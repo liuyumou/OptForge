@@ -1,0 +1,1 @@
+{"schema_version":1,"model_id":"overflow-prone","variables":[{"id":0,"domain":"continuous","lower":{"kind":"negative_infinity"},"upper":{"kind":"positive_infinity"}}],"constraints":[],"objective":{"sense":"minimize","offset":0.0,"terms":[{"variable_id":0,"coefficient":1.7976931348623157e308}]}}

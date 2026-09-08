@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "model_id": "tiny-mixed",
+  "values": [
+    {"variable_id": 3, "value": 1.0},
+    {"variable_id": 8, "value": 1.0}
+  ]
+}

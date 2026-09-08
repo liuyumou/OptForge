@@ -10,6 +10,7 @@ name = "optimizer"
 path = "src/main.rs"
 
 [dependencies]
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
 optimizer-cuda = { version = "0.1.0", path = "../optimizer-cuda" }
 serde_json.workspace = true
 ctrlc = { version = "3.4", features = ["termination"] }

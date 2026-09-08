@@ -1,8 +1,8 @@
 # Architecture
 
-Purpose: define stable ownership boundaries. Scope: M0 and planned dependencies.
-Owner: architecture. Status: accepted. Last reviewed commit: bootstrap (the initial
-commit containing this document; exact review revisions are recorded in task state).
+Purpose: define stable ownership boundaries. Scope: M0-M1 and planned dependencies.
+Owner: architecture. Status: accepted.
+Last reviewed commit: 9e6dc86534de2efa414205752ca58d7584976052.
 
 ## Implemented boundaries
 
@@ -10,6 +10,13 @@ The CLI delegates inventory and advisory ownership to optimizer-cuda. That crate
 uses nvidia-smi and standard-library file locks without linking CUDA.
 optimizer-experiment embeds the versioned JSON Schemas. Python validation tools
 apply the schemas and cross-record provenance checks.
+
+optimizer-core stores immutable validated original linear models. Rust and
+versioned JSON share construction checks. Candidate evaluation recomputes objective,
+row activities, bounds and domains using explicit caller tolerances. The CLI reads
+bounded model/candidate files and returns validation reports. See
+[SPEC-0001](../specifications/SPEC-0001-model-and-validation.md) and
+[ADR-0002](../decisions/ADR-0002-model-validation.md).
 
 ## Planned numerical flow
 
@@ -20,7 +27,7 @@ optimizer-core result validation -> experiment record and CLI.
 The core owns feasibility, objective recomputation, and mathematical status.
 Extensions may propose candidates or actions; the core must validate them.
 Raw native handles will remain inside the corresponding FFI crate.
-No numerical tolerance or proof contract is implemented in M0.
+M1 defines candidate numerical tolerances; solver proof contracts remain deferred.
 
 ## Ownership and resources
 

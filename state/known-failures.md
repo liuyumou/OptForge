@@ -18,5 +18,6 @@ administration. Next step: configure these settings separately from Git syncing.
 
 ## Deferred hardware evidence
 
-M0 queries inventory only. CUDA sanitizer, kernel equivalence, HiGHS differential,
-and numerical correctness tests remain gated on M1-M5 implementation.
+GPU support queries inventory only. CUDA sanitizer, kernel equivalence and HiGHS
+differential tests remain gated on M2-M5 implementation. M1 candidate numerical
+correctness is covered by CPU contracts; no solver or hardware proof is claimed.

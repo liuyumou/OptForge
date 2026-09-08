@@ -1,6 +1,6 @@
 # Build and Verify
 
-Purpose: reproduce local and CI acceptance. Scope: Linux M0.
+Purpose: reproduce local and CI acceptance. Scope: Linux M0-M1.
 
 Install rustup, Python 3.11+, Git and util-linux. The root toolchain file pins Rust.
 Create a Python virtual environment and install tools/requirements.txt, then:

@@ -1,8 +1,9 @@
 # AI Optimizer
 
 A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. The current release is **M0: repository bootstrap**.
-It builds and tests project tooling; it does not solve optimization models.
+selective GPU acceleration. The current milestone is **M1: core model and validation**.
+It validates original linear models and supplied candidates; it does not solve
+optimization models.
 
 ## Quick start
 
@@ -17,6 +18,7 @@ python3 -m pip install -r tools/requirements.txt
 cargo install cargo-deny --version 0.19.0 --locked
 cargo build --workspace --locked
 cargo run -p optimizer-cli -- hello
+cargo run -p optimizer-cli -- model validate --model examples/model-v1.json
 cargo run -p optimizer-cli -- gpu discover --dry-run
 bash tools/check.sh
 ```
@@ -33,6 +35,8 @@ A Git commit is required for that measured record.
 - [Contributor and autonomous workflow](CONTRIBUTING.md)
 - [Architecture and ownership](docs/architecture/overview.md)
 - [Bootstrap specification](docs/specifications/SPEC-0000-bootstrap.md)
+- [Model and validation specification](docs/specifications/SPEC-0001-model-and-validation.md)
+- [Validate a model and candidate](docs/tutorials/model-validation.md)
 - [GPU discovery and lease contract](docs/specifications/SPEC-0006-gpu-lease.md)
 - [Artifact contract](docs/specifications/SPEC-0007-artifacts.md)
 - [Build and verification](docs/operations/build.md)
@@ -49,9 +53,11 @@ long-term direction. Their unvalidated research claims are hypotheses.
 
 ## Layout
 
-`crates/` contains the Rust workspace. Only the CLI, GPU discovery/ownership,
-and embedded artifact schemas have runtime or public content. Numerical crates
-reserve ownership boundaries with module documentation and no solver APIs.
+`crates/` contains the Rust workspace. optimizer-core owns original models,
+versioned JSON, objective recomputation and candidate feasibility with explicit
+tolerances. The CLI exposes validation and GPU discovery/ownership;
+optimizer-experiment embeds artifact schemas. Other numerical crates reserve
+ownership boundaries without solver APIs.
 `schemas/`, `examples/`, `tests/`, and `tools/` provide executable contracts.
 `docs/` is authoritative; `wiki/` provides navigation. Python SDK, native HiGHS
 integration, CUDA kernels, and performance suites are deferred.

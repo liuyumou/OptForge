@@ -1,4 +1,6 @@
-//! Bootstrap CLI. No optimization results are produced in M0.
+//! Workspace CLI and original-model candidate validation. No solving is performed.
+
+mod model;
 
 use std::env;
 use std::io::{self, Write};
@@ -11,9 +13,11 @@ use std::time::{Duration, Instant};
 
 use optimizer_cuda::{DEFAULT_LOCK_PATH, GpuLease, discover};
 
-const HELP: &str = "optimizer 0.1.0 (M0 bootstrap)
+const HELP: &str = "optimizer 0.1.0 (M1 model validation)
 Usage:
   optimizer hello
+  optimizer model validate --model <path>
+    [--candidate <path> --absolute-tolerance <f64> --relative-tolerance <f64> --integrality-tolerance <f64>]
   optimizer gpu discover [--dry-run]
   optimizer gpu lease --simulate-ms <0..60000> [--timeout-ms <0..60000>]
   optimizer --help
@@ -21,7 +25,7 @@ Usage:
 
 fn main() -> ExitCode {
     match run(env::args().skip(1).collect()) {
-        Ok(()) => ExitCode::SUCCESS,
+        Ok(code) => ExitCode::from(code),
         Err(error) => {
             eprintln!("optimizer: {error}");
             ExitCode::from(if error.kind() == io::ErrorKind::Interrupted {
@@ -33,19 +37,20 @@ fn main() -> ExitCode {
     }
 }
 
-fn run(args: Vec<String>) -> io::Result<()> {
+fn run(args: Vec<String>) -> io::Result<u8> {
     let words: Vec<&str> = args.iter().map(String::as_str).collect();
     match words.as_slice() {
         [] | ["--help"] | ["-h"] => println!("{HELP}"),
         ["--version"] => println!("optimizer {}", env!("CARGO_PKG_VERSION")),
         ["hello"] => println!("hello workspace"),
+        ["model", "validate", options @ ..] => return model::validate(options),
         ["gpu", "discover"] | ["gpu", "discover", "--dry-run"] => {
             println!("{}", serde_json::to_string_pretty(&discover())?);
         }
         ["gpu", "lease", options @ ..] => simulate_lease(options)?,
         _ => return Err(io::Error::new(io::ErrorKind::InvalidInput, HELP)),
     }
-    Ok(())
+    Ok(0)
 }
 
 fn simulate_lease(options: &[&str]) -> io::Result<()> {

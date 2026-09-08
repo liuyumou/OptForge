@@ -1,5 +1,50 @@
 # Active Task
 
+Objective: implement M1 core models, candidate validation, versioned JSON, and CLI.
+
+Status: complete.
+
+Acceptance gate: accepted SPEC-0001 and ADR-0002; independent property/exhaustive
+model tests, serialization and numerical boundary tests, CLI contracts, and
+the complete bash tools/check.sh gate. Commit locally after acceptance.
+
+Expected changes: optimizer-core, optimizer-cli, model fixtures/examples,
+specification and ADR, current scope/status documentation, changelog, task state.
+Resource budget: CPU only, at most four Cargo build workers, bounded deterministic
+tests; no GPU workloads. Existing smoke seeds and configuration remain unchanged.
+
+Evidence (2026-09-08): accepted SPEC-0001 and ADR-0002 preceded implementation.
+The complete bash tools/check.sh gate passed after the final runtime/test edits:
+format, warnings-as-errors Clippy, 22 Rust tests, workspace build, warnings-as-errors
+rustdoc, cargo-deny advisories/bans/licenses/sources, artifact schema/provenance,
+8 Python artifact tests, 36-page documentation/link build, and bootstrap smoke.
+No checks were waived. The 14 new Rust contracts include 18,522 independent dense
+oracle evaluations, generated model ordering properties, 968 finite f64 values
+round-tripped through both model and candidate JSON, numerical/domain boundaries,
+edge-model fixtures, CLI exit/report behavior, and exact 16 MiB file boundaries.
+
+Resolved regression: Serde internally tagged unit variants accepted an unknown
+field on infinite bounds. Strict bound deserialization now rejects the minimized
+fixture in tests/regression/infinite-bound-extra-field.json; its contract test passes.
+
+Environment: Rust 1.93.1 and cargo-deny 0.19.0 under /tmp/ai-optimizer-cargo,
+RUSTUP_HOME=/tmp/ai-optimizer-rustup, Python tooling /tmp/ai-optimizer-venv,
+CARGO_BUILD_JOBS=4. Core contracts completed in 0.17 s and CLI model contracts in
+0.78 s in the final gate. Work was CPU-only; lease tests used temporary locks and
+simulated jobs. Cargo.lock only adds local core/CLI dependency edges; no external
+package versions changed. Serde JSON's float_roundtrip feature preserves f64 input.
+
+Provenance: the precommit gate's smoke honestly records a dirty working tree.
+The local feature commit is followed by a smoke rerun for clean revision-bound
+provenance at artifacts/bootstrap-smoke.json. This remains CLI startup evidence,
+not solver or GPU performance. No push or hosting changes are part of M1.
+
+Follow-up: M2 is dependency-ready. Write SPEC-0002-backend-contract.md before
+implementing HiGHS lifecycle, status mapping, cancellation, limits and solve records.
+No M2 behavior is implemented here.
+
+## Previous Repository Synchronization
+
 Objective: synchronize the project to https://github.com/liuyumou/OptForge.git.
 
 Status: complete.
