@@ -63,10 +63,15 @@ ID ordering without merging duplicate terms. Duplicates are rejected.
 ## Errors and Limits
 
 All three tolerances are required with --candidate; none may appear without it.
-Malformed arguments, I/O, invalid documents/models/candidates, invalid tolerances
-and nonfinite arithmetic produce a categorized stderr diagnostic, no report, and
-exit code 2. Both files are limited to 16 MiB. JSON formats are versioned and reject
-unknown fields, duplicate fields, nonfinite numbers and unsupported versions.
+File paths preserve native OS names, including non-UTF-8 Unix names. Commands,
+flags and tolerance values require UTF-8 text.
+
+Malformed arguments, input I/O, invalid documents/models/candidates, invalid
+tolerances and nonfinite arithmetic produce a categorized stderr diagnostic,
+no report, and exit code 2. Output write or flush failures also return an io
+diagnostic and exit 2; any bytes already delivered cannot be retracted. Both files
+are limited to 16 MiB. JSON formats are versioned and reject unknown fields,
+duplicate fields, nonfinite numbers and unsupported versions.
 
 The command performs CPU validation only. It does not solve, report optimality,
 create experiment solve records, or run GPU work.

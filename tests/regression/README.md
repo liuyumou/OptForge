@@ -42,3 +42,32 @@ minimal failing output fixtures, in both structural and candidate modes:
 ```bash
 cargo test -p optimizer-cli --test model failed_report_output --locked
 ```
+
+## Native CLI Paths
+
+The model command previously used env::args, which panics on non-UTF-8 bytes.
+In Bash, this missing filename reproduced exit 101 before any file access:
+
+```bash
+target/debug/optimizer model validate --model $'bad\xff.json'
+```
+
+SPEC-0001 requires native path preservation and categorized argument/I/O errors.
+The Unix regression creates valid example documents at temporary names containing
+0xff and 0xfe bytes, verifies structural and candidate success, and removes each
+file to verify missing-file errors. Non-path argument bytes are rejected with
+exit 2. Reproduce the corrected assertions:
+
+```bash
+cargo test -p optimizer-cli --test model utf8 --locked
+```
+
+## Model Command Dispatch
+
+`optimizer model` and `optimizer model unknown` previously returned bare usage
+without SPEC-0001's argument category. They now return an argument diagnostic,
+usage on stderr, no stdout, and exit 2. The argument vectors are retained in:
+
+```bash
+cargo test -p optimizer-cli --test model incomplete_and_unknown_model_commands --locked
+```

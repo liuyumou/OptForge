@@ -80,6 +80,9 @@ satisfied. Unbounded sides and continuous domain checks serialize as null.
 optimizer model validate --model PATH checks structure. Adding --candidate PATH
 requires --absolute-tolerance F64 --relative-tolerance F64 --integrality-tolerance F64.
 Flags may appear in any order; duplicate/unknown/missing flags are errors.
+File paths MUST preserve native OS strings, including non-UTF-8 Unix names.
+Commands, flag names and tolerance values MUST be UTF-8 text; invalid text is an
+argument error. File contents remain versioned JSON regardless of path encoding.
 Tolerances without a candidate are errors. Structural success prints version 1
 JSON with model_id and status="structurally_valid". Candidate mode prints a report.
 Exit 0 means structural success or feasible candidate; 1 means evaluated infeasible

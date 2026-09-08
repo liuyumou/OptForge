@@ -6,6 +6,9 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Fixed
 
+- Model and candidate file paths preserve native OS strings, including non-UTF-8
+  Unix names; malformed command/flag/tolerance text returns an argument error.
+- Incomplete and unknown model commands include the argument error category.
 - Model and candidate JSON now reject positional records and object-wrapped
   domain/objective enums, including direct Serde parsing and nested records.
 - Model validation report write and flush failures return a categorized I/O

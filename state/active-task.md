@@ -1,5 +1,49 @@
 # Active Task
 
+## Repeated Branch Review (2026-09-08)
+
+Objective: review the complete feature branch against main, fix any substantiated
+findings, and repeat until the final review has no unresolved actionable findings.
+
+Status: complete.
+
+Acceptance gate: inspect every changed runtime path and the SPEC-0001/ADR-0002
+contracts, verify relevant regression coverage, and run bash tools/check.sh.
+
+Expected changes: this review record and any bounded fixes supported by reproduced
+failures. Resource budget: CPU only, at most four Cargo workers, deterministic
+tests, no GPU workloads. Review base: local main at 9e6dc86; starting HEAD: 58df6bb.
+
+Current finding: model validate panics with exit 101 when a model/candidate path
+contains non-UTF-8 bytes because main uses env::args. Preserve native paths with
+args_os and report malformed non-path text as an argument error. Expected fix:
+CLI parsing, Unix path/error regression tests, specification and release notes.
+Follow-up finding: incomplete/unknown model commands returned bare usage without
+the required argument category. Add a categorized dispatch error and regression.
+
+Evidence (2026-09-08): both new regressions failed before their fixes and pass
+afterward. Native model/candidate filenames retain their OS representation;
+non-UTF-8 command, flag and tolerance text returns an argument error with exit 2.
+Incomplete and unknown model commands now return the same error category.
+Unix regressions cover real non-UTF-8 filenames, successful reports and missing
+files. Specifications, tutorial, changelog and regression instructions agree.
+
+The final complete bash tools/check.sh gate passed: format, warnings-as-errors
+Clippy, 29 Rust tests, workspace build, rustdoc, cargo-deny, artifact validation,
+8 Python tests, 36-page documentation/link validation and bootstrap smoke.
+Temporary RustSec advisory-fetch failures recovered; no checks were waived.
+Cargo preflight checks also passed for missing Cargo (exit 127 with a diagnostic)
+and the rustup-only PATH fallback to the pinned Rust 1.93.1 toolchain.
+
+Final review against local main at 9e6dc86534de2efa414205752ca58d7584976052
+found no unresolved actionable findings. Coverage included strict JSON parsing,
+canonical model construction, candidate coverage, arithmetic and tolerance
+contracts, report output, CLI errors, dependencies, specifications and fixtures.
+The existing independent dense oracle covers 18,522 evaluations and the f64
+round-trip suite covers 968 values. Resource use remained CPU-only with four
+Cargo workers; scope remains M1. Commit after acceptance, then rerun bootstrap
+smoke to record the clean committed revision.
+
 ## M1 Review Contract Fixes (2026-09-08)
 
 Objective: reject alternate JSON representations for all model/candidate input

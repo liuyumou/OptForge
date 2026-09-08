@@ -3,6 +3,7 @@
 mod model;
 
 use std::env;
+use std::ffi::OsString;
 use std::io::{self, Write};
 use std::path::PathBuf;
 use std::process::ExitCode;
@@ -24,7 +25,7 @@ Usage:
   optimizer --version";
 
 fn main() -> ExitCode {
-    match run(env::args().skip(1).collect()) {
+    match run(env::args_os().skip(1).collect()) {
         Ok(code) => ExitCode::from(code),
         Err(error) => {
             eprintln!("optimizer: {error}");
@@ -37,18 +38,36 @@ fn main() -> ExitCode {
     }
 }
 
-fn run(args: Vec<String>) -> io::Result<u8> {
+fn run(args: Vec<OsString>) -> io::Result<u8> {
+    if let [command, subcommand, options @ ..] = args.as_slice()
+        && command == "model"
+        && subcommand == "validate"
+    {
+        return model::validate(options);
+    }
+    let args: Vec<String> = args
+        .into_iter()
+        .map(|arg| {
+            arg.into_string().map_err(|_| {
+                io::Error::new(io::ErrorKind::InvalidInput, "argument: expected UTF-8 text")
+            })
+        })
+        .collect::<io::Result<_>>()?;
     let words: Vec<&str> = args.iter().map(String::as_str).collect();
     match words.as_slice() {
         [] | ["--help"] | ["-h"] => println!("{HELP}"),
         ["--version"] => println!("optimizer {}", env!("CARGO_PKG_VERSION")),
         ["hello"] => println!("hello workspace"),
-        ["model", "validate", options @ ..] => return model::validate(options),
         ["gpu", "discover"] | ["gpu", "discover", "--dry-run"] => {
             println!("{}", serde_json::to_string_pretty(&discover())?);
         }
         ["gpu", "lease", options @ ..] => simulate_lease(options)?,
-        _ => return Err(io::Error::new(io::ErrorKind::InvalidInput, HELP)),
+        _ => {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidInput,
+                format!("argument: invalid command\n{HELP}"),
+            ));
+        }
     }
     Ok(0)
 }

@@ -48,18 +48,14 @@ fn run(args: &[&str]) -> Output {
 }
 
 fn evaluate(model: &Path, candidate: &Path) -> Output {
-    run(&[
-        "--candidate",
-        candidate.to_str().unwrap(),
-        "--relative-tolerance",
-        "0",
-        "--model",
-        model.to_str().unwrap(),
-        "--integrality-tolerance",
-        "0",
-        "--absolute-tolerance",
-        "0",
-    ])
+    Command::new(env!("CARGO_BIN_EXE_optimizer"))
+        .args(["model", "validate", "--candidate"])
+        .arg(candidate)
+        .args(["--relative-tolerance", "0", "--model"])
+        .arg(model)
+        .args(["--integrality-tolerance", "0", "--absolute-tolerance", "0"])
+        .output()
+        .unwrap()
 }
 
 fn error(output: Output, category: &str) {
@@ -114,6 +110,23 @@ fn structure_and_candidate_commands_produce_versioned_reports_and_exit_codes() {
     assert_eq!(report["variables"][0]["domain"]["violation"], 0.5);
     assert_eq!(report["constraints"][0]["lower"]["violation"], 0.5);
     assert!(report.get("status").is_none());
+}
+
+#[test]
+fn incomplete_and_unknown_model_commands_are_argument_errors() {
+    for args in [
+        vec!["model"],
+        vec!["model", "unknown"],
+        vec!["model", "--model", "x"],
+    ] {
+        error(
+            Command::new(env!("CARGO_BIN_EXE_optimizer"))
+                .args(args)
+                .output()
+                .unwrap(),
+            "argument:",
+        );
+    }
 }
 
 #[test]
@@ -193,6 +206,87 @@ fn input_errors_are_categorized_and_never_write_partial_reports() {
     let overflow = root().join("tests/fixtures/models/overflow-prone.json");
     let c = sandbox.write("overflow-candidate.json", serde_json::to_vec(&json!({"schema_version":1,"model_id":"overflow-prone","values":[{"variable_id":0,"value":2.0}]})).unwrap());
     error(evaluate(&overflow, &c), "numerical:");
+}
+
+#[test]
+#[cfg(unix)]
+fn native_paths_preserve_non_utf8_bytes() {
+    use std::ffi::OsString;
+    use std::os::unix::ffi::OsStringExt;
+
+    let sandbox = Sandbox::new();
+    let model = sandbox
+        .0
+        .join(OsString::from_vec(b"model-\xff.json".to_vec()));
+    let candidate = sandbox
+        .0
+        .join(OsString::from_vec(b"candidate-\xfe.json".to_vec()));
+    fs::copy(root().join("examples/model-v1.json"), &model).unwrap();
+    fs::copy(root().join("examples/candidate-v1.json"), &candidate).unwrap();
+    let structure = || {
+        Command::new(env!("CARGO_BIN_EXE_optimizer"))
+            .args(["model", "validate", "--model"])
+            .arg(&model)
+            .output()
+            .unwrap()
+    };
+    let output = structure();
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let report: Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(report["model_id"], "tiny-mixed");
+    let output = evaluate(&model, &candidate);
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let report: Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(report["feasible"], true);
+    assert_eq!(report["objective"], 3.5);
+    fs::remove_file(&candidate).unwrap();
+    error(evaluate(&model, &candidate), "io:");
+    fs::remove_file(&model).unwrap();
+    error(structure(), "io:");
+}
+
+#[test]
+#[cfg(unix)]
+fn non_utf8_command_flag_and_tolerance_text_is_an_argument_error() {
+    use std::ffi::OsString;
+    use std::os::unix::ffi::OsStringExt;
+
+    for index in [0, 1, 2, 4, 6, 7, 8, 9, 10, 11] {
+        let mut args: Vec<OsString> = [
+            "model",
+            "validate",
+            "--model",
+            "examples/model-v1.json",
+            "--candidate",
+            "examples/candidate-v1.json",
+            "--absolute-tolerance",
+            "0",
+            "--relative-tolerance",
+            "0",
+            "--integrality-tolerance",
+            "0",
+        ]
+        .into_iter()
+        .map(OsString::from)
+        .collect();
+        args[index] = OsString::from_vec(vec![0xff]);
+        error(
+            Command::new(env!("CARGO_BIN_EXE_optimizer"))
+                .args(args)
+                .current_dir(root())
+                .output()
+                .unwrap(),
+            "argument:",
+        );
+    }
 }
 
 #[test]

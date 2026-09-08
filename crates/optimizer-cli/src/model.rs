@@ -1,11 +1,13 @@
+use std::ffi::{OsStr, OsString};
 use std::fs::File;
 use std::io::{self, Read, Write};
+use std::path::Path;
 
 use optimizer_core::{Candidate, Model, Tolerances};
 
 const MAX_INPUT_BYTES: u64 = 16 * 1024 * 1024;
 
-pub(crate) fn validate(options: &[&str]) -> io::Result<u8> {
+pub(crate) fn validate(options: &[OsString]) -> io::Result<u8> {
     let mut model_path = None;
     let mut candidate_path = None;
     let mut absolute = None;
@@ -15,7 +17,10 @@ pub(crate) fn validate(options: &[&str]) -> io::Result<u8> {
         let [key, value] = pair else {
             return Err(argument("each flag requires a value"));
         };
-        let slot = match *key {
+        let key = key
+            .to_str()
+            .ok_or_else(|| argument("flag names must be UTF-8 text"))?;
+        let slot = match key {
             "--model" => &mut model_path,
             "--candidate" => &mut candidate_path,
             "--absolute-tolerance" => &mut absolute,
@@ -23,7 +28,7 @@ pub(crate) fn validate(options: &[&str]) -> io::Result<u8> {
             "--integrality-tolerance" => &mut integrality,
             _ => return Err(argument(&format!("unknown flag {key}"))),
         };
-        if slot.replace(*value).is_some() {
+        if slot.replace(value.as_os_str()).is_some() {
             return Err(argument(&format!("duplicate flag {key}")));
         }
     }
@@ -73,15 +78,19 @@ fn argument(message: &str) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, format!("argument: {message}"))
 }
 
-fn number(value: Option<&str>, name: &str) -> io::Result<f64> {
+fn number(value: Option<&OsStr>, name: &str) -> io::Result<f64> {
     value
         .ok_or_else(|| argument(&format!("--{name}-tolerance is required")))?
+        .to_str()
+        .ok_or_else(|| argument(&format!("invalid --{name}-tolerance: expected UTF-8 text")))?
         .parse()
         .map_err(|_| argument(&format!("invalid --{name}-tolerance")))
 }
 
-fn read(path: &str) -> io::Result<Vec<u8>> {
-    let read_error = |error: io::Error| io::Error::other(format!("io: {path}: {error}"));
+fn read(path: &OsStr) -> io::Result<Vec<u8>> {
+    let path = Path::new(path);
+    let read_error =
+        |error: io::Error| io::Error::other(format!("io: {}: {error}", path.display()));
     let mut bytes = Vec::new();
     File::open(path)
         .map_err(read_error)?
@@ -90,7 +99,8 @@ fn read(path: &str) -> io::Result<Vec<u8>> {
         .map_err(read_error)?;
     if u64::try_from(bytes.len()).map_err(io::Error::other)? > MAX_INPUT_BYTES {
         return Err(io::Error::other(format!(
-            "document: {path}: input exceeds 16 MiB"
+            "document: {}: input exceeds 16 MiB",
+            path.display()
         )));
     }
     Ok(bytes)
