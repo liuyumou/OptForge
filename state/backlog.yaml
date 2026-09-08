@@ -1,15 +1,16 @@
 schema_version: 1
 current_milestone: M0
+next_ready_milestone: M1
 tasks:
   - id: M0
     title: Repository and process bootstrap
-    status: in_progress
+    status: complete
     depends_on: []
     specification: docs/specifications/SPEC-0000-bootstrap.md
     acceptance: "tools/check.sh; discovery; simulated serialization and cancellation"
   - id: M1
     title: Core model and validation
-    status: ready_after_dependencies
+    status: ready
     depends_on: [M0]
     specification_to_write: docs/specifications/SPEC-0001-model-and-validation.md
     acceptance: "Property and exhaustive model tests, round trips, independent objective and violation recomputation"
