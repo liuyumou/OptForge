@@ -1,5 +1,40 @@
 # Active Task
 
+## Commit and Branch Review (2026-09-08)
+
+Objective: validate and commit the pending acceptance-script diagnostic change,
+then review the complete feature branch against local main in PR style.
+
+Status: acceptance passed; commit prepared, followed by read-only branch review.
+
+Acceptance gate: run bash tools/check.sh before committing; inspect the complete
+main-to-branch diff against SPEC-0001 and ADR-0002 and report actionable findings.
+
+Expected changes: the pending tools/check.sh change and this task record.
+Resource budget: CPU only, at most four Cargo build workers; no GPU workloads.
+
+Evidence (2026-09-08): the complete bash tools/check.sh gate passed with Rust
+1.93.1 and four Cargo workers: format, Clippy, 22 Rust tests, workspace build,
+rustdoc, cargo-deny, artifact validation, 8 Python tests, 36-page documentation
+build/link validation, and bootstrap smoke. No checks were waived. Review findings
+will be reported to the requester after the commit; comparison base is local main
+at 9e6dc86534de2efa414205752ca58d7584976052 (also origin/main locally).
+
+## Current diagnostic fix (2026-09-08)
+
+Objective: make the acceptance gate locate the repository-pinned Rust toolchain and report executor failures clearly.
+
+Status: complete.
+
+Acceptance gate: shell syntax and toolchain preflight behavior pass; existing Rust gate remains unchanged after Cargo is resolved.
+
+Evidence (2026-09-08): `bash -n tools/check.sh` passed. With Cargo absent, the gate exits 127 with an actionable diagnostic instead of an opaque `command not found`; with the pinned toolchain bin directory available, the existing Rust checks remain the executed gate.
+
+Expected changes: tools/check.sh and this task record.
+
+Resource budget: CPU only; no GPU workloads.
+
+
 Objective: implement M1 core models, candidate validation, versioned JSON, and CLI.
 
 Status: complete.
