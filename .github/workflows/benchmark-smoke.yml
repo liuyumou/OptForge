@@ -1,0 +1,52 @@
+name: Benchmark Smoke
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      gpu:
+        description: Run trusted discovery on the provisioned GPU runner
+        type: boolean
+        default: false
+      gpu_uuid:
+        description: Single physical GPU UUID for the serialized runner
+        type: string
+        default: GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: rustup show
+      - run: python3 -m pip install -r tools/requirements.txt
+      - run: cargo build --workspace --locked
+      - run: python3 tools/benchmark_smoke.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-smoke-record
+          path: artifacts/bootstrap-smoke.json
+
+  gpu-discovery:
+    if: github.event_name == 'workflow_dispatch' && inputs.gpu && github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, linux, x64, optimizer-gpu]
+    timeout-minutes: 10
+    concurrency:
+      group: ai-optimizer-gpu
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup show
+      - run: cargo build --workspace --locked
+      - name: Serialized dry-run discovery
+        env:
+          GPU_UUID: ${{ inputs.gpu_uuid }}
+        run: bash tools/gpu_job.sh "$GPU_UUID" target/debug/optimizer gpu discover --dry-run

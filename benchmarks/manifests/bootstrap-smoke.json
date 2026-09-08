@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "m0-bootstrap-smoke-v1",
+  "purpose": "bootstrap-smoke",
+  "suite": "bootstrap",
+  "split": "development",
+  "license": "MIT",
+  "instances": [
+    {
+      "id": "bootstrap-message",
+      "path": "tests/fixtures/bootstrap.txt",
+      "sha256": "f9c6dd4ce78558c65387db9034b1196f7b173a04ff93b27f094ef27836c6fe3e",
+      "source": "repository fixture",
+      "generator": null
+    }
+  ],
+  "seeds": [17],
+  "configuration": {
+    "schema_version": 1,
+    "seed": 17,
+    "time_limit_ms": 10000,
+    "memory_limit_mib": 512,
+    "threads": 1,
+    "device": "cpu",
+    "settings": {}
+  },
+  "timing": {
+    "clock": "monotonic",
+    "includes": "end-to-end-with-transfers",
+    "warmup_runs": 0,
+    "measured_runs": 1
+  }
+}

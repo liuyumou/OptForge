@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Run configuration v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "seed",
+    "time_limit_ms",
+    "memory_limit_mib",
+    "threads",
+    "device",
+    "settings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "time_limit_ms": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "memory_limit_mib": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "threads": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "device": {
+      "type": "string",
+      "pattern": "^(cpu|GPU-[A-Za-z0-9-]+)$"
+    },
+    "settings": {
+      "type": "object",
+      "maxProperties": 0
+    }
+  }
+}

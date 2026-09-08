@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "example",
+  "record_id": "m0-example-not-a-measurement",
+  "manifest": {
+    "path": "benchmarks/manifests/bootstrap-smoke.json",
+    "sha256": "bb798f97a32392adb5a8b521f7df75c5fe3e0265720543f09eee1e896e879622"
+  },
+  "revision": "0000000000000000000000000000000000000000",
+  "dirty": false,
+  "hardware": {
+    "os": "Linux (example)",
+    "cpu": "example CPU",
+    "logical_cpus": 1,
+    "gpu_uuid": null,
+    "gpu_name": null,
+    "driver": null
+  },
+  "toolchain": {
+    "rustc": "rustc 1.93.1 (example)",
+    "cargo": "cargo 1.93.1 (example)"
+  },
+  "configuration": {
+    "schema_version": 1,
+    "seed": 17,
+    "time_limit_ms": 10000,
+    "memory_limit_mib": 512,
+    "threads": 1,
+    "device": "cpu",
+    "settings": {}
+  },
+  "timing": {
+    "clock": "monotonic",
+    "includes": "end-to-end-with-transfers",
+    "elapsed_ns": 0,
+    "samples": 1
+  },
+  "status": "smoke_passed",
+  "objective": null,
+  "warnings": [
+    "Synthetic schema example, not a measured benchmark result."
+  ],
+  "error": null
+}

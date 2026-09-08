@@ -1,0 +1,55 @@
+schema_version: 1
+current_milestone: M0
+tasks:
+  - id: M0
+    title: Repository and process bootstrap
+    status: in_progress
+    depends_on: []
+    specification: docs/specifications/SPEC-0000-bootstrap.md
+    acceptance: "tools/check.sh; discovery; simulated serialization and cancellation"
+  - id: M1
+    title: Core model and validation
+    status: ready_after_dependencies
+    depends_on: [M0]
+    specification_to_write: docs/specifications/SPEC-0001-model-and-validation.md
+    acceptance: "Property and exhaustive model tests, round trips, independent objective and violation recomputation"
+  - id: M2
+    title: HiGHS FFI and solve records
+    status: planned
+    depends_on: [M1]
+    specification_to_write: docs/specifications/SPEC-0002-backend-contract.md
+    acceptance: "Differential LP/MILP, cancellation, limits, lifecycle sanitizers, reproducible records"
+  - id: M3
+    title: CPU flow-shop vertical slice
+    status: planned
+    depends_on: [M1, M2]
+    specification_to_write: docs/specifications/SPEC-0003-flow-shop.md
+    acceptance: "Exhaustive permutations, independent recurrence, Taillard smoke, validated MILP incumbents"
+  - id: M4
+    title: Owned MILP executive
+    status: planned
+    depends_on: [M2, M3]
+    specification_to_write: docs/specifications/SPEC-0004-branch-and-bound.md
+    acceptance: "Tiny exhaustive agreement, statuses, extension rejection, proof completion"
+  - id: M5
+    title: CUDA schedule evaluator
+    status: planned
+    depends_on: [M3, M4]
+    specification_to_write: docs/specifications/SPEC-0005-gpu-schedule-evaluator.md
+    acceptance: "CPU/GPU equivalence, sanitizers, overflow/permutation rejection, recovery, transfer-inclusive crossover"
+  - id: M6
+    title: Benchmark and evidence package
+    status: planned
+    depends_on: [M2, M3, M4, M5]
+    acceptance: "Frozen datasets/licenses/checksums/splits/seeds/configuration/timing and independent reports"
+research_phases:
+  - "Adaptive portfolios and bounded agent-generated candidate/search advisers"
+  - "CPU first-order LP before approximate GPU LP research"
+  - "Evidence-driven presolve, scaling, recovery, cuts, CPU parallelism, checkpointing"
+  - "Python SDK and local extension registry after stable Rust contracts"
+  - "Independent held-out evaluation, ablations, negative results, authorized release"
+deferred:
+  - public_plugin_distribution
+  - multi_gpu_algorithms
+  - broad_commercial_solver_compatibility
+  - natural_language_model_generation

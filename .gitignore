@@ -1,0 +1,9 @@
+/target/
+/book/
+__pycache__/
+*.pyc
+.venv/
+.env
+/benchmarks/reports/*
+!/benchmarks/reports/README.md
+/artifacts/
