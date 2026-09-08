@@ -12,9 +12,9 @@ original planning inputs from recursive link validation.
 
 ## External configuration
 
-No remote is configured. Protected main, labeled GPU runner provisioning, and
-artifact retention require hosting administration. Reproduction: git remote -v.
-Next step: configure hosting when publication/integration is authorized.
+The origin remote is https://github.com/liuyumou/OptForge.git. Protected main,
+labeled GPU runner provisioning, and artifact retention still require hosting
+administration. Next step: configure these settings separately from Git syncing.
 
 ## Deferred hardware evidence
 

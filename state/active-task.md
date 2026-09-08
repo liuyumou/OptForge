@@ -1,5 +1,24 @@
 # Active Task
 
+Objective: synchronize the project to https://github.com/liuyumou/OptForge.git.
+
+Status: complete.
+
+Acceptance gate: origin points to the requested repository; main is pushed with
+upstream tracking; the remote main revision matches local HEAD; the worktree is
+clean. Preserve existing history and validate updated documentation.
+
+Expected changes: Git remote/tracking configuration and repository hosting/task
+records. Resource budget: bounded CPU checks and Git operations; no GPU work.
+
+Evidence: the original main history was pushed successfully and main now tracks
+origin/main. The complete tools/check.sh gate passed, including 8 Rust tests,
+8 artifact tests, dependency policy, documentation, and smoke validation. Hosting
+records identify the remote. The synchronization includes this documentation
+update; remote revision equality and clean worktree are checked after its push.
+
+## M0 Bootstrap Evidence
+
 Objective: implement M0 from implementation-plan.md.
 
 Status: complete.
