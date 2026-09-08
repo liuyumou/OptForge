@@ -58,6 +58,9 @@ LinearTerm contains variable_id and coefficient. Objective contains sense
 (minimize/maximize), offset, terms. Bounds are tagged objects: {"kind":"finite",
 "value":1.0}, {"kind":"negative_infinity"}, or {"kind":"positive_infinity"}.
 Domains are continuous, integer, binary. Every input field is required.
+Records MUST be JSON objects, including nested records; positional arrays are
+invalid. Domains and objective senses MUST be JSON strings, not enum objects.
+These shape rules also apply to direct Serde deserialization of public input types.
 
 Model::new validates into private immutable storage; document() exposes a shared
 reference. Model::from_json/to_json use the same construction checks. Candidate
@@ -81,7 +84,9 @@ Tolerances without a candidate are errors. Structural success prints version 1
 JSON with model_id and status="structurally_valid". Candidate mode prints a report.
 Exit 0 means structural success or feasible candidate; 1 means evaluated infeasible
 candidate; 2 means argument/I/O/document/structural/numerical error. Errors identify
-their category on stderr and produce no partial report on stdout.
+their category on stderr. Argument, input and evaluation errors produce no partial
+report on stdout. Report write and flush failures MUST return an io diagnostic
+and exit 2; bytes already delivered to a failing output stream cannot be retracted.
 
 ## State and Invariants
 
@@ -125,7 +130,10 @@ and [tutorial](../tutorials/model-validation.md).
 Requirements 1-5: structural, malformed JSON and canonical round-trip contracts.
 Requirements 6-11: explicit tolerances, independent dense oracle, exhaustive tiny
 assignments, cancellation scaling, overflow and discrete boundaries. Requirement
-12: CLI success, infeasibility, input, size, argument and numerical-error contracts.
+12: CLI success, infeasibility, input, size, argument, numerical-error and failed
+output contracts. JSON tests reject positional records and object-wrapped enums
+both directly and nested in model/candidate documents. Linux output tests cover
+full-device and closed-pipe errors for structural and candidate reports.
 All run through bash tools/check.sh. Fixtures cover infeasible, unbounded,
 degenerate, poorly scaled and overflow-prone models without solver classification.
 Generated tests enumerate a fixed finite space without random seeds.

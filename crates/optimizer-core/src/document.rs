@@ -2,6 +2,45 @@ use serde::{Deserialize, Serialize};
 
 use crate::{ErrorKind, ValidationError, finite};
 
+fn object<'de, D: serde::Deserializer<'de>, T: Deserialize<'de>>(
+    deserializer: D,
+) -> Result<T, D::Error> {
+    struct ObjectVisitor<T>(std::marker::PhantomData<T>);
+
+    impl<'de, T: Deserialize<'de>> serde::de::Visitor<'de> for ObjectVisitor<T> {
+        type Value = T;
+
+        fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            formatter.write_str("an object")
+        }
+
+        fn visit_map<A: serde::de::MapAccess<'de>>(self, map: A) -> Result<T, A::Error> {
+            T::deserialize(serde::de::value::MapAccessDeserializer::new(map))
+        }
+    }
+
+    deserializer.deserialize_map(ObjectVisitor(std::marker::PhantomData))
+}
+
+// Serde's struct derive accepts positional sequences. Require a map before
+// delegating field validation, preserving duplicate/unknown-field rejection.
+macro_rules! deserialize_object {
+    ($name:ident { $($field:ident: $ty:ty),+ $(,)? }) => {
+        impl<'de> Deserialize<'de> for $name {
+            fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+                #[derive(Deserialize)]
+                #[serde(deny_unknown_fields)]
+                struct Fields {
+                    $($field: $ty),+
+                }
+
+                let fields: Fields = object(deserializer)?;
+                Ok(Self { $($field: fields.$field),+ })
+            }
+        }
+    };
+}
+
 /// Current model, candidate and validation report wire version.
 pub const SCHEMA_VERSION: u32 = 1;
 
@@ -30,7 +69,7 @@ impl<'de> Deserialize<'de> for Bound {
             Finite { value: f64 },
             PositiveInfinity {},
         }
-        Ok(match Input::deserialize(deserializer)? {
+        Ok(match object(deserializer)? {
             Input::NegativeInfinity {} => Self::NegativeInfinity,
             Input::Finite { value } => Self::Finite { value },
             Input::PositiveInfinity {} => Self::PositiveInfinity,
@@ -39,7 +78,7 @@ impl<'de> Deserialize<'de> for Bound {
 }
 
 /// Supported linear variable domains.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Domain {
     /// Real-valued variable.
@@ -50,8 +89,22 @@ pub enum Domain {
     Binary,
 }
 
+impl<'de> Deserialize<'de> for Domain {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        match String::deserialize(deserializer)?.as_str() {
+            "continuous" => Ok(Self::Continuous),
+            "integer" => Ok(Self::Integer),
+            "binary" => Ok(Self::Binary),
+            other => Err(serde::de::Error::unknown_variant(
+                other,
+                &["continuous", "integer", "binary"],
+            )),
+        }
+    }
+}
+
 /// Original variable with a stable ID and explicit bounds.
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Variable {
     /// Stable caller-assigned identity.
@@ -64,8 +117,15 @@ pub struct Variable {
     pub upper: Bound,
 }
 
+deserialize_object!(Variable {
+    id: u32,
+    domain: Domain,
+    lower: Bound,
+    upper: Bound
+});
+
 /// One original sparse coefficient; duplicate variable IDs are rejected.
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct LinearTerm {
     /// Referenced original variable ID.
@@ -74,8 +134,13 @@ pub struct LinearTerm {
     pub coefficient: f64,
 }
 
+deserialize_object!(LinearTerm {
+    variable_id: u32,
+    coefficient: f64
+});
+
 /// Original ranged linear constraint, including equalities and free rows.
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Constraint {
     /// Stable caller-assigned identity.
@@ -88,8 +153,10 @@ pub struct Constraint {
     pub terms: Vec<LinearTerm>,
 }
 
+deserialize_object!(Constraint { id: u32, lower: Bound, upper: Bound, terms: Vec<LinearTerm> });
+
 /// Objective direction; recomputation never negates the original objective.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum ObjectiveSense {
     /// Minimize the original expression.
@@ -98,8 +165,21 @@ pub enum ObjectiveSense {
     Maximize,
 }
 
+impl<'de> Deserialize<'de> for ObjectiveSense {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        match String::deserialize(deserializer)?.as_str() {
+            "minimize" => Ok(Self::Minimize),
+            "maximize" => Ok(Self::Maximize),
+            other => Err(serde::de::Error::unknown_variant(
+                other,
+                &["minimize", "maximize"],
+            )),
+        }
+    }
+}
+
 /// Original linear objective.
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Objective {
     /// Optimization direction, retained even though M1 does not solve.
@@ -110,8 +190,10 @@ pub struct Objective {
     pub terms: Vec<LinearTerm>,
 }
 
+deserialize_object!(Objective { sense: ObjectiveSense, offset: f64, terms: Vec<LinearTerm> });
+
 /// Unvalidated model input. Use [`Model::new`] before evaluation or canonical output.
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ModelDocument {
     /// Must equal [`SCHEMA_VERSION`].
@@ -125,6 +207,14 @@ pub struct ModelDocument {
     /// Original objective.
     pub objective: Objective,
 }
+
+deserialize_object!(ModelDocument {
+    schema_version: u32,
+    model_id: String,
+    variables: Vec<Variable>,
+    constraints: Vec<Constraint>,
+    objective: Objective,
+});
 
 /// Immutable structurally valid original model. This is not a feasibility proof.
 #[derive(Clone, Debug, PartialEq)]
@@ -191,7 +281,7 @@ impl Model {
 }
 
 /// One supplied original-variable value.
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Assignment {
     /// Stable original variable identity.
@@ -200,8 +290,13 @@ pub struct Assignment {
     pub value: f64,
 }
 
+deserialize_object!(Assignment {
+    variable_id: u32,
+    value: f64
+});
+
 /// Candidate input; identity and variable coverage are verified during evaluation.
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Candidate {
     /// Must equal [`SCHEMA_VERSION`].
@@ -211,6 +306,8 @@ pub struct Candidate {
     /// Exactly one assignment per original variable.
     pub values: Vec<Assignment>,
 }
+
+deserialize_object!(Candidate { schema_version: u32, model_id: String, values: Vec<Assignment> });
 
 impl Candidate {
     pub(crate) fn canonical(&self) -> Result<Self, ValidationError> {

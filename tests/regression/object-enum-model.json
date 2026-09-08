@@ -1,0 +1,1 @@
+{"schema_version":1,"model_id":"enum-model","variables":[{"id":0,"domain":{"continuous":null},"lower":{"kind":"negative_infinity"},"upper":{"kind":"positive_infinity"}}],"constraints":[],"objective":{"sense":{"minimize":null},"offset":0,"terms":[]}}

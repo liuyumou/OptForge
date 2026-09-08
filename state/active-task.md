@@ -1,11 +1,41 @@
 # Active Task
 
+## M1 Review Contract Fixes (2026-09-08)
+
+Objective: reject alternate JSON representations for all model/candidate input
+types and return categorized CLI I/O errors when report output fails.
+
+Status: complete.
+
+Acceptance gate: regressions for positional records, object-wrapped enums,
+and failed stdout writes; full bash tools/check.sh under SPEC-0001 and ADR-0002.
+
+Expected changes: optimizer-core document parsing, optimizer-cli report output,
+contract tests, minimized fixtures, specification clarifications, changelog,
+and this task record. Resource budget: CPU only, four Cargo build workers,
+bounded deterministic tests, no GPU workloads.
+
+Evidence (2026-09-08): new regressions reproduced accepted alternate JSON forms
+and exit 101 on failed stdout before their fixes. Public record types and tagged
+bounds now reject positional arrays; domain/objective enums require strings.
+Direct and nested parsing tests pass, preserving unknown/duplicate-field rejection
+and f64 round trips. CLI tests verify categorized io errors and exit 2 for /dev/full
+and closed pipes in structural and candidate modes. Output writes and flushes
+are fallible; the specification clarifies that delivered bytes cannot be retracted.
+
+The complete bash tools/check.sh gate passed: format, warnings-as-errors Clippy,
+26 Rust tests, workspace build, rustdoc, cargo-deny, artifact validation, 8 Python
+tests, 36-page documentation/link validation, and bootstrap smoke. No checks were
+waived. Rust 1.93.1, four Cargo workers, and CPU-only simulations were used.
+Minimized JSON fixtures and reproduction instructions are in tests/regression/.
+Both review findings are resolved; no dependency or numerical-policy changes.
+
 ## Commit and Branch Review (2026-09-08)
 
 Objective: validate and commit the pending acceptance-script diagnostic change,
 then review the complete feature branch against local main in PR style.
 
-Status: acceptance passed; commit prepared, followed by read-only branch review.
+Status: complete; committed as 4981aef and reviewed against local main.
 
 Acceptance gate: run bash tools/check.sh before committing; inspect the complete
 main-to-branch diff against SPEC-0001 and ADR-0002 and report actionable findings.
@@ -16,8 +46,9 @@ Resource budget: CPU only, at most four Cargo build workers; no GPU workloads.
 Evidence (2026-09-08): the complete bash tools/check.sh gate passed with Rust
 1.93.1 and four Cargo workers: format, Clippy, 22 Rust tests, workspace build,
 rustdoc, cargo-deny, artifact validation, 8 Python tests, 36-page documentation
-build/link validation, and bootstrap smoke. No checks were waived. Review findings
-will be reported to the requester after the commit; comparison base is local main
+build/link validation, and bootstrap smoke. No checks were waived. Review found
+alternate JSON representations and panicking stdout writes, resolved by the M1
+review contract fixes above. The comparison base was local main
 at 9e6dc86534de2efa414205752ca58d7584976052 (also origin/main locally).
 
 ## Current diagnostic fix (2026-09-08)

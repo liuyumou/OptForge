@@ -1,5 +1,5 @@
 use std::fs::File;
-use std::io::{self, Read};
+use std::io::{self, Read, Write};
 
 use optimizer_core::{Candidate, Model, Tolerances};
 
@@ -62,7 +62,10 @@ pub(crate) fn validate(options: &[&str]) -> io::Result<u8> {
             0,
         )
     };
-    println!("{output}");
+    let mut stdout = io::stdout().lock();
+    writeln!(stdout, "{output}")
+        .and_then(|()| stdout.flush())
+        .map_err(|error| io::Error::other(format!("io: stdout: {error}")))?;
     Ok(code)
 }
 

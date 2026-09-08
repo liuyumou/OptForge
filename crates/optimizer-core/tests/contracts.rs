@@ -234,6 +234,137 @@ fn strict_json_rejects_unknown_duplicate_and_unsupported_input() {
 }
 
 #[test]
+fn json_records_require_objects_in_direct_and_nested_inputs() {
+    fn reject_array<T: serde::de::DeserializeOwned + serde::Serialize>(value: &T, fields: &[&str]) {
+        let object = serde_json::to_value(value).unwrap();
+        let array: Vec<_> = fields.iter().map(|field| object[*field].clone()).collect();
+        assert!(serde_json::from_value::<T>(object).is_ok());
+        assert!(
+            serde_json::from_slice::<T>(&serde_json::to_vec(&array).unwrap()).is_err(),
+            "{} accepted a positional array",
+            std::any::type_name::<T>()
+        );
+    }
+    let d = document();
+    reject_array(
+        &d,
+        &[
+            "schema_version",
+            "model_id",
+            "variables",
+            "constraints",
+            "objective",
+        ],
+    );
+    reject_array(&d.variables[0], &["id", "domain", "lower", "upper"]);
+    reject_array(&d.constraints[0], &["id", "lower", "upper", "terms"]);
+    reject_array(&d.objective, &["sense", "offset", "terms"]);
+    reject_array(&d.objective.terms[0], &["variable_id", "coefficient"]);
+    let c = candidate(&[0.0, 0.0]);
+    reject_array(&c, &["schema_version", "model_id", "values"]);
+    reject_array(&c.values[0], &["variable_id", "value"]);
+    for bound in [
+        Bound::NegativeInfinity,
+        finite(0.0),
+        Bound::PositiveInfinity,
+    ] {
+        let fields = if matches!(bound, Bound::Finite { .. }) {
+            &["kind", "value"][..]
+        } else {
+            &["kind"][..]
+        };
+        reject_array(&bound, fields);
+    }
+    for (path, replacement) in [
+        (
+            "/variables/0",
+            serde_json::json!([2, "continuous", {"kind":"negative_infinity"}, {"kind":"positive_infinity"}]),
+        ),
+        (
+            "/constraints/0",
+            serde_json::json!([7, {"kind":"finite","value":-2}, {"kind":"finite","value":3}, []]),
+        ),
+        ("/objective", serde_json::json!(["minimize", 0.5, []])),
+        ("/objective/terms/0", serde_json::json!([2, -1.0])),
+        ("/constraints/0/terms/0", serde_json::json!([2, 2.0])),
+        (
+            "/variables/0/lower",
+            serde_json::json!(["negative_infinity"]),
+        ),
+        (
+            "/variables/0/upper",
+            serde_json::json!(["positive_infinity"]),
+        ),
+        ("/constraints/0/lower", serde_json::json!(["finite", -2.0])),
+    ] {
+        let mut input = serde_json::to_value(&d).unwrap();
+        *input.pointer_mut(path).unwrap() = replacement;
+        assert_eq!(
+            Model::from_json(&serde_json::to_vec(&input).unwrap())
+                .unwrap_err()
+                .kind,
+            ErrorKind::Document
+        );
+    }
+    let mut input = serde_json::to_value(&c).unwrap();
+    input["values"][0] = serde_json::json!([2, 0.0]);
+    assert_eq!(
+        Candidate::from_json(&serde_json::to_vec(&input).unwrap())
+            .unwrap_err()
+            .kind,
+        ErrorKind::Document
+    );
+    assert_eq!(
+        Candidate::from_json(br#"[1,"test",[]]"#).unwrap_err().kind,
+        ErrorKind::Document
+    );
+    assert_eq!(
+        Model::from_json(include_bytes!(
+            "../../../tests/regression/positional-model.json"
+        ))
+        .unwrap_err()
+        .kind,
+        ErrorKind::Document
+    );
+}
+
+#[test]
+fn json_domain_and_objective_enums_require_strings() {
+    for name in ["continuous", "integer", "binary"] {
+        assert!(serde_json::from_value::<Domain>(serde_json::json!(name)).is_ok());
+        assert!(serde_json::from_value::<Domain>(serde_json::json!({name: null})).is_err());
+        let mut input = serde_json::to_value(document()).unwrap();
+        input["variables"][0]["domain"] = serde_json::json!({name: null});
+        assert_eq!(
+            Model::from_json(&serde_json::to_vec(&input).unwrap())
+                .unwrap_err()
+                .kind,
+            ErrorKind::Document
+        );
+    }
+    for name in ["minimize", "maximize"] {
+        assert!(serde_json::from_value::<ObjectiveSense>(serde_json::json!(name)).is_ok());
+        assert!(serde_json::from_value::<ObjectiveSense>(serde_json::json!({name: null})).is_err());
+        let mut input = serde_json::to_value(document()).unwrap();
+        input["objective"]["sense"] = serde_json::json!({name: null});
+        assert_eq!(
+            Model::from_json(&serde_json::to_vec(&input).unwrap())
+                .unwrap_err()
+                .kind,
+            ErrorKind::Document
+        );
+    }
+    assert_eq!(
+        Model::from_json(include_bytes!(
+            "../../../tests/regression/object-enum-model.json"
+        ))
+        .unwrap_err()
+        .kind,
+        ErrorKind::Document
+    );
+}
+
+#[test]
 fn candidate_identity_coverage_and_tolerances_are_explicit() {
     let model = Model::new(document()).unwrap();
     let invalid: Vec<fn(&mut Candidate)> = vec![

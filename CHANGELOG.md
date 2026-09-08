@@ -4,6 +4,13 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Fixed
+
+- Model and candidate JSON now reject positional records and object-wrapped
+  domain/objective enums, including direct Serde parsing and nested records.
+- Model validation report write and flush failures return a categorized I/O
+  diagnostic and exit code 2, including full output devices and closed pipes.
+
 ### Added
 
 - M1 original linear models with stable IDs, explicit bounds and continuous,

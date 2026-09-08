@@ -196,6 +196,53 @@ fn input_errors_are_categorized_and_never_write_partial_reports() {
 }
 
 #[test]
+fn alternate_json_representations_are_document_errors() {
+    for fixture in ["positional-model.json", "object-enum-model.json"] {
+        let path = root().join("tests/regression").join(fixture);
+        error(run(&["--model", path.to_str().unwrap()]), "document:");
+    }
+}
+
+#[test]
+#[cfg(target_os = "linux")]
+fn failed_report_output_is_an_io_error_for_both_modes() {
+    for candidate_mode in [false, true] {
+        for closed_pipe in [false, true] {
+            let stdout = if closed_pipe {
+                let (reader, writer) = std::io::pipe().unwrap();
+                drop(reader);
+                std::process::Stdio::from(writer)
+            } else {
+                std::process::Stdio::from(
+                    fs::OpenOptions::new()
+                        .write(true)
+                        .open("/dev/full")
+                        .unwrap(),
+                )
+            };
+            let mut command = Command::new(env!("CARGO_BIN_EXE_optimizer"));
+            command
+                .args(["model", "validate", "--model"])
+                .arg(root().join("examples/model-v1.json"));
+            if candidate_mode {
+                command
+                    .arg("--candidate")
+                    .arg(root().join("examples/candidate-v1.json"))
+                    .args([
+                        "--absolute-tolerance",
+                        "0",
+                        "--relative-tolerance",
+                        "0",
+                        "--integrality-tolerance",
+                        "0",
+                    ]);
+            }
+            error(command.stdout(stdout).output().unwrap(), "io: stdout:");
+        }
+    }
+}
+
+#[test]
 fn file_limits_accept_exact_limit_and_reject_one_byte_over_for_both_inputs() {
     let sandbox = Sandbox::new();
     let mut bytes = fs::read(root().join("examples/model-v1.json")).unwrap();
