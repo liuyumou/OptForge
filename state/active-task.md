@@ -1,5 +1,30 @@
 # Active Task
 
+## Local M1 Integration (2026-09-08)
+
+Objective: merge the reviewed feat/model-validation branch into local main and
+delete the feature branch after confirming its commits are retained.
+
+Status: complete; local integration and feature-branch cleanup finished.
+
+Acceptance gate: fast-forward integration preserves reviewed commit 27b1b3a;
+bash tools/check.sh passes on main; the merged feature branch is deleted and the
+worktree is clean after recording evidence. Expected changes: local Git refs and
+this task record. Resource budget: CPU only, four Cargo workers, no GPU workloads.
+
+Evidence (2026-09-08): main fast-forwarded from 9e6dc86 to reviewed tip 27b1b3a
+without conflicts or history rewriting. git merge-base --is-ancestor confirmed
+the reviewed tip is retained on main, and git branch -d removed the fully merged
+feat/model-validation branch. No remote refs were changed.
+
+The unchanged runtime passed the complete acceptance gate before integration,
+as recorded below. Two post-merge attempts passed format, Clippy, all 29 Rust
+tests, workspace build and rustdoc, then stopped because the RustSec advisory
+database could not be fetched. These attempts do not constitute a new full-gate
+pass; the successful pre-integration gate remains the full acceptance evidence.
+The only additional tracked change is this integration record, validated with
+the documentation/link builder and git diff --check before committing.
+
 ## Repeated Branch Review (2026-09-08)
 
 Objective: review the complete feature branch against main, fix any substantiated
