@@ -1,5 +1,26 @@
 # Active Task
 
+## M2 Backend Contract and Implementation (2026-09-09)
+
+Objective: implement the approved M2-M6 plan sequentially, starting with the
+HiGHS backend contract, safe lifecycle, validated solving and reproducible records.
+
+Status: in progress; baseline verification and native dependency investigation.
+
+Acceptance gate: accepted SPEC-0002 and supporting ADR; standalone HiGHS
+differential LP/MILP tests, explicit statuses, cancellation/limits, warm starts,
+lifecycle sanitizers, structured records, and bash tools/check.sh. Inspect and
+fix review findings before committing and advancing to M3.
+
+Expected changes: optimizer-highs, core solve contracts, CLI, experiment schemas,
+native build/validation tooling, tests, specifications, ADRs and project state.
+Resource budget: CPU only for M2, at most four workers, bounded deterministic
+tests and benchmark batches of at most 30 minutes. M5/M6 will use one shared
+host GPU lease at a time. Existing M0/M1 defaults remain unchanged.
+
+Follow-up order: M3 CPU flow shop, M4 owned MILP search, M5 CUDA evaluator,
+M6 representative benchmark/evidence package. No remote publication is included.
+
 ## Local M1 Integration (2026-09-08)
 
 Objective: merge the reviewed feat/model-validation branch into local main and
