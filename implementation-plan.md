@@ -1,6 +1,14 @@
 # AI-Native Optimizer Implementation Plan
 
-This plan turns [ai-native-optimizer-plan.md](ai-native-optimizer-plan.md) into an evidence-driven implementation roadmap. M0 and M1 are complete. Later work is organized around reusable capabilities rather than a fixed solver sequence.
+This plan turns [ai-native-optimizer-plan.md](ai-native-optimizer-plan.md) into an
+evidence-driven roadmap. It is organized by **evidence stage**: each stage states
+what must be true to enter it, the work it contains, the falsifiable evidence that
+closes it, and the artifacts that record that evidence. Capability numbers (C1-C7)
+name work items inside the stages and are retained for
+[state/backlog.yaml](state/backlog.yaml) dependency tracking.
+
+A stage closes on evidence, not on completed code. Where evidence does not yet
+exist, this document says so rather than implying it.
 
 ## Principles and invariants
 
@@ -12,91 +20,213 @@ This plan turns [ai-native-optimizer-plan.md](ai-native-optimizer-plan.md) into 
 - GPU work is measured end to end, uses the shared one-GPU lease, and always retains a CPU fallback.
 - Every behavior has a specification, acceptance tests, provenance, and a recorded failure path.
 
-## Completed foundation
+## Status summary
 
-### M0 — Repository and process bootstrap
+| Stage | Work items | State |
+|---|---|---|
+| 0. Foundation | M0 bootstrap, M1 model/validation authority | Complete |
+| 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
+| 2. Execution | C2 executive, C3 extension runtime | Not started; **no specification written** |
+| 3. Application | C4 SDK/CLI/registry, C5 scheduling slice | Not started |
+| 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | Not started |
+| 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
+| 6. Reproduction | Independent reproduction, then release decisions | Not started |
 
-Completed. Rust workspace, pinned toolchain, documentation and dependency checks, schemas, artifact provenance, GPU discovery, and cancellable lease simulation are in place.
+Only stages 0 and 1 have evidence. Everything below stage 1 is a plan, and the
+performance and learning claims in stages 4 and beyond are hypotheses, not results.
 
-### M1 — Model and validation authority
+---
 
-Completed under SPEC-0001 and ADR-0002. Original models, stable identifiers, checked arithmetic, bounds/domains, objective recomputation, candidate validation, tolerances, canonical JSON, and CLI diagnostics are authoritative.
+## Stage 0 — Foundation (complete)
 
-## Capability roadmap
+**M0 — Repository and process bootstrap.** Rust workspace, pinned toolchain,
+documentation and dependency checks, schemas, artifact provenance, GPU discovery,
+and cancellable lease simulation, under SPEC-0000 and ADR-0001.
 
-### C1 — Backend-neutral solve and session contract
+**M1 — Model and validation authority.** Original models, stable identifiers,
+checked arithmetic, bounds/domains, objective recomputation, candidate validation,
+tolerances, canonical JSON, and CLI diagnostics, under SPEC-0001 and ADR-0002.
 
-Specification: SPEC-0002 and a superseding ADR where required.
+*Evidence:* the M1 contracts include an independent dense oracle over 18,522
+evaluations and 968 f64 round trips. Both stages' evidence is recorded in
+[state/active-task.md](state/active-task.md).
 
-Define solve requests, backend capabilities, cancellation and resource limits, warm starts, progress events, termination/status semantics, validated solution extraction, diagnostics, and immutable solve records. Keep native handles inside the adapter crate. Distinguish backend status, candidate feasibility, bound validity, and engine proof claims.
+## Stage 1 — Contract (complete)
 
-Implement the HiGHS 1.11.0 adapter first for LP and narrow MILP support. Require differential tests, lifecycle cleanup, limits, cancellation, warm starts, status preservation, numerical warning retention, and reproducible records.
+**Entry condition:** M1 validation authority is green.
 
-Gate: standalone HiGHS comparisons and all CPU checks pass; no backend failure, timeout, or interruption can be reported as proven optimality.
+**C1 — Backend-neutral solve and session contract**, under
+[SPEC-0002](docs/specifications/SPEC-0002-backend-contract.md) and
+[ADR-0003](docs/decisions/ADR-0003-highs-backend.md).
 
-### C2 — Owned solver executive
+Solve requests, backend capabilities, cancellation and resource limits, warm
+starts, termination/status semantics, validated solution extraction, diagnostics,
+and immutable solve records. Native handles stay inside the adapter crate. Backend
+status, candidate feasibility, bound validity, and engine proof claims are distinct.
 
-Specification: new executive/search specification before public search APIs.
+*Evidence:*
 
-Own session state, work scheduling, budgets, cancellation, telemetry, checkpoint shape, incumbent acceptance, and proof completion. Provide a relaxation service over C1 and keep search strategy replaceable.
+- The pinned HiGHS 1.11.0 CPU library is provisioned out of tree by
+  `tools/setup_highs.sh` and linked through a private FFI boundary. The
+  standalone executable is built from the same source as an independent reference.
+- Differential agreement with that reference over LP, objective-offset, equality,
+  ranged, MILP, and infeasible cases.
+- All 18 native model statuses are mapped with no catch-all arm, so a HiGHS
+  upgrade fails to compile rather than silently mis-classifying an outcome.
+- Every extracted candidate is re-validated against the original model before
+  publication; invalid native output is a numerical failure, never optimality.
+- 58 Rust tests and 20 Python tests pass under `bash tools/check.sh`, with the
+  native library required and a skip reported as uncovered acceptance.
 
-Start with a narrow branch-and-bound strategy using HiGHS relaxations, but keep node/work-item interfaces usable by decomposition, portfolios, and future search strategies. Exhaustive tiny-model tests must cover feasible, infeasible, unbounded, interrupted, limited, backend-failure, and proof states.
+*Gate met:* no backend failure, timeout, or interruption can be reported as proven
+optimality. This is asserted directly by the limit, cancellation, and
+termination-classification tests.
 
-Gate: complete search correctness and termination evidence precedes performance claims or learned control.
+*Known limits, carried forward rather than hidden:* the adapter rejects
+coefficients below the native small-matrix threshold instead of scaling the model;
+presolve, scaling, and reoptimization are deliberately absent until Stage 5;
+sanitizer runs over repeated native lifecycles are not yet part of the gate.
 
-### C3 — Extension runtime and authority model
+## Stage 2 — Execution
 
-Specification: extension lifecycle, capability, and conformance contracts.
+**Entry condition:** Stage 1 evidence holds and M1 behavior remains green.
 
-Provide official Rust traits and a deliberately small versioned C boundary for separately distributed native components. Extensions declare problem classes, dependencies, data needs, hardware, limits, and authority.
+**Both work items in this stage require an accepted specification before any
+public API is introduced. Neither specification exists yet.**
 
-Initial production categories are candidate producers and search advisers. Transformations such as cuts, presolve, and reformulations remain experimental until validity and solution-space preservation are justified. Reject invalid actions, incompatible versions, crashes, and resource abuse with structured artifacts.
+**C2 — Owned solver executive.** Own session state, work scheduling, budgets,
+cancellation, telemetry, checkpoint shape, incumbent acceptance, and proof
+completion. Provide a relaxation service over C1 and keep search strategy
+replaceable. Start with a narrow branch-and-bound strategy using HiGHS
+relaxations, but keep node/work-item interfaces usable by decomposition,
+portfolios, and future search strategies.
 
-Gate: independently authored extensions build and run without engine-internal changes; core validation remains authoritative.
+**C3 — Extension runtime and authority model.** Official Rust traits plus a
+deliberately small versioned C boundary for separately distributed native
+components. Extensions declare problem classes, dependencies, data needs,
+hardware, limits, and authority. Initial production categories are candidate
+producers and search advisers; transformations such as cuts, presolve, and
+reformulations remain experimental until validity and solution-space preservation
+are justified.
 
-### C4 — Agent-independent interaction and experiment workspace
+*Evidence that closes this stage:*
 
-Extend the CLI and add Python bindings/SDK after C1 interfaces stabilize. Support model inspection, validation, pinned solving, progress and diagnostics, cancellation, comparative experiments, profiling, extension conformance, and artifact retrieval through documented files and records.
+- Exhaustive tiny-model search tests covering feasible, infeasible, unbounded,
+  interrupted, limited, backend-failure, and proof states.
+- Branch coverage and termination correctness demonstrated before any performance
+  claim or learned control is attempted.
+- Independently authored extensions build and run without engine-internal changes,
+  while core validation remains authoritative.
+- Invalid actions, incompatible versions, crashes, and resource abuse produce
+  structured artifacts rather than silent degradation.
 
-Maintain disposable experimental and pinned execution workspaces. Add a local registry for versions, licenses, compatibility, authority basis, failures, interactions, manifests, and results. MCP may wrap these interfaces but is not required for execution.
+## Stage 3 — Application
 
-Gate: a run remains reproducible from pinned revisions and records after its originating agent is unavailable.
+**Entry condition:** Stage 2 proves owned state, search correctness, and
+extension safety.
 
-### C5 — Scheduling vertical slice
+**C4 — Agent-independent interaction and experiment workspace.** Extend the CLI
+and add Python bindings/SDK after the C1 interfaces have stabilized under real
+use. Support model inspection, validation, pinned solving, progress and
+diagnostics, cancellation, comparative experiments, profiling, extension
+conformance, and artifact retrieval through documented files and records. Maintain
+disposable experimental and pinned execution workspaces, plus a local registry for
+versions, licenses, compatibility, authority basis, failures, interactions,
+manifests, and results. MCP may wrap these interfaces but is not required for
+execution.
 
-Specification: flow-shop application contract.
+**C5 — Scheduling vertical slice.** Flow-shop instances, makespan recurrence,
+deterministic NEH and insertion candidates, independent evaluation, and model
+adapters through the common C1-C3 interfaces. Job-shop follows only after
+flow-shop correctness and reproducibility gates pass.
 
-Implement flow-shop instances, makespan recurrence, deterministic NEH and insertion candidates, independent evaluation, and model adapters through the common C1–C3 interfaces. Add job-shop only after flow-shop correctness and reproducibility gates pass.
+*Evidence that closes this stage:*
 
-Gate: exhaustive tiny instances, independent evaluator agreement, validated incumbents, and a frozen Taillard development subset pass with provenance.
+- A run remains reproducible from pinned revisions and records after its
+  originating agent is unavailable.
+- Exhaustive tiny instances, independent evaluator agreement, validated
+  incumbents, and a frozen Taillard development subset pass with provenance.
 
-### C6 — Heterogeneous computation
+## Stage 4 — Research
 
-Specification: backend/device and GPU evaluator contracts before kernels.
+**Entry condition:** Stage 3 provides reproducible workflows and a workload with
+independent evaluation. Baselines are tuned before any intervention is measured.
 
-Make device selection, residency, batching, transfer timing, arithmetic width, lease ownership, fallback, cancellation, reset recovery, and equivalence tolerances explicit. Measure a GPU candidate evaluator or batched heuristic when independent work justifies it. Evaluate GPU LP methods as a complementary backend; approximate results remain candidates or warm starts until justified bounds and statuses exist.
+**C6 — Heterogeneous computation.** Make device selection, residency, batching,
+transfer timing, arithmetic width, lease ownership, fallback, cancellation, reset
+recovery, and equivalence tolerances explicit before writing kernels. Measure a
+GPU candidate evaluator or batched heuristic when independent work justifies it.
+Evaluate GPU LP methods as a complementary backend; approximate results remain
+candidates or warm starts until justified bounds and statuses exist.
 
-Gate: CPU/GPU agreement, sanitizer checks, overflow and input rejection, cancellation recovery, serialized lease behavior, and transfer-inclusive crossover measurements pass. CPU remains the default below the measured crossover.
+**C7 — Adaptive portfolios and agent-developed algorithms.** Establish
+conventional baselines, then evaluate feature/progress-aware allocation, reusable
+candidate producers, and search advisers. Give agents source, contracts,
+evaluators, profiling tools, and bounded budgets. Promote only artifacts that pass
+conformance, correctness, resource, compatibility, and held-out performance gates.
 
-### C7 — Adaptive portfolios and agent-developed algorithms
+These correspond to Hypotheses A and B in
+[ai-native-optimizer-plan.md](ai-native-optimizer-plan.md). They are hypotheses:
+this stage may close with a recorded negative result, which is a valid outcome.
 
-Establish conventional baselines, then evaluate feature/progress-aware allocation, reusable candidate producers, and search advisers. Give agents source, contracts, evaluators, profiling tools, and bounded budgets. Promote only artifacts that pass conformance, correctness, resource, compatibility, and held-out performance gates.
+*Evidence that closes this stage:*
 
-Measure discovery cost, per-solve overhead, reuse, interactions, negative results, and distribution shift. Compare with tuned static configurations, simple adaptive rules, and conventional selection methods.
+- CPU/GPU agreement, sanitizer checks, overflow and input rejection, cancellation
+  recovery, serialized lease behavior, and transfer-inclusive crossover
+  measurements. CPU remains the default below the measured crossover.
+- Held-out effect size, uncertainty estimates, controller and discovery overhead,
+  interaction effects, and failure analysis, compared against tuned static
+  configurations, simple adaptive rules, and conventional selection methods.
+- A principal research contribution is selected on this evidence, or the
+  hypotheses are recorded as unsupported.
 
-Gate: select a principal research contribution using held-out effect size, uncertainty, overhead, and failure analysis.
+## Stage 5 — Hardening
 
-## Evidence and release stages
+**Entry condition:** measured evidence identifies a specific bottleneck. Each
+item below requires its own specification; none is authorized by this document.
 
-1. **Contract stage:** C1 is complete and M1 behavior remains green.
-2. **Execution stage:** C2 and C3 prove owned state, extension safety, and search correctness.
-3. **Application stage:** C4 and C5 provide reproducible human/agent workflows and scheduling evidence.
-4. **Research stage:** C6 and C7 compare interventions against tuned baselines on sealed family-level holdouts.
-5. **Hardening stage:** add presolve, scaling, reoptimization, stronger cuts, parallel CPU search, checkpoint/restart, and larger models only when evidence justifies separate specifications.
-6. **Reproduction stage:** independently reproduce findings from pinned artifacts, document limitations and negative results, then make licensing, public hub, and release decisions separately.
+Presolve, scaling, reoptimization, numerical recovery, stronger cuts, parallel
+CPU search, checkpoint/restart, and larger models. These can dominate both
+reliability and runtime, so they are sequenced by measurement rather than by
+expected importance.
 
-All benchmarks freeze datasets, checksums, splits, seeds, settings, hardware, budgets, timing, and analysis before comparison. Correctness, numerical behavior, optimization performance, and development efficiency remain separate scorecards. No public publication, push, hosting configuration, multi-GPU algorithm, broad commercial compatibility, or natural-language modeling subsystem is implied by this plan.
+*Evidence that closes this stage:* each addition preserves the Stage 1 and 2
+correctness contracts, including original-variable reconstruction through any new
+transformation, and shows a measured improvement on the frozen workload.
+
+## Stage 6 — Reproduction
+
+**Entry condition:** a principal finding exists with held-out evidence.
+
+Independently reproduce findings from pinned artifacts, document limitations and
+negative results, then make licensing, public hub, and release decisions
+separately.
+
+*Evidence that closes this stage:* principal findings are reproduced from pinned
+artifacts by someone other than their author. GPU and parallel execution may
+prevent bitwise reproducibility, so reproducible experimental conclusions are
+distinguished from identical execution traces.
+
+---
+
+## Measurement rules
+
+All benchmarks freeze datasets, checksums, splits, seeds, settings, hardware,
+budgets, timing, and analysis before comparison. Correctness, numerical behavior,
+optimization performance, and development efficiency remain separate scorecards
+and are not combined into an aggregate score. Evaluation ownership stays distinct
+from the author of the tested algorithm. Sealed evaluation data stays outside the
+discovery loop.
+
+No public publication, push, hosting configuration, multi-GPU algorithm, broad
+commercial compatibility, or natural-language modeling subsystem is implied by
+this plan.
 
 ## Dependency rule
 
-Implement one bounded, dependency-ready task at a time. Before behavior exists, write its specification and ADR as needed; after implementation run `bash tools/check.sh`, preserve minimized regressions, update records and changelog, and advance only when the stated gate passes.
+Implement one bounded, dependency-ready task at a time. Before behavior exists,
+write its specification and ADR as needed; after implementation run
+`bash tools/check.sh`, preserve minimized regressions, update records and
+changelog, and advance only when the stated evidence exists. A skipped or waived
+check is recorded in [state/known-failures.md](state/known-failures.md), never
+silently absorbed into a pass.

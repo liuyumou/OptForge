@@ -32,7 +32,17 @@ fixtures are retained in tests/. Fixtures do not establish solver classification
 
 Original-variable reconstruction after transformations, deterministic solver
 seeding, flow-shop recurrence, permutation validity and CPU/GPU agreement remain
-gated on later milestones. M1 does not implement transformations or solving.
+gated on later capabilities. Transformations are not implemented.
+
+C1 adds [solve contract](../../crates/optimizer-core/tests/solve.rs),
+[backend acceptance](../../crates/optimizer-highs/tests/backend.rs),
+[differential](../../crates/optimizer-highs/tests/differential.rs),
+[solve CLI](../../crates/optimizer-cli/tests/solve.rs) and
+[solve schema](../../tests/integration/test_solve_artifacts.py) contracts. The
+differential layer drives the standalone HiGHS executable, built from the same
+pinned source, as a separate process and fails on disagreement rather than
+deferring to the adapter. Native-only tests report an explicit skip when the
+library is absent, so a missing build is never counted as coverage.
 
 Every backend status must have an explicit test. Limits and numerical failures
 must never become proven optimality. Performance tests are separate from

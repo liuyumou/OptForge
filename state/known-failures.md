@@ -18,6 +18,29 @@ administration. Next step: configure these settings separately from Git syncing.
 
 ## Deferred hardware evidence
 
-GPU support queries inventory only. CUDA sanitizer, kernel equivalence and HiGHS
-differential tests remain gated on M2-M5 implementation. M1 candidate numerical
-correctness is covered by CPU contracts; no solver or hardware proof is claimed.
+GPU support queries inventory only. CUDA sanitizer and kernel equivalence tests
+remain gated on C6 implementation. HiGHS differential tests are implemented and
+passing under C1; see [active task](active-task.md). No solver performance or
+hardware claim is made.
+
+## Intermittent advisory database fetch
+
+`cargo deny check advisories` fetches the RustSec database from github.com, which
+has repeatedly been unreachable in this environment. The acceptance gate now
+falls back to the cached database rather than failing spuriously or skipping the
+check; an absent cache is still a hard failure. Reproduction: run
+`cargo deny --locked check` without network egress to github.com. Next step: seed
+the advisory database in CI so the check does not depend on egress at gate time.
+
+## Native acceptance can be skipped explicitly
+
+`AI_OPTIMIZER_SKIP_NATIVE=1 bash tools/check.sh` runs without the pinned HiGHS
+build and prints a prominent warning that native acceptance was not covered. Such
+a run is not a complete acceptance gate pass and must not be recorded as one.
+
+## Sanitizers not yet in the gate
+
+SPEC-0002's acceptance list mentions running repeated native lifecycle tests under
+available sanitizers. The repeated-lifecycle test exists and passes, but no
+sanitizer run is part of `tools/check.sh` yet. This is an uncovered part of the C1
+acceptance list, recorded rather than waived silently.

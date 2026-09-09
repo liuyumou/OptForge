@@ -1,6 +1,6 @@
 schema_version: 1
-current_milestone: M1
-next_ready_milestone: C1
+current_milestone: C1
+next_ready_milestone: C2
 tasks:
   - id: M0
     title: Repository and process bootstrap
@@ -16,13 +16,13 @@ tasks:
     acceptance: "Property and exhaustive model tests, round trips, independent objective and violation recomputation"
   - id: C1
     title: Backend-neutral solve and session contract with HiGHS adapter
-    status: ready
+    status: complete
     depends_on: [M1]
     specification: docs/specifications/SPEC-0002-backend-contract.md
     acceptance: "Differential LP/MILP, cancellation, limits, lifecycle, warm starts, explicit statuses, reproducible records"
   - id: C2
     title: Owned solver executive
-    status: planned
+    status: ready
     depends_on: [C1]
     acceptance: "Tiny exhaustive search, termination semantics, budgets, cancellation, proof completion"
   - id: C3

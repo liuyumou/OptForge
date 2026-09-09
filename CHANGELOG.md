@@ -4,9 +4,38 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Added
+
+- C1 backend-neutral solve contract: explicit solve options with no default
+  seed, limits or tolerances; cooperative cancellation; engine-owned termination
+  that never reports a limit, interruption or failure as proven optimality;
+  model-bound candidate and LP-basis warm starts; and reproducible solve records
+  in which an absent measurement is omitted rather than serialized as null.
+- Pinned CPU HiGHS 1.11.0 LP/MILP backend behind a private FFI boundary, with
+  every native model status mapped explicitly, native handles destroyed exactly
+  once, and every extracted candidate re-validated against the original model
+  before publication.
+- `optimizer solve --model PATH --config PATH [--candidate PATH | --basis PATH]`,
+  with exit 0 for a completed outcome, 1 for a limit, 130 for interruption and 2
+  for argument, I/O, unsupported, backend or numerical errors.
+- Versioned solve configuration and solve record JSON Schemas, plus their
+  negative acceptance tests.
+- `tools/setup_highs.sh` is now part of the acceptance gate. Running without the
+  native library requires `AI_OPTIMIZER_SKIP_NATIVE=1` and is reported as
+  uncovered native acceptance rather than a full pass.
+
 ### Changed
 
-- Replaced the narrow M0-M6 implementation sequence with an architecture-driven C1-C7 capability roadmap covering backend-neutral solving, the owned executive, extensions, agent workflows, scheduling, GPU feasibility, and adaptive research.
+- Replaced the narrow M0-M6 implementation sequence with an evidence-staged
+  roadmap covering the completed contract stage and the planned execution,
+  application, research, hardening and reproduction stages.
+- Solve errors use the existing `ErrorKind` taxonomy, extended with
+  `unsupported` and `backend` categories, instead of unstructured strings.
+- `optimizer-highs` declares its own lints rather than inheriting the workspace
+  set, because a workspace-level `unsafe_code = "forbid"` cannot be relaxed by an
+  inner crate; every other runtime crate keeps the prohibition.
+- The acceptance gate runs cheap preconditions before compilation and falls back
+  to the cached RustSec database when the advisory fetch is unavailable.
 
 ### Fixed
 
@@ -17,6 +46,8 @@ User-visible changes are recorded here using Conventional Commit terminology.
   domain/objective enums, including direct Serde parsing and nested records.
 - Model validation report write and flush failures return a categorized I/O
   diagnostic and exit code 2, including full output devices and closed pipes.
+- Candidate domain evaluation no longer relies on an unreachable branch, so
+  adding a variable domain cannot introduce a latent panic.
 
 ### Added
 
@@ -33,4 +64,6 @@ User-visible changes are recorded here using Conventional Commit terminology.
 - CPU CI, documentation builds, dependency policy, and manual serialized GPU CI.
 - Contract tests, bounded smoke artifacts, project rules, and milestone backlog.
 
-No model solving, HiGHS calls, CUDA kernels, or solver performance claims are included.
+No CUDA kernels, owned branch-and-bound search, Python SDK, extension registry,
+or solver performance claims are included. Solving is single-threaded CPU HiGHS
+under recorded numerical settings; no benchmark comparison is claimed.

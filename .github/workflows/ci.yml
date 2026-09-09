@@ -10,12 +10,34 @@ permissions:
 jobs:
   cpu:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: pip
+          cache-dependency-path: tools/requirements.txt
+      # cargo-deny is installed from source, so caching the Cargo home keeps the
+      # gate inside its timeout instead of rebuilding the tool every run.
+      - name: Cache Cargo home
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+          key: cargo-${{ runner.os }}-${{ hashFiles('Cargo.lock') }}
+          restore-keys: cargo-${{ runner.os }}-
+      # The pinned native library is built from checksum-verified upstream
+      # source; cache it on the setup script so CI does not rebuild HiGHS on
+      # every run. The key changes only when the provisioning script changes.
+      - name: Cache pinned HiGHS build
+        uses: actions/cache@v4
+        with:
+          path: target/native/highs-1.11.0
+          key: highs-1.11.0-${{ runner.os }}-${{ hashFiles('tools/setup_highs.sh') }}
       - name: Install pinned toolchain and tooling
         run: |
           rustup show

@@ -12,5 +12,8 @@
 | Acceptance gate | Evidence required before completing a bounded task |
 | M0 | Repository/process bootstrap; no solver claims |
 | ADR | Architecture decision record, superseded rather than rewritten |
+| Termination | Engine-owned solve outcome; a limit or interruption is never a proof; [SPEC-0002](../docs/specifications/SPEC-0002-backend-contract.md) |
+| Backend | Replaceable numerical solver behind the solve contract; native handles stay private |
+| Warm start | Validated candidate or model-bound LP basis supplied to a solve |
 | Candidate | Proposed solution requiring original-model validation |
-| Makespan | Completion time of the final job on the final machine; M3 contract pending |
+| Makespan | Completion time of the final job on the final machine; C5 contract pending |

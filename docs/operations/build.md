@@ -1,20 +1,30 @@
 # Build and Verify
 
-Purpose: reproduce local and CI acceptance. Scope: Linux M0-M1.
+Purpose: reproduce local and CI acceptance. Scope: Linux, M0-M1 and C1.
 
-Install rustup, Python 3.11+, Git and util-linux. The root toolchain file pins Rust.
-Create a Python virtual environment and install tools/requirements.txt, then:
+Install rustup, Python 3.11+, Git and util-linux. Solving additionally requires
+CMake and a C++ compiler for the pinned HiGHS build. The root toolchain file pins
+Rust. Create a Python virtual environment and install tools/requirements.txt, then:
 
 ```bash
 cargo install cargo-deny --version 0.19.0 --locked
+bash tools/setup_highs.sh
 bash tools/check.sh
 ```
 
-[check.sh](../../tools/check.sh) runs formatting, warnings-as-errors Clippy,
-workspace tests and build, warnings-as-errors rustdoc, dependency advisories and
-licenses, schema/provenance checks, artifact negative tests, documentation links,
-and the benchmark smoke. Run from a committed checkout for measured provenance.
-Cargo.lock is committed; use --locked for builds.
+[check.sh](../../tools/check.sh) runs shell syntax and whitespace checks, a Python
+dependency preflight, the pinned native HiGHS build, formatting,
+warnings-as-errors Clippy, workspace tests and build, warnings-as-errors rustdoc,
+dependency advisories and licenses, schema/provenance checks, artifact negative
+tests, documentation links, and the benchmark smoke. Run from a committed checkout
+for measured provenance. Cargo.lock is committed; use --locked for builds.
+
+[setup_highs.sh](../../tools/setup_highs.sh) downloads the checksum-verified
+HiGHS 1.11.0 source and builds a static CPU library under `target/native`, outside
+tracked source. Set `AI_OPTIMIZER_HIGHS_DIR` to use an existing install prefix.
+Set `AI_OPTIMIZER_SKIP_NATIVE=1` to run the gate without the native library; that
+run prints a warning and is not a complete acceptance pass. Set
+`AI_OPTIMIZER_CARGO_HOME` to point the gate at a specific Cargo installation.
 
 `python3 tools/build_docs.py` writes a static book under book/.
 `cargo doc --workspace --no-deps --locked` writes public API docs under target/doc/.

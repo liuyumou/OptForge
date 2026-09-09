@@ -1,5 +1,71 @@
 # Active Task
 
+## C1 Backend-Neutral Solve Contract and HiGHS Adapter (2026-09-09)
+
+Objective: implement C1 under SPEC-0002: backend-neutral solve/session types,
+HiGHS adapter boundary, strict solve configuration and structured records.
+
+Status: complete; contract, native adapter, solve CLI, schemas and acceptance
+tests are in place and the full gate passes with native acceptance covered.
+
+Acceptance gate: core and adapter contract tests, strict CLI solve flow,
+status/cancellation/limits/warm-start behavior, reproducible records, and
+`bash tools/check.sh`. CPU-only; native HiGHS setup uses the pinned 1.11.0
+source and at most four build workers.
+
+Expected changes: optimizer-core, optimizer-highs, optimizer-cli, experiment
+schemas, specifications, changelog, tests, and task state. No GPU workload.
+
+Evidence (2026-09-09): the complete `bash tools/check.sh` gate passed with the
+native library built and linked: format, warnings-as-errors Clippy, 58 Rust
+tests, workspace build, warnings-as-errors rustdoc, cargo-deny
+(advisories/bans/licenses/sources), artifact schema/provenance, 20 Python tests,
+38-page documentation/link validation and bootstrap smoke. No checks were waived.
+
+Native provisioning and FFI: `tools/setup_highs.sh` builds the pinned static CPU
+library under `target/native/highs-1.11.0/install` from the checksum-verified
+upstream archive. A hand-written private FFI module links it; no `highs-sys`
+dependency is introduced. `Highs_version()` reports 1.11.0 and the compile-time
+assertion confirms a 4-byte `HighsInt`, matching the pinned `HIGHSINT64=OFF`.
+
+Differential acceptance: the standalone executable, built from the same source,
+is driven as a separate process over generated LP files and agrees with the
+adapter on status and objective for LP, objective-offset, equality, ranged, MILP
+and infeasible cases. Disagreement fails the test rather than deferring to the
+adapter. The reference is run in a sandbox directory with its log redirected, so
+native output cannot litter the tree.
+
+Correctness contracts verified: all 18 native model statuses map explicitly with
+no catch-all arm; extracted candidates are re-validated through SPEC-0001 before
+publication and a validation failure becomes a numerical failure rather than an
+optimality claim; a pre-cancelled solve returns interrupted without creating
+native state; limits and interruptions never satisfy `proves_completion`; binary
+bounds intersect [0,1] regardless of declared bounds; coefficients below the
+native small-matrix threshold are rejected instead of being silently dropped; a
+basis is bound to a canonical-model fingerprint, so changed data under an
+unchanged `model_id` is rejected.
+
+Resolved review findings during implementation:
+
+- The workspace `unsafe_code = "forbid"` made ADR-0003's native boundary
+  unimplementable: `forbid` cannot be relaxed by an inner crate
+  (`E0453 overruled by previous forbid`). optimizer-highs now declares its own
+  `[lints.rust]` block with `unsafe_op_in_unsafe_fn` denied.
+- `serde_json` serializes a nonfinite `f64` as `null`, which is indistinguishable
+  from an absent field, so SPEC-0002's absent-not-null rule cannot rely on a
+  serializer error. Records omit absent measurements and reject nonfinite ones
+  explicitly as numerical failures.
+- The stub adapter's pre-cancellation path required a provisioned library, which
+  contradicted requirement 6. The check now precedes native dispatch and is
+  answered identically with or without the library. Found by running the gate
+  with the library deliberately absent.
+- A no-op `.max()` in bound conversion and an unfulfilled lint expectation were
+  caught by Clippy and removed.
+
+Deferred and recorded rather than hidden: sanitizer runs over repeated native
+lifecycles are not yet in the gate; presolve, scaling and reoptimization remain
+Stage 5 work; owned search remains C2.
+
 ## Roadmap redesign (2026-09-09)
 
 Objective: replace the narrow M0-M6 implementation sequence with the
@@ -21,21 +87,24 @@ the environment cannot create its sandbox namespace; no Rust checks were waived.
 Objective: implement the approved M2-M6 plan sequentially, starting with the
 HiGHS backend contract, safe lifecycle, validated solving and reproducible records.
 
-Status: in progress; baseline verification and native dependency investigation.
+Status: superseded; see the C1 record at the top of this file. The M2-M6 sequence
+was replaced by the evidence-staged roadmap, and this objective was delivered as
+C1 under the same SPEC-0002 and ADR-0003 contracts.
 
 Acceptance gate: accepted SPEC-0002 and supporting ADR; standalone HiGHS
 differential LP/MILP tests, explicit statuses, cancellation/limits, warm starts,
 lifecycle sanitizers, structured records, and bash tools/check.sh. Inspect and
-fix review findings before committing and advancing to M3.
+fix review findings before committing.
 
 Expected changes: optimizer-highs, core solve contracts, CLI, experiment schemas,
 native build/validation tooling, tests, specifications, ADRs and project state.
-Resource budget: CPU only for M2, at most four workers, bounded deterministic
-tests and benchmark batches of at most 30 minutes. M5/M6 will use one shared
+Resource budget: CPU only, at most four workers, bounded deterministic
+tests and benchmark batches of at most 30 minutes. GPU work will use one shared
 host GPU lease at a time. Existing M0/M1 defaults remain unchanged.
 
-Follow-up order: M3 CPU flow shop, M4 owned MILP search, M5 CUDA evaluator,
-M6 representative benchmark/evidence package. No remote publication is included.
+Follow-up order under the current roadmap: C2 owned executive, C3 extension
+runtime, C4 SDK/registry, C5 flow shop, C6 GPU feasibility, C7 adaptive research.
+No remote publication is included.
 
 ## Local M1 Integration (2026-09-08)
 
@@ -281,3 +350,19 @@ external setup, as documented in state/known-failures.md.
 Follow-up: M1 is dependency-ready. Write SPEC-0001-model-and-validation.md, then
 implement the original-model numerical authority boundary and its independent
 property/exhaustive tests. No M1 behavior has been implemented as part of M0.
+
+## Toolchain recovery (2026-09-09)
+
+The pinned Rust toolchain was present under `/tmp/ai-optimizer-cargo` and
+`/tmp/ai-optimizer-rustup` but absent from the default PATH. `tools/check.sh`
+now discovers those locations and sets `RUSTUP_HOME` automatically, and the
+search order is overridable through `AI_OPTIMIZER_CARGO_HOME` rather than being
+hardcoded to one machine's layout.
+
+Superseded detail: this record previously stated that the gate stopped at
+artifact validation for a missing Python `jsonschema`. That diagnosis is stale.
+`jsonschema` is present and artifact validation passes; the missing module was
+`Markdown`, which `tools/requirements.txt` already pins. The gate now checks both
+imports as a precondition, so this class of failure is reported in seconds rather
+than after several minutes of compilation. C1 native HiGHS and solve CLI
+implementation are now complete; see the C1 record at the top of this file.
