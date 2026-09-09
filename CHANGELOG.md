@@ -4,6 +4,10 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Changed
+
+- Replaced the narrow M0-M6 implementation sequence with an architecture-driven C1-C7 capability roadmap covering backend-neutral solving, the owned executive, extensions, agent workflows, scheduling, GPU feasibility, and adaptive research.
+
 ### Fixed
 
 - Model and candidate file paths preserve native OS strings, including non-UTF-8

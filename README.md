@@ -1,7 +1,7 @@
 # AI Optimizer
 
 A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. The current milestone is **M1: core model and validation**.
+selective GPU acceleration. The current milestone is **M1 complete; C1 backend-neutral solve contract is next**.
 It validates original linear models and supplied candidates; it does not solve
 optimization models.
 
@@ -47,8 +47,8 @@ A Git commit is required for that measured record.
 - [Backlog](state/backlog.yaml) and [active task](state/active-task.md)
 - [Changelog](CHANGELOG.md)
 
-The source [implementation plan](implementation-plan.md) defines M0 and the
-later M1-M6 roadmap. The [research plan](ai-native-optimizer-plan.md) provides
+The source [implementation plan](implementation-plan.md) defines the completed foundation
+and capability roadmap (C1-C7). The [research plan](ai-native-optimizer-plan.md) provides
 long-term direction. Their unvalidated research claims are hypotheses.
 
 ## Layout

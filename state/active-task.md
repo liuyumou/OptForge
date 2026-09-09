@@ -1,5 +1,21 @@
 # Active Task
 
+## Roadmap redesign (2026-09-09)
+
+Objective: replace the narrow M0-M6 implementation sequence with the
+architecture-driven C1-C7 capability roadmap in implementation-plan.md.
+
+Status: complete; plan and backlog metadata synchronized.
+
+Acceptance gate: roadmap is decision-complete, preserves M0/M1 evidence, keeps
+HiGHS as the first replaceable backend, defines executive/extension/SDK/GPU
+gates, and bash tools/check.sh reaches the required gate.
+
+Evidence: implementation-plan.md, state/backlog.yaml, README.md, and CHANGELOG.md
+now describe C1-C7 and the next dependency-ready task is C1. `git diff --check`
+passes. `bash tools/check.sh` reaches preflight but cannot start Cargo because
+the environment cannot create its sandbox namespace; no Rust checks were waived.
+
 ## M2 Backend Contract and Implementation (2026-09-09)
 
 Objective: implement the approved M2-M6 plan sequentially, starting with the
