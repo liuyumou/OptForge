@@ -5,9 +5,15 @@
 
 mod document;
 mod evaluate;
+mod serde_strict;
+mod solve;
 
 pub use document::*;
 pub use evaluate::*;
+pub use solve::{
+    Backend, Basis, BasisStatus, CancellationToken, SOLVE_SCHEMA_VERSION, SolveOptions,
+    SolveRecord, Termination, WarmStart, finite_or_absent,
+};
 
 use std::fmt;
 
@@ -24,6 +30,10 @@ pub enum ErrorKind {
     Tolerance,
     /// Arithmetic cannot safely produce a finite result.
     Numerical,
+    /// Valid input that the selected backend cannot honor.
+    Unsupported,
+    /// A backend or native API call failed.
+    Backend,
 }
 
 impl ErrorKind {
@@ -35,6 +45,8 @@ impl ErrorKind {
             Self::Candidate => "candidate",
             Self::Tolerance => "tolerance",
             Self::Numerical => "numerical",
+            Self::Unsupported => "unsupported",
+            Self::Backend => "backend",
         }
     }
 }
@@ -49,7 +61,12 @@ pub struct ValidationError {
 }
 
 impl ValidationError {
-    pub(crate) fn new(kind: ErrorKind, message: impl Into<String>) -> Self {
+    /// Construct a categorized failure.
+    ///
+    /// Backends outside this crate use this to report unsupported input,
+    /// native API failures, and rejected numerical output in the same
+    /// taxonomy the core and CLI already agree on.
+    pub fn new(kind: ErrorKind, message: impl Into<String>) -> Self {
         Self {
             kind,
             message: message.into(),

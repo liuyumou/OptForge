@@ -97,6 +97,7 @@ def main():
         validate_result(args.result)
     else:
         validator("run-config-v1.schema.json").validate(read_json(ROOT / "examples/run-config.json"))
+        validator("solve-config-v1.schema.json").validate(read_json(ROOT / "examples/solve-config-v1.json"))
         for path in sorted((ROOT / "benchmarks/manifests").glob("*.json")):
             validate_manifest(path)
         validate_result(ROOT / "examples/experiment-result.json")

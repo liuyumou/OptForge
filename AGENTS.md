@@ -5,10 +5,12 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-The current implementation scope is M1 (SPEC-0001 and ADR-0002). Later solver APIs
-require their own specifications and acceptance gates. Do not introduce speculative solver types.
+The current implementation scope is C1 (SPEC-0002 and ADR-0003), building on the
+completed M1 contracts. Later solver executive, extension, scheduling, and GPU APIs
+require their own specifications and acceptance gates; do not introduce them here.
 Use Rust for runtime work; Python under tools/ is build and validation tooling,
-not the SDK. Keep unsafe and native dependencies deferred until their contract.
+not the SDK. Native HiGHS code is permitted only inside optimizer-highs behind its
+private ownership boundary, with the pinned 1.11.0 CPU contract.
 
 Run bash tools/check.sh for acceptance. Discovering GPUs does not authorize a
 kernel workload; all actual project GPU jobs require the shared host lock.

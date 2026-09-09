@@ -125,6 +125,7 @@ dependencies = [
  "ctrlc",
  "optimizer-core",
  "optimizer-cuda",
+ "optimizer-highs",
  "serde_json",
 ]
 
@@ -151,6 +152,9 @@ version = "0.1.0"
 [[package]]
 name = "optimizer-highs"
 version = "0.1.0"
+dependencies = [
+ "optimizer-core",
+]
 
 [[package]]
 name = "optimizer-schedule"

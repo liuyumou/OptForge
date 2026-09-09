@@ -1,5 +1,6 @@
 use serde::Serialize;
 
+use crate::serde_strict::deserialize_object;
 use crate::{
     Bound, Candidate, Domain, ErrorKind, LinearTerm, Model, SCHEMA_VERSION, ValidationError,
     finite, zero,
@@ -7,6 +8,7 @@ use crate::{
 
 /// Explicit caller policy. There are deliberately no default numerical tolerances.
 #[derive(Clone, Copy, Debug, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct Tolerances {
     /// Nonnegative finite absolute feasibility allowance.
     pub absolute: f64,
@@ -15,6 +17,12 @@ pub struct Tolerances {
     /// Absolute discrete-domain allowance in [0, 0.5).
     pub integrality: f64,
 }
+
+deserialize_object!(Tolerances {
+    absolute: f64,
+    relative: f64,
+    integrality: f64,
+});
 
 impl Tolerances {
     /// Validate explicit numerical policy and normalize signed zeros.
@@ -42,6 +50,7 @@ impl Tolerances {
 
 /// Inspectable check against one finite bound.
 #[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct BoundCheck {
     /// Original finite bound.
     pub bound: f64,
@@ -53,8 +62,16 @@ pub struct BoundCheck {
     pub satisfied: bool,
 }
 
+deserialize_object!(BoundCheck {
+    bound: f64,
+    violation: f64,
+    allowance: f64,
+    satisfied: bool,
+});
+
 /// Inspectable distance to an integer or to {0, 1}.
 #[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct DomainCheck {
     /// Distance to the nearest permitted domain value.
     pub violation: f64,
@@ -64,8 +81,15 @@ pub struct DomainCheck {
     pub satisfied: bool,
 }
 
+deserialize_object!(DomainCheck {
+    violation: f64,
+    allowance: f64,
+    satisfied: bool,
+});
+
 /// Original variable value, independent bound checks, and optional domain check.
 #[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct VariableCheck {
     /// Original variable ID.
     pub variable_id: u32,
@@ -79,8 +103,17 @@ pub struct VariableCheck {
     pub domain: Option<DomainCheck>,
 }
 
+deserialize_object!(VariableCheck {
+    variable_id: u32,
+    value: f64,
+    lower: Option<BoundCheck>,
+    upper: Option<BoundCheck>,
+    domain: Option<DomainCheck>,
+});
+
 /// Original row activity and bound checks.
 #[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct ConstraintCheck {
     /// Original constraint ID.
     pub constraint_id: u32,
@@ -92,8 +125,16 @@ pub struct ConstraintCheck {
     pub upper: Option<BoundCheck>,
 }
 
+deserialize_object!(ConstraintCheck {
+    constraint_id: u32,
+    activity: f64,
+    lower: Option<BoundCheck>,
+    upper: Option<BoundCheck>,
+});
+
 /// Complete candidate assessment, never an optimality or infeasibility proof.
 #[derive(Clone, Debug, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct ValidationReport {
     /// Report wire format version.
     pub schema_version: u32,
@@ -110,6 +151,16 @@ pub struct ValidationReport {
     /// Checks in increasing original constraint-ID order.
     pub constraints: Vec<ConstraintCheck>,
 }
+
+deserialize_object!(ValidationReport {
+    schema_version: u32,
+    model_id: String,
+    tolerances: Tolerances,
+    objective: f64,
+    feasible: bool,
+    variables: Vec<VariableCheck>,
+    constraints: Vec<ConstraintCheck>,
+});
 
 impl Model {
     /// Evaluate an original candidate using explicit tolerances and checked f64 arithmetic.
@@ -149,27 +200,27 @@ impl Model {
         for (variable, assignment) in document.variables.iter().zip(&candidate.values) {
             let context = format!("variable {}", variable.id);
             let value = assignment.value;
-            let domain = if variable.domain == Domain::Continuous {
-                None
-            } else {
-                if value.abs() > 9_007_199_254_740_992.0 {
-                    return Err(ValidationError::new(
-                        ErrorKind::Numerical,
-                        format!("{context}: discrete magnitude exceeds 2^53"),
-                    ));
+            let domain = match variable.domain {
+                Domain::Continuous => None,
+                Domain::Integer | Domain::Binary => {
+                    if value.abs() > 9_007_199_254_740_992.0 {
+                        return Err(ValidationError::new(
+                            ErrorKind::Numerical,
+                            format!("{context}: discrete magnitude exceeds 2^53"),
+                        ));
+                    }
+                    let violation = zero(match variable.domain {
+                        Domain::Binary => value.abs().min(checked(value - 1.0, &context)?.abs()),
+                        _ => checked(value - value.round(), &context)?.abs(),
+                    });
+                    let satisfied = violation <= tolerances.integrality;
+                    feasible &= satisfied;
+                    Some(DomainCheck {
+                        violation,
+                        allowance: tolerances.integrality,
+                        satisfied,
+                    })
                 }
-                let violation = zero(match variable.domain {
-                    Domain::Integer => checked(value - value.round(), &context)?.abs(),
-                    Domain::Binary => value.abs().min(checked(value - 1.0, &context)?.abs()),
-                    Domain::Continuous => unreachable!(),
-                });
-                let satisfied = violation <= tolerances.integrality;
-                feasible &= satisfied;
-                Some(DomainCheck {
-                    violation,
-                    allowance: tolerances.integrality,
-                    satisfied,
-                })
             };
             let lower = check_bound(
                 variable.lower,

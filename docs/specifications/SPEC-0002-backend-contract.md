@@ -3,17 +3,22 @@
 Status: accepted
 Scope: CPU LP/MILP backend and solve CLI
 Owner: numerical backend
-Introduced: M2
-Last reviewed commit: 9b42b62
+Introduced: C1
+Last reviewed commit: 5d6b50b
 Supersedes: none
-Implementation: pending
-Tests: pending
+Implementation: [contract](../../crates/optimizer-core/src/solve.rs), [adapter](../../crates/optimizer-highs/src/lib.rs), [native path](../../crates/optimizer-highs/src/native.rs), [CLI](../../crates/optimizer-cli/src/solve.rs)
+Tests: [contract](../../crates/optimizer-core/tests/solve.rs), [backend](../../crates/optimizer-highs/tests/backend.rs), [differential](../../crates/optimizer-highs/tests/differential.rs), [CLI](../../crates/optimizer-cli/tests/solve.rs), [schemas](../../tests/integration/test_solve_artifacts.py)
 
 ## Purpose
 
 Solve original M1 linear models with pinned HiGHS and validate extracted
 candidates independently. Native backend termination is numerical evidence,
-not an exact-arithmetic certificate. Owned branch-and-bound belongs to M4.
+not an exact-arithmetic certificate. Owned branch-and-bound belongs to C2.
+
+The pinned library is provisioned out of tree by tools/setup_highs.sh. A build
+without it exposes the same API and MUST report an explicit unsupported backend;
+a missing native build MUST NOT be mistaken for a solved model. Skipping the
+native build in the acceptance gate MUST be reported as uncovered acceptance.
 
 ## Terminology
 
@@ -56,8 +61,9 @@ termination from candidate feasibility and retain native model status, HiGHS
 version, elapsed time, warnings and original-model validation. LP basis state
 is opaque and tied to the exact canonical model, not only its caller-supplied ID.
 
-The model solve CLI accepts --model and --config paths plus optional
---candidate. Solve configuration is a strict versioned JSON object. A successful
+The model solve CLI accepts --model and --config paths plus an optional
+--candidate or --basis warm start; the two warm-start forms are mutually
+exclusive. Solve configuration is a strict versioned JSON object. A successful
 record is emitted atomically at the application level through fallible writes;
 bytes delivered before a stream failure cannot be retracted. Exit 0 means a
 completed solve outcome, 1 means a limit or unresolved outcome, 130 means
@@ -89,14 +95,14 @@ native state; no failed model is reused implicitly.
 ## Compatibility and Versioning
 
 M1 documents stay at version 1. New solve configuration and result documents have
-their own version 1. Bootstrap experiment schemas stay unchanged; M6 will define
+their own version 1. Bootstrap experiment schemas stay unchanged; C4 will define
 the enclosing experiment format and migration. No Python SDK or CUDA dependency.
 
 ## Security and Resource Limits
 
 Linux x86-64 is supported. Four workers may build native code; each solve uses
 one thread. The API is synchronous with explicit limits and cooperative
-cancellation. Rust callers own memory budgets; CLI experiment workers in M6 will
+cancellation. Rust callers own memory budgets; CLI experiment workers in C4 will
 enforce process memory limits. Source downloads are checksum verified and cached
 outside tracked source. Raw handles cannot cross the FFI boundary.
 
@@ -109,9 +115,9 @@ candidate checks, time/iteration/node limits and cancellation. Requirement 9:
 candidate and basis round trips plus wrong-model rejection. Requirements 10-11:
 CLI strict inputs, output failures, deterministic configuration round trips and
 reproducible records. Repeated lifecycle tests run under available sanitizers.
-All CPU contracts and bash tools/check.sh are required before M2 completion.
+All CPU contracts and bash tools/check.sh are required before C1 completion.
 
 ## Open Questions
 
 None for this bounded contract. Native proof rays, dual certificates and safe
-owned-search pruning require the M4 contract before their public introduction.
+owned-search pruning require the C2 contract before their public introduction.

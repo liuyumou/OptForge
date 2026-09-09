@@ -4,6 +4,24 @@ version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
+build = "build.rs"
 
-[lints]
-workspace = true
+# This crate owns the only native boundary in the workspace. ADR-0003 permits
+# unsafe here and nowhere else, and a workspace-level `forbid` cannot be relaxed
+# per crate, so the lints are declared explicitly instead of inherited.
+[lints.rust]
+unsafe_code = "allow"
+unsafe_op_in_unsafe_fn = "deny"
+missing_docs = "warn"
+
+[lints.clippy]
+all = "warn"
+
+[features]
+default = ["native"]
+# Link the pinned HiGHS 1.11.0 CPU build when it is provisioned. Without it the
+# safe contract still compiles and reports an unsupported backend.
+native = []
+
+[dependencies]
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }

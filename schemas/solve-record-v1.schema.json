@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/liuyumou/OptForge/schemas/solve-record-v1.schema.json",
+  "title": "Solve record, version 1",
+  "description": "Immutable record of one solve under SPEC-0002, sufficient to repeat it. A termination is native evidence recorded under explicit numerical settings, never an exact-arithmetic certificate. Absent measurements are omitted rather than serialized as null.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "model_id",
+    "backend",
+    "backend_version",
+    "termination",
+    "warnings",
+    "elapsed_ms",
+    "options"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "backend": {
+      "type": "string",
+      "minLength": 1
+    },
+    "backend_version": {
+      "description": "Version reported by the backend itself, not assumed by the adapter.",
+      "type": "string",
+      "minLength": 1
+    },
+    "termination": {
+      "description": "Engine-owned outcome. Only optimal, infeasible, unbounded and unbounded_or_infeasible are completed outcomes; a limit or failure never implies proof completion.",
+      "enum": [
+        "optimal",
+        "feasible",
+        "infeasible",
+        "unbounded_or_infeasible",
+        "unbounded",
+        "interrupted",
+        "time_limit",
+        "iteration_limit",
+        "node_limit",
+        "numerical_failure",
+        "backend_failure",
+        "unsupported"
+      ]
+    },
+    "native_status": {
+      "description": "Native status name retained verbatim for diagnosis.",
+      "type": "string"
+    },
+    "objective": {
+      "description": "Recomputed original objective of an accepted incumbent. Finite when present.",
+      "type": "number"
+    },
+    "best_bound": {
+      "description": "Best proven bound, present only when the backend supplied a finite one.",
+      "type": "number"
+    },
+    "gap": {
+      "description": "Relative gap, present only when finite.",
+      "type": "number"
+    },
+    "candidate": {
+      "description": "Accepted incumbent in original variable IDs.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "model_id", "values"],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["variable_id", "value"],
+            "properties": {
+              "variable_id": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "value": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "validation": {
+      "description": "Independent original-model validation of the incumbent, as defined by SPEC-0001. Unbounded sides and continuous domain checks are explicitly null there.",
+      "type": "object"
+    },
+    "warnings": {
+      "description": "Native and adapter warnings, retained even on success.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "elapsed_ms": {
+      "description": "Measured elapsed wall-clock time in milliseconds.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "options": {
+      "$ref": "solve-config-v1.schema.json"
+    }
+  }
+}

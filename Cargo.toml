@@ -12,6 +12,9 @@ license = "MIT"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0", features = ["float_roundtrip"] }
 
+# Runtime crates forbid unsafe. A workspace-level `forbid` cannot be relaxed by
+# an inner crate, so optimizer-highs declares its own [lints.rust] block for the
+# single native boundary permitted by ADR-0003 instead of inheriting these.
 [workspace.lints.rust]
 unsafe_code = "forbid"
 missing_docs = "warn"

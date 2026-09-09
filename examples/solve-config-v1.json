@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "seed": 17,
+  "time_limit_ms": 10000,
+  "iteration_limit": null,
+  "node_limit": null,
+  "tolerances": {
+    "absolute": 1e-9,
+    "relative": 1e-9,
+    "integrality": 1e-9
+  },
+  "threads": 1
+}

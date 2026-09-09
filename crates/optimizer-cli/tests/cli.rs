@@ -113,7 +113,10 @@ fn hello_and_invalid_arguments_follow_cli_contract() {
     assert!(output.status.success());
     assert_eq!(output.stdout, b"hello workspace\n");
     for args in [
+        // `solve` now exists, so this is a missing-argument error rather than
+        // an unknown command; both are categorized argument failures.
         vec!["solve"],
+        vec!["solve", "--model", "examples/model-v1.json"],
         vec!["gpu", "lease"],
         vec!["gpu", "lease", "--simulate-ms", "60001"],
         vec!["gpu", "lease", "--simulate-ms", "0", "--simulate-ms", "1"],

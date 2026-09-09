@@ -1,6 +1,8 @@
 //! Workspace CLI and original-model candidate validation. No solving is performed.
 
+mod input;
 mod model;
+mod solve;
 
 use std::env;
 use std::ffi::OsString;
@@ -14,11 +16,12 @@ use std::time::{Duration, Instant};
 
 use optimizer_cuda::{DEFAULT_LOCK_PATH, GpuLease, discover};
 
-const HELP: &str = "optimizer 0.1.0 (M1 model validation)
+const HELP: &str = "optimizer 0.1.0 (C1 pinned HiGHS solving)
 Usage:
   optimizer hello
   optimizer model validate --model <path>
     [--candidate <path> --absolute-tolerance <f64> --relative-tolerance <f64> --integrality-tolerance <f64>]
+  optimizer solve --model <path> --config <path> [--candidate <path> | --basis <path>]
   optimizer gpu discover [--dry-run]
   optimizer gpu lease --simulate-ms <0..60000> [--timeout-ms <0..60000>]
   optimizer --help
@@ -39,11 +42,16 @@ fn main() -> ExitCode {
 }
 
 fn run(args: Vec<OsString>) -> io::Result<u8> {
-    if let [command, subcommand, options @ ..] = args.as_slice()
-        && command == "model"
-        && subcommand == "validate"
-    {
-        return model::validate(options);
+    // Path-bearing commands are dispatched before any UTF-8 conversion so
+    // native filenames keep their OS representation.
+    match args.as_slice() {
+        [command, subcommand, options @ ..] if command == "model" && subcommand == "validate" => {
+            return model::validate(options);
+        }
+        [command, options @ ..] if command == "solve" => {
+            return solve::solve(options);
+        }
+        _ => {}
     }
     let args: Vec<String> = args
         .into_iter()

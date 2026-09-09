@@ -1,11 +1,9 @@
 use std::ffi::{OsStr, OsString};
-use std::fs::File;
-use std::io::{self, Read, Write};
-use std::path::Path;
+use std::io::{self, Write};
 
 use optimizer_core::{Candidate, Model, Tolerances};
 
-const MAX_INPUT_BYTES: u64 = 16 * 1024 * 1024;
+use crate::input::{argument, read};
 
 pub(crate) fn validate(options: &[OsString]) -> io::Result<u8> {
     let mut model_path = None;
@@ -74,10 +72,6 @@ pub(crate) fn validate(options: &[OsString]) -> io::Result<u8> {
     Ok(code)
 }
 
-fn argument(message: &str) -> io::Error {
-    io::Error::new(io::ErrorKind::InvalidInput, format!("argument: {message}"))
-}
-
 fn number(value: Option<&OsStr>, name: &str) -> io::Result<f64> {
     value
         .ok_or_else(|| argument(&format!("--{name}-tolerance is required")))?
@@ -85,23 +79,4 @@ fn number(value: Option<&OsStr>, name: &str) -> io::Result<f64> {
         .ok_or_else(|| argument(&format!("invalid --{name}-tolerance: expected UTF-8 text")))?
         .parse()
         .map_err(|_| argument(&format!("invalid --{name}-tolerance")))
-}
-
-fn read(path: &OsStr) -> io::Result<Vec<u8>> {
-    let path = Path::new(path);
-    let read_error =
-        |error: io::Error| io::Error::other(format!("io: {}: {error}", path.display()));
-    let mut bytes = Vec::new();
-    File::open(path)
-        .map_err(read_error)?
-        .take(MAX_INPUT_BYTES + 1)
-        .read_to_end(&mut bytes)
-        .map_err(read_error)?;
-    if u64::try_from(bytes.len()).map_err(io::Error::other)? > MAX_INPUT_BYTES {
-        return Err(io::Error::other(format!(
-            "document: {}: input exceeds 16 MiB",
-            path.display()
-        )));
-    }
-    Ok(bytes)
 }

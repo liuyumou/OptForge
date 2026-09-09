@@ -1,45 +1,7 @@
 use serde::{Deserialize, Serialize};
 
+use crate::serde_strict::{deserialize_object, object};
 use crate::{ErrorKind, ValidationError, finite};
-
-fn object<'de, D: serde::Deserializer<'de>, T: Deserialize<'de>>(
-    deserializer: D,
-) -> Result<T, D::Error> {
-    struct ObjectVisitor<T>(std::marker::PhantomData<T>);
-
-    impl<'de, T: Deserialize<'de>> serde::de::Visitor<'de> for ObjectVisitor<T> {
-        type Value = T;
-
-        fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            formatter.write_str("an object")
-        }
-
-        fn visit_map<A: serde::de::MapAccess<'de>>(self, map: A) -> Result<T, A::Error> {
-            T::deserialize(serde::de::value::MapAccessDeserializer::new(map))
-        }
-    }
-
-    deserializer.deserialize_map(ObjectVisitor(std::marker::PhantomData))
-}
-
-// Serde's struct derive accepts positional sequences. Require a map before
-// delegating field validation, preserving duplicate/unknown-field rejection.
-macro_rules! deserialize_object {
-    ($name:ident { $($field:ident: $ty:ty),+ $(,)? }) => {
-        impl<'de> Deserialize<'de> for $name {
-            fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-                #[derive(Deserialize)]
-                #[serde(deny_unknown_fields)]
-                struct Fields {
-                    $($field: $ty),+
-                }
-
-                let fields: Fields = object(deserializer)?;
-                Ok(Self { $($field: fields.$field),+ })
-            }
-        }
-    };
-}
 
 /// Current model, candidate and validation report wire version.
 pub const SCHEMA_VERSION: u32 = 1;
@@ -277,6 +239,22 @@ impl Model {
     /// Serialize canonical model data with stable ordering and f64 round trips.
     pub fn to_json(&self) -> Result<String, ValidationError> {
         serde_json::to_string_pretty(&self.document).map_err(json_error)
+    }
+
+    /// Stable fingerprint of the canonical model document.
+    ///
+    /// Warm starts are bound to this value rather than to `model_id` alone, so a
+    /// basis cannot be replayed against changed data under the same identity.
+    /// This identifies canonical bytes; it is not a cryptographic commitment.
+    pub fn fingerprint(&self) -> Result<String, ValidationError> {
+        let canonical = self.to_json()?;
+        // FNV-1a over the canonical bytes: deterministic and dependency-free.
+        let mut hash: u64 = 0xcbf2_9ce4_8422_2325;
+        for byte in canonical.as_bytes() {
+            hash ^= u64::from(*byte);
+            hash = hash.wrapping_mul(0x0000_0100_0000_01b3);
+        }
+        Ok(format!("fnv1a64:{hash:016x}"))
     }
 }
 

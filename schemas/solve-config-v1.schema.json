@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/liuyumou/OptForge/schemas/solve-config-v1.schema.json",
+  "title": "Solve configuration, version 1",
+  "description": "Explicit solve configuration under SPEC-0002. Every limit and tolerance is caller-supplied; there are deliberately no defaults, so a record always states what was run.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "seed",
+    "time_limit_ms",
+    "iteration_limit",
+    "node_limit",
+    "tolerances",
+    "threads"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "seed": {
+      "description": "Deterministic seed recorded and passed to the backend.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "time_limit_ms": {
+      "description": "Wall-clock limit in milliseconds, or null for unlimited.",
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "iteration_limit": {
+      "description": "Simplex or interior-point iteration limit, or null.",
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "node_limit": {
+      "description": "Branch-and-bound node limit, or null.",
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "tolerances": {
+      "description": "Original-model validation policy applied to extracted candidates.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["absolute", "relative", "integrality"],
+      "properties": {
+        "absolute": {
+          "type": "number",
+          "minimum": 0
+        },
+        "relative": {
+          "type": "number",
+          "minimum": 0
+        },
+        "integrality": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 0.5
+        }
+      }
+    },
+    "threads": {
+      "description": "Native worker threads. Only one CPU thread is supported.",
+      "const": 1
+    }
+  }
+}
