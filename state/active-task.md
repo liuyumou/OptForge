@@ -1,5 +1,28 @@
 # Active Task
 
+## Local C2 Integration (2026-09-09)
+
+Objective: integrate the reviewed feat/solver-executive branch into local main
+and delete the feature branch after confirming its commits are retained.
+
+Status: complete; fast-forward integration and feature-branch cleanup finished.
+
+Acceptance gate: fast-forward integration preserves the reviewed tip 5a74184;
+the feature branch is deleted and the worktree is clean. Resource budget: CPU
+only, no GPU workloads.
+
+Evidence (2026-09-09): main fast-forwarded from c742064 to 5a74184 without
+conflicts or history rewriting, so the integrated tree is byte-identical to the
+revision whose complete gate pass is recorded below. `git merge-base
+--is-ancestor` confirmed the reviewed tip is retained on main, and `git branch
+-d` removed the fully merged feat/solver-executive branch. The worktree is clean
+and the bootstrap smoke was rerun on the integrated revision for clean
+provenance.
+
+No remote refs were changed. main remains unpushed pending separate
+authorization; the origin remote and its outstanding protection settings are
+recorded in [known failures](known-failures.md).
+
 ## C2 Owned Solver Executive Implementation (2026-09-09)
 
 Objective: implement C2 under SPEC-0003: an owned branch-and-bound executive in
