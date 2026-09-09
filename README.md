@@ -1,10 +1,10 @@
 # AI Optimizer
 
 A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. The current milestone is **C1 complete: pinned CPU
-HiGHS LP/MILP solving behind the backend-neutral solve contract**.
-It validates original linear models and candidates, and solves them with an
-independently validated incumbent. There is no owned search yet.
+selective GPU acceleration. The current milestone is **C2 complete: an owned
+branch-and-bound executive over the pinned CPU HiGHS relaxation service**.
+It validates original linear models and candidates, solves them with an
+independently validated incumbent, and proves optimality with its own search.
 
 ## Quick start
 
@@ -49,6 +49,7 @@ acceptance was not covered.
 - [Bootstrap specification](docs/specifications/SPEC-0000-bootstrap.md)
 - [Model and validation specification](docs/specifications/SPEC-0001-model-and-validation.md)
 - [Backend contract specification](docs/specifications/SPEC-0002-backend-contract.md)
+- [Solver executive specification](docs/specifications/SPEC-0003-solver-executive.md)
 - [Validate a model and candidate](docs/tutorials/model-validation.md)
 - [Solve a model](docs/tutorials/solve-a-model.md)
 - [GPU discovery and lease contract](docs/specifications/SPEC-0006-gpu-lease.md)
@@ -71,12 +72,14 @@ provides long-term direction. Their unvalidated research claims are hypotheses.
 versioned JSON, objective recomputation, candidate feasibility with explicit
 tolerances, and the backend-neutral solve contract. optimizer-highs implements
 that contract against the pinned CPU HiGHS build and is the only crate permitted
-to contain unsafe code. The CLI exposes validation, solving and GPU
+to contain unsafe code. optimizer-solver owns the branch-and-bound executive and
+consumes the solve contract as a relaxation service without depending on any
+backend. The CLI exposes validation, solving and GPU
 discovery/ownership; optimizer-experiment embeds artifact schemas. Remaining
 numerical crates reserve ownership boundaries without solver APIs.
 `schemas/`, `examples/`, `tests/`, and `tools/` provide executable contracts.
-`docs/` is authoritative; `wiki/` provides navigation. Python SDK, owned search,
-CUDA kernels, and performance suites are deferred.
+`docs/` is authoritative; `wiki/` provides navigation. Python SDK, CUDA kernels,
+extension runtime, and performance suites are deferred.
 
 ## License
 

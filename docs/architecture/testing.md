@@ -34,6 +34,22 @@ Original-variable reconstruction after transformations, deterministic solver
 seeding, flow-shop recurrence, permutation validity and CPU/GPU agreement remain
 gated on later capabilities. Transformations are not implemented.
 
+C2 adds [search contracts](../../crates/optimizer-solver/tests/executive.rs) and
+[native end-to-end acceptance](../../crates/optimizer-highs/tests/executive.rs).
+The search contracts run entirely on test backends: an exact vertex-enumeration
+LP solver written independently for the tests, and a scripted backend that
+returns each termination in turn. That keeps the bound-validity and forfeiture
+rules covered when HiGHS is absent, and it demonstrates the executive is
+backend-neutral. Correctness is established by comparing 192 tiny discrete
+models against brute-force enumeration of the entire assignment space, over a
+fixed grid with no randomness. The native test drives the real executive over
+the pinned library and compares against independent subset enumeration; it
+reports an explicit skip when the library is absent.
+
+A relaxation limit must be shown to prune nothing and to forfeit the proof
+claim. Termination must not depend on backend correctness: a backend returning
+solutions outside the node it was given must forfeit rather than loop.
+
 C1 adds [solve contract](../../crates/optimizer-core/tests/solve.rs),
 [backend acceptance](../../crates/optimizer-highs/tests/backend.rs),
 [differential](../../crates/optimizer-highs/tests/differential.rs),

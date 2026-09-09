@@ -5,11 +5,11 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-The current implementation scope is C2, the owned solver executive, building on
-the completed M1 and C1 contracts. C2 has no accepted specification yet: write it
-before introducing any public search API. Later extension, scheduling, SDK and
-GPU APIs require their own specifications and acceptance gates; do not introduce
-them here.
+The current implementation scope is C3, the extension runtime and authority
+model, building on the completed M1, C1 and C2 contracts. C3 has no accepted
+specification yet: write it before introducing any public extension API. Later
+scheduling, SDK and GPU APIs require their own specifications and acceptance
+gates; do not introduce them here.
 Use Rust for runtime work; Python under tools/ is build and validation tooling,
 not the SDK. Native HiGHS code is permitted only inside optimizer-highs behind its
 private ownership boundary, with the pinned 1.11.0 CPU contract. That crate

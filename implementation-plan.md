@@ -26,14 +26,16 @@ exist, this document says so rather than implying it.
 |---|---|---|
 | 0. Foundation | M0 bootstrap, M1 model/validation authority | Complete |
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
-| 2. Execution | C2 executive, C3 extension runtime | Not started; **no specification written** |
+| 2. Execution | C2 executive, C3 extension runtime | C2 complete; C3 not started, **unspecified** |
 | 3. Application | C4 SDK/CLI/registry, C5 scheduling slice | Not started |
 | 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | Not started |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
 
-Only stages 0 and 1 have evidence. Everything below stage 1 is a plan, and the
-performance and learning claims in stages 4 and beyond are hypotheses, not results.
+Only stages 0 and 1 are complete, and C2 within stage 2. Everything below is a
+plan, and the performance and learning claims in stages 4 and beyond are
+hypotheses, not results. C2 establishes search correctness only and makes no
+performance claim.
 
 ---
 
@@ -91,8 +93,11 @@ sanitizer runs over repeated native lifecycles are not yet part of the gate.
 
 **Entry condition:** Stage 1 evidence holds and M1 behavior remains green.
 
-**Both work items in this stage require an accepted specification before any
-public API is introduced. Neither specification exists yet.**
+**C2 is implemented under
+[SPEC-0003](docs/specifications/SPEC-0003-solver-executive.md) and
+[ADR-0004](docs/decisions/ADR-0004-owned-search.md). C3 requires an accepted
+specification before any public API is introduced; that specification does not
+exist.**
 
 **C2 — Owned solver executive.** Own session state, work scheduling, budgets,
 cancellation, telemetry, checkpoint shape, incumbent acceptance, and proof
@@ -109,12 +114,23 @@ producers and search advisers; transformations such as cuts, presolve, and
 reformulations remain experimental until validity and solution-space preservation
 are justified.
 
-*Evidence that closes this stage:*
+*C2 evidence (recorded, not projected):*
 
-- Exhaustive tiny-model search tests covering feasible, infeasible, unbounded,
-  interrupted, limited, backend-failure, and proof states.
-- Branch coverage and termination correctness demonstrated before any performance
-  claim or learned control is attempted.
+- 192 tiny discrete models across a fixed coefficient/bound/limit grid, both
+  objective senses, integer and binary domains, agree with brute-force
+  enumeration of the entire assignment space on both the proven optimum and
+  proven infeasibility.
+- Every non-optimal relaxation termination is shown to forfeit the proof claim
+  and to prune nothing by bound, so a limited child solve cannot discard an
+  optimal solution.
+- The executive drives the pinned HiGHS backend end to end and matches
+  independent subset enumeration; it also runs entirely on test backends, which
+  is what demonstrates it is backend-neutral.
+- Termination does not depend on backend correctness: a backend returning
+  solutions outside the node it was given forfeits rather than looping.
+
+*Evidence that still closes this stage (C3):*
+
 - Independently authored extensions build and run without engine-internal changes,
   while core validation remains authoritative.
 - Invalid actions, incompatible versions, crashes, and resource abuse produce

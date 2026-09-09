@@ -1,5 +1,126 @@
 # Active Task
 
+## C2 Owned Solver Executive Implementation (2026-09-09)
+
+Objective: implement C2 under SPEC-0003: an owned branch-and-bound executive in
+optimizer-solver that consumes the C1 backend contract as a relaxation service
+and owns proof completion.
+
+Status: complete; executive, contract documents, node representation and
+acceptance tests are in place and the full gate passes with native acceptance
+covered.
+
+Acceptance gate: exhaustive tiny-model search compared against independent
+enumeration, termination semantics, budgets, cancellation, proof completion, and
+`bash tools/check.sh`. CPU only, four Cargo workers, no GPU workloads.
+
+Expected changes: optimizer-solver runtime and tests, an end-to-end test in
+optimizer-highs, SPEC-0003 implementation/test links, project records, changelog
+and this task record.
+
+Evidence (2026-09-09): the complete `bash tools/check.sh` gate passed with the
+native library built and linked, with **zero skip messages**: format,
+warnings-as-errors Clippy, 84 Rust tests, workspace build, warnings-as-errors
+rustdoc, cargo-deny (advisories/bans/licenses/sources, fetched successfully this
+run without the cached-database fallback), artifact validation, 20 Python tests,
+41-page documentation/link validation and bootstrap smoke. Rust tests rose from
+58 to 84: 22 new search contracts and 4 new native end-to-end contracts. No
+checks were waived.
+
+Cargo.lock changed only by adding local dependency edges for optimizer-solver
+(optimizer-core, serde, serde_json) and the optimizer-highs dev-dependency on
+optimizer-solver. No external package version changed.
+
+Correctness evidence, stated as what was actually checked:
+
+- 192 tiny discrete models over a fixed coefficient, bound and row-limit grid,
+  both objective senses, integer and binary domains, agree with brute-force
+  enumeration of the entire assignment space on the proven optimum and on proven
+  infeasibility. The grid is fixed with no randomness, so a failure reproduces.
+- Every non-optimal relaxation termination (time, iteration and node limits,
+  interruption, feasible-without-proof, numerical failure, backend failure,
+  unsupported) forfeits the proof claim and prunes nothing by bound.
+- The executive runs entirely on test backends, which is what demonstrates
+  backend neutrality; the end-to-end test over pinned HiGHS lives in
+  optimizer-highs so optimizer-solver keeps that guarantee. Both agree with
+  independent enumeration.
+
+Resolved during implementation:
+
+- The first test run did not terminate. A backend that returns the same
+  fractional solution regardless of node bounds caused the executive to
+  regenerate an identical child forever. Root cause: the executive trusted the
+  relaxation solution to lie inside the node it asked about. Fixed by checking
+  every relaxation solution against its own node before branching, which makes
+  termination independent of backend correctness. Recorded as SPEC-0003
+  requirement 12a rather than fixed silently.
+- A record test asserted no `null` anywhere in the serialized record. That
+  conflated two rules: absent *measurements* are omitted, while an absent
+  *budget* stays an explicit null meaning unlimited, matching the C1
+  configuration convention. The assertion now targets measurements by name.
+
+Deferred and recorded rather than hidden: checkpoint restart is specified in
+shape and deliberately unimplemented; no CLI subcommand exposes search yet; no
+performance claim is made and no comparison against another solver was run.
+Cross-node basis reuse remains Stage 5 reoptimization work.
+
+Follow-up: C3, the extension runtime and authority model, is dependency-ready.
+Write its specification before introducing any public extension API.
+
+## C2 Solver Executive Specification (2026-09-09)
+
+Objective: write and accept the C2 contract before any owned search API exists,
+as required by AGENTS.md and the Stage 2 entry condition. No C2 behavior is
+implemented by this change.
+
+Status: complete; SPEC-0003 and ADR-0004 are accepted and the project records
+that reference C2 are synchronized.
+
+Acceptance gate: the specification uses numbered observable MUST/MUST NOT
+requirements with an acceptance-test mapping, states its exclusions, and passes
+documentation/link validation; `bash tools/check.sh` continues to pass with
+native acceptance covered and unchanged test counts, because no behavior changed.
+Resource budget: CPU only, four Cargo workers, no GPU workloads.
+
+Expected changes: docs/specifications/SPEC-0003-solver-executive.md,
+docs/decisions/ADR-0004-owned-search.md, state/backlog.yaml, README.md,
+implementation-plan.md, docs/architecture/overview.md, wiki/status.md, the two
+stale placeholder doc comments in optimizer-solver and optimizer-schedule, and
+this record.
+
+Contract decisions worth recording, because they are the ones a later
+implementation could get quietly wrong:
+
+- A relaxation objective is admitted as a dual bound only when that relaxation
+  reported `Termination::Optimal`. Any limit, interruption or failure leaves the
+  node bound unavailable, forbids pruning that node by bound, and permanently
+  forfeits the search's proof claim, recorded as `forfeited` in the record. This
+  is what stops a timeout inside a child solve from silently discarding an
+  optimal solution.
+- `SearchOutcome` is a new type rather than a reuse of `Termination`. The two
+  express different claims: one relaxation solve versus an exhausted node tree.
+- The executive consumes the C1 `Backend` trait and must not depend on
+  optimizer-highs, so the pruning and forfeiture rules are testable against a
+  stub backend without the native library.
+- `Tolerances.integrality` governs both incumbent acceptance and the decision to
+  branch, so the two cannot disagree.
+- Checkpoints are specified in shape only; restart is deliberately not part of C2
+  and needs its own acceptance evidence.
+
+Numbering: no spec-numbering convention exists in the repository, so SPEC-0003
+and ADR-0004 take the next free sequential numbers. Two placeholder doc comments
+referenced the retired M0-M6 scheme and dangled at nonexistent specifications;
+optimizer-schedule's stale "SPEC-0003" claim would have collided with this
+specification and now names C5 with an unassigned number.
+
+No CHANGELOG.md entry accompanies this change: the changelog records user-visible
+changes, and an accepted contract with zero behavior is not one. C2 enters the
+changelog when its behavior ships.
+
+Follow-up: C2 implementation is now dependency-ready under SPEC-0003. It requires
+a stub-backend test crate for the bound-validity and forfeiture rules plus
+exhaustive tiny-model comparison against independent enumeration.
+
 ## Local C1 Integration (2026-09-09)
 
 Objective: verify the reviewed feat/highs-backend branch from a clean checkout,
@@ -36,8 +157,9 @@ The advisory database fetch failed again during the clean-clone run and recovere
 through the cached database, as recorded in
 [known failures](known-failures.md). No checks were waived.
 
-Follow-up: C2, the owned solver executive, is dependency-ready. Write its
-specification before introducing any public search API; no C2 behavior exists.
+Follow-up: C2, the owned solver executive, is dependency-ready. Its specification
+is now accepted as SPEC-0003; see the C2 record at the top of this file. No C2
+behavior existed at the time of this integration.
 
 ## C1 Backend-Neutral Solve Contract and HiGHS Adapter (2026-09-09)
 

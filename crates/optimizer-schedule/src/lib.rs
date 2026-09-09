@@ -1,1 +1,1 @@
-//! Scheduling algorithms reserved for M3 and SPEC-0003.
+//! Scheduling algorithms reserved for C5; its specification is unassigned.

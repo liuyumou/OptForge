@@ -1,0 +1,1249 @@
+//! Independent acceptance contracts for the SPEC-0003 search executive.
+//!
+//! Every test states an externally observable contract and maps to a
+//! requirement number. No native library is used: relaxations are solved by an
+//! independent exact vertex-enumeration LP solver written for these tests, and
+//! termination rules are driven by a scripted backend. That keeps the pruning
+//! and forfeiture contracts covered even when HiGHS is not provisioned, and it
+//! proves the executive is genuinely backend-neutral.
+
+use std::cell::RefCell;
+
+use optimizer_core::{
+    Assignment, Backend, Bound, CancellationToken, Candidate, Constraint, Domain, ErrorKind,
+    LinearTerm, Model, ModelDocument, Objective, ObjectiveSense, SOLVE_SCHEMA_VERSION,
+    SolveOptions, SolveRecord, Termination, Tolerances, ValidationError, Variable, WarmStart,
+};
+use optimizer_solver::{
+    SEARCH_SCHEMA_VERSION, SearchOptions, SearchOutcome, SearchRecord, initial_checkpoint, search,
+};
+
+const EPSILON: f64 = 1e-9;
+
+fn tolerances() -> Tolerances {
+    Tolerances {
+        absolute: 1e-7,
+        relative: 1e-9,
+        integrality: 1e-7,
+    }
+}
+
+fn relaxation_options() -> SolveOptions {
+    SolveOptions {
+        schema_version: SOLVE_SCHEMA_VERSION,
+        seed: 17,
+        time_limit_ms: None,
+        iteration_limit: None,
+        node_limit: None,
+        tolerances: tolerances(),
+        threads: 1,
+    }
+}
+
+fn options() -> SearchOptions {
+    SearchOptions {
+        schema_version: SEARCH_SCHEMA_VERSION,
+        seed: 17,
+        node_limit: None,
+        time_limit_ms: None,
+        open_node_limit: None,
+        improvement_tolerance: 1e-9,
+        relaxation: relaxation_options(),
+    }
+}
+
+fn finite(value: f64) -> Bound {
+    Bound::Finite { value }
+}
+
+/// One compact constraint: id, optional lower bound, optional upper bound, terms.
+type ConstraintSpec<'a> = (u32, Option<f64>, Option<f64>, &'a [(u32, f64)]);
+
+/// Build a model from compact parts.
+fn model(
+    model_id: &str,
+    variables: &[(u32, Domain, f64, f64)],
+    constraints: &[ConstraintSpec<'_>],
+    sense: ObjectiveSense,
+    offset: f64,
+    objective_terms: &[(u32, f64)],
+) -> Model {
+    let terms = |pairs: &[(u32, f64)]| {
+        pairs
+            .iter()
+            .map(|(variable_id, coefficient)| LinearTerm {
+                variable_id: *variable_id,
+                coefficient: *coefficient,
+            })
+            .collect::<Vec<_>>()
+    };
+    Model::new(ModelDocument {
+        schema_version: optimizer_core::SCHEMA_VERSION,
+        model_id: model_id.to_string(),
+        variables: variables
+            .iter()
+            .map(|(id, domain, lower, upper)| Variable {
+                id: *id,
+                domain: *domain,
+                lower: finite(*lower),
+                upper: finite(*upper),
+            })
+            .collect(),
+        constraints: constraints
+            .iter()
+            .map(|(id, lower, upper, pairs)| Constraint {
+                id: *id,
+                lower: lower.map_or(Bound::NegativeInfinity, finite),
+                upper: upper.map_or(Bound::PositiveInfinity, finite),
+                terms: terms(pairs),
+            })
+            .collect(),
+        objective: Objective {
+            sense,
+            offset,
+            terms: terms(objective_terms),
+        },
+    })
+    .expect("model")
+}
+
+// ---------------------------------------------------------------------------
+// An independent exact LP backend, by vertex enumeration.
+//
+// Every test model has finite variable bounds, so the feasible region is a
+// polytope and an optimum, if one exists, lies at a vertex. Enumerating all
+// n-subsets of the half-planes and solving each square system is exponential
+// but exact, and it is written independently of the executive it checks.
+// ---------------------------------------------------------------------------
+
+/// One half-plane `coefficients . x <= rhs`.
+struct HalfPlane {
+    coefficients: Vec<f64>,
+    rhs: f64,
+}
+
+fn half_planes(model: &Model) -> Vec<HalfPlane> {
+    let document = model.document();
+    let count = document.variables.len();
+    let index = |variable_id: u32| {
+        document
+            .variables
+            .binary_search_by_key(&variable_id, |v| v.id)
+            .expect("known variable")
+    };
+    let mut planes = Vec::new();
+    for (position, variable) in document.variables.iter().enumerate() {
+        if let Bound::Finite { value } = variable.upper {
+            let mut coefficients = vec![0.0; count];
+            coefficients[position] = 1.0;
+            planes.push(HalfPlane {
+                coefficients,
+                rhs: value,
+            });
+        }
+        if let Bound::Finite { value } = variable.lower {
+            let mut coefficients = vec![0.0; count];
+            coefficients[position] = -1.0;
+            planes.push(HalfPlane {
+                coefficients,
+                rhs: -value,
+            });
+        }
+    }
+    for constraint in &document.constraints {
+        let mut row = vec![0.0; count];
+        for term in &constraint.terms {
+            row[index(term.variable_id)] += term.coefficient;
+        }
+        if let Bound::Finite { value } = constraint.upper {
+            planes.push(HalfPlane {
+                coefficients: row.clone(),
+                rhs: value,
+            });
+        }
+        if let Bound::Finite { value } = constraint.lower {
+            planes.push(HalfPlane {
+                coefficients: row.iter().map(|c| -c).collect(),
+                rhs: -value,
+            });
+        }
+    }
+    planes
+}
+
+/// Solve a square system by Gaussian elimination with partial pivoting.
+fn solve_square(mut matrix: Vec<Vec<f64>>, mut rhs: Vec<f64>) -> Option<Vec<f64>> {
+    let n = rhs.len();
+    for column in 0..n {
+        let pivot = (column..n)
+            .max_by(|a, b| {
+                matrix[*a][column]
+                    .abs()
+                    .partial_cmp(&matrix[*b][column].abs())
+                    .unwrap_or(std::cmp::Ordering::Equal)
+            })
+            .expect("nonempty");
+        if matrix[pivot][column].abs() < 1e-12 {
+            return None;
+        }
+        matrix.swap(column, pivot);
+        rhs.swap(column, pivot);
+        // Split so the pivot row and the rows below it are borrowed separately.
+        let (upper, lower) = matrix.split_at_mut(column + 1);
+        let pivot_row = &upper[column];
+        let pivot_rhs = rhs[column];
+        for (offset, row) in lower.iter_mut().enumerate() {
+            let factor = row[column] / pivot_row[column];
+            for (target, source) in row.iter_mut().zip(pivot_row).skip(column) {
+                *target -= factor * source;
+            }
+            rhs[column + 1 + offset] -= factor * pivot_rhs;
+        }
+    }
+    let mut solution = vec![0.0; n];
+    for row in (0..n).rev() {
+        let mut sum = rhs[row];
+        for column in row + 1..n {
+            sum -= matrix[row][column] * solution[column];
+        }
+        solution[row] = sum / matrix[row][row];
+    }
+    Some(solution)
+}
+
+/// Exact LP optimum over a bounded polytope, or `None` when infeasible.
+fn lp_optimum(model: &Model) -> Option<Vec<f64>> {
+    let document = model.document();
+    let n = document.variables.len();
+    let planes = half_planes(model);
+
+    let feasible = |point: &[f64]| {
+        planes.iter().all(|plane| {
+            let activity: f64 = plane
+                .coefficients
+                .iter()
+                .zip(point)
+                .map(|(c, x)| c * x)
+                .sum();
+            activity <= plane.rhs + 1e-7
+        })
+    };
+    let objective = |point: &[f64]| {
+        let mut total = document.objective.offset;
+        for term in &document.objective.terms {
+            let position = document
+                .variables
+                .binary_search_by_key(&term.variable_id, |v| v.id)
+                .expect("known variable");
+            total += term.coefficient * point[position];
+        }
+        total
+    };
+
+    if n == 0 {
+        return Some(Vec::new());
+    }
+    if planes.len() < n {
+        return None;
+    }
+
+    let mut best: Option<Vec<f64>> = None;
+    let mut indices: Vec<usize> = (0..n).collect();
+    loop {
+        let matrix: Vec<Vec<f64>> = indices
+            .iter()
+            .map(|i| planes[*i].coefficients.clone())
+            .collect();
+        let rhs: Vec<f64> = indices.iter().map(|i| planes[*i].rhs).collect();
+        if let Some(point) = solve_square(matrix, rhs)
+            && feasible(&point)
+        {
+            let better = best
+                .as_ref()
+                .is_none_or(|current| match document.objective.sense {
+                    ObjectiveSense::Minimize => objective(&point) < objective(current) - 1e-12,
+                    ObjectiveSense::Maximize => objective(&point) > objective(current) + 1e-12,
+                });
+            if better {
+                best = Some(point);
+            }
+        }
+        // Advance the combination in lexicographic order.
+        let mut position = n;
+        loop {
+            if position == 0 {
+                return best;
+            }
+            position -= 1;
+            if indices[position] < planes.len() - (n - position) {
+                indices[position] += 1;
+                for later in position + 1..n {
+                    indices[later] = indices[later - 1] + 1;
+                }
+                break;
+            }
+        }
+    }
+}
+
+/// A backend that solves each relaxation exactly, independently of the engine.
+#[derive(Default)]
+struct ExactBackend {
+    solves: RefCell<u32>,
+}
+
+impl Backend for ExactBackend {
+    fn solve(
+        &self,
+        model: &Model,
+        options: &SolveOptions,
+        _cancel: &CancellationToken,
+        _warm_start: Option<WarmStart<'_>>,
+    ) -> Result<SolveRecord, ValidationError> {
+        *self.solves.borrow_mut() += 1;
+        let record = |termination, candidate: Option<Candidate>, objective| SolveRecord {
+            schema_version: SOLVE_SCHEMA_VERSION,
+            model_id: model.document().model_id.clone(),
+            backend: "exact-test-lp".to_string(),
+            backend_version: "1.0.0".to_string(),
+            termination,
+            native_status: None,
+            objective,
+            best_bound: objective,
+            gap: None,
+            candidate,
+            validation: None,
+            warnings: Vec::new(),
+            elapsed_ms: 0,
+            options: options.clone(),
+        };
+        match lp_optimum(model) {
+            None => Ok(record(Termination::Infeasible, None, None)),
+            Some(point) => {
+                let candidate = Candidate {
+                    schema_version: optimizer_core::SCHEMA_VERSION,
+                    model_id: model.document().model_id.clone(),
+                    values: model
+                        .document()
+                        .variables
+                        .iter()
+                        .zip(&point)
+                        .map(|(variable, value)| Assignment {
+                            variable_id: variable.id,
+                            value: *value,
+                        })
+                        .collect(),
+                };
+                let report = model.evaluate(&candidate, options.tolerances)?;
+                Ok(record(
+                    Termination::Optimal,
+                    Some(candidate),
+                    Some(report.objective),
+                ))
+            }
+        }
+    }
+}
+
+/// A backend that returns scripted terminations, to drive the bound rules.
+struct ScriptedBackend {
+    script: Vec<Termination>,
+    calls: RefCell<usize>,
+}
+
+impl ScriptedBackend {
+    fn new(script: &[Termination]) -> Self {
+        Self {
+            script: script.to_vec(),
+            calls: RefCell::new(0),
+        }
+    }
+}
+
+impl Backend for ScriptedBackend {
+    fn solve(
+        &self,
+        model: &Model,
+        options: &SolveOptions,
+        _cancel: &CancellationToken,
+        _warm_start: Option<WarmStart<'_>>,
+    ) -> Result<SolveRecord, ValidationError> {
+        let mut calls = self.calls.borrow_mut();
+        let termination = *self
+            .script
+            .get(*calls)
+            .unwrap_or(self.script.last().expect("a nonempty script"));
+        *calls += 1;
+        drop(calls);
+
+        // A scripted solution is deliberately fractional, so an engine that
+        // wrongly accepted it would be caught by the original-model check.
+        let candidate = Candidate {
+            schema_version: optimizer_core::SCHEMA_VERSION,
+            model_id: model.document().model_id.clone(),
+            values: model
+                .document()
+                .variables
+                .iter()
+                .map(|variable| Assignment {
+                    variable_id: variable.id,
+                    value: 0.5,
+                })
+                .collect(),
+        };
+        let objective = model
+            .evaluate(&candidate, options.tolerances)
+            .map(|report| report.objective)
+            .ok();
+        Ok(SolveRecord {
+            schema_version: SOLVE_SCHEMA_VERSION,
+            model_id: model.document().model_id.clone(),
+            backend: "scripted".to_string(),
+            backend_version: "0.0.0".to_string(),
+            termination,
+            native_status: None,
+            objective,
+            best_bound: objective,
+            gap: None,
+            candidate: Some(candidate),
+            validation: None,
+            warnings: Vec::new(),
+            elapsed_ms: 0,
+            options: options.clone(),
+        })
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Independent brute-force reference over the discrete box.
+// ---------------------------------------------------------------------------
+
+/// Exhaustively enumerate every integer assignment and return the true optimum.
+///
+/// This is the independent oracle: it shares no code with the executive.
+fn brute_force(model: &Model) -> Option<(Vec<f64>, f64)> {
+    let document = model.document();
+    let ranges: Vec<(f64, f64)> = document
+        .variables
+        .iter()
+        .map(|variable| {
+            let (Bound::Finite { value: lower }, Bound::Finite { value: upper }) =
+                (variable.lower, variable.upper)
+            else {
+                panic!("the oracle requires finite bounds");
+            };
+            match variable.domain {
+                Domain::Binary => (lower.max(0.0).ceil(), upper.min(1.0).floor()),
+                _ => (lower.ceil(), upper.floor()),
+            }
+        })
+        .collect();
+
+    if ranges.iter().any(|(lower, upper)| lower > upper) {
+        return None;
+    }
+
+    let mut best: Option<(Vec<f64>, f64)> = None;
+    let mut assignment: Vec<f64> = ranges.iter().map(|(lower, _)| *lower).collect();
+    loop {
+        let candidate = Candidate {
+            schema_version: optimizer_core::SCHEMA_VERSION,
+            model_id: document.model_id.clone(),
+            values: document
+                .variables
+                .iter()
+                .zip(&assignment)
+                .map(|(variable, value)| Assignment {
+                    variable_id: variable.id,
+                    value: *value,
+                })
+                .collect(),
+        };
+        if let Ok(report) = model.evaluate(&candidate, tolerances())
+            && report.feasible
+        {
+            let better =
+                best.as_ref()
+                    .is_none_or(|(_, objective)| match document.objective.sense {
+                        ObjectiveSense::Minimize => report.objective < *objective,
+                        ObjectiveSense::Maximize => report.objective > *objective,
+                    });
+            if better {
+                best = Some((assignment.clone(), report.objective));
+            }
+        }
+        // Odometer over the integer box.
+        let mut position = 0;
+        loop {
+            if position == assignment.len() {
+                return best;
+            }
+            assignment[position] += 1.0;
+            if assignment[position] <= ranges[position].1 + EPSILON {
+                break;
+            }
+            assignment[position] = ranges[position].0;
+            position += 1;
+        }
+    }
+}
+
+fn run(model: &Model, options: &SearchOptions) -> SearchRecord {
+    search(
+        model,
+        options,
+        &ExactBackend::default(),
+        &CancellationToken::new(),
+    )
+    .expect("search")
+}
+
+// ---------------------------------------------------------------------------
+// Requirements 1-4: ownership, node shape, identity preservation, neutrality.
+// ---------------------------------------------------------------------------
+
+/// Requirements 2-3: branching restricts discrete bounds only, and the
+/// incumbent comes back in original variable IDs against the original model.
+#[test]
+fn incumbent_uses_original_identities() {
+    // Deliberately non-contiguous IDs: a renumbering bug cannot hide.
+    let discrete = model(
+        "identity",
+        &[
+            (7, Domain::Integer, 0.0, 3.0),
+            (11, Domain::Integer, 0.0, 3.0),
+        ],
+        &[(4, None, Some(3.5), &[(7, 1.0), (11, 1.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(7, 1.0), (11, 1.0)],
+    );
+    let record = run(&discrete, &options());
+
+    assert_eq!(record.outcome, SearchOutcome::ProvenOptimal);
+    assert_eq!(record.model_id, "identity");
+    let candidate = record.candidate.expect("incumbent");
+    let ids: Vec<u32> = candidate.values.iter().map(|v| v.variable_id).collect();
+    assert_eq!(ids, vec![7, 11], "original IDs must survive the search");
+    // x7 + x11 <= 3.5 over integers maximizes at 3.
+    assert_eq!(record.objective, Some(3.0));
+}
+
+/// Requirement 4: the executive drives whatever backend it is handed.
+#[test]
+fn search_is_backend_neutral() {
+    let discrete = model(
+        "neutral",
+        &[(0, Domain::Integer, 0.0, 4.0)],
+        &[(0, None, Some(2.5), &[(0, 1.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let exact = run(&discrete, &options());
+    assert_eq!(exact.outcome, SearchOutcome::ProvenOptimal);
+    assert_eq!(exact.objective, Some(2.0));
+
+    // A different backend implementation drives the same executive.
+    let scripted = search(
+        &discrete,
+        &options(),
+        &ScriptedBackend::new(&[Termination::Infeasible]),
+        &CancellationToken::new(),
+    )
+    .expect("search");
+    assert_eq!(scripted.outcome, SearchOutcome::ProvenInfeasible);
+    assert_eq!(scripted.backend, optimizer_solver::RELAXATION_BACKEND);
+}
+
+// ---------------------------------------------------------------------------
+// Requirements 5-8: bound validity, forfeiture, and the pruning rules.
+// ---------------------------------------------------------------------------
+
+/// Requirements 5 and 6, the central contract: a relaxation that did not prove
+/// optimality yields no usable bound, so the search must forfeit its proof
+/// claim rather than presenting a limited solve as a completed one.
+#[test]
+fn unproven_relaxation_forfeits_the_proof_claim() {
+    let discrete = model(
+        "forfeit",
+        &[
+            (0, Domain::Integer, 0.0, 4.0),
+            (1, Domain::Integer, 0.0, 4.0),
+        ],
+        &[(0, None, Some(5.0), &[(0, 1.0), (1, 1.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0), (1, 1.0)],
+    );
+
+    for termination in [
+        Termination::TimeLimit,
+        Termination::IterationLimit,
+        Termination::NodeLimit,
+        Termination::Interrupted,
+        Termination::Feasible,
+        Termination::NumericalFailure,
+        Termination::BackendFailure,
+        Termination::Unsupported,
+    ] {
+        let record = search(
+            &discrete,
+            &options(),
+            &ScriptedBackend::new(&[termination]),
+            &CancellationToken::new(),
+        )
+        .expect("search");
+
+        assert!(
+            record.forfeited,
+            "{termination:?} must forfeit the proof claim"
+        );
+        assert!(
+            !record.outcome.proves_completion(),
+            "{termination:?} must never report a completed proof, got {:?}",
+            record.outcome
+        );
+        assert_eq!(
+            record.nodes_pruned_bound, 0,
+            "{termination:?} supplies no valid bound, so nothing may be pruned by bound"
+        );
+    }
+}
+
+/// Requirement 5: only a proven relaxation contributes a dual bound.
+#[test]
+fn only_proven_relaxations_supply_a_dual_bound() {
+    let continuous = model(
+        "bounded",
+        &[(0, Domain::Continuous, 0.0, 2.0)],
+        &[],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let proven = run(&continuous, &options());
+    assert_eq!(proven.outcome, SearchOutcome::ProvenOptimal);
+    assert_eq!(proven.dual_bound, Some(2.0));
+    assert!(!proven.forfeited);
+
+    let limited = search(
+        &continuous,
+        &options(),
+        &ScriptedBackend::new(&[Termination::TimeLimit]),
+        &CancellationToken::new(),
+    )
+    .expect("search");
+    assert!(limited.forfeited);
+    assert_eq!(
+        limited.dual_bound, None,
+        "an unproven relaxation must not leave a dual bound behind"
+    );
+}
+
+/// Requirement 7: only a proven infeasible relaxation closes a node.
+#[test]
+fn only_proven_infeasibility_prunes_a_node() {
+    let discrete = model(
+        "infeasible-vs-limit",
+        &[(0, Domain::Integer, 0.0, 2.0)],
+        &[(0, Some(5.0), None, &[(0, 1.0)])],
+        ObjectiveSense::Minimize,
+        0.0,
+        &[(0, 1.0)],
+    );
+
+    let proven = search(
+        &discrete,
+        &options(),
+        &ScriptedBackend::new(&[Termination::Infeasible]),
+        &CancellationToken::new(),
+    )
+    .expect("search");
+    assert_eq!(proven.outcome, SearchOutcome::ProvenInfeasible);
+    assert_eq!(proven.nodes_pruned_infeasible, 1);
+    assert!(!proven.forfeited);
+
+    let limited = search(
+        &discrete,
+        &options(),
+        &ScriptedBackend::new(&[Termination::TimeLimit]),
+        &CancellationToken::new(),
+    )
+    .expect("search");
+    assert_eq!(
+        limited.nodes_pruned_infeasible, 0,
+        "a limit is not evidence of infeasibility"
+    );
+    assert_ne!(limited.outcome, SearchOutcome::ProvenInfeasible);
+}
+
+/// Requirement 16: an unbounded relaxation is never a feasible incumbent.
+#[test]
+fn unbounded_relaxation_is_not_an_incumbent() {
+    let discrete = model(
+        "unbounded",
+        &[(0, Domain::Integer, 0.0, 4.0)],
+        &[],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    for termination in [Termination::Unbounded, Termination::UnboundedOrInfeasible] {
+        let record = search(
+            &discrete,
+            &options(),
+            &ScriptedBackend::new(&[termination]),
+            &CancellationToken::new(),
+        )
+        .expect("search");
+        assert_eq!(record.outcome, SearchOutcome::UnboundedOrInfeasible);
+        assert!(
+            record.candidate.is_none(),
+            "unboundedness is backend evidence, not an incumbent"
+        );
+        assert!(record.objective.is_none());
+    }
+}
+
+/// Requirement 8: an exhausted proof leaves no open node behind.
+#[test]
+fn proven_bounds_prune_dominated_subtrees() {
+    let discrete = model(
+        "prune",
+        &[
+            (0, Domain::Integer, 0.0, 6.0),
+            (1, Domain::Integer, 0.0, 6.0),
+        ],
+        &[(0, None, Some(6.0), &[(0, 1.0), (1, 1.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0), (1, 2.0)],
+    );
+    let record = run(&discrete, &options());
+    assert_eq!(record.outcome, SearchOutcome::ProvenOptimal);
+    assert_eq!(record.objective, Some(12.0));
+    assert!(!record.forfeited);
+    assert_eq!(record.open_nodes_remaining, 0);
+}
+
+// ---------------------------------------------------------------------------
+// Requirements 9-13: branching, validation, incumbent acceptance.
+// ---------------------------------------------------------------------------
+
+/// Requirements 9-10: a fractional relaxation forces covering branches.
+#[test]
+fn fractional_relaxations_force_covering_branches() {
+    let discrete = model(
+        "branching",
+        &[(0, Domain::Integer, 0.0, 10.0)],
+        &[(0, None, Some(3.5), &[(0, 1.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let record = run(&discrete, &options());
+    assert_eq!(record.outcome, SearchOutcome::ProvenOptimal);
+    assert_eq!(record.objective, Some(3.0));
+    assert!(
+        record.nodes_explored > 1,
+        "a fractional root must produce child nodes"
+    );
+}
+
+/// Requirement 12: an incumbent is validated against the original model, which
+/// still carries the integrality the relaxation dropped.
+#[test]
+fn fractional_solutions_never_become_incumbents() {
+    let discrete = model(
+        "fractional-claim",
+        &[(0, Domain::Integer, 0.0, 1.0)],
+        &[],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let record = search(
+        &discrete,
+        &options(),
+        &ScriptedBackend::new(&[Termination::Optimal]),
+        &CancellationToken::new(),
+    )
+    .expect("search");
+
+    if let Some(candidate) = &record.candidate {
+        let report = discrete
+            .evaluate(candidate, tolerances())
+            .expect("published incumbents must evaluate");
+        assert!(
+            report.feasible,
+            "a published incumbent must satisfy the original model"
+        );
+    }
+}
+
+/// Requirement 11: an unrepresentable branch bound is an explicit failure.
+#[test]
+fn unrepresentable_branch_bounds_are_rejected() {
+    let huge = 9_007_199_254_740_993.0;
+    let discrete = model(
+        "huge",
+        &[(0, Domain::Integer, 0.0, huge)],
+        &[(0, None, Some(huge - 0.5), &[(0, 1.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let outcome = search(
+        &discrete,
+        &options(),
+        &ScriptedBackend::new(&[Termination::Optimal]),
+        &CancellationToken::new(),
+    );
+    match outcome {
+        Err(error) => assert!(
+            matches!(error.kind, ErrorKind::Unsupported | ErrorKind::Numerical),
+            "unexpected category {:?}",
+            error.kind
+        ),
+        Ok(record) => assert!(
+            !record.outcome.proves_completion(),
+            "an unrepresentable branch must not yield a proof"
+        ),
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Requirements 14-16: exhaustive correctness against an independent oracle.
+// ---------------------------------------------------------------------------
+
+/// Requirement 14: over a family of tiny discrete models, the executive's
+/// proven optimum equals a brute-force enumeration of the whole assignment
+/// space. This is the contract that would catch an unsound prune.
+#[test]
+fn exhaustive_tiny_models_match_brute_force() {
+    let mut checked = 0;
+    for (index, sense) in [ObjectiveSense::Minimize, ObjectiveSense::Maximize]
+        .into_iter()
+        .enumerate()
+    {
+        // A fixed finite grid; no randomness, so a failure reproduces exactly.
+        for c0 in [-2.0_f64, -1.0, 1.0, 3.0] {
+            for c1 in [-1.0_f64, 1.0, 2.0] {
+                for limit in [1.5_f64, 3.0, 4.5, 7.0] {
+                    for domain in [Domain::Integer, Domain::Binary] {
+                        let upper = if domain == Domain::Binary { 1.0 } else { 3.0 };
+                        let name = format!("grid-{index}-{c0}-{c1}-{limit}");
+                        let discrete = model(
+                            &name,
+                            &[(0, domain, 0.0, upper), (1, domain, 0.0, upper)],
+                            &[
+                                (0, None, Some(limit), &[(0, 1.0), (1, 1.0)]),
+                                (1, Some(-limit), Some(limit), &[(0, 2.0), (1, -1.0)]),
+                            ],
+                            sense,
+                            0.25,
+                            &[(0, c0), (1, c1)],
+                        );
+
+                        let record = run(&discrete, &options());
+                        let expected = brute_force(&discrete);
+                        checked += 1;
+
+                        match expected {
+                            None => assert_eq!(
+                                record.outcome,
+                                SearchOutcome::ProvenInfeasible,
+                                "{name}: the oracle found no feasible assignment"
+                            ),
+                            Some((_, objective)) => {
+                                assert_eq!(
+                                    record.outcome,
+                                    SearchOutcome::ProvenOptimal,
+                                    "{name}: the oracle found a feasible assignment"
+                                );
+                                let found = record.objective.expect("an optimum has an objective");
+                                assert!(
+                                    (found - objective).abs() <= 1e-6,
+                                    "{name}: engine {found} vs oracle {objective}"
+                                );
+                                let candidate = record.candidate.expect("incumbent");
+                                let report =
+                                    discrete.evaluate(&candidate, tolerances()).expect("report");
+                                assert!(report.feasible, "{name}: incumbent must be feasible");
+                                assert!(
+                                    (report.objective - objective).abs() <= 1e-6,
+                                    "{name}: recomputed objective disagrees with the oracle"
+                                );
+                            }
+                        }
+                        assert!(!record.forfeited, "{name}: a clean search must not forfeit");
+                    }
+                }
+            }
+        }
+    }
+    assert_eq!(checked, 192, "the fixed grid must stay fixed");
+}
+
+/// Requirement 14: proven infeasibility carries no incumbent.
+#[test]
+fn proven_infeasibility_carries_no_incumbent() {
+    let discrete = model(
+        "contradiction",
+        &[(0, Domain::Integer, 0.0, 2.0)],
+        // x >= 2 and x <= 1 cannot both hold.
+        &[
+            (0, Some(2.0), None, &[(0, 1.0)]),
+            (1, None, Some(1.0), &[(0, 1.0)]),
+        ],
+        ObjectiveSense::Minimize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    assert!(brute_force(&discrete).is_none(), "the oracle agrees");
+
+    let record = run(&discrete, &options());
+    assert_eq!(record.outcome, SearchOutcome::ProvenInfeasible);
+    assert!(record.candidate.is_none());
+    assert!(record.objective.is_none());
+    assert!(record.outcome.proves_completion());
+}
+
+// ---------------------------------------------------------------------------
+// Requirements 17-20: budgets, cancellation, continuous pass-through.
+// ---------------------------------------------------------------------------
+
+/// Requirement 19: a pre-cancelled search dispatches no relaxation at all.
+#[test]
+fn pre_cancelled_search_does_no_backend_work() {
+    let discrete = model(
+        "cancelled",
+        &[(0, Domain::Integer, 0.0, 4.0)],
+        &[],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let cancel = CancellationToken::new();
+    cancel.cancel();
+    let backend = ExactBackend::default();
+    let record = search(&discrete, &options(), &backend, &cancel).expect("search");
+
+    assert_eq!(record.outcome, SearchOutcome::Interrupted);
+    assert_eq!(
+        *backend.solves.borrow(),
+        0,
+        "no relaxation may be dispatched"
+    );
+    assert_eq!(record.relaxations_solved, 0);
+    assert!(!record.outcome.proves_completion());
+}
+
+/// Requirements 17-18: each budget produces its own outcome.
+#[test]
+fn each_budget_has_its_own_outcome() {
+    let discrete = model(
+        "budgets",
+        &[
+            (0, Domain::Integer, 0.0, 20.0),
+            (1, Domain::Integer, 0.0, 20.0),
+        ],
+        &[(0, None, Some(20.5), &[(0, 2.0), (1, 3.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0), (1, 1.0)],
+    );
+
+    let mut node_limited = options();
+    node_limited.node_limit = Some(1);
+    let record = run(&discrete, &node_limited);
+    assert_eq!(record.outcome, SearchOutcome::NodeLimit);
+    assert!(!record.outcome.proves_completion());
+    assert_eq!(record.nodes_explored, 1);
+
+    let mut open_limited = options();
+    open_limited.open_node_limit = Some(1);
+    let record = run(&discrete, &open_limited);
+    assert!(
+        matches!(
+            record.outcome,
+            SearchOutcome::OpenNodeLimit | SearchOutcome::ProvenOptimal
+        ),
+        "unexpected outcome {:?}",
+        record.outcome
+    );
+}
+
+/// Requirement 17: each invalid budget keeps its own diagnostic category.
+#[test]
+fn invalid_budgets_are_categorized() {
+    let discrete = model(
+        "invalid",
+        &[(0, Domain::Integer, 0.0, 1.0)],
+        &[],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+
+    let mut version = options();
+    version.schema_version = 2;
+    assert_eq!(
+        search(
+            &discrete,
+            &version,
+            &ExactBackend::default(),
+            &CancellationToken::new()
+        )
+        .unwrap_err()
+        .kind,
+        ErrorKind::Document
+    );
+
+    for mutate in [
+        (|o: &mut SearchOptions| o.node_limit = Some(0)) as fn(&mut SearchOptions),
+        |o: &mut SearchOptions| o.time_limit_ms = Some(0),
+        |o: &mut SearchOptions| o.open_node_limit = Some(0),
+    ] {
+        let mut invalid = options();
+        mutate(&mut invalid);
+        assert_eq!(
+            search(
+                &discrete,
+                &invalid,
+                &ExactBackend::default(),
+                &CancellationToken::new()
+            )
+            .unwrap_err()
+            .kind,
+            ErrorKind::Unsupported,
+            "a zero budget must be rejected"
+        );
+    }
+
+    let mut tolerance = options();
+    tolerance.improvement_tolerance = -1.0;
+    assert_eq!(
+        search(
+            &discrete,
+            &tolerance,
+            &ExactBackend::default(),
+            &CancellationToken::new()
+        )
+        .unwrap_err()
+        .kind,
+        ErrorKind::Tolerance
+    );
+}
+
+/// Requirement 20: a continuous model performs no branching and solves once.
+#[test]
+fn continuous_models_solve_without_branching() {
+    let continuous = model(
+        "continuous",
+        &[
+            (0, Domain::Continuous, 0.0, 1.0),
+            (1, Domain::Continuous, 0.0, 1.0),
+        ],
+        &[(0, None, Some(1.5), &[(0, 1.0), (1, 1.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0), (1, 1.0)],
+    );
+    let backend = ExactBackend::default();
+    let record =
+        search(&continuous, &options(), &backend, &CancellationToken::new()).expect("search");
+
+    assert_eq!(record.outcome, SearchOutcome::ProvenOptimal);
+    assert_eq!(record.objective, Some(1.5));
+    assert_eq!(
+        *backend.solves.borrow(),
+        1,
+        "a continuous model needs exactly one relaxation"
+    );
+    assert_eq!(record.nodes_explored, 1);
+}
+
+// ---------------------------------------------------------------------------
+// Requirements 21-23: determinism, records, checkpoints.
+// ---------------------------------------------------------------------------
+
+/// Requirement 21: two identical searches explore identically.
+#[test]
+fn identical_searches_replay_identically() {
+    let discrete = model(
+        "replay",
+        &[
+            (0, Domain::Integer, 0.0, 5.0),
+            (1, Domain::Integer, 0.0, 5.0),
+        ],
+        &[(0, None, Some(7.5), &[(0, 2.0), (1, 3.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 3.0), (1, 4.0)],
+    );
+    let first = run(&discrete, &options());
+    let second = run(&discrete, &options());
+
+    assert_eq!(first.outcome, second.outcome);
+    assert_eq!(first.objective, second.objective);
+    assert_eq!(first.nodes_explored, second.nodes_explored);
+    assert_eq!(first.nodes_pruned_bound, second.nodes_pruned_bound);
+    assert_eq!(
+        first.nodes_pruned_infeasible,
+        second.nodes_pruned_infeasible
+    );
+    assert_eq!(first.relaxations_solved, second.relaxations_solved);
+    assert_eq!(first.candidate, second.candidate);
+}
+
+/// Requirement 22: an absent measurement is omitted, not serialized as null.
+#[test]
+fn records_omit_absent_measurements() {
+    let discrete = model(
+        "record",
+        &[(0, Domain::Integer, 0.0, 3.0)],
+        &[(0, Some(9.0), None, &[(0, 1.0)])],
+        ObjectiveSense::Minimize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let record = run(&discrete, &options());
+    assert_eq!(record.outcome, SearchOutcome::ProvenInfeasible);
+
+    let json = record.to_json().expect("serializable");
+    // Absent *measurements* are omitted entirely. An absent budget inside
+    // `options` is still an explicit null, matching the C1 configuration
+    // convention where null means "unlimited" rather than a missing number.
+    for measurement in ["objective", "dual_bound", "gap", "candidate", "validation"] {
+        assert!(
+            !json.contains(&format!("\"{measurement}\"")),
+            "absent {measurement} must be omitted, not null: {json}"
+        );
+    }
+    assert!(json.contains("\"forfeited\""));
+    assert!(
+        json.contains("\"node_limit\": null"),
+        "an unlimited budget stays an explicit null in configuration"
+    );
+
+    let parsed = SearchRecord::from_json(json.as_bytes()).expect("round trip");
+    assert_eq!(parsed, record);
+}
+
+/// Requirement 22: bad versions and nonfinite measurements are rejected.
+#[test]
+fn records_reject_bad_versions_and_nonfinite_values() {
+    let discrete = model(
+        "versions",
+        &[(0, Domain::Integer, 0.0, 1.0)],
+        &[],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let mut record = run(&discrete, &options());
+
+    record.objective = Some(f64::INFINITY);
+    assert_eq!(
+        record.to_json().unwrap_err().kind,
+        ErrorKind::Numerical,
+        "a nonfinite measurement must not serialize"
+    );
+
+    record.objective = Some(1.0);
+    let json = record.to_json().expect("serializable");
+    let bumped = json.replacen("\"schema_version\": 1", "\"schema_version\": 2", 1);
+    assert_eq!(
+        SearchRecord::from_json(bumped.as_bytes()).unwrap_err().kind,
+        ErrorKind::Document
+    );
+}
+
+/// Requirement 22: search documents reject positional arrays and unknown fields.
+#[test]
+fn search_documents_require_strict_objects() {
+    let positional = b"[1, 17, null, null, null, 0.0, {}]";
+    assert!(
+        serde_json::from_slice::<SearchOptions>(positional).is_err(),
+        "a positional record must be rejected"
+    );
+
+    let unknown = br#"{"schema_version":1,"seed":17,"node_limit":null,
+        "time_limit_ms":null,"open_node_limit":null,"improvement_tolerance":0.0,
+        "relaxation":{"schema_version":1,"seed":1,"time_limit_ms":null,
+        "iteration_limit":null,"node_limit":null,"threads":1,
+        "tolerances":{"absolute":0.0,"relative":0.0,"integrality":0.0}},
+        "surprise":true}"#;
+    assert!(
+        serde_json::from_slice::<SearchOptions>(unknown).is_err(),
+        "an unknown field must be rejected"
+    );
+
+    assert!(
+        serde_json::from_slice::<SearchOutcome>(b"\"not_an_outcome\"").is_err(),
+        "an unknown outcome variant must be rejected"
+    );
+}
+
+/// Requirement 22: the checkpoint shape is versioned and bound to the model.
+#[test]
+fn checkpoints_serialize_and_bind_to_the_model() {
+    let discrete = model(
+        "checkpoint",
+        &[(0, Domain::Integer, 0.0, 2.0)],
+        &[],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let checkpoint = initial_checkpoint(&discrete, &options()).expect("checkpoint");
+
+    assert_eq!(checkpoint.schema_version, SEARCH_SCHEMA_VERSION);
+    assert_eq!(checkpoint.model_id, "checkpoint");
+    assert_eq!(
+        checkpoint.model_fingerprint,
+        discrete.fingerprint().expect("fingerprint"),
+        "a checkpoint is bound to exact canonical data, not just an identity"
+    );
+    assert_eq!(checkpoint.open_nodes.len(), 1, "the root is the frontier");
+    assert!(!checkpoint.forfeited);
+
+    let json = checkpoint.to_json().expect("serializable");
+    let parsed = optimizer_solver::Checkpoint::from_json(json.as_bytes()).expect("round trip");
+    assert_eq!(parsed, checkpoint);
+
+    let bumped = json.replacen("\"schema_version\": 1", "\"schema_version\": 9", 1);
+    assert_eq!(
+        optimizer_solver::Checkpoint::from_json(bumped.as_bytes())
+            .unwrap_err()
+            .kind,
+        ErrorKind::Document
+    );
+}
+
+/// Requirement 14: `proves_completion` is true for exactly the completed
+/// outcomes, so a limit can never be read as a finished proof.
+#[test]
+fn only_completed_outcomes_prove_completion() {
+    for outcome in [
+        SearchOutcome::ProvenOptimal,
+        SearchOutcome::ProvenInfeasible,
+        SearchOutcome::UnboundedOrInfeasible,
+    ] {
+        assert!(outcome.proves_completion(), "{outcome:?}");
+    }
+    for outcome in [
+        SearchOutcome::Feasible,
+        SearchOutcome::NodeLimit,
+        SearchOutcome::TimeLimit,
+        SearchOutcome::OpenNodeLimit,
+        SearchOutcome::Interrupted,
+        SearchOutcome::NumericalFailure,
+        SearchOutcome::BackendFailure,
+        SearchOutcome::Unsupported,
+    ] {
+        assert!(!outcome.proves_completion(), "{outcome:?}");
+    }
+}

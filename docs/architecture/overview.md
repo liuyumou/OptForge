@@ -1,6 +1,6 @@
 # Architecture
 
-Purpose: define stable ownership boundaries. Scope: M0-M1 and C1, plus planned dependencies.
+Purpose: define stable ownership boundaries. Scope: M0-M1, C1 and C2, plus planned dependencies.
 Owner: architecture. Status: accepted.
 Last reviewed commit: 98033db.
 
@@ -35,8 +35,19 @@ optimizer-core result validation -> experiment record and CLI.
 C1 implements the backend leg of this flow: the CLI drives optimizer-highs
 directly through the backend-neutral contract in optimizer-core, and every
 extracted candidate returns through optimizer-core validation before publication.
-The optimizer-solver executive is not yet implemented, so no owned search sits
-between the two.
+
+C2 implements the executive leg under
+[SPEC-0003](../specifications/SPEC-0003-solver-executive.md) and
+[ADR-0004](../decisions/ADR-0004-owned-search.md). optimizer-solver owns node
+state, budgets, cancellation, incumbent acceptance and proof completion, and
+consumes the C1 `Backend` trait purely as a relaxation service. It does not
+depend on optimizer-highs, so its correctness contracts run without a native
+library; the end-to-end test over pinned HiGHS lives in optimizer-highs instead.
+
+Two proof claims stay distinct. A backend `Termination` describes one relaxation
+solve; a `SearchOutcome` describes whether the executive exhausted its node tree.
+A relaxation objective becomes a dual bound only when that relaxation proved
+optimality, and any other termination forfeits the search's proof claim.
 
 The core owns feasibility, objective recomputation, and mathematical status.
 Extensions may propose candidates or actions; the core must validate them.

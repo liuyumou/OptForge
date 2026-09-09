@@ -6,6 +6,27 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- C2 owned branch-and-bound executive in optimizer-solver, under SPEC-0003 and
+  ADR-0004. It owns node state, budgets, cancellation, incumbent acceptance and
+  proof completion, and consumes the C1 backend contract purely as a relaxation
+  service without depending on any particular backend.
+- `SearchOutcome`, a proof claim distinct from the backend's `Termination`:
+  proven optimality means the executive exhausted its own node tree, not that
+  one relaxation solve reported optimality.
+- A relaxation objective is admitted as a dual bound only when that relaxation
+  proved optimality. Any limit, interruption or failure leaves the node bound
+  unavailable, forbids pruning that node, and permanently forfeits the search's
+  proof claim, recorded as `forfeited` so a reader can see why a completed-looking
+  search claimed nothing.
+- Versioned search configuration, search record and checkpoint documents at
+  schema version 1, with absent measurements omitted rather than serialized as
+  null. The checkpoint shape is defined and serializable; restart is deliberately
+  not implemented and needs its own acceptance evidence.
+- C2 acceptance evidence: 192 tiny discrete models agree with brute-force
+  enumeration of the entire assignment space on both proven optimum and proven
+  infeasibility, plus end-to-end agreement with independent subset enumeration
+  over the pinned HiGHS relaxation service. No performance claim is made.
+
 - C1 backend-neutral solve contract: explicit solve options with no default
   seed, limits or tolerances; cooperative cancellation; engine-owned termination
   that never reports a limit, interruption or failure as proven optimality;
@@ -64,6 +85,7 @@ User-visible changes are recorded here using Conventional Commit terminology.
 - CPU CI, documentation builds, dependency policy, and manual serialized GPU CI.
 - Contract tests, bounded smoke artifacts, project rules, and milestone backlog.
 
-No CUDA kernels, owned branch-and-bound search, Python SDK, extension registry,
-or solver performance claims are included. Solving is single-threaded CPU HiGHS
+No CUDA kernels, Python SDK, extension registry, or solver performance claims are
+included. Owned branch-and-bound search proves optimality but is not tuned and is
+not compared against any other solver. Relaxations are single-threaded CPU HiGHS
 under recorded numerical settings; no benchmark comparison is claimed.

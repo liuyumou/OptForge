@@ -154,6 +154,7 @@ name = "optimizer-highs"
 version = "0.1.0"
 dependencies = [
  "optimizer-core",
+ "optimizer-solver",
 ]
 
 [[package]]
@@ -163,6 +164,11 @@ version = "0.1.0"
 [[package]]
 name = "optimizer-solver"
 version = "0.1.0"
+dependencies = [
+ "optimizer-core",
+ "serde",
+ "serde_json",
+]
 
 [[package]]
 name = "proc-macro2"
