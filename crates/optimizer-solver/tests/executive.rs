@@ -56,6 +56,32 @@ fn finite(value: f64) -> Bound {
     Bound::Finite { value }
 }
 
+/// A version this crate will never accept, for negative version tests.
+///
+/// Written as an offset rather than a literal so a later version bump cannot
+/// silently turn a rejection case into an accepted one.
+const UNSUPPORTED_SCHEMA_VERSION: u32 = SEARCH_SCHEMA_VERSION + 1;
+
+/// Set only the top-level `schema_version` of a serialized document.
+///
+/// Replacing the first `"schema_version": 1` occurrence in the text would be
+/// wrong: a record's nested `candidate` and `options` carry their own versions,
+/// and which appears first depends on which optional fields are present. It
+/// would also silently become a no-op for a document with no nested versions at
+/// all. Mutating the parsed value targets the document's own field by name, so
+/// neither the field order nor the serializer's formatting can make an assertion
+/// vacuous.
+fn retarget_version(json: &str, version: u32) -> String {
+    let mut document: serde_json::Value = serde_json::from_str(json).expect("valid JSON");
+    let object = document.as_object_mut().expect("a JSON object");
+    let previous = object.insert("schema_version".to_string(), version.into());
+    assert!(
+        previous.is_some(),
+        "the document must already carry a schema_version to retarget"
+    );
+    serde_json::to_string_pretty(&document).expect("serializable")
+}
+
 /// One compact constraint: id, optional lower bound, optional upper bound, terms.
 type ConstraintSpec<'a> = (u32, Option<f64>, Option<f64>, &'a [(u32, f64)]);
 
@@ -988,7 +1014,7 @@ fn invalid_budgets_are_categorized() {
     );
 
     let mut version = options();
-    version.schema_version = 2;
+    version.schema_version = UNSUPPORTED_SCHEMA_VERSION;
     assert_eq!(
         search(
             &discrete,
@@ -1154,10 +1180,21 @@ fn records_reject_bad_versions_and_nonfinite_values() {
 
     record.objective = Some(1.0);
     let json = record.to_json().expect("serializable");
-    let bumped = json.replacen("\"schema_version\": 1", "\"schema_version\": 2", 1);
+    // The record's own version, not the nested candidate's or its options'.
+    // Which of those appears first in the text depends on which optional fields
+    // are present, so anchoring on position would silently stop testing this.
+    let bumped = retarget_version(&json, UNSUPPORTED_SCHEMA_VERSION);
+    assert_ne!(bumped, json, "the version must actually have been changed");
     assert_eq!(
         SearchRecord::from_json(bumped.as_bytes()).unwrap_err().kind,
         ErrorKind::Document
+    );
+
+    // The unmutated record still round trips, so the rejection above is caused
+    // by the version and not by the retargeting having damaged the document.
+    assert_eq!(
+        SearchRecord::from_json(json.as_bytes()).expect("round trip"),
+        record
     );
 }
 
@@ -1170,15 +1207,27 @@ fn search_documents_require_strict_objects() {
         "a positional record must be rejected"
     );
 
-    let unknown = br#"{"schema_version":1,"seed":17,"node_limit":null,
-        "time_limit_ms":null,"open_node_limit":null,"improvement_tolerance":0.0,
-        "relaxation":{"schema_version":1,"seed":1,"time_limit_ms":null,
-        "iteration_limit":null,"node_limit":null,"threads":1,
-        "tolerances":{"absolute":0.0,"relative":0.0,"integrality":0.0}},
-        "surprise":true}"#;
+    // A complete, currently valid configuration is the only useful base for an
+    // unknown-field test. A hand-written literal drifts as soon as a field is
+    // added: it would then be rejected for the *missing* field while the
+    // assertion still passed, silently ceasing to test unknown-field rejection.
+    let valid = serde_json::to_string(&options()).expect("serializable");
     assert!(
-        serde_json::from_slice::<SearchOptions>(unknown).is_err(),
-        "an unknown field must be rejected"
+        serde_json::from_str::<SearchOptions>(&valid).is_ok(),
+        "the base document must be accepted: {valid}"
+    );
+    let unknown = format!("{},\"surprise\":true}}", &valid[..valid.len() - 1]);
+    assert!(
+        serde_json::from_str::<SearchOptions>(&unknown).is_err(),
+        "an unknown field must be rejected: {unknown}"
+    );
+
+    // A missing required field is rejected too, and for its own reason.
+    let missing = valid.replace("\"seed\":17,", "");
+    assert_ne!(missing, valid, "the seed field must actually be removed");
+    assert!(
+        serde_json::from_str::<SearchOptions>(&missing).is_err(),
+        "a missing required field must be rejected"
     );
 
     assert!(
@@ -1214,7 +1263,8 @@ fn checkpoints_serialize_and_bind_to_the_model() {
     let parsed = optimizer_solver::Checkpoint::from_json(json.as_bytes()).expect("round trip");
     assert_eq!(parsed, checkpoint);
 
-    let bumped = json.replacen("\"schema_version\": 1", "\"schema_version\": 9", 1);
+    let bumped = retarget_version(&json, UNSUPPORTED_SCHEMA_VERSION);
+    assert_ne!(bumped, json, "the version must actually have been changed");
     assert_eq!(
         optimizer_solver::Checkpoint::from_json(bumped.as_bytes())
             .unwrap_err()
