@@ -1,5 +1,44 @@
 # Active Task
 
+## Local C1 Integration (2026-09-09)
+
+Objective: verify the reviewed feat/highs-backend branch from a clean checkout,
+integrate it into local main, and delete the feature branch after confirming its
+commits are retained.
+
+Status: complete; clean-checkout verification, fast-forward integration and
+feature-branch cleanup finished.
+
+Acceptance gate: the complete gate passes in an independent clone with nothing
+prebuilt; fast-forward integration preserves the reviewed tip c8bb6f3; the
+feature branch is deleted and the worktree is clean. Resource budget: CPU only,
+four Cargo workers, no GPU workloads.
+
+Evidence (2026-09-09): the branch was cloned to /tmp/c1-verify with no populated
+target/native, and `bash tools/check.sh` passed there in 1 minute 43 seconds.
+That run built the pinned HiGHS 1.11.0 library from the checksum-verified
+upstream archive, produced both libhighs.a and the standalone executable, and ran
+58 Rust and 20 Python tests with **zero skip messages**, so native acceptance was
+genuinely covered rather than bypassed. The clean clone also solved
+examples/model-v1.json to `termination: optimal`, `objective: 2.5`,
+`backend_version: 1.11.0` with an independently validated feasible incumbent and
+exit 0, and wrote a smoke record bound to revision c8bb6f3 with `dirty: false`.
+
+This clean-checkout pass is the acceptance evidence for the integration. main was
+fast-forwarded from 9b42b62 to c8bb6f3 without conflicts or history rewriting, so
+the integrated tree is byte-identical to the verified revision.
+`git merge-base --is-ancestor` confirmed the reviewed tip is retained on main, and
+`git branch -d` removed the fully merged feat/highs-backend branch. No remote refs
+were changed; main remains 9 commits ahead of origin/main and unpushed, pending a
+separate authorization to push.
+
+The advisory database fetch failed again during the clean-clone run and recovered
+through the cached database, as recorded in
+[known failures](known-failures.md). No checks were waived.
+
+Follow-up: C2, the owned solver executive, is dependency-ready. Write its
+specification before introducing any public search API; no C2 behavior exists.
+
 ## C1 Backend-Neutral Solve Contract and HiGHS Adapter (2026-09-09)
 
 Objective: implement C1 under SPEC-0002: backend-neutral solve/session types,
