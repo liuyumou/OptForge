@@ -1,10 +1,12 @@
 # AI Optimizer
 
 A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. The current milestone is **C2 complete: an owned
-branch-and-bound executive over the pinned CPU HiGHS relaxation service**.
-It validates original linear models and candidates, solves them with an
-independently validated incumbent, and proves optimality with its own search.
+selective GPU acceleration. The current milestone is **C3 complete: an extension
+runtime whose candidate producers and search advisers propose, while the core
+decides**. It validates original linear models and candidates, solves them with
+an independently validated incumbent, proves optimality with its own search, and
+accepts separately authored extensions without granting them any mathematical
+authority.
 
 ## Quick start
 
@@ -50,6 +52,7 @@ acceptance was not covered.
 - [Model and validation specification](docs/specifications/SPEC-0001-model-and-validation.md)
 - [Backend contract specification](docs/specifications/SPEC-0002-backend-contract.md)
 - [Solver executive specification](docs/specifications/SPEC-0003-solver-executive.md)
+- [Extension runtime specification](docs/specifications/SPEC-0004-extension-runtime.md)
 - [Validate a model and candidate](docs/tutorials/model-validation.md)
 - [Solve a model](docs/tutorials/solve-a-model.md)
 - [GPU discovery and lease contract](docs/specifications/SPEC-0006-gpu-lease.md)
@@ -74,12 +77,16 @@ tolerances, and the backend-neutral solve contract. optimizer-highs implements
 that contract against the pinned CPU HiGHS build and is the only crate permitted
 to contain unsafe code. optimizer-solver owns the branch-and-bound executive and
 consumes the solve contract as a relaxation service without depending on any
-backend. The CLI exposes validation, solving and GPU
+backend. optimizer-extension defines the extension declaration, authority model
+and guarded host; optimizer-extension-examples holds independently authored
+extensions, including deliberately hostile ones, and depends only on the
+published APIs. The CLI exposes validation, solving and GPU
 discovery/ownership; optimizer-experiment embeds artifact schemas. Remaining
 numerical crates reserve ownership boundaries without solver APIs.
 `schemas/`, `examples/`, `tests/`, and `tools/` provide executable contracts.
 `docs/` is authoritative; `wiki/` provides navigation. Python SDK, CUDA kernels,
-extension runtime, and performance suites are deferred.
+a local extension registry, dynamically loaded native extensions, and
+performance suites are deferred.
 
 ## License
 

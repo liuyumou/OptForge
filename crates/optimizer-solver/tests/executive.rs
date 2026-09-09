@@ -49,6 +49,9 @@ fn options() -> SearchOptions {
         open_node_limit: None,
         improvement_tolerance: 1e-9,
         relaxation: relaxation_options(),
+        // C2's contracts run with no extension permitted, so every assertion
+        // below describes the executive's own behavior.
+        extensions: Vec::new(),
     }
 }
 
@@ -1153,6 +1156,13 @@ fn records_omit_absent_measurements() {
         json.contains("\"node_limit\": null"),
         "an unlimited budget stays an explicit null in configuration"
     );
+    // An extension-free search says so with an empty list rather than by
+    // omitting the field, so a reader can tell "none participated" from
+    // "this record predates extensions".
+    assert!(
+        json.contains("\"extensions\": []"),
+        "an extension-free search records an empty list: {json}"
+    );
 
     let parsed = SearchRecord::from_json(json.as_bytes()).expect("round trip");
     assert_eq!(parsed, record);
@@ -1201,7 +1211,7 @@ fn records_reject_bad_versions_and_nonfinite_values() {
 /// Requirement 22: search documents reject positional arrays and unknown fields.
 #[test]
 fn search_documents_require_strict_objects() {
-    let positional = b"[1, 17, null, null, null, 0.0, {}]";
+    let positional = b"[2, 17, null, null, null, 0.0, {}, []]";
     assert!(
         serde_json::from_slice::<SearchOptions>(positional).is_err(),
         "a positional record must be rejected"

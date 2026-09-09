@@ -16,11 +16,12 @@
 //! recorded numerical settings; it is not an exact-arithmetic certificate.
 
 mod executive;
+mod hooks;
 mod node;
 mod search;
 mod serde_strict;
 
-pub use executive::{initial_checkpoint, search};
+pub use executive::{initial_checkpoint, search, search_with_extensions};
 pub use search::{
     Checkpoint, CheckpointNode, Restriction, SEARCH_SCHEMA_VERSION, SearchOptions, SearchOutcome,
     SearchRecord,

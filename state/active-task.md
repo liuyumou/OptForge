@@ -1,5 +1,150 @@
 # Active Task
 
+## C3 Extension Runtime and Authority Model (2026-09-09)
+
+Objective: implement C3 under a new SPEC-0004: an extension runtime with a
+declared authority model, candidate producers and search advisers, whose actions
+the core validates and whose failures are recorded rather than absorbed.
+
+Status: complete; the specification preceded the implementation, and the full
+gate passes with native acceptance covered.
+
+Acceptance gate: independently authored extensions build and run against the
+published APIs with no engine-internal change; invalid candidates, invalid
+advice, incompatible versions, panics and budget abuse each produce a typed
+record entry; the proven optimum and the proof claim are identical with and
+without extensions, including adversarial ones; and `bash tools/check.sh` passes
+with native acceptance covered. Resource budget: CPU only, four Cargo workers,
+no GPU workloads.
+
+Expected changes: new SPEC-0004 and ADR-0005; new crates optimizer-extension and
+optimizer-extension-examples; optimizer-solver contracts, executive and hooks;
+`SEARCH_SCHEMA_VERSION` 1 to 2; the C2 search and native executive tests;
+SPEC-0003 compatibility and exclusion clauses; implementation-plan.md, README.md,
+docs/architecture/{overview,testing}.md, wiki/{status,glossary}.md, CHANGELOG.md,
+state/backlog.yaml, state/known-failures.md and this record.
+
+Evidence (2026-09-09): the complete `bash tools/check.sh` gate passed with the
+native library built and linked, with **zero skip messages**: format,
+warnings-as-errors Clippy, 130 Rust tests, workspace build, warnings-as-errors
+rustdoc, cargo-deny (advisories/bans/licenses/sources), artifact validation, 20
+Python tests, 43-page documentation/link validation and bootstrap smoke. Rust
+tests rose from 84 to 130: 27 new extension runtime contracts, 18 new
+independent-extension acceptance contracts, and 1 new native end-to-end
+contract. No checks were waived.
+
+The RustSec advisory-database fetch failed on the final run and recovered
+through the cached database, as recorded in
+[known failures](known-failures.md). Bans, licenses and sources are offline and
+were checked normally; the advisory check ran against the cache rather than a
+fresh fetch.
+
+Cargo.lock changed only by adding local dependency edges for
+optimizer-extension (optimizer-core, serde, serde_json),
+optimizer-extension-examples (optimizer-core, optimizer-extension, and
+optimizer-solver as a dev-dependency), the optimizer-solver dependency on
+optimizer-extension, and optimizer-highs dev-dependencies on both new crates.
+No external package version changed.
+
+Correctness evidence, stated as what was actually checked:
+
+- Three honest extensions and three hostile ones covering 17 distinct
+  misbehavior modes (7 bad proposals, 4 bad actions, 6 unadmittable
+  declarations) live in optimizer-extension-examples, which depends on the
+  published extension and core APIs and takes optimizer-solver only as a
+  dev-dependency. That the
+  workspace builds is the evidence that a third-party extension needs no
+  engine-internal change; it is not an assertion in prose.
+- Over a fixed 25-model grid covering both senses, integer and binary domains,
+  three capacities, two coefficient settings and a proven-infeasible case, every
+  hostile extension leaves the outcome, the
+  proven optimum, the dual bound, the forfeiture state and both prune counters
+  identical to the extension-free run, which itself agrees with brute-force
+  enumeration of the whole assignment space. These comparisons use unlimited
+  node and time budgets deliberately: a hostile adviser spending a node budget
+  on unpromising nodes legitimately changes which outcome a *budgeted* search
+  reaches, so a budgeted assertion would be flaky by design rather than a real
+  correctness check.
+- An empty extension policy reproduces the extension-free record exactly, apart
+  from measured elapsed time. That is the direct check that C3 did not perturb
+  C2, and all 22 C2 contracts still pass unchanged in substance.
+- Refusals are typed and recorded: infeasible, out-of-bounds, wrong-model,
+  incomplete and nonfinite candidates; advice naming a nonexistent node, an
+  unknown variable or an integral variable; both directions of host-contract
+  mismatch; a refused transformation category; an unclaimed problem class;
+  contained panics in `propose`, `advise` and even `declare`; and exhausted
+  invocation and proposal budgets. A refused extension is never invoked at all,
+  which is asserted against a call counter the extension itself maintains.
+- A producer's claimed objective is never read. The out-of-bounds producer
+  offers a candidate with an enormous objective and the record still reports the
+  true optimum from independent recomputation.
+- Recorded diagnostics stay bounded: 10,000 distinct rejections leave the
+  counter exact at 10,000 and the retained messages capped at 8.
+- The native end-to-end test drives the real executive over pinned HiGHS with a
+  lying producer, a ghost-node adviser and a panicking adviser registered
+  simultaneously, and still proves the optimum independent enumeration finds.
+
+Resolved during implementation:
+
+- The first acceptance run showed a search adviser being consulted for a
+  continuous model, which requirement 20 forbids. Root cause: the node-selection
+  hook ran whenever the frontier was non-empty, including when it held exactly
+  one node and there was no choice to make. Fixed by not consulting an adviser
+  for a decision with one possible answer, and recorded as SPEC-0004
+  requirement 9a rather than patched silently. Consulting there could only
+  manufacture rejections describing the hook rather than the extension.
+- Three acceptance tests initially asserted against models whose LP relaxations
+  happen to be integral, so no branching occurred and no adviser was ever
+  consulted; they were passing or failing for reasons unrelated to their names.
+  They now use a model with a genuinely fractional relaxation and assert
+  `nodes_explored > 1` first, so a future change that removes the branching
+  cannot make them vacuous.
+- Three C2 record tests needed repair rather than renumbering. Two mutated "the
+  first `schema_version` in the JSON", which at version 2 is the nested
+  candidate's or is absent entirely, so they would have parsed successfully and
+  panicked on `unwrap_err`. A third hand-wrote a complete configuration object
+  plus an unknown field; with a new required field it would have been rejected
+  for the *missing* field while still passing, silently ceasing to test
+  unknown-field rejection. All three now target the document's own version or
+  build their base from a serialized valid configuration.
+
+Deferred and recorded rather than hidden: the extension host is in-process, so
+containment covers panics but not a process abort, stack exhaustion or a memory
+fault, and no per-extension memory budget is enforced. Process isolation and the
+versioned C boundary for dynamically loaded native components are specified as
+deferred and need their own decision record, because a second unsafe boundary
+would amend ADR-0003. No CLI subcommand exposes extensions yet, no JSON Schema
+covers search or extension records, and no performance claim is made: C3
+establishes safety only, and whether advisers improve search is C7's question.
+
+Follow-up: C4, the agent-independent SDK, CLI, experiment workspace and local
+registry, is dependency-ready. Write its specification before introducing any
+public SDK or registry API.
+
+Contract decisions worth recording, because they are the ones a later
+implementation could get quietly wrong:
+
+- No extension path may reach forfeiture, a search-loop break, or an `Err`
+  return from `search`. An adversarial extension must not be able to deny a
+  proof the engine would otherwise complete. C2 forfeits when a *backend*
+  misbehaves because its bounds become untrustworthy; a bad extension candidate
+  implies nothing about bounds, so it is a recorded rejection and a disable.
+- A proposed candidate is validated by `Model::evaluate` against the original
+  model, and the record's objective is the recomputed one. A producer's claimed
+  objective is never read.
+- An advised branching variable must lie in the recomputed fractional set. This
+  is a termination requirement, not a preference: branching on an integral
+  variable yields two children that do not tighten the box, which is the same
+  hazard SPEC-0003 requirement 12a exists to prevent.
+- Extension budgets are counted in invocations and proposals, never wall clock,
+  so the search path cannot depend on machine speed and requirement 21's replay
+  guarantee survives.
+- The `backend` category is not introduced: `optimizer_core::Backend` is already
+  public and replaceable under SPEC-0002, and declaring the category only to
+  refuse it would read as a regression of an accepted contract.
+- `transformation` is refused at declaration time, so no code path for it
+  exists until its validity has its own contract.
+
 ## Local C2 Integration (2026-09-09)
 
 Objective: integrate the reviewed feat/solver-executive branch into local main

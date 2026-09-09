@@ -150,10 +150,30 @@ name = "optimizer-experiment"
 version = "0.1.0"
 
 [[package]]
+name = "optimizer-extension"
+version = "0.1.0"
+dependencies = [
+ "optimizer-core",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "optimizer-extension-examples"
+version = "0.1.0"
+dependencies = [
+ "optimizer-core",
+ "optimizer-extension",
+ "optimizer-solver",
+]
+
+[[package]]
 name = "optimizer-highs"
 version = "0.1.0"
 dependencies = [
  "optimizer-core",
+ "optimizer-extension",
+ "optimizer-extension-examples",
  "optimizer-solver",
 ]
 
@@ -166,6 +186,7 @@ name = "optimizer-solver"
 version = "0.1.0"
 dependencies = [
  "optimizer-core",
+ "optimizer-extension",
  "serde",
  "serde_json",
 ]

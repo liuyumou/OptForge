@@ -17,3 +17,8 @@
 | Warm start | Validated candidate or model-bound LP basis supplied to a solve |
 | Candidate | Proposed solution requiring original-model validation |
 | Makespan | Completion time of the final job on the final machine; C5 contract pending |
+| Extension | Separately authored component that proposes candidates or search actions; [SPEC-0004](../docs/specifications/SPEC-0004-extension-runtime.md) |
+| Authority | Consequence the core permits an extension's output to have, derived from its category, never chosen by the extension |
+| Declaration | Versioned document by which an extension states identity, category, contract version, determinism and budgets |
+| Rejection | Core refusal of one proposal or action; the search continues unchanged |
+| Disabling | Permanent exclusion of one extension from the remainder of one search |

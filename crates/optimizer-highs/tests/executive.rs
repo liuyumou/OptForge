@@ -14,8 +14,12 @@ use optimizer_core::{
     ModelDocument, Objective, ObjectiveSense, SOLVE_SCHEMA_VERSION, SolveOptions, Tolerances,
     Variable,
 };
+use optimizer_extension::{EXTENSION_SCHEMA_VERSION, ExtensionPolicy, Registration};
+use optimizer_extension_examples::{BadAdvice, BadProposal, HostileAdviser, HostileProducer};
 use optimizer_highs::{HighsBackend, is_native};
-use optimizer_solver::{SEARCH_SCHEMA_VERSION, SearchOptions, SearchOutcome, search};
+use optimizer_solver::{
+    SEARCH_SCHEMA_VERSION, SearchOptions, SearchOutcome, search, search_with_extensions,
+};
 
 fn tolerances() -> Tolerances {
     Tolerances {
@@ -42,6 +46,7 @@ fn options() -> SearchOptions {
             tolerances: tolerances(),
             threads: 1,
         },
+        extensions: Vec::new(),
     }
 }
 
@@ -284,4 +289,102 @@ fn native_incumbents_are_revalidated_against_the_original_model() {
             "a binary incumbent must be integral"
         );
     }
+}
+
+/// C3 end to end: adversarial extensions cannot change a native search's proof.
+///
+/// The SPEC-0004 contracts in optimizer-extension and the acceptance suite in
+/// optimizer-extension-examples run over test backends. This closes the
+/// remaining gap: the real executive, the real native relaxation service, and
+/// extensions that lie, panic and misadvise, checked against independent
+/// enumeration.
+#[test]
+fn native_search_is_unaffected_by_hostile_extensions() {
+    if !require_native("native_search_is_unaffected_by_hostile_extensions") {
+        return;
+    }
+    let backend = HighsBackend::new();
+    let model = knapsack(
+        "native-extensions",
+        &[3.0, 4.0, 5.0, 2.0],
+        &[4.0, 5.0, 8.0, 3.0],
+        9.0,
+    );
+    let expected = best_subset(&[3.0, 4.0, 5.0, 2.0], &[4.0, 5.0, 8.0, 3.0], 9.0);
+
+    let plain = search(&model, &options(), &backend, &CancellationToken::new()).expect("search");
+    assert_eq!(plain.outcome, SearchOutcome::ProvenOptimal);
+
+    let policy = |extension_id: &str| ExtensionPolicy {
+        schema_version: EXTENSION_SCHEMA_VERSION,
+        extension_id: extension_id.to_string(),
+        invocation_budget: 10_000,
+        proposal_budget: 10_000,
+    };
+
+    // A producer whose every candidate is infeasible, an adviser that names a
+    // node the search never created, and one that panics on first contact.
+    let liar = HostileProducer::new(BadProposal::OutOfBounds);
+    let ghost = HostileAdviser::new(BadAdvice::NonexistentNode);
+    let bomb = HostileAdviser::new(BadAdvice::Panic);
+
+    let mut configuration = options();
+    configuration.extensions = vec![
+        policy(liar.declare_id()),
+        policy(ghost.declare_id()),
+        policy(bomb.declare_id()),
+    ];
+
+    let record = search_with_extensions(
+        &model,
+        &configuration,
+        &[
+            Registration::Producer(&liar),
+            Registration::Adviser(&ghost),
+            Registration::Adviser(&bomb),
+        ],
+        &backend,
+        &CancellationToken::new(),
+    )
+    .expect("a hostile extension must never make a search fail");
+
+    assert_eq!(
+        record.outcome,
+        SearchOutcome::ProvenOptimal,
+        "hostile extensions must not deny a proof the engine can complete"
+    );
+    assert!(!record.forfeited, "no extension path may forfeit");
+    let found = record.objective.expect("an optimum has an objective");
+    assert!(
+        (found - expected).abs() <= 1e-6,
+        "engine {found} vs enumeration {expected}"
+    );
+    assert_eq!(
+        record.objective, plain.objective,
+        "the proven optimum is identical with and without extensions"
+    );
+
+    // Every one of them was consulted and every one of them was refused.
+    assert_eq!(record.extensions.len(), 3, "all three are summarized");
+    assert!(
+        record
+            .extensions
+            .iter()
+            .all(|summary| summary.registered && summary.accepted == 0),
+        "each was admitted and had nothing accepted: {:?}",
+        record.extensions
+    );
+    assert!(
+        record
+            .extensions
+            .iter()
+            .any(|summary| !summary.failures.is_empty()),
+        "the refusals are recorded rather than absorbed silently"
+    );
+
+    // The published incumbent still satisfies the original model.
+    let candidate = record.candidate.as_ref().expect("incumbent");
+    let report = model.evaluate(candidate, tolerances()).expect("report");
+    assert!(report.feasible);
+    assert_eq!(record.objective, Some(report.objective));
 }

@@ -11,11 +11,18 @@ use serde::{Deserialize, Serialize};
 use optimizer_core::{
     Candidate, ErrorKind, ObjectiveSense, SolveOptions, ValidationError, ValidationReport,
 };
+use optimizer_extension::{ExtensionPolicy, ExtensionSummary, validate_policies};
 
 use crate::serde_strict::deserialize_object;
 
 /// Current search configuration, record and checkpoint wire version.
-pub const SEARCH_SCHEMA_VERSION: u32 = 1;
+///
+/// Version 2 adds the caller's extension policy to configuration and the
+/// per-extension summary to records, under SPEC-0004. Version 1 documents are
+/// rejected rather than migrated: a version-1 record of an extension-influenced
+/// search would claim to be sufficient to repeat a search it does not describe.
+/// [`Checkpoint`] moves with this constant even though its shape is unchanged.
+pub const SEARCH_SCHEMA_VERSION: u32 = 2;
 
 /// Explicit search configuration.
 ///
@@ -38,6 +45,11 @@ pub struct SearchOptions {
     pub improvement_tolerance: f64,
     /// Configuration applied to every node relaxation.
     pub relaxation: SolveOptions,
+    /// Extensions the caller permits, with their counted budgets.
+    ///
+    /// An empty list means no extension participates, and such a search must
+    /// produce the record the extension-free entry point produces.
+    pub extensions: Vec<ExtensionPolicy>,
 }
 
 deserialize_object!(SearchOptions {
@@ -48,6 +60,7 @@ deserialize_object!(SearchOptions {
     open_node_limit: Option<u64>,
     improvement_tolerance: f64,
     relaxation: SolveOptions,
+    extensions: Vec<ExtensionPolicy>,
 });
 
 impl SearchOptions {
@@ -80,6 +93,7 @@ impl SearchOptions {
         Ok(Self {
             improvement_tolerance: crate::positive_zero(self.improvement_tolerance),
             relaxation: self.relaxation.validate()?,
+            extensions: validate_policies(&self.extensions)?,
             ..self.clone()
         })
     }
@@ -208,6 +222,12 @@ pub struct SearchRecord {
     pub forfeited: bool,
     /// Executive warnings, retained even on success.
     pub warnings: Vec<String>,
+    /// What each permitted extension did, in extension-identity order.
+    ///
+    /// Empty when no extension was permitted. A reader can see from this alone
+    /// whether an extension influenced the search this record describes, which
+    /// is why it is recorded rather than kept in a separate document.
+    pub extensions: Vec<ExtensionSummary>,
     /// Measured elapsed wall-clock time in milliseconds.
     pub elapsed_ms: u64,
     /// Explicit configuration this search actually used.
@@ -232,6 +252,7 @@ deserialize_object!(SearchRecord {
     relaxations_solved: u64,
     forfeited: bool,
     warnings: Vec<String>,
+    extensions: Vec<ExtensionSummary>,
     elapsed_ms: u64,
     options: SearchOptions,
 });

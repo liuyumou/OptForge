@@ -6,6 +6,44 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- C3 extension runtime and authority model in optimizer-extension, under
+  SPEC-0004 and ADR-0005. Extensions declare identity, category, host contract
+  version, determinism and counted budgets; the core derives their authority
+  from the category and decides what is true. Candidate producers and search
+  advisers are the admitted categories.
+- Every proposed candidate is validated by `Model::evaluate` against the
+  original model before it can become an incumbent, and the recorded objective
+  is that recomputation. An objective an extension asserts is never read.
+- No extension path can forfeit a proof claim, end a search or return an error.
+  An adversarial extension can waste its budget and have everything refused; it
+  cannot deny a proof the engine would otherwise complete.
+- Advised branching is restricted to variables the executive itself found above
+  its integrality tolerance at that node. Branching on an integral value would
+  produce two children that do not tighten the node, so the search could
+  regenerate an identical child forever.
+- Typed extension failures in search records: invalid candidates, invalid
+  advice, both directions of contract-version mismatch, a refused
+  transformation category, an unclaimed problem class, contained panics and
+  exhausted budgets. Counters stay exact while retained messages are capped, so
+  an extension refused once per node cannot grow a record with the search.
+- Search configuration, search records and checkpoints move to schema version 2.
+  Configuration carries the caller's extension policy and records carry one
+  summary per permitted extension, so a record cannot conceal that extensions
+  influenced it. Version-1 documents are rejected rather than migrated.
+- `search_with_extensions` alongside `search`, which remains the extension-free
+  entry point. A search with an empty policy produces the same record as the
+  extension-free one apart from measured elapsed time.
+- optimizer-extension-examples: three honest extensions and three hostile ones
+  covering 17 distinct misbehavior modes, depending only on the published
+  extension and core APIs with the executive as a test-only dependency. That
+  they build and run is the evidence that a third-party extension needs no
+  engine-internal change.
+- C3 acceptance evidence: over a fixed model grid every hostile extension leaves
+  the outcome, proven optimum, dual bound, forfeiture state and both prune
+  counters identical to the extension-free run, which itself agrees with
+  brute-force enumeration. Extension containment covers panics, not a process
+  abort. No performance claim is made.
+
 - C2 owned branch-and-bound executive in optimizer-solver, under SPEC-0003 and
   ADR-0004. It owns node state, budgets, cancellation, incumbent acceptance and
   proof completion, and consumes the C1 backend contract purely as a relaxation
@@ -85,7 +123,10 @@ User-visible changes are recorded here using Conventional Commit terminology.
 - CPU CI, documentation builds, dependency policy, and manual serialized GPU CI.
 - Contract tests, bounded smoke artifacts, project rules, and milestone backlog.
 
-No CUDA kernels, Python SDK, extension registry, or solver performance claims are
-included. Owned branch-and-bound search proves optimality but is not tuned and is
-not compared against any other solver. Relaxations are single-threaded CPU HiGHS
-under recorded numerical settings; no benchmark comparison is claimed.
+No CUDA kernels, Python SDK, extension registry, dynamically loaded native
+extensions, or solver performance claims are included. Owned branch-and-bound
+search proves optimality but is not tuned and is not compared against any other
+solver. Extensions may propose candidates and search actions; the core validates
+every one, and extension containment covers panics rather than a process abort.
+Relaxations are single-threaded CPU HiGHS under recorded numerical settings; no
+benchmark comparison is claimed.

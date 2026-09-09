@@ -26,7 +26,9 @@ native = []
 [dependencies]
 optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
 
-# C2 end-to-end acceptance lives here so optimizer-solver keeps its
+# C2 and C3 end-to-end acceptance lives here so optimizer-solver keeps its
 # backend-neutrality guarantee: the executive must not depend on this crate.
 [dev-dependencies]
+optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
+optimizer-extension-examples = { version = "0.1.0", path = "../optimizer-extension-examples" }
 optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }

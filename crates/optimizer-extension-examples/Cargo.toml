@@ -1,0 +1,20 @@
+[package]
+name = "optimizer-extension-examples"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
+
+# This crate depends only on the published extension and core APIs. The
+# executive is a test-only dependency, so "an independently authored extension
+# builds and runs without engine-internal changes" is established by the
+# workspace build rather than asserted in prose.
+[dev-dependencies]
+optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }
+
+[lints]
+workspace = true

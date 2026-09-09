@@ -4,10 +4,10 @@ Status: accepted
 Scope: optimizer-solver owned branch-and-bound executive
 Owner: search executive
 Introduced: C2
-Last reviewed commit: c742064
+Last reviewed commit: b934dbd
 Supersedes: none
 Implementation: [executive](../../crates/optimizer-solver/src/executive.rs), [contracts](../../crates/optimizer-solver/src/search.rs), [nodes](../../crates/optimizer-solver/src/node.rs)
-Tests: [search contracts](../../crates/optimizer-solver/tests/executive.rs), [native end to end](../../crates/optimizer-highs/tests/executive.rs)
+Tests: [search contracts](../../crates/optimizer-solver/tests/executive.rs), [native end to end](../../crates/optimizer-highs/tests/executive.rs), [extension independence](../../crates/optimizer-extension-examples/tests/acceptance.rs)
 
 ## Purpose
 
@@ -20,10 +20,13 @@ A backend termination describes one relaxation solve. This specification defines
 separate, stronger claim: that the executive itself exhausted its own node tree.
 Neither claim implies the other, and neither is an exact-arithmetic certificate.
 
-Excluded: extensions and the authority model (C3); presolve, scaling,
+Excluded: presolve, scaling,
 reoptimization, cut generation and numerical recovery (Stage 5); parallel search;
 decomposition; portfolios; any performance claim. Node and work-item interfaces
 MUST remain usable by those later capabilities, but none is introduced here.
+Extensions and the authority model are specified separately in
+[SPEC-0004](SPEC-0004-extension-runtime.md), which adds no requirement to this
+one: every rule below holds whether or not an extension participates.
 
 ## Terminology
 
@@ -191,10 +194,16 @@ resources belong to the backend; the executive holds none.
 
 ## Compatibility and Versioning
 
-`SearchOptions`, `SearchRecord` and `Checkpoint` are new documents at
-`schema_version` 1. M1 and C1 documents stay at version 1 and are not migrated.
-Bootstrap and solve schemas are unchanged. The Rust API stays at workspace version
-0.1.0. No Python SDK, CUDA dependency or extension API is introduced.
+`SearchOptions`, `SearchRecord` and `Checkpoint` were new documents at
+`schema_version` 1 in C2 and are at **version 2** since C3, which added the
+caller's extension policy to configuration and the per-extension summary to
+records under [SPEC-0004](SPEC-0004-extension-runtime.md). `Checkpoint` moved
+with the shared constant although its shape is unchanged. Version-1 documents
+are rejected rather than migrated, because a version-1 record of an
+extension-influenced search would claim to be sufficient to repeat a search it
+does not describe. M1 and C1 documents stay at version 1 and are not migrated.
+Bootstrap and solve schemas are unchanged. The Rust API stays at workspace
+version 0.1.0. No Python SDK or CUDA dependency is introduced.
 
 ## Security and Resource Limits
 

@@ -26,16 +26,16 @@ exist, this document says so rather than implying it.
 |---|---|---|
 | 0. Foundation | M0 bootstrap, M1 model/validation authority | Complete |
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
-| 2. Execution | C2 executive, C3 extension runtime | C2 complete; C3 not started, **unspecified** |
+| 2. Execution | C2 executive, C3 extension runtime | Complete |
 | 3. Application | C4 SDK/CLI/registry, C5 scheduling slice | Not started |
 | 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | Not started |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
 
-Only stages 0 and 1 are complete, and C2 within stage 2. Everything below is a
+Only stages 0, 1 and 2 are complete. Everything below is a
 plan, and the performance and learning claims in stages 4 and beyond are
-hypotheses, not results. C2 establishes search correctness only and makes no
-performance claim.
+hypotheses, not results. C2 establishes search correctness only and C3
+establishes extension safety only; neither makes a performance claim.
 
 ---
 
@@ -93,11 +93,11 @@ sanitizer runs over repeated native lifecycles are not yet part of the gate.
 
 **Entry condition:** Stage 1 evidence holds and M1 behavior remains green.
 
-**C2 is implemented under
-[SPEC-0003](docs/specifications/SPEC-0003-solver-executive.md) and
-[ADR-0004](docs/decisions/ADR-0004-owned-search.md). C3 requires an accepted
-specification before any public API is introduced; that specification does not
-exist.**
+**C2 and C3 are implemented under
+[SPEC-0003](docs/specifications/SPEC-0003-solver-executive.md),
+[ADR-0004](docs/decisions/ADR-0004-owned-search.md),
+[SPEC-0004](docs/specifications/SPEC-0004-extension-runtime.md) and
+[ADR-0005](docs/decisions/ADR-0005-extension-authority.md).**
 
 **C2 — Owned solver executive.** Own session state, work scheduling, budgets,
 cancellation, telemetry, checkpoint shape, incumbent acceptance, and proof
@@ -129,12 +129,34 @@ are justified.
 - Termination does not depend on backend correctness: a backend returning
   solutions outside the node it was given forfeits rather than looping.
 
-*Evidence that still closes this stage (C3):*
+*C3 evidence (recorded, not projected):*
 
-- Independently authored extensions build and run without engine-internal changes,
-  while core validation remains authoritative.
-- Invalid actions, incompatible versions, crashes, and resource abuse produce
-  structured artifacts rather than silent degradation.
+- Three honest extensions and three hostile ones covering 17 distinct
+  misbehavior modes live in their own crate, which depends on the published
+  extension and core APIs and takes the executive only as a test dependency.
+  That they build and run at all is the evidence that a third-party extension
+  needs no engine-internal change.
+- Over the fixed model grid, every hostile extension leaves the outcome, the
+  proven optimum, the dual bound, the forfeiture state and both prune counters
+  identical to the extension-free run, which itself agrees with brute-force
+  enumeration. Budgets are unlimited for these comparisons, because a hostile
+  adviser spending a node budget badly changes exploration quality rather than
+  correctness.
+- An empty extension policy reproduces the extension-free record exactly, apart
+  from measured elapsed time.
+- Invalid candidates, invalid advice, both directions of contract-version
+  mismatch, a refused transformation category, contained panics and exhausted
+  budgets each produce a typed record entry. Recorded diagnostics stay bounded
+  under an extension that is refused once per node.
+- A proposal's claimed objective is never read; the record's objective is the
+  independent recomputation. An adviser that always names an integral variable
+  terminates rather than regenerating a child forever.
+
+*Known limits, carried forward rather than hidden:* the extension host is
+in-process, so containment covers panics but not a process abort or a memory
+fault; process isolation and dynamically loaded native extensions are deferred
+and need their own decision record. No memory budget is enforced per extension.
+C3 establishes safety and makes no claim that any adviser improves search.
 
 ## Stage 3 — Application
 

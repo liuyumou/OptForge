@@ -50,6 +50,25 @@ A relaxation limit must be shown to prune nothing and to forfeit the proof
 claim. Termination must not depend on backend correctness: a backend returning
 solutions outside the node it was given must forfeit rather than loop.
 
+C3 adds [extension runtime contracts](../../crates/optimizer-extension/tests/contracts.rs)
+and [independent extension acceptance](../../crates/optimizer-extension-examples/tests/acceptance.rs).
+The runtime contracts need no executive, so version negotiation, counted
+budgets and panic containment stay covered independently of any search. The
+acceptance suite lives in the examples crate, which depends on the published
+extension and core APIs and takes the executive only as a test dependency, so
+"an independently authored extension runs without engine-internal changes" is
+established by the workspace build rather than asserted.
+
+The central C3 assertion is negative: for every deliberately hostile extension,
+the outcome, proven optimum, dual bound, forfeiture state and prune counters
+must equal the extension-free run's over a fixed model grid, which itself agrees
+with brute-force enumeration. Those comparisons use unlimited budgets on
+purpose, because an adviser that spends a node budget badly changes exploration
+quality rather than correctness. An empty extension policy must reproduce the
+extension-free record exactly apart from elapsed time. A hostile adviser that
+always names an integral variable must terminate, which is requirement 12a's
+hazard arriving from a second untrusted source.
+
 C1 adds [solve contract](../../crates/optimizer-core/tests/solve.rs),
 [backend acceptance](../../crates/optimizer-highs/tests/backend.rs),
 [differential](../../crates/optimizer-highs/tests/differential.rs),

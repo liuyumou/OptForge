@@ -1,8 +1,8 @@
 # Architecture
 
-Purpose: define stable ownership boundaries. Scope: M0-M1, C1 and C2, plus planned dependencies.
+Purpose: define stable ownership boundaries. Scope: M0-M1, C1, C2 and C3, plus planned dependencies.
 Owner: architecture. Status: accepted.
-Last reviewed commit: 98033db.
+Last reviewed commit: b934dbd.
 
 ## Implemented boundaries
 
@@ -51,9 +51,21 @@ optimality, and any other termination forfeits the search's proof claim.
 
 The core owns feasibility, objective recomputation, and mathematical status.
 Extensions may propose candidates or actions; the core must validate them.
+C3 implements that rule under
+[SPEC-0004](../specifications/SPEC-0004-extension-runtime.md) and
+[ADR-0005](../decisions/ADR-0005-extension-authority.md). optimizer-extension
+owns the declaration document, the authority model derived from an extension's
+category, and the guarded host that counts budgets and contains panics.
+optimizer-solver validates every proposal with `Model::evaluate` against the
+original model and every action against its real frontier and its own
+recomputed branchable set. No extension path can forfeit a proof claim, end a
+search, or return an error, so an adversarial extension cannot deny a proof the
+engine would otherwise complete. Containment covers panics, not a process abort;
+process isolation and dynamically loaded native extensions are deferred.
+
 Raw native handles remain inside the corresponding FFI crate.
 M1 defines candidate numerical tolerances. C1 records backend termination under
-explicit native settings; owned proof contracts remain deferred to C2.
+explicit native settings; owned proof contracts belong to C2.
 
 ## Ownership and resources
 
@@ -63,6 +75,8 @@ explicit native settings; owned proof contracts remain deferred to C2.
 | optimizer-highs | Safe backend lifecycle and status mapping | C1 |
 | optimizer-schedule | Flow-shop recurrence and heuristics | C5 |
 | optimizer-solver | Search executive, branch and bound | C2 |
+| optimizer-extension | Extension declarations, authority model, guarded host | C3 |
+| optimizer-extension-examples | Independently authored and adversarial extensions | C3 |
 | optimizer-cuda | Discovery, ownership, later kernels | M0 / C6 |
 | optimizer-experiment | Schemas, later experiment execution | M0 / C4 |
 | optimizer-cli | Agent-independent command interface | M0 |
@@ -70,7 +84,10 @@ explicit native settings; owned proof contracts remain deferred to C2.
 optimizer-highs is the only crate permitted to contain unsafe code. Because a
 workspace-level `forbid` cannot be relaxed by an inner crate, it declares its own
 lints rather than inheriting the workspace lints; every other runtime crate keeps
-the prohibition. See [ADR-0003](../decisions/ADR-0003-highs-backend.md).
+the prohibition. See [ADR-0003](../decisions/ADR-0003-highs-backend.md). The
+extension runtime keeps that prohibition too, which is why C3 specifies the
+versioned C boundary without implementing it: a second unsafe boundary needs its
+own decision record. See [ADR-0005](../decisions/ADR-0005-extension-authority.md).
 
 All GPU devices share one host lease. Selection uses UUIDs. Later transfers and
 batching must be explicit; timings include overhead. Multi-GPU work is deferred.

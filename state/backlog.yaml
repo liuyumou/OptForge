@@ -1,5 +1,5 @@
 schema_version: 1
-current_milestone: C2
+current_milestone: C3
 next_ready_milestone: C3
 tasks:
   - id: M0
@@ -30,6 +30,7 @@ tasks:
     title: Extension runtime and authority model
     status: ready
     depends_on: [C2]
+    specification: docs/specifications/SPEC-0004-extension-runtime.md
     acceptance: "Independent extension conformance, invalid-action rejection, compatibility and resource failures"
   - id: C4
     title: Agent-independent SDK, CLI, experiment workspace, and local registry

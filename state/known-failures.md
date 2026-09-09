@@ -44,3 +44,24 @@ SPEC-0002's acceptance list mentions running repeated native lifecycle tests und
 available sanitizers. The repeated-lifecycle test exists and passes, but no
 sanitizer run is part of `tools/check.sh` yet. This is an uncovered part of the C1
 acceptance list, recorded rather than waived silently.
+
+## Extension containment covers panics only
+
+The C3 extension host runs extensions in-process and contains panics with
+`catch_unwind`. It cannot contain a process abort, stack exhaustion or a memory
+fault, and it enforces no per-extension memory budget. A hostile extension can
+therefore still take down the process, even though it cannot affect a search's
+mathematical conclusion. Reproduction: an extension calling
+`std::process::abort` ends the test process. Next step: process-isolated
+workers, which SPEC-0004 defers and which need their own decision record. The
+host also requires the unwind panic strategy; no repository profile sets
+`panic = "abort"`, and nothing currently pins that.
+
+## Dynamically loaded native extensions are not implemented
+
+SPEC-0004 specifies host-contract-version negotiation and implements it in safe
+Rust, but the versioned C-compatible boundary for separately distributed native
+components is deliberately absent. It needs a second unsafe boundary, which
+ADR-0003 prohibits outside optimizer-highs, so it requires an amending decision
+record plus its own lifecycle, ABI-stability and crash-isolation evidence. This
+is a recorded deferral, not a gap discovered late.

@@ -7,6 +7,7 @@ license.workspace = true
 
 [dependencies]
 optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
 serde.workspace = true
 serde_json.workspace = true
 
