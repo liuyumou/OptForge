@@ -353,6 +353,11 @@ impl SolveRecord {
     }
 
     /// Parse one complete versioned solve record.
+    ///
+    /// Nested documents are versioned too, and their versions are checked here
+    /// rather than deferred: the version-1 schemas pin them, so accepting a
+    /// wrongly versioned incumbent or configuration would make this parser
+    /// laxer than `tools/validate_artifacts.py`.
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         let record: Self = serde_json::from_slice(bytes)
             .map_err(|error| ValidationError::new(ErrorKind::Document, error.to_string()))?;
@@ -362,7 +367,27 @@ impl SolveRecord {
                 format!("unsupported solve schema_version {}", record.schema_version),
             ));
         }
+        record.check_nested_versions()?;
         Ok(record)
+    }
+
+    /// Check every nested versioned document this record carries.
+    ///
+    /// `Candidate::canonical` is deliberately not used: it also sorts and
+    /// range-checks values, and parsing a record must reject a wrong version
+    /// without silently rewriting the document it was handed.
+    fn check_nested_versions(&self) -> Result<(), ValidationError> {
+        if let Some(candidate) = &self.candidate {
+            crate::nested_version("candidate", candidate.schema_version, crate::SCHEMA_VERSION)?;
+        }
+        if let Some(validation) = &self.validation {
+            crate::nested_version(
+                "validation",
+                validation.schema_version,
+                crate::SCHEMA_VERSION,
+            )?;
+        }
+        crate::nested_version("options", self.options.schema_version, SOLVE_SCHEMA_VERSION)
     }
 }
 

@@ -4,7 +4,7 @@ Status: accepted
 Scope: CPU LP/MILP backend and solve CLI
 Owner: numerical backend
 Introduced: C1
-Last reviewed commit: 5d6b50b
+Last reviewed commit: a85da69
 Supersedes: none
 Implementation: [contract](../../crates/optimizer-core/src/solve.rs), [adapter](../../crates/optimizer-highs/src/lib.rs), [native path](../../crates/optimizer-highs/src/native.rs), [CLI](../../crates/optimizer-cli/src/solve.rs)
 Tests: [contract](../../crates/optimizer-core/tests/solve.rs), [backend](../../crates/optimizer-highs/tests/backend.rs), [differential](../../crates/optimizer-highs/tests/differential.rs), [CLI](../../crates/optimizer-cli/tests/solve.rs), [schemas](../../tests/integration/test_solve_artifacts.py)
@@ -51,7 +51,11 @@ recorded tolerances. A basis is an opaque, model-bound LP warm start.
 10. The CLI MUST preserve native OS paths, bound JSON files to 16 MiB, reject
     unknown/duplicate arguments and return categorized I/O and argument failures.
 11. Records MUST be versioned, serializable without nonfinite numbers and retain
-    enough configuration and backend provenance to repeat the solve.
+    enough configuration and backend provenance to repeat the solve. Parsing a
+    record MUST validate the versions of the documents nested inside it, not
+    only its own: the version-1 schemas pin every nested `schema_version`, so a
+    parser checking only the outer version would accept records the artifact
+    validation tooling rejects.
 
 ## Interfaces
 
@@ -113,8 +117,11 @@ native numeric boundaries, empty/infeasible/unbounded/poorly-scaled fixtures.
 Requirements 4-8: every native status, standalone LP/MILP comparisons, independent
 candidate checks, time/iteration/node limits and cancellation. Requirement 9:
 candidate and basis round trips plus wrong-model rejection. Requirements 10-11:
-CLI strict inputs, output failures, deterministic configuration round trips and
-reproducible records. Repeated lifecycle tests run under available sanitizers.
+CLI strict inputs, output failures, deterministic configuration round trips,
+reproducible records, and rejection of a record whose nested candidate,
+validation report or configuration carries a wrong version, each mutated by
+parsed field name so no assertion depends on serialized position. Repeated
+lifecycle tests run under available sanitizers.
 All CPU contracts and bash tools/check.sh are required before C1 completion.
 
 ## Open Questions

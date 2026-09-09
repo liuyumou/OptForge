@@ -98,6 +98,15 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Fixed
 
+- Record parsing validates the versions of the documents nested inside a
+  record, not only the record's own version. The version-1 JSON Schemas already
+  pin every nested `schema_version`, so `SolveRecord::from_json`,
+  `SearchRecord::from_json` and `Checkpoint::from_json` previously accepted
+  documents `tools/validate_artifacts.py` rejects. A wrongly versioned
+  incumbent, validation report, relaxation configuration, extension summary or
+  extension policy is now a document error at parse time. Strictly narrowing:
+  no document that was valid under both paths becomes invalid.
+
 - Model and candidate file paths preserve native OS strings, including non-UTF-8
   Unix names; malformed command/flag/tolerance text returns an argument error.
 - Incomplete and unknown model commands include the argument error category.

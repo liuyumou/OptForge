@@ -1208,6 +1208,78 @@ fn records_reject_bad_versions_and_nonfinite_values() {
     );
 }
 
+/// Requirement 22: a record's nested versioned documents are validated on
+/// parse, not only its own version.
+///
+/// This is the contract whose absence let the version assertion above be
+/// mutated on a nested field and still appear to pass. The version-1 schemas
+/// already pin every nested `schema_version`, so a parser that checked only
+/// the outer version would be laxer than the artifact validation tooling.
+#[test]
+fn nested_document_versions_are_validated_on_parse() {
+    let discrete = model(
+        "nested",
+        &[(0, Domain::Integer, 0.0, 3.0)],
+        &[(0, None, Some(2.0), &[(0, 1.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0)],
+    );
+    let record = run(&discrete, &options());
+    assert_eq!(record.outcome, SearchOutcome::ProvenOptimal);
+    assert!(
+        record.candidate.is_some() && record.validation.is_some(),
+        "this record must carry the nested documents under test"
+    );
+
+    let json = record.to_json().expect("serializable");
+    assert_eq!(
+        SearchRecord::from_json(json.as_bytes()).expect("round trip"),
+        record,
+        "the intact record round trips, so each rejection below is the version"
+    );
+
+    // Every nested versioned document is rejected on its own. Mutation targets
+    // a parsed field by path, so no assertion depends on serialized position.
+    for path in [
+        vec!["candidate"],
+        vec!["validation"],
+        vec!["options", "relaxation"],
+    ] {
+        let mut document: serde_json::Value = serde_json::from_str(&json).expect("valid JSON");
+        let mut cursor = &mut document;
+        for step in &path {
+            cursor = &mut cursor[*step];
+        }
+        cursor["schema_version"] = serde_json::json!(9);
+        let mutated = serde_json::to_string(&document).expect("serializable");
+
+        let error = SearchRecord::from_json(mutated.as_bytes())
+            .expect_err("a wrongly versioned nested document must be rejected");
+        assert_eq!(error.kind, ErrorKind::Document, "{path:?}: {error}");
+    }
+
+    // A checkpoint's nested incumbent is checked the same way. The initial
+    // checkpoint has none, so one is attached deliberately.
+    let mut checkpoint = initial_checkpoint(&discrete, &options()).expect("checkpoint");
+    checkpoint.incumbent = record.candidate.clone();
+    let json = checkpoint.to_json().expect("serializable");
+    assert!(
+        optimizer_solver::Checkpoint::from_json(json.as_bytes()).is_ok(),
+        "a checkpoint carrying a current-version incumbent parses"
+    );
+
+    let mut document: serde_json::Value = serde_json::from_str(&json).expect("valid JSON");
+    document["incumbent"]["schema_version"] = serde_json::json!(9);
+    let mutated = serde_json::to_string(&document).expect("serializable");
+    assert_eq!(
+        optimizer_solver::Checkpoint::from_json(mutated.as_bytes())
+            .unwrap_err()
+            .kind,
+        ErrorKind::Document
+    );
+}
+
 /// Requirement 22: search documents reject positional arrays and unknown fields.
 #[test]
 fn search_documents_require_strict_objects() {

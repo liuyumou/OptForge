@@ -1,5 +1,74 @@
 # Active Task
 
+## C3 Review Follow-up: Test Provenance and Nested Versions (2026-09-09)
+
+Objective: resolve three problems found reviewing the C3 commit — a history that
+made four mandatory test repairs indistinguishable from weakened ones, a
+replacement test helper that asserted on serializer whitespace, and Rust record
+parsers laxer than the JSON Schemas about nested document versions.
+
+Status: complete; the branch is three commits and the full gate passes with
+native acceptance covered.
+
+Acceptance gate: the test repair compiles and passes on its own at search
+schema version 1, proving it is not a consequence of the version bump; the
+repaired assertions are shown to fail when the helper is sabotaged, so none is
+vacuous; a record with a wrong nested version is rejected by both
+`from_json` and `tools/validate_artifacts.py`; and `bash tools/check.sh` passes
+with native acceptance covered. Resource budget: CPU only, four Cargo workers,
+no GPU workloads.
+
+Expected changes: the branch history; `crates/optimizer-core/src/{lib,solve}.rs`;
+`crates/optimizer-solver/src/search.rs`; contract tests in optimizer-core,
+optimizer-solver and optimizer-extension-examples; SPEC-0002 requirement 11,
+SPEC-0003 requirement 22, SPEC-0004 requirement 23 and their acceptance
+mappings; CHANGELOG.md and this record.
+
+Evidence (2026-09-09): the branch is `b934dbd` → `9a2eda5` (test repair) →
+`a85da69` (C3) → this commit. `git diff c3-pre-split a85da69` touches only the
+test helper, confirming the split preserved the reviewed C3 content byte for
+byte elsewhere; the pre-split tip is retained as tag `c3-pre-split`. The repair
+commit's 22 contracts pass at version 1 with no extension field present, which
+is what establishes that the repair was independent of the feature rather than
+produced by it. Sabotaging `retarget_version` to a no-op makes both version
+tests fail, so neither is vacuous.
+
+The complete `bash tools/check.sh` gate passed with the native library built and
+linked, with **zero skip messages**. Rust tests rose from 130 to 132: one nested
+version contract in optimizer-core and one in optimizer-solver, plus extension
+document coverage folded into the existing round-trip test. Cargo.lock changed
+only by adding a `serde_json` dev-dependency edge for
+optimizer-extension-examples; no external package version changed.
+
+Why the parser change needed no ADR: `schemas/solve-record-v1.schema.json`
+already pins the nested candidate's `schema_version` to `const 1` and pins
+`options` by `$ref`, and those schemas are normative under SPEC-0007. The Rust
+parsers checked only their own top-level version, so the two enforcement paths
+disagreed and `tools/validate_artifacts.py` rejected documents the Rust parser
+accepted. This change brings code into line with an accepted contract rather
+than deciding anything new, and it is strictly narrowing: no document valid
+under both paths becomes invalid. Verified by parsing one fixture with a wrong
+nested version through both paths and confirming both reject it.
+
+`Candidate::canonical` is deliberately not called on the parse path. It also
+sorts and range-checks values, and parsing a record must reject a wrong version
+without silently rewriting the document it was handed.
+
+Resolved during implementation: the acceptance suite needed `serde_json` as a
+dev-dependency to mutate a parsed document by field path. It is test-only, so
+the examples crate's runtime dependencies remain optimizer-core and
+optimizer-extension alone, and the independence evidence is unaffected.
+
+Noted and not changed: `crates/optimizer-core/tests/solve.rs` still replaces
+every `"schema_version": 1` occurrence in one assertion, which passes only
+because the top-level check fires first. It is not wrong today and its
+assertion is the top-level rule, so it is left alone; the new nested-version
+contract beside it covers what the replacement cannot distinguish.
+
+Follow-up: C4, the agent-independent SDK, CLI, experiment workspace and local
+registry, is dependency-ready. Write its specification before introducing any
+public SDK or registry API.
+
 ## C3 Extension Runtime and Authority Model (2026-09-09)
 
 Objective: implement C3 under a new SPEC-0004: an extension runtime with a

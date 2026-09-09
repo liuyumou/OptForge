@@ -4,7 +4,7 @@ Status: accepted
 Scope: optimizer-solver owned branch-and-bound executive
 Owner: search executive
 Introduced: C2
-Last reviewed commit: b934dbd
+Last reviewed commit: a85da69
 Supersedes: none
 Implementation: [executive](../../crates/optimizer-solver/src/executive.rs), [contracts](../../crates/optimizer-solver/src/search.rs), [nodes](../../crates/optimizer-solver/src/node.rs)
 Tests: [search contracts](../../crates/optimizer-solver/tests/executive.rs), [native end to end](../../crates/optimizer-highs/tests/executive.rs), [extension independence](../../crates/optimizer-extension-examples/tests/acceptance.rs)
@@ -120,7 +120,9 @@ and larger for a maximize sense.
     collection.
 22. Records MUST be versioned, MUST retain node counters and configuration
     sufficient to repeat the search, and MUST omit an unavailable or nonfinite
-    measurement rather than serializing null in place of a number.
+    measurement rather than serializing null in place of a number. Parsing a
+    record or a checkpoint MUST validate the versions of the documents nested
+    inside it, not only its own.
 23. Node relaxations MUST NOT reuse an LP basis across nodes whose bounds differ,
     because a basis is bound to an exact canonical model fingerprint. Warm-start
     reuse between nodes is deferred to Stage 5 reoptimization.
@@ -236,7 +238,9 @@ against independent brute-force enumeration over the full assignment space,
 covering feasible, infeasible, unbounded and proof states. Requirements 17-19:
 each budget triggers its own outcome, and a pre-cancelled search dispatches no
 relaxation. Requirements 20-23: continuous-only pass-through, replay equality of
-two identical searches, absent-not-null serialization, and rejection of basis
+two identical searches, absent-not-null serialization, rejection of a record or
+checkpoint whose nested candidate, validation report, relaxation configuration
+or incumbent carries a wrong version, and rejection of basis
 reuse across differing nodes.
 
 Native relaxations require the pinned library, so those tests report an explicit

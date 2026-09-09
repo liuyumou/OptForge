@@ -12,9 +12,11 @@ optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
 # This crate depends only on the published extension and core APIs. The
 # executive is a test-only dependency, so "an independently authored extension
 # builds and runs without engine-internal changes" is established by the
-# workspace build rather than asserted in prose.
+# workspace build rather than asserted in prose. serde_json is test-only too:
+# the extensions themselves need no serialization.
 [dev-dependencies]
 optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }
+serde_json.workspace = true
 
 [lints]
 workspace = true

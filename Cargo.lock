@@ -165,6 +165,7 @@ dependencies = [
  "optimizer-core",
  "optimizer-extension",
  "optimizer-solver",
+ "serde_json",
 ]
 
 [[package]]

@@ -281,7 +281,87 @@ fn solve_documents_require_strict_versioned_objects() {
     );
 }
 
-// Requirement 6: cancellation is shared by every clone of a token.
+// Requirement 11: a record's nested versioned documents are validated on parse,
+// not only its own version.
+//
+// The version-1 JSON Schemas pin every nested `schema_version`, so a parser
+// checking only the outer version would accept documents
+// tools/validate_artifacts.py rejects. That divergence is what let a search
+// record test mutate a nested version and still appear to pass.
+#[test]
+fn nested_document_versions_are_validated_on_parse() {
+    let candidate = Candidate {
+        schema_version: SCHEMA_VERSION,
+        model_id: "nested".into(),
+        values: vec![Assignment {
+            variable_id: 0,
+            value: 1.0,
+        }],
+    };
+    let model = Model::new(ModelDocument {
+        schema_version: SCHEMA_VERSION,
+        model_id: "nested".into(),
+        variables: vec![Variable {
+            id: 0,
+            domain: Domain::Continuous,
+            lower: Bound::Finite { value: 0.0 },
+            upper: Bound::Finite { value: 2.0 },
+        }],
+        constraints: vec![],
+        objective: Objective {
+            sense: ObjectiveSense::Minimize,
+            offset: 0.0,
+            terms: vec![LinearTerm {
+                variable_id: 0,
+                coefficient: 1.0,
+            }],
+        },
+    })
+    .expect("model");
+    let validation = model.evaluate(&candidate, tolerances()).expect("report");
+
+    let record = SolveRecord {
+        schema_version: SOLVE_SCHEMA_VERSION,
+        model_id: "nested".into(),
+        backend: "highs".into(),
+        backend_version: "1.11.0".into(),
+        termination: Termination::Optimal,
+        native_status: None,
+        objective: Some(validation.objective),
+        best_bound: None,
+        gap: None,
+        candidate: Some(candidate),
+        validation: Some(validation),
+        warnings: vec![],
+        elapsed_ms: 0,
+        options: options(),
+    };
+
+    // The intact record round trips, so each rejection below is caused by the
+    // nested version alone.
+    let json = record.to_json().expect("serializable");
+    assert_eq!(
+        SolveRecord::from_json(json.as_bytes()).expect("round trip"),
+        record
+    );
+
+    // Each nested document is rejected independently. The mutation targets one
+    // parsed field by name, so no assertion depends on where a version happens
+    // to appear in the serialized text.
+    for field in ["candidate", "validation", "options"] {
+        let mut document: serde_json::Value = serde_json::from_str(&json).expect("valid JSON");
+        document[field]["schema_version"] = serde_json::json!(9);
+        let mutated = serde_json::to_string(&document).expect("serializable");
+
+        let error = SolveRecord::from_json(mutated.as_bytes())
+            .expect_err("a wrongly versioned nested document must be rejected");
+        assert_eq!(error.kind, ErrorKind::Document, "{field}: {error}");
+        assert!(
+            error.message.contains(field),
+            "the failure must name the offending field: {error}"
+        );
+    }
+}
 #[test]
 fn cancellation_is_observable_through_every_clone() {
     let token = CancellationToken::new();

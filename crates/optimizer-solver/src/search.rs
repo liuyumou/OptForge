@@ -8,10 +8,13 @@
 
 use serde::{Deserialize, Serialize};
 
+use optimizer_core::nested_version;
 use optimizer_core::{
     Candidate, ErrorKind, ObjectiveSense, SolveOptions, ValidationError, ValidationReport,
 };
-use optimizer_extension::{ExtensionPolicy, ExtensionSummary, validate_policies};
+use optimizer_extension::{
+    EXTENSION_SCHEMA_VERSION, ExtensionPolicy, ExtensionSummary, validate_policies,
+};
 
 use crate::serde_strict::deserialize_object;
 
@@ -96,6 +99,27 @@ impl SearchOptions {
             extensions: validate_policies(&self.extensions)?,
             ..self.clone()
         })
+    }
+
+    /// Check every nested versioned document this configuration carries.
+    ///
+    /// [`Self::validate`] already rejects a wrong nested version as part of
+    /// validating the nested documents themselves. This exists for the parse
+    /// path, where a record's configuration is read but not re-validated.
+    pub(crate) fn check_nested_versions(&self) -> Result<(), ValidationError> {
+        nested_version(
+            "options.relaxation",
+            self.relaxation.schema_version,
+            optimizer_core::SOLVE_SCHEMA_VERSION,
+        )?;
+        for policy in &self.extensions {
+            nested_version(
+                "options.extensions",
+                policy.schema_version,
+                EXTENSION_SCHEMA_VERSION,
+            )?;
+        }
+        Ok(())
     }
 }
 
@@ -280,6 +304,10 @@ impl SearchRecord {
     }
 
     /// Parse one complete versioned search record.
+    ///
+    /// Nested documents are versioned too, and their versions are checked here
+    /// rather than deferred, so this parser cannot be laxer than the artifact
+    /// validation tooling about a document it accepts.
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         let record: Self = serde_json::from_slice(bytes)
             .map_err(|error| ValidationError::new(ErrorKind::Document, error.to_string()))?;
@@ -292,6 +320,28 @@ impl SearchRecord {
                 ),
             ));
         }
+        if let Some(candidate) = &record.candidate {
+            nested_version(
+                "candidate",
+                candidate.schema_version,
+                optimizer_core::SCHEMA_VERSION,
+            )?;
+        }
+        if let Some(validation) = &record.validation {
+            nested_version(
+                "validation",
+                validation.schema_version,
+                optimizer_core::SCHEMA_VERSION,
+            )?;
+        }
+        for summary in &record.extensions {
+            nested_version(
+                "extensions",
+                summary.schema_version,
+                EXTENSION_SCHEMA_VERSION,
+            )?;
+        }
+        record.options.check_nested_versions()?;
         Ok(record)
     }
 }
@@ -392,7 +442,8 @@ impl Checkpoint {
     /// Parse one complete versioned checkpoint.
     ///
     /// Parsing does not imply restart support; no entry point consumes a
-    /// checkpoint in C2.
+    /// checkpoint. A nested incumbent's own version is checked here, so a
+    /// checkpoint cannot carry a candidate this workspace could not evaluate.
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         let checkpoint: Self = serde_json::from_slice(bytes)
             .map_err(|error| ValidationError::new(ErrorKind::Document, error.to_string()))?;
@@ -404,6 +455,13 @@ impl Checkpoint {
                     checkpoint.schema_version
                 ),
             ));
+        }
+        if let Some(incumbent) = &checkpoint.incumbent {
+            nested_version(
+                "incumbent",
+                incumbent.schema_version,
+                optimizer_core::SCHEMA_VERSION,
+            )?;
         }
         Ok(checkpoint)
     }

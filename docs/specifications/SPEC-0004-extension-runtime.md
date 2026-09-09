@@ -4,7 +4,7 @@ Status: accepted
 Scope: optimizer-extension runtime, authority model and executive integration
 Owner: extension runtime
 Introduced: C3
-Last reviewed commit: b934dbd
+Last reviewed commit: a85da69
 Supersedes: none
 Implementation: [runtime](../../crates/optimizer-extension/src/lib.rs), [declarations](../../crates/optimizer-extension/src/declare.rs), [guarded host](../../crates/optimizer-extension/src/guard.rs), [records](../../crates/optimizer-extension/src/record.rs), [executive integration](../../crates/optimizer-solver/src/hooks.rs)
 Tests: [runtime contracts](../../crates/optimizer-extension/tests/contracts.rs), [independent extensions](../../crates/optimizer-extension-examples/tests/acceptance.rs), [native end to end](../../crates/optimizer-highs/tests/executive.rs)
@@ -134,6 +134,8 @@ permits an extension's output to have.
 23. Extension documents MUST be versioned, MUST reject unknown fields,
     positional arrays and unknown enum variants, and MUST omit an unavailable or
     nonfinite measurement rather than serializing null in place of a number.
+    Parsing a search record MUST validate the version of every extension
+    summary and policy nested inside it, not only the record's own version.
 
 ## Interfaces
 
@@ -300,8 +302,9 @@ a nondeterministic declaration reflected in the record, an unchanged warm-start
 argument, and no adviser invocation for a continuous model with the
 single-relaxation counters intact. Requirements 21-23: version-2 round trips,
 rejection of version 1, unknown fields, positional arrays and unknown variants,
-absent-not-null serialization, and an empty-policy search producing a record
-identical to the extension-free entry point apart from elapsed time.
+absent-not-null serialization, rejection of a record whose nested extension
+summary or policy carries a wrong version, and an empty-policy search producing
+a record identical to the extension-free entry point apart from elapsed time.
 
 Independently authored extensions live in their own crate depending only on the
 published extension and core APIs, with the executive as a test-only dependency,

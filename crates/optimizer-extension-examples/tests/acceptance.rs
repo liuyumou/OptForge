@@ -1207,6 +1207,31 @@ fn extension_influenced_records_round_trip() {
         json.contains("\"authority\": \"propose_validated_candidate\""),
         "the record states the acceptance boundary that applied"
     );
+
+    // The extension documents nested in a record are versioned too, and their
+    // versions are validated on parse rather than deferred. Mutation targets a
+    // parsed field by path, so the assertion cannot depend on serialized
+    // position or on the pretty-printer's formatting.
+    for path in [vec!["extensions", "0"], vec!["options", "extensions", "0"]] {
+        let mut document: serde_json::Value = serde_json::from_str(&json).expect("valid JSON");
+        let mut cursor = &mut document;
+        for step in &path {
+            cursor = match step.parse::<usize>() {
+                Ok(index) => &mut cursor[index],
+                Err(_) => &mut cursor[*step],
+            };
+        }
+        assert!(
+            cursor["schema_version"].is_u64(),
+            "{path:?} must be a versioned document in the serialized record"
+        );
+        cursor["schema_version"] = serde_json::json!(9);
+        let mutated = serde_json::to_string(&document).expect("serializable");
+        assert!(
+            SearchRecord::from_json(mutated.as_bytes()).is_err(),
+            "{path:?}: a wrongly versioned extension document must be rejected"
+        );
+    }
 }
 
 /// Requirement 20: a continuous model consults no adviser and solves once.

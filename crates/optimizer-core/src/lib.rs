@@ -86,6 +86,27 @@ fn zero(value: f64) -> f64 {
     if value == 0.0 { 0.0 } else { value }
 }
 
+/// Reject a nested versioned document whose version is not the expected one.
+///
+/// A record's own version says nothing about the documents inside it. The
+/// version-1 JSON Schemas already pin every nested `schema_version`, so a
+/// parser that checked only the outer version would accept documents
+/// `tools/validate_artifacts.py` rejects, leaving two normative enforcement
+/// paths disagreeing.
+///
+/// # Errors
+///
+/// Returns a document failure naming the nested field and both versions.
+pub fn nested_version(field: &str, found: u32, expected: u32) -> Result<(), ValidationError> {
+    if found != expected {
+        return Err(ValidationError::new(
+            ErrorKind::Document,
+            format!("{field}: unsupported nested schema_version {found}, expected {expected}"),
+        ));
+    }
+    Ok(())
+}
+
 fn finite(value: f64, kind: ErrorKind, context: &str) -> Result<f64, ValidationError> {
     if value.is_finite() {
         Ok(zero(value))
