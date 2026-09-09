@@ -1,5 +1,59 @@
 # Active Task
 
+## Local C3 Integration (2026-09-09)
+
+Objective: verify the reviewed feat/extension-runtime branch from a clean
+checkout, integrate it into local main, and delete the feature branch after
+confirming its commits are retained.
+
+Status: complete; clean-checkout verification, fast-forward integration and
+feature-branch cleanup finished.
+
+Acceptance gate: the complete gate passes in an independent clone with nothing
+prebuilt; fast-forward integration preserves the reviewed tip 6516a6f; the
+feature branch is deleted and the worktree is clean. Resource budget: CPU only,
+four Cargo workers, no GPU workloads.
+
+Evidence (2026-09-09): the branch was cloned to /tmp/c3-verify with no `target/`
+directory present, and `bash tools/check.sh` passed there in 1 minute 44 seconds
+with **zero skip messages**, so native acceptance was genuinely covered rather
+than inherited from a warm build directory. That run built the pinned HiGHS
+1.11.0 library from the checksum-verified upstream archive inside the clone,
+producing both `libhighs.a` (10.2 MB) and the standalone reference executable
+(5.0 MB). It ran 132 Rust tests and 20 Python tests, validated 43 documentation
+pages, and passed cargo-deny, artifact validation and bootstrap smoke.
+
+The clean clone also solved examples/model-v1.json to `termination: optimal`,
+`objective: 2.5`, `backend_version: 1.11.0` with an independently validated
+feasible incumbent and exit 0, matching the workspace result exactly.
+
+This clean-checkout pass is the acceptance evidence for the integration. It was
+run because C3 adds two crates and a new dev-dependency edge, which is exactly
+the case where a stale lockfile or a missing manifest entry hides behind a
+populated `target/`. The C2 integration relied on its pre-integration gate pass
+instead; this record restores the stronger C1 standard.
+
+main was fast-forwarded from b934dbd to 6516a6f without conflicts or history
+rewriting, so the integrated tree is byte-identical to the verified revision.
+`git merge-base --is-ancestor` confirmed the reviewed tip is retained on main,
+`git rev-parse` confirmed main is exactly the verified revision, and
+`git branch -d` removed the fully merged feat/extension-runtime branch. The
+worktree is clean and the bootstrap smoke was rerun on the integrated revision
+for clean revision-bound provenance.
+
+The RustSec advisory-database fetch failed in the clean clone and recovered
+through the cached database, as recorded in [known failures](known-failures.md).
+Bans, licenses and sources were checked normally. No checks were waived.
+
+No remote refs were changed. main is now 3 commits ahead of origin/main and
+remains unpushed pending separate authorization; the origin remote and its
+outstanding protection settings are recorded in
+[known failures](known-failures.md).
+
+Follow-up: C4, the agent-independent SDK, CLI, experiment workspace and local
+registry, is dependency-ready. Write its specification before introducing any
+public SDK or registry API.
+
 ## C3 Review Follow-up: Test Provenance and Nested Versions (2026-09-09)
 
 Objective: resolve three problems found reviewing the C3 commit — a history that
