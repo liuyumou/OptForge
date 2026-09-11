@@ -1,5 +1,47 @@
 # Active Task
 
+## Local C4 Integration (2026-09-11)
+
+Objective: verify the feat/run-surface branch from a clean checkout, integrate it
+into local main, and delete the feature branch after confirming its commits are
+retained.
+
+Status: complete; clean-checkout verification, fast-forward integration and
+feature-branch cleanup finished.
+
+Acceptance gate: the complete gate passes in an independent clone with nothing
+prebuilt; fast-forward integration preserves the reviewed tip 6725d93; the feature
+branch is deleted and the worktree is clean. Resource budget: CPU only, no GPU
+workloads.
+
+Evidence (2026-09-11): the branch was cloned to /tmp/c4-final with
+`--no-hardlinks` and no `target/` directory present, and `bash tools/check.sh`
+passed there in 1 minute 56 seconds with zero skip messages. That run built the
+pinned HiGHS 1.11.0 library from the checksum-verified upstream archive inside the
+clone, ran 159 Rust and 39 Python tests, re-executed the committed run record
+against the freshly built binary, validated 46 documentation pages, and passed
+cargo-deny, artifact validation and bootstrap smoke.
+
+Two stale claims were found and fixed before integration rather than carried onto
+main. AGENTS.md still stated that C3 was the current scope and had no accepted
+specification; it is the first file an agent reads, so a stale scope there
+misdirects work rather than merely aging. And the three review markers named
+692e19f, the parent the documents were written against, rather than the
+implementing revision whose content was reviewed.
+
+main was fast-forwarded from 692e19f to 6725d93 without conflicts or history
+rewriting, so the integrated tree is byte-identical to the verified revision.
+`git merge-base --is-ancestor` confirmed the reviewed tip is retained, and
+`git branch -d` removed the fully merged feat/run-surface branch.
+
+No remote refs were changed. main is now 5 commits ahead of origin/main and
+remains unpushed pending separate authorization.
+
+Follow-up: C5, the flow-shop scheduling vertical slice, is dependency-ready.
+Write its specification before introducing any public scheduling API. C8, the
+local registry, SDK and comparative experiment runner, is also unblocked; the SDK
+needs an ADR amending ADR-0003 before any binding code.
+
 ## C4 Follow-up: Gated Re-execution and Engine Diagnostics (2026-09-11)
 
 Objective: close three gaps found reviewing the C4 slice — a gate that never
