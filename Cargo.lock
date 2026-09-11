@@ -125,7 +125,9 @@ dependencies = [
  "ctrlc",
  "optimizer-core",
  "optimizer-cuda",
+ "optimizer-experiment",
  "optimizer-highs",
+ "optimizer-solver",
  "serde_json",
 ]
 
@@ -148,6 +150,12 @@ dependencies = [
 [[package]]
 name = "optimizer-experiment"
 version = "0.1.0"
+dependencies = [
+ "optimizer-core",
+ "optimizer-solver",
+ "serde",
+ "serde_json",
+]
 
 [[package]]
 name = "optimizer-extension"

@@ -1,12 +1,12 @@
 # AI Optimizer
 
 A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. The current milestone is **C3 complete: an extension
-runtime whose candidate producers and search advisers propose, while the core
-decides**. It validates original linear models and candidates, solves them with
-an independently validated incumbent, proves optimality with its own search, and
-accepts separately authored extensions without granting them any mathematical
-authority.
+selective GPU acceleration. The current milestone is **C4 complete: runs that
+can be repeated and checked by someone who has only their record**. It validates
+original linear models and candidates, solves them with an independently
+validated incumbent, proves optimality with its own search, accepts separately
+authored extensions without granting them any mathematical authority, and records
+each search with the provenance needed to re-execute it.
 
 ## Quick start
 
@@ -26,6 +26,11 @@ cargo run -p optimizer-cli -- hello
 cargo run -p optimizer-cli -- model validate --model examples/model-v1.json
 cargo run -p optimizer-cli -- solve \
   --model examples/model-v1.json --config examples/solve-config-v1.json
+cargo run -p optimizer-cli -- search \
+  --model examples/model-v1.json --config examples/search-config-v2.json \
+  --output artifacts/run.json
+cargo run -p optimizer-cli -- verify \
+  --record artifacts/run.json --model examples/model-v1.json
 cargo run -p optimizer-cli -- gpu discover --dry-run
 bash tools/check.sh
 ```
@@ -33,6 +38,11 @@ bash tools/check.sh
 The hello command prints `hello workspace`. Solving prints a version-1 solve
 record whose objective and violations are recomputed by the core, not echoed from
 the backend; exit 0 means a completed outcome, 1 a limit, 130 an interruption.
+Searching prints a version-1 run record whose embedded search record carries the
+executive's own proof claim, plus the revision, model fingerprint and input
+hashes needed to repeat it. Verifying re-runs that search from the record alone
+and exits 2 on any divergence, naming the field; agreement establishes
+determinism on this host, not optimality.
 Discovery prints JSON with `status: available` and devices sorted by UUID, or
 `status: unavailable` and a diagnostic. It never creates a CUDA context. Checks
 include a bounded process smoke measurement whose artifact is written to
@@ -53,8 +63,10 @@ acceptance was not covered.
 - [Backend contract specification](docs/specifications/SPEC-0002-backend-contract.md)
 - [Solver executive specification](docs/specifications/SPEC-0003-solver-executive.md)
 - [Extension runtime specification](docs/specifications/SPEC-0004-extension-runtime.md)
+- [Run surface specification](docs/specifications/SPEC-0005-run-surface.md)
 - [Validate a model and candidate](docs/tutorials/model-validation.md)
 - [Solve a model](docs/tutorials/solve-a-model.md)
+- [Run and verify a search](docs/tutorials/run-and-verify.md)
 - [GPU discovery and lease contract](docs/specifications/SPEC-0006-gpu-lease.md)
 - [Artifact contract](docs/specifications/SPEC-0007-artifacts.md)
 - [Build and verification](docs/operations/build.md)
@@ -81,12 +93,14 @@ backend. optimizer-extension defines the extension declaration, authority model
 and guarded host; optimizer-extension-examples holds independently authored
 extensions, including deliberately hostile ones, and depends only on the
 published APIs. The CLI exposes validation, solving and GPU
-discovery/ownership; optimizer-experiment embeds artifact schemas. Remaining
+discovery/ownership and the reproducible run surface; optimizer-experiment owns
+run records, their provenance and the verification comparison. Remaining
 numerical crates reserve ownership boundaries without solver APIs.
 `schemas/`, `examples/`, `tests/`, and `tools/` provide executable contracts.
 `docs/` is authoritative; `wiki/` provides navigation. Python SDK, CUDA kernels,
-a local extension registry, dynamically loaded native extensions, and
-performance suites are deferred.
+a local extension registry, dynamically loaded native extensions, checkpoint
+restart and performance suites are deferred, each with its blocker recorded in
+[known failures](state/known-failures.md).
 
 ## License
 

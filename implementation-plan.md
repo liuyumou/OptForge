@@ -27,15 +27,16 @@ exist, this document says so rather than implying it.
 | 0. Foundation | M0 bootstrap, M1 model/validation authority | Complete |
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
 | 2. Execution | C2 executive, C3 extension runtime | Complete |
-| 3. Application | C4 SDK/CLI/registry, C5 scheduling slice | Not started |
+| 3. Application | C4 run surface, C5 scheduling slice, C8 registry/SDK | C4 complete; C5 and C8 not started |
 | 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | Not started |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
 
-Only stages 0, 1 and 2 are complete. Everything below is a
-plan, and the performance and learning claims in stages 4 and beyond are
-hypotheses, not results. C2 establishes search correctness only and C3
-establishes extension safety only; neither makes a performance claim.
+Stages 0, 1 and 2 are complete, and Stage 3's reproducibility evidence is now
+recorded rather than projected. Everything below that is a plan, and the
+performance and learning claims in stages 4 and beyond are hypotheses, not
+results. C2 establishes search correctness only, C3 establishes extension safety
+only, and C4 establishes repeatability only; none makes a performance claim.
 
 ---
 
@@ -163,27 +164,56 @@ C3 establishes safety and makes no claim that any adviser improves search.
 **Entry condition:** Stage 2 proves owned state, search correctness, and
 extension safety.
 
-**C4 — Agent-independent interaction and experiment workspace.** Extend the CLI
-and add Python bindings/SDK after the C1 interfaces have stabilized under real
-use. Support model inspection, validation, pinned solving, progress and
-diagnostics, cancellation, comparative experiments, profiling, extension
-conformance, and artifact retrieval through documented files and records. Maintain
-disposable experimental and pinned execution workspaces, plus a local registry for
-versions, licenses, compatibility, authority basis, failures, interactions,
-manifests, and results. MCP may wrap these interfaces but is not required for
-execution.
+**C4 — Agent-independent run surface (complete).** Implemented under
+[SPEC-0005](docs/specifications/SPEC-0005-run-surface.md) and
+[ADR-0006](docs/decisions/ADR-0006-run-provenance.md). `optimizer search` drives
+the owned executive over the pinned backend and writes a run record carrying the
+revision, dirty state, hardware, toolchain, canonical model fingerprint and input
+hashes; `optimizer verify` re-runs the search from that record alone and reports
+divergence by field. This is the first surface reaching the C2 executive and C3
+extension host from outside Rust test code.
+
+The remaining items from C4's original scope keep their own specifications and
+gates as **C8**: the local registry for versions, licenses, compatibility,
+authority basis, failures and interactions; the Python SDK, whose blocker is
+recorded because pyo3 requires an unsafe boundary ADR-0003 does not permit;
+comparative experiment execution over a frozen manifest; and progress streaming
+and checkpoint restart, which need new public search surface. MCP may wrap these
+interfaces but is not required for execution.
 
 **C5 — Scheduling vertical slice.** Flow-shop instances, makespan recurrence,
 deterministic NEH and insertion candidates, independent evaluation, and model
 adapters through the common C1-C3 interfaces. Job-shop follows only after
 flow-shop correctness and reproducibility gates pass.
 
-*Evidence that closes this stage:*
+*C4 evidence (recorded, not projected):*
 
-- A run remains reproducible from pinned revisions and records after its
-  originating agent is unavailable.
+- A run remains reproducible from its record after its originating agent is
+  unavailable: verification reads only the record's embedded configuration and
+  the model it names, never the recorded result, and re-runs the search.
+- Verification is shown to fail as well as pass. A model whose coefficient
+  changed under an unchanged `model_id` is refused on its fingerprint, and each
+  of the ten compared fields is detected when it alone is mutated, so no field is
+  nominally compared and actually ignored.
+- A record differing only in measured elapsed time still verifies, which fixes
+  that number as diagnostic rather than contractual.
+- A node-limited search writes its record, exits 1, and verifies as limited; a
+  forfeited search that verifies still reports forfeiture. Agreement cannot
+  launder a claim C2 declined to make.
+- The run record satisfies both normative authorities: the Rust parser and the
+  JSON Schemas accept the same documents, with nested versions checked on the
+  parse path.
+
+*Remaining evidence for this stage:*
+
 - Exhaustive tiny instances, independent evaluator agreement, validated
-  incumbents, and a frozen Taillard development subset pass with provenance.
+  incumbents, and a frozen Taillard development subset pass with provenance (C5).
+
+*Known limits, carried forward rather than hidden:* agreement is evidence of
+determinism on one host over time, not of correctness; cross-host reproducibility
+is untested; verification assumes an unchanged native library and cannot
+distinguish a changed engine from a wrong result; checkpoint restart and progress
+streaming remain unimplemented.
 
 ## Stage 4 — Research
 

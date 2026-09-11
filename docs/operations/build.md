@@ -1,6 +1,6 @@
 # Build and Verify
 
-Purpose: reproduce local and CI acceptance. Scope: Linux, M0-M1 and C1.
+Purpose: reproduce local and CI acceptance. Scope: Linux, M0-M1 and C1 through C4.
 
 Install rustup, Python 3.11+, Git and util-linux. Solving additionally requires
 CMake and a C++ compiler for the pinned HiGHS build. The root toolchain file pins

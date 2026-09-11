@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/liuyumou/OptForge/schemas/search-config-v2.schema.json",
+  "title": "Search configuration, version 2",
+  "description": "Explicit owned-search configuration under SPEC-0003. Every budget is caller-supplied and there are deliberately no defaults, so a record always states the budgets that produced it. Version 2 carries the caller's extension policy under SPEC-0004; an empty list means no extension participates.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "seed",
+    "node_limit",
+    "time_limit_ms",
+    "open_node_limit",
+    "improvement_tolerance",
+    "relaxation",
+    "extensions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "seed": {
+      "description": "Deterministic seed recorded for this search.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "node_limit": {
+      "description": "Limit on explored nodes, or null for unlimited.",
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "time_limit_ms": {
+      "description": "Wall-clock limit in milliseconds, or null for unlimited.",
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "open_node_limit": {
+      "description": "Bound on the open-node frontier, or null for unlimited.",
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "improvement_tolerance": {
+      "description": "Absolute objective improvement required to accept an incumbent or to refuse a prune, in the original objective's units.",
+      "type": "number",
+      "minimum": 0
+    },
+    "relaxation": {
+      "$ref": "solve-config-v1.schema.json"
+    },
+    "extensions": {
+      "description": "Extensions the caller permits, with their counted budgets. Budgets are counts rather than durations so the search path does not depend on machine speed.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schema_version",
+          "extension_id",
+          "invocation_budget",
+          "proposal_budget"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": 1
+          },
+          "extension_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "invocation_budget": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "proposal_budget": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    }
+  }
+}

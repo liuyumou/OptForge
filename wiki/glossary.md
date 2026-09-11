@@ -22,3 +22,8 @@
 | Declaration | Versioned document by which an extension states identity, category, contract version, determinism and budgets |
 | Rejection | Core refusal of one proposal or action; the search continues unchanged |
 | Disabling | Permanent exclusion of one extension from the remainder of one search |
+| Run record | One search plus the provenance needed to repeat it; [SPEC-0005](../docs/specifications/SPEC-0005-run-surface.md) |
+| Provenance | Revision, dirty state, hardware, toolchain, model fingerprint and input hashes identifying what produced a record |
+| Verification | Re-executing a run from its record and comparing the two search records; evidence of determinism, never of optimality |
+| Divergence | A named difference between a recorded search and its re-execution |
+| Model fingerprint | Hash of the canonical model document, identifying model bytes rather than model identity |

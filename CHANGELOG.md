@@ -6,6 +6,50 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- C4 agent-independent run surface, under SPEC-0005 and ADR-0006. `optimizer
+  search` runs the owned executive over the pinned backend and writes a run
+  record; `optimizer verify` re-runs that search from the record alone and fails
+  on disagreement. Before this, the C2 executive and the C3 extension host were
+  reachable only from Rust test code.
+- Reproducibility is established by re-execution rather than asserted.
+  Verification reads only the configuration embedded in a record, never its
+  recorded outcome, objective, bound or counters, so it cannot confirm its own
+  input. Divergence in the outcome, recomputed objective, dual bound, gap,
+  forfeiture state or any of the five counters is reported by name.
+- Measured elapsed time is recorded and excluded from agreement. It describes the
+  host rather than the search, so including it would make every verification
+  fail.
+- A record is bound to model bytes by `Model::fingerprint`, not by `model_id`, so
+  a model edited under an unchanged identifier is refused before any search runs.
+  This is the rule C1 already applied to LP bases.
+- `RunRecord` in optimizer-experiment at schema version 1, carrying source
+  revision, dirty state, hardware, toolchain, the canonical model fingerprint,
+  the SHA-256 of each input document, and the complete `SearchRecord` embedded
+  verbatim. Provenance field names are taken from SPEC-0007's experiment result
+  so the repository's two provenance shapes cannot drift apart.
+- A search that reached a limit or was interrupted still writes its record and
+  reports exit 1 or 130. Only a run that could not start writes nothing, because
+  there was no run to describe.
+- A configuration naming an extension policy is refused as unsupported rather
+  than run without the extension it names, which would record a search the caller
+  did not request. That refusal marks the seam the deferred registry fills.
+- JSON Schemas for the run record, the search record and search configuration,
+  giving C2 and C3 documents their first schema coverage. The Rust parsers and the
+  schemas accept the same documents, and nested versions are validated on the
+  parse path so neither authority is laxer than the other.
+- SHA-256 in safe Rust, checked against the FIPS 180-4 vectors and independently
+  against Python's `hashlib` over the committed documents, rather than adding six
+  transitive dependencies under a `multiple-versions = "deny"` policy.
+- C4 acceptance evidence: verification is shown to fail as well as pass. A
+  perturbed model is refused on its fingerprint, and a mutated outcome,
+  objective, forfeiture flag and each counter are detected individually, so no
+  field is nominally compared and actually ignored. Agreement establishes
+  determinism on one host, not correctness and not optimality; a forfeited search
+  stays forfeited after it verifies. Cross-host reproducibility is untested and
+  no performance claim is made. The Python SDK, the local registry, checkpoint
+  restart and comparative experiment execution are deferred with recorded
+  blockers.
+
 - C3 extension runtime and authority model in optimizer-extension, under
   SPEC-0004 and ADR-0005. Extensions declare identity, category, host contract
   version, determinism and counted budgets; the core derives their authority

@@ -61,6 +61,30 @@ def validate_manifest(path):
     return manifest
 
 
+def validate_run_record(path):
+    """Validate one run record and its provenance (SPEC-0005)."""
+    record = read_json(path)
+    validator("run-record-v1.schema.json").validate(record)
+    roles = [document["role"] for document in record["inputs"]]
+    if sorted(roles) != ["config", "model"]:
+        raise ValueError("run record must name exactly one model and one config input")
+    # An input hash is verified when the document is still in the repository, so
+    # a record cannot claim bytes the tree does not contain.
+    for document in record["inputs"]:
+        target = (ROOT / document["path"]).resolve()
+        if not target.is_relative_to(ROOT):
+            raise ValueError("input path escapes repository")
+        if target.exists() and hashlib.sha256(target.read_bytes()).hexdigest() != document["sha256"]:
+            raise ValueError(f"input checksum mismatch: {target}")
+    if record["revision"] == "0" * 40 and not record["warnings"]:
+        raise ValueError("an example record must say it is not a measurement")
+    # A limit or failure never carries a proof, matching SPEC-0003.
+    proven = {"proven_optimal", "proven_infeasible", "unbounded_or_infeasible"}
+    if record["search"]["forfeited"] and record["search"]["outcome"] in proven:
+        raise ValueError("a forfeited search must not report a completed proof")
+    return record
+
+
 def validate_result(path):
     result = read_json(path)
     validator("experiment-result-v1.schema.json").validate(result)
@@ -98,6 +122,8 @@ def main():
     else:
         validator("run-config-v1.schema.json").validate(read_json(ROOT / "examples/run-config.json"))
         validator("solve-config-v1.schema.json").validate(read_json(ROOT / "examples/solve-config-v1.json"))
+        validator("search-config-v2.schema.json").validate(read_json(ROOT / "examples/search-config-v2.json"))
+        validate_run_record(ROOT / "examples/run-record-v1.json")
         for path in sorted((ROOT / "benchmarks/manifests").glob("*.json")):
             validate_manifest(path)
         validate_result(ROOT / "examples/experiment-result.json")

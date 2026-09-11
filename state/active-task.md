@@ -1,5 +1,130 @@
 # Active Task
 
+## C4 Agent-Independent Run Surface (2026-09-11)
+
+Objective: implement the first C4 slice under a new SPEC-0005: expose the C2
+executive and C3 extension host through the CLI, wrap each search in a
+provenance-bearing run record, and add a verification command that re-runs a
+search from its record alone and fails on disagreement.
+
+Status: complete; the specification preceded the implementation, and the full
+gate passes with native acceptance covered.
+
+Acceptance gate: a search performed through the CLI writes a schema-valid run
+record carrying source revision, dirty state, hardware, toolchain, backend
+identity and version, the canonical model fingerprint and hashed inputs; that
+record is re-executable by `optimizer verify` using only its embedded
+configuration and the model it names; verification detects a mutated outcome,
+objective, dual bound, forfeiture flag and each node counter individually, and
+rejects a model whose fingerprint changed while its `model_id` did not;
+elapsed time alone never fails verification; and `bash tools/check.sh` passes
+with native acceptance covered. Resource budget: CPU only, four Cargo workers,
+no GPU workloads.
+
+Scope boundary, decided before implementation: the backlog's C4 line bundles
+four deliverables and CONTRIBUTING.md mandates one complete vertical slice. This
+slice delivers the CLI run surface and pinned reproducible runs. The local
+registry and the Python SDK are deferred to their own specifications and gates
+and are recorded in [known failures](known-failures.md) rather than dropped
+silently. The SDK deferral has a technical basis: pyo3 expands to unsafe code,
+the workspace forbids it, and ADR-0003 permits unsafe only inside
+optimizer-highs, so an SDK needs an amending decision record.
+
+Expected changes: new SPEC-0005 and ADR-0006; `crates/optimizer-experiment`
+gains its first types and dependencies; new `schemas/run-record-v1.schema.json`
+and `schemas/search-record-v2.schema.json`; `crates/optimizer-cli` gains
+`search` and `verify` over new optimizer-solver and optimizer-experiment
+dependencies; new tests in optimizer-cli, optimizer-experiment and
+tests/integration; `examples/run-record-v1.json`;
+`tools/validate_artifacts.py`; README.md, CHANGELOG.md,
+docs/architecture/{overview,testing}.md, a new run-and-verify tutorial,
+docs/operations/build.md, wiki/{status,glossary}.md, schemas/README.md,
+cuda/schedule_eval/README.md, implementation-plan.md, state/backlog.yaml,
+state/known-failures.md and this record.
+
+Evidence (2026-09-11): the complete `bash tools/check.sh` gate passed with the
+pinned HiGHS 1.11.0 library built and linked, with **zero skip messages**, in 20
+seconds on a warm build directory: format, warnings-as-errors Clippy over all
+targets, 156 Rust tests, workspace build, warnings-as-errors rustdoc, cargo-deny
+(advisories, bans, licenses, sources all ok), artifact validation, 39 Python
+tests, 46-page documentation and link validation, and bootstrap smoke. No checks
+were waived.
+
+Rust tests rose from 132 to 156: 11 run surface CLI contracts in optimizer-cli,
+11 run record contracts in optimizer-experiment, and 2 SHA-256 unit tests.
+Python tests rose from 20 to 39: 12 run record and search record schema
+contracts plus 2 checksum-agreement tests, counted with subtests as unittest
+reports them. Documentation pages rose from 43 to 46: SPEC-0005, ADR-0006 and
+the run-and-verify tutorial.
+
+Cargo.lock changed only by adding local dependency edges: optimizer-cli on
+optimizer-experiment and optimizer-solver, and optimizer-experiment on
+optimizer-core, optimizer-solver, serde and serde_json. No external package
+version changed, and no new external dependency was introduced.
+
+Reproducibility evidence, stated as what was actually checked rather than as a
+property claimed in prose:
+
+- `optimizer search` over examples/model-v1.json reported
+  `outcome: proven_optimal`, `objective: 2.5`, `dual_bound: 2.5`, `forfeited:
+  false` and exit 0, matching the C1 solve of the same model exactly. The record
+  carried a 40-hex revision, the model fingerprint `fnv1a64:cc63f58b64d1c205`,
+  and a SHA-256 for each of the two input documents.
+- `optimizer verify` on that record re-ran the search and agreed, exit 0, naming
+  all ten compared fields in its verdict.
+- Verification was shown to be able to fail, in both directions it must. A model
+  whose objective coefficient changed from 2.0 to 2.5 while keeping
+  `model_id: tiny-mixed` was refused before any search ran:
+  `document: model fingerprint mismatch`, exit 2. A record whose objective was
+  edited to 1.5 was refused after re-running:
+  `divergence: numerical: objective: recorded 1.5, reproduced 2.5`, exit 2.
+- Each of the ten compared fields is asserted to fail when it alone is mutated,
+  and the list of mutated field names is asserted equal to
+  `RunRecord::compared_fields()`, so a field cannot be dropped from the
+  comparison without a test failing.
+- A record differing only in `elapsed_ms` by 987 seconds still verified with exit
+  0, which fixes elapsed time as diagnostic rather than contractual.
+- A node-limited search wrote its record, reported `outcome: node_limit` and exit
+  1, and that record verified as still limited. A forfeited search that verifies
+  is asserted to remain forfeited and to fail `proves_completion`.
+
+Why the SHA-256 is implemented rather than taken from a crate: `sha2` and its
+dependencies would add six external packages under `deny.toml`'s
+`multiple-versions = "deny"` policy for one well-specified function. It is
+implemented in safe Rust and checked against the FIPS 180-4 published vectors,
+including the three padding edge cases at 55, 56 and 64 bytes and the
+one-million-character vector, then independently against Python's `hashlib` over
+the committed example documents and over a freshly generated record. Agreement
+between the two implementations is verified rather than assumed.
+
+Both normative authorities accept the same documents. The new schemas give C2 and
+C3 records their first schema coverage, and `RunRecord::from_json` validates the
+embedded search record's version on the parse path, so the divergence that
+produced commit 6516a6f cannot recur here.
+
+Resolved during implementation: an early assertion that a record with absent
+measurements contains no `null` at all was wrong and was narrowed. Search
+configuration serializes an absent budget as an explicit `null` meaning
+unlimited, which is SPEC-0003's stated convention; the omit-rather-than-null rule
+governs measurements. The test now asserts the three measurements are absent and
+that `node_limit` is still explicitly null beside them.
+
+Noted and not changed: the example record is generated from a real search and
+then rewritten with the all-zero revision and example hardware, matching how
+examples/experiment-result.json marks itself as a shape rather than evidence. Its
+input hashes are the real ones and are verified against the committed files by
+both the validator and a Python test.
+
+Scope split recorded in the backlog: C4's original line covered four
+deliverables. C4 is now the run surface and the registry, SDK and comparative
+runner are backlog item C8, which depends on C4. C5, C6 and C7 keep their
+dependency on C4, which remains meaningful because the run surface is what they
+build on. The four deferrals are recorded in
+[known failures](known-failures.md) with their blockers.
+
+No remote refs were changed and nothing was pushed; main remains unpushed pending
+separate authorization.
+
 ## Local C3 Integration (2026-09-09)
 
 Objective: verify the reviewed feat/extension-runtime branch from a clean

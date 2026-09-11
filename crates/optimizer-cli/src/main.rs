@@ -2,6 +2,8 @@
 
 mod input;
 mod model;
+mod provenance;
+mod search;
 mod solve;
 
 use std::env;
@@ -16,12 +18,14 @@ use std::time::{Duration, Instant};
 
 use optimizer_cuda::{DEFAULT_LOCK_PATH, GpuLease, discover};
 
-const HELP: &str = "optimizer 0.1.0 (C1 pinned HiGHS solving)
+const HELP: &str = "optimizer 0.1.0 (C4 agent-independent run surface)
 Usage:
   optimizer hello
   optimizer model validate --model <path>
     [--candidate <path> --absolute-tolerance <f64> --relative-tolerance <f64> --integrality-tolerance <f64>]
   optimizer solve --model <path> --config <path> [--candidate <path> | --basis <path>]
+  optimizer search --model <path> --config <path> [--output <path>]
+  optimizer verify --record <path> --model <path>
   optimizer gpu discover [--dry-run]
   optimizer gpu lease --simulate-ms <0..60000> [--timeout-ms <0..60000>]
   optimizer --help
@@ -50,6 +54,12 @@ fn run(args: Vec<OsString>) -> io::Result<u8> {
         }
         [command, options @ ..] if command == "solve" => {
             return solve::solve(options);
+        }
+        [command, options @ ..] if command == "search" => {
+            return search::search(options);
+        }
+        [command, options @ ..] if command == "verify" => {
+            return search::verify(options);
         }
         _ => {}
     }

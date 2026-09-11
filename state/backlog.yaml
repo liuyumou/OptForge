@@ -1,6 +1,6 @@
 schema_version: 1
-current_milestone: C3
-next_ready_milestone: C3
+current_milestone: C4
+next_ready_milestone: C4
 tasks:
   - id: M0
     title: Repository and process bootstrap
@@ -28,15 +28,16 @@ tasks:
     acceptance: "Tiny exhaustive search, termination semantics, budgets, cancellation, proof completion"
   - id: C3
     title: Extension runtime and authority model
-    status: ready
+    status: complete
     depends_on: [C2]
     specification: docs/specifications/SPEC-0004-extension-runtime.md
     acceptance: "Independent extension conformance, invalid-action rejection, compatibility and resource failures"
   - id: C4
-    title: Agent-independent SDK, CLI, experiment workspace, and local registry
-    status: planned
+    title: Agent-independent run surface with pinned reproducible records
+    status: ready
     depends_on: [C1, C3]
-    acceptance: "Pinned reproducible runs, comparative records, extension build/conformance workflow"
+    specification: docs/specifications/SPEC-0005-run-surface.md
+    acceptance: "Provenance-bearing run records, re-execution verification, named divergence, CLI search over the executive"
   - id: C5
     title: Flow-shop scheduling vertical slice
     status: planned
@@ -52,6 +53,14 @@ tasks:
     status: planned
     depends_on: [C2, C3, C4, C5, C6]
     acceptance: "Held-out comparison, discovery cost, overhead, interaction and negative-result records"
+  # C4 was one line covering four deliverables. The run surface is the
+  # reproducibility spine the later items build on, so it ships first and the
+  # registry, SDK and comparative runner keep their own specifications and gates.
+  - id: C8
+    title: Local extension registry, SDK and comparative experiment runner
+    status: planned
+    depends_on: [C4]
+    acceptance: "Extension registration and promotion, conformance workflow, comparative records over a frozen manifest"
 research_phases:
   - "Adaptive portfolios and bounded agent-generated candidate/search advisers"
   - "CPU first-order LP before approximate GPU LP research"

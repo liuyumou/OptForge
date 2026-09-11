@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/liuyumou/OptForge/schemas/search-record-v2.schema.json",
+  "title": "Search record, version 2",
+  "description": "Immutable record of one owned branch-and-bound search under SPEC-0003, sufficient to repeat it. A search outcome is the executive's own claim that it exhausted its node tree; it is distinct from one relaxation's termination and is never an exact-arithmetic certificate. Version 2 carries the caller's extension policy and one summary per permitted extension under SPEC-0004. Absent measurements are omitted rather than serialized as null.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "model_id",
+    "backend",
+    "backend_version",
+    "outcome",
+    "nodes_explored",
+    "nodes_pruned_infeasible",
+    "nodes_pruned_bound",
+    "open_nodes_remaining",
+    "relaxations_solved",
+    "forfeited",
+    "warnings",
+    "extensions",
+    "elapsed_ms",
+    "options"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "backend": {
+      "description": "Identifier recorded for the relaxation service.",
+      "type": "string",
+      "minLength": 1
+    },
+    "backend_version": {
+      "description": "Version reported by the relaxation backend itself, not assumed by the executive.",
+      "type": "string",
+      "minLength": 1
+    },
+    "outcome": {
+      "description": "Engine-owned search outcome. Only proven_optimal, proven_infeasible and unbounded_or_infeasible are completed proofs; a limit, interruption or failure never implies one.",
+      "enum": [
+        "proven_optimal",
+        "proven_infeasible",
+        "unbounded_or_infeasible",
+        "feasible",
+        "node_limit",
+        "time_limit",
+        "open_node_limit",
+        "interrupted",
+        "numerical_failure",
+        "backend_failure",
+        "unsupported"
+      ]
+    },
+    "objective": {
+      "description": "Independently recomputed original objective of the incumbent, never a backend-reported value. Finite when present.",
+      "type": "number"
+    },
+    "dual_bound": {
+      "description": "Best valid dual bound over open nodes, present only when a relaxation proved one.",
+      "type": "number"
+    },
+    "gap": {
+      "description": "Relative gap between incumbent and dual bound, present only when finite.",
+      "type": "number"
+    },
+    "candidate": {
+      "description": "Accepted incumbent in original variable IDs.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "model_id", "values"],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["variable_id", "value"],
+            "properties": {
+              "variable_id": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "value": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "validation": {
+      "description": "Independent original-model validation of the incumbent, as defined by SPEC-0001. Unbounded sides and continuous domain checks are explicitly null there.",
+      "type": "object"
+    },
+    "nodes_explored": {
+      "description": "Nodes whose relaxation was dispatched.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "nodes_pruned_infeasible": {
+      "description": "Nodes closed by a proven infeasible relaxation or an empty branch domain.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "nodes_pruned_bound": {
+      "description": "Nodes closed by a valid dual bound against the incumbent.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "open_nodes_remaining": {
+      "description": "Nodes still open when the search stopped.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "relaxations_solved": {
+      "description": "Relaxation solves dispatched to the backend.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "forfeited": {
+      "description": "Whether any node permanently lost the search's proof claim. Recorded explicitly so a reader can see why a completed-looking search claimed nothing.",
+      "type": "boolean"
+    },
+    "warnings": {
+      "description": "Executive warnings, retained even on success.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "extensions": {
+      "description": "What each permitted extension did, in extension-identity order. Empty when no extension was permitted, so a record cannot conceal that extensions influenced it.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schema_version",
+          "extension_id",
+          "version",
+          "category",
+          "deterministic",
+          "registered",
+          "invocations",
+          "proposals",
+          "accepted",
+          "rejected",
+          "disabled",
+          "failures"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": 1
+          },
+          "extension_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "enum": ["candidate_producer", "search_adviser", "transformation"]
+          },
+          "authority": {
+            "description": "Acceptance boundary the core applied, derived from the category and never chosen by the extension. Absent for a refused category.",
+            "enum": ["propose_validated_candidate", "propose_checked_action"]
+          },
+          "deterministic": {
+            "type": "boolean"
+          },
+          "registered": {
+            "type": "boolean"
+          },
+          "invocations": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "proposals": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "accepted": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "rejected": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "failures": {
+            "description": "Bounded distinct failures. Counters stay exact while retained messages are capped, so an extension refused once per node cannot grow a record with the search.",
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "message"],
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "declaration_invalid",
+                    "incompatible_contract",
+                    "unsupported_category",
+                    "unsupported_problem_class",
+                    "invalid_candidate",
+                    "invalid_advice",
+                    "budget_exhausted",
+                    "panicked"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "maxLength": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "elapsed_ms": {
+      "description": "Measured elapsed wall-clock time in milliseconds. Deliberately excluded from reproducibility comparison: it measures the host, not the search.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "options": {
+      "$ref": "search-config-v2.schema.json"
+    }
+  }
+}

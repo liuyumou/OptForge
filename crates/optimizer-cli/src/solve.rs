@@ -103,7 +103,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     Ok(code)
 }
 
-fn install_signal_handler(
+pub(crate) fn install_signal_handler(
     cancel: &CancellationToken,
     signalled: &Arc<AtomicBool>,
 ) -> io::Result<()> {

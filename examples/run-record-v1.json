@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "record_id": "c4-example-not-a-measurement",
+  "revision": "0000000000000000000000000000000000000000",
+  "dirty": false,
+  "hardware": {
+    "os": "Linux (example)",
+    "cpu": "example CPU",
+    "logical_cpus": 1,
+    "gpu_uuid": null,
+    "gpu_name": null,
+    "driver": null
+  },
+  "toolchain": {
+    "rustc": "rustc 1.93.1 (example)",
+    "cargo": "cargo 1.93.1 (example)"
+  },
+  "model_fingerprint": "fnv1a64:cc63f58b64d1c205",
+  "inputs": [
+    {
+      "role": "model",
+      "path": "examples/model-v1.json",
+      "sha256": "145bd24c56fd925308b57617df2594b172d7d8c33b0745219a568dfa5fbb3a32"
+    },
+    {
+      "role": "config",
+      "path": "examples/search-config-v2.json",
+      "sha256": "255e01113676b693cd9a2472a088bea9406604d6f8a56b31ff9e65ec75d992bd"
+    }
+  ],
+  "search": {
+    "schema_version": 2,
+    "model_id": "tiny-mixed",
+    "backend": "relaxation",
+    "backend_version": "1.11.0",
+    "outcome": "proven_optimal",
+    "objective": 2.5,
+    "dual_bound": 2.5,
+    "gap": 0.0,
+    "candidate": {
+      "schema_version": 1,
+      "model_id": "tiny-mixed",
+      "values": [
+        {
+          "variable_id": 3,
+          "value": 0.0
+        },
+        {
+          "variable_id": 8,
+          "value": 2.0
+        }
+      ]
+    },
+    "validation": {
+      "schema_version": 1,
+      "model_id": "tiny-mixed",
+      "tolerances": {
+        "absolute": 1e-09,
+        "relative": 1e-09,
+        "integrality": 1e-09
+      },
+      "objective": 2.5,
+      "feasible": true,
+      "variables": [
+        {
+          "variable_id": 3,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 8,
+          "value": 2.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.0000000000000004e-09,
+            "satisfied": true
+          },
+          "upper": null,
+          "domain": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_id": 12,
+          "activity": 2.0,
+          "lower": {
+            "bound": 2.0,
+            "violation": 0.0,
+            "allowance": 3.0000000000000004e-09,
+            "satisfied": true
+          },
+          "upper": null
+        }
+      ]
+    },
+    "nodes_explored": 1,
+    "nodes_pruned_infeasible": 0,
+    "nodes_pruned_bound": 0,
+    "open_nodes_remaining": 0,
+    "relaxations_solved": 1,
+    "forfeited": false,
+    "warnings": [],
+    "extensions": [],
+    "elapsed_ms": 0,
+    "options": {
+      "schema_version": 2,
+      "seed": 17,
+      "node_limit": null,
+      "time_limit_ms": 10000,
+      "open_node_limit": null,
+      "improvement_tolerance": 1e-09,
+      "relaxation": {
+        "schema_version": 1,
+        "seed": 17,
+        "time_limit_ms": 10000,
+        "iteration_limit": null,
+        "node_limit": null,
+        "tolerances": {
+          "absolute": 1e-09,
+          "relative": 1e-09,
+          "integrality": 1e-09
+        },
+        "threads": 1
+      },
+      "extensions": []
+    }
+  },
+  "warnings": [
+    "Synthetic schema example, not a measured run record."
+  ]
+}

@@ -69,6 +69,23 @@ extension-free record exactly apart from elapsed time. A hostile adviser that
 always names an integral variable must terminate, which is requirement 12a's
 hazard arriving from a second untrusted source.
 
+C4 adds [run surface contracts](../../crates/optimizer-cli/tests/search.rs),
+[record contracts](../../crates/optimizer-experiment/tests/run.rs) and
+[schema contracts](../../tests/integration/test_run_records.py). Reproducibility
+is established by re-execution rather than asserted in prose: the surface tests
+produce a record, re-run it and compare. The load-bearing assertions are the
+negative ones, because a verifier that cannot fail establishes nothing. A model
+whose coefficient changed under an unchanged `model_id` must be refused on its
+fingerprint before any search runs, and each of the ten compared fields must be
+shown to fail when it alone is mutated, so no field can be nominally compared and
+actually ignored. A record differing only in elapsed time must still verify,
+which fixes that measurement as diagnostic rather than contractual. A forfeited
+search that verifies must still report forfeiture, so agreement cannot launder a
+claim C2 declined to make. The embedded SHA-256 is checked against the FIPS 180-4
+vectors and independently against Python's `hashlib` over the committed
+documents, so an agreement between two implementations is verified rather than
+assumed.
+
 C1 adds [solve contract](../../crates/optimizer-core/tests/solve.rs),
 [backend acceptance](../../crates/optimizer-highs/tests/backend.rs),
 [differential](../../crates/optimizer-highs/tests/differential.rs),

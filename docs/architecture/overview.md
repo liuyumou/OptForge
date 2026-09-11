@@ -1,8 +1,8 @@
 # Architecture
 
-Purpose: define stable ownership boundaries. Scope: M0-M1, C1, C2 and C3, plus planned dependencies.
+Purpose: define stable ownership boundaries. Scope: M0-M1, C1, C2, C3 and C4, plus planned dependencies.
 Owner: architecture. Status: accepted.
-Last reviewed commit: b934dbd.
+Last reviewed commit: 692e19f.
 
 ## Implemented boundaries
 
@@ -26,11 +26,27 @@ CPU HiGHS 1.11.0 build behind a private FFI boundary, and the CLI exposes it as
 [SPEC-0002](../specifications/SPEC-0002-backend-contract.md) and
 [ADR-0003](../decisions/ADR-0003-highs-backend.md).
 
+optimizer-experiment owns the run record: one search record embedded verbatim
+plus the provenance needed to repeat it, and the field-by-field comparison that
+decides whether a repeat agreed. The CLI exposes it as `optimizer search` and
+`optimizer verify`, which is the first surface reaching the executive from
+outside Rust test code. Verification re-runs using only the record's embedded
+configuration, so it cannot confirm its own input, and a record is bound to model
+bytes by fingerprint rather than by `model_id`. Agreement is evidence of
+determinism on one host; it adds no mathematical authority and cannot clear a
+forfeited proof claim. See
+[SPEC-0005](../specifications/SPEC-0005-run-surface.md) and
+[ADR-0006](../decisions/ADR-0006-run-provenance.md).
+
 ## Planned numerical flow
 
 Original model -> optimizer-core validation -> optimizer-solver executive ->
 optimizer-highs LP backend and optimizer-schedule candidate production ->
 optimizer-core result validation -> experiment record and CLI.
+
+C4 closes the last leg for search: the CLI drives the executive and
+optimizer-experiment wraps its record with provenance, so the flow runs end to
+end without an agent. optimizer-schedule candidate production remains C5.
 
 C1 implements the backend leg of this flow: the CLI drives optimizer-highs
 directly through the backend-neutral contract in optimizer-core, and every
@@ -78,8 +94,8 @@ explicit native settings; owned proof contracts belong to C2.
 | optimizer-extension | Extension declarations, authority model, guarded host | C3 |
 | optimizer-extension-examples | Independently authored and adversarial extensions | C3 |
 | optimizer-cuda | Discovery, ownership, later kernels | M0 / C6 |
-| optimizer-experiment | Schemas, later experiment execution | M0 / C4 |
-| optimizer-cli | Agent-independent command interface | M0 |
+| optimizer-experiment | Artifact schemas, run records, verification comparison | M0 / C4 |
+| optimizer-cli | Agent-independent command interface | M0 / C4 |
 
 optimizer-highs is the only crate permitted to contain unsafe code. Because a
 workspace-level `forbid` cannot be relaxed by an inner crate, it declares its own

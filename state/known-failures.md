@@ -57,6 +57,53 @@ workers, which SPEC-0004 defers and which need their own decision record. The
 host also requires the unwind panic strategy; no repository profile sets
 `panic = "abort"`, and nothing currently pins that.
 
+## Python SDK is deferred with a stated blocker
+
+SPEC-0005 delivers the C4 run surface through the CLI and defers the Python SDK
+to its own specification. The blocker is concrete rather than a matter of
+sequencing: pyo3 expands to unsafe code, the workspace sets
+`unsafe_code = "forbid"`, and ADR-0003 permits unsafe only inside
+optimizer-highs. An in-process binding therefore requires a decision record
+amending ADR-0003, plus maturin packaging and a Python test layer in the gate.
+AGENTS.md also states that Python under tools/ is validation tooling and not the
+SDK. Reproduction: add a pyo3 dependency to any runtime crate and build. Next
+step: decide the SDK's shape in its own specification; a subprocess wrapper over
+the versioned run records needs no unsafe boundary and is the cheaper option if
+an SDK is wanted before that decision.
+
+## Local extension registry is not implemented
+
+SPEC-0005 excludes the registry. `search_with_extensions` takes an in-memory
+`&[Registration]` slice for one search, and the CLI has no mechanism to populate
+it, so the run surface refuses a configuration naming an extension policy as
+unsupported rather than running the search without the extension it names. That
+refusal is the seam the registry fills; it is a stated boundary, not a silent
+omission. Registration, promotion, licenses, compatibility, authority basis and
+inter-extension interactions all remain unspecified, and SPEC-0004 already parks
+the corresponding declaration fields there. Reproduction: run
+`optimizer search` with a configuration whose `extensions` list is non-empty.
+Next step: its own specification under backlog item C8.
+
+## Verification assumes an unchanged native library
+
+`optimizer verify` re-runs a search and compares the two records field by field.
+It cannot distinguish a wrong result from a legitimately changed engine: a
+rebuilt or upgraded HiGHS that changes a node count produces a named divergence
+identical in form to a real disagreement. Cross-host reproducibility is also
+untested, because floating-point behavior and library builds may differ between
+machines. Agreement is therefore evidence of determinism on one host over time,
+which is what ADR-0006 claims and no more. Next step: a comparison mode that
+separates engine change from result change, if a case requires one.
+
+## Checkpoint restart is still unimplemented
+
+C2 defines and serializes `Checkpoint` and SPEC-0003 states that restart is not
+implemented. The C4 run surface does not add a restart entry point either, so a
+long search cannot be resumed and a run record cannot be continued. Verification
+re-runs from the beginning under the record's own budgets. Reproduction: no CLI
+command consumes a checkpoint. Next step: restart needs its own acceptance
+evidence before any public entry point exists.
+
 ## Dynamically loaded native extensions are not implemented
 
 SPEC-0004 specifies host-contract-version negotiation and implements it in safe
