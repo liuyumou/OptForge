@@ -144,7 +144,8 @@ permits an extension's output to have.
 `category`, `problem_classes`, `deterministic` and `limits`. Every field is
 required. Data needs, hardware requirements and inter-extension dependencies are
 deliberately absent: nothing in this specification reads them, and they belong to
-the C4 registry.
+the registry, specified as [SPEC-0009](SPEC-0009-extension-registry.md), which
+gives each of them a checked meaning.
 
 `Category` has the variants `candidate_producer`, `search_adviser` and
 `transformation`. Deserialization MUST reject an unknown variant. There is

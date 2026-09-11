@@ -1,6 +1,6 @@
 schema_version: 1
-current_milestone: C5
-next_ready_milestone: C5
+current_milestone: C8
+next_ready_milestone: C8
 tasks:
   - id: M0
     title: Repository and process bootstrap
@@ -57,11 +57,27 @@ tasks:
   # C4 was one line covering four deliverables. The run surface is the
   # reproducibility spine the later items build on, so it ships first and the
   # registry, SDK and comparative runner keep their own specifications and gates.
+  # C8's own line bundled three deliverables the same way. The registry is the
+  # seam the other two build on and the one two recorded known-failures point at,
+  # so C8 is now the registry alone under SPEC-0009, and the SDK and the
+  # comparative runner become C9 and C10 with their own gates and their recorded
+  # blockers. Existing references to "C8's registry" therefore stay accurate.
   - id: C8
-    title: Local extension registry, SDK and comparative experiment runner
-    status: planned
+    title: Local extension registry and conformance workflow
+    status: ready
     depends_on: [C4]
-    acceptance: "Extension registration and promotion, conformance workflow, comparative records over a frozen manifest"
+    specification: docs/specifications/SPEC-0009-extension-registry.md
+    acceptance: "Registry resolution refusals, promotion checked against a conformance record, registry-backed run records verifiable by re-execution"
+  - id: C9
+    title: Python SDK over the versioned records
+    status: planned
+    depends_on: [C8]
+    acceptance: "Decision record amending ADR-0003 or a subprocess boundary needing none, packaging, and a Python test layer in the gate"
+  - id: C10
+    title: Comparative experiment runner over a frozen manifest
+    status: planned
+    depends_on: [C8]
+    acceptance: "Comparative records over a frozen manifest with per-instance provenance and no aggregate score"
 research_phases:
   - "Adaptive portfolios and bounded agent-generated candidate/search advisers"
   - "CPU first-order LP before approximate GPU LP research"

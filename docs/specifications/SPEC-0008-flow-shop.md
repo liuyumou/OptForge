@@ -40,7 +40,8 @@ bounds or against another scheduling code; local search beyond the insertion
 neighborhood named in requirement 17, and any metaheuristic built over it;
 GPU-batched schedule evaluation (C6); choosing among heuristics by learned or
 adaptive allocation (C7); the local extension registry, so a producer is
-registered in memory by a caller exactly as SPEC-0005 leaves it (C8). No dataset
+registered in memory by a caller exactly as SPEC-0005 leaves it, and resolving one
+from a registry document is [SPEC-0009](SPEC-0009-extension-registry.md)'s. No dataset
 outside the frozen development subset in requirement 22 is introduced, and no
 validation or held-out split is established here.
 

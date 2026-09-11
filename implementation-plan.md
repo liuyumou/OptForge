@@ -3,9 +3,12 @@
 This plan turns [ai-native-optimizer-plan.md](ai-native-optimizer-plan.md) into an
 evidence-driven roadmap. It is organized by **evidence stage**: each stage states
 what must be true to enter it, the work it contains, the falsifiable evidence that
-closes it, and the artifacts that record that evidence. Capability numbers (C1-C7)
-name work items inside the stages and are retained for
-[state/backlog.yaml](state/backlog.yaml) dependency tracking.
+closes it, and the artifacts that record that evidence. Capability numbers name
+work items inside the stages and are retained for
+[state/backlog.yaml](state/backlog.yaml) dependency tracking. Numbers above C7
+were assigned later, when an over-bundled item was split: C8, C9 and C10 are the
+registry, the SDK and the comparative runner that C4's original line covered, so
+they belong to Stage 3 despite sorting after the Stage 4 numbers.
 
 A stage closes on evidence, not on completed code. Where evidence does not yet
 exist, this document says so rather than implying it.
@@ -27,13 +30,14 @@ exist, this document says so rather than implying it.
 | 0. Foundation | M0 bootstrap, M1 model/validation authority | Complete |
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
 | 2. Execution | C2 executive, C3 extension runtime | Complete |
-| 3. Application | C4 run surface, C5 scheduling slice, C8 registry/SDK | C4 and C5 complete; C8 not started |
+| 3. Application | C4 run surface, C5 scheduling slice, C8 extension registry | C4 and C5 complete; C8 specified and in progress |
 | 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | Not started |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
 
 Stages 0, 1 and 2 are complete, and Stage 3's reproducibility evidence is now
-recorded rather than projected. Everything below that is a plan, and the
+recorded rather than projected for C4 and C5; C8's contract is accepted and its
+evidence does not exist yet. Everything below that is a plan, and the
 performance and learning claims in stages 4 and beyond are hypotheses, not
 results. C2 establishes search correctness only, C3 establishes extension safety
 only, and C4 establishes repeatability only; none makes a performance claim.
@@ -174,12 +178,24 @@ divergence by field. This is the first surface reaching the C2 executive and C3
 extension host from outside Rust test code.
 
 The remaining items from C4's original scope keep their own specifications and
-gates as **C8**: the local registry for versions, licenses, compatibility,
-authority basis, failures and interactions; the Python SDK, whose blocker is
-recorded because pyo3 requires an unsafe boundary ADR-0003 does not permit;
-comparative experiment execution over a frozen manifest; and progress streaming
-and checkpoint restart, which need new public search surface. MCP may wrap these
-interfaces but is not required for execution.
+gates. **C8** is the local registry for versions, licenses, compatibility,
+authority basis, failures and interactions, specified as
+[SPEC-0009](docs/specifications/SPEC-0009-extension-registry.md) and
+[ADR-0008](docs/decisions/ADR-0008-registry-resolution.md). **C9** is the Python
+SDK, whose blocker is recorded because pyo3 requires an unsafe boundary ADR-0003
+does not permit. **C10** is comparative experiment execution over a frozen
+manifest. Progress streaming and checkpoint restart need new public search
+surface and remain unassigned. MCP may wrap these interfaces but is not required
+for execution.
+
+C8 is what makes the extension runtime reachable without Rust test code. C3 built
+the host but left registration as an in-memory slice, so the run surface refuses
+any configuration naming an extension and a C5 scheduling run performed with the
+NEH producer cannot be verified by re-execution at all. The registry resolves a
+named identity to an extension this build provides, refuses everything it cannot
+check, and leaves what agreement means untouched. It deliberately does not load
+dynamically distributed native components, which would need a second unsafe
+boundary and its own crash-isolation evidence.
 
 **C5 — Scheduling vertical slice (complete).** Flow-shop
 instances, makespan recurrence, deterministic NEH and insertion candidates,

@@ -9,7 +9,8 @@ evidence is recorded in [active task](../state/active-task.md).
 | State | Features |
 | --- | --- |
 | Implemented | Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
-| Planned | GPU feasibility and adaptive research (C6/C7), registry and SDK (C8) |
+| In progress | Local extension registry and conformance (C8), specified as SPEC-0009 |
+| Planned | GPU feasibility and adaptive research (C6/C7), Python SDK (C9), comparative runner (C10) |
 | Experimental | None enabled |
 | Deprecated | None |
 

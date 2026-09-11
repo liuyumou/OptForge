@@ -1,5 +1,68 @@
 # Active Task
 
+## C8 Extension Registry Specification (2026-09-12)
+
+Objective: write and accept the C8 contract before any public registry API exists,
+as required by AGENTS.md, CONTRIBUTING.md and the Stage 3 scope. No C8 behavior is
+implemented by this change.
+
+Status: complete; SPEC-0009 and ADR-0008 are accepted and the project records that
+reference C8 are synchronized.
+
+Acceptance gate: the specification uses numbered observable MUST/MUST NOT
+requirements with an acceptance-test mapping, states its exclusions, and passes
+documentation and link validation; `bash tools/check.sh` continues to pass with
+native acceptance covered and **unchanged test counts**, because no behavior
+changes. Had either count moved, this change would be doing something it claims not
+to. Resource budget: CPU only, no GPU workloads.
+
+Why C8 and not C6: Stage 4's entry condition is that Stage 3 provides reproducible
+workflows, and C8 is Stage 3's last open item. It is also the seam two recorded
+known-failures point at, so it blocks rather than merely precedes: the registry does
+not exist, and a C5 scheduling run performed with the NEH producer is not verifiable
+by re-execution at all. C6's dependencies are met, but starting it would leave
+Stage 3's reproducibility claim partial.
+
+Scope decided before implementation: the registry alone. C8's backlog line bundled
+three deliverables and CONTRIBUTING.md mandates one complete vertical slice, so the
+Python SDK becomes C9 with its pyo3/ADR-0003 blocker unchanged and the comparative
+experiment runner becomes C10. Existing references to "C8's registry" stay accurate
+because C8 keeps the registry.
+
+Two contract decisions worth recording, because both are the kind a later
+implementation could get quietly wrong:
+
+The registry resolves; it does not load. An entry names an extension the build
+already provides through a caller-owned `Provider` seam, which is the same pattern
+as `&dyn Backend` and `&[Registration]`. Dynamic native loading needs a second
+unsafe boundary ADR-0003 prohibits, so it stays deferred; the registry now makes
+that absence more visible rather than closing it.
+
+No document version changes and agreement is untouched. An extension is identified
+in a record by the `extension_id` and `version` its `ExtensionSummary` already
+embeds verbatim, so a record naming an extension is re-resolvable without a new
+field. Adding the registry to the compared fields would change what agreement means
+for every existing record, which SPEC-0005 reserves for a new record version plus an
+ADR. A resolved-version mismatch and a nondeterministic summary are therefore
+refused as *unsupported* rather than reported as divergence, which is the same
+distinction the C5 implementation drew when it turned a misleading divergence into a
+refusal.
+
+Expected changes: docs/specifications/SPEC-0009-extension-registry.md,
+docs/decisions/ADR-0008-registry-resolution.md, state/backlog.yaml, AGENTS.md,
+state/known-failures.md, implementation-plan.md, wiki/status.md, the forward
+references in SPEC-0004, SPEC-0005 and SPEC-0008, and this record. No CHANGELOG.md
+entry: the changelog records user-visible changes and an accepted contract with zero
+behavior is not one, matching the C2 and C5 specification commits.
+
+Follow-up: C8 implementation is dependency-ready under SPEC-0009. It requires the
+optimizer-registry crate with the strict registry document, resolution with each
+refusal path in its own category, the reusable conformance suite over a fixed grid,
+the CLI provider table and subcommands, registry integration in `search`, `verify`
+and `schedule solve`, the two JSON Schemas with committed examples, and a gate step
+re-executing a committed registry-backed scheduling record so the closed gap is
+established across a commit boundary rather than within one process.
+
 ## C5 Flow-Shop Scheduling Implementation (2026-09-11)
 
 Objective: implement C5 under the accepted SPEC-0008 and ADR-0007: flow-shop

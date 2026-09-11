@@ -307,5 +307,10 @@ produced on one machine verifies on another. Verification is currently evidence
 about one host over time.
 
 The local registry, the Python SDK, comparative experiment execution, checkpoint
-restart and progress streaming are named exclusions with no contract yet. Their
-recorded deferrals are in [known failures](../../state/known-failures.md).
+restart and progress streaming are named exclusions. Their recorded deferrals are
+in [known failures](../../state/known-failures.md). The registry exclusion now has
+a contract of its own in
+[SPEC-0009](SPEC-0009-extension-registry.md), which supplies the mechanism
+requirement 14 refuses without: it resolves a named extension through a
+caller-supplied registry, and it deliberately leaves requirement 11's compared
+fields and the meaning of agreement unchanged.

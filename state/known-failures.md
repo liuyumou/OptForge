@@ -67,9 +67,9 @@ optimizer-highs. An in-process binding therefore requires a decision record
 amending ADR-0003, plus maturin packaging and a Python test layer in the gate.
 AGENTS.md also states that Python under tools/ is validation tooling and not the
 SDK. Reproduction: add a pyo3 dependency to any runtime crate and build. Next
-step: decide the SDK's shape in its own specification; a subprocess wrapper over
-the versioned run records needs no unsafe boundary and is the cheaper option if
-an SDK is wanted before that decision.
+step: decide the SDK's shape in its own specification, now backlog item C9; a
+subprocess wrapper over the versioned run records needs no unsafe boundary and is
+the cheaper option if an SDK is wanted before that decision.
 
 ## Local extension registry is not implemented
 
@@ -82,7 +82,9 @@ omission. Registration, promotion, licenses, compatibility, authority basis and
 inter-extension interactions all remain unspecified, and SPEC-0004 already parks
 the corresponding declaration fields there. Reproduction: run
 `optimizer search` with a configuration whose `extensions` list is non-empty.
-Next step: its own specification under backlog item C8.
+Next step: implement the accepted
+[SPEC-0009](../docs/specifications/SPEC-0009-extension-registry.md) contract under
+backlog item C8. The contract exists; the behavior does not yet.
 
 ## Verification assumes an unchanged native library
 
@@ -146,8 +148,10 @@ The consequence is real and worth stating: a scheduling run performed *with* the
 producer is not verifiable by re-execution today, only one performed without it.
 Reproduction: `optimizer schedule solve` with a configuration naming
 `flow-shop-neh`, then `optimizer verify` on the resulting record. Next step: the
-seam is the deferred extension registry under C8, which is what would let a verifier
-reconstruct the producer a record names.
+seam is the extension registry under C8, now specified as
+[SPEC-0009](../docs/specifications/SPEC-0009-extension-registry.md) requirement 19,
+which is what will let a verifier reconstruct the producer a record names. Until
+that behavior exists this limitation stands.
 
 ## Dynamically loaded native extensions are not implemented
 
@@ -157,3 +161,9 @@ components is deliberately absent. It needs a second unsafe boundary, which
 ADR-0003 prohibits outside optimizer-highs, so it requires an amending decision
 record plus its own lifecycle, ABI-stability and crash-isolation evidence. This
 is a recorded deferral, not a gap discovered late.
+
+[SPEC-0009](../docs/specifications/SPEC-0009-extension-registry.md) does not change
+this. Its registry *resolves* a named identity to an extension the build already
+provides and refuses one it does not, so the registry is now the obvious place a
+dynamically loaded extension would be named and deliberately cannot name one. That
+makes the deferral more visible rather than closing it.
