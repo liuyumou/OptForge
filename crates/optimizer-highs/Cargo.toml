@@ -31,4 +31,6 @@ optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
 [dev-dependencies]
 optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
 optimizer-extension-examples = { version = "0.1.0", path = "../optimizer-extension-examples" }
+optimizer-schedule = { version = "0.1.0", path = "../optimizer-schedule" }
+optimizer-schedule-examples = { version = "0.1.0", path = "../optimizer-schedule-examples" }
 optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }

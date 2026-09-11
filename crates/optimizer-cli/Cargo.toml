@@ -13,7 +13,10 @@ path = "src/main.rs"
 optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
 optimizer-cuda = { version = "0.1.0", path = "../optimizer-cuda" }
 optimizer-experiment = { version = "0.1.0", path = "../optimizer-experiment" }
+optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
 optimizer-highs = { version = "0.1.0", path = "../optimizer-highs" }
+optimizer-schedule = { version = "0.1.0", path = "../optimizer-schedule" }
+optimizer-schedule-examples = { version = "0.1.0", path = "../optimizer-schedule-examples" }
 optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }
 serde_json.workspace = true
 ctrlc = { version = "3.4", features = ["termination"] }

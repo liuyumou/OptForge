@@ -33,9 +33,8 @@ fixtures are retained in tests/. Fixtures do not establish solver classification
 Original-variable reconstruction after transformations and CPU/GPU agreement remain
 gated on later capabilities. Transformations are not implemented.
 
-C5 specifies the flow-shop recurrence and permutation-validity rows above and is
-not yet implemented; its planned coverage is described at the end of this document
-so the intended evidence is on record before the code is.
+C5 fills the flow-shop recurrence and permutation-validity rows above; its coverage
+is described at the end of this document.
 
 C2 adds [search contracts](../../crates/optimizer-solver/tests/executive.rs) and
 [native end-to-end acceptance](../../crates/optimizer-highs/tests/executive.rs).
@@ -115,8 +114,14 @@ published generator instead records the generator, seed and parameters per
 instance and commits the generated documents with checksums, as
 [the benchmark protocol](../benchmarks/protocol.md) now states.
 
-C5 is specified by [SPEC-0008](../specifications/SPEC-0008-flow-shop.md) and not
-implemented. Its load-bearing assertion is the exhaustive one: over a fixed grid of
+C5 adds [flow-shop contracts](../../crates/optimizer-schedule/tests/contracts.rs),
+[native scheduling acceptance](../../crates/optimizer-highs/tests/schedule.rs),
+[CLI contracts](../../crates/optimizer-cli/tests/schedule.rs) and
+[manifest provenance](../../tests/integration/test_flow_shop_manifest.py). The
+schedule crate takes no solver dependency at all, not even for tests, so the
+recurrence stays independent of any search and the search-driven assertions live in
+optimizer-highs for the same reason the C2 ones do. Its load-bearing assertion is
+the exhaustive one: over a fixed grid of
 tiny instances with no randomness, the minimum makespan found by enumerating every
 permutation must equal the optimum the executive proves on the encoded model, with
 the grid's size asserted so it cannot silently shrink. That comparison is what

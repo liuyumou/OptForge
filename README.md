@@ -1,12 +1,15 @@
 # AI Optimizer
 
 A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. The current milestone is **C4 complete: runs that
-can be repeated and checked by someone who has only their record**. It validates
+selective GPU acceleration. The current milestone is **C5 complete: a flow-shop
+workload whose answers are checked against an independent definition**. It validates
 original linear models and candidates, solves them with an independently
 validated incumbent, proves optimality with its own search, accepts separately
 authored extensions without granting them any mathematical authority, and records
-each search with the provenance needed to re-execute it.
+each search with the provenance needed to re-execute it. Flow-shop instances reach
+that same machinery through an exactly linear encoding, and their makespans are
+recomputed by a recurrence that shares no code with the heuristics proposing
+schedules.
 
 ## Quick start
 

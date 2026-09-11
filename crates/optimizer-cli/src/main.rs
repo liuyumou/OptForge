@@ -3,6 +3,7 @@
 mod input;
 mod model;
 mod provenance;
+mod schedule;
 mod search;
 mod solve;
 
@@ -18,7 +19,7 @@ use std::time::{Duration, Instant};
 
 use optimizer_cuda::{DEFAULT_LOCK_PATH, GpuLease, discover};
 
-const HELP: &str = "optimizer 0.1.0 (C4 agent-independent run surface)
+const HELP: &str = "optimizer 0.1.0 (C5 flow-shop scheduling slice)
 Usage:
   optimizer hello
   optimizer model validate --model <path>
@@ -26,6 +27,8 @@ Usage:
   optimizer solve --model <path> --config <path> [--candidate <path> | --basis <path>]
   optimizer search --model <path> --config <path> [--output <path>]
   optimizer verify --record <path> --model <path>
+  optimizer schedule generate --instance-id <text> --seed <u32> --jobs <n> --machines <m> [--output <path>]
+  optimizer schedule solve --instance <path> --config <path> [--output <path>] [--output-model <path>]
   optimizer gpu discover [--dry-run]
   optimizer gpu lease --simulate-ms <0..60000> [--timeout-ms <0..60000>]
   optimizer --help
@@ -60,6 +63,14 @@ fn run(args: Vec<OsString>) -> io::Result<u8> {
         }
         [command, options @ ..] if command == "verify" => {
             return search::verify(options);
+        }
+        [command, subcommand, options @ ..]
+            if command == "schedule" && subcommand == "generate" =>
+        {
+            return schedule::generate(options);
+        }
+        [command, subcommand, options @ ..] if command == "schedule" && subcommand == "solve" => {
+            return schedule::solve(options);
         }
         _ => {}
     }

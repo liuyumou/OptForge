@@ -40,7 +40,7 @@ tasks:
     acceptance: "Provenance-bearing run records, re-execution verification, named divergence, CLI search over the executive"
   - id: C5
     title: Flow-shop scheduling vertical slice
-    status: ready
+    status: complete
     depends_on: [C1, C3, C4]
     specification: docs/specifications/SPEC-0008-flow-shop.md
     acceptance: "Exhaustive permutations, independent evaluator, validated incumbents, frozen development subset"

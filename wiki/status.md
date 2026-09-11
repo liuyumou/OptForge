@@ -1,14 +1,14 @@
 # Project Status
 
-The repository implements the C4 agent-independent run surface on top of C3
+The repository implements the C5 flow-shop scheduling slice on top of the C4
+agent-independent run surface, C3
 extension safety, C2 owned branch-and-bound search, C1 pinned HiGHS solving, M1
 model and candidate validation and the M0 bootstrap. Acceptance
 evidence is recorded in [active task](../state/active-task.md).
 
 | State | Features |
 | --- | --- |
-| Implemented | Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
-| Specified, not implemented | Flow-shop scheduling slice (C5) under SPEC-0008 and ADR-0007 |
+| Implemented | Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | Planned | GPU feasibility and adaptive research (C6/C7), registry and SDK (C8) |
 | Experimental | None enabled |
 | Deprecated | None |
@@ -31,13 +31,14 @@ loaded native extension, checkpoint restart or comparative experiment runner is
 available, cross-host reproducibility is untested, and no solver performance
 claim is made.
 
-The flow-shop slice is specified and unimplemented. Its contract fixes a makespan
-recurrence as the sole authority on a schedule's cost, a positional encoding that
-is exactly linear and needs no big-M constant, and a development subset generated
-from published seeds rather than downloaded. It claims correctness, not
-tractability: the encoding's linear relaxation is weak, so proven optimality is
-asserted only for tiny instances checked against exhaustive permutation
-enumeration.
+The flow-shop slice adds the first application workload whose objective has a
+second, independent computation: a makespan recurrence that shares no code with
+anything proposing a schedule. An instance is encoded into an ordinary model with no
+big-M constant, so every earlier contract carries it unchanged. It claims
+correctness, not tractability: the encoding's linear relaxation is weak, proven
+optimality is asserted only for tiny instances checked against exhaustive
+permutation enumeration, and the frozen Taillard subset carries feasibility and
+determinism evidence only. No best-known bound is committed as a threshold.
 
 See the [M1 contract](../docs/specifications/SPEC-0001-model-and-validation.md),
 [backend contract](../docs/specifications/SPEC-0002-backend-contract.md),

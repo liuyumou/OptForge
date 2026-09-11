@@ -46,13 +46,13 @@ optimizer-core result validation -> experiment record and CLI.
 
 C4 closes the last leg for search: the CLI drives the executive and
 optimizer-experiment wraps its record with provenance, so the flow runs end to
-end without an agent. optimizer-schedule candidate production remains C5, whose
-contract is accepted as
-[SPEC-0008](../specifications/SPEC-0008-flow-shop.md) with no behavior yet. That
-contract fixes how a scheduling instance enters this flow: it is encoded into an
-ordinary optimizer-core model, so the existing legs carry it unchanged rather than
-gaining a parallel scheduling path, and a makespan recurrence independent of every
-heuristic is the authority on what a resulting schedule costs.
+end without an agent. C5 completes the flow's first application under
+[SPEC-0008](../specifications/SPEC-0008-flow-shop.md): a scheduling instance is
+encoded into an ordinary optimizer-core model, so the existing legs carry it
+unchanged rather than gaining a parallel scheduling path, and a makespan recurrence
+independent of every heuristic is the authority on what a resulting schedule costs.
+optimizer-schedule-examples holds the NEH and insertion producers and depends only
+on the published core, extension and scheduling APIs.
 
 C1 implements the backend leg of this flow: the CLI drives optimizer-highs
 directly through the backend-neutral contract in optimizer-core, and every
@@ -95,7 +95,8 @@ explicit native settings; owned proof contracts belong to C2.
 | --- | --- | --- |
 | optimizer-core | Original models, numerical validation, solve contract | M1 / C1 |
 | optimizer-highs | Safe backend lifecycle and status mapping | C1 |
-| optimizer-schedule | Flow-shop recurrence and heuristics | C5 |
+| optimizer-schedule | Flow-shop instances, recurrence, encoding and heuristics | C5 |
+| optimizer-schedule-examples | Independently authored scheduling candidate producers | C5 |
 | optimizer-solver | Search executive, branch and bound | C2 |
 | optimizer-extension | Extension declarations, authority model, guarded host | C3 |
 | optimizer-extension-examples | Independently authored and adversarial extensions | C3 |

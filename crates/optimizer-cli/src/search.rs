@@ -177,6 +177,29 @@ pub(crate) fn verify(options: &[OsString]) -> io::Result<u8> {
     let record = RunRecord::from_json(&read(record_path)?).map_err(io::Error::other)?;
     let model = Model::from_json(&read(model_path)?).map_err(io::Error::other)?;
 
+    // Requirement 14 applies to this command too, and it is the reason this check
+    // exists rather than a divergence report. Re-execution below loads no
+    // extension, so a record whose configuration names an extension policy would
+    // be reproduced by a search the record does not describe, and the counters
+    // would differ for that reason alone. Reporting that as divergence would blame
+    // the record for a limitation of this surface. Refusing it as unsupported says
+    // what is actually true: nothing here can reconstruct the named extension, and
+    // that seam is the deferred registry's.
+    if !record.search.options.extensions.is_empty() {
+        let named: Vec<&str> = record
+            .search
+            .options
+            .extensions
+            .iter()
+            .map(|policy| policy.extension_id.as_str())
+            .collect();
+        return Err(io::Error::other(format!(
+            "unsupported: this surface loads no extensions; \
+             a record whose configuration names extension {} cannot be re-executed",
+            named.join(", ")
+        )));
+    }
+
     // The fingerprint is checked before spending a search budget, and it is
     // checked rather than model_id: a record whose model data changed under an
     // unchanged identity must not verify.

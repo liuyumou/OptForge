@@ -5,5 +5,14 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 
+[dependencies]
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# This crate takes no solver dependency at all, not even for tests. Requirement 8
+# keeps the recurrence independent of any search, and the search-driven half of
+# requirements 11 and 15 lives in optimizer-highs, so this crate stays as
+# backend-neutral as optimizer-solver itself.
 [lints]
 workspace = true

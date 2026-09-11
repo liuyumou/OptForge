@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "id": "c5-taillard-flow-shop-development-v1",
+  "purpose": "correctness",
+  "suite": "taillard-flow-shop",
+  "split": "development",
+  "license": "Instances are generated locally by the algorithm published in the cited paper; no third-party dataset is redistributed.",
+  "instances": [
+    {
+      "id": "ta001",
+      "path": "benchmarks/instances/flow-shop/ta001.json",
+      "sha256": "6d08edd4c25c6bf2cef6fe2de3c1b97bd3ed2c75201123a1ac05654156abd6c7",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 873654221,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta002",
+      "path": "benchmarks/instances/flow-shop/ta002.json",
+      "sha256": "a91f66bb8dfec99831bfadc665ccb1f9162d5ea5c78e86026edf0d8acdf72f70",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 379008056,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta003",
+      "path": "benchmarks/instances/flow-shop/ta003.json",
+      "sha256": "aaeb3ef7bb16c69f4f726fb7cc4d2fe911e2d9acc60b6e9d5a572dbb368bac70",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 1866992158,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta004",
+      "path": "benchmarks/instances/flow-shop/ta004.json",
+      "sha256": "abbefb2aefd18eea08697c6de165d4e6fcbedf1a68d39c363a45e568c6c3a2db",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 216771124,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta005",
+      "path": "benchmarks/instances/flow-shop/ta005.json",
+      "sha256": "2880d61a92c7f6920e624aee12bd7f2f3cebaed0f63bab431d9a425885fed627",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 495070989,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta006",
+      "path": "benchmarks/instances/flow-shop/ta006.json",
+      "sha256": "457f5db5e508440b8b6237a4b9dac7959ef3ff6c756d71941025dfe4b35c0997",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 402959317,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta007",
+      "path": "benchmarks/instances/flow-shop/ta007.json",
+      "sha256": "3fc17bc3b2a886bc511d0a6e39687ae36397fc5a9d9d2dd819867e00e75e23e1",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 1369363414,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta008",
+      "path": "benchmarks/instances/flow-shop/ta008.json",
+      "sha256": "6fb90c0e610276af5108cedb8fceab33e1a78fdc6ae6ad88ec93a51706aac886",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 2021925980,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta009",
+      "path": "benchmarks/instances/flow-shop/ta009.json",
+      "sha256": "cb5d912f674ec408628d266a8d745842e2c7f5d0d678f0723adb2cfbaff10348",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 573109518,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta010",
+      "path": "benchmarks/instances/flow-shop/ta010.json",
+      "sha256": "883140100c6f05b2e27d4bf874d00f9b90dd1144be89489d218926da267363d9",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 88325120,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    }
+  ],
+  "seeds": [
+    17
+  ],
+  "configuration": {
+    "schema_version": 1,
+    "seed": 17,
+    "time_limit_ms": 120000,
+    "memory_limit_mib": 2048,
+    "threads": 1,
+    "device": "cpu",
+    "settings": {}
+  },
+  "timing": {
+    "clock": "monotonic",
+    "includes": "end-to-end-with-transfers",
+    "warmup_runs": 0,
+    "measured_runs": 1
+  }
+}

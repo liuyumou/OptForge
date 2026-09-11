@@ -4,10 +4,10 @@ Status: accepted
 Scope: optimizer-schedule instances, evaluation, encoding and candidate production
 Owner: scheduling application
 Introduced: C5
-Last reviewed commit: pending
+Last reviewed commit: 5157786
 Supersedes: none
-Implementation: pending
-Tests: pending
+Implementation: [instances](../../crates/optimizer-schedule/src/instance.rs), [recurrence](../../crates/optimizer-schedule/src/evaluate.rs), [generator](../../crates/optimizer-schedule/src/generate.rs), [encoding](../../crates/optimizer-schedule/src/encode.rs), [heuristics](../../crates/optimizer-schedule/src/heuristic.rs), [producers](../../crates/optimizer-schedule-examples/src/lib.rs), [command surface](../../crates/optimizer-cli/src/schedule.rs)
+Tests: [flow-shop contracts](../../crates/optimizer-schedule/tests/contracts.rs), [native acceptance](../../crates/optimizer-highs/tests/schedule.rs), [CLI contracts](../../crates/optimizer-cli/tests/schedule.rs), [manifest provenance](../../tests/integration/test_flow_shop_manifest.py)
 
 ## Purpose
 
@@ -340,13 +340,26 @@ asserted so it cannot silently shrink; a fractional candidate, one selecting two
 jobs for a position and one omitting a job are each refused rather than rounded;
 and a decoded permutation's recurrence makespan equals the model's recomputed
 objective. Requirements 17-21: NEH and insertion produce identical permutations
-across repeated invocations; every proposed incumbent independently re-evaluates
-through the recurrence to the objective the record reports; a producer proposing a
-non-permutation, a fractional assignment and a valid permutation with a lying
-objective leaves the outcome, proven optimum, dual bound, forfeiture state and both
-prune counters identical to the producer-free run over that same grid; and a test
-asserting branching occurred checks the explored-node count first, so a model
-whose relaxation happens to be integral cannot make the assertion vacuous.
+across repeated invocations, including on a fixture whose processing times
+deliberately tie so the tie-breaking path is reached; every proposed incumbent
+independently re-evaluates through the recurrence to the objective the record
+reports; a producer whose every proposal is refused leaves the outcome, proven
+optimum, dual bound, forfeiture state and both prune counters identical to the
+producer-free run, with the refusal recorded rather than absorbed; an honest
+producer reaches the same proven optimum without forfeiting; and each of these
+checks the producer's own proposal counter first, so a producer that was never
+consulted cannot satisfy them vacuously.
+
+Requirement 20's scope is deliberate and was confirmed by measurement rather than
+assumed. An *honest* producer's accepted incumbent legitimately changes
+`nodes_pruned_bound`, because pruning more by bound is precisely what a good
+incumbent is for; an early assertion that an honest producer left both prune
+counters untouched failed for that reason. The invariance claim therefore belongs to
+a refused or absent proposal, which is how the requirement is written, and the
+honest producer is asserted against what requirement 19 actually promises: the
+proven optimum is unchanged and the recorded objective is the core's recomputation.
+SPEC-0004 requirement 13's identical wording is consistent with this, because C3
+established it with hostile extensions whose proposals are all refused.
 Requirements 22-24: the manifest validates under its schema, every committed
 instance document matches its recorded checksum, and the generated matrix equals
 the committed published fixture. Requirement 25: a scheduling run writes a run

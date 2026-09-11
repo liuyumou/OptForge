@@ -3,7 +3,7 @@
 Status: accepted
 Owner: scheduling application
 Introduced: C5
-Last reviewed commit: pending
+Last reviewed commit: 5157786
 Supersedes: none; ADR-0001 through ADR-0006 remain in force
 
 ## Context

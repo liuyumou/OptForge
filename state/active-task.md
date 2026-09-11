@@ -1,5 +1,111 @@
 # Active Task
 
+## C5 Flow-Shop Scheduling Implementation (2026-09-11)
+
+Objective: implement C5 under the accepted SPEC-0008 and ADR-0007: flow-shop
+instances, the makespan recurrence, the positional encoding, deterministic NEH and
+insertion producers, a scheduling command surface, and a frozen generated Taillard
+development subset.
+
+Status: complete; the specification preceded the implementation, and the full gate
+passes with native acceptance covered.
+
+Acceptance gate: the optimum the executive proves on an encoded model equals the
+minimum found by exhaustive permutation enumeration over a fixed grid; the recurrence
+agrees with an independently written oracle; the generator reproduces Taillard's
+published verification instance exactly; a producer whose proposals are refused
+leaves the outcome, proven optimum, dual bound, forfeiture state and both prune
+counters unchanged; a scheduling run writes a verifiable run record; and
+`bash tools/check.sh` passes with native acceptance covered. Resource budget: CPU
+only, no GPU workloads.
+
+Evidence (2026-09-11): the complete `bash tools/check.sh` gate passed with the
+pinned HiGHS 1.11.0 library linked and **zero skip messages**, exit 0 in 16 seconds
+on a warm build directory, with no native-uncovered warning. Rust tests rose from
+159 to 191 and Python tests from 39 to 45. Documentation remains 48 pages, because
+SPEC-0008 and ADR-0007 were added by the specification commit. The
+`AI_OPTIMIZER_SKIP_NATIVE=1` configuration also passed with all 191 tests and its
+uncovered-acceptance warning. No checks were waived; the RustSec advisory fetch
+recovered through the cached database as already recorded.
+
+`Cargo.lock` changed only by adding local dependency edges and the new
+optimizer-schedule-examples crate. No external package version changed and no new
+external dependency was introduced: the Lehmer generator is Taillard's own published
+algorithm rather than a general-purpose RNG crate, which is a correctness
+requirement and not a dependency preference.
+
+Correctness evidence, stated as what was actually checked:
+
+- Over a fixed grid of tiny instances with no randomness, the executive's proven
+  optimum on the encoded model equals the minimum from exhaustive enumeration of
+  every permutation, and the decoded winner re-evaluates through the recurrence to
+  that same value. Three independent views must agree, so neither the encoding nor
+  the recurrence can be wrong alone without failing. The grid sizes are asserted so
+  they cannot silently shrink.
+- The recurrence agrees with a separately written oracle over 5,232
+  instance-permutation pairs. The independence is architectural rather than
+  asserted: `evaluate` imports neither `encode` nor `heuristic`, and the test oracle
+  is a second implementation in the test file.
+- The generator reproduces Taillard's published `ta001` matrix exactly from seed
+  873654221, checked in Rust against the published matrix and independently in
+  Python against a second implementation of the generator. Both a wrong seed and a
+  transposed loop order are shown to disagree, so the check can fail.
+- Every one of the ten frozen instances regenerates from its manifest-recorded seed
+  and parameters to the committed bytes, and its committed checksum is verified.
+- A producer whose every proposal is refused leaves the outcome, proven optimum,
+  dual bound, forfeiture state and both prune counters identical to the
+  producer-free run, with the refusal recorded as rejected rather than absorbed.
+- Every scheduling test that depends on a producer asserts the producer's own
+  proposal counter first, so none can pass because the producer was never consulted.
+- Decoding refuses a fractional assignment, a position selecting two jobs, a
+  position selecting none, one job filling two positions, a candidate naming another
+  model, and a candidate missing a variable. None is rounded or repaired.
+- The end-to-end surface was exercised on the built binary: a 5-job, 3-machine
+  instance reported `proven_optimal` with objective 372, matching independent
+  brute-force enumeration of all 120 permutations, and its record verified.
+
+Two findings during implementation, both recorded rather than patched silently:
+
+An early test asserted that an *honest* producer left both prune counters unchanged.
+It failed, correctly: `nodes_pruned_bound` went from 0 to 1 because an accepted
+incumbent legitimately prunes more by bound, which is the entire purpose of a
+candidate producer. SPEC-0008 requirement 20 was already scoped to a refused or
+absent proposal, so the contract was right and the test was wrong. A
+`RefusedProducer` was added to test the invariance claim for what it actually says,
+and the honest producer is now asserted against requirement 19's promise instead.
+C3's identically worded rule is consistent, because it was established with hostile
+extensions whose proposals are all refused. The specification's acceptance section
+now records this rather than leaving the scope looking arbitrary.
+
+`optimizer verify` reported a *divergence* for a record produced with the producer
+registered, naming a node-count difference. That diagnosis was misleading:
+verification re-executes through the extension-free entry point, so it reproduced a
+search the record does not describe and the counters differed for that reason alone.
+SPEC-0005 requirement 14 already refuses such a configuration on the search path, so
+the same rule now applies to verification and the record is refused as unsupported
+instead. The consequence is real and is recorded in
+[known failures](known-failures.md): a scheduling run performed with the producer is
+not verifiable by re-execution today, and the seam is C8's registry.
+
+Scope boundary held: no schema version changed anywhere, no new record type was
+introduced, and no existing document gained or lost a field. `RunRecord`,
+`SearchRecord`, `Model` and `optimizer verify` are untouched apart from the
+verification refusal above, which is why the committed C4 example record still
+re-executes and verifies inside the gate.
+
+What is deliberately not claimed: no performance, runtime or solution-quality
+result. Proven optimality is asserted only where exhaustive enumeration is the
+oracle; a node-limited run over `ta001` is asserted to report its limit rather than
+an optimum, and its incumbent is asserted feasible through the recurrence. No
+best-known bound is committed, because a committed bound is an acceptance threshold.
+The positional encoding's weak relaxation and the suboptimality of permutation
+schedules beyond three machines are both recorded in
+[known failures](known-failures.md).
+
+Follow-up: C6 (heterogeneous backend and GPU feasibility) now has its dependencies
+met, and C8 (registry, SDK and comparative runner) remains unblocked. Both need
+their specifications written before any public API.
+
 ## C5 Flow-Shop Scheduling Specification (2026-09-11)
 
 Objective: write and accept the C5 contract before any public scheduling API

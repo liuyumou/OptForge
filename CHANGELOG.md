@@ -6,6 +6,50 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- C5 flow-shop scheduling slice, under SPEC-0008 and ADR-0007. This is the first
+  application workload with an independent notion of a correct answer: a makespan
+  recurrence computes a schedule's cost from a job order, so a candidate is checked
+  against a definition rather than against another solver.
+- `optimizer schedule generate` writes a flow-shop instance from a published
+  Taillard seed, and `optimizer schedule solve` encodes an instance, registers the
+  NEH producer, runs the executive and writes a SPEC-0005 run record. `solve` also
+  writes the encoded model, which is what a caller hands `optimizer verify`: a run
+  record's fingerprint is computed from the model that was searched, and for a
+  scheduling run that is the encoded model rather than the instance.
+- Flow-shop instances are versioned strict-JSON documents. A ragged matrix, a
+  processing time that is zero or negative, a matrix disagreeing with its declared
+  shape, an unknown or duplicate field, and a positional array are each refused at
+  parse time rather than clamped or repaired.
+- The positional encoding turns an instance into an ordinary model with no big-M
+  constant, so the existing solve, search, extension and run-record contracts apply
+  unchanged: no new record type, and no schema version changed anywhere.
+- Deterministic NEH and insertion candidate producers, registered by a caller and
+  never loaded by default. They hold no authority: every proposal is validated
+  against the original model and the recorded objective is that recomputation.
+- A frozen Taillard development subset, the published 20x5 class, generated from
+  the seeds in the cited paper rather than downloaded. The manifest records each
+  instance's generator, seed and parameters beside its checksum, so the derivation
+  is verifiable and the gate needs no network access.
+- C5 acceptance evidence: the proven optimum on encoded models equals exhaustive
+  enumeration of every permutation over a fixed grid; the generator reproduces
+  Taillard's published `ta001` matrix exactly; a producer whose proposals are all
+  refused leaves the outcome, proven optimum, dual bound, forfeiture state and both
+  prune counters identical to the producer-free run; and a scheduling run record
+  verifies by re-execution.
+- No performance or solution-quality claim is made. The positional encoding's
+  linear relaxation is weak, so proven optimality is asserted only for tiny
+  instances, and no best-known bound is committed as a threshold.
+
+### Fixed
+
+- `optimizer verify` now refuses a record whose configuration names an extension
+  policy, reporting it as unsupported instead of as a divergence. Re-execution
+  loads no extension, so such a record was reproduced by a search it does not
+  describe and its node counters differed for that reason alone; calling that a
+  divergence blamed the record for a limitation of the verifier. SPEC-0005
+  requirement 14 already refused such a configuration on the search path, and this
+  applies the same rule to verification.
+
 - C4 agent-independent run surface, under SPEC-0005 and ADR-0006. `optimizer
   search` runs the owned executive over the pinned backend and writes a run
   record; `optimizer verify` re-runs that search from the record alone and fails

@@ -1,0 +1,21 @@
+[package]
+name = "optimizer-schedule-examples"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
+optimizer-schedule = { version = "0.1.0", path = "../optimizer-schedule" }
+
+# This crate depends only on the published extension, core and scheduling APIs.
+# The executive is a test-only dependency, so "a scheduling producer needs no
+# engine-internal change" is established by the workspace build rather than
+# asserted, exactly as ADR-0005 established it for the example extensions.
+[dev-dependencies]
+optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }
+
+[lints]
+workspace = true

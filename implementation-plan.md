@@ -27,7 +27,7 @@ exist, this document says so rather than implying it.
 | 0. Foundation | M0 bootstrap, M1 model/validation authority | Complete |
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
 | 2. Execution | C2 executive, C3 extension runtime | Complete |
-| 3. Application | C4 run surface, C5 scheduling slice, C8 registry/SDK | C4 complete; C5 specified, not implemented; C8 not started |
+| 3. Application | C4 run surface, C5 scheduling slice, C8 registry/SDK | C4 and C5 complete; C8 not started |
 | 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | Not started |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
@@ -181,7 +181,7 @@ comparative experiment execution over a frozen manifest; and progress streaming
 and checkpoint restart, which need new public search surface. MCP may wrap these
 interfaces but is not required for execution.
 
-**C5 — Scheduling vertical slice (specified, not implemented).** Flow-shop
+**C5 — Scheduling vertical slice (complete).** Flow-shop
 instances, makespan recurrence, deterministic NEH and insertion candidates,
 independent evaluation, and model adapters through the common C1-C3 interfaces,
 under [SPEC-0008](docs/specifications/SPEC-0008-flow-shop.md) and
@@ -223,10 +223,30 @@ committed, because a committed bound is an acceptance threshold.
   JSON Schemas accept the same documents, with nested versions checked on the
   parse path.
 
-*Remaining evidence for this stage:*
+*C5 evidence (recorded, not projected):*
 
-- Exhaustive tiny instances, independent evaluator agreement, validated
-  incumbents, and a frozen Taillard development subset pass with provenance (C5).
+- Over a fixed grid of tiny instances with no randomness, the optimum the
+  executive proves on the encoded model equals the minimum found by exhaustive
+  enumeration of every permutation, and the decoded winner re-evaluates through
+  the recurrence to that same value. Three independent views must agree, so
+  neither the encoding nor the recurrence can be wrong alone without failing.
+- The recurrence agrees with a separately written oracle over 5,232
+  instance-permutation pairs, and the two share no code by construction: the
+  evaluator imports neither the encoding nor any heuristic.
+- The generator reproduces Taillard's published `ta001` matrix exactly from the
+  paper's seed, asserted in Rust against a committed fixture and independently in
+  Python against a second implementation of the generator. A wrong seed and a
+  transposed loop order are both shown to disagree, so the check can fail.
+- A producer whose every proposal is refused leaves the outcome, proven optimum,
+  dual bound, forfeiture state and both prune counters identical to the
+  producer-free run, with the refusal recorded. Each such test asserts the
+  producer was actually invoked first, so none can pass vacuously.
+- A scheduling run writes a run record that verifies by re-execution, and two
+  instances sharing an identifier but differing in data are refused on the
+  fingerprint.
+- No performance claim is made or measured. Proven optimality is asserted only
+  where exhaustive enumeration is the oracle; on the frozen subset the assertions
+  are feasibility, determinism and validated incumbents.
 
 *Known limits, carried forward rather than hidden:* agreement is evidence of
 determinism on one host over time, not of correctness; cross-host reproducibility

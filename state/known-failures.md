@@ -107,10 +107,9 @@ re-runs from the beginning under the record's own budgets. Reproduction: no CLI
 command consumes a checkpoint. Next step: restart needs its own acceptance
 evidence before any public entry point exists.
 
-## The flow-shop encoding is correct but weak, and unimplemented
+## The flow-shop encoding is correct but weak
 
-SPEC-0008 and ADR-0007 are accepted with no behavior implemented. Two limits are
-recorded now rather than discovered during implementation.
+Two limits recorded before implementation, both confirmed by it.
 
 The positional encoding is exactly linear and its optimum equals the instance's
 minimum makespan by construction, but its linear relaxation is weak and the model
@@ -120,9 +119,11 @@ specification confines proven-optimal claims to tiny instances checked against
 exhaustive permutation enumeration and confines the frozen subset to feasibility,
 determinism and validated-incumbent evidence. This is a stated scope boundary, not
 a defect, and it is why requirement 26 forbids recording a performance claim.
-Reproduction: encode any 20-job instance and run the executive without a budget.
-Next step: a stronger formulation or a scheduling-specific bound would each need
-its own contract, and the evidence justifying one does not exist yet.
+Reproduction: encode any 20-job instance and run the executive without a budget; a
+node-limited run over `ta001` is asserted in the CLI contracts to report its limit
+rather than an optimum. Next step: a stronger formulation or a scheduling-specific
+bound would each need its own contract, and the evidence justifying one does not
+exist yet.
 
 Permutation schedules are also not optimal for the general flow shop beyond three
 machines, confirmed by direct enumeration on a 3-job, 4-machine instance where the
@@ -130,6 +131,23 @@ best permutation schedule costs 50 and the best general schedule costs 47. The
 permutation restriction is part of the problem C5 solves rather than an
 approximation it makes, and nothing in the slice should be read as solving the
 general flow shop.
+
+## Scheduling run records cannot be verified with a producer registered
+
+`optimizer verify` re-executes a record through the extension-free search entry
+point, so a record whose configuration names an extension policy is refused as
+unsupported rather than re-run. This is deliberate and is the same rule SPEC-0005
+requirement 14 already applied to `optimizer search`: re-running without the named
+producer would reproduce a search the record does not describe, and its node
+counters would differ for that reason alone. Reporting that as divergence would
+blame the record for a limitation of the verifier.
+
+The consequence is real and worth stating: a scheduling run performed *with* the NEH
+producer is not verifiable by re-execution today, only one performed without it.
+Reproduction: `optimizer schedule solve` with a configuration naming
+`flow-shop-neh`, then `optimizer verify` on the resulting record. Next step: the
+seam is the deferred extension registry under C8, which is what would let a verifier
+reconstruct the producer a record names.
 
 ## Dynamically loaded native extensions are not implemented
 
