@@ -46,7 +46,13 @@ optimizer-core result validation -> experiment record and CLI.
 
 C4 closes the last leg for search: the CLI drives the executive and
 optimizer-experiment wraps its record with provenance, so the flow runs end to
-end without an agent. optimizer-schedule candidate production remains C5.
+end without an agent. optimizer-schedule candidate production remains C5, whose
+contract is accepted as
+[SPEC-0008](../specifications/SPEC-0008-flow-shop.md) with no behavior yet. That
+contract fixes how a scheduling instance enters this flow: it is encoded into an
+ordinary optimizer-core model, so the existing legs carry it unchanged rather than
+gaining a parallel scheduling path, and a makespan recurrence independent of every
+heuristic is the authority on what a resulting schedule costs.
 
 C1 implements the backend leg of this flow: the CLI drives optimizer-highs
 directly through the backend-neutral contract in optimizer-core, and every

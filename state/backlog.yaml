@@ -1,6 +1,6 @@
 schema_version: 1
-current_milestone: C4
-next_ready_milestone: C4
+current_milestone: C5
+next_ready_milestone: C5
 tasks:
   - id: M0
     title: Repository and process bootstrap
@@ -34,14 +34,15 @@ tasks:
     acceptance: "Independent extension conformance, invalid-action rejection, compatibility and resource failures"
   - id: C4
     title: Agent-independent run surface with pinned reproducible records
-    status: ready
+    status: complete
     depends_on: [C1, C3]
     specification: docs/specifications/SPEC-0005-run-surface.md
     acceptance: "Provenance-bearing run records, re-execution verification, named divergence, CLI search over the executive"
   - id: C5
     title: Flow-shop scheduling vertical slice
-    status: planned
+    status: ready
     depends_on: [C1, C3, C4]
+    specification: docs/specifications/SPEC-0008-flow-shop.md
     acceptance: "Exhaustive permutations, independent evaluator, validated incumbents, frozen development subset"
   - id: C6
     title: Heterogeneous backend and GPU feasibility

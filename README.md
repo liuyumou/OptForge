@@ -64,6 +64,7 @@ acceptance was not covered.
 - [Solver executive specification](docs/specifications/SPEC-0003-solver-executive.md)
 - [Extension runtime specification](docs/specifications/SPEC-0004-extension-runtime.md)
 - [Run surface specification](docs/specifications/SPEC-0005-run-surface.md)
+- [Flow-shop scheduling specification](docs/specifications/SPEC-0008-flow-shop.md)
 - [Validate a model and candidate](docs/tutorials/model-validation.md)
 - [Solve a model](docs/tutorials/solve-a-model.md)
 - [Run and verify a search](docs/tutorials/run-and-verify.md)

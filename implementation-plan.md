@@ -27,7 +27,7 @@ exist, this document says so rather than implying it.
 | 0. Foundation | M0 bootstrap, M1 model/validation authority | Complete |
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
 | 2. Execution | C2 executive, C3 extension runtime | Complete |
-| 3. Application | C4 run surface, C5 scheduling slice, C8 registry/SDK | C4 complete; C5 and C8 not started |
+| 3. Application | C4 run surface, C5 scheduling slice, C8 registry/SDK | C4 complete; C5 specified, not implemented; C8 not started |
 | 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | Not started |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
@@ -181,10 +181,29 @@ comparative experiment execution over a frozen manifest; and progress streaming
 and checkpoint restart, which need new public search surface. MCP may wrap these
 interfaces but is not required for execution.
 
-**C5 — Scheduling vertical slice.** Flow-shop instances, makespan recurrence,
-deterministic NEH and insertion candidates, independent evaluation, and model
-adapters through the common C1-C3 interfaces. Job-shop follows only after
-flow-shop correctness and reproducibility gates pass.
+**C5 — Scheduling vertical slice (specified, not implemented).** Flow-shop
+instances, makespan recurrence, deterministic NEH and insertion candidates,
+independent evaluation, and model adapters through the common C1-C3 interfaces,
+under [SPEC-0008](docs/specifications/SPEC-0008-flow-shop.md) and
+[ADR-0007](docs/decisions/ADR-0007-flow-shop-encoding.md). Job-shop follows only
+after flow-shop correctness and reproducibility gates pass.
+
+The contract settles three things before any code exists. The makespan recurrence
+is the sole authority on what a schedule costs and shares no implementation with
+anything that proposes one, which is what makes agreement between them evidence
+rather than a tautology. An instance reaches the solver as an ordinary
+optimizer-core model through a positional encoding that is exactly linear and needs
+no big-M constant, so C1-C4 apply unchanged with no new record type and no schema
+version bump. And the frozen development subset is generated from seeds published
+in the cited paper rather than downloaded, which keeps the gate independent of a
+third-party host and records how each instance arose rather than only what its
+bytes hash to.
+
+What C5 will not claim is equally fixed: the positional encoding's linear
+relaxation is weak, so proven optimality is asserted only for tiny instances
+checked against exhaustive permutation enumeration, and the frozen subset carries
+feasibility, determinism and validated-incumbent evidence. No best-known bound is
+committed, because a committed bound is an acceptance threshold.
 
 *C4 evidence (recorded, not projected):*
 

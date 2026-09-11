@@ -30,9 +30,12 @@ tests use fixed enumeration without random seeds. Minimized parser regressions
 and infeasible, unbounded, degenerate, poorly scaled and overflow-prone model
 fixtures are retained in tests/. Fixtures do not establish solver classifications.
 
-Original-variable reconstruction after transformations, deterministic solver
-seeding, flow-shop recurrence, permutation validity and CPU/GPU agreement remain
+Original-variable reconstruction after transformations and CPU/GPU agreement remain
 gated on later capabilities. Transformations are not implemented.
+
+C5 specifies the flow-shop recurrence and permutation-validity rows above and is
+not yet implemented; its planned coverage is described at the end of this document
+so the intended evidence is on record before the code is.
 
 C2 adds [search contracts](../../crates/optimizer-solver/tests/executive.rs) and
 [native end-to-end acceptance](../../crates/optimizer-highs/tests/executive.rs).
@@ -107,4 +110,29 @@ library is absent, so a missing build is never counted as coverage.
 Every backend status must have an explicit test. Limits and numerical failures
 must never become proven optimality. Performance tests are separate from
 correctness tests. Tiny fixtures belong in Git; large datasets require download
-scripts, checksums, source versions, and license records.
+scripts, checksums, source versions, and license records. A suite reproduced by a
+published generator instead records the generator, seed and parameters per
+instance and commits the generated documents with checksums, as
+[the benchmark protocol](../benchmarks/protocol.md) now states.
+
+C5 is specified by [SPEC-0008](../specifications/SPEC-0008-flow-shop.md) and not
+implemented. Its load-bearing assertion is the exhaustive one: over a fixed grid of
+tiny instances with no randomness, the minimum makespan found by enumerating every
+permutation must equal the optimum the executive proves on the encoded model, with
+the grid's size asserted so it cannot silently shrink. That comparison is what
+detects drift between the two computations of makespan the slice deliberately
+maintains, and it compares both against enumeration rather than against each other,
+so a shared error cannot hide.
+
+The scheduling suites need three guards the earlier capabilities' lessons already
+identified. A test asserting that branching occurred must check the explored-node
+count first, because an encoded model whose relaxation happens to be integral makes
+the assertion vacuous, which is the C3 lesson arriving from a third source. A
+producer-independence test must confirm the producer was actually invoked rather
+than assume it. And the generator must be asserted against a committed fixture
+holding its source's own published reference instance, so "reproduces the
+literature" is checked rather than described.
+
+Requirement 26 makes an omission part of the contract: no scheduling test may
+assert a runtime, a solution quality or a comparison against a published bound. A
+limited search's incumbent is asserted feasible, never optimal.

@@ -6,8 +6,9 @@ Update state/active-task.md before work and record acceptance evidence afterward
 Read state/known-failures.md before implementing related behavior.
 
 M1, C1, C2, C3 and C4 are complete and specified. The next dependency-ready task
-is C5, the flow-shop scheduling slice, which has no accepted specification yet:
-write it before introducing any public scheduling API. The local extension
+is C5, the flow-shop scheduling slice, whose contract is accepted as SPEC-0008 and
+ADR-0007 with no behavior implemented yet; implement it against that contract and
+do not widen it. The local extension
 registry, the Python SDK and the comparative experiment runner are backlog item
 C8 and are likewise unspecified; SPEC-0005 excludes them deliberately and
 [known failures](state/known-failures.md) records each blocker. Later scheduling,

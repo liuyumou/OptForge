@@ -16,7 +16,11 @@
 | Backend | Replaceable numerical solver behind the solve contract; native handles stay private |
 | Warm start | Validated candidate or model-bound LP basis supplied to a solve |
 | Candidate | Proposed solution requiring original-model validation |
-| Makespan | Completion time of the final job on the final machine; C5 contract pending |
+| Makespan | Completion time of the final job on the final machine; [SPEC-0008](../docs/specifications/SPEC-0008-flow-shop.md) |
+| Recurrence | Definition of makespan from an instance and a permutation; the sole authority on a schedule's cost, independent of every heuristic |
+| Permutation schedule | One job order used identically on every machine; not optimal for the general flow shop beyond three machines |
+| Positional encoding | Adaptation of a flow-shop instance into a linear model placing jobs in positions, using no big-M constant |
+| Decoding | Recovering a permutation from a candidate over an encoded model; a candidate that does not decode is refused, never rounded |
 | Extension | Separately authored component that proposes candidates or search actions; [SPEC-0004](../docs/specifications/SPEC-0004-extension-runtime.md) |
 | Authority | Consequence the core permits an extension's output to have, derived from its category, never chosen by the extension |
 | Declaration | Versioned document by which an extension states identity, category, contract version, determinism and budgets |

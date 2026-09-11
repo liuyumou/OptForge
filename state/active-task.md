@@ -1,5 +1,118 @@
 # Active Task
 
+## C5 Flow-Shop Scheduling Specification (2026-09-11)
+
+Objective: write and accept the C5 contract before any public scheduling API
+exists, as required by AGENTS.md, CONTRIBUTING.md and the Stage 3 scope. No C5
+behavior is implemented by this change.
+
+Status: complete; SPEC-0008 and ADR-0007 are accepted and the project records that
+reference C5 are synchronized.
+
+Acceptance gate: the specification uses numbered observable MUST/MUST NOT
+requirements with an acceptance-test mapping, states its exclusions, and passes
+documentation and link validation; `bash tools/check.sh` continues to pass with
+native acceptance covered and unchanged test counts, because no behavior changes.
+Resource budget: CPU only, four Cargo workers, no GPU workloads.
+
+Evidence (2026-09-11): the complete `bash tools/check.sh` gate passed with the
+pinned HiGHS 1.11.0 library linked and **zero skip messages**, exit 0 and no
+native-uncovered warning. Rust tests remain 159 and Python tests remain 39, which
+is the expected result for a contract with no behavior: had either count moved,
+this change would have been doing something it claims not to. Documentation rose
+from 46 to 48 pages, SPEC-0008 and ADR-0007, with internal links and anchors
+validated. The RustSec advisory fetch failed and recovered through the cached
+database, the condition already recorded in [known failures](known-failures.md).
+No checks were waived.
+
+The diff is documentation plus one doc comment. `Cargo.lock`, `Cargo.toml`,
+`schemas/`, `tools/` and `examples/` are untouched, and the only change under
+`crates/` replaces the stale placeholder comment in optimizer-schedule that claimed
+its specification was unassigned. No CHANGELOG.md entry accompanies this change:
+the changelog records user-visible changes, and an accepted contract with zero
+behavior is not one, matching the C2 specification commit. C5 enters the changelog
+when its behavior ships.
+
+Three claims in these documents were verified before being written down rather than
+reasoned about, because each is the kind a later implementation could get quietly
+wrong. Taillard's generator, reimplemented from the OR-Library transcription of the
+1993 EJOR paper, reproduces his published ta001 matrix exactly from seed 873654221.
+The positional encoding's optimum equals the makespan recurrence for a fixed
+permutation, and its minimum over all permutations equals brute-force enumeration,
+over 300 randomly generated instances. And permutation schedules are genuinely
+suboptimal for the general flow shop beyond three machines: on a 3-job, 4-machine
+instance the best permutation schedule costs 50 while the best general schedule
+costs 47, which is why SPEC-0008 states the permutation restriction is part of the
+problem rather than an approximation. The exhaustive-oracle bound was also measured:
+enumerating 8 jobs is 40,320 permutations in roughly 130 ms, so the fixed grid in
+the acceptance tests is affordable at n ≤ 8.
+
+Resolved while writing: the first gate run failed rustdoc with an unresolved
+intra-doc link, because the new module comment linked to `optimizer_core` while
+optimizer-schedule still declares no dependencies. Adding that dependency edge
+belongs to the implementation commit, not to a spec-only change, so the comment now
+uses plain backticks. Worth recording because the failure was the workspace's
+warnings-as-errors rustdoc correctly catching a documentation claim that referenced
+something not yet in scope.
+
+Noted and not changed: `state/backlog.yaml` retains one `status: ready`, which is
+now C5's own and is correct. The benchmark protocol gained a paragraph stating when
+a generated suite satisfies its freezing rule without download tooling, because the
+rule as written required download tooling and ADR-0007 deliberately takes the other
+route; leaving the two in apparent conflict would have made the protocol read as
+overridden rather than extended.
+
+Follow-up: C5 implementation is now dependency-ready under SPEC-0008. It requires
+the instance document and its strict parser, the recurrence evaluator kept
+independent of the encoding, the Lehmer generator with the pinned published seeds,
+the positional adapter, the NEH and insertion producers in their own crate so the
+independence evidence comes from the workspace build, a CLI surface, the frozen
+manifest with committed instances and checksums, and the exhaustive permutation
+grid that is the slice's load-bearing assertion.
+
+Expected changes: docs/specifications/SPEC-0008-flow-shop.md,
+docs/decisions/ADR-0007-flow-shop-encoding.md, state/backlog.yaml,
+docs/benchmarks/protocol.md, implementation-plan.md, docs/architecture/overview.md,
+docs/architecture/testing.md, README.md, wiki/status.md, AGENTS.md, the stale
+placeholder doc comment in optimizer-schedule, and this record.
+
+Two decisions are settled before implementation because both are the kind a later
+implementation could get quietly wrong, and both were verified rather than
+assumed.
+
+The positional encoding is exactly linear. Makespan is not linear in a raw
+permutation, but the positional formulation with binary job-position assignment
+and continuous completion times needs no big-M constant. Checked over 300 random
+instances: the encoded optimum for a fixed permutation equals the makespan
+recurrence, and the minimum over all permutations equals brute-force enumeration.
+The consequence is that C5 reuses `Model`, `Model::evaluate`,
+`optimizer_solver::search`, `RunRecord` and `optimizer verify` unchanged, with no
+new record type and no schema version bump.
+
+The frozen Taillard subset is generated from published seeds rather than
+downloaded. Taillard's documented Lehmer generator reproduces his published ta001
+matrix exactly from seed 873654221, checked against the OR-Library transcription
+of the EJOR paper. The canonical instance host timed out from this environment, so
+generating from pinned seeds removes a network dependency from the gate instead of
+adding one. `schemas/benchmark-manifest-v1.schema.json` already carries the shape
+this needs: `instances[].generator` accepts a name, seed and parameters, so no
+schema change is required.
+
+What C5 must not claim: the positional encoding's LP relaxation is weak and a
+20x5 Taillard instance is 400 binaries, so the executive will not prove optimality
+at that size. Proven-optimal assertions are therefore confined to tiny instances
+where exhaustive permutation enumeration is the independent oracle, and the frozen
+subset carries feasibility, determinism and validated-incumbent assertions only.
+Best-known upper bounds are deliberately not committed, because recording one
+would create an acceptance threshold that the benchmark protocol says requires its
+own ADR and experiment record.
+
+Also in scope: `state/backlog.yaml` still names C4 as the current and next-ready
+milestone and marks it `ready` while every other record in the repository says C4
+is complete. It is the only file carrying that staleness. The benchmark protocol's
+planned-suites table also still dates the two flow-shop suites in the retired
+M-numbering.
+
 ## Local C4 Integration (2026-09-11)
 
 Objective: verify the feat/run-surface branch from a clean checkout, integrate it

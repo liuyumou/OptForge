@@ -8,7 +8,8 @@ evidence is recorded in [active task](../state/active-task.md).
 | State | Features |
 | --- | --- |
 | Implemented | Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
-| Planned | Flow-shop slice (C5), GPU feasibility and adaptive research (C6/C7), registry and SDK (C8) |
+| Specified, not implemented | Flow-shop scheduling slice (C5) under SPEC-0008 and ADR-0007 |
+| Planned | GPU feasibility and adaptive research (C6/C7), registry and SDK (C8) |
 | Experimental | None enabled |
 | Deprecated | None |
 
@@ -30,10 +31,19 @@ loaded native extension, checkpoint restart or comparative experiment runner is
 available, cross-host reproducibility is untested, and no solver performance
 claim is made.
 
+The flow-shop slice is specified and unimplemented. Its contract fixes a makespan
+recurrence as the sole authority on a schedule's cost, a positional encoding that
+is exactly linear and needs no big-M constant, and a development subset generated
+from published seeds rather than downloaded. It claims correctness, not
+tractability: the encoding's linear relaxation is weak, so proven optimality is
+asserted only for tiny instances checked against exhaustive permutation
+enumeration.
+
 See the [M1 contract](../docs/specifications/SPEC-0001-model-and-validation.md),
 [backend contract](../docs/specifications/SPEC-0002-backend-contract.md),
 [solver executive contract](../docs/specifications/SPEC-0003-solver-executive.md),
 [extension runtime contract](../docs/specifications/SPEC-0004-extension-runtime.md),
 [run surface contract](../docs/specifications/SPEC-0005-run-surface.md),
+[flow-shop contract](../docs/specifications/SPEC-0008-flow-shop.md),
 [backlog](../state/backlog.yaml) and
 [implementation plan](../implementation-plan.md) for evidence stages and dependencies.
