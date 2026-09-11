@@ -140,6 +140,14 @@ GPU work.
 version 2, carrying the relaxation backend's own reported version rather than a
 version this surface assumes.
 
+`EnvironmentDifference` reports whether the backend library, source revision or
+compiler performing a verification differs from the one a record names. It is
+diagnostic: it is computed after the search runs, it is never consulted when
+deciding agreement, and the backend difference is labeled distinctly because a
+rebuilt library can change a search's counters while a moved revision alone
+cannot. Making any of it decide an outcome would change what agreement means and
+requires a new record version and an ADR.
+
 `RunRecord::verify_agreement` compares two search records under requirements 11
 and 12 and is the single authority for agreement. The command surface and the
 contract tests use that one implementation, so a field cannot be compared by one
@@ -284,11 +292,14 @@ slice is complete.
 
 ## Open Questions
 
-Whether verification should tolerate a changed backend version is unresolved. It
-currently reports divergence in the fields, not in the version, so an upgraded
-library that changes a node count produces a named divergence rather than a
-diagnosis. A future comparison mode distinguishing "different engine" from
-"different result" needs its own contract.
+Whether verification should **tolerate** a changed backend version is unresolved.
+A divergence now carries a note when the library, revision or compiler differs, so
+a reader can distinguish "another build produced this" from "this result is
+wrong". That is explanation only: the divergence still fails, and the ten compared
+fields are unchanged. Deciding that a version mismatch makes divergence
+acceptable, or gating verification on the version, would change the meaning of
+agreement and therefore requires a new record version and its own decision
+record. Nothing here authorizes it.
 
 Cross-host reproducibility is untested. Floating-point behavior and library
 builds may differ between hosts, and nothing here establishes that a record

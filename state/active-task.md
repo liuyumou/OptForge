@@ -1,5 +1,61 @@
 # Active Task
 
+## C4 Follow-up: Gated Re-execution and Engine Diagnostics (2026-09-11)
+
+Objective: close three gaps found reviewing the C4 slice — a gate that never
+re-executed a committed record, a divergence that could not distinguish a changed
+engine from a wrong result, and a non-native build recording a backend version it
+never called.
+
+Status: complete; the full gate passes with native acceptance covered, and the
+non-native configuration passes separately.
+
+Acceptance gate: the committed example record re-executes against the current
+build inside `bash tools/check.sh`, with both refusal directions asserted there
+too; a record naming a different revision or compiler still verifies while
+reporting the difference; a divergence carries that difference as a note without
+changing its exit code; a build linking no native library records `unavailable`
+rather than the pinned version, shown by a test that fails when the old code is
+reinstated. Resource budget: CPU only, no GPU workloads.
+
+Scope boundary: consulting engine identity as an *explanation* is within
+SPEC-0005 as accepted, because requirement 11 fixes the ten compared fields and
+requirement 13 forbids strengthening a claim; neither constrains diagnostic text.
+Deciding that a version mismatch makes divergence *tolerable* would change the
+meaning of agreement, which SPEC-0005's compatibility section says requires a new
+record version and an ADR. That remains open and is recorded, not implemented.
+
+Evidence (2026-09-11): the complete gate passed with the pinned library linked and
+zero skip messages. Rust tests rose from 156 to 159: two environment-difference
+contracts in optimizer-experiment and one CLI contract asserting the diagnostic
+does not decide agreement. Python tests remain 39 and documentation 46 pages. The
+new `tools/verify_committed_record.py` step reports
+`committed run record re-executed and verified: passed`.
+
+`AI_OPTIMIZER_SKIP_NATIVE=1 bash tools/check.sh` also passed with all 159 tests,
+still printing its uncovered-acceptance warning, and correctly skipping the
+committed-record step because a build with no library cannot solve at all.
+
+The backend-version fix is verified by reinstating the defect rather than by
+assertion alone: with `PINNED_VERSION` restored on the pre-cancelled path, the
+non-native test fails at backend.rs:172; with the fix, it passes. The same test
+runs in both configurations, so the native path is covered by the same assertion.
+`interrupted_record` was the reachable path, because a pre-cancelled solve returns
+a record without touching the library.
+
+Why the gate step exists: every Rust re-execution test produces its record moments
+earlier in the same process against the same binary, so none of them exercised the
+property SPEC-0005 actually claims, that a record outlives its author. The gate now
+re-runs a record committed at an earlier revision, and asserts the fingerprint
+refusal and a counter divergence there as well, so the passing case is not the
+only thing checked.
+
+Noted: the example record's own provenance differs from any current checkout by
+construction, since it carries the all-zero revision. That made it the natural
+fixture for the diagnostic — verifying it now reports `environment_differs: true`
+while still agreeing and exiting 0, which is exactly the separation between
+explanation and decision that this change is about.
+
 ## C4 Agent-Independent Run Surface (2026-09-11)
 
 Objective: implement the first C4 slice under a new SPEC-0005: expose the C2

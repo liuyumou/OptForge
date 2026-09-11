@@ -389,3 +389,57 @@ fn dirty_and_example_records_are_not_evidence() {
     example.revision = EXAMPLE_REVISION.to_owned();
     assert!(!example.is_evidence());
 }
+
+// The environment comparison is diagnostic only: it must never appear among the
+// fields that decide agreement, or it would change what agreement means.
+#[test]
+fn environment_differences_are_diagnostic_not_compared() {
+    let record = record();
+
+    // An identical environment reports nothing.
+    let same = record.environment_difference("1.11.0", &"a".repeat(40), "rustc (test)");
+    assert!(same.is_empty());
+    assert!(same.describe().is_empty());
+
+    // A changed library, revision and compiler are each reported, and the
+    // backend is named first because it is the one that can change the numbers.
+    let changed = record.environment_difference("1.12.0", &"b".repeat(40), "rustc (other)");
+    assert!(!changed.is_empty());
+    let lines = changed.describe();
+    assert_eq!(lines.len(), 3);
+    assert!(lines[0].contains("backend library differs"), "{}", lines[0]);
+    assert!(lines[0].contains("1.11.0") && lines[0].contains("1.12.0"));
+    assert!(lines[1].contains("source revision differs"));
+    assert!(lines[2].contains("compiler differs"));
+
+    // None of these names is a compared field, so agreement is unaffected.
+    for name in ["backend_version", "revision", "rustc", "toolchain"] {
+        assert!(
+            !RunRecord::compared_fields().contains(&name),
+            "{name} must not decide agreement"
+        );
+    }
+
+    // A record whose environment changed still agrees when its search agrees.
+    record
+        .verify_agreement(&search())
+        .expect("a changed environment is not divergence");
+}
+
+// Only the backend version speaks to numerical behavior, so it is reported
+// distinctly rather than lumped in with the source and compiler.
+#[test]
+fn only_the_backend_difference_claims_numerical_relevance() {
+    let record = record();
+
+    let backend = record.environment_difference("1.12.0", &"a".repeat(40), "rustc (test)");
+    let line = &backend.describe()[0];
+    assert!(line.contains("can change a search's counters"), "{line}");
+
+    let source = record.environment_difference("1.11.0", &"b".repeat(40), "rustc (test)");
+    let line = &source.describe()[0];
+    assert!(
+        !line.contains("can change a search's counters"),
+        "a moved revision alone makes no numerical claim: {line}"
+    );
+}

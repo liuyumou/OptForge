@@ -86,14 +86,17 @@ Next step: its own specification under backlog item C8.
 
 ## Verification assumes an unchanged native library
 
-`optimizer verify` re-runs a search and compares the two records field by field.
-It cannot distinguish a wrong result from a legitimately changed engine: a
-rebuilt or upgraded HiGHS that changes a node count produces a named divergence
-identical in form to a real disagreement. Cross-host reproducibility is also
+`optimizer verify` re-runs a search and compares the two records field by field. A
+divergence now reports whether the backend library, source revision or compiler
+differs from the record's, so a changed engine is distinguishable from a wrong
+result *in the diagnostic*. What remains unresolved is whether such a mismatch
+should ever be **tolerated**: verification still fails, because deciding otherwise
+would change the meaning of agreement and needs a new record version plus an ADR
+under SPEC-0005's compatibility rule. Cross-host reproducibility is separately
 untested, because floating-point behavior and library builds may differ between
-machines. Agreement is therefore evidence of determinism on one host over time,
-which is what ADR-0006 claims and no more. Next step: a comparison mode that
-separates engine change from result change, if a case requires one.
+machines, and closing it needs a second machine in CI rather than local code.
+Agreement therefore remains evidence of determinism on one host over time, which
+is what ADR-0006 claims and no more.
 
 ## Checkpoint restart is still unimplemented
 

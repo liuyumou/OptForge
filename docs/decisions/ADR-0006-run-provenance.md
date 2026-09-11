@@ -136,9 +136,12 @@ machines, and nothing here tests that. This is stated as an open question rather
 than implied by the word reproducible.
 
 Verification assumes the pinned native library is unchanged. A rebuilt or upgraded
-HiGHS that changes a node count produces a named divergence, which is honest but
-does not distinguish "the engine changed" from "the result is wrong." That
-distinction needs its own comparison mode.
+HiGHS that changes a node count produces a named divergence. That divergence now
+carries a note when the library, revision or compiler differs from the record's,
+which tells a reader the engine also changed without excusing the disagreement:
+the comparison itself is untouched and the run still fails. Deciding that such a
+mismatch is tolerable would change what agreement means and needs its own decision
+record.
 
 Restart from a checkpoint remains unimplemented. `Checkpoint` is defined and
 serialized by C2, no entry point consumes one, and this surface does not add one,

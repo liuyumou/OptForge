@@ -16,7 +16,8 @@ bash tools/check.sh
 dependency preflight, the pinned native HiGHS build, formatting,
 warnings-as-errors Clippy, workspace tests and build, warnings-as-errors rustdoc,
 dependency advisories and licenses, schema/provenance checks, artifact negative
-tests, documentation links, and the benchmark smoke. Run from a committed checkout
+tests, re-execution of the committed run record, documentation links, and the
+benchmark smoke. Run from a committed checkout
 for measured provenance. Cargo.lock is committed; use --locked for builds.
 
 [setup_highs.sh](../../tools/setup_highs.sh) downloads the checksum-verified

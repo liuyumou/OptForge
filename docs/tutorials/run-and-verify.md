@@ -93,6 +93,14 @@ any claim: agreement establishes that the search is repeatable on this host with
 this library, not that its answer is correct, and a forfeited search stays
 forfeited after it verifies.
 
+The verdict also reports `environment_differs`. When the backend library, source
+revision or compiler differs from the one the record names, each difference is
+listed. This is explanation, not a decision: a record from another build still
+verifies when its search agrees, and a divergence still fails when it does not.
+The backend library is called out separately because a rebuilt or upgraded library
+can legitimately change a search's counters, whereas a moved revision on its own
+cannot.
+
 ## Confirm that verification can fail
 
 A check that cannot fail is worth nothing, so both refusals are worth seeing.

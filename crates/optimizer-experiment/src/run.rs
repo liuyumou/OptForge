@@ -177,6 +177,58 @@ const COMPARED_FIELDS: &[&str] = &[
     "relaxations_solved",
 ];
 
+/// What the environment performing a verification differs from, if anything.
+///
+/// This is diagnostic only. It never decides whether a run agreed: the fields
+/// listed by [`RunRecord::compared_fields`] do that, and adding a field to
+/// agreement would change what agreement means. Reporting an environment change
+/// alongside a divergence explains a likely cause without excusing it.
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
+pub struct EnvironmentDifference {
+    /// The backend version the record names, when it differs from the current one.
+    ///
+    /// This is the only difference that speaks to numerical behavior directly: a
+    /// rebuilt or upgraded library can legitimately change a node count.
+    pub backend_version: Option<(String, String)>,
+    /// The source revision the record names, when it differs.
+    pub revision: Option<(String, String)>,
+    /// The compiler the record names, when it differs.
+    pub rustc: Option<(String, String)>,
+}
+
+impl EnvironmentDifference {
+    /// Whether anything differs.
+    pub fn is_empty(&self) -> bool {
+        self.backend_version.is_none() && self.revision.is_none() && self.rustc.is_none()
+    }
+
+    /// One line per difference, each naming what changed and both values.
+    ///
+    /// The backend is reported first and labeled distinctly, because a changed
+    /// library can alter a search's numbers while a changed revision or compiler
+    /// only indicates that the source moved.
+    pub fn describe(&self) -> Vec<String> {
+        let mut lines = Vec::new();
+        if let Some((recorded, current)) = &self.backend_version {
+            lines.push(format!(
+                "backend library differs: record {recorded}, current {current}; \
+                 a rebuilt or upgraded library can change a search's counters"
+            ));
+        }
+        if let Some((recorded, current)) = &self.revision {
+            lines.push(format!(
+                "source revision differs: record {recorded}, current {current}"
+            ));
+        }
+        if let Some((recorded, current)) = &self.rustc {
+            lines.push(format!(
+                "compiler differs: record {recorded}, current {current}"
+            ));
+        }
+        lines
+    }
+}
+
 impl RunRecord {
     /// Field names verification compares, in report order.
     ///
@@ -184,6 +236,29 @@ impl RunRecord {
     /// specification says it covers, rather than trusting the prose.
     pub fn compared_fields() -> &'static [&'static str] {
         COMPARED_FIELDS
+    }
+
+    /// Compare this record's environment against the one verifying it.
+    ///
+    /// The result is never consulted when deciding agreement. It exists so a
+    /// divergence can say that the engine also changed, which is the difference
+    /// between "this result is wrong" and "this was produced by another build".
+    /// Distinguishing those two as an *outcome* rather than as a diagnostic would
+    /// change what agreement means and needs its own decision record.
+    pub fn environment_difference(
+        &self,
+        backend_version: &str,
+        revision: &str,
+        rustc: &str,
+    ) -> EnvironmentDifference {
+        let changed = |recorded: &str, current: &str| {
+            (recorded != current).then(|| (recorded.to_owned(), current.to_owned()))
+        };
+        EnvironmentDifference {
+            backend_version: changed(&self.search.backend_version, backend_version),
+            revision: changed(&self.revision, revision),
+            rustc: changed(&self.toolchain.rustc, rustc),
+        }
     }
 
     /// Serialize one run record.

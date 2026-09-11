@@ -164,6 +164,21 @@ fn pre_cancelled_solve_is_interrupted_without_native_work() {
     assert!(record.native_status.is_none());
     assert!(record.candidate.is_none());
     assert!(!record.termination.proves_completion());
+
+    // This path is reachable without the pinned library, so the recorded version
+    // must be the adapter's own report rather than the pinned constant. A build
+    // that linked nothing must not produce a record claiming it solved against
+    // the real library, which would make provenance unfalsifiable.
+    assert_eq!(
+        record.backend_version,
+        backend
+            .version()
+            .unwrap_or_else(|| optimizer_highs::UNAVAILABLE_VERSION.to_string())
+    );
+    if !optimizer_highs::is_native() {
+        assert_eq!(record.backend_version, optimizer_highs::UNAVAILABLE_VERSION);
+        assert_ne!(record.backend_version, optimizer_highs::PINNED_VERSION);
+    }
 }
 
 // Requirements 4 and 7: an optimal LP is validated against the original model.

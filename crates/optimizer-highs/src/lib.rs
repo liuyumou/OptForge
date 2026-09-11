@@ -25,6 +25,13 @@ pub const BACKEND_NAME: &str = "highs";
 /// The pinned HiGHS release this adapter is written against.
 pub const PINNED_VERSION: &str = "1.11.0";
 
+/// Version recorded when this build linked no native library.
+///
+/// A record must not name a library version it never called. Writing
+/// [`PINNED_VERSION`] here would let a build with no pinned library produce a
+/// record indistinguishable from one that solved against the real thing.
+pub const UNAVAILABLE_VERSION: &str = "unavailable";
+
 /// Whether this build linked the pinned native library.
 pub const fn is_native() -> bool {
     cfg!(highs_native)
@@ -91,12 +98,18 @@ impl HighsBackend {
 }
 
 /// Record for a solve cancelled before any native work began.
+///
+/// This path is reachable without the pinned library, so the recorded version is
+/// the adapter's own report rather than the pinned constant: a record produced by
+/// a build that linked nothing must not claim the version it was written against.
 fn interrupted_record(model: &Model, options: &SolveOptions) -> SolveRecord {
     SolveRecord {
         schema_version: optimizer_core::SOLVE_SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
         backend: BACKEND_NAME.to_string(),
-        backend_version: PINNED_VERSION.to_string(),
+        backend_version: HighsBackend::new()
+            .version()
+            .unwrap_or_else(|| UNAVAILABLE_VERSION.to_string()),
         termination: optimizer_core::Termination::Interrupted,
         native_status: None,
         objective: None,

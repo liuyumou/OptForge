@@ -86,6 +86,14 @@ vectors and independently against Python's `hashlib` over the committed
 documents, so an agreement between two implementations is verified rather than
 assumed.
 
+One gap the Rust suites cannot close by construction: each produces its record
+moments earlier in the same process, so none tests that a record outlives its
+author. The gate therefore re-executes the *committed* example record against the
+current build through
+[verify_committed_record.py](../../tools/verify_committed_record.py), and requires
+the two negative directions there too, because a verifier that cannot fail
+establishes nothing about the one that passed.
+
 C1 adds [solve contract](../../crates/optimizer-core/tests/solve.rs),
 [backend acceptance](../../crates/optimizer-highs/tests/backend.rs),
 [differential](../../crates/optimizer-highs/tests/differential.rs),

@@ -40,6 +40,20 @@ User-visible changes are recorded here using Conventional Commit terminology.
 - SHA-256 in safe Rust, checked against the FIPS 180-4 vectors and independently
   against Python's `hashlib` over the committed documents, rather than adding six
   transitive dependencies under a `multiple-versions = "deny"` policy.
+- A divergence reports whether the backend library, source revision or compiler
+  differs from the one the record names, so a changed engine is distinguishable
+  from a wrong result. This is diagnostic only: the ten compared fields are
+  unchanged, a record from another build still verifies when its search agrees,
+  and a divergence still fails. Whether such a mismatch should ever be tolerated
+  is unresolved and needs its own record version and decision record.
+- The acceptance gate re-executes the committed example run record against the
+  current build. Every other verification test produces its record moments
+  earlier in the same process, so none of them covered the property actually
+  claimed, that a record outlives its author.
+- Fixed: a build that linked no native library recorded `backend_version:
+  "1.11.0"` for a pre-cancelled solve, making its record indistinguishable from
+  one produced against the real library. It now records the adapter's own report,
+  `unavailable`, so provenance cannot claim a library that was never called.
 - C4 acceptance evidence: verification is shown to fail as well as pass. A
   perturbed model is refused on its fingerprint, and a mutated outcome,
   objective, forfeiture flag and each counter are detected individually, so no

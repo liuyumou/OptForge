@@ -13,7 +13,8 @@ mod serde_strict;
 pub mod sha256;
 
 pub use run::{
-    EXAMPLE_REVISION, Hardware, InputDocument, InputRole, RUN_SCHEMA_VERSION, RunRecord, Toolchain,
+    EXAMPLE_REVISION, EnvironmentDifference, Hardware, InputDocument, InputRole,
+    RUN_SCHEMA_VERSION, RunRecord, Toolchain,
 };
 
 /// JSON Schema for benchmark manifests, version 1.

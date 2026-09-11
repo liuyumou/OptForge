@@ -198,9 +198,22 @@ pub(crate) fn verify(options: &[OsString]) -> io::Result<u8> {
     let fresh = optimizer_solver::search(&model, &record.search.options, &backend, &cancel)
         .map_err(io::Error::other)?;
 
-    record
-        .verify_agreement(&fresh)
-        .map_err(|error| io::Error::other(format!("divergence: {error}")))?;
+    // The environment is compared for diagnosis only, after the search has run
+    // and never as an input to the agreement decision. A changed library is a
+    // likely cause of divergence, not an excuse for it.
+    let environment = record.environment_difference(
+        &fresh.backend_version,
+        &provenance::revision().unwrap_or_else(|_| "unavailable".to_owned()),
+        &provenance::toolchain().rustc,
+    );
+
+    if let Err(error) = record.verify_agreement(&fresh) {
+        let mut report = format!("divergence: {error}");
+        for line in environment.describe() {
+            report.push_str(&format!("\n  note: {line}"));
+        }
+        return Err(io::Error::other(report));
+    }
 
     // Agreement is evidence of determinism. It is deliberately not reported as
     // a proof: a forfeited search stays forfeited however often it is repeated.
@@ -214,6 +227,10 @@ pub(crate) fn verify(options: &[OsString]) -> io::Result<u8> {
         "outcome": fresh.outcome,
         "forfeited": fresh.forfeited,
         "evidence": record.is_evidence(),
+        // Recorded even when the run agreed, so a reader can see that it agreed
+        // despite a different build rather than having to infer it.
+        "environment_differs": !environment.is_empty(),
+        "environment": environment.describe(),
         "note": "Agreement establishes determinism under this host and library, not optimality."
     }))?;
 

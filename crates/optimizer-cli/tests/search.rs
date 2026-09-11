@@ -600,3 +600,73 @@ fn verify_refuses_malformed_records() {
         );
     }
 }
+
+// The environment comparison explains a divergence without deciding it: a record
+// from another build still verifies when its search agrees, and a divergence
+// gains a note naming what else changed.
+#[test]
+fn an_environment_difference_explains_but_does_not_decide() {
+    if !native_available() {
+        return;
+    }
+    let sandbox = Sandbox::new();
+    let model = sandbox.write("model.json", MODEL);
+    let config = sandbox.write("config.json", CONFIG);
+    let (_, record) = sandbox.search(&model, &config);
+
+    // A record naming another revision and compiler, with its search untouched.
+    let mut foreign = record.clone();
+    foreign["revision"] = serde_json::json!("f".repeat(40));
+    foreign["toolchain"]["rustc"] = serde_json::json!("rustc 1.0.0 (ancient)");
+    let path = sandbox.write("foreign.json", &foreign.to_string());
+
+    let output = sandbox
+        .command()
+        .arg("verify")
+        .arg("--record")
+        .arg(&path)
+        .arg("--model")
+        .arg(&model)
+        .output()
+        .expect("run verify");
+    // Agreement is unchanged: the environment is not a compared field.
+    assert_eq!(
+        output.status.code(),
+        Some(0),
+        "a different build must not fail verification: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let verdict: serde_json::Value = serde_json::from_slice(&output.stdout).expect("json verdict");
+    assert_eq!(verdict["agreement"], true);
+    // But it is reported, so agreement despite a different build is visible.
+    assert_eq!(verdict["environment_differs"], true);
+    let notes = verdict["environment"].as_array().expect("environment");
+    assert!(
+        notes.iter().any(|note| {
+            note.as_str()
+                .is_some_and(|text| text.contains("source revision differs"))
+        }),
+        "the changed revision must be named: {notes:?}"
+    );
+
+    // A divergence in the same record carries the note alongside the field.
+    let mut diverging = foreign.clone();
+    diverging["search"]["nodes_explored"] = serde_json::json!(4242);
+    let path = sandbox.write("diverging.json", &diverging.to_string());
+    let output = sandbox
+        .command()
+        .arg("verify")
+        .arg("--record")
+        .arg(&path)
+        .arg("--model")
+        .arg(&model)
+        .output()
+        .expect("run verify");
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(stderr.contains("nodes_explored"), "found {stderr}");
+    assert!(
+        stderr.contains("note:"),
+        "the note must accompany it: {stderr}"
+    );
+}

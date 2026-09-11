@@ -77,6 +77,14 @@ if ! cargo deny --locked check; then
 fi
 python3 tools/validate_artifacts.py
 python3 -m unittest discover -s tests/integration -p 'test_*.py'
+# SPEC-0005 requirement 9: re-execute a record committed at an earlier revision.
+# Every other verification test produces its record moments earlier in the same
+# process, so none of them exercises the property actually claimed, that a record
+# outlives its author. This one re-runs a committed record against the current
+# build. It is skipped without the native library, which cannot solve at all.
+if [[ "$native_covered" == "1" ]]; then
+    python3 tools/verify_committed_record.py
+fi
 python3 tools/build_docs.py
 python3 tools/benchmark_smoke.py
 
