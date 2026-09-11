@@ -2,7 +2,7 @@
 
 Purpose: define stable ownership boundaries. Scope: M0-M1, C1, C2, C3 and C4, plus planned dependencies.
 Owner: architecture. Status: accepted.
-Last reviewed commit: 692e19f.
+Last reviewed commit: f8d6091.
 
 ## Implemented boundaries
 
