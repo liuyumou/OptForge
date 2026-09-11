@@ -122,8 +122,27 @@ dependency on C4, which remains meaningful because the run surface is what they
 build on. The four deferrals are recorded in
 [known failures](known-failures.md) with their blockers.
 
+Clean-checkout verification, which is the stronger C1 and C3 standard and the
+case that matters here because this change adds four crate dependency edges where
+a stale lockfile or a missing manifest entry would otherwise hide behind a
+populated `target/`: the branch was cloned to /tmp/c4-verify with
+`--no-hardlinks` and no `target/` directory present, and
+`bash tools/check.sh` passed there in 1 minute 36 seconds. That run built the
+pinned HiGHS 1.11.0 library from the checksum-verified upstream archive inside
+the clone and ran the same 156 Rust and 39 Python tests. The only lines matching
+"skip" were CMake's own `Check for working CXX compiler - skipped` probes, not
+test skips, so native acceptance was genuinely covered rather than inherited from
+a warm build directory.
+
+On the clean committed tree the run surface produces evidence-grade provenance:
+`optimizer search` recorded revision c0eac20 with `dirty: false`, and
+`optimizer verify` reported `agreement: true` with `evidence: true` and exit 0.
+The dirty mid-implementation runs reported `evidence: false`, which is the
+requirement 5 rule working rather than a defect.
+
 No remote refs were changed and nothing was pushed; main remains unpushed pending
-separate authorization.
+separate authorization. The branch feat/run-surface holds two commits, 8775da1
+specifying the surface and c0eac20 implementing it.
 
 ## Local C3 Integration (2026-09-09)
 
