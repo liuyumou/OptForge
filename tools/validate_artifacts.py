@@ -197,6 +197,13 @@ def main():
         validator("search-config-v2.schema.json").validate(
             read_json(ROOT / "examples/search-config-neh-v2.json")
         )
+        # The frozen node-budget configuration the timing diagnostic drives. It is
+        # validated here for the same reason every other committed configuration is:
+        # the schema and the Rust parser must agree about it, and a measurement run
+        # against a configuration the engine would reject is worth nothing.
+        validator("search-config-v2.schema.json").validate(
+            read_json(ROOT / "benchmarks/configs/search-node-budget-v2.json")
+        )
         validate_run_record(ROOT / "examples/run-record-v1.json")
         # The registry-backed scheduling record is validated by the same schema and
         # the same provenance rules, which is the point: SPEC-0009 introduces no new

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "id": "perf-node-budget-v1",
+  "purpose": "performance",
+  "suite": "taillard-flow-shop",
+  "split": "development",
+  "license": "Instances are generated locally by the algorithm published in the cited paper; no third-party dataset is redistributed.",
+  "instances": [
+    {
+      "id": "ta001",
+      "path": "benchmarks/instances/flow-shop/ta001.json",
+      "sha256": "6d08edd4c25c6bf2cef6fe2de3c1b97bd3ed2c75201123a1ac05654156abd6c7",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 873654221,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta002",
+      "path": "benchmarks/instances/flow-shop/ta002.json",
+      "sha256": "a91f66bb8dfec99831bfadc665ccb1f9162d5ea5c78e86026edf0d8acdf72f70",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 379008056,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    },
+    {
+      "id": "ta003",
+      "path": "benchmarks/instances/flow-shop/ta003.json",
+      "sha256": "aaeb3ef7bb16c69f4f726fb7cc4d2fe911e2d9acc60b6e9d5a572dbb368bac70",
+      "source": "E. Taillard, Benchmarks for basic scheduling problems, EJOR 64 (1993) 278-285; generator and seeds transcribed in OR-Library flowshop2.txt",
+      "generator": {
+        "name": "taillard-1993-flow-shop",
+        "seed": 1866992158,
+        "parameters": {
+          "jobs": 20,
+          "machines": 5,
+          "minimum_processing_time": 1,
+          "maximum_processing_time": 99
+        }
+      }
+    }
+  ],
+  "seeds": [
+    17
+  ],
+  "configuration": {
+    "schema_version": 1,
+    "seed": 17,
+    "time_limit_ms": 600000,
+    "memory_limit_mib": 4096,
+    "threads": 1,
+    "device": "cpu",
+    "settings": {}
+  },
+  "timing": {
+    "clock": "monotonic",
+    "includes": "end-to-end-with-transfers",
+    "warmup_runs": 1,
+    "measured_runs": 3
+  }
+}
