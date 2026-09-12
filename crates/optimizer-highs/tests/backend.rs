@@ -600,3 +600,104 @@ fn coefficients_below_the_native_threshold_are_rejected() {
         ErrorKind::Unsupported
     );
 }
+
+/// `Backend::solve` and `solve_with_basis` agree on the record they produce.
+///
+/// This is characterization written against the code as it stood before basis
+/// extraction became lazy. `Backend::solve` used to be literally
+/// `solve_with_basis(..).map(|(record, _)| record)`, so the two agreeing was true
+/// by construction and untested; once the trait method stops extracting a basis
+/// it is a real claim, and this is what holds it. Elapsed time is normalized for
+/// the reason SPEC-0005 requirement 12 gives: it measures the host.
+#[test]
+fn the_trait_method_and_the_basis_method_agree_on_the_record() {
+    if !require_native("the_trait_method_and_the_basis_method_agree_on_the_record") {
+        return;
+    }
+    let backend = HighsBackend::new();
+    let cancel = optimizer_core::CancellationToken::new();
+    for (domain, id) in [
+        (Domain::Continuous, "agree-lp"),
+        (Domain::Integer, "agree-mip"),
+        (Domain::Binary, "agree-binary"),
+    ] {
+        let model = model(domain, id);
+        let mut through_trait = Backend::solve(&backend, &model, &options(), &cancel, None)
+            .expect("the trait method solves");
+        let (mut through_basis, basis) = backend
+            .solve_with_basis(&model, &options(), &cancel, None)
+            .expect("the basis method solves");
+        through_trait.elapsed_ms = 0;
+        through_basis.elapsed_ms = 0;
+        assert_eq!(
+            through_trait, through_basis,
+            "{id}: the two entry points must produce the same record"
+        );
+        // And the basis method still returns one for a continuous model, so
+        // laziness cannot be achieved by never extracting at all.
+        if domain == Domain::Continuous {
+            let basis = basis.expect("a continuous solve yields a basis");
+            assert_eq!(
+                basis.model_fingerprint,
+                model.fingerprint().expect("fingerprint"),
+                "a basis is bound to the model it was extracted from"
+            );
+        }
+    }
+}
+
+/// `Model::fingerprint` is total for any model `Model::new` accepted.
+///
+/// Basis extraction propagates a fingerprint failure, so removing it from the
+/// trait path removes that error. This is the evidence that the error being
+/// removed does not exist: every value in a validated model is finite, and
+/// serializing to a String has no I/O to fail at.
+#[test]
+fn a_validated_model_always_fingerprints() {
+    for (domain, id) in [
+        (Domain::Continuous, "fp-lp"),
+        (Domain::Integer, "fp-mip"),
+        (Domain::Binary, "fp-binary"),
+    ] {
+        let model = model(domain, id);
+        let first = model.fingerprint().expect("a validated model fingerprints");
+        assert!(first.starts_with("fnv1a64:"));
+        assert_eq!(first, model.fingerprint().expect("stable"), "and is stable");
+    }
+
+    // Extreme but valid magnitudes, including negative zero, which the canonical
+    // form normalizes. If any of these could fail, every fingerprint call site
+    // would be affected, not only the one this change removes.
+    let extreme = Model::new(ModelDocument {
+        schema_version: optimizer_core::SCHEMA_VERSION,
+        model_id: "fp-extreme".to_string(),
+        variables: vec![Variable {
+            id: 0,
+            domain: Domain::Continuous,
+            lower: finite(-0.0),
+            upper: finite(f64::MAX),
+        }],
+        constraints: vec![Constraint {
+            id: 0,
+            lower: Bound::NegativeInfinity,
+            upper: finite(f64::MAX),
+            terms: vec![LinearTerm {
+                variable_id: 0,
+                coefficient: f64::MAX,
+            }],
+        }],
+        objective: Objective {
+            sense: ObjectiveSense::Minimize,
+            offset: -0.0,
+            terms: vec![LinearTerm {
+                variable_id: 0,
+                coefficient: f64::MIN_POSITIVE,
+            }],
+        },
+    })
+    .expect("extreme magnitudes are valid");
+    assert!(
+        extreme.fingerprint().is_ok(),
+        "a validated model must always fingerprint"
+    );
+}
