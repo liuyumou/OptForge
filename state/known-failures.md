@@ -16,6 +16,14 @@ The origin remote is https://github.com/liuyumou/OptForge.git. Protected main,
 labeled GPU runner provisioning, and artifact retention still require hosting
 administration. Next step: configure these settings separately from Git syncing.
 
+Publication state, because several earlier records state the opposite and were
+true when written: the work through `dfdc245` — every milestone up to and
+including C8 — has been pushed to origin by the maintainer. Records dated before
+that push describe main as unpushed pending authorization; that was accurate at
+the time and is left as written rather than backdated. Anything after `dfdc245`
+is local until the maintainer pushes it, and AGENTS.md's prohibition on
+publishing without authorization is unchanged.
+
 ## Deferred hardware evidence
 
 GPU support queries inventory only. CUDA sanitizer and kernel equivalence tests

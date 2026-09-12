@@ -1,5 +1,45 @@
 # Active Task
 
+## Local Track A Integration (2026-09-12)
+
+Objective: verify the C8 follow-up branch from a clean checkout, integrate it into
+local main, and delete the feature branch after confirming its commits are
+retained.
+
+Status: complete; clean-checkout verification, fast-forward integration and
+feature-branch cleanup finished.
+
+Acceptance gate: the complete gate passes in an independent clone with nothing
+prebuilt; fast-forward integration preserves the reviewed tip 8cddb44; the feature
+branch is deleted and the worktree is clean. Resource budget: CPU only, no GPU
+workloads.
+
+Evidence (2026-09-12): the branch was cloned with `--no-hardlinks` and no `target/`
+directory present, and `bash tools/check.sh` passed there in 1 minute 33 seconds
+with **zero test skips**, building the pinned HiGHS 1.11.0 library inside the clone
+and running 234 Rust and 60 Python tests. main fast-forwarded from dfdc245 to
+8cddb44 with no conflicts and no history rewriting; `git diff 8cddb44 main` is
+empty, `git merge-base --is-ancestor` confirms the reviewed tip is retained, and
+`git branch -d` removed the fully merged branch. The bootstrap smoke was rerun on
+the integrated revision, recording 8cddb44 with `dirty: false`.
+
+One process note worth recording rather than hiding: the first commit on this
+branch used `git add -A` and captured all of Track A under a message describing
+only the review-marker fix. It was split into two honest commits before anything
+was integrated. The branch was local and unpushed, so no shared history was
+rewritten.
+
+Publication state changed outside this work. The maintainer pushed the work
+through `dfdc245` to origin, so every milestone up to and including C8 is now
+published. Records dated before that push describe main as unpushed pending
+authorization; they were accurate when written and are left as written rather than
+backdated. [Known failures](known-failures.md) now carries the current state. The
+two Track A commits are local and unpushed, and remain so pending the maintainer's
+own push.
+
+Follow-up: Track B, the measurement harness and the behaviour-preserving waste
+removal on the per-node path, is next. C6 still has no accepted specification.
+
 ## C8 Follow-Up Items (2026-09-12)
 
 Objective: close the three items the C8 integration record left open — SPEC-0009
