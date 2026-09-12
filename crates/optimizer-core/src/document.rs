@@ -231,6 +231,68 @@ impl Model {
         &self.document
     }
 
+    /// This model with replaced variable domains and bounds, reusing its
+    /// already-canonical constraints and objective.
+    ///
+    /// Branch-and-bound builds one relaxation per node, and a node changes only
+    /// variable domains and bounds: the constraints and the objective are the
+    /// original's, unchanged. Routing that through [`Model::new`] re-sorted every
+    /// row's terms, re-checked their uniqueness, and per matrix nonzero did a
+    /// binary search and a finiteness check, for data that had already passed all
+    /// three. This validates what actually changed and skips what cannot have.
+    ///
+    /// Skipping the term checks is sound rather than merely cheaper, and the
+    /// precondition below is what makes it so. Those checks decide exactly two
+    /// things: that every coefficient is finite, and that every term names a
+    /// variable this model has. Coefficients are carried verbatim from a document
+    /// that already passed, and requiring the supplied variable IDs to be the
+    /// original's makes the second decide identically. Any other variable list is
+    /// refused rather than accepted cheaply, so this cannot become a way around
+    /// construction.
+    ///
+    /// Domains are not constrained here: dropping integrality is exactly what a
+    /// relaxation does, and a domain is checked against a candidate during
+    /// evaluation rather than against the model during construction.
+    ///
+    /// # Errors
+    ///
+    /// Returns a structural failure when the supplied variables do not name
+    /// exactly the original variable IDs, or when any supplied bound pair is
+    /// nonfinite, reversed or infinite on the wrong side.
+    pub fn rebound(&self, mut variables: Vec<Variable>) -> Result<Self, ValidationError> {
+        variables.sort_by_key(|v| v.id);
+        // Sorted plus equal-length plus pairwise-equal IDs implies the two ID
+        // sets are the same, and rejects a duplicate at the same time: a repeat
+        // would have to displace one of the original's IDs.
+        let same_ids = variables.len() == self.document.variables.len()
+            && variables
+                .iter()
+                .zip(&self.document.variables)
+                .all(|(supplied, original)| supplied.id == original.id);
+        if !same_ids {
+            return Err(ValidationError::new(
+                ErrorKind::Structural,
+                "rebound variables must name exactly the original variable IDs",
+            ));
+        }
+        for variable in &mut variables {
+            bounds(
+                &mut variable.lower,
+                &mut variable.upper,
+                &format!("variable {}", variable.id),
+            )?;
+        }
+        Ok(Self {
+            document: ModelDocument {
+                schema_version: self.document.schema_version,
+                model_id: self.document.model_id.clone(),
+                variables,
+                constraints: self.document.constraints.clone(),
+                objective: self.document.objective.clone(),
+            },
+        })
+    }
+
     /// Parse one complete versioned JSON document and validate model structure.
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         Self::new(serde_json::from_slice(bytes).map_err(json_error)?)

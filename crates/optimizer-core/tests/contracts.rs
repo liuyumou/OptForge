@@ -275,6 +275,142 @@ fn candidate_canonicalization_pins_its_reordering_and_its_refusals() {
     );
 }
 
+/// `Model::rebound` must be indistinguishable from full construction.
+///
+/// It exists because branch-and-bound rebuilds a relaxation per node and only
+/// the variables differ, so it skips the row and objective checks. That shortcut
+/// is only sound while the result is identical to what `Model::new` would build,
+/// which is what these comparisons assert — by canonical bytes and by
+/// fingerprint, not by a field-by-field walk that could miss one.
+#[test]
+fn rebound_equals_full_construction_for_every_relaxed_variable_list() {
+    let original = Model::new(document()).unwrap();
+
+    // The branch-and-bound case: integrality dropped, bounds tightened.
+    let relaxed = vec![
+        Variable {
+            id: 2,
+            domain: Domain::Continuous,
+            lower: finite(0.0),
+            upper: finite(1.5),
+        },
+        Variable {
+            id: 9,
+            domain: Domain::Continuous,
+            lower: finite(-3.0),
+            upper: finite(3.0),
+        },
+    ];
+
+    let mut expected_document = document();
+    expected_document.variables = relaxed.clone();
+    let expected = Model::new(expected_document).unwrap();
+    let rebounded = original.rebound(relaxed.clone()).unwrap();
+    assert_eq!(rebounded.to_json().unwrap(), expected.to_json().unwrap());
+    assert_eq!(
+        rebounded.fingerprint().unwrap(),
+        expected.fingerprint().unwrap()
+    );
+    assert_eq!(rebounded, expected);
+
+    // The constraints and the objective are carried through untouched, which is
+    // the whole reason their checks can be skipped.
+    assert_eq!(
+        rebounded.document().constraints,
+        original.document().constraints
+    );
+    assert_eq!(
+        rebounded.document().objective,
+        original.document().objective
+    );
+
+    // An unsorted supplied list is sorted, exactly as construction sorts.
+    let mut reversed = relaxed.clone();
+    reversed.reverse();
+    assert_eq!(
+        original.rebound(reversed).unwrap().to_json().unwrap(),
+        expected.to_json().unwrap()
+    );
+
+    // Infinite sides survive in both directions, and rebounding to the original
+    // variables reproduces the original model exactly.
+    assert_eq!(
+        original
+            .rebound(original.document().variables.clone())
+            .unwrap(),
+        original
+    );
+
+    // Signed zero is still normalized, so this cannot become a way to smuggle an
+    // unnormalized bound into a model.
+    let mut negative_zero = relaxed;
+    negative_zero[0].lower = finite(-0.0);
+    let smuggled = original.rebound(negative_zero).unwrap();
+    assert!(!smuggled.to_json().unwrap().contains("-0.0"));
+    let Bound::Finite { value } = smuggled.document().variables[0].lower else {
+        panic!("expected a finite lower bound");
+    };
+    assert_eq!(value.to_bits(), 0);
+}
+
+/// `Model::rebound` must refuse every variable list that is not the original's.
+///
+/// The skipped row checks decide that each term names a variable the model has,
+/// so accepting a changed ID set would leave a model whose terms reference
+/// variables that are not there. Each refusal below is the case that would
+/// produce one.
+#[test]
+fn rebound_refuses_any_variable_list_that_is_not_the_originals_ids() {
+    let original = Model::new(document()).unwrap();
+    let variables = original.document().variables.clone();
+
+    let renamed = |id: u32| {
+        let mut v = variables.clone();
+        v[1].id = id;
+        v
+    };
+
+    let invalid: Vec<Vec<Variable>> = vec![
+        Vec::new(),                 // none at all
+        vec![variables[0].clone()], // one missing
+        renamed(99),                // one renamed
+        renamed(2),                 // duplicated
+        {
+            let mut v = variables.clone();
+            v.push(variable(42, Domain::Continuous));
+            v
+        }, // one extra
+    ];
+    for supplied in invalid {
+        let error = original.rebound(supplied).unwrap_err();
+        assert_eq!(error.kind, ErrorKind::Structural);
+        assert_eq!(
+            error.message,
+            "rebound variables must name exactly the original variable IDs"
+        );
+    }
+
+    // Bounds are still validated, with the same diagnostics construction gives.
+    let invalid_bounds: Vec<fn(&mut Vec<Variable>)> = vec![
+        |v| {
+            v[0].lower = finite(2.0);
+            v[0].upper = finite(1.0);
+        },
+        |v| v[0].lower = finite(f64::NAN),
+        |v| v[0].upper = finite(f64::INFINITY),
+        |v| v[0].lower = Bound::PositiveInfinity,
+        |v| v[0].upper = Bound::NegativeInfinity,
+    ];
+    for mutate in invalid_bounds {
+        let mut supplied = variables.clone();
+        mutate(&mut supplied);
+        assert_eq!(
+            original.rebound(supplied).unwrap_err().kind,
+            ErrorKind::Structural
+        );
+    }
+}
+
 #[test]
 fn f64_round_trips_across_exponents_and_mantissas() {
     for exponent in (0_u64..2047).step_by(17) {

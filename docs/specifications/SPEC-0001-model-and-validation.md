@@ -27,6 +27,16 @@ outside a finite bound. Allowance is the explicit acceptance tolerance.
 2. Construction MUST reject nonfinite numeric input, reversed bounds, positive
    infinite lower bounds, negative infinite upper bounds, unknown references and
    duplicate terms; empty models/rows, free variables and equality MUST be supported.
+2a. Rebounding a model — replacing its variable domains and bounds while keeping
+   its rows and objective — MUST produce exactly the model full construction would
+   produce from the same variables, and MUST refuse any supplied variable list that
+   does not name exactly the original variable IDs. Row and objective term checks
+   MAY be skipped on this path, and only because that refusal makes them decide
+   identically: those checks establish that coefficients are finite, which is
+   carried from an already-valid document, and that every term names a variable the
+   model has, which the ID requirement preserves. Supplied bounds are validated as
+   requirement 2 validates them. Domains MUST NOT be constrained, because dropping
+   integrality is what a relaxation does.
 3. Models MUST sort variables, constraints and terms by ID without renumbering,
    merging or removing zero terms; numeric signed zero MUST normalize to positive zero.
 4. JSON MUST use version 1, reject unknown/duplicate fields, trailing input and
@@ -63,7 +73,10 @@ invalid. Domains and objective senses MUST be JSON strings, not enum objects.
 These shape rules also apply to direct Serde deserialization of public input types.
 
 Model::new validates into private immutable storage; document() exposes a shared
-reference. Model::from_json/to_json use the same construction checks. Candidate
+reference. Model::from_json/to_json use the same construction checks.
+Model::rebound(Vec<Variable>) -> Result<Model, ValidationError> implements
+requirement 2a; it is the relaxation path C2 builds one subproblem per node with,
+and it is not a general-purpose constructor. Candidate
 contains schema_version, model_id, values; assignments contain variable_id, value.
 Candidate::from_json/to_json validate version, shape, finite values and duplicate
 IDs; evaluate checks identity/coverage. Tolerances contains absolute, relative,
@@ -131,6 +144,11 @@ and [tutorial](../tutorials/model-validation.md).
 ## Acceptance Tests
 
 Requirements 1-5: structural, malformed JSON and canonical round-trip contracts.
+Requirement 2a: rebound results are compared against full construction by canonical
+bytes and by fingerprint rather than field by field; every variable list that is not
+the original IDs — none, one missing, one renamed, one duplicated, one extra — is
+asserted to be refused in its own category, and the refusal is shown to be
+load-bearing by disabling it and observing that contract fail.
 Requirements 6-11: explicit tolerances, independent dense oracle, exhaustive tiny
 assignments, cancellation scaling, overflow and discrete boundaries. Requirement
 12: CLI success, infeasibility, input, size, argument, numerical-error and failed

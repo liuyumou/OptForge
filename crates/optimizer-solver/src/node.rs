@@ -6,7 +6,7 @@
 //! Relaxations preserve every original identity, so an extracted candidate
 //! evaluates directly against the original model without renumbering.
 
-use optimizer_core::{Bound, Domain, ErrorKind, Model, ModelDocument, ValidationError, Variable};
+use optimizer_core::{Bound, Domain, ErrorKind, Model, ValidationError, Variable};
 
 use crate::search::Restriction;
 
@@ -132,6 +132,12 @@ pub(crate) fn is_empty(model: &Model, node: &Node) -> bool {
 /// objective sense are preserved exactly; only variable domains and bounds
 /// change. Returns `Ok(None)` when the node's domain is empty, which is node
 /// infeasibility established without dispatching a relaxation.
+///
+/// The rebuild goes through `Model::rebound` rather than `Model::new` because
+/// only the variables differ from the original. `Model::new` would re-sort and
+/// re-validate every row and the objective once per node, for data this node did
+/// not touch; `rebound` validates the supplied bounds and refuses any variable
+/// list that is not the original's IDs.
 pub(crate) fn relaxation(model: &Model, node: &Node) -> Result<Option<Model>, ValidationError> {
     if is_empty(model, node) {
         return Ok(None);
@@ -148,14 +154,7 @@ pub(crate) fn relaxation(model: &Model, node: &Node) -> Result<Option<Model>, Va
             upper: upper.map_or(Bound::PositiveInfinity, |value| Bound::Finite { value }),
         });
     }
-    Model::new(ModelDocument {
-        schema_version: document.schema_version,
-        model_id: document.model_id.clone(),
-        variables,
-        constraints: document.constraints.clone(),
-        objective: document.objective.clone(),
-    })
-    .map(Some)
+    model.rebound(variables).map(Some)
 }
 
 /// Round a branching bound, rejecting one that cannot be represented exactly.
