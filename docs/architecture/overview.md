@@ -54,6 +54,17 @@ independent of every heuristic is the authority on what a resulting schedule cos
 optimizer-schedule-examples holds the NEH and insertion producers and depends only
 on the published core, extension and scheduling APIs.
 
+C8 connects the extension leg to that flow under
+[SPEC-0009](../specifications/SPEC-0009-extension-registry.md). optimizer-registry
+turns a recorded extension identity into a registration the executive already
+accepts, and refuses anything it cannot check against the extension's own
+declaration. It names no extension itself: the concrete provider table lives in
+optimizer-cli, which is the same arrangement that keeps `&dyn Backend` free of
+HiGHS and `&[Registration]` free of any particular extension. The consequence for
+the flow is that a search naming an extension now runs, and its record re-executes,
+which is what makes the reproducibility leg cover extension-influenced runs rather
+than only extension-free ones.
+
 C1 implements the backend leg of this flow: the CLI drives optimizer-highs
 directly through the backend-neutral contract in optimizer-core, and every
 extracted candidate returns through optimizer-core validation before publication.
@@ -100,6 +111,7 @@ explicit native settings; owned proof contracts belong to C2.
 | optimizer-solver | Search executive, branch and bound | C2 |
 | optimizer-extension | Extension declarations, authority model, guarded host | C3 |
 | optimizer-extension-examples | Independently authored and adversarial extensions | C3 |
+| optimizer-registry | Registry documents, resolution, conformance suite | C8 |
 | optimizer-cuda | Discovery, ownership, later kernels | M0 / C6 |
 | optimizer-experiment | Artifact schemas, run records, verification comparison | M0 / C4 |
 | optimizer-cli | Agent-independent command interface | M0 / C4 |

@@ -5,8 +5,14 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 
+# optimizer-extension is a direct dependency because ExtensionDifference compares
+# the ExtensionSummary values a run record already embeds through its search
+# record. optimizer-solver uses that type without re-exporting it, and depending on
+# the crate that defines it is clearer than adding a re-export purely to avoid an
+# edge that already exists transitively.
 [dependencies]
 optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
 optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }
 serde.workspace = true
 serde_json.workspace = true

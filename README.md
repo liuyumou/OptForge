@@ -1,15 +1,17 @@
 # AI Optimizer
 
 A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. The current milestone is **C5 complete: a flow-shop
-workload whose answers are checked against an independent definition**. It validates
-original linear models and candidates, solves them with an independently
-validated incumbent, proves optimality with its own search, accepts separately
-authored extensions without granting them any mathematical authority, and records
-each search with the provenance needed to re-execute it. Flow-shop instances reach
-that same machinery through an exactly linear encoding, and their makespans are
-recomputed by a recurrence that shares no code with the heuristics proposing
-schedules.
+selective GPU acceleration. The current milestone is **C8 complete: a search that
+registers an extension is reproducible from its record**. It validates original
+linear models and candidates, solves them with an independently validated incumbent,
+proves optimality with its own search, accepts separately authored extensions
+without granting them any mathematical authority, and records each search with the
+provenance needed to re-execute it. Flow-shop instances reach that same machinery
+through an exactly linear encoding, and their makespans are recomputed by a
+recurrence that shares no code with the heuristics proposing schedules. A local
+registry resolves a named extension into a run and refuses every claim it cannot
+check, which is what lets an extension-influenced record be re-executed rather than
+merely read.
 
 ## Quick start
 
@@ -68,9 +70,11 @@ acceptance was not covered.
 - [Extension runtime specification](docs/specifications/SPEC-0004-extension-runtime.md)
 - [Run surface specification](docs/specifications/SPEC-0005-run-surface.md)
 - [Flow-shop scheduling specification](docs/specifications/SPEC-0008-flow-shop.md)
+- [Extension registry specification](docs/specifications/SPEC-0009-extension-registry.md)
 - [Validate a model and candidate](docs/tutorials/model-validation.md)
 - [Solve a model](docs/tutorials/solve-a-model.md)
 - [Run and verify a search](docs/tutorials/run-and-verify.md)
+- [Register an extension](docs/tutorials/register-an-extension.md)
 - [GPU discovery and lease contract](docs/specifications/SPEC-0006-gpu-lease.md)
 - [Artifact contract](docs/specifications/SPEC-0007-artifacts.md)
 - [Build and verification](docs/operations/build.md)
@@ -96,14 +100,17 @@ consumes the solve contract as a relaxation service without depending on any
 backend. optimizer-extension defines the extension declaration, authority model
 and guarded host; optimizer-extension-examples holds independently authored
 extensions, including deliberately hostile ones, and depends only on the
-published APIs. The CLI exposes validation, solving and GPU
-discovery/ownership and the reproducible run surface; optimizer-experiment owns
-run records, their provenance and the verification comparison. Remaining
-numerical crates reserve ownership boundaries without solver APIs.
-`schemas/`, `examples/`, `tests/`, and `tools/` provide executable contracts.
+published APIs. optimizer-registry resolves a recorded extension identity into a
+registration the executive accepts, refusing any claim it cannot check against the
+extension's own declaration; it names no extension itself, so the concrete provider
+table lives in the CLI. The CLI exposes validation, solving and GPU
+discovery/ownership, the reproducible run surface and the registry surface;
+optimizer-experiment owns run records, their provenance and the verification
+comparison. Remaining numerical crates reserve ownership boundaries without solver
+APIs. `schemas/`, `examples/`, `tests/`, and `tools/` provide executable contracts.
 `docs/` is authoritative; `wiki/` provides navigation. Python SDK, CUDA kernels,
-a local extension registry, dynamically loaded native extensions, checkpoint
-restart and performance suites are deferred, each with its blocker recorded in
+dynamically loaded native extensions, checkpoint restart and performance suites are
+deferred, each with its blocker recorded in
 [known failures](state/known-failures.md).
 
 ## License

@@ -168,20 +168,21 @@ recording the registry in the run record, which needs run-record v2.
 
 ## Implementation and tests
 
-No behavior accompanies this decision record. The links below are deliberately
-plain names rather than references, because the files do not exist yet and
-[the documentation gate](../../tools/build_docs.py) validates every link: this
-record is accepted before the implementation, as ADR-0004, ADR-0005, ADR-0006 and
-ADR-0007 each were.
+This record was accepted before its implementation, as ADR-0004 through ADR-0007
+each were.
 
-Implementation, added by the implementation commit: `crates/optimizer-registry`
-holding the registry document, resolution and the conformance suite, and
-`crates/optimizer-cli/src/registry.rs` holding the provider table and the
-subcommands, with registry integration in the existing `search`, `verify` and
-`schedule solve` paths.
+Implementation: [the registry crate](../../crates/optimizer-registry/src/lib.rs)
+holding [the document](../../crates/optimizer-registry/src/document.rs),
+[resolution](../../crates/optimizer-registry/src/resolve.rs) and
+[the conformance suite](../../crates/optimizer-registry/src/conformance.rs), plus
+[the provider table and subcommands](../../crates/optimizer-cli/src/registry.rs)
+and registry integration in
+[search and verify](../../crates/optimizer-cli/src/search.rs) and
+[schedule solve](../../crates/optimizer-cli/src/schedule.rs).
 
-Tests: `crates/optimizer-registry/tests/contracts.rs`,
-`crates/optimizer-cli/tests/registry.rs`, `tests/integration/test_registry.py`,
-and a committed-record re-execution step added to
+Tests: [registry contracts](../../crates/optimizer-registry/tests/contracts.rs),
+[scheduling CLI contracts](../../crates/optimizer-cli/tests/schedule.rs),
+[schema contracts](../../tests/integration/test_registry.py), and the
+committed-record re-execution step in
 [the acceptance gate](../../tools/check.sh), which is what establishes the closed
 gap across a commit boundary rather than within one process.

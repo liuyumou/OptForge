@@ -3,6 +3,7 @@
 mod input;
 mod model;
 mod provenance;
+mod registry;
 mod schedule;
 mod search;
 mod solve;
@@ -19,20 +20,26 @@ use std::time::{Duration, Instant};
 
 use optimizer_cuda::{DEFAULT_LOCK_PATH, GpuLease, discover};
 
-const HELP: &str = "optimizer 0.1.0 (C5 flow-shop scheduling slice)
+const HELP: &str = "optimizer 0.1.0 (C8 local extension registry)
 Usage:
   optimizer hello
   optimizer model validate --model <path>
     [--candidate <path> --absolute-tolerance <f64> --relative-tolerance <f64> --integrality-tolerance <f64>]
   optimizer solve --model <path> --config <path> [--candidate <path> | --basis <path>]
-  optimizer search --model <path> --config <path> [--output <path>]
-  optimizer verify --record <path> --model <path>
+  optimizer search --model <path> --config <path> [--output <path>] [REGISTRY]
+  optimizer verify --record <path> --model <path> [--instance <path>] [REGISTRY]
   optimizer schedule generate --instance-id <text> --seed <u32> --jobs <n> --machines <m> [--output <path>]
-  optimizer schedule solve --instance <path> --config <path> [--output <path>] [--output-model <path>]
+  optimizer schedule solve --instance <path> --config <path> [--output <path>] [--output-model <path>] [REGISTRY]
+  optimizer registry list --registry <path>
+  optimizer registry check --registry <path> --extension <id> [--instance <path>] [--output <path>]
   optimizer gpu discover [--dry-run]
   optimizer gpu lease --simulate-ms <0..60000> [--timeout-ms <0..60000>]
   optimizer --help
-  optimizer --version";
+  optimizer --version
+
+REGISTRY is [--registry <path>] [--allow-experimental]. A configuration naming an
+extension requires --registry; there is deliberately no default registry location,
+so a run's extensions depend on the command rather than on the filesystem.";
 
 fn main() -> ExitCode {
     match run(env::args_os().skip(1).collect()) {
@@ -71,6 +78,12 @@ fn run(args: Vec<OsString>) -> io::Result<u8> {
         }
         [command, subcommand, options @ ..] if command == "schedule" && subcommand == "solve" => {
             return schedule::solve(options);
+        }
+        [command, subcommand, options @ ..] if command == "registry" && subcommand == "list" => {
+            return registry::list(options);
+        }
+        [command, subcommand, options @ ..] if command == "registry" && subcommand == "check" => {
+            return registry::check(options);
         }
         _ => {}
     }

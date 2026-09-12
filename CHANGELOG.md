@@ -6,6 +6,46 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- C8 local extension registry and conformance, under SPEC-0009 and ADR-0008. A
+  registry document maps a declared extension identity to an extension this build
+  provides, together with the facts needed to decide whether to permit it: version,
+  license, category, authority basis, host contract compatibility, declared
+  determinism, counted limits, data and hardware needs, inter-extension
+  requirements and conflicts, and promotion state. Before this, the extension
+  runtime was reachable only from Rust test code.
+- `optimizer search`, `optimizer verify` and `optimizer schedule solve` accept
+  `--registry` and resolve a configuration's extension policy through it. This
+  closes the gap C5 recorded: a scheduling run performed with the NEH producer is
+  now verifiable by re-execution, where before it was refused as unsupported.
+- `optimizer registry list` reports every entry a registry records, and separately
+  whether this build provides the identity at all, so an entry that would be
+  refused is visible without attempting a search. `optimizer registry check` runs
+  the conformance suite over one entry and writes its record.
+- The registry resolves; it does not load. An entry names an extension the binary
+  already provides through a caller-owned provider seam, and an entry naming an
+  identity this build does not provide is refused rather than skipped. Dynamic
+  loading of separately distributed native components would need a second unsafe
+  boundary ADR-0003 prohibits, and stays deferred with its recorded blocker.
+- Resolution is total: it either produces a resolved set for every named entry or
+  refuses, so a search never begins with a subset of what it was configured with.
+  The extension's own declaration is authoritative and an entry is a claim about
+  it; a disagreement on version, category, host contract version, problem class,
+  determinism or limits is refused in both directions rather than reconciled.
+- Promotion is checkable rather than assertable. A promoted entry cites a
+  conformance record by path and SHA-256, and is refused when the record is absent,
+  its bytes do not match, its outcome is not a pass, or it names another extension
+  or version. An experimental entry needs `--allow-experimental`, and a record
+  written with one registered carries a warning naming it.
+- A conformance record and a registry document are new versioned strict-JSON
+  documents at `schema_version` 1, each with a JSON Schema that accepts exactly
+  what the Rust parser accepts. No existing schema version changed and no existing
+  document gained or lost a field, so the committed C4 example record still
+  verifies unchanged.
+- Nothing here grants an extension mathematical authority. Resolution decides which
+  extensions a search may consult; SPEC-0004 continues to decide what their output
+  is worth. Promotion means the contract conformance suite passed, never that the
+  extension improves a search, and no performance or solution-quality claim is made
+  or measured.
 - C5 flow-shop scheduling slice, under SPEC-0008 and ADR-0007. This is the first
   application workload with an independent notion of a correct answer: a makespan
   recurrence computes a schedule's cost from a job order, so a candidate is checked

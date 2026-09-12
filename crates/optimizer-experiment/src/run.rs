@@ -13,6 +13,7 @@
 use serde::{Deserialize, Serialize};
 
 use optimizer_core::{ErrorKind, ValidationError, nested_version};
+use optimizer_extension::ExtensionSummary;
 use optimizer_solver::{SEARCH_SCHEMA_VERSION, SearchRecord};
 
 use crate::serde_strict::deserialize_object;
@@ -223,6 +224,105 @@ impl EnvironmentDifference {
         if let Some((recorded, current)) = &self.rustc {
             lines.push(format!(
                 "compiler differs: record {recorded}, current {current}"
+            ));
+        }
+        lines
+    }
+}
+
+/// How a re-executed search's extensions behaved differently, if at all.
+///
+/// Diagnostic only, and deliberately built the same way as
+/// [`EnvironmentDifference`]: it is computed after the search has run and is never
+/// consulted when deciding agreement. Adding it to agreement would change what
+/// agreement means for every record produced before that change, which SPEC-0005's
+/// compatibility section reserves for a new record version and an ADR.
+///
+/// It is worth having anyway, because an extension that behaved differently
+/// already shows up in the compared node counters. This says which extension, so a
+/// reader is not left inferring it from a node count.
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
+pub struct ExtensionDifference {
+    /// One entry per extension whose summary differs, with both descriptions.
+    pub changed: Vec<(String, String, String)>,
+    /// Extensions the record names that the re-execution did not register.
+    pub absent: Vec<String>,
+    /// Extensions the re-execution registered that the record does not name.
+    pub unexpected: Vec<String>,
+}
+
+impl ExtensionDifference {
+    /// Compare a record's extension summaries against a fresh search's.
+    pub fn between(recorded: &[ExtensionSummary], fresh: &[ExtensionSummary]) -> Self {
+        // Counters only. An extension's identity and version are checked before
+        // re-execution and refused there, so a difference reaching this point is
+        // about behavior rather than about identity.
+        let describe = |summary: &ExtensionSummary| {
+            format!(
+                "invocations {}, proposals {}, accepted {}, rejected {}, disabled {}",
+                summary.invocations,
+                summary.proposals,
+                summary.accepted,
+                summary.rejected,
+                summary.disabled
+            )
+        };
+        let mut difference = Self::default();
+        for recorded_summary in recorded {
+            match fresh
+                .iter()
+                .find(|summary| summary.extension_id == recorded_summary.extension_id)
+            {
+                Some(fresh_summary) => {
+                    let (before, after) = (describe(recorded_summary), describe(fresh_summary));
+                    if before != after {
+                        difference.changed.push((
+                            recorded_summary.extension_id.clone(),
+                            before,
+                            after,
+                        ));
+                    }
+                }
+                None => difference
+                    .absent
+                    .push(recorded_summary.extension_id.clone()),
+            }
+        }
+        for fresh_summary in fresh {
+            if !recorded
+                .iter()
+                .any(|summary| summary.extension_id == fresh_summary.extension_id)
+            {
+                difference
+                    .unexpected
+                    .push(fresh_summary.extension_id.clone());
+            }
+        }
+        difference
+    }
+
+    /// Whether anything differs.
+    pub fn is_empty(&self) -> bool {
+        self.changed.is_empty() && self.absent.is_empty() && self.unexpected.is_empty()
+    }
+
+    /// One line per difference, each naming the extension and both descriptions.
+    pub fn describe(&self) -> Vec<String> {
+        let mut lines = Vec::new();
+        for (extension_id, recorded, fresh) in &self.changed {
+            lines.push(format!(
+                "extension {extension_id} behaved differently: record {recorded}; \
+                 reproduced {fresh}"
+            ));
+        }
+        for extension_id in &self.absent {
+            lines.push(format!(
+                "extension {extension_id} is named by the record but was not registered"
+            ));
+        }
+        for extension_id in &self.unexpected {
+            lines.push(format!(
+                "extension {extension_id} was registered but is not named by the record"
             ));
         }
         lines

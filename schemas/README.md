@@ -15,6 +15,9 @@ Version 1 uses JSON Schema draft 2020-12. These are normative interfaces under
   [SPEC-0004](../docs/specifications/SPEC-0004-extension-runtime.md)
 - [Run record](run-record-v1.schema.json), normative under
   [SPEC-0005](../docs/specifications/SPEC-0005-run-surface.md)
+- [Extension registry](extension-registry-v1.schema.json) and
+  [conformance record](conformance-record-v1.schema.json), normative under
+  [SPEC-0009](../docs/specifications/SPEC-0009-extension-registry.md)
 
 Use python3 tools/validate_artifacts.py from the repository root. Schema validation
 is supplemented with file checksum, configuration, hardware, and timing checks.
@@ -25,6 +28,15 @@ Search and run records are validated by the same tooling and by the Rust parsers
 in optimizer-solver and optimizer-experiment. Both authorities must accept the
 same documents, so nested `schema_version` values are checked on the Rust parse
 path too rather than only by the schemas.
+
+Registry and conformance documents follow the same rule through
+optimizer-registry's parsers. Two registry rules are cross-field and cannot be
+expressed in JSON Schema — that an entry's authority follows from its category, and
+that no two entries share an identity — so the validator checks them in Python
+beside the schema, and the integration tests pair each against the Rust parser
+rather than against the schema alone. A promoted entry's conformance record is read
+and re-hashed during validation, so a promotion claim in a committed registry
+cannot be stale.
 
 M1 model, candidate and validation-report JSON are separate from experiment
 artifacts. Their normative version-1 shape is defined in

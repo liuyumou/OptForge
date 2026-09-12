@@ -4,10 +4,10 @@ Status: accepted
 Scope: optimizer-registry resolution and conformance, and the optimizer-cli registry surface
 Owner: extension runtime
 Introduced: C8
-Last reviewed commit: 08ed424
+Last reviewed commit: d48ce11
 Supersedes: none
-Implementation: pending
-Tests: pending
+Implementation: [registry document](../../crates/optimizer-registry/src/document.rs), [resolution](../../crates/optimizer-registry/src/resolve.rs), [conformance](../../crates/optimizer-registry/src/conformance.rs), [provider table and subcommands](../../crates/optimizer-cli/src/registry.rs), [search and verify integration](../../crates/optimizer-cli/src/search.rs), [validator](../../tools/validate_artifacts.py)
+Tests: [registry contracts](../../crates/optimizer-registry/tests/contracts.rs), [conformance suite and CLI contracts](../../crates/optimizer-cli/tests/registry.rs), [scheduling CLI contracts](../../crates/optimizer-cli/tests/schedule.rs), [run surface contracts](../../crates/optimizer-cli/tests/search.rs), [schema contracts](../../tests/integration/test_registry.py)
 
 ## Purpose
 
@@ -237,10 +237,9 @@ introduced and no existing signature changes.
 `backend_version`, `checks` and `outcome`. `CONFORMANCE_SCHEMA_VERSION` is 1.
 Each check carries a stable name, a pass flag and a bounded detail string.
 
-The schemas are `schemas/extension-registry-v1.schema.json` and
-`schemas/conformance-record-v1.schema.json`, named in plain text here because this
-contract is accepted before the files exist and the documentation gate validates
-every link. The implementation commit adds them and links them from
+The schemas are
+[extension-registry-v1](../../schemas/extension-registry-v1.schema.json) and
+[conformance-record-v1](../../schemas/conformance-record-v1.schema.json), listed in
 [the schema index](../../schemas/README.md).
 
 ## State and Invariants
@@ -381,12 +380,12 @@ optimizer verify --record artifacts/schedule-run.json \
   --registry examples/extension-registry-v1.json
 ```
 
-The scheduling run registers the NEH producer and reports `proven_optimal` for
-the committed three-job, two-machine example instance, whose minimum makespan is
-9 by exhaustive enumeration of its six permutations. Verification re-executes it
-through the same registry and agrees, exiting 0. This is the case that is not
-possible before this specification: the same run verified without a registry is
-refused as unsupported.
+The scheduling run registers the NEH producer and reports `proven_optimal` with
+objective 7 for the committed three-job, two-machine example instance, which is
+the minimum makespan over its six permutations by exhaustive enumeration.
+Verification re-executes it through the same registry and agrees, exiting 0. This
+is the case that is not possible before this specification: the same run verified
+without a registry is refused as unsupported.
 
 Verifying that record against a registry whose entry names a different version of
 the producer is refused as unsupported rather than reported as divergence.

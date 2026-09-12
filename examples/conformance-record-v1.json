@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "extension_id": "flow-shop-neh",
+  "version": "0.1.0",
+  "host_contract_version": 1,
+  "grid_size": 6,
+  "backend_version": "1.11.0",
+  "checks": [
+    {
+      "name": "resolves",
+      "passed": true,
+      "detail": "entry resolved with authority candidate_producer"
+    },
+    {
+      "name": "invoked",
+      "passed": true,
+      "detail": "6 invocations across 6 models"
+    },
+    {
+      "name": "conclusions_invariant",
+      "passed": true,
+      "detail": "outcome, proven optimum, dual bound and forfeiture state unchanged"
+    }
+  ],
+  "outcome": true
+}

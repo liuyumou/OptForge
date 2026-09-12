@@ -1,5 +1,132 @@
 # Active Task
 
+## C8 Extension Registry Implementation (2026-09-12)
+
+Objective: implement C8 under the accepted SPEC-0009 and ADR-0008: the registry
+document and its strict parser, resolution with each refusal path in its own
+category, the reusable conformance suite and its record, the CLI provider table and
+`registry` subcommands, registry integration in `search`, `verify` and
+`schedule solve`, the two JSON Schemas with committed examples, and a gate step
+re-executing a committed registry-backed scheduling record.
+
+Status: complete; the specification preceded the implementation, and the full gate
+passes with native acceptance covered.
+
+Acceptance gate: each resolution refusal is asserted separately in its own
+`ErrorKind` category; a promoted entry is refused when its conformance record is
+absent, tampered with, failing or naming another version; a scheduling run
+registering the NEH producer writes a record that verifies by re-execution, both in
+Rust and across a commit boundary in the gate; a registry supplied to a search
+naming no extension changes nothing; the conformance suite runs and its committed
+record regenerates; and `bash tools/check.sh` passes with native acceptance
+covered. Resource budget: CPU only, no GPU workloads.
+
+Evidence (2026-09-12): the complete `bash tools/check.sh` gate passed with the
+pinned HiGHS 1.11.0 library linked and **zero skip messages**, exit 0, with no
+native-uncovered warning. Rust tests rose from 191 to 232 and Python tests from 45
+to 60. Documentation rose from 48 to 51 pages: SPEC-0009, ADR-0008 and the
+register-an-extension tutorial. No checks were waived; the RustSec advisory fetch
+recovered through the cached database as already recorded.
+
+`Cargo.lock` changed only by adding the new optimizer-registry crate and local
+dependency edges. No external package version changed and no new external
+dependency was introduced. The registry crate depends on the published core,
+extension and executive APIs and on no crate supplying a concrete extension, so the
+provider seam is enforced by the build rather than asserted: the concrete table
+lives in optimizer-cli.
+
+Correctness evidence, stated as what was actually checked:
+
+- Every refusal path is asserted in its own `ErrorKind` category: an unprovided
+  identity; a declaration disagreeing with its entry on version, category, host
+  contract version, problem class, determinism and limits, each individually; a
+  provider returning the wrong role; an authority not implied by the category; the
+  transformation category; an unmet data requirement; a gpu hardware requirement;
+  an absent required identity; a declared conflicting pair; a promoted entry whose
+  record is absent, tampered with, failing, or names another extension or version;
+  and an experimental entry without permission.
+- Refusal is total. A two-entry registry in which one entry is refused refuses the
+  whole set, and the CLI writes no record for such a run.
+- The refusals decided before construction are asserted against the provider's own
+  construction counter, so neither can pass because nothing was ever built.
+- A scheduling run registering the NEH producer through a registry writes a record
+  that verifies by re-execution and exits 0. The gate re-executes such a record
+  committed at an earlier revision, which is the property no in-process test can
+  establish.
+- A registry whose entry names a different producer version is refused at
+  verification as unsupported rather than reported as divergence, so the verifier
+  does not blame a record for a property of its own inputs.
+- An experimental entry is refused without `--allow-experimental` and, with it,
+  the written record carries a warning naming it.
+
+Findings during implementation, each recorded rather than patched silently:
+
+The conformance suite had no test at all. `conformance::run` and
+`optimizer registry check` had exactly one caller between them, the production code
+path, so requirements 23 to 25 had no evidence and the committed
+`examples/conformance-record-v1.json` was a frozen artifact that was internally
+consistent and correctly checksummed but never re-derived. That is the specific
+failure the suite exists to prevent: `examples/extension-registry-v1.json` promotes
+`flow-shop-neh` by citing that file's SHA-256, so a producer that regressed would
+have kept citing a passing record while every check still agreed with it. New CLI
+contracts now regenerate the record through `registry check` and compare it byte for
+byte, and the assertion was shown to fail by perturbing the committed file. The
+suite's own invariance comparison is unit-tested against each of the six fields it
+compares, because SPEC-0004's containment means no extension reachable through the
+host can move them — a broken comparison would otherwise be indistinguishable from
+a conforming extension.
+
+`entry_order_does_not_affect_resolution` was vacuous. Its adviser entry recorded an
+identity its declaration did not match, so both orders were refused on the first
+policy and the test asserted only that two identical errors were identical; it
+passed with both identity sorts deleted. It now resolves two entries successfully in
+both orders and asserts the identity and role sequences the host receives, and it
+was shown to fail with the sort removed. The refusal-determinism case it used to
+cover is kept as a separate test, because a test that only ever observes refusals
+cannot see the ordering it claims to check.
+
+Requirement 17 had no test. An empty extension policy with a registry supplied must
+still take the extension-free entry point, which is the compatibility claim the
+whole slice rests on, and it was asserted only in a code comment. A run surface
+contract now compares the two records field by field apart from elapsed time.
+
+`docs/architecture/testing.md` claimed that every refusal test asserts the
+extension's own construction or invocation counter. Two did, and the invocation
+counter was written and never read. The claim is now accurate, the dead
+instrumentation is removed, and the reason the declaration-mismatch paths cannot
+assert it is stated: resolution has to construct the extension and call `declare`
+to discover the disagreement, which means requirement 14's "MUST NOT construct" is
+narrower in practice than it reads. That narrowing is recorded in
+[known failures](known-failures.md) as a specification correction to make, not a
+code change to sneak in.
+
+Recorded and not closed, because each needs a decision rather than a patch:
+requirement 20's nondeterministic-record refusal has no fixture that can produce
+one; requirement 20's version comparison at verification may be unreachable, since
+resolution has already equated the declaration with the entry, and the branch is
+left in place rather than deleted on inspection alone; requirement 21's positive
+diagnostic case, requirement 22's forfeited registry-backed record, and
+`optimizer search --registry` with a non-empty policy are all untested, the last
+because both provided extensions are flow-shop producers that cannot be built from
+a bare model. All are in [known failures](known-failures.md).
+
+Scope boundary held: no schema version changed anywhere, no existing document
+gained or lost a field, and the compared fields stay the ten SPEC-0005 fixed. The
+committed C4 example record still re-executes and verifies inside the gate. An
+extension summary difference is a diagnostic note that does not change an exit code,
+matching the existing environment-difference rule.
+
+What is deliberately not claimed: no performance, runtime or solution-quality
+result. Promotion means the contract conformance suite passed, never that the
+extension improves a search, which stays C7's question. The conformance record
+carries no timing field, and a test asserts its absence so one cannot arrive
+quietly.
+
+Follow-up: C6, heterogeneous computation and GPU feasibility, is the next
+dependency-ready task and has no accepted specification; write one before any
+public GPU or backend-selection API. C9 and C10 are also unblocked now that C8 is
+complete, and both keep their recorded blockers.
+
 ## C8 Extension Registry Specification (2026-09-12)
 
 Objective: write and accept the C8 contract before any public registry API exists,

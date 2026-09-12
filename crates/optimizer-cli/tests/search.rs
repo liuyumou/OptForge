@@ -4,7 +4,7 @@
 //! here matter more than the agreeing one: a changed model under an unchanged
 //! identity, and a mutated measurement, must both be refused.
 
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -425,6 +425,62 @@ fn an_extension_policy_is_refused_as_unsupported() {
     assert!(output.stdout.is_empty(), "no record for a refused run");
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(stderr.contains("unsupported:"), "found {stderr}");
+}
+
+// SPEC-0009 requirement 17: supplying a registry must not change a search whose
+// configuration names no extension.
+//
+// This is the compatibility claim C8 rests on. The registry is reachable from
+// every search command now, so the case that matters most is the one where it
+// does nothing: an empty policy must still take the extension-free entry point
+// and produce the record C4 produced, byte for byte apart from measured time.
+// Without this, "no existing behavior moved" would be prose rather than a check.
+#[test]
+fn a_registry_does_not_change_a_search_that_names_no_extension() {
+    if !native_available() {
+        return;
+    }
+    let sandbox = Sandbox::new();
+    let model = sandbox.write("model.json", MODEL);
+    let config = sandbox.write("config.json", CONFIG);
+    let registry =
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("../../examples/extension-registry-v1.json");
+
+    let (bare_code, mut bare) = sandbox.search(&model, &config);
+    let output = sandbox
+        .command()
+        .arg("search")
+        .arg("--model")
+        .arg(&model)
+        .arg("--config")
+        .arg(&config)
+        .arg("--registry")
+        .arg(&registry)
+        .output()
+        .expect("run search with a registry");
+    assert_eq!(bare_code, Some(0));
+    assert_eq!(
+        output.status.code(),
+        Some(0),
+        "a registry cannot fail a search that names no extension"
+    );
+    let mut with_registry: serde_json::Value =
+        serde_json::from_slice(&output.stdout).expect("a record");
+
+    // Elapsed time measures the host rather than the search, which is the same
+    // exclusion SPEC-0005 requirement 12 already fixes for verification.
+    bare["search"]["elapsed_ms"] = serde_json::json!(0);
+    with_registry["search"]["elapsed_ms"] = serde_json::json!(0);
+    assert_eq!(
+        bare, with_registry,
+        "a registry must not perturb a search whose extension policy is empty"
+    );
+    assert_eq!(
+        with_registry["search"]["extensions"],
+        serde_json::json!([]),
+        "no extension may be registered by naming a registry alone"
+    );
+    assert_eq!(with_registry["warnings"], serde_json::json!([]));
 }
 
 // Requirements 8 and 16: argument failures are categorized and write no record.

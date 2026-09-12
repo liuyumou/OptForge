@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "registry_id": "example-local-registry",
+  "entries": [
+    {
+      "schema_version": 1,
+      "extension_id": "flow-shop-neh",
+      "version": "0.1.0",
+      "license": "MIT",
+      "category": "candidate_producer",
+      "authority_basis": "propose_validated_candidate",
+      "host_contract_version": 1,
+      "problem_classes": [
+        "discrete"
+      ],
+      "deterministic": true,
+      "limits": {
+        "max_invocations": 1,
+        "max_proposals": 2
+      },
+      "data_requirement": "flow_shop_instance",
+      "hardware_requirement": "cpu",
+      "requires": [],
+      "conflicts_with": [],
+      "promotion": {
+        "state": "promoted",
+        "conformance_path": "examples/conformance-record-v1.json",
+        "conformance_sha256": "f5f1845ed0f029ddf4b0833dad47a25596444d8b53ccf760981ad07629ef86d2"
+      }
+    },
+    {
+      "schema_version": 1,
+      "extension_id": "flow-shop-refused",
+      "version": "0.1.0",
+      "license": "MIT",
+      "category": "candidate_producer",
+      "authority_basis": "propose_validated_candidate",
+      "host_contract_version": 1,
+      "problem_classes": [
+        "discrete"
+      ],
+      "deterministic": true,
+      "limits": {
+        "max_invocations": 18446744073709551615,
+        "max_proposals": 18446744073709551615
+      },
+      "data_requirement": "flow_shop_instance",
+      "hardware_requirement": "cpu",
+      "requires": [],
+      "conflicts_with": [],
+      "promotion": {
+        "state": "experimental"
+      }
+    }
+  ]
+}

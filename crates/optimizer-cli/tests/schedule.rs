@@ -88,6 +88,36 @@ const CONFIG_WITH_PRODUCER: &str = r#"{
   ]
 }"#;
 
+/// A registry recording the NEH producer exactly as it declares itself.
+///
+/// The version, category, host contract version, problem class, determinism and
+/// limits all match `SchedulingProducer`'s own declaration, because resolution
+/// refuses a mismatch. `data_requirement` is `flow_shop_instance` because the
+/// producer is built from an instance and cannot be constructed from a model.
+const REGISTRY: &str = r#"{
+  "schema_version": 1,
+  "registry_id": "schedule-cli-fixture",
+  "entries": [
+    {
+      "schema_version": 1,
+      "extension_id": "flow-shop-neh",
+      "version": "0.1.0",
+      "license": "MIT",
+      "category": "candidate_producer",
+      "authority_basis": "propose_validated_candidate",
+      "host_contract_version": 1,
+      "problem_classes": ["discrete"],
+      "deterministic": true,
+      "limits": {"max_invocations": 1, "max_proposals": 2},
+      "data_requirement": "flow_shop_instance",
+      "hardware_requirement": "cpu",
+      "requires": [],
+      "conflicts_with": [],
+      "promotion": {"state": "experimental"}
+    }
+  ]
+}"#;
+
 /// Skip a native-only test loudly rather than reporting false coverage.
 fn require_native(test: &str) -> bool {
     if native_available() {
@@ -395,7 +425,8 @@ fn verification_refuses_a_changed_instance_under_one_identity() {
     );
 }
 
-/// Requirement 18: a configuration naming an unregistered extension is refused.
+/// Requirement 18 and SPEC-0009 requirement 5: a configuration naming an extension
+/// the registry does not record is refused, naming it.
 #[test]
 fn solve_refuses_an_unregistered_extension_policy() {
     let sandbox = Sandbox::new();
@@ -418,6 +449,52 @@ fn solve_refuses_an_unregistered_extension_policy() {
         "config.json",
         &CONFIG_WITH_PRODUCER.replace("flow-shop-neh", "somebody-elses-extension"),
     );
+    let registry = sandbox.write("registry.json", REGISTRY);
+    let output = sandbox
+        .command()
+        .args(["schedule", "solve", "--instance"])
+        .arg(&instance)
+        .arg("--config")
+        .arg(&config)
+        .arg("--registry")
+        .arg(&registry)
+        .arg("--allow-experimental")
+        .output()
+        .expect("run solve");
+    assert_eq!(output.status.code(), Some(2));
+    assert!(output.stdout.is_empty(), "no partial record on refusal");
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        stderr.contains("unsupported") && stderr.contains("somebody-elses-extension"),
+        "expected an unsupported refusal naming the extension, got {stderr}"
+    );
+}
+
+/// SPEC-0009 requirement 18: a non-empty policy with no registry is refused, and the
+/// diagnostic says what to do about it.
+///
+/// There is deliberately no default registry location, so this refusal is the only
+/// thing standing between a caller and a search whose extensions depend on the
+/// filesystem rather than on the command.
+#[test]
+fn solve_refuses_an_extension_policy_without_a_registry() {
+    let sandbox = Sandbox::new();
+    let instance = sandbox.at("tiny.json");
+    sandbox
+        .command()
+        .args([
+            "schedule",
+            "generate",
+            "--instance-id",
+            "tiny",
+            "--seed",
+            "873654221",
+        ])
+        .args(["--jobs", "3", "--machines", "2", "--output"])
+        .arg(&instance)
+        .status()
+        .expect("generate");
+    let config = sandbox.write("config.json", CONFIG_WITH_PRODUCER);
     let output = sandbox
         .command()
         .args(["schedule", "solve", "--instance"])
@@ -430,20 +507,99 @@ fn solve_refuses_an_unregistered_extension_policy() {
     assert!(output.stdout.is_empty(), "no partial record on refusal");
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(
-        stderr.contains("unsupported") && stderr.contains("somebody-elses-extension"),
-        "expected an unsupported refusal naming the extension, got {stderr}"
+        stderr.contains("unsupported") && stderr.contains("--registry"),
+        "the refusal must name the remedy, got {stderr}"
     );
 }
 
-/// Requirement 25 and SPEC-0005 requirement 14: a record naming an extension
-/// policy cannot be re-executed by a surface that loads none.
-///
-/// This is reported as unsupported rather than as divergence. Re-execution loads no
-/// extension, so the counters would differ for that reason alone, and calling that
-/// a divergence would blame the record for a limitation of the verifier.
+/// SPEC-0009 requirement 12: an experimental entry needs explicit permission, and
+/// the record it produces says so.
 #[test]
-fn verification_refuses_a_record_naming_an_extension_policy() {
-    if !require_native("verification_refuses_a_record_naming_an_extension_policy") {
+fn an_experimental_entry_needs_permission_and_is_recorded() {
+    if !require_native("an_experimental_entry_needs_permission_and_is_recorded") {
+        return;
+    }
+    let sandbox = Sandbox::new();
+    let instance = sandbox.at("tiny.json");
+    sandbox
+        .command()
+        .args([
+            "schedule",
+            "generate",
+            "--instance-id",
+            "tiny",
+            "--seed",
+            "873654221",
+        ])
+        .args(["--jobs", "3", "--machines", "2", "--output"])
+        .arg(&instance)
+        .status()
+        .expect("generate");
+    let config = sandbox.write("config.json", CONFIG_WITH_PRODUCER);
+    let registry = sandbox.write("registry.json", REGISTRY);
+
+    // Without permission the entry is refused before any search runs.
+    let refused = sandbox
+        .command()
+        .args(["schedule", "solve", "--instance"])
+        .arg(&instance)
+        .arg("--config")
+        .arg(&config)
+        .arg("--registry")
+        .arg(&registry)
+        .output()
+        .expect("run solve");
+    assert_eq!(refused.status.code(), Some(2));
+    let stderr = String::from_utf8_lossy(&refused.stderr);
+    assert!(
+        stderr.contains("--allow-experimental"),
+        "the refusal must name the remedy, got {stderr}"
+    );
+
+    // With permission it runs, and the record carries the warning.
+    let record = sandbox.at("run.json");
+    let status = sandbox
+        .command()
+        .args(["schedule", "solve", "--instance"])
+        .arg(&instance)
+        .arg("--config")
+        .arg(&config)
+        .arg("--registry")
+        .arg(&registry)
+        .arg("--allow-experimental")
+        .arg("--output")
+        .arg(&record)
+        .status()
+        .expect("solve");
+    assert_eq!(status.code(), Some(0));
+    let written: serde_json::Value =
+        serde_json::from_slice(&std::fs::read(&record).expect("read")).expect("parse");
+    let warnings = written["warnings"]
+        .as_array()
+        .expect("warnings is an array");
+    assert_eq!(warnings.len(), 1, "found {warnings:?}");
+    assert!(
+        warnings[0]
+            .as_str()
+            .expect("warning text")
+            .contains("flow-shop-neh"),
+        "the warning must name the extension: {warnings:?}"
+    );
+}
+
+/// SPEC-0009 requirement 19: a scheduling record produced **with** the NEH producer
+/// re-executes and verifies through a registry.
+///
+/// This is the property that did not exist before C8, and the reason the registry is
+/// the seam two known-failures pointed at. Before SPEC-0009 this same record was
+/// refused as unsupported, because re-execution loaded no extension and the counters
+/// would have differed for that reason alone.
+///
+/// Both directions are asserted: the record verifies with the registry, and is still
+/// refused without one, so the pass is not the only thing checked.
+#[test]
+fn a_producer_backed_record_verifies_through_a_registry() {
+    if !require_native("a_producer_backed_record_verifies_through_a_registry") {
         return;
     }
     let sandbox = Sandbox::new();
@@ -463,6 +619,7 @@ fn verification_refuses_a_record_naming_an_extension_policy() {
         .arg(&instance)
         .status()
         .expect("generate");
+    let registry = sandbox.write("registry.json", REGISTRY);
     let record = sandbox.at("run.json");
     let model = sandbox.at("model.json");
     let status = sandbox
@@ -471,6 +628,9 @@ fn verification_refuses_a_record_naming_an_extension_policy() {
         .arg(&instance)
         .arg("--config")
         .arg(&config)
+        .arg("--registry")
+        .arg(&registry)
+        .arg("--allow-experimental")
         .arg("--output")
         .arg(&record)
         .arg("--output-model")
@@ -479,8 +639,9 @@ fn verification_refuses_a_record_naming_an_extension_policy() {
         .expect("solve");
     assert_eq!(status.code(), Some(0), "the producer run itself succeeds");
 
-    // The producer was registered and did its work, which is what makes the
-    // refusal below about re-execution rather than about a failed search.
+    // The producer was registered and its proposals were accepted. Asserting this
+    // first is what stops the verification below from passing because the producer
+    // was never actually consulted.
     let written: serde_json::Value =
         serde_json::from_slice(&std::fs::read(&record).expect("read")).expect("parse");
     assert_eq!(written["search"]["outcome"], "proven_optimal");
@@ -489,7 +650,46 @@ fn verification_refuses_a_record_naming_an_extension_policy() {
     assert_eq!(summary["registered"], true);
     assert!(summary["accepted"].as_u64().expect("accepted count") > 0);
 
+    // The headline: the record re-executes and agrees.
     let output = sandbox
+        .command()
+        .arg("verify")
+        .arg("--record")
+        .arg(&record)
+        .arg("--model")
+        .arg(&model)
+        .arg("--instance")
+        .arg(&instance)
+        .arg("--registry")
+        .arg(&registry)
+        .arg("--allow-experimental")
+        .output()
+        .expect("run verify");
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert_eq!(
+        output.status.code(),
+        Some(0),
+        "a producer-backed record must verify: {stderr}"
+    );
+    let verdict: serde_json::Value =
+        serde_json::from_slice(&output.stdout).expect("verdict parses");
+    assert_eq!(verdict["agreement"], true);
+    assert_eq!(verdict["outcome"], "proven_optimal");
+    assert_eq!(verdict["extensions"][0], "flow-shop-neh");
+    // Requirement 21: agreement is decided by the ten compared fields alone, and a
+    // registry-backed run that agrees reports no extension difference.
+    assert_eq!(verdict["extensions_differ"], false);
+    assert_eq!(
+        verdict["compared"].as_array().expect("compared list").len(),
+        10,
+        "the compared field list must be unchanged by C8"
+    );
+
+    // Without a registry the same record is still refused, because nothing can
+    // reconstruct the producer it names. The refusal is unsupported rather than
+    // divergence: re-executing without the producer would reproduce a search the
+    // record does not describe.
+    let refused = sandbox
         .command()
         .arg("verify")
         .arg("--record")
@@ -498,15 +698,95 @@ fn verification_refuses_a_record_naming_an_extension_policy() {
         .arg(&model)
         .output()
         .expect("run verify");
-    assert_eq!(output.status.code(), Some(2));
-    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert_eq!(refused.status.code(), Some(2));
+    let stderr = String::from_utf8_lossy(&refused.stderr);
     assert!(
-        stderr.contains("unsupported") && stderr.contains("flow-shop-neh"),
-        "expected an unsupported refusal, got {stderr}"
+        stderr.contains("unsupported") && stderr.contains("--registry"),
+        "expected an unsupported refusal naming the remedy, got {stderr}"
     );
     assert!(
         !stderr.contains("divergence"),
-        "a surface limitation must not be reported as divergence: {stderr}"
+        "a missing registry must not be reported as divergence: {stderr}"
+    );
+}
+
+/// SPEC-0009 requirement 20: a registry resolving a different version is refused as
+/// unsupported rather than reported as divergence.
+///
+/// The distinction matters. Re-executing against another version would reproduce a
+/// search the record does not describe, so its counters would differ for that reason
+/// alone, and calling that divergence would blame the record.
+#[test]
+fn verification_refuses_a_registry_naming_another_version() {
+    if !require_native("verification_refuses_a_registry_naming_another_version") {
+        return;
+    }
+    let sandbox = Sandbox::new();
+    let config = sandbox.write("config.json", CONFIG_WITH_PRODUCER);
+    let registry = sandbox.write("registry.json", REGISTRY);
+    let instance = sandbox.at("tiny.json");
+    sandbox
+        .command()
+        .args([
+            "schedule",
+            "generate",
+            "--instance-id",
+            "tiny",
+            "--seed",
+            "873654221",
+        ])
+        .args(["--jobs", "3", "--machines", "2", "--output"])
+        .arg(&instance)
+        .status()
+        .expect("generate");
+    let record = sandbox.at("run.json");
+    let model = sandbox.at("model.json");
+    let status = sandbox
+        .command()
+        .args(["schedule", "solve", "--instance"])
+        .arg(&instance)
+        .arg("--config")
+        .arg(&config)
+        .arg("--registry")
+        .arg(&registry)
+        .arg("--allow-experimental")
+        .arg("--output")
+        .arg(&record)
+        .arg("--output-model")
+        .arg(&model)
+        .status()
+        .expect("solve");
+    assert_eq!(status.code(), Some(0));
+
+    // A registry claiming a version the extension does not report is refused at
+    // resolution, before the version comparison against the record is reached.
+    let restamped = sandbox.write(
+        "restamped-registry.json",
+        &REGISTRY.replace(r#""version": "0.1.0""#, r#""version": "9.9.9""#),
+    );
+    let output = sandbox
+        .command()
+        .arg("verify")
+        .arg("--record")
+        .arg(&record)
+        .arg("--model")
+        .arg(&model)
+        .arg("--instance")
+        .arg(&instance)
+        .arg("--registry")
+        .arg(&restamped)
+        .arg("--allow-experimental")
+        .output()
+        .expect("run verify");
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        stderr.contains("unsupported") && stderr.contains("9.9.9"),
+        "expected an unsupported refusal naming the version, got {stderr}"
+    );
+    assert!(
+        !stderr.contains("divergence"),
+        "a version mismatch must not be reported as divergence: {stderr}"
     );
 }
 

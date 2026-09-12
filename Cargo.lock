@@ -128,6 +128,7 @@ dependencies = [
  "optimizer-experiment",
  "optimizer-extension",
  "optimizer-highs",
+ "optimizer-registry",
  "optimizer-schedule",
  "optimizer-schedule-examples",
  "optimizer-solver",
@@ -155,6 +156,7 @@ name = "optimizer-experiment"
 version = "0.1.0"
 dependencies = [
  "optimizer-core",
+ "optimizer-extension",
  "optimizer-solver",
  "serde",
  "serde_json",
@@ -189,6 +191,18 @@ dependencies = [
  "optimizer-schedule",
  "optimizer-schedule-examples",
  "optimizer-solver",
+]
+
+[[package]]
+name = "optimizer-registry"
+version = "0.1.0"
+dependencies = [
+ "optimizer-core",
+ "optimizer-experiment",
+ "optimizer-extension",
+ "optimizer-solver",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

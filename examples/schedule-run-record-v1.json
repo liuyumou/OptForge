@@ -1,0 +1,698 @@
+{
+  "schema_version": 1,
+  "record_id": "c8-example-registry-backed-schedule-run",
+  "revision": "0000000000000000000000000000000000000000",
+  "dirty": false,
+  "hardware": {
+    "os": "Linux (example)",
+    "cpu": "example CPU",
+    "logical_cpus": 1,
+    "gpu_uuid": null,
+    "gpu_name": null,
+    "driver": null
+  },
+  "toolchain": {
+    "rustc": "rustc 1.93.1 (example)",
+    "cargo": "cargo 1.93.1 (example)"
+  },
+  "model_fingerprint": "fnv1a64:b1500daab7d13d14",
+  "inputs": [
+    {
+      "role": "model",
+      "path": "examples/flow-shop-v1.json",
+      "sha256": "ffa8380583bc054e8b6967182338913acbaabd75873d9c3238e63957609d75bf"
+    },
+    {
+      "role": "config",
+      "path": "examples/search-config-neh-v2.json",
+      "sha256": "537e8468ab0b4bcf2d6b428a09078d3ba41e8949ded8c51e9b9521f5f837597a"
+    }
+  ],
+  "search": {
+    "schema_version": 2,
+    "model_id": "flow-shop-example",
+    "backend": "relaxation",
+    "backend_version": "1.11.0",
+    "outcome": "proven_optimal",
+    "objective": 7.0,
+    "dual_bound": 7.0,
+    "gap": 0.0,
+    "candidate": {
+      "schema_version": 1,
+      "model_id": "flow-shop-example",
+      "values": [
+        {
+          "variable_id": 0,
+          "value": 0.0
+        },
+        {
+          "variable_id": 1,
+          "value": 1.0
+        },
+        {
+          "variable_id": 2,
+          "value": 0.0
+        },
+        {
+          "variable_id": 3,
+          "value": 1.0
+        },
+        {
+          "variable_id": 4,
+          "value": 0.0
+        },
+        {
+          "variable_id": 5,
+          "value": 0.0
+        },
+        {
+          "variable_id": 6,
+          "value": 0.0
+        },
+        {
+          "variable_id": 7,
+          "value": 0.0
+        },
+        {
+          "variable_id": 8,
+          "value": 1.0
+        },
+        {
+          "variable_id": 9,
+          "value": 1.0
+        },
+        {
+          "variable_id": 10,
+          "value": 4.0
+        },
+        {
+          "variable_id": 11,
+          "value": 4.0
+        },
+        {
+          "variable_id": 12,
+          "value": 6.0
+        },
+        {
+          "variable_id": 13,
+          "value": 6.0
+        },
+        {
+          "variable_id": 14,
+          "value": 7.0
+        }
+      ]
+    },
+    "validation": {
+      "schema_version": 1,
+      "model_id": "flow-shop-example",
+      "tolerances": {
+        "absolute": 1e-07,
+        "relative": 1e-09,
+        "integrality": 1e-06
+      },
+      "objective": 7.0,
+      "feasible": true,
+      "variables": [
+        {
+          "variable_id": 0,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-06,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 1,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-06,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 2,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-06,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 3,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-06,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 4,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-06,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 5,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-06,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 6,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-06,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 7,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-06,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 8,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-06,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 9,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 12.0,
+            "violation": 0.0,
+            "allowance": 1.12e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 10,
+          "value": 4.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.0399999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 12.0,
+            "violation": 0.0,
+            "allowance": 1.12e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 11,
+          "value": 4.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.0399999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 12.0,
+            "violation": 0.0,
+            "allowance": 1.12e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 12,
+          "value": 6.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.06e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 12.0,
+            "violation": 0.0,
+            "allowance": 1.12e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 13,
+          "value": 6.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.06e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 12.0,
+            "violation": 0.0,
+            "allowance": 1.12e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 14,
+          "value": 7.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.0699999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 12.0,
+            "violation": 0.0,
+            "allowance": 1.12e-07,
+            "satisfied": true
+          },
+          "domain": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_id": 0,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 1,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 2,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 3,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 4,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 5,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 1.0099999999999999e-07,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 6,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.02e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 7,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.02e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 8,
+          "activity": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.0699999999999999e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 9,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.08e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 10,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.08e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 11,
+          "activity": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.0699999999999999e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 12,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.12e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 13,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.12e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 14,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.12e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 15,
+          "activity": 4.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.08e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 16,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.14e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 17,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.14e-07,
+            "satisfied": true
+          },
+          "upper": null
+        }
+      ]
+    },
+    "nodes_explored": 1,
+    "nodes_pruned_infeasible": 0,
+    "nodes_pruned_bound": 1,
+    "open_nodes_remaining": 0,
+    "relaxations_solved": 1,
+    "forfeited": false,
+    "warnings": [],
+    "extensions": [
+      {
+        "schema_version": 1,
+        "extension_id": "flow-shop-neh",
+        "version": "0.1.0",
+        "category": "candidate_producer",
+        "authority": "propose_validated_candidate",
+        "deterministic": true,
+        "registered": true,
+        "invocations": 1,
+        "proposals": 1,
+        "accepted": 1,
+        "rejected": 0,
+        "disabled": false,
+        "failures": []
+      }
+    ],
+    "elapsed_ms": 1,
+    "options": {
+      "schema_version": 2,
+      "seed": 17,
+      "node_limit": 50000,
+      "time_limit_ms": 120000,
+      "open_node_limit": 50000,
+      "improvement_tolerance": 1e-09,
+      "relaxation": {
+        "schema_version": 1,
+        "seed": 17,
+        "time_limit_ms": null,
+        "iteration_limit": null,
+        "node_limit": null,
+        "tolerances": {
+          "absolute": 1e-07,
+          "relative": 1e-09,
+          "integrality": 1e-06
+        },
+        "threads": 1
+      },
+      "extensions": [
+        {
+          "schema_version": 1,
+          "extension_id": "flow-shop-neh",
+          "invocation_budget": 8,
+          "proposal_budget": 8
+        }
+      ]
+    }
+  },
+  "warnings": [
+    "Example record with the all-zero revision; it verifies but is not measurement evidence."
+  ]
+}

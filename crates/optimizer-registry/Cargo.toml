@@ -1,0 +1,26 @@
+[package]
+name = "optimizer-registry"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+# This crate is deliberately provider-agnostic: it depends on the published core,
+# extension and executive APIs and on no crate that supplies a concrete
+# extension. A dependency on optimizer-extension-examples or
+# optimizer-schedule-examples would turn resolution into a table of blessed
+# first-party extensions, which is the opposite of what the Provider seam is for.
+# The concrete table lives in optimizer-cli, as SPEC-0009 states.
+# optimizer-experiment supplies the SHA-256 used to verify a promotion claim.
+# It is checked against the FIPS 180-4 vectors and independently against Python's
+# hashlib, so reusing it is preferable to a second implementation to keep correct.
+[dependencies]
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+optimizer-experiment = { version = "0.1.0", path = "../optimizer-experiment" }
+optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
+optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }
+serde.workspace = true
+serde_json.workspace = true
+
+[lints]
+workspace = true

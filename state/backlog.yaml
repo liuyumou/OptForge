@@ -1,6 +1,6 @@
 schema_version: 1
-current_milestone: C8
-next_ready_milestone: C8
+current_milestone: C6
+next_ready_milestone: C6
 tasks:
   - id: M0
     title: Repository and process bootstrap
@@ -46,7 +46,7 @@ tasks:
     acceptance: "Exhaustive permutations, independent evaluator, validated incumbents, frozen development subset"
   - id: C6
     title: Heterogeneous backend and GPU feasibility
-    status: planned
+    status: ready
     depends_on: [C1, C4, C5]
     acceptance: "CPU/GPU equivalence, sanitizers, lease recovery, fallback and transfer-inclusive measurements"
   - id: C7
@@ -64,7 +64,7 @@ tasks:
   # blockers. Existing references to "C8's registry" therefore stay accurate.
   - id: C8
     title: Local extension registry and conformance workflow
-    status: ready
+    status: complete
     depends_on: [C4]
     specification: docs/specifications/SPEC-0009-extension-registry.md
     acceptance: "Registry resolution refusals, promotion checked against a conformance record, registry-backed run records verifiable by re-execution"

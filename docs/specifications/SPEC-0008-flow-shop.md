@@ -307,16 +307,18 @@ not involved.
 ## Examples
 
 ```bash
-optimizer schedule --instance examples/flow-shop-v1.json \
-  --config examples/search-config-v2.json --output artifacts/schedule-run.json
+optimizer schedule solve --instance examples/flow-shop-v1.json \
+  --config examples/search-config-v2.json \
+  --output artifacts/schedule-run.json --output-model artifacts/schedule-model.json
 optimizer verify --record artifacts/schedule-run.json --model artifacts/schedule-model.json
 ```
 
 A three-job, two-machine instance with processing times `[[3, 1, 2], [2, 3, 1]]`
-by machine has minimum makespan 9, which exhaustive enumeration of its six
-permutations confirms. Encoding it yields nine binary and six continuous
-variables, and the executive proves the same value the recurrence computes for the
-best permutation.
+by machine has minimum makespan 7, attained by the job order `1, 0, 2`, which
+exhaustive enumeration of its six permutations confirms; the identity order
+`0, 1, 2` costs 9. Encoding it yields nine binary and six continuous variables,
+and the executive proves the same value the recurrence computes for the best
+permutation.
 
 The generator's published reference is Taillard's first flow-shop instance, 20
 jobs on 5 machines from seed 873654221, whose first machine row begins

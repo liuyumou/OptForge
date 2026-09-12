@@ -30,17 +30,19 @@ exist, this document says so rather than implying it.
 | 0. Foundation | M0 bootstrap, M1 model/validation authority | Complete |
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
 | 2. Execution | C2 executive, C3 extension runtime | Complete |
-| 3. Application | C4 run surface, C5 scheduling slice, C8 extension registry | C4 and C5 complete; C8 specified and in progress |
-| 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | Not started |
+| 3. Application | C4 run surface, C5 scheduling slice, C8 extension registry | C4, C5 and C8 complete; C9 and C10 not started |
+| 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | C6 dependency-ready, not started |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
 
 Stages 0, 1 and 2 are complete, and Stage 3's reproducibility evidence is now
-recorded rather than projected for C4 and C5; C8's contract is accepted and its
-evidence does not exist yet. Everything below that is a plan, and the
-performance and learning claims in stages 4 and beyond are hypotheses, not
-results. C2 establishes search correctness only, C3 establishes extension safety
-only, and C4 establishes repeatability only; none makes a performance claim.
+recorded rather than projected for C4, C5 and C8; the Python SDK and the
+comparative runner that also belong to Stage 3 remain unspecified. Everything
+below that is a plan, and the performance and learning claims in stages 4 and
+beyond are hypotheses, not results. C2 establishes search correctness only, C3
+establishes extension safety only, C4 establishes repeatability only, and C8
+establishes which extensions a search may consult; none makes a performance
+claim.
 
 ---
 
@@ -179,7 +181,7 @@ extension host from outside Rust test code.
 
 The remaining items from C4's original scope keep their own specifications and
 gates. **C8** is the local registry for versions, licenses, compatibility,
-authority basis, failures and interactions, specified as
+authority basis, failures and interactions, implemented under
 [SPEC-0009](docs/specifications/SPEC-0009-extension-registry.md) and
 [ADR-0008](docs/decisions/ADR-0008-registry-resolution.md). **C9** is the Python
 SDK, whose blocker is recorded because pyo3 requires an unsafe boundary ADR-0003
@@ -188,13 +190,14 @@ manifest. Progress streaming and checkpoint restart need new public search
 surface and remain unassigned. MCP may wrap these interfaces but is not required
 for execution.
 
-C8 is what makes the extension runtime reachable without Rust test code. C3 built
-the host but left registration as an in-memory slice, so the run surface refuses
+C8 is what made the extension runtime reachable without Rust test code. C3 built
+the host but left registration as an in-memory slice, so the run surface refused
 any configuration naming an extension and a C5 scheduling run performed with the
-NEH producer cannot be verified by re-execution at all. The registry resolves a
+NEH producer could not be verified by re-execution at all. The registry resolves a
 named identity to an extension this build provides, refuses everything it cannot
-check, and leaves what agreement means untouched. It deliberately does not load
-dynamically distributed native components, which would need a second unsafe
+check, and leaves what agreement means untouched: no schema version changed and
+the compared fields are the ten SPEC-0005 already fixed. It deliberately does not
+load dynamically distributed native components, which would need a second unsafe
 boundary and its own crash-isolation evidence.
 
 **C5 — Scheduling vertical slice (complete).** Flow-shop

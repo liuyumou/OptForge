@@ -71,20 +71,99 @@ step: decide the SDK's shape in its own specification, now backlog item C9; a
 subprocess wrapper over the versioned run records needs no unsafe boundary and is
 the cheaper option if an SDK is wanted before that decision.
 
-## Local extension registry is not implemented
+## Resolved: the local extension registry is implemented
 
-SPEC-0005 excludes the registry. `search_with_extensions` takes an in-memory
-`&[Registration]` slice for one search, and the CLI has no mechanism to populate
-it, so the run surface refuses a configuration naming an extension policy as
-unsupported rather than running the search without the extension it names. That
-refusal is the seam the registry fills; it is a stated boundary, not a silent
-omission. Registration, promotion, licenses, compatibility, authority basis and
-inter-extension interactions all remain unspecified, and SPEC-0004 already parks
-the corresponding declaration fields there. Reproduction: run
-`optimizer search` with a configuration whose `extensions` list is non-empty.
-Next step: implement the accepted
-[SPEC-0009](../docs/specifications/SPEC-0009-extension-registry.md) contract under
-backlog item C8. The contract exists; the behavior does not yet.
+This was recorded from C4 through C5 and is now closed by C8 under
+[SPEC-0009](../docs/specifications/SPEC-0009-extension-registry.md) and
+[ADR-0008](../docs/decisions/ADR-0008-registry-resolution.md). `optimizer search`,
+`optimizer verify` and `optimizer schedule solve` resolve a configuration's
+extension policy through a registry document the caller names with `--registry`,
+and registration, promotion, licenses, compatibility, authority basis and
+inter-extension requirements are all checked rather than parked. The declaration
+fields SPEC-0004 deliberately left unread — data needs, hardware and dependencies —
+now have checked meanings.
+
+Retained as the limits the implementation actually has, each recorded rather than
+absorbed:
+
+- A run record names each extension's identity and version but not the registry
+  document that resolved it, so licenses and promotion state are auditable through
+  the registry rather than through the record. Closing this needs a run-record v2
+  and an ADR, because SPEC-0005 makes a change to the compared fields breaking.
+- An extension is identified by identity and version, so two different builds of one
+  version are indistinguishable. This is the same limitation already recorded for
+  the pinned native library, and it is why the summary-difference diagnostic exists.
+- The registry resolves only extensions this build provides. It cannot name a
+  dynamically loaded native extension, and it refuses an entry requiring a GPU;
+  both refusals are explicit and both remain recorded below.
+- Provider construction happens before SPEC-0004's guarded host exists, so a
+  provider that panics while constructing an extension is outside the
+  panic-containment claim. The host's containment of `declare`, `propose` and
+  `advise` is unchanged.
+- Conformance establishes contract invariance only. A passing record means the
+  contract held, never that the extension improved a search, which stays a C7
+  question.
+
+## Resolved: a scheduling run record with a producer registered now verifies
+
+Recorded from C5 and closed by C8. `optimizer verify` previously re-executed every
+record through the extension-free search entry point, so a record whose
+configuration named an extension policy was refused as unsupported: re-running
+without the named producer would have reproduced a search the record does not
+describe, and its node counters would have differed for that reason alone.
+
+Under [SPEC-0009](../docs/specifications/SPEC-0009-extension-registry.md)
+requirement 19 the verifier reconstructs the producer a record names, through a
+registry the caller passes with `--registry`. Reproduction of the closed case:
+`optimizer schedule solve` with a configuration naming `flow-shop-neh` and a
+registry, then `optimizer verify` on the resulting record with the same registry;
+it agrees and exits 0. The gate re-executes such a record across a commit boundary
+in `tools/verify_committed_record.py`. A record naming an extension policy with no
+`--registry` is still refused, which is requirement 18 rather than a limitation.
+
+## C8 requirements whose acceptance tests are thinner than the specification
+
+SPEC-0009's acceptance section describes cases that the implementation does not
+yet assert. These are recorded rather than quietly downgraded, because the
+specification is accepted and its own test mapping is the thing out of date.
+
+- Requirement 14 says resolution "MUST NOT ... construct" a refused extension, but
+  the declaration-mismatch and role-mismatch paths necessarily construct the
+  extension and call `declare` in order to discover the disagreement. The
+  construction counter is therefore non-zero on those paths by design. The rule
+  holds as written only for the refusals decided before construction — an unmet
+  data requirement and a gpu hardware requirement — and those are the two the
+  tests assert it against. Next step: narrow requirement 14's wording to the
+  refusals it can actually govern, which is a specification correction rather than
+  a code change.
+- Requirement 20's nondeterministic-record refusal has no test. Neither example
+  extension declares nondeterminism, so producing such a record needs a fixture
+  that does not exist in the CLI's provider table.
+- Requirement 20's other half, refusing a record whose named extension resolves to
+  a *different version than the record's summary states*, may not be reachable at
+  all: resolution already forces the declaration and the entry to agree on version,
+  and a summary's version was itself copied from a declaration. Both tests aimed at
+  this rule restamp the registry entry and are refused earlier, by the declaration
+  check. Reproduction: `crates/optimizer-cli/src/search.rs` compares
+  `declaration.version` against `summary.version` after resolution has already
+  equated the first with the entry's. Next diagnostic step: determine whether the
+  branch is dead and either remove it or find the input that reaches it; do not
+  delete it on inspection alone, because it guards a record re-executing against a
+  different extension.
+- Requirement 21's positive case — a run that agrees while reporting an extension
+  summary difference as a diagnostic note — is asserted only in its negative form,
+  that no difference is reported when none exists. `ExtensionDifference` has no
+  unit test.
+- Requirement 22's forfeited registry-backed record is not produced by any test.
+  The forfeiture rule itself is covered without a registry under SPEC-0005.
+- Requirement 18 is asserted for `optimizer schedule solve` but not for
+  `optimizer search --registry` with a non-empty policy, because both extensions
+  this build provides are flow-shop producers that cannot be constructed from a
+  bare model. A search-command case needs a provider that takes no auxiliary
+  instance.
+- Requirement 1's document-level missing-field refusal and requirement 3's
+  duplicate-field rejection are covered for entries but not for the document
+  itself.
 
 ## Verification assumes an unchanged native library
 
@@ -133,25 +212,6 @@ best permutation schedule costs 50 and the best general schedule costs 47. The
 permutation restriction is part of the problem C5 solves rather than an
 approximation it makes, and nothing in the slice should be read as solving the
 general flow shop.
-
-## Scheduling run records cannot be verified with a producer registered
-
-`optimizer verify` re-executes a record through the extension-free search entry
-point, so a record whose configuration names an extension policy is refused as
-unsupported rather than re-run. This is deliberate and is the same rule SPEC-0005
-requirement 14 already applied to `optimizer search`: re-running without the named
-producer would reproduce a search the record does not describe, and its node
-counters would differ for that reason alone. Reporting that as divergence would
-blame the record for a limitation of the verifier.
-
-The consequence is real and worth stating: a scheduling run performed *with* the NEH
-producer is not verifiable by re-execution today, only one performed without it.
-Reproduction: `optimizer schedule solve` with a configuration naming
-`flow-shop-neh`, then `optimizer verify` on the resulting record. Next step: the
-seam is the extension registry under C8, now specified as
-[SPEC-0009](../docs/specifications/SPEC-0009-extension-registry.md) requirement 19,
-which is what will let a verifier reconstruct the producer a record names. Until
-that behavior exists this limitation stands.
 
 ## Dynamically loaded native extensions are not implemented
 

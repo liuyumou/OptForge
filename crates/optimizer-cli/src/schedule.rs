@@ -21,10 +21,8 @@ use std::sync::atomic::AtomicBool;
 
 use optimizer_core::CancellationToken;
 use optimizer_experiment::{InputDocument, InputRole, RUN_SCHEMA_VERSION, RunRecord, sha256};
-use optimizer_extension::Registration;
 use optimizer_highs::HighsBackend;
 use optimizer_schedule::FlowShopInstance;
-use optimizer_schedule_examples::SchedulingProducer;
 use optimizer_solver::{SearchOptions, SearchRecord};
 
 use crate::input::{argument, read};
@@ -79,6 +77,8 @@ pub(crate) fn generate(options: &[OsString]) -> io::Result<u8> {
 
 /// Encode an instance, search it with the NEH producer, and write a run record.
 pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
+    let (registry, options) = crate::registry::take_arguments(options)?;
+    let options = options.as_slice();
     let mut instance_path = None;
     let mut config_path = None;
     let mut output_path = None;
@@ -110,23 +110,13 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     let configuration: SearchOptions = serde_json::from_slice(&config_bytes)
         .map_err(|error| io::Error::other(format!("document: search configuration: {error}")))?;
 
-    // Requirement 18: this surface registers exactly the NEH producer. A policy
-    // naming anything else is refused rather than silently ignored, for the same
-    // reason SPEC-0005 requirement 14 refuses an unrecognized policy: the record
-    // would otherwise describe a search the caller did not request. This is not the
-    // general extension registry, which remains C8's.
-    for policy in &configuration.extensions {
-        if policy.extension_id != SchedulingProducer::ID {
-            return Err(io::Error::other(format!(
-                "unsupported: this surface registers only {}; \
-                 a configuration naming extension {} cannot be honored",
-                SchedulingProducer::ID,
-                policy.extension_id
-            )));
-        }
-    }
-
     let model = optimizer_schedule::model(&instance).map_err(io::Error::other)?;
+
+    // SPEC-0009 requirement 18 replaces what used to be a single hardcoded
+    // identity here. Any extension the caller's registry records and this build
+    // provides can now be registered, and the instance travels in the provider
+    // context because a scheduling producer cannot be built from a model alone.
+    let resolved = registry.resolve(&configuration.extensions, &model, Some(&instance_bytes))?;
     // Provenance is collected before the search so a run that cannot produce a
     // valid record fails before spending the budget.
     let revision = provenance::revision()?;
@@ -138,20 +128,17 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     crate::solve::install_signal_handler(&cancel, &signalled)?;
 
     let backend = HighsBackend::new();
-    let producer = SchedulingProducer::new(instance.clone());
-    let search: SearchRecord = if configuration.extensions.is_empty() {
-        optimizer_solver::search(&model, &configuration, &backend, &cancel)
-            .map_err(io::Error::other)?
-    } else {
-        let registry = [Registration::Producer(&producer)];
-        optimizer_solver::search_with_extensions(
+    let search: SearchRecord = match &resolved {
+        Some(resolved) => optimizer_solver::search_with_extensions(
             &model,
             &configuration,
-            &registry,
+            &resolved.registrations(),
             &backend,
             &cancel,
         )
-        .map_err(io::Error::other)?
+        .map_err(io::Error::other)?,
+        None => optimizer_solver::search(&model, &configuration, &backend, &cancel)
+            .map_err(io::Error::other)?,
     };
 
     let record = RunRecord {
@@ -175,7 +162,10 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             },
         ],
         search,
-        warnings: Vec::new(),
+        warnings: resolved
+            .as_ref()
+            .map(|resolved| resolved.warnings().to_vec())
+            .unwrap_or_default(),
     };
 
     // The encoded model is written first. A record naming a fingerprint whose
