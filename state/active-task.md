@@ -1,5 +1,68 @@
 # Active Task
 
+## Local C8 Integration (2026-09-12)
+
+Objective: verify the feat/extension-registry branch from a clean checkout,
+integrate it into local main, and delete the feature branch after confirming its
+commits are retained.
+
+Status: complete; clean-checkout verification, fast-forward integration and
+feature-branch cleanup finished.
+
+Acceptance gate: the complete gate passes in an independent clone with nothing
+prebuilt; fast-forward integration preserves the reviewed tip 7757af6; the feature
+branch is deleted and the worktree is clean. Resource budget: CPU only, no GPU
+workloads.
+
+Evidence (2026-09-12): the branch was cloned with `--no-hardlinks` and no `target/`
+directory present, and `bash tools/check.sh` passed there in 2 minutes 2 seconds
+with **zero test skips**. That run built the pinned HiGHS 1.11.0 library from the
+checksum-verified upstream archive inside the clone, producing `libhighs.a` at
+10,186,956 bytes, ran 233 Rust and 60 Python tests, re-executed the committed run
+records against the freshly built binary, validated 51 documentation pages, and
+passed cargo-deny, artifact validation and bootstrap smoke.
+
+This clean-checkout pass is the acceptance evidence for the integration, and it was
+not a formality. The first attempt **failed**, at
+`a_registry_does_not_change_a_search_that_names_no_extension`, and the cause was a
+record identifier derived from measured elapsed time rather than anything the
+registry does. Every warm-tree gate run during C8 had passed because both searches
+finished in the same millisecond. That defect, its fix and the reasoning are
+recorded above under the C8 verification follow-up. C8 adds a crate, a dependency
+edge and a lockfile change, which is the case the C4 record identifies as the one
+where a clean checkout earns its cost; this time it earned it for a different
+reason than a stale lockfile.
+
+main was fast-forwarded from 08ed424 to 7757af6 without conflicts or history
+rewriting, so the integrated tree is byte-identical to the verified revision, which
+`git diff 7757af6 main` confirms as empty. `git merge-base --is-ancestor` confirmed
+the reviewed tip is retained, and `git branch -d` removed the fully merged
+feat/extension-registry branch, which refuses a branch whose commits are not
+reachable. The worktree is clean and the bootstrap smoke was rerun on the integrated
+revision, recording 7757af6 with `dirty: false` for clean revision-bound provenance.
+
+The branch held five commits: d48ce11 specifying the registry, 6cf6d5e implementing
+it, 95c1d81 correcting the two review markers to name the implementing revision,
+bb13f67 narrowing the requirement 17 contract when the clean checkout failed, and
+7757af6 fixing the identifier derivation and restoring that contract to a whole
+record comparison. bb13f67 is partly superseded by 7757af6 and was kept rather than
+rewritten, because the intermediate state is what motivated the fix and shared
+history is not rewritten.
+
+No remote refs were changed. main is now 5 commits ahead of origin/main and remains
+unpushed pending separate authorization; the origin remote and its outstanding
+protection settings are recorded in [known failures](known-failures.md).
+
+Follow-up: C6, heterogeneous computation and GPU feasibility, is the next
+dependency-ready task and has no accepted specification. Write one before
+introducing any public GPU or backend-selection API. Two items recorded during C8
+are worth picking up with it or before it: SPEC-0009 requirement 14's "MUST NOT
+construct" is narrower in practice than it reads and wants a wording correction, and
+the requirement 20 version comparison at verification may be unreachable and should
+be diagnosed rather than deleted on inspection. SPEC-0008 and ADR-0007 also still
+name 5157786, the C5 specification commit, rather than its implementing commit
+08ed424, which is the same marker staleness 95c1d81 fixed for C8.
+
 ## C8 Verification Follow-up: Clock-Derived Record Identifier (2026-09-12)
 
 Objective: remove measured elapsed time from a run record's identifier, and specify
