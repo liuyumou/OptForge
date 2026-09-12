@@ -4,7 +4,7 @@ Status: accepted
 Scope: optimizer-schedule instances, evaluation, encoding and candidate production
 Owner: scheduling application
 Introduced: C5
-Last reviewed commit: 5157786
+Last reviewed commit: 08ed424
 Supersedes: none
 Implementation: [instances](../../crates/optimizer-schedule/src/instance.rs), [recurrence](../../crates/optimizer-schedule/src/evaluate.rs), [generator](../../crates/optimizer-schedule/src/generate.rs), [encoding](../../crates/optimizer-schedule/src/encode.rs), [heuristics](../../crates/optimizer-schedule/src/heuristic.rs), [producers](../../crates/optimizer-schedule-examples/src/lib.rs), [command surface](../../crates/optimizer-cli/src/schedule.rs)
 Tests: [flow-shop contracts](../../crates/optimizer-schedule/tests/contracts.rs), [native acceptance](../../crates/optimizer-highs/tests/schedule.rs), [CLI contracts](../../crates/optimizer-cli/tests/schedule.rs), [manifest provenance](../../tests/integration/test_flow_shop_manifest.py)
