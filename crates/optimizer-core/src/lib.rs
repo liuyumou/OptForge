@@ -108,12 +108,30 @@ pub fn nested_version(field: &str, found: u32, expected: u32) -> Result<(), Vali
 }
 
 fn finite(value: f64, kind: ErrorKind, context: &str) -> Result<f64, ValidationError> {
+    finite_with(value, kind, || context.to_owned())
+}
+
+/// [`finite`] with the diagnostic context built only when the check fails.
+///
+/// The eager form allocates its context on the success path, which on the
+/// branch-and-bound node path meant several `String`s per matrix nonzero for text
+/// that was almost never read. The closure is `FnOnce` and runs only inside the
+/// error arm, so a successful check allocates nothing.
+///
+/// Note the success value: this returns `zero(value)`, not `value`. That
+/// normalization of negative zero is observable — it reaches `VariableCheck.value`
+/// and so every serialized validation report — so a caller that inlines this
+/// check must keep it.
+fn finite_with<F>(value: f64, kind: ErrorKind, context: F) -> Result<f64, ValidationError>
+where
+    F: FnOnce() -> String,
+{
     if value.is_finite() {
         Ok(zero(value))
     } else {
         Err(ValidationError::new(
             kind,
-            format!("{context}: nonfinite value"),
+            format!("{}: nonfinite value", context()),
         ))
     }
 }

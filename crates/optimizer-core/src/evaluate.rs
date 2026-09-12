@@ -3,7 +3,7 @@ use serde::Serialize;
 use crate::serde_strict::deserialize_object;
 use crate::{
     Bound, Candidate, Domain, ErrorKind, LinearTerm, Model, SCHEMA_VERSION, ValidationError,
-    finite, zero,
+    finite, finite_with, zero,
 };
 
 /// Explicit caller policy. There are deliberately no default numerical tolerances.
@@ -296,6 +296,14 @@ fn checked(value: f64, context: &str) -> Result<f64, ValidationError> {
     finite(value, ErrorKind::Numerical, context)
 }
 
+/// [`checked`] with the diagnostic context built only on failure.
+fn checked_with<F>(value: f64, context: F) -> Result<f64, ValidationError>
+where
+    F: FnOnce() -> String,
+{
+    finite_with(value, ErrorKind::Numerical, context)
+}
+
 fn satisfied(check: &Option<BoundCheck>) -> bool {
     check.as_ref().is_none_or(|check| check.satisfied)
 }
@@ -318,17 +326,18 @@ fn expression(
                     format!("missing variable {}", term.variable_id),
                 )
             })?;
-        let context = format!("{context}, variable {}", term.variable_id);
-        let product = checked(
-            term.coefficient * candidate.values[index].value,
-            &format!("{context} product"),
-        )?;
-        sum = checked(sum + product, &format!("{context} sum"))?;
+        // The per-term context is built inside each closure rather than once
+        // before them. It is the same text either way; the difference is that on
+        // the success path, which is every path that matters, it is never built.
+        let id = term.variable_id;
+        let product = checked_with(term.coefficient * candidate.values[index].value, || {
+            format!("{context}, variable {id} product")
+        })?;
+        sum = checked_with(sum + product, || format!("{context}, variable {id} sum"))?;
         if track_magnitude {
-            magnitude = checked(
-                magnitude + product.abs(),
-                &format!("{context} term magnitude"),
-            )?;
+            magnitude = checked_with(magnitude + product.abs(), || {
+                format!("{context}, variable {id} term magnitude")
+            })?;
         }
     }
     Ok((sum, magnitude))
@@ -346,21 +355,19 @@ fn check_bound(
         return Ok(None);
     };
     let violation = if lower && activity < bound {
-        checked(bound - activity, &format!("{context} lower residual"))?
+        checked_with(bound - activity, || format!("{context} lower residual"))?
     } else if !lower && activity > bound {
-        checked(activity - bound, &format!("{context} upper residual"))?
+        checked_with(activity - bound, || format!("{context} upper residual"))?
     } else {
         0.0
     };
     let scale = activity.abs().max(bound.abs()).max(magnitude);
-    let relative = checked(
-        tolerances.relative * scale,
-        &format!("{context} relative allowance"),
-    )?;
-    let allowance = checked(
-        tolerances.absolute + relative,
-        &format!("{context} allowance sum"),
-    )?;
+    let relative = checked_with(tolerances.relative * scale, || {
+        format!("{context} relative allowance")
+    })?;
+    let allowance = checked_with(tolerances.absolute + relative, || {
+        format!("{context} allowance sum")
+    })?;
     Ok(Some(BoundCheck {
         bound,
         violation,

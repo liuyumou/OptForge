@@ -767,3 +767,239 @@ fn persisted_edge_models_are_valid_structure_without_solver_classification() {
         }
     }
 }
+
+// Characterization of the numerical-failure diagnostics, written before the
+// eager `format!` calls in `evaluate.rs` became lazy. Every message below is the
+// byte-exact text the current code produces. The refactor that follows must not
+// move a single character of them: these strings reach CLI stderr and the
+// categorized error surface, so a "harmless" rewording is a contract change.
+mod evaluation_diagnostics {
+    use optimizer_core::*;
+
+    fn tolerances(absolute: f64, relative: f64) -> Tolerances {
+        Tolerances {
+            absolute,
+            relative,
+            integrality: 1e-9,
+        }
+    }
+
+    /// A variable with no finite bound, so `check_bound` returns early for it and
+    /// a constraint-level diagnostic is the first one reached.
+    fn unbounded(id: u32) -> Variable {
+        Variable {
+            id,
+            domain: Domain::Continuous,
+            lower: Bound::NegativeInfinity,
+            upper: Bound::PositiveInfinity,
+        }
+    }
+
+    fn variable(id: u32, domain: Domain, upper: f64) -> Variable {
+        Variable {
+            id,
+            domain,
+            lower: Bound::Finite { value: -upper },
+            upper: Bound::Finite { value: upper },
+        }
+    }
+
+    fn evaluate(
+        variables: Vec<Variable>,
+        constraints: Vec<Constraint>,
+        objective: Objective,
+        values: Vec<(u32, f64)>,
+        tolerances: Tolerances,
+    ) -> Result<ValidationReport, ValidationError> {
+        let model = Model::new(ModelDocument {
+            schema_version: SCHEMA_VERSION,
+            model_id: "diagnostics".to_owned(),
+            variables,
+            constraints,
+            objective,
+        })
+        .expect("fixture model is valid");
+        let candidate = Candidate {
+            schema_version: SCHEMA_VERSION,
+            model_id: "diagnostics".to_owned(),
+            values: values
+                .into_iter()
+                .map(|(variable_id, value)| Assignment { variable_id, value })
+                .collect(),
+        };
+        model.evaluate(&candidate, tolerances)
+    }
+
+    fn message(result: Result<ValidationReport, ValidationError>) -> String {
+        result.expect_err("this fixture must fail").to_string()
+    }
+
+    fn objective_of(terms: Vec<LinearTerm>, offset: f64) -> Objective {
+        Objective {
+            sense: ObjectiveSense::Minimize,
+            offset,
+            terms,
+        }
+    }
+
+    fn term(variable_id: u32, coefficient: f64) -> LinearTerm {
+        LinearTerm {
+            variable_id,
+            coefficient,
+        }
+    }
+
+    #[test]
+    fn a_discrete_magnitude_beyond_two_to_the_fifty_three_is_named() {
+        let text = message(evaluate(
+            vec![variable(7, Domain::Integer, 1e300)],
+            Vec::new(),
+            objective_of(vec![term(7, 1.0)], 0.0),
+            vec![(7, 1e17)],
+            tolerances(1e-9, 1e-9),
+        ));
+        assert!(
+            text.contains("variable 7: discrete magnitude exceeds 2^53"),
+            "found {text}"
+        );
+    }
+
+    #[test]
+    fn a_nonfinite_objective_product_names_its_variable() {
+        let text = message(evaluate(
+            vec![variable(3, Domain::Continuous, 1e300)],
+            Vec::new(),
+            objective_of(vec![term(3, 1e308)], 0.0),
+            vec![(3, 1e10)],
+            tolerances(1e-9, 1e-9),
+        ));
+        assert!(
+            text.contains("objective, variable 3 product: nonfinite value"),
+            "found {text}"
+        );
+    }
+
+    #[test]
+    fn a_nonfinite_objective_sum_names_its_variable() {
+        let text = message(evaluate(
+            vec![
+                variable(0, Domain::Continuous, 1e300),
+                variable(1, Domain::Continuous, 1e300),
+            ],
+            Vec::new(),
+            objective_of(vec![term(0, 1.0), term(1, 1.0)], 0.0),
+            vec![(0, 9e307), (1, 9e307)],
+            tolerances(1e-9, 1e-9),
+        ));
+        assert!(
+            text.contains("objective, variable 1 sum: nonfinite value"),
+            "found {text}"
+        );
+    }
+
+    #[test]
+    fn a_nonfinite_term_magnitude_names_its_constraint_and_variable() {
+        // Opposite signs keep the running sum finite while the magnitude, which
+        // accumulates absolute values, overflows. This is the only path that
+        // reaches the `track_magnitude` branch.
+        let text = message(evaluate(
+            vec![
+                variable(0, Domain::Continuous, 1e300),
+                variable(1, Domain::Continuous, 1e300),
+            ],
+            vec![Constraint {
+                id: 5,
+                lower: Bound::NegativeInfinity,
+                upper: Bound::Finite { value: 1e300 },
+                terms: vec![term(0, 9e307), term(1, -9e307)],
+            }],
+            objective_of(vec![term(0, 1.0)], 0.0),
+            vec![(0, 1.0), (1, 1.0)],
+            tolerances(1e-9, 1e-9),
+        ));
+        assert!(
+            text.contains("constraint 5, variable 1 term magnitude: nonfinite value"),
+            "found {text}"
+        );
+    }
+
+    #[test]
+    fn a_nonfinite_objective_offset_is_named() {
+        let text = message(evaluate(
+            vec![variable(0, Domain::Continuous, 1e300)],
+            Vec::new(),
+            objective_of(vec![term(0, 1.0)], 1e308),
+            vec![(0, 9e307)],
+            tolerances(1e-9, 1e-9),
+        ));
+        assert!(
+            text.contains("objective offset addition: nonfinite value"),
+            "found {text}"
+        );
+    }
+
+    #[test]
+    fn a_nonfinite_relative_allowance_names_its_constraint() {
+        let text = message(evaluate(
+            vec![unbounded(0)],
+            vec![Constraint {
+                id: 9,
+                lower: Bound::NegativeInfinity,
+                upper: Bound::Finite { value: 1e300 },
+                terms: vec![term(0, 1.0)],
+            }],
+            objective_of(vec![term(0, 1.0)], 0.0),
+            vec![(0, 1e300)],
+            tolerances(1e-9, 1e308),
+        ));
+        assert!(
+            text.contains("constraint 9 relative allowance: nonfinite value"),
+            "found {text}"
+        );
+    }
+
+    #[test]
+    fn a_nonfinite_allowance_sum_names_its_constraint() {
+        // relative * scale stays finite at 1e308; adding an absolute allowance of
+        // the same size is what overflows, which is the `allowance sum` site
+        // rather than the `relative allowance` one above.
+        let text = message(evaluate(
+            vec![unbounded(0)],
+            vec![Constraint {
+                id: 11,
+                lower: Bound::NegativeInfinity,
+                upper: Bound::Finite { value: 1e308 },
+                terms: vec![term(0, 1.0)],
+            }],
+            objective_of(vec![term(0, 1.0)], 0.0),
+            vec![(0, 1.0)],
+            tolerances(1e308, 1.0),
+        ));
+        assert!(
+            text.contains("constraint 11 allowance sum: nonfinite value"),
+            "found {text}"
+        );
+    }
+
+    #[test]
+    fn a_nonfinite_variable_residual_names_its_variable() {
+        // The value sits above a bound at the opposite extreme, so the upper
+        // residual `activity - bound` overflows.
+        let text = message(evaluate(
+            vec![Variable {
+                id: 4,
+                domain: Domain::Continuous,
+                lower: Bound::Finite { value: -1e308 },
+                upper: Bound::Finite { value: -1e308 },
+            }],
+            Vec::new(),
+            objective_of(vec![term(4, 1.0)], 0.0),
+            vec![(4, 1e308)],
+            tolerances(1e-9, 1e-9),
+        ));
+        assert!(
+            text.contains("variable 4 upper residual: nonfinite value"),
+            "found {text}"
+        );
+    }
+}
