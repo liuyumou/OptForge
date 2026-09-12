@@ -82,6 +82,19 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Fixed
 
+- The branch-and-bound node path no longer performs work it discards. The backend
+  extracted an LP basis on every node — computing the model's canonical
+  fingerprint, which serializes the whole model — for a value `Backend::solve`
+  dropped immediately and that SPEC-0003 requirement 23 forbids reusing across
+  nodes. Evaluation and structural diagnostics were formatted eagerly, costing
+  several string allocations per matrix nonzero on the success path for text a
+  valid model never produces. Both are now built only when a check fails.
+  Conclusions are unchanged: every field verification compares, every node
+  counter and every diagnostic message is identical, and the messages are pinned
+  byte-exactly by tests written against the previous code. No performance
+  property is claimed of the engine; `tools/benchmark_search.py` is a development
+  diagnostic that records no threshold.
+
 - A run record's identifier no longer depends on measured elapsed time. `optimizer
   search` built `record_id` as `run-{model_id}-{elapsed_ms}` and `optimizer
   schedule solve` built `schedule-{model_id}-{elapsed_ms}`, so a record's identity

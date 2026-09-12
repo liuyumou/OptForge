@@ -389,17 +389,20 @@ fn terms(
         context,
     )?;
     for term in terms {
-        let context = format!("{context}, variable {}", term.variable_id);
-        if variables
-            .binary_search_by_key(&term.variable_id, |v| v.id)
-            .is_err()
-        {
+        // Built inside the closures rather than once per term. `Model::new` runs
+        // once per branch-and-bound node through `node::relaxation`, so this loop
+        // is on the node path and allocated one `String` per nonzero for text
+        // that a valid model never produces.
+        let id = term.variable_id;
+        if variables.binary_search_by_key(&id, |v| v.id).is_err() {
             return Err(ValidationError::new(
                 ErrorKind::Structural,
-                format!("{context}: unknown variable"),
+                format!("{context}, variable {id}: unknown variable"),
             ));
         }
-        term.coefficient = finite(term.coefficient, ErrorKind::Structural, &context)?;
+        term.coefficient = crate::finite_with(term.coefficient, ErrorKind::Structural, || {
+            format!("{context}, variable {id}")
+        })?;
     }
     Ok(())
 }

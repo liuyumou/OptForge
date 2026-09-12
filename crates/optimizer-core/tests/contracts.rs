@@ -1002,4 +1002,68 @@ mod evaluation_diagnostics {
             "found {text}"
         );
     }
+    // `Model::new` runs once per branch-and-bound node through `node::relaxation`,
+    // and its per-nonzero diagnostics are on that path. Pinned here before they
+    // became lazy, for the same reason as the evaluation messages above.
+    #[test]
+    fn a_term_naming_an_absent_variable_is_named() {
+        let error = Model::new(ModelDocument {
+            schema_version: SCHEMA_VERSION,
+            model_id: "structural".to_owned(),
+            variables: vec![unbounded(0)],
+            constraints: vec![Constraint {
+                id: 5,
+                lower: Bound::NegativeInfinity,
+                upper: Bound::Finite { value: 1.0 },
+                terms: vec![term(0, 1.0), term(42, 1.0)],
+            }],
+            objective: objective_of(vec![term(0, 1.0)], 0.0),
+        })
+        .expect_err("a term naming an absent variable is refused");
+        assert!(
+            error
+                .to_string()
+                .contains("constraint 5, variable 42: unknown variable"),
+            "found {error}"
+        );
+    }
+
+    #[test]
+    fn a_nonfinite_coefficient_names_its_term() {
+        let error = Model::new(ModelDocument {
+            schema_version: SCHEMA_VERSION,
+            model_id: "structural".to_owned(),
+            variables: vec![unbounded(0)],
+            constraints: Vec::new(),
+            objective: objective_of(vec![term(0, f64::INFINITY)], 0.0),
+        })
+        .expect_err("a nonfinite coefficient is refused");
+        assert!(
+            error
+                .to_string()
+                .contains("objective, variable 0: nonfinite value"),
+            "found {error}"
+        );
+    }
+
+    #[test]
+    fn crossed_bounds_name_their_owner() {
+        let error = Model::new(ModelDocument {
+            schema_version: SCHEMA_VERSION,
+            model_id: "structural".to_owned(),
+            variables: vec![Variable {
+                id: 2,
+                domain: Domain::Continuous,
+                lower: Bound::Finite { value: 5.0 },
+                upper: Bound::Finite { value: 1.0 },
+            }],
+            constraints: Vec::new(),
+            objective: objective_of(vec![term(2, 1.0)], 0.0),
+        })
+        .expect_err("crossed bounds are refused");
+        assert!(
+            error.to_string().contains("variable 2: invalid bounds"),
+            "found {error}"
+        );
+    }
 }

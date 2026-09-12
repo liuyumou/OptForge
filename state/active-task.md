@@ -1,5 +1,91 @@
 # Active Task
 
+## Track B: Node-Path Measurement and Waste Removal (2026-09-12)
+
+Objective: make solver timing measurable, then remove work the branch-and-bound
+node path does and discards, without changing any conclusion.
+
+Status: in progress; the harness and the first three removals are complete and
+gated. The node relaxation rebuild and the candidate-canonicalization clone are
+measured but not yet attempted.
+
+Acceptance gate: every compared field and node counter is identical before and
+after each change, asserted by the harness rather than by eye; every diagnostic
+whose text is touched is pinned byte-exactly by a test written against unmodified
+code; and `bash tools/check.sh` passes with native acceptance covered after each
+commit. Resource budget: CPU only, no GPU workloads.
+
+There was no way to measure a solver change before this. `benches/` held a
+placeholder and `tools/benchmark_smoke.py` times `optimizer hello`. The bottleneck
+ranking recorded in the plan was therefore static analysis, and the first task was
+to replace it with numbers.
+
+The unit of work is a fixed node budget with `time_limit_ms` null, over ta001 to
+ta003 from the frozen Taillard set. A time limit would couple the outcome to host
+speed, so before and after would explore different trees — the comparison would be
+meaningless and the ten fields SPEC-0005 requirement 11 compares would
+legitimately move. A node budget holds the work constant, and every run terminates
+at the limit and claims nothing.
+
+Measured, minimum of three runs after a warmup, release build, same host:
+
+| change | ta001 | ta002 | ta003 |
+| --- | --- | --- | --- |
+| baseline | 8028.9 ms | 4186.1 ms | 5369.7 ms |
+| basis extracted only on request | -5.8% | -10.4% | -8.9% |
+| evaluation diagnostics built lazily | -11.5% | -22.5% | -17.3% |
+| structural diagnostics built lazily | -1.0% | -3.5% | -2.4% |
+| **cumulative** | **-17.5%** | **-33.0%** | **-26.5%** |
+
+What the numbers are not: they are a development diagnostic, not evidence. The
+tool records `"claim": "none"`, defines no threshold, and is comparable only
+against another run of itself on the same host. Nothing here is a benchmark result
+and no performance property is claimed of the engine.
+
+The largest single item was pure waste. Node relaxations are always continuous, so
+the backend extracted an LP basis on every node; extraction computes the model's
+canonical fingerprint, which serializes the entire model with
+`serde_json::to_string_pretty`. The encoded ta001 model is 567,565 bytes, so a
+256-node search serialized and discarded roughly 145 MB — to build a value
+`Backend::solve` dropped on the next line and that SPEC-0003 requirement 23
+forbids reusing anyway.
+
+The second was diagnostics nobody reads. `checked` took `&str`, so `expression`
+formatted about four `String`s per matrix nonzero on the success path and
+`check_bound` two to three per call. At 5,175 nonzeros and two to three
+evaluations per node that is tens of thousands of allocations per node for text a
+valid model never produces. `Model::new`'s per-nonzero context had the same shape
+and is on the same path, because `node::relaxation` rebuilds and revalidates a
+model per node.
+
+Method worth keeping: characterization first. Eleven tests pinning the byte-exact
+text of every diagnostic these commits touch were written and passed against
+unmodified code before any of it moved. Three of them were wrong on the first
+attempt in an instructive way — the fixtures aimed at a constraint-level message
+and hit the variable-level one, because variables are checked first. Discovering
+that from a failing characterization test is the cheap version of discovering it
+from a changed error message in production.
+
+Two traps avoided rather than survived. `checked` returns `zero(value)`, not
+`value`, and that negative-zero normalization is observable through
+`VariableCheck.value` and therefore every serialized validation report; a lazy
+rewrite that returned the raw product would have changed committed records. And
+the harness compares conclusions itself and fails outright if any moved, so a
+timing win accompanied by a counter change is reported as a bug rather than a
+speedup.
+
+Not attempted, and why: reusing the `Highs` object across nodes is legal under
+requirement 23, which forbids reusing a *basis* rather than the instance, and is
+the obvious next item — deferred pending the measurement that now exists. Cross-node
+warm start and any parallelism remain out of scope; both are forbidden by accepted
+contracts (SPEC-0003 requirement 23, SPEC-0002 requirement 5) and need their own
+decision records.
+
+Follow-up: the remaining Track B items are the node relaxation rebuild and
+`Candidate::canonical`'s clone-and-re-sort, then a multi-node committed record so
+the gate compares all ten fields across a commit boundary on a model large enough
+for this work to matter. Track C, the C6 specification, has not started.
+
 ## Local Track A Integration (2026-09-12)
 
 Objective: verify the C8 follow-up branch from a clean checkout, integrate it into
