@@ -288,9 +288,35 @@ pub struct Candidate {
 deserialize_object!(Candidate { schema_version: u32, model_id: String, values: Vec<Assignment> });
 
 impl Candidate {
-    pub(crate) fn canonical(&self) -> Result<Self, ValidationError> {
+    /// The canonical form of this candidate, borrowing when it already is one.
+    ///
+    /// A backend builds its candidate by iterating the model's own variables,
+    /// which `Model::new` sorted and proved distinct, so on the branch-and-bound
+    /// node path the input is already canonical and the clone-and-re-sort was
+    /// pure copying. The fast path below is taken exactly when the canonical form
+    /// would equal the input, and any other input falls through to the original
+    /// code unchanged, so every error keeps its message and its order.
+    pub(crate) fn canonical(&self) -> Result<std::borrow::Cow<'_, Self>, ValidationError> {
         version(self.schema_version)?;
         identity(&self.model_id, ErrorKind::Candidate)?;
+
+        // Strictly increasing covers sorted and distinct in one pass. The value
+        // test must reject negative zero as well as nonfinite values, because
+        // `finite` normalizes `-0.0` to `0.0` and that normalization is
+        // observable: it reaches `VariableCheck.value` and so every serialized
+        // validation report. Borrowing a candidate holding `-0.0` would publish a
+        // different number than the owned path does.
+        let canonical =
+            self.values
+                .windows(2)
+                .all(|pair| pair[0].variable_id < pair[1].variable_id)
+                && self.values.iter().all(|a| {
+                    a.value.is_finite() && !(a.value == 0.0 && a.value.is_sign_negative())
+                });
+        if canonical {
+            return Ok(std::borrow::Cow::Borrowed(self));
+        }
+
         let mut candidate = self.clone();
         candidate.values.sort_by_key(|v| v.variable_id);
         unique(
@@ -305,18 +331,18 @@ impl Candidate {
                 &format!("variable {}", assignment.variable_id),
             )?;
         }
-        Ok(candidate)
+        Ok(std::borrow::Cow::Owned(candidate))
     }
 
     /// Parse and canonicalize candidate shape and values; evaluation checks coverage.
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         let candidate: Self = serde_json::from_slice(bytes).map_err(json_error)?;
-        candidate.canonical()
+        candidate.canonical().map(std::borrow::Cow::into_owned)
     }
 
     /// Validate and serialize candidate data in variable-ID order.
     pub fn to_json(&self) -> Result<String, ValidationError> {
-        serde_json::to_string_pretty(&self.canonical()?).map_err(json_error)
+        serde_json::to_string_pretty(&*self.canonical()?).map_err(json_error)
     }
 }
 

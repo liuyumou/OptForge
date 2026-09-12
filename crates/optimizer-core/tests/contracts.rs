@@ -149,6 +149,132 @@ fn canonicalization_preserves_ids_zero_terms_and_original_objective_sense() {
     );
 }
 
+/// Characterization: every observable effect of candidate canonicalization.
+///
+/// `Candidate::canonical` runs on the branch-and-bound node path, once per
+/// evaluated candidate, so it is a target for a fast path that skips the
+/// clone-and-re-sort when the input is already canonical. These assertions pin
+/// what such a fast path must not change, and they are written against the
+/// clone-always implementation so that they characterize existing behavior
+/// rather than describe an intended one.
+///
+/// The negative-zero case is the load-bearing one and is the reason a fast path
+/// cannot simply test "sorted and distinct". `finite` returns `zero(value)`, so
+/// canonicalization normalizes `-0.0` to `0.0`, and that normalization is
+/// observable through `VariableCheck.value` and therefore through every
+/// serialized validation report. A fast path that borrowed a candidate holding
+/// `-0.0` would publish a different number than the owned path does.
+#[test]
+fn candidate_canonicalization_normalizes_signed_zero_through_evaluation() {
+    let model = Model::new(document()).unwrap();
+
+    // Negative zero survives into the candidate unchanged ...
+    let c = candidate(&[-0.0, 2.0]);
+    assert_eq!(c.values[0].value.to_bits(), 1_u64 << 63);
+
+    // ... and is normalized by canonicalization, which `evaluate` performs. The
+    // assertion is on bits because `-0.0 == 0.0` compares equal and would pass
+    // against an unnormalized value.
+    let report = model.evaluate(&c, exact()).unwrap();
+    assert_eq!(report.variables[0].variable_id, 2);
+    assert_eq!(report.variables[0].value.to_bits(), 0);
+
+    // The same normalization on the serialization path, which is the other way a
+    // caller observes it.
+    assert!(!c.to_json().unwrap().contains("-0.0"));
+    assert_eq!(
+        Candidate::from_json(c.to_json().unwrap().as_bytes())
+            .unwrap()
+            .values[0]
+            .value
+            .to_bits(),
+        0
+    );
+
+    // A candidate already free of negative zero evaluates to the same report, so
+    // normalization is the only difference between the two inputs.
+    let plain = model.evaluate(&candidate(&[0.0, 2.0]), exact()).unwrap();
+    assert_eq!(report, plain);
+}
+
+/// Characterization: the byte-exact refusals and reorderings canonicalization
+/// produces, pinned before any fast path can change one of them silently.
+#[test]
+fn candidate_canonicalization_pins_its_reordering_and_its_refusals() {
+    let model = Model::new(document()).unwrap();
+
+    // Reordering is silent and is not an error: an unsorted candidate is accepted
+    // and sorted, and evaluates identically to the sorted one.
+    let mut unsorted = candidate(&[1.0, 2.0]);
+    unsorted.values.reverse();
+    assert_eq!(unsorted.values[0].variable_id, 9);
+    let report = model.evaluate(&unsorted, exact()).unwrap();
+    assert_eq!(report.variables[0].variable_id, 2);
+    assert_eq!(
+        report,
+        model.evaluate(&candidate(&[1.0, 2.0]), exact()).unwrap()
+    );
+    assert_eq!(
+        unsorted.to_json().unwrap(),
+        candidate(&[1.0, 2.0]).to_json().unwrap()
+    );
+
+    // A duplicate assignment is refused, by both entry points, with this message.
+    let mut duplicated = candidate(&[1.0, 2.0]);
+    duplicated.values[1].variable_id = 2;
+    for error in [
+        duplicated.to_json().unwrap_err(),
+        model.evaluate(&duplicated, exact()).unwrap_err(),
+    ] {
+        assert_eq!(error.kind, ErrorKind::Candidate);
+        assert_eq!(error.message, "duplicate assignment ID 2");
+    }
+
+    // A nonfinite value is refused, naming the variable it belongs to. The
+    // message is checked byte for byte because a fast path that inlines the
+    // finiteness test could easily produce a different one.
+    for value in [f64::NAN, f64::INFINITY, f64::NEG_INFINITY] {
+        let nonfinite = candidate(&[1.0, value]);
+        for error in [
+            nonfinite.to_json().unwrap_err(),
+            model.evaluate(&nonfinite, exact()).unwrap_err(),
+        ] {
+            assert_eq!(error.kind, ErrorKind::Candidate);
+            assert_eq!(error.message, "variable 9: nonfinite value");
+        }
+    }
+
+    // The duplicate check runs before the finiteness check, so a candidate that
+    // is both keeps the duplicate message. Order is observable and is pinned.
+    let mut both = candidate(&[f64::NAN, 2.0]);
+    both.values[1].variable_id = 2;
+    assert_eq!(
+        both.to_json().unwrap_err().message,
+        "duplicate assignment ID 2"
+    );
+
+    // Identity and version are refused before anything is sorted or copied.
+    let mut anonymous = candidate(&[1.0, 2.0]);
+    anonymous.model_id.clear();
+    assert_eq!(anonymous.to_json().unwrap_err().kind, ErrorKind::Candidate);
+    let mut future = candidate(&[1.0, 2.0]);
+    future.schema_version = 2;
+    assert_eq!(future.to_json().unwrap_err().kind, ErrorKind::Document);
+
+    // An empty candidate canonicalizes rather than failing; `evaluate` is what
+    // rejects it, for coverage rather than for shape.
+    let empty = Candidate {
+        schema_version: 1,
+        model_id: "test".into(),
+        values: Vec::new(),
+    };
+    assert!(empty.to_json().is_ok());
+    assert_eq!(
+        model.evaluate(&empty, exact()).unwrap_err().message,
+        "assignment count does not match variables"
+    );
+}
+
 #[test]
 fn f64_round_trips_across_exponents_and_mantissas() {
     for exponent in (0_u64..2047).step_by(17) {
