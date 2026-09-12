@@ -1,5 +1,56 @@
 # Active Task
 
+## Local Track B Integration (2026-09-12)
+
+Objective: verify the Track B node-path branch from a clean checkout, integrate it
+into local main, and delete the feature branch after confirming its commits are
+retained.
+
+Status: complete; clean-checkout verification, fast-forward integration and
+feature-branch cleanup finished.
+
+Acceptance gate: the complete gate passes in an independent clone with nothing
+prebuilt; fast-forward integration preserves the reviewed tip e8fcd7b; the feature
+branch is deleted and the worktree is clean. Resource budget: CPU only, no GPU
+workloads.
+
+Evidence (2026-09-12): the branch was cloned with `--no-hardlinks` and no `target/`
+directory present, and `bash tools/check.sh` passed there in 2 minutes 3 seconds
+with **zero test skips**, building the pinned HiGHS 1.11.0 library inside the clone
+and running 251 Rust and 60 Python tests. main fast-forwarded from 5beccfd to
+e8fcd7b with no conflicts and no history rewriting; `git diff e8fcd7b main` is
+empty, `git merge-base --is-ancestor` confirms the reviewed tip is retained, and
+`git branch -d` removed the fully merged branch. The bootstrap smoke was rerun on
+the integrated revision, recording e8fcd7b with `dirty: false`.
+
+`Cargo.lock` and `Cargo.toml` are untouched by the whole branch. No crate was
+added and no dependency edge changed, which is why this integration did not need
+the stronger justification the C4 and C8 clean-checkout runs did — it was run
+anyway, because `Model::rebound` is new public API and the branch rewrote a path
+every search takes.
+
+One item was found and fixed before integration rather than carried onto main.
+SPEC-0001 gained requirement 2a in 5fe8ba3, but its review marker still named
+9e6dc86 — a GitHub synchronization record that never touched the file — so the
+specification claimed review at a revision predating a normative requirement it
+now contains. This is the same staleness 95c1d81 and f0af453 corrected for C8 and
+C5. Worth recording is how nearly it was missed: an audit comparing every marker
+against its file's last-change commit reported all eighteen specifications and
+ADRs as stale, which is a useless answer, because the commit that sets a marker is
+itself a change to the file and no correct marker can ever match. The check was
+discarded and the one real case identified by reading the history instead.
+
+No remote refs were changed. main is now 13 commits ahead of origin/main and
+remains unpushed pending the maintainer's authorization; the publication state is
+recorded in [known failures](known-failures.md).
+
+Follow-up: C6, heterogeneous computation and GPU feasibility, is the next
+dependency-ready capability and still has no accepted specification. Write one
+before introducing any public GPU or backend-selection API. The two deferred
+per-node items — the constraint clone in `node::relaxation` and cross-node `Highs`
+instance reuse — are recorded in [known failures](known-failures.md) with the
+measurement each would need.
+
 ## Track B: Node-Path Measurement and Waste Removal (2026-09-12)
 
 Objective: make solver timing measurable, then remove work the branch-and-bound
