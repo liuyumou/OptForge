@@ -3,7 +3,7 @@
 Status: accepted
 Owner: extension runtime
 Introduced: C8
-Last reviewed commit: 08ed424
+Last reviewed commit: 6cf6d5e
 Superseded by: none; ADR-0001 through ADR-0007 remain in force
 
 ## Context
