@@ -4,7 +4,7 @@ Status: accepted
 Scope: optimizer-core and model validation CLI
 Owner: numerical core
 Introduced: M1
-Last reviewed commit: 9e6dc86534de2efa414205752ca58d7584976052
+Last reviewed commit: 5fe8ba30c34662bbf3b79965ab8c12a8b6091231
 Supersedes: none
 Implementation: [core](../../crates/optimizer-core/src/lib.rs), [CLI](../../crates/optimizer-cli/src/main.rs)
 Tests: [core contracts](../../crates/optimizer-core/tests/contracts.rs), [CLI contracts](../../crates/optimizer-cli/tests/model.rs)
