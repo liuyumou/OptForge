@@ -8,6 +8,11 @@ earlier revision, by an author who is gone, is still enough to repeat its search
 This runs `optimizer verify` on the committed example and requires agreement. It
 also requires the negative direction to hold, because a verifier that cannot fail
 establishes nothing about the one that passed.
+
+Three records are covered and each is here for a different reason: the C4 example
+for the base run surface, the C8 registry-backed scheduling record for extension
+reconstruction, and a multi-node record whose search branched, without which no
+gated re-execution ever descended past the root.
 """
 
 import json
@@ -21,6 +26,8 @@ RECORD = ROOT / "examples/run-record-v1.json"
 MODEL = ROOT / "examples/model-v1.json"
 SCHEDULE_RECORD = ROOT / "examples/schedule-run-record-v1.json"
 SCHEDULE_MODEL = ROOT / "examples/schedule-model-v1.json"
+MULTI_NODE_RECORD = ROOT / "examples/multi-node-run-record-v1.json"
+MULTI_NODE_MODEL = ROOT / "examples/multi-node-flow-shop-model-v1.json"
 INSTANCE = ROOT / "examples/flow-shop-v1.json"
 REGISTRY = ROOT / "examples/extension-registry-v1.json"
 
@@ -133,6 +140,60 @@ def check_registry_backed_record():
             raise SystemExit(f"a version mismatch must not be a divergence: {stderr}")
 
 
+def check_multi_node_record():
+    """Re-execute a committed record whose search actually branched.
+
+    Both other committed records report `nodes_explored: 1`, so until this one
+    existed the only check that re-executes a record across a commit boundary had
+    never exercised a branch-and-bound tree. Work on the per-node path is exactly
+    the work a single-node record cannot see, so a change that moved a conclusion
+    at depth would have passed the gate.
+
+    The node counters are asserted on the committed record rather than on the
+    verdict, which does not carry them. That is the stronger place for them: it
+    fixes the fixture as one that branches, so this check cannot quietly decay
+    into a third single-node case if the record is ever regenerated.
+    """
+    search = json.loads(MULTI_NODE_RECORD.read_text())["search"]
+    if search["nodes_explored"] <= 1 or search["relaxations_solved"] <= 1:
+        raise SystemExit(
+            f"the multi-node fixture must branch, got "
+            f"nodes_explored={search['nodes_explored']}, "
+            f"relaxations_solved={search['relaxations_solved']}"
+        )
+    if search["nodes_pruned_bound"] < 1:
+        raise SystemExit("the multi-node fixture must prune by bound at least once")
+    # A proven outcome is a stronger thing to reproduce than a limited one, so
+    # the fixture is asserted to carry one rather than merely to agree.
+    if search["outcome"] != "proven_optimal" or search["forfeited"]:
+        raise SystemExit(
+            f"the multi-node fixture must prove optimality, got "
+            f"{search['outcome']}, forfeited={search['forfeited']}"
+        )
+
+    code, stdout, stderr = verify(MULTI_NODE_RECORD, MULTI_NODE_MODEL)
+    if code != 0:
+        raise SystemExit(f"committed multi-node record failed to verify: {stderr}")
+    verdict = json.loads(stdout)
+    if not verdict["agreement"]:
+        raise SystemExit("committed multi-node record did not agree")
+    if verdict["forfeited"]:
+        raise SystemExit("a proven record must not verify as forfeited")
+
+    # The negative direction, on a counter only a branching search can produce. A
+    # verifier that accepted this either way would make the pass above meaningless.
+    with tempfile.TemporaryDirectory() as directory:
+        mutated = Path(directory) / "mutated-multi-node.json"
+        record = json.loads(MULTI_NODE_RECORD.read_text())
+        record["search"]["nodes_pruned_bound"] -= 1
+        mutated.write_text(json.dumps(record))
+        code, _, stderr = verify(mutated, MULTI_NODE_MODEL)
+        if code != 2 or "nodes_pruned_bound" not in stderr:
+            raise SystemExit(
+                f"a mutated prune counter must diverge by name, got {code}: {stderr}"
+            )
+
+
 def main():
     if not BINARY.is_file():
         raise SystemExit("run cargo build --workspace --locked first")
@@ -177,6 +238,7 @@ def main():
             )
 
     check_registry_backed_record()
+    check_multi_node_record()
 
     print("committed run records re-executed and verified: passed")
 

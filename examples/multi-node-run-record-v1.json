@@ -1,0 +1,1526 @@
+{
+  "schema_version": 1,
+  "record_id": "trackb-example-multi-node-schedule-run",
+  "revision": "0000000000000000000000000000000000000000",
+  "dirty": false,
+  "hardware": {
+    "os": "Linux (example)",
+    "cpu": "example CPU",
+    "logical_cpus": 1,
+    "gpu_uuid": null,
+    "gpu_name": null,
+    "driver": null
+  },
+  "toolchain": {
+    "rustc": "rustc 1.93.1 (example)",
+    "cargo": "cargo 1.93.1 (example)"
+  },
+  "model_fingerprint": "fnv1a64:eeac14f894abac08",
+  "inputs": [
+    {
+      "role": "model",
+      "path": "examples/multi-node-flow-shop-v1.json",
+      "sha256": "10ccd3330e42b471100b6784735775ea3d4e7d58232c25dacb33115da70d9038"
+    },
+    {
+      "role": "config",
+      "path": "examples/search-config-multi-node-v2.json",
+      "sha256": "3787fc1eb1cacabd9d0c65ff829738cb99e28ecb2b1a3ee07c4d4b636877e0bb"
+    }
+  ],
+  "search": {
+    "schema_version": 2,
+    "model_id": "multi-node-example",
+    "backend": "relaxation",
+    "backend_version": "1.11.0",
+    "outcome": "proven_optimal",
+    "objective": 356.0,
+    "dual_bound": 356.0,
+    "gap": 0.0,
+    "candidate": {
+      "schema_version": 1,
+      "model_id": "multi-node-example",
+      "values": [
+        {
+          "variable_id": 0,
+          "value": 1.0
+        },
+        {
+          "variable_id": 1,
+          "value": 0.0
+        },
+        {
+          "variable_id": 2,
+          "value": 0.0
+        },
+        {
+          "variable_id": 3,
+          "value": -0.0
+        },
+        {
+          "variable_id": 4,
+          "value": 0.0
+        },
+        {
+          "variable_id": 5,
+          "value": 0.0
+        },
+        {
+          "variable_id": 6,
+          "value": 0.0
+        },
+        {
+          "variable_id": 7,
+          "value": 0.0
+        },
+        {
+          "variable_id": 8,
+          "value": 1.0
+        },
+        {
+          "variable_id": 9,
+          "value": -0.0
+        },
+        {
+          "variable_id": 10,
+          "value": 0.0
+        },
+        {
+          "variable_id": 11,
+          "value": 0.0
+        },
+        {
+          "variable_id": 12,
+          "value": 1.0
+        },
+        {
+          "variable_id": 13,
+          "value": -0.0
+        },
+        {
+          "variable_id": 14,
+          "value": 0.0
+        },
+        {
+          "variable_id": 15,
+          "value": -0.0
+        },
+        {
+          "variable_id": 16,
+          "value": 1.0
+        },
+        {
+          "variable_id": 17,
+          "value": 0.0
+        },
+        {
+          "variable_id": 18,
+          "value": 0.0
+        },
+        {
+          "variable_id": 19,
+          "value": -0.0
+        },
+        {
+          "variable_id": 20,
+          "value": 0.0
+        },
+        {
+          "variable_id": 21,
+          "value": 0.0
+        },
+        {
+          "variable_id": 22,
+          "value": 0.0
+        },
+        {
+          "variable_id": 23,
+          "value": -0.0
+        },
+        {
+          "variable_id": 24,
+          "value": 1.0
+        },
+        {
+          "variable_id": 25,
+          "value": 1.0
+        },
+        {
+          "variable_id": 26,
+          "value": 21.0
+        },
+        {
+          "variable_id": 27,
+          "value": 32.0
+        },
+        {
+          "variable_id": 28,
+          "value": 28.0
+        },
+        {
+          "variable_id": 29,
+          "value": 81.0
+        },
+        {
+          "variable_id": 30,
+          "value": 160.0
+        },
+        {
+          "variable_id": 31,
+          "value": 101.0
+        },
+        {
+          "variable_id": 32,
+          "value": 152.0
+        },
+        {
+          "variable_id": 33,
+          "value": 250.0
+        },
+        {
+          "variable_id": 34,
+          "value": 153.0
+        },
+        {
+          "variable_id": 35,
+          "value": 250.0
+        },
+        {
+          "variable_id": 36,
+          "value": 331.0
+        },
+        {
+          "variable_id": 37,
+          "value": 305.0
+        },
+        {
+          "variable_id": 38,
+          "value": 331.0
+        },
+        {
+          "variable_id": 39,
+          "value": 356.0
+        }
+      ]
+    },
+    "validation": {
+      "schema_version": 1,
+      "model_id": "multi-node-example",
+      "tolerances": {
+        "absolute": 1e-09,
+        "relative": 1e-09,
+        "integrality": 1e-09
+      },
+      "objective": 356.0,
+      "feasible": true,
+      "variables": [
+        {
+          "variable_id": 0,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 1,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 2,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 3,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 4,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 5,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 6,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 7,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 8,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 9,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 10,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 11,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 12,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 13,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 14,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 15,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 16,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 17,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 18,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 19,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 20,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 21,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 22,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 23,
+          "value": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 24,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "domain": {
+            "violation": 0.0,
+            "allowance": 1e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "variable_id": 25,
+          "value": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 26,
+          "value": 21.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2.2000000000000002e-08,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 27,
+          "value": 32.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.3000000000000004e-08,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 28,
+          "value": 28.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2.9e-08,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 29,
+          "value": 81.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 8.2e-08,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 30,
+          "value": 160.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.61e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 31,
+          "value": 101.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.02e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 32,
+          "value": 152.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.53e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 33,
+          "value": 250.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2.5100000000000006e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 34,
+          "value": 153.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.54e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 35,
+          "value": 250.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2.5100000000000006e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 36,
+          "value": 331.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.3200000000000006e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 37,
+          "value": 305.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.0600000000000007e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 38,
+          "value": 331.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.3200000000000006e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        },
+        {
+          "variable_id": 39,
+          "value": 356.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.5700000000000003e-07,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 690.0,
+            "violation": 0.0,
+            "allowance": 6.91e-07,
+            "satisfied": true
+          },
+          "domain": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_id": 0,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 1,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 2,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 3,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 4,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 5,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 6,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 7,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 8,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 9,
+          "activity": 1.0,
+          "lower": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          },
+          "upper": {
+            "bound": 1.0,
+            "violation": 0.0,
+            "allowance": 2e-09,
+            "satisfied": true
+          }
+        },
+        {
+          "constraint_id": 10,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.0000000000000004e-09,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 11,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.0000000000000004e-09,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 12,
+          "activity": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 4.2000000000000006e-08,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 13,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 4.300000000000001e-08,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 14,
+          "activity": 21.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 4.4000000000000004e-08,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 15,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 6.5e-08,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 16,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 5.700000000000001e-08,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 17,
+          "activity": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 5.6000000000000005e-08,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 18,
+          "activity": 7.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.56e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 19,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.6300000000000002e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 20,
+          "activity": 83.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2.3800000000000001e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 21,
+          "activity": 34.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2.87e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 22,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2.03e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 23,
+          "activity": 28.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 1.7500000000000002e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 24,
+          "activity": 20.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2.85e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 25,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.0500000000000004e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 26,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 5.01e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 27,
+          "activity": 8.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 4.93e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 28,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.0700000000000004e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 29,
+          "activity": 101.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 2.0600000000000002e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 30,
+          "activity": 1.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 5e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 31,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 5.01e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 32,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 6.63e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 33,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 6.63e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 34,
+          "activity": 114.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 4.97e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 35,
+          "activity": 267.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 3.4400000000000006e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 36,
+          "activity": 55.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 6.08e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 37,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 6.63e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 38,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 7.13e-07,
+            "satisfied": true
+          },
+          "upper": null
+        },
+        {
+          "constraint_id": 39,
+          "activity": 0.0,
+          "lower": {
+            "bound": 0.0,
+            "violation": 0.0,
+            "allowance": 7.13e-07,
+            "satisfied": true
+          },
+          "upper": null
+        }
+      ]
+    },
+    "nodes_explored": 37,
+    "nodes_pruned_infeasible": 0,
+    "nodes_pruned_bound": 23,
+    "open_nodes_remaining": 0,
+    "relaxations_solved": 37,
+    "forfeited": false,
+    "warnings": [],
+    "extensions": [],
+    "elapsed_ms": 0,
+    "options": {
+      "schema_version": 2,
+      "seed": 17,
+      "node_limit": 64,
+      "time_limit_ms": null,
+      "open_node_limit": null,
+      "improvement_tolerance": 1e-09,
+      "relaxation": {
+        "schema_version": 1,
+        "seed": 17,
+        "time_limit_ms": null,
+        "iteration_limit": null,
+        "node_limit": null,
+        "tolerances": {
+          "absolute": 1e-09,
+          "relative": 1e-09,
+          "integrality": 1e-09
+        },
+        "threads": 1
+      },
+      "extensions": []
+    }
+  },
+  "warnings": [
+    "Example record with the all-zero revision; it verifies but is not measurement evidence."
+  ]
+}

@@ -1,0 +1,1996 @@
+{
+  "schema_version": 1,
+  "model_id": "multi-node-example",
+  "variables": [
+    {
+      "id": 0,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 1,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 2,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 3,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 4,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 5,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 6,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 7,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 8,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 9,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 10,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 11,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 12,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 13,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 14,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 15,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 16,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 17,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 18,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 19,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 20,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 21,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 22,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 23,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 24,
+      "domain": "binary",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      }
+    },
+    {
+      "id": 25,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 26,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 27,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 28,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 29,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 30,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 31,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 32,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 33,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 34,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 35,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 36,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 37,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 38,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    },
+    {
+      "id": 39,
+      "domain": "continuous",
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 690.0
+      }
+    }
+  ],
+  "constraints": [
+    {
+      "id": 0,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 0,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 5,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 10,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 15,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 20,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 1,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 6,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 11,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 16,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 21,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 2,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 7,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 12,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 17,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 22,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 3,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 8,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 13,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 18,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 23,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 4,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 9,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 14,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 19,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 24,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 0,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 1,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 2,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 3,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 4,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 5,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 6,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 7,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 8,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 9,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 10,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 11,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 12,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 13,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 14,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 15,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 16,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 17,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 18,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 19,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "lower": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "upper": {
+        "kind": "finite",
+        "value": 1.0
+      },
+      "terms": [
+        {
+          "variable_id": 20,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 21,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 22,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 23,
+          "coefficient": 1.0
+        },
+        {
+          "variable_id": 24,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 0,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 1,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 2,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 3,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 4,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 25,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 0,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 1,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 2,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 3,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 4,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 25,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 0,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 1,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 2,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 3,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 4,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 26,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 0,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 1,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 2,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 3,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 4,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 25,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 26,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 0,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 1,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 2,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 3,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 4,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 27,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 0,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 1,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 2,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 3,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 4,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 26,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 27,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 5,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 6,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 7,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 8,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 9,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 25,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 28,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 5,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 6,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 7,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 8,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 9,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 28,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 5,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 6,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 7,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 8,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 9,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 26,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 29,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 5,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 6,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 7,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 8,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 9,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 28,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 29,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 5,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 6,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 7,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 8,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 9,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 27,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 30,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 5,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 6,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 7,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 8,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 9,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 29,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 30,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 10,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 11,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 12,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 13,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 14,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 28,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 31,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 10,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 11,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 12,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 13,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 14,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 31,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 10,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 11,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 12,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 13,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 14,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 29,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 32,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 10,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 11,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 12,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 13,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 14,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 31,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 32,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 10,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 11,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 12,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 13,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 14,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 30,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 33,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 10,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 11,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 12,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 13,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 14,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 32,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 33,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 15,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 16,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 17,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 18,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 19,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 31,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 34,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 15,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 16,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 17,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 18,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 19,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 34,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 15,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 16,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 17,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 18,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 19,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 32,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 35,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 15,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 16,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 17,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 18,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 19,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 34,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 35,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 15,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 16,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 17,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 18,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 19,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 33,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 36,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 15,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 16,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 17,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 18,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 19,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 35,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 36,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 20,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 21,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 22,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 23,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 24,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 34,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 37,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 20,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 21,
+          "coefficient": -52.0
+        },
+        {
+          "variable_id": 22,
+          "coefficient": -73.0
+        },
+        {
+          "variable_id": 23,
+          "coefficient": -27.0
+        },
+        {
+          "variable_id": 24,
+          "coefficient": -38.0
+        },
+        {
+          "variable_id": 37,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 20,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 21,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 22,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 23,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 24,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 35,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 38,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 20,
+          "coefficient": -20.0
+        },
+        {
+          "variable_id": 21,
+          "coefficient": -97.0
+        },
+        {
+          "variable_id": 22,
+          "coefficient": -51.0
+        },
+        {
+          "variable_id": 23,
+          "coefficient": -53.0
+        },
+        {
+          "variable_id": 24,
+          "coefficient": -26.0
+        },
+        {
+          "variable_id": 37,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 38,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 20,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 21,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 22,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 23,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 24,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 36,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 39,
+          "coefficient": 1.0
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "lower": {
+        "kind": "finite",
+        "value": 0.0
+      },
+      "upper": {
+        "kind": "positive_infinity"
+      },
+      "terms": [
+        {
+          "variable_id": 20,
+          "coefficient": -11.0
+        },
+        {
+          "variable_id": 21,
+          "coefficient": -81.0
+        },
+        {
+          "variable_id": 22,
+          "coefficient": -90.0
+        },
+        {
+          "variable_id": 23,
+          "coefficient": -45.0
+        },
+        {
+          "variable_id": 24,
+          "coefficient": -25.0
+        },
+        {
+          "variable_id": 38,
+          "coefficient": -1.0
+        },
+        {
+          "variable_id": 39,
+          "coefficient": 1.0
+        }
+      ]
+    }
+  ],
+  "objective": {
+    "sense": "minimize",
+    "offset": 0.0,
+    "terms": [
+      {
+        "variable_id": 39,
+        "coefficient": 1.0
+      }
+    ]
+  }
+}
