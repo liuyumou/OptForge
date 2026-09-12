@@ -147,35 +147,52 @@ closed case: run `optimizer search` twice over the same model and configuration 
 compare the two `record_id` values; the contract test asserts this and was shown to
 fail with the old derivation reinstated.
 
+## Resolved: two SPEC-0009 acceptance gaps closed by diagnosis
+
+Both were recorded when C8 was integrated and both are now closed, one by a
+specification correction and one by a test that reaches a branch previously
+believed possibly dead.
+
+Requirement 14 said resolution "MUST NOT ... construct" a refused extension, which
+was not true of the declaration- and role-mismatch paths: `Extension::declare` is
+the authority being compared and the provider is what supplies the role, so both
+are necessarily decided after construction. The rule is now split. Requirement 14
+governs invocation, which holds everywhere. Requirement 14a governs construction
+and names the three refusals that can be decided before it — an unprovided
+identity, an unsatisfied data requirement and a gpu hardware requirement — and
+states that a mismatch is constructed, read and then refused without ever being
+invoked. This was a specification correction, not a code change; the
+implementation was already right.
+
+Requirement 20's record-versus-resolved version comparison is **reachable**, and
+is now tested. The earlier doubt came from testing it the wrong way round:
+restamping the *registry* is refused by the declaration check first, because the
+extension still reports the version it always did. The rule the requirement
+actually describes runs the other direction — a record naming a version the
+current build no longer declares, which is what happens when a record outlives the
+build that produced it. Restating the version in the record's extension summary
+reaches it, and disabling the branch makes that test fail. The branch is not dead
+and was not removed.
+
+That diagnosis also found a defect in the acceptance gate itself.
+`tools/verify_committed_record.py` restamped the registry and asserted only that
+the restamped version appeared in stderr — but resolution's declaration-mismatch
+message contains that version too, so the check passed on the wrong error and
+never reached requirement 20. Its comment claimed an isolation it did not achieve.
+The gate now covers both rules separately and each asserts the message its own
+rule produces; with the requirement 20 branch disabled the gate step fails, where
+before it passed. This is the same class of defect the C8 clean-checkout run
+found: a check that passes for a reason other than the one it names.
+
 ## C8 requirements whose acceptance tests are thinner than the specification
 
 SPEC-0009's acceptance section describes cases that the implementation does not
 yet assert. These are recorded rather than quietly downgraded, because the
 specification is accepted and its own test mapping is the thing out of date.
 
-- Requirement 14 says resolution "MUST NOT ... construct" a refused extension, but
-  the declaration-mismatch and role-mismatch paths necessarily construct the
-  extension and call `declare` in order to discover the disagreement. The
-  construction counter is therefore non-zero on those paths by design. The rule
-  holds as written only for the refusals decided before construction — an unmet
-  data requirement and a gpu hardware requirement — and those are the two the
-  tests assert it against. Next step: narrow requirement 14's wording to the
-  refusals it can actually govern, which is a specification correction rather than
-  a code change.
 - Requirement 20's nondeterministic-record refusal has no test. Neither example
   extension declares nondeterminism, so producing such a record needs a fixture
   that does not exist in the CLI's provider table.
-- Requirement 20's other half, refusing a record whose named extension resolves to
-  a *different version than the record's summary states*, may not be reachable at
-  all: resolution already forces the declaration and the entry to agree on version,
-  and a summary's version was itself copied from a declaration. Both tests aimed at
-  this rule restamp the registry entry and are refused earlier, by the declaration
-  check. Reproduction: `crates/optimizer-cli/src/search.rs` compares
-  `declaration.version` against `summary.version` after resolution has already
-  equated the first with the entry's. Next diagnostic step: determine whether the
-  branch is dead and either remove it or find the input that reaches it; do not
-  delete it on inspection alone, because it guards a record re-executing against a
-  different extension.
 - Requirement 21's positive case — a run that agrees while reporting an extension
   summary difference as a diagnostic note — is asserted only in its negative form,
   that no difference is reported when none exists. `ExtensionDifference` has no

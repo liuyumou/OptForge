@@ -77,16 +77,22 @@ def check_registry_backed_record():
     if "divergence" in stderr:
         raise SystemExit(f"a missing registry must not be reported as divergence: {stderr}")
 
-    # A registry naming another version must be refused too, so the version check
-    # is covered across a commit boundary rather than only in-process.
+    # Two different rules live here and were previously conflated. Restamping the
+    # registry is refused by resolution's declaration check, whose message also
+    # contains the restamped version, so asserting only that the version appears
+    # in stderr passed on the wrong error and never reached SPEC-0009
+    # requirement 20's comparison at all. Both are now covered and each asserts
+    # the message its own rule produces.
     with tempfile.TemporaryDirectory() as directory:
+        # (1) Resolution: the registry claims a version the extension does not
+        # report. Refused before requirement 20 is reached.
         restamped = Path(directory) / "registry.json"
         registry = json.loads(REGISTRY.read_text())
         for entry in registry["entries"]:
             if entry["extension_id"] == "flow-shop-neh":
                 entry["version"] = "9.9.9"
-                # The promotion claim is checked before the version comparison, so
-                # it is dropped here to isolate the version refusal.
+                # The promotion claim is checked before the declaration
+                # comparison, so it is dropped here to reach that comparison.
                 entry["promotion"] = {"state": "experimental"}
         restamped.write_text(json.dumps(registry))
         code, _, stderr = verify(
@@ -94,9 +100,34 @@ def check_registry_backed_record():
             SCHEDULE_MODEL,
             ("--instance", str(INSTANCE), "--registry", str(restamped), "--allow-experimental"),
         )
-        if code != 2 or "9.9.9" not in stderr:
+        if code != 2 or "but the extension declares" not in stderr:
             raise SystemExit(
-                f"a registry naming another version must be refused, got {code}: {stderr}"
+                f"a registry naming another version must be refused by the "
+                f"declaration check, got {code}: {stderr}"
+            )
+        if "divergence" in stderr:
+            raise SystemExit(f"a version mismatch must not be a divergence: {stderr}")
+
+        # (2) Requirement 20 proper: the registry is honest, so resolution
+        # succeeds, and the *record* names a version this build no longer
+        # declares. This is the case a record outliving its build produces, and
+        # it is the only one that reaches the record-versus-resolved comparison.
+        restated = Path(directory) / "record.json"
+        record = json.loads(SCHEDULE_RECORD.read_text())
+        summaries = record["search"]["extensions"]
+        if not summaries or summaries[0]["extension_id"] != "flow-shop-neh":
+            raise SystemExit("the committed schedule record must name flow-shop-neh")
+        summaries[0]["version"] = "9.9.9"
+        restated.write_text(json.dumps(record))
+        code, _, stderr = verify(
+            restated,
+            SCHEDULE_MODEL,
+            ("--instance", str(INSTANCE), "--registry", str(REGISTRY), "--allow-experimental"),
+        )
+        if code != 2 or "but the record names version 9.9.9" not in stderr:
+            raise SystemExit(
+                f"a record naming another extension version must be refused by "
+                f"requirement 20, got {code}: {stderr}"
             )
         if "divergence" in stderr:
             raise SystemExit(f"a version mismatch must not be a divergence: {stderr}")

@@ -127,9 +127,19 @@ it needs.
 13. Resolution MUST be refused as a whole rather than partially applied. A
     search MUST NOT begin with a subset of the extensions its configuration
     named.
-14. Resolution MUST NOT consult, invoke, construct or otherwise execute an
-    extension it refuses. A refused entry MUST leave the extension's own
-    invocation count at zero.
+14. Resolution MUST NOT invoke an extension it refuses. `propose` and `advise`
+    MUST NOT be called for a refused entry, and a refused entry MUST leave the
+    extension's own invocation count at zero.
+14a. Resolution MUST NOT construct an extension for a refusal it can decide
+    before construction. A gpu hardware requirement, an unsatisfied data
+    requirement, an unpermitted experimental entry and a failed promotion check
+    are each decided before the provider is consulted at all; an identity this
+    build does not provide consults the provider but constructs nothing. A
+    declaration or role mismatch is necessarily decided *after* construction,
+    because `Extension::declare` is the authority being compared and the provider
+    is what supplies the role; such an entry is constructed and its declaration
+    read, and is then refused without ever being invoked. Requirement 14 governs
+    it from that point on.
 15. Registration order and invocation order MUST remain SPEC-0004 requirement
     18's order keyed by extension identity, and MUST NOT depend on the order
     entries appear in a registry document.
@@ -399,10 +409,15 @@ field, carrying an unknown or duplicate field, arriving as an array, naming an
 unknown enum variant, carrying a wrong version at the document or entry level, or
 repeating an extension identity are each refused at parse time.
 
-Requirements 5-14: each refusal path is asserted separately in its own
-`ErrorKind` category, and each is asserted against the extension's own invocation
-counter to establish requirement 14, so no refusal test can pass because the
-extension was never built. The paths are an unprovided identity; a declaration
+Requirements 5-14a: each refusal path is asserted separately in its own
+`ErrorKind` category. The refusals decided before construction — an unsatisfied
+data requirement and a gpu hardware requirement — are additionally asserted
+against the provider's own construction counter, which is requirement 14a and is
+what keeps those tests from passing because nothing was ever built. The
+declaration and role mismatches cannot be asserted that way and are not: they are
+decided by reading a declaration that only exists once the extension is
+constructed, which requirement 14a states rather than leaves implicit. The paths
+are an unprovided identity; a declaration
 disagreeing with the entry on version, category, host contract version, problem
 class, determinism and limits, each individually; an authority basis that does
 not derive from the category; an unsatisfied data requirement; a gpu hardware
@@ -424,7 +439,11 @@ the property that does not exist before this specification and is asserted both
 in Rust and, across a commit boundary, by the acceptance gate re-executing a
 committed registry-backed record; a non-empty policy without `--registry` is
 refused as unsupported; a record whose extension resolves to a different version
-is refused as unsupported rather than diverging; a record declaring
+is refused as unsupported rather than diverging, asserted from the record side by
+restating the version in an extension summary so that resolution succeeds and the
+comparison is actually reached — restamping the registry instead is refused
+earlier by the declaration check and does not exercise this rule; a record
+declaring
 nondeterminism is refused as unsupported; a summary difference in invocations,
 proposals, acceptances, rejections or disabled state is reported as a note
 without changing the exit code, asserted by a run that agrees while reporting

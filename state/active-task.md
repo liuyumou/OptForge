@@ -1,5 +1,67 @@
 # Active Task
 
+## C8 Follow-Up Items (2026-09-12)
+
+Objective: close the three items the C8 integration record left open — SPEC-0009
+requirement 14's overstated wording, requirement 20's possibly-unreachable
+verification branch, and the stale C5 review markers.
+
+Status: complete; the full gate passes with native acceptance covered.
+
+Acceptance gate: requirement 14 is narrowed to what the implementation can
+actually guarantee; requirement 20's branch is either reached by a test or
+recorded as unreachable with a decision; the C5 markers name the implementing
+revision; and `bash tools/check.sh` passes with native acceptance covered.
+Resource budget: CPU only, no GPU workloads.
+
+Requirement 20's branch is reachable, and the earlier doubt came from testing it
+the wrong way round. Restamping the *registry* is refused by the declaration check
+first, because the extension still reports the version it always did — the existing
+test's own comment says so. The rule the requirement describes runs the other
+direction: a record naming a version the current build no longer declares, which is
+what happens when a record outlives the build that produced it and the extension's
+version has since moved. A new contract restates the version in the record's
+extension summary, leaves the registry alone so resolution succeeds, and reaches
+the comparison. Disabling the branch makes it fail, so it is not vacuous. Nothing
+was deleted.
+
+That diagnosis found a second defect, in the acceptance gate itself.
+`tools/verify_committed_record.py` restamped the registry and then asserted only
+that `9.9.9` appeared in stderr. Resolution's declaration-mismatch message contains
+that string too, so the check passed on the wrong error and never reached
+requirement 20 — while its comment claimed to "isolate the version refusal". The
+gate now covers both rules separately, each asserting the message its own rule
+produces, and the requirement 20 case is checked across a commit boundary as
+SPEC-0009's acceptance section says it is. Verified by disabling the branch: the
+gate step now fails where it previously passed. This is the same class of defect
+the C8 clean-checkout run found — a check passing for a reason other than the one
+it names — and it is worth recording that it was found by pulling on a thread
+about a *different* requirement.
+
+Requirement 14 was wrong as written rather than under-implemented. It claimed
+resolution never constructs a refused extension, but `Extension::declare` is the
+authority a declaration mismatch compares against and the provider is what supplies
+the role, so both mismatches are necessarily decided after construction. The rule is
+now split: requirement 14 governs invocation and holds everywhere; requirement 14a
+governs construction and names the refusals decided before it — a gpu hardware
+requirement, an unsatisfied data requirement, an unpermitted experimental entry and
+a failed promotion check are all decided before the provider is consulted, while an
+unprovided identity consults the provider but constructs nothing. The
+implementation did not change, and the acceptance mapping now says which refusals
+can be asserted against a construction counter and why the others cannot.
+
+Evidence (2026-09-12): the complete `bash tools/check.sh` gate passed with the
+pinned HiGHS 1.11.0 library linked and **zero skip messages**, exit 0. Rust tests
+rose from 233 to 234, the requirement 20 contract. Python tests remain 60 and
+documentation 51 pages.
+
+Follow-up: C6 remains the next capability and still has no accepted specification.
+The remaining thin spots in SPEC-0009's acceptance mapping — requirement 20's
+nondeterministic-record case, requirement 21's positive diagnostic case,
+requirement 22's forfeited registry-backed record, `optimizer search --registry`
+with a non-empty policy, and the document-level parse cases — stay recorded in
+[known failures](known-failures.md); each needs a fixture this build does not have.
+
 ## Local C8 Integration (2026-09-12)
 
 Objective: verify the feat/extension-registry branch from a clean checkout,

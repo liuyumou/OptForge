@@ -790,6 +790,100 @@ fn verification_refuses_a_registry_naming_another_version() {
     );
 }
 
+/// Requirement 20: the record-versus-resolved version comparison, reached.
+///
+/// The test above cannot reach it, and says so: restamping the *registry* is
+/// refused by the declaration check first, because the extension still reports
+/// the version it always did. The comparison requirement 20 actually describes
+/// comes from the other direction — the record names a version the current build
+/// no longer declares, which is what happens when a record outlives the build
+/// that produced it and the extension's own version has since moved.
+///
+/// Editing the summary in the record simulates exactly that, the same way the run
+/// surface contracts mutate a record to exercise divergence. Without this, the
+/// branch at `search.rs` has no test and its reachability is a matter of opinion.
+#[test]
+fn verification_refuses_a_record_naming_another_extension_version() {
+    if !require_native("verification_refuses_a_record_naming_another_extension_version") {
+        return;
+    }
+    let sandbox = Sandbox::new();
+    let config = sandbox.write("config.json", CONFIG_WITH_PRODUCER);
+    let registry = sandbox.write("registry.json", REGISTRY);
+    let instance = sandbox.at("tiny.json");
+    sandbox
+        .command()
+        .args([
+            "schedule",
+            "generate",
+            "--instance-id",
+            "tiny",
+            "--seed",
+            "873654221",
+        ])
+        .args(["--jobs", "3", "--machines", "2", "--output"])
+        .arg(&instance)
+        .status()
+        .expect("generate");
+    let record_path = sandbox.at("run.json");
+    let model = sandbox.at("model.json");
+    let status = sandbox
+        .command()
+        .args(["schedule", "solve", "--instance"])
+        .arg(&instance)
+        .arg("--config")
+        .arg(&config)
+        .arg("--registry")
+        .arg(&registry)
+        .arg("--allow-experimental")
+        .arg("--output")
+        .arg(&record_path)
+        .arg("--output-model")
+        .arg(&model)
+        .status()
+        .expect("solve");
+    assert_eq!(status.code(), Some(0));
+
+    // The record claims a version the build does not declare. The registry is
+    // left alone, so resolution succeeds and the comparison is actually reached.
+    let mut record: serde_json::Value =
+        serde_json::from_slice(&std::fs::read(&record_path).expect("read")).expect("parse");
+    let summary = &mut record["search"]["extensions"][0];
+    assert_eq!(summary["extension_id"], "flow-shop-neh");
+    assert_eq!(
+        summary["registered"], true,
+        "an unregistered summary is skipped"
+    );
+    assert_eq!(summary["version"], "0.1.0");
+    summary["version"] = serde_json::json!("9.9.9");
+    let restated = sandbox.write("restated.json", &record.to_string());
+
+    let output = sandbox
+        .command()
+        .arg("verify")
+        .arg("--record")
+        .arg(&restated)
+        .arg("--model")
+        .arg(&model)
+        .arg("--instance")
+        .arg(&instance)
+        .arg("--registry")
+        .arg(&registry)
+        .arg("--allow-experimental")
+        .output()
+        .expect("run verify");
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        stderr.contains("unsupported:") && stderr.contains("9.9.9") && stderr.contains("0.1.0"),
+        "the refusal must name both versions, got {stderr}"
+    );
+    assert!(
+        !stderr.contains("divergence"),
+        "a version mismatch must not be reported as divergence: {stderr}"
+    );
+}
+
 /// Requirement 1: a malformed instance is an input error, and no record is written.
 #[test]
 fn solve_refuses_a_malformed_instance() {
