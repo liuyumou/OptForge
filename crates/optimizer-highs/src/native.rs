@@ -504,15 +504,33 @@ fn apply_warm_start(
     Ok(())
 }
 
+/// Whether a caller wants the final LP basis alongside the record.
+///
+/// Extracting one is not free: it reads the native basis and computes the
+/// model's canonical fingerprint, which serializes the whole model. On a
+/// branch-and-bound node that cost is pure waste, because node relaxations are
+/// always continuous so the basis is always extracted, `Backend::solve` discards
+/// it immediately, and SPEC-0003 requirement 23 forbids reusing one across nodes
+/// anyway.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum BasisRequest {
+    /// Extract the basis, for a caller that will warm start from it.
+    Extract,
+    /// Skip extraction; the caller discards the basis.
+    Skip,
+}
+
 /// Solve one model with the pinned native library.
 ///
 /// The returned basis accompanies an accepted LP incumbent so a later solve can
-/// warm start from it; it is `None` whenever no usable basis exists.
+/// warm start from it; it is `None` whenever no usable basis exists, and whenever
+/// the caller asked for [`BasisRequest::Skip`].
 pub(crate) fn solve(
     model: &Model,
     options: &SolveOptions,
     cancel: &CancellationToken,
     warm_start: Option<WarmStart<'_>>,
+    basis_request: BasisRequest,
 ) -> Result<(SolveRecord, Option<Basis>), ValidationError> {
     let started = Instant::now();
     let mut warnings = Vec::new();
@@ -835,11 +853,14 @@ pub(crate) fn solve(
         warnings.push(format!("native simplex_iteration_count={iterations}"));
     }
 
-    // A basis is only meaningful for a continuous relaxation.
-    let basis = if loaded.discrete {
-        None
-    } else {
-        extract_basis(&highs, model, &loaded)?
+    // A basis is only meaningful for a continuous relaxation, and only worth
+    // extracting when a caller asked for one. The discrete arm is kept even
+    // though every branch-and-bound node relaxation is continuous: this is
+    // backend code and must not depend on a solver-side invariant, and
+    // `solve_with_basis` is reachable with a discrete model.
+    let basis = match (loaded.discrete, basis_request) {
+        (true, _) | (_, BasisRequest::Skip) => None,
+        (false, BasisRequest::Extract) => extract_basis(&highs, model, &loaded)?,
     };
 
     let (accepted, _) = record(

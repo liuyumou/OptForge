@@ -74,6 +74,23 @@ impl HighsBackend {
         cancel: &CancellationToken,
         warm_start: Option<WarmStart<'_>>,
     ) -> Result<(SolveRecord, Option<Basis>), ValidationError> {
+        self.dispatch(model, options, cancel, warm_start, true)
+    }
+
+    /// Shared body of both entry points.
+    ///
+    /// `want_basis` decides only whether the final basis is extracted. Every
+    /// other step, including the pre-cancellation short circuit and the
+    /// unprovisioned-library refusal, is common, so the two entry points cannot
+    /// drift apart in anything but the basis.
+    fn dispatch(
+        &self,
+        model: &Model,
+        options: &SolveOptions,
+        cancel: &CancellationToken,
+        warm_start: Option<WarmStart<'_>>,
+        want_basis: bool,
+    ) -> Result<(SolveRecord, Option<Basis>), ValidationError> {
         let options = options.validate()?;
 
         // A pre-cancelled solve performs no native work by definition, so it is
@@ -84,11 +101,16 @@ impl HighsBackend {
 
         #[cfg(highs_native)]
         {
-            native::solve(model, &options, cancel, warm_start)
+            let request = if want_basis {
+                native::BasisRequest::Extract
+            } else {
+                native::BasisRequest::Skip
+            };
+            native::solve(model, &options, cancel, warm_start, request)
         }
         #[cfg(not(highs_native))]
         {
-            let _ = warm_start;
+            let _ = (warm_start, want_basis);
             Err(ValidationError::new(
                 optimizer_core::ErrorKind::Unsupported,
                 "HiGHS native library is not provisioned; run bash tools/setup_highs.sh",
@@ -131,7 +153,10 @@ impl Backend for HighsBackend {
         cancel: &CancellationToken,
         warm_start: Option<WarmStart<'_>>,
     ) -> Result<SolveRecord, ValidationError> {
-        self.solve_with_basis(model, options, cancel, warm_start)
+        // No basis is extracted here. This method's caller cannot receive one, so
+        // computing it would serialize the whole model on every branch-and-bound
+        // node to build a value discarded on the next line.
+        self.dispatch(model, options, cancel, warm_start, false)
             .map(|(record, _)| record)
     }
 }
