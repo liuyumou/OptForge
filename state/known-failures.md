@@ -121,6 +121,36 @@ it agrees and exits 0. The gate re-executes such a record across a commit bounda
 in `tools/verify_committed_record.py`. A record naming an extension policy with no
 `--registry` is still refused, which is requirement 18 rather than a limitation.
 
+## A run record's identifier is derived from measured elapsed time
+
+`optimizer search` builds `record_id` as `run-{model_id}-{elapsed_ms}` and
+`optimizer schedule solve` builds `schedule-{model_id}-{elapsed_ms}`. The
+identifier is therefore a pure function of a measurement the project excludes from
+meaning everywhere else: SPEC-0005 requirement 12 fixes elapsed time as diagnostic
+rather than contractual, and verification ignores it. Two runs of the same search
+on the same machine get different identifiers whenever the host happens to spend a
+different number of milliseconds, and two unrelated searches that take the same
+number of milliseconds collide.
+
+Found by the C8 clean-checkout verification, which is the case it takes to see it:
+the requirement 17 contract compares a record produced with a registry against one
+produced without, and both runs completed in 0 ms on a warm working tree and in 0
+and 1 ms on the clean clone. The test now normalizes `record_id` and says why, so
+it checks the registry rather than the clock.
+
+Nothing is currently broken by this. `record_id` is not among the ten fields
+SPEC-0005 requirement 11 compares, so verification is unaffected, and the schema
+requires only a non-empty string, so no document is invalid. Reproduction: run
+`optimizer search` twice over the same model and configuration on a loaded machine
+and compare the two `record_id` values.
+
+Next step: decide what a record identifier is for before changing it, because the
+options trade against each other. A content-derived identifier would make two runs
+of the same search collide, which may be correct or may not; a counter needs state
+the command does not have; a timestamp reintroduces the same host dependence in a
+more honest form. SPEC-0005 does not currently constrain the derivation at all,
+which is why this is a decision rather than a patch.
+
 ## C8 requirements whose acceptance tests are thinner than the specification
 
 SPEC-0009's acceptance section describes cases that the implementation does not

@@ -469,8 +469,19 @@ fn a_registry_does_not_change_a_search_that_names_no_extension() {
 
     // Elapsed time measures the host rather than the search, which is the same
     // exclusion SPEC-0005 requirement 12 already fixes for verification.
-    bare["search"]["elapsed_ms"] = serde_json::json!(0);
-    with_registry["search"]["elapsed_ms"] = serde_json::json!(0);
+    //
+    // `record_id` is normalized for the same reason and not a separate one: it is
+    // built as `run-{model_id}-{elapsed_ms}`, so it is a pure function of that same
+    // measurement and varies between two identical searches whenever the host
+    // happens to spend a different number of milliseconds. That derivation is a
+    // recorded defect rather than something this test should encode as expected;
+    // see state/known-failures.md. Comparing it here would make requirement 17's
+    // check fail for a reason that has nothing to do with the registry, which is
+    // exactly what it did on a loaded machine before this normalization.
+    for record in [&mut bare, &mut with_registry] {
+        record["search"]["elapsed_ms"] = serde_json::json!(0);
+        record["record_id"] = serde_json::json!("normalized");
+    }
     assert_eq!(
         bare, with_registry,
         "a registry must not perturb a search whose extension policy is empty"
