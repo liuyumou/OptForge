@@ -5,9 +5,9 @@
 Objective: make solver timing measurable, then remove work the branch-and-bound
 node path does and discards, without changing any conclusion.
 
-Status: in progress; the harness and the first three removals are complete and
-gated. The node relaxation rebuild and the candidate-canonicalization clone are
-measured but not yet attempted.
+Status: complete; the harness, all five removals and the multi-node gate fixture
+are in place and gated. Every item this track set out to do is done, and the two
+it declined are recorded below with their reasons.
 
 Acceptance gate: every compared field and node counter is identical before and
 after each change, asserted by the harness rather than by eye; every diagnostic
@@ -35,7 +35,16 @@ Measured, minimum of three runs after a warmup, release build, same host:
 | basis extracted only on request | -5.8% | -10.4% | -8.9% |
 | evaluation diagnostics built lazily | -11.5% | -22.5% | -17.3% |
 | structural diagnostics built lazily | -1.0% | -3.5% | -2.4% |
-| **cumulative** | **-17.5%** | **-33.0%** | **-26.5%** |
+| candidate borrowed when already canonical | -1.3% | -2.3% | -1.8% |
+| node relaxation rebounded, not rebuilt | -0.3% | -0.7% | -0.4% |
+| **cumulative** | **-18.8%** | **-35.0%** | **-28.1%** |
+| *noise floor, identical binary* | *0.1%* | *0.2%* | *0.1%* |
+
+The noise floor is in that table on purpose. The last row of real work is
+-0.3% to -0.7% against a repeat-measurement spread of 0.1% to 0.2%, so it is
+roughly two to three times noise and no more. Reporting it alone would overstate
+it; reporting it beside the floor lets a reader judge it. The first three items
+are large enough that the distinction does not arise.
 
 What the numbers are not: they are a development diagnostic, not evidence. The
 tool records `"claim": "none"`, defines no threshold, and is comparable only
@@ -58,33 +67,82 @@ valid model never produces. `Model::new`'s per-nonzero context had the same shap
 and is on the same path, because `node::relaxation` rebuilds and revalidates a
 model per node.
 
+The last two were the smallest and are worth recording for what they cost rather
+than for what they saved. `Candidate::canonical` cloned and re-sorted a candidate
+a backend had just built by iterating the model's own sorted variables; it now
+returns `Cow` and borrows when the input is already canonical. `node::relaxation`
+went through `Model::new`, which re-sorted and revalidated every row and the
+objective once per node for data the node did not touch; it now goes through
+`Model::rebound`, which validates the supplied bounds and refuses any variable
+list that is not the original's IDs.
+
+That refusal is the whole basis for skipping the row checks, and it is stated as
+SPEC-0001 requirement 2a rather than left implicit in code. The skipped checks
+decide two things — coefficients are finite, and every term names a variable the
+model has — and the first is carried from a document that already passed while the
+second is exactly what the ID requirement preserves. This follows how SPEC-0003
+requirement 12a and SPEC-0004 requirement 9a were recorded when implementation
+found a rule the contract had not stated. No ADR: the change is strictly narrowing
+and reverses nothing accepted.
+
 Method worth keeping: characterization first. Eleven tests pinning the byte-exact
 text of every diagnostic these commits touch were written and passed against
-unmodified code before any of it moved. Three of them were wrong on the first
-attempt in an instructive way — the fixtures aimed at a constraint-level message
-and hit the variable-level one, because variables are checked first. Discovering
-that from a failing characterization test is the cheap version of discovering it
-from a changed error message in production.
+unmodified code before any of it moved, and the two candidate-canonicalization
+contracts were written the same way, against the clone-always implementation. Three
+of the eleven were wrong on the first attempt in an instructive way — the fixtures
+aimed at a constraint-level message and hit the variable-level one, because
+variables are checked first. Discovering that from a failing characterization test
+is the cheap version of discovering it from a changed error message in production.
+
+Every behavior change here was also verified by reinstating the defect rather than
+by assertion alone. An unconditional canonical fast path fails the signed-zero
+contract with bits 9223372036854775808 against 0 and takes three pre-existing
+contracts with it; disabling `rebound`'s ID refusal fails the refusal contract.
 
 Two traps avoided rather than survived. `checked` returns `zero(value)`, not
 `value`, and that negative-zero normalization is observable through
 `VariableCheck.value` and therefore every serialized validation report; a lazy
-rewrite that returned the raw product would have changed committed records. And
-the harness compares conclusions itself and fails outright if any moved, so a
+rewrite that returned the raw product would have changed committed records. The
+same trap reappeared in the candidate fast path, where borrowing a candidate
+holding `-0.0` would publish a different number than the owned path does, which is
+why the fast path tests for negative zero and not merely for sorted-and-distinct.
+And the harness compares conclusions itself and fails outright if any moved, so a
 timing win accompanied by a counter change is reported as a bug rather than a
 speedup.
 
+A blind spot found while closing the track, and the reason the last commit is a
+test rather than a removal: both committed run records reported `nodes_explored:
+1`. `tools/verify_committed_record.py` is the only check that re-executes a record
+against a later build, and it had therefore never descended past the root node —
+while every change on this branch was on the per-node path. A generated 5x3
+instance exploring 37 nodes, pruning 23 by bound and proving optimality now closes
+that. Its counters are asserted against the committed record rather than the
+verdict, which does not carry them, so swapping in a single-node record fails
+loudly instead of passing quietly.
+
 Not attempted, and why: reusing the `Highs` object across nodes is legal under
 requirement 23, which forbids reusing a *basis* rather than the instance, and is
-the obvious next item — deferred pending the measurement that now exists. Cross-node
-warm start and any parallelism remain out of scope; both are forbidden by accepted
-contracts (SPEC-0003 requirement 23, SPEC-0002 requirement 5) and need their own
-decision records.
+the obvious next item — deferred pending the measurement that now exists. The
+constraint and objective clone in `node::relaxation` also remains and is now
+likely the dominant per-node cost, since `rebound` removed the validation beside
+it but not the copy; eliminating it needs shared ownership inside `ModelDocument`,
+which is a public type change with a wide ripple and belongs behind its own
+measurement. Cross-node warm start and any parallelism remain out of scope; both
+are forbidden by accepted contracts (SPEC-0003 requirement 23, SPEC-0002
+requirement 5) and need their own decision records.
 
-Follow-up: the remaining Track B items are the node relaxation rebuild and
-`Candidate::canonical`'s clone-and-re-sort, then a multi-node committed record so
-the gate compares all ten fields across a commit boundary on a model large enough
-for this work to matter. Track C, the C6 specification, has not started.
+Evidence (2026-09-12): `bash tools/check.sh` passed after each of the three
+commits with the pinned HiGHS 1.11.0 library linked and **zero test skips**, exit
+0. Rust tests rose from 247 to 251 — two candidate-canonicalization contracts and
+two `rebound` contracts — while Python tests remain 60 and documentation 51 pages.
+The last commit adds a gate step and fixtures rather than contracts, so it moves
+neither count, which is the expected result for what it claims to do.
+
+Follow-up: Track B is closed. C6, heterogeneous computation and GPU feasibility,
+is the next dependency-ready capability and still has no accepted specification;
+write one before introducing any public GPU or backend-selection API. The two
+deferred per-node items above are recorded in
+[known failures](known-failures.md) rather than carried as intentions.
 
 ## Local Track A Integration (2026-09-12)
 

@@ -230,6 +230,39 @@ machines, and closing it needs a second machine in CI rather than local code.
 Agreement therefore remains evidence of determinism on one host over time, which
 is what ADR-0006 claims and no more.
 
+## Per-node work Track B measured and deliberately did not remove
+
+Track B removed five items from the branch-and-bound node path without changing
+any conclusion; see [active task](active-task.md) for the measurements. Two
+candidates were identified, reasoned about and left in place, and both are
+recorded here so they read as decisions rather than as oversights.
+
+`node::relaxation` still clones the original model's constraints and objective
+once per node — 5,175 nonzeros for the encoded ta001. `Model::rebound` removed the
+revalidation that sat beside that copy but not the copy itself, and the copy is
+now likely the dominant per-node cost. Reproduction: profile a node-budgeted
+`schedule solve` over ta001 and attribute time inside `node::relaxation`. Next
+step: sharing the rows between a model and its relaxations needs an `Rc` or `Arc`
+inside `ModelDocument`, which is a public type in a crate other crates deserialize
+through; that is a wide change and needs its own measurement before it is worth
+making, not a follow-on commit.
+
+Reusing the `Highs` object across nodes is permitted — SPEC-0003 requirement 23
+forbids reusing a *basis*, not the instance — and is the obvious next per-node
+item. It was deferred because the measurement harness that would justify it did
+not exist when the ranking was made. Cross-node warm start and parallel search
+remain forbidden by SPEC-0003 requirement 23 and SPEC-0002 requirement 5
+respectively, and each needs its own decision record; neither is blocked on
+measurement.
+
+Also worth recording, because it is a gate property rather than an engine one:
+until Track B's last commit both committed run records reported `nodes_explored:
+1`, so `tools/verify_committed_record.py` had never re-executed a branching search
+across a commit boundary. A multi-node fixture now closes that. Its
+`nodes_pruned_infeasible` is 0 and is deliberately not asserted, because the
+positional encoding's relaxation was feasible at every size tried and choosing a
+fixture to hit that counter would be choosing it for the wrong reason.
+
 ## Checkpoint restart is still unimplemented
 
 C2 defines and serializes `Checkpoint` and SPEC-0003 states that restart is not

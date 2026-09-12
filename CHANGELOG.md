@@ -6,6 +6,12 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- `Model::rebound`, which replaces a model's variable domains and bounds while
+  reusing its already-validated rows and objective, under new SPEC-0001
+  requirement 2a. It is the relaxation path branch-and-bound builds one subproblem
+  per node with, not a general-purpose constructor: it refuses any variable list
+  that does not name exactly the original variable IDs, and that refusal is what
+  makes skipping the row checks sound rather than merely cheaper.
 - C8 local extension registry and conformance, under SPEC-0009 and ADR-0008. A
   registry document maps a declared extension identity to an extension this build
   provides, together with the facts needed to decide whether to permit it: version,
@@ -89,11 +95,25 @@ User-visible changes are recorded here using Conventional Commit terminology.
   nodes. Evaluation and structural diagnostics were formatted eagerly, costing
   several string allocations per matrix nonzero on the success path for text a
   valid model never produces. Both are now built only when a check fails.
+  `Candidate::canonical` cloned and re-sorted a candidate the backend had just
+  built by iterating the model's own sorted variables, and now borrows when the
+  input is already canonical. `node::relaxation` rebuilt each subproblem through
+  `Model::new`, revalidating every row and the objective once per node for data
+  the node did not touch, and now uses `Model::rebound`, which validates the
+  supplied bounds and refuses any variable list that is not the original's IDs.
   Conclusions are unchanged: every field verification compares, every node
   counter and every diagnostic message is identical, and the messages are pinned
   byte-exactly by tests written against the previous code. No performance
   property is claimed of the engine; `tools/benchmark_search.py` is a development
   diagnostic that records no threshold.
+
+- `tools/verify_committed_record.py` now re-executes a record whose search
+  branched. Both committed records reported `nodes_explored: 1`, so the only check
+  that re-runs a record against a later build had never descended past the root
+  node — the exact blind spot that matters for work on the per-node path. The new
+  fixture explores 37 nodes, prunes 23 by bound and proves optimality, and its
+  counters are asserted against the committed record so the check cannot decay
+  into a third single-node case.
 
 - A run record's identifier no longer depends on measured elapsed time. `optimizer
   search` built `record_id` as `run-{model_id}-{elapsed_ms}` and `optimizer
