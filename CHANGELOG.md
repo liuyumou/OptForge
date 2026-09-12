@@ -82,6 +82,17 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Fixed
 
+- A run record's identifier no longer depends on measured elapsed time. `optimizer
+  search` built `record_id` as `run-{model_id}-{elapsed_ms}` and `optimizer
+  schedule solve` built `schedule-{model_id}-{elapsed_ms}`, so a record's identity
+  was a property of how busy the host happened to be: two runs of the same search
+  got different identifiers, and two unrelated searches that took equally long got
+  the same one. Both now derive it from the SHA-256 digests of the input documents
+  the record already carries. SPEC-0005 requirement 1a states the rule, so the
+  derivation is specified rather than incidental. `record_id` is not among the
+  fields verification compares, so no record version changed and existing records
+  remain valid.
+
 - `optimizer verify` now refuses a record whose configuration names an extension
   policy, reporting it as unsupported instead of as a divergence. Re-execution
   loads no extension, so such a record was reproduced by a search it does not

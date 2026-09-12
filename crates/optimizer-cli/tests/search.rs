@@ -468,19 +468,11 @@ fn a_registry_does_not_change_a_search_that_names_no_extension() {
         serde_json::from_slice(&output.stdout).expect("a record");
 
     // Elapsed time measures the host rather than the search, which is the same
-    // exclusion SPEC-0005 requirement 12 already fixes for verification.
-    //
-    // `record_id` is normalized for the same reason and not a separate one: it is
-    // built as `run-{model_id}-{elapsed_ms}`, so it is a pure function of that same
-    // measurement and varies between two identical searches whenever the host
-    // happens to spend a different number of milliseconds. That derivation is a
-    // recorded defect rather than something this test should encode as expected;
-    // see state/known-failures.md. Comparing it here would make requirement 17's
-    // check fail for a reason that has nothing to do with the registry, which is
-    // exactly what it did on a loaded machine before this normalization.
+    // exclusion SPEC-0005 requirement 12 already fixes for verification. It is the
+    // only field normalized here: `record_id` is compared like everything else,
+    // because requirement 1a derives it from the inputs rather than the clock.
     for record in [&mut bare, &mut with_registry] {
         record["search"]["elapsed_ms"] = serde_json::json!(0);
-        record["record_id"] = serde_json::json!("normalized");
     }
     assert_eq!(
         bare, with_registry,
@@ -492,6 +484,65 @@ fn a_registry_does_not_change_a_search_that_names_no_extension() {
         "no extension may be registered by naming a registry alone"
     );
     assert_eq!(with_registry["warnings"], serde_json::json!([]));
+}
+
+// SPEC-0005 requirement 1a: a record identifier is derived from the inputs, not
+// from the clock.
+//
+// The earlier implementation built it as `run-{model_id}-{elapsed_ms}`, so this
+// test would have failed only when the two runs happened to land in different
+// milliseconds — which is how it survived until a clean-checkout run on a loaded
+// machine. Asserting equality across two separate invocations is what makes the
+// property hold always rather than usually.
+#[test]
+fn a_record_identifier_is_stable_across_runs_and_varies_with_the_inputs() {
+    if !native_available() {
+        return;
+    }
+    let sandbox = Sandbox::new();
+    let model = sandbox.write("model.json", MODEL);
+    let config = sandbox.write("config.json", CONFIG);
+
+    let (_, first) = sandbox.search(&model, &config);
+    let (_, second) = sandbox.search(&model, &config);
+    let id = first["record_id"]
+        .as_str()
+        .expect("an identifier")
+        .to_owned();
+    assert_eq!(
+        id, second["record_id"],
+        "the same model and configuration must identify the same run"
+    );
+    assert!(
+        id.starts_with("run-cli-search-"),
+        "the identifier names the command and the model, found {id}"
+    );
+    assert!(
+        !id.ends_with("-0"),
+        "an identifier ending in a millisecond count is the defect this pins"
+    );
+
+    // A different configuration over the same model is a different run.
+    let other_config = sandbox.write(
+        "other.json",
+        &CONFIG.replace("\"seed\": 17", "\"seed\": 23"),
+    );
+    let (_, other) = sandbox.search(&model, &other_config);
+    assert_ne!(
+        first["record_id"], other["record_id"],
+        "a changed configuration must change the identifier"
+    );
+
+    // And so is a different model, even when the configuration is identical.
+    let other_model = sandbox.write(
+        "other-model.json",
+        &MODEL.replace("\"offset\": 0.5", "\"offset\": 1.5"),
+    );
+    let (_, other_model_record) = sandbox.search(&other_model, &config);
+    assert_ne!(
+        first["record_id"], other_model_record["record_id"],
+        "a changed model must change the identifier"
+    );
 }
 
 // Requirements 8 and 16: argument failures are categorized and write no record.

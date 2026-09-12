@@ -22,6 +22,7 @@
       "const": 1
     },
     "record_id": {
+      "description": "Identifier derived from what the record describes, never from measured elapsed time or any other host measurement. Two runs of the same model and configuration therefore share an identifier.",
       "type": "string",
       "minLength": 1
     },

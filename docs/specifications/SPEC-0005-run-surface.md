@@ -54,6 +54,15 @@ document, which identifies model bytes rather than model identity.
    revision, the dirty state of that source, hardware, toolchain, the canonical
    model fingerprint, the hashed input documents, the complete search record,
    and warnings. A record missing any of these MUST be refused at parse time.
+1a. A record identifier MUST be derived only from what the record describes, and
+   MUST NOT depend on measured elapsed time or any other measurement of the
+   host. Two runs of the same model and configuration therefore carry the same
+   identifier, which is the intended reading: the identifier names the inputs a
+   record describes, and whether two such runs agree is what verification
+   answers. An identifier that moved with the clock would make a record's
+   identity a property of how busy the machine was, which requirement 12 already
+   excludes from meaning, and would collide for unrelated searches that happened
+   to take equally long.
 2. A run record MUST embed the search record verbatim, including its
    configuration, node counters, forfeiture state and per-extension summaries.
    It MUST NOT summarize, replace or omit any part of it, so a reader can see

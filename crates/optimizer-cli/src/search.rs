@@ -143,9 +143,12 @@ fn run(
             .map_err(io::Error::other)?,
     };
 
+    let model_sha = sha256::hex(&model_bytes);
+    let config_sha = sha256::hex(&config_bytes);
     let record = RunRecord {
         schema_version: RUN_SCHEMA_VERSION,
-        record_id: format!("run-{}-{}", search.model_id, search.elapsed_ms),
+        // Requirement 1a: derived from the inputs, never from measured time.
+        record_id: provenance::record_id("run", &search.model_id, &[&model_sha, &config_sha]),
         revision,
         dirty: provenance::dirty(),
         hardware: provenance::hardware(),
@@ -155,12 +158,12 @@ fn run(
             InputDocument {
                 role: InputRole::Model,
                 path: std::path::Path::new(model_path).display().to_string(),
-                sha256: sha256::hex(&model_bytes),
+                sha256: model_sha,
             },
             InputDocument {
                 role: InputRole::Config,
                 path: std::path::Path::new(config_path).display().to_string(),
-                sha256: sha256::hex(&config_bytes),
+                sha256: config_sha,
             },
         ],
         search,

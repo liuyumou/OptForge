@@ -121,35 +121,31 @@ it agrees and exits 0. The gate re-executes such a record across a commit bounda
 in `tools/verify_committed_record.py`. A record naming an extension policy with no
 `--registry` is still refused, which is requirement 18 rather than a limitation.
 
-## A run record's identifier is derived from measured elapsed time
+## Resolved: a run record's identifier no longer depends on the clock
 
-`optimizer search` builds `record_id` as `run-{model_id}-{elapsed_ms}` and
-`optimizer schedule solve` builds `schedule-{model_id}-{elapsed_ms}`. The
-identifier is therefore a pure function of a measurement the project excludes from
-meaning everywhere else: SPEC-0005 requirement 12 fixes elapsed time as diagnostic
-rather than contractual, and verification ignores it. Two runs of the same search
-on the same machine get different identifiers whenever the host happens to spend a
-different number of milliseconds, and two unrelated searches that take the same
-number of milliseconds collide.
+`optimizer search` built `record_id` as `run-{model_id}-{elapsed_ms}` and
+`optimizer schedule solve` built `schedule-{model_id}-{elapsed_ms}`. The
+identifier was a pure function of a measurement the project excludes from meaning
+everywhere else: SPEC-0005 requirement 12 fixes elapsed time as diagnostic rather
+than contractual, and verification ignores it. Two runs of the same search on the
+same machine got different identifiers whenever the host spent a different number
+of milliseconds, and two unrelated searches that took equally long collided.
 
 Found by the C8 clean-checkout verification, which is the case it takes to see it:
 the requirement 17 contract compares a record produced with a registry against one
-produced without, and both runs completed in 0 ms on a warm working tree and in 0
-and 1 ms on the clean clone. The test now normalizes `record_id` and says why, so
-it checks the registry rather than the clock.
+produced without, and both runs completed in 0 ms on a warm working tree but in 0
+and 1 ms on the clean clone.
 
-Nothing is currently broken by this. `record_id` is not among the ten fields
-SPEC-0005 requirement 11 compares, so verification is unaffected, and the schema
-requires only a non-empty string, so no document is invalid. Reproduction: run
-`optimizer search` twice over the same model and configuration on a loaded machine
-and compare the two `record_id` values.
-
-Next step: decide what a record identifier is for before changing it, because the
-options trade against each other. A content-derived identifier would make two runs
-of the same search collide, which may be correct or may not; a counter needs state
-the command does not have; a timestamp reintroduces the same host dependence in a
-more honest form. SPEC-0005 does not currently constrain the derivation at all,
-which is why this is a decision rather than a patch.
+Closed by SPEC-0005 requirement 1a, which now states that an identifier is derived
+only from what the record describes. Both commands derive it from the SHA-256
+digests of the input documents the record already carries, so a different model or
+a different configuration yields a different identifier and a repeated run yields
+the same one. Two runs of the same inputs sharing an identifier is the intended
+reading rather than a residual collision: the identifier names the inputs, and
+whether two such runs agree is what `optimizer verify` answers. Reproduction of the
+closed case: run `optimizer search` twice over the same model and configuration and
+compare the two `record_id` values; the contract test asserts this and was shown to
+fail with the old derivation reinstated.
 
 ## C8 requirements whose acceptance tests are thinner than the specification
 

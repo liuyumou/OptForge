@@ -85,3 +85,32 @@ pub(crate) fn toolchain() -> Toolchain {
         cargo: text("cargo", &["--version"]).unwrap_or_else(|| "unknown".to_owned()),
     }
 }
+
+/// Identifier for a run record, derived only from what the record describes.
+///
+/// SPEC-0005 requirement 1a. `kind` distinguishes the command that produced the
+/// record, `model_id` names what was searched, and the digest is taken over the
+/// input hashes the record already carries, so a different configuration over the
+/// same model yields a different identifier.
+///
+/// This deliberately depends on nothing measured. An earlier implementation built
+/// the identifier as `{kind}-{model_id}-{elapsed_ms}`, which made a record's
+/// identity a property of how busy the host happened to be: two runs of the same
+/// search got different identifiers, and two unrelated searches that took the same
+/// number of milliseconds got the same one. Requirement 12 already excludes
+/// elapsed time from meaning, and an identifier is not the place to smuggle it
+/// back in.
+///
+/// Two runs of the same model and configuration therefore share an identifier.
+/// That is the intended reading: the identifier names the inputs a record
+/// describes, and whether two such runs actually agree is what `optimizer verify`
+/// exists to answer. `revision` and `model_fingerprint` remain separate fields,
+/// so the identifier does not duplicate the build or the model dimension.
+pub(crate) fn record_id(kind: &str, model_id: &str, input_digests: &[&str]) -> String {
+    let joined = input_digests.concat();
+    let digest = optimizer_experiment::sha256::hex(joined.as_bytes());
+    // Sixteen hex digits is 64 bits over inputs that are themselves SHA-256
+    // digests, which is ample for distinguishing records a caller holds at once
+    // and keeps the identifier readable.
+    format!("{kind}-{model_id}-{}", &digest[..16])
+}

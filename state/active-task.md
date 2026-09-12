@@ -1,5 +1,63 @@
 # Active Task
 
+## C8 Verification Follow-up: Clock-Derived Record Identifier (2026-09-12)
+
+Objective: remove measured elapsed time from a run record's identifier, and specify
+what the identifier is so the derivation cannot regress.
+
+Status: complete; the full gate passes with native acceptance covered, and the
+clean-checkout verification that found the defect now passes.
+
+Acceptance gate: two runs of the same model and configuration produce the same
+identifier; a changed configuration and a changed model each produce a different
+one; the SPEC-0009 requirement 17 contract compares whole records again with only
+elapsed time normalized; the contract fails with the old derivation reinstated; and
+`bash tools/check.sh` passes with native acceptance covered. Resource budget: CPU
+only, no GPU workloads.
+
+How it was found, because the method is the point: every gate run during C8 used a
+warm `target/` and passed. The clean-checkout verification, run before integrating
+the branch, failed at
+`a_registry_does_not_change_a_search_that_names_no_extension`. The registry was not
+the cause. `record_id` was built as `run-{model_id}-{elapsed_ms}`, both searches
+finished in 0 ms on the warm tree so their identifiers matched, and in the
+independent clone one took 0 ms and the other 1 ms. The contract had been failing
+on the clock since it was written and passing by luck.
+
+The defect is older than C8. `search.rs` and `schedule.rs` have derived the
+identifier this way since C4 and C5 respectively; the C8 contract was simply the
+first thing to compare two whole records produced by separate invocations. A record
+identifier that moves with the clock makes a record's identity a property of how
+busy the machine was, which SPEC-0005 requirement 12 already excludes from meaning,
+and it collides for unrelated searches that happen to take equally long.
+
+What was decided rather than assumed: the identifier now derives from the SHA-256
+digests of the input documents the record already carries. Two runs of the same
+model and configuration therefore share an identifier, and that is the intended
+reading rather than a residual collision — the identifier names the inputs a record
+describes, and whether two such runs agree is what `optimizer verify` exists to
+answer. `revision` and `model_fingerprint` stay separate fields, so the identifier
+does not duplicate the build or the model dimension. The rule is now SPEC-0005
+requirement 1a, added rather than left implicit, matching how SPEC-0003 requirement
+12a and SPEC-0004 requirement 9a were recorded when implementation found a rule the
+contract had not stated.
+
+Why this needed no record version and no ADR: `record_id` is not among the ten
+fields requirement 11 compares, so agreement is untouched and SPEC-0005's rule that
+a change to the compared fields is breaking does not apply. The field, its type and
+its schema constraint are unchanged, no exit code or stderr category moved, and the
+committed example records carry hand-written identifiers rather than generated
+ones, so none of them changed. The schema gains a description only.
+
+Evidence (2026-09-12): the complete `bash tools/check.sh` gate passed with the
+pinned HiGHS 1.11.0 library linked and **zero skip messages**, exit 0. Rust tests
+rose from 232 to 233, the new identifier contract. Python tests remain 60 and
+documentation 51 pages. The fix is verified by reinstating the defect rather than by
+assertion alone: with `run-{model_id}-{elapsed_ms}` restored the new contract fails
+at the changed-configuration assertion, and with the fix it passes. Restoring the
+requirement 17 contract to a whole-record comparison is the second check, since it
+now compares `record_id` like every other field.
+
 ## C8 Extension Registry Implementation (2026-09-12)
 
 Objective: implement C8 under the accepted SPEC-0009 and ADR-0008: the registry
