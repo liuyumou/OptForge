@@ -193,6 +193,12 @@ def main():
     else:
         validator("run-config-v1.schema.json").validate(read_json(ROOT / "examples/run-config.json"))
         validator("solve-config-v1.schema.json").validate(read_json(ROOT / "examples/solve-config-v1.json"))
+        # The first-order settings example, which SPEC-0011 requirements 9 and 10
+        # make recorded state. Validated here so the committed example cannot
+        # drift from the schema a record embeds it under.
+        validator("lp-settings-v1.schema.json").validate(
+            read_json(ROOT / "examples/lp-settings-v1.json")
+        )
         validator("search-config-v3.schema.json").validate(read_json(ROOT / "examples/search-config-v3.json"))
         validator("search-config-v3.schema.json").validate(
             read_json(ROOT / "examples/search-config-neh-v3.json")

@@ -128,6 +128,7 @@ dependencies = [
  "optimizer-experiment",
  "optimizer-extension",
  "optimizer-highs",
+ "optimizer-lp",
  "optimizer-registry",
  "optimizer-schedule",
  "optimizer-schedule-examples",

@@ -10,9 +10,10 @@ use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
 
 use optimizer_core::{
-    Backend, Basis, CancellationToken, Candidate, Model, SolveOptions, Termination,
+    Backend, Basis, CancellationToken, Candidate, LpSettings, Model, SolveOptions, Termination,
 };
 use optimizer_highs::HighsBackend;
+use optimizer_lp::HostLpBackend;
 
 use crate::input::{argument, read};
 
@@ -21,6 +22,8 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     let mut config_path = None;
     let mut candidate_path = None;
     let mut basis_path = None;
+    let mut backend_name = None;
+    let mut settings_path = None;
     for pair in options.chunks(2) {
         let [key, value] = pair else {
             return Err(argument("each flag requires a value"));
@@ -33,6 +36,8 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             "--config" => &mut config_path,
             "--candidate" => &mut candidate_path,
             "--basis" => &mut basis_path,
+            "--backend" => &mut backend_name,
+            "--lp-settings" => &mut settings_path,
             _ => return Err(argument(&format!("unknown flag {key}"))),
         };
         if slot.replace(value.as_os_str()).is_some() {
@@ -74,9 +79,50 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     let signalled = Arc::new(AtomicBool::new(false));
     install_signal_handler(&cancel, &signalled)?;
 
-    let record = HighsBackend::new()
-        .solve(&model, &configuration, &cancel, warm_start)
-        .map_err(io::Error::other)?;
+    // SPEC-0011 requirement 18: the pinned CPU backend is the default, and it is
+    // the default because nothing else can be reached without being named. There
+    // is deliberately no threshold here that could promote a solve to another
+    // backend: a dispatch threshold is a recorded measurement under requirements
+    // 18 and 19, and state/known-failures.md already records that this project
+    // commits no such number without an ADR and held-out evidence.
+    let selected = backend_name
+        .map(|name| {
+            name.to_str()
+                .ok_or_else(|| argument("--backend must be UTF-8 text"))
+        })
+        .transpose()?
+        .unwrap_or("highs");
+
+    let record = match selected {
+        "highs" => {
+            if settings_path.is_some() {
+                return Err(argument(
+                    "--lp-settings applies only to a first-order backend",
+                ));
+            }
+            HighsBackend::new()
+                .solve(&model, &configuration, &cancel, warm_start)
+                .map_err(io::Error::other)?
+        }
+        "host-lp" => {
+            // Settings are required rather than defaulted. Requirements 9 and 10
+            // make the preconditioner and the check interval recorded state, and
+            // a default would let two solves with different behaviour write
+            // records that look identical.
+            let path = settings_path
+                .ok_or_else(|| argument("--backend host-lp requires --lp-settings"))?;
+            let settings = LpSettings::from_json(&read(path)?).map_err(io::Error::other)?;
+            HostLpBackend::new(settings)
+                .map_err(io::Error::other)?
+                .solve(&model, &configuration, &cancel, warm_start)
+                .map_err(io::Error::other)?
+        }
+        other => {
+            return Err(argument(&format!(
+                "unknown backend {other}; expected highs or host-lp"
+            )));
+        }
+    };
     let output = record.to_json().map_err(io::Error::other)?;
 
     let code = match record.termination {

@@ -26,6 +26,7 @@ Usage:
   optimizer model validate --model <path>
     [--candidate <path> --absolute-tolerance <f64> --relative-tolerance <f64> --integrality-tolerance <f64>]
   optimizer solve --model <path> --config <path> [--candidate <path> | --basis <path>]
+    [--backend highs|host-lp] [--lp-settings <path>]
   optimizer search --model <path> --config <path> [--output <path>] [REGISTRY]
   optimizer verify --record <path> --model <path> [--instance <path>] [REGISTRY]
   optimizer schedule generate --instance-id <text> --seed <u32> --jobs <n> --machines <m> [--output <path>]

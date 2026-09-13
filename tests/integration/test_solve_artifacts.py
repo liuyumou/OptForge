@@ -163,3 +163,68 @@ class SolveRecordContracts(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class LpSettingsContracts(unittest.TestCase):
+    """SPEC-0011 requirements 9 and 10, from the schema side.
+
+    The Rust parser refuses a settings document that omits a recorded field.
+    These assert the schema refuses the same documents, so neither authority is
+    laxer than the other -- the parity rule SPEC-0005 requirement 20 and
+    SPEC-0009 requirement 26 already apply to the other documents.
+    """
+
+    def setUp(self):
+        self.validator = validator("lp-settings-v1.schema.json")
+        self.settings = read_json(ROOT / "examples/lp-settings-v1.json")
+
+    def test_the_committed_example_validates(self):
+        self.validator.validate(self.settings)
+
+    def test_a_document_missing_a_recorded_field_is_refused(self):
+        for absent in (
+            "preconditioner",
+            "check_interval",
+            "iteration_limit",
+            "power_iterations",
+            "restart",
+            "primal_weight",
+        ):
+            partial = {k: v for k, v in self.settings.items() if k != absent}
+            with self.subTest(absent=absent), self.assertRaises(ValidationError):
+                self.validator.validate(partial)
+
+    def test_unknown_fields_and_out_of_range_values_are_refused(self):
+        for settings in (
+            {**self.settings, "step_size": 0.5},
+            {**self.settings, "schema_version": 2},
+            {**self.settings, "check_interval": 0},
+            {**self.settings, "iteration_limit": 0},
+            {
+                **self.settings,
+                "restart": {**self.settings["restart"], "sufficient": 1.5},
+            },
+            {
+                **self.settings,
+                "preconditioner": {
+                    **self.settings["preconditioner"],
+                    "pock_chambolle_alpha": 3.0,
+                },
+            },
+        ):
+            with self.assertRaises(ValidationError):
+                self.validator.validate(settings)
+
+    def test_a_record_embedding_invalid_settings_is_refused(self):
+        embedded = {
+            "schema_version": 2,
+            "model_id": "tiny-continuous",
+            "backend": "host-lp",
+            "backend_version": "0.1.0",
+            "termination": "optimal",
+            "warnings": [],
+            "elapsed_ms": 3,
+            "options": read_json(ROOT / "examples/solve-config-v1.json"),
+            "lp_settings": {k: v for k, v in self.settings.items() if k != "check_interval"},
+        }
+        with self.assertRaises(ValidationError):
+            validator("solve-record-v2.schema.json").validate(embedded)

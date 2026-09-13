@@ -1,5 +1,52 @@
 # Active Task
 
+## C6 Backend Selection at the Run Surface (2026-09-13)
+
+Objective: reach SPEC-0011 requirements 18 and 25 — the first-order backend
+reachable by explicit caller configuration, with the pinned CPU backend still the
+default, and the settings document a caller supplies validated by both authorities.
+
+Status: complete for the host backends. Requirement 20's fallback and requirement 17's
+relaxation forfeiture belong to the device backend and are not reached yet.
+
+Acceptance gate: `bash tools/check.sh` with the pinned HiGHS library present.
+Resource budget: CPU only, no GPU workloads.
+
+`optimizer solve` gains `--backend` and `--lp-settings`. The default is the pinned
+backend, and it is the default in the strongest available sense: there is no threshold
+anywhere that could promote a solve to another backend, so nothing could say otherwise.
+That is deliberate rather than unfinished. Requirements 18 and 19 make a dispatch
+threshold a recorded measurement, and `state/known-failures.md` already records for
+SPEC-0010 requirement 22 that this project commits no such number without an ADR and
+held-out evidence. The same entry now covers two specifications.
+
+Settings are required rather than defaulted when the first-order backend is named, and
+`--lp-settings` is refused outright for a backend that has none. A caller who thinks
+they configured something is told they did not, rather than having the flag ignored.
+
+`lp-settings-v1` is its own schema rather than a block inside the record. It is a
+document a caller passes on the command line, so it needs to be checkable on its own,
+and the record `$ref`s it exactly as it already `$ref`s the solve configuration. Both
+authorities are asserted to refuse the same documents: the Rust parser and the JSON
+Schema each reject a settings document missing any recorded field, and a record
+embedding an incomplete block is rejected too.
+
+`examples/lp-model-v1.json` is new because the existing example model is discrete, so
+the specification's own worked example would have refused. Both examples are now
+validated by `tools/validate_artifacts.py`, so a committed example cannot drift from
+the schema a record embeds it under.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed, exit 0, with 362 Rust tests, 72
+Python tests and 56 documentation pages. Eleven tests are new. The default reaching the
+pinned backend is asserted positively, on the backend named in the record rather than
+by observing that nothing else happened. Both backends are shown to agree on the
+example model, which is what makes naming one a choice of implementation rather than a
+choice of answer. The discrete refusal is asserted end to end at the run surface, not
+only in a unit test: exit 2, `unsupported`, and the record still names the backend that
+refused.
+
+Follow-up: the device kernels, then the evidence record and the honest limits.
+
 ## C6 Host First-Order Engine and Backend (2026-09-13)
 
 Objective: reach SPEC-0011 requirements 3, 5, 8, 10, 14 to 16, 21 and 24 to 26 — the

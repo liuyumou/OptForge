@@ -55,6 +55,23 @@ User-visible changes are recorded here using Conventional Commit terminology.
   rounding. The cost is convergence rate, about which this project claims nothing
   in either direction.
 
+- `optimizer solve --backend highs|host-lp` and `--lp-settings <path>`, under
+  SPEC-0011 requirements 18 and 25. The pinned CPU backend stays the default, and
+  it is the default in the strongest available sense: no threshold exists anywhere
+  that could promote a solve to another backend, so nothing could say otherwise. A
+  dispatch threshold is a recorded measurement under requirements 18 and 19 and is
+  deliberately not committed here; `state/known-failures.md` records why.
+
+  Settings are required when the first-order backend is named and refused for a
+  backend that has none, so a caller who thinks they configured something is told
+  they did not rather than having the flag ignored.
+- `schemas/lp-settings-v1.schema.json`, and `examples/lp-settings-v1.json` and
+  `examples/lp-model-v1.json` alongside it. The settings are their own document
+  because a caller passes one on the command line, so it must be checkable on its
+  own; a solve record `$ref`s it exactly as it already `$ref`s the solve
+  configuration. The new example model is continuous because the existing one is
+  discrete, which the first-order backend refuses by design.
+
 ### Changed
 
 - **Breaking:** solve records move to `solve-record-v2`, under SPEC-0011

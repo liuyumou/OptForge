@@ -6,9 +6,17 @@ Every schema uses JSON Schema draft 2020-12. These are normative interfaces unde
 - [Run configuration](run-config-v1.schema.json)
 - [Benchmark manifest](benchmark-manifest-v1.schema.json)
 - [Experiment result](experiment-result-v1.schema.json)
-- [Solve configuration](solve-config-v1.schema.json) and
-  [solve record](solve-record-v2.schema.json), normative under
-  [SPEC-0002](../docs/specifications/SPEC-0002-backend-contract.md)
+- [Solve configuration](solve-config-v1.schema.json) at version 1 and
+  [solve record](solve-record-v2.schema.json) at version 2, normative under
+  [SPEC-0002](../docs/specifications/SPEC-0002-backend-contract.md). The two carry
+  separate versions: the record gained a settings block under
+  [SPEC-0011](../docs/specifications/SPEC-0011-gpu-lp-backend.md) while the
+  configuration did not change, and a configuration is embedded in the search
+  configuration where a record is embedded nowhere.
+- [First-order LP settings](lp-settings-v1.schema.json), normative under
+  [SPEC-0011](../docs/specifications/SPEC-0011-gpu-lp-backend.md) requirements 9
+  and 10. A solve record embeds this document when the backend that wrote it has
+  such settings.
 - [Search configuration](search-config-v3.schema.json) and
   [search record](search-record-v3.schema.json) at version 3, normative under
   [SPEC-0003](../docs/specifications/SPEC-0003-solver-executive.md),

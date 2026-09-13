@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/liuyumou/OptForge/schemas/lp-settings-v1.schema.json",
+  "title": "First-order LP settings, version 1",
+  "description": "Caller-supplied settings for the first-order linear programming method under SPEC-0011 requirements 9 and 10. Every field changes the iterates and therefore changes the result, which is why the preconditioner and the termination check interval are recorded rather than assumed. There are deliberately no defaults: a default would let two solves with different behaviour produce records that look identical. A document missing any field is refused.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "preconditioner",
+    "iteration_limit",
+    "check_interval",
+    "power_iterations",
+    "restart",
+    "primal_weight"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "preconditioner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ruiz_passes",
+        "pock_chambolle_alpha"
+      ],
+      "properties": {
+        "ruiz_passes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "pock_chambolle_alpha": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        }
+      }
+    },
+    "iteration_limit": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "check_interval": {
+      "description": "Iterations between termination checks. A real parameter under requirement 10, never hidden: it bounds both device synchronization and cancellation latency.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "power_iterations": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "restart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sufficient",
+        "necessary",
+        "artificial"
+      ],
+      "properties": {
+        "sufficient": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "necessary": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "artificial": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "primal_weight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proportional",
+        "integral",
+        "derivative"
+      ],
+      "properties": {
+        "proportional": {
+          "type": "number"
+        },
+        "integral": {
+          "type": "number"
+        },
+        "derivative": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

@@ -391,3 +391,141 @@ fn infeasible_models_complete_without_an_incumbent() {
     assert!(record.get("objective").is_none());
     assert!(record.get("candidate").is_none());
 }
+
+// ---------------------------------------------------------------------------
+// SPEC-0011 requirements 18 and 25: backend selection at the run surface.
+// ---------------------------------------------------------------------------
+
+fn repository_root() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../..")
+        .canonicalize()
+        .expect("repository root")
+}
+
+fn solve_example(backend: Option<&str>, settings: bool) -> std::process::Output {
+    let root = repository_root();
+    let mut command = Command::new(env!("CARGO_BIN_EXE_optimizer"));
+    command
+        .arg("solve")
+        .arg("--model")
+        .arg(root.join("examples/lp-model-v1.json"))
+        .arg("--config")
+        .arg(root.join("examples/solve-config-v1.json"));
+    if let Some(backend) = backend {
+        command.arg("--backend").arg(backend);
+    }
+    if settings {
+        command
+            .arg("--lp-settings")
+            .arg(root.join("examples/lp-settings-v1.json"));
+    }
+    command.output().expect("run solve")
+}
+
+/// Requirement 18: the pinned CPU backend is the default.
+///
+/// Asserted positively, on the backend named in the record, rather than by
+/// observing that nothing else happened. Nothing in the run surface can promote
+/// a solve to another backend: there is no threshold, so the default holds
+/// because no number could say otherwise.
+#[test]
+fn the_default_configuration_reaches_the_pinned_backend() {
+    let output = solve_example(None, false);
+    let text = String::from_utf8(output.stdout).expect("utf-8");
+    let record: serde_json::Value = serde_json::from_str(&text).expect("json");
+    assert_eq!(record["backend"], "highs");
+    assert!(
+        record["lp_settings"].is_null(),
+        "the pinned backend records no first-order settings"
+    );
+}
+
+/// Requirement 25: the first-order backend is reachable by explicit selection,
+/// and the record names it rather than the default.
+#[test]
+fn naming_the_first_order_backend_reaches_it_and_records_its_settings() {
+    let output = solve_example(Some("host-lp"), true);
+    let text = String::from_utf8(output.stdout).expect("utf-8");
+    let record: serde_json::Value = serde_json::from_str(&text).expect("json");
+    assert_eq!(record["backend"], "host-lp");
+    // Requirements 9 and 10: the settings that produced the record are in it.
+    assert_eq!(record["lp_settings"]["check_interval"], 200);
+    assert_eq!(record["lp_settings"]["preconditioner"]["ruiz_passes"], 10);
+    // The embedded configuration stays at version 1 while the record is 2.
+    assert_eq!(record["schema_version"], 2);
+    assert_eq!(record["options"]["schema_version"], 1);
+}
+
+/// The two backends agree on this model, which is what makes selecting one a
+/// choice of implementation rather than a choice of answer.
+#[test]
+fn both_backends_agree_on_the_example_model() {
+    let pinned = solve_example(None, false);
+    let first_order = solve_example(Some("host-lp"), true);
+    let parse = |output: std::process::Output| -> f64 {
+        let text = String::from_utf8(output.stdout).expect("utf-8");
+        let record: serde_json::Value = serde_json::from_str(&text).expect("json");
+        record["objective"].as_f64().expect("an objective")
+    };
+    let expected = parse(pinned);
+    let actual = parse(first_order);
+    assert!(
+        (expected - actual).abs() <= 1e-6 * expected.abs().max(1.0),
+        "{actual} disagrees with the pinned backend's {expected}"
+    );
+}
+
+/// Settings are required rather than defaulted, because requirements 9 and 10
+/// make them recorded state and a default would let two different solves write
+/// records that look identical.
+#[test]
+fn the_first_order_backend_requires_its_settings() {
+    let output = solve_example(Some("host-lp"), false);
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8(output.stderr).expect("utf-8");
+    assert!(stderr.contains("--lp-settings"), "{stderr}");
+}
+
+/// A flag that cannot apply is refused rather than ignored, so a caller who
+/// thinks they configured something is told they did not.
+#[test]
+fn settings_are_refused_for_a_backend_that_has_none() {
+    let output = solve_example(Some("highs"), true);
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8(output.stderr).expect("utf-8");
+    assert!(stderr.contains("--lp-settings"), "{stderr}");
+}
+
+#[test]
+fn an_unknown_backend_is_refused_by_name() {
+    let output = solve_example(Some("cuda-lp"), true);
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8(output.stderr).expect("utf-8");
+    assert!(stderr.contains("unknown backend"), "{stderr}");
+}
+
+/// Requirement 3 end to end: the example discrete model is refused by the
+/// first-order backend and solved by the pinned one, at the run surface rather
+/// than only in a unit test.
+#[test]
+fn a_discrete_model_is_refused_by_the_first_order_backend_at_the_run_surface() {
+    let root = repository_root();
+    let refused = Command::new(env!("CARGO_BIN_EXE_optimizer"))
+        .arg("solve")
+        .arg("--model")
+        .arg(root.join("examples/model-v1.json"))
+        .arg("--config")
+        .arg(root.join("examples/solve-config-v1.json"))
+        .arg("--backend")
+        .arg("host-lp")
+        .arg("--lp-settings")
+        .arg(root.join("examples/lp-settings-v1.json"))
+        .output()
+        .expect("run solve");
+    assert_eq!(refused.status.code(), Some(2));
+    let text = String::from_utf8(refused.stdout).expect("utf-8");
+    let record: serde_json::Value = serde_json::from_str(&text).expect("json");
+    assert_eq!(record["termination"], "unsupported");
+    assert_eq!(record["backend"], "host-lp");
+}
