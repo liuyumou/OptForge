@@ -3,7 +3,7 @@
 Status: accepted
 Owner: numerical backend
 Introduced: C6
-Last reviewed commit: 391edeb
+Last reviewed commit: 7ec4f53
 Superseded by: none; ADR-0001 through ADR-0009 remain in force
 
 ## Context

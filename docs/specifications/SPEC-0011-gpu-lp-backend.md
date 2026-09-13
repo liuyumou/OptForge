@@ -4,10 +4,10 @@ Status: accepted
 Scope: backend capability declaration on the solve contract, the first-order LP method, and its certification
 Owner: numerical backend
 Introduced: C6
-Last reviewed commit: 391edeb
+Last reviewed commit: 7ec4f53
 Supersedes: none; extends SPEC-0002 with a capability declaration
-Implementation: pending
-Tests: pending
+Implementation: [optimizer-core capability declaration](../../crates/optimizer-core/src/capability.rs), [the first-order method and its certification](../../crates/optimizer-lp/src/), [the device kernels](../../cuda/lp_pdhg/lp_pdhg.cu) and [the device backend](../../crates/optimizer-lp-cuda/src/)
+Tests: [first-order acceptance](../../crates/optimizer-highs/tests/first_order.rs), [device acceptance](../../crates/optimizer-lp-cuda/tests/device.rs), [run surface](../../crates/optimizer-cli/tests/solve.rs) and [settings schema contracts](../../tests/integration/test_solve_artifacts.py)
 
 ## Purpose
 
