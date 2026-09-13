@@ -16,6 +16,7 @@ optimizer-experiment = { version = "0.1.0", path = "../optimizer-experiment" }
 optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
 optimizer-highs = { version = "0.1.0", path = "../optimizer-highs" }
 optimizer-lp = { version = "0.1.0", path = "../optimizer-lp" }
+optimizer-lp-cuda = { version = "0.1.0", path = "../optimizer-lp-cuda" }
 optimizer-schedule = { version = "0.1.0", path = "../optimizer-schedule" }
 optimizer-registry = { version = "0.1.0", path = "../optimizer-registry" }
 optimizer-schedule-examples = { version = "0.1.0", path = "../optimizer-schedule-examples" }

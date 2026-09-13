@@ -114,6 +114,8 @@ explicit native settings; owned proof contracts belong to C2.
 | optimizer-registry | Registry documents, resolution, conformance suite | C8 |
 | optimizer-cuda | Discovery, ownership, device selection and residency | M0 / C6 |
 | optimizer-cuda-sys | The CUDA driver boundary and its owned handles | C6 |
+| optimizer-lp | First-order LP form, reduction order, certification, host backend | C6 |
+| optimizer-lp-cuda | The first-order LP kernels and the device backend | C6 |
 | optimizer-experiment | Artifact schemas, run records, verification comparison | M0 / C4 |
 | optimizer-cli | Agent-independent command interface | M0 / C4 |
 
@@ -144,12 +146,24 @@ and timings include them. Multi-GPU work is deferred. See
 [lease implementation](../../crates/optimizer-cuda/src/lib.rs), and
 [acceptance tests](../../crates/optimizer-cli/tests/cli.rs).
 
-C6's device leg is now partly built. `optimizer-cuda-sys` resolves the driver at
-runtime and owns every handle; `optimizer-cuda` holds the lease, decides
-admissibility before any allocation, and keeps an instance resident across calls. Two
-integer kernels evaluate flow-shop schedules and agree with the recurrence exactly.
-Nothing above them dispatches to a device yet, so the leg reaches the flow only from
-test code, which is the same gap C8 closed for extensions.
+C6's device leg is built. `optimizer-cuda-sys` resolves the driver at runtime and owns
+every handle; `optimizer-cuda` holds the lease, decides admissibility before any
+allocation, and keeps an instance resident across calls. Two integer kernels evaluate
+flow-shop schedules and agree with the recurrence exactly, and a second code object
+runs a first-order linear programming iteration in `f64`.
+
+An earlier revision of this paragraph said nothing above the device layer dispatched to
+a device. That is no longer true in either direction: a search reaches the integer
+evaluator through the C3 candidate-producer seam, and `optimizer solve --backend
+cuda-lp` reaches the LP kernels through the backend contract. Neither gains authority
+by doing so, which is the point the next paragraph makes.
+
+The linear-programming half is split across two crates for a reason worth stating.
+`optimizer-lp` holds the method, the certification and a host backend, and takes no
+device dependency at all: it is the oracle the kernels are checked against, and an
+oracle that needed a device would establish nothing. `optimizer-lp-cuda` depends on it
+and never the reverse. Neither contains unsafe code; the device is reached only through
+`optimizer-cuda-sys`.
 
 C6 adds the device leg of the numerical flow, under
 [SPEC-0010](../specifications/SPEC-0010-heterogeneous-computation.md) and

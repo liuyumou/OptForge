@@ -1,5 +1,73 @@
 # Active Task
 
+## C6 Evidence and the Limits It Carries (2026-09-13)
+
+Objective: reach SPEC-0011 requirements 17, 20, 21, 22 and 23 — the two tests ADR-0010
+names as the ones that can fail, the fallback, and the rule that no acceptance artifact
+records a timing — and record what C6 does not establish.
+
+Status: complete. C6 is complete: both its contracts are implemented with evidence, and
+the backlog line closes.
+
+Acceptance gate: `bash tools/check.sh` plus
+`bash tools/gpu_job.sh <uuid> bash tools/gpu_check.sh`. Resource budget: one GPU under
+the shared host lease, for the device runs only.
+
+Requirement 22 needed an early-stopped iterate to mean anything. At convergence the
+certified bound and the pinned backend's can round to the same `f64` — that backend
+sets its bound equal to its objective for a continuous LP — so a converged instance
+would have made "strictly weaker" turn on rounding rather than on the procedure. Three
+iterations produce a bound that is valid and visibly weaker, which is what ADR-0010
+asks for: a certificate that only ever agrees has not been shown to be a certificate.
+
+The other able-to-fail test asserts three things because the hazard has three parts. A
+point outside the row bound looks better than the optimum, `Model::evaluate` refuses it,
+and no multiplier — including two scaled by 1e9 — turns into a bound below the true
+optimum. A wrong kernel's most dangerous output is a plausible number better than the
+truth, and two independent host computations stand in its way.
+
+Requirement 20's fallback is provoked by a code object that is not there, which is a
+real availability failure rather than a simulated one, and the test asserts the failure
+fired before asserting the agreement. Without that ordering the agreement would hold
+just as well if the device had quietly succeeded.
+
+One gap was found by running the end-to-end command rather than by reading the
+contract. The device backend ran to its iteration limit and assessed once, so the
+recorded check interval changed nothing — requirement 10 exists precisely to stop an
+interval being a number that is recorded and ignored. It now assesses at each interval,
+and a test asserts both halves: that the interval is consulted, and that changing it
+leaves the iterates bit for bit identical. The second half is the one that could have
+gone wrong quietly, because the Halpern coefficient sequence has to continue across an
+interval boundary rather than restart at it.
+
+Seven entries were added to `state/known-failures.md` rather than left implied: no
+dispatch threshold for either contract, a fallback that cannot be verified field for
+field, the difference between a device that cannot be opened and one that fails after
+opening, tolerances reused as an optimality-gap policy, bitwise CPU/GPU identity being
+this project's property rather than the contract's, the third device suite not running
+in CI either, and the two candidate explanations any weak bound on a scheduling
+instance would have.
+
+Evidence (2026-09-13, RTX 5090, driver 580.105.08, CUDA 13.0):
+`bash tools/check.sh` passed, exit 0, 380 Rust tests, 72 Python tests, 56 documentation
+pages, every device test reporting an explicit skip.
+`bash tools/gpu_job.sh GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 bash tools/gpu_check.sh`
+passed, exit 0: three device suites, twelve sanitizer runs across memcheck, racecheck,
+initcheck and synccheck, zero errors.
+End to end, `optimizer solve --backend cuda-lp --device GPU-...` writes a record naming
+`cuda-lp`, carrying the settings that produced it, an objective the host recomputed and
+a bound below the true optimum, and terminating as `iteration_limit` rather than
+claiming a proof it did not have at the caller's tolerance.
+
+One observation worth carrying: `tools/check.sh` is CPU-only but not independent of
+device activity. `test_a_named_device_is_refused_rather_than_run_on_the_cpu` blocked for
+the lease's full timeout while a device gate held it, and the gate failed on a timeout
+rather than on a defect. That is the lease behaving as SPEC-0006 specifies, not a new
+fault, but running both gates at once on one host does not work.
+
+Follow-up: C6 is complete. C7 is next and has no specification; it needs one before any
+behavior.
+
 ## C6 First-Order LP Kernels on a Device (2026-09-13)
 
 Objective: reach the device halves of SPEC-0011 requirements 5 to 8 — the iteration's

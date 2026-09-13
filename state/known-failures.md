@@ -24,13 +24,20 @@ the time and is left as written rather than backdated. Anything after `dfdc245`
 is local until the maintainer pushes it, and AGENTS.md's prohibition on
 publishing without authorization is unchanged.
 
-## SPEC-0010 requirement 22 is measured and consulted by nothing
+## No dispatch threshold is committed, for either specification
+
+SPEC-0010 requirement 22 and SPEC-0011 requirements 18 and 19 ask the same thing of
+two different decisions, and neither is answered by a committed number.
 
 The crossover is recorded below and no default reads it. Dispatch is the caller's
-explicit `device` field: there is no threshold anywhere that compares a model
-against the measurement and chooses. "CPU remains the default below the measured
-crossover" therefore holds because CPU is the default everywhere, not because
-anything measured.
+explicit `device` field, or for a backend the explicit `--backend` flag: there is no
+threshold anywhere that compares a model against a measurement and chooses. "CPU
+remains the default below the measured crossover" therefore holds because CPU is the
+default everywhere, not because anything measured.
+
+For SPEC-0011 the position is the same and the mechanism is even simpler: there is no
+threshold document, no `Default` for one, and no code path that could promote a solve
+to another backend. The pinned CPU backend is what runs when nothing is named.
 
 That is deliberate rather than outstanding work. A dispatch threshold is an
 acceptance-shaped number -- it decides what runs where, on evidence from one host --
@@ -38,9 +45,116 @@ and the benchmark protocol requires an ADR and an experiment record before a
 threshold like that is committed. Recording the measurement and leaving the choice
 to the caller is the honest intermediate state.
 
-Reproduction: `grep -rn "crossover" crates/` finds only comments. Next step: an ADR
-proposing a threshold, with the held-out evidence Stage 4 asks for rather than the
-single-host diagnostic recorded here.
+Reproduction: `grep -rn "crossover" crates/` finds only comments, and
+`optimizer solve` with no `--backend` reaches `highs`, asserted positively by
+`the_default_configuration_reaches_the_pinned_backend`. Next step: an ADR proposing
+a threshold, with the held-out evidence Stage 4 asks for rather than the single-host
+diagnostic recorded here. One ADR can cover both decisions or they can be split;
+what neither may do is commit a number without that evidence.
+
+## A fallback cannot be verified field for field
+
+SPEC-0011 requirement 20 requires an availability failure to fall back to the CPU
+backend and produce "the same conclusion". That is satisfiable for the conclusion and
+is not satisfiable for the record. A fallback writes a record naming `highs` where the
+caller asked for `cuda-lp`, so `backend`, `backend_version` and `lp_settings` all
+differ, and `optimizer verify` compares those fields.
+
+So a run that fell back is reproducible only in the sense that re-running it reaches
+the same answer, not in the sense that its record matches one from a run that did not
+fall back. `an_availability_failure_falls_back_to_the_pinned_backend` asserts the
+conclusion and asserts explicitly that the two records name different backends, rather
+than asserting an agreement that does not hold.
+
+The related entry above -- verification assuming an unchanged native library -- is the
+same shape of limit arriving from a different direction.
+
+Reproduction: point `CudaLpBackend::open_with_code_object` at an absent code object and
+compare the record it writes with the pinned backend's. Next step: none proposed. A
+record that recorded "asked for A, ran on B" would make the divergence describable, but
+that is a SPEC-0005 change and needs its own contract.
+
+## A device that cannot be opened is refused, not fallen back from
+
+The two rules meet here and the boundary between them is a choice this implementation
+made rather than one either specification states outright. A device that cannot be
+*opened* -- absent, hidden by `CUDA_VISIBLE_DEVICES`, or not leased -- is a refusal,
+because SPEC-0010 requirement 3 forbids a record claiming a device the run did not use
+and the C6 device work already established that a GPU-naming configuration is refused
+rather than silently run on the CPU. A device that opens and then cannot do the work --
+no code object, not enough memory -- is an availability failure and falls back under
+requirement 20.
+
+Both are defensible and they are not the same rule. A caller who mistypes a UUID gets
+an error; a caller on a correctly named device with an unprovisioned code object gets a
+CPU answer and a diagnostic. That difference is worth knowing before relying on either.
+
+Reproduction: `optimizer solve --backend cuda-lp --device GPU-does-not-exist` versus
+the same command with `AI_OPTIMIZER_CUDA_DIR` pointed at an empty directory. Next step:
+none proposed; if the distinction proves confusing in use it belongs in SPEC-0011's
+Errors and Recovery section rather than in code.
+
+## Tolerances are reused as an optimality-gap policy
+
+SPEC-0011 requirement 14 closes `Optimal` when a certified bound and a validated
+candidate agree "within the caller's tolerances", and the only tolerances a caller
+supplies are `absolute`, `relative` and `integrality` on the solve configuration. Those
+are documented as a *feasibility* policy: they decide whether a candidate satisfies the
+model. Using them as a duality-gap policy overloads them.
+
+The practical consequence is that a caller who wants a strict feasibility check and a
+loose optimality gap, or the reverse, cannot express it. Nothing is wrong today because
+both uses want small numbers, and a gap field cannot be added without changing
+`solve-config-v1`, which SPEC-0011 deliberately leaves at version 1.
+
+Reproduction: read `assess` in `crates/optimizer-lp/src/backend.rs` against
+`Tolerances`'s documentation in `crates/optimizer-core/src/evaluate.rs`. Next step: a
+gap tolerance on the solve configuration, which is a schema change with the cascade
+into `search-config-v3` that SPEC-0011's Compatibility section avoided.
+
+## CPU/GPU bitwise identity is this project's property, not the contract's
+
+SPEC-0011 requirement 8 asks only that a result be bitwise reproducible on a fixed
+device and code object. The device suite asserts something stronger: that the device's
+iterates equal the host engine's bit for bit. That is deliberate -- a tolerance on an
+iterative method is nearly untestable, since one loose enough to pass at iteration ten
+thousand hides a real defect at iteration ten -- but it is not contractual.
+
+It holds because `-fmad=false` removes the device's only contraction, because Rust
+never contracts, and because `log`, `exp` and `sqrt` are computed host-side and passed
+in as scalars. A toolchain that broke any of those would break the assertion without
+breaking the specification.
+
+Reproduction: rebuild `lp_pdhg.cubin` without `-fmad=false` and run
+`the_device_iterates_match_the_host_engine_bitwise`. Next step, if it ever breaks:
+record which operation diverged and narrow the assertion to that operation, rather than
+widening everything to a tolerance and losing the instrument.
+
+## The LP device suite does not run in CI either
+
+The entry above about device acceptance applies unchanged to the three device suites,
+not two. `tools/gpu_check.sh` now runs `optimizer-cuda`, `optimizer-schedule-examples`
+and `optimizer-lp-cuda`, and sanitizes all three under each of the four tools, but the
+labeled GPU runner is still unprovisioned. Every result recorded for SPEC-0011's device
+half is a local run on one host.
+
+Reproduction: `.github/` contains no device job. Next step: unchanged -- provision a
+labeled runner, or keep recording device evidence as local.
+
+## A weak certified bound will have two causes
+
+SPEC-0011's open question is whether a certified bound is ever strong enough to prune
+usefully. On this project's own models that question cannot be answered cleanly yet,
+because the flow-shop encoding's linear relaxation is already weak before any method
+touches it -- which the entry on that encoding records.
+
+So a weak bound on an encoded scheduling instance has two candidate explanations, the
+relaxation and the certification, and attributing it to either without an instance
+family whose relaxation is known to be tight would be wrong.
+
+Reproduction: none needed; it follows from the two contracts. Next step: if the
+question is pursued, measure on instances whose relaxation quality is known
+independently, not on the frozen scheduling subset.
 
 ## Rebuilding a poisoned context is not implemented
 

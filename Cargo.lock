@@ -129,6 +129,7 @@ dependencies = [
  "optimizer-extension",
  "optimizer-highs",
  "optimizer-lp",
+ "optimizer-lp-cuda",
  "optimizer-registry",
  "optimizer-schedule",
  "optimizer-schedule-examples",

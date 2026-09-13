@@ -14,6 +14,7 @@ use optimizer_core::{
 };
 use optimizer_highs::HighsBackend;
 use optimizer_lp::HostLpBackend;
+use optimizer_lp_cuda::CudaLpBackend;
 
 use crate::input::{argument, read};
 
@@ -24,6 +25,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     let mut basis_path = None;
     let mut backend_name = None;
     let mut settings_path = None;
+    let mut device_name = None;
     for pair in options.chunks(2) {
         let [key, value] = pair else {
             return Err(argument("each flag requires a value"));
@@ -38,6 +40,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             "--basis" => &mut basis_path,
             "--backend" => &mut backend_name,
             "--lp-settings" => &mut settings_path,
+            "--device" => &mut device_name,
             _ => return Err(argument(&format!("unknown flag {key}"))),
         };
         if slot.replace(value.as_os_str()).is_some() {
@@ -117,9 +120,53 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
                 .solve(&model, &configuration, &cancel, warm_start)
                 .map_err(io::Error::other)?
         }
+        "cuda-lp" => {
+            let path = settings_path
+                .ok_or_else(|| argument("--backend cuda-lp requires --lp-settings"))?;
+            let settings = LpSettings::from_json(&read(path)?).map_err(io::Error::other)?;
+            let device = device_name
+                .ok_or_else(|| argument("--backend cuda-lp requires --device"))?
+                .to_str()
+                .ok_or_else(|| argument("--device must be UTF-8 text"))?
+                .to_string();
+            let device = optimizer_core::Device::parse(&device).map_err(io::Error::other)?;
+
+            // SPEC-0011 requirement 20 and SPEC-0010 requirement 24: an
+            // availability failure falls back to the CPU backend. The fallback is
+            // the pinned adapter, never the host first-order method -- SPEC-0010
+            // requirement 23 requires a fallback to be the implementation the
+            // project already treats as authoritative, and requirement 26 keeps
+            // the host method a differential oracle rather than a second engine
+            // the run surface may quietly substitute.
+            //
+            // The decision lives here because only here are both backends in
+            // scope. A backend that answered with a different implementation would
+            // write a record naming itself for work it did not do.
+            match crate::registry::open_device(&device)? {
+                Some(session) => {
+                    match device_solve(&session, settings, &model, &configuration, &cancel) {
+                        Ok(record) => record,
+                        Err(reason) => {
+                            eprintln!("solve: falling back to the pinned CPU backend: {reason}");
+                            HighsBackend::new()
+                                .solve(&model, &configuration, &cancel, warm_start)
+                                .map_err(io::Error::other)?
+                        }
+                    }
+                }
+                None => {
+                    eprintln!(
+                        "solve: falling back to the pinned CPU backend: no device was opened"
+                    );
+                    HighsBackend::new()
+                        .solve(&model, &configuration, &cancel, warm_start)
+                        .map_err(io::Error::other)?
+                }
+            }
+        }
         other => {
             return Err(argument(&format!(
-                "unknown backend {other}; expected highs or host-lp"
+                "unknown backend {other}; expected highs, host-lp or cuda-lp"
             )));
         }
     };
@@ -147,6 +194,33 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         .and_then(|()| stdout.flush())
         .map_err(|error| io::Error::other(format!("io: stdout: {error}")))?;
     Ok(code)
+}
+
+/// Run one solve on an opened device, reporting an availability failure as text.
+///
+/// The error is a string rather than a typed failure because the caller's only
+/// response is to fall back and record why; a richer type would suggest a decision
+/// that is not available here.
+fn device_solve(
+    session: &optimizer_cuda::session::DeviceSession,
+    settings: LpSettings,
+    model: &Model,
+    configuration: &SolveOptions,
+    cancel: &CancellationToken,
+) -> Result<optimizer_core::SolveRecord, String> {
+    let context = session.context();
+    let backend = CudaLpBackend::open(context, settings).map_err(|error| error.to_string())?;
+    let record = backend
+        .solve(model, configuration, cancel, None)
+        .map_err(|error| error.to_string())?;
+    if record.termination == Termination::BackendFailure {
+        return Err(record
+            .warnings
+            .first()
+            .cloned()
+            .unwrap_or_else(|| "the device backend failed".to_string()));
+    }
+    Ok(record)
 }
 
 pub(crate) fn install_signal_handler(

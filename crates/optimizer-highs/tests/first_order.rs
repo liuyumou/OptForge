@@ -436,3 +436,178 @@ fn a_cancelled_solve_claims_nothing() {
     assert!(!record.termination.proves_completion());
     assert!(record.best_bound.is_none());
 }
+
+// ---------------------------------------------------------------------------
+// SPEC-0011 requirements 17 and 22, and ADR-0010's two able-to-fail tests.
+// ---------------------------------------------------------------------------
+
+/// Requirement 22: the certified bound is valid and strictly weaker than the
+/// pinned backend's on at least one instance.
+///
+/// ADR-0010 names this as one of the two tests that can fail, and the reason is
+/// that a certificate which only ever agrees has not been shown to be a
+/// certificate. It is asserted on a deliberately early-stopped iterate, which is
+/// also what requirement 13 wants: at convergence the two bounds can round to the
+/// same `f64` -- the pinned backend sets its bound equal to the objective for a
+/// continuous LP -- and the assertion would then turn on rounding rather than on
+/// the procedure.
+#[test]
+fn the_certified_bound_is_valid_and_strictly_weaker_than_the_pinned_backends() {
+    if skip("the_certified_bound_is_valid_and_strictly_weaker_than_the_pinned_backends") {
+        return;
+    }
+    let model = model(
+        "lp-upper",
+        Domain::Continuous,
+        1.0,
+        (Bound::NegativeInfinity, finite(1.5)),
+        [-1.0, -3.0],
+        0.0,
+    );
+    let reference = HighsBackend::new()
+        .solve(&model, &options(), &CancellationToken::new(), None)
+        .expect("solves");
+    let optimum = reference.objective.expect("an objective");
+    let pinned_bound = reference
+        .best_bound
+        .expect("the pinned backend proves a bound");
+
+    // Stopped long before convergence, so the dual iterate is a poor guess.
+    let program = optimizer_lp::LinearProgram::new(&model).expect("continuous");
+    let stopped = LpSettings::published(3, 1);
+    let engine = optimizer_lp::Engine::new(&program, stopped);
+    let (iterate, _) = engine.run(&CancellationToken::new(), |_| {
+        optimizer_lp::Decision::Continue
+    });
+    let certificate =
+        optimizer_lp::certify(&program, &iterate.dual).expect("a boxed program certifies");
+
+    assert!(
+        certificate.bound <= optimum + 1e-9,
+        "the certified bound {} must not exceed the optimum {optimum}",
+        certificate.bound
+    );
+    assert!(
+        certificate.bound < pinned_bound,
+        "an early-stopped certificate must be strictly weaker than the pinned \
+         backend's {pinned_bound}, or it has not been shown to be a certificate: {}",
+        certificate.bound
+    );
+}
+
+/// ADR-0010's other able-to-fail test: an iterate claiming a better-than-optimal
+/// answer is refused twice, and moves nothing.
+///
+/// A wrong kernel's most dangerous output is not a crash but a plausible number
+/// better than the truth. Two independent host computations stand in its way, and
+/// this asserts both: `Model::evaluate` refuses the candidate, so no objective is
+/// published, and certification refuses to turn the same iterate into a bound
+/// below the true optimum.
+#[test]
+fn an_iterate_claiming_better_than_optimal_is_refused_and_moves_nothing() {
+    if skip("an_iterate_claiming_better_than_optimal_is_refused_and_moves_nothing") {
+        return;
+    }
+    let model = model(
+        "lp-upper",
+        Domain::Continuous,
+        1.0,
+        (Bound::NegativeInfinity, finite(1.5)),
+        [-1.0, -3.0],
+        0.0,
+    );
+    let optimum = HighsBackend::new()
+        .solve(&model, &options(), &CancellationToken::new(), None)
+        .expect("solves")
+        .objective
+        .expect("an objective");
+
+    // What a mutated kernel would produce: a point outside the row bound, whose
+    // objective is better than any feasible point's.
+    let fabricated = optimizer_core::Candidate {
+        schema_version: optimizer_core::SCHEMA_VERSION,
+        model_id: "lp-upper".to_string(),
+        values: vec![
+            optimizer_core::Assignment {
+                variable_id: 0,
+                value: 1.0,
+            },
+            optimizer_core::Assignment {
+                variable_id: 1,
+                value: 1.0,
+            },
+        ],
+    };
+    let report = model
+        .evaluate(&fabricated, tolerances())
+        .expect("evaluation itself succeeds");
+    assert!(
+        report.objective < optimum,
+        "the fabricated point must look better than the optimum, or this test is \
+         not exercising the hazard"
+    );
+    assert!(
+        !report.feasible,
+        "the host must refuse a candidate outside the model's own constraints"
+    );
+
+    // And no dual vector -- however the device arrived at it -- turns into a bound
+    // below the true optimum. Certification is valid for an arbitrary vector, so
+    // this is checked over adversarial ones rather than one convenient one.
+    let program = optimizer_lp::LinearProgram::new(&model).expect("continuous");
+    for multiplier in [0.0, -1.0, -1e9, 1e9, 12.5] {
+        let certificate =
+            optimizer_lp::certify(&program, &[multiplier]).expect("a boxed program certifies");
+        assert!(
+            certificate.bound <= optimum + 1e-9,
+            "multiplier {multiplier} produced {} above the optimum {optimum}",
+            certificate.bound
+        );
+    }
+}
+
+/// Requirement 17: used as a relaxation, a non-`Optimal` termination forfeits the
+/// proof claim and prunes nothing by bound.
+///
+/// The executive already enforces this for any backend, and C2's contracts are
+/// where it is established. What is asserted here is that this backend actually
+/// produces such a termination -- a backend that always returned `Optimal` would
+/// satisfy requirement 17 vacuously.
+#[test]
+fn an_iteration_limited_solve_claims_no_proof() {
+    let model = model(
+        "lp-upper",
+        Domain::Continuous,
+        1.0,
+        (Bound::NegativeInfinity, finite(1.5)),
+        [-1.0, -3.0],
+        0.0,
+    );
+    // One iteration cannot converge, so this must not close.
+    let backend = HostLpBackend::new(LpSettings::published(1, 1)).expect("valid settings");
+    let record = backend
+        .solve(&model, &options(), &CancellationToken::new(), None)
+        .expect("solves");
+    assert_ne!(record.termination, Termination::Optimal);
+    assert!(
+        !record.termination.proves_completion(),
+        "a limited solve must claim no completed proof"
+    );
+}
+
+/// Requirement 23: no acceptance artifact records a timing.
+///
+/// Elapsed time is present in a record as a diagnostic, which SPEC-0005 already
+/// fixes, and nothing in this suite asserts on it. This states that rule where a
+/// later edit would see it, because the easiest way to breach requirement 23 is to
+/// add a comparison that looks harmless.
+#[test]
+fn no_assertion_in_this_suite_depends_on_a_measured_time() {
+    let source = include_str!("first_order.rs");
+    for line in source.lines() {
+        let assertion = line.trim_start().starts_with("assert");
+        if assertion && line.contains("elapsed_ms") {
+            panic!("an acceptance assertion must not depend on a measured time: {line}");
+        }
+    }
+}

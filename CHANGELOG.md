@@ -96,6 +96,18 @@ User-visible changes are recorded here using Conventional Commit terminology.
 - `tools/check.sh` refuses atomic accumulation in the LP kernels outside the
   deliberately nondeterministic build. It is CPU-only and is the only guard on a
   host with no GPU, where the device suite that would catch it reports a skip.
+- `optimizer solve --backend cuda-lp --device GPU-<uuid>`, which runs the
+  first-order method on a leased device and falls back to the pinned CPU backend on
+  an availability failure, under SPEC-0011 requirement 20 and SPEC-0010
+  requirements 24 and 26. The fallback is the pinned adapter and never the host
+  first-order method: SPEC-0010 requirement 23 requires a fallback to be the
+  implementation the project already treats as authoritative.
+
+  A device that cannot be opened is refused rather than fallen back from, because a
+  record must not claim a device the run did not use. A device that opens and then
+  cannot do the work is an availability failure and does fall back. Both rules are
+  deliberate and they are not the same rule; `state/known-failures.md` records the
+  boundary.
 
 ### Changed
 

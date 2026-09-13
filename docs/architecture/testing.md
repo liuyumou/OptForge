@@ -42,6 +42,22 @@ neither property: its arithmetic is inexact, so agreement is within the caller's
 tolerances and determinism is a property of a reduction order the specification
 fixes. The two must not be tested as though they were the same thing.
 
+Those distinctions produced three different comparisons in the LP suites, and keeping
+them apart is what makes each mean something. Agreement with the pinned CPU backend is
+on objective value within tolerance, and it is an algorithmic check: the two share no
+implementation, so agreeing is evidence about the method. Agreement between the device
+kernels and the host engine is asserted bitwise, because they are two implementations
+of one fixed reduction order and any difference is a defect rather than a rounding.
+And a certificate is checked against feasible points of the original model rather than
+against either engine, because weak duality is a claim about the model and checking it
+against a solver would be checking two things that could be wrong together.
+
+The bitwise device-to-host assertion is stronger than SPEC-0011 requirement 8 demands,
+which asks only for same-device reproducibility. It is kept because a tolerance on an
+iterative method is nearly untestable -- one loose enough to pass at iteration ten
+thousand hides a real defect at iteration ten -- and recorded in
+`state/known-failures.md` as this project's property rather than the contract's.
+
 Two anti-vacuity rules apply specifically to device tests. A fallback test must
 assert that the fallback actually fired, because a device path that was never
 attempted trivially agrees with the CPU path it did not replace. And a crossover

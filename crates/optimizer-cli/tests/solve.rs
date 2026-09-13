@@ -499,10 +499,53 @@ fn settings_are_refused_for_a_backend_that_has_none() {
 
 #[test]
 fn an_unknown_backend_is_refused_by_name() {
-    let output = solve_example(Some("cuda-lp"), true);
+    // Deliberately not one of the three real names. `cuda-lp` was used here until
+    // it became a backend, which is the kind of drift a name-based negative test
+    // invites; `pdlp` is close enough to be a plausible typo and is not a backend.
+    let output = solve_example(Some("pdlp"), true);
     assert_eq!(output.status.code(), Some(2));
     let stderr = String::from_utf8(output.stderr).expect("utf-8");
     assert!(stderr.contains("unknown backend"), "{stderr}");
+}
+
+/// The device backend needs a device named, and says so rather than picking one.
+///
+/// SPEC-0010 requirement 5 leaves device selection to the caller: there is no
+/// default device, and no measurement or availability check promotes a run to one.
+/// A backend whose name implies a device still has to be told which.
+#[test]
+fn the_device_backend_requires_a_device_to_be_named() {
+    let output = solve_example(Some("cuda-lp"), true);
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8(output.stderr).expect("utf-8");
+    assert!(stderr.contains("--device"), "{stderr}");
+}
+
+/// A malformed device identity is refused before anything is opened.
+///
+/// An enumeration index is the specific shape refused: `CUDA_VISIBLE_DEVICES`
+/// renumbers devices per process, so an index names different hardware in different
+/// runs and a record carrying one could not be re-executed.
+#[test]
+fn an_enumeration_index_is_not_a_device_identity() {
+    let root = repository_root();
+    let output = Command::new(env!("CARGO_BIN_EXE_optimizer"))
+        .arg("solve")
+        .arg("--model")
+        .arg(root.join("examples/lp-model-v1.json"))
+        .arg("--config")
+        .arg(root.join("examples/solve-config-v1.json"))
+        .arg("--backend")
+        .arg("cuda-lp")
+        .arg("--lp-settings")
+        .arg(root.join("examples/lp-settings-v1.json"))
+        .arg("--device")
+        .arg("0")
+        .output()
+        .expect("run solve");
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8(output.stderr).expect("utf-8");
+    assert!(stderr.contains("device must be"), "{stderr}");
 }
 
 /// Requirement 3 end to end: the example discrete model is refused by the

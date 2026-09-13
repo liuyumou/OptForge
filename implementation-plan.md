@@ -31,7 +31,7 @@ exist, this document says so rather than implying it.
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
 | 2. Execution | C2 executive, C3 extension runtime | Complete |
 | 3. Application | C4 run surface, C5 scheduling slice, C8 extension registry | C4, C5 and C8 complete; C9 and C10 not started |
-| 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | C6's SPEC-0010 half complete with evidence; SPEC-0011 GPU LP specified and unimplemented |
+| 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | C6 complete with evidence; C7 not started |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
 
@@ -40,7 +40,8 @@ recorded rather than projected for C4, C5 and C8; the Python SDK and the
 comparative runner that also belong to Stage 3 remain unspecified. Everything
 below that is a plan, and the performance and learning claims in stages 4 and
 beyond are hypotheses, not results. C2 establishes search correctness only, C3
-establishes extension safety only, C4 establishes repeatability only, and C8
+establishes extension safety only, C4 establishes repeatability only, C6
+establishes that a device can be used without gaining authority, and C8
 establishes which extensions a search may consult; none makes a performance
 claim.
 
@@ -285,7 +286,7 @@ GPU candidate evaluator or batched heuristic when independent work justifies it.
 Evaluate GPU LP methods as a complementary backend; approximate results remain
 candidates or warm starts until justified bounds and statuses exist.
 
-That list is now a contract rather than an intention, split across
+That list is now implemented, across
 [SPEC-0010](docs/specifications/SPEC-0010-heterogeneous-computation.md) and
 [SPEC-0011](docs/specifications/SPEC-0011-gpu-lp-backend.md), with
 [ADR-0009](docs/decisions/ADR-0009-cuda-driver-boundary.md) authorizing the CUDA
@@ -315,6 +316,16 @@ takes the device's dual iterate as an untrusted guess, repairs its infeasibility
 against the model's own bounds, and evaluates weak duality in `f64`. A bad guess
 yields a weak bound, never an invalid one, which is why the procedure is a
 certification rather than an optimality test.
+
+What C6 does not claim is worth stating beside what it does. No dispatch threshold is
+committed for either contract, so the CPU remains the default because it is the default
+everywhere rather than because anything measured; a threshold is an acceptance-shaped
+number and needs its own decision record and held-out evidence. Whether either device
+path is ever faster on this project's models is deliberately unmeasured, and whether a
+certified bound is ever strong enough to prune usefully is open and separate from
+whether it is valid. A weak bound on an encoded scheduling instance would have two
+candidate explanations, because the positional encoding's relaxation is already weak
+before any method touches it.
 
 Two prerequisites are recorded rather than assumed. The existing flow-shop
 heuristics are an untuned baseline, and this stage's entry condition requires

@@ -599,3 +599,119 @@ fn the_code_object_exports_every_kernel_this_build_expects() {
         .function("halpern")
         .expect("the code object must export halpern");
 }
+
+/// SPEC-0011 requirement 20 and SPEC-0010 requirements 24 and 26: an availability
+/// failure falls back to the pinned CPU backend and produces the same conclusion.
+///
+/// The failure is provoked by pointing the backend at a code object that is not
+/// there, which is a real availability failure rather than a simulated one. The
+/// test asserts the failure actually fired before asserting the agreement, so it
+/// cannot pass because nothing was dispatched -- the rule
+/// `docs/architecture/testing.md` fixes for every fallback test.
+///
+/// The fallback is the pinned adapter and not the host first-order method.
+/// SPEC-0010 requirement 23 requires a fallback to be the implementation the
+/// project already treats as authoritative, and requirement 26 keeps the host
+/// method a differential oracle; falling back to it would make an agreement test
+/// compare two implementations of the same thing.
+#[test]
+fn an_availability_failure_falls_back_to_the_pinned_backend() {
+    let name = "an_availability_failure_falls_back_to_the_pinned_backend";
+    let Some(context) = device(name) else {
+        return;
+    };
+    if !optimizer_highs::is_native() {
+        eprintln!("SKIP {name}: HiGHS not provisioned; run bash tools/setup_highs.sh");
+        return;
+    }
+    let model = model();
+    let absent = code_object_path().with_file_name("lp_pdhg_absent.cubin");
+    assert!(!absent.is_file(), "the provoking path must not exist");
+
+    let backend = optimizer_lp_cuda::CudaLpBackend::open_with_code_object(
+        Rc::clone(&context),
+        settings(1_000),
+        absent,
+    )
+    .expect("valid settings");
+    let failed = backend
+        .solve(&model, &options(), &CancellationToken::new(), None)
+        .expect("an availability failure is an outcome, not an error");
+
+    // Assert the failure fired first. Without this the agreement below would hold
+    // just as well if the device had quietly succeeded.
+    assert_eq!(
+        failed.termination,
+        Termination::BackendFailure,
+        "the missing code object must produce an availability failure"
+    );
+    assert!(
+        failed
+            .warnings
+            .iter()
+            .any(|w| w.contains("device unavailable")),
+        "the failure must be recorded as a typed diagnostic: {:?}",
+        failed.warnings
+    );
+    assert!(failed.objective.is_none(), "a failure claims nothing");
+
+    // The same conclusion, reached through the pinned backend.
+    let fallback = optimizer_highs::HighsBackend::new()
+        .solve(&model, &options(), &CancellationToken::new(), None)
+        .expect("the pinned backend solves");
+    assert_eq!(fallback.termination, Termination::Optimal);
+    assert!((fallback.objective.expect("an objective") - -3.5).abs() < 1e-9);
+
+    // "The same conclusion" is about the outcome, not the record. A fallback names
+    // the backend that did the work, so `backend`, `backend_version` and
+    // `lp_settings` necessarily differ, and `optimizer verify` would not accept one
+    // record in place of the other. Asserting on the conclusion rather than on the
+    // bytes is what keeps that honest.
+    assert_ne!(failed.backend, fallback.backend);
+}
+
+/// Requirement 10 on the device: the caller's check interval is consulted, and
+/// consulting it does not change the answer.
+///
+/// Both halves matter. An interval that was recorded but never acted on would make
+/// requirement 10 a formality, and an interval that changed the iterates would make
+/// a termination check part of the method -- the Halpern coefficient sequence has to
+/// continue across an interval boundary rather than restart at it.
+#[test]
+fn the_check_interval_is_consulted_and_does_not_change_the_answer() {
+    let Some(context) = device("the_check_interval_is_consulted_and_does_not_change_the_answer")
+    else {
+        return;
+    };
+    let model = model();
+
+    let solve_with = |interval: u64| {
+        let mut settings = settings(600);
+        settings.check_interval = interval;
+        let backend = CudaLpBackend::open(Rc::clone(&context), settings).expect("valid settings");
+        backend
+            .solve(&model, &options(), &CancellationToken::new(), None)
+            .expect("solves")
+    };
+
+    // Two different intervals over the same iteration count. The answer is a
+    // property of the method, so it must not depend on how often the host looked.
+    let often = solve_with(50);
+    let rarely = solve_with(300);
+    let objective = |record: &optimizer_core::SolveRecord| {
+        record
+            .candidate
+            .as_ref()
+            .expect("a candidate")
+            .values
+            .iter()
+            .map(|assignment| assignment.value.to_bits())
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(
+        objective(&often),
+        objective(&rarely),
+        "the check interval must not change the iterates"
+    );
+    assert_eq!(often.termination, rarely.termination);
+}

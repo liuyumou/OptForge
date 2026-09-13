@@ -170,6 +170,18 @@ impl DeviceSession {
         self.context.device()
     }
 
+    /// The leased context, for a consumer that builds its own residency.
+    ///
+    /// Shared rather than borrowed, because a residency must be able to outlive the
+    /// borrow while never outliving the lease. The field order in this struct is
+    /// the drop contract -- context before lease, SPEC-0010 requirement 10 -- and
+    /// handing out an `Rc` keeps that intact: the lease is released only after the
+    /// last holder is gone.
+    #[must_use]
+    pub fn context(&self) -> Rc<Context> {
+        Rc::clone(&self.context)
+    }
+
     /// Make an instance resident on this session's device.
     ///
     /// # Errors

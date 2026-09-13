@@ -48,6 +48,7 @@ pub const BACKEND_VERSION: &str = env!("CARGO_PKG_VERSION");
 pub struct CudaLpBackend {
     context: Rc<Context>,
     settings: LpSettings,
+    code_object: std::path::PathBuf,
 }
 
 impl CudaLpBackend {
@@ -61,8 +62,30 @@ impl CudaLpBackend {
     ///
     /// Returns a document failure when the settings do not validate.
     pub fn open(context: Rc<Context>, settings: LpSettings) -> Result<Self, ValidationError> {
+        Self::open_with_code_object(context, settings, code_object_path())
+    }
+
+    /// Construct a backend against an explicit code object.
+    ///
+    /// Exists so an availability failure can be provoked without mutating a
+    /// process-wide environment variable, which a parallel test harness would make
+    /// racy. Requirement 20's fallback has to be exercised by a test that can
+    /// actually cause the failure, and this is the narrowest way to cause one.
+    ///
+    /// # Errors
+    ///
+    /// Returns a document failure when the settings do not validate.
+    pub fn open_with_code_object(
+        context: Rc<Context>,
+        settings: LpSettings,
+        code_object: std::path::PathBuf,
+    ) -> Result<Self, ValidationError> {
         settings.validate()?;
-        Ok(Self { context, settings })
+        Ok(Self {
+            context,
+            settings,
+            code_object,
+        })
     }
 
     /// The settings this backend runs with.
@@ -77,11 +100,19 @@ impl CudaLpBackend {
         self.context.device()
     }
 
-    /// Run the iteration on the device and return the unscaled iterate.
+    /// Run the iteration on the device, consulting `check` every check interval.
+    ///
+    /// The interval is requirement 10's real parameter rather than a formality:
+    /// each one costs a synchronization and two transfers, because the host cannot
+    /// evaluate a candidate or certify a bound without the iterate. Running to the
+    /// limit and assessing once would be cheaper and would make the interval a
+    /// recorded number that changed nothing, which is exactly what requirement 10
+    /// forbids hiding.
     fn iterate(
         &self,
         program: &LinearProgram,
         cancel: &CancellationToken,
+        mut check: impl FnMut(&[f64], &[f64]) -> bool,
     ) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
         // The host engine owns the scaling and the step size, and the device
         // uploads exactly what it computed. Recomputing the scaling here would
@@ -97,24 +128,41 @@ impl CudaLpBackend {
             engine.scaled_objective(),
             engine.scaled_row_bounds(),
             engine.scaled_column_bounds(),
-            &code_object_path(),
+            &self.code_object,
         )?;
 
         let mut x = engine.start_primal();
         let mut y = engine.start_dual();
         let anchor_x = x.clone();
         let anchor_y = y.clone();
-        let done = residency.advance(
-            &mut x,
-            &mut y,
-            &anchor_x,
-            &anchor_y,
-            0,
-            self.settings.iteration_limit,
-            engine.step(),
-            1.0,
-            cancel,
-        )?;
+        let mut done = 0u64;
+
+        while done < self.settings.iteration_limit {
+            let remaining = self.settings.iteration_limit - done;
+            let chunk = self.settings.check_interval.min(remaining);
+            // `done` is passed as the Halpern iteration count, so restarting the
+            // launch loop at each interval does not restart the coefficient
+            // sequence. Getting that wrong would make the interval change the
+            // answer, which is the one thing a termination check must not do.
+            residency.advance(
+                &mut x,
+                &mut y,
+                &anchor_x,
+                &anchor_y,
+                done,
+                chunk,
+                engine.step(),
+                1.0,
+                cancel,
+            )?;
+            done += chunk;
+
+            let primal = engine.unscale_primal(&x);
+            let dual = engine.unscale_dual(&y);
+            if check(&primal, &dual) {
+                return Ok((primal, dual, done));
+            }
+        }
 
         Ok((engine.unscale_primal(&x), engine.unscale_dual(&y), done))
     }
@@ -156,7 +204,46 @@ impl Backend for CudaLpBackend {
         }
 
         let program = LinearProgram::new(model)?;
-        let (primal, dual, iterations) = match self.iterate(&program, cancel) {
+        // Assessment is the host's, exactly as it is for the host backend: the
+        // candidate is validated against the original model and any bound is
+        // certified from the model's own coefficients. Nothing the device computed
+        // is consulted except the iterate itself.
+        let assess = |primal: &[f64],
+                      dual: &[f64]|
+         -> Option<(Candidate, f64, bool, Option<f64>, bool)> {
+            let candidate = Candidate {
+                schema_version: optimizer_core::SCHEMA_VERSION,
+                model_id: model.document().model_id.clone(),
+                values: program
+                    .variable_ids()
+                    .iter()
+                    .zip(primal)
+                    .map(|(variable_id, value)| optimizer_core::Assignment {
+                        variable_id: *variable_id,
+                        value: *value,
+                    })
+                    .collect(),
+            };
+            let report = model.evaluate(&candidate, options.tolerances).ok()?;
+            let bound = certify(&program, dual).ok().map(|c| c.bound);
+            let closed = match (report.feasible, bound) {
+                (true, Some(bound)) => {
+                    let gap = report.objective - bound;
+                    let scale = report.objective.abs().max(bound.abs());
+                    gap >= -options.tolerances.absolute
+                        && gap <= options.tolerances.absolute + options.tolerances.relative * scale
+                }
+                _ => false,
+            };
+            Some((candidate, report.objective, report.feasible, bound, closed))
+        };
+
+        let mut closed_early = false;
+        let (primal, dual, iterations) = match self.iterate(&program, cancel, |primal, dual| {
+            let stop = assess(primal, dual).is_some_and(|(_, _, _, _, closed)| closed);
+            closed_early |= stop;
+            stop
+        }) {
             Ok(iterate) => iterate,
             Err(DeviceError::Cancelled) => {
                 return Ok(bare(
@@ -185,6 +272,9 @@ impl Backend for CudaLpBackend {
             }
         };
 
+        // Requirement 34 of SPEC-0010 and requirement 15 here: every device-produced
+        // candidate is validated against the original model before publication, and
+        // the objective published is this validation's recomputation.
         let candidate = Candidate {
             schema_version: optimizer_core::SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
@@ -198,21 +288,18 @@ impl Backend for CudaLpBackend {
                 })
                 .collect(),
         };
-        // Requirement 34 of SPEC-0010 and requirement 15 here: every device-produced
-        // candidate is validated against the original model before publication, and
-        // the objective published is this validation's recomputation.
         let report = model.evaluate(&candidate, options.tolerances)?;
         let bound = certify(&program, &dual).ok().map(|c| c.bound);
-
-        let closed = match (report.feasible, bound) {
-            (true, Some(bound)) => {
-                let gap = report.objective - bound;
-                let scale = report.objective.abs().max(bound.abs());
-                gap >= -options.tolerances.absolute
-                    && gap <= options.tolerances.absolute + options.tolerances.relative * scale
-            }
-            _ => false,
-        };
+        let closed = closed_early
+            && match (report.feasible, bound) {
+                (true, Some(bound)) => {
+                    let gap = report.objective - bound;
+                    let scale = report.objective.abs().max(bound.abs());
+                    gap >= -options.tolerances.absolute
+                        && gap <= options.tolerances.absolute + options.tolerances.relative * scale
+                }
+                _ => false,
+            };
 
         let termination = if closed {
             Termination::Optimal

@@ -5,21 +5,29 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-M1, C1, C2, C3, C4, C5 and C8 are complete and specified. The current task is C6,
-heterogeneous computation and GPU feasibility, specified as
+M1, C1, C2, C3, C4, C5, C6 and C8 are complete and specified. C6 was heterogeneous
+computation and GPU feasibility, specified as
 [SPEC-0010](docs/specifications/SPEC-0010-heterogeneous-computation.md) for device
 selection, residency, batching, arithmetic width, fallback, cancellation, recovery and
 the batched integer schedule evaluator, and
 [SPEC-0011](docs/specifications/SPEC-0011-gpu-lp-backend.md) for the GPU linear
-programming backend. SPEC-0010 is implemented with evidence: a search can register
-a device-backed candidate producer, and the record it writes names the device and
-re-executes on it. SPEC-0011 is accepted and unimplemented, so C6 is not complete.
+programming backend. Both are implemented with evidence: a search can register a
+device-backed candidate producer and re-execute from the record it writes, and
+`optimizer solve --backend host-lp|cuda-lp` runs a first-order linear programming
+method whose dual bound comes only from a host-side certification. The next capability
+is C7, adaptive portfolios, which has no specification yet and needs one before any
+behavior.
 Unsafe CUDA code is permitted only inside optimizer-cuda-sys under
 [ADR-0009](docs/decisions/ADR-0009-cuda-driver-boundary.md), which amends ADR-0003's
 single-boundary rule; optimizer-cuda keeps the prohibition and keeps discovery and the
 lease. A device never holds mathematical authority:
 [ADR-0010](docs/decisions/ADR-0010-certified-gpu-lp.md) requires every bound to come
 from a host-side certification that does not assume the device computed correctly.
+`optimizer-lp` holds that certification and the method, takes no device dependency, and
+is the oracle the kernels are differentially checked against; `optimizer-lp-cuda`
+depends on it and never the reverse. Neither is a fallback: a fallback is the pinned
+HiGHS adapter, because SPEC-0010 requirement 23 requires one to be the implementation
+the project already treats as authoritative.
 The C8 local extension registry is implemented under SPEC-0009 and ADR-0008;
 it resolves a named extension identity to an extension this build provides and
 deliberately does not load dynamically distributed native components, which would

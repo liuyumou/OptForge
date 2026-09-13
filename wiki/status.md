@@ -9,8 +9,8 @@ evidence is recorded in [active task](../state/active-task.md).
 
 | State | Features |
 | --- | --- |
-| Implemented | Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
-| In progress | GPU feasibility (C6): SPEC-0010 is implemented with evidence; SPEC-0011's GPU linear-programming backend is accepted and unimplemented |
+| Implemented | A backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
+| In progress | None |
 | Planned | Adaptive research (C7), Python SDK (C9), comparative runner (C10) |
 | Experimental | None enabled |
 | Deprecated | None |
@@ -54,7 +54,7 @@ optimality is asserted only for tiny instances checked against exhaustive
 permutation enumeration, and the frozen Taillard subset carries feasibility and
 determinism evidence only. No best-known bound is committed as a threshold.
 
-C6 is half implemented, and the half is the whole of one contract. Two exist:
+C6 is implemented. Two contracts make it up:
 [heterogeneous computation](../docs/specifications/SPEC-0010-heterogeneous-computation.md)
 fixes device selection, residency, batching, arithmetic width, fallback,
 cancellation, recovery and equivalence, and a
@@ -66,7 +66,7 @@ model like any other, and an approximate LP iterate becomes a dual bound only th
 a host-side certification that treats the device's output as an untrusted guess; a
 bad guess yields a weak bound, never an invalid one.
 
-SPEC-0010 is implemented and SPEC-0011's LP backend is not. Two kernels evaluate
+Both are implemented. Two kernels evaluate
 flow-shop schedules in 32-bit integer arithmetic and agree with the host recurrence
 exactly rather than within a tolerance, which is available only because the
 arithmetic is integer. A search selects a device in its configuration, registers a
@@ -76,6 +76,17 @@ neighbourhood and the proposals are identical. A first crossover is measured: th
 device loses below roughly fifty jobs and context creation costs about 148
 milliseconds, so the CPU remains the default and residency is what makes a device
 worth reaching.
+
+The linear-programming half adds a second and a third backend behind the same
+contract, selected only by an explicit `--backend`. A restarted primal-dual method
+runs on the host or on a device, and in both cases everything it is permitted to claim
+is computed on the host: the candidate is validated against the original model, and a
+dual bound exists only where a host-side certification builds one from the model's own
+coefficients. That certification reads no residual the device computed, which is what
+stops it checking the device against itself, and it is valid for an arbitrary
+multiplier vector -- a bad guess yields a weak bound rather than an invalid one. The
+device's iterates agree with the host engine's bit for bit, which is stronger than the
+contract asks and is recorded as this project's property rather than a guarantee.
 
 No performance claim is made. The crossover is a development diagnostic on one host
 and no default consults it, so "CPU below the crossover" holds because CPU is the
