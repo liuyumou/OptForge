@@ -10,7 +10,7 @@ evidence is recorded in [active task](../state/active-task.md).
 | State | Features |
 | --- | --- |
 | Implemented | Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
-| In progress | GPU feasibility (C6): the device boundary, kernels and equivalence evidence exist; the configuration, CLI and producer surfaces do not |
+| In progress | GPU feasibility (C6): SPEC-0010 is implemented with evidence; SPEC-0011's GPU linear-programming backend is accepted and unimplemented |
 | Planned | Adaptive research (C7), Python SDK (C9), comparative runner (C10) |
 | Experimental | None enabled |
 | Deprecated | None |
@@ -54,7 +54,7 @@ optimality is asserted only for tiny instances checked against exhaustive
 permutation enumeration, and the frozen Taillard subset carries feasibility and
 determinism evidence only. No best-known bound is committed as a threshold.
 
-C6 is partly implemented. Two contracts exist where none did:
+C6 is half implemented, and the half is the whole of one contract. Two exist:
 [heterogeneous computation](../docs/specifications/SPEC-0010-heterogeneous-computation.md)
 fixes device selection, residency, batching, arithmetic width, fallback,
 cancellation, recovery and equivalence, and a
@@ -66,17 +66,22 @@ model like any other, and an approximate LP iterate becomes a dual bound only th
 a host-side certification that treats the device's output as an untrusted guess; a
 bad guess yields a weak bound, never an invalid one.
 
-The device half of SPEC-0010 is implemented and the LP backend of SPEC-0011 is not.
-Two kernels evaluate flow-shop schedules in 32-bit integer arithmetic, and they agree
-with the host recurrence exactly rather than within a tolerance, which is available
-only because the arithmetic is integer. A first crossover is measured: the device
-loses below roughly fifty jobs and context creation costs about 148 milliseconds, so
-the CPU remains the default and residency is what makes a device worth reaching.
-Nothing outside Rust test code can reach a device yet -- there is no device field on
-a search configuration, no probe subcommand and no device-backed producer -- and no
-performance claim is made. Each gap is recorded in
-[known failures](../state/known-failures.md) rather than implied by the parts that
-do work.
+SPEC-0010 is implemented and SPEC-0011's LP backend is not. Two kernels evaluate
+flow-shop schedules in 32-bit integer arithmetic and agree with the host recurrence
+exactly rather than within a tolerance, which is available only because the
+arithmetic is integer. A search selects a device in its configuration, registers a
+device-backed candidate producer, and writes a record that names the hardware and
+re-executes on it; when the device declines, the host computes the same
+neighbourhood and the proposals are identical. A first crossover is measured: the
+device loses below roughly fifty jobs and context creation costs about 148
+milliseconds, so the CPU remains the default and residency is what makes a device
+worth reaching.
+
+No performance claim is made. The crossover is a development diagnostic on one host
+and no default consults it, so "CPU below the crossover" holds because CPU is the
+default everywhere rather than because anything measured. Each remaining gap is
+recorded in [known failures](../state/known-failures.md) rather than implied by the
+parts that work.
 
 See the [M1 contract](../docs/specifications/SPEC-0001-model-and-validation.md),
 [backend contract](../docs/specifications/SPEC-0002-backend-contract.md),

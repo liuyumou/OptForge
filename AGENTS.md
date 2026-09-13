@@ -11,8 +11,10 @@ heterogeneous computation and GPU feasibility, specified as
 selection, residency, batching, arithmetic width, fallback, cancellation, recovery and
 the batched integer schedule evaluator, and
 [SPEC-0011](docs/specifications/SPEC-0011-gpu-lp-backend.md) for the GPU linear
-programming backend. No C6 behavior is implemented yet. Unsafe CUDA code is permitted
-only inside optimizer-cuda-sys under
+programming backend. SPEC-0010 is implemented with evidence: a search can register
+a device-backed candidate producer, and the record it writes names the device and
+re-executes on it. SPEC-0011 is accepted and unimplemented, so C6 is not complete.
+Unsafe CUDA code is permitted only inside optimizer-cuda-sys under
 [ADR-0009](docs/decisions/ADR-0009-cuda-driver-boundary.md), which amends ADR-0003's
 single-boundary rule; optimizer-cuda keeps the prohibition and keeps discovery and the
 lease. A device never holds mathematical authority:

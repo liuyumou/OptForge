@@ -52,9 +52,19 @@ tasks:
   # contract that nothing in C1 through C8 required. Both are C6. The
   # specification key names the first, because it is the one the second depends
   # on for device selection, residency, lease ownership and fallback.
+  # SPEC-0010 is implemented with its evidence recorded; SPEC-0011 is accepted and
+  # unimplemented, so this line stays open. Splitting C6 into two ids would make the
+  # done half look complete on its own, which it is not: the acceptance string below
+  # is one capability's, and a GPU LP backend has to meet the equivalence and
+  # fallback parts of it too.
+  #
+  # `in_progress` is a fourth status value; the others here are complete, ready and
+  # planned. It is introduced deliberately rather than reusing `ready`, which would
+  # say the work has not started, or `complete`, which would say it has finished.
+  # Nothing parses this file, so the vocabulary is for a reader.
   - id: C6
     title: Heterogeneous backend and GPU feasibility
-    status: ready
+    status: in_progress
     depends_on: [C1, C4, C5]
     specification: docs/specifications/SPEC-0010-heterogeneous-computation.md
     acceptance: "CPU/GPU equivalence, sanitizers, lease recovery, fallback and transfer-inclusive measurements"

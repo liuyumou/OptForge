@@ -31,7 +31,7 @@ exist, this document says so rather than implying it.
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
 | 2. Execution | C2 executive, C3 extension runtime | Complete |
 | 3. Application | C4 run surface, C5 scheduling slice, C8 extension registry | C4, C5 and C8 complete; C9 and C10 not started |
-| 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | C6 specified, not implemented |
+| 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | C6's SPEC-0010 half complete with evidence; SPEC-0011 GPU LP specified and unimplemented |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
 

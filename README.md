@@ -1,8 +1,9 @@
 # AI Optimizer
 
 A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. The current milestone is **C8 complete: a search that
-registers an extension is reproducible from its record**. It validates original
+selective GPU acceleration. The current milestone is **SPEC-0010 complete: a search
+can run part of its work on a GPU, and the device holds no mathematical authority
+for doing so**. It validates original
 linear models and candidates, solves them with an independently validated incumbent,
 proves optimality with its own search, accepts separately authored extensions
 without granting them any mathematical authority, and records each search with the
@@ -116,10 +117,12 @@ discovery/ownership, the reproducible run surface and the registry surface;
 optimizer-experiment owns run records, their provenance and the verification
 comparison. Remaining numerical crates reserve ownership boundaries without solver
 APIs. `schemas/`, `examples/`, `tests/`, and `tools/` provide executable contracts.
-`docs/` is authoritative; `wiki/` provides navigation. Python SDK, CUDA kernels,
-dynamically loaded native extensions, checkpoint restart and performance suites are
-deferred, each with its blocker recorded in
-[known failures](state/known-failures.md).
+optimizer-cuda-sys owns the CUDA driver boundary and optimizer-cuda owns discovery,
+the host lease, device selection and residency; `cuda/` holds the kernels, built out
+of tracked source by `tools/setup_cuda.sh`. `docs/` is authoritative; `wiki/`
+provides navigation. Python SDK, GPU linear programming, dynamically loaded native
+extensions, checkpoint restart and performance suites are deferred, each with its
+blocker recorded in [known failures](state/known-failures.md).
 
 ## License
 

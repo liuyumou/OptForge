@@ -117,10 +117,14 @@ never decide one; the ten compared fields decide it.
 ## What this does not do
 
 The registry resolves extensions this build provides. It cannot load a separately
-distributed native extension, which would need a second unsafe boundary ADR-0003
-prohibits, and it refuses an entry requiring a GPU because no device selection
-exists yet. Both refusals are explicit, and both remain recorded in
-[known failures](../../state/known-failures.md).
+distributed native extension: that needs an ABI stability contract, a lifecycle and
+unload story and crash-isolation evidence, none of which exists, and the refusal is
+recorded in [known failures](../../state/known-failures.md).
+
+An entry requiring a GPU resolves only when the run holds a device, and is refused
+with a distinguishable reason when it does not. Selecting a device is the `device`
+field on a search configuration, and holding one means the host lease was taken and
+a context was opened, so the condition cannot be satisfied by claiming it.
 
 A run record names each extension's identity and version but not the registry
 document itself, so licenses and promotion state are auditable through the registry
