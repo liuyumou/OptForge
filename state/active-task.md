@@ -33,7 +33,15 @@ host a full gate pass.
 Evidence (2026-09-13): cloned with `--no-hardlinks` at `6dbaf8c` with no `target/`
 present; `bash tools/check.sh` passed there in 1 minute 35 seconds, exit 0, with 300
 Rust tests, 68 Python tests and 56 documentation pages — the same counts as the
-working tree. `Cargo.lock` is unchanged across the whole branch.
+working tree.
+
+`Cargo.lock` did change across the branch, and the earlier wording here said it had
+not. What it gained is the `optimizer-cuda-sys` entry, its one dependency edge on
+`libc`, and the edges naming the new crate from `optimizer-cuda` and
+`optimizer-schedule-examples`. No third-party crate was added: `libc` was already in
+the lockfile transitively, so the workspace still resolves the same eighteen
+external packages it did before, which is what `cargo deny --locked check` confirms
+on every gate run.
 
 Follow-up: the branch is ready to integrate. C6 itself is not complete: SPEC-0011's
 GPU linear-programming backend is accepted and unimplemented, so the backlog line
