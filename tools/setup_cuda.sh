@@ -7,7 +7,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 out="$(pwd)/target/native/cuda"
-src="$(pwd)/cuda/schedule_eval"
+src="$(pwd)/cuda"
 
 nvcc="${AI_OPTIMIZER_NVCC:-nvcc}"
 if ! command -v "$nvcc" >/dev/null 2>&1; then
@@ -34,8 +34,34 @@ flock --exclusive 9
 arch="${AI_OPTIMIZER_CUDA_ARCH:-120}"
 for stage in cubin ptx; do
     "$nvcc" --"$stage" -arch="sm_${arch}" -O3 -lineinfo \
-        -o "$out/schedule_eval.$stage" "$src/schedule_eval.cu"
+        -o "$out/schedule_eval.$stage" "$src/schedule_eval/schedule_eval.cu"
 done
 
+# The linear-programming kernels are built with -fmad=false. Fused multiply-add
+# rounds once where the host rounds twice, and it is the only contraction that
+# stands between these kernels and bitwise agreement with the host engine: Rust
+# never contracts, and IEEE-754 binary64 add, multiply, divide and square root are
+# correctly rounded and identical to x86-64 otherwise. Disabling it costs nothing
+# measurable here, because SPEC-0011's own arithmetic puts the sparse product at
+# roughly 0.17 operations per byte with about fivefold headroom before the FP64
+# rate could bind.
+#
+# That agreement is a property of this toolchain pair rather than a contract:
+# requirement 8 asks only for same-device reproducibility. The device suite
+# re-verifies it on every run instead of assuming it.
+for stage in cubin ptx; do
+    "$nvcc" --"$stage" -arch="sm_${arch}" -O3 -lineinfo -fmad=false \
+        -o "$out/lp_pdhg.$stage" "$src/lp_pdhg/lp_pdhg.cu"
+done
+
+# A second code object with an atomic reduction substituted, built only so the
+# determinism assertion can be shown to be able to fail. Nothing loads it outside
+# the test that exists to watch it break the assertion, which is what SPEC-0011's
+# acceptance section asks for.
+"$nvcc" --cubin -arch="sm_${arch}" -O3 -lineinfo -fmad=false \
+    -DAI_OPTIMIZER_ATOMIC_REDUCTION \
+    -o "$out/lp_pdhg_atomic.cubin" "$src/lp_pdhg/lp_pdhg.cu"
+
 "$nvcc" --version | tail -2
-echo "setup_cuda: wrote $out/schedule_eval.cubin and $out/schedule_eval.ptx for sm_${arch}"
+echo "setup_cuda: wrote $out/schedule_eval.{cubin,ptx}, $out/lp_pdhg.{cubin,ptx}"
+echo "setup_cuda: and $out/lp_pdhg_atomic.cubin for sm_${arch}"

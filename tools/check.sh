@@ -40,6 +40,27 @@ fi
 for script in tools/*.sh; do
     bash -n "$script"
 done
+
+# The first-order LP kernels must contain no atomic accumulation outside the
+# deliberately nondeterministic build. SPEC-0011 requirements 6 to 8 make the
+# reduction order a contract, and an atomicAdd would silently make a result depend
+# on how the hardware scheduled it -- a defect that reproduces only sometimes and
+# only on a device. This is CPU-only and costs nothing, and it is the sole guard on
+# a host with no GPU, where the device suite that would catch it reports a skip.
+#
+# Matched on the call rather than the bare name, because the file documents the
+# prohibition in a comment and an earlier version of this check flagged its own
+# documentation.
+if ! awk '
+    /#ifdef AI_OPTIMIZER_ATOMIC_REDUCTION/ { guarded = 1 }
+    /#else/ { guarded = 0 }
+    /#endif/ { guarded = 0 }
+    /atomicAdd\(/ { if (!guarded) exit 1 }
+' cuda/lp_pdhg/lp_pdhg.cu; then
+    echo "acceptance gate: atomicAdd outside the deliberately nondeterministic build" >&2
+    echo "acceptance gate: SPEC-0011 requirements 6 to 8 make the reduction order a contract" >&2
+    exit 1
+fi
 git diff --check
 if ! python3 -c 'import jsonschema, markdown' 2>/dev/null; then
     cat >&2 <<'EOF'

@@ -168,6 +168,98 @@ impl<'a> Engine<'a> {
         &self.preconditioner
     }
 
+    /// The program this engine was built for.
+    #[must_use]
+    pub fn program(&self) -> &LinearProgram {
+        self.program
+    }
+
+    /// The settings this engine runs with.
+    #[must_use]
+    pub fn settings(&self) -> LpSettings {
+        self.settings
+    }
+
+    /// The step size derived from the scaled matrix.
+    #[must_use]
+    pub fn step(&self) -> f64 {
+        self.step
+    }
+
+    /// The scaled matrix values, in row-major and column-major order.
+    ///
+    /// Exposed so a device residency can upload exactly what this engine iterates
+    /// on rather than recomputing the scaling itself. Two computations of the same
+    /// scaling would be two things that must agree, and the whole point of the
+    /// host engine is to be the one the device is checked against.
+    #[must_use]
+    pub fn scaled_matrix(&self) -> (&[f64], &[f64]) {
+        (&self.scaled_row_values, &self.scaled_column_values)
+    }
+
+    /// The scaled objective coefficients.
+    #[must_use]
+    pub fn scaled_objective(&self) -> &[f64] {
+        &self.scaled_objective
+    }
+
+    /// The scaled row activity bounds.
+    #[must_use]
+    pub fn scaled_row_bounds(&self) -> (&[f64], &[f64]) {
+        (&self.scaled_row_lower, &self.scaled_row_upper)
+    }
+
+    /// The scaled variable bounds.
+    #[must_use]
+    pub fn scaled_column_bounds(&self) -> (&[f64], &[f64]) {
+        (&self.scaled_column_lower, &self.scaled_column_upper)
+    }
+
+    /// The starting primal point: zero projected onto the scaled variable bounds.
+    ///
+    /// Shared with the device engine so both start from the same place; a
+    /// differential that started from two points would measure the starts.
+    #[must_use]
+    pub fn start_primal(&self) -> Vec<f64> {
+        (0..self.program.column_count())
+            .map(|column| {
+                0.0f64
+                    .max(self.scaled_column_lower[column])
+                    .min(self.scaled_column_upper[column])
+            })
+            .collect()
+    }
+
+    /// The starting dual point.
+    #[must_use]
+    pub fn start_dual(&self) -> Vec<f64> {
+        vec![0.0; self.program.row_count()]
+    }
+
+    /// Unscale a primal iterate into the original model's variables.
+    #[must_use]
+    pub fn unscale_primal(&self, x: &[f64]) -> Vec<f64> {
+        x.iter()
+            .zip(self.preconditioner.column())
+            .map(|(value, scale)| value * scale)
+            .collect()
+    }
+
+    /// Unscale a dual iterate into the original model's rows.
+    #[must_use]
+    pub fn unscale_dual(&self, y: &[f64]) -> Vec<f64> {
+        y.iter()
+            .zip(self.preconditioner.row())
+            .map(|(value, scale)| value * scale)
+            .collect()
+    }
+
+    /// One step of the iteration, exposed for a differential against a device.
+    #[must_use]
+    pub fn step_once(&self, x: &[f64], y: &[f64], weight: f64) -> (Vec<f64>, Vec<f64>) {
+        self.advance(x, y, weight)
+    }
+
     /// Estimate the largest singular value by a fixed number of power iterations.
     fn spectral_norm(&self) -> f64 {
         let columns = self.program.column_count();

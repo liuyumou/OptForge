@@ -1,0 +1,28 @@
+[package]
+name = "optimizer-lp-cuda"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+optimizer-cuda = { version = "0.1.0", path = "../optimizer-cuda" }
+optimizer-cuda-sys = { version = "0.1.0", path = "../optimizer-cuda-sys" }
+optimizer-lp = { version = "0.1.0", path = "../optimizer-lp" }
+
+[dev-dependencies]
+optimizer-highs = { version = "0.1.0", path = "../optimizer-highs" }
+
+# A separate crate rather than a module inside optimizer-cuda. That crate is what
+# every existing GPU consumer depends on, and putting the linear-programming
+# engine there would force optimizer-cuda to depend on optimizer-lp, so the CLI
+# and the scheduling examples would compile an LP engine none of them calls. It
+# would also put a Backend implementation in the crate that owns discovery and the
+# lease, which are unrelated concerns.
+#
+# Workspace lints are inherited, so this crate forbids unsafe. It reaches the
+# device only through optimizer-cuda-sys's safe surface, which is the single new
+# boundary ADR-0009 authorizes; no second boundary is opened here.
+[lints]
+workspace = true

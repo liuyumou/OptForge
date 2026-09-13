@@ -215,6 +215,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "optimizer-lp-cuda"
+version = "0.1.0"
+dependencies = [
+ "optimizer-core",
+ "optimizer-cuda",
+ "optimizer-cuda-sys",
+ "optimizer-highs",
+ "optimizer-lp",
+]
+
+[[package]]
 name = "optimizer-registry"
 version = "0.1.0"
 dependencies = [

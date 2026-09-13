@@ -72,6 +72,31 @@ User-visible changes are recorded here using Conventional Commit terminology.
   configuration. The new example model is continuous because the existing one is
   discrete, which the first-order backend refuses by design.
 
+- `optimizer-lp-cuda` and the `lp_pdhg` code object: the first-order method's
+  kernels running on a device SPEC-0010 selected and leased. A separate crate
+  rather than a module inside `optimizer-cuda`, which every existing GPU consumer
+  depends on and which would otherwise compile a linear-programming engine none of
+  them calls. It inherits the workspace lints, so it forbids unsafe and opens no
+  second boundary: it reaches hardware only through `optimizer-cuda-sys`, the one
+  ADR-0009 authorizes, which gains an `f64` kernel argument and nothing else.
+
+  The device proposes and the host certifies. Every claim a record carries --
+  objective, feasibility, bound, termination -- is produced on the host from the
+  original model, so a wrong kernel yields a refused candidate or a weak bound
+  rather than a wrong answer.
+
+  Reductions use the same fixed partition and tree the host uses, including the
+  second level that reduces per-segment partials. Accumulating those partials left
+  to right instead would agree on every line of at most one segment and disagree on
+  every wider one, which is why a deliberately wide row is part of the acceptance.
+  The kernels are built with `-fmad=false`, which makes device iterates bitwise
+  identical to the host engine's; that is a property of this toolchain pair and is
+  re-verified by the suite rather than claimed as a contract, since requirement 8
+  asks only for same-device reproducibility.
+- `tools/check.sh` refuses atomic accumulation in the LP kernels outside the
+  deliberately nondeterministic build. It is CPU-only and is the only guard on a
+  host with no GPU, where the device suite that would catch it reports a skip.
+
 ### Changed
 
 - **Breaking:** solve records move to `solve-record-v2`, under SPEC-0011

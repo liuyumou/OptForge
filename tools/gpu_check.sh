@@ -33,6 +33,11 @@ export AI_OPTIMIZER_GPU=1
 # The device-backed producer lives with the other scheduling producers, so its
 # contracts do too; both suites are device acceptance and neither is complete alone.
 "$cargo" test --release -p optimizer-schedule-examples --test device
+# The first-order LP kernels under SPEC-0011. A third suite rather than a third
+# case in an existing one: it is a different contract with a different oracle, and
+# its bitwise agreement is with the host engine rather than with an exact integer
+# recurrence.
+"$cargo" test --release -p optimizer-lp-cuda --test device
 
 sanitizer="${AI_OPTIMIZER_COMPUTE_SANITIZER:-compute-sanitizer}"
 if ! command -v "$sanitizer" >/dev/null 2>&1; then
@@ -51,11 +56,12 @@ fi
 
 # The test binary is rebuilt above, so pick the newest matching artifact rather than
 # hard-coding a hash that changes on every edit.
-# Both suites build a binary called `device-*`; sanitize each, newest first, and
-# require both to be present so a rename cannot silently drop one from the gate.
-mapfile -t binaries < <(ls -t target/release/deps/device-* | grep -v '\.d$' | head -2)
-if [[ ${#binaries[@]} -lt 2 ]]; then
-    echo "gpu_check: expected two device test binaries, found ${#binaries[@]}" >&2
+# All three suites build a binary called `device-*`; sanitize each, newest first,
+# and require all three to be present so a rename cannot silently drop one from the
+# gate.
+mapfile -t binaries < <(ls -t target/release/deps/device-* | grep -v '\.d$' | head -3)
+if [[ ${#binaries[@]} -lt 3 ]]; then
+    echo "gpu_check: expected three device test binaries, found ${#binaries[@]}" >&2
     exit 2
 fi
 # One thread: the sanitizers serialize device work anyway, and a parallel harness

@@ -858,6 +858,12 @@ pub enum Argument {
     DevicePtr(u64),
     /// A 32-bit unsigned value.
     U32(u32),
+    /// A 64-bit floating-point value.
+    ///
+    /// SPEC-0011 requirement 5 makes the first-order method `f64` throughout, so a
+    /// step size or a Halpern coefficient reaches a kernel through this. The cell
+    /// below is eight bytes, so this fills it exactly where `U32` fills half.
+    F64(f64),
 }
 
 /// Launch `function` with `arguments` on `stream`.
@@ -883,6 +889,7 @@ pub fn launch(
         match argument {
             Argument::DevicePtr(value) => cell.copy_from_slice(&value.to_ne_bytes()),
             Argument::U32(value) => cell[..4].copy_from_slice(&value.to_ne_bytes()),
+            Argument::F64(value) => cell.copy_from_slice(&value.to_ne_bytes()),
         }
         storage.push(cell);
     }

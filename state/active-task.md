@@ -1,5 +1,67 @@
 # Active Task
 
+## C6 First-Order LP Kernels on a Device (2026-09-13)
+
+Objective: reach the device halves of SPEC-0011 requirements 5 to 8 — the iteration's
+kernels in `f64` on a leased device, with the reduction order fixed so a result cannot
+depend on how the hardware scheduled it.
+
+Status: complete. This is the last implementation slice of SPEC-0011 and therefore of
+C6.
+
+Acceptance gate: `bash tools/check.sh` on the CPU, where every device test reports an
+explicit skip, plus `bash tools/gpu_job.sh <uuid> bash tools/gpu_check.sh` on hardware.
+Resource budget: one GPU under the shared host lease, for the device runs only.
+
+`optimizer-lp-cuda` is a separate crate rather than a module in `optimizer-cuda`. That
+crate is what every existing GPU consumer depends on, so putting the LP engine there
+would force `optimizer-cuda` to depend on `optimizer-lp` and make the CLI and the
+scheduling examples compile an engine none of them calls. It would also put a `Backend`
+implementation in the crate that owns discovery and the lease. The new crate inherits
+the workspace lints, so it forbids unsafe and opens no second boundary: it reaches
+hardware only through `optimizer-cuda-sys`, which is the one ADR-0009 authorizes. The
+single change to that boundary is an `F64` kernel argument, which requirement 5 makes
+unavoidable.
+
+A real defect was caught before it could hide. The first kernel accumulated per-segment
+partials left to right while the host reduces them by the same tree. Those orders agree
+for any line of at most `SEGMENT` entries and disagree for every wider one, so the
+models this project currently produces would all have passed and the defect would have
+surfaced later as an unexplained disagreement on a large instance. The kernel now
+performs the same two-level recursion, and a test builds a deliberately wide row to
+exercise the second level — without it the agreement tests would only ever cover the
+single-segment path.
+
+The able-to-fail instrument for determinism substitutes the atomic reduction *inside*
+`spmv_row` rather than adding a second kernel beside it. A separate kernel could drift
+from the real one and leave the instrument measuring something else; substituting into
+the production path is also literally what the specification's acceptance section asks
+for. The first attempt did add a separate kernel, reached by hand-written launch code in
+the test, and that code faulted — which is its own argument for exercising the machinery
+the other tests use.
+
+Bitwise CPU/GPU identity holds and is asserted, but it is this project's property rather
+than the contract's. Requirement 8 asks only for same-device reproducibility. The
+identity needs `-fmad=false` on the device, Rust never contracting on the host, and the
+`log`, `exp` and `sqrt` staying host-side; the test re-verifies it on every run instead
+of assuming it. A tolerance was rejected because a tolerance on an iterative method is
+nearly untestable: loose enough to pass at iteration ten thousand, it hides a real
+defect at iteration ten.
+
+`tools/check.sh` gains a grep for atomic accumulation outside the guarded build. It is
+CPU-only and it is the sole guard on a host with no GPU, where the device suite reports
+a skip. Its first version flagged the file's own documentation of the prohibition and
+was tightened to match the call rather than the name; both directions were then checked.
+
+Evidence (2026-09-13, RTX 5090, driver 580.105.08, CUDA 13.0):
+`bash tools/check.sh` passed, exit 0, 372 Rust tests, 72 Python tests, 56 documentation
+pages, with all ten device tests reporting explicit skips.
+`bash tools/gpu_job.sh GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 bash tools/gpu_check.sh`
+passed, exit 0: three device suites and twelve sanitizer runs, three binaries under each
+of memcheck, racecheck, initcheck and synccheck, zero errors.
+
+Follow-up: the evidence record and the limits that must be carried rather than hidden.
+
 ## C6 Backend Selection at the Run Surface (2026-09-13)
 
 Objective: reach SPEC-0011 requirements 18 and 25 — the first-order backend
