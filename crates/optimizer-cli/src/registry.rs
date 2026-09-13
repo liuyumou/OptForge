@@ -410,7 +410,11 @@ pub(crate) fn open_device(device: &optimizer_core::Device) -> io::Result<Option<
         || std::path::PathBuf::from(optimizer_cuda::DEFAULT_LOCK_PATH),
         std::path::PathBuf::from,
     );
+    // Every refusal names the device the caller asked for, whichever one fires.
+    // Without this, a host with no provisioned code object reports a path and a
+    // host with no driver reports a driver, and neither says which device was
+    // being opened -- which is the one thing the caller definitely specified.
     DeviceSession::open(uuid, &path, std::time::Duration::from_secs(300))
         .map(Some)
-        .map_err(|error| io::Error::other(format!("unsupported: {error}")))
+        .map_err(|error| io::Error::other(format!("unsupported: device {uuid}: {error}")))
 }

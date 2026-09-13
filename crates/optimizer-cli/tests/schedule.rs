@@ -1043,9 +1043,16 @@ fn a_device_no_registered_extension_needs_is_refused() {
     assert_eq!(result.status.code(), Some(2));
     assert!(!output.exists(), "a refused run writes no record");
     let stderr = String::from_utf8_lossy(&result.stderr);
-    // On a host with no device the refusal comes earlier, when the device cannot be
-    // opened at all. Either way it must refuse and name the device rather than
-    // running on the CPU, which is the property under test.
+    // Which refusal fires depends on the host, and that is the point of asserting
+    // only what every host shares. With a device and a provisioned code object it is
+    // "no extension requires one"; without either it is the session failing to open.
+    // Both must name the device, because that is what the caller specified and it is
+    // what a reader needs in order to know the run did not quietly use the CPU.
+    //
+    // An earlier version of this assertion passed locally and failed in a clean
+    // checkout, where no code object exists and the earlier refusal names a path
+    // rather than a device. The fix was to make every refusal name the device, not
+    // to weaken the assertion.
     assert!(
         stderr.contains("GPU-dfb2449a"),
         "the refusal must name the device: {stderr}"
