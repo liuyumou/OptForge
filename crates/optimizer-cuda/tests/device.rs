@@ -12,6 +12,7 @@
 //! and it is why these tests can live in the ordinary suite rather than in a
 //! separate one that never runs.
 
+use std::rc::Rc;
 use std::sync::atomic::AtomicBool;
 use std::time::Duration;
 
@@ -119,14 +120,14 @@ fn device_makespans_equal_the_host_recurrence() {
         return;
     }
     let _lease = lease();
-    let context = Context::create(&first_device().uuid).expect("context");
+    let context = Rc::new(Context::create(&first_device().uuid).expect("context"));
 
     let mut checked = 0usize;
     for published in SCALE_SUBSET {
         let instance = published.generate().expect("instance generates");
         let jobs = instance.jobs();
         let residency = ScheduleResidency::open(
-            &context,
+            Rc::clone(&context),
             shape(&instance),
             &machine_major(&instance),
             &code_object_path(),
@@ -185,12 +186,12 @@ fn the_device_neighborhood_equals_the_cpu_path() {
         return;
     }
     let _lease = lease();
-    let context = Context::create(&first_device().uuid).expect("context");
+    let context = Rc::new(Context::create(&first_device().uuid).expect("context"));
 
     for published in SCALE_SUBSET {
         let instance = published.generate().expect("instance generates");
         let residency = ScheduleResidency::open(
-            &context,
+            Rc::clone(&context),
             shape(&instance),
             &machine_major(&instance),
             &code_object_path(),
@@ -240,12 +241,12 @@ fn the_device_neighborhood_agrees_with_a_full_recomputation() {
         return;
     }
     let _lease = lease();
-    let context = Context::create(&first_device().uuid).expect("context");
+    let context = Rc::new(Context::create(&first_device().uuid).expect("context"));
 
     for published in DEVELOPMENT_SUBSET {
         let instance = published.generate().expect("instance generates");
         let residency = ScheduleResidency::open(
-            &context,
+            Rc::clone(&context),
             shape(&instance),
             &machine_major(&instance),
             &code_object_path(),
@@ -297,10 +298,10 @@ fn repeating_a_device_evaluation_is_bitwise_identical() {
         return;
     }
     let _lease = lease();
-    let context = Context::create(&first_device().uuid).expect("context");
+    let context = Rc::new(Context::create(&first_device().uuid).expect("context"));
     let instance = SCALE_SUBSET[10].generate().expect("instance generates");
     let residency = ScheduleResidency::open(
-        &context,
+        Rc::clone(&context),
         shape(&instance),
         &machine_major(&instance),
         &code_object_path(),
@@ -336,10 +337,10 @@ fn a_residency_uploads_its_instance_once() {
         return;
     }
     let _lease = lease();
-    let context = Context::create(&first_device().uuid).expect("context");
+    let context = Rc::new(Context::create(&first_device().uuid).expect("context"));
     let instance = SCALE_SUBSET[0].generate().expect("instance generates");
     let residency = ScheduleResidency::open(
-        &context,
+        Rc::clone(&context),
         shape(&instance),
         &machine_major(&instance),
         &code_object_path(),
@@ -432,10 +433,10 @@ fn an_absent_code_object_is_a_named_refusal() {
         return;
     }
     let _lease = lease();
-    let context = Context::create(&first_device().uuid).expect("context");
+    let context = Rc::new(Context::create(&first_device().uuid).expect("context"));
     let instance = SCALE_SUBSET[0].generate().expect("instance generates");
     let error = ScheduleResidency::open(
-        &context,
+        Rc::clone(&context),
         shape(&instance),
         &machine_major(&instance),
         missing,

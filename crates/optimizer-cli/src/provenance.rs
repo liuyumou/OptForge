@@ -8,6 +8,7 @@
 use std::io;
 use std::process::Command;
 
+use optimizer_cuda::session::DeviceSession;
 use optimizer_experiment::{Hardware, Toolchain};
 
 /// Run one provenance command and return its trimmed stdout.
@@ -49,20 +50,25 @@ pub(crate) fn dirty() -> bool {
     text("git", &["status", "--porcelain"]).is_some_and(|status| !status.is_empty())
 }
 
-/// Host facts for a CPU run.
+/// Host facts for a run, naming the device when one was held.
 ///
-/// The three GPU fields stay null: this surface performs no GPU work, and
-/// SPEC-0007 requirement 9 forbids a CPU record claiming GPU execution.
-pub(crate) fn hardware() -> Hardware {
+/// SPEC-0007 requirement 9 is two rules, and this is the one function that has to
+/// satisfy both: a CPU record must not claim GPU execution, and a GPU record must
+/// identify the selected UUID, name and driver. The three fields are therefore all
+/// null or all populated, and they are populated from a [`DeviceSession`] rather
+/// than from a configuration string — holding one means the lease was taken, the
+/// context was created and the driver confirmed the identity, so a record cannot
+/// name a device the run did not actually open.
+pub(crate) fn hardware(device: Option<&DeviceSession>) -> Hardware {
     Hardware {
         os: text("uname", &["-sr"]).unwrap_or_else(|| "unknown".to_owned()),
         cpu: cpu_model(),
         logical_cpus: std::thread::available_parallelism()
             .map(|count| u32::try_from(count.get()).unwrap_or(u32::MAX))
             .unwrap_or(1),
-        gpu_uuid: None,
-        gpu_name: None,
-        driver: None,
+        gpu_uuid: device.map(|session| session.uuid().to_owned()),
+        gpu_name: device.map(|session| session.name().to_owned()),
+        driver: device.map(|session| session.driver_version().to_owned()),
     }
 }
 

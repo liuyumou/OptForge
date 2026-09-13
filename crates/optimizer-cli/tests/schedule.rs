@@ -982,3 +982,72 @@ fn a_node_limited_scheduling_run_reports_its_limit() {
         "a 4-node search proves nothing here"
     );
 }
+
+// ---- SPEC-0010 requirement 6: a named device must be used, or refused ----
+
+/// Requirement 6: a configuration naming a device but registering nothing that
+/// needs one is refused, and writes no record.
+///
+/// This is the sufficient half of requirement 6, and it can only be checked here.
+/// The executive refuses the necessary half -- a device with no registrations at
+/// all -- but cannot see whether a *particular* registration uses one, because
+/// SPEC-0004 keeps the hardware requirement out of an extension's own declaration
+/// and SPEC-0009 puts it in the registry. This surface resolved the registry, so it
+/// is the one that knows.
+///
+/// Running anyway would be worse than an error: the record's provenance would name
+/// a device that sat idle, and verification would re-run the same configuration and
+/// agree, certifying a hardware claim nothing checked.
+#[test]
+fn a_device_no_registered_extension_needs_is_refused() {
+    if !require_native("a_device_no_registered_extension_needs_is_refused") {
+        return;
+    }
+    let sandbox = Sandbox::new();
+    let instance = sandbox.at("instance.json");
+    assert!(
+        sandbox
+            .command()
+            .args(["schedule", "generate", "--instance-id", "device-refusal"])
+            .args(["--seed", "873654221", "--jobs", "4", "--machines", "2"])
+            .arg("--output")
+            .arg(&instance)
+            .status()
+            .expect("generate an instance")
+            .success()
+    );
+    let registry = sandbox.write("registry.json", REGISTRY);
+    // The CPU producer, with a device named. Nothing here requires one.
+    let config = sandbox.write(
+        "config.json",
+        &CONFIG_WITH_PRODUCER.replace(
+            r#""device": "cpu""#,
+            r#""device": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48""#,
+        ),
+    );
+    let output = sandbox.at("record.json");
+
+    let result = sandbox
+        .command()
+        .args(["schedule", "solve", "--instance"])
+        .arg(&instance)
+        .arg("--config")
+        .arg(&config)
+        .arg("--registry")
+        .arg(&registry)
+        .arg("--output")
+        .arg(&output)
+        .output()
+        .expect("run schedule solve");
+
+    assert_eq!(result.status.code(), Some(2));
+    assert!(!output.exists(), "a refused run writes no record");
+    let stderr = String::from_utf8_lossy(&result.stderr);
+    // On a host with no device the refusal comes earlier, when the device cannot be
+    // opened at all. Either way it must refuse and name the device rather than
+    // running on the CPU, which is the property under test.
+    assert!(
+        stderr.contains("GPU-dfb2449a"),
+        "the refusal must name the device: {stderr}"
+    );
+}

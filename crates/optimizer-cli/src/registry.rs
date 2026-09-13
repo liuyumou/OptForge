@@ -13,13 +13,16 @@ use std::ffi::{OsStr, OsString};
 use std::io::{self, Write};
 
 use optimizer_core::Model;
+use optimizer_cuda::session::DeviceSession;
 use optimizer_highs::HighsBackend;
 use optimizer_registry::{
     ConformanceSource, Options, Provided, Provider, ProviderContext, RegistryDocument,
     RegistryEntry, ResolvedSet, resolve_with,
 };
 use optimizer_schedule::FlowShopInstance;
-use optimizer_schedule_examples::{RefusedKind, RefusedProducer, SchedulingProducer};
+use optimizer_schedule_examples::{
+    GpuSchedulingProducer, RefusedKind, RefusedProducer, SchedulingProducer,
+};
 
 use crate::input::{argument, read};
 
@@ -28,11 +31,48 @@ use crate::input::{argument, read};
 /// A flow-shop producer needs its instance, which is why the context carries one
 /// and why an entry declaring `flow_shop_instance` is refused without it: the
 /// producer cannot be constructed from a model alone.
-pub(crate) struct Builtin;
+pub(crate) struct Builtin<'a> {
+    /// The device this run holds, when it holds one.
+    ///
+    /// A device-backed producer needs a residency, and a residency needs a leased
+    /// open context. Carrying the session here rather than in `ProviderContext`
+    /// keeps optimizer-registry free of the driver boundary: resolution only needs
+    /// to know *whether* a device is available, which a UUID answers, while
+    /// construction needs the device itself.
+    pub(crate) device: Option<&'a DeviceSession>,
+}
 
-impl Provider for Builtin {
+impl Provider for Builtin<'_> {
     fn provide(&self, extension_id: &str, context: &ProviderContext<'_>) -> Option<Provided> {
         match extension_id {
+            GpuSchedulingProducer::ID => {
+                // Both are required and neither is this seam's error to report: a
+                // device-requiring entry is refused before construction when no
+                // device is held, and an instance that does not parse means the
+                // caller's bytes are not an instance at all.
+                let session = self.device?;
+                let instance = FlowShopInstance::from_json(context.instance?).ok()?;
+                let jobs = instance.jobs();
+                let machines = instance.machines();
+                let mut times = Vec::with_capacity(jobs * machines);
+                for machine in 0..machines {
+                    for job in 0..jobs {
+                        times.push(instance.processing_time(job, machine));
+                    }
+                }
+                let shape = optimizer_cuda::schedule::InstanceShape {
+                    jobs,
+                    machines,
+                    total_processing_time: (0..jobs).map(|job| instance.job_total(job)).sum(),
+                };
+                // An inadmissible instance makes this identity unprovided rather
+                // than a hard error, so resolution reports it the way it reports
+                // every other identity this build cannot supply.
+                let residency = session.residency(shape, &times).ok()?;
+                Some(Provided::Producer(Box::new(GpuSchedulingProducer::new(
+                    instance, residency,
+                ))))
+            }
             SchedulingProducer::ID => {
                 // A malformed instance is not this seam's error to report: the
                 // caller's document was already parsed before resolution, so
@@ -99,8 +139,18 @@ impl RegistryArguments {
         policies: &[optimizer_extension::ExtensionPolicy],
         model: &'a Model,
         instance: Option<&'a [u8]>,
+        device: Option<&DeviceSession>,
     ) -> io::Result<Option<ResolvedSet>> {
         if policies.is_empty() {
+            // A device with no extension policy at all cannot be used by anything,
+            // which the executive also refuses; saying so here names the device.
+            if let Some(session) = device {
+                return Err(io::Error::other(format!(
+                    "unsupported: this configuration names device {} but no extension policy, \
+                     so nothing in the search could use it",
+                    session.uuid()
+                )));
+            }
             return Ok(None);
         }
         let Some(path) = self.path.as_ref() else {
@@ -110,14 +160,41 @@ impl RegistryArguments {
             ));
         };
         let document = RegistryDocument::from_json(&read(path)?).map_err(io::Error::other)?;
-        let context = instance.map_or_else(
+        let mut context = instance.map_or_else(
             || ProviderContext::new(model),
             |instance| ProviderContext::with_instance(model, instance),
         );
+        if let Some(session) = device {
+            context = context.on_device(session.uuid());
+        }
+
+        // SPEC-0010 requirement 6, the half the executive cannot make. A device is
+        // named, so the record will say so; if no entry this configuration named
+        // actually requires one, the device would sit idle and the record would
+        // claim hardware nothing touched. The entries carry the hardware
+        // requirement, which is why this check belongs here and not in the
+        // executive: SPEC-0004 keeps it out of an extension's own declaration.
+        if let Some(session) = device {
+            let uses_device = policies.iter().any(|policy| {
+                document.entries.iter().any(|entry| {
+                    entry.extension_id == policy.extension_id
+                        && entry.hardware_requirement
+                            == optimizer_registry::HardwareRequirement::Gpu
+                })
+            });
+            if !uses_device {
+                return Err(io::Error::other(format!(
+                    "unsupported: this configuration names device {} but no extension it \
+                     registers requires one, so the device would be unused",
+                    session.uuid()
+                )));
+            }
+        }
+
         let resolved = resolve_with(
             &document.entries,
             policies,
-            &Builtin,
+            &Builtin { device },
             &context,
             &Files,
             Options {
@@ -227,7 +304,10 @@ pub(crate) fn list(options: &[OsString]) -> io::Result<u8> {
 /// its identity as known rather than as absent: the two are different facts and a
 /// listing should not conflate them.
 fn provides(extension_id: &str) -> bool {
-    matches!(extension_id, SchedulingProducer::ID | RefusedProducer::ID)
+    matches!(
+        extension_id,
+        SchedulingProducer::ID | RefusedProducer::ID | GpuSchedulingProducer::ID
+    )
 }
 
 /// Run the conformance suite over one entry and write its record.
@@ -277,9 +357,16 @@ pub(crate) fn check(options: &[OsString]) -> io::Result<u8> {
     };
 
     let backend = HighsBackend::new();
-    let record =
-        optimizer_registry::conformance::run(entry, &Builtin, &backend, instance.as_deref())
-            .map_err(io::Error::other)?;
+    let record = optimizer_registry::conformance::run(
+        entry,
+        // The conformance suite checks a contract, not hardware, so it runs
+        // without a device; a device-requiring entry is refused by the same
+        // rule that refuses one in a search that selected none.
+        &Builtin { device: None },
+        &backend,
+        instance.as_deref(),
+    )
+    .map_err(io::Error::other)?;
     let outcome = record.outcome;
     let document = record.to_json().map_err(io::Error::other)?;
 
@@ -302,4 +389,28 @@ pub(crate) fn check(options: &[OsString]) -> io::Result<u8> {
     // this command, so the record is written either way and only the exit code
     // distinguishes them.
     Ok(u8::from(!outcome))
+}
+
+/// Open the device a configuration names, or nothing when it names the CPU.
+///
+/// Refusing rather than falling back is deliberate. Requirement 24 makes an
+/// availability failure a fallback for a device path the engine chose; this is a
+/// device the *caller* chose, and silently running without it would produce a record
+/// whose configuration names hardware the run never touched.
+///
+/// # Errors
+///
+/// Returns an unsupported failure naming what went wrong: the lease, discovery, the
+/// UUID, or an unprovisioned build.
+pub(crate) fn open_device(device: &optimizer_core::Device) -> io::Result<Option<DeviceSession>> {
+    let optimizer_core::Device::Gpu(uuid) = device else {
+        return Ok(None);
+    };
+    let path = std::env::var_os("AI_OPTIMIZER_GPU_LOCK").map_or_else(
+        || std::path::PathBuf::from(optimizer_cuda::DEFAULT_LOCK_PATH),
+        std::path::PathBuf::from,
+    );
+    DeviceSession::open(uuid, &path, std::time::Duration::from_secs(300))
+        .map(Some)
+        .map_err(|error| io::Error::other(format!("unsupported: {error}")))
 }

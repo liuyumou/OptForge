@@ -115,7 +115,11 @@ fn run(
     // registry the caller named explicitly, and refused when none was named.
     // Running without the named extension would record a search the caller did not
     // ask for, which is what the pre-registry refusal existed to prevent.
-    let resolved = registry.resolve(&configuration.extensions, &model, None)?;
+    // The device is opened before anything else spends budget, and it stays open
+    // for the whole search: requirement 16's residency rule is only meaningful if
+    // the context outlives the calls that use it.
+    let device = crate::registry::open_device(&configuration.device)?;
+    let resolved = registry.resolve(&configuration.extensions, &model, None, device.as_ref())?;
 
     // The revision is required before the search so a run that cannot produce a
     // valid record fails before spending the budget.
@@ -151,7 +155,7 @@ fn run(
         record_id: provenance::record_id("run", &search.model_id, &[&model_sha, &config_sha]),
         revision,
         dirty: provenance::dirty(),
-        hardware: provenance::hardware(),
+        hardware: provenance::hardware(device.as_ref()),
         toolchain: provenance::toolchain(),
         model_fingerprint: fingerprint,
         inputs: vec![
@@ -246,7 +250,16 @@ pub(crate) fn verify(options: &[OsString]) -> io::Result<u8> {
         }
         None => None,
     };
-    let resolved = registry.resolve(&record.search.options.extensions, &model, instance)?;
+    // Verification re-runs on the device the record names, because re-running a
+    // device search on the CPU would compare two different searches and call the
+    // agreement evidence.
+    let device = crate::registry::open_device(&record.search.options.device)?;
+    let resolved = registry.resolve(
+        &record.search.options.extensions,
+        &model,
+        instance,
+        device.as_ref(),
+    )?;
 
     // A resolved extension whose version differs from the one the record names is
     // refused as unsupported, not compared: re-executing against a different

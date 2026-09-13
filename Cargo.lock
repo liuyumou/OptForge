@@ -228,6 +228,7 @@ name = "optimizer-schedule-examples"
 version = "0.1.0"
 dependencies = [
  "optimizer-core",
+ "optimizer-cuda",
  "optimizer-extension",
  "optimizer-schedule",
  "optimizer-solver",

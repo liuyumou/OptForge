@@ -24,52 +24,39 @@ the time and is left as written rather than backdated. Anything after `dfdc245`
 is local until the maintainer pushes it, and AGENTS.md's prohibition on
 publishing without authorization is unchanged.
 
-## SPEC-0010 requirements this slice does not yet reach
+## SPEC-0010 requirements not yet reached
 
-The device path exists and agrees exactly with the host, but SPEC-0010 is not
-finished, and the gap is listed here rather than implied by an unqualified
-"C6 implemented".
+A search now reaches a device end to end, so what remains is smaller and more
+specific than it was. Listed rather than implied by the parts that work.
 
-Not implemented at all. Requirement 22's crossover is measured but is not yet what
-any default consults, because nothing dispatches to a device outside a probe or a
-test. Requirement 35: `optimizer-registry` still refuses every `gpu` hardware
-requirement unconditionally. There is no device-backed candidate producer, so no
-*search* reaches a device -- `optimizer gpu probe` now does, which closes the
-"nothing outside Rust test code" half of this gap but not the half that matters for
-a solve.
+Requirement 22's crossover is measured and no default consults it. Dispatch is the
+caller's explicit `device` field; there is no threshold anywhere that compares a
+model against the recorded crossover and chooses. That is deliberate for now --
+a threshold is an acceptance-shaped number and needs its own record -- but it means
+"CPU remains the default below the measured crossover" holds because CPU is the
+default everywhere, not because anything measured.
 
-A precise note on requirement 1a, because it is easy to read as further along than
-it is. Discovery and the probe both report the driver version, so the field has a
-producer. `Hardware::driver` in a *run record* is still null, and correctly so:
-SPEC-0007 requirement 9 forbids a CPU record claiming GPU execution, and every
-search this build performs is a CPU search. The field gets a non-null value when a
-search runs on a device, which is requirement 35's work, not this one's.
-
-Requirements 6, 40 and 41 are now reached, and the shape of what they reach is worth
-being precise about. A search configuration carries its device, the schema cascade
-that forced is done, and both authorities refuse an earlier version rather than
-migrating it. But the executive *refuses* a configuration naming a device rather
-than honouring one, because no search path dispatches to a device. That refusal is
-the requirement being met, not a placeholder for it: a search that ran on the CPU
-while its record said `GPU-...` would verify, because verification re-runs from the
-same configuration and would also run on the CPU, and the agreement would certify a
-hardware claim nothing checked. Narrowing the refusal to "dispatch when a device is
-available" is what a device-backed search path has to do, and until then the field
-is recorded and honoured only by being refused.
-
-Partly implemented. Requirements 27 to 30: a launch is one call per batch rather than
+Requirements 27 to 30 are partly reached. A launch is one call per batch rather than
 bounded chunks with a cancellation check between them, so cancellation latency is
-bounded by the batch and not by a chunk; `DriverStatus::is_sticky` names the sticky
-statuses and is tested, but nothing yet destroys and rebuilds a context on one.
-Requirement 24's fallback is available -- `device_path_available` and `admissible`
-both answer before any allocation -- but no caller currently chooses between the two
-paths, so the fallback is reachable rather than exercised.
+bounded by the batch rather than by a chunk; at the sizes the device is used for
+that is milliseconds, but the contract asks for chunks and it is chunks that are
+missing. `DriverStatus::is_sticky` names the sticky statuses and is tested, and
+nothing yet destroys and rebuilds a context when one occurs: a sticky fault today
+fails the producer's proposal, which the host records as a refusal, rather than
+rebuilding.
 
-Reproduction: `grep -rn "HardwareRequirement::Gpu" crates/optimizer-registry/src/resolve.rs`
-still shows an unconditional refusal, and `optimizer search` with a configuration
-naming a device exits 2. Next step: the device-backed candidate producer, which is
-what would make requirement 35's refusal worth narrowing and requirement 22's
-crossover worth consulting.
+Requirement 24's fallback is reachable and unexercised in the direction that
+matters. `device_path_available` and `InstanceShape::admissible` both answer before
+any allocation, and an inadmissible instance makes the device producer unprovided so
+the run is refused. What does not exist is a path that *falls back* mid-run: a
+device failure during a search fails that proposal, and the search continues without
+it, which is correct but is not the same as the CPU path producing the identical
+result the device path would have.
+
+Reproduction: `grep -rn "crossover" crates/` finds nothing outside comments, and
+`grep -rn "is_sticky" crates/optimizer-cuda*/src` shows the predicate with no caller
+that rebuilds. Next step: bounded launch chunks with a cancellation check, since
+that is the one an interrupted long device run would notice.
 
 ## Resolved: device sanitizer coverage runs and is clean
 

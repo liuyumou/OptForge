@@ -7,6 +7,10 @@ license.workspace = true
 
 [dependencies]
 optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+# The device producer needs a residency. optimizer-cuda is a published API like the
+# others here, and the dependency runs one way only: nothing in the device layer
+# knows this crate exists.
+optimizer-cuda = { version = "0.1.0", path = "../optimizer-cuda" }
 optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
 optimizer-schedule = { version = "0.1.0", path = "../optimizer-schedule" }
 

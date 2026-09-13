@@ -1,5 +1,87 @@
 # Active Task
 
+## C6 Device-Backed Candidate Producer (2026-09-13)
+
+Objective: make a search reach a device. Until now the device path existed and was
+verified, and nothing outside a test could use it — the same gap C8 closed for
+extensions, open again for hardware.
+
+Status: complete; `optimizer schedule solve` with a device named and
+`flow-shop-neh-gpu` registered runs the neighbourhood on the device, writes a record
+whose provenance names the hardware, and that record re-executes and agrees.
+
+Acceptance gate: every device-produced candidate is feasible by `Model::evaluate`;
+the producer applies exactly the best single insertion move by the host's own
+computation; repeated proposals are identical; a `gpu` registry entry resolves with
+a device and is refused without one, still before construction; a configuration
+naming a device that no registered extension needs is refused and writes no record;
+`bash tools/check.sh` passes with native acceptance covered. Resource budget:
+**GPU, one device under the shared host lease**.
+
+Where the enforcement lives took the most thought. Requirement 6 says a record must
+not claim a device the run did not use, and it has two halves that cannot live in
+one place. The executive can see that a device is named and no extension is
+registered at all, which makes the device certainly unused — that check is
+necessary and it is not sufficient, and the code says so rather than implying
+otherwise. Whether a *particular* registration uses a device needs the hardware
+requirement, which SPEC-0004 deliberately keeps out of an extension's declaration
+and SPEC-0009 puts in the registry. So the sufficient half belongs to the surface
+that resolved the registry. Splitting it felt like a smell until the alternative was
+written down: putting both in the executive would mean teaching it to read registry
+entries, which is exactly the coupling ADR-0008 avoided.
+
+The registry's condition is a UUID, not a device handle, so optimizer-registry stays
+free of the driver boundary. That is sound because of where the UUID comes from: the
+only way to obtain one is `DeviceSession::open`, which leases the host lock, creates
+a context and reads the identity back. A caller cannot fabricate `Some` without
+having done all three, so "a device is selected" and "a device is held" are the same
+statement.
+
+A refactor was needed and is worth recording because it improved the code rather
+than merely enabling it. The driver handles borrowed their context with a lifetime,
+which a producer cannot satisfy: a `Box<dyn CandidateProducer>` has no lifetime to
+borrow from. They now hold `Rc<Context>`, so a context outlives its modules, streams
+and allocations by refcount rather than by the borrow checker. That is strictly more
+robust — the old arrangement was correct only because every holder happened to be
+borrowed from the same scope.
+
+Two mistakes the work caught, both mine.
+
+The first was a wrong test. I asserted the device producer is never worse than
+`SchedulingProducer` and it failed on `ta051`, 4059 against 4040. The producer was
+right and the test was wrong: the CPU producer runs a full sequential pass, up to one
+accepted move per job with each visible to the next, while this one applies a single
+best move. Comparing them compares two algorithms, and neither promises to beat the
+other. The test now asserts what is actually promised — that the move applied is the
+best single move, checked against `insertion_neighborhood` on the host — and the
+old assertion is recorded in its doc comment so the next reader does not reinstate
+it.
+
+The second was a wrong diagnostic, found by a test helper making the obvious error.
+It chose a device from the host inventory, and under `tools/gpu_job.sh` the inventory
+and the driver disagree: the wrapper restricts the process to one device, so the
+inventory's first entry is usually one the driver cannot see. The message was "no
+device with UUID", which is true and sends a reader to check a UUID that is already
+correct. There is now a separate `HiddenFromDriver` refusal naming
+`CUDA_VISIBLE_DEVICES`, and `visible_uuids()` reports what the driver can actually
+see, which is the list a consumer must choose from.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed with the pinned HiGHS 1.11.0
+library linked and **zero test skips other than the fifteen device tests**, exit 0.
+Rust tests rose from 286 to 295 and Python remains 68; documentation remains 56
+pages. `Cargo.lock` is unchanged and one `Cargo.toml` gained one intra-workspace
+edge. Separately, `bash tools/gpu_job.sh <uuid> bash tools/gpu_check.sh` passed both
+device suites — eleven kernel contracts and four producer contracts — and all four
+sanitizers over both binaries, with zero errors and zero hazards, on an RTX 5090.
+
+End to end on an RTX PRO 6000: a scheduling search with the device producer
+registered proved optimality, recorded `gpu_uuid`, `gpu_name` and driver 580.105.08
+in its provenance, and `optimizer verify` re-executed it on the same device and
+agreed on every compared field.
+
+Follow-up: bounded launch chunks with a cancellation check between them, which is
+the part of requirements 27 to 30 an interrupted long device run would notice.
+
 ## C6 Device Probe and Driver Version (2026-09-13)
 
 Objective: give the driver version a producer, under SPEC-0006 requirement 1a, and

@@ -12,6 +12,7 @@
 //! refusal names which one failed instead of leaving a reader to infer it.
 
 use std::path::Path;
+use std::rc::Rc;
 use std::sync::atomic::AtomicBool;
 use std::time::Duration;
 
@@ -93,6 +94,8 @@ pub enum ProbeError {
     Discovery(String),
     /// No visible device carries the requested UUID.
     NotFound(String),
+    /// Management tooling lists the device but the driver cannot see it.
+    HiddenFromDriver(String),
     /// The driver reported a different device than the one requested.
     Mismatch {
         /// What the caller asked for.
@@ -112,6 +115,11 @@ impl std::fmt::Display for ProbeError {
             Self::Lease(detail) => write!(formatter, "host lease unavailable: {detail}"),
             Self::Discovery(detail) => write!(formatter, "device discovery failed: {detail}"),
             Self::NotFound(uuid) => write!(formatter, "no device with UUID {uuid}"),
+            Self::HiddenFromDriver(uuid) => write!(
+                formatter,
+                "management tooling lists {uuid} but the driver cannot see it; \
+                 check CUDA_VISIBLE_DEVICES"
+            ),
             Self::Mismatch {
                 requested,
                 observed,
@@ -175,7 +183,16 @@ pub fn probe(
         .find(|device| device.uuid == uuid)
         .ok_or_else(|| ProbeError::NotFound(uuid.to_string()))?;
 
-    let context = optimizer_cuda_sys::Context::create(uuid).map_err(map_device_error)?;
+    // Discovery found this UUID above, so a driver refusal here means the two
+    // disagree about visibility rather than that the device is absent.
+    let context = Rc::new(optimizer_cuda_sys::Context::create(uuid).map_err(
+        |error| match error {
+            optimizer_cuda_sys::DeviceError::DeviceNotFound(uuid) => {
+                ProbeError::HiddenFromDriver(uuid)
+            }
+            other => map_device_error(other),
+        },
+    )?);
     let device = context.device();
     if device.uuid != uuid {
         return Err(ProbeError::Mismatch {
@@ -252,6 +269,7 @@ mod tests {
             ProbeError::Lease("timed out".into()).to_string(),
             ProbeError::Discovery("nvidia-smi absent".into()).to_string(),
             ProbeError::NotFound("GPU-a".into()).to_string(),
+            ProbeError::HiddenFromDriver("GPU-a".into()).to_string(),
             ProbeError::Mismatch {
                 requested: "GPU-a".into(),
                 observed: "GPU-b".into(),

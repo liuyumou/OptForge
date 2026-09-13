@@ -1419,14 +1419,23 @@ fn the_selected_device_round_trips_through_a_record() {
     assert_eq!(reparsed.options.device, Device::Cpu);
 }
 
-/// Requirement 6: a configuration naming a device is refused, not run on the CPU.
+/// Requirement 6: a device named with nothing registered that could use it is
+/// refused, not run on the CPU.
 ///
 /// This is the case that would be invisible if it were wrong. A search that ran on
 /// the CPU while its record said `GPU-...` would verify: verification re-runs from
 /// the same configuration, would also run on the CPU, and the two would agree. The
 /// agreement would then certify a hardware claim nothing ever checked.
+///
+/// The executive can only make the necessary half of this check. It never
+/// dispatches to a device itself, so the only thing in a search that can use one is
+/// a registered extension, and no registrations means a device is certainly unused.
+/// Whether a *particular* registration uses it needs the hardware requirement that
+/// SPEC-0004 keeps out of an extension's declaration and SPEC-0009 puts in the
+/// registry, so the sufficient half lives in the surface that resolved it and is
+/// asserted in the CLI contracts.
 #[test]
-fn a_device_this_build_cannot_honour_is_refused_rather_than_run_on_the_cpu() {
+fn a_device_with_nothing_registered_to_use_it_is_refused() {
     let fixture = device_fixture();
     let mut named = options();
     named.device = Device::Gpu("GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48".into());

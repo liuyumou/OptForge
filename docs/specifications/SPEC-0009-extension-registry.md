@@ -221,14 +221,18 @@ describe a category or an authority the runtime does not have.
 SPEC-0004's deliberately parked "data needs" field a checked meaning: an entry
 declaring `flow_shop_instance` is refused unless the caller supplied an instance.
 
-`HardwareRequirement` has the variants `cpu` and `gpu`. `gpu` is refused at
-resolution while no device selection exists, because an entry must not be able to
-claim a capability nothing provides.
-[SPEC-0010](SPEC-0010-heterogeneous-computation.md) requirement 35 narrows that
-refusal rather than removing it: once a device is selected and its lease is held,
-a `gpu` entry resolves, and without one it is still refused with a reason
-distinguishable from every other refusal. Requirement 14a is unaffected, because
-the refusal is still decided before the provider is consulted.
+`HardwareRequirement` has the variants `cpu` and `gpu`.
+[SPEC-0010](SPEC-0010-heterogeneous-computation.md) requirement 35 makes `gpu`
+conditional rather than refused outright: it resolves when the run holds a device
+and is refused when it does not, with a reason distinguishable from every other
+refusal. Requirement 14a is unaffected, because the refusal is still decided from
+the entry and the context before the provider is consulted.
+
+The condition is a UUID on the provider context rather than a device handle, which
+keeps this crate free of the driver boundary: resolution needs to know only
+*whether* a device is available, not how to use one. That is sound because the only
+way a caller obtains such a UUID is by leasing the host lock and opening the device,
+so `Some` cannot be fabricated by a run that did neither.
 
 `Promotion` is `experimental`, or `promoted` with a `conformance_path` and a
 `conformance_sha256`. A promoted entry's claim is checkable, which is the whole

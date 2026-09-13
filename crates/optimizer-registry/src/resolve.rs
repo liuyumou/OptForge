@@ -45,6 +45,15 @@ pub struct ProviderContext<'a> {
     pub model: &'a Model,
     /// Auxiliary instance document bytes, when the caller supplied one.
     pub instance: Option<&'a [u8]>,
+    /// UUID of the device this run holds, when it holds one.
+    ///
+    /// A plain string rather than a device handle on purpose: this crate must not
+    /// depend on the driver boundary, and what resolution needs to decide is only
+    /// whether a device is available, not how to use one. The invariant that makes
+    /// that sound lives at the other end -- the only way a caller obtains a UUID to
+    /// put here is by leasing and opening the device -- so `Some` cannot be
+    /// fabricated by a caller that did not.
+    pub device: Option<&'a str>,
 }
 
 impl<'a> ProviderContext<'a> {
@@ -53,6 +62,7 @@ impl<'a> ProviderContext<'a> {
         Self {
             model,
             instance: None,
+            device: None,
         }
     }
 
@@ -61,7 +71,18 @@ impl<'a> ProviderContext<'a> {
         Self {
             model,
             instance: Some(instance),
+            device: None,
         }
+    }
+
+    /// The same context with a device this run has leased and opened.
+    ///
+    /// SPEC-0010 requirement 35 narrows SPEC-0009 requirement 9's refusal: a `gpu`
+    /// entry resolves when a device is selected and is still refused without one.
+    #[must_use]
+    pub fn on_device(mut self, uuid: &'a str) -> Self {
+        self.device = Some(uuid);
+        self
     }
 
     /// Whether this context satisfies one data requirement.
@@ -302,9 +323,11 @@ pub fn resolve_with(
 
         // Checked before the provider is consulted, so an entry requiring a
         // device or missing its data is refused without constructing anything.
-        if entry.hardware_requirement == HardwareRequirement::Gpu {
+        // Requirement 14a still holds: this is decided from the entry and the
+        // context, and nothing is built to decide it.
+        if entry.hardware_requirement == HardwareRequirement::Gpu && context.device.is_none() {
             return Err(unsupported(format!(
-                "{}: requires hardware {}; no device selection exists in this build",
+                "{}: requires hardware {}; this run selected no device",
                 entry.extension_id,
                 entry.hardware_requirement.as_str()
             )));

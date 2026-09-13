@@ -6,6 +6,17 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Changed
 
+- A registry entry requiring a GPU now resolves when the run holds a device, and is
+  still refused when it does not, under SPEC-0010 requirement 35. This narrows
+  SPEC-0009 requirement 9's unconditional refusal rather than removing it, and
+  requirement 14a is unaffected: the decision is still made from the entry and the
+  context, before the provider is consulted and with nothing constructed.
+- A configuration naming a device but registering no extension that needs one is
+  refused. Requirement 6 has two halves and they live in two places: the executive
+  refuses a device with no registrations at all, which is all it can see, and the
+  run surface refuses a device no registered entry requires, because the hardware
+  requirement lives in the registry it resolved. Running anyway would record a
+  device that sat idle and verification would agree with it.
 - **Breaking:** search configurations, search records and run records move to
   `search-config-v3`, `search-record-v3` and `run-record-v2`, under SPEC-0010
   requirements 40 and 41. The configuration gains one field, `device`, which is
@@ -56,6 +67,27 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- `flow-shop-neh-gpu`, the first candidate producer whose work runs on a device,
+  under SPEC-0010 requirements 26 and 33 to 35. Construction stays on the CPU --
+  NEH is `O(n^2 m)` and the measured crossover puts a device behind the CPU below
+  roughly fifty jobs -- and the device evaluates the full insertion neighbourhood,
+  which is the batched part and the part the crossover measured.
+
+  It holds no more authority than any other producer. Its proposals are complete
+  permutations that `Model::evaluate` validates against the original model, so a
+  wrong kernel produces a recorded refusal rather than a wrong incumbent; that is a
+  property of the seam it reaches the engine through, not of the producer's good
+  behaviour.
+- `DeviceSession`, one leased open device for the duration of a run. Holding one
+  means, by construction, that the host lease was taken and a context was created on
+  the named device and its identity was read back from the driver; the lease is
+  released after the context is destroyed. A run naming a device that cannot be
+  opened is refused rather than falling back, because the caller asked for that
+  device and a silent CPU run would record hardware it never touched.
+- A run record's `hardware` block now names the device when one was held, which
+  gives SPEC-0007 requirement 9 its producer. The three GPU fields are all null or
+  all populated, and they come from a `DeviceSession` rather than a configuration
+  string, so a record cannot name a device the run did not open.
 - `optimizer gpu probe --device GPU-<uuid> [--lease acquire|inherited]
   [--timeout-ms N]`, under SPEC-0010 requirements 3, 4 and 9. It takes the shared
   host lease, creates a context on one named device, and writes one JSON report; a

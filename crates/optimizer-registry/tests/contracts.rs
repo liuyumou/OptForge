@@ -301,12 +301,25 @@ fn resolve_one(
     entry: &RegistryEntry,
     provider: &dyn Provider,
 ) -> Result<optimizer_registry::ResolvedSet, optimizer_core::ValidationError> {
+    resolve_one_on(entry, provider, None)
+}
+
+/// Resolve one entry, optionally on a device this run is holding.
+fn resolve_one_on(
+    entry: &RegistryEntry,
+    provider: &dyn Provider,
+    device: Option<&str>,
+) -> Result<optimizer_registry::ResolvedSet, optimizer_core::ValidationError> {
     let model = model();
+    let context = match device {
+        None => ProviderContext::new(&model),
+        Some(uuid) => ProviderContext::new(&model).on_device(uuid),
+    };
     resolve_with(
         std::slice::from_ref(entry),
         &[policy(&entry.extension_id)],
         provider,
-        &ProviderContext::new(&model),
+        &context,
         &optimizer_registry::NoConformance,
         Options {
             allow_experimental: true,
@@ -622,7 +635,13 @@ fn a_satisfied_data_requirement_resolves() {
     assert_eq!(resolved.identities(), vec![HONEST]);
 }
 
-// Requirement 9: a device requirement is refused, and before construction.
+// Requirement 9, as narrowed by SPEC-0010 requirement 35: a device requirement is
+// refused when this run selected no device, and still before construction.
+//
+// The refusal was unconditional until a device path existed. It is now conditional,
+// which is a narrowing rather than a removal: the entry still cannot be resolved by
+// a run that has no device, and the decision is still made from the entry and the
+// context with nothing built to make it, which is requirement 14a.
 #[test]
 fn a_gpu_hardware_requirement_is_refused_before_construction() {
     let mut entry = entry();
@@ -632,7 +651,7 @@ fn a_gpu_hardware_requirement_is_refused_before_construction() {
     let error = resolve_one(&entry, &provider).expect_err("must be refused");
     assert_eq!(error.kind, ErrorKind::Unsupported);
     assert!(
-        error.to_string().contains("no device selection"),
+        error.to_string().contains("selected no device"),
         "found {error}"
     );
     assert_eq!(
@@ -640,6 +659,43 @@ fn a_gpu_hardware_requirement_is_refused_before_construction() {
         0,
         "a refused entry must not be constructed"
     );
+}
+
+// Requirement 35: the same entry resolves when the run holds a device.
+//
+// Without this the narrowing would be untested in the direction that changed: a
+// refusal that never lifts is indistinguishable from the unconditional one it
+// replaced.
+#[test]
+fn a_gpu_hardware_requirement_resolves_when_a_device_is_selected() {
+    let mut entry = entry();
+    entry.hardware_requirement = HardwareRequirement::Gpu;
+    let provider = TestProvider::honest();
+
+    let resolved = resolve_one_on(
+        &entry,
+        &provider,
+        Some("GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48"),
+    )
+    .expect("a gpu entry resolves on a device");
+    assert_eq!(resolved.identities(), vec![HONEST]);
+    assert_eq!(
+        provider.constructions(),
+        1,
+        "resolving must construct exactly once"
+    );
+
+    // A cpu entry is unaffected by the presence of a device, so the new field
+    // gates only what it was added to gate.
+    let cpu = self::entry();
+    let provider = TestProvider::honest();
+    let resolved = resolve_one_on(
+        &cpu,
+        &provider,
+        Some("GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48"),
+    )
+    .expect("a cpu entry resolves on a device too");
+    assert_eq!(resolved.identities(), vec![HONEST]);
 }
 
 // Requirement 10: an absent required identity is refused and named.

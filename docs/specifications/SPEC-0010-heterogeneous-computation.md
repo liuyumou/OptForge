@@ -6,9 +6,9 @@ Owner: heterogeneous computation
 Introduced: C6
 Last reviewed commit: f7505c7
 Supersedes: none; amends SPEC-0006 requirement 1 and SPEC-0009 requirement 9
-Implementation: [device selection](../../crates/optimizer-core/src/solve.rs), [probe](../../crates/optimizer-cuda/src/probe.rs), [driver boundary](../../crates/optimizer-cuda-sys/src/lib.rs), [status mapping](../../crates/optimizer-cuda-sys/src/status.rs), [residency and admissibility](../../crates/optimizer-cuda/src/schedule.rs), [lease ownership](../../crates/optimizer-cuda/src/lib.rs), [kernels](../../cuda/schedule_eval/schedule_eval.cu), [provisioning](../../tools/setup_cuda.sh), [build probe](../../crates/optimizer-cuda/build.rs)
-Tests: [device contracts](../../crates/optimizer-cuda/tests/device.rs), [admissibility and status unit tests](../../crates/optimizer-cuda/src/schedule.rs)
-Implemented: requirements 1 to 4, 6 to 21, 23 to 34 and 36 to 41; requirements 5, 22 and 35 are not reached, and requirements 27 to 30 only partly; see [known failures](../../state/known-failures.md)
+Implementation: [device selection](../../crates/optimizer-core/src/solve.rs), [device session](../../crates/optimizer-cuda/src/session.rs), [probe](../../crates/optimizer-cuda/src/probe.rs), [device producer](../../crates/optimizer-schedule-examples/src/lib.rs), [driver boundary](../../crates/optimizer-cuda-sys/src/lib.rs), [status mapping](../../crates/optimizer-cuda-sys/src/status.rs), [residency and admissibility](../../crates/optimizer-cuda/src/schedule.rs), [lease ownership](../../crates/optimizer-cuda/src/lib.rs), [kernels](../../cuda/schedule_eval/schedule_eval.cu), [provisioning](../../tools/setup_cuda.sh), [build probe](../../crates/optimizer-cuda/build.rs)
+Tests: [device contracts](../../crates/optimizer-cuda/tests/device.rs), [device producer contracts](../../crates/optimizer-schedule-examples/tests/device.rs), [registry resolution](../../crates/optimizer-registry/tests/contracts.rs), [scheduling CLI contracts](../../crates/optimizer-cli/tests/schedule.rs), [admissibility and status unit tests](../../crates/optimizer-cuda/src/schedule.rs)
+Implemented: requirements 1 to 21, 23 to 26 and 31 to 41; requirement 22 is measured but consulted by no default, and requirements 27 to 30 only partly; see [known failures](../../state/known-failures.md)
 
 ## Purpose
 

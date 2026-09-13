@@ -14,6 +14,7 @@
 //! them is validated against the original model like any other.
 
 use std::path::{Path, PathBuf};
+use std::rc::Rc;
 
 use optimizer_cuda_sys::{
     Argument, Context, DeviceBuffer, DeviceError, LaunchConfig, Module, Stream, launch,
@@ -76,13 +77,15 @@ pub fn device_path_available() -> bool {
 
 /// An instance resident in device memory, with its kernels loaded.
 ///
-/// The lifetime ties every device allocation to the context that owns it, so a
-/// program that dropped the context while a buffer was live would not compile.
-pub struct ScheduleResidency<'context> {
-    context: &'context Context,
-    module: Module<'context>,
-    stream: Stream<'context>,
-    times: DeviceBuffer<'context, u32>,
+/// It owns its context through a shared handle rather than borrowing one. That is
+/// what lets a candidate producer own a residency: a producer is a `Box<dyn
+/// CandidateProducer>` with no lifetime to borrow from, so a borrowed residency
+/// could not live inside one.
+pub struct ScheduleResidency {
+    context: Rc<Context>,
+    module: Module,
+    stream: Stream,
+    times: DeviceBuffer<u32>,
     jobs: usize,
     machines: usize,
     /// Counts uploads of instance-invariant data. Requirement 16 says this must be
@@ -220,7 +223,7 @@ impl InstanceShape {
     }
 }
 
-impl<'context> ScheduleResidency<'context> {
+impl ScheduleResidency {
     /// Upload an instance and load the kernels.
     ///
     /// `times` is machine-major, `times[machine * jobs + job]`, matching the
@@ -231,7 +234,7 @@ impl<'context> ScheduleResidency<'context> {
     /// Returns [`DeviceError::Unsupported`] when the shape is inadmissible, naming
     /// the [`Decline`], and an availability failure when the device refuses.
     pub fn open(
-        context: &'context Context,
+        context: Rc<Context>,
         shape: InstanceShape,
         times: &[u32],
         code_object: &Path,
@@ -399,11 +402,17 @@ impl<'context> ScheduleResidency<'context> {
         }
     }
 
-    fn allocate_u32(&self, count: usize) -> Result<DeviceBuffer<'context, u32>, DeviceError> {
+    /// The device this residency is bound to, for a record that must name it.
+    #[must_use]
+    pub fn device(&self) -> &optimizer_cuda_sys::DeviceInfo {
+        self.context.device()
+    }
+
+    fn allocate_u32(&self, count: usize) -> Result<DeviceBuffer<u32>, DeviceError> {
         self.context.allocate::<u32>(count)
     }
 
-    fn allocate_u16(&self, count: usize) -> Result<DeviceBuffer<'context, u16>, DeviceError> {
+    fn allocate_u16(&self, count: usize) -> Result<DeviceBuffer<u16>, DeviceError> {
         self.context.allocate::<u16>(count)
     }
 }

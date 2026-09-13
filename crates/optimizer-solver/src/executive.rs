@@ -526,17 +526,23 @@ pub fn search_with_extensions(
 ) -> Result<SearchRecord, ValidationError> {
     let options = options.validate()?;
     // SPEC-0010 requirement 6: a record must not claim a device the run did not
-    // use. No search path dispatches to a device yet, so a configuration naming one
-    // is refused rather than quietly run on the CPU. Running it would be worse than
-    // an error: the record would carry the device it was asked for, verification
-    // would re-run it on the CPU and agree, and the agreement would certify a claim
-    // nothing checked. Narrowing this refusal is what a device-backed search path
-    // has to do first.
-    if options.device.is_gpu() {
+    // use. The executive itself never dispatches to a device -- it owns node state
+    // and budgets, and SPEC-0003 keeps it backend-neutral -- so the only thing in a
+    // search that can use one is a registered extension. With no registrations,
+    // a named device is certainly unused and the record would claim hardware
+    // nothing touched.
+    //
+    // This check is necessary, not sufficient, and saying so is the point: a
+    // CPU-only producer paired with a named device would pass it. The sufficient
+    // check needs each entry's hardware requirement, which SPEC-0004 deliberately
+    // keeps out of an extension's own declaration and SPEC-0009 puts in the
+    // registry, so it belongs to the surface that resolved the registry rather than
+    // here.
+    if options.device.is_gpu() && registry.is_empty() {
         return Err(ValidationError::new(
             ErrorKind::Unsupported,
             format!(
-                "configuration names device {}; no search path dispatches to a device in this build",
+                "configuration names device {} but registers no extension that could use it",
                 options.device.as_str()
             ),
         ));

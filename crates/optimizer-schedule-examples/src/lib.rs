@@ -17,6 +17,7 @@
 use std::cell::Cell;
 
 use optimizer_core::{Assignment, Candidate};
+use optimizer_cuda::schedule::ScheduleResidency;
 use optimizer_extension::{
     CandidateProducer, Category, DeclaredLimits, EXTENSION_SCHEMA_VERSION, Extension,
     ExtensionDeclaration, ProblemClass, SearchSnapshot,
@@ -229,6 +230,158 @@ impl CandidateProducer for SchedulingProducer {
             && improved != constructed
         {
             sequences.push(improved);
+        }
+        let candidates: Vec<Candidate> = sequences
+            .iter()
+            .filter_map(|sequence| optimizer_schedule::candidate(&self.instance, sequence).ok())
+            .collect();
+        self.proposals
+            .set(self.proposals.get() + candidates.len() as u64);
+        candidates
+    }
+}
+
+/// Proposes the NEH permutation, then the best insertion move a device found.
+///
+/// This is the first producer whose work happens on a device, and the division of
+/// labour is deliberate. Construction stays on the CPU: NEH is `O(n^2 m)` and the
+/// measured crossover puts a device behind the CPU below roughly fifty jobs, so
+/// sending it would be slower and would say nothing. The device evaluates the full
+/// insertion neighbourhood, which is the batched part and the part the crossover
+/// measured.
+///
+/// It holds no more authority than any other producer. The moves it proposes are
+/// complete permutations encoded as candidates, and `Model::evaluate` validates
+/// each one against the original model exactly as it does a CPU producer's. A wrong
+/// kernel therefore produces a recorded refusal, not a wrong answer: SPEC-0010
+/// requirement 34 is not a policy this producer follows, it is a property of the
+/// seam it reaches the engine through.
+pub struct GpuSchedulingProducer {
+    instance: FlowShopInstance,
+    residency: ScheduleResidency,
+    proposals: Cell<u64>,
+    /// Counts device neighbourhood sweeps, separately from proposals.
+    ///
+    /// A test asserting the device did the work cannot use the proposal count: a
+    /// CPU fallback would produce the same proposals. This counts the thing that
+    /// only happens on a device.
+    sweeps: Cell<u64>,
+}
+
+impl std::fmt::Debug for GpuSchedulingProducer {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("GpuSchedulingProducer")
+            .field("instance", &self.instance.instance_id())
+            .field("device", &self.residency.device().uuid)
+            .field("proposals", &self.proposals.get())
+            .finish()
+    }
+}
+
+impl GpuSchedulingProducer {
+    /// Identifier this producer declares.
+    pub const ID: &'static str = "flow-shop-neh-gpu";
+
+    /// Build a producer over an instance already resident on a device.
+    ///
+    /// The residency is constructed by the caller rather than here, because opening
+    /// one needs a leased context and this crate deliberately knows nothing about
+    /// leases. That keeps "who holds the lease" a question with one answer: the
+    /// command surface that took it.
+    pub fn new(instance: FlowShopInstance, residency: ScheduleResidency) -> Self {
+        Self {
+            instance,
+            residency,
+            proposals: Cell::new(0),
+            sweeps: Cell::new(0),
+        }
+    }
+
+    /// How many candidates this producer has returned.
+    pub fn proposals(&self) -> u64 {
+        self.proposals.get()
+    }
+
+    /// How many device neighbourhood sweeps this producer has run.
+    pub fn sweeps(&self) -> u64 {
+        self.sweeps.get()
+    }
+
+    /// The device this producer's instance is resident on.
+    pub fn device_uuid(&self) -> &str {
+        &self.residency.device().uuid
+    }
+
+    /// The best insertion move over the whole neighbourhood of `sequence`.
+    ///
+    /// Ties break on the lowest cost, then the lowest job, then the earliest
+    /// position. That is a total order, so the move does not depend on the order
+    /// the device happened to return its results in, which is what keeps a
+    /// device-produced proposal reproducible.
+    fn best_move(&self, sequence: &[usize]) -> Option<(usize, usize)> {
+        let encoded: Vec<u16> = sequence
+            .iter()
+            .map(|&job| u16::try_from(job).ok())
+            .collect::<Option<Vec<u16>>>()?;
+        let neighborhood = self.residency.insertion_neighborhood(&encoded).ok()?;
+        self.sweeps.set(self.sweeps.get() + 1);
+
+        let mut best: Option<(u32, usize, u32)> = None;
+        for (job, &(cost, position)) in neighborhood.iter().enumerate() {
+            let candidate = (cost, job, position);
+            if best.is_none_or(|current| candidate < current) {
+                best = Some(candidate);
+            }
+        }
+        let (_, job, position) = best?;
+        Some((job, position as usize))
+    }
+}
+
+impl Extension for GpuSchedulingProducer {
+    fn declare(&self) -> ExtensionDeclaration {
+        ExtensionDeclaration {
+            schema_version: EXTENSION_SCHEMA_VERSION,
+            extension_id: Self::ID.to_string(),
+            version: env!("CARGO_PKG_VERSION").to_string(),
+            host_contract_version: EXTENSION_SCHEMA_VERSION,
+            category: Category::CandidateProducer,
+            problem_classes: vec![ProblemClass::Discrete],
+            // Integer maximum and addition are associative and commutative, so no
+            // reduction order on the device can change a makespan. Determinism here
+            // is a property of the arithmetic rather than of the launch
+            // configuration, which is why this producer can declare it and
+            // SPEC-0011's floating-point path will not be able to.
+            deterministic: true,
+            limits: DeclaredLimits {
+                max_invocations: 1,
+                max_proposals: 2,
+            },
+        }
+    }
+}
+
+impl CandidateProducer for GpuSchedulingProducer {
+    fn propose(&self, _snapshot: &SearchSnapshot<'_>) -> Vec<Candidate> {
+        // A failure returns no candidates rather than propagating, because
+        // requirement 21 forbids a producer turning its own trouble into the
+        // caller's error. A device failure is a producer's own trouble.
+        let Ok(constructed) = optimizer_schedule::neh(&self.instance) else {
+            return Vec::new();
+        };
+        let mut sequences = vec![constructed.clone()];
+        if let Some((job, position)) = self.best_move(&constructed) {
+            let mut moved = constructed.clone();
+            if let Some(from) = moved.iter().position(|&candidate| candidate == job) {
+                moved.remove(from);
+                if position <= moved.len() {
+                    moved.insert(position, job);
+                    if moved != constructed {
+                        sequences.push(moved);
+                    }
+                }
+            }
         }
         let candidates: Vec<Candidate> = sequences
             .iter()

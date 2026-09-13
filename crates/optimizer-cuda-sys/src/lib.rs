@@ -12,16 +12,19 @@
 //! link failure, which is what makes SPEC-0010 requirement 37 reachable. And no
 //! NVIDIA code is linked or redistributed.
 //!
-//! Every handle here releases its driver resource on drop, and every `Drop` runs in
-//! the reverse order of acquisition because the types own one another: a
-//! [`DeviceBuffer`] borrows its [`Context`], so the borrow checker refuses a program
-//! that would free a context while device memory is still live.
+//! Every handle here releases its driver resource on drop, and every one of them
+//! holds a shared reference to the [`Context`] it belongs to. That is what makes a
+//! context outlive its modules, streams and allocations no matter what order a
+//! caller drops them in. A borrowed lifetime would express the same rule and would
+//! also force every holder to be borrowed from something, which a candidate producer
+//! owning its own residency cannot be.
 
 use std::ffi::{CStr, CString, c_char, c_int, c_uint, c_void};
 use std::fmt;
 use std::marker::PhantomData;
 use std::path::Path;
 use std::ptr;
+use std::rc::Rc;
 use std::sync::OnceLock;
 
 mod status;
@@ -475,7 +478,7 @@ impl Context {
     ///
     /// Returns an availability failure when the image is not loadable on this
     /// device, which includes a cubin built for another compute capability.
-    pub fn load_module(&self, image: &[u8]) -> Result<Module<'_>> {
+    pub fn load_module(self: &Rc<Self>, image: &[u8]) -> Result<Module> {
         let driver = driver()?;
         self.make_current(driver)?;
         // The driver reads a NUL-terminated image for PTX and a length-prefixed one
@@ -491,7 +494,7 @@ impl Context {
         check(driver, "cuModuleLoadData", status)?;
         Ok(Module {
             raw,
-            _context: PhantomData,
+            _context: Rc::clone(self),
         })
     }
 
@@ -501,7 +504,7 @@ impl Context {
     ///
     /// Returns [`DeviceError::CodeObjectMissing`] when the file is absent, and
     /// whatever [`Context::load_module`] returns otherwise.
-    pub fn load_module_file(&self, path: &Path) -> Result<Module<'_>> {
+    pub fn load_module_file(self: &Rc<Self>, path: &Path) -> Result<Module> {
         let image = std::fs::read(path)
             .map_err(|_| DeviceError::CodeObjectMissing(path.display().to_string()))?;
         self.load_module(&image)
@@ -512,7 +515,7 @@ impl Context {
     /// # Errors
     ///
     /// Returns an availability failure when creation fails.
-    pub fn stream(&self) -> Result<Stream<'_>> {
+    pub fn stream(self: &Rc<Self>) -> Result<Stream> {
         let driver = driver()?;
         self.make_current(driver)?;
         let mut raw: CuStream = ptr::null_mut();
@@ -521,7 +524,7 @@ impl Context {
         check(driver, "cuStreamCreate", status)?;
         Ok(Stream {
             raw,
-            _context: PhantomData,
+            _context: Rc::clone(self),
         })
     }
 
@@ -531,7 +534,7 @@ impl Context {
     ///
     /// Returns an availability failure when the allocation fails, which SPEC-0010
     /// requirement 24 makes a fallback rather than an abort.
-    pub fn allocate<T: Copy>(&self, count: usize) -> Result<DeviceBuffer<'_, T>> {
+    pub fn allocate<T: Copy>(self: &Rc<Self>, count: usize) -> Result<DeviceBuffer<T>> {
         let driver = driver()?;
         self.make_current(driver)?;
         let bytes = count
@@ -549,7 +552,7 @@ impl Context {
         Ok(DeviceBuffer {
             raw,
             count,
-            _context: PhantomData,
+            _context: Rc::clone(self),
             _element: PhantomData,
         })
     }
@@ -578,19 +581,22 @@ unsafe impl Send for Context {}
 
 /// A loaded code object. Borrowing its context is what prevents unloading after the
 /// context it belongs to has been destroyed.
-pub struct Module<'context> {
+pub struct Module {
     raw: CuModule,
-    _context: PhantomData<&'context Context>,
+    // Keeps the context alive for at least as long as this module. Unloading a
+    // module into a destroyed context is the failure this prevents, and it cannot
+    // be prevented by drop order alone once a caller owns both.
+    _context: Rc<Context>,
 }
 
-impl<'context> Module<'context> {
+impl Module {
     /// Look up a kernel by its exported name.
     ///
     /// # Errors
     ///
     /// Returns an availability failure when the module exports no such name, which
     /// in practice means the code object is older than the caller.
-    pub fn function(&self, name: &str) -> Result<Function<'context>> {
+    pub fn function(&self, name: &str) -> Result<Function<'_>> {
         let driver = driver()?;
         let name = CString::new(name)
             .map_err(|_| DeviceError::Unsupported("kernel name contains a NUL".into()))?;
@@ -606,7 +612,7 @@ impl<'context> Module<'context> {
     }
 }
 
-impl Drop for Module<'_> {
+impl Drop for Module {
     fn drop(&mut self) {
         if let Ok(driver) = driver() {
             // SAFETY: `self.raw` is a live module this value owns, dropped once.
@@ -654,12 +660,12 @@ impl Function<'_> {
 
 /// An owned stream. Work is ordered within one and this crate uses exactly one per
 /// residency, so ordering is explicit rather than implied by the default stream.
-pub struct Stream<'context> {
+pub struct Stream {
     raw: CuStream,
-    _context: PhantomData<&'context Context>,
+    _context: Rc<Context>,
 }
 
-impl Stream<'_> {
+impl Stream {
     /// Block until everything queued on this stream has finished.
     ///
     /// # Errors
@@ -674,7 +680,7 @@ impl Stream<'_> {
     }
 }
 
-impl Drop for Stream<'_> {
+impl Drop for Stream {
     fn drop(&mut self) {
         if let Ok(driver) = driver() {
             // SAFETY: `self.raw` is a live stream this value owns, dropped once.
@@ -689,14 +695,14 @@ impl Drop for Stream<'_> {
 ///
 /// `T: Copy` is required because the bytes are transferred verbatim: a type with a
 /// destructor or an interior pointer would be meaningless on a device.
-pub struct DeviceBuffer<'context, T: Copy> {
+pub struct DeviceBuffer<T: Copy> {
     raw: CuDevicePtr,
     count: usize,
-    _context: PhantomData<&'context Context>,
+    _context: Rc<Context>,
     _element: PhantomData<T>,
 }
 
-impl<T: Copy> DeviceBuffer<'_, T> {
+impl<T: Copy> DeviceBuffer<T> {
     /// Element count.
     #[must_use]
     pub fn len(&self) -> usize {
@@ -722,7 +728,7 @@ impl<T: Copy> DeviceBuffer<'_, T> {
     ///
     /// Returns [`DeviceError::Unsupported`] when `source` is longer than the
     /// allocation, and an availability failure when the copy fails.
-    pub fn copy_from(&mut self, source: &[T], stream: &Stream<'_>) -> Result<()> {
+    pub fn copy_from(&mut self, source: &[T], stream: &Stream) -> Result<()> {
         if source.len() > self.count {
             return Err(DeviceError::Unsupported(format!(
                 "copy of {} elements into a buffer of {}",
@@ -759,7 +765,7 @@ impl<T: Copy> DeviceBuffer<'_, T> {
     ///
     /// Returns [`DeviceError::Unsupported`] when `destination` is longer than the
     /// allocation, and an availability failure when the copy fails.
-    pub fn copy_to(&self, destination: &mut [T], stream: &Stream<'_>) -> Result<()> {
+    pub fn copy_to(&self, destination: &mut [T], stream: &Stream) -> Result<()> {
         if destination.len() > self.count {
             return Err(DeviceError::Unsupported(format!(
                 "copy of {} elements out of a buffer of {}",
@@ -783,7 +789,7 @@ impl<T: Copy> DeviceBuffer<'_, T> {
     }
 }
 
-impl<T: Copy> Drop for DeviceBuffer<'_, T> {
+impl<T: Copy> Drop for DeviceBuffer<T> {
     fn drop(&mut self) {
         if let Ok(driver) = driver() {
             // SAFETY: `self.raw` is a live allocation this value owns, dropped once.
@@ -829,7 +835,7 @@ pub fn launch(
     function: &Function<'_>,
     config: LaunchConfig,
     arguments: &[Argument],
-    stream: &Stream<'_>,
+    stream: &Stream,
 ) -> Result<()> {
     let driver = driver()?;
     // Copy every argument into a local array first, then build the pointer array

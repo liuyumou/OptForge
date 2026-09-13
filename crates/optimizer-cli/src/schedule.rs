@@ -116,7 +116,13 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     // identity here. Any extension the caller's registry records and this build
     // provides can now be registered, and the instance travels in the provider
     // context because a scheduling producer cannot be built from a model alone.
-    let resolved = registry.resolve(&configuration.extensions, &model, Some(&instance_bytes))?;
+    let device = crate::registry::open_device(&configuration.device)?;
+    let resolved = registry.resolve(
+        &configuration.extensions,
+        &model,
+        Some(&instance_bytes),
+        device.as_ref(),
+    )?;
     // Provenance is collected before the search so a run that cannot produce a
     // valid record fails before spending the budget.
     let revision = provenance::revision()?;
@@ -153,7 +159,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         ),
         revision,
         dirty: provenance::dirty(),
-        hardware: provenance::hardware(),
+        hardware: provenance::hardware(device.as_ref()),
         toolchain: provenance::toolchain(),
         model_fingerprint: fingerprint,
         inputs: vec![

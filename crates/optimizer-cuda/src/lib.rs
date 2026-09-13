@@ -22,6 +22,7 @@ use serde::Serialize;
 // types are not in scope, so its intra-doc links would not resolve.
 pub mod probe;
 pub mod schedule;
+pub mod session;
 
 /// Shared by every project checkout and GPU runner on a host.
 pub const DEFAULT_LOCK_PATH: &str = "/tmp/ai-optimizer-gpu.lock";

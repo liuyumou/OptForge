@@ -30,6 +30,9 @@ fi
 
 export AI_OPTIMIZER_GPU=1
 "$cargo" test --release -p optimizer-cuda --test device
+# The device-backed producer lives with the other scheduling producers, so its
+# contracts do too; both suites are device acceptance and neither is complete alone.
+"$cargo" test --release -p optimizer-schedule-examples --test device
 
 sanitizer="${AI_OPTIMIZER_COMPUTE_SANITIZER:-compute-sanitizer}"
 if ! command -v "$sanitizer" >/dev/null 2>&1; then
@@ -48,11 +51,19 @@ fi
 
 # The test binary is rebuilt above, so pick the newest matching artifact rather than
 # hard-coding a hash that changes on every edit.
-binary="$(ls -t target/release/deps/device-* | grep -v '\.d$' | head -1)"
+# Both suites build a binary called `device-*`; sanitize each, newest first, and
+# require both to be present so a rename cannot silently drop one from the gate.
+mapfile -t binaries < <(ls -t target/release/deps/device-* | grep -v '\.d$' | head -2)
+if [[ ${#binaries[@]} -lt 2 ]]; then
+    echo "gpu_check: expected two device test binaries, found ${#binaries[@]}" >&2
+    exit 2
+fi
 # One thread: the sanitizers serialize device work anyway, and a parallel harness
 # makes a reported hazard hard to attribute to a test.
 for tool in memcheck racecheck initcheck synccheck; do
-    echo "gpu_check: compute-sanitizer --tool $tool"
-    "$sanitizer" --tool "$tool" "$binary" --test-threads 1
+    for binary in "${binaries[@]}"; do
+        echo "gpu_check: compute-sanitizer --tool $tool $(basename "$binary")"
+        "$sanitizer" --tool "$tool" "$binary" --test-threads 1
+    done
 done
 echo "gpu_check: device acceptance and all four sanitizers passed"

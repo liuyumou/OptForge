@@ -51,6 +51,30 @@
       "promotion": {
         "state": "experimental"
       }
+    },
+    {
+      "schema_version": 1,
+      "extension_id": "flow-shop-neh-gpu",
+      "version": "0.1.0",
+      "license": "MIT",
+      "category": "candidate_producer",
+      "authority_basis": "propose_validated_candidate",
+      "host_contract_version": 1,
+      "problem_classes": [
+        "discrete"
+      ],
+      "deterministic": true,
+      "limits": {
+        "max_invocations": 1,
+        "max_proposals": 2
+      },
+      "data_requirement": "flow_shop_instance",
+      "hardware_requirement": "gpu",
+      "requires": [],
+      "conflicts_with": [],
+      "promotion": {
+        "state": "experimental"
+      }
     }
   ]
 }
