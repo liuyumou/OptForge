@@ -4,6 +4,24 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Added
+
+- `optimizer-lp`, the host half of SPEC-0011: the canonical linear-program form,
+  the fixed reduction order, and diagonal preconditioning. It takes no device
+  dependency and adds no third-party crate. Being device-free is the point rather
+  than a convenience: this is the oracle the LP kernels are checked against under
+  requirement 24, and an oracle that needed the thing it checks would establish
+  nothing. It is not the fallback path -- requirement 26 keeps that the pinned CPU
+  backend, because falling back to a second implementation written to match the
+  kernel would make an agreement test compare a component with itself.
+
+  The constraint matrix is held in both row-major and column-major form so that
+  neither product needs atomic accumulation, which is a determinism requirement
+  before it is a performance one: floating-point addition is not associative, so an
+  atomic reduction would make a result depend on how the hardware scheduled it.
+  Reductions use one shared partition and tree order, defined once here for both
+  engines rather than restated by the kernel.
+
 ### Changed
 
 - **Breaking:** `Backend` gains a `capabilities` method, under SPEC-0011

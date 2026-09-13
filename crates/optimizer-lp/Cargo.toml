@@ -1,0 +1,18 @@
+[package]
+name = "optimizer-lp"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# No device dependency. This crate is the host half of SPEC-0011 and must build
+# and run on a host with no driver and no code object, because it is the oracle
+# the device kernels are checked against. optimizer-lp-cuda takes the device
+# dependency and depends on this crate, never the other way around.
+[lints]
+workspace = true

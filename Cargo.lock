@@ -204,6 +204,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "optimizer-lp"
+version = "0.1.0"
+dependencies = [
+ "optimizer-core",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "optimizer-registry"
 version = "0.1.0"
 dependencies = [

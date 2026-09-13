@@ -1,5 +1,57 @@
 # Active Task
 
+## C6 Canonical LP Form and Fixed Reduction Order (2026-09-13)
+
+Objective: reach SPEC-0011 requirements 6, 7 and 27 — the constraint matrix in both
+orientations, one reduction order both engines share, and a recorded preconditioner.
+
+Status: complete. Requirement 9's recording half waits on the settings document; what
+lands here is the preconditioner itself and the proof that it is a pure function of
+its parameters, which is what makes recording them sufficient.
+
+Acceptance gate: `bash tools/check.sh` with the pinned HiGHS library present.
+Resource budget: CPU only, no GPU workloads — deliberately, because this crate is the
+oracle the device kernels will be checked against and must not need one.
+
+The new `optimizer-lp` crate takes no device dependency and adds no third-party crate,
+so `cargo deny` still resolves the same eighteen external packages. It inherits the
+workspace lints, so it forbids unsafe; ADR-0009's single new boundary is untouched.
+
+Holding the matrix twice is the requirement that most looks like a performance choice
+and is not. Each product reads the orientation whose major axis it writes, so every
+output element is owned by exactly one accumulation and no atomic is needed anywhere.
+The column-major form is built from the same triples transposed rather than derived
+from the row-major one, because deriving it would make a defect in the first invisible
+in the second, and the two exist to be an independent pair.
+
+`SEGMENT`, the tree, and the `+0.0` padding are one definition rather than a rule the
+kernel will restate. Padding is what removes the length from the tree shape, and it
+changes no bit because adding `+0.0` is an exact identity.
+
+The reduction has two orders on purpose. `DeviceMirror` is the kernel's own, so a host
+and device result can be compared bit for bit and a drifted index shows immediately.
+`Sequential` shares no order with the kernel, so agreement with it is evidence about
+the method rather than about a copied summation. One number could not establish both.
+
+Two tests earned their place by being rewritten. The first version of the partition
+test compared `tree_sum` with itself, which asserts only determinism — a much weaker
+claim than the one its name made, and one the repeatability test already covers. It
+now checks a literal transcription of the documented steps, written separately, bit
+for bit across seven lengths including the segment boundary. And
+`a_tree_sum_differs_from_a_left_to_right_sum_on_a_catastrophic_input` exists because
+without it every later determinism assertion would be vacuous: if no input
+distinguished the two orders, any order would satisfy them.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed, exit 0, with 324 Rust tests, 68
+Python tests and 56 documentation pages. Fifteen tests are new, covering both
+orientations holding the same nonzeros, infinite bounds surviving conversion, a
+maximization negated once and reported back in the caller's direction, a discrete
+model refused rather than relaxed, the documented reduction rule, the two orders being
+distinguishable, padding changing no bit, and the preconditioner being a pure function
+of its recorded parameters.
+
+Follow-up: the host certification, which is the load-bearing piece.
+
 ## C6 Backend Capability Declaration (2026-09-13)
 
 Objective: reach SPEC-0011 requirements 1, 2 and 4 — a declaration a caller can read
