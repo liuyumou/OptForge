@@ -4,7 +4,7 @@ Status: accepted
 Scope: optimizer-cuda-sys device boundary, optimizer-cuda selection and residency, the batched schedule evaluator, and the optimizer-cli device surface
 Owner: heterogeneous computation
 Introduced: C6
-Last reviewed commit: pending
+Last reviewed commit: 391edeb
 Supersedes: none; amends SPEC-0006 requirement 1 and SPEC-0009 requirement 9
 Implementation: pending
 Tests: pending

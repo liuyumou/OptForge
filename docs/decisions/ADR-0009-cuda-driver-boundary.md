@@ -3,7 +3,7 @@
 Status: accepted
 Owner: heterogeneous computation
 Introduced: C6
-Last reviewed commit: pending
+Last reviewed commit: 391edeb
 Supersedes: ADR-0003's single-unsafe-boundary scope and ADR-0001's CUDA deferral; ADR-0001 through ADR-0008 otherwise remain in force
 
 ## Context

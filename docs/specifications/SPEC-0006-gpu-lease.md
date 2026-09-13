@@ -4,7 +4,7 @@ Status: accepted
 Scope: GPU ownership
 Owner: optimizer-cuda
 Introduced: M0
-Last reviewed commit: bootstrap (initial commit containing this file)
+Last reviewed commit: 391edeb (requirement 1a; the rest is unchanged from the initial commit containing this file)
 Supersedes: none
 Amended by: [SPEC-0010](SPEC-0010-heterogeneous-computation.md) requirement 1, which adds requirement 1a below
 Implementation: [Rust library](../../crates/optimizer-cuda/src/lib.rs), [CLI](../../crates/optimizer-cli/src/main.rs), [wrapper](../../tools/gpu_job.sh)
