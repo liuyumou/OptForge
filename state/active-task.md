@@ -1,5 +1,81 @@
 # Active Task
 
+## C6 Tuned Flow-Shop Baseline (2026-09-13)
+
+Objective: implement Taillard's exact head and tail acceleration inside `neh` and
+`insertion` so that Stage 4's entry condition — baselines are tuned before any
+intervention is measured — holds before any device work is measured against them.
+
+Status: complete; both heuristics score insertion positions from head and tail
+arrays, the returned permutations are asserted identical to the pre-change
+algorithm's, and the measurement is recorded.
+
+Acceptance gate: every existing SPEC-0008 contract passes unchanged; a new contract
+test compares both heuristics against the pre-change algorithm over the fixed grid
+and all ten frozen Taillard instances and requires the same permutation rather than
+the same makespan; that test is confirmed able to fail; `bash tools/check.sh` passes
+with native acceptance covered. Resource budget: CPU only, no GPU workloads.
+
+Why this first, before any kernel: the pass being replaced was `Theta(n^3 m)`, and a
+device measured against it would have been measured against the clone-and-re-evaluate
+loop rather than against the algorithm. That is the failure mode Stage 4's entry
+condition exists to prevent, and it would have been invisible in the result: a large
+speedup is exactly what a strawman baseline produces.
+
+Where the acceleration lives is a contract question rather than a style one. The
+value it computes is a makespan, and SPEC-0008 requirement 8 makes the recurrence
+module the sole authority on what a schedule costs by keeping it architecturally
+independent of everything that proposes one. Putting head and tail arrays in
+`heuristic` would have given a heuristic its own cost model that happens to agree,
+which is the shape of argument requirement 8 exists to refuse. They are in
+`evaluate`, and `head[i]` is by construction the row `partial_completion_times`
+would leave after `i` jobs.
+
+The assertion is on permutations, not costs, and the difference is load-bearing.
+Requirement 17 fixes which of several tied permutations a caller receives, so two
+implementations can return different sequences of equal makespan and a
+cost comparison would pass. The test therefore compares sequences, and it was
+confirmed able to fail by relaxing the insertion tie-break from strictly-less to
+less-or-equal — the exact mistake this rewrite invites, because it is the rewrite
+that moves that comparison. Under that mutation the new test fails and
+`construction_is_deterministic_including_under_ties` still passes, which is the
+evidence that the existing suite could not have caught it: a deterministic wrong
+answer is still deterministic.
+
+`insertion` stays sequential. An accepted move is visible to the next job, so the
+jobs cannot be scored independently of one another, and only the scoring of one
+job's positions is accelerated. This is worth stating because the obvious next
+optimization — evaluate all removals in parallel — would silently change which moves
+the pass accepts, and it is the reason the device workload SPEC-0010 specifies is a
+new producer rather than a faster `insertion`.
+
+Measured on the development host, release build, best of three after a warmup, with a
+0.41% noise floor from an identical binary. The full table is in
+[known failures](known-failures.md). A 100-job, 20-machine improvement pass falls
+from 32.66 ms to 0.92 ms, and a 200-job, 10-machine pass from 98.87 ms to 1.88 ms;
+the ratio grows from roughly 3x at 20 jobs to roughly 50x at 200, which is what an
+`O(n)` factor should do. The smallest instance is in the table on purpose: a single
+large instance would have supported almost any claim about the shape of the
+improvement.
+
+What the numbers are not: a benchmark result or evidence. They are a development
+diagnostic on one host, comparable only against another run of themselves, and
+SPEC-0008 requirement 26 continues to forbid this slice recording a performance
+claim. What they do change is C6's starting position, and not in a convenient
+direction: a device now has to beat 23.86 ms of tuned single-threaded CPU work at 500
+jobs rather than the several seconds the naive pass would have taken, so the
+crossover will sit further out than it would have.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed with the pinned HiGHS 1.11.0
+library linked and **zero test skips**, exit 0. Rust tests rose from 251 to 252, the
+one new test being the naive-comparison contract; Python tests remain 60 and
+documentation remains 55 pages. `Cargo.lock` and every `Cargo.toml` are untouched: no
+crate was added and no dependency edge changed.
+
+Follow-up: SPEC-0010's remaining phases. The next dependency-ready one is the scaled
+workload, because a crossover measured only on the frozen 20-by-5 subset would report
+that the CPU wins and would establish nothing about where the crossover lies.
+
 ## C6 Heterogeneous Computation Specification (2026-09-13)
 
 Objective: write and accept the C6 contracts before any public GPU or

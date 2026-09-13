@@ -12,7 +12,7 @@
 
 use optimizer_core::ValidationError;
 
-use crate::evaluate::partial_completion_times;
+use crate::evaluate::{InsertionArrays, partial_completion_times};
 use crate::instance::FlowShopInstance;
 
 /// NEH construction: order jobs by descending total processing time, then insert
@@ -22,6 +22,12 @@ use crate::instance::FlowShopInstance;
 /// with equal totals keep ascending job order, and equal insertion costs keep the
 /// earliest position. Neither falls out of sort stability: the sort key includes
 /// the job index precisely so the result cannot depend on the sorting algorithm.
+///
+/// Insertion positions are scored from head and tail arrays rather than by
+/// rebuilding each trial sequence, which is the same arithmetic reaching the same
+/// costs in `O(n^2 m)` instead of `O(n^3 m)`. The returned permutation is
+/// unchanged, and a contract test asserts that against a naive reference rather
+/// than trusting the argument.
 ///
 /// # Errors
 ///
@@ -41,18 +47,10 @@ pub fn neh(instance: &FlowShopInstance) -> Result<Vec<usize>, ValidationError> {
     });
 
     let mut sequence: Vec<usize> = Vec::with_capacity(jobs);
+    let mut arrays = InsertionArrays::new(instance.machines());
     for job in order {
-        let mut best: Option<(u64, usize)> = None;
-        for position in 0..=sequence.len() {
-            let mut trial = sequence.clone();
-            trial.insert(position, job);
-            let cost = partial_makespan(instance, &trial)?;
-            // Strictly-less keeps the earliest position on a tie.
-            if best.is_none_or(|(best_cost, _)| cost < best_cost) {
-                best = Some((cost, position));
-            }
-        }
-        let (_, position) = best.expect("at least one insertion position exists");
+        arrays.rebuild(instance, &sequence)?;
+        let (_, position) = arrays.best_insertion(instance, job)?;
         sequence.insert(position, job);
     }
     Ok(sequence)
@@ -66,6 +64,11 @@ pub fn neh(instance: &FlowShopInstance) -> Result<Vec<usize>, ValidationError> {
 /// cannot cycle. One pass is deliberate: iterating to a local optimum is local
 /// search, which SPEC-0008 excludes.
 ///
+/// The pass stays sequential: an accepted move is visible to the next job, so the
+/// jobs cannot be scored independently of one another. Only the scoring of one
+/// job's positions is accelerated, which is why the accepted moves and therefore
+/// the returned permutation are identical to the naive pass.
+///
 /// # Errors
 ///
 /// Returns a candidate failure when `sequence` is not a permutation of the
@@ -77,30 +80,25 @@ pub fn insertion(
     crate::evaluate::validate_permutation(instance, sequence)?;
     let mut current = sequence.to_vec();
     let mut best_cost = partial_makespan(instance, &current)?;
+    let mut without: Vec<usize> = Vec::with_capacity(current.len());
+    let mut arrays = InsertionArrays::new(instance.machines());
     for job in 0..instance.jobs() {
         let from = current
             .iter()
             .position(|&candidate| candidate == job)
             .expect("a validated permutation contains every job");
-        let mut without = current.clone();
+        without.clear();
+        without.extend_from_slice(&current);
         without.remove(from);
-        let mut best: Option<(u64, usize)> = None;
-        for position in 0..=without.len() {
-            let mut trial = without.clone();
-            trial.insert(position, job);
-            let cost = partial_makespan(instance, &trial)?;
-            if best.is_none_or(|(best_cost, _)| cost < best_cost) {
-                best = Some((cost, position));
-            }
-        }
-        let (cost, position) = best.expect("at least one insertion position exists");
+        arrays.rebuild(instance, &without)?;
+        let (cost, position) = arrays.best_insertion(instance, job)?;
         // Strict improvement only. Accepting an equal move would let the pass
         // shuffle a permutation without improving it, which is a difference a
         // caller would see as nondeterminism between versions.
         if cost < best_cost {
-            let mut moved = without;
-            moved.insert(position, job);
-            current = moved;
+            current.clear();
+            current.extend_from_slice(&without);
+            current.insert(position, job);
             best_cost = cost;
         }
     }

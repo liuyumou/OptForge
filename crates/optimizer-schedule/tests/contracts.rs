@@ -525,6 +525,142 @@ fn a_candidate_that_does_not_decode_is_refused() {
 
 // ---- Requirement 17: deterministic construction ----
 
+// ---- Naive reference heuristics ----
+//
+// The scoring inside `neh` and `insertion` was changed from rebuilding each trial
+// sequence to composing head and tail arrays, which is the same arithmetic reaching
+// the same costs asymptotically faster. These two functions are the pre-change
+// algorithm, written out here so the claim "the returned permutation is unchanged"
+// is asserted rather than argued. They score a trial with `oracle_makespan`, which
+// shares no code with the crate, so a rewrite that silently changed the cost model
+// would fail here too.
+
+fn naive_neh(times: &[Vec<u32>]) -> Vec<usize> {
+    let jobs = times[0].len();
+    let total = |job: usize| -> u64 { times.iter().map(|row| u64::from(row[job])).sum() };
+    let mut order: Vec<usize> = (0..jobs).collect();
+    order.sort_by(|&left, &right| total(right).cmp(&total(left)).then(left.cmp(&right)));
+
+    let mut sequence: Vec<usize> = Vec::new();
+    for job in order {
+        let mut best: Option<(u64, usize)> = None;
+        for position in 0..=sequence.len() {
+            let mut trial = sequence.clone();
+            trial.insert(position, job);
+            let cost = oracle_makespan(times, &trial);
+            // Strictly-less keeps the earliest position on a tie.
+            if best.is_none_or(|(best_cost, _)| cost < best_cost) {
+                best = Some((cost, position));
+            }
+        }
+        sequence.insert(best.expect("a position exists").1, job);
+    }
+    sequence
+}
+
+fn naive_insertion(times: &[Vec<u32>], sequence: &[usize]) -> Vec<usize> {
+    let jobs = times[0].len();
+    let mut current = sequence.to_vec();
+    let mut best_cost = oracle_makespan(times, &current);
+    for job in 0..jobs {
+        let from = current
+            .iter()
+            .position(|&candidate| candidate == job)
+            .expect("a permutation contains every job");
+        let mut without = current.clone();
+        without.remove(from);
+        let mut best: Option<(u64, usize)> = None;
+        for position in 0..=without.len() {
+            let mut trial = without.clone();
+            trial.insert(position, job);
+            let cost = oracle_makespan(times, &trial);
+            if best.is_none_or(|(best_cost, _)| cost < best_cost) {
+                best = Some((cost, position));
+            }
+        }
+        let (cost, position) = best.expect("a position exists");
+        if cost < best_cost {
+            let mut moved = without;
+            moved.insert(position, job);
+            current = moved;
+            best_cost = cost;
+        }
+    }
+    current
+}
+
+/// Requirement 17: accelerated scoring returns the same permutations as the naive
+/// pass, not merely permutations of the same cost.
+///
+/// Equal cost is the weaker claim and the one that would hide the defect this test
+/// exists to catch. Two different permutations can tie, and requirement 17 fixes
+/// which of them a caller gets, so a change that returned a different tied
+/// permutation would be a contract break that a cost comparison would pass. The
+/// assertion is therefore on the sequences themselves.
+///
+/// The grid includes the repeated-total fixtures, which is what makes the
+/// tie-breaking path reachable; a grid of distinct totals could not distinguish the
+/// two implementations at all.
+#[test]
+fn accelerated_scoring_returns_the_naive_permutations() {
+    let mut tied_reached = 0usize;
+    for (id, times) in fixed_grid() {
+        let fixture = instance(&id, times.clone());
+
+        let constructed = neh(&fixture).expect("neh succeeds");
+        assert_eq!(
+            constructed,
+            naive_neh(&times),
+            "{id}: neh must return the naive permutation"
+        );
+
+        let refined = insertion(&fixture, &constructed).expect("insertion succeeds");
+        assert_eq!(
+            refined,
+            naive_insertion(&times, &constructed),
+            "{id}: insertion must return the naive permutation"
+        );
+
+        let totals: BTreeSet<u64> = (0..fixture.jobs())
+            .map(|job| fixture.job_total(job))
+            .collect();
+        if totals.len() < fixture.jobs() {
+            tied_reached += 1;
+        }
+    }
+    assert!(
+        tied_reached > 0,
+        "the grid must contain instances with repeated totals, or the tie-break is untested"
+    );
+
+    // The frozen subset is the only place the two are compared at twenty jobs,
+    // where the naive pass evaluates 210 trial sequences per construction and the
+    // accelerated one evaluates none.
+    for published in DEVELOPMENT_SUBSET {
+        let fixture = published.generate().expect("published instance generates");
+        let times: Vec<Vec<u32>> = (0..fixture.machines())
+            .map(|machine| {
+                (0..fixture.jobs())
+                    .map(|job| fixture.processing_time(job, machine))
+                    .collect()
+            })
+            .collect();
+        let constructed = neh(&fixture).expect("neh succeeds");
+        assert_eq!(
+            constructed,
+            naive_neh(&times),
+            "{}: neh must return the naive permutation",
+            published.id
+        );
+        assert_eq!(
+            insertion(&fixture, &constructed).expect("insertion succeeds"),
+            naive_insertion(&times, &constructed),
+            "{}: insertion must return the naive permutation",
+            published.id
+        );
+    }
+}
+
 /// Requirement 17: NEH and insertion are deterministic, including under ties.
 ///
 /// The tie fixture has repeated processing times and therefore repeated job totals,

@@ -39,27 +39,10 @@ forward explicitly rather than treated as closed by specifying them. No device c
 object is built, so every device-dependent test would report a skip if it existed.
 No labeled GPU runner is provisioned, so device sanitizer coverage cannot run in CI
 at all; see the external configuration entry above. The CPU baseline the crossover
-must be measured against is untuned, recorded separately below, and Stage 4's entry
-condition requires it be tuned first. And the driver version field that SPEC-0007
+must be measured against is now tuned, recorded separately below, so that gap is
+closed rather than outstanding. And the driver version field that SPEC-0007
 requirement 9 requires of a GPU record still has no producer, which SPEC-0010
 requirement 1 is written to supply.
-
-## The flow-shop heuristics are an untuned baseline
-
-`neh` and `insertion` in
-[the heuristics module](../crates/optimizer-schedule/src/heuristic.rs) evaluate each
-candidate insertion position by cloning the sequence and re-running the whole
-recurrence, so a pass costs Theta(n^3 m) where Taillard's exact head/tail
-acceleration would cost Theta(n^2 m). At the frozen subset's 20 jobs this is
-microseconds and the choice was the right one for C5, which claims correctness and
-forbids a performance claim. It stops being harmless the moment C6 measures a device
-against it: Stage 4's entry condition is that baselines are tuned before any
-intervention is measured, and a speedup over an untuned baseline measures the
-baseline. Reproduction: run `insertion` on a generated 500-job, 20-machine instance
-and compare against the same pass with head/tail arrays. Next step: implement the
-acceleration inside the existing functions, preserving the sequential order, the
-strict-improvement rule and the earliest-position tie-break that SPEC-0008
-requirement 17 fixes, before any device measurement is recorded.
 
 ## A device fault is outside every containment claim this project makes
 
@@ -71,6 +54,54 @@ device-backed extension therefore cannot be contained the way a CPU extension is
 no per-device memory budget is enforced. Next step: the same process-isolated workers
 the panic-only entry below already names, which would cover both cases and needs its
 own decision record.
+
+## Resolved: the flow-shop heuristics are a tuned baseline
+
+`neh` and `insertion` evaluated each candidate insertion position by cloning the
+sequence and re-running the whole recurrence, which is `Theta(n^3 m)` where
+Taillard's exact head and tail acceleration is `Theta(n^2 m)`. That was the right
+choice for C5, which claims correctness and forbids a performance claim, and it
+became a problem only because Stage 4's entry condition requires baselines be tuned
+before any intervention is measured: a device speedup over the naive pass would have
+measured the pass.
+
+The acceleration is implemented in
+[the recurrence module](../crates/optimizer-schedule/src/evaluate.rs) rather than in
+the heuristics, so requirement 8's rule that nothing proposing a schedule owns a
+second definition of its cost still holds. The returned permutations are unchanged
+and that is asserted by `accelerated_scoring_returns_the_naive_permutations`, which
+compares against the pre-change algorithm scored by the independent oracle and
+requires the same sequence rather than the same makespan. The weaker assertion would
+have passed a real break: requirement 17 fixes which of several tied permutations a
+caller receives, and two different permutations can tie.
+
+The test was confirmed able to fail. Relaxing the insertion tie-break from strictly
+less to less-or-equal — the exact mistake the acceleration invites, because the
+rewrite moves that comparison — fails it, while
+`construction_is_deterministic_including_under_ties` still passes, since a
+deterministic wrong answer is still deterministic.
+
+Measured on the development host, release build, best of three after a warmup, with a
+0.41% noise floor from an identical binary:
+
+| instance | construction | improvement pass |
+| --- | --- | --- |
+| 20 jobs, 5 machines | 0.18 ms to 0.03 ms | 0.11 ms to 0.04 ms |
+| 50 jobs, 20 machines | 1.52 ms to 0.13 ms | 4.20 ms to 0.23 ms |
+| 100 jobs, 20 machines | 11.27 ms to 0.48 ms | 32.66 ms to 0.92 ms |
+| 200 jobs, 10 machines | 34.56 ms to 0.96 ms | 98.87 ms to 1.88 ms |
+| 500 jobs, 20 machines | naive not run; 11.96 ms | naive not run; 23.86 ms |
+
+The ratio grows from roughly 3x to roughly 50x across that range, which is what an
+`O(n)` factor should do and is the reason the smallest row is in the table: a single
+instance would have supported almost any claim. These are a development diagnostic on
+one host, not a benchmark result and not evidence.
+
+What this changes for C6 is worth recording, because it is the opposite of
+convenient. The number a device now has to beat at 500 jobs is 23.86 ms of tuned
+single-threaded CPU work, not the several seconds the naive pass would have taken.
+The crossover, when it is measured, will sit further out than it would have against
+the old baseline, and that is the honest position to measure from.
 
 ## Intermittent advisory database fetch
 

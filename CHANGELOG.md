@@ -4,6 +4,26 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Changed
+
+- `neh` and `insertion` score insertion positions from head and tail completion-time
+  arrays instead of rebuilding and re-evaluating each trial sequence, which is
+  Taillard's exact acceleration and reduces a pass from `O(n^3 m)` to `O(n^2 m)`. The
+  arithmetic is the recurrence's own and lives in `evaluate`, so requirement 8's rule
+  that nothing proposing a schedule owns a second definition of what one costs is
+  preserved. Behavior is unchanged, and that is asserted rather than argued: a
+  contract test compares both heuristics against the pre-change algorithm over the
+  fixed grid and all ten frozen Taillard instances and requires the *same
+  permutation*, not merely the same makespan, because requirement 17 fixes which of
+  several tied permutations a caller receives.
+
+  Measured on the development host, release build, best of three after a warmup:
+  a 100-job, 20-machine construction falls from 11.27 ms to 0.48 ms and its
+  improvement pass from 32.66 ms to 0.92 ms; at 200 jobs and 10 machines the pass
+  falls from 98.87 ms to 1.88 ms. The speedup grows with the job count, as an `O(n)`
+  factor should. This is a development diagnostic on one host and is not a benchmark
+  result, not evidence, and not a claim about the engine.
+
 ### Added
 
 - `Model::rebound`, which replaces a model's variable domains and bounds while
