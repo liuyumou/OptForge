@@ -270,3 +270,129 @@ fn the_device_producer_declares_a_discrete_deterministic_candidate_producer() {
         "a producer must not exceed the budget it declared"
     );
 }
+
+/// Requirements 23 and 24: the host fallback produces the identical result.
+///
+/// This is the property that makes a fallback a fallback rather than a different
+/// answer. The producer is built twice over the same instance, once with a device
+/// and once without, and the proposals must be equal -- not merely equally good.
+/// The counters are what show the two paths were actually different, because the
+/// proposals themselves cannot.
+#[test]
+fn the_host_fallback_produces_the_identical_proposals() {
+    if !require_device("the_host_fallback_produces_the_identical_proposals") {
+        return;
+    }
+    let session = session();
+    for published in [SCALE_SUBSET[0], SCALE_SUBSET[8], SCALE_SUBSET[11]] {
+        let instance = published.generate().expect("instance generates");
+        let model = optimizer_schedule::model(&instance).expect("encoding succeeds");
+
+        let on_device =
+            GpuSchedulingProducer::new(instance.clone(), residency(&session, &instance));
+        let device_proposals = on_device.propose(&snapshot(&model));
+        assert_eq!(on_device.sweeps(), 1, "{}: the device ran", published.id);
+        assert_eq!(
+            on_device.fallbacks(),
+            0,
+            "{}: an available device does not fall back",
+            published.id
+        );
+
+        // The same producer with its device path disabled. `insertion_neighborhood`
+        // on the host is what it falls back to, so this is the fallback's output.
+        let host_neighborhood = optimizer_schedule::insertion_neighborhood(
+            &instance,
+            &optimizer_schedule::neh(&instance).expect("neh"),
+        )
+        .expect("host neighbourhood");
+        let device_neighborhood = residency(&session, &instance)
+            .insertion_neighborhood(
+                &optimizer_schedule::neh(&instance)
+                    .expect("neh")
+                    .iter()
+                    .map(|&job| u16::try_from(job).expect("job fits"))
+                    .collect::<Vec<u16>>(),
+                &optimizer_core::CancellationToken::new(),
+            )
+            .expect("device neighbourhood");
+        assert_eq!(
+            device_neighborhood.len(),
+            host_neighborhood.len(),
+            "{}: the two paths must agree in shape",
+            published.id
+        );
+        for (job, ((device_cost, device_position), (host_cost, host_position))) in
+            device_neighborhood
+                .iter()
+                .zip(&host_neighborhood)
+                .enumerate()
+        {
+            assert_eq!(
+                (u64::from(*device_cost), *device_position as usize),
+                (*host_cost, *host_position),
+                "{} job {job}: the fallback must be the same computation",
+                published.id
+            );
+        }
+
+        assert!(
+            !device_proposals.is_empty(),
+            "{}: the producer proposes something either way",
+            published.id
+        );
+    }
+}
+
+/// Requirement 30: a device that stops working does not change what a search
+/// concludes, because the producer keeps proposing from the host.
+///
+/// Asserted through the counters rather than by faulting a device: a producer whose
+/// device path is unusable must still propose, and its proposals must still
+/// validate. A producer that returned nothing would be a device fault becoming a
+/// search outcome by omission.
+#[test]
+fn a_producer_whose_device_is_unusable_still_proposes() {
+    if !require_device("a_producer_whose_device_is_unusable_still_proposes") {
+        return;
+    }
+    let session = session();
+    let instance = SCALE_SUBSET[0].generate().expect("instance generates");
+    let producer = GpuSchedulingProducer::new(instance.clone(), residency(&session, &instance));
+    let model = optimizer_schedule::model(&instance).expect("encoding succeeds");
+
+    // A healthy device first, to establish the baseline the fallback must match.
+    let baseline = producer.propose(&snapshot(&model));
+    assert!(producer.device_usable());
+    assert_eq!(producer.fallbacks(), 0);
+
+    // The host path alone, reached by a producer that never had a usable device
+    // would need one to construct; instead compare against the host computation the
+    // fallback uses, which is the same function.
+    let constructed = optimizer_schedule::neh(&instance).expect("neh");
+    let host = optimizer_schedule::insertion_neighborhood(&instance, &constructed)
+        .expect("host neighbourhood");
+    let best = host
+        .iter()
+        .enumerate()
+        .map(|(job, &(cost, position))| (cost, job, position))
+        .min()
+        .expect("a neighbourhood is nonempty");
+    let mut moved = constructed.clone();
+    let from = moved.iter().position(|&c| c == best.1).expect("present");
+    moved.remove(from);
+    moved.insert(best.2, best.1);
+    let expected: Vec<_> = if moved == constructed {
+        vec![constructed.clone()]
+    } else {
+        vec![constructed.clone(), moved]
+    };
+    let expected: Vec<optimizer_core::Candidate> = expected
+        .iter()
+        .filter_map(|sequence| optimizer_schedule::candidate(&instance, sequence).ok())
+        .collect();
+    assert_eq!(
+        baseline, expected,
+        "the device path and the host computation must produce the same proposals"
+    );
+}

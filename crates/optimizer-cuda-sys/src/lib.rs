@@ -79,6 +79,19 @@ pub enum DeviceError {
     DeviceNotFound(String),
     /// A request that cannot be satisfied on this device.
     Unsupported(String),
+    /// The caller cancelled between launch chunks.
+    ///
+    /// Not a failure of the device. It is here so a caller can tell a cancelled
+    /// run from a failed one without parsing a message, which matters because
+    /// SPEC-0010 requirement 30 forbids reporting either as a solver outcome but
+    /// they are recorded differently.
+    Cancelled,
+    /// A fault inside a kernel left this context permanently unusable.
+    ///
+    /// Every later call on the same context fails too, so continuing to launch
+    /// would turn one fault into a stream of them. Requirement 29 forbids that:
+    /// the context is finished, and the caller rebuilds or falls back.
+    ContextPoisoned(DriverStatus),
 }
 
 impl fmt::Display for DeviceError {
@@ -104,6 +117,28 @@ impl fmt::Display for DeviceError {
             ),
             Self::DeviceNotFound(uuid) => write!(formatter, "no device with UUID {uuid}"),
             Self::Unsupported(detail) => write!(formatter, "unsupported: {detail}"),
+            Self::Cancelled => write!(formatter, "cancelled between launch chunks"),
+            Self::ContextPoisoned(status) => write!(
+                formatter,
+                "context is unusable after {}; it cannot be reused",
+                status.as_str()
+            ),
+        }
+    }
+}
+
+impl DeviceError {
+    /// Whether this failure left the context permanently unusable.
+    ///
+    /// True for a sticky driver status as well as for an already-poisoned context,
+    /// so a caller can make the same decision from either without knowing which
+    /// call first observed the fault.
+    #[must_use]
+    pub fn poisons_context(&self) -> bool {
+        match self {
+            Self::ContextPoisoned(_) => true,
+            Self::Driver { status, .. } => status.is_sticky(),
+            _ => false,
         }
     }
 }

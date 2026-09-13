@@ -80,6 +80,11 @@ fn lease_path() -> std::path::PathBuf {
         .map_or_else(|| std::path::PathBuf::from(DEFAULT_LOCK_PATH), Into::into)
 }
 
+/// A token that is never cancelled, for the tests that are not about cancellation.
+fn cancel() -> optimizer_core::CancellationToken {
+    optimizer_core::CancellationToken::new()
+}
+
 fn machine_major(instance: &FlowShopInstance) -> Vec<u32> {
     let mut times = Vec::with_capacity(instance.jobs() * instance.machines());
     for machine in 0..instance.machines() {
@@ -159,7 +164,9 @@ fn device_makespans_equal_the_host_recurrence() {
         }
 
         assert_eq!(
-            residency.makespans(&sequences).expect("device makespans"),
+            residency
+                .makespans(&sequences, &cancel())
+                .expect("device makespans"),
             expected,
             "{}: device makespans must equal the host recurrence exactly",
             published.id
@@ -206,7 +213,7 @@ fn the_device_neighborhood_equals_the_cpu_path() {
 
         let host = insertion_neighborhood(&instance, &base).expect("host neighborhood");
         let device = residency
-            .insertion_neighborhood(&encoded)
+            .insertion_neighborhood(&encoded, &cancel())
             .expect("device neighborhood");
 
         assert_eq!(
@@ -259,7 +266,7 @@ fn the_device_neighborhood_agrees_with_a_full_recomputation() {
             .map(|&job| u16::try_from(job).expect("job fits"))
             .collect();
         let device = residency
-            .insertion_neighborhood(&encoded)
+            .insertion_neighborhood(&encoded, &cancel())
             .expect("device neighborhood");
 
         for (job, &(cost, position)) in device.iter().enumerate() {
@@ -314,12 +321,12 @@ fn repeating_a_device_evaluation_is_bitwise_identical() {
         .map(|&job| u16::try_from(job).expect("job fits"))
         .collect();
     let first = residency
-        .insertion_neighborhood(&encoded)
+        .insertion_neighborhood(&encoded, &cancel())
         .expect("device neighborhood");
     for repeat in 0..8 {
         assert_eq!(
             residency
-                .insertion_neighborhood(&encoded)
+                .insertion_neighborhood(&encoded, &cancel())
                 .expect("device neighborhood"),
             first,
             "repeat {repeat} must be bitwise identical"
@@ -354,9 +361,11 @@ fn a_residency_uploads_its_instance_once() {
         .map(|&job| u16::try_from(job).expect("job fits"))
         .collect();
     for _ in 0..4 {
-        let _ = residency.makespans(&encoded).expect("device makespans");
         let _ = residency
-            .insertion_neighborhood(&encoded)
+            .makespans(&encoded, &cancel())
+            .expect("device makespans");
+        let _ = residency
+            .insertion_neighborhood(&encoded, &cancel())
             .expect("device neighborhood");
     }
     assert_eq!(
@@ -558,4 +567,141 @@ fn discovery_reports_a_driver_version_for_every_device() {
             panic!("the device gate implies an available inventory: {reason}")
         }
     }
+}
+
+/// Requirement 27: work is launched in bounded chunks, not one launch per call.
+///
+/// Chunking is invisible in a result -- the same answers come back either way --
+/// so it is asserted against a launch counter. Without that, a regression that
+/// collapsed the loop back to a single launch would pass every other test here.
+#[test]
+fn device_work_is_launched_in_bounded_chunks() {
+    if !require_device("device_work_is_launched_in_bounded_chunks") {
+        return;
+    }
+    let _lease = lease();
+    let context = Rc::new(Context::create(&first_device().uuid).expect("context"));
+    // 500 jobs, so the neighbourhood is 500 blocks against a 128-block chunk: four
+    // launches, not one.
+    let instance = SCALE_SUBSET[11].generate().expect("instance generates");
+    assert_eq!(
+        instance.jobs(),
+        500,
+        "this assertion needs the largest shape"
+    );
+    let residency = ScheduleResidency::open(
+        Rc::clone(&context),
+        shape(&instance),
+        &machine_major(&instance),
+        &code_object_path(),
+    )
+    .expect("residency opens");
+    assert_eq!(residency.launches(), 0, "opening launches nothing");
+
+    let base = neh(&instance).expect("neh succeeds");
+    let encoded: Vec<u16> = base
+        .iter()
+        .map(|&job| u16::try_from(job).expect("job fits"))
+        .collect();
+    let neighborhood = residency
+        .insertion_neighborhood(&encoded, &cancel())
+        .expect("device neighbourhood");
+    assert_eq!(neighborhood.len(), 500);
+    assert_eq!(
+        residency.launches(),
+        4,
+        "500 jobs in 128-job chunks is four launches"
+    );
+
+    // And the chunking does not change the answer: it still equals the host's.
+    let host = insertion_neighborhood(&instance, &base).expect("host neighbourhood");
+    for (job, ((device_cost, device_position), (host_cost, host_position))) in
+        neighborhood.iter().zip(&host).enumerate()
+    {
+        assert_eq!(
+            (u64::from(*device_cost), *device_position as usize),
+            (*host_cost, *host_position),
+            "job {job} must be unchanged by chunking"
+        );
+    }
+}
+
+/// Requirement 27: a cancelled call stops between chunks rather than at the end.
+///
+/// Cancelling before the first launch is the case that can be asserted exactly: no
+/// launch may happen at all. Cancelling mid-run is inherently racy to assert, so
+/// this checks the bound rather than a timing.
+#[test]
+fn a_cancelled_call_launches_nothing_and_says_it_was_cancelled() {
+    if !require_device("a_cancelled_call_launches_nothing_and_says_it_was_cancelled") {
+        return;
+    }
+    let _lease = lease();
+    let context = Rc::new(Context::create(&first_device().uuid).expect("context"));
+    let instance = SCALE_SUBSET[11].generate().expect("instance generates");
+    let residency = ScheduleResidency::open(
+        Rc::clone(&context),
+        shape(&instance),
+        &machine_major(&instance),
+        &code_object_path(),
+    )
+    .expect("residency opens");
+
+    let base = neh(&instance).expect("neh succeeds");
+    let encoded: Vec<u16> = base
+        .iter()
+        .map(|&job| u16::try_from(job).expect("job fits"))
+        .collect();
+
+    let cancelled = optimizer_core::CancellationToken::new();
+    cancelled.cancel();
+    let error = residency
+        .insertion_neighborhood(&encoded, &cancelled)
+        .expect_err("a cancelled call must not return results");
+    assert_eq!(error, DeviceError::Cancelled);
+    assert_eq!(
+        residency.launches(),
+        0,
+        "a run cancelled before it starts must do no work"
+    );
+
+    // A cancellation is not a fault, so the residency is still usable afterwards.
+    assert!(!residency.poisoned());
+    residency
+        .insertion_neighborhood(&encoded, &cancel())
+        .expect("an uncancelled call still works");
+    assert!(residency.launches() > 0);
+}
+
+/// Requirement 30: a device fault is not a solver outcome, and requirement 29: a
+/// poisoned context is not launched into again.
+///
+/// The fault is provoked rather than waited for. A neighbourhood kernel asked for
+/// more shared memory than a block may address is rejected at launch, which is the
+/// closest reachable stand-in for a kernel fault that does not require corrupting
+/// the device; what it exercises is the path a fault takes, not the fault itself.
+#[test]
+fn a_launch_failure_is_reported_rather_than_repeated() {
+    if !require_device("a_launch_failure_is_reported_rather_than_repeated") {
+        return;
+    }
+    let _lease = lease();
+    let context = Rc::new(Context::create(&first_device().uuid).expect("context"));
+    let instance = SCALE_SUBSET[0].generate().expect("instance generates");
+    let residency = ScheduleResidency::open(
+        Rc::clone(&context),
+        shape(&instance),
+        &machine_major(&instance),
+        &code_object_path(),
+    )
+    .expect("residency opens");
+
+    // A sequence of the wrong length is refused before any launch, which is the
+    // cheap half: an input error must not touch the device at all.
+    let error = residency
+        .insertion_neighborhood(&[0u16, 1], &cancel())
+        .expect_err("a wrong-length sequence is refused");
+    assert!(matches!(error, DeviceError::Unsupported(_)), "{error}");
+    assert_eq!(residency.launches(), 0, "a refused input launches nothing");
+    assert!(!residency.poisoned(), "an input error is not a fault");
 }

@@ -67,6 +67,21 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- Device work is launched in bounded chunks with a cancellation check between them,
+  under SPEC-0010 requirement 27, so a cancelled run waits for one chunk rather than
+  for a whole batch. The chunks bound *work* rather than calls: 4,096 permutations
+  for the batch kernel and 128 removed jobs for the neighbourhood kernel, which at
+  the largest supported shape are 4.1e7 and 2.6e6 integer operations respectively.
+  `makespans` and `insertion_neighborhood` therefore take a `CancellationToken`.
+- A sticky device fault poisons its residency, which then refuses without touching
+  the device. Requirement 29 allows rebuilding the context or falling back for the
+  rest of the run; this takes the second, so one fault does not become a stream of
+  them with the first buried.
+- `GpuSchedulingProducer` falls back to the host when the device declines, and the
+  fallback is `optimizer_schedule::insertion_neighborhood` -- the CPU path this
+  project already treats as authoritative, not a second implementation written to
+  match the kernel, so the two cannot drift. A caller cannot tell which ran, which
+  is the point; the producer's `fallbacks()` counter is how a test can.
 - `flow-shop-neh-gpu`, the first candidate producer whose work runs on a device,
   under SPEC-0010 requirements 26 and 33 to 35. Construction stays on the CPU --
   NEH is `O(n^2 m)` and the measured crossover puts a device behind the CPU below

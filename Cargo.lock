@@ -148,6 +148,7 @@ name = "optimizer-cuda"
 version = "0.1.0"
 dependencies = [
  "csv",
+ "optimizer-core",
  "optimizer-cuda-sys",
  "optimizer-schedule",
  "serde",

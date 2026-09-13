@@ -44,7 +44,7 @@ __global__ void makespan_batch(const unsigned int *__restrict__ times,
                                const unsigned short *__restrict__ sequences,
                                unsigned int *__restrict__ makespans,
                                unsigned int jobs, unsigned int machines,
-                               unsigned int batch) {
+                               unsigned int offset, unsigned int count) {
   extern __shared__ unsigned int shared_times[];
   // Stage the processing times once per block. Each thread reads a different job,
   // so the global accesses would otherwise be scattered across the matrix.
@@ -53,8 +53,12 @@ __global__ void makespan_batch(const unsigned int *__restrict__ times,
   }
   __syncthreads();
 
-  unsigned int index = blockIdx.x * blockDim.x + threadIdx.x;
-  if (index >= batch) {
+  // `offset` and `count` name one chunk of a larger batch. The host launches in
+  // bounded chunks and checks for cancellation between them, so a cancelled run
+  // waits for one chunk rather than for the whole batch; the kernel sees only which
+  // chunk it is.
+  unsigned int index = offset + blockIdx.x * blockDim.x + threadIdx.x;
+  if (index >= offset + count) {
     return;
   }
   const unsigned short *sequence = sequences + (size_t)index * jobs;
@@ -102,14 +106,15 @@ insertion_neighborhood(const unsigned int *__restrict__ times,
                        const unsigned short *__restrict__ sequence,
                        unsigned int *__restrict__ best_cost,
                        unsigned int *__restrict__ best_position, unsigned int jobs,
-                       unsigned int machines) {
+                       unsigned int machines, unsigned int offset) {
   // `head` then `tail`, each (jobs) * machines entries: the remaining sequence has
   // jobs - 1 entries, so there are jobs prefixes and jobs suffixes.
   extern __shared__ unsigned int tables[];
   unsigned int *head = tables;
   unsigned int *tail = tables + jobs * machines;
 
-  const unsigned int removed = blockIdx.x;
+  // One chunk of the job range, for the same reason as above.
+  const unsigned int removed = offset + blockIdx.x;
   const unsigned int length = jobs - 1u;
 
   // The sequence without `removed`, addressed by index rather than materialised.

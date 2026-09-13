@@ -24,39 +24,40 @@ the time and is left as written rather than backdated. Anything after `dfdc245`
 is local until the maintainer pushes it, and AGENTS.md's prohibition on
 publishing without authorization is unchanged.
 
-## SPEC-0010 requirements not yet reached
+## SPEC-0010 requirement 22 is measured and consulted by nothing
 
-A search now reaches a device end to end, so what remains is smaller and more
-specific than it was. Listed rather than implied by the parts that work.
+The crossover is recorded below and no default reads it. Dispatch is the caller's
+explicit `device` field: there is no threshold anywhere that compares a model
+against the measurement and chooses. "CPU remains the default below the measured
+crossover" therefore holds because CPU is the default everywhere, not because
+anything measured.
 
-Requirement 22's crossover is measured and no default consults it. Dispatch is the
-caller's explicit `device` field; there is no threshold anywhere that compares a
-model against the recorded crossover and chooses. That is deliberate for now --
-a threshold is an acceptance-shaped number and needs its own record -- but it means
-"CPU remains the default below the measured crossover" holds because CPU is the
-default everywhere, not because anything measured.
+That is deliberate rather than outstanding work. A dispatch threshold is an
+acceptance-shaped number -- it decides what runs where, on evidence from one host --
+and the benchmark protocol requires an ADR and an experiment record before a
+threshold like that is committed. Recording the measurement and leaving the choice
+to the caller is the honest intermediate state.
 
-Requirements 27 to 30 are partly reached. A launch is one call per batch rather than
-bounded chunks with a cancellation check between them, so cancellation latency is
-bounded by the batch rather than by a chunk; at the sizes the device is used for
-that is milliseconds, but the contract asks for chunks and it is chunks that are
-missing. `DriverStatus::is_sticky` names the sticky statuses and is tested, and
-nothing yet destroys and rebuilds a context when one occurs: a sticky fault today
-fails the producer's proposal, which the host records as a refusal, rather than
-rebuilding.
+Reproduction: `grep -rn "crossover" crates/` finds only comments. Next step: an ADR
+proposing a threshold, with the held-out evidence Stage 4 asks for rather than the
+single-host diagnostic recorded here.
 
-Requirement 24's fallback is reachable and unexercised in the direction that
-matters. `device_path_available` and `InstanceShape::admissible` both answer before
-any allocation, and an inadmissible instance makes the device producer unprovided so
-the run is refused. What does not exist is a path that *falls back* mid-run: a
-device failure during a search fails that proposal, and the search continues without
-it, which is correct but is not the same as the CPU path producing the identical
-result the device path would have.
+## Rebuilding a poisoned context is not implemented
 
-Reproduction: `grep -rn "crossover" crates/` finds nothing outside comments, and
-`grep -rn "is_sticky" crates/optimizer-cuda*/src` shows the predicate with no caller
-that rebuilds. Next step: bounded launch chunks with a cancellation check, since
-that is the one an interrupted long device run would notice.
+Requirement 29 permits two responses to a sticky fault: destroy and rebuild the
+context, or fall back for the remainder of the run. This implementation takes the
+second. A residency that observes a sticky driver status marks itself poisoned and
+refuses every later call without touching the device, and the device producer's
+sweeps go to the host from then on.
+
+The consequence is that one sticky fault costs a run its device even if the fault
+was transient. Rebuilding would need the residency to replace a context its buffers
+hold through an `Rc`, which is a lifetime problem rather than a driver one, and the
+specification does not require it. Reproduction: there is no test that faults a real
+device, because provoking a genuine sticky fault means corrupting one, so the
+poisoning path is covered by unit tests over `DriverStatus::is_sticky` and
+`DeviceError::poisons_context` rather than end to end. That gap is the honest one to
+record: the decision logic is tested, the recovery from a real fault is not.
 
 ## Resolved: device sanitizer coverage runs and is clean
 

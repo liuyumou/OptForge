@@ -266,6 +266,13 @@ pub struct GpuSchedulingProducer {
     /// CPU fallback would produce the same proposals. This counts the thing that
     /// only happens on a device.
     sweeps: Cell<u64>,
+    /// Counts sweeps the device declined and the host completed instead.
+    ///
+    /// Requirement 24 makes an availability failure a fallback rather than an
+    /// error, and requirement 23 requires the fallback to produce an identical
+    /// result. Both are unobservable from the proposals, which is exactly the
+    /// point: a caller cannot tell, and this counter is how a test can.
+    fallbacks: Cell<u64>,
 }
 
 impl std::fmt::Debug for GpuSchedulingProducer {
@@ -295,6 +302,7 @@ impl GpuSchedulingProducer {
             residency,
             proposals: Cell::new(0),
             sweeps: Cell::new(0),
+            fallbacks: Cell::new(0),
         }
     }
 
@@ -306,6 +314,20 @@ impl GpuSchedulingProducer {
     /// How many device neighbourhood sweeps this producer has run.
     pub fn sweeps(&self) -> u64 {
         self.sweeps.get()
+    }
+
+    /// How many sweeps fell back to the host.
+    pub fn fallbacks(&self) -> u64 {
+        self.fallbacks.get()
+    }
+
+    /// Whether the device path is still usable for this producer.
+    ///
+    /// False after a sticky fault. Requirement 29 permits falling back for the
+    /// remainder of a run instead of rebuilding a context, and that is what this
+    /// producer does: once the device is finished, every later sweep is the host's.
+    pub fn device_usable(&self) -> bool {
+        !self.residency.poisoned()
     }
 
     /// The device this producer's instance is resident on.
@@ -320,14 +342,8 @@ impl GpuSchedulingProducer {
     /// the device happened to return its results in, which is what keeps a
     /// device-produced proposal reproducible.
     fn best_move(&self, sequence: &[usize]) -> Option<(usize, usize)> {
-        let encoded: Vec<u16> = sequence
-            .iter()
-            .map(|&job| u16::try_from(job).ok())
-            .collect::<Option<Vec<u16>>>()?;
-        let neighborhood = self.residency.insertion_neighborhood(&encoded).ok()?;
-        self.sweeps.set(self.sweeps.get() + 1);
-
-        let mut best: Option<(u32, usize, u32)> = None;
+        let neighborhood = self.neighborhood(sequence)?;
+        let mut best: Option<(u64, usize, usize)> = None;
         for (job, &(cost, position)) in neighborhood.iter().enumerate() {
             let candidate = (cost, job, position);
             if best.is_none_or(|current| candidate < current) {
@@ -335,7 +351,37 @@ impl GpuSchedulingProducer {
             }
         }
         let (_, job, position) = best?;
-        Some((job, position as usize))
+        Some((job, position))
+    }
+
+    /// The neighbourhood, from the device when it can and from the host otherwise.
+    ///
+    /// Requirement 23: the fallback is the CPU path this project already treats as
+    /// authoritative, not a second implementation written to match the kernel, so
+    /// the two cannot drift. The device tests assert they agree exactly; this is
+    /// what makes the agreement matter, because either may be the one that ran.
+    fn neighborhood(&self, sequence: &[usize]) -> Option<Vec<(u64, usize)>> {
+        let cancel = optimizer_core::CancellationToken::new();
+        if self.device_usable()
+            && let Some(encoded) = sequence
+                .iter()
+                .map(|&job| u16::try_from(job).ok())
+                .collect::<Option<Vec<u16>>>()
+            && let Ok(neighborhood) = self.residency.insertion_neighborhood(&encoded, &cancel)
+        {
+            self.sweeps.set(self.sweeps.get() + 1);
+            return Some(
+                neighborhood
+                    .into_iter()
+                    .map(|(cost, position)| (u64::from(cost), position as usize))
+                    .collect(),
+            );
+        }
+        // An availability failure is a fallback, not an error. The host computes the
+        // same quantity, so a caller sees the same proposals and only the counter
+        // below records that the device declined.
+        self.fallbacks.set(self.fallbacks.get() + 1);
+        optimizer_schedule::insertion_neighborhood(&self.instance, sequence).ok()
     }
 }
 

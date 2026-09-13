@@ -13,6 +13,7 @@
 //! against the host recurrence by the caller's contracts, and a candidate built from
 //! them is validated against the original model like any other.
 
+use optimizer_core::CancellationToken;
 use std::path::{Path, PathBuf};
 use std::rc::Rc;
 
@@ -32,6 +33,24 @@ const NEIGHBORHOOD_BLOCK: u32 = 256;
 
 /// Compute capability this build's cubin targets.
 const TARGET_CAPABILITY: (u32, u32) = (12, 0);
+
+/// Permutations evaluated per launch of the batch kernel.
+///
+/// Requirement 27 asks for bounded chunks, and what has to be bounded is *work*,
+/// not calls. The largest supported instance costs 500 * 20 = 10,000 integer
+/// operations per permutation, so this chunk is at most 4.1e7 operations: well under
+/// a millisecond on the development hardware, and the bound holds for every smaller
+/// shape too because they cost strictly less per permutation.
+const BATCH_CHUNK: usize = 4_096;
+
+/// Removed jobs evaluated per launch of the neighbourhood kernel.
+///
+/// One block per removed job, each doing roughly 2 * n * m serial recurrence steps,
+/// so this chunk is at most 128 * 20,000 = 2.6e6 dependent operations at the largest
+/// supported shape. Smaller than the batch chunk on purpose: the neighbourhood
+/// kernel's per-block work is serial, so the same block count buys less parallelism
+/// and takes longer.
+const NEIGHBORHOOD_CHUNK: usize = 128;
 
 /// Where `tools/setup_cuda.sh` wrote its output when this crate was built.
 ///
@@ -91,6 +110,17 @@ pub struct ScheduleResidency {
     /// Counts uploads of instance-invariant data. Requirement 16 says this must be
     /// one per residency, and a counter is how a test asserts that without timing.
     uploads: usize,
+    /// Set when a sticky fault made this context unusable.
+    ///
+    /// Requirement 29: once a kernel faults, every later call on the same context
+    /// fails too, so continuing to launch turns one fault into a stream of them and
+    /// buries the first. A poisoned residency refuses without touching the device.
+    poisoned: std::cell::Cell<bool>,
+    /// Counts launches, so a test can assert chunking happened.
+    ///
+    /// Requirement 27 is about how work is divided, which no result reveals: the
+    /// same answers come back whether they took one launch or fifty.
+    launches: std::cell::Cell<u64>,
 }
 
 /// Why a device path declined, separately from why it failed.
@@ -267,6 +297,8 @@ impl ScheduleResidency {
             jobs: shape.jobs,
             machines: shape.machines,
             uploads: 1,
+            poisoned: std::cell::Cell::new(false),
+            launches: std::cell::Cell::new(0),
         })
     }
 
@@ -287,7 +319,12 @@ impl ScheduleResidency {
     ///
     /// Returns [`DeviceError::Unsupported`] for a malformed batch and an
     /// availability failure when the device refuses or a launch faults.
-    pub fn makespans(&self, sequences: &[u16]) -> Result<Vec<u32>, DeviceError> {
+    pub fn makespans(
+        &self,
+        sequences: &[u16],
+        cancel: &CancellationToken,
+    ) -> Result<Vec<u32>, DeviceError> {
+        self.usable()?;
         if self.jobs == 0 || !sequences.len().is_multiple_of(self.jobs) {
             return Err(DeviceError::Unsupported(format!(
                 "{} sequence entries is not a whole number of {}-job permutations",
@@ -311,26 +348,46 @@ impl ScheduleResidency {
         device_sequences.copy_from(sequences, &self.stream)?;
         let device_makespans = self.allocate_u32(batch)?;
 
-        let grid = batch.div_ceil(BATCH_BLOCK as usize);
-        launch(
-            &function,
-            LaunchConfig {
-                grid: u32::try_from(grid).map_err(|_| {
-                    DeviceError::Unsupported("batch exceeds the grid dimension".into())
-                })?,
-                block: BATCH_BLOCK,
-                shared_memory: shared,
-            },
-            &[
-                Argument::DevicePtr(self.times.as_device_ptr()),
-                Argument::DevicePtr(device_sequences.as_device_ptr()),
-                Argument::DevicePtr(device_makespans.as_device_ptr()),
-                Argument::U32(u32::try_from(self.jobs).unwrap_or(u32::MAX)),
-                Argument::U32(u32::try_from(self.machines).unwrap_or(u32::MAX)),
-                Argument::U32(u32::try_from(batch).unwrap_or(u32::MAX)),
-            ],
-            &self.stream,
-        )?;
+        // Requirement 27: bounded chunks with a cancellation check between them, so
+        // a cancelled run waits for one chunk rather than for the whole batch. The
+        // check is before each launch rather than after, so a run cancelled before
+        // any work starts does none.
+        for offset in (0..batch).step_by(BATCH_CHUNK) {
+            if cancel.is_cancelled() {
+                return Err(DeviceError::Cancelled);
+            }
+            let count = BATCH_CHUNK.min(batch - offset);
+            let grid = count.div_ceil(BATCH_BLOCK as usize);
+            launch(
+                &function,
+                LaunchConfig {
+                    grid: u32::try_from(grid).map_err(|_| {
+                        DeviceError::Unsupported("chunk exceeds the grid dimension".into())
+                    })?,
+                    block: BATCH_BLOCK,
+                    shared_memory: shared,
+                },
+                &[
+                    Argument::DevicePtr(self.times.as_device_ptr()),
+                    Argument::DevicePtr(device_sequences.as_device_ptr()),
+                    Argument::DevicePtr(device_makespans.as_device_ptr()),
+                    Argument::U32(u32::try_from(self.jobs).unwrap_or(u32::MAX)),
+                    Argument::U32(u32::try_from(self.machines).unwrap_or(u32::MAX)),
+                    Argument::U32(u32::try_from(offset).unwrap_or(u32::MAX)),
+                    Argument::U32(u32::try_from(count).unwrap_or(u32::MAX)),
+                ],
+                &self.stream,
+            )
+            .map_err(|error| self.observe(error))?;
+            self.launches.set(self.launches.get() + 1);
+            // Synchronizing per chunk is what makes the cancellation check above
+            // mean anything: without it the launches queue and the loop finishes
+            // before any of them has run. It is also where a kernel fault surfaces,
+            // which is why the sticky check wraps it.
+            self.stream
+                .synchronize()
+                .map_err(|error| self.observe(error))?;
+        }
 
         let mut makespans = vec![0u32; batch];
         device_makespans.copy_to(&mut makespans, &self.stream)?;
@@ -347,7 +404,12 @@ impl ScheduleResidency {
     ///
     /// Returns [`DeviceError::Unsupported`] when `sequence` is not a permutation of
     /// the resident instance's jobs, and an availability failure otherwise.
-    pub fn insertion_neighborhood(&self, sequence: &[u16]) -> Result<Vec<(u32, u32)>, DeviceError> {
+    pub fn insertion_neighborhood(
+        &self,
+        sequence: &[u16],
+        cancel: &CancellationToken,
+    ) -> Result<Vec<(u32, u32)>, DeviceError> {
+        self.usable()?;
         if sequence.len() != self.jobs {
             return Err(DeviceError::Unsupported(format!(
                 "sequence has {} entries, expected {}",
@@ -367,23 +429,35 @@ impl ScheduleResidency {
         let device_cost = self.allocate_u32(self.jobs)?;
         let device_position = self.allocate_u32(self.jobs)?;
 
-        launch(
-            &function,
-            LaunchConfig {
-                grid: u32::try_from(self.jobs).unwrap_or(u32::MAX),
-                block: NEIGHBORHOOD_BLOCK,
-                shared_memory: shared,
-            },
-            &[
-                Argument::DevicePtr(self.times.as_device_ptr()),
-                Argument::DevicePtr(device_sequence.as_device_ptr()),
-                Argument::DevicePtr(device_cost.as_device_ptr()),
-                Argument::DevicePtr(device_position.as_device_ptr()),
-                Argument::U32(u32::try_from(self.jobs).unwrap_or(u32::MAX)),
-                Argument::U32(u32::try_from(self.machines).unwrap_or(u32::MAX)),
-            ],
-            &self.stream,
-        )?;
+        for offset in (0..self.jobs).step_by(NEIGHBORHOOD_CHUNK) {
+            if cancel.is_cancelled() {
+                return Err(DeviceError::Cancelled);
+            }
+            let count = NEIGHBORHOOD_CHUNK.min(self.jobs - offset);
+            launch(
+                &function,
+                LaunchConfig {
+                    grid: u32::try_from(count).unwrap_or(u32::MAX),
+                    block: NEIGHBORHOOD_BLOCK,
+                    shared_memory: shared,
+                },
+                &[
+                    Argument::DevicePtr(self.times.as_device_ptr()),
+                    Argument::DevicePtr(device_sequence.as_device_ptr()),
+                    Argument::DevicePtr(device_cost.as_device_ptr()),
+                    Argument::DevicePtr(device_position.as_device_ptr()),
+                    Argument::U32(u32::try_from(self.jobs).unwrap_or(u32::MAX)),
+                    Argument::U32(u32::try_from(self.machines).unwrap_or(u32::MAX)),
+                    Argument::U32(u32::try_from(offset).unwrap_or(u32::MAX)),
+                ],
+                &self.stream,
+            )
+            .map_err(|error| self.observe(error))?;
+            self.launches.set(self.launches.get() + 1);
+            self.stream
+                .synchronize()
+                .map_err(|error| self.observe(error))?;
+        }
 
         let mut costs = vec![0u32; self.jobs];
         let mut positions = vec![0u32; self.jobs];
@@ -400,6 +474,36 @@ impl ScheduleResidency {
             // because `open` already found the real bound admissible.
             total_processing_time: 0,
         }
+    }
+
+    /// How many kernel launches this residency has made.
+    #[must_use]
+    pub fn launches(&self) -> u64 {
+        self.launches.get()
+    }
+
+    /// Whether a sticky fault has made this residency unusable.
+    #[must_use]
+    pub fn poisoned(&self) -> bool {
+        self.poisoned.get()
+    }
+
+    /// Refuse immediately when the context is already finished.
+    fn usable(&self) -> Result<(), DeviceError> {
+        if self.poisoned.get() {
+            return Err(DeviceError::ContextPoisoned(
+                optimizer_cuda_sys::DriverStatus::LaunchFailed,
+            ));
+        }
+        Ok(())
+    }
+
+    /// Record a failure, remembering a sticky one so nothing launches again.
+    fn observe(&self, error: DeviceError) -> DeviceError {
+        if error.poisons_context() {
+            self.poisoned.set(true);
+        }
+        error
     }
 
     /// The device this residency is bound to, for a record that must name it.

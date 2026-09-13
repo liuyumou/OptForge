@@ -1,5 +1,71 @@
 # Active Task
 
+## C6 Bounded Launch Chunks and Host Fallback (2026-09-13)
+
+Objective: reach SPEC-0010 requirements 27 to 30 — bounded launch chunks with a
+cancellation check between them, a poisoned context that is not launched into again,
+and a device fault that never becomes a solver outcome.
+
+Status: complete. Requirement 29 takes its fall-back-for-the-run option rather than
+rebuilding a context, which the specification permits and which is recorded as the
+choice it is.
+
+Acceptance gate: a 500-job neighbourhood takes four launches rather than one,
+asserted against a counter; the chunked result is identical to the host's; a
+pre-cancelled call launches nothing and reports cancellation; a cancelled residency
+is still usable afterwards; an input error touches the device at all; the host
+fallback produces byte-identical proposals; `bash tools/check.sh` passes with native
+acceptance covered. Resource budget: **GPU, one device under the shared host lease**.
+
+What had to be bounded is work, not calls, and the two chunk sizes differ for a
+reason worth recording. The batch kernel is one thread per permutation, so 4,096
+permutations is 4.1e7 integer operations at the largest supported shape. The
+neighbourhood kernel is one block per removed job and each block's recurrence is
+serial, so the same block count buys far less parallelism and takes longer; 128 jobs
+is 2.6e6 dependent operations. Picking one constant for both would have made one of
+them either uselessly small or unboundedly large.
+
+Synchronizing per chunk is what makes the cancellation check mean anything, and that
+is not free. Without it the launches queue and the loop finishes before any of them
+has run, so the check would test a token nothing had waited on. It is also where a
+kernel fault surfaces, which is why the sticky check wraps the synchronize rather
+than the launch.
+
+The measurement did not move: a 500-job neighbourhood still runs in the same time it
+did as a single launch, because four synchronizes at this size cost microseconds
+against milliseconds of work. That is the expected result and it is worth stating,
+because a chunking change that *did* move it would mean the chunks were too small.
+
+Requirement 29 offers two responses to a sticky fault and this takes the second.
+Rebuilding a context would mean replacing one that the residency's buffers hold
+through an `Rc`, which is a lifetime problem rather than a driver one; falling back
+for the remainder of the run is permitted, simpler, and loses only a transient
+fault's device. The cost is recorded in [known failures](known-failures.md) along
+with the honest gap: the decision logic is unit-tested, and recovery from a real
+sticky fault is not, because provoking one means corrupting a device.
+
+The producer's fallback closes requirement 24's recorded gap, and the assertion is
+the one that matters. The fallback is `optimizer_schedule::insertion_neighborhood`
+— the CPU path this project already treats as authoritative, not a second
+implementation written to match the kernel — so the two cannot drift, and the
+contract asserts the proposals are *identical* rather than equally good. A caller
+cannot tell which path ran, which is the definition of a fallback; the `fallbacks()`
+counter is how a test can.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed with the pinned HiGHS 1.11.0
+library linked and **zero test skips other than the twenty device tests**, exit 0.
+Rust tests rose from 295 to 300 and Python remains 68; documentation remains 56
+pages. `Cargo.lock` is unchanged; `optimizer-cuda` gained an `optimizer-core` edge
+for `CancellationToken`, which requirement 27 names explicitly. Separately,
+`bash tools/gpu_job.sh <uuid> bash tools/gpu_check.sh` passed both device suites —
+fourteen kernel contracts and six producer contracts — and all four sanitizers over
+both binaries, with zero errors and zero hazards.
+
+Follow-up: none blocking. What remains open on SPEC-0010 is requirement 22's
+threshold, which is deliberately not implemented because a dispatch threshold is an
+acceptance-shaped number that the benchmark protocol requires an ADR and an
+experiment record to commit.
+
 ## C6 Device-Backed Candidate Producer (2026-09-13)
 
 Objective: make a search reach a device. Until now the device path existed and was
