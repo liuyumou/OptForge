@@ -6,8 +6,9 @@ Owner: heterogeneous computation
 Introduced: C6
 Last reviewed commit: 391edeb
 Supersedes: none; amends SPEC-0006 requirement 1 and SPEC-0009 requirement 9
-Implementation: pending
-Tests: pending
+Implementation: [driver boundary](../../crates/optimizer-cuda-sys/src/lib.rs), [status mapping](../../crates/optimizer-cuda-sys/src/status.rs), [residency and admissibility](../../crates/optimizer-cuda/src/schedule.rs), [lease ownership](../../crates/optimizer-cuda/src/lib.rs), [kernels](../../cuda/schedule_eval/schedule_eval.cu), [provisioning](../../tools/setup_cuda.sh), [build probe](../../crates/optimizer-cuda/build.rs)
+Tests: [device contracts](../../crates/optimizer-cuda/tests/device.rs), [admissibility and status unit tests](../../crates/optimizer-cuda/src/schedule.rs)
+Implemented: requirements 2 to 4, 7 to 21 and 23 to 39 in part; see [known failures](../../state/known-failures.md) for the requirements this slice does not yet reach
 
 ## Purpose
 

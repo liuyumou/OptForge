@@ -24,25 +24,118 @@ the time and is left as written rather than backdated. Anything after `dfdc245`
 is local until the maintainer pushes it, and AGENTS.md's prohibition on
 publishing without authorization is unchanged.
 
+## SPEC-0010 requirements this slice does not yet reach
+
+The device path exists and agrees exactly with the host, but SPEC-0010 is not
+finished, and the gap is listed here rather than implied by an unqualified
+"C6 implemented".
+
+Not implemented at all. Requirement 1 and SPEC-0006 requirement 1a: discovery still
+queries three fields, so `Hardware::driver` has no producer and a device run cannot
+yet satisfy SPEC-0007 requirement 9. Requirements 5, 6, 40 and 41: there is no
+`device` field on the search configuration, so `search-config-v3`,
+`search-record-v3` and `run-record-v2` do not exist and a device run is not
+re-executable from its record. Requirement 22's crossover is measured but is not yet
+what any default consults, because nothing dispatches to a device outside a test.
+Requirement 35: `optimizer-registry` still refuses every `gpu` hardware requirement
+unconditionally. There is no `optimizer gpu probe` subcommand and no device-backed
+candidate producer, so nothing reaches a device from outside Rust test code -- which
+is the same gap C8 closed for extensions and it is open again here.
+
+Partly implemented. Requirements 27 to 30: a launch is one call per batch rather than
+bounded chunks with a cancellation check between them, so cancellation latency is
+bounded by the batch and not by a chunk; `DriverStatus::is_sticky` names the sticky
+statuses and is tested, but nothing yet destroys and rebuilds a context on one.
+Requirement 24's fallback is available -- `device_path_available` and `admissible`
+both answer before any allocation -- but no caller currently chooses between the two
+paths, so the fallback is reachable rather than exercised.
+
+Reproduction: `grep -rn "device" schemas/search-config-v2.schema.json` finds nothing,
+and `AI_OPTIMIZER_GPU=1 cargo test -p optimizer-cuda` passes without any of the above
+existing. Next step: the schema cascade and the CLI surface, in that order, because
+the surface has nothing to record without the cascade.
+
+## Device sanitizer coverage has not run
+
+SPEC-0010's acceptance list and the C6 backlog line both name sanitizers.
+`compute-sanitizer` ships with the installed toolkit, but no run is part of any gate
+and none has been recorded. The kernels are new, hand-written, and index shared
+memory from computed offsets, which is exactly the code a memory checker is for.
+This is an uncovered part of the C6 acceptance list, recorded rather than waived
+silently, and it is separate from the C1 native-sanitizer gap below. Next step: a
+`compute-sanitizer --tool memcheck` run over the device suite on the labeled runner,
+added to the gate behind the same `AI_OPTIMIZER_GPU=1` marker the device tests use.
+
+## Device acceptance does not run in CI
+
+The device suite is opt-in behind `AI_OPTIMIZER_GPU=1` so the ordinary gate stays
+CPU-only and no task record's "CPU only, no GPU workloads" budget is made false by
+it. The consequence is that device evidence exists only where someone ran it by
+hand: the labeled GPU runner is still not provisioned, so no device test has ever
+run in CI. Evidence recorded from a local run is recorded as such and must not be
+read as a CI pass.
+
 ## Deferred hardware evidence
 
-GPU support queries inventory only. CUDA sanitizer and kernel equivalence tests
-remain gated on C6 implementation. HiGHS differential tests are implemented and
-passing under C1; see [active task](active-task.md). No solver performance or
-hardware claim is made.
+HiGHS differential tests are implemented and passing under C1; see
+[active task](active-task.md). No solver performance or hardware claim is made, and
+the crossover recorded below is a development diagnostic on one host rather than a
+benchmark result.
 
-C6 is now specified as
-[SPEC-0010](../docs/specifications/SPEC-0010-heterogeneous-computation.md) and
-[SPEC-0011](../docs/specifications/SPEC-0011-gpu-lp-backend.md), so the contract for
-that evidence exists while the evidence itself does not. Four gaps are carried
-forward explicitly rather than treated as closed by specifying them. No device code
-object is built, so every device-dependent test would report a skip if it existed.
-No labeled GPU runner is provisioned, so device sanitizer coverage cannot run in CI
-at all; see the external configuration entry above. The CPU baseline the crossover
-must be measured against is now tuned, recorded separately below, so that gap is
-closed rather than outstanding. And the driver version field that SPEC-0007
-requirement 9 requires of a GPU record still has no producer, which SPEC-0010
-requirement 1 is written to supply.
+## The device loses below roughly fifty jobs, and context creation dominates
+
+The first crossover measurement, recorded here because both of its findings are
+inconvenient and would be easy to leave out.
+
+Measured on one RTX 5090, compute capability 12.0, 170 multiprocessors, release
+build, best of three after a warmup, over the ADR-0011 scale split. The workload is
+one full insertion neighborhood: for every job, the cost and position of its best
+reinsertion. The CPU column is the tuned `insertion_neighborhood`; "resident" is the
+device with the instance already uploaded and the context already created; "with
+setup" is end to end from nothing, which is what the benchmark protocol requires be
+reported and which no kernel-only number may replace.
+
+| instance | shape | cpu tuned | device resident | device with setup | ratio |
+| --- | --- | --- | --- | --- | --- |
+| ta001 | 20x5 | 0.010 ms | 0.041 ms | 151.6 ms | 0.25x |
+| ta011 | 20x10 | 0.019 ms | 0.043 ms | 151.7 ms | 0.45x |
+| ta021 | 20x20 | 0.037 ms | 0.054 ms | 148.4 ms | 0.69x |
+| ta031 | 50x5 | 0.063 ms | 0.054 ms | 143.9 ms | 1.17x |
+| ta041 | 50x10 | 0.122 ms | 0.074 ms | 163.4 ms | 1.64x |
+| ta051 | 50x20 | 0.230 ms | 0.087 ms | 162.3 ms | 2.63x |
+| ta061 | 100x5 | 0.250 ms | 0.079 ms | 148.2 ms | 3.19x |
+| ta071 | 100x10 | 0.478 ms | 0.095 ms | 147.1 ms | 5.03x |
+| ta081 | 100x20 | 0.916 ms | 0.134 ms | 149.9 ms | 6.85x |
+| ta091 | 200x10 | 1.898 ms | 0.159 ms | 146.8 ms | 11.97x |
+| ta101 | 200x20 | 3.749 ms | 0.232 ms | 147.0 ms | 16.15x |
+| ta111 | 500x20 | 23.868 ms | 2.507 ms | 148.7 ms | 9.52x |
+
+The device loses at twenty jobs, by a factor of four. That row is the reason the
+measurement is believable: SPEC-0010's acceptance list states it as the expected
+outcome, and a report winning everywhere would have been evidence that transfers
+were excluded. The crossover sits at roughly fifty jobs on this hardware, and
+requirement 22 makes the CPU the default below it.
+
+Context creation costs about 148 milliseconds and dwarfs every other number in the
+table, including the largest CPU time. A device is therefore worth reaching only
+when the context is amortized across many calls, which is requirement 16's residency
+rule arriving as a measurement rather than as a design preference. Nothing in the
+project currently amortizes it, because nothing dispatches to a device outside a
+test.
+
+The ratio peaks at 200 jobs and then falls, from 16.15x to 9.52x. That is not noise
+and the cause is known: the head and tail tables are 80,000 bytes at 500 jobs by 20
+machines, so only one block is resident per multiprocessor, and the per-block
+recurrence is built by two threads while the other 254 wait. The kernel comment says
+so and names the fix -- a max-plus scan across machines per step -- which is
+deliberately not done, because correctness came first and an unmeasured optimization
+would have had nothing to be measured against. The falling tail is what makes the
+table worth keeping: a sweep that stopped at 200 jobs would have reported a
+monotonic trend that does not hold.
+
+These numbers are a development diagnostic on one host. They are not a benchmark
+result, not evidence, and not a claim about the engine, and SPEC-0010 requirement 36
+forbids reading the crossover as evidence that device execution improves a search.
 
 ## A device fault is outside every containment claim this project makes
 

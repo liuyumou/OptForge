@@ -30,7 +30,7 @@ pub use evaluate::{completion_times, makespan, validate_permutation};
 pub use generate::{
     DEVELOPMENT_SUBSET, GENERATOR_NAME, Lehmer, PublishedInstance, SCALE_SUBSET, taillard_instance,
 };
-pub use heuristic::{insertion, neh};
+pub use heuristic::{insertion, insertion_neighborhood, neh};
 pub use instance::{
     FlowShopDocument, FlowShopInstance, MAX_JOBS, MAX_MACHINES, MAX_PROCESSING_TIME,
     SCHEDULE_SCHEMA_VERSION,

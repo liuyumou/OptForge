@@ -8,6 +8,10 @@ license.workspace = true
 [dependencies]
 serde.workspace = true
 csv = "1.3"
+optimizer-cuda-sys = { version = "0.1.0", path = "../optimizer-cuda-sys" }
+
+[dev-dependencies]
+optimizer-schedule = { version = "0.1.0", path = "../optimizer-schedule" }
 
 [lints]
 workspace = true

@@ -27,6 +27,42 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- The CUDA driver boundary, under SPEC-0010 and ADR-0009. `optimizer-cuda-sys` is the
+  workspace's second and last unsafe crate; it resolves `libcuda.so.1` with `dlopen`
+  rather than linking it, so an ordinary `cargo build` still works on a host with no
+  CUDA toolkit and no device, an absent driver is a typed error rather than a link
+  failure, and no NVIDIA code is linked or redistributed. No third-party crate was
+  added: `libc` was already in the lockfile. `optimizer-cuda` keeps
+  `unsafe_code = "forbid"` and keeps discovery, the lease and residency.
+- Two device kernels for batched flow-shop evaluation, compiled out of tracked source
+  by `tools/setup_cuda.sh`. `nvcc` is a provisioning dependency, never a build
+  dependency. Both are pure 32-bit integer: at compute capability 12.0 that runs at
+  the full lane rate, and it makes CPU/GPU agreement an exact identity rather than a
+  tolerance. The head and tail tables are 32-bit because 64-bit ones would need
+  160,000 bytes at the largest supported instance, where a block may address 99 KB.
+- `ScheduleResidency`, which uploads an instance once and reuses it across calls, and
+  refuses a device before any allocation when the instance's own makespan bound
+  exceeds the kernel's range, when the shape needs more shared memory than the device
+  allows, or when the compute capability is older than the code object.
+- `Ownership::acquire_or_inherit`, which accepts a lease an ancestor already holds.
+  `tools/gpu_job.sh` takes the lock and execs its child, so a child that acquired
+  again would block on itself until the wrapper's 300-second timeout.
+- `optimizer_schedule::insertion_neighborhood`, the whole insertion neighborhood of
+  one permutation scored from a single starting point. Unlike `insertion`, which is
+  sequential because an accepted move is visible to the next job, this scores the
+  jobs independently, which is what makes it expressible as a batch and therefore
+  what a device can compute. It is also the CPU path the device must agree with.
+- Device acceptance tests, opt-in behind `AI_OPTIMIZER_GPU=1` so the ordinary gate
+  stays CPU-only and no task record's "CPU only" resource budget is made false. They
+  assert equality against the host recurrence at tolerance exactly zero, agreement
+  with a full recomputation, bitwise-identical repeats, one upload per residency, and
+  that a nonexistent UUID and an absent code object are each refused by name.
+- A first crossover measurement, recorded in
+  [known failures](state/known-failures.md). The device loses at 20 jobs by a factor
+  of four, crosses over at roughly 50, peaks at 16x on 200x20 and falls back to 9.5x
+  at 500x20; context creation costs about 148 ms and dwarfs every other number. It is
+  a development diagnostic on one host, not a benchmark result and not evidence, and
+  no default consults it yet.
 - A frozen Taillard scale split, under ADR-0011, at
   `benchmarks/manifests/taillard-flow-shop-scale-v1.json`. It takes the first
   instance of each of the paper's twelve published classes, spanning 20 to 500 jobs

@@ -144,6 +144,13 @@ and timings include them. Multi-GPU work is deferred. See
 [lease implementation](../../crates/optimizer-cuda/src/lib.rs), and
 [acceptance tests](../../crates/optimizer-cli/tests/cli.rs).
 
+C6's device leg is now partly built. `optimizer-cuda-sys` resolves the driver at
+runtime and owns every handle; `optimizer-cuda` holds the lease, decides
+admissibility before any allocation, and keeps an instance resident across calls. Two
+integer kernels evaluate flow-shop schedules and agree with the recurrence exactly.
+Nothing above them dispatches to a device yet, so the leg reaches the flow only from
+test code, which is the same gap C8 closed for extensions.
+
 C6 adds the device leg of the numerical flow, under
 [SPEC-0010](../specifications/SPEC-0010-heterogeneous-computation.md) and
 [SPEC-0011](../specifications/SPEC-0011-gpu-lp-backend.md). It reaches the flow at

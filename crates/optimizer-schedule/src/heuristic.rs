@@ -115,3 +115,41 @@ fn partial_makespan(
         .copied()
         .unwrap_or(0))
 }
+
+/// For every job, the cost and position of its best reinsertion into `sequence`,
+/// with that job removed first.
+///
+/// This is the whole insertion neighborhood of one permutation, evaluated from one
+/// starting point. It is deliberately *not* what [`insertion`] does: that pass is
+/// sequential, so an accepted move is visible to the next job and the jobs cannot be
+/// scored independently. This function scores them independently, which is what makes
+/// it expressible as a batch and therefore what a device can compute.
+///
+/// Choosing among the results is left to the caller, so the tie-break lives in one
+/// place rather than being duplicated by every consumer.
+///
+/// # Errors
+///
+/// Returns a candidate failure when `sequence` is not a permutation of the
+/// instance's jobs, and a numerical failure on overflow.
+pub fn insertion_neighborhood(
+    instance: &FlowShopInstance,
+    sequence: &[usize],
+) -> Result<Vec<(u64, usize)>, ValidationError> {
+    crate::evaluate::validate_permutation(instance, sequence)?;
+    let mut arrays = InsertionArrays::new(instance.machines());
+    let mut without: Vec<usize> = Vec::with_capacity(sequence.len());
+    let mut best = Vec::with_capacity(instance.jobs());
+    for job in 0..instance.jobs() {
+        let from = sequence
+            .iter()
+            .position(|&candidate| candidate == job)
+            .expect("a validated permutation contains every job");
+        without.clear();
+        without.extend_from_slice(sequence);
+        without.remove(from);
+        arrays.rebuild(instance, &without)?;
+        best.push(arrays.best_insertion(instance, job)?);
+    }
+    Ok(best)
+}

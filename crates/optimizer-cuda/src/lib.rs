@@ -1,4 +1,11 @@
-//! GPU discovery and cooperative host-wide ownership without CUDA linkage.
+//! GPU discovery, cooperative host-wide ownership, and device residency.
+//!
+//! This crate contains no unsafe code and links nothing. Discovery is a subprocess,
+//! the lease is a standard-library file lock, and device work is delegated to
+//! `optimizer-cuda-sys`, which ADR-0009 makes the only crate permitted to call the
+//! driver. Keeping the split this way is deliberate: every GPU consumer in the
+//! workspace already depends on this crate, and adding a kernel path should not
+//! make the crate they depend on unsafe.
 
 use std::fs::{File, OpenOptions, TryLockError};
 use std::io;
@@ -9,6 +16,11 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 use serde::Serialize;
+
+// The module carries its own `//!` documentation. A `///` comment here as well
+// would be concatenated with it and resolved in *this* scope, where the module's own
+// types are not in scope, so its intra-doc links would not resolve.
+pub mod schedule;
 
 /// Shared by every project checkout and GPU runner on a host.
 pub const DEFAULT_LOCK_PATH: &str = "/tmp/ai-optimizer-gpu.lock";
@@ -118,6 +130,75 @@ fn query_devices() -> Result<Vec<Device>, String> {
         ));
     }
     parse_devices(&output.stdout)
+}
+
+/// Environment marker a wrapper sets to say it already holds the host lease.
+///
+/// `tools/gpu_job.sh` takes the lock and then execs its child, so a child that
+/// acquired again would block on itself until the wrapper's 300-second timeout.
+/// SPEC-0010 requirement 8 exists because of that deadlock, not in anticipation of
+/// one.
+pub const INHERITED_LEASE_VARIABLE: &str = "AI_OPTIMIZER_GPU_LEASE";
+
+/// How a process came to hold the host lease.
+///
+/// The two are deliberately distinguishable rather than collapsed into a boolean:
+/// a diagnostic that cannot say whether it took the lock or trusted an ancestor
+/// cannot explain a deadlock or an unleased run.
+pub enum Ownership {
+    /// This process took the lock and will release it on drop.
+    Acquired(GpuLease),
+    /// An ancestor holds it, named by the marker it set.
+    Inherited,
+}
+
+impl std::fmt::Debug for Ownership {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // The lease itself holds a file handle and has nothing worth printing; what
+        // a reader needs is which of the two ways this process came to hold it.
+        formatter.write_str(match self {
+            Self::Acquired(_) => "Ownership::Acquired",
+            Self::Inherited => "Ownership::Inherited",
+        })
+    }
+}
+
+impl Ownership {
+    /// Take the host lease, or accept one an ancestor already holds.
+    ///
+    /// Requirement 9 is why there is no third outcome: a caller that neither
+    /// acquired nor inherited gets an error, and no flag or variable admits
+    /// unleased device execution.
+    ///
+    /// # Errors
+    ///
+    /// Returns whatever [`GpuLease::acquire`] returns when the lock must be taken.
+    pub fn acquire_or_inherit(
+        path: &Path,
+        timeout: Duration,
+        cancelled: &AtomicBool,
+    ) -> io::Result<Self> {
+        if inherited() {
+            return Ok(Self::Inherited);
+        }
+        GpuLease::acquire(path, timeout, cancelled).map(Self::Acquired)
+    }
+
+    /// Whether an ancestor holds the lease rather than this process.
+    #[must_use]
+    pub fn is_inherited(&self) -> bool {
+        matches!(self, Self::Inherited)
+    }
+}
+
+/// Whether the wrapper marked this process as already holding the lease.
+///
+/// Only the exact value `inherited` counts. Treating any non-empty value as true
+/// would let a stray variable produce an unleased run, which requirement 9 forbids.
+#[must_use]
+pub fn inherited() -> bool {
+    std::env::var_os(INHERITED_LEASE_VARIABLE)
+        .is_some_and(|value| value.eq_ignore_ascii_case("inherited"))
 }
 
 /// An exclusive advisory lock. The OS releases it on drop or process death.

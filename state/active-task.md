@@ -1,5 +1,87 @@
 # Active Task
 
+## C6 Device Boundary and Batched Schedule Evaluation (2026-09-13)
+
+Objective: implement SPEC-0010's device path far enough to answer the question the
+whole capability exists for — whether a device agrees with the host exactly, and
+where the crossover is — without granting the device any authority.
+
+Status: complete for the boundary, the kernels and the evidence; incomplete for the
+surfaces that would let anything outside a test reach a device. Both halves are
+recorded in [known failures](known-failures.md) rather than one of them implied.
+
+Acceptance gate: device makespans equal `optimizer_schedule::makespan` exactly, at
+tolerance zero, over the whole ADR-0011 sweep; the device neighborhood equals both
+the accelerated CPU path and a full recomputation; a repeated evaluation is bitwise
+identical; a residency uploads once, asserted against a counter; a nonexistent UUID
+and an absent code object are each refused by name; the ordinary gate stays CPU-only
+and green with no device. Resource budget: **GPU, one device under the shared host
+lease**, which is the first task in this project whose budget is not CPU only.
+
+The boundary is `dlopen`, not a link. `optimizer-cuda-sys` opens `libcuda.so.1` and
+resolves about twenty entry points, so `cargo build --workspace --all-features` keeps
+working on a host with no toolkit and no device, and an absent driver is a typed
+`DriverUnavailable` rather than a link error. That is what makes requirement 37
+reachable rather than aspirational, and it added no third-party crate: `libc` was
+already in the lockfile transitively. `optimizer-cuda` keeps `unsafe_code = "forbid"`
+and keeps discovery, the lease and residency, so the crate every GPU consumer already
+depends on did not become unsafe.
+
+Both kernels are pure `unsigned int`, and that choice is forced twice over. The
+hardware runs FP64 at one sixty-fourth of FP32 and issues integer and
+floating-point instructions on one pipeline, so integer code runs at the full lane
+rate. And the head and tail tables are 80,000 bytes at 500 jobs by 20 machines,
+inside the 99 KB a block may address at compute capability 12.0, where 64-bit tables
+would be 160,000 and would not fit on any block of this hardware. Both numbers were
+checked rather than assumed: the driver reports the 99 KB limit and `ptxas -v`
+reports 31 registers with zero spill for the batch kernel, inside the 42 that 48
+resident warps allow.
+
+Agreement is exact. Not "within a tolerance" — the assertion is `assert_eq!` on
+`u32` values, over 64 permutations of each of the twelve instances and over every
+job of every instance's neighborhood, plus a full cubic recomputation on the
+twenty-job instances so the two head-and-tail implementations cannot share a wrong
+idea of what an insertion costs. This is the strongest form of the CPU/GPU agreement
+evidence Stage 4 asks for, and it is available only because the arithmetic is
+integer; SPEC-0011's floating-point path will not have it.
+
+The crossover is measured and both of its findings are inconvenient. The device
+loses at twenty jobs by a factor of four, crosses over at roughly fifty, peaks at
+16x on 200x20 — and then falls back to 9.5x at 500x20, because the 80 KB tables
+leave one block resident per multiprocessor and two threads build the recurrence
+while 254 wait. Context creation costs about 148 ms, which dwarfs every other number
+in the table including the largest CPU time. The losing row and the falling tail are
+both why the table is believable: SPEC-0010 names the first as the expected outcome,
+and a sweep stopping at 200 jobs would have reported a monotonic trend that does not
+hold. The full table is in [known failures](known-failures.md).
+
+What is deliberately not done: the max-plus scan that would parallelise the
+recurrence across machines. It is named in the kernel comment and left undone,
+because correctness came first and an unmeasured optimisation would have had no
+baseline to be measured against. Now it has one.
+
+Device tests are opt-in behind `AI_OPTIMIZER_GPU=1`. Every earlier task record in
+this project states "CPU only, no GPU workloads", and a suite that silently took the
+host lease and ran kernels would have made those records false; it would also contend
+on a lock that permits one holder for the whole host. The ordinary gate therefore
+reports eight explicit skips naming the variable, which is the same shape as the
+native-library skip and is never counted as coverage.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed with the pinned HiGHS 1.11.0
+library linked and **zero test skips other than the eight device tests**, exit 0.
+Rust tests rose from 253 to 273 and Python remains 63; documentation remains 56
+pages. `Cargo.lock` gained `libc` as a direct dependency of the new crate and nothing
+else. Separately, `AI_OPTIMIZER_GPU=1 bash tools/gpu_job.sh <uuid> cargo test
+--release -p optimizer-cuda --test device` passed all eight on both an RTX 5090 and
+the RTX PRO 6000, under an inherited lease. No device test has run in CI, because the
+labeled runner is still not provisioned, and that is recorded rather than glossed.
+
+Follow-up: the schema cascade — `device` on the search configuration, and the
+`search-config-v3`, `search-record-v3`, `run-record-v2` versions it forces — then the
+CLI probe and the device-backed producer, then `compute-sanitizer`. Nothing reaches a
+device from outside Rust test code yet, which is the same gap C8 closed for
+extensions and is open again here.
+
 ## C6 Scale Split (2026-09-13)
 
 Objective: add a frozen flow-shop split that spans published instance shapes, so the

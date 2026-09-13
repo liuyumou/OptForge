@@ -32,6 +32,20 @@ Events report waiting, acquisition, and release as JSON lines. SIGINT/SIGTERM ca
 exit 130. No device is touched. A held lease releases on normal exit, cancellation,
 or process death; do not remove the lock file.
 
+## Device work
+
+```bash
+bash tools/setup_cuda.sh                      # nvcc -> target/native/cuda
+AI_OPTIMIZER_GPU=1 bash tools/gpu_job.sh GPU-<uuid> \
+  cargo test --release -p optimizer-cuda --test device
+```
+
+Device tests are opt-in. Without `AI_OPTIMIZER_GPU=1` they report an explicit skip,
+so `bash tools/check.sh` stays CPU-only even on a host that has a device; a suite
+that silently took the host lease would contend on a lock that permits one holder
+for the whole host. The wrapper exports `AI_OPTIMIZER_GPU_LEASE=inherited`, which is
+how a child knows not to acquire the lock its parent already holds.
+
 ## Real jobs
 
 ```bash

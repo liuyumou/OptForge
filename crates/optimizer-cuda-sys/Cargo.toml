@@ -1,0 +1,21 @@
+[package]
+name = "optimizer-cuda-sys"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+libc = "0.2"
+
+# This crate owns the CUDA driver boundary, the second and last native boundary in
+# the workspace. ADR-0009 permits unsafe here and nowhere else new, and a
+# workspace-level `forbid` cannot be relaxed per crate, so the lints are declared
+# explicitly instead of inherited, exactly as optimizer-highs does.
+[lints.rust]
+unsafe_code = "allow"
+unsafe_op_in_unsafe_fn = "deny"
+missing_docs = "warn"
+
+[lints.clippy]
+all = "warn"

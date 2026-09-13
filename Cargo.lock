@@ -148,7 +148,16 @@ name = "optimizer-cuda"
 version = "0.1.0"
 dependencies = [
  "csv",
+ "optimizer-cuda-sys",
+ "optimizer-schedule",
  "serde",
+]
+
+[[package]]
+name = "optimizer-cuda-sys"
+version = "0.1.0"
+dependencies = [
+ "libc",
 ]
 
 [[package]]
