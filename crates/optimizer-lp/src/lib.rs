@@ -19,10 +19,12 @@
 //! `Model::evaluate`'s, and a bound comes only from the certification procedure,
 //! which does not assume any iterate was computed correctly.
 
+pub mod certify;
 pub mod precondition;
 pub mod problem;
 pub mod reduce;
 
+pub use certify::{Certificate, NoBound, certify, certify_model};
 pub use precondition::{Preconditioner, PreconditionerSettings};
 pub use problem::{Compressed, LinearProgram, Range};
 pub use reduce::{ReductionOrder, SEGMENT, sequential_sum, sum, tree_sum};

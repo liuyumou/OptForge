@@ -1,5 +1,58 @@
 # Active Task
 
+## C6 Host Certification of a Dual Bound (2026-09-13)
+
+Objective: reach SPEC-0011 requirements 11, 12 and 13 — a bound produced only by a
+host-side procedure that does not assume the device computed anything correctly, and
+that is valid even when the iterate is far from optimal.
+
+Status: complete. This is the piece ADR-0010 calls load-bearing in a way little else
+in the project is, and it is tested for validity far from optimality rather than only
+near it.
+
+Acceptance gate: `bash tools/check.sh` with the pinned HiGHS library present.
+Resource budget: CPU only, no GPU workloads.
+
+Nothing here reads a residual, a norm or an objective any device computed. The only
+device-produced numbers the procedure touches are the row multipliers, and they enter
+inequalities that hold for every real number. That is what makes the result a
+certification rather than a check: the reduced costs are recomputed from the model's
+own coefficients, so `z = c − Aᵀŷ` is true by construction rather than claimed.
+
+The two sides of the repair are not symmetric, and the asymmetry is the reason
+ADR-0010's wording was corrected in `fde1d82`. A row multiplier with the sign whose
+bound is infinite can be zeroed, because projecting it breaks no identity. A reduced
+cost cannot, because it is determined by the multipliers, and adjusting one alone
+would falsify the identity the bound rests on. Where a variable's bound is infinite on
+the side its reduced cost needs, the infimum really is negative infinity and the
+honest answer is no bound, naming the variable. Clamping to a large finite number
+would fabricate one and is the most dangerous shortcut available in this module.
+
+Both mechanisms were checked to be load-bearing rather than assumed to be. Removing
+the repair fails three tests including the central validity one. Removing the rounding
+allowance fails the test written for it.
+
+Finding an instance where the allowance matters took a search, and the search is worth
+recording because the first attempt produced a test that proved nothing. A violation is
+pure `f64` rounding, so it only appears where the margin is zero: at the optimal dual,
+where complementary slackness makes every bounded term tight. Away from it the slack is
+of order the reduced costs, and rounding at 1e-16 cannot reach across — half a million
+random multipliers produced no violation at all. With the multiplier set to the one that
+zeroes a variable's reduced cost, an instance appeared whose raw sum exceeds the true
+optimum by 6.6e-14. The first version of this test used an instance where the raw sum
+landed exactly on the optimum, and asserted only that the allowance was positive and the
+bound weaker; that would have passed with the subtraction deleted.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed, exit 0, with 332 Rust tests, 68
+Python tests and 56 documentation pages. Eight tests are new. Validity is asserted
+against every feasible point on a grid rather than against an optimum, because weak
+duality claims the bound is below the objective everywhere feasible — testing the claim
+itself needs no second solver and no optimum. The multipliers include zero, a
+sign-flipped one and two scaled by 1e18, none near optimal.
+
+Follow-up: the host PDHG engine and the settings document, which is where requirements
+9 and 10 are recorded and where `solve-record-v2` lands.
+
 ## C6 Canonical LP Form and Fixed Reduction Order (2026-09-13)
 
 Objective: reach SPEC-0011 requirements 6, 7 and 27 — the constraint matrix in both

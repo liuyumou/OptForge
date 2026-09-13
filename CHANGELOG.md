@@ -21,6 +21,21 @@ User-visible changes are recorded here using Conventional Commit terminology.
   atomic reduction would make a result depend on how the hardware scheduled it.
   Reductions use one shared partition and tree order, defined once here for both
   engines rather than restated by the kernel.
+- Host certification of a dual bound, under SPEC-0011 requirements 11 to 13. A
+  bound is produced only by a host-side procedure in `f64` that recomputes the
+  reduced costs from the original model's own coefficients and evaluates weak
+  duality. It reads no residual, no norm and no objective the device computed, so
+  it cannot be checking the device against itself.
+
+  The bound is valid for an arbitrary multiplier vector, including one nowhere near
+  optimal: a bad guess makes the bounded terms small, so the bound is weak, but it
+  cannot make the bound invalid. Where a variable's bound is infinite on the side
+  its reduced cost needs, no finite number is a bound and none is reported --
+  the refusal names the variable rather than clamping to something large.
+
+  A conservative rounding allowance is subtracted, because the underlying argument
+  is exact in the reals and a `f64` sum that landed above the true value would be a
+  bound stronger than the evidence supports.
 
 ### Changed
 
