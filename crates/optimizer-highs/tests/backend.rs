@@ -5,11 +5,12 @@
 //! provisioned, so a missing build is never silently reported as coverage.
 
 use optimizer_core::{
-    Assignment, Backend, Basis, BasisStatus, Bound, Candidate, Constraint, Domain, ErrorKind,
-    LinearTerm, Model, ModelDocument, Objective, ObjectiveSense, SOLVE_SCHEMA_VERSION,
-    SolveOptions, SolveRecord, Termination, Tolerances, Variable, WarmStart,
+    Arithmetic, Assignment, Backend, Basis, BasisStatus, Bound, CAPABILITY_SCHEMA_VERSION,
+    CancellationToken, Candidate, Constraint, DeviceClass, Domain, ErrorKind, LinearTerm, Model,
+    ModelDocument, Objective, ObjectiveSense, ProblemClass, SOLVE_SCHEMA_VERSION, SolveOptions,
+    SolveRecord, Termination, Tolerances, Variable, WarmStart,
 };
-use optimizer_highs::{BACKEND_NAME, HighsBackend, is_native};
+use optimizer_highs::{BACKEND_NAME, HighsBackend, UNAVAILABLE_VERSION, is_native};
 
 fn exact() -> Tolerances {
     Tolerances {
@@ -700,4 +701,74 @@ fn a_validated_model_always_fingerprints() {
         extreme.fingerprint().is_ok(),
         "a validated model must always fingerprint"
     );
+}
+
+// ---------------------------------------------------------------------------
+// SPEC-0011 requirements 1 and 2: the capability declaration.
+// ---------------------------------------------------------------------------
+
+/// Requirement 2: a declaration states all four properties.
+#[test]
+fn the_pinned_adapter_states_every_declared_property() {
+    let declared = HighsBackend::new().capabilities();
+    assert_eq!(declared.schema_version(), CAPABILITY_SCHEMA_VERSION);
+    assert_eq!(declared.name(), BACKEND_NAME);
+    assert_eq!(declared.arithmetic(), Arithmetic::F64);
+    assert_eq!(declared.device(), DeviceClass::Cpu);
+    assert!(
+        declared.warm_start(),
+        "the adapter accepts both warm start forms and must say so"
+    );
+}
+
+/// Requirement 1: the declaration is checked against what the backend actually
+/// accepts, so it cannot drift from behavior.
+///
+/// This is the whole point of the requirement. A declaration is only useful to a
+/// caller who cannot see the implementation, so asserting it against a constant
+/// would test that a literal equals itself. Each declared class is solved
+/// instead, and each solve is required to reach a real outcome rather than the
+/// `Unsupported` a refusal would produce.
+#[test]
+fn the_pinned_adapter_accepts_every_class_it_declares() {
+    if !is_native() {
+        eprintln!(
+            "SKIP the_pinned_adapter_accepts_every_class_it_declares: \
+             HiGHS not provisioned; run bash tools/setup_highs.sh"
+        );
+        return;
+    }
+    let backend = HighsBackend::new();
+    let declared = backend.capabilities();
+    for class in declared.problem_classes() {
+        let (domain, name) = match class {
+            ProblemClass::Continuous => (Domain::Continuous, "declared-continuous"),
+            ProblemClass::Discrete => (Domain::Integer, "declared-discrete"),
+        };
+        let model = model(domain, name);
+        assert!(
+            declared.accepts(&model),
+            "a model of a declared class must be accepted by the declaration"
+        );
+        let record = backend
+            .solve(&model, &options(), &CancellationToken::new(), None)
+            .expect("a declared class solves");
+        assert_ne!(
+            record.termination,
+            Termination::Unsupported,
+            "{name}: a declared class must not be refused as unsupported"
+        );
+    }
+}
+
+/// The declaration names the version this build linked, never the pinned
+/// constant, so a build with no library cannot claim one it never called.
+#[test]
+fn the_declared_version_is_the_one_this_build_linked() {
+    let backend = HighsBackend::new();
+    let declared = backend.capabilities();
+    match backend.version() {
+        Some(version) => assert_eq!(declared.version(), version),
+        None => assert_eq!(declared.version(), UNAVAILABLE_VERSION),
+    }
 }

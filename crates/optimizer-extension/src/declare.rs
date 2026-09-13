@@ -7,7 +7,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use optimizer_core::{Domain, ErrorKind, Model, ValidationError};
+use optimizer_core::{ErrorKind, Model, ProblemClass, ValidationError};
 
 use crate::serde_strict::deserialize_object;
 
@@ -96,46 +96,6 @@ impl<'de> Deserialize<'de> for Authority {
             "propose_validated_candidate" => Ok(Self::ProposeValidatedCandidate),
             "propose_checked_action" => Ok(Self::ProposeCheckedAction),
             other => Err(serde::de::Error::unknown_variant(other, NAMES)),
-        }
-    }
-}
-
-/// A model class an extension states it supports.
-///
-/// The core checks a declaration against the model's actual domains, so an
-/// extension cannot be invoked on a class it did not claim.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize)]
-#[serde(rename_all = "snake_case")]
-pub enum ProblemClass {
-    /// Every variable is continuous.
-    Continuous,
-    /// At least one variable is integer or binary.
-    Discrete,
-}
-
-impl<'de> Deserialize<'de> for ProblemClass {
-    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        const NAMES: &[&str] = &["continuous", "discrete"];
-        match String::deserialize(deserializer)?.as_str() {
-            "continuous" => Ok(Self::Continuous),
-            "discrete" => Ok(Self::Discrete),
-            other => Err(serde::de::Error::unknown_variant(other, NAMES)),
-        }
-    }
-}
-
-impl ProblemClass {
-    /// The class of an original model, decided by its variable domains.
-    pub fn of(model: &Model) -> Self {
-        let discrete = model
-            .document()
-            .variables
-            .iter()
-            .any(|variable| variable.domain != Domain::Continuous);
-        if discrete {
-            Self::Discrete
-        } else {
-            Self::Continuous
         }
     }
 }

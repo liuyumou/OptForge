@@ -32,10 +32,17 @@ mod view;
 
 pub use declare::{
     Authority, Category, DeclaredLimits, EXTENSION_SCHEMA_VERSION, ExtensionDeclaration,
-    MAX_EXTENSION_ID_BYTES, ProblemClass,
+    MAX_EXTENSION_ID_BYTES,
 };
 pub use guard::{ExtensionHost, Registration};
 pub use hook::{Advice, CandidateProducer, Extension, SearchAdviser};
+/// The model class an extension declares it supports.
+///
+/// Re-exported rather than defined here: SPEC-0011 needs the same concept on the
+/// solve contract, and one type with one wire form is what keeps a registry
+/// entry's `continuous` and a backend's `continuous` from becoming two unrelated
+/// facts. Every `optimizer_extension::ProblemClass` path keeps working.
+pub use optimizer_core::ProblemClass;
 pub use record::{
     ExtensionFailure, ExtensionPolicy, ExtensionSummary, FailureKind, MAX_FAILURE_MESSAGE_BYTES,
     MAX_RETAINED_FAILURES, validate_policies,

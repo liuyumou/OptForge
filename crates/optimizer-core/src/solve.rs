@@ -486,7 +486,21 @@ pub fn finite_or_absent(value: f64) -> Option<f64> {
 /// handles across this boundary. They must not report proof completion for a
 /// limit, interruption or failure.
 pub trait Backend {
+    /// What this backend accepts, independently of any request.
+    ///
+    /// Takes no argument, so there is no request-shaped input a caller could use
+    /// to influence the answer. SPEC-0011 requirement 4 makes a declaration a
+    /// property of the backend rather than of the call, matching the rule that
+    /// an extension's authority follows from its category rather than from its
+    /// own claim.
+    fn capabilities(&self) -> crate::BackendCapabilities;
+
     /// Solve one original model under explicit options and cooperative cancellation.
+    ///
+    /// A request outside the declared capabilities terminates as
+    /// [`Termination::Unsupported`] rather than being attempted. The check
+    /// belongs to the implementation, so a caller holding a widened copy of a
+    /// declaration is still refused.
     fn solve(
         &self,
         model: &crate::Model,

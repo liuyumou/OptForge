@@ -3,11 +3,15 @@
 //! Construction validates structure; evaluation checks a supplied candidate using
 //! explicit tolerances. Neither operation solves a model or establishes a proof.
 
+mod capability;
 mod document;
 mod evaluate;
 mod serde_strict;
 mod solve;
 
+pub use capability::{
+    Arithmetic, BackendCapabilities, CAPABILITY_SCHEMA_VERSION, DeviceClass, ProblemClass,
+};
 pub use document::*;
 pub use evaluate::*;
 pub use solve::{

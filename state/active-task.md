@@ -1,5 +1,59 @@
 # Active Task
 
+## C6 Backend Capability Declaration (2026-09-13)
+
+Objective: reach SPEC-0011 requirements 1, 2 and 4 — a declaration a caller can read
+without knowing which implementation it holds, and which that caller cannot widen.
+
+Status: complete. Requirement 3's refusal is not reached here, because it needs a
+backend that refuses something, and the pinned adapter accepts every class.
+
+Acceptance gate: `bash tools/check.sh` with the pinned HiGHS library present.
+Resource budget: CPU only, no GPU workloads.
+
+`ProblemClass` moved from `optimizer-extension` to `optimizer-core` and is re-exported
+from its old path. It is a relocation rather than a redesign: its only constructor
+already read nothing but `Model` and `Domain`, both core types, and the serde
+implementation was carried verbatim. The alternative was a second enum on the solve
+contract with the same two variants and the same wire form, which is the drift
+SPEC-0008 requirement 8 exists to prevent arriving from a new direction — a registry
+entry claiming `continuous` and a backend declaring `continuous` would have become two
+unrelated facts. Every `optimizer_extension::ProblemClass` path still compiles, and the
+unchanged extension contract tests and `tests/integration/test_registry.py` are the
+evidence that no wire byte moved.
+
+Requirement 4 is carried by three mechanisms rather than one, because the obvious one
+is the weakest. Private fields stop a caller mutating a declaration; `capabilities`
+takes no argument, so there is no request-shaped input to influence it with; and a
+backend consults its own declaration inside `solve`, which is what makes a caller
+holding a widened copy still refused. The requirement is about authority, and only the
+third mechanism establishes it.
+
+The specification's printed interface could not be implemented and was corrected in
+`fde1d82` first. `version` is a `String`: the adapter reports the version it actually
+linked and `unavailable` when it linked nothing, and a `&'static str` would have forced
+it to name a version it may never have called.
+
+What the widening test does and does not establish. The `compile_fail` doctest is the
+first in this workspace. It was verified to fail with `E0616`, the private-field error,
+by compiling the same snippet directly. But the `E0616` annotation is **not enforced**:
+substituting `E0308` was tried and the doctest still passed, so stable rustdoc accepts
+any compilation failure. On its own the block would therefore keep passing if the field
+were renamed rather than kept private. A positive test reads the same field through its
+accessor so a rename cannot leave both green, and the doc comment records the
+limitation rather than implying the annotation checks anything.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed, exit 0, with 309 Rust tests, 68
+Python tests and 56 documentation pages. Nine tests are new: four on declaration
+validation, one pairing with the doctest, three on the pinned adapter's declaration,
+and the doctest itself. `the_pinned_adapter_accepts_every_class_it_declares` solves a
+model of each declared class and requires a real outcome rather than `Unsupported`,
+so a declaration cannot drift from behavior and the test cannot pass by refusing
+everything.
+
+Follow-up: the canonical LP form and the fixed reduction order, then the host
+certification.
+
 ## C6 SPEC-0011 Corrections Before Implementation (2026-09-13)
 
 Objective: settle two requirements of SPEC-0011 that cannot be satisfied as written,

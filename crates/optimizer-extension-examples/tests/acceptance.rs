@@ -16,9 +16,10 @@
 use std::cell::RefCell;
 
 use optimizer_core::{
-    Assignment, Backend, Bound, CancellationToken, Candidate, Constraint, Domain, LinearTerm,
-    Model, ModelDocument, Objective, ObjectiveSense, SCHEMA_VERSION, SOLVE_SCHEMA_VERSION,
-    SolveOptions, SolveRecord, Termination, Tolerances, ValidationError, Variable, WarmStart,
+    Arithmetic, Assignment, Backend, BackendCapabilities, Bound, CancellationToken, Candidate,
+    Constraint, DeviceClass, Domain, LinearTerm, Model, ModelDocument, Objective, ObjectiveSense,
+    ProblemClass, SCHEMA_VERSION, SOLVE_SCHEMA_VERSION, SolveOptions, SolveRecord, Termination,
+    Tolerances, ValidationError, Variable, WarmStart,
 };
 use optimizer_extension::{EXTENSION_SCHEMA_VERSION, ExtensionPolicy, FailureKind, Registration};
 use optimizer_extension_examples::{
@@ -312,6 +313,21 @@ struct ExactBackend {
 }
 
 impl Backend for ExactBackend {
+    fn capabilities(&self) -> BackendCapabilities {
+        // Both classes, because this stands in for a real backend over a grid
+        // that includes discrete models; a narrower declaration would make a
+        // refusal, rather than the extension host, the thing under test.
+        BackendCapabilities::declare(
+            "exact-test-lp",
+            "test".to_string(),
+            vec![ProblemClass::Continuous, ProblemClass::Discrete],
+            Arithmetic::F64,
+            true,
+            DeviceClass::Cpu,
+        )
+        .expect("a test declaration is well formed")
+    }
+
     fn solve(
         &self,
         model: &Model,

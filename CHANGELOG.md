@@ -6,6 +6,28 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Changed
 
+- **Breaking:** `Backend` gains a `capabilities` method, under SPEC-0011
+  requirements 1, 2 and 4. A backend now states the problem classes it accepts, its
+  arithmetic width, whether it takes a warm start and whether it runs on a device,
+  so a caller can know what an implementation supports without knowing which
+  implementation it holds. `solve` is unchanged, and no schema or wire format moves.
+
+  Migration: an out-of-tree `impl Backend` adds one method returning
+  `BackendCapabilities::declare(..)`. The trait had exactly one implementor in this
+  workspace and two test doubles, all updated here.
+
+  A declaration's fields are private, which is requirement 4 in the type rather than
+  in prose: a caller must not be able to widen one. Privacy alone would only stop a
+  local mutation, so `capabilities` also takes no argument, and a backend consults
+  its own declaration inside `solve` -- which is what makes a widened copy useless
+  to whoever holds it.
+- `ProblemClass` now lives in `optimizer-core` beside the solve contract and is
+  re-exported from `optimizer-extension`, so every existing path keeps working and
+  no document changes. Both a backend declaration and an extension declaration need
+  the concept, and two enums with the same variants and the same wire form would let
+  a registry entry's `continuous` and a backend's `continuous` drift into unrelated
+  facts.
+
 - A registry entry requiring a GPU now resolves when the run holds a device, and is
   still refused when it does not, under SPEC-0010 requirement 35. This narrows
   SPEC-0009 requirement 9's unconditional refusal rather than removing it, and

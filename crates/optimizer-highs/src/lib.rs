@@ -16,7 +16,8 @@ mod ffi;
 mod native;
 
 use optimizer_core::{
-    Backend, Basis, CancellationToken, Model, SolveOptions, SolveRecord, ValidationError, WarmStart,
+    Arithmetic, Backend, BackendCapabilities, Basis, CancellationToken, DeviceClass, Model,
+    ProblemClass, SolveOptions, SolveRecord, ValidationError, WarmStart,
 };
 
 /// Backend identifier recorded in every solve record.
@@ -146,6 +147,25 @@ fn interrupted_record(model: &Model, options: &SolveOptions) -> SolveRecord {
 }
 
 impl Backend for HighsBackend {
+    fn capabilities(&self) -> BackendCapabilities {
+        // The version reported is the one this build actually linked, never the
+        // pinned constant: a declaration naming 1.11.0 on a build that linked
+        // nothing would claim a library it may never call. This is the same rule
+        // UNAVAILABLE_VERSION exists to enforce in a record.
+        let version = self
+            .version()
+            .unwrap_or_else(|| UNAVAILABLE_VERSION.to_string());
+        BackendCapabilities::declare(
+            BACKEND_NAME,
+            version,
+            vec![ProblemClass::Continuous, ProblemClass::Discrete],
+            Arithmetic::F64,
+            true,
+            DeviceClass::Cpu,
+        )
+        .expect("the pinned adapter's declaration is a constant and is well formed")
+    }
+
     fn solve(
         &self,
         model: &Model,

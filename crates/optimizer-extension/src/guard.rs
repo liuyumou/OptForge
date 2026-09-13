@@ -15,11 +15,9 @@
 
 use std::panic::{AssertUnwindSafe, catch_unwind};
 
-use optimizer_core::{Candidate, Model};
+use optimizer_core::{Candidate, Model, ProblemClass};
 
-use crate::declare::{
-    Authority, Category, EXTENSION_SCHEMA_VERSION, ExtensionDeclaration, ProblemClass,
-};
+use crate::declare::{Authority, Category, EXTENSION_SCHEMA_VERSION, ExtensionDeclaration};
 use crate::hook::{Advice, CandidateProducer, Extension, SearchAdviser};
 use crate::record::{
     ExtensionFailure, ExtensionPolicy, ExtensionSummary, FailureKind, MAX_RETAINED_FAILURES,

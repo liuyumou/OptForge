@@ -10,9 +10,10 @@
 use std::cell::RefCell;
 
 use optimizer_core::{
-    Assignment, Backend, Bound, CancellationToken, Candidate, Constraint, Device, Domain,
-    ErrorKind, LinearTerm, Model, ModelDocument, Objective, ObjectiveSense, SOLVE_SCHEMA_VERSION,
-    SolveOptions, SolveRecord, Termination, Tolerances, ValidationError, Variable, WarmStart,
+    Arithmetic, Assignment, Backend, BackendCapabilities, Bound, CancellationToken, Candidate,
+    Constraint, Device, DeviceClass, Domain, ErrorKind, LinearTerm, Model, ModelDocument,
+    Objective, ObjectiveSense, ProblemClass, SOLVE_SCHEMA_VERSION, SolveOptions, SolveRecord,
+    Termination, Tolerances, ValidationError, Variable, WarmStart,
 };
 use optimizer_solver::{
     SEARCH_SCHEMA_VERSION, SearchOptions, SearchOutcome, SearchRecord, initial_checkpoint, search,
@@ -325,7 +326,29 @@ struct ExactBackend {
     solves: RefCell<u32>,
 }
 
+/// The declaration a test backend makes.
+///
+/// These backends stand in for a real one over the whole fixed model grid, which
+/// includes discrete models, so they declare both classes. A narrower
+/// declaration would refuse the grid and the refusal, not the search, would be
+/// what the executive tests measured.
+fn test_capabilities(name: &'static str) -> BackendCapabilities {
+    BackendCapabilities::declare(
+        name,
+        "test".to_string(),
+        vec![ProblemClass::Continuous, ProblemClass::Discrete],
+        Arithmetic::F64,
+        true,
+        DeviceClass::Cpu,
+    )
+    .expect("a test declaration is well formed")
+}
+
 impl Backend for ExactBackend {
+    fn capabilities(&self) -> BackendCapabilities {
+        test_capabilities("exact-test-lp")
+    }
+
     fn solve(
         &self,
         model: &Model,
@@ -394,6 +417,10 @@ impl ScriptedBackend {
 }
 
 impl Backend for ScriptedBackend {
+    fn capabilities(&self) -> BackendCapabilities {
+        test_capabilities("scripted-test")
+    }
+
     fn solve(
         &self,
         model: &Model,
