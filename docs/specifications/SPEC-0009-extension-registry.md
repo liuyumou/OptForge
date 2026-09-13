@@ -4,7 +4,7 @@ Status: accepted
 Scope: optimizer-registry resolution and conformance, and the optimizer-cli registry surface
 Owner: extension runtime
 Introduced: C8
-Last reviewed commit: 6cf6d5e
+Last reviewed commit: 49f9c85
 Supersedes: none
 Implementation: [registry document](../../crates/optimizer-registry/src/document.rs), [resolution](../../crates/optimizer-registry/src/resolve.rs), [conformance](../../crates/optimizer-registry/src/conformance.rs), [provider table and subcommands](../../crates/optimizer-cli/src/registry.rs), [search and verify integration](../../crates/optimizer-cli/src/search.rs), [validator](../../tools/validate_artifacts.py)
 Tests: [registry contracts](../../crates/optimizer-registry/tests/contracts.rs), [conformance suite and CLI contracts](../../crates/optimizer-cli/tests/registry.rs), [scheduling CLI contracts](../../crates/optimizer-cli/tests/schedule.rs), [run surface contracts](../../crates/optimizer-cli/tests/search.rs), [schema contracts](../../tests/integration/test_registry.py)
