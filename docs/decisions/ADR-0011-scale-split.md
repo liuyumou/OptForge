@@ -3,7 +3,7 @@
 Status: accepted
 Owner: heterogeneous computation
 Introduced: C6
-Last reviewed commit: pending
+Last reviewed commit: c547f0c
 Superseded by: none; ADR-0001 through ADR-0010 remain in force
 
 ## Context
