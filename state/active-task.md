@@ -1,5 +1,44 @@
 # Active Task
 
+## C6 Clean-Checkout Verification (2026-09-13)
+
+Objective: verify the C6 branch from a checkout with nothing prebuilt, before any
+integration, as the C4, C8 and Track B branches each were.
+
+Status: complete; the branch passes from a fresh clone and one environment-dependent
+test was found and fixed by doing so.
+
+Acceptance gate: `bash tools/check.sh` passes in an independent clone with no
+`target/` directory, no provisioned HiGHS library and no provisioned device code
+object. Resource budget: CPU only, no GPU workloads — which is itself part of what
+is being verified.
+
+The verification earned its place. `a_device_no_registered_extension_needs_is_refused`
+passed locally and failed in the clone. With a code object present the refusal is
+"no extension requires one" and names the device; without one the session fails
+earlier with "no device code object at <path>", which names a path. The test was
+environment-dependent, and the message was genuinely worse than the test: a caller
+who asked for a device and got a message about a file cannot tell which device was
+refused. Fixed by making every refusal name the device rather than by weakening the
+assertion.
+
+What the clone establishes that a local run cannot. The build script's warning fired
+four times, so `cuda_native` was unset throughout and every device path compiled to
+its unsupported form: this is SPEC-0010 requirement 37 and ADR-0009's "nvcc is a
+provisioning dependency, never a build dependency", observed rather than asserted.
+The pinned HiGHS library was built inside the clone from scratch. And the twenty
+device tests reported their skips rather than failing, which is what keeps a CPU-only
+host a full gate pass.
+
+Evidence (2026-09-13): cloned with `--no-hardlinks` at `6dbaf8c` with no `target/`
+present; `bash tools/check.sh` passed there in 1 minute 35 seconds, exit 0, with 300
+Rust tests, 68 Python tests and 56 documentation pages — the same counts as the
+working tree. `Cargo.lock` is unchanged across the whole branch.
+
+Follow-up: the branch is ready to integrate. C6 itself is not complete: SPEC-0011's
+GPU linear-programming backend is accepted and unimplemented, so the backlog line
+stays open.
+
 ## C6 Bounded Launch Chunks and Host Fallback (2026-09-13)
 
 Objective: reach SPEC-0010 requirements 27 to 30 — bounded launch chunks with a
