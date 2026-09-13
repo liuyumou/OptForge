@@ -222,8 +222,13 @@ SPEC-0004's deliberately parked "data needs" field a checked meaning: an entry
 declaring `flow_shop_instance` is refused unless the caller supplied an instance.
 
 `HardwareRequirement` has the variants `cpu` and `gpu`. `gpu` is refused at
-resolution, because no device selection exists before C6 and an entry must not be
-able to claim a capability nothing provides.
+resolution while no device selection exists, because an entry must not be able to
+claim a capability nothing provides.
+[SPEC-0010](SPEC-0010-heterogeneous-computation.md) requirement 35 narrows that
+refusal rather than removing it: once a device is selected and its lease is held,
+a `gpu` entry resolves, and without one it is still refused with a reason
+distinguishable from every other refusal. Requirement 14a is unaffected, because
+the refusal is still decided before the provider is consulted.
 
 `Promotion` is `experimental`, or `promoted` with a `conformance_path` and a
 `conformance_sha256`. A promoted entry's claim is checkable, which is the whole

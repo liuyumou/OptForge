@@ -11,7 +11,7 @@ evidence is recorded in [active task](../state/active-task.md).
 | --- | --- |
 | Implemented | Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | GPU feasibility and adaptive research (C6/C7), Python SDK (C9), comparative runner (C10) |
+| Planned | GPU feasibility (C6, specified and unimplemented), adaptive research (C7), Python SDK (C9), comparative runner (C10) |
 | Experimental | None enabled |
 | Deprecated | None |
 
@@ -54,6 +54,20 @@ optimality is asserted only for tiny instances checked against exhaustive
 permutation enumeration, and the frozen Taillard subset carries feasibility and
 determinism evidence only. No best-known bound is committed as a threshold.
 
+C6 is specified and not implemented. Two contracts now exist where none did:
+[heterogeneous computation](../docs/specifications/SPEC-0010-heterogeneous-computation.md)
+fixes device selection, residency, batching, arithmetic width, fallback,
+cancellation, recovery and equivalence, and a
+[GPU LP backend](../docs/specifications/SPEC-0011-gpu-lp-backend.md) adds a
+capability declaration to the solve contract so a caller reaching a backend that
+cannot solve its model is refused rather than answered. Neither grants a device any
+mathematical authority. A device-produced candidate is validated against the original
+model like any other, and an approximate LP iterate becomes a dual bound only through
+a host-side certification that treats the device's output as an untrusted guess; a
+bad guess yields a weak bound, never an invalid one. No kernel is compiled, no device
+is used, no crossover is measured, and no performance claim is made or implied by
+these contracts existing.
+
 See the [M1 contract](../docs/specifications/SPEC-0001-model-and-validation.md),
 [backend contract](../docs/specifications/SPEC-0002-backend-contract.md),
 [solver executive contract](../docs/specifications/SPEC-0003-solver-executive.md),
@@ -61,5 +75,7 @@ See the [M1 contract](../docs/specifications/SPEC-0001-model-and-validation.md),
 [run surface contract](../docs/specifications/SPEC-0005-run-surface.md),
 [flow-shop contract](../docs/specifications/SPEC-0008-flow-shop.md),
 [extension registry contract](../docs/specifications/SPEC-0009-extension-registry.md),
+[heterogeneous computation contract](../docs/specifications/SPEC-0010-heterogeneous-computation.md),
+[GPU LP backend contract](../docs/specifications/SPEC-0011-gpu-lp-backend.md),
 [backlog](../state/backlog.yaml) and
 [implementation plan](../implementation-plan.md) for evidence stages and dependencies.

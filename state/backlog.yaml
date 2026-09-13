@@ -44,10 +44,19 @@ tasks:
     depends_on: [C1, C3, C4]
     specification: docs/specifications/SPEC-0008-flow-shop.md
     acceptance: "Exhaustive permutations, independent evaluator, validated incumbents, frozen development subset"
+  # C6's line bundles two contracts that authorize different things, and
+  # CONTRIBUTING.md mandates one complete vertical slice, so they are separated
+  # without renumbering. SPEC-0010 owns heterogeneous computation itself and the
+  # batched integer evaluator that is its first workload; SPEC-0011 owns the GPU
+  # linear-programming backend, which needs a capability concept on the solve
+  # contract that nothing in C1 through C8 required. Both are C6. The
+  # specification key names the first, because it is the one the second depends
+  # on for device selection, residency, lease ownership and fallback.
   - id: C6
     title: Heterogeneous backend and GPU feasibility
     status: ready
     depends_on: [C1, C4, C5]
+    specification: docs/specifications/SPEC-0010-heterogeneous-computation.md
     acceptance: "CPU/GPU equivalence, sanitizers, lease recovery, fallback and transfer-inclusive measurements"
   - id: C7
     title: Adaptive portfolios and agent-developed algorithms
@@ -80,7 +89,11 @@ tasks:
     acceptance: "Comparative records over a frozen manifest with per-instance provenance and no aggregate score"
 research_phases:
   - "Adaptive portfolios and bounded agent-generated candidate/search advisers"
-  - "CPU first-order LP before approximate GPU LP research"
+  # SPEC-0011 keeps this ordering in substance rather than skipping it: the CPU
+  # first-order method is built first and is what the device kernels are checked
+  # against, so it is a differential oracle rather than a preliminary step that
+  # the device work replaces.
+  - "CPU first-order LP as the oracle for, and therefore before, approximate GPU LP"
   - "Evidence-driven presolve, scaling, recovery, cuts, CPU parallelism, checkpointing"
   - "Python SDK and local extension registry after stable Rust contracts"
   - "Independent held-out evaluation, ablations, negative results, authorized release"

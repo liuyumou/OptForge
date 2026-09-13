@@ -31,7 +31,7 @@ exist, this document says so rather than implying it.
 | 1. Contract | C1 backend-neutral solve and HiGHS adapter | Complete |
 | 2. Execution | C2 executive, C3 extension runtime | Complete |
 | 3. Application | C4 run surface, C5 scheduling slice, C8 extension registry | C4, C5 and C8 complete; C9 and C10 not started |
-| 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | C6 dependency-ready, not started |
+| 4. Research | C6 heterogeneous computation, C7 adaptive portfolios | C6 specified, not implemented |
 | 5. Hardening | Presolve, scaling, reoptimization, cuts, parallel search | Not started |
 | 6. Reproduction | Independent reproduction, then release decisions | Not started |
 
@@ -284,6 +284,45 @@ recovery, and equivalence tolerances explicit before writing kernels. Measure a
 GPU candidate evaluator or batched heuristic when independent work justifies it.
 Evaluate GPU LP methods as a complementary backend; approximate results remain
 candidates or warm starts until justified bounds and statuses exist.
+
+That list is now a contract rather than an intention, split across
+[SPEC-0010](docs/specifications/SPEC-0010-heterogeneous-computation.md) and
+[SPEC-0011](docs/specifications/SPEC-0011-gpu-lp-backend.md), with
+[ADR-0009](docs/decisions/ADR-0009-cuda-driver-boundary.md) authorizing the CUDA
+driver boundary and [ADR-0010](docs/decisions/ADR-0010-certified-gpu-lp.md) deciding
+that an approximate solution never carries authority. Three things the specifications
+settled are worth recording here, because each inverts what the paragraph above
+assumes.
+
+The first workload is integer, not floating point. The development hardware is
+compute capability 12.0, which runs FP64 at one sixty-fourth of FP32 and shares one
+execution pipeline between integer and floating-point instructions. The flow shop's
+makespan recurrence is integer maximum and addition, so it runs at the full lane rate
+and its CPU/GPU equivalence is an exact identity rather than a tolerance — which is
+the strongest agreement evidence this stage could ask for, and it is available only
+because the arithmetic is integer.
+
+That same ratio does not disqualify GPU LP, and the reason it does not is worth
+stating because the peak-throughput reading suggests otherwise. A sparse
+matrix-vector product is bounded by memory bandwidth rather than by arithmetic at
+this intensity, so a first-order method has roughly fivefold headroom before the FP64
+rate could bind. Factorization and interior-point steps have the opposite intensity
+and are excluded for that reason rather than by preference.
+
+"Approximate results remain candidates or warm starts until justified bounds exist"
+is satisfied by constructing the justification rather than by deferring it. The host
+takes the device's dual iterate as an untrusted guess, repairs its infeasibility
+against the model's own bounds, and evaluates weak duality in `f64`. A bad guess
+yields a weak bound, never an invalid one, which is why the procedure is a
+certification rather than an optimality test.
+
+Two prerequisites are recorded rather than assumed. The existing flow-shop
+heuristics are an untuned baseline, and this stage's entry condition requires
+baselines be tuned before any intervention is measured, so Taillard's exact head/tail
+acceleration lands before any device measurement. And the frozen C5 subset is 20 jobs
+by 5 machines, which is microseconds of work; a crossover measured only there would
+report that the CPU wins and would have established nothing, so larger instances are
+generated from the same published seeds and the same committed generator.
 
 **C7 — Adaptive portfolios and agent-developed algorithms.** Establish
 conventional baselines, then evaluate feature/progress-aware allocation, reusable

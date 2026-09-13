@@ -33,6 +33,23 @@ fixtures are retained in tests/. Fixtures do not establish solver classification
 Original-variable reconstruction after transformations and CPU/GPU agreement remain
 gated on later capabilities. Transformations are not implemented.
 
+C6 fills the GPU row above, and the form its agreement evidence takes is unusual
+enough to state here. The batched schedule evaluator is integer, so agreement with
+[the recurrence](../../crates/optimizer-schedule/src/evaluate.rs) is asserted as
+equality at tolerance exactly zero rather than within a tolerance, and determinism
+follows from the arithmetic rather than from launch configuration. The LP backend has
+neither property: its arithmetic is inexact, so agreement is within the caller's
+tolerances and determinism is a property of a reduction order the specification
+fixes. The two must not be tested as though they were the same thing.
+
+Two anti-vacuity rules apply specifically to device tests. A fallback test must
+assert that the fallback actually fired, because a device path that was never
+attempted trivially agrees with the CPU path it did not replace. And a crossover
+measurement must show the device losing at the smallest instance size; a report in
+which the device wins everywhere is evidence the measurement excluded transfers, not
+evidence the device is fast. Device-dependent tests report an explicit skip when no
+device or code object is present, exactly as native-dependent tests do.
+
 C5 fills the flow-shop recurrence and permutation-validity rows above; its coverage
 is described at the end of this document.
 

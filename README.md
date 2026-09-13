@@ -76,6 +76,8 @@ acceptance was not covered.
 - [Run and verify a search](docs/tutorials/run-and-verify.md)
 - [Register an extension](docs/tutorials/register-an-extension.md)
 - [GPU discovery and lease contract](docs/specifications/SPEC-0006-gpu-lease.md)
+- [Heterogeneous computation specification](docs/specifications/SPEC-0010-heterogeneous-computation.md)
+- [GPU LP backend specification](docs/specifications/SPEC-0011-gpu-lp-backend.md)
 - [Artifact contract](docs/specifications/SPEC-0007-artifacts.md)
 - [Build and verification](docs/operations/build.md)
 - [GPU operations](docs/operations/gpu.md)

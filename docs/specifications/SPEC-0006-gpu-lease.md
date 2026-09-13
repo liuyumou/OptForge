@@ -6,13 +6,20 @@ Owner: optimizer-cuda
 Introduced: M0
 Last reviewed commit: bootstrap (initial commit containing this file)
 Supersedes: none
+Amended by: [SPEC-0010](SPEC-0010-heterogeneous-computation.md) requirement 1, which adds requirement 1a below
 Implementation: [Rust library](../../crates/optimizer-cuda/src/lib.rs), [CLI](../../crates/optimizer-cli/src/main.rs), [wrapper](../../tools/gpu_job.sh)
 Tests: [process contracts](../../crates/optimizer-cli/tests/cli.rs), library unit tests
 
 ## Purpose
 
-Discover physical devices and establish cooperative exclusive ownership before M5
-introduces kernels. No CUDA context, kernel, scheduler, or device reset is implemented.
+Discover physical devices and establish cooperative exclusive ownership before
+kernels exist. No CUDA context, kernel, scheduler, or device reset is implemented
+here; SPEC-0010 owns all of those and reuses this contract's lease unchanged.
+
+Earlier revisions of this document deferred that work to a milestone named M5. The
+roadmap later renamed it C6, and the references below are updated rather than left
+to be decoded, because a contract that defers to a milestone name nothing else uses
+is a contract a reader cannot follow.
 
 ## Terminology
 
@@ -22,6 +29,10 @@ by all project checkouts and all GPU models. A simulation holds that lease only.
 ## Requirements
 
 1. Discovery MUST query UUID, name, and memory MiB without launching kernels.
+1a. Discovery MUST also report the driver version. SPEC-0007 requirement 9 requires
+   a GPU record to identify its driver, and nothing produced that field until
+   SPEC-0010 needed it; this requirement is added there rather than here, and is
+   restated here so the inventory contract is readable in one place.
 2. Discovery MUST sort devices by UUID and reject malformed or duplicate rows.
 3. Missing tooling, no devices, nonzero command exit, or a five-second deadline MUST produce unavailable with a reason.
 4. Discovery MUST report all physical devices returned by management tooling, including the three known host devices when present.
@@ -61,7 +72,8 @@ positive u64 MiB; invalid/overflowing numbers are rejected, never wrapped.
 
 Discovery reports unavailable for command, parse, or driver failures. Lock-open
 and lock-I/O errors propagate; no fallback to unlocked GPU execution is allowed.
-Kernel/device-reset recovery belongs to M5. OS lock release handles dead owners.
+Kernel and device-reset recovery belong to SPEC-0010. OS lock release handles dead
+owners.
 
 ## Compatibility and versioning
 
@@ -90,9 +102,12 @@ Requirements 5-10: exclusive_lease_times_out_and_serializes_waiters,
 normal_exit_and_process_death_release_the_same_lock_inode,
 cancellation_while_waiting_does_not_release_another_jobs_lease.
 Requirements 11-12: signal process tests and shell_runner_and_rust_use_the_same_host_lock.
-Requirement 13: wrapper/runner configuration; real CUDA enforcement remains M5.
+Requirement 13: wrapper/runner configuration; real CUDA enforcement belongs to
+SPEC-0010 requirements 2 to 4, which read the selected UUID back from the driver.
 
 ## Open questions
 
 Multi-user host lock provisioning depends on deployment. Detached worker process
-trees and kernel cancellation semantics require an M5 contract before support.
+trees still require their own contract. Kernel cancellation semantics are settled
+by SPEC-0010 requirements 27 and 28, which bound cancellation latency by one
+launch chunk and order lease release after context destruction.

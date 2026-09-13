@@ -1,5 +1,117 @@
 # Active Task
 
+## C6 Heterogeneous Computation Specification (2026-09-13)
+
+Objective: write and accept the C6 contracts before any public GPU or
+backend-selection API exists, as required by AGENTS.md, CONTRIBUTING.md and the
+Stage 4 scope. No C6 behavior is implemented by this change.
+
+Status: complete; SPEC-0010, SPEC-0011, ADR-0009 and ADR-0010 are accepted and the
+project records that reference C6 are synchronized.
+
+Acceptance gate: each specification uses numbered observable MUST/MUST NOT
+requirements with an acceptance-test mapping, states its exclusions, and passes
+documentation and link validation; `bash tools/check.sh` continues to pass with
+native acceptance covered and **unchanged test counts**, because no behavior
+changes. Had either count moved, this change would be doing something it claims not
+to. Resource budget: CPU only, no GPU workloads; the device inventory was read once
+through `nvidia-smi` for the hardware table below, which creates no CUDA context and
+needs no lease.
+
+Scope decided before implementation: C6's backlog line bundles two distinct
+contracts, and CONTRIBUTING.md mandates one complete vertical slice, so they are
+separated. SPEC-0010 owns heterogeneous computation itself — device selection,
+residency, batching, transfer timing, arithmetic width, lease ownership, fallback,
+cancellation, reset recovery and equivalence — and the batched integer schedule
+evaluator that is its first workload. SPEC-0011 owns the GPU linear-programming
+backend, which needs a capability concept on the solve contract that nothing in C1
+through C8 required. Both are C6; neither is complete without the other, and the
+first can be accepted, implemented and measured while the second is still a draft.
+
+Why two decision records: they authorize different things. ADR-0009 amends
+ADR-0003's single-unsafe-boundary rule, which is a workspace-wide structural change
+and the same blocker C3, C8 and C9 each recorded rather than crossed. ADR-0010
+decides that an approximate first-order solution never carries mathematical
+authority, which is a numerical-authority decision that would still be needed if the
+device were a CPU. Bundling them would let approval of the second imply approval of
+the first.
+
+The development host was observed with three Blackwell devices, compute capability
+12.0, under driver 580.105.08 and CUDA 13.0.88: two GeForce RTX 5090 with 32,607 MiB
+each and one RTX PRO 6000 Blackwell Server Edition with 97,887 MiB. This is recorded
+because four properties of that compute capability are load-bearing in SPEC-0010's
+requirements rather than incidental to them, and a reader checking the requirements
+on sm_100 hardware would find different numbers: FP64 runs at one sixty-fourth of
+FP32; INT32 and FP32 share one execution pipeline, so integer code runs at the full
+lane rate; a thread block may address at most 99 KB of shared memory; and thread
+block clusters are accepted by the assembler while `cluster.sync` degenerates to a
+no-op, which is a silent-failure mode rather than a missing feature.
+
+Three decisions inverted what the roadmap paragraph assumed, and each is recorded in
+the contract that made it rather than only here. The first workload is integer
+because of that FP64 ratio and that shared pipeline, which also means its CPU/GPU
+equivalence is an exact identity at tolerance zero rather than an agreement within a
+tolerance — the strongest form of the agreement evidence Stage 4 asks for, available
+only because the arithmetic is integer. The same ratio does *not* disqualify GPU
+linear programming, which is the opposite of what a peak-throughput reading suggests:
+a sparse matrix-vector product is bounded by memory bandwidth at this intensity, with
+roughly fivefold headroom before the FP64 rate could bind, so first-order methods are
+viable here and factorizing ones are not. And "approximate results remain candidates
+or warm starts until justified bounds exist" is met by constructing the justification
+rather than by deferring it, because the justification is short and deferring it would
+have left the backend's value impossible to evaluate except on throughput.
+
+Two prerequisites were found while reading the code and are recorded in
+[known failures](known-failures.md) rather than absorbed. The flow-shop heuristics
+evaluate every insertion position by cloning the sequence and re-running the whole
+recurrence, which is Theta(n^3 m) where Taillard's head/tail acceleration is
+Theta(n^2 m); that was the right choice for C5, which forbids performance claims, and
+it becomes a strawman the moment a device is measured against it, so Stage 4's entry
+condition requires it be tuned first. And the frozen C5 subset is 20 jobs by 5
+machines, roughly 1.3e4 integer operations for a full construction, so a crossover
+measured only there would report that the CPU wins and would have established
+nothing about where the crossover lies.
+
+One correction was made during drafting and is worth recording because it nearly
+shipped. An early draft claimed the contract needed no schema version, on the grounds
+that a `device` field already existed. It does — in `run-config-v1`, which is the
+benchmark manifest's configuration, not the search configuration a run record embeds.
+A device recorded only in provenance would describe a run that `optimizer verify`
+could not repeat, because SPEC-0005 verification reads only the record's embedded
+configuration. SPEC-0010 requirements 40 and 41 therefore accept the version cascade
+this actually costs: `search-config-v3`, `search-record-v3` and `run-record-v2`. The
+solve configuration stays at version 1, because SPEC-0006 requirement 6 permits one
+lease holder across device selections, so a search cannot use two devices and a
+per-solve device would be a configuration able to express something the lease forbids.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed with the pinned HiGHS 1.11.0
+library linked and **zero test skips**, exit 0, in 29 seconds. Rust tests remain 251
+and Python tests remain 60, which is the acceptance gate for a contract with no
+behavior: had either moved, this change would be doing something it claims not to.
+Documentation moved from 51 to 55 pages, which is the four new contract documents and
+nothing else. `cargo deny` reports advisories, bans, licenses and sources ok with no
+lockfile change, because no crate was added; `optimizer-cuda-sys` and its `libc`
+dependency arrive with the implementation, not with the contract.
+
+Expected changes: docs/specifications/SPEC-0010-heterogeneous-computation.md,
+docs/specifications/SPEC-0011-gpu-lp-backend.md,
+docs/decisions/ADR-0009-cuda-driver-boundary.md,
+docs/decisions/ADR-0010-certified-gpu-lp.md, state/backlog.yaml, AGENTS.md,
+state/known-failures.md, implementation-plan.md, wiki/status.md, README.md,
+docs/architecture/overview.md, docs/architecture/testing.md, docs/operations/gpu.md,
+cuda/schedule_eval/README.md, the forward references in SPEC-0006 and SPEC-0009, and
+this record. No CHANGELOG.md entry: the changelog records user-visible changes and an
+accepted contract with zero behavior is not one, matching the C2, C5 and C8
+specification commits.
+
+Also corrected here rather than left to be decoded: SPEC-0006, `docs/operations/gpu.md`
+and `cuda/schedule_eval/README.md` deferred kernel work to a milestone named M5, which
+the roadmap later renamed C6. Nothing else in the repository uses that name, so those
+references pointed at a milestone a reader could not look up.
+
+Follow-up: SPEC-0010's implementation phases, beginning with the tuned CPU baseline
+that Stage 4's entry condition requires before any intervention is measured.
+
 ## Local Track B Integration (2026-09-12)
 
 Objective: verify the Track B node-path branch from a clean checkout, integrate it

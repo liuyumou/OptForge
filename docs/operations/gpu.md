@@ -51,5 +51,8 @@ Do not nest the wrapper around a command that acquires the lease again.
 CI uses both a repository-wide concurrency group and the host file lock. Only
 trusted manual workflows use the self-hosted runner; fork PRs receive CPU checks.
 A host administrator must apply the wrapper to all project GPU jobs. Container
-jobs must bind-mount the same host lock file. GPU compiler/sanitizer installation
-belongs only on the labeled runner, when M5 introduces kernels.
+jobs must bind-mount the same host lock file. GPU compiler and sanitizer installation
+belongs only on the labeled runner, and is required there by
+[SPEC-0010](../specifications/SPEC-0010-heterogeneous-computation.md), which
+introduces kernels. The runner is not provisioned yet; see
+[known failures](../../state/known-failures.md).

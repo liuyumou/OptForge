@@ -31,6 +31,47 @@ remain gated on C6 implementation. HiGHS differential tests are implemented and
 passing under C1; see [active task](active-task.md). No solver performance or
 hardware claim is made.
 
+C6 is now specified as
+[SPEC-0010](../docs/specifications/SPEC-0010-heterogeneous-computation.md) and
+[SPEC-0011](../docs/specifications/SPEC-0011-gpu-lp-backend.md), so the contract for
+that evidence exists while the evidence itself does not. Four gaps are carried
+forward explicitly rather than treated as closed by specifying them. No device code
+object is built, so every device-dependent test would report a skip if it existed.
+No labeled GPU runner is provisioned, so device sanitizer coverage cannot run in CI
+at all; see the external configuration entry above. The CPU baseline the crossover
+must be measured against is untuned, recorded separately below, and Stage 4's entry
+condition requires it be tuned first. And the driver version field that SPEC-0007
+requirement 9 requires of a GPU record still has no producer, which SPEC-0010
+requirement 1 is written to supply.
+
+## The flow-shop heuristics are an untuned baseline
+
+`neh` and `insertion` in
+[the heuristics module](../crates/optimizer-schedule/src/heuristic.rs) evaluate each
+candidate insertion position by cloning the sequence and re-running the whole
+recurrence, so a pass costs Theta(n^3 m) where Taillard's exact head/tail
+acceleration would cost Theta(n^2 m). At the frozen subset's 20 jobs this is
+microseconds and the choice was the right one for C5, which claims correctness and
+forbids a performance claim. It stops being harmless the moment C6 measures a device
+against it: Stage 4's entry condition is that baselines are tuned before any
+intervention is measured, and a speedup over an untuned baseline measures the
+baseline. Reproduction: run `insertion` on a generated 500-job, 20-machine instance
+and compare against the same pass with head/tail arrays. Next step: implement the
+acceleration inside the existing functions, preserving the sequential order, the
+strict-improvement rule and the earliest-position tie-break that SPEC-0008
+requirement 17 fixes, before any device measurement is recorded.
+
+## A device fault is outside every containment claim this project makes
+
+The C3 extension host contains panics. A device fault is not a panic: an illegal
+memory access in a kernel poisons the context, and a driver-level fault can end the
+process. ADR-0009 records this as a cost of the boundary rather than solving it, and
+SPEC-0010's security section states it rather than implying containment. A
+device-backed extension therefore cannot be contained the way a CPU extension is, and
+no per-device memory budget is enforced. Next step: the same process-isolated workers
+the panic-only entry below already names, which would cover both cases and needs its
+own decision record.
+
 ## Intermittent advisory database fetch
 
 `cargo deny check advisories` fetches the RustSec database from github.com, which

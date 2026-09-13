@@ -112,20 +112,47 @@ explicit native settings; owned proof contracts belong to C2.
 | optimizer-extension | Extension declarations, authority model, guarded host | C3 |
 | optimizer-extension-examples | Independently authored and adversarial extensions | C3 |
 | optimizer-registry | Registry documents, resolution, conformance suite | C8 |
-| optimizer-cuda | Discovery, ownership, later kernels | M0 / C6 |
+| optimizer-cuda | Discovery, ownership, device selection and residency | M0 / C6 |
+| optimizer-cuda-sys | The CUDA driver boundary and its owned handles | C6 |
 | optimizer-experiment | Artifact schemas, run records, verification comparison | M0 / C4 |
 | optimizer-cli | Agent-independent command interface | M0 / C4 |
 
-optimizer-highs is the only crate permitted to contain unsafe code. Because a
-workspace-level `forbid` cannot be relaxed by an inner crate, it declares its own
-lints rather than inheriting the workspace lints; every other runtime crate keeps
-the prohibition. See [ADR-0003](../decisions/ADR-0003-highs-backend.md). The
-extension runtime keeps that prohibition too, which is why C3 specifies the
-versioned C boundary without implementing it: a second unsafe boundary needs its
-own decision record. See [ADR-0005](../decisions/ADR-0005-extension-authority.md).
+optimizer-highs and optimizer-cuda-sys are the only crates permitted to contain
+unsafe code. Because a workspace-level `forbid` cannot be relaxed by an inner crate,
+each declares its own lints rather than inheriting the workspace lints; every other
+runtime crate keeps the prohibition. See
+[ADR-0003](../decisions/ADR-0003-highs-backend.md) and
+[ADR-0009](../decisions/ADR-0009-cuda-driver-boundary.md). The extension runtime
+keeps the prohibition too, which is why C3 specifies the versioned C boundary without
+implementing it: ADR-0009 authorizes one boundary for CUDA and no other, so a
+dynamically loaded native extension still needs its own decision record. See
+[ADR-0005](../decisions/ADR-0005-extension-authority.md).
 
-All GPU devices share one host lease. Selection uses UUIDs. Later transfers and
-batching must be explicit; timings include overhead. Multi-GPU work is deferred.
-See [ADR-0001](../decisions/ADR-0001-bootstrap-boundaries.md),
+The split between the two GPU crates is deliberate. optimizer-cuda-sys holds the
+foreign declarations and the owned handles and knows nothing about optimization;
+optimizer-cuda keeps discovery, the lease, device selection and residency, and keeps
+`unsafe_code = "forbid"`. Every existing GPU consumer depends on the second, so
+adding a kernel path does not make the crate they already use unsafe.
+
+All GPU devices share one host lease, so a search uses at most one device and the
+selected device is one field on its configuration rather than one per component.
+Selection uses UUIDs and the driver-reported UUID is read back and compared, so a
+record cannot claim hardware the run did not use. Transfers and batching are explicit
+and timings include them. Multi-GPU work is deferred. See
+[ADR-0001](../decisions/ADR-0001-bootstrap-boundaries.md),
+[SPEC-0010](../specifications/SPEC-0010-heterogeneous-computation.md),
 [lease implementation](../../crates/optimizer-cuda/src/lib.rs), and
 [acceptance tests](../../crates/optimizer-cli/tests/cli.rs).
+
+C6 adds the device leg of the numerical flow, under
+[SPEC-0010](../specifications/SPEC-0010-heterogeneous-computation.md) and
+[SPEC-0011](../specifications/SPEC-0011-gpu-lp-backend.md). It reaches the flow at
+two points and at neither does it gain authority. A batched integer evaluator reaches
+it through the C3 candidate-producer seam, which already returns a batch and whose
+output `Model::evaluate` already validates, so a wrong kernel produces a recorded
+refusal rather than a wrong answer. A first-order LP backend reaches it through the
+C1 `Backend` trait, which gains a capability declaration so that a caller reaching a
+backend that cannot solve its model is refused rather than answered; its approximate
+iterates become a bound only through a host-side certification that does not assume
+the device computed correctly. See
+[ADR-0010](../decisions/ADR-0010-certified-gpu-lp.md).
