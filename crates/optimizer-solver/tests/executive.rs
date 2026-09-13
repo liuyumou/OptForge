@@ -12,8 +12,8 @@ use std::cell::RefCell;
 use optimizer_core::{
     Arithmetic, Assignment, Backend, BackendCapabilities, Bound, CancellationToken, Candidate,
     Constraint, Device, DeviceClass, Domain, ErrorKind, LinearTerm, Model, ModelDocument,
-    Objective, ObjectiveSense, ProblemClass, SOLVE_SCHEMA_VERSION, SolveOptions, SolveRecord,
-    Termination, Tolerances, ValidationError, Variable, WarmStart,
+    Objective, ObjectiveSense, ProblemClass, SOLVE_RECORD_SCHEMA_VERSION, SOLVE_SCHEMA_VERSION,
+    SolveOptions, SolveRecord, Termination, Tolerances, ValidationError, Variable, WarmStart,
 };
 use optimizer_solver::{
     SEARCH_SCHEMA_VERSION, SearchOptions, SearchOutcome, SearchRecord, initial_checkpoint, search,
@@ -358,7 +358,7 @@ impl Backend for ExactBackend {
     ) -> Result<SolveRecord, ValidationError> {
         *self.solves.borrow_mut() += 1;
         let record = |termination, candidate: Option<Candidate>, objective| SolveRecord {
-            schema_version: SOLVE_SCHEMA_VERSION,
+            schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: "exact-test-lp".to_string(),
             backend_version: "1.0.0".to_string(),
@@ -372,6 +372,7 @@ impl Backend for ExactBackend {
             warnings: Vec::new(),
             elapsed_ms: 0,
             options: options.clone(),
+            lp_settings: None,
         };
         match lp_optimum(model) {
             None => Ok(record(Termination::Infeasible, None, None)),
@@ -456,7 +457,7 @@ impl Backend for ScriptedBackend {
             .map(|report| report.objective)
             .ok();
         Ok(SolveRecord {
-            schema_version: SOLVE_SCHEMA_VERSION,
+            schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: "scripted".to_string(),
             backend_version: "0.0.0".to_string(),
@@ -470,6 +471,7 @@ impl Backend for ScriptedBackend {
             warnings: Vec::new(),
             elapsed_ms: 0,
             options: options.clone(),
+            lp_settings: None,
         })
     }
 }

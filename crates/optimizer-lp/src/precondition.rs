@@ -17,54 +17,10 @@
 //! [`crate::reduce`]. Mixing the two rules would have made the preconditioner's
 //! reproducibility depend on which pass happened to dominate.
 
-use serde::{Deserialize, Serialize};
+use optimizer_core::PreconditionerSettings;
 
 use crate::problem::LinearProgram;
 use crate::reduce::tree_sum;
-
-/// How the preconditioner was configured, recorded with every solve.
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
-pub struct PreconditionerSettings {
-    /// Number of Ruiz equilibration passes. Fixed, never convergence-driven: a
-    /// pass count that stopped on a measured criterion would vary with rounding
-    /// and take the iterates with it.
-    pub ruiz_passes: u32,
-    /// Pock-Chambolle exponent. `1.0` is the balanced choice; `0.0` disables the
-    /// pass.
-    pub pock_chambolle_alpha: f64,
-}
-
-impl PreconditionerSettings {
-    /// Whether these settings are usable.
-    ///
-    /// # Errors
-    ///
-    /// Returns a document failure for a nonfinite or out-of-range exponent, or a
-    /// pass count large enough to be a mistake rather than a choice.
-    pub fn validate(&self) -> Result<(), optimizer_core::ValidationError> {
-        use optimizer_core::{ErrorKind, ValidationError};
-        if self.ruiz_passes > 100 {
-            return Err(ValidationError::new(
-                ErrorKind::Document,
-                format!("ruiz_passes {} exceeds 100", self.ruiz_passes),
-            ));
-        }
-        if !self.pock_chambolle_alpha.is_finite()
-            || self.pock_chambolle_alpha < 0.0
-            || self.pock_chambolle_alpha > 2.0
-        {
-            return Err(ValidationError::new(
-                ErrorKind::Document,
-                format!(
-                    "pock_chambolle_alpha {} must be finite in [0, 2]",
-                    self.pock_chambolle_alpha
-                ),
-            ));
-        }
-        Ok(())
-    }
-}
 
 /// The diagonal scaling applied to a program.
 ///

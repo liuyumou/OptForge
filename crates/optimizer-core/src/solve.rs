@@ -13,8 +13,23 @@ use std::time::Duration;
 use crate::serde_strict::deserialize_object;
 use crate::{Candidate, ErrorKind, Tolerances, ValidationError, ValidationReport};
 
-/// Current solve configuration and record wire version.
+/// Current solve *configuration* wire version.
+///
+/// Deliberately still 1. SPEC-0011 adds a second backend without changing what a
+/// caller asks for: the first-order method's settings are constructor state under
+/// its own `open(residency, settings)` interface, not per-solve options. Bumping
+/// this would cascade into `search-config-v3`, which embeds a solve configuration,
+/// and from there into the search and run records -- four versions moved to record
+/// something no configuration carries.
 pub const SOLVE_SCHEMA_VERSION: u32 = 1;
+
+/// Current solve *record* wire version.
+///
+/// Separate from the configuration version, and ahead of it, because SPEC-0011
+/// requirements 9 and 10 require a record to carry the settings that produced it
+/// while the configuration stays fixed. Nothing embeds a solve record, so this is
+/// a leaf bump: no other document's version moves with it.
+pub const SOLVE_RECORD_SCHEMA_VERSION: u32 = 2;
 
 /// The device a search and its relaxations run on.
 ///
@@ -358,7 +373,7 @@ impl Termination {
 #[derive(Clone, Debug, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct SolveRecord {
-    /// Must equal [`SOLVE_SCHEMA_VERSION`].
+    /// Must equal [`SOLVE_RECORD_SCHEMA_VERSION`].
     pub schema_version: u32,
     /// Original model identity.
     pub model_id: String,
@@ -392,6 +407,16 @@ pub struct SolveRecord {
     pub elapsed_ms: u64,
     /// Explicit configuration this solve actually used.
     pub options: SolveOptions,
+    /// First-order method settings, when the backend that wrote this record has
+    /// them.
+    ///
+    /// Absent for a backend with no such settings, which is what the pinned CPU
+    /// adapter writes. Present and complete for the first-order backends, because
+    /// SPEC-0011 requirements 9 and 10 require the preconditioner and the
+    /// termination check interval to be recorded: both change the iterates, so a
+    /// record without them would not describe the solve it came from.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub lp_settings: Option<crate::LpSettings>,
 }
 
 deserialize_object!(SolveRecord {
@@ -409,6 +434,7 @@ deserialize_object!(SolveRecord {
     warnings: Vec<String>,
     elapsed_ms: u64,
     options: SolveOptions,
+    lp_settings: Option<crate::LpSettings>,
 });
 
 impl SolveRecord {
@@ -442,7 +468,7 @@ impl SolveRecord {
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         let record: Self = serde_json::from_slice(bytes)
             .map_err(|error| ValidationError::new(ErrorKind::Document, error.to_string()))?;
-        if record.schema_version != SOLVE_SCHEMA_VERSION {
+        if record.schema_version != SOLVE_RECORD_SCHEMA_VERSION {
             return Err(ValidationError::new(
                 ErrorKind::Document,
                 format!("unsupported solve schema_version {}", record.schema_version),

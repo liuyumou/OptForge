@@ -70,9 +70,9 @@ class SolveConfigContracts(unittest.TestCase):
 
 class SolveRecordContracts(unittest.TestCase):
     def setUp(self):
-        self.validator = validator("solve-record-v1.schema.json")
+        self.validator = validator("solve-record-v2.schema.json")
         self.record = {
-            "schema_version": 1,
+            "schema_version": 2,
             "model_id": "tiny-mixed",
             "backend": "highs",
             "backend_version": "1.11.0",
@@ -146,7 +146,8 @@ class SolveRecordContracts(unittest.TestCase):
             {**self.record, "termination": "almost_optimal"},
             {**self.record, "termination": "proven"},
             {**self.record, "surprise": True},
-            {**self.record, "schema_version": 2},
+            {**self.record, "schema_version": 1},
+            {**self.record, "schema_version": 3},
             {**self.record, "elapsed_ms": -1},
             {**self.record, "backend_version": ""},
         ):

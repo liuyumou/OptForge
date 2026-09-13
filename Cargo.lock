@@ -198,6 +198,7 @@ dependencies = [
  "optimizer-core",
  "optimizer-extension",
  "optimizer-extension-examples",
+ "optimizer-lp",
  "optimizer-schedule",
  "optimizer-schedule-examples",
  "optimizer-solver",

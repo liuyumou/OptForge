@@ -127,7 +127,7 @@ impl HighsBackend {
 /// a build that linked nothing must not claim the version it was written against.
 fn interrupted_record(model: &Model, options: &SolveOptions) -> SolveRecord {
     SolveRecord {
-        schema_version: optimizer_core::SOLVE_SCHEMA_VERSION,
+        schema_version: optimizer_core::SOLVE_RECORD_SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
         backend: BACKEND_NAME.to_string(),
         backend_version: HighsBackend::new()
@@ -143,6 +143,8 @@ fn interrupted_record(model: &Model, options: &SolveOptions) -> SolveRecord {
         warnings: Vec::new(),
         elapsed_ms: 0,
         options: options.clone(),
+        // See native.rs: this backend has no first-order settings to report.
+        lp_settings: None,
     }
 }
 

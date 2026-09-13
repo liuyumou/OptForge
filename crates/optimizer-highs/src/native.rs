@@ -11,8 +11,8 @@ use std::time::Instant;
 
 use optimizer_core::{
     Assignment, Basis, BasisStatus, Bound, CancellationToken, Candidate, Domain, ErrorKind, Model,
-    SOLVE_SCHEMA_VERSION, SolveOptions, SolveRecord, Termination, ValidationError, WarmStart,
-    finite_or_absent,
+    SOLVE_RECORD_SCHEMA_VERSION, SOLVE_SCHEMA_VERSION, SolveOptions, SolveRecord, Termination,
+    ValidationError, WarmStart, finite_or_absent,
 };
 
 use crate::ffi::{self, HighsInt};
@@ -549,7 +549,7 @@ pub(crate) fn solve(
      -> (SolveRecord, Option<Basis>) {
         (
             SolveRecord {
-                schema_version: SOLVE_SCHEMA_VERSION,
+                schema_version: SOLVE_RECORD_SCHEMA_VERSION,
                 model_id: model.document().model_id.clone(),
                 backend: BACKEND_NAME.to_string(),
                 backend_version,
@@ -563,6 +563,10 @@ pub(crate) fn solve(
                 warnings,
                 elapsed_ms: u64::try_from(started.elapsed().as_millis()).unwrap_or(u64::MAX),
                 options: options.clone(),
+                // The pinned adapter is not a first-order method and has no such
+                // settings. Absent rather than empty: an empty settings block would
+                // claim a preconditioner that was never applied.
+                lp_settings: None,
             },
             None,
         )

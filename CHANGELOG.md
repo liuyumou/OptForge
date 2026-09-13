@@ -36,8 +36,46 @@ User-visible changes are recorded here using Conventional Commit terminology.
   A conservative rounding allowance is subtracted, because the underlying argument
   is exact in the reals and a `f64` sum that landed above the true value would be a
   bound stronger than the evidence supports.
+- `HostLpBackend`, a first-order linear programming backend that runs entirely on
+  the host, under SPEC-0011 requirements 24 and 25. It refuses any model with a
+  discrete variable as `Unsupported` before doing any work, because a first-order
+  method has no branch and bound and a relaxed answer to a discrete question would
+  be wrong rather than refused. `Optimal` requires a candidate `Model::evaluate`
+  accepted and a certified bound to close, so two independent computations must
+  agree and neither of them is the iteration's.
+
+  It is not a default and not a fallback. Requirement 26 keeps the fallback the
+  pinned CPU backend, because SPEC-0010 requirement 23 requires a fallback to be
+  the implementation the project already treats as authoritative.
+
+  Two departures from the published method are deliberate and made for
+  determinism: the step size is fixed rather than line-searched, and the power
+  iteration count is fixed rather than convergence-driven. An adaptive step retries
+  an input-dependent number of times, and the trial count would then depend on
+  rounding. The cost is convergence rate, about which this project claims nothing
+  in either direction.
 
 ### Changed
+
+- **Breaking:** solve records move to `solve-record-v2`, under SPEC-0011
+  requirements 9 and 10. The record gains `lp_settings`, carrying the
+  preconditioner, the termination check interval and the rest of a first-order
+  method's configuration. Both change the iterates, so a record without them would
+  not describe the solve it came from. The field is absent for a backend that has
+  no such settings, which is what the pinned CPU adapter writes; an empty block
+  would claim a preconditioner that was never applied.
+
+  The embedded solve *configuration* stays at version 1, and that is what confines
+  the change. A configuration is embedded in `search-config-v3`, so bumping it
+  would have moved the search configuration, the search record and the run record
+  too -- four documents to record something no configuration carries. Nothing
+  embeds a solve record, so it moves alone. `SOLVE_SCHEMA_VERSION` keeps its value
+  and now names the configuration only; `SOLVE_RECORD_SCHEMA_VERSION` names the
+  record.
+
+  Migration: set a version-1 record's `schema_version` to 2. There is no automatic
+  migration and version 1 is refused rather than upgraded, in both the Rust parser
+  and the JSON Schema.
 
 - **Breaking:** `Backend` gains a `capabilities` method, under SPEC-0011
   requirements 1, 2 and 4. A backend now states the problem classes it accepts, its

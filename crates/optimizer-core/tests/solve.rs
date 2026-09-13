@@ -135,7 +135,7 @@ fn solve_records_round_trip_with_stable_status_names() {
     ];
     for (termination, name) in names {
         let record = SolveRecord {
-            schema_version: SOLVE_SCHEMA_VERSION,
+            schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: "record".into(),
             backend: "highs".into(),
             backend_version: "1.11.0".into(),
@@ -149,6 +149,7 @@ fn solve_records_round_trip_with_stable_status_names() {
             warnings: vec![],
             elapsed_ms: 7,
             options: options(),
+            lp_settings: None,
         };
         let json = record.to_json().unwrap();
         assert!(
@@ -163,7 +164,7 @@ fn solve_records_round_trip_with_stable_status_names() {
 #[test]
 fn absent_measurements_are_omitted_and_nonfinite_ones_rejected() {
     let base = SolveRecord {
-        schema_version: SOLVE_SCHEMA_VERSION,
+        schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: "measurements".into(),
         backend: "highs".into(),
         backend_version: "1.11.0".into(),
@@ -177,6 +178,7 @@ fn absent_measurements_are_omitted_and_nonfinite_ones_rejected() {
         warnings: vec![],
         elapsed_ms: 0,
         options: options(),
+        lp_settings: None,
     };
 
     let json = base.to_json().unwrap();
@@ -246,7 +248,7 @@ fn solve_documents_require_strict_versioned_objects() {
 
     // An unsupported record version fails as a document error.
     let record = SolveRecord {
-        schema_version: SOLVE_SCHEMA_VERSION,
+        schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: "version".into(),
         backend: "highs".into(),
         backend_version: "1.11.0".into(),
@@ -260,6 +262,7 @@ fn solve_documents_require_strict_versioned_objects() {
         warnings: vec![],
         elapsed_ms: 0,
         options: options(),
+        lp_settings: None,
     };
     let bumped = record
         .to_json()
@@ -321,7 +324,7 @@ fn nested_document_versions_are_validated_on_parse() {
     let validation = model.evaluate(&candidate, tolerances()).expect("report");
 
     let record = SolveRecord {
-        schema_version: SOLVE_SCHEMA_VERSION,
+        schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: "nested".into(),
         backend: "highs".into(),
         backend_version: "1.11.0".into(),
@@ -335,6 +338,7 @@ fn nested_document_versions_are_validated_on_parse() {
         warnings: vec![],
         elapsed_ms: 0,
         options: options(),
+        lp_settings: None,
     };
 
     // The intact record round trips, so each rejection below is caused by the

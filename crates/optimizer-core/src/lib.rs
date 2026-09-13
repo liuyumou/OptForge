@@ -6,6 +6,7 @@
 mod capability;
 mod document;
 mod evaluate;
+mod lp_settings;
 mod serde_strict;
 mod solve;
 
@@ -14,9 +15,13 @@ pub use capability::{
 };
 pub use document::*;
 pub use evaluate::*;
+pub use lp_settings::{
+    LP_SETTINGS_SCHEMA_VERSION, LpSettings, PreconditionerSettings, PrimalWeightSettings,
+    RestartSettings,
+};
 pub use solve::{
-    Backend, Basis, BasisStatus, CancellationToken, Device, SOLVE_SCHEMA_VERSION, SolveOptions,
-    SolveRecord, Termination, WarmStart, finite_or_absent,
+    Backend, Basis, BasisStatus, CancellationToken, Device, SOLVE_RECORD_SCHEMA_VERSION,
+    SOLVE_SCHEMA_VERSION, SolveOptions, SolveRecord, Termination, WarmStart, finite_or_absent,
 };
 
 use std::fmt;

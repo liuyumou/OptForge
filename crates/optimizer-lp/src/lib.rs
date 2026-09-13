@@ -19,12 +19,25 @@
 //! `Model::evaluate`'s, and a bound comes only from the certification procedure,
 //! which does not assume any iterate was computed correctly.
 
+pub mod backend;
 pub mod certify;
+pub mod pdhg;
 pub mod precondition;
 pub mod problem;
 pub mod reduce;
 
+pub use backend::{BACKEND_NAME, BACKEND_VERSION, HostLpBackend};
 pub use certify::{Certificate, NoBound, certify, certify_model};
-pub use precondition::{Preconditioner, PreconditionerSettings};
+/// The settings documents this crate's method reads.
+///
+/// Defined in `optimizer-core` beside every other wire format, because a solve
+/// record carries them and records are core types. Re-exported so a caller of
+/// this crate needs only one import.
+pub use optimizer_core::{
+    LP_SETTINGS_SCHEMA_VERSION, LpSettings, PreconditionerSettings, PrimalWeightSettings,
+    RestartSettings,
+};
+pub use pdhg::{Decision, Engine, Iterate, Stop};
+pub use precondition::Preconditioner;
 pub use problem::{Compressed, LinearProgram, Range};
 pub use reduce::{ReductionOrder, SEGMENT, sequential_sum, sum, tree_sum};

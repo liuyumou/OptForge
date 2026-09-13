@@ -51,6 +51,16 @@ impl Compressed {
         (&self.indices[start..end], &self.values[start..end])
     }
 
+    /// Where one major line starts in the flat storage.
+    ///
+    /// Exposed so a caller holding a parallel array of values -- a scaled copy of
+    /// the matrix, for instance -- can index it the same way without rebuilding
+    /// the structure alongside it.
+    #[must_use]
+    pub fn offset(&self, major: usize) -> usize {
+        self.offsets[major]
+    }
+
     /// Every stored entry as `(major, minor, value)`, in storage order.
     pub fn entries(&self) -> impl Iterator<Item = (usize, u32, f64)> + '_ {
         (0..self.lines()).flat_map(move |major| {

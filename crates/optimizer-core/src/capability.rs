@@ -261,7 +261,7 @@ impl BackendCapabilities {
     pub fn refuse(&self, model: &Model, options: &SolveOptions) -> SolveRecord {
         let class = ProblemClass::of(model);
         SolveRecord {
-            schema_version: crate::SOLVE_SCHEMA_VERSION,
+            schema_version: crate::SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: self.name.to_string(),
             backend_version: self.version.clone(),
@@ -280,6 +280,9 @@ impl BackendCapabilities {
             )],
             elapsed_ms: 0,
             options: options.clone(),
+            // A refusal is decided before any method runs, so there are no
+            // settings to report.
+            lp_settings: None,
         }
     }
 

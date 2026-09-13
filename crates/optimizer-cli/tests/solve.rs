@@ -117,7 +117,11 @@ fn completed_solve_prints_a_record_and_exits_zero() {
     assert_eq!(output.status.code(), Some(0));
     let text = String::from_utf8(output.stdout).expect("utf-8 record");
     let record: serde_json::Value = serde_json::from_str(&text).expect("json record");
-    assert_eq!(record["schema_version"], 1);
+    // The record is version 2 while the configuration it embeds stays version 1.
+    // The two are separate documents with separate versions, and this asserts
+    // both rather than only the outer one.
+    assert_eq!(record["schema_version"], 2);
+    assert_eq!(record["options"]["schema_version"], 1);
     assert_eq!(record["model_id"], "cli-solve");
     assert_eq!(record["backend"], "highs");
     assert_eq!(record["termination"], "optimal");

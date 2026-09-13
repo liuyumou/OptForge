@@ -31,7 +31,7 @@ pub const CONFIG_SCHEMA: &str = include_str!("../../../schemas/run-config-v1.sch
 pub const SOLVE_CONFIG_SCHEMA: &str = include_str!("../../../schemas/solve-config-v1.schema.json");
 
 /// JSON Schema for reproducible solve records, version 1.
-pub const SOLVE_RECORD_SCHEMA: &str = include_str!("../../../schemas/solve-record-v1.schema.json");
+pub const SOLVE_RECORD_SCHEMA: &str = include_str!("../../../schemas/solve-record-v2.schema.json");
 
 /// JSON Schema for reproducible run records, version 1.
 pub const RUN_RECORD_SCHEMA: &str = include_str!("../../../schemas/run-record-v2.schema.json");

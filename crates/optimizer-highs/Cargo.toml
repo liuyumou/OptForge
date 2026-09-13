@@ -28,7 +28,11 @@ optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
 
 # C2 and C3 end-to-end acceptance lives here so optimizer-solver keeps its
 # backend-neutrality guarantee: the executive must not depend on this crate.
+# The first-order backend is a dev-dependency only. It is the differential
+# oracle these tests compare against, and SPEC-0011 requirement 26 keeps it out
+# of any production path: the fallback is this crate's own backend.
 [dev-dependencies]
+optimizer-lp = { version = "0.1.0", path = "../optimizer-lp" }
 optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
 optimizer-extension-examples = { version = "0.1.0", path = "../optimizer-extension-examples" }
 optimizer-schedule = { version = "0.1.0", path = "../optimizer-schedule" }

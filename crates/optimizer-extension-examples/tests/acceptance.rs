@@ -18,8 +18,8 @@ use std::cell::RefCell;
 use optimizer_core::{
     Arithmetic, Assignment, Backend, BackendCapabilities, Bound, CancellationToken, Candidate,
     Constraint, DeviceClass, Domain, LinearTerm, Model, ModelDocument, Objective, ObjectiveSense,
-    ProblemClass, SCHEMA_VERSION, SOLVE_SCHEMA_VERSION, SolveOptions, SolveRecord, Termination,
-    Tolerances, ValidationError, Variable, WarmStart,
+    ProblemClass, SCHEMA_VERSION, SOLVE_RECORD_SCHEMA_VERSION, SOLVE_SCHEMA_VERSION, SolveOptions,
+    SolveRecord, Termination, Tolerances, ValidationError, Variable, WarmStart,
 };
 use optimizer_extension::{EXTENSION_SCHEMA_VERSION, ExtensionPolicy, FailureKind, Registration};
 use optimizer_extension_examples::{
@@ -342,7 +342,7 @@ impl Backend for ExactBackend {
         *self.solves.borrow_mut() += 1;
         let document = model.document();
         let mut record = SolveRecord {
-            schema_version: SOLVE_SCHEMA_VERSION,
+            schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: document.model_id.clone(),
             backend: "exact".to_string(),
             backend_version: "test".to_string(),
@@ -356,6 +356,7 @@ impl Backend for ExactBackend {
             warnings: Vec::new(),
             elapsed_ms: 0,
             options: options.clone(),
+            lp_settings: None,
         };
         if cancel.is_cancelled() {
             record.termination = Termination::Interrupted;

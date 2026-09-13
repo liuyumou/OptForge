@@ -1,5 +1,66 @@
 # Active Task
 
+## C6 Host First-Order Engine and Backend (2026-09-13)
+
+Objective: reach SPEC-0011 requirements 3, 5, 8, 10, 14 to 16, 21 and 24 to 26 — the
+restarted primal-dual method on the host, a backend that claims only what two
+independent computations support, and a record that states the settings it ran under.
+
+Status: complete. Requirements 9 and 10's recording half lands here as
+`solve-record-v2`. Requirements 17 to 20 (relaxation forfeiture, dispatch and
+fallback) belong to the CLI surface and are not reached yet.
+
+Acceptance gate: `bash tools/check.sh` with the pinned HiGHS library present.
+Resource budget: CPU only, no GPU workloads.
+
+Two version constants now exist where one did. `SOLVE_SCHEMA_VERSION` keeps its value
+and its meaning narrows to the configuration; `SOLVE_RECORD_SCHEMA_VERSION` is 2. That
+split is what confines the bump: the configuration is embedded in `search-config-v3`,
+so bumping it would have moved the search configuration, the search record and the run
+record as well — four documents to record something no configuration carries. Nothing
+embeds a solve record, so the record moves alone. The settings are constructor state,
+which is what SPEC-0011's own `open(residency, settings)` interface already implied.
+
+The settings documents live in `optimizer-core` for the same reason `ProblemClass`
+does: a record carries them, records are core types, and a second copy in the
+implementing crate would be the drift SPEC-0008 requirement 8 exists to prevent. The
+method stays in `optimizer-lp`.
+
+A sign convention was wrong on the first attempt and the test caught it. The method
+converged to an infeasible point with objective -2 on an instance whose optimum is
+-1.5, because the dual update used the saddle function with the opposite sign of the
+one the certification assumes. The fix is not cosmetic: this module takes
+`cᵀx − yᵀAx + h(y)` so that the reduced cost is `c − Aᵀy`, the ordinary linear
+programming convention and the one the certification recomputes. Under the other
+convention the multipliers come out negated, certification stays *valid* — it is valid
+for any vector — and every bound is uselessly weak. That is a much harder defect to
+notice than a wrong answer, which is why the convention is now stated where the update
+is written. With it right, the engine's own dual on the worked instance is exactly
+-1.0, the true optimal dual, and the certified bound sits one rounding allowance below
+the optimum.
+
+Two departures from the published method, both made for determinism and both
+recorded rather than absorbed. The step size is fixed rather than line-searched,
+because an adaptive step retries an input-dependent number of times and the trial
+count would then depend on rounding. The power iteration count is fixed for the same
+reason. The cost is convergence rate, which requirement 23 forbids claiming anything
+about in either direction.
+
+The KKT residuals this module computes steer the algorithm and justify nothing. No
+bound, status or proof reads them. A device computing them badly converges badly and
+cannot produce a wrong answer — a distinction easy to lose at a glance, so it is
+written where the residuals are.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed, exit 0, with 355 Rust tests, 68
+Python tests and 56 documentation pages. Twenty-three tests are new. Agreement with
+the pinned backend is asserted over the same four LP shapes its own differential
+acceptance uses, with a mutated instance shown to disagree so the comparison is known
+able to fail. All four fixtures reach optimality with a certified bound, which is
+asserted rather than assumed: without that assertion the closure test would pass by
+taking its other branch if certification ever regressed.
+
+Follow-up: the CLI surface, dispatch and fallback, then the device kernels.
+
 ## C6 Host Certification of a Dual Bound (2026-09-13)
 
 Objective: reach SPEC-0011 requirements 11, 12 and 13 — a bound produced only by a

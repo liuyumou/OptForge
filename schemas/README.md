@@ -7,7 +7,7 @@ Every schema uses JSON Schema draft 2020-12. These are normative interfaces unde
 - [Benchmark manifest](benchmark-manifest-v1.schema.json)
 - [Experiment result](experiment-result-v1.schema.json)
 - [Solve configuration](solve-config-v1.schema.json) and
-  [solve record](solve-record-v1.schema.json), normative under
+  [solve record](solve-record-v2.schema.json), normative under
   [SPEC-0002](../docs/specifications/SPEC-0002-backend-contract.md)
 - [Search configuration](search-config-v3.schema.json) and
   [search record](search-record-v3.schema.json) at version 3, normative under
