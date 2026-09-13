@@ -4,7 +4,7 @@ Status: accepted
 Scope: optimizer-cuda-sys device boundary, optimizer-cuda selection and residency, the batched schedule evaluator, and the optimizer-cli device surface
 Owner: heterogeneous computation
 Introduced: C6
-Last reviewed commit: 49f9c85
+Last reviewed commit: a789759
 Supersedes: none; amends SPEC-0006 requirement 1 and SPEC-0009 requirement 9
 Implementation: [device selection](../../crates/optimizer-core/src/solve.rs), [device session](../../crates/optimizer-cuda/src/session.rs), [probe](../../crates/optimizer-cuda/src/probe.rs), [device producer](../../crates/optimizer-schedule-examples/src/lib.rs), [driver boundary](../../crates/optimizer-cuda-sys/src/lib.rs), [status mapping](../../crates/optimizer-cuda-sys/src/status.rs), [residency and admissibility](../../crates/optimizer-cuda/src/schedule.rs), [lease ownership](../../crates/optimizer-cuda/src/lib.rs), [kernels](../../cuda/schedule_eval/schedule_eval.cu), [provisioning](../../tools/setup_cuda.sh), [build probe](../../crates/optimizer-cuda/build.rs)
 Tests: [device contracts](../../crates/optimizer-cuda/tests/device.rs), [device producer contracts](../../crates/optimizer-schedule-examples/tests/device.rs), [registry resolution](../../crates/optimizer-registry/tests/contracts.rs), [scheduling CLI contracts](../../crates/optimizer-cli/tests/schedule.rs), [admissibility and status unit tests](../../crates/optimizer-cuda/src/schedule.rs)
