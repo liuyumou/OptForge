@@ -1,5 +1,55 @@
 # Active Task
 
+## C6 Clean-Checkout Verification and Local Integration (2026-09-13)
+
+Objective: verify C6 from a checkout with nothing prebuilt before integrating it, as
+the C4, C8 and Track B branches each were, and as this branch already was at `6dbaf8c`
+when only SPEC-0010 was implemented.
+
+Status: complete. The branch is integrated into local `main` by fast-forward.
+
+Acceptance gate: `bash tools/check.sh` passes in an independent clone with no `target/`
+directory, no provisioned HiGHS library, no provisioned device code object, and no CUDA
+toolkit on `PATH`. Resource budget: CPU only, no GPU workloads — which is itself part of
+what is being verified.
+
+The earlier verification at `6dbaf8c` no longer covered the tree. Eight commits since
+then added two crates, a schema, two examples, a step to the acceptance gate itself and
+a second code object, and every one of those is surface a clean clone exercises and a
+warm working tree does not. Re-running it was the point of having the ritual.
+
+What the clone establishes that a local run cannot. The build script's warning fired
+four times, so `cuda_native` was unset throughout and every device path compiled to its
+unsupported form: ADR-0009's "nvcc is a provisioning dependency, never a build
+dependency" observed rather than asserted, and now covering the linear-programming
+kernels as well as the integer ones. `nvcc` was absent from `PATH` deliberately. The
+pinned HiGHS library was built from source inside the clone, so native acceptance was
+covered rather than skipped — the loud banner did not print and the differential test
+against the standalone reference ran. And the twelve device tests reported their skips
+rather than failing, which is what keeps a host with no GPU a full gate pass.
+
+Evidence (2026-09-13): cloned with `--no-hardlinks` at `d7c2118` with no `target/`
+present; `bash tools/check.sh` passed there, exit 0, with 380 Rust tests, 72 Python
+tests and 56 documentation pages — the same counts as the working tree.
+
+`Cargo.lock` gained three workspace entries across this branch: `optimizer-cuda-sys`
+from the device work, and `optimizer-lp` and `optimizer-lp-cuda` from the
+linear-programming work. No third-party crate was added — the diff contains no new
+`source` line — so the workspace still resolves the same eighteen external packages,
+which is what `cargo deny --locked check` confirms on every gate run. No code object,
+native library or other build output is tracked; `git ls-files` finds no `.cubin`,
+`.ptx`, `.so`, `.a` or `.o`.
+
+Integration was a fast-forward. `main` had not moved, so the branch was already linear
+on top of it and the rebase CONTRIBUTING.md asks for before integration was a no-op;
+this repository's history carries no merge commits and that is preserved.
+
+Not pushed. Everything after `dfdc245` remains local, as `state/known-failures.md`
+records, and publishing needs authorization this task does not carry.
+
+Follow-up: C6 is complete and integrated. C7 is next and has no specification; it needs
+one before any behavior.
+
 ## C6 Evidence and the Limits It Carries (2026-09-13)
 
 Objective: reach SPEC-0011 requirements 17, 20, 21, 22 and 23 — the two tests ADR-0010
