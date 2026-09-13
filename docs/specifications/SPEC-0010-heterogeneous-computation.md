@@ -4,7 +4,7 @@ Status: accepted
 Scope: optimizer-cuda-sys device boundary, optimizer-cuda selection and residency, the batched schedule evaluator, and the optimizer-cli device surface
 Owner: heterogeneous computation
 Introduced: C6
-Last reviewed commit: 391edeb
+Last reviewed commit: 4bd44a4
 Supersedes: none; amends SPEC-0006 requirement 1 and SPEC-0009 requirement 9
 Implementation: [device selection](../../crates/optimizer-core/src/solve.rs), [driver boundary](../../crates/optimizer-cuda-sys/src/lib.rs), [status mapping](../../crates/optimizer-cuda-sys/src/status.rs), [residency and admissibility](../../crates/optimizer-cuda/src/schedule.rs), [lease ownership](../../crates/optimizer-cuda/src/lib.rs), [kernels](../../cuda/schedule_eval/schedule_eval.cu), [provisioning](../../tools/setup_cuda.sh), [build probe](../../crates/optimizer-cuda/build.rs)
 Tests: [device contracts](../../crates/optimizer-cuda/tests/device.rs), [admissibility and status unit tests](../../crates/optimizer-cuda/src/schedule.rs)

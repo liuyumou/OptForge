@@ -4,7 +4,7 @@ Status: accepted
 Scope: optimizer-experiment run records and the optimizer-cli search/verify surface
 Owner: research infrastructure
 Introduced: C4
-Last reviewed commit: f8d6091
+Last reviewed commit: 4bd44a4
 Supersedes: none
 Implementation: [run records](../../crates/optimizer-experiment/src/run.rs), [checksums](../../crates/optimizer-experiment/src/sha256.rs), [search command](../../crates/optimizer-cli/src/search.rs), [provenance](../../crates/optimizer-cli/src/provenance.rs), [validator](../../tools/validate_artifacts.py)
 Tests: [run surface contracts](../../crates/optimizer-cli/tests/search.rs), [record contracts](../../crates/optimizer-experiment/tests/run.rs), [schema contracts](../../tests/integration/test_run_records.py)
