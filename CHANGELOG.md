@@ -106,8 +106,11 @@ User-visible changes are recorded here using Conventional Commit terminology.
 - The registry resolves; it does not load. An entry names an extension the binary
   already provides through a caller-owned provider seam, and an entry naming an
   identity this build does not provide is refused rather than skipped. Dynamic
-  loading of separately distributed native components would need a second unsafe
-  boundary ADR-0003 prohibits, and stays deferred with its recorded blocker.
+  loading of separately distributed native components stays deferred with its
+  recorded blocker: it needs an unsafe boundary, an ABI stability contract, a
+  lifecycle and unload story and crash-isolation evidence. ADR-0009 has since
+  authorized one unsafe boundary, for CUDA and no other, so the blocker is narrower
+  than it was when this was written but is not removed.
 - Resolution is total: it either produces a resolved set for every named entry or
   refuses, so a search never begins with a subset of what it was configured with.
   The extension's own declaration is authoritative and an entry is a claim about
