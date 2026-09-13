@@ -40,13 +40,24 @@ and SPEC-0003 owns termination. This record adds the third and supplies the miss
 one, the bound.
 
 **Certification takes the dual iterate as untrusted input and repairs it, rather than
-checking it.** Given the dual iterate `y`, the host computes the reduced costs from
-the original model's own coefficients, and resolves each remaining dual infeasibility
-against that variable's own bound, which is finite wherever the repair needs it. The
-result is a dual-feasible point, and weak duality makes its objective a valid bound on
-the primal optimum. The device's `y` is a guess about where to look; the host's
-arithmetic is what makes the answer a bound. This is why the procedure is a
-certification and not a test.
+checking it.** Given the dual iterate `y`, the host projects it onto the multipliers
+its rows admit, computes the reduced costs from the original model's own coefficients,
+and bounds each variable's contribution by that variable's own bound. The result is a
+dual-feasible point, and weak duality makes its objective a valid bound on the primal
+optimum. The device's `y` is a guess about where to look; the host's arithmetic is what
+makes the answer a bound. This is why the procedure is a certification and not a test.
+
+The repair is available on the row side unconditionally, because projecting `y` breaks
+no identity. It is not available on the column side, and an earlier wording here said
+the needed bound is always finite. That is true of every model this project currently
+produces — each node relaxation is boxed by construction and the flow-shop encoding is
+all-binary — and false of a `model-v1` document in general, which may declare a free
+variable. The reduced cost is determined by the repaired `y`, so adjusting one reduced
+cost on its own falsifies the identity the bound rests on, and where the needed bound
+is infinite no finite number bounds that variable's contribution. The honest outcome
+there is no bound at all, reported as an absent bound naming the variable that blocked
+it. Substituting a large finite number would fabricate a bound and is precisely what
+this record exists to forbid.
 
 **A bad guess yields a weak bound, never an invalid one.** This is the property that
 makes the decision safe rather than merely careful, and it is what SPEC-0011

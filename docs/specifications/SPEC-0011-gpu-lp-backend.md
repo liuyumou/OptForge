@@ -134,17 +134,42 @@ was found, which is the property this contract rests on.
     property of two implementations on named hardware and MUST NOT be described as
     evidence that the engine is faster.
 
+### Host reference implementation
+
+These requirements are numbered after the evidence group so that no earlier number
+moves; they were added when the host method's status was settled, before any of this
+contract was implemented.
+
+24. The same first-order method MUST exist as a host implementation that executes no
+    device work, and the device kernels MUST be checked against it. It is the oracle
+    for them and is therefore built before them, as `state/backlog.yaml` records.
+25. The host implementation MUST be a backend under this contract's capability
+    declaration rather than test scaffolding, and MUST be selectable by explicit
+    caller configuration. It is a public feature and is specified here rather than
+    introduced without a contract.
+26. The host implementation MUST NOT become a default, and MUST NOT be described as
+    the fallback path. Requirement 20's fallback is the pinned CPU backend, which is
+    the implementation this project already treats as authoritative; SPEC-0010
+    requirement 23 forbids falling back to a second implementation written to match
+    the thing it is checking. The host method's role is differential evidence, and
+    conflating the two roles would make an agreement test compare a component with
+    itself.
+27. The host implementation and the device implementation MUST share one definition
+    of the reduction partition and tree order, rather than each carrying its own. Two
+    definitions that are meant to be identical are a drift hazard, and a differential
+    between them would then be evidence about the copy rather than about the kernel.
+
 ## Interfaces
 
 ```rust
 pub struct BackendCapabilities {
-    pub schema_version: u32,
-    pub name: &'static str,
-    pub version: &'static str,
-    pub problem_classes: Vec<ProblemClass>,
-    pub arithmetic: Arithmetic,
-    pub warm_start: bool,
-    pub device: DeviceClass,
+    schema_version: u32,
+    name: &'static str,
+    version: String,
+    problem_classes: Vec<ProblemClass>,
+    arithmetic: Arithmetic,
+    warm_start: bool,
+    device: DeviceClass,
 }
 
 pub trait Backend {
@@ -158,6 +183,20 @@ pub trait Backend {
     ) -> Result<SolveRecord, ValidationError>;
 }
 ```
+
+The fields are private and there is no setter, no `&mut` accessor and no public
+constructor other than a validating one. That is requirement 4 expressed in the type
+rather than only in prose: widening a declaration must not compile, and public fields
+would make it an ordinary mutation. `capabilities` also takes no argument, so there is
+no request-shaped input a caller could influence it with, and `solve` consults the
+declaration itself, so a caller holding a widened copy would still be refused —
+requirement 4 is about authority rather than about local mutability.
+
+`version` is a `String` rather than `&'static str` because a backend's version is not
+always known at compile time. The pinned adapter reports the version it actually
+linked, and reports an unavailable version when nothing was linked; a `&'static str`
+would force it to name a version it may never have called, which is the claim
+ADR-0003's provisioning rule exists to prevent.
 
 `capabilities` is added to the existing trait; `solve` is unchanged. `HighsBackend`
 declares continuous and discrete classes, `f64`, warm start, and the CPU device class,
@@ -226,11 +265,26 @@ by that interval rather than by the iteration limit.
 
 ## Compatibility and Versioning
 
-`Backend` gains one method. `SolveOptions`, `SolveRecord`, `Termination` and every
-solve schema are unchanged, so `solve-config-v1` and `solve-record-v1` stay at
-version 1. The device is selected once for a whole search by SPEC-0010's
-`search-config-v3` field, and a relaxation inherits it; this contract adds no
-configuration field of its own.
+`Backend` gains one method. `SolveOptions` and `Termination` are unchanged, so
+`solve-config-v1` stays at version 1: the settings requirements 9 and 10 name are
+constructor-time state under this contract's own `CudaLpBackend::open(residency,
+settings)` interface, not per-solve options. `SolveRecord` gains the settings block
+those requirements require it to carry, which is `solve-record-v2`. That is a leaf
+bump: no other document embeds a solve record, so `search-config-v3`,
+`search-record-v3` and `run-record-v2` are untouched. A version mismatch is refused
+rather than migrated, and the Rust parser and the JSON Schema must accept the same
+documents, matching SPEC-0005 requirement 20.
+
+An earlier revision of this section froze `solve-record-v1` as well. That could not
+be satisfied: requirements 9 and 10 require settings to be recorded and the
+acceptance section requires a record missing them to be refused, while the version-1
+record is closed to new fields in both the Rust parser and the schema. The freeze was
+the mistaken half, because the alternative — recording settings outside the record —
+would leave a `SolveRecord` unable to reproduce its own solve.
+
+The device is selected once for a whole search by SPEC-0010's `search-config-v3`
+field, and a relaxation inherits it; this contract adds no configuration field of its
+own.
 
 The capability declaration is versioned with its own `schema_version` so that a later
 capability can be added without redefining the existing ones.
@@ -252,8 +306,19 @@ refusal; requirements 11 to 15 are what prevent it from causing a wrong answer.
 
 ```bash
 optimizer solve --model examples/model-v1.json --config examples/solve-config-v1.json \
+  --backend cuda-lp --lp-settings examples/lp-settings-v1.json \
   --device GPU-6721b13a-30f9-83ec-dace-ba2d9738556f
 ```
+
+The same model on the host method, which executes no device work and names no device:
+
+```bash
+optimizer solve --model examples/model-v1.json --config examples/solve-config-v1.json \
+  --backend host-lp --lp-settings examples/lp-settings-v1.json
+```
+
+Both flags are explicit. Omitting `--backend` reaches the pinned CPU backend, which is
+requirement 18 and requirement 26.
 
 ## Acceptance Tests
 
@@ -287,6 +352,14 @@ Requirements 21-23: differential agreement with the pinned CPU backend on object
 value across the existing LP, objective-offset, equality and ranged fixtures, with a
 mutated instance shown to disagree so the comparison is known to be able to fail. No
 timing is recorded in any acceptance artifact.
+
+Requirements 24-27: the device iterates are compared against the host implementation
+on a fixed instance, and the shared reduction definition is asserted to be the same
+one both engines use rather than two copies that happen to agree; the default
+configuration is shown to reach the pinned CPU backend and not the host method, which
+is what keeps requirement 26 from being prose; a forced availability failure is shown
+to fall back to the pinned CPU backend rather than to the host method, asserted by the
+backend name in the record.
 
 Device-dependent tests report an explicit skip when no device or no code object is
 present, so a missing device is never counted as coverage, matching how

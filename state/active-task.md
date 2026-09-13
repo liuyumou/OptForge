@@ -1,5 +1,66 @@
 # Active Task
 
+## C6 SPEC-0011 Corrections Before Implementation (2026-09-13)
+
+Objective: settle two requirements of SPEC-0011 that cannot be satisfied as written,
+before any of the GPU linear-programming backend is implemented against them.
+
+Status: complete. Documents only; no behavior changes, so no changelog entry, as
+the C2, C5 and C8 specification commits each recorded.
+
+Acceptance gate: `bash tools/check.sh` passes unchanged, with the same 300 Rust and
+68 Python tests, because nothing executable changed. Resource budget: CPU only, no
+GPU workloads.
+
+Three corrections, each a conflict found by reading the contract against the tree
+rather than a preference.
+
+Requirements 9 and 10 require the preconditioner and the termination check interval
+to be recorded "as part of the settings that produced a record", and the acceptance
+section requires a record missing either to be refused. Compatibility freezes
+`solve-record-v1`, and that document is closed: `deny_unknown_fields` on the Rust side
+and `additionalProperties: false` in the schema. Both cannot hold. The correction
+permits `solve-record-v2` and keeps `solve-config-v1` at version 1, which is what the
+specification's own `CudaLpBackend::open(residency, settings)` interface already
+implies: settings are constructor-time state, not per-solve options. Nothing embeds
+`solve-record`, so this is a leaf bump with no cascade into `search-config-v3`,
+`search-record-v3` or `run-record-v2` — checked before choosing it. The rejected
+alternative was a sidecar settings document, which obeys the frozen version literally
+but leaves a `SolveRecord` unable to reproduce its own solve, contradicting the
+doc comment on that type and weakening SPEC-0005's reproducibility spine.
+
+The Interfaces block cannot be implemented as printed. `version: &'static str` cannot
+hold the HiGHS version, which is a runtime `String` and is `UNAVAILABLE_VERSION` when
+nothing was linked, so a `&'static str` would force the adapter to name a version it
+may never have called. And public fields make widening a declaration a mutation the
+compiler permits, which contradicts requirement 4 and its acceptance line that a
+caller attempting to widen one does not compile.
+
+The host first-order method is the oracle the device kernels are checked against,
+which `state/backlog.yaml` requires be built first. Shipping it as a selectable
+backend rather than as test scaffolding makes it a public feature, and CONTRIBUTING.md
+requires an accepted specification for one. Requirements are added here rather than
+the surface being introduced without a contract.
+
+ADR-0010's "which is finite wherever the repair needs it" is true of every model this
+project currently produces and false of `model-v1` in general: a free variable admits
+no finite repair on the column side, because the reduced cost is determined by the
+dual iterate and repairing it alone falsifies the identity the bound rests on. The
+behavior there is a refusal rather than a wrong bound, so this is a scope statement,
+but the sentence reads as a theorem and is narrowed to the models it is a theorem
+about.
+
+Follow-up: the implementation slices, in order — the capability declaration on the
+solve contract, the canonical LP form and fixed reduction order, the host
+certification, the host engine with dispatch, the device kernels, and the evidence
+record.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed with the pinned HiGHS library
+present, exit 0, 300 Rust tests, 68 Python tests and 56 documentation pages — the same
+counts as before this change, which is what a specification-only commit should
+produce. The advisory database fetch failed and fell back to the cached copy, which
+`state/known-failures.md` already records as intermittent.
+
 ## C6 Clean-Checkout Verification (2026-09-13)
 
 Objective: verify the C6 branch from a checkout with nothing prebuilt, before any
