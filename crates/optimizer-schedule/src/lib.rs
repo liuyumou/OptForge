@@ -28,7 +28,7 @@ mod serde_strict;
 pub use encode::{assignment_variable, candidate, completion_variable, model, permutation};
 pub use evaluate::{completion_times, makespan, validate_permutation};
 pub use generate::{
-    DEVELOPMENT_SUBSET, GENERATOR_NAME, Lehmer, PublishedInstance, taillard_instance,
+    DEVELOPMENT_SUBSET, GENERATOR_NAME, Lehmer, PublishedInstance, SCALE_SUBSET, taillard_instance,
 };
 pub use heuristic::{insertion, neh};
 pub use instance::{

@@ -1,5 +1,69 @@
 # Active Task
 
+## C6 Scale Split (2026-09-13)
+
+Objective: add a frozen flow-shop split that spans published instance shapes, so the
+crossover SPEC-0010 requirement 22 makes the CPU default depend on can be located
+rather than merely bounded from below.
+
+Status: complete; ADR-0011 is accepted, twelve instances are committed with their
+derivations, and the manifest validates under both authorities.
+
+Acceptance gate: the manifest validates against the SPEC-0007 schema; every committed
+document is reproduced from its recorded seed by an independently written generator
+and matches its checksum; the reproduction check is shown to fail for a wrong seed
+and for a transposed loop order; the development subset is byte-identical to before;
+`bash tools/check.sh` passes with native acceptance covered. Resource budget: CPU
+only, no GPU workloads.
+
+Why a new split rather than a larger one: SPEC-0008 requirement 24 and the benchmark
+protocol both require a decision record before a split changes, and the development
+subset's own documentation says enlarging it is such a change. Enlarging it would
+also have altered the split a completed capability's evidence cites, for a reason
+that has nothing to do with that capability. ADR-0011 therefore adds a split and
+leaves C5's untouched.
+
+Why one instance per shape rather than ten: the two splits answer different
+questions. C5 asks whether an encoding and a recurrence are correct, and correctness
+does not vary with shape, so ten instances of one shape exercise the same paths ten
+times and that is the right sample. C6 asks how cost grows with shape, so the sample
+has to move along the axis that varies. Ten per class would have committed twelve
+times the bytes to answer a question about within-shape variance that nothing in C6
+asks — and would have invited averages over a split never designed to support them.
+
+The smallest shape is in the split deliberately. Twenty jobs by five machines is
+where a device is expected to lose, so it is the crossover measurement's own
+falsification check: a report showing the device winning everywhere is evidence the
+measurement excluded transfers, not evidence the device is fast. A sweep starting at
+the large end could not produce that signal.
+
+One property of the source caught a wrong assertion before it was written. Taillard
+reuses time seeds across classes — `ta051` and `ta071` are both 1539989115 — so the
+development subset's "seeds must be unique" assertion is true only within one shape.
+Carrying it over would have failed on the published table itself rather than on a
+mistake. Both the Rust and the Python contracts now assert uniqueness of the seed
+together with its shape, and the reason is recorded beside them.
+
+The seed table was transcribed from the same OR-Library source the development subset
+cites, and the ten seeds already in the repository matched it exactly, which is a
+cross-check on both rather than on neither.
+
+With the split in place the Phase 1 measurement was retaken over all twelve
+instances, replacing the earlier table that reported shapes without naming instances.
+The numbers are materially unchanged, which is the expected result — processing times
+are drawn from the same distribution regardless of seed — but the rows now name
+instances that exist. The full table is in [known failures](known-failures.md).
+
+Evidence (2026-09-13): `bash tools/check.sh` passed with the pinned HiGHS 1.11.0
+library linked and **zero test skips**, exit 0. Rust tests rose from 252 to 253 and
+Python tests from 60 to 63; documentation rose from 55 to 56 pages, which is ADR-0011
+and nothing else. `Cargo.lock` and every `Cargo.toml` are untouched. The tracked
+instance documents add roughly 280 KB, which is the cost of checkable provenance.
+
+Follow-up: SPEC-0010's device phases. The next is the CUDA driver boundary and the
+provisioning script, which must leave an ordinary `cargo build` working on a host
+with no toolkit and no device.
+
 ## C6 Tuned Flow-Shop Baseline (2026-09-13)
 
 Objective: implement Taillard's exact head and tail acceleration inside `neh` and

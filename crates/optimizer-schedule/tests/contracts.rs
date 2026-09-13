@@ -9,9 +9,9 @@ use std::collections::BTreeSet;
 
 use optimizer_core::{Candidate, ErrorKind, ObjectiveSense, Tolerances};
 use optimizer_schedule::{
-    DEVELOPMENT_SUBSET, FlowShopDocument, FlowShopInstance, Lehmer, SCHEDULE_SCHEMA_VERSION,
-    assignment_variable, candidate, completion_variable, insertion, makespan, model, neh,
-    permutation, taillard_instance, validate_permutation,
+    DEVELOPMENT_SUBSET, FlowShopDocument, FlowShopInstance, Lehmer, MAX_JOBS, MAX_MACHINES,
+    SCALE_SUBSET, SCHEDULE_SCHEMA_VERSION, assignment_variable, candidate, completion_variable,
+    insertion, makespan, model, neh, permutation, taillard_instance, validate_permutation,
 };
 
 fn tolerances() -> Tolerances {
@@ -785,6 +785,72 @@ fn the_frozen_subset_is_stable_and_published() {
             }
         }
     }
+}
+
+/// Requirement 24: the scale subset sweeps shapes and stays inside the limits.
+///
+/// The development subset answers whether an encoding is correct, so ten instances
+/// of one shape is the right sample. This one answers how cost grows with shape, so
+/// repeating a shape would add bytes without adding range. The assertions are
+/// therefore about coverage rather than count.
+#[test]
+fn the_scale_subset_sweeps_published_shapes() {
+    assert_eq!(SCALE_SUBSET.len(), 12, "the scale subset must stay fixed");
+
+    let mut shapes = BTreeSet::new();
+    let mut identities = BTreeSet::new();
+    for published in SCALE_SUBSET {
+        assert!(
+            shapes.insert((published.jobs, published.machines)),
+            "{}: a sweep must not repeat a shape",
+            published.id
+        );
+        // Taillard reuses seeds across shapes: ta051 and ta071 share one. A seed
+        // is unique only together with its shape, and asserting otherwise would
+        // fail on the source's own published table rather than on a mistake.
+        assert!(
+            identities.insert((published.seed, published.jobs, published.machines)),
+            "{}: a seed and shape together must be unique",
+            published.id
+        );
+        assert!(
+            published.jobs <= MAX_JOBS && published.machines <= MAX_MACHINES,
+            "{}: the sweep must stay inside the document limits it was sized for",
+            published.id
+        );
+        let instance = published.generate().expect("generation succeeds");
+        assert_eq!(instance.instance_id(), published.id);
+        assert_eq!(instance.jobs() as u32, published.jobs);
+        assert_eq!(instance.machines() as u32, published.machines);
+    }
+
+    let jobs: BTreeSet<u32> = SCALE_SUBSET.iter().map(|p| p.jobs).collect();
+    assert_eq!(
+        jobs.into_iter().collect::<Vec<_>>(),
+        vec![20, 50, 100, 200, 500],
+        "the sweep must span the published job counts"
+    );
+    // The smallest shape is where a device is expected to lose, which is the
+    // crossover measurement's own falsification check under SPEC-0010
+    // requirement 22. A sweep that started at the large end could not fail.
+    assert!(shapes.contains(&(20, 5)));
+    assert!(shapes.contains(&(500, 20)));
+
+    // The two subsets overlap at ta001 on purpose, and the overlap is only sound
+    // because both derive it from the same published seed.
+    let development = DEVELOPMENT_SUBSET
+        .iter()
+        .find(|p| p.id == "ta001")
+        .expect("ta001 is in the development subset");
+    let scale = SCALE_SUBSET
+        .iter()
+        .find(|p| p.id == "ta001")
+        .expect("ta001 is in the scale subset");
+    assert_eq!(
+        development.generate().expect("generation succeeds"),
+        scale.generate().expect("generation succeeds"),
+        "an instance in two splits must be one instance"
+    );
 }
 
 /// Requirement 3 of the generator's contract: an out-of-range shape is refused.

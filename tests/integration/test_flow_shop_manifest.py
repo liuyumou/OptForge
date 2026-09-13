@@ -19,6 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "benchmarks/manifests/taillard-flow-shop-development.json"
+SCALE_MANIFEST = ROOT / "benchmarks/manifests/taillard-flow-shop-scale-v1.json"
 
 # Taillard's published verification instance, ta001 from seed 873654221. Rows are
 # machines and columns are jobs, exactly as the source prints it.
@@ -130,6 +131,70 @@ class FlowShopManifest(unittest.TestCase):
                     instance["sha256"],
                     f"{instance['id']} checksum does not match the manifest",
                 )
+
+    def test_the_scale_manifest_sweeps_shapes_rather_than_sampling_one(self):
+        """SPEC-0010 requirement 22: a crossover needs range, not a sample."""
+        manifest = read_json(SCALE_MANIFEST)
+        self.assertEqual(manifest["split"], "validation")
+        self.assertEqual(manifest["purpose"], "performance")
+        self.assertEqual(manifest["suite"], "taillard-flow-shop")
+        shapes = [
+            (i["generator"]["parameters"]["jobs"], i["generator"]["parameters"]["machines"])
+            for i in manifest["instances"]
+        ]
+        self.assertEqual(len(shapes), len(set(shapes)), "a sweep must not repeat a shape")
+        jobs = sorted({shape[0] for shape in shapes})
+        self.assertEqual(jobs, [20, 50, 100, 200, 500])
+        # The smallest shape is the row a device is expected to lose on, and is
+        # therefore the measurement's own falsification check. Its absence would
+        # make a report that wins everywhere unfalsifiable.
+        self.assertIn((20, 5), shapes)
+        self.assertIn((500, 20), shapes)
+
+    def test_the_scale_manifest_regenerates_from_its_recorded_seeds(self):
+        """Requirements 23 and 27, applied to the scale split."""
+        manifest = read_json(SCALE_MANIFEST)
+        # Taillard reuses seeds across shapes -- ta051 and ta071 share one -- so a
+        # seed is unique only together with its shape. Asserting seed uniqueness
+        # alone would fail on the source's own published table.
+        keys = set()
+        for instance in manifest["instances"]:
+            generator = instance["generator"]
+            parameters = generator["parameters"]
+            key = (generator["seed"], parameters["jobs"], parameters["machines"])
+            self.assertNotIn(key, keys, "a seed and shape together must be unique")
+            keys.add(key)
+            with self.subTest(instance=instance["id"]):
+                path = ROOT / instance["path"]
+                document = read_json(path)
+                self.assertEqual(
+                    document["processing_times"],
+                    generate(
+                        generator["seed"],
+                        parameters["jobs"],
+                        parameters["machines"],
+                        parameters["minimum_processing_time"],
+                        parameters["maximum_processing_time"],
+                    ),
+                    f"{instance['id']} is not what its recorded seed produces",
+                )
+                self.assertEqual(document["instance_id"], instance["id"])
+                self.assertEqual(
+                    hashlib.sha256(path.read_bytes()).hexdigest(),
+                    instance["sha256"],
+                    f"{instance['id']} checksum does not match the manifest",
+                )
+
+    def test_a_wrong_seed_and_a_transposed_loop_order_both_disagree(self):
+        """Requirement 23: the regeneration check must be able to fail."""
+        correct = generate(873654221, 20, 5, 1, 99)
+        self.assertNotEqual(correct, generate(873654222, 20, 5, 1, 99), "a wrong seed must differ")
+        transposed = generate(873654221, 5, 20, 1, 99)
+        self.assertNotEqual(
+            correct,
+            [list(row) for row in zip(*transposed)],
+            "a transposed loop order must differ",
+        )
 
     def test_the_generator_reproduces_the_published_reference_instance(self):
         """Requirement 23: agreement with the source's own printed matrix."""

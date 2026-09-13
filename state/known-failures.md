@@ -81,21 +81,35 @@ rewrite moves that comparison — fails it, while
 `construction_is_deterministic_including_under_ties` still passes, since a
 deterministic wrong answer is still deterministic.
 
-Measured on the development host, release build, best of three after a warmup, with a
-0.41% noise floor from an identical binary:
+Measured on the development host, release build, best of three after a warmup, over
+the whole ADR-0011 scale split, with a 0.19% noise floor from an identical binary:
 
-| instance | construction | improvement pass |
-| --- | --- | --- |
-| 20 jobs, 5 machines | 0.18 ms to 0.03 ms | 0.11 ms to 0.04 ms |
-| 50 jobs, 20 machines | 1.52 ms to 0.13 ms | 4.20 ms to 0.23 ms |
-| 100 jobs, 20 machines | 11.27 ms to 0.48 ms | 32.66 ms to 0.92 ms |
-| 200 jobs, 10 machines | 34.56 ms to 0.96 ms | 98.87 ms to 1.88 ms |
-| 500 jobs, 20 machines | naive not run; 11.96 ms | naive not run; 23.86 ms |
+| instance | shape | construction | improvement pass |
+| --- | --- | --- | --- |
+| ta001 | 20x5 | 0.18 ms to 0.03 ms | 0.16 ms to 0.04 ms |
+| ta011 | 20x10 | 0.07 ms to 0.01 ms | 0.16 ms to 0.02 ms |
+| ta021 | 20x20 | 0.12 ms to 0.02 ms | 0.31 ms to 0.04 ms |
+| ta031 | 50x5 | 0.33 ms to 0.04 ms | 0.84 ms to 0.06 ms |
+| ta041 | 50x10 | 0.64 ms to 0.07 ms | 1.70 ms to 0.12 ms |
+| ta051 | 50x20 | 1.52 ms to 0.13 ms | 4.23 ms to 0.23 ms |
+| ta061 | 100x5 | 2.29 ms to 0.13 ms | 6.26 ms to 0.25 ms |
+| ta071 | 100x10 | 4.67 ms to 0.25 ms | 13.24 ms to 0.47 ms |
+| ta081 | 100x20 | 11.26 ms to 0.48 ms | 32.49 ms to 0.92 ms |
+| ta091 | 200x10 | 34.33 ms to 0.97 ms | 99.13 ms to 1.89 ms |
+| ta101 | 200x20 | 87.05 ms to 1.89 ms | 257.39 ms to 3.75 ms |
+| ta111 | 500x20 | naive not run; 11.98 ms | naive not run; 23.86 ms |
 
-The ratio grows from roughly 3x to roughly 50x across that range, which is what an
-`O(n)` factor should do and is the reason the smallest row is in the table: a single
-instance would have supported almost any claim. These are a development diagnostic on
-one host, not a benchmark result and not evidence.
+The improvement pass speeds up by roughly 4x at twenty jobs and roughly 69x at two
+hundred, and the ratio tracks the job count rather than the machine count: ta061 and
+ta091 differ only in jobs and their ratios differ by a factor of two, while ta061 and
+ta081 differ mostly in machines and their ratios are much closer. That is what an
+`O(n)` factor should look like, and it is the reason the whole sweep is in the table
+rather than one row: any single instance would have supported almost any claim about
+the shape of the improvement. The naive pass was not run at five hundred jobs, where
+it takes minutes; that row reports the tuned time only and says so.
+
+These are a development diagnostic on one host, not a benchmark result and not
+evidence.
 
 What this changes for C6 is worth recording, because it is the opposite of
 convenient. The number a device now has to beat at 500 jobs is 23.86 ms of tuned

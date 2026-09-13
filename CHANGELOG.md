@@ -17,14 +17,29 @@ User-visible changes are recorded here using Conventional Commit terminology.
   permutation*, not merely the same makespan, because requirement 17 fixes which of
   several tied permutations a caller receives.
 
-  Measured on the development host, release build, best of three after a warmup:
-  a 100-job, 20-machine construction falls from 11.27 ms to 0.48 ms and its
-  improvement pass from 32.66 ms to 0.92 ms; at 200 jobs and 10 machines the pass
-  falls from 98.87 ms to 1.88 ms. The speedup grows with the job count, as an `O(n)`
-  factor should. This is a development diagnostic on one host and is not a benchmark
+  Measured on the development host, release build, best of three after a warmup,
+  over the whole scale split: the improvement pass on `ta081` (100x20) falls from
+  32.49 ms to 0.92 ms and on `ta101` (200x20) from 257.39 ms to 3.75 ms, a speedup
+  growing from roughly 4x at twenty jobs to roughly 69x at two hundred. The ratio
+  tracks the job count rather than the machine count, which is what an `O(n)` factor
+  should do. This is a development diagnostic on one host and is not a benchmark
   result, not evidence, and not a claim about the engine.
 
 ### Added
+
+- A frozen Taillard scale split, under ADR-0011, at
+  `benchmarks/manifests/taillard-flow-shop-scale-v1.json`. It takes the first
+  instance of each of the paper's twelve published classes, spanning 20 to 500 jobs
+  and 5 to 20 machines, and exists to locate a crossover rather than to sample one
+  shape. The development subset is unchanged: its ten instances, its shape and its
+  seeds are untouched, so every C5 claim that cites it still holds. Instances are
+  generated from the published seeds by the committed generator and checked by
+  regenerating them with an independently written one, so the split needs no
+  download and no third-party host. It commits no best-known bound, because a
+  committed bound is an acceptance threshold.
+- `SCALE_SUBSET`, the published seed table behind that split. Taillard reuses seeds
+  across classes — `ta051` and `ta071` share one — so a seed is unique only together
+  with its shape, and the contracts assert that pair rather than the seed alone.
 
 - `Model::rebound`, which replaces a model's variable domains and bounds while
   reusing its already-validated rows and objective, under new SPEC-0001

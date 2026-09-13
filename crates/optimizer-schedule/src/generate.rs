@@ -209,3 +209,99 @@ impl PublishedInstance {
         taillard_instance(self.id, self.seed, self.jobs, self.machines)
     }
 }
+
+/// One instance from each published shape, `ta001` through `ta111`.
+///
+/// This is the scale subset. It exists to locate a crossover, which is a question
+/// about how cost grows with instance shape, so it takes the first instance of each
+/// of the paper's twelve classes rather than ten instances of one class. A sweep
+/// needs range; it does not need a sample, and taking ten per class would commit
+/// twelve times the bytes to answer the same question less clearly.
+///
+/// It deliberately overlaps [`DEVELOPMENT_SUBSET`] at `ta001`. That instance is the
+/// small end of the sweep and the one where a device is expected to lose, which is
+/// the measurement's own falsification check under SPEC-0010 requirement 22; leaving
+/// it out would remove the row most able to show a measurement is wrong.
+///
+/// Seeds are transcribed from the same published table as the development subset,
+/// and the paper reuses some seeds across shapes: `ta051` and `ta071` share one.
+/// A seed is therefore unique only together with its shape, and anything asserting
+/// uniqueness must say so, or it will fail on the source's own data.
+///
+/// This list is a split. Changing it, or any seed in it, requires a new decision
+/// record and experiment record under requirement 24, exactly as the development
+/// subset does.
+pub const SCALE_SUBSET: [PublishedInstance; 12] = [
+    PublishedInstance {
+        id: "ta001",
+        seed: 873_654_221,
+        jobs: 20,
+        machines: 5,
+    },
+    PublishedInstance {
+        id: "ta011",
+        seed: 587_595_453,
+        jobs: 20,
+        machines: 10,
+    },
+    PublishedInstance {
+        id: "ta021",
+        seed: 479_340_445,
+        jobs: 20,
+        machines: 20,
+    },
+    PublishedInstance {
+        id: "ta031",
+        seed: 1_328_042_058,
+        jobs: 50,
+        machines: 5,
+    },
+    PublishedInstance {
+        id: "ta041",
+        seed: 1_958_948_863,
+        jobs: 50,
+        machines: 10,
+    },
+    PublishedInstance {
+        id: "ta051",
+        seed: 1_539_989_115,
+        jobs: 50,
+        machines: 20,
+    },
+    PublishedInstance {
+        id: "ta061",
+        seed: 896_678_084,
+        jobs: 100,
+        machines: 5,
+    },
+    PublishedInstance {
+        id: "ta071",
+        seed: 1_539_989_115,
+        jobs: 100,
+        machines: 10,
+    },
+    PublishedInstance {
+        id: "ta081",
+        seed: 450_926_852,
+        jobs: 100,
+        machines: 20,
+    },
+    PublishedInstance {
+        id: "ta091",
+        seed: 471_503_978,
+        jobs: 200,
+        machines: 10,
+    },
+    PublishedInstance {
+        id: "ta101",
+        seed: 2_013_025_619,
+        jobs: 200,
+        machines: 20,
+    },
+    PublishedInstance {
+        id: "ta111",
+        seed: 1_368_624_604,
+        jobs: 500,
+        machines: 20,
+    },
+];
