@@ -30,14 +30,20 @@ The device path exists and agrees exactly with the host, but SPEC-0010 is not
 finished, and the gap is listed here rather than implied by an unqualified
 "C6 implemented".
 
-Not implemented at all. Requirement 1 and SPEC-0006 requirement 1a: discovery still
-queries three fields, so `Hardware::driver` has no producer and a device run cannot
-yet satisfy SPEC-0007 requirement 9. Requirement 22's crossover is measured but is
-not yet what any default consults, because nothing dispatches to a device outside a
+Not implemented at all. Requirement 22's crossover is measured but is not yet what
+any default consults, because nothing dispatches to a device outside a probe or a
 test. Requirement 35: `optimizer-registry` still refuses every `gpu` hardware
-requirement unconditionally. There is no `optimizer gpu probe` subcommand and no
-device-backed candidate producer, so nothing reaches a device from outside Rust test
-code -- which is the same gap C8 closed for extensions and it is open again here.
+requirement unconditionally. There is no device-backed candidate producer, so no
+*search* reaches a device -- `optimizer gpu probe` now does, which closes the
+"nothing outside Rust test code" half of this gap but not the half that matters for
+a solve.
+
+A precise note on requirement 1a, because it is easy to read as further along than
+it is. Discovery and the probe both report the driver version, so the field has a
+producer. `Hardware::driver` in a *run record* is still null, and correctly so:
+SPEC-0007 requirement 9 forbids a CPU record claiming GPU execution, and every
+search this build performs is a CPU search. The field gets a non-null value when a
+search runs on a device, which is requirement 35's work, not this one's.
 
 Requirements 6, 40 and 41 are now reached, and the shape of what they reach is worth
 being precise about. A search configuration carries its device, the schema cascade
@@ -59,11 +65,11 @@ Requirement 24's fallback is available -- `device_path_available` and `admissibl
 both answer before any allocation -- but no caller currently chooses between the two
 paths, so the fallback is reachable rather than exercised.
 
-Reproduction: `optimizer gpu probe` is not a command, `grep -rn "HardwareRequirement::Gpu"
-crates/optimizer-registry/src/resolve.rs` still shows an unconditional refusal, and
-`AI_OPTIMIZER_GPU=1 cargo test -p optimizer-cuda` passes without any of the above
-existing. Next step: the CLI probe and the driver version together, since the probe
-is what would report it, then the device-backed producer.
+Reproduction: `grep -rn "HardwareRequirement::Gpu" crates/optimizer-registry/src/resolve.rs`
+still shows an unconditional refusal, and `optimizer search` with a configuration
+naming a device exits 2. Next step: the device-backed candidate producer, which is
+what would make requirement 35's refusal worth narrowing and requirement 22's
+crossover worth consulting.
 
 ## Resolved: device sanitizer coverage runs and is clean
 

@@ -1,5 +1,78 @@
 # Active Task
 
+## C6 Device Probe and Driver Version (2026-09-13)
+
+Objective: give the driver version a producer, under SPEC-0006 requirement 1a, and
+add `optimizer gpu probe` so a caller can find out whether this build can use a
+device without running a search on one.
+
+Status: complete; discovery reports four fields, and a probe creates a real context
+under the lease and reports what the driver and the code object actually provide.
+
+Acceptance gate: discovery refuses a row without a driver version rather than
+accepting a hole; a probe reads the requested UUID back through the context it
+created and reports both; it resolves every kernel this build expects without
+launching one; a UUID no device carries, a missing device flag, a repeated flag, an
+unknown lease mode and an out-of-range timeout are each refused with exit 2 and no
+report; `bash tools/check.sh` passes with native acceptance covered. Resource
+budget: **GPU, one device under the shared host lease** for the device-gated tests;
+the CPU gate is unchanged and still runs none of them.
+
+Why a probe is a separate command from discovery. Discovery asks management tooling
+what hardware exists and never touches the driver, which is why it needs no lease
+and runs anywhere. A probe asks the driver, so it creates a context and therefore
+must hold the lease. Collapsing the two would have made the cheap question expensive
+and the expensive one look free.
+
+The report keeps `requested` and `observed` as separate fields, and that is the
+point of it rather than a detail. Requirement 3's check is that they are equal; a
+single field would have recorded the answer while recording nothing about whether
+anything was compared. The same reasoning put the kernel list in the report: the
+probe resolves every entry point this build expects without launching any of them,
+so a code object that loads but is missing a kernel is found here rather than by a
+first launch.
+
+Two arguments were refused where a lenient reading was available. `--lease` accepts
+only `acquire` and `inherited`, and a repeated `--device` is an error rather than
+last-one-wins, because a caller who named two devices did not mean either of them
+and the lock permits one holder anyway.
+
+The unsafe prohibition caught a design mistake, which is worth recording because it
+was mine. The first version of the probe command set the inherited-lease environment
+variable so the library would see it. `optimizer-cli` forbids unsafe and
+`env::set_var` is unsafe under edition 2024, so it would not compile. The
+prohibition was right on the merits, not merely in the way: a command that mutates
+its own environment to signal a library is harder to follow than one that passes an
+argument. The lease decision is now a `LeaseRequest` parameter, and `LeaseRequest`
+is deliberately distinct from the `LeaseMode` the report carries — one is what the
+caller asked for, the other is what happened, and `Auto` can produce either.
+
+`--lease acquire` inside a wrapped job is now a bounded refusal rather than a hang.
+It waits on the lock its own parent holds and gives up at the timeout, which is the
+deadlock requirement 8 exists to prevent, made visible in a test run instead of a
+stuck job.
+
+What this does not do, stated because it is easy to read as further along than it
+is: `Hardware::driver` in a run record is still null. That is correct rather than
+outstanding. Every search this build performs is a CPU search, and SPEC-0007
+requirement 9 forbids a CPU record claiming GPU execution; the field takes a value
+when a search runs on a device, which is the device-backed producer's work.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed with the pinned HiGHS 1.11.0
+library linked and **zero test skips other than the eleven device tests**, exit 0.
+Rust tests rose from 277 to 286 and Python remains 68; documentation remains 56
+pages. `Cargo.lock` and every `Cargo.toml` are untouched. Separately,
+`bash tools/gpu_job.sh <uuid> bash tools/gpu_check.sh` passed all eleven device
+tests and all four sanitizers — memcheck, racecheck, initcheck and synccheck — with
+zero errors and zero hazards, on an RTX 5090. A probe on the RTX PRO 6000 reported
+compute capability 12.0, 188 multiprocessors, 101,376 bytes of shared memory per
+block and driver 580.105.08, with both kernels resolved.
+
+Follow-up: the device-backed candidate producer. It is what would make the
+registry's unconditional refusal of a `gpu` hardware requirement worth narrowing,
+and the measured crossover worth consulting; until it exists, no search reaches a
+device.
+
 ## C6 Device Selection Schema Cascade (2026-09-13)
 
 Objective: put the selected device on the search configuration, under SPEC-0010

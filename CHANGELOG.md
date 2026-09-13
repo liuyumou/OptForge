@@ -56,6 +56,33 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- `optimizer gpu probe --device GPU-<uuid> [--lease acquire|inherited]
+  [--timeout-ms N]`, under SPEC-0010 requirements 3, 4 and 9. It takes the shared
+  host lease, creates a context on one named device, and writes one JSON report; a
+  refusal exits 2 and writes nothing, so a partial report can never be read as a
+  successful one. It names exactly one UUID because the lock permits one holder
+  across device selections, so a probe-everything form would be a command the lease
+  forbids.
+
+  The report keeps `requested` and `observed` as separate fields. Equality of the
+  two is the check requirement 3 makes, and one field would record the answer
+  without recording that anything was compared. It also reports the compute
+  capability, multiprocessor count, the shared memory a block may address, free and
+  total memory, and which kernels the provisioned code object actually provides --
+  resolving each entry point without launching any of it, so a build mismatch is
+  found by a probe rather than by a first launch.
+
+  Under `tools/gpu_job.sh` the lease is inherited. `--lease acquire` inside a
+  wrapped job waits on the lock its own parent holds and refuses at the timeout,
+  which is the deadlock the inherited form exists to prevent, now bounded and
+  visible rather than a 300-second hang.
+- Discovery reports the driver version, SPEC-0006 requirement 1a. SPEC-0007
+  requirement 9 has required a GPU record to identify its driver since M0 and
+  nothing produced the field until now. A row without one is refused rather than
+  accepted with a hole, so the producer cannot sometimes produce nothing. Note that
+  `Hardware::driver` in a run record is still null and correctly so: every search
+  this build performs is a CPU search, and requirement 9 forbids a CPU record
+  claiming GPU execution.
 - The CUDA driver boundary, under SPEC-0010 and ADR-0009. `optimizer-cuda-sys` is the
   workspace's second and last unsafe crate; it resolves `libcuda.so.1` with `dlopen`
   rather than linking it, so an ordinary `cargo build` still works on a host with no

@@ -20,6 +20,7 @@ use serde::Serialize;
 // The module carries its own `//!` documentation. A `///` comment here as well
 // would be concatenated with it and resolved in *this* scope, where the module's own
 // types are not in scope, so its intra-doc links would not resolve.
+pub mod probe;
 pub mod schedule;
 
 /// Shared by every project checkout and GPU runner on a host.
@@ -34,6 +35,17 @@ pub struct Device {
     pub name: String,
     /// Total memory in MiB, as reported by nvidia-smi.
     pub memory_mib: u64,
+    /// Kernel-mode driver version, as reported by nvidia-smi.
+    ///
+    /// SPEC-0006 requirement 1a. [SPEC-0007] requirement 9 has required a GPU
+    /// record to identify its driver since M0 and nothing produced the field until
+    /// SPEC-0010 needed it. It is a string rather than a parsed triple because it
+    /// is provenance, not a number anything compares: recording what the driver
+    /// said is the point, and parsing it would invite a comparison the contract
+    /// does not define.
+    ///
+    /// [SPEC-0007]: ../../docs/specifications/SPEC-0007-artifacts.md
+    pub driver_version: String,
 }
 
 /// Discovery has an explicit unavailable state and never launches kernels.
@@ -61,7 +73,12 @@ pub fn parse_devices(output: &[u8]) -> Result<Vec<Device>, String> {
     let mut devices = Vec::new();
     for row in reader.records() {
         let row = row.map_err(|error| error.to_string())?;
-        if row.len() != 3 || !row[0].starts_with("GPU-") || row[0].len() <= 4 || row[1].is_empty() {
+        if row.len() != 4
+            || !row[0].starts_with("GPU-")
+            || row[0].len() <= 4
+            || row[1].is_empty()
+            || row[3].is_empty()
+        {
             return Err("invalid GPU inventory row".into());
         }
         let memory_mib = row[2].parse::<u64>().map_err(|_| "invalid GPU memory")?;
@@ -72,6 +89,7 @@ pub fn parse_devices(output: &[u8]) -> Result<Vec<Device>, String> {
             uuid: row[0].into(),
             name: row[1].into(),
             memory_mib,
+            driver_version: row[3].into(),
         });
     }
     devices.sort_by(|left, right| left.uuid.cmp(&right.uuid));
@@ -95,7 +113,7 @@ pub fn discover() -> Discovery {
 fn query_devices() -> Result<Vec<Device>, String> {
     let mut child = Command::new("nvidia-smi")
         .args([
-            "--query-gpu=uuid,name,memory.total",
+            "--query-gpu=uuid,name,memory.total,driver_version",
             "--format=csv,noheader,nounits",
         ])
         .stdout(Stdio::piped())
@@ -249,20 +267,40 @@ mod tests {
 
     #[test]
     fn inventory_is_sorted_and_csv_quoted_names_work() {
-        let devices = parse_devices(b"GPU-b,\"model, B\",32\nGPU-a,model A,64\n").unwrap();
+        let devices =
+            parse_devices(b"GPU-b,\"model, B\",32,580.105.08\nGPU-a,model A,64,580.105.08\n")
+                .unwrap();
         assert_eq!(devices[0].uuid, "GPU-a");
         assert_eq!(devices[1].name, "model, B");
         assert_eq!(devices[0].memory_mib, 64);
+        assert_eq!(devices[0].driver_version, "580.105.08");
+    }
+
+    /// Requirement 1a: the driver version is required, not optional.
+    ///
+    /// Accepting a row without one would leave `Hardware::driver` with a producer
+    /// that sometimes produces nothing, which is the same hole SPEC-0007
+    /// requirement 9 has been waiting on since M0.
+    #[test]
+    fn a_row_without_a_driver_version_is_rejected() {
+        // The pre-1a three-column shape, which is exactly what an older nvidia-smi
+        // or a wrong query string would produce.
+        assert!(parse_devices(b"GPU-a,name,32\n").is_err());
+        assert!(parse_devices(b"GPU-a,name,32,\n").is_err());
+        assert_eq!(
+            parse_devices(b"GPU-a,name,32,580.105.08\n").unwrap()[0].driver_version,
+            "580.105.08"
+        );
     }
 
     #[test]
     fn malformed_and_duplicate_inventory_is_rejected() {
         for input in [
-            "0,name,32",
-            "GPU-a,name,N/A",
-            "GPU-a,name,0",
-            "GPU-a,name,32,extra",
-            "GPU-a,name,32\nGPU-a,name,32",
+            "0,name,32,580.105.08",
+            "GPU-a,name,N/A,580.105.08",
+            "GPU-a,name,0,580.105.08",
+            "GPU-a,name,32,580.105.08,extra",
+            "GPU-a,name,32,580.105.08\nGPU-a,name,32,580.105.08",
         ] {
             assert!(parse_devices(input.as_bytes()).is_err(), "{input}");
         }

@@ -34,6 +34,7 @@ Usage:
   optimizer registry check --registry <path> --extension <id> [--instance <path>] [--output <path>]
   optimizer gpu discover [--dry-run]
   optimizer gpu lease --simulate-ms <0..60000> [--timeout-ms <0..60000>]
+  optimizer gpu probe --device GPU-<uuid> [--lease acquire|inherited] [--timeout-ms <0..60000>]
   optimizer --help
   optimizer --version
 
@@ -104,6 +105,7 @@ fn run(args: Vec<OsString>) -> io::Result<u8> {
             println!("{}", serde_json::to_string_pretty(&discover())?);
         }
         ["gpu", "lease", options @ ..] => simulate_lease(options)?,
+        ["gpu", "probe", options @ ..] => probe_device(options)?,
         _ => {
             return Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
@@ -112,6 +114,83 @@ fn run(args: Vec<OsString>) -> io::Result<u8> {
         }
     }
     Ok(0)
+}
+
+/// Probe one device, under SPEC-0010 requirements 3, 4 and 9.
+///
+/// Unlike `gpu discover`, which asks management tooling and never touches the
+/// driver, this creates a context and therefore takes the host lease. That is why
+/// it names exactly one UUID: the lease permits one holder across device
+/// selections, so probing "everything" would be a command the lease forbids.
+fn probe_device(options: &[&str]) -> io::Result<()> {
+    let invalid = || io::Error::new(io::ErrorKind::InvalidInput, HELP);
+    let mut device = None;
+    let mut lease = None;
+    let mut timeout = None;
+    for pair in options.chunks(2) {
+        let [key, value] = pair else {
+            return Err(invalid());
+        };
+        // Each flag is stored once. A repeated flag is an error rather than a
+        // last-one-wins, matching every other command here, because a caller who
+        // passed two devices did not mean either of them.
+        match *key {
+            "--device" => {
+                if device.replace((*value).to_string()).is_some() {
+                    return Err(invalid());
+                }
+            }
+            "--lease" => {
+                let mode = match *value {
+                    "acquire" | "inherited" => (*value).to_string(),
+                    _ => return Err(invalid()),
+                };
+                if lease.replace(mode).is_some() {
+                    return Err(invalid());
+                }
+            }
+            "--timeout-ms" => {
+                let parsed = value
+                    .parse::<u64>()
+                    .ok()
+                    .filter(|value| *value <= 60_000)
+                    .ok_or_else(invalid)?;
+                if timeout.replace(parsed).is_some() {
+                    return Err(invalid());
+                }
+            }
+            _ => return Err(invalid()),
+        }
+    }
+    let device = device.ok_or_else(invalid)?;
+
+    // The lease decision is passed as an argument rather than through the
+    // environment. Setting a variable here would need unsafe under edition 2024,
+    // which this crate forbids, and the prohibition is right: a command that
+    // mutates its own environment to reach a library is harder to follow than one
+    // that says what it wants.
+    let request = match lease.as_deref() {
+        None => optimizer_cuda::probe::LeaseRequest::Auto,
+        Some("acquire") => optimizer_cuda::probe::LeaseRequest::Acquire,
+        Some("inherited") => optimizer_cuda::probe::LeaseRequest::Inherited,
+        Some(_) => return Err(invalid()),
+    };
+
+    let path = env::var_os("AI_OPTIMIZER_GPU_LOCK")
+        .map_or_else(|| PathBuf::from(DEFAULT_LOCK_PATH), PathBuf::from);
+    let timeout = Duration::from_millis(timeout.unwrap_or(5_000));
+    match optimizer_cuda::probe::probe(&device, &path, timeout, request) {
+        Ok(report) => {
+            println!("{}", serde_json::to_string_pretty(&report)?);
+            Ok(())
+        }
+        // Every refusal is exit 2 and writes no report. A probe that printed a
+        // partial report on failure would be read as a successful one.
+        Err(error) => Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            error.to_string(),
+        )),
+    }
 }
 
 fn simulate_lease(options: &[&str]) -> io::Result<()> {

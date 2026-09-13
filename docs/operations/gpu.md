@@ -32,6 +32,24 @@ Events report waiting, acquisition, and release as JSON lines. SIGINT/SIGTERM ca
 exit 130. No device is touched. A held lease releases on normal exit, cancellation,
 or process death; do not remove the lock file.
 
+## Probing a device
+
+```bash
+bash tools/gpu_job.sh GPU-<uuid> \
+  cargo run -p optimizer-cli -- gpu probe --device GPU-<uuid>
+```
+
+A probe creates a real context, so it needs the lease; discovery does not, because
+it only asks management tooling. The report names the UUID that was requested and
+the one the driver reported back, separately, so it records that a comparison
+happened rather than only its outcome. It also reports the compute capability, the
+multiprocessor count, the shared memory a block may address, free and total memory,
+and which kernels the provisioned code object actually provides.
+
+Under the wrapper the lease is inherited automatically. `--lease acquire` inside a
+wrapped job is the deadlock the inherited form exists to prevent: it waits on the
+lock its own parent holds and refuses when the timeout expires.
+
 ## Device work
 
 ```bash

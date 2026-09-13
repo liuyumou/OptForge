@@ -37,6 +37,8 @@ cargo run -p optimizer-cli -- search \
 cargo run -p optimizer-cli -- verify \
   --record artifacts/run.json --model examples/model-v1.json
 cargo run -p optimizer-cli -- gpu discover --dry-run
+bash tools/gpu_job.sh GPU-<uuid> \
+  cargo run -p optimizer-cli -- gpu probe --device GPU-<uuid>
 bash tools/check.sh
 ```
 
@@ -48,8 +50,12 @@ executive's own proof claim, plus the revision, model fingerprint and input
 hashes needed to repeat it. Verifying re-runs that search from the record alone
 and exits 2 on any divergence, naming the field; agreement establishes
 determinism on this host, not optimality.
-Discovery prints JSON with `status: available` and devices sorted by UUID, or
-`status: unavailable` and a diagnostic. It never creates a CUDA context. Checks
+Discovery prints JSON with `status: available` and devices sorted by UUID with their
+driver version, or `status: unavailable` and a diagnostic. It never creates a CUDA
+context. Probing does: it takes the shared host lease, creates a context on one named
+device, and reports the UUID the driver read back beside the one that was requested,
+along with the compute capability and the kernels the provisioned code object
+provides. A probe that cannot reach a device exits 2 and writes no report. Checks
 include a bounded process smoke measurement whose artifact is written to
 `artifacts/bootstrap-smoke.json`. A Git commit is required for that measured record.
 

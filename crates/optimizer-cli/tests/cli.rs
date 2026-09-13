@@ -120,6 +120,15 @@ fn hello_and_invalid_arguments_follow_cli_contract() {
         vec!["gpu", "lease"],
         vec!["gpu", "lease", "--simulate-ms", "60001"],
         vec!["gpu", "lease", "--simulate-ms", "0", "--simulate-ms", "1"],
+        // A probe names exactly one device, because the host lease permits one
+        // holder across device selections; omitting it or naming two are both
+        // requests the lease could not satisfy.
+        vec!["gpu", "probe"],
+        vec!["gpu", "probe", "--device"],
+        vec!["gpu", "probe", "--device", "GPU-a", "--device", "GPU-b"],
+        vec!["gpu", "probe", "--device", "GPU-a", "--lease", "maybe"],
+        vec!["gpu", "probe", "--device", "GPU-a", "--timeout-ms", "60001"],
+        vec!["gpu", "probe", "--device", "GPU-a", "--unknown", "1"],
     ] {
         assert_eq!(
             sandbox.command().args(args).output().unwrap().status.code(),
@@ -141,6 +150,107 @@ fn absent_management_tool_is_explicitly_unavailable() {
     let record: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
     assert_eq!(record["status"], "unavailable");
     assert!(record["reason"].as_str().unwrap().contains("nvidia-smi"));
+}
+
+/// SPEC-0010 requirements 3 and 4: a probe without a driver refuses and says so.
+///
+/// This runs on any host, including one with no device at all, which is the case it
+/// is about: the refusal must name what was missing rather than report an empty
+/// success. A probe that printed a partial report when it could not reach a driver
+/// would be read as one that reached it.
+#[test]
+fn a_probe_without_management_tooling_refuses_and_writes_no_report() {
+    let sandbox = Sandbox::new();
+    let output = sandbox
+        .command()
+        .env("PATH", &sandbox.0)
+        .args([
+            "gpu",
+            "probe",
+            "--device",
+            "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+        ])
+        .output()
+        .unwrap();
+    assert_eq!(output.status.code(), Some(2));
+    assert!(output.stdout.is_empty(), "a refusal writes no report");
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        stderr.contains("nvidia-smi") || stderr.contains("driver"),
+        "the refusal must name what was missing: {stderr}"
+    );
+}
+
+/// Requirement 8: a probe under the wrapper does not block on the lock its parent
+/// holds, and asking it to is bounded rather than a hang.
+///
+/// `--lease acquire` inside an inherited lease is the deadlock requirement 8 exists
+/// to prevent, expressed deliberately. It must time out and refuse, not wait for the
+/// wrapper's 300 seconds, so the mistake is visible in a test run rather than in a
+/// stuck CI job.
+#[test]
+fn acquiring_inside_an_inherited_lease_times_out_rather_than_hanging() {
+    let sandbox = Sandbox::new();
+    let holder = sandbox.holder();
+    let started = std::time::Instant::now();
+    let output = sandbox
+        .command()
+        .args([
+            "gpu",
+            "probe",
+            "--device",
+            "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+            "--lease",
+            "acquire",
+            "--timeout-ms",
+            "300",
+        ])
+        .output()
+        .unwrap();
+    assert_eq!(output.status.code(), Some(2));
+    assert!(
+        started.elapsed() < std::time::Duration::from_secs(30),
+        "the wait must be bounded by the timeout, not by the wrapper's"
+    );
+    assert!(
+        String::from_utf8_lossy(&output.stderr).contains("lease"),
+        "the refusal must name the lease"
+    );
+    signal(&holder, "-TERM");
+}
+
+/// Requirement 9: asserting an inherited lease does not take the lock.
+///
+/// The assertion is a caller's, and a caller that makes it wrongly gets an unleased
+/// run. That is why the wrapper is the thing that normally makes it and why the flag
+/// exists at all: without it, a wrapped child would block on its own parent.
+#[test]
+fn an_asserted_inherited_lease_does_not_wait_for_the_lock() {
+    let sandbox = Sandbox::new();
+    let holder = sandbox.holder();
+    let output = sandbox
+        .command()
+        .env("PATH", &sandbox.0)
+        .args([
+            "gpu",
+            "probe",
+            "--device",
+            "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+            "--lease",
+            "inherited",
+        ])
+        .output()
+        .unwrap();
+    // It still refuses, because this sandbox has no management tooling on PATH.
+    // What matters is which refusal: it reached discovery rather than blocking on
+    // a lock another process holds.
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        !stderr.contains("lease"),
+        "an asserted inherited lease must not wait for the lock: {stderr}"
+    );
+    signal(&holder, "-TERM");
 }
 
 #[test]

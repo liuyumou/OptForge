@@ -65,10 +65,18 @@ fn require_device(test: &str) -> bool {
 /// `tools/gpu_job.sh` the lease is inherited and must not be taken again, which is
 /// requirement 8 and the deadlock it exists to prevent.
 fn lease() -> Ownership {
-    let path = std::env::var_os("AI_OPTIMIZER_GPU_LOCK")
-        .map_or_else(|| std::path::PathBuf::from(DEFAULT_LOCK_PATH), Into::into);
-    Ownership::acquire_or_inherit(&path, Duration::from_secs(300), &AtomicBool::new(false))
-        .expect("the host lease is available")
+    Ownership::acquire_or_inherit(
+        &lease_path(),
+        Duration::from_secs(300),
+        &AtomicBool::new(false),
+    )
+    .expect("the host lease is available")
+}
+
+/// The host lock this run must use, honouring the wrapper's override.
+fn lease_path() -> std::path::PathBuf {
+    std::env::var_os("AI_OPTIMIZER_GPU_LOCK")
+        .map_or_else(|| std::path::PathBuf::from(DEFAULT_LOCK_PATH), Into::into)
 }
 
 fn machine_major(instance: &FlowShopInstance) -> Vec<u32> {
@@ -438,4 +446,115 @@ fn an_absent_code_object_is_a_named_refusal() {
         matches!(error, DeviceError::CodeObjectMissing(_)),
         "expected CodeObjectMissing, got {error}"
     );
+}
+
+/// Requirements 1, 3 and 4: a probe reads the device back and reports what it holds.
+///
+/// The load-bearing field is `observed`. It is separate from `requested` so that a
+/// report records that a comparison happened, not merely its outcome; a single
+/// field would be equally true and would establish nothing.
+#[test]
+fn a_probe_reads_the_device_back_and_reports_its_code_object() {
+    if !require_device("a_probe_reads_the_device_back_and_reports_its_code_object") {
+        return;
+    }
+    let target = first_device();
+    let report = optimizer_cuda::probe::probe(
+        &target.uuid,
+        &lease_path(),
+        Duration::from_secs(300),
+        optimizer_cuda::probe::LeaseRequest::Auto,
+    )
+    .expect("a real device probes");
+
+    assert_eq!(report.requested, target.uuid);
+    assert_eq!(report.observed, target.uuid, "requirement 3");
+    assert_eq!(report.name, target.name);
+
+    // Requirement 1a: the driver version now has a producer. This is the field
+    // SPEC-0007 requirement 9 has required of a GPU record since M0 and that
+    // nothing produced until now.
+    assert!(
+        !report.driver_version.is_empty(),
+        "a probe must report the driver version"
+    );
+    assert!(
+        report.driver_version.contains('.'),
+        "a driver version looks like 580.105.08, got {}",
+        report.driver_version
+    );
+
+    // Requirement 4: what this build holds, reported rather than assumed.
+    assert!(report.provisioned, "the device gate implies a code object");
+    assert_eq!(
+        report.kernels,
+        vec!["makespan_batch", "insertion_neighborhood"]
+    );
+    assert_eq!(report.target_capability, "12.0");
+    assert_eq!(
+        (report.capability_major, report.capability_minor),
+        (12, 0),
+        "the development hardware is compute capability 12.0"
+    );
+    assert!(report.multiprocessors > 0);
+    assert!(report.free_memory <= report.total_memory);
+
+    // The 99 KB per-block ceiling is what forces 32-bit head and tail tables, so
+    // it is asserted here rather than trusted to a comment.
+    assert_eq!(
+        report.max_shared_memory_per_block, 101_376,
+        "compute capability 12.0 allows 99 KB per block"
+    );
+}
+
+/// Requirement 3: a UUID no device carries is refused, and distinguishably so.
+#[test]
+fn a_probe_refuses_a_uuid_no_device_carries() {
+    if !require_device("a_probe_refuses_a_uuid_no_device_carries") {
+        return;
+    }
+    let error = optimizer_cuda::probe::probe(
+        "GPU-00000000-0000-0000-0000-000000000000",
+        &lease_path(),
+        Duration::from_secs(300),
+        optimizer_cuda::probe::LeaseRequest::Auto,
+    )
+    .expect_err("a nonexistent UUID must be refused");
+    assert!(
+        matches!(error, optimizer_cuda::probe::ProbeError::NotFound(_)),
+        "expected NotFound, got {error}"
+    );
+
+    // And a real one succeeds, so the refusal discriminates rather than refusing
+    // everything.
+    optimizer_cuda::probe::probe(
+        &first_device().uuid,
+        &lease_path(),
+        Duration::from_secs(300),
+        optimizer_cuda::probe::LeaseRequest::Auto,
+    )
+    .expect("a real device still probes");
+}
+
+/// Requirement 1a: discovery reports the driver version for every device.
+#[test]
+fn discovery_reports_a_driver_version_for_every_device() {
+    if !require_device("discovery_reports_a_driver_version_for_every_device") {
+        return;
+    }
+    match optimizer_cuda::discover() {
+        optimizer_cuda::Discovery::Available { devices } => {
+            assert!(!devices.is_empty());
+            for device in devices {
+                assert!(
+                    !device.driver_version.is_empty(),
+                    "{} must report a driver version",
+                    device.uuid
+                );
+            }
+        }
+        optimizer_cuda::Discovery::Unavailable { reason } => {
+            panic!("the device gate implies an available inventory: {reason}")
+        }
+    }
 }

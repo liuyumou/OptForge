@@ -56,7 +56,18 @@ milliseconds. Timeout defaults to 5000 ms. Duplicate, missing, unknown, negative
 or out-of-range arguments exit 2. Waiting, acquisition, and release emit JSON lines with
 event and simulated=true. An acquisition timeout exits 2.
 
+optimizer gpu probe --device GPU-<uuid> [--lease acquire|inherited] [--timeout-ms N]
+creates a context on one named device and writes one JSON report, or exits 2 with a
+diagnostic and no report. It is the first command that takes the lease for real work
+rather than for a simulation, and SPEC-0010 requirements 3, 4 and 9 govern what it
+reports. Because the lock permits one holder across device selections, it names
+exactly one UUID; there is no probe-everything form.
+
 GpuLease::acquire(path, timeout, cancelled) returns ownership or io::Error.
+Ownership::acquire_or_inherit adds the case the wrapper creates: it accepts a lease
+an ancestor holds rather than blocking on it. A child that acquired under
+tools/gpu_job.sh would wait on its own parent until the wrapper's 300-second
+timeout, which is a real deadlock rather than an anticipated one.
 AI_OPTIMIZER_GPU_LOCK overrides /tmp/ai-optimizer-gpu.lock for a host deployment.
 Tests use private temporary lock paths; real jobs on one host MUST agree on one path.
 The shell wrapper waits up to 300 seconds and exports CUDA_VISIBLE_DEVICES.
