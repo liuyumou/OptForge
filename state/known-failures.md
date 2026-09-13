@@ -55,16 +55,27 @@ and `AI_OPTIMIZER_GPU=1 cargo test -p optimizer-cuda` passes without any of the 
 existing. Next step: the schema cascade and the CLI surface, in that order, because
 the surface has nothing to record without the cascade.
 
-## Device sanitizer coverage has not run
+## Resolved: device sanitizer coverage runs and is clean
 
-SPEC-0010's acceptance list and the C6 backlog line both name sanitizers.
-`compute-sanitizer` ships with the installed toolkit, but no run is part of any gate
-and none has been recorded. The kernels are new, hand-written, and index shared
-memory from computed offsets, which is exactly the code a memory checker is for.
-This is an uncovered part of the C6 acceptance list, recorded rather than waived
-silently, and it is separate from the C1 native-sanitizer gap below. Next step: a
-`compute-sanitizer --tool memcheck` run over the device suite on the labeled runner,
-added to the gate behind the same `AI_OPTIMIZER_GPU=1` marker the device tests use.
+`bash tools/gpu_check.sh`, run under `tools/gpu_job.sh`, executes the device suite
+and then all four `compute-sanitizer` tools over it. On 2026-09-13 on an RTX 5090:
+memcheck 0 errors, racecheck 0 hazards, initcheck 0 errors, synccheck 0 errors.
+
+This mattered more than a formality. The kernels are hand-written and index shared
+memory from computed offsets, and the neighborhood kernel has two threads writing
+disjoint halves of one dynamically sized array while 254 others wait on a barrier --
+which is precisely the shape racecheck exists to find and precisely the shape a
+reviewer cannot check by reading.
+
+The script refuses to run without an inherited lease rather than taking one itself,
+so it cannot be invoked outside the wrapper that names a single device. It is
+deliberately not part of `tools/check.sh`: that gate is CPU-only and must stay so,
+because almost every task record in this project states a "CPU only, no GPU
+workloads" budget that a kernel-running gate would make false.
+
+What is still uncovered: the C1 native-library sanitizer gap below is unrelated and
+unchanged, and none of this has run in CI, because the labeled runner is not
+provisioned. A local run is recorded as a local run.
 
 ## Device acceptance does not run in CI
 

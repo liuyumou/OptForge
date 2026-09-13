@@ -36,9 +36,14 @@ or process death; do not remove the lock file.
 
 ```bash
 bash tools/setup_cuda.sh                      # nvcc -> target/native/cuda
-AI_OPTIMIZER_GPU=1 bash tools/gpu_job.sh GPU-<uuid> \
-  cargo test --release -p optimizer-cuda --test device
+bash tools/gpu_job.sh GPU-<uuid> bash tools/gpu_check.sh
 ```
+
+`gpu_check.sh` runs the device suite and then `compute-sanitizer` with memcheck,
+racecheck, initcheck and synccheck. It refuses to run without an inherited lease
+rather than taking one itself, so it cannot be invoked outside the wrapper that
+names a single device, and it reports loudly rather than silently passing when
+`compute-sanitizer` is absent.
 
 Device tests are opt-in. Without `AI_OPTIMIZER_GPU=1` they report an explicit skip,
 so `bash tools/check.sh` stays CPU-only even on a host that has a device; a suite

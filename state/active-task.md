@@ -76,6 +76,15 @@ else. Separately, `AI_OPTIMIZER_GPU=1 bash tools/gpu_job.sh <uuid> cargo test
 the RTX PRO 6000, under an inherited lease. No device test has run in CI, because the
 labeled runner is still not provisioned, and that is recorded rather than glossed.
 
+Sanitizers (2026-09-13, added after the boundary landed): `bash tools/gpu_check.sh`
+under the wrapper runs the device suite and then all four `compute-sanitizer` tools.
+memcheck 0 errors, racecheck 0 hazards, initcheck 0 errors, synccheck 0 errors on an
+RTX 5090. Racecheck was the one worth having: the neighborhood kernel has two threads
+writing disjoint halves of one dynamically sized shared array while 254 others wait on
+a barrier, which is exactly the shape a reviewer cannot check by reading. The script
+refuses to run without an inherited lease rather than taking one, so it cannot escape
+the wrapper that names a single device.
+
 Follow-up: the schema cascade — `device` on the search configuration, and the
 `search-config-v3`, `search-record-v3`, `run-record-v2` versions it forces — then the
 CLI probe and the device-backed producer, then `compute-sanitizer`. Nothing reaches a

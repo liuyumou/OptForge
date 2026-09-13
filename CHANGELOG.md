@@ -57,6 +57,11 @@ User-visible changes are recorded here using Conventional Commit terminology.
   assert equality against the host recurrence at tolerance exactly zero, agreement
   with a full recomputation, bitwise-identical repeats, one upload per residency, and
   that a nonexistent UUID and an absent code object are each refused by name.
+- `tools/gpu_check.sh`, device acceptance plus `compute-sanitizer` with memcheck,
+  racecheck, initcheck and synccheck. It refuses to run without an inherited lease
+  rather than taking one, so it cannot be invoked outside the wrapper that names a
+  single device, and it warns loudly rather than passing silently when
+  `compute-sanitizer` is absent. All four are clean on an RTX 5090.
 - A first crossover measurement, recorded in
   [known failures](state/known-failures.md). The device loses at 20 jobs by a factor
   of four, crosses over at roughly 50, peaks at 16x on 200x20 and falls back to 9.5x
