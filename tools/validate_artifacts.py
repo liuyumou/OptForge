@@ -64,7 +64,7 @@ def validate_manifest(path):
 def validate_run_record(path):
     """Validate one run record and its provenance (SPEC-0005)."""
     record = read_json(path)
-    validator("run-record-v1.schema.json").validate(record)
+    validator("run-record-v2.schema.json").validate(record)
     roles = [document["role"] for document in record["inputs"]]
     if sorted(roles) != ["config", "model"]:
         raise ValueError("run record must name exactly one model and one config input")
@@ -193,32 +193,32 @@ def main():
     else:
         validator("run-config-v1.schema.json").validate(read_json(ROOT / "examples/run-config.json"))
         validator("solve-config-v1.schema.json").validate(read_json(ROOT / "examples/solve-config-v1.json"))
-        validator("search-config-v2.schema.json").validate(read_json(ROOT / "examples/search-config-v2.json"))
-        validator("search-config-v2.schema.json").validate(
-            read_json(ROOT / "examples/search-config-neh-v2.json")
+        validator("search-config-v3.schema.json").validate(read_json(ROOT / "examples/search-config-v3.json"))
+        validator("search-config-v3.schema.json").validate(
+            read_json(ROOT / "examples/search-config-neh-v3.json")
         )
         # The frozen node-budget configuration the timing diagnostic drives. It is
         # validated here for the same reason every other committed configuration is:
         # the schema and the Rust parser must agree about it, and a measurement run
         # against a configuration the engine would reject is worth nothing.
-        validator("search-config-v2.schema.json").validate(
-            read_json(ROOT / "benchmarks/configs/search-node-budget-v2.json")
+        validator("search-config-v3.schema.json").validate(
+            read_json(ROOT / "benchmarks/configs/search-node-budget-v3.json")
         )
         # The multi-node fixture's configuration. Its `node_limit` is set and its
         # `time_limit_ms` is null on purpose, so the tree it explores is the same
         # one on any host and the record stays re-executable rather than becoming
         # a record of how fast the machine that produced it was.
-        validator("search-config-v2.schema.json").validate(
-            read_json(ROOT / "examples/search-config-multi-node-v2.json")
+        validator("search-config-v3.schema.json").validate(
+            read_json(ROOT / "examples/search-config-multi-node-v3.json")
         )
-        validate_run_record(ROOT / "examples/run-record-v1.json")
+        validate_run_record(ROOT / "examples/run-record-v2.json")
         # The registry-backed scheduling record is validated by the same schema and
         # the same provenance rules, which is the point: SPEC-0009 introduces no new
         # record type and does not re-version this one.
-        validate_run_record(ROOT / "examples/schedule-run-record-v1.json")
+        validate_run_record(ROOT / "examples/schedule-run-record-v2.json")
         # The record whose search actually branched. Same schema and same rules
         # again; what it adds is a committed tree deeper than the root.
-        validate_run_record(ROOT / "examples/multi-node-run-record-v1.json")
+        validate_run_record(ROOT / "examples/multi-node-run-record-v2.json")
         validate_registry(ROOT / "examples/extension-registry-v1.json")
         validate_conformance(ROOT / "examples/conformance-record-v1.json")
         for path in sorted((ROOT / "benchmarks/manifests").glob("*.json")):

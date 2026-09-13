@@ -308,7 +308,7 @@ not involved.
 
 ```bash
 optimizer schedule solve --instance examples/flow-shop-v1.json \
-  --config examples/search-config-v2.json \
+  --config examples/search-config-v3.json \
   --output artifacts/schedule-run.json --output-model artifacts/schedule-model.json
 optimizer verify --record artifacts/schedule-run.json --model artifacts/schedule-model.json
 ```

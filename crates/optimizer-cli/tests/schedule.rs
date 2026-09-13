@@ -48,12 +48,13 @@ impl Drop for Sandbox {
 
 /// A budgeted configuration with no extension policy.
 const CONFIG: &str = r#"{
-  "schema_version": 2,
+  "schema_version": 3,
   "seed": 17,
   "node_limit": 50000,
   "time_limit_ms": 120000,
   "open_node_limit": 50000,
   "improvement_tolerance": 1e-9,
+  "device": "cpu",
   "relaxation": {
     "schema_version": 1,
     "seed": 17,
@@ -68,12 +69,13 @@ const CONFIG: &str = r#"{
 
 /// The same configuration registering the one producer this surface knows.
 const CONFIG_WITH_PRODUCER: &str = r#"{
-  "schema_version": 2,
+  "schema_version": 3,
   "seed": 17,
   "node_limit": 50000,
   "time_limit_ms": 120000,
   "open_node_limit": 50000,
   "improvement_tolerance": 1e-9,
+  "device": "cpu",
   "relaxation": {
     "schema_version": 1,
     "seed": 17,

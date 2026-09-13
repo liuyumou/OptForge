@@ -385,7 +385,7 @@ optimizer registry check --registry examples/extension-registry-v1.json \
   --output artifacts/conformance.json
 
 optimizer schedule solve --instance examples/flow-shop-v1.json \
-  --config examples/search-config-neh-v2.json \
+  --config examples/search-config-neh-v3.json \
   --registry examples/extension-registry-v1.json \
   --output artifacts/schedule-run.json \
   --output-model artifacts/schedule-model.json

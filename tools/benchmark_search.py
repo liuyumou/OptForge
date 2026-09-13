@@ -39,7 +39,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BINARY = ROOT / "target/release/optimizer"
 MANIFEST = ROOT / "benchmarks/manifests/perf-node-budget-v1.json"
-CONFIG = ROOT / "benchmarks/configs/search-node-budget-v2.json"
+CONFIG = ROOT / "benchmarks/configs/search-node-budget-v3.json"
 
 # Every field SPEC-0005 requirement 11 compares, plus the node counters that make a
 # per-node change visible. A timing difference accompanied by any difference here is

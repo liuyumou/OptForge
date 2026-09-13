@@ -6,6 +6,35 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Changed
 
+- **Breaking:** search configurations, search records and run records move to
+  `search-config-v3`, `search-record-v3` and `run-record-v2`, under SPEC-0010
+  requirements 40 and 41. The configuration gains one field, `device`, which is
+  `"cpu"` or a physical GPU UUID; the other two move only because a search record
+  embeds its configuration and a run record embeds that search record. Earlier
+  versions are refused rather than migrated, in both the Rust parsers and the JSON
+  Schemas, which are asserted to refuse the same documents.
+
+  The device is in the configuration rather than in provenance, and that is what
+  costs the cascade. Provenance would have moved no versions at all -- and would
+  have put the device somewhere `optimizer verify` never reads, because
+  verification re-runs a search from the embedded configuration alone. A device
+  recorded only in provenance would describe a run the run surface could not repeat.
+
+  Migration: add `"device": "cpu"` to a version-2 configuration and set
+  `schema_version` to 3. There is deliberately no automatic migration: a version-2
+  record of a device run and a version-2 record of a CPU run are the same bytes, so
+  defaulting an absent device would have to invent the fact that distinguishes them.
+
+  One value governs a whole search rather than one per component, because SPEC-0006
+  requirement 6 permits one lease holder across device selections -- a search cannot
+  use two devices, so a per-component field could express what the lease forbids.
+  The solve configuration is therefore unchanged at version 1 and a relaxation
+  inherits the search's device.
+- A search configuration naming a GPU is **refused** as unsupported rather than run
+  on the CPU. No search path dispatches to a device yet, and running one anyway
+  would be worse than an error: the record would name the device it was asked for,
+  verification would re-run it on the CPU and agree, and that agreement would
+  certify a hardware claim nothing checked.
 - `neh` and `insertion` score insertion positions from head and tail completion-time
   arrays instead of rebuilding and re-evaluating each trial sequence, which is
   Taillard's exact acceleration and reduces a pass from `O(n^3 m)` to `O(n^2 m)`. The

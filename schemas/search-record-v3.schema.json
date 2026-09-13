@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/liuyumou/OptForge/schemas/search-record-v2.schema.json",
-  "title": "Search record, version 2",
+  "$id": "https://github.com/liuyumou/OptForge/schemas/search-record-v3.schema.json",
+  "title": "Search record, version 3",
   "description": "Immutable record of one owned branch-and-bound search under SPEC-0003, sufficient to repeat it. A search outcome is the executive's own claim that it exhausted its node tree; it is distinct from one relaxation's termination and is never an exact-arithmetic certificate. Version 2 carries the caller's extension policy and one summary per permitted extension under SPEC-0004. Absent measurements are omitted rather than serialized as null.",
   "type": "object",
   "additionalProperties": false,
@@ -24,7 +24,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": 2
+      "const": 3
     },
     "model_id": {
       "type": "string",
@@ -72,7 +72,11 @@
       "description": "Accepted incumbent in original variable IDs.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["schema_version", "model_id", "values"],
+      "required": [
+        "schema_version",
+        "model_id",
+        "values"
+      ],
       "properties": {
         "schema_version": {
           "const": 1
@@ -86,7 +90,10 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["variable_id", "value"],
+            "required": [
+              "variable_id",
+              "value"
+            ],
             "properties": {
               "variable_id": {
                 "type": "integer",
@@ -175,11 +182,18 @@
             "minLength": 1
           },
           "category": {
-            "enum": ["candidate_producer", "search_adviser", "transformation"]
+            "enum": [
+              "candidate_producer",
+              "search_adviser",
+              "transformation"
+            ]
           },
           "authority": {
             "description": "Acceptance boundary the core applied, derived from the category and never chosen by the extension. Absent for a refused category.",
-            "enum": ["propose_validated_candidate", "propose_checked_action"]
+            "enum": [
+              "propose_validated_candidate",
+              "propose_checked_action"
+            ]
           },
           "deterministic": {
             "type": "boolean"
@@ -213,7 +227,10 @@
             "items": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["kind", "message"],
+              "required": [
+                "kind",
+                "message"
+              ],
               "properties": {
                 "kind": {
                   "enum": [
@@ -243,7 +260,7 @@
       "minimum": 0
     },
     "options": {
-      "$ref": "search-config-v2.schema.json"
+      "$ref": "search-config-v3.schema.json"
     }
   }
 }

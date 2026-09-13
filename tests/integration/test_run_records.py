@@ -14,12 +14,12 @@ from jsonschema import ValidationError
 
 class RunRecordContracts(unittest.TestCase):
     def setUp(self):
-        self.record = read_json(ROOT / "examples/run-record-v1.json")
-        self.validator = validator("run-record-v1.schema.json")
+        self.record = read_json(ROOT / "examples/run-record-v2.json")
+        self.validator = validator("run-record-v2.schema.json")
 
     def test_example_record_is_valid(self):
         self.validator.validate(self.record)
-        validate_run_record(ROOT / "examples/run-record-v1.json")
+        validate_run_record(ROOT / "examples/run-record-v2.json")
 
     def test_every_field_is_required(self):
         for key in self.record:
@@ -32,7 +32,12 @@ class RunRecordContracts(unittest.TestCase):
     def test_unknown_fields_and_versions_are_rejected(self):
         for record in (
             {**self.record, "surprise": True},
-            {**self.record, "schema_version": 2},
+            # Version 1 is what every run record carried before SPEC-0010 added a
+            # device to the configuration a record embeds. It is refused rather
+            # than migrated, because a version-1 record of a device run and one of
+            # a CPU run are indistinguishable.
+            {**self.record, "schema_version": 1},
+            {**self.record, "schema_version": 3},
         ):
             with self.assertRaises(ValidationError):
                 self.validator.validate(record)
@@ -126,23 +131,25 @@ class RunRecordContracts(unittest.TestCase):
 
 class SearchRecordContracts(unittest.TestCase):
     def setUp(self):
-        self.record = read_json(ROOT / "examples/run-record-v1.json")["search"]
-        self.validator = validator("search-record-v2.schema.json")
+        self.record = read_json(ROOT / "examples/run-record-v2.json")["search"]
+        self.validator = validator("search-record-v3.schema.json")
 
     def test_example_search_record_is_valid(self):
         self.validator.validate(self.record)
 
-    def test_search_documents_are_version_two(self):
-        # SPEC-0004 moved search documents to version 2 and rejects version 1
-        # rather than migrating it.
-        for version in (1, 3):
+    def test_search_documents_are_version_three(self):
+        # SPEC-0004 moved search documents to version 2 for the extension policy
+        # and SPEC-0010 moved them to version 3 for the device. Earlier versions
+        # are refused rather than migrated.
+        for version in (1, 2, 4):
             record = {**self.record, "schema_version": version}
             with self.assertRaises(ValidationError):
                 self.validator.validate(record)
-        record = copy.deepcopy(self.record)
-        record["options"]["schema_version"] = 1
-        with self.assertRaises(ValidationError):
-            self.validator.validate(record)
+        for version in (1, 2):
+            record = copy.deepcopy(self.record)
+            record["options"]["schema_version"] = version
+            with self.assertRaises(ValidationError):
+                self.validator.validate(record)
 
     def test_every_declared_outcome_is_accepted(self):
         for outcome in (
@@ -207,7 +214,7 @@ class ChecksumAgreement(unittest.TestCase):
     def test_recorded_input_hashes_match_hashlib(self):
         # The Rust implementation is checked against Python's hashlib over the
         # real committed documents, so agreement is verified rather than assumed.
-        record = read_json(ROOT / "examples/run-record-v1.json")
+        record = read_json(ROOT / "examples/run-record-v2.json")
         for document in record["inputs"]:
             with self.subTest(role=document["role"]):
                 target = ROOT / document["path"]
@@ -223,7 +230,7 @@ class ChecksumAgreement(unittest.TestCase):
         if not binary.is_file():
             self.skipTest("run cargo build --workspace --locked first")
         model = ROOT / "examples/model-v1.json"
-        config = ROOT / "examples/search-config-v2.json"
+        config = ROOT / "examples/search-config-v3.json"
         completed = subprocess.run(
             [str(binary), "search", "--model", str(model), "--config", str(config)],
             capture_output=True,
@@ -243,6 +250,125 @@ class ChecksumAgreement(unittest.TestCase):
                     hashlib.sha256((ROOT / document["path"]).read_bytes()).hexdigest(),
                     document["sha256"],
                 )
+
+
+class DeviceSelectionContracts(unittest.TestCase):
+    """SPEC-0010 requirements 2, 40 and 41: the device the configuration names.
+
+    The schema and the Rust parser must accept the same documents, neither laxer
+    than the other. These check the schema half; the Rust half lives in
+    `crates/optimizer-solver/tests/executive.rs`, and the two are deliberately
+    written against the same cases so a divergence shows up as one failing and the
+    other passing rather than as both being silently wrong.
+    """
+
+    def setUp(self):
+        self.config = read_json(ROOT / "examples/search-config-v3.json")
+        self.validator = validator("search-config-v3.schema.json")
+
+    def test_the_committed_configuration_is_valid_and_names_the_cpu(self):
+        self.validator.validate(self.config)
+        self.assertEqual(self.config["device"], "cpu")
+
+    def test_a_configuration_without_a_device_is_refused(self):
+        # A version-2 document is exactly this one without the device, which is
+        # what makes accepting it tempting. Refusing it is requirement 41: a
+        # version-2 record of a device run and one of a CPU run are the same
+        # bytes, so a migration would have to invent what distinguishes them.
+        stale = copy.deepcopy(self.config)
+        del stale["device"]
+        with self.assertRaises(ValidationError):
+            self.validator.validate(stale)
+
+        stale["schema_version"] = 2
+        with self.assertRaises(ValidationError):
+            self.validator.validate(stale)
+
+    def test_only_the_cpu_and_a_uuid_are_accepted(self):
+        for accepted in ("cpu", "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48"):
+            with self.subTest(device=accepted):
+                self.validator.validate({**self.config, "device": accepted})
+
+        for refused in (
+            # An enumeration index: CUDA_VISIBLE_DEVICES renumbers devices per
+            # process, so a record carrying one could not be re-executed.
+            "0",
+            "gpu:0",
+            # Case matters, so two spellings of one device cannot compare unequal.
+            "gpu-dfb2449a",
+            "GPU-",
+            "",
+            "CPU",
+            "cuda",
+            "GPU-dfb2449a_9eff",
+        ):
+            with self.subTest(device=refused):
+                with self.assertRaises(ValidationError):
+                    self.validator.validate({**self.config, "device": refused})
+
+    def test_the_rust_parser_refuses_what_the_schema_refuses(self):
+        """Requirement 41: neither authority may be laxer than the other."""
+        binary = ROOT / "target/debug/optimizer"
+        if not binary.is_file():
+            self.skipTest("optimizer binary not built")
+        import json
+        import tempfile
+
+        model = ROOT / "examples/model-v1.json"
+        for name, mutation in (
+            ("absent device", lambda c: c.pop("device")),
+            ("enumeration index", lambda c: c.update(device="0")),
+            ("lowercase prefix", lambda c: c.update(device="gpu-dfb2449a")),
+            ("version 2", lambda c: (c.pop("device"), c.update(schema_version=2))),
+        ):
+            with self.subTest(case=name):
+                mutated = copy.deepcopy(self.config)
+                mutation(mutated)
+                with self.assertRaises(ValidationError):
+                    self.validator.validate(mutated)
+                with tempfile.TemporaryDirectory() as directory:
+                    path = Path(directory) / "config.json"
+                    path.write_text(json.dumps(mutated))
+                    completed = subprocess.run(
+                        [str(binary), "search", "--model", str(model),
+                         "--config", str(path), "--output", str(Path(directory) / "out.json")],
+                        capture_output=True, text=True, timeout=120, cwd=ROOT,
+                    )
+                    self.assertNotEqual(
+                        completed.returncode, 0,
+                        f"{name}: the Rust parser accepted what the schema refused",
+                    )
+
+    def test_a_named_device_is_refused_rather_than_run_on_the_cpu(self):
+        """Requirement 6: a record must not claim hardware the run did not use.
+
+        The schema accepts a UUID, because the document is well formed. The engine
+        refuses it, because no search path dispatches to a device yet. Running it
+        would produce a record naming a device, which verification would re-run on
+        the CPU and agree with, certifying a claim nothing checked.
+        """
+        binary = ROOT / "target/debug/optimizer"
+        if not binary.is_file():
+            self.skipTest("optimizer binary not built")
+        import json
+        import tempfile
+
+        named = {**self.config, "device": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48"}
+        self.validator.validate(named)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "config.json"
+            path.write_text(json.dumps(named))
+            output = Path(directory) / "out.json"
+            completed = subprocess.run(
+                [str(binary), "search", "--model", str(ROOT / "examples/model-v1.json"),
+                 "--config", str(path), "--output", str(output)],
+                capture_output=True, text=True, timeout=120, cwd=ROOT,
+            )
+            if "not provisioned" in completed.stderr:
+                self.skipTest("HiGHS not provisioned; run bash tools/setup_highs.sh")
+            self.assertNotEqual(completed.returncode, 0, completed.stdout)
+            self.assertIn("GPU-dfb2449a", completed.stderr)
+            self.assertFalse(output.exists(), "a refused search must write no record")
 
 
 if __name__ == "__main__":

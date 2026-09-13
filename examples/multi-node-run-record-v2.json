@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "record_id": "trackb-example-multi-node-schedule-run",
   "revision": "0000000000000000000000000000000000000000",
   "dirty": false,
@@ -24,12 +24,12 @@
     },
     {
       "role": "config",
-      "path": "examples/search-config-multi-node-v2.json",
-      "sha256": "3787fc1eb1cacabd9d0c65ff829738cb99e28ecb2b1a3ee07c4d4b636877e0bb"
+      "path": "examples/search-config-multi-node-v3.json",
+      "sha256": "1f685f8c1341d7f2ad846d1aa4b7143bb0a07c5c09a8a30a07863808ca921193"
     }
   ],
   "search": {
-    "schema_version": 2,
+    "schema_version": 3,
     "model_id": "multi-node-example",
     "backend": "relaxation",
     "backend_version": "1.11.0",
@@ -1498,12 +1498,13 @@
     "extensions": [],
     "elapsed_ms": 0,
     "options": {
-      "schema_version": 2,
+      "schema_version": 3,
       "seed": 17,
       "node_limit": 64,
       "time_limit_ms": null,
       "open_node_limit": null,
       "improvement_tolerance": 1e-09,
+      "device": "cpu",
       "relaxation": {
         "schema_version": 1,
         "seed": 17,

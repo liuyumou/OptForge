@@ -1,0 +1,30 @@
+{
+  "schema_version": 3,
+  "seed": 17,
+  "node_limit": 50000,
+  "time_limit_ms": 120000,
+  "open_node_limit": 50000,
+  "improvement_tolerance": 1e-09,
+  "device": "cpu",
+  "relaxation": {
+    "schema_version": 1,
+    "seed": 17,
+    "time_limit_ms": null,
+    "iteration_limit": null,
+    "node_limit": null,
+    "tolerances": {
+      "absolute": 1e-07,
+      "relative": 1e-09,
+      "integrality": 1e-06
+    },
+    "threads": 1
+  },
+  "extensions": [
+    {
+      "schema_version": 1,
+      "extension_id": "flow-shop-neh",
+      "invocation_budget": 8,
+      "proposal_budget": 8
+    }
+  ]
+}

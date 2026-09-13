@@ -32,7 +32,7 @@ cargo run -p optimizer-cli -- model validate --model examples/model-v1.json
 cargo run -p optimizer-cli -- solve \
   --model examples/model-v1.json --config examples/solve-config-v1.json
 cargo run -p optimizer-cli -- search \
-  --model examples/model-v1.json --config examples/search-config-v2.json \
+  --model examples/model-v1.json --config examples/search-config-v3.json \
   --output artifacts/run.json
 cargo run -p optimizer-cli -- verify \
   --record artifacts/run.json --model examples/model-v1.json

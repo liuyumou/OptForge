@@ -20,6 +20,10 @@ fn options() -> SearchOptions {
         time_limit_ms: Some(10_000),
         open_node_limit: None,
         improvement_tolerance: 1e-9,
+        // These contracts are about search behaviour, which SPEC-0010
+        // requirement 26 requires a device not to change. Running them on the
+        // CPU is what keeps them a statement about the executive.
+        device: optimizer_core::Device::Cpu,
         relaxation: SolveOptions {
             schema_version: SOLVE_SCHEMA_VERSION,
             seed: 17,
@@ -184,8 +188,10 @@ fn inputs_must_name_one_model_and_one_config() {
 fn nested_document_versions_are_validated_on_parse() {
     let text = record().to_json().expect("serialize");
 
-    // The outer version alone.
-    let outer = text.replacen(r#""schema_version": 1"#, r#""schema_version": 9"#, 1);
+    // The outer version alone. It is the record's first serialized field, so the
+    // first occurrence in the text is the outer one; matching on the value would
+    // otherwise hit whichever nested document happens to share it.
+    let outer = text.replacen(r#""schema_version": 2"#, r#""schema_version": 9"#, 1);
     let error = RunRecord::from_json(outer.as_bytes()).expect_err("outer version");
     assert_eq!(error.kind, ErrorKind::Document);
     assert!(
@@ -195,7 +201,9 @@ fn nested_document_versions_are_validated_on_parse() {
     );
 
     // The embedded search record's version, which the outer check cannot catch.
-    let nested = text.replace(r#""schema_version": 2"#, r#""schema_version": 1"#);
+    // Its configuration carries the same version, so this mutates both; either
+    // alone is enough to make the document invalid.
+    let nested = text.replace(r#""schema_version": 3"#, r#""schema_version": 1"#);
     let error = RunRecord::from_json(nested.as_bytes()).expect_err("nested version");
     assert_eq!(error.kind, ErrorKind::Document);
     assert!(error.message.contains("search"), "{}", error.message);
@@ -207,9 +215,11 @@ fn nested_document_versions_are_validated_on_parse() {
 fn strict_object_shapes_are_required() {
     let text = record().to_json().expect("serialize");
 
+    // The record's own field, which is the first one it serializes. A nested
+    // document's unknown field would be refused too, but by a different parser.
     let extra = text.replacen(
-        r#""schema_version": 1,"#,
-        r#""schema_version": 1, "unexpected": true,"#,
+        r#""schema_version": 2,"#,
+        r#""schema_version": 2, "unexpected": true,"#,
         1,
     );
     assert!(

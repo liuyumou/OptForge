@@ -251,7 +251,10 @@ strict all-fields-required document with no additive escape hatch, and a version
 record of an extension-influenced search would claim to be sufficient to repeat a
 search it does not describe. `Checkpoint` moves to version 2 with a
 byte-identical shape because it shares that constant. Version-1 search documents
-are rejected, not migrated, matching existing behavior. M1 and C1 documents stay
+are rejected, not migrated, matching existing behavior. These documents have since
+moved again, to version 3, under
+[SPEC-0010](SPEC-0010-heterogeneous-computation.md) requirement 40; this paragraph
+records what this contract changed rather than what the current version is. M1 and C1 documents stay
 at version 1. The Rust API stays at workspace version 0.1.0. No Python SDK, CUDA
 dependency, registry or dynamically loaded native extension is introduced.
 

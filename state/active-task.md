@@ -1,5 +1,76 @@
 # Active Task
 
+## C6 Device Selection Schema Cascade (2026-09-13)
+
+Objective: put the selected device on the search configuration, under SPEC-0010
+requirements 40 and 41, so that a device run is describable by a record that
+verification can re-execute — and pay the three version bumps that forces rather
+than avoiding them by putting the device somewhere verification never reads.
+
+Status: complete; `search-config-v3`, `search-record-v3` and `run-record-v2` are in
+both authorities, and a configuration naming a device is refused rather than run on
+the CPU.
+
+Acceptance gate: both the Rust parsers and the JSON Schemas accept exactly the same
+documents and are asserted to refuse the same four mutations; an earlier version is
+refused rather than migrated; a configuration naming a GPU is refused with the
+device named and writes no record; the three committed example records still
+re-execute and agree; `bash tools/check.sh` passes with native acceptance covered.
+Resource budget: CPU only, no GPU workloads.
+
+Why the field is in the configuration and not in provenance. Provenance was the
+cheaper answer by a wide margin: `Hardware` already has three nullable GPU fields
+and no version would have moved at all. It is the wrong answer because SPEC-0005
+verification re-runs a search using only the record's embedded configuration, on
+purpose, so that a record cannot confirm its own result. A device recorded only in
+provenance is therefore invisible to the thing that repeats the run, and a record
+naming a device would be re-executed without one. The cascade is what it costs to
+keep the device where a re-execution can see it.
+
+One field moved three versions because the documents nest: a search record embeds
+its configuration, and a run record embeds that search record. The solve
+configuration deliberately did not move. A relaxation inherits the search's device
+because SPEC-0006 requirement 6 permits one lease holder across device selections,
+so a search cannot use two devices and a per-solve field could express a
+configuration the lease forbids.
+
+Nothing is migrated, and the reason is not conservatism. A version-2 configuration
+is exactly a version-3 one with the `device` line deleted, so defaulting an absent
+device to `cpu` looks free. It is not: a version-2 record of a device run and a
+version-2 record of a CPU run are byte-identical, so a migration would have to
+invent the fact that tells them apart. Both authorities refuse, and a test asserts
+they refuse the same documents rather than each refusing separately.
+
+The refusal that matters most is the one that looks like an omission. The executive
+rejects a configuration naming a GPU, because no search path dispatches to a device
+yet. Honouring it by quietly running on the CPU would not have been a smaller
+version of the feature; it would have been a false record that *passes*
+verification, because verification re-runs from the same configuration, also lands
+on the CPU, and agrees — and that agreement would certify a hardware claim nothing
+ever checked. The refusal names the device it refused, and the CPU configuration
+differing only in that field still runs, so it is discriminating rather than a
+blanket failure.
+
+One thing nearly went wrong and is worth recording. The three committed example
+records are synthetic: an all-zero revision, `dirty: false`, a fixed identifier and
+a warning saying they are not measurement evidence. Regenerating them with
+`optimizer search` was the obvious way to move them to the new version and would
+have silently replaced all four of those properties with real ones from a dirty
+working tree. They were version-bumped in place instead, with only their
+configuration input's path and checksum updated, and all three still re-execute and
+agree.
+
+Evidence (2026-09-13): `bash tools/check.sh` passed with the pinned HiGHS 1.11.0
+library linked and **zero test skips other than the eight device tests**, exit 0.
+Rust tests rose from 273 to 277 and Python from 63 to 68. Documentation remains 56
+pages. `Cargo.lock` and every `Cargo.toml` are untouched.
+
+Follow-up: the surfaces that make the field do something — `optimizer gpu probe`,
+the driver version SPEC-0006 requirement 1a needs, a device-backed candidate
+producer, and narrowing the registry's unconditional refusal of a `gpu` hardware
+requirement. Until one of those lands, the device field is honoured only by being
+refused.
+
 ## C6 Device Boundary and Batched Schedule Evaluation (2026-09-13)
 
 Objective: implement SPEC-0010's device path far enough to answer the question the

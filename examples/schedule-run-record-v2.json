@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "record_id": "c8-example-registry-backed-schedule-run",
   "revision": "0000000000000000000000000000000000000000",
   "dirty": false,
@@ -24,12 +24,12 @@
     },
     {
       "role": "config",
-      "path": "examples/search-config-neh-v2.json",
-      "sha256": "537e8468ab0b4bcf2d6b428a09078d3ba41e8949ded8c51e9b9521f5f837597a"
+      "path": "examples/search-config-neh-v3.json",
+      "sha256": "77b4a319015a980849556a7aa06d59901621b11f933f619dcd2238361216ab8f"
     }
   ],
   "search": {
-    "schema_version": 2,
+    "schema_version": 3,
     "model_id": "flow-shop-example",
     "backend": "relaxation",
     "backend_version": "1.11.0",
@@ -663,12 +663,13 @@
     ],
     "elapsed_ms": 1,
     "options": {
-      "schema_version": 2,
+      "schema_version": 3,
       "seed": 17,
       "node_limit": 50000,
       "time_limit_ms": 120000,
       "open_node_limit": 50000,
       "improvement_tolerance": 1e-09,
+      "device": "cpu",
       "relaxation": {
         "schema_version": 1,
         "seed": 17,

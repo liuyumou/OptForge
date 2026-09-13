@@ -22,11 +22,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BINARY = ROOT / "target/debug/optimizer"
-RECORD = ROOT / "examples/run-record-v1.json"
+RECORD = ROOT / "examples/run-record-v2.json"
 MODEL = ROOT / "examples/model-v1.json"
-SCHEDULE_RECORD = ROOT / "examples/schedule-run-record-v1.json"
+SCHEDULE_RECORD = ROOT / "examples/schedule-run-record-v2.json"
 SCHEDULE_MODEL = ROOT / "examples/schedule-model-v1.json"
-MULTI_NODE_RECORD = ROOT / "examples/multi-node-run-record-v1.json"
+MULTI_NODE_RECORD = ROOT / "examples/multi-node-run-record-v2.json"
 MULTI_NODE_MODEL = ROOT / "examples/multi-node-flow-shop-model-v1.json"
 INSTANCE = ROOT / "examples/flow-shop-v1.json"
 REGISTRY = ROOT / "examples/extension-registry-v1.json"

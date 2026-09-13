@@ -254,6 +254,9 @@ fn options(policies: Vec<ExtensionPolicy>) -> SearchOptions {
         time_limit_ms: None,
         open_node_limit: None,
         improvement_tolerance: 1e-9,
+        // The suite checks a contract, not hardware. A device would make the
+        // conformance record depend on what the checking host happens to have.
+        device: optimizer_core::Device::Cpu,
         relaxation: optimizer_core::SolveOptions {
             schema_version: optimizer_core::SOLVE_SCHEMA_VERSION,
             seed: 17,

@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 
 use optimizer_core::nested_version;
 use optimizer_core::{
-    Candidate, ErrorKind, ObjectiveSense, SolveOptions, ValidationError, ValidationReport,
+    Candidate, Device, ErrorKind, ObjectiveSense, SolveOptions, ValidationError, ValidationReport,
 };
 use optimizer_extension::{
     EXTENSION_SCHEMA_VERSION, ExtensionPolicy, ExtensionSummary, validate_policies,
@@ -20,12 +20,21 @@ use crate::serde_strict::deserialize_object;
 
 /// Current search configuration, record and checkpoint wire version.
 ///
-/// Version 2 adds the caller's extension policy to configuration and the
-/// per-extension summary to records, under SPEC-0004. Version 1 documents are
-/// rejected rather than migrated: a version-1 record of an extension-influenced
-/// search would claim to be sufficient to repeat a search it does not describe.
+/// Version 2 added the caller's extension policy to configuration and the
+/// per-extension summary to records, under SPEC-0004.
+///
+/// Version 3 adds the selected device to configuration, under SPEC-0010
+/// requirement 40. The field could have lived in provenance instead, and that would
+/// have avoided this bump; it is here because SPEC-0005 verification re-runs a
+/// search from the record's embedded configuration alone, so a device recorded only
+/// in provenance would describe a run that verification could not repeat.
+///
+/// Earlier documents are rejected rather than migrated. Defaulting an absent
+/// `device` to `cpu` would read as harmless and is not: a version-2 record of a
+/// device run and a version-2 record of a CPU run are indistinguishable, so
+/// migration would have to invent the fact that distinguishes them.
 /// [`Checkpoint`] moves with this constant even though its shape is unchanged.
-pub const SEARCH_SCHEMA_VERSION: u32 = 2;
+pub const SEARCH_SCHEMA_VERSION: u32 = 3;
 
 /// Explicit search configuration.
 ///
@@ -46,6 +55,12 @@ pub struct SearchOptions {
     pub open_node_limit: Option<u64>,
     /// Absolute objective improvement required to accept or to refuse a prune.
     pub improvement_tolerance: f64,
+    /// Device this search and its relaxations run on.
+    ///
+    /// One value for the whole search: SPEC-0006 requirement 6 permits one lease
+    /// holder across device selections, so a relaxation cannot run on a different
+    /// device than the search that requested it.
+    pub device: Device,
     /// Configuration applied to every node relaxation.
     pub relaxation: SolveOptions,
     /// Extensions the caller permits, with their counted budgets.
@@ -62,6 +77,7 @@ deserialize_object!(SearchOptions {
     time_limit_ms: Option<u64>,
     open_node_limit: Option<u64>,
     improvement_tolerance: f64,
+    device: Device,
     relaxation: SolveOptions,
     extensions: Vec<ExtensionPolicy>,
 });

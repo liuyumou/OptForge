@@ -162,11 +162,24 @@ and 12 and is the single authority for agreement. The command surface and the
 contract tests use that one implementation, so a field cannot be compared by one
 and ignored by the other.
 
-`RUN_SCHEMA_VERSION` is 1. The run record schema is
-[run-record-v1](../../schemas/run-record-v1.schema.json) and the embedded search
+`RUN_SCHEMA_VERSION` is 2. The run record schema is
+[run-record-v2](../../schemas/run-record-v2.schema.json) and the embedded search
 record schema is
-[search-record-v2](../../schemas/search-record-v2.schema.json), whose version is
-2 because SPEC-0004 moved search documents to version 2.
+[search-record-v3](../../schemas/search-record-v3.schema.json).
+
+Both moved together and neither moved for a reason of its own. SPEC-0010
+requirement 40 put the selected device on the search configuration; a search record
+embeds its configuration and a run record embeds that search record, so one field
+moved three versions. Recording the device in provenance instead would have moved
+none of them, and that is exactly why it is not there: verification re-runs a search
+from the embedded configuration alone, so a device recorded only in provenance
+would describe a run this surface could not repeat.
+
+Earlier versions are refused rather than migrated. A version-2 configuration is
+exactly a version-3 one without the device, so defaulting it to `cpu` would read as
+harmless; it is not, because a version-2 record of a device run and a version-2
+record of a CPU run are the same bytes, and a migration would have to invent the
+fact that distinguishes them.
 
 ## State and Invariants
 
@@ -259,7 +272,7 @@ backend and creates no CUDA context. No network access is performed.
 
 ```bash
 optimizer search --model examples/model-v1.json \
-  --config examples/search-config-v2.json --output artifacts/run.json
+  --config examples/search-config-v3.json --output artifacts/run.json
 optimizer verify --record artifacts/run.json --model examples/model-v1.json
 ```
 
@@ -270,7 +283,7 @@ verification agrees and exits 0. Perturbing a coefficient in the model and
 verifying again is refused on the fingerprint. Editing the recorded objective is
 refused as divergence.
 
-[The example record](../../examples/run-record-v1.json) is marked as an example
+[The example record](../../examples/run-record-v2.json) is marked as an example
 and uses the all-zero revision, so it cannot be read as measurement evidence.
 
 ## Acceptance Tests

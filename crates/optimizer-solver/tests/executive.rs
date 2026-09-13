@@ -10,8 +10,8 @@
 use std::cell::RefCell;
 
 use optimizer_core::{
-    Assignment, Backend, Bound, CancellationToken, Candidate, Constraint, Domain, ErrorKind,
-    LinearTerm, Model, ModelDocument, Objective, ObjectiveSense, SOLVE_SCHEMA_VERSION,
+    Assignment, Backend, Bound, CancellationToken, Candidate, Constraint, Device, Domain,
+    ErrorKind, LinearTerm, Model, ModelDocument, Objective, ObjectiveSense, SOLVE_SCHEMA_VERSION,
     SolveOptions, SolveRecord, Termination, Tolerances, ValidationError, Variable, WarmStart,
 };
 use optimizer_solver::{
@@ -48,6 +48,10 @@ fn options() -> SearchOptions {
         time_limit_ms: None,
         open_node_limit: None,
         improvement_tolerance: 1e-9,
+        // These contracts are about search behaviour, which SPEC-0010
+        // requirement 26 requires a device not to change. Running them on the
+        // CPU is what keeps them a statement about the executive.
+        device: optimizer_core::Device::Cpu,
         relaxation: relaxation_options(),
         // C2's contracts run with no extension permitted, so every assertion
         // below describes the executive's own behavior.
@@ -1377,5 +1381,132 @@ fn only_completed_outcomes_prove_completion() {
         SearchOutcome::Unsupported,
     ] {
         assert!(!outcome.proves_completion(), "{outcome:?}");
+    }
+}
+
+// ---- SPEC-0010 requirements 6, 40 and 41: the recorded device ----
+
+/// A tiny discrete model for the device contracts below, whose optimum is known.
+fn device_fixture() -> Model {
+    model(
+        "device-fixture",
+        &[
+            (0, Domain::Integer, 0.0, 3.0),
+            (1, Domain::Integer, 0.0, 3.0),
+        ],
+        &[(0, None, Some(3.5), &[(0, 1.0), (1, 1.0)])],
+        ObjectiveSense::Maximize,
+        0.0,
+        &[(0, 1.0), (1, 1.0)],
+    )
+}
+
+/// Requirement 40: the device is part of the configuration, so it round-trips
+/// through a record and is available to whatever re-executes it.
+///
+/// Recording it in provenance instead would have avoided a schema version, and
+/// would also have put it somewhere verification never reads: SPEC-0005 re-runs a
+/// search from the embedded configuration alone.
+#[test]
+fn the_selected_device_round_trips_through_a_record() {
+    let fixture = device_fixture();
+    let record = run(&fixture, &options());
+    assert_eq!(record.options.device, Device::Cpu);
+
+    let text = record.to_json().expect("serialize");
+    assert!(text.contains(r#""device": "cpu""#), "{text}");
+    let reparsed = SearchRecord::from_json(text.as_bytes()).expect("reparse");
+    assert_eq!(reparsed.options.device, Device::Cpu);
+}
+
+/// Requirement 6: a configuration naming a device is refused, not run on the CPU.
+///
+/// This is the case that would be invisible if it were wrong. A search that ran on
+/// the CPU while its record said `GPU-...` would verify: verification re-runs from
+/// the same configuration, would also run on the CPU, and the two would agree. The
+/// agreement would then certify a hardware claim nothing ever checked.
+#[test]
+fn a_device_this_build_cannot_honour_is_refused_rather_than_run_on_the_cpu() {
+    let fixture = device_fixture();
+    let mut named = options();
+    named.device = Device::Gpu("GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48".into());
+
+    let error = search(
+        &fixture,
+        &named,
+        &ExactBackend::default(),
+        &CancellationToken::new(),
+    )
+    .expect_err("a device this build cannot dispatch to must be refused");
+    assert_eq!(error.kind, ErrorKind::Unsupported);
+    assert!(
+        error.message.contains("GPU-dfb2449a"),
+        "the refusal must name the device it refused: {}",
+        error.message
+    );
+
+    // And the CPU configuration that differs only in this field still succeeds, so
+    // the refusal is discriminating rather than a blanket failure.
+    let plain = run(&fixture, &options());
+    assert_eq!(plain.outcome, SearchOutcome::ProvenOptimal);
+}
+
+/// Requirement 41: an earlier configuration version is refused, never migrated.
+///
+/// Defaulting an absent device to `cpu` would read as harmless. It is not: a
+/// version-2 record of a device run and a version-2 record of a CPU run are the
+/// same bytes, so a migration would have to invent the fact that distinguishes
+/// them.
+#[test]
+fn an_earlier_search_document_version_is_refused_rather_than_migrated() {
+    for version in [1u32, 2, SEARCH_SCHEMA_VERSION + 1] {
+        let mut stale = options();
+        stale.schema_version = version;
+        let error = stale.validate().expect_err("a wrong version is refused");
+        assert_eq!(error.kind, ErrorKind::Document, "version {version}");
+    }
+
+    // A version-2 document is exactly a version-3 one without the device, which is
+    // what makes silently accepting it tempting and wrong.
+    let text = serde_json::to_string(&options()).expect("serialize");
+    let without_device = text.replace(r#""device":"cpu","#, "").replace(
+        &format!(r#""schema_version":{SEARCH_SCHEMA_VERSION}"#),
+        r#""schema_version":2"#,
+    );
+    assert!(
+        serde_json::from_str::<SearchOptions>(&without_device).is_err(),
+        "a version-2 configuration must not parse as version 3"
+    );
+}
+
+/// Requirement 2: a device is named by UUID, and nothing else is accepted.
+#[test]
+fn a_device_is_named_by_uuid_and_nothing_else_parses() {
+    assert_eq!(Device::parse("cpu").expect("cpu parses"), Device::Cpu);
+    let uuid = "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48";
+    assert_eq!(
+        Device::parse(uuid).expect("a uuid parses"),
+        Device::Gpu(uuid.to_string())
+    );
+
+    for rejected in [
+        // An enumeration index, which CUDA_VISIBLE_DEVICES renumbers per process,
+        // so a record carrying one could not be re-executed.
+        "0",
+        "gpu:0",
+        // Case matters: the driver prints an uppercase prefix and accepting both
+        // would make two spellings of one device compare unequal in a record.
+        "gpu-dfb2449a",
+        "GPU-",
+        "",
+        "CPU",
+        "cuda",
+        // A UUID with a character the driver never emits.
+        "GPU-dfb2449a_9eff",
+    ] {
+        assert!(
+            Device::parse(rejected).is_err(),
+            "{rejected:?} must be refused"
+        );
     }
 }

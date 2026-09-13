@@ -19,7 +19,7 @@ use optimizer_solver::{SEARCH_SCHEMA_VERSION, SearchRecord};
 use crate::serde_strict::deserialize_object;
 
 /// Current run record wire version.
-pub const RUN_SCHEMA_VERSION: u32 = 1;
+pub const RUN_SCHEMA_VERSION: u32 = 2;
 
 /// Revision recorded by an example that is deliberately not a measurement.
 ///

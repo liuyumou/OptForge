@@ -65,12 +65,13 @@ impl Drop for Sandbox {
 }
 
 const CONFIG: &str = r#"{
-  "schema_version": 2,
+  "schema_version": 3,
   "seed": 17,
   "node_limit": null,
   "time_limit_ms": 10000,
   "open_node_limit": null,
   "improvement_tolerance": 1e-9,
+  "device": "cpu",
   "relaxation": {
     "schema_version": 1,
     "seed": 17,
@@ -142,7 +143,7 @@ fn completed_search_writes_a_record_with_provenance() {
 
     let (code, record) = sandbox.search(&model, &config);
     assert_eq!(code, Some(0));
-    assert_eq!(record["schema_version"], 1);
+    assert_eq!(record["schema_version"], 2);
     assert_eq!(record["search"]["outcome"], "proven_optimal");
     // The published objective is the core's own recomputation.
     assert_eq!(record["search"]["objective"], 2.5);
@@ -607,7 +608,7 @@ fn input_errors_are_categorized_and_write_no_record() {
     // A version-1 search configuration is rejected rather than migrated.
     let old_version = sandbox.write(
         "v1.json",
-        &CONFIG.replacen(r#""schema_version": 2"#, r#""schema_version": 1"#, 1),
+        &CONFIG.replacen(r#""schema_version": 3"#, r#""schema_version": 1"#, 1),
     );
     let missing = sandbox.path.join("absent.json");
 
@@ -681,11 +682,16 @@ fn verify_refuses_malformed_records() {
     for (name, mutated) in [
         (
             "outer version",
-            text.replacen(r#""schema_version":1"#, r#""schema_version":7"#, 1),
+            // The record's own version is the first field it serializes, so the
+            // first occurrence in the text is the outer one.
+            text.replacen(r#""schema_version":2"#, r#""schema_version":7"#, 1),
         ),
         (
+            // The embedded search record and its configuration both carry the
+            // search version, so this mutates every nested one at once; each is
+            // independently sufficient to make the document invalid.
             "nested version",
-            text.replace(r#""schema_version":2"#, r#""schema_version":3"#),
+            text.replace(r#""schema_version":3"#, r#""schema_version":9"#),
         ),
         ("missing provenance", {
             let mut stripped = record.clone();

@@ -514,8 +514,9 @@ pub fn search(
 /// # Errors
 ///
 /// Returns a categorized [`ValidationError`] for invalid configuration,
-/// including an invalid extension policy, or for a branch that cannot be
-/// represented. Extension failures are recorded rather than returned.
+/// including an invalid extension policy or a device this build cannot honour,
+/// or for a branch that cannot be represented. Extension failures are recorded
+/// rather than returned.
 pub fn search_with_extensions(
     model: &Model,
     options: &SearchOptions,
@@ -524,6 +525,22 @@ pub fn search_with_extensions(
     cancel: &CancellationToken,
 ) -> Result<SearchRecord, ValidationError> {
     let options = options.validate()?;
+    // SPEC-0010 requirement 6: a record must not claim a device the run did not
+    // use. No search path dispatches to a device yet, so a configuration naming one
+    // is refused rather than quietly run on the CPU. Running it would be worse than
+    // an error: the record would carry the device it was asked for, verification
+    // would re-run it on the CPU and agree, and the agreement would certify a claim
+    // nothing checked. Narrowing this refusal is what a device-backed search path
+    // has to do first.
+    if options.device.is_gpu() {
+        return Err(ValidationError::new(
+            ErrorKind::Unsupported,
+            format!(
+                "configuration names device {}; no search path dispatches to a device in this build",
+                options.device.as_str()
+            ),
+        ));
+    }
     let mut host = ExtensionHost::register(registry, &options.extensions, model);
     let mut state = Executive::new(model, options);
 

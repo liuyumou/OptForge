@@ -1,6 +1,6 @@
 # Artifact Schemas
 
-Version 1 uses JSON Schema draft 2020-12. These are normative interfaces under
+Every schema uses JSON Schema draft 2020-12. These are normative interfaces under
 [SPEC-0007](../docs/specifications/SPEC-0007-artifacts.md).
 
 - [Run configuration](run-config-v1.schema.json)
@@ -9,11 +9,12 @@ Version 1 uses JSON Schema draft 2020-12. These are normative interfaces under
 - [Solve configuration](solve-config-v1.schema.json) and
   [solve record](solve-record-v1.schema.json), normative under
   [SPEC-0002](../docs/specifications/SPEC-0002-backend-contract.md)
-- [Search configuration](search-config-v2.schema.json) and
-  [search record](search-record-v2.schema.json) at version 2, normative under
-  [SPEC-0003](../docs/specifications/SPEC-0003-solver-executive.md) and
-  [SPEC-0004](../docs/specifications/SPEC-0004-extension-runtime.md)
-- [Run record](run-record-v1.schema.json), normative under
+- [Search configuration](search-config-v3.schema.json) and
+  [search record](search-record-v3.schema.json) at version 3, normative under
+  [SPEC-0003](../docs/specifications/SPEC-0003-solver-executive.md),
+  [SPEC-0004](../docs/specifications/SPEC-0004-extension-runtime.md) and
+  [SPEC-0010](../docs/specifications/SPEC-0010-heterogeneous-computation.md)
+- [Run record](run-record-v2.schema.json) at version 2, normative under
   [SPEC-0005](../docs/specifications/SPEC-0005-run-surface.md)
 - [Extension registry](extension-registry-v1.schema.json) and
   [conformance record](conformance-record-v1.schema.json), normative under
@@ -43,3 +44,15 @@ artifacts. Their normative version-1 shape is defined in
 [SPEC-0001](../docs/specifications/SPEC-0001-model-and-validation.md) and enforced
 by optimizer-core's typed parser and contract tests. Candidate infeasibility is
 not an experiment-result solver status.
+
+A version lives in the filename and is pinned inside the document by a `const`, so
+a document and its schema cannot disagree about which one it is. A breaking change
+is a new versioned file, never an edit to an existing one, and a mismatch is refused
+rather than migrated.
+
+Three of these moved together for one field. SPEC-0010 put the selected device on
+the search configuration; a search record embeds its configuration and a run record
+embeds that search record, so `search-config`, `search-record` and `run-record` all
+moved at once. That cascade is the cost of keeping the device somewhere verification
+reads, and it was paid deliberately rather than avoided by putting the device in
+provenance, where a re-execution would never see it.

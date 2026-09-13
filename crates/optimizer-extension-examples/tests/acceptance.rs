@@ -49,6 +49,10 @@ fn options(policies: Vec<ExtensionPolicy>) -> SearchOptions {
         time_limit_ms: None,
         open_node_limit: None,
         improvement_tolerance: 1e-9,
+        // These contracts are about search behaviour, which SPEC-0010
+        // requirement 26 requires a device not to change. Running them on the
+        // CPU is what keeps them a statement about the executive.
+        device: optimizer_core::Device::Cpu,
         relaxation: SolveOptions {
             schema_version: SOLVE_SCHEMA_VERSION,
             seed: 17,

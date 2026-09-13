@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/liuyumou/OptForge/schemas/search-config-v2.schema.json",
-  "title": "Search configuration, version 2",
-  "description": "Explicit owned-search configuration under SPEC-0003. Every budget is caller-supplied and there are deliberately no defaults, so a record always states the budgets that produced it. Version 2 carries the caller's extension policy under SPEC-0004; an empty list means no extension participates.",
+  "$id": "https://github.com/liuyumou/OptForge/schemas/search-config-v3.schema.json",
+  "title": "Search configuration, version 3",
+  "description": "Explicit owned-search configuration under SPEC-0003. Every budget is caller-supplied and there are deliberately no defaults, so a record always states the budgets that produced it. Version 2 carries the caller's extension policy under SPEC-0004; an empty list means no extension participates. Version 3 carries the selected device under SPEC-0010. The device is in the configuration rather than in provenance because verification re-runs a search from the configuration alone, so a device recorded only in provenance would describe a run that verification could not repeat.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -12,12 +12,13 @@
     "time_limit_ms",
     "open_node_limit",
     "improvement_tolerance",
+    "device",
     "relaxation",
     "extensions"
   ],
   "properties": {
     "schema_version": {
-      "const": 2
+      "const": 3
     },
     "seed": {
       "description": "Deterministic seed recorded for this search.",
@@ -27,23 +28,37 @@
     },
     "node_limit": {
       "description": "Limit on explored nodes, or null for unlimited.",
-      "type": ["integer", "null"],
+      "type": [
+        "integer",
+        "null"
+      ],
       "minimum": 1
     },
     "time_limit_ms": {
       "description": "Wall-clock limit in milliseconds, or null for unlimited.",
-      "type": ["integer", "null"],
+      "type": [
+        "integer",
+        "null"
+      ],
       "minimum": 1
     },
     "open_node_limit": {
       "description": "Bound on the open-node frontier, or null for unlimited.",
-      "type": ["integer", "null"],
+      "type": [
+        "integer",
+        "null"
+      ],
       "minimum": 1
     },
     "improvement_tolerance": {
       "description": "Absolute objective improvement required to accept an incumbent or to refuse a prune, in the original objective's units.",
       "type": "number",
       "minimum": 0
+    },
+    "device": {
+      "description": "Device this search and its relaxations run on: \"cpu\", or one physical GPU UUID. One value governs the whole search because SPEC-0006 requirement 6 permits one lease holder across device selections, so a search cannot use two devices. An enumeration index is not accepted: CUDA_VISIBLE_DEVICES renumbers devices per process, so a record carrying one could not be re-executed.",
+      "type": "string",
+      "pattern": "^(cpu|GPU-[A-Za-z0-9-]+)$"
     },
     "relaxation": {
       "$ref": "solve-config-v1.schema.json"

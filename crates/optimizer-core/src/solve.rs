@@ -16,6 +16,87 @@ use crate::{Candidate, ErrorKind, Tolerances, ValidationError, ValidationReport}
 /// Current solve configuration and record wire version.
 pub const SOLVE_SCHEMA_VERSION: u32 = 1;
 
+/// The device a search and its relaxations run on.
+///
+/// One value governs a whole search rather than one per component, and that is a
+/// consequence of the lease rather than a simplification: SPEC-0006 requirement 6
+/// permits at most one holder across device selections, so a search cannot use two
+/// devices and a per-component field could express a configuration the lease
+/// forbids.
+///
+/// A UUID is the only accepted device identity. An enumeration index is refused
+/// because `CUDA_VISIBLE_DEVICES` renumbers devices per process, so the same index
+/// names different hardware in different runs and a record carrying one could not be
+/// re-executed.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum Device {
+    /// No device. This is what every configuration written before SPEC-0010 means,
+    /// and it stays the default: there is no device unless a caller names one.
+    Cpu,
+    /// One physical device, named by its driver-reported UUID including the `GPU-`
+    /// prefix that management tooling prints.
+    Gpu(String),
+}
+
+impl Device {
+    /// The wire form: `cpu`, or the UUID itself.
+    #[must_use]
+    pub fn as_str(&self) -> &str {
+        match self {
+            Self::Cpu => "cpu",
+            Self::Gpu(uuid) => uuid,
+        }
+    }
+
+    /// Whether this names a physical device.
+    #[must_use]
+    pub fn is_gpu(&self) -> bool {
+        matches!(self, Self::Gpu(_))
+    }
+
+    /// Parse the wire form, refusing anything that is neither `cpu` nor a UUID.
+    ///
+    /// The accepted shape is the one
+    /// [the benchmark run configuration](../../schemas/run-config-v1.schema.json)
+    /// already fixed for the same purpose, so the two surfaces cannot drift.
+    ///
+    /// # Errors
+    ///
+    /// Returns a document failure for any other text. The refusal is deliberate
+    /// rather than lenient: accepting an unrecognised name and running on the CPU
+    /// would produce a record claiming a device selection the run did not honour.
+    pub fn parse(text: &str) -> Result<Self, ValidationError> {
+        if text == "cpu" {
+            return Ok(Self::Cpu);
+        }
+        let is_uuid = text.len() > 4
+            && text.starts_with("GPU-")
+            && text[4..]
+                .chars()
+                .all(|character| character.is_ascii_alphanumeric() || character == '-');
+        if is_uuid {
+            return Ok(Self::Gpu(text.to_string()));
+        }
+        Err(ValidationError::new(
+            ErrorKind::Document,
+            format!("device must be \"cpu\" or a GPU- UUID, got {text:?}"),
+        ))
+    }
+}
+
+impl Serialize for Device {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        serializer.serialize_str(self.as_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for Device {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let text = String::deserialize(deserializer)?;
+        Self::parse(&text).map_err(serde::de::Error::custom)
+    }
+}
+
 /// Explicit solve configuration. Every limit and tolerance is caller-supplied;
 /// there are deliberately no defaults, so a record always states what was run.
 #[derive(Clone, Debug, PartialEq, Serialize)]

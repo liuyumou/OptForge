@@ -11,7 +11,7 @@ mod solve;
 pub use document::*;
 pub use evaluate::*;
 pub use solve::{
-    Backend, Basis, BasisStatus, CancellationToken, SOLVE_SCHEMA_VERSION, SolveOptions,
+    Backend, Basis, BasisStatus, CancellationToken, Device, SOLVE_SCHEMA_VERSION, SolveOptions,
     SolveRecord, Termination, WarmStart, finite_or_absent,
 };
 

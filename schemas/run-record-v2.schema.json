@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/liuyumou/OptForge/schemas/run-record-v1.schema.json",
-  "title": "Run record, version 1",
+  "$id": "https://github.com/liuyumou/OptForge/schemas/run-record-v2.schema.json",
+  "title": "Run record, version 2",
   "description": "Immutable record of one run under SPEC-0005: a complete search record plus the provenance needed to repeat it. Verification re-runs the search from this document and compares the two records; agreement is evidence of determinism, never a proof of optimality.",
   "type": "object",
   "additionalProperties": false,
@@ -19,7 +19,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": 1
+      "const": 2
     },
     "record_id": {
       "description": "Identifier derived from what the record describes, never from measured elapsed time or any other host measurement. Two runs of the same model and configuration therefore share an identifier.",
@@ -39,7 +39,14 @@
       "description": "Host the run executed on. Field names match experiment-result-v1 so the two provenance shapes cannot drift apart.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["os", "cpu", "logical_cpus", "gpu_uuid", "gpu_name", "driver"],
+      "required": [
+        "os",
+        "cpu",
+        "logical_cpus",
+        "gpu_uuid",
+        "gpu_name",
+        "driver"
+      ],
       "properties": {
         "os": {
           "type": "string",
@@ -55,13 +62,22 @@
         },
         "gpu_uuid": {
           "description": "Null for a CPU run. This surface performs no GPU work.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "gpu_name": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "driver": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -69,7 +85,10 @@
       "description": "Build tooling of the binary that performed the run.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["rustc", "cargo"],
+      "required": [
+        "rustc",
+        "cargo"
+      ],
       "properties": {
         "rustc": {
           "type": "string",
@@ -94,10 +113,17 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["role", "path", "sha256"],
+        "required": [
+          "role",
+          "path",
+          "sha256"
+        ],
         "properties": {
           "role": {
-            "enum": ["model", "config"]
+            "enum": [
+              "model",
+              "config"
+            ]
           },
           "path": {
             "description": "Path as the caller supplied it, for diagnosis rather than resolution.",
@@ -112,7 +138,7 @@
       }
     },
     "search": {
-      "$ref": "search-record-v2.schema.json"
+      "$ref": "search-record-v3.schema.json"
     },
     "warnings": {
       "description": "Run-level warnings, retained even on success.",

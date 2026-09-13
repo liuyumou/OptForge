@@ -42,7 +42,7 @@ solve configuration applied to every node.
 ```bash
 cargo run -p optimizer-cli -- search \
   --model examples/model-v1.json \
-  --config examples/search-config-v2.json \
+  --config examples/search-config-v3.json \
   --output artifacts/run.json
 ```
 

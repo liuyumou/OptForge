@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "record_id": "c4-example-not-a-measurement",
   "revision": "0000000000000000000000000000000000000000",
   "dirty": false,
@@ -24,12 +24,12 @@
     },
     {
       "role": "config",
-      "path": "examples/search-config-v2.json",
-      "sha256": "255e01113676b693cd9a2472a088bea9406604d6f8a56b31ff9e65ec75d992bd"
+      "path": "examples/search-config-v3.json",
+      "sha256": "7bb3c44d295064cd3b0d094dd6eca698b732ddc4f9d93a7fb7817a4512683b92"
     }
   ],
   "search": {
-    "schema_version": 2,
+    "schema_version": 3,
     "model_id": "tiny-mixed",
     "backend": "relaxation",
     "backend_version": "1.11.0",
@@ -120,12 +120,13 @@
     "extensions": [],
     "elapsed_ms": 0,
     "options": {
-      "schema_version": 2,
+      "schema_version": 3,
       "seed": 17,
       "node_limit": null,
       "time_limit_ms": 10000,
       "open_node_limit": null,
       "improvement_tolerance": 1e-09,
+      "device": "cpu",
       "relaxation": {
         "schema_version": 1,
         "seed": 17,

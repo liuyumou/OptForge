@@ -161,7 +161,7 @@ benchmark result.
 Implementation in [optimizer-experiment](../../crates/optimizer-experiment/src/lib.rs)
 and [optimizer-cli](../../crates/optimizer-cli/src/main.rs) over the
 [search executive](../../crates/optimizer-solver/src/lib.rs) and the
-[run record schema](../../schemas/run-record-v1.schema.json), verified through the
+[run record schema](../../schemas/run-record-v2.schema.json), verified through the
 [gate](../../tools/check.sh). No behavior is implemented by this decision record.
 Acceptance evidence is recorded in [active task](../../state/active-task.md); this
 slice is not complete until its full gate passes with native acceptance covered
