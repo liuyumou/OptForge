@@ -41,11 +41,16 @@ finite conservative tolerance arithmetic. The reported objective and the existin
 feasibility tolerance policy are unchanged.
 
 Evidence is in [active task](active-task.md). The original cancellation and free
-variable cases failed before the repair. Independent rational fixtures, the full
-native CPU gate, all regular device suites, all full memcheck suites, and scoped
-checks under all four sanitizers cover the repair. The broad sanitizer invocation
-was stopped during the long existing racecheck case; it is not recorded as a full
-sanitizer-gate pass. No GPU kernel or experimental precision mode changed.
+variable cases failed before the repair. Independent rational fixtures and the full
+native CPU gate cover the numerical contract. Integration acceptance added all
+regular device suites; full memcheck, initcheck, and synccheck for all three suites;
+full racecheck for CUDA/scheduling; and 11 LP racecheck cases, all with zero errors.
+The long publication case completed in an earlier partial racecheck run. The broad
+run was subsequently stopped during the existing atomic-reduction negative-control
+stress case. That stress case remains an explicit sanitizer coverage limit accepted
+in the integration review for unchanged kernels; the full broad gate is not claimed
+as passed. The original RTX 5090 scoped sanitizer evidence remains valid. No GPU
+kernel or experimental precision mode changed.
 
 Remaining limit: outward enclosures can be wider than necessary because they lose
 correlations. A finite boxed model may refuse certification after intermediate
@@ -91,13 +96,14 @@ The origin remote is https://github.com/liuyumou/OptForge.git. Protected main,
 labeled GPU runner provisioning, and artifact retention still require hosting
 administration. Next step: configure these settings separately from Git syncing.
 
-Publication state, because several earlier records state the opposite and were
-true when written: the work through `dfdc245` — every milestone up to and
-including C8 — has been pushed to origin by the maintainer. Records dated before
-that push describe main as unpushed pending authorization; that was accurate at
-the time and is left as written rather than backdated. Anything after `dfdc245`
-is local until the maintainer pushes it, and AGENTS.md's prohibition on
-publishing without authorization is unchanged.
+Publication state (verified 2026-09-14): origin/main and local main both contain
+C6 through `ee2d4fe`. Earlier entries describing commits after `dfdc245` as local
+were accurate when written and remain historical evidence. The maintainer has
+now authorized the GPUP-0/1 PR, review, merge, and branch cleanup. Those slice
+commits are published on the certification branch and are under review in
+[PR #1](https://github.com/liuyumou/OptForge/pull/1); see
+[active task](active-task.md) for current integration progress.
+AGENTS.md's prohibition on publishing without authorization is unchanged.
 
 ## No dispatch threshold is committed, for either specification
 

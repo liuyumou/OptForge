@@ -16,7 +16,7 @@ User-visible changes are recorded here using Conventional Commit terminology.
 - A recorded reduced-cost cancellation defect in the existing LP certification,
   with an exact binary64-coefficient counterexample and GPUP-1 repair prerequisite.
   The earlier certification claims below describe the intended contract; the
-  implementation does not meet it for this case until that repair passes.
+  GPUP-1 repair recorded below resolves this case with exact-arithmetic regressions.
 
 - `optimizer-lp`, the host half of SPEC-0011: the canonical linear-program form,
   the fixed reduction order, and diagonal preconditioning. It takes no device
@@ -429,6 +429,9 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Fixed
 
+- CI reuses the verified pinned cargo-deny 0.19.0 binary restored from cache;
+  missing or mismatched binaries are replaced with the same locked version.
+  This avoids an installation failure when Cargo metadata was not cached.
 - GPUP-1 repairs host LP certification used by both `host-lp` and `cuda-lp`.
   Products, fixed-tree sums, reduced costs, variable contributions, and the final
   bound now carry outward binary64 enclosures. A reduced cost rounded to zero

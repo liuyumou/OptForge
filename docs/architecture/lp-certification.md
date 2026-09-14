@@ -2,14 +2,15 @@
 
 Status: implemented under GPUP-1
 Owner: numerical backend (optimizer-lp)
-Last reviewed commit: bootstrap (first commit containing this document)
+Last reviewed commit: 61c53f432fc4ef28e2481f153b16d28b25d3375b (GPUP-0/1 integration review)
 Contract: [SPEC-0011](../specifications/SPEC-0011-gpu-lp-backend.md), requirements 11-15 and 13a/14a/14b
 Implementation: [certification](../../crates/optimizer-lp/src/certify.rs)
 Acceptance: [Rust certificate/gap regressions](../../crates/optimizer-lp/tests/certification.rs),
 [primitive enclosures](../../crates/optimizer-lp/src/outward.rs),
 [independent rational oracle](../../tools/lp_certification_oracle.py),
 [oracle regeneration checks](../../tests/integration/test_lp_certification_oracle.py),
-the full native CPU gate, regular device suites, and scoped sanitizer checks.
+the full native CPU gate, regular device suites, and the explicitly scoped
+sanitizer coverage described below.
 Evidence and scope: [active task](../../state/active-task.md).
 
 ## Bound argument
@@ -125,3 +126,31 @@ Each invocation must report one executed, passing test (not a device skip or zer
 matching tests) and zero sanitizer errors. These scoped results do not claim that
 the entire broad sanitizer gate completed; its stopped racecheck is recorded in
 the slice evidence.
+
+## Integration review sanitizer coverage
+
+The GPUP-0/1 PR review on 2026-09-14 extended acceptance on the RTX PRO 6000
+Blackwell (UUID GPU-6721b13a-30f9-83ec-dace-ba2d9738556f). All regular suites and all
+full memcheck, initcheck, and synccheck suites passed. Both non-LP full racecheck
+suites passed. The LP publication case completed successfully during the broad
+racecheck invocation, which was later stopped during the existing atomic-reduction
+negative-control stress case. The other 11 LP cases passed in a completed racecheck
+invocation with zero errors and warnings:
+
+```bash
+bash tools/gpu_job.sh GPU-<uuid> env AI_OPTIMIZER_GPU=1 \
+  compute-sanitizer --error-exitcode 99 --tool racecheck \
+  <lp-device-test-executable> --test-threads 1 \
+  --skip an_atomic_reduction_build_breaks_the_bitwise_assertion \
+  --skip a_device_solve_publishes_only_what_the_host_validated
+```
+
+For the full initcheck/synccheck suites and both non-LP racecheck suites, use the
+same invocation without the two --skip options and choose each suite executable.
+Every completed invocation must show the expected executed count and zero errors;
+the LP command above must show 11 passed and two filtered. The integration review
+accepts this scope for a host-only repair with unchanged kernels and prior scoped
+RTX 5090 coverage. It does not claim the entire broad sanitizer gate passed. The
+unfinished atomic stress case remains a coverage limitation; internal test settings
+were not reduced. Total additional GPU acceptance was 1,550.46 seconds, below the
+1,800-second integration cap, and used none of the performance-study allocation.

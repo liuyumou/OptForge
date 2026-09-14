@@ -1,5 +1,105 @@
 # Active Task
 
+## GPUP-0/1 PR Review and Integration (2026-09-14)
+
+Objective: review the roadmap and certification repair, publish one PR preserving
+both slice commits, record the review, merge through GitHub after acceptance,
+synchronize local main, and remove the two completed branches. The maintainer
+explicitly authorized publication, self-review, merge, and branch cleanup.
+
+Status: numerical review and local acceptance complete; final PR CI and merge
+pending. Base main is ee2d4fe; reviewed implementation is 61c53f4,
+which includes roadmap commit f28bf0e. No later precision slice is in scope.
+
+Acceptance gate: numerical proof and caller review; full pinned-native CPU gate;
+finish the previously incomplete broad GPU sanitizer coverage if the bounded
+integration allocation permits, otherwise explicitly assess the existing scoped
+coverage; successful PR CI; remote merge confirmation and clean synchronized main
+before branch deletion. GitHub author self-approval restrictions must be respected;
+record the review without changing branch protections if formal approval is refused.
+
+Resource budget: at most 30 minutes CPU gate wall time with four Cargo build jobs
+and 30 minutes additional GPU acceptance on one device under the shared host lease,
+sequentially with the CPU gate. Profiling and performance trials remain out of scope;
+the eight GPU-hour research campaign is unspent. Likely files: active task, known
+failures/publication state, and review evidence; runtime changes only for review
+findings, with a fresh gate before publication.
+
+
+Review evidence: checked the finite enclosure primitives, concave variable-bound
+contributions, row repair, objective-sense conversion, conservative tolerance
+arithmetic, both backend callers, and the shared reduction tree. The independent
+Fraction oracle evaluates the stored coefficients without copying the interval
+algorithm. No blocking numerical or contract finding was identified. Original-model
+feasibility remains tolerance-based, and interval dependency can weaken/refuse a
+certificate; neither limitation is hidden by the gap result. No runtime edit was
+needed. The two original slice commits remain separate.
+
+The fresh full CPU gate passed (23.30 seconds, pinned native HiGHS covered), with
+390 Rust tests, 76 Python tests and 62 documentation pages. A GPU launch without
+the provisioned Rust PATH failed before device work (0.08 seconds). The next run
+failed from CUDA context allocation on the busy RTX 5090 (4.31 seconds); both
+5090s had approximately 30 GiB allocated by other activity. Those processes were
+left untouched. Remaining acceptance moved to the idle RTX PRO 6000 Blackwell,
+UUID GPU-6721b13a-30f9-83ec-dace-ba2d9738556f, under the same host-wide lock and
+remaining total budget. A temporary sanitizer wrapper adds --error-exitcode 99;
+no test counts, timeouts inside tests, or numerical thresholds were reduced.
+
+Publication readiness: the reviewed slice commits were pushed to
+codex/fix-lp-certification through SSH. The maintainer completed GitHub CLI browser
+login, enabling API access as liuyumou. Main is not protected; merge settings and
+protections will remain unchanged. [PR #1](https://github.com/liuyumou/OptForge/pull/1)
+is open as a draft; its review is prepared locally. Both documentation and benchmark
+smoke CI passed. CPU CI is held by the tooling-cache finding below.
+
+Integration finding: the first remote CPU CI run failed before acceptance during
+cargo-deny installation (run 34859538269, job 104027791392). The Cargo cache restores
+bin/ but not Cargo installation metadata, so reinstalling reports "binary
+cargo-deny already exists in destination". Bounded correction: verify the cached
+binary reports exactly cargo-deny 0.19.0; reuse that version, otherwise install the
+same pinned locked package with --force. No toolchain or dependency version changes.
+The final local gate and remote CI must pass after this workflow edit.
+
+Sanitizer scope decision before the remaining runs: the broad PRO 6000 job was
+stopped after 1,294.10 seconds during the existing atomic-reduction negative-control
+stress case under racecheck. The 20,000-iteration publication test had completed
+successfully under racecheck; the original Slice 1 coverage gap at that case is
+therefore narrowed. The entire broad job is still not a completed gate. Use the
+remaining total allocation for all three full initcheck and synccheck suites,
+both non-LP full racecheck suites, and the 11 other LP racecheck cases (excluding
+the already-observed publication case and the unfinished atomic stress case).
+Keep error-exitcode 99 and every test's internal settings unchanged. Review accepts
+this explicit sanitizer coverage for a host-only arithmetic repair with unchanged
+kernels and prior scoped coverage on RTX 5090; it does not waive a known numerical
+failure or claim the entire broad sanitizer gate passed.
+
+Final device evidence: the nine supplemental invocations all passed with exit 0
+in 251.97 seconds. Full initcheck and synccheck each ran 13 LP, six scheduling,
+and 14 CUDA tests with zero errors. The completed racecheck invocations ran 11 LP,
+six scheduling, and 14 CUDA tests with zero errors and warnings; only the LP
+invocation filtered the two explicitly named cases above. Together with all
+regular device suites, all three full memcheck suites, the observed long publication
+test completion under racecheck, and the prior RTX 5090 scoped checks, this is the
+accepted coverage. The unfinished atomic negative-control racecheck remains a
+known acceptance limit, not a full broad-gate pass. No device test silently skipped.
+
+Total additional GPU acceptance: 1,550.46 seconds including both failed launches,
+the stopped broad job, and supplemental checks; within 1,800 seconds. No CPU gate
+overlapped GPU acceptance, and the performance campaign remains unspent. Logs:
+/tmp/gpup-pr-cpu.log, /tmp/gpup-pr-gpu-launch-failure.log,
+/tmp/gpup-pr-gpu-5090-oom.log, /tmp/gpup-pr-gpu.log, and
+/tmp/gpup-pr-remaining-sanitizers.log, with timing summary JSON siblings. These are
+ephemeral acceptance diagnostics. Reproduction and scope are recorded in
+[LP certification arithmetic](../docs/architecture/lp-certification.md).
+
+Final local acceptance after the CI/documentation edits: bash tools/check.sh passed
+with pinned native HiGHS 1.11.0, 390 Rust tests, 76 Python tests, and 62 documentation
+pages (23.53 seconds; /tmp/gpup-pr-cpu-final.log and its timing summary). The CI setup
+shell passed bash syntax validation, and the cached-tool guard's version string was
+checked against the actual pinned binary. The original runtime and CUDA files are
+unchanged from 61c53f4. PR CI, review publication, merge, and cleanup follow this
+accepted local tree; their final outcome will be recorded after verification.
+
 ## GPU LP Precision Slice 1: Conservative Certification (2026-09-14)
 
 Objective: reproduce and repair the zero-reduced-cost cancellation defect, bound
