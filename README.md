@@ -5,8 +5,9 @@ selective GPU acceleration. **C6 is implemented under SPEC-0010 and SPEC-0011**:
 a search can evaluate integer schedules on a GPU, and a first-order LP backend
 runs on the host or device with host-side validation and certification. The next
 prioritized work is the [GPU LP precision roadmap](docs/plans/gpu-lp-precision-roadmap.md).
-Its first code slice repairs a [known certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost);
-mixed precision and performance recipes are not implemented yet.
+Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)
+and the objective/gap checks; the next slice establishes measurement infrastructure.
+Mixed precision and performance recipes are not implemented yet.
 
 The project validates original
 linear models and candidates, solves them with an independently validated incumbent,
@@ -90,6 +91,7 @@ acceptance was not covered.
 - [GPU discovery and lease contract](docs/specifications/SPEC-0006-gpu-lease.md)
 - [Heterogeneous computation specification](docs/specifications/SPEC-0010-heterogeneous-computation.md)
 - [GPU LP backend specification](docs/specifications/SPEC-0011-gpu-lp-backend.md)
+- [LP certification arithmetic and limits](docs/architecture/lp-certification.md)
 - [GPU LP performance roadmap and slices](docs/plans/gpu-lp-precision-roadmap.md)
 - [Mixed-precision LP draft](docs/specifications/SPEC-0012-mixed-precision-lp.md)
 - [LP experiment protocol draft](docs/specifications/SPEC-0013-lp-precision-experiments.md)

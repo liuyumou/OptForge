@@ -4,7 +4,7 @@ next_ready_milestone: C7
 # Capability milestones stay numbered as before. The user prioritized this
 # separate research track before C7 behavior; next_ready_task selects its slice.
 active_research_track: GPUP
-next_ready_task: GPUP-1
+next_ready_task: GPUP-2
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: M0
@@ -113,13 +113,13 @@ tasks:
     acceptance: "Full native gate; documentation links; requirement-to-test and dependency mapping; zero GPU work"
   - id: GPUP-1
     title: Repair LP certification and review objective and gap arithmetic
-    status: ready
+    status: complete
     depends_on: [GPUP-0]
     specification: docs/specifications/SPEC-0011-gpu-lp-backend.md
     acceptance: "Independent exact-arithmetic cancellation, uncertain-sign, infinite-bound and objective-sense regressions; full native gate"
   - id: GPUP-2
     title: Establish bounded LP experiment infrastructure and baseline evidence
-    status: planned
+    status: ready
     depends_on: [GPUP-1]
     specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
     acceptance: "Accept experiment contract and freeze manifests first; strict artifacts, independent endpoints, budget ledger, baseline bottleneck report"

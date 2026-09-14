@@ -21,6 +21,7 @@
 
 pub mod backend;
 pub mod certify;
+mod outward;
 pub mod pdhg;
 pub mod precondition;
 pub mod problem;

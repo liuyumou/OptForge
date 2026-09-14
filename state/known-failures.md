@@ -2,13 +2,14 @@
 
 ## LP certification can lose the roundoff allowance at zero reduced cost
 
-Confirmed during the GPU LP precision design review on 2026-09-14; not repaired
-by the GPUP-0 documentation slice. This affects the current host certification
-used by both host-lp and cuda-lp, independently of any future quantization.
+Resolved by GPUP-1 on 2026-09-14. Discovered during the GPU LP precision design
+review and preserved by GPUP-0, this affected the shared host certification used
+by both host-lp and cuda-lp, independently of future quantization. The original
+counterexample below is retained for reproduction against the previous revision.
 
-In `crates/optimizer-lp/src/certify.rs`, the variable loop uses bound zero when a
-computed reduced cost rounds to zero, then multiplies the reduced-cost error
-allowance by that chosen bound. The reduced cost can be nonzero in exact arithmetic
+The previous variable loop in `crates/optimizer-lp/src/certify.rs` used bound zero
+when a computed reduced cost rounded to zero, then multiplied the reduced-cost
+error allowance by that chosen bound. The reduced cost can be nonzero in exact arithmetic
 over the stored binary64 coefficients, so the required allowance is lost.
 
 Reproducer (continuous variables, equality constraint):
@@ -22,7 +23,7 @@ dual multiplier y = [0.1]
 feasible candidate x = [3e16, -1e16]
 ```
 
-The current built-library diagnostic returned bound 0 with allowance 0. The
+The pre-repair built-library diagnostic returned bound 0 with allowance 0. The
 candidate passes the existing feasibility check; ordinary FP64 objective evaluation
 reports -0.5. Exact rational evaluation of the *stored binary64* coefficients at
 that candidate is `-152587890625/549755813888`, approximately
@@ -30,19 +31,36 @@ that candidate is `-152587890625/549755813888`, approximately
 model; the ordinary objective's -0.5 also illustrates why objective/gap arithmetic
 needs review. These values are a correctness counterexample, not timing evidence.
 
-Next: [GPUP-1](../docs/plans/gpu-lp-precision-roadmap.md#implementation-slices), under
-SPEC-0011 requirements 11-14. Preserve an independent exact-arithmetic regression,
-use conservative outward reduced-cost/contribution bounds including uncertain
-signs and infinite sides, and review original-model objective, gap closure, and
-objective-sense conversion. Do not treat FP64 as an exactness guarantee or discard
-uncertainty when the rounded reduced cost is zero. No lower-precision implementation
-may precede the repair. This entry must remain open until acceptance evidence exists.
+Resolution: [GPUP-1](../docs/plans/gpu-lp-precision-roadmap.md#implementation-slices)
+replaces the scalar allowance estimate with finite outward enclosures for every
+product, reduction, reduced cost, bound contribution, and final sum. Uncertain
+signs use both variable-bound sides; an unusable infinite side yields no finite
+certificate. Exact zero remains usable even for a free variable. Both backends
+share an outward objective/gap check with the correct maximization direction and
+finite conservative tolerance arithmetic. The reported objective and the existing
+feasibility tolerance policy are unchanged.
+
+Evidence is in [active task](active-task.md). The original cancellation and free
+variable cases failed before the repair. Independent rational fixtures, the full
+native CPU gate, all regular device suites, all full memcheck suites, and scoped
+checks under all four sanitizers cover the repair. The broad sanitizer invocation
+was stopped during the long existing racecheck case; it is not recorded as a full
+sanitizer-gate pass. No GPU kernel or experimental precision mode changed.
+
+Remaining limit: outward enclosures can be wider than necessary because they lose
+correlations. A finite boxed model may refuse certification after intermediate
+overflow, and uncertainty can prevent certification on an infinite side even when
+the exact reduced cost is zero. This is a conservative refusal, not a proof that
+the LP is unbounded. Feasibility and the objective field remain tolerance-based
+binary64 computations, not exact-rational primal certificates. See
+[the numerical argument](../docs/architecture/lp-certification.md).
 
 ## GPU LP precision experiments and recipes are not implemented
 
 The user approved the [GPUP roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
 with single-solve latency as the primary objective and an eight GPU-hour first
-campaign. GPUP-0 records the plan and draft contracts only. There is no
+campaign. GPUP-0 records the roadmap and drafts; GPUP-1 repairs the existing
+certification and gap calculations. There is no
 `cuda-lp-quantized` backend, precision-settings schema, study harness, frozen LP
 study partition, measured winning recipe, or supported new preset yet. Draft
 SPEC-0012/SPEC-0013 must be completed and accepted before their behavior is added.
@@ -51,8 +69,8 @@ this LP-only study. Existing Taillard timing/structure observations are developm
 diagnostics and cannot be relabeled held-out validation.
 
 Next: follow the dependency chain in [the backlog](backlog.yaml). Record each
-slice's gates and resource use separately. Fix certification first, establish
-measurement before performance claims, and preserve unsuccessful trials and
+slice's gates and resource use separately. Certification repair is complete;
+establish measurement before performance claims and preserve unsuccessful trials and
 negative results. The approved direction permits evaluating formats/scales/rounding;
 it does not preselect FP8 or Tensor Cores as the final recipe. Repeated-solve
 throughput and full MILP search performance need separate specifications and budgets.

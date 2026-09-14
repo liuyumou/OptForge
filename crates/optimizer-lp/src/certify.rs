@@ -56,32 +56,15 @@
 
 use optimizer_core::Model;
 
+use crate::outward::{self, Enclosure};
 use crate::problem::LinearProgram;
-use crate::reduce::tree_sum;
-
-/// Unit roundoff for IEEE-754 binary64.
-const UNIT_ROUNDOFF: f64 = f64::EPSILON / 2.0;
-
-/// The standard `γₙ = n·u / (1 − n·u)` error growth factor.
-///
-/// Returns infinity once `n·u` reaches one, which makes an unusable allowance
-/// visibly unusable instead of negative. A negative allowance would be *added* to
-/// the bound and would be the one arithmetic mistake here that produces a stronger
-/// claim than the evidence supports.
-fn gamma(n: usize) -> f64 {
-    let product = n as f64 * UNIT_ROUNDOFF;
-    if product >= 1.0 {
-        f64::INFINITY
-    } else {
-        product / (1.0 - product)
-    }
-}
 
 /// Why no bound could be produced.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum NoBound {
-    /// A variable's contribution is unbounded below: its reduced cost has the
-    /// sign whose bound is infinite. Names the original variable ID.
+    /// A variable contribution cannot be bounded finitely: its reduced-cost
+    /// enclosure includes a sign whose variable bound is infinite.
+    /// Names the original variable ID; this does not prove the LP is unbounded.
     UnboundedVariable {
         /// The original variable ID that blocked the bound.
         variable_id: u32,
@@ -103,7 +86,7 @@ impl std::fmt::Display for NoBound {
             Self::UnboundedVariable { variable_id } => write!(
                 formatter,
                 "no certified bound: variable {variable_id} has an infinite bound on the side \
-                 its reduced cost needs, so its contribution is unbounded below"
+                 its reduced-cost enclosure needs, so no finite contribution is certified"
             ),
             Self::NonfiniteMultiplier { row } => write!(
                 formatter,
@@ -125,10 +108,11 @@ pub struct Certificate {
     /// A lower bound for a minimization and an upper bound for a maximization,
     /// which is the same statement expressed in the caller's terms.
     pub bound: f64,
-    /// The bound before the rounding allowance was subtracted, for diagnosis.
+    /// The nearest-rounded weak-duality value, for diagnosis only.
     pub unadjusted: f64,
-    /// The allowance subtracted to make the bound valid in `f64` rather than only
-    /// in exact arithmetic.
+    /// An outward upper bound on the adjustment from `unadjusted` to `bound`.
+    /// The authoritative bound is computed directly, not by subtracting this
+    /// diagnostic with round-to-nearest arithmetic.
     pub allowance: f64,
     /// How many multipliers the repair had to zero.
     ///
@@ -146,9 +130,9 @@ pub struct Certificate {
 ///
 /// # Errors
 ///
-/// Returns [`NoBound`] when no finite number is a valid bound, rather than
-/// returning a weak one. The distinction matters: a weak bound is still correct,
-/// but there is no correct finite answer in the cases listed there.
+/// Returns [`NoBound`] when this enclosure cannot establish a finite bound.
+/// In particular, sign uncertainty on an infinite variable side can prevent
+/// certification even when a tighter calculation would succeed.
 pub fn certify(program: &LinearProgram, y: &[f64]) -> Result<Certificate, NoBound> {
     assert_eq!(
         y.len(),
@@ -178,108 +162,125 @@ pub fn certify(program: &LinearProgram, y: &[f64]) -> Result<Certificate, NoBoun
         }
     }
 
-    // Step 2: the row contribution. Each term is the infimum of `ŷᵢ t` over the
-    // row's own activity range, which after the repair is always finite.
-    let mut row_terms = Vec::with_capacity(program.row_count());
+    // Enclose every term from the original data. A zero rounded reduced cost
+    // still carries the full interval through the variable's two bound sides.
+    let mut terms = Vec::with_capacity(program.row_count() + program.column_count() + 1);
     for (row, value) in repaired_y.iter().enumerate() {
-        let range = program.rows()[row];
-        let term = if *value > 0.0 {
-            *value * range.lower
-        } else if *value < 0.0 {
-            *value * range.upper
-        } else {
-            0.0
-        };
-        row_terms.push(term);
+        terms.push(endpoint(*value, program.rows()[row], None)?);
     }
-
-    // Step 3: reduced costs, from the model's own coefficients. Nothing the
-    // device computed is read here beyond the multipliers themselves; in
-    // particular no residual, which is what requirement 12 forbids.
-    let mut column_terms = Vec::with_capacity(program.column_count());
-    // Error carried from computing `z` itself, weighted by the bound it is
-    // multiplied against. Tracked separately because it is not a rounding of the
-    // final sum but of its inputs.
-    let mut input_error = 0.0f64;
-
     for column in 0..program.column_count() {
         let (rows, coefficients) = program.column_major().line(column);
-        let products: Vec<f64> = rows
+        let products = rows
             .iter()
             .zip(coefficients)
-            .map(|(row, coefficient)| coefficient * repaired_y[*row as usize])
-            .collect();
-        let magnitude = tree_sum(&products.iter().map(|value| value.abs()).collect::<Vec<_>>());
-        let transposed = tree_sum(&products);
-        let cost = program.objective()[column];
-        let reduced = cost - transposed;
-
+            .map(|(row, coefficient)| {
+                Enclosure::product(*coefficient, repaired_y[*row as usize])
+                    .ok_or(NoBound::NonfiniteArithmetic)
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+        let transposed = outward::sum(&products).ok_or(NoBound::NonfiniteArithmetic)?;
+        let reduced = Enclosure::point(program.objective()[column])
+            .and_then(|cost| cost.subtract(transposed))
+            .ok_or(NoBound::NonfiniteArithmetic)?;
         let range = program.columns()[column];
-        let (bound, term) = if reduced > 0.0 {
-            (range.lower, reduced * range.lower)
-        } else if reduced < 0.0 {
-            (range.upper, reduced * range.upper)
+        let id = Some(program.variable_ids()[column]);
+        let low = endpoint(reduced.lower, range, id)?;
+        let high = endpoint(reduced.upper, range, id)?;
+        let rounded = endpoint(reduced.rounded, range, id)?.rounded;
+        // phi(z) = inf_x z*x is concave. Its minimum over the enclosure is
+        // attained at an endpoint; the only possible interior maximum is z=0.
+        let upper = if reduced.lower <= 0.0 && reduced.upper >= 0.0 {
+            low.upper.max(high.upper).max(0.0)
         } else {
-            (0.0, 0.0)
+            low.upper.max(high.upper)
         };
-
-        if !term.is_finite() {
-            // Exactly the case ADR-0010's corrected wording describes: the
-            // reduced cost points at a bound that is not there, and no finite
-            // number bounds this variable's contribution.
-            return Err(NoBound::UnboundedVariable {
-                variable_id: program.variable_ids()[column],
-            });
-        }
-
-        // |fl(z) − z| ≤ γ(k+1)·Σ|aᵢⱼŷᵢ| + u·|z|, and the term multiplies that by
-        // its bound, with one more rounding for the multiply itself.
-        let reduced_error = gamma(products.len() + 1) * magnitude + UNIT_ROUNDOFF * reduced.abs();
-        input_error += bound.abs() * reduced_error + UNIT_ROUNDOFF * term.abs();
-
-        column_terms.push(term);
+        terms.push(
+            Enclosure::new(low.lower.min(high.lower), upper, rounded)
+                .ok_or(NoBound::NonfiniteArithmetic)?,
+        );
     }
-
-    // Step 4: the weak-duality value, summed in the project's fixed order so the
-    // certification is as reproducible as the iteration it checks.
-    let mut all_terms = Vec::with_capacity(row_terms.len() + column_terms.len() + 1);
-    all_terms.extend_from_slice(&row_terms);
-    all_terms.extend_from_slice(&column_terms);
-    all_terms.push(program.offset());
-    let total = tree_sum(&all_terms);
-    let magnitude = tree_sum(
-        &all_terms
-            .iter()
-            .map(|value| value.abs())
-            .collect::<Vec<_>>(),
-    );
-
-    if !total.is_finite() || !magnitude.is_finite() {
-        return Err(NoBound::NonfiniteArithmetic);
-    }
-
-    // The argument above is exact in the reals. In `f64` the computed value may
-    // land either side of the true one, and a value that landed *above* would be
-    // a bound stronger than the evidence supports -- the one failure mode that
-    // matters here. Subtracting a conservative allowance removes it.
-    let allowance = gamma(all_terms.len()) * magnitude + input_error;
-    if !allowance.is_finite() {
-        return Err(NoBound::NonfiniteArithmetic);
-    }
-    let adjusted = total - allowance;
-    if !adjusted.is_finite() {
-        return Err(NoBound::NonfiniteArithmetic);
-    }
-
+    terms.push(Enclosure::point(program.offset()).ok_or(NoBound::NonfiniteArithmetic)?);
+    let total = outward::sum(&terms).ok_or(NoBound::NonfiniteArithmetic)?;
+    let allowance = Enclosure::point(total.rounded)
+        .and_then(|raw| raw.subtract(Enclosure::point(total.lower)?))
+        .ok_or(NoBound::NonfiniteArithmetic)?
+        .upper
+        .max(0.0);
     Ok(Certificate {
-        // Reported in the caller's direction: the internal program is always a
-        // minimization, so a maximization's lower bound on `min −cᵀx` is an upper
-        // bound on `max cᵀx`. Getting this backwards would produce a number valid
-        // in the wrong direction, which is worse than producing none.
-        bound: program.to_original_objective(adjusted),
-        unadjusted: program.to_original_objective(total),
+        bound: program.to_original_objective(total.lower),
+        unadjusted: program.to_original_objective(total.rounded),
         allowance,
         repaired,
+    })
+}
+
+/// Enclose phi(z) for one exact endpoint. Zero needs neither infinite side.
+fn endpoint(z: f64, range: crate::Range, variable: Option<u32>) -> Result<Enclosure, NoBound> {
+    if z == 0.0 {
+        return Ok(Enclosure::ZERO);
+    }
+    let bound = if z > 0.0 { range.lower } else { range.upper };
+    if !bound.is_finite() {
+        return Err(match variable {
+            Some(variable_id) => NoBound::UnboundedVariable { variable_id },
+            None => NoBound::NonfiniteArithmetic,
+        });
+    }
+    Enclosure::product(z, bound).ok_or(NoBound::NonfiniteArithmetic)
+}
+
+/// Conservative gap assessment in absolute objective units, shared by both LP backends.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct GapAssessment {
+    /// Nonnegative outward upper bound on the sense-directed objective gap.
+    pub upper: f64,
+    /// Whether the whole gap enclosure fits the caller's existing tolerance policy.
+    /// The caller must additionally require original-model candidate feasibility.
+    pub closed: bool,
+}
+
+/// Assess the gap using an outward objective enclosure, including its offset.
+///
+/// `primal` is in original model units and canonical variable order. `bound` must
+/// already have been certified for this program and is in the original sense;
+/// this function does not certify a supplied bound or establish primal feasibility.
+/// Returns `None` for wrong vector length, invalid tolerances, or any arithmetic
+/// that cannot be enclosed finitely. The model's nearest-rounded reported objective
+/// is deliberately not an input to a mathematical termination decision.
+#[must_use]
+pub fn assess_gap(
+    program: &LinearProgram,
+    primal: &[f64],
+    bound: f64,
+    tolerances: optimizer_core::Tolerances,
+) -> Option<GapAssessment> {
+    if primal.len() != program.column_count() || tolerances.validate().is_err() {
+        return None;
+    }
+    let mut terms = program
+        .objective()
+        .iter()
+        .zip(primal)
+        .map(|(cost, value)| Enclosure::product(*cost, *value))
+        .collect::<Option<Vec<_>>>()?;
+    terms.push(Enclosure::point(program.offset())?);
+    let objective = outward::sum(&terms)?;
+    // Sign conversion is an involution: it also maps a reported bound back to min.
+    let bound = program.to_original_objective(bound);
+    let gap = objective.subtract(Enclosure::point(bound)?)?;
+    // A lower bound on the requested scale for EVERY objective in the interval.
+    // Using its maximum magnitude would increase the tolerance without evidence.
+    let magnitude = if objective.lower <= 0.0 && objective.upper >= 0.0 {
+        0.0
+    } else {
+        objective.lower.abs().min(objective.upper.abs())
+    };
+    let scale = magnitude.max(bound.abs());
+    let allowance = Enclosure::product(tolerances.relative, scale)?
+        .add(Enclosure::point(tolerances.absolute)?)?;
+    Some(GapAssessment {
+        upper: gap.upper.max(0.0),
+        closed: gap.lower >= -tolerances.absolute && gap.upper <= allowance.lower,
     })
 }
 
@@ -488,11 +489,12 @@ mod tests {
     /// regime, with `y` set to the multiplier that zeroes the first variable's
     /// reduced cost.
     ///
-    /// Without the subtraction the reported bound would exceed the true optimum by
+    /// Without the outward adjustment the reported bound would exceed the true optimum by
     /// about 6.6e-14 -- a bound stronger than the truth, which is the one failure
-    /// mode this module exists to prevent. Deleting the allowance fails this test.
+    /// mode this module exists to prevent. Returning the raw value as the bound
+    /// fails this test; the allowance field itself is only diagnostic.
     #[test]
-    fn the_rounding_allowance_is_subtracted_and_is_shown_to_matter() {
+    fn the_outward_adjustment_is_shown_to_matter() {
         let a = [0.206_433_577_151_847_46_f64, 9.355_369_574_607_812];
         let cost = [8.345_320_531_948_929_f64, 7.939_554_807_831_865];
         let rhs = 9.398_501_687_559_822_f64;

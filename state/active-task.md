@@ -1,5 +1,81 @@
 # Active Task
 
+## GPU LP Precision Slice 1: Conservative Certification (2026-09-14)
+
+Objective: reproduce and repair the zero-reduced-cost cancellation defect, bound
+rounding uncertainty conservatively through certification, and review objective/gap
+arithmetic and minimization/maximization termination in both first-order backends.
+
+Status: complete. GPUP-0 is complete; this is GPUP-1 only.
+
+Acceptance gate: independent exact-arithmetic regressions, the full
+`bash tools/check.sh` gate with pinned native HiGHS, and the device acceptance and
+sanitizer gate if the shared host-side change reaches device integration. Resource
+budget: up to 60 minutes CPU gate/test wall time with four Cargo build jobs; up to
+15 minutes GPU acceptance under the shared host lease on one device, sequentially
+with the CPU gate. No performance study jobs; the eight-hour campaign remains
+unspent. No GPU kernel or iteration arithmetic change is planned.
+
+Likely files: optimizer-lp certification, a private outward-arithmetic helper,
+shared objective/gap assessment, host/device backend integration, regression
+fixtures and exact validation tooling, SPEC-0011, numerical documentation,
+changelog, known failures, roadmap and backlog. No new runtime dependency or
+unsafe boundary is authorized. Existing caller tolerances remain unchanged.
+
+Evidence (2026-09-14): the rounded-zero and free-variable regressions both failed
+against the old certifier, which returned bound 0 and allowance 0. The separate
+maximization gap regression also failed before repair. All now pass. The rational
+oracle covers 1,083 primitive arithmetic cases, five fixed-tree sums (including a
+multi-segment sum), 26 certificate cases, and 18 objective/gap cases; the Python
+integration gate independently regenerates the fixture from exact Fractions.
+
+The final `bash tools/check.sh` passed, exit 0: pinned native HiGHS 1.11.0,
+390 Rust tests, 76 Python tests, artifact/provenance validation, committed-record
+re-execution, and 62 documentation pages. The final gate took 27.46 seconds; both full CPU gates stayed within the
+declared allocation and ran sequentially with GPU acceptance.
+No runtime dependency, GPU kernel, original-model coefficient, caller tolerance,
+experiment seed/split, or solver default changed.
+
+Device evidence: RTX 5090, UUID GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48,
+driver 580.105.08, provisioned CUDA 13.0 code objects. All three regular device
+suites passed, including the new maximization case and existing bitwise iteration
+comparisons. All three full memcheck runs reported zero errors. The broad
+`tools/gpu_check.sh` sanitizer invocation was explicitly stopped during the
+existing 20,000-iteration publication test under racecheck; **the full broad
+sanitizer gate did not complete and is not claimed as passed**.
+
+Bounded replacement coverage: memcheck, racecheck, initcheck, and synccheck each
+ran the new one-iteration maximization integration, the existing 400-iteration
+CPU/GPU bitwise comparison, and the wide-row differential case. All 12 scoped
+runs reported one executed passing test and zero errors, with no skips. The
+scoped commands set `--error-exitcode 99` and retained the existing test iteration
+counts/thresholds. This is the relevant sanitizer coverage for unchanged kernels
+with repaired host-side certification/gap arithmetic; reproduction commands are
+in docs/architecture/lp-certification.md.
+
+The stopped broad job consumed 499.99 seconds and the scoped checks 59.74 seconds:
+559.73 seconds total acceptance wall time, within the 900-second allocation,
+on one device under the shared host lease. Performance campaign consumption is
+zero. Local logs and machine-readable timing summaries are in
+`/tmp/gpup-1-cpu-final.log`, `/tmp/gpup-1-gpu-acceptance.log`, and
+`/tmp/gpup-1-scoped-sanitizers.log` with sibling summary JSON files. These are
+ephemeral acceptance diagnostics, not retained performance artifacts.
+
+Resolution: certification carries outward enclosures through original-model
+products, reductions, reduced costs, variable contributions, and the final sum.
+Both LP backends use the shared outward objective/gap check, including sense
+conversion and conservative finite tolerance arithmetic. Certificate fields stay
+compatible; LP record gaps remain absolute objective-unit diagnostics, now
+nonnegative conservative upper bounds. Feasibility and reported objective values
+retain their existing tolerance-based meanings. Interval dependency and overflow
+can weaken or prevent a certificate, as the numerical documentation records.
+
+Follow-up: GPUP-2 is ready. Complete and accept draft SPEC-0013 before implementing
+the LP-only measurement harness; freeze its concrete manifests, artifacts,
+analysis and campaign accounting before performance trials. This repair satisfies
+the certification prerequisite and does not implement mixed precision, select a
+recipe, or complete C7/C9/C10.
+
 ## GPU LP Precision Slice 0: Roadmap and Contracts (2026-09-14)
 
 Objective: persist the user-approved GPU LP performance roadmap as a separate,

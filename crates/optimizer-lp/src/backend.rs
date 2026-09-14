@@ -29,7 +29,7 @@ use optimizer_core::{
     Termination, ValidationError, WarmStart, finite_or_absent,
 };
 
-use crate::certify::certify;
+use crate::certify::{assess_gap, certify};
 use crate::pdhg::{Decision, Engine, Iterate, Stop};
 use crate::problem::LinearProgram;
 
@@ -72,6 +72,7 @@ struct Outcome {
     objective: f64,
     feasible: bool,
     bound: Option<f64>,
+    gap: Option<f64>,
     closed: bool,
 }
 
@@ -110,26 +111,20 @@ fn assess(
     // not assume the iteration computed anything correctly.
     let bound = certify(program, &iterate.dual).ok().map(|c| c.bound);
 
-    // Requirement 14: `Optimal` needs a validated candidate and a certified bound
-    // to close. The order matters -- a bound above the incumbent is impossible in
-    // exact arithmetic and is therefore a symptom, so it refuses rather than
-    // closes.
-    let closed = match (report.feasible, bound) {
-        (true, Some(bound)) => {
-            let objective = report.objective;
-            let tolerances = options.tolerances;
-            let scale = objective.abs().max(bound.abs());
-            let gap = objective - bound;
-            gap >= -tolerances.absolute && gap <= tolerances.absolute + tolerances.relative * scale
-        }
-        _ => false,
-    };
+    let gap = report
+        .feasible
+        .then(|| {
+            bound.and_then(|bound| assess_gap(program, &iterate.primal, bound, options.tolerances))
+        })
+        .flatten();
+    let closed = gap.is_some_and(|gap| gap.closed);
 
     Ok(Outcome {
         candidate,
         objective: report.objective,
         feasible: report.feasible,
         bound,
+        gap: gap.map(|gap| gap.upper),
         closed,
     })
 }
@@ -265,7 +260,7 @@ fn record(
     started: Instant,
     settings: LpSettings,
 ) -> SolveRecord {
-    let (objective, bound, candidate, validation) = match outcome {
+    let (objective, bound, gap, candidate, validation) = match outcome {
         Some(outcome) => {
             // Requirement 15: the record's objective is the validation's
             // recomputation, and only when the candidate was accepted. An
@@ -273,9 +268,15 @@ fn record(
             // make a record look like it found something.
             let objective = outcome.feasible.then_some(outcome.objective);
             let report = model.evaluate(&outcome.candidate, options.tolerances).ok();
-            (objective, outcome.bound, Some(outcome.candidate), report)
+            (
+                objective,
+                outcome.bound,
+                outcome.gap,
+                Some(outcome.candidate),
+                report,
+            )
         }
-        None => (None, None, None, None),
+        None => (None, None, None, None, None),
     };
 
     SolveRecord {
@@ -287,15 +288,71 @@ fn record(
         native_status: None,
         objective: objective.and_then(finite_or_absent),
         best_bound: bound.and_then(finite_or_absent),
-        gap: match (objective, bound) {
-            (Some(objective), Some(bound)) => finite_or_absent(objective - bound),
-            _ => None,
-        },
+        gap,
         candidate,
         validation,
         warnings,
         elapsed_ms: started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64,
         options: options.clone(),
         lp_settings: Some(settings),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use optimizer_core::{
+        Bound, Domain, LinearTerm, ModelDocument, Objective, ObjectiveSense, SCHEMA_VERSION,
+        Tolerances, Variable,
+    };
+
+    #[test]
+    fn maximization_closes_a_positive_gap_with_relative_tolerance() {
+        let model = Model::new(ModelDocument {
+            schema_version: SCHEMA_VERSION,
+            model_id: "max-gap".into(),
+            variables: vec![Variable {
+                id: 0,
+                domain: Domain::Continuous,
+                lower: Bound::Finite { value: 0.0 },
+                upper: Bound::Finite { value: 1.0 },
+            }],
+            constraints: vec![],
+            objective: Objective {
+                sense: ObjectiveSense::Maximize,
+                offset: 0.0,
+                terms: vec![LinearTerm {
+                    variable_id: 0,
+                    coefficient: 1.0,
+                }],
+            },
+        })
+        .unwrap();
+        let program = LinearProgram::new(&model).unwrap();
+        let options = SolveOptions {
+            tolerances: Tolerances {
+                absolute: 0.0,
+                relative: 0.1,
+                integrality: 0.0,
+            },
+            schema_version: optimizer_core::SOLVE_SCHEMA_VERSION,
+            seed: 0,
+            time_limit_ms: None,
+            iteration_limit: None,
+            node_limit: None,
+            threads: 1,
+        };
+        let iterate = Iterate {
+            primal: vec![0.95],
+            dual: vec![],
+            iterations: 0,
+            restarts: 0,
+        };
+        let outcome = assess(&model, &program, &iterate, &options).unwrap();
+        assert!(outcome.feasible);
+        assert!(
+            outcome.closed,
+            "0.05 <= 0.1 * 1, with a valid upper bound of 1"
+        );
     }
 }

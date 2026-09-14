@@ -429,6 +429,24 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Fixed
 
+- GPUP-1 repairs host LP certification used by both `host-lp` and `cuda-lp`.
+  Products, fixed-tree sums, reduced costs, variable contributions, and the final
+  bound now carry outward binary64 enclosures. A reduced cost rounded to zero
+  retains uncertainty; an infinite variable side or nonfinite arithmetic that
+  prevents certification yields no bound. The original cancellation reproducer
+  previously returned an invalid zero lower bound.
+- Both first-order backends share a conservative, objective-sense-aware gap check.
+  It encloses the original objective including its offset, fixes maximization gap
+  direction, and prevents objective cancellation or overflowing tolerance arithmetic
+  from producing an optimality claim. LP record gaps remain absolute objective-unit
+  diagnostics, now nonnegative upper enclosures; the reported objective and caller
+  feasibility tolerances retain their existing meanings. Bounds can be weaker or
+  absent when uncertainty prevents a finite certificate.
+- Independent rational fixtures cover 1,083 primitive cases, five reductions,
+  26 certification cases, and 18 gap cases, with native host and leased-device
+  maximization integration tests. See
+  [LP certification arithmetic](docs/architecture/lp-certification.md).
+
 - The branch-and-bound node path no longer performs work it discards. The backend
   extracted an LP basis on every node — computing the model's canonical
   fingerprint, which serializes the whole model — for a value `Backend::solve`

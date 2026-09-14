@@ -32,7 +32,7 @@ use optimizer_core::{
     Termination, ValidationError, WarmStart, finite_or_absent,
 };
 use optimizer_cuda_sys::{Context, DeviceError};
-use optimizer_lp::certify::certify;
+use optimizer_lp::certify::{assess_gap, certify};
 use optimizer_lp::pdhg::Engine;
 use optimizer_lp::problem::LinearProgram;
 
@@ -208,35 +208,29 @@ impl Backend for CudaLpBackend {
         // candidate is validated against the original model and any bound is
         // certified from the model's own coefficients. Nothing the device computed
         // is consulted except the iterate itself.
-        let assess = |primal: &[f64],
-                      dual: &[f64]|
-         -> Option<(Candidate, f64, bool, Option<f64>, bool)> {
-            let candidate = Candidate {
-                schema_version: optimizer_core::SCHEMA_VERSION,
-                model_id: model.document().model_id.clone(),
-                values: program
-                    .variable_ids()
-                    .iter()
-                    .zip(primal)
-                    .map(|(variable_id, value)| optimizer_core::Assignment {
-                        variable_id: *variable_id,
-                        value: *value,
-                    })
-                    .collect(),
+        let assess =
+            |primal: &[f64], dual: &[f64]| -> Option<(Candidate, f64, bool, Option<f64>, bool)> {
+                let candidate = Candidate {
+                    schema_version: optimizer_core::SCHEMA_VERSION,
+                    model_id: model.document().model_id.clone(),
+                    values: program
+                        .variable_ids()
+                        .iter()
+                        .zip(primal)
+                        .map(|(variable_id, value)| optimizer_core::Assignment {
+                            variable_id: *variable_id,
+                            value: *value,
+                        })
+                        .collect(),
+                };
+                let report = model.evaluate(&candidate, options.tolerances).ok()?;
+                let bound = certify(&program, dual).ok().map(|c| c.bound);
+                let closed = report.feasible
+                    && bound
+                        .and_then(|bound| assess_gap(&program, primal, bound, options.tolerances))
+                        .is_some_and(|gap| gap.closed);
+                Some((candidate, report.objective, report.feasible, bound, closed))
             };
-            let report = model.evaluate(&candidate, options.tolerances).ok()?;
-            let bound = certify(&program, dual).ok().map(|c| c.bound);
-            let closed = match (report.feasible, bound) {
-                (true, Some(bound)) => {
-                    let gap = report.objective - bound;
-                    let scale = report.objective.abs().max(bound.abs());
-                    gap >= -options.tolerances.absolute
-                        && gap <= options.tolerances.absolute + options.tolerances.relative * scale
-                }
-                _ => false,
-            };
-            Some((candidate, report.objective, report.feasible, bound, closed))
-        };
 
         let mut closed_early = false;
         let (primal, dual, iterations) = match self.iterate(&program, cancel, |primal, dual| {
@@ -290,16 +284,13 @@ impl Backend for CudaLpBackend {
         };
         let report = model.evaluate(&candidate, options.tolerances)?;
         let bound = certify(&program, &dual).ok().map(|c| c.bound);
-        let closed = closed_early
-            && match (report.feasible, bound) {
-                (true, Some(bound)) => {
-                    let gap = report.objective - bound;
-                    let scale = report.objective.abs().max(bound.abs());
-                    gap >= -options.tolerances.absolute
-                        && gap <= options.tolerances.absolute + options.tolerances.relative * scale
-                }
-                _ => false,
-            };
+        let gap = report
+            .feasible
+            .then(|| {
+                bound.and_then(|bound| assess_gap(&program, &primal, bound, options.tolerances))
+            })
+            .flatten();
+        let closed = closed_early && gap.is_some_and(|gap| gap.closed);
 
         let termination = if closed {
             Termination::Optimal
@@ -321,10 +312,7 @@ impl Backend for CudaLpBackend {
             native_status: None,
             objective: objective.and_then(finite_or_absent),
             best_bound: bound.and_then(finite_or_absent),
-            gap: match (objective, bound) {
-                (Some(objective), Some(bound)) => finite_or_absent(objective - bound),
-                _ => None,
-            },
+            gap: gap.map(|gap| gap.upper),
             candidate: Some(candidate),
             validation: Some(report),
             warnings,

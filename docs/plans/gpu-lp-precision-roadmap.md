@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; slice 0 complete; slices 1-10 pending
+Status: approved roadmap; slices 0-1 complete; slices 2-10 pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: bootstrap (first commit containing this document)
@@ -38,11 +38,12 @@ This track follows C6 but does not complete C7, C9, or the general C10 runner.
 - [ADR-0013](../decisions/ADR-0013-lp-precision-study.md) records the performance
   objective, campaign budget, evidence rules, and separate future directions.
 
-The current host certifier has a confirmed cancellation defect, recorded in
-[known failures](../../state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost).
-It must be repaired before lower precision. A successful existing test suite does
-not establish that this defect is absent. Slice 1 also reviews objective and gap
-arithmetic rather than assuming that every FP64 computation is conservative.
+GPUP-1 repairs the host certifier's cancellation defect, retained in
+[known failures](../../state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost),
+and the objective/gap arithmetic in both LP backends. Independent exact-rational
+regressions establish the repair before lower precision; the ordinary objective
+and tolerance-based feasibility report retain their existing meanings. See
+[the arithmetic argument and limitations](../architecture/lp-certification.md).
 
 ## Implementation slices
 
@@ -192,6 +193,7 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Next handoff after GPUP-0: reproduce and repair the certification defect under
-GPUP-1. Full MILP integration and repeated-solve throughput are separately listed in
+Next handoff after GPUP-1: finalize the experiment contract and establish the
+measurement infrastructure under GPUP-2. Full MILP integration and repeated-solve
+throughput are separately listed in
 the backlog; neither follows automatically from a faster LP kernel.

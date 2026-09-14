@@ -51,29 +51,32 @@ pub enum ReductionOrder {
 /// changes no bit of the result while removing the length from the tree shape.
 #[must_use]
 pub fn tree_sum(values: &[f64]) -> f64 {
-    if values.is_empty() {
-        return 0.0;
-    }
-    let mut level: Vec<f64> = values.chunks(SEGMENT).map(reduce_segment).collect();
-    while level.len() > 1 {
-        level = level.chunks(SEGMENT).map(reduce_segment).collect();
-    }
-    level[0]
+    tree_reduce(values, 0.0, |left, right| left + right)
 }
 
-/// Reduce one segment of at most [`SEGMENT`] values by the fixed tree.
-fn reduce_segment(segment: &[f64]) -> f64 {
-    debug_assert!(segment.len() <= SEGMENT);
-    let mut buffer = [0.0f64; SEGMENT];
-    buffer[..segment.len()].copy_from_slice(segment);
-    let mut stride = SEGMENT / 2;
-    while stride >= 1 {
-        for index in 0..stride {
-            buffer[index] += buffer[index + stride];
-        }
-        stride /= 2;
+/// The shared partition/tree, also used for outward host certification.
+/// The combine operation changes; indices and padding do not.
+pub(crate) fn tree_reduce<T: Copy>(values: &[T], zero: T, combine: impl Fn(T, T) -> T + Copy) -> T {
+    if values.is_empty() {
+        return zero;
     }
-    buffer[0]
+    let segment = |values: &[T]| {
+        let mut buffer = [zero; SEGMENT];
+        buffer[..values.len()].copy_from_slice(values);
+        let mut stride = SEGMENT / 2;
+        while stride >= 1 {
+            for index in 0..stride {
+                buffer[index] = combine(buffer[index], buffer[index + stride]);
+            }
+            stride /= 2;
+        }
+        buffer[0]
+    };
+    let mut level: Vec<T> = values.chunks(SEGMENT).map(segment).collect();
+    while level.len() > 1 {
+        level = level.chunks(SEGMENT).map(segment).collect();
+    }
+    level[0]
 }
 
 /// Sum `values` left to right, sharing no order with the kernel.

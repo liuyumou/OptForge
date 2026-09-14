@@ -6,7 +6,7 @@ Owner: numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: bootstrap (first commit containing this document)
 Supersedes: none while draft; ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
-Implementation: pending GPUP-1 and GPUP-3 through GPUP-8
+Implementation: GPUP-1 repairs the existing SPEC-0011 backend; mixed precision pending GPUP-3 through GPUP-8
 Tests: planned requirement mapping below; no new runtime coverage in slice 0
 
 ## Purpose
@@ -207,9 +207,12 @@ showing a command that does not work in slice 0.
 
 ## Acceptance tests
 
-All tests below are planned, not yet implemented. Each implementing slice must
-replace planned labels with named tests/evidence; numerical tests use independent
-oracles or able-to-fail injections rather than mirroring the implementation.
+GPUP-1's existing-backend prerequisite is implemented with
+[exact certificate/gap regressions](../../crates/optimizer-lp/tests/certification.rs)
+and the [numerical argument](../architecture/lp-certification.md). The mixed-precision
+acceptance below remains planned. Each implementing slice must replace planned
+labels with named tests/evidence; numerical tests use independent oracles or
+able-to-fail injections rather than mirroring the implementation.
 
 | Requirements | Planned assertion | Slice |
 | --- | --- | --- |
@@ -230,6 +233,7 @@ The fastest format, scale, block size, state precision, and recovery policy are
 hypotheses to resolve experimentally, not missing defaults to invent during coding.
 Exact wire schemas, memory/work-limit precedence, supported-format tables, and
 rounding/scale corner-case algorithms must be completed before the corresponding
-runtime slice. GPUP-1 must settle the numerical certification argument first.
+runtime slice. GPUP-1 supplies the conservative certification prerequisite; its
+limits remain part of future performance comparisons.
 This draft does not assert a PDHG convergence theorem for stochastic rounding or
 low-precision operators, or support for unmeasured Tensor Core instructions.

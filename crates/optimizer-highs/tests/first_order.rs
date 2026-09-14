@@ -611,3 +611,54 @@ fn no_assertion_in_this_suite_depends_on_a_measured_time() {
         }
     }
 }
+
+/// GPUP-1: a positive maximization gap can close under relative tolerance.
+#[test]
+fn a_maximization_solve_reports_a_conservative_positive_gap() {
+    let backend = HostLpBackend::new(LpSettings::published(1, 1)).unwrap();
+
+    let model = Model::new(ModelDocument {
+        schema_version: optimizer_core::SCHEMA_VERSION,
+        model_id: "max-positive-gap".into(),
+        variables: vec![Variable {
+            id: 0,
+            domain: Domain::Continuous,
+            lower: finite(0.0),
+            upper: finite(1.0),
+        }],
+        constraints: vec![Constraint {
+            id: 0,
+            lower: finite(0.0),
+            upper: finite(1.0),
+            terms: vec![LinearTerm {
+                variable_id: 0,
+                coefficient: 1.0,
+            }],
+        }],
+        objective: Objective {
+            sense: ObjectiveSense::Maximize,
+            offset: 0.0,
+            terms: vec![LinearTerm {
+                variable_id: 0,
+                coefficient: 1.0,
+            }],
+        },
+    })
+    .unwrap();
+    let mut options = options();
+    options.tolerances.absolute = 0.0;
+    options.tolerances.relative = 0.75;
+    let result = backend
+        .solve(&model, &options, &CancellationToken::new(), None)
+        .unwrap();
+    assert_eq!(result.termination, Termination::Optimal);
+    assert!(result.validation.as_ref().unwrap().feasible);
+    assert!(
+        result.objective.unwrap() < 1.0,
+        "must exercise a nonzero gap"
+    );
+    assert!(result.best_bound.unwrap() >= 1.0);
+    let gap = result.gap.unwrap();
+    assert!(gap > 0.0 && gap <= 0.75);
+    assert!(gap >= result.best_bound.unwrap() - result.objective.unwrap());
+}
