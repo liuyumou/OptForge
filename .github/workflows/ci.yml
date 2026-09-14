@@ -42,7 +42,11 @@ jobs:
         run: |
           rustup show
           python3 -m pip install -r tools/requirements.txt
-          cargo install cargo-deny --version 0.19.0 --locked
+          # The cache restores bin/ without Cargo's install metadata. Reuse
+          # the verified pin; --force also repairs an unregistered stale binary.
+          if [ "$(cargo deny --version 2>/dev/null)" != "cargo-deny 0.19.0" ]; then
+            cargo install cargo-deny --version 0.19.0 --locked --force
+          fi
       - name: CPU acceptance gate
         run: bash tools/check.sh
       - uses: actions/upload-artifact@v4

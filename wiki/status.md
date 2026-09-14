@@ -11,9 +11,16 @@ evidence is recorded in [active task](../state/active-task.md).
 | --- | --- |
 | Implemented | A backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | Adaptive research (C7), Python SDK (C9), comparative runner (C10) |
+| Planned | Prioritized GPU LP precision track (GPUP-2 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); repeated-solve throughput and full MILP performance are later tracks |
 | Experimental | None enabled |
 | Deprecated | None |
+
+GPUP-0 has saved the [precision roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
+draft specifications, design ADRs, and dependency-ordered tasks. GPUP-1 repairs
+host certification and objective/gap arithmetic in both LP backends, with independent
+exact-rational regressions. GPUP-2, measurement infrastructure, is next. No mixed-precision implementation or
+experiment recipe is available yet; the future single-solve study is capped at
+eight GPU-hours. Slice evidence remains in the active-task record.
 
 Solve records recompute objectives and violations independently of the backend. A
 backend optimality claim holds under the recorded numerical settings; it is not an
@@ -28,7 +35,7 @@ not a process abort. A search is recorded with the revision, model fingerprint
 and input hashes needed to repeat it, and verification re-runs that search from
 the record alone rather than trusting its stored result; agreement establishes
 determinism on one host, never optimality, and a forfeited search stays forfeited
-after it verifies. No Python SDK, CUDA kernel, dynamically
+after it verifies. No Python SDK, mixed-precision LP backend, dynamically
 loaded native extension, checkpoint restart or comparative experiment runner is
 available, cross-host reproducibility is untested, and no solver performance
 claim is made.
@@ -64,7 +71,10 @@ cannot solve its model is refused rather than answered. Neither grants a device 
 mathematical authority. A device-produced candidate is validated against the original
 model like any other, and an approximate LP iterate becomes a dual bound only through
 a host-side certification that treats the device's output as an untrusted guess; a
-bad guess yields a weak bound, never an invalid one.
+bad guess is required to yield a weak bound or no bound, never an invalid one.
+GPUP-1 repairs the [reduced-cost cancellation defect](../state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)
+with outward arithmetic and a shared, sense-aware objective/gap check. See the
+[numerical argument and conservative limits](../docs/architecture/lp-certification.md).
 
 Both are implemented. Two kernels evaluate
 flow-shop schedules in 32-bit integer arithmetic and agree with the host recurrence

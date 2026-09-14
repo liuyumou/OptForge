@@ -85,3 +85,18 @@ command fails with an `unsupported:` diagnostic rather than reporting a solve.
 See the [backend contract](../specifications/SPEC-0002-backend-contract.md) for
 the normative requirements and [model validation](model-validation.md) for the
 candidate report format.
+## Reading a first-order LP bound and gap
+
+For `host-lp` and `cuda-lp`, a bound is computed on the host from the original
+model with outward rounding. Uncertain reduced costs on an infinite variable side
+can leave the bound absent even for a bounded LP. That is a certification refusal,
+not a proof that the model is unbounded.
+
+The objective field remains the core's ordinary binary64 recomputation. Gap
+closure additionally encloses objective rounding and respects minimization versus
+maximization. The LP `gap` field is a nonnegative conservative upper bound in
+absolute objective units, so it need not equal subtraction of the rounded objective
+and bound fields. HiGHS instead reports its relative MIP gap. A missing gap or a
+small diagnostic alone never establishes optimality; consult the termination and
+validation fields under the recorded tolerances. See
+[the arithmetic argument and limitations](../architecture/lp-certification.md).

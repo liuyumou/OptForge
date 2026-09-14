@@ -1,6 +1,11 @@
 schema_version: 1
 current_milestone: C7
 next_ready_milestone: C7
+# Capability milestones stay numbered as before. The user prioritized this
+# separate research track before C7 behavior; next_ready_task selects its slice.
+active_research_track: GPUP
+next_ready_task: GPUP-2
+research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: M0
     title: Repository and process bootstrap
@@ -98,7 +103,86 @@ tasks:
     status: planned
     depends_on: [C8]
     acceptance: "Comparative records over a frozen manifest with per-instance provenance and no aggregate score"
+  # Execute one GPUP slice at a time. Draft specifications must be accepted
+  # before the behavior they own; GPUP-1 repairs the existing SPEC-0011 contract.
+  - id: GPUP-0
+    title: Persist GPU LP roadmap and draft contracts
+    status: complete
+    depends_on: [C6, C8]
+    specification: docs/plans/gpu-lp-precision-roadmap.md
+    acceptance: "Full native gate; documentation links; requirement-to-test and dependency mapping; zero GPU work"
+  - id: GPUP-1
+    title: Repair LP certification and review objective and gap arithmetic
+    status: complete
+    depends_on: [GPUP-0]
+    specification: docs/specifications/SPEC-0011-gpu-lp-backend.md
+    acceptance: "Independent exact-arithmetic cancellation, uncertain-sign, infinite-bound and objective-sense regressions; full native gate"
+  - id: GPUP-2
+    title: Establish bounded LP experiment infrastructure and baseline evidence
+    status: ready
+    depends_on: [GPUP-1]
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "Accept experiment contract and freeze manifests first; strict artifacts, independent endpoints, budget ledger, baseline bottleneck report"
+  - id: GPUP-3
+    title: Create shared resumable FP64 controller and reference
+    status: planned
+    depends_on: [GPUP-2]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "Accept numerical contract first; whole trajectories, restart/history checkpoints, cancellation and work accounting"
+  - id: GPUP-4
+    title: Optimize FP64 residency and sparse execution
+    status: planned
+    depends_on: [GPUP-3]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "Isolated residency, transfer, kernel and fusion measurements; numerical and device gates"
+  - id: GPUP-5
+    title: Implement FP32 storage, computation and working-state comparisons
+    status: planned
+    depends_on: [GPUP-4]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "Versioned interface acceptance; original-model checks; range diagnostics; convergence and total-cost comparison"
+  - id: GPUP-6
+    title: Implement configurable audits and adaptive precision recovery
+    status: planned
+    depends_on: [GPUP-5]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "Fault-injected full rollback, reference correction, charged retries, cancellation, sticky promotion and guarded demotion"
+  - id: GPUP-7
+    title: Implement quantization candidates and sparse FP8 execution
+    status: planned
+    depends_on: [GPUP-6]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "Quantizer boundary tests; identical represented transpose; guarded operands; seeded replay; numerical screening"
+  - id: GPUP-8
+    title: Implement hybrid sparse and Tensor Core single-solve execution
+    status: planned
+    depends_on: [GPUP-7]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "Hardware/layout refusal; differential kernels, repeatability, sanitizers; packing and padding-inclusive comparisons"
+  - id: GPUP-9
+    title: Run controlled precision experiments and ablations
+    status: planned
+    depends_on: [GPUP-8]
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "Frozen finalists and held-out evaluation; interactions, negative results, uncertainty and coverage; eight GPU-hour campaign ledger"
+  - id: GPUP-10
+    title: Package evidence-supported precision recipes
+    status: planned
+    depends_on: [GPUP-9]
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "Preset evidence and decision record; reproducible report and tutorials; full gates; no promotion from incomplete evidence"
+  - id: GPUP-THROUGHPUT
+    title: Repeated-solve throughput with explicit matrix and device reuse
+    status: planned
+    depends_on: [GPUP-10]
+    acceptance: "Separate specification, API and resource budget before implementation; amortized throughput plus setup-cost evidence"
+  - id: GPUP-MILP
+    title: Full MILP search integration and end-to-end performance study
+    status: planned
+    depends_on: [GPUP-10]
+    acceptance: "Separate integration specification and budget; pruning authority and proof preservation; full integer-search timing"
 research_phases:
+  - "Priority GPUP track: certified single-solve latency; eight GPU-hour initial study; see research_roadmap and next_ready_task"
   - "Adaptive portfolios and bounded agent-generated candidate/search advisers"
   # SPEC-0011 keeps this ordering in substance rather than skipping it: the CPU
   # first-order method is built first and is what the device kernels are checked

@@ -1,5 +1,225 @@
 # Active Task
 
+## GPUP-0/1 PR Review and Integration (2026-09-14)
+
+Objective: review the roadmap and certification repair, publish one PR preserving
+both slice commits, record the review, merge through GitHub after acceptance,
+synchronize local main, and remove the two completed branches. The maintainer
+explicitly authorized publication, self-review, merge, and branch cleanup.
+
+Status: numerical review and local acceptance complete; final PR CI and merge
+pending. Base main is ee2d4fe; reviewed implementation is 61c53f4,
+which includes roadmap commit f28bf0e. No later precision slice is in scope.
+
+Acceptance gate: numerical proof and caller review; full pinned-native CPU gate;
+finish the previously incomplete broad GPU sanitizer coverage if the bounded
+integration allocation permits, otherwise explicitly assess the existing scoped
+coverage; successful PR CI; remote merge confirmation and clean synchronized main
+before branch deletion. GitHub author self-approval restrictions must be respected;
+record the review without changing branch protections if formal approval is refused.
+
+Resource budget: at most 30 minutes CPU gate wall time with four Cargo build jobs
+and 30 minutes additional GPU acceptance on one device under the shared host lease,
+sequentially with the CPU gate. Profiling and performance trials remain out of scope;
+the eight GPU-hour research campaign is unspent. Likely files: active task, known
+failures/publication state, and review evidence; runtime changes only for review
+findings, with a fresh gate before publication.
+
+
+Review evidence: checked the finite enclosure primitives, concave variable-bound
+contributions, row repair, objective-sense conversion, conservative tolerance
+arithmetic, both backend callers, and the shared reduction tree. The independent
+Fraction oracle evaluates the stored coefficients without copying the interval
+algorithm. No blocking numerical or contract finding was identified. Original-model
+feasibility remains tolerance-based, and interval dependency can weaken/refuse a
+certificate; neither limitation is hidden by the gap result. No runtime edit was
+needed. The two original slice commits remain separate.
+
+The fresh full CPU gate passed (23.30 seconds, pinned native HiGHS covered), with
+390 Rust tests, 76 Python tests and 62 documentation pages. A GPU launch without
+the provisioned Rust PATH failed before device work (0.08 seconds). The next run
+failed from CUDA context allocation on the busy RTX 5090 (4.31 seconds); both
+5090s had approximately 30 GiB allocated by other activity. Those processes were
+left untouched. Remaining acceptance moved to the idle RTX PRO 6000 Blackwell,
+UUID GPU-6721b13a-30f9-83ec-dace-ba2d9738556f, under the same host-wide lock and
+remaining total budget. A temporary sanitizer wrapper adds --error-exitcode 99;
+no test counts, timeouts inside tests, or numerical thresholds were reduced.
+
+Publication readiness: the reviewed slice commits were pushed to
+codex/fix-lp-certification through SSH. The maintainer completed GitHub CLI browser
+login, enabling API access as liuyumou. Main is not protected; merge settings and
+protections will remain unchanged. [PR #1](https://github.com/liuyumou/OptForge/pull/1)
+is open as a draft; its review is prepared locally. Both documentation and benchmark
+smoke CI passed. CPU CI is held by the tooling-cache finding below.
+
+Integration finding: the first remote CPU CI run failed before acceptance during
+cargo-deny installation (run 34859538269, job 104027791392). The Cargo cache restores
+bin/ but not Cargo installation metadata, so reinstalling reports "binary
+cargo-deny already exists in destination". Bounded correction: verify the cached
+binary reports exactly cargo-deny 0.19.0; reuse that version, otherwise install the
+same pinned locked package with --force. No toolchain or dependency version changes.
+The final local gate and remote CI must pass after this workflow edit.
+
+Sanitizer scope decision before the remaining runs: the broad PRO 6000 job was
+stopped after 1,294.10 seconds during the existing atomic-reduction negative-control
+stress case under racecheck. The 20,000-iteration publication test had completed
+successfully under racecheck; the original Slice 1 coverage gap at that case is
+therefore narrowed. The entire broad job is still not a completed gate. Use the
+remaining total allocation for all three full initcheck and synccheck suites,
+both non-LP full racecheck suites, and the 11 other LP racecheck cases (excluding
+the already-observed publication case and the unfinished atomic stress case).
+Keep error-exitcode 99 and every test's internal settings unchanged. Review accepts
+this explicit sanitizer coverage for a host-only arithmetic repair with unchanged
+kernels and prior scoped coverage on RTX 5090; it does not waive a known numerical
+failure or claim the entire broad sanitizer gate passed.
+
+Final device evidence: the nine supplemental invocations all passed with exit 0
+in 251.97 seconds. Full initcheck and synccheck each ran 13 LP, six scheduling,
+and 14 CUDA tests with zero errors. The completed racecheck invocations ran 11 LP,
+six scheduling, and 14 CUDA tests with zero errors and warnings; only the LP
+invocation filtered the two explicitly named cases above. Together with all
+regular device suites, all three full memcheck suites, the observed long publication
+test completion under racecheck, and the prior RTX 5090 scoped checks, this is the
+accepted coverage. The unfinished atomic negative-control racecheck remains a
+known acceptance limit, not a full broad-gate pass. No device test silently skipped.
+
+Total additional GPU acceptance: 1,550.46 seconds including both failed launches,
+the stopped broad job, and supplemental checks; within 1,800 seconds. No CPU gate
+overlapped GPU acceptance, and the performance campaign remains unspent. Logs:
+/tmp/gpup-pr-cpu.log, /tmp/gpup-pr-gpu-launch-failure.log,
+/tmp/gpup-pr-gpu-5090-oom.log, /tmp/gpup-pr-gpu.log, and
+/tmp/gpup-pr-remaining-sanitizers.log, with timing summary JSON siblings. These are
+ephemeral acceptance diagnostics. Reproduction and scope are recorded in
+[LP certification arithmetic](../docs/architecture/lp-certification.md).
+
+Final local acceptance after the CI/documentation edits: bash tools/check.sh passed
+with pinned native HiGHS 1.11.0, 390 Rust tests, 76 Python tests, and 62 documentation
+pages (23.53 seconds; /tmp/gpup-pr-cpu-final.log and its timing summary). The CI setup
+shell passed bash syntax validation, and the cached-tool guard's version string was
+checked against the actual pinned binary. The original runtime and CUDA files are
+unchanged from 61c53f4. PR CI, review publication, merge, and cleanup follow this
+accepted local tree; their final outcome will be recorded after verification.
+
+## GPU LP Precision Slice 1: Conservative Certification (2026-09-14)
+
+Objective: reproduce and repair the zero-reduced-cost cancellation defect, bound
+rounding uncertainty conservatively through certification, and review objective/gap
+arithmetic and minimization/maximization termination in both first-order backends.
+
+Status: complete. GPUP-0 is complete; this is GPUP-1 only.
+
+Acceptance gate: independent exact-arithmetic regressions, the full
+`bash tools/check.sh` gate with pinned native HiGHS, and the device acceptance and
+sanitizer gate if the shared host-side change reaches device integration. Resource
+budget: up to 60 minutes CPU gate/test wall time with four Cargo build jobs; up to
+15 minutes GPU acceptance under the shared host lease on one device, sequentially
+with the CPU gate. No performance study jobs; the eight-hour campaign remains
+unspent. No GPU kernel or iteration arithmetic change is planned.
+
+Likely files: optimizer-lp certification, a private outward-arithmetic helper,
+shared objective/gap assessment, host/device backend integration, regression
+fixtures and exact validation tooling, SPEC-0011, numerical documentation,
+changelog, known failures, roadmap and backlog. No new runtime dependency or
+unsafe boundary is authorized. Existing caller tolerances remain unchanged.
+
+Evidence (2026-09-14): the rounded-zero and free-variable regressions both failed
+against the old certifier, which returned bound 0 and allowance 0. The separate
+maximization gap regression also failed before repair. All now pass. The rational
+oracle covers 1,083 primitive arithmetic cases, five fixed-tree sums (including a
+multi-segment sum), 26 certificate cases, and 18 objective/gap cases; the Python
+integration gate independently regenerates the fixture from exact Fractions.
+
+The final `bash tools/check.sh` passed, exit 0: pinned native HiGHS 1.11.0,
+390 Rust tests, 76 Python tests, artifact/provenance validation, committed-record
+re-execution, and 62 documentation pages. The final gate took 27.46 seconds; both full CPU gates stayed within the
+declared allocation and ran sequentially with GPU acceptance.
+No runtime dependency, GPU kernel, original-model coefficient, caller tolerance,
+experiment seed/split, or solver default changed.
+
+Device evidence: RTX 5090, UUID GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48,
+driver 580.105.08, provisioned CUDA 13.0 code objects. All three regular device
+suites passed, including the new maximization case and existing bitwise iteration
+comparisons. All three full memcheck runs reported zero errors. The broad
+`tools/gpu_check.sh` sanitizer invocation was explicitly stopped during the
+existing 20,000-iteration publication test under racecheck; **the full broad
+sanitizer gate did not complete and is not claimed as passed**.
+
+Bounded replacement coverage: memcheck, racecheck, initcheck, and synccheck each
+ran the new one-iteration maximization integration, the existing 400-iteration
+CPU/GPU bitwise comparison, and the wide-row differential case. All 12 scoped
+runs reported one executed passing test and zero errors, with no skips. The
+scoped commands set `--error-exitcode 99` and retained the existing test iteration
+counts/thresholds. This is the relevant sanitizer coverage for unchanged kernels
+with repaired host-side certification/gap arithmetic; reproduction commands are
+in docs/architecture/lp-certification.md.
+
+The stopped broad job consumed 499.99 seconds and the scoped checks 59.74 seconds:
+559.73 seconds total acceptance wall time, within the 900-second allocation,
+on one device under the shared host lease. Performance campaign consumption is
+zero. Local logs and machine-readable timing summaries are in
+`/tmp/gpup-1-cpu-final.log`, `/tmp/gpup-1-gpu-acceptance.log`, and
+`/tmp/gpup-1-scoped-sanitizers.log` with sibling summary JSON files. These are
+ephemeral acceptance diagnostics, not retained performance artifacts.
+
+Resolution: certification carries outward enclosures through original-model
+products, reductions, reduced costs, variable contributions, and the final sum.
+Both LP backends use the shared outward objective/gap check, including sense
+conversion and conservative finite tolerance arithmetic. Certificate fields stay
+compatible; LP record gaps remain absolute objective-unit diagnostics, now
+nonnegative conservative upper bounds. Feasibility and reported objective values
+retain their existing tolerance-based meanings. Interval dependency and overflow
+can weaken or prevent a certificate, as the numerical documentation records.
+
+Follow-up: GPUP-2 is ready. Complete and accept draft SPEC-0013 before implementing
+the LP-only measurement harness; freeze its concrete manifests, artifacts,
+analysis and campaign accounting before performance trials. This repair satisfies
+the certification prerequisite and does not implement mixed precision, select a
+recipe, or complete C7/C9/C10.
+
+## GPU LP Precision Slice 0: Roadmap and Contracts (2026-09-14)
+
+Objective: persist the user-approved GPU LP performance roadmap as a separate,
+dependency-ordered research track, draft its numerical and experiment contracts,
+and record the prerequisites before any new arithmetic is implemented.
+
+Status: complete. This slice changes documentation and task state only.
+
+Acceptance gate: `bash tools/check.sh` with the pinned native HiGHS build,
+documentation link/anchor validation, and a manual requirement-to-test and backlog
+dependency review. Resource budget: CPU only, at most 30 minutes of gate wall time
+with four Cargo build jobs; zero GPU work. The first later experiment campaign has
+an eight GPU-hour cap, not a budget consumed by this documentation slice.
+
+Likely files: the new roadmap under `docs/plans/`, two draft specifications,
+arithmetic/reproducibility and experiment ADRs, project navigation, benchmark
+protocol, changelog, backlog, and known failures. Existing runtime behavior,
+experiment seeds, splits, thresholds, and solver defaults remain unchanged.
+
+Acceptance evidence (2026-09-14): `bash tools/check.sh` passed, exit 0, with
+pinned native HiGHS 1.11.0, 380 Rust tests, 72 Python tests, artifact/provenance
+validation, committed-record re-execution, and 61 documentation pages with valid
+local links/anchors. The gate completed within the 30-minute CPU wall-time budget;
+GPU jobs and GPU campaign consumption: zero. The full local gate log is
+`/tmp/gpup-0-acceptance.log` (ephemeral, not a retained benchmark artifact).
+
+Supplemental review checked all 38 SPEC-0012 and 35 SPEC-0013 numbered requirements
+against their planned acceptance mappings, unique backlog identities and ordered
+dependencies, the campaign allocation sum (28,800 GPU seconds), and the exact
+rational objective in the cancellation counterexample. These are documentation
+and planning checks; none is recorded as runtime precision or performance evidence.
+No runtime source, schema, dependency, experiment manifest, seed, threshold, or
+default changed. ADR-0012 and ADR-0013 accept design decisions; SPEC-0012 and
+SPEC-0013 remain drafts requiring completion before their implementation slices.
+
+Follow-up: GPUP-1 is ready under the existing SPEC-0011 certification contract.
+Reproduce the recorded cancellation case with an independent exact-arithmetic
+fixture; repair conservative reduced-cost/contribution handling including uncertain
+signs and infinite bounds; review objective/gap rounding and objective-sense
+conversion; run the full gate and record evidence before any lower precision.
+The known-failure entry remains open. GPUP-2 then finalizes and accepts the LP
+experiment contract before implementing measurement. C7/C9/C10 remain planned,
+and repeated-solve throughput and full MILP performance are separate future tasks.
+
 ## C6 Clean-Checkout Verification and Local Integration (2026-09-13)
 
 Objective: verify C6 from a checkout with nothing prebuilt before integrating it, as

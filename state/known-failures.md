@@ -1,5 +1,85 @@
 # Known Failures and Limitations
 
+## LP certification can lose the roundoff allowance at zero reduced cost
+
+Resolved by GPUP-1 on 2026-09-14. Discovered during the GPU LP precision design
+review and preserved by GPUP-0, this affected the shared host certification used
+by both host-lp and cuda-lp, independently of future quantization. The original
+counterexample below is retained for reproduction against the previous revision.
+
+The previous variable loop in `crates/optimizer-lp/src/certify.rs` used bound zero
+when a computed reduced cost rounded to zero, then multiplied the reduced-cost
+error allowance by that chosen bound. The reduced cost can be nonzero in exact arithmetic
+over the stored binary64 coefficients, so the required allowance is lost.
+
+Reproducer (continuous variables, equality constraint):
+
+```text
+minimize 0.1*x1 + 0.30000000000000004*x2
+subject to x1 + 3*x2 = 0
+-3e16 <= x1 <= 3e16
+-1e16 <= x2 <= 1e16
+dual multiplier y = [0.1]
+feasible candidate x = [3e16, -1e16]
+```
+
+The pre-repair built-library diagnostic returned bound 0 with allowance 0. The
+candidate passes the existing feasibility check; ordinary FP64 objective evaluation
+reports -0.5. Exact rational evaluation of the *stored binary64* coefficients at
+that candidate is `-152587890625/549755813888`, approximately
+-0.27755575615628914. Thus zero is an invalid lower bound even for a finite boxed
+model; the ordinary objective's -0.5 also illustrates why objective/gap arithmetic
+needs review. These values are a correctness counterexample, not timing evidence.
+
+Resolution: [GPUP-1](../docs/plans/gpu-lp-precision-roadmap.md#implementation-slices)
+replaces the scalar allowance estimate with finite outward enclosures for every
+product, reduction, reduced cost, bound contribution, and final sum. Uncertain
+signs use both variable-bound sides; an unusable infinite side yields no finite
+certificate. Exact zero remains usable even for a free variable. Both backends
+share an outward objective/gap check with the correct maximization direction and
+finite conservative tolerance arithmetic. The reported objective and the existing
+feasibility tolerance policy are unchanged.
+
+Evidence is in [active task](active-task.md). The original cancellation and free
+variable cases failed before the repair. Independent rational fixtures and the full
+native CPU gate cover the numerical contract. Integration acceptance added all
+regular device suites; full memcheck, initcheck, and synccheck for all three suites;
+full racecheck for CUDA/scheduling; and 11 LP racecheck cases, all with zero errors.
+The long publication case completed in an earlier partial racecheck run. The broad
+run was subsequently stopped during the existing atomic-reduction negative-control
+stress case. That stress case remains an explicit sanitizer coverage limit accepted
+in the integration review for unchanged kernels; the full broad gate is not claimed
+as passed. The original RTX 5090 scoped sanitizer evidence remains valid. No GPU
+kernel or experimental precision mode changed.
+
+Remaining limit: outward enclosures can be wider than necessary because they lose
+correlations. A finite boxed model may refuse certification after intermediate
+overflow, and uncertainty can prevent certification on an infinite side even when
+the exact reduced cost is zero. This is a conservative refusal, not a proof that
+the LP is unbounded. Feasibility and the objective field remain tolerance-based
+binary64 computations, not exact-rational primal certificates. See
+[the numerical argument](../docs/architecture/lp-certification.md).
+
+## GPU LP precision experiments and recipes are not implemented
+
+The user approved the [GPUP roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
+with single-solve latency as the primary objective and an eight GPU-hour first
+campaign. GPUP-0 records the roadmap and drafts; GPUP-1 repairs the existing
+certification and gap calculations. There is no
+`cuda-lp-quantized` backend, precision-settings schema, study harness, frozen LP
+study partition, measured winning recipe, or supported new preset yet. Draft
+SPEC-0012/SPEC-0013 must be completed and accepted before their behavior is added.
+The generic C10 comparative runner remains unspecified and is not implemented by
+this LP-only study. Existing Taillard timing/structure observations are development
+diagnostics and cannot be relabeled held-out validation.
+
+Next: follow the dependency chain in [the backlog](backlog.yaml). Record each
+slice's gates and resource use separately. Certification repair is complete;
+establish measurement before performance claims and preserve unsuccessful trials and
+negative results. The approved direction permits evaluating formats/scales/rounding;
+it does not preselect FP8 or Tensor Cores as the final recipe. Repeated-solve
+throughput and full MILP search performance need separate specifications and budgets.
+
 No known implementation failure has been accepted as a waived gate.
 
 ## Source planning references
@@ -16,13 +96,14 @@ The origin remote is https://github.com/liuyumou/OptForge.git. Protected main,
 labeled GPU runner provisioning, and artifact retention still require hosting
 administration. Next step: configure these settings separately from Git syncing.
 
-Publication state, because several earlier records state the opposite and were
-true when written: the work through `dfdc245` — every milestone up to and
-including C8 — has been pushed to origin by the maintainer. Records dated before
-that push describe main as unpushed pending authorization; that was accurate at
-the time and is left as written rather than backdated. Anything after `dfdc245`
-is local until the maintainer pushes it, and AGENTS.md's prohibition on
-publishing without authorization is unchanged.
+Publication state (verified 2026-09-14): origin/main and local main both contain
+C6 through `ee2d4fe`. Earlier entries describing commits after `dfdc245` as local
+were accurate when written and remain historical evidence. The maintainer has
+now authorized the GPUP-0/1 PR, review, merge, and branch cleanup. Those slice
+commits are published on the certification branch and are under review in
+[PR #1](https://github.com/liuyumou/OptForge/pull/1); see
+[active task](active-task.md) for current integration progress.
+AGENTS.md's prohibition on publishing without authorization is unchanged.
 
 ## No dispatch threshold is committed, for either specification
 

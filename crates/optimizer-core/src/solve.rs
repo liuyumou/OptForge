@@ -392,7 +392,9 @@ pub struct SolveRecord {
     /// Best proven bound, when the backend supplied a finite one.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub best_bound: Option<f64>,
-    /// Relative gap, when finite.
+    /// Backend gap diagnostic, when finite: HiGHS reports its relative MIP gap;
+    /// the first-order LP backends report a conservative absolute objective gap.
+    /// This field alone establishes no optimality claim.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub gap: Option<f64>,
     /// Accepted incumbent in original variable IDs.

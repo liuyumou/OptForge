@@ -4,7 +4,7 @@ Status: accepted
 Scope: backend capability declaration on the solve contract, the first-order LP method, and its certification
 Owner: numerical backend
 Introduced: C6
-Last reviewed commit: 7ec4f53
+Last reviewed commit: 61c53f432fc4ef28e2481f153b16d28b25d3375b (GPUP-0/1 integration review)
 Supersedes: none; extends SPEC-0002 with a capability declaration
 Implementation: [optimizer-core capability declaration](../../crates/optimizer-core/src/capability.rs), [the first-order method and its certification](../../crates/optimizer-lp/src/), [the device kernels](../../cuda/lp_pdhg/lp_pdhg.cu) and [the device backend](../../crates/optimizer-lp-cuda/src/)
 Tests: [first-order acceptance](../../crates/optimizer-highs/tests/first_order.rs), [device acceptance](../../crates/optimizer-lp-cuda/tests/device.rs), [run surface](../../crates/optimizer-cli/tests/solve.rs) and [settings schema contracts](../../tests/integration/test_solve_artifacts.py)
@@ -16,8 +16,8 @@ programs with a first-order method whose kernels run on a device, and it produce
 approximate primal and dual iterates. This contract fixes what such a backend may
 claim, which is much less than what it computes: an approximate solution becomes a
 candidate or a warm start by default, and becomes a dual bound only through a
-host-side certification procedure that is exact in `f64` and independent of the
-device.
+host-side certification procedure with conservative outward `f64` bounds,
+independent of the device. Binary64 arithmetic itself is not exact.
 
 It also adds the concept the backend contract has never needed: a capability
 declaration. With one backend, "what can this solve" was answered by the single
@@ -99,10 +99,21 @@ was found, which is the property this contract rests on.
 13. A certified bound MUST be valid even when the iterate is far from optimal. A
     procedure that can only produce a bound from a near-optimal iterate is an
     optimality test, not a certification.
+13a. Certification MUST enclose rounding in products, reductions, reduced costs,
+    variable contributions, and the final sum. A reduced cost rounded to zero MUST
+    NOT erase sign uncertainty. If its enclosure requires an infinite variable
+    bound, certification MUST refuse a finite result, without claiming the LP itself
+    is unbounded. Nonfinite arithmetic MUST refuse certification.
 14. `Termination::Optimal` MUST be returned only when a certified bound and a
     candidate already validated by `Model::evaluate` close to within the caller's
     tolerances. Every other outcome MUST use an existing termination that does not
     claim a proof.
+14a. Gap closure MUST use an outward enclosure of the original-model objective,
+    including its offset, and a gap directed by the objective sense. Objective
+    rounding uncertainty MUST NOT be hidden by the reported nearest-rounded objective.
+14b. Gap arithmetic and the absolute-plus-relative comparison MUST be conservative
+    and finite. Failure to enclose either side MUST prevent an optimal termination.
+    Feasibility remains Model::evaluate's existing tolerance-based contract.
 15. A candidate produced by this backend MUST be validated against the original model
     before publication, matching SPEC-0002. The backend MUST NOT report its own
     objective.
@@ -366,6 +377,23 @@ present, so a missing device is never counted as coverage, matching how
 native-dependent tests already report a skip when the pinned library is absent. The
 complete `bash tools/check.sh` gate with native acceptance covered, plus the device
 suite on the labeled runner, is required before this slice is complete.
+
+## Certification repair acceptance (GPUP-1)
+
+Requirements 13a and 14a-14b clarify the existing bound-validity and gap-closure
+obligations; they do not introduce new tolerances or an exact-feasibility policy.
+The implementation uses a shared host assessment for both first-order backends.
+The existing LP record's `gap` remains an absolute objective-unit diagnostic,
+now conservatively enclosed and correctly directed for maximization; it is not
+HiGHS's relative MIP gap. No wire fields or schema versions change.
+
+Acceptance requires an exact rational oracle over stored binary64 inputs,
+regressions for rounded-zero and sign-uncertain reduced costs, free and one-sided
+infinite variables, subnormal products, overflow refusal, objective cancellation,
+objective offsets, both senses, and finite conservative gap thresholds. Legacy
+fixed-tree and device-bitwise iteration tests remain unchanged. The numerical
+argument and limits are documented in
+[LP certification arithmetic](../architecture/lp-certification.md).
 
 ## Open Questions
 
