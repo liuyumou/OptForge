@@ -96,14 +96,14 @@ The origin remote is https://github.com/liuyumou/OptForge.git. Protected main,
 labeled GPU runner provisioning, and artifact retention still require hosting
 administration. Next step: configure these settings separately from Git syncing.
 
-Publication state (verified 2026-09-14): origin/main and local main both contain
-C6 through `ee2d4fe`. Earlier entries describing commits after `dfdc245` as local
-were accurate when written and remain historical evidence. The maintainer has
-now authorized the GPUP-0/1 PR, review, merge, and branch cleanup. Those slice
-commits are published on the certification branch and are under review in
-[PR #1](https://github.com/liuyumou/OptForge/pull/1); see
-[active task](active-task.md) for current integration progress.
-AGENTS.md's prohibition on publishing without authorization is unchanged.
+Publication state (verified 2026-09-14): GPUP-0/1 and the CI cache correction are
+published and merged in [PR #1](https://github.com/liuyumou/OptForge/pull/1), merge
+commit `2c84a95`. The original slice commits are retained on main, local main was
+synchronized, and both completed local branches and the published feature branch
+were removed after ancestry verification. Earlier local-only publication statements
+remain historical records. The maintainer explicitly authorized publication,
+self-review, merge, and cleanup; AGENTS.md's authorization rule is unchanged.
+See [active task](active-task.md) for acceptance, CI, review, and cleanup evidence.
 
 ## No dispatch threshold is committed, for either specification
 

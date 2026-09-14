@@ -7,8 +7,8 @@ both slice commits, record the review, merge through GitHub after acceptance,
 synchronize local main, and remove the two completed branches. The maintainer
 explicitly authorized publication, self-review, merge, and branch cleanup.
 
-Status: numerical review and local acceptance complete; final PR CI and merge
-pending. Base main is ee2d4fe; reviewed implementation is 61c53f4,
+Status: complete. PR #1 is merged, main is synchronized, and both completed
+local branches plus the published feature branch have been removed. Base main is ee2d4fe; reviewed implementation is 61c53f4,
 which includes roadmap commit f28bf0e. No later precision slice is in scope.
 
 Acceptance gate: numerical proof and caller review; full pinned-native CPU gate;
@@ -47,10 +47,10 @@ no test counts, timeouts inside tests, or numerical thresholds were reduced.
 
 Publication readiness: the reviewed slice commits were pushed to
 codex/fix-lp-certification through SSH. The maintainer completed GitHub CLI browser
-login, enabling API access as liuyumou. Main is not protected; merge settings and
-protections will remain unchanged. [PR #1](https://github.com/liuyumou/OptForge/pull/1)
-is open as a draft; its review is prepared locally. Both documentation and benchmark
-smoke CI passed. CPU CI is held by the tooling-cache finding below.
+login, enabling API access as liuyumou. Main was unprotected; merge settings and
+protections remained unchanged. [PR #1](https://github.com/liuyumou/OptForge/pull/1)
+was opened as a draft with its review prepared locally. Documentation and benchmark
+smoke CI passed first; CPU CI initially hit the tooling-cache finding below.
 
 Integration finding: the first remote CPU CI run failed before acceptance during
 cargo-deny installation (run 34859538269, job 104027791392). The Cargo cache restores
@@ -98,7 +98,37 @@ pages (23.53 seconds; /tmp/gpup-pr-cpu-final.log and its timing summary). The CI
 shell passed bash syntax validation, and the cached-tool guard's version string was
 checked against the actual pinned binary. The original runtime and CUDA files are
 unchanged from 61c53f4. PR CI, review publication, merge, and cleanup follow this
-accepted local tree; their final outcome will be recorded after verification.
+accepted local tree. Final integration evidence follows.
+
+Integration evidence: both push and pull-request CPU, documentation, and benchmark
+smoke CI passed on PR head 1930a0b09c4b0c0f9c8009111480203c0592fc12. CPU workflow
+runs 34862464456 and 34862468896 passed; manual-only GPU discovery was skipped as
+configured and is not GPU acceptance evidence. GitHub rejected a formal author
+APPROVE review ("Can not approve your own pull request"). The completed technical
+approval, including acceptance of the sanitizer scope, is published as a
+[COMMENT review](https://github.com/liuyumou/OptForge/pull/1#pullrequestreview-5199671767).
+This is the requested agent self-review, not an independent human review or a
+formal GitHub approval event. No branch protection or merge setting was changed.
+
+GitHub confirmed PR #1 merged at 2026-09-14T15:32:28Z, merge commit
+2c84a95e8580bb51ac74dff6bfe4535b2edbb282. The rebase check was a no-op against
+unchanged main ee2d4fe. A merge commit preserves the original roadmap, numerical
+repair, and review-evidence commit identities and their documentation references.
+The merged tree exactly matches the CI-tested PR head. Local main fast-forwarded;
+both former branch tips were verified as ancestors before deletion. The remote
+feature branch was deleted with an expected-head guard, both local branches were
+removed with git branch -d, and remote references were pruned. The roadmap branch
+had never been published.
+
+Post-merge audit acceptance: bash tools/check.sh passed on synchronized main
+with the completed task/publication records (33.46 seconds), again covering pinned
+native HiGHS, 390 Rust tests, 76 Python tests and 62 documentation pages. The log is
+/tmp/gpup-pr-main-audit.log with its timing summary. Total local CPU gate wall time
+for integration was 80.29 seconds, within the declared 30-minute allocation.
+
+This post-merge audit changes task/publication records only. Follow-up remains
+GPUP-2: finalize and accept SPEC-0013 before the LP experiment harness. No later
+slice, performance experiment, or supported low-precision recipe was introduced.
 
 ## GPU LP Precision Slice 1: Conservative Certification (2026-09-14)
 
