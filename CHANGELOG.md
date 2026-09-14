@@ -6,6 +6,18 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- The approved [GPU LP precision roadmap](docs/plans/gpu-lp-precision-roadmap.md),
+  GPUP-0 through GPUP-10 backlog slices, draft numerical/experiment specifications,
+  and ADR-0012/ADR-0013. The selected objective is certified single-solve latency
+  with an eight GPU-hour first experiment campaign and component/interaction
+  ablations before recipe selection. Repeated-solve throughput and full MILP search
+  performance are separate future tracks. This is documentation and planning;
+  no mixed-precision backend, experiment result, or new default is shipped.
+- A recorded reduced-cost cancellation defect in the existing LP certification,
+  with an exact binary64-coefficient counterexample and GPUP-1 repair prerequisite.
+  The earlier certification claims below describe the intended contract; the
+  implementation does not meet it for this case until that repair passes.
+
 - `optimizer-lp`, the host half of SPEC-0011: the canonical linear-program form,
   the fixed reduction order, and diagonal preconditioning. It takes no device
   dependency and adds no third-party crate. Being device-free is the point rather

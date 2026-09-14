@@ -1,7 +1,12 @@
 # Benchmark Protocol
 
 Purpose: preserve comparable, reproducible evidence. Scope: bootstrap smoke and the
-C5 scheduling correctness subset now; solver performance suites are unscheduled.
+C5 scheduling correctness subset now. The approved
+[GPU LP precision roadmap](../plans/gpu-lp-precision-roadmap.md) schedules a bounded
+LP study under [draft SPEC-0013](../specifications/SPEC-0013-lp-precision-experiments.md)
+and [ADR-0013](../decisions/ADR-0013-lp-precision-study.md); its harness, concrete
+manifests, and measurements are pending. Existing timing diagnostics are not that
+study, and no performance recipe has been selected.
 
 Every measured record names a manifest hash, instance hashes, source revision,
 dirty state, hardware, seed, configuration, toolchain, timing method, and failures.

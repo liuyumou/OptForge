@@ -1,5 +1,62 @@
 # Known Failures and Limitations
 
+## LP certification can lose the roundoff allowance at zero reduced cost
+
+Confirmed during the GPU LP precision design review on 2026-09-14; not repaired
+by the GPUP-0 documentation slice. This affects the current host certification
+used by both host-lp and cuda-lp, independently of any future quantization.
+
+In `crates/optimizer-lp/src/certify.rs`, the variable loop uses bound zero when a
+computed reduced cost rounds to zero, then multiplies the reduced-cost error
+allowance by that chosen bound. The reduced cost can be nonzero in exact arithmetic
+over the stored binary64 coefficients, so the required allowance is lost.
+
+Reproducer (continuous variables, equality constraint):
+
+```text
+minimize 0.1*x1 + 0.30000000000000004*x2
+subject to x1 + 3*x2 = 0
+-3e16 <= x1 <= 3e16
+-1e16 <= x2 <= 1e16
+dual multiplier y = [0.1]
+feasible candidate x = [3e16, -1e16]
+```
+
+The current built-library diagnostic returned bound 0 with allowance 0. The
+candidate passes the existing feasibility check; ordinary FP64 objective evaluation
+reports -0.5. Exact rational evaluation of the *stored binary64* coefficients at
+that candidate is `-152587890625/549755813888`, approximately
+-0.27755575615628914. Thus zero is an invalid lower bound even for a finite boxed
+model; the ordinary objective's -0.5 also illustrates why objective/gap arithmetic
+needs review. These values are a correctness counterexample, not timing evidence.
+
+Next: [GPUP-1](../docs/plans/gpu-lp-precision-roadmap.md#implementation-slices), under
+SPEC-0011 requirements 11-14. Preserve an independent exact-arithmetic regression,
+use conservative outward reduced-cost/contribution bounds including uncertain
+signs and infinite sides, and review original-model objective, gap closure, and
+objective-sense conversion. Do not treat FP64 as an exactness guarantee or discard
+uncertainty when the rounded reduced cost is zero. No lower-precision implementation
+may precede the repair. This entry must remain open until acceptance evidence exists.
+
+## GPU LP precision experiments and recipes are not implemented
+
+The user approved the [GPUP roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
+with single-solve latency as the primary objective and an eight GPU-hour first
+campaign. GPUP-0 records the plan and draft contracts only. There is no
+`cuda-lp-quantized` backend, precision-settings schema, study harness, frozen LP
+study partition, measured winning recipe, or supported new preset yet. Draft
+SPEC-0012/SPEC-0013 must be completed and accepted before their behavior is added.
+The generic C10 comparative runner remains unspecified and is not implemented by
+this LP-only study. Existing Taillard timing/structure observations are development
+diagnostics and cannot be relabeled held-out validation.
+
+Next: follow the dependency chain in [the backlog](backlog.yaml). Record each
+slice's gates and resource use separately. Fix certification first, establish
+measurement before performance claims, and preserve unsuccessful trials and
+negative results. The approved direction permits evaluating formats/scales/rounding;
+it does not preselect FP8 or Tensor Cores as the final recipe. Repeated-solve
+throughput and full MILP search performance need separate specifications and budgets.
+
 No known implementation failure has been accepted as a waived gate.
 
 ## Source planning references

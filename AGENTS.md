@@ -16,7 +16,13 @@ device-backed candidate producer and re-execute from the record it writes, and
 `optimizer solve --backend host-lp|cuda-lp` runs a first-order linear programming
 method whose dual bound comes only from a host-side certification. The next capability
 is C7, adaptive portfolios, which has no specification yet and needs one before any
-behavior.
+behavior. The user has prioritized the separate
+[GPU LP precision research track](docs/plans/gpu-lp-precision-roadmap.md) before C7;
+follow `next_ready_task` in state/backlog.yaml and implement one GPUP slice at a time.
+Its numerical and experiment specifications are drafts, not implemented features.
+Repair the recorded certification defect before introducing lower precision; the
+initial experiment campaign is capped at eight GPU-hours. Repeated-solve throughput
+and full MILP search performance are separate future directions.
 Unsafe CUDA code is permitted only inside optimizer-cuda-sys under
 [ADR-0009](docs/decisions/ADR-0009-cuda-driver-boundary.md), which amends ADR-0003's
 single-boundary rule; optimizer-cuda keeps the prohibition and keeps discovery and the

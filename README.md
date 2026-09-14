@@ -1,9 +1,14 @@
 # AI Optimizer
 
 A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. The current milestone is **SPEC-0010 complete: a search
-can run part of its work on a GPU, and the device holds no mathematical authority
-for doing so**. It validates original
+selective GPU acceleration. **C6 is implemented under SPEC-0010 and SPEC-0011**:
+a search can evaluate integer schedules on a GPU, and a first-order LP backend
+runs on the host or device with host-side validation and certification. The next
+prioritized work is the [GPU LP precision roadmap](docs/plans/gpu-lp-precision-roadmap.md).
+Its first code slice repairs a [known certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost);
+mixed precision and performance recipes are not implemented yet.
+
+The project validates original
 linear models and candidates, solves them with an independently validated incumbent,
 proves optimality with its own search, accepts separately authored extensions
 without granting them any mathematical authority, and records each search with the
@@ -85,6 +90,9 @@ acceptance was not covered.
 - [GPU discovery and lease contract](docs/specifications/SPEC-0006-gpu-lease.md)
 - [Heterogeneous computation specification](docs/specifications/SPEC-0010-heterogeneous-computation.md)
 - [GPU LP backend specification](docs/specifications/SPEC-0011-gpu-lp-backend.md)
+- [GPU LP performance roadmap and slices](docs/plans/gpu-lp-precision-roadmap.md)
+- [Mixed-precision LP draft](docs/specifications/SPEC-0012-mixed-precision-lp.md)
+- [LP experiment protocol draft](docs/specifications/SPEC-0013-lp-precision-experiments.md)
 - [Artifact contract](docs/specifications/SPEC-0007-artifacts.md)
 - [Build and verification](docs/operations/build.md)
 - [GPU operations](docs/operations/gpu.md)
@@ -103,9 +111,9 @@ provides long-term direction. Their unvalidated research claims are hypotheses.
 `crates/` contains the Rust workspace. optimizer-core owns original models,
 versioned JSON, objective recomputation, candidate feasibility with explicit
 tolerances, and the backend-neutral solve contract. optimizer-highs implements
-that contract against the pinned CPU HiGHS build and is the only crate permitted
-to contain unsafe code. optimizer-solver owns the branch-and-bound executive and
-consumes the solve contract as a relaxation service without depending on any
+that contract against the pinned CPU HiGHS build. It and optimizer-cuda-sys are
+the only crates permitted to contain unsafe code. optimizer-solver owns the
+branch-and-bound executive and consumes the solve contract as a relaxation service without depending on any
 backend. optimizer-extension defines the extension declaration, authority model
 and guarded host; optimizer-extension-examples holds independently authored
 extensions, including deliberately hostile ones, and depends only on the
@@ -120,9 +128,11 @@ APIs. `schemas/`, `examples/`, `tests/`, and `tools/` provide executable contrac
 optimizer-cuda-sys owns the CUDA driver boundary and optimizer-cuda owns discovery,
 the host lease, device selection and residency; `cuda/` holds the kernels, built out
 of tracked source by `tools/setup_cuda.sh`. `docs/` is authoritative; `wiki/`
-provides navigation. Python SDK, GPU linear programming, dynamically loaded native
-extensions, checkpoint restart and performance suites are deferred, each with its
-blocker recorded in [known failures](state/known-failures.md).
+provides navigation. optimizer-lp owns the host LP method and certification without
+a device dependency; optimizer-lp-cuda owns the device backend. Python SDK,
+mixed-precision LP, dynamically loaded native extensions, checkpoint restart and
+performance suites remain planned, with limits recorded in
+[known failures](state/known-failures.md).
 
 ## License
 

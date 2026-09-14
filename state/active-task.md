@@ -1,5 +1,49 @@
 # Active Task
 
+## GPU LP Precision Slice 0: Roadmap and Contracts (2026-09-14)
+
+Objective: persist the user-approved GPU LP performance roadmap as a separate,
+dependency-ordered research track, draft its numerical and experiment contracts,
+and record the prerequisites before any new arithmetic is implemented.
+
+Status: complete. This slice changes documentation and task state only.
+
+Acceptance gate: `bash tools/check.sh` with the pinned native HiGHS build,
+documentation link/anchor validation, and a manual requirement-to-test and backlog
+dependency review. Resource budget: CPU only, at most 30 minutes of gate wall time
+with four Cargo build jobs; zero GPU work. The first later experiment campaign has
+an eight GPU-hour cap, not a budget consumed by this documentation slice.
+
+Likely files: the new roadmap under `docs/plans/`, two draft specifications,
+arithmetic/reproducibility and experiment ADRs, project navigation, benchmark
+protocol, changelog, backlog, and known failures. Existing runtime behavior,
+experiment seeds, splits, thresholds, and solver defaults remain unchanged.
+
+Acceptance evidence (2026-09-14): `bash tools/check.sh` passed, exit 0, with
+pinned native HiGHS 1.11.0, 380 Rust tests, 72 Python tests, artifact/provenance
+validation, committed-record re-execution, and 61 documentation pages with valid
+local links/anchors. The gate completed within the 30-minute CPU wall-time budget;
+GPU jobs and GPU campaign consumption: zero. The full local gate log is
+`/tmp/gpup-0-acceptance.log` (ephemeral, not a retained benchmark artifact).
+
+Supplemental review checked all 38 SPEC-0012 and 35 SPEC-0013 numbered requirements
+against their planned acceptance mappings, unique backlog identities and ordered
+dependencies, the campaign allocation sum (28,800 GPU seconds), and the exact
+rational objective in the cancellation counterexample. These are documentation
+and planning checks; none is recorded as runtime precision or performance evidence.
+No runtime source, schema, dependency, experiment manifest, seed, threshold, or
+default changed. ADR-0012 and ADR-0013 accept design decisions; SPEC-0012 and
+SPEC-0013 remain drafts requiring completion before their implementation slices.
+
+Follow-up: GPUP-1 is ready under the existing SPEC-0011 certification contract.
+Reproduce the recorded cancellation case with an independent exact-arithmetic
+fixture; repair conservative reduced-cost/contribution handling including uncertain
+signs and infinite bounds; review objective/gap rounding and objective-sense
+conversion; run the full gate and record evidence before any lower precision.
+The known-failure entry remains open. GPUP-2 then finalizes and accepts the LP
+experiment contract before implementing measurement. C7/C9/C10 remain planned,
+and repeated-solve throughput and full MILP performance are separate future tasks.
+
 ## C6 Clean-Checkout Verification and Local Integration (2026-09-13)
 
 Objective: verify C6 from a checkout with nothing prebuilt before integrating it, as

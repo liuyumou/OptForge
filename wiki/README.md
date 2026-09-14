@@ -9,3 +9,4 @@ Concise navigation only. Normative behavior lives in
 - [Architecture](../docs/architecture/overview.md)
 - [Operations](../docs/operations/build.md)
 - [Benchmark definitions](../docs/benchmarks/protocol.md)
+- [GPU LP precision roadmap and slices](../docs/plans/gpu-lp-precision-roadmap.md)
