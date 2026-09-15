@@ -98,7 +98,11 @@ fresh-process solves are dominated by device startup. Transfers were a minor cos
 on the measured instances; the kernel source's idealized bandwidth argument does
 not account for padded work and is not a measured bottleneck classification.
 
-Python validator construction rechecks all schemas for every event/result; ledger
+The ADR-0016 tooling follow-up now compiles one strict immutable schema snapshot
+per process and waits for quiet telemetry with bounded post-lease admission.
+CPU simulations and the full pinned-native gate pass; measured before/after
+costs will accompany GPUP-3. Historical diagnosis: Python validator construction
+rechecked all schemas for every event/result; ledger
 replay and report generation repeat that overhead. The activity guard can pause
 on a recent utilization sample from the project's own completed job. Four
 supplementary invocations paused and resumed without repeated trials. Proposed

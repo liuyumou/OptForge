@@ -47,11 +47,18 @@ def reap_group(pgid):
 def supervise(request, device=None):
     expected={'command','directory','prefix','solve_seconds','cleanup_seconds',
               'host_rss_bytes','poll_ms','output_bytes'}
+    version = request.get('schema_version', 1)
+    if version == 2:
+        expected |= {'schema_version', 'gpu_admission_seconds'}
+    elif version != 1:
+        raise ValueError('unknown worker version')
     if set(request)!=expected: raise ValueError('invalid worker request fields')
     if not isinstance(request['command'],list) or not request['command'] or not all(isinstance(x,str) for x in request['command']):
         raise ValueError('invalid command')
     for key in expected-{'command','directory','prefix'}:
         if not isinstance(request[key],(int,float)) or request[key]<=0: raise ValueError('invalid worker limit')
+    if version == 2 and request['gpu_admission_seconds'] != 3:
+        raise ValueError('unfrozen admission limit')
     directory=Path(request['directory']).resolve(); directory.mkdir(parents=True,exist_ok=True)
     prefix=request['prefix']
     if not prefix or Path(prefix).name!=prefix: raise ValueError('invalid worker prefix')
@@ -65,6 +72,8 @@ def supervise(request, device=None):
     report={'schema_version':1,'returncode':None,'reason':None,'elapsed_ns':0,
             'queue_ns':0,'leased_ns':0,'peak_rss_bytes':0,'signal':None,'signal_events':[],
             'clock':'monotonic_ns','memory_method':'10ms aggregate process-tree VmRSS watchdog'}
+    if version == 2:
+        report.update(schema_version=2, activity=None)
     try:
         if device:
             if not device.startswith('GPU-'): raise ValueError('invalid device UUID')
@@ -80,6 +89,13 @@ def supervise(request, device=None):
                         return report
                     time.sleep(0.01)
             report['queue_ns']=acquired-queued
+        if device and version == 2:
+            from lp_activity import ActivityPause, wait_quiet
+            try:
+                report['activity'] = wait_quiet(device, 3, lambda: cancelled)
+            except ActivityPause as error:
+                report.update(reason='activity_blocked', activity=error.report)
+                return report
         if cancelled:
             report['reason']='cancelled_before_launch'; return report
         env={**os.environ,'OMP_NUM_THREADS':'1','LC_ALL':'C'}

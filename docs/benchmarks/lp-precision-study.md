@@ -134,3 +134,14 @@ The five new LP schema names are separate from existing SPEC-0007 records. There
 is no migration from a smoke result into an LP trial. Existing readers retain
 their meanings; unsupported future LP versions are rejected. Synthetic schema
 examples explicitly name their lack of measurement evidence.
+
+## Matched FP64 follow-up
+
+[ADR-0016](../decisions/ADR-0016-matched-fp64.md) freezes the next bounded study.
+Tooling now reuses one strictly checked schema snapshot per process; restart the
+process to observe schema edits. GPU admission waits up to 300 seconds for zero
+utilization and no compute processes before reservation, with 250 ms polling.
+Unavailable telemetry pauses with a retained activity sidecar. Version-2 workers
+recheck under the shared lease for at most three seconds; GPU jobs reserve 16
+seconds and charge all leased time. A blocked leased attempt is retained and never
+silently retried. No device is substituted. Existing frozen artifacts stay intact.

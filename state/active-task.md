@@ -1,5 +1,27 @@
 # Active Task
 
+## GPUP-2 follow-up: schema reuse and activity admission (2026-09-15)
+
+Acceptance: completed. Full pinned-native tools/check.sh passed in 18.026 seconds,
+396 Rust tests, 98 Python tests and 68 documentation pages. The targeted study
+suite passed 26 tests in 2.172 seconds, including schema reuse/strictness, immutable
+refresh, residual activity, process exclusion, telemetry refusal, exact wait limits
+and a simulated post-lease race that launches no child. No GPU work occurred.
+Reference executable SHA-256 remains 9538f9b16f1fdf3e224674a9c2e4f76f5e797022f730f858eaf63d2080b048fb.
+Evidence: /tmp/gpup3-harness-gate.log and .json; /tmp/gpup3-harness-tests.log.
+
+Status: accepted for local commit. First bounded change in the maintainer-approved matched FP64
+plan, followed by bit-preserving certification and GPUP-3. Read CONTRIBUTING,
+known failures and accepted contracts. Accept SPEC-0012 with later requirements
+explicitly deferred; ADR-0016 freezes implementation and supplementary measurements.
+Preserve original artifacts, legacy behavior and 194.142866023 seconds of campaign
+consumption. Objective: immutable reusable schema registries and cancellable,
+accounted GPU admission. Acceptance: strictness/activity/lease simulations and the
+full pinned-native tools/check.sh gate. Combined acceptance budget across changes:
+60 CPU wall minutes, four build jobs; 30 GPU minutes sequential with CPU gates.
+Supplementary study cap: 600 additional GPU seconds, cumulative 900, baseline
+1,800 and campaign 28,800 unchanged. Record exact evidence before local commits.
+
 ## GPUP-2 follow-up: Diagnose slow GPU study (2026-09-15)
 
 Objective: measure and carefully explain solver latency, convergence, GPU setup,

@@ -33,15 +33,9 @@ def telemetry(device):
         '--format=csv,noheader,nounits'],3)
 
 def quiet_device(device):
-    activity=command_text(['nvidia-smi','--id='+device,'--query-gpu=utilization.gpu','--format=csv,noheader,nounits'],3)
-    applications=command_text(['nvidia-smi','--query-compute-apps=gpu_uuid,pid','--format=csv,noheader'],3)
-    # No applications is a usable empty list, unlike unavailable utilization.
-    if activity.startswith('unavailable:') or not activity.isdigit():
-        raise ValueError('GPU activity unavailable; pause study: '+activity)
-    if int(activity)>0 or device in applications:
-        raise ValueError('competing GPU activity; pause study without device substitution')
-    if applications.startswith('unavailable:') and applications!='unavailable: empty output':
-        raise ValueError('GPU process telemetry unavailable; pause study')
+    from lp_activity import wait_quiet
+    return wait_quiet(device)
+
 
 def provenance(binary, device):
     code=Path(os.environ.get('AI_OPTIMIZER_CUDA_DIR',ROOT/'target/native/cuda'))/'lp_pdhg.cubin'
@@ -83,7 +77,14 @@ def recover_intents(directory, attempts):
 def run_trial(value, identity, instance, configuration, repetition, order, mode,
               binary, directory, ledger, base_provenance):
     gpu=configuration['backend']=='cuda-lp'
-    if gpu: quiet_device(value['device'])
+    if gpu:
+        from lp_activity import ActivityPause
+        try:
+            activity = quiet_device(value['device'])
+        except ActivityPause as error:
+            write_json(directory/(identity+'.activity.json'), error.report)
+            raise
+        write_json(directory/(identity+'.activity.json'), activity)
     before=telemetry(value['device'])
     model=checked_reference(ROOT,instance['model'])
     evidence=directory/(identity+'.endpoint.json')
@@ -108,14 +109,15 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
     if gpu: args+=['--device',value['device']]
     request={k:value['limits'][k] for k in ['solve_seconds','cleanup_seconds','host_rss_bytes','poll_ms','output_bytes']}
     request.update(command=args,directory=str(directory),prefix=identity)
+    if gpu: request.update(schema_version=2, gpu_admission_seconds=3)
     request_path=directory/(identity+'.request.json');write_json(request_path,request)
     # One second covers the bounded supervisor's setup/lease teardown overhead.
-    reservation=ledger.reserve(identity,value['limits']['solve_seconds']+value['limits']['cleanup_seconds']+1,
+    reservation=ledger.reserve(identity,value['limits']['solve_seconds']+value['limits']['cleanup_seconds']+(4 if gpu else 1),
                                resource='gpu' if gpu else 'cpu')
     worker_args=['bash',str(ROOT/'tools/gpu_job.sh'),value['device'],'--lp-study-request',str(request_path)] if gpu else [sys.executable,str(ROOT/'tools/lp_supervise.py'),'--request',str(request_path)]
     worker=subprocess.Popen(worker_args,pass_fds=(ledger.lock.fileno(),))
     try:
-        worker.wait(timeout=318 if gpu else 18)
+        worker.wait(timeout=322 if gpu else 18)
     except (subprocess.TimeoutExpired, KeyboardInterrupt):
         worker.send_signal(signal.SIGTERM)
         try: worker.wait(timeout=3)
@@ -128,7 +130,7 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
     else:
         charge=info['leased_ns'] if gpu else info['elapsed_ns']
         ledger.settle(reservation,charge)
-        trial.update(status=info['reason'],elapsed_ns=info['elapsed_ns'],queue_ns=info['queue_ns'],
+        trial.update(status='process_failure' if info['reason']=='activity_blocked' else info['reason'],elapsed_ns=info['elapsed_ns'],queue_ns=info['queue_ns'],
                      leased_ns=info['leased_ns'],peak_rss_bytes=info['peak_rss_bytes'],memory_method=info['memory_method'],error=None)
         if worker.returncode!=0:
             trial.update(status='process_failure',error=f'worker exit {worker.returncode}')
@@ -161,6 +163,8 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
     print(f'{identity}: {trial["status"]}/{trial["endpoint_class"]}; GPU charged {ledger.totals()/NS:.3f}s',flush=True)
     if info is None or (info and (info['leased_ns'] if gpu else info['elapsed_ns'])>reservation['reserved_ns']):
         raise ValueError('uncertain/overrun worker; stop after preserving trial')
+    if info and info['reason'] == 'activity_blocked':
+        raise ValueError('GPU activity appeared under lease; blocked attempt retained; pause study')
     return trial
 
 def main():
@@ -220,7 +224,9 @@ def prepare_execution(directory, base):
                 if not source.is_file():continue
                 content=source.read_bytes(); item=tarfile.TarInfo(os.fsdecode(name));item.size=len(content);item.mode=0o644
                 archive.addfile(item,io.BytesIO(content))
-        write_json(execution_path,{**base,'source_archive_sha256':file_hash(directory/'source.tar')})
+        from validate_artifacts import schema_snapshot
+        write_json(execution_path,{**base,'source_archive_sha256':file_hash(directory/'source.tar'),
+                                   'schema_snapshot_sha256':schema_snapshot().sha256})
 
 if __name__=='__main__':
     try:main()

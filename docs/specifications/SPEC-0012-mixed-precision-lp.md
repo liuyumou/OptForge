@@ -1,15 +1,22 @@
 # SPEC-0012: Experimental Mixed-Precision LP Backend
 
-Status: draft; not implemented or selectable
+Status: accepted; GPUP-3 in progress, later precision requirements pending
 Scope: opt-in LP arithmetic, resumable control, numerical audits, and recovery
 Owner: numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: bootstrap (first commit containing this document)
-Supersedes: none while draft; ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
+Supersedes: ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
 Implementation: GPUP-1 repairs the existing SPEC-0011 backend; mixed precision pending GPUP-3 through GPUP-8
 Tests: planned requirement mapping below; no new runtime coverage in slice 0
 
 ## Purpose
+
+Accepted by the maintainer on 2026-09-15. GPUP-3 implements shared resumable FP64
+control and explicit `cuda-lp-matched` using existing kernels, settings and host
+mathematical authority. Requirements 9-11 apply to in-memory FP64 checkpoints now;
+precision/audit/random state applies when introduced in GPUP-5 through GPUP-8.
+Persistent checkpoints, precision settings, quantization, recovery and presets
+remain pending. [ADR-0016](../decisions/ADR-0016-matched-fp64.md) freezes this slice.
 
 Define an experimental route from FP64 through FP32 to FP8 and Tensor Core LP
 iteration without giving the device mathematical authority. Optimize certified
