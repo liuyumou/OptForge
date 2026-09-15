@@ -12,6 +12,16 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- Opt-in cuda-lp-matched shares the host FP64 restart/weight controller, with
+  in-memory checkpoints, bounded cancellation and non-rollback work/deadlines.
+  Endpoint-v2 and LP replay preserve candidate/dual alignment and independent checks.
+- Frozen ADR-0016 supplementary study uses strict v2 campaign/trial schemas and
+  the existing cumulative budget ledger. Legacy schemas and cuda-lp control remain.
+  The [matched FP64 report](docs/benchmarks/lp-matched-fp64-gpup3.md) records all 160
+  attempts: matched CUDA certifies 27/36 timing trials, versus legacy CUDA 6/36.
+  Cumulative study consumption is 445.988 GPU seconds; three scheduling instances
+  remain unclosed. Full native and scoped device/sanitizer gates pass.
+
 - A [measured GPU LP slowdown diagnosis](docs/benchmarks/lp-gpu-slowdown-diagnosis.md):
   CPU replay matches two 50,000-step GPU endpoints bit-for-bit; component timings
   isolate certification costs; seven supplementary jobs and decoded CUDA traces

@@ -4,10 +4,37 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use std::time::Instant;
 
+/// Additional observations for the opt-in matched FP64 endpoint-v2 contract.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct LpControlDiagnostics {
+    /// Versioned shared controller identity.
+    pub controller: String,
+    /// Logical iteration index at stop.
+    pub logical_iterations: u64,
+    /// Actual completed physical steps; restoration never reduces it.
+    pub physical_iterations: Option<u64>,
+    /// Successfully enqueued LP kernels, retained even when pinned fallback executes.
+    pub device_kernel_launches: u64,
+    /// Actual host endpoint assessments in the backend (excluding independent verification).
+    pub assessments: u64,
+    /// Actual KKT evaluations steering control, including initialization/restarts.
+    pub kkt_evaluations: u64,
+    /// Completed restart decisions.
+    pub restarts: u64,
+    /// Final controller weight.
+    pub weight: f64,
+    /// Explicit control stop: accepted, iteration_limit, interrupted or time_limit.
+    pub stop: String,
+}
+
 /// Data collected by an explicitly observed solve, separately from SolveRecord.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct LpDiagnostics {
+    /// Kept out of the legacy wire shape; endpoint v2 serializes this separately.
+    #[serde(skip)]
+    pub control: Option<LpControlDiagnostics>,
     /// Whether witness collection was requested.
     pub enabled: bool,
     /// Detailed timing is a separate profiling execution.
@@ -37,6 +64,7 @@ impl LpDiagnostics {
     #[must_use]
     pub fn new(enabled: bool, profile: bool) -> Self {
         Self {
+            control: None,
             enabled,
             profile,
             device_buffer_limit_bytes: None,

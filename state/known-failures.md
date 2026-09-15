@@ -72,9 +72,14 @@ scheduling cases. These unsuccessful outcomes are preserved evidence, not
 infrastructure gate failures or permission to weaken numerical targets.
 
 Low-precision experiments, cuda-lp-quantized, precision-settings and supported
-recipes remain unimplemented. SPEC-0012 is still draft and must be accepted before
-GPUP-3 creates the shared resumable controller. Host adaptive restart/weight and
-GPU fixed control differ; no algorithmically matched device speedup is established.
+recipes remain unimplemented. SPEC-0012 is accepted for implemented GPUP-3 FP64
+control; later precision requirements remain pending. Opt-in cuda-lp-matched shares
+host control. Legacy cuda-lp retains fixed control. The
+[matched study](../docs/benchmarks/lp-matched-fp64-gpup3.md) certified 27/36 timing
+trials for both matched CUDA and host, versus 6/36 for legacy CUDA. Scheduling-50x10,
+ta001 and ta011 remain infeasible at 50,000 matched iterations; no finite gap is
+claimed for them. Small cases remain slower on GPU because setup dominates.
+Certified per-instance paired timings establish bounded development evidence only.
 The independent exact-rational certification regressions remain authoritative.
 The section heading retains its earlier link identity; the missing experiments
 here are precision comparisons and recipe selection, not baseline measurements.
@@ -100,14 +105,24 @@ not account for padded work and is not a measured bottleneck classification.
 
 The ADR-0016 tooling follow-up now compiles one strict immutable schema snapshot
 per process and waits for quiet telemetry with bounded post-lease admission.
-CPU simulations and the full pinned-native gate pass; measured before/after
-costs will accompany GPUP-3. Historical diagnosis: Python validator construction
+CPU simulations, full pinned-native gate and the supplementary study pass. One
+invocation completed all 160 attempts, with 55.606 seconds of pre-reservation
+activity waiting. The same-catalog ledger validation falls from 166.575 ms including
+a fresh snapshot to 0.067 ms with reuse; large document validation remains a cost.
+The bit-preserving certifier cuts irregular-2048 certificate cost from 26.455 to
+2.198 ms, with independent rational and padded-oracle regressions preserved.
+Historical diagnosis: Python validator construction
 rechecked all schemas for every event/result; ledger
 replay and report generation repeat that overhead. The activity guard can pause
 on a recent utilization sample from the project's own completed job. Four
 supplementary invocations paused and resumed without repeated trials. Proposed
-fixes must preserve schema strictness, shared-lease exclusion and host numerical
-authority. GPUP-3 remains next; this diagnosis changes no solver behavior.
+fixes preserved schema strictness, shared-lease exclusion and host numerical
+authority. GPUP-3 is complete; GPUP-4 is next. The original diagnosis changed no
+solver behavior. Supplementary study spending is 251.845179881 GPU seconds, bringing
+the canonical cumulative ledger to 445.988045904 seconds. Original records remain
+unchanged. Endpoint-v2 controller-phase schema omission was caught in acceptance,
+fixed with a CPU regression and verified by the affected leased CLI rerun; no
+required check is waived.
 
 Seven supplementary jobs added 20.994604580 GPU seconds, including profiler export
 failures. Cumulative campaign use is 194.142866023 seconds. Raw traces were recovered

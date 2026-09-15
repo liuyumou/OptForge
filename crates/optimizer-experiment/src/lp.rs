@@ -1,6 +1,9 @@
 //! Independently replayable LP endpoints under SPEC-0013. No device dependency.
 use crate::serde_strict::deserialize_object;
-use optimizer_core::{ErrorKind, LpDiagnostics, Model, SolveRecord, Termination, ValidationError};
+use optimizer_core::{
+    ErrorKind, LpControlDiagnostics, LpDiagnostics, Model, SolveRecord, Termination,
+    ValidationError,
+};
 use optimizer_lp::{LinearProgram, certify, certify::assess_gap};
 use serde::Serialize;
 
@@ -33,7 +36,7 @@ deserialize_object!(Assessment { classification: String, feasible: Option<bool>,
 /// Versioned sidecar; the existing solve record retains its original meaning.
 #[derive(Clone, Debug, PartialEq, Serialize)]
 pub struct LpEndpoint {
-    /// Must be one.
+    /// One for legacy evidence, two for the opt-in matched path.
     pub schema_version: u32,
     /// SHA-256 of exact input model bytes.
     pub model_sha256: String,
@@ -51,11 +54,14 @@ pub struct LpEndpoint {
     pub fallback_reason: Option<String>,
     /// Integrity of the record, row IDs, observations and fallback identity.
     pub payload_sha256: String,
+    /// Matched FP64 state/work observations; absent when unavailable or in v1.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub control: Option<LpControlDiagnostics>,
 }
 deserialize_object!(LpEndpoint { schema_version: u32, model_sha256: String,
     requested_backend: String, record: SolveRecord, row_ids: Vec<u32>,
     diagnostics: LpDiagnostics, assessment: Assessment, fallback_reason: Option<String>,
-    payload_sha256: String });
+    payload_sha256: String, control: Option<LpControlDiagnostics> });
 
 fn invalid(message: impl Into<String>) -> ValidationError {
     ValidationError::new(ErrorKind::Document, message)
@@ -191,13 +197,18 @@ pub fn assess(
 
 impl LpEndpoint {
     fn payload_hash(&self) -> Result<String, ValidationError> {
-        let bytes = serde_json::to_vec(&(
+        let payload = (
             &self.requested_backend,
             &self.record,
             &self.row_ids,
             &self.diagnostics,
             &self.fallback_reason,
-        ))
+        );
+        let bytes = if self.schema_version == 1 {
+            serde_json::to_vec(&payload)
+        } else {
+            serde_json::to_vec(&(payload, &self.control))
+        }
         .map_err(|e| invalid(e.to_string()))?;
         Ok(crate::sha256::hex(&bytes))
     }
@@ -217,8 +228,20 @@ impl LpEndpoint {
         let check = diagnostics.start();
         let assessment = assess(&model, &record, &diagnostics)?;
         diagnostics.finish("independent_endpoint", check);
+        let matched = requested_backend == "cuda-lp-matched";
+        let control = if matched {
+            diagnostics.control.take()
+        } else {
+            None
+        };
+        if matched && control.is_none() {
+            diagnostics
+                .unavailable
+                .push("matched controller state unavailable before completion".into());
+        }
         let mut endpoint = Self {
-            schema_version: 1,
+            schema_version: if matched { 2 } else { 1 },
+            control,
             model_sha256: crate::sha256::hex(model_bytes),
             requested_backend,
             record,
@@ -228,6 +251,7 @@ impl LpEndpoint {
             fallback_reason,
             payload_sha256: String::new(),
         };
+        endpoint.verify_control()?;
         endpoint.payload_sha256 = endpoint.payload_hash()?;
         Ok(endpoint)
     }
@@ -237,21 +261,30 @@ impl LpEndpoint {
     /// # Errors
     /// Rejects altered or inconsistent evidence, without trusting its status label.
     pub fn verify(&self, model_bytes: &[u8]) -> Result<(), ValidationError> {
-        if self.schema_version != 1
+        if ![1, 2].contains(&self.schema_version)
             || self.model_sha256 != crate::sha256::hex(model_bytes)
             || self.payload_sha256 != self.payload_hash()?
         {
             return Err(invalid("endpoint version/hash differs"));
         }
-        if !["highs", "host-lp", "cuda-lp"].contains(&self.requested_backend.as_str())
-            || !["highs", "host-lp", "cuda-lp"].contains(&self.record.backend.as_str())
+        let backends = ["highs", "host-lp", "cuda-lp", "cuda-lp-matched"];
+        if !backends.contains(&self.requested_backend.as_str())
+            || !backends.contains(&self.record.backend.as_str())
+            || (self.schema_version == 1
+                && (self.control.is_some()
+                    || self.requested_backend == "cuda-lp-matched"
+                    || self.record.backend == "cuda-lp-matched"))
+            || (self.schema_version == 2 && self.requested_backend != "cuda-lp-matched")
             || !self.diagnostics.enabled
         {
             return Err(invalid("invalid observation/backend identity"));
         }
+        self.verify_control()?;
         let fallback = self.requested_backend != self.record.backend;
         if fallback != self.fallback_reason.is_some()
-            || (fallback && (self.requested_backend != "cuda-lp" || self.record.backend != "highs"))
+            || (fallback
+                && (!["cuda-lp", "cuda-lp-matched"].contains(&self.requested_backend.as_str())
+                    || self.record.backend != "highs"))
         {
             return Err(invalid("inconsistent fallback identity"));
         }
@@ -270,6 +303,74 @@ impl LpEndpoint {
         Ok(())
     }
 
+    fn verify_control(&self) -> Result<(), ValidationError> {
+        let Some(control) = &self.control else {
+            if self.schema_version == 2
+                && self.record.backend == "cuda-lp-matched"
+                && !matches!(
+                    self.record.termination,
+                    Termination::Unsupported | Termination::BackendFailure
+                )
+            {
+                return Err(invalid("missing matched control evidence"));
+            }
+            return Ok(());
+        };
+        if control.controller != "host-restart-weight-v1"
+            || !control.weight.is_finite()
+            || !(1e-6..=1e6).contains(&control.weight)
+            || control
+                .physical_iterations
+                .is_some_and(|n| n < control.logical_iterations)
+            || control.restarts > control.logical_iterations
+            || ![
+                "accepted",
+                "iteration_limit",
+                "interrupted",
+                "time_limit",
+                "device_failure",
+            ]
+            .contains(&control.stop.as_str())
+        {
+            return Err(invalid("invalid matched controller observations"));
+        }
+        if self.record.backend == "cuda-lp-matched" {
+            let settings = self
+                .record
+                .lp_settings
+                .ok_or_else(|| invalid("missing matched LP settings"))?;
+            let expected = match self.record.termination {
+                Termination::Optimal => "accepted",
+                Termination::Interrupted => "interrupted",
+                Termination::TimeLimit => "time_limit",
+                Termination::IterationLimit => "iteration_limit",
+                Termination::BackendFailure => "device_failure",
+                _ => return Err(invalid("inconsistent matched termination")),
+            };
+            if expected != control.stop
+                || control.physical_iterations.is_some_and(|n| {
+                    n > settings.iteration_limit
+                        || self
+                            .record
+                            .options
+                            .iteration_limit
+                            .is_some_and(|limit| n > limit)
+                })
+                || self.diagnostics.iterations != control.physical_iterations
+                || (control.stop != "device_failure"
+                    && self.diagnostics.restarts != Some(control.restarts))
+                || self
+                    .diagnostics
+                    .assessment_iteration
+                    .is_some_and(|i| i > control.logical_iterations)
+                || control.kkt_evaluations == 0
+            {
+                return Err(invalid("matched work/assessment alignment differs"));
+            }
+        }
+        Ok(())
+    }
+
     /// Parse an object-form versioned sidecar. Verification is a separate required step.
     ///
     /// # Errors
@@ -278,9 +379,33 @@ impl LpEndpoint {
         unique_json(bytes)?;
         let shape: serde_json::Value =
             serde_json::from_slice(bytes).map_err(|e| invalid(e.to_string()))?;
+        let mut base_shape = shape.clone();
+        if shape["schema_version"] == 2
+            && let Some(control) = base_shape
+                .as_object_mut()
+                .and_then(|map| map.remove("control"))
+        {
+            let fields = [
+                "controller",
+                "logical_iterations",
+                "physical_iterations",
+                "device_kernel_launches",
+                "assessments",
+                "kkt_evaluations",
+                "restarts",
+                "weight",
+                "stop",
+            ];
+            let map = control
+                .as_object()
+                .ok_or_else(|| invalid("control requires an object"))?;
+            if map.len() != fields.len() || fields.iter().any(|key| !map.contains_key(*key)) {
+                return Err(invalid("missing or unknown control field"));
+            }
+        }
         for (object, fields) in [
             (
-                &shape,
+                &base_shape,
                 &[
                     "schema_version",
                     "model_sha256",
@@ -331,8 +456,35 @@ impl LpEndpoint {
                 return Err(invalid("missing or unknown LP evidence field"));
             }
         }
+        let allowed = [
+            "input_preparation",
+            "device_context",
+            "preparation",
+            "preconditioning",
+            "invariant_allocation_upload",
+            "working_allocation",
+            "working_upload",
+            "kernels_and_synchronization",
+            "readback",
+            "iteration",
+            "host_checks",
+            "solve_record_serialization",
+            "native_preparation",
+            "native_solve",
+            "native_extraction",
+            "independent_endpoint",
+        ];
+        let phases = shape["diagnostics"]["phases_ns"]
+            .as_object()
+            .ok_or_else(|| invalid("phase measurements require an object"))?;
+        if phases.keys().any(|name| {
+            !(allowed.contains(&name.as_str())
+                || (shape["schema_version"] == 2 && name == "controller"))
+        }) {
+            return Err(invalid("unknown LP measurement phase"));
+        }
         let result: Self = serde_json::from_slice(bytes).map_err(|e| invalid(e.to_string()))?;
-        if result.schema_version != 1 {
+        if ![1, 2].contains(&result.schema_version) {
             return Err(invalid("unsupported endpoint version"));
         }
         Ok(result)
@@ -423,6 +575,74 @@ mod tests {
             )
             .unwrap();
         LpEndpoint::new(MODEL, "host-lp".into(), record, diagnostics, None).unwrap()
+    }
+
+    fn matched_observed() -> LpEndpoint {
+        let mut endpoint = observed();
+        endpoint.schema_version = 2;
+        endpoint.requested_backend = "cuda-lp-matched".into();
+        endpoint.record.backend = "cuda-lp-matched".into();
+        endpoint
+            .diagnostics
+            .phases_ns
+            .insert("controller".into(), 7);
+        endpoint.control = Some(LpControlDiagnostics {
+            controller: "host-restart-weight-v1".into(),
+            logical_iterations: 3,
+            physical_iterations: Some(3),
+            device_kernel_launches: 18,
+            assessments: 2,
+            kkt_evaluations: 3,
+            restarts: endpoint.diagnostics.restarts.unwrap(),
+            weight: 1.0,
+            stop: "iteration_limit".into(),
+        });
+        endpoint.payload_sha256 = endpoint.payload_hash().unwrap();
+        endpoint
+    }
+
+    #[test]
+    fn matched_evidence_roundtrips_without_changing_legacy_shape() {
+        let legacy = observed();
+        assert!(
+            !serde_json::to_value(&legacy)
+                .unwrap()
+                .as_object()
+                .unwrap()
+                .contains_key("control")
+        );
+        let endpoint = matched_observed();
+        endpoint.verify(MODEL).unwrap();
+        let bytes = serde_json::to_vec(&endpoint).unwrap();
+        let restored = LpEndpoint::from_json(&bytes).unwrap();
+        assert_eq!(restored, endpoint);
+        restored.verify(MODEL).unwrap();
+    }
+
+    #[test]
+    fn matched_corruption_fails_even_with_a_recomputed_payload_hash() {
+        for change in 0..10 {
+            let mut endpoint = matched_observed();
+            match change {
+                0 => endpoint.control.as_mut().unwrap().physical_iterations = Some(2),
+                1 => endpoint.control.as_mut().unwrap().stop = "accepted".into(),
+                2 => endpoint.control = None,
+                3 => endpoint.diagnostics.assessment_iteration = Some(4),
+                4 => endpoint.record.objective = Some(100.0),
+                5 => endpoint.diagnostics.dual = Some(vec![]),
+                6 => endpoint.record.termination = Termination::Optimal,
+                7 => endpoint.record.candidate.as_mut().unwrap().values[0].value = 100.0,
+                8 => endpoint.record.best_bound = Some(1e30),
+                _ => endpoint.control.as_mut().unwrap().weight = 0.0,
+            }
+            endpoint.payload_sha256 = endpoint.payload_hash().unwrap();
+            assert!(endpoint.verify(MODEL).is_err(), "change {change}");
+        }
+        let mut value = serde_json::to_value(matched_observed()).unwrap();
+        value["control"]["unknown"] = true.into();
+        assert!(LpEndpoint::from_json(&serde_json::to_vec(&value).unwrap()).is_err());
+        value["control"] = serde_json::json!([]);
+        assert!(LpEndpoint::from_json(&serde_json::to_vec(&value).unwrap()).is_err());
     }
 
     #[test]

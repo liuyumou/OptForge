@@ -312,3 +312,41 @@ multipliers for independent host certification; native status alone is insuffici
 interim result. The fastest configuration and its useful workload range remain
 hypotheses until the later controlled study is complete. GPUP-2 development
 measurements establish baseline costs and coverage, with no recipe selected.
+
+## ADR-0016 supplementary version-2 interfaces
+
+The frozen lp-matched-v2 campaign names four configuration/binary roles, profile
+instances, immutable baseline budget authority, prior consumption, supplementary
+allowance and admission policy. Trial-v2 additionally records that authority hash,
+pre-reservation activity reference/wait, and schema snapshot hash. Version-1
+campaign, manifest, trial, ledger and endpoint schemas remain byte-for-byte intact.
+The budget ledger retains its original authority/hash and output binding; new
+study IDs do not create another spending allowance.
+
+Endpoint-v2 is emitted only when cuda-lp-matched is requested. Its optional control
+object records host-restart-weight-v1, logical and physical steps, LP kernel
+launches, assessments, KKT evaluations, restarts, weight and stop reason. Physical
+steps are null after a fault if completion is unknown. Missing controller data
+before opening/initialization is explicitly unavailable. Payload integrity includes
+this object. The verifier rejects impossible identity, stop/work or assessment
+alignment claims and independently rechecks the original model and certificate.
+Legacy solves still emit endpoint-v1. New readers accept both versions.
+
+`optimizer lp-study replay --model MODEL --evidence ENDPOINT --output FRESH
+[--device UUID]` verifies the source and executes its recorded implementation;
+a historical fallback therefore replays HiGHS. It independently checks the new
+endpoint, refuses existing outputs and uses the normal selected-device/lease and
+fallback boundary. Elapsed-time termination can differ on replay; a fresh endpoint
+is evidence, not an assertion that a timeout reproduced bit for bit.
+
+Tooling validation: test_lp_overheads.py and test_lp_matched.py cover immutable
+schema reuse, strictness, v1 preservation, activity/admission races, frozen paired
+analysis and actual CPU child/replay/verification boundaries. Existing ledger,
+crash, cleanup, failure and partition tests remain acceptance requirements.
+
+Supplementary acceptance: [GPUP-3 report](../benchmarks/lp-matched-fp64-gpup3.md),
+160/160 retained attempts, no invalid/missing evidence, 251.845179881 additional
+GPU seconds and 445.988045904 cumulative seconds. All 12 development instances
+received three repetitions; four received separate profiles. Validation/held-out
+partitions remain unmeasured. Low-precision ablations and recipe selection remain
+pending. Full native and scoped device/sanitizer evidence is recorded in active task.

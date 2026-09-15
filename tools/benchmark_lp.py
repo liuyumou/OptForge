@@ -56,9 +56,11 @@ def schedule(value, manifests):
     selected=next(m for m in manifests if m['partition']==value['partition'])
     for mode,count in [('timing',value['repetitions']),('profile',value['profile_repetitions'])]:
         for instance in selected['instances']:
+            if mode=='profile' and value.get('profile_instances') is not None and instance['id'] not in value['profile_instances']:continue
             for repetition in range(count):
                 for order,configuration in enumerate(ordered(value['configurations'],value['order_seed'],instance['id'],repetition)):
-                    identity=f'{mode}-{instance["id"]}-{repetition}-{configuration["id"]}'
+                    prefix=value['id']+'-' if value['schema_version']==2 else ''
+                    identity=f'{prefix}{mode}-{instance["id"]}-{repetition}-{configuration["id"]}'
                     yield identity,instance,configuration,repetition,order,mode
 
 def reference(directory,path):
@@ -75,8 +77,9 @@ def recover_intents(directory, attempts):
         validate('trial',trial); write_json(destination,trial)
 
 def run_trial(value, identity, instance, configuration, repetition, order, mode,
-              binary, directory, ledger, base_provenance):
-    gpu=configuration['backend']=='cuda-lp'
+              binary, directory, ledger, base_provenance, protocol_hash=None):
+    gpu=configuration['backend'] in ('cuda-lp','cuda-lp-matched')
+    activity=None
     if gpu:
         from lp_activity import ActivityPause
         try:
@@ -90,7 +93,7 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
     evidence=directory/(identity+'.endpoint.json')
     config_hash=digest(encoded({'configuration':configuration,'solve':value['solve'],
                                'lp_settings':value['lp_settings'] if configuration['backend']!='highs' else None}))
-    trial={'schema_version':1,'id':identity,'campaign_sha256':ledger.campaign_hash,
+    trial={'schema_version':value['schema_version'],'id':identity,'campaign_sha256':protocol_hash or ledger.campaign_hash,
         'instance_id':instance['id'],'model_sha256':instance['model']['sha256'],
         'config_id':configuration['id'],'config_sha256':config_hash,
         'block':f'{instance["id"]}:{repetition}','repetition':repetition,'order':order,'mode':mode,
@@ -99,6 +102,12 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
         'elapsed_ns':None,'queue_ns':None,'leased_ns':None,'verification_ns':None,'peak_rss_bytes':None,
         'memory_method':'unavailable: worker not completed','limits':value['limits'],
         'provenance':{**base_provenance,'telemetry_before':before},'error':'unfinished trial intent'}
+    if value['schema_version']==2:
+        from validate_artifacts import schema_snapshot
+        trial.update(budget_authority_sha256=ledger.campaign_hash,
+            activity_wait_ns=activity['elapsed_ns'] if activity else None,
+            activity=reference(directory,directory/(identity+'.activity.json')) if activity else None)
+        trial['provenance']['schema_snapshot_sha256']=schema_snapshot().sha256
     validate('trial',trial)
     write_json(directory/(identity+'.intent.json'),trial)
     args=[str(binary),'solve','--model',str(model),'--config',str(directory/'solve.json'),
@@ -130,7 +139,7 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
     else:
         charge=info['leased_ns'] if gpu else info['elapsed_ns']
         ledger.settle(reservation,charge)
-        trial.update(status='process_failure' if info['reason']=='activity_blocked' else info['reason'],elapsed_ns=info['elapsed_ns'],queue_ns=info['queue_ns'],
+        trial.update(status='process_failure' if info['reason']=='activity_blocked' and value['schema_version']==1 else info['reason'],elapsed_ns=info['elapsed_ns'],queue_ns=info['queue_ns'],
                      leased_ns=info['leased_ns'],peak_rss_bytes=info['peak_rss_bytes'],memory_method=info['memory_method'],error=None)
         if worker.returncode!=0:
             trial.update(status='process_failure',error=f'worker exit {worker.returncode}')

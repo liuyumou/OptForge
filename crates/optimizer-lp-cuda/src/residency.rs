@@ -195,6 +195,15 @@ impl Requirement {
     }
 }
 
+/// A healthy resumable chunk returns the exact completed work, also on cancellation.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct AdvanceResult {
+    /// Steps whose kernels completed and whose vectors were read back.
+    pub completed: u64,
+    /// A cancellation/deadline observation stopped this chunk early.
+    pub interrupted: bool,
+}
+
 /// Instance-invariant data resident on one device, plus the iterate buffers.
 pub struct LpResidency {
     context: Rc<Context>,
@@ -434,6 +443,72 @@ impl LpResidency {
         cancel: &CancellationToken,
         diagnostics: &mut optimizer_core::LpDiagnostics,
     ) -> Result<u64, DeviceError> {
+        self.advance_impl(
+            x,
+            y,
+            anchor_x,
+            anchor_y,
+            since_restart,
+            iterations,
+            step,
+            weight,
+            |_| cancel.is_cancelled(),
+            false,
+            diagnostics,
+        )
+        .map(|r| r.completed)
+    }
+
+    /// Execute existing kernels with resumable cancellation at 64-step boundaries.
+    /// The observer receives completed work; a true result requests healthy readback.
+    ///
+    /// # Errors
+    /// Device faults propagate and poison the residency as before. They never
+    /// fabricate a successfully completed iterate.
+    #[allow(clippy::too_many_arguments)]
+    pub fn advance_resumable(
+        &self,
+        x: &mut [f64],
+        y: &mut [f64],
+        anchor_x: &[f64],
+        anchor_y: &[f64],
+        since_restart: u64,
+        iterations: u64,
+        step: f64,
+        weight: f64,
+        stop_requested: impl FnMut(u64) -> bool,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
+    ) -> Result<AdvanceResult, DeviceError> {
+        self.advance_impl(
+            x,
+            y,
+            anchor_x,
+            anchor_y,
+            since_restart,
+            iterations,
+            step,
+            weight,
+            stop_requested,
+            true,
+            diagnostics,
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn advance_impl(
+        &self,
+        x: &mut [f64],
+        y: &mut [f64],
+        anchor_x: &[f64],
+        anchor_y: &[f64],
+        since_restart: u64,
+        iterations: u64,
+        step: f64,
+        weight: f64,
+        mut stop_requested: impl FnMut(u64) -> bool,
+        resumable: bool,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
+    ) -> Result<AdvanceResult, DeviceError> {
         self.usable()?;
         let spmv_row = self.module.function("spmv_row")?;
         let spmv_column = self.module.function("spmv_column")?;
@@ -474,11 +549,16 @@ impl LpResidency {
         let line_grid = |lines: usize| u32::try_from(lines.max(1)).unwrap_or(u32::MAX);
 
         let mut done = 0u64;
+        let mut interrupted = false;
         for chunk_start in (0..iterations).step_by(ITERATION_CHUNK as usize) {
             // Cancellation is checked before each chunk rather than after, so a run
             // cancelled before any work starts does none.
-            if cancel.is_cancelled() {
-                return Err(DeviceError::Cancelled);
+            if stop_requested(done) {
+                if !resumable {
+                    return Err(DeviceError::Cancelled);
+                }
+                interrupted = true;
+                break;
             }
             let chunk = ITERATION_CHUNK.min(iterations - chunk_start);
             for step_index in 0..chunk {
@@ -625,6 +705,9 @@ impl LpResidency {
         device_x.copy_to(x, &self.stream)?;
         device_y.copy_to(y, &self.stream)?;
         diagnostics.finish("readback", readback);
-        Ok(done)
+        Ok(AdvanceResult {
+            completed: done,
+            interrupted,
+        })
     }
 }

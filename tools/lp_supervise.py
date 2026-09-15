@@ -56,7 +56,7 @@ def supervise(request, device=None):
     if not isinstance(request['command'],list) or not request['command'] or not all(isinstance(x,str) for x in request['command']):
         raise ValueError('invalid command')
     for key in expected-{'command','directory','prefix'}:
-        if not isinstance(request[key],(int,float)) or request[key]<=0: raise ValueError('invalid worker limit')
+        if isinstance(request[key],bool) or not isinstance(request[key],(int,float)) or not math.isfinite(request[key]) or request[key]<=0: raise ValueError('invalid worker limit')
     if version == 2 and request['gpu_admission_seconds'] != 3:
         raise ValueError('unfrozen admission limit')
     directory=Path(request['directory']).resolve(); directory.mkdir(parents=True,exist_ok=True)

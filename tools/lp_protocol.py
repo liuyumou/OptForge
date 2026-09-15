@@ -41,7 +41,10 @@ def local(root, path):
     return target
 
 def validate(kind, value):
-    validator('lp-' + kind + '-v1.schema.json').validate(value)
+    version=value.get('schema_version',1)
+    if version not in (1,2) or (version==2 and kind not in ('campaign','trial','endpoint')):
+        raise ValueError('unsupported LP artifact version')
+    validator(f'lp-{kind}-v{version}.schema.json').validate(value)
     return value
 
 def checked_reference(root, reference):

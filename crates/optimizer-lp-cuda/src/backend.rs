@@ -49,6 +49,7 @@ pub struct CudaLpBackend {
     context: Rc<Context>,
     settings: LpSettings,
     code_object: std::path::PathBuf,
+    matched: bool,
 }
 
 impl CudaLpBackend {
@@ -85,7 +86,29 @@ impl CudaLpBackend {
             context,
             settings,
             code_object,
+            matched: false,
         })
+    }
+
+    /// Opt into the shared host restart/weight controller using existing FP64 kernels.
+    ///
+    /// # Errors
+    /// Returns invalid LP settings, as for the legacy constructor.
+    pub fn open_matched(
+        context: Rc<Context>,
+        settings: LpSettings,
+    ) -> Result<Self, ValidationError> {
+        let mut backend = Self::open(context, settings)?;
+        backend.matched = true;
+        Ok(backend)
+    }
+
+    fn name(&self) -> &'static str {
+        if self.matched {
+            "cuda-lp-matched"
+        } else {
+            BACKEND_NAME
+        }
     }
 
     /// The settings this backend runs with.
@@ -114,13 +137,19 @@ impl CudaLpBackend {
         cancel: &CancellationToken,
         diagnostics: &mut optimizer_core::LpDiagnostics,
         mut check: impl FnMut(&[f64], &[f64], &mut optimizer_core::LpDiagnostics) -> bool,
+        deadline: Option<Instant>,
+        work_limit: Option<u64>,
     ) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
         // The host engine owns the scaling and the step size, and the device
         // uploads exactly what it computed. Recomputing the scaling here would
         // create a second thing that must agree with the first, and the host engine
         // exists precisely to be the one the device is checked against.
         let preparation = diagnostics.start();
-        let engine = Engine::new(program, self.settings);
+        let mut settings = self.settings;
+        if self.matched {
+            settings.iteration_limit = settings.iteration_limit.min(work_limit.unwrap_or(u64::MAX));
+        }
+        let engine = Engine::new(program, settings);
         diagnostics.finish("preconditioning", preparation);
         let (row_values, column_values) = engine.scaled_matrix();
         let peak = LpResidency::peak_buffer_bytes(program);
@@ -148,6 +177,9 @@ impl CudaLpBackend {
         if diagnostics.enabled {
             diagnostics.device_buffer_peak_bytes = Some(peak);
             diagnostics.restarts = Some(0);
+        }
+        if self.matched {
+            return self.iterate_matched(&engine, &residency, cancel, diagnostics, check, deadline);
         }
         let mut x = engine.start_primal();
         let mut y = engine.start_dual();
@@ -191,12 +223,127 @@ impl CudaLpBackend {
 
         Ok((engine.unscale_primal(&x), engine.unscale_dual(&y), done))
     }
+    #[allow(clippy::too_many_arguments)]
+    fn iterate_matched(
+        &self,
+        engine: &Engine<'_>,
+        residency: &LpResidency,
+        cancel: &CancellationToken,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
+        mut check: impl FnMut(&[f64], &[f64], &mut optimizer_core::LpDiagnostics) -> bool,
+        deadline: Option<Instant>,
+    ) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
+        let initial = diagnostics.start();
+        let mut control = optimizer_lp::control::Fp64Controller::new(engine);
+        control.set_deadline(deadline);
+        diagnostics.finish("controller", initial);
+        let mut assessed = None;
+        let mut assessments = 0;
+        let mut stop = "iteration_limit";
+        while control.remaining() > 0 {
+            if cancel.is_cancelled() {
+                stop = "interrupted";
+                break;
+            }
+            if control.expired() {
+                stop = "time_limit";
+                break;
+            }
+            let chunk = control.next_chunk(self.settings.check_interval);
+            let since_restart = control.state().since_restart;
+            let weight = control.state().weight;
+            let (x, y, anchor_x, anchor_y) = control.buffers();
+            let result = residency.advance_resumable(
+                x,
+                y,
+                anchor_x,
+                anchor_y,
+                since_restart,
+                chunk,
+                engine.step(),
+                weight,
+                |_| cancel.is_cancelled() || deadline.is_some_and(|d| Instant::now() >= d),
+                diagnostics,
+            );
+            if diagnostics.enabled {
+                diagnostics.kernel_launches = Some(residency.launches());
+            }
+            let result = match result {
+                Ok(result) => result,
+                Err(error) => {
+                    diagnostics.iterations = None;
+                    diagnostics.control = Some(optimizer_core::LpControlDiagnostics {
+                        controller: "host-restart-weight-v1".into(),
+                        logical_iterations: control.state().iterations,
+                        physical_iterations: None,
+                        device_kernel_launches: residency.launches(),
+                        assessments,
+                        kkt_evaluations: control.kkt_evaluations(),
+                        restarts: control.state().restarts,
+                        weight: control.state().weight,
+                        stop: "device_failure".into(),
+                    });
+                    diagnostics
+                        .unavailable
+                        .push("completed device work after fault is unavailable".into());
+                    return Err(error);
+                }
+            };
+            control
+                .commit_steps(result.completed)
+                .expect("admitted device chunk");
+            if diagnostics.enabled {
+                diagnostics.iterations = Some(control.physical_iterations());
+            }
+            if result.interrupted || cancel.is_cancelled() || control.expired() {
+                stop = if cancel.is_cancelled() {
+                    "interrupted"
+                } else {
+                    "time_limit"
+                };
+                break;
+            }
+            if control.check_pending() {
+                let iterate = control.iterate();
+                assessments += 1;
+                let accepted = check(&iterate.primal, &iterate.dual, diagnostics);
+                assessed = Some(iterate);
+                if accepted {
+                    stop = "accepted";
+                    break;
+                }
+                let phase = diagnostics.start();
+                control.continue_after_check();
+                diagnostics.finish("controller", phase);
+            }
+        }
+        if diagnostics.enabled {
+            diagnostics.iterations = Some(control.physical_iterations());
+            diagnostics.restarts = Some(control.state().restarts);
+        }
+        diagnostics.control = Some(optimizer_core::LpControlDiagnostics {
+            controller: "host-restart-weight-v1".into(),
+            logical_iterations: control.state().iterations,
+            physical_iterations: Some(control.physical_iterations()),
+            device_kernel_launches: residency.launches(),
+            assessments,
+            kkt_evaluations: control.kkt_evaluations(),
+            restarts: control.state().restarts,
+            weight: control.state().weight,
+            stop: stop.into(),
+        });
+        if control.physical_iterations() == 0 && stop == "interrupted" {
+            return Err(DeviceError::Cancelled);
+        }
+        let iterate = assessed.unwrap_or_else(|| control.iterate());
+        Ok((iterate.primal, iterate.dual, iterate.iterations))
+    }
 }
 
 impl Backend for CudaLpBackend {
     fn capabilities(&self) -> BackendCapabilities {
         BackendCapabilities::declare(
-            BACKEND_NAME,
+            self.name(),
             BACKEND_VERSION.to_string(),
             vec![ProblemClass::Continuous],
             Arithmetic::F64,
@@ -229,6 +376,19 @@ impl CudaLpBackend {
     /// # Errors
     /// Returns the same validation and backend failures as `Backend::solve`.
     pub fn solve_with_diagnostics(
+        &self,
+        model: &Model,
+        options: &SolveOptions,
+        cancel: &CancellationToken,
+        warm_start: Option<WarmStart<'_>>,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
+    ) -> Result<SolveRecord, ValidationError> {
+        let mut record = self.solve_observed(model, options, cancel, warm_start, diagnostics)?;
+        record.backend = self.name().into();
+        Ok(record)
+    }
+
+    fn solve_observed(
         &self,
         model: &Model,
         options: &SolveOptions,
@@ -292,6 +452,10 @@ impl CudaLpBackend {
                 closed_early |= stop;
                 stop
             },
+            options
+                .time_limit_ms
+                .and_then(|ms| started.checked_add(std::time::Duration::from_millis(ms))),
+            options.iteration_limit,
         ) {
             Ok(iterate) => iterate,
             Err(DeviceError::Cancelled) => {
@@ -339,6 +503,9 @@ impl CudaLpBackend {
         };
         let checking = diagnostics.start();
         diagnostics.capture(&dual, iterations);
+        if let Some(control) = &mut diagnostics.control {
+            control.assessments += 1;
+        }
         let report = model.evaluate(&candidate, options.tolerances)?;
         let bound = certify(&program, &dual).ok().map(|c| c.bound);
         let gap = report
@@ -349,9 +516,16 @@ impl CudaLpBackend {
             .flatten();
         let closed = closed_early && gap.is_some_and(|gap| gap.closed);
 
-        let termination = if closed {
+        let control_stop = diagnostics.control.as_ref().map(|c| c.stop.as_str());
+        let termination = if control_stop == Some("interrupted") {
+            Termination::Interrupted
+        } else if control_stop == Some("time_limit") {
+            Termination::TimeLimit
+        } else if closed {
             Termination::Optimal
-        } else if iterations >= self.settings.iteration_limit {
+        } else if control_stop == Some("iteration_limit")
+            || iterations >= self.settings.iteration_limit
+        {
             Termination::IterationLimit
         } else if report.feasible {
             Termination::Feasible

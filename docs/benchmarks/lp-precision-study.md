@@ -113,7 +113,8 @@ may expose setup/host-check costs even when no solver closes the requested gap.
 
 The existing host uses adaptive restart/weight control while the GPU uses fixed
 anchors/weight. These are distinct baseline implementations, not an algorithmically
-matched acceleration claim. GPUP-3/4 supplies the matched/tuned control. Neither a
+matched acceleration claim. GPUP-3 supplies the opt-in matched control, with
+[measured evidence](lp-matched-fp64-gpup3.md); GPUP-4 will investigate execution cost. Neither a
 fast kernel nor this baseline report selects a mixed-precision recipe.
 
 ## Device acceptance and compatibility
@@ -124,7 +125,8 @@ bash tools/gpu_job.sh GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 \
 ```
 
 This runs all three regular device suites, all four sanitizers on the two added
-study_observation tests, and actual CLI device/fallback verification. It refuses
+study_observation tests plus three matched_control tests, and actual CLI
+device/fallback/replay verification. It refuses
 missing sanitizers and device skips. It does not claim the broad historical
 sanitizer suite was run; the older atomic negative-control racecheck limitation
 remains separately recorded. Ordinary builds and the CPU gate require no device
@@ -137,7 +139,9 @@ examples explicitly name their lack of measurement evidence.
 
 ## Matched FP64 follow-up
 
-[ADR-0016](../decisions/ADR-0016-matched-fp64.md) freezes the next bounded study.
+[ADR-0016](../decisions/ADR-0016-matched-fp64.md) freezes the completed supplementary
+study. The [report](lp-matched-fp64-gpup3.md) records 27/36 matched CUDA certified
+timing trials, 251.845179881 additional GPU seconds and 445.988045904 cumulative.
 Tooling now reuses one strictly checked schema snapshot per process; restart the
 process to observe schema edits. GPU admission waits up to 300 seconds for zero
 utilization and no compute processes before reservation, with 250 ms polling.
@@ -145,3 +149,19 @@ Unavailable telemetry pauses with a retained activity sidecar. Version-2 workers
 recheck under the shared lease for at most three seconds; GPU jobs reserve 16
 seconds and charge all leased time. A blocked leased attempt is retained and never
 silently retried. No device is substituted. Existing frozen artifacts stay intact.
+
+The matched path is explicitly selected with `--backend cuda-lp-matched`; legacy
+cuda-lp remains the frozen fixed-control comparison. All arithmetic remains FP64.
+Use `python3 tools/benchmark_lp_matched.py --dry-run` to inspect the frozen
+160-attempt supplementary schedule and `python3 tools/report_lp_matched.py` to
+verify/report its retained artifacts. The reference executable is the preserved
+e415918 build (its hash matches the original baseline); the reference source archive
+is `git archive e415918`. Both live in ignored artifacts/gpup3-reference. Rebuilding
+that reference requires the pinned toolchain/native library and recorded build
+path; a changed executable hash requires a newly recorded protocol identity.
+
+Before each supplementary execution run the full native gate on the exact current
+source, build the release CLI, and use the existing ledger. The study never reruns
+attempted IDs or resets its 194.142866023-second starting consumption. Profiles
+remain separate; GPU time includes admission under the lease. Recipe selection,
+lower precision and residency/kernel optimization remain later slices.

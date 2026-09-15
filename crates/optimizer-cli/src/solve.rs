@@ -168,7 +168,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
                 )
                 .map_err(io::Error::other)?
         }
-        "cuda-lp" => {
+        "cuda-lp" | "cuda-lp-matched" => {
             let path = settings_path
                 .ok_or_else(|| argument("--backend cuda-lp requires --lp-settings"))?;
             let settings = LpSettings::from_json(&read(path)?).map_err(io::Error::other)?;
@@ -197,6 +197,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
                 Some(session) => {
                     match device_solve(
                         &session,
+                        selected == "cuda-lp-matched",
                         settings,
                         &model,
                         &configuration,
@@ -239,7 +240,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         }
         other => {
             return Err(argument(&format!(
-                "unknown backend {other}; expected highs, host-lp or cuda-lp"
+                "unknown backend {other}; expected highs, host-lp, cuda-lp or cuda-lp-matched"
             )));
         }
     };
@@ -291,8 +292,10 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
 /// The error is a string rather than a typed failure because the caller's only
 /// response is to fall back and record why; a richer type would suggest a decision
 /// that is not available here.
-fn device_solve(
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn device_solve(
     session: &optimizer_cuda::session::DeviceSession,
+    matched: bool,
     settings: LpSettings,
     model: &Model,
     configuration: &SolveOptions,
@@ -300,7 +303,12 @@ fn device_solve(
     diagnostics: &mut optimizer_core::LpDiagnostics,
 ) -> Result<optimizer_core::SolveRecord, String> {
     let context = session.context();
-    let backend = CudaLpBackend::open(context, settings).map_err(|error| error.to_string())?;
+    let backend = if matched {
+        CudaLpBackend::open_matched(context, settings)
+    } else {
+        CudaLpBackend::open(context, settings)
+    }
+    .map_err(|error| error.to_string())?;
     let record = backend
         .solve_with_diagnostics(model, configuration, cancel, None, diagnostics)
         .map_err(|error| error.to_string())?;

@@ -829,3 +829,237 @@ fn study_observation_refuses_the_explicit_buffer_budget() {
     assert!(record.warnings.iter().any(|w| w.contains("buffer budget")));
     assert!(diagnostics.dual.is_none());
 }
+
+fn matched_residency(
+    context: &Rc<Context>,
+    program: &LinearProgram,
+    engine: &Engine<'_>,
+) -> LpResidency {
+    let (rows, columns) = engine.scaled_matrix();
+    LpResidency::open(
+        Rc::clone(context),
+        program,
+        rows,
+        columns,
+        engine.scaled_objective(),
+        engine.scaled_row_bounds(),
+        engine.scaled_column_bounds(),
+        &code_object_path(),
+    )
+    .unwrap()
+}
+
+#[test]
+fn matched_control_whole_trajectory_and_restart_history() {
+    use optimizer_lp::control::Fp64Controller;
+    let Some(context) = device("matched_control_whole_trajectory_and_restart_history") else {
+        return;
+    };
+    let program = LinearProgram::new(&model()).unwrap();
+    let mut settings = LpSettings::published(128, 7);
+    settings.primal_weight.integral = 0.02;
+    settings.primal_weight.derivative = 0.1;
+    let engine = Engine::new(&program, settings);
+    let residency = matched_residency(&context, &program, &engine);
+    let mut host = Fp64Controller::new(&engine);
+    let mut gpu = Fp64Controller::new(&engine);
+    let token = CancellationToken::new();
+    let mut diagnostics = optimizer_core::LpDiagnostics::new(true, false);
+    for _ in 0..64 {
+        assert_eq!(host.advance_host(1, &token), 1);
+        let since = gpu.state().since_restart;
+        let weight = gpu.state().weight;
+        let (x, y, ax, ay) = gpu.buffers();
+        let result = residency
+            .advance_resumable(
+                x,
+                y,
+                ax,
+                ay,
+                since,
+                1,
+                engine.step(),
+                weight,
+                |_| false,
+                &mut diagnostics,
+            )
+            .unwrap();
+        assert_eq!(result.completed, 1);
+        gpu.commit_steps(result.completed).unwrap();
+        for (a, b) in host
+            .state()
+            .primal
+            .iter()
+            .chain(&host.state().dual)
+            .zip(gpu.state().primal.iter().chain(&gpu.state().dual))
+        {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+        if host.check_pending() {
+            host.continue_after_check();
+            gpu.continue_after_check();
+            assert_eq!(host.state().weight.to_bits(), gpu.state().weight.to_bits());
+            assert_eq!(
+                host.state().integral.to_bits(),
+                gpu.state().integral.to_bits()
+            );
+            assert_eq!(host.state().restarts, gpu.state().restarts);
+        }
+    }
+    assert!(gpu.state().restarts > 1);
+    assert!(gpu.state().previous_error.is_some());
+    assert_eq!(residency.launches(), 64 * 6);
+}
+
+#[test]
+fn matched_control_partial_chunk_cancellation_returns_completed_vectors() {
+    use optimizer_lp::control::Fp64Controller;
+    let Some(context) =
+        device("matched_control_partial_chunk_cancellation_returns_completed_vectors")
+    else {
+        return;
+    };
+    let program = LinearProgram::new(&model()).unwrap();
+    let engine = Engine::new(&program, settings(200));
+    let residency = matched_residency(&context, &program, &engine);
+    let mut host = Fp64Controller::new(&engine);
+    let mut gpu = Fp64Controller::new(&engine);
+    let (x, y, ax, ay) = gpu.buffers();
+    let result = residency
+        .advance_resumable(
+            x,
+            y,
+            ax,
+            ay,
+            0,
+            200,
+            engine.step(),
+            1.0,
+            |completed| completed >= 64,
+            &mut optimizer_core::LpDiagnostics::new(true, true),
+        )
+        .unwrap();
+    assert!(result.interrupted);
+    assert_eq!(result.completed, 64);
+    gpu.commit_steps(result.completed).unwrap();
+    assert_eq!(host.advance_host(64, &CancellationToken::new()), 64);
+    for (a, b) in host
+        .state()
+        .primal
+        .iter()
+        .chain(&host.state().dual)
+        .zip(gpu.state().primal.iter().chain(&gpu.state().dual))
+    {
+        assert_eq!(a.to_bits(), b.to_bits());
+    }
+    assert_eq!(residency.launches(), 384);
+    let saved = gpu.checkpoint();
+    let (x, y, ax, ay) = gpu.buffers();
+    let result = residency
+        .advance_resumable(
+            x,
+            y,
+            ax,
+            ay,
+            64,
+            10,
+            engine.step(),
+            1.0,
+            |_| true,
+            &mut optimizer_core::LpDiagnostics::new(true, false),
+        )
+        .unwrap();
+    assert_eq!(result.completed, 0);
+    assert!(result.interrupted);
+    gpu.restore(&saved).unwrap();
+    assert_eq!(gpu.physical_iterations(), 64);
+    assert_eq!(residency.launches(), 384);
+}
+
+#[test]
+fn matched_control_endpoint_alignment_senses_and_repeatability() {
+    use optimizer_lp::HostLpBackend;
+    let Some(context) = device("matched_control_endpoint_alignment_senses_and_repeatability")
+    else {
+        return;
+    };
+    for maximize in [false, true] {
+        let mut document = model().document().clone();
+        if maximize {
+            document.objective.sense = ObjectiveSense::Maximize;
+            for term in &mut document.objective.terms {
+                term.coefficient = -term.coefficient;
+            }
+        }
+        let model = Model::new(document).unwrap();
+        let settings = LpSettings::published(250, 200);
+        let mut options = options();
+        options.tolerances.absolute = 1e-9;
+        options.tolerances.relative = 1e-9;
+        let host = HostLpBackend::new(settings).unwrap();
+        let gpu = CudaLpBackend::open_matched(Rc::clone(&context), settings).unwrap();
+        let mut host_diag = optimizer_core::LpDiagnostics::new(true, false);
+        let expected = host
+            .solve_with_diagnostics(
+                &model,
+                &options,
+                &CancellationToken::new(),
+                None,
+                &mut host_diag,
+            )
+            .unwrap();
+        let mut previous = None;
+        for profile in [false, true] {
+            let mut diagnostics = optimizer_core::LpDiagnostics::new(true, profile);
+            let mut actual = gpu
+                .solve_with_diagnostics(
+                    &model,
+                    &options,
+                    &CancellationToken::new(),
+                    None,
+                    &mut diagnostics,
+                )
+                .unwrap();
+            assert_eq!(actual.backend, "cuda-lp-matched");
+            assert_eq!(actual.candidate, expected.candidate);
+            assert_eq!(actual.best_bound, expected.best_bound);
+            assert_eq!(diagnostics.dual, host_diag.dual);
+            assert_eq!(
+                diagnostics.assessment_iteration,
+                host_diag.assessment_iteration
+            );
+            assert_eq!(diagnostics.iterations, host_diag.iterations);
+            assert_eq!(
+                diagnostics.kernel_launches,
+                diagnostics.iterations.map(|n| 6 * n)
+            );
+            actual.elapsed_ms = 0;
+            if let Some(previous) = previous {
+                assert_eq!(actual, previous);
+            }
+            previous = Some(actual);
+        }
+        // The solve-options allowance independently bounds the explicit LP limit.
+        options.iteration_limit = Some(3);
+        let mut diagnostics = optimizer_core::LpDiagnostics::new(true, false);
+        let record = gpu
+            .solve_with_diagnostics(
+                &model,
+                &options,
+                &CancellationToken::new(),
+                None,
+                &mut diagnostics,
+            )
+            .unwrap();
+        assert_eq!(diagnostics.iterations, Some(3));
+        assert_eq!(record.termination, Termination::IterationLimit);
+        let token = CancellationToken::new();
+        token.cancel();
+        let mut diagnostics = optimizer_core::LpDiagnostics::new(true, false);
+        let record = gpu
+            .solve_with_diagnostics(&model, &options, &token, None, &mut diagnostics)
+            .unwrap();
+        assert_eq!(record.termination, Termination::Interrupted);
+        assert_eq!(diagnostics.iterations, Some(0));
+    }
+}

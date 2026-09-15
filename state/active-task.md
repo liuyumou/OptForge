@@ -1,5 +1,60 @@
 # Active Task
 
+## GPUP-3: shared resumable matched FP64 control (2026-09-15)
+
+Status: complete; acceptance passed, ready for local commit. SPEC-0012 accepted before implementation; ADR-0016 freezes
+the opt-in FP64 contract and comparative protocol. Prerequisites committed separately
+as 18fe686 (schema/activity) and 223ee6c (bit-preserving certification), each after
+its full native gate. No legacy controller/default, numerical target or frozen
+baseline artifact changed. GPUP-4 is the next dependency-ready task.
+
+The [reviewed report](../docs/benchmarks/lp-matched-fp64-gpup3.md) retains all 160
+attempts: 144 primary timings and 16 profiles, all development-only, in one
+468.090-second invocation. Matched CUDA and current host certified 27/36 timing
+trials; both legacy CUDA builds certified 6/36. Three scheduling instances remain
+infeasible at the matched iteration limit. No invalid/missing evidence, device
+failure or fallback occurred. All 33 mutually completed reference/current legacy
+pairs and 27 mutually certified host/matched pairs agree on candidate, witness,
+objective, bound and gap bits. The report includes paired intervals and limitations.
+
+Budget: 251.845179881 additional GPU seconds from the allocated 600; prior
+194.142866023 carried forward through the original authority. Cumulative is
+445.988045904 of 900, preserving the 1,800-second baseline phase, 28,800-second
+campaign and remaining allocations. All 160 distinct attempts settled, no pending
+crash reservation. Pre-reservation waits total 55.605846414 seconds, lease queue
+0.002241305 seconds; no study restart. Original baseline summary and ledger hashes
+are unchanged. Current ledger SHA-256:
+49ea15fc24a24fcabb4e677d6a684ea8a8d0d6c5fc1d1a52dba7b098c827a8f3.
+Raw source/binary/schema identities and indexed artifacts are in the report.
+
+Acceptance uses the separate 60-minute CPU/four-build-job and 30-minute GPU budgets.
+Premeasurement full pinned-native gate passed: 405 Rust, 103 Python and 68 doc pages,
+18.273888354 seconds. CPU gates/builds and device workloads were sequential.
+The 38 regular GPU cases and five scoped cases under each of memcheck, racecheck,
+initcheck and synccheck passed with zero errors; racecheck zero warnings. The first
+combined job then caught a missing controller phase in endpoint-v2's schema.
+Schema/parser parity and a CPU regression fixed it; a full native gate and targeted
+leased CLI evidence/fallback/replay rerun passed. Runtime/controller/kernel output
+was unchanged. Both attempts are retained. Total GPU acceptance was
+77.351226566 + 2.322113705 = 79.673340271 leased seconds, within 1,800.
+
+Logs: /tmp/gpup3-measurement-ready.log/.json, /tmp/gpup3-acceptance and
+/tmp/gpup3-cli-acceptance. Durable copies are indexed under
+artifacts/gpup3-matched-fp64-v1 along with raw trials and independent verification.
+No precision work, persistent checkpoint format, preset, general runner or
+publication is included.
+
+Final gate: full pinned-native bash tools/check.sh passed in 18.284103359 seconds,
+405 Rust tests, 103 Python tests and 69 documentation pages, with dependency/license
+checks, unchanged-record replay and smoke verification. Evidence is retained in
+artifacts/gpup3-final-acceptance/native.log and native.json. Native log SHA-256:
+8601cc1a629acab78d33c6661d7ddea10d00d35b7603f8d5be827f7832ec5f90.
+Only completion-state documentation and backlog selection changed afterward;
+the source/kernel/device acceptance and measured artifacts remain intact.
+GPUP-3's required gates are satisfied; GPUP-4 is ready, with no new work authorized
+by merely selecting that backlog item. Local commit includes all bounded GPUP-3
+implementation, acceptance and handoff documentation.
+
 ## GPUP-3 prerequisite: bit-preserving certification cost (2026-09-15)
 
 Status: accepted for local commit. Full pinned-native gate passed in 22.844
