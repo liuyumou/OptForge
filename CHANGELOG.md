@@ -1,5 +1,11 @@
 # Changelog
 
+## Matched FP64 prerequisites (2026-09-15)
+
+- Reuse strictly checked LP schema snapshots and wait for quiet GPU admission.
+- Prune padding-only outward certification work, preserving all enclosure/result
+  bits and conservative refusals. Independent rational and padded-oracle tests pass.
+
 User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased

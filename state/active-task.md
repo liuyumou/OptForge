@@ -1,5 +1,22 @@
 # Active Task
 
+## GPUP-3 prerequisite: bit-preserving certification cost (2026-09-15)
+
+Status: accepted for local commit. Full pinned-native gate passed in 22.844
+seconds: 398 Rust tests, 98 Python tests and 68 documentation pages. New tests
+compare 138 length/input combinations bit-for-bit with the retained padded reducer
+and verify exactly n-1 live enclosure additions across segment boundaries. All
+independent exact-rational certificate/gap fixtures pass. No GPU work occurred.
+Logs: /tmp/gpup3-cert-tests.log and /tmp/gpup3-cert-gate.log/.json.
+
+Optimize only outward reduction padding under ADR-0016.
+Keep the partition, meaningful addition order, rounded/enclosure bits, signed zeros
+and conservative refusals. Keep the literal padded differential oracle and GPUP-1
+exact-rational authority. Acceptance: signed-zero/subnormal/cancellation/overflow
+and segment-boundary differential cases, meaningful operation counts, full native
+gate. CPU only, four build jobs, charged to the combined 60-minute acceptance cap.
+No GPU work or campaign consumption; runtime reduction/controller settings unchanged.
+
 ## GPUP-2 follow-up: schema reuse and activity admission (2026-09-15)
 
 Acceptance: completed. Full pinned-native tools/check.sh passed in 18.026 seconds,

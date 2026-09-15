@@ -154,3 +154,16 @@ RTX 5090 coverage. It does not claim the entire broad sanitizer gate passed. The
 unfinished atomic stress case remains a coverage limitation; internal test settings
 were not reduced. Total additional GPU acceptance was 1,550.46 seconds, below the
 1,800-second integration cap, and used none of the performance-study allocation.
+
+## Padding optimization
+
+ADR-0016 prunes only padding subtrees of the fixed 1,024-element reduction.
+Meaningful additions retain their original indices and order. A live finite
+component plus positive zero has an exact zero TwoSum residual; evaluating its
+rounded addition explicitly preserves negative-zero normalization. Thus a padding
+edge can use three ordinary component additions, and a padding-only subtree is
+exactly the all-positive-zero enclosure. No uncertain sign, overflow refusal,
+interval endpoint or coefficient changes. The literal padded reducer and independent
+rational oracle remain regression authorities. Eighteen live terms now need 17
+full enclosure additions rather than 1,023; this count does not include cheap
+padding normalization and is not an end-to-end speedup claim.
