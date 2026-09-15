@@ -78,6 +78,39 @@ impl HighsBackend {
         self.dispatch(model, options, cancel, warm_start, true)
     }
 
+    /// Solve with untrusted LP row multipliers and optional phase observations.
+    /// No native handle or mathematical authority crosses this interface.
+    pub fn solve_with_diagnostics(
+        &self,
+        model: &Model,
+        options: &SolveOptions,
+        cancel: &CancellationToken,
+        warm_start: Option<WarmStart<'_>>,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
+    ) -> Result<SolveRecord, ValidationError> {
+        let options = options.validate()?;
+        if cancel.is_cancelled() {
+            return Ok(interrupted_record(model, &options));
+        }
+        #[cfg(highs_native)]
+        {
+            native::solve(
+                model,
+                &options,
+                cancel,
+                warm_start,
+                native::BasisRequest::Skip,
+                diagnostics,
+            )
+            .map(|v| v.0)
+        }
+        #[cfg(not(highs_native))]
+        {
+            let _ = (warm_start, diagnostics);
+            self.solve(model, &options, cancel, None)
+        }
+    }
+
     /// Shared body of both entry points.
     ///
     /// `want_basis` decides only whether the final basis is extracted. Every
@@ -107,7 +140,14 @@ impl HighsBackend {
             } else {
                 native::BasisRequest::Skip
             };
-            native::solve(model, &options, cancel, warm_start, request)
+            native::solve(
+                model,
+                &options,
+                cancel,
+                warm_start,
+                request,
+                &mut optimizer_core::LpDiagnostics::new(false, false),
+            )
         }
         #[cfg(not(highs_native))]
         {

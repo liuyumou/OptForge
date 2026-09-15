@@ -112,14 +112,27 @@ impl CudaLpBackend {
         &self,
         program: &LinearProgram,
         cancel: &CancellationToken,
-        mut check: impl FnMut(&[f64], &[f64]) -> bool,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
+        mut check: impl FnMut(&[f64], &[f64], &mut optimizer_core::LpDiagnostics) -> bool,
     ) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
         // The host engine owns the scaling and the step size, and the device
         // uploads exactly what it computed. Recomputing the scaling here would
         // create a second thing that must agree with the first, and the host engine
         // exists precisely to be the one the device is checked against.
+        let preparation = diagnostics.start();
         let engine = Engine::new(program, self.settings);
+        diagnostics.finish("preconditioning", preparation);
         let (row_values, column_values) = engine.scaled_matrix();
+        let peak = LpResidency::peak_buffer_bytes(program);
+        if diagnostics
+            .device_buffer_limit_bytes
+            .is_some_and(|limit| peak > limit)
+        {
+            return Err(DeviceError::Unsupported(format!(
+                "LP device buffer budget: {peak} bytes"
+            )));
+        }
+        let allocation = diagnostics.start();
         let residency = LpResidency::open(
             Rc::clone(&self.context),
             program,
@@ -131,6 +144,11 @@ impl CudaLpBackend {
             &self.code_object,
         )?;
 
+        diagnostics.finish("invariant_allocation_upload", allocation);
+        if diagnostics.enabled {
+            diagnostics.device_buffer_peak_bytes = Some(peak);
+            diagnostics.restarts = Some(0);
+        }
         let mut x = engine.start_primal();
         let mut y = engine.start_dual();
         let anchor_x = x.clone();
@@ -144,7 +162,7 @@ impl CudaLpBackend {
             // launch loop at each interval does not restart the coefficient
             // sequence. Getting that wrong would make the interval change the
             // answer, which is the one thing a termination check must not do.
-            residency.advance(
+            let result = residency.advance_with_diagnostics(
                 &mut x,
                 &mut y,
                 &anchor_x,
@@ -154,12 +172,19 @@ impl CudaLpBackend {
                 engine.step(),
                 1.0,
                 cancel,
-            )?;
+                diagnostics,
+            );
+            if diagnostics.enabled {
+                diagnostics.kernel_launches = Some(residency.launches());
+                diagnostics.iterations = Some(residency.launches() / 6);
+            }
+            result?;
             done += chunk;
 
             let primal = engine.unscale_primal(&x);
             let dual = engine.unscale_dual(&y);
-            if check(&primal, &dual) {
+            diagnostics.capture(&dual, done);
+            if check(&primal, &dual, diagnostics) {
                 return Ok((primal, dual, done));
             }
         }
@@ -187,6 +212,29 @@ impl Backend for CudaLpBackend {
         options: &SolveOptions,
         cancel: &CancellationToken,
         warm_start: Option<WarmStart<'_>>,
+    ) -> Result<SolveRecord, ValidationError> {
+        self.solve_with_diagnostics(
+            model,
+            options,
+            cancel,
+            warm_start,
+            &mut optimizer_core::LpDiagnostics::new(false, false),
+        )
+    }
+}
+
+impl CudaLpBackend {
+    /// Execute the ordinary method while collecting explicitly requested observations.
+    ///
+    /// # Errors
+    /// Returns the same validation and backend failures as `Backend::solve`.
+    pub fn solve_with_diagnostics(
+        &self,
+        model: &Model,
+        options: &SolveOptions,
+        cancel: &CancellationToken,
+        warm_start: Option<WarmStart<'_>>,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
     ) -> Result<SolveRecord, ValidationError> {
         options.validate()?;
 
@@ -233,11 +281,18 @@ impl Backend for CudaLpBackend {
             };
 
         let mut closed_early = false;
-        let (primal, dual, iterations) = match self.iterate(&program, cancel, |primal, dual| {
-            let stop = assess(primal, dual).is_some_and(|(_, _, _, _, closed)| closed);
-            closed_early |= stop;
-            stop
-        }) {
+        let (primal, dual, iterations) = match self.iterate(
+            &program,
+            cancel,
+            diagnostics,
+            |primal, dual, diagnostics| {
+                let checking = diagnostics.start();
+                let stop = assess(primal, dual).is_some_and(|(_, _, _, _, closed)| closed);
+                diagnostics.finish("host_checks", checking);
+                closed_early |= stop;
+                stop
+            },
+        ) {
             Ok(iterate) => iterate,
             Err(DeviceError::Cancelled) => {
                 return Ok(bare(
@@ -282,6 +337,8 @@ impl Backend for CudaLpBackend {
                 })
                 .collect(),
         };
+        let checking = diagnostics.start();
+        diagnostics.capture(&dual, iterations);
         let report = model.evaluate(&candidate, options.tolerances)?;
         let bound = certify(&program, &dual).ok().map(|c| c.bound);
         let gap = report
@@ -302,6 +359,7 @@ impl Backend for CudaLpBackend {
             Termination::IterationLimit
         };
 
+        diagnostics.finish("host_checks", checking);
         let objective = report.feasible.then_some(report.objective);
         Ok(SolveRecord {
             schema_version: SOLVE_RECORD_SCHEMA_VERSION,

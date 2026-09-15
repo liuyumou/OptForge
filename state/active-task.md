@@ -1,5 +1,95 @@
 # Active Task
 
+## GPUP-2: LP measurement infrastructure (2026-09-15)
+
+Objective: implement the maintainer-approved Slice 2 plan: accepted contract,
+frozen repository/generated workloads, independent host-lp/cuda-lp/HiGHS
+endpoints, strict artifacts, crash-safe accounting and a baseline cost report.
+Status: complete; accepted for local commit. GPUP-3 is the next ready task.
+Known failures have been read. Preserve GPUP-1 rational
+regressions and existing host/GPU controller differences; no later slice.
+Acceptance: full pinned-native bash tools/check.sh; adversarial artifact,
+endpoint, budget/crash/lease/cleanup and analysis tests; regular device suites
+and relevant new cases under all four sanitizers; development measurements.
+Budget: 60 minutes CPU acceptance wall time, four Cargo jobs; 30 minutes GPU
+acceptance sequential with CPU gates. Study cap 900 GPU seconds from the 1,800
+baseline phase within the 28,800 campaign total. Device is exclusively
+GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 under the shared host lease.
+Likely files: diagnostic backend APIs, CLI solve/study, experiment types/schemas,
+Python tooling/tests, frozen manifests/configs, SPEC-0013, ADR-0014 and task/docs.
+No publication. Evidence and actual consumption follow below.
+
+Pre-measurement acceptance: two full pinned-native gates passed (50.974 and
+39.336 seconds), each with 396 Rust tests, 89 Python tests and 64 documentation
+pages. Release solver/device-test preparation took 10.299 seconds. Additional
+CPU orchestration checks exercised one complete trial and an interim report with
+source archive/raw-reference validation, with no GPU work. The second gate
+includes a correction preventing --output from creating a fresh campaign ledger.
+
+Device acceptance: all 35 regular device cases passed on the pinned RTX 5090.
+Both new study_observation cases passed under memcheck, racecheck, initcheck and
+synccheck, with zero errors; racecheck also reported zero warnings. The first
+combined invocation exited 1 only at the CLI fallback fixture: it hid the
+scheduling code object required to open a session, before LP fallback was reachable.
+The corrected fixture preserves that object and hides only lp_pdhg.cubin.
+The targeted CLI rerun passed device evidence and pinned fallback verification.
+No runtime code changed for this fixture correction. Total GPU acceptance was
+27.249 + 1.266 = 28.515 seconds, well within 1,800. Logs and timing JSON are in
+/tmp/gpup2-gpu-acceptance.* and /tmp/gpup2-gpu-cli.*. This is the declared scoped
+sanitizer acceptance, not a claim of running the historical broad sanitizer suite.
+
+The third full pre-measurement native gate passed in 39.966 seconds with the
+same coverage. All 144 development attempts then completed: 108 timing trials,
+36 separate profiles, 48 GPU jobs. The canonical campaign ledger charged exactly
+173.148261443 GPU seconds; CPU-only jobs used 202.666858567 seconds and additional
+standalone host verification used 24.459310130 seconds. Two activity pauses resumed
+on the same device/ledger without repeated trials. No validation/held-out solves.
+
+The [reviewed baseline](../docs/benchmarks/lp-baseline-gpup2.md) records medians,
+paired intervals, coverage, work, phases, memory, certificate quality and raw hashes.
+CUDA certified 6/36 timing trials (two small witness cases), host LP 27/36 and
+HiGHS 30/36. No fallback or malformed evidence occurred in the campaign. Failure,
+work-limit and deadline evidence is retained. No solver default, seed, split or
+numerical threshold moved; the exact-rational GPUP-1 regressions are unchanged.
+
+Raw artifacts: artifacts/gpup-baseline-v1, with canonical budget storage in
+artifacts/lp-campaign-ledgers/gpup-baseline-v1. Ledger SHA-256 is
+aee3f1398725fedf8ad37d644c8960156b897b3a11478839359def4619eb8e37;
+summary SHA-256 is c57de898e75b5c422efd09ed3590e8e9d39f97f2b50ce99535f63d1c41a6cc63.
+The measured dirty source is archived and hashed in the report. Preserve spending
+when a later slice introduces a recorded campaign migration. Remaining baseline
+phase is 1,626.851738557 seconds; remaining total is 28,626.851738557 seconds.
+
+Final review tightened the supervisor after measurement: persist SIGINT intent
+before escalation, reap orphaned process-group children before releasing the lease,
+and stream artifact hashes after checking model size. Fifteen targeted study tests
+passed, including exact simulated deadline boundaries and orphan cleanup. Existing
+raw measurements and their source archive remain intact; these tooling-only edits
+introduce no solver, kernel, controller or protocol-setting change.
+
+Final acceptance: bash tools/check.sh passed with pinned native HiGHS 1.11.0,
+396 Rust tests, 91 Python tests, 65 documentation pages, dependency/license checks,
+committed-record replay and smoke verification (39.666 seconds). The four full
+native gates total 169.942 CPU wall seconds; release preparation was 10.299 seconds,
+the last focused study tests 5.891 seconds, and explicit Rust validation of all
+32 frozen models plus 24 planted primal witnesses was 1.215 seconds. Earlier
+bounded orchestration/interim-report checks added approximately 4.17 seconds;
+acceptance remained below the 3,600-second CPU allocation with four build jobs.
+Logs: /tmp/gpup2-cpu-final.log and timing JSON; /tmp/gpup2-partition-validation.*.
+
+The final supervised GPU CLI/evidence/fallback check passed in 1.467 seconds
+(leased job 1.308638432 seconds). Signal history was empty for the successful job;
+forced-signal and orphan-reaping cases passed the CPU simulation tests. Including
+the prior regular suites, all four scoped sanitizers and failed fixture attempt,
+GPU acceptance totals 29.981850548 seconds of 1,800. Its machine-readable worker
+record is /tmp/gpup2-final-supervisor/acceptance.worker.json; summary is
+/tmp/gpup2-gpu-final.json. No CPU gate overlapped device acceptance.
+
+Slice 2's gate is satisfied. Preserve the accepted source/records, exact-rational
+regressions, frozen splits/settings, unsuccessful trials and cumulative campaign
+spending. GPUP-3 must accept SPEC-0012 before implementing shared resumable FP64
+control. No mixed precision, C10 runner, supported preset or publication is included.
+
 ## GPUP-0/1 PR Review and Integration (2026-09-14)
 
 Objective: review the roadmap and certification repair, publish one PR preserving

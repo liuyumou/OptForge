@@ -238,6 +238,16 @@ pub fn device_path_available() -> bool {
 }
 
 impl LpResidency {
+    /// Peak bytes actually allocated by invariant and advance buffers, including
+    /// one-element allocations for empty arrays. Driver/module memory is excluded.
+    #[must_use]
+    pub fn peak_buffer_bytes(program: &LinearProgram) -> u64 {
+        let n = program.nonzeros().max(1) as u64;
+        let rows = program.row_count() as u64;
+        let cols = program.column_count() as u64;
+        24 * n + 4 * (rows + cols + 2) + 8 * (8 * cols.max(1) + 6 * rows.max(1))
+    }
+
     /// Upload one program's invariant data and allocate its iterate buffers.
     ///
     /// # Errors
@@ -392,6 +402,38 @@ impl LpResidency {
         weight: f64,
         cancel: &CancellationToken,
     ) -> Result<u64, DeviceError> {
+        self.advance_with_diagnostics(
+            x,
+            y,
+            anchor_x,
+            anchor_y,
+            since_restart,
+            iterations,
+            step,
+            weight,
+            cancel,
+            &mut optimizer_core::LpDiagnostics::new(false, false),
+        )
+    }
+
+    /// The ordinary advance with optional synchronized phase observations.
+    ///
+    /// # Errors
+    /// Returns the same cancellation, device and availability failures as advance.
+    #[allow(clippy::too_many_arguments)]
+    pub fn advance_with_diagnostics(
+        &self,
+        x: &mut [f64],
+        y: &mut [f64],
+        anchor_x: &[f64],
+        anchor_y: &[f64],
+        since_restart: u64,
+        iterations: u64,
+        step: f64,
+        weight: f64,
+        cancel: &CancellationToken,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
+    ) -> Result<u64, DeviceError> {
         self.usable()?;
         let spmv_row = self.module.function("spmv_row")?;
         let spmv_column = self.module.function("spmv_column")?;
@@ -405,6 +447,7 @@ impl LpResidency {
             spmv_column.set_max_dynamic_shared_memory(shared)?;
         }
 
+        let allocation = diagnostics.start();
         let mut device_x = self.context.allocate::<f64>(self.columns.max(1))?;
         let mut device_y = self.context.allocate::<f64>(self.rows.max(1))?;
         let mut device_anchor_x = self.context.allocate::<f64>(self.columns.max(1))?;
@@ -415,11 +458,15 @@ impl LpResidency {
         let transposed = self.context.allocate::<f64>(self.columns.max(1))?;
         let activity = self.context.allocate::<f64>(self.rows.max(1))?;
 
+        diagnostics.finish("working_allocation", allocation);
+        let upload = diagnostics.start();
         device_x.copy_from(x, &self.stream)?;
         device_y.copy_from(y, &self.stream)?;
         device_anchor_x.copy_from(anchor_x, &self.stream)?;
         device_anchor_y.copy_from(anchor_y, &self.stream)?;
 
+        diagnostics.finish("working_upload", upload);
+        let kernels = diagnostics.start();
         let primal_step = step / weight;
         let dual_step = step * weight;
         let grid_columns = (self.columns.max(1) as u32).div_ceil(BLOCK);
@@ -460,6 +507,7 @@ impl LpResidency {
                     &self.stream,
                 )
                 .map_err(|error| self.observe(error))?;
+                self.launches.set(self.launches.get() + 1);
 
                 launch(
                     &primal,
@@ -482,6 +530,7 @@ impl LpResidency {
                     &self.stream,
                 )
                 .map_err(|error| self.observe(error))?;
+                self.launches.set(self.launches.get() + 1);
 
                 launch(
                     &spmv_row,
@@ -504,6 +553,7 @@ impl LpResidency {
                     &self.stream,
                 )
                 .map_err(|error| self.observe(error))?;
+                self.launches.set(self.launches.get() + 1);
 
                 launch(
                     &dual,
@@ -524,6 +574,7 @@ impl LpResidency {
                     &self.stream,
                 )
                 .map_err(|error| self.observe(error))?;
+                self.launches.set(self.launches.get() + 1);
 
                 // The Halpern coefficients are pure functions of an integer and are
                 // computed here rather than on the device, so both engines derive
@@ -556,8 +607,8 @@ impl LpResidency {
                         &self.stream,
                     )
                     .map_err(|error| self.observe(error))?;
+                    self.launches.set(self.launches.get() + 1);
                 }
-                self.launches.set(self.launches.get() + 5);
             }
 
             // Synchronizing per chunk is what makes the cancellation check above
@@ -569,8 +620,11 @@ impl LpResidency {
             done += chunk;
         }
 
+        diagnostics.finish("kernels_and_synchronization", kernels);
+        let readback = diagnostics.start();
         device_x.copy_to(x, &self.stream)?;
         device_y.copy_to(y, &self.stream)?;
+        diagnostics.finish("readback", readback);
         Ok(done)
     }
 }

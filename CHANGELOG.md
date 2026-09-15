@@ -6,13 +6,25 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- GPUP-2 LP-only measurement infrastructure: strict frozen campaigns/manifests,
+  optional solve evidence and independent verification, conservative host certification
+  of HiGHS row multipliers, crash-safe budget accounting, bounded supervised GPU
+  jobs, paired coverage analysis and separate phase profiles. See
+  [study operations](docs/benchmarks/lp-precision-study.md). Existing solve formats,
+  arithmetic, controllers and defaults remain compatible. The [baseline report](docs/benchmarks/lp-baseline-gpup2.md)
+  records 144 trials and 173.148 GPU seconds; CUDA certified only the two small
+  witness cases. No low-precision recipe is promoted.
+- Accurate observed LP device-buffer peak and per-call kernel launch counts for
+  study accounting; the old launch counter omitted the second Halpern launch.
+
 - The approved [GPU LP precision roadmap](docs/plans/gpu-lp-precision-roadmap.md),
   GPUP-0 through GPUP-10 backlog slices, draft numerical/experiment specifications,
   and ADR-0012/ADR-0013. The selected objective is certified single-solve latency
   with an eight GPU-hour first experiment campaign and component/interaction
   ablations before recipe selection. Repeated-solve throughput and full MILP search
-  performance are separate future tracks. This is documentation and planning;
-  no mixed-precision backend, experiment result, or new default is shipped.
+  performance are separate future tracks. That initial planning change shipped
+  no mixed-precision backend, experiment result, or new default; GPUP-2 evidence
+  is recorded separately above.
 - A recorded reduced-cost cancellation defect in the existing LP certification,
   with an exact binary64-coefficient counterexample and GPUP-1 repair prerequisite.
   The earlier certification claims below describe the intended contract; the

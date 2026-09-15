@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-ledger-v1.schema.json",
+  "title": "LP ledger v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "campaign_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reservation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trial_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "reserve",
+        "settle",
+        "recover"
+      ]
+    },
+    "phase": {
+      "enum": [
+        "baseline",
+        "screening",
+        "ablations",
+        "finalists",
+        "repeatability"
+      ]
+    },
+    "resource": {
+      "enum": [
+        "cpu",
+        "gpu"
+      ]
+    },
+    "reserved_ns": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "charged_ns": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "campaign_sha256",
+    "sequence",
+    "reservation_id",
+    "trial_id",
+    "kind",
+    "phase",
+    "resource",
+    "reserved_ns",
+    "charged_ns"
+  ]
+}

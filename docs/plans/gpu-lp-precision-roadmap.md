@@ -1,11 +1,11 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; slices 0-1 complete; slices 2-10 pending
+Status: approved roadmap; slices 0-2 complete; slices 3-10 pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: bootstrap (first commit containing this document)
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
-Acceptance: the slice gates below; no performance results yet
+Acceptance: the slice gates below; [GPUP-2 baseline evidence](../benchmarks/lp-baseline-gpup2.md)
 
 ## Objective and working agreement
 
@@ -30,8 +30,9 @@ This track follows C6 but does not complete C7, C9, or the general C10 runner.
 
 - [SPEC-0012](../specifications/SPEC-0012-mixed-precision-lp.md) drafts numerical,
   recovery, and interface requirements. It is not an implemented capability.
-- [SPEC-0013](../specifications/SPEC-0013-lp-precision-experiments.md) drafts the
-  bounded LP study, its artifacts, and acceptance mapping.
+- [SPEC-0013](../specifications/SPEC-0013-lp-precision-experiments.md) is accepted;
+  GPUP-2 implements the bounded LP study, artifacts and baseline acceptance.
+  [ADR-0014](../decisions/ADR-0014-lp-baseline-protocol.md) freezes its concrete protocol.
 - [ADR-0012](../decisions/ADR-0012-opt-in-lp-precision.md) narrowly supersedes the
   blanket FP64 and shared-reduction restrictions for a new opt-in backend once
   its prerequisites and accepted specification are in place.
@@ -193,7 +194,10 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Next handoff after GPUP-1: finalize the experiment contract and establish the
-measurement infrastructure under GPUP-2. Full MILP integration and repeated-solve
+Next handoff after GPUP-2: accept SPEC-0012 and create the shared resumable FP64
+controller under GPUP-3. The baseline completed 144 attempts and consumed
+173.148261443 GPU seconds; preserve that ledger consumption. Host/GPU controller
+differences and limited GPU certified coverage are documented in the baseline report.
+Full MILP integration and repeated-solve
 throughput are separately listed in
 the backlog; neither follows automatically from a faster LP kernel.

@@ -769,3 +769,63 @@ fn a_device_maximization_uses_the_host_gap_enclosure() {
     assert!(gap > 0.0 && gap <= 0.75);
     assert!(gap >= result.best_bound.unwrap() - result.objective.unwrap());
 }
+
+/// GPUP-2 observations share the same numerical solve and count actual launches.
+#[test]
+fn study_observation_preserves_result_witness_and_actual_work() {
+    let Some(context) = device("study_observation_preserves_result_witness_and_actual_work") else {
+        return;
+    };
+    let model = model();
+    let backend = CudaLpBackend::open(context, settings(201)).unwrap();
+    let mut ordinary = backend
+        .solve(&model, &options(), &CancellationToken::new(), None)
+        .unwrap();
+    let mut diagnostics = optimizer_core::LpDiagnostics::new(true, true);
+    diagnostics.device_buffer_limit_bytes = Some(8 * 1024 * 1024 * 1024);
+    let mut observed = backend
+        .solve_with_diagnostics(
+            &model,
+            &options(),
+            &CancellationToken::new(),
+            None,
+            &mut diagnostics,
+        )
+        .unwrap();
+    ordinary.elapsed_ms = 0;
+    observed.elapsed_ms = 0;
+    assert_eq!(ordinary, observed);
+    assert_eq!(diagnostics.iterations, Some(201));
+    assert_eq!(diagnostics.assessment_iteration, Some(201));
+    assert_eq!(diagnostics.kernel_launches, Some(6 * 201));
+    assert!(diagnostics.phases_ns.contains_key("readback"));
+    let program = LinearProgram::new(&model).unwrap();
+    assert_eq!(
+        diagnostics.device_buffer_peak_bytes,
+        Some(LpResidency::peak_buffer_bytes(&program))
+    );
+    let certificate = optimizer_lp::certify(&program, diagnostics.dual.as_ref().unwrap()).unwrap();
+    assert_eq!(observed.best_bound, Some(certificate.bound));
+}
+
+#[test]
+fn study_observation_refuses_the_explicit_buffer_budget() {
+    let Some(context) = device("study_observation_refuses_the_explicit_buffer_budget") else {
+        return;
+    };
+    let backend = CudaLpBackend::open(context, settings(200)).unwrap();
+    let mut diagnostics = optimizer_core::LpDiagnostics::new(true, true);
+    diagnostics.device_buffer_limit_bytes = Some(1);
+    let record = backend
+        .solve_with_diagnostics(
+            &model(),
+            &options(),
+            &CancellationToken::new(),
+            None,
+            &mut diagnostics,
+        )
+        .unwrap();
+    assert_eq!(record.termination, Termination::BackendFailure);
+    assert!(record.warnings.iter().any(|w| w.contains("buffer budget")));
+    assert!(diagnostics.dual.is_none());
+}

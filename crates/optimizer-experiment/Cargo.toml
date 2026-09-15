@@ -11,6 +11,7 @@ license.workspace = true
 # the crate that defines it is clearer than adding a re-export purely to avoid an
 # edge that already exists transitively.
 [dependencies]
+optimizer-lp = { version = "0.1.0", path = "../optimizer-lp" }
 optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
 optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
 optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }

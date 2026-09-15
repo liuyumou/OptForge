@@ -227,8 +227,13 @@ def main():
         validate_run_record(ROOT / "examples/multi-node-run-record-v2.json")
         validate_registry(ROOT / "examples/extension-registry-v1.json")
         validate_conformance(ROOT / "examples/conformance-record-v1.json")
+        from lp_protocol import campaign, validate
+        for kind in ["trial", "ledger"]:
+            validate(kind, read_json(ROOT / f"examples/lp-{kind}-v1.synthetic.json"))
+        campaign(ROOT / "benchmarks/configs/lp-campaign-v1.json")
         for path in sorted((ROOT / "benchmarks/manifests").glob("*.json")):
-            validate_manifest(path)
+            if not path.name.startswith("lp-"):
+                validate_manifest(path)
         validate_result(ROOT / "examples/experiment-result.json")
     print("artifact schemas and provenance: passed")
 

@@ -9,18 +9,20 @@ evidence is recorded in [active task](../state/active-task.md).
 
 | State | Features |
 | --- | --- |
-| Implemented | A backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
+| Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | Prioritized GPU LP precision track (GPUP-2 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); repeated-solve throughput and full MILP performance are later tracks |
+| Planned | Prioritized GPU LP precision track (GPUP-3 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); repeated-solve throughput and full MILP performance are later tracks |
 | Experimental | None enabled |
 | Deprecated | None |
 
 GPUP-0 has saved the [precision roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
 draft specifications, design ADRs, and dependency-ordered tasks. GPUP-1 repairs
 host certification and objective/gap arithmetic in both LP backends, with independent
-exact-rational regressions. GPUP-2, measurement infrastructure, is next. No mixed-precision implementation or
-experiment recipe is available yet; the future single-solve study is capped at
-eight GPU-hours. Slice evidence remains in the active-task record.
+exact-rational regressions. GPUP-2 implements measurement infrastructure and the
+[development baseline](../docs/benchmarks/lp-baseline-gpup2.md): 144 trials,
+173.148261443 GPU seconds. GPUP-3, the shared resumable FP64 controller, is next.
+No mixed-precision implementation or supported recipe is available. The campaign
+retains its eight GPU-hour cap; slice evidence remains in the active-task record.
 
 Solve records recompute objectives and violations independently of the backend. A
 backend optimality claim holds under the recorded numerical settings; it is not an
@@ -37,8 +39,8 @@ the record alone rather than trusting its stored result; agreement establishes
 determinism on one host, never optimality, and a forfeited search stays forfeited
 after it verifies. No Python SDK, mixed-precision LP backend, dynamically
 loaded native extension, checkpoint restart or comparative experiment runner is
-available, cross-host reproducibility is untested, and no solver performance
-claim is made.
+available. Cross-host reproducibility is untested; the development baseline
+reports measured costs and coverage without a general solver superiority claim.
 
 The registry decides which extensions a search may consult and records why. It
 resolves a named identity to an extension this build already provides and refuses

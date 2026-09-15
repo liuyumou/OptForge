@@ -6,6 +6,7 @@
 mod capability;
 mod document;
 mod evaluate;
+mod lp_diagnostics;
 mod lp_settings;
 mod serde_strict;
 mod solve;
@@ -15,6 +16,7 @@ pub use capability::{
 };
 pub use document::*;
 pub use evaluate::*;
+pub use lp_diagnostics::LpDiagnostics;
 pub use lp_settings::{
     LP_SETTINGS_SCHEMA_VERSION, LpSettings, PreconditionerSettings, PrimalWeightSettings,
     RestartSettings,

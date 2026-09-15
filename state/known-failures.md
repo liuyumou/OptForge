@@ -62,25 +62,47 @@ binary64 computations, not exact-rational primal certificates. See
 
 ## GPU LP precision experiments and recipes are not implemented
 
-The user approved the [GPUP roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
-with single-solve latency as the primary objective and an eight GPU-hour first
-campaign. GPUP-0 records the roadmap and drafts; GPUP-1 repairs the existing
-certification and gap calculations. There is no
-`cuda-lp-quantized` backend, precision-settings schema, study harness, frozen LP
-study partition, measured winning recipe, or supported new preset yet. Draft
-SPEC-0012/SPEC-0013 must be completed and accepted before their behavior is added.
-The generic C10 comparative runner remains unspecified and is not implemented by
-this LP-only study. Existing Taillard timing/structure observations are development
-diagnostics and cannot be relabeled held-out validation.
+GPUP-2 now implements the bounded LP-only harness under accepted SPEC-0013 and
+frozen ADR-0014. The [development baseline](../docs/benchmarks/lp-baseline-gpup2.md)
+records 144 trials and 173.148261443 GPU seconds. Existing CUDA FP64 certified only
+the two small witness instances at the selected targets; host LP certified nine
+instances and HiGHS ten. Larger GPU cases reached work/time limits, HiGHS failed
+scaling-256 and timed out on irregular-2048, and host LP timed out on three
+scheduling cases. These unsuccessful outcomes are preserved evidence, not
+infrastructure gate failures or permission to weaken numerical targets.
 
-Next: follow the dependency chain in [the backlog](backlog.yaml). Record each
-slice's gates and resource use separately. Certification repair is complete;
-establish measurement before performance claims and preserve unsuccessful trials and
-negative results. The approved direction permits evaluating formats/scales/rounding;
-it does not preselect FP8 or Tensor Cores as the final recipe. Repeated-solve
-throughput and full MILP search performance need separate specifications and budgets.
+Low-precision experiments, cuda-lp-quantized, precision-settings and supported
+recipes remain unimplemented. SPEC-0012 is still draft and must be accepted before
+GPUP-3 creates the shared resumable controller. Host adaptive restart/weight and
+GPU fixed control differ; no algorithmically matched device speedup is established.
+The independent exact-rational certification regressions remain authoritative.
+The section heading retains its earlier link identity; the missing experiments
+here are precision comparisons and recipe selection, not baseline measurements.
 
-No known implementation failure has been accepted as a waived gate.
+Follow [the backlog](backlog.yaml) one slice at a time, preserving the study ledger
+and all failures. Validation and held-out models were generated/hash-checked only;
+existing Taillard observations remain development diagnostics. Later campaign
+migrations must carry forward consumption within the unchanged eight GPU-hour cap.
+The general C10 runner remains unspecified. Repeated-solve throughput and full MILP
+performance need separate specifications and budgets. No implementation failure
+has been accepted as a waived gate.
+
+## Legacy HiGHS LP best_bound is not independent certificate evidence
+
+GPUP-2 endpoint checks observed the existing adapter reporting best_bound 0 for
+examples/lp-model-v1.json while its validated minimum objective is -3.5. The
+adapter reads mip_dual_bound even for an LP; the pinned library can return a
+finite MIP-only default, preventing the adapter's objective fallback. This field
+must not be treated as a conservative LP certificate. The owned executive already
+uses the objective of an optimal relaxation rather than this field.
+
+Reproduce with optimizer solve --backend highs on examples/lp-model-v1.json and
+examples/solve-config-v1.json. With --lp-evidence, the new independent endpoint
+certifies -3.5 from native row multipliers; it never uses the legacy best_bound or
+native optimal status as certificate evidence. Both objective senses are tested.
+Existing solve-record meanings and runtime defaults are preserved in GPUP-2.
+A separate bounded adapter-contract repair should address the legacy LP field;
+this does not block the independently certified LP study endpoint.
 
 ## Source planning references
 

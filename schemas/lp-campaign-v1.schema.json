@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-campaign-v1.schema.json",
+  "title": "LP campaign v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "const": "gpup-baseline-v1"
+    },
+    "manifests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ]
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "partition": {
+      "const": "development"
+    },
+    "configurations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "enum": [
+              "highs",
+              "host-lp",
+              "cuda-lp"
+            ]
+          },
+          "backend": {
+            "enum": [
+              "highs",
+              "host-lp",
+              "cuda-lp"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "backend"
+        ]
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "solve": {
+      "$ref": "solve-config-v1.schema.json"
+    },
+    "lp_settings": {
+      "$ref": "lp-settings-v1.schema.json"
+    },
+    "order_seed": {
+      "const": 17001
+    },
+    "repetitions": {
+      "const": 3
+    },
+    "profile_repetitions": {
+      "const": 1
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "seed": {
+          "const": 17002
+        },
+        "resamples": {
+          "const": 10000
+        },
+        "confidence": {
+          "const": 0.95
+        }
+      },
+      "required": [
+        "seed",
+        "resamples",
+        "confidence"
+      ]
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "solve_seconds": {
+          "const": 10
+        },
+        "cleanup_seconds": {
+          "const": 2
+        },
+        "host_rss_bytes": {
+          "const": 8589934592
+        },
+        "device_buffer_bytes": {
+          "const": 8589934592
+        },
+        "poll_ms": {
+          "const": 10
+        },
+        "output_bytes": {
+          "const": 33554432
+        }
+      },
+      "required": [
+        "solve_seconds",
+        "cleanup_seconds",
+        "host_rss_bytes",
+        "device_buffer_bytes",
+        "poll_ms",
+        "output_bytes"
+      ]
+    },
+    "device": {
+      "const": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48"
+    },
+    "total_gpu_seconds": {
+      "const": 28800
+    },
+    "slice_gpu_seconds": {
+      "const": 900
+    },
+    "phase_gpu_seconds": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "baseline": {
+          "const": 1800
+        },
+        "screening": {
+          "const": 7200
+        },
+        "ablations": {
+          "const": 7200
+        },
+        "finalists": {
+          "const": 9000
+        },
+        "repeatability": {
+          "const": 3600
+        }
+      },
+      "required": [
+        "baseline",
+        "screening",
+        "ablations",
+        "finalists",
+        "repeatability"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "manifests",
+    "partition",
+    "configurations",
+    "solve",
+    "lp_settings",
+    "order_seed",
+    "repetitions",
+    "profile_repetitions",
+    "analysis",
+    "limits",
+    "device",
+    "total_gpu_seconds",
+    "slice_gpu_seconds",
+    "phase_gpu_seconds"
+  ]
+}

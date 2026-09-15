@@ -152,6 +152,29 @@ impl Backend for HostLpBackend {
         cancel: &CancellationToken,
         warm_start: Option<WarmStart<'_>>,
     ) -> Result<SolveRecord, ValidationError> {
+        self.solve_with_diagnostics(
+            model,
+            options,
+            cancel,
+            warm_start,
+            &mut optimizer_core::LpDiagnostics::new(false, false),
+        )
+    }
+}
+
+impl HostLpBackend {
+    /// Execute the ordinary method while collecting explicitly requested observations.
+    ///
+    /// # Errors
+    /// Returns the same validation and backend failures as `Backend::solve`.
+    pub fn solve_with_diagnostics(
+        &self,
+        model: &Model,
+        options: &SolveOptions,
+        cancel: &CancellationToken,
+        warm_start: Option<WarmStart<'_>>,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
+    ) -> Result<SolveRecord, ValidationError> {
         options.validate()?;
 
         let declared = self.capabilities();
@@ -174,8 +197,10 @@ impl Backend for HostLpBackend {
             );
         }
 
+        let setup = diagnostics.start();
         let program = LinearProgram::new(model)?;
         let engine = Engine::new(&program, self.settings);
+        diagnostics.finish("preparation", setup);
 
         if cancel.is_cancelled() {
             return Ok(record(
@@ -191,8 +216,15 @@ impl Backend for HostLpBackend {
 
         let mut best: Option<Outcome> = None;
         let mut failure: Option<ValidationError> = None;
+        let mut iteration_start = diagnostics.start();
         let (iterate, stop) = engine.run(cancel, |iterate| {
-            match assess(model, &program, iterate, options) {
+            diagnostics.finish("iteration", iteration_start.take());
+            let check_start = diagnostics.start();
+            let result = assess(model, &program, iterate, options);
+            diagnostics.finish("host_checks", check_start);
+            diagnostics.capture(&iterate.dual, iterate.iterations);
+            iteration_start = diagnostics.start();
+            match result {
                 Ok(outcome) => {
                     let closed = outcome.closed;
                     best = Some(outcome);
@@ -209,6 +241,13 @@ impl Backend for HostLpBackend {
             }
         });
 
+        diagnostics.finish("iteration", iteration_start);
+        if diagnostics.enabled {
+            diagnostics.iterations = Some(iterate.iterations);
+            diagnostics.restarts = Some(iterate.restarts);
+            diagnostics.kernel_launches = Some(0);
+            diagnostics.device_buffer_peak_bytes = Some(0);
+        }
         if let Some(error) = failure {
             return Err(error);
         }
@@ -218,7 +257,13 @@ impl Backend for HostLpBackend {
         // nothing at all.
         let outcome = match best {
             Some(outcome) => outcome,
-            None => assess(model, &program, &iterate, options)?,
+            None => {
+                let check_start = diagnostics.start();
+                let outcome = assess(model, &program, &iterate, options)?;
+                diagnostics.finish("host_checks", check_start);
+                diagnostics.capture(&iterate.dual, iterate.iterations);
+                outcome
+            }
         };
 
         let termination = match stop {

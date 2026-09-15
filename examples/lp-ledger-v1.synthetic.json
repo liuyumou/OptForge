@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "campaign_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "sequence": 0,
+  "reservation_id": "synthetic-failed-trial",
+  "trial_id": "synthetic-failed-trial",
+  "kind": "reserve",
+  "phase": "baseline",
+  "resource": "gpu",
+  "reserved_ns": 13000000000,
+  "charged_ns": 0
+}
