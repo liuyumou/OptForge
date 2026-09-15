@@ -171,6 +171,15 @@ The origin remote is https://github.com/liuyumou/OptForge.git. Protected main,
 labeled GPU runner provisioning, and artifact retention still require hosting
 administration. Next step: configure these settings separately from Git syncing.
 
+Publication state (verified 2026-09-15): GPUP-2/3, the baseline diagnosis and the
+CI/test review fixes are published and merged in
+[PR #2](https://github.com/liuyumou/OptForge/pull/2), merge commit 3c8d1ff.
+All six hosted CPU/docs/smoke runs passed for reviewed head faf4a90. The author's
+self-review is recorded on the PR. Original implementation/reference commits are
+preserved; local main was synchronized and both completed branch copies deleted
+after ancestry verification. The maintainer authorized these operations; no
+hosting/protection change or additional GPU study work occurred.
+
 Publication state (verified 2026-09-14): GPUP-0/1 and the CI cache correction are
 published and merged in [PR #1](https://github.com/liuyumou/OptForge/pull/1), merge
 commit `2c84a95`. The original slice commits are retained on main, local main was

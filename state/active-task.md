@@ -8,7 +8,10 @@ explicitly authorized PR creation, self-review, merge and cleanup. Preserve the 
 bounded implementation/diagnosis commits, source archives, model hashes and the
 445.988045904-second cumulative study ledger; no new experiment or GPUP-4 work.
 
-Status: local review and acceptance complete; ready for hosted integration.
+Status: complete. [PR #2](https://github.com/liuyumou/OptForge/pull/2) is merged
+as 3c8d1ffba2b79e527a1dd32bcea2e695eb34ae80. Local main is synchronized; the
+remote and local codex/gpup2-lp-measurement branches were removed after merged
+ancestry verification. The five bounded commits and e415918 reference are retained.
 Reviewed CONTRIBUTING, known failures and accepted contracts.
 Gate: full pinned-native tools/check.sh; full branch/unsafe/dependency/CI review;
 successful remote CPU/docs/smoke checks; verified merged ancestry before cleanup.
@@ -35,8 +38,17 @@ ordering and signed zeros, frozen generation, schema strictness and provenance,
 ledger/crash recovery, lease/activity/process cleanup, report pairing/censoring,
 CI and the lockfile's single internal dependency addition. No blocking review finding
 remains after the two integration fixes. Preserve the original commit history on
-merge because the accepted reference source is named by its commit. Hosted CI and
-merge results will be attached to the PR; verify merged ancestry before cleanup.
+merge because the accepted reference source is named by its commit.
+
+Hosted acceptance: CPU CI, Documentation and Benchmark Smoke all passed for both
+push and pull-request runs of reviewed head faf4a9075fe218872d2d85563cb3406f665f0f9c.
+The [self-review](https://github.com/liuyumou/OptForge/pull/2#pullrequestreview-5206719687)
+is recorded as an author comment review, not independent peer approval. GitHub
+confirmed the merge at 2026-09-15T07:13:44Z. The merge API required the reviewed SHA;
+remote deletion used an expected-head lease. No branch protection or hosting
+configuration was changed. Machine-readable run IDs, review URL and merge receipt
+are retained in artifacts/gpup-pr-review/integration.json. Completion documentation
+is committed after integration; GPUP-4 remains next with campaign use unchanged.
 
 ## GPUP-3: shared resumable matched FP64 control (2026-09-15)
 
