@@ -64,3 +64,14 @@ embeds that search record, so `search-config`, `search-record` and `run-record` 
 moved at once. That cascade is the cost of keeping the device somewhere verification
 reads, and it was paid deliberately rather than avoided by putting the device in
 provenance, where a re-execution would never see it.
+
+## LP study artifacts
+
+SPEC-0013 defines separate [campaign](lp-campaign-v1.schema.json),
+[manifest](lp-manifest-v1.schema.json), [endpoint](lp-endpoint-v1.schema.json),
+[trial](lp-trial-v1.schema.json) and append-only [ledger event](lp-ledger-v1.schema.json)
+version-1 documents. The endpoint embeds an unchanged solve-record-v2. Strict
+schema validation is supplemented by independent Rust endpoint checking, grouped
+partition/configuration checks and durable reservation/settlement validation.
+These are not a migration of SPEC-0007 smoke artifacts or the general C10 runner.
+See [study operations](../docs/benchmarks/lp-precision-study.md).

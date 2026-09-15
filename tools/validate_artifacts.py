@@ -14,6 +14,10 @@ SCHEMAS = ROOT / "schemas"
 
 
 def read_json(path):
+    return read_json_bytes(Path(path).read_bytes())
+
+
+def read_json_bytes(data):
     def finite_float(value):
         result = float(value)
         if not math.isfinite(result):
@@ -31,16 +35,45 @@ def read_json(path):
             result[key] = value
         return result
 
-    return json.loads(path.read_text(), parse_constant=reject_constant, parse_float=finite_float, object_pairs_hook=unique_keys)
+    return json.loads(data, parse_constant=reject_constant, parse_float=finite_float, object_pairs_hook=unique_keys)
+
+
+class SchemaSnapshot:
+    """Strict immutable schema bytes for one process; create anew to observe edits."""
+    def __init__(self, directory=SCHEMAS):
+        self.schemas = {}
+        resources = []
+        identity = hashlib.sha256()
+        for path in sorted(Path(directory).glob("*.schema.json")):
+            data = path.read_bytes()
+            # Parse the same bytes we hash, rather than reopening a changing file.
+            schema = read_json_bytes(data)
+            Draft202012Validator.check_schema(schema)
+            self.schemas[path.name] = schema
+            resources.append((path.name, Resource.from_contents(schema)))
+            identity.update(path.name.encode() + b"\0" + data + b"\0")
+        self.sha256 = identity.hexdigest()
+        self.registry = Registry().with_resources(resources)
+        self.validators = {}
+
+    def validator(self, name):
+        if name not in self.validators:
+            self.validators[name] = Draft202012Validator(self.schemas[name], registry=self.registry)
+        return self.validators[name]
+
+
+_snapshot = None
+
+
+def schema_snapshot():
+    global _snapshot
+    if _snapshot is None:
+        _snapshot = SchemaSnapshot(SCHEMAS)
+    return _snapshot
 
 
 def validator(name):
-    resources = []
-    for path in sorted(SCHEMAS.glob("*.schema.json")):
-        schema = read_json(path)
-        Draft202012Validator.check_schema(schema)
-        resources.append((path.name, Resource.from_contents(schema)))
-    return Draft202012Validator(read_json(SCHEMAS / name), registry=Registry().with_resources(resources))
+    return schema_snapshot().validator(name)
 
 
 def validate_manifest(path):
@@ -227,8 +260,13 @@ def main():
         validate_run_record(ROOT / "examples/multi-node-run-record-v2.json")
         validate_registry(ROOT / "examples/extension-registry-v1.json")
         validate_conformance(ROOT / "examples/conformance-record-v1.json")
+        from lp_protocol import campaign, validate
+        for kind in ["trial", "ledger"]:
+            validate(kind, read_json(ROOT / f"examples/lp-{kind}-v1.synthetic.json"))
+        campaign(ROOT / "benchmarks/configs/lp-campaign-v1.json")
         for path in sorted((ROOT / "benchmarks/manifests").glob("*.json")):
-            validate_manifest(path)
+            if not path.name.startswith("lp-"):
+                validate_manifest(path)
         validate_result(ROOT / "examples/experiment-result.json")
     print("artifact schemas and provenance: passed")
 

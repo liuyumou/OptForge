@@ -10,7 +10,7 @@ use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
 
 use optimizer_core::{
-    Backend, Basis, CancellationToken, Candidate, LpSettings, Model, SolveOptions, Termination,
+    Basis, CancellationToken, Candidate, LpSettings, Model, SolveOptions, Termination,
 };
 use optimizer_highs::HighsBackend;
 use optimizer_lp::HostLpBackend;
@@ -19,6 +19,10 @@ use optimizer_lp_cuda::CudaLpBackend;
 use crate::input::{argument, read};
 
 pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
+    let input_started = std::time::Instant::now();
+    let mut evidence_path = None;
+    let mut profile_mode = None;
+    let mut memory_limit = None;
     let mut model_path = None;
     let mut config_path = None;
     let mut candidate_path = None;
@@ -34,6 +38,9 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             .to_str()
             .ok_or_else(|| argument("flag names must be UTF-8 text"))?;
         let slot = match key {
+            "--lp-evidence" => &mut evidence_path,
+            "--lp-profile" => &mut profile_mode,
+            "--lp-device-memory-bytes" => &mut memory_limit,
             "--model" => &mut model_path,
             "--config" => &mut config_path,
             "--candidate" => &mut candidate_path,
@@ -55,7 +62,25 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         ));
     }
 
-    let model = Model::from_json(&read(model_path)?).map_err(io::Error::other)?;
+    if evidence_path.is_none() && (profile_mode.is_some() || memory_limit.is_some()) {
+        return Err(argument("LP profiling/memory limits require --lp-evidence"));
+    }
+    let profile = match profile_mode.and_then(|v| v.to_str()) {
+        None | Some("false") => false,
+        Some("true") => true,
+        _ => return Err(argument("--lp-profile requires true or false")),
+    };
+    let mut diagnostics = optimizer_core::LpDiagnostics::new(evidence_path.is_some(), profile);
+    diagnostics.device_buffer_limit_bytes = memory_limit
+        .map(|v| {
+            v.to_str()
+                .and_then(|v| v.parse::<u64>().ok())
+                .filter(|v| *v > 0)
+                .ok_or_else(|| argument("invalid LP device memory limit"))
+        })
+        .transpose()?;
+    let model_bytes = read(model_path)?;
+    let model = Model::from_json(&model_bytes).map_err(io::Error::other)?;
     let configuration: SolveOptions = serde_json::from_slice(&read(config_path)?)
         .map_err(|error| io::Error::other(format!("document: solve configuration: {error}")))?;
 
@@ -96,6 +121,17 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         .transpose()?
         .unwrap_or("highs");
 
+    if diagnostics.enabled
+        && !model
+            .document()
+            .variables
+            .iter()
+            .all(|v| v.domain == optimizer_core::Domain::Continuous)
+    {
+        return Err(argument("LP evidence requires a continuous original model"));
+    }
+    diagnostics.finish("input_preparation", profile.then_some(input_started));
+    let mut fallback_reason = None;
     let record = match selected {
         "highs" => {
             if settings_path.is_some() {
@@ -104,7 +140,13 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
                 ));
             }
             HighsBackend::new()
-                .solve(&model, &configuration, &cancel, warm_start)
+                .solve_with_diagnostics(
+                    &model,
+                    &configuration,
+                    &cancel,
+                    warm_start,
+                    &mut diagnostics,
+                )
                 .map_err(io::Error::other)?
         }
         "host-lp" => {
@@ -117,10 +159,16 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             let settings = LpSettings::from_json(&read(path)?).map_err(io::Error::other)?;
             HostLpBackend::new(settings)
                 .map_err(io::Error::other)?
-                .solve(&model, &configuration, &cancel, warm_start)
+                .solve_with_diagnostics(
+                    &model,
+                    &configuration,
+                    &cancel,
+                    warm_start,
+                    &mut diagnostics,
+                )
                 .map_err(io::Error::other)?
         }
-        "cuda-lp" => {
+        "cuda-lp" | "cuda-lp-matched" => {
             let path = settings_path
                 .ok_or_else(|| argument("--backend cuda-lp requires --lp-settings"))?;
             let settings = LpSettings::from_json(&read(path)?).map_err(io::Error::other)?;
@@ -142,35 +190,78 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             // The decision lives here because only here are both backends in
             // scope. A backend that answered with a different implementation would
             // write a record naming itself for work it did not do.
-            match crate::registry::open_device(&device)? {
+            let opening = diagnostics.start();
+            let session_result = crate::registry::open_device(&device);
+            diagnostics.finish("device_context", opening);
+            match session_result? {
                 Some(session) => {
-                    match device_solve(&session, settings, &model, &configuration, &cancel) {
+                    match device_solve(
+                        &session,
+                        selected == "cuda-lp-matched",
+                        settings,
+                        &model,
+                        &configuration,
+                        &cancel,
+                        &mut diagnostics,
+                    ) {
                         Ok(record) => record,
                         Err(reason) => {
+                            fallback_reason = Some(reason.clone());
+                            diagnostics.dual = None;
                             eprintln!("solve: falling back to the pinned CPU backend: {reason}");
                             HighsBackend::new()
-                                .solve(&model, &configuration, &cancel, warm_start)
+                                .solve_with_diagnostics(
+                                    &model,
+                                    &configuration,
+                                    &cancel,
+                                    warm_start,
+                                    &mut diagnostics,
+                                )
                                 .map_err(io::Error::other)?
                         }
                     }
                 }
                 None => {
+                    fallback_reason = Some("no device was opened".to_string());
                     eprintln!(
                         "solve: falling back to the pinned CPU backend: no device was opened"
                     );
                     HighsBackend::new()
-                        .solve(&model, &configuration, &cancel, warm_start)
+                        .solve_with_diagnostics(
+                            &model,
+                            &configuration,
+                            &cancel,
+                            warm_start,
+                            &mut diagnostics,
+                        )
                         .map_err(io::Error::other)?
                 }
             }
         }
         other => {
             return Err(argument(&format!(
-                "unknown backend {other}; expected highs, host-lp or cuda-lp"
+                "unknown backend {other}; expected highs, host-lp, cuda-lp or cuda-lp-matched"
             )));
         }
     };
+    let serialization = diagnostics.start();
     let output = record.to_json().map_err(io::Error::other)?;
+    diagnostics.finish("solve_record_serialization", serialization);
+    if let Some(path) = evidence_path {
+        let endpoint = optimizer_experiment::lp::LpEndpoint::new(
+            &model_bytes,
+            selected.to_string(),
+            record.clone(),
+            diagnostics,
+            fallback_reason,
+        )
+        .map_err(io::Error::other)?;
+        let bytes = serde_json::to_vec_pretty(&endpoint).map_err(io::Error::other)?;
+        let destination = std::path::Path::new(path);
+        let partial = destination.with_extension("partial");
+        std::fs::write(&partial, bytes)?;
+        std::fs::rename(partial, destination)?;
+    }
 
     let code = match record.termination {
         // A completed mathematical outcome.
@@ -201,17 +292,25 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
 /// The error is a string rather than a typed failure because the caller's only
 /// response is to fall back and record why; a richer type would suggest a decision
 /// that is not available here.
-fn device_solve(
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn device_solve(
     session: &optimizer_cuda::session::DeviceSession,
+    matched: bool,
     settings: LpSettings,
     model: &Model,
     configuration: &SolveOptions,
     cancel: &CancellationToken,
+    diagnostics: &mut optimizer_core::LpDiagnostics,
 ) -> Result<optimizer_core::SolveRecord, String> {
     let context = session.context();
-    let backend = CudaLpBackend::open(context, settings).map_err(|error| error.to_string())?;
+    let backend = if matched {
+        CudaLpBackend::open_matched(context, settings)
+    } else {
+        CudaLpBackend::open(context, settings)
+    }
+    .map_err(|error| error.to_string())?;
     let record = backend
-        .solve(model, configuration, cancel, None)
+        .solve_with_diagnostics(model, configuration, cancel, None, diagnostics)
         .map_err(|error| error.to_string())?;
     if record.termination == Termination::BackendFailure {
         return Err(record

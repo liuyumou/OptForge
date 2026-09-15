@@ -1,6 +1,7 @@
 //! Workspace CLI and original-model candidate validation. No solving is performed.
 
 mod input;
+mod lp_study;
 mod model;
 mod provenance;
 mod registry;
@@ -26,7 +27,11 @@ Usage:
   optimizer model validate --model <path>
     [--candidate <path> --absolute-tolerance <f64> --relative-tolerance <f64> --integrality-tolerance <f64>]
   optimizer solve --model <path> --config <path> [--candidate <path> | --basis <path>]
-    [--backend highs|host-lp] [--lp-settings <path>]
+    [--backend highs|host-lp|cuda-lp|cuda-lp-matched] [--lp-settings <path>] [--device GPU-<uuid>]
+    [--lp-evidence <path>] [--lp-profile true|false] [--lp-device-memory-bytes <bytes>]
+  optimizer lp-study prepare --instance <path> --output <model-path>
+  optimizer lp-study verify --model <path> --evidence <path>
+  optimizer lp-study replay --model <path> --evidence <path> --output <path> [--device GPU-<uuid>]
   optimizer search --model <path> --config <path> [--output <path>] [REGISTRY]
   optimizer verify --record <path> --model <path> [--instance <path>] [REGISTRY]
   optimizer schedule generate --instance-id <text> --seed <u32> --jobs <n> --machines <m> [--output <path>]
@@ -61,6 +66,9 @@ fn run(args: Vec<OsString>) -> io::Result<u8> {
     // Path-bearing commands are dispatched before any UTF-8 conversion so
     // native filenames keep their OS representation.
     match args.as_slice() {
+        [command, subcommand, options @ ..] if command == "lp-study" => {
+            return lp_study::run(subcommand, options);
+        }
         [command, subcommand, options @ ..] if command == "model" && subcommand == "validate" => {
             return model::validate(options);
         }

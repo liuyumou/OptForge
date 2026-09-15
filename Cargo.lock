@@ -169,6 +169,7 @@ version = "0.1.0"
 dependencies = [
  "optimizer-core",
  "optimizer-extension",
+ "optimizer-lp",
  "optimizer-solver",
  "serde",
  "serde_json",

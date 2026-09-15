@@ -62,25 +62,90 @@ binary64 computations, not exact-rational primal certificates. See
 
 ## GPU LP precision experiments and recipes are not implemented
 
-The user approved the [GPUP roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
-with single-solve latency as the primary objective and an eight GPU-hour first
-campaign. GPUP-0 records the roadmap and drafts; GPUP-1 repairs the existing
-certification and gap calculations. There is no
-`cuda-lp-quantized` backend, precision-settings schema, study harness, frozen LP
-study partition, measured winning recipe, or supported new preset yet. Draft
-SPEC-0012/SPEC-0013 must be completed and accepted before their behavior is added.
-The generic C10 comparative runner remains unspecified and is not implemented by
-this LP-only study. Existing Taillard timing/structure observations are development
-diagnostics and cannot be relabeled held-out validation.
+GPUP-2 now implements the bounded LP-only harness under accepted SPEC-0013 and
+frozen ADR-0014. The [development baseline](../docs/benchmarks/lp-baseline-gpup2.md)
+records 144 trials and 173.148261443 GPU seconds. Existing CUDA FP64 certified only
+the two small witness instances at the selected targets; host LP certified nine
+instances and HiGHS ten. Larger GPU cases reached work/time limits, HiGHS failed
+scaling-256 and timed out on irregular-2048, and host LP timed out on three
+scheduling cases. These unsuccessful outcomes are preserved evidence, not
+infrastructure gate failures or permission to weaken numerical targets.
 
-Next: follow the dependency chain in [the backlog](backlog.yaml). Record each
-slice's gates and resource use separately. Certification repair is complete;
-establish measurement before performance claims and preserve unsuccessful trials and
-negative results. The approved direction permits evaluating formats/scales/rounding;
-it does not preselect FP8 or Tensor Cores as the final recipe. Repeated-solve
-throughput and full MILP search performance need separate specifications and budgets.
+Low-precision experiments, cuda-lp-quantized, precision-settings and supported
+recipes remain unimplemented. SPEC-0012 is accepted for implemented GPUP-3 FP64
+control; later precision requirements remain pending. Opt-in cuda-lp-matched shares
+host control. Legacy cuda-lp retains fixed control. The
+[matched study](../docs/benchmarks/lp-matched-fp64-gpup3.md) certified 27/36 timing
+trials for both matched CUDA and host, versus 6/36 for legacy CUDA. Scheduling-50x10,
+ta001 and ta011 remain infeasible at 50,000 matched iterations; no finite gap is
+claimed for them. Small cases remain slower on GPU because setup dominates.
+Certified per-instance paired timings establish bounded development evidence only.
+The independent exact-rational certification regressions remain authoritative.
+The section heading retains its earlier link identity; the missing experiments
+here are precision comparisons and recipe selection, not baseline measurements.
 
-No known implementation failure has been accepted as a waived gate.
+Follow [the backlog](backlog.yaml) one slice at a time, preserving the study ledger
+and all failures. Validation and held-out models were generated/hash-checked only;
+existing Taillard observations remain development diagnostics. Later campaign
+migrations must carry forward consumption within the unchanged eight GPU-hour cap.
+The general C10 runner remains unspecified. Repeated-solve throughput and full MILP
+performance need separate specifications and budgets. No implementation failure
+has been accepted as a waived gate.
+
+## GPU LP latency and harness overhead are measured limitations
+
+The [follow-up diagnosis](../docs/benchmarks/lp-gpu-slowdown-diagnosis.md) reproduced
+the GPU's slow convergence bit-for-bit on the host for irregular-256 and scaling-64.
+The fixed GPU controller differs from the adaptive host controller. Repeated host
+certification consumed 7.369 of 9.276 seconds on irregular-2048; its padded
+1,024-entry reductions perform extensive work on short sparse columns. Small
+fresh-process solves are dominated by device startup. Transfers were a minor cost
+on the measured instances; the kernel source's idealized bandwidth argument does
+not account for padded work and is not a measured bottleneck classification.
+
+The ADR-0016 tooling follow-up now compiles one strict immutable schema snapshot
+per process and waits for quiet telemetry with bounded post-lease admission.
+CPU simulations, full pinned-native gate and the supplementary study pass. One
+invocation completed all 160 attempts, with 55.606 seconds of pre-reservation
+activity waiting. The same-catalog ledger validation falls from 166.575 ms including
+a fresh snapshot to 0.067 ms with reuse; large document validation remains a cost.
+The bit-preserving certifier cuts irregular-2048 certificate cost from 26.455 to
+2.198 ms, with independent rational and padded-oracle regressions preserved.
+Historical diagnosis: Python validator construction
+rechecked all schemas for every event/result; ledger
+replay and report generation repeat that overhead. The activity guard can pause
+on a recent utilization sample from the project's own completed job. Four
+supplementary invocations paused and resumed without repeated trials. Proposed
+fixes preserved schema strictness, shared-lease exclusion and host numerical
+authority. GPUP-3 is complete; GPUP-4 is next. The original diagnosis changed no
+solver behavior. Supplementary study spending is 251.845179881 GPU seconds, bringing
+the canonical cumulative ledger to 445.988045904 seconds. Original records remain
+unchanged. Endpoint-v2 controller-phase schema omission was caught in acceptance,
+fixed with a CPU regression and verified by the affected leased CLI rerun; no
+required check is waived.
+
+Seven supplementary jobs added 20.994604580 GPU seconds, including profiler export
+failures. Cumulative campaign use is 194.142866023 seconds. Raw traces were recovered
+offline using a privately extracted importer dependency; all seven endpoints and
+both 1,200-launch trace counts verified. CPU call-stack sampling and GPU
+bandwidth/occupancy counters were unavailable or not collected, respectively.
+
+## Legacy HiGHS LP best_bound is not independent certificate evidence
+
+GPUP-2 endpoint checks observed the existing adapter reporting best_bound 0 for
+examples/lp-model-v1.json while its validated minimum objective is -3.5. The
+adapter reads mip_dual_bound even for an LP; the pinned library can return a
+finite MIP-only default, preventing the adapter's objective fallback. This field
+must not be treated as a conservative LP certificate. The owned executive already
+uses the objective of an optimal relaxation rather than this field.
+
+Reproduce with optimizer solve --backend highs on examples/lp-model-v1.json and
+examples/solve-config-v1.json. With --lp-evidence, the new independent endpoint
+certifies -3.5 from native row multipliers; it never uses the legacy best_bound or
+native optimal status as certificate evidence. Both objective senses are tested.
+Existing solve-record meanings and runtime defaults are preserved in GPUP-2.
+A separate bounded adapter-contract repair should address the legacy LP field;
+this does not block the independently certified LP study endpoint.
 
 ## Source planning references
 
@@ -89,6 +154,16 @@ llm-or-survey.md from another session; neither is present. Reproduction:
 inspect its Background links. Next diagnostic step: recover those source surveys
 if research work needs them. The maintained documentation book excludes the two
 original planning inputs from recursive link validation.
+
+## LP integration CI fixtures
+
+Resolved during GPUP-2/3 PR review on 2026-09-15. The new archived-schema regression
+needs the e415918 Git tree, so CPU CI now fetches full history. A fresh native gate
+also exposed a startup-dependent lease test: its 150 ms parent sleep included
+worker imports, leaving only 40.380 ms of actual queue wait against a 50 ms check.
+The test now waits until the worker opens the lock, then measures held-lease delay
+and asserts no solve output opens before release. Ten consecutive targeted runs and
+a full pinned-native gate pass. Production lock and supervisor code did not change.
 
 ## External configuration
 

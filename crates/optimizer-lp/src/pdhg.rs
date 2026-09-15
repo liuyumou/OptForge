@@ -383,7 +383,7 @@ impl<'a> Engine<'a> {
     /// A weighted KKT error, used to steer restarts and the primal weight.
     ///
     /// Never used to justify a bound, a status or a proof. See the module header.
-    fn kkt_error(&self, x: &[f64], y: &[f64], weight: f64) -> f64 {
+    pub(crate) fn kkt_error(&self, x: &[f64], y: &[f64], weight: f64) -> f64 {
         let activity = self.multiply(x);
         let primal_violation: Vec<f64> = (0..y.len())
             .map(|row| {
@@ -429,6 +429,32 @@ impl<'a> Engine<'a> {
         &self,
         cancel: &CancellationToken,
         mut check: impl FnMut(&Iterate) -> Decision,
+    ) -> (Iterate, Stop) {
+        let mut control = crate::control::Fp64Controller::new(self);
+        while control.remaining() > 0 {
+            control.host_step();
+            if !control.check_pending() {
+                continue;
+            }
+            // Preserve the legacy host cancellation and callback order exactly.
+            if cancel.is_cancelled() {
+                return (control.iterate(), Stop::Cancelled);
+            }
+            let iterate = control.iterate();
+            if check(&iterate) == Decision::Accept {
+                return (iterate, Stop::Accepted);
+            }
+            control.continue_after_check();
+        }
+        (control.iterate(), Stop::IterationLimit)
+    }
+
+    #[cfg(test)]
+    pub(crate) fn legacy_run(
+        &self,
+        cancel: &CancellationToken,
+        mut check: impl FnMut(&Iterate) -> Decision,
+        mut trace: impl FnMut(&Iterate),
     ) -> (Iterate, Stop) {
         let columns = self.program.column_count();
         let rows = self.program.row_count();
@@ -490,6 +516,7 @@ impl<'a> Engine<'a> {
 
             iterations += 1;
             since_restart += 1;
+            trace(&unscale(&x, &y, iterations, restarts));
 
             if !iterations.is_multiple_of(self.settings.check_interval) {
                 continue;
@@ -545,7 +572,7 @@ impl<'a> Engine<'a> {
     /// rebalances the step sizes toward whichever is lagging. With the integral
     /// and derivative gains at zero this is exactly the published smoothed update.
     #[allow(clippy::too_many_arguments)]
-    fn next_weight(
+    pub(crate) fn next_weight(
         &self,
         x: &[f64],
         y: &[f64],
@@ -596,6 +623,118 @@ mod tests {
         Bound, Constraint, Domain, LinearTerm, Model, ModelDocument, Objective, ObjectiveSense,
         SCHEMA_VERSION, Variable,
     };
+
+    fn assert_iterate_bits(left: &Iterate, right: &Iterate) {
+        assert_eq!(
+            (left.iterations, left.restarts),
+            (right.iterations, right.restarts)
+        );
+        for (a, b) in left
+            .primal
+            .iter()
+            .chain(&left.dual)
+            .zip(right.primal.iter().chain(&right.dual))
+        {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+    }
+
+    #[test]
+    fn shared_controller_matches_literal_legacy_whole_trajectories() {
+        use crate::control::Fp64Controller;
+        let program = program();
+        for interval in [1, 17, 200] {
+            for history in [false, true] {
+                let mut settings = LpSettings::published(1237, 17);
+                settings.iteration_limit = 1237;
+                settings.check_interval = interval;
+                if history {
+                    settings.primal_weight.integral = 0.02;
+                    settings.primal_weight.derivative = 0.1;
+                }
+                let engine = Engine::new(&program, settings);
+                let mut expected = Vec::new();
+                let (last, _) = engine.legacy_run(
+                    &CancellationToken::new(),
+                    |_| Decision::Continue,
+                    |iterate| expected.push(iterate.clone()),
+                );
+                let mut control = Fp64Controller::new(&engine);
+                for iterate in expected {
+                    control.host_step();
+                    assert_iterate_bits(&control.iterate(), &iterate);
+                    if control.check_pending() {
+                        control.continue_after_check();
+                    }
+                }
+                assert_iterate_bits(&control.iterate(), &last);
+                assert!(control.state().restarts > 0);
+                assert!(control.state().previous_error.is_some());
+            }
+        }
+    }
+
+    #[test]
+    fn checkpoints_restore_all_history_but_never_work_or_deadlines() {
+        use crate::control::Fp64Controller;
+        let program = program();
+        let mut settings = LpSettings::published(1237, 17);
+        settings.iteration_limit = 900;
+        settings.check_interval = 17;
+        settings.primal_weight.integral = 0.02;
+        settings.primal_weight.derivative = 0.1;
+        let engine = Engine::new(&program, settings);
+        let other_engine = Engine::new(&program, settings);
+        let mut uninterrupted = Fp64Controller::new(&engine);
+        let token = CancellationToken::new();
+        for index in 0..450 {
+            uninterrupted.host_step();
+            if [1, 16, 17, 18, 101, 199, 200, 449].contains(&index) {
+                let checkpoint = uninterrupted.checkpoint();
+                let mut resumed = Fp64Controller::new(&engine);
+                resumed.restore(&checkpoint).unwrap();
+                assert_eq!(resumed.state(), uninterrupted.state());
+                if resumed.check_pending() {
+                    resumed.continue_after_check();
+                }
+                let saved = resumed.checkpoint();
+                let deadline = std::time::Instant::now();
+                resumed.set_deadline(Some(deadline));
+                assert!(resumed.expired_at(deadline));
+                assert!(!resumed.expired_at(deadline - std::time::Duration::from_nanos(1)));
+                resumed.host_step();
+                let after = resumed.state().clone();
+                let consumed = resumed.physical_iterations();
+                let kkt = resumed.kkt_evaluations();
+                resumed.restore(&saved).unwrap();
+                assert_eq!(resumed.physical_iterations(), consumed);
+                assert_eq!(resumed.kkt_evaluations(), kkt);
+                assert!(resumed.expired_at(deadline));
+                assert_eq!(resumed.advance_host(64, &token), 0);
+                resumed.set_deadline(None);
+                resumed.host_step();
+                assert_eq!(resumed.state(), &after);
+                assert!(Fp64Controller::new(&other_engine).restore(&saved).is_err());
+            }
+            if uninterrupted.check_pending() {
+                uninterrupted.continue_after_check();
+            }
+        }
+        let saved = uninterrupted.checkpoint();
+        while uninterrupted.remaining() > 0 {
+            if uninterrupted.check_pending() {
+                uninterrupted.continue_after_check();
+            }
+            uninterrupted.advance_host(64, &token);
+        }
+        uninterrupted.restore(&saved).unwrap();
+        assert_eq!(uninterrupted.remaining(), 0);
+        assert_eq!(uninterrupted.advance_host(64, &token), 0);
+        let mut fresh = Fp64Controller::new(&engine);
+        token.cancel();
+        assert_eq!(fresh.advance_host(64, &token), 0);
+        assert_eq!(fresh.physical_iterations(), 0);
+    }
 
     fn finite(value: f64) -> Bound {
         Bound::Finite { value }

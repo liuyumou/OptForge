@@ -1,7 +1,7 @@
 //! Finite outward binary64 enclosures for host certification only.
 //! Assumes nearest-even, gradual underflow, and no reassociation of additions.
 
-use crate::reduce::tree_reduce;
+use crate::reduce::SEGMENT;
 
 #[derive(Clone, Copy, Debug)]
 pub(crate) struct Enclosure {
@@ -133,15 +133,126 @@ fn parts(value: f64) -> (u128, i32) {
 }
 
 pub(crate) fn sum(values: &[Enclosure]) -> Option<Enclosure> {
-    let values: Vec<_> = values.iter().copied().map(Some).collect();
-    tree_reduce(&values, Some(Enclosure::ZERO), |left, right| {
-        left?.add(right?)
-    })
+    sum_using(values, Enclosure::add)
+}
+
+/// Prune only known padding subtrees of the documented tree. A live node plus
+/// padding still normalizes -0 to +0 in all three components. For finite operands
+/// TwoSum with +0 has zero error, so these three additions have exactly the same
+/// enclosure and refusal semantics as `add(ZERO)` (including subnormals).
+fn sum_using(
+    values: &[Enclosure],
+    mut add: impl FnMut(Enclosure, Enclosure) -> Option<Enclosure>,
+) -> Option<Enclosure> {
+    if values.is_empty() {
+        return Some(Enclosure::ZERO);
+    }
+    let mut level = values.to_vec();
+    loop {
+        let mut next = Vec::with_capacity(level.len().div_ceil(SEGMENT));
+        for values in level.chunks(SEGMENT) {
+            let mut buffer = values.to_vec();
+            let mut active = buffer.len();
+            let mut stride = SEGMENT / 2;
+            while stride > 0 {
+                for index in 0..active.min(stride) {
+                    buffer[index] = if index + stride < active {
+                        add(buffer[index], buffer[index + stride])?
+                    } else {
+                        let value = buffer[index];
+                        Enclosure {
+                            lower: value.lower + 0.0,
+                            upper: value.upper + 0.0,
+                            rounded: value.rounded + 0.0,
+                        }
+                    };
+                }
+                active = active.min(stride);
+                stride /= 2;
+            }
+            next.push(buffer[0]);
+        }
+        if next.len() == 1 {
+            return Some(next[0]);
+        }
+        level = next;
+    }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    // The pre-optimization implementation, retained as a literal padded oracle.
+    fn padded(values: &[Enclosure]) -> Option<Enclosure> {
+        let values: Vec<_> = values.iter().copied().map(Some).collect();
+        crate::reduce::tree_reduce(&values, Some(Enclosure::ZERO), |left, right| {
+            left?.add(right?)
+        })
+    }
+
+    fn bits(value: Option<Enclosure>) -> Option<[u64; 3]> {
+        value.map(|v| [v.lower.to_bits(), v.upper.to_bits(), v.rounded.to_bits()])
+    }
+
+    #[test]
+    fn pruned_padding_matches_every_enclosure_bit_and_refusal() {
+        let lengths = [
+            0, 1, 2, 3, 4, 7, 18, 31, 32, 33, 63, 64, 255, 256, 511, 512, 513, 1023, 1024, 1025,
+            2048, 2049, 5000,
+        ];
+        for length in lengths {
+            for kind in 0..6 {
+                let mut seed = 17002_u64;
+                let values: Vec<_> = (0..length)
+                    .map(|index| {
+                        seed ^= seed << 13;
+                        seed ^= seed >> 7;
+                        seed ^= seed << 17;
+                        match kind {
+                            0 => Enclosure::point(-0.0).unwrap(),
+                            1 => Enclosure::point(
+                                f64::from_bits(1 + seed % 4096)
+                                    * if index % 2 == 0 { 1.0 } else { -1.0 },
+                            )
+                            .unwrap(),
+                            2 => {
+                                Enclosure::point(if index % 2 == 0 { f64::MAX } else { -f64::MAX })
+                                    .unwrap()
+                            }
+                            3 => Enclosure::point(f64::MAX).unwrap(),
+                            4 => Enclosure::product((seed as i64) as f64 * 1e-15, 0.1).unwrap(),
+                            _ => Enclosure::new(
+                                -f64::from_bits(seed & 0x7fefffffffffffff),
+                                f64::from_bits(seed & 0x7fefffffffffffff),
+                                -0.0,
+                            )
+                            .unwrap(),
+                        }
+                    })
+                    .collect();
+                assert_eq!(
+                    bits(sum(&values)),
+                    bits(padded(&values)),
+                    "length {length}, kind {kind}"
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn short_columns_do_only_live_enclosure_additions() {
+        for length in [1, 4, 18, 32, 1024, 1025, 5000] {
+            let values = vec![Enclosure::point(0.5).unwrap(); length];
+            let mut additions = 0;
+            let actual = sum_using(&values, |a, b| {
+                additions += 1;
+                a.add(b)
+            });
+            assert_eq!(bits(actual), bits(padded(&values)));
+            assert_eq!(additions, length - 1);
+        }
+    }
 
     fn value(raw: &serde_json::Value) -> f64 {
         f64::from_bits(u64::from_str_radix(raw.as_str().unwrap(), 16).unwrap())

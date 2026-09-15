@@ -6,7 +6,9 @@ a search can evaluate integer schedules on a GPU, and a first-order LP backend
 runs on the host or device with host-side validation and certification. The next
 prioritized work is the [GPU LP precision roadmap](docs/plans/gpu-lp-precision-roadmap.md).
 Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)
-and the objective/gap checks; the next slice establishes measurement infrastructure.
+and the objective/gap checks. Slice 2 adds the [bounded LP study harness](docs/benchmarks/lp-precision-study.md),
+with independent endpoints, frozen workloads and a [measured baseline report](docs/benchmarks/lp-baseline-gpup2.md).
+Slice 3, the shared resumable FP64 controller, is next.
 Mixed precision and performance recipes are not implemented yet.
 
 The project validates original
@@ -94,7 +96,7 @@ acceptance was not covered.
 - [LP certification arithmetic and limits](docs/architecture/lp-certification.md)
 - [GPU LP performance roadmap and slices](docs/plans/gpu-lp-precision-roadmap.md)
 - [Mixed-precision LP draft](docs/specifications/SPEC-0012-mixed-precision-lp.md)
-- [LP experiment protocol draft](docs/specifications/SPEC-0013-lp-precision-experiments.md)
+- [Accepted LP experiment protocol](docs/specifications/SPEC-0013-lp-precision-experiments.md)
 - [Artifact contract](docs/specifications/SPEC-0007-artifacts.md)
 - [Build and verification](docs/operations/build.md)
 - [GPU operations](docs/operations/gpu.md)

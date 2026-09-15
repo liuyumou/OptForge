@@ -19,6 +19,6 @@ pub mod residency;
 
 pub use backend::{BACKEND_NAME, BACKEND_VERSION, CudaLpBackend};
 pub use residency::{
-    Decline, KERNEL_NAMES, LpResidency, Requirement, TARGET_CAPABILITY, code_object_path,
-    device_path_available,
+    AdvanceResult, Decline, KERNEL_NAMES, LpResidency, Requirement, TARGET_CAPABILITY,
+    code_object_path, device_path_available,
 };

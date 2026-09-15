@@ -531,8 +531,10 @@ pub(crate) fn solve(
     cancel: &CancellationToken,
     warm_start: Option<WarmStart<'_>>,
     basis_request: BasisRequest,
+    diagnostics: &mut optimizer_core::LpDiagnostics,
 ) -> Result<(SolveRecord, Option<Basis>), ValidationError> {
     let started = Instant::now();
+    let preparation_start = diagnostics.start();
     let mut warnings = Vec::new();
 
     // Every non-final return path reports no basis; the accepted-incumbent
@@ -692,7 +694,12 @@ pub(crate) fn solve(
     }
 
     // Safety: valid handle; the callback data is still alive.
+    diagnostics.finish("native_preparation", preparation_start);
+    let iteration_start = diagnostics.start();
+    // Safety: valid owned handle, with callback state alive through this call.
     let run_status = unsafe { ffi::Highs_run(highs.as_ptr()) };
+    diagnostics.finish("native_solve", iteration_start);
+    let extraction_start = diagnostics.start();
     // Safety: valid handle.
     let model_status = unsafe { ffi::Highs_getModelStatus(highs.as_ptr()) };
     drop(interrupt);
@@ -746,6 +753,11 @@ pub(crate) fn solve(
     // Extract the primal solution and re-validate it against the original
     // model. Native output is never published unchecked.
     let mut values = vec![0.0f64; loaded.col_lower.len()];
+    let mut row_dual = if diagnostics.enabled && !loaded.discrete {
+        vec![0.0; loaded.row_lower.len()]
+    } else {
+        Vec::new()
+    };
     // Safety: valid handle; buffer matches the loaded column count.
     let extract = unsafe {
         ffi::Highs_getSolution(
@@ -753,7 +765,11 @@ pub(crate) fn solve(
             values.as_mut_ptr(),
             std::ptr::null_mut(),
             std::ptr::null_mut(),
-            std::ptr::null_mut(),
+            if row_dual.is_empty() {
+                std::ptr::null_mut()
+            } else {
+                row_dual.as_mut_ptr()
+            },
         )
     };
 
@@ -778,6 +794,23 @@ pub(crate) fn solve(
         ));
     }
 
+    if diagnostics.enabled && !loaded.discrete && row_dual.iter().all(|v| v.is_finite()) {
+        let sign = match model.document().objective.sense {
+            optimizer_core::ObjectiveSense::Minimize => 1.0,
+            optimizer_core::ObjectiveSense::Maximize => -1.0,
+        };
+        diagnostics.dual = Some(row_dual.into_iter().map(|v| sign * v).collect());
+        diagnostics.iterations = highs
+            .int_info(c"simplex_iteration_count")
+            .and_then(|v| u64::try_from(v).ok());
+        diagnostics.kernel_launches.get_or_insert(0);
+        diagnostics.device_buffer_peak_bytes.get_or_insert(0);
+        diagnostics
+            .unavailable
+            .push("native internal phase/restart counters unavailable".into());
+    }
+    diagnostics.finish("native_extraction", extraction_start);
+    let checks_start = diagnostics.start();
     let candidate = Candidate {
         schema_version: optimizer_core::SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
@@ -841,6 +874,7 @@ pub(crate) fn solve(
         };
     }
 
+    diagnostics.finish("host_checks", checks_start);
     let objective = finite_or_absent(validation.objective);
     let best_bound =
         highs

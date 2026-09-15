@@ -1,5 +1,289 @@
 # Active Task
 
+## GPUP-2/3 PR review and integration (2026-09-15)
+
+Objective: publish the completed branch, review its full diff, merge after acceptance
+and hosted checks, synchronize main, and delete the completed branches. The user
+explicitly authorized PR creation, self-review, merge and cleanup. Preserve the five
+bounded implementation/diagnosis commits, source archives, model hashes and the
+445.988045904-second cumulative study ledger; no new experiment or GPUP-4 work.
+
+Status: local review and acceptance complete; ready for hosted integration.
+Reviewed CONTRIBUTING, known failures and accepted contracts.
+Gate: full pinned-native tools/check.sh; full branch/unsafe/dependency/CI review;
+successful remote CPU/docs/smoke checks; verified merged ancestry before cleanup.
+Budget: 30 minutes CPU review/acceptance with four build jobs; up to five minutes
+GPU acceptance only if a runtime review fix requires it, sequential with CPU gates
+and under the shared lease. Existing device/sanitizer evidence remains applicable
+to unchanged runtime. GitHub authentication is restored with the maintainer's sign-in; Git SSH access
+works. Two review findings are fixed: CI now fetches full history for the archived
+e415918 schema comparison, and the lease test observes worker readiness before
+measuring queue wait. The initial full native gate caught the latter race (40.380
+ms observed against its 50 ms requirement); this was fixture startup timing, not
+a lease exclusion failure. The corrected fixture retained its threshold, gained
+an assertion that no child output opens under the held lease, and passed ten
+consecutive runs (2.553 seconds). No runtime, kernel or measurement artifact changed.
+
+Fresh full pinned-native acceptance passed in 19.144629400 seconds: 405 Rust tests,
+103 Python tests, dependency/license checks, committed-record replay and 69 doc pages.
+Logs and the failed first run are retained in artifacts/gpup-pr-review. No additional
+GPU work was necessary; prior 38 regular device tests and five scoped cases under
+each of four sanitizers remain applicable. Review checked the complete branch:
+native row multipliers and sense/order normalization, independent endpoint authority,
+matched checkpoints/work/cancellation, legacy compatibility, outward reduction
+ordering and signed zeros, frozen generation, schema strictness and provenance,
+ledger/crash recovery, lease/activity/process cleanup, report pairing/censoring,
+CI and the lockfile's single internal dependency addition. No blocking review finding
+remains after the two integration fixes. Preserve the original commit history on
+merge because the accepted reference source is named by its commit. Hosted CI and
+merge results will be attached to the PR; verify merged ancestry before cleanup.
+
+## GPUP-3: shared resumable matched FP64 control (2026-09-15)
+
+Status: complete; acceptance passed, ready for local commit. SPEC-0012 accepted before implementation; ADR-0016 freezes
+the opt-in FP64 contract and comparative protocol. Prerequisites committed separately
+as 18fe686 (schema/activity) and 223ee6c (bit-preserving certification), each after
+its full native gate. No legacy controller/default, numerical target or frozen
+baseline artifact changed. GPUP-4 is the next dependency-ready task.
+
+The [reviewed report](../docs/benchmarks/lp-matched-fp64-gpup3.md) retains all 160
+attempts: 144 primary timings and 16 profiles, all development-only, in one
+468.090-second invocation. Matched CUDA and current host certified 27/36 timing
+trials; both legacy CUDA builds certified 6/36. Three scheduling instances remain
+infeasible at the matched iteration limit. No invalid/missing evidence, device
+failure or fallback occurred. All 33 mutually completed reference/current legacy
+pairs and 27 mutually certified host/matched pairs agree on candidate, witness,
+objective, bound and gap bits. The report includes paired intervals and limitations.
+
+Budget: 251.845179881 additional GPU seconds from the allocated 600; prior
+194.142866023 carried forward through the original authority. Cumulative is
+445.988045904 of 900, preserving the 1,800-second baseline phase, 28,800-second
+campaign and remaining allocations. All 160 distinct attempts settled, no pending
+crash reservation. Pre-reservation waits total 55.605846414 seconds, lease queue
+0.002241305 seconds; no study restart. Original baseline summary and ledger hashes
+are unchanged. Current ledger SHA-256:
+49ea15fc24a24fcabb4e677d6a684ea8a8d0d6c5fc1d1a52dba7b098c827a8f3.
+Raw source/binary/schema identities and indexed artifacts are in the report.
+
+Acceptance uses the separate 60-minute CPU/four-build-job and 30-minute GPU budgets.
+Premeasurement full pinned-native gate passed: 405 Rust, 103 Python and 68 doc pages,
+18.273888354 seconds. CPU gates/builds and device workloads were sequential.
+The 38 regular GPU cases and five scoped cases under each of memcheck, racecheck,
+initcheck and synccheck passed with zero errors; racecheck zero warnings. The first
+combined job then caught a missing controller phase in endpoint-v2's schema.
+Schema/parser parity and a CPU regression fixed it; a full native gate and targeted
+leased CLI evidence/fallback/replay rerun passed. Runtime/controller/kernel output
+was unchanged. Both attempts are retained. Total GPU acceptance was
+77.351226566 + 2.322113705 = 79.673340271 leased seconds, within 1,800.
+
+Logs: /tmp/gpup3-measurement-ready.log/.json, /tmp/gpup3-acceptance and
+/tmp/gpup3-cli-acceptance. Durable copies are indexed under
+artifacts/gpup3-matched-fp64-v1 along with raw trials and independent verification.
+No precision work, persistent checkpoint format, preset, general runner or
+publication is included.
+
+Final gate: full pinned-native bash tools/check.sh passed in 18.284103359 seconds,
+405 Rust tests, 103 Python tests and 69 documentation pages, with dependency/license
+checks, unchanged-record replay and smoke verification. Evidence is retained in
+artifacts/gpup3-final-acceptance/native.log and native.json. Native log SHA-256:
+8601cc1a629acab78d33c6661d7ddea10d00d35b7603f8d5be827f7832ec5f90.
+Only completion-state documentation and backlog selection changed afterward;
+the source/kernel/device acceptance and measured artifacts remain intact.
+GPUP-3's required gates are satisfied; GPUP-4 is ready, with no new work authorized
+by merely selecting that backlog item. Local commit includes all bounded GPUP-3
+implementation, acceptance and handoff documentation.
+
+## GPUP-3 prerequisite: bit-preserving certification cost (2026-09-15)
+
+Status: accepted for local commit. Full pinned-native gate passed in 22.844
+seconds: 398 Rust tests, 98 Python tests and 68 documentation pages. New tests
+compare 138 length/input combinations bit-for-bit with the retained padded reducer
+and verify exactly n-1 live enclosure additions across segment boundaries. All
+independent exact-rational certificate/gap fixtures pass. No GPU work occurred.
+Logs: /tmp/gpup3-cert-tests.log and /tmp/gpup3-cert-gate.log/.json.
+
+Optimize only outward reduction padding under ADR-0016.
+Keep the partition, meaningful addition order, rounded/enclosure bits, signed zeros
+and conservative refusals. Keep the literal padded differential oracle and GPUP-1
+exact-rational authority. Acceptance: signed-zero/subnormal/cancellation/overflow
+and segment-boundary differential cases, meaningful operation counts, full native
+gate. CPU only, four build jobs, charged to the combined 60-minute acceptance cap.
+No GPU work or campaign consumption; runtime reduction/controller settings unchanged.
+
+## GPUP-2 follow-up: schema reuse and activity admission (2026-09-15)
+
+Acceptance: completed. Full pinned-native tools/check.sh passed in 18.026 seconds,
+396 Rust tests, 98 Python tests and 68 documentation pages. The targeted study
+suite passed 26 tests in 2.172 seconds, including schema reuse/strictness, immutable
+refresh, residual activity, process exclusion, telemetry refusal, exact wait limits
+and a simulated post-lease race that launches no child. No GPU work occurred.
+Reference executable SHA-256 remains 9538f9b16f1fdf3e224674a9c2e4f76f5e797022f730f858eaf63d2080b048fb.
+Evidence: /tmp/gpup3-harness-gate.log and .json; /tmp/gpup3-harness-tests.log.
+
+Status: accepted for local commit. First bounded change in the maintainer-approved matched FP64
+plan, followed by bit-preserving certification and GPUP-3. Read CONTRIBUTING,
+known failures and accepted contracts. Accept SPEC-0012 with later requirements
+explicitly deferred; ADR-0016 freezes implementation and supplementary measurements.
+Preserve original artifacts, legacy behavior and 194.142866023 seconds of campaign
+consumption. Objective: immutable reusable schema registries and cancellable,
+accounted GPU admission. Acceptance: strictness/activity/lease simulations and the
+full pinned-native tools/check.sh gate. Combined acceptance budget across changes:
+60 CPU wall minutes, four build jobs; 30 GPU minutes sequential with CPU gates.
+Supplementary study cap: 600 additional GPU seconds, cumulative 900, baseline
+1,800 and campaign 28,800 unchanged. Record exact evidence before local commits.
+
+## GPUP-2 follow-up: Diagnose slow GPU study (2026-09-15)
+
+Objective: measure and carefully explain solver latency, convergence, GPU setup,
+certification and study orchestration costs requested by the maintainer. This is
+bounded diagnosis of the existing FP64 baseline, not GPUP-3 implementation.
+Status: complete; accepted for local commit. GPUP-3 remains next.
+Read accepted contracts and known failures first. Preserve
+all frozen trials, original solver settings and exact-rational regressions.
+Budget: 30 minutes CPU diagnostic/acceptance wall time, four build jobs; at most
+120 additional GPU study seconds within the existing 900-second Slice 2 allowance
+and 1,800-second baseline phase. Prior campaign spending is 173.148261443 seconds.
+GPU jobs use the same RTX 5090 UUID and shared host lease; CPU gates and device
+jobs run sequentially. If device acceptance is needed, separately cap it at five
+minutes. No publication or later-slice algorithm changes.
+
+Plan: audit phase accounting and implementation; time original-model evaluation,
+certification and reductions independently; replay fixed GPU control on the host;
+profile Python schema/analysis overhead; use bounded driver/kernel traces on
+selected development cases. Freeze supplementary diagnostic choices and ledger
+extension before GPU launches. Retain raw profiles under ignored artifacts and
+write a reviewed diagnosis with uncertainty, reproduction and resource accounting.
+Acceptance: useful component/trajectory consistency checks, full pinned-native
+tools/check.sh for committed tooling, and independently verified device endpoints.
+
+Evidence: CPU component/replay diagnostics completed in 15.27 seconds. Both
+50,000-step fixed CPU replays matched every primal/dual bit of the archived GPU
+endpoints. The first full pinned-native gate passed in 41.317 seconds, with
+396 Rust tests, 91 Python tests and 66 documentation pages. Seven supplementary
+GPU jobs completed with independent endpoint checks, using 20.994604580 seconds;
+canonical cumulative consumption is 194.142866023 seconds. No additional GPU
+acceptance job was required. Four activity pauses resumed only unattempted jobs.
+
+Both Nsight traces retained raw qdstrm files despite automatic importer failure.
+A missing libdw.so.1 was supplied from a pinned Ubuntu package extracted privately
+to /tmp; offline import/export then succeeded, without new GPU work. Both traces
+contain exactly 1,200 kernels for 200 iterations. A reviewed report and strict
+raw-prefix/hash/ledger/count analysis are in
+[the diagnosis](../docs/benchmarks/lp-gpu-slowdown-diagnosis.md). Main findings:
+fixed-controller convergence, repeated padded host certification, setup/launch
+costs and redundant schema construction. GPU transfers are small on these cases.
+No solver/controller/kernel/default changed.
+
+Final acceptance: full pinned-native bash tools/check.sh passed in
+39.866 seconds, with 396 Rust tests, 91 Python tests, 67 documentation pages,
+dependency/license checks, committed-record replay and smoke verification. The
+native gates total 81.184 seconds; CPU component/replay measurement used 15.271
+seconds; four recorded resume invocations plus intervening waits used 174.924
+seconds, dominated by repeated ledger/schema validation. The initial invocation,
+Python profiling, builds, provisioning and offline trace analysis also remained
+within the declared 30-minute CPU allocation. Final log/summary:
+/tmp/gpup2-diagnosis-final.log and /tmp/gpup2-diagnosis-final.json. No CPU gate
+ran concurrently with GPU jobs. All indexed raw artifact hashes were rechecked;
+original baseline evidence is unchanged.
+
+Cumulative ledger SHA-256:
+9a1bed26e90ad69bc641355c68ca6edff055268a3971f948df69cc89abeb254f.
+Diagnosis SHA-256:
+0c79e7bb322df44fdcaa7cc8679d0a6c7347138d721562822638eb44b570a7cb.
+Remaining original Slice 2 allowance: 705.857133977 seconds; remaining baseline
+phase: 1,605.857133977 seconds; remaining total campaign: 28,605.857133977 seconds.
+No budget reset, repeated attempt, changed numerical threshold or publication.
+
+## GPUP-2: LP measurement infrastructure (2026-09-15)
+
+Objective: implement the maintainer-approved Slice 2 plan: accepted contract,
+frozen repository/generated workloads, independent host-lp/cuda-lp/HiGHS
+endpoints, strict artifacts, crash-safe accounting and a baseline cost report.
+Status: complete; accepted for local commit. GPUP-3 is the next ready task.
+Known failures have been read. Preserve GPUP-1 rational
+regressions and existing host/GPU controller differences; no later slice.
+Acceptance: full pinned-native bash tools/check.sh; adversarial artifact,
+endpoint, budget/crash/lease/cleanup and analysis tests; regular device suites
+and relevant new cases under all four sanitizers; development measurements.
+Budget: 60 minutes CPU acceptance wall time, four Cargo jobs; 30 minutes GPU
+acceptance sequential with CPU gates. Study cap 900 GPU seconds from the 1,800
+baseline phase within the 28,800 campaign total. Device is exclusively
+GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 under the shared host lease.
+Likely files: diagnostic backend APIs, CLI solve/study, experiment types/schemas,
+Python tooling/tests, frozen manifests/configs, SPEC-0013, ADR-0014 and task/docs.
+No publication. Evidence and actual consumption follow below.
+
+Pre-measurement acceptance: two full pinned-native gates passed (50.974 and
+39.336 seconds), each with 396 Rust tests, 89 Python tests and 64 documentation
+pages. Release solver/device-test preparation took 10.299 seconds. Additional
+CPU orchestration checks exercised one complete trial and an interim report with
+source archive/raw-reference validation, with no GPU work. The second gate
+includes a correction preventing --output from creating a fresh campaign ledger.
+
+Device acceptance: all 35 regular device cases passed on the pinned RTX 5090.
+Both new study_observation cases passed under memcheck, racecheck, initcheck and
+synccheck, with zero errors; racecheck also reported zero warnings. The first
+combined invocation exited 1 only at the CLI fallback fixture: it hid the
+scheduling code object required to open a session, before LP fallback was reachable.
+The corrected fixture preserves that object and hides only lp_pdhg.cubin.
+The targeted CLI rerun passed device evidence and pinned fallback verification.
+No runtime code changed for this fixture correction. Total GPU acceptance was
+27.249 + 1.266 = 28.515 seconds, well within 1,800. Logs and timing JSON are in
+/tmp/gpup2-gpu-acceptance.* and /tmp/gpup2-gpu-cli.*. This is the declared scoped
+sanitizer acceptance, not a claim of running the historical broad sanitizer suite.
+
+The third full pre-measurement native gate passed in 39.966 seconds with the
+same coverage. All 144 development attempts then completed: 108 timing trials,
+36 separate profiles, 48 GPU jobs. The canonical campaign ledger charged exactly
+173.148261443 GPU seconds; CPU-only jobs used 202.666858567 seconds and additional
+standalone host verification used 24.459310130 seconds. Two activity pauses resumed
+on the same device/ledger without repeated trials. No validation/held-out solves.
+
+The [reviewed baseline](../docs/benchmarks/lp-baseline-gpup2.md) records medians,
+paired intervals, coverage, work, phases, memory, certificate quality and raw hashes.
+CUDA certified 6/36 timing trials (two small witness cases), host LP 27/36 and
+HiGHS 30/36. No fallback or malformed evidence occurred in the campaign. Failure,
+work-limit and deadline evidence is retained. No solver default, seed, split or
+numerical threshold moved; the exact-rational GPUP-1 regressions are unchanged.
+
+Raw artifacts: artifacts/gpup-baseline-v1, with canonical budget storage in
+artifacts/lp-campaign-ledgers/gpup-baseline-v1. Ledger SHA-256 is
+aee3f1398725fedf8ad37d644c8960156b897b3a11478839359def4619eb8e37;
+summary SHA-256 is c57de898e75b5c422efd09ed3590e8e9d39f97f2b50ce99535f63d1c41a6cc63.
+The measured dirty source is archived and hashed in the report. Preserve spending
+when a later slice introduces a recorded campaign migration. Remaining baseline
+phase is 1,626.851738557 seconds; remaining total is 28,626.851738557 seconds.
+
+Final review tightened the supervisor after measurement: persist SIGINT intent
+before escalation, reap orphaned process-group children before releasing the lease,
+and stream artifact hashes after checking model size. Fifteen targeted study tests
+passed, including exact simulated deadline boundaries and orphan cleanup. Existing
+raw measurements and their source archive remain intact; these tooling-only edits
+introduce no solver, kernel, controller or protocol-setting change.
+
+Final acceptance: bash tools/check.sh passed with pinned native HiGHS 1.11.0,
+396 Rust tests, 91 Python tests, 65 documentation pages, dependency/license checks,
+committed-record replay and smoke verification (39.666 seconds). The four full
+native gates total 169.942 CPU wall seconds; release preparation was 10.299 seconds,
+the last focused study tests 5.891 seconds, and explicit Rust validation of all
+32 frozen models plus 24 planted primal witnesses was 1.215 seconds. Earlier
+bounded orchestration/interim-report checks added approximately 4.17 seconds;
+acceptance remained below the 3,600-second CPU allocation with four build jobs.
+Logs: /tmp/gpup2-cpu-final.log and timing JSON; /tmp/gpup2-partition-validation.*.
+
+The final supervised GPU CLI/evidence/fallback check passed in 1.467 seconds
+(leased job 1.308638432 seconds). Signal history was empty for the successful job;
+forced-signal and orphan-reaping cases passed the CPU simulation tests. Including
+the prior regular suites, all four scoped sanitizers and failed fixture attempt,
+GPU acceptance totals 29.981850548 seconds of 1,800. Its machine-readable worker
+record is /tmp/gpup2-final-supervisor/acceptance.worker.json; summary is
+/tmp/gpup2-gpu-final.json. No CPU gate overlapped device acceptance.
+
+Slice 2's gate is satisfied. Preserve the accepted source/records, exact-rational
+regressions, frozen splits/settings, unsuccessful trials and cumulative campaign
+spending. GPUP-3 must accept SPEC-0012 before implementing shared resumable FP64
+control. No mixed precision, C10 runner, supported preset or publication is included.
+
 ## GPUP-0/1 PR Review and Integration (2026-09-14)
 
 Objective: review the roadmap and certification repair, publish one PR preserving

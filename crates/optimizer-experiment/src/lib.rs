@@ -8,6 +8,7 @@
 //! Comparative experiment execution over a benchmark manifest is not
 //! implemented here; this crate records single runs.
 
+pub mod lp;
 mod run;
 mod serde_strict;
 pub mod sha256;

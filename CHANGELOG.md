@@ -1,18 +1,56 @@
 # Changelog
 
+## Matched FP64 prerequisites (2026-09-15)
+
+- Reuse strictly checked LP schema snapshots and wait for quiet GPU admission.
+- Prune padding-only outward certification work, preserving all enclosure/result
+  bits and conservative refusals. Independent rational and padded-oracle tests pass.
+
 User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Fixed
+
+- Fetch full CI history for frozen LP schema comparisons; synchronize the lease
+  exclusion test with worker readiness so import latency cannot cause false failures.
+
 ### Added
+
+- Opt-in cuda-lp-matched shares the host FP64 restart/weight controller, with
+  in-memory checkpoints, bounded cancellation and non-rollback work/deadlines.
+  Endpoint-v2 and LP replay preserve candidate/dual alignment and independent checks.
+- Frozen ADR-0016 supplementary study uses strict v2 campaign/trial schemas and
+  the existing cumulative budget ledger. Legacy schemas and cuda-lp control remain.
+  The [matched FP64 report](docs/benchmarks/lp-matched-fp64-gpup3.md) records all 160
+  attempts: matched CUDA certifies 27/36 timing trials, versus legacy CUDA 6/36.
+  Cumulative study consumption is 445.988 GPU seconds; three scheduling instances
+  remain unclosed. Full native and scoped device/sanitizer gates pass.
+
+- A [measured GPU LP slowdown diagnosis](docs/benchmarks/lp-gpu-slowdown-diagnosis.md):
+  CPU replay matches two 50,000-step GPU endpoints bit-for-bit; component timings
+  isolate certification costs; seven supplementary jobs and decoded CUDA traces
+  separate startup, kernel, transfer and harness overhead. Existing solver behavior
+  is unchanged; cumulative study use is 194.143 GPU seconds.
+- GPUP-2 LP-only measurement infrastructure: strict frozen campaigns/manifests,
+  optional solve evidence and independent verification, conservative host certification
+  of HiGHS row multipliers, crash-safe budget accounting, bounded supervised GPU
+  jobs, paired coverage analysis and separate phase profiles. See
+  [study operations](docs/benchmarks/lp-precision-study.md). Existing solve formats,
+  arithmetic, controllers and defaults remain compatible. The [baseline report](docs/benchmarks/lp-baseline-gpup2.md)
+  records 144 trials and 173.148 GPU seconds; CUDA certified only the two small
+  witness cases. No low-precision recipe is promoted.
+- Accurate observed LP device-buffer peak and per-call kernel launch counts for
+  study accounting; the old launch counter omitted the second Halpern launch.
 
 - The approved [GPU LP precision roadmap](docs/plans/gpu-lp-precision-roadmap.md),
   GPUP-0 through GPUP-10 backlog slices, draft numerical/experiment specifications,
   and ADR-0012/ADR-0013. The selected objective is certified single-solve latency
   with an eight GPU-hour first experiment campaign and component/interaction
   ablations before recipe selection. Repeated-solve throughput and full MILP search
-  performance are separate future tracks. This is documentation and planning;
-  no mixed-precision backend, experiment result, or new default is shipped.
+  performance are separate future tracks. That initial planning change shipped
+  no mixed-precision backend, experiment result, or new default; GPUP-2 evidence
+  is recorded separately above.
 - A recorded reduced-cost cancellation defect in the existing LP certification,
   with an exact binary64-coefficient counterexample and GPUP-1 repair prerequisite.
   The earlier certification claims below describe the intended contract; the

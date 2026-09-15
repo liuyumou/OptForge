@@ -1,15 +1,22 @@
 # SPEC-0012: Experimental Mixed-Precision LP Backend
 
-Status: draft; not implemented or selectable
+Status: accepted; GPUP-3 implemented and measured, later precision requirements pending
 Scope: opt-in LP arithmetic, resumable control, numerical audits, and recovery
 Owner: numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: bootstrap (first commit containing this document)
-Supersedes: none while draft; ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
-Implementation: GPUP-1 repairs the existing SPEC-0011 backend; mixed precision pending GPUP-3 through GPUP-8
-Tests: planned requirement mapping below; no new runtime coverage in slice 0
+Supersedes: ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
+Implementation: shared optimizer-lp FP64 controller and opt-in optimizer-lp-cuda matched executor; precision pending GPUP-5 through GPUP-8
+Tests: continuation, bitwise trajectory, exact-rational, endpoint, native and scoped device gates; mapping below
 
 ## Purpose
+
+Accepted by the maintainer on 2026-09-15. GPUP-3 implements shared resumable FP64
+control and explicit `cuda-lp-matched` using existing kernels, settings and host
+mathematical authority. Requirements 9-11 apply to in-memory FP64 checkpoints now;
+precision/audit/random state applies when introduced in GPUP-5 through GPUP-8.
+Persistent checkpoints, precision settings, quantization, recovery and presets
+remain pending. [ADR-0016](../decisions/ADR-0016-matched-fp64.md) freezes this slice.
 
 Define an experimental route from FP64 through FP32 to FP8 and Tensor Core LP
 iteration without giving the device mathematical authority. Optimize certified
@@ -121,7 +128,7 @@ execution by the pinned HiGHS adapter, distinct from FP64 numerical recovery.
 ## Interfaces
 
 Planned selection: `cuda-lp-quantized`, opt-in through the existing solve surface.
-This name is reserved by the draft, not accepted by the current CLI. The Backend
+This name is reserved for later precision work and is not accepted by the current CLI. The Backend
 trait remains the runtime boundary. Its capability declaration needs an explicit
 mixed-arithmetic representation rather than falsely reporting F64-only execution.
 
@@ -131,7 +138,7 @@ scale and block policy, rounding/seed, sparse or hybrid execution, tile-density
 policy, audit interval, primal/dual update tolerances, recovery ladder,
 clean-window/demotion policy, and work/memory/time limits. All consequential
 settings are explicit. Unsupported combinations fail validation; no final preset
-or runtime schema is shipped by this draft.
+or precision runtime schema is shipped by GPUP-3.
 
 New records distinguish requested and executed backends/modes and retain config
 and code-object identities, transitions/reasons, accepted/rejected/audit counts,
@@ -179,7 +186,7 @@ permission under SPEC-0003. A missing certificate is not infeasibility.
 
 ## Compatibility and versioning
 
-Accept this draft before introducing the behavior it owns. ADR-0012 permits the
+This specification is accepted. GPUP-3 exposes only the FP64 contract below. ADR-0012 permits the
 new opt-in contract without changing legacy FP64 tests. Record breaking changes
 with new schemas and explicit migration notes. Same-device reproducibility is
 part of the new contract; a method that cannot satisfy it stays unsupported until
@@ -202,8 +209,8 @@ checkpoint and retries in FP64, counting both attempts and the audit work.
 An interval-32 FP8 test that passes its final-update audit has corrected that
 endpoint; it has not proved that 32 earlier updates match an FP64 trajectory.
 The independent final host checks still decide its candidate and bound claims.
-Executable CLI/JSON examples will accompany the accepted interface, rather than
-showing a command that does not work in slice 0.
+These precision examples remain prospective. The implemented FP64 CLI and evidence
+interfaces are documented below and in the study operations guide.
 
 ## Acceptance tests
 
@@ -214,17 +221,17 @@ acceptance below remains planned. Each implementing slice must replace planned
 labels with named tests/evidence; numerical tests use independent oracles or
 able-to-fail injections rather than mirroring the implementation.
 
-| Requirements | Planned assertion | Slice |
+| Requirements | Assertion and implementation status | Slice |
 | --- | --- | --- |
 | 1-5 | Exact binary64-coefficient rational oracle; cancellation/sign/infinite-bound fixtures; wrong device output cannot strengthen a bound; objective/gap sense checks. | GPUP-1, GPUP-5 |
 | 6-8 | Capability refusal, unchanged default/legacy fixtures, settings/schema parity, old-record reading and migration. | GPUP-5 |
-| 9-11 | Full trajectory, restart, controller-history, and checkpoint/replay comparisons against the matched reference. | GPUP-3, GPUP-6 |
+| 9-11 | Implemented FP64: shared_controller_matches_literal_legacy_whole_trajectories, checkpoints_restore_all_history_but_never_work_or_deadlines, matched_control device tests. Precision/recovery state remains planned. | GPUP-3 complete, GPUP-6 pending |
 | 12-15 | Allocation/transfer instrumentation, recorded arithmetic, same-device repeatability, conservative operator/step checks. | GPUP-4, GPUP-5, GPUP-8 |
 | 16-21 | Quantizer boundary/tie/subnormal/overflow fixtures; transpose reconstruction equality; seeded retry equality; original high-precision operands retained. | GPUP-7 |
 | 22-23 | Single-RHS padding/cost accounting; sparse/Tensor equivalence; unsupported hardware/layout checks. | GPUP-8 |
 | 24-29 | Interval-1 and sampled audits; corrupted updates/guards; whole-window restore; reference endpoint adoption; charged work; sticky and hysteretic recovery. | GPUP-6, GPUP-7 |
 | 30-33 | Exhausted ladder, time/work limit and cancellation injections; poisoned-context refusal; recorded pinned-backend fallback. | GPUP-6, GPUP-8 |
-| 34-37 | Unsafe/dependency checks, toolkit/device-free build, lease exclusion, full native gate and relevant sanitizers. | Every implementation slice |
+| 34-37 | GPUP-3 passed unsafe/dependency checks, ordinary build, lease tests, full pinned-native gate and all four scoped sanitizers; repeat for each later slice. | Every implementation slice |
 | 38 | Preset-to-frozen-experiment provenance; no preset/default emitted from an incomplete study. | GPUP-10 |
 
 ## Open questions
@@ -235,5 +242,39 @@ Exact wire schemas, memory/work-limit precedence, supported-format tables, and
 rounding/scale corner-case algorithms must be completed before the corresponding
 runtime slice. GPUP-1 supplies the conservative certification prerequisite; its
 limits remain part of future performance comparisons.
-This draft does not assert a PDHG convergence theorem for stochastic rounding or
+This specification does not assert a PDHG convergence theorem for stochastic rounding or
 low-precision operators, or support for unmeasured Tensor Core instructions.
+
+## GPUP-3 FP64 interface and continuation contract
+
+`optimizer solve --backend cuda-lp-matched` requires explicit LP settings and a
+device, as for cuda-lp. Storage, products, accumulation and state remain FP64;
+existing kernels/reduction order and no-contraction behavior remain unchanged.
+The host controller computes the same restart/error/weight updates used by host-lp.
+Legacy cuda-lp retains fixed anchors and weight. Host cancellation/callback ordering
+remains unchanged; the matched host reference and device driver use bounded
+64-step cancellation observations, without moving global check boundaries.
+
+`Fp64Controller` holds scaled x/y, anchors, weight, integral/previous errors, anchor
+and last-check errors, logical indices, restart count and processed check position.
+Opaque in-memory checkpoints also bind the exact immutable Engine (model,
+preconditioning/settings and step). Restore on a different engine is refused.
+Physical steps, KKT work and absolute deadline are outside the checkpoint; rollback
+never replenishes work or time. Device resumable advance returns completed vectors
+and steps on healthy cancellation. A fault retains enqueued-kernel counts and
+marks completed physical steps unavailable; native fallback cannot erase them.
+The solve-options and LP iteration allowances both bound matched execution.
+
+Assess before each controller update. On a limit between checks retain the last
+assessed candidate and its dual; assess the final state if no previous assessment
+exists. Retain the final independent checks. Endpoint-v2 carries controller/work
+observations separately from unchanged legacy diagnostics/solve-record fields.
+No controller observation grants mathematical authority.
+
+Acceptance names: shared_controller_matches_literal_legacy_whole_trajectories;
+checkpoints_restore_all_history_but_never_work_or_deadlines; matched_control device
+cases; matched_evidence_roundtrips_without_changing_legacy_shape; matched_corruption
+fixtures. The [reviewed GPUP-3 study](../benchmarks/lp-matched-fp64-gpup3.md)
+records 160 attempts, full native acceptance, 38 regular device cases and five
+cases under all four sanitizers. All 27 mutually certified host/matched endpoint
+pairs agree bit for bit. Numerical limits remain in the report and known failures.

@@ -1,13 +1,13 @@
 # SPEC-0013: Bounded LP Precision Experiments
 
-Status: draft; harness and study not implemented
+Status: accepted; GPUP-2 implemented and measured; later slices pending
 Scope: LP-only development measurement, ablations, evidence, and recipe selection
 Owner: experiment tooling and numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: bootstrap (first commit containing this document)
 Supersedes: none; extends SPEC-0007 for a separately versioned LP study
-Implementation: pending GPUP-2 through GPUP-10
-Tests: planned requirement mapping below; no measured results in slice 0
+Implementation: GPUP-2 CLI/backend observations and tools/ LP harness; GPUP-3 through GPUP-10 pending
+Tests: implementation mapping below; [baseline evidence](../benchmarks/lp-baseline-gpup2.md)
 
 ## Purpose
 
@@ -127,10 +127,54 @@ validation, certificate outcome, and all provenance in requirement 16. Unsupport
 or unavailable measurements are explicit, not fabricated zeros. Reports reference
 raw record hashes and the analysis configuration.
 
-Schema names and exact wire fields, subprocess timeout/cleanup behavior, and the
-ledger crash-reservation algorithm must be finalized before GPUP-2 implementation.
+The version-1 contract below and ADR-0014 finalize these choices before GPUP-2 behavior.
 Existing strict schemas cannot be extended by unversioned extra fields. Resume
 means resuming a study ledger; it does not introduce solver checkpoint restart.
+
+### GPUP-2 version-1 wire contract
+
+All objects reject unknown/duplicate fields and nonfinite numbers. Hashes are
+SHA-256 of exact bytes; local paths are confined to their declared root. The JSON
+schemas are normative for field spelling and required/optional distinctions.
+
+- lp-campaign-v1: identity, hashed manifest references, configuration grid,
+  solve/LP settings, partition, seeds, repetitions, analysis, resource limits,
+  pinned device and immutable total/phase/slice GPU allocations.
+- lp-manifest-v1: identity/partition, instance ID, family/group, model path,
+  byte hash/size, source/license and generator version/seed/parameters.
+- lp-endpoint-v1: model hash, requested backend, unchanged solve record,
+  canonical row-ID multiplier witness or explicit absence, recomputed host
+  assessment, work/memory/phase diagnostics and fallback reason. Assessment
+  contains feasibility/objective, certificate or refusal, conservative gap and
+  classification. Native statuses/bounds are diagnostics, not certificates.
+- lp-trial-v1: campaign/config/instance/block/repetition/order, timing/profile
+  mode, provenance/limits, process outcome, nanosecond elapsed/queue/lease time,
+  memory method, hashed output references and verified endpoint or absence.
+- lp-ledger-v1: append-only reserve/settle/recover events with campaign hash,
+  monotone sequence, reservation/trial identity, phase, CPU/GPU class and
+  reserved/charged nanoseconds. Flush and fsync before work; exclusively lock
+  campaign mutation through execution. The canonical ledger directory is derived
+  from campaign identity, independently of output paths, and binds one output
+  directory so changing --output cannot reset consumption. Recover unresolved reservations at full
+  cost. Never bypass an ambiguous/corrupt ledger. Preserve a torn trailing event
+  as crash evidence before repairing it under the exclusive lock.
+
+The supervisor starts a foreground process group, sends SIGINT at ten seconds,
+cancellation or sampled RSS overflow, and escalates to SIGKILL within two further
+seconds. Preserve bounded stdout/stderr and partial output. A leased supervisor
+owns the deadline independently of the outer runner; retain the lease until
+children are reaped. Queue wait is separate. Charge unexpected overruns fully and
+stop further jobs. Reserve enough for teardown before acquiring the lease.
+
+Diagnostic entry points share ordinary backend execution. A dual witness must
+match the candidate assessment even if the work limit ends between checks.
+Independent host checking occurs before completed evidence output. Profiles use
+synchronized phase boundaries and remain separate from primary samples. Unavailable
+measurements carry a reason; zero means measured zero or an inapplicable operation.
+
+Frozen choices are in [ADR-0014](../decisions/ADR-0014-lp-baseline-protocol.md).
+Requirements 24-31 and 33 retain their GPUP-9/10 implementation gates; accepting
+this contract does not authorize held-out evaluation or preset selection in GPUP-2.
 
 ## State and invariants
 
@@ -194,7 +238,7 @@ separate events. Existing availability/fallback behavior remains observable.
 
 ## Compatibility and versioning
 
-Accept this draft and complete its wire contracts before GPUP-2. Preserve existing
+The maintainer accepted this contract for GPUP-2. Preserve existing
 SPEC-0007 artifacts and existing Taillard manifests unchanged. A new manifest and
 decision record are required for the concrete LP partitions; this document creates
 none. Automatic dispatch/default changes and the general C10 API remain outside
@@ -216,14 +260,17 @@ a time limit on a baseline-successful case, that is a coverage loss, not an omit
 pair. If a fallback solves the model, it is counted with its full cost and labeled
 with the backend actually executed.
 
-No measured example is provided in GPUP-0. GPUP-2 will add explicitly synthetic
-schema examples plus executable reproduction instructions. GPUP-9/10 supply real
-provenance-bearing results only after trials and independent validation.
+GPUP-2 includes explicitly synthetic trial/ledger schema examples,
+[executable reproduction instructions](../benchmarks/lp-precision-study.md), and
+[a measured development baseline](../benchmarks/lp-baseline-gpup2.md) with hashed
+raw evidence. GPUP-9/10 retain the held-out comparison and recipe-selection gates.
 
 ## Acceptance tests
 
-All mappings are planned. Named implementation tests and actual evidence must
-replace the pending descriptions slice by slice.
+GPUP-2 assertions are implemented in tests/integration/test_lp_study.py,
+optimizer-experiment LP unit tests, and the two study_observation device tests.
+Later-slice mappings remain pending; measured acceptance and exact device/sanitizer
+coverage are recorded in [active task](../../state/active-task.md).
 
 | Requirements | Planned assertion | Slice |
 | --- | --- | --- |
@@ -237,12 +284,69 @@ replace the pending descriptions slice by slice.
 | 27-31 | Frozen finalist identity; held-out retuning refusal; insufficient/negative evidence reports without preset promotion. | GPUP-9 |
 | 32-35 | Strict schema/provenance/migration cases; preset-to-evidence links; slice ledger and documentation; full gates. | GPUP-2, GPUP-10 |
 
+### Implemented GPUP-2 acceptance mapping
+
+- Requirements 1-5: frozen generation, exact witness construction, grouped partitions,
+  altered seed/target/config/hash/path refusals in ProtocolTests and the gate's
+  lp_generate.py materialization comparison.
+- Requirements 6-9: Ledger reservation/recovery/phase/concurrency tests, forced
+  process cleanup, and isolated simulated shared-lock tests. Device execution
+  remains opt-in under the actual host lease.
+- Requirements 10-18: known-delay child, separate profile flags, deterministic
+  schedule, complete trial intents/results, requested/executed identity and the
+  lp_gpu_cli_check.py actual-device fallback check.
+- Requirements 19-21: optimizer-experiment::lp unit tests preserve assessment/witness
+  alignment; corrupted claims and malformed duals fail; EndpointTests checks
+  native minimization/maximization witnesses and the standalone verifier.
+- Requirements 22-23: exact paired ratios, censored failures, incomplete counts and
+  fallback exclusion in ProtocolTests; raw trial/ledger coverage is required by
+  lp_report.py.
+- Requirements 32, 34-35: five strict schemas, old artifact gates unchanged, task
+  resource/evidence state, native gate receipt and scoped device acceptance.
+
 ## Open questions
 
-Concrete instances, generator dimensions, seeds, split membership, numerical
-thresholds, repetition scheduling within phase caps, and analysis parameters need
-recorded freezing before trials. They are not chosen silently by this draft.
-GPUP-2 must define how each baseline supplies independently checkable bound evidence;
-pinned HiGHS status alone is not a substitute. Eight GPU-hours may yield only an
+ADR-0014 and the frozen version-1 artifacts now specify the initial instances,
+seeds, targets, limits and analysis. All three baselines provide untrusted row
+multipliers for independent host certification; native status alone is insufficient. Eight GPU-hours may yield only an
 interim result. The fastest configuration and its useful workload range remain
-hypotheses until the study is complete.
+hypotheses until the later controlled study is complete. GPUP-2 development
+measurements establish baseline costs and coverage, with no recipe selected.
+
+## ADR-0016 supplementary version-2 interfaces
+
+The frozen lp-matched-v2 campaign names four configuration/binary roles, profile
+instances, immutable baseline budget authority, prior consumption, supplementary
+allowance and admission policy. Trial-v2 additionally records that authority hash,
+pre-reservation activity reference/wait, and schema snapshot hash. Version-1
+campaign, manifest, trial, ledger and endpoint schemas remain byte-for-byte intact.
+The budget ledger retains its original authority/hash and output binding; new
+study IDs do not create another spending allowance.
+
+Endpoint-v2 is emitted only when cuda-lp-matched is requested. Its optional control
+object records host-restart-weight-v1, logical and physical steps, LP kernel
+launches, assessments, KKT evaluations, restarts, weight and stop reason. Physical
+steps are null after a fault if completion is unknown. Missing controller data
+before opening/initialization is explicitly unavailable. Payload integrity includes
+this object. The verifier rejects impossible identity, stop/work or assessment
+alignment claims and independently rechecks the original model and certificate.
+Legacy solves still emit endpoint-v1. New readers accept both versions.
+
+`optimizer lp-study replay --model MODEL --evidence ENDPOINT --output FRESH
+[--device UUID]` verifies the source and executes its recorded implementation;
+a historical fallback therefore replays HiGHS. It independently checks the new
+endpoint, refuses existing outputs and uses the normal selected-device/lease and
+fallback boundary. Elapsed-time termination can differ on replay; a fresh endpoint
+is evidence, not an assertion that a timeout reproduced bit for bit.
+
+Tooling validation: test_lp_overheads.py and test_lp_matched.py cover immutable
+schema reuse, strictness, v1 preservation, activity/admission races, frozen paired
+analysis and actual CPU child/replay/verification boundaries. Existing ledger,
+crash, cleanup, failure and partition tests remain acceptance requirements.
+
+Supplementary acceptance: [GPUP-3 report](../benchmarks/lp-matched-fp64-gpup3.md),
+160/160 retained attempts, no invalid/missing evidence, 251.845179881 additional
+GPU seconds and 445.988045904 cumulative seconds. All 12 development instances
+received three repetitions; four received separate profiles. Validation/held-out
+partitions remain unmeasured. Low-precision ablations and recipe selection remain
+pending. Full native and scoped device/sanitizer evidence is recorded in active task.

@@ -4,7 +4,7 @@ next_ready_milestone: C7
 # Capability milestones stay numbered as before. The user prioritized this
 # separate research track before C7 behavior; next_ready_task selects its slice.
 active_research_track: GPUP
-next_ready_task: GPUP-2
+next_ready_task: GPUP-4
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: M0
@@ -119,19 +119,19 @@ tasks:
     acceptance: "Independent exact-arithmetic cancellation, uncertain-sign, infinite-bound and objective-sense regressions; full native gate"
   - id: GPUP-2
     title: Establish bounded LP experiment infrastructure and baseline evidence
-    status: ready
+    status: complete
     depends_on: [GPUP-1]
     specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
     acceptance: "Accept experiment contract and freeze manifests first; strict artifacts, independent endpoints, budget ledger, baseline bottleneck report"
   - id: GPUP-3
     title: Create shared resumable FP64 controller and reference
-    status: planned
+    status: complete
     depends_on: [GPUP-2]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     acceptance: "Accept numerical contract first; whole trajectories, restart/history checkpoints, cancellation and work accounting"
   - id: GPUP-4
     title: Optimize FP64 residency and sparse execution
-    status: planned
+    status: ready
     depends_on: [GPUP-3]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     acceptance: "Isolated residency, transfer, kernel and fusion measurements; numerical and device gates"

@@ -96,6 +96,7 @@ if ! cargo deny --locked check; then
     echo "acceptance gate: retrying advisories against the cached database" >&2
     cargo deny --offline --locked check
 fi
+python3 tools/lp_generate.py
 python3 tools/validate_artifacts.py
 python3 -m unittest discover -s tests/integration -p 'test_*.py'
 # SPEC-0005 requirement 9: re-execute a record committed at an earlier revision.
@@ -121,4 +122,14 @@ if [[ "$native_covered" == "0" ]]; then
 # one. Re-run without AI_OPTIMIZER_SKIP_NATIVE for C1 acceptance evidence.
 ################################################################################
 EOF
+fi
+# This receipt is written only after every full native gate command succeeded.
+if [[ "$native_covered" == "1" ]]; then
+    python3 - <<'PYRECEIPT'
+import sys
+sys.path.insert(0, "tools")
+from benchmark_lp import source_identity
+from lp_protocol import ROOT, write_json
+write_json(ROOT / "target/lp-native-gate.json", {"native": True, "source_tree_sha256": source_identity()})
+PYRECEIPT
 fi

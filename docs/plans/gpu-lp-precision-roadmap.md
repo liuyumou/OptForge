@@ -1,11 +1,11 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; slices 0-1 complete; slices 2-10 pending
+Status: approved roadmap; slices 0-3 complete; slices 4-10 pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: bootstrap (first commit containing this document)
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
-Acceptance: the slice gates below; no performance results yet
+Acceptance: the slice gates below; [GPUP-2 baseline evidence](../benchmarks/lp-baseline-gpup2.md), [GPUP-3 matched evidence](../benchmarks/lp-matched-fp64-gpup3.md)
 
 ## Objective and working agreement
 
@@ -30,8 +30,9 @@ This track follows C6 but does not complete C7, C9, or the general C10 runner.
 
 - [SPEC-0012](../specifications/SPEC-0012-mixed-precision-lp.md) drafts numerical,
   recovery, and interface requirements. It is not an implemented capability.
-- [SPEC-0013](../specifications/SPEC-0013-lp-precision-experiments.md) drafts the
-  bounded LP study, its artifacts, and acceptance mapping.
+- [SPEC-0013](../specifications/SPEC-0013-lp-precision-experiments.md) is accepted;
+  GPUP-2 implements the bounded LP study, artifacts and baseline acceptance.
+  [ADR-0014](../decisions/ADR-0014-lp-baseline-protocol.md) freezes its concrete protocol.
 - [ADR-0012](../decisions/ADR-0012-opt-in-lp-precision.md) narrowly supersedes the
   blanket FP64 and shared-reduction restrictions for a new opt-in backend once
   its prerequisites and accepted specification are in place.
@@ -57,7 +58,7 @@ be refined from earlier findings, with changes recorded before affected trials.
 | GPUP-0 | Persist this roadmap, dependency-ordered backlog, numerical and experiment drafts, and superseding arithmetic/reproducibility ADR. | Documentation gate; requirement-to-test mapping; explicit budgets and decision rules. |
 | GPUP-1 | Repair reduced-cost cancellation with conservative outward bounds; review objective and gap authority. | Independent exact-arithmetic regressions for cancellation, uncertain signs, finite/infinite bounds, and both objective senses. |
 | GPUP-2 | Establish the LP-only measurement harness, versioned manifests/results, independent checking, and phase instrumentation. Measure host LP, existing GPU FP64, and pinned HiGHS. | Reproducible records, deliberately failing checks, complete cost accounting, baseline bottleneck report. |
-| GPUP-3 | Create a resumable FP64 control implementation with shared restart, weight, checkpoint, cancellation, and budget state. | Whole-trajectory and restart checks; identify controller differences from existing implementations. |
+| GPUP-3 | Create a resumable FP64 control implementation with shared restart, weight, checkpoint, cancellation, and budget state. | Complete: whole-trajectory/checkpoint tests, full native and scoped device/sanitizer gates, and 160 supplementary study attempts. Opt-in matched CUDA certifies 27/36 timing runs; legacy remains unchanged. |
 | GPUP-4 | Optimize FP64 residency, allocation, transfers, sparse kernels, and compatible fusion where profiling supports it. | Isolated residency/kernel/fusion measurements and numerical checks; a tuned control baseline. |
 | GPUP-5 | Add FP32 matrix storage with FP64 arithmetic, then FP32 products/accumulation. Compare FP64 masters and FP32 working state with FP64 correction. | Original-model checks, convergence and range diagnostics, measured storage/arithmetic/state costs. |
 | GPUP-6 | Add configurable audits, checkpoints, replay, promotion, and optional demotion, initially FP32/FP64. | Fault injection covering full rollback, budget/cancellation accounting, sticky promotion, and guarded demotion. |
@@ -72,6 +73,12 @@ postpone all measurement until after implementation. Each slice declares its own
 bounded CPU/GPU acceptance budget before work. All study jobs, including failed
 trials and profiling, consume the single campaign ledger; acceptance-only GPU work
 is separately identified and budgeted, never hidden in benchmark timings.
+
+GPUP-3's [accepted report](../benchmarks/lp-matched-fp64-gpup3.md) records schema/activity
+repairs, bit-preserving certification, matched control, failures and raw hashes.
+It adds 251.845179881 GPU seconds; cumulative study consumption is 445.988045904.
+GPUP-4 must preserve that ledger, the original artifacts and exact-rational tests.
+No validation/held-out solve, precision preset or publication occurred.
 
 ## Numerical design and candidate methods
 
@@ -193,7 +200,10 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Next handoff after GPUP-1: finalize the experiment contract and establish the
-measurement infrastructure under GPUP-2. Full MILP integration and repeated-solve
+Next handoff after GPUP-2: accept SPEC-0012 and create the shared resumable FP64
+controller under GPUP-3. The baseline completed 144 attempts and consumed
+173.148261443 GPU seconds; preserve that ledger consumption. Host/GPU controller
+differences and limited GPU certified coverage are documented in the baseline report.
+Full MILP integration and repeated-solve
 throughput are separately listed in
 the backlog; neither follows automatically from a faster LP kernel.
