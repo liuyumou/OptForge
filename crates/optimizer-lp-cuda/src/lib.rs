@@ -22,3 +22,5 @@ pub use residency::{
     AdvanceResult, Decline, KERNEL_NAMES, LpResidency, Requirement, TARGET_CAPABILITY,
     code_object_path, device_path_available,
 };
+
+pub mod tuned;

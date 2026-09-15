@@ -419,30 +419,83 @@ pub struct SolveRecord {
     /// record without them would not describe the solve it came from.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub lp_settings: Option<crate::LpSettings>,
+    /// Explicit tuned execution, present only in version 3.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub lp_execution: Option<crate::LpExecutionRecord>,
 }
 
-deserialize_object!(SolveRecord {
-    schema_version: u32,
-    model_id: String,
-    backend: String,
-    backend_version: String,
-    termination: Termination,
-    native_status: Option<String>,
-    objective: Option<f64>,
-    best_bound: Option<f64>,
-    gap: Option<f64>,
-    candidate: Option<Candidate>,
-    validation: Option<ValidationReport>,
-    warnings: Vec<String>,
-    elapsed_ms: u64,
-    options: SolveOptions,
-    lp_settings: Option<crate::LpSettings>,
-});
+// Track explicit field presence: a v2 record with lp_execution:null is still
+// a schema violation, even though its Rust Option would otherwise be None.
+#[derive(Default)]
+enum ExecutionField {
+    #[default]
+    Missing,
+    Present(Option<crate::LpExecutionRecord>),
+}
+impl<'de> serde::Deserialize<'de> for ExecutionField {
+    fn deserialize<D: serde::Deserializer<'de>>(d: D) -> Result<Self, D::Error> {
+        <Option<crate::LpExecutionRecord> as serde::Deserialize>::deserialize(d).map(Self::Present)
+    }
+}
+impl<'de> serde::Deserialize<'de> for SolveRecord {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[derive(serde::Deserialize)]
+        #[serde(deny_unknown_fields)]
+        struct Fields {
+            schema_version: u32,
+            model_id: String,
+            backend: String,
+            backend_version: String,
+            termination: Termination,
+            native_status: Option<String>,
+            objective: Option<f64>,
+            best_bound: Option<f64>,
+            gap: Option<f64>,
+            candidate: Option<Candidate>,
+            validation: Option<ValidationReport>,
+            warnings: Vec<String>,
+            elapsed_ms: u64,
+            options: SolveOptions,
+            lp_settings: Option<crate::LpSettings>,
+            #[serde(default)]
+            lp_execution: ExecutionField,
+        }
+        let fields: Fields = crate::serde_strict::object(deserializer)?;
+        if fields.schema_version == 2 && !matches!(fields.lp_execution, ExecutionField::Missing) {
+            return Err(serde::de::Error::custom(
+                "v2 solve record contains lp_execution",
+            ));
+        }
+        let lp_execution = match fields.lp_execution {
+            ExecutionField::Missing => None,
+            ExecutionField::Present(value) => value,
+        };
+        Ok(Self {
+            schema_version: fields.schema_version,
+            model_id: fields.model_id,
+            backend: fields.backend,
+            backend_version: fields.backend_version,
+            termination: fields.termination,
+            native_status: fields.native_status,
+            objective: fields.objective,
+            best_bound: fields.best_bound,
+            gap: fields.gap,
+            candidate: fields.candidate,
+            validation: fields.validation,
+            warnings: fields.warnings,
+            elapsed_ms: fields.elapsed_ms,
+            options: fields.options,
+            lp_settings: fields.lp_settings,
+            lp_execution,
+        })
+    }
+}
 
 impl SolveRecord {
     /// Serialize a record, rejecting nonfinite measurements rather than emitting
     /// a null in place of an allegedly finite number.
     pub fn to_json(&self) -> Result<String, ValidationError> {
+        self.check_execution()?;
         for (name, value) in [
             ("objective", self.objective),
             ("best_bound", self.best_bound),
@@ -470,14 +523,40 @@ impl SolveRecord {
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         let record: Self = serde_json::from_slice(bytes)
             .map_err(|error| ValidationError::new(ErrorKind::Document, error.to_string()))?;
-        if record.schema_version != SOLVE_RECORD_SCHEMA_VERSION {
+        if ![SOLVE_RECORD_SCHEMA_VERSION, 3].contains(&record.schema_version) {
             return Err(ValidationError::new(
                 ErrorKind::Document,
                 format!("unsupported solve schema_version {}", record.schema_version),
             ));
         }
+        record.check_execution()?;
         record.check_nested_versions()?;
         Ok(record)
+    }
+
+    /// Enforce version/backend/settings agreement without changing legacy emission.
+    pub fn check_execution(&self) -> Result<(), ValidationError> {
+        let valid = match (&self.lp_execution, self.schema_version) {
+            (None, 2) => self.backend != "cuda-lp-tuned",
+            (Some(execution), 3) => {
+                execution.settings.validate()?;
+                self.backend == "cuda-lp-tuned"
+                    && self.lp_settings.is_some()
+                    && execution.code_object_sha256.len() == 64
+                    && execution
+                        .code_object_sha256
+                        .bytes()
+                        .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
+            }
+            _ => false,
+        };
+        if !valid {
+            return Err(ValidationError::new(
+                ErrorKind::Document,
+                "solve execution/version identity differs",
+            ));
+        }
+        Ok(())
     }
 
     /// Check every nested versioned document this record carries.

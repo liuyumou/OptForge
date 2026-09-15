@@ -48,6 +48,7 @@ pub struct Fp64Controller<'e, 'p> {
     engine: &'e Engine<'p>,
     state: Fp64State,
     physical_iterations: u64,
+    generation: u64,
     kkt_evaluations: u64,
     deadline: Option<Instant>,
 }
@@ -77,9 +78,16 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
                 checked_iteration: 0,
             },
             physical_iterations: 0,
+            generation: 0,
             kkt_evaluations: 1,
             deadline: None,
         }
+    }
+
+    /// State replacement generation; does not roll back with checkpoints.
+    #[must_use]
+    pub fn generation(&self) -> u64 {
+        self.generation
     }
 
     /// Numerical state, read-only outside controlled buffer execution.
@@ -135,6 +143,10 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
             return Err("checkpoint belongs to a different FP64 engine");
         }
         self.state = checkpoint.state.clone();
+        self.generation = self
+            .generation
+            .checked_add(1)
+            .expect("FP64 state generation exhausted");
         Ok(())
     }
 

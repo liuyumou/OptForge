@@ -358,6 +358,7 @@ impl Backend for ExactBackend {
     ) -> Result<SolveRecord, ValidationError> {
         *self.solves.borrow_mut() += 1;
         let record = |termination, candidate: Option<Candidate>, objective| SolveRecord {
+            lp_execution: None,
             schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: "exact-test-lp".to_string(),
@@ -457,6 +458,7 @@ impl Backend for ScriptedBackend {
             .map(|report| report.objective)
             .ok();
         Ok(SolveRecord {
+            lp_execution: None,
             schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: "scripted".to_string(),

@@ -50,6 +50,8 @@ pub struct CudaLpBackend {
     settings: LpSettings,
     code_object: std::path::PathBuf,
     matched: bool,
+    execution: Option<optimizer_core::LpExecutionRecord>,
+    code_image: Option<Vec<u8>>,
 }
 
 impl CudaLpBackend {
@@ -87,6 +89,8 @@ impl CudaLpBackend {
             settings,
             code_object,
             matched: false,
+            execution: None,
+            code_image: None,
         })
     }
 
@@ -103,8 +107,46 @@ impl CudaLpBackend {
         Ok(backend)
     }
 
+    /// Open explicitly configured experimental FP64 execution.
+    /// The code-object hash records the actual bytes subsequently loaded.
+    pub fn open_tuned(
+        context: Rc<Context>,
+        settings: LpSettings,
+        execution: optimizer_core::Fp64ExecutionSettings,
+    ) -> Result<Self, ValidationError> {
+        Self::open_tuned_with_code_object(
+            context,
+            settings,
+            execution,
+            crate::tuned::code_object_path(),
+        )
+    }
+
+    /// Open tuned execution against an explicit provisioned code object.
+    pub fn open_tuned_with_code_object(
+        context: Rc<Context>,
+        settings: LpSettings,
+        execution: optimizer_core::Fp64ExecutionSettings,
+        path: std::path::PathBuf,
+    ) -> Result<Self, ValidationError> {
+        execution.validate()?;
+        let bytes = std::fs::read(&path).map_err(|e| {
+            ValidationError::new(optimizer_core::ErrorKind::Document, e.to_string())
+        })?;
+        let mut backend = Self::open_with_code_object(context, settings, path)?;
+        backend.matched = true;
+        backend.execution = Some(optimizer_core::LpExecutionRecord {
+            settings: execution,
+            code_object_sha256: optimizer_core::sha256::hex(&bytes),
+        });
+        backend.code_image = Some(bytes);
+        Ok(backend)
+    }
+
     fn name(&self) -> &'static str {
-        if self.matched {
+        if self.execution.is_some() {
+            "cuda-lp-tuned"
+        } else if self.matched {
             "cuda-lp-matched"
         } else {
             BACKEND_NAME
@@ -152,7 +194,10 @@ impl CudaLpBackend {
         let engine = Engine::new(program, settings);
         diagnostics.finish("preconditioning", preparation);
         let (row_values, column_values) = engine.scaled_matrix();
-        let peak = LpResidency::peak_buffer_bytes(program);
+        let peak = match &self.execution {
+            Some(e) => crate::tuned::peak_buffer_bytes(program, e.settings)?,
+            None => LpResidency::peak_buffer_bytes(program),
+        };
         if diagnostics
             .device_buffer_limit_bytes
             .is_some_and(|limit| peak > limit)
@@ -162,7 +207,7 @@ impl CudaLpBackend {
             )));
         }
         let allocation = diagnostics.start();
-        let residency = LpResidency::open(
+        let residency = LpResidency::open_for_execution(
             Rc::clone(&self.context),
             program,
             row_values,
@@ -171,11 +216,21 @@ impl CudaLpBackend {
             engine.scaled_row_bounds(),
             engine.scaled_column_bounds(),
             &self.code_object,
-        )?;
+            self.execution.as_ref().map(|e| e.settings),
+            self.code_image.as_deref(),
+            diagnostics.execution.as_mut(),
+        );
+        if diagnostics.enabled && self.execution.is_some() {
+            diagnostics.device_buffer_peak_bytes =
+                diagnostics.execution.as_ref().map(|e| e.allocated_bytes);
+        }
+        let residency = residency?;
 
         diagnostics.finish("invariant_allocation_upload", allocation);
         if diagnostics.enabled {
-            diagnostics.device_buffer_peak_bytes = Some(peak);
+            if self.execution.is_none() {
+                diagnostics.device_buffer_peak_bytes = Some(peak);
+            }
             diagnostics.restarts = Some(0);
         }
         if self.matched {
@@ -237,6 +292,11 @@ impl CudaLpBackend {
         let mut control = optimizer_lp::control::Fp64Controller::new(engine);
         control.set_deadline(deadline);
         diagnostics.finish("controller", initial);
+        let mut tuned = self
+            .execution
+            .as_ref()
+            .map(|e| crate::tuned::TunedExecutor::new(residency, e.settings))
+            .transpose()?;
         let mut assessed = None;
         let mut assessments = 0;
         let mut stop = "iteration_limit";
@@ -252,19 +312,38 @@ impl CudaLpBackend {
             let chunk = control.next_chunk(self.settings.check_interval);
             let since_restart = control.state().since_restart;
             let weight = control.state().weight;
+            let generation = control.generation();
+            let restarts = control.state().restarts;
             let (x, y, anchor_x, anchor_y) = control.buffers();
-            let result = residency.advance_resumable(
-                x,
-                y,
-                anchor_x,
-                anchor_y,
-                since_restart,
-                chunk,
-                engine.step(),
-                weight,
-                |_| cancel.is_cancelled() || deadline.is_some_and(|d| Instant::now() >= d),
-                diagnostics,
-            );
+            let result = if let Some(tuned) = &mut tuned {
+                tuned.advance(
+                    x,
+                    y,
+                    anchor_x,
+                    anchor_y,
+                    generation,
+                    restarts,
+                    since_restart,
+                    chunk,
+                    engine.step(),
+                    weight,
+                    |_| cancel.is_cancelled() || deadline.is_some_and(|d| Instant::now() >= d),
+                    diagnostics,
+                )
+            } else {
+                residency.advance_resumable(
+                    x,
+                    y,
+                    anchor_x,
+                    anchor_y,
+                    since_restart,
+                    chunk,
+                    engine.step(),
+                    weight,
+                    |_| cancel.is_cancelled() || deadline.is_some_and(|d| Instant::now() >= d),
+                    diagnostics,
+                )
+            };
             if diagnostics.enabled {
                 diagnostics.kernel_launches = Some(residency.launches());
             }
@@ -383,8 +462,18 @@ impl CudaLpBackend {
         warm_start: Option<WarmStart<'_>>,
         diagnostics: &mut optimizer_core::LpDiagnostics,
     ) -> Result<SolveRecord, ValidationError> {
+        if let Some(e) = &self.execution {
+            let mut observations = optimizer_core::LpExecutionDiagnostics::new(e.settings);
+            observations.code_object_sha256 = Some(e.code_object_sha256.clone());
+            diagnostics.execution = Some(observations);
+        }
         let mut record = self.solve_observed(model, options, cancel, warm_start, diagnostics)?;
         record.backend = self.name().into();
+        if let Some(e) = &self.execution {
+            record.schema_version = 3;
+            record.lp_settings = Some(self.settings);
+            record.lp_execution = Some(e.clone());
+        }
         Ok(record)
     }
 
@@ -536,6 +625,7 @@ impl CudaLpBackend {
         diagnostics.finish("host_checks", checking);
         let objective = report.feasible.then_some(report.objective);
         Ok(SolveRecord {
+            lp_execution: None,
             schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: BACKEND_NAME.to_string(),
@@ -566,6 +656,7 @@ fn bare(
     settings: LpSettings,
 ) -> SolveRecord {
     SolveRecord {
+        lp_execution: None,
         schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
         backend: BACKEND_NAME.to_string(),

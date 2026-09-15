@@ -1,12 +1,12 @@
 # SPEC-0012: Experimental Mixed-Precision LP Backend
 
-Status: accepted; GPUP-3 implemented and measured, later precision requirements pending
+Status: accepted; GPUP-3/4 implemented and measured, later precision requirements pending
 Scope: opt-in LP arithmetic, resumable control, numerical audits, and recovery
 Owner: numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: bootstrap (first commit containing this document)
 Supersedes: ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
-Implementation: shared optimizer-lp FP64 controller and opt-in optimizer-lp-cuda matched executor; precision pending GPUP-5 through GPUP-8
+Implementation: shared optimizer-lp FP64 controller and opt-in matched/tuned CUDA executors; precision pending GPUP-5 through GPUP-8
 Tests: continuation, bitwise trajectory, exact-rational, endpoint, native and scoped device gates; mapping below
 
 ## Purpose
@@ -278,3 +278,60 @@ fixtures. The [reviewed GPUP-3 study](../benchmarks/lp-matched-fp64-gpup3.md)
 records 160 attempts, full native acceptance, 38 regular device cases and five
 cases under all four sanitizers. All 27 mutually certified host/matched endpoint
 pairs agree bit for bit. Numerical limits remain in the report and known failures.
+
+## GPUP-4 tuned FP64 contract
+
+Accepted by the maintainer on 2026-09-15; runtime implemented, correction study verified and final acceptance passed.
+[ADR-0017](../decisions/ADR-0017-tuned-fp64.md) freezes arithmetic and measurement.
+Requirements 12-14 and 34-37 apply to this slice. The experimental backend is
+cuda-lp-tuned; cuda-lp-matched retains its existing arithmetic. All storage,
+products, accumulation and updates remain FP64. Only the iteration reduction may
+change; original-model host authority and shared controller policy do not.
+
+The required --lp-execution document uses schema_version 1, allocation
+(per_check|resident), uploads (every_check|necessary), reduction
+(legacy_1024|warp32_v1), and fusion (separate|primal_dual). Necessary uploads require
+resident allocation. Unknown fields/values and unsupported versions are refused.
+No execution defaults are supplied. Solve-record v3 carries lp_execution and the
+actual code-object SHA-256. Endpoint v3 carries requested execution and execution
+observations, even when pinned HiGHS executes after a device availability failure.
+Version-2 solve records and version-1/2 endpoints retain their old wire shapes.
+
+Resident state is scoped to one solve and immutable engine. Initialization and
+checkpoint restoration upload complete state; restarts upload anchors. Physical
+work and absolute deadlines never roll back. Every host assessment still receives
+x/y; cancellation is observed at synchronized chunks of at most 64 steps. A fault
+preserves enqueued launch counts and does not invent completed physical work.
+All buffers, including empty padding and scratch, count toward admission and peak
+memory. Counters report actual allocations, copy calls/bytes, synchronizations,
+and launches. Profile phases cannot replace fresh-process latency.
+
+warp32-v1 and two-kernel fusion follow ADR-0017's explicit operation order. Both
+orientations use the unchanged canonical scaled coefficients. Bitwise tests compare
+allocation/upload/fusion variants within one arithmetic mode. Warp arithmetic has
+an independent Rust mirror and rational error checks; legacy whole-trajectory and
+GPUP-1 exact-rational authority tests remain independent acceptance gates. Same
+input/device/code/settings must reproduce bits. No validation or held-out tuning,
+lower-precision interface, recovery policy, or supported preset is introduced.
+
+Acceptance mapping:
+
+- Requirements 7-8, 13-14: Fp64ExecutionSettings and solve/endpoint v3 migration,
+  tuned_records_and_endpoints_are_versioned_and_strict and tuned_fault_fallback unit cases, TunedTests strict settings,
+  unchanged legacy schema bytes, execution_enum_names_require_strings and CLI replay/altered-code rejection.
+- Requirements 9-14, 28, 31-32: tuned_variants_match_complete_trajectories_and_restored_history,
+  tuned_warp32_matches_independent_rational_products and
+  tuned_cancellation_limits_memory_and_senses. Both vectors/anchors compare bits;
+  independent Fraction fixtures check finite dot errors, device cases include
+  overflow, cancellation, subnormals, padding and exact peak on early interruption.
+- Requirements 33-37: pinned fallback/retained fault observations, device and
+  admission integration cases, full native gate and all four scoped sanitizers
+  through tools/lp_tuned_gpu_check.sh under the shared host lease.
+- Measurement: TunedTests frozen protocol/allowance/crash/admission and immutable
+  prior-ledger checks; tools/report_lp_tuned.py independently verifies endpoints,
+  exact schedule, provenance and charged reservations. ADR-0018 retains the failed
+  first round and freezes a separate correction under the same allowance. The
+  [GPUP-4 report](../benchmarks/lp-tuned-fp64-gpup4.md) records evidence and limits.
+
+No requirement concerning later precision/recovery or supported presets is marked
+implemented by this FP64 slice.

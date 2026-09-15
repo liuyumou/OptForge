@@ -1063,3 +1063,6 @@ fn matched_control_endpoint_alignment_senses_and_repeatability() {
         assert_eq!(diagnostics.iterations, Some(0));
     }
 }
+
+#[path = "device/tuned.rs"]
+mod tuned_cases;

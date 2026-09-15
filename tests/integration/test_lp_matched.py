@@ -39,7 +39,8 @@ class MatchedStudyTests(unittest.TestCase):
         self.assertEqual(jobs,list(schedule(value,manifests)))
 
     def test_archived_v1_schemas_and_campaign_are_byte_preserved(self):
-        paths=list((ROOT/'schemas').glob('lp-*-v1.schema.json'))+[ROOT/'benchmarks/configs/lp-campaign-v1.json']
+        archived=subprocess.check_output(['git','ls-tree','-r','--name-only','e415918','schemas'],cwd=ROOT,text=True).splitlines()
+        paths=[ROOT/name for name in archived if Path(name).name.startswith('lp-') and name.endswith('-v1.schema.json')]+[ROOT/'benchmarks/configs/lp-campaign-v1.json']
         for path in paths:
             original=subprocess.check_output(['git','show','e415918:'+str(path.relative_to(ROOT))],cwd=ROOT)
             self.assertEqual(path.read_bytes(),original,path.name)

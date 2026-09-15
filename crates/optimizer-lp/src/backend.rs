@@ -325,6 +325,7 @@ fn record(
     };
 
     SolveRecord {
+        lp_execution: None,
         schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
         backend: BACKEND_NAME.to_string(),

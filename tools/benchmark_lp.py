@@ -59,7 +59,7 @@ def schedule(value, manifests):
             if mode=='profile' and value.get('profile_instances') is not None and instance['id'] not in value['profile_instances']:continue
             for repetition in range(count):
                 for order,configuration in enumerate(ordered(value['configurations'],value['order_seed'],instance['id'],repetition)):
-                    prefix=value['id']+'-' if value['schema_version']==2 else ''
+                    prefix=value['id']+'-' if value['schema_version']>=2 else ''
                     identity=f'{prefix}{mode}-{instance["id"]}-{repetition}-{configuration["id"]}'
                     yield identity,instance,configuration,repetition,order,mode
 
@@ -77,8 +77,8 @@ def recover_intents(directory, attempts):
         validate('trial',trial); write_json(destination,trial)
 
 def run_trial(value, identity, instance, configuration, repetition, order, mode,
-              binary, directory, ledger, base_provenance, protocol_hash=None):
-    gpu=configuration['backend'] in ('cuda-lp','cuda-lp-matched')
+              binary, directory, ledger, base_provenance, protocol_hash=None, code_directory=None):
+    gpu=configuration['backend'] in ('cuda-lp','cuda-lp-matched','cuda-lp-tuned')
     activity=None
     if gpu:
         from lp_activity import ActivityPause
@@ -102,7 +102,7 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
         'elapsed_ns':None,'queue_ns':None,'leased_ns':None,'verification_ns':None,'peak_rss_bytes':None,
         'memory_method':'unavailable: worker not completed','limits':value['limits'],
         'provenance':{**base_provenance,'telemetry_before':before},'error':'unfinished trial intent'}
-    if value['schema_version']==2:
+    if value['schema_version']>=2:
         from validate_artifacts import schema_snapshot
         trial.update(budget_authority_sha256=ledger.campaign_hash,
             activity_wait_ns=activity['elapsed_ns'] if activity else None,
@@ -115,7 +115,13 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
           '--lp-profile','true' if mode=='profile' else 'false',
           '--lp-device-memory-bytes',str(value['limits']['device_buffer_bytes'])]
     if configuration['backend']!='highs': args+=['--lp-settings',str(directory/'lp-settings.json')]
+    if configuration['backend']=='cuda-lp-tuned':
+        execution_path=directory/(identity+'.execution.json')
+        write_json(execution_path,configuration['execution'])
+        args+=['--lp-execution',str(execution_path)]
     if gpu: args+=['--device',value['device']]
+    if code_directory is not None:
+        args=['/usr/bin/env','AI_OPTIMIZER_CUDA_DIR='+str(code_directory),*args]
     request={k:value['limits'][k] for k in ['solve_seconds','cleanup_seconds','host_rss_bytes','poll_ms','output_bytes']}
     request.update(command=args,directory=str(directory),prefix=identity)
     if gpu: request.update(schema_version=2, gpu_admission_seconds=3)
@@ -158,6 +164,10 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
                 raise ValueError('endpoint solve configuration differs')
             if endpoint['record']['backend']!='highs' and endpoint['record'].get('lp_settings')!=value['lp_settings']:
                 raise ValueError('endpoint LP settings differ')
+            if configuration['backend']=='cuda-lp-tuned':
+                execution=endpoint['execution']
+                if execution['settings']!=configuration['execution'] or execution['code_object_sha256']!=base_provenance['code_object_sha256']:
+                    raise ValueError('endpoint execution differs from scheduled trial')
             verified=subprocess.run([str(binary),'lp-study','verify','--model',str(model),'--evidence',str(evidence)],
                                     capture_output=True,text=True,timeout=12)
             if verified.returncode:raise ValueError('independent verifier rejected endpoint: '+verified.stderr[:1000])

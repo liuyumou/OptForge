@@ -1,5 +1,44 @@
 # Known Failures and Limitations
 
+## GPUP-4 launch setup failure, correction and remaining limits
+
+The first 320-attempt round lost 24 matched-reference timing endpoints because an
+archived executable was copied without execute permission. Its bytes were intact;
+permission repair enabled subsequent attempts. All failed attempts and charges
+remain. ADR-0018 preserves that interim round and freezes one separate complete
+correction, with identical numerical settings/seeds/order/device and no new GPU
+allowance. All 320 correction attempts have verified evidence: 248 certified,
+66 work-limited, six host timeouts. Each configuration certifies 27/36 timings.
+
+Both rounds charge 456.586499157 additional GPU seconds; canonical campaign total
+902.574545061. The original 622-event prefix, authority and output binding remain.
+Executable preflight, mode-preserving copies and prior-prefix verification prevent
+silent recurrence or ledger reset. A final schema regression also caught and fixed
+object-wrapped execution enum names; string-only parsing now matches the schema.
+
+The [reviewed report](../docs/benchmarks/lp-tuned-fp64-gpup4.md) retains negative
+ablation results and unchanged scheduling convergence failures. Transfer savings
+do not consistently improve latency; context startup remains substantial. Matched
+FP64 stays the general reference, with fused-warp provisional only on the three
+named development instances. Three repeats, unadjusted intervals and no held-out
+measurement do not support a universal preset. Final parser validation was repaired
+after measurement; the report identifies the exact measured source/executable.
+
+## GPUP-4 sanitizer device differs from the frozen measurement device
+
+Acceptance on 2026-09-15: all 41 regular device cases pass on the selected RTX 5090.
+Memcheck failed to allocate instrumentation while it reported 31314 MiB used and
+797 MiB free, with no process visible from this workspace. The documented
+force-synchronization-limit 8 retry also failed. Both failed attempts are retained.
+
+The separate acceptance budget then used an idle sm_120 RTX PRO 6000 Blackwell
+GPU-6721b13a-30f9-83ec-dace-ba2d9738556f, under the same shared host lease. All 41
+regular cases and eight scoped cases under each of memcheck/racecheck/initcheck/
+synccheck passed; zero errors and zero racecheck warnings. CLI evidence, fallback
+and replay also passed. This is sanitizer coverage on the named compatible device,
+not a claim that the memory-constrained RTX 5090 sanitizer run passed. Measurement
+remains on the frozen RTX 5090 UUID. Evidence: artifacts/gpup4-acceptance.
+
 ## LP certification can lose the roundoff allowance at zero reduced cost
 
 Resolved by GPUP-1 on 2026-09-14. Discovered during the GPU LP precision design

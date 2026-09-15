@@ -206,26 +206,27 @@ pub struct AdvanceResult {
 
 /// Instance-invariant data resident on one device, plus the iterate buffers.
 pub struct LpResidency {
-    context: Rc<Context>,
-    module: Module,
-    stream: Stream,
-    row_values: DeviceBuffer<f64>,
-    row_indices: DeviceBuffer<u32>,
-    row_offsets: DeviceBuffer<u32>,
-    column_values: DeviceBuffer<f64>,
-    column_indices: DeviceBuffer<u32>,
-    column_offsets: DeviceBuffer<u32>,
-    objective: DeviceBuffer<f64>,
-    column_lower: DeviceBuffer<f64>,
-    column_upper: DeviceBuffer<f64>,
-    row_lower: DeviceBuffer<f64>,
-    row_upper: DeviceBuffer<f64>,
-    rows: usize,
-    columns: usize,
-    requirement: Requirement,
-    uploads: usize,
-    launches: Cell<u64>,
-    poisoned: Cell<bool>,
+    pub(crate) context: Rc<Context>,
+    pub(crate) module: Module,
+    pub(crate) stream: Stream,
+    pub(crate) row_values: DeviceBuffer<f64>,
+    pub(crate) row_indices: DeviceBuffer<u32>,
+    pub(crate) row_offsets: DeviceBuffer<u32>,
+    pub(crate) column_values: DeviceBuffer<f64>,
+    pub(crate) column_indices: DeviceBuffer<u32>,
+    pub(crate) column_offsets: DeviceBuffer<u32>,
+    pub(crate) objective: DeviceBuffer<f64>,
+    pub(crate) column_lower: DeviceBuffer<f64>,
+    pub(crate) column_upper: DeviceBuffer<f64>,
+    pub(crate) row_lower: DeviceBuffer<f64>,
+    pub(crate) row_upper: DeviceBuffer<f64>,
+    pub(crate) rows: usize,
+    pub(crate) columns: usize,
+    pub(crate) requirement: Requirement,
+    pub(crate) execution: Option<optimizer_core::Fp64ExecutionSettings>,
+    pub(crate) uploads: usize,
+    pub(crate) launches: Cell<u64>,
+    pub(crate) poisoned: Cell<bool>,
 }
 
 /// Where the committed LP code object lives.
@@ -274,8 +275,43 @@ impl LpResidency {
         scaled_column_bounds: (&[f64], &[f64]),
         code_object: &Path,
     ) -> Result<Self, DeviceError> {
+        Self::open_for_execution(
+            context,
+            program,
+            scaled_row_values,
+            scaled_column_values,
+            scaled_objective,
+            scaled_row_bounds,
+            scaled_column_bounds,
+            code_object,
+            None,
+            None,
+            None,
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn open_for_execution(
+        context: Rc<Context>,
+        program: &LinearProgram,
+        scaled_row_values: &[f64],
+        scaled_column_values: &[f64],
+        scaled_objective: &[f64],
+        scaled_row_bounds: (&[f64], &[f64]),
+        scaled_column_bounds: (&[f64], &[f64]),
+        code_object: &Path,
+        execution: Option<optimizer_core::Fp64ExecutionSettings>,
+        code_image: Option<&[u8]>,
+        mut counters: Option<&mut optimizer_core::LpExecutionDiagnostics>,
+    ) -> Result<Self, DeviceError> {
         let device = context.device();
-        let requirement = Requirement::of(program);
+        let mut requirement = Requirement::of(program);
+        if let Some(settings) = execution {
+            requirement.memory_bytes = crate::tuned::peak_buffer_bytes(program, settings)?;
+            if settings.reduction == optimizer_core::Fp64Reduction::Warp32V1 {
+                requirement.shared_bytes = 0;
+            }
+        }
         let (free, _total) = context.memory_info()?;
         requirement
             .admissible(
@@ -285,7 +321,10 @@ impl LpResidency {
             )
             .map_err(|decline| DeviceError::Unsupported(decline.to_string()))?;
 
-        let module = context.load_module_file(code_object)?;
+        let module = match code_image {
+            Some(image) => context.load_module(image)?,
+            None => context.load_module_file(code_object)?,
+        };
         let stream = context.stream()?;
 
         let row_indices_host: Vec<u32> = program.row_major().entries().map(|(_, m, _)| m).collect();
@@ -301,17 +340,36 @@ impl LpResidency {
             .map(|line| u32::try_from(program.column_major().offset(line)).unwrap_or(u32::MAX))
             .collect();
 
+        let counters = std::cell::RefCell::new(&mut counters);
         let upload_f64 = |values: &[f64]| -> Result<DeviceBuffer<f64>, DeviceError> {
             let mut buffer = context.allocate::<f64>(values.len().max(1))?;
+            if let Some(c) = counters.borrow_mut().as_deref_mut() {
+                c.allocations += 1;
+                c.allocated_bytes += buffer.len() as u64 * 8;
+            }
             if !values.is_empty() {
                 buffer.copy_from(values, &stream)?;
+                if let Some(c) = counters.borrow_mut().as_deref_mut() {
+                    c.upload_calls += 1;
+                    c.upload_bytes += values.len() as u64 * 8;
+                    c.synchronizations += 1;
+                }
             }
             Ok(buffer)
         };
         let upload_u32 = |values: &[u32]| -> Result<DeviceBuffer<u32>, DeviceError> {
             let mut buffer = context.allocate::<u32>(values.len().max(1))?;
+            if let Some(c) = counters.borrow_mut().as_deref_mut() {
+                c.allocations += 1;
+                c.allocated_bytes += buffer.len() as u64 * 4;
+            }
             if !values.is_empty() {
                 buffer.copy_from(values, &stream)?;
+                if let Some(c) = counters.borrow_mut().as_deref_mut() {
+                    c.upload_calls += 1;
+                    c.upload_bytes += values.len() as u64 * 4;
+                    c.synchronizations += 1;
+                }
             }
             Ok(buffer)
         };
@@ -331,6 +389,7 @@ impl LpResidency {
             rows: program.row_count(),
             columns: program.column_count(),
             requirement,
+            execution,
             // One upload per residency, counted so requirement 16 is asserted
             // against a counter rather than against elapsed time.
             uploads: 1,
@@ -340,6 +399,67 @@ impl LpResidency {
             stream,
             context,
         })
+    }
+
+    /// Create tuned invariant residency from an immutable host engine.
+    /// All successful allocations/uploads are recorded, including partial failures.
+    pub fn open_tuned(
+        context: Rc<Context>,
+        engine: &optimizer_lp::pdhg::Engine<'_>,
+        execution: optimizer_core::Fp64ExecutionSettings,
+        diagnostics: &mut optimizer_core::LpDiagnostics,
+    ) -> Result<Self, DeviceError> {
+        execution
+            .validate()
+            .map_err(|e| DeviceError::Unsupported(e.to_string()))?;
+        let peak = crate::tuned::peak_buffer_bytes(engine.program(), execution)?;
+        if diagnostics
+            .device_buffer_limit_bytes
+            .is_some_and(|limit| peak > limit)
+        {
+            return Err(DeviceError::Unsupported(format!(
+                "LP device buffer budget: {peak} bytes"
+            )));
+        }
+        let image = std::fs::read(crate::tuned::code_object_path())
+            .map_err(|e| DeviceError::CodeObjectMissing(e.to_string()))?;
+        let mut counters = optimizer_core::LpExecutionDiagnostics::new(execution);
+        counters.code_object_sha256 = Some(optimizer_core::sha256::hex(&image));
+        diagnostics.execution = Some(counters);
+        let (rows, columns) = engine.scaled_matrix();
+        let result = Self::open_for_execution(
+            context,
+            engine.program(),
+            rows,
+            columns,
+            engine.scaled_objective(),
+            engine.scaled_row_bounds(),
+            engine.scaled_column_bounds(),
+            &crate::tuned::code_object_path(),
+            Some(execution),
+            Some(&image),
+            diagnostics.execution.as_mut(),
+        );
+        if diagnostics.enabled {
+            diagnostics.device_buffer_peak_bytes =
+                diagnostics.execution.as_ref().map(|e| e.allocated_bytes);
+        }
+        result
+    }
+
+    /// Bytes in the currently owned invariant allocations, including padding.
+    pub(crate) fn buffer_bytes(&self) -> u64 {
+        8 * (self.row_values.len()
+            + self.column_values.len()
+            + self.objective.len()
+            + self.column_lower.len()
+            + self.column_upper.len()
+            + self.row_lower.len()
+            + self.row_upper.len()) as u64
+            + 4 * (self.row_indices.len()
+                + self.column_indices.len()
+                + self.row_offsets.len()
+                + self.column_offsets.len()) as u64
     }
 
     /// How many times invariant data has been uploaded. One, for the life of this.
@@ -372,7 +492,7 @@ impl LpResidency {
         self.context.device()
     }
 
-    fn usable(&self) -> Result<(), DeviceError> {
+    pub(crate) fn usable(&self) -> Result<(), DeviceError> {
         if self.poisoned.get() {
             return Err(DeviceError::ContextPoisoned(
                 optimizer_cuda_sys::DriverStatus::LaunchFailed,
@@ -381,7 +501,7 @@ impl LpResidency {
         Ok(())
     }
 
-    fn observe(&self, error: DeviceError) -> DeviceError {
+    pub(crate) fn observe(&self, error: DeviceError) -> DeviceError {
         if error.poisons_context() {
             self.poisoned.set(true);
         }
