@@ -272,10 +272,31 @@ class SupervisorTests(unittest.TestCase):
             path=self.request(tmp,'print("simulated; no CUDA context")',1)
             env={**os.environ,'AI_OPTIMIZER_GPU_LOCK':str(lock_path)}
             worker=subprocess.Popen(['bash',str(ROOT/'tools/gpu_job.sh'),'GPU-simulated','--lp-study-request',str(path)],env=env)
-            time.sleep(.15);self.assertIsNone(worker.poll())
-            fcntl.flock(lock,fcntl.LOCK_UN);lock.close();self.assertEqual(worker.wait(timeout=3),0)
-            info=read_json(Path(tmp)/'job.worker.json')
-            self.assertGreater(info['queue_ns'],50_000_000);self.assertGreater(info['leased_ns'],0)
-            self.assertEqual(info['reason'],'completed')
+            try:
+                # Observe the worker opening the lock, after its queue clock starts.
+                # Import/startup time is not lease wait and varies across CI hosts.
+                deadline=time.monotonic()+5
+                opened=False
+                while worker.poll() is None and time.monotonic()<deadline:
+                    try:
+                        opened=any(fd.resolve()==lock_path for fd in Path(f'/proc/{worker.pid}/fd').iterdir())
+                    except (FileNotFoundError,ProcessLookupError):
+                        opened=False
+                    if opened:break
+                    time.sleep(.01)
+                self.assertTrue(opened,'worker never reached lease acquisition')
+                time.sleep(.075)
+                self.assertIsNone(worker.poll())
+                self.assertFalse((Path(tmp)/'job.stdout').exists(),'child launched while lease held')
+                fcntl.flock(lock,fcntl.LOCK_UN)
+                self.assertEqual(worker.wait(timeout=3),0)
+                info=read_json(Path(tmp)/'job.worker.json')
+                self.assertGreater(info['queue_ns'],50_000_000)
+                self.assertGreater(info['leased_ns'],0)
+                self.assertEqual(info['reason'],'completed')
+            finally:
+                fcntl.flock(lock,fcntl.LOCK_UN);lock.close()
+                if worker.poll() is None:
+                    worker.terminate();worker.wait(timeout=3)
 
 if __name__=='__main__':unittest.main()

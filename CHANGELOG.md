@@ -10,6 +10,11 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Fixed
+
+- Fetch full CI history for frozen LP schema comparisons; synchronize the lease
+  exclusion test with worker readiness so import latency cannot cause false failures.
+
 ### Added
 
 - Opt-in cuda-lp-matched shares the host FP64 restart/weight controller, with

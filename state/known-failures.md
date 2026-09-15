@@ -155,6 +155,16 @@ inspect its Background links. Next diagnostic step: recover those source surveys
 if research work needs them. The maintained documentation book excludes the two
 original planning inputs from recursive link validation.
 
+## LP integration CI fixtures
+
+Resolved during GPUP-2/3 PR review on 2026-09-15. The new archived-schema regression
+needs the e415918 Git tree, so CPU CI now fetches full history. A fresh native gate
+also exposed a startup-dependent lease test: its 150 ms parent sleep included
+worker imports, leaving only 40.380 ms of actual queue wait against a 50 ms check.
+The test now waits until the worker opens the lock, then measures held-lease delay
+and asserts no solve output opens before release. Ten consecutive targeted runs and
+a full pinned-native gate pass. Production lock and supervisor code did not change.
+
 ## External configuration
 
 The origin remote is https://github.com/liuyumou/OptForge.git. Protected main,

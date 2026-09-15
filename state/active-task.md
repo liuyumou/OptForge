@@ -1,5 +1,43 @@
 # Active Task
 
+## GPUP-2/3 PR review and integration (2026-09-15)
+
+Objective: publish the completed branch, review its full diff, merge after acceptance
+and hosted checks, synchronize main, and delete the completed branches. The user
+explicitly authorized PR creation, self-review, merge and cleanup. Preserve the five
+bounded implementation/diagnosis commits, source archives, model hashes and the
+445.988045904-second cumulative study ledger; no new experiment or GPUP-4 work.
+
+Status: local review and acceptance complete; ready for hosted integration.
+Reviewed CONTRIBUTING, known failures and accepted contracts.
+Gate: full pinned-native tools/check.sh; full branch/unsafe/dependency/CI review;
+successful remote CPU/docs/smoke checks; verified merged ancestry before cleanup.
+Budget: 30 minutes CPU review/acceptance with four build jobs; up to five minutes
+GPU acceptance only if a runtime review fix requires it, sequential with CPU gates
+and under the shared lease. Existing device/sanitizer evidence remains applicable
+to unchanged runtime. GitHub authentication is restored with the maintainer's sign-in; Git SSH access
+works. Two review findings are fixed: CI now fetches full history for the archived
+e415918 schema comparison, and the lease test observes worker readiness before
+measuring queue wait. The initial full native gate caught the latter race (40.380
+ms observed against its 50 ms requirement); this was fixture startup timing, not
+a lease exclusion failure. The corrected fixture retained its threshold, gained
+an assertion that no child output opens under the held lease, and passed ten
+consecutive runs (2.553 seconds). No runtime, kernel or measurement artifact changed.
+
+Fresh full pinned-native acceptance passed in 19.144629400 seconds: 405 Rust tests,
+103 Python tests, dependency/license checks, committed-record replay and 69 doc pages.
+Logs and the failed first run are retained in artifacts/gpup-pr-review. No additional
+GPU work was necessary; prior 38 regular device tests and five scoped cases under
+each of four sanitizers remain applicable. Review checked the complete branch:
+native row multipliers and sense/order normalization, independent endpoint authority,
+matched checkpoints/work/cancellation, legacy compatibility, outward reduction
+ordering and signed zeros, frozen generation, schema strictness and provenance,
+ledger/crash recovery, lease/activity/process cleanup, report pairing/censoring,
+CI and the lockfile's single internal dependency addition. No blocking review finding
+remains after the two integration fixes. Preserve the original commit history on
+merge because the accepted reference source is named by its commit. Hosted CI and
+merge results will be attached to the PR; verify merged ancestry before cleanup.
+
 ## GPUP-3: shared resumable matched FP64 control (2026-09-15)
 
 Status: complete; acceptance passed, ready for local commit. SPEC-0012 accepted before implementation; ADR-0016 freezes
