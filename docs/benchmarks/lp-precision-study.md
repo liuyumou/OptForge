@@ -96,7 +96,9 @@ Malformed complete events block resume. An unfinished intent remains a failed
 attempt, never a resurrected success. GPU study spending is capped at 900 seconds
 of the 1,800-second baseline phase, inside the unchanged 28,800-second campaign.
 Acceptance jobs are separately budgeted and recorded in active-task state.
-The completed local study consumed 173.148261443 GPU seconds. Preserve its ledger
+The original baseline consumed 173.148261443 GPU seconds. The subsequent
+[diagnosis](lp-gpu-slowdown-diagnosis.md) added 20.994604580 seconds, bringing
+cumulative study consumption to 194.142866023 seconds. Preserve its ledger
 and raw bundle; future configuration/source changes need a recorded migration
 that carries forward spending, not a fresh budget.
 

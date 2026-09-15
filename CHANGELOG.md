@@ -6,6 +6,11 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- A [measured GPU LP slowdown diagnosis](docs/benchmarks/lp-gpu-slowdown-diagnosis.md):
+  CPU replay matches two 50,000-step GPU endpoints bit-for-bit; component timings
+  isolate certification costs; seven supplementary jobs and decoded CUDA traces
+  separate startup, kernel, transfer and harness overhead. Existing solver behavior
+  is unchanged; cumulative study use is 194.143 GPU seconds.
 - GPUP-2 LP-only measurement infrastructure: strict frozen campaigns/manifests,
   optional solve evidence and independent verification, conservative host certification
   of HiGHS row multipliers, crash-safe budget accounting, bounded supervised GPU

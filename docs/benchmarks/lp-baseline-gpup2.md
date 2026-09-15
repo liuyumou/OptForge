@@ -152,6 +152,11 @@ remain the numerical regression authority; measured agreement is not their repla
 
 ## Environment and budget
 
+The figures below are historical totals at baseline completion. The subsequent
+[slowdown diagnosis](lp-gpu-slowdown-diagnosis.md) added 20.994604580 GPU seconds;
+current cumulative study consumption is 194.142866023 seconds. Preserve the entire
+canonical ledger when continuing the campaign.
+
 - Intel Xeon Platinum 8457C; one allowed CPU core (0), one solver thread.
 - RTX 5090 GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48; driver 580.105.08.
 - Linux 5.19.0-32-generic; Rust/Cargo 1.93.1; release build; HiGHS 1.11.0.

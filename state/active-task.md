@@ -1,5 +1,67 @@
 # Active Task
 
+## GPUP-2 follow-up: Diagnose slow GPU study (2026-09-15)
+
+Objective: measure and carefully explain solver latency, convergence, GPU setup,
+certification and study orchestration costs requested by the maintainer. This is
+bounded diagnosis of the existing FP64 baseline, not GPUP-3 implementation.
+Status: complete; accepted for local commit. GPUP-3 remains next.
+Read accepted contracts and known failures first. Preserve
+all frozen trials, original solver settings and exact-rational regressions.
+Budget: 30 minutes CPU diagnostic/acceptance wall time, four build jobs; at most
+120 additional GPU study seconds within the existing 900-second Slice 2 allowance
+and 1,800-second baseline phase. Prior campaign spending is 173.148261443 seconds.
+GPU jobs use the same RTX 5090 UUID and shared host lease; CPU gates and device
+jobs run sequentially. If device acceptance is needed, separately cap it at five
+minutes. No publication or later-slice algorithm changes.
+
+Plan: audit phase accounting and implementation; time original-model evaluation,
+certification and reductions independently; replay fixed GPU control on the host;
+profile Python schema/analysis overhead; use bounded driver/kernel traces on
+selected development cases. Freeze supplementary diagnostic choices and ledger
+extension before GPU launches. Retain raw profiles under ignored artifacts and
+write a reviewed diagnosis with uncertainty, reproduction and resource accounting.
+Acceptance: useful component/trajectory consistency checks, full pinned-native
+tools/check.sh for committed tooling, and independently verified device endpoints.
+
+Evidence: CPU component/replay diagnostics completed in 15.27 seconds. Both
+50,000-step fixed CPU replays matched every primal/dual bit of the archived GPU
+endpoints. The first full pinned-native gate passed in 41.317 seconds, with
+396 Rust tests, 91 Python tests and 66 documentation pages. Seven supplementary
+GPU jobs completed with independent endpoint checks, using 20.994604580 seconds;
+canonical cumulative consumption is 194.142866023 seconds. No additional GPU
+acceptance job was required. Four activity pauses resumed only unattempted jobs.
+
+Both Nsight traces retained raw qdstrm files despite automatic importer failure.
+A missing libdw.so.1 was supplied from a pinned Ubuntu package extracted privately
+to /tmp; offline import/export then succeeded, without new GPU work. Both traces
+contain exactly 1,200 kernels for 200 iterations. A reviewed report and strict
+raw-prefix/hash/ledger/count analysis are in
+[the diagnosis](../docs/benchmarks/lp-gpu-slowdown-diagnosis.md). Main findings:
+fixed-controller convergence, repeated padded host certification, setup/launch
+costs and redundant schema construction. GPU transfers are small on these cases.
+No solver/controller/kernel/default changed.
+
+Final acceptance: full pinned-native bash tools/check.sh passed in
+39.866 seconds, with 396 Rust tests, 91 Python tests, 67 documentation pages,
+dependency/license checks, committed-record replay and smoke verification. The
+native gates total 81.184 seconds; CPU component/replay measurement used 15.271
+seconds; four recorded resume invocations plus intervening waits used 174.924
+seconds, dominated by repeated ledger/schema validation. The initial invocation,
+Python profiling, builds, provisioning and offline trace analysis also remained
+within the declared 30-minute CPU allocation. Final log/summary:
+/tmp/gpup2-diagnosis-final.log and /tmp/gpup2-diagnosis-final.json. No CPU gate
+ran concurrently with GPU jobs. All indexed raw artifact hashes were rechecked;
+original baseline evidence is unchanged.
+
+Cumulative ledger SHA-256:
+9a1bed26e90ad69bc641355c68ca6edff055268a3971f948df69cc89abeb254f.
+Diagnosis SHA-256:
+0c79e7bb322df44fdcaa7cc8679d0a6c7347138d721562822638eb44b570a7cb.
+Remaining original Slice 2 allowance: 705.857133977 seconds; remaining baseline
+phase: 1,605.857133977 seconds; remaining total campaign: 28,605.857133977 seconds.
+No budget reset, repeated attempt, changed numerical threshold or publication.
+
 ## GPUP-2: LP measurement infrastructure (2026-09-15)
 
 Objective: implement the maintainer-approved Slice 2 plan: accepted contract,

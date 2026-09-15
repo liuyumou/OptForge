@@ -21,7 +21,7 @@ behavior. The user has prioritized the separate
 follow `next_ready_task` in state/backlog.yaml and implement one GPUP slice at a time.
 SPEC-0013 is accepted and GPUP-2 implements the bounded LP study and baseline report.
 SPEC-0012 remains a draft; accept it before GPUP-3 numerical behavior. Carry forward
-the 173.148261443 GPU seconds already consumed by the campaign; never reset its ledger.
+the 194.142866023 GPU seconds already consumed by the campaign; never reset its ledger.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent
 exact-rational regressions before introducing lower precision. The initial
 experiment campaign is capped at eight GPU-hours. Repeated-solve throughput

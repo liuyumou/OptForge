@@ -87,6 +87,30 @@ The general C10 runner remains unspecified. Repeated-solve throughput and full M
 performance need separate specifications and budgets. No implementation failure
 has been accepted as a waived gate.
 
+## GPU LP latency and harness overhead are measured limitations
+
+The [follow-up diagnosis](../docs/benchmarks/lp-gpu-slowdown-diagnosis.md) reproduced
+the GPU's slow convergence bit-for-bit on the host for irregular-256 and scaling-64.
+The fixed GPU controller differs from the adaptive host controller. Repeated host
+certification consumed 7.369 of 9.276 seconds on irregular-2048; its padded
+1,024-entry reductions perform extensive work on short sparse columns. Small
+fresh-process solves are dominated by device startup. Transfers were a minor cost
+on the measured instances; the kernel source's idealized bandwidth argument does
+not account for padded work and is not a measured bottleneck classification.
+
+Python validator construction rechecks all schemas for every event/result; ledger
+replay and report generation repeat that overhead. The activity guard can pause
+on a recent utilization sample from the project's own completed job. Four
+supplementary invocations paused and resumed without repeated trials. Proposed
+fixes must preserve schema strictness, shared-lease exclusion and host numerical
+authority. GPUP-3 remains next; this diagnosis changes no solver behavior.
+
+Seven supplementary jobs added 20.994604580 GPU seconds, including profiler export
+failures. Cumulative campaign use is 194.142866023 seconds. Raw traces were recovered
+offline using a privately extracted importer dependency; all seven endpoints and
+both 1,200-launch trace counts verified. CPU call-stack sampling and GPU
+bandwidth/occupancy counters were unavailable or not collected, respectively.
+
 ## Legacy HiGHS LP best_bound is not independent certificate evidence
 
 GPUP-2 endpoint checks observed the existing adapter reporting best_bound 0 for
