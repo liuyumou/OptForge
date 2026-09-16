@@ -2,7 +2,7 @@
 
 ## GPUP-4 integration follow-up: supervisor timing fixture (2026-09-16)
 
-Status: fixture repair accepted locally; hosted integration is next.
+Status: complete; fixture repair reviewed, merged and its branch removed.
 PR #3 and branch cleanup completed after all six pre-merge
 checks passed. The subsequent completion-documentation commit's CPU CI run
 35041476887 found a pre-existing fixture timing assumption: coordinator-loss
@@ -26,6 +26,19 @@ three-second completion wait and 0.1-second solve/cleanup settings remain. Timeo
 signal timing, negative child status, complete lease timing and nonblocking lock
 reacquisition now establish the intended contract without assuming CI scheduling
 or durable output always fits an additional one-second ceiling.
+
+[PR #4](https://github.com/liuyumou/OptForge/pull/4) merged as
+1b8e33d13138dcb2da751bd113d5560976c2c073. All six hosted CPU/docs/smoke checks passed for
+reviewed head 8ced5d85e879a6191251ede1904e8bcb3246f792. The
+[author review](https://github.com/liuyumou/OptForge/pull/4#pullrequestreview-5217393475)
+verified the four file blobs and reports no blocking finding. The merge required
+that SHA and preserved its exact tree. Main was synchronized and the local/remote
+codex/gpup4-supervisor-fixture branches were deleted after ancestry verification,
+with expected-head protection for remote deletion. The failed prior main run is
+retained; its failure is not relabeled as a pass. New hosted receipts are in
+artifacts/gpup4-pr-integration/hosted-fixture-pr.json. Final completion updates are
+documentation only and pass the documentation/link gate. All study artifacts and
+902.574545061 campaign GPU seconds remain unchanged. GPUP-5 is next.
 
 ## GPUP-4 PR integration and GPUP-5 interface handoff (2026-09-16)
 
