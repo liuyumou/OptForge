@@ -167,6 +167,7 @@ impl HighsBackend {
 /// a build that linked nothing must not claim the version it was written against.
 fn interrupted_record(model: &Model, options: &SolveOptions) -> SolveRecord {
     SolveRecord {
+        lp_execution: None,
         schema_version: optimizer_core::SOLVE_RECORD_SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
         backend: BACKEND_NAME.to_string(),

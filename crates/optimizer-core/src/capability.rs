@@ -261,6 +261,7 @@ impl BackendCapabilities {
     pub fn refuse(&self, model: &Model, options: &SolveOptions) -> SolveRecord {
         let class = ProblemClass::of(model);
         SolveRecord {
+            lp_execution: None,
             schema_version: crate::SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: self.name.to_string(),

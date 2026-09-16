@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "allocation": {
+      "enum": [
+        "per_check",
+        "resident"
+      ]
+    },
+    "uploads": {
+      "enum": [
+        "every_check",
+        "necessary"
+      ]
+    },
+    "reduction": {
+      "enum": [
+        "legacy_1024",
+        "warp32_v1"
+      ]
+    },
+    "fusion": {
+      "enum": [
+        "separate",
+        "primal_dual"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "allocation",
+    "uploads",
+    "reduction",
+    "fusion"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "uploads": {
+            "const": "necessary"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "allocation": {
+            "const": "resident"
+          }
+        }
+      }
+    }
+  ],
+  "$id": "lp-execution-v1.schema.json"
+}

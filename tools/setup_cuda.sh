@@ -32,6 +32,11 @@ flock --exclusive 9
 # later capability load at all. An earlier capability is refused rather than run,
 # which is SPEC-0010 requirement 4.
 arch="${AI_OPTIMIZER_CUDA_ARCH:-120}"
+if [[ $# -gt 1 || ( $# -eq 1 && "$1" != --tuned-only ) ]]; then
+    echo "usage: setup_cuda.sh [--tuned-only]" >&2
+    exit 2
+fi
+if [[ "${1:-}" != --tuned-only ]]; then
 for stage in cubin ptx; do
     "$nvcc" --"$stage" -arch="sm_${arch}" -O3 -lineinfo \
         -o "$out/schedule_eval.$stage" "$src/schedule_eval/schedule_eval.cu"
@@ -65,3 +70,11 @@ done
 "$nvcc" --version | tail -2
 echo "setup_cuda: wrote $out/schedule_eval.{cubin,ptx}, $out/lp_pdhg.{cubin,ptx}"
 echo "setup_cuda: and $out/lp_pdhg_atomic.cubin for sm_${arch}"
+
+fi
+
+# GPUP-4 uses a separate code object; ordinary Cargo builds never invoke nvcc.
+"$nvcc" --cubin -arch="sm_${arch}" -O3 -lineinfo -fmad=false \
+    -o "$out/lp_pdhg_tuned.cubin" "$src/lp_pdhg_tuned/lp_pdhg_tuned.cu"
+"$nvcc" --ptx -arch="sm_${arch}" -O3 -lineinfo -fmad=false \
+    -o "$out/lp_pdhg_tuned.ptx" "$src/lp_pdhg_tuned/lp_pdhg_tuned.cu"

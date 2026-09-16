@@ -96,6 +96,15 @@ fn replay(
     )?;
     let mut diagnostics = LpDiagnostics::new(true, false);
     diagnostics.device_buffer_limit_bytes = original.diagnostics.device_buffer_limit_bytes;
+    if let Some(execution) = &original.record.lp_execution {
+        let image = std::fs::read(optimizer_lp_cuda::tuned::code_object_path())?;
+        if optimizer_core::sha256::hex(&image) != execution.code_object_sha256 {
+            return Err(argument("recorded tuned code object differs"));
+        }
+        diagnostics.execution = Some(optimizer_core::LpExecutionDiagnostics::new(
+            execution.settings,
+        ));
+    }
     let options = &original.record.options;
     let settings = || {
         original
@@ -116,7 +125,7 @@ fn replay(
             .map_err(io::Error::other)?
             .solve_with_diagnostics(&model, options, &token, None, &mut diagnostics)
             .map_err(io::Error::other)?,
-        "cuda-lp" | "cuda-lp-matched" => {
+        "cuda-lp" | "cuda-lp-matched" | "cuda-lp-tuned" => {
             let name = device
                 .and_then(|d| d.to_str())
                 .ok_or_else(|| argument("device replay requires --device"))?;
@@ -126,6 +135,7 @@ fn replay(
                 Some(session) => crate::solve::device_solve(
                     &session,
                     selected == "cuda-lp-matched",
+                    original.record.lp_execution.as_ref().map(|e| e.settings),
                     settings,
                     &model,
                     options,

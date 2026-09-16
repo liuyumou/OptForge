@@ -1,11 +1,11 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; slices 0-3 complete; slices 4-10 pending
+Status: approved roadmap; slices 0-4 complete; slices 5-10 pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: bootstrap (first commit containing this document)
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
-Acceptance: the slice gates below; [GPUP-2 baseline evidence](../benchmarks/lp-baseline-gpup2.md), [GPUP-3 matched evidence](../benchmarks/lp-matched-fp64-gpup3.md)
+Acceptance: the slice gates below; [GPUP-2 baseline evidence](../benchmarks/lp-baseline-gpup2.md), [GPUP-3 matched evidence](../benchmarks/lp-matched-fp64-gpup3.md), [GPUP-4 tuned evidence](../benchmarks/lp-tuned-fp64-gpup4.md)
 
 ## Objective and working agreement
 
@@ -28,8 +28,9 @@ This track follows C6 but does not complete C7, C9, or the general C10 runner.
 
 ## Contracts and status
 
-- [SPEC-0012](../specifications/SPEC-0012-mixed-precision-lp.md) drafts numerical,
-  recovery, and interface requirements. It is not an implemented capability.
+- [SPEC-0012](../specifications/SPEC-0012-mixed-precision-lp.md) is accepted for
+  implemented GPUP-3/4 shared FP64 control and explicit tuned execution. Later
+  precision, recovery and preset requirements remain pending.
 - [SPEC-0013](../specifications/SPEC-0013-lp-precision-experiments.md) is accepted;
   GPUP-2 implements the bounded LP study, artifacts and baseline acceptance.
   [ADR-0014](../decisions/ADR-0014-lp-baseline-protocol.md) freezes its concrete protocol.
@@ -59,7 +60,7 @@ be refined from earlier findings, with changes recorded before affected trials.
 | GPUP-1 | Repair reduced-cost cancellation with conservative outward bounds; review objective and gap authority. | Independent exact-arithmetic regressions for cancellation, uncertain signs, finite/infinite bounds, and both objective senses. |
 | GPUP-2 | Establish the LP-only measurement harness, versioned manifests/results, independent checking, and phase instrumentation. Measure host LP, existing GPU FP64, and pinned HiGHS. | Reproducible records, deliberately failing checks, complete cost accounting, baseline bottleneck report. |
 | GPUP-3 | Create a resumable FP64 control implementation with shared restart, weight, checkpoint, cancellation, and budget state. | Complete: whole-trajectory/checkpoint tests, full native and scoped device/sanitizer gates, and 160 supplementary study attempts. Opt-in matched CUDA certifies 27/36 timing runs; legacy remains unchanged. |
-| GPUP-4 | Optimize FP64 residency, allocation, transfers, sparse kernels, and compatible fusion where profiling supports it. | Isolated residency/kernel/fusion measurements and numerical checks; a tuned control baseline. |
+| GPUP-4 | Optimize FP64 residency, allocation, transfers, sparse kernels, and compatible fusion where profiling supports it. | Complete: explicit cuda-lp-tuned, bitwise/rational/native/device/scoped sanitizer gates, preserved original failures and a complete 320-attempt correction. Coverage remains 27/36 for every configuration; scoped provisional fusion gains, matched remains the general reference. |
 | GPUP-5 | Add FP32 matrix storage with FP64 arithmetic, then FP32 products/accumulation. Compare FP64 masters and FP32 working state with FP64 correction. | Original-model checks, convergence and range diagnostics, measured storage/arithmetic/state costs. |
 | GPUP-6 | Add configurable audits, checkpoints, replay, promotion, and optional demotion, initially FP32/FP64. | Fault injection covering full rollback, budget/cancellation accounting, sticky promotion, and guarded demotion. |
 | GPUP-7 | Add quantization candidates through a common experimental interface; establish sparse FP8 before Tensor Core comparisons. | Quantizer checks, transpose consistency, guarded conversion, screening against the FP64 control. |
@@ -77,8 +78,15 @@ is separately identified and budgeted, never hidden in benchmark timings.
 GPUP-3's [accepted report](../benchmarks/lp-matched-fp64-gpup3.md) records schema/activity
 repairs, bit-preserving certification, matched control, failures and raw hashes.
 It adds 251.845179881 GPU seconds; cumulative study consumption is 445.988045904.
-GPUP-4 must preserve that ledger, the original artifacts and exact-rational tests.
-No validation/held-out solve, precision preset or publication occurred.
+GPUP-4 preserves that history and all rational tests. Its
+[reviewed report](../benchmarks/lp-tuned-fp64-gpup4.md) retains the original 320
+attempts, including 24 reference launch failures, and a separately frozen complete
+320-attempt correction under ADR-0018. It adds 456.586499157 GPU seconds under the
+approved 900-second supplement; cumulative use is 902.574545061 of the exact
+1345.988045904 ceiling. Every configuration certifies 27/36 timings. Matched remains
+the general reference; fused warp32 is provisional only on three named development
+instances. GPUP-5 is next. No validation/held-out solve, precision preset or
+publication occurred.
 
 ## Numerical design and candidate methods
 
@@ -181,7 +189,11 @@ maximum. New automatic dispatch or portfolios require their own specification.
 
 ## Interfaces, documentation, and handoff
 
-The planned opt-in backend is `cuda-lp-quantized`; it is not available in slice 0.
+The originally planned opt-in backend name `cuda-lp-quantized` remains reserved
+and unavailable. Before GPUP-5, resolve the [interface handoff](gpup5-interface-handoff.md):
+prefer one experimental implementation with versioned precision settings and retain
+existing backend/replay compatibility. This recommendation requires specification
+acceptance before it changes the planned interface.
 Versioned settings will describe requested/executed arithmetic, quantization,
 audits, recovery, and resource limits. Versioned records preserve transitions,
 reasons, provenance, and host certification. Existing records remain readable and

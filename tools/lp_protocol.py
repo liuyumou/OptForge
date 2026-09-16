@@ -42,7 +42,7 @@ def local(root, path):
 
 def validate(kind, value):
     version=value.get('schema_version',1)
-    if version not in (1,2) or (version==2 and kind not in ('campaign','trial','endpoint')):
+    if version not in (1,2,3) or (version>=2 and kind not in ('campaign','trial','endpoint')):
         raise ValueError('unsupported LP artifact version')
     validator(f'lp-{kind}-v{version}.schema.json').validate(value)
     return value
@@ -112,12 +112,14 @@ def ordered(configurations, seed, instance, repetition):
 
 class Ledger:
     """One exclusive campaign writer, durable reservations, conservative recovery."""
-    def __init__(self, directory, campaign_hash, allocations=None, slice_seconds=900):
+    def __init__(self, directory, campaign_hash, allocations=None, slice_seconds=900, *, cumulative_ns=None):
         self.directory = Path(directory); self.directory.mkdir(parents=True, exist_ok=True)
         self.path = self.directory / 'ledger.jsonl'
         self.campaign_hash = campaign_hash
         self.allocations = allocations or PHASES
-        self.slice_ns = slice_seconds * NS
+        if cumulative_ns is not None and (type(cumulative_ns) is not int or not 0 < cumulative_ns <= 28800 * NS):
+            raise ValueError('invalid cumulative nanosecond allowance')
+        self.slice_ns = slice_seconds * NS if cumulative_ns is None else cumulative_ns
         self.lock = None; self.events = []
 
     def __enter__(self):

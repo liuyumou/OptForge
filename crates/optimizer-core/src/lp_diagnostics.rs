@@ -35,6 +35,9 @@ pub struct LpDiagnostics {
     /// Kept out of the legacy wire shape; endpoint v2 serializes this separately.
     #[serde(skip)]
     pub control: Option<LpControlDiagnostics>,
+    /// Tuned execution observations serialized separately by endpoint v3.
+    #[serde(skip)]
+    pub execution: Option<crate::LpExecutionDiagnostics>,
     /// Whether witness collection was requested.
     pub enabled: bool,
     /// Detailed timing is a separate profiling execution.
@@ -65,6 +68,7 @@ impl LpDiagnostics {
     pub fn new(enabled: bool, profile: bool) -> Self {
         Self {
             control: None,
+            execution: None,
             enabled,
             profile,
             device_buffer_limit_bytes: None,

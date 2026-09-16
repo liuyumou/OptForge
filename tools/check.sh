@@ -61,6 +61,10 @@ if ! awk '
     echo "acceptance gate: SPEC-0011 requirements 6 to 8 make the reduction order a contract" >&2
     exit 1
 fi
+if rg -n 'atomicAdd\(' cuda/lp_pdhg_tuned; then
+    echo "acceptance gate: atomic accumulation in tuned kernels" >&2
+    exit 1
+fi
 git diff --check
 if ! python3 -c 'import jsonschema, markdown' 2>/dev/null; then
     cat >&2 <<'EOF'

@@ -1,0 +1,191 @@
+{
+  "activity": {
+    "leased_seconds": 3,
+    "poll_ms": 250,
+    "wait_seconds": 300
+  },
+  "additional_gpu_seconds": 900,
+  "analysis": {
+    "confidence": 0.95,
+    "resamples": 10000,
+    "seed": 17002
+  },
+  "budget_authority": {
+    "path": "benchmarks/configs/lp-campaign-v1.json",
+    "sha256": "a65d0ac2ce2b2676453d0e15752f887af1ee759318bed8b4538ae3f6f0cf137f"
+  },
+  "code_object_sha256": "a60a3a15dee107ea87e727f23496ad4a516706991a8a05ae7cc23f38083bd235",
+  "configurations": [
+    {
+      "backend": "cuda-lp-matched",
+      "binary": "reference",
+      "id": "reference-matched"
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "binary": "current",
+      "execution": {
+        "allocation": "per_check",
+        "fusion": "separate",
+        "reduction": "legacy_1024",
+        "schema_version": 1,
+        "uploads": "every_check"
+      },
+      "id": "tuned-compat"
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "binary": "current",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "legacy_1024",
+        "schema_version": 1,
+        "uploads": "every_check"
+      },
+      "id": "tuned-resident"
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "binary": "current",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "legacy_1024",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-transfers"
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "binary": "current",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-warp32"
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "binary": "current",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "primal_dual",
+        "reduction": "legacy_1024",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fused-legacy"
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "binary": "current",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "primal_dual",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fused-warp32"
+    },
+    {
+      "backend": "host-lp",
+      "binary": "current",
+      "id": "host-lp"
+    }
+  ],
+  "cumulative_gpu_ns": 1345988045904,
+  "device": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+  "id": "gpup4-tuned-fp64-correction-v1",
+  "limits": {
+    "cleanup_seconds": 2,
+    "device_buffer_bytes": 8589934592,
+    "host_rss_bytes": 8589934592,
+    "output_bytes": 33554432,
+    "poll_ms": 10,
+    "solve_seconds": 10
+  },
+  "lp_settings": {
+    "check_interval": 200,
+    "iteration_limit": 50000,
+    "power_iterations": 20,
+    "preconditioner": {
+      "pock_chambolle_alpha": 1.0,
+      "ruiz_passes": 10
+    },
+    "primal_weight": {
+      "derivative": 0.0,
+      "integral": 0.0,
+      "proportional": 0.5
+    },
+    "restart": {
+      "artificial": 0.36,
+      "necessary": 0.8,
+      "sufficient": 0.2
+    },
+    "schema_version": 1
+  },
+  "manifests": [
+    {
+      "path": "benchmarks/manifests/lp-development-v1.json",
+      "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+    },
+    {
+      "path": "benchmarks/manifests/lp-validation-v1.json",
+      "sha256": "f1fbda485e4ec02172aed2fb889f3f0797eb41fb7c1da6f30cfc6ec7c777f4ff"
+    },
+    {
+      "path": "benchmarks/manifests/lp-held_out-v1.json",
+      "sha256": "0f7a16ff64f1929b81cb4c8ba71523f4f7b1a39f84011aa39620968e28d15930"
+    }
+  ],
+  "order_seed": 17001,
+  "partition": "development",
+  "phase_gpu_seconds": {
+    "ablations": 7200,
+    "baseline": 1800,
+    "finalists": 9000,
+    "repeatability": 3600,
+    "screening": 7200
+  },
+  "prior_gpu_ns": 445988045904,
+  "profile_instances": [
+    "gpup-development-small-4",
+    "gpup-development-irregular-256",
+    "gpup-development-irregular-2048",
+    "gpup-development-dense_block-1024"
+  ],
+  "profile_repetitions": 1,
+  "reference_binary": {
+    "path": "artifacts/gpup4-reference/optimizer",
+    "sha256": "3f145b255d0aae934eb88068f991ece09cc8a46c22b35c7970119ad736e91993"
+  },
+  "reference_code_object": {
+    "path": "artifacts/gpup4-reference/lp_pdhg.cubin",
+    "sha256": "6a4c87550f7efec3ff2b29e247e604aac42d8cff83fa42f438d3823d15580f5e"
+  },
+  "reference_revision": "722e0b0",
+  "repetitions": 3,
+  "schema_version": 3,
+  "session_code_object_sha256": "90c2bee5aaeb6561aac71f8585e4d38c303bcb560532e2c1e96b5c09a831cfea",
+  "slice_gpu_seconds": 900,
+  "solve": {
+    "iteration_limit": 50000,
+    "node_limit": null,
+    "schema_version": 1,
+    "seed": 17,
+    "threads": 1,
+    "time_limit_ms": 10000,
+    "tolerances": {
+      "absolute": 1e-09,
+      "integrality": 1e-09,
+      "relative": 1e-09
+    }
+  },
+  "total_gpu_seconds": 28800
+}

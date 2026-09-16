@@ -57,11 +57,14 @@ pub struct LpEndpoint {
     /// Matched FP64 state/work observations; absent when unavailable or in v1.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub control: Option<LpControlDiagnostics>,
+    /// Requested tuned execution and actual work, including fallback.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub execution: Option<optimizer_core::LpExecutionDiagnostics>,
 }
 deserialize_object!(LpEndpoint { schema_version: u32, model_sha256: String,
     requested_backend: String, record: SolveRecord, row_ids: Vec<u32>,
     diagnostics: LpDiagnostics, assessment: Assessment, fallback_reason: Option<String>,
-    payload_sha256: String, control: Option<LpControlDiagnostics> });
+    payload_sha256: String, control: Option<LpControlDiagnostics>, execution: Option<optimizer_core::LpExecutionDiagnostics> });
 
 fn invalid(message: impl Into<String>) -> ValidationError {
     ValidationError::new(ErrorKind::Document, message)
@@ -206,6 +209,8 @@ impl LpEndpoint {
         );
         let bytes = if self.schema_version == 1 {
             serde_json::to_vec(&payload)
+        } else if self.schema_version == 3 {
+            serde_json::to_vec(&(payload, &self.control, &self.execution))
         } else {
             serde_json::to_vec(&(payload, &self.control))
         }
@@ -228,7 +233,8 @@ impl LpEndpoint {
         let check = diagnostics.start();
         let assessment = assess(&model, &record, &diagnostics)?;
         diagnostics.finish("independent_endpoint", check);
-        let matched = requested_backend == "cuda-lp-matched";
+        let tuned = requested_backend == "cuda-lp-tuned";
+        let matched = requested_backend == "cuda-lp-matched" || tuned;
         let control = if matched {
             diagnostics.control.take()
         } else {
@@ -240,7 +246,18 @@ impl LpEndpoint {
                 .push("matched controller state unavailable before completion".into());
         }
         let mut endpoint = Self {
-            schema_version: if matched { 2 } else { 1 },
+            schema_version: if tuned {
+                3
+            } else if matched {
+                2
+            } else {
+                1
+            },
+            execution: if tuned {
+                diagnostics.execution.take()
+            } else {
+                None
+            },
             control,
             model_sha256: crate::sha256::hex(model_bytes),
             requested_backend,
@@ -261,13 +278,19 @@ impl LpEndpoint {
     /// # Errors
     /// Rejects altered or inconsistent evidence, without trusting its status label.
     pub fn verify(&self, model_bytes: &[u8]) -> Result<(), ValidationError> {
-        if ![1, 2].contains(&self.schema_version)
+        if ![1, 2, 3].contains(&self.schema_version)
             || self.model_sha256 != crate::sha256::hex(model_bytes)
             || self.payload_sha256 != self.payload_hash()?
         {
             return Err(invalid("endpoint version/hash differs"));
         }
-        let backends = ["highs", "host-lp", "cuda-lp", "cuda-lp-matched"];
+        let backends = [
+            "highs",
+            "host-lp",
+            "cuda-lp",
+            "cuda-lp-matched",
+            "cuda-lp-tuned",
+        ];
         if !backends.contains(&self.requested_backend.as_str())
             || !backends.contains(&self.record.backend.as_str())
             || (self.schema_version == 1
@@ -275,6 +298,11 @@ impl LpEndpoint {
                     || self.requested_backend == "cuda-lp-matched"
                     || self.record.backend == "cuda-lp-matched"))
             || (self.schema_version == 2 && self.requested_backend != "cuda-lp-matched")
+            || (self.schema_version == 3 && self.requested_backend != "cuda-lp-tuned")
+            || (self.schema_version < 3
+                && (self.execution.is_some()
+                    || self.requested_backend == "cuda-lp-tuned"
+                    || self.record.backend == "cuda-lp-tuned"))
             || !self.diagnostics.enabled
         {
             return Err(invalid("invalid observation/backend identity"));
@@ -283,7 +311,8 @@ impl LpEndpoint {
         let fallback = self.requested_backend != self.record.backend;
         if fallback != self.fallback_reason.is_some()
             || (fallback
-                && (!["cuda-lp", "cuda-lp-matched"].contains(&self.requested_backend.as_str())
+                && (!["cuda-lp", "cuda-lp-matched", "cuda-lp-tuned"]
+                    .contains(&self.requested_backend.as_str())
                     || self.record.backend != "highs"))
         {
             return Err(invalid("inconsistent fallback identity"));
@@ -304,9 +333,51 @@ impl LpEndpoint {
     }
 
     fn verify_control(&self) -> Result<(), ValidationError> {
+        self.record.check_execution()?;
+        if self.schema_version == 3 {
+            let e = self
+                .execution
+                .as_ref()
+                .ok_or_else(|| invalid("missing tuned execution"))?;
+            e.settings.validate()?;
+            if let Some(hash) = &e.code_object_sha256
+                && (hash.len() != 64
+                    || !hash
+                        .bytes()
+                        .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b)))
+            {
+                return Err(invalid("invalid tuned code identity"));
+            }
+            if let Some(actual) = &self.record.lp_execution
+                && (actual.settings != e.settings
+                    || Some(&actual.code_object_sha256) != e.code_object_sha256.as_ref())
+            {
+                return Err(invalid("tuned requested/executed settings differ"));
+            }
+            if let Some(c) = &self.control
+                && let Some(steps) = c.physical_iterations
+            {
+                let per_step = if e.settings.fusion == optimizer_core::Fp64Fusion::PrimalDual {
+                    2
+                } else {
+                    6
+                };
+                if steps.checked_mul(per_step) != Some(e.kernel_launches) {
+                    return Err(invalid("tuned completed work/launch count differs"));
+                }
+            }
+            if let Some(c) = &self.control
+                && c.device_kernel_launches != e.kernel_launches
+            {
+                return Err(invalid("tuned launch accounting differs"));
+            }
+        } else if self.execution.is_some() {
+            return Err(invalid("legacy endpoint contains tuned execution"));
+        }
+
         let Some(control) = &self.control else {
-            if self.schema_version == 2
-                && self.record.backend == "cuda-lp-matched"
+            if self.schema_version >= 2
+                && ["cuda-lp-matched", "cuda-lp-tuned"].contains(&self.record.backend.as_str())
                 && !matches!(
                     self.record.termination,
                     Termination::Unsupported | Termination::BackendFailure
@@ -334,7 +405,7 @@ impl LpEndpoint {
         {
             return Err(invalid("invalid matched controller observations"));
         }
-        if self.record.backend == "cuda-lp-matched" {
+        if ["cuda-lp-matched", "cuda-lp-tuned"].contains(&self.record.backend.as_str()) {
             let settings = self
                 .record
                 .lp_settings
@@ -380,7 +451,7 @@ impl LpEndpoint {
         let shape: serde_json::Value =
             serde_json::from_slice(bytes).map_err(|e| invalid(e.to_string()))?;
         let mut base_shape = shape.clone();
-        if shape["schema_version"] == 2
+        if matches!(shape["schema_version"].as_u64(), Some(2 | 3))
             && let Some(control) = base_shape
                 .as_object_mut()
                 .and_then(|map| map.remove("control"))
@@ -401,6 +472,30 @@ impl LpEndpoint {
                 .ok_or_else(|| invalid("control requires an object"))?;
             if map.len() != fields.len() || fields.iter().any(|key| !map.contains_key(*key)) {
                 return Err(invalid("missing or unknown control field"));
+            }
+        }
+        if shape["schema_version"] == 3 {
+            let execution = base_shape
+                .as_object_mut()
+                .and_then(|m| m.remove("execution"))
+                .ok_or_else(|| invalid("missing tuned execution"))?;
+            let fields = [
+                "settings",
+                "code_object_sha256",
+                "allocations",
+                "allocated_bytes",
+                "upload_calls",
+                "upload_bytes",
+                "readback_calls",
+                "readback_bytes",
+                "synchronizations",
+                "kernel_launches",
+            ];
+            let map = execution
+                .as_object()
+                .ok_or_else(|| invalid("execution requires an object"))?;
+            if map.len() != fields.len() || fields.iter().any(|k| !map.contains_key(*k)) {
+                return Err(invalid("missing or unknown execution field"));
             }
         }
         for (object, fields) in [
@@ -479,12 +574,13 @@ impl LpEndpoint {
             .ok_or_else(|| invalid("phase measurements require an object"))?;
         if phases.keys().any(|name| {
             !(allowed.contains(&name.as_str())
-                || (shape["schema_version"] == 2 && name == "controller"))
+                || (matches!(shape["schema_version"].as_u64(), Some(2 | 3))
+                    && name == "controller"))
         }) {
             return Err(invalid("unknown LP measurement phase"));
         }
         let result: Self = serde_json::from_slice(bytes).map_err(|e| invalid(e.to_string()))?;
-        if ![1, 2].contains(&result.schema_version) {
+        if ![1, 2, 3].contains(&result.schema_version) {
             return Err(invalid("unsupported endpoint version"));
         }
         Ok(result)
@@ -599,6 +695,112 @@ mod tests {
         });
         endpoint.payload_sha256 = endpoint.payload_hash().unwrap();
         endpoint
+    }
+
+    fn tuned_observed() -> LpEndpoint {
+        let mut e = matched_observed();
+        let settings = optimizer_core::Fp64ExecutionSettings::from_json(include_bytes!(
+            "../../../examples/lp-execution-v1.json"
+        ))
+        .unwrap();
+        let mut execution = optimizer_core::LpExecutionDiagnostics::new(settings);
+        execution.code_object_sha256 = Some("a".repeat(64));
+        execution.kernel_launches = 6;
+        e.control.as_mut().unwrap().device_kernel_launches = 6;
+        e.schema_version = 3;
+        e.requested_backend = "cuda-lp-tuned".into();
+        e.record.backend = "cuda-lp-tuned".into();
+        e.record.schema_version = 3;
+        e.record.lp_execution = Some(optimizer_core::LpExecutionRecord {
+            settings,
+            code_object_sha256: "a".repeat(64),
+        });
+        e.execution = Some(execution);
+        e.payload_sha256 = e.payload_hash().unwrap();
+        e
+    }
+
+    #[test]
+    fn tuned_records_and_endpoints_are_versioned_and_strict() {
+        let e = tuned_observed();
+        e.verify(MODEL).unwrap();
+        let json = serde_json::to_vec(&e).unwrap();
+        let copy = LpEndpoint::from_json(&json).unwrap();
+        copy.verify(MODEL).unwrap();
+        assert_eq!(e, copy);
+        let record = SolveRecord::from_json(e.record.to_json().unwrap().as_bytes()).unwrap();
+        assert_eq!(record, e.record);
+        for key in ["execution", "control"] {
+            let mut value = serde_json::to_value(&e).unwrap();
+            value.as_object_mut().unwrap().remove(key);
+            assert!(
+                LpEndpoint::from_json(&serde_json::to_vec(&value).unwrap())
+                    .and_then(|e| e.verify(MODEL))
+                    .is_err()
+            );
+        }
+        for mutation in 0..8 {
+            let mut wrong = e.clone();
+            match mutation {
+                0 => wrong.schema_version = 2,
+                1 => wrong.record.schema_version = 2,
+                2 => {
+                    wrong.execution.as_mut().unwrap().settings.reduction =
+                        optimizer_core::Fp64Reduction::Legacy1024
+                }
+                3 => wrong.execution.as_mut().unwrap().code_object_sha256 = Some("b".repeat(64)),
+                4 => wrong.execution.as_mut().unwrap().kernel_launches += 1,
+                5 => wrong.record.lp_execution = None,
+                6 => {
+                    wrong
+                        .record
+                        .lp_execution
+                        .as_mut()
+                        .unwrap()
+                        .settings
+                        .schema_version = 2
+                }
+                _ => wrong.record.backend = "host-lp".into(),
+            }
+            wrong.payload_sha256 = wrong.payload_hash().unwrap();
+            assert!(wrong.verify(MODEL).is_err(), "mutation {mutation}");
+        }
+        let legacy = observed();
+        let mut bad_record = serde_json::to_value(&legacy.record).unwrap();
+        bad_record["lp_execution"] = serde_json::Value::Null;
+        assert!(SolveRecord::from_json(&serde_json::to_vec(&bad_record).unwrap()).is_err());
+        let value = serde_json::to_value(&legacy).unwrap();
+        assert!(value.get("execution").is_none());
+        assert!(value["record"].get("lp_execution").is_none());
+    }
+
+    #[test]
+    fn tuned_fault_fallback_retains_requested_execution_and_unknown_work() {
+        let mut endpoint = tuned_observed();
+        endpoint.record.schema_version = 2;
+        endpoint.record.backend = "highs".into();
+        endpoint.record.lp_execution = None;
+        endpoint.fallback_reason = Some("injected sticky device failure after submission".into());
+        endpoint.control.as_mut().unwrap().physical_iterations = None;
+        endpoint.control.as_mut().unwrap().stop = "device_failure".into();
+        endpoint.diagnostics.iterations = None;
+        endpoint.assessment = assess(
+            &Model::from_json(MODEL).unwrap(),
+            &endpoint.record,
+            &endpoint.diagnostics,
+        )
+        .unwrap();
+        endpoint.payload_sha256 = endpoint.payload_hash().unwrap();
+        endpoint.verify(MODEL).unwrap();
+        let copy = LpEndpoint::from_json(&serde_json::to_vec(&endpoint).unwrap()).unwrap();
+        copy.verify(MODEL).unwrap();
+        assert_eq!(copy.execution, endpoint.execution);
+        assert_eq!(copy.control.as_ref().unwrap().physical_iterations, None);
+        assert!(copy.execution.as_ref().unwrap().kernel_launches > 0);
+        let mut erased = copy;
+        erased.execution.as_mut().unwrap().kernel_launches = 0;
+        erased.payload_sha256 = erased.payload_hash().unwrap();
+        assert!(erased.verify(MODEL).is_err());
     }
 
     #[test]

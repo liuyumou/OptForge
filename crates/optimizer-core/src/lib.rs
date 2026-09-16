@@ -146,3 +146,10 @@ where
         ))
     }
 }
+
+pub mod lp_execution;
+pub mod sha256;
+pub use lp_execution::{
+    Fp64ExecutionSettings, Fp64Fusion, Fp64Reduction, LpExecutionDiagnostics, LpExecutionRecord,
+    StateUploads, WorkingAllocation,
+};

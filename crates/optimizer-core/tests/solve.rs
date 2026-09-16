@@ -135,6 +135,7 @@ fn solve_records_round_trip_with_stable_status_names() {
     ];
     for (termination, name) in names {
         let record = SolveRecord {
+            lp_execution: None,
             schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: "record".into(),
             backend: "highs".into(),
@@ -164,6 +165,7 @@ fn solve_records_round_trip_with_stable_status_names() {
 #[test]
 fn absent_measurements_are_omitted_and_nonfinite_ones_rejected() {
     let base = SolveRecord {
+        lp_execution: None,
         schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: "measurements".into(),
         backend: "highs".into(),
@@ -248,6 +250,7 @@ fn solve_documents_require_strict_versioned_objects() {
 
     // An unsupported record version fails as a document error.
     let record = SolveRecord {
+        lp_execution: None,
         schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: "version".into(),
         backend: "highs".into(),
@@ -324,6 +327,7 @@ fn nested_document_versions_are_validated_on_parse() {
     let validation = model.evaluate(&candidate, tolerances()).expect("report");
 
     let record = SolveRecord {
+        lp_execution: None,
         schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: "nested".into(),
         backend: "highs".into(),

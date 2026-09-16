@@ -1,5 +1,114 @@
 # Active Task
 
+## GPUP-4 PR integration and GPUP-5 interface handoff (2026-09-16)
+
+Status: in progress. The user authorized publishing the completed GPUP-4 branch,
+reviewing and merging its PR after required checks, synchronizing main, and deleting
+the completed feature branch. Preserve reference commits, ignored study archives,
+code objects and the canonical 902.574545061-second campaign ledger.
+
+Record the backend-interface recommendation in the GPUP-5 handoff and discovery
+paths. This is planning guidance: GPUP-5 precision behavior and any interface
+migration still require accepted contracts before implementation. No new study.
+Read CONTRIBUTING, release operations and known failures before work.
+Acceptance: complete diff/unsafe/dependency review, fresh full pinned-native gate,
+hosted CPU/docs/smoke checks for the reviewed head, verified merge ancestry and
+synchronized main before branch cleanup. Budget: 30 CPU wall minutes with four
+build jobs; at most five GPU acceptance minutes only if a runtime review repair
+requires them, sequentially under the shared lease. Existing device/sanitizer
+results apply to unchanged runtime. Integration receipts: artifacts/gpup4-pr-integration.
+
+Local review and acceptance complete; publication and hosted checks are next.
+Full pinned-native tools/check.sh passed in 18.889058079 seconds: 411 Rust tests,
+110 Python tests, 74 documentation pages, formatting/Clippy/rustdoc, dependency and
+license policy, artifact checks and recorded replay. No runtime change or additional
+GPU job was needed. Existing 41 regular device cases and eight scoped cases under
+each of all four sanitizers remain applicable, with the documented device limitation.
+
+Review covered the complete implementation diff, resident/restored state, bounded
+cancellation and physical work, padded memory admission, deterministic reductions
+and fusion, legacy schemas and code, strict execution/replay/provenance, fallback,
+ledger reservations/admission, pairing/coverage and report limitations. No blocking
+finding remains. The lockfile adds only a dev-dependency on existing serde_json;
+SHA-256 moved unchanged into core and no new unsafe boundary was introduced.
+
+Fresh read-only evidence verification checked all 640 trial records, 616 available
+endpoints and 5530 indexed files across the preserved original and correction rounds.
+The canonical ledger hash remains 35b58ef0b0d58637288801bac2bdaa32b65b97b42b429debcffc615768c7c543;
+study consumption is unchanged at 902.574545061 seconds. GitHub sign-in was restored
+with the maintainer's device authorization. Remote main is still the reference
+722e0b01aecc5875b44ae0a7124f7c1b41eeeeed, so no rebase is necessary.
+
+The [GPUP-5 interface handoff](../docs/plans/gpup5-interface-handoff.md) recommends
+versioned experimental precision settings, preserving existing backend identities
+and replay, and revisiting the reserved quantized selector before behavior. It is
+linked from AGENTS, the roadmap, SPEC-0012 and the GPUP-5 backlog entry; the interface
+decision remains pending. This documentation does not begin GPUP-5 implementation.
+
+## GPUP-4: tuned FP64 execution (2026-09-15)
+
+Status: complete; all required gates and study evidence passed, ready for local
+commit. GPUP-5 is next_ready_task; no GPUP-5 behavior is implemented.
+Objective: explicit cuda-lp-tuned under accepted SPEC-0012/ADR-0017; resident
+allocation, necessary uploads, deterministic warp32 and two-kernel fusion, with
+recorded execution settings/provenance. Legacy/matched behavior and host authority
+remain. Runtime and reference source/code were archived before measurement.
+
+The [reviewed report](../docs/benchmarks/lp-tuned-fp64-gpup4.md) retains 640 attempts:
+320 original plus the separately frozen ADR-0018 correction, each 280 GPU/40 CPU.
+The original remains interim after 24 archived-reference execute-permission failures;
+its source/binary bytes, failed attempts and charges are preserved. The full
+correction has 248 certified endpoints, 66 work limits and six host timeouts, with
+no process/invalid/missing evidence or unsettled reservations. Each configuration
+certifies 27/36 timings. All 36 GPU endpoint pairs preserve bits and iteration/restart
+counts across ablations. Matched remains the general reference; fused warp32 is a
+provisional comparison on three named development instances only. No preset,
+held-out solve, lower precision, dispatch, publication or push is introduced.
+
+Study charges: prior 445.988045904; original round 219.094449232; correction
+237.492049925; GPUP-4 total 456.586499157 of 900 additional GPU seconds. Cumulative
+902.574545061, below the exact 1345.988045904 ceiling, 1800-second baseline phase
+and 28800-second campaign. Original authority/output binding and the exact 622-event
+prior prefix are preserved. Final study ledger SHA-256:
+35b58ef0b0d58637288801bac2bdaa32b65b97b42b429debcffc615768c7c543.
+Correction raw index SHA-256:
+9b560b44b74f2035525a2d0c86ea5438f03097fdb203e2fb33723b3023a98b77.
+Correction source/archive/executable/code identities are in the report and immutable
+artifacts/gpup4-tuned-fp64-correction-v1. Native-freeze receipt binds measured source
+8307df2ecb105552551058d93d885d10e93063695b188889fe520705ccdaef86.
+
+Acceptance budget: 60 CPU wall minutes, four build jobs; 30 GPU minutes, sequential
+with CPU gates. The measured source passed all 410 Rust/110 Python tests and 73 doc
+pages in 19.140472299 seconds. All 41 regular device cases passed on RTX 5090 and
+PRO 6000. Eight scoped cases passed each of all four sanitizers on PRO 6000, zero
+errors/racecheck warnings. RTX 5090 lacked memcheck memory (797 MiB free); both
+failed attempts remain recorded. The final parser-only schema repair was reproduced
+by a failing regression and passes afterward; measured iteration code/settings/code
+object are unchanged, and its untimed status is explicit in the report. Final
+41-case RTX 5090 acceptance plus CLI evidence/fallback/replay/altered-code rejection
+passed in 16.587609922 seconds. Total acceptance GPU use including failures:
+479.537579339 seconds of 1800. Complete receipts/logs: artifacts/gpup4-acceptance.
+
+Review fixes cover peak observations on early stops, cached launch configuration,
+executor/residency agreement, GPU overflow, signed bits in both vectors/anchors,
+strict enum shapes, complete ledger/trial coverage, torn-ledger read refusal,
+immutable pre-campaign history and archive execution permission. GPUP-1 independent
+rational authority and matched trajectory regressions remain. Only a dev-dependency
+edge to existing serde_json was added; no external package version or unsafe boundary
+changed. Read CONTRIBUTING and known failures before implementation.
+
+Final full pinned-native acceptance passed in 35.965244998 seconds: 411 Rust tests,
+110 Python tests, 73 documentation pages, formatting/Clippy/rustdoc, dependency and
+license policy, artifact/provenance checks and recorded-run replay. Native and
+focused schema-regression receipts total 177.027801669 CPU wall seconds; builds
+used four workers and remained within the 60-minute acceptance allocation. Final
+GPU acceptance including failed attempts totals 479.537579339 seconds of 1800.
+The post-measurement parser-only change has a failed-before/passed-after fixture,
+full native acceptance and fresh 41-case/CLI RTX 5090 acceptance. The report names
+its measurement limitation. The complete diff, legacy schema/source preservation,
+unsafe boundaries and lockfile were reviewed. Commit locally; no push authorized.
+
+
 ## GPUP-2/3 PR review and integration (2026-09-15)
 
 Objective: publish the completed branch, review its full diff, merge after acceptance

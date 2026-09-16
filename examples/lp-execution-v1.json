@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "allocation": "resident",
+  "uploads": "necessary",
+  "reduction": "warp32_v1",
+  "fusion": "primal_dual"
+}

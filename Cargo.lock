@@ -225,6 +225,7 @@ dependencies = [
  "optimizer-cuda-sys",
  "optimizer-highs",
  "optimizer-lp",
+ "serde_json",
 ]
 
 [[package]]

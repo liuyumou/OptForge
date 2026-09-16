@@ -12,10 +12,26 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Fixed
 
+- Tuned execution reports actual buffer peaks on early stops and refuses mismatched
+  residency settings. Execution enums reject object-wrapped names. Study archives
+  preserve execute permission and check the exact prior campaign ledger prefix.
+
 - Fetch full CI history for frozen LP schema comparisons; synchronize the lease
   exclusion test with worker readiness so import latency cannot cause false failures.
 
 ### Added
+
+- A [GPUP-5 interface handoff](docs/plans/gpup5-interface-handoff.md) recommending
+  versioned experimental precision settings while preserving current backend/replay
+  compatibility. The interface decision remains pending before GPUP-5 behavior.
+
+- Experimental cuda-lp-tuned with explicit FP64 execution settings, resident buffers,
+  necessary state uploads, deterministic warp32 reduction and two-kernel fusion.
+  Versioned execution records and replay preserve existing backend/schema contracts.
+  The [GPUP-4 report](docs/benchmarks/lp-tuned-fp64-gpup4.md) retains the original
+  launch failures and a verified complete correction round. All configurations
+  certify 27/36 timings; scoped provisional fusion gains do not promote a preset.
+  Both rounds consume 456.586499157 additional GPU seconds, preserving all history.
 
 - Opt-in cuda-lp-matched shares the host FP64 restart/weight controller, with
   in-memory checkpoints, bounded cancellation and non-rollback work/deadlines.

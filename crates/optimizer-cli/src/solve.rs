@@ -29,6 +29,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     let mut basis_path = None;
     let mut backend_name = None;
     let mut settings_path = None;
+    let mut execution_path = None;
     let mut device_name = None;
     for pair in options.chunks(2) {
         let [key, value] = pair else {
@@ -47,6 +48,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             "--basis" => &mut basis_path,
             "--backend" => &mut backend_name,
             "--lp-settings" => &mut settings_path,
+            "--lp-execution" => &mut execution_path,
             "--device" => &mut device_name,
             _ => return Err(argument(&format!("unknown flag {key}"))),
         };
@@ -131,6 +133,16 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         return Err(argument("LP evidence requires a continuous original model"));
     }
     diagnostics.finish("input_preparation", profile.then_some(input_started));
+    let execution = match (selected, execution_path) {
+        ("cuda-lp-tuned", Some(path)) => Some(
+            optimizer_core::Fp64ExecutionSettings::from_json(&read(path)?)
+                .map_err(io::Error::other)?,
+        ),
+        ("cuda-lp-tuned", None) => return Err(argument("cuda-lp-tuned requires --lp-execution")),
+        (_, Some(_)) => return Err(argument("--lp-execution requires cuda-lp-tuned")),
+        (_, None) => None,
+    };
+    diagnostics.execution = execution.map(optimizer_core::LpExecutionDiagnostics::new);
     let mut fallback_reason = None;
     let record = match selected {
         "highs" => {
@@ -168,7 +180,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
                 )
                 .map_err(io::Error::other)?
         }
-        "cuda-lp" | "cuda-lp-matched" => {
+        "cuda-lp" | "cuda-lp-matched" | "cuda-lp-tuned" => {
             let path = settings_path
                 .ok_or_else(|| argument("--backend cuda-lp requires --lp-settings"))?;
             let settings = LpSettings::from_json(&read(path)?).map_err(io::Error::other)?;
@@ -198,6 +210,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
                     match device_solve(
                         &session,
                         selected == "cuda-lp-matched",
+                        execution,
                         settings,
                         &model,
                         &configuration,
@@ -240,7 +253,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         }
         other => {
             return Err(argument(&format!(
-                "unknown backend {other}; expected highs, host-lp, cuda-lp or cuda-lp-matched"
+                "unknown backend {other}; expected highs, host-lp, cuda-lp, cuda-lp-matched or cuda-lp-tuned"
             )));
         }
     };
@@ -296,6 +309,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
 pub(crate) fn device_solve(
     session: &optimizer_cuda::session::DeviceSession,
     matched: bool,
+    execution: Option<optimizer_core::Fp64ExecutionSettings>,
     settings: LpSettings,
     model: &Model,
     configuration: &SolveOptions,
@@ -303,7 +317,9 @@ pub(crate) fn device_solve(
     diagnostics: &mut optimizer_core::LpDiagnostics,
 ) -> Result<optimizer_core::SolveRecord, String> {
     let context = session.context();
-    let backend = if matched {
+    let backend = if let Some(execution) = execution {
+        CudaLpBackend::open_tuned(context, settings, execution)
+    } else if matched {
         CudaLpBackend::open_matched(context, settings)
     } else {
         CudaLpBackend::open(context, settings)
