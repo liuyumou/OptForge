@@ -1,5 +1,27 @@
 # Active Task
 
+## Standalone pelican bicycle animation (2026-09-16)
+
+Status: complete. User-requested creative artifact, separate from the optimizer
+capability backlog. Objective: one self-contained `pelican-bicycle.html` containing
+an original 2D SVG pelican riding a bicycle, synchronized pedaling/wheels, a moving
+seaside scene, responsive layout, pause/speed controls and reduced-motion support.
+Likely files: the HTML artifact and this task record. Acceptance: inspect the SVG
+and script, browser checks if a local browser is available, and `bash tools/check.sh`.
+Resource budget: 20 minutes CPU wall time, at most four build jobs; zero project
+GPU work. CONTRIBUTING and relevant task state were read before implementation.
+
+Acceptance evidence: the self-contained SVG parses with unique IDs and resolved
+references; JavaScript syntax passes. Chromium desktop (1440px) and mobile (390px)
+previews were visually inspected. Browser checks passed for moving pedals,
+pause/resume, exclusive pace selection, reduced motion, keyboard activation,
+no horizontal mobile overflow and no script errors. Temporary browser dependencies
+were extracted under /tmp; no system package or project dependency changed.
+Full pinned-native `bash tools/check.sh` passed, including 121 Python tests,
+79 documentation pages, policy checks, committed replay and bootstrap smoke.
+Evidence is retained under artifacts/pelican-bicycle. No optimizer behavior,
+research backlog, GPU campaign ledger or archived study evidence changed.
+
 ## GPUP-5 follow-up: diagnose FP32 latency (2026-09-16)
 
 Status: complete; diagnostic evidence and full pinned-native acceptance passed.
