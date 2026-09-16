@@ -8,6 +8,12 @@ from lp_protocol import ROOT,NS,Ledger,checked_reference,file_hash,read_json,wri
 from lp_report import load_trials,successful,paired_ratio
 from lp_copt import gpu_started
 
+def use_historical_snapshot(ledger,snapshot,active):
+    if not snapshot.endswith(b'\n') or not active.startswith(snapshot):
+        raise ValueError('archived campaign ledger is not an intact historical prefix')
+    ledger.events=ledger.events[:len(snapshot.splitlines())]
+    if ledger.pending():raise ValueError('historical snapshot has unsettled reservations')
+
 def report(directory,config_path,binary):
     value,base,manifests=protocol(config_path);trials,endpoints=load_trials(directory,value,manifests,file_hash(config_path))
     identities=read_json(directory/'configuration-executions.json');groups=defaultdict(dict);work=[]
@@ -41,9 +47,11 @@ def report(directory,config_path,binary):
         fcntl.flock(lock,fcntl.LOCK_SH|fcntl.LOCK_NB)
         ledger=Ledger(ledger_dir,value['budget_authority']['sha256'],base['phase_gpu_seconds'],cumulative_ns=value['cumulative_gpu_ns']);ledger._load()
         if ledger.pending():raise ValueError('unsettled campaign reservations')
+        # Later diagnostics append to the same authority; historical charges stay
+        # bound to the original settled snapshot, never to subsequent jobs.
+        use_historical_snapshot(ledger,(directory/'ledger.jsonl').read_bytes(),ledger.path.read_bytes())
         charged=ledger.totals()
         if charged>value['cumulative_gpu_ns']:raise ValueError('slice cumulative ceiling exceeded')
-        if (directory/'ledger.jsonl').read_bytes()!=ledger.path.read_bytes():raise ValueError('archived campaign ledger differs')
         settled={e['trial_id'] for e in ledger.events if e['kind'] in ('settle','recover')}
         if any(t['id'] not in settled for t in trials):raise ValueError('trial missing ledger settlement')
     rows=[];ratios=[];instances=next(m['instances'] for m in manifests if m['partition']=='development')
@@ -57,7 +65,7 @@ def report(directory,config_path,binary):
                 pairs=[(left[r]['elapsed_ns'],right[r]['elapsed_ns']) for r in left.keys()&right.keys() if successful(left[r]) and successful(right[r])]
                 ratios.append(dict(instance=instance['id'],reference=reference,candidate=config['id'],statistics=paired_ratio(pairs,value['analysis']['seed'],value['analysis']['resamples'])))
     expected=len(list(schedule(value,manifests)));bad={'process_failure','invalid_evidence','missing_evidence','lease_timeout','lease_cancelled','cancelled_before_launch','activity_blocked'}
-    summary=dict(schema_version=4,status='complete' if len(trials)==expected and not any(t['status'] in bad for t in trials) else 'interim',planned=expected,attempted=len(trials),verified_endpoints=len(endpoints),prior_gpu_seconds=value['prior_gpu_ns']/NS,additional_gpu_seconds=(charged-value['prior_gpu_ns'])/NS,cumulative_gpu_seconds=charged/NS,ceiling_gpu_seconds=value['cumulative_gpu_ns']/NS,protocol_sha256=file_hash(config_path),ledger_sha256=file_hash(ledger_dir/'ledger.jsonl'),outcomes=dict(Counter(t['status']+'/'+str(t['endpoint_class']) for t in trials)),rows=rows,ratios=ratios,work=work)
+    summary=dict(schema_version=4,status='complete' if len(trials)==expected and not any(t['status'] in bad for t in trials) else 'interim',planned=expected,attempted=len(trials),verified_endpoints=len(endpoints),prior_gpu_seconds=value['prior_gpu_ns']/NS,additional_gpu_seconds=(charged-value['prior_gpu_ns'])/NS,cumulative_gpu_seconds=charged/NS,ceiling_gpu_seconds=value['cumulative_gpu_ns']/NS,protocol_sha256=file_hash(config_path),ledger_sha256=file_hash(directory/'ledger.jsonl'),outcomes=dict(Counter(t['status']+'/'+str(t['endpoint_class']) for t in trials)),rows=rows,ratios=ratios,work=work)
     write_json(directory/'summary.json',summary)
     files=[dict(path=p.name,sha256=file_hash(p)) for p in sorted(directory.iterdir()) if p.is_file() and p.name!='artifact-index.json']
     write_json(directory/'artifact-index.json',files)

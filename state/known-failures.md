@@ -12,6 +12,18 @@ benchmarks/configs/lp-precision-v4.json and the archived measured source. Next:
 GPUP-6 must specify adaptive audits/recovery before changing numerical behavior;
 do not weaken guards, tolerances or work limits to hide these outcomes.
 
+The [bounded follow-up diagnosis](../docs/benchmarks/lp-fp32-slowdown-diagnosis.md)
+retains 196 equal-work short runs, 14 decoded CUDA traces and three unsuccessful
+hardware-counter attempts. FP32 iterations are similar or sometimes faster than
+the precision FP64 control, but the failed large cases do 22–31 times as many
+proposals. Exact rational row activities identify scaled-matrix bias above original
+allowances; this does not explain every nonconverged model. Generic guarded kernels,
+six launches/update, frequent state readbacks and host correction add costs. Hardware
+counters are unavailable (ERR_NVGPUCTRPERM); cache/bandwidth/occupancy attribution is
+unresolved. Saved traces decoded offline with the existing isolated libdw dependency.
+No solver behavior or guard changed. Historical reporting now accepts an intact,
+settled archived ledger prefix so later diagnostics cannot change GPUP-5's totals.
+
 COPT 8.0.6 CPU/GPU PDLP certify 27/36 and 24/36 timings. Scaling-256 remains
 feasible but unclosed; GPU ta001 witnesses are rejected by original-model checks.
 Its public API exposes neither a PDLP iteration-limit nor a seed control: record

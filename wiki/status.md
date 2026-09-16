@@ -35,8 +35,11 @@ with explicit FP32 settings, fixed charged FP64 correction and separate code ide
 Its [480-attempt report](../docs/benchmarks/lp-fp32-gpup5.md) retains 27/36 timing
 coverage for FP64, 12/36 for storage/products/accumulation/master correction and
 6/36 for FP32 working state. COPT CPU/GPU PDLP certify 27/36 and 24/36. Total study
-consumption is 1324.210639253 GPU seconds, including all prior evidence. GPUP-6 is
-next; adaptive recovery requires its bounded contract. No supported recipe is
+consumption after that study was 1324.210639253 GPU seconds. The subsequent
+[213-job FP32 diagnosis](../docs/benchmarks/lp-fp32-slowdown-diagnosis.md) adds
+143.056235443 seconds, totaling 1467.266874696, with all history preserved. It
+separates extra iterations and representation error from executor/correction costs;
+no runtime change was made. GPUP-6 is next; adaptive recovery requires its bounded contract. No supported recipe is
 available. The campaign retains its eight GPU-hour cap; acceptance details remain
 in the active-task record.
 

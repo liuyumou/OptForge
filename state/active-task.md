@@ -1,5 +1,57 @@
 # Active Task
 
+## GPUP-5 follow-up: diagnose FP32 latency (2026-09-16)
+
+Status: complete; diagnostic evidence and full pinned-native acceptance passed.
+The requested investigation preserves runtime behavior, all 480 original trials,
+code objects, guards, controller, original-model authority and defaults. No GPUP-6
+behavior or supported preset was introduced. See
+[diagnosis report](../docs/benchmarks/lp-fp32-slowdown-diagnosis.md) and ADR-0020.
+
+All 213 frozen GPU jobs ran under the shared lease: 196 equal-update repetitions,
+14 Nsight Systems traces and three unsuccessful Nsight Compute counter attempts.
+Every endpoint independently verifies and records exactly 200 proposals (206
+physical steps with correction). Every decoded trace matches 1200 launches. Raw
+traces initially failed automatic import; existing private libdw decoded them offline.
+All counter attempts retain ERR_NVGPUCTRPERM; no driver permission was changed.
+No retry, timeout, fallback or missing endpoint. Hardware bottleneck counters remain
+unavailable, and first-200-update timings do not establish late convergence behavior.
+
+Exact rational representation analysis covers 72 archived witnesses across all
+twelve development models. All 166292 original coefficients are exactly FP32;
+only 18 scaled values are. Concrete original-row violations exceed allowances by
+34.2x/15.8x while meeting the implied represented-operator allowance. Other failures
+also retain represented residuals, so quantization alone is not asserted for every
+model. Equal-work FP32 savings are small or instance-dependent; extra iterations,
+generic guarded execution, state readback and fixed correction dominate large losses.
+
+Full pinned-native tools/check.sh passed before measurement (422 Rust tests,
+119 Python tests, 78 pages) and on final tooling/documentation (422 Rust tests,
+121 Python tests, 79 pages), including formatting, clippy, native HiGHS,
+dependency policy, committed replay and smoke gates. Final log:
+artifacts/gpup5-diagnosis-v1/native-final.log. Five new diagnostic tests cover schedule,
+exact arithmetic, historical totals, phase/counter status and work-limit eligibility.
+All 480 old endpoints reverify in a temporary copy; old report/index bytes and all
+original indexed artifacts are unchanged. No runtime/device changes required another
+sanitizer run; GPUP-5 device evidence remains intact.
+
+Resources: four build jobs within the two-hour CPU validation ceiling; GPU jobs and
+CPU acceptance sequential. Diagnostics consume 143.056235443 of their 300-second
+cap, charged to screening, plus the preserved 1324.210639253 = 1467.266874696 total
+GPU seconds, within 4502.574545061 and global/phase caps. GPUP-5 acceptance remains
+80.458622460/900 seconds, unused here. All 213 reservations settled; complete
+2862-event old prefix SHA-256
+66d8c2b0ee24ce050ee051c6dbea2184361abe2c2fc4a57b8ee202c001479ff0 is preserved.
+New 3288-event ledger SHA-256:
+b3ca2739b1108a552b0423606ddd0cd94a8ed2323da1506098fa0150ba42bfef.
+
+Evidence: artifacts/gpup5-diagnosis-v1 (frozen protocol/source/executable, raw runs,
+traces/decoder commands, counter failures, disassembly, exact row diagnostics,
+paired analysis and artifact hashes). Post-measurement changes affect only read-only
+analysis/reporting/tests/documentation. No old report or evidence was rewritten.
+Known failures and CONTRIBUTING were read first. GPUP-6 remains next, requiring its
+bounded contract. No push or publication.
+
 ## GPUP-5: explicit FP32 comparisons and COPT baselines (2026-09-16)
 
 Status: complete; full native, device, sanitizer and frozen-study gates passed.

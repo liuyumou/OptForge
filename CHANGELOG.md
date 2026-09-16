@@ -12,6 +12,12 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- A [213-job FP32 latency investigation](docs/benchmarks/lp-fp32-slowdown-diagnosis.md)
+  separates convergence loss, scaled-matrix error, guarded executor costs and fixed
+  correction overhead. Includes equal-work timings, CUDA traces and exact-rational
+  row diagnostics; unavailable hardware counters remain explicit. Solver behavior
+  and all 480 original study results are preserved.
+
 - GPUP-5 adds explicit lp-precision-v1 on cuda-lp-tuned, canonical FP32 storage,
   product/accumulation/state comparisons, fixed charged FP64 correction, guarded
   conversion, conservative operator steps and v4 evidence/replay. Existing defaults
@@ -28,6 +34,9 @@ User-visible changes are recorded here using Conventional Commit terminology.
   mandatory human approval remains disabled for the autonomous workflow.
 
 ### Fixed
+
+- Historical GPUP-5 reports use their verified settled ledger prefix, preserving
+  original totals when later diagnostics append to the shared campaign ledger.
 
 - Verify supervisor timeout and released lease ownership without imposing an
   undeclared one-second cleanup ceiling in the coordinator-loss CI fixture.

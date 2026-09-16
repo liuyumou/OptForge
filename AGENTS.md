@@ -34,8 +34,11 @@ coverage losses; no supported preset is selected. Existing identities/replay and
 original-model authority remain. GPUP-6 is next and requires its bounded adaptive
 interface/contract before behavior; no audit/rollback/promotion/demotion is implicit
 in GPUP-5. Later quantization and precision requirements remain pending.
-Carry forward 1324.210639253 campaign GPU seconds, including the prior
-902.574545061 and GPUP-5's 421.636094192; never reset the ledger or archived evidence.
+The [FP32 latency diagnosis](docs/benchmarks/lp-fp32-slowdown-diagnosis.md) adds
+213 equal-work/profiler diagnostics under ADR-0020: convergence amplification,
+scaled-matrix bias and executor/correction overhead, with hardware counters denied.
+Carry forward 1467.266874696 campaign GPU seconds: the prior 1324.210639253 plus
+143.056235443 diagnostic screening seconds. Never reset the ledger or archived evidence.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

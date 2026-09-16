@@ -384,3 +384,15 @@ GPUP-5 acceptance mapping:
 - The report retains timeouts, native failures, range failures and unclosed gaps.
   COPT's unavailable native iteration/seed controls are explicit limitations.
   No supported recipe or validation/held-out result is selected.
+
+### GPUP-5 diagnostic follow-up acceptance
+
+[ADR-0020](../decisions/ADR-0020-fp32-latency-diagnosis.md) authorizes a separate
+bounded diagnosis, without changing the frozen study or numerical interfaces.
+[Diagnostic tests](../../tests/integration/test_lp_precision_diagnosis.py) check
+its 213-job schedule, exact representation arithmetic, historical ledger-prefix
+reporting, matching phase boundaries, explicit counter unavailability and the
+expected work-limit exit convention. The [report](../benchmarks/lp-fp32-slowdown-diagnosis.md)
+records equal-work repetitions, trace/endpoint launch agreement, all missing
+hardware counters, unchanged historical artifacts and charged diagnostic work.
+The native gate and final evidence identities are recorded in state/active-task.md.

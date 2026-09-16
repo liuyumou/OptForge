@@ -70,3 +70,20 @@ The [completed GPUP-5 report](../benchmarks/lp-fp32-gpup5.md) retains all 480
 attempts and explains the lower-precision coverage losses. Its ignored source
 archive/binary are the measured implementation. Final import-range hardening and
 additional device boundary acceptance do not change the frozen inputs or kernels.
+
+## Read-only latency diagnosis
+
+The [FP32 diagnosis](../benchmarks/lp-fp32-slowdown-diagnosis.md) documents the
+completed ADR-0020 diagnostic grid and separates equal-update timing from original
+model convergence. `python3 tools/diagnose_lp_precision.py` prints its frozen scope;
+--gpu uses the existing ledger/lease and requires the exact source's native receipt.
+It will not silently resume with changed source. The completed 213 jobs need no rerun.
+Use `python3 tools/analyze_lp_precision_diagnosis.py` for stored evidence and --cpu
+for original-versus-represented row diagnostics, after building the read-only Rust
+example lp_precision_diagnose in optimizer-experiment. Offline-import.json records
+how the saved profiler streams were decoded without additional GPU work.
+
+Historical reports now require their snapshot to be an intact settled prefix of
+the active canonical ledger and calculate their own totals from that snapshot.
+Later diagnostic spending remains charged to the active ledger. Do not reset either
+artifact directory or ledger to work around a provenance mismatch.
