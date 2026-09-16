@@ -196,6 +196,16 @@ original planning inputs from recursive link validation.
 
 ## LP integration CI fixtures
 
+On 2026-09-16, post-merge CPU CI run 35041476887 correctly timed out the
+coordinator-loss fixture but recorded 1.340948131 leased seconds against its
+one-second assertion. That assertion imposed a second wall-clock ceiling on
+teardown and durable output, independent of the requested 0.1-second solve and
+cleanup limits. The fixture now retains its existing three-second completion wait
+and checks timeout signal timing, terminated child status, lease coverage of full
+elapsed work and nonblocking lease reacquisition. Production supervision, study
+limits, charged overruns and all GPU behavior are unchanged. The failed hosted log
+is retained in artifacts/gpup4-pr-integration/main-ci-failure.log.
+
 Resolved during GPUP-2/3 PR review on 2026-09-15. The new archived-schema regression
 needs the e415918 Git tree, so CPU CI now fetches full history. A fresh native gate
 also exposed a startup-dependent lease test: its 150 ms parent sleep included
