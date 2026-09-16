@@ -46,3 +46,7 @@ pub use reduce::{ReductionOrder, SEGMENT, sequential_sum, sum, tree_sum};
 
 /// Experimental represented-operator checks and differential oracle.
 pub mod precision;
+
+/// Isolated ADR-0021 arithmetic; unavailable to ordinary runtime selectors.
+#[cfg(feature = "precision-research")]
+pub mod research;

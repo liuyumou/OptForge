@@ -12,6 +12,14 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- GPUP-5B isolates exact power-of-two/factored scaling and two/three-component
+  sparse products behind a research feature, with strict independent host evidence.
+  The [investigation](docs/benchmarks/lp-exact-components-gpup5b.md) restores FP64
+  certified coverage but retains negative component-product performance results.
+  Includes reproducible rounding analysis, future candidates and complete work,
+  memory and packing costs. Runtime interfaces, historical evidence and defaults
+  remain unchanged; no supported preset or adaptive recovery is introduced.
+
 - A [213-job FP32 latency investigation](docs/benchmarks/lp-fp32-slowdown-diagnosis.md)
   separates convergence loss, scaled-matrix error, guarded executor costs and fixed
   correction overhead. Includes equal-work timings, CUDA traces and exact-rational

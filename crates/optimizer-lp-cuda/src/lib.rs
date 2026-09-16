@@ -27,3 +27,7 @@ pub mod tuned;
 
 /// Explicit experimental binary32 execution.
 pub mod precision;
+
+/// Isolated research executor, never selected by runtime backends.
+#[cfg(feature = "precision-research")]
+pub mod research;

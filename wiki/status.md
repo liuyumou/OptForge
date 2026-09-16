@@ -12,7 +12,7 @@ evidence is recorded in [active task](../state/active-task.md).
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
 | Planned | Prioritized GPU LP precision track (GPUP-6 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); repeated-solve throughput and full MILP performance are later tracks |
-| Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and isolated COPT CPU/GPU PDLP controls; independently checked versioned endpoints, no supported precision recipe |
+| Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
 GPUP-0 has saved the [precision roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
@@ -39,8 +39,18 @@ consumption after that study was 1324.210639253 GPU seconds. The subsequent
 [213-job FP32 diagnosis](../docs/benchmarks/lp-fp32-slowdown-diagnosis.md) adds
 143.056235443 seconds, totaling 1467.266874696, with all history preserved. It
 separates extra iterations and representation error from executor/correction costs;
-no runtime change was made. GPUP-6 is next; adaptive recovery requires its bounded contract. No supported recipe is
-available. The campaign retains its eight GPU-hour cap; acceptance details remain
+no runtime change was made. The subsequent
+[GPUP-5B investigation](../docs/benchmarks/lp-exact-components-gpup5b.md) verifies
+all 840 attempts and isolates exact power-of-two/factored scaling and component
+products behind a research feature. Every new mode recovers 27/36 timing coverage;
+component cross-products remain slower on the larger profiled cases. Full native,
+device and all four scoped sanitizer gates pass. Its 697.211414922 study plus
+70.875589353 acceptance seconds are charged to screening, totaling 2235.353878971
+campaign seconds, with original artifacts and ledger prefixes intact. The
+[rounding analysis](../docs/benchmarks/lp-fp32-rounding-analysis.md) and
+[candidate register](../docs/plans/lp-precision-candidates.md) retain the diagnosis
+and future alternatives. GPUP-6 is next; adaptive recovery requires its bounded
+contract. No supported recipe is available. The campaign retains its eight GPU-hour cap; acceptance details remain
 in the active-task record.
 
 Solve records recompute objectives and violations independently of the backend. A

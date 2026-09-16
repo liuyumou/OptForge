@@ -87,3 +87,29 @@ Historical reports now require their snapshot to be an intact settled prefix of
 the active canonical ledger and calculate their own totals from that snapshot.
 Later diagnostic spending remains charged to the active ledger. Do not reset either
 artifact directory or ledger to work around a provenance mismatch.
+
+## Isolated exact-scaling/component research
+
+[ADR-0021](../decisions/ADR-0021-exact-scaling-components.md) defines GPUP-5B.
+The precision-research feature enables the lp_precision_research example in
+optimizer-experiment. It accepts `solve MODEL REQUEST EVIDENCE` and the CPU-only
+`verify MODEL REQUEST EVIDENCE`; requests and evidence are strict research-v1
+objects, independent of runtime backend settings. Request fields bind model,
+source tree, executable, code object, device, method, limits, profile and mode.
+Evidence retains original-model primal/dual witnesses, independently recomputed
+assessment, executed device, proposals/physical work, arithmetic truncation,
+packing time, bounds/step, memory, transfers and failures. Unknown physical work
+is explicit after device failure; component operation counts then describe the
+admitted proposals. No runtime backend selector enables this arithmetic.
+
+Provision only the separate object with `bash tools/setup_cuda_research.sh`.
+Do not rebuild historical code objects to reproduce this study. The frozen grid
+is benchmarks/configs/lp-research-v1.json. tools/benchmark_lp_research.py requires
+a matching full native gate receipt and uses the existing shared lease/ledger;
+it refuses changed execution identities and stops before exceeding its budget.
+Do not reset or repurpose the completed output directory for a new experiment.
+Read-only `python3 tools/analyze_lp_research.py --decode-traces` verifies archived
+endpoints, identities, history and budgets, and imports retained traces offline.
+The [report](../benchmarks/lp-exact-components-gpup5b.md) defines the limits of the
+results. CPU-only rounding/oracle reproduction uses tools/analyze_lp_rounding.py
+and tools/lp_research_oracle.py. No supported preset or adaptive recovery is added.

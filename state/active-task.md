@@ -1,5 +1,55 @@
 # Active Task
 
+## GPUP-5B: exact scaling and component sparse products (2026-09-16–17)
+
+Status: complete; all 840 attempts and required acceptance gates passed. The
+maintainer accepted ADR-0021 and SPEC-0012/0013 amendments before behavior.
+Feature-gated host scaling, separate research code object/executable and strict
+research-v1 evidence implement power-of-two/factored exact storage and two/three
+components with matched reconstructed-FP64/FP32-cross-product controls. Ordinary
+runtime schemas, selectors, code objects, replay and original-model authority
+remain. No correction, adaptive recovery or supported preset was added.
+
+The [report](../docs/benchmarks/lp-exact-components-gpup5b.md) retains all results:
+432 timings, 48 profiles, 336 equal-work runs and 24 Systems traces. All 840
+endpoints independently verify; all traces decode offline and match 1200 launches.
+Timing coverage is 27/36 for every new mode versus 12/36 for plain FP32 storage.
+Three-component cross-products recover convergence but cost 2.69x/2.67x native
+research update time on irregular-2048/dense_block-1024. Failures remain visible;
+no held-out/validation measurement or supported preset. The prior diagnosis is
+unchanged. The [rounding note](../docs/benchmarks/lp-fp32-rounding-analysis.md)
+reproduces every CPU claim and archived witness/hash; the
+[candidate register](../docs/plans/lp-precision-candidates.md) preserves future work.
+
+Acceptance: full pinned-native tools/check.sh on measured and final code, with
+435 Rust tests, 126 Python integration tests and 83 documentation pages on final
+source, plus format/clippy/dependency/replay/smoke checks. Independent Fraction
+fixtures cover reconstruction/products/sparse cancellation/transpose; CPU/device
+differentials cover all nine modes and controller boundaries. Memory refusal,
+cancellation, exhausted physical work, range/fault accounting and strict evidence
+mutations pass. All 51 regular device cases pass; all four scoped sanitizers run
+sequentially with zero errors/race warnings. All nine research modes pass the
+end-to-end preflight; the hardened final reader revalidates all 630 research
+endpoints. Evidence: artifacts/gpup5b-v1, artifacts/gpup5b-rounding-v1 and
+artifacts/gpup5b-acceptance (native-final.log, canonical device/sanitizer logs,
+final-verification.json, exact source/code identities and artifact indexes).
+Preliminary compile/CPU launcher/debug-audit records are retained. Post-measurement
+changes only strengthen CPU evidence checks, rational fixtures and reporting;
+measured numerical kernels/executor/controller are unchanged.
+
+Resources: four build jobs, CPU validation within four hours; GPU measurements and
+CPU acceptance run separately. New study 697.211414922/900 plus acceptance
+70.875589353/300 = 768.087004275/1200 screening seconds. Preserve prior
+1467.266874696 seconds: cumulative 2235.353878971/4502.574545061, with all original
+campaign/phase caps. All 854 new reservations settled. The 3288-event prefix SHA
+b3ca2739b1108a552b0423606ddd0cd94a8ed2323da1506098fa0150ba42bfef is intact;
+4996-event final ledger SHA
+737e1301cb31cf5d0ad0585aa81a4dc0b814615d39e4974827e504e880b11e5f.
+Historical artifact indexes and all their referenced files verify. GPUP-5's
+80.458622460 acceptance seconds remain separate and unchanged. Every GPU job used
+the shared host lease. No push/publication. Next ready task: GPUP-6; accept its
+bounded adaptive interface/contract before implementation.
+
 ## Standalone pelican bicycle animation (2026-09-16)
 
 Status: complete. User-requested creative artifact, separate from the optimizer

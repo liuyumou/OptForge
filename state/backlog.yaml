@@ -142,10 +142,16 @@ tasks:
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     handoff: docs/plans/gpup5-interface-handoff.md
     acceptance: "Versioned interface acceptance; original-model checks; range diagnostics; convergence and total-cost comparison; ADR-0020 equal-work, trace and representation diagnosis complete"
+  - id: GPUP-5B
+    title: Investigate exact scaling and component-based sparse products
+    status: complete
+    depends_on: [GPUP-5]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "ADR-0021 complete; reproduced rounding note and candidates; rational/device/full-native/sanitizer gates; all 840 attempts verified; coverage recovered, negative component latency retained"
   - id: GPUP-6
     title: Implement configurable audits and adaptive precision recovery
-    status: ready
-    depends_on: [GPUP-5]
+    status: planned
+    depends_on: [GPUP-5B]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     acceptance: "Fault-injected full rollback, reference correction, charged retries, cancellation, sticky promotion and guarded demotion"
   - id: GPUP-7

@@ -168,8 +168,10 @@ name = "optimizer-experiment"
 version = "0.1.0"
 dependencies = [
  "optimizer-core",
+ "optimizer-cuda-sys",
  "optimizer-extension",
  "optimizer-lp",
+ "optimizer-lp-cuda",
  "optimizer-solver",
  "serde",
  "serde_json",

@@ -43,3 +43,7 @@ pub const SEARCH_RECORD_SCHEMA: &str =
 
 /// Independently checked external LP study witnesses.
 pub mod lp_external;
+
+/// Strict isolated GPUP-5B study evidence; no runtime selector.
+#[cfg(feature = "precision-research")]
+pub mod lp_research;

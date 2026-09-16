@@ -1,5 +1,32 @@
 # Known Failures and Limitations
 
+## GPUP-5B exact representations recover coverage but component arithmetic is slower
+
+The [840-attempt research study](../docs/benchmarks/lp-exact-components-gpup5b.md)
+restores 27/36 certified timings with exact power-of-two/factored FP32 storage
+and with two/three-component products, versus 12/36 for ordinary scaled FP32
+storage. Existing runtime behavior and old failures remain unchanged. All new
+modes still exhaust work on scheduling-50x10, ta001 and ta011. Power-of-two scaling
+increases proposals on four development instances and its current extra host
+preparation costs time. Three-component cross-products take 2.69x/2.67x the native
+research update time on irregular-2048/dense_block-1024 and increase certified
+solve latency by 10.4%/13.8%. Exact representation is not an acceleration result.
+Two-component truncation works at these targets on this corpus; no universal
+accuracy guarantee or supported preset follows.
+
+The isolated prototype splits vectors per nonzero, stores per-coefficient exponents,
+and performs many FP64 compensated additions to recombine FP32 product/error pairs.
+Packing and metadata add storage/transfers; all are charged. Matched reconstruction
+controls and traces separate these costs from convergence. Hardware counters remain
+unavailable; no bandwidth/occupancy explanation is asserted. Raw traces initially
+need offline import with the existing isolated libdw; all 24 decode and match
+1200 launches without rerunning GPU work. No missing endpoint, numerical failure,
+timeout or fallback occurred among these 840 attempts. All old artifacts and the
+3288-event prefix are unchanged. See the preserved
+[rounding note](../docs/benchmarks/lp-fp32-rounding-analysis.md) and
+[candidates](../docs/plans/lp-precision-candidates.md). GPUP-6 requires its own
+bounded adaptive contract; no recovery or guard relaxation is implicit here.
+
 ## GPUP-5 FP32 coverage loss and external-control limits
 
 The [verified GPUP-5 study](../docs/benchmarks/lp-fp32-gpup5.md) retains all 480

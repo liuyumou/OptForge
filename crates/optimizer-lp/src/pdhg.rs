@@ -93,6 +93,14 @@ impl<'a> Engine<'a> {
     #[must_use]
     pub fn new(program: &'a LinearProgram, settings: LpSettings) -> Self {
         let preconditioner = Preconditioner::new(program, settings.preconditioner);
+        Self::with_preconditioner(program, settings, preconditioner)
+    }
+
+    fn with_preconditioner(
+        program: &'a LinearProgram,
+        settings: LpSettings,
+        preconditioner: Preconditioner,
+    ) -> Self {
         let row_scale = preconditioner.row().to_vec();
         let column_scale = preconditioner.column().to_vec();
 
@@ -160,6 +168,88 @@ impl<'a> Engine<'a> {
         // it diverges, so the margin is not a tuning constant.
         engine.step = if norm > 0.0 { 0.9 / norm } else { 1.0 };
         engine
+    }
+
+    /// Research-only exact power-of-two scaling, with explicit caller-supplied exponents.
+    #[cfg(feature = "precision-research")]
+    pub fn with_power2_scaling(
+        program: &'a LinearProgram,
+        settings: LpSettings,
+        row: &[i32],
+        column: &[i32],
+    ) -> Result<Self, &'static str> {
+        use crate::research::{exact_scale, scale_pow2};
+        if row.len() != program.row_count() || column.len() != program.column_count() {
+            return Err("scale_dimensions");
+        }
+        let make = |v: &[i32]| {
+            v.iter()
+                .map(|&e| {
+                    let s = scale_pow2(1.0, e);
+                    if s.is_finite() && s > 0.0 {
+                        Ok(s)
+                    } else {
+                        Err("scale_range")
+                    }
+                })
+                .collect::<Result<Vec<_>, _>>()
+        };
+        let scales = Preconditioner::explicit(make(row)?, make(column)?, settings.preconditioner);
+        let mut engine = Self::with_preconditioner(program, settings, scales);
+        engine.scaled_row_values = program
+            .row_major()
+            .entries()
+            .map(|(r, c, a)| {
+                exact_scale(
+                    a,
+                    row[r]
+                        .checked_add(column[c as usize])
+                        .ok_or("scale_exponent")?,
+                )
+            })
+            .collect::<Result<_, _>>()?;
+        engine.scaled_column_values =
+            crate::research::transpose(program, &engine.scaled_row_values);
+        engine.scaled_objective = program
+            .objective()
+            .iter()
+            .zip(column)
+            .map(|(&v, &e)| exact_scale(v, e))
+            .collect::<Result<_, _>>()?;
+        let bound = |v: f64, e: i32| {
+            if v.is_infinite() {
+                Ok(v)
+            } else {
+                exact_scale(v, e)
+            }
+        };
+        engine.scaled_column_lower = program
+            .columns()
+            .iter()
+            .zip(column)
+            .map(|(v, &e)| bound(v.lower, -e))
+            .collect::<Result<_, _>>()?;
+        engine.scaled_column_upper = program
+            .columns()
+            .iter()
+            .zip(column)
+            .map(|(v, &e)| bound(v.upper, -e))
+            .collect::<Result<_, _>>()?;
+        engine.scaled_row_lower = program
+            .rows()
+            .iter()
+            .zip(row)
+            .map(|(v, &e)| bound(v.lower, e))
+            .collect::<Result<_, _>>()?;
+        engine.scaled_row_upper = program
+            .rows()
+            .iter()
+            .zip(row)
+            .map(|(v, &e)| bound(v.upper, e))
+            .collect::<Result<_, _>>()?;
+        let norm = engine.spectral_norm();
+        engine.step = if norm > 0.0 { 0.9 / norm } else { 1.0 };
+        Ok(engine)
     }
 
     /// Restrict the experimental operator step without changing legacy construction.

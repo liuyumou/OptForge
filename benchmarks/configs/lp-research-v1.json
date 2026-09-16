@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "id": "gpup5b-v1",
+  "source_campaign": {
+    "path": "benchmarks/configs/lp-precision-v4.json",
+    "sha256": "b40217f3e5ce7260f903b8f16882a14c1fc0521c2c397871240e51d90da7ec48"
+  },
+  "configurations": [
+    {
+      "id": "tuned-fp64",
+      "backend": "cuda-lp-tuned",
+      "binary": "current",
+      "execution": {
+        "schema_version": 1,
+        "allocation": "resident",
+        "uploads": "necessary",
+        "reduction": "warp32_v1",
+        "fusion": "separate"
+      }
+    },
+    {
+      "id": "precision-fp64",
+      "backend": "cuda-lp-tuned",
+      "binary": "current",
+      "execution": {
+        "schema_version": 1,
+        "allocation": "resident",
+        "uploads": "necessary",
+        "reduction": "warp32_v1",
+        "fusion": "separate"
+      },
+      "precision": {
+        "schema_version": 1,
+        "matrix": "f64",
+        "product_operands": "f64",
+        "products": "f64",
+        "accumulation": "f64",
+        "working_state": "f64",
+        "updates": "f64",
+        "rounding": "nearest_even",
+        "correction_interval": null
+      }
+    },
+    {
+      "id": "storage-fp32",
+      "backend": "cuda-lp-tuned",
+      "binary": "current",
+      "execution": {
+        "schema_version": 1,
+        "allocation": "resident",
+        "uploads": "necessary",
+        "reduction": "warp32_v1",
+        "fusion": "separate"
+      },
+      "precision": {
+        "schema_version": 1,
+        "matrix": "f32",
+        "product_operands": "f64",
+        "products": "f64",
+        "accumulation": "f64",
+        "working_state": "f64",
+        "updates": "f64",
+        "rounding": "nearest_even",
+        "correction_interval": null
+      }
+    },
+    {
+      "id": "research-default-fp64",
+      "mode": "default-fp64"
+    },
+    {
+      "id": "research-power2-fp64",
+      "mode": "power2-fp64"
+    },
+    {
+      "id": "research-power2-fp32",
+      "mode": "power2-fp32"
+    },
+    {
+      "id": "research-factored-fp64",
+      "mode": "factored-fp64"
+    },
+    {
+      "id": "research-factored-fp32",
+      "mode": "factored-fp32"
+    },
+    {
+      "id": "research-components2-fp64",
+      "mode": "components2-fp64"
+    },
+    {
+      "id": "research-components3-fp64",
+      "mode": "components3-fp64"
+    },
+    {
+      "id": "research-components2-fp32",
+      "mode": "components2-fp32"
+    },
+    {
+      "id": "research-components3-fp32",
+      "mode": "components3-fp32"
+    }
+  ],
+  "profiles": [
+    "gpup-development-small-4",
+    "gpup-development-irregular-256",
+    "gpup-development-irregular-2048",
+    "gpup-development-dense_block-1024"
+  ],
+  "traces": [
+    "gpup-development-small-4",
+    "gpup-development-irregular-2048"
+  ],
+  "timing_repetitions": 3,
+  "profile_repetitions": 1,
+  "short_repetitions": 7,
+  "short_proposals": 200,
+  "planned_attempts": 840,
+  "prior_gpu_ns": 1467266874696,
+  "study_cap_seconds": 900,
+  "acceptance_cap_seconds": 300,
+  "cumulative_ceiling_ns": 4502574545061
+}

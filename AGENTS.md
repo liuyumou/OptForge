@@ -37,8 +37,20 @@ in GPUP-5. Later quantization and precision requirements remain pending.
 The [FP32 latency diagnosis](docs/benchmarks/lp-fp32-slowdown-diagnosis.md) adds
 213 equal-work/profiler diagnostics under ADR-0020: convergence amplification,
 scaled-matrix bias and executor/correction overhead, with hardware counters denied.
-Carry forward 1467.266874696 campaign GPU seconds: the prior 1324.210639253 plus
-143.056235443 diagnostic screening seconds. Never reset the ledger or archived evidence.
+The diagnosis reached 1467.266874696 campaign GPU seconds: the prior 1324.210639253
+plus 143.056235443 diagnostic screening seconds. Never reset the ledger or evidence.
+GPUP-5B is complete under ADR-0021: feature-gated exact scaling and two/three-component
+sparse products, separate research code object/executable and strict research-v1
+host evidence. Its [report](docs/benchmarks/lp-exact-components-gpup5b.md) verifies
+all 840 attempts and full native/device/four scoped sanitizer gates. New modes
+restore 27/36 timing coverage; component cross-products remain slower. Preserve
+the [rounding note](docs/benchmarks/lp-fp32-rounding-analysis.md) and
+[candidate register](docs/plans/lp-precision-candidates.md). No preset or adaptive
+recovery is selected. Carry forward 2235.353878971 campaign seconds, including
+697.211414922 GPUP-5B study and 70.875589353 acceptance screening seconds. All 4996
+ledger events retain the 3288-event prefix; the final ledger SHA-256 is
+737e1301cb31cf5d0ad0585aa81a4dc0b814615d39e4974827e504e880b11e5f.
+GPUP-6 remains next and requires its bounded adaptive contract before behavior.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

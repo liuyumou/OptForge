@@ -55,7 +55,11 @@ fn mul(a: f64, b: f64, width: LpWidth) -> Result<f64, &'static str> {
         Ok(p)
     }
 }
-fn norm_bound(engine: &Engine<'_>, rows: &[f64], cols: &[f64]) -> Result<f64, &'static str> {
+pub(crate) fn norm_bound(
+    engine: &Engine<'_>,
+    rows: &[f64],
+    cols: &[f64],
+) -> Result<f64, &'static str> {
     let program = engine.program();
     let maximum =
         |matrix: &crate::problem::Compressed, values: &[f64]| -> Result<f64, &'static str> {

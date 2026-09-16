@@ -1069,3 +1069,7 @@ mod tuned_cases;
 
 #[path = "device/precision.rs"]
 mod precision_cases;
+
+#[cfg(feature = "precision-research")]
+#[path = "device/research.rs"]
+mod research_cases;

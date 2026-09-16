@@ -375,3 +375,40 @@ GPUP-5 acceptance mapping (only bounded requirements, not GPUP-6 recovery):
 
 No adaptive audit, rollback, promotion/demotion, persistent precision checkpoint,
 quantization or supported-preset requirement is marked implemented by this slice.
+
+## GPUP-5B accepted bounded contract
+
+Accepted on 2026-09-16 under [ADR-0021](../decisions/ADR-0021-exact-scaling-components.md).
+Feature-gated explicit scaling and two/three-component sparse products use FP64
+control and original-model certification. Strict research-v1 requests/evidence
+are separate from runtime schemas and selectors. The frozen twelve-mode,
+840-attempt development study charges all work to the preserved campaign ledger,
+with 900 study/300 acceptance seconds inside existing ceilings. Numerical recovery
+remains GPUP-6. The rounding investigation is reproduced before GPU measurements.
+
+
+GPUP-5B implementation and acceptance mapping:
+
+- Explicit scaling, component reconstruction, coefficient range, conservative step
+  and canonical transpose: optimizer-lp research.rs and tests/research.rs.
+  Independent rational products and sparse cancellation/reduction-boundary fixtures
+  are checked by tools/lp_research_oracle.py and the Rust tests.
+- Isolated resident execution: optimizer-lp-cuda research.rs and the separately
+  provisioned cuda/lp_pdhg_research code object. No runtime selector or unsafe
+  boundary is added. Ordinary builds remain toolkit-free.
+- research_all_modes_match_independent_steps_across_controller_boundaries covers
+  all nine new modes, checkpoint/controller transitions and truncation accounting.
+  research_checkpoint_restore_and_exhausted_work_are_respected and
+  research_memory_admission_precedes_allocations_and_faults_preserve_state cover
+  admission, replay work and faults. Full-exponent device products cover subnormal
+  retention, overflow and nonzero-to-zero loss before projection.
+- Strict request/evidence, early cancellation, altered code identity, corrupted
+  witnesses and mislabeled devices: optimizer-experiment lp_research tests.
+  Assessment reuses original-model host validation/certification.
+- The [report](../benchmarks/lp-exact-components-gpup5b.md) and active-task record
+  bind exact measured identities, regular device and four sequential sanitizer
+  gates, full native gates and retained failures. GPUP-1 certification regressions
+  and existing FP64 trajectory/replay fixtures remain required and unchanged.
+
+This slice implements fixed research modes only. No adaptive, quantization or
+supported-preset requirement is marked complete by these observations.
