@@ -21,6 +21,10 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- A [GPUP-5 interface handoff](docs/plans/gpup5-interface-handoff.md) recommending
+  versioned experimental precision settings while preserving current backend/replay
+  compatibility. The interface decision remains pending before GPUP-5 behavior.
+
 - Experimental cuda-lp-tuned with explicit FP64 execution settings, resident buffers,
   necessary state uploads, deterministic warp32 reduction and two-kernel fusion.
   Versioned execution records and replay preserve existing backend/schema contracts.

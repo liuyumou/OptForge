@@ -1,5 +1,50 @@
 # Active Task
 
+## GPUP-4 PR integration and GPUP-5 interface handoff (2026-09-16)
+
+Status: in progress. The user authorized publishing the completed GPUP-4 branch,
+reviewing and merging its PR after required checks, synchronizing main, and deleting
+the completed feature branch. Preserve reference commits, ignored study archives,
+code objects and the canonical 902.574545061-second campaign ledger.
+
+Record the backend-interface recommendation in the GPUP-5 handoff and discovery
+paths. This is planning guidance: GPUP-5 precision behavior and any interface
+migration still require accepted contracts before implementation. No new study.
+Read CONTRIBUTING, release operations and known failures before work.
+Acceptance: complete diff/unsafe/dependency review, fresh full pinned-native gate,
+hosted CPU/docs/smoke checks for the reviewed head, verified merge ancestry and
+synchronized main before branch cleanup. Budget: 30 CPU wall minutes with four
+build jobs; at most five GPU acceptance minutes only if a runtime review repair
+requires them, sequentially under the shared lease. Existing device/sanitizer
+results apply to unchanged runtime. Integration receipts: artifacts/gpup4-pr-integration.
+
+Local review and acceptance complete; publication and hosted checks are next.
+Full pinned-native tools/check.sh passed in 18.889058079 seconds: 411 Rust tests,
+110 Python tests, 74 documentation pages, formatting/Clippy/rustdoc, dependency and
+license policy, artifact checks and recorded replay. No runtime change or additional
+GPU job was needed. Existing 41 regular device cases and eight scoped cases under
+each of all four sanitizers remain applicable, with the documented device limitation.
+
+Review covered the complete implementation diff, resident/restored state, bounded
+cancellation and physical work, padded memory admission, deterministic reductions
+and fusion, legacy schemas and code, strict execution/replay/provenance, fallback,
+ledger reservations/admission, pairing/coverage and report limitations. No blocking
+finding remains. The lockfile adds only a dev-dependency on existing serde_json;
+SHA-256 moved unchanged into core and no new unsafe boundary was introduced.
+
+Fresh read-only evidence verification checked all 640 trial records, 616 available
+endpoints and 5530 indexed files across the preserved original and correction rounds.
+The canonical ledger hash remains 35b58ef0b0d58637288801bac2bdaa32b65b97b42b429debcffc615768c7c543;
+study consumption is unchanged at 902.574545061 seconds. GitHub sign-in was restored
+with the maintainer's device authorization. Remote main is still the reference
+722e0b01aecc5875b44ae0a7124f7c1b41eeeeed, so no rebase is necessary.
+
+The [GPUP-5 interface handoff](../docs/plans/gpup5-interface-handoff.md) recommends
+versioned experimental precision settings, preserving existing backend identities
+and replay, and revisiting the reserved quantized selector before behavior. It is
+linked from AGENTS, the roadmap, SPEC-0012 and the GPUP-5 backlog entry; the interface
+decision remains pending. This documentation does not begin GPUP-5 implementation.
+
 ## GPUP-4: tuned FP64 execution (2026-09-15)
 
 Status: complete; all required gates and study evidence passed, ready for local

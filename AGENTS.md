@@ -26,8 +26,11 @@ GPUP-4 adds explicit experimental cuda-lp-tuned under ADR-0017, with the preserv
 first round and complete ADR-0018 correction documented in
 [the report](docs/benchmarks/lp-tuned-fp64-gpup4.md). Matched remains the general
 reference; scoped provisional fusion results are not supported presets. GPUP-5
-is next and requires its precision interfaces before behavior. Later precision
-requirements remain pending. Carry forward 902.574545061 campaign GPU seconds,
+is next and requires its precision interfaces before behavior. Read the
+[GPUP-5 interface handoff](docs/plans/gpup5-interface-handoff.md): preserve existing
+identities/replay and resolve one versioned experimental precision interface before
+adding another backend name. This is a recommendation awaiting contract acceptance.
+Later precision requirements remain pending. Carry forward 902.574545061 campaign GPU seconds,
 including the earlier 445.988045904 and GPUP-4's 456.586499157; never reset the
 ledger or archived evidence. GPUP-4's cumulative ceiling was 1345.988045904 seconds.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

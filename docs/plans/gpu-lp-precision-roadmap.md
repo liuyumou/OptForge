@@ -189,7 +189,11 @@ maximum. New automatic dispatch or portfolios require their own specification.
 
 ## Interfaces, documentation, and handoff
 
-The planned opt-in backend is `cuda-lp-quantized`; it is not available in slice 0.
+The originally planned opt-in backend name `cuda-lp-quantized` remains reserved
+and unavailable. Before GPUP-5, resolve the [interface handoff](gpup5-interface-handoff.md):
+prefer one experimental implementation with versioned precision settings and retain
+existing backend/replay compatibility. This recommendation requires specification
+acceptance before it changes the planned interface.
 Versioned settings will describe requested/executed arithmetic, quantization,
 audits, recovery, and resource limits. Versioned records preserve transitions,
 reasons, provenance, and host certification. Existing records remain readable and

@@ -128,6 +128,9 @@ execution by the pinned HiGHS adapter, distinct from FP64 numerical recovery.
 ## Interfaces
 
 Planned selection: `cuda-lp-quantized`, opt-in through the existing solve surface.
+Before GPUP-5, review the [interface handoff](../plans/gpup5-interface-handoff.md)
+and accept a selector/settings decision; its consolidation recommendation is not
+an accepted interface change.
 This name is reserved for later precision work and is not accepted by the current CLI. The Backend
 trait remains the runtime boundary. Its capability declaration needs an explicit
 mixed-arithmetic representation rather than falsely reporting F64-only execution.
