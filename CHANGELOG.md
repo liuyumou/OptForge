@@ -12,6 +12,9 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Fixed
 
+- Verify supervisor timeout and released lease ownership without imposing an
+  undeclared one-second cleanup ceiling in the coordinator-loss CI fixture.
+
 - Tuned execution reports actual buffer peaks on early stops and refuses mismatched
   residency settings. Execution enums reject object-wrapped names. Study archives
   preserve execute permission and check the exact prior campaign ledger prefix.

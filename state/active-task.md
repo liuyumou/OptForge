@@ -1,5 +1,32 @@
 # Active Task
 
+## GPUP-4 integration follow-up: supervisor timing fixture (2026-09-16)
+
+Status: fixture repair accepted locally; hosted integration is next.
+PR #3 and branch cleanup completed after all six pre-merge
+checks passed. The subsequent completion-documentation commit's CPU CI run
+35041476887 found a pre-existing fixture timing assumption: coordinator-loss
+supervision correctly reported timeout, but 1.340948131 leased seconds exceeded
+an arbitrary one-second assertion. Preserve its failed hosted log and receipts in
+artifacts/gpup4-pr-integration. Inspect the supervisor contract before changing tests.
+
+Objective: make the coordinator-loss fixture assert independent timeout, complete
+lease accounting and released ownership within its existing three-second outer
+wait. Keep solve/cleanup limits, production supervisor and all GPU/study behavior
+unchanged. Acceptance: targeted repeated fixture runs, full pinned-native gate,
+reviewed follow-up PR with hosted CPU/docs/smoke checks, main synchronization and
+branch cleanup. CPU only within the remaining integration budget; four build jobs.
+No new study or GPU work. GPUP-5 interface handoff remains the next feature task.
+
+Ten consecutive targeted coordinator-loss cases passed in 7.123434293 seconds.
+The full pinned-native gate passed in 18.939487085 seconds: 411 Rust tests,
+110 Python tests and 74 documentation pages, including all policy/replay checks.
+Review confirms this changes only test assertions and documentation. The existing
+three-second completion wait and 0.1-second solve/cleanup settings remain. Timeout
+signal timing, negative child status, complete lease timing and nonblocking lock
+reacquisition now establish the intended contract without assuming CI scheduling
+or durable output always fits an additional one-second ceiling.
+
 ## GPUP-4 PR integration and GPUP-5 interface handoff (2026-09-16)
 
 Status: complete. The user authorized publishing the completed GPUP-4 branch,

@@ -263,7 +263,19 @@ class SupervisorTests(unittest.TestCase):
             deadline=time.monotonic()+3
             while not (Path(tmp)/'job.worker.json').exists() and time.monotonic()<deadline:time.sleep(.02)
             info=read_json(Path(tmp)/'job.worker.json')
-            self.assertEqual(info['reason'],'timeout');self.assertLess(info['leased_ns'],NS)
+            self.assertEqual(info['reason'],'timeout')
+            self.assertEqual(info['signal_events'][0]['signal'],'SIGINT')
+            self.assertGreaterEqual(info['signal_events'][0]['elapsed_ns'],100_000_000)
+            self.assertIn(info['returncode'],[-signal.SIGINT,-signal.SIGKILL])
+            # The existing outer wait bounds completion. Lease time also includes
+            # teardown and durable output; loaded CI hosts can exceed one second.
+            # Check full accounting and released ownership instead of assuming a
+            # second, shorter wall-clock limit that the request does not declare.
+            self.assertGreaterEqual(info['leased_ns'],info['elapsed_ns'])
+            import fcntl
+            with (Path(tmp)/'lock').open('a+b') as lock:
+                fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+                fcntl.flock(lock,fcntl.LOCK_UN)
 
     def test_cpu_only_simulated_shared_lease_exclusion_and_queue_accounting(self):
         import fcntl
