@@ -2,7 +2,7 @@
 
 ## GPUP-4 PR integration and GPUP-5 interface handoff (2026-09-16)
 
-Status: in progress. The user authorized publishing the completed GPUP-4 branch,
+Status: complete. The user authorized publishing the completed GPUP-4 branch,
 reviewing and merging its PR after required checks, synchronizing main, and deleting
 the completed feature branch. Preserve reference commits, ignored study archives,
 code objects and the canonical 902.574545061-second campaign ledger.
@@ -18,7 +18,8 @@ build jobs; at most five GPU acceptance minutes only if a runtime review repair
 requires them, sequentially under the shared lease. Existing device/sanitizer
 results apply to unchanged runtime. Integration receipts: artifacts/gpup4-pr-integration.
 
-Local review and acceptance complete; publication and hosted checks are next.
+Local review, acceptance, publication, hosted checks, merge and branch cleanup
+are complete.
 Full pinned-native tools/check.sh passed in 18.889058079 seconds: 411 Rust tests,
 110 Python tests, 74 documentation pages, formatting/Clippy/rustdoc, dependency and
 license policy, artifact checks and recorded replay. No runtime change or additional
@@ -36,14 +37,35 @@ Fresh read-only evidence verification checked all 640 trial records, 616 availab
 endpoints and 5530 indexed files across the preserved original and correction rounds.
 The canonical ledger hash remains 35b58ef0b0d58637288801bac2bdaa32b65b97b42b429debcffc615768c7c543;
 study consumption is unchanged at 902.574545061 seconds. GitHub sign-in was restored
-with the maintainer's device authorization. Remote main is still the reference
-722e0b01aecc5875b44ae0a7124f7c1b41eeeeed, so no rebase is necessary.
+with the maintainer's device authorization. At pre-merge review, remote main was
+still the reference 722e0b01aecc5875b44ae0a7124f7c1b41eeeeed, so no rebase was needed.
 
 The [GPUP-5 interface handoff](../docs/plans/gpup5-interface-handoff.md) recommends
 versioned experimental precision settings, preserving existing backend identities
 and replay, and revisiting the reserved quantized selector before behavior. It is
 linked from AGENTS, the roadmap, SPEC-0012 and the GPUP-5 backlog entry; the interface
 decision remains pending. This documentation does not begin GPUP-5 implementation.
+
+[PR #3](https://github.com/liuyumou/OptForge/pull/3) merged as
+1982bbf8f4522f604f899983990ec0a7e849a10e. All six hosted CPU CI, Documentation and
+Benchmark Smoke push/pull-request runs passed for reviewed head
+7820ccf688bb759107386120505dee38cb3288c2. All 59 PR file blobs matched the reviewed
+local tree. The [author review](https://github.com/liuyumou/OptForge/pull/3#pullrequestreview-5217348891)
+is a self-review comment, not independent peer approval. The merge API required the
+reviewed SHA; the resulting tree matches it exactly and retains 4bca1a0, 722e0b0
+and e415918 ancestry.
+
+Local main was fast-forwarded to the merge. Remote feature-branch deletion required
+its expected head, then the merged local codex/gpup4-fp64-execution branch was
+removed. Study archives, reference code objects, ignored artifacts and the canonical
+ledger remain intact. No new GPU work, ruleset change or release tag was introduced.
+Machine-readable merge, review, hosted-run and preservation receipts are retained
+in artifacts/gpup4-pr-integration. This completion record follows the merge; GPUP-5
+remains the next bounded task, beginning with its pending interface decision.
+
+The completion documentation passed the full pinned-native gate in 30.104146154
+seconds (411 Rust tests, 110 Python tests, 74 documentation pages). Both local
+gate receipts are retained; no additional GPU time was consumed.
 
 ## GPUP-4: tuned FP64 execution (2026-09-15)
 
