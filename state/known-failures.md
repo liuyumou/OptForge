@@ -216,9 +216,13 @@ a full pinned-native gate pass. Production lock and supervisor code did not chan
 
 ## External configuration
 
-The origin remote is https://github.com/liuyumou/OptForge.git. Protected main,
-labeled GPU runner provisioning, and artifact retention still require hosting
-administration. Next step: configure these settings separately from Git syncing.
+The origin remote is https://github.com/liuyumou/OptForge.git. Main protection is
+configured and verified as of 2026-09-16 under the active
+[Protect main ruleset](https://github.com/liuyumou/OptForge/rules/23515452): required
+PRs, up-to-date GitHub Actions cpu/docs/smoke checks, resolved conversations, no
+force pushes or deletion, and no bypass actors. Human approval is not mandatory.
+See [release operations](../docs/operations/release.md#protected-main). Labeled GPU
+runner provisioning and artifact retention remain separate hosting administration.
 
 Publication state (verified 2026-09-15): GPUP-2/3, the baseline diagnosis and the
 CI/test review fixes are published and merged in
