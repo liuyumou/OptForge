@@ -1,5 +1,40 @@
 # Active Task
 
+## GitHub main protection (2026-09-16)
+
+Status: complete; main protection is active and independently verified.
+The user explicitly authorized protecting main on GitHub.
+Follow release operations: require CPU, documentation and smoke checks; prevent
+force pushes and deletion. Inspect existing rules and actual check identities
+before configuring protection. Require pull requests with current checks, while
+retaining the documented autonomous workflow without mandatory human approval.
+No administrator bypass is planned. Preserve repository visibility, source history,
+existing permissions and GPU/study evidence.
+
+Acceptance: validate the concrete ruleset request, read back active rules and their
+application to main, and record the final settings or any hosting-plan limitation.
+CPU administration/documentation only, bounded to 15 minutes; no GPU work.
+Evidence: artifacts/main-protection. Read release operations and known failures.
+
+Created active [ruleset 23515452](https://github.com/liuyumou/OptForge/rules/23515452),
+then independently read it back and checked the effective rules on main. GitHub
+reports main protected and current_user_can_bypass=never. Required cpu/docs/smoke
+contexts are bound to the observed GitHub Actions application ID 15368. PRs must
+be up to date and have resolved review conversations. Approving-review count is
+zero; no bypass actors, force pushes or branch deletion are allowed. Existing
+merge methods remain available. Main's source commit was unchanged by configuration.
+
+The exact request, response, verified ruleset and effective branch rules are saved
+under artifacts/main-protection. Updated release operations and resolved the stale
+main-protection blocker in known failures. Documentation uses a PR under the active
+rules; do not push completion records directly to main or disable protection.
+
+Full pinned-native acceptance passed in 18.739547708 seconds: 411 Rust tests,
+110 Python tests, 74 documentation pages and all policy/replay checks. No source,
+solver behavior, GPU work or study ledger changed. The documentation commit follows
+the newly enforced PR and hosted-check requirements; integration receipts are
+retained with the configuration evidence under artifacts/main-protection.
+
 ## GPUP-4 integration follow-up: supervisor timing fixture (2026-09-16)
 
 Status: complete; fixture repair reviewed, merged and its branch removed.

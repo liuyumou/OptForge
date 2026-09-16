@@ -10,6 +10,12 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Changed
+
+- Protect GitHub main with required PRs, current CPU/docs/smoke checks, resolved
+  conversations, and blocked force pushes/deletion. No actor bypasses the rules;
+  mandatory human approval remains disabled for the autonomous workflow.
+
 ### Fixed
 
 - Verify supervisor timeout and released lease ownership without imposing an
