@@ -10,6 +10,17 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Added
+
+- GPUP-5 adds explicit lp-precision-v1 on cuda-lp-tuned, canonical FP32 storage,
+  product/accumulation/state comparisons, fixed charged FP64 correction, guarded
+  conversion, conservative operator steps and v4 evidence/replay. Existing defaults
+  and records retain their meaning. Isolated COPT CPU/GPU PDLP study controls use
+  original-model host assessment; no runtime COPT dependency or preset is added.
+  See [precision operations](docs/operations/lp-precision.md).
+  The [480-attempt report](docs/benchmarks/lp-fp32-gpup5.md) retains lower certified
+  FP32 coverage; GPUP-6 adaptive recovery remains deferred.
+
 ### Changed
 
 - Protect GitHub main with required PRs, current CPU/docs/smoke checks, resolved

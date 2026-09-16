@@ -4,7 +4,7 @@ next_ready_milestone: C7
 # Capability milestones stay numbered as before. The user prioritized this
 # separate research track before C7 behavior; next_ready_task selects its slice.
 active_research_track: GPUP
-next_ready_task: GPUP-5
+next_ready_task: GPUP-6
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: M0
@@ -137,14 +137,14 @@ tasks:
     acceptance: "Isolated residency, transfer, kernel and fusion measurements; numerical and device gates"
   - id: GPUP-5
     title: Implement FP32 storage, computation and working-state comparisons
-    status: ready
+    status: complete
     depends_on: [GPUP-4]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     handoff: docs/plans/gpup5-interface-handoff.md
     acceptance: "Versioned interface acceptance; original-model checks; range diagnostics; convergence and total-cost comparison"
   - id: GPUP-6
     title: Implement configurable audits and adaptive precision recovery
-    status: planned
+    status: ready
     depends_on: [GPUP-5]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     acceptance: "Fault-injected full rollback, reference correction, charged retries, cancellation, sticky promotion and guarded demotion"

@@ -1,5 +1,43 @@
 # Active Task
 
+## GPUP-5: explicit FP32 comparisons and COPT baselines (2026-09-16)
+
+Status: complete; full native, device, sanitizer and frozen-study gates passed.
+Next ready task: GPUP-6, bounded adaptive contract before implementation.
+The maintainer accepted the complete plan before behavior (ADR-0019 and
+SPEC-0012/0013 amendments). cuda-lp-tuned now has strict lp-precision-v1, v4
+records/replay, canonical FP32 storage/products/accumulation/state and charged fixed
+FP64 correction. Original-model authority, prior behavior/code objects and unsafe
+boundaries remain. COPT 8.0.6 CPU/GPU PDLP uses isolated ignored Python 3.11 bindings;
+licenses remain in /root/copt80. No adaptive recovery or preset was introduced.
+
+Evidence: [GPUP-5 report](../docs/benchmarks/lp-fp32-gpup5.md),
+artifacts/gpup5-fp32-v1 and artifacts/gpup5-acceptance. All 480 attempts have verified
+endpoints, exact schedule/provenance and settled ledger entries. No missing/invalid
+endpoint, fallback or lease failure. Lower-precision failures remain in coverage.
+Full pinned-native final gate: 422 Rust tests, 116 Python tests, 77 documentation
+pages plus format/clippy/dependency/replay/smoke gates; native-final.log records the
+pass. The exact measured source also passed its pre-study gate (421/115/76).
+Final device suites: 47 cases.
+All six precision cases pass memcheck/racecheck/initcheck/synccheck sequentially on
+the original RTX 5090 with zero errors/race warnings. Six CLI/replay pairs and
+missing-code pinned HiGHS fallback pass. Native COPT original-model min/max,
+ranged-row and objective-constant fixtures pass; actual GPU preflight certifies.
+Initial callback/log-wording preflight failures are retained. Final source adds an
+independent device subnormal/tie/guard fixture and refuses COPT input coefficients
+at or below its native discard threshold; every frozen model is above it.
+
+Resources: four build jobs within a four-hour CPU validation ceiling. All GPU work
+used the shared one-device lease. Acceptance used 80.458622460 of its separate 900
+seconds. Study added 421.636094192 screening seconds to the preserved
+902.574545061 seconds, totaling 1324.210639253 of 4502.574545061 allowed seconds.
+The full 1902-event prefix SHA-256 remains
+35b58ef0b0d58637288801bac2bdaa32b65b97b42b429debcffc615768c7c543;
+final ledger SHA-256 is 66d8c2b0ee24ce050ee051c6dbea2184361abe2c2fc4a57b8ee202c001479ff0.
+Global 28800-second and original phase caps remain. No ledger, archive, seeds,
+thresholds, defaults or partitions were reset. Validation/held-out remain untouched.
+Known failures/CONTRIBUTING were read before work. No push or publication.
+
 ## GitHub main protection (2026-09-16)
 
 Status: complete; main protection is active and independently verified.

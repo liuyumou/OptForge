@@ -24,3 +24,6 @@ pub use residency::{
 };
 
 pub mod tuned;
+
+/// Explicit experimental binary32 execution.
+pub mod precision;

@@ -61,7 +61,7 @@ if ! awk '
     echo "acceptance gate: SPEC-0011 requirements 6 to 8 make the reduction order a contract" >&2
     exit 1
 fi
-if rg -n 'atomicAdd\(' cuda/lp_pdhg_tuned; then
+if rg -n 'atomicAdd\(' cuda/lp_pdhg_tuned cuda/lp_pdhg_precision; then
     echo "acceptance gate: atomic accumulation in tuned kernels" >&2
     exit 1
 fi

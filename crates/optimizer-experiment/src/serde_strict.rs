@@ -47,3 +47,23 @@ macro_rules! deserialize_object {
 }
 
 pub(crate) use deserialize_object;
+
+// Nullable fields in new strict documents must still be explicitly present.
+pub(crate) fn required<'de, D: serde::Deserializer<'de>, T: serde::Deserialize<'de>>(
+    d: D,
+) -> Result<T, D::Error> {
+    T::deserialize(d)
+}
+macro_rules! deserialize_required_object {
+ ($name:ident { $($field:ident: $ty:ty),+ $(,)? }) => {
+  impl<'de> serde::Deserialize<'de> for $name {
+   fn deserialize<D:serde::Deserializer<'de>>(deserializer:D)->Result<Self,D::Error>{
+    #[derive(serde::Deserialize)] #[serde(deny_unknown_fields)]
+    struct Fields { $(#[serde(deserialize_with="crate::serde_strict::required")] $field:$ty),+ }
+    let fields:Fields=$crate::serde_strict::object(deserializer)?;
+    Ok(Self{$($field:fields.$field),+})
+   }
+  }
+ };
+}
+pub(crate) use deserialize_required_object;

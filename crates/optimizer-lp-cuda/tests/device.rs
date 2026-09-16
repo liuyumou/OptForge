@@ -1066,3 +1066,6 @@ fn matched_control_endpoint_alignment_senses_and_repeatability() {
 
 #[path = "device/tuned.rs"]
 mod tuned_cases;
+
+#[path = "device/precision.rs"]
+mod precision_cases;

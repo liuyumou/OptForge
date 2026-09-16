@@ -43,3 +43,6 @@ pub use pdhg::{Decision, Engine, Iterate, Stop};
 pub use precondition::Preconditioner;
 pub use problem::{Compressed, LinearProgram, Range};
 pub use reduce::{ReductionOrder, SEGMENT, sequential_sum, sum, tree_sum};
+
+/// Experimental represented-operator checks and differential oracle.
+pub mod precision;

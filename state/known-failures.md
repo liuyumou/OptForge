@@ -1,5 +1,33 @@
 # Known Failures and Limitations
 
+## GPUP-5 FP32 coverage loss and external-control limits
+
+The [verified GPUP-5 study](../docs/benchmarks/lp-fp32-gpup5.md) retains all 480
+attempts. Matched/tuned/precision FP64 certify 27/36 timings; FP32 storage,
+products, accumulation and fixed master correction certify 12/36, and FP32 working
+state 6/36. Storage-only modes exhaust work; product modes stop on guarded
+nonzero-to-zero product loss. Fixed correction every 32 steps does not restore
+coverage and can substantially increase transfers and host work. Reproduce with
+benchmarks/configs/lp-precision-v4.json and the archived measured source. Next:
+GPUP-6 must specify adaptive audits/recovery before changing numerical behavior;
+do not weaken guards, tolerances or work limits to hide these outcomes.
+
+COPT 8.0.6 CPU/GPU PDLP certify 27/36 and 24/36 timings. Scaling-256 remains
+feasible but unclosed; GPU ta001 witnesses are rejected by original-model checks.
+Its public API exposes neither a PDLP iteration-limit nor a seed control: record
+observed counts above 50000 as work_limit and enforce the common process deadline.
+Input coefficients at or below its nonzero 1e-10 threshold are refused rather than
+silently dropped; all frozen study coefficients exceed it. Native status and a
+requested GPUMode never establish host certification or actual GPU execution.
+Isolated setup phase timing is unavailable; native rounded solve time and combined
+setup/export/validation/startup overhead are recorded separately. COPT remains
+optional study tooling. Presolve-only or CPU fallback is not a GPU success.
+
+HiGHS scaling-256 run errors and irregular-2048 timeouts remain in this study, as
+do host time/work limits. Preflight callback/log-parser failures are retained in
+the separate acceptance ledger. All six precision cases pass all four sanitizers
+on the original measurement GPU; GPUP-4's historical device limitation stays below.
+
 ## GPUP-4 launch setup failure, correction and remaining limits
 
 The first 320-attempt round lost 24 matched-reference timing endpoints because an
@@ -110,18 +138,19 @@ scaling-256 and timed out on irregular-2048, and host LP timed out on three
 scheduling cases. These unsuccessful outcomes are preserved evidence, not
 infrastructure gate failures or permission to weaken numerical targets.
 
-Low-precision experiments, cuda-lp-quantized, precision-settings and supported
-recipes remain unimplemented. SPEC-0012 is accepted for implemented GPUP-3 FP64
-control; later precision requirements remain pending. Opt-in cuda-lp-matched shares
+GPUP-5 implements precision settings and bounded FP32 comparisons under accepted
+SPEC-0012/0013 and ADR-0019. cuda-lp-quantized, adaptive recovery, lower-width
+quantization and supported recipes remain unavailable. Opt-in cuda-lp-matched shares
 host control. Legacy cuda-lp retains fixed control. The
 [matched study](../docs/benchmarks/lp-matched-fp64-gpup3.md) certified 27/36 timing
 trials for both matched CUDA and host, versus 6/36 for legacy CUDA. Scheduling-50x10,
-ta001 and ta011 remain infeasible at 50,000 matched iterations; no finite gap is
+ta001 and ta011 remain uncertified at 50,000 matched iterations; no finite gap is
 claimed for them. Small cases remain slower on GPU because setup dominates.
 Certified per-instance paired timings establish bounded development evidence only.
 The independent exact-rational certification regressions remain authoritative.
 The section heading retains its earlier link identity; the missing experiments
-here are precision comparisons and recipe selection, not baseline measurements.
+here are later precision/recovery comparisons and recipe selection; GPUP-5
+FP32 comparisons are now implemented and measured.
 
 Follow [the backlog](backlog.yaml) one slice at a time, preserving the study ledger
 and all failures. Validation and held-out models were generated/hash-checked only;

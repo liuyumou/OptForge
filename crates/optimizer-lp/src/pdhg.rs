@@ -162,6 +162,15 @@ impl<'a> Engine<'a> {
         engine
     }
 
+    /// Restrict the experimental operator step without changing legacy construction.
+    pub fn restrict_step(&mut self, step: f64) -> Result<(), &'static str> {
+        if !step.is_finite() || step <= 0.0 || step > self.step {
+            return Err("invalid restricted step");
+        }
+        self.step = step;
+        Ok(())
+    }
+
     /// The preconditioner this engine applied, for the record.
     #[must_use]
     pub fn preconditioner(&self) -> &Preconditioner {

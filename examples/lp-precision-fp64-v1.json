@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "matrix": "f64",
+  "product_operands": "f64",
+  "products": "f64",
+  "accumulation": "f64",
+  "working_state": "f64",
+  "updates": "f64",
+  "rounding": "nearest_even",
+  "correction_interval": null
+}

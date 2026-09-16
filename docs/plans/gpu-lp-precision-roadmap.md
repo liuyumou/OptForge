@@ -85,8 +85,13 @@ attempts, including 24 reference launch failures, and a separately frozen comple
 approved 900-second supplement; cumulative use is 902.574545061 of the exact
 1345.988045904 ceiling. Every configuration certifies 27/36 timings. Matched remains
 the general reference; fused warp32 is provisional only on three named development
-instances. GPUP-5 is next. No validation/held-out solve, precision preset or
-publication occurred.
+instances. GPUP-5 now adds explicit FP32 comparisons and COPT CPU/GPU PDLP
+controls under ADR-0019. Its [report](../benchmarks/lp-fp32-gpup5.md) verifies all
+480 attempts and adds 421.636094192 screening seconds, for 1324.210639253 cumulative
+seconds beneath the 4502.574545061 slice ceiling. FP64 controls retain 27/36 timing
+coverage, versus 12/36 for FP32 storage/products/accumulation/master correction and
+6/36 for FP32 working state. GPUP-6 is next after completed acceptance. No
+validation/held-out solve, supported preset or publication occurred.
 
 ## Numerical design and candidate methods
 
@@ -190,10 +195,9 @@ maximum. New automatic dispatch or portfolios require their own specification.
 ## Interfaces, documentation, and handoff
 
 The originally planned opt-in backend name `cuda-lp-quantized` remains reserved
-and unavailable. Before GPUP-5, resolve the [interface handoff](gpup5-interface-handoff.md):
-prefer one experimental implementation with versioned precision settings and retain
-existing backend/replay compatibility. This recommendation requires specification
-acceptance before it changes the planned interface.
+and unavailable. GPUP-5 resolves the [interface handoff](gpup5-interface-handoff.md)
+under accepted ADR-0019: explicit lp-precision-v1 extends cuda-lp-tuned, preserving
+absent-setting behavior, prior code identities and replay compatibility.
 Versioned settings will describe requested/executed arithmetic, quantization,
 audits, recovery, and resource limits. Versioned records preserve transitions,
 reasons, provenance, and host certification. Existing records remain readable and

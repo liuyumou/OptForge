@@ -1,12 +1,12 @@
 # SPEC-0013: Bounded LP Precision Experiments
 
-Status: accepted; GPUP-2 implemented and measured; later slices pending
+Status: accepted; GPUP-2 through GPUP-5 implemented and measured; later slices pending
 Scope: LP-only development measurement, ablations, evidence, and recipe selection
 Owner: experiment tooling and numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: bootstrap (first commit containing this document)
 Supersedes: none; extends SPEC-0007 for a separately versioned LP study
-Implementation: GPUP-2 CLI/backend observations and tools/ LP harness; GPUP-3 through GPUP-10 pending
+Implementation: bounded LP harness, matched/tuned FP64 and FP32 studies, external COPT witnesses; GPUP-6 through GPUP-10 pending
 Tests: implementation mapping below; [baseline evidence](../benchmarks/lp-baseline-gpup2.md)
 
 ## Purpose
@@ -14,7 +14,7 @@ Tests: implementation mapping below; [baseline evidence](../benchmarks/lp-baseli
 Make a precision recipe an experimentally supported conclusion. The selected
 objective is certified single-solve latency, and the first campaign is bounded to
 eight GPU-hours under [ADR-0013](../decisions/ADR-0013-lp-precision-study.md).
-Numerical authority remains [SPEC-0011](SPEC-0011-gpu-lp-backend.md) and the future
+Numerical authority remains [SPEC-0011](SPEC-0011-gpu-lp-backend.md) and accepted
 [SPEC-0012](SPEC-0012-mixed-precision-lp.md), never this performance contract.
 
 This is development/validation tooling over the project's LP solve boundary,
@@ -350,3 +350,37 @@ GPU seconds and 445.988045904 cumulative seconds. All 12 development instances
 received three repetitions; four received separate profiles. Validation/held-out
 partitions remain unmeasured. Low-precision ablations and recipe selection remain
 pending. Full native and scoped device/sanitizer evidence is recorded in active task.
+
+## GPUP-5 accepted bounded contract
+
+Accepted by the maintainer on 2026-09-16, before behavior.
+[ADR-0019](../decisions/ADR-0019-fp32-lp-comparisons.md) defines the normative
+precision combinations, fixed correction, versioned interfaces, external COPT
+controls, frozen study and exact budgets. It supersedes the pending selector
+recommendation: precision extends cuda-lp-tuned; absent settings retain old
+behavior. Adaptive recovery and supported presets remain deferred. The
+[GPUP-5 report](../benchmarks/lp-fp32-gpup5.md) records all 480 independently verified
+endpoints, costs, failures and the exact 1324.210639253-second cumulative ledger.
+Full native acceptance before measurement, final device/sanitizer evidence and
+final-source acceptance are recorded in state/active-task.md.
+
+
+GPUP-5 acceptance mapping:
+
+- Strict lp-campaign/trial/endpoint/solve-record v4 plus external-witness/endpoint v1
+  retain all prior readers and original schema bytes. PrecisionTests checks the
+  frozen 480-attempt grid, exact carry-forward budget, unchanged seeds/limits,
+  required settings and unsupported combinations.
+- External authority: Rust external-certify/external-verify reconstruct original
+  minimization/maximization and ranged-row evidence, reject changed witnesses and
+  mislabelled GPU execution. Native COPT fixtures include objective constants.
+  Duplicate/unknown/missing fields and altered provenance are refused. Import
+  refuses values COPT could silently discard; all frozen inputs pass that guard.
+- tools/report_lp_precision.py checks all 480 original-model endpoints, exact
+  schedule/configuration/provenance, raw references, paired results, actual GPU
+  logs and COPT library identities, settled work and preserved ledger prefix.
+  Profile observations include original/represented operator bounds, conversion,
+  memory/transfers, physical proposals/corrections and COPT aggregate setup costs.
+- The report retains timeouts, native failures, range failures and unclosed gaps.
+  COPT's unavailable native iteration/seed controls are explicit limitations.
+  No supported recipe or validation/held-out result is selected.

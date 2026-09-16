@@ -78,7 +78,8 @@ def recover_intents(directory, attempts):
 
 def run_trial(value, identity, instance, configuration, repetition, order, mode,
               binary, directory, ledger, base_provenance, protocol_hash=None, code_directory=None):
-    gpu=configuration['backend'] in ('cuda-lp','cuda-lp-matched','cuda-lp-tuned')
+    gpu=configuration['backend'] in ('cuda-lp','cuda-lp-matched','cuda-lp-tuned','copt-gpu-pdlp')
+    external=configuration['backend'].startswith('copt-')
     activity=None
     if gpu:
         from lp_activity import ActivityPause
@@ -119,7 +120,17 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
         execution_path=directory/(identity+'.execution.json')
         write_json(execution_path,configuration['execution'])
         args+=['--lp-execution',str(execution_path)]
+    if 'precision' in configuration:
+        precision_path=directory/(identity+'.precision.json');write_json(precision_path,configuration['precision'])
+        args+=['--lp-precision',str(precision_path)]
     if gpu: args+=['--device',value['device']]
+    if external:
+        args=[str(ROOT/'artifacts/gpup5-copt/venv/bin/python'),'-B',str(ROOT/'tools/lp_copt.py'),
+              '--model',str(model),'--config',str(directory/'solve.json'),'--output',str(evidence),'--binary',str(binary)]
+        if gpu:args+=['--gpu','--device',value['device']]
+        args=['/usr/bin/env','COPT_HOME=/root/copt80','COPT_LICENSE_DIR=/root/copt80',
+              'LD_LIBRARY_PATH=/usr/local/cuda/lib64'+(':'+os.environ['LD_LIBRARY_PATH'] if os.environ.get('LD_LIBRARY_PATH') else ''),
+              *([] if gpu else ['CUDA_VISIBLE_DEVICES=']),*args]
     if code_directory is not None:
         args=['/usr/bin/env','AI_OPTIMIZER_CUDA_DIR='+str(code_directory),*args]
     request={k:value['limits'][k] for k in ['solve_seconds','cleanup_seconds','host_rss_bytes','poll_ms','output_bytes']}
@@ -128,7 +139,7 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
     request_path=directory/(identity+'.request.json');write_json(request_path,request)
     # One second covers the bounded supervisor's setup/lease teardown overhead.
     reservation=ledger.reserve(identity,value['limits']['solve_seconds']+value['limits']['cleanup_seconds']+(4 if gpu else 1),
-                               resource='gpu' if gpu else 'cpu')
+                               resource='gpu' if gpu else 'cpu',phase='screening' if value['schema_version']==4 else 'baseline')
     worker_args=['bash',str(ROOT/'tools/gpu_job.sh'),value['device'],'--lp-study-request',str(request_path)] if gpu else [sys.executable,str(ROOT/'tools/lp_supervise.py'),'--request',str(request_path)]
     worker=subprocess.Popen(worker_args,pass_fds=(ledger.lock.fileno(),))
     try:
@@ -157,21 +168,35 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
     if evidence.exists():
         trial['endpoint']=reference(directory,evidence)
         try:
-            endpoint=validate('endpoint',read_json(evidence))
-            if endpoint['model_sha256']!=instance['model']['sha256'] or endpoint['requested_backend']!=configuration['backend']:
-                raise ValueError('endpoint model/backend differs from scheduled trial')
-            if endpoint['record']['options']!=value['solve']:
-                raise ValueError('endpoint solve configuration differs')
-            if endpoint['record']['backend']!='highs' and endpoint['record'].get('lp_settings')!=value['lp_settings']:
-                raise ValueError('endpoint LP settings differ')
-            if configuration['backend']=='cuda-lp-tuned':
-                execution=endpoint['execution']
-                if execution['settings']!=configuration['execution'] or execution['code_object_sha256']!=base_provenance['code_object_sha256']:
-                    raise ValueError('endpoint execution differs from scheduled trial')
-            verified=subprocess.run([str(binary),'lp-study','verify','--model',str(model),'--evidence',str(evidence)],
-                                    capture_output=True,text=True,timeout=12)
-            if verified.returncode:raise ValueError('independent verifier rejected endpoint: '+verified.stderr[:1000])
-            trial['executed_backend']=endpoint['record']['backend'];trial['endpoint_class']=endpoint['assessment']['classification']
+            if external:
+                from validate_artifacts import validator
+                endpoint=read_json(evidence);validator('lp-external-endpoint-v1.schema.json').validate(endpoint)
+                witness=endpoint['witness']
+                if witness['model_sha256']!=instance['model']['sha256'] or witness['requested_backend']!=configuration['backend'] or witness['options']!=value['solve']:
+                    raise ValueError('external model/backend/options differ')
+                if witness['library_sha256']!=base_provenance['copt_library_sha256'] or witness['binding_sha256']!=base_provenance['copt_binding_sha256']:
+                    raise ValueError('external binary identity differs')
+                verified=subprocess.run([str(binary),'lp-study','external-verify','--model',str(model),'--evidence',str(evidence)],capture_output=True,text=True,timeout=12)
+                if verified.returncode:raise ValueError('independent external verification failed: '+verified.stderr[:1000])
+                trial['executed_backend']=witness['executed_backend'];trial['endpoint_class']=endpoint['assessment']['classification']
+            else:
+                endpoint=validate('endpoint',read_json(evidence))
+                if endpoint['model_sha256']!=instance['model']['sha256'] or endpoint['requested_backend']!=configuration['backend']:
+                    raise ValueError('endpoint model/backend differs from scheduled trial')
+                if endpoint['record']['options']!=value['solve']:
+                    raise ValueError('endpoint solve configuration differs')
+                if endpoint['record']['backend']!='highs' and endpoint['record'].get('lp_settings')!=value['lp_settings']:
+                    raise ValueError('endpoint LP settings differ')
+                if configuration['backend']=='cuda-lp-tuned':
+                    execution=endpoint['execution']
+                    if execution['settings']!=configuration['execution'] or execution['code_object_sha256']!=base_provenance['code_object_sha256']:
+                        raise ValueError('endpoint execution differs from scheduled trial')
+                verified=subprocess.run([str(binary),'lp-study','verify','--model',str(model),'--evidence',str(evidence)],
+                                        capture_output=True,text=True,timeout=12)
+                if verified.returncode:raise ValueError('independent verifier rejected endpoint: '+verified.stderr[:1000])
+                if 'precision' in configuration and endpoint.get('precision',{}).get('settings')!=configuration['precision']:
+                    raise ValueError('endpoint precision differs from scheduled trial')
+                trial['executed_backend']=endpoint['record']['backend'];trial['endpoint_class']=endpoint['assessment']['classification']
         except Exception as error:
             # Preserve a malformed artifact and its hash; it cannot become a success.
             trial.update(status='invalid_evidence',error=str(error)[:2000])

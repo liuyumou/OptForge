@@ -168,6 +168,7 @@ impl HighsBackend {
 fn interrupted_record(model: &Model, options: &SolveOptions) -> SolveRecord {
     SolveRecord {
         lp_execution: None,
+        lp_precision: None,
         schema_version: optimizer_core::SOLVE_RECORD_SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
         backend: BACKEND_NAME.to_string(),

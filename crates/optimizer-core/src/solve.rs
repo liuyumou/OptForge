@@ -422,6 +422,9 @@ pub struct SolveRecord {
     /// Explicit tuned execution, present only in version 3.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub lp_execution: Option<crate::LpExecutionRecord>,
+    /// Explicit precision settings, only in solve-record v4.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub lp_precision: Option<crate::LpPrecisionSettings>,
 }
 
 // Track explicit field presence: a v2 record with lp_execution:null is still
@@ -435,6 +438,18 @@ enum ExecutionField {
 impl<'de> serde::Deserialize<'de> for ExecutionField {
     fn deserialize<D: serde::Deserializer<'de>>(d: D) -> Result<Self, D::Error> {
         <Option<crate::LpExecutionRecord> as serde::Deserialize>::deserialize(d).map(Self::Present)
+    }
+}
+#[derive(Default)]
+enum PrecisionField {
+    #[default]
+    Missing,
+    Present(Option<crate::LpPrecisionSettings>),
+}
+impl<'de> serde::Deserialize<'de> for PrecisionField {
+    fn deserialize<D: serde::Deserializer<'de>>(d: D) -> Result<Self, D::Error> {
+        <Option<crate::LpPrecisionSettings> as serde::Deserialize>::deserialize(d)
+            .map(Self::Present)
     }
 }
 impl<'de> serde::Deserialize<'de> for SolveRecord {
@@ -459,6 +474,8 @@ impl<'de> serde::Deserialize<'de> for SolveRecord {
             lp_settings: Option<crate::LpSettings>,
             #[serde(default)]
             lp_execution: ExecutionField,
+            #[serde(default)]
+            lp_precision: PrecisionField,
         }
         let fields: Fields = crate::serde_strict::object(deserializer)?;
         if fields.schema_version == 2 && !matches!(fields.lp_execution, ExecutionField::Missing) {
@@ -466,6 +483,15 @@ impl<'de> serde::Deserialize<'de> for SolveRecord {
                 "v2 solve record contains lp_execution",
             ));
         }
+        if fields.schema_version < 4 && !matches!(fields.lp_precision, PrecisionField::Missing) {
+            return Err(serde::de::Error::custom(
+                "legacy solve record contains lp_precision",
+            ));
+        }
+        let lp_precision = match fields.lp_precision {
+            PrecisionField::Missing => None,
+            PrecisionField::Present(v) => v,
+        };
         let lp_execution = match fields.lp_execution {
             ExecutionField::Missing => None,
             ExecutionField::Present(value) => value,
@@ -487,6 +513,7 @@ impl<'de> serde::Deserialize<'de> for SolveRecord {
             options: fields.options,
             lp_settings: fields.lp_settings,
             lp_execution,
+            lp_precision,
         })
     }
 }
@@ -523,7 +550,7 @@ impl SolveRecord {
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         let record: Self = serde_json::from_slice(bytes)
             .map_err(|error| ValidationError::new(ErrorKind::Document, error.to_string()))?;
-        if ![SOLVE_RECORD_SCHEMA_VERSION, 3].contains(&record.schema_version) {
+        if ![SOLVE_RECORD_SCHEMA_VERSION, 3, 4].contains(&record.schema_version) {
             return Err(ValidationError::new(
                 ErrorKind::Document,
                 format!("unsupported solve schema_version {}", record.schema_version),
@@ -536,9 +563,21 @@ impl SolveRecord {
 
     /// Enforce version/backend/settings agreement without changing legacy emission.
     pub fn check_execution(&self) -> Result<(), ValidationError> {
+        if (self.schema_version == 4) != self.lp_precision.is_some() {
+            return Err(ValidationError::new(
+                ErrorKind::Document,
+                "precision/version differs",
+            ));
+        }
+        if let Some(p) = &self.lp_precision {
+            let e = self.lp_execution.as_ref().ok_or_else(|| {
+                ValidationError::new(ErrorKind::Document, "missing precision execution")
+            })?;
+            p.validate_execution(e.settings)?;
+        }
         let valid = match (&self.lp_execution, self.schema_version) {
             (None, 2) => self.backend != "cuda-lp-tuned",
-            (Some(execution), 3) => {
+            (Some(execution), 3 | 4) => {
                 execution.settings.validate()?;
                 self.backend == "cuda-lp-tuned"
                     && self.lp_settings.is_some()

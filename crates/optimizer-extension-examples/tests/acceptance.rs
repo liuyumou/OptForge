@@ -343,6 +343,7 @@ impl Backend for ExactBackend {
         let document = model.document();
         let mut record = SolveRecord {
             lp_execution: None,
+            lp_precision: None,
             schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: document.model_id.clone(),
             backend: "exact".to_string(),

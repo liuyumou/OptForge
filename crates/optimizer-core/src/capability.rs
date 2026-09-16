@@ -78,6 +78,8 @@ impl ProblemClass {
 pub enum Arithmetic {
     /// IEEE-754 binary64 throughout.
     F64,
+    /// Explicit binary32/binary64 execution; details in lp-precision-v1.
+    MixedF32F64,
 }
 
 /// Whether a backend executes on a device.
@@ -130,7 +132,7 @@ pub enum DeviceClass {
 #[serde(deny_unknown_fields)]
 #[non_exhaustive]
 pub struct BackendCapabilities {
-    /// Must equal [`CAPABILITY_SCHEMA_VERSION`].
+    /// Legacy FP64 uses [`CAPABILITY_SCHEMA_VERSION`]; explicit mixed arithmetic uses 2.
     schema_version: u32,
     name: &'static str,
     version: String,
@@ -192,7 +194,11 @@ impl BackendCapabilities {
             ));
         }
         Ok(Self {
-            schema_version: CAPABILITY_SCHEMA_VERSION,
+            schema_version: if arithmetic == Arithmetic::MixedF32F64 {
+                2
+            } else {
+                CAPABILITY_SCHEMA_VERSION
+            },
             name,
             version,
             problem_classes,
@@ -262,6 +268,7 @@ impl BackendCapabilities {
         let class = ProblemClass::of(model);
         SolveRecord {
             lp_execution: None,
+            lp_precision: None,
             schema_version: crate::SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: self.name.to_string(),

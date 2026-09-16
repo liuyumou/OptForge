@@ -60,11 +60,14 @@ pub struct LpEndpoint {
     /// Requested tuned execution and actual work, including fallback.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub execution: Option<optimizer_core::LpExecutionDiagnostics>,
+    /// Precision arithmetic and physical correction work, only in endpoint v4.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub precision: Option<optimizer_core::LpPrecisionDiagnostics>,
 }
 deserialize_object!(LpEndpoint { schema_version: u32, model_sha256: String,
     requested_backend: String, record: SolveRecord, row_ids: Vec<u32>,
     diagnostics: LpDiagnostics, assessment: Assessment, fallback_reason: Option<String>,
-    payload_sha256: String, control: Option<LpControlDiagnostics>, execution: Option<optimizer_core::LpExecutionDiagnostics> });
+    payload_sha256: String, control: Option<LpControlDiagnostics>, execution: Option<optimizer_core::LpExecutionDiagnostics>, precision: Option<optimizer_core::LpPrecisionDiagnostics> });
 
 fn invalid(message: impl Into<String>) -> ValidationError {
     ValidationError::new(ErrorKind::Document, message)
@@ -209,6 +212,8 @@ impl LpEndpoint {
         );
         let bytes = if self.schema_version == 1 {
             serde_json::to_vec(&payload)
+        } else if self.schema_version == 4 {
+            serde_json::to_vec(&(payload, &self.control, &self.execution, &self.precision))
         } else if self.schema_version == 3 {
             serde_json::to_vec(&(payload, &self.control, &self.execution))
         } else {
@@ -246,7 +251,9 @@ impl LpEndpoint {
                 .push("matched controller state unavailable before completion".into());
         }
         let mut endpoint = Self {
-            schema_version: if tuned {
+            schema_version: if diagnostics.precision.is_some() {
+                4
+            } else if tuned {
                 3
             } else if matched {
                 2
@@ -258,6 +265,7 @@ impl LpEndpoint {
             } else {
                 None
             },
+            precision: diagnostics.precision.take(),
             control,
             model_sha256: crate::sha256::hex(model_bytes),
             requested_backend,
@@ -278,7 +286,7 @@ impl LpEndpoint {
     /// # Errors
     /// Rejects altered or inconsistent evidence, without trusting its status label.
     pub fn verify(&self, model_bytes: &[u8]) -> Result<(), ValidationError> {
-        if ![1, 2, 3].contains(&self.schema_version)
+        if ![1, 2, 3, 4].contains(&self.schema_version)
             || self.model_sha256 != crate::sha256::hex(model_bytes)
             || self.payload_sha256 != self.payload_hash()?
         {
@@ -298,7 +306,7 @@ impl LpEndpoint {
                     || self.requested_backend == "cuda-lp-matched"
                     || self.record.backend == "cuda-lp-matched"))
             || (self.schema_version == 2 && self.requested_backend != "cuda-lp-matched")
-            || (self.schema_version == 3 && self.requested_backend != "cuda-lp-tuned")
+            || (self.schema_version >= 3 && self.requested_backend != "cuda-lp-tuned")
             || (self.schema_version < 3
                 && (self.execution.is_some()
                     || self.requested_backend == "cuda-lp-tuned"
@@ -334,7 +342,44 @@ impl LpEndpoint {
 
     fn verify_control(&self) -> Result<(), ValidationError> {
         self.record.check_execution()?;
-        if self.schema_version == 3 {
+        if (self.schema_version == 4) != self.precision.is_some() {
+            return Err(invalid("precision endpoint version differs"));
+        }
+        if let Some(p) = &self.precision {
+            p.settings.validate_execution(
+                self.execution
+                    .as_ref()
+                    .ok_or_else(|| invalid("missing execution"))?
+                    .settings,
+            )?;
+            if self.record.backend == "cuda-lp-tuned"
+                && self.record.lp_precision.as_ref() != Some(&p.settings)
+            {
+                return Err(invalid("precision requested/executed differs"));
+            }
+            if p.rejected_steps > p.proposed_steps
+                || p.correction_steps > p.proposed_steps
+                || !p.correction_max_error.is_finite()
+                || p.correction_max_error < 0.0
+                || !p.matrix_max_error.is_finite()
+                || p.matrix_max_error < 0.0
+                || p.operator_bounds
+                    .is_some_and(|b| b.iter().any(|v| !v.is_finite() || *v < 0.0))
+                || p.step.is_some_and(|v| !v.is_finite() || v <= 0.0)
+            {
+                return Err(invalid("invalid precision observations"));
+            }
+            if let Some(c) = &self.control
+                && let Some(physical) = c.physical_iterations
+                && (p.proposed_steps.checked_add(p.correction_steps) != Some(physical)
+                    || p.proposed_steps.checked_sub(p.rejected_steps) != Some(c.logical_iterations)
+                    || p.proposed_steps.checked_mul(6) != Some(c.device_kernel_launches)
+                    || (c.stop == "numerical_failure") != p.guard.is_some())
+            {
+                return Err(invalid("precision work accounting differs"));
+            }
+        }
+        if self.schema_version >= 3 {
             let e = self
                 .execution
                 .as_ref()
@@ -362,7 +407,9 @@ impl LpEndpoint {
                 } else {
                     6
                 };
-                if steps.checked_mul(per_step) != Some(e.kernel_launches) {
+                if self.schema_version == 3
+                    && steps.checked_mul(per_step) != Some(e.kernel_launches)
+                {
                     return Err(invalid("tuned completed work/launch count differs"));
                 }
             }
@@ -400,6 +447,7 @@ impl LpEndpoint {
                 "interrupted",
                 "time_limit",
                 "device_failure",
+                "numerical_failure",
             ]
             .contains(&control.stop.as_str())
         {
@@ -416,6 +464,7 @@ impl LpEndpoint {
                 Termination::TimeLimit => "time_limit",
                 Termination::IterationLimit => "iteration_limit",
                 Termination::BackendFailure => "device_failure",
+                Termination::NumericalFailure if self.schema_version == 4 => "numerical_failure",
                 _ => return Err(invalid("inconsistent matched termination")),
             };
             if expected != control.stop
@@ -451,7 +500,7 @@ impl LpEndpoint {
         let shape: serde_json::Value =
             serde_json::from_slice(bytes).map_err(|e| invalid(e.to_string()))?;
         let mut base_shape = shape.clone();
-        if matches!(shape["schema_version"].as_u64(), Some(2 | 3))
+        if matches!(shape["schema_version"].as_u64(), Some(2..=4))
             && let Some(control) = base_shape
                 .as_object_mut()
                 .and_then(|map| map.remove("control"))
@@ -474,7 +523,16 @@ impl LpEndpoint {
                 return Err(invalid("missing or unknown control field"));
             }
         }
-        if shape["schema_version"] == 3 {
+        if shape["schema_version"] == 4 {
+            let p = base_shape
+                .as_object_mut()
+                .and_then(|m| m.remove("precision"))
+                .ok_or_else(|| invalid("missing precision observations"))?;
+            if !p.is_object() {
+                return Err(invalid("precision observations require object"));
+            }
+        }
+        if matches!(shape["schema_version"].as_u64(), Some(3 | 4)) {
             let execution = base_shape
                 .as_object_mut()
                 .and_then(|m| m.remove("execution"))
@@ -574,20 +632,22 @@ impl LpEndpoint {
             .ok_or_else(|| invalid("phase measurements require an object"))?;
         if phases.keys().any(|name| {
             !(allowed.contains(&name.as_str())
-                || (matches!(shape["schema_version"].as_u64(), Some(2 | 3))
-                    && name == "controller"))
+                || (matches!(shape["schema_version"].as_u64(), Some(2..=4))
+                    && name == "controller")
+                || (shape["schema_version"] == 4
+                    && ["precision_preparation", "fp64_correction"].contains(&name.as_str())))
         }) {
             return Err(invalid("unknown LP measurement phase"));
         }
         let result: Self = serde_json::from_slice(bytes).map_err(|e| invalid(e.to_string()))?;
-        if ![1, 2, 3].contains(&result.schema_version) {
+        if ![1, 2, 3, 4].contains(&result.schema_version) {
             return Err(invalid("unsupported endpoint version"));
         }
         Ok(result)
     }
 }
 
-fn unique_json(bytes: &[u8]) -> Result<(), ValidationError> {
+pub(crate) fn unique_json(bytes: &[u8]) -> Result<(), ValidationError> {
     struct Unique;
     impl<'de> serde::Deserialize<'de> for Unique {
         fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
@@ -718,6 +778,62 @@ mod tests {
         e.execution = Some(execution);
         e.payload_sha256 = e.payload_hash().unwrap();
         e
+    }
+
+    #[test]
+    fn precision_v4_binds_settings_physical_work_and_legacy_absence() {
+        let mut e = tuned_observed();
+        let p = optimizer_core::LpPrecisionSettings::from_json(include_bytes!(
+            "../../../examples/lp-storage-fp32-v1.json"
+        ))
+        .unwrap();
+        e.schema_version = 4;
+        e.record.schema_version = 4;
+        e.record.lp_precision = Some(p.clone());
+        e.execution.as_mut().unwrap().settings.fusion = optimizer_core::Fp64Fusion::Separate;
+        e.record.lp_execution.as_mut().unwrap().settings = e.execution.as_ref().unwrap().settings;
+        let steps = e.control.as_ref().unwrap().physical_iterations.unwrap();
+        e.execution.as_mut().unwrap().kernel_launches = steps * 6;
+        e.control.as_mut().unwrap().device_kernel_launches = steps * 6;
+        let mut observations = optimizer_core::LpPrecisionDiagnostics::new(p);
+        observations.proposed_steps = steps;
+        e.precision = Some(observations);
+        e.payload_sha256 = e.payload_hash().unwrap();
+        e.verify(MODEL).unwrap();
+        let bytes = serde_json::to_vec(&e).unwrap();
+        let round = LpEndpoint::from_json(&bytes).unwrap();
+        round.verify(MODEL).unwrap();
+        assert_eq!(e, round);
+        for mutation in 0..6 {
+            let mut wrong = e.clone();
+            match mutation {
+                0 => wrong.precision.as_mut().unwrap().correction_steps += 1,
+                1 => {
+                    wrong
+                        .precision
+                        .as_mut()
+                        .unwrap()
+                        .settings
+                        .correction_interval = Some(32)
+                }
+                2 => {
+                    wrong
+                        .record
+                        .lp_execution
+                        .as_mut()
+                        .unwrap()
+                        .code_object_sha256 = "b".repeat(64)
+                }
+                3 => wrong.schema_version = 3,
+                4 => wrong.record.lp_precision = None,
+                _ => wrong.precision.as_mut().unwrap().guard = Some("injected".into()),
+            }
+            wrong.payload_sha256 = wrong.payload_hash().unwrap();
+            assert!(wrong.verify(MODEL).is_err(), "{mutation}");
+        }
+        let mut legacy = serde_json::to_value(tuned_observed().record).unwrap();
+        legacy["lp_precision"] = serde_json::Value::Null;
+        assert!(SolveRecord::from_json(&serde_json::to_vec(&legacy).unwrap()).is_err());
     }
 
     #[test]
