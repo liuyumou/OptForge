@@ -1,5 +1,35 @@
 # Known Failures and Limitations
 
+## Consumer Blackwell runs FP64, double compares and 64-bit conversions at 1/64 rate
+
+The [root-cause note](../docs/benchmarks/lp-fp64-pipe-root-cause.md) shows that every
+scheme recombining FP32 partials in FP64 is bound by the sm_120 FP64 pipe, that the
+guarded research FP64 control is 2.4x slower than tuned for the same reason, and
+that the twelve development instances are launch-bound. Hardware counters remain
+unavailable (`ERR_NVGPUCTRPERM` even as root), so pipe attribution rests on static
+instruction counts plus timing. GPUP-5C addresses the removable costs under
+[ADR-0022](../docs/decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md);
+context creation (about 208 ms per solve) remains outside every arithmetic change.
+Do not extrapolate dense Tensor Core or data-center FP64 throughput to this host.
+
+## GPUP-5C: double-float underflows on scheduling LPs; large instances are host-bound and CLI-refused
+
+The [GPUP-5C report](../docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies 806 of 850
+admitted attempts; 24 planned attempts are missing because the 1500-second study cap
+was reached, and 44 admitted attempts have no endpoint (34 CLI refusals of inputs
+above the SPEC-0005 16 MiB bound, 10 research 30-second timeouts on mixed-65536).
+`doublefloat-fp32` certifies 24/36 at 1e-9 and 27/36 at 1e-6 and 1e-4: its losses are
+strict nonzero-to-zero product guards on scheduling-20x5 (1e-9 only), scheduling-50x10,
+ta001, ta011 and mixed-65536, where FP32 products of decaying iterates fall below
+the binary32 normal range. Do not weaken that guard; a block-exponent or per-vector
+scale is the prerequisite. Fused FP64 is slower than integer-guarded separate FP64
+on 32768-65536-row instances because its per-block update warp serializes eight
+rows' vector arithmetic. On those instances preconditioning and research preparation
+cost about one second each, dwarfing kernel time; the CLI cannot read them at all.
+Tolerance tiers 1e-6/1e-4 recover FP32 storage coverage to 24/36 and 30/36 but do
+not change certified latency materially. Reproduce with
+benchmarks/configs/lp-research-v2.json and the archived measured executables.
+
 ## GPUP-5B exact representations recover coverage but component arithmetic is slower
 
 The [840-attempt research study](../docs/benchmarks/lp-exact-components-gpup5b.md)

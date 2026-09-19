@@ -103,7 +103,8 @@ impl Request {
     pub fn validate(&self) -> Result<(), ValidationError> {
         self.options.validate()?;
         self.method.validate()?;
-        if self.schema_version != 1
+        if !(self.schema_version == 1 || self.schema_version == 2)
+            || (self.schema_version == 1 && self.mode.v2())
             || !self.device.starts_with("GPU-")
             || self.device_buffer_bytes == 0
             || [
@@ -190,7 +191,7 @@ impl Evidence {
     }
     pub fn new(bytes: &[u8], witness: Witness) -> Result<Self, ValidationError> {
         let result = Self {
-            schema_version: 1,
+            schema_version: witness.request.schema_version,
             assessment: assessment(bytes, &witness)?,
             payload_sha256: crate::sha256::hex(&serde_json::to_vec(&witness).map_err(invalid)?),
             witness,
@@ -203,7 +204,7 @@ impl Evidence {
         w.request.validate()?;
         let model = Model::from_json(bytes)?;
         let p = LinearProgram::new(&model)?;
-        if self.schema_version != 1
+        if self.schema_version != w.request.schema_version
             || &w.request != expected
             || w.request.model_sha256 != crate::sha256::hex(bytes)
             || self.payload_sha256 != crate::sha256::hex(&serde_json::to_vec(w).map_err(invalid)?)
@@ -256,8 +257,13 @@ impl Evidence {
         };
         let launches = w
             .proposed_steps
-            .checked_mul(6)
+            .checked_mul(w.request.mode.launches_per_step())
             .ok_or_else(|| invalid("work overflow"))?;
+        let fusion = if w.request.mode.fused() {
+            optimizer_core::Fp64Fusion::PrimalDual
+        } else {
+            optimizer_core::Fp64Fusion::Separate
+        };
         if w.vector_splits != if k > 0 { products } else { 0 }
             || w.fp32_cross_products != cross_products
         {
@@ -270,7 +276,7 @@ impl Evidence {
                     allocation: optimizer_core::WorkingAllocation::Resident,
                     uploads: optimizer_core::StateUploads::Necessary,
                     reduction: optimizer_core::Fp64Reduction::Warp32V1,
-                    fusion: optimizer_core::Fp64Fusion::Separate,
+                    fusion,
                 }
                 || exec.code_object_sha256.as_ref() != Some(&w.request.code_object_sha256)
                 || (w.physical_steps.is_some() && exec.kernel_launches != launches)
@@ -447,7 +453,11 @@ pub fn solve(
             ))
             .map_err(|e| e.to_string())?,
         );
-        e.settings.fusion = optimizer_core::Fp64Fusion::Separate;
+        e.settings.fusion = if w.request.mode.fused() {
+            optimizer_core::Fp64Fusion::PrimalDual
+        } else {
+            optimizer_core::Fp64Fusion::Separate
+        };
         e.code_object_sha256 = Some(w.request.code_object_sha256.clone());
         w.diagnostics.execution = Some(e);
         let phase = w.diagnostics.start();
@@ -608,8 +618,17 @@ mod tests {
         extra["unknown"] = true.into();
         assert!(Request::from_json(&serde_json::to_vec(&extra).unwrap()).is_err());
         extra = serde_json::to_value(&r).unwrap();
-        extra["schema_version"] = 2.into();
+        extra["schema_version"] = 3.into();
         assert!(Request::from_json(&serde_json::to_vec(&extra).unwrap()).is_err());
+        // ADR-0022 modes require research-v2; version 2 still admits the nine v1 modes.
+        extra = serde_json::to_value(&r).unwrap();
+        extra["mode"] = "doublefloat-fp32".into();
+        assert!(Request::from_json(&serde_json::to_vec(&extra).unwrap()).is_err());
+        extra["schema_version"] = 2.into();
+        let v2 = Request::from_json(&serde_json::to_vec(&extra).unwrap()).unwrap();
+        assert_eq!(v2.mode, Mode::DoublefloatFp32);
+        extra["mode"] = "components3-fp32".into();
+        assert!(Request::from_json(&serde_json::to_vec(&extra).unwrap()).is_ok());
         extra = serde_json::to_value(&r).unwrap();
         extra["mode"] = serde_json::json!({"components3-fp32":null});
         assert!(Request::from_json(&serde_json::to_vec(&extra).unwrap()).is_err());
@@ -657,6 +676,40 @@ mod tests {
         let mut w = e.witness;
         w.status = "accepted".into();
         assert!(Evidence::new(MODEL, w).is_err());
+    }
+    #[test]
+    fn fused_modes_bind_two_launches_and_the_fused_execution_setting() {
+        let mut r = request();
+        r.schema_version = 2;
+        r.mode = Mode::FusedFp64;
+        let token = CancellationToken::new();
+        token.cancel();
+        let e = solve(MODEL, r.clone(), &token).unwrap();
+        assert_eq!(e.schema_version, 2);
+        assert_eq!(e.witness.request.mode.launches_per_step(), 2);
+        let separate = |fusion| {
+            let mut w = e.witness.clone();
+            let mut execution = LpExecutionDiagnostics::new(Fp64ExecutionSettings {
+                schema_version: 1,
+                allocation: optimizer_core::WorkingAllocation::Resident,
+                uploads: optimizer_core::StateUploads::Necessary,
+                reduction: optimizer_core::Fp64Reduction::Warp32V1,
+                fusion,
+            });
+            execution.code_object_sha256 = Some(w.request.code_object_sha256.clone());
+            w.execution = Some(execution);
+            Evidence::new(MODEL, w)
+        };
+        assert!(separate(optimizer_core::Fp64Fusion::Separate).is_err());
+        assert!(separate(optimizer_core::Fp64Fusion::PrimalDual).is_ok());
+        let mut altered = e.clone();
+        altered.schema_version = 1;
+        assert!(altered.verify(MODEL, &r).is_err());
+        assert_eq!(
+            Mode::DoublefloatFp32.fused_kernels(),
+            Some(("research_fused_primal_df", "research_fused_dual_df"))
+        );
+        assert_eq!(Mode::IntguardFp64.launches_per_step(), 6);
     }
     #[test]
     fn altered_execution_policy_and_overflowing_work_are_rejected() {

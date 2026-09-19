@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; slices 0-5 and GPUP-5B complete; slices 6-10 pending
+Status: approved roadmap; slices 0-5 and GPUP-5B complete; GPUP-5C complete; slices 6-10 pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: bootstrap (first commit containing this document)
@@ -63,6 +63,7 @@ be refined from earlier findings, with changes recorded before affected trials.
 | GPUP-4 | Optimize FP64 residency, allocation, transfers, sparse kernels, and compatible fusion where profiling supports it. | Complete: explicit cuda-lp-tuned, bitwise/rational/native/device/scoped sanitizer gates, preserved original failures and a complete 320-attempt correction. Coverage remains 27/36 for every configuration; scoped provisional fusion gains, matched remains the general reference. |
 | GPUP-5 | Add FP32 matrix storage with FP64 arithmetic, then FP32 products/accumulation. Compare FP64 masters and FP32 working state with FP64 correction. | Original-model checks, convergence and range diagnostics, measured storage/arithmetic/state costs. |
 | GPUP-5B | Investigate exact power-of-two/factored scaling and two/three-component sparse products. | Matched FP64 controls, independent rational/device checks, 840 frozen development attempts and preserved rounding analysis; [report](../benchmarks/lp-exact-components-gpup5b.md). |
+| GPUP-5C | Act on the FP64-pipe root cause: integer-pipe guards, fused two-launch schedule, double-float FP32 pairs, explicit tolerance tiers and a frozen development extension. | ADR-0022; twelve-mode bitwise device differentials, rational pair fixtures, research-v2 evidence, manifest v2 with byte-identical v1 outputs, charged 874-attempt study. |
 | GPUP-6 | Add configurable audits, checkpoints, replay, promotion, and optional demotion, initially FP32/FP64. | Fault injection covering full rollback, budget/cancellation accounting, sticky promotion, and guarded demotion. |
 | GPUP-7 | Add quantization candidates through a common experimental interface; establish sparse FP8 before Tensor Core comparisons. | Quantizer checks, transpose consistency, guarded conversion, screening against the FP64 control. |
 | GPUP-8 | Add hybrid sparse/dense-tile Tensor Core execution on the actual Blackwell target, including FP16/BF16 and FP8 where supported. | Differential kernels, same-device repeatability, sanitizers, and padding/packing-inclusive single-solve timings. |
@@ -104,7 +105,18 @@ cross-products retained. Full native/device/scoped sanitizer gates pass. New wor
 uses 697.211414922 study + 70.875589353 acceptance screening seconds, totaling
 2235.353878971 cumulative seconds within 4502.574545061 and campaign/phase caps.
 All 4996 ledger events preserve the original 3288-event prefix and old artifacts.
-GPUP-6 is next and requires its bounded adaptive contract; no preset is selected.
+
+GPUP-5C follows under [ADR-0022](../decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md)
+after the [root-cause note](../benchmarks/lp-fp64-pipe-root-cause.md) attributed the
+component slowdown to the sm_120 FP64 pipe rather than Tensor Cores or bandwidth.
+It adds three research modes, research-v2 evidence, tolerance tiers 1e-6/1e-4 and a
+development extension. Its [report](../benchmarks/lp-fp64-pipe-gpup5c.md) verifies
+806 of 850 admitted attempts; integer guards and fusion are bitwise identical to
+the FP64 control and halve update cost, double-float is fastest at scale but
+underflows on scheduling LPs, and tiers recover FP32 storage coverage. It used
+1493.313474227 study plus 66.091602441 acceptance seconds, for 3794.758955639
+cumulative inside the unchanged ceiling. GPUP-6 follows and requires its bounded
+adaptive contract; no preset is selected.
 
 ## Numerical design and candidate methods
 

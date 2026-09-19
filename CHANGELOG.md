@@ -12,6 +12,16 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- GPUP-5C (ADR-0022) records the [FP64-pipe root cause](docs/benchmarks/lp-fp64-pipe-root-cause.md)
+  of the component slowdown and adds feature-gated research modes `intguard-fp64`,
+  `fused-fp64` and `doublefloat-fp32` with CPU oracles, research-v2 evidence,
+  explicit tolerance tiers, a frozen lp-manifest-v2 development extension with a
+  `mixed` family, a protocol-driven research harness and charged diagnostic
+  microbenchmarks. The [report](docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies
+  806 of 850 admitted attempts. Runtime selectors, defaults, existing code objects,
+  v1 artifacts and the 1e-9 default remain unchanged; no supported preset or
+  recovery is added.
+
 - GPUP-5B isolates exact power-of-two/factored scaling and two/three-component
   sparse products behind a research feature, with strict independent host evidence.
   The [investigation](docs/benchmarks/lp-exact-components-gpup5b.md) restores FP64

@@ -209,3 +209,150 @@ fn sparse_products_and_transpose_obey_independent_rational_error_bounds() {
     }
     println!("independent rational sparse error / allowance maximum: {worst}");
 }
+
+#[test]
+fn adr0022_modes_round_trip_and_declare_their_schedules() {
+    let strings = [
+        ("intguard-fp64", Mode::IntguardFp64, 6, false, false),
+        ("fused-fp64", Mode::FusedFp64, 2, true, false),
+        ("doublefloat-fp32", Mode::DoublefloatFp32, 2, true, true),
+        ("default-fp64", Mode::DefaultFp64, 6, false, false),
+        ("components3-fp32", Mode::Components3Fp32, 6, false, false),
+    ];
+    for (text, mode, launches, fused, df) in strings {
+        let json = serde_json::to_string(&mode).unwrap();
+        assert_eq!(json, format!("\"{text}\""));
+        assert_eq!(serde_json::from_str::<Mode>(&json).unwrap(), mode);
+        assert_eq!(mode.launches_per_step(), launches);
+        assert_eq!(mode.fused(), fused);
+        assert_eq!(mode.doublefloat(), df);
+        assert_eq!(mode.fused_kernels().is_some(), fused);
+        assert_eq!(
+            mode.v2(),
+            matches!(
+                mode,
+                Mode::IntguardFp64 | Mode::FusedFp64 | Mode::DoublefloatFp32
+            )
+        );
+        assert_eq!(
+            mode.components(),
+            if text.starts_with("components3") {
+                3
+            } else {
+                0
+            }
+        );
+    }
+    assert!(serde_json::from_str::<Mode>("\"fused-fp32\"").is_err());
+    assert_eq!(Mode::IntguardFp64.kernel(), "research_intguard64");
+}
+
+#[test]
+fn fp32_pairs_split_exactly_and_refuse_lost_or_subnormal_coefficients() {
+    use optimizer_core::{LpSettings, Model};
+    use optimizer_lp::{Engine, LinearProgram};
+    for x in [
+        0.0,
+        1.0 / 3.0,
+        -1.23456789012345,
+        1e30,
+        1e-30,
+        2.0_f64.next_down(),
+    ] {
+        let pair = Pair::split(x);
+        assert_eq!(f64::from(pair.hi), f64::from(x as f32));
+        // 48 significant bits: the pair error is below 2^-47 relative.
+        assert!(
+            (pair.value() - x).abs() <= x.abs() * 2.0_f64.powi(-47),
+            "{x}"
+        );
+        assert!(pair.lo.abs() <= (pair.hi.abs() * f32::EPSILON) / 2.0 + f32::MIN_POSITIVE);
+    }
+    let a = Pair::split(1.0 / 3.0);
+    let b = Pair::split(1.0 / 7.0);
+    let p = a.times(b);
+    assert!((p.value() - 1.0 / 21.0).abs() <= 2.0_f64.powi(-44) / 21.0);
+    let s = p.plus(Pair::split(-1.0 / 21.0));
+    assert!(s.value().abs() <= 2.0_f64.powi(-44) / 21.0);
+    let m = Model::from_json(include_bytes!("../../../examples/lp-model-v1.json")).unwrap();
+    let p = LinearProgram::new(&m).unwrap();
+    let e = Engine::new(&p, LpSettings::published(20, 4));
+    let op = Operator::new(&e, Mode::DoublefloatFp32).unwrap();
+    assert_eq!(transpose(&p, &op.rows), op.columns);
+    assert!(
+        op.matrix_tail_max <= 2.0_f64.powi(-47) * op.rows.iter().fold(0.0, |m, v| v.abs().max(m))
+    );
+    for bound in op.bounds {
+        assert!(op.step * bound <= 0.9);
+    }
+    let control = Operator::new(&e, Mode::DefaultFp64).unwrap();
+    assert_eq!(op.bounds[0], control.bounds[0]);
+    // The CPU pair oracle agrees with FP64 to the representation error on this model.
+    let x: Vec<f64> = (0..p.column_count())
+        .map(|j| 0.25 + j as f64 * 0.125)
+        .collect();
+    let fp64 = control.apply(&e, false, &x).unwrap();
+    let df = op.apply(&e, false, &x).unwrap();
+    for (a, b) in fp64.iter().zip(&df) {
+        assert!((a - b).abs() <= 1e-12 * (1.0 + a.abs()), "{a} {b}");
+    }
+}
+
+#[test]
+fn doublefloat_sparse_products_obey_independent_rational_error_bounds() {
+    use optimizer_core::{LpSettings, Model};
+    use optimizer_lp::{Engine, LinearProgram};
+    let data: serde_json::Value =
+        serde_json::from_str(include_str!("fixtures/research-doublefloat.json")).unwrap();
+    let number = |s: &serde_json::Value| {
+        f64::from_bits(u64::from_str_radix(s.as_str().unwrap(), 16).unwrap())
+    };
+    let mut worst = 0.0_f64;
+    for case in data["cases"].as_array().unwrap() {
+        let a: Vec<f64> = case["a"].as_array().unwrap().iter().map(number).collect();
+        let x: Vec<f64> = case["x"].as_array().unwrap().iter().map(number).collect();
+        let variables: Vec<_> = (0..a.len())
+            .map(|i| {
+                serde_json::json!({
+                    "id":i,"domain":"continuous","lower":{"kind":"finite","value":-1.0},
+                    "upper":{"kind":"finite","value":1.0}
+                })
+            })
+            .collect();
+        let terms: Vec<_> = a
+            .iter()
+            .enumerate()
+            .map(|(i, a)| serde_json::json!({"variable_id":i,"coefficient":a}))
+            .collect();
+        let model = Model::from_json(
+            &serde_json::to_vec(&serde_json::json!({
+                "schema_version":1,"model_id":"independent-doublefloat-rational","variables":variables,
+                "constraints":[{"id":0,"lower":{"kind":"finite","value":-1.0},
+                    "upper":{"kind":"finite","value":1.0},"terms":terms}],
+                "objective":{"sense":"minimize","offset":0.0,"terms":[]}
+            }))
+            .unwrap(),
+        )
+        .unwrap();
+        let p = LinearProgram::new(&model).unwrap();
+        let e =
+            Engine::with_power2_scaling(&p, LpSettings::published(8, 4), &[0], &vec![0; a.len()])
+                .unwrap();
+        let op = Operator::new(&e, Mode::DoublefloatFp32).unwrap();
+        let expected = &case["expected"];
+        let actual = op.apply(&e, false, &x).unwrap()[0];
+        let error = (actual - number(&expected["nearest"])).abs();
+        let allowance = expected["absolute_allowance"].as_f64().unwrap();
+        assert!(error <= allowance, "{error} > {allowance}");
+        worst = worst.max(error / allowance);
+        let transposed = op.apply(&e, true, &[0.75]).unwrap();
+        for ((actual, target), allowance) in transposed
+            .iter()
+            .zip(expected["transpose_nearest"].as_array().unwrap())
+            .zip(expected["transpose_allowance"].as_array().unwrap())
+        {
+            assert!((actual - number(target)).abs() <= allowance.as_f64().unwrap());
+        }
+    }
+    println!("independent rational double-float error / allowance maximum: {worst}");
+}

@@ -113,3 +113,22 @@ endpoints, identities, history and budgets, and imports retained traces offline.
 The [report](../benchmarks/lp-exact-components-gpup5b.md) defines the limits of the
 results. CPU-only rounding/oracle reproduction uses tools/analyze_lp_rounding.py
 and tools/lp_research_oracle.py. No supported preset or adaptive recovery is added.
+
+## GPUP-5C: FP64-pipe execution modes, tiers and extension
+
+[ADR-0022](../decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md) acts on
+the [root-cause note](../benchmarks/lp-fp64-pipe-root-cause.md). The same research
+executable accepts research-v2 requests for `intguard-fp64`, `fused-fp64` and
+`doublefloat-fp32`; version 1 requests remain valid for the nine GPUP-5B modes.
+The frozen protocol is benchmarks/configs/lp-research-v2.json, passed to
+`tools/benchmark_lp_research.py --protocol` and `tools/analyze_lp_research.py
+--protocol`; omitting the flag keeps GPUP-5B behavior. It records explicit
+tolerance tiers per configuration, a 30-second limit for the development
+extension instances materialized by `python3 tools/lp_generate.py --extension`
+under lp-manifest-v2, and its own identity prefix, caps and preserved ledger
+prefix. `bash tools/setup_cuda_diagnostics.sh` builds the cuda/diagnostics
+microbenchmarks; run them only through `tools/lp_research_budget.py --protocol
+benchmarks/configs/lp-research-v2.json --id microbench-... --seconds ...` so the
+time is charged. Their numbers are diagnostics, never solve-time evidence.
+The [GPUP-5C report](../benchmarks/lp-fp64-pipe-gpup5c.md) defines the limits of
+the results.

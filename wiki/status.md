@@ -49,8 +49,14 @@ device and all four scoped sanitizer gates pass. Its 697.211414922 study plus
 campaign seconds, with original artifacts and ledger prefixes intact. The
 [rounding analysis](../docs/benchmarks/lp-fp32-rounding-analysis.md) and
 [candidate register](../docs/plans/lp-precision-candidates.md) retain the diagnosis
-and future alternatives. GPUP-6 is next; adaptive recovery requires its bounded
-contract. No supported recipe is available. The campaign retains its eight GPU-hour cap; acceptance details remain
+and future alternatives. The [FP64-pipe root-cause note](../docs/benchmarks/lp-fp64-pipe-root-cause.md)
+attributes the component slowdown to the sm_120 FP64 pipe; GPUP-5C acts on it under
+[ADR-0022](../docs/decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md)
+with integer-pipe guards, a fused two-launch schedule, double-float FP32 pairs,
+explicit tolerance tiers and a frozen development extension; its
+[report](../docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies 806 of 850 attempts,
+raising cumulative consumption to 3794.758955639 seconds. GPUP-6 follows;
+adaptive recovery requires its bounded contract. No supported recipe is available. The campaign retains its eight GPU-hour cap; acceptance details remain
 in the active-task record.
 
 Solve records recompute objectives and violations independently of the backend. A

@@ -61,7 +61,7 @@ if ! awk '
     echo "acceptance gate: SPEC-0011 requirements 6 to 8 make the reduction order a contract" >&2
     exit 1
 fi
-if rg -n 'atomicAdd\(' cuda/lp_pdhg_tuned cuda/lp_pdhg_precision cuda/lp_pdhg_research; then
+if rg -n 'atomicAdd\(' cuda/lp_pdhg_tuned cuda/lp_pdhg_precision cuda/lp_pdhg_research cuda/diagnostics; then
     echo "acceptance gate: atomic accumulation in tuned kernels" >&2
     exit 1
 fi
@@ -100,7 +100,7 @@ if ! cargo deny --locked check; then
     echo "acceptance gate: retrying advisories against the cached database" >&2
     cargo deny --offline --locked check
 fi
-python3 tools/lp_generate.py
+python3 tools/lp_generate.py --extension
 python3 tools/validate_artifacts.py
 python3 -m unittest discover -s tests/integration -p 'test_*.py'
 # SPEC-0005 requirement 9: re-execute a record committed at an earlier revision.

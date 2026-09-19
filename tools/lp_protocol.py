@@ -42,7 +42,7 @@ def local(root, path):
 
 def validate(kind, value):
     version=value.get('schema_version',1)
-    if version not in (1,2,3,4) or (version>=2 and kind not in ('campaign','trial','endpoint')):
+    if version not in (1,2,3,4) or (version>=2 and kind not in ('campaign','trial','endpoint','manifest')) or (kind=='manifest' and version>2):
         raise ValueError('unsupported LP artifact version')
     validator(f'lp-{kind}-v{version}.schema.json').validate(value)
     return value

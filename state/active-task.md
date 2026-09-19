@@ -1,5 +1,56 @@
 # Active Task
 
+## GPUP-5C: FP64-pipe execution, tolerance tiers and corpus extension (2026-09-19)
+
+Status: complete under [ADR-0022](../docs/decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md);
+see the [report](../docs/benchmarks/lp-fp64-pipe-gpup5c.md). Evidence below.
+Objective: act on the [root-cause note](../docs/benchmarks/lp-fp64-pipe-root-cause.md)
+without changing runtime selectors, defaults, existing code objects, archived
+evidence or the nine GPUP-5B modes. Add feature-gated research modes
+intguard-fp64 (integer-pipe guards), fused-fp64 (two launches per proposal) and
+doublefloat-fp32 (FP32 hi/lo pairs, no FP64 in the sparse loop) with CPU oracles;
+research-v2 requests/evidence; explicit tolerance tiers 1e-9/1e-6/1e-4 recorded
+per configuration; a frozen development-extension manifest under lp-manifest-v2
+with instances up to 65536 rows and a new mixed family; a protocol-driven research
+harness with byte-identical v1 behavior; committed diagnostic microbenchmarks.
+
+Acceptance gate: full pinned-native tools/check.sh; CPU rational fixtures for
+double-float products; strict v1/v2 evidence tests; device differential over all
+twelve modes across controller boundaries, fault/admission tests, and all four
+scoped sanitizers sequentially; frozen lp-research-v2.json attempts all admitted
+through the shared lease and the preserved ledger; independent revalidation of
+every endpoint; report with coverage per tier, paired latency, equal work, traces.
+
+Likely files: crates/optimizer-lp/src/research.rs and tests; cuda/lp_pdhg_research;
+crates/optimizer-lp-cuda/src/research.rs and tests/device/research.rs;
+crates/optimizer-experiment/src/lp_research.rs; schemas/lp-manifest-v2.schema.json;
+tools/lp_generate.py, lp_protocol.py, lp_research_budget.py, benchmark_lp_research.py,
+analyze_lp_research.py, lp_research_oracle.py; cuda/diagnostics; benchmarks/configs/
+lp-research-v2.json; benchmarks/manifests/lp-development-extension-v1.json; docs.
+
+Resource budget: four build jobs; CPU validation within four hours; GPU study
+1500 s and acceptance 300 s (combined 1800 s) charged to the preserved
+gpup-baseline-v1 ledger under identity gpup5c-v1. Preserve the 4996-event prefix
+SHA-256 737e1301cb31cf5d0ad0585aa81a4dc0b814615d39e4974827e504e880b11e5f and
+2235.353878971 cumulative seconds inside the 4502.574545061-second ceiling.
+Uncharged 2026-09-19 investigation work is recorded, not repeated silently.
+
+Evidence: artifacts/gpup5c-v1 (850 admitted of 874 planned attempts, 806 verified,
+24 missing at the study cap, 44 without endpoints: 34 CLI 16 MiB refusals and 10
+mixed-65536 timeouts) and artifacts/gpup5c-acceptance (two regular device runs of
+33 cases, all four sanitizers twice with zero errors/hazards, three charged
+microbenchmark runs). All twelve modes match the CPU oracle bitwise over 40 steps;
+intguard/fused endpoints are identical to the FP64 control on all 114 pairs.
+Full pinned-native tools/check.sh passed on the measured source
+5e1e0ff1dd6604c54667356fa75d665c451d1e37b7f794039783acc982833e68 (131 Python
+tests, 85 documentation pages) and again on the final source. Study
+1493.313474227/1500 plus acceptance 66.091602441/300 seconds; cumulative
+3794.758955639/4502.574545061. Ledger 6722 events, SHA-256
+ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b, 4996-event prefix
+intact. The initial fused kernels serialized their update tail on lane 0 and were
+restructured before the study; both microbenchmark results are retained. Every GPU
+job used the shared lease; no push or publication. Next ready task: GPUP-6.
+
 ## GPUP-5B: exact scaling and component sparse products (2026-09-16–17)
 
 Status: complete; all 840 attempts and required acceptance gates passed. The

@@ -7,7 +7,7 @@ use optimizer_lp::{
     LinearProgram,
     control::Fp64Controller,
     pdhg::Engine,
-    research::{Mode, Operator, Parts2, Parts3, split},
+    research::{Mode, Operator, Pair, Parts2, Parts3, split},
 };
 use std::{path::PathBuf, rc::Rc};
 
@@ -21,6 +21,8 @@ enum Buffer {
     F32(DeviceBuffer<f32>),
     C2(DeviceBuffer<Parts2>),
     C3(DeviceBuffer<Parts3>),
+    /// ADR-0022 unevaluated FP32 pairs; split on upload, never read back.
+    Df(DeviceBuffer<Pair>),
 }
 impl Buffer {
     fn ptr(&self) -> A {
@@ -29,6 +31,7 @@ impl Buffer {
             Self::F32(b) => b.as_device_ptr(),
             Self::C2(b) => b.as_device_ptr(),
             Self::C3(b) => b.as_device_ptr(),
+            Self::Df(b) => b.as_device_ptr(),
         })
     }
     fn upload(
@@ -55,6 +58,11 @@ impl Buffer {
                 b.copy_from(&data, s)?;
                 4
             }
+            Self::Df(b) => {
+                let data = v.iter().map(|&x| Pair::split(x)).collect::<Vec<_>>();
+                b.copy_from(&data, s)?;
+                8
+            }
         };
         c.upload_calls += 1;
         c.upload_bytes += v.len() as u64 * bytes;
@@ -76,7 +84,7 @@ impl Buffer {
                 b.copy_to(&mut v, s)?;
                 (v, 8)
             }
-            Self::C2(_) | Self::C3(_) => {
+            Self::C2(_) | Self::C3(_) | Self::Df(_) => {
                 return Err(DeviceError::Unsupported("component state read".into()));
             }
             Self::F32(b) => {
@@ -111,12 +119,14 @@ pub struct ResearchExecutor {
     /// CPU splitting/packing/permutation time, a subset of invariant preparation.
     pub packing_ns: u64,
 }
-fn shape(p: &LinearProgram, _mode: Mode) -> Vec<(usize, LpWidth)> {
+const YDF: usize = 16;
+const BARDF: usize = 17;
+fn shape(p: &LinearProgram, mode: Mode) -> Vec<(usize, LpWidth)> {
     use LpWidth::F64;
     let n = p.column_count();
     let m = p.row_count();
     let z = p.nonzeros();
-    vec![
+    let mut v = vec![
         (z, F64),
         (z, F64),
         (n, F64),
@@ -133,7 +143,16 @@ fn shape(p: &LinearProgram, _mode: Mode) -> Vec<(usize, LpWidth)> {
         (n, F64),
         (m, F64),
         (m, F64),
-    ]
+    ];
+    if mode.doublefloat() {
+        v.push((m, F64));
+        v.push((n, F64));
+    }
+    v
+}
+/// Byte width of buffer `index` for `mode`; only matrices and pair shadows differ from 8.
+fn width(mode: Mode, index: usize) -> u64 {
+    if index < 2 { matrix_bytes(mode) } else { 8 }
 }
 /// Exact allocated device bytes, including empty padding, guards and scratch.
 pub fn peak_buffer_bytes(p: &LinearProgram, mode: Mode) -> Result<u64, DeviceError> {
@@ -149,7 +168,7 @@ pub fn peak_buffer_bytes(p: &LinearProgram, mode: Mode) -> Result<u64, DeviceErr
         Ok(())
     };
     for (index, (n, _)) in shape(p, mode).into_iter().enumerate() {
-        add(n, if index < 2 { matrix_bytes(mode) } else { 8 })?;
+        add(n, width(mode, index))?;
     }
     let guards = p
         .column_count()
@@ -182,6 +201,7 @@ fn matrix_bytes(mode: Mode) -> u64 {
         }
     }
 }
+
 impl ResearchExecutor {
     /// Admit every buffer before allocation; the code image was identified before opening.
     pub fn new(
@@ -269,11 +289,13 @@ impl ResearchExecutor {
         let padding2 = [Parts2::default()];
         let padding3 = [Parts3::default()];
         for (idx, (n, _)) in shape(p, mode).into_iter().enumerate() {
-            let width = if idx < 2 { matrix_bytes(mode) } else { 8 };
+            let width = width(mode, idx);
             let mut buffer = if idx < 2 && mode.components() == 2 {
                 Buffer::C2(context.allocate(n.max(1))?)
             } else if idx < 2 && mode.components() == 3 {
                 Buffer::C3(context.allocate(n.max(1))?)
+            } else if mode.doublefloat() && !(2..YDF).contains(&idx) {
+                Buffer::Df(context.allocate(n.max(1))?)
             } else if width == 4 {
                 Buffer::F32(context.allocate(n.max(1))?)
             } else {
@@ -399,11 +421,11 @@ impl ResearchExecutor {
                 self.b[idx].upload(v, &self.stream, c)?;
             }
         }
+        if self.mode.doublefloat() && full {
+            // The dual pair shadow is split on the host once; fused kernels keep it current.
+            self.b[YDF].upload(&state.dual, &self.stream, c)?;
+        }
         self.loaded = Some(key);
-        let sparse = self.module.function(self.mode.kernel())?;
-        let primal = self.module.function("precision_primal")?;
-        let dual = self.module.function("precision_dual")?;
-        let store = self.module.function("precision_store")?;
         let sparse_launch = |n: usize| LaunchConfig {
             grid: (n.max(1) as u32).div_ceil(8),
             block: 256,
@@ -427,120 +449,189 @@ impl ResearchExecutor {
         {
             return Ok(Some("update_step_range".into()));
         }
-        for t in 0..steps {
-            let since = state.since_restart + t;
-            let toward = A::F64((since + 1) as f64 / (since + 2) as f64);
-            let back = A::F64(1.0 / (since + 2) as f64);
-            launch(
-                &sparse,
-                sparse_launch(self.n),
-                &[
-                    self.b[1].ptr(),
-                    ip(1),
-                    ip(3),
-                    self.b[Y].ptr(),
-                    self.b[11].ptr(),
-                    gp(0),
-                    n,
-                    A::U32(0),
-                    A::U32(0),
-                    A::U32(0),
-                    A::U32(0),
-                    A::DevicePtr(self.scales[1].as_device_ptr()),
-                    A::DevicePtr(self.scales[0].as_device_ptr()),
-                ],
-                &self.stream,
-            )?;
-            c.kernel_launches += 1;
-            launch(
-                &primal,
-                vector_launch(self.n),
-                &[
+        if let Some((primal_name, dual_name)) = self.mode.fused_kernels() {
+            let primal = self.module.function(primal_name)?;
+            let dual = self.module.function(dual_name)?;
+            let df = self.mode.doublefloat();
+            for t in 0..steps {
+                let since = state.since_restart + t;
+                let toward = A::F64((since + 1) as f64 / (since + 2) as f64);
+                let back = A::F64(1.0 / (since + 2) as f64);
+                let mut args = vec![self.b[1].ptr(), ip(1), ip(3)];
+                if df {
+                    args.push(self.b[YDF].ptr());
+                } else {
+                    args.push(self.b[Y].ptr());
+                }
+                args.extend([
                     self.b[X].ptr(),
-                    self.b[11].ptr(),
                     self.b[2].ptr(),
                     self.b[3].ptr(),
                     self.b[4].ptr(),
+                    self.b[AX].ptr(),
+                    self.b[13].ptr(),
+                ]);
+                if df {
+                    args.push(self.b[BARDF].ptr());
+                }
+                args.extend([
                     self.b[12].ptr(),
-                    self.b[13].ptr(),
+                    gp(0),
                     gp(self.n),
+                    gp(2 * (self.n + self.m)),
                     A::F64(primal_step),
+                    toward,
+                    back,
                     n,
-                    A::U32(0),
-                ],
-                &self.stream,
-            )?;
-            c.kernel_launches += 1;
-            launch(
-                &sparse,
-                sparse_launch(self.m),
-                &[
-                    self.b[0].ptr(),
-                    ip(0),
-                    ip(2),
-                    self.b[13].ptr(),
-                    self.b[14].ptr(),
-                    gp(2 * self.n),
-                    m,
-                    A::U32(0),
-                    A::U32(0),
-                    A::U32(0),
-                    A::U32(0),
-                    A::DevicePtr(self.scales[0].as_device_ptr()),
-                    A::DevicePtr(self.scales[1].as_device_ptr()),
-                ],
-                &self.stream,
-            )?;
-            c.kernel_launches += 1;
-            launch(
-                &dual,
-                vector_launch(self.m),
-                &[
-                    self.b[Y].ptr(),
-                    self.b[14].ptr(),
+                ]);
+                launch(&primal, sparse_launch(self.n), &args, &self.stream)?;
+                c.kernel_launches += 1;
+                let mut args = vec![self.b[0].ptr(), ip(0), ip(2)];
+                if df {
+                    args.push(self.b[BARDF].ptr());
+                } else {
+                    args.push(self.b[13].ptr());
+                }
+                args.push(self.b[Y].ptr());
+                if df {
+                    args.push(self.b[YDF].ptr());
+                }
+                args.extend([
                     self.b[5].ptr(),
                     self.b[6].ptr(),
-                    self.b[15].ptr(),
-                    gp(2 * self.n + self.m),
-                    A::F64(dual_step),
-                    m,
-                    A::U32(0),
-                ],
-                &self.stream,
-            )?;
-            c.kernel_launches += 1;
-            launch(
-                &store,
-                vector_launch(self.n),
-                &[
-                    self.b[X].ptr(),
-                    self.b[12].ptr(),
-                    self.b[AX].ptr(),
-                    gp(2 * (self.n + self.m)),
-                    toward,
-                    back,
-                    n,
-                    A::U32(0),
-                ],
-                &self.stream,
-            )?;
-            c.kernel_launches += 1;
-            launch(
-                &store,
-                vector_launch(self.m),
-                &[
-                    self.b[Y].ptr(),
-                    self.b[15].ptr(),
                     self.b[AY].ptr(),
+                    self.b[15].ptr(),
+                    gp(2 * self.n),
+                    gp(2 * self.n + self.m),
                     gp(3 * self.n + 2 * self.m),
+                    A::F64(dual_step),
                     toward,
                     back,
                     m,
-                    A::U32(0),
-                ],
-                &self.stream,
-            )?;
-            c.kernel_launches += 1;
+                ]);
+                launch(&dual, sparse_launch(self.m), &args, &self.stream)?;
+                c.kernel_launches += 1;
+            }
+        } else {
+            let sparse = self.module.function(self.mode.kernel())?;
+            let primal = self.module.function("precision_primal")?;
+            let dual = self.module.function("precision_dual")?;
+            let store = self.module.function("precision_store")?;
+            for t in 0..steps {
+                let since = state.since_restart + t;
+                let toward = A::F64((since + 1) as f64 / (since + 2) as f64);
+                let back = A::F64(1.0 / (since + 2) as f64);
+                launch(
+                    &sparse,
+                    sparse_launch(self.n),
+                    &[
+                        self.b[1].ptr(),
+                        ip(1),
+                        ip(3),
+                        self.b[Y].ptr(),
+                        self.b[11].ptr(),
+                        gp(0),
+                        n,
+                        A::U32(0),
+                        A::U32(0),
+                        A::U32(0),
+                        A::U32(0),
+                        A::DevicePtr(self.scales[1].as_device_ptr()),
+                        A::DevicePtr(self.scales[0].as_device_ptr()),
+                    ],
+                    &self.stream,
+                )?;
+                c.kernel_launches += 1;
+                launch(
+                    &primal,
+                    vector_launch(self.n),
+                    &[
+                        self.b[X].ptr(),
+                        self.b[11].ptr(),
+                        self.b[2].ptr(),
+                        self.b[3].ptr(),
+                        self.b[4].ptr(),
+                        self.b[12].ptr(),
+                        self.b[13].ptr(),
+                        gp(self.n),
+                        A::F64(primal_step),
+                        n,
+                        A::U32(0),
+                    ],
+                    &self.stream,
+                )?;
+                c.kernel_launches += 1;
+                launch(
+                    &sparse,
+                    sparse_launch(self.m),
+                    &[
+                        self.b[0].ptr(),
+                        ip(0),
+                        ip(2),
+                        self.b[13].ptr(),
+                        self.b[14].ptr(),
+                        gp(2 * self.n),
+                        m,
+                        A::U32(0),
+                        A::U32(0),
+                        A::U32(0),
+                        A::U32(0),
+                        A::DevicePtr(self.scales[0].as_device_ptr()),
+                        A::DevicePtr(self.scales[1].as_device_ptr()),
+                    ],
+                    &self.stream,
+                )?;
+                c.kernel_launches += 1;
+                launch(
+                    &dual,
+                    vector_launch(self.m),
+                    &[
+                        self.b[Y].ptr(),
+                        self.b[14].ptr(),
+                        self.b[5].ptr(),
+                        self.b[6].ptr(),
+                        self.b[15].ptr(),
+                        gp(2 * self.n + self.m),
+                        A::F64(dual_step),
+                        m,
+                        A::U32(0),
+                    ],
+                    &self.stream,
+                )?;
+                c.kernel_launches += 1;
+                launch(
+                    &store,
+                    vector_launch(self.n),
+                    &[
+                        self.b[X].ptr(),
+                        self.b[12].ptr(),
+                        self.b[AX].ptr(),
+                        gp(2 * (self.n + self.m)),
+                        toward,
+                        back,
+                        n,
+                        A::U32(0),
+                    ],
+                    &self.stream,
+                )?;
+                c.kernel_launches += 1;
+                launch(
+                    &store,
+                    vector_launch(self.m),
+                    &[
+                        self.b[Y].ptr(),
+                        self.b[15].ptr(),
+                        self.b[AY].ptr(),
+                        gp(3 * self.n + 2 * self.m),
+                        toward,
+                        back,
+                        m,
+                        A::U32(0),
+                    ],
+                    &self.stream,
+                )?;
+                c.kernel_launches += 1;
+            }
         }
         let mut guards = vec![0_u32; (3 * (self.n + self.m)).max(1)];
         self.i[4].copy_to(&mut guards, &self.stream)?;

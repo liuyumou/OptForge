@@ -35,6 +35,30 @@ def generate():
     return dict(schema_version=1,seed=17002,oracle='Fraction of represented binary inputs; independently rounded exact dot products',cases=cases)
 
 
+def pair(x):
+    """Exact rational value of the ADR-0022 FP32 pair representation of x."""
+    hi=struct.unpack('>f',struct.pack('>f',x))[0]
+    lo=struct.unpack('>f',struct.pack('>f',x-hi))[0]
+    return F(hi)+F(lo)
+
+
+def generate_doublefloat():
+    rng=random.Random(17003);cases=[]
+    for count in [3,31,32,33,64,65,97,128]:
+        a=[math.ldexp(rng.uniform(-1,1),rng.randrange(-12,12)) for _ in range(count)]
+        x=[math.ldexp(rng.uniform(-1,1),rng.randrange(-12,12)) for _ in range(count)]
+        a[:3]=[1.0,2**-30,-1.0];x[:3]=[2**10,1.0,2**10]
+        terms=[pair(v)*pair(w) for v,w in zip(a,x)]
+        exact=sum(terms);mass=sum(map(abs,terms))
+        # The dropped lo*lo term and each FP32 pair operation lose about 2^-44 relative
+        # to the mass; the allowance is a wide independent forward-error bound.
+        allowance=max(float(mass*F(2)**-40),math.ulp(float(exact)))
+        transpose=[pair(v)*pair(.75) for v in a]
+        cases.append(dict(a=list(map(bits,a)),x=list(map(bits,x)),expected=dict(exact=str(exact),nearest=bits(float(exact)),absolute_allowance=allowance,
+                          transpose_nearest=[bits(float(v)) for v in transpose],transpose_allowance=[max(float(abs(v)*F(2)**-44),math.ulp(float(v))) for v in transpose])))
+    return dict(schema_version=1,seed=17003,oracle='Fraction of FP32 pair inputs; independently rounded exact dot products',cases=cases)
+
+
 def verify_products():
     value=read_json(ROOT/'crates/optimizer-lp/tests/fixtures/research-products.json')
     for row in value['products']:
@@ -48,5 +72,9 @@ def main():
     if path.exists():
         if read_json(path)!=value:raise ValueError('sparse rational fixture changed')
     else:write_json(path,value)
+    path=ROOT/'crates/optimizer-lp/tests/fixtures/research-doublefloat.json';df=generate_doublefloat()
+    if path.exists():
+        if read_json(path)!=df:raise ValueError('double-float rational fixture changed')
+    else:write_json(path,df)
     print('CPU exact rational fixtures:',verify_products(),'scalar products;',len(value['cases']),'sparse rows with two/three-component and transpose references')
 if __name__=='__main__':main()

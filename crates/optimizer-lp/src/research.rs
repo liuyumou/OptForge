@@ -24,6 +24,12 @@ pub enum Mode {
     Components2Fp32,
     /// Three components and nine FP32 cross-products with residual recovery.
     Components3Fp32,
+    /// ADR-0022: native FP64 with range guards on the integer pipe, six launches.
+    IntguardFp64,
+    /// ADR-0022: native FP64, integer guards, sparse product fused with its update.
+    FusedFp64,
+    /// ADR-0022: unevaluated FP32 pairs for coefficients and operands, fused.
+    DoublefloatFp32,
 }
 impl<'de> Deserialize<'de> for Mode {
     fn deserialize<D: serde::Deserializer<'de>>(d: D) -> Result<Self, D::Error> {
@@ -37,6 +43,9 @@ impl<'de> Deserialize<'de> for Mode {
             "components3-fp64" => Ok(Self::Components3Fp64),
             "components2-fp32" => Ok(Self::Components2Fp32),
             "components3-fp32" => Ok(Self::Components3Fp32),
+            "intguard-fp64" => Ok(Self::IntguardFp64),
+            "fused-fp64" => Ok(Self::FusedFp64),
+            "doublefloat-fp32" => Ok(Self::DoublefloatFp32),
             _ => Err(serde::de::Error::custom("unknown research mode")),
         }
     }
@@ -66,7 +75,35 @@ impl Mode {
     pub fn cross(self) -> bool {
         matches!(self, Self::Components2Fp32 | Self::Components3Fp32)
     }
-    /// Separate kernel entry point, binding arithmetic to its code identity.
+    /// ADR-0022 modes require research-v2 requests and evidence.
+    pub fn v2(self) -> bool {
+        matches!(
+            self,
+            Self::IntguardFp64 | Self::FusedFp64 | Self::DoublefloatFp32
+        )
+    }
+    /// Sparse product fused with its vector update and store: two launches per step.
+    pub fn fused(self) -> bool {
+        matches!(self, Self::FusedFp64 | Self::DoublefloatFp32)
+    }
+    /// Unevaluated FP32 pair arithmetic without FP64 inside the sparse loop.
+    pub fn doublefloat(self) -> bool {
+        matches!(self, Self::DoublefloatFp32)
+    }
+    /// Kernel launches charged per proposed step.
+    pub fn launches_per_step(self) -> u64 {
+        if self.fused() { 2 } else { 6 }
+    }
+    /// Fused primal/dual entry points, when the mode is fused.
+    pub fn fused_kernels(self) -> Option<(&'static str, &'static str)> {
+        match self {
+            Self::FusedFp64 => Some(("research_fused_primal_64", "research_fused_dual_64")),
+            Self::DoublefloatFp32 => Some(("research_fused_primal_df", "research_fused_dual_df")),
+            _ => None,
+        }
+    }
+    /// Kernel entry point binding arithmetic to its code identity; the sparse
+    /// kernel for separate schedules, the fused primal kernel otherwise.
     pub fn kernel(self) -> &'static str {
         match self {
             Self::DefaultFp64 | Self::Power2Fp64 => "research_native64",
@@ -77,7 +114,61 @@ impl Mode {
             Self::Components3Fp64 => "research_components3_native",
             Self::Components2Fp32 => "research_components2_cross",
             Self::Components3Fp32 => "research_components3_cross",
+            Self::IntguardFp64 => "research_intguard64",
+            Self::FusedFp64 => "research_fused_primal_64",
+            Self::DoublefloatFp32 => "research_fused_primal_df",
         }
+    }
+}
+/// Unevaluated FP32 pair: `hi + lo` with `|lo| <= ulp(hi) / 2`.
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Pair {
+    /// Nearest-even FP32 of the represented value.
+    pub hi: f32,
+    /// Nearest-even FP32 of the remaining difference.
+    pub lo: f32,
+}
+impl Pair {
+    /// Split a binary64 value; `hi` is the nearest binary32.
+    pub fn split(x: f64) -> Self {
+        let hi = x as f32;
+        let lo = (x - f64::from(hi)) as f32;
+        Self { hi, lo }
+    }
+    /// Exact binary64 value of the pair.
+    pub fn value(self) -> f64 {
+        f64::from(self.hi) + f64::from(self.lo)
+    }
+    fn two_sum(a: f32, b: f32) -> Self {
+        let s = a + b;
+        let bb = s - a;
+        Self {
+            hi: s,
+            lo: (a - (s - bb)) + (b - bb),
+        }
+    }
+    fn quick_two_sum(a: f32, b: f32) -> Self {
+        let s = a + b;
+        Self {
+            hi: s,
+            lo: b - (s - a),
+        }
+    }
+    /// Error-free FP32 pair addition in the fixed device order.
+    pub fn plus(self, other: Self) -> Self {
+        let s = Self::two_sum(self.hi, other.hi);
+        let t = Self::two_sum(self.lo, other.lo);
+        let s = Self::quick_two_sum(s.hi, s.lo + t.hi);
+        Self::quick_two_sum(s.hi, s.lo + t.lo)
+    }
+    /// One FP32 multiply and three FMAs; the `lo*lo` term is dropped.
+    pub fn times(self, other: Self) -> Self {
+        let p = self.hi * other.hi;
+        let e = self.hi.mul_add(other.hi, -p);
+        let e = self.hi.mul_add(other.lo, e);
+        let e = self.lo.mul_add(other.hi, e);
+        Self::quick_two_sum(p, e)
     }
 }
 /// Device-compatible exact normalized expansion; exponent is an integer.
@@ -261,6 +352,14 @@ impl Operator {
         if mode.storage32() && rows.iter().any(|&v| f64::from(v as f32) != v) {
             return Err("matrix_not_exact_fp32");
         }
+        if mode.doublefloat()
+            && rows.iter().any(|&v| {
+                let hi = v as f32;
+                !hi.is_finite() || (v != 0.0 && (hi == 0.0 || !hi.is_normal()))
+            })
+        {
+            return Err("matrix_doublefloat_range");
+        }
         let columns = transpose(p, &rows);
         let mut represented = Vec::new();
         let mut error = 0.0_f64;
@@ -274,6 +373,10 @@ impl Operator {
                     .upper
             } else if mode.components() > 0 {
                 let q = reconstruct(split(v)?, mode.components());
+                error = error.max((v - q).abs());
+                q
+            } else if mode.doublefloat() {
+                let q = Pair::split(v).value();
                 error = error.max((v - q).abs());
                 q
             } else {
@@ -329,6 +432,9 @@ impl Operator {
         vector: &[f64],
     ) -> Result<Vec<f64>, &'static str> {
         use optimizer_core::LpWidth::F64;
+        if self.mode.doublefloat() {
+            return self.apply_doublefloat(engine, transposed, vector);
+        }
         let p = engine.program();
         let (matrix, values, outer, inner) = if transposed {
             (
@@ -376,6 +482,68 @@ impl Operator {
             } else {
                 lanes[0]
             });
+        }
+        Ok(out)
+    }
+}
+
+impl Operator {
+    /// Lane-strided FP32-pair application mirroring the fused double-float kernels.
+    fn apply_doublefloat(
+        &self,
+        engine: &Engine<'_>,
+        transposed: bool,
+        vector: &[f64],
+    ) -> Result<Vec<f64>, &'static str> {
+        let p = engine.program();
+        let (matrix, values) = if transposed {
+            (p.column_major(), &self.columns)
+        } else {
+            (p.row_major(), &self.rows)
+        };
+        let split = vector
+            .iter()
+            .map(|&x| {
+                let v = finite(x)?;
+                let pair = Pair::split(v);
+                if v != 0.0 && pair.hi == 0.0 {
+                    Err("operand_lost_nonzero")
+                } else {
+                    Ok(pair)
+                }
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+        let mut out = Vec::new();
+        for line in 0..matrix.lines() {
+            let (indices, _) = matrix.line(line);
+            let start = matrix.offset(line);
+            let mut lanes = [Pair::default(); 32];
+            for (lane, sum) in lanes.iter_mut().enumerate() {
+                for i in (lane..indices.len()).step_by(32) {
+                    let a = Pair::split(values[start + i]);
+                    let b = split[indices[i] as usize];
+                    let product = a.times(b);
+                    if !product.hi.is_finite() {
+                        return Err("intermediate_nonfinite");
+                    }
+                    if a.hi != 0.0 && b.hi != 0.0 && product.hi == 0.0 {
+                        return Err("product_lost_nonzero");
+                    }
+                    *sum = sum.plus(product);
+                    if !sum.hi.is_finite() {
+                        return Err("intermediate_nonfinite");
+                    }
+                }
+            }
+            for offset in [16, 8, 4, 2, 1] {
+                for lane in 0..offset {
+                    lanes[lane] = lanes[lane].plus(lanes[lane + offset]);
+                    if !lanes[lane].hi.is_finite() {
+                        return Err("intermediate_nonfinite");
+                    }
+                }
+            }
+            out.push(finite(lanes[0].value())?);
         }
         Ok(out)
     }
