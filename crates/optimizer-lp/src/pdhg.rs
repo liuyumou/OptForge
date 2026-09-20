@@ -88,16 +88,39 @@ pub struct Engine<'a> {
     step: f64,
 }
 
-impl<'a> Engine<'a> {
-    /// Build the scaled working problem.
+/// The matrix-only half of an [`Engine`]'s construction, built once and shared
+/// across solves that differ only in variable bounds.
+///
+/// SPEC-0014 requirement 7 fixes exactly what a repeated-solve session may
+/// reuse: the preconditioner, the scaled matrix in both orientations, the
+/// scaled objective and the spectral step. None of them reads a bound, so they
+/// are computed here, and [`Engine::from_prepared`] adds the bound-derived
+/// vectors for one program — which is the cheap half, next to the
+/// preconditioning passes and the power iterations a session exists to
+/// amortize.
+pub struct PreparedMatrix {
+    preconditioner: Preconditioner,
+    settings: LpSettings,
+    /// Scaled matrix values, parallel to the program's own storage.
+    scaled_row_values: Vec<f64>,
+    scaled_column_values: Vec<f64>,
+    scaled_objective: Vec<f64>,
+    step: f64,
+}
+
+impl PreparedMatrix {
+    /// Build the reusable matrix-only state for one program.
     #[must_use]
-    pub fn new(program: &'a LinearProgram, settings: LpSettings) -> Self {
-        let preconditioner = Preconditioner::new(program, settings.preconditioner);
-        Self::with_preconditioner(program, settings, preconditioner)
+    pub fn new(program: &LinearProgram, settings: &LpSettings) -> Self {
+        Self::with_preconditioner(
+            program,
+            *settings,
+            Preconditioner::new(program, settings.preconditioner),
+        )
     }
 
     fn with_preconditioner(
-        program: &'a LinearProgram,
+        program: &LinearProgram,
         settings: LpSettings,
         preconditioner: Preconditioner,
     ) -> Self {
@@ -117,13 +140,105 @@ impl<'a> Engine<'a> {
             .map(|(column, row, value)| row_scale[row as usize] * value * column_scale[column])
             .collect();
 
-        // x = diag(column) x̂, so bounds divide and the objective multiplies.
+        // x = diag(column) x̂, so the objective multiplies and the bounds divide.
         let scaled_objective: Vec<f64> = program
             .objective()
             .iter()
             .zip(&column_scale)
             .map(|(cost, scale)| cost * scale)
             .collect();
+
+        let norm = spectral_norm(
+            program,
+            &settings,
+            &scaled_row_values,
+            &scaled_column_values,
+        );
+        // 0.9 rather than 1.0 leaves headroom for the norm estimate being low.
+        // A step above the convergence threshold does not merely converge slowly,
+        // it diverges, so the margin is not a tuning constant.
+        let step = if norm > 0.0 { 0.9 / norm } else { 1.0 };
+        Self {
+            preconditioner,
+            settings,
+            scaled_row_values,
+            scaled_column_values,
+            scaled_objective,
+            step,
+        }
+    }
+
+    /// The preconditioner this preparation computed, for the record.
+    #[must_use]
+    pub fn preconditioner(&self) -> &Preconditioner {
+        &self.preconditioner
+    }
+
+    /// The settings this preparation ran with.
+    #[must_use]
+    pub fn settings(&self) -> LpSettings {
+        self.settings
+    }
+
+    /// The scaled matrix values, in row-major and column-major order.
+    ///
+    /// Exposed for the same reason as [`Engine::scaled_matrix`]: a device
+    /// residency uploads exactly these values rather than recomputing a scaling
+    /// it would then have to be checked against.
+    #[must_use]
+    pub fn scaled_matrix(&self) -> (&[f64], &[f64]) {
+        (&self.scaled_row_values, &self.scaled_column_values)
+    }
+
+    /// The scaled objective coefficients.
+    #[must_use]
+    pub fn scaled_objective(&self) -> &[f64] {
+        &self.scaled_objective
+    }
+
+    /// The step size derived from the scaled matrix.
+    #[must_use]
+    pub fn step(&self) -> f64 {
+        self.step
+    }
+}
+
+impl<'a> Engine<'a> {
+    /// Build the scaled working problem.
+    #[must_use]
+    pub fn new(program: &'a LinearProgram, settings: LpSettings) -> Self {
+        Self::from_prepared(program, &PreparedMatrix::new(program, &settings))
+    }
+
+    #[cfg(feature = "precision-research")]
+    fn with_preconditioner(
+        program: &'a LinearProgram,
+        settings: LpSettings,
+        preconditioner: Preconditioner,
+    ) -> Self {
+        Self::from_prepared(
+            program,
+            &PreparedMatrix::with_preconditioner(program, settings, preconditioner),
+        )
+    }
+
+    /// Build an engine for `program` from state prepared for its matrix.
+    ///
+    /// The result is bit for bit the engine [`Engine::new`] would have built:
+    /// the bound-derived vectors below are computed with the same expressions
+    /// in the same order, and everything else is cloned verbatim from the
+    /// preparation. A session holds one [`PreparedMatrix`] and calls this per
+    /// solve, so a solve that changes only variable bounds pays neither the
+    /// preconditioning passes nor the spectral estimate again. Nothing here
+    /// checks that `prepared` was built for this program's matrix; pairing
+    /// them is the caller's contract, and the session makes it with
+    /// [`LinearProgram::same_matrix_objective_rows`].
+    #[must_use]
+    pub fn from_prepared(program: &'a LinearProgram, prepared: &PreparedMatrix) -> Engine<'a> {
+        let row_scale = prepared.preconditioner.row().to_vec();
+        let column_scale = prepared.preconditioner.column().to_vec();
+
+        // x = diag(column) x̂, so bounds divide.
         let scaled_column_lower: Vec<f64> = program
             .columns()
             .iter()
@@ -149,25 +264,19 @@ impl<'a> Engine<'a> {
             .map(|(range, scale)| range.upper * scale)
             .collect();
 
-        let mut engine = Self {
+        Self {
             program,
-            preconditioner,
-            settings,
-            scaled_row_values,
-            scaled_column_values,
-            scaled_objective,
+            preconditioner: prepared.preconditioner.clone(),
+            settings: prepared.settings,
+            scaled_row_values: prepared.scaled_row_values.clone(),
+            scaled_column_values: prepared.scaled_column_values.clone(),
+            scaled_objective: prepared.scaled_objective.clone(),
             scaled_row_lower,
             scaled_row_upper,
             scaled_column_lower,
             scaled_column_upper,
-            step: 1.0,
-        };
-        let norm = engine.spectral_norm();
-        // 0.9 rather than 1.0 leaves headroom for the norm estimate being low.
-        // A step above the convergence threshold does not merely converge slowly,
-        // it diverges, so the margin is not a tuning constant.
-        engine.step = if norm > 0.0 { 0.9 / norm } else { 1.0 };
-        engine
+            step: prepared.step,
+        }
     }
 
     /// Research-only exact power-of-two scaling, with explicit caller-supplied exponents.
@@ -259,6 +368,19 @@ impl<'a> Engine<'a> {
         }
         self.step = step;
         Ok(())
+    }
+
+    /// Tighten the iteration allowance for one solve of a repeated-solve
+    /// session (SPEC-0014), matching the clamp a backend applies when
+    /// `SolveOptions::iteration_limit` tightens the settings' limit.
+    ///
+    /// Nothing an engine precomputes reads `iteration_limit` — the scaled
+    /// values, the spectral step and the start vectors are all built without
+    /// it — so clamping after construction yields exactly the engine
+    /// [`Engine::new`] would have built from settings with the smaller limit,
+    /// which is what makes clamping a session's reused engine sound.
+    pub fn clamp_iteration_limit(&mut self, limit: u64) {
+        self.settings.iteration_limit = self.settings.iteration_limit.min(limit);
     }
 
     /// The preconditioner this engine applied, for the record.
@@ -360,71 +482,29 @@ impl<'a> Engine<'a> {
     }
 
     /// Estimate the largest singular value by a fixed number of power iterations.
+    #[cfg(feature = "precision-research")]
     fn spectral_norm(&self) -> f64 {
-        let columns = self.program.column_count();
-        if columns == 0 || self.program.nonzeros() == 0 {
-            return 0.0;
-        }
-        // A deterministic start rather than a random one. The seed would have to
-        // be recorded otherwise, and nothing is gained: the estimate feeds a step
-        // size, not a result.
-        let mut vector = vec![1.0f64; columns];
-        let mut norm = 0.0;
-        for _ in 0..self.settings.power_iterations {
-            let product = self.multiply(&vector);
-            let transposed = self.multiply_transpose(&product);
-            let magnitude = self.norm(&transposed);
-            if magnitude <= 0.0 {
-                return 0.0;
-            }
-            for value in &mut vector {
-                *value /= magnitude;
-            }
-            for (slot, value) in vector.iter_mut().zip(&transposed) {
-                *slot = value / magnitude;
-            }
-            norm = magnitude.sqrt();
-        }
-        norm
+        spectral_norm(
+            self.program,
+            &self.settings,
+            &self.scaled_row_values,
+            &self.scaled_column_values,
+        )
     }
 
     /// Euclidean norm through the fixed reduction.
     fn norm(&self, values: &[f64]) -> f64 {
-        tree_sum(&values.iter().map(|value| value * value).collect::<Vec<_>>()).sqrt()
+        euclidean_norm(values)
     }
 
     /// `Â x̂`, written row by row from the row-major form.
     fn multiply(&self, x: &[f64]) -> Vec<f64> {
-        (0..self.program.row_count())
-            .map(|row| {
-                let (indices, _) = self.program.row_major().line(row);
-                let start = self.program.row_major().offset(row);
-                let products: Vec<f64> = indices
-                    .iter()
-                    .enumerate()
-                    .map(|(slot, column)| {
-                        self.scaled_row_values[start + slot] * x[*column as usize]
-                    })
-                    .collect();
-                tree_sum(&products)
-            })
-            .collect()
+        multiply(self.program, &self.scaled_row_values, x)
     }
 
     /// `Âᵀ ŷ`, written column by column from the column-major form.
     fn multiply_transpose(&self, y: &[f64]) -> Vec<f64> {
-        (0..self.program.column_count())
-            .map(|column| {
-                let (indices, _) = self.program.column_major().line(column);
-                let start = self.program.column_major().offset(column);
-                let products: Vec<f64> = indices
-                    .iter()
-                    .enumerate()
-                    .map(|(slot, row)| self.scaled_column_values[start + slot] * y[*row as usize])
-                    .collect();
-                tree_sum(&products)
-            })
-            .collect()
+        multiply_transpose(self.program, &self.scaled_column_values, y)
     }
 
     /// One primal-dual step.
@@ -715,6 +795,86 @@ impl<'a> Engine<'a> {
     }
 }
 
+/// Estimate the largest singular value by a fixed number of power iterations.
+///
+/// A free function rather than a method so [`PreparedMatrix`] — which holds the
+/// scaled matrix but no program borrow — and [`Engine`] run the same
+/// arithmetic; two implementations of one estimate would be two things that
+/// must agree.
+fn spectral_norm(
+    program: &LinearProgram,
+    settings: &LpSettings,
+    scaled_row_values: &[f64],
+    scaled_column_values: &[f64],
+) -> f64 {
+    let columns = program.column_count();
+    if columns == 0 || program.nonzeros() == 0 {
+        return 0.0;
+    }
+    // A deterministic start rather than a random one. The seed would have to
+    // be recorded otherwise, and nothing is gained: the estimate feeds a step
+    // size, not a result.
+    let mut vector = vec![1.0f64; columns];
+    let mut norm = 0.0;
+    for _ in 0..settings.power_iterations {
+        let product = multiply(program, scaled_row_values, &vector);
+        let transposed = multiply_transpose(program, scaled_column_values, &product);
+        let magnitude = euclidean_norm(&transposed);
+        if magnitude <= 0.0 {
+            return 0.0;
+        }
+        for value in &mut vector {
+            *value /= magnitude;
+        }
+        for (slot, value) in vector.iter_mut().zip(&transposed) {
+            *slot = value / magnitude;
+        }
+        norm = magnitude.sqrt();
+    }
+    norm
+}
+
+/// Euclidean norm through the fixed reduction.
+fn euclidean_norm(values: &[f64]) -> f64 {
+    tree_sum(&values.iter().map(|value| value * value).collect::<Vec<_>>()).sqrt()
+}
+
+/// `Â x̂`, written row by row from the row-major form.
+fn multiply(program: &LinearProgram, scaled_row_values: &[f64], x: &[f64]) -> Vec<f64> {
+    (0..program.row_count())
+        .map(|row| {
+            let (indices, _) = program.row_major().line(row);
+            let start = program.row_major().offset(row);
+            let products: Vec<f64> = indices
+                .iter()
+                .enumerate()
+                .map(|(slot, column)| scaled_row_values[start + slot] * x[*column as usize])
+                .collect();
+            tree_sum(&products)
+        })
+        .collect()
+}
+
+/// `Âᵀ ŷ`, written column by column from the column-major form.
+fn multiply_transpose(
+    program: &LinearProgram,
+    scaled_column_values: &[f64],
+    y: &[f64],
+) -> Vec<f64> {
+    (0..program.column_count())
+        .map(|column| {
+            let (indices, _) = program.column_major().line(column);
+            let start = program.column_major().offset(column);
+            let products: Vec<f64> = indices
+                .iter()
+                .enumerate()
+                .map(|(slot, row)| scaled_column_values[start + slot] * y[*row as usize])
+                .collect();
+            tree_sum(&products)
+        })
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -840,8 +1000,8 @@ mod tests {
     }
 
     /// `min -x0 - x1` subject to `x0 + x1 <= 1.5`, `0 <= xj <= 1`. Optimum -1.5.
-    fn program() -> LinearProgram {
-        let model = Model::new(ModelDocument {
+    fn model() -> Model {
+        Model::new(ModelDocument {
             schema_version: SCHEMA_VERSION,
             model_id: "pdhg".to_string(),
             variables: (0..2)
@@ -874,8 +1034,11 @@ mod tests {
                     .collect(),
             },
         })
-        .expect("valid");
-        LinearProgram::new(&model).expect("continuous")
+        .expect("valid")
+    }
+
+    fn program() -> LinearProgram {
+        LinearProgram::new(&model()).expect("continuous")
     }
 
     fn settings() -> LpSettings {
@@ -884,6 +1047,31 @@ mod tests {
 
     fn run(program: &LinearProgram, settings: LpSettings) -> (Iterate, Stop) {
         Engine::new(program, settings).run(&CancellationToken::new(), |_| Decision::Continue)
+    }
+
+    /// SPEC-0014: a session clamps one solve's allowance rather than
+    /// rebuilding the engine; the clamped engine is the one a fresh
+    /// construction with the tighter limit would have produced.
+    #[test]
+    fn clamping_the_iteration_limit_matches_fresh_construction() {
+        let program = program();
+        let prepared = PreparedMatrix::new(&program, &settings());
+        let mut clamped = Engine::from_prepared(&program, &prepared);
+        clamped.clamp_iteration_limit(3);
+        let mut tighter = settings();
+        tighter.iteration_limit = 3;
+        let fresh = Engine::new(&program, tighter);
+        assert_eq!(clamped.settings(), fresh.settings());
+        assert_eq!(clamped.step().to_bits(), fresh.step().to_bits());
+        assert_eq!(clamped.start_primal(), fresh.start_primal());
+        assert_eq!(clamped.scaled_matrix(), fresh.scaled_matrix());
+        assert_eq!(clamped.scaled_objective(), fresh.scaled_objective());
+        assert_eq!(clamped.scaled_row_bounds(), fresh.scaled_row_bounds());
+        assert_eq!(clamped.scaled_column_bounds(), fresh.scaled_column_bounds());
+        // A clamp above the settings' limit changes nothing.
+        let mut unclamped = Engine::from_prepared(&program, &prepared);
+        unclamped.clamp_iteration_limit(u64::MAX);
+        assert_eq!(unclamped.settings(), settings());
     }
 
     #[test]
@@ -915,6 +1103,87 @@ mod tests {
         }
         assert_eq!(first.iterations, second.iterations);
         assert_eq!(first.restarts, second.restarts);
+    }
+
+    fn assert_engine_bits(left: &Engine<'_>, right: &Engine<'_>) {
+        assert_eq!(left.preconditioner(), right.preconditioner());
+        assert_eq!(left.settings(), right.settings());
+        assert_eq!(left.step().to_bits(), right.step().to_bits());
+        let pairs = [
+            (left.scaled_matrix().0, right.scaled_matrix().0),
+            (left.scaled_matrix().1, right.scaled_matrix().1),
+            (left.scaled_objective(), right.scaled_objective()),
+            (left.scaled_row_bounds().0, right.scaled_row_bounds().0),
+            (left.scaled_row_bounds().1, right.scaled_row_bounds().1),
+            (
+                left.scaled_column_bounds().0,
+                right.scaled_column_bounds().0,
+            ),
+            (
+                left.scaled_column_bounds().1,
+                right.scaled_column_bounds().1,
+            ),
+        ];
+        for (a, b) in pairs {
+            assert_eq!(a.len(), b.len());
+            for (x, y) in a.iter().zip(b) {
+                assert_eq!(x.to_bits(), y.to_bits());
+            }
+        }
+        for (a, b) in left.start_primal().iter().zip(&right.start_primal()) {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+        for (a, b) in left.start_dual().iter().zip(&right.start_dual()) {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+    }
+
+    /// SPEC-0014 requirements 6 to 10: an engine assembled from a prepared
+    /// matrix is bit for bit the engine `Engine::new` builds in one piece —
+    /// every scaled vector, the step, the start points and the whole
+    /// trajectory. Asserted on the base program and on a variant that differs
+    /// only in variable bounds, which is the reuse a session exists for.
+    #[test]
+    fn from_prepared_matches_a_fresh_engine_bitwise_on_base_and_bounds_variant() {
+        let base = model();
+        let program = program();
+        let mut tightened = base.document().variables.clone();
+        for variable in &mut tightened {
+            variable.lower = finite(0.25);
+            variable.upper = finite(0.75);
+        }
+        let variant = program
+            .with_variable_bounds(&base.rebound(tightened).unwrap())
+            .unwrap();
+        assert!(variant.same_matrix_objective_rows(&program));
+
+        let prepared = PreparedMatrix::new(&program, &settings());
+        assert_eq!(prepared.settings(), settings());
+        for candidate in [program, variant] {
+            let fresh = Engine::new(&candidate, settings());
+            let reused = Engine::from_prepared(&candidate, &prepared);
+            assert_engine_bits(&fresh, &reused);
+
+            let mut expected = Vec::new();
+            let (last, stop) = fresh.legacy_run(
+                &CancellationToken::new(),
+                |_| Decision::Continue,
+                |iterate| expected.push(iterate.clone()),
+            );
+            expected.push(last);
+            let mut actual = Vec::new();
+            let (reused_last, reused_stop) = reused.legacy_run(
+                &CancellationToken::new(),
+                |_| Decision::Continue,
+                |iterate| actual.push(iterate.clone()),
+            );
+            actual.push(reused_last);
+            assert_eq!(stop, reused_stop);
+            assert_eq!(expected.len(), actual.len());
+            for (a, b) in expected.iter().zip(&actual) {
+                assert_iterate_bits(a, b);
+            }
+        }
     }
 
     /// Requirement 10: the interval is a real parameter, and changing it changes

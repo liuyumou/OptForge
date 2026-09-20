@@ -16,12 +16,16 @@
 
 pub mod backend;
 pub mod residency;
+/// Repeated-solve sessions over one resident matrix (SPEC-0014).
+pub mod session;
 
 pub use backend::{BACKEND_NAME, BACKEND_VERSION, CudaLpBackend};
+pub use optimizer_core::SessionSetup;
 pub use residency::{
     AdvanceResult, Decline, KERNEL_NAMES, LpResidency, Requirement, TARGET_CAPABILITY,
     code_object_path, device_path_available,
 };
+pub use session::TunedSession;
 
 pub mod tuned;
 
@@ -31,3 +35,6 @@ pub mod precision;
 /// Isolated research executor, never selected by runtime backends.
 #[cfg(feature = "precision-research")]
 pub mod research;
+
+#[cfg(feature = "precision-research")]
+pub use research::ResearchSession;

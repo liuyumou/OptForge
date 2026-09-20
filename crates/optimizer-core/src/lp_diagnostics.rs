@@ -28,6 +28,38 @@ pub struct LpControlDiagnostics {
     pub stop: String,
 }
 
+/// Session phase timings for a repeated-solve batch (SPEC-0014 requirement 24).
+///
+/// A session's setup phases (device context, module load, preconditioning,
+/// research preparation, invariant allocation and upload) and per-solve session
+/// phases (variant rebind, engine rebind, bound upload) live here rather than
+/// in [`LpDiagnostics::phases_ns`]: the lp-endpoint phase allow-list does not
+/// admit them, and per-solve endpoint records keep their existing vocabulary.
+/// Batch records serialize this document separately.
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SessionSetup {
+    /// Cumulative session phase timings in nanoseconds, keyed by phase name.
+    pub phases_ns: BTreeMap<String, u64>,
+}
+
+impl SessionSetup {
+    /// Start a session phase clock. Session phases are always measured: they
+    /// are the quantity a batch exists to amortize, so they are not gated on
+    /// the profiling flag the endpoint's own phases follow.
+    #[must_use]
+    pub fn start(&self) -> Instant {
+        Instant::now()
+    }
+
+    /// Accumulate one completed session phase.
+    pub fn finish(&mut self, name: &str, start: Instant) {
+        let ns = u64::try_from(start.elapsed().as_nanos()).unwrap_or(u64::MAX);
+        let entry = self.phases_ns.entry(name.to_owned()).or_default();
+        *entry = entry.saturating_add(ns);
+    }
+}
+
 /// Data collected by an explicitly observed solve, separately from SolveRecord.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

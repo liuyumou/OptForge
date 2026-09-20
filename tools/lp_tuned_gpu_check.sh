@@ -27,6 +27,8 @@ for tool in memcheck racecheck initcheck synccheck; do
   if rg -q 'SKIP' "/tmp/gpup4-matched-${tool}.log"; then exit 2; fi
   "$sanitizer" --error-exitcode 99 --tool "$tool" "$binary" tuned_cases --test-threads 1 --nocapture 2>&1 | tee "/tmp/gpup4-tuned-${tool}.log"
   if rg -q 'SKIP' "/tmp/gpup4-tuned-${tool}.log"; then exit 2; fi
+  "$sanitizer" --error-exitcode 99 --tool "$tool" "$binary" session_ --test-threads 1 --nocapture 2>&1 | tee "/tmp/gpup4-session-${tool}.log"
+  if rg -q 'SKIP' "/tmp/gpup4-session-${tool}.log"; then exit 2; fi
 done
 # Exercise the actual CLI evidence path and pinned fallback under the same lease.
 python3 tools/lp_gpu_cli_check.py

@@ -39,7 +39,7 @@ pub use optimizer_core::{
     LP_SETTINGS_SCHEMA_VERSION, LpSettings, PreconditionerSettings, PrimalWeightSettings,
     RestartSettings,
 };
-pub use pdhg::{Decision, Engine, Iterate, Stop};
+pub use pdhg::{Decision, Engine, Iterate, PreparedMatrix, Stop};
 pub use precondition::Preconditioner;
 pub use problem::{Compressed, LinearProgram, Range};
 pub use reduce::{ReductionOrder, SEGMENT, sequential_sum, sum, tree_sum};

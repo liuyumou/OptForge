@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-batch-request-v1.schema.json",
+  "title": "LP batch request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "enum": [
+        "repeat",
+        "variant"
+      ]
+    },
+    "solves": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "changes": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "variable_id": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "lower": {
+                  "type": "number"
+                },
+                "upper": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "variable_id",
+                "lower",
+                "upper"
+              ]
+            }
+          }
+        },
+        "required": [
+          "index",
+          "changes"
+        ]
+      }
+    },
+    "generator": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "seed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "changes": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "seed",
+            "changes"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "batch_time_limit_ms": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "solves",
+    "variants",
+    "generator",
+    "batch_time_limit_ms"
+  ]
+}

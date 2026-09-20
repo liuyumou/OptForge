@@ -31,11 +31,22 @@ class Study:
     prior_events: int
     prior_hash: str
     cumulative_ceiling_ns: int
+    # Seconds of headroom a version-3 protocol adds on top of its source
+    # campaign's cumulative consumption (SPEC-0014 requirement 29); zero for
+    # the frozen v1/v2 studies, so their pinned equality is unchanged.
+    additional_ns: int = 0
 
     @staticmethod
     def from_protocol(value):
         if value['schema_version']==1:
             return STUDY_V1
+        if value['schema_version']==3:
+            return Study(prefix=value['prefix'],output=ROOT/value['output'],acceptance=ROOT/value['acceptance_output'],
+                         study_cap_seconds=value['study_cap_seconds'],acceptance_cap_seconds=value['acceptance_cap_seconds'],
+                         combined_cap_seconds=value['combined_cap_seconds'],prior_ns=value['prior_gpu_ns'],
+                         prior_events=value['prior_events'],prior_hash=value['prior_ledger_sha256'],
+                         cumulative_ceiling_ns=value['cumulative_ceiling_ns'],
+                         additional_ns=value['additional_gpu_seconds']*NS)
         if value['schema_version']!=2:raise ValueError('unsupported research protocol version')
         return Study(prefix=value['prefix'],output=ROOT/value['output'],acceptance=ROOT/value['acceptance_output'],
                      study_cap_seconds=value['study_cap_seconds'],acceptance_cap_seconds=value['acceptance_cap_seconds'],
@@ -49,15 +60,22 @@ STUDY_V1=Study(prefix='gpup5b',output=OUTPUT,acceptance=ROOT/'artifacts/gpup5b-a
                prior_hash=PRIOR_HASH,cumulative_ceiling_ns=4502574545061)
 
 
-def ledger_for(study=STUDY_V1):
-    value=read_json(ROOT/'benchmarks/configs/lp-precision-v4.json')
+def ledger_for(study=STUDY_V1, protocol=None):
+    source=None
+    if protocol is not None and study.additional_ns:
+        # A version-3 protocol carries its own ceiling authority (SPEC-0014
+        # requirement 29): the source campaign reference and the decision
+        # record must hash-match before the ledger is touched.
+        source=checked_reference(ROOT,protocol['source_campaign'])
+        checked_reference(ROOT,protocol['decision'])
+    value=read_json(source) if source else read_json(ROOT/'benchmarks/configs/lp-precision-v4.json')
     authority=checked_reference(ROOT,value['budget_authority'])
     directory=ROOT/'artifacts/lp-campaign-ledgers'/read_json(authority)['id']
     prefix=b''.join((directory/'ledger.jsonl').read_bytes().splitlines(keepends=True)[:study.prior_events])
     if hashlib.sha256(prefix).hexdigest()!=study.prior_hash: raise ValueError('historical ledger prefix changed')
     if read_json(directory/'output.json')['output_path']!=str(ROOT/'artifacts/gpup-baseline-v1'): raise ValueError('original output binding changed')
-    if study.cumulative_ceiling_ns!=value['cumulative_gpu_ns']: raise ValueError('cumulative ceiling differs from the budget authority')
-    return Ledger(directory,file_hash(authority),value['phase_gpu_seconds'],cumulative_ns=value['cumulative_gpu_ns'])
+    if study.cumulative_ceiling_ns!=value['cumulative_gpu_ns']+(study.additional_ns if source else 0): raise ValueError('cumulative ceiling differs from the budget authority')
+    return Ledger(directory,file_hash(authority),value['phase_gpu_seconds'],cumulative_ns=study.cumulative_ceiling_ns)
 
 
 def category_usage(ledger,category,prefix='gpup5b'):
@@ -105,8 +123,12 @@ def main():
     p.add_argument('--protocol',type=Path,default=None,help='research protocol file; GPUP-5B when omitted')
     p.add_argument('command',nargs=argparse.REMAINDER);a=p.parse_args()
     command=a.command[1:] if a.command[:1]==['--'] else a.command
-    study=Study.from_protocol(read_json(a.protocol)) if a.protocol else STUDY_V1
-    with ledger_for(study) as ledger:
+    # A version-3 protocol carries its own ceiling authority; ledger_for
+    # revalidates it. v1/v2 protocols take the unchanged rule (SPEC-0014
+    # requirement 29 leaves both paths intact).
+    value=read_json(a.protocol) if a.protocol else None
+    study=Study.from_protocol(value) if value else STUDY_V1
+    with ledger_for(study,protocol=value) as ledger:
         result=run(ledger,'accept',a.id,command,a.seconds,study.acceptance,study)
         print(result);print('acceptance seconds:',category_usage(ledger,'accept',study.prefix)/NS,'campaign:',ledger.totals()/NS)
     if not result['worker'] or result['supervisor_returncode'] or result['worker']['reason']!='completed' or result['worker']['returncode']!=0:raise SystemExit(1)

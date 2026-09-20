@@ -1,10 +1,14 @@
 //! ADR-0021 isolated executor. Mirrors the guarded six-kernel schedule for comparison.
-use optimizer_core::{LpDiagnostics, LpExecutionDiagnostics, LpWidth};
+use optimizer_core::{
+    ErrorKind, Fp64ExecutionSettings, Fp64Fusion, Fp64Reduction, LpDiagnostics,
+    LpExecutionDiagnostics, LpSettings, LpWidth, Model, SessionSetup, StateUploads,
+    ValidationError, WorkingAllocation,
+};
 use optimizer_cuda_sys::{
     Argument as A, Context, DeviceBuffer, DeviceError, LaunchConfig, Module, Stream, launch,
 };
 use optimizer_lp::{
-    LinearProgram,
+    LinearProgram, PreparedMatrix,
     control::Fp64Controller,
     pdhg::Engine,
     research::{Mode, Operator, Pair, Parts2, Parts3, split},
@@ -394,6 +398,59 @@ impl ResearchExecutor {
             packing_ns,
         })
     }
+    /// Reset per-solve state for a session (SPEC-0014 requirement 10).
+    ///
+    /// Clears the upload-gating key and the tail diagnostic, and re-uploads
+    /// the zeroed guard slots as a counted upload, so a reused executor can
+    /// never silently keep a previous solve's terminal iterate gating or
+    /// guard state. The zero image and its padding are the constructor's.
+    ///
+    /// # Errors
+    /// Returns an availability failure when the device refuses the upload.
+    pub fn begin_solve(
+        &mut self,
+        counters: &mut LpExecutionDiagnostics,
+    ) -> Result<(), DeviceError> {
+        self.loaded = None;
+        self.vector_tail_units = 0;
+        let mut zeroes = vec![0_u32; 3 * (self.n + self.m)];
+        if zeroes.is_empty() {
+            zeroes.push(0);
+        }
+        self.i[4].copy_from(&zeroes, &self.stream)?;
+        counters.upload_calls += 1;
+        counters.upload_bytes += zeroes.len() as u64 * 4;
+        counters.synchronizations += 1;
+        Ok(())
+    }
+
+    /// Re-upload the scaled column bounds (buffers 3 and 4) for a bounds-only
+    /// variant, counted in the caller's per-solve counters.
+    ///
+    /// These two buffers are `F64` in every mode — components and
+    /// double-float packing apply only to the matrix and shadow buffers — and
+    /// the row-bound buffers are the session's and never move (SPEC-0014
+    /// requirement 12). The length check runs before any device call.
+    ///
+    /// # Errors
+    /// Returns an unsupported failure on a dimension mismatch and an
+    /// availability failure when the device refuses an upload.
+    pub fn rebind_column_bounds(
+        &mut self,
+        xl: &[f64],
+        xu: &[f64],
+        counters: &mut LpExecutionDiagnostics,
+    ) -> Result<(), DeviceError> {
+        if xl.len() != self.n || xu.len() != self.n {
+            return Err(DeviceError::Unsupported(
+                "column bounds differ from the program's column count".into(),
+            ));
+        }
+        self.b[3].upload(xl, &self.stream, counters)?;
+        self.b[4].upload(xu, &self.stream, counters)?;
+        Ok(())
+    }
+
     /// Execute at most 64 steps; only synchronized, range-clean endpoints are committed.
     pub fn advance(
         &mut self,
@@ -651,5 +708,328 @@ impl ResearchExecutor {
         cx.copy_from_slice(&x);
         cy.copy_from_slice(&y);
         Ok(None)
+    }
+}
+
+/// One admitted solve of a [`ResearchSession`]: a fresh engine over the
+/// solve's program plus the session's resident executor, reset for this
+/// solve.
+///
+/// The engine borrows the session's program and prepared matrix while the
+/// executor is mutably borrowed — disjoint fields, so the batch loop in
+/// optimizer-experiment can build a fresh [`Fp64Controller`] from `engine`,
+/// drive `executor.advance` with the per-solve counters
+/// [`ResearchSession::fresh_counters`] minted, and certify against `program`,
+/// all through this value. The controller cannot be part of the struct: it
+/// would borrow the engine the struct owns, which no struct may do.
+pub struct ResearchSolve<'s> {
+    /// The solve's engine, step-restricted to the session operator's step.
+    pub engine: Engine<'s>,
+    /// The resident executor after `begin_solve` and any bound rebind.
+    pub executor: &'s mut ResearchExecutor,
+    /// The program actually solved: the materialized variant or the base.
+    pub program: &'s LinearProgram,
+}
+
+/// A repeated-solve session for the isolated research executor (SPEC-0014).
+///
+/// Mirrors [`crate::session::TunedSession`] on the research path: one
+/// context, one code image (read and hashed once), one matrix, one operator
+/// and one [`ResearchExecutor`] for the session's life, with per-solve
+/// gating/guard resets and bounds-only variant rebinds. The per-solve
+/// assess/certify/record loop stays in optimizer-experiment — it is the
+/// witness contract's code, shared with the fresh path in a later slice —
+/// so this type exposes [`ResearchSession::prepare_solve`] rather than a
+/// whole-solve entry point.
+///
+/// The session is `!Send` through its `Rc<Context>`. A device fault reported
+/// by the batch loop must be passed to [`ResearchSession::poison`]; a
+/// poisoned session refuses later solves, and the driver records them
+/// `not_attempted` (requirement 13).
+pub struct ResearchSession {
+    context: Rc<Context>,
+    execution: Fp64ExecutionSettings,
+    image: Vec<u8>,
+    image_sha256: String,
+    model: Model,
+    program: LinearProgram,
+    prepared: PreparedMatrix,
+    operator: Operator,
+    executor: ResearchExecutor,
+    solve_program: Option<LinearProgram>,
+    loaded_bounds: Vec<(f64, f64)>,
+    poisoned: Option<String>,
+    setup: SessionSetup,
+    solve_phases: SessionSetup,
+}
+
+impl ResearchSession {
+    /// Open a research session: precondition once, admit the operator and
+    /// memory once, upload the invariant data once.
+    ///
+    /// The operator and the restricted step are admitted before any device
+    /// allocation, exactly as the fresh research flow admits them, and the
+    /// executor constructor performs the same admission and upload as a
+    /// fresh solve. The execution identity is the one the research verifier
+    /// pins (resident allocation, necessary uploads, warp32 reduction), with
+    /// fusion following the mode. The phases this open measures —
+    /// `preconditioning`, `research_preparation` and
+    /// `invariant_allocation_upload` — land in [`ResearchSession::setup`].
+    ///
+    /// Power-of-two scaling modes are refused: the fresh flow rebuilds the
+    /// engine with explicit exponents for them, which a prepared matrix does
+    /// not express, so a session could not reproduce a fresh power-of-two
+    /// solve bitwise (requirement 15). The batch contract's modes —
+    /// intguard-fp64 and fused-fp64 — do not rescale and are admitted.
+    ///
+    /// # Errors
+    ///
+    /// Returns the settings' and model's validation failures, an unsupported
+    /// failure when the mode or the operator cannot be admitted, and a
+    /// backend failure when the device or the image is refused. Nothing
+    /// falls back.
+    pub fn open(
+        context: Rc<Context>,
+        model: Model,
+        settings: LpSettings,
+        mode: Mode,
+        image: Vec<u8>,
+        diagnostics: &mut LpDiagnostics,
+    ) -> Result<Self, ValidationError> {
+        settings.validate()?;
+        if mode.power2() {
+            return Err(ValidationError::new(
+                ErrorKind::Unsupported,
+                "research sessions do not support power-of-two scaling modes",
+            ));
+        }
+        let mut setup = SessionSetup::default();
+        let program = LinearProgram::new(&model)?;
+        let phase = setup.start();
+        let prepared = PreparedMatrix::new(&program, &settings);
+        setup.finish("preconditioning", phase);
+        let phase = setup.start();
+        let mut engine = Engine::from_prepared(&program, &prepared);
+        let operator = Operator::new(&engine, mode)
+            .map_err(|e| ValidationError::new(ErrorKind::Unsupported, e))?;
+        engine
+            .restrict_step(operator.step)
+            .map_err(|e| ValidationError::new(ErrorKind::Unsupported, e))?;
+        setup.finish("research_preparation", phase);
+        let execution = Fp64ExecutionSettings {
+            schema_version: 1,
+            allocation: WorkingAllocation::Resident,
+            uploads: StateUploads::Necessary,
+            reduction: Fp64Reduction::Warp32V1,
+            fusion: if mode.fused() {
+                Fp64Fusion::PrimalDual
+            } else {
+                Fp64Fusion::Separate
+            },
+        };
+        execution.validate()?;
+        let image_sha256 = optimizer_core::sha256::hex(&image);
+        let mut counters = LpExecutionDiagnostics::new(execution);
+        counters.code_object_sha256 = Some(image_sha256.clone());
+        diagnostics.execution = Some(counters);
+        let phase = setup.start();
+        let executor =
+            ResearchExecutor::new(Rc::clone(&context), &engine, &operator, &image, diagnostics)
+                .map_err(|e| ValidationError::new(ErrorKind::Backend, e.to_string()))?;
+        setup.finish("invariant_allocation_upload", phase);
+        let (lower, upper) = engine.scaled_column_bounds();
+        let loaded_bounds = lower.iter().copied().zip(upper.iter().copied()).collect();
+        Ok(Self {
+            context,
+            execution,
+            image,
+            image_sha256,
+            model,
+            program,
+            prepared,
+            operator,
+            executor,
+            solve_program: None,
+            loaded_bounds,
+            poisoned: None,
+            setup,
+            solve_phases: SessionSetup::default(),
+        })
+    }
+
+    /// Admit one solve and return its engine plus the reset resident
+    /// executor.
+    ///
+    /// The variant, when present, is checked against the session's matrix,
+    /// objective, row bounds, variable IDs and domains before any upload for
+    /// the solve (requirement 11). The executor is then reset
+    /// ([`ResearchExecutor::begin_solve`]) and its column-bound buffers are
+    /// re-uploaded only when the solve's scaled bounds differ from the
+    /// resident ones (requirement 12). The caller drives the shared
+    /// iteration/assessment loop on the returned [`ResearchSolve`]; the
+    /// deadline, cancellation and witness recording are the loop's, as they
+    /// are for a fresh solve.
+    ///
+    /// A device fault here poisons the session. A fault inside the loop is
+    /// reported by the loop, and the caller passes it to
+    /// [`ResearchSession::poison`] — the loop's outcome is not this method's
+    /// to observe.
+    ///
+    /// # Errors
+    ///
+    /// Returns a backend failure naming the original fault when the session
+    /// is poisoned, an unsupported failure for an inadmissible variant, and
+    /// a backend failure when the reset or rebind upload is refused.
+    pub fn prepare_solve(
+        &mut self,
+        variant: Option<&Model>,
+        counters: &mut LpExecutionDiagnostics,
+    ) -> Result<ResearchSolve<'_>, ValidationError> {
+        if let Some(reason) = &self.poisoned {
+            return Err(ValidationError::new(
+                ErrorKind::Backend,
+                format!("the session is poisoned by an earlier device fault: {reason}"),
+            ));
+        }
+        let mut phases = SessionSetup::default();
+        self.solve_phases = SessionSetup::default();
+        let phase = phases.start();
+        let mut variant_program = None;
+        if let Some(variant) = variant {
+            // Admission compares the variant's own canonical program against
+            // the session's: the bounds-only rebind inherits this program's
+            // matrix, objective and row bounds, so comparing against it alone
+            // could never see a changed coefficient (requirement 11).
+            let canonical = LinearProgram::new(variant)?;
+            let rebound = self.program.with_variable_bounds(variant)?;
+            let same_domains = variant
+                .document()
+                .variables
+                .iter()
+                .zip(&self.model.document().variables)
+                .all(|(v, b)| v.domain == b.domain);
+            if !same_domains || !self.program.same_matrix_objective_rows(&canonical) {
+                return Err(ValidationError::new(
+                    ErrorKind::Unsupported,
+                    "a session variant must differ from the session model only in variable bounds",
+                ));
+            }
+            variant_program = Some(rebound);
+        }
+        phases.finish("variant_rebind", phase);
+        self.solve_program = variant_program;
+        let program = self.solve_program.as_ref().unwrap_or(&self.program);
+
+        let phase = phases.start();
+        let mut engine = Engine::from_prepared(program, &self.prepared);
+        engine
+            .restrict_step(self.operator.step)
+            .map_err(|e| ValidationError::new(ErrorKind::Unsupported, e))?;
+        phases.finish("engine_rebind", phase);
+
+        if let Err(error) = self.executor.begin_solve(counters) {
+            self.poisoned = Some(error.to_string());
+            return Err(ValidationError::new(ErrorKind::Backend, error.to_string()));
+        }
+        let (lower, upper) = engine.scaled_column_bounds();
+        if !crate::session::bounds_match(&self.loaded_bounds, lower, upper) {
+            let phase = phases.start();
+            if let Err(error) = self.executor.rebind_column_bounds(lower, upper, counters) {
+                self.poisoned = Some(error.to_string());
+                self.solve_phases = phases;
+                return Err(ValidationError::new(ErrorKind::Backend, error.to_string()));
+            }
+            phases.finish("bound_upload", phase);
+            self.loaded_bounds = lower.iter().copied().zip(upper.iter().copied()).collect();
+        }
+        self.solve_phases = phases;
+        let executor = &mut self.executor;
+        Ok(ResearchSolve {
+            engine,
+            executor,
+            program,
+        })
+    }
+
+    /// Mark the session poisoned after a device fault the batch loop
+    /// reported; later solves are refused (requirement 13).
+    pub fn poison(&mut self, reason: impl Into<String>) {
+        self.poisoned = Some(reason.into());
+    }
+
+    /// Fresh per-solve execution counters carrying the session's recorded
+    /// execution identity and code-image hash (requirement 9).
+    #[must_use]
+    pub fn fresh_counters(&self) -> LpExecutionDiagnostics {
+        let mut counters = LpExecutionDiagnostics::new(self.execution);
+        counters.code_object_sha256 = Some(self.image_sha256.clone());
+        counters
+    }
+
+    /// The model this session was opened with.
+    #[must_use]
+    pub fn model(&self) -> &Model {
+        &self.model
+    }
+
+    /// The session's canonical program, with the base model's column bounds.
+    #[must_use]
+    pub fn program(&self) -> &LinearProgram {
+        &self.program
+    }
+
+    /// The admitted operator; its bounds, step and matrix tail are recorded
+    /// in every solve's witness, identical to a fresh solve's.
+    #[must_use]
+    pub fn operator(&self) -> &Operator {
+        &self.operator
+    }
+
+    /// The mode this session runs.
+    #[must_use]
+    pub fn mode(&self) -> Mode {
+        self.operator.mode
+    }
+
+    /// The code image the executor was loaded from, read once at open.
+    #[must_use]
+    pub fn image(&self) -> &[u8] {
+        &self.image
+    }
+
+    /// The code image's SHA-256, recorded once at open.
+    #[must_use]
+    pub fn image_sha256(&self) -> &str {
+        &self.image_sha256
+    }
+
+    /// The executor's one-time host packing/packing-permutation time.
+    #[must_use]
+    pub fn packing_ns(&self) -> u64 {
+        self.executor.packing_ns
+    }
+
+    /// The one-time setup phases measured at open.
+    #[must_use]
+    pub fn setup(&self) -> &SessionSetup {
+        &self.setup
+    }
+
+    /// The session phases of the most recent prepared solve.
+    #[must_use]
+    pub fn solve_phases(&self) -> &SessionSetup {
+        &self.solve_phases
+    }
+
+    /// The fault that poisoned this session, if one did.
+    #[must_use]
+    pub fn poisoned(&self) -> Option<&str> {
+        self.poisoned.as_deref()
+    }
+
+    /// The device this session is bound to, for a record that must name it.
+    #[must_use]
+    pub fn device(&self) -> &optimizer_cuda_sys::DeviceInfo {
+        self.context.device()
     }
 }

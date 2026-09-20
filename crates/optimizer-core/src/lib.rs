@@ -16,7 +16,7 @@ pub use capability::{
 };
 pub use document::*;
 pub use evaluate::*;
-pub use lp_diagnostics::{LpControlDiagnostics, LpDiagnostics};
+pub use lp_diagnostics::{LpControlDiagnostics, LpDiagnostics, SessionSetup};
 pub use lp_settings::{
     LP_SETTINGS_SCHEMA_VERSION, LpSettings, PreconditionerSettings, PrimalWeightSettings,
     RestartSettings,

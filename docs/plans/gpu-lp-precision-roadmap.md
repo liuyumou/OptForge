@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; slices 0-5, GPUP-5B and GPUP-5C complete; GPUP-THROUGHPUT in progress under accepted [SPEC-0014](../specifications/SPEC-0014-lp-repeated-solve-throughput.md) and [ADR-0023](../decisions/ADR-0023-repeated-solve-throughput.md); slices 6-10 pending
+Status: approved roadmap; slices 0-5, GPUP-5B, GPUP-5C and GPUP-THROUGHPUT complete; slices 6-10 pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: bootstrap (first commit containing this document)
@@ -120,19 +120,23 @@ underflows on scheduling LPs, and tiers recover FP32 storage coverage. It used
 1493.313474227 study plus 66.091602441 acceptance seconds, for 3794.758955639
 cumulative inside the unchanged ceiling. No preset is selected.
 
-GPUP-THROUGHPUT is in progress under [SPEC-0014](../specifications/SPEC-0014-lp-repeated-solve-throughput.md)
+GPUP-THROUGHPUT is complete under [SPEC-0014](../specifications/SPEC-0014-lp-repeated-solve-throughput.md)
 and [ADR-0023](../decisions/ADR-0023-repeated-solve-throughput.md), both accepted
-2026-09-20, the day the user pulled it ahead of GPUP-6; `next_ready_task` remains
-GPUP-THROUGHPUT until its study completes, then GPUP-6. The
+2026-09-20, the day the user pulled it ahead of GPUP-6. The
 GPUP-5C report shows that paired certified-latency ratios stay within 0.92-1.11 of
 tuned for every mode and tier, while context creation (208-330 ms) and the fixed
 host phases dominate 400-600 ms solves at study size, and at 65536 rows
 preconditioning (about 940 ms) and research preparation (about 1020 ms) each exceed
 the total kernel time of a 200-proposal run (19-30 ms). No arithmetic slice removes
 those costs. With its specification, API and resource budget accepted before any
-behavior, the slice keeps the fresh-process single-solve endpoint and its protocol
-unchanged, reports context, setup, transfer and per-solve costs separately, and
-never presents amortized throughput as single-solve latency. GPUP-6 follows it and
+behavior, the slice kept the fresh-process single-solve endpoint and its protocol
+unchanged and never presented amortized throughput as single-solve latency. Its
+[report](../benchmarks/lp-repeated-solve-throughput.md) verifies 687 of 705
+admitted attempts with 4785/4785 batch solves bitwise identical to fresh singles,
+setup amortized to as little as 15.6 ms per solve at N=32 on small-4 (26.6x,
+separately labeled), negative results at N=1 and at 32768 rows, and 18 timed-out
+65536-row short batches, consuming 2617.929459541 study plus 538.371430691
+acceptance seconds for 6951.059845871 cumulative. GPUP-6 follows it and
 requires its bounded adaptive contract.
 
 ## Numerical design and candidate methods
@@ -263,7 +267,8 @@ controller under GPUP-3. The baseline completed 144 attempts and consumed
 173.148261443 GPU seconds; preserve that ledger consumption. Host/GPU controller
 differences and limited GPU certified coverage are documented in the baseline report.
 Full MILP integration remains separately listed in the backlog; repeated-solve
-throughput is GPUP-THROUGHPUT, in progress under accepted
+throughput is GPUP-THROUGHPUT, complete under accepted
 [SPEC-0014](../specifications/SPEC-0014-lp-repeated-solve-throughput.md) and
-[ADR-0023](../decisions/ADR-0023-repeated-solve-throughput.md). Neither follows
+[ADR-0023](../decisions/ADR-0023-repeated-solve-throughput.md) with its
+[report](../benchmarks/lp-repeated-solve-throughput.md). Neither follows
 automatically from a faster LP kernel.

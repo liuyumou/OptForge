@@ -2,8 +2,16 @@
 
 ## GPUP-THROUGHPUT: specification, ADR and budget before behavior (2026-09-20)
 
-Status: in progress (Phase A, documentation only; no behavior). The backlog reorder
-record below stays as the history of how this slice was selected.
+Status: complete. Phase A is committed as 0d5d713 with its full pinned-native
+gate receipt; Phases B-E are the implementation commit on top of it. The
+[repeated-solve report](../docs/benchmarks/lp-repeated-solve-throughput.md)
+holds the Phase E evidence; GPUP-6 is next_ready_task and requires its bounded
+adaptive contract before behavior. The working tree carried the optimizer-lp
+PreparedMatrix/Engine::from_prepared refactor, TunedSession and
+ResearchSession with residency bound rebinding, solve-batch/materialize/verify-batch
+CLI, lp_batch and research batch documents, both frozen schemas, lp_variants.py,
+benchmark_lp_throughput.py (705 planned attempts) and the session_ device cases. The
+backlog reorder record below stays as the history of how this slice was selected.
 
 Objective: implement GPUP-THROUGHPUT (state/backlog.yaml next_ready_task) in phases,
 beginning with its accepted bounded contract: SPEC-0014 (repeated-solve sessions for
@@ -46,6 +54,53 @@ artifact schemas and committed-record replay). SPEC-0014, ADR-0023 and the froze
 lp-throughput-v1 protocol (planned 705 attempts, ceiling 8102574545061 ns embedding
 source campaign hash b40217f3... and decision hash 06f28fbf...) are committed as
 documentation. No GPU job ran; the campaign ledger is untouched.
+
+Phase B-D evidence (2026-09-20): full pinned-native bash tools/check.sh passed on the
+implementation tree (source identity 3a10d41228d2e70b8ce1a544b21c7657a58935e870c33985b185041273df6f36;
+146 Python tests including 15 throughput grid/variant/budget/analysis gates, 88
+documentation pages with valid links/anchors, artifact schemas and committed-record
+replay; log /tmp/gpupt-gate-b2.log). Resumed work added tools/analyze_lp_throughput.py
+(separate-endpoint labeling, bitwise identity counts), the lp_gpu_cli_check.py
+solve-batch/verify-batch section, the v3 acceptance ledger authority in
+lp_research_budget.py's main, the CHANGELOG behavior entry and SPEC-0014
+implementation/test mappings. The Rust workspace test suite passes across 54
+binaries with zero failures; the eight session_ device cases compile and await
+their leased acceptance run. No GPU job has run; the campaign ledger is untouched.
+
+Phase E evidence (2026-09-21): the frozen gpup-throughput-v1 study admitted all 705
+planned attempts; 687 verified independently with the archived executables and 18
+(the 65536-row N=8 short batches, both kinds, three repetitions) stopped at their
+58-second reservations without endpoints, charged and retained. Batch solves are
+bitwise identical to fresh singles on 4785/4785 compared pairs; fused and intguard
+research trajectories agree on 2451/2451 numerical comparisons (launch counts
+differ by construction). Study 2617.929459541/2700, acceptance 538.371430691/600,
+combined 3156.300890232/3300, cumulative 6951.059845871/8102.574545061 GPU seconds;
+the 8178-event ledger SHA-256 dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6
+preserves the 6722-event prefix ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b,
+with all 728 new reservations settled. Device acceptance passed on
+GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48: regular suites on both binaries, all
+session_ cases under all four scoped sanitizers with zero errors/hazards, the
+research_ cases under all four, the study_observation/matched_control/tuned_cases
+filters under memcheck/initcheck/synccheck, and the CLI evidence check including
+solve-batch, materialize, verify-batch and the pinned fallback. Retained failures:
+one stale-binary launch, one three-defect session-test run and two CLI-check
+failures (all fixed before final evidence), one session-racecheck reservation
+timeout (retried, passed 116.8 s), and the pre-existing-filters racecheck that
+timed out after study_observation and matched_control passed clean; tuned_cases
+lacks a racecheck receipt because the frozen acceptance cap left 61.6 seconds, and
+the gap is recorded in the report and known failures, not relabeled. The measured
+source tree 6343d622025803e6e9637612c8fd05d30832b138788ab652fe5ed791f245b1ea
+(optimizer 6498e4f3e126cd24d3bb2587dadd792857a4819ec44ac5f6ddbd3f009e087676,
+research ec778ceeba80bc072525c4447863a46e892d72bc11fc94d151c088a4ab776e1e, code
+object 6a743e1e745159f304168124800eec86891c641dfe9f18a91c0aa11d0555b7a2 unchanged
+from GPUP-5C) is archived in artifacts/gpup-throughput-v1 with protocol, jobs,
+ledger snapshot and analysis.json (analysis tool
+2916421b148e70ebb676a6e353fdf745fd1af8c9768fbcc66463070b3de40448). The
+[report](../docs/benchmarks/lp-repeated-solve-throughput.md) keeps the amortized
+endpoint separate and records the N=1 and 32768-row negative results. The
+post-measurement changes are the analysis-tool tuple fix and cross-mode
+launch-count exclusion (each with a regression test), documentation and state
+records; measured kernels, sessions and frozen evidence are unchanged.
 
 ## GPUP-THROUGHPUT pulled ahead of GPUP-6; GPUP-5/5B/5C integrated (2026-09-20)
 

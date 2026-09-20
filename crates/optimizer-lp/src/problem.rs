@@ -15,7 +15,7 @@
 //! an atomic reduction would make the result depend on the order the hardware
 //! happened to schedule, which requirement 8 forbids.
 
-use optimizer_core::{Bound, ErrorKind, Model, ObjectiveSense, ValidationError};
+use optimizer_core::{Bound, ErrorKind, Model, ObjectiveSense, ValidationError, Variable};
 
 /// A sparse matrix in one compressed orientation.
 ///
@@ -111,6 +111,17 @@ fn bound_value(bound: &Bound) -> f64 {
     }
 }
 
+/// The column bound pairs of a canonical variable list.
+///
+/// Shared by [`LinearProgram::new`] and [`LinearProgram::with_variable_bounds`]
+/// so the two cannot diverge on what a bound becomes.
+fn column_bounds(variables: &[Variable]) -> Vec<Range> {
+    variables
+        .iter()
+        .map(|variable| Range::of(&variable.lower, &variable.upper))
+        .collect()
+}
+
 /// One linear program in the form the iteration and the certification both read.
 ///
 /// Held as `min cᵀx + offset` subject to `rows.lower ≤ A x ≤ rows.upper` and
@@ -153,11 +164,7 @@ impl LinearProgram {
             .iter()
             .map(|variable| variable.id)
             .collect();
-        let columns: Vec<Range> = document
-            .variables
-            .iter()
-            .map(|variable| Range::of(&variable.lower, &variable.upper))
-            .collect();
+        let columns: Vec<Range> = column_bounds(&document.variables);
         let rows: Vec<Range> = document
             .constraints
             .iter()
@@ -210,6 +217,122 @@ impl LinearProgram {
             variable_ids,
             sense,
         })
+    }
+
+    /// This program with its variable bounds replaced by a variant model's.
+    ///
+    /// The variant supplies column bounds and nothing else: the matrix in both
+    /// orientations, the objective, the objective constant, the row bounds, the
+    /// variable identities and the sense are this program's, cloned. That is
+    /// [`Model::rebound`]'s contract one level down — a SPEC-0014 batch variant
+    /// changes bounds only, so its canonical form differs from this program
+    /// only in `columns`, and rebuilding one through [`LinearProgram::new`]
+    /// would redo the compression and the term indexing for data that already
+    /// passed them. When the variant differs only in column bounds, the result
+    /// is exactly what `LinearProgram::new` of the variant would produce.
+    ///
+    /// The identity check is the same one `Model::rebound` makes, and it is
+    /// load-bearing rather than ceremonial: the cloned matrix's columns are
+    /// indexed by position, so a variant naming different variables would apply
+    /// its bounds to the wrong columns. Both lists are sorted by id —
+    /// `Model::new` canonicalizes — so equal lengths and pairwise-equal ids are
+    /// set equality.
+    ///
+    /// # Errors
+    ///
+    /// Returns an unsupported failure when the variant's variable IDs are not
+    /// exactly this program's.
+    pub fn with_variable_bounds(&self, variant: &Model) -> Result<Self, ValidationError> {
+        let variables = &variant.document().variables;
+        let same_ids = variables.len() == self.variable_ids.len()
+            && variables
+                .iter()
+                .zip(&self.variable_ids)
+                .all(|(variable, id)| variable.id == *id);
+        if !same_ids {
+            return Err(ValidationError::new(
+                ErrorKind::Unsupported,
+                "a bounds variant must name exactly the program's variable IDs",
+            ));
+        }
+        Ok(Self {
+            row_major: self.row_major.clone(),
+            column_major: self.column_major.clone(),
+            objective: self.objective.clone(),
+            offset: self.offset,
+            rows: self.rows.clone(),
+            columns: column_bounds(variables),
+            variable_ids: self.variable_ids.clone(),
+            sense: self.sense,
+        })
+    }
+
+    /// Whether two programs share everything a repeated solve may reuse.
+    ///
+    /// Field-wise equality of the matrix in both orientations, the objective,
+    /// the objective constant, the row bounds, the variable identities and the
+    /// sense — every field except `columns`. SPEC-0014 requirement 11 admits a
+    /// batch variant by this check: it is the difference between "same solve,
+    /// new variable bounds" and a different solve, which a session must refuse.
+    #[must_use]
+    pub fn same_matrix_objective_rows(&self, other: &Self) -> bool {
+        self.row_major == other.row_major
+            && self.column_major == other.column_major
+            && self.objective == other.objective
+            && self.offset == other.offset
+            && self.rows == other.rows
+            && self.variable_ids == other.variable_ids
+            && self.sense == other.sense
+    }
+
+    /// A SHA-256 commitment to the whole canonical program.
+    ///
+    /// Hashed over one canonical little-endian serialization: the row and
+    /// column counts as `u64`; each matrix orientation's offsets as `u64`,
+    /// minor indices as `u32` and values as their `f64` bit patterns; the
+    /// objective coefficients and constant as bit patterns; both bound sets as
+    /// bit patterns, lower then upper, rows then columns; the variable
+    /// identities as `u32`; and a one-byte sense tag. Lengths need no framing
+    /// of their own: the counts fix every vector's length, since each
+    /// orientation's offsets end at its nonzero count.
+    ///
+    /// The name is about identity, not exclusion: the digest commits to the
+    /// full program *including* both bound sets, so a bounds-only variant
+    /// hashes differently. Evidence names a solve by this digest; the reuse
+    /// decision is [`Self::same_matrix_objective_rows`]'s, and the two are
+    /// deliberately separate.
+    #[must_use]
+    pub fn matrix_sha256(&self) -> String {
+        let mut bytes = Vec::new();
+        bytes.extend_from_slice(&(self.row_count() as u64).to_le_bytes());
+        bytes.extend_from_slice(&(self.column_count() as u64).to_le_bytes());
+        for form in [&self.row_major, &self.column_major] {
+            for offset in &form.offsets {
+                bytes.extend_from_slice(&(*offset as u64).to_le_bytes());
+            }
+            for index in &form.indices {
+                bytes.extend_from_slice(&index.to_le_bytes());
+            }
+            for value in &form.values {
+                bytes.extend_from_slice(&value.to_bits().to_le_bytes());
+            }
+        }
+        for coefficient in &self.objective {
+            bytes.extend_from_slice(&coefficient.to_bits().to_le_bytes());
+        }
+        bytes.extend_from_slice(&self.offset.to_bits().to_le_bytes());
+        for range in self.rows.iter().chain(&self.columns) {
+            bytes.extend_from_slice(&range.lower.to_bits().to_le_bytes());
+            bytes.extend_from_slice(&range.upper.to_bits().to_le_bytes());
+        }
+        for id in &self.variable_ids {
+            bytes.extend_from_slice(&id.to_le_bytes());
+        }
+        bytes.push(match self.sense {
+            ObjectiveSense::Minimize => 0,
+            ObjectiveSense::Maximize => 1,
+        });
+        optimizer_core::sha256::hex(&bytes)
     }
 
     /// Number of constraints.
@@ -494,5 +617,139 @@ mod tests {
             let (indices, _) = program.row_major().line(major);
             assert!(indices.windows(2).all(|pair| pair[0] < pair[1]));
         }
+    }
+
+    /// A bounds-only variant converted through the program is exactly a fresh
+    /// conversion of the variant model — the construction is a shortcut, not a
+    /// different result.
+    #[test]
+    fn with_variable_bounds_matches_a_fresh_conversion_of_a_bounds_only_variant() {
+        let base = model(ObjectiveSense::Minimize);
+        let program = LinearProgram::new(&base).unwrap();
+        let mut tightened = base.document().variables.clone();
+        tightened[0].lower = finite(0.25);
+        tightened[1].upper = finite(4.0);
+        let variant = base.rebound(tightened).unwrap();
+        let rebound = program.with_variable_bounds(&variant).unwrap();
+        assert_eq!(rebound, LinearProgram::new(&variant).unwrap());
+        assert_eq!(
+            rebound.columns(),
+            [
+                Range {
+                    lower: 0.25,
+                    upper: 1.0
+                },
+                Range {
+                    lower: 0.0,
+                    upper: 4.0
+                },
+            ]
+        );
+        assert!(rebound.same_matrix_objective_rows(&program));
+    }
+
+    #[test]
+    fn with_variable_bounds_accepts_a_model_with_identical_bounds() {
+        let base = model(ObjectiveSense::Minimize);
+        let program = LinearProgram::new(&base).unwrap();
+        assert_eq!(program.with_variable_bounds(&base).unwrap(), program);
+    }
+
+    /// The identity check mirrors `Model::rebound`'s: a variant that names
+    /// different variables — by membership or by count — is refused, because
+    /// the cloned matrix's columns are indexed by position.
+    #[test]
+    fn with_variable_bounds_refuses_a_different_variable_id_set() {
+        let program = LinearProgram::new(&model(ObjectiveSense::Minimize)).unwrap();
+
+        let mut renamed = model(ObjectiveSense::Minimize).document().clone();
+        renamed.variables[1].id = 7;
+        for constraint in &mut renamed.constraints {
+            for term in &mut constraint.terms {
+                if term.variable_id == 1 {
+                    term.variable_id = 7;
+                }
+            }
+        }
+        for term in &mut renamed.objective.terms {
+            if term.variable_id == 1 {
+                term.variable_id = 7;
+            }
+        }
+        let renamed = Model::new(renamed).unwrap();
+        let error = program.with_variable_bounds(&renamed).unwrap_err();
+        assert_eq!(error.kind, ErrorKind::Unsupported);
+
+        let mut wider = model(ObjectiveSense::Minimize).document().clone();
+        wider.variables.push(Variable {
+            id: 2,
+            domain: Domain::Continuous,
+            lower: finite(0.0),
+            upper: finite(1.0),
+        });
+        let wider = Model::new(wider).unwrap();
+        let error = program.with_variable_bounds(&wider).unwrap_err();
+        assert_eq!(error.kind, ErrorKind::Unsupported);
+    }
+
+    #[test]
+    fn same_matrix_objective_rows_ignores_column_bounds_only() {
+        let base = model(ObjectiveSense::Minimize);
+        let program = LinearProgram::new(&base).unwrap();
+        assert!(program.same_matrix_objective_rows(&program));
+
+        let mut tightened = base.document().variables.clone();
+        tightened[0].upper = finite(0.5);
+        let variant = base.rebound(tightened).unwrap();
+        let bounds_only = LinearProgram::new(&variant).unwrap();
+        assert!(program.same_matrix_objective_rows(&bounds_only));
+
+        let mut coefficient = base.document().clone();
+        coefficient.constraints[0].terms[0].coefficient = 1.5;
+        let coefficient = LinearProgram::new(&Model::new(coefficient).unwrap()).unwrap();
+        assert!(!program.same_matrix_objective_rows(&coefficient));
+
+        let mut row = base.document().clone();
+        row.constraints[0].upper = finite(1.75);
+        let row = LinearProgram::new(&Model::new(row).unwrap()).unwrap();
+        assert!(!program.same_matrix_objective_rows(&row));
+
+        let mut objective = base.document().clone();
+        objective.objective.terms[0].coefficient = -1.5;
+        let objective = LinearProgram::new(&Model::new(objective).unwrap()).unwrap();
+        assert!(!program.same_matrix_objective_rows(&objective));
+
+        let maximize = LinearProgram::new(&model(ObjectiveSense::Maximize)).unwrap();
+        assert!(!program.same_matrix_objective_rows(&maximize));
+    }
+
+    /// The digest names the full program: stable across a rebuild of the same
+    /// model, changed by a coefficient — and changed by a bounds-only variant,
+    /// because it commits to the bounds too. The reuse decision is
+    /// `same_matrix_objective_rows`'s; this digest is evidence identity.
+    #[test]
+    fn matrix_sha256_commits_to_coefficients_and_bounds() {
+        let base = model(ObjectiveSense::Minimize);
+        let program = LinearProgram::new(&base).unwrap();
+        let digest = program.matrix_sha256();
+        assert_eq!(digest.len(), 64);
+        assert_eq!(
+            digest,
+            LinearProgram::new(&model(ObjectiveSense::Minimize))
+                .unwrap()
+                .matrix_sha256()
+        );
+
+        let mut coefficient = base.document().clone();
+        coefficient.constraints[0].terms[0].coefficient = 1.5;
+        let coefficient = LinearProgram::new(&Model::new(coefficient).unwrap()).unwrap();
+        assert_ne!(digest, coefficient.matrix_sha256());
+
+        let mut tightened = base.document().variables.clone();
+        tightened[0].upper = finite(0.5);
+        let variant = base.rebound(tightened).unwrap();
+        let bounds_only = program.with_variable_bounds(&variant).unwrap();
+        assert!(program.same_matrix_objective_rows(&bounds_only));
+        assert_ne!(digest, bounds_only.matrix_sha256());
     }
 }

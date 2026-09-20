@@ -148,4 +148,9 @@ per-solve time is a separately labeled endpoint, never substituted for fresh
 single-solve latency. The frozen protocol is benchmarks/configs/lp-throughput-v1.json;
 its budget is 2700 study plus 600 acceptance seconds, 3300 combined, under identity
 gpup-throughput-v1 within the raised 8102.574545061-second cumulative ceiling.
-Existing commands, defaults, schemas and archived evidence are unchanged.
+Existing commands, defaults, schemas and archived evidence are unchanged. The
+[GPUP-THROUGHPUT report](../benchmarks/lp-repeated-solve-throughput.md) verifies
+687 of 705 admitted attempts with 4785/4785 batch solves bitwise identical to
+fresh singles, records the session_ sanitizer coverage and the tuned_cases
+racecheck gap, and consumes 2617.929459541 study plus 538.371430691 acceptance
+seconds for 6951.059845871 cumulative.

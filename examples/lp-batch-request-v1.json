@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "kind": "repeat",
+  "solves": 2,
+  "variants": [],
+  "generator": null,
+  "batch_time_limit_ms": 60000
+}

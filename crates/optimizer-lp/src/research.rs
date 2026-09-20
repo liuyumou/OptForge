@@ -323,6 +323,13 @@ pub fn transpose<T: Copy>(p: &LinearProgram, rows: &[T]) -> Vec<T> {
         .collect()
 }
 /// Admitted immutable research matrix and conservative step information.
+///
+/// An operator is a pure function of the program's matrix, the preconditioner
+/// and the spectral step: every field below derives from coefficients and
+/// scales, and none derives from a bound or the objective. Under SPEC-0014
+/// requirement 7 it is therefore part of what a repeated-solve session may
+/// reuse across solves that differ only in variable bounds, which is what lets
+/// the research path admit it once at session open.
 pub struct Operator {
     /// Arithmetic identity.
     pub mode: Mode,
@@ -339,6 +346,12 @@ pub struct Operator {
 }
 impl Operator {
     /// Admit operator and step before any allocation on the device.
+    ///
+    /// Admission reads only the matrix, the preconditioner and the engine's
+    /// step — the scaled matrix values, the diagonals for a factored mode, and
+    /// norm bounds of coefficient arrays. It holds no bound- or
+    /// objective-derived state, so one admission serves every solve of a
+    /// session whose variants differ only in variable bounds.
     pub fn new(engine: &Engine<'_>, mode: Mode) -> Result<Self, &'static str> {
         let p = engine.program();
         let rows = if mode.factored() {

@@ -66,16 +66,27 @@ ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b with the
 4996-event prefix intact. On 2026-09-20 the user pulled GPUP-THROUGHPUT ahead of
 GPUP-6: after GPUP-5C, context creation (208-330 ms) and the fixed host phases, not
 arithmetic, dominate solves, and at 65536 rows preconditioning and research
-preparation each exceed total kernel time. GPUP-THROUGHPUT is in progress under
+preparation each exceed total kernel time. GPUP-THROUGHPUT is complete under
 [SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md) and
 [ADR-0023](docs/decisions/ADR-0023-repeated-solve-throughput.md), both accepted
-2026-09-20. It leaves the single-solve endpoint, protocol, defaults and archived
-evidence unchanged and never reports amortized throughput as single-solve latency.
-Its cumulative ceiling is 8102.574545061 seconds, with 2700 study / 600 acceptance /
-3300 combined seconds under identity gpup-throughput-v1; it preserves the 6722-event
-ledger prefix ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b and
-the 3794.758955639 consumed seconds. GPUP-6 follows it and requires its bounded
-adaptive contract before behavior.
+2026-09-20: opt-in TunedSession/ResearchSession reuse one context, prepared matrix
+and residency per batch, with per-solve cold iterates, fresh certification and
+bound rebinds counted separately. Its
+[report](docs/benchmarks/lp-repeated-solve-throughput.md) verifies 687 of 705
+admitted attempts under identity gpup-throughput-v1: 4785/4785 batch solves are
+bitwise identical to fresh singles, amortized throughput reaches 26.6x fresh
+single-solve latency at N=32 on small-4 as a separately labeled endpoint, a batch
+of one does not pay off, sessions lose at 32768 rows, and all 18 65536-row short
+batches timed out. It leaves the single-solve endpoint, protocol, defaults and
+archived evidence unchanged and never reports amortized throughput as
+single-solve latency. Cumulative campaign consumption is 6951.059845871 seconds
+inside the 8102.574545061-second ceiling (2617.929459541 study / 2700,
+538.371430691 acceptance / 600); the 8178-event ledger SHA-256 is
+dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6 with the
+6722-event prefix ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b
+intact. The pre-existing tuned_cases filter lacks a clean racecheck receipt (the
+session_ scope passed all four sanitizers); the partial receipts are retained.
+GPUP-6 follows it and requires its bounded adaptive contract before behavior.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

@@ -291,7 +291,19 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         std::fs::rename(partial, destination)?;
     }
 
-    let code = match record.termination {
+    let code = exit_code(record.termination);
+
+    let mut stdout = io::stdout().lock();
+    writeln!(stdout, "{output}")
+        .and_then(|()| stdout.flush())
+        .map_err(|error| io::Error::other(format!("io: stdout: {error}")))?;
+    Ok(code)
+}
+
+/// The exit status of one solve outcome, shared by `solve` and `solve-batch`
+/// so both map the same termination the same way.
+pub(crate) fn exit_code(termination: Termination) -> u8 {
+    match termination {
         // A completed mathematical outcome.
         Termination::Optimal
         | Termination::Infeasible
@@ -306,13 +318,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         | Termination::NodeLimit => 1,
         // A failure is an error, not a solve outcome.
         Termination::NumericalFailure | Termination::BackendFailure | Termination::Unsupported => 2,
-    };
-
-    let mut stdout = io::stdout().lock();
-    writeln!(stdout, "{output}")
-        .and_then(|()| stdout.flush())
-        .map_err(|error| io::Error::other(format!("io: stdout: {error}")))?;
-    Ok(code)
+    }
 }
 
 /// Run one solve on an opened device, reporting an availability failure as text.

@@ -18,10 +18,34 @@ User-visible changes are recorded here using Conventional Commit terminology.
   Amortized throughput is a separately labeled endpoint, never substituted for
   fresh-process single-solve latency; no runtime behavior changes yet.
 
+- GPUP-THROUGHPUT (behavior phase): opt-in repeated-solve sessions implement
+  SPEC-0014. `optimizer solve-batch` runs one `TunedSession` per batch over a
+  fixed matrix, writing one individually verifiable lp-endpoint-v3 per solve plus
+  an lp-batch-endpoint-v1 record; `optimizer lp-study materialize` and
+  `lp-study verify-batch` expose the deterministic variant materialization and
+  the evidence-only batch verification. The isolated research executable gains
+  `batch`/`verify-batch` actions limited to the `intguard-fp64` and `fused-fp64`
+  modes. New lp-batch-request-v1 and lp-batch-endpoint-v1 schemas, the
+  `tools/lp_variants.py` witness-tightening generator, the frozen
+  `tools/benchmark_lp_throughput.py` planner and the
+  `tools/analyze_lp_throughput.py` verifier with separate-endpoint labeling and
+  bitwise identity counts. `Backend::solve`, backend selectors, defaults, the
+  fresh-process single-solve endpoint, prior protocols, manifests and archived
+  evidence are unchanged; no dispatch, preset, warm start or fallback change.
+
 - The frozen GPUP-THROUGHPUT protocol benchmarks/configs/lp-throughput-v1.json
   raises the cumulative screening ceiling by 3600 seconds to 8102.574545061
   seconds under identity gpup-throughput-v1 (study 2700 s, acceptance 600 s,
   combined 3300 s).
+
+- GPUP-THROUGHPUT (study phase): the frozen 705-attempt gpup-throughput-v1 study
+  is measured and verified in the
+  [repeated-solve report](docs/benchmarks/lp-repeated-solve-throughput.md). 687
+  attempts verify independently; 4785/4785 compared batch solves are bitwise
+  identical to fresh-process single solves, and amortized per-solve time reaches
+  26.6x fresh single-solve latency at N=32 on small-4 as a separately labeled
+  endpoint. Study 2617.929459541 and acceptance 538.371430691 GPU seconds;
+  cumulative campaign consumption is 6951.059845871 seconds.
 
 - GPUP-5C (ADR-0022) records the [FP64-pipe root cause](docs/benchmarks/lp-fp64-pipe-root-cause.md)
   of the component slowdown and adds feature-gated research modes `intguard-fp64`,

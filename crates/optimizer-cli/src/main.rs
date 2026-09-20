@@ -1,5 +1,6 @@
 //! Workspace CLI and original-model candidate validation. No solving is performed.
 
+mod batch;
 mod input;
 mod lp_study;
 mod model;
@@ -30,11 +31,16 @@ Usage:
     [--backend highs|host-lp|cuda-lp|cuda-lp-matched|cuda-lp-tuned] [--lp-settings <path>]
     [--lp-execution <path>] [--lp-precision <path>] [--device GPU-<uuid>]
     [--lp-evidence <path>] [--lp-profile true|false] [--lp-device-memory-bytes <bytes>]
+  optimizer solve-batch --model <path> --batch <path> --config <path> --lp-settings <path>
+    --lp-execution <path> --device GPU-<uuid> --lp-evidence <dir>
+    [--lp-profile true|false] [--lp-device-memory-bytes <bytes>]
   optimizer lp-study prepare --instance <path> --output <model-path>
   optimizer lp-study verify --model <path> --evidence <path>
   optimizer lp-study external-certify --model <path> --evidence <witness-path> --output <path>
   optimizer lp-study external-verify --model <path> --evidence <path>
   optimizer lp-study replay --model <path> --evidence <path> --output <path> [--device GPU-<uuid>]
+  optimizer lp-study materialize --model <path> --batch <path> --index <k> --out <path>
+  optimizer lp-study verify-batch --model <path> --batch <path> --evidence <dir>
   optimizer search --model <path> --config <path> [--output <path>] [REGISTRY]
   optimizer verify --record <path> --model <path> [--instance <path>] [REGISTRY]
   optimizer schedule generate --instance-id <text> --seed <u32> --jobs <n> --machines <m> [--output <path>]
@@ -77,6 +83,9 @@ fn run(args: Vec<OsString>) -> io::Result<u8> {
         }
         [command, options @ ..] if command == "solve" => {
             return solve::solve(options);
+        }
+        [command, options @ ..] if command == "solve-batch" => {
+            return batch::run(options);
         }
         [command, options @ ..] if command == "search" => {
             return search::search(options);

@@ -1,14 +1,14 @@
 # SPEC-0014: Repeated-Solve LP Throughput with Explicit Matrix, Context and Device Reuse
 
-Status: accepted by the maintainer's implementation request, 2026-09-20
+Status: accepted by the maintainer's implementation request, 2026-09-20; implemented and measured, 2026-09-21
 Scope: opt-in repeated-solve sessions for cuda-lp-tuned and the isolated research
 executable
 Owner: numerical backend and experiment tooling
 Introduced: GPUP-THROUGHPUT
-Last reviewed commit: pending
+Last reviewed commit: GPUP-THROUGHPUT implementation and Phase E study
 Supersedes: none; extends SPEC-0010, SPEC-0011, SPEC-0012 and SPEC-0013
-Implementation: pending
-Tests: pending
+Implementation: [prepared matrix and variant rebinding](../../crates/optimizer-lp/src/problem.rs), [Engine::from_prepared](../../crates/optimizer-lp/src/pdhg.rs), [tuned and research sessions](../../crates/optimizer-lp-cuda/src/session.rs), [residency bound rebind](../../crates/optimizer-lp-cuda/src/residency.rs), [batch documents](../../crates/optimizer-experiment/src/lp_batch.rs), [solve-batch CLI](../../crates/optimizer-cli/src/batch.rs), [variant generator](../../tools/lp_variants.py), [frozen planner](../../tools/benchmark_lp_throughput.py), [analysis](../../tools/analyze_lp_throughput.py); [Phase E report](../benchmarks/lp-repeated-solve-throughput.md)
+Tests: implementation mapping below; [session device acceptance](../../crates/optimizer-lp-cuda/tests/device/session.rs), [CLI contracts](../../crates/optimizer-cli/tests/batch.rs), [document contracts](../../crates/optimizer-experiment/src/lp_batch.rs), [grid/variant/budget/analysis gates](../../tests/integration/test_lp_throughput.py); Phase E evidence in the report and artifacts/gpup-throughput-v1
 
 ## Purpose
 

@@ -1,5 +1,25 @@
 # Known Failures and Limitations
 
+## GPUP-THROUGHPUT: 65536-row short batches time out; tuned_cases racecheck incomplete
+
+The [repeated-solve report](../docs/benchmarks/lp-repeated-solve-throughput.md)
+verifies 687 of 705 admitted attempts. The 18 unverified attempts are the
+65536-row N=8 short batches (batch-repeat-short and batch-variant-short on
+irregular-65536, dense_block-65536 and mixed-65536, research-fused-fp64): each
+was stopped at its 58-second supervisor reservation with no endpoint written.
+irregular-32768 completes but its amortized per-solve time (6.09 s) exceeds its
+fresh single-solve latency (3.95 s): sessions do not pay off at that size with
+200-proposal solves, and a batch of one does not pay off anywhere (paired ratio
+0.67-1.04). Every 200-proposal short block terminates at the work limit, fresh
+and batched alike, so no short block claims a certificate. The pre-existing
+tuned_cases filter lacks a clean racecheck receipt: the run exceeded its
+90-second reservation after study_observation and matched_control passed with
+zero hazards, and the frozen 600-second acceptance cap (61.6 seconds left) could
+not fit a rerun. The SPEC-0014 session_ scope passed all four sanitizers
+including racecheck, and tuned_cases passed the other three; the partial
+receipts are retained. Reproduce with benchmarks/configs/lp-throughput-v1.json
+and the archived measured executables.
+
 ## Consumer Blackwell runs FP64, double compares and 64-bit conversions at 1/64 rate
 
 The [root-cause note](../docs/benchmarks/lp-fp64-pipe-root-cause.md) shows that every

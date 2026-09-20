@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "model_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "batch_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "requested_backend": "cuda-lp-tuned",
+  "setup": {
+    "phases_ns": {
+      "device_context": 208412557,
+      "module_load": 44721093,
+      "preconditioning": 119804332,
+      "invariant_allocation_upload": 81306918
+    }
+  },
+  "solves": [
+    {
+      "index": 0,
+      "model_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "endpoint_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "certified_success",
+      "solve_elapsed_ns": 1493861120,
+      "session_phases_ns": {
+        "variant_rebind": 12480,
+        "engine_rebind": 351244,
+        "bound_upload": 482031
+      },
+      "reason": null
+    },
+    {
+      "index": 1,
+      "model_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "endpoint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "status": "certified_success",
+      "solve_elapsed_ns": 1487720945,
+      "session_phases_ns": {
+        "variant_rebind": 11962,
+        "engine_rebind": 348977,
+        "bound_upload": 476588
+      },
+      "reason": null
+    }
+  ],
+  "payload_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+}

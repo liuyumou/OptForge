@@ -11,4 +11,5 @@ if [[ "${2:-regular}" == regular ]]; then
   "$binary" --test-threads 1 --nocapture
 else
   /usr/local/cuda/bin/compute-sanitizer --error-exitcode 99 --tool "$2" "$binary" research_ --test-threads 1 --nocapture
+  /usr/local/cuda/bin/compute-sanitizer --error-exitcode 99 --tool "$2" "$binary" session_ --test-threads 1 --nocapture
 fi
