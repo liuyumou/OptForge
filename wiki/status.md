@@ -11,7 +11,7 @@ evidence is recorded in [active task](../state/active-task.md).
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | Prioritized GPU LP precision track (GPUP-6 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); repeated-solve throughput and full MILP performance are later tracks |
+| Planned | Prioritized GPU LP precision track (GPUP-THROUGHPUT next, then GPUP-6 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
 | Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
@@ -55,7 +55,11 @@ attributes the component slowdown to the sm_120 FP64 pipe; GPUP-5C acts on it un
 with integer-pipe guards, a fused two-launch schedule, double-float FP32 pairs,
 explicit tolerance tiers and a frozen development extension; its
 [report](../docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies 806 of 850 attempts,
-raising cumulative consumption to 3794.758955639 seconds. GPUP-6 follows;
+raising cumulative consumption to 3794.758955639 seconds. Because context creation
+and fixed host phases, not arithmetic, now dominate solves, the user pulled
+GPUP-THROUGHPUT (repeated-solve throughput with explicit matrix and device reuse)
+ahead of GPUP-6 on 2026-09-20; it needs its own accepted specification and budget
+before behavior and does not replace the single-solve endpoint. GPUP-6 follows;
 adaptive recovery requires its bounded contract. No supported recipe is available. The campaign retains its eight GPU-hour cap; acceptance details remain
 in the active-task record.
 

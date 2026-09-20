@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; slices 0-5 and GPUP-5B complete; GPUP-5C complete; slices 6-10 pending
+Status: approved roadmap; slices 0-5, GPUP-5B and GPUP-5C complete; GPUP-THROUGHPUT pulled ahead of slice 6 on 2026-09-20; slices 6-10 pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: bootstrap (first commit containing this document)
@@ -12,8 +12,10 @@ Acceptance: the slice gates below; [GPUP-2 baseline evidence](../benchmarks/lp-b
 Optimize **end-to-end single-solve latency at the required feasibility and
 certified-gap tolerances**, including setup, transfers, numerical checks, recovery,
 and final certification. This is the user's selected priority. Repeated-solve
-throughput and full MILP search performance are future tracks, not substitutes for
-this objective.
+throughput and full MILP search performance are separate tracks, not substitutes for
+this objective. On 2026-09-20 the user pulled the repeated-solve track,
+GPUP-THROUGHPUT, ahead of GPUP-6 because the GPUP-5C evidence shows the remaining
+cost is outside arithmetic; it keeps its own specification, endpoint and budget.
 
 Implement one dependency-ready slice at a time. Each leaves a buildable,
 documented result, acceptance evidence, and a handoff. Update active-task state
@@ -64,6 +66,7 @@ be refined from earlier findings, with changes recorded before affected trials.
 | GPUP-5 | Add FP32 matrix storage with FP64 arithmetic, then FP32 products/accumulation. Compare FP64 masters and FP32 working state with FP64 correction. | Original-model checks, convergence and range diagnostics, measured storage/arithmetic/state costs. |
 | GPUP-5B | Investigate exact power-of-two/factored scaling and two/three-component sparse products. | Matched FP64 controls, independent rational/device checks, 840 frozen development attempts and preserved rounding analysis; [report](../benchmarks/lp-exact-components-gpup5b.md). |
 | GPUP-5C | Act on the FP64-pipe root cause: integer-pipe guards, fused two-launch schedule, double-float FP32 pairs, explicit tolerance tiers and a frozen development extension. | ADR-0022; twelve-mode bitwise device differentials, rational pair fixtures, research-v2 evidence, manifest v2 with byte-identical v1 outputs, charged 874-attempt study. |
+| GPUP-THROUGHPUT | Repeated-solve throughput with explicit matrix, context and device reuse: accepted specification, API and resource budget first; then amortized throughput with complete setup-cost accounting. | Accepted specification before behavior; fresh-process single-solve endpoint and protocol unchanged; setup, context, transfer and per-solve costs reported separately; full native and device gates. |
 | GPUP-6 | Add configurable audits, checkpoints, replay, promotion, and optional demotion, initially FP32/FP64. | Fault injection covering full rollback, budget/cancellation accounting, sticky promotion, and guarded demotion. |
 | GPUP-7 | Add quantization candidates through a common experimental interface; establish sparse FP8 before Tensor Core comparisons. | Quantizer checks, transpose consistency, guarded conversion, screening against the FP64 control. |
 | GPUP-8 | Add hybrid sparse/dense-tile Tensor Core execution on the actual Blackwell target, including FP16/BF16 and FP8 where supported. | Differential kernels, same-device repeatability, sanitizers, and padding/packing-inclusive single-solve timings. |
@@ -92,7 +95,7 @@ controls under ADR-0019. Its [report](../benchmarks/lp-fp32-gpup5.md) verifies a
 480 attempts and adds 421.636094192 screening seconds, for 1324.210639253 cumulative
 seconds beneath the 4502.574545061 slice ceiling. FP64 controls retain 27/36 timing
 coverage, versus 12/36 for FP32 storage/products/accumulation/master correction and
-6/36 for FP32 working state. GPUP-6 is next after completed acceptance. No
+6/36 for FP32 working state. GPUP-5B followed after completed acceptance. No
 validation/held-out solve, supported preset or publication occurred.
 
 GPUP-5B is complete before GPUP-6 under [ADR-0021](../decisions/ADR-0021-exact-scaling-components.md).
@@ -115,8 +118,19 @@ development extension. Its [report](../benchmarks/lp-fp64-pipe-gpup5c.md) verifi
 the FP64 control and halve update cost, double-float is fastest at scale but
 underflows on scheduling LPs, and tiers recover FP32 storage coverage. It used
 1493.313474227 study plus 66.091602441 acceptance seconds, for 3794.758955639
-cumulative inside the unchanged ceiling. GPUP-6 follows and requires its bounded
-adaptive contract; no preset is selected.
+cumulative inside the unchanged ceiling. No preset is selected.
+
+GPUP-THROUGHPUT is next, pulled ahead of GPUP-6 by the user on 2026-09-20. The
+GPUP-5C report shows that paired certified-latency ratios stay within 0.92-1.11 of
+tuned for every mode and tier, while context creation (208-330 ms) and the fixed
+host phases dominate 400-600 ms solves at study size, and at 65536 rows
+preconditioning (about 940 ms) and research preparation (about 1020 ms) each exceed
+the total kernel time of a 200-proposal run (19-30 ms). No arithmetic slice removes
+those costs. The slice must accept its own specification, API and resource budget
+before any behavior, keep the fresh-process single-solve endpoint and its protocol
+unchanged, report context, setup, transfer and per-solve costs separately, and
+never present amortized throughput as single-solve latency. GPUP-6 follows it and
+requires its bounded adaptive contract.
 
 ## Numerical design and candidate methods
 
@@ -245,6 +259,6 @@ Next handoff after GPUP-2: accept SPEC-0012 and create the shared resumable FP64
 controller under GPUP-3. The baseline completed 144 attempts and consumed
 173.148261443 GPU seconds; preserve that ledger consumption. Host/GPU controller
 differences and limited GPU certified coverage are documented in the baseline report.
-Full MILP integration and repeated-solve
-throughput are separately listed in
-the backlog; neither follows automatically from a faster LP kernel.
+Full MILP integration remains separately listed in the backlog; repeated-solve
+throughput is GPUP-THROUGHPUT, the next ready slice. Neither follows automatically
+from a faster LP kernel.

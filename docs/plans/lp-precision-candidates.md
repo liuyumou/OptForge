@@ -24,7 +24,7 @@ component cross-product line and GPUP-5C acts on the rows marked below under
 | Block scaling / compressed exponents / exact outliers | Could reduce per-value exponent and component traffic. | Canonical transpose mapping, range/outlier proofs, metadata admission and measured total costs. |
 | Specialized kernels / fusion / cached handles / buffer reuse | Generic kernels and host synchronization are measured or inspected costs. | Hold numerical policy fixed; new execution identity; cancellation/guard/sanitizer gates. |
 | Larger sparse or block-structured instances | The twelve development instances are launch-bound (about 4 us per SpMV against a 2 us floor). | GPUP-5C freezes a development extension up to 65536 rows plus a `mixed` family under lp-manifest-v2; larger sizes need their own decision. |
-| Repeated-solve context reuse | Context creation is 208 ms of a 512 ms certified solve on irregular-2048, the largest single cost. | Separate throughput objective and protocol; never substitute it for current single-solve latency. Priority raised by the root-cause note. |
+| Repeated-solve context reuse | Context creation is 208 ms of a 512 ms certified solve on irregular-2048, the largest single cost. | Separate throughput objective and protocol; never substitute it for current single-solve latency. Pulled ahead of GPUP-6 as GPUP-THROUGHPUT on 2026-09-20 after the GPUP-5C report showed host phases exceed kernel time at 65536 rows. |
 
 Primary starting points: [accurate sums and products](https://www.tuhh.de/ti3/paper/rump/OgRuOi04a.pdf),
 [stochastic rounding analysis](https://eprints.maths.manchester.ac.uk/2763/),

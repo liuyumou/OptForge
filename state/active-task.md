@@ -1,5 +1,40 @@
 # Active Task
 
+## GPUP-THROUGHPUT pulled ahead of GPUP-6; GPUP-5/5B/5C integrated (2026-09-20)
+
+Status: ready; no behavior implemented. PR #6 merged branch
+codex/gpup5b-exact-products into main as merge commit 8e768247 after the cpu, docs
+and smoke checks passed; the recorded full pinned-native gate receipt
+(target/lp-native-gate.json) matched the merged source identity
+e8055b7e8158f5919c0d4b82e08e1af1b388aa1dcfb7577e48e7c98a8ea8f758. GitHub refuses
+self-approval, and the main ruleset requires zero approving reviews, so the merge
+rests on the recorded gate and the required status checks.
+
+Objective: reorder the backlog only. The user pulled GPUP-THROUGHPUT ahead of
+GPUP-6 because the GPUP-5C report shows the remaining cost is outside arithmetic:
+paired certified-latency ratios stay within 0.92-1.11 of tuned for every mode and
+tier, context creation (208-330 ms) and fixed host phases dominate 400-600 ms solves
+at study size, and at 65536 rows preconditioning (about 940 ms) and research
+preparation (about 1020 ms) each exceed the 19-30 ms total kernel time of a
+200-proposal run. GPUP-THROUGHPUT becomes next_ready_task with status ready and
+depends_on GPUP-5C; GPUP-6 now also depends on it. Its acceptance keeps the ADR-0013
+separation: an accepted specification, API and resource budget before any behavior;
+the fresh-process single-solve endpoint, protocol, defaults and archived evidence
+unchanged; amortized throughput never reported as single-solve latency.
+
+Acceptance gate: bash tools/check.sh (documentation build and policy checks cover
+the edited pages); no solver, protocol, seed, tolerance, artifact or ledger changes.
+Likely files: state/backlog.yaml, AGENTS.md, docs/plans/gpu-lp-precision-roadmap.md,
+docs/plans/lp-precision-candidates.md, wiki/status.md and this record.
+Resource budget: documentation-only; at most four build jobs for the gate; zero
+project GPU work. The slice's own CPU/GPU budget is set by its specification, which
+is the first deliverable of GPUP-THROUGHPUT and must be accepted before behavior.
+
+Evidence: full pinned-native bash tools/check.sh passed on the edited tree (source
+identity 38d6a626c4a32e44668d280d31fbdbe23e0c0ca9ecc9f3610f094cab374d3248; 131
+Python tests, 86 documentation pages, committed records re-executed, bootstrap
+smoke). No GPU job ran; the campaign ledger is untouched.
+
 ## GPUP-5C: FP64-pipe execution, tolerance tiers and corpus extension (2026-09-19)
 
 Status: complete under [ADR-0022](../docs/decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md);
