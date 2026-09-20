@@ -464,3 +464,12 @@ GPUP-5C implementation and acceptance mapping:
   the exact `mixed` witness and the double-float fixture.
 - cuda/diagnostics microbenchmarks are charged acceptance diagnostics, never timing
   evidence; the uncharged 2026-09-19 numbers are labeled as such in the root-cause note.
+
+## GPUP-THROUGHPUT accepted bounded contract
+
+Accepted on 2026-09-20 under [ADR-0023](../decisions/ADR-0023-repeated-solve-throughput.md),
+[SPEC-0014](SPEC-0014-lp-repeated-solve-throughput.md) defines opt-in repeated-solve
+sessions over a fixed matrix. Requirements 10-13 keep fresh-process single-solve
+latency the primary endpoint; amortized per-solve time (batch elapsed / N) is a
+separately labeled endpoint that is never substituted for or tabulated as
+single-solve latency, and warm timings remain secondary diagnostics.

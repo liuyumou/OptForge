@@ -66,11 +66,16 @@ ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b with the
 4996-event prefix intact. On 2026-09-20 the user pulled GPUP-THROUGHPUT ahead of
 GPUP-6: after GPUP-5C, context creation (208-330 ms) and the fixed host phases, not
 arithmetic, dominate solves, and at 65536 rows preconditioning and research
-preparation each exceed total kernel time. GPUP-THROUGHPUT is the next ready task.
-It requires its own accepted specification, API and resource budget before any
-behavior, leaves the single-solve endpoint, protocol, defaults and archived evidence
-unchanged, and never reports amortized throughput as single-solve latency. GPUP-6
-follows it and requires its bounded adaptive contract before behavior.
+preparation each exceed total kernel time. GPUP-THROUGHPUT is in progress under
+[SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md) and
+[ADR-0023](docs/decisions/ADR-0023-repeated-solve-throughput.md), both accepted
+2026-09-20. It leaves the single-solve endpoint, protocol, defaults and archived
+evidence unchanged and never reports amortized throughput as single-solve latency.
+Its cumulative ceiling is 8102.574545061 seconds, with 2700 study / 600 acceptance /
+3300 combined seconds under identity gpup-throughput-v1; it preserves the 6722-event
+ledger prefix ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b and
+the 3794.758955639 consumed seconds. GPUP-6 follows it and requires its bounded
+adaptive contract before behavior.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

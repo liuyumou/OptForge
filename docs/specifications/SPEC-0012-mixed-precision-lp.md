@@ -448,3 +448,13 @@ GPUP-5C implementation and acceptance mapping:
 
 No adaptive recovery, quantization, runtime tolerance change or supported preset is
 marked implemented by this slice.
+
+## GPUP-THROUGHPUT accepted bounded contract
+
+Accepted on 2026-09-20 under [ADR-0023](../decisions/ADR-0023-repeated-solve-throughput.md),
+[SPEC-0014](SPEC-0014-lp-repeated-solve-throughput.md) defines opt-in repeated-solve
+sessions over a fixed matrix as an extension of this contract. Nothing in this
+specification's numerical contract changes: every solve starts from a fresh
+per-solve controller and the cold iterate, and original-model host certification
+is unchanged. Amortized throughput is a separately labeled endpoint, never
+substituted for fresh single-solve latency.

@@ -9,6 +9,10 @@ Slice 1 repairs a [certification defect](state/known-failures.md#lp-certificatio
 and the objective/gap checks. Slice 2 adds the [bounded LP study harness](docs/benchmarks/lp-precision-study.md),
 with independent endpoints, frozen workloads and a [measured baseline report](docs/benchmarks/lp-baseline-gpup2.md).
 Slice 3, the shared resumable FP64 controller, is next.
+GPUP-THROUGHPUT, opt-in repeated-solve throughput sessions, is in progress under
+[SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md) and
+[ADR-0023](docs/decisions/ADR-0023-repeated-solve-throughput.md), both accepted
+2026-09-20.
 Mixed precision and performance recipes are not implemented yet.
 
 The project validates original

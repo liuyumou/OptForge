@@ -12,6 +12,17 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Added
 
+- GPUP-THROUGHPUT (documentation phase): [SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md)
+  and [ADR-0023](docs/decisions/ADR-0023-repeated-solve-throughput.md) are accepted
+  on 2026-09-20 for opt-in repeated-solve throughput sessions over a fixed matrix.
+  Amortized throughput is a separately labeled endpoint, never substituted for
+  fresh-process single-solve latency; no runtime behavior changes yet.
+
+- The frozen GPUP-THROUGHPUT protocol benchmarks/configs/lp-throughput-v1.json
+  raises the cumulative screening ceiling by 3600 seconds to 8102.574545061
+  seconds under identity gpup-throughput-v1 (study 2700 s, acceptance 600 s,
+  combined 3300 s).
+
 - GPUP-5C (ADR-0022) records the [FP64-pipe root cause](docs/benchmarks/lp-fp64-pipe-root-cause.md)
   of the component slowdown and adds feature-gated research modes `intguard-fp64`,
   `fused-fp64` and `doublefloat-fp32` with CPU oracles, research-v2 evidence,

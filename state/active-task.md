@@ -1,5 +1,52 @@
 # Active Task
 
+## GPUP-THROUGHPUT: specification, ADR and budget before behavior (2026-09-20)
+
+Status: in progress (Phase A, documentation only; no behavior). The backlog reorder
+record below stays as the history of how this slice was selected.
+
+Objective: implement GPUP-THROUGHPUT (state/backlog.yaml next_ready_task) in phases,
+beginning with its accepted bounded contract: SPEC-0014 (repeated-solve sessions for
+cuda-lp-tuned and the research executable), ADR-0023 (two opt-in paths, variant rule,
+bitwise-identity rule, frozen resources) and the frozen protocol
+benchmarks/configs/lp-throughput-v1.json carrying its own ceiling authority. A batch
+fixes one matrix, objective and row bounds; solves are identical repeats or per-solve
+variable-bound variants tightened around the instance's frozen witness. The
+fresh-process single-solve endpoint, protocol, defaults and archived evidence stay
+unchanged; amortized throughput is a separately labeled endpoint, never substituted
+(ADR-0013, SPEC-0013 requirements 10-13).
+
+Acceptance gate per phase: Phase A (this record) — full pinned-native
+bash tools/check.sh with zero GPU work, committed as documentation only. Phases B-D —
+full gate plus Python integration tests; device session_ cases and all four scoped
+sanitizers under the shared lease. Phase E — frozen study under identity
+gpup-throughput-v1, independent verification of every admitted attempt, bitwise
+identity counts, report and final gate.
+
+Likely files: docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md,
+docs/decisions/ADR-0023-repeated-solve-throughput.md,
+benchmarks/configs/lp-throughput-v1.json, crates/optimizer-lp (problem.rs, pdhg.rs),
+crates/optimizer-lp-cuda (residency.rs, backend.rs, session.rs, research.rs),
+crates/optimizer-experiment (lp_batch.rs, lp_research.rs, example), crates/optimizer-cli
+(batch.rs, lp_study.rs, main.rs), schemas/lp-batch-request-v1/lp-batch-endpoint-v1,
+tools (lp_variants.py, benchmark_lp_throughput.py, analyze_lp_throughput.py,
+lp_research_budget.py), tests, and the documentation set named in SPEC-0014.
+
+Resource budget: four build jobs; four-hour CPU validation ceiling. GPU only after
+ADR-0023 is accepted: study 2700 s plus acceptance 600 s (combined 3300 s) under
+identity gpup-throughput-v1, inside a cumulative ceiling of 8102.574545061 seconds
+(4502.574545061 + 3600). Preserve the 6722-event ledger prefix SHA-256
+ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b and 3794.758955639
+consumed seconds; campaign 28800 s and phase caps unchanged. Phase A runs zero GPU work.
+
+Evidence: full pinned-native bash tools/check.sh passed on the Phase A tree
+(source identity 1620d714af9b4f84e41303b7d1c17ae47dbcd1481d7993c873dde5901036035;
+441 Rust tests, 131 Python tests, 88 documentation pages with valid links/anchors,
+artifact schemas and committed-record replay). SPEC-0014, ADR-0023 and the frozen
+lp-throughput-v1 protocol (planned 705 attempts, ceiling 8102574545061 ns embedding
+source campaign hash b40217f3... and decision hash 06f28fbf...) are committed as
+documentation. No GPU job ran; the campaign ledger is untouched.
+
 ## GPUP-THROUGHPUT pulled ahead of GPUP-6; GPUP-5/5B/5C integrated (2026-09-20)
 
 Status: ready; no behavior implemented. PR #6 merged branch

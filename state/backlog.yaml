@@ -163,8 +163,9 @@ tasks:
     acceptance: "Root-cause note; integer-guard/fused/double-float modes with CPU oracles and bitwise device differentials; research-v2 evidence; explicit tiers; manifest v2 extension with byte-identical v1 outputs; full native and four sanitizer gates; frozen gpup5c-v1 study verified"
   - id: GPUP-THROUGHPUT
     title: Repeated-solve throughput with explicit matrix and device reuse
-    status: ready
+    status: in_progress
     depends_on: [GPUP-5C]
+    specification: docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md
     acceptance: "Separate specification, API and resource budget accepted before implementation; amortized throughput plus complete setup-cost evidence; single-solve endpoint, protocol, defaults and archived evidence unchanged"
   - id: GPUP-6
     title: Implement configurable audits and adaptive precision recovery

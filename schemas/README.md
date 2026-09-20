@@ -32,6 +32,11 @@ Every schema uses JSON Schema draft 2020-12. These are normative interfaces unde
   extension: a `mixed` family, generator version 2, a larger byte cap, an
   explicit `extends` reference to the frozen v1 development manifest and a
   per-instance solve limit. Version 1 manifests are unchanged.
+- Forthcoming under [SPEC-0014](../docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md)
+  and ADR-0023: lp-batch-request-v1 and lp-batch-endpoint-v1 for GPUP-THROUGHPUT
+  repeated-solve sessions. They land with the implementation phase as new
+  versioned files; per the versioning rule below, each version lives in its
+  filename and is pinned inside the document by a `const`.
 
 Use python3 tools/validate_artifacts.py from the repository root. Schema validation
 is supplemented with file checksum, configuration, hardware, and timing checks.
