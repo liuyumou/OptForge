@@ -31,7 +31,7 @@ code identity, FP32 storage/products/accumulation/state and fixed FP64 correctio
 v4 evidence and optional isolated COPT 8.0.6 CPU/GPU PDLP baselines. Its
 [report](docs/benchmarks/lp-fp32-gpup5.md) verifies all 480 attempts and records
 coverage losses; no supported preset is selected. Existing identities/replay and
-original-model authority remain. GPUP-6 is next and requires its bounded adaptive
+original-model authority remain. GPUP-6 requires its bounded adaptive
 interface/contract before behavior; no audit/rollback/promotion/demotion is implicit
 in GPUP-5. Later quantization and precision requirements remain pending.
 The [FP32 latency diagnosis](docs/benchmarks/lp-fp32-slowdown-diagnosis.md) adds
@@ -63,14 +63,20 @@ double-float is fastest at scale but underflows on scheduling LPs; tiers recover
 FP32 storage coverage without changing latency. Cumulative campaign consumption is
 3794.758955639 seconds; the 6722-event ledger SHA-256 is
 ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b with the
-4996-event prefix intact. GPUP-6 is next and requires its bounded adaptive
-contract before behavior.
+4996-event prefix intact. On 2026-09-20 the user pulled GPUP-THROUGHPUT ahead of
+GPUP-6: after GPUP-5C, context creation (208-330 ms) and the fixed host phases, not
+arithmetic, dominate solves, and at 65536 rows preconditioning and research
+preparation each exceed total kernel time. GPUP-THROUGHPUT is the next ready task.
+It requires its own accepted specification, API and resource budget before any
+behavior, leaves the single-solve endpoint, protocol, defaults and archived evidence
+unchanged, and never reports amortized throughput as single-solve latency. GPUP-6
+follows it and requires its bounded adaptive contract before behavior.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent
 exact-rational regressions before introducing lower precision. The initial
-experiment campaign is capped at eight GPU-hours. Repeated-solve throughput
-and full MILP search performance are separate future directions.
+experiment campaign is capped at eight GPU-hours. Repeated-solve throughput is
+GPUP-THROUGHPUT above; full MILP search performance remains a separate future direction.
 Unsafe CUDA code is permitted only inside optimizer-cuda-sys under
 [ADR-0009](docs/decisions/ADR-0009-cuda-driver-boundary.md), which amends ADR-0003's
 single-boundary rule; optimizer-cuda keeps the prohibition and keeps discovery and the
