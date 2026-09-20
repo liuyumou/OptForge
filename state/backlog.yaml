@@ -4,7 +4,7 @@ next_ready_milestone: C7
 # Capability milestones stay numbered as before. The user prioritized this
 # separate research track before C7 behavior; next_ready_task selects its slice.
 active_research_track: GPUP
-next_ready_task: GPUP-5
+next_ready_task: GPUP-6
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: M0
@@ -137,15 +137,27 @@ tasks:
     acceptance: "Isolated residency, transfer, kernel and fusion measurements; numerical and device gates"
   - id: GPUP-5
     title: Implement FP32 storage, computation and working-state comparisons
-    status: ready
+    status: complete
     depends_on: [GPUP-4]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     handoff: docs/plans/gpup5-interface-handoff.md
-    acceptance: "Versioned interface acceptance; original-model checks; range diagnostics; convergence and total-cost comparison"
+    acceptance: "Versioned interface acceptance; original-model checks; range diagnostics; convergence and total-cost comparison; ADR-0020 equal-work, trace and representation diagnosis complete"
+  - id: GPUP-5B
+    title: Investigate exact scaling and component-based sparse products
+    status: complete
+    depends_on: [GPUP-5]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "ADR-0021 complete; reproduced rounding note and candidates; rational/device/full-native/sanitizer gates; all 840 attempts verified; coverage recovered, negative component latency retained"
+  - id: GPUP-5C
+    title: FP64-pipe execution modes, tolerance tiers and corpus extension
+    status: complete
+    depends_on: [GPUP-5B]
+    specification: docs/decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md
+    acceptance: "Root-cause note; integer-guard/fused/double-float modes with CPU oracles and bitwise device differentials; research-v2 evidence; explicit tiers; manifest v2 extension with byte-identical v1 outputs; full native and four sanitizer gates; frozen gpup5c-v1 study verified"
   - id: GPUP-6
     title: Implement configurable audits and adaptive precision recovery
     status: planned
-    depends_on: [GPUP-5]
+    depends_on: [GPUP-5C]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     acceptance: "Fault-injected full rollback, reference correction, charged retries, cancellation, sticky promotion and guarded demotion"
   - id: GPUP-7

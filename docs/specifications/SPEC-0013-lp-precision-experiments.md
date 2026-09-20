@@ -1,12 +1,12 @@
 # SPEC-0013: Bounded LP Precision Experiments
 
-Status: accepted; GPUP-2 implemented and measured; later slices pending
+Status: accepted; GPUP-2 through GPUP-5 implemented and measured; later slices pending
 Scope: LP-only development measurement, ablations, evidence, and recipe selection
 Owner: experiment tooling and numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: bootstrap (first commit containing this document)
 Supersedes: none; extends SPEC-0007 for a separately versioned LP study
-Implementation: GPUP-2 CLI/backend observations and tools/ LP harness; GPUP-3 through GPUP-10 pending
+Implementation: bounded LP harness, matched/tuned FP64 and FP32 studies, external COPT witnesses; GPUP-6 through GPUP-10 pending
 Tests: implementation mapping below; [baseline evidence](../benchmarks/lp-baseline-gpup2.md)
 
 ## Purpose
@@ -14,7 +14,7 @@ Tests: implementation mapping below; [baseline evidence](../benchmarks/lp-baseli
 Make a precision recipe an experimentally supported conclusion. The selected
 objective is certified single-solve latency, and the first campaign is bounded to
 eight GPU-hours under [ADR-0013](../decisions/ADR-0013-lp-precision-study.md).
-Numerical authority remains [SPEC-0011](SPEC-0011-gpu-lp-backend.md) and the future
+Numerical authority remains [SPEC-0011](SPEC-0011-gpu-lp-backend.md) and accepted
 [SPEC-0012](SPEC-0012-mixed-precision-lp.md), never this performance contract.
 
 This is development/validation tooling over the project's LP solve boundary,
@@ -350,3 +350,117 @@ GPU seconds and 445.988045904 cumulative seconds. All 12 development instances
 received three repetitions; four received separate profiles. Validation/held-out
 partitions remain unmeasured. Low-precision ablations and recipe selection remain
 pending. Full native and scoped device/sanitizer evidence is recorded in active task.
+
+## GPUP-5 accepted bounded contract
+
+Accepted by the maintainer on 2026-09-16, before behavior.
+[ADR-0019](../decisions/ADR-0019-fp32-lp-comparisons.md) defines the normative
+precision combinations, fixed correction, versioned interfaces, external COPT
+controls, frozen study and exact budgets. It supersedes the pending selector
+recommendation: precision extends cuda-lp-tuned; absent settings retain old
+behavior. Adaptive recovery and supported presets remain deferred. The
+[GPUP-5 report](../benchmarks/lp-fp32-gpup5.md) records all 480 independently verified
+endpoints, costs, failures and the exact 1324.210639253-second cumulative ledger.
+Full native acceptance before measurement, final device/sanitizer evidence and
+final-source acceptance are recorded in state/active-task.md.
+
+
+GPUP-5 acceptance mapping:
+
+- Strict lp-campaign/trial/endpoint/solve-record v4 plus external-witness/endpoint v1
+  retain all prior readers and original schema bytes. PrecisionTests checks the
+  frozen 480-attempt grid, exact carry-forward budget, unchanged seeds/limits,
+  required settings and unsupported combinations.
+- External authority: Rust external-certify/external-verify reconstruct original
+  minimization/maximization and ranged-row evidence, reject changed witnesses and
+  mislabelled GPU execution. Native COPT fixtures include objective constants.
+  Duplicate/unknown/missing fields and altered provenance are refused. Import
+  refuses values COPT could silently discard; all frozen inputs pass that guard.
+- tools/report_lp_precision.py checks all 480 original-model endpoints, exact
+  schedule/configuration/provenance, raw references, paired results, actual GPU
+  logs and COPT library identities, settled work and preserved ledger prefix.
+  Profile observations include original/represented operator bounds, conversion,
+  memory/transfers, physical proposals/corrections and COPT aggregate setup costs.
+- The report retains timeouts, native failures, range failures and unclosed gaps.
+  COPT's unavailable native iteration/seed controls are explicit limitations.
+  No supported recipe or validation/held-out result is selected.
+
+### GPUP-5 diagnostic follow-up acceptance
+
+[ADR-0020](../decisions/ADR-0020-fp32-latency-diagnosis.md) authorizes a separate
+bounded diagnosis, without changing the frozen study or numerical interfaces.
+[Diagnostic tests](../../tests/integration/test_lp_precision_diagnosis.py) check
+its 213-job schedule, exact representation arithmetic, historical ledger-prefix
+reporting, matching phase boundaries, explicit counter unavailability and the
+expected work-limit exit convention. The [report](../benchmarks/lp-fp32-slowdown-diagnosis.md)
+records equal-work repetitions, trace/endpoint launch agreement, all missing
+hardware counters, unchanged historical artifacts and charged diagnostic work.
+The native gate and final evidence identities are recorded in state/active-task.md.
+
+## GPUP-5B accepted bounded contract
+
+Accepted on 2026-09-16 under [ADR-0021](../decisions/ADR-0021-exact-scaling-components.md).
+Feature-gated explicit scaling and two/three-component sparse products use FP64
+control and original-model certification. Strict research-v1 requests/evidence
+are separate from runtime schemas and selectors. The frozen twelve-mode,
+840-attempt development study charges all work to the preserved campaign ledger,
+with 900 study/300 acceptance seconds inside existing ceilings. Numerical recovery
+remains GPUP-6. The rounding investigation is reproduced before GPU measurements.
+
+
+GPUP-5B implementation and acceptance mapping:
+
+- Strict research-v1 requests/evidence in optimizer-experiment lp_research bind
+  numerical policy, source/model/executable/code identities, actual device,
+  witness, arithmetic/work, memory/transfers and independently assessed outcome.
+  Existing solve-record/endpoint/campaign wire formats are unchanged.
+- benchmarks/configs/lp-research-v1.json and tools/benchmark_lp_research.py freeze
+  twelve configurations and 840 attempts. Integration tests preserve the original
+  seeds, resource limits, development partition and attempt counts.
+- tools/lp_research_budget.py admits complete reservations through the shared lease,
+  retains the 3288-event prefix, charges both categories to screening, and enforces
+  separate 900/300-second plus cumulative/campaign/phase ceilings. Missing work is
+  explicitly incomplete, never assigned success.
+- tools/analyze_lp_research.py revalidates all archived endpoints, hashes,
+  matched settings, old artifact indexes, ledger prefix and charges; analyzes
+  paired certified latency, coverage, equal work and independently decoded traces.
+- tools/analyze_lp_rounding.py preserves the exact-rational rounding investigation
+  and its archived witness/input identities without new GPU work. The
+  [rounding note](../benchmarks/lp-fp32-rounding-analysis.md),
+  [report](../benchmarks/lp-exact-components-gpup5b.md) and
+  [candidate register](../plans/lp-precision-candidates.md) distinguish sampled
+  observations, numerical arguments, limitations and deferred hypotheses.
+
+The full native gate, device/sanitizer evidence and final resource totals are
+recorded in the report and state/active-task.md. No held-out selection or supported
+preset is authorized by this bounded development investigation.
+
+## GPUP-5C accepted bounded contract
+
+Accepted on 2026-09-19 under [ADR-0022](../decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md).
+Requirement 5 is satisfied by the decision record and the new experiment identity
+`gpup5c-v1`: tolerance tiers 1e-9, 1e-6 and 1e-4 are explicit per-configuration
+request tolerances in benchmarks/configs/lp-research-v2.json; the 1e-9 default,
+ADR-0014 campaign, seeds, splits and every v1 artifact are unchanged. A frozen
+development extension manifest (schemas/lp-manifest-v2.schema.json,
+benchmarks/manifests/lp-development-extension-v1.json) adds instances up to 65536
+rows and a `mixed` family generated by tools/lp_generate.py with constructed
+witnesses, a distinct seed band and groups, a raised byte cap and a per-instance
+30-second limit; requirement 3 holds because every extension instance is development.
+
+GPUP-5C implementation and acceptance mapping:
+
+- tools/benchmark_lp_research.py accepts `--protocol`; version-1 protocols keep the
+  byte-identical GPUP-5B schedule and version-2 protocols enumerate frozen blocks of
+  kind, instances, configurations, tiers and repetitions with randomized blocking
+  under the original order seed. tools/lp_research_budget.py carries a per-study
+  identity prefix, separate 1500/300-second caps, a combined 1800-second cap, the
+  preserved 4996-event prefix and the unchanged cumulative/phase ceilings.
+- tools/analyze_lp_research.py revalidates both studies from their protocol files,
+  reconstructs every expected request including tiers and limits, and reports
+  coverage, paired latency and equal-work medians per tier.
+- tests/integration/test_lp_research.py freezes the 874-attempt v2 grid, tier
+  recording, extension limits, the manifest-v2 contract, byte-identical v1 files,
+  the exact `mixed` witness and the double-float fixture.
+- cuda/diagnostics microbenchmarks are charged acceptance diagnostics, never timing
+  evidence; the uncharged 2026-09-19 numbers are labeled as such in the root-cause note.

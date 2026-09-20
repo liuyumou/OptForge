@@ -11,8 +11,8 @@ evidence is recorded in [active task](../state/active-task.md).
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | Prioritized GPU LP precision track (GPUP-5 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); repeated-solve throughput and full MILP performance are later tracks |
-| Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution with independently checked versioned endpoints; no lower-precision recipe |
+| Planned | Prioritized GPU LP precision track (GPUP-6 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); repeated-solve throughput and full MILP performance are later tracks |
+| Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
 GPUP-0 has saved the [precision roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
@@ -30,10 +30,34 @@ round and a complete correction, each 320 attempts. All eight configurations ret
 27/36 timing coverage. Cumulative study use is 902.574545061 GPU seconds, including
 the original 445.988045904; no ledger history was reset. Matched remains the general
 reference; fused-warp is provisional only on three named development instances.
-Full native/device/scoped sanitizer gates passed; GPUP-5 is next. See the
-[execution contract](../docs/architecture/lp-tuned-fp64.md).
-No mixed-precision implementation or supported recipe is available. The campaign
-retains its eight GPU-hour cap; slice evidence remains in the active-task record.
+Full native/device/scoped sanitizer gates passed. GPUP-5 now extends cuda-lp-tuned
+with explicit FP32 settings, fixed charged FP64 correction and separate code identity.
+Its [480-attempt report](../docs/benchmarks/lp-fp32-gpup5.md) retains 27/36 timing
+coverage for FP64, 12/36 for storage/products/accumulation/master correction and
+6/36 for FP32 working state. COPT CPU/GPU PDLP certify 27/36 and 24/36. Total study
+consumption after that study was 1324.210639253 GPU seconds. The subsequent
+[213-job FP32 diagnosis](../docs/benchmarks/lp-fp32-slowdown-diagnosis.md) adds
+143.056235443 seconds, totaling 1467.266874696, with all history preserved. It
+separates extra iterations and representation error from executor/correction costs;
+no runtime change was made. The subsequent
+[GPUP-5B investigation](../docs/benchmarks/lp-exact-components-gpup5b.md) verifies
+all 840 attempts and isolates exact power-of-two/factored scaling and component
+products behind a research feature. Every new mode recovers 27/36 timing coverage;
+component cross-products remain slower on the larger profiled cases. Full native,
+device and all four scoped sanitizer gates pass. Its 697.211414922 study plus
+70.875589353 acceptance seconds are charged to screening, totaling 2235.353878971
+campaign seconds, with original artifacts and ledger prefixes intact. The
+[rounding analysis](../docs/benchmarks/lp-fp32-rounding-analysis.md) and
+[candidate register](../docs/plans/lp-precision-candidates.md) retain the diagnosis
+and future alternatives. The [FP64-pipe root-cause note](../docs/benchmarks/lp-fp64-pipe-root-cause.md)
+attributes the component slowdown to the sm_120 FP64 pipe; GPUP-5C acts on it under
+[ADR-0022](../docs/decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md)
+with integer-pipe guards, a fused two-launch schedule, double-float FP32 pairs,
+explicit tolerance tiers and a frozen development extension; its
+[report](../docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies 806 of 850 attempts,
+raising cumulative consumption to 3794.758955639 seconds. GPUP-6 follows;
+adaptive recovery requires its bounded contract. No supported recipe is available. The campaign retains its eight GPU-hour cap; acceptance details remain
+in the active-task record.
 
 Solve records recompute objectives and violations independently of the backend. A
 backend optimality claim holds under the recorded numerical settings; it is not an

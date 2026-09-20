@@ -1,0 +1,185 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "matrix": {
+      "enum": [
+        "f32",
+        "f64"
+      ]
+    },
+    "product_operands": {
+      "enum": [
+        "f32",
+        "f64"
+      ]
+    },
+    "products": {
+      "enum": [
+        "f32",
+        "f64"
+      ]
+    },
+    "accumulation": {
+      "enum": [
+        "f32",
+        "f64"
+      ]
+    },
+    "working_state": {
+      "enum": [
+        "f32",
+        "f64"
+      ]
+    },
+    "updates": {
+      "const": "f64"
+    },
+    "rounding": {
+      "const": "nearest_even"
+    },
+    "correction_interval": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "matrix",
+    "product_operands",
+    "products",
+    "accumulation",
+    "working_state",
+    "updates",
+    "rounding",
+    "correction_interval"
+  ],
+  "oneOf": [
+    {
+      "properties": {
+        "matrix": {
+          "const": "f64"
+        },
+        "product_operands": {
+          "const": "f64"
+        },
+        "products": {
+          "const": "f64"
+        },
+        "accumulation": {
+          "const": "f64"
+        },
+        "working_state": {
+          "const": "f64"
+        }
+      }
+    },
+    {
+      "properties": {
+        "matrix": {
+          "const": "f32"
+        },
+        "product_operands": {
+          "const": "f64"
+        },
+        "products": {
+          "const": "f64"
+        },
+        "accumulation": {
+          "const": "f64"
+        },
+        "working_state": {
+          "const": "f64"
+        }
+      }
+    },
+    {
+      "properties": {
+        "matrix": {
+          "const": "f32"
+        },
+        "product_operands": {
+          "const": "f32"
+        },
+        "products": {
+          "const": "f32"
+        },
+        "accumulation": {
+          "const": "f64"
+        },
+        "working_state": {
+          "const": "f64"
+        }
+      }
+    },
+    {
+      "properties": {
+        "matrix": {
+          "const": "f32"
+        },
+        "product_operands": {
+          "const": "f32"
+        },
+        "products": {
+          "const": "f32"
+        },
+        "accumulation": {
+          "const": "f32"
+        },
+        "working_state": {
+          "const": "f64"
+        }
+      }
+    },
+    {
+      "properties": {
+        "matrix": {
+          "const": "f32"
+        },
+        "product_operands": {
+          "const": "f32"
+        },
+        "products": {
+          "const": "f32"
+        },
+        "accumulation": {
+          "const": "f32"
+        },
+        "working_state": {
+          "const": "f32"
+        }
+      }
+    }
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "working_state": {
+            "const": "f32"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "correction_interval": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-precision-v1.schema.json"
+}

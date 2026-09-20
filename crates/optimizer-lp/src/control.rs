@@ -205,6 +205,51 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
         Ok(())
     }
 
+    /// Explicitly prepare binary32 state; unchanged representable values retain residency.
+    pub fn round_working(&mut self) -> Result<(), &'static str> {
+        let mut changed = false;
+        let mut next = self.state.clone();
+        for v in next
+            .primal
+            .iter_mut()
+            .chain(&mut next.dual)
+            .chain(&mut next.anchor_primal)
+            .chain(&mut next.anchor_dual)
+        {
+            let rounded = crate::precision::narrow(*v)?;
+            changed |= rounded.to_bits() != v.to_bits();
+            *v = rounded;
+        }
+        if changed {
+            self.state = next;
+            self.generation += 1;
+        }
+        Ok(())
+    }
+
+    /// Charge reference or rejected work without accepting another logical step.
+    pub fn charge_extra(&mut self, count: u64) -> Result<(), &'static str> {
+        if count > self.remaining() {
+            return Err("reference work exceeds allowance");
+        }
+        self.physical_iterations += count;
+        Ok(())
+    }
+
+    /// Replace a corrected endpoint and invalidate resident state, preserving history.
+    pub fn replace_endpoint(&mut self, x: Vec<f64>, y: Vec<f64>) -> Result<(), &'static str> {
+        if x.len() != self.state.primal.len()
+            || y.len() != self.state.dual.len()
+            || !x.iter().chain(&y).all(|v| v.is_finite())
+        {
+            return Err("invalid corrected endpoint");
+        }
+        self.state.primal = x;
+        self.state.dual = y;
+        self.generation += 1;
+        Ok(())
+    }
+
     /// One unchanged host arithmetic step. The driver owns cancellation policy.
     pub(crate) fn host_step(&mut self) {
         assert!(self.next_chunk(1) == 1);

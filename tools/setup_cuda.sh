@@ -78,3 +78,9 @@ fi
     -o "$out/lp_pdhg_tuned.cubin" "$src/lp_pdhg_tuned/lp_pdhg_tuned.cu"
 "$nvcc" --ptx -arch="sm_${arch}" -O3 -lineinfo -fmad=false \
     -o "$out/lp_pdhg_tuned.ptx" "$src/lp_pdhg_tuned/lp_pdhg_tuned.cu"
+
+# GPUP-5 retains all preceding code-object identities.
+for stage in cubin ptx; do
+    "$nvcc" --"$stage" -arch="sm_${arch}" -O3 -lineinfo -fmad=false -ftz=false \
+        -o "$out/lp_pdhg_precision.$stage" "$src/lp_pdhg_precision/lp_pdhg_precision.cu"
+done

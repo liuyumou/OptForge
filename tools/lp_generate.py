@@ -54,6 +54,86 @@ def linear(identity, family, n, seed):
 
 def reference(path): return {'path':str(path.relative_to(ROOT)), 'sha256':file_hash(path)}
 
+# ADR-0022 development extension: larger instances of existing families and a
+# `mixed` family with equality/one-sided rows, free variables and coefficients that
+# are exact in FP64 but inexact in FP32. Seeds occupy a separate band so no
+# generator seed crosses partitions; groups are distinct from every v1 group.
+EXTENSION=[('irregular',[32768,65536]),('dense_block',[65536]),('mixed',[65536])]
+EXTENSION_SEED=17110
+EXTENSION_LIMIT_SECONDS=30
+
+def infinite(sign): return {'kind':'positive_infinity' if sign>0 else 'negative_infinity'}
+
+def mixed(identity, n, seed):
+    """Exact witness LP: equality, one-sided and ranged rows; boxed and free variables."""
+    rng = Random(seed)
+    free = [j % 10 == 3 for j in range(n)]
+    # Free variables carry zero reduced cost; boxed variables sit at a bound.
+    x = [float(rng.integer(3)-1) if free[j] else float(j % 2) for j in range(n)]
+    rows, costs = [], [0.0 if free[j] else (1.0 if x[j] == 0.0 else -1.0) for j in range(n)]
+    y = []
+    for i in range(n):
+        kind = i % 4  # 0 equality, 1 lower-only, 2 upper-only, 3 ranged
+        magnitude = float(1 + i % 3)
+        if kind == 0: yi = magnitude * (1 if i % 8 < 4 else -1)
+        elif kind == 1: yi = magnitude
+        elif kind == 2: yi = -magnitude
+        else: yi = magnitude * (1 if i % 8 < 4 else -1)
+        y.append(yi)
+        width = min(n, 4+rng.integer(29)); indices={i}
+        while len(indices) < width: indices.add(rng.integer(n))
+        row={}
+        for j in sorted(indices):
+            # k + m*2^-30 with k in 1..4 and m in 1..7: exact binary64, inexact binary32.
+            value = (1 + rng.integer(4)) + (1 + rng.integer(7)) * 2.0 ** -30
+            if rng.integer(2): value = -value
+            row[j]=value
+            costs[j] += yi * value
+        activity = sum(row[j]*x[j] for j in row)
+        if kind == 0: lo, hi = finite(activity), finite(activity)
+        elif kind == 1: lo, hi = finite(activity), infinite(+1)
+        elif kind == 2: lo, hi = infinite(-1), finite(activity)
+        else: lo, hi = (finite(activity), finite(activity+1)) if yi > 0 else (finite(activity-1), finite(activity))
+        rows.append({'id':i,'lower':lo,'upper':hi,'terms':terms(row)})
+    model={'schema_version':1,'model_id':identity,
+        'variables':[{'id':j,'domain':'continuous','lower':infinite(-1) if free[j] else finite(0),
+                      'upper':infinite(+1) if free[j] else finite(1)} for j in range(n)],
+        'constraints':rows,'objective':{'sense':'minimize','offset':float(n)/4,'terms':terms(dict(enumerate(costs)))}}
+    witness={'candidate':{'schema_version':1,'model_id':identity,
+        'values':[{'variable_id':j,'value':v} for j,v in enumerate(x)]},'dual':y,
+        'construction':'bounded/free primal and sign-matched dual complementary pair; not a solver result'}
+    return model,witness
+
+def extension(freeze=False):
+    """Materialize the ADR-0022 development extension without touching v1 outputs."""
+    OUTPUT.mkdir(parents=True,exist_ok=True)
+    development=ROOT/'benchmarks/manifests/lp-development-v1.json'
+    instances=[]
+    for index,(family,sizes) in enumerate(EXTENSION):
+        seed=EXTENSION_SEED+index
+        for size in sizes:
+            identity=f'gpup-extension-{family}-{size}'
+            path=OUTPUT/(identity+'.json')
+            if family == 'mixed': model,proof=mixed(identity,size,seed)
+            else: model,proof=linear(identity,family,size,seed)
+            if not path.exists() or read_json(path)!=model: write_json(path,model)
+            proof_path=OUTPUT/(identity+'-witness.json')
+            if not proof_path.exists() or read_json(proof_path)!=proof: write_json(proof_path,proof)
+            instances.append({'id':identity,'family':family,'group':f'development-extension-{family}-{seed}',
+                'model':reference(path),'bytes':path.stat().st_size,'witness':reference(proof_path),
+                'source':'repository generation under ADR-0022',
+                'license':'MIT repository generator; no third-party dataset redistribution',
+                'generator':{'name':'sha256-counter-lp-v2','version':2,'seed':seed,'parameters':{'size':[size]}},
+                'time_limit_seconds':EXTENSION_LIMIT_SECONDS})
+    manifest={'schema_version':2,'id':'gpup-development-extension-v1','partition':'development',
+              'extends':reference(development),'instances':instances}
+    target=ROOT/'benchmarks/manifests/lp-development-extension-v1.json'
+    if freeze:
+        if target.exists() and read_json(target)!=manifest: raise ValueError('refusing to replace a frozen extension manifest')
+        write_json(target,manifest)
+    elif read_json(target)!=manifest: raise ValueError('generated extension differs from frozen manifest')
+    return manifest
+
 def generate(binary, freeze=False):
     OUTPUT.mkdir(parents=True,exist_ok=True)
     references=[]
@@ -119,4 +199,6 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--binary',type=Path,default=ROOT/'target/debug/optimizer')
     parser.add_argument('--freeze',action='store_true')
+    parser.add_argument('--extension',action='store_true',help='also materialize the ADR-0022 extension')
     args=parser.parse_args(); generate(args.binary.resolve(),args.freeze)
+    if args.extension: extension(args.freeze)

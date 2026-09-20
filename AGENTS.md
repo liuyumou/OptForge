@@ -25,14 +25,48 @@ opt-in cuda-lp-matched backend and measured overhead repairs preserve legacy cud
 GPUP-4 adds explicit experimental cuda-lp-tuned under ADR-0017, with the preserved
 first round and complete ADR-0018 correction documented in
 [the report](docs/benchmarks/lp-tuned-fp64-gpup4.md). Matched remains the general
-reference; scoped provisional fusion results are not supported presets. GPUP-5
-is next and requires its precision interfaces before behavior. Read the
-[GPUP-5 interface handoff](docs/plans/gpup5-interface-handoff.md): preserve existing
-identities/replay and resolve one versioned experimental precision interface before
-adding another backend name. This is a recommendation awaiting contract acceptance.
-Later precision requirements remain pending. Carry forward 902.574545061 campaign GPU seconds,
-including the earlier 445.988045904 and GPUP-4's 456.586499157; never reset the
-ledger or archived evidence. GPUP-4's cumulative ceiling was 1345.988045904 seconds.
+reference; scoped provisional fusion results are not supported presets. GPUP-5 is
+implemented under ADR-0019: lp-precision-v1 on cuda-lp-tuned, separate precision
+code identity, FP32 storage/products/accumulation/state and fixed FP64 correction,
+v4 evidence and optional isolated COPT 8.0.6 CPU/GPU PDLP baselines. Its
+[report](docs/benchmarks/lp-fp32-gpup5.md) verifies all 480 attempts and records
+coverage losses; no supported preset is selected. Existing identities/replay and
+original-model authority remain. GPUP-6 is next and requires its bounded adaptive
+interface/contract before behavior; no audit/rollback/promotion/demotion is implicit
+in GPUP-5. Later quantization and precision requirements remain pending.
+The [FP32 latency diagnosis](docs/benchmarks/lp-fp32-slowdown-diagnosis.md) adds
+213 equal-work/profiler diagnostics under ADR-0020: convergence amplification,
+scaled-matrix bias and executor/correction overhead, with hardware counters denied.
+The diagnosis reached 1467.266874696 campaign GPU seconds: the prior 1324.210639253
+plus 143.056235443 diagnostic screening seconds. Never reset the ledger or evidence.
+GPUP-5B is complete under ADR-0021: feature-gated exact scaling and two/three-component
+sparse products, separate research code object/executable and strict research-v1
+host evidence. Its [report](docs/benchmarks/lp-exact-components-gpup5b.md) verifies
+all 840 attempts and full native/device/four scoped sanitizer gates. New modes
+restore 27/36 timing coverage; component cross-products remain slower. Preserve
+the [rounding note](docs/benchmarks/lp-fp32-rounding-analysis.md) and
+[candidate register](docs/plans/lp-precision-candidates.md). No preset or adaptive
+recovery is selected. Carry forward 2235.353878971 campaign seconds, including
+697.211414922 GPUP-5B study and 70.875589353 acceptance screening seconds. All 4996
+ledger events retain the 3288-event prefix; the final ledger SHA-256 is
+737e1301cb31cf5d0ad0585aa81a4dc0b814615d39e4974827e504e880b11e5f.
+GPUP-5C is complete under ADR-0022 after the
+[FP64-pipe root-cause note](docs/benchmarks/lp-fp64-pipe-root-cause.md): three
+feature-gated research modes (integer-pipe guards, fused two-launch schedule,
+double-float FP32 pairs), research-v2 evidence, explicit tolerance tiers
+1e-9/1e-6/1e-4 recorded per request, a frozen lp-manifest-v2 development extension
+up to 65536 rows, and a protocol-driven harness (`--protocol`) whose v1 behavior is
+byte-identical. Its [report](docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies 806
+of 850 admitted attempts under identity gpup5c-v1: integer guards and fusion are
+bitwise identical to the FP64 control and halve update cost at study size;
+double-float is fastest at scale but underflows on scheduling LPs; tiers recover
+FP32 storage coverage without changing latency. Cumulative campaign consumption is
+3794.758955639 seconds; the 6722-event ledger SHA-256 is
+ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b with the
+4996-event prefix intact. GPUP-6 is next and requires its bounded adaptive
+contract before behavior.
+GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
+used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent
 exact-rational regressions before introducing lower precision. The initial
 experiment campaign is capped at eight GPU-hours. Repeated-solve throughput

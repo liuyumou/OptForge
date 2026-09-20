@@ -73,10 +73,16 @@ def load_trials(directory,value,manifests,campaign_hash):
         for role in ['worker','stdout','stderr','endpoint']:
             if trial[role] is not None:checked_reference(directory,trial[role])
         if trial['endpoint'] is not None and trial['status']!='invalid_evidence':
-            endpoint=validate('endpoint',read_json(checked_reference(directory,trial['endpoint'])))
-            if endpoint['assessment']['classification']!=trial['endpoint_class'] or endpoint['record']['backend']!=trial['executed_backend']:
+            endpoint=read_json(checked_reference(directory,trial['endpoint']))
+            if trial['requested_backend'].startswith('copt-'):
+                from validate_artifacts import validator
+                validator('lp-external-endpoint-v1.schema.json').validate(endpoint)
+                record=endpoint['witness'];executed=record['executed_backend']
+            else:
+                validate('endpoint',endpoint);record=endpoint;executed=endpoint['record']['backend']
+            if endpoint['assessment']['classification']!=trial['endpoint_class'] or executed!=trial['executed_backend']:
                 raise ValueError('trial endpoint classification differs')
-            if endpoint['model_sha256']!=trial['model_sha256'] or endpoint['requested_backend']!=trial['requested_backend']:
+            if record['model_sha256']!=trial['model_sha256'] or record['requested_backend']!=trial['requested_backend']:
                 raise ValueError('trial endpoint identity differs')
             endpoints[identity]=endpoint
         trials.append(trial)

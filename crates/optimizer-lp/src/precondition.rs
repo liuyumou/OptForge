@@ -97,6 +97,19 @@ impl Preconditioner {
         }
     }
 
+    #[cfg(feature = "precision-research")]
+    pub(crate) fn explicit(
+        row: Vec<f64>,
+        column: Vec<f64>,
+        settings: PreconditionerSettings,
+    ) -> Self {
+        Self {
+            row,
+            column,
+            settings,
+        }
+    }
+
     /// Row multipliers.
     #[must_use]
     pub fn row(&self) -> &[f64] {

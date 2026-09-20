@@ -1,5 +1,102 @@
 # Known Failures and Limitations
 
+## Consumer Blackwell runs FP64, double compares and 64-bit conversions at 1/64 rate
+
+The [root-cause note](../docs/benchmarks/lp-fp64-pipe-root-cause.md) shows that every
+scheme recombining FP32 partials in FP64 is bound by the sm_120 FP64 pipe, that the
+guarded research FP64 control is 2.4x slower than tuned for the same reason, and
+that the twelve development instances are launch-bound. Hardware counters remain
+unavailable (`ERR_NVGPUCTRPERM` even as root), so pipe attribution rests on static
+instruction counts plus timing. GPUP-5C addresses the removable costs under
+[ADR-0022](../docs/decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md);
+context creation (about 208 ms per solve) remains outside every arithmetic change.
+Do not extrapolate dense Tensor Core or data-center FP64 throughput to this host.
+
+## GPUP-5C: double-float underflows on scheduling LPs; large instances are host-bound and CLI-refused
+
+The [GPUP-5C report](../docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies 806 of 850
+admitted attempts; 24 planned attempts are missing because the 1500-second study cap
+was reached, and 44 admitted attempts have no endpoint (34 CLI refusals of inputs
+above the SPEC-0005 16 MiB bound, 10 research 30-second timeouts on mixed-65536).
+`doublefloat-fp32` certifies 24/36 at 1e-9 and 27/36 at 1e-6 and 1e-4: its losses are
+strict nonzero-to-zero product guards on scheduling-20x5 (1e-9 only), scheduling-50x10,
+ta001, ta011 and mixed-65536, where FP32 products of decaying iterates fall below
+the binary32 normal range. Do not weaken that guard; a block-exponent or per-vector
+scale is the prerequisite. Fused FP64 is slower than integer-guarded separate FP64
+on 32768-65536-row instances because its per-block update warp serializes eight
+rows' vector arithmetic. On those instances preconditioning and research preparation
+cost about one second each, dwarfing kernel time; the CLI cannot read them at all.
+Tolerance tiers 1e-6/1e-4 recover FP32 storage coverage to 24/36 and 30/36 but do
+not change certified latency materially. Reproduce with
+benchmarks/configs/lp-research-v2.json and the archived measured executables.
+
+## GPUP-5B exact representations recover coverage but component arithmetic is slower
+
+The [840-attempt research study](../docs/benchmarks/lp-exact-components-gpup5b.md)
+restores 27/36 certified timings with exact power-of-two/factored FP32 storage
+and with two/three-component products, versus 12/36 for ordinary scaled FP32
+storage. Existing runtime behavior and old failures remain unchanged. All new
+modes still exhaust work on scheduling-50x10, ta001 and ta011. Power-of-two scaling
+increases proposals on four development instances and its current extra host
+preparation costs time. Three-component cross-products take 2.69x/2.67x the native
+research update time on irregular-2048/dense_block-1024 and increase certified
+solve latency by 10.4%/13.8%. Exact representation is not an acceleration result.
+Two-component truncation works at these targets on this corpus; no universal
+accuracy guarantee or supported preset follows.
+
+The isolated prototype splits vectors per nonzero, stores per-coefficient exponents,
+and performs many FP64 compensated additions to recombine FP32 product/error pairs.
+Packing and metadata add storage/transfers; all are charged. Matched reconstruction
+controls and traces separate these costs from convergence. Hardware counters remain
+unavailable; no bandwidth/occupancy explanation is asserted. Raw traces initially
+need offline import with the existing isolated libdw; all 24 decode and match
+1200 launches without rerunning GPU work. No missing endpoint, numerical failure,
+timeout or fallback occurred among these 840 attempts. All old artifacts and the
+3288-event prefix are unchanged. See the preserved
+[rounding note](../docs/benchmarks/lp-fp32-rounding-analysis.md) and
+[candidates](../docs/plans/lp-precision-candidates.md). GPUP-6 requires its own
+bounded adaptive contract; no recovery or guard relaxation is implicit here.
+
+## GPUP-5 FP32 coverage loss and external-control limits
+
+The [verified GPUP-5 study](../docs/benchmarks/lp-fp32-gpup5.md) retains all 480
+attempts. Matched/tuned/precision FP64 certify 27/36 timings; FP32 storage,
+products, accumulation and fixed master correction certify 12/36, and FP32 working
+state 6/36. Storage-only modes exhaust work; product modes stop on guarded
+nonzero-to-zero product loss. Fixed correction every 32 steps does not restore
+coverage and can substantially increase transfers and host work. Reproduce with
+benchmarks/configs/lp-precision-v4.json and the archived measured source. Next:
+GPUP-6 must specify adaptive audits/recovery before changing numerical behavior;
+do not weaken guards, tolerances or work limits to hide these outcomes.
+
+The [bounded follow-up diagnosis](../docs/benchmarks/lp-fp32-slowdown-diagnosis.md)
+retains 196 equal-work short runs, 14 decoded CUDA traces and three unsuccessful
+hardware-counter attempts. FP32 iterations are similar or sometimes faster than
+the precision FP64 control, but the failed large cases do 22–31 times as many
+proposals. Exact rational row activities identify scaled-matrix bias above original
+allowances; this does not explain every nonconverged model. Generic guarded kernels,
+six launches/update, frequent state readbacks and host correction add costs. Hardware
+counters are unavailable (ERR_NVGPUCTRPERM); cache/bandwidth/occupancy attribution is
+unresolved. Saved traces decoded offline with the existing isolated libdw dependency.
+No solver behavior or guard changed. Historical reporting now accepts an intact,
+settled archived ledger prefix so later diagnostics cannot change GPUP-5's totals.
+
+COPT 8.0.6 CPU/GPU PDLP certify 27/36 and 24/36 timings. Scaling-256 remains
+feasible but unclosed; GPU ta001 witnesses are rejected by original-model checks.
+Its public API exposes neither a PDLP iteration-limit nor a seed control: record
+observed counts above 50000 as work_limit and enforce the common process deadline.
+Input coefficients at or below its nonzero 1e-10 threshold are refused rather than
+silently dropped; all frozen study coefficients exceed it. Native status and a
+requested GPUMode never establish host certification or actual GPU execution.
+Isolated setup phase timing is unavailable; native rounded solve time and combined
+setup/export/validation/startup overhead are recorded separately. COPT remains
+optional study tooling. Presolve-only or CPU fallback is not a GPU success.
+
+HiGHS scaling-256 run errors and irregular-2048 timeouts remain in this study, as
+do host time/work limits. Preflight callback/log-parser failures are retained in
+the separate acceptance ledger. All six precision cases pass all four sanitizers
+on the original measurement GPU; GPUP-4's historical device limitation stays below.
+
 ## GPUP-4 launch setup failure, correction and remaining limits
 
 The first 320-attempt round lost 24 matched-reference timing endpoints because an
@@ -110,18 +207,19 @@ scaling-256 and timed out on irregular-2048, and host LP timed out on three
 scheduling cases. These unsuccessful outcomes are preserved evidence, not
 infrastructure gate failures or permission to weaken numerical targets.
 
-Low-precision experiments, cuda-lp-quantized, precision-settings and supported
-recipes remain unimplemented. SPEC-0012 is accepted for implemented GPUP-3 FP64
-control; later precision requirements remain pending. Opt-in cuda-lp-matched shares
+GPUP-5 implements precision settings and bounded FP32 comparisons under accepted
+SPEC-0012/0013 and ADR-0019. cuda-lp-quantized, adaptive recovery, lower-width
+quantization and supported recipes remain unavailable. Opt-in cuda-lp-matched shares
 host control. Legacy cuda-lp retains fixed control. The
 [matched study](../docs/benchmarks/lp-matched-fp64-gpup3.md) certified 27/36 timing
 trials for both matched CUDA and host, versus 6/36 for legacy CUDA. Scheduling-50x10,
-ta001 and ta011 remain infeasible at 50,000 matched iterations; no finite gap is
+ta001 and ta011 remain uncertified at 50,000 matched iterations; no finite gap is
 claimed for them. Small cases remain slower on GPU because setup dominates.
 Certified per-instance paired timings establish bounded development evidence only.
 The independent exact-rational certification regressions remain authoritative.
 The section heading retains its earlier link identity; the missing experiments
-here are precision comparisons and recipe selection, not baseline measurements.
+here are later precision/recovery comparisons and recipe selection; GPUP-5
+FP32 comparisons are now implemented and measured.
 
 Follow [the backlog](backlog.yaml) one slice at a time, preserving the study ledger
 and all failures. Validation and held-out models were generated/hash-checked only;

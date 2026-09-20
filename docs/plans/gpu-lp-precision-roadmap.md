@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; slices 0-4 complete; slices 5-10 pending
+Status: approved roadmap; slices 0-5 and GPUP-5B complete; GPUP-5C complete; slices 6-10 pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: bootstrap (first commit containing this document)
@@ -62,6 +62,8 @@ be refined from earlier findings, with changes recorded before affected trials.
 | GPUP-3 | Create a resumable FP64 control implementation with shared restart, weight, checkpoint, cancellation, and budget state. | Complete: whole-trajectory/checkpoint tests, full native and scoped device/sanitizer gates, and 160 supplementary study attempts. Opt-in matched CUDA certifies 27/36 timing runs; legacy remains unchanged. |
 | GPUP-4 | Optimize FP64 residency, allocation, transfers, sparse kernels, and compatible fusion where profiling supports it. | Complete: explicit cuda-lp-tuned, bitwise/rational/native/device/scoped sanitizer gates, preserved original failures and a complete 320-attempt correction. Coverage remains 27/36 for every configuration; scoped provisional fusion gains, matched remains the general reference. |
 | GPUP-5 | Add FP32 matrix storage with FP64 arithmetic, then FP32 products/accumulation. Compare FP64 masters and FP32 working state with FP64 correction. | Original-model checks, convergence and range diagnostics, measured storage/arithmetic/state costs. |
+| GPUP-5B | Investigate exact power-of-two/factored scaling and two/three-component sparse products. | Matched FP64 controls, independent rational/device checks, 840 frozen development attempts and preserved rounding analysis; [report](../benchmarks/lp-exact-components-gpup5b.md). |
+| GPUP-5C | Act on the FP64-pipe root cause: integer-pipe guards, fused two-launch schedule, double-float FP32 pairs, explicit tolerance tiers and a frozen development extension. | ADR-0022; twelve-mode bitwise device differentials, rational pair fixtures, research-v2 evidence, manifest v2 with byte-identical v1 outputs, charged 874-attempt study. |
 | GPUP-6 | Add configurable audits, checkpoints, replay, promotion, and optional demotion, initially FP32/FP64. | Fault injection covering full rollback, budget/cancellation accounting, sticky promotion, and guarded demotion. |
 | GPUP-7 | Add quantization candidates through a common experimental interface; establish sparse FP8 before Tensor Core comparisons. | Quantizer checks, transpose consistency, guarded conversion, screening against the FP64 control. |
 | GPUP-8 | Add hybrid sparse/dense-tile Tensor Core execution on the actual Blackwell target, including FP16/BF16 and FP8 where supported. | Differential kernels, same-device repeatability, sanitizers, and padding/packing-inclusive single-solve timings. |
@@ -85,8 +87,36 @@ attempts, including 24 reference launch failures, and a separately frozen comple
 approved 900-second supplement; cumulative use is 902.574545061 of the exact
 1345.988045904 ceiling. Every configuration certifies 27/36 timings. Matched remains
 the general reference; fused warp32 is provisional only on three named development
-instances. GPUP-5 is next. No validation/held-out solve, precision preset or
-publication occurred.
+instances. GPUP-5 now adds explicit FP32 comparisons and COPT CPU/GPU PDLP
+controls under ADR-0019. Its [report](../benchmarks/lp-fp32-gpup5.md) verifies all
+480 attempts and adds 421.636094192 screening seconds, for 1324.210639253 cumulative
+seconds beneath the 4502.574545061 slice ceiling. FP64 controls retain 27/36 timing
+coverage, versus 12/36 for FP32 storage/products/accumulation/master correction and
+6/36 for FP32 working state. GPUP-6 is next after completed acceptance. No
+validation/held-out solve, supported preset or publication occurred.
+
+GPUP-5B is complete before GPUP-6 under [ADR-0021](../decisions/ADR-0021-exact-scaling-components.md).
+The preserved diagnosis adds 143.056235443 seconds for 1467.266874696 cumulative.
+See the [GPUP-5B report](../benchmarks/lp-exact-components-gpup5b.md),
+the [rounding investigation](../benchmarks/lp-fp32-rounding-analysis.md) and
+[future candidate register](lp-precision-candidates.md). All 840 attempts verify;
+new exact/component modes recover 27/36 timing coverage, with slower component
+cross-products retained. Full native/device/scoped sanitizer gates pass. New work
+uses 697.211414922 study + 70.875589353 acceptance screening seconds, totaling
+2235.353878971 cumulative seconds within 4502.574545061 and campaign/phase caps.
+All 4996 ledger events preserve the original 3288-event prefix and old artifacts.
+
+GPUP-5C follows under [ADR-0022](../decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md)
+after the [root-cause note](../benchmarks/lp-fp64-pipe-root-cause.md) attributed the
+component slowdown to the sm_120 FP64 pipe rather than Tensor Cores or bandwidth.
+It adds three research modes, research-v2 evidence, tolerance tiers 1e-6/1e-4 and a
+development extension. Its [report](../benchmarks/lp-fp64-pipe-gpup5c.md) verifies
+806 of 850 admitted attempts; integer guards and fusion are bitwise identical to
+the FP64 control and halve update cost, double-float is fastest at scale but
+underflows on scheduling LPs, and tiers recover FP32 storage coverage. It used
+1493.313474227 study plus 66.091602441 acceptance seconds, for 3794.758955639
+cumulative inside the unchanged ceiling. GPUP-6 follows and requires its bounded
+adaptive contract; no preset is selected.
 
 ## Numerical design and candidate methods
 
@@ -190,10 +220,9 @@ maximum. New automatic dispatch or portfolios require their own specification.
 ## Interfaces, documentation, and handoff
 
 The originally planned opt-in backend name `cuda-lp-quantized` remains reserved
-and unavailable. Before GPUP-5, resolve the [interface handoff](gpup5-interface-handoff.md):
-prefer one experimental implementation with versioned precision settings and retain
-existing backend/replay compatibility. This recommendation requires specification
-acceptance before it changes the planned interface.
+and unavailable. GPUP-5 resolves the [interface handoff](gpup5-interface-handoff.md)
+under accepted ADR-0019: explicit lp-precision-v1 extends cuda-lp-tuned, preserving
+absent-setting behavior, prior code identities and replay compatibility.
 Versioned settings will describe requested/executed arithmetic, quantization,
 audits, recovery, and resource limits. Versioned records preserve transitions,
 reasons, provenance, and host certification. Existing records remain readable and

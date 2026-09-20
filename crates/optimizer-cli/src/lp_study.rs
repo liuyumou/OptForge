@@ -25,7 +25,32 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
             return Err(argument("duplicate flag"));
         }
     }
-    if command == "verify" && instance.is_none() && output.is_none() && device.is_none() {
+    if command == "external-certify" || command == "external-verify" {
+        let bytes = read(model.ok_or_else(|| argument("--model required"))?)?;
+        let evidence = read(evidence.ok_or_else(|| argument("--evidence required"))?)?;
+        if command == "external-certify" {
+            let witness = optimizer_experiment::lp_external::ExternalWitness::from_json(&evidence)
+                .map_err(io::Error::other)?;
+            let endpoint =
+                optimizer_experiment::lp_external::ExternalEndpoint::new(witness, &bytes)
+                    .map_err(io::Error::other)?;
+            let output = output.ok_or_else(|| argument("--output required"))?;
+            let mut file = std::fs::OpenOptions::new()
+                .write(true)
+                .create_new(true)
+                .open(output)?;
+            std::io::Write::write_all(
+                &mut file,
+                &serde_json::to_vec_pretty(&endpoint).map_err(io::Error::other)?,
+            )?;
+        } else {
+            let endpoint =
+                optimizer_experiment::lp_external::ExternalEndpoint::from_json(&evidence)
+                    .map_err(io::Error::other)?;
+            endpoint.verify(&bytes).map_err(io::Error::other)?;
+            println!("{}", serde_json::to_string(&endpoint.assessment)?);
+        }
+    } else if command == "verify" && instance.is_none() && output.is_none() && device.is_none() {
         let bytes = read(model.ok_or_else(|| argument("--model is required"))?)?;
         let endpoint = optimizer_experiment::lp::LpEndpoint::from_json(&read(
             evidence.ok_or_else(|| argument("--evidence is required"))?,
@@ -97,7 +122,12 @@ fn replay(
     let mut diagnostics = LpDiagnostics::new(true, false);
     diagnostics.device_buffer_limit_bytes = original.diagnostics.device_buffer_limit_bytes;
     if let Some(execution) = &original.record.lp_execution {
-        let image = std::fs::read(optimizer_lp_cuda::tuned::code_object_path())?;
+        let path = if original.record.lp_precision.is_some() {
+            optimizer_lp_cuda::precision::code_object_path()
+        } else {
+            optimizer_lp_cuda::tuned::code_object_path()
+        };
+        let image = std::fs::read(path)?;
         if optimizer_core::sha256::hex(&image) != execution.code_object_sha256 {
             return Err(argument("recorded tuned code object differs"));
         }
@@ -105,6 +135,11 @@ fn replay(
             execution.settings,
         ));
     }
+    diagnostics.precision = original
+        .record
+        .lp_precision
+        .clone()
+        .map(optimizer_core::LpPrecisionDiagnostics::new);
     let options = &original.record.options;
     let settings = || {
         original

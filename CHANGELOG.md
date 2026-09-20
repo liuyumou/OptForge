@@ -10,6 +10,41 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Added
+
+- GPUP-5C (ADR-0022) records the [FP64-pipe root cause](docs/benchmarks/lp-fp64-pipe-root-cause.md)
+  of the component slowdown and adds feature-gated research modes `intguard-fp64`,
+  `fused-fp64` and `doublefloat-fp32` with CPU oracles, research-v2 evidence,
+  explicit tolerance tiers, a frozen lp-manifest-v2 development extension with a
+  `mixed` family, a protocol-driven research harness and charged diagnostic
+  microbenchmarks. The [report](docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies
+  806 of 850 admitted attempts. Runtime selectors, defaults, existing code objects,
+  v1 artifacts and the 1e-9 default remain unchanged; no supported preset or
+  recovery is added.
+
+- GPUP-5B isolates exact power-of-two/factored scaling and two/three-component
+  sparse products behind a research feature, with strict independent host evidence.
+  The [investigation](docs/benchmarks/lp-exact-components-gpup5b.md) restores FP64
+  certified coverage but retains negative component-product performance results.
+  Includes reproducible rounding analysis, future candidates and complete work,
+  memory and packing costs. Runtime interfaces, historical evidence and defaults
+  remain unchanged; no supported preset or adaptive recovery is introduced.
+
+- A [213-job FP32 latency investigation](docs/benchmarks/lp-fp32-slowdown-diagnosis.md)
+  separates convergence loss, scaled-matrix error, guarded executor costs and fixed
+  correction overhead. Includes equal-work timings, CUDA traces and exact-rational
+  row diagnostics; unavailable hardware counters remain explicit. Solver behavior
+  and all 480 original study results are preserved.
+
+- GPUP-5 adds explicit lp-precision-v1 on cuda-lp-tuned, canonical FP32 storage,
+  product/accumulation/state comparisons, fixed charged FP64 correction, guarded
+  conversion, conservative operator steps and v4 evidence/replay. Existing defaults
+  and records retain their meaning. Isolated COPT CPU/GPU PDLP study controls use
+  original-model host assessment; no runtime COPT dependency or preset is added.
+  See [precision operations](docs/operations/lp-precision.md).
+  The [480-attempt report](docs/benchmarks/lp-fp32-gpup5.md) retains lower certified
+  FP32 coverage; GPUP-6 adaptive recovery remains deferred.
+
 ### Changed
 
 - Protect GitHub main with required PRs, current CPU/docs/smoke checks, resolved
@@ -17,6 +52,9 @@ User-visible changes are recorded here using Conventional Commit terminology.
   mandatory human approval remains disabled for the autonomous workflow.
 
 ### Fixed
+
+- Historical GPUP-5 reports use their verified settled ledger prefix, preserving
+  original totals when later diagnostics append to the shared campaign ledger.
 
 - Verify supervisor timeout and released lease ownership without imposing an
   undeclared one-second cleanup ceiling in the coordinator-loss CI fixture.

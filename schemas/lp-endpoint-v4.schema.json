@@ -1,0 +1,579 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-endpoint-v4.schema.json",
+  "title": "Explicit precision endpoint v4",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 4
+    },
+    "model_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "requested_backend": {
+      "const": "cuda-lp-tuned"
+    },
+    "record": {
+      "anyOf": [
+        {
+          "$ref": "solve-record-v2.schema.json"
+        },
+        {
+          "$ref": "solve-record-v4.schema.json"
+        }
+      ]
+    },
+    "row_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "uniqueItems": true
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "const": true
+        },
+        "profile": {
+          "type": "boolean"
+        },
+        "device_buffer_limit_bytes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "dual": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "iterations": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "assessment_iteration": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "restarts": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kernel_launches": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "device_buffer_peak_bytes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "phases_ns": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "input_preparation": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "device_context": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "preparation": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "preconditioning": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "invariant_allocation_upload": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "working_allocation": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "working_upload": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "kernels_and_synchronization": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "readback": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "iteration": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "host_checks": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "solve_record_serialization": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "native_preparation": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "native_solve": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "native_extraction": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "independent_endpoint": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "controller": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "precision_preparation": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "fp64_correction": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": []
+        },
+        "unavailable": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "enabled",
+        "profile",
+        "device_buffer_limit_bytes",
+        "dual",
+        "iterations",
+        "assessment_iteration",
+        "restarts",
+        "kernel_launches",
+        "device_buffer_peak_bytes",
+        "phases_ns",
+        "unavailable"
+      ]
+    },
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "enum": [
+            "missing_candidate",
+            "certified_success",
+            "feasible_unclosed",
+            "missing_certificate",
+            "numerical_rejection",
+            "interrupted",
+            "timeout",
+            "work_limit",
+            "unsupported",
+            "backend_failure",
+            "reference_only"
+          ]
+        },
+        "feasible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "objective": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "gap_upper": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "gap_closed": {
+          "type": "boolean"
+        },
+        "allowance": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "repaired": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "classification",
+        "feasible",
+        "objective",
+        "bound",
+        "gap_upper",
+        "gap_closed",
+        "allowance",
+        "repaired",
+        "reason"
+      ]
+    },
+    "fallback_reason": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "control": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "logical_iterations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "physical_iterations": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "assessments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kkt_evaluations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "restarts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "controller": {
+          "const": "host-restart-weight-v1"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 1e-06,
+          "maximum": 1000000.0
+        },
+        "stop": {
+          "enum": [
+            "accepted",
+            "iteration_limit",
+            "interrupted",
+            "time_limit",
+            "device_failure",
+            "numerical_failure"
+          ]
+        },
+        "device_kernel_launches": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "logical_iterations",
+        "physical_iterations",
+        "assessments",
+        "kkt_evaluations",
+        "restarts",
+        "controller",
+        "weight",
+        "stop",
+        "device_kernel_launches"
+      ]
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "settings": {
+          "$ref": "lp-execution-v1.schema.json"
+        },
+        "code_object_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "allocations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allocated_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "upload_calls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "upload_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "readback_calls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "readback_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "synchronizations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kernel_launches": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "settings",
+        "code_object_sha256",
+        "allocations",
+        "allocated_bytes",
+        "upload_calls",
+        "upload_bytes",
+        "readback_calls",
+        "readback_bytes",
+        "synchronizations",
+        "kernel_launches"
+      ]
+    },
+    "precision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "settings": {
+          "$ref": "lp-precision-v1.schema.json"
+        },
+        "proposed_steps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "correction_steps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rejected_steps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "guard": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "operator_bounds": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": 0
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "step": {
+          "anyOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "correction_max_error": {
+          "type": "number",
+          "minimum": 0
+        },
+        "matrix_max_error": {
+          "type": "number",
+          "minimum": 0
+        },
+        "matrix_subnormals": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "settings",
+        "proposed_steps",
+        "correction_steps",
+        "rejected_steps",
+        "guard",
+        "operator_bounds",
+        "step",
+        "correction_max_error",
+        "matrix_max_error",
+        "matrix_subnormals"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "model_sha256",
+    "requested_backend",
+    "record",
+    "row_ids",
+    "diagnostics",
+    "assessment",
+    "fallback_reason",
+    "payload_sha256",
+    "execution",
+    "precision"
+  ]
+}

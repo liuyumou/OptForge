@@ -52,6 +52,7 @@ pub struct CudaLpBackend {
     matched: bool,
     execution: Option<optimizer_core::LpExecutionRecord>,
     code_image: Option<Vec<u8>>,
+    precision: Option<optimizer_core::LpPrecisionSettings>,
 }
 
 impl CudaLpBackend {
@@ -91,6 +92,7 @@ impl CudaLpBackend {
             matched: false,
             execution: None,
             code_image: None,
+            precision: None,
         })
     }
 
@@ -143,6 +145,24 @@ impl CudaLpBackend {
         Ok(backend)
     }
 
+    /// Open the versioned precision path; old tuned construction is unchanged.
+    pub fn open_precision(
+        context: Rc<Context>,
+        settings: LpSettings,
+        execution: optimizer_core::Fp64ExecutionSettings,
+        precision: optimizer_core::LpPrecisionSettings,
+    ) -> Result<Self, ValidationError> {
+        precision.validate_execution(execution)?;
+        let mut backend = Self::open_tuned_with_code_object(
+            context,
+            settings,
+            execution,
+            crate::precision::code_object_path(),
+        )?;
+        backend.precision = Some(precision);
+        Ok(backend)
+    }
+
     fn name(&self) -> &'static str {
         if self.execution.is_some() {
             "cuda-lp-tuned"
@@ -191,7 +211,22 @@ impl CudaLpBackend {
         if self.matched {
             settings.iteration_limit = settings.iteration_limit.min(work_limit.unwrap_or(u64::MAX));
         }
-        let engine = Engine::new(program, settings);
+        let mut engine = Engine::new(program, settings);
+        if let Some(precision) = &self.precision {
+            diagnostics.finish("preconditioning", preparation);
+            return crate::precision::iterate(
+                Rc::clone(&self.context),
+                &mut engine,
+                precision.clone(),
+                self.code_image
+                    .as_deref()
+                    .expect("identified precision object"),
+                cancel,
+                diagnostics,
+                check,
+                deadline,
+            );
+        }
         diagnostics.finish("preconditioning", preparation);
         let (row_values, column_values) = engine.scaled_matrix();
         let peak = match &self.execution {
@@ -425,7 +460,11 @@ impl Backend for CudaLpBackend {
             self.name(),
             BACKEND_VERSION.to_string(),
             vec![ProblemClass::Continuous],
-            Arithmetic::F64,
+            if self.precision.as_ref().is_some_and(|p| p.mixed()) {
+                Arithmetic::MixedF32F64
+            } else {
+                Arithmetic::F64
+            },
             true,
             DeviceClass::Gpu,
         )
@@ -467,10 +506,14 @@ impl CudaLpBackend {
             observations.code_object_sha256 = Some(e.code_object_sha256.clone());
             diagnostics.execution = Some(observations);
         }
+        if let Some(p) = &self.precision {
+            diagnostics.precision = Some(optimizer_core::LpPrecisionDiagnostics::new(p.clone()));
+        }
         let mut record = self.solve_observed(model, options, cancel, warm_start, diagnostics)?;
         record.backend = self.name().into();
         if let Some(e) = &self.execution {
-            record.schema_version = 3;
+            record.schema_version = if self.precision.is_some() { 4 } else { 3 };
+            record.lp_precision = self.precision.clone();
             record.lp_settings = Some(self.settings);
             record.lp_execution = Some(e.clone());
         }
@@ -606,7 +649,12 @@ impl CudaLpBackend {
         let closed = closed_early && gap.is_some_and(|gap| gap.closed);
 
         let control_stop = diagnostics.control.as_ref().map(|c| c.stop.as_str());
-        let termination = if control_stop == Some("interrupted") {
+        let termination = if control_stop == Some("numerical_failure") {
+            if let Some(reason) = diagnostics.precision.as_ref().and_then(|p| p.guard.clone()) {
+                warnings.push(reason);
+            }
+            Termination::NumericalFailure
+        } else if control_stop == Some("interrupted") {
             Termination::Interrupted
         } else if control_stop == Some("time_limit") {
             Termination::TimeLimit
@@ -626,6 +674,7 @@ impl CudaLpBackend {
         let objective = report.feasible.then_some(report.objective);
         Ok(SolveRecord {
             lp_execution: None,
+            lp_precision: None,
             schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: BACKEND_NAME.to_string(),
@@ -657,6 +706,7 @@ fn bare(
 ) -> SolveRecord {
     SolveRecord {
         lp_execution: None,
+        lp_precision: None,
         schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
         backend: BACKEND_NAME.to_string(),

@@ -40,3 +40,10 @@ pub const RUN_RECORD_SCHEMA: &str = include_str!("../../../schemas/run-record-v2
 /// JSON Schema for embedded search records, version 2.
 pub const SEARCH_RECORD_SCHEMA: &str =
     include_str!("../../../schemas/search-record-v3.schema.json");
+
+/// Independently checked external LP study witnesses.
+pub mod lp_external;
+
+/// Strict isolated GPUP-5B study evidence; no runtime selector.
+#[cfg(feature = "precision-research")]
+pub mod lp_research;

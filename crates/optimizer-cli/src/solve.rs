@@ -30,6 +30,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     let mut backend_name = None;
     let mut settings_path = None;
     let mut execution_path = None;
+    let mut precision_path = None;
     let mut device_name = None;
     for pair in options.chunks(2) {
         let [key, value] = pair else {
@@ -49,6 +50,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             "--backend" => &mut backend_name,
             "--lp-settings" => &mut settings_path,
             "--lp-execution" => &mut execution_path,
+            "--lp-precision" => &mut precision_path,
             "--device" => &mut device_name,
             _ => return Err(argument(&format!("unknown flag {key}"))),
         };
@@ -142,6 +144,19 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         (_, Some(_)) => return Err(argument("--lp-execution requires cuda-lp-tuned")),
         (_, None) => None,
     };
+    let precision = precision_path
+        .map(|path| {
+            if selected != "cuda-lp-tuned" {
+                return Err(argument("--lp-precision requires cuda-lp-tuned"));
+            }
+            let p = optimizer_core::LpPrecisionSettings::from_json(&read(path)?)
+                .map_err(io::Error::other)?;
+            p.validate_execution(execution.expect("explicit tuned settings"))
+                .map_err(io::Error::other)?;
+            Ok(p)
+        })
+        .transpose()?;
+    diagnostics.precision = precision.map(optimizer_core::LpPrecisionDiagnostics::new);
     diagnostics.execution = execution.map(optimizer_core::LpExecutionDiagnostics::new);
     let mut fallback_reason = None;
     let record = match selected {
@@ -318,7 +333,11 @@ pub(crate) fn device_solve(
 ) -> Result<optimizer_core::SolveRecord, String> {
     let context = session.context();
     let backend = if let Some(execution) = execution {
-        CudaLpBackend::open_tuned(context, settings, execution)
+        if let Some(p) = &diagnostics.precision {
+            CudaLpBackend::open_precision(context, settings, execution, p.settings.clone())
+        } else {
+            CudaLpBackend::open_tuned(context, settings, execution)
+        }
     } else if matched {
         CudaLpBackend::open_matched(context, settings)
     } else {

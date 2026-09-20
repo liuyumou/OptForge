@@ -32,6 +32,9 @@ pub struct LpControlDiagnostics {
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct LpDiagnostics {
+    /// Precision observations belong only to endpoint v4.
+    #[serde(skip)]
+    pub precision: Option<crate::LpPrecisionDiagnostics>,
     /// Kept out of the legacy wire shape; endpoint v2 serializes this separately.
     #[serde(skip)]
     pub control: Option<LpControlDiagnostics>,
@@ -67,6 +70,7 @@ impl LpDiagnostics {
     #[must_use]
     pub fn new(enabled: bool, profile: bool) -> Self {
         Self {
+            precision: None,
             control: None,
             execution: None,
             enabled,

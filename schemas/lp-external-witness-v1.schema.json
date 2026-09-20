@@ -1,0 +1,183 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "model_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "requested_backend": {
+      "enum": [
+        "copt-cpu-pdlp",
+        "copt-gpu-pdlp"
+      ]
+    },
+    "executed_backend": {
+      "anyOf": [
+        {
+          "enum": [
+            "copt-cpu-pdlp",
+            "copt-gpu-pdlp"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "options": {
+      "$ref": "solve-config-v1.schema.json"
+    },
+    "copt_version": {
+      "const": "8.0.6"
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "LpMethod": {
+          "type": "number"
+        },
+        "GPUMode": {
+          "type": "number"
+        },
+        "GPUDevice": {
+          "type": "number"
+        },
+        "Threads": {
+          "type": "number"
+        },
+        "Crossover": {
+          "type": "number"
+        },
+        "TimeLimit": {
+          "type": "number"
+        },
+        "PDLPTol": {
+          "type": "number"
+        },
+        "FeasTol": {
+          "type": "number"
+        },
+        "DualTol": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "LpMethod",
+        "GPUMode",
+        "GPUDevice",
+        "Threads",
+        "Crossover",
+        "TimeLimit",
+        "PDLPTol",
+        "FeasTol",
+        "DualTol"
+      ]
+    },
+    "library_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "binding_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gpu_confirmed": {
+      "type": "boolean"
+    },
+    "row_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "variable_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "primal": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "dual": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "optimal",
+        "time_limit",
+        "iteration_limit",
+        "interrupted",
+        "unsupported",
+        "numerical_failure",
+        "backend_failure"
+      ]
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "model_sha256",
+    "requested_backend",
+    "executed_backend",
+    "options",
+    "copt_version",
+    "parameters",
+    "library_sha256",
+    "binding_sha256",
+    "gpu_confirmed",
+    "row_ids",
+    "variable_ids",
+    "primal",
+    "dual",
+    "status",
+    "iterations",
+    "limitations"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-external-witness-v1.schema.json"
+}

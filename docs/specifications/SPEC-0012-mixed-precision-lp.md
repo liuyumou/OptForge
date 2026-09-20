@@ -1,12 +1,12 @@
 # SPEC-0012: Experimental Mixed-Precision LP Backend
 
-Status: accepted; GPUP-3/4 implemented and measured, later precision requirements pending
+Status: accepted; GPUP-3/4/5 implemented and measured, adaptive recovery and later precision pending
 Scope: opt-in LP arithmetic, resumable control, numerical audits, and recovery
 Owner: numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: bootstrap (first commit containing this document)
 Supersedes: ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
-Implementation: shared optimizer-lp FP64 controller and opt-in matched/tuned CUDA executors; precision pending GPUP-5 through GPUP-8
+Implementation: shared FP64 control, matched/tuned CUDA and explicit FP32 comparisons with fixed correction; adaptive recovery and GPUP-7/8 pending
 Tests: continuation, bitwise trajectory, exact-rational, endpoint, native and scoped device gates; mapping below
 
 ## Purpose
@@ -15,8 +15,8 @@ Accepted by the maintainer on 2026-09-15. GPUP-3 implements shared resumable FP6
 control and explicit `cuda-lp-matched` using existing kernels, settings and host
 mathematical authority. Requirements 9-11 apply to in-memory FP64 checkpoints now;
 precision/audit/random state applies when introduced in GPUP-5 through GPUP-8.
-Persistent checkpoints, precision settings, quantization, recovery and presets
-remain pending. [ADR-0016](../decisions/ADR-0016-matched-fp64.md) freezes this slice.
+GPUP-5 adds explicit precision settings and fixed correction under ADR-0019.
+Persistent checkpoints, quantization, adaptive recovery and presets remain pending. [ADR-0016](../decisions/ADR-0016-matched-fp64.md) freezes this slice.
 
 Define an experimental route from FP64 through FP32 to FP8 and Tensor Core LP
 iteration without giving the device mathematical authority. Optimize certified
@@ -127,28 +127,30 @@ execution by the pinned HiGHS adapter, distinct from FP64 numerical recovery.
 
 ## Interfaces
 
-Planned selection: `cuda-lp-quantized`, opt-in through the existing solve surface.
-Before GPUP-5, review the [interface handoff](../plans/gpup5-interface-handoff.md)
-and accept a selector/settings decision; its consolidation recommendation is not
-an accepted interface change.
-This name is reserved for later precision work and is not accepted by the current CLI. The Backend
-trait remains the runtime boundary. Its capability declaration needs an explicit
-mixed-arithmetic representation rather than falsely reporting F64-only execution.
+GPUP-5 accepts explicit `--lp-precision` on `cuda-lp-tuned` alongside method and
+execution settings, under ADR-0019. The [interface handoff](../plans/gpup5-interface-handoff.md)
+is resolved. The originally proposed cuda-lp-quantized name remains reserved and
+unavailable. The Backend trait remains the runtime boundary. Capability schema 2
+explicitly declares mixed binary32/binary64 arithmetic; existing FP64 declarations
+retain schema 1.
 
-A separate versioned precision-settings document will accompany the existing LP
-method settings. It records allowed/forced precision modes, matrix/vector format,
-scale and block policy, rounding/seed, sparse or hybrid execution, tile-density
-policy, audit interval, primal/dual update tolerances, recovery ladder,
-clean-window/demotion policy, and work/memory/time limits. All consequential
-settings are explicit. Unsupported combinations fail validation; no final preset
-or precision runtime schema is shipped by GPUP-3.
+The strict lp-precision-v1 document records matrix, product operand, product,
+accumulation, working-state and update widths, nearest-even rounding and a fixed
+correction interval (or explicit null). GPUP-5 only accepts resident/necessary/
+warp32_v1/separate execution and the combinations in ADR-0019. Unsupported fields,
+versions and combinations fail before allocation. Absent precision settings retain
+existing emission and behavior. No supported preset is shipped.
 
-New records distinguish requested and executed backends/modes and retain config
-and code-object identities, transitions/reasons, accepted/rejected/audit counts,
-termination, and host validation/certification. Existing records remain readable.
-Exact schema versions, enum wire values, and comparison rules must be finalized
-with migration fixtures before GPUP-5 exposes the interface; adding fields silently
-to strict existing schemas is not compatible.
+Precision solve records/endpoints and study campaign/trials use schema 4. They
+retain requested/executed arithmetic and code identity, conversion/range diagnostics,
+physical proposals/rejections/corrections, discrepancy, work, memory/transfers,
+termination and original-model host assessment. Existing strict schemas and readers
+remain intact. External COPT witness/endpoint-v1 is a separate study-only format.
+
+Later quantization, scale/block policies, stochastic rounding, sparse/hybrid tile
+policies, adaptive audits, primal/dual error thresholds, recovery ladders and guarded
+demotion require their own accepted versioned settings. Their checkpoint/history
+requirements below are pending those slices, not implied by fixed correction.
 
 ## State and invariants
 
@@ -338,3 +340,111 @@ Acceptance mapping:
 
 No requirement concerning later precision/recovery or supported presets is marked
 implemented by this FP64 slice.
+
+## GPUP-5 accepted bounded contract
+
+Accepted by the maintainer on 2026-09-16, before behavior.
+[ADR-0019](../decisions/ADR-0019-fp32-lp-comparisons.md) defines the normative
+precision combinations, fixed correction, versioned interfaces, external COPT
+controls, frozen study and exact budgets. It supersedes the pending selector
+recommendation: precision extends cuda-lp-tuned; absent settings retain old
+behavior. Adaptive recovery and supported presets remain deferred. The
+[GPUP-5 report](../benchmarks/lp-fp32-gpup5.md) records all 480 independently verified
+endpoints, costs, failures and the exact 1324.210639253-second cumulative ledger.
+Full native acceptance before measurement, final device/sanitizer evidence and
+final-source acceptance are recorded in state/active-task.md.
+
+
+GPUP-5 acceptance mapping (only bounded requirements, not GPUP-6 recovery):
+
+- Requirements 1-8, 13-14, 33-37: unchanged exact-rational authority and historical
+  trajectory/replay tests; lp_precision strict settings; precision solve/endpoint v4
+  mutation tests; six CLI replay pairs and actual missing-code HiGHS fallback.
+- Requirements 9-18, 28, 31-32: precision_modes_match_independent_steps_and_restore_residency,
+  precision_long_sparse_reductions_and_guarded_operands, independent host rounding/
+  product/canonical-transpose/operator-bound tests, and
+  precision_device_preserves_subnormals_and_checks_loss_before_projection.
+- Fixed correction: precision_interval_one_adopts_original_fp64_endpoint and
+  precision_correction_work_cancellation_and_memory_are_bounded cover unconditional
+  original-operator adoption, intervals 1/3/8/32/128, controller boundaries,
+  FP32 restoration, cancellation, admission and exhausted physical work.
+- Numerical versus availability failures: precision_range_failure_is_not_availability_fallback,
+  retained fault diagnostics/unknown work and strict fallback endpoint checks.
+  Six precision cases pass all four scoped CUDA sanitizers; regular device suites
+  contain 47 cases. Details and logs are in the report/active task.
+
+No adaptive audit, rollback, promotion/demotion, persistent precision checkpoint,
+quantization or supported-preset requirement is marked implemented by this slice.
+
+## GPUP-5B accepted bounded contract
+
+Accepted on 2026-09-16 under [ADR-0021](../decisions/ADR-0021-exact-scaling-components.md).
+Feature-gated explicit scaling and two/three-component sparse products use FP64
+control and original-model certification. Strict research-v1 requests/evidence
+are separate from runtime schemas and selectors. The frozen twelve-mode,
+840-attempt development study charges all work to the preserved campaign ledger,
+with 900 study/300 acceptance seconds inside existing ceilings. Numerical recovery
+remains GPUP-6. The rounding investigation is reproduced before GPU measurements.
+
+
+GPUP-5B implementation and acceptance mapping:
+
+- Explicit scaling, component reconstruction, coefficient range, conservative step
+  and canonical transpose: optimizer-lp research.rs and tests/research.rs.
+  Independent rational products and sparse cancellation/reduction-boundary fixtures
+  are checked by tools/lp_research_oracle.py and the Rust tests.
+- Isolated resident execution: optimizer-lp-cuda research.rs and the separately
+  provisioned cuda/lp_pdhg_research code object. No runtime selector or unsafe
+  boundary is added. Ordinary builds remain toolkit-free.
+- research_all_modes_match_independent_steps_across_controller_boundaries covers
+  all nine new modes, checkpoint/controller transitions and truncation accounting.
+  research_checkpoint_restore_and_exhausted_work_are_respected and
+  research_memory_admission_precedes_allocations_and_faults_preserve_state cover
+  admission, replay work and faults. Full-exponent device products cover subnormal
+  retention, overflow and nonzero-to-zero loss before projection.
+- Strict request/evidence, early cancellation, altered code identity, corrupted
+  witnesses and mislabeled devices: optimizer-experiment lp_research tests.
+  Assessment reuses original-model host validation/certification.
+- The [report](../benchmarks/lp-exact-components-gpup5b.md) and active-task record
+  bind exact measured identities, regular device and four sequential sanitizer
+  gates, full native gates and retained failures. GPUP-1 certification regressions
+  and existing FP64 trajectory/replay fixtures remain required and unchanged.
+
+This slice implements fixed research modes only. No adaptive, quantization or
+supported-preset requirement is marked complete by these observations.
+
+## GPUP-5C accepted bounded contract
+
+Accepted on 2026-09-19 under [ADR-0022](../decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md),
+following the [FP64-pipe root-cause note](../benchmarks/lp-fp64-pipe-root-cause.md).
+Three further feature-gated research modes keep the shared FP64 controller, master
+state, vector-update arithmetic, bounds, objective, guard semantics and original-model
+certification: `intguard-fp64` (integer-pipe range guards), `fused-fp64` (sparse
+product fused with its update and store, two launches per proposal) and
+`doublefloat-fp32` (unevaluated FP32 pairs for coefficients and product operands,
+no FP64 inside the sparse loop). Research-v2 requests/evidence record the
+launch count per proposal and the fused execution setting; version 1 remains
+valid only for the nine GPUP-5B modes. Explicit tolerance tiers are recorded per
+request and never change the default 1e-9 or the certification arithmetic.
+
+GPUP-5C implementation and acceptance mapping:
+
+- Mode predicates, FP32 pair arithmetic, double-float admission/tail/bounds and the
+  lane-strided pair oracle: optimizer-lp research.rs; tests/research.rs covers
+  round trips, pair splitting, subnormal refusal and the independent rational
+  double-float fixture generated by tools/lp_research_oracle.py.
+- Kernels: cuda/lp_pdhg_research adds research_intguard64, research_fused_primal/dual_64
+  and research_fused_primal/dual_df beside the unchanged nine entry points. The
+  update helpers duplicate precision_primal/dual/store operation for operation so
+  optimizer_lp::research::step remains the bitwise oracle.
+- Executor: optimizer-lp-cuda research.rs allocates pair shadows, splits the dual on
+  upload, and branches to the two-launch schedule; the six guard slots are unchanged.
+- research_all_modes_match_independent_steps_across_controller_boundaries covers all
+  twelve modes bitwise; research_intguard_fused_and_doublefloat_faults_are_reported_and_state_preserved
+  and research_doublefloat_device_products_match_the_pair_oracle_and_flag_loss cover
+  admission, faults, pair products and nonzero-to-zero loss.
+- optimizer-experiment lp_research tests cover v1/v2 acceptance rules, fused
+  launch counts and the fused execution setting.
+
+No adaptive recovery, quantization, runtime tolerance change or supported preset is
+marked implemented by this slice.

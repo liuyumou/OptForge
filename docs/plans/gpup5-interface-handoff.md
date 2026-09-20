@@ -1,8 +1,10 @@
 # GPUP-5 interface handoff
 
 Status: recommendation recorded at the maintainer's request on 2026-09-16;
-interface decision and precision contracts remain pending.
-Next task: [GPUP-5](../../state/backlog.yaml), after completed GPUP-4.
+recommendation accepted in [ADR-0019](../decisions/ADR-0019-fp32-lp-comparisons.md) on 2026-09-16.
+The historical decisions below are resolved by that bounded GPUP-5 contract.
+GPUP-5 is implemented; [GPUP-6](../../state/backlog.yaml) is next. The
+[verified report](../benchmarks/lp-fp32-gpup5.md) records acceptance and limitations.
 Contracts: [SPEC-0012](../specifications/SPEC-0012-mixed-precision-lp.md),
 [ADR-0012](../decisions/ADR-0012-opt-in-lp-precision.md),
 [ADR-0017](../decisions/ADR-0017-tuned-fp64.md).

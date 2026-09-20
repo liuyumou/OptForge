@@ -28,6 +28,11 @@ Every schema uses JSON Schema draft 2020-12. These are normative interfaces unde
   [conformance record](conformance-record-v1.schema.json), normative under
   [SPEC-0009](../docs/specifications/SPEC-0009-extension-registry.md)
 
+- [LP manifest v2](lp-manifest-v2.schema.json), the ADR-0022 development
+  extension: a `mixed` family, generator version 2, a larger byte cap, an
+  explicit `extends` reference to the frozen v1 development manifest and a
+  per-instance solve limit. Version 1 manifests are unchanged.
+
 Use python3 tools/validate_artifacts.py from the repository root. Schema validation
 is supplemented with file checksum, configuration, hardware, and timing checks.
 optimizer-experiment embeds these same files; there is no separately maintained

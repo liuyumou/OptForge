@@ -95,6 +95,8 @@ acceptance was not covered.
 - [GPU LP backend specification](docs/specifications/SPEC-0011-gpu-lp-backend.md)
 - [LP certification arithmetic and limits](docs/architecture/lp-certification.md)
 - [GPU LP performance roadmap and slices](docs/plans/gpu-lp-precision-roadmap.md)
+- [FP64-pipe root cause of the FP32 component slowdown](docs/benchmarks/lp-fp64-pipe-root-cause.md)
+- [GPUP-5C guards, fusion, double-float, tiers and corpus report](docs/benchmarks/lp-fp64-pipe-gpup5c.md)
 - [Mixed-precision LP draft](docs/specifications/SPEC-0012-mixed-precision-lp.md)
 - [Accepted LP experiment protocol](docs/specifications/SPEC-0013-lp-precision-experiments.md)
 - [Artifact contract](docs/specifications/SPEC-0007-artifacts.md)

@@ -10,7 +10,16 @@ license.workspace = true
 # record. optimizer-solver uses that type without re-exporting it, and depending on
 # the crate that defines it is clearer than adding a re-export purely to avoid an
 # edge that already exists transitively.
+[features]
+precision-research = ["optimizer-lp/precision-research", "dep:optimizer-lp-cuda", "dep:optimizer-cuda-sys"]
+
+[[example]]
+name = "lp_precision_research"
+required-features = ["precision-research"]
+
 [dependencies]
+optimizer-lp-cuda = { version = "0.1.0", path = "../optimizer-lp-cuda", optional = true, features = ["precision-research"] }
+optimizer-cuda-sys = { version = "0.1.0", path = "../optimizer-cuda-sys", optional = true }
 optimizer-lp = { version = "0.1.0", path = "../optimizer-lp" }
 optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
 optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }

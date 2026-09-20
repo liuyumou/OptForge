@@ -1,5 +1,218 @@
 # Active Task
 
+## GPUP-5C: FP64-pipe execution, tolerance tiers and corpus extension (2026-09-19)
+
+Status: complete under [ADR-0022](../docs/decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md);
+see the [report](../docs/benchmarks/lp-fp64-pipe-gpup5c.md). Evidence below.
+Objective: act on the [root-cause note](../docs/benchmarks/lp-fp64-pipe-root-cause.md)
+without changing runtime selectors, defaults, existing code objects, archived
+evidence or the nine GPUP-5B modes. Add feature-gated research modes
+intguard-fp64 (integer-pipe guards), fused-fp64 (two launches per proposal) and
+doublefloat-fp32 (FP32 hi/lo pairs, no FP64 in the sparse loop) with CPU oracles;
+research-v2 requests/evidence; explicit tolerance tiers 1e-9/1e-6/1e-4 recorded
+per configuration; a frozen development-extension manifest under lp-manifest-v2
+with instances up to 65536 rows and a new mixed family; a protocol-driven research
+harness with byte-identical v1 behavior; committed diagnostic microbenchmarks.
+
+Acceptance gate: full pinned-native tools/check.sh; CPU rational fixtures for
+double-float products; strict v1/v2 evidence tests; device differential over all
+twelve modes across controller boundaries, fault/admission tests, and all four
+scoped sanitizers sequentially; frozen lp-research-v2.json attempts all admitted
+through the shared lease and the preserved ledger; independent revalidation of
+every endpoint; report with coverage per tier, paired latency, equal work, traces.
+
+Likely files: crates/optimizer-lp/src/research.rs and tests; cuda/lp_pdhg_research;
+crates/optimizer-lp-cuda/src/research.rs and tests/device/research.rs;
+crates/optimizer-experiment/src/lp_research.rs; schemas/lp-manifest-v2.schema.json;
+tools/lp_generate.py, lp_protocol.py, lp_research_budget.py, benchmark_lp_research.py,
+analyze_lp_research.py, lp_research_oracle.py; cuda/diagnostics; benchmarks/configs/
+lp-research-v2.json; benchmarks/manifests/lp-development-extension-v1.json; docs.
+
+Resource budget: four build jobs; CPU validation within four hours; GPU study
+1500 s and acceptance 300 s (combined 1800 s) charged to the preserved
+gpup-baseline-v1 ledger under identity gpup5c-v1. Preserve the 4996-event prefix
+SHA-256 737e1301cb31cf5d0ad0585aa81a4dc0b814615d39e4974827e504e880b11e5f and
+2235.353878971 cumulative seconds inside the 4502.574545061-second ceiling.
+Uncharged 2026-09-19 investigation work is recorded, not repeated silently.
+
+Evidence: artifacts/gpup5c-v1 (850 admitted of 874 planned attempts, 806 verified,
+24 missing at the study cap, 44 without endpoints: 34 CLI 16 MiB refusals and 10
+mixed-65536 timeouts) and artifacts/gpup5c-acceptance (two regular device runs of
+33 cases, all four sanitizers twice with zero errors/hazards, three charged
+microbenchmark runs). All twelve modes match the CPU oracle bitwise over 40 steps;
+intguard/fused endpoints are identical to the FP64 control on all 114 pairs.
+Full pinned-native tools/check.sh passed on the measured source
+5e1e0ff1dd6604c54667356fa75d665c451d1e37b7f794039783acc982833e68 (131 Python
+tests, 85 documentation pages) and again on the final source. Study
+1493.313474227/1500 plus acceptance 66.091602441/300 seconds; cumulative
+3794.758955639/4502.574545061. Ledger 6722 events, SHA-256
+ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b, 4996-event prefix
+intact. The initial fused kernels serialized their update tail on lane 0 and were
+restructured before the study; both microbenchmark results are retained. Every GPU
+job used the shared lease; no push or publication. Next ready task: GPUP-6.
+
+## GPUP-5B: exact scaling and component sparse products (2026-09-16–17)
+
+Status: complete; all 840 attempts and required acceptance gates passed. The
+maintainer accepted ADR-0021 and SPEC-0012/0013 amendments before behavior.
+Feature-gated host scaling, separate research code object/executable and strict
+research-v1 evidence implement power-of-two/factored exact storage and two/three
+components with matched reconstructed-FP64/FP32-cross-product controls. Ordinary
+runtime schemas, selectors, code objects, replay and original-model authority
+remain. No correction, adaptive recovery or supported preset was added.
+
+The [report](../docs/benchmarks/lp-exact-components-gpup5b.md) retains all results:
+432 timings, 48 profiles, 336 equal-work runs and 24 Systems traces. All 840
+endpoints independently verify; all traces decode offline and match 1200 launches.
+Timing coverage is 27/36 for every new mode versus 12/36 for plain FP32 storage.
+Three-component cross-products recover convergence but cost 2.69x/2.67x native
+research update time on irregular-2048/dense_block-1024. Failures remain visible;
+no held-out/validation measurement or supported preset. The prior diagnosis is
+unchanged. The [rounding note](../docs/benchmarks/lp-fp32-rounding-analysis.md)
+reproduces every CPU claim and archived witness/hash; the
+[candidate register](../docs/plans/lp-precision-candidates.md) preserves future work.
+
+Acceptance: full pinned-native tools/check.sh on measured and final code, with
+435 Rust tests, 126 Python integration tests and 83 documentation pages on final
+source, plus format/clippy/dependency/replay/smoke checks. Independent Fraction
+fixtures cover reconstruction/products/sparse cancellation/transpose; CPU/device
+differentials cover all nine modes and controller boundaries. Memory refusal,
+cancellation, exhausted physical work, range/fault accounting and strict evidence
+mutations pass. All 51 regular device cases pass; all four scoped sanitizers run
+sequentially with zero errors/race warnings. All nine research modes pass the
+end-to-end preflight; the hardened final reader revalidates all 630 research
+endpoints. Evidence: artifacts/gpup5b-v1, artifacts/gpup5b-rounding-v1 and
+artifacts/gpup5b-acceptance (native-final.log, canonical device/sanitizer logs,
+final-verification.json, exact source/code identities and artifact indexes).
+Preliminary compile/CPU launcher/debug-audit records are retained. Post-measurement
+changes only strengthen CPU evidence checks, rational fixtures and reporting;
+measured numerical kernels/executor/controller are unchanged.
+
+Resources: four build jobs, CPU validation within four hours; GPU measurements and
+CPU acceptance run separately. New study 697.211414922/900 plus acceptance
+70.875589353/300 = 768.087004275/1200 screening seconds. Preserve prior
+1467.266874696 seconds: cumulative 2235.353878971/4502.574545061, with all original
+campaign/phase caps. All 854 new reservations settled. The 3288-event prefix SHA
+b3ca2739b1108a552b0423606ddd0cd94a8ed2323da1506098fa0150ba42bfef is intact;
+4996-event final ledger SHA
+737e1301cb31cf5d0ad0585aa81a4dc0b814615d39e4974827e504e880b11e5f.
+Historical artifact indexes and all their referenced files verify. GPUP-5's
+80.458622460 acceptance seconds remain separate and unchanged. Every GPU job used
+the shared host lease. No push/publication. Next ready task: GPUP-6; accept its
+bounded adaptive interface/contract before implementation.
+
+## Standalone pelican bicycle animation (2026-09-16)
+
+Status: complete. User-requested creative artifact, separate from the optimizer
+capability backlog. Objective: one self-contained `pelican-bicycle.html` containing
+an original 2D SVG pelican riding a bicycle, synchronized pedaling/wheels, a moving
+seaside scene, responsive layout, pause/speed controls and reduced-motion support.
+Likely files: the HTML artifact and this task record. Acceptance: inspect the SVG
+and script, browser checks if a local browser is available, and `bash tools/check.sh`.
+Resource budget: 20 minutes CPU wall time, at most four build jobs; zero project
+GPU work. CONTRIBUTING and relevant task state were read before implementation.
+
+Acceptance evidence: the self-contained SVG parses with unique IDs and resolved
+references; JavaScript syntax passes. Chromium desktop (1440px) and mobile (390px)
+previews were visually inspected. Browser checks passed for moving pedals,
+pause/resume, exclusive pace selection, reduced motion, keyboard activation,
+no horizontal mobile overflow and no script errors. Temporary browser dependencies
+were extracted under /tmp; no system package or project dependency changed.
+Full pinned-native `bash tools/check.sh` passed, including 121 Python tests,
+79 documentation pages, policy checks, committed replay and bootstrap smoke.
+Evidence is retained under artifacts/pelican-bicycle. No optimizer behavior,
+research backlog, GPU campaign ledger or archived study evidence changed.
+
+## GPUP-5 follow-up: diagnose FP32 latency (2026-09-16)
+
+Status: complete; diagnostic evidence and full pinned-native acceptance passed.
+The requested investigation preserves runtime behavior, all 480 original trials,
+code objects, guards, controller, original-model authority and defaults. No GPUP-6
+behavior or supported preset was introduced. See
+[diagnosis report](../docs/benchmarks/lp-fp32-slowdown-diagnosis.md) and ADR-0020.
+
+All 213 frozen GPU jobs ran under the shared lease: 196 equal-update repetitions,
+14 Nsight Systems traces and three unsuccessful Nsight Compute counter attempts.
+Every endpoint independently verifies and records exactly 200 proposals (206
+physical steps with correction). Every decoded trace matches 1200 launches. Raw
+traces initially failed automatic import; existing private libdw decoded them offline.
+All counter attempts retain ERR_NVGPUCTRPERM; no driver permission was changed.
+No retry, timeout, fallback or missing endpoint. Hardware bottleneck counters remain
+unavailable, and first-200-update timings do not establish late convergence behavior.
+
+Exact rational representation analysis covers 72 archived witnesses across all
+twelve development models. All 166292 original coefficients are exactly FP32;
+only 18 scaled values are. Concrete original-row violations exceed allowances by
+34.2x/15.8x while meeting the implied represented-operator allowance. Other failures
+also retain represented residuals, so quantization alone is not asserted for every
+model. Equal-work FP32 savings are small or instance-dependent; extra iterations,
+generic guarded execution, state readback and fixed correction dominate large losses.
+
+Full pinned-native tools/check.sh passed before measurement (422 Rust tests,
+119 Python tests, 78 pages) and on final tooling/documentation (422 Rust tests,
+121 Python tests, 79 pages), including formatting, clippy, native HiGHS,
+dependency policy, committed replay and smoke gates. Final log:
+artifacts/gpup5-diagnosis-v1/native-final.log. Five new diagnostic tests cover schedule,
+exact arithmetic, historical totals, phase/counter status and work-limit eligibility.
+All 480 old endpoints reverify in a temporary copy; old report/index bytes and all
+original indexed artifacts are unchanged. No runtime/device changes required another
+sanitizer run; GPUP-5 device evidence remains intact.
+
+Resources: four build jobs within the two-hour CPU validation ceiling; GPU jobs and
+CPU acceptance sequential. Diagnostics consume 143.056235443 of their 300-second
+cap, charged to screening, plus the preserved 1324.210639253 = 1467.266874696 total
+GPU seconds, within 4502.574545061 and global/phase caps. GPUP-5 acceptance remains
+80.458622460/900 seconds, unused here. All 213 reservations settled; complete
+2862-event old prefix SHA-256
+66d8c2b0ee24ce050ee051c6dbea2184361abe2c2fc4a57b8ee202c001479ff0 is preserved.
+New 3288-event ledger SHA-256:
+b3ca2739b1108a552b0423606ddd0cd94a8ed2323da1506098fa0150ba42bfef.
+
+Evidence: artifacts/gpup5-diagnosis-v1 (frozen protocol/source/executable, raw runs,
+traces/decoder commands, counter failures, disassembly, exact row diagnostics,
+paired analysis and artifact hashes). Post-measurement changes affect only read-only
+analysis/reporting/tests/documentation. No old report or evidence was rewritten.
+Known failures and CONTRIBUTING were read first. GPUP-6 remains next, requiring its
+bounded contract. No push or publication.
+
+## GPUP-5: explicit FP32 comparisons and COPT baselines (2026-09-16)
+
+Status: complete; full native, device, sanitizer and frozen-study gates passed.
+Next ready task: GPUP-6, bounded adaptive contract before implementation.
+The maintainer accepted the complete plan before behavior (ADR-0019 and
+SPEC-0012/0013 amendments). cuda-lp-tuned now has strict lp-precision-v1, v4
+records/replay, canonical FP32 storage/products/accumulation/state and charged fixed
+FP64 correction. Original-model authority, prior behavior/code objects and unsafe
+boundaries remain. COPT 8.0.6 CPU/GPU PDLP uses isolated ignored Python 3.11 bindings;
+licenses remain in /root/copt80. No adaptive recovery or preset was introduced.
+
+Evidence: [GPUP-5 report](../docs/benchmarks/lp-fp32-gpup5.md),
+artifacts/gpup5-fp32-v1 and artifacts/gpup5-acceptance. All 480 attempts have verified
+endpoints, exact schedule/provenance and settled ledger entries. No missing/invalid
+endpoint, fallback or lease failure. Lower-precision failures remain in coverage.
+Full pinned-native final gate: 422 Rust tests, 116 Python tests, 77 documentation
+pages plus format/clippy/dependency/replay/smoke gates; native-final.log records the
+pass. The exact measured source also passed its pre-study gate (421/115/76).
+Final device suites: 47 cases.
+All six precision cases pass memcheck/racecheck/initcheck/synccheck sequentially on
+the original RTX 5090 with zero errors/race warnings. Six CLI/replay pairs and
+missing-code pinned HiGHS fallback pass. Native COPT original-model min/max,
+ranged-row and objective-constant fixtures pass; actual GPU preflight certifies.
+Initial callback/log-wording preflight failures are retained. Final source adds an
+independent device subnormal/tie/guard fixture and refuses COPT input coefficients
+at or below its native discard threshold; every frozen model is above it.
+
+Resources: four build jobs within a four-hour CPU validation ceiling. All GPU work
+used the shared one-device lease. Acceptance used 80.458622460 of its separate 900
+seconds. Study added 421.636094192 screening seconds to the preserved
+902.574545061 seconds, totaling 1324.210639253 of 4502.574545061 allowed seconds.
+The full 1902-event prefix SHA-256 remains
+35b58ef0b0d58637288801bac2bdaa32b65b97b42b429debcffc615768c7c543;
+final ledger SHA-256 is 66d8c2b0ee24ce050ee051c6dbea2184361abe2c2fc4a57b8ee202c001479ff0.
+Global 28800-second and original phase caps remain. No ledger, archive, seeds,
+thresholds, defaults or partitions were reset. Validation/held-out remain untouched.
+Known failures/CONTRIBUTING were read before work. No push or publication.
+
 ## GitHub main protection (2026-09-16)
 
 Status: complete; main protection is active and independently verified.
