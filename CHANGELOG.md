@@ -10,6 +10,14 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Performance
+
+- Reuse independently recomputed host operator metadata across research batch
+  evidence checks. Every solve still receives original-model certification and
+  complete identity/work checks. Retained N=8 evidence verifies 1.48–1.52x faster
+  on the CPU; no new GPU solve-throughput claim. See the
+  [branch review and measurements](docs/benchmarks/lp-throughput-review.md).
+
 ### Added
 
 - GPUP-THROUGHPUT (documentation phase): [SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md)

@@ -365,6 +365,13 @@ lp-endpoint-v3 record that `optimizer lp-study verify` accepts) plus
 | 28-31 | Python: frozen grid count and kind counts, label uniqueness, Study.from_protocol v3 fields, ceiling == lp-precision-v4 cumulative + 3600 s, prior events/hash, STUDY_V1/STUDY_V2 unchanged |
 | 32-35 | tools/check.sh (unsafe grep, toolkit-free build, schema/example validation); device: all session_ cases under all four scoped sanitizers; tools/lp_gpu_cli_check.py solve-batch + verify-batch |
 
+The 2026-09-22 [review and CPU repair](../benchmarks/lp-throughput-review.md)
+adds research evidence tests for independent host metadata reuse, fresh
+bound-dependent certification, provenance tampering, matrix/method/mode changes,
+and one preparation across producer checks and directory verification. This is
+an implementation optimization within requirements 5-7 and 17, with unchanged
+record semantics; the review separately records unresolved acceptance gaps.
+
 ## Open questions
 
 - Warm starts across solves are excluded here; whether a bounded warm-start contract is

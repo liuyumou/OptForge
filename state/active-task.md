@@ -1,5 +1,49 @@
 # Active Task
 
+## GPUP-THROUGHPUT branch review and bounded performance repair (2026-09-22)
+
+Status: complete. Reviewed feat/gpup-throughput at 14a1a88 against main at
+0e7811a; [PR findings and CPU measurements](../docs/benchmarks/lp-throughput-review.md)
+recommend request changes for four unresolved correctness/evidence findings.
+One bounded host verification performance repair is implemented and accepted;
+this is a review of the completed slice, not GPUP-6 implementation.
+
+Objective: identify reproducible PR findings and, if supported by measurements,
+complete one bounded host-side performance repair within SPEC-0014. Preserve
+numerical behavior, protocol, frozen artifacts and the GPU ledger.
+
+Acceptance: focused CPU regressions and performance evidence for any repair,
+then full pinned-native `bash tools/check.sh`; PR review references verified lines
+and distinguishes archived GPU receipts from checks run during this review.
+Likely files: session/batch evidence paths in optimizer-lp, optimizer-lp-cuda,
+optimizer-experiment and optimizer-cli, relevant contract tests and documentation.
+Resources: at most four build jobs, four CPU-hours; initially zero GPU jobs.
+Any device validation must use the shared lease and existing phase/campaign caps;
+no allowance or ledger reset is authorized by this review.
+
+Acceptance evidence: full pinned-native `bash tools/check.sh` passed on the
+repair (477 Rust test results, 148 Python integration tests, 90 documentation
+pages, schema/provenance/replay/smoke and static checks). Three added CPU tests
+cover byte-identical cached/uncached evidence, fresh bound-dependent assessment,
+provenance mutation, matrix/method/mode invalidation and one independent metadata
+preparation across producer and final directory checks. All 11 research evidence
+tests pass; 17 archived single endpoints covering all twelve modes, v1/v2 and
+three tolerance tiers reverify. Two temporary CPU tests reproduced invalid
+failure endpoint identity and acceptance of mixed code-object identities; a
+Python probe reproduced signed-zero equality. These are review findings, not
+newly injected GPU faults.
+
+CPU-only N=8 archived batch verification, three paired repetitions: 0.970→0.638 s
+(irregular-2048 repeat), 18.905→12.732 s (irregular-32768 repeat), and
+19.366→12.737 s (irregular-32768 variant), 1.48–1.52x faster. All 18 timed calls
+accepted unchanged evidence. No end-to-end GPU throughput claim. Raw timing,
+compatibility, reproductions, measured candidate and acceptance logs are retained
+in artifacts/gpupt-review-cpu-20260922; tools/benchmark_lp_batch_verify.py
+reproduces the CPU endpoint. Zero GPU jobs ran: the 8178-event campaign ledger
+retains 6951.059845871 seconds and SHA-256
+dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6.
+Original protocols, measured archives and code objects remain unchanged.
+
 ## GPUP-THROUGHPUT: specification, ADR and budget before behavior (2026-09-20)
 
 Status: complete. Phase A is committed as 0d5d713 with its full pinned-native

@@ -186,22 +186,122 @@ fn assessment(bytes: &[u8], w: &Witness) -> Result<Assessment, ValidationError> 
     d.dual = w.dual.clone();
     crate::lp::assess(&model, &record, &d)
 }
+// Only matrix-derived verification metadata is reusable. This cache is private,
+// rebuilt from the original host model (never session/device observations), and
+// checked against each record's complete method, mode and canonical program.
+// Candidate evaluation, bound certification and gap assessment remain per solve.
+struct OperatorVerification {
+    bounds: [f64; 2],
+    step: f64,
+    matrix_tail_max: f64,
+    scaling_sha256: String,
+}
+
+impl OperatorVerification {
+    fn new(
+        program: &LinearProgram,
+        method: LpSettings,
+        mode: Mode,
+    ) -> Result<Self, ValidationError> {
+        let mut engine = Engine::new(program, method);
+        if mode.power2() {
+            let row = engine
+                .preconditioner()
+                .row()
+                .iter()
+                .map(|&x| power_exponent(x))
+                .collect::<Result<Vec<_>, _>>()
+                .map_err(invalid)?;
+            let col = engine
+                .preconditioner()
+                .column()
+                .iter()
+                .map(|&x| power_exponent(x))
+                .collect::<Result<Vec<_>, _>>()
+                .map_err(invalid)?;
+            engine = Engine::with_power2_scaling(program, method, &row, &col).map_err(invalid)?;
+        }
+        let op = Operator::new(&engine, mode).map_err(invalid)?;
+        let scales = crate::sha256::hex(
+            &serde_json::to_vec(&(
+                engine.preconditioner().row(),
+                engine.preconditioner().column(),
+            ))
+            .map_err(invalid)?,
+        );
+        Ok(Self {
+            bounds: op.bounds,
+            step: op.step,
+            matrix_tail_max: op.matrix_tail_max,
+            scaling_sha256: scales,
+        })
+    }
+}
+
+#[derive(Default)]
+struct OperatorCache {
+    entry: Option<(LinearProgram, LpSettings, Mode, OperatorVerification)>,
+    #[cfg(test)]
+    preparations: usize,
+}
+
+impl OperatorCache {
+    fn get(
+        &mut self,
+        program: &LinearProgram,
+        request: &Request,
+    ) -> Result<&OperatorVerification, ValidationError> {
+        let matches = self
+            .entry
+            .as_ref()
+            .is_some_and(|(cached, method, mode, _)| {
+                *method == request.method
+                    && *mode == request.mode
+                    && cached.same_matrix_objective_rows(program)
+            });
+        if !matches {
+            let verified = OperatorVerification::new(program, request.method, request.mode)?;
+            self.entry = Some((program.clone(), request.method, request.mode, verified));
+            #[cfg(test)]
+            {
+                self.preparations += 1;
+            }
+        }
+        Ok(&self.entry.as_ref().expect("verified operator").3)
+    }
+}
+
 impl Evidence {
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         crate::lp::unique_json(bytes)?;
         serde_json::from_slice(bytes).map_err(invalid)
     }
     pub fn new(bytes: &[u8], witness: Witness) -> Result<Self, ValidationError> {
+        Self::new_with_cache(bytes, witness, None)
+    }
+    fn new_with_cache(
+        bytes: &[u8],
+        witness: Witness,
+        operator_cache: Option<&mut OperatorCache>,
+    ) -> Result<Self, ValidationError> {
         let result = Self {
             schema_version: witness.request.schema_version,
             assessment: assessment(bytes, &witness)?,
             payload_sha256: crate::sha256::hex(&serde_json::to_vec(&witness).map_err(invalid)?),
             witness,
         };
-        result.verify(bytes, &result.witness.request)?;
+        result.verify_with_cache(bytes, &result.witness.request, operator_cache)?;
         Ok(result)
     }
     pub fn verify(&self, bytes: &[u8], expected: &Request) -> Result<(), ValidationError> {
+        self.verify_with_cache(bytes, expected, None)
+    }
+    fn verify_with_cache(
+        &self,
+        bytes: &[u8],
+        expected: &Request,
+        operator_cache: Option<&mut OperatorCache>,
+    ) -> Result<(), ValidationError> {
         let w = &self.witness;
         w.request.validate()?;
         let model = Model::from_json(bytes)?;
@@ -289,37 +389,17 @@ impl Evidence {
             return Err(invalid("research execution differs"));
         }
         if w.operator_bounds.is_some() || w.executed_device.is_some() {
-            let mut engine = Engine::new(&p, w.request.method);
-            if w.request.mode.power2() {
-                let row = engine
-                    .preconditioner()
-                    .row()
-                    .iter()
-                    .map(|&x| power_exponent(x))
-                    .collect::<Result<Vec<_>, _>>()
-                    .map_err(invalid)?;
-                let col = engine
-                    .preconditioner()
-                    .column()
-                    .iter()
-                    .map(|&x| power_exponent(x))
-                    .collect::<Result<Vec<_>, _>>()
-                    .map_err(invalid)?;
-                engine = Engine::with_power2_scaling(&p, w.request.method, &row, &col)
-                    .map_err(invalid)?;
-            }
-            let op = Operator::new(&engine, w.request.mode).map_err(invalid)?;
-            let scales = crate::sha256::hex(
-                &serde_json::to_vec(&(
-                    engine.preconditioner().row(),
-                    engine.preconditioner().column(),
-                ))
-                .map_err(invalid)?,
-            );
+            let uncached;
+            let op = if let Some(cache) = operator_cache {
+                cache.get(&p, &w.request)?
+            } else {
+                uncached = OperatorVerification::new(&p, w.request.method, w.request.mode)?;
+                &uncached
+            };
             if w.operator_bounds != Some(op.bounds)
                 || w.step != Some(op.step)
                 || w.matrix_tail_max != Some(op.matrix_tail_max)
-                || w.scaling_sha256.as_ref() != Some(&scales)
+                || w.scaling_sha256.as_ref() != Some(&op.scaling_sha256)
             {
                 return Err(invalid("operator/scaling provenance differs"));
             }
@@ -779,6 +859,23 @@ impl ResearchBatchEvidence {
         solves: Vec<ResearchBatchSolve>,
         dir: &Path,
     ) -> Result<Self, ValidationError> {
+        Self::new_with_cache(
+            base_bytes,
+            request,
+            setup,
+            solves,
+            dir,
+            &mut OperatorCache::default(),
+        )
+    }
+    fn new_with_cache(
+        base_bytes: &[u8],
+        request: ResearchBatchRequest,
+        setup: SessionSetup,
+        solves: Vec<ResearchBatchSolve>,
+        dir: &Path,
+        operator_cache: &mut OperatorCache,
+    ) -> Result<Self, ValidationError> {
         let mut result = Self {
             schema_version: 1,
             request,
@@ -787,7 +884,7 @@ impl ResearchBatchEvidence {
             payload_sha256: String::new(),
         };
         result.payload_sha256 = result.compute_payload()?;
-        result.verify(base_bytes, dir)?;
+        result.verify_with_cache(base_bytes, dir, operator_cache)?;
         Ok(result)
     }
     fn compute_payload(&self) -> Result<String, ValidationError> {
@@ -804,6 +901,14 @@ impl ResearchBatchEvidence {
     /// its materialized bytes with the unchanged verifier, and recompute
     /// every hash (requirement 17).
     pub fn verify(&self, base_bytes: &[u8], dir: &Path) -> Result<(), ValidationError> {
+        self.verify_with_cache(base_bytes, dir, &mut OperatorCache::default())
+    }
+    fn verify_with_cache(
+        &self,
+        base_bytes: &[u8],
+        dir: &Path,
+        operator_cache: &mut OperatorCache,
+    ) -> Result<(), ValidationError> {
         self.request.validate()?;
         if self.schema_version != 1 || self.request.model_sha256 != crate::sha256::hex(base_bytes) {
             return Err(invalid("research batch version/model differs"));
@@ -845,9 +950,10 @@ impl ResearchBatchEvidence {
                         return Err(invalid("research solve evidence hash differs"));
                     }
                     let evidence = Evidence::from_json(&file_bytes)?;
-                    evidence.verify(
+                    evidence.verify_with_cache(
                         &bytes,
                         &self.request.solve_request(solve.model_sha256.clone()),
+                        Some(operator_cache),
                     )?;
                     if solve.status != evidence.witness.status {
                         return Err(invalid("research solve status differs"));
@@ -972,6 +1078,7 @@ pub fn solve_batch(
                 return ResearchBatchEvidence::new(bytes, request.clone(), setup, solves, dir);
             }
         };
+    let mut operator_cache = OperatorCache::default();
     let (operator_bounds, step, matrix_tail_max) = {
         let operator = session.operator();
         (operator.bounds, operator.step, operator.matrix_tail_max)
@@ -1090,7 +1197,7 @@ pub fn solve_batch(
             session.poison(w.failure.clone().unwrap_or_else(|| "device fault".into()));
         }
         finish_witness(&program, &mut w);
-        match Evidence::new(&variant_bytes, w) {
+        match Evidence::new_with_cache(&variant_bytes, w, Some(&mut operator_cache)) {
             Ok(evidence) => {
                 let status = evidence.witness.status.clone();
                 let file = serde_json::to_vec_pretty(&evidence).map_err(invalid)?;
@@ -1122,7 +1229,14 @@ pub fn solve_batch(
             }
         }
     }
-    ResearchBatchEvidence::new(bytes, request.clone(), setup, solves, dir)
+    ResearchBatchEvidence::new_with_cache(
+        bytes,
+        request.clone(),
+        setup,
+        solves,
+        dir,
+        &mut operator_cache,
+    )
 }
 
 #[cfg(test)]
@@ -1149,6 +1263,162 @@ mod tests {
             device_buffer_bytes: 1024,
         }
     }
+    // A zero-work host witness exercises operator provenance and certification
+    // without opening a device or claiming any device computation took place.
+    fn host_witness(bytes: &[u8], mode: Mode, method: LpSettings) -> Witness {
+        let mut r = request();
+        r.schema_version = 2;
+        r.mode = mode;
+        r.method = method;
+        r.options.iteration_limit = Some(method.iteration_limit);
+        r.model_sha256 = crate::sha256::hex(bytes);
+        let token = CancellationToken::new();
+        token.cancel();
+        let mut w = solve(bytes, r, &token).unwrap().witness;
+        let model = Model::from_json(bytes).unwrap();
+        let p = LinearProgram::new(&model).unwrap();
+        let metadata = OperatorVerification::new(&p, method, mode).unwrap();
+        w.operator_bounds = Some(metadata.bounds);
+        w.step = Some(metadata.step);
+        w.matrix_tail_max = Some(metadata.matrix_tail_max);
+        w.scaling_sha256 = Some(metadata.scaling_sha256);
+        w.primal = Some(vec![0.5, 1.0]);
+        w.dual = Some(vec![-1.0]);
+        w
+    }
+
+    #[test]
+    fn batch_verification_reuses_only_matrix_metadata_and_rechecks_bounds() {
+        let method = LpSettings::published(8, 4);
+        let mut cache = OperatorCache::default();
+        let w = host_witness(MODEL, Mode::FusedFp64, method);
+        let original = Evidence::new_with_cache(MODEL, w.clone(), Some(&mut cache)).unwrap();
+        assert_eq!(original, Evidence::new(MODEL, w).unwrap());
+        let base = Model::from_json(MODEL).unwrap();
+        let mut variables = base.document().variables.clone();
+        variables[1].upper = optimizer_core::Bound::Finite { value: 0.75 };
+        let bytes = base
+            .rebound(variables)
+            .unwrap()
+            .to_json()
+            .unwrap()
+            .into_bytes();
+        let w = host_witness(&bytes, Mode::FusedFp64, method);
+        let variant = Evidence::new_with_cache(&bytes, w.clone(), Some(&mut cache)).unwrap();
+        assert_eq!(
+            serde_json::to_vec(&variant).unwrap(),
+            serde_json::to_vec(&Evidence::new(&bytes, w).unwrap()).unwrap()
+        );
+        assert_eq!(cache.preparations, 1);
+        assert_ne!(variant.assessment, original.assessment);
+        // Even with correct hashes and a warm metadata cache, an assessment
+        // copied from the old bounds must fail original-model certification.
+        let mut stale = variant.clone();
+        stale.assessment = original.assessment;
+        assert!(
+            stale
+                .verify_with_cache(&bytes, &stale.witness.request, Some(&mut cache))
+                .is_err()
+        );
+        for field in 0..4 {
+            let mut altered = variant.clone();
+            match field {
+                0 => altered.witness.step = Some(0.0),
+                1 => altered.witness.operator_bounds = Some([0.0, 0.0]),
+                2 => altered.witness.matrix_tail_max = Some(1.0),
+                _ => altered.witness.scaling_sha256 = Some("0".repeat(64)),
+            }
+            altered.payload_sha256 =
+                crate::sha256::hex(&serde_json::to_vec(&altered.witness).unwrap());
+            assert!(
+                altered
+                    .verify_with_cache(&bytes, &altered.witness.request, Some(&mut cache))
+                    .is_err()
+            );
+        }
+        assert_eq!(cache.preparations, 1);
+    }
+
+    #[test]
+    fn batch_verification_reprepares_on_matrix_method_or_mode_change() {
+        let mut cache = OperatorCache::default();
+        let method = LpSettings::published(8, 4);
+        let mut changed = Model::from_json(MODEL).unwrap().document().clone();
+        changed.constraints[0].terms[0].coefficient = 2.0;
+        let changed = Model::new(changed).unwrap().to_json().unwrap().into_bytes();
+        let mut other_method = method;
+        other_method.power_iterations += 1;
+        for (index, (bytes, mode, method)) in [
+            (MODEL, Mode::FusedFp64, method),
+            (changed.as_slice(), Mode::FusedFp64, method),
+            (changed.as_slice(), Mode::FusedFp64, other_method),
+            (changed.as_slice(), Mode::IntguardFp64, other_method),
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            let witness = host_witness(bytes, mode, method);
+            let cached =
+                Evidence::new_with_cache(bytes, witness.clone(), Some(&mut cache)).unwrap();
+            assert_eq!(cached, Evidence::new(bytes, witness).unwrap());
+            assert_eq!(cache.preparations, index + 1);
+        }
+    }
+
+    #[test]
+    fn batch_directory_and_producer_share_one_independent_host_preparation() {
+        let request = batch_request(Mode::IntguardFp64);
+        let base = Model::from_json(MODEL).unwrap();
+        let dir = batch_sandbox();
+        let mut cache = OperatorCache::default();
+        let mut solves = Vec::new();
+        for index in 0..request.batch.solves {
+            let (_, bytes, model_sha256) =
+                crate::lp_batch::materialize(&base, &request.batch, index).unwrap();
+            let mut witness = host_witness(&bytes, request.mode, request.method);
+            witness.request = request.solve_request(model_sha256.clone());
+            let expected = Evidence::new(&bytes, witness.clone()).unwrap();
+            let evidence = Evidence::new_with_cache(&bytes, witness, Some(&mut cache)).unwrap();
+            assert_eq!(evidence, expected);
+            let file = serde_json::to_vec_pretty(&evidence).unwrap();
+            crate::lp_batch::write_evidence_file(
+                &dir.join(crate::lp_batch::solve_file_name(index)),
+                &file,
+            )
+            .unwrap();
+            solves.push(ResearchBatchSolve {
+                index,
+                model_sha256,
+                evidence_sha256: crate::sha256::hex(&file),
+                status: evidence.witness.status,
+                session_phases_ns: BTreeMap::new(),
+                reason: None,
+            });
+        }
+        let batch = ResearchBatchEvidence::new_with_cache(
+            MODEL,
+            request,
+            SessionSetup::default(),
+            solves,
+            &dir,
+            &mut cache,
+        )
+        .unwrap();
+        assert_eq!(
+            cache.preparations, 1,
+            "producer and final directory recheck share metadata"
+        );
+        let mut independent = OperatorCache::default();
+        batch
+            .verify_with_cache(MODEL, &dir, &mut independent)
+            .unwrap();
+        assert_eq!(
+            independent.preparations, 1,
+            "a new verifier independently prepares once"
+        );
+        std::fs::remove_dir_all(dir).unwrap();
+    }
+
     #[test]
     fn strict_research_request_and_cancelled_witness_are_device_free() {
         let r = request();

@@ -1,5 +1,16 @@
 # Known Failures and Limitations
 
+## GPUP-THROUGHPUT branch review: outcome identity and evidence gaps
+
+The [2026-09-22 review](../docs/benchmarks/lp-throughput-review.md) records four
+unresolved findings: tuned session early failure/cancellation returns retain the
+legacy cuda-lp identity and fail endpoint verification; fresh-variant study
+controls use N=1 sessions; tuned batch verification accepts mixed code-object
+identities; and the claimed bitwise comparison ignores signed-zero differences.
+CPU reproductions and recommended repairs are in the review. The bounded host
+verification performance repair preserves the original study and closes none of
+these correctness/evidence gaps. No additional GPU work or allowance was used.
+
 ## GPUP-THROUGHPUT: 65536-row short batches time out; tuned_cases racecheck incomplete
 
 The [repeated-solve report](../docs/benchmarks/lp-repeated-solve-throughput.md)
