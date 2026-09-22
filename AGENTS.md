@@ -86,7 +86,15 @@ dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6 with the
 6722-event prefix ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b
 intact. The pre-existing tuned_cases filter lacks a clean racecheck receipt (the
 session_ scope passed all four sanitizers); the partial receipts are retained.
-GPUP-6 follows it and requires its bounded adaptive contract before behavior.
+The [review corrections](docs/benchmarks/lp-throughput-corrections.md) under
+ADR-0024 repair outcome identity, common session identity and binary64 comparison;
+48 new ordinary fresh-variant controls validate 360/360 retained comparisons.
+Historical fresh-variant controls were N=1 sessions and remain labeled as such.
+After the correction: cumulative 6982.408046756 s, study 2645.977139698/2700,
+acceptance 541.671951419/600; 8276-event ledger SHA-256
+b3451186b7a5fc0029fbbd612b07e795072476ab76137a78a375b1d97866c236 preserves the
+8178-event prefix above. No new GPU allowance. GPUP-6 follows it and requires its
+bounded adaptive contract before behavior.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

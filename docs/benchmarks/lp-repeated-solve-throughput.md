@@ -10,6 +10,17 @@ it is never substituted for, tabulated as, or merged into one latency table with
 fresh-process single-solve latency, and the comparison below is titled as
 separate endpoints (SPEC-0014 requirements 1-4, ADR-0013).
 
+## Dated correction (2026-09-22)
+
+The original study's 360 variant comparisons used N=1 sessions as controls.
+The [correction report](lp-throughput-corrections.md) now supplies 48 ordinary
+fresh-variant solves and independently verifies all 360 eligible comparisons,
+including signed-zero-sensitive binary64 checks. Original timings and archived
+analysis below remain historical; the 4,425 repeat comparisons already used
+ordinary fresh solves. Outcome identity and common batch identity checks are
+also repaired. See the correction report for the additional existing-budget
+charges and new ledger snapshot.
+
 ## Findings
 
 1. **Batch solves are bitwise identical to fresh-process single solves.** Over

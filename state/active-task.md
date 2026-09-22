@@ -1,5 +1,50 @@
 # Active Task
 
+## GPUP-THROUGHPUT review corrections (2026-09-22)
+
+Status: complete at the user's explicit request to fix the review findings.
+Objective: one bounded corrective slice for outcome identity, common session
+identity, actual binary64 comparisons and ordinary fresh-variant controls.
+Preserve the original study and ledger; then select a separate bounded host
+performance optimization if measurements justify one. GPUP-6 remains deferred.
+
+Contract: SPEC-0014 requirements 6, 13-17 and the accepted corrective addendum;
+ADR-0024 records the new follow-up protocol and shared (not additional) budget.
+Acceptance: targeted CPU regression/mutation tests, full pinned-native
+`bash tools/check.sh`, scoped device acceptance and corrected fresh controls
+under the existing shared lease and caps, independent endpoint verification,
+corrected analysis in a new artifact directory, updated report and task state.
+Files: tuned backend/session identity, batch verifier, study planner/analyzer,
+regression tests, corrective protocol, specifications and report.
+Resources: four build jobs, four CPU-hours. At start: campaign 6951.059845871 s,
+8178 events, SHA-256 dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6.
+Remaining GPUP-THROUGHPUT study 82.070540459 s, acceptance 61.628569309 s;
+combined 143.699109768 s, cumulative ceiling 8102.574545061 s unchanged.
+All admitted GPU work retains prefix gpupt and old phase/combined caps; no new
+allowance, prefix reset, kernel arithmetic or default change.
+
+Acceptance evidence: full pinned-native tools/check.sh passes, including the
+new Rust outcome/session-identity regressions and 150 Python tests. All 48
+ordinary fresh-variant controls completed, independently verified and certified;
+360/360 retained batch variants match their binary64 numerical/work identities.
+The original-study reanalysis independently verifies 687/705 endpoints, with
+4425/4425 ordinary-single repeat pairs, 360/360 historical N=1-session pairs
+and 2451/2451 cross-mode pairs; partner labels remain explicit. The cancellation endpoint regression passes on the device and
+under all four scoped sanitizers with zero errors/hazards; this does not close
+the earlier tuned_cases racecheck gap. See the
+[correction report](../docs/benchmarks/lp-throughput-corrections.md).
+
+New study work: 28.047680157 s; acceptance: 3.300520728 s. Cumulative campaign:
+6982.408046756 s; study 2645.977139698/2700, acceptance 541.671951419/600,
+combined 3187.649091117/3300. The 8276-event ledger SHA-256 is
+b3451186b7a5fc0029fbbd612b07e795072476ab76137a78a375b1d97866c236;
+the original 8178-event prefix remains dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6.
+Measured controls source identity: 73936de19b351cc4f89328355c49fbcba7acf38024854067b0c004809bcaca6b.
+Artifacts: artifacts/gpup-throughput-controls-v1 (archived source, protocol,
+binaries, models, controls, comparisons and original reanalysis) and
+artifacts/gpup-throughput-review-acceptance (scoped device receipts). Original
+study artifacts and numerical kernels are unchanged.
+
 ## GPUP-THROUGHPUT branch review and bounded performance repair (2026-09-22)
 
 Status: complete. Reviewed feat/gpup-throughput at 14a1a88 against main at

@@ -13,6 +13,9 @@ batch request and runs the same batch command with N=1, so the Rust
 materializer remains the only model serializer and the attempt's single solve
 is the fresh materialized solve of the family's variant_index.
 
+The corrected fresh-variant-single kind instead materializes on the CPU and
+runs the ordinary solve command; its new protocol shares the existing caps.
+
 All work shares the GPUP supervisor, lease, ledger and verification path and
 runs under identity gpup-throughput-v1 (prefix gpupt) inside the raised
 cumulative ceiling the protocol itself authorizes (requirement 29).
@@ -20,6 +23,7 @@ cumulative ceiling the protocol itself authorizes (requirement 29).
 import argparse
 import shutil
 import subprocess
+import tempfile
 from collections import Counter
 from functools import lru_cache
 from pathlib import Path
@@ -29,10 +33,11 @@ from lp_research_budget import Study, category_usage, ledger_for, run
 import lp_variants
 CONFIG=ROOT/'benchmarks/configs/lp-throughput-v1.json'
 V3_KEYS={'schema_version','id','prefix','output','acceptance_output','source_campaign','decision','additional_gpu_seconds','extension_manifest','tiers','configurations','blocks','short_proposals','planned_attempts','prior_gpu_ns','prior_events','prior_ledger_sha256','study_cap_seconds','acceptance_cap_seconds','combined_cap_seconds','cumulative_ceiling_ns','development_limit_seconds','variant_seed_base','variant_changes'}
-FRESH_KINDS=('fresh','fresh-short')
+SINGLE_VARIANT_KIND='fresh-variant-single'
+FRESH_KINDS=('fresh','fresh-short',SINGLE_VARIANT_KIND)
 BATCH_KINDS=('batch-repeat','batch-variant','batch-repeat-short','batch-variant-short','fresh-variant')
 REPEAT_KINDS=('batch-repeat','batch-repeat-short')
-VARIANT_KINDS=('batch-variant','batch-variant-short','fresh-variant')
+VARIANT_KINDS=('batch-variant','batch-variant-short','fresh-variant',SINGLE_VARIANT_KIND)
 KINDS=FRESH_KINDS+('fresh-variant',)+BATCH_KINDS[:4]
 
 
@@ -48,7 +53,7 @@ def protocol(path=CONFIG):
     for block in value['blocks']:
         kind=block.get('kind')
         if kind not in KINDS:raise ValueError('throughput block kind')
-        expected={'kind','instances','configurations','tiers','repetitions'}|({'sizes'} if kind in BATCH_KINDS[:4] else set())|({'variants'} if kind=='fresh-variant' else set())
+        expected={'kind','instances','configurations','tiers','repetitions'}|({'sizes'} if kind in BATCH_KINDS[:4] else set())|({'variants'} if kind in ('fresh-variant',SINGLE_VARIANT_KIND) else set())
         if set(block)!=expected:raise ValueError('throughput block schema')
         if type(block['instances']) is not list or not block['instances'] or any(type(i) is not str for i in block['instances']):raise ValueError('throughput block instances')
         if type(block['repetitions']) is not int or block['repetitions']<1:raise ValueError('throughput block repetitions')
@@ -118,8 +123,8 @@ def batch_request_for(job,value,batch_time_limit_ms):
     instance=job['instance']
     if job['kind'] in REPEAT_KINDS:
         return lp_variants.request(instance['id'],'repeat',job['size'],[],None,None,batch_time_limit_ms)
-    family=family_for(instance['id'],job['variant_seed'],value['variant_changes'],32 if job['kind']=='fresh-variant' else job['size'])
-    if job['kind']=='fresh-variant':
+    family=family_for(instance['id'],job['variant_seed'],value['variant_changes'],32 if job['kind'] in ('fresh-variant',SINGLE_VARIANT_KIND) else job['size'])
+    if job['kind'] in ('fresh-variant',SINGLE_VARIANT_KIND):
         selected=[dict(index=0,changes=family[job['variant']]['changes'])]
         return lp_variants.request(instance['id'],'variant',1,selected,job['variant_seed'],value['variant_changes'],batch_time_limit_ms)
     return lp_variants.request(instance['id'],'variant',job['size'],family[:job['size']],job['variant_seed'],value['variant_changes'],batch_time_limit_ms)
@@ -144,6 +149,14 @@ def command(job,base,binary,research,identity,directory,value):
     key=label(job);c=job['config']
     options,method,seconds,batch_ms=settings_for(job,base,value)
     model=checked_reference(ROOT,job['instance']['model'])
+    if job['kind']==SINGLE_VARIANT_KIND:
+        materialization=directory/(key+'.materialize.json')
+        write_json(materialization,batch_request_for(job,value,batch_ms))
+        materialized=directory/(key+'.model.json')
+        subprocess.run([str(binary),'lp-study','materialize','--model',str(model),
+                        '--batch',str(materialization),'--index','0','--out',str(materialized)],
+                       check=True,capture_output=True,text=True,timeout=120)
+        model=materialized
     batch=job['kind'] in BATCH_KINDS
     evidence=directory/(key+'.batch') if batch else directory/(key+'.endpoint.json')
     cubin=file_hash(ROOT/'target/native/cuda/lp_pdhg_research.cubin')
@@ -174,6 +187,22 @@ def command(job,base,binary,research,identity,directory,value):
                  '--lp-device-memory-bytes',str(base['limits']['device_buffer_bytes'])]
             verify=[str(binary),'lp-study','verify','--model',str(model),'--evidence',str(evidence)]
     return cmd,verify,evidence/'batch.json' if batch else evidence,seconds
+
+
+def verify_control_model(job,value,directory,binary):
+    """Re-materialize a fresh-variant-single model independently on the CPU."""
+    key=label(job)
+    request=directory/(key+'.materialize.json')
+    _,_,_,batch_ms=settings_for(job,read_json(checked_reference(ROOT,value['source_campaign'])),value)
+    if read_json(request)!=batch_request_for(job,value,batch_ms):raise ValueError('materialization request changed')
+    base=checked_reference(ROOT,job['instance']['model'])
+    model=directory/(key+'.model.json')
+    with tempfile.TemporaryDirectory() as temporary:
+        rebuilt=Path(temporary)/'model.json'
+        subprocess.run([str(binary),'lp-study','materialize','--model',str(base),'--batch',str(request),
+                        '--index','0','--out',str(rebuilt)],check=True,capture_output=True,text=True,timeout=120)
+        if file_hash(model)!=file_hash(rebuilt):raise ValueError('materialized control model changed')
+    return model
 
 
 def main():

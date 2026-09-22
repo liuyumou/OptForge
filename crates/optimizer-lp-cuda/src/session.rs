@@ -196,6 +196,18 @@ impl TunedSession {
         cancel: &CancellationToken,
         diagnostics: &mut LpDiagnostics,
     ) -> Result<SolveRecord, ValidationError> {
+        let mut record = self.solve_observed(variant, options, cancel, diagnostics)?;
+        stamp_tuned_record(&mut record, self.prepared.settings(), &self.execution);
+        Ok(record)
+    }
+
+    fn solve_observed(
+        &mut self,
+        variant: Option<&Model>,
+        options: &SolveOptions,
+        cancel: &CancellationToken,
+        diagnostics: &mut LpDiagnostics,
+    ) -> Result<SolveRecord, ValidationError> {
         options.validate()?;
         if let Some(reason) = &self.poisoned {
             return Err(ValidationError::new(
@@ -332,7 +344,7 @@ impl TunedSession {
                 ));
             }
         };
-        let mut record = assess_and_record(
+        let record = assess_and_record(
             model,
             program,
             options,
@@ -345,12 +357,6 @@ impl TunedSession {
             started,
             diagnostics,
         )?;
-        // The session runs tuned execution only, so its records carry the
-        // tuned identity exactly as solve_with_diagnostics writes it.
-        record.backend = "cuda-lp-tuned".into();
-        record.schema_version = 3;
-        record.lp_settings = Some(settings);
-        record.lp_execution = Some(self.execution.clone());
         self.solve_phases = phases;
         Ok(record)
     }
@@ -417,5 +423,62 @@ impl TunedSession {
     #[must_use]
     pub fn device(&self) -> &optimizer_cuda_sys::DeviceInfo {
         self.context.device()
+    }
+}
+
+// Apply identity outside the outcome-producing body, just as the ordinary
+// backend does, so cancellation and every fault exit receive it too.
+fn stamp_tuned_record(
+    record: &mut SolveRecord,
+    settings: LpSettings,
+    execution: &LpExecutionRecord,
+) {
+    record.backend = "cuda-lp-tuned".into();
+    record.schema_version = 3;
+    record.lp_settings = Some(settings);
+    record.lp_execution = Some(execution.clone());
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn every_session_outcome_has_a_valid_tuned_execution_identity() {
+        let model = Model::from_json(include_bytes!("../../../examples/lp-model-v1.json")).unwrap();
+        let options: SolveOptions =
+            serde_json::from_slice(include_bytes!("../../../examples/solve-config-v1.json"))
+                .unwrap();
+        let settings = LpSettings::published(8, 4);
+        let execution = LpExecutionRecord {
+            settings: Fp64ExecutionSettings::from_json(include_bytes!(
+                "../../../examples/lp-execution-v1.json"
+            ))
+            .unwrap(),
+            code_object_sha256: "a".repeat(64),
+        };
+        for termination in [
+            Termination::Interrupted,
+            Termination::BackendFailure,
+            Termination::NumericalFailure,
+            Termination::IterationLimit,
+            Termination::Optimal,
+        ] {
+            let mut record = bare(
+                &model,
+                &options,
+                termination,
+                vec![],
+                Instant::now(),
+                settings,
+            );
+            stamp_tuned_record(&mut record, settings, &execution);
+            assert_eq!(record.backend, "cuda-lp-tuned");
+            assert_eq!(record.schema_version, 3);
+            assert_eq!(record.lp_execution.as_ref(), Some(&execution));
+            assert_eq!(record.lp_settings, Some(settings));
+            assert_eq!(record.termination, termination);
+            record.check_execution().unwrap();
+        }
     }
 }

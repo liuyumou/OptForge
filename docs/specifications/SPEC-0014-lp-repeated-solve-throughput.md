@@ -372,6 +372,22 @@ and one preparation across producer checks and directory verification. This is
 an implementation optimization within requirements 5-7 and 17, with unchanged
 record semantics; the review separately records unresolved acceptance gaps.
 
+## Accepted review correction (2026-09-22)
+
+Under [ADR-0024](../decisions/ADR-0024-throughput-review-corrections.md),
+requirements 6 and 13-17 include these explicit acceptance details:
+
+- All tuned outcome exits retain backend, record version, method and execution
+  identity, including failure and zero-work cancellation.
+- Batch verification rejects missing tuned identity, fallback and disagreements
+  in method or execution/code identity among attempted records. Per-call solve
+  options remain per solve; this does not add an options-equality constraint.
+- Bitwise comparisons encode floating values as IEEE binary64, including signed
+  zero, and compare non-floating identity fields without coercion.
+- The follow-up protocol's fresh-variant-single kind materializes on the CPU and
+  invokes ordinary solve. Historical fresh-variant remains an N=1 session.
+  Revised analysis is written separately from every archived analysis.
+
 ## Open questions
 
 - Warm starts across solves are excluded here; whether a bounded warm-start contract is

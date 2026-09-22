@@ -6,9 +6,10 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tools'))
-from benchmark_lp_throughput import KINDS,protocol,jobs,label,settings_for,batch_request_for,research_batch_request_for
+from benchmark_lp_throughput import command,SINGLE_VARIANT_KIND,KINDS,protocol,jobs,label,settings_for,batch_request_for,research_batch_request_for
 from analyze_lp_throughput import (FRESH_ENDPOINT,AMORTIZED_ENDPOINT,SEPARATE_TITLE,COVERAGE_KINDS,amortized,identity_count,
                                    tuned_bits,research_bits,cross_mode_bits,tuned_exit_code,expected_batch_exit,check_endpoint_separation)
 from lp_protocol import NS,file_hash,read_json,write_json
@@ -85,6 +86,36 @@ class ThroughputGridTests(unittest.TestCase):
                     self.assertIsNotNone(research['options']['time_limit_ms'])
                     self.assertTrue(research['device'].startswith('GPU-'))
                     self.assertEqual(research['batch'],request)
+
+    def test_corrected_controls_use_ordinary_solve_after_cpu_materialization(self):
+        value,base,manifest=protocol(ROOT/'benchmarks/configs/lp-throughput-controls-v1.json')
+        schedule=list(jobs(value,base,manifest))
+        self.assertEqual(len(schedule),48)
+        self.assertTrue(all(j['kind']==SINGLE_VARIANT_KIND for j in schedule))
+        old,_,_=protocol()
+        a,b=Study.from_protocol(value),Study.from_protocol(old)
+        self.assertEqual(a.prefix,b.prefix)
+        for name in ['study_cap_seconds','acceptance_cap_seconds','combined_cap_seconds','prior_ns','prior_events','prior_hash','cumulative_ceiling_ns','additional_ns']:
+            self.assertEqual(getattr(a,name),getattr(b,name),name)
+        with tempfile.TemporaryDirectory() as temp:
+            directory=Path(temp)
+            for config in value['configurations']:
+                job=next(j for j in schedule if j['config']==config)
+                with patch('benchmark_lp_throughput.file_hash',return_value='a'*64), patch('benchmark_lp_throughput.subprocess.run') as materialize:
+                    cmd,verify,evidence,_=command(job,base,Path('/optimizer'),Path('/research'),{'source_tree_sha256':'b'*64},directory,value)
+                called=materialize.call_args.args[0]
+                self.assertEqual(called[:3],['/optimizer','lp-study','materialize'])
+                self.assertEqual(cmd[1],'solve')
+                self.assertNotIn('solve-batch',cmd)
+                self.assertNotIn('batch',cmd)
+                model=directory/(label(job)+'.model.json')
+                self.assertIn(str(model),cmd)
+                self.assertIn(str(model),verify)
+                self.assertEqual(evidence,directory/(label(job)+'.endpoint.json'))
+                document=read_json(directory/(label(job)+'.materialize.json'))
+                self.assertEqual(document['solves'],1)
+                self.assertEqual(document['variants'][0]['index'],0)
+
 
 
 class VariantContractTests(unittest.TestCase):
@@ -234,6 +265,14 @@ class AnalysisTests(unittest.TestCase):
         self.assertEqual(identity_count([(tuned_bits(tuned),tuned_bits(tuned)),(tuned_bits(tuned),changed)]),
                          dict(compared=2,identical=1))
         self.assertEqual(identity_count([]),dict(compared=0,identical=0))
+    def test_bitwise_identity_preserves_signed_zero_and_large_integer_fields(self):
+        left=dict(primal={'values':[{'variable_id':0,'value':0.0}]},dual=[-0.0],logical_iterations=2**60)
+        right=dict(left,primal={'values':[{'variable_id':0,'value':-0.0}]})
+        dual=dict(left,dual=[0.0])
+        count=dict(left,logical_iterations=2**60+1)
+        self.assertEqual(identity_count([(left,left),(left,right),(left,dual),(left,count)]),
+                         dict(compared=4,identical=1))
+
     def test_cross_mode_identity_excludes_launch_counts(self):
         # fused-fp64 runs two launches per proposal where intguard-fp64 runs
         # six: numerical trajectories agree bitwise while launch counts differ
@@ -261,7 +300,7 @@ class AnalysisTests(unittest.TestCase):
     def test_coverage_kinds_equal_the_planner_kind_universe(self):
         # Regression: the coverage loop once crashed concatenating a tuple to a
         # list; the frozen coverage kinds must match the planner's kind set.
-        self.assertEqual(len(COVERAGE_KINDS),7)
+        self.assertEqual(len(COVERAGE_KINDS),8)
         self.assertEqual(sorted(COVERAGE_KINDS),sorted(KINDS))
     def test_batch_exit_codes_mirror_solve_exit_codes(self):
         self.assertEqual([tuned_exit_code(t) for t in ['optimal','infeasible','unbounded','unbounded_or_infeasible']],[0,0,0,0])

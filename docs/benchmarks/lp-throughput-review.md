@@ -2,8 +2,10 @@
 
 Reviewed 2026-09-22: `feat/gpup-throughput` at `14a1a88f1e34efa078549710c005bd63ca20e025`
 against `main` at `0e7811a34615ea1fddf072b32f2a2de400904e95`.
-Recommendation: request changes for the four findings below. The bounded host
-performance repair is implemented separately from those unresolved findings.
+Historical recommendation: request changes for the four findings below. All four
+are now corrected with independent controls and regression evidence in the
+[correction report](lp-throughput-corrections.md). The bounded host performance
+repair below preceded those corrections.
 The [original throughput report](lp-repeated-solve-throughput.md), protocol,
 measurements, code objects and campaign ledger are retained unchanged.
 

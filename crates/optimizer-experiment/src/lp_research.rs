@@ -1420,6 +1420,47 @@ mod tests {
     }
 
     #[test]
+    fn review_session_outcome_cancelled_endpoint_verifies() {
+        if std::env::var("AI_OPTIMIZER_GPU").ok().as_deref() != Some("1") {
+            eprintln!("SKIP review_session_outcome: device tests are opt-in");
+            return;
+        }
+        assert_eq!(
+            std::env::var("AI_OPTIMIZER_GPU_LEASE").unwrap(),
+            "inherited"
+        );
+        let device = std::env::var("CUDA_VISIBLE_DEVICES").unwrap();
+        let context = Rc::new(optimizer_cuda_sys::Context::create(&device).unwrap());
+        let model = Model::from_json(MODEL).unwrap();
+        let execution = Fp64ExecutionSettings::from_json(include_bytes!(
+            "../../../examples/lp-execution-v1.json"
+        ))
+        .unwrap();
+        let method = LpSettings::published(8, 4);
+        let mut session = optimizer_lp_cuda::TunedSession::open(
+            context,
+            method,
+            execution,
+            model,
+            &mut LpDiagnostics::new(true, false),
+        )
+        .unwrap();
+        let token = CancellationToken::new();
+        token.cancel();
+        let mut diagnostics = LpDiagnostics::new(true, false);
+        let record = session
+            .solve(None, &request().options, &token, &mut diagnostics)
+            .unwrap();
+        assert_eq!(record.termination, Termination::Interrupted);
+        assert_eq!(record.backend, "cuda-lp-tuned");
+        assert!(session.poisoned().is_none());
+        let endpoint =
+            crate::lp::LpEndpoint::new(MODEL, "cuda-lp-tuned".into(), record, diagnostics, None)
+                .unwrap();
+        endpoint.verify(MODEL).unwrap();
+    }
+
+    #[test]
     fn strict_research_request_and_cancelled_witness_are_device_free() {
         let r = request();
         let bytes = serde_json::to_vec(&r).unwrap();

@@ -531,6 +531,7 @@ impl BatchEndpoint {
         let request = BatchRequest::from_json(batch_bytes)?;
         let base = Model::from_json(model_bytes)?;
         self.check(&base, &request)?;
+        let mut session_identity = None;
         for solve in &self.solves {
             let (_, bytes, _) = materialize(&base, &request, solve.index)?;
             let path = dir.join(solve_file_name(solve.index));
@@ -546,6 +547,29 @@ impl BatchEndpoint {
                     if endpoint.requested_backend != self.requested_backend {
                         return Err(invalid("solve backend identity differs"));
                     }
+                    if endpoint.record.backend != self.requested_backend
+                        || endpoint.fallback_reason.is_some()
+                    {
+                        return Err(invalid("a batch session cannot fall back"));
+                    }
+                    let identity = (
+                        endpoint
+                            .record
+                            .lp_settings
+                            .ok_or_else(|| invalid("missing session method identity"))?,
+                        endpoint
+                            .record
+                            .lp_execution
+                            .clone()
+                            .ok_or_else(|| invalid("missing session execution identity"))?,
+                    );
+                    if session_identity
+                        .as_ref()
+                        .is_some_and(|expected| expected != &identity)
+                    {
+                        return Err(invalid("batch session method/execution identity differs"));
+                    }
+                    session_identity = Some(identity);
                     if solve.status != endpoint.assessment.classification {
                         return Err(invalid("solve status differs"));
                     }
@@ -700,6 +724,77 @@ mod tests {
             solve_elapsed_ns: 1,
             session_phases_ns: BTreeMap::from([("variant_rebind".to_owned(), 1)]),
             reason: None,
+        }
+    }
+
+    #[test]
+    fn batch_refuses_mixed_method_code_and_fallback_identities() {
+        for change in ["code", "method", "fallback"] {
+            let (canonical, first) = observed_endpoint();
+            let mut record = first.record.clone();
+            let mut diagnostics = first.diagnostics.clone();
+            diagnostics.control = first.control.clone();
+            diagnostics.execution = first.execution.clone();
+            let fallback = match change {
+                "code" => {
+                    record.lp_execution.as_mut().unwrap().code_object_sha256 = "b".repeat(64);
+                    diagnostics.execution.as_mut().unwrap().code_object_sha256 =
+                        Some("b".repeat(64));
+                    None
+                }
+                "method" => {
+                    record.lp_settings.as_mut().unwrap().power_iterations += 1;
+                    None
+                }
+                _ => {
+                    record.backend = "highs".into();
+                    record.schema_version = 2;
+                    record.lp_settings = None;
+                    record.lp_execution = None;
+                    diagnostics.control = None;
+                    Some("injected fallback".into())
+                }
+            };
+            let second = crate::lp::LpEndpoint::new(
+                &canonical,
+                "cuda-lp-tuned".into(),
+                record,
+                diagnostics,
+                fallback,
+            )
+            .unwrap();
+            second.verify(&canonical).unwrap(); // Each file is individually valid.
+            let dir = sandbox();
+            let request = repeat_request(2).to_json().unwrap().into_bytes();
+            let mut solves = Vec::new();
+            for (index, endpoint) in [first, second].into_iter().enumerate() {
+                let bytes = serde_json::to_vec_pretty(&endpoint).unwrap();
+                write_evidence_file(&dir.join(solve_file_name(index as u32)), &bytes).unwrap();
+                solves.push(summary(
+                    index as u32,
+                    crate::sha256::hex(&canonical),
+                    &bytes,
+                    endpoint.assessment.classification,
+                ));
+            }
+            let batch = BatchEndpoint::new(
+                &request,
+                &canonical,
+                "cuda-lp-tuned".into(),
+                SessionSetup::default(),
+                solves,
+            )
+            .unwrap();
+            let error = batch.verify(&canonical, &request, &dir).unwrap_err();
+            assert!(
+                error.message.contains(if change == "fallback" {
+                    "cannot fall back"
+                } else {
+                    "session method/execution"
+                }),
+                "{change}: {error}"
+            );
+            std::fs::remove_dir_all(dir).unwrap();
         }
     }
 

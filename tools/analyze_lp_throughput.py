@@ -12,11 +12,12 @@ import argparse
 from collections import Counter, defaultdict
 import hashlib
 import statistics
+import struct
 import subprocess
 from pathlib import Path
 from benchmark_lp_throughput import (CONFIG,BATCH_KINDS,FRESH_KINDS,REPEAT_KINDS,VARIANT_KINDS,
                                      jobs,label,protocol,request_for,research_batch_request_for,
-                                     batch_request_for,settings_for)
+                                     batch_request_for,settings_for,SINGLE_VARIANT_KIND,verify_control_model)
 from lp_research_budget import Study,category_usage
 from lp_protocol import ROOT,NS,Ledger,checked_reference,file_hash,read_json,strict_loads,validate,write_json
 from lp_report import paired_ratio
@@ -52,9 +53,21 @@ def research_bits(evidence):
                 kernel_launches=d['kernel_launches'])
 
 
+def bitwise_key(value):
+    """Preserve binary64 encodings recursively, including the sign of zero.
+
+    Non-floating identity fields keep their types; counts and IDs are never
+    rounded through float conversion. The key is used only for comparison.
+    """
+    if type(value) is float:return ('f64',struct.pack('>d',value))
+    if type(value) is dict:return ('object',tuple((k,bitwise_key(v)) for k,v in sorted(value.items())))
+    if type(value) is list:return ('array',tuple(bitwise_key(v) for v in value))
+    return (type(value).__name__,value)
+
+
 def identity_count(pairs):
     """(compared, identical) over (fresh bits, batch solve bits) pairs: counts, never asserted."""
-    return dict(compared=len(pairs),identical=sum(1 for a,b in pairs if a==b))
+    return dict(compared=len(pairs),identical=sum(1 for a,b in pairs if bitwise_key(a)==bitwise_key(b)))
 
 
 def cross_mode_bits(bits):
@@ -141,7 +154,8 @@ def inspect(directory=None,config=CONFIG):
         row=dict(id=key,kind=job['kind'],instance=job['instance']['id'],configuration=c['id'],tier=job['tier'],
                  repetition=job['repeat'],size=job['size'],variant=job['variant'],worker=result['worker'],verified=False,certified=False)
         options,method,_,batch_ms=settings_for(job,base,value)
-        model=checked_reference(ROOT,job['instance']['model'])
+        model=(verify_control_model(job,value,directory,directory/'optimizer') if job['kind']==SINGLE_VARIANT_KIND
+               else checked_reference(ROOT,job['instance']['model']))
         evidence=directory/(key+'.batch') if batch else directory/(key+'.endpoint.json')
         endpoint_path=evidence/'batch.json' if batch else evidence
         if endpoint_path.exists():
@@ -150,7 +164,7 @@ def inspect(directory=None,config=CONFIG):
             if research:
                 request_path=directory/(key+'.research.json');request=read_json(request_path)
                 expected=(research_batch_request_for(job,base,value,frozen['source']['source_tree_sha256'],file_hash(model),frozen['research_binary_sha256'],frozen['code_object_sha256'])
-                          if batch else request_for(job,base,value,frozen['source']['source_tree_sha256'],job['instance']['model']['sha256'],frozen['research_binary_sha256'],frozen['code_object_sha256']))
+                          if batch else request_for(job,base,value,frozen['source']['source_tree_sha256'],file_hash(model),frozen['research_binary_sha256'],frozen['code_object_sha256']))
                 if request!=expected:raise ValueError('research request changed')
                 cmd=[str(directory/'lp_precision_research'),'verify-batch' if batch else 'verify',str(model),str(request_path),str(evidence)]
             else:
@@ -235,7 +249,7 @@ def inspect(directory=None,config=CONFIG):
                 if one['index'] in FRESH_VARIANT_INDICES and one['bits'] is not None:
                     partner=variant_pair.get((row['instance'],row['configuration'],row['tier'],one['index']))
                     if partner is not None:pairs.append((partner['solves'][0]['bits'],one['bits']))
-        if pairs:identity.append(dict(id=row['id'],partner='fresh-single-solve',**identity_count(pairs)))
+        if pairs:identity.append(dict(id=row['id'],partner='fresh-single-solve' if row['kind'] in REPEAT_KINDS else 'historical-n1-session',**identity_count(pairs)))
     # Cross-mode check: both admitted research modes are independently
     # bitwise-identical to the FP64 control (GPUP-5C), so their batch solves of
     # one materialized model agree numerically; measured as counts over the
@@ -256,10 +270,10 @@ def inspect(directory=None,config=CONFIG):
     batch_rows=[row for row in rows if row['kind'] in BATCH_KINDS and row['kind']!='fresh-variant']
     fresh_table=[]
     groups=defaultdict(list)
-    for row in fresh_rows:groups[(row['kind'],row['instance'],row['configuration'],row['tier'])].append(row)
-    for (kind,instance,configuration,tier),group in sorted(groups.items()):
+    for row in fresh_rows:groups[(row['kind'],row['instance'],row['configuration'],row['tier'],row['variant'])].append(row)
+    for (kind,instance,configuration,tier,variant),group in sorted(groups.items()):
         usable=[r for r in group if r['verified'] and r.get('process_complete') and r.get('executed')]
-        fresh_table.append(dict(id=kind+'/'+instance+'/'+configuration,kind=kind,instance=instance,configuration=configuration,tier=tier,
+        fresh_table.append(dict(id=kind+'/'+instance+'/'+configuration+('' if variant is None else '/v'+str(variant)),kind=kind,instance=instance,configuration=configuration,tier=tier,variant=variant,
                                 planned=len(group),verified=len([r for r in group if r['verified']]),
                                 certified=len([r for r in group if r['certified']]),
                                 median_elapsed_ns=statistics.median(r['elapsed_ns'] for r in usable) if usable else None,
@@ -305,7 +319,7 @@ def inspect(directory=None,config=CONFIG):
                 bootstrap_seed=17002,bootstrap_resamples=10000,schema_version=1,planned=value['planned_attempts'],attempted=len(rows),
                 verified=sum(r['verified'] for r in rows),missing=missing,
                 endpoint_labeling={'fresh':FRESH_ENDPOINT,'amortized':AMORTIZED_ENDPOINT,'comparison':SEPARATE_TITLE},
-                identity=identity,identity_totals=dict(compared=sum(i['compared'] for i in identity),identical=sum(i['identical'] for i in identity)),
+                identity=identity,identity_by_partner={partner:{field:sum(i[field] for i in identity if i['partner']==partner) for field in ['compared','identical']} for partner in sorted({i['partner'] for i in identity})},identity_totals=dict(compared=sum(i['compared'] for i in identity),identical=sum(i['identical'] for i in identity)),
                 cross_mode_identity=cross_counts,
                 fresh_single_solve_latency=fresh_table,amortized_repeated_solve_throughput=amortized_table,paired_amortized_vs_fresh=paired,
                 coverage=coverage,rows=[public(r) for r in rows],
@@ -318,9 +332,11 @@ def inspect(directory=None,config=CONFIG):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--protocol',type=Path,default=CONFIG);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--protocol',type=Path,default=CONFIG);p.add_argument('--output',type=Path);a=p.parse_args()
     study=Study.from_protocol(read_json(a.protocol))
-    result=inspect(study.output,a.protocol);write_json(study.output/'analysis.json',result)
+    destination=a.output or study.output/'analysis.json'
+    if destination.exists():raise ValueError('refusing to overwrite analysis; choose a new --output')
+    result=inspect(study.output,a.protocol);write_json(destination,result)
     print('Attempts',result['attempted'],'verified',result['verified'],'missing',len(result['missing']))
     print('Bitwise identity',result['identity_totals'])
     for row in result['coverage']:print(row)

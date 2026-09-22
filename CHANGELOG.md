@@ -10,6 +10,15 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Fixed
+
+- GPUP-THROUGHPUT review corrections: stamp tuned identity on failure and
+  cancellation; reject mixed method/code identities and fallback in batch
+  verification; compare binary64 encodings, including signed zero. ADR-0024
+  freezes 48 ordinary fresh-variant controls within the existing GPU caps and
+  preserves the original protocol and N=1-session controls. Revised analyses
+  refuse to overwrite archived results.
+
 ### Performance
 
 - Reuse independently recomputed host operator metadata across research batch
