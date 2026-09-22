@@ -1,5 +1,42 @@
 # Active Task
 
+## GPUP-THROUGHPUT integration and branch cleanup (2026-09-22)
+
+Status: implementation acceptance complete; prepared for protected integration.
+The PR status and retained integration receipt record the final remote outcome.
+The user explicitly authorized opening a PR, merging when appropriate, and
+cleaning up the merged branch. Scope: verify the branch against
+current origin/main, inspect the reviewed changes and existing acceptance,
+run the pinned-native integration gate, publish the branch and a reviewable PR,
+wait for all required GitHub checks and review conversations, merge without
+bypassing protection, then fast-forward local main and delete only this merged
+local/remote feature branch. Preserve all benchmark artifacts and GPU ledgers.
+No release tag, hosting change, protection change or new GPU job is included.
+
+Resources: four build jobs, one CPU-hour, read-only GitHub inspection plus the
+explicitly authorized PR/push/merge/branch deletion. Existing numerical/device
+acceptance and the 7015.920961503-second campaign total are unchanged. Acceptance:
+full tools/check.sh, no unresolved new findings, current main ancestry, required
+cpu/docs/smoke checks on the PR, merged head ancestry, synchronized clean main,
+feature branch removed and all experiment evidence retained. The PR and local
+artifacts/gpupt-integration-20260922 receipt record the final remote outcome.
+
+
+
+Readiness evidence: origin/main remains 0e7811a, an ancestor of the five reviewed
+implementation/specification commits ending at cd1e958; no rebase is needed.
+All four review findings are fixed. Existing full native acceptance is 481 Rust
+results and 150 Python tests; fresh controls validate 360/360 variant comparisons,
+and both old/new verifiers validate 16/16 optimized diagnostic solve identities.
+The effective main rules require current cpu/docs/smoke checks and resolved
+conversations, with no mandatory approving review and no bypass. Merge commits
+are allowed and preserve archived source ancestry. No lockfile/dependency changes
+or raw experiment artifacts are included in the source diff. The 65536-row
+coverage and historical tuned_cases racecheck limitations remain explicit;
+experimental opt-in behavior and unchanged defaults make them documented scope
+limits rather than newly concealed supported-backend guarantees.
+
+
 ## GPUP-THROUGHPUT validated host input reuse (2026-09-22)
 
 Status: complete after the review corrections committed as 2848b0d.
