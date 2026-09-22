@@ -10,7 +10,69 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Fixed
+
+- Make throughput budget-authority tests independent of retained local campaign
+  artifacts, using a real temporary CPU ledger while preserving reference,
+  ceiling, prefix and output-binding checks in clean checkouts.
+
+- GPUP-THROUGHPUT review corrections: stamp tuned identity on failure and
+  cancellation; reject mixed method/code identities and fallback in batch
+  verification; compare binary64 encodings, including signed zero. ADR-0024
+  freezes 48 ordinary fresh-variant controls within the existing GPU caps and
+  preserves the original protocol and N=1-session controls. Revised analyses
+  refuse to overwrite archived results.
+
+### Performance
+
+- Reuse independently validated host models and canonical LPs in research
+  evidence generation/verification; repeated batches parse and serialize their
+  model once per boundary, while bound variants retain fresh certification.
+  The [host-input report](docs/benchmarks/lp-throughput-host-input.md) records
+  paired CPU measurements and the bounded producer diagnostic.
+
+- Reuse independently recomputed host operator metadata across research batch
+  evidence checks. Every solve still receives original-model certification and
+  complete identity/work checks. Retained N=8 evidence verifies 1.48–1.52x faster
+  on the CPU; no new GPU solve-throughput claim. See the
+  [branch review and measurements](docs/benchmarks/lp-throughput-review.md).
+
 ### Added
+
+- GPUP-THROUGHPUT (documentation phase): [SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md)
+  and [ADR-0023](docs/decisions/ADR-0023-repeated-solve-throughput.md) are accepted
+  on 2026-09-20 for opt-in repeated-solve throughput sessions over a fixed matrix.
+  Amortized throughput is a separately labeled endpoint, never substituted for
+  fresh-process single-solve latency; no runtime behavior changes yet.
+
+- GPUP-THROUGHPUT (behavior phase): opt-in repeated-solve sessions implement
+  SPEC-0014. `optimizer solve-batch` runs one `TunedSession` per batch over a
+  fixed matrix, writing one individually verifiable lp-endpoint-v3 per solve plus
+  an lp-batch-endpoint-v1 record; `optimizer lp-study materialize` and
+  `lp-study verify-batch` expose the deterministic variant materialization and
+  the evidence-only batch verification. The isolated research executable gains
+  `batch`/`verify-batch` actions limited to the `intguard-fp64` and `fused-fp64`
+  modes. New lp-batch-request-v1 and lp-batch-endpoint-v1 schemas, the
+  `tools/lp_variants.py` witness-tightening generator, the frozen
+  `tools/benchmark_lp_throughput.py` planner and the
+  `tools/analyze_lp_throughput.py` verifier with separate-endpoint labeling and
+  bitwise identity counts. `Backend::solve`, backend selectors, defaults, the
+  fresh-process single-solve endpoint, prior protocols, manifests and archived
+  evidence are unchanged; no dispatch, preset, warm start or fallback change.
+
+- The frozen GPUP-THROUGHPUT protocol benchmarks/configs/lp-throughput-v1.json
+  raises the cumulative screening ceiling by 3600 seconds to 8102.574545061
+  seconds under identity gpup-throughput-v1 (study 2700 s, acceptance 600 s,
+  combined 3300 s).
+
+- GPUP-THROUGHPUT (study phase): the frozen 705-attempt gpup-throughput-v1 study
+  is measured and verified in the
+  [repeated-solve report](docs/benchmarks/lp-repeated-solve-throughput.md). 687
+  attempts verify independently; 4785/4785 compared batch solves are bitwise
+  identical to fresh-process single solves, and amortized per-solve time reaches
+  26.6x fresh single-solve latency at N=32 on small-4 as a separately labeled
+  endpoint. Study 2617.929459541 and acceptance 538.371430691 GPU seconds;
+  cumulative campaign consumption is 6951.059845871 seconds.
 
 - GPUP-5C (ADR-0022) records the [FP64-pipe root cause](docs/benchmarks/lp-fp64-pipe-root-cause.md)
   of the component slowdown and adds feature-gated research modes `intguard-fp64`,

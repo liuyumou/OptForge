@@ -82,12 +82,23 @@ pub fn assess(
     record: &SolveRecord,
     diagnostics: &LpDiagnostics,
 ) -> Result<Assessment, ValidationError> {
+    let program = LinearProgram::new(model)?;
+    assess_program(model, &program, record, diagnostics)
+}
+
+// Internal callers must construct this program from this exact validated host
+// model. Sharing immutable input never shares a certificate or an assessment.
+pub(crate) fn assess_program(
+    model: &Model,
+    program: &LinearProgram,
+    record: &SolveRecord,
+    diagnostics: &LpDiagnostics,
+) -> Result<Assessment, ValidationError> {
     record.options.validate()?;
     record.to_json()?;
     if record.model_id != model.document().model_id {
         return Err(invalid("record model identity differs"));
     }
-    let program = LinearProgram::new(model)?;
     if let Some(dual) = &diagnostics.dual
         && (dual.len() != program.row_count() || dual.iter().any(|v| !v.is_finite()))
     {
@@ -104,10 +115,7 @@ pub fn assess(
         repaired: None,
         reason: None,
     };
-    let certificate = diagnostics
-        .dual
-        .as_ref()
-        .map(|dual| certify(&program, dual));
+    let certificate = diagnostics.dual.as_ref().map(|dual| certify(program, dual));
     match certificate {
         Some(Ok(c)) => {
             result.bound = Some(c.bound);
@@ -161,7 +169,7 @@ pub fn assess(
         if report.feasible
             && let Some(gap) = result
                 .bound
-                .and_then(|b| assess_gap(&program, &primal, b, record.options.tolerances))
+                .and_then(|b| assess_gap(program, &primal, b, record.options.tolerances))
         {
             result.gap_upper = Some(gap.upper);
             result.gap_closed = gap.closed;

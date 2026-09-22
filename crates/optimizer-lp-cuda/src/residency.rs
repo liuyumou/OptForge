@@ -225,6 +225,7 @@ pub struct LpResidency {
     pub(crate) requirement: Requirement,
     pub(crate) execution: Option<optimizer_core::Fp64ExecutionSettings>,
     pub(crate) uploads: usize,
+    pub(crate) bound_rebinds: usize,
     pub(crate) launches: Cell<u64>,
     pub(crate) poisoned: Cell<bool>,
 }
@@ -393,6 +394,9 @@ impl LpResidency {
             // One upload per residency, counted so requirement 16 is asserted
             // against a counter rather than against elapsed time.
             uploads: 1,
+            // Column-bound rebinds are SPEC-0014's separate counter; they do
+            // not touch `uploads`.
+            bound_rebinds: 0,
             launches: Cell::new(0),
             poisoned: Cell::new(false),
             module,
@@ -447,6 +451,117 @@ impl LpResidency {
         result
     }
 
+    /// Create tuned residency from a session's prepared matrix (SPEC-0014).
+    ///
+    /// The scaled matrix and objective come from the
+    /// [`optimizer_lp::PreparedMatrix`] the session built once, rather than
+    /// from an engine rebuilt per solve. The scaled row bounds are derived
+    /// here with the same expressions in the same order as
+    /// [`optimizer_lp::pdhg::Engine::from_prepared`] — row bounds never
+    /// change over a session's life — while the scaled column bounds are the
+    /// caller's, so a session opens with whichever bound set its first solve
+    /// runs.
+    ///
+    /// Settings validation and memory admission run inside
+    /// [`LpResidency::open_for_execution`] exactly as for
+    /// [`LpResidency::open_tuned`], with admission decided from the program
+    /// before the module is loaded; any explicit buffer budget is the
+    /// caller's check, made before it read the code image it passes in.
+    ///
+    /// # Errors
+    ///
+    /// Returns the same validation, admission and availability failures as
+    /// [`LpResidency::open_tuned`].
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn open_prepared_tuned(
+        context: Rc<Context>,
+        program: &LinearProgram,
+        prepared: &optimizer_lp::PreparedMatrix,
+        scaled_column_bounds: (&[f64], &[f64]),
+        execution: optimizer_core::Fp64ExecutionSettings,
+        code_image: Option<&[u8]>,
+        counters: Option<&mut optimizer_core::LpExecutionDiagnostics>,
+    ) -> Result<Self, DeviceError> {
+        execution
+            .validate()
+            .map_err(|e| DeviceError::Unsupported(e.to_string()))?;
+        let row_scale = prepared.preconditioner().row();
+        let scaled_row_lower: Vec<f64> = program
+            .rows()
+            .iter()
+            .zip(row_scale)
+            .map(|(range, scale)| range.lower * scale)
+            .collect();
+        let scaled_row_upper: Vec<f64> = program
+            .rows()
+            .iter()
+            .zip(row_scale)
+            .map(|(range, scale)| range.upper * scale)
+            .collect();
+        let (row_values, column_values) = prepared.scaled_matrix();
+        Self::open_for_execution(
+            context,
+            program,
+            row_values,
+            column_values,
+            prepared.scaled_objective(),
+            (&scaled_row_lower, &scaled_row_upper),
+            scaled_column_bounds,
+            &crate::tuned::code_object_path(),
+            Some(execution),
+            code_image,
+            counters,
+        )
+    }
+
+    /// Re-upload the scaled column bounds into the existing buffers.
+    ///
+    /// SPEC-0014 requirement 12: the column-bound buffers are the only
+    /// resident data a bounds-only variant may replace, and the re-upload is
+    /// counted separately — `bound_rebinds` here, the caller's counters for
+    /// the bytes — while [`LpResidency::uploads`] stays 1 for the residency's
+    /// life. The length check runs before any device call.
+    ///
+    /// # Errors
+    ///
+    /// Returns an unsupported failure when either vector's length differs
+    /// from the program's column count, a poisoned-context failure when the
+    /// residency is already poisoned, and an availability failure when the
+    /// device refuses an upload.
+    pub(crate) fn rebind_column_bounds(
+        &mut self,
+        lower: &[f64],
+        upper: &[f64],
+        counters: &mut optimizer_core::LpExecutionDiagnostics,
+    ) -> Result<(), DeviceError> {
+        if lower.len() != self.columns || upper.len() != self.columns {
+            return Err(DeviceError::Unsupported(
+                "column bounds differ from the program's column count".into(),
+            ));
+        }
+        self.usable()?;
+        if !lower.is_empty() {
+            let result = self.column_lower.copy_from(lower, &self.stream);
+            if let Err(error) = result {
+                return Err(self.observe(error));
+            }
+            counters.upload_calls += 1;
+            counters.upload_bytes += lower.len() as u64 * 8;
+            counters.synchronizations += 1;
+        }
+        if !upper.is_empty() {
+            let result = self.column_upper.copy_from(upper, &self.stream);
+            if let Err(error) = result {
+                return Err(self.observe(error));
+            }
+            counters.upload_calls += 1;
+            counters.upload_bytes += upper.len() as u64 * 8;
+            counters.synchronizations += 1;
+        }
+        self.bound_rebinds += 1;
+        Ok(())
+    }
+
     /// Bytes in the currently owned invariant allocations, including padding.
     pub(crate) fn buffer_bytes(&self) -> u64 {
         8 * (self.row_values.len()
@@ -466,6 +581,15 @@ impl LpResidency {
     #[must_use]
     pub fn uploads(&self) -> usize {
         self.uploads
+    }
+
+    /// How many times the column bounds have been re-uploaded since open.
+    ///
+    /// SPEC-0014 requirement 12's separate counter for variant rebinds; the
+    /// invariant [`LpResidency::uploads`] is unaffected by them.
+    #[must_use]
+    pub fn bound_rebinds(&self) -> usize {
+        self.bound_rebinds
     }
 
     /// How many kernel launches this residency has issued.

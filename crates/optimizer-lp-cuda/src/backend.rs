@@ -320,137 +320,19 @@ impl CudaLpBackend {
         residency: &LpResidency,
         cancel: &CancellationToken,
         diagnostics: &mut optimizer_core::LpDiagnostics,
-        mut check: impl FnMut(&[f64], &[f64], &mut optimizer_core::LpDiagnostics) -> bool,
+        check: impl FnMut(&[f64], &[f64], &mut optimizer_core::LpDiagnostics) -> bool,
         deadline: Option<Instant>,
     ) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
-        let initial = diagnostics.start();
-        let mut control = optimizer_lp::control::Fp64Controller::new(engine);
-        control.set_deadline(deadline);
-        diagnostics.finish("controller", initial);
-        let mut tuned = self
-            .execution
-            .as_ref()
-            .map(|e| crate::tuned::TunedExecutor::new(residency, e.settings))
-            .transpose()?;
-        let mut assessed = None;
-        let mut assessments = 0;
-        let mut stop = "iteration_limit";
-        while control.remaining() > 0 {
-            if cancel.is_cancelled() {
-                stop = "interrupted";
-                break;
-            }
-            if control.expired() {
-                stop = "time_limit";
-                break;
-            }
-            let chunk = control.next_chunk(self.settings.check_interval);
-            let since_restart = control.state().since_restart;
-            let weight = control.state().weight;
-            let generation = control.generation();
-            let restarts = control.state().restarts;
-            let (x, y, anchor_x, anchor_y) = control.buffers();
-            let result = if let Some(tuned) = &mut tuned {
-                tuned.advance(
-                    x,
-                    y,
-                    anchor_x,
-                    anchor_y,
-                    generation,
-                    restarts,
-                    since_restart,
-                    chunk,
-                    engine.step(),
-                    weight,
-                    |_| cancel.is_cancelled() || deadline.is_some_and(|d| Instant::now() >= d),
-                    diagnostics,
-                )
-            } else {
-                residency.advance_resumable(
-                    x,
-                    y,
-                    anchor_x,
-                    anchor_y,
-                    since_restart,
-                    chunk,
-                    engine.step(),
-                    weight,
-                    |_| cancel.is_cancelled() || deadline.is_some_and(|d| Instant::now() >= d),
-                    diagnostics,
-                )
-            };
-            if diagnostics.enabled {
-                diagnostics.kernel_launches = Some(residency.launches());
-            }
-            let result = match result {
-                Ok(result) => result,
-                Err(error) => {
-                    diagnostics.iterations = None;
-                    diagnostics.control = Some(optimizer_core::LpControlDiagnostics {
-                        controller: "host-restart-weight-v1".into(),
-                        logical_iterations: control.state().iterations,
-                        physical_iterations: None,
-                        device_kernel_launches: residency.launches(),
-                        assessments,
-                        kkt_evaluations: control.kkt_evaluations(),
-                        restarts: control.state().restarts,
-                        weight: control.state().weight,
-                        stop: "device_failure".into(),
-                    });
-                    diagnostics
-                        .unavailable
-                        .push("completed device work after fault is unavailable".into());
-                    return Err(error);
-                }
-            };
-            control
-                .commit_steps(result.completed)
-                .expect("admitted device chunk");
-            if diagnostics.enabled {
-                diagnostics.iterations = Some(control.physical_iterations());
-            }
-            if result.interrupted || cancel.is_cancelled() || control.expired() {
-                stop = if cancel.is_cancelled() {
-                    "interrupted"
-                } else {
-                    "time_limit"
-                };
-                break;
-            }
-            if control.check_pending() {
-                let iterate = control.iterate();
-                assessments += 1;
-                let accepted = check(&iterate.primal, &iterate.dual, diagnostics);
-                assessed = Some(iterate);
-                if accepted {
-                    stop = "accepted";
-                    break;
-                }
-                let phase = diagnostics.start();
-                control.continue_after_check();
-                diagnostics.finish("controller", phase);
-            }
-        }
-        if diagnostics.enabled {
-            diagnostics.iterations = Some(control.physical_iterations());
-            diagnostics.restarts = Some(control.state().restarts);
-        }
-        diagnostics.control = Some(optimizer_core::LpControlDiagnostics {
-            controller: "host-restart-weight-v1".into(),
-            logical_iterations: control.state().iterations,
-            physical_iterations: Some(control.physical_iterations()),
-            device_kernel_launches: residency.launches(),
-            assessments,
-            kkt_evaluations: control.kkt_evaluations(),
-            restarts: control.state().restarts,
-            weight: control.state().weight,
-            stop: stop.into(),
-        });
-        if control.physical_iterations() == 0 && stop == "interrupted" {
-            return Err(DeviceError::Cancelled);
-        }
-        let iterate = assessed.unwrap_or_else(|| control.iterate());
-        Ok((iterate.primal, iterate.dual, iterate.iterations))
+        run_matched(
+            engine,
+            residency,
+            self.execution.as_ref().map(|e| e.settings),
+            self.settings.check_interval,
+            cancel,
+            diagnostics,
+            check,
+            deadline,
+        )
     }
 }
 
@@ -548,30 +430,6 @@ impl CudaLpBackend {
         // candidate is validated against the original model and any bound is
         // certified from the model's own coefficients. Nothing the device computed
         // is consulted except the iterate itself.
-        let assess =
-            |primal: &[f64], dual: &[f64]| -> Option<(Candidate, f64, bool, Option<f64>, bool)> {
-                let candidate = Candidate {
-                    schema_version: optimizer_core::SCHEMA_VERSION,
-                    model_id: model.document().model_id.clone(),
-                    values: program
-                        .variable_ids()
-                        .iter()
-                        .zip(primal)
-                        .map(|(variable_id, value)| optimizer_core::Assignment {
-                            variable_id: *variable_id,
-                            value: *value,
-                        })
-                        .collect(),
-                };
-                let report = model.evaluate(&candidate, options.tolerances).ok()?;
-                let bound = certify(&program, dual).ok().map(|c| c.bound);
-                let closed = report.feasible
-                    && bound
-                        .and_then(|bound| assess_gap(&program, primal, bound, options.tolerances))
-                        .is_some_and(|gap| gap.closed);
-                Some((candidate, report.objective, report.feasible, bound, closed))
-            };
-
         let mut closed_early = false;
         let (primal, dual, iterations) = match self.iterate(
             &program,
@@ -579,7 +437,8 @@ impl CudaLpBackend {
             diagnostics,
             |primal, dual, diagnostics| {
                 let checking = diagnostics.start();
-                let stop = assess(primal, dual).is_some_and(|(_, _, _, _, closed)| closed);
+                let stop = assess(model, &program, options.tolerances, primal, dual)
+                    .is_some_and(|(_, _, _, _, closed)| closed);
                 diagnostics.finish("host_checks", checking);
                 closed_early |= stop;
                 stop
@@ -620,83 +479,303 @@ impl CudaLpBackend {
         // Requirement 34 of SPEC-0010 and requirement 15 here: every device-produced
         // candidate is validated against the original model before publication, and
         // the objective published is this validation's recomputation.
-        let candidate = Candidate {
-            schema_version: optimizer_core::SCHEMA_VERSION,
-            model_id: model.document().model_id.clone(),
-            values: program
-                .variable_ids()
-                .iter()
-                .zip(&primal)
-                .map(|(variable_id, value)| optimizer_core::Assignment {
-                    variable_id: *variable_id,
-                    value: *value,
-                })
-                .collect(),
-        };
-        let checking = diagnostics.start();
-        diagnostics.capture(&dual, iterations);
-        if let Some(control) = &mut diagnostics.control {
-            control.assessments += 1;
-        }
-        let report = model.evaluate(&candidate, options.tolerances)?;
-        let bound = certify(&program, &dual).ok().map(|c| c.bound);
-        let gap = report
-            .feasible
-            .then(|| {
-                bound.and_then(|bound| assess_gap(&program, &primal, bound, options.tolerances))
-            })
-            .flatten();
-        let closed = closed_early && gap.is_some_and(|gap| gap.closed);
-
-        let control_stop = diagnostics.control.as_ref().map(|c| c.stop.as_str());
-        let termination = if control_stop == Some("numerical_failure") {
-            if let Some(reason) = diagnostics.precision.as_ref().and_then(|p| p.guard.clone()) {
-                warnings.push(reason);
-            }
-            Termination::NumericalFailure
-        } else if control_stop == Some("interrupted") {
-            Termination::Interrupted
-        } else if control_stop == Some("time_limit") {
-            Termination::TimeLimit
-        } else if closed {
-            Termination::Optimal
-        } else if control_stop == Some("iteration_limit")
-            || iterations >= self.settings.iteration_limit
-        {
-            Termination::IterationLimit
-        } else if report.feasible {
-            Termination::Feasible
-        } else {
-            Termination::IterationLimit
-        };
-
-        diagnostics.finish("host_checks", checking);
-        let objective = report.feasible.then_some(report.objective);
-        Ok(SolveRecord {
-            lp_execution: None,
-            lp_precision: None,
-            schema_version: SOLVE_RECORD_SCHEMA_VERSION,
-            model_id: model.document().model_id.clone(),
-            backend: BACKEND_NAME.to_string(),
-            backend_version: BACKEND_VERSION.to_string(),
-            termination,
-            native_status: None,
-            objective: objective.and_then(finite_or_absent),
-            best_bound: bound.and_then(finite_or_absent),
-            gap: gap.map(|gap| gap.upper),
-            candidate: Some(candidate),
-            validation: Some(report),
+        assess_and_record(
+            model,
+            &program,
+            options,
+            &primal,
+            &dual,
+            iterations,
+            closed_early,
+            self.settings,
             warnings,
-            elapsed_ms: started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64,
-            options: options.clone(),
-            lp_settings: Some(self.settings),
-        })
+            started,
+            diagnostics,
+        )
     }
+}
+
+/// The matched iteration loop, shared by [`CudaLpBackend::iterate_matched`]
+/// and by a repeated-solve session (SPEC-0014).
+///
+/// Every call starts from a fresh controller — the cold iterate — and, when
+/// `execution` is present, a fresh [`crate::tuned::TunedExecutor`], so no
+/// primal, dual, anchor or upload-gating state can carry over between solves
+/// (requirements 8 and 10). Launch counts are reported relative to the
+/// residency's count at entry: a fresh residency starts at zero, so the
+/// single-solve path reports exactly what it always has, while a session's
+/// reused residency attributes each solve's launches to that solve.
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn run_matched(
+    engine: &Engine<'_>,
+    residency: &LpResidency,
+    execution: Option<optimizer_core::Fp64ExecutionSettings>,
+    check_interval: u64,
+    cancel: &CancellationToken,
+    diagnostics: &mut optimizer_core::LpDiagnostics,
+    mut check: impl FnMut(&[f64], &[f64], &mut optimizer_core::LpDiagnostics) -> bool,
+    deadline: Option<Instant>,
+) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
+    let initial = diagnostics.start();
+    let mut control = optimizer_lp::control::Fp64Controller::new(engine);
+    control.set_deadline(deadline);
+    diagnostics.finish("controller", initial);
+    let mut tuned = execution
+        .map(|settings| crate::tuned::TunedExecutor::new(residency, settings))
+        .transpose()?;
+    let launch_base = residency.launches();
+    let mut assessed = None;
+    let mut assessments = 0;
+    let mut stop = "iteration_limit";
+    while control.remaining() > 0 {
+        if cancel.is_cancelled() {
+            stop = "interrupted";
+            break;
+        }
+        if control.expired() {
+            stop = "time_limit";
+            break;
+        }
+        let chunk = control.next_chunk(check_interval);
+        let since_restart = control.state().since_restart;
+        let weight = control.state().weight;
+        let generation = control.generation();
+        let restarts = control.state().restarts;
+        let (x, y, anchor_x, anchor_y) = control.buffers();
+        let result = if let Some(tuned) = &mut tuned {
+            tuned.advance(
+                x,
+                y,
+                anchor_x,
+                anchor_y,
+                generation,
+                restarts,
+                since_restart,
+                chunk,
+                engine.step(),
+                weight,
+                |_| cancel.is_cancelled() || deadline.is_some_and(|d| Instant::now() >= d),
+                diagnostics,
+            )
+        } else {
+            residency.advance_resumable(
+                x,
+                y,
+                anchor_x,
+                anchor_y,
+                since_restart,
+                chunk,
+                engine.step(),
+                weight,
+                |_| cancel.is_cancelled() || deadline.is_some_and(|d| Instant::now() >= d),
+                diagnostics,
+            )
+        };
+        if diagnostics.enabled {
+            diagnostics.kernel_launches = Some(residency.launches() - launch_base);
+        }
+        let result = match result {
+            Ok(result) => result,
+            Err(error) => {
+                diagnostics.iterations = None;
+                diagnostics.control = Some(optimizer_core::LpControlDiagnostics {
+                    controller: "host-restart-weight-v1".into(),
+                    logical_iterations: control.state().iterations,
+                    physical_iterations: None,
+                    device_kernel_launches: residency.launches() - launch_base,
+                    assessments,
+                    kkt_evaluations: control.kkt_evaluations(),
+                    restarts: control.state().restarts,
+                    weight: control.state().weight,
+                    stop: "device_failure".into(),
+                });
+                diagnostics
+                    .unavailable
+                    .push("completed device work after fault is unavailable".into());
+                return Err(error);
+            }
+        };
+        control
+            .commit_steps(result.completed)
+            .expect("admitted device chunk");
+        if diagnostics.enabled {
+            diagnostics.iterations = Some(control.physical_iterations());
+        }
+        if result.interrupted || cancel.is_cancelled() || control.expired() {
+            stop = if cancel.is_cancelled() {
+                "interrupted"
+            } else {
+                "time_limit"
+            };
+            break;
+        }
+        if control.check_pending() {
+            let iterate = control.iterate();
+            assessments += 1;
+            let accepted = check(&iterate.primal, &iterate.dual, diagnostics);
+            assessed = Some(iterate);
+            if accepted {
+                stop = "accepted";
+                break;
+            }
+            let phase = diagnostics.start();
+            control.continue_after_check();
+            diagnostics.finish("controller", phase);
+        }
+    }
+    if diagnostics.enabled {
+        diagnostics.iterations = Some(control.physical_iterations());
+        diagnostics.restarts = Some(control.state().restarts);
+    }
+    diagnostics.control = Some(optimizer_core::LpControlDiagnostics {
+        controller: "host-restart-weight-v1".into(),
+        logical_iterations: control.state().iterations,
+        physical_iterations: Some(control.physical_iterations()),
+        device_kernel_launches: residency.launches() - launch_base,
+        assessments,
+        kkt_evaluations: control.kkt_evaluations(),
+        restarts: control.state().restarts,
+        weight: control.state().weight,
+        stop: stop.into(),
+    });
+    if control.physical_iterations() == 0 && stop == "interrupted" {
+        return Err(DeviceError::Cancelled);
+    }
+    let iterate = assessed.unwrap_or_else(|| control.iterate());
+    Ok((iterate.primal, iterate.dual, iterate.iterations))
+}
+
+/// The host's assessment of one iterate: rebuild the candidate, evaluate it
+/// against the original model, certify a bound from the model's own
+/// coefficients and check the gap.
+///
+/// Shared by the single-solve termination check and a session solve so a
+/// batch solve is assessed by exactly the code a fresh solve is (SPEC-0014
+/// requirement 5).
+pub(crate) fn assess(
+    model: &Model,
+    program: &LinearProgram,
+    tolerances: optimizer_core::Tolerances,
+    primal: &[f64],
+    dual: &[f64],
+) -> Option<(Candidate, f64, bool, Option<f64>, bool)> {
+    let candidate = Candidate {
+        schema_version: optimizer_core::SCHEMA_VERSION,
+        model_id: model.document().model_id.clone(),
+        values: program
+            .variable_ids()
+            .iter()
+            .zip(primal)
+            .map(|(variable_id, value)| optimizer_core::Assignment {
+                variable_id: *variable_id,
+                value: *value,
+            })
+            .collect(),
+    };
+    let report = model.evaluate(&candidate, tolerances).ok()?;
+    let bound = certify(program, dual).ok().map(|c| c.bound);
+    let closed = report.feasible
+        && bound
+            .and_then(|bound| assess_gap(program, primal, bound, tolerances))
+            .is_some_and(|gap| gap.closed);
+    Some((candidate, report.objective, report.feasible, bound, closed))
+}
+
+/// Build the record for a completed matched iteration: the final candidate,
+/// its host validation and certification, and the termination mapping.
+///
+/// Extracted verbatim from [`CudaLpBackend::solve_observed`] so a session
+/// solve records exactly what a fresh single solve records (SPEC-0014
+/// requirement 5). `closed_early` is whether any in-loop assessment already
+/// closed the gap; `settings` is the backend's or session's, deliberately not
+/// clamped by the solve options' iteration limit, which is what the
+/// termination mapping has always read.
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn assess_and_record(
+    model: &Model,
+    program: &LinearProgram,
+    options: &SolveOptions,
+    primal: &[f64],
+    dual: &[f64],
+    iterations: u64,
+    closed_early: bool,
+    settings: LpSettings,
+    mut warnings: Vec<String>,
+    started: Instant,
+    diagnostics: &mut optimizer_core::LpDiagnostics,
+) -> Result<SolveRecord, ValidationError> {
+    let candidate = Candidate {
+        schema_version: optimizer_core::SCHEMA_VERSION,
+        model_id: model.document().model_id.clone(),
+        values: program
+            .variable_ids()
+            .iter()
+            .zip(primal)
+            .map(|(variable_id, value)| optimizer_core::Assignment {
+                variable_id: *variable_id,
+                value: *value,
+            })
+            .collect(),
+    };
+    let checking = diagnostics.start();
+    diagnostics.capture(dual, iterations);
+    if let Some(control) = &mut diagnostics.control {
+        control.assessments += 1;
+    }
+    let report = model.evaluate(&candidate, options.tolerances)?;
+    let bound = certify(program, dual).ok().map(|c| c.bound);
+    let gap = report
+        .feasible
+        .then(|| bound.and_then(|bound| assess_gap(program, primal, bound, options.tolerances)))
+        .flatten();
+    let closed = closed_early && gap.is_some_and(|gap| gap.closed);
+
+    let control_stop = diagnostics.control.as_ref().map(|c| c.stop.as_str());
+    let termination = if control_stop == Some("numerical_failure") {
+        if let Some(reason) = diagnostics.precision.as_ref().and_then(|p| p.guard.clone()) {
+            warnings.push(reason);
+        }
+        Termination::NumericalFailure
+    } else if control_stop == Some("interrupted") {
+        Termination::Interrupted
+    } else if control_stop == Some("time_limit") {
+        Termination::TimeLimit
+    } else if closed {
+        Termination::Optimal
+    } else if control_stop == Some("iteration_limit") || iterations >= settings.iteration_limit {
+        Termination::IterationLimit
+    } else if report.feasible {
+        Termination::Feasible
+    } else {
+        Termination::IterationLimit
+    };
+
+    diagnostics.finish("host_checks", checking);
+    let objective = report.feasible.then_some(report.objective);
+    Ok(SolveRecord {
+        lp_execution: None,
+        lp_precision: None,
+        schema_version: SOLVE_RECORD_SCHEMA_VERSION,
+        model_id: model.document().model_id.clone(),
+        backend: BACKEND_NAME.to_string(),
+        backend_version: BACKEND_VERSION.to_string(),
+        termination,
+        native_status: None,
+        objective: objective.and_then(finite_or_absent),
+        best_bound: bound.and_then(finite_or_absent),
+        gap: gap.map(|gap| gap.upper),
+        candidate: Some(candidate),
+        validation: Some(report),
+        warnings,
+        elapsed_ms: started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64,
+        options: options.clone(),
+        lp_settings: Some(settings),
+    })
 }
 
 /// A record for an outcome reached before any iterate existed.
 #[allow(clippy::too_many_arguments)]
-fn bare(
+pub(crate) fn bare(
     model: &Model,
     options: &SolveOptions,
     termination: Termination,

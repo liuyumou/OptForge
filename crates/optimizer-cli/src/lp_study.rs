@@ -9,6 +9,9 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
     let mut instance = None;
     let mut output = None;
     let mut device = None;
+    let mut batch = None;
+    let mut index = None;
+    let mut out = None;
     for pair in args.chunks(2) {
         let [key, value] = pair else {
             return Err(argument("each flag requires a value"));
@@ -19,6 +22,9 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
             Some("--instance") => &mut instance,
             Some("--output") => &mut output,
             Some("--device") => &mut device,
+            Some("--batch") => &mut batch,
+            Some("--index") => &mut index,
+            Some("--out") => &mut out,
             _ => return Err(argument("unknown LP study flag")),
         };
         if slot.replace(value.as_os_str()).is_some() {
@@ -50,7 +56,14 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
             endpoint.verify(&bytes).map_err(io::Error::other)?;
             println!("{}", serde_json::to_string(&endpoint.assessment)?);
         }
-    } else if command == "verify" && instance.is_none() && output.is_none() && device.is_none() {
+    } else if command == "verify"
+        && instance.is_none()
+        && output.is_none()
+        && device.is_none()
+        && batch.is_none()
+        && index.is_none()
+        && out.is_none()
+    {
         let bytes = read(model.ok_or_else(|| argument("--model is required"))?)?;
         let endpoint = optimizer_experiment::lp::LpEndpoint::from_json(&read(
             evidence.ok_or_else(|| argument("--evidence is required"))?,
@@ -58,14 +71,26 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
         .map_err(io::Error::other)?;
         endpoint.verify(&bytes).map_err(io::Error::other)?;
         println!("{}", serde_json::to_string(&endpoint.assessment)?);
-    } else if command == "replay" && instance.is_none() {
+    } else if command == "replay"
+        && instance.is_none()
+        && batch.is_none()
+        && index.is_none()
+        && out.is_none()
+    {
         return replay(
             model.ok_or_else(|| argument("--model is required"))?,
             evidence.ok_or_else(|| argument("--evidence is required"))?,
             output.ok_or_else(|| argument("--output is required"))?,
             device,
         );
-    } else if command == "prepare" && model.is_none() && evidence.is_none() && device.is_none() {
+    } else if command == "prepare"
+        && model.is_none()
+        && evidence.is_none()
+        && device.is_none()
+        && batch.is_none()
+        && index.is_none()
+        && out.is_none()
+    {
         let instance = optimizer_schedule::FlowShopInstance::from_json(&read(
             instance.ok_or_else(|| argument("--instance is required"))?,
         )?)
@@ -90,9 +115,65 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
             output.ok_or_else(|| argument("--output is required"))?,
             json,
         )?;
+    } else if command == "materialize"
+        && evidence.is_none()
+        && instance.is_none()
+        && output.is_none()
+        && device.is_none()
+    {
+        // SPEC-0014 requirement 16: the deterministic pure materialization
+        // function, exposed so a variant's bytes can be inspected or hashed
+        // without a device.
+        let bytes = read(model.ok_or_else(|| argument("--model is required"))?)?;
+        let base = optimizer_core::Model::from_json(&bytes).map_err(io::Error::other)?;
+        let batch_bytes = read(batch.ok_or_else(|| argument("--batch is required"))?)?;
+        let request = optimizer_experiment::lp_batch::BatchRequest::from_json(&batch_bytes)
+            .map_err(io::Error::other)?;
+        let index = index.ok_or_else(|| argument("--index is required"))?;
+        let index = index
+            .to_str()
+            .and_then(|value| value.parse::<u32>().ok())
+            .ok_or_else(|| argument("--index must be a solve index"))?;
+        let (_, materialized, sha256) =
+            optimizer_experiment::lp_batch::materialize(&base, &request, index)
+                .map_err(io::Error::other)?;
+        optimizer_experiment::lp_batch::write_evidence_file(
+            std::path::Path::new(out.ok_or_else(|| argument("--out is required"))?),
+            &materialized,
+        )
+        .map_err(io::Error::other)?;
+        println!("{sha256}");
+    } else if command == "verify-batch"
+        && instance.is_none()
+        && output.is_none()
+        && device.is_none()
+        && index.is_none()
+        && out.is_none()
+    {
+        // Requirement 17: bitwise identity is decided from the retained
+        // evidence directory alone.
+        let model_bytes = read(model.ok_or_else(|| argument("--model is required"))?)?;
+        let batch_bytes = read(batch.ok_or_else(|| argument("--batch is required"))?)?;
+        let dir =
+            std::path::PathBuf::from(evidence.ok_or_else(|| argument("--evidence is required"))?);
+        let endpoint = optimizer_experiment::lp_batch::BatchEndpoint::from_json(&read(
+            dir.join("batch.json").as_os_str(),
+        )?)
+        .map_err(io::Error::other)?;
+        endpoint
+            .verify(&model_bytes, &batch_bytes, &dir)
+            .map_err(io::Error::other)?;
+        println!(
+            "{}",
+            serde_json::json!({
+                "verified": true,
+                "solves": endpoint.solves.len(),
+                "payload_sha256": endpoint.payload_sha256,
+            })
+        );
     } else {
         return Err(argument(
-            "expected lp-study prepare, verify or replay with matching flags",
+            "expected lp-study prepare, verify, replay, materialize or verify-batch with matching flags",
         ));
     }
     Ok(0)

@@ -263,6 +263,11 @@ def main():
         from lp_protocol import campaign, validate
         for kind in ["trial", "ledger"]:
             validate(kind, read_json(ROOT / f"examples/lp-{kind}-v1.synthetic.json"))
+        # The SPEC-0014 repeated-solve batch documents: the committed repeat request
+        # the CLI example consumes and a synthetic batch record. Validated here so
+        # the examples cannot drift from the schemas the batch evidence parses under.
+        validate("batch-request", read_json(ROOT / "examples/lp-batch-request-v1.json"))
+        validate("batch-endpoint", read_json(ROOT / "examples/lp-batch-endpoint-v1.synthetic.json"))
         campaign(ROOT / "benchmarks/configs/lp-campaign-v1.json")
         for path in sorted((ROOT / "benchmarks/manifests").glob("*.json")):
             if not path.name.startswith("lp-"):

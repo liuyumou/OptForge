@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-batch-endpoint-v1.schema.json",
+  "title": "LP batch endpoint v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "model_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "batch_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "requested_backend": {
+      "const": "cuda-lp-tuned"
+    },
+    "setup": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "phases_ns": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "device_context": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "module_load": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "preconditioning": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "research_preparation": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "invariant_allocation_upload": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": []
+        }
+      },
+      "required": [
+        "phases_ns"
+      ]
+    },
+    "solves": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "model_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "endpoint_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              {
+                "const": "-"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "solve_elapsed_ns": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "session_phases_ns": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "variant_rebind": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "engine_rebind": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "bound_upload": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": []
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "index",
+          "model_sha256",
+          "endpoint_sha256",
+          "status",
+          "solve_elapsed_ns",
+          "session_phases_ns",
+          "reason"
+        ]
+      }
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "model_sha256",
+    "batch_sha256",
+    "requested_backend",
+    "setup",
+    "solves",
+    "payload_sha256"
+  ]
+}

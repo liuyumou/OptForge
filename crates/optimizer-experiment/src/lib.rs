@@ -9,6 +9,7 @@
 //! implemented here; this crate records single runs.
 
 pub mod lp;
+pub mod lp_batch;
 mod run;
 mod serde_strict;
 pub mod sha256;

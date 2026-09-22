@@ -132,3 +132,25 @@ benchmarks/configs/lp-research-v2.json --id microbench-... --seconds ...` so the
 time is charged. Their numbers are diagnostics, never solve-time evidence.
 The [GPUP-5C report](../benchmarks/lp-fp64-pipe-gpup5c.md) defines the limits of
 the results.
+
+## GPUP-THROUGHPUT: repeated-solve sessions
+
+[SPEC-0014](../specifications/SPEC-0014-lp-repeated-solve-throughput.md) and
+[ADR-0023](../decisions/ADR-0023-repeated-solve-throughput.md), both accepted
+2026-09-20, add opt-in repeated-solve sessions. The public path is the
+`optimizer solve-batch` CLI command for cuda-lp-tuned; the research path adds
+`batch` and `verify-batch` actions to the isolated research executable for the
+intguard-fp64 and fused-fp64 modes only. A session fixes one matrix, objective
+and row bounds, and every solve starts from a fresh controller and the cold
+iterate with original-model host certification unchanged. Evidence is one
+directory per batch with individually verifiable per-solve records; amortized
+per-solve time is a separately labeled endpoint, never substituted for fresh
+single-solve latency. The frozen protocol is benchmarks/configs/lp-throughput-v1.json;
+its budget is 2700 study plus 600 acceptance seconds, 3300 combined, under identity
+gpup-throughput-v1 within the raised 8102.574545061-second cumulative ceiling.
+Existing commands, defaults, schemas and archived evidence are unchanged. The
+[GPUP-THROUGHPUT report](../benchmarks/lp-repeated-solve-throughput.md) verifies
+687 of 705 admitted attempts with 4785/4785 batch solves bitwise identical to
+fresh singles, records the session_ sanitizer coverage and the tuned_cases
+racecheck gap, and consumes 2617.929459541 study plus 538.371430691 acceptance
+seconds for 6951.059845871 cumulative.

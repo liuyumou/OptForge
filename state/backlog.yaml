@@ -11,7 +11,7 @@ active_research_track: GPUP
 # kernel time. Those costs are outside GPUP-6's adaptive-recovery scope. The slice
 # keeps its own specification, endpoint and budget: amortized throughput never
 # substitutes for the single-solve latency endpoint (ADR-0013).
-next_ready_task: GPUP-THROUGHPUT
+next_ready_task: GPUP-6
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: M0
@@ -163,8 +163,9 @@ tasks:
     acceptance: "Root-cause note; integer-guard/fused/double-float modes with CPU oracles and bitwise device differentials; research-v2 evidence; explicit tiers; manifest v2 extension with byte-identical v1 outputs; full native and four sanitizer gates; frozen gpup5c-v1 study verified"
   - id: GPUP-THROUGHPUT
     title: Repeated-solve throughput with explicit matrix and device reuse
-    status: ready
+    status: complete
     depends_on: [GPUP-5C]
+    specification: docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md
     acceptance: "Separate specification, API and resource budget accepted before implementation; amortized throughput plus complete setup-cost evidence; single-solve endpoint, protocol, defaults and archived evidence unchanged"
   - id: GPUP-6
     title: Implement configurable audits and adaptive precision recovery

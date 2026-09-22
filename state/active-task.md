@@ -1,5 +1,301 @@
 # Active Task
 
+## GPUP-THROUGHPUT integration and branch cleanup (2026-09-22)
+
+Integration follow-up: PR #8 is open, but both initial CPU workflows fail in
+`test_ledger_for_enforces_the_v3_ceiling_authority`: the test reads the ignored
+local campaign ledger absent from a clean checkout. Before merging, repair this
+one test with a temporary root, checked source/decision/authority files and a
+valid synthetic CPU-only ledger; retain ceiling, reference-hash, prefix and
+output-binding rejection checks. Validate the budget tests in a clean source
+checkout and rerun the complete native gate. No production budget code, frozen
+protocol, numerical settings, device work or live ledger changes. The CI logs
+are retained in artifacts/gpupt-integration-20260922.
+Repair evidence: all three budget-authority tests now pass in a fresh local clone
+with no campaign artifacts. The fixture uses actual temporary ledger/reference
+files and preserves all refusal cases; the live 8278-event ledger is unchanged.
+Only test code and integration documentation change. The complete native gate
+and new GitHub checks remain the final integration gates.
+
+
+Status: implementation acceptance complete; prepared for protected integration.
+The PR status and retained integration receipt record the final remote outcome.
+The user explicitly authorized opening a PR, merging when appropriate, and
+cleaning up the merged branch. Scope: verify the branch against
+current origin/main, inspect the reviewed changes and existing acceptance,
+run the pinned-native integration gate, publish the branch and a reviewable PR,
+wait for all required GitHub checks and review conversations, merge without
+bypassing protection, then fast-forward local main and delete only this merged
+local/remote feature branch. Preserve all benchmark artifacts and GPU ledgers.
+No release tag, hosting change, protection change or new GPU job is included.
+
+Resources: four build jobs, one CPU-hour, read-only GitHub inspection plus the
+explicitly authorized PR/push/merge/branch deletion. Existing numerical/device
+acceptance and the 7015.920961503-second campaign total are unchanged. Acceptance:
+full tools/check.sh, no unresolved new findings, current main ancestry, required
+cpu/docs/smoke checks on the PR, merged head ancestry, synchronized clean main,
+feature branch removed and all experiment evidence retained. The PR and local
+artifacts/gpupt-integration-20260922 receipt record the final remote outcome.
+
+
+
+Readiness evidence: origin/main remains 0e7811a, an ancestor of the five reviewed
+implementation/specification commits ending at cd1e958; no rebase is needed.
+All four review findings are fixed. Existing full native acceptance is 481 Rust
+results and 150 Python tests; fresh controls validate 360/360 variant comparisons,
+and both old/new verifiers validate 16/16 optimized diagnostic solve identities.
+The effective main rules require current cpu/docs/smoke checks and resolved
+conversations, with no mandatory approving review and no bypass. Merge commits
+are allowed and preserve archived source ancestry. No lockfile/dependency changes
+or raw experiment artifacts are included in the source diff. The 65536-row
+coverage and historical tuned_cases racecheck limitations remain explicit;
+experimental opt-in behavior and unchanged defaults make them documented scope
+limits rather than newly concealed supported-backend guarantees.
+
+
+## GPUP-THROUGHPUT validated host input reuse (2026-09-22)
+
+Status: complete after the review corrections committed as 2848b0d.
+Objective: remove repeated JSON parsing, canonical model serialization and sparse
+LP reconstruction from research evidence generation and verification. Reuse only
+independently validated immutable host inputs, with freshly materialized bounds
+for variants; every candidate evaluation, certificate and gap check remains per
+solve. Existing SPEC-0014 requirements 5, 8-10 and 15-17 govern this internal
+optimization; no public schema, numerical method, kernel or default changes.
+
+Acceptance: byte-identical raw/materialized evidence, stale assessment and model
+identity mutation rejection, historical v1/v2 mode/tier compatibility, paired
+CPU timings against the correction executable, full pinned-native tools/check.sh.
+If CPU evidence justifies it, at most two existing 32768-row N=8 fused-FP64 short
+batch cells (repeat and variant) may be rerun as explicitly scoped diagnostic
+acceptance of the producer path, with all original numerical settings and
+independent bitwise comparison. Freeze inputs/source before device admission;
+use one 48-second worker plus six-second reservation in the original study pool.
+No new campaign or allowance. Changes: experiment host assessment/evidence code,
+contract tests and performance report. Four build jobs and four CPU-hours.
+GPU start: 6982.408046756 s, 8276 events, hash b3451186b7a5fc0029fbbd612b07e795072476ab76137a78a375b1d97866c236.
+Remaining study 54.022860302 s; acceptance 58.328048581 s; combined 112.350908883 s.
+Preserve every prior prefix and the cumulative 8102.574545061-second ceiling.
+
+
+Acceptance evidence: full pinned-native tools/check.sh passed (481 Rust test
+results, 150 Python tests, 93 documentation pages and all other gates). New
+regression proves byte-identical raw/prepared evidence, fresh variant assessment,
+LP rebuild equality and wrong model hash/stale assessment refusal. Seventeen
+archived research-v1/v2 single endpoints across all twelve modes and three tiers
+reverify. Three paired CPU repetitions accept unchanged N=8 evidence and reduce
+verification medians 0.656→0.186 s (2048 repeat), 12.821→3.484 s (32768 repeat),
+12.832→7.344 s (32768 variant), versus the corrected operator-cache baseline.
+
+The two admitted large-batch producer diagnostics complete and are independently
+verified by both original and optimized executables: 16/16 per-solve bitwise
+identities match, with identical work-limit statuses. Whole process times are
+10.746/22.484 s versus historical 48.679/49.444 s (repeat/variant), one new
+repetition each; these are historical unpaired diagnostics, not single-solve
+latency, statistical claims or a supported preset. See the
+[host-input report](../docs/benchmarks/lp-throughput-host-input.md).
+
+New device charge 33.512914747 s; cumulative 7015.920961503 s. Study
+2679.490054445/2700, acceptance 541.671951419/600, combined 3221.162005864/3300.
+The 8278-event ledger SHA-256 is c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a;
+its 8276-event prefix b3451186b7a5fc0029fbbd612b07e795072476ab76137a78a375b1d97866c236
+and every earlier prefix remain intact. No GPU allowance was added; no kernels
+changed. Exact measured source 97a77c12e52a87d185442a168a5211dbba0019ebe46284f58c1b91aaf9cbb362
+and all receipts are in artifacts/gpupt-host-input-20260922. The earlier
+65536-row coverage and tuned_cases racecheck limitations remain explicit.
+
+
+## GPUP-THROUGHPUT review corrections (2026-09-22)
+
+Status: complete at the user's explicit request to fix the review findings.
+Objective: one bounded corrective slice for outcome identity, common session
+identity, actual binary64 comparisons and ordinary fresh-variant controls.
+Preserve the original study and ledger; then select a separate bounded host
+performance optimization if measurements justify one. GPUP-6 remains deferred.
+
+Contract: SPEC-0014 requirements 6, 13-17 and the accepted corrective addendum;
+ADR-0024 records the new follow-up protocol and shared (not additional) budget.
+Acceptance: targeted CPU regression/mutation tests, full pinned-native
+`bash tools/check.sh`, scoped device acceptance and corrected fresh controls
+under the existing shared lease and caps, independent endpoint verification,
+corrected analysis in a new artifact directory, updated report and task state.
+Files: tuned backend/session identity, batch verifier, study planner/analyzer,
+regression tests, corrective protocol, specifications and report.
+Resources: four build jobs, four CPU-hours. At start: campaign 6951.059845871 s,
+8178 events, SHA-256 dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6.
+Remaining GPUP-THROUGHPUT study 82.070540459 s, acceptance 61.628569309 s;
+combined 143.699109768 s, cumulative ceiling 8102.574545061 s unchanged.
+All admitted GPU work retains prefix gpupt and old phase/combined caps; no new
+allowance, prefix reset, kernel arithmetic or default change.
+
+Acceptance evidence: full pinned-native tools/check.sh passes, including the
+new Rust outcome/session-identity regressions and 150 Python tests. All 48
+ordinary fresh-variant controls completed, independently verified and certified;
+360/360 retained batch variants match their binary64 numerical/work identities.
+The original-study reanalysis independently verifies 687/705 endpoints, with
+4425/4425 ordinary-single repeat pairs, 360/360 historical N=1-session pairs
+and 2451/2451 cross-mode pairs; partner labels remain explicit. The cancellation endpoint regression passes on the device and
+under all four scoped sanitizers with zero errors/hazards; this does not close
+the earlier tuned_cases racecheck gap. See the
+[correction report](../docs/benchmarks/lp-throughput-corrections.md).
+
+New study work: 28.047680157 s; acceptance: 3.300520728 s. Cumulative campaign:
+6982.408046756 s; study 2645.977139698/2700, acceptance 541.671951419/600,
+combined 3187.649091117/3300. The 8276-event ledger SHA-256 is
+b3451186b7a5fc0029fbbd612b07e795072476ab76137a78a375b1d97866c236;
+the original 8178-event prefix remains dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6.
+Measured controls source identity: 73936de19b351cc4f89328355c49fbcba7acf38024854067b0c004809bcaca6b.
+Artifacts: artifacts/gpup-throughput-controls-v1 (archived source, protocol,
+binaries, models, controls, comparisons and original reanalysis) and
+artifacts/gpup-throughput-review-acceptance (scoped device receipts). Original
+study artifacts and numerical kernels are unchanged.
+
+## GPUP-THROUGHPUT branch review and bounded performance repair (2026-09-22)
+
+Status: complete. Reviewed feat/gpup-throughput at 14a1a88 against main at
+0e7811a; [PR findings and CPU measurements](../docs/benchmarks/lp-throughput-review.md)
+recommend request changes for four unresolved correctness/evidence findings.
+One bounded host verification performance repair is implemented and accepted;
+this is a review of the completed slice, not GPUP-6 implementation.
+
+Objective: identify reproducible PR findings and, if supported by measurements,
+complete one bounded host-side performance repair within SPEC-0014. Preserve
+numerical behavior, protocol, frozen artifacts and the GPU ledger.
+
+Acceptance: focused CPU regressions and performance evidence for any repair,
+then full pinned-native `bash tools/check.sh`; PR review references verified lines
+and distinguishes archived GPU receipts from checks run during this review.
+Likely files: session/batch evidence paths in optimizer-lp, optimizer-lp-cuda,
+optimizer-experiment and optimizer-cli, relevant contract tests and documentation.
+Resources: at most four build jobs, four CPU-hours; initially zero GPU jobs.
+Any device validation must use the shared lease and existing phase/campaign caps;
+no allowance or ledger reset is authorized by this review.
+
+Acceptance evidence: full pinned-native `bash tools/check.sh` passed on the
+repair (477 Rust test results, 148 Python integration tests, 90 documentation
+pages, schema/provenance/replay/smoke and static checks). Three added CPU tests
+cover byte-identical cached/uncached evidence, fresh bound-dependent assessment,
+provenance mutation, matrix/method/mode invalidation and one independent metadata
+preparation across producer and final directory checks. All 11 research evidence
+tests pass; 17 archived single endpoints covering all twelve modes, v1/v2 and
+three tolerance tiers reverify. Two temporary CPU tests reproduced invalid
+failure endpoint identity and acceptance of mixed code-object identities; a
+Python probe reproduced signed-zero equality. These are review findings, not
+newly injected GPU faults.
+
+CPU-only N=8 archived batch verification, three paired repetitions: 0.970→0.638 s
+(irregular-2048 repeat), 18.905→12.732 s (irregular-32768 repeat), and
+19.366→12.737 s (irregular-32768 variant), 1.48–1.52x faster. All 18 timed calls
+accepted unchanged evidence. No end-to-end GPU throughput claim. Raw timing,
+compatibility, reproductions, measured candidate and acceptance logs are retained
+in artifacts/gpupt-review-cpu-20260922; tools/benchmark_lp_batch_verify.py
+reproduces the CPU endpoint. Zero GPU jobs ran: the 8178-event campaign ledger
+retains 6951.059845871 seconds and SHA-256
+dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6.
+Original protocols, measured archives and code objects remain unchanged.
+
+## GPUP-THROUGHPUT: specification, ADR and budget before behavior (2026-09-20)
+
+Status: complete. Phase A is committed as 0d5d713 with its full pinned-native
+gate receipt; Phases B-E are the implementation commit on top of it. The
+[repeated-solve report](../docs/benchmarks/lp-repeated-solve-throughput.md)
+holds the Phase E evidence; GPUP-6 is next_ready_task and requires its bounded
+adaptive contract before behavior. The working tree carried the optimizer-lp
+PreparedMatrix/Engine::from_prepared refactor, TunedSession and
+ResearchSession with residency bound rebinding, solve-batch/materialize/verify-batch
+CLI, lp_batch and research batch documents, both frozen schemas, lp_variants.py,
+benchmark_lp_throughput.py (705 planned attempts) and the session_ device cases. The
+backlog reorder record below stays as the history of how this slice was selected.
+
+Objective: implement GPUP-THROUGHPUT (state/backlog.yaml next_ready_task) in phases,
+beginning with its accepted bounded contract: SPEC-0014 (repeated-solve sessions for
+cuda-lp-tuned and the research executable), ADR-0023 (two opt-in paths, variant rule,
+bitwise-identity rule, frozen resources) and the frozen protocol
+benchmarks/configs/lp-throughput-v1.json carrying its own ceiling authority. A batch
+fixes one matrix, objective and row bounds; solves are identical repeats or per-solve
+variable-bound variants tightened around the instance's frozen witness. The
+fresh-process single-solve endpoint, protocol, defaults and archived evidence stay
+unchanged; amortized throughput is a separately labeled endpoint, never substituted
+(ADR-0013, SPEC-0013 requirements 10-13).
+
+Acceptance gate per phase: Phase A (this record) — full pinned-native
+bash tools/check.sh with zero GPU work, committed as documentation only. Phases B-D —
+full gate plus Python integration tests; device session_ cases and all four scoped
+sanitizers under the shared lease. Phase E — frozen study under identity
+gpup-throughput-v1, independent verification of every admitted attempt, bitwise
+identity counts, report and final gate.
+
+Likely files: docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md,
+docs/decisions/ADR-0023-repeated-solve-throughput.md,
+benchmarks/configs/lp-throughput-v1.json, crates/optimizer-lp (problem.rs, pdhg.rs),
+crates/optimizer-lp-cuda (residency.rs, backend.rs, session.rs, research.rs),
+crates/optimizer-experiment (lp_batch.rs, lp_research.rs, example), crates/optimizer-cli
+(batch.rs, lp_study.rs, main.rs), schemas/lp-batch-request-v1/lp-batch-endpoint-v1,
+tools (lp_variants.py, benchmark_lp_throughput.py, analyze_lp_throughput.py,
+lp_research_budget.py), tests, and the documentation set named in SPEC-0014.
+
+Resource budget: four build jobs; four-hour CPU validation ceiling. GPU only after
+ADR-0023 is accepted: study 2700 s plus acceptance 600 s (combined 3300 s) under
+identity gpup-throughput-v1, inside a cumulative ceiling of 8102.574545061 seconds
+(4502.574545061 + 3600). Preserve the 6722-event ledger prefix SHA-256
+ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b and 3794.758955639
+consumed seconds; campaign 28800 s and phase caps unchanged. Phase A runs zero GPU work.
+
+Evidence: full pinned-native bash tools/check.sh passed on the Phase A tree
+(source identity 1620d714af9b4f84e41303b7d1c17ae47dbcd1481d7993c873dde5901036035;
+441 Rust tests, 131 Python tests, 88 documentation pages with valid links/anchors,
+artifact schemas and committed-record replay). SPEC-0014, ADR-0023 and the frozen
+lp-throughput-v1 protocol (planned 705 attempts, ceiling 8102574545061 ns embedding
+source campaign hash b40217f3... and decision hash 06f28fbf...) are committed as
+documentation. No GPU job ran; the campaign ledger is untouched.
+
+Phase B-D evidence (2026-09-20): full pinned-native bash tools/check.sh passed on the
+implementation tree (source identity 3a10d41228d2e70b8ce1a544b21c7657a58935e870c33985b185041273df6f36;
+146 Python tests including 15 throughput grid/variant/budget/analysis gates, 88
+documentation pages with valid links/anchors, artifact schemas and committed-record
+replay; log /tmp/gpupt-gate-b2.log). Resumed work added tools/analyze_lp_throughput.py
+(separate-endpoint labeling, bitwise identity counts), the lp_gpu_cli_check.py
+solve-batch/verify-batch section, the v3 acceptance ledger authority in
+lp_research_budget.py's main, the CHANGELOG behavior entry and SPEC-0014
+implementation/test mappings. The Rust workspace test suite passes across 54
+binaries with zero failures; the eight session_ device cases compile and await
+their leased acceptance run. No GPU job has run; the campaign ledger is untouched.
+
+Phase E evidence (2026-09-21): the frozen gpup-throughput-v1 study admitted all 705
+planned attempts; 687 verified independently with the archived executables and 18
+(the 65536-row N=8 short batches, both kinds, three repetitions) stopped at their
+58-second reservations without endpoints, charged and retained. Batch solves are
+bitwise identical to fresh singles on 4785/4785 compared pairs; fused and intguard
+research trajectories agree on 2451/2451 numerical comparisons (launch counts
+differ by construction). Study 2617.929459541/2700, acceptance 538.371430691/600,
+combined 3156.300890232/3300, cumulative 6951.059845871/8102.574545061 GPU seconds;
+the 8178-event ledger SHA-256 dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6
+preserves the 6722-event prefix ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b,
+with all 728 new reservations settled. Device acceptance passed on
+GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48: regular suites on both binaries, all
+session_ cases under all four scoped sanitizers with zero errors/hazards, the
+research_ cases under all four, the study_observation/matched_control/tuned_cases
+filters under memcheck/initcheck/synccheck, and the CLI evidence check including
+solve-batch, materialize, verify-batch and the pinned fallback. Retained failures:
+one stale-binary launch, one three-defect session-test run and two CLI-check
+failures (all fixed before final evidence), one session-racecheck reservation
+timeout (retried, passed 116.8 s), and the pre-existing-filters racecheck that
+timed out after study_observation and matched_control passed clean; tuned_cases
+lacks a racecheck receipt because the frozen acceptance cap left 61.6 seconds, and
+the gap is recorded in the report and known failures, not relabeled. The measured
+source tree 6343d622025803e6e9637612c8fd05d30832b138788ab652fe5ed791f245b1ea
+(optimizer 6498e4f3e126cd24d3bb2587dadd792857a4819ec44ac5f6ddbd3f009e087676,
+research ec778ceeba80bc072525c4447863a46e892d72bc11fc94d151c088a4ab776e1e, code
+object 6a743e1e745159f304168124800eec86891c641dfe9f18a91c0aa11d0555b7a2 unchanged
+from GPUP-5C) is archived in artifacts/gpup-throughput-v1 with protocol, jobs,
+ledger snapshot and analysis.json (analysis tool
+2916421b148e70ebb676a6e353fdf745fd1af8c9768fbcc66463070b3de40448). The
+[report](../docs/benchmarks/lp-repeated-solve-throughput.md) keeps the amortized
+endpoint separate and records the N=1 and 32768-row negative results. The
+post-measurement changes are the analysis-tool tuple fix and cross-mode
+launch-count exclusion (each with a regression test), documentation and state
+records; measured kernels, sessions and frozen evidence are unchanged.
+
 ## GPUP-THROUGHPUT pulled ahead of GPUP-6; GPUP-5/5B/5C integrated (2026-09-20)
 
 Status: ready; no behavior implemented. PR #6 merged branch
