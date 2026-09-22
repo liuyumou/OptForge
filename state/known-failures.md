@@ -1,5 +1,18 @@
 # Known Failures and Limitations
 
+## PR #8 clean-checkout budget test failure corrected
+
+Both initial CPU workflows failed because the throughput budget-authority test
+read the ignored local GPU campaign ledger. A checkout with retained study data
+masked that dependency. The test now uses a temporary root, unchanged checked
+source/decision/authority files and a valid synthetic CPU-only ledger. Real
+checksum, ceiling, prefix and output-binding rejection checks remain enabled;
+all three budget tests pass in a fresh source checkout with no campaign artifacts.
+The frozen production pins are still checked separately. No production accounting
+code or live campaign data changed. Initial CI failure and clean-checkout receipts
+are retained in artifacts/gpupt-integration-20260922; final integration still
+requires the complete native gate and GitHub's required checks.
+
 ## GPUP-THROUGHPUT review findings corrected
 
 The [correction report](../docs/benchmarks/lp-throughput-corrections.md) closes

@@ -2,6 +2,22 @@
 
 ## GPUP-THROUGHPUT integration and branch cleanup (2026-09-22)
 
+Integration follow-up: PR #8 is open, but both initial CPU workflows fail in
+`test_ledger_for_enforces_the_v3_ceiling_authority`: the test reads the ignored
+local campaign ledger absent from a clean checkout. Before merging, repair this
+one test with a temporary root, checked source/decision/authority files and a
+valid synthetic CPU-only ledger; retain ceiling, reference-hash, prefix and
+output-binding rejection checks. Validate the budget tests in a clean source
+checkout and rerun the complete native gate. No production budget code, frozen
+protocol, numerical settings, device work or live ledger changes. The CI logs
+are retained in artifacts/gpupt-integration-20260922.
+Repair evidence: all three budget-authority tests now pass in a fresh local clone
+with no campaign artifacts. The fixture uses actual temporary ledger/reference
+files and preserves all refusal cases; the live 8278-event ledger is unchanged.
+Only test code and integration documentation change. The complete native gate
+and new GitHub checks remain the final integration gates.
+
+
 Status: implementation acceptance complete; prepared for protected integration.
 The PR status and retained integration receipt record the final remote outcome.
 The user explicitly authorized opening a PR, merging when appropriate, and

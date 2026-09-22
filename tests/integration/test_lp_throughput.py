@@ -1,7 +1,9 @@
 """GPUP-THROUGHPUT: frozen grid, variant contract, budget authority and byte pins."""
 from collections import Counter
+from dataclasses import replace
 from fractions import Fraction as F
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -12,7 +14,7 @@ sys.path.insert(0,str(ROOT/'tools'))
 from benchmark_lp_throughput import command,SINGLE_VARIANT_KIND,KINDS,protocol,jobs,label,settings_for,batch_request_for,research_batch_request_for
 from analyze_lp_throughput import (FRESH_ENDPOINT,AMORTIZED_ENDPOINT,SEPARATE_TITLE,COVERAGE_KINDS,amortized,identity_count,
                                    tuned_bits,research_bits,cross_mode_bits,tuned_exit_code,expected_batch_exit,check_endpoint_separation)
-from lp_protocol import NS,file_hash,read_json,write_json
+from lp_protocol import NS,Ledger,file_hash,read_json,write_json
 from lp_research_budget import STUDY_V1,Study,ledger_for
 import lp_variants
 CONFIG=ROOT/'benchmarks/configs/lp-throughput-v1.json'
@@ -210,21 +212,51 @@ class BudgetAuthorityTests(unittest.TestCase):
         with self.assertRaises(ValueError):Study.from_protocol(dict(value,schema_version=4))
     def test_ledger_for_enforces_the_v3_ceiling_authority(self):
         value=read_json(CONFIG)
-        study=Study.from_protocol(value)
-        ledger=ledger_for(study,protocol=value)
-        self.assertEqual(ledger.slice_ns,study.cumulative_ceiling_ns)
         source=read_json(ROOT/value['source_campaign']['path'])
-        self.assertEqual(study.cumulative_ceiling_ns,source['cumulative_gpu_ns']+study.additional_ns)
-        wrong_decision=dict(value,decision=dict(value['decision'],sha256='0'*64))
-        with self.assertRaises(ValueError):ledger_for(study,protocol=wrong_decision)
-        wrong_source=dict(value,source_campaign=dict(value['source_campaign'],sha256='0'*64))
-        with self.assertRaises(ValueError):ledger_for(study,protocol=wrong_source)
-        wrong_ceiling=dict(value,cumulative_ceiling_ns=value['cumulative_ceiling_ns']-1)
-        with self.assertRaises(ValueError):ledger_for(Study.from_protocol(wrong_ceiling),protocol=wrong_ceiling)
-        # Without the protocol the v1/v2 rule applies unchanged and refuses the
-        # raised ceiling, which differs from the source campaign's consumption.
-        with self.assertRaises(ValueError):ledger_for(study)
-        self.assertEqual(ledger_for(STUDY_V1).slice_ns,STUDY_V1.cumulative_ceiling_ns)
+        # A clean checkout has no retained GPU campaign. Exercise the real
+        # reference, prefix and output-binding checks in a temporary root;
+        # immutable production protocol pins remain checked separately below.
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            for ref in [value['source_campaign'],value['decision'],source['budget_authority']]:
+                path=root/ref['path'];path.parent.mkdir(parents=True,exist_ok=True)
+                shutil.copyfile(ROOT/ref['path'],path)
+            authority=read_json(root/source['budget_authority']['path'])
+            directory=root/'artifacts/lp-campaign-ledgers'/authority['id']
+            with Ledger(directory,source['budget_authority']['sha256']) as fixture:
+                fixture.bind_output(root/'artifacts/gpup-baseline-v1')
+                reservation=fixture.reserve('synthetic-cpu-fixture',1,resource='cpu')
+                fixture.settle(reservation,NS)
+            prefix=(directory/'ledger.jsonl').read_bytes()
+            value=dict(value,prior_events=2,prior_gpu_ns=0,prior_ledger_sha256=file_hash(directory/'ledger.jsonl'))
+            study=Study.from_protocol(value)
+            with patch('lp_research_budget.ROOT',root):
+                ledger=ledger_for(study,protocol=value)
+                self.assertEqual(ledger.directory,directory)
+                self.assertEqual(ledger.slice_ns,study.cumulative_ceiling_ns)
+                self.assertEqual(study.cumulative_ceiling_ns,source['cumulative_gpu_ns']+study.additional_ns)
+                wrong_decision=dict(value,decision=dict(value['decision'],sha256='0'*64))
+                with self.assertRaisesRegex(ValueError,'artifact checksum mismatch'):
+                    ledger_for(study,protocol=wrong_decision)
+                wrong_source=dict(value,source_campaign=dict(value['source_campaign'],sha256='0'*64))
+                with self.assertRaisesRegex(ValueError,'artifact checksum mismatch'):
+                    ledger_for(study,protocol=wrong_source)
+                wrong_ceiling=dict(value,cumulative_ceiling_ns=value['cumulative_ceiling_ns']-1)
+                with self.assertRaisesRegex(ValueError,'cumulative ceiling'):
+                    ledger_for(Study.from_protocol(wrong_ceiling),protocol=wrong_ceiling)
+                # Omitting the v3 protocol must still refuse its raised ceiling;
+                # the old allowance remains accepted with the same fixture.
+                with self.assertRaisesRegex(ValueError,'cumulative ceiling'):
+                    ledger_for(study)
+                legacy=replace(STUDY_V1,prior_events=2,prior_hash=study.prior_hash,prior_ns=0)
+                self.assertEqual(ledger_for(legacy).slice_ns,STUDY_V1.cumulative_ceiling_ns)
+                with self.assertRaisesRegex(ValueError,'historical ledger prefix'):
+                    ledger_for(replace(study,prior_hash='0'*64),protocol=value)
+                binding=read_json(directory/'output.json')
+                write_json(directory/'output.json',dict(binding,output_path=str(root/'wrong-output')))
+                with self.assertRaisesRegex(ValueError,'original output binding'):
+                    ledger_for(study,protocol=value)
+            self.assertEqual((directory/'ledger.jsonl').read_bytes(),prefix)
     def test_frozen_protocol_self_consistency_and_byte_pins(self):
         value=read_json(CONFIG)
         source=read_json(ROOT/value['source_campaign']['path'])

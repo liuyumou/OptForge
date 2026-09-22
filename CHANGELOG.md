@@ -12,6 +12,10 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Fixed
 
+- Make throughput budget-authority tests independent of retained local campaign
+  artifacts, using a real temporary CPU ledger while preserving reference,
+  ceiling, prefix and output-binding checks in clean checkouts.
+
 - GPUP-THROUGHPUT review corrections: stamp tuned identity on failure and
   cancellation; reject mixed method/code identities and fallback in batch
   verification; compare binary64 encodings, including signed zero. ADR-0024
