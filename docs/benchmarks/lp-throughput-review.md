@@ -9,6 +9,9 @@ repair below preceded those corrections.
 The [original throughput report](lp-repeated-solve-throughput.md), protocol,
 measurements, code objects and campaign ledger are retained unchanged.
 
+The subsequent [host-input repair](lp-throughput-host-input.md) adds further CPU
+verification and scoped whole-batch performance evidence, preserving all results.
+
 ## Review findings
 
 1. **P1 — Stamp the tuned identity on every session outcome.**

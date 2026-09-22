@@ -125,9 +125,60 @@ impl Request {
         Ok(())
     }
 }
-fn assessment(bytes: &[u8], w: &Witness) -> Result<Assessment, ValidationError> {
-    let model = Model::from_json(bytes)?;
-    let program = LinearProgram::new(&model)?;
+// A private, independently constructed host input. Its model, canonical LP and
+// exact-byte identity are inseparable; neither device data nor evidence supplies
+// them. A batch holds one base and at most one materialized bounds variant.
+struct HostInput {
+    model: Model,
+    program: LinearProgram,
+    model_sha256: String,
+}
+
+impl HostInput {
+    fn from_bytes(bytes: &[u8]) -> Result<Self, ValidationError> {
+        let model = Model::from_json(bytes)?;
+        let program = LinearProgram::new(&model)?;
+        Ok(Self {
+            model,
+            program,
+            model_sha256: crate::sha256::hex(bytes),
+        })
+    }
+
+    fn canonical(model: Model) -> Result<Self, ValidationError> {
+        let program = LinearProgram::new(&model)?;
+        let model_sha256 = crate::sha256::hex(model.to_json()?.as_bytes());
+        Ok(Self {
+            model,
+            program,
+            model_sha256,
+        })
+    }
+
+    // Only materialize may supply the changed model: it preserves the base's
+    // matrix, objective, domains and row bounds by construction. Rebinding this
+    // host LP is therefore equivalent to a full conversion of the variant.
+    fn variant(
+        &self,
+        request: &crate::lp_batch::BatchRequest,
+        index: u32,
+    ) -> Result<Option<Self>, ValidationError> {
+        if request.kind == crate::lp_batch::BatchKind::Repeat {
+            return Ok(None);
+        }
+        let (model, _, model_sha256) = crate::lp_batch::materialize(&self.model, request, index)?;
+        let program = self.program.with_variable_bounds(&model)?;
+        Ok(Some(Self {
+            model,
+            program,
+            model_sha256,
+        }))
+    }
+}
+
+fn assessment(input: &HostInput, w: &Witness) -> Result<Assessment, ValidationError> {
+    let model = &input.model;
+    let program = &input.program;
     let candidate = w.primal.as_ref().map(|p| Candidate {
         schema_version: 1,
         model_id: model.document().model_id.clone(),
@@ -145,13 +196,13 @@ fn assessment(bytes: &[u8], w: &Witness) -> Result<Assessment, ValidationError> 
     let bound = w
         .dual
         .as_ref()
-        .and_then(|v| certify(&program, v).ok())
+        .and_then(|v| certify(program, v).ok())
         .map(|c| c.bound);
     let gap = report
         .as_ref()
         .filter(|v| v.feasible)
         .and(w.primal.as_ref())
-        .and_then(|p| bound.and_then(|b| assess_gap(&program, p, b, w.request.options.tolerances)))
+        .and_then(|p| bound.and_then(|b| assess_gap(program, p, b, w.request.options.tolerances)))
         .map(|g| g.upper);
     let termination = match w.status.as_str() {
         "accepted" => Termination::Feasible,
@@ -184,7 +235,7 @@ fn assessment(bytes: &[u8], w: &Witness) -> Result<Assessment, ValidationError> 
     };
     let mut d = LpDiagnostics::new(true, false);
     d.dual = w.dual.clone();
-    crate::lp::assess(&model, &record, &d)
+    crate::lp::assess_program(model, program, &record, &d)
 }
 // Only matrix-derived verification metadata is reusable. This cache is private,
 // rebuilt from the original host model (never session/device observations), and
@@ -284,13 +335,21 @@ impl Evidence {
         witness: Witness,
         operator_cache: Option<&mut OperatorCache>,
     ) -> Result<Self, ValidationError> {
+        let input = HostInput::from_bytes(bytes)?;
+        Self::new_for_input(&input, witness, operator_cache)
+    }
+    fn new_for_input(
+        input: &HostInput,
+        witness: Witness,
+        operator_cache: Option<&mut OperatorCache>,
+    ) -> Result<Self, ValidationError> {
         let result = Self {
             schema_version: witness.request.schema_version,
-            assessment: assessment(bytes, &witness)?,
+            assessment: assessment(input, &witness)?,
             payload_sha256: crate::sha256::hex(&serde_json::to_vec(&witness).map_err(invalid)?),
             witness,
         };
-        result.verify_with_cache(bytes, &result.witness.request, operator_cache)?;
+        result.verify_for_input(input, &result.witness.request, operator_cache)?;
         Ok(result)
     }
     pub fn verify(&self, bytes: &[u8], expected: &Request) -> Result<(), ValidationError> {
@@ -302,13 +361,22 @@ impl Evidence {
         expected: &Request,
         operator_cache: Option<&mut OperatorCache>,
     ) -> Result<(), ValidationError> {
+        let input = HostInput::from_bytes(bytes)?;
+        self.verify_for_input(&input, expected, operator_cache)
+    }
+    fn verify_for_input(
+        &self,
+        input: &HostInput,
+        expected: &Request,
+        operator_cache: Option<&mut OperatorCache>,
+    ) -> Result<(), ValidationError> {
         let w = &self.witness;
         w.request.validate()?;
-        let model = Model::from_json(bytes)?;
-        let p = LinearProgram::new(&model)?;
+        let model = &input.model;
+        let p = &input.program;
         if self.schema_version != w.request.schema_version
             || &w.request != expected
-            || w.request.model_sha256 != crate::sha256::hex(bytes)
+            || w.request.model_sha256 != input.model_sha256
             || self.payload_sha256 != crate::sha256::hex(&serde_json::to_vec(w).map_err(invalid)?)
             || w.variable_ids != p.variable_ids()
             || w.row_ids
@@ -334,7 +402,7 @@ impl Evidence {
                 .as_ref()
                 .is_some_and(|v| v.len() != p.row_count() || v.iter().any(|x| !x.is_finite()))
             || w.primal.is_some() != w.dual.is_some()
-            || self.assessment != assessment(bytes, w)?
+            || self.assessment != assessment(input, w)?
         {
             return Err(invalid(
                 "research evidence identity, work or assessment differs",
@@ -391,9 +459,9 @@ impl Evidence {
         if w.operator_bounds.is_some() || w.executed_device.is_some() {
             let uncached;
             let op = if let Some(cache) = operator_cache {
-                cache.get(&p, &w.request)?
+                cache.get(p, &w.request)?
             } else {
-                uncached = OperatorVerification::new(&p, w.request.method, w.request.mode)?;
+                uncached = OperatorVerification::new(p, w.request.method, w.request.mode)?;
                 &uncached
             };
             if w.operator_bounds != Some(op.bounds)
@@ -404,7 +472,7 @@ impl Evidence {
                 return Err(invalid("operator/scaling provenance differs"));
             }
             if let Some(peak) = w.diagnostics.device_buffer_peak_bytes {
-                let expected = optimizer_lp_cuda::research::peak_buffer_bytes(&p, w.request.mode)
+                let expected = optimizer_lp_cuda::research::peak_buffer_bytes(p, w.request.mode)
                     .map_err(invalid)?;
                 if peak != expected
                     || w.execution
@@ -913,7 +981,7 @@ impl ResearchBatchEvidence {
         if self.schema_version != 1 || self.request.model_sha256 != crate::sha256::hex(base_bytes) {
             return Err(invalid("research batch version/model differs"));
         }
-        let base = Model::from_json(base_bytes)?;
+        let base = HostInput::canonical(Model::from_json(base_bytes)?)?;
         crate::lp_batch::check_phases(&self.setup.phases_ns, &crate::lp_batch::SETUP_PHASES)?;
         if self.solves.len() != self.request.batch.solves as usize
             || self
@@ -936,9 +1004,9 @@ impl ResearchBatchEvidence {
                 &solve.session_phases_ns,
                 &crate::lp_batch::SOLVE_PHASES,
             )?;
-            let (_, bytes, materialized_sha256) =
-                crate::lp_batch::materialize(&base, &self.request.batch, solve.index)?;
-            if solve.model_sha256 != materialized_sha256 {
+            let variant = base.variant(&self.request.batch, solve.index)?;
+            let input = variant.as_ref().unwrap_or(&base);
+            if solve.model_sha256 != input.model_sha256 {
                 return Err(invalid("research batch solve model differs"));
             }
             let path = dir.join(crate::lp_batch::solve_file_name(solve.index));
@@ -950,8 +1018,8 @@ impl ResearchBatchEvidence {
                         return Err(invalid("research solve evidence hash differs"));
                     }
                     let evidence = Evidence::from_json(&file_bytes)?;
-                    evidence.verify_with_cache(
-                        &bytes,
+                    evidence.verify_for_input(
+                        input,
                         &self.request.solve_request(solve.model_sha256.clone()),
                         Some(operator_cache),
                     )?;
@@ -1056,20 +1124,24 @@ pub fn solve_batch(
     if request.model_sha256 != crate::sha256::hex(bytes) {
         return Err(invalid("model hash differs"));
     }
-    let base = Model::from_json(bytes)?;
-    let program = LinearProgram::new(&base)?;
+    let base = HostInput::canonical(Model::from_json(bytes)?)?;
     // Every variant is materialized before any device open, so a malformed
     // change list refuses the batch before allocation or upload (requirement
     // 11); the hashes are the per-solve identities.
     let mut materialized = Vec::with_capacity(request.batch.solves as usize);
     for index in 0..request.batch.solves {
-        materialized.push(crate::lp_batch::materialize(&base, &request.batch, index)?.2);
+        materialized.push(match request.batch.kind {
+            crate::lp_batch::BatchKind::Repeat => base.model_sha256.clone(),
+            crate::lp_batch::BatchKind::Variant => {
+                crate::lp_batch::materialize(&base.model, &request.batch, index)?.2
+            }
+        });
     }
     let batch_deadline = Instant::now() + Duration::from_millis(request.batch.batch_time_limit_ms);
     let mut setup = SessionSetup::default();
     let mut solves: Vec<ResearchBatchSolve> = Vec::with_capacity(request.batch.solves as usize);
     let (mut session, resident, peak) =
-        match open_research_session(&base, request, cancel, &mut setup) {
+        match open_research_session(&base.model, request, cancel, &mut setup) {
             Ok(opened) => opened,
             Err(reason) => {
                 for (index, model_sha256) in materialized.iter().enumerate() {
@@ -1097,13 +1169,15 @@ pub fn solve_batch(
             }
             break;
         }
-        let (variant, variant_bytes, model_sha256) =
-            crate::lp_batch::materialize(&base, &request.batch, index)?;
+        let variant = base.variant(&request.batch, index)?;
+        let input = variant.as_ref().unwrap_or(&base);
+        let model_sha256 = input.model_sha256.clone();
         let mut w = Witness {
             request: request.solve_request(model_sha256.clone()),
             executed_device: Some(session.device().uuid.clone()),
             variable_ids: session.program().variable_ids().to_vec(),
-            row_ids: variant
+            row_ids: input
+                .model
                 .document()
                 .constraints
                 .iter()
@@ -1141,7 +1215,7 @@ pub fn solve_batch(
         counters.allocated_bytes = resident.allocated_bytes;
         let admitted = match request.batch.kind {
             crate::lp_batch::BatchKind::Repeat => None,
-            crate::lp_batch::BatchKind::Variant => Some(&variant),
+            crate::lp_batch::BatchKind::Variant => Some(&input.model),
         };
         let solve = match session.prepare_solve(admitted, &mut counters) {
             Ok(solve) => solve,
@@ -1180,7 +1254,7 @@ pub fn solve_batch(
                 &mut c,
                 solve.executor,
                 &solve.engine,
-                &variant,
+                &input.model,
                 solve.program,
                 cancel,
                 &mut w,
@@ -1196,8 +1270,8 @@ pub fn solve_batch(
             // solves are recorded not_attempted (requirement 13).
             session.poison(w.failure.clone().unwrap_or_else(|| "device fault".into()));
         }
-        finish_witness(&program, &mut w);
-        match Evidence::new_with_cache(&variant_bytes, w, Some(&mut operator_cache)) {
+        finish_witness(&input.program, &mut w);
+        match Evidence::new_for_input(input, w, Some(&mut operator_cache)) {
             Ok(evidence) => {
                 let status = evidence.witness.status.clone();
                 let file = serde_json::to_vec_pretty(&evidence).map_err(invalid)?;
@@ -1285,6 +1359,69 @@ mod tests {
         w.primal = Some(vec![0.5, 1.0]);
         w.dual = Some(vec![-1.0]);
         w
+    }
+
+    #[test]
+    fn prepared_host_inputs_preserve_bytes_and_bind_fresh_variant_bounds() {
+        let base = HostInput::canonical(Model::from_json(MODEL).unwrap()).unwrap();
+        // Canonical batch bytes and the caller's input bytes are distinct
+        // identities even when they describe the same mathematical model.
+        assert_ne!(base.model_sha256, crate::sha256::hex(MODEL));
+        let mut request = batch_request(Mode::FusedFp64);
+        request.batch.variants[0].changes[0].upper = 0.25;
+        request.batch.variants[0].changes[0].lower = 0.0;
+        let mut assessments = Vec::new();
+        let mut cache = OperatorCache::default();
+        for index in 0..request.batch.solves {
+            let variant = base.variant(&request.batch, index).unwrap().unwrap();
+            let (_, bytes, hash) =
+                crate::lp_batch::materialize(&base.model, &request.batch, index).unwrap();
+            assert_eq!(variant.model_sha256, hash);
+            assert_eq!(variant.program, LinearProgram::new(&variant.model).unwrap());
+            let witness = host_witness(&bytes, request.mode, request.method);
+            let raw = Evidence::new(&bytes, witness.clone()).unwrap();
+            let prepared = Evidence::new_for_input(&variant, witness, Some(&mut cache)).unwrap();
+            assert_eq!(
+                serde_json::to_vec(&prepared).unwrap(),
+                serde_json::to_vec(&raw).unwrap()
+            );
+            prepared.verify(&bytes, &prepared.witness.request).unwrap();
+            // Hashing a fresh model cannot excuse an old bound assessment.
+            for old in &assessments {
+                assert_ne!(&prepared.assessment, old);
+                let mut stale = prepared.clone();
+                stale.assessment = old.clone();
+                assert!(
+                    stale
+                        .verify_for_input(&variant, &stale.witness.request, Some(&mut cache))
+                        .is_err()
+                );
+            }
+            assessments.push(prepared.assessment.clone());
+            // Rehashing an altered witness does not detach it from its input.
+            let mut wrong = prepared;
+            wrong.witness.request.model_sha256 = base.model_sha256.clone();
+            wrong.payload_sha256 = crate::sha256::hex(&serde_json::to_vec(&wrong.witness).unwrap());
+            assert!(
+                wrong
+                    .verify_for_input(&variant, &wrong.witness.request, Some(&mut cache))
+                    .is_err()
+            );
+        }
+        assert_eq!(cache.preparations, 1);
+        request.batch.kind = crate::lp_batch::BatchKind::Repeat;
+        request.batch.variants.clear();
+        request.batch.generator = None;
+        request.validate().unwrap();
+        for index in 0..request.batch.solves {
+            assert!(base.variant(&request.batch, index).unwrap().is_none());
+            assert_eq!(
+                base.model_sha256,
+                crate::lp_batch::materialize(&base.model, &request.batch, index)
+                    .unwrap()
+                    .2
+            );
+        }
     }
 
     #[test]

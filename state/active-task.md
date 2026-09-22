@@ -1,5 +1,57 @@
 # Active Task
 
+## GPUP-THROUGHPUT validated host input reuse (2026-09-22)
+
+Status: complete after the review corrections committed as 2848b0d.
+Objective: remove repeated JSON parsing, canonical model serialization and sparse
+LP reconstruction from research evidence generation and verification. Reuse only
+independently validated immutable host inputs, with freshly materialized bounds
+for variants; every candidate evaluation, certificate and gap check remains per
+solve. Existing SPEC-0014 requirements 5, 8-10 and 15-17 govern this internal
+optimization; no public schema, numerical method, kernel or default changes.
+
+Acceptance: byte-identical raw/materialized evidence, stale assessment and model
+identity mutation rejection, historical v1/v2 mode/tier compatibility, paired
+CPU timings against the correction executable, full pinned-native tools/check.sh.
+If CPU evidence justifies it, at most two existing 32768-row N=8 fused-FP64 short
+batch cells (repeat and variant) may be rerun as explicitly scoped diagnostic
+acceptance of the producer path, with all original numerical settings and
+independent bitwise comparison. Freeze inputs/source before device admission;
+use one 48-second worker plus six-second reservation in the original study pool.
+No new campaign or allowance. Changes: experiment host assessment/evidence code,
+contract tests and performance report. Four build jobs and four CPU-hours.
+GPU start: 6982.408046756 s, 8276 events, hash b3451186b7a5fc0029fbbd612b07e795072476ab76137a78a375b1d97866c236.
+Remaining study 54.022860302 s; acceptance 58.328048581 s; combined 112.350908883 s.
+Preserve every prior prefix and the cumulative 8102.574545061-second ceiling.
+
+
+Acceptance evidence: full pinned-native tools/check.sh passed (481 Rust test
+results, 150 Python tests, 93 documentation pages and all other gates). New
+regression proves byte-identical raw/prepared evidence, fresh variant assessment,
+LP rebuild equality and wrong model hash/stale assessment refusal. Seventeen
+archived research-v1/v2 single endpoints across all twelve modes and three tiers
+reverify. Three paired CPU repetitions accept unchanged N=8 evidence and reduce
+verification medians 0.656→0.186 s (2048 repeat), 12.821→3.484 s (32768 repeat),
+12.832→7.344 s (32768 variant), versus the corrected operator-cache baseline.
+
+The two admitted large-batch producer diagnostics complete and are independently
+verified by both original and optimized executables: 16/16 per-solve bitwise
+identities match, with identical work-limit statuses. Whole process times are
+10.746/22.484 s versus historical 48.679/49.444 s (repeat/variant), one new
+repetition each; these are historical unpaired diagnostics, not single-solve
+latency, statistical claims or a supported preset. See the
+[host-input report](../docs/benchmarks/lp-throughput-host-input.md).
+
+New device charge 33.512914747 s; cumulative 7015.920961503 s. Study
+2679.490054445/2700, acceptance 541.671951419/600, combined 3221.162005864/3300.
+The 8278-event ledger SHA-256 is c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a;
+its 8276-event prefix b3451186b7a5fc0029fbbd612b07e795072476ab76137a78a375b1d97866c236
+and every earlier prefix remain intact. No GPU allowance was added; no kernels
+changed. Exact measured source 97a77c12e52a87d185442a168a5211dbba0019ebe46284f58c1b91aaf9cbb362
+and all receipts are in artifacts/gpupt-host-input-20260922. The earlier
+65536-row coverage and tuned_cases racecheck limitations remain explicit.
+
+
 ## GPUP-THROUGHPUT review corrections (2026-09-22)
 
 Status: complete at the user's explicit request to fix the review findings.

@@ -21,6 +21,12 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ### Performance
 
+- Reuse independently validated host models and canonical LPs in research
+  evidence generation/verification; repeated batches parse and serialize their
+  model once per boundary, while bound variants retain fresh certification.
+  The [host-input report](docs/benchmarks/lp-throughput-host-input.md) records
+  paired CPU measurements and the bounded producer diagnostic.
+
 - Reuse independently recomputed host operator metadata across research batch
   evidence checks. Every solve still receives original-model certification and
   complete identity/work checks. Retained N=8 evidence verifies 1.48–1.52x faster

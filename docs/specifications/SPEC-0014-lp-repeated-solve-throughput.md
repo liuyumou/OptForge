@@ -394,3 +394,16 @@ requirements 6 and 13-17 include these explicit acceptance details:
   worth a later specification is open and belongs to the GPUP-6 interface discussion.
 - `Model::rebound` clones the full variable vector per variant; at 65536 rows this
   clone cost is measured (variant_rebind phase) rather than optimized in this slice.
+
+### Host input reuse validation (2026-09-22)
+
+The internal research evidence path now retains an independently validated host
+model, exact-byte identity and canonical LP across its checks. Repeat batches
+reuse one canonical input; variants materialize fresh bounds against the base
+and independently rebind the host LP. This implements requirements 5, 8-10 and
+15-17 without sharing candidates, certificates, gap assessments or device data.
+The `prepared_host_inputs_preserve_bytes_and_bind_fresh_variant_bounds` test
+checks raw/materialized evidence byte equality, canonical/raw identity binding,
+fresh LP equivalence and stale assessment refusal. Historical record
+compatibility and performance are recorded in the
+[host-input report](../benchmarks/lp-throughput-host-input.md).

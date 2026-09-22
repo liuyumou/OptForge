@@ -93,8 +93,17 @@ Historical fresh-variant controls were N=1 sessions and remain labeled as such.
 After the correction: cumulative 6982.408046756 s, study 2645.977139698/2700,
 acceptance 541.671951419/600; 8276-event ledger SHA-256
 b3451186b7a5fc0029fbbd612b07e795072476ab76137a78a375b1d97866c236 preserves the
-8178-event prefix above. No new GPU allowance. GPUP-6 follows it and requires its
-bounded adaptive contract before behavior.
+8178-event prefix above. No new GPU allowance.
+The subsequent [host-input repair](docs/benchmarks/lp-throughput-host-input.md)
+removes repeated host parsing/reconstruction without caching assessments:
+16/16 new 32768-row N=8 diagnostic results match, with original and new verifier
+acceptance. Whole-batch historical comparisons are 4.53x repeat and 2.20x variant
+(one repetition, no general preset). Campaign consumption is now 7015.920961503 s;
+study 2679.490054445/2700, acceptance 541.671951419/600. The 8278-event ledger
+SHA-256 is c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a, preserving
+the 8276-event prefix above and all prior prefixes. No new allowance or kernel
+change; 65536-row coverage and the old tuned_cases racecheck gap remain open.
+GPUP-6 follows it and requires its bounded adaptive contract before behavior.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent
