@@ -2,9 +2,11 @@
 
 ## GPUP-6 and COPT protected integration (2026-09-27)
 
-Status: in progress; the user explicitly authorized two PRs, ordered merges and
-safe cleanup of merged branches. Merge GPUP-6 first, then its dependent COPT
-comparison, preserving measured commit ancestry with merge commits.
+Status: acceptance complete; protected integration and safe cleanup authorized.
+Final merge/check/cleanup outcomes are retained in the integration receipt below.
+The user explicitly authorized two PRs, ordered merges and safe branch cleanup.
+Merge GPUP-6 first, then its dependent COPT comparison, preserving measured
+commit ancestry with merge commits.
 Scope: inspect reviewable changes and existing acceptance, publish both branches,
 wait for required cpu/docs/smoke checks and resolve actionable review findings,
 merge through protected PRs, synchronize local main, and delete only branches
@@ -20,6 +22,20 @@ Initial code acceptance is the full pinned-native GPUP-6/COPT gates and recorded
 device/sanitizer scope. Initial remote main is 1dff5a9; both task branches form a
 linear stack above it. Integration receipts remain under
 artifacts/gpup6-copt-integration-20260927. No release or hosting publication.
+
+Acceptance evidence: [PR #9](https://github.com/liuyumou/OptForge/pull/9) passed
+all required cpu/docs/smoke checks, had no unresolved review threads, and merged
+without bypass as 5aca01d. The dependent branch includes that merge with no source
+conflict or numerical change. Its existing full native gate passes 495 Rust and
+170 Python tests, with 55 device tests and the documented sanitizer scope; the
+additional GitHub checks must pass on its current head before merging.
+Local review covers adaptive rollback/work/reference authority, COPT method and
+model identity, bounded admission, nested timing and compatibility; no unresolved
+local finding remains. The final integration.json receipt records both merged PR
+URLs/commits, the required-check snapshots, preserved measured ancestry, clean
+main and the exact local/remote branch deletions. Only documentation and merge
+ancestry change in this integration; the campaign ledger and raw evidence stay
+unchanged.
 
 ## COPT comparison and component-cost diagnosis (2026-09-26)
 
