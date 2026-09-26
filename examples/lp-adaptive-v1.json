@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "ladder": [
+    "working_fp32",
+    "accumulation_fp32",
+    "products_fp32",
+    "storage_fp32",
+    "fp64"
+  ],
+  "audit_interval": 32,
+  "primal_absolute": 1e-07,
+  "dual_absolute": 1e-07,
+  "relative": 1e-07,
+  "demotion": null
+}

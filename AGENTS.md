@@ -31,8 +31,7 @@ code identity, FP32 storage/products/accumulation/state and fixed FP64 correctio
 v4 evidence and optional isolated COPT 8.0.6 CPU/GPU PDLP baselines. Its
 [report](docs/benchmarks/lp-fp32-gpup5.md) verifies all 480 attempts and records
 coverage losses; no supported preset is selected. Existing identities/replay and
-original-model authority remain. GPUP-6 requires its bounded adaptive
-interface/contract before behavior; no audit/rollback/promotion/demotion is implicit
+original-model authority remain. GPUP-6 is a separate explicit adaptive contract (below); no audit/rollback/promotion/demotion is implicit
 in GPUP-5. Later quantization and precision requirements remain pending.
 The [FP32 latency diagnosis](docs/benchmarks/lp-fp32-slowdown-diagnosis.md) adds
 213 equal-work/profiler diagnostics under ADR-0020: convergence amplification,
@@ -103,7 +102,22 @@ study 2679.490054445/2700, acceptance 541.671951419/600. The 8278-event ledger
 SHA-256 is c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a, preserving
 the 8276-event prefix above and all prior prefixes. No new allowance or kernel
 change; 65536-row coverage and the old tuned_cases racecheck gap remain open.
-GPUP-6 follows it and requires its bounded adaptive contract before behavior.
+GPUP-6 is complete under accepted ADR-0025 and SPEC-0012: explicit lp-adaptive-v1
+ladders/audits, whole-window rollback and charged replay, direct/gradual promotion,
+sticky or probed demotion, fresh-single v5 evidence and replay. Original-model
+host certification remains authoritative; old kernels, records and defaults remain.
+Its [report](docs/benchmarks/lp-adaptive-gpup6.md) independently verifies
+2086 endpoints from 2376 admitted of 2376 planned attempts.
+Failed archive-discovery attempts and comparison gaps remain visible; no preset
+is selected. Native, regular device and four adaptive sanitizer gates pass.
+Campaign consumption is 8912.494084146 s inside the 14402.574545061 s ceiling;
+GPUP-6 study 1826.094392481/5400 s, acceptance 70.478730162/900 s.
+The 13056-event ledger SHA-256 is
+6db55153153e66ed5c2398417d008e4edd278e11153cf87b975345f1a574d34d, preserving the 8278-event prefix
+c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a and every earlier prefix.
+GPUP-7 follows and needs its bounded quantization/FP8 interface and resource
+contract before behavior. Adaptive sessions, persistent checkpoints and supported
+presets remain outside GPUP-6; old 65536-row and tuned_cases racecheck gaps remain.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

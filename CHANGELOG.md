@@ -10,6 +10,17 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+### Added
+
+- Experimental GPUP-6 `--lp-adaptive`: explicit FP32/FP64 ladders, configurable
+  original-unit audits, complete-window rollback, charged replay, sticky promotion
+  and guarded demotion probes. Version-5 evidence and replay retain original-model
+  host certification. Existing precision paths, kernel bytes and defaults remain.
+- Frozen 2376-attempt adaptive policy study with chained budget authority,
+  independently checked endpoints and separate ablation/acceptance phase caps.
+  The [GPUP-6 report](docs/benchmarks/lp-adaptive-gpup6.md) verifies 2086 endpoints,
+  retains failed comparison attempts and selects no supported preset.
+
 ### Fixed
 
 - Make throughput budget-authority tests independent of retained local campaign

@@ -29,7 +29,7 @@ Usage:
     [--candidate <path> --absolute-tolerance <f64> --relative-tolerance <f64> --integrality-tolerance <f64>]
   optimizer solve --model <path> --config <path> [--candidate <path> | --basis <path>]
     [--backend highs|host-lp|cuda-lp|cuda-lp-matched|cuda-lp-tuned] [--lp-settings <path>]
-    [--lp-execution <path>] [--lp-precision <path>] [--device GPU-<uuid>]
+    [--lp-execution <path>] [--lp-precision <path> | --lp-adaptive <path>] [--device GPU-<uuid>]
     [--lp-evidence <path>] [--lp-profile true|false] [--lp-device-memory-bytes <bytes>]
   optimizer solve-batch --model <path> --batch <path> --config <path> --lp-settings <path>
     --lp-execution <path> --device GPU-<uuid> --lp-evidence <dir>

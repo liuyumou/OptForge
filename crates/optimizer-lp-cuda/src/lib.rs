@@ -38,3 +38,5 @@ pub mod research;
 
 #[cfg(feature = "precision-research")]
 pub use research::ResearchSession;
+
+mod adaptive;

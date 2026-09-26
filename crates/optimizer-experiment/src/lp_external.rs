@@ -204,6 +204,7 @@ impl ExternalWitness {
             lp_settings: None,
             lp_execution: None,
             lp_precision: None,
+            lp_adaptive: None,
         };
         let mut d = LpDiagnostics::new(true, false);
         d.dual = self.dual.clone();

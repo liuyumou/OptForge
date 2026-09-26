@@ -203,11 +203,12 @@ fn replay(
     let mut diagnostics = LpDiagnostics::new(true, false);
     diagnostics.device_buffer_limit_bytes = original.diagnostics.device_buffer_limit_bytes;
     if let Some(execution) = &original.record.lp_execution {
-        let path = if original.record.lp_precision.is_some() {
-            optimizer_lp_cuda::precision::code_object_path()
-        } else {
-            optimizer_lp_cuda::tuned::code_object_path()
-        };
+        let path =
+            if original.record.lp_precision.is_some() || original.record.lp_adaptive.is_some() {
+                optimizer_lp_cuda::precision::code_object_path()
+            } else {
+                optimizer_lp_cuda::tuned::code_object_path()
+            };
         let image = std::fs::read(path)?;
         if optimizer_core::sha256::hex(&image) != execution.code_object_sha256 {
             return Err(argument("recorded tuned code object differs"));
@@ -216,6 +217,11 @@ fn replay(
             execution.settings,
         ));
     }
+    diagnostics.adaptive = original
+        .record
+        .lp_adaptive
+        .clone()
+        .map(optimizer_core::LpAdaptiveDiagnostics::new);
     diagnostics.precision = original
         .record
         .lp_precision

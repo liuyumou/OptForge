@@ -1,13 +1,37 @@
 # SPEC-0012: Experimental Mixed-Precision LP Backend
 
-Status: accepted; GPUP-3/4/5 implemented and measured, adaptive recovery and later precision pending
+Status: accepted; GPUP-3/4/5/6 implemented and measured; later quantization and Tensor Core precision pending
 Scope: opt-in LP arithmetic, resumable control, numerical audits, and recovery
 Owner: numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: bootstrap (first commit containing this document)
 Supersedes: ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
-Implementation: shared FP64 control, matched/tuned CUDA and explicit FP32 comparisons with fixed correction; adaptive recovery and GPUP-7/8 pending
+Implementation: shared FP64 control, matched/tuned CUDA, fixed FP32 correction and explicit GPUP-6 adaptive audits/recovery; GPUP-7/8 pending
 Tests: continuation, bitwise trajectory, exact-rational, endpoint, native and scoped device gates; mapping below
+
+## GPUP-6 accepted bounded contract
+
+The maintainer accepted [ADR-0025](../decisions/ADR-0025-adaptive-precision-recovery.md)
+on 2026-09-26 before implementation. It binds requirements 24-33 to explicit
+lp-adaptive-v1 settings, five ordered FP32/FP64 rungs, complete-window rollback,
+charged reference audits and demotion probes, version-5 evidence and replay.
+Audit settings are independent of final certification tolerances. In-memory
+checkpoint restoration never restores physical work or deadlines. The frozen
+2376-attempt comparison and separately charged acceptance retain every previous
+ledger prefix and campaign/phase cap. Implementation and correctness acceptance
+are complete; the [report](../benchmarks/lp-adaptive-gpup6.md) retains incomplete
+comparison coverage and all failures. No supported preset is selected.
+
+The host adaptive fault-injection suite covers full restoration after restart and
+weight decisions, original-unit reference adoption, intermediate/sticky promotion,
+charged demotion probes, unavailable preparation/runtime rungs, cancellation,
+deadlines, physical-work exhaustion and terminal FP64 failure. Device adaptive_
+tests compare both objective senses and working-state rounding across windows,
+controller checks and restored residency. Strict v5 mutation tests cover policy,
+method/code identity, transitions, work counters and independently recomputed
+assessments. CLI checks cover replay, exclusive flags and pinned fallback. All
+four adaptive sanitizer scopes and the full pinned-native gate pass. The
+original GPUP-1 exact-rational and legacy-record regressions remain in that gate.
 
 ## Purpose
 
@@ -16,7 +40,8 @@ control and explicit `cuda-lp-matched` using existing kernels, settings and host
 mathematical authority. Requirements 9-11 apply to in-memory FP64 checkpoints now;
 precision/audit/random state applies when introduced in GPUP-5 through GPUP-8.
 GPUP-5 adds explicit precision settings and fixed correction under ADR-0019.
-Persistent checkpoints, quantization, adaptive recovery and presets remain pending. [ADR-0016](../decisions/ADR-0016-matched-fp64.md) freezes this slice.
+GPUP-6 implements in-memory adaptive recovery under ADR-0025. Persistent
+checkpoints, quantization and presets remain pending. [ADR-0016](../decisions/ADR-0016-matched-fp64.md) freezes this slice.
 
 Define an experimental route from FP64 through FP32 to FP8 and Tensor Core LP
 iteration without giving the device mathematical authority. Optimize certified
@@ -230,12 +255,12 @@ able-to-fail injections rather than mirroring the implementation.
 | --- | --- | --- |
 | 1-5 | Exact binary64-coefficient rational oracle; cancellation/sign/infinite-bound fixtures; wrong device output cannot strengthen a bound; objective/gap sense checks. | GPUP-1, GPUP-5 |
 | 6-8 | Capability refusal, unchanged default/legacy fixtures, settings/schema parity, old-record reading and migration. | GPUP-5 |
-| 9-11 | Implemented FP64: shared_controller_matches_literal_legacy_whole_trajectories, checkpoints_restore_all_history_but_never_work_or_deadlines, matched_control device tests. Precision/recovery state remains planned. | GPUP-3 complete, GPUP-6 pending |
+| 9-11 | Implemented FP64: shared_controller_matches_literal_legacy_whole_trajectories, checkpoints_restore_all_history_but_never_work_or_deadlines, matched_control device tests. GPUP-6 adaptive fault injection restores complete window numerical/policy history. | GPUP-3 and GPUP-6 complete; persistent/random quantization state pending |
 | 12-15 | Allocation/transfer instrumentation, recorded arithmetic, same-device repeatability, conservative operator/step checks. | GPUP-4, GPUP-5, GPUP-8 |
 | 16-21 | Quantizer boundary/tie/subnormal/overflow fixtures; transpose reconstruction equality; seeded retry equality; original high-precision operands retained. | GPUP-7 |
 | 22-23 | Single-RHS padding/cost accounting; sparse/Tensor equivalence; unsupported hardware/layout checks. | GPUP-8 |
-| 24-29 | Interval-1 and sampled audits; corrupted updates/guards; whole-window restore; reference endpoint adoption; charged work; sticky and hysteretic recovery. | GPUP-6, GPUP-7 |
-| 30-33 | Exhausted ladder, time/work limit and cancellation injections; poisoned-context refusal; recorded pinned-backend fallback. | GPUP-6, GPUP-8 |
+| 24-29 | Interval-1 and sampled audits; corrupted updates/guards; whole-window restore; reference endpoint adoption; charged work; sticky and hysteretic recovery. | GPUP-6 complete for FP32/FP64; GPUP-7 quantization pending |
+| 30-33 | Exhausted ladder, time/work limit and cancellation injections; poisoned-context refusal; recorded pinned-backend fallback. | GPUP-6 complete for FP32/FP64; GPUP-8 hardware modes pending |
 | 34-37 | GPUP-3 passed unsafe/dependency checks, ordinary build, lease tests, full pinned-native gate and all four scoped sanitizers; repeat for each later slice. | Every implementation slice |
 | 38 | Preset-to-frozen-experiment provenance; no preset/default emitted from an incomplete study. | GPUP-10 |
 

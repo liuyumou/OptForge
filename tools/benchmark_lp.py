@@ -103,6 +103,9 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
         'elapsed_ns':None,'queue_ns':None,'leased_ns':None,'verification_ns':None,'peak_rss_bytes':None,
         'memory_method':'unavailable: worker not completed','limits':value['limits'],
         'provenance':{**base_provenance,'telemetry_before':before},'error':'unfinished trial intent'}
+    if value['schema_version']==5:
+        study_block=identity.split('-study-',1)[1].split('-',1)[0]
+        trial['block']=f'{study_block}:{instance["id"]}:{repetition}'
     if value['schema_version']>=2:
         from validate_artifacts import schema_snapshot
         trial.update(budget_authority_sha256=ledger.campaign_hash,
@@ -123,6 +126,9 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
     if 'precision' in configuration:
         precision_path=directory/(identity+'.precision.json');write_json(precision_path,configuration['precision'])
         args+=['--lp-precision',str(precision_path)]
+    if 'adaptive' in configuration:
+        adaptive_path=directory/(identity+'.adaptive.json');write_json(adaptive_path,configuration['adaptive'])
+        args+=['--lp-adaptive',str(adaptive_path)]
     if gpu: args+=['--device',value['device']]
     if external:
         args=[str(ROOT/'artifacts/gpup5-copt/venv/bin/python'),'-B',str(ROOT/'tools/lp_copt.py'),
@@ -139,7 +145,7 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
     request_path=directory/(identity+'.request.json');write_json(request_path,request)
     # One second covers the bounded supervisor's setup/lease teardown overhead.
     reservation=ledger.reserve(identity,value['limits']['solve_seconds']+value['limits']['cleanup_seconds']+(4 if gpu else 1),
-                               resource='gpu' if gpu else 'cpu',phase='screening' if value['schema_version']==4 else 'baseline')
+                               resource='gpu' if gpu else 'cpu',phase=value['study_phase'] if value['schema_version']==5 else 'screening' if value['schema_version']==4 else 'baseline')
     worker_args=['bash',str(ROOT/'tools/gpu_job.sh'),value['device'],'--lp-study-request',str(request_path)] if gpu else [sys.executable,str(ROOT/'tools/lp_supervise.py'),'--request',str(request_path)]
     worker=subprocess.Popen(worker_args,pass_fds=(ledger.lock.fileno(),))
     try:
@@ -196,6 +202,8 @@ def run_trial(value, identity, instance, configuration, repetition, order, mode,
                 if verified.returncode:raise ValueError('independent verifier rejected endpoint: '+verified.stderr[:1000])
                 if 'precision' in configuration and endpoint.get('precision',{}).get('settings')!=configuration['precision']:
                     raise ValueError('endpoint precision differs from scheduled trial')
+                if 'adaptive' in configuration and endpoint.get('adaptive',{}).get('settings')!=configuration['adaptive']:
+                    raise ValueError('endpoint adaptive policy differs from scheduled trial')
                 trial['executed_backend']=endpoint['record']['backend'];trial['endpoint_class']=endpoint['assessment']['classification']
         except Exception as error:
             # Preserve a malformed artifact and its hash; it cannot become a success.

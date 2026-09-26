@@ -425,6 +425,9 @@ pub struct SolveRecord {
     /// Explicit precision settings, only in solve-record v4.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub lp_precision: Option<crate::LpPrecisionSettings>,
+    /// Explicit adaptive policy, only in solve-record v5.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub lp_adaptive: Option<crate::LpAdaptiveSettings>,
 }
 
 // Track explicit field presence: a v2 record with lp_execution:null is still
@@ -452,6 +455,17 @@ impl<'de> serde::Deserialize<'de> for PrecisionField {
             .map(Self::Present)
     }
 }
+#[derive(Default)]
+enum AdaptiveField {
+    #[default]
+    Missing,
+    Present(Option<crate::LpAdaptiveSettings>),
+}
+impl<'de> serde::Deserialize<'de> for AdaptiveField {
+    fn deserialize<D: serde::Deserializer<'de>>(d: D) -> Result<Self, D::Error> {
+        <Option<crate::LpAdaptiveSettings> as serde::Deserialize>::deserialize(d).map(Self::Present)
+    }
+}
 impl<'de> serde::Deserialize<'de> for SolveRecord {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         #[derive(serde::Deserialize)]
@@ -476,6 +490,8 @@ impl<'de> serde::Deserialize<'de> for SolveRecord {
             lp_execution: ExecutionField,
             #[serde(default)]
             lp_precision: PrecisionField,
+            #[serde(default)]
+            lp_adaptive: AdaptiveField,
         }
         let fields: Fields = crate::serde_strict::object(deserializer)?;
         if fields.schema_version == 2 && !matches!(fields.lp_execution, ExecutionField::Missing) {
@@ -483,11 +499,20 @@ impl<'de> serde::Deserialize<'de> for SolveRecord {
                 "v2 solve record contains lp_execution",
             ));
         }
-        if fields.schema_version < 4 && !matches!(fields.lp_precision, PrecisionField::Missing) {
+        if fields.schema_version != 4 && !matches!(fields.lp_precision, PrecisionField::Missing) {
             return Err(serde::de::Error::custom(
                 "legacy solve record contains lp_precision",
             ));
         }
+        if fields.schema_version < 5 && !matches!(fields.lp_adaptive, AdaptiveField::Missing) {
+            return Err(serde::de::Error::custom(
+                "legacy solve record contains lp_adaptive",
+            ));
+        }
+        let lp_adaptive = match fields.lp_adaptive {
+            AdaptiveField::Missing => None,
+            AdaptiveField::Present(v) => v,
+        };
         let lp_precision = match fields.lp_precision {
             PrecisionField::Missing => None,
             PrecisionField::Present(v) => v,
@@ -514,6 +539,7 @@ impl<'de> serde::Deserialize<'de> for SolveRecord {
             lp_settings: fields.lp_settings,
             lp_execution,
             lp_precision,
+            lp_adaptive,
         })
     }
 }
@@ -550,7 +576,7 @@ impl SolveRecord {
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
         let record: Self = serde_json::from_slice(bytes)
             .map_err(|error| ValidationError::new(ErrorKind::Document, error.to_string()))?;
-        if ![SOLVE_RECORD_SCHEMA_VERSION, 3, 4].contains(&record.schema_version) {
+        if ![SOLVE_RECORD_SCHEMA_VERSION, 3, 4, 5].contains(&record.schema_version) {
             return Err(ValidationError::new(
                 ErrorKind::Document,
                 format!("unsupported solve schema_version {}", record.schema_version),
@@ -563,6 +589,22 @@ impl SolveRecord {
 
     /// Enforce version/backend/settings agreement without changing legacy emission.
     pub fn check_execution(&self) -> Result<(), ValidationError> {
+        if (self.schema_version == 5) != self.lp_adaptive.is_some() {
+            return Err(ValidationError::new(
+                ErrorKind::Document,
+                "adaptive/version differs",
+            ));
+        }
+        if let Some(a) = &self.lp_adaptive {
+            a.validate_execution(
+                self.lp_execution
+                    .as_ref()
+                    .ok_or_else(|| {
+                        ValidationError::new(ErrorKind::Document, "missing adaptive execution")
+                    })?
+                    .settings,
+            )?;
+        }
         if (self.schema_version == 4) != self.lp_precision.is_some() {
             return Err(ValidationError::new(
                 ErrorKind::Document,
@@ -577,7 +619,7 @@ impl SolveRecord {
         }
         let valid = match (&self.lp_execution, self.schema_version) {
             (None, 2) => self.backend != "cuda-lp-tuned",
-            (Some(execution), 3 | 4) => {
+            (Some(execution), 3..=5) => {
                 execution.settings.validate()?;
                 self.backend == "cuda-lp-tuned"
                     && self.lp_settings.is_some()

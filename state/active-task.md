@@ -1,5 +1,52 @@
 # Active Task
 
+## GPUP-6 adaptive precision recovery (2026-09-26)
+
+Status: complete; bounded plan accepted before implementation; correctness gates passed and comparison gaps retained.
+Objective: implement opt-in FP32/FP64 audits, complete-window rollback, direct and
+gradual promotion, sticky/guarded demotion, independent v5 evidence and replay,
+and the frozen 2376-attempt development policy comparison under ADR-0025.
+Likely files: optimizer-core settings/records; optimizer-lp adaptive control;
+optimizer-lp-cuda executor/backend; CLI/evidence; schemas; study/budget tooling;
+CPU/device tests and documentation. Existing kernels and old protocols stay intact.
+Acceptance: full pinned-native tools/check.sh; injected rollback/guard/work/cancel
+contracts; legacy wire/replay compatibility; device differentials and four adaptive
+sanitizers; independently verified study report with all missing/failing trials.
+Resources: four build jobs and four CPU-hours; 5400 GPU seconds in ablations and
+900 in repeatability, combined 6300, under the one-device shared host lease.
+Starting consumption 7015.920961503 s; 8278 events; prefix SHA-256
+c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a.
+New cumulative ceiling 14402.574545061 s; preserve campaign 28800 s, every phase
+cap, prior output binding and ledger prefix. No remote publication is authorized.
+The preceding throughput integration completed at 1dff5a9; the retained completion
+receipt supersedes the historical pre-merge wording below.
+
+GPUP-6 is complete under accepted ADR-0025 and SPEC-0012: explicit lp-adaptive-v1
+ladders/audits, whole-window rollback and charged replay, direct/gradual promotion,
+sticky or probed demotion, fresh-single v5 evidence and replay. Original-model
+host certification remains authoritative; old kernels, records and defaults remain.
+Its [report](../docs/benchmarks/lp-adaptive-gpup6.md) independently verifies
+2086 endpoints from 2376 admitted of 2376 planned attempts.
+Failed archive-discovery attempts and comparison gaps remain visible; no preset
+is selected. Native, regular device and four adaptive sanitizer gates pass.
+Campaign consumption is 8912.494084146 s inside the 14402.574545061 s ceiling;
+GPUP-6 study 1826.094392481/5400 s, acceptance 70.478730162/900 s.
+The 13056-event ledger SHA-256 is
+6db55153153e66ed5c2398417d008e4edd278e11153cf87b975345f1a574d34d, preserving the 8278-event prefix
+c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a and every earlier prefix.
+GPUP-7 follows and needs its bounded quantization/FP8 interface and resource
+contract before behavior. Adaptive sessions, persistent checkpoints and supported
+presets remain outside GPUP-6; old 65536-row and tuned_cases racecheck gaps remain.
+
+Acceptance evidence: full pinned-native tools/check.sh, clean-checkout synthetic
+budget/admission tests, regular device suites, CLI v5 verification/replay, and
+memcheck/racecheck/initcheck/synccheck on adaptive_. Receipts are retained in
+artifacts/gpup6-acceptance; the measured source/executable and all attempted trial
+records remain in artifacts/gpup6-adaptive-v1. The report records exact test
+counts, costs, retained failed initial acceptance and harness preflight/discovery
+failures. Final verifier/archive checks change no numerical path. Local commit
+after acceptance only; no push or publication.
+
 ## GPUP-THROUGHPUT integration and branch cleanup (2026-09-22)
 
 Integration follow-up: PR #8 is open, but both initial CPU workflows fail in

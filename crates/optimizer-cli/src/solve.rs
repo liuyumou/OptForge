@@ -31,6 +31,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     let mut settings_path = None;
     let mut execution_path = None;
     let mut precision_path = None;
+    let mut adaptive_path = None;
     let mut device_name = None;
     for pair in options.chunks(2) {
         let [key, value] = pair else {
@@ -51,6 +52,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             "--lp-settings" => &mut settings_path,
             "--lp-execution" => &mut execution_path,
             "--lp-precision" => &mut precision_path,
+            "--lp-adaptive" => &mut adaptive_path,
             "--device" => &mut device_name,
             _ => return Err(argument(&format!("unknown flag {key}"))),
         };
@@ -144,6 +146,25 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         (_, Some(_)) => return Err(argument("--lp-execution requires cuda-lp-tuned")),
         (_, None) => None,
     };
+    if adaptive_path.is_some() && precision_path.is_some() {
+        return Err(argument(
+            "--lp-adaptive and --lp-precision are mutually exclusive",
+        ));
+    }
+    let adaptive = adaptive_path
+        .map(|path| {
+            if selected != "cuda-lp-tuned" {
+                return Err(argument("--lp-adaptive requires cuda-lp-tuned"));
+            }
+            let value = optimizer_core::LpAdaptiveSettings::from_json(&read(path)?)
+                .map_err(io::Error::other)?;
+            value
+                .validate_execution(execution.expect("explicit tuned execution"))
+                .map_err(io::Error::other)?;
+            Ok(value)
+        })
+        .transpose()?;
+    diagnostics.adaptive = adaptive.map(optimizer_core::LpAdaptiveDiagnostics::new);
     let precision = precision_path
         .map(|path| {
             if selected != "cuda-lp-tuned" {
@@ -339,7 +360,9 @@ pub(crate) fn device_solve(
 ) -> Result<optimizer_core::SolveRecord, String> {
     let context = session.context();
     let backend = if let Some(execution) = execution {
-        if let Some(p) = &diagnostics.precision {
+        if let Some(a) = &diagnostics.adaptive {
+            CudaLpBackend::open_adaptive(context, settings, execution, a.settings.clone())
+        } else if let Some(p) = &diagnostics.precision {
             CudaLpBackend::open_precision(context, settings, execution, p.settings.clone())
         } else {
             CudaLpBackend::open_tuned(context, settings, execution)
