@@ -8,13 +8,17 @@ prioritized work is the [GPU LP precision roadmap](docs/plans/gpu-lp-precision-r
 Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)
 and the objective/gap checks. Slice 2 adds the [bounded LP study harness](docs/benchmarks/lp-precision-study.md),
 with independent endpoints, frozen workloads and a [measured baseline report](docs/benchmarks/lp-baseline-gpup2.md).
-Slice 3, the shared resumable FP64 controller, is next.
+The shared resumable FP64 controller and subsequent explicit tuned/precision
+slices are implemented, with their evidence linked from the roadmap.
 GPUP-THROUGHPUT, opt-in repeated-solve throughput sessions, is complete under
 [SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md) and
 [ADR-0023](docs/decisions/ADR-0023-repeated-solve-throughput.md), both accepted
 2026-09-20; its [report](docs/benchmarks/lp-repeated-solve-throughput.md) verifies
 687 of 705 attempts with 4785/4785 batch solves bitwise identical to fresh singles.
-Mixed precision and performance recipes are not implemented yet.
+Explicit FP32 execution and GPUP-6 adaptive audit/recovery policies are
+implemented experimentally; the [adaptive report](docs/benchmarks/lp-adaptive-gpup6.md)
+records acceptance and incomplete comparison coverage. No supported precision
+recipe is selected. GPUP-7 requires its bounded quantization/FP8 contract next.
 
 The project validates original
 linear models and candidates, solves them with an independently validated incumbent,
@@ -102,7 +106,7 @@ acceptance was not covered.
 - [GPU LP performance roadmap and slices](docs/plans/gpu-lp-precision-roadmap.md)
 - [FP64-pipe root cause of the FP32 component slowdown](docs/benchmarks/lp-fp64-pipe-root-cause.md)
 - [GPUP-5C guards, fusion, double-float, tiers and corpus report](docs/benchmarks/lp-fp64-pipe-gpup5c.md)
-- [Mixed-precision LP draft](docs/specifications/SPEC-0012-mixed-precision-lp.md)
+- [Accepted mixed-precision LP contract](docs/specifications/SPEC-0012-mixed-precision-lp.md)
 - [Accepted LP experiment protocol](docs/specifications/SPEC-0013-lp-precision-experiments.md)
 - [Artifact contract](docs/specifications/SPEC-0007-artifacts.md)
 - [Build and verification](docs/operations/build.md)
@@ -141,7 +145,7 @@ the host lease, device selection and residency; `cuda/` holds the kernels, built
 of tracked source by `tools/setup_cuda.sh`. `docs/` is authoritative; `wiki/`
 provides navigation. optimizer-lp owns the host LP method and certification without
 a device dependency; optimizer-lp-cuda owns the device backend. Python SDK,
-mixed-precision LP, dynamically loaded native extensions, checkpoint restart and
+quantized/FP8 LP, dynamically loaded native extensions, persistent checkpoint restart and
 performance suites remain planned, with limits recorded in
 [known failures](state/known-failures.md).
 

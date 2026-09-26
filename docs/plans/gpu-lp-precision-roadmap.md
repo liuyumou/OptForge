@@ -136,8 +136,8 @@ admitted attempts with 4785/4785 batch solves bitwise identical to fresh singles
 setup amortized to as little as 15.6 ms per solve at N=32 on small-4 (26.6x,
 separately labeled), negative results at N=1 and at 32768 rows, and 18 timed-out
 65536-row short batches, consuming 2617.929459541 study plus 538.371430691
-acceptance seconds for 6951.059845871 cumulative. GPUP-6 follows it and
-requires its bounded adaptive contract.
+acceptance seconds for 6951.059845871 cumulative. GPUP-6 follows it under the accepted ADR-0025 contract; its completed
+implementation and comparison are recorded below.
 
 ## Numerical design and candidate methods
 
@@ -272,3 +272,22 @@ throughput is GPUP-THROUGHPUT, complete under accepted
 [ADR-0023](../decisions/ADR-0023-repeated-solve-throughput.md) with its
 [report](../benchmarks/lp-repeated-solve-throughput.md). Neither follows
 automatically from a faster LP kernel.
+
+## GPUP-6 completion (2026-09-26)
+
+GPUP-6 is complete under accepted ADR-0025 and SPEC-0012: explicit lp-adaptive-v1
+ladders/audits, whole-window rollback and charged replay, direct/gradual promotion,
+sticky or probed demotion, fresh-single v5 evidence and replay. Original-model
+host certification remains authoritative; old kernels, records and defaults remain.
+Its [report](../benchmarks/lp-adaptive-gpup6.md) independently verifies
+2086 endpoints from 2376 admitted of 2376 planned attempts.
+Failed archive-discovery attempts and comparison gaps remain visible; no preset
+is selected. Native, regular device and four adaptive sanitizer gates pass.
+Campaign consumption is 8912.494084146 s inside the 14402.574545061 s ceiling;
+GPUP-6 study 1826.094392481/5400 s, acceptance 70.478730162/900 s.
+The 13056-event ledger SHA-256 is
+6db55153153e66ed5c2398417d008e4edd278e11153cf87b975345f1a574d34d, preserving the 8278-event prefix
+c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a and every earlier prefix.
+GPUP-7 follows and needs its bounded quantization/FP8 interface and resource
+contract before behavior. Adaptive sessions, persistent checkpoints and supported
+presets remain outside GPUP-6; old 65536-row and tuned_cases racecheck gaps remain.

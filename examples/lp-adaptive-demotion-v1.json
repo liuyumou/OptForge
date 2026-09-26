@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "ladder": [
+    "working_fp32",
+    "fp64"
+  ],
+  "audit_interval": 32,
+  "primal_absolute": 1e-07,
+  "dual_absolute": 1e-07,
+  "relative": 1e-07,
+  "demotion": {
+    "clean_windows": 4,
+    "margin_fraction": 0.25
+  }
+}

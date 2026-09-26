@@ -1,5 +1,24 @@
 # Known Failures and Limitations
 
+## GPUP-6 comparison coverage is incomplete; no preset selected
+
+The [adaptive report](../docs/benchmarks/lp-adaptive-gpup6.md) records the frozen
+comparison and every retained failure. An initial archive omitted the unchanged
+scheduling code image required by CUDA discovery, causing 288 missing-evidence
+attempts before LP execution; coordinator interruption also retained partial
+attempts. The image was restored with a hash-bound repair record, and only
+unattempted identities resumed. No failed trial was retried or hidden. Archive
+preflight now checks all four required images before admission. The earlier v5
+configuration-enum preflight failed before any reservation and is also preserved.
+
+These missing cells cannot establish a performance ranking. Work-limit and
+numerical-rejection endpoints are independently verifiable but remain uncertified.
+The implemented opt-in recovery policies pass host fault injection, regular
+device differentials, v5 verification/replay and all four adaptive sanitizers;
+no general preset follows from those correctness gates. Adaptive throughput
+sessions and disk checkpoints remain out of scope. The previous 65536-row
+throughput timeouts and historical tuned_cases racecheck gap below remain open.
+
 ## PR #8 clean-checkout budget test failure corrected
 
 Both initial CPU workflows failed because the throughput budget-authority test

@@ -269,6 +269,7 @@ impl BackendCapabilities {
         SolveRecord {
             lp_execution: None,
             lp_precision: None,
+            lp_adaptive: None,
             schema_version: crate::SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: self.name.to_string(),

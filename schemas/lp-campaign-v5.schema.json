@@ -1,0 +1,3401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-campaign-v5.schema.json",
+  "title": "Frozen GPUP-6 campaign v5",
+  "const": {
+    "analysis": {
+      "confidence": 0.95,
+      "resamples": 10000,
+      "seed": 17002
+    },
+    "configurations": [
+      {
+        "id": "highs",
+        "backend": "highs"
+      },
+      {
+        "id": "host-lp",
+        "backend": "host-lp"
+      },
+      {
+        "id": "cuda-lp",
+        "backend": "cuda-lp"
+      },
+      {
+        "id": "matched-fp64",
+        "backend": "cuda-lp-matched"
+      },
+      {
+        "id": "tuned-fp64",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        }
+      },
+      {
+        "id": "precision-fp64",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "precision": {
+          "schema_version": 1,
+          "matrix": "f64",
+          "product_operands": "f64",
+          "products": "f64",
+          "accumulation": "f64",
+          "working_state": "f64",
+          "updates": "f64",
+          "rounding": "nearest_even",
+          "correction_interval": null
+        }
+      },
+      {
+        "id": "storage-fp32",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "precision": {
+          "schema_version": 1,
+          "matrix": "f32",
+          "product_operands": "f64",
+          "products": "f64",
+          "accumulation": "f64",
+          "working_state": "f64",
+          "updates": "f64",
+          "rounding": "nearest_even",
+          "correction_interval": null
+        }
+      },
+      {
+        "id": "products-fp32",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "precision": {
+          "schema_version": 1,
+          "matrix": "f32",
+          "product_operands": "f32",
+          "products": "f32",
+          "accumulation": "f64",
+          "working_state": "f64",
+          "updates": "f64",
+          "rounding": "nearest_even",
+          "correction_interval": null
+        }
+      },
+      {
+        "id": "accumulation-fp32",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "precision": {
+          "schema_version": 1,
+          "matrix": "f32",
+          "product_operands": "f32",
+          "products": "f32",
+          "accumulation": "f32",
+          "working_state": "f64",
+          "updates": "f64",
+          "rounding": "nearest_even",
+          "correction_interval": null
+        }
+      },
+      {
+        "id": "master-correction32",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "precision": {
+          "schema_version": 1,
+          "matrix": "f32",
+          "product_operands": "f32",
+          "products": "f32",
+          "accumulation": "f32",
+          "working_state": "f64",
+          "updates": "f64",
+          "rounding": "nearest_even",
+          "correction_interval": 32
+        }
+      },
+      {
+        "id": "working-fp32-correction32",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "precision": {
+          "schema_version": 1,
+          "matrix": "f32",
+          "product_operands": "f32",
+          "products": "f32",
+          "accumulation": "f32",
+          "working_state": "f32",
+          "updates": "f64",
+          "rounding": "nearest_even",
+          "correction_interval": 32
+        }
+      },
+      {
+        "id": "adaptive-fp64-a1",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-fp64-a8",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-fp64-a32",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-fp64-a128",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a1-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a1-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a1-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a1-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a8-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a8-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a8-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a8-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a32-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a32-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a32-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a32-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a128-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a128-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a128-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-working_fp32-a128-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a1-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a1-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a1-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a1-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a8-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a8-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a8-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a8-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a32-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a32-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a32-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a32-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a128-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a128-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a128-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-accumulation_fp32-a128-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a1-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a1-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a1-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a1-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a8-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a8-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a8-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a8-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a32-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a32-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a32-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a32-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a128-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a128-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a128-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-products_fp32-a128-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a1-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a1-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a1-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a1-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a8-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a8-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a8-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a8-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a32-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a32-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a32-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a32-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a128-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a128-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a128-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-direct-storage_fp32-a128-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a1-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a1-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a1-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a1-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a8-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a8-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a8-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a8-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a32-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a32-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a32-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a32-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a128-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a128-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a128-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-working_fp32-a128-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "working_fp32",
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a1-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a1-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a1-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a1-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a8-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a8-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a8-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a8-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a32-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a32-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a32-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a32-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a128-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a128-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a128-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-accumulation_fp32-a128-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "accumulation_fp32",
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a1-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a1-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a1-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a1-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 1,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a8-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a8-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a8-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a8-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 8,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a32-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a32-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a32-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a32-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 32,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a128-strict-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a128-strict-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-07,
+          "dual_absolute": 1e-07,
+          "relative": 1e-07,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a128-loose-sticky",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": null
+        }
+      },
+      {
+        "id": "adaptive-gradual-products_fp32-a128-loose-demote",
+        "backend": "cuda-lp-tuned",
+        "execution": {
+          "schema_version": 1,
+          "allocation": "resident",
+          "uploads": "necessary",
+          "reduction": "warp32_v1",
+          "fusion": "separate"
+        },
+        "adaptive": {
+          "schema_version": 1,
+          "ladder": [
+            "products_fp32",
+            "storage_fp32",
+            "fp64"
+          ],
+          "audit_interval": 128,
+          "primal_absolute": 1e-05,
+          "dual_absolute": 1e-05,
+          "relative": 1e-05,
+          "demotion": {
+            "clean_windows": 4,
+            "margin_fraction": 0.25
+          }
+        }
+      }
+    ],
+    "device": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+    "id": "gpup6-adaptive-v1",
+    "limits": {
+      "cleanup_seconds": 2,
+      "device_buffer_bytes": 8589934592,
+      "host_rss_bytes": 8589934592,
+      "output_bytes": 33554432,
+      "poll_ms": 10,
+      "solve_seconds": 10
+    },
+    "lp_settings": {
+      "check_interval": 200,
+      "iteration_limit": 50000,
+      "power_iterations": 20,
+      "preconditioner": {
+        "pock_chambolle_alpha": 1.0,
+        "ruiz_passes": 10
+      },
+      "primal_weight": {
+        "derivative": 0.0,
+        "integral": 0.0,
+        "proportional": 0.5
+      },
+      "restart": {
+        "artificial": 0.36,
+        "necessary": 0.8,
+        "sufficient": 0.2
+      },
+      "schema_version": 1
+    },
+    "manifests": [
+      {
+        "path": "benchmarks/manifests/lp-development-v1.json",
+        "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+      },
+      {
+        "path": "benchmarks/manifests/lp-validation-v1.json",
+        "sha256": "f1fbda485e4ec02172aed2fb889f3f0797eb41fb7c1da6f30cfc6ec7c777f4ff"
+      },
+      {
+        "path": "benchmarks/manifests/lp-held_out-v1.json",
+        "sha256": "0f7a16ff64f1929b81cb4c8ba71523f4f7b1a39f84011aa39620968e28d15930"
+      }
+    ],
+    "order_seed": 17001,
+    "partition": "development",
+    "phase_gpu_seconds": {
+      "ablations": 7200,
+      "baseline": 1800,
+      "finalists": 9000,
+      "repeatability": 3600,
+      "screening": 7200
+    },
+    "profile_repetitions": 1,
+    "repetitions": 3,
+    "schema_version": 5,
+    "slice_gpu_seconds": 6300,
+    "solve": {
+      "iteration_limit": 50000,
+      "node_limit": null,
+      "schema_version": 1,
+      "seed": 17,
+      "threads": 1,
+      "time_limit_ms": 10000,
+      "tolerances": {
+        "absolute": 1e-09,
+        "integrality": 1e-09,
+        "relative": 1e-09
+      }
+    },
+    "total_gpu_seconds": 28800,
+    "budget_authority": {
+      "path": "benchmarks/configs/lp-campaign-v1.json",
+      "sha256": "a65d0ac2ce2b2676453d0e15752f887af1ee759318bed8b4538ae3f6f0cf137f"
+    },
+    "previous_protocol": {
+      "path": "benchmarks/configs/lp-throughput-v1.json",
+      "sha256": "6039196ee82df47099bab66f780c6a3f7730d34ac0a56e2ba28a58508ca086f1"
+    },
+    "decision": {
+      "path": "docs/decisions/ADR-0025-adaptive-precision-recovery.md",
+      "sha256": "4b6fe9a12fd3bab61672e6a9c5107efe020be807607392536f753044e208a0cc"
+    },
+    "prior_gpu_ns": 7015920961503,
+    "prior_events": 8278,
+    "prior_ledger_sha256": "c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a",
+    "additional_gpu_seconds": 6300,
+    "cumulative_gpu_ns": 14402574545061,
+    "study_cap_seconds": 5400,
+    "acceptance_cap_seconds": 900,
+    "combined_cap_seconds": 6300,
+    "study_phase": "ablations",
+    "acceptance_phase": "repeatability",
+    "output": "artifacts/gpup6-adaptive-v1",
+    "acceptance_output": "artifacts/gpup6-acceptance",
+    "planned_attempts": 2376,
+    "blocks": [
+      {
+        "id": "coverage",
+        "mode": "timing",
+        "instances": [
+          "gpup-development-scheduling-20x5",
+          "gpup-development-scheduling-50x10",
+          "gpup-development-irregular-256",
+          "gpup-development-irregular-2048",
+          "gpup-development-dense_block-256",
+          "gpup-development-dense_block-1024",
+          "gpup-development-scaling-64",
+          "gpup-development-scaling-256",
+          "gpup-development-small-4",
+          "gpup-development-small-16",
+          "ta001-relaxation",
+          "ta011-relaxation"
+        ],
+        "configurations": [
+          "highs",
+          "host-lp",
+          "cuda-lp",
+          "matched-fp64",
+          "tuned-fp64",
+          "precision-fp64",
+          "storage-fp32",
+          "products-fp32",
+          "accumulation-fp32",
+          "master-correction32",
+          "working-fp32-correction32",
+          "adaptive-fp64-a32",
+          "adaptive-direct-working_fp32-a32-strict-sticky",
+          "adaptive-direct-working_fp32-a32-strict-demote",
+          "adaptive-direct-accumulation_fp32-a32-strict-sticky",
+          "adaptive-direct-accumulation_fp32-a32-strict-demote",
+          "adaptive-direct-products_fp32-a32-strict-sticky",
+          "adaptive-direct-products_fp32-a32-strict-demote",
+          "adaptive-direct-storage_fp32-a32-strict-sticky",
+          "adaptive-direct-storage_fp32-a32-strict-demote",
+          "adaptive-gradual-working_fp32-a32-strict-sticky",
+          "adaptive-gradual-working_fp32-a32-strict-demote",
+          "adaptive-gradual-accumulation_fp32-a32-strict-sticky",
+          "adaptive-gradual-accumulation_fp32-a32-strict-demote",
+          "adaptive-gradual-products_fp32-a32-strict-sticky",
+          "adaptive-gradual-products_fp32-a32-strict-demote"
+        ],
+        "repetitions": 3
+      },
+      {
+        "id": "policy",
+        "mode": "timing",
+        "instances": [
+          "gpup-development-small-4",
+          "gpup-development-irregular-256",
+          "gpup-development-irregular-2048",
+          "gpup-development-dense_block-1024"
+        ],
+        "configurations": [
+          "adaptive-direct-working_fp32-a1-strict-sticky",
+          "adaptive-direct-working_fp32-a1-strict-demote",
+          "adaptive-direct-working_fp32-a1-loose-sticky",
+          "adaptive-direct-working_fp32-a1-loose-demote",
+          "adaptive-direct-working_fp32-a8-strict-sticky",
+          "adaptive-direct-working_fp32-a8-strict-demote",
+          "adaptive-direct-working_fp32-a8-loose-sticky",
+          "adaptive-direct-working_fp32-a8-loose-demote",
+          "adaptive-direct-working_fp32-a32-strict-sticky",
+          "adaptive-direct-working_fp32-a32-strict-demote",
+          "adaptive-direct-working_fp32-a32-loose-sticky",
+          "adaptive-direct-working_fp32-a32-loose-demote",
+          "adaptive-direct-working_fp32-a128-strict-sticky",
+          "adaptive-direct-working_fp32-a128-strict-demote",
+          "adaptive-direct-working_fp32-a128-loose-sticky",
+          "adaptive-direct-working_fp32-a128-loose-demote",
+          "adaptive-direct-accumulation_fp32-a1-strict-sticky",
+          "adaptive-direct-accumulation_fp32-a1-strict-demote",
+          "adaptive-direct-accumulation_fp32-a1-loose-sticky",
+          "adaptive-direct-accumulation_fp32-a1-loose-demote",
+          "adaptive-direct-accumulation_fp32-a8-strict-sticky",
+          "adaptive-direct-accumulation_fp32-a8-strict-demote",
+          "adaptive-direct-accumulation_fp32-a8-loose-sticky",
+          "adaptive-direct-accumulation_fp32-a8-loose-demote",
+          "adaptive-direct-accumulation_fp32-a32-strict-sticky",
+          "adaptive-direct-accumulation_fp32-a32-strict-demote",
+          "adaptive-direct-accumulation_fp32-a32-loose-sticky",
+          "adaptive-direct-accumulation_fp32-a32-loose-demote",
+          "adaptive-direct-accumulation_fp32-a128-strict-sticky",
+          "adaptive-direct-accumulation_fp32-a128-strict-demote",
+          "adaptive-direct-accumulation_fp32-a128-loose-sticky",
+          "adaptive-direct-accumulation_fp32-a128-loose-demote",
+          "adaptive-direct-products_fp32-a1-strict-sticky",
+          "adaptive-direct-products_fp32-a1-strict-demote",
+          "adaptive-direct-products_fp32-a1-loose-sticky",
+          "adaptive-direct-products_fp32-a1-loose-demote",
+          "adaptive-direct-products_fp32-a8-strict-sticky",
+          "adaptive-direct-products_fp32-a8-strict-demote",
+          "adaptive-direct-products_fp32-a8-loose-sticky",
+          "adaptive-direct-products_fp32-a8-loose-demote",
+          "adaptive-direct-products_fp32-a32-strict-sticky",
+          "adaptive-direct-products_fp32-a32-strict-demote",
+          "adaptive-direct-products_fp32-a32-loose-sticky",
+          "adaptive-direct-products_fp32-a32-loose-demote",
+          "adaptive-direct-products_fp32-a128-strict-sticky",
+          "adaptive-direct-products_fp32-a128-strict-demote",
+          "adaptive-direct-products_fp32-a128-loose-sticky",
+          "adaptive-direct-products_fp32-a128-loose-demote",
+          "adaptive-direct-storage_fp32-a1-strict-sticky",
+          "adaptive-direct-storage_fp32-a1-strict-demote",
+          "adaptive-direct-storage_fp32-a1-loose-sticky",
+          "adaptive-direct-storage_fp32-a1-loose-demote",
+          "adaptive-direct-storage_fp32-a8-strict-sticky",
+          "adaptive-direct-storage_fp32-a8-strict-demote",
+          "adaptive-direct-storage_fp32-a8-loose-sticky",
+          "adaptive-direct-storage_fp32-a8-loose-demote",
+          "adaptive-direct-storage_fp32-a32-strict-sticky",
+          "adaptive-direct-storage_fp32-a32-strict-demote",
+          "adaptive-direct-storage_fp32-a32-loose-sticky",
+          "adaptive-direct-storage_fp32-a32-loose-demote",
+          "adaptive-direct-storage_fp32-a128-strict-sticky",
+          "adaptive-direct-storage_fp32-a128-strict-demote",
+          "adaptive-direct-storage_fp32-a128-loose-sticky",
+          "adaptive-direct-storage_fp32-a128-loose-demote",
+          "adaptive-gradual-working_fp32-a1-strict-sticky",
+          "adaptive-gradual-working_fp32-a1-strict-demote",
+          "adaptive-gradual-working_fp32-a1-loose-sticky",
+          "adaptive-gradual-working_fp32-a1-loose-demote",
+          "adaptive-gradual-working_fp32-a8-strict-sticky",
+          "adaptive-gradual-working_fp32-a8-strict-demote",
+          "adaptive-gradual-working_fp32-a8-loose-sticky",
+          "adaptive-gradual-working_fp32-a8-loose-demote",
+          "adaptive-gradual-working_fp32-a32-strict-sticky",
+          "adaptive-gradual-working_fp32-a32-strict-demote",
+          "adaptive-gradual-working_fp32-a32-loose-sticky",
+          "adaptive-gradual-working_fp32-a32-loose-demote",
+          "adaptive-gradual-working_fp32-a128-strict-sticky",
+          "adaptive-gradual-working_fp32-a128-strict-demote",
+          "adaptive-gradual-working_fp32-a128-loose-sticky",
+          "adaptive-gradual-working_fp32-a128-loose-demote",
+          "adaptive-gradual-accumulation_fp32-a1-strict-sticky",
+          "adaptive-gradual-accumulation_fp32-a1-strict-demote",
+          "adaptive-gradual-accumulation_fp32-a1-loose-sticky",
+          "adaptive-gradual-accumulation_fp32-a1-loose-demote",
+          "adaptive-gradual-accumulation_fp32-a8-strict-sticky",
+          "adaptive-gradual-accumulation_fp32-a8-strict-demote",
+          "adaptive-gradual-accumulation_fp32-a8-loose-sticky",
+          "adaptive-gradual-accumulation_fp32-a8-loose-demote",
+          "adaptive-gradual-accumulation_fp32-a32-strict-sticky",
+          "adaptive-gradual-accumulation_fp32-a32-strict-demote",
+          "adaptive-gradual-accumulation_fp32-a32-loose-sticky",
+          "adaptive-gradual-accumulation_fp32-a32-loose-demote",
+          "adaptive-gradual-accumulation_fp32-a128-strict-sticky",
+          "adaptive-gradual-accumulation_fp32-a128-strict-demote",
+          "adaptive-gradual-accumulation_fp32-a128-loose-sticky",
+          "adaptive-gradual-accumulation_fp32-a128-loose-demote",
+          "adaptive-gradual-products_fp32-a1-strict-sticky",
+          "adaptive-gradual-products_fp32-a1-strict-demote",
+          "adaptive-gradual-products_fp32-a1-loose-sticky",
+          "adaptive-gradual-products_fp32-a1-loose-demote",
+          "adaptive-gradual-products_fp32-a8-strict-sticky",
+          "adaptive-gradual-products_fp32-a8-strict-demote",
+          "adaptive-gradual-products_fp32-a8-loose-sticky",
+          "adaptive-gradual-products_fp32-a8-loose-demote",
+          "adaptive-gradual-products_fp32-a32-strict-sticky",
+          "adaptive-gradual-products_fp32-a32-strict-demote",
+          "adaptive-gradual-products_fp32-a32-loose-sticky",
+          "adaptive-gradual-products_fp32-a32-loose-demote",
+          "adaptive-gradual-products_fp32-a128-strict-sticky",
+          "adaptive-gradual-products_fp32-a128-strict-demote",
+          "adaptive-gradual-products_fp32-a128-loose-sticky",
+          "adaptive-gradual-products_fp32-a128-loose-demote",
+          "adaptive-fp64-a1",
+          "adaptive-fp64-a8",
+          "adaptive-fp64-a32",
+          "adaptive-fp64-a128",
+          "tuned-fp64",
+          "precision-fp64"
+        ],
+        "repetitions": 3
+      },
+      {
+        "id": "profiles",
+        "mode": "profile",
+        "instances": [
+          "gpup-development-small-4",
+          "gpup-development-irregular-256",
+          "gpup-development-irregular-2048",
+          "gpup-development-dense_block-1024"
+        ],
+        "configurations": [
+          "tuned-fp64",
+          "adaptive-fp64-a32",
+          "adaptive-direct-accumulation_fp32-a1-strict-sticky",
+          "adaptive-direct-accumulation_fp32-a32-strict-sticky",
+          "adaptive-direct-accumulation_fp32-a128-strict-sticky",
+          "adaptive-gradual-working_fp32-a32-strict-demote"
+        ],
+        "repetitions": 1
+      }
+    ],
+    "activity": {
+      "leased_seconds": 3,
+      "poll_ms": 250,
+      "wait_seconds": 300
+    }
+  }
+}

@@ -53,6 +53,7 @@ pub struct CudaLpBackend {
     execution: Option<optimizer_core::LpExecutionRecord>,
     code_image: Option<Vec<u8>>,
     precision: Option<optimizer_core::LpPrecisionSettings>,
+    adaptive: Option<optimizer_core::LpAdaptiveSettings>,
 }
 
 impl CudaLpBackend {
@@ -93,6 +94,7 @@ impl CudaLpBackend {
             execution: None,
             code_image: None,
             precision: None,
+            adaptive: None,
         })
     }
 
@@ -163,6 +165,24 @@ impl CudaLpBackend {
         Ok(backend)
     }
 
+    /// Open explicitly configured adaptive audits and recovery using unchanged precision kernels.
+    pub fn open_adaptive(
+        context: Rc<Context>,
+        settings: LpSettings,
+        execution: optimizer_core::Fp64ExecutionSettings,
+        adaptive: optimizer_core::LpAdaptiveSettings,
+    ) -> Result<Self, ValidationError> {
+        adaptive.validate_execution(execution)?;
+        let mut backend = Self::open_tuned_with_code_object(
+            context,
+            settings,
+            execution,
+            crate::precision::code_object_path(),
+        )?;
+        backend.adaptive = Some(adaptive);
+        Ok(backend)
+    }
+
     fn name(&self) -> &'static str {
         if self.execution.is_some() {
             "cuda-lp-tuned"
@@ -212,6 +232,21 @@ impl CudaLpBackend {
             settings.iteration_limit = settings.iteration_limit.min(work_limit.unwrap_or(u64::MAX));
         }
         let mut engine = Engine::new(program, settings);
+        if let Some(adaptive) = &self.adaptive {
+            diagnostics.finish("preconditioning", preparation);
+            return crate::adaptive::iterate(
+                Rc::clone(&self.context),
+                &mut engine,
+                adaptive.clone(),
+                self.code_image
+                    .as_deref()
+                    .expect("identified precision object"),
+                cancel,
+                diagnostics,
+                check,
+                deadline,
+            );
+        }
         if let Some(precision) = &self.precision {
             diagnostics.finish("preconditioning", preparation);
             return crate::precision::iterate(
@@ -342,7 +377,11 @@ impl Backend for CudaLpBackend {
             self.name(),
             BACKEND_VERSION.to_string(),
             vec![ProblemClass::Continuous],
-            if self.precision.as_ref().is_some_and(|p| p.mixed()) {
+            if self.precision.as_ref().is_some_and(|p| p.mixed())
+                || self.adaptive.as_ref().is_some_and(|a| {
+                    a.ladder.first() != Some(&optimizer_core::LpAdaptiveRung::Fp64)
+                })
+            {
                 Arithmetic::MixedF32F64
             } else {
                 Arithmetic::F64
@@ -391,10 +430,20 @@ impl CudaLpBackend {
         if let Some(p) = &self.precision {
             diagnostics.precision = Some(optimizer_core::LpPrecisionDiagnostics::new(p.clone()));
         }
+        if let Some(a) = &self.adaptive {
+            diagnostics.adaptive = Some(optimizer_core::LpAdaptiveDiagnostics::new(a.clone()));
+        }
         let mut record = self.solve_observed(model, options, cancel, warm_start, diagnostics)?;
         record.backend = self.name().into();
         if let Some(e) = &self.execution {
-            record.schema_version = if self.precision.is_some() { 4 } else { 3 };
+            record.schema_version = if self.adaptive.is_some() {
+                5
+            } else if self.precision.is_some() {
+                4
+            } else {
+                3
+            };
+            record.lp_adaptive = self.adaptive.clone();
             record.lp_precision = self.precision.clone();
             record.lp_settings = Some(self.settings);
             record.lp_execution = Some(e.clone());
@@ -755,6 +804,7 @@ pub(crate) fn assess_and_record(
     Ok(SolveRecord {
         lp_execution: None,
         lp_precision: None,
+        lp_adaptive: None,
         schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
         backend: BACKEND_NAME.to_string(),
@@ -786,6 +836,7 @@ pub(crate) fn bare(
     SolveRecord {
         lp_execution: None,
         lp_precision: None,
+        lp_adaptive: None,
         schema_version: SOLVE_RECORD_SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
         backend: BACKEND_NAME.to_string(),

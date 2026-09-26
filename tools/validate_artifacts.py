@@ -224,6 +224,9 @@ def main():
     if args.result:
         validate_result(args.result)
     else:
+        for name in ["lp-adaptive-v1.json", "lp-adaptive-demotion-v1.json"]:
+            validator("lp-adaptive-v1.schema.json").validate(read_json(ROOT / "examples" / name))
+        validator("lp-campaign-v5.schema.json").validate(read_json(ROOT / "benchmarks/configs/lp-adaptive-v1.json"))
         validator("run-config-v1.schema.json").validate(read_json(ROOT / "examples/run-config.json"))
         validator("solve-config-v1.schema.json").validate(read_json(ROOT / "examples/solve-config-v1.json"))
         # The first-order settings example, which SPEC-0011 requirements 9 and 10

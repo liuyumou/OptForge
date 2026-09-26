@@ -11,7 +11,7 @@ active_research_track: GPUP
 # kernel time. Those costs are outside GPUP-6's adaptive-recovery scope. The slice
 # keeps its own specification, endpoint and budget: amortized throughput never
 # substitutes for the single-solve latency endpoint (ADR-0013).
-next_ready_task: GPUP-6
+next_ready_task: GPUP-7
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: M0
@@ -169,10 +169,10 @@ tasks:
     acceptance: "Separate specification, API and resource budget accepted before implementation; amortized throughput plus complete setup-cost evidence; single-solve endpoint, protocol, defaults and archived evidence unchanged"
   - id: GPUP-6
     title: Implement configurable audits and adaptive precision recovery
-    status: planned
+    status: complete
     depends_on: [GPUP-5C, GPUP-THROUGHPUT]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
-    acceptance: "Fault-injected full rollback, reference correction, charged retries, cancellation, sticky promotion and guarded demotion"
+    acceptance: "ADR-0025 complete; host fault injection, CPU/device differentials, v5 identity/replay/schema gates, clean-checkout budgets, full pinned-native and four adaptive sanitizers; frozen comparison with independently verified endpoints and retained failures; docs/benchmarks/lp-adaptive-gpup6.md"
   - id: GPUP-7
     title: Implement quantization candidates and sparse FP8 execution
     status: planned

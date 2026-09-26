@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-adaptive-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "ladder": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "working_fp32",
+          "accumulation_fp32",
+          "products_fp32",
+          "storage_fp32",
+          "fp64"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 5,
+      "uniqueItems": true
+    },
+    "audit_interval": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "primal_absolute": {
+      "type": "number",
+      "minimum": 0
+    },
+    "dual_absolute": {
+      "type": "number",
+      "minimum": 0
+    },
+    "relative": {
+      "type": "number",
+      "minimum": 0
+    },
+    "demotion": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "clean_windows": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "margin_fraction": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 1
+            }
+          },
+          "required": [
+            "clean_windows",
+            "margin_fraction"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "ladder",
+    "audit_interval",
+    "primal_absolute",
+    "dual_absolute",
+    "relative",
+    "demotion"
+  ]
+}

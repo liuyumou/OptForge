@@ -50,3 +50,6 @@ pub mod precision;
 /// Isolated ADR-0021 arithmetic; unavailable to ordinary runtime selectors.
 #[cfg(feature = "precision-research")]
 pub mod research;
+
+/// Explicit adaptive audit/recovery controller and CPU oracle.
+pub mod adaptive;

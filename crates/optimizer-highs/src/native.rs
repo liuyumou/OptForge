@@ -553,6 +553,7 @@ pub(crate) fn solve(
             SolveRecord {
                 lp_execution: None,
                 lp_precision: None,
+                lp_adaptive: None,
                 schema_version: SOLVE_RECORD_SCHEMA_VERSION,
                 model_id: model.document().model_id.clone(),
                 backend: BACKEND_NAME.to_string(),

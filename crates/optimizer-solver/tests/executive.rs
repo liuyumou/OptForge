@@ -360,6 +360,7 @@ impl Backend for ExactBackend {
         let record = |termination, candidate: Option<Candidate>, objective| SolveRecord {
             lp_execution: None,
             lp_precision: None,
+            lp_adaptive: None,
             schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: "exact-test-lp".to_string(),
@@ -461,6 +462,7 @@ impl Backend for ScriptedBackend {
         Ok(SolveRecord {
             lp_execution: None,
             lp_precision: None,
+            lp_adaptive: None,
             schema_version: SOLVE_RECORD_SCHEMA_VERSION,
             model_id: model.document().model_id.clone(),
             backend: "scripted".to_string(),

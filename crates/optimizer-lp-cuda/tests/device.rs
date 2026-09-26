@@ -1076,3 +1076,6 @@ mod session_cases;
 #[cfg(feature = "precision-research")]
 #[path = "device/research.rs"]
 mod research_cases;
+
+#[path = "device/adaptive.rs"]
+mod adaptive_cases;

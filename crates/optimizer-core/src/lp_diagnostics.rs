@@ -64,6 +64,9 @@ impl SessionSetup {
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct LpDiagnostics {
+    /// Adaptive observations serialized only by endpoint v5.
+    #[serde(skip)]
+    pub adaptive: Option<crate::LpAdaptiveDiagnostics>,
     /// Precision observations belong only to endpoint v4.
     #[serde(skip)]
     pub precision: Option<crate::LpPrecisionDiagnostics>,
@@ -102,6 +105,7 @@ impl LpDiagnostics {
     #[must_use]
     pub fn new(enabled: bool, profile: bool) -> Self {
         Self {
+            adaptive: None,
             precision: None,
             control: None,
             execution: None,

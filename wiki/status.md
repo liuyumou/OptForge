@@ -11,8 +11,8 @@ evidence is recorded in [active task](../state/active-task.md).
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | Prioritized GPU LP precision track (GPUP-6 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
-| Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
+| Planned | Prioritized GPU LP precision track (GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
 GPUP-0 has saved the [precision roadmap](../docs/plans/gpu-lp-precision-roadmap.md),
@@ -65,8 +65,10 @@ and research sessions pay setup once per batch, and its
 [report](../docs/benchmarks/lp-repeated-solve-throughput.md) verifies 687 of 705
 admitted attempts with 4785/4785 batch solves bitwise identical to fresh singles,
 amortized throughput as a separately labeled endpoint (never single-solve
-latency), and cumulative consumption of 6951.059845871 seconds. GPUP-6 follows;
-adaptive recovery requires its bounded contract. No supported recipe is available. The campaign retains its eight GPU-hour cap; acceptance details remain
+latency), and cumulative consumption of 6951.059845871 seconds. GPUP-6 is also complete under accepted ADR-0025; its
+[adaptive report](../docs/benchmarks/lp-adaptive-gpup6.md) records explicit audits,
+rollback, promotion/demotion, independent v5 evidence, complete correctness gates
+and retained comparison failures. GPUP-7 is next and needs a bounded contract. No supported recipe is available. The campaign retains its eight GPU-hour cap; acceptance details remain
 in the active-task record.
 
 Solve records recompute objectives and violations independently of the backend. A
@@ -82,7 +84,7 @@ not a process abort. A search is recorded with the revision, model fingerprint
 and input hashes needed to repeat it, and verification re-runs that search from
 the record alone rather than trusting its stored result; agreement establishes
 determinism on one host, never optimality, and a forfeited search stays forfeited
-after it verifies. No Python SDK, mixed-precision LP backend, dynamically
+after it verifies. No Python SDK, dynamically
 loaded native extension, persistent checkpoint restart or general comparative experiment runner is
 available. Cross-host reproducibility is untested; the development baseline
 reports measured costs and coverage without a general solver superiority claim.

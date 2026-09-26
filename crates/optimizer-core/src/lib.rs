@@ -156,3 +156,9 @@ pub use lp_execution::{
 
 mod lp_precision;
 pub use lp_precision::{LpPrecisionDiagnostics, LpPrecisionSettings, LpWidth};
+
+mod lp_adaptive;
+pub use lp_adaptive::{
+    LpAdaptiveDiagnostics, LpAdaptiveRung, LpAdaptiveSettings, LpAdaptiveTransition,
+    LpDemotionSettings,
+};

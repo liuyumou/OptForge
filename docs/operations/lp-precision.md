@@ -3,7 +3,7 @@
 GPUP-5 implements the bounded [ADR-0019](../decisions/ADR-0019-fp32-lp-comparisons.md)
 contract on cuda-lp-tuned. Existing backend selections and absent precision settings
 keep their original arithmetic and replay formats. These are experimental choices,
-not supported presets. Adaptive audits and recovery remain GPUP-6.
+not supported presets. GPUP-6 adds the separate explicit adaptive policy below.
 
 ## Explicit invocation
 
@@ -154,3 +154,51 @@ Existing commands, defaults, schemas and archived evidence are unchanged. The
 fresh singles, records the session_ sanitizer coverage and the tuned_cases
 racecheck gap, and consumes 2617.929459541 study plus 538.371430691 acceptance
 seconds for 6951.059845871 cumulative.
+
+## Adaptive FP32/FP64 recovery
+
+[ADR-0025](../decisions/ADR-0025-adaptive-precision-recovery.md) adds
+`--lp-adaptive examples/lp-adaptive-v1.json` to cuda-lp-tuned, exclusive with
+`--lp-precision`. It uses the same explicit precision execution document and
+unchanged kernels. The alternate lp-adaptive-demotion-v1 example enables guarded
+demotion. Neither example is a supported preset. All GPU commands must run under
+an admitted campaign reservation and the shared host lease.
+
+The ladder is a strictly increasing subsequence of working_fp32,
+accumulation_fp32, products_fp32, storage_fp32, fp64 and must end in fp64. Every
+policy field is required. Audit tolerances describe local update error in original
+model units, independently of final feasibility and gap tolerances. Passing audits
+adopt the original-operator reference endpoint. They do not certify preceding steps.
+Failed audits or range guards restore the complete window before promotion/replay.
+Physical work and deadlines never roll back. Demotion requires both clean windows
+and a separately charged prospective lower-rung probe; null demotion stays sticky.
+
+Adaptive solve records and endpoints use version 5. The method identity is
+adaptive-fp32-fp64-v1; kernel identity remains the precision code-object hash.
+The proposal count includes discarded/replayed proposals; rejected and replay
+counts are subsets, not extra work. Total completed physical updates are proposals
+plus audits plus probes. Unknown work after a device fault stays unavailable.
+Peak device bytes admit the maximum rung residency; cumulative allocated bytes
+also include recreated buffers at transitions. Each solve starts cold.
+
+To inspect the frozen comparison without running a GPU job:
+
+```bash
+python3 tools/benchmark_lp_adaptive.py --dry-run
+```
+
+The native gate must pass on the exact source before device admission. The study
+runner supervises and leases each attempt; acceptance uses lp_adaptive_budget.py
+and lp_adaptive_gpu_check.sh with unique job IDs. The original ledger is never
+reset, and ablation/acceptance allowances cannot borrow across phases. Regenerate
+no seeds, tolerances or grid after inspecting results. The independent report
+command uses the archived executable and refuses to overwrite an existing report:
+
+```bash
+python3 tools/report_lp_adaptive.py --output artifacts/gpup6-adaptive-v1/report.json
+```
+
+The [GPUP-6 report](../benchmarks/lp-adaptive-gpup6.md) records completed
+correctness acceptance, retained comparison failures, phase accounting and
+reproduction. The archived measured source and executable define the timing
+identity; final verifier/archive checks do not change the numerical path.
