@@ -1,0 +1,225 @@
+{
+  "$id": "lp-external-witness-v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "binding_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "copt_version": {
+      "const": "8.0.6"
+    },
+    "dual": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "executed_backend": {
+      "anyOf": [
+        {
+          "enum": [
+            "copt-cpu-default",
+            "copt-cpu-pdlp",
+            "copt-gpu-pdlp"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "gpu_confirmed": {
+      "type": "boolean"
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "library_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "model_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "native": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "barrier_iterations": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "pdlp_iterations": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "peak_memory_mb": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "simplex_iterations": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "solving_seconds": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "simplex_iterations",
+            "barrier_iterations",
+            "pdlp_iterations",
+            "solving_seconds",
+            "peak_memory_mb"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "options": {
+      "$ref": "solve-config-v1.schema.json"
+    },
+    "parameters": {
+      "additionalProperties": false,
+      "properties": {
+        "Crossover": {
+          "type": "number"
+        },
+        "DualTol": {
+          "type": "number"
+        },
+        "FeasTol": {
+          "type": "number"
+        },
+        "GPUDevice": {
+          "type": "number"
+        },
+        "GPUMode": {
+          "type": "number"
+        },
+        "LpMethod": {
+          "type": "number"
+        },
+        "PDLPTol": {
+          "type": "number"
+        },
+        "Threads": {
+          "type": "number"
+        },
+        "TimeLimit": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "LpMethod",
+        "GPUMode",
+        "GPUDevice",
+        "Threads",
+        "Crossover",
+        "TimeLimit",
+        "FeasTol",
+        "DualTol"
+      ],
+      "type": "object"
+    },
+    "primal": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "requested_backend": {
+      "enum": [
+        "copt-cpu-default",
+        "copt-cpu-pdlp",
+        "copt-gpu-pdlp"
+      ]
+    },
+    "row_ids": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "schema_version": {
+      "const": 2
+    },
+    "status": {
+      "enum": [
+        "optimal",
+        "time_limit",
+        "iteration_limit",
+        "interrupted",
+        "unsupported",
+        "numerical_failure",
+        "backend_failure"
+      ]
+    },
+    "variable_ids": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "model_sha256",
+    "requested_backend",
+    "executed_backend",
+    "options",
+    "copt_version",
+    "parameters",
+    "library_sha256",
+    "binding_sha256",
+    "gpu_confirmed",
+    "row_ids",
+    "variable_ids",
+    "primal",
+    "dual",
+    "status",
+    "iterations",
+    "limitations",
+    "native"
+  ],
+  "type": "object"
+}

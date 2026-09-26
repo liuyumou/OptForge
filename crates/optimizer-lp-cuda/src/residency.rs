@@ -767,6 +767,7 @@ impl LpResidency {
         }
 
         let allocation = diagnostics.start();
+        let component_allocation = optimizer_core::lp_cost::scope("working_allocation");
         let mut device_x = self.context.allocate::<f64>(self.columns.max(1))?;
         let mut device_y = self.context.allocate::<f64>(self.rows.max(1))?;
         let mut device_anchor_x = self.context.allocate::<f64>(self.columns.max(1))?;
@@ -777,15 +778,19 @@ impl LpResidency {
         let transposed = self.context.allocate::<f64>(self.columns.max(1))?;
         let activity = self.context.allocate::<f64>(self.rows.max(1))?;
 
+        drop(component_allocation);
         diagnostics.finish("working_allocation", allocation);
         let upload = diagnostics.start();
+        let component_upload = optimizer_core::lp_cost::scope("working_upload");
         device_x.copy_from(x, &self.stream)?;
         device_y.copy_from(y, &self.stream)?;
         device_anchor_x.copy_from(anchor_x, &self.stream)?;
         device_anchor_y.copy_from(anchor_y, &self.stream)?;
 
+        drop(component_upload);
         diagnostics.finish("working_upload", upload);
         let kernels = diagnostics.start();
+        let component_kernels = optimizer_core::lp_cost::scope("kernels_and_synchronization");
         let primal_step = step / weight;
         let dual_step = step * weight;
         let grid_columns = (self.columns.max(1) as u32).div_ceil(BLOCK);
@@ -944,10 +949,13 @@ impl LpResidency {
             done += chunk;
         }
 
+        drop(component_kernels);
         diagnostics.finish("kernels_and_synchronization", kernels);
         let readback = diagnostics.start();
+        let component_readback = optimizer_core::lp_cost::scope("readback");
         device_x.copy_to(x, &self.stream)?;
         device_y.copy_to(y, &self.stream)?;
+        drop(component_readback);
         diagnostics.finish("readback", readback);
         Ok(AdvanceResult {
             completed: done,

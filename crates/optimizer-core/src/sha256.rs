@@ -95,6 +95,7 @@ const H0: [u32; 8] = [
 
 /// SHA-256 of `bytes` as 64 lowercase hexadecimal digits.
 pub fn hex(bytes: &[u8]) -> String {
+    let _component_scope = crate::lp_cost::scope("artifact_hash");
     let mut state = H0;
 
     // Pad to a multiple of 64 bytes: a single one bit, zeroes, then the message

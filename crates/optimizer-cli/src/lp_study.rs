@@ -4,6 +4,77 @@ use std::ffi::OsString;
 use std::io;
 
 pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8> {
+    let mut model_limit = None;
+    let mut costs = None;
+    let mut filtered = Vec::new();
+    for pair in args.chunks(2) {
+        let [key, value] = pair else {
+            return Err(argument("each flag requires a value"));
+        };
+        match key.to_str() {
+            Some("--model-byte-limit") => {
+                let limit = value
+                    .to_str()
+                    .and_then(|v| v.parse::<u64>().ok())
+                    .filter(|v| *v > 0 && *v <= 128 * 1024 * 1024)
+                    .ok_or_else(|| {
+                        argument("study model limit must be between 1 and 134217728 bytes")
+                    })?;
+                if model_limit.replace(limit).is_some() {
+                    return Err(argument("duplicate model limit"));
+                }
+            }
+            Some("--cost-profile") => {
+                if costs.replace(value).is_some() {
+                    return Err(argument("duplicate cost profile"));
+                }
+            }
+            _ => filtered.extend_from_slice(pair),
+        }
+    }
+    let supported = matches!(
+        command.to_str(),
+        Some("solve" | "verify" | "external-certify" | "external-verify")
+    );
+    if !supported && (model_limit.is_some() || costs.is_some()) {
+        return Err(argument(
+            "explicit study input/profile options require solve or single verification",
+        ));
+    }
+    if command == "solve" && !filtered.iter().any(|v| v == "--lp-evidence") {
+        return Err(argument("study solve requires --lp-evidence"));
+    }
+    let session = costs
+        .map(|_| optimizer_core::lp_cost::Session::begin().map_err(io::Error::other))
+        .transpose()?;
+    let result = if command == "solve" {
+        crate::solve::solve_with_model_limit(
+            &filtered,
+            model_limit.unwrap_or(crate::input::MAX_INPUT_BYTES),
+        )
+    } else {
+        run_inner(
+            command,
+            &filtered,
+            model_limit.unwrap_or(crate::input::MAX_INPUT_BYTES),
+        )
+    };
+    if let (Some(session), Some(path)) = (session, costs) {
+        let profile = session.finish();
+        let mut file = std::fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(path)?;
+        std::io::Write::write_all(
+            &mut file,
+            &serde_json::to_vec(&profile).map_err(io::Error::other)?,
+        )?;
+    }
+    result
+}
+
+fn run_inner(command: &std::ffi::OsStr, args: &[OsString], model_limit: u64) -> io::Result<u8> {
+    let _cost = optimizer_core::lp_cost::scope("study_verification");
     let mut model = None;
     let mut evidence = None;
     let mut instance = None;
@@ -32,29 +103,62 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
         }
     }
     if command == "external-certify" || command == "external-verify" {
-        let bytes = read(model.ok_or_else(|| argument("--model required"))?)?;
-        let evidence = read(evidence.ok_or_else(|| argument("--evidence required"))?)?;
+        let bytes = crate::input::read_with_limit(
+            model.ok_or_else(|| argument("--model required"))?,
+            model_limit,
+        )?;
+        let evidence = crate::input::read_with_limit(
+            evidence.ok_or_else(|| argument("--evidence required"))?,
+            model_limit,
+        )?;
+        let version = serde_json::from_slice::<serde_json::Value>(&evidence)
+            .map_err(io::Error::other)?
+            .get("schema_version")
+            .and_then(|v| v.as_u64());
+        use optimizer_experiment::lp_external::{ExternalEndpoint, ExternalWitness};
+        use optimizer_experiment::lp_external_v2::{ExternalEndpointV2, ExternalWitnessV2};
+        let serialized = if command == "external-certify" {
+            match version {
+                Some(1) => serde_json::to_vec_pretty(
+                    &ExternalEndpoint::new(
+                        ExternalWitness::from_json(&evidence).map_err(io::Error::other)?,
+                        &bytes,
+                    )
+                    .map_err(io::Error::other)?,
+                )?,
+                Some(2) => serde_json::to_vec_pretty(
+                    &ExternalEndpointV2::new(
+                        ExternalWitnessV2::from_json(&evidence).map_err(io::Error::other)?,
+                        &bytes,
+                    )
+                    .map_err(io::Error::other)?,
+                )?,
+                _ => return Err(argument("unsupported external witness version")),
+            }
+        } else {
+            match version {
+                Some(1) => {
+                    let e = ExternalEndpoint::from_json(&evidence).map_err(io::Error::other)?;
+                    e.verify(&bytes).map_err(io::Error::other)?;
+                    serde_json::to_vec(&e.assessment)?
+                }
+                Some(2) => {
+                    let e = ExternalEndpointV2::from_json(&evidence).map_err(io::Error::other)?;
+                    e.verify(&bytes).map_err(io::Error::other)?;
+                    serde_json::to_vec(&e.assessment)?
+                }
+                _ => return Err(argument("unsupported external endpoint version")),
+            }
+        };
         if command == "external-certify" {
-            let witness = optimizer_experiment::lp_external::ExternalWitness::from_json(&evidence)
-                .map_err(io::Error::other)?;
-            let endpoint =
-                optimizer_experiment::lp_external::ExternalEndpoint::new(witness, &bytes)
-                    .map_err(io::Error::other)?;
-            let output = output.ok_or_else(|| argument("--output required"))?;
+            let _cost = optimizer_core::lp_cost::scope("endpoint_write");
             let mut file = std::fs::OpenOptions::new()
                 .write(true)
                 .create_new(true)
-                .open(output)?;
-            std::io::Write::write_all(
-                &mut file,
-                &serde_json::to_vec_pretty(&endpoint).map_err(io::Error::other)?,
-            )?;
+                .open(output.ok_or_else(|| argument("--output required"))?)?;
+            std::io::Write::write_all(&mut file, &serialized)?;
         } else {
-            let endpoint =
-                optimizer_experiment::lp_external::ExternalEndpoint::from_json(&evidence)
-                    .map_err(io::Error::other)?;
-            endpoint.verify(&bytes).map_err(io::Error::other)?;
-            println!("{}", serde_json::to_string(&endpoint.assessment)?);
+            println!("{}", String::from_utf8_lossy(&serialized));
         }
     } else if command == "verify"
         && instance.is_none()
@@ -64,11 +168,16 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
         && index.is_none()
         && out.is_none()
     {
-        let bytes = read(model.ok_or_else(|| argument("--model is required"))?)?;
-        let endpoint = optimizer_experiment::lp::LpEndpoint::from_json(&read(
-            evidence.ok_or_else(|| argument("--evidence is required"))?,
-        )?)
-        .map_err(io::Error::other)?;
+        let bytes = crate::input::read_with_limit(
+            model.ok_or_else(|| argument("--model is required"))?,
+            model_limit,
+        )?;
+        let endpoint =
+            optimizer_experiment::lp::LpEndpoint::from_json(&crate::input::read_with_limit(
+                evidence.ok_or_else(|| argument("--evidence is required"))?,
+                model_limit,
+            )?)
+            .map_err(io::Error::other)?;
         endpoint.verify(&bytes).map_err(io::Error::other)?;
         println!("{}", serde_json::to_string(&endpoint.assessment)?);
     } else if command == "replay"

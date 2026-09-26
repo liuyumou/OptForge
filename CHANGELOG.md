@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — COPT component study
+
+- Add explicit large-input LP study solves, COPT method/native-counter evidence
+  v2, and opt-in hierarchical host component costs without changing solver math.
+- Complete all 1140 ADR-0026 attempts on sixteen development instances; publish
+  [certified latency and component costs](docs/benchmarks/lp-copt-comparison.md),
+  retaining output/deadline failures and opaque COPT graph phases. No preset.
+- Apply the explicit study input allowance to verification evidence as well as
+  models; preserve ordinary 16 MiB parsing and historical v1 external witnesses.
+
+
 ## Matched FP64 prerequisites (2026-09-15)
 
 - Reuse strictly checked LP schema snapshots and wait for quiet GPU admission.

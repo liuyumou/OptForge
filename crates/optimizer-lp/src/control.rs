@@ -128,6 +128,7 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
     /// Save every continuation field without saving resource consumption.
     #[must_use]
     pub fn checkpoint(&self) -> Fp64Checkpoint<'e, 'p> {
+        let _component_scope = optimizer_core::lp_cost::scope("checkpoint_copy");
         Fp64Checkpoint {
             engine: self.engine,
             state: self.state.clone(),
@@ -139,6 +140,7 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
     /// # Errors
     /// Refuses checkpoints belonging to another engine.
     pub fn restore(&mut self, checkpoint: &Fp64Checkpoint<'e, 'p>) -> Result<(), &'static str> {
+        let _component_scope = optimizer_core::lp_cost::scope("checkpoint_restore");
         if !std::ptr::eq(self.engine, checkpoint.engine) {
             return Err("checkpoint belongs to a different FP64 engine");
         }
@@ -207,6 +209,7 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
 
     /// Explicitly prepare binary32 state; unchanged representable values retain residency.
     pub fn round_working(&mut self) -> Result<(), &'static str> {
+        let _component_scope = optimizer_core::lp_cost::scope("working_state_narrowing");
         let mut changed = false;
         let mut next = self.state.clone();
         for v in next
@@ -238,6 +241,7 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
 
     /// Replace a corrected endpoint and invalidate resident state, preserving history.
     pub fn replace_endpoint(&mut self, x: Vec<f64>, y: Vec<f64>) -> Result<(), &'static str> {
+        let _component_scope = optimizer_core::lp_cost::scope("reference_adoption");
         if x.len() != self.state.primal.len()
             || y.len() != self.state.dual.len()
             || !x.iter().chain(&y).all(|v| v.is_finite())
@@ -294,6 +298,7 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
 
     /// Continue after a non-accepting assessment using the original host control.
     pub fn continue_after_check(&mut self) {
+        let _cost = optimizer_core::lp_cost::scope("controller_assessment");
         assert!(self.check_pending());
         let state = &mut self.state;
         let error = self
@@ -307,6 +312,7 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
             || (error <= restart.necessary * state.anchor_error && rose)
             || state.since_restart as f64 >= restart.artificial * state.iterations as f64
         {
+            let _cost = optimizer_core::lp_cost::scope("restart");
             state.weight = self.engine.next_weight(
                 &state.primal,
                 &state.dual,

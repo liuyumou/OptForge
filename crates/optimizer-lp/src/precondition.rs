@@ -38,11 +38,13 @@ impl Preconditioner {
     /// Compute the scaling for one program.
     #[must_use]
     pub fn new(program: &LinearProgram, settings: PreconditionerSettings) -> Self {
+        let _component_scope = optimizer_core::lp_cost::scope("preconditioning");
         let rows = program.row_count();
         let columns = program.column_count();
         let mut row = vec![1.0f64; rows];
         let mut column = vec![1.0f64; columns];
 
+        let ruiz_cost = optimizer_core::lp_cost::scope("ruiz_scaling");
         for _ in 0..settings.ruiz_passes {
             let mut row_max = vec![0.0f64; rows];
             let mut column_max = vec![0.0f64; columns];
@@ -65,7 +67,9 @@ impl Preconditioner {
             }
         }
 
+        drop(ruiz_cost);
         if settings.pock_chambolle_alpha > 0.0 {
+            let _cost = optimizer_core::lp_cost::scope("pock_chambolle_scaling");
             let alpha = settings.pock_chambolle_alpha;
             // These are sums, so they go through the fixed reduction rather than
             // being accumulated in whatever order the entries arrive.

@@ -18,6 +18,7 @@ pub struct PreparedAdaptive {
 impl PreparedAdaptive {
     /// Prepare before constructing the controller; never change its engine later.
     pub fn new(engine: &mut Engine<'_>, settings: &LpAdaptiveSettings) -> Self {
+        let _component_scope = optimizer_core::lp_cost::scope("ladder_preparation");
         let operators: Vec<_> = settings
             .ladder
             .iter()
@@ -40,6 +41,7 @@ pub fn proposal(
     op: &PrecisionOperator,
     rung: LpAdaptiveRung,
 ) -> Result<(Vec<f64>, Vec<f64>), &'static str> {
+    let _component_scope = optimizer_core::lp_cost::scope("demotion_cpu_mirror");
     let mut saved = state.clone();
     if rung == LpAdaptiveRung::WorkingFp32 {
         for v in saved
@@ -77,6 +79,7 @@ pub fn audit(
     reference: (&[f64], &[f64]),
     margin: f64,
 ) -> (bool, f64) {
+    let _component_scope = optimizer_core::lp_cost::scope("audit_comparison");
     let pre_x = engine.unscale_primal(&pre.primal);
     let pre_y = engine.unscale_dual(&pre.dual);
     let low_x = engine.unscale_primal(low.0);
@@ -114,6 +117,7 @@ fn restore<'e, 'p>(
     start: u64,
     observations: &mut LpAdaptiveDiagnostics,
 ) {
+    let _component_scope = optimizer_core::lp_cost::scope("window_rollback");
     observations.rejected_steps += control.state().iterations - start;
     control.restore(checkpoint).expect("same immutable engine");
 }
@@ -124,6 +128,7 @@ fn transition(
     next: Option<usize>,
     reason: &str,
 ) {
+    let _component_scope = optimizer_core::lp_cost::scope("precision_transition");
     a.transitions.push(LpAdaptiveTransition {
         iteration: control.state().iterations,
         physical_work: control.physical_iterations(),
@@ -155,6 +160,7 @@ pub fn run<E>(
     ) -> Result<Option<String>, E>,
     mut check: impl FnMut(&[f64], &[f64], &mut LpDiagnostics) -> bool,
 ) -> Result<(Vec<f64>, Vec<f64>, u64), E> {
+    let _component_scope = optimizer_core::lp_cost::scope("adaptive_iterations");
     let mut a = LpAdaptiveDiagnostics::new(settings.clone());
     a.step = Some(engine.step());
     a.unavailable_rungs = prepared
@@ -198,6 +204,12 @@ pub fn run<E>(
         let checkpoint = c.checkpoint();
         let mut replay = false;
         'attempt: loop {
+            let _rung_cost = optimizer_core::lp_cost::indexed_scope("adaptive_rung", index);
+            let _window_cost = optimizer_core::lp_cost::scope(if replay {
+                "replay_window"
+            } else {
+                "proposal_window"
+            });
             let mut failure = None;
             let mut pre = None;
             while c.state().iterations < end {
@@ -266,6 +278,7 @@ pub fn run<E>(
                     break 'solve;
                 }
                 let phase = d.start();
+                let component_phase = optimizer_core::lp_cost::scope("adaptive_audit");
                 let result = correction(engine, pre.as_ref().expect("isolated final pre-step"));
                 c.charge_extra(1).expect("reserved audit work");
                 a.audit_steps += 1;
@@ -288,6 +301,7 @@ pub fn run<E>(
                     }
                     Err(_) => failure = Some("reference_guard"),
                 }
+                drop(component_phase);
                 d.finish("adaptive_audit", phase);
             }
             if let Some(reason) = failure {
@@ -327,6 +341,7 @@ pub fn run<E>(
                 clean = 0;
                 if let Ok(op) = &prepared.operators[index - 1] {
                     let phase = d.start();
+                    let component_phase = optimizer_core::lp_cost::scope("adaptive_probe");
                     let before = pre.as_ref().unwrap();
                     let trial = proposal(engine, before, op, settings.ladder[index - 1]);
                     c.charge_extra(1).expect("admitted demotion probe");
@@ -345,6 +360,7 @@ pub fn run<E>(
                         transition(&c, &mut a, index, Some(index - 1), "demotion");
                         index -= 1;
                     }
+                    drop(component_phase);
                     d.finish("adaptive_probe", phase);
                 }
             }
@@ -366,7 +382,9 @@ pub fn run<E>(
                     break 'solve;
                 }
                 let phase = d.start();
+                let component_phase = optimizer_core::lp_cost::scope("controller");
                 c.continue_after_check();
+                drop(component_phase);
                 d.finish("controller", phase);
             }
             break 'attempt;

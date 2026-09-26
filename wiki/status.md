@@ -164,3 +164,13 @@ See the [M1 contract](../docs/specifications/SPEC-0001-model-and-validation.md),
 [GPU LP backend contract](../docs/specifications/SPEC-0011-gpu-lp-backend.md),
 [backlog](../state/backlog.yaml) and
 [implementation plan](../implementation-plan.md) for evidence stages and dependencies.
+
+GPUP-COPT is complete under ADR-0026. Its [component-cost report](../docs/benchmarks/lp-copt-comparison.md)
+retains all 1140 attempts, independently verifies 948 endpoints and certifies
+402/816 primary timings. Evidence output at 65536 rows and COPT graph internals
+remain explicit gaps; no winner or preset is selected. Task charge is
+5853.941357570 GPU s; cumulative 14766.435441716/18002.574545061 s.
+The 15340-event ledger SHA-256 is
+5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
+preserving the 13056-event prefix and every phase cap. Performance repairs ranked
+in the report are future bounded tasks; GPUP-7 still needs its accepted contract.

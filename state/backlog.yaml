@@ -14,6 +14,12 @@ active_research_track: GPUP
 next_ready_task: GPUP-7
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-COPT
+    title: COPT comparison and component-cost diagnosis
+    status: complete
+    depends_on: [GPUP-6]
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "ADR-0026; native/device gates; all 1140 attempts, 948 verified endpoints, 402/816 primary certified; component report and preserved 15340-event ledger"
   - id: M0
     title: Repository and process bootstrap
     status: complete

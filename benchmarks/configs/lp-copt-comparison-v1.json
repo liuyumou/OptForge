@@ -1,0 +1,418 @@
+{
+  "acceptance_output": "artifacts/gpup-copt-acceptance",
+  "activity": {
+    "leased_seconds": 3,
+    "poll_ms": 250,
+    "wait_seconds": 300
+  },
+  "additional_gpu_seconds": 3600,
+  "analysis": {
+    "confidence": 0.95,
+    "resamples": 10000,
+    "seed": 17002
+  },
+  "budget_authority": {
+    "path": "benchmarks/configs/lp-campaign-v1.json",
+    "sha256": "a65d0ac2ce2b2676453d0e15752f887af1ee759318bed8b4538ae3f6f0cf137f"
+  },
+  "categories": {
+    "accept": {
+      "phase": "repeatability",
+      "seconds": 300
+    },
+    "profile": {
+      "phase": "repeatability",
+      "seconds": 3000
+    },
+    "timing": {
+      "phase": "ablations",
+      "seconds": 4800
+    },
+    "trace": {
+      "phase": "baseline",
+      "seconds": 600
+    }
+  },
+  "combined_cap_seconds": 8700,
+  "configurations": [
+    {
+      "backend": "highs",
+      "id": "highs"
+    },
+    {
+      "backend": "host-lp",
+      "id": "host-lp"
+    },
+    {
+      "backend": "cuda-lp",
+      "id": "cuda-lp"
+    },
+    {
+      "backend": "cuda-lp-matched",
+      "id": "matched-fp64"
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64"
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "precision-fp64",
+      "precision": {
+        "accumulation": "f64",
+        "correction_interval": null,
+        "matrix": "f64",
+        "product_operands": "f64",
+        "products": "f64",
+        "rounding": "nearest_even",
+        "schema_version": 1,
+        "updates": "f64",
+        "working_state": "f64"
+      }
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "storage-fp32",
+      "precision": {
+        "accumulation": "f64",
+        "correction_interval": null,
+        "matrix": "f32",
+        "product_operands": "f64",
+        "products": "f64",
+        "rounding": "nearest_even",
+        "schema_version": 1,
+        "updates": "f64",
+        "working_state": "f64"
+      }
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "products-fp32",
+      "precision": {
+        "accumulation": "f64",
+        "correction_interval": null,
+        "matrix": "f32",
+        "product_operands": "f32",
+        "products": "f32",
+        "rounding": "nearest_even",
+        "schema_version": 1,
+        "updates": "f64",
+        "working_state": "f64"
+      }
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "accumulation-fp32",
+      "precision": {
+        "accumulation": "f32",
+        "correction_interval": null,
+        "matrix": "f32",
+        "product_operands": "f32",
+        "products": "f32",
+        "rounding": "nearest_even",
+        "schema_version": 1,
+        "updates": "f64",
+        "working_state": "f64"
+      }
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "master-correction32",
+      "precision": {
+        "accumulation": "f32",
+        "correction_interval": 32,
+        "matrix": "f32",
+        "product_operands": "f32",
+        "products": "f32",
+        "rounding": "nearest_even",
+        "schema_version": 1,
+        "updates": "f64",
+        "working_state": "f64"
+      }
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "working-fp32-correction32",
+      "precision": {
+        "accumulation": "f32",
+        "correction_interval": 32,
+        "matrix": "f32",
+        "product_operands": "f32",
+        "products": "f32",
+        "rounding": "nearest_even",
+        "schema_version": 1,
+        "updates": "f64",
+        "working_state": "f32"
+      }
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": null,
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "adaptive-fp64-a32"
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": null,
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "accumulation_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "adaptive-direct-accumulation_fp32-a32-strict-sticky"
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": {
+          "clean_windows": 4,
+          "margin_fraction": 0.25
+        },
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "working_fp32",
+          "accumulation_fp32",
+          "products_fp32",
+          "storage_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "adaptive-gradual-working_fp32-a32-strict-demote"
+    },
+    {
+      "backend": "copt-cpu-default",
+      "id": "copt-cpu-default"
+    },
+    {
+      "backend": "copt-cpu-pdlp",
+      "id": "copt-cpu-pdlp"
+    },
+    {
+      "backend": "copt-gpu-pdlp",
+      "id": "copt-gpu-pdlp"
+    }
+  ],
+  "copt_installation": "/root/copt80",
+  "copt_python": "artifacts/gpup5-copt/venv/bin/python",
+  "cpu_cap_seconds": 14400,
+  "cumulative_gpu_ns": 18002574545061,
+  "decision": {
+    "path": "docs/decisions/ADR-0026-copt-component-diagnosis.md",
+    "sha256": "67438fc90d406c91f5ac5f7de725f2b8cd3ab567534e6dadaf8f45b7499dd093"
+  },
+  "device": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+  "id": "gpup-copt-comparison-v1",
+  "limits": {
+    "cleanup_seconds": 2,
+    "device_buffer_bytes": 8589934592,
+    "host_rss_bytes": 8589934592,
+    "output_bytes": 33554432,
+    "poll_ms": 10,
+    "solve_seconds": 10
+  },
+  "lp_settings": {
+    "check_interval": 200,
+    "iteration_limit": 50000,
+    "power_iterations": 20,
+    "preconditioner": {
+      "pock_chambolle_alpha": 1.0,
+      "ruiz_passes": 10
+    },
+    "primal_weight": {
+      "derivative": 0.0,
+      "integral": 0.0,
+      "proportional": 0.5
+    },
+    "restart": {
+      "artificial": 0.36,
+      "necessary": 0.8,
+      "sufficient": 0.2
+    },
+    "schema_version": 1
+  },
+  "manifests": [
+    {
+      "path": "benchmarks/manifests/lp-development-v1.json",
+      "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+    },
+    {
+      "path": "benchmarks/manifests/lp-development-extension-v1.json",
+      "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+    }
+  ],
+  "model_byte_limit": 134217728,
+  "nsys": "/opt/nvidia/nsight-compute/2025.3.0/host/target-linux-x64/nsys",
+  "order_seed": 17001,
+  "output": "artifacts/gpup-copt-comparison-v1",
+  "partition": "development",
+  "phase_gpu_seconds": {
+    "ablations": 7200,
+    "baseline": 1800,
+    "finalists": 9000,
+    "repeatability": 3600,
+    "screening": 7200
+  },
+  "planned_attempts": 1140,
+  "previous_protocol": {
+    "path": "benchmarks/configs/lp-adaptive-v1.json",
+    "sha256": "52060731e175f7d8bacd9135559049f9eda598cd79339136fb01b5c6d5d1621e"
+  },
+  "prior_events": 13056,
+  "prior_gpu_ns": 8912494084146,
+  "prior_ledger_sha256": "6db55153153e66ed5c2398417d008e4edd278e11153cf87b975345f1a574d34d",
+  "profile_configurations": [
+    "copt-cpu-default",
+    "copt-cpu-pdlp",
+    "copt-gpu-pdlp",
+    "tuned-fp64",
+    "adaptive-direct-accumulation_fp32-a32-strict-sticky",
+    "adaptive-gradual-working_fp32-a32-strict-demote"
+  ],
+  "profile_instances": [
+    "gpup-development-small-4",
+    "gpup-development-irregular-256",
+    "gpup-development-irregular-2048",
+    "gpup-development-dense_block-1024",
+    "gpup-extension-irregular-32768",
+    "gpup-extension-irregular-65536",
+    "gpup-extension-dense_block-65536",
+    "gpup-extension-mixed-65536"
+  ],
+  "profile_repetitions": 3,
+  "schema_version": 6,
+  "short_configurations": [
+    "tuned-fp64",
+    "precision-fp64",
+    "accumulation-fp32",
+    "adaptive-fp64-a32",
+    "adaptive-direct-accumulation_fp32-a32-strict-sticky",
+    "adaptive-gradual-working_fp32-a32-strict-demote"
+  ],
+  "short_instances": [
+    "gpup-development-small-4",
+    "gpup-development-irregular-2048",
+    "gpup-extension-irregular-32768",
+    "gpup-extension-mixed-65536"
+  ],
+  "short_work": 200,
+  "solve": {
+    "iteration_limit": 50000,
+    "node_limit": null,
+    "schema_version": 1,
+    "seed": 17,
+    "threads": 1,
+    "time_limit_ms": 10000,
+    "tolerances": {
+      "absolute": 1e-09,
+      "integrality": 1e-09,
+      "relative": 1e-09
+    }
+  },
+  "timing_repetitions": 3,
+  "total_gpu_seconds": 28800,
+  "trace_configurations": [
+    "tuned-fp64",
+    "accumulation-fp32",
+    "adaptive-direct-accumulation_fp32-a32-strict-sticky",
+    "adaptive-gradual-working_fp32-a32-strict-demote",
+    "copt-gpu-pdlp"
+  ],
+  "trace_extra_seconds": 15,
+  "trace_instances": [
+    "gpup-development-small-4",
+    "gpup-development-irregular-2048",
+    "gpup-extension-irregular-32768",
+    "gpup-extension-mixed-65536"
+  ],
+  "trace_output_bytes": 536870912,
+  "verification_seconds": 120
+}

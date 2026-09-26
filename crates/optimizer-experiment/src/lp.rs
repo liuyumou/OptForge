@@ -97,6 +97,7 @@ pub(crate) fn assess_program(
     record: &SolveRecord,
     diagnostics: &LpDiagnostics,
 ) -> Result<Assessment, ValidationError> {
+    let _component_scope = optimizer_core::lp_cost::scope("original_program_assessment");
     record.options.validate()?;
     record.to_json()?;
     if record.model_id != model.document().model_id {
@@ -247,6 +248,7 @@ impl LpEndpoint {
         mut diagnostics: LpDiagnostics,
         fallback_reason: Option<String>,
     ) -> Result<Self, ValidationError> {
+        let _component_scope = optimizer_core::lp_cost::scope("independent_endpoint");
         let model = Model::from_json(model_bytes)?;
         let check = diagnostics.start();
         let assessment = assess(&model, &record, &diagnostics)?;
@@ -302,6 +304,7 @@ impl LpEndpoint {
     /// # Errors
     /// Rejects altered or inconsistent evidence, without trusting its status label.
     pub fn verify(&self, model_bytes: &[u8]) -> Result<(), ValidationError> {
+        let _component_scope = optimizer_core::lp_cost::scope("endpoint_verification");
         if ![1, 2, 3, 4, 5].contains(&self.schema_version)
             || self.model_sha256 != crate::sha256::hex(model_bytes)
             || self.payload_sha256 != self.payload_hash()?

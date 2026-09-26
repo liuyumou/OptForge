@@ -1,5 +1,32 @@
 # Known Failures and Limitations
 
+## COPT comparison: large evidence output and opaque graph internals
+
+The [component report](../docs/benchmarks/lp-copt-comparison.md) retains all 1140
+attempts, 948 verified endpoints and 402/816 certified primary samples. At 65536
+rows, the frozen 32 MiB per-file output limit truncates project endpoint writes:
+148 partial endpoint files remain, 142 exactly at the cap (82 process failures
+and 60 also classified timeout), plus six killed partial writes. The trace-only
+512 MiB allowance does not fill primary cells. Compact versioned evidence and a
+separate controlled comparison are future work; no output limit was changed
+post-result. Other failures include deadlines, work limits and numerical rejection.
+
+The archived verifier initially applied the ordinary 16 MiB cap to endpoint reads
+despite explicit 128 MiB study input. The final reader repairs that omission and
+independently verifies all 88 retained affected endpoints, recovering 37 certified
+outcomes (21 primary), without changing trials, solving again or relaxing checks.
+COPT native optimality still does not replace the original-model certificate;
+both PDLP modes on mixed-65536 fail that certificate at 1e-9.
+
+All 20 CUDA captures export, but COPT graph granularity leaves internal graph
+kernel counts/durations and exact busy time unavailable. Native CPU phases remain
+opaque and hardware-counter/CPU-sampling restrictions remain. Offline import
+initially appended telemetry to captures and failed checksum validation. Exact
+pre-import SHA-256 reconstruction recovered all 20 originals, with mutated copies
+and recovery evidence retained; future imports use copies. Tests reject any
+reconstruction that cannot match the complete historical hash. Historical
+`tuned_cases` racecheck and old large-session limitations below remain open.
+
 ## GPUP-6 comparison coverage is incomplete; no preset selected
 
 The [adaptive report](../docs/benchmarks/lp-adaptive-gpup6.md) records the frozen

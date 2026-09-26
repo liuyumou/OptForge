@@ -201,6 +201,7 @@ fn native_index(value: usize, context: &str) -> Result<HighsInt, ValidationError
 }
 
 fn convert(model: &Model, infinity: f64) -> Result<Loaded, ValidationError> {
+    let _component_scope = optimizer_core::lp_cost::scope("highs_model_conversion");
     let document = model.document();
     let num_col = native_index(document.variables.len(), "variable count")?;
     let num_row = native_index(document.constraints.len(), "constraint count")?;
@@ -533,8 +534,10 @@ pub(crate) fn solve(
     basis_request: BasisRequest,
     diagnostics: &mut optimizer_core::LpDiagnostics,
 ) -> Result<(SolveRecord, Option<Basis>), ValidationError> {
+    let _component_scope = optimizer_core::lp_cost::scope("highs_backend");
     let started = Instant::now();
     let preparation_start = diagnostics.start();
+    let component_preparation_start = optimizer_core::lp_cost::scope("native_preparation");
     let mut warnings = Vec::new();
 
     // Every non-final return path reports no basis; the accepted-incumbent
@@ -697,12 +700,16 @@ pub(crate) fn solve(
     }
 
     // Safety: valid handle; the callback data is still alive.
+    drop(component_preparation_start);
     diagnostics.finish("native_preparation", preparation_start);
     let iteration_start = diagnostics.start();
+    let component_iteration_start = optimizer_core::lp_cost::scope("native_solve");
     // Safety: valid owned handle, with callback state alive through this call.
     let run_status = unsafe { ffi::Highs_run(highs.as_ptr()) };
+    drop(component_iteration_start);
     diagnostics.finish("native_solve", iteration_start);
     let extraction_start = diagnostics.start();
+    let component_extraction_start = optimizer_core::lp_cost::scope("native_extraction");
     // Safety: valid handle.
     let model_status = unsafe { ffi::Highs_getModelStatus(highs.as_ptr()) };
     drop(interrupt);
@@ -812,8 +819,10 @@ pub(crate) fn solve(
             .unavailable
             .push("native internal phase/restart counters unavailable".into());
     }
+    drop(component_extraction_start);
     diagnostics.finish("native_extraction", extraction_start);
     let checks_start = diagnostics.start();
+    let component_checks_start = optimizer_core::lp_cost::scope("host_checks");
     let candidate = Candidate {
         schema_version: optimizer_core::SCHEMA_VERSION,
         model_id: model.document().model_id.clone(),
@@ -877,6 +886,7 @@ pub(crate) fn solve(
         };
     }
 
+    drop(component_checks_start);
     diagnostics.finish("host_checks", checks_start);
     let objective = finite_or_absent(validation.objective);
     let best_bound =

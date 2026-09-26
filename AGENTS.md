@@ -118,6 +118,16 @@ c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a and every earli
 GPUP-7 follows and needs its bounded quantization/FP8 interface and resource
 contract before behavior. Adaptive sessions, persistent checkpoints and supported
 presets remain outside GPUP-6; old 65536-row and tuned_cases racecheck gaps remain.
+
+GPUP-COPT is complete under ADR-0026. Its [component-cost report](docs/benchmarks/lp-copt-comparison.md)
+retains all 1140 attempts, independently verifies 948 endpoints and certifies
+402/816 primary timings. Evidence output at 65536 rows and COPT graph internals
+remain explicit gaps; no winner or preset is selected. Task charge is
+5853.941357570 GPU s; cumulative 14766.435441716/18002.574545061 s.
+The 15340-event ledger SHA-256 is
+5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
+preserving the 13056-event prefix and every phase cap. Performance repairs ranked
+in the report are future bounded tasks; GPUP-7 still needs its accepted contract.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

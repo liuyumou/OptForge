@@ -1,5 +1,91 @@
 # Active Task
 
+## GPUP-6 and COPT protected integration (2026-09-27)
+
+Status: acceptance complete; protected integration and safe cleanup authorized.
+Final merge/check/cleanup outcomes are retained in the integration receipt below.
+The user explicitly authorized two PRs, ordered merges and safe branch cleanup.
+Merge GPUP-6 first, then its dependent COPT comparison, preserving measured
+commit ancestry with merge commits.
+Scope: inspect reviewable changes and existing acceptance, publish both branches,
+wait for required cpu/docs/smoke checks and resolve actionable review findings,
+merge through protected PRs, synchronize local main, and delete only branches
+whose tips are ancestors of merged main and have no other worktrees.
+Acceptance: required checks pass on current PR heads, no unresolved review
+threads, both PRs merged, original measured commits retained, clean synchronized
+main, only the merged task branches removed. No protection bypass or force push.
+Resources: four build jobs and one CPU-hour for integration checks; no new GPU
+work or campaign allowance. Preserve the 15340-event ledger and all artifacts:
+14766.435441716 cumulative GPU seconds, SHA-256
+5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b.
+Initial code acceptance is the full pinned-native GPUP-6/COPT gates and recorded
+device/sanitizer scope. Initial remote main is 1dff5a9; both task branches form a
+linear stack above it. Integration receipts remain under
+artifacts/gpup6-copt-integration-20260927. No release or hosting publication.
+
+Acceptance evidence: [PR #9](https://github.com/liuyumou/OptForge/pull/9) passed
+all required cpu/docs/smoke checks, had no unresolved review threads, and merged
+without bypass as 5aca01d. The dependent branch includes that merge with no source
+conflict or numerical change. Its existing full native gate passes 495 Rust and
+170 Python tests, with 55 device tests and the documented sanitizer scope; the
+additional GitHub checks must pass on its current head before merging.
+Local review covers adaptive rollback/work/reference authority, COPT method and
+model identity, bounded admission, nested timing and compatibility; no unresolved
+local finding remains. The final integration.json receipt records both merged PR
+URLs/commits, the required-check snapshots, preserved measured ancestry, clean
+main and the exact local/remote branch deletions. Only documentation and merge
+ancestry change in this integration; the campaign ledger and raw evidence stay
+unchanged.
+
+## COPT comparison and component-cost diagnosis (2026-09-26)
+
+Status: implementation and study complete; final acceptance recorded below.
+The maintainer accepted the complete plan before behavior.
+Objective: fresh certified LP comparison and component-cost diagnosis against local
+COPT 8.0.6 under ADR-0026/SPEC-0013, identity gpup-copt-comparison-v1.
+Scope: 17 configurations, 16 development models through 65536 rows, 1140 planned
+attempts; separate timing, hierarchical profiles, bounded-work runs and CUDA traces.
+Likely files: study CLI/input bounds; core optional profiling; LP/CUDA phase scopes;
+external witnesses; v6 study and cost schemas; comparison/budget/report tooling;
+acceptance tests and repository report. Numerical methods and kernel bytes unchanged.
+Acceptance: full pinned-native tools/check.sh; regular device and profile equivalence;
+strict external/cost evidence; clean-checkout synthetic budgets; independently verified
+report retaining all failures and incomplete blocks. Existing sanitizer receipts are
+carried forward only for unchanged arithmetic; historical gaps remain explicit.
+Resources: four build jobs and four CPU validation hours. GPU: timings 4800 s in
+ablations; profiles/short work 3000 s in repeatability; traces 600 s in baseline;
+acceptance 300 s in repeatability; combined 8700 s. No cross-category borrowing.
+Starting consumption 8912.494084146 s; 13056 events; prefix SHA-256
+6db55153153e66ed5c2398417d008e4edd278e11153cf87b975345f1a574d34d.
+Additional ceiling authority 3600 s gives 18002.574545061 s cumulative. Preserve all
+campaign phase caps, 28800 s total, existing output binding, and every prior prefix.
+All device jobs use the shared host lease. Commit locally after acceptance; no push.
+
+Acceptance evidence: full pinned-native tools/check.sh (495 Rust and 170 Python
+tests), 55 regular device tests, six fixed-work bitwise profile pairs, six COPT
+min/max method fixtures, clean-source synthetic budget/admission tests and 948
+independently verified endpoints from all 1140 frozen attempts. Final metadata
+checks cover all 1140 worker receipts and collector envelopes. Existing four
+adaptive sanitizer receipts are carried forward for unchanged kernels/arithmetic.
+See the [comparison report](../docs/benchmarks/lp-copt-comparison.md) and its
+hash-bound data catalog for precise scope, initial failures and corrected readers.
+The first verifier omitted the explicit study allowance for endpoint reads;
+88 unchanged endpoints reverify, recovering 21 primary certified samples. The
+primary comparison still certifies only 402/816, with large-output/time-limit
+failures retained. All 20 traces export; COPT graph internals remain unavailable.
+No solver optimization, retries, preset, tolerance change or publication occurred.
+
+Task GPU charge 5853.941357570/8700 s: timings 3848.867383594/4800,
+profiles/short work 1717.984545181/3000, traces 267.901220613/600,
+acceptance 19.188208182/300. Cumulative 14766.435441716/18002.574545061 s;
+15340 events; ledger SHA-256
+5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b.
+The original 13056-event prefix and all phase caps remain intact. Raw evidence is
+in artifacts/gpup-copt-comparison-v1 and artifacts/gpup-copt-acceptance. Four build
+jobs; measured validation CPU stays below four hours. Commit locally after the
+final gate. GPUP-7 still requires its bounded contract; the report ranks separate
+host/evidence repair experiments without implementing them.
+
 ## GPUP-6 adaptive precision recovery (2026-09-26)
 
 Status: complete; bounded plan accepted before implementation; correctness gates passed and comparison gaps retained.

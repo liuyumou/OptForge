@@ -449,6 +449,7 @@ impl Context {
     /// UUID, [`DeviceError::DeviceMismatch`] when the driver reports a different one
     /// after creation, and an availability failure for any driver error.
     pub fn create(uuid: &str) -> Result<Self> {
+        let _component_scope = optimizer_core::lp_cost::scope("device_context");
         let driver = driver()?;
         let info = devices()?
             .into_iter()
@@ -514,6 +515,7 @@ impl Context {
     /// Returns an availability failure when the image is not loadable on this
     /// device, which includes a cubin built for another compute capability.
     pub fn load_module(self: &Rc<Self>, image: &[u8]) -> Result<Module> {
+        let _component_scope = optimizer_core::lp_cost::scope("module_load");
         let driver = driver()?;
         self.make_current(driver)?;
         // The driver reads a NUL-terminated image for PTX and a length-prefixed one
@@ -551,6 +553,7 @@ impl Context {
     ///
     /// Returns an availability failure when creation fails.
     pub fn stream(self: &Rc<Self>) -> Result<Stream> {
+        let _component_scope = optimizer_core::lp_cost::scope("stream_creation");
         let driver = driver()?;
         self.make_current(driver)?;
         let mut raw: CuStream = ptr::null_mut();
@@ -570,6 +573,7 @@ impl Context {
     /// Returns an availability failure when the allocation fails, which SPEC-0010
     /// requirement 24 makes a fallback rather than an abort.
     pub fn allocate<T: Copy>(self: &Rc<Self>, count: usize) -> Result<DeviceBuffer<T>> {
+        let _component_scope = optimizer_core::lp_cost::scope("device_allocation");
         let driver = driver()?;
         self.make_current(driver)?;
         let bytes = count
@@ -584,6 +588,7 @@ impl Context {
         // SAFETY: `raw` is a live slot and `bytes` is nonzero.
         let status = unsafe { (driver.memory_allocate)(&mut raw, bytes) };
         check(driver, "cuMemAlloc_v2", status)?;
+        optimizer_core::lp_cost::count("device_allocated_bytes", bytes as u64);
         Ok(DeviceBuffer {
             raw,
             count,
@@ -595,6 +600,7 @@ impl Context {
 
 impl Drop for Context {
     fn drop(&mut self) {
+        let _cost = optimizer_core::lp_cost::scope("context_teardown");
         // A failure here cannot be reported and must not panic in a drop. The
         // process is either exiting or has already recorded the failure that led
         // here, and the driver reclaims the context when the process ends.
@@ -632,6 +638,7 @@ impl Module {
     /// Returns an availability failure when the module exports no such name, which
     /// in practice means the code object is older than the caller.
     pub fn function(&self, name: &str) -> Result<Function<'_>> {
+        let _component_scope = optimizer_core::lp_cost::scope("kernel_lookup");
         let driver = driver()?;
         let name = CString::new(name)
             .map_err(|_| DeviceError::Unsupported("kernel name contains a NUL".into()))?;
@@ -649,6 +656,7 @@ impl Module {
 
 impl Drop for Module {
     fn drop(&mut self) {
+        let _cost = optimizer_core::lp_cost::scope("module_unload");
         if let Ok(driver) = driver() {
             // SAFETY: `self.raw` is a live module this value owns, dropped once.
             unsafe {
@@ -708,6 +716,7 @@ impl Stream {
     /// Returns an availability failure, which after a launch is where a kernel fault
     /// surfaces.
     pub fn synchronize(&self) -> Result<()> {
+        let _component_scope = optimizer_core::lp_cost::scope("device_synchronization");
         let driver = driver()?;
         // SAFETY: `self.raw` is a live stream this value owns.
         let status = unsafe { (driver.stream_synchronize)(self.raw) };
@@ -717,6 +726,7 @@ impl Stream {
 
 impl Drop for Stream {
     fn drop(&mut self) {
+        let _cost = optimizer_core::lp_cost::scope("stream_teardown");
         if let Ok(driver) = driver() {
             // SAFETY: `self.raw` is a live stream this value owns, dropped once.
             unsafe {
@@ -764,6 +774,7 @@ impl<T: Copy> DeviceBuffer<T> {
     /// Returns [`DeviceError::Unsupported`] when `source` is longer than the
     /// allocation, and an availability failure when the copy fails.
     pub fn copy_from(&mut self, source: &[T], stream: &Stream) -> Result<()> {
+        let _component_scope = optimizer_core::lp_cost::scope("host_to_device");
         if source.len() > self.count {
             return Err(DeviceError::Unsupported(format!(
                 "copy of {} elements into a buffer of {}",
@@ -788,6 +799,10 @@ impl<T: Copy> DeviceBuffer<T> {
             )
         };
         check(driver, "cuMemcpyHtoDAsync_v2", status)?;
+        optimizer_core::lp_cost::count(
+            "host_to_device_bytes",
+            std::mem::size_of_val(source) as u64,
+        );
         // The source is borrowed only for this call, so the copy must complete
         // before it returns. Synchronizing here is what makes that true, and it is
         // the reason this method is not the one a hot loop uses.
@@ -801,6 +816,7 @@ impl<T: Copy> DeviceBuffer<T> {
     /// Returns [`DeviceError::Unsupported`] when `destination` is longer than the
     /// allocation, and an availability failure when the copy fails.
     pub fn copy_to(&self, destination: &mut [T], stream: &Stream) -> Result<()> {
+        let _component_scope = optimizer_core::lp_cost::scope("device_to_host");
         if destination.len() > self.count {
             return Err(DeviceError::Unsupported(format!(
                 "copy of {} elements out of a buffer of {}",
@@ -820,12 +836,14 @@ impl<T: Copy> DeviceBuffer<T> {
             (driver.copy_to_host)(destination.as_mut_ptr().cast(), self.raw, bytes, stream.raw)
         };
         check(driver, "cuMemcpyDtoHAsync_v2", status)?;
+        optimizer_core::lp_cost::count("device_to_host_bytes", bytes as u64);
         stream.synchronize()
     }
 }
 
 impl<T: Copy> Drop for DeviceBuffer<T> {
     fn drop(&mut self) {
+        let _cost = optimizer_core::lp_cost::scope("device_free");
         if let Ok(driver) = driver() {
             // SAFETY: `self.raw` is a live allocation this value owns, dropped once.
             unsafe {
@@ -878,6 +896,7 @@ pub fn launch(
     arguments: &[Argument],
     stream: &Stream,
 ) -> Result<()> {
+    let _component_scope = optimizer_core::lp_cost::scope("kernel_submission");
     let driver = driver()?;
     // Copy every argument into a local array first, then build the pointer array
     // from those copies. Both outlive the call below, which is the property the

@@ -235,6 +235,7 @@ impl<'a> Engine<'a> {
     /// [`LinearProgram::same_matrix_objective_rows`].
     #[must_use]
     pub fn from_prepared(program: &'a LinearProgram, prepared: &PreparedMatrix) -> Engine<'a> {
+        let _component_scope = optimizer_core::lp_cost::scope("working_host_allocation");
         let row_scale = prepared.preconditioner.row().to_vec();
         let column_scale = prepared.preconditioner.column().to_vec();
 
@@ -484,6 +485,7 @@ impl<'a> Engine<'a> {
     /// Estimate the largest singular value by a fixed number of power iterations.
     #[cfg(feature = "precision-research")]
     fn spectral_norm(&self) -> f64 {
+        let _component_scope = optimizer_core::lp_cost::scope("norm_step_estimation");
         spectral_norm(
             self.program,
             &self.settings,
@@ -509,6 +511,7 @@ impl<'a> Engine<'a> {
 
     /// One primal-dual step.
     fn advance(&self, x: &[f64], y: &[f64], weight: f64) -> (Vec<f64>, Vec<f64>) {
+        let _component_scope = optimizer_core::lp_cost::scope("cpu_arithmetic_update");
         let primal_step = self.step / weight;
         let dual_step = self.step * weight;
 
@@ -563,6 +566,7 @@ impl<'a> Engine<'a> {
     ///
     /// Never used to justify a bound, a status or a proof. See the module header.
     pub(crate) fn kkt_error(&self, x: &[f64], y: &[f64], weight: f64) -> f64 {
+        let _component_scope = optimizer_core::lp_cost::scope("kkt_evaluation");
         let activity = self.multiply(x);
         let primal_violation: Vec<f64> = (0..y.len())
             .map(|row| {
@@ -807,6 +811,7 @@ fn spectral_norm(
     scaled_row_values: &[f64],
     scaled_column_values: &[f64],
 ) -> f64 {
+    let _component_scope = optimizer_core::lp_cost::scope("norm_step_estimation");
     let columns = program.column_count();
     if columns == 0 || program.nonzeros() == 0 {
         return 0.0;

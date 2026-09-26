@@ -6,6 +6,7 @@
 mod capability;
 mod document;
 mod evaluate;
+pub mod lp_cost;
 mod lp_diagnostics;
 mod lp_settings;
 mod serde_strict;

@@ -134,6 +134,7 @@ pub struct Certificate {
 /// In particular, sign uncertainty on an infinite variable side can prevent
 /// certification even when a tighter calculation would succeed.
 pub fn certify(program: &LinearProgram, y: &[f64]) -> Result<Certificate, NoBound> {
+    let _component_scope = optimizer_core::lp_cost::scope("dual_certification");
     assert_eq!(
         y.len(),
         program.row_count(),
@@ -254,6 +255,7 @@ pub fn assess_gap(
     bound: f64,
     tolerances: optimizer_core::Tolerances,
 ) -> Option<GapAssessment> {
+    let _component_scope = optimizer_core::lp_cost::scope("gap_assessment");
     if primal.len() != program.column_count() || tolerances.validate().is_err() {
         return None;
     }

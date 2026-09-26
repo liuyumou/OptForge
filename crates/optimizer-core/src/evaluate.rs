@@ -169,6 +169,7 @@ impl Model {
         candidate: &Candidate,
         tolerances: Tolerances,
     ) -> Result<ValidationReport, ValidationError> {
+        let _component_scope = crate::lp_cost::scope("candidate_feasibility_objective");
         let tolerances = tolerances.validate()?;
         let candidate = candidate.canonical()?;
         let document = self.document();

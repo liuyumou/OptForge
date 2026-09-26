@@ -60,6 +60,7 @@ pub(crate) fn norm_bound(
     rows: &[f64],
     cols: &[f64],
 ) -> Result<f64, &'static str> {
+    let _component_scope = optimizer_core::lp_cost::scope("conservative_norm_guard");
     let program = engine.program();
     let maximum =
         |matrix: &crate::problem::Compressed, values: &[f64]| -> Result<f64, &'static str> {
@@ -91,6 +92,7 @@ pub(crate) fn norm_bound(
 impl PrecisionOperator {
     /// Convert rows once and permute; never independently quantize the transpose.
     pub fn new(engine: &Engine<'_>, settings: &LpPrecisionSettings) -> Result<Self, &'static str> {
+        let _component_scope = optimizer_core::lp_cost::scope("precision_operator_preparation");
         settings.validate().map_err(|_| "invalid_precision")?;
         let (original_rows, original_cols) = engine.scaled_matrix();
         let rows: Vec<f64> = original_rows
@@ -182,6 +184,7 @@ pub fn correction(
     engine: &Engine<'_>,
     state: &Fp64State,
 ) -> Result<(Vec<f64>, Vec<f64>), &'static str> {
+    let _component_scope = optimizer_core::lp_cost::scope("reference_fp64_update");
     let (rows, cols) = engine.scaled_matrix();
     step(engine, state, rows, cols, LpWidth::F64, LpWidth::F64)
 }
@@ -194,6 +197,7 @@ pub fn step(
     products: LpWidth,
     accumulation: LpWidth,
 ) -> Result<(Vec<f64>, Vec<f64>), &'static str> {
+    let _component_scope = optimizer_core::lp_cost::scope("cpu_arithmetic_update");
     let p = engine.program();
     let (xl, xu) = engine.scaled_column_bounds();
     let (yl, yu) = engine.scaled_row_bounds();

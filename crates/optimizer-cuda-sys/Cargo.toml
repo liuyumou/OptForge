@@ -6,6 +6,7 @@ rust-version.workspace = true
 license.workspace = true
 
 [dependencies]
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
 libc = "0.2"
 
 # This crate owns the CUDA driver boundary, the second and last native boundary in

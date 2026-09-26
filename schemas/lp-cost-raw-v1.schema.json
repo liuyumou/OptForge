@@ -1,0 +1,86 @@
+{
+  "$id": "lp-cost-raw-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "clock": {
+      "const": "monotonic_host_thread"
+    },
+    "counters": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "object"
+    },
+    "elapsed_ns": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "scopes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "calls": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "exclusive_ns": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "inclusive_ns": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "max_ns": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "min_ns": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "path": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 64,
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "path",
+          "calls",
+          "inclusive_ns",
+          "exclusive_ns",
+          "min_ns",
+          "max_ns"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4096,
+      "type": "array"
+    },
+    "unavailable": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "clock",
+    "elapsed_ns",
+    "scopes",
+    "counters",
+    "unavailable"
+  ],
+  "type": "object"
+}
