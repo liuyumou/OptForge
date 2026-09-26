@@ -36,6 +36,7 @@ Usage:
     [--lp-profile true|false] [--lp-device-memory-bytes <bytes>]
   optimizer lp-study prepare --instance <path> --output <model-path>
   optimizer lp-study verify --model <path> --evidence <path>
+  optimizer lp-study solve <solve flags> [--model-byte-limit <bytes>] [--cost-profile <path>]
   optimizer lp-study external-certify --model <path> --evidence <witness-path> --output <path>
   optimizer lp-study external-verify --model <path> --evidence <path>
   optimizer lp-study replay --model <path> --evidence <path> --output <path> [--device GPU-<uuid>]

@@ -184,6 +184,7 @@ impl<'r> TunedExecutor<'r> {
             ));
         }
         let phase = diagnostics.start();
+        let component_phase = optimizer_core::lp_cost::scope("working_allocation");
         if self.working.is_none() {
             let sizes = [
                 r.columns, r.rows, r.columns, r.rows, r.columns, r.columns, r.rows, r.columns,
@@ -216,9 +217,11 @@ impl<'r> TunedExecutor<'r> {
             }
             self.working = Some(buffers);
         }
+        drop(component_phase);
         diagnostics.finish("working_allocation", phase);
         let w = self.working.as_mut().expect("allocated working buffers");
         let phase = diagnostics.start();
+        let component_phase = optimizer_core::lp_cost::scope("working_upload");
         let full = self.settings.uploads == StateUploads::EveryCheck
             || self.loaded.is_none_or(|(g, _)| g != generation);
         let anchors = full || self.loaded.is_none_or(|(_, a)| a != restarts);
@@ -238,8 +241,10 @@ impl<'r> TunedExecutor<'r> {
             }
         }
         self.loaded = Some((generation, restarts));
+        drop(component_phase);
         diagnostics.finish("working_upload", phase);
         let phase = diagnostics.start();
+        let component_phase = optimizer_core::lp_cost::scope("kernels_and_synchronization");
         let ptr = |i: usize| A::DevicePtr(w[i].as_device_ptr());
         let n = A::U32(r.columns as u32);
         let m = A::U32(r.rows as u32);
@@ -384,8 +389,10 @@ impl<'r> TunedExecutor<'r> {
             counters.synchronizations += 1;
             done += chunk;
         }
+        drop(component_phase);
         diagnostics.finish("kernels_and_synchronization", phase);
         let phase = diagnostics.start();
+        let component_phase = optimizer_core::lp_cost::scope("readback");
         for (index, values) in [(0, x), (1, y)] {
             if !values.is_empty() {
                 w[index]
@@ -396,6 +403,7 @@ impl<'r> TunedExecutor<'r> {
                 counters.synchronizations += 1;
             }
         }
+        drop(component_phase);
         diagnostics.finish("readback", phase);
         Ok(AdvanceResult {
             completed: done,

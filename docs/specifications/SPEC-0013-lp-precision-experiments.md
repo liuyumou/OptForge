@@ -473,3 +473,24 @@ sessions over a fixed matrix. Requirements 10-13 keep fresh-process single-solve
 latency the primary endpoint; amortized per-solve time (batch elapsed / N) is a
 separately labeled endpoint that is never substituted for or tabulated as
 single-solve latency, and warm timings remain secondary diagnostics.
+
+
+## COPT comparison and component-cost diagnosis (ADR-0026)
+
+Accepted 2026-09-26 before behavior.
+[ADR-0026](../decisions/ADR-0026-copt-component-diagnosis.md) freezes the complete
+1140-attempt development contract, COPT default/CPU/GPU methods, 128 MiB explicit
+study input boundary, external-v2/campaign-v6/cost evidence, and hierarchical
+component measurements. Original-model certification remains authoritative.
+Profiles and CUDA activity are separate from primary certified fresh latency;
+nested/overlapping scopes and native opaque phases cannot be fabricated as additive
+costs. Legacy commands, frozen protocols and kernel bytes retain their meanings.
+Its chained 3600-second ceiling extension gives 18002.574545061 s cumulative;
+timing/profile/trace/acceptance category caps total 8700 s inside existing campaign
+and phase caps. Acceptance and the final report must preserve every missing trial,
+failed collection and historical coverage limitation. Implementation is complete;
+[the report](../benchmarks/lp-copt-comparison.md) maps native/device, legacy,
+large-reader, nested-cost, trace-correlation and synthetic-budget acceptance.
+All 1140 attempts remain; 948 endpoints verify. Incomplete primary coverage and
+opaque native phases do not select a winner. The explicit study byte allowance
+applies to both model and evidence reads, while ordinary 16 MiB parsing remains.

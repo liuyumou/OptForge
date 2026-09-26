@@ -159,6 +159,7 @@ impl PrecisionExecutor {
         image: &[u8],
         d: &mut LpDiagnostics,
     ) -> Result<Self, DeviceError> {
+        let _component_scope = optimizer_core::lp_cost::scope("precision_residency");
         let p = engine.program();
         let peak = peak_buffer_bytes(p, &settings)?;
         let device = context.device();
@@ -265,6 +266,7 @@ impl PrecisionExecutor {
         step: f64,
         c: &mut LpExecutionDiagnostics,
     ) -> Result<Option<String>, DeviceError> {
+        let _component_scope = optimizer_core::lp_cost::scope("precision_chunk");
         assert!(steps > 0 && steps <= 64);
         let state = control.state();
         let key = (control.generation(), state.restarts);
@@ -450,6 +452,7 @@ pub(crate) fn iterate(
     deadline: Option<Instant>,
 ) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
     let preparation = d.start();
+    let component_preparation = optimizer_core::lp_cost::scope("precision_preparation");
     let operator = PrecisionOperator::new(engine, &settings);
     let mut control;
     let mut stop = "iteration_limit";
@@ -465,9 +468,12 @@ pub(crate) fn iterate(
             p.step = Some(op.step);
             p.matrix_max_error = op.max_error;
             p.matrix_subnormals = op.subnormals;
+            drop(component_preparation);
             d.finish("precision_preparation", preparation);
             let phase = d.start();
+            let component_phase = optimizer_core::lp_cost::scope("invariant_allocation_upload");
             let exec = PrecisionExecutor::new(context, engine, &op, settings.clone(), image, d)?;
+            drop(component_phase);
             d.finish("invariant_allocation_upload", phase);
             Some(exec)
         }
@@ -524,12 +530,14 @@ pub(crate) fn iterate(
         });
         let saved = correcting.then(|| control.state().clone());
         let phase = d.start();
+        let component_phase = optimizer_core::lp_cost::scope("kernels_and_synchronization");
         let result = executor.advance(
             &mut control,
             chunk,
             engine.step(),
             d.execution.as_mut().unwrap(),
         );
+        drop(component_phase);
         d.finish("kernels_and_synchronization", phase);
         match result {
             Err(error) => {
@@ -567,6 +575,7 @@ pub(crate) fn iterate(
                 break;
             }
             let phase = d.start();
+            let component_phase = optimizer_core::lp_cost::scope("fp64_correction");
             let corrected = optimizer_lp::precision::correction(engine, &saved);
             control.charge_extra(1).expect("admitted correction work");
             d.precision.as_mut().unwrap().correction_steps += 1;
@@ -598,6 +607,7 @@ pub(crate) fn iterate(
                     break;
                 }
             }
+            drop(component_phase);
             d.finish("fp64_correction", phase);
         }
         if control.check_pending() {
@@ -610,7 +620,9 @@ pub(crate) fn iterate(
                 break;
             }
             let phase = d.start();
+            let component_phase = optimizer_core::lp_cost::scope("controller");
             control.continue_after_check();
+            drop(component_phase);
             d.finish("controller", phase);
         }
     }

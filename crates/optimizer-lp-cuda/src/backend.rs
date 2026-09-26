@@ -227,12 +227,14 @@ impl CudaLpBackend {
         // create a second thing that must agree with the first, and the host engine
         // exists precisely to be the one the device is checked against.
         let preparation = diagnostics.start();
+        let component_preparation = optimizer_core::lp_cost::scope("preconditioning");
         let mut settings = self.settings;
         if self.matched {
             settings.iteration_limit = settings.iteration_limit.min(work_limit.unwrap_or(u64::MAX));
         }
         let mut engine = Engine::new(program, settings);
         if let Some(adaptive) = &self.adaptive {
+            drop(component_preparation);
             diagnostics.finish("preconditioning", preparation);
             return crate::adaptive::iterate(
                 Rc::clone(&self.context),
@@ -248,6 +250,7 @@ impl CudaLpBackend {
             );
         }
         if let Some(precision) = &self.precision {
+            drop(component_preparation);
             diagnostics.finish("preconditioning", preparation);
             return crate::precision::iterate(
                 Rc::clone(&self.context),
@@ -262,6 +265,7 @@ impl CudaLpBackend {
                 deadline,
             );
         }
+        drop(component_preparation);
         diagnostics.finish("preconditioning", preparation);
         let (row_values, column_values) = engine.scaled_matrix();
         let peak = match &self.execution {
@@ -277,6 +281,7 @@ impl CudaLpBackend {
             )));
         }
         let allocation = diagnostics.start();
+        let component_allocation = optimizer_core::lp_cost::scope("invariant_allocation_upload");
         let residency = LpResidency::open_for_execution(
             Rc::clone(&self.context),
             program,
@@ -296,6 +301,7 @@ impl CudaLpBackend {
         }
         let residency = residency?;
 
+        drop(component_allocation);
         diagnostics.finish("invariant_allocation_upload", allocation);
         if diagnostics.enabled {
             if self.execution.is_none() {
@@ -486,8 +492,10 @@ impl CudaLpBackend {
             diagnostics,
             |primal, dual, diagnostics| {
                 let checking = diagnostics.start();
+                let component_checking = optimizer_core::lp_cost::scope("host_checks");
                 let stop = assess(model, &program, options.tolerances, primal, dual)
                     .is_some_and(|(_, _, _, _, closed)| closed);
+                drop(component_checking);
                 diagnostics.finish("host_checks", checking);
                 closed_early |= stop;
                 stop
@@ -566,8 +574,10 @@ pub(crate) fn run_matched(
     deadline: Option<Instant>,
 ) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
     let initial = diagnostics.start();
+    let component_initial = optimizer_core::lp_cost::scope("controller");
     let mut control = optimizer_lp::control::Fp64Controller::new(engine);
     control.set_deadline(deadline);
+    drop(component_initial);
     diagnostics.finish("controller", initial);
     let mut tuned = execution
         .map(|settings| crate::tuned::TunedExecutor::new(residency, settings))
@@ -668,7 +678,9 @@ pub(crate) fn run_matched(
                 break;
             }
             let phase = diagnostics.start();
+            let component_phase = optimizer_core::lp_cost::scope("controller");
             control.continue_after_check();
+            drop(component_phase);
             diagnostics.finish("controller", phase);
         }
     }
@@ -767,6 +779,7 @@ pub(crate) fn assess_and_record(
             .collect(),
     };
     let checking = diagnostics.start();
+    let component_checking = optimizer_core::lp_cost::scope("host_checks");
     diagnostics.capture(dual, iterations);
     if let Some(control) = &mut diagnostics.control {
         control.assessments += 1;
@@ -799,6 +812,7 @@ pub(crate) fn assess_and_record(
         Termination::IterationLimit
     };
 
+    drop(component_checking);
     diagnostics.finish("host_checks", checking);
     let objective = report.feasible.then_some(report.objective);
     Ok(SolveRecord {

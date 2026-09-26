@@ -150,6 +150,7 @@ impl LinearProgram {
     /// SPEC-0011 requirement 3 refuses such a request at the backend boundary, and
     /// this is the second place it cannot slip through.
     pub fn new(model: &Model) -> Result<Self, ValidationError> {
+        let _component_scope = optimizer_core::lp_cost::scope("sparse_operator_construction");
         let document = model.document();
         if optimizer_core::ProblemClass::of(model) == optimizer_core::ProblemClass::Discrete {
             return Err(ValidationError::new(
@@ -303,6 +304,7 @@ impl LinearProgram {
     /// deliberately separate.
     #[must_use]
     pub fn matrix_sha256(&self) -> String {
+        let _component_scope = optimizer_core::lp_cost::scope("operator_hash");
         let mut bytes = Vec::new();
         bytes.extend_from_slice(&(self.row_count() as u64).to_le_bytes());
         bytes.extend_from_slice(&(self.column_count() as u64).to_le_bytes());
@@ -423,6 +425,7 @@ fn compress(
     columns: usize,
     transpose: bool,
 ) -> Compressed {
+    let _component_scope = optimizer_core::lp_cost::scope("sparse_compression");
     let (majors, _minors) = if transpose {
         (columns, rows)
     } else {

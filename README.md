@@ -20,6 +20,11 @@ implemented experimentally; the [adaptive report](docs/benchmarks/lp-adaptive-gp
 records acceptance and incomplete comparison coverage. No supported precision
 recipe is selected. GPUP-7 requires its bounded quantization/FP8 contract next.
 
+The [COPT comparison and component report](docs/benchmarks/lp-copt-comparison.md)
+now covers all 1140 planned attempts through 65536 rows. It identifies evidence
+size, host preparation/checks and adaptive recovery costs as future directions;
+coverage gaps remain, and no winner or preset is selected.
+
 The project validates original
 linear models and candidates, solves them with an independently validated incumbent,
 proves optimality with its own search, accepts separately authored extensions

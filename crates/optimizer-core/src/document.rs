@@ -187,6 +187,7 @@ pub struct Model {
 impl Model {
     /// Validate and canonicalize original model data without modifying coefficients.
     pub fn new(mut document: ModelDocument) -> Result<Self, ValidationError> {
+        let _component_scope = crate::lp_cost::scope("model_validation_canonicalization");
         version(document.schema_version)?;
         identity(&document.model_id, ErrorKind::Structural)?;
         document.variables.sort_by_key(|v| v.id);
@@ -295,11 +296,13 @@ impl Model {
 
     /// Parse one complete versioned JSON document and validate model structure.
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
+        let _component_scope = crate::lp_cost::scope("json_parse");
         Self::new(serde_json::from_slice(bytes).map_err(json_error)?)
     }
 
     /// Serialize canonical model data with stable ordering and f64 round trips.
     pub fn to_json(&self) -> Result<String, ValidationError> {
+        let _component_scope = crate::lp_cost::scope("model_serialization");
         serde_json::to_string_pretty(&self.document).map_err(json_error)
     }
 
@@ -398,12 +401,14 @@ impl Candidate {
 
     /// Parse and canonicalize candidate shape and values; evaluation checks coverage.
     pub fn from_json(bytes: &[u8]) -> Result<Self, ValidationError> {
+        let _component_scope = crate::lp_cost::scope("json_parse");
         let candidate: Self = serde_json::from_slice(bytes).map_err(json_error)?;
         candidate.canonical().map(std::borrow::Cow::into_owned)
     }
 
     /// Validate and serialize candidate data in variable-ID order.
     pub fn to_json(&self) -> Result<String, ValidationError> {
+        let _component_scope = crate::lp_cost::scope("model_serialization");
         serde_json::to_string_pretty(&*self.canonical()?).map_err(json_error)
     }
 }

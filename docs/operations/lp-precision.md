@@ -202,3 +202,51 @@ The [GPUP-6 report](../benchmarks/lp-adaptive-gpup6.md) records completed
 correctness acceptance, retained comparison failures, phase accounting and
 reproduction. The archived measured source and executable define the timing
 identity; final verifier/archive checks do not change the numerical path.
+
+
+## COPT comparison and component diagnosis
+
+[ADR-0026](../decisions/ADR-0026-copt-component-diagnosis.md) freezes 1140 fresh
+comparison, component-profile, short-work and CUDA-trace attempts on sixteen
+development models. Inspect without device work:
+
+```bash
+python3 tools/benchmark_lp_copt.py --dry-run
+```
+
+The runner requires an exact-source pinned-native gate, COPT 8.0.6 binding hashes,
+all four archived CUDA code images, the shared lease and chained category budget.
+It verifies each endpoint and retains every attempted identity. No retries or
+implicit category borrowing occur. Ordinary solve remains bounded to 16 MiB;
+explicit `optimizer lp-study solve --model-byte-limit 134217728` uses the same
+solve path for extension inputs. `--cost-profile PATH` on study commands enables
+hierarchical host costs in a separate artifact. It does not change certification.
+
+External witness/endpoint v2 adds default CPU LP and native method counters,
+SolvingTime and MemPeak; existing v1 evidence remains independently readable.
+COPT arithmetic internals and inaccessible CPU phases remain opaque. Exclusive
+host costs, child certifier processes, and overlapping GPU activity are distinct
+views; never add their envelopes. Detailed profiles/traces are not primary timing.
+
+Use `tools/lp_copt_budget.py --id NAME --seconds N -- COMMAND` for acceptance.
+Regular devices use the existing `tools/lp_adaptive_gpu_check.sh regular`;
+`tools/lp_copt_accept.py` checks profile equivalence and real COPT method witnesses.
+After the study, `tools/report_lp_copt.py --decode-traces` decodes retained traces
+offline, rechecks frozen identities and every endpoint, and writes an immutable
+report. CPU verification is separately accounted. Existing hardware-counter, CPU
+sampling and historical sanitizer limitations remain explicit.
+
+The [completed comparison](../benchmarks/lp-copt-comparison.md) distinguishes
+initial parser-limited verification from the separately archived corrected verifier.
+Apply `--model-byte-limit 134217728` to study verification as well as solve.
+For reanalysis, pass `--verifier` and `--verifier-execution` with the archived final
+verifier identity, and select a new output path; reports are never overwritten.
+Offline decoding imports working copies because the installed importer appends
+metadata. `tools/lp_copt_trace_recover.py` can restore only captures whose complete
+historical hash matches exactly; it preserves the importer-modified copy.
+
+`tools/export_lp_copt.py` publishes data and audits worker/collector envelopes;
+`tools/plot_lp_copt.py` generates disjoint host charts and separate CUDA timelines
+from the verified report (Matplotlib is optional offline plotting tooling).
+Neither launches device work. Raw/partial files and unavailable graph-node activity
+remain retained; trace samples never fill missing primary timings.

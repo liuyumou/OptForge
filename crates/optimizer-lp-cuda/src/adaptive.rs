@@ -19,7 +19,9 @@ pub(crate) fn iterate(
     deadline: Option<Instant>,
 ) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
     let phase = d.start();
+    let component_phase = optimizer_core::lp_cost::scope("adaptive_preparation");
     let prepared = PreparedAdaptive::new(engine, &settings);
+    drop(component_phase);
     d.finish("adaptive_preparation", phase);
     let peak = settings
         .ladder
@@ -51,6 +53,7 @@ pub(crate) fn iterate(
                 // is cumulative, while device_buffer_peak_bytes is the admitted maximum.
                 drop(executor.take());
                 let phase = d.start();
+                let component_phase = optimizer_core::lp_cost::scope("invariant_allocation_upload");
                 executor = Some(crate::precision::PrecisionExecutor::new(
                     Rc::clone(&context),
                     engine,
@@ -60,10 +63,12 @@ pub(crate) fn iterate(
                     d,
                 )?);
                 d.device_buffer_peak_bytes = Some(peak);
+                drop(component_phase);
                 d.finish("invariant_allocation_upload", phase);
                 active = Some(index);
             }
             let phase = d.start();
+            let component_phase = optimizer_core::lp_cost::scope("kernels_and_synchronization");
             let result = executor
                 .as_mut()
                 .expect("active precision residency")
@@ -73,6 +78,7 @@ pub(crate) fn iterate(
                     engine.step(),
                     d.execution.as_mut().expect("explicit execution"),
                 );
+            drop(component_phase);
             d.finish("kernels_and_synchronization", phase);
             result
         },

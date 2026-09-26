@@ -48,3 +48,6 @@ pub mod lp_external;
 /// Strict isolated GPUP-5B study evidence; no runtime selector.
 #[cfg(feature = "precision-research")]
 pub mod lp_research;
+
+/// Explicit-method COPT study evidence, version two.
+pub mod lp_external_v2;

@@ -19,6 +19,11 @@ use optimizer_lp_cuda::CudaLpBackend;
 use crate::input::{argument, read};
 
 pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
+    solve_with_model_limit(options, crate::input::MAX_INPUT_BYTES)
+}
+
+pub(crate) fn solve_with_model_limit(options: &[OsString], model_limit: u64) -> io::Result<u8> {
+    let _cost = optimizer_core::lp_cost::scope("solve");
     let input_started = std::time::Instant::now();
     let mut evidence_path = None;
     let mut profile_mode = None;
@@ -85,7 +90,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
                 .ok_or_else(|| argument("invalid LP device memory limit"))
         })
         .transpose()?;
-    let model_bytes = read(model_path)?;
+    let model_bytes = crate::input::read_with_limit(model_path, model_limit)?;
     let model = Model::from_json(&model_bytes).map_err(io::Error::other)?;
     let configuration: SolveOptions = serde_json::from_slice(&read(config_path)?)
         .map_err(|error| io::Error::other(format!("document: solve configuration: {error}")))?;
@@ -294,7 +299,10 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
         }
     };
     let serialization = diagnostics.start();
-    let output = record.to_json().map_err(io::Error::other)?;
+    let output = {
+        let _cost = optimizer_core::lp_cost::scope("solve_record_serialization");
+        record.to_json().map_err(io::Error::other)?
+    };
     diagnostics.finish("solve_record_serialization", serialization);
     if let Some(path) = evidence_path {
         let endpoint = optimizer_experiment::lp::LpEndpoint::new(
@@ -305,7 +313,11 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
             fallback_reason,
         )
         .map_err(io::Error::other)?;
-        let bytes = serde_json::to_vec_pretty(&endpoint).map_err(io::Error::other)?;
+        let bytes = {
+            let _cost = optimizer_core::lp_cost::scope("endpoint_serialization");
+            serde_json::to_vec_pretty(&endpoint).map_err(io::Error::other)?
+        };
+        let _cost = optimizer_core::lp_cost::scope("endpoint_write");
         let destination = std::path::Path::new(path);
         let partial = destination.with_extension("partial");
         std::fs::write(&partial, bytes)?;
@@ -314,6 +326,7 @@ pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
 
     let code = exit_code(record.termination);
 
+    let _cost = optimizer_core::lp_cost::scope("record_output");
     let mut stdout = io::stdout().lock();
     writeln!(stdout, "{output}")
         .and_then(|()| stdout.flush())

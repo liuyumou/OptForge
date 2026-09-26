@@ -161,6 +161,7 @@ name = "optimizer-cuda-sys"
 version = "0.1.0"
 dependencies = [
  "libc",
+ "optimizer-core",
 ]
 
 [[package]]
