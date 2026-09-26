@@ -1,5 +1,26 @@
 # Active Task
 
+## GPUP-6 and COPT protected integration (2026-09-27)
+
+Status: in progress; the user explicitly authorized two PRs, ordered merges and
+safe cleanup of merged branches. Merge GPUP-6 first, then its dependent COPT
+comparison, preserving measured commit ancestry with merge commits.
+Scope: inspect reviewable changes and existing acceptance, publish both branches,
+wait for required cpu/docs/smoke checks and resolve actionable review findings,
+merge through protected PRs, synchronize local main, and delete only branches
+whose tips are ancestors of merged main and have no other worktrees.
+Acceptance: required checks pass on current PR heads, no unresolved review
+threads, both PRs merged, original measured commits retained, clean synchronized
+main, only the merged task branches removed. No protection bypass or force push.
+Resources: four build jobs and one CPU-hour for integration checks; no new GPU
+work or campaign allowance. Preserve the 15340-event ledger and all artifacts:
+14766.435441716 cumulative GPU seconds, SHA-256
+5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b.
+Initial code acceptance is the full pinned-native GPUP-6/COPT gates and recorded
+device/sanitizer scope. Initial remote main is 1dff5a9; both task branches form a
+linear stack above it. Integration receipts remain under
+artifacts/gpup6-copt-integration-20260927. No release or hosting publication.
+
 ## COPT comparison and component-cost diagnosis (2026-09-26)
 
 Status: implementation and study complete; final acceptance recorded below.
