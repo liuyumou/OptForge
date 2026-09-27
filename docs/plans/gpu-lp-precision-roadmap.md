@@ -1,9 +1,9 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; slices 0-5, GPUP-5B, GPUP-5C and GPUP-THROUGHPUT complete; slices 6-10 pending
+Status: approved roadmap; GPUP-0 through GPUP-6, GPUP-5B/5C, GPUP-THROUGHPUT and GPUP-COPT complete; ordered COPT follow-ups and GPUP-7 through GPUP-10 pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: bootstrap (first commit containing this document)
+Last reviewed commit: 15dd5c8d7bf47ea9dfb530cb2051f66b5971562c (follow-up ordering, 2026-09-27)
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
 Acceptance: the slice gates below; [GPUP-2 baseline evidence](../benchmarks/lp-baseline-gpup2.md), [GPUP-3 matched evidence](../benchmarks/lp-matched-fp64-gpup3.md), [GPUP-4 tuned evidence](../benchmarks/lp-tuned-fp64-gpup4.md)
 
@@ -31,8 +31,9 @@ This track follows C6 but does not complete C7, C9, or the general C10 runner.
 ## Contracts and status
 
 - [SPEC-0012](../specifications/SPEC-0012-mixed-precision-lp.md) is accepted for
-  implemented GPUP-3/4 shared FP64 control and explicit tuned execution. Later
-  precision, recovery and preset requirements remain pending.
+  implemented GPUP-3/4 shared FP64 control and tuned execution, GPUP-5 fixed FP32
+  comparisons and GPUP-6 adaptive recovery. Quantization, Tensor Core execution
+  and supported presets still need their bounded contracts and acceptance.
 - [SPEC-0013](../specifications/SPEC-0013-lp-precision-experiments.md) is accepted;
   GPUP-2 implements the bounded LP study, artifacts and baseline acceptance.
   [ADR-0014](../decisions/ADR-0014-lp-baseline-protocol.md) freezes its concrete protocol.
@@ -51,10 +52,13 @@ and tolerance-based feasibility report retain their existing meanings. See
 
 ## Implementation slices
 
-Every row depends on the preceding row; GPUP-0 depends on C6 and C8. New behavior
-requires the relevant draft specification to be accepted before implementation.
-Slice 1 repairs the existing SPEC-0011 certification contract. Later slices may
-be refined from earlier findings, with changes recorded before affected trials.
+The original precision sequence is below; GPUP-0 depends on C6 and C8. The
+[current follow-up order](#current-follow-up-order-2026-09-27) inserts the COPT
+findings before GPUP-7; the backlog records actual prerequisites separately from
+priority. New behavior requires the relevant bounded contract to be accepted
+before implementation. Slice 1 repairs the existing SPEC-0011 certification
+contract. Later slices may be refined from earlier findings, with changes
+recorded before affected trials.
 
 | ID | Deliverable | Completion evidence |
 | --- | --- | --- |
@@ -262,10 +266,11 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Next handoff after GPUP-2: accept SPEC-0012 and create the shared resumable FP64
-controller under GPUP-3. The baseline completed 144 attempts and consumed
-173.148261443 GPU seconds; preserve that ledger consumption. Host/GPU controller
-differences and limited GPU certified coverage are documented in the baseline report.
+Current handoff: GPUP-EVIDENCE, beginning with the compact evidence contract and
+CPU-only size/write/verification prototype described below. GPUP-3 through GPUP-6
+and the COPT diagnosis have completed; retain their contracts, reports and ledger
+history. The original GPUP-2 baseline remains 144 attempts and 173.148261443 GPU
+seconds, not a new campaign starting point.
 Full MILP integration remains separately listed in the backlog; repeated-solve
 throughput is GPUP-THROUGHPUT, complete under accepted
 [SPEC-0014](../specifications/SPEC-0014-lp-repeated-solve-throughput.md) and
@@ -288,9 +293,9 @@ GPUP-6 study 1826.094392481/5400 s, acceptance 70.478730162/900 s.
 The 13056-event ledger SHA-256 is
 6db55153153e66ed5c2398417d008e4edd278e11153cf87b975345f1a574d34d, preserving the 8278-event prefix
 c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a and every earlier prefix.
-GPUP-7 follows and needs its bounded quantization/FP8 interface and resource
-contract before behavior. Adaptive sessions, persistent checkpoints and supported
-presets remain outside GPUP-6; old 65536-row and tuned_cases racecheck gaps remain.
+GPUP-7 remains the next precision feature after the ordered COPT follow-ups below;
+it needs its bounded quantization/FP8 interface and resource contract before behavior.
+Adaptive sessions, persistent checkpoints and supported presets remain outside GPUP-6; old 65536-row and tuned_cases racecheck gaps remain.
 
 
 GPUP-COPT is complete under ADR-0026. Its [component-cost report](../benchmarks/lp-copt-comparison.md)
@@ -301,4 +306,53 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. Performance repairs ranked
-in the report are future bounded tasks; GPUP-7 still needs its accepted contract.
+in the report are now ordered below; their contracts and implementation remain
+future bounded tasks. GPUP-7 still needs its accepted contract.
+
+
+## Current follow-up order (2026-09-27)
+
+The user requested ordering after GPUP-6 and GPUP-COPT merged. The COPT
+[ranked experiments](../benchmarks/lp-copt-comparison.md#ranked-next-experiments)
+are the evidence for the first six priorities. Coverage comes first, followed by
+measured host costs, then additional arithmetic candidates. These are planned
+bounded tasks, not accepted behavior changes or performance promises.
+
+| Order | Task | Scope and completion decision |
+| --- | --- | --- |
+| 1 | **GPUP-EVIDENCE: compact independently verifiable evidence** | Specify the versioned endpoint, original-model witnesses, identity/replay, legacy readers and resource limits first. Compare CPU size, writing and verification on all four extensions before new GPU timings. There are 142 partial files exactly at 32 MiB and no certified 65536-row project primary sample; recover assessable output without rewriting historical trials or relaxing checks. |
+| 2 | **GPUP-HOST: immutable host representation and preparation** | Remove one measured reconstruction within a fresh solve; keep every candidate and certificate assessment fresh. Input/preparation accounts for 40.0% of tuned irregular-32768 wall, with certification another 27.1%. Preserve arithmetic and exact-rational checks; report rebuild counts and complete certified latency. The earlier throughput host-input repair is complete and does not establish this fresh-single repair. |
+| 3 | **GPUP-ADAPTIVE-COST: ladder and audit/probe overhead** | Build on reusable immutable host data. Separate duplicate preparation from required reference arithmetic under fixed proposals; preserve canonical rungs, conservative common step, original-unit audits, rollback and charged replay. Preparation/recovery is 44.7% of gradual irregular-32768 wall; checkpoint copying alone is below 0.2%. |
+| 4 | **GPUP-SETUP: fresh device setup diagnosis** | Attribute discovery, context creation, module loading and teardown before choosing one repair. Setup is 59.8% of small-4 tuned wall. Complete the bounded diagnosis even if no worthwhile repair follows; persistent contexts remain a separate warm/session endpoint. |
+| 5 | **GPUP-COPT-ADAPTER: optional external baseline construction** | Test bulk model construction while preserving coefficients, senses, offsets, import guards and fresh certification. Input/setup is 54.5% of dense65536 GPU wrapper wall. Record a new adapter identity and preserve historical comparisons. This task depends on continued use of the optional local COPT control. |
+| 6 | **GPUP-CONVERGENCE: work amplification and remaining device diagnosis** | Reassess proposals, audits, probes and replay after host/adaptive repairs, then compare certification coverage. A small graph-node trace is optional only if it resolves a concrete execution decision. Completion is a bounded diagnosis feeding GPUP-7, not a requirement to solve every convergence failure or expose COPT internals. |
+| 7 | **GPUP-7: quantization interface, then sparse FP8** | Accept the bounded interface, resource and numerical contract before behavior. Stage matrix-only candidates before vector quantization; retain canonical transpose consistency, guards, seeded replay, FP64 controls and development screening. |
+| 8 | **GPUP-8: hybrid sparse/Tensor Core execution** | Follow the sparse quantized reference. Compare equivalent represented operands on the actual target, including packing, padding, metadata, setup, certification and recovery for a single right-hand side. |
+| 9 | **GPUP-9: controlled ablations and frozen finalists** | Reassess development candidates, select on validation, freeze finalists, then evaluate held-out data with coverage and uncertainty. Keep negative results and reserved finalist resources. |
+| 10 | **GPUP-10: evidence-supported recipes** | Package only configurations supported by the final comparisons; retaining tuned FP64 is a valid result. No automatic dispatch or preset follows from the current development studies. |
+
+Priority does not imply an artificial dependency on every earlier row. The main
+sequence is GPUP-EVIDENCE → GPUP-HOST → GPUP-ADAPTIVE-COST → GPUP-CONVERGENCE
+→ GPUP-7 → GPUP-8 → GPUP-9 → GPUP-10. Setup diagnosis and COPT adapter work
+are separately bounded investigations in the indicated priority order, but neither
+blocks quantization if unavailable or unjustified by its cost. Work still proceeds
+one bounded task at a time. Each implementation declares its acceptance gate and
+CPU/GPU budget before starting; public/versioned behavior needs an accepted contract.
+
+After this precision track, GPUP-MILP requires its own integration specification
+and full-search study. C7 portfolios remain a separate capability requiring a
+specification; C9 SDK and C10 general runner remain separately unspecified.
+Adaptive sessions, persistent checkpoints and the old 65536-row throughput gap
+are outside this sequence. The historical tuned_cases racecheck gap stays visible
+and must be covered for affected supported claims; it is not silently waived by
+new arithmetic or by the adaptive sanitizer receipts.
+
+The current cumulative charge is **14766.435441716 / 18002.574545061 GPU s**;
+headroom under that ceiling is **3236.139103345 s**, not a new task allowance.
+Phase headroom is baseline 629.524234326 s, screening 1086.653583558 s,
+ablations 1525.038223925 s and repeatability 1792.348516475 s. Finalists retain
+9000 s under the overall 28800 s campaign cap; using more than the current
+cumulative ceiling still requires explicit authority. Do not borrow between
+phases, spend held-out resources on tuning, or reset the 15340-event ledger.
+Start with CPU-only evidence work and small justified comparisons; a new broad
+17-configuration campaign is not part of this ordering.

@@ -1,5 +1,37 @@
 # Active Task
 
+## GPUP follow-up ordering (2026-09-27)
+
+Status: complete; documentation-only ordering and acceptance recorded.
+Objective: reconcile the merged GPUP-6/COPT state and order the remaining COPT
+repairs and precision slices by coverage, measured cost and actual dependencies.
+Scope: backlog, roadmap and current handoff pointers; preserve benchmark reports,
+accepted contracts, raw evidence, numerical settings and historical task receipts.
+The next implementation starts with its own bounded contract; this review does
+not accept new numerical behavior or allocate GPU time.
+Acceptance: consistent ordered tasks and dependency-ready next handoff, unchanged
+campaign ledger, documentation links and full pinned-native `bash tools/check.sh`.
+Resources: four build jobs, at most one CPU-hour for validation, zero GPU jobs.
+Baseline: clean local main at 15dd5c8d7bf47ea9dfb530cb2051f66b5971562c;
+GPUP-6 and COPT are merged according to the retained integration receipt.
+Preserve 14766.435441716 cumulative GPU seconds, the 18002.574545061 current
+ceiling, all phase caps and the 15340-event ledger SHA-256
+5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b.
+Likely files: state/backlog.yaml, docs/plans/gpu-lp-precision-roadmap.md,
+wiki/status.md, AGENTS.md and this record. Local commit after acceptance; no push.
+
+Acceptance evidence: full pinned-native `bash tools/check.sh` passed, including
+495 Rust tests, 170 Python integration tests, archived-record replay, 97-page
+link/anchor validation and bootstrap smoke. A separate planning check confirms
+34 unique tasks, an acyclic dependency graph, completed prerequisites for
+GPUP-EVIDENCE and matching roadmap/backlog priority. Receipts are retained in
+artifacts/gpup-followup-order-20260927. Only five planning/state documents changed;
+the COPT report, accepted specifications, runtime and historical evidence remain
+unchanged. The ledger still has exactly 15340 events and the SHA-256 above after
+the gate; no GPU job or allowance was added. The next task begins with the
+GPUP-EVIDENCE contract, not a new solve campaign. Setup and optional COPT adapter
+investigations retain their priority without becoming quantization prerequisites.
+
 ## GPUP-6 and COPT protected integration (2026-09-27)
 
 Status: acceptance complete; protected integration and safe cleanup authorized.

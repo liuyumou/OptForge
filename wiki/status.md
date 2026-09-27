@@ -11,7 +11,7 @@ evidence is recorded in [active task](../state/active-task.md).
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | Prioritized GPU LP precision track (GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| Planned | Ordered COPT evidence/host/adaptive follow-ups, then GPU LP precision track (GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
 | Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
@@ -68,7 +68,12 @@ amortized throughput as a separately labeled endpoint (never single-solve
 latency), and cumulative consumption of 6951.059845871 seconds. GPUP-6 is also complete under accepted ADR-0025; its
 [adaptive report](../docs/benchmarks/lp-adaptive-gpup6.md) records explicit audits,
 rollback, promotion/demotion, independent v5 evidence, complete correctness gates
-and retained comparison failures. GPUP-7 is next and needs a bounded contract. No supported recipe is available. The campaign retains its eight GPU-hour cap; acceptance details remain
+and retained comparison failures. The next task is GPUP-EVIDENCE: specify compact
+independently verifiable endpoints, then repair measured host and adaptive costs
+before GPUP-7's bounded quantization contract. The
+[ordered follow-ups](../docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
+separate priority from prerequisites. No supported recipe is available. The
+campaign retains its eight GPU-hour cap; acceptance details remain
 in the active-task record.
 
 Solve records recompute objectives and violations independently of the backend. A
@@ -173,4 +178,5 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. Performance repairs ranked
-in the report are future bounded tasks; GPUP-7 still needs its accepted contract.
+in the report are ordered in the roadmap and backlog, beginning with GPUP-EVIDENCE;
+GPUP-7 still needs its accepted contract.
