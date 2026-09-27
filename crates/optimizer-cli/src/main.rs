@@ -9,6 +9,7 @@ mod registry;
 mod schedule;
 mod search;
 mod solve;
+mod study_output;
 
 use std::env;
 use std::ffi::OsString;
@@ -37,9 +38,13 @@ Usage:
   optimizer lp-study prepare --instance <path> --output <model-path>
   optimizer lp-study verify --model <path> --evidence <path>
   optimizer lp-study solve <solve flags> [--model-byte-limit <bytes>] [--cost-profile <path>]
+    [--evidence-format legacy|compact-v1]
   optimizer lp-study external-certify --model <path> --evidence <witness-path> --output <path>
   optimizer lp-study external-verify --model <path> --evidence <path>
   optimizer lp-study replay --model <path> --evidence <path> --output <path> [--device GPU-<uuid>]
+    [--model-byte-limit <bytes>] [--evidence-format legacy|compact-v1]
+  optimizer lp-study transcode --model <path> --evidence <path> --output <path>
+    --evidence-format legacy|compact-v1 [--model-byte-limit <bytes>]
   optimizer lp-study materialize --model <path> --batch <path> --index <k> --out <path>
   optimizer lp-study verify-batch --model <path> --batch <path> --evidence <dir>
   optimizer search --model <path> --config <path> [--output <path>] [REGISTRY]

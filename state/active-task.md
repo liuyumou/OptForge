@@ -1,5 +1,128 @@
 # Active Task
 
+## GPUP-EVIDENCE protected integration (2026-09-27)
+
+Status: local acceptance passed; protected integration authorized; remote outcomes
+are recorded in the integration receipt.
+The user explicitly authorized opening the PR, merging after required checks and
+review, synchronizing main, and cleaning up its corresponding branch.
+Scope: publish the completed GPUP-EVIDENCE slice and its preceding follow-up
+ordering; inspect reviewable changes and CI, preserve measured commit ancestry
+with a merge commit, and delete only the merged compact-evidence branch after
+checking main ancestry and worktree ownership. No release or hosting change.
+Acceptance: full pinned-native tools/check.sh, local diff review, required GitHub
+cpu/docs/smoke checks on the final head, resolved review threads, protected merge,
+clean synchronized main and verified local/remote branch deletion. No bypass.
+Resources: four build jobs, at most one CPU-hour for integration, zero GPU jobs.
+Preserve all campaign evidence and the 15392-event ledger SHA-256
+6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518;
+cumulative 15071.710156489 / 18002.574545061 GPU seconds, no added allowance.
+Initial source head: 99f2abb1f08df67d74263d1ad5ca982bd41c269c; origin/main:
+15dd5c8d7bf47ea9dfb530cb2051f66b5971562c. The branch is current with main.
+Final PR/check/merge/cleanup outcomes and acceptance logs are retained in
+artifacts/gpup-evidence-integration-20260927/integration.json and sibling files.
+
+Local acceptance: full pinned-native tools/check.sh passes (500 Rust tests, 179
+Python tests, 101 documentation pages, committed-record replay and smoke). The
+local review found no blocking issue in codec/CLI verification or accounting.
+The read-only evidence audit checks 391 retained references, the unchanged ledger
+prefix and numerical/kernel sources; all pass. Integration uses 124.719736 metered
+child CPU seconds and no GPU work. Remote cpu/docs/smoke and unresolved review
+threads are checked on the PR head before merge; no protection bypass is allowed.
+
+## GPUP-EVIDENCE compact LP output (2026-09-27)
+
+Status: complete; implementation, bounded study and final repository acceptance passed.
+Objective: study-only compact evidence with independently reconstructed validation,
+legacy identity/replay, CPU size/write/verification evidence and 24 fresh paired timings.
+Contract: SPEC-0015 and ADR-0027, recorded before implementation. Preserve every
+numerical setting, original-model certification, existing output default and kernel.
+Likely files: optimizer-experiment compact codec, optimizer-cli study/solve output,
+schemas, CPU/device contracts, bounded evidence protocol/runner/report and task docs.
+Acceptance: full pinned-native tools/check.sh; strict versions 1–5, bitwise codec
+round trips and rejection tests; four extension fixtures; regular device and fixed-work
+format/replay equivalence; independent report retaining every failure and timing gap.
+Resources: four build jobs, four CPU validation hours; 900 GPU seconds ablations for
+24 timing attempts (864 seconds total reservation), 300 repeatability for acceptance.
+No added allowance: cumulative 14766.435441716 / 18002.574545061 seconds; retain all
+phase caps and the 15340-event prefix SHA-256
+5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b. Serialize GPU jobs
+under the shared host lease. No failed identity is retried. Local commit after
+acceptance; advance to GPUP-HOST only when this bounded slice passes. No push.
+
+Acceptance evidence: [SPEC-0015](../docs/specifications/SPEC-0015-compact-lp-evidence.md)
+and ADR-0027 were accepted before implementation. The study-only compact codec,
+assessment stdout, auto-detect verification/replay and verified transcode preserve
+legacy defaults and v1-v5 payload hashes. Full pinned-native pre-study gate passes
+500 Rust and 179 Python tests; 55 regular device tests, six fixed-work format pairs
+and six compact replays pass with all 18 endpoints independently verified and
+bitwise equal. Four extension CPU fixtures fit below 32 MiB and preserve exact
+legacy serialization through round trips. Two fixtures are explicitly synthetic;
+retained conversions never become new or recovered historical timing samples.
+
+The [report](../docs/benchmarks/lp-compact-evidence.md) and hash-bound repository data
+retain all 24 fresh attempts: 15 verified endpoints and 12 certified timings.
+Compact certifies 9/12 and verifies 12/12; legacy certifies/verifies 3/12. All nine
+legacy partials hit 32 MiB. Compact mixed-65536 outputs verify interrupted outcomes
+but remain timeouts. The three qualifying irregular-32768 pairs have identical
+numerical bits and median legacy/compact ratio 1.046264 (95% paired interval
+1.022637–1.049929); no general preset follows. Kernels and numerical settings are
+unchanged; prior sanitizer receipts retain their original scope, and the historical
+racecheck/session gaps remain explicit. The initial historical-schema test failure
+and subsequent corrected passing gates are retained; no GPU identity was retried.
+
+Task charge: 305.274714773 GPU s (283.019581049/900 ablations timing and
+22.255133724/300 repeatability acceptance). Cumulative 15071.710156489 /
+18002.574545061 s; every phase cap and the original output binding are intact.
+The 15392-event ledger SHA-256 is
+6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518;
+its 15340-event prefix retains the hash above. CPU resource receipts and full logs
+are under artifacts/gpup-evidence-acceptance. Advance to GPUP-HOST for one bounded
+immutable-host reconstruction repair; no additional GPU allowance is implied.
+
+
+Final repository gate: full pinned-native tools/check.sh passes again after report
+publication (500 Rust tests, 179 Python tests, 101 documentation pages, native
+committed-record replay and smoke). Metered child CPU use across full gates, build,
+CPU study, device checks, fresh study and analysis is 1277.511807 seconds; earlier
+focused checks retain duration logs without child CPU receipts. Four build jobs
+and the four-hour CPU bound are retained. Final artifact/reference and ledger-prefix
+checks pass, including assessment-only compact stdout and unchanged numerical/kernel
+sources and code images. The report, compatibility tutorial, all 24 trial summaries
+and acceptance/provenance data are repository files. Local commit follows; no push.
+
+## GPUP follow-up ordering (2026-09-27)
+
+Status: complete; documentation-only ordering and acceptance recorded.
+Objective: reconcile the merged GPUP-6/COPT state and order the remaining COPT
+repairs and precision slices by coverage, measured cost and actual dependencies.
+Scope: backlog, roadmap and current handoff pointers; preserve benchmark reports,
+accepted contracts, raw evidence, numerical settings and historical task receipts.
+The next implementation starts with its own bounded contract; this review does
+not accept new numerical behavior or allocate GPU time.
+Acceptance: consistent ordered tasks and dependency-ready next handoff, unchanged
+campaign ledger, documentation links and full pinned-native `bash tools/check.sh`.
+Resources: four build jobs, at most one CPU-hour for validation, zero GPU jobs.
+Baseline: clean local main at 15dd5c8d7bf47ea9dfb530cb2051f66b5971562c;
+GPUP-6 and COPT are merged according to the retained integration receipt.
+Preserve 14766.435441716 cumulative GPU seconds, the 18002.574545061 current
+ceiling, all phase caps and the 15340-event ledger SHA-256
+5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b.
+Likely files: state/backlog.yaml, docs/plans/gpu-lp-precision-roadmap.md,
+wiki/status.md, AGENTS.md and this record. Local commit after acceptance; no push.
+
+Acceptance evidence: full pinned-native `bash tools/check.sh` passed, including
+495 Rust tests, 170 Python integration tests, archived-record replay, 97-page
+link/anchor validation and bootstrap smoke. A separate planning check confirms
+34 unique tasks, an acyclic dependency graph, completed prerequisites for
+GPUP-EVIDENCE and matching roadmap/backlog priority. Receipts are retained in
+artifacts/gpup-followup-order-20260927. Only five planning/state documents changed;
+the COPT report, accepted specifications, runtime and historical evidence remain
+unchanged. The ledger still has exactly 15340 events and the SHA-256 above after
+the gate; no GPU job or allowance was added. The next task begins with the
+GPUP-EVIDENCE contract, not a new solve campaign. Setup and optional COPT adapter
+investigations retain their priority without becoming quantization prerequisites.
+
 ## GPUP-6 and COPT protected integration (2026-09-27)
 
 Status: acceptance complete; protected integration and safe cleanup authorized.

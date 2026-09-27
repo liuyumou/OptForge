@@ -11,7 +11,11 @@ active_research_track: GPUP
 # kernel time. Those costs are outside GPUP-6's adaptive-recovery scope. The slice
 # keeps its own specification, endpoint and budget: amortized throughput never
 # substitutes for the single-solve latency endpoint (ADR-0013).
-next_ready_task: GPUP-7
+# 2026-09-27: order the COPT report's follow-ups before more arithmetic work.
+# GPUP-EVIDENCE is complete under SPEC-0015/ADR-0027; GPUP-HOST follows.
+# Listed priority is distinct from depends_on: setup and optional COPT adapter
+# investigations are not prerequisites for quantization. See the roadmap handoff.
+next_ready_task: GPUP-HOST
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -179,12 +183,43 @@ tasks:
     depends_on: [GPUP-5C, GPUP-THROUGHPUT]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     acceptance: "ADR-0025 complete; host fault injection, CPU/device differentials, v5 identity/replay/schema gates, clean-checkout budgets, full pinned-native and four adaptive sanitizers; frozen comparison with independently verified endpoints and retained failures; docs/benchmarks/lp-adaptive-gpup6.md"
+  - id: GPUP-EVIDENCE
+    title: Specify and implement compact independently verifiable LP evidence
+    status: complete
+    depends_on: [GPUP-COPT]
+    specification: docs/specifications/SPEC-0015-compact-lp-evidence.md
+    acceptance: "ADR-0027 complete; strict v1-v5 codec/identity/replay and verified transcode; four full-witness CPU roundtrips; full pinned-native gate, 55 device tests, six format pairs and six replays; all 24 fresh attempts retained, 15 independently verified and 12 certified; docs/benchmarks/lp-compact-evidence.md"
+  - id: GPUP-HOST
+    title: Remove repeated immutable host reconstruction within fresh solves
+    status: planned
+    depends_on: [GPUP-EVIDENCE]
+    acceptance: "One measured representation/preparation repair; fresh candidate and certificate assessments, exact-rational regressions, rebuild counts and certified fresh-process comparison; no cross-solve reuse"
+  - id: GPUP-ADAPTIVE-COST
+    title: Reduce adaptive ladder preparation and audit or probe host overhead
+    status: planned
+    depends_on: [GPUP-HOST, GPUP-6]
+    acceptance: "Separate repeated preparation from required reference arithmetic under fixed proposals; preserve canonical rungs, conservative common step, original-unit audits, rollback and charged work; measure total certified latency"
+  - id: GPUP-SETUP
+    title: Investigate fresh device discovery, context, module and teardown costs
+    status: planned
+    depends_on: [GPUP-COPT]
+    acceptance: "Bounded phase attribution before any repair; preserve fresh-process endpoint; persistent contexts remain separately labeled session work; proceed only within an explicit resource contract"
+  - id: GPUP-COPT-ADAPTER
+    title: Investigate optional COPT bulk model construction
+    status: planned
+    depends_on: [GPUP-EVIDENCE]
+    acceptance: "Optional external-control repair; canonical coefficients, senses, offsets and guards unchanged; fresh independent certification; retain old wrapper timings and new adapter identity; not a quantization prerequisite"
+  - id: GPUP-CONVERGENCE
+    title: Review convergence and equal-work mixtures before lower precision
+    status: planned
+    depends_on: [GPUP-ADAPTIVE-COST]
+    acceptance: "Bounded comparison of proposals, audits, probes and replay with certification coverage; diagnose remaining work amplification; optional graph-node trace only if it resolves a decision; no inferred COPT precision or implicit solver tuning"
   - id: GPUP-7
     title: Implement quantization candidates and sparse FP8 execution
     status: planned
-    depends_on: [GPUP-6]
+    depends_on: [GPUP-6, GPUP-EVIDENCE, GPUP-CONVERGENCE]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
-    acceptance: "Quantizer boundary tests; identical represented transpose; guarded operands; seeded replay; numerical screening"
+    acceptance: "Accept bounded quantization/FP8 interface and resource contract first; quantizer boundary tests; identical represented transpose; guarded operands; seeded replay; numerical screening"
   - id: GPUP-8
     title: Implement hybrid sparse and Tensor Core single-solve execution
     status: planned

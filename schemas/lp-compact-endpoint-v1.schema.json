@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-compact-endpoint-v1.schema.json",
+  "title": "Compact independently verifiable study LP endpoint v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "format": {
+      "const": "lp-compact-v1"
+    },
+    "endpoint": {
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "$ref": "lp-endpoint-v1.schema.json"
+            },
+            {
+              "$ref": "lp-endpoint-v2.schema.json"
+            },
+            {
+              "$ref": "lp-endpoint-v3.schema.json"
+            },
+            {
+              "$ref": "lp-endpoint-v4.schema.json"
+            },
+            {
+              "$ref": "lp-endpoint-v5.schema.json"
+            }
+          ]
+        },
+        {
+          "properties": {
+            "record": {
+              "not": {
+                "required": [
+                  "validation"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "validation_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "format",
+    "endpoint",
+    "validation_sha256"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "validation_sha256": {
+            "type": "string"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "endpoint": {
+            "properties": {
+              "record": {
+                "required": [
+                  "candidate"
+                ],
+                "properties": {
+                  "candidate": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

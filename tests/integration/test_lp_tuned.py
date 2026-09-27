@@ -64,12 +64,17 @@ class TunedTests(unittest.TestCase):
         self.assertEqual(read_json(FIXTURE),build())
 
     def test_legacy_schema_bytes_unchanged(self):
-        for pattern in ['lp-*-v1.schema.json','lp-*-v2.schema.json','solve-record-v2.schema.json']:
-            for path in (ROOT/'schemas').glob(pattern):
-                # Schemas introduced after that commit are additions, not legacy changes.
-                if path.name in ('lp-cost-v1.schema.json','lp-cost-raw-v1.schema.json','lp-external-witness-v2.schema.json','lp-external-endpoint-v2.schema.json','lp-adaptive-v1.schema.json','lp-execution-v1.schema.json','lp-precision-v1.schema.json','lp-external-witness-v1.schema.json','lp-external-endpoint-v1.schema.json','lp-manifest-v2.schema.json','lp-batch-request-v1.schema.json','lp-batch-endpoint-v1.schema.json'):continue
-                archived=subprocess.check_output(['git','show','722e0b0:schemas/'+path.name],cwd=ROOT)
-                self.assertEqual(path.read_bytes(),archived,path.name)
+        import fnmatch
+        # Freeze the historical set, including detection of deleted schemas. New
+        # independently versioned schemas need no growing exclusion list.
+        names = subprocess.check_output(
+            ['git', 'ls-tree', '--name-only', '722e0b0:schemas'], cwd=ROOT, text=True).splitlines()
+        patterns = ['lp-*-v1.schema.json', 'lp-*-v2.schema.json', 'solve-record-v2.schema.json']
+        legacy = [name for name in names if any(fnmatch.fnmatchcase(name, pattern) for pattern in patterns)]
+        self.assertTrue(legacy)
+        for name in legacy:
+            archived = subprocess.check_output(['git', 'show', '722e0b0:schemas/' + name], cwd=ROOT)
+            self.assertEqual((ROOT / 'schemas' / name).read_bytes(), archived, name)
 
     def test_tuned_admission_uses_gpu_wrapper_and_separate_code_identity(self):
         value,base,manifests=protocol(materialized=False)

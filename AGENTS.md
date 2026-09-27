@@ -115,9 +115,9 @@ GPUP-6 study 1826.094392481/5400 s, acceptance 70.478730162/900 s.
 The 13056-event ledger SHA-256 is
 6db55153153e66ed5c2398417d008e4edd278e11153cf87b975345f1a574d34d, preserving the 8278-event prefix
 c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a and every earlier prefix.
-GPUP-7 follows and needs its bounded quantization/FP8 interface and resource
-contract before behavior. Adaptive sessions, persistent checkpoints and supported
-presets remain outside GPUP-6; old 65536-row and tuned_cases racecheck gaps remain.
+GPUP-7 remains the next precision feature after the COPT follow-ups ordered below;
+it needs its bounded quantization/FP8 interface and resource contract before behavior.
+Adaptive sessions, persistent checkpoints and supported presets remain outside GPUP-6; old 65536-row and tuned_cases racecheck gaps remain.
 
 GPUP-COPT is complete under ADR-0026. Its [component-cost report](docs/benchmarks/lp-copt-comparison.md)
 retains all 1140 attempts, independently verifies 948 endpoints and certifies
@@ -126,8 +126,26 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 5853.941357570 GPU s; cumulative 14766.435441716/18002.574545061 s.
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
-preserving the 13056-event prefix and every phase cap. Performance repairs ranked
-in the report are future bounded tasks; GPUP-7 still needs its accepted contract.
+preserving the 13056-event prefix and every phase cap. The user requested follow-up
+ordering on 2026-09-27. GPUP-EVIDENCE is now complete (below). Continue with
+GPUP-HOST, GPUP-ADAPTIVE-COST and
+GPUP-CONVERGENCE before GPUP-7. Fresh setup diagnosis and optional COPT adapter
+construction have intervening priorities but are not quantization prerequisites;
+see the [ordered roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
+and next_ready_task. Planning adds no GPU allowance or accepted numerical behavior;
+GPUP-7 still needs its accepted contract.
+GPUP-EVIDENCE is complete under accepted SPEC-0015 and ADR-0027. Its
+[report](docs/benchmarks/lp-compact-evidence.md) records strict study-only compact
+v1-v5 evidence, verified transcode and replay, four full-witness CPU round trips,
+full native acceptance, 55 device tests and six format pairs plus six replays.
+All 24 fresh attempts are retained: 15 verify and 12 certify; compact verifies
+12/12 and certifies 9/12, while mixed-65536 remains time-limited. Historical outputs,
+legacy defaults, numerical settings and kernels are unchanged; the old racecheck
+and session gaps remain. Task charge is 305.274714773 GPU s; cumulative
+15071.710156489/18002.574545061 s, with no new allowance. The 15392-event ledger
+SHA-256 is 6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518,
+preserving the 15340-event prefix above and all phase caps. Next is GPUP-HOST:
+one bounded immutable host reconstruction repair, retaining fresh assessments.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

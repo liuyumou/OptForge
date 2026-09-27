@@ -1,11 +1,13 @@
 //! Bounded study preparation and independent endpoint verification (SPEC-0013).
 use crate::input::{argument, read};
+use optimizer_experiment::lp_compact::{EvidenceFormat, read_verified};
 use std::ffi::OsString;
 use std::io;
 
 pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8> {
     let mut model_limit = None;
     let mut costs = None;
+    let mut format = None;
     let mut filtered = Vec::new();
     for pair in args.chunks(2) {
         let [key, value] = pair else {
@@ -24,6 +26,15 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
                     return Err(argument("duplicate model limit"));
                 }
             }
+            Some("--evidence-format") => {
+                let value = value
+                    .to_str()
+                    .ok_or_else(|| argument("evidence format must be UTF-8"))?;
+                let value = EvidenceFormat::parse(value).map_err(io::Error::other)?;
+                if format.replace(value).is_some() {
+                    return Err(argument("duplicate evidence format"));
+                }
+            }
             Some("--cost-profile") => {
                 if costs.replace(value).is_some() {
                     return Err(argument("duplicate cost profile"));
@@ -36,10 +47,20 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
         command.to_str(),
         Some("solve" | "verify" | "external-certify" | "external-verify")
     );
-    if !supported && (model_limit.is_some() || costs.is_some()) {
+    if (!supported && costs.is_some())
+        || (!supported && command != "replay" && command != "transcode" && model_limit.is_some())
+    {
         return Err(argument(
-            "explicit study input/profile options require solve or single verification",
+            "unsupported study input/profile options for this command",
         ));
+    }
+    if format.is_some() && !matches!(command.to_str(), Some("solve" | "replay" | "transcode")) {
+        return Err(argument(
+            "evidence format requires solve, replay or transcode",
+        ));
+    }
+    if command == "transcode" && format.is_none() {
+        return Err(argument("transcode requires --evidence-format"));
     }
     if command == "solve" && !filtered.iter().any(|v| v == "--lp-evidence") {
         return Err(argument("study solve requires --lp-evidence"));
@@ -48,15 +69,17 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
         .map(|_| optimizer_core::lp_cost::Session::begin().map_err(io::Error::other))
         .transpose()?;
     let result = if command == "solve" {
-        crate::solve::solve_with_model_limit(
+        crate::solve::solve_with_output(
             &filtered,
             model_limit.unwrap_or(crate::input::MAX_INPUT_BYTES),
+            format.unwrap_or(EvidenceFormat::Legacy),
         )
     } else {
         run_inner(
             command,
             &filtered,
             model_limit.unwrap_or(crate::input::MAX_INPUT_BYTES),
+            format,
         )
     };
     if let (Some(session), Some(path)) = (session, costs) {
@@ -73,7 +96,12 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
     result
 }
 
-fn run_inner(command: &std::ffi::OsStr, args: &[OsString], model_limit: u64) -> io::Result<u8> {
+fn run_inner(
+    command: &std::ffi::OsStr,
+    args: &[OsString],
+    model_limit: u64,
+    format: Option<EvidenceFormat>,
+) -> io::Result<u8> {
     let _cost = optimizer_core::lp_cost::scope("study_verification");
     let mut model = None;
     let mut evidence = None;
@@ -172,14 +200,42 @@ fn run_inner(command: &std::ffi::OsStr, args: &[OsString], model_limit: u64) -> 
             model.ok_or_else(|| argument("--model is required"))?,
             model_limit,
         )?;
-        let endpoint =
-            optimizer_experiment::lp::LpEndpoint::from_json(&crate::input::read_with_limit(
+        let (endpoint, _) = read_verified(
+            &crate::input::read_with_limit(
                 evidence.ok_or_else(|| argument("--evidence is required"))?,
                 model_limit,
-            )?)
-            .map_err(io::Error::other)?;
-        endpoint.verify(&bytes).map_err(io::Error::other)?;
+            )?,
+            &bytes,
+        )
+        .map_err(io::Error::other)?;
         println!("{}", serde_json::to_string(&endpoint.assessment)?);
+    } else if command == "transcode"
+        && instance.is_none()
+        && device.is_none()
+        && batch.is_none()
+        && index.is_none()
+        && out.is_none()
+    {
+        let destination = crate::study_output::AtomicOutput::new(std::path::Path::new(
+            output.ok_or_else(|| argument("--output is required"))?,
+        ))?;
+        let bytes = crate::input::read_with_limit(
+            model.ok_or_else(|| argument("--model is required"))?,
+            model_limit,
+        )?;
+        let source = crate::input::read_with_limit(
+            evidence.ok_or_else(|| argument("--evidence is required"))?,
+            model_limit,
+        )?;
+        let (endpoint, _) = read_verified(&source, &bytes).map_err(io::Error::other)?;
+        let summary = serde_json::to_string(&endpoint.assessment).map_err(io::Error::other)?;
+        let encoded = optimizer_experiment::lp_compact::encode(
+            endpoint,
+            format.expect("transcode format checked"),
+        )
+        .map_err(io::Error::other)?;
+        destination.publish(&encoded)?;
+        println!("{summary}");
     } else if command == "replay"
         && instance.is_none()
         && batch.is_none()
@@ -191,6 +247,8 @@ fn run_inner(command: &std::ffi::OsStr, args: &[OsString], model_limit: u64) -> 
             evidence.ok_or_else(|| argument("--evidence is required"))?,
             output.ok_or_else(|| argument("--output is required"))?,
             device,
+            model_limit,
+            format,
         );
     } else if command == "prepare"
         && model.is_none()
@@ -282,7 +340,7 @@ fn run_inner(command: &std::ffi::OsStr, args: &[OsString], model_limit: u64) -> 
         );
     } else {
         return Err(argument(
-            "expected lp-study prepare, verify, replay, materialize or verify-batch with matching flags",
+            "expected lp-study prepare, solve, verify, replay, transcode, materialize or verify-batch with matching flags",
         ));
     }
     Ok(0)
@@ -295,13 +353,26 @@ fn replay(
     evidence_path: &std::ffi::OsStr,
     output_path: &std::ffi::OsStr,
     device: Option<&std::ffi::OsStr>,
+    model_limit: u64,
+    format: Option<EvidenceFormat>,
 ) -> io::Result<u8> {
     use optimizer_core::{CancellationToken, LpDiagnostics, Model, Termination};
     use optimizer_experiment::lp::LpEndpoint;
     use std::io::Write;
-    let bytes = read(model_path)?;
-    let original = LpEndpoint::from_json(&read(evidence_path)?).map_err(io::Error::other)?;
-    original.verify(&bytes).map_err(io::Error::other)?;
+    let bytes = crate::input::read_with_limit(model_path, model_limit)?;
+    let (original, source_format) = read_verified(
+        &crate::input::read_with_limit(evidence_path, model_limit)?,
+        &bytes,
+    )
+    .map_err(io::Error::other)?;
+    let format = format.unwrap_or(source_format);
+    let compact_output = if format == EvidenceFormat::CompactV1 {
+        Some(crate::study_output::AtomicOutput::new(
+            std::path::Path::new(output_path),
+        )?)
+    } else {
+        None
+    };
     let selected = original.record.backend.as_str();
     let model = Model::from_json(&bytes).map_err(io::Error::other)?;
     let token = CancellationToken::new();
@@ -391,15 +462,22 @@ fn replay(
     let endpoint = LpEndpoint::new(&bytes, selected.into(), record, diagnostics, fallback)
         .map_err(io::Error::other)?;
     endpoint.verify(&bytes).map_err(io::Error::other)?;
-    let output = serde_json::to_vec_pretty(&endpoint).map_err(io::Error::other)?;
-    let mut file = std::fs::OpenOptions::new()
-        .write(true)
-        .create_new(true)
-        .open(output_path)?;
-    file.write_all(&output)?;
-    file.sync_all()?;
-    println!("{}", serde_json::to_string(&endpoint.assessment)?);
-    Ok(match endpoint.record.termination {
+    let summary = serde_json::to_string(&endpoint.assessment)?;
+    let termination = endpoint.record.termination;
+    let output =
+        optimizer_experiment::lp_compact::encode(endpoint, format).map_err(io::Error::other)?;
+    if let Some(destination) = compact_output {
+        destination.publish(&output)?;
+    } else {
+        let mut file = std::fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(output_path)?;
+        file.write_all(&output)?;
+        file.sync_all()?;
+    }
+    println!("{summary}");
+    Ok(match termination {
         Termination::Optimal => 0,
         Termination::Interrupted => 130,
         Termination::TimeLimit | Termination::IterationLimit | Termination::Feasible => 1,

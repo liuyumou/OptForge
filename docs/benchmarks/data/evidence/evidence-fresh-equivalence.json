@@ -1,0 +1,44 @@
+{
+  "pairs": [
+    {
+      "bitwise_equal": true,
+      "instance_id": "gpup-extension-irregular-32768",
+      "numerical_sha256": [
+        "7bc20374565ab148ea47eef07cdd2d9dcf17524323a4d2abbdf343f055780ad1",
+        "7bc20374565ab148ea47eef07cdd2d9dcf17524323a4d2abbdf343f055780ad1"
+      ],
+      "repetition": 0,
+      "trial_ids": [
+        "gpup-evidence-v1-timing-gpup-extension-irregular-32768-0-tuned-fp64-compact-v1",
+        "gpup-evidence-v1-timing-gpup-extension-irregular-32768-0-tuned-fp64-legacy"
+      ]
+    },
+    {
+      "bitwise_equal": true,
+      "instance_id": "gpup-extension-irregular-32768",
+      "numerical_sha256": [
+        "7bc20374565ab148ea47eef07cdd2d9dcf17524323a4d2abbdf343f055780ad1",
+        "7bc20374565ab148ea47eef07cdd2d9dcf17524323a4d2abbdf343f055780ad1"
+      ],
+      "repetition": 1,
+      "trial_ids": [
+        "gpup-evidence-v1-timing-gpup-extension-irregular-32768-1-tuned-fp64-compact-v1",
+        "gpup-evidence-v1-timing-gpup-extension-irregular-32768-1-tuned-fp64-legacy"
+      ]
+    },
+    {
+      "bitwise_equal": true,
+      "instance_id": "gpup-extension-irregular-32768",
+      "numerical_sha256": [
+        "7bc20374565ab148ea47eef07cdd2d9dcf17524323a4d2abbdf343f055780ad1",
+        "7bc20374565ab148ea47eef07cdd2d9dcf17524323a4d2abbdf343f055780ad1"
+      ],
+      "repetition": 2,
+      "trial_ids": [
+        "gpup-evidence-v1-timing-gpup-extension-irregular-32768-2-tuned-fp64-legacy",
+        "gpup-evidence-v1-timing-gpup-extension-irregular-32768-2-tuned-fp64-compact-v1"
+      ]
+    }
+  ],
+  "scope": "Both independently certified members of fresh timing pairs; binary64 bits, excluding clocks/profiling"
+}
