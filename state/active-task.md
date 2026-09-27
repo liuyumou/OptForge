@@ -1,5 +1,35 @@
 # Active Task
 
+## GPUP-EVIDENCE protected integration (2026-09-27)
+
+Status: local acceptance passed; protected integration authorized; remote outcomes
+are recorded in the integration receipt.
+The user explicitly authorized opening the PR, merging after required checks and
+review, synchronizing main, and cleaning up its corresponding branch.
+Scope: publish the completed GPUP-EVIDENCE slice and its preceding follow-up
+ordering; inspect reviewable changes and CI, preserve measured commit ancestry
+with a merge commit, and delete only the merged compact-evidence branch after
+checking main ancestry and worktree ownership. No release or hosting change.
+Acceptance: full pinned-native tools/check.sh, local diff review, required GitHub
+cpu/docs/smoke checks on the final head, resolved review threads, protected merge,
+clean synchronized main and verified local/remote branch deletion. No bypass.
+Resources: four build jobs, at most one CPU-hour for integration, zero GPU jobs.
+Preserve all campaign evidence and the 15392-event ledger SHA-256
+6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518;
+cumulative 15071.710156489 / 18002.574545061 GPU seconds, no added allowance.
+Initial source head: 99f2abb1f08df67d74263d1ad5ca982bd41c269c; origin/main:
+15dd5c8d7bf47ea9dfb530cb2051f66b5971562c. The branch is current with main.
+Final PR/check/merge/cleanup outcomes and acceptance logs are retained in
+artifacts/gpup-evidence-integration-20260927/integration.json and sibling files.
+
+Local acceptance: full pinned-native tools/check.sh passes (500 Rust tests, 179
+Python tests, 101 documentation pages, committed-record replay and smoke). The
+local review found no blocking issue in codec/CLI verification or accounting.
+The read-only evidence audit checks 391 retained references, the unchanged ledger
+prefix and numerical/kernel sources; all pass. Integration uses 124.719736 metered
+child CPU seconds and no GPU work. Remote cpu/docs/smoke and unresolved review
+threads are checked on the PR head before merge; no protection bypass is allowed.
+
 ## GPUP-EVIDENCE compact LP output (2026-09-27)
 
 Status: complete; implementation, bounded study and final repository acceptance passed.
