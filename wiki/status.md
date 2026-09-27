@@ -68,9 +68,11 @@ amortized throughput as a separately labeled endpoint (never single-solve
 latency), and cumulative consumption of 6951.059845871 seconds. GPUP-6 is also complete under accepted ADR-0025; its
 [adaptive report](../docs/benchmarks/lp-adaptive-gpup6.md) records explicit audits,
 rollback, promotion/demotion, independent v5 evidence, complete correctness gates
-and retained comparison failures. The next task is GPUP-EVIDENCE: specify compact
-independently verifiable endpoints, then repair measured host and adaptive costs
-before GPUP-7's bounded quantization contract. The
+and retained comparison failures. GPUP-EVIDENCE is complete under SPEC-0015 and
+ADR-0027; its [report](../docs/benchmarks/lp-compact-evidence.md) retains 24 fresh
+attempts, 15 verified endpoints and 12 certified timings. The next task is GPUP-HOST,
+one measured immutable host reconstruction repair before adaptive costs and
+GPUP-7's bounded quantization contract. The
 [ordered follow-ups](../docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 separate priority from prerequisites. No supported recipe is available. The
 campaign retains its eight GPU-hour cap; acceptance details remain
@@ -178,5 +180,7 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. Performance repairs ranked
-in the report are ordered in the roadmap and backlog, beginning with GPUP-EVIDENCE;
+in the report are ordered in the roadmap and backlog; GPUP-EVIDENCE is complete
+and GPUP-HOST follows. Current cumulative consumption is 15071.710156489 /
+18002.574545061 GPU s, with a 15392-event ledger preserving the COPT prefix.
 GPUP-7 still needs its accepted contract.

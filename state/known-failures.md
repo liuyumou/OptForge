@@ -1,5 +1,22 @@
 # Known Failures and Limitations
 
+## Compact evidence repairs output coverage; mixed-65536 remains time-limited
+
+The [GPUP-EVIDENCE report](../docs/benchmarks/lp-compact-evidence.md) retains all 24
+fresh timing attempts. Compact verifies 12/12 and certifies 9/12, including all
+irregular/dense 65536 cases; legacy verifies/certifies 3/12 and retains nine 32 MiB
+partial files. All three compact mixed-65536 outcomes verify as interrupted, but
+the workers timed out and remain unsuccessful. No large-model paired speed ratio
+is available when its legacy member failed. Historical COPT samples are unchanged.
+
+Four CPU full-witness fixtures fit below the unchanged cap; two are explicit
+synthetic codec fixtures, never solve results. No solver arithmetic/kernel,
+numerical setting, preset or session behavior changed. Existing tuned_cases
+racecheck, session and COPT graph limitations below remain open. The first full
+CPU gate exposed an overly broad historical-schema test; it now enumerates the
+old revision and still checks exact bytes/deletions. Failed and passing receipts
+are retained in artifacts/gpup-evidence-acceptance.
+
 ## COPT comparison: large evidence output and opaque graph internals
 
 The [component report](../docs/benchmarks/lp-copt-comparison.md) retains all 1140
@@ -7,9 +24,9 @@ attempts, 948 verified endpoints and 402/816 certified primary samples. At 65536
 rows, the frozen 32 MiB per-file output limit truncates project endpoint writes:
 148 partial endpoint files remain, 142 exactly at the cap (82 process failures
 and 60 also classified timeout), plus six killed partial writes. The trace-only
-512 MiB allowance does not fill primary cells. Compact versioned evidence and a
-separate controlled comparison are future work; no output limit was changed
-post-result. Other failures include deadlines, work limits and numerical rejection.
+512 MiB allowance does not fill primary cells. Compact versioned evidence and its
+separate GPUP-EVIDENCE comparison are now complete above; no historical output
+limit or result was changed post-result. Other failures include deadlines, work limits and numerical rejection.
 
 The archived verifier initially applied the ordinary 16 MiB cap to endpoint reads
 despite explicit 128 MiB study input. The final reader repairs that omission and

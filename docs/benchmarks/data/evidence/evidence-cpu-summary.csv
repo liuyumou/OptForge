@@ -1,0 +1,9 @@
+instance,kind,classification,format,bytes,write_median_ns,verify_median_ns
+gpup-extension-irregular-32768,retained,certified_success,legacy,32280626,33222639,1727502322
+gpup-extension-irregular-32768,retained,certified_success,compact-v1,2244255,3120914,1210945244
+gpup-extension-irregular-65536,synthetic,work_limit,legacy,59082946,64332405,3269770971
+gpup-extension-irregular-65536,synthetic,work_limit,compact-v1,2863050,3961529,2424910933
+gpup-extension-dense_block-65536,synthetic,work_limit,legacy,59225810,63869684,3728800343
+gpup-extension-dense_block-65536,synthetic,work_limit,compact-v1,2863054,3807036,2998849298
+gpup-extension-mixed-65536,retained,timeout,legacy,58419348,62706096,3271453026
+gpup-extension-mixed-65536,retained,timeout,compact-v1,4298555,5813241,2649679866

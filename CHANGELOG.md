@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased — compact LP study evidence
+
+- Add opt-in compact study endpoints, host reconstruction of validation details,
+  automatic verification, replay and explicit verified transcode (SPEC-0015).
+- Preserve legacy record identities/defaults and print only an assessment for
+  compact study solves; atomically publish new outputs without replacing files.
+- Freeze a bounded four-extension CPU codec comparison and 24 fresh format timings
+  under ADR-0027, using existing campaign headroom and unchanged numerical settings.
+- Publish the [compact evidence report](docs/benchmarks/lp-compact-evidence.md):
+  all 24 attempts retained, 15 verified endpoints and 12 certified timings;
+  compact restores large-model output coverage while mixed-65536 remains limited.
+
 ## Unreleased — COPT component study
 
 - Add explicit large-input LP study solves, COPT method/native-counter evidence

@@ -10,6 +10,7 @@
 
 pub mod lp;
 pub mod lp_batch;
+pub mod lp_compact;
 mod run;
 mod serde_strict;
 pub mod sha256;

@@ -1,0 +1,195 @@
+{
+  "cpu_limit_seconds": 14400,
+  "gpu": {
+    "categories_ns": {
+      "accept": 22255133724,
+      "timing": 283019581049
+    },
+    "ceiling_ns": 18002574545061,
+    "cpu_ns": 0,
+    "cumulative_ns": 15071710156489,
+    "events": 15392,
+    "ledger_sha256": "6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518",
+    "phases_ns": {
+      "ablations": 5957981357124,
+      "baseline": 1170475765674,
+      "finalists": 0,
+      "repeatability": 1829906617249,
+      "screening": 6113346416442
+    }
+  },
+  "measured_cpu_seconds": 1277.5118069999999,
+  "note": "Initial focused developer checks have logs but no child CPU receipts; no GPU jobs ran before the required CPU gates. All full native gates, release build, CPU study, device acceptance, fresh study and independent analysis are metered.",
+  "receipts": [
+    {
+      "artifact": {
+        "bytes": 265,
+        "path": "artifacts/gpup-evidence-acceptance/cpu-fixtures.resource.json",
+        "sha256": "a8675cd43b17ba95a6c813ab8850dde5adb25e2e1ab915a09972b5a217363981"
+      },
+      "category": "validation",
+      "command": [
+        "python3",
+        "tools/lp_evidence_cpu.py",
+        "--run-id",
+        "initial"
+      ],
+      "cpu_seconds": 113.582554,
+      "elapsed_ns": 113854305384,
+      "returncode": 0,
+      "system_seconds": 16.76302,
+      "user_seconds": 96.819534
+    },
+    {
+      "artifact": {
+        "bytes": 348,
+        "path": "artifacts/gpup-evidence-acceptance/device-cli.resource.json",
+        "sha256": "5abb5df2a816a95f912fba39238d695052bccfedbf73a83d9898a5112fbf1b55"
+      },
+      "category": "validation",
+      "command": [
+        "python3",
+        "tools/lp_evidence_budget.py",
+        "--id",
+        "cli",
+        "--seconds",
+        "114",
+        "--",
+        "python3",
+        "tools/lp_evidence_gpu_check.py"
+      ],
+      "cpu_seconds": 13.021891,
+      "elapsed_ns": 13281377701,
+      "returncode": 0,
+      "system_seconds": 5.736432,
+      "user_seconds": 7.285459
+    },
+    {
+      "artifact": {
+        "bytes": 363,
+        "path": "artifacts/gpup-evidence-acceptance/device-regular.resource.json",
+        "sha256": "3262ca7107ceeb77b8fe21a278c3386f1eaace153bccb0605db9d77c32635c27"
+      },
+      "category": "validation",
+      "command": [
+        "python3",
+        "tools/lp_evidence_budget.py",
+        "--id",
+        "regular",
+        "--seconds",
+        "174",
+        "--",
+        "bash",
+        "tools/lp_adaptive_gpu_check.sh",
+        "regular"
+      ],
+      "cpu_seconds": 13.346781,
+      "elapsed_ns": 13131429331,
+      "returncode": 0,
+      "system_seconds": 8.442601,
+      "user_seconds": 4.90418
+    },
+    {
+      "artifact": {
+        "bytes": 242,
+        "path": "artifacts/gpup-evidence-acceptance/fresh-study.resource.json",
+        "sha256": "892768809dd216dc17298922b8f73f7d9e268932e0e29297d516c7ed73ce0bf0"
+      },
+      "category": "validation",
+      "command": [
+        "python3",
+        "tools/benchmark_lp_evidence.py"
+      ],
+      "cpu_seconds": 408.409194,
+      "elapsed_ns": 407571383371,
+      "returncode": 0,
+      "system_seconds": 32.667736,
+      "user_seconds": 375.741458
+    },
+    {
+      "artifact": {
+        "bytes": 246,
+        "path": "artifacts/gpup-evidence-acceptance/independent-analysis.resource.json",
+        "sha256": "d174395f7989134df414db3b8cc2001e185936e100e46cc862d476cfe216d9b7"
+      },
+      "category": "validation",
+      "command": [
+        "python3",
+        "tools/report_lp_evidence.py"
+      ],
+      "cpu_seconds": 114.75090399999999,
+      "elapsed_ns": 114809215254,
+      "returncode": 0,
+      "system_seconds": 5.819953,
+      "user_seconds": 108.930951
+    },
+    {
+      "artifact": {
+        "bytes": 222,
+        "path": "artifacts/gpup-evidence-acceptance/native-completion.resource.json",
+        "sha256": "dea98b8974cfb7d616581f52b387d42cbd71b84e30591bf06da5ae8e3cc94af5"
+      },
+      "category": "validation",
+      "command": [
+        "bash",
+        "tools/check.sh"
+      ],
+      "cpu_seconds": 124.514903,
+      "elapsed_ns": 101442703929,
+      "returncode": 0,
+      "system_seconds": 28.740248,
+      "user_seconds": 95.774655
+    },
+    {
+      "artifact": {
+        "bytes": 221,
+        "path": "artifacts/gpup-evidence-acceptance/native-prestudy-corrected.resource.json",
+        "sha256": "cfeb8d92c2a98eee9e3347a49961d3f59f118a90808d81bba86fe3faec578dc2"
+      },
+      "category": "validation",
+      "command": [
+        "bash",
+        "tools/check.sh"
+      ],
+      "cpu_seconds": 124.482945,
+      "elapsed_ns": 99543193378,
+      "returncode": 0,
+      "system_seconds": 29.191902,
+      "user_seconds": 95.291043
+    },
+    {
+      "artifact": {
+        "bytes": 231,
+        "path": "artifacts/gpup-evidence-acceptance/native-prestudy.resource.json",
+        "sha256": "640e5373a3d50fa97969c38b1549720062b0d91b762280c3604f65e10d4074ae"
+      },
+      "category": "validation",
+      "command": [
+        "bash",
+        "tools/check.sh"
+      ],
+      "cpu_seconds": 149.36175400000002,
+      "elapsed_ns": 106250955628,
+      "returncode": 1,
+      "system_seconds": 37.867796,
+      "user_seconds": 111.493958
+    },
+    {
+      "artifact": {
+        "bytes": 240,
+        "path": "artifacts/gpup-evidence-acceptance/native-release-final.resource.json",
+        "sha256": "2ca4190b54201240b3ad157332090df9461e496ab23aab56e1ead9f87d68bd96"
+      },
+      "category": "validation",
+      "command": [
+        "bash",
+        "/tmp/gpup-evidence-preflight.sh"
+      ],
+      "cpu_seconds": 216.040881,
+      "elapsed_ns": 126675524734,
+      "returncode": 0,
+      "system_seconds": 33.792187,
+      "user_seconds": 182.248694
+    }
+  ]
+}

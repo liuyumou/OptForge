@@ -1148,4 +1148,199 @@ mod tests {
         observed.elapsed_ms = 0;
         assert_eq!(ordinary, observed);
     }
+
+    fn compact_roundtrip(endpoint: &LpEndpoint, model: &[u8]) {
+        use crate::lp_compact::{EvidenceFormat, encode, read_verified};
+        endpoint.verify(model).unwrap();
+        let original = serde_json::to_vec(endpoint).unwrap();
+        let encoded = encode(endpoint.clone(), EvidenceFormat::CompactV1).unwrap();
+        let shape: serde_json::Value = serde_json::from_slice(&encoded).unwrap();
+        assert!(shape["endpoint"]["record"].get("validation").is_none());
+        assert_eq!(
+            shape["validation_sha256"].is_null(),
+            endpoint.record.validation.is_none()
+        );
+        let (restored, format) = read_verified(&encoded, model).unwrap();
+        assert_eq!(format, EvidenceFormat::CompactV1);
+        // Serialized equality detects signed-zero changes that f64 PartialEq hides.
+        assert_eq!(serde_json::to_vec(&restored).unwrap(), original);
+        assert_eq!(restored.payload_sha256, endpoint.payload_sha256);
+        let legacy = encode(restored, EvidenceFormat::Legacy).unwrap();
+        assert_eq!(
+            read_verified(&legacy, model).unwrap().1,
+            EvidenceFormat::Legacy
+        );
+    }
+
+    #[test]
+    fn compact_roundtrips_all_five_versions_and_fallback_without_changing_payloads() {
+        let mut examples = vec![observed(), matched_observed(), tuned_observed()];
+        for version in [4, 5] {
+            let mut e = tuned_observed();
+            e.schema_version = version;
+            e.record.schema_version = version;
+            e.execution.as_mut().unwrap().settings.fusion = optimizer_core::Fp64Fusion::Separate;
+            e.record.lp_execution.as_mut().unwrap().settings =
+                e.execution.as_ref().unwrap().settings;
+            let steps = e.control.as_ref().unwrap().physical_iterations.unwrap();
+            e.execution.as_mut().unwrap().kernel_launches = steps * 6;
+            e.control.as_mut().unwrap().device_kernel_launches = steps * 6;
+            if version == 4 {
+                let settings = optimizer_core::LpPrecisionSettings::from_json(include_bytes!(
+                    "../../../examples/lp-storage-fp32-v1.json"
+                ))
+                .unwrap();
+                e.record.lp_precision = Some(settings.clone());
+                let mut observations = optimizer_core::LpPrecisionDiagnostics::new(settings);
+                observations.proposed_steps = steps;
+                e.precision = Some(observations);
+            } else {
+                let mut settings = optimizer_core::LpAdaptiveSettings::from_json(include_bytes!(
+                    "../../../examples/lp-adaptive-v1.json"
+                ))
+                .unwrap();
+                settings.ladder = vec![optimizer_core::LpAdaptiveRung::Fp64];
+                e.record.lp_adaptive = Some(settings.clone());
+                let mut observations = optimizer_core::LpAdaptiveDiagnostics::new(settings);
+                observations.proposed_steps = steps;
+                observations.rung_proposals[0] = steps;
+                observations.step = Some(1.0);
+                e.adaptive = Some(observations);
+            }
+            e.payload_sha256 = e.payload_hash().unwrap();
+            examples.push(e);
+        }
+        let mut fallback = tuned_observed();
+        fallback.record.schema_version = 2;
+        fallback.record.backend = "highs".into();
+        fallback.record.lp_execution = None;
+        fallback.fallback_reason = Some("synthetic codec fallback fixture".into());
+        fallback.control.as_mut().unwrap().physical_iterations = None;
+        fallback.control.as_mut().unwrap().stop = "device_failure".into();
+        fallback.diagnostics.iterations = None;
+        fallback.assessment = assess(
+            &Model::from_json(MODEL).unwrap(),
+            &fallback.record,
+            &fallback.diagnostics,
+        )
+        .unwrap();
+        fallback.payload_sha256 = fallback.payload_hash().unwrap();
+        examples.push(fallback);
+        for endpoint in examples {
+            compact_roundtrip(&endpoint, MODEL);
+        }
+    }
+
+    #[test]
+    fn compact_preserves_missing_report_missing_candidate_failures_and_signed_zero() {
+        let mut e = observed();
+        e.record.validation = None;
+        e.payload_sha256 = e.payload_hash().unwrap();
+        compact_roundtrip(&e, MODEL);
+        e.record.candidate = None;
+        e.record.objective = None;
+        e.record.termination = Termination::BackendFailure;
+        e.diagnostics.dual = None;
+        e.assessment =
+            assess(&Model::from_json(MODEL).unwrap(), &e.record, &e.diagnostics).unwrap();
+        e.payload_sha256 = e.payload_hash().unwrap();
+        compact_roundtrip(&e, MODEL);
+        assert_eq!(e.assessment.classification, "backend_failure");
+        let mut e = observed();
+        e.requested_backend = "highs".into();
+        e.record.backend = "highs".into();
+        e.diagnostics.dual.as_mut().unwrap()[0] = -0.0;
+        e.assessment =
+            assess(&Model::from_json(MODEL).unwrap(), &e.record, &e.diagnostics).unwrap();
+        e.payload_sha256 = e.payload_hash().unwrap();
+        compact_roundtrip(&e, MODEL);
+    }
+
+    #[test]
+    fn compact_reconstruction_checks_both_objective_senses() {
+        for sense in ["minimize", "maximize"] {
+            let mut document: serde_json::Value = serde_json::from_slice(MODEL).unwrap();
+            document["objective"]["sense"] = sense.into();
+            document["objective"]["offset"] = 0.125.into();
+            let bytes = serde_json::to_vec(&document).unwrap();
+            let model = Model::from_json(&bytes).unwrap();
+            let mut diagnostics = LpDiagnostics::new(true, false);
+            let record = HostLpBackend::new(LpSettings::published(3, 2))
+                .unwrap()
+                .solve_with_diagnostics(
+                    &model,
+                    &observed().record.options,
+                    &CancellationToken::new(),
+                    None,
+                    &mut diagnostics,
+                )
+                .unwrap();
+            let e = LpEndpoint::new(&bytes, "host-lp".into(), record, diagnostics, None).unwrap();
+            compact_roundtrip(&e, &bytes);
+        }
+    }
+
+    #[test]
+    fn compact_rejects_malformed_envelopes_witnesses_and_rehashed_false_reports() {
+        use crate::lp_compact::{EvidenceFormat, encode, read_verified};
+        let e = tuned_observed();
+        let encoded = encode(e.clone(), EvidenceFormat::CompactV1).unwrap();
+        let value: serde_json::Value = serde_json::from_slice(&encoded).unwrap();
+        for mutation in 0..19 {
+            let mut v = value.clone();
+            match mutation {
+                0 => {
+                    v.as_object_mut().unwrap().remove("validation_sha256");
+                }
+                1 => v["validation_sha256"] = serde_json::Value::Null,
+                2 => v["validation_sha256"] = "A".repeat(64).into(),
+                3 => v["validation_sha256"] = "0".repeat(64).into(),
+                4 => v["schema_version"] = 2.into(),
+                5 => v["format"] = "unknown".into(),
+                6 => v["extra"] = true.into(),
+                7 => v["endpoint"]["record"]["validation"] = serde_json::Value::Null,
+                8 => {
+                    v["endpoint"]["record"]
+                        .as_object_mut()
+                        .unwrap()
+                        .remove("candidate");
+                }
+                9 => v["endpoint"]["model_sha256"] = "0".repeat(64).into(),
+                10 => v["endpoint"]["record"]["candidate"]["values"][0]["value"] = 123.0.into(),
+                11 => v["endpoint"]["diagnostics"]["dual"] = serde_json::json!([]),
+                12 => v["endpoint"]["assessment"]["classification"] = "certified_success".into(),
+                13 => v["endpoint"]["record"]["options"]["tolerances"]["absolute"] = 1.0.into(),
+                14 => v["endpoint"]["execution"]["code_object_sha256"] = "b".repeat(64).into(),
+                15 => v["endpoint"]["control"] = serde_json::json!([]),
+                16 => v["endpoint"]["diagnostics"]["unknown"] = true.into(),
+                17 => {
+                    v["endpoint"]["diagnostics"]
+                        .as_object_mut()
+                        .unwrap()
+                        .remove("dual");
+                }
+                _ => v["endpoint"]["schema_version"] = 6.into(),
+            }
+            assert!(
+                read_verified(&serde_json::to_vec(&v).unwrap(), MODEL).is_err(),
+                "mutation {mutation}"
+            );
+        }
+        let text = String::from_utf8(encoded.clone()).unwrap();
+        for bad in [
+            format!("{{\"schema_version\":1,{}", &text[1..]),
+            text.replacen("\"schema_version\":1", "\"schema_version\":NaN", 1),
+            text.replacen("\"schema_version\":1", "\"schema_version\":1e999", 1),
+        ] {
+            assert!(read_verified(bad.as_bytes(), MODEL).is_err());
+        }
+        let mut changed_model = MODEL.to_vec();
+        changed_model.push(b' ');
+        assert!(read_verified(&encoded, &changed_model).is_err());
+        let mut forged = e;
+        forged.record.validation.as_mut().unwrap().objective += 1.0;
+        forged.payload_sha256 = forged.payload_hash().unwrap();
+        let forged = encode(forged, EvidenceFormat::CompactV1).unwrap();
+        assert!(read_verified(&forged, MODEL).is_err());
+    }
 }

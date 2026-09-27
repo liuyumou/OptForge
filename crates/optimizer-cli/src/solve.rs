@@ -17,12 +17,21 @@ use optimizer_lp::HostLpBackend;
 use optimizer_lp_cuda::CudaLpBackend;
 
 use crate::input::{argument, read};
+use optimizer_experiment::lp_compact::EvidenceFormat;
 
 pub(crate) fn solve(options: &[OsString]) -> io::Result<u8> {
     solve_with_model_limit(options, crate::input::MAX_INPUT_BYTES)
 }
 
 pub(crate) fn solve_with_model_limit(options: &[OsString], model_limit: u64) -> io::Result<u8> {
+    solve_with_output(options, model_limit, EvidenceFormat::Legacy)
+}
+
+pub(crate) fn solve_with_output(
+    options: &[OsString],
+    model_limit: u64,
+    format: EvidenceFormat,
+) -> io::Result<u8> {
     let _cost = optimizer_core::lp_cost::scope("solve");
     let input_started = std::time::Instant::now();
     let mut evidence_path = None;
@@ -76,6 +85,15 @@ pub(crate) fn solve_with_model_limit(options: &[OsString], model_limit: u64) -> 
     if evidence_path.is_none() && (profile_mode.is_some() || memory_limit.is_some()) {
         return Err(argument("LP profiling/memory limits require --lp-evidence"));
     }
+    let compact_output = if format == EvidenceFormat::CompactV1 {
+        let path =
+            evidence_path.ok_or_else(|| argument("compact output requires --lp-evidence"))?;
+        Some(crate::study_output::AtomicOutput::new(
+            std::path::Path::new(path),
+        )?)
+    } else {
+        None
+    };
     let profile = match profile_mode.and_then(|v| v.to_str()) {
         None | Some("false") => false,
         Some("true") => true,
@@ -298,12 +316,15 @@ pub(crate) fn solve_with_model_limit(options: &[OsString], model_limit: u64) -> 
             )));
         }
     };
-    let serialization = diagnostics.start();
-    let output = {
+    let mut output = if format == EvidenceFormat::Legacy {
+        let serialization = diagnostics.start();
         let _cost = optimizer_core::lp_cost::scope("solve_record_serialization");
-        record.to_json().map_err(io::Error::other)?
+        let output = record.to_json().map_err(io::Error::other)?;
+        diagnostics.finish("solve_record_serialization", serialization);
+        Some(output)
+    } else {
+        None
     };
-    diagnostics.finish("solve_record_serialization", serialization);
     if let Some(path) = evidence_path {
         let endpoint = optimizer_experiment::lp::LpEndpoint::new(
             &model_bytes,
@@ -313,21 +334,29 @@ pub(crate) fn solve_with_model_limit(options: &[OsString], model_limit: u64) -> 
             fallback_reason,
         )
         .map_err(io::Error::other)?;
+        if format == EvidenceFormat::CompactV1 {
+            output = Some(serde_json::to_string(&endpoint.assessment).map_err(io::Error::other)?);
+        }
         let bytes = {
             let _cost = optimizer_core::lp_cost::scope("endpoint_serialization");
-            serde_json::to_vec_pretty(&endpoint).map_err(io::Error::other)?
+            optimizer_experiment::lp_compact::encode(endpoint, format).map_err(io::Error::other)?
         };
         let _cost = optimizer_core::lp_cost::scope("endpoint_write");
-        let destination = std::path::Path::new(path);
-        let partial = destination.with_extension("partial");
-        std::fs::write(&partial, bytes)?;
-        std::fs::rename(partial, destination)?;
+        if let Some(destination) = compact_output {
+            destination.publish(&bytes)?;
+        } else {
+            let destination = std::path::Path::new(path);
+            let partial = destination.with_extension("partial");
+            std::fs::write(&partial, bytes)?;
+            std::fs::rename(partial, destination)?;
+        }
     }
 
     let code = exit_code(record.termination);
 
     let _cost = optimizer_core::lp_cost::scope("record_output");
     let mut stdout = io::stdout().lock();
+    let output = output.expect("legacy record or compact assessment prepared");
     writeln!(stdout, "{output}")
         .and_then(|()| stdout.flush())
         .map_err(|error| io::Error::other(format!("io: stdout: {error}")))?;

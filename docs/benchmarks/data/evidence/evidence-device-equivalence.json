@@ -1,0 +1,88 @@
+{
+  "binary_sha256": "aa9422eaa630ab7ed54a5a22ba655ff49fcf9d8ed70659aab4c35ff44ef3ab81",
+  "pairs": [
+    {
+      "compact_sha256": "0f9407d6115a785f6c2ab1e8e48600f828bac65a2b489c2dba9e729ab9e875ea",
+      "configuration": "tuned-fp64",
+      "digest": "89fea79b023262961e74c7c71e4f5348737be18f3b5c761d512b834926cecae7",
+      "instance": "gpup-development-small-4",
+      "legacy_sha256": "7010df529f7d9ea239b98ca6ef091ec29f92540dba60243603a1f46f7fbd12a0"
+    },
+    {
+      "compact_sha256": "5ceb9d1559074cb8d294f14b5802bf47d81492ec0b1a753def42b4eb09bcdb59",
+      "configuration": "accumulation-fp32",
+      "digest": "8de27d14e59a0598c4adb4c488ed56fc97f8fd4a22bf3e70fc43dfdffbb56491",
+      "instance": "gpup-development-small-4",
+      "legacy_sha256": "ad694dd0716f6581bdc50310aa96e942f0ae2e3a3cdf9c3be613587eb7fe23a4"
+    },
+    {
+      "compact_sha256": "cf08533100770f4656f3dde3925994043e8d32ef4b5fc9e177fb98dbd19a71d0",
+      "configuration": "adaptive-gradual-working_fp32-a32-strict-demote",
+      "digest": "2c97bb98f184db2c4f9d507e993d02db7f6578c19a5c5597d78e3e5c37725371",
+      "instance": "gpup-development-small-4",
+      "legacy_sha256": "e138d675bbaceb5a5cc1f4dc6c62e21f15f3295884c9f9cf2b1f467327239218"
+    },
+    {
+      "compact_sha256": "62be9f19c16c8fb3c2b5b2f99ebdc497c57bfcb65f800e53c156b658318f1104",
+      "configuration": "tuned-fp64",
+      "digest": "a15d3097bb4d7ac3702e5764f02d336c239a962de38de74a39240607dcff1c9b",
+      "instance": "gpup-development-irregular-2048",
+      "legacy_sha256": "00b945d484cf058ee9d624cc266ad561f57006d6ac67cf5b00b64aef3e562a61"
+    },
+    {
+      "compact_sha256": "05a7ba4ae6581d6b1af039501d7508eb46ce7e067c64b79e38574b1b3263f35c",
+      "configuration": "accumulation-fp32",
+      "digest": "83ff3095ebd43ece6898a27190fce30b9ef4208b879fb90fcba7dbed1b166066",
+      "instance": "gpup-development-irregular-2048",
+      "legacy_sha256": "63057c8fc464f3b8791d14e8f5bc12d46ad99c66d01e61a5515adba26b5a8f75"
+    },
+    {
+      "compact_sha256": "0cf0796dbc68da75e9ab5a284e67943ba1618a858cd81eadb032ca88bfaebdd6",
+      "configuration": "adaptive-gradual-working_fp32-a32-strict-demote",
+      "digest": "96332beb5ce8a78dbb2013f210836eb5e9e33387891eba3a887d473ce07d1c4f",
+      "instance": "gpup-development-irregular-2048",
+      "legacy_sha256": "02fd14601c73f5350e910a6e0d5ec2edbe391700bf53b48d095b6df3da4b3546"
+    }
+  ],
+  "replays": [
+    {
+      "configuration": "tuned-fp64",
+      "digest": "89fea79b023262961e74c7c71e4f5348737be18f3b5c761d512b834926cecae7",
+      "endpoint_sha256": "0f9407d6115a785f6c2ab1e8e48600f828bac65a2b489c2dba9e729ab9e875ea",
+      "instance": "gpup-development-small-4"
+    },
+    {
+      "configuration": "accumulation-fp32",
+      "digest": "8de27d14e59a0598c4adb4c488ed56fc97f8fd4a22bf3e70fc43dfdffbb56491",
+      "endpoint_sha256": "5ceb9d1559074cb8d294f14b5802bf47d81492ec0b1a753def42b4eb09bcdb59",
+      "instance": "gpup-development-small-4"
+    },
+    {
+      "configuration": "adaptive-gradual-working_fp32-a32-strict-demote",
+      "digest": "2c97bb98f184db2c4f9d507e993d02db7f6578c19a5c5597d78e3e5c37725371",
+      "endpoint_sha256": "cf08533100770f4656f3dde3925994043e8d32ef4b5fc9e177fb98dbd19a71d0",
+      "instance": "gpup-development-small-4"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "digest": "a15d3097bb4d7ac3702e5764f02d336c239a962de38de74a39240607dcff1c9b",
+      "endpoint_sha256": "c19cf3d6754e0169b084fc5f46ccf912b38d6764991ad693c4fe4a834c0ab464",
+      "instance": "gpup-development-irregular-2048"
+    },
+    {
+      "configuration": "accumulation-fp32",
+      "digest": "83ff3095ebd43ece6898a27190fce30b9ef4208b879fb90fcba7dbed1b166066",
+      "endpoint_sha256": "a3f133b9891155354f924c881861613d8debd7c638a0e2c775672f92cb0a098a",
+      "instance": "gpup-development-irregular-2048"
+    },
+    {
+      "configuration": "adaptive-gradual-working_fp32-a32-strict-demote",
+      "digest": "96332beb5ce8a78dbb2013f210836eb5e9e33387891eba3a887d473ce07d1c4f",
+      "endpoint_sha256": "0cf0796dbc68da75e9ab5a284e67943ba1618a858cd81eadb032ca88bfaebdd6",
+      "instance": "gpup-development-irregular-2048"
+    }
+  ],
+  "schema_version": 1,
+  "source_tree_sha256": "dc6eae6832a6f8d4eb0f6c3bf375ade7eb6cf70781b1eab7924ad1233b75d024",
+  "status": "passed"
+}

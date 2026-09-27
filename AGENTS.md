@@ -127,12 +127,25 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. The user requested follow-up
-ordering on 2026-09-27. Start with GPUP-EVIDENCE's bounded compact-evidence contract, then GPUP-HOST, GPUP-ADAPTIVE-COST and
+ordering on 2026-09-27. GPUP-EVIDENCE is now complete (below). Continue with
+GPUP-HOST, GPUP-ADAPTIVE-COST and
 GPUP-CONVERGENCE before GPUP-7. Fresh setup diagnosis and optional COPT adapter
 construction have intervening priorities but are not quantization prerequisites;
 see the [ordered roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 and next_ready_task. Planning adds no GPU allowance or accepted numerical behavior;
 GPUP-7 still needs its accepted contract.
+GPUP-EVIDENCE is complete under accepted SPEC-0015 and ADR-0027. Its
+[report](docs/benchmarks/lp-compact-evidence.md) records strict study-only compact
+v1-v5 evidence, verified transcode and replay, four full-witness CPU round trips,
+full native acceptance, 55 device tests and six format pairs plus six replays.
+All 24 fresh attempts are retained: 15 verify and 12 certify; compact verifies
+12/12 and certifies 9/12, while mixed-65536 remains time-limited. Historical outputs,
+legacy defaults, numerical settings and kernels are unchanged; the old racecheck
+and session gaps remain. Task charge is 305.274714773 GPU s; cumulative
+15071.710156489/18002.574545061 s, with no new allowance. The 15392-event ledger
+SHA-256 is 6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518,
+preserving the 15340-event prefix above and all phase caps. Next is GPUP-HOST:
+one bounded immutable host reconstruction repair, retaining fresh assessments.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent
