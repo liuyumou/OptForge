@@ -74,7 +74,11 @@ attempts, 15 verified endpoints and 12 certified timings. GPUP-HOST is complete
 under SPEC-0016/ADR-0028: its [report](../docs/benchmarks/lp-immutable-host-input.md)
 verifies all 28 attempts, certifies 24 timings and preserves all 14 numerical pairs.
 One duplicate model reconstruction is removed while every assessment stays fresh.
-The next task is GPUP-ADAPTIVE-COST before GPUP-7's bounded quantization contract. The
+GPUP-ADAPTIVE-COST is complete under SPEC-0017/ADR-0029; its
+[report](../docs/benchmarks/lp-adaptive-host-cost.md) verifies 32 attempts,
+certifies 24 timings and preserves all 16 numerical/work pairs. Full native,
+regular device, fixed-work/replay and four adaptive sanitizers pass.
+The next task is GPUP-SETUP, before the remaining ordered follow-ups. The
 [ordered follow-ups](../docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 separate priority from prerequisites. No supported recipe is available. The
 campaign retains its eight GPU-hour cap; acceptance details remain
@@ -183,8 +187,8 @@ The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. Performance repairs ranked
 in the report are ordered in the roadmap and backlog; GPUP-EVIDENCE and GPUP-HOST
-are complete and GPUP-ADAPTIVE-COST follows. Current cumulative consumption is
-15205.782575335 / 18002.574545061 GPU s. The 15452-event ledger SHA-256
-90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2
-preserves the 15392-event compact-evidence prefix and all prior history.
+are complete, as is GPUP-ADAPTIVE-COST; GPUP-SETUP follows. Current cumulative consumption is
+15407.672759957 / 18002.574545061 GPU s. The 15528-event ledger SHA-256
+cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6
+preserves the 15452-event host-input prefix and all prior history.
 GPUP-7 still needs its accepted contract.

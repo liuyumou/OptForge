@@ -8,21 +8,31 @@ use optimizer_core::{
     CancellationToken, LpAdaptiveDiagnostics, LpAdaptiveRung, LpAdaptiveSettings,
     LpAdaptiveTransition, LpControlDiagnostics, LpDiagnostics,
 };
-use std::time::Instant;
+use std::{sync::Arc, time::Instant};
 
 /// Canonical prepared ladder, sharing one conservative step for the whole solve.
 pub struct PreparedAdaptive {
     /// Failed representations remain explicit and are never executed.
-    pub operators: Vec<Result<PrecisionOperator, &'static str>>,
+    pub operators: Vec<Result<Arc<PrecisionOperator>, &'static str>>,
 }
 impl PreparedAdaptive {
     /// Prepare before constructing the controller; never change its engine later.
     pub fn new(engine: &mut Engine<'_>, settings: &LpAdaptiveSettings) -> Self {
         let _component_scope = optimizer_core::lp_cost::scope("ladder_preparation");
+        // Canonical rungs differ in arithmetic/state width, but operator preparation
+        // depends only on matrix width. Cache failures as well as immutable values.
+        // Do not restrict the engine step until every representation is prepared.
+        let mut by_width: [Option<Result<Arc<PrecisionOperator>, &'static str>>; 2] = [None, None];
         let operators: Vec<_> = settings
             .ladder
             .iter()
-            .map(|r| PrecisionOperator::new(engine, &r.precision()))
+            .map(|r| {
+                let precision = r.precision();
+                let index = usize::from(precision.matrix == optimizer_core::LpWidth::F64);
+                by_width[index]
+                    .get_or_insert_with(|| PrecisionOperator::new(engine, &precision).map(Arc::new))
+                    .clone()
+            })
             .collect();
         let common = operators
             .iter()
@@ -42,22 +52,34 @@ pub fn proposal(
     rung: LpAdaptiveRung,
 ) -> Result<(Vec<f64>, Vec<f64>), &'static str> {
     let _component_scope = optimizer_core::lp_cost::scope("demotion_cpu_mirror");
-    let mut saved = state.clone();
-    if rung == LpAdaptiveRung::WorkingFp32 {
-        for v in saved
+    let mut narrowed;
+    let saved = if rung == LpAdaptiveRung::WorkingFp32 {
+        let _copy_scope = optimizer_core::lp_cost::scope("probe_state_copy_narrowing");
+        optimizer_core::lp_cost::count(
+            "probe_state_copied_elements",
+            (state.primal.len()
+                + state.dual.len()
+                + state.anchor_primal.len()
+                + state.anchor_dual.len()) as u64,
+        );
+        narrowed = state.clone();
+        for v in narrowed
             .primal
             .iter_mut()
-            .chain(&mut saved.dual)
-            .chain(&mut saved.anchor_primal)
-            .chain(&mut saved.anchor_dual)
+            .chain(&mut narrowed.dual)
+            .chain(&mut narrowed.anchor_primal)
+            .chain(&mut narrowed.anchor_dual)
         {
             *v = narrow(*v)?;
         }
-    }
+        &narrowed
+    } else {
+        state
+    };
     let p = rung.precision();
     let (mut x, mut y) = step(
         engine,
-        &saved,
+        saved,
         &op.rows,
         &op.columns,
         p.products,
@@ -80,22 +102,34 @@ pub fn audit(
     margin: f64,
 ) -> (bool, f64) {
     let _component_scope = optimizer_core::lp_cost::scope("audit_comparison");
-    let pre_x = engine.unscale_primal(&pre.primal);
-    let pre_y = engine.unscale_dual(&pre.dual);
-    let low_x = engine.unscale_primal(low.0);
-    let low_y = engine.unscale_dual(low.1);
-    let ref_x = engine.unscale_primal(reference.0);
-    let ref_y = engine.unscale_dual(reference.1);
     let mut pass = true;
     let mut maximum: f64 = 0.0;
-    for (before, lo, hi, absolute) in [
-        (&pre_x, &low_x, &ref_x, settings.primal_absolute),
-        (&pre_y, &low_y, &ref_y, settings.dual_absolute),
+    for (before, lo, hi, scales, absolute) in [
+        (
+            pre.primal.as_slice(),
+            low.0,
+            reference.0,
+            engine.preconditioner().column(),
+            settings.primal_absolute,
+        ),
+        (
+            pre.dual.as_slice(),
+            low.1,
+            reference.1,
+            engine.preconditioner().row(),
+            settings.dual_absolute,
+        ),
     ] {
-        if before.len() != lo.len() || lo.len() != hi.len() {
+        // Match unscale_*'s zip truncation, including malformed-state behavior.
+        let length = before.len().min(scales.len());
+        if length != lo.len().min(scales.len()) || length != hi.len().min(scales.len()) {
             return (false, maximum);
         }
-        for ((&b, &l), &h) in before.iter().zip(lo).zip(hi) {
+        for (((&b, &l), &h), &scale) in before.iter().zip(lo).zip(hi).zip(scales) {
+            // Preserve each original-unit multiplication before subtraction.
+            let b = b * scale;
+            let l = l * scale;
+            let h = h * scale;
             let error = (l - h).abs();
             let allowance = margin * (absolute + settings.relative * b.abs().max(h.abs()));
             if error.is_finite() {

@@ -1,5 +1,20 @@
 # Known Failures and Limitations
 
+## Adaptive host-cost results are scoped; reference arithmetic remains
+
+The [GPUP-ADAPTIVE-COST report](../docs/benchmarks/lp-adaptive-host-cost.md)
+verifies all 32 attempts, certifies 24 timings and preserves 16 numerical/work pairs.
+Full ladders prepare two operators rather than five; audits stream comparisons and
+probes borrow state where narrowing is unnecessary. Reference FP64 updates, sparse
+probe arithmetic, checkpoints, recovery and original-model assessments remain.
+Only small-4 and irregular-32768, two policies and three development repetitions
+were measured. Small-4 direct regresses (paired baseline/repaired ratio 0.7652,
+95% interval [0.7336, 0.8291]); its cause remains unestablished. No preset or universal speedup is selected. Mixed-65536, old large
+sessions and the historical tuned_cases racecheck gap remain open; fresh setup,
+optional COPT construction and convergence diagnosis are separate tasks.
+The initial CPU lint and source-only fixture failures are corrected, with receipts
+retained. All device attempts passed; no study identity was retried.
+
 ## GPUP-HOST scope and latency uncertainty
 
 The [host-input report](../docs/benchmarks/lp-immutable-host-input.md) verifies all
@@ -7,7 +22,7 @@ The [host-input report](../docs/benchmarks/lp-immutable-host-input.md) verifies 
 paired intervals span one. The large-model result is scoped to three development
 repetitions. No general preset follows. The repair removes one duplicate model
 parse/validation; sparse construction and all candidate/certificate assessments
-remain fresh. Adaptive preparation, mixed-65536 timeouts, old large-session gaps
+remain fresh. Remaining adaptive reference arithmetic, mixed-65536 timeouts, old large-session gaps
 and the historical tuned_cases racecheck receipt remain unresolved.
 
 ## Compact evidence repairs output coverage; mixed-65536 remains time-limited
