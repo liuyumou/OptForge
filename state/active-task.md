@@ -1,5 +1,38 @@
 # Active Task
 
+## GPUP-ADAPTIVE-COST protected integration (2026-09-29)
+
+Status: user authorized PR publication, self-review and protected merge after checks.
+Objective: review the completed slice and evidence, address any findings, publish
+its PR, require current-head cpu/docs/smoke checks and resolved conversations,
+merge without bypass while preserving source ancestry, and synchronize local main.
+The latest user authorization supersedes the implementation-phase no-push scope
+below. No release, additional experiment or GPUP-SETUP work is included.
+Acceptance: existing full pinned-native/device/sanitizer receipts, independent
+source and provenance review, required remote checks, protected merge, and clean
+synchronized main. Likely files: this task state and any review corrections.
+Resources: four build jobs, at most one CPU-hour for integration validation,
+zero GPU jobs and no new campaign allowance. Preserve all artifacts and the
+15528-event ledger SHA-256
+cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6;
+cumulative consumption remains 15407.672759957 / 18002.574545061 GPU seconds.
+Initial source head: 400d575a4bc0bc2f80fa9b1b76c9d199cc404eed; current main:
+5b9a9d083b27547e8bcb3ee4c9d265dde1a40bbb. Final review/check/merge outcomes
+are retained in artifacts/gpup-adaptive-cost-integration-20260929/integration.json
+and sibling receipts. Self-review is explicitly labeled; no independent human
+approval is claimed or required by the current branch rules.
+
+Integration preflight: self-review found no blocking issue in runtime, tests,
+frozen study, strict identity/accounting tools or report claims. All 468 artifact
+references and the complete ledger/prefix match their recorded hashes; measured
+runtime, tooling, schemas and protocol match the archived source. The small-4
+direct slowdown and historical coverage gaps remain explicit. The fresh full
+pinned-native gate passes 505 Rust tests, 187 Python tests, committed-record replay,
+107 documentation pages and smoke. GitHub requires current-head cpu/docs/smoke
+and resolved conversations; no protection bypass or independent approval is claimed.
+Only integration state changed after the implementation commit. Remote check,
+self-review comment and merge receipts will be retained in the directory above.
+
 ## GPUP-ADAPTIVE-COST (2026-09-29)
 
 Status: complete; implementation, bounded study and final repository gate passed.
