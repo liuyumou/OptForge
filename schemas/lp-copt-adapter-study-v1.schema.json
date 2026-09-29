@@ -1,0 +1,280 @@
+{
+  "$id": "lp-copt-adapter-study-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acceptance_output": {
+      "const": "artifacts/gpup-copt-adapter-acceptance"
+    },
+    "additional_gpu_seconds": {
+      "const": 0
+    },
+    "analysis": {
+      "const": {
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 17002
+      }
+    },
+    "baseline_output": {
+      "const": "artifacts/gpup-copt-adapter-baseline"
+    },
+    "baseline_revision": {
+      "const": "8fdec89451c07ffea46a3d8630aa184b14e072c5"
+    },
+    "budget_authority": {
+      "const": {
+        "path": "benchmarks/configs/lp-campaign-v1.json",
+        "sha256": "a65d0ac2ce2b2676453d0e15752f887af1ee759318bed8b4538ae3f6f0cf137f"
+      }
+    },
+    "categories": {
+      "const": {
+        "accept": {
+          "phase": "repeatability",
+          "seconds": 400
+        },
+        "profile": {
+          "phase": "repeatability",
+          "seconds": 200
+        },
+        "timing": {
+          "phase": "ablations",
+          "seconds": 900
+        }
+      }
+    },
+    "combined_cap_seconds": {
+      "const": 1500
+    },
+    "configurations": {
+      "const": [
+        {
+          "adapter_id": "copt-scalar-v1",
+          "backend": "copt-cpu-default",
+          "id": "copt-cpu-default-scalar"
+        },
+        {
+          "adapter_id": "copt-bulk-v1",
+          "backend": "copt-cpu-default",
+          "id": "copt-cpu-default-bulk"
+        },
+        {
+          "adapter_id": "copt-scalar-v1",
+          "backend": "copt-cpu-pdlp",
+          "id": "copt-cpu-pdlp-scalar"
+        },
+        {
+          "adapter_id": "copt-bulk-v1",
+          "backend": "copt-cpu-pdlp",
+          "id": "copt-cpu-pdlp-bulk"
+        },
+        {
+          "adapter_id": "copt-scalar-v1",
+          "backend": "copt-gpu-pdlp",
+          "id": "copt-gpu-pdlp-scalar"
+        },
+        {
+          "adapter_id": "copt-bulk-v1",
+          "backend": "copt-gpu-pdlp",
+          "id": "copt-gpu-pdlp-bulk"
+        }
+      ]
+    },
+    "copt_installation": {
+      "const": "/root/copt80"
+    },
+    "copt_python": {
+      "const": "artifacts/gpup-copt-adapter-env/venv/bin/python"
+    },
+    "cpu_cap_seconds": {
+      "const": 14400
+    },
+    "cumulative_gpu_ns": {
+      "const": 18002574545061
+    },
+    "decision": {
+      "const": {
+        "path": "docs/decisions/ADR-0031-copt-bulk-adapter.md",
+        "sha256": "e83fb8818226b7edd3d97bc062c5fb5801e7974f6413262d0e45f53ce0c71ebd"
+      }
+    },
+    "dependencies": {
+      "const": {
+        "path": "artifacts/gpup-copt-adapter-env/identity.json",
+        "sha256": "7d54e074aa74c908b376eaa02e42da27634e325069cbfd69e9c377d91ac564bf"
+      }
+    },
+    "device": {
+      "const": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48"
+    },
+    "id": {
+      "const": "gpup-copt-adapter-v1"
+    },
+    "instances": {
+      "const": [
+        "gpup-development-small-4",
+        "gpup-extension-irregular-32768",
+        "gpup-extension-dense_block-65536",
+        "gpup-extension-mixed-65536"
+      ]
+    },
+    "limits": {
+      "const": {
+        "cleanup_seconds": 2,
+        "device_buffer_bytes": 8589934592,
+        "host_rss_bytes": 8589934592,
+        "output_bytes": 33554432,
+        "poll_ms": 10,
+        "solve_seconds": 10
+      }
+    },
+    "lp_settings": {
+      "const": {
+        "check_interval": 200,
+        "iteration_limit": 50000,
+        "power_iterations": 20,
+        "preconditioner": {
+          "pock_chambolle_alpha": 1.0,
+          "ruiz_passes": 10
+        },
+        "primal_weight": {
+          "derivative": 0.0,
+          "integral": 0.0,
+          "proportional": 0.5
+        },
+        "restart": {
+          "artificial": 0.36,
+          "necessary": 0.8,
+          "sufficient": 0.2
+        },
+        "schema_version": 1
+      }
+    },
+    "manifests": {
+      "const": [
+        {
+          "path": "benchmarks/manifests/lp-development-v1.json",
+          "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+        },
+        {
+          "path": "benchmarks/manifests/lp-development-extension-v1.json",
+          "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+        }
+      ]
+    },
+    "model_byte_limit": {
+      "const": 134217728
+    },
+    "order_seed": {
+      "const": 17001
+    },
+    "output": {
+      "const": "artifacts/gpup-copt-adapter-v1"
+    },
+    "partition": {
+      "const": "development"
+    },
+    "phase_gpu_seconds": {
+      "const": {
+        "ablations": 7200,
+        "baseline": 1800,
+        "finalists": 9000,
+        "repeatability": 3600,
+        "screening": 7200
+      }
+    },
+    "planned_attempts": {
+      "const": 84
+    },
+    "previous_protocol": {
+      "const": {
+        "path": "benchmarks/configs/lp-setup-v1.json",
+        "sha256": "3c2541811ea212dcf7960cc3f57e72c44e591e703cdad3283dd8f0320ea3878b"
+      }
+    },
+    "prior_events": {
+      "const": 15606
+    },
+    "prior_gpu_ns": {
+      "const": 15632281207415
+    },
+    "prior_ledger_sha256": {
+      "const": "ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b"
+    },
+    "profile_instances": {
+      "const": [
+        "gpup-development-small-4",
+        "gpup-extension-dense_block-65536"
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "solve": {
+      "const": {
+        "iteration_limit": 50000,
+        "node_limit": null,
+        "schema_version": 1,
+        "seed": 17,
+        "threads": 1,
+        "time_limit_ms": 10000,
+        "tolerances": {
+          "absolute": 1e-09,
+          "integrality": 1e-09,
+          "relative": 1e-09
+        }
+      }
+    },
+    "timing_repetitions": {
+      "const": 3
+    },
+    "total_gpu_seconds": {
+      "const": 28800
+    },
+    "verification_seconds": {
+      "const": 120
+    }
+  },
+  "required": [
+    "budget_authority",
+    "cumulative_gpu_ns",
+    "phase_gpu_seconds",
+    "total_gpu_seconds",
+    "device",
+    "solve",
+    "lp_settings",
+    "manifests",
+    "limits",
+    "model_byte_limit",
+    "verification_seconds",
+    "schema_version",
+    "id",
+    "decision",
+    "previous_protocol",
+    "additional_gpu_seconds",
+    "prior_events",
+    "prior_gpu_ns",
+    "prior_ledger_sha256",
+    "baseline_revision",
+    "baseline_output",
+    "output",
+    "acceptance_output",
+    "copt_python",
+    "copt_installation",
+    "dependencies",
+    "categories",
+    "combined_cap_seconds",
+    "cpu_cap_seconds",
+    "partition",
+    "instances",
+    "profile_instances",
+    "timing_repetitions",
+    "planned_attempts",
+    "order_seed",
+    "analysis",
+    "configurations"
+  ],
+  "title": "Frozen SPEC-0019 study",
+  "type": "object"
+}

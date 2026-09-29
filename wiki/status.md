@@ -11,7 +11,7 @@ evidence is recorded in [active task](../state/active-task.md).
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | Ordered optional COPT/convergence follow-ups, then GPU LP precision track (GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| Planned | Ordered convergence follow-up, then GPU LP precision track (GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
 | Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
@@ -81,8 +81,13 @@ regular device, fixed-work/replay and four adaptive sanitizers pass.
 GPUP-SETUP is complete under SPEC-0018/ADR-0030: its
 [report](../docs/benchmarks/lp-fresh-setup.md) verifies 32 attempts, certifies 24 timings
 and preserves 16 equal comparisons. Primary contexts show no consistent latency
-benefit and remain study-only. All acceptance gates pass. The next task is optional
-GPUP-COPT-ADAPTER, before GPUP-CONVERGENCE. The
+benefit and remain study-only. All acceptance gates pass. GPUP-COPT-ADAPTER is
+complete under SPEC-0019/ADR-0031: its [report](../docs/benchmarks/lp-copt-adapter.md)
+verifies all 84 attempts, certifies 42 timings, and finds this bulk adapter slower
+in every certified cell. Twelve readbacks and 24 acceptance endpoints pass. Carry
+15804.186067059 / 18002.574545061 GPU seconds and the 15776-event ledger
+2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0 forward.
+The next task is GPUP-CONVERGENCE. The
 [ordered follow-ups](../docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 separate priority from prerequisites. No supported recipe is available. The
 campaign retains its eight GPU-hour cap; acceptance details remain

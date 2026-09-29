@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — isolated COPT bulk adapter
+
+- Add optional loadMatrix construction with pinned isolated dependencies and strict
+  adapter/source/request/evidence identities under SPEC-0019/ADR-0031. Preserve
+  external v2 certification, original wrappers, runtime and defaults.
+- The [report](docs/benchmarks/lp-copt-adapter.md) verifies all 84 attempts and
+  certifies 42/72 timings; this candidate is slower in every certified cell.
+- Twelve native readbacks, 24 certified min/max/profile endpoints and full native
+  and source-only gates pass. Preserve every failure and campaign prefix; hand
+  off to GPUP-CONVERGENCE with no preset or new allowance.
+
 ## Unreleased — fresh LP setup diagnosis
 
 - Separate discovery, driver initialization, context/module work and checked teardown

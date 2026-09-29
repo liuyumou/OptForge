@@ -266,7 +266,9 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Current handoff: optional GPUP-COPT-ADAPTER. GPUP-SETUP is complete under
+Current handoff: GPUP-CONVERGENCE. GPUP-COPT-ADAPTER is complete under
+SPEC-0019/ADR-0031 with a negative fresh-process bulk construction result.
+GPUP-SETUP is complete under
 SPEC-0018/ADR-0030 with a measured negative primary-context result.
 GPUP-ADAPTIVE-COST is complete under SPEC-0017/ADR-0029; its
 [report](../benchmarks/lp-adaptive-host-cost.md) verifies 32 attempts, certifies
@@ -330,7 +332,7 @@ planned bounded tasks, not accepted behavior changes or performance promises.
 | 2 | **GPUP-HOST: complete** | [SPEC-0016 report](../benchmarks/lp-immutable-host-input.md): all 28 attempts verify, 24 fresh timings certify, 14 numerical/work pairs match. Parse/validation calls fall from two to one; sparse reconstruction and every candidate/certificate assessment remain fresh. Scope is one fresh solve, with no session or adaptive-preparation change. |
 | 3 | **GPUP-ADAPTIVE-COST: complete** | [SPEC-0017 report](../benchmarks/lp-adaptive-host-cost.md): 32 verified attempts, 24 certified timings, 16 identical numerical/work pairs; full ladders prepare two operators rather than five, with streamed audits and borrowed probes. Arithmetic and recovery remain unchanged; no preset. |
 | 4 | **GPUP-SETUP: complete** | [SPEC-0018 report](../benchmarks/lp-fresh-setup.md): 32 verified attempts, 24 certified timings and 16 equal comparisons; four control profiles precede experimental primary contexts. No consistent fresh-process benefit or default change. Persistent contexts remain a separate session endpoint. |
-| 5 | **GPUP-COPT-ADAPTER: optional external baseline construction** | Test bulk model construction while preserving coefficients, senses, offsets, import guards and fresh certification. Input/setup is 54.5% of dense65536 GPU wrapper wall. Record a new adapter identity and preserve historical comparisons. This task depends on continued use of the optional local COPT control. |
+| 5 | **GPUP-COPT-ADAPTER: complete** | [SPEC-0019 report](../benchmarks/lp-copt-adapter.md): 84 verified attempts, 42/72 certified timings, 12 native readbacks and 24 certified acceptance endpoints. Bulk is slower in every certified cell; original wrappers and certification remain, no preset. |
 | 6 | **GPUP-CONVERGENCE: work amplification and remaining device diagnosis** | Reassess proposals, audits, probes and replay after host/adaptive repairs, then compare certification coverage. A small graph-node trace is optional only if it resolves a concrete execution decision. Completion is a bounded diagnosis feeding GPUP-7, not a requirement to solve every convergence failure or expose COPT internals. |
 | 7 | **GPUP-7: quantization interface, then sparse FP8** | Accept the bounded interface, resource and numerical contract before behavior. Stage matrix-only candidates before vector quantization; retain canonical transpose consistency, guards, seeded replay, FP64 controls and development screening. |
 | 8 | **GPUP-8: hybrid sparse/Tensor Core execution** | Follow the sparse quantized reference. Compare equivalent represented operands on the actual target, including packing, padding, metadata, setup, certification and recovery for a single right-hand side. |
@@ -379,5 +381,17 @@ SHA-256 cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6; the 15
 GPUP-SETUP is complete under SPEC-0018/ADR-0030, using 224.608447458 GPU seconds.
 Carry 15632.281207415 / 18002.574545061 seconds and 15606 ledger events, SHA-256
 ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b; the 15528-event prefix remains intact.
-No new allowance or preset. The next handoff is optional GPUP-COPT-ADAPTER, followed
-by GPUP-CONVERGENCE before GPUP-7.
+GPUP-COPT-ADAPTER is complete under accepted SPEC-0019/ADR-0031. Its
+[report](../benchmarks/lp-copt-adapter.md) independently verifies all 84 attempts,
+certifies 42/72 timings and 10/12 profiles, and retains all interrupted/rejected
+outcomes. Twelve native readbacks and 24 min/max/profile endpoints pass; 27/36
+timing pairs and 10/12 profile comparisons match, with the remaining CPU-default
+pairs deadline-limited. Bulk loading is cheaper, but CSC preparation and cold
+SciPy import make this adapter slower in every certified cell. No preset or
+runtime/kernel/default change; historical wrappers and evidence remain intact.
+Task charge 171.904859644 GPU seconds; cumulative 15804.186067059 /
+18002.574545061 seconds, no added allowance. The 15776-event ledger SHA-256
+2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0 preserves the
+15606-event prefix above and every phase cap. Next is GPUP-CONVERGENCE;
+GPUP-7 still needs its accepted quantization contract.
+No new allowance or preset.

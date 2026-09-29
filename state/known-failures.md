@@ -1,5 +1,24 @@
 # Known Failures and Limitations
 
+## Bulk COPT preparation outweighs native loading savings
+
+The [adapter report](../docs/benchmarks/lp-copt-adapter.md) verifies all 84 attempts
+and certifies 42/72 timings. The bulk adapter is slower in every certified cell:
+dense GPU PDLP median 11.070 versus 8.983 seconds. Native loading is cheaper, but
+CSC preparation (including a repeated guard scan) and cold SciPy import outweigh
+the saving. This implementation is experimental; no preset follows.
+
+All 18 CPU-default extension timings and two profiles are interrupted at the
+process deadline; native work differs, so their nine timing pairs and two profile
+comparisons do not establish numerical/work equivalence. All 12 mixed-65536 PDLP
+timings are numerically rejected. The other 27 timing pairs and ten profile pairs
+match bitwise. Twelve native readbacks, 24 certified acceptance endpoints and
+full native/source-only gates pass. Initial schema-enum and readback API failures
+are corrected with receipts retained. Detailed per-trial driver/thermal telemetry
+was not sampled and is explicitly unavailable; native GPU identity/execution and
+lease admission activity are retained. Original wrappers, records, runtime kernels,
+old racecheck/session and mixed-model gaps remain. GPUP-CONVERGENCE is next.
+
 ## Fresh primary contexts do not show a consistent latency benefit
 
 The [GPUP-SETUP report](../docs/benchmarks/lp-fresh-setup.md) verifies all 32 attempts,
