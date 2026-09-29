@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — immutable LP host input
+
+- Reuse one validated model within fresh-solve evidence construction through
+  opaque LpInput (SPEC-0016); retain fresh sparse reconstruction and assessments.
+- Preserve raw-byte constructors, endpoint v1-v5 identities, compact/legacy output,
+  replay, numerical settings and kernels.
+- Publish the [GPUP-HOST report](docs/benchmarks/lp-immutable-host-input.md):
+  all 28 attempts verify, all 24 timings certify and all 14 numerical pairs match;
+  profile counts confirm one removed parse with unchanged certification work.
+- Advance the bounded research handoff to GPUP-ADAPTIVE-COST; no new GPU allowance.
+
 ## Unreleased — compact LP study evidence
 
 - Add opt-in compact study endpoints, host reconstruction of validation details,

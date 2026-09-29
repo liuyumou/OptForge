@@ -127,8 +127,8 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. The user requested follow-up
-ordering on 2026-09-27. GPUP-EVIDENCE is now complete (below). Continue with
-GPUP-HOST, GPUP-ADAPTIVE-COST and
+ordering on 2026-09-27. GPUP-EVIDENCE and GPUP-HOST are now complete (below). Continue with
+GPUP-ADAPTIVE-COST and
 GPUP-CONVERGENCE before GPUP-7. Fresh setup diagnosis and optional COPT adapter
 construction have intervening priorities but are not quantization prerequisites;
 see the [ordered roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
@@ -144,8 +144,19 @@ legacy defaults, numerical settings and kernels are unchanged; the old racecheck
 and session gaps remain. Task charge is 305.274714773 GPU s; cumulative
 15071.710156489/18002.574545061 s, with no new allowance. The 15392-event ledger
 SHA-256 is 6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518,
-preserving the 15340-event prefix above and all phase caps. Next is GPUP-HOST:
-one bounded immutable host reconstruction repair, retaining fresh assessments.
+preserving the 15340-event prefix above and all phase caps.
+GPUP-HOST is complete under accepted SPEC-0016 and ADR-0028. Its
+[report](docs/benchmarks/lp-immutable-host-input.md) verifies all 28 attempts,
+certifies all 24 fresh timings and matches all 14 numerical/work pairs. LpInput
+removes one duplicate parse/structural validation, retaining fresh sparse construction
+and every candidate/certificate assessment. Native, 55 regular device tests, six
+old/new fixed-work pairs and six compact replays pass. No numerical/default/kernel
+change or cross-solve reuse; historical racecheck/session/mixed-65536 gaps remain.
+Task charge is 134.072418846 GPU seconds; cumulative 15205.782575335 /
+18002.574545061 seconds, no added allowance. The 15452-event ledger SHA-256 is
+90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2,
+preserving the 15392-event prefix above and all phase caps. Next is
+GPUP-ADAPTIVE-COST, with its own bounded contract before implementation.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

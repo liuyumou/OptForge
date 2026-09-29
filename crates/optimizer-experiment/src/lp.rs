@@ -72,6 +72,57 @@ deserialize_object!(LpEndpoint { schema_version: u32, model_sha256: String,
     diagnostics: LpDiagnostics, assessment: Assessment, fallback_reason: Option<String>,
     payload_sha256: String, control: Option<LpControlDiagnostics>, execution: Option<optimizer_core::LpExecutionDiagnostics>, precision: Option<optimizer_core::LpPrecisionDiagnostics>, adaptive: Option<optimizer_core::LpAdaptiveDiagnostics> });
 
+/// Validated original input owned by one fresh solve (SPEC-0016).
+///
+/// The private model and exact source bytes cannot be supplied independently.
+/// Only immutable model data is reused: endpoint creation still reconstructs
+/// its LP and independently evaluates and certifies the supplied witnesses.
+pub struct LpInput<'a> {
+    model: Model,
+    bytes: &'a [u8],
+}
+
+impl<'a> LpInput<'a> {
+    /// Parse and structurally validate the exact source bytes once.
+    ///
+    /// # Errors
+    /// Rejects the same malformed or invalid models as `Model::from_json`.
+    pub fn from_bytes(bytes: &'a [u8]) -> Result<Self, ValidationError> {
+        Ok(Self {
+            model: Model::from_json(bytes)?,
+            bytes,
+        })
+    }
+
+    /// Read-only original model for this solve.
+    #[must_use]
+    pub fn model(&self) -> &Model {
+        &self.model
+    }
+
+    /// Consume this solve's input and freshly assess its untrusted evidence.
+    ///
+    /// # Errors
+    /// Rejects inconsistent identities, invalid witnesses and assessments, as
+    /// `LpEndpoint::new` does. No previous assessment is reused.
+    pub fn into_endpoint(
+        self,
+        requested_backend: String,
+        record: SolveRecord,
+        diagnostics: LpDiagnostics,
+        fallback_reason: Option<String>,
+    ) -> Result<LpEndpoint, ValidationError> {
+        let _component_scope = optimizer_core::lp_cost::scope("independent_endpoint");
+        LpEndpoint::from_input(
+            self,
+            requested_backend,
+            record,
+            diagnostics,
+            fallback_reason,
+        )
+    }
+}
+
 fn invalid(message: impl Into<String>) -> ValidationError {
     ValidationError::new(ErrorKind::Document, message)
 }
@@ -245,11 +296,27 @@ impl LpEndpoint {
         model_bytes: &[u8],
         requested_backend: String,
         record: SolveRecord,
-        mut diagnostics: LpDiagnostics,
+        diagnostics: LpDiagnostics,
         fallback_reason: Option<String>,
     ) -> Result<Self, ValidationError> {
         let _component_scope = optimizer_core::lp_cost::scope("independent_endpoint");
-        let model = Model::from_json(model_bytes)?;
+        Self::from_input(
+            LpInput::from_bytes(model_bytes)?,
+            requested_backend,
+            record,
+            diagnostics,
+            fallback_reason,
+        )
+    }
+
+    fn from_input(
+        input: LpInput<'_>,
+        requested_backend: String,
+        record: SolveRecord,
+        mut diagnostics: LpDiagnostics,
+        fallback_reason: Option<String>,
+    ) -> Result<Self, ValidationError> {
+        let LpInput { model, bytes } = input;
         let check = diagnostics.start();
         let assessment = assess(&model, &record, &diagnostics)?;
         diagnostics.finish("independent_endpoint", check);
@@ -285,7 +352,7 @@ impl LpEndpoint {
             precision: diagnostics.precision.take(),
             adaptive: diagnostics.adaptive.take(),
             control,
-            model_sha256: crate::sha256::hex(model_bytes),
+            model_sha256: crate::sha256::hex(bytes),
             requested_backend,
             record,
             row_ids: model.document().constraints.iter().map(|r| r.id).collect(),
@@ -1173,6 +1240,88 @@ mod tests {
     }
 
     #[test]
+    fn immutable_input_keeps_exact_bytes_and_fresh_assessments() {
+        let endpoint = observed();
+        let mut spaced = MODEL.to_vec();
+        spaced.extend_from_slice(b" \n");
+        let input = LpInput::from_bytes(&spaced).unwrap();
+        assert_eq!(input.model(), &Model::from_json(MODEL).unwrap());
+        let session = optimizer_core::lp_cost::Session::begin().unwrap();
+        let rebuilt = input
+            .into_endpoint(
+                "host-lp".into(),
+                endpoint.record.clone(),
+                endpoint.diagnostics.clone(),
+                None,
+            )
+            .unwrap();
+        let profile = session.finish();
+        let calls = |name: &str| {
+            profile
+                .scopes
+                .iter()
+                .filter(|s| s.path.last().is_some_and(|v| v == name))
+                .map(|s| s.calls)
+                .sum::<u64>()
+        };
+        assert_eq!(calls("json_parse"), 0);
+        assert_eq!(calls("model_validation_canonicalization"), 0);
+        for name in [
+            "sparse_operator_construction",
+            "candidate_feasibility_objective",
+            "dual_certification",
+            "gap_assessment",
+        ] {
+            assert_eq!(calls(name), 1, "fresh {name}");
+        }
+        assert_eq!(rebuilt.model_sha256, crate::sha256::hex(&spaced));
+        rebuilt.verify(&spaced).unwrap();
+        assert!(rebuilt.verify(MODEL).is_err());
+        let mut changed = Model::from_json(MODEL).unwrap().document().clone();
+        changed.objective.offset += 1.0;
+        let changed = serde_json::to_vec(&changed).unwrap();
+        assert!(
+            LpInput::from_bytes(&changed)
+                .unwrap()
+                .into_endpoint(
+                    "host-lp".into(),
+                    endpoint.record.clone(),
+                    endpoint.diagnostics.clone(),
+                    None,
+                )
+                .is_err()
+        );
+        assert!(rebuilt.verify(&changed).is_err());
+        let mut false_assessment = rebuilt.clone();
+        false_assessment.assessment.objective = Some(1000.0);
+        assert!(false_assessment.verify(&spaced).is_err());
+    }
+
+    #[test]
+    fn immutable_input_rejects_invalid_models_and_untrusted_witnesses() {
+        for bytes in [b"{}".as_slice(), b"{", b"null"] {
+            assert!(LpInput::from_bytes(bytes).is_err());
+        }
+        let endpoint = observed();
+        for field in 0..4 {
+            let mut record = endpoint.record.clone();
+            let mut diagnostics = endpoint.diagnostics.clone();
+            match field {
+                0 => record.candidate.as_mut().unwrap().values[0].value = f64::NAN,
+                1 => record.objective = Some(1.0e30),
+                2 => diagnostics.dual = Some(vec![f64::NAN]),
+                _ => record.model_id = "different-model".into(),
+            }
+            assert!(
+                LpInput::from_bytes(MODEL)
+                    .unwrap()
+                    .into_endpoint("host-lp".into(), record, diagnostics, None,)
+                    .is_err()
+            );
+        }
+    }
+
+    #[test]
     fn compact_roundtrips_all_five_versions_and_fallback_without_changing_payloads() {
         let mut examples = vec![observed(), matched_observed(), tuned_observed()];
         for version in [4, 5] {
@@ -1228,6 +1377,37 @@ mod tests {
         examples.push(fallback);
         for endpoint in examples {
             compact_roundtrip(&endpoint, MODEL);
+            let mut diagnostics = endpoint.diagnostics.clone();
+            diagnostics.profile = false;
+            diagnostics.phases_ns.clear();
+            diagnostics.control = endpoint.control.clone();
+            diagnostics.execution = endpoint.execution.clone();
+            diagnostics.precision = endpoint.precision.clone();
+            diagnostics.adaptive = endpoint.adaptive.clone();
+            let legacy = LpEndpoint::new(
+                MODEL,
+                endpoint.requested_backend.clone(),
+                endpoint.record.clone(),
+                diagnostics.clone(),
+                endpoint.fallback_reason.clone(),
+            )
+            .unwrap();
+            let reused = LpInput::from_bytes(MODEL)
+                .unwrap()
+                .into_endpoint(
+                    endpoint.requested_backend.clone(),
+                    endpoint.record.clone(),
+                    diagnostics,
+                    endpoint.fallback_reason.clone(),
+                )
+                .unwrap();
+            // Serialized equality includes payload commitments and binary64 signed zero.
+            assert_eq!(
+                serde_json::to_vec(&legacy).unwrap(),
+                serde_json::to_vec(&reused).unwrap()
+            );
+            assert_eq!(reused.schema_version, endpoint.schema_version);
+            reused.verify(MODEL).unwrap();
         }
     }
 

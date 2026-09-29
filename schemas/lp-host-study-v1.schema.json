@@ -1,0 +1,345 @@
+{
+  "$id": "lp-host-study-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acceptance_configurations": {
+      "const": [
+        {
+          "backend": "cuda-lp-tuned",
+          "execution": {
+            "allocation": "resident",
+            "fusion": "separate",
+            "reduction": "warp32_v1",
+            "schema_version": 1,
+            "uploads": "necessary"
+          },
+          "id": "tuned-fp64"
+        },
+        {
+          "backend": "cuda-lp-tuned",
+          "execution": {
+            "allocation": "resident",
+            "fusion": "separate",
+            "reduction": "warp32_v1",
+            "schema_version": 1,
+            "uploads": "necessary"
+          },
+          "id": "accumulation-fp32",
+          "precision": {
+            "accumulation": "f32",
+            "correction_interval": null,
+            "matrix": "f32",
+            "product_operands": "f32",
+            "products": "f32",
+            "rounding": "nearest_even",
+            "schema_version": 1,
+            "updates": "f64",
+            "working_state": "f64"
+          }
+        },
+        {
+          "adaptive": {
+            "audit_interval": 32,
+            "demotion": {
+              "clean_windows": 4,
+              "margin_fraction": 0.25
+            },
+            "dual_absolute": 1e-07,
+            "ladder": [
+              "working_fp32",
+              "accumulation_fp32",
+              "products_fp32",
+              "storage_fp32",
+              "fp64"
+            ],
+            "primal_absolute": 1e-07,
+            "relative": 1e-07,
+            "schema_version": 1
+          },
+          "backend": "cuda-lp-tuned",
+          "execution": {
+            "allocation": "resident",
+            "fusion": "separate",
+            "reduction": "warp32_v1",
+            "schema_version": 1,
+            "uploads": "necessary"
+          },
+          "id": "adaptive-gradual-working_fp32-a32-strict-demote"
+        }
+      ]
+    },
+    "acceptance_instances": {
+      "const": [
+        "gpup-development-small-4",
+        "gpup-development-irregular-2048"
+      ]
+    },
+    "acceptance_output": {
+      "const": "artifacts/gpup-host-acceptance"
+    },
+    "acceptance_work": {
+      "const": 200
+    },
+    "activity": {
+      "const": {
+        "leased_seconds": 3,
+        "poll_ms": 250,
+        "wait_seconds": 300
+      }
+    },
+    "additional_gpu_seconds": {
+      "const": 0
+    },
+    "analysis": {
+      "const": {
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 18002
+      }
+    },
+    "baseline_output": {
+      "const": "artifacts/gpup-host-baseline"
+    },
+    "baseline_revision": {
+      "const": "1818cdb5405fe466728c9cfb1719c67e22f660a5"
+    },
+    "budget_authority": {
+      "const": {
+        "path": "benchmarks/configs/lp-campaign-v1.json",
+        "sha256": "a65d0ac2ce2b2676453d0e15752f887af1ee759318bed8b4538ae3f6f0cf137f"
+      }
+    },
+    "categories": {
+      "const": {
+        "accept": {
+          "phase": "repeatability",
+          "seconds": 300
+        },
+        "profile": {
+          "phase": "repeatability",
+          "seconds": 200
+        },
+        "timing": {
+          "phase": "ablations",
+          "seconds": 900
+        }
+      }
+    },
+    "combined_cap_seconds": {
+      "const": 1400
+    },
+    "configurations": {
+      "const": [
+        {
+          "backend": "cuda-lp-tuned",
+          "evidence_format": "compact-v1",
+          "execution": {
+            "allocation": "resident",
+            "fusion": "separate",
+            "reduction": "warp32_v1",
+            "schema_version": 1,
+            "uploads": "necessary"
+          },
+          "id": "baseline"
+        },
+        {
+          "backend": "cuda-lp-tuned",
+          "evidence_format": "compact-v1",
+          "execution": {
+            "allocation": "resident",
+            "fusion": "separate",
+            "reduction": "warp32_v1",
+            "schema_version": 1,
+            "uploads": "necessary"
+          },
+          "id": "repaired"
+        }
+      ]
+    },
+    "cpu_cap_seconds": {
+      "const": 14400
+    },
+    "cumulative_gpu_ns": {
+      "const": 18002574545061
+    },
+    "decision": {
+      "const": {
+        "path": "docs/decisions/ADR-0028-immutable-lp-host-input.md",
+        "sha256": "d2d3848f51d1bf7ada288b952ebcd60aa6295f695cd1be317ea259eb7d6e866a"
+      }
+    },
+    "device": {
+      "const": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48"
+    },
+    "id": {
+      "const": "gpup-host-v1"
+    },
+    "instances": {
+      "const": [
+        "gpup-development-small-4",
+        "gpup-extension-irregular-32768",
+        "gpup-extension-irregular-65536",
+        "gpup-extension-dense_block-65536"
+      ]
+    },
+    "limits": {
+      "const": {
+        "cleanup_seconds": 2,
+        "device_buffer_bytes": 8589934592,
+        "host_rss_bytes": 8589934592,
+        "output_bytes": 33554432,
+        "poll_ms": 10,
+        "solve_seconds": 30
+      }
+    },
+    "lp_settings": {
+      "const": {
+        "check_interval": 200,
+        "iteration_limit": 50000,
+        "power_iterations": 20,
+        "preconditioner": {
+          "pock_chambolle_alpha": 1.0,
+          "ruiz_passes": 10
+        },
+        "primal_weight": {
+          "derivative": 0.0,
+          "integral": 0.0,
+          "proportional": 0.5
+        },
+        "restart": {
+          "artificial": 0.36,
+          "necessary": 0.8,
+          "sufficient": 0.2
+        },
+        "schema_version": 1
+      }
+    },
+    "manifests": {
+      "const": [
+        {
+          "path": "benchmarks/manifests/lp-development-v1.json",
+          "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+        },
+        {
+          "path": "benchmarks/manifests/lp-development-extension-v1.json",
+          "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+        }
+      ]
+    },
+    "model_byte_limit": {
+      "const": 134217728
+    },
+    "order_seed": {
+      "const": 18001
+    },
+    "output": {
+      "const": "artifacts/gpup-host-v1"
+    },
+    "partition": {
+      "const": "development"
+    },
+    "phase_gpu_seconds": {
+      "const": {
+        "ablations": 7200,
+        "baseline": 1800,
+        "finalists": 9000,
+        "repeatability": 3600,
+        "screening": 7200
+      }
+    },
+    "planned_attempts": {
+      "const": 28
+    },
+    "previous_protocol": {
+      "const": {
+        "path": "benchmarks/configs/lp-evidence-v1.json",
+        "sha256": "48fef481c9fddc7b32be7f9ac8c3d49c860834ab808caf5440c251c7f0767877"
+      }
+    },
+    "prior_events": {
+      "const": 15392
+    },
+    "prior_gpu_ns": {
+      "const": 15071710156489
+    },
+    "prior_ledger_sha256": {
+      "const": "6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518"
+    },
+    "profile_instances": {
+      "const": [
+        "gpup-extension-irregular-32768",
+        "gpup-extension-dense_block-65536"
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "solve": {
+      "const": {
+        "iteration_limit": 50000,
+        "node_limit": null,
+        "schema_version": 1,
+        "seed": 17,
+        "threads": 1,
+        "time_limit_ms": 30000,
+        "tolerances": {
+          "absolute": 1e-09,
+          "integrality": 1e-09,
+          "relative": 1e-09
+        }
+      }
+    },
+    "timing_repetitions": {
+      "const": 3
+    },
+    "total_gpu_seconds": {
+      "const": 28800
+    },
+    "verification_seconds": {
+      "const": 120
+    }
+  },
+  "required": [
+    "acceptance_configurations",
+    "acceptance_instances",
+    "acceptance_output",
+    "acceptance_work",
+    "activity",
+    "additional_gpu_seconds",
+    "analysis",
+    "budget_authority",
+    "categories",
+    "combined_cap_seconds",
+    "configurations",
+    "cpu_cap_seconds",
+    "cumulative_gpu_ns",
+    "decision",
+    "device",
+    "id",
+    "instances",
+    "limits",
+    "lp_settings",
+    "manifests",
+    "model_byte_limit",
+    "order_seed",
+    "output",
+    "partition",
+    "phase_gpu_seconds",
+    "planned_attempts",
+    "previous_protocol",
+    "prior_events",
+    "prior_gpu_ns",
+    "prior_ledger_sha256",
+    "schema_version",
+    "solve",
+    "timing_repetitions",
+    "total_gpu_seconds",
+    "verification_seconds",
+    "baseline_output",
+    "baseline_revision",
+    "profile_instances"
+  ],
+  "title": "Frozen GPUP-HOST study v1",
+  "type": "object"
+}
