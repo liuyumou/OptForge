@@ -1,5 +1,87 @@
 # Active Task
 
+## GPUP-ADAPTIVE-COST protected integration (2026-09-29)
+
+Status: user authorized PR publication, self-review and protected merge after checks.
+Objective: review the completed slice and evidence, address any findings, publish
+its PR, require current-head cpu/docs/smoke checks and resolved conversations,
+merge without bypass while preserving source ancestry, and synchronize local main.
+The latest user authorization supersedes the implementation-phase no-push scope
+below. No release, additional experiment or GPUP-SETUP work is included.
+Acceptance: existing full pinned-native/device/sanitizer receipts, independent
+source and provenance review, required remote checks, protected merge, and clean
+synchronized main. Likely files: this task state and any review corrections.
+Resources: four build jobs, at most one CPU-hour for integration validation,
+zero GPU jobs and no new campaign allowance. Preserve all artifacts and the
+15528-event ledger SHA-256
+cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6;
+cumulative consumption remains 15407.672759957 / 18002.574545061 GPU seconds.
+Initial source head: 400d575a4bc0bc2f80fa9b1b76c9d199cc404eed; current main:
+5b9a9d083b27547e8bcb3ee4c9d265dde1a40bbb. Final review/check/merge outcomes
+are retained in artifacts/gpup-adaptive-cost-integration-20260929/integration.json
+and sibling receipts. Self-review is explicitly labeled; no independent human
+approval is claimed or required by the current branch rules.
+
+Integration preflight: self-review found no blocking issue in runtime, tests,
+frozen study, strict identity/accounting tools or report claims. All 468 artifact
+references and the complete ledger/prefix match their recorded hashes; measured
+runtime, tooling, schemas and protocol match the archived source. The small-4
+direct slowdown and historical coverage gaps remain explicit. The fresh full
+pinned-native gate passes 505 Rust tests, 187 Python tests, committed-record replay,
+107 documentation pages and smoke. GitHub requires current-head cpu/docs/smoke
+and resolved conversations; no protection bypass or independent approval is claimed.
+Only integration state changed after the implementation commit. Remote check,
+self-review comment and merge receipts will be retained in the directory above.
+
+## GPUP-ADAPTIVE-COST (2026-09-29)
+
+Status: complete; implementation, bounded study and final repository gate passed.
+Objective: share adaptive operators by matrix width, stream original-unit audits,
+and borrow probe state when working-state narrowing is not needed. Preserve all
+arithmetic, guards, recovery and physical-work accounting. User accepted the full
+plan before implementation; SPEC-0017 and ADR-0029 record it.
+Acceptance: full pinned-native tools/check.sh; all-ladder/legacy host differentials;
+strict study provenance and clean-checkout synthetic budgets; regular device tests,
+four adaptive sanitizers, twelve 200-update old/new pairs and twelve replays;
+24 fresh timings and eight profiles independently verified by both executables.
+Baseline: 5b9a9d083b27547e8bcb3ee4c9d265dde1a40bbb, archived before runtime edits.
+Likely files: host adaptive runtime/tests, separate study/schema/budget/report
+and acceptance tooling, specification/decision and state documentation.
+Resources: four build jobs, four CPU-hours; timing 1000 GPU seconds in ablations,
+profiles 300 and acceptance 500 in repeatability, combined 1800. No added allowance.
+All GPU work requires the shared host lease and full conservative reservations.
+Preserve 15452 ledger events, SHA-256
+90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2,
+and 15205.782575335 / 18002.574545061 charged GPU seconds. Retain failed attempts.
+Commit locally after acceptance; no push or publication. Handoff: GPUP-SETUP only.
+
+Acceptance evidence: [report](../docs/benchmarks/lp-adaptive-host-cost.md), strict
+protocol/schemas and hash-bound data. All 32 attempts verify with both binaries,
+all 24 timings certify and all 16 numerical/work pairs match. Twelve 200-update
+old/new pairs and twelve baseline replays match bitwise; both binaries accept all
+36 endpoints. Full native (187 Python integration tests), 55 regular device tests
+and all four adaptive sanitizers pass. All sixteen ladders and independent old
+probe/audit implementations match; exact-rational regressions remain intact.
+A 255-file source audit preserves old runtime/schema/protocol/kernel/decision data.
+Only adaptive.rs changes runtime behavior. Initial test-only Clippy and clean-source
+fixture failures are fixed; failed and passing CPU receipts are retained.
+No failed GPU trial or retry. Historical racecheck/session/mixed-65536 gaps remain.
+
+Task charge 201.890184622 GPU seconds: timing 62.784243449/1000,
+profiles 20.927881994/300 and acceptance
+118.178059179/500. Cumulative 15407.672759957 /
+18002.574545061 seconds, no added allowance. The 15528-event ledger SHA-256
+cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6 preserves the 15452-event prefix and every phase cap.
+Final full pinned-native tools/check.sh passes 505 Rust tests, 187 Python tests,
+record replay, 107 documentation pages and smoke. Metered child CPU is
+1430.901302 seconds within four hours; small edits/catalog checks are outside that
+metered child total. Four build jobs; no additional GPU work. Final source audit
+and immutable ledger prefix pass. Local commit follows; no push.
+
+Raw source/executables, endpoints, receipts and analysis remain under
+artifacts/gpup-adaptive-cost-baseline, artifacts/gpup-adaptive-cost-acceptance and
+artifacts/gpup-adaptive-cost-v1. GPUP-SETUP is the next handoff; no work on it begins.
+
 ## GPUP-HOST protected integration (2026-09-29)
 
 Status: local acceptance complete; PR publication and protected merge authorized.

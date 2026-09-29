@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — adaptive host costs
+
+- Share canonical adaptive operators by matrix width, stream original-unit audits
+  and borrow probe state when narrowing is unnecessary (SPEC-0017/ADR-0029).
+- Preserve reference arithmetic, recovery/work accounting, original-model
+  certification, kernels, evidence identities and numerical settings.
+- Publish the [adaptive host-cost report](docs/benchmarks/lp-adaptive-host-cost.md):
+  all 32 attempts verify, 24 timings certify and 16 numerical/work pairs match;
+  twelve fixed-work pairs/replays, regular device and four adaptive sanitizers pass.
+- Advance the bounded handoff to GPUP-SETUP; no new allowance or preset.
+
 ## Unreleased — immutable LP host input
 
 - Reuse one validated model within fresh-solve evidence construction through

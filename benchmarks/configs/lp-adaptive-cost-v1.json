@@ -1,0 +1,445 @@
+{
+  "acceptance_cases": [
+    {
+      "configuration": "tuned-fp64",
+      "instance": "gpup-development-small-4"
+    },
+    {
+      "configuration": "accumulation-fp32",
+      "instance": "gpup-development-small-4"
+    },
+    {
+      "configuration": "adaptive-fp64",
+      "instance": "gpup-development-small-4"
+    },
+    {
+      "configuration": "direct",
+      "instance": "gpup-development-small-4"
+    },
+    {
+      "configuration": "gradual",
+      "instance": "gpup-development-small-4"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "instance": "gpup-development-irregular-2048"
+    },
+    {
+      "configuration": "accumulation-fp32",
+      "instance": "gpup-development-irregular-2048"
+    },
+    {
+      "configuration": "adaptive-fp64",
+      "instance": "gpup-development-irregular-2048"
+    },
+    {
+      "configuration": "direct",
+      "instance": "gpup-development-irregular-2048"
+    },
+    {
+      "configuration": "gradual",
+      "instance": "gpup-development-irregular-2048"
+    },
+    {
+      "configuration": "direct",
+      "instance": "gpup-extension-irregular-32768"
+    },
+    {
+      "configuration": "gradual",
+      "instance": "gpup-extension-irregular-32768"
+    }
+  ],
+  "acceptance_configurations": [
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64"
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "accumulation-fp32",
+      "precision": {
+        "accumulation": "f32",
+        "correction_interval": null,
+        "matrix": "f32",
+        "product_operands": "f32",
+        "products": "f32",
+        "rounding": "nearest_even",
+        "schema_version": 1,
+        "updates": "f64",
+        "working_state": "f64"
+      }
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": null,
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "adaptive-fp64"
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": null,
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "accumulation_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "direct"
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": {
+          "clean_windows": 4,
+          "margin_fraction": 0.25
+        },
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "working_fp32",
+          "accumulation_fp32",
+          "products_fp32",
+          "storage_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "gradual"
+    }
+  ],
+  "acceptance_instances": [
+    "gpup-development-small-4",
+    "gpup-development-irregular-2048"
+  ],
+  "acceptance_output": "artifacts/gpup-adaptive-cost-acceptance",
+  "acceptance_work": 200,
+  "activity": {
+    "leased_seconds": 3,
+    "poll_ms": 250,
+    "wait_seconds": 300
+  },
+  "additional_gpu_seconds": 0,
+  "analysis": {
+    "confidence": 0.95,
+    "resamples": 10000,
+    "seed": 18002
+  },
+  "baseline_output": "artifacts/gpup-adaptive-cost-baseline",
+  "baseline_revision": "5b9a9d083b27547e8bcb3ee4c9d265dde1a40bbb",
+  "budget_authority": {
+    "path": "benchmarks/configs/lp-campaign-v1.json",
+    "sha256": "a65d0ac2ce2b2676453d0e15752f887af1ee759318bed8b4538ae3f6f0cf137f"
+  },
+  "categories": {
+    "accept": {
+      "phase": "repeatability",
+      "seconds": 500
+    },
+    "profile": {
+      "phase": "repeatability",
+      "seconds": 300
+    },
+    "timing": {
+      "phase": "ablations",
+      "seconds": 1000
+    }
+  },
+  "combined_cap_seconds": 1800,
+  "configurations": [
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": null,
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "accumulation_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "evidence_format": "compact-v1",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "baseline-direct",
+      "policy_id": "direct",
+      "variant": "baseline"
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": null,
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "accumulation_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "evidence_format": "compact-v1",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "repaired-direct",
+      "policy_id": "direct",
+      "variant": "repaired"
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": {
+          "clean_windows": 4,
+          "margin_fraction": 0.25
+        },
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "working_fp32",
+          "accumulation_fp32",
+          "products_fp32",
+          "storage_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "evidence_format": "compact-v1",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "baseline-gradual",
+      "policy_id": "gradual",
+      "variant": "baseline"
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": {
+          "clean_windows": 4,
+          "margin_fraction": 0.25
+        },
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "working_fp32",
+          "accumulation_fp32",
+          "products_fp32",
+          "storage_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "backend": "cuda-lp-tuned",
+      "evidence_format": "compact-v1",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "repaired-gradual",
+      "policy_id": "gradual",
+      "variant": "repaired"
+    }
+  ],
+  "cpu_cap_seconds": 14400,
+  "cumulative_gpu_ns": 18002574545061,
+  "decision": {
+    "path": "docs/decisions/ADR-0029-adaptive-host-cost.md",
+    "sha256": "3571d14a4ae76ce00bfe7b9b811cdae3508b88de6b44c3a6cf184a89e3fe071e"
+  },
+  "device": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+  "id": "gpup-adaptive-cost-v1",
+  "instances": [
+    "gpup-development-small-4",
+    "gpup-extension-irregular-32768"
+  ],
+  "limits": {
+    "cleanup_seconds": 2,
+    "device_buffer_bytes": 8589934592,
+    "host_rss_bytes": 8589934592,
+    "output_bytes": 33554432,
+    "poll_ms": 10,
+    "solve_seconds": 30
+  },
+  "lp_settings": {
+    "check_interval": 200,
+    "iteration_limit": 50000,
+    "power_iterations": 20,
+    "preconditioner": {
+      "pock_chambolle_alpha": 1.0,
+      "ruiz_passes": 10
+    },
+    "primal_weight": {
+      "derivative": 0.0,
+      "integral": 0.0,
+      "proportional": 0.5
+    },
+    "restart": {
+      "artificial": 0.36,
+      "necessary": 0.8,
+      "sufficient": 0.2
+    },
+    "schema_version": 1
+  },
+  "manifests": [
+    {
+      "path": "benchmarks/manifests/lp-development-v1.json",
+      "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+    },
+    {
+      "path": "benchmarks/manifests/lp-development-extension-v1.json",
+      "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+    }
+  ],
+  "model_byte_limit": 134217728,
+  "order_seed": 18001,
+  "output": "artifacts/gpup-adaptive-cost-v1",
+  "partition": "development",
+  "phase_gpu_seconds": {
+    "ablations": 7200,
+    "baseline": 1800,
+    "finalists": 9000,
+    "repeatability": 3600,
+    "screening": 7200
+  },
+  "planned_attempts": 32,
+  "policies": [
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": null,
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "accumulation_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "id": "direct"
+    },
+    {
+      "adaptive": {
+        "audit_interval": 32,
+        "demotion": {
+          "clean_windows": 4,
+          "margin_fraction": 0.25
+        },
+        "dual_absolute": 1e-07,
+        "ladder": [
+          "working_fp32",
+          "accumulation_fp32",
+          "products_fp32",
+          "storage_fp32",
+          "fp64"
+        ],
+        "primal_absolute": 1e-07,
+        "relative": 1e-07,
+        "schema_version": 1
+      },
+      "id": "gradual"
+    }
+  ],
+  "previous_protocol": {
+    "path": "benchmarks/configs/lp-host-v1.json",
+    "sha256": "af51bf05f276d653833311267c3ed9b22ec0424e2e2951e7d2f7b39d3cbea184"
+  },
+  "prior_events": 15452,
+  "prior_gpu_ns": 15205782575335,
+  "prior_ledger_sha256": "90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2",
+  "profile_instances": [
+    "gpup-development-small-4",
+    "gpup-extension-irregular-32768"
+  ],
+  "schema_version": 1,
+  "solve": {
+    "iteration_limit": 50000,
+    "node_limit": null,
+    "schema_version": 1,
+    "seed": 17,
+    "threads": 1,
+    "time_limit_ms": 30000,
+    "tolerances": {
+      "absolute": 1e-09,
+      "integrality": 1e-09,
+      "relative": 1e-09
+    }
+  },
+  "timing_repetitions": 3,
+  "total_gpu_seconds": 28800,
+  "verification_seconds": 120
+}

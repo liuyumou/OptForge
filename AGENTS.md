@@ -127,9 +127,9 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. The user requested follow-up
-ordering on 2026-09-27. GPUP-EVIDENCE and GPUP-HOST are now complete (below). Continue with
-GPUP-ADAPTIVE-COST and
-GPUP-CONVERGENCE before GPUP-7. Fresh setup diagnosis and optional COPT adapter
+ordering on 2026-09-27. GPUP-EVIDENCE and GPUP-HOST are now complete (below).
+Continue with the ordered GPUP-SETUP diagnosis and optional adapter follow-up,
+then GPUP-CONVERGENCE before GPUP-7. Fresh setup diagnosis and optional COPT adapter
 construction have intervening priorities but are not quantization prerequisites;
 see the [ordered roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 and next_ready_task. Planning adds no GPU allowance or accepted numerical behavior;
@@ -155,8 +155,20 @@ change or cross-solve reuse; historical racecheck/session/mixed-65536 gaps remai
 Task charge is 134.072418846 GPU seconds; cumulative 15205.782575335 /
 18002.574545061 seconds, no added allowance. The 15452-event ledger SHA-256 is
 90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2,
-preserving the 15392-event prefix above and all phase caps. Next is
-GPUP-ADAPTIVE-COST, with its own bounded contract before implementation.
+preserving the 15392-event prefix above and all phase caps.
+GPUP-ADAPTIVE-COST is complete under accepted SPEC-0017 and ADR-0029. Its
+[report](docs/benchmarks/lp-adaptive-host-cost.md) verifies all 32 attempts,
+certifies all 24 timings and matches all 16 timing/profile pairs. Shared operators
+reduce full-ladder preparation from five operators to two; streamed audits and
+borrowed probes preserve arithmetic and charged recovery. Twelve fixed-work pairs
+and twelve replays match; full native, 55 regular device tests and four adaptive
+sanitizers pass. No preset or cross-solve reuse. Historical gaps remain open.
+Task charge 201.890184622 GPU seconds; cumulative 15407.672759957 /
+18002.574545061 seconds, with no added allowance. The 15528-event ledger SHA-256
+cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6
+preserves the 15452-event prefix above and all phase caps.
+Next is GPUP-SETUP, which needs its bounded diagnosis/resource contract before work.
+GPUP-CONVERGENCE still precedes GPUP-7's unaccepted quantization contract.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

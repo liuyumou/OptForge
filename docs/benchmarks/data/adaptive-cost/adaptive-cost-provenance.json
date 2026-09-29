@@ -1,0 +1,2346 @@
+{
+  "id": "gpup-adaptive-cost-v1",
+  "references": [
+    {
+      "bytes": 4076,
+      "path": "artifacts/gpup-adaptive-cost-v1/baseline-execution.json",
+      "sha256": "02f0c6133a8cb6068cd9325b19ddfd0587c0008fa42c21509398bf94c439bc57"
+    },
+    {
+      "bytes": 14469120,
+      "path": "artifacts/gpup-adaptive-cost-v1/baseline-source.tar",
+      "sha256": "001ec0c35b8d9cde8814c8daa15684da112639196c8408135cbf60c135fdeac9"
+    },
+    {
+      "bytes": 70,
+      "path": "artifacts/gpup-adaptive-cost-v1/budget-binding.json",
+      "sha256": "cc029d3721db3db63d37cda565215240807bce80318c3dbcb1f2c91b6fc26137"
+    },
+    {
+      "bytes": 225,
+      "path": "artifacts/gpup-adaptive-cost-v1/budget.json",
+      "sha256": "181013e6e5e3564de420894eb94dd3f21b62f056c71ed6cfcf322740716fe999"
+    },
+    {
+      "bytes": 7630,
+      "path": "artifacts/gpup-adaptive-cost-v1/campaign.json",
+      "sha256": "eac2d506423608b2e3f5b0f314cdeb20f7794e06737723835ab08b514662c561"
+    },
+    {
+      "bytes": 356,
+      "path": "artifacts/gpup-adaptive-cost-v1/code-objects.json",
+      "sha256": "a42cfdd4ab65f9fc881e39a286b1408e459e3df260a58a06ebb51707cc05b2bb"
+    },
+    {
+      "bytes": 7993,
+      "path": "artifacts/gpup-adaptive-cost-v1/configuration-executions.json",
+      "sha256": "70891e453f9d70e3bd3af65a5774ecdba52462eaf33c677003c5138ae0a78c0a"
+    },
+    {
+      "bytes": 158,
+      "path": "artifacts/gpup-adaptive-cost-v1/direct.adaptive.json",
+      "sha256": "cd7c42bfa4a657d174be76644f096fcd06645ab84766607debfd74f6f880dc66"
+    },
+    {
+      "bytes": 111,
+      "path": "artifacts/gpup-adaptive-cost-v1/execution-settings.json",
+      "sha256": "73239baba5aa36cf09846904b0af87c05a4b4ce6f681bfb25275fc4c0e96bdc1"
+    },
+    {
+      "bytes": 4075,
+      "path": "artifacts/gpup-adaptive-cost-v1/execution.json",
+      "sha256": "a6b45359b452338484202dfefa80c4b56e5e10c49281ce50f28a9b615e418537"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-direct.activity.json",
+      "sha256": "86f0e0ef17f8aa0b78d233e4b86e80b8c28638ca6ce84da7a8421ff4203ab5f5"
+    },
+    {
+      "bytes": 11248,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-direct.cost.json",
+      "sha256": "0280bd2024de371fc50762ea5825f5ecea8f3c60da8051538cf4eaa499e8b73d"
+    },
+    {
+      "bytes": 3479,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-direct.endpoint.json",
+      "sha256": "6d2dfac0ed79699874565f519346d70c12be54c42b6d3f93b4fba297d191d64b"
+    },
+    {
+      "bytes": 6222,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-direct.intent.json",
+      "sha256": "60cfcdbaf3ba615aa8d3aae93e3886449d23de0764251e06b1adce8cfe8a5332"
+    },
+    {
+      "bytes": 1491,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-direct.request.json",
+      "sha256": "7763381e0d206e463d48bfd6dec8fee01ae060dfe61805c7e1af3b35a7ec5606"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-direct.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7148,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-direct.trial.json",
+      "sha256": "bbf8effda6ce10ce81fba1e8cfacc029c226776a2f0bb8e18a1f4af660103ec8"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-direct.worker.json",
+      "sha256": "d47c8f69cf4c3d4d7ae39e873f0e172359ef980f785d3b90a5a7cb6753856e31"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-gradual.activity.json",
+      "sha256": "e587e6e16b8135219c318cc22a06f998fd76050527ac386a60fffe7aa3ebaba9"
+    },
+    {
+      "bytes": 11427,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-gradual.cost.json",
+      "sha256": "01d7866de7da596024549f98eca8aea2856974f57b422ff334b344d625515761"
+    },
+    {
+      "bytes": 3663,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-gradual.endpoint.json",
+      "sha256": "2d854f8975fb84703de26c1ac8d993665eeade70f5de8f2b2daea0b56d1b4bed"
+    },
+    {
+      "bytes": 6311,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-gradual.intent.json",
+      "sha256": "06530705054ca62c4180818532764c0913cc55b613942154ca8efe0d129bdf15"
+    },
+    {
+      "bytes": 1495,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-gradual.request.json",
+      "sha256": "5acd9f49942402acb58a01dfe2d3b25c4107f93034c0922838b06b336ee88081"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-gradual.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7242,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-gradual.trial.json",
+      "sha256": "bb997fc64a88a152590550bbe543cbd3c8e1c35fc9625cbacd4804d394716067"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-baseline-gradual.worker.json",
+      "sha256": "ee12491f53b9b4559991cc7fb49a3ce3029d076f3385c8c004ea91edbb98a449"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-direct.activity.json",
+      "sha256": "63ce1b994d06b78f5101acf5a19d9b24fe1d9aa7d4e60274a33ab888c86270cc"
+    },
+    {
+      "bytes": 11246,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-direct.cost.json",
+      "sha256": "6557ebf9aa10b09bb7f4952fc4fbfdd378b6d1813ef5d562556f00c75f76967b"
+    },
+    {
+      "bytes": 3479,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-direct.endpoint.json",
+      "sha256": "540eb5980ce3a76de114ca076a683ee7d13b2eb529fcdfbc66522acdbfdfbbde"
+    },
+    {
+      "bytes": 6220,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-direct.intent.json",
+      "sha256": "e59fb814a7fa760b54e3a924ae955908b2d3b7b9ae7ba6570fb77694a40ca082"
+    },
+    {
+      "bytes": 1482,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-direct.request.json",
+      "sha256": "4529d2f0323ea10d2e6a453234d9ff741ae00cab3efbd350ea76d8654caaf8ff"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-direct.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7144,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-direct.trial.json",
+      "sha256": "6a10b7067f92da29a74c779b5e9c57f0ab1decdd26c9cdd04ed4e26ef2ff045f"
+    },
+    {
+      "bytes": 441,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-direct.worker.json",
+      "sha256": "76e50846a4bd95390daf53de191b2c2409bd380dd023cd9524619d7f1f0d3b61"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-gradual.activity.json",
+      "sha256": "2bb66c32a40ca744e5d5be6b790707b16931febbeb15be21815516e1bf6f505e"
+    },
+    {
+      "bytes": 11423,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-gradual.cost.json",
+      "sha256": "5edc7dc50619f5cb27ba69cfb4c761390b219d5669d8cde4b1f97a59d1a2eed0"
+    },
+    {
+      "bytes": 3663,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-gradual.endpoint.json",
+      "sha256": "dc3e38c9b65303b1c58543b5090ce79b47e6e374b0f0a99245fe9107af256175"
+    },
+    {
+      "bytes": 6310,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-gradual.intent.json",
+      "sha256": "a352f022caf8f63bb6eb3d3afa6efaf3b4167e4ce8f3ac6f935a9ddb7aab6464"
+    },
+    {
+      "bytes": 1486,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-gradual.request.json",
+      "sha256": "3ef175a5c3242ff6c60f46cb873e3e4826b37be5a2dd48d8b62a25de6a3a05b1"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-gradual.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7241,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-gradual.trial.json",
+      "sha256": "f540c49a7ca70f181353a1701d938ffa181cabc638359319827a87c652b9c375"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-development-small-4-0-repaired-gradual.worker.json",
+      "sha256": "4cacbbc4f41b83d8b9ca38a5af9b29826e1fb3e9b597da0c2aba2ee9d917cf86"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-direct.activity.json",
+      "sha256": "16cb73ae9f03416661dc4cb09c3392eaef53294e5c658cd1b5d0d6a28baa0643"
+    },
+    {
+      "bytes": 23419,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-direct.cost.json",
+      "sha256": "3a1fc7b436c64e031b3b101aea638292ee4b0b5c8094f0ac9c293ee1f572285e"
+    },
+    {
+      "bytes": 2144733,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-direct.endpoint.json",
+      "sha256": "3e7757efc11eea97ba270ebd10453d98280b731eb38b3c09796f4716a82e7c6e"
+    },
+    {
+      "bytes": 6245,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-direct.intent.json",
+      "sha256": "2da59d635ad1469681d3751e7c2bd07590fe5a0e1cadd31f1504ffa3f7c97664"
+    },
+    {
+      "bytes": 1515,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-direct.request.json",
+      "sha256": "aa58fac839dd3f441b91d757cbe53c61fede465947ae8058189e95cd22c73953"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 210,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-direct.stdout",
+      "sha256": "fe154dd61bd582012c3c7d4c7766aef0a5d30656001f621549b67cb716a4df68"
+    },
+    {
+      "bytes": 7204,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-direct.trial.json",
+      "sha256": "d614a42ca433f823ce0b403cf19dcd920aabdc1596f7f3e1e70117cf13b3d85c"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-direct.worker.json",
+      "sha256": "9f08b1e16c3dd06f83af7899998535073767224ec4bce504b5ad597e268fad5b"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-gradual.activity.json",
+      "sha256": "c2eb2b639f3aa91ff404264011cbaaeaf3b2d4b2021980db82d7a1fcd4a914c9"
+    },
+    {
+      "bytes": 55262,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-gradual.cost.json",
+      "sha256": "4cab11118ba9615c0f4c29b16f778be386f5a3f622290f3d921aa99eba17e022"
+    },
+    {
+      "bytes": 2112862,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-gradual.endpoint.json",
+      "sha256": "1f8d891b737a5d7a91435d53f2a4cfbee8d84b0694a7dde6aa20176005deb432"
+    },
+    {
+      "bytes": 6334,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-gradual.intent.json",
+      "sha256": "2b32c96adc635c57387edab4656c76680874eb4304ad2750ec8ae98471de0ac6"
+    },
+    {
+      "bytes": 1519,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-gradual.request.json",
+      "sha256": "bfc4fd3a1f76a609a6fd715aff464110b373c23093321f204bfaa389e2d26d53"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-gradual.stdout",
+      "sha256": "e0f4ca57c9c92e71398f6e423aa1c400856b7a1ceb8ab7ce4d2c72c42e9a1e4d"
+    },
+    {
+      "bytes": 7298,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-gradual.trial.json",
+      "sha256": "e913b045faacd854b532044c6a59e084857629defe1f47d3a2598e27be602036"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-baseline-gradual.worker.json",
+      "sha256": "ae5f4da06656a933b513a307c6b6f4cd7edf723d9beac6fb56d6d65eaa3f9528"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-direct.activity.json",
+      "sha256": "ab504e128a418dd42e4cfeae81918861ed4f1eaec2e01d25b5d678e1b9048aae"
+    },
+    {
+      "bytes": 23423,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-direct.cost.json",
+      "sha256": "fde551d8e7aa1f93028b28e847147fa760092787e5448600450301d7d7b33952"
+    },
+    {
+      "bytes": 2144733,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-direct.endpoint.json",
+      "sha256": "d8ae82e1a314daf791c53f4533e6d3f199f093d4a752aaab7e7a0982dc47de4e"
+    },
+    {
+      "bytes": 6245,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-direct.intent.json",
+      "sha256": "8e356503859e2db014620056e0664d1234147f5645f1b7ecc7e4c931dbd2278f"
+    },
+    {
+      "bytes": 1506,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-direct.request.json",
+      "sha256": "f1ff5591076a25688d4a7374a7cc399c3049ae6eb161f1a202d89315526b49d1"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 210,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-direct.stdout",
+      "sha256": "fe154dd61bd582012c3c7d4c7766aef0a5d30656001f621549b67cb716a4df68"
+    },
+    {
+      "bytes": 7204,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-direct.trial.json",
+      "sha256": "3c4947bdd148628f29f8977021e6739823a8db67ee1cb61385b6dcdb00f0e07d"
+    },
+    {
+      "bytes": 442,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-direct.worker.json",
+      "sha256": "9d2a0b1ea3ec0eea9f78f9ff501f25291aed2c746524d9f2529419fd12705f52"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-gradual.activity.json",
+      "sha256": "a5d6f463d72a1eea4b2c40e5565d4347a095d6776b4a115a8284302d4d702183"
+    },
+    {
+      "bytes": 55247,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-gradual.cost.json",
+      "sha256": "503d66996f54f47e8e33df30cda5cad752b88a9574dc28131f281b14faca3017"
+    },
+    {
+      "bytes": 2112861,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-gradual.endpoint.json",
+      "sha256": "a7c207af0b8aa6d81c3e04bdaec1871f40b55937c97467e68f918501da2928c7"
+    },
+    {
+      "bytes": 6333,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-gradual.intent.json",
+      "sha256": "8270d1b4d7ce984a168514e1cf61fab87fc2f8a6c59184c49d1818fc9c6d4441"
+    },
+    {
+      "bytes": 1510,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-gradual.request.json",
+      "sha256": "d979bf802b9287f2b99590cb66fd1d43ba78056dcc980a50ae5e7f8cd08d6da1"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-gradual.stdout",
+      "sha256": "e0f4ca57c9c92e71398f6e423aa1c400856b7a1ceb8ab7ce4d2c72c42e9a1e4d"
+    },
+    {
+      "bytes": 7297,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-gradual.trial.json",
+      "sha256": "5182708a70881c467e88b7bd4e10f70ad248297705b1886bd99e2dc1cde1fa75"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-profile-gpup-extension-irregular-32768-0-repaired-gradual.worker.json",
+      "sha256": "e09bca02851ab088ee65cb89b808ae5adbc3d124b7fcce67d25f6bc226478ab5"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-direct.activity.json",
+      "sha256": "ad943a4f504429d9d376e37be9a66e3b2e7a2ec6adc4bd551331dbdd9af32ee7"
+    },
+    {
+      "bytes": 3227,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-direct.endpoint.json",
+      "sha256": "1f6285f701fb64059284f0d5ff9f62bd8d0d5daa9a569a37879af08f2ef15000"
+    },
+    {
+      "bytes": 6216,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-direct.intent.json",
+      "sha256": "71fec8ec95c34ff46ed3783ee58be07ef1072b1b1594cba0fa1bd3cac7af5489"
+    },
+    {
+      "bytes": 1332,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-direct.request.json",
+      "sha256": "c2f35c53c233682f2e8124162c204a8f457f772a8a7d6921a47fb1a844aafd80"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-direct.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 6973,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-direct.trial.json",
+      "sha256": "d5e017ff94ef04ea4ddaab29d9e560516b5eaa6964ca209fbd2eb832f783ab1f"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-direct.worker.json",
+      "sha256": "1f2414dab7148c95333faa596ae31380d458b5ce95185300c0e3c212b774c659"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-gradual.activity.json",
+      "sha256": "df463f1095afb3871b5fa39186dad212ddb9b2d962905d29a8e518be14364251"
+    },
+    {
+      "bytes": 3411,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-gradual.endpoint.json",
+      "sha256": "d2a6b5206f7e1d121a4ca1c9764f9eb71bfd30681339a518984cbd315b57345c"
+    },
+    {
+      "bytes": 6307,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-gradual.intent.json",
+      "sha256": "0825b3ac824ca35d507a25fbdb55514e9f04a95b02e9de2feae9037c6b14fe4a"
+    },
+    {
+      "bytes": 1335,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-gradual.request.json",
+      "sha256": "dd32f9a51cfa392502b54d04a21bd880619a097ed3e980bd83a76c43b1d69396"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-gradual.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7068,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-gradual.trial.json",
+      "sha256": "4430d27f41ee27a7d4fb92cd028daec02b18b96374489219247018ac3f8a9459"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-baseline-gradual.worker.json",
+      "sha256": "b1684c13d4dd610e0f1c70d5a3f7a0ab15260aeae3dcc66df46855003e698a27"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-direct.activity.json",
+      "sha256": "cd48d47ba91003a4cec36a94793e76bb1e059617db9a41d44ded93de0a608228"
+    },
+    {
+      "bytes": 3227,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-direct.endpoint.json",
+      "sha256": "30622372b1bbc7c4e5a8bf99a75ae090a3f02679e20b34162ae44c35044e5720"
+    },
+    {
+      "bytes": 6216,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-direct.intent.json",
+      "sha256": "9be4ffdc8a626969e162e1b00d8fd51dcb3aa2e1375e1db417cd38351b617efb"
+    },
+    {
+      "bytes": 1323,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-direct.request.json",
+      "sha256": "96d98401fcaf9761f0b28852bce0a5b831e403b43c7f7ef0ae50115838b992c9"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-direct.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 6971,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-direct.trial.json",
+      "sha256": "c364892e74292e5cbfbafeb1e222bb46393a436be8bc3c4a53454d36648d79b9"
+    },
+    {
+      "bytes": 441,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-direct.worker.json",
+      "sha256": "5eb5deb73c19cbfbd7f891c4236b8bfc8417554309d2ebe194e897a6ca03dd9d"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-gradual.activity.json",
+      "sha256": "268a4dbf055cd438d7f741e6b3670886a30abaffd904855c82088a3c14d4eea1"
+    },
+    {
+      "bytes": 3411,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-gradual.endpoint.json",
+      "sha256": "0304252bed2a559d38c4bfe3d894884ea383e732475ed9deb502122c075d392d"
+    },
+    {
+      "bytes": 6306,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-gradual.intent.json",
+      "sha256": "9c8421067ceebe7a908cf6f3644550be8bc04bb74feb6f0ff1ec3b2832c6f259"
+    },
+    {
+      "bytes": 1326,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-gradual.request.json",
+      "sha256": "91864245feb984333ef106e00c9bb062831b96ec8877fb1c3a11c5527f6776ad"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-gradual.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7067,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-gradual.trial.json",
+      "sha256": "5abbbf957cd6f231de980ef375963a128dc71ca7d361d73e2e2c91d7c1811272"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-0-repaired-gradual.worker.json",
+      "sha256": "6a934bc26c9e445588028de5f766ec6604c8becc6d9599ab5e7559a1dee0f179"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-direct.activity.json",
+      "sha256": "0c0bf4689577ab93019f12a6e098bef54adeec5dc41d157b168b7aa0c056f13c"
+    },
+    {
+      "bytes": 3227,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-direct.endpoint.json",
+      "sha256": "30622372b1bbc7c4e5a8bf99a75ae090a3f02679e20b34162ae44c35044e5720"
+    },
+    {
+      "bytes": 6218,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-direct.intent.json",
+      "sha256": "f37a040d86dcb61b525e0cf400f4fe4f4d941093f135d57478ab73598c4b655b"
+    },
+    {
+      "bytes": 1332,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-direct.request.json",
+      "sha256": "4028fa188e33d0365eac081324b9c5e75964421939e8128c763edb85f4339c4c"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-direct.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 6975,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-direct.trial.json",
+      "sha256": "873cbd4cfd8ddcccff667c66aef9da55c40b32d551cffcc2fcfd02092c531c10"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-direct.worker.json",
+      "sha256": "54c930d01437401e8be8210f1222de004bd85c6b125e65473e01d9d59f25e6bc"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-gradual.activity.json",
+      "sha256": "68643c40b6f265c7e6c247a542adf94fb8432d5e119c4fcbf4ccc4acbe130302"
+    },
+    {
+      "bytes": 3411,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-gradual.endpoint.json",
+      "sha256": "0304252bed2a559d38c4bfe3d894884ea383e732475ed9deb502122c075d392d"
+    },
+    {
+      "bytes": 6307,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-gradual.intent.json",
+      "sha256": "1b9832c671ed2b45a64fa61261cac531a6e34d2aa73a5c5c8b785f98857150e5"
+    },
+    {
+      "bytes": 1335,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-gradual.request.json",
+      "sha256": "cea989a61126ff76d5884619c056ad93c3a4064a7d9febb792e7d40e41336b9b"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-gradual.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7068,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-gradual.trial.json",
+      "sha256": "3bfa3aff110cc7c4177ed236ddf8c63558309d0710b7a673430a0db53d495a33"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-baseline-gradual.worker.json",
+      "sha256": "0fdd5bae2235614b17dab875680d5516cadb2fe6003e4c7c70614e6a9e2f9c3b"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-direct.activity.json",
+      "sha256": "019ed453e6c4766f57658e93429dd14796557058ddf4a5bc4a5d4a0af6fca653"
+    },
+    {
+      "bytes": 3227,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-direct.endpoint.json",
+      "sha256": "30622372b1bbc7c4e5a8bf99a75ae090a3f02679e20b34162ae44c35044e5720"
+    },
+    {
+      "bytes": 6216,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-direct.intent.json",
+      "sha256": "ee064cc8133eb619e55f650a57f5338e1448774afd2e2e991231ac89bd455d0e"
+    },
+    {
+      "bytes": 1323,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-direct.request.json",
+      "sha256": "d7ac1e084d61f8b2323f95f9b132e336eedc7941b8362432ab09e33dfea71d63"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-direct.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 6971,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-direct.trial.json",
+      "sha256": "84800c4eccf82750eb5be7f89ce2a682d8273a3d51c9175aa1d2a247e10a35fe"
+    },
+    {
+      "bytes": 441,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-direct.worker.json",
+      "sha256": "7c5aad73c3ed3a9bd7fae3791c2d49ca18ea2fe0ddf45ac7dcf2697c59843ba6"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-gradual.activity.json",
+      "sha256": "65485a4a994150cfb9e2d1d861dca989afd0a49b1a5dff33a2d6acda84031908"
+    },
+    {
+      "bytes": 3411,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-gradual.endpoint.json",
+      "sha256": "0304252bed2a559d38c4bfe3d894884ea383e732475ed9deb502122c075d392d"
+    },
+    {
+      "bytes": 6306,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-gradual.intent.json",
+      "sha256": "a568a3497e43eda095b77639cb553161c217b388b6dad35ffea72a782be4f607"
+    },
+    {
+      "bytes": 1326,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-gradual.request.json",
+      "sha256": "3921324db124b13b5be8a677a4cde2ff43eb234b798163836185cc489c570ef9"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-gradual.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7067,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-gradual.trial.json",
+      "sha256": "d6bcf8c16104c1769f226df5eb93026820f108b9c5acc98f846fa7f8b3804508"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-1-repaired-gradual.worker.json",
+      "sha256": "f36dc4bc195fec56e8fc95ae6523a47ce280bcd0e4dfaaf99bd17974af3e35cf"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-direct.activity.json",
+      "sha256": "f3bf977a6aa4c046655e3679d91a88a52143d343bd8a7b6dca6a967ed8ec3e59"
+    },
+    {
+      "bytes": 3227,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-direct.endpoint.json",
+      "sha256": "30622372b1bbc7c4e5a8bf99a75ae090a3f02679e20b34162ae44c35044e5720"
+    },
+    {
+      "bytes": 6217,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-direct.intent.json",
+      "sha256": "c4315aa54b4ad8802ccecb1963015c440f73168447fc4b11d3f5e9631b99ed09"
+    },
+    {
+      "bytes": 1332,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-direct.request.json",
+      "sha256": "03c12d01b609ebb6961680a11131939f9eec0099ab4b908a7ce92c606d3fa254"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-direct.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 6974,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-direct.trial.json",
+      "sha256": "558f951058ed80090ebdf37bf5128e50f9c19db0679b7b276e919cf5790d755f"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-direct.worker.json",
+      "sha256": "b4d450854fe137b50383ed682e444bccb983ae0f9843ed6823944f709fd14512"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-gradual.activity.json",
+      "sha256": "9447f2b2d7f2904d64fb6bb69a7174b9dd5bb120ba34cc50b9ed496568dbc6aa"
+    },
+    {
+      "bytes": 3411,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-gradual.endpoint.json",
+      "sha256": "0304252bed2a559d38c4bfe3d894884ea383e732475ed9deb502122c075d392d"
+    },
+    {
+      "bytes": 6307,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-gradual.intent.json",
+      "sha256": "90184ec0535e72496b53cf75e9be9ada08bad66a514432872bdfa53f131ba8bb"
+    },
+    {
+      "bytes": 1335,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-gradual.request.json",
+      "sha256": "24ab0080e837f2f40fdc57ad8b8e874ea9c0d5c74e3133520baf4b133859cf27"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-gradual.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7068,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-gradual.trial.json",
+      "sha256": "a95eda24224db2bf7b63d68c3a3432e90492965482180cc35f2cd552d64557af"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-baseline-gradual.worker.json",
+      "sha256": "e7cb8cc2d8c69c52004bad5aabf211c5ef31750ac1f423ff1e3f8e47a871fe06"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-direct.activity.json",
+      "sha256": "90a4181ace117eb7e55656e9c7c1cc55088cbf0fdcfca6596b6885611c694dce"
+    },
+    {
+      "bytes": 3227,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-direct.endpoint.json",
+      "sha256": "30622372b1bbc7c4e5a8bf99a75ae090a3f02679e20b34162ae44c35044e5720"
+    },
+    {
+      "bytes": 6215,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-direct.intent.json",
+      "sha256": "0957056f2658441f099cc86052061f5e3b2e28596b77ab48cafd6a549e8c88b4"
+    },
+    {
+      "bytes": 1323,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-direct.request.json",
+      "sha256": "74b18ce8543ad698bfd8e8242c39d8168806dc514a01bf6a32011824023725d2"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-direct.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 6971,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-direct.trial.json",
+      "sha256": "6888280d07208d98d51e4acaf14ebda569f2ba2384497030388d5f08a9974188"
+    },
+    {
+      "bytes": 441,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-direct.worker.json",
+      "sha256": "41cab1edf3f7ed18142b02baa895e4a5f52287ca1b04f9c10eceb82702bc9625"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-gradual.activity.json",
+      "sha256": "b5c9f5f77f1758a25414c23e9a7f536b793329f2b57b3608d3166872b18dbf9a"
+    },
+    {
+      "bytes": 3411,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-gradual.endpoint.json",
+      "sha256": "0304252bed2a559d38c4bfe3d894884ea383e732475ed9deb502122c075d392d"
+    },
+    {
+      "bytes": 6306,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-gradual.intent.json",
+      "sha256": "8e1d3dac14dedb6ccac135bee42c8637faf77755661fda1c4c4a8b7dd6f06844"
+    },
+    {
+      "bytes": 1326,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-gradual.request.json",
+      "sha256": "6302cb6a74b3a6e748fa6d14da878299e213ff318c07f8539a6c80c4372ae86a"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 160,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-gradual.stdout",
+      "sha256": "924269b3243359577ce1b7e9d9bf36c4698773fd0389242ea52ee5f77c9e0908"
+    },
+    {
+      "bytes": 7067,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-gradual.trial.json",
+      "sha256": "6918fecdd3a5dc2b8d932c98cecdc969018f59927d72cfab79e1d13cc9b57860"
+    },
+    {
+      "bytes": 440,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-development-small-4-2-repaired-gradual.worker.json",
+      "sha256": "17cacbc0a09097b0889b0885cc3c6a7a13ef4bb0fe0f3e5b32fc2d9f2693bc70"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-direct.activity.json",
+      "sha256": "0a8574d88c7cdf89a1187cea07c3872e7fc3d49ab44c6db6dd1afac1d2b6e3eb"
+    },
+    {
+      "bytes": 2144431,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-direct.endpoint.json",
+      "sha256": "3bcd95c30a28fb1905fe01fdd207652266d117508c400d31a75aca0f627d76fa"
+    },
+    {
+      "bytes": 6241,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-direct.intent.json",
+      "sha256": "636851b05ec5407a78edffd03f09e5fc2a8ecd732f66e44e7d42fa8463947980"
+    },
+    {
+      "bytes": 1350,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-direct.request.json",
+      "sha256": "5f6162b9abdbc38a1ab0240b5f504c50fef2f31072fa1e10a9e7fffc029720a8"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 210,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-direct.stdout",
+      "sha256": "fe154dd61bd582012c3c7d4c7766aef0a5d30656001f621549b67cb716a4df68"
+    },
+    {
+      "bytes": 7025,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-direct.trial.json",
+      "sha256": "3bb5c38c7454bbc9e1d5abefa50df33b13b11ee922189805fdb9e676f439270d"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-direct.worker.json",
+      "sha256": "0287158ac0cf1ee6803a7a13270734f49434697c20d8eeb4b791437affa71376"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-gradual.activity.json",
+      "sha256": "cb98ccb7adc17e9c0fc05ec06c5bf4caad6316848a79cd002eb27b40b6407cc1"
+    },
+    {
+      "bytes": 2112532,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-gradual.endpoint.json",
+      "sha256": "7f8f348b4d831128816479e91504dcf13c11f491f1215f7003d4e414c25985c5"
+    },
+    {
+      "bytes": 6330,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-gradual.intent.json",
+      "sha256": "0ef12a8d7873dc0bacddd5baaf5f1ab240e10bf9e50e246bffc8d6452448444e"
+    },
+    {
+      "bytes": 1353,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-gradual.request.json",
+      "sha256": "ede534891ddb9563fc73d75e0a7582cee6522f944c8c77941ac8faa473a94275"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-gradual.stdout",
+      "sha256": "e0f4ca57c9c92e71398f6e423aa1c400856b7a1ceb8ab7ce4d2c72c42e9a1e4d"
+    },
+    {
+      "bytes": 7118,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-gradual.trial.json",
+      "sha256": "b16c49941f051866afbc643e99cf5a479efb847550b7ffbf0e2a590a2dcb508e"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-baseline-gradual.worker.json",
+      "sha256": "23c1e18a1a919e393592e186ba109568f2aeb938ae6643d3d52a4c8702563627"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-direct.activity.json",
+      "sha256": "4fbed049f63f3af39aaa3215cd0a51d4832e5945cfe7af0aada75169ad4dcec5"
+    },
+    {
+      "bytes": 2144431,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-direct.endpoint.json",
+      "sha256": "ea2ecd4257d50d60356df9afc963623df6d561f76d302a9c471c5fe9114988d1"
+    },
+    {
+      "bytes": 6241,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-direct.intent.json",
+      "sha256": "f3280f190be827946841e5dec20587432db53db19cd1dd2385e2b1c8583bc0b0"
+    },
+    {
+      "bytes": 1341,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-direct.request.json",
+      "sha256": "a38db0bab2f7e43aeba1570d46b36bd166242a432c0749c488e7fcd75a0e4706"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 210,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-direct.stdout",
+      "sha256": "fe154dd61bd582012c3c7d4c7766aef0a5d30656001f621549b67cb716a4df68"
+    },
+    {
+      "bytes": 7025,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-direct.trial.json",
+      "sha256": "a6e62c8a3207016235d01658258d362d7fe2f673864592c7a713663c1eedbfbd"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-direct.worker.json",
+      "sha256": "bd6e1ccc81a27c1d51d77115c910b87a7a476c971739b33981fa1afcec1f4baa"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-gradual.activity.json",
+      "sha256": "dea424fdfe0c6b6b4c7c95aef4e8a247e0810dda864d67cda0b1a71fc59cf265"
+    },
+    {
+      "bytes": 2112532,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-gradual.endpoint.json",
+      "sha256": "92eee21bfae558559d4ffa4c2987c7e83ee3898df4f1f80f8e64a1a0e4374135"
+    },
+    {
+      "bytes": 6329,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-gradual.intent.json",
+      "sha256": "98e6f13eab168f0b2984f0d8de37621673e03ec51c9add7ad989358030a6d658"
+    },
+    {
+      "bytes": 1344,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-gradual.request.json",
+      "sha256": "65e1a4f57350624ef30485251dcbddcdd47785950465acc4b843713ad6d18a1b"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-gradual.stdout",
+      "sha256": "e0f4ca57c9c92e71398f6e423aa1c400856b7a1ceb8ab7ce4d2c72c42e9a1e4d"
+    },
+    {
+      "bytes": 7117,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-gradual.trial.json",
+      "sha256": "457d0e616809bdf79320b208ba0317626762d681d30a3ec5fdd109130d258f8e"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-0-repaired-gradual.worker.json",
+      "sha256": "e1fcf1f920fea97e5d726f94b3dff1620ce4d77f4d073f802345910fc165d48a"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-direct.activity.json",
+      "sha256": "d51849eba5e010d340344509f3f13794188b04b9bd89a90f28ccb34c2e61c984"
+    },
+    {
+      "bytes": 2144431,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-direct.endpoint.json",
+      "sha256": "5cc9c649646521a28ffd322a21a5aa0bc6d670d00c105e9e45fa42b40db45530"
+    },
+    {
+      "bytes": 6242,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-direct.intent.json",
+      "sha256": "9ff01c687d3014d76fc7ce03e9ea466ec666f8e0ede48d6a295f85ca5f0502ee"
+    },
+    {
+      "bytes": 1350,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-direct.request.json",
+      "sha256": "ee2356c6b6a641c1728f4d6fddd2e8100ce5697d79c7779b4c16a47960491b12"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 210,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-direct.stdout",
+      "sha256": "fe154dd61bd582012c3c7d4c7766aef0a5d30656001f621549b67cb716a4df68"
+    },
+    {
+      "bytes": 7026,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-direct.trial.json",
+      "sha256": "8570f7de240cfe61f782d59d33668813d07b6dd636dfb4bdf2a08c1652478da0"
+    },
+    {
+      "bytes": 442,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-direct.worker.json",
+      "sha256": "5e24be4baa2a01050327f29df48a8f3692b44fdb9c6f7881da472e4bfd7cc2de"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-gradual.activity.json",
+      "sha256": "aaa4b2eee3b07729bb462133f7ebb5d4fc3e6b2472f1bca894fea66bc8acbe2d"
+    },
+    {
+      "bytes": 2112532,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-gradual.endpoint.json",
+      "sha256": "b4e4672667a232fb74be63b6f525abf11cb1f6721cf2dadd89126b3ac46e2756"
+    },
+    {
+      "bytes": 6330,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-gradual.intent.json",
+      "sha256": "68671d4fce717ed01bf27adc2750cc44277fa022e1f9d125d807f8492afb3408"
+    },
+    {
+      "bytes": 1353,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-gradual.request.json",
+      "sha256": "86f0b844b103f79739b074a592dae9245632f00f9a3e8d361ee04bd9af8d6133"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-gradual.stdout",
+      "sha256": "e0f4ca57c9c92e71398f6e423aa1c400856b7a1ceb8ab7ce4d2c72c42e9a1e4d"
+    },
+    {
+      "bytes": 7118,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-gradual.trial.json",
+      "sha256": "99176159b4426e7399eecc586f4bbba6905baaeb6ed75a28049ac7e4b3068887"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-baseline-gradual.worker.json",
+      "sha256": "f649350d525d0baef2c0abf80efefe8352af3c43b2850463bd2f8c9ab1141289"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-direct.activity.json",
+      "sha256": "03886ae8a0541ec8878dde7b7097fab01814946e2a8695bf273439699ac02f1c"
+    },
+    {
+      "bytes": 2144431,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-direct.endpoint.json",
+      "sha256": "5cc9c649646521a28ffd322a21a5aa0bc6d670d00c105e9e45fa42b40db45530"
+    },
+    {
+      "bytes": 6240,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-direct.intent.json",
+      "sha256": "15130c059c22abab9526d85fcdaf0773db8202e6ef0b81c52b1be459932661a1"
+    },
+    {
+      "bytes": 1341,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-direct.request.json",
+      "sha256": "ecf429054b9ff556ac99f41258efced4ae68a9dacc2b436c094aafcd58c9db6c"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 210,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-direct.stdout",
+      "sha256": "fe154dd61bd582012c3c7d4c7766aef0a5d30656001f621549b67cb716a4df68"
+    },
+    {
+      "bytes": 7024,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-direct.trial.json",
+      "sha256": "8f7fa7ed2d80a329a1f15a44f418d35a0c5d55976e8f45a92cbb71c0ea111414"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-direct.worker.json",
+      "sha256": "3cbad7c041523ee17e1ca844535fb0f5d65832b1d8826223e94775df90d96148"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-gradual.activity.json",
+      "sha256": "3289c674179394c54ceb7a82d87f37fe6bccd0c3405d4c620578273a39cfad57"
+    },
+    {
+      "bytes": 2112532,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-gradual.endpoint.json",
+      "sha256": "ac95a425856839007e0780426af3f517d64710885bb74f6e6c68648ad1ab3fd8"
+    },
+    {
+      "bytes": 6329,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-gradual.intent.json",
+      "sha256": "a97df82df516c34368e7d76ff5aa40828b9729ef74c52d7363fe956ccc237b0c"
+    },
+    {
+      "bytes": 1344,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-gradual.request.json",
+      "sha256": "57b84a91cb70072a09275abfe8f097ce670debcd26359011a7ec740bdd866525"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-gradual.stdout",
+      "sha256": "e0f4ca57c9c92e71398f6e423aa1c400856b7a1ceb8ab7ce4d2c72c42e9a1e4d"
+    },
+    {
+      "bytes": 7117,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-gradual.trial.json",
+      "sha256": "1473c9acbd2753f803586e0017ec4d33e4fa6245e8bb69a6c3a4b47efec8408e"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-1-repaired-gradual.worker.json",
+      "sha256": "bac0f8513d9e90bcac43a542abb8be843002ecd008419d1c81e9faa22dcf99a6"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-direct.activity.json",
+      "sha256": "844c377afac645c682124c697060ba41700c6aeef261f2fab28f23d49390e125"
+    },
+    {
+      "bytes": 2144431,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-direct.endpoint.json",
+      "sha256": "09207daf0f32d228d325ba66360e4424d1d4822a1a0550efde17485f54ad2928"
+    },
+    {
+      "bytes": 6241,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-direct.intent.json",
+      "sha256": "92625f9311b29fecbb5f0a6c208436a109f96f43a8cd5f0f7111f1d0b96d39a7"
+    },
+    {
+      "bytes": 1350,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-direct.request.json",
+      "sha256": "988ccc784c96626202128f37daa5d2b7258be422d0ec69c163a10f923d850bf7"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 210,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-direct.stdout",
+      "sha256": "fe154dd61bd582012c3c7d4c7766aef0a5d30656001f621549b67cb716a4df68"
+    },
+    {
+      "bytes": 7025,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-direct.trial.json",
+      "sha256": "a5d13f0fba1c16aa360b999af786702a0c9baab9e594c6d8b11a4acf90de44a4"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-direct.worker.json",
+      "sha256": "48eddb1c7cec1c406c33f90aff1081790852afec70cc2ebec46f01b869becffa"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-gradual.activity.json",
+      "sha256": "d4082ebe85ff7917a1a7648c765df3ee0f8bc118906fc563e905be39eac7f69e"
+    },
+    {
+      "bytes": 2112532,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-gradual.endpoint.json",
+      "sha256": "266e8db011b48c99159e41bd59081a794dae227550494a0c1e3d9ac15494b587"
+    },
+    {
+      "bytes": 6330,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-gradual.intent.json",
+      "sha256": "9e819b8724fb476d98088cbc87f809a84442c5772868bf8325fe33e0129322ac"
+    },
+    {
+      "bytes": 1353,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-gradual.request.json",
+      "sha256": "54b4045f45a2e3bef453b3091ac9ddf2ec81476bb15a12ab9cc436d74a821ddb"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-gradual.stdout",
+      "sha256": "e0f4ca57c9c92e71398f6e423aa1c400856b7a1ceb8ab7ce4d2c72c42e9a1e4d"
+    },
+    {
+      "bytes": 7118,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-gradual.trial.json",
+      "sha256": "7dafc6c8cf33fd55eb3a22943fada424e39ed93bfbea705535214f389c31a917"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-baseline-gradual.worker.json",
+      "sha256": "b872c94a552f41b3ac448b8baa2d0fd612f16863f6821b69f8776620682b83df"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-direct.activity.json",
+      "sha256": "6c8bfd41f4f2234b3e5a00c3eded3ce13e56e5e41685103d6c32706d4541e8fc"
+    },
+    {
+      "bytes": 2144431,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-direct.endpoint.json",
+      "sha256": "737dd027b6984717e576eee382d3219036d44bdd7bb44a3f8242d64f8b4a253e"
+    },
+    {
+      "bytes": 6241,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-direct.intent.json",
+      "sha256": "5849b24adf26385f1b92b52de1bca6e6d3f552358524519da41b0c6b2dc4e2ce"
+    },
+    {
+      "bytes": 1341,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-direct.request.json",
+      "sha256": "5b564adcc01abd99967e0d6202a140ca31575b6b5fd7d045e3a06f00049233c6"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-direct.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 210,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-direct.stdout",
+      "sha256": "fe154dd61bd582012c3c7d4c7766aef0a5d30656001f621549b67cb716a4df68"
+    },
+    {
+      "bytes": 7025,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-direct.trial.json",
+      "sha256": "0fe346d80bfb5e9e96c3b3c2be6edeb2442331d2f8349264ebfce00d9300729f"
+    },
+    {
+      "bytes": 442,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-direct.worker.json",
+      "sha256": "1a5d20392e79dc70a6a672bac54afb414681b976cc8bf99daf48c7579920bf00"
+    },
+    {
+      "bytes": 167,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-gradual.activity.json",
+      "sha256": "a75b84b6df02bfbec766c0ace40db820aaad8ad6ddf6ccb20223c0788c042628"
+    },
+    {
+      "bytes": 2112532,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-gradual.endpoint.json",
+      "sha256": "dc69eec8dda4c46b471b855ce704ecd623d6921a0587cd4a457b21a80969b419"
+    },
+    {
+      "bytes": 6329,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-gradual.intent.json",
+      "sha256": "ba29875fcdea9980af3979955262529431574776e9fa02a7996f3539266471ce"
+    },
+    {
+      "bytes": 1344,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-gradual.request.json",
+      "sha256": "0f03bd711bf58224d152864c5eb894b09998712ffe26d7d0d388a371e7ff2af8"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-gradual.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 229,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-gradual.stdout",
+      "sha256": "e0f4ca57c9c92e71398f6e423aa1c400856b7a1ceb8ab7ce4d2c72c42e9a1e4d"
+    },
+    {
+      "bytes": 7117,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-gradual.trial.json",
+      "sha256": "200bde8facef65b2ed706a4af8cdf541ebce43995d01453ebe2eed9fd9897f04"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-v1/gpup-adaptive-cost-v1-timing-gpup-extension-irregular-32768-2-repaired-gradual.worker.json",
+      "sha256": "15cb98b44522398b9ce50fc86c0d4886d498b4e1ea3db0d1675fa9da8fffaf9e"
+    },
+    {
+      "bytes": 242,
+      "path": "artifacts/gpup-adaptive-cost-v1/gradual.adaptive.json",
+      "sha256": "c965f7e48bfb3b6d315cc0a9295120a2b937b89bccd85bdfb37d4673cdaad42e"
+    },
+    {
+      "bytes": 6625762,
+      "path": "artifacts/gpup-adaptive-cost-v1/ledger.jsonl",
+      "sha256": "cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6"
+    },
+    {
+      "bytes": 283,
+      "path": "artifacts/gpup-adaptive-cost-v1/lp-settings.json",
+      "sha256": "39ae09c72880978d20b83fbb996ce35223c2ef61e68c97a5ae604a1aa1056a57"
+    },
+    {
+      "bytes": 83448,
+      "path": "artifacts/gpup-adaptive-cost-v1/lp_pdhg.cubin",
+      "sha256": "6afafffde0d66e951bab2aa9bbed5a2aa2ed9fc94bf6677895fc1c991676c62f"
+    },
+    {
+      "bytes": 239904,
+      "path": "artifacts/gpup-adaptive-cost-v1/lp_pdhg_precision.cubin",
+      "sha256": "2780f58bf7c6fa506db8ebc7911fa71a512b6417633215820be34d409e702e25"
+    },
+    {
+      "bytes": 275008,
+      "path": "artifacts/gpup-adaptive-cost-v1/lp_pdhg_tuned.cubin",
+      "sha256": "5ac4da194cfd016a7fb08400f21684236f6397b71cec33ead300d47eed563ccb"
+    },
+    {
+      "bytes": 8385464,
+      "path": "artifacts/gpup-adaptive-cost-v1/optimizer",
+      "sha256": "bbcceb24b72637dc573427eb538cc16518f78d9b7e030da124f03cb39089c9b1"
+    },
+    {
+      "bytes": 8386344,
+      "path": "artifacts/gpup-adaptive-cost-v1/optimizer-baseline",
+      "sha256": "cbb15853963ef61b2ed30f57960cad9aae9174e224cea6181876f03b981be1a6"
+    },
+    {
+      "bytes": 100863,
+      "path": "artifacts/gpup-adaptive-cost-v1/report.json",
+      "sha256": "5da5c8eaa98c94a8bafcfc6d1aacf0e6390d1351e6100060e06d1ff20ddaac1c"
+    },
+    {
+      "bytes": 84976,
+      "path": "artifacts/gpup-adaptive-cost-v1/schedule_eval.cubin",
+      "sha256": "90c2bee5aaeb6561aac71f8585e4d38c303bcb560532e2c1e96b5c09a831cfea"
+    },
+    {
+      "bytes": 176,
+      "path": "artifacts/gpup-adaptive-cost-v1/solve.json",
+      "sha256": "982730ebefbef2c8c138cf4d16c994f538ce4e3d9a473b4146526673f9043e84"
+    },
+    {
+      "bytes": 14602240,
+      "path": "artifacts/gpup-adaptive-cost-v1/source.tar",
+      "sha256": "6e3e9cc76a0be51af8bef8f74f8f20387cc712569721fedc8e07fbf2023d2680"
+    },
+    {
+      "bytes": 196,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/baseline-build.cpu.json",
+      "sha256": "df963ce8af8c3f4762b6b5f9d6c456dcc18371a6f57c5cdc76dbb387eca35d26"
+    },
+    {
+      "bytes": 1337,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/baseline-build.log",
+      "sha256": "e5c43965e5326d217c6b3175fcf94a79b173bc22865ab6cb9f4e7d52b204762b"
+    },
+    {
+      "bytes": 205,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/budget.json",
+      "sha256": "189853a49e8bcf3e626a61f8966500cfbb33018402da00f7022853585153e600"
+    },
+    {
+      "bytes": 240,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/clean-checkout-budget-02.cpu.json",
+      "sha256": "9917641b9a705838614440266379e9d6aecf183a1ee361d45e2cabba8fac93bf"
+    },
+    {
+      "bytes": 102,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/clean-checkout-budget-02.log",
+      "sha256": "0c9884e10ef8e9298946924551116b38d5432ddfe27fe5cf8d095c6230a4c2d4"
+    },
+    {
+      "bytes": 239,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/clean-checkout-budget.cpu.json",
+      "sha256": "20d3a4d4ffac046d881aa0ee9e385ce01c5e11a49d39c30a8aae8c4356d8cf4a"
+    },
+    {
+      "bytes": 1544,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/clean-checkout-budget.log",
+      "sha256": "b5b42cd9cac506761df24cd8d652d335d104186742ac3857d658467652a33a87"
+    },
+    {
+      "bytes": 111,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/accumulation-fp32.execution.json",
+      "sha256": "73239baba5aa36cf09846904b0af87c05a4b4ce6f681bfb25275fc4c0e96bdc1"
+    },
+    {
+      "bytes": 190,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/accumulation-fp32.precision.json",
+      "sha256": "202ba806150639f08d1006769a19ae4c3e495b78b30381782066636882908da6"
+    },
+    {
+      "bytes": 138,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/adaptive-fp64.adaptive.json",
+      "sha256": "8c157fb9fab0cab5e170932f59b795a6e2245b2564d769fb0ee95007ba72d1e0"
+    },
+    {
+      "bytes": 111,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/adaptive-fp64.execution.json",
+      "sha256": "73239baba5aa36cf09846904b0af87c05a4b4ce6f681bfb25275fc4c0e96bdc1"
+    },
+    {
+      "bytes": 158,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/direct.adaptive.json",
+      "sha256": "cd7c42bfa4a657d174be76644f096fcd06645ab84766607debfd74f6f880dc66"
+    },
+    {
+      "bytes": 111,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/direct.execution.json",
+      "sha256": "73239baba5aa36cf09846904b0af87c05a4b4ce6f681bfb25275fc4c0e96bdc1"
+    },
+    {
+      "bytes": 137639,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-accumulation-fp32-baseline.json",
+      "sha256": "a3f133b9891155354f924c881861613d8debd7c638a0e2c775672f92cb0a098a"
+    },
+    {
+      "bytes": 137639,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-accumulation-fp32-repaired.json",
+      "sha256": "05a7ba4ae6581d6b1af039501d7508eb46ce7e067c64b79e38574b1b3263f35c"
+    },
+    {
+      "bytes": 137639,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-accumulation-fp32-replay.json",
+      "sha256": "a3f133b9891155354f924c881861613d8debd7c638a0e2c775672f92cb0a098a"
+    },
+    {
+      "bytes": 137947,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-adaptive-fp64-baseline.json",
+      "sha256": "6f333a0329d83327efdc1064f4b959672fb411c0186cb90a2be8a5c058295903"
+    },
+    {
+      "bytes": 137947,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-adaptive-fp64-repaired.json",
+      "sha256": "6f333a0329d83327efdc1064f4b959672fb411c0186cb90a2be8a5c058295903"
+    },
+    {
+      "bytes": 137947,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-adaptive-fp64-replay.json",
+      "sha256": "6f333a0329d83327efdc1064f4b959672fb411c0186cb90a2be8a5c058295903"
+    },
+    {
+      "bytes": 138041,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-direct-baseline.json",
+      "sha256": "2df43a0926b42d883e93af852a166ed96b689a5298eee20cd98e642518549813"
+    },
+    {
+      "bytes": 138041,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-direct-repaired.json",
+      "sha256": "2df43a0926b42d883e93af852a166ed96b689a5298eee20cd98e642518549813"
+    },
+    {
+      "bytes": 138041,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-direct-replay.json",
+      "sha256": "df25096a5130fe5cebc3982ab57a574c57dc962f9518aec1de18d8fa9af2942d"
+    },
+    {
+      "bytes": 138210,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-gradual-baseline.json",
+      "sha256": "0cf0796dbc68da75e9ab5a284e67943ba1618a858cd81eadb032ca88bfaebdd6"
+    },
+    {
+      "bytes": 138210,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-gradual-repaired.json",
+      "sha256": "2358a54eec0da19b2ae5092dc92732134fe95c9c58d2199c250e4c1e8729317a"
+    },
+    {
+      "bytes": 138210,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-gradual-replay.json",
+      "sha256": "2358a54eec0da19b2ae5092dc92732134fe95c9c58d2199c250e4c1e8729317a"
+    },
+    {
+      "bytes": 136292,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-tuned-fp64-baseline.json",
+      "sha256": "62be9f19c16c8fb3c2b5b2f99ebdc497c57bfcb65f800e53c156b658318f1104"
+    },
+    {
+      "bytes": 136292,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-tuned-fp64-repaired.json",
+      "sha256": "62be9f19c16c8fb3c2b5b2f99ebdc497c57bfcb65f800e53c156b658318f1104"
+    },
+    {
+      "bytes": 136292,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-irregular-2048-tuned-fp64-replay.json",
+      "sha256": "62be9f19c16c8fb3c2b5b2f99ebdc497c57bfcb65f800e53c156b658318f1104"
+    },
+    {
+      "bytes": 3214,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-accumulation-fp32-baseline.json",
+      "sha256": "5ceb9d1559074cb8d294f14b5802bf47d81492ec0b1a753def42b4eb09bcdb59"
+    },
+    {
+      "bytes": 3214,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-accumulation-fp32-repaired.json",
+      "sha256": "5ceb9d1559074cb8d294f14b5802bf47d81492ec0b1a753def42b4eb09bcdb59"
+    },
+    {
+      "bytes": 3214,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-accumulation-fp32-replay.json",
+      "sha256": "5ceb9d1559074cb8d294f14b5802bf47d81492ec0b1a753def42b4eb09bcdb59"
+    },
+    {
+      "bytes": 3165,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-adaptive-fp64-baseline.json",
+      "sha256": "e12ccd830540b08f33efad2757f4e7082f3140f491bb8e37b4076cc00f9fa16f"
+    },
+    {
+      "bytes": 3165,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-adaptive-fp64-repaired.json",
+      "sha256": "e12ccd830540b08f33efad2757f4e7082f3140f491bb8e37b4076cc00f9fa16f"
+    },
+    {
+      "bytes": 3165,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-adaptive-fp64-replay.json",
+      "sha256": "e12ccd830540b08f33efad2757f4e7082f3140f491bb8e37b4076cc00f9fa16f"
+    },
+    {
+      "bytes": 3225,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-direct-baseline.json",
+      "sha256": "91adf57abee95fec518ef6acbcea22fc57a12fc0c6e80d582c29096edecf3327"
+    },
+    {
+      "bytes": 3225,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-direct-repaired.json",
+      "sha256": "91adf57abee95fec518ef6acbcea22fc57a12fc0c6e80d582c29096edecf3327"
+    },
+    {
+      "bytes": 3225,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-direct-replay.json",
+      "sha256": "91adf57abee95fec518ef6acbcea22fc57a12fc0c6e80d582c29096edecf3327"
+    },
+    {
+      "bytes": 3409,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-gradual-baseline.json",
+      "sha256": "cf08533100770f4656f3dde3925994043e8d32ef4b5fc9e177fb98dbd19a71d0"
+    },
+    {
+      "bytes": 3409,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-gradual-repaired.json",
+      "sha256": "cf08533100770f4656f3dde3925994043e8d32ef4b5fc9e177fb98dbd19a71d0"
+    },
+    {
+      "bytes": 3409,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-gradual-replay.json",
+      "sha256": "cf08533100770f4656f3dde3925994043e8d32ef4b5fc9e177fb98dbd19a71d0"
+    },
+    {
+      "bytes": 2546,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-tuned-fp64-baseline.json",
+      "sha256": "0f9407d6115a785f6c2ab1e8e48600f828bac65a2b489c2dba9e729ab9e875ea"
+    },
+    {
+      "bytes": 2546,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-tuned-fp64-repaired.json",
+      "sha256": "0f9407d6115a785f6c2ab1e8e48600f828bac65a2b489c2dba9e729ab9e875ea"
+    },
+    {
+      "bytes": 2546,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-development-small-4-tuned-fp64-replay.json",
+      "sha256": "0f9407d6115a785f6c2ab1e8e48600f828bac65a2b489c2dba9e729ab9e875ea"
+    },
+    {
+      "bytes": 2237793,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-extension-irregular-32768-direct-baseline.json",
+      "sha256": "590e4f7045feda67f55ce284c9f32c340f825a3164b0cdf081db2c065045a2a1"
+    },
+    {
+      "bytes": 2237793,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-extension-irregular-32768-direct-repaired.json",
+      "sha256": "81ca9e6ddf344973813a735abdaf8ce3bf1185e490fa8fa040d23569565b3aba"
+    },
+    {
+      "bytes": 2237793,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-extension-irregular-32768-direct-replay.json",
+      "sha256": "839129645949056e05c098e9bb5600fbf5d540a7d83af70ec144da7b046caf8c"
+    },
+    {
+      "bytes": 2243255,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-extension-irregular-32768-gradual-baseline.json",
+      "sha256": "7e2b195683d2933ee51adb377eb9b7cc38ccff3a35c15ecaccb34f970943d3fa"
+    },
+    {
+      "bytes": 2243255,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-extension-irregular-32768-gradual-repaired.json",
+      "sha256": "1daedf4a75814516bc6cbdc48da23340f42eb75c37d87c5589f9fea0de2961c6"
+    },
+    {
+      "bytes": 2243255,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gpup-extension-irregular-32768-gradual-replay.json",
+      "sha256": "ce7c33510234b2851655b40739f18a9e63e1bca05c70209950eb96c2220bb0f0"
+    },
+    {
+      "bytes": 242,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gradual.adaptive.json",
+      "sha256": "c965f7e48bfb3b6d315cc0a9295120a2b937b89bccd85bdfb37d4673cdaad42e"
+    },
+    {
+      "bytes": 111,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/gradual.execution.json",
+      "sha256": "73239baba5aa36cf09846904b0af87c05a4b4ce6f681bfb25275fc4c0e96bdc1"
+    },
+    {
+      "bytes": 281,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/method.json",
+      "sha256": "344d7a583920bf499fccfd39eac353f9d40311aace49061ce7a88ae0291a2953"
+    },
+    {
+      "bytes": 11956,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/report.json",
+      "sha256": "9ea24306df3c7219e49374b3ea5ed9dbaa6db44fe1b6a078c20ca24f73ab4e26"
+    },
+    {
+      "bytes": 174,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/solve.json",
+      "sha256": "2914eb5f8832e5485c64cf9b89e9b24832da036ccbb8d1dad5ea39b9165b1d63"
+    },
+    {
+      "bytes": 111,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-1790677440604969318/tuned-fp64.execution.json",
+      "sha256": "73239baba5aa36cf09846904b0af87c05a4b4ce6f681bfb25275fc4c0e96bdc1"
+    },
+    {
+      "bytes": 11956,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cli-adaptive-cost.json",
+      "sha256": "9ea24306df3c7219e49374b3ea5ed9dbaa6db44fe1b6a078c20ca24f73ab4e26"
+    },
+    {
+      "bytes": 870,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/cpu-meter.py",
+      "sha256": "a49486388aa6ff93daa5df872b8ad7dbb495dd0f3091d6af3aedb2cbf9d6fe47"
+    },
+    {
+      "bytes": 320,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-build.cpu.json",
+      "sha256": "7dc2ea8573712844289a1b77ea06aa156723a5034aa69fdf665afcbf423a48c3"
+    },
+    {
+      "bytes": 659,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-build.log",
+      "sha256": "a984709cdbfd39a729cf57afd36ae96d86dae5977f08e8eb69c93d6aaaae02f1"
+    },
+    {
+      "bytes": 280,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-cli.cpu.json",
+      "sha256": "c4d0606f9a08e21e7d2a4d52b27eef4fa020e2bf37d8899515bacdf23dfe0d93"
+    },
+    {
+      "bytes": 482,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-cli.log",
+      "sha256": "36a4cd30da6786a504e4108dd4d0d5f52f4474f08fffb66abe5b742ca91983ed"
+    },
+    {
+      "bytes": 304,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-initcheck.cpu.json",
+      "sha256": "62d0b74f43fc695220fec0153561ccfce2e09f9dea4f2672d5a6d65a418608e7"
+    },
+    {
+      "bytes": 479,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-initcheck.log",
+      "sha256": "51aa9a1a3b2a4330eae1e9ba67ca516c35ec4709ef6d2d27fce79aec081bf11f"
+    },
+    {
+      "bytes": 291,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-memcheck.cpu.json",
+      "sha256": "2197788dff5ed82a4b9a12038632a7852bf655e0c68dd67af75b74cb6b89e42a"
+    },
+    {
+      "bytes": 480,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-memcheck.log",
+      "sha256": "26ddde5d1b4fc5c55e722aab7c7804a543de6094ab10ac179e32ce5ae7c2e9cf"
+    },
+    {
+      "bytes": 295,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-racecheck.cpu.json",
+      "sha256": "ceeb58e4fbeca48c4aeedcd2a2ab8dc7ef5cbcbf165bf7b68ca6e78df241e991"
+    },
+    {
+      "bytes": 483,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-racecheck.log",
+      "sha256": "8ae241f9ecc2f719af9a4aa598582f1b69d906d93f3d3a28daa814bdd4d3fbb7"
+    },
+    {
+      "bytes": 300,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-regular.cpu.json",
+      "sha256": "c9da4842071377dee8e5e8c5223edfd823ae8d516c4636ee164e80e7ad496486"
+    },
+    {
+      "bytes": 482,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-regular.log",
+      "sha256": "3919866eef08c0c92e1e5ef2b1b5de8ce207c8ecae56a86c778310d9b7c3abb9"
+    },
+    {
+      "bytes": 304,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-synccheck.cpu.json",
+      "sha256": "0a2454e088c125de7938485f11b06982762040d53b159ea538c67e9b6c00c597"
+    },
+    {
+      "bytes": 478,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/device-synccheck.log",
+      "sha256": "358f75e5a5aa9f6867875fba7e92222d6a69fd5ee1f1101d3934ff0975c0af9b"
+    },
+    {
+      "bytes": 391,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/final-audit.json",
+      "sha256": "d06fd91f0e4d58cb99598760f7b14eca8aa691d93628502641702db5f49d412d"
+    },
+    {
+      "bytes": 142,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/final-native.cpu.json",
+      "sha256": "65a25d5cc84da8e91350ae9d2196974d1a8c53448a8415508258b917d566e8f0"
+    },
+    {
+      "bytes": 73480,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/final-native.log",
+      "sha256": "6e03dbfbc96d6aa435d727390beb71c6db4ba6aa77c8d00fb38049e0ac666b37"
+    },
+    {
+      "bytes": 191,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/freeze.cpu.json",
+      "sha256": "11b2791c6be43987272a7f552d74eeb2ede10488dd679e0f700a1ce24f2236b8"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/freeze.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 334,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-cli.request.json",
+      "sha256": "d7336d5916383e2e078e89795343beb5dd8a79c23d3db3a0caa3071131d2df56"
+    },
+    {
+      "bytes": 174,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-cli.source.json",
+      "sha256": "41b8651ff0be80426350fab81737a7ff822174de6434e88f04b9e6d33368d83a"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-cli.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 107,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-cli.stdout",
+      "sha256": "83d2f37eb6ee16e5f2510c6c5fb4ec9663692c6001a8cf521f979339de06fb4e"
+    },
+    {
+      "bytes": 445,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-cli.worker.json",
+      "sha256": "a6c6b4847b235966801663b2955f42c0493c5072f5179460b4578ee966781388"
+    },
+    {
+      "bytes": 343,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-initcheck.request.json",
+      "sha256": "a373e82aafa8e0bce8ebf14a98a9ebf02e266a2f0909ef1b5dfbdd35bba101b8"
+    },
+    {
+      "bytes": 174,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-initcheck.source.json",
+      "sha256": "d89f16852ef5fcc515be8e8e1498261c6c1b00ab8d7b98fb6916abef4ae02641"
+    },
+    {
+      "bytes": 62,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-initcheck.stderr",
+      "sha256": "222a02ed477d249a21359df8cae975864a62d848f4739cadc5b00b6190a963c6"
+    },
+    {
+      "bytes": 364,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-initcheck.stdout",
+      "sha256": "8439d99a531fbf0a9be0efff80aca7444a09e4b0de06fdc111e2b33d0b6ab5da"
+    },
+    {
+      "bytes": 442,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-initcheck.worker.json",
+      "sha256": "c22a5e044a3c1712e1ba260374765053afac1c92b0d13f4e6ca8f839da84d858"
+    },
+    {
+      "bytes": 341,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-memcheck.request.json",
+      "sha256": "6b06a6e51022763ce723cf133d2f082b66ec093ebac1e0f9447b98bcd1f9fa3a"
+    },
+    {
+      "bytes": 174,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-memcheck.source.json",
+      "sha256": "c28190c000a06c85422c3341704eb3f43868d178e981a38db465518ed05f38af"
+    },
+    {
+      "bytes": 62,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-memcheck.stderr",
+      "sha256": "222a02ed477d249a21359df8cae975864a62d848f4739cadc5b00b6190a963c6"
+    },
+    {
+      "bytes": 364,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-memcheck.stdout",
+      "sha256": "0d7f33f95da39df606bf1428bd7436d219b081dc16f0707885ddad3732f6b29e"
+    },
+    {
+      "bytes": 443,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-memcheck.worker.json",
+      "sha256": "24d0aba8c8221633bb56a11e64ed34b9ce699076a8f6d7eca2dfa2927089530b"
+    },
+    {
+      "bytes": 343,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-racecheck.request.json",
+      "sha256": "d358de185f1d704dec375958cf374052e062e7c5887f1b903a306553cdedb567"
+    },
+    {
+      "bytes": 174,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-racecheck.source.json",
+      "sha256": "29e2803441b40ecaaa47afd29293ce9ea81f6fd8faeae1e562f097e23a2ffad5"
+    },
+    {
+      "bytes": 62,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-racecheck.stderr",
+      "sha256": "222a02ed477d249a21359df8cae975864a62d848f4739cadc5b00b6190a963c6"
+    },
+    {
+      "bytes": 403,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-racecheck.stdout",
+      "sha256": "81227f962157b09578d5ad816a498b845dfc19e7d8dce1b07ee034c03db3e724"
+    },
+    {
+      "bytes": 446,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-racecheck.worker.json",
+      "sha256": "a96113250455772da826e67a017907ca595f53e6cf07d841ecf74c9e83b43663"
+    },
+    {
+      "bytes": 339,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-regular.request.json",
+      "sha256": "0e60dacc8e2403b17d565ab0bfba718841c455f7398cd94124902da37c487884"
+    },
+    {
+      "bytes": 174,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-regular.source.json",
+      "sha256": "746623827edf1f0f7c47d4b8e9185ea611f5204adf8c6b09d0115f4169be9af2"
+    },
+    {
+      "bytes": 0,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-regular.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4647,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-regular.stdout",
+      "sha256": "b5c3f53a7f96b4cea96e913092e1069b8ce7511768cf7de9822ff0990e8a68c2"
+    },
+    {
+      "bytes": 445,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-regular.worker.json",
+      "sha256": "1aeffca30484fee05ad16a0786fac27a4266e0512d6f0bf1c13663d099954539"
+    },
+    {
+      "bytes": 343,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-synccheck.request.json",
+      "sha256": "3c512604c8941309bad9394625c5dfd8b6d4aa6235c4492432e02c594bd406de"
+    },
+    {
+      "bytes": 174,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-synccheck.source.json",
+      "sha256": "5f7a31b2c2108b8a4a0a65562e9bd41242fd43ebdf8b898c672971783db01c34"
+    },
+    {
+      "bytes": 62,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-synccheck.stderr",
+      "sha256": "222a02ed477d249a21359df8cae975864a62d848f4739cadc5b00b6190a963c6"
+    },
+    {
+      "bytes": 364,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-synccheck.stdout",
+      "sha256": "d3805e0642f182616446d06dfe4141a9eda1b1d1c496d199ed34500849dd1eac"
+    },
+    {
+      "bytes": 441,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/gpup-adaptive-cost-v1-accept-synccheck.worker.json",
+      "sha256": "960cc2dede8432af0d5c8ec34b8ea9d0aed193fba4a547391ab9276a805b9c39"
+    },
+    {
+      "bytes": 45628,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/historical-audit.json",
+      "sha256": "b4e352190f914d270d4d0efb1474277f13d9d3706c95f593a4ac8d9431b97d2f"
+    },
+    {
+      "bytes": 273,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/host-tests.cpu.json",
+      "sha256": "c172ce99db6119df360109e11aff71392e4075778b814557a3394a860891c221"
+    },
+    {
+      "bytes": 1887,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/host-tests.log",
+      "sha256": "9080194fb191252fd223e6a4f7700060c23412d88069c43d506cfde05e8fe3f9"
+    },
+    {
+      "bytes": 142,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/pre-study-native-02.cpu.json",
+      "sha256": "165acae7205be88b897bcbebd2c9969f708a65b688e9e2f82c30563a9f7afddd"
+    },
+    {
+      "bytes": 75744,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/pre-study-native-02.log",
+      "sha256": "6500b5c4595d60ec9522d55990deb8a7c5a54ba76603958c4c901de6b58e7050"
+    },
+    {
+      "bytes": 142,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/pre-study-native.cpu.json",
+      "sha256": "f665f76626ce4c7b1a20d1ed8276117e65de10bf4fe7dc3bebba47de0b9bc128"
+    },
+    {
+      "bytes": 28309,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/pre-study-native.log",
+      "sha256": "ca156cbd44908f91785bff96c7acc4b51d18b0b1c9e3bbe87ba911b74aceb010"
+    },
+    {
+      "bytes": 212,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/precommit-format-check.txt",
+      "sha256": "de5939d8264b7884e9f6166e5c442010b07f878fb15d64991a82e9a5f3eb15d4"
+    },
+    {
+      "bytes": 205,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/release-build.cpu.json",
+      "sha256": "8d172fc4e5184881865bfee1e92e7a3350c65edf4d51a786b98eeadba02d72a2"
+    },
+    {
+      "bytes": 582,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/release-build.log",
+      "sha256": "66b212ab2b93d62e7b385cf42026654e2b16fb6dd84433c45636c15b96ecf8b1"
+    },
+    {
+      "bytes": 162,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/report.cpu.json",
+      "sha256": "37cbc8b861d767cea7056ecf13878cb3548ec7c4ab31b2804bf2f16a9235131b"
+    },
+    {
+      "bytes": 50,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/report.log",
+      "sha256": "95fe7aaecf60a59f9550c7b885ec1cf70fc3853b8092a59dd730bc38eb8644bb"
+    },
+    {
+      "bytes": 166,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/study.cpu.json",
+      "sha256": "809c2c34aaea471a6e7da33172364914c60483cd65e9e04f5a0d40f5e5673567"
+    },
+    {
+      "bytes": 3832,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/study.log",
+      "sha256": "f59354167f7eb7fa16210e850ea0ca79d02d6895cc1357c8fa8dfdab1e289678"
+    },
+    {
+      "bytes": 195,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/summary.json",
+      "sha256": "615a1745c4c1ec8e04fc632cb16381a152e9098bfb62e76b7028330e46951af0"
+    },
+    {
+      "bytes": 239,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/tooling-tests.cpu.json",
+      "sha256": "48cc55610e3008cf3efc2c767a11f3c992313ca8b365c19fe3b669725186e82d"
+    },
+    {
+      "bytes": 101,
+      "path": "artifacts/gpup-adaptive-cost-acceptance/tooling-tests.log",
+      "sha256": "7808ad1f14a19d2e776799fedca39c91155f1e7f7476bd0825a282a6513fc0ad"
+    },
+    {
+      "bytes": 356,
+      "path": "artifacts/gpup-adaptive-cost-baseline/code-objects.json",
+      "sha256": "a42cfdd4ab65f9fc881e39a286b1408e459e3df260a58a06ebb51707cc05b2bb"
+    },
+    {
+      "bytes": 4076,
+      "path": "artifacts/gpup-adaptive-cost-baseline/execution.json",
+      "sha256": "02f0c6133a8cb6068cd9325b19ddfd0587c0008fa42c21509398bf94c439bc57"
+    },
+    {
+      "bytes": 83448,
+      "path": "artifacts/gpup-adaptive-cost-baseline/lp_pdhg.cubin",
+      "sha256": "6afafffde0d66e951bab2aa9bbed5a2aa2ed9fc94bf6677895fc1c991676c62f"
+    },
+    {
+      "bytes": 239904,
+      "path": "artifacts/gpup-adaptive-cost-baseline/lp_pdhg_precision.cubin",
+      "sha256": "2780f58bf7c6fa506db8ebc7911fa71a512b6417633215820be34d409e702e25"
+    },
+    {
+      "bytes": 275008,
+      "path": "artifacts/gpup-adaptive-cost-baseline/lp_pdhg_tuned.cubin",
+      "sha256": "5ac4da194cfd016a7fb08400f21684236f6397b71cec33ead300d47eed563ccb"
+    },
+    {
+      "bytes": 8386344,
+      "path": "artifacts/gpup-adaptive-cost-baseline/optimizer",
+      "sha256": "cbb15853963ef61b2ed30f57960cad9aae9174e224cea6181876f03b981be1a6"
+    },
+    {
+      "bytes": 84976,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schedule_eval.cubin",
+      "sha256": "90c2bee5aaeb6561aac71f8585e4d38c303bcb560532e2c1e96b5c09a831cfea"
+    },
+    {
+      "bytes": 5424,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/README.md",
+      "sha256": "5f9e5b7e8446196658d6636da6d840480609ce3a93114730d1304c0211defef4"
+    },
+    {
+      "bytes": 3131,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/benchmark-manifest-v1.schema.json",
+      "sha256": "7727fe61b78b800cbf7d52173a99aa1bb29636dec93852d563889d6656b1bfc5"
+    },
+    {
+      "bytes": 1393,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/conformance-record-v1.schema.json",
+      "sha256": "1378bfa7a855d09fff62e2db389350840f47598757d90745ee71566cace02320"
+    },
+    {
+      "bytes": 4146,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/experiment-result-v1.schema.json",
+      "sha256": "1792d81b65797bb9ef6098e539dd15cf80d5fb950ad1c516b60249d0123ca7ec"
+    },
+    {
+      "bytes": 4491,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/extension-registry-v1.schema.json",
+      "sha256": "71662b788643fc7f29c10f5458a597b45c678b4aa594057b18b738aac693ea1a"
+    },
+    {
+      "bytes": 1543,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-adaptive-v1.schema.json",
+      "sha256": "951bcb6298d4e13d619a618e16ba8312c5949f2c97799e93bc0fd976e87fe3c7"
+    },
+    {
+      "bytes": 3416,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-batch-endpoint-v1.schema.json",
+      "sha256": "170457ebdb630a7d347fe58a4ab8f90f8e62d70e754d71c5a9b270ae0e39a01d"
+    },
+    {
+      "bytes": 2111,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-batch-request-v1.schema.json",
+      "sha256": "4e6e329b42276aef0669718b12f148ec38ca7ddae73fbdf19eb456a4f1de44bf"
+    },
+    {
+      "bytes": 3811,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-campaign-v1.schema.json",
+      "sha256": "e3fe6459ec0096747baca3346a55ce370bf1da0e6630a09176b90769ea041ad3"
+    },
+    {
+      "bytes": 5015,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-campaign-v2.schema.json",
+      "sha256": "951622629ad1f7015e78eada20121c850a8e51a0c6ab121002773de5e02f3284"
+    },
+    {
+      "bytes": 7371,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-campaign-v3.schema.json",
+      "sha256": "9da0c1115d04cc9d6e93b661482de8b98ed40f480b8ff6fe3216f2212adf2144"
+    },
+    {
+      "bytes": 10468,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-campaign-v4.schema.json",
+      "sha256": "8c66ce84d6808691e893358a1772c8253a3fcf13a4686d3a172af9583c14f2e7"
+    },
+    {
+      "bytes": 96921,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-campaign-v5.schema.json",
+      "sha256": "e6f64da0baec9807d36a9d0ac69350c95e9a6f141d6fc19089a0c125d1111bb1"
+    },
+    {
+      "bytes": 14499,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-campaign-v6.schema.json",
+      "sha256": "8c96db9d48d7d3e9a70e5fc6e97bd0c715cfea16e7a4036e377975f8abf02277"
+    },
+    {
+      "bytes": 1919,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-compact-endpoint-v1.schema.json",
+      "sha256": "3bd27fbbab45e1f234a230f1ab64473a76823f3210f9a6413aa91aaa6a41eadc"
+    },
+    {
+      "bytes": 1753,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-cost-raw-v1.schema.json",
+      "sha256": "7f201e3ea23491a23f0d128e935b4f2c22f96a0a0453d53ec1bcde6df5f092b3"
+    },
+    {
+      "bytes": 3443,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-cost-v1.schema.json",
+      "sha256": "5f0d79b7919f5d3eee3abf637110fa40045b8105ac226be14cc49b1243f7e53b"
+    },
+    {
+      "bytes": 7451,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-endpoint-v1.schema.json",
+      "sha256": "c1a33efbc0ad7ca086b23dd17d81dae706f1ce6e004e69acd63076ed246341d6"
+    },
+    {
+      "bytes": 8949,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-endpoint-v2.schema.json",
+      "sha256": "fc92eb5ac1ece1464a7638a1a407a2070a7fd7e9637755dad8bf91147af8e051"
+    },
+    {
+      "bytes": 10531,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-endpoint-v3.schema.json",
+      "sha256": "4dc2ce71587594f27d5b4f1ed9b97b7422aff4727cbd913ed9f9457550e7887d"
+    },
+    {
+      "bytes": 12620,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-endpoint-v4.schema.json",
+      "sha256": "8e6f7001edf87ed0fd074ea28d03de93f7fd137d3356bc480bbf0aa7a8d732c7"
+    },
+    {
+      "bytes": 14711,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-endpoint-v5.schema.json",
+      "sha256": "507a68639e08362ead19e0514f3a5dc7ce3f14cec99d1c44b5e8c41be99cf203"
+    },
+    {
+      "bytes": 9291,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-evidence-study-v1.schema.json",
+      "sha256": "c9e23a54aead43dac09e8446b670b424efe4e17a6eafea7c4a47dce5d79d5cd3"
+    },
+    {
+      "bytes": 12152,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-evidence-trial-v1.schema.json",
+      "sha256": "845794c7e737d457f8d911c4061885e0e21b0c6124bc02b5591d8d3ceaf20ac5"
+    },
+    {
+      "bytes": 980,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-execution-v1.schema.json",
+      "sha256": "9a0bfe1ff892b19e7b6334e1bc3b9c5e0703b5d6fa6d6bc6ca7d0269c94f986a"
+    },
+    {
+      "bytes": 2632,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-external-endpoint-v1.schema.json",
+      "sha256": "16ff07a7b1a8438246a660982e23ebf8d986e0a2f7bdebc453a637575cf64778"
+    },
+    {
+      "bytes": 2632,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-external-endpoint-v2.schema.json",
+      "sha256": "22ad1270815c997e69517a87db4d2f2d2607cf6c3ca8310fba68e09a697244fd"
+    },
+    {
+      "bytes": 3355,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-external-witness-v1.schema.json",
+      "sha256": "582d5829194cbeafdd4685654fe666039f5fc33d94879f839718f6ebf3c1116d"
+    },
+    {
+      "bytes": 4369,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-external-witness-v2.schema.json",
+      "sha256": "4d032d27304e5cb9c75a37b4cb23780818955e37828f3c2a792c2388b28311f1"
+    },
+    {
+      "bytes": 8456,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-host-study-v1.schema.json",
+      "sha256": "bd67df85c6040f46d68d57346fda99fb82b74f9358d9528d764e40572103d600"
+    },
+    {
+      "bytes": 12159,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-host-trial-v1.schema.json",
+      "sha256": "a8ffd29f629ecdb91be88e74b6c9d9f0c7b42cb9a172436a270378a6605e6cb3"
+    },
+    {
+      "bytes": 1227,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-ledger-v1.schema.json",
+      "sha256": "56d778b781f2e736dd20069a7977f5f681e39bdff2a3593da1839ef0179868bd"
+    },
+    {
+      "bytes": 3806,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-manifest-v1.schema.json",
+      "sha256": "627e85ed3dcae29bd20e54760a85353aa818687afce29711e5269eb38adf2f73"
+    },
+    {
+      "bytes": 4363,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-manifest-v2.schema.json",
+      "sha256": "aecd7cdcdafdc45e4e3ae9fb3e0896dcc6e06b04f1b5b63a7e2e9b941db97e93"
+    },
+    {
+      "bytes": 3174,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-precision-v1.schema.json",
+      "sha256": "16962f4be5ba63b3186dc0b865449a02dad2c0db6e17ee4302c521e8bcd2d1b8"
+    },
+    {
+      "bytes": 2766,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-settings-v1.schema.json",
+      "sha256": "cdb07f5163dacc00f96240f6a045ed2ac77b1a2696c1b73de29ba4e42ded52ac"
+    },
+    {
+      "bytes": 8575,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-trial-v1.schema.json",
+      "sha256": "32a1ea5865ffef9ca456c6657c06a5354df455a94e1096f1539be61b6587f726"
+    },
+    {
+      "bytes": 9713,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-trial-v2.schema.json",
+      "sha256": "7202170160d40fcc55a2bfa9becb9cab3e6d6040ce16b7f41e0d183c88976616"
+    },
+    {
+      "bytes": 9880,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-trial-v3.schema.json",
+      "sha256": "f95da878fb6020245df2cf8a195c44bcc0f89260741cf3b4282195349bd6d475"
+    },
+    {
+      "bytes": 10640,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-trial-v4.schema.json",
+      "sha256": "8df25610b552f15dbcd26e6b6e8bb6960abbf7fb24df38fea7614c20ddb84d44"
+    },
+    {
+      "bytes": 17254,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-trial-v5.schema.json",
+      "sha256": "08c1ba647473fd45d5205678aa048e39d680996e955614a935b42019fbef1b30"
+    },
+    {
+      "bytes": 11994,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/lp-trial-v6.schema.json",
+      "sha256": "192909cd23b9ce82e0f0144af1c7d567cb1c0f5ce0ef8b0a23c4102258c09a8d"
+    },
+    {
+      "bytes": 845,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/run-config-v1.schema.json",
+      "sha256": "c0a6e8b4406f86c6ae4e15cb23cc77408ff0135c9be54ced9645d71057e589bf"
+    },
+    {
+      "bytes": 4396,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/run-record-v2.schema.json",
+      "sha256": "f7dc1d75ade705317dc121f941669ae7edbe81002c83f4ab7cbb8614a20c1259"
+    },
+    {
+      "bytes": 3517,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/search-config-v3.schema.json",
+      "sha256": "3ebdcf0e17fd09d56ae67a3f2eb9bffb8967b9aa9450c4925c17ee6ba05a02c7"
+    },
+    {
+      "bytes": 8259,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/search-record-v3.schema.json",
+      "sha256": "dd64a38481092bb9543dc4d6f7f6b36a06bff92449d12e3d0f9d228c0a222ce2"
+    },
+    {
+      "bytes": 1984,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/solve-config-v1.schema.json",
+      "sha256": "75e98ffe5238b7c9419d24cf443f3d9d391584ec118ca169e97ba49cc9e8b0ad"
+    },
+    {
+      "bytes": 4357,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/solve-record-v2.schema.json",
+      "sha256": "f7505d3c0c9881f255f64a606bfdfc48b79e2ecce3009ab6971071379fe6dbbd"
+    },
+    {
+      "bytes": 4169,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/solve-record-v3.schema.json",
+      "sha256": "bde7fc7fff5bf3e0b8352c401558851367955a31823737284d311060efb93ad0"
+    },
+    {
+      "bytes": 4240,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/solve-record-v4.schema.json",
+      "sha256": "1dcc2f47d2195135311e1f685039df40c5911f77f676eb7738f72341d8dd94ad"
+    },
+    {
+      "bytes": 4230,
+      "path": "artifacts/gpup-adaptive-cost-baseline/schemas/solve-record-v5.schema.json",
+      "sha256": "9556874cc5f4a422f40ff7f4744fd0e9cb5e86bfaeb4a5b9ca121947e3933c1a"
+    },
+    {
+      "bytes": 14469120,
+      "path": "artifacts/gpup-adaptive-cost-baseline/source.tar",
+      "sha256": "001ec0c35b8d9cde8814c8daa15684da112639196c8408135cbf60c135fdeac9"
+    }
+  ],
+  "schema_version": 1
+}

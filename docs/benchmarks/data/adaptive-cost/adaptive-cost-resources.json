@@ -1,0 +1,290 @@
+{
+  "cpu_cap_seconds": 14400,
+  "cpu_receipts": {
+    "baseline-build.cpu.json": {
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--locked",
+        "-p",
+        "optimizer-cli"
+      ],
+      "cpu_seconds": 45.099427,
+      "returncode": 0,
+      "wall_seconds": 12.83004771079868
+    },
+    "clean-checkout-budget-02.cpu.json": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/integration",
+        "-p",
+        "test_lp_adaptive_cost.py"
+      ],
+      "cpu_seconds": 0.800991,
+      "returncode": 0,
+      "wall_seconds": 0.8152198758907616
+    },
+    "clean-checkout-budget.cpu.json": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/integration",
+        "-p",
+        "test_lp_adaptive_cost.py"
+      ],
+      "cpu_seconds": 0.891647,
+      "returncode": 1,
+      "wall_seconds": 0.815280073788017
+    },
+    "device-build.cpu.json": {
+      "command": [
+        "cargo",
+        "test",
+        "--release",
+        "--locked",
+        "-p",
+        "optimizer-cuda",
+        "-p",
+        "optimizer-schedule-examples",
+        "-p",
+        "optimizer-lp-cuda",
+        "--test",
+        "device",
+        "--no-run"
+      ],
+      "cpu_seconds": 12.357629,
+      "returncode": 0,
+      "wall_seconds": 3.769032302778214
+    },
+    "device-cli.cpu.json": {
+      "command": [
+        "python3",
+        "tools/lp_adaptive_cost_budget.py",
+        "--id",
+        "cli",
+        "--seconds",
+        "120",
+        "--",
+        "python3",
+        "tools/lp_adaptive_cost_gpu_check.py"
+      ],
+      "cpu_seconds": 95.391031,
+      "returncode": 0,
+      "wall_seconds": 94.33382369624451
+    },
+    "device-initcheck.cpu.json": {
+      "command": [
+        "python3",
+        "tools/lp_adaptive_cost_budget.py",
+        "--id",
+        "initcheck",
+        "--seconds",
+        "60",
+        "--",
+        "bash",
+        "tools/lp_adaptive_gpu_check.sh",
+        "initcheck"
+      ],
+      "cpu_seconds": 3.1323809999999996,
+      "returncode": 0,
+      "wall_seconds": 3.2184940851293504
+    },
+    "device-memcheck.cpu.json": {
+      "command": [
+        "python3",
+        "tools/lp_adaptive_cost_budget.py",
+        "--id",
+        "memcheck",
+        "--seconds",
+        "60",
+        "--",
+        "bash",
+        "tools/lp_adaptive_gpu_check.sh",
+        "memcheck"
+      ],
+      "cpu_seconds": 3.323016,
+      "returncode": 0,
+      "wall_seconds": 3.468918161932379
+    },
+    "device-racecheck.cpu.json": {
+      "command": [
+        "python3",
+        "tools/lp_adaptive_cost_budget.py",
+        "--id",
+        "racecheck",
+        "--seconds",
+        "60",
+        "--",
+        "bash",
+        "tools/lp_adaptive_gpu_check.sh",
+        "racecheck"
+      ],
+      "cpu_seconds": 14.699652,
+      "returncode": 0,
+      "wall_seconds": 14.081926421262324
+    },
+    "device-regular.cpu.json": {
+      "command": [
+        "python3",
+        "tools/lp_adaptive_cost_budget.py",
+        "--id",
+        "regular",
+        "--seconds",
+        "60",
+        "--",
+        "bash",
+        "tools/lp_adaptive_gpu_check.sh",
+        "regular"
+      ],
+      "cpu_seconds": 13.343022999999999,
+      "returncode": 0,
+      "wall_seconds": 13.131298313848674
+    },
+    "device-synccheck.cpu.json": {
+      "command": [
+        "python3",
+        "tools/lp_adaptive_cost_budget.py",
+        "--id",
+        "synccheck",
+        "--seconds",
+        "60",
+        "--",
+        "bash",
+        "tools/lp_adaptive_gpu_check.sh",
+        "synccheck"
+      ],
+      "cpu_seconds": 3.1597939999999998,
+      "returncode": 0,
+      "wall_seconds": 3.2184532890096307
+    },
+    "final-native.cpu.json": {
+      "command": [
+        "bash",
+        "tools/check.sh"
+      ],
+      "cpu_seconds": 128.035282,
+      "returncode": 0,
+      "wall_seconds": 101.44247759366408
+    },
+    "freeze.cpu.json": {
+      "command": [
+        "python3",
+        "tools/benchmark_lp_adaptive_cost.py",
+        "--prepare"
+      ],
+      "cpu_seconds": 0.9883839999999999,
+      "returncode": 0,
+      "wall_seconds": 1.0157013949938118
+    },
+    "host-tests.cpu.json": {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "optimizer-lp",
+        "--test",
+        "adaptive",
+        "--test",
+        "adaptive_cost",
+        "--test",
+        "precision",
+        "--locked"
+      ],
+      "cpu_seconds": 3.296913,
+      "returncode": 0,
+      "wall_seconds": 0.9653075896203518
+    },
+    "pre-study-native-02.cpu.json": {
+      "command": [
+        "bash",
+        "tools/check.sh"
+      ],
+      "cpu_seconds": 166.206033,
+      "returncode": 0,
+      "wall_seconds": 113.56110292114317
+    },
+    "pre-study-native.cpu.json": {
+      "command": [
+        "bash",
+        "tools/check.sh"
+      ],
+      "cpu_seconds": 3.283772,
+      "returncode": 101,
+      "wall_seconds": 2.3176007312722504
+    },
+    "release-build.cpu.json": {
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--locked",
+        "-p",
+        "optimizer-cli"
+      ],
+      "cpu_seconds": 28.682859999999998,
+      "returncode": 0,
+      "wall_seconds": 8.073938612826169
+    },
+    "report.cpu.json": {
+      "command": [
+        "python3",
+        "tools/report_lp_adaptive_cost.py"
+      ],
+      "cpu_seconds": 571.979054,
+      "returncode": 0,
+      "wall_seconds": 236.5173973357305
+    },
+    "study.cpu.json": {
+      "command": [
+        "python3",
+        "tools/benchmark_lp_adaptive_cost.py"
+      ],
+      "cpu_seconds": 335.369403,
+      "returncode": 0,
+      "wall_seconds": 338.54473291290924
+    },
+    "tooling-tests.cpu.json": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/integration",
+        "-p",
+        "test_lp_adaptive_cost.py"
+      ],
+      "cpu_seconds": 0.86101,
+      "returncode": 0,
+      "wall_seconds": 0.8653125260025263
+    }
+  },
+  "gpu": {
+    "categories_ns": {
+      "accept": 118178059179,
+      "profile": 20927881994,
+      "timing": 62784243449
+    },
+    "ceiling_ns": 18002574545061,
+    "cpu_ns": 0,
+    "cumulative_ns": 15407672759957,
+    "events": 15528,
+    "ledger_sha256": "cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6",
+    "phases_ns": {
+      "ablations": 6112227535333,
+      "baseline": 1170475765674,
+      "finalists": 0,
+      "repeatability": 2011623042508,
+      "screening": 6113346416442
+    }
+  },
+  "metered_child_cpu_seconds": 1430.901302
+}
