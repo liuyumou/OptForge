@@ -1,5 +1,83 @@
 # Active Task
 
+## GPUP-COPT-ADAPTER protected integration (2026-09-30)
+
+Status: user authorized PR publication, self-review, protected merge and safe
+branch cleanup. This supersedes the implementation-phase no-push scope below.
+Objective: review the isolated study and its evidence, retain the faster existing
+scalar COPT wrapper as the ordinary COPT construction path, and leave runtime
+solver defaults unchanged. The bulk adapter stays explicitly experimental.
+Acceptance: full pinned-native gate, current-head GitHub cpu/docs/smoke checks,
+resolved conversations, merge preserving source ancestry without bypass, and
+clean synchronized main. Self-review is labeled; no independent approval is claimed.
+Likely files: this task state and any substantiated review corrections.
+Resources: four build jobs, at most one CPU-hour for integration validation,
+zero GPU jobs and no new campaign allowance. Preserve every study artifact and
+the 15776-event ledger SHA-256
+2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0;
+cumulative consumption remains 15804.186067059 / 18002.574545061 GPU seconds.
+Starting source: 5c77323. Integration receipts will be retained under
+artifacts/gpup-copt-adapter-integration-20260930. GPUP-CONVERGENCE is not started.
+
+Local self-review and CPU acceptance pass. The reproduced interruption defect and
+fix are covered by partial-output, surviving-receipt, conservative-charge and
+no-promotion regressions. All eleven adapter tests pass in a clean source-only
+checkout. The full pinned-native gate passes 514 Rust tests, 207 Python tests,
+committed-record replay, 113 documentation pages and smoke. No checks were waived.
+The source audit binds three declared CPU coordinator/report/export corrections,
+359 unchanged measured files and 382 unchanged historical authority files. All
+1159 archived artifact references match. Both solver workers, CSC builder, native
+binaries, schemas, protocol and measured endpoints remain byte-identical; the
+ordinary scalar COPT path and runtime solver defaults remain unchanged.
+Independent report re-verification and current-head remote checks must pass before
+merging. Their outcomes, self-review, protected merge and cleanup receipts are
+retained in the integration directory above. No additional GPU execution is needed.
+
+## GPUP-COPT-ADAPTER (2026-09-29)
+
+Status: complete; implementation, device acceptance, frozen study, independent
+report and final full native gate pass under SPEC-0019/ADR-0031. Local commit follows.
+Objective: a separately identified COPT bulk matrix adapter, exact import/readback
+and fresh independent certification; compare three methods against fresh scalar
+controls in one new isolated environment. Archive baseline 8fdec89451c07ffea46a3d8630aa184b14e072c5.
+Acceptance: full pinned-native gate before GPU admission and at completion;
+dependency-free contracts, real CPU readback, 24 min/max/profile endpoints,
+72 timings and 12 profiles with independent verification and strict provenance.
+Likely files: new Python study/provisioning/acceptance/report tools, schemas,
+protocol, tests, contract and evidence/state documents. No runtime or kernel edits.
+Resources: four build jobs, four CPU-hours; timing 900 GPU seconds in ablations,
+profiles 200 and acceptance 400 in repeatability, combined 1500; no added allowance.
+All device jobs require the shared host lease and full reservations. Preserve
+15606 ledger events, SHA-256 ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b,
+and 15632.281207415 / 18002.574545061 cumulative GPU seconds and all phase caps.
+Retain every failed attempt, never retry admitted study identities. Commit locally
+after acceptance; no push. Handoff: GPUP-CONVERGENCE without starting it.
+
+Acceptance evidence: [report](../docs/benchmarks/lp-copt-adapter.md). All 84 attempts
+independently verify; 42/72 timings and 10/12 profiles certify. Twelve native
+readbacks and all 24 min/max/profile acceptance endpoints pass with both
+certifiers. All 27 completed timing pairs match; nine interrupted CPU-default
+pairs differ in native work. Ten profiles match timing state/work; the two
+CPU-default interruptions differ. Bulk is slower in every certified cell, with
+CSC preparation and cold SciPy import exceeding native loading savings.
+Full pre-study native gate passes 514 Rust/205 Python tests, record replay,
+112 documentation pages and smoke; source-only new contracts also pass.
+Initial CPU schema/readback failures are retained and corrected. No failed GPU
+acceptance or retried study identity. No runtime/kernel/default change or preset.
+Task charge 171.904859644 GPU seconds (timing 142.395630328/900, profiles
+22.026636414/200, acceptance 7.482592902/400), cumulative
+15804.186067059 / 18002.574545061. The 15776-event ledger SHA-256
+2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0 preserves the
+15606-event prefix above and all phase caps. Evidence remains under the
+gpup-copt-adapter baseline, acceptance, environment and v1 artifact directories.
+
+Final full pinned-native tools/check.sh passes 514 Rust tests, 205 Python tests,
+committed-record replay, 113 documentation pages and smoke. The source audit
+checks 362 measured files and preserves all 382 historical code/authority files.
+Metered child CPU remains within 14400 seconds; the final resource catalog records
+the exact total and each receipt. No new GPU job is needed after acceptance.
+Local commit only; GPUP-CONVERGENCE is the next handoff and is not begun.
+
 ## GPUP-SETUP protected integration (2026-09-29)
 
 Status: user authorized PR publication, self-review, fixes, protected merge and

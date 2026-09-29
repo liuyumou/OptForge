@@ -12,10 +12,11 @@ active_research_track: GPUP
 # keeps its own specification, endpoint and budget: amortized throughput never
 # substitutes for the single-solve latency endpoint (ADR-0013).
 # 2026-09-27: order the COPT report's follow-ups before more arithmetic work.
-# GPUP-EVIDENCE, GPUP-HOST, GPUP-ADAPTIVE-COST and GPUP-SETUP are complete.
+# GPUP-EVIDENCE, GPUP-HOST, GPUP-ADAPTIVE-COST, GPUP-SETUP and
+# GPUP-COPT-ADAPTER are complete.
 # Listed priority is distinct from depends_on: setup and optional COPT adapter
 # investigations are not prerequisites for quantization. See the roadmap handoff.
-next_ready_task: GPUP-COPT-ADAPTER
+next_ready_task: GPUP-CONVERGENCE
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -209,9 +210,10 @@ tasks:
     acceptance: "ADR-0030 complete; four prior control profiles; 32 verified attempts, 24 certified timings, 16 equal comparisons; full native, 58 device, four primary sanitizers, twelve fixed-work pairs/replays; no consistent benefit or default change; docs/benchmarks/lp-fresh-setup.md"
   - id: GPUP-COPT-ADAPTER
     title: Investigate optional COPT bulk model construction
-    status: planned
+    status: complete
     depends_on: [GPUP-EVIDENCE]
-    acceptance: "Optional external-control repair; canonical coefficients, senses, offsets and guards unchanged; fresh independent certification; retain old wrapper timings and new adapter identity; not a quantization prerequisite"
+    specification: docs/specifications/SPEC-0019-copt-bulk-adapter.md
+    acceptance: "ADR-0031 complete; full native and source-only gates, 12 native readbacks, 24 certified acceptance endpoints; all 84 study attempts verify, 42/72 timings certify; bulk slower in all certified cells; docs/benchmarks/lp-copt-adapter.md"
   - id: GPUP-CONVERGENCE
     title: Review convergence and equal-work mixtures before lower precision
     status: planned

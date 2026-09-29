@@ -128,9 +128,9 @@ The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. The user requested follow-up
 ordering on 2026-09-27. GPUP-EVIDENCE and GPUP-HOST are now complete (below).
-Continue with the ordered GPUP-SETUP diagnosis and optional adapter follow-up,
-then GPUP-CONVERGENCE before GPUP-7. Fresh setup diagnosis and optional COPT adapter
-construction have intervening priorities but are not quantization prerequisites;
+GPUP-SETUP and GPUP-COPT-ADAPTER are now complete (below); continue with
+GPUP-CONVERGENCE before GPUP-7. Fresh setup diagnosis and optional COPT adapter
+construction were separately prioritized investigations, not quantization prerequisites;
 see the [ordered roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 and next_ready_task. Planning adds no GPU allowance or accepted numerical behavior;
 GPUP-7 still needs its accepted contract.
@@ -178,8 +178,20 @@ pairs and twelve replays pass. Historical racecheck/session/mixed-65536 gaps rem
 Task charge 224.608447458 GPU seconds; cumulative 15632.281207415 /
 18002.574545061 seconds, no new allowance. The 15606-event ledger SHA-256
 ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b preserves the 15528-event prefix above
-and every phase cap. Next is optional GPUP-COPT-ADAPTER, then GPUP-CONVERGENCE;
-GPUP-7 still requires its accepted quantization contract.
+and every phase cap. The following adapter slice retains this prefix.
+GPUP-COPT-ADAPTER is complete under accepted SPEC-0019/ADR-0031. Its
+[report](docs/benchmarks/lp-copt-adapter.md) independently verifies all 84 attempts,
+certifies 42/72 timings and 10/12 profiles, and retains all interrupted/rejected
+outcomes. Twelve native readbacks and 24 min/max/profile endpoints pass; 27/36
+timing pairs and 10/12 profile comparisons match, with the remaining CPU-default
+pairs deadline-limited. Bulk loading is cheaper, but CSC preparation and cold
+SciPy import make this adapter slower in every certified cell. No preset or
+runtime/kernel/default change; historical wrappers and evidence remain intact.
+Task charge 171.904859644 GPU seconds; cumulative 15804.186067059 /
+18002.574545061 seconds, no added allowance. The 15776-event ledger SHA-256
+2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0 preserves the
+15606-event prefix above and every phase cap. Next is GPUP-CONVERGENCE;
+GPUP-7 still needs its accepted quantization contract.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent
