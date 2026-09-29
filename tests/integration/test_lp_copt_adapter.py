@@ -159,7 +159,61 @@ class AdapterStudyTests(unittest.TestCase):
                 with self.assertRaises(ValueError):check_identity(v,job,trial,wrong,directory,binary,'a'*64)
                 wrong=copy.deepcopy(trial);del wrong['endpoint']
                 with self.assertRaises(Exception):validator('lp-copt-adapter-trial-v1.schema.json').validate(wrong)
-                recover_intents(directory,{job['id']});self.assertIn('no retry',read_json(directory/(job['id']+'.trial.json'))['error'])
+                # A killed coordinator can leave partial output before finalizing a trial.
+                (directory/(job['id']+'.endpoint.json')).write_text('{partial')
+                (directory/(job['id']+'.stdout')).write_text('retained partial output')
+                worker=dict(elapsed_ns=5,queue_ns=1,leased_ns=4,peak_rss_bytes=100,memory_method='fixture',reason='completed')
+                write_json(directory/(job['id']+'.worker.json'),worker)
+                recover_intents(directory,{job['id']})
+                recovered=read_json(directory/(job['id']+'.trial.json'))
+                self.assertIn('no retry',recovered['error']);check_artifacts(directory,recovered)
+                self.assertEqual(recovered['status'],'process_failure')
+                self.assertEqual(recovered['elapsed_ns'],worker['elapsed_ns'])
+                self.assertIsNone(recovered['endpoint_class'])
+                before=(directory/(job['id']+'.trial.json')).read_bytes()
+                recover_intents(directory,{job['id']})
+                self.assertEqual(before,(directory/(job['id']+'.trial.json')).read_bytes())
+
+    def test_recovered_receipt_keeps_full_charge_and_cannot_be_successful(self):
+        from benchmark_lp_copt_adapter import RECOVERED
+        from report_lp_copt_adapter import check_accounting
+        worker=dict(elapsed_ns=5,queue_ns=1,leased_ns=4,peak_rss_bytes=100,memory_method='fixture',reason='completed')
+        trial=dict(worker,status='process_failure',error=RECOVERED)
+        for gpu in [False,True]:
+            settlement=dict(kind='recover',reserved_ns=10,charged_ns=10)
+            check_accounting(trial,worker,settlement,gpu)
+            with self.assertRaises(ValueError):check_accounting(trial,worker,dict(settlement,charged_ns=4),gpu)
+            with self.assertRaises(ValueError):check_accounting(dict(trial,status='completed'),worker,settlement,gpu)
+            with self.assertRaises(ValueError):check_accounting(dict(trial,elapsed_ns=3),worker,settlement,gpu)
+            with self.assertRaises(ValueError):check_accounting(dict(trial,error=None),worker,settlement,gpu)
+            # A crash after settlement retains actual accounting and a failed trial.
+            check_accounting(trial,worker,dict(kind='settle',reserved_ns=10,charged_ns=4 if gpu else 5),gpu)
+        check_accounting(trial,None,dict(kind='recover',reserved_ns=10,charged_ns=10),True)
+
+    def test_review_declarations_bind_exact_bytes_and_exclude_solver_workers(self):
+        import io
+        import tarfile
+        from report_lp_copt_adapter import check_measured_source
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);name='tools/benchmark_lp_copt_adapter.py'
+            path=root/name;path.parent.mkdir();path.write_bytes(b'reviewed')
+            with tarfile.open(root/'source.tar','w') as archive:
+                item=tarfile.TarInfo(name);item.size=len(b'measured');archive.addfile(item,io.BytesIO(b'measured'))
+            declaration=root/'docs/benchmarks/data/copt-adapter/adapter-review-corrections.json'
+            declaration.parent.mkdir(parents=True)
+            entry=dict(path=name,measured_sha256=hashlib.sha256(b'measured').hexdigest(),reviewed_sha256=file_hash(path))
+            with patch('report_lp_copt_adapter.ROOT',root):
+                with self.assertRaises(ValueError):check_measured_source(root)
+                write_json(declaration,dict(files=[entry]))
+                self.assertEqual(check_measured_source(root),([name],[name]))
+                path.write_bytes(b'substituted')
+                with self.assertRaises(ValueError):check_measured_source(root)
+                path.write_bytes(b'reviewed')
+                write_json(declaration,dict(files=[dict(entry,measured_sha256='0'*64)]))
+                with self.assertRaises(ValueError):check_measured_source(root)
+                for entries in [[entry,entry],[dict(entry,path='tools/lp_copt_bulk.py')]]:
+                    write_json(declaration,dict(files=entries))
+                    with self.assertRaises(ValueError):check_measured_source(root)
 
     def test_same_bytes_under_another_filename_are_rejected(self):
         from benchmark_lp import reference

@@ -1,5 +1,14 @@
 # Known Failures and Limitations
 
+## COPT adapter interruption recovery corrected during integration review
+
+Self-review reproduced unbound partial artifacts after coordinator interruption.
+Recovery now binds retained files and surviving worker observations, and the report
+accepts the ledger's conservative full reservation charge without treating a
+recovered trial as successful. CPU regressions cover partial outputs, surviving
+receipts, crashes after settlement, substitution and no retry. The declared review
+corrections do not alter measured workers, results, defaults or GPU accounting.
+
 ## Bulk COPT preparation outweighs native loading savings
 
 The [adapter report](../docs/benchmarks/lp-copt-adapter.md) verifies all 84 attempts

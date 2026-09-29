@@ -54,3 +54,9 @@ Twelve native readbacks and 24 min/max/profile endpoints pass; 27/36 timing pair
 and 10/12 profile comparisons match, with deadline-limited CPU-default differences
 explicit. Full native and source-only gates pass. Bulk construction is slower
 end to end in every certified cell; no preset is selected.
+
+Integration review adds CPU regressions for interrupted partial-output bindings,
+surviving worker receipts, conservative recovery charges and exclusion from
+successful timing samples. Declared coordinator/report corrections preserve every
+measured worker, schema, protocol, endpoint and GPU ledger byte; scalar construction
+remains the ordinary COPT path with unchanged runtime solver defaults.

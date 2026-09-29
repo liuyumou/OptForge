@@ -8,7 +8,7 @@ import subprocess
 import tarfile
 from benchmark_lp import reference
 from benchmark_lp_copt import effective, is_gpu, verify_endpoint
-from benchmark_lp_copt_adapter import SUFFIXES, jobs, request_for, configuration_hash, validate_trial
+from benchmark_lp_copt_adapter import RECOVERED, SUFFIXES, jobs, request_for, configuration_hash, validate_trial
 from lp_copt_adapter_budget import CONFIG, protocol, ledger_for, receipt
 from lp_protocol import ROOT, checked_reference, file_hash, read_json, write_json
 from report_lp_copt import check_worker, checked_component_rows, numerical_digest
@@ -38,6 +38,47 @@ def check_artifacts(directory, trial):
             checked_reference(directory, ref)
 
 
+def check_accounting(trial, worker, settlement, gpu):
+    recovered = trial['error'] == RECOVERED
+    if recovered and trial['status'] != 'process_failure':
+        raise ValueError('recovered coordinator cannot qualify as completed')
+    if worker:
+        if recovered:
+            for key in ['elapsed_ns', 'queue_ns', 'leased_ns', 'peak_rss_bytes', 'memory_method']:
+                if trial[key] != worker[key]: raise ValueError('recovered worker observation differs')
+        else:
+            check_worker(trial, worker)
+    if settlement['kind'] == 'recover':
+        if not recovered: raise ValueError('recovered reservation requires interrupted trial')
+        charge = settlement['reserved_ns']
+    else:
+        charge = (worker['leased_ns'] if gpu else worker['elapsed_ns']) if worker else settlement['reserved_ns']
+    if settlement['charged_ns'] != charge: raise ValueError('worker/reservation charge differs')
+
+
+def check_measured_source(directory):
+    """Only declared CPU review corrections may differ from the measured snapshot."""
+    review_path = ROOT / 'docs/benchmarks/data/copt-adapter/adapter-review-corrections.json'
+    review = read_json(review_path) if review_path.exists() else {'files': []}
+    corrections = {item['path']: item for item in review['files']}
+    allowed = {'tools/benchmark_lp_copt_adapter.py', 'tools/report_lp_copt_adapter.py', 'tools/export_lp_copt_adapter.py'}
+    if len(corrections) != len(review['files']) or not set(corrections) <= allowed:
+        raise ValueError('invalid review correction scope')
+    measured = []; corrected = []
+    with tarfile.open(directory / 'source.tar') as archive:
+        for member in archive.getmembers():
+            if member.isfile() and (member.name.startswith(('tools/', 'schemas/', 'crates/', 'cuda/', 'benchmarks/')) or member.name in ['Cargo.toml', 'Cargo.lock']):
+                content = archive.extractfile(member).read(); current = ROOT / member.name
+                if content != current.read_bytes():
+                    correction = corrections.get(member.name)
+                    if not correction or correction['measured_sha256'] != hashlib.sha256(content).hexdigest() or correction['reviewed_sha256'] != file_hash(current):
+                        raise ValueError('undeclared measured source change: ' + member.name)
+                    corrected.append(member.name)
+                measured.append(member.name)
+    if set(corrected) != set(corrections): raise ValueError('review correction does not match source difference')
+    return measured, corrected
+
+
 def check_cost(directory, trial, endpoint):
     cost = read_json(checked_reference(directory, trial['cost'])); validator('lp-cost-v1.schema.json').validate(cost)
     for key, expected in dict(trial_id=trial['id'], model_sha256=trial['model_sha256'], request_sha256=trial['request_sha256'],
@@ -60,10 +101,7 @@ def check_archive(directory, value):
     baseline = read_json(ROOT / value['baseline_output'] / 'execution.json')
     if baseline['dirty'] or baseline['revision'] != value['baseline_revision'] or baseline['source_archive_sha256'] != file_hash(directory / 'baseline-source.tar') or baseline['binary_sha256'] != file_hash(directory / 'optimizer-baseline'):
         raise ValueError('baseline identity differs')
-    with tarfile.open(directory / 'source.tar') as archive:
-        for member in archive.getmembers():
-            if member.isfile() and (member.name.startswith(('tools/', 'schemas/', 'crates/', 'cuda/', 'benchmarks/')) or member.name in ['Cargo.toml', 'Cargo.lock']):
-                if archive.extractfile(member).read() != (ROOT / member.name).read_bytes(): raise ValueError('measured source changed: ' + member.name)
+    check_measured_source(directory)
     subprocess.run([str(ROOT / value['copt_python']), '-B', str(ROOT / 'tools/setup_copt_adapter.py'), '--identity'], check=True, capture_output=True, timeout=120)
     return execution
 
@@ -130,11 +168,7 @@ def report(value):
         if len(events)!=2 or events[0]['kind']!='reserve' or events[1]['kind'] not in ['settle','recover'] or any(e['resource']!=expected_resource or e['phase']!=value['categories'][job['category']]['phase'] or e['reserved_ns']!=expected_reserve for e in events):
             raise ValueError('attempt ledger binding differs')
         worker=read_json(checked_reference(directory,trial['worker'])) if trial['worker'] else None
-        if worker:
-            check_worker(trial,worker)
-            charge=worker['leased_ns'] if is_gpu(job) else worker['elapsed_ns']
-            if events[1]['charged_ns']!=charge: raise ValueError('worker charge differs')
-        elif events[1]['charged_ns']!=events[0]['reserved_ns']: raise ValueError('missing worker undercharged')
+        check_accounting(trial, worker, events[1], is_gpu(job))
         row.update(status=trial['status'],error=trial['error'],elapsed_ns=trial['elapsed_ns'],leased_ns=trial['leased_ns'])
         endpoint=None
         if trial['endpoint']:

@@ -5,7 +5,9 @@ but is slower in every certified comparison cell. The dense-65536 GPU PDLP media
 increases from 8.983 to 11.070 seconds. Native bulk loading is cheaper; fresh CSC
 preparation and sparse dependency import outweigh that saving. No preset or default
 is selected. This is one measured adapter implementation, not a claim that every
-possible use of COPT's bulk API must be slower.
+possible use of COPT's bulk API must be slower. The faster existing scalar wrapper
+remains the ordinary COPT path; the bulk worker is opt-in and runtime solver
+defaults are unchanged.
 
 [SPEC-0019](../specifications/SPEC-0019-copt-bulk-adapter.md) and
 [ADR-0031](../decisions/ADR-0031-copt-bulk-adapter.md) were accepted before behavior.
@@ -172,3 +174,19 @@ filename, dependency, source and ledger identity and never repairs the ledger.
 [source/ledger audit](data/copt-adapter/adapter-source-ledger-audit.json) and
 [artifact catalog](data/copt-adapter/adapter-provenance.json) retain the evidence.
 The next bounded task is GPUP-CONVERGENCE; it is not started here.
+
+## Integration review
+
+Self-review reproduced and corrected interrupted-coordinator recovery: retained
+partial files now receive exact artifact bindings, surviving worker observations
+are restored, and a recovered reservation keeps its full charge. Recovered trials
+remain process failures even when a completed worker receipt survives; they cannot
+enter successful latency samples. A crash after settlement retains its actual
+charge. CPU regression tests cover both accounting paths and reject substitution
+or promotion of interrupted trials.
+
+The [review correction manifest](data/copt-adapter/adapter-review-corrections.json)
+binds the measured and reviewed bytes of the three changed coordinator/report/export
+files. Both solver workers, the CSC builder, frozen protocol, schemas, native
+binaries, all measured results and the GPU ledger remain byte-identical. The
+source audit declares these CPU corrections separately from the measured version.

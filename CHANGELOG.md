@@ -2,6 +2,10 @@
 
 ## Unreleased — isolated COPT bulk adapter
 
+- GPUP-COPT-ADAPTER integration: preserve scalar COPT construction and runtime
+  defaults; bind interrupted partial outputs and surviving worker receipts while
+  retaining conservative reservation charges and failed-trial classification.
+
 - Add optional loadMatrix construction with pinned isolated dependencies and strict
   adapter/source/request/evidence identities under SPEC-0019/ADR-0031. Preserve
   external v2 certification, original wrappers, runtime and defaults.

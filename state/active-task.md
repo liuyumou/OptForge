@@ -1,5 +1,38 @@
 # Active Task
 
+## GPUP-COPT-ADAPTER protected integration (2026-09-30)
+
+Status: user authorized PR publication, self-review, protected merge and safe
+branch cleanup. This supersedes the implementation-phase no-push scope below.
+Objective: review the isolated study and its evidence, retain the faster existing
+scalar COPT wrapper as the ordinary COPT construction path, and leave runtime
+solver defaults unchanged. The bulk adapter stays explicitly experimental.
+Acceptance: full pinned-native gate, current-head GitHub cpu/docs/smoke checks,
+resolved conversations, merge preserving source ancestry without bypass, and
+clean synchronized main. Self-review is labeled; no independent approval is claimed.
+Likely files: this task state and any substantiated review corrections.
+Resources: four build jobs, at most one CPU-hour for integration validation,
+zero GPU jobs and no new campaign allowance. Preserve every study artifact and
+the 15776-event ledger SHA-256
+2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0;
+cumulative consumption remains 15804.186067059 / 18002.574545061 GPU seconds.
+Starting source: 5c77323. Integration receipts will be retained under
+artifacts/gpup-copt-adapter-integration-20260930. GPUP-CONVERGENCE is not started.
+
+Local self-review and CPU acceptance pass. The reproduced interruption defect and
+fix are covered by partial-output, surviving-receipt, conservative-charge and
+no-promotion regressions. All eleven adapter tests pass in a clean source-only
+checkout. The full pinned-native gate passes 514 Rust tests, 207 Python tests,
+committed-record replay, 113 documentation pages and smoke. No checks were waived.
+The source audit binds three declared CPU coordinator/report/export corrections,
+359 unchanged measured files and 382 unchanged historical authority files. All
+1159 archived artifact references match. Both solver workers, CSC builder, native
+binaries, schemas, protocol and measured endpoints remain byte-identical; the
+ordinary scalar COPT path and runtime solver defaults remain unchanged.
+Independent report re-verification and current-head remote checks must pass before
+merging. Their outcomes, self-review, protected merge and cleanup receipts are
+retained in the integration directory above. No additional GPU execution is needed.
+
 ## GPUP-COPT-ADAPTER (2026-09-29)
 
 Status: complete; implementation, device acceptance, frozen study, independent

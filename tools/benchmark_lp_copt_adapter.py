@@ -13,6 +13,8 @@ from lp_copt_adapter_budget import CONFIG, ledger_for, protocol, receipt
 from lp_protocol import ROOT, checked_reference, digest, encoded, file_hash, ordered, read_json, write_json
 from validate_artifacts import schema_snapshot, validator
 
+RECOVERED = 'interrupted coordinator; reservation accounting retained; no retry'
+
 SUFFIXES = dict(worker='.worker.json', stdout='.stdout', stderr='.stderr', endpoint='.endpoint.json',
                 witness='.endpoint.witness.json', log='.endpoint.copt.log', cost='.cost.json',
                 raw_cost='.raw-cost.json', cert_cost='.endpoint.cert-cost.json',
@@ -63,7 +65,21 @@ def recover_intents(directory, attempted):
     for path in directory.glob('*.intent.json'):
         trial = read_json(path); dest = directory / (trial['id'] + '.trial.json')
         if trial['id'] in attempted and not dest.exists():
-            trial.update(status='process_failure', error='interrupted coordinator; full reservation retained; no retry')
+            trial.update(status='process_failure', error=RECOVERED)
+            for role, suffix in SUFFIXES.items():
+                trial[role] = reference(directory, directory / (trial['id'] + suffix))
+            if trial['worker']:
+                worker = read_json(directory / trial['worker']['path'])
+                for key in ['elapsed_ns', 'queue_ns', 'leased_ns', 'peak_rss_bytes', 'memory_method']:
+                    trial[key] = worker[key]
+            if trial['endpoint']:
+                try:
+                    endpoint = read_json(directory / trial['endpoint']['path'])
+                    trial['executed_backend'] = endpoint['witness']['executed_backend']
+                    trial['endpoint_class'] = endpoint['assessment']['classification']
+                except (ValueError, KeyError, TypeError):
+                    # Partial bytes stay bound; independent verification decides validity.
+                    trial['executed_backend'] = trial['endpoint_class'] = None
             write_json(dest, validate_trial(trial))
 
 
