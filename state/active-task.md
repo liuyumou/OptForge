@@ -1,5 +1,23 @@
 # Active Task
 
+## GPUP-SETUP protected integration (2026-09-29)
+
+Status: user authorized PR publication, self-review, fixes, protected merge and
+safe branch cleanup. The current instruction supersedes the implementation-phase
+no-push scope below. Review the completed runtime, evidence and study tooling,
+fix any findings, pass full pinned-native validation and current-head cpu/docs/smoke
+checks, resolve all conversations, merge preserving source ancestry, and synchronize
+local main. No release or subsequent research task is included.
+Resources: four build jobs, at most one CPU-hour for integration validation,
+zero GPU jobs and no new campaign allowance. Preserve all archived artifacts and
+the 15606-event ledger SHA-256
+ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b; cumulative consumption
+remains 15632.281207415 / 18002.574545061 GPU seconds. Initial source head:
+62c625f81892004b2cb0aa90fb2bf8f84c4b771c. Likely changes: this state and any review
+corrections. Self-review is explicitly labeled; no independent approval is claimed.
+Final review, checks, merge and cleanup receipts are retained under
+artifacts/gpup-setup-integration-20260929.
+
 ## GPUP-SETUP (2026-09-29)
 
 Status: complete; implementation, device acceptance, bounded study and final native
