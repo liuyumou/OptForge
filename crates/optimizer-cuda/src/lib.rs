@@ -21,6 +21,7 @@ use serde::Serialize;
 // would be concatenated with it and resolved in *this* scope, where the module's own
 // types are not in scope, so its intra-doc links would not resolve.
 pub mod probe;
+pub use optimizer_cuda_sys::setup;
 pub mod schedule;
 pub mod session;
 
@@ -102,6 +103,7 @@ pub fn parse_devices(output: &[u8]) -> Result<Vec<Device>, String> {
 
 /// Query physical devices with a five-second deadline and no CUDA context.
 pub fn discover() -> Discovery {
+    let _cost = optimizer_core::lp_cost::scope("device_discovery");
     match query_devices() {
         Ok(devices) if !devices.is_empty() => Discovery::Available { devices },
         Ok(_) => Discovery::Unavailable {

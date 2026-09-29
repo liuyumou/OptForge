@@ -1079,3 +1079,6 @@ mod research_cases;
 
 #[path = "device/adaptive.rs"]
 mod adaptive_cases;
+
+#[path = "device/primary.rs"]
+mod primary_cases;

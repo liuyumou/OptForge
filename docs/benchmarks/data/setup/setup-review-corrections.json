@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "measured_commit": "62c625f81892004b2cb0aa90fb2bf8f84c4b771c",
+  "files": [
+    {
+      "path": "crates/optimizer-cli/src/lp_setup.rs",
+      "measured_sha256": "303e544ee10ff262173c8f46f5af8230f8cda9e8d662af20c689a49fc60f9cef",
+      "reviewed_sha256": "430d240571fd287739fd299f4fadf63f311aa836df5711f0b37591f5587fff40",
+      "reason": "Reject omitted required error fields and receipts over 4096 events before replay; add CPU boundary regressions. Solve, context lifecycle and endpoint arithmetic are unchanged."
+    },
+    {
+      "path": "tools/report_lp_setup.py",
+      "measured_sha256": "1b6271fbe0d43ee08e46e9f97a3f1e40fe4312bce94111d0acd0e577e9f907e7",
+      "reviewed_sha256": "50d98060d9b57511574340029cd2cf6d612d72d08e8170b74c5d0377e0407368",
+      "reason": "Bind worker, stream, endpoint, activity, cost and setup references to the canonical filename for their attempt, in addition to validating content hashes. CPU-only reporting correction; immutable retained trials are reverified separately."
+    }
+  ]
+}

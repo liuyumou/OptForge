@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — fresh LP setup diagnosis
+
+- Separate discovery, driver initialization, context/module work and checked teardown
+  under SPEC-0018/ADR-0030. Add study-only experimental primary contexts and
+  setup-bound replay while preserving ordinary defaults and numerical evidence.
+- The [setup report](docs/benchmarks/lp-fresh-setup.md) verifies 32 attempts, certifies
+  24 timings and matches all 16 comparisons. No consistent latency benefit or preset.
+- Full native, 58 device tests, four primary sanitizers and twelve fixed-work
+  pairs/replays pass. Preserve every old limitation and the cumulative allowance;
+  hand off to optional GPUP-COPT-ADAPTER.
+
 ## Unreleased — adaptive host costs
 
 - Share canonical adaptive operators by matrix width, stream original-unit audits
@@ -54,6 +65,10 @@
 User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
+
+- Setup-source replay enforces the strict receipt schema's required nullable error
+  field and 4096-event limit; the setup report also binds each artifact path to its
+  attempt. Post-study validation corrections are separately hash-bound.
 
 ### Added
 

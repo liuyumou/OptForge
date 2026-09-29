@@ -1,0 +1,763 @@
+{
+  "$id": "lp-setup-trial-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "config_id": {
+            "const": "baseline-fp64"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adaptive": {
+            "const": null
+          },
+          "cuda_context": {
+            "const": "user"
+          },
+          "policy_id": {
+            "const": "fp64"
+          },
+          "variant": {
+            "const": "baseline"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "config_id": {
+            "const": "baseline-direct"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adaptive": {
+            "const": {
+              "audit_interval": 32,
+              "demotion": null,
+              "dual_absolute": 1e-07,
+              "ladder": [
+                "accumulation_fp32",
+                "fp64"
+              ],
+              "primal_absolute": 1e-07,
+              "relative": 1e-07,
+              "schema_version": 1
+            }
+          },
+          "cuda_context": {
+            "const": "user"
+          },
+          "policy_id": {
+            "const": "direct"
+          },
+          "variant": {
+            "const": "baseline"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "config_id": {
+            "const": "repaired-fp64"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adaptive": {
+            "const": null
+          },
+          "cuda_context": {
+            "const": "primary-experimental"
+          },
+          "policy_id": {
+            "const": "fp64"
+          },
+          "variant": {
+            "const": "repaired"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "config_id": {
+            "const": "repaired-direct"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adaptive": {
+            "const": {
+              "audit_interval": 32,
+              "demotion": null,
+              "dual_absolute": 1e-07,
+              "ladder": [
+                "accumulation_fp32",
+                "fp64"
+              ],
+              "primal_absolute": 1e-07,
+              "relative": 1e-07,
+              "schema_version": 1
+            }
+          },
+          "cuda_context": {
+            "const": "primary-experimental"
+          },
+          "policy_id": {
+            "const": "direct"
+          },
+          "variant": {
+            "const": "repaired"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "activity": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "activity_wait_ns": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "adaptive": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "lp-adaptive-v1.schema.json"
+        }
+      ]
+    },
+    "block": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "budget_authority_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "campaign_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "timing",
+        "profile"
+      ]
+    },
+    "config_id": {
+      "enum": [
+        "baseline-fp64",
+        "baseline-direct",
+        "repaired-fp64",
+        "repaired-direct"
+      ]
+    },
+    "config_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "cost": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "cuda_context": {
+      "enum": [
+        "user",
+        "primary-experimental"
+      ]
+    },
+    "elapsed_ns": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "endpoint": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "endpoint_class": {
+      "anyOf": [
+        {
+          "enum": [
+            "missing_candidate",
+            "certified_success",
+            "feasible_unclosed",
+            "missing_certificate",
+            "numerical_rejection",
+            "interrupted",
+            "timeout",
+            "work_limit",
+            "unsupported",
+            "backend_failure",
+            "reference_only"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "error": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "evidence_format": {
+      "const": "compact-v1"
+    },
+    "executed_backend": {
+      "anyOf": [
+        {
+          "enum": [
+            "highs",
+            "host-lp",
+            "cuda-lp",
+            "cuda-lp-matched",
+            "cuda-lp-tuned",
+            "copt-cpu-default",
+            "copt-cpu-pdlp",
+            "copt-gpu-pdlp"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "instance_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "leased_ns": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "limits": {
+      "additionalProperties": false,
+      "properties": {
+        "cleanup_seconds": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "device_buffer_bytes": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "host_rss_bytes": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "output_bytes": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "poll_ms": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "solve_seconds": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "cleanup_seconds",
+        "device_buffer_bytes",
+        "host_rss_bytes",
+        "output_bytes",
+        "poll_ms",
+        "solve_seconds"
+      ],
+      "type": "object"
+    },
+    "lp_settings": {
+      "$ref": "lp-settings-v1.schema.json"
+    },
+    "memory_method": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "timing",
+        "profile"
+      ]
+    },
+    "model_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "order": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "peak_rss_bytes": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "policy_id": {
+      "enum": [
+        "fp64",
+        "direct"
+      ]
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "binary_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "build_profile": {
+          "enum": [
+            "release",
+            "debug"
+          ]
+        },
+        "cargo": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "code_object_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "copt_binding_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "copt_library_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cpu": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "cpu_affinity": {
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "device": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "dirty": {
+          "type": "boolean"
+        },
+        "highs_library_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "os": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        "rustc": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "schema_snapshot_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "source_tree_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "telemetry_after": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "telemetry_before": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "revision",
+        "dirty",
+        "source_tree_sha256",
+        "binary_sha256",
+        "code_object_sha256",
+        "highs_library_sha256",
+        "rustc",
+        "cargo",
+        "os",
+        "cpu",
+        "cpu_affinity",
+        "build_profile",
+        "device",
+        "telemetry_before",
+        "telemetry_after",
+        "schema_snapshot_sha256",
+        "copt_library_sha256",
+        "copt_binding_sha256"
+      ],
+      "type": "object"
+    },
+    "queue_ns": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "repetition": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "request_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "requested_backend": {
+      "enum": [
+        "highs",
+        "host-lp",
+        "cuda-lp",
+        "cuda-lp-matched",
+        "cuda-lp-tuned",
+        "copt-cpu-default",
+        "copt-cpu-pdlp",
+        "copt-gpu-pdlp"
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "setup": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "solve": {
+      "$ref": "solve-config-v1.schema.json"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "timeout",
+        "cancelled",
+        "memory_limit",
+        "process_failure",
+        "invalid_evidence",
+        "missing_evidence",
+        "lease_timeout",
+        "lease_cancelled",
+        "cancelled_before_launch",
+        "activity_blocked"
+      ]
+    },
+    "stderr": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stdout": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "variant": {
+      "enum": [
+        "baseline",
+        "repaired"
+      ]
+    },
+    "verification_ns": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "worker": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "campaign_sha256",
+    "instance_id",
+    "model_sha256",
+    "config_id",
+    "config_sha256",
+    "block",
+    "repetition",
+    "order",
+    "mode",
+    "requested_backend",
+    "executed_backend",
+    "status",
+    "endpoint_class",
+    "endpoint",
+    "worker",
+    "stdout",
+    "stderr",
+    "elapsed_ns",
+    "queue_ns",
+    "leased_ns",
+    "verification_ns",
+    "peak_rss_bytes",
+    "memory_method",
+    "limits",
+    "provenance",
+    "error",
+    "budget_authority_sha256",
+    "activity_wait_ns",
+    "activity",
+    "category",
+    "solve",
+    "lp_settings",
+    "request_sha256",
+    "cost",
+    "evidence_format",
+    "variant",
+    "policy_id",
+    "adaptive",
+    "cuda_context",
+    "setup"
+  ],
+  "title": "GPUP-ADAPTIVE-COST trial v1",
+  "type": "object"
+}

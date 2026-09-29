@@ -12,10 +12,10 @@ active_research_track: GPUP
 # keeps its own specification, endpoint and budget: amortized throughput never
 # substitutes for the single-solve latency endpoint (ADR-0013).
 # 2026-09-27: order the COPT report's follow-ups before more arithmetic work.
-# GPUP-EVIDENCE, GPUP-HOST and GPUP-ADAPTIVE-COST are complete; GPUP-SETUP follows.
+# GPUP-EVIDENCE, GPUP-HOST, GPUP-ADAPTIVE-COST and GPUP-SETUP are complete.
 # Listed priority is distinct from depends_on: setup and optional COPT adapter
 # investigations are not prerequisites for quantization. See the roadmap handoff.
-next_ready_task: GPUP-SETUP
+next_ready_task: GPUP-COPT-ADAPTER
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -203,9 +203,10 @@ tasks:
     acceptance: "ADR-0029/SPEC-0017 complete; full native, 55 device and four adaptive sanitizer gates; twelve old/new pairs and twelve replays bitwise; 32 verified attempts, 24 certified timings, 16 identical numerical/work pairs; docs/benchmarks/lp-adaptive-host-cost.md"
   - id: GPUP-SETUP
     title: Investigate fresh device discovery, context, module and teardown costs
-    status: planned
+    status: complete
     depends_on: [GPUP-COPT]
-    acceptance: "Bounded phase attribution before any repair; preserve fresh-process endpoint; persistent contexts remain separately labeled session work; proceed only within an explicit resource contract"
+    specification: docs/specifications/SPEC-0018-lp-fresh-setup.md
+    acceptance: "ADR-0030 complete; four prior control profiles; 32 verified attempts, 24 certified timings, 16 equal comparisons; full native, 58 device, four primary sanitizers, twelve fixed-work pairs/replays; no consistent benefit or default change; docs/benchmarks/lp-fresh-setup.md"
   - id: GPUP-COPT-ADAPTER
     title: Investigate optional COPT bulk model construction
     status: planned

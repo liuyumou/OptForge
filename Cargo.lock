@@ -134,6 +134,7 @@ dependencies = [
  "optimizer-schedule",
  "optimizer-schedule-examples",
  "optimizer-solver",
+ "serde",
  "serde_json",
 ]
 
@@ -162,6 +163,7 @@ version = "0.1.0"
 dependencies = [
  "libc",
  "optimizer-core",
+ "serde",
 ]
 
 [[package]]

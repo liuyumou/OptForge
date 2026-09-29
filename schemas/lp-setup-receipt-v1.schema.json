@@ -1,0 +1,84 @@
+{
+  "$id": "lp-setup-receipt-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "device": {
+      "type": "string"
+    },
+    "endpoint_sha256": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      ]
+    },
+    "error": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "events": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "detail": {
+            "type": "string"
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "operation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation",
+          "ok",
+          "detail"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4096,
+      "type": "array"
+    },
+    "observed": {
+      "enum": [
+        "user",
+        "primary-experimental",
+        null
+      ]
+    },
+    "requested": {
+      "enum": [
+        "user",
+        "primary-experimental"
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "failed"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "requested",
+    "observed",
+    "device",
+    "status",
+    "endpoint_sha256",
+    "error",
+    "events"
+  ],
+  "type": "object"
+}

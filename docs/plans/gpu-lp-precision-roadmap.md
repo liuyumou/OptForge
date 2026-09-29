@@ -266,7 +266,8 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Current handoff: GPUP-SETUP, a separately bounded fresh device setup diagnosis.
+Current handoff: optional GPUP-COPT-ADAPTER. GPUP-SETUP is complete under
+SPEC-0018/ADR-0030 with a measured negative primary-context result.
 GPUP-ADAPTIVE-COST is complete under SPEC-0017/ADR-0029; its
 [report](../benchmarks/lp-adaptive-host-cost.md) verifies 32 attempts, certifies
 24 timings and preserves all 16 numerical/work pairs. GPUP-HOST is complete under SPEC-0016/ADR-0028; its
@@ -328,7 +329,7 @@ planned bounded tasks, not accepted behavior changes or performance promises.
 | 1 | **GPUP-EVIDENCE: complete** | [SPEC-0015 report](../benchmarks/lp-compact-evidence.md): four full-witness CPU round trips; 24 new attempts, 15 verified endpoints, 12 certified timings. Compact verifies 12/12 and certifies 9/12, recovering irregular/dense 65536 output; mixed remains time-limited. Historical COPT cells are unchanged. |
 | 2 | **GPUP-HOST: complete** | [SPEC-0016 report](../benchmarks/lp-immutable-host-input.md): all 28 attempts verify, 24 fresh timings certify, 14 numerical/work pairs match. Parse/validation calls fall from two to one; sparse reconstruction and every candidate/certificate assessment remain fresh. Scope is one fresh solve, with no session or adaptive-preparation change. |
 | 3 | **GPUP-ADAPTIVE-COST: complete** | [SPEC-0017 report](../benchmarks/lp-adaptive-host-cost.md): 32 verified attempts, 24 certified timings, 16 identical numerical/work pairs; full ladders prepare two operators rather than five, with streamed audits and borrowed probes. Arithmetic and recovery remain unchanged; no preset. |
-| 4 | **GPUP-SETUP: fresh device setup diagnosis** | Attribute discovery, context creation, module loading and teardown before choosing one repair. Setup is 59.8% of small-4 tuned wall. Complete the bounded diagnosis even if no worthwhile repair follows; persistent contexts remain a separate warm/session endpoint. |
+| 4 | **GPUP-SETUP: complete** | [SPEC-0018 report](../benchmarks/lp-fresh-setup.md): 32 verified attempts, 24 certified timings and 16 equal comparisons; four control profiles precede experimental primary contexts. No consistent fresh-process benefit or default change. Persistent contexts remain a separate session endpoint. |
 | 5 | **GPUP-COPT-ADAPTER: optional external baseline construction** | Test bulk model construction while preserving coefficients, senses, offsets, import guards and fresh certification. Input/setup is 54.5% of dense65536 GPU wrapper wall. Record a new adapter identity and preserve historical comparisons. This task depends on continued use of the optional local COPT control. |
 | 6 | **GPUP-CONVERGENCE: work amplification and remaining device diagnosis** | Reassess proposals, audits, probes and replay after host/adaptive repairs, then compare certification coverage. A small graph-node trace is optional only if it resolves a concrete execution decision. Completion is a bounded diagnosis feeding GPUP-7, not a requirement to solve every convergence failure or expose COPT internals. |
 | 7 | **GPUP-7: quantization interface, then sparse FP8** | Accept the bounded interface, resource and numerical contract before behavior. Stage matrix-only candidates before vector quantization; retain canonical transpose consistency, guards, seeded replay, FP64 controls and development screening. |
@@ -375,4 +376,8 @@ forward, preserving the 15392-event prefix above. GPUP-ADAPTIVE-COST is now comp
 under SPEC-0017/ADR-0029, using 201.890184622 GPU seconds within existing allowance.
 Carry 15407.672759957 / 18002.574545061 seconds and the 15528-event ledger
 SHA-256 cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6; the 15452-event prefix remains intact.
-GPUP-SETUP is next and requires its own bounded diagnosis/resource contract.
+GPUP-SETUP is complete under SPEC-0018/ADR-0030, using 224.608447458 GPU seconds.
+Carry 15632.281207415 / 18002.574545061 seconds and 15606 ledger events, SHA-256
+ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b; the 15528-event prefix remains intact.
+No new allowance or preset. The next handoff is optional GPUP-COPT-ADAPTER, followed
+by GPUP-CONVERGENCE before GPUP-7.

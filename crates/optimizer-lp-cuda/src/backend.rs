@@ -134,14 +134,20 @@ impl CudaLpBackend {
         path: std::path::PathBuf,
     ) -> Result<Self, ValidationError> {
         execution.validate()?;
-        let bytes = std::fs::read(&path).map_err(|e| {
-            ValidationError::new(optimizer_core::ErrorKind::Document, e.to_string())
-        })?;
+        let bytes = {
+            let _cost = optimizer_core::lp_cost::scope("code_image_read");
+            std::fs::read(&path).map_err(|e| {
+                ValidationError::new(optimizer_core::ErrorKind::Document, e.to_string())
+            })?
+        };
         let mut backend = Self::open_with_code_object(context, settings, path)?;
         backend.matched = true;
         backend.execution = Some(optimizer_core::LpExecutionRecord {
             settings: execution,
-            code_object_sha256: optimizer_core::sha256::hex(&bytes),
+            code_object_sha256: {
+                let _cost = optimizer_core::lp_cost::scope("code_image_hash");
+                optimizer_core::sha256::hex(&bytes)
+            },
         });
         backend.code_image = Some(bytes);
         Ok(backend)

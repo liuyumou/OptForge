@@ -2,6 +2,7 @@
 
 mod batch;
 mod input;
+mod lp_setup;
 mod lp_study;
 mod model;
 mod provenance;
