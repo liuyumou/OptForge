@@ -1,5 +1,47 @@
 # Active Task
 
+## GPUP-SETUP (2026-09-29)
+
+Status: complete; implementation, device acceptance, bounded study and final native
+gate pass. Diagnosed fresh discovery, driver,
+context/module and teardown costs before testing one experimental primary-context
+lifecycle. SPEC-0018 and ADR-0030 record the contract before runtime edits.
+Baseline 9bf8e8d5d6f6e4fd3b2eb60ae494506ed620323e is archived in
+artifacts/gpup-setup-baseline. Changes: CUDA boundary and safe study plumbing,
+opt-in cost scopes, strict setup study/schema/budget/replay/report tooling and tests.
+Acceptance: full pinned-native tools/check.sh, lifecycle fault tests, regular device
+gates, four primary-context sanitizers, twelve fixed-work pairs and twelve replays,
+and independently verified 24 timings plus eight profiles. Four user-context profiles
+must precede primary-context implementation. Negative results are complete evidence.
+Resources: four build jobs, four CPU-hours; timing 900 GPU seconds in ablations,
+profiles 300 and acceptance 600 in repeatability, combined 1800; no new allowance.
+Preserve cumulative 15407.672759957 / 18002.574545061 GPU seconds and all phase caps,
+15528 events and prefix cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6.
+All GPU jobs use the shared lease and full reservations; retain every failure and
+never retry attempted study identities. Record evidence and commit locally after
+acceptance; no push. Handoff: optional GPUP-COPT-ADAPTER, without beginning it.
+
+Acceptance evidence: [report](../docs/benchmarks/lp-fresh-setup.md), strict protocol,
+three source/binary archives and hash-bound repository data. All 32 attempts verify,
+24 timings certify and all 16 numerical/work pairs match. Control attribution was
+completed before the primary implementation; no consistent latency benefit follows.
+Full native pre-study gate passes 514 Rust and 195 Python tests; 58 candidate device
+tests and all four primary-context sanitizers pass. Twelve fixed-work pairs and
+setup-bound replays match, with both binaries verifying all 36 acceptance endpoints.
+The source-only synthetic-budget tests pass without campaign artifacts. No GPU
+attempt failed or was retried. The initial test-order lint receipt is retained.
+The audit preserves 342 measured and 190 historical authority files. Task charge
+224.608447458 GPU seconds: timing 47.100554150/900,
+profiles 15.598178240/300, acceptance 161.909715068/600.
+Cumulative 15632.281207415 / 18002.574545061 seconds; 15606 ledger events,
+SHA-256 ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b; the 15528-event prefix and
+all phase caps remain intact. Final full pinned-native tools/check.sh passes 514 Rust
+tests, 195 Python integration tests, committed-record replay, 110 documentation
+pages and smoke. Metered child CPU totals 2085.569504 seconds within four hours;
+small source-edit/catalog actions are outside that meter. Final source/ledger audits
+and all 488 artifact references pass. Local commit follows. No push; optional
+GPUP-COPT-ADAPTER is the next handoff and is not begun.
+
 ## GPUP-ADAPTIVE-COST protected integration (2026-09-29)
 
 Status: user authorized PR publication, self-review and protected merge after checks.

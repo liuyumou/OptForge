@@ -167,8 +167,19 @@ Task charge 201.890184622 GPU seconds; cumulative 15407.672759957 /
 18002.574545061 seconds, with no added allowance. The 15528-event ledger SHA-256
 cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6
 preserves the 15452-event prefix above and all phase caps.
-Next is GPUP-SETUP, which needs its bounded diagnosis/resource contract before work.
-GPUP-CONVERGENCE still precedes GPUP-7's unaccepted quantization contract.
+GPUP-SETUP is complete under accepted SPEC-0018/ADR-0030. Its
+[report](docs/benchmarks/lp-fresh-setup.md) verifies all 32 attempts, certifies 24
+fresh timings and matches all 16 numerical/work comparisons. Four control profiles
+precede the sole experimental primary-context repair; retain/release provides no
+consistent fresh-process latency benefit. User contexts remain the default, primary
+contexts are study-only, with checked lifecycle receipts and setup-bound replay.
+Full native, 58 candidate device tests, four primary sanitizers, twelve fixed-work
+pairs and twelve replays pass. Historical racecheck/session/mixed-65536 gaps remain.
+Task charge 224.608447458 GPU seconds; cumulative 15632.281207415 /
+18002.574545061 seconds, no new allowance. The 15606-event ledger SHA-256
+ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b preserves the 15528-event prefix above
+and every phase cap. Next is optional GPUP-COPT-ADAPTER, then GPUP-CONVERGENCE;
+GPUP-7 still requires its accepted quantization contract.
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent

@@ -403,6 +403,13 @@ pub(crate) fn check(options: &[OsString]) -> io::Result<u8> {
 /// Returns an unsupported failure naming what went wrong: the lease, discovery, the
 /// UUID, or an unprovisioned build.
 pub(crate) fn open_device(device: &optimizer_core::Device) -> io::Result<Option<DeviceSession>> {
+    open_device_with_context(device, optimizer_cuda::setup::ContextMode::User)
+}
+
+pub(crate) fn open_device_with_context(
+    device: &optimizer_core::Device,
+    mode: optimizer_cuda::setup::ContextMode,
+) -> io::Result<Option<DeviceSession>> {
     let optimizer_core::Device::Gpu(uuid) = device else {
         return Ok(None);
     };
@@ -414,7 +421,7 @@ pub(crate) fn open_device(device: &optimizer_core::Device) -> io::Result<Option<
     // Without this, a host with no provisioned code object reports a path and a
     // host with no driver reports a driver, and neither says which device was
     // being opened -- which is the one thing the caller definitely specified.
-    DeviceSession::open(uuid, &path, std::time::Duration::from_secs(300))
+    DeviceSession::open_with_context(uuid, &path, std::time::Duration::from_secs(300), mode)
         .map(Some)
         .map_err(|error| io::Error::other(format!("unsupported: device {uuid}: {error}")))
 }

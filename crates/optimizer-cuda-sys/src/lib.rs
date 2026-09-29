@@ -27,6 +27,8 @@ use std::ptr;
 use std::rc::Rc;
 use std::sync::OnceLock;
 
+mod primary;
+pub mod setup;
 mod status;
 
 pub use status::DriverStatus;
@@ -236,6 +238,7 @@ fn driver() -> Result<&'static Driver> {
     let resolved = DRIVER.get_or_init(|| {
         // SAFETY: a literal NUL-terminated path, and the flags are the documented
         // ones. `RTLD_NOW` surfaces a missing symbol here rather than at first call.
+        let loading = optimizer_core::lp_cost::scope("driver_library_load");
         let handle =
             unsafe { libc::dlopen(c"libcuda.so.1".as_ptr(), libc::RTLD_NOW | libc::RTLD_LOCAL) };
         if handle.is_null() {
@@ -250,11 +253,16 @@ fn driver() -> Result<&'static Driver> {
             };
             return Err(DeviceError::DriverUnavailable(detail));
         }
+        drop(loading);
+        let resolution = optimizer_core::lp_cost::scope("driver_symbol_resolution");
         // SAFETY: `handle` is a live library handle from `dlopen`.
         let driver = unsafe { Driver::resolve(handle) }?;
+        drop(resolution);
+        let initialization = optimizer_core::lp_cost::scope("driver_initialization");
         // SAFETY: resolved above; flags must be zero per the driver contract.
         let status = unsafe { (driver.init)(0) };
         check(&driver, "cuInit", status)?;
+        drop(initialization);
         Ok(driver)
     });
     resolved.as_ref().map_err(Clone::clone)
@@ -438,9 +446,24 @@ fn format_uuid(raw: &[u8; 16]) -> String {
 pub struct Context {
     raw: CuContext,
     info: DeviceInfo,
+    primary_device: Option<CuDevice>,
+    _lifetime_owner: Option<std::sync::Arc<dyn Send + Sync>>,
 }
 
 impl Context {
+    /// Open an explicitly selected study context; ordinary callers use `create`.
+    ///
+    /// # Errors
+    /// Returns device failures or an unavailable experimental policy.
+    pub fn create_with_mode(uuid: &str, mode: setup::ContextMode) -> Result<Self> {
+        let result = match mode {
+            setup::ContextMode::User => Self::create(uuid),
+            setup::ContextMode::PrimaryExperimental => Self::create_primary(uuid),
+        };
+        setup::event(mode.creation_event(), result.is_ok(), uuid);
+        result
+    }
+
     /// Create a context on the device with `uuid`.
     ///
     /// # Errors
@@ -451,6 +474,7 @@ impl Context {
     pub fn create(uuid: &str) -> Result<Self> {
         let _component_scope = optimizer_core::lp_cost::scope("device_context");
         let driver = driver()?;
+        let lookup = optimizer_core::lp_cost::scope("device_lookup");
         let info = devices()?
             .into_iter()
             .find(|candidate| candidate.uuid == uuid)
@@ -460,12 +484,21 @@ impl Context {
         // SAFETY: `device` is live and the ordinal came from this driver.
         let status = unsafe { (driver.device_get)(&mut device, info.ordinal) };
         check(driver, "cuDeviceGet", status)?;
+        drop(lookup);
 
+        let creation = optimizer_core::lp_cost::scope("context_create_api");
         let mut raw: CuContext = ptr::null_mut();
         // SAFETY: `raw` is a live slot; flags of zero is the documented default.
         let status = unsafe { (driver.context_create)(&mut raw, 0, device) };
         check(driver, "cuCtxCreate_v2", status)?;
-        let context = Self { raw, info };
+        drop(creation);
+        let identity = optimizer_core::lp_cost::scope("context_identity_check");
+        let context = Self {
+            raw,
+            info,
+            primary_device: None,
+            _lifetime_owner: None,
+        };
 
         // Read the identity back through the handle we actually hold, rather than
         // trusting the lookup that produced the ordinal. This is the assertion
@@ -478,7 +511,43 @@ impl Context {
                 found: observed.uuid,
             });
         }
+        drop(identity);
         Ok(context)
+    }
+
+    fn create_primary(uuid: &str) -> Result<Self> {
+        let _cost = optimizer_core::lp_cost::scope("device_context");
+        let driver = driver()?;
+        let lookup = optimizer_core::lp_cost::scope("device_lookup");
+        let info = devices()?
+            .into_iter()
+            .find(|d| d.uuid == uuid)
+            .ok_or_else(|| DeviceError::DeviceNotFound(uuid.into()))?;
+        let mut device = 0;
+        // SAFETY: live output slot and ordinal read from this driver.
+        check(driver, "cuDeviceGet", unsafe {
+            (driver.device_get)(&mut device, info.ordinal)
+        })?;
+        drop(lookup);
+        let raw = primary::create(driver, device, info.ordinal, uuid)?;
+        Ok(Self {
+            raw,
+            info,
+            primary_device: Some(device),
+            _lifetime_owner: None,
+        })
+    }
+
+    /// Keep a cooperative ownership guard alive through this context's destruction.
+    /// Child resources already retain the context; this extends the owner's lifetime
+    /// even when a caller drops its session before the last child resource.
+    #[must_use]
+    pub fn with_lifetime_owner(mut self, owner: std::sync::Arc<dyn Send + Sync>) -> Self {
+        self._lifetime_owner = Some(match self._lifetime_owner.take() {
+            Some(previous) => std::sync::Arc::new((previous, owner)),
+            None => owner,
+        });
+        self
     }
 
     /// The device this context is bound to.
@@ -521,14 +590,18 @@ impl Context {
         // The driver reads a NUL-terminated image for PTX and a length-prefixed one
         // for cubin; appending a NUL is safe for both and is what lets one entry
         // point accept either.
+        let preparation = optimizer_core::lp_cost::scope("module_image_preparation");
         let mut owned = Vec::with_capacity(image.len() + 1);
         owned.extend_from_slice(image);
         owned.push(0);
+        drop(preparation);
+        let loading = optimizer_core::lp_cost::scope("module_load_api");
         let mut raw: CuModule = ptr::null_mut();
         // SAFETY: `raw` is a live slot and `owned` is a NUL-terminated image that
         // outlives the call.
         let status = unsafe { (driver.module_load_data)(&mut raw, owned.as_ptr().cast()) };
         check(driver, "cuModuleLoadData", status)?;
+        drop(loading);
         Ok(Module {
             raw,
             _context: Rc::clone(self),
@@ -542,8 +615,10 @@ impl Context {
     /// Returns [`DeviceError::CodeObjectMissing`] when the file is absent, and
     /// whatever [`Context::load_module`] returns otherwise.
     pub fn load_module_file(self: &Rc<Self>, path: &Path) -> Result<Module> {
+        let reading = optimizer_core::lp_cost::scope("code_image_read");
         let image = std::fs::read(path)
             .map_err(|_| DeviceError::CodeObjectMissing(path.display().to_string()))?;
+        drop(reading);
         self.load_module(&image)
     }
 
@@ -605,9 +680,14 @@ impl Drop for Context {
         // process is either exiting or has already recorded the failure that led
         // here, and the driver reclaims the context when the process ends.
         if let Ok(driver) = driver() {
+            if let Some(device) = self.primary_device {
+                primary::destroy(driver, device, self.raw);
+                return;
+            }
             // SAFETY: `self.raw` is a live context this value owns, dropped once.
             unsafe {
-                let _ = (driver.context_destroy)(self.raw);
+                let status = (driver.context_destroy)(self.raw);
+                setup::status_event("context_destroy_user", status);
             }
         }
     }
@@ -660,7 +740,8 @@ impl Drop for Module {
         if let Ok(driver) = driver() {
             // SAFETY: `self.raw` is a live module this value owns, dropped once.
             unsafe {
-                let _ = (driver.module_unload)(self.raw);
+                let status = (driver.module_unload)(self.raw);
+                setup::status_event("module_unload", status);
             }
         }
     }
@@ -730,7 +811,8 @@ impl Drop for Stream {
         if let Ok(driver) = driver() {
             // SAFETY: `self.raw` is a live stream this value owns, dropped once.
             unsafe {
-                let _ = (driver.stream_destroy)(self.raw);
+                let status = (driver.stream_destroy)(self.raw);
+                setup::status_event("stream_destroy", status);
             }
         }
     }
@@ -847,7 +929,8 @@ impl<T: Copy> Drop for DeviceBuffer<T> {
         if let Ok(driver) = driver() {
             // SAFETY: `self.raw` is a live allocation this value owns, dropped once.
             unsafe {
-                let _ = (driver.memory_free)(self.raw);
+                let status = (driver.memory_free)(self.raw);
+                setup::status_event("memory_free", status);
             }
         }
     }

@@ -93,8 +93,13 @@ pub struct DeviceSession {
     // destroyed before the lease is released, so a second holder cannot create one
     // while this run still owns device memory.
     context: Rc<Context>,
-    _lease: Ownership,
+    _lease: SessionOwnership,
     driver_version: String,
+}
+
+enum SessionOwnership {
+    Local { _lease: Ownership },
+    Shared { _lease: std::sync::Arc<Ownership> },
 }
 
 impl DeviceSession {
@@ -110,6 +115,18 @@ impl DeviceSession {
     /// Returns the [`SessionError`] that applies, each distinguishable so a
     /// diagnostic sends a reader to the right place.
     pub fn open(uuid: &str, lease_path: &Path, timeout: Duration) -> Result<Self, SessionError> {
+        Self::open_with_context(uuid, lease_path, timeout, crate::setup::ContextMode::User)
+    }
+
+    /// Open with an explicit study context policy, retaining the lease contract.
+    /// # Errors
+    /// Returns the same errors as `open` or a refused experimental context.
+    pub fn open_with_context(
+        uuid: &str,
+        lease_path: &Path,
+        timeout: Duration,
+        mode: crate::setup::ContextMode,
+    ) -> Result<Self, SessionError> {
         let cancelled = std::sync::atomic::AtomicBool::new(false);
         let lease = Ownership::acquire_or_inherit(lease_path, timeout, &cancelled)
             .map_err(|error| SessionError::Lease(error.to_string()))?;
@@ -135,10 +152,20 @@ impl DeviceSession {
 
         // Discovery already found this UUID above, so the driver refusing it means
         // the two disagree about visibility rather than that the device is absent.
-        let context = Rc::new(Context::create(uuid).map_err(|error| match error {
+        let context = Context::create_with_mode(uuid, mode).map_err(|error| match error {
             DeviceError::DeviceNotFound(uuid) => SessionError::HiddenFromDriver(uuid),
             other => SessionError::Device(other.to_string()),
-        })?);
+        })?;
+        let (context, lease) = if mode == crate::setup::ContextMode::PrimaryExperimental {
+            let lease = std::sync::Arc::new(lease);
+            (
+                context.with_lifetime_owner(lease.clone()),
+                SessionOwnership::Shared { _lease: lease },
+            )
+        } else {
+            (context, SessionOwnership::Local { _lease: lease })
+        };
+        let context = Rc::new(context);
         Ok(Self {
             context,
             _lease: lease,

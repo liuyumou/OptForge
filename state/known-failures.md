@@ -1,5 +1,21 @@
 # Known Failures and Limitations
 
+## Fresh primary contexts do not show a consistent latency benefit
+
+The [GPUP-SETUP report](../docs/benchmarks/lp-fresh-setup.md) verifies all 32 attempts,
+certifies 24 timings and matches 16 numerical/work comparisons. Primary retain/release
+still takes about 170–189 ms in these separate profiles; it does not remove fresh
+context work. Three paired intervals span one; direct irregular-32768 shows a small
+scoped slowdown (user/primary 0.9947, 95% interval 0.9845–0.9948). User contexts remain
+the default. The experimental primary path requires an inactive context and inherited
+lease, with checked cleanup and separate setup receipts. No persistent reuse or preset.
+
+All native, regular device and four primary-scope sanitizer gates pass, along with
+twelve fixed-work pairs/replays. No actual GPU attempt failed or was retried; one
+initial CPU lint failure was corrected and retained. Historical mixed-65536, large
+sessions and tuned_cases racecheck gaps remain open. Optional COPT adapter and
+convergence diagnosis are the next separately bounded tasks.
+
 ## Adaptive host-cost results are scoped; reference arithmetic remains
 
 The [GPUP-ADAPTIVE-COST report](../docs/benchmarks/lp-adaptive-host-cost.md)

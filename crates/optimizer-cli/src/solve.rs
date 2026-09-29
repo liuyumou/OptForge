@@ -32,6 +32,20 @@ pub(crate) fn solve_with_output(
     model_limit: u64,
     format: EvidenceFormat,
 ) -> io::Result<u8> {
+    solve_with_setup(
+        options,
+        model_limit,
+        format,
+        optimizer_cuda::setup::ContextMode::User,
+    )
+}
+
+pub(crate) fn solve_with_setup(
+    options: &[OsString],
+    model_limit: u64,
+    format: EvidenceFormat,
+    mode: optimizer_cuda::setup::ContextMode,
+) -> io::Result<u8> {
     let _cost = optimizer_core::lp_cost::scope("solve");
     let input_started = std::time::Instant::now();
     let mut evidence_path = None;
@@ -264,7 +278,7 @@ pub(crate) fn solve_with_output(
             // scope. A backend that answered with a different implementation would
             // write a record naming itself for work it did not do.
             let opening = diagnostics.start();
-            let session_result = crate::registry::open_device(&device);
+            let session_result = crate::registry::open_device_with_context(&device, mode);
             diagnostics.finish("device_context", opening);
             match session_result? {
                 Some(session) => {

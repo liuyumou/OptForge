@@ -250,3 +250,25 @@ historical hash matches exactly; it preserves the importer-modified copy.
 from the verified report (Matplotlib is optional offline plotting tooling).
 Neither launches device work. Raw/partial files and unavailable graph-node activity
 remain retained; trace samples never fill missing primary timings.
+
+## Experimental fresh context setup
+
+[SPEC-0018](../specifications/SPEC-0018-lp-fresh-setup.md) and the
+[completed setup report](../benchmarks/lp-fresh-setup.md) retain a negative bounded
+primary-context comparison. Ordinary solve and sessions continue to use user contexts.
+Only explicit tuned `lp-study solve`/`replay` accepts `--cuda-context user` or
+`--cuda-context primary-experimental`, together with a new `--setup-receipt PATH`.
+Primary studies require the inherited shared host lease and refuse current/active
+contexts. They do not reset another owner or persist a context across solves.
+
+A setup receipt binds policy, checked lifecycle/cleanup and the numerical endpoint
+hash. Numerical evidence formats remain unchanged. For setup-aware replay, supply
+`--setup-source ORIGINAL-SETUP.json --setup-receipt NEW-SETUP.json` along with the
+existing model/evidence/output/device arguments. Replay restores the source policy
+and refuses an explicit conflicting context option. Ordinary endpoint replay retains
+its historical semantics; it does not claim to restore separate setup metadata.
+
+Use `python3 tools/benchmark_lp_setup.py --dry-run` to inspect the frozen development
+grid and `python3 tools/report_lp_setup.py` for CPU-only re-verification. Device work
+is admitted only through the strict task budget and shared lease; completed attempts
+are immutable. No extra allowance or supported preset follows from this study.

@@ -8,12 +8,34 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
     let mut model_limit = None;
     let mut costs = None;
     let mut format = None;
+    let mut context_mode = None;
+    let mut setup_receipt = None;
+    let mut setup_source = None;
     let mut filtered = Vec::new();
     for pair in args.chunks(2) {
         let [key, value] = pair else {
             return Err(argument("each flag requires a value"));
         };
         match key.to_str() {
+            Some("--cuda-context") => {
+                if context_mode
+                    .replace(crate::lp_setup::parse_mode(value)?)
+                    .is_some()
+                {
+                    return Err(argument("duplicate CUDA context"));
+                }
+            }
+            Some("--setup-receipt") => {
+                if setup_receipt.replace(std::path::Path::new(value)).is_some() {
+                    return Err(argument("duplicate setup receipt"));
+                }
+            }
+            Some("--setup-source") => {
+                if setup_source.replace(std::path::Path::new(value)).is_some() {
+                    return Err(argument("duplicate setup source"));
+                }
+            }
+
             Some("--model-byte-limit") => {
                 let limit = value
                     .to_str()
@@ -65,14 +87,88 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
     if command == "solve" && !filtered.iter().any(|v| v == "--lp-evidence") {
         return Err(argument("study solve requires --lp-evidence"));
     }
+    let flag = |name: &str| {
+        filtered
+            .chunks(2)
+            .find(|pair| pair[0] == name)
+            .map(|pair| pair[1].as_os_str())
+    };
+    if let Some(source) = setup_source {
+        if command != "replay" {
+            return Err(argument("setup source requires replay"));
+        }
+        let evidence =
+            flag("--evidence").ok_or_else(|| argument("setup replay requires evidence"))?;
+        let recorded = crate::lp_setup::source_mode(source, std::path::Path::new(evidence))?;
+        if context_mode.is_some_and(|m| m != recorded) {
+            return Err(argument("CUDA context differs from setup source"));
+        }
+        context_mode = Some(recorded);
+    }
+    if context_mode.is_some() != setup_receipt.is_some() {
+        return Err(argument(
+            "explicit CUDA context and setup receipt are required together",
+        ));
+    }
+    if let Some(path) = setup_receipt {
+        if !matches!(command.to_str(), Some("solve" | "replay")) || path.exists() {
+            return Err(argument(
+                "setup receipt requires solve/replay and a new output path",
+            ));
+        }
+        if command == "solve" && flag("--backend") != Some(std::ffi::OsStr::new("cuda-lp-tuned")) {
+            return Err(argument("setup observation requires cuda-lp-tuned"));
+        }
+    }
+    if setup_receipt.is_some() && command == "replay" {
+        let path = flag("--evidence").ok_or_else(|| argument("setup replay requires evidence"))?;
+        let bytes = crate::input::read_with_limit(
+            path,
+            model_limit.unwrap_or(crate::input::MAX_INPUT_BYTES),
+        )?;
+        let value: serde_json::Value = serde_json::from_slice(&bytes)?;
+        let payload = value.get("endpoint").unwrap_or(&value);
+        if payload
+            .get("record")
+            .and_then(|r| r.get("backend"))
+            .and_then(|b| b.as_str())
+            != Some("cuda-lp-tuned")
+        {
+            return Err(argument("setup replay requires tuned evidence"));
+        }
+    }
+    let mode = context_mode.unwrap_or_default();
+    if mode == optimizer_cuda::setup::ContextMode::PrimaryExperimental
+        && std::env::var("AI_OPTIMIZER_GPU_LEASE").as_deref() != Ok("inherited")
+    {
+        return Err(argument(
+            "primary-context study requires inherited shared host lease",
+        ));
+    }
+    let endpoint_path = flag(if command == "solve" {
+        "--lp-evidence"
+    } else {
+        "--output"
+    })
+    .map(std::path::Path::new);
+    if setup_receipt.is_some_and(|p| Some(p) == endpoint_path) {
+        return Err(argument("setup receipt and endpoint must differ"));
+    }
+    let device = flag("--device")
+        .map(|v| v.to_string_lossy().into_owned())
+        .unwrap_or_default();
+    let setup = setup_receipt
+        .map(|_| optimizer_cuda::setup::SetupObservation::begin().map_err(io::Error::other))
+        .transpose()?;
     let session = costs
         .map(|_| optimizer_core::lp_cost::Session::begin().map_err(io::Error::other))
         .transpose()?;
     let result = if command == "solve" {
-        crate::solve::solve_with_output(
+        crate::solve::solve_with_setup(
             &filtered,
             model_limit.unwrap_or(crate::input::MAX_INPUT_BYTES),
             format.unwrap_or(EvidenceFormat::Legacy),
+            mode,
         )
     } else {
         run_inner(
@@ -80,7 +176,13 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
             &filtered,
             model_limit.unwrap_or(crate::input::MAX_INPUT_BYTES),
             format,
+            mode,
         )
+    };
+    let setup_result = if let (Some(observer), Some(path)) = (setup, setup_receipt) {
+        crate::lp_setup::finish(observer, mode, device, path, endpoint_path, &result)
+    } else {
+        Ok(())
     };
     if let (Some(session), Some(path)) = (session, costs) {
         let profile = session.finish();
@@ -93,6 +195,7 @@ pub(crate) fn run(command: &std::ffi::OsStr, args: &[OsString]) -> io::Result<u8
             &serde_json::to_vec(&profile).map_err(io::Error::other)?,
         )?;
     }
+    setup_result?;
     result
 }
 
@@ -101,6 +204,7 @@ fn run_inner(
     args: &[OsString],
     model_limit: u64,
     format: Option<EvidenceFormat>,
+    mode: optimizer_cuda::setup::ContextMode,
 ) -> io::Result<u8> {
     let _cost = optimizer_core::lp_cost::scope("study_verification");
     let mut model = None;
@@ -249,6 +353,7 @@ fn run_inner(
             device,
             model_limit,
             format,
+            mode,
         );
     } else if command == "prepare"
         && model.is_none()
@@ -355,6 +460,7 @@ fn replay(
     device: Option<&std::ffi::OsStr>,
     model_limit: u64,
     format: Option<EvidenceFormat>,
+    mode: optimizer_cuda::setup::ContextMode,
 ) -> io::Result<u8> {
     use optimizer_core::{CancellationToken, LpDiagnostics, Model, Termination};
     use optimizer_experiment::lp::LpEndpoint;
@@ -374,6 +480,9 @@ fn replay(
         None
     };
     let selected = original.record.backend.as_str();
+    if mode != optimizer_cuda::setup::ContextMode::User && selected != "cuda-lp-tuned" {
+        return Err(argument("primary-context replay requires tuned evidence"));
+    }
     let model = Model::from_json(&bytes).map_err(io::Error::other)?;
     let token = CancellationToken::new();
     crate::solve::install_signal_handler(
@@ -433,7 +542,7 @@ fn replay(
                 .ok_or_else(|| argument("device replay requires --device"))?;
             let device = optimizer_core::Device::parse(name).map_err(io::Error::other)?;
             let settings = settings()?;
-            let result = match crate::registry::open_device(&device)? {
+            let result = match crate::registry::open_device_with_context(&device, mode)? {
                 Some(session) => crate::solve::device_solve(
                     &session,
                     selected == "cuda-lp-matched",
