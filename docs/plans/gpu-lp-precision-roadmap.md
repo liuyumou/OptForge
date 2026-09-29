@@ -266,8 +266,10 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Current handoff: GPUP-HOST, one bounded repair of repeated immutable host
-reconstruction within a fresh solve. GPUP-EVIDENCE is complete under SPEC-0015 and
+Current handoff: GPUP-ADAPTIVE-COST, a separately bounded ladder/audit preparation
+and reference-cost repair. GPUP-HOST is complete under SPEC-0016/ADR-0028; its
+[report](../benchmarks/lp-immutable-host-input.md) verifies 28 attempts, certifies
+24 fresh timings and confirms one fewer model parse with fresh assessments. GPUP-EVIDENCE is complete under SPEC-0015 and
 ADR-0027; its [report](../benchmarks/lp-compact-evidence.md) retains all 24 new
 attempts, 15 verified endpoints and 12 certified timings. Retain all prior contracts,
 reports and ledger history. The original GPUP-2 baseline remains 144 attempts
@@ -307,7 +309,7 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. Performance repairs ranked
-in the report are ordered below. GPUP-EVIDENCE is complete; the remaining repairs
+in the report are ordered below. GPUP-EVIDENCE and GPUP-HOST are complete; the remaining repairs
 are bounded future tasks. GPUP-7 still needs its accepted contract.
 
 
@@ -316,13 +318,13 @@ are bounded future tasks. GPUP-7 still needs its accepted contract.
 The user requested ordering after GPUP-6 and GPUP-COPT merged. The COPT
 [ranked experiments](../benchmarks/lp-copt-comparison.md#ranked-next-experiments)
 are the evidence for the first six priorities. Coverage comes first, followed by
-measured host costs, then additional arithmetic candidates. GPUP-EVIDENCE is now complete under its accepted contract; the remaining rows are
+measured host costs, then additional arithmetic candidates. GPUP-EVIDENCE and GPUP-HOST are complete under accepted contracts; the remaining rows are
 planned bounded tasks, not accepted behavior changes or performance promises.
 
 | Order | Task | Scope and completion decision |
 | --- | --- | --- |
 | 1 | **GPUP-EVIDENCE: complete** | [SPEC-0015 report](../benchmarks/lp-compact-evidence.md): four full-witness CPU round trips; 24 new attempts, 15 verified endpoints, 12 certified timings. Compact verifies 12/12 and certifies 9/12, recovering irregular/dense 65536 output; mixed remains time-limited. Historical COPT cells are unchanged. |
-| 2 | **GPUP-HOST: immutable host representation and preparation** | Remove one measured reconstruction within a fresh solve; keep every candidate and certificate assessment fresh. Input/preparation accounts for 40.0% of tuned irregular-32768 wall, with certification another 27.1%. Preserve arithmetic and exact-rational checks; report rebuild counts and complete certified latency. The earlier throughput host-input repair is complete and does not establish this fresh-single repair. |
+| 2 | **GPUP-HOST: complete** | [SPEC-0016 report](../benchmarks/lp-immutable-host-input.md): all 28 attempts verify, 24 fresh timings certify, 14 numerical/work pairs match. Parse/validation calls fall from two to one; sparse reconstruction and every candidate/certificate assessment remain fresh. Scope is one fresh solve, with no session or adaptive-preparation change. |
 | 3 | **GPUP-ADAPTIVE-COST: ladder and audit/probe overhead** | Build on reusable immutable host data. Separate duplicate preparation from required reference arithmetic under fixed proposals; preserve canonical rungs, conservative common step, original-unit audits, rollback and charged replay. Preparation/recovery is 44.7% of gradual irregular-32768 wall; checkpoint copying alone is below 0.2%. |
 | 4 | **GPUP-SETUP: fresh device setup diagnosis** | Attribute discovery, context creation, module loading and teardown before choosing one repair. Setup is 59.8% of small-4 tuned wall. Complete the bounded diagnosis even if no worthwhile repair follows; persistent contexts remain a separate warm/session endpoint. |
 | 5 | **GPUP-COPT-ADAPTER: optional external baseline construction** | Test bulk model construction while preserving coefficients, senses, offsets, import guards and fresh certification. Input/setup is 54.5% of dense65536 GPU wrapper wall. Record a new adapter identity and preserve historical comparisons. This task depends on continued use of the optional local COPT control. |
@@ -361,5 +363,11 @@ Start with CPU-only evidence work and small justified comparisons; a new broad
 GPUP-EVIDENCE consumes 305.274714773 GPU seconds without new allowance. Carry
 15071.710156489 / 18002.574545061 seconds and the 15392-event ledger SHA-256
 6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518 forward;
-the 15340-event COPT prefix and all phase caps remain intact. GPUP-HOST must declare
-its own bounded acceptance/resources before implementation.
+the 15340-event COPT prefix and all phase caps remain intact.
+
+GPUP-HOST consumes another 134.072418846 GPU seconds without new allowance:
+91.461934760 timing, 19.113062965 profiling and 23.497421121 acceptance. Carry
+15205.782575335 / 18002.574545061 seconds and the 15452-event ledger SHA-256
+90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2
+forward, preserving the 15392-event prefix above. GPUP-ADAPTIVE-COST must declare
+its own bounded contract, acceptance and resources before implementation.

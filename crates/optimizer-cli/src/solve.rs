@@ -109,7 +109,9 @@ pub(crate) fn solve_with_output(
         })
         .transpose()?;
     let model_bytes = crate::input::read_with_limit(model_path, model_limit)?;
-    let model = Model::from_json(&model_bytes).map_err(io::Error::other)?;
+    let input =
+        optimizer_experiment::lp::LpInput::from_bytes(&model_bytes).map_err(io::Error::other)?;
+    let model = input.model();
     let configuration: SolveOptions = serde_json::from_slice(&read(config_path)?)
         .map_err(|error| io::Error::other(format!("document: solve configuration: {error}")))?;
 
@@ -212,7 +214,7 @@ pub(crate) fn solve_with_output(
             }
             HighsBackend::new()
                 .solve_with_diagnostics(
-                    &model,
+                    model,
                     &configuration,
                     &cancel,
                     warm_start,
@@ -231,7 +233,7 @@ pub(crate) fn solve_with_output(
             HostLpBackend::new(settings)
                 .map_err(io::Error::other)?
                 .solve_with_diagnostics(
-                    &model,
+                    model,
                     &configuration,
                     &cancel,
                     warm_start,
@@ -271,7 +273,7 @@ pub(crate) fn solve_with_output(
                         selected == "cuda-lp-matched",
                         execution,
                         settings,
-                        &model,
+                        model,
                         &configuration,
                         &cancel,
                         &mut diagnostics,
@@ -283,7 +285,7 @@ pub(crate) fn solve_with_output(
                             eprintln!("solve: falling back to the pinned CPU backend: {reason}");
                             HighsBackend::new()
                                 .solve_with_diagnostics(
-                                    &model,
+                                    model,
                                     &configuration,
                                     &cancel,
                                     warm_start,
@@ -300,7 +302,7 @@ pub(crate) fn solve_with_output(
                     );
                     HighsBackend::new()
                         .solve_with_diagnostics(
-                            &model,
+                            model,
                             &configuration,
                             &cancel,
                             warm_start,
@@ -326,14 +328,14 @@ pub(crate) fn solve_with_output(
         None
     };
     if let Some(path) = evidence_path {
-        let endpoint = optimizer_experiment::lp::LpEndpoint::new(
-            &model_bytes,
-            selected.to_string(),
-            record.clone(),
-            diagnostics,
-            fallback_reason,
-        )
-        .map_err(io::Error::other)?;
+        let endpoint = input
+            .into_endpoint(
+                selected.to_string(),
+                record.clone(),
+                diagnostics,
+                fallback_reason,
+            )
+            .map_err(io::Error::other)?;
         if format == EvidenceFormat::CompactV1 {
             output = Some(serde_json::to_string(&endpoint.assessment).map_err(io::Error::other)?);
         }

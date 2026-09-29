@@ -11,7 +11,7 @@ evidence is recorded in [active task](../state/active-task.md).
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | Ordered COPT evidence/host/adaptive follow-ups, then GPU LP precision track (GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| Planned | Ordered adaptive/setup/COPT/convergence follow-ups, then GPU LP precision track (GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
 | Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
@@ -70,9 +70,11 @@ latency), and cumulative consumption of 6951.059845871 seconds. GPUP-6 is also c
 rollback, promotion/demotion, independent v5 evidence, complete correctness gates
 and retained comparison failures. GPUP-EVIDENCE is complete under SPEC-0015 and
 ADR-0027; its [report](../docs/benchmarks/lp-compact-evidence.md) retains 24 fresh
-attempts, 15 verified endpoints and 12 certified timings. The next task is GPUP-HOST,
-one measured immutable host reconstruction repair before adaptive costs and
-GPUP-7's bounded quantization contract. The
+attempts, 15 verified endpoints and 12 certified timings. GPUP-HOST is complete
+under SPEC-0016/ADR-0028: its [report](../docs/benchmarks/lp-immutable-host-input.md)
+verifies all 28 attempts, certifies 24 timings and preserves all 14 numerical pairs.
+One duplicate model reconstruction is removed while every assessment stays fresh.
+The next task is GPUP-ADAPTIVE-COST before GPUP-7's bounded quantization contract. The
 [ordered follow-ups](../docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 separate priority from prerequisites. No supported recipe is available. The
 campaign retains its eight GPU-hour cap; acceptance details remain
@@ -180,7 +182,9 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. Performance repairs ranked
-in the report are ordered in the roadmap and backlog; GPUP-EVIDENCE is complete
-and GPUP-HOST follows. Current cumulative consumption is 15071.710156489 /
-18002.574545061 GPU s, with a 15392-event ledger preserving the COPT prefix.
+in the report are ordered in the roadmap and backlog; GPUP-EVIDENCE and GPUP-HOST
+are complete and GPUP-ADAPTIVE-COST follows. Current cumulative consumption is
+15205.782575335 / 18002.574545061 GPU s. The 15452-event ledger SHA-256
+90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2
+preserves the 15392-event compact-evidence prefix and all prior history.
 GPUP-7 still needs its accepted contract.

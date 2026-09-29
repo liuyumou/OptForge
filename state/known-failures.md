@@ -1,5 +1,15 @@
 # Known Failures and Limitations
 
+## GPUP-HOST scope and latency uncertainty
+
+The [host-input report](../docs/benchmarks/lp-immutable-host-input.md) verifies all
+28 attempts and certifies 24 fresh timings, but the small-4 and irregular-32768
+paired intervals span one. The large-model result is scoped to three development
+repetitions. No general preset follows. The repair removes one duplicate model
+parse/validation; sparse construction and all candidate/certificate assessments
+remain fresh. Adaptive preparation, mixed-65536 timeouts, old large-session gaps
+and the historical tuned_cases racecheck receipt remain unresolved.
+
 ## Compact evidence repairs output coverage; mixed-65536 remains time-limited
 
 The [GPUP-EVIDENCE report](../docs/benchmarks/lp-compact-evidence.md) retains all 24

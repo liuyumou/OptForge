@@ -12,10 +12,10 @@ active_research_track: GPUP
 # keeps its own specification, endpoint and budget: amortized throughput never
 # substitutes for the single-solve latency endpoint (ADR-0013).
 # 2026-09-27: order the COPT report's follow-ups before more arithmetic work.
-# GPUP-EVIDENCE is complete under SPEC-0015/ADR-0027; GPUP-HOST follows.
+# GPUP-EVIDENCE and GPUP-HOST are complete; GPUP-ADAPTIVE-COST follows.
 # Listed priority is distinct from depends_on: setup and optional COPT adapter
 # investigations are not prerequisites for quantization. See the roadmap handoff.
-next_ready_task: GPUP-HOST
+next_ready_task: GPUP-ADAPTIVE-COST
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -191,9 +191,10 @@ tasks:
     acceptance: "ADR-0027 complete; strict v1-v5 codec/identity/replay and verified transcode; four full-witness CPU roundtrips; full pinned-native gate, 55 device tests, six format pairs and six replays; all 24 fresh attempts retained, 15 independently verified and 12 certified; docs/benchmarks/lp-compact-evidence.md"
   - id: GPUP-HOST
     title: Remove repeated immutable host reconstruction within fresh solves
-    status: planned
+    status: complete
     depends_on: [GPUP-EVIDENCE]
-    acceptance: "One measured representation/preparation repair; fresh candidate and certificate assessments, exact-rational regressions, rebuild counts and certified fresh-process comparison; no cross-solve reuse"
+    specification: docs/specifications/SPEC-0016-lp-immutable-host-input.md
+    acceptance: "ADR-0028 complete; v1-v5 immutable input/identity and exact-rational gates; full native and 55 device tests; six old/new pairs and six replays; all 28 attempts independently verify, 24 timings certify, 14 numerical pairs match; parse/validation calls 2 to 1 with fresh assessments; docs/benchmarks/lp-immutable-host-input.md"
   - id: GPUP-ADAPTIVE-COST
     title: Reduce adaptive ladder preparation and audit or probe host overhead
     status: planned

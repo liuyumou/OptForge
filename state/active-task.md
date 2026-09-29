@@ -1,5 +1,64 @@
 # Active Task
 
+## GPUP-HOST immutable model reuse (2026-09-29)
+
+Status: complete; implementation, bounded study and final repository gate passed.
+Objective: remove one duplicate model parse/structural validation within fresh
+solve evidence construction, retaining fresh LP reconstruction and assessments.
+Contract: SPEC-0016 and ADR-0028, accepted by the user before runtime work.
+Likely files: optimizer-experiment LP input, CLI solve, host study/schema/tooling,
+contract tests, report and state documentation.
+Acceptance: full pinned-native tools/check.sh, exact-rational regressions, v1-v5
+constructor/identity checks, CPU reconstruction counts, regular device acceptance,
+fixed-work old/new comparisons/replay, and independently verified 24 timings plus
+four profiles. Archive baseline HEAD 1818cdb5405fe466728c9cfb1719c67e22f660a5.
+Resources: four build jobs, four CPU-hours; timing 900 GPU seconds in ablations,
+profiles 200 and acceptance 300 in repeatability, combined 1400. No added allowance.
+Every device job uses the shared host lease and conservative reservation accounting.
+Preserve cumulative 15071.710156489 / 18002.574545061 GPU seconds, all phase caps,
+15392 events and ledger SHA-256
+6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518.
+Retain every failed attempt; no retries, numerical/default/kernel changes or
+cross-solve reuse. Commit locally after acceptance; no push. Handoff after completion
+is GPUP-ADAPTIVE-COST, which this task does not begin.
+
+Acceptance evidence: [report](../docs/benchmarks/lp-immutable-host-input.md), accepted
+SPEC-0016/ADR-0028 and hash-bound repository data. The full pinned-native pre-study
+gate passes 502 Rust and 183 Python tests, exact-rational regressions, record replay,
+103 documentation pages and smoke. All 55 regular device tests pass; six old/new
+fixed-work pairs and six compact replays match bitwise, with both executables
+independently accepting all 18 endpoints. CPU old/new checks retain every assessment.
+
+All 28/28 admitted study attempts independently verify and 24/24 primary timings
+certify. All 14 timing/profile numerical/work pairs match. Profiles demonstrate
+parse/validation counts 2 to 1, sparse construction remaining 2 and unchanged
+candidate/certificate/gap counts. Scoped large-model improvements and smaller-cell
+uncertainty are reported; no preset follows. No failed or retried GPU identity.
+The first final gate caught one broken relative report link after all numerical
+and integration checks passed; the link is corrected and the failure receipt retained.
+Only two runtime files change; 121 historical files and both source archives pass
+the independent audit. Kernels, old schemas/protocols and mathematical authority
+are unchanged; historical session, racecheck and mixed-65536 gaps remain open.
+
+Task charge 134.072418846 GPU seconds: timing 91.461934760/900, profiles
+19.113062965/200 and acceptance 23.497421121/300. Cumulative
+15205.782575335 / 18002.574545061 seconds, no added allowance. The 15452-event
+ledger SHA-256 is
+90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2;
+the 15392-event prefix above and all phase caps remain intact. Source, native/device
+receipts, CPU metering, raw outputs and independently verified analysis are retained
+under artifacts/gpup-host-baseline, artifacts/gpup-host-acceptance and
+artifacts/gpup-host-v1. Handoff is GPUP-ADAPTIVE-COST; no work on it or push occurs.
+
+Final repository acceptance: corrected full pinned-native tools/check.sh passes
+502 Rust tests, 183 Python tests, record replay, 104 documentation pages and smoke.
+The first documentation-link failure and corrected passing receipts are retained.
+Metered child CPU across builds, focused/full gates, device acceptance, study,
+independent reporting and source audit is 1297.465518 seconds within four hours;
+small source-edit/catalog checks are not included in that metered child total.
+Four build jobs; no additional GPU work. The published artifact catalog verifies
+all 335 retained references. Local commit follows; no push.
+
 ## GPUP-EVIDENCE protected integration (2026-09-27)
 
 Status: local acceptance passed; protected integration authorized; remote outcomes
