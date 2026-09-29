@@ -14,6 +14,7 @@ pub(crate) struct Receipt {
     events: Vec<SetupEvent>,
     status: String,
     endpoint_sha256: Option<String>,
+    #[serde(deserialize_with = "Option::<String>::deserialize")]
     error: Option<String>,
 }
 pub(crate) fn parse_mode(value: &std::ffi::OsStr) -> io::Result<ContextMode> {
@@ -28,6 +29,7 @@ pub(crate) fn parse_mode(value: &std::ffi::OsStr) -> io::Result<ContextMode> {
 pub(crate) fn source_mode(path: &Path, endpoint: &Path) -> io::Result<ContextMode> {
     let receipt: Receipt = serde_json::from_slice(&crate::input::read(path.as_os_str())?)?;
     if receipt.schema_version != 1
+        || receipt.events.len() > 4096
         || receipt.status != "passed"
         || receipt.observed != Some(receipt.requested)
         || !optimizer_cuda::setup::complete(receipt.requested, &receipt.events)
@@ -118,6 +120,23 @@ mod tests {
         let save = |r: &Receipt| std::fs::write(&path, serde_json::to_vec(r).unwrap()).unwrap();
         save(&receipt);
         assert_eq!(source_mode(&path, &endpoint).unwrap(), ContextMode::User);
+        let mut missing = serde_json::to_value(&receipt).unwrap();
+        missing.as_object_mut().unwrap().remove("error");
+        std::fs::write(&path, serde_json::to_vec(&missing).unwrap()).unwrap();
+        assert!(source_mode(&path, &endpoint).is_err());
+        let mut oversized = serde_json::to_value(&receipt).unwrap();
+        let events = oversized["events"].as_array_mut().unwrap();
+        for _ in 0..4095 {
+            events.insert(
+                1,
+                serde_json::json!({"operation": "memory_free", "ok": true, "detail": "0"}),
+            );
+        }
+        std::fs::write(&path, serde_json::to_vec(&oversized).unwrap()).unwrap();
+        assert!(source_mode(&path, &endpoint).is_err());
+        oversized["events"].as_array_mut().unwrap().remove(1);
+        std::fs::write(&path, serde_json::to_vec(&oversized).unwrap()).unwrap();
+        assert_eq!(source_mode(&path, &endpoint).unwrap(), ContextMode::User);
         receipt.events.reverse();
         save(&receipt);
         assert!(source_mode(&path, &endpoint).is_err());
@@ -129,6 +148,7 @@ mod tests {
         save(&receipt);
         std::fs::write(&endpoint, b"{ }").unwrap();
         assert!(source_mode(&path, &endpoint).is_err());
+        std::fs::write(&endpoint, b"{}").unwrap();
         let mut unknown = serde_json::to_value(&receipt).unwrap();
         unknown["extra"] = true.into();
         std::fs::write(&path, serde_json::to_vec(&unknown).unwrap()).unwrap();

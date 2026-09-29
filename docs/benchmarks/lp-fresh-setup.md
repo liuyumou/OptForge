@@ -19,6 +19,7 @@ finding, not a supported preset or a claim about persistent/warm contexts.
 [pre-repair attribution](data/setup/setup-control-attribution.json),
 [full compressed analysis](data/setup/setup-analysis.json.gz),
 [source/ledger audit](data/setup/setup-source-ledger-audit.json),
+[review corrections](data/setup/setup-review-corrections.json),
 [resources](data/setup/setup-resources.json), and
 [artifact catalog](data/setup/setup-provenance.json) retain the evidence.
 The [protocol](../../benchmarks/configs/lp-setup-v1.json) is strict gpup-setup-v1.
@@ -134,7 +135,17 @@ Setup replay validates the source receipt/hash and restores its context policy.
 All 32 study receipts record successful lifecycle and resource cleanup. No actual
 GPU attempt failed or was retried. Kernels, original-model authority, numerical
 settings and old schemas/protocols are preserved. The source audit checks 342
-measured files and 190 historical authority files.
+measured files and 190 historical authority files. A post-study self-review tightened
+the CPU setup-source parser to require the nullable error field and enforce the
+4096-event schema bound. Its regression covers a missing field, 4097 events and the
+accepted 4096-event boundary. The runtime parser and a report-verifier correction are hash-bound in the
+review-corrections record: 340 measured files and all 190 authority files remain
+byte-identical. The report verifier now also requires each artifact reference to
+use its attempt's canonical filename, preventing cross-attempt substitution even
+when hashes match. Archived executables, timings and endpoint evidence are untouched;
+these CPU validation corrections need no new device execution. The post-review full
+pinned-native gate passes 514 Rust tests, 196 Python integration tests, record replay,
+110 documentation pages and smoke; all 56 retained setup receipts still parse.
 
 Task GPU charge: **224.608447458 seconds**: timing 47.100554150/900,
 profiles 15.598178240/300, acceptance 161.909715068/600.

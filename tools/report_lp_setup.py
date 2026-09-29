@@ -44,6 +44,19 @@ def check_identity(value, job, trial, request, directory, binary, protocol_hash)
         raise ValueError('worker request differs from frozen format/limits/command')
 
 
+
+def check_trial_artifacts(directory, trial):
+    suffixes = dict(worker='.worker.json', stdout='.stdout', stderr='.stderr',
+                    endpoint='.endpoint.json', activity='.activity.json',
+                    cost='.cost.json', setup='.setup.json')
+    for role, suffix in suffixes.items():
+        ref = trial[role]
+        if ref:
+            if ref['path'] != trial['id'] + suffix:
+                raise ValueError('trial artifact path differs: ' + role)
+            checked_reference(directory, ref)
+
+
 def checked_ledger(path, value):
     from lp_protocol import Ledger
     if not path.is_file() or (path.read_bytes() and not path.read_bytes().endswith(b'\n')):
@@ -112,9 +125,7 @@ def report(directory, value, protocol_path):
                 raise ValueError('execution provenance differs: ' + field)
         if trial['provenance']['schema_snapshot_sha256'] != execution['schema_snapshot_sha256']:
             raise ValueError('schema snapshot identity differs')
-        for role in ['worker', 'stdout', 'stderr', 'endpoint', 'activity', 'cost', 'setup']:
-            if trial[role]:
-                checked_reference(directory, trial[role])
+        check_trial_artifacts(directory, trial)
         worker = read_json(checked_reference(directory, trial['worker'])) if trial['worker'] else None
         if worker:
             check_worker(trial, worker)
@@ -244,6 +255,7 @@ def control_attribution(directory, value):
         if job['mode'] != 'profile' or job['configuration']['variant'] != 'baseline': continue
         key = job['id']; trial = validate_trial(read_json(directory / (key + '.trial.json')))
         if trial['status'] != 'completed': raise ValueError('control profile did not complete: ' + key)
+        check_trial_artifacts(directory, trial)
         verify_both(value, job, directory, trial['provenance'])
         check_setup(directory / (key + '.setup.json'), directory / (key + '.endpoint.json'), 'user', value['device'])
         raw = read_json(checked_reference(directory, trial['cost'])); validate_profile(raw)

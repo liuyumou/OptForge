@@ -18,6 +18,20 @@ corrections. Self-review is explicitly labeled; no independent approval is claim
 Final review, checks, merge and cleanup receipts are retained under
 artifacts/gpup-setup-integration-20260929.
 
+PR #14 is open. Self-review found and fixed two validation gaps: setup replay
+accepted a missing required nullable error field or more than 4096 events; the
+report verifier checked artifact hashes without binding filenames to their attempt.
+Retained failing regressions reproduce both defects, and the corrected tests pass.
+The CPU-only parser/report corrections are declared with old/new hashes in
+setup-review-corrections.json. All 488 historical artifact references, 340 unchanged
+measured files and 190 historical authority files verify. All 56 retained setup
+receipts pass the corrected parser on CPU. Archived timings, binaries and the ledger
+are unchanged. The final full pinned-native gate passes 514 Rust tests, 196 Python
+integration tests, committed-record replay, 110 documentation pages and smoke.
+Independent report re-verification and current-head remote checks precede merging;
+their outcomes and final merge/cleanup receipts are retained in the integration
+artifact directory above. No further runtime change or GPU execution is required.
+
 ## GPUP-SETUP (2026-09-29)
 
 Status: complete; implementation, device acceptance, bounded study and final native

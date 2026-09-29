@@ -66,6 +66,10 @@ User-visible changes are recorded here using Conventional Commit terminology.
 
 ## Unreleased
 
+- Setup-source replay enforces the strict receipt schema's required nullable error
+  field and 4096-event limit; the setup report also binds each artifact path to its
+  attempt. Post-study validation corrections are separately hash-bound.
+
 ### Added
 
 - Experimental GPUP-6 `--lp-adaptive`: explicit FP32/FP64 ladders, configurable

@@ -57,14 +57,26 @@ def main():
     prefix=b''.join(data.splitlines(keepends=True)[:15528]);prefix_hash=hashlib.sha256(prefix).hexdigest()
     if prefix_hash != 'cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6' or file_hash(ledger)!=report['budget']['ledger_sha256']:
         raise ValueError('canonical ledger/prefix changed')
+    review_path = output / 'setup-review-corrections.json'
+    review = read_json(review_path) if review_path.exists() else {'files': []}
+    corrections = {item['path']: item for item in review['files']}
+    if len(corrections) != len(review['files']):
+        raise ValueError('duplicate review correction')
+    corrected = []
     checked=[]
     with tarfile.open(source/'source.tar') as archive:
         for entry in archive.getmembers():
             if entry.isfile() and (entry.name.startswith(('crates/','tools/','schemas/','benchmarks/')) or entry.name in ['Cargo.toml','Cargo.lock']):
                 content=archive.extractfile(entry).read()
                 if not (ROOT/entry.name).is_file() or (ROOT/entry.name).read_bytes()!=content:
-                    raise ValueError('measured source changed: '+entry.name)
+                    correction = corrections.get(entry.name)
+                    if (not correction or correction['measured_sha256'] != hashlib.sha256(content).hexdigest()
+                            or correction['reviewed_sha256'] != file_hash(ROOT / entry.name)):
+                        raise ValueError('undeclared measured source change: '+entry.name)
+                    corrected.append(entry.name)
                 checked.append(entry.name)
+    if set(corrected) != set(corrections):
+        raise ValueError('review correction does not match the measured source difference')
     original='9bf8e8d5d6f6e4fd3b2eb60ae494506ed620323e'
     history=subprocess.check_output(['git','ls-tree','-r','--name-only',original],cwd=ROOT,text=True).splitlines()
     preserved=[p for p in history if p.startswith(('cuda/','schemas/','benchmarks/','crates/optimizer-core/','crates/optimizer-lp/','crates/optimizer-experiment/','docs/decisions/'))]
@@ -72,7 +84,7 @@ def main():
         if (ROOT/name).read_bytes()!=subprocess.check_output(['git','show',original+':'+name],cwd=ROOT): raise ValueError('historical authority changed: '+name)
     with tarfile.open(source/'baseline-source.tar') as archive:
         if 'crates/optimizer-cuda-sys/src/primary.rs' in archive.getnames(): raise ValueError('control already contained repair')
-    write_json(output/'setup-source-ledger-audit.json',dict(status='passed',measured_files=len(checked),preserved_files=len(preserved),prior_events=15528,prior_ledger_sha256=prefix_hash,
+    write_json(output/'setup-source-ledger-audit.json',dict(status='passed',measured_files=len(checked),unchanged_measured_files=len(checked)-len(corrected),review_corrected_paths=corrected,review_corrections_sha256=file_hash(review_path) if review_path.exists() else None,preserved_files=len(preserved),prior_events=15528,prior_ledger_sha256=prefix_hash,
         ledger_sha256=file_hash(ledger),events=len(data.splitlines()),control_precedes_primary=True,measured_paths=checked,preserved_paths=preserved))
     cpu=[dict(path=str(p.relative_to(ROOT)),sha256=file_hash(p),**read_json(p)) for p in sorted((ROOT/'artifacts/gpup-setup-acceptance').glob('*.cpu.json'))]
     write_json(output/'setup-resources.json',dict(gpu=report['budget'],cpu_seconds=sum(r['cpu_seconds'] for r in cpu),cpu_cap_seconds=14400,cpu_receipts=cpu,
@@ -82,7 +94,7 @@ def main():
         for p in sorted((ROOT/'artifacts'/name).rglob('*')):
             if p.is_file() and '__pycache__' not in p.parts: catalog.append(dict(path=str(p.relative_to(ROOT)),sha256=file_hash(p),bytes=p.stat().st_size))
     write_json(output/'setup-provenance.json',dict(schema_version=1,source_report=dict(path=str((source/'report.json').relative_to(ROOT)),sha256=file_hash(source/'report.json')),artifacts=catalog))
-    print(f'Exported {len(catalog)} artifact references; {len(checked)} measured files and {len(preserved)} historical authority files unchanged')
+    print(f'Exported {len(catalog)} artifact references; {len(checked)-len(corrected)} measured files unchanged, {len(corrected)} declared corrections, {len(preserved)} historical authority files unchanged')
 
 
 if __name__ == '__main__': main()

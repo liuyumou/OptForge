@@ -71,6 +71,32 @@ class SetupTests(unittest.TestCase):
             with self.assertRaises(ValueError):check_identity(value,job,wrong,request,directory,binary,'a'*64)
         with self.assertRaises(ValueError):check_identity(value,job,trial,request,directory,Path('/wrong'),'a'*64)
 
+    def test_trial_artifacts_cannot_be_substituted_between_attempts(self):
+        from report_lp_setup import check_trial_artifacts
+        from benchmark_lp import reference
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            suffixes = dict(worker='.worker.json', stdout='.stdout', stderr='.stderr',
+                            endpoint='.endpoint.json', activity='.activity.json',
+                            cost='.cost.json', setup='.setup.json')
+            trial = dict(id='attempt-a')
+            for role, suffix in suffixes.items():
+                path = directory / ('attempt-a' + suffix)
+                path.write_text('{}')
+                trial[role] = reference(directory, path)
+            check_trial_artifacts(directory, trial)
+            for role, suffix in suffixes.items():
+                substitute = directory / ('attempt-b' + suffix)
+                substitute.write_text('{}')  # Even identical bytes belong to another attempt.
+                wrong = copy.deepcopy(trial)
+                wrong[role] = reference(directory, substitute)
+                with self.assertRaisesRegex(ValueError, 'artifact path'):
+                    check_trial_artifacts(directory, wrong)
+            wrong = copy.deepcopy(trial)
+            wrong['setup']['sha256'] = '0' * 64
+            with self.assertRaises(ValueError):
+                check_trial_artifacts(directory, wrong)
+
     def test_receipt_requires_policy_endpoint_and_cleanup(self):
         with tempfile.TemporaryDirectory() as tmp:
             directory=Path(tmp); endpoint=directory/'endpoint';endpoint.write_text('{}')
