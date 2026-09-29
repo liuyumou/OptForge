@@ -1,5 +1,33 @@
 # Active Task
 
+## GPUP-HOST protected integration (2026-09-29)
+
+Status: local acceptance complete; PR publication and protected merge authorized.
+The user authorized opening the GPUP-HOST PR and merging after the recommended
+checks. Scope: publish the completed slice, inspect required CI and review
+conversations, merge with preserved source ancestry, and synchronize local main.
+Acceptance: existing full pinned-native and device receipts, current branch,
+required GitHub cpu/docs/smoke checks on the final head, resolved review threads,
+protected merge without bypass, and clean synchronized main.
+Resources: four build jobs, at most one CPU-hour for integration validation,
+zero GPU jobs and no added campaign allowance. Preserve all artifacts and the
+15452-event ledger SHA-256
+90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2;
+cumulative consumption remains 15205.782575335 / 18002.574545061 GPU seconds.
+Initial source head: af8e60f9c400968f8a8c66c4986ef3a6bb7a86e8; origin/main:
+1818cdb5405fe466728c9cfb1719c67e22f660a5. The branch is current with main.
+The recorded no-push scope below describes the completed implementation phase;
+this later user authorization permits its PR and merge. GPUP-ADAPTIVE-COST
+remains the next task and is not begun. Final check/merge outcomes are retained
+in artifacts/gpup-host-integration-20260929/integration.json and sibling receipts.
+
+Integration preflight: runtime review found no blocking issue; the pinned-native
+and regular device receipts pass, the 15452-event ledger hash is unchanged, and
+all 104 documentation pages pass link/anchor validation. Dependencies and CI
+workflows are unchanged. GitHub's effective rules require current-branch
+cpu/docs/smoke checks and resolved conversations; no mandatory approval or
+protection bypass is used. Remote outcomes follow in the integration receipt.
+
 ## GPUP-HOST immutable model reuse (2026-09-29)
 
 Status: complete; implementation, bounded study and final repository gate passed.
