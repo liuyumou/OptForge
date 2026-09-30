@@ -1,5 +1,17 @@
 # Known Failures and Limitations
 
+## Convergence acceptance labels corrected during PR self-review
+
+A CPU-only reproduction swapped tuned-FP64 and precision-FP64 acceptance labels
+while retaining valid endpoints and numerical digests; the original independent
+archive check accepted them. The reviewed report binds each acceptance endpoint
+back to its model, configuration, work limit, profile flag and code object. COPT
+checks also bind the original min/max model with offset seven, options, native
+parameters and dependency identities, and recheck profile state/work equality.
+Measured acceptance workers, endpoints, study results and GPU accounting are unchanged.
+The reproduction, regression tests and integration checks remain under
+artifacts/gpup-convergence-integration-20260930.
+
 ## Convergence costs and incomplete FP32/mixed coverage
 
 The [convergence report](../docs/benchmarks/lp-convergence.md) retains all 176

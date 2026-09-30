@@ -1,5 +1,37 @@
 # Active Task
 
+## GPUP-CONVERGENCE PR integration (2026-09-30)
+
+Status: implementing the user's explicit authorization to publish a PR, self-review,
+fix substantiated problems, merge through required checks and clean up safely.
+Objective: integrate the completed bounded diagnosis and verified evidence without
+changing measured workers, numerical behavior, runtime defaults or campaign history.
+Acceptance: labeled self-review; full pinned-native tools/check.sh; source-only and
+artifact/provenance checks; current-head GitHub CPU/docs/smoke success, resolved
+conversations and merge without policy bypass. Preserve the separate research-docs
+branch at 62516e8cef59104442fa359a2e2440af8a59f033 and restore its checkout afterward.
+Likely files: this task record and substantiated review corrections only.
+Resources: four build jobs, at most one additional CPU-hour for integration checks,
+zero GPU jobs and no new allowance. Preserve cumulative 17115.274617853 /
+18002.574545061 GPU seconds and the 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+Starting source: ce72e80572fdd9eea88a33d31d5c92299903b9c5. This authorization
+supersedes the implementation-phase no-push scope below for this branch only.
+Keep integration receipts under artifacts/gpup-convergence-integration-20260930.
+
+Local self-review reproduced acceptance-label substitution with unchanged, valid
+retained endpoints. The independent report now binds claimed model/configuration,
+work limits, profile flags, code images, COPT parameters/dependencies and exact
+min/max offset-seven models, and rechecks state/work equality. Measured workers,
+schemas, protocols, endpoints and ledger bytes are unchanged. Twelve source-only
+contracts pass in an artifact-free copy; the full pinned-native gate passes
+514 Rust tests, 219 Python tests, record replay, 115 documentation pages and smoke.
+The original PR head passes required GitHub CPU/docs/smoke checks. Independent
+report re-verification and current-head remote checks must pass before merging.
+Self-review is explicitly labeled; no independent approval is claimed. Final
+verification, merge and safe-cleanup receipts are retained in the integration
+directory above; no additional GPU execution is authorized or needed.
+
 ## GPUP-CONVERGENCE (2026-09-30)
 
 Status: complete; bounded study, independent verification and all required gates pass.

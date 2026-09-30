@@ -2,6 +2,10 @@
 
 ## Unreleased — convergence and work amplification
 
+- PR self-review: bind acceptance labels to effective model/configuration/work and
+  execution identities, including COPT min/max offsets and dependency bytes; reject
+  valid endpoints substituted into a different acceptance cell without changing data.
+
 - Freeze gpup-convergence-v1 under ADR-0032/SPEC-0013 with eight unchanged project
   and scalar COPT configurations, strict identity/budget tooling and independent
   compact/external verification. Preserve runtime, kernels and defaults.

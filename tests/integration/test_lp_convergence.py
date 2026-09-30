@@ -204,4 +204,65 @@ class ConvergenceTests(unittest.TestCase):
                     with self.assertRaises(ValueError):check_measured_source(root)
 
 
+    def test_project_acceptance_binds_claimed_configuration_and_work(self):
+        from report_lp_convergence import check_project_acceptance_identity
+        v=protocol();images={'lp_pdhg_tuned.cubin':'1'*64,'lp_pdhg_precision.cubin':'2'*64}
+        configs=[c for c in v['configurations'] if c['backend']=='cuda-lp-tuned']
+        for config in configs:
+            e=dict(model_sha256='a'*64,requested_backend=config['backend'],
+                   record=dict(backend=config['backend'],termination='iteration_limit',
+                               options=dict(v['solve'],time_limit_ms=30000,iteration_limit=2000),lp_settings=dict(v['lp_settings'],iteration_limit=2000)),
+                   diagnostics=dict(profile=False),execution=dict(settings=copy.deepcopy(config['execution']),
+                       code_object_sha256=images['lp_pdhg_precision.cubin' if 'precision' in config or 'adaptive' in config else 'lp_pdhg_tuned.cubin']))
+            for field in ['precision','adaptive']:
+                if field in config:e[field]=dict(settings=copy.deepcopy(config[field]))
+            check=lambda x,c=config:check_project_acceptance_identity(v,c,'a'*64,x,False,images)
+            check(e)
+            for other in configs:
+                if other['id']!=config['id']:
+                    with self.assertRaisesRegex(ValueError,'configuration|image'):check(e,other)
+            for path,value in [(('model_sha256',),'b'*64),(('requested_backend',),'highs'),(('record','backend'),'highs'),
+                               (('record','options','iteration_limit'),50000),(('record','lp_settings','iteration_limit'),200),
+                               (('record','options','tolerances','absolute'),1e-6),(('diagnostics','profile'),True),
+                               (('record','termination'),'time_limit'),(('execution','code_object_sha256'),'0'*64)]:
+                changed=copy.deepcopy(e);node=changed
+                for name in path[:-1]:node=node[name]
+                node[path[-1]]=value
+                with self.subTest(config=config['id'],field=path),self.assertRaises(ValueError):check(changed)
+
+    def test_external_acceptance_binds_original_model_parameters_and_dependencies(self):
+        from report_lp_convergence import check_external_acceptance_model,check_external_acceptance_identity
+        from lp_copt import parameters
+        v=protocol();identity=dict(copt_library_sha256='a'*64,copt_binding_sha256='b'*64)
+        original=read_json(ROOT/'examples/model-v1.json')
+        for sense in ['minimize','maximize']:
+            model=copy.deepcopy(original);model['objective'].update(sense=sense,offset=7.0)
+            if sense=='maximize':
+                for term in model['objective']['terms']:term['coefficient']=-term['coefficient']
+            check_external_acceptance_model(original,sense,model)
+            wrong=copy.deepcopy(model);wrong['objective']['offset']=0.0
+            with self.assertRaises(ValueError):check_external_acceptance_model(original,sense,wrong)
+            wrong=copy.deepcopy(model);wrong['objective']['terms'][0]['coefficient']+=1
+            with self.assertRaises(ValueError):check_external_acceptance_model(original,sense,wrong)
+            with self.assertRaises(ValueError):check_external_acceptance_model(original,'other',model)
+        for gpu in [False,True]:
+            method='copt-gpu-pdlp' if gpu else 'copt-cpu-pdlp';solve=dict(v['solve'],time_limit_ms=30000)
+            witness=dict(model_sha256='c'*64,requested_backend=method,executed_backend=method,options=solve,
+                         parameters=parameters(solve,gpu),library_sha256=identity['copt_library_sha256'],
+                         binding_sha256=identity['copt_binding_sha256'],copt_version='8.0.6',gpu_confirmed=gpu)
+            endpoint=dict(witness=witness,assessment=dict(classification='certified_success'))
+            check=lambda e:check_external_acceptance_identity(v,method,'c'*64,e,identity)
+            check(endpoint)
+            for path,value in [(('witness','model_sha256'),'d'*64),(('witness','requested_backend'),'highs'),
+                               (('witness','options','iteration_limit'),2000),(('witness','parameters','Threads'),2),
+                               (('witness','library_sha256'),'0'*64),(('witness','binding_sha256'),'0'*64),
+                               (('witness','gpu_confirmed'),not gpu),(('witness','copt_version'),'0.0.0'),
+                               (('assessment','classification'),'numerical_rejection')]:
+                changed=copy.deepcopy(endpoint);node=changed
+                for name in path[:-1]:node=node[name]
+                node[path[-1]]=value
+                with self.subTest(gpu=gpu,field=path),self.assertRaises(ValueError):check(changed)
+
+
+
 if __name__=='__main__':unittest.main()
