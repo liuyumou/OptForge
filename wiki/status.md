@@ -7,6 +7,11 @@ extension safety, C2 owned branch-and-bound search, C1 pinned HiGHS solving, M1
 model and candidate validation and the M0 bootstrap. Acceptance
 evidence is recorded in [active task](../state/active-task.md).
 
+The [2026-09-30 low-precision research analysis](../docs/plans/lp-low-precision-research-2026-09-30.md)
+preserves the evidence, numerical derivations and proposed routes to faster
+FP32/FP16/FP8 computation at unchanged 1e-9 acceptance. It is research guidance;
+GPUP-7 still requires its accepted quantization/resource contract before behavior.
+
 | State | Features |
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |

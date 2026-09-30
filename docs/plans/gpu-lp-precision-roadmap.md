@@ -145,6 +145,16 @@ implementation and comparison are recorded below.
 
 ## Numerical design and candidate methods
 
+The [2026-09-30 low-precision research review](lp-low-precision-research-2026-09-30.md)
+and updated [candidate register](lp-precision-candidates.md) reconcile the completed
+studies with proposals for unchanged-1e-9 refinement, a lean precision executor,
+scaled double-float, selective error budgets, active-face polishing and
+layout-appropriate Tensor Core/integer emulation. This is non-normative research:
+it preserves the roadmap's accepted scope, backlog order, budgets and historical
+evidence. GPUP-7's accepted quantization/interface/resource contract remains the
+next implementation prerequisite; none of these proposals is an accepted preset
+or implicit numerical behavior.
+
 Preserve the original FP64 model. Independent host validation and conservative
 certification decide whether a candidate meets the requested contract. Iteration
 arithmetic, small residuals, sampled audits, and benchmark agreement grant no

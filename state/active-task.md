@@ -1,5 +1,39 @@
 # Active Task
 
+## Persist low-precision research analysis (2026-09-30)
+
+Status: complete; documentation only, explicitly requested by the user.
+Objective: save the complete preceding evidence review and research proposals in
+repository documentation so later sessions can discover and evaluate them.
+Acceptance: preserve measured-versus-proposed distinctions, equations and numerical
+caveats, primary sources, hardware applicability, experiment order and rejection
+gates; link from the roadmap, candidate register and session entry points; full
+pinned-native tools/check.sh and documentation/link validation.
+Likely files: docs/plans/lp-low-precision-research-2026-09-30.md, precision roadmap
+and candidate register, AGENTS.md, wiki/status.md and this task record.
+Resources: at most one CPU-hour, four build jobs, zero GPU workloads and no new
+allowance. Preserve runtime, accepted contracts, backlog order and all evidence.
+Campaign remains 17115.274617853 / 18002.574545061 GPU seconds; preserve the
+16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+GPUP-7's accepted quantization/resource contract remains the implementation handoff.
+Commit documentation locally after acceptance; no push or publication.
+
+Acceptance evidence: the complete
+[research note](../docs/plans/lp-low-precision-research-2026-09-30.md) records the
+measured failure mechanisms, all six primary proposals and supporting/speculative
+ideas, correction-LP and anchored-error equations, hardware/source qualifications,
+range/conditioning/authority caveats, falsifiable experiment sequence and resource
+handoff. AGENTS.md, wiki/status.md, roadmap and candidate register link to it.
+The register distinguishes completed investigations from unimplemented hypotheses.
+Independent numerical and hardware reviews found no blocking issues; minor scale,
+conservative-bound and cuOpt-mode clarifications were applied.
+Full pinned-native `bash tools/check.sh` passed: native/Rust gates, 217 Python
+tests, committed-record replay, 116 documentation pages and smoke. Log:
+`/tmp/ai-optimizer-low-precision-notes-check.log`. Final documentation links and
+whitespace checks pass. No GPU workload or runtime change; all campaign evidence,
+accepted contracts, defaults and backlog order remain unchanged.
+
 ## Low-precision performance research review (2026-09-30)
 
 Status: complete; user-requested research and recommendations only.

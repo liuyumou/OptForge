@@ -5,6 +5,13 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
+For low-precision LP follow-ups, read the preserved
+[2026-09-30 research analysis](docs/plans/lp-low-precision-research-2026-09-30.md)
+alongside the roadmap and candidate register. It records measured failure
+mechanisms, proposed correction-LP/anchored-product methods, SM120 bypasses,
+FP16/FP8 progression, limitations and experiment gates. It is research guidance,
+not an accepted numerical contract or a change to next_ready_task or GPU budgets.
+
 M1, C1, C2, C3, C4, C5, C6 and C8 are complete and specified. C6 was heterogeneous
 computation and GPU feasibility, specified as
 [SPEC-0010](docs/specifications/SPEC-0010-heterogeneous-computation.md) for device
