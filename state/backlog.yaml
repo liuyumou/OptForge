@@ -13,10 +13,10 @@ active_research_track: GPUP
 # substitutes for the single-solve latency endpoint (ADR-0013).
 # 2026-09-27: order the COPT report's follow-ups before more arithmetic work.
 # GPUP-EVIDENCE, GPUP-HOST, GPUP-ADAPTIVE-COST, GPUP-SETUP and
-# GPUP-COPT-ADAPTER are complete.
+# GPUP-COPT-ADAPTER and GPUP-CONVERGENCE are complete.
 # Listed priority is distinct from depends_on: setup and optional COPT adapter
 # investigations are not prerequisites for quantization. See the roadmap handoff.
-next_ready_task: GPUP-CONVERGENCE
+next_ready_task: GPUP-7
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -216,9 +216,10 @@ tasks:
     acceptance: "ADR-0031 complete; full native and source-only gates, 12 native readbacks, 24 certified acceptance endpoints; all 84 study attempts verify, 42/72 timings certify; bulk slower in all certified cells; docs/benchmarks/lp-copt-adapter.md"
   - id: GPUP-CONVERGENCE
     title: Review convergence and equal-work mixtures before lower precision
-    status: planned
+    status: complete
     depends_on: [GPUP-ADAPTIVE-COST]
-    acceptance: "Bounded comparison of proposals, audits, probes and replay with certification coverage; diagnose remaining work amplification; optional graph-node trace only if it resolves a decision; no inferred COPT precision or implicit solver tuning"
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "ADR-0032 complete; all 176 attempts retained, 174 endpoints verified, 87/104 timings certified; full native, 58 device, twelve fixed-work pairs/replays, eight COPT min/max/profile endpoints and source-only gates pass; work/cost diagnosis without arithmetic/default changes or preset; docs/benchmarks/lp-convergence.md"
   - id: GPUP-7
     title: Implement quantization candidates and sparse FP8 execution
     status: planned

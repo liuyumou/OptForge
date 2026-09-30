@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased — convergence and work amplification
+
+- PR self-review: bind acceptance labels to effective model/configuration/work and
+  execution identities, including COPT min/max offsets and dependency bytes; reject
+  valid endpoints substituted into a different acceptance cell without changing data.
+
+- Freeze gpup-convergence-v1 under ADR-0032/SPEC-0013 with eight unchanged project
+  and scalar COPT configurations, strict identity/budget tooling and independent
+  compact/external verification. Preserve runtime, kernels and defaults.
+- The [report](docs/benchmarks/lp-convergence.md) retains all 176 attempts, verifies
+  174 endpoints and certifies 87/104 timings. Export work, transitions, disjoint
+  host costs, paired certified ratios and static figures without selecting a preset.
+- Full pre/post pinned-native gates, 58 device tests, twelve fixed-work pairs and
+  replays, eight COPT min/max/profile endpoints and source-only contracts pass.
+  Retain missing/failed outcomes and exactly bound CPU recovery review repairs.
+- Preserve every campaign prefix and phase cap: task 1311.088550794 GPU
+  seconds; cumulative 17115.274617853/18002.574545061. No new allowance.
+  Hand off to GPUP-7's required quantization/FP8 interface and resource contract.
+
 ## Unreleased — isolated COPT bulk adapter
 
 - GPUP-COPT-ADAPTER integration: preserve scalar COPT construction and runtime

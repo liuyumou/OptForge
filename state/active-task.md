@@ -1,5 +1,89 @@
 # Active Task
 
+## GPUP-CONVERGENCE PR integration (2026-09-30)
+
+Status: implementing the user's explicit authorization to publish a PR, self-review,
+fix substantiated problems, merge through required checks and clean up safely.
+Objective: integrate the completed bounded diagnosis and verified evidence without
+changing measured workers, numerical behavior, runtime defaults or campaign history.
+Acceptance: labeled self-review; full pinned-native tools/check.sh; source-only and
+artifact/provenance checks; current-head GitHub CPU/docs/smoke success, resolved
+conversations and merge without policy bypass. Preserve the separate research-docs
+branch at 62516e8cef59104442fa359a2e2440af8a59f033 and restore its checkout afterward.
+Likely files: this task record and substantiated review corrections only.
+Resources: four build jobs, at most one additional CPU-hour for integration checks,
+zero GPU jobs and no new allowance. Preserve cumulative 17115.274617853 /
+18002.574545061 GPU seconds and the 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+Starting source: ce72e80572fdd9eea88a33d31d5c92299903b9c5. This authorization
+supersedes the implementation-phase no-push scope below for this branch only.
+Keep integration receipts under artifacts/gpup-convergence-integration-20260930.
+
+Local self-review reproduced acceptance-label substitution with unchanged, valid
+retained endpoints. The independent report now binds claimed model/configuration,
+work limits, profile flags, code images, COPT parameters/dependencies and exact
+min/max offset-seven models, and rechecks state/work equality. Measured workers,
+schemas, protocols, endpoints and ledger bytes are unchanged. Twelve source-only
+contracts pass in an artifact-free copy; the full pinned-native gate passes
+514 Rust tests, 219 Python tests, record replay, 115 documentation pages and smoke.
+The original PR head passes required GitHub CPU/docs/smoke checks. Independent
+report re-verification and current-head remote checks must pass before merging.
+Self-review is explicitly labeled; no independent approval is claimed. Final
+verification, merge and safe-cleanup receipts are retained in the integration
+directory above; no additional GPU execution is authorized or needed.
+
+## GPUP-CONVERGENCE (2026-09-30)
+
+Status: complete; bounded study, independent verification and all required gates pass.
+ADR-0032/protocol were frozen before GPU execution. Local commit follows.
+Objective: diagnose fresh-solve convergence/work amplification after host repairs,
+including fresh scalar COPT CPU/GPU PDLP controls, with unchanged runtime arithmetic,
+kernels, settings, defaults and historical evidence. Freeze 176 study attempts.
+Acceptance: full pinned-native tools/check.sh before GPU admission and at completion;
+source-only schedule/provenance/accounting/recovery tests, regular device gate,
+twelve project fixed-work profile pairs and replays, COPT min/max/profile checks,
+independent endpoint verification, reproducible report/exports and preserved ledger.
+Likely files: dedicated convergence tools, study/trial schemas, protocol, ADR-0032,
+benchmark report/data/figures and task/status documentation. Runtime changes excluded.
+Resources: four build jobs; 14400 CPU seconds; timing 800 GPU seconds (ablations),
+profiles 800 and acceptance 300 (repeatability); combined 1900, no borrowing or
+additional allowance. Preserve 15776 events and SHA-256
+2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0;
+15804.186067059 / 18002.574545061 cumulative GPU seconds and every phase cap.
+Every GPU job uses the shared host lease and complete reservations. Retain failures,
+partial artifacts and interruptions; never retry an admitted study identity.
+Starting revision: c10d212. Commit locally after acceptance; no push/publication.
+Handoff after completion: GPUP-7 contract work, without implementing GPUP-7.
+
+Acceptance evidence (2026-09-30):
+
+GPUP-CONVERGENCE is complete under accepted ADR-0032/SPEC-0013. Its
+[report](../docs/benchmarks/lp-convergence.md) retains all 176 frozen attempts,
+independently verifies 174 endpoints and certifies 87/104 timings
+and 32/72 diagnostic profiles. Two dense-65536 accumulation-FP32 timings
+have no endpoint; every interruption and rejection remains visible, without retries.
+Scoped per-proposal savings do not overcome unsuccessful FP32 work; adaptive
+reference arithmetic, recovery and original-model assessments remain material.
+Full pre/post native gates, 58 regular device tests, twelve fixed-work pairs and
+replays, eight COPT min/max/profile endpoints and ten source-only contracts pass.
+Runtime, kernels, settings, defaults and historical evidence remain unchanged;
+no preset is selected. CPU-only recovery/report review corrections are exactly bound.
+Task charge 1311.088550794 GPU seconds: timing
+634.748860654/800, profiles 441.911765452/800,
+acceptance 234.427924688/300; cumulative 17115.274617853 /
+18002.574545061 seconds, with no new allowance. The 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserves the
+15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
+and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
+Next is GPUP-7's accepted quantization/FP8 interface and resource contract,
+before any new numerical behavior.
+
+Final full pinned-native gate passes 217 Python tests, native Rust/exact-rational
+regressions, committed-record replay, documentation and smoke. Source-only review
+reproductions and exact measured/reviewed hashes are retained. The resource catalog
+records metered child CPU within 14400 seconds and four build jobs. Existing scoped
+sanitizer receipts carry forward because runtime/kernel bytes are unchanged.
+
 ## GPUP-COPT-ADAPTER protected integration (2026-09-30)
 
 Status: user authorized PR publication, self-review, protected merge and safe

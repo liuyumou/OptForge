@@ -11,7 +11,7 @@ evidence is recorded in [active task](../state/active-task.md).
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | Ordered convergence follow-up, then GPU LP precision track (GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| Planned | GPU LP precision track (GPUP-7 contract work first, through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
 | Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
@@ -87,7 +87,10 @@ verifies all 84 attempts, certifies 42 timings, and finds this bulk adapter slow
 in every certified cell. Twelve readbacks and 24 acceptance endpoints pass. Carry
 15804.186067059 / 18002.574545061 GPU seconds and the 15776-event ledger
 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0 forward.
-The next task is GPUP-CONVERGENCE. The
+GPUP-CONVERGENCE is complete under ADR-0032/SPEC-0013; its
+[report](../docs/benchmarks/lp-convergence.md) retains 176 attempts, independently
+verifies 174 endpoints and certifies 87/104 timings. No solver behavior or preset
+changes. The next task is GPUP-7's required quantization/FP8 contract. The
 [ordered follow-ups](../docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 separate priority from prerequisites. No supported recipe is available. The
 campaign retains its eight GPU-hour cap; acceptance details remain
@@ -196,8 +199,29 @@ The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. Performance repairs ranked
 in the report are ordered in the roadmap and backlog; GPUP-EVIDENCE and GPUP-HOST
-are complete, as are GPUP-ADAPTIVE-COST and GPUP-SETUP. Current cumulative consumption is
+are complete, as are GPUP-ADAPTIVE-COST and GPUP-SETUP. At setup completion, consumption was
 15632.281207415 / 18002.574545061 GPU s. The 15606-event ledger SHA-256
 ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b
 preserves the 15528-event adaptive-cost prefix and all prior history.
 GPUP-7 still needs its accepted contract.
+
+GPUP-CONVERGENCE is complete under accepted ADR-0032/SPEC-0013. Its
+[report](../docs/benchmarks/lp-convergence.md) retains all 176 frozen attempts,
+independently verifies 174 endpoints and certifies 87/104 timings
+and 32/72 diagnostic profiles. Two dense-65536 accumulation-FP32 timings
+have no endpoint; every interruption and rejection remains visible, without retries.
+Scoped per-proposal savings do not overcome unsuccessful FP32 work; adaptive
+reference arithmetic, recovery and original-model assessments remain material.
+Full pre/post native gates, 58 regular device tests, twelve fixed-work pairs and
+replays, eight COPT min/max/profile endpoints and ten source-only contracts pass.
+Runtime, kernels, settings, defaults and historical evidence remain unchanged;
+no preset is selected. CPU-only recovery/report review corrections are exactly bound.
+Task charge 1311.088550794 GPU seconds: timing
+634.748860654/800, profiles 441.911765452/800,
+acceptance 234.427924688/300; cumulative 17115.274617853 /
+18002.574545061 seconds, with no new allowance. The 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserves the
+15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
+and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
+Next is GPUP-7's accepted quantization/FP8 interface and resource contract,
+before any new numerical behavior.

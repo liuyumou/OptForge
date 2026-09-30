@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; GPUP-0 through GPUP-6, GPUP-5B/5C, GPUP-THROUGHPUT and GPUP-COPT complete; ordered COPT follow-ups and GPUP-7 through GPUP-10 pending
+Status: approved roadmap; GPUP-0 through GPUP-6, GPUP-5B/5C, GPUP-THROUGHPUT, GPUP-COPT and its ordered follow-ups complete; GPUP-7 contract work is next, GPUP-7 through GPUP-10 behavior pending
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 15dd5c8d7bf47ea9dfb530cb2051f66b5971562c (follow-up ordering, 2026-09-27)
@@ -266,7 +266,10 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Current handoff: GPUP-CONVERGENCE. GPUP-COPT-ADAPTER is complete under
+Current handoff: GPUP-7 contract work. GPUP-CONVERGENCE is complete under
+ADR-0032/SPEC-0013; its [report](../benchmarks/lp-convergence.md) retains 176
+attempts and diagnoses work/cost amplification without selecting a preset.
+GPUP-COPT-ADAPTER is complete under
 SPEC-0019/ADR-0031 with a negative fresh-process bulk construction result.
 GPUP-SETUP is complete under
 SPEC-0018/ADR-0030 with a measured negative primary-context result.
@@ -314,8 +317,8 @@ remain explicit gaps; no winner or preset is selected. Task charge is
 The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. Performance repairs ranked
-in the report are ordered below. GPUP-EVIDENCE and GPUP-HOST are complete; the remaining repairs
-are bounded future tasks. GPUP-7 still needs its accepted contract.
+in the report are ordered below. All six follow-ups are now complete with scoped
+results and retained limitations. GPUP-7 still needs its accepted contract.
 
 
 ## Current follow-up order (2026-09-27)
@@ -323,8 +326,9 @@ are bounded future tasks. GPUP-7 still needs its accepted contract.
 The user requested ordering after GPUP-6 and GPUP-COPT merged. The COPT
 [ranked experiments](../benchmarks/lp-copt-comparison.md#ranked-next-experiments)
 are the evidence for the first six priorities. Coverage comes first, followed by
-measured host costs, then additional arithmetic candidates. GPUP-EVIDENCE and GPUP-HOST are complete under accepted contracts; the remaining rows are
-planned bounded tasks, not accepted behavior changes or performance promises.
+measured host costs, then additional arithmetic candidates. The first six rows are
+complete under accepted contracts. GPUP-7 through GPUP-10 remain planned bounded
+tasks, not accepted behavior changes or performance promises.
 
 | Order | Task | Scope and completion decision |
 | --- | --- | --- |
@@ -333,7 +337,7 @@ planned bounded tasks, not accepted behavior changes or performance promises.
 | 3 | **GPUP-ADAPTIVE-COST: complete** | [SPEC-0017 report](../benchmarks/lp-adaptive-host-cost.md): 32 verified attempts, 24 certified timings, 16 identical numerical/work pairs; full ladders prepare two operators rather than five, with streamed audits and borrowed probes. Arithmetic and recovery remain unchanged; no preset. |
 | 4 | **GPUP-SETUP: complete** | [SPEC-0018 report](../benchmarks/lp-fresh-setup.md): 32 verified attempts, 24 certified timings and 16 equal comparisons; four control profiles precede experimental primary contexts. No consistent fresh-process benefit or default change. Persistent contexts remain a separate session endpoint. |
 | 5 | **GPUP-COPT-ADAPTER: complete** | [SPEC-0019 report](../benchmarks/lp-copt-adapter.md): 84 verified attempts, 42/72 certified timings, 12 native readbacks and 24 certified acceptance endpoints. Bulk is slower in every certified cell; original wrappers and certification remain, no preset. |
-| 6 | **GPUP-CONVERGENCE: work amplification and remaining device diagnosis** | Reassess proposals, audits, probes and replay after host/adaptive repairs, then compare certification coverage. A small graph-node trace is optional only if it resolves a concrete execution decision. Completion is a bounded diagnosis feeding GPUP-7, not a requirement to solve every convergence failure or expose COPT internals. |
+| 6 | **GPUP-CONVERGENCE: complete** | [ADR-0032 report](../benchmarks/lp-convergence.md): 176 retained attempts, 174 verified endpoints and 87/104 certified timings. Per-proposal FP32 savings coexist with unsuccessful amplified work; adaptive audits/probes, reference arithmetic and certification remain explicit. No graph trace, preset or numerical change. |
 | 7 | **GPUP-7: quantization interface, then sparse FP8** | Accept the bounded interface, resource and numerical contract before behavior. Stage matrix-only candidates before vector quantization; retain canonical transpose consistency, guards, seeded replay, FP64 controls and development screening. |
 | 8 | **GPUP-8: hybrid sparse/Tensor Core execution** | Follow the sparse quantized reference. Compare equivalent represented operands on the actual target, including packing, padding, metadata, setup, certification and recovery for a single right-hand side. |
 | 9 | **GPUP-9: controlled ablations and frozen finalists** | Reassess development candidates, select on validation, freeze finalists, then evaluate held-out data with coverage and uncertainty. Keep negative results and reserved finalist resources. |
@@ -392,6 +396,28 @@ runtime/kernel/default change; historical wrappers and evidence remain intact.
 Task charge 171.904859644 GPU seconds; cumulative 15804.186067059 /
 18002.574545061 seconds, no added allowance. The 15776-event ledger SHA-256
 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0 preserves the
-15606-event prefix above and every phase cap. Next is GPUP-CONVERGENCE;
-GPUP-7 still needs its accepted quantization contract.
+15606-event prefix above and every phase cap. The subsequent convergence study
+retains this prefix. GPUP-7 still needs its accepted quantization contract.
+
+GPUP-CONVERGENCE is complete under accepted ADR-0032/SPEC-0013. Its
+[report](../benchmarks/lp-convergence.md) retains all 176 frozen attempts,
+independently verifies 174 endpoints and certifies 87/104 timings
+and 32/72 diagnostic profiles. Two dense-65536 accumulation-FP32 timings
+have no endpoint; every interruption and rejection remains visible, without retries.
+Scoped per-proposal savings do not overcome unsuccessful FP32 work; adaptive
+reference arithmetic, recovery and original-model assessments remain material.
+Full pre/post native gates, 58 regular device tests, twelve fixed-work pairs and
+replays, eight COPT min/max/profile endpoints and ten source-only contracts pass.
+Runtime, kernels, settings, defaults and historical evidence remain unchanged;
+no preset is selected. CPU-only recovery/report review corrections are exactly bound.
+Task charge 1311.088550794 GPU seconds: timing
+634.748860654/800, profiles 441.911765452/800,
+acceptance 234.427924688/300; cumulative 17115.274617853 /
+18002.574545061 seconds, with no new allowance. The 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserves the
+15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
+and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
+Next is GPUP-7's accepted quantization/FP8 interface and resource contract,
+before any new numerical behavior.
+
 No new allowance or preset.

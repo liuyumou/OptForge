@@ -1,5 +1,38 @@
 # Known Failures and Limitations
 
+## Convergence acceptance labels corrected during PR self-review
+
+A CPU-only reproduction swapped tuned-FP64 and precision-FP64 acceptance labels
+while retaining valid endpoints and numerical digests; the original independent
+archive check accepted them. The reviewed report binds each acceptance endpoint
+back to its model, configuration, work limit, profile flag and code object. COPT
+checks also bind the original min/max model with offset seven, options, native
+parameters and dependency identities, and recheck profile state/work equality.
+Measured acceptance workers, endpoints, study results and GPU accounting are unchanged.
+The reproduction, regression tests and integration checks remain under
+artifacts/gpup-convergence-integration-20260930.
+
+## Convergence costs and incomplete FP32/mixed coverage
+
+The [convergence report](../docs/benchmarks/lp-convergence.md) retains all 176
+attempts and independently verifies 174 endpoints; 87/104 primary timings certify.
+On irregular-32768, accumulation FP32 saves about 10% of the measured device host
+cost per proposal in short profiles but consumes 40464 proposals without certifying
+in the full profile; precision FP64 certifies after 1600. This does not establish
+a certified latency benefit. Reference arithmetic, audits/probes and original-model
+assessments remain material for adaptive policies. No preset or tuning follows.
+
+Two dense-65536 accumulation-FP32 timings (repetitions one/two) time out without
+endpoints; empty output and partial worker receipts remain. Every mixed-65536 primary
+sample is uncertified and its single repetition has no repeatability interval.
+Deliberate bounded-work profiles retain work-limit outcomes. No admitted identity
+was retried; no failed sample is promoted or used in certified ratios. Full native,
+regular device, fixed-work/replay and COPT min/max/profile acceptance pass. CPU-only
+review repairs prevent pre-refusal activity writes, retain non-object partial JSON
+and leave missing worker cost envelopes unavailable, with exact source bindings.
+Historical tuned_cases racecheck, large-session, mixed-model and opaque COPT graph
+gaps remain. GPUP-7 requires an accepted numerical/resource contract first.
+
 ## COPT adapter interruption recovery corrected during integration review
 
 Self-review reproduced unbound partial artifacts after coordinator interruption.

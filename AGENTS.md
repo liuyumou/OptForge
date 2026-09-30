@@ -128,8 +128,8 @@ The 15340-event ledger SHA-256 is
 5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
 preserving the 13056-event prefix and every phase cap. The user requested follow-up
 ordering on 2026-09-27. GPUP-EVIDENCE and GPUP-HOST are now complete (below).
-GPUP-SETUP and GPUP-COPT-ADAPTER are now complete (below); continue with
-GPUP-CONVERGENCE before GPUP-7. Fresh setup diagnosis and optional COPT adapter
+GPUP-SETUP, GPUP-COPT-ADAPTER and GPUP-CONVERGENCE are now complete (below);
+continue with GPUP-7's required contract work. Fresh setup diagnosis and optional COPT adapter
 construction were separately prioritized investigations, not quantization prerequisites;
 see the [ordered roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 and next_ready_task. Planning adds no GPU allowance or accepted numerical behavior;
@@ -190,8 +190,29 @@ runtime/kernel/default change; historical wrappers and evidence remain intact.
 Task charge 171.904859644 GPU seconds; cumulative 15804.186067059 /
 18002.574545061 seconds, no added allowance. The 15776-event ledger SHA-256
 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0 preserves the
-15606-event prefix above and every phase cap. Next is GPUP-CONVERGENCE;
-GPUP-7 still needs its accepted quantization contract.
+15606-event prefix above and every phase cap. The subsequent convergence study
+retains this prefix. GPUP-7 still needs its accepted quantization contract.
+GPUP-CONVERGENCE is complete under accepted ADR-0032/SPEC-0013. Its
+[report](docs/benchmarks/lp-convergence.md) retains all 176 frozen attempts,
+independently verifies 174 endpoints and certifies 87/104 timings
+and 32/72 diagnostic profiles. Two dense-65536 accumulation-FP32 timings
+have no endpoint; every interruption and rejection remains visible, without retries.
+Scoped per-proposal savings do not overcome unsuccessful FP32 work; adaptive
+reference arithmetic, recovery and original-model assessments remain material.
+Full pre/post native gates, 58 regular device tests, twelve fixed-work pairs and
+replays, eight COPT min/max/profile endpoints and ten source-only contracts pass.
+Runtime, kernels, settings, defaults and historical evidence remain unchanged;
+no preset is selected. CPU-only recovery/report review corrections are exactly bound.
+Task charge 1311.088550794 GPU seconds: timing
+634.748860654/800, profiles 441.911765452/800,
+acceptance 234.427924688/300; cumulative 17115.274617853 /
+18002.574545061 seconds, with no new allowance. The 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserves the
+15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
+and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
+Next is GPUP-7's accepted quantization/FP8 interface and resource contract,
+before any new numerical behavior.
+
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
 GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent
