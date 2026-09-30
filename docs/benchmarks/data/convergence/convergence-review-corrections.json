@@ -1,0 +1,23 @@
+{
+  "scope": "Post-study CPU coordinator/report/export repairs only; no measured worker, protocol, numerical result or ledger change.",
+  "files": [
+    {
+      "path": "tools/benchmark_lp_convergence.py",
+      "measured_sha256": "179093f89b746e87fc78418c5d228f0b77930604ac0e0d45cbce502f43db2380",
+      "reviewed_sha256": "3ec55cb26e5c581ccce27ccd383e69eda94affd4aa99feb85bb5f09a4b96429e",
+      "reason": "Refuse duplicate/unadmitted requests before activity writes; retain non-object malformed endpoint bytes during recovery."
+    },
+    {
+      "path": "tools/report_lp_convergence.py",
+      "measured_sha256": "8e5e8cf251800908b9212136e773757bc4f4dd3b609cc48c562fcce0562bc9a8",
+      "reviewed_sha256": "f34518db033a7ed22a8537a0de2fff20e51ce45dcaaf5a551fd89aee1b1437c6",
+      "reason": "Retain raw partial profiles without a worker envelope; reject nonpositive single-pair times; verify exact declared CPU review source repairs."
+    },
+    {
+      "path": "tools/export_lp_convergence.py",
+      "measured_sha256": "99a46d3bd8bc71cc020d56c7aa61ccffc46d82336d3f7e94490c8fa827261018",
+      "reviewed_sha256": "523c797e8a31650dc3b1cec2343f6d3b66ddd66c940642645ec698d8a21649f9",
+      "reason": "Include exact CPU review source corrections in the exported audit; preserve unavailable replay observations, fit figure annotations and normalize generated SVG whitespace."
+    }
+  ]
+}

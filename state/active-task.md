@@ -1,5 +1,57 @@
 # Active Task
 
+## GPUP-CONVERGENCE (2026-09-30)
+
+Status: complete; bounded study, independent verification and all required gates pass.
+ADR-0032/protocol were frozen before GPU execution. Local commit follows.
+Objective: diagnose fresh-solve convergence/work amplification after host repairs,
+including fresh scalar COPT CPU/GPU PDLP controls, with unchanged runtime arithmetic,
+kernels, settings, defaults and historical evidence. Freeze 176 study attempts.
+Acceptance: full pinned-native tools/check.sh before GPU admission and at completion;
+source-only schedule/provenance/accounting/recovery tests, regular device gate,
+twelve project fixed-work profile pairs and replays, COPT min/max/profile checks,
+independent endpoint verification, reproducible report/exports and preserved ledger.
+Likely files: dedicated convergence tools, study/trial schemas, protocol, ADR-0032,
+benchmark report/data/figures and task/status documentation. Runtime changes excluded.
+Resources: four build jobs; 14400 CPU seconds; timing 800 GPU seconds (ablations),
+profiles 800 and acceptance 300 (repeatability); combined 1900, no borrowing or
+additional allowance. Preserve 15776 events and SHA-256
+2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0;
+15804.186067059 / 18002.574545061 cumulative GPU seconds and every phase cap.
+Every GPU job uses the shared host lease and complete reservations. Retain failures,
+partial artifacts and interruptions; never retry an admitted study identity.
+Starting revision: c10d212. Commit locally after acceptance; no push/publication.
+Handoff after completion: GPUP-7 contract work, without implementing GPUP-7.
+
+Acceptance evidence (2026-09-30):
+
+GPUP-CONVERGENCE is complete under accepted ADR-0032/SPEC-0013. Its
+[report](../docs/benchmarks/lp-convergence.md) retains all 176 frozen attempts,
+independently verifies 174 endpoints and certifies 87/104 timings
+and 32/72 diagnostic profiles. Two dense-65536 accumulation-FP32 timings
+have no endpoint; every interruption and rejection remains visible, without retries.
+Scoped per-proposal savings do not overcome unsuccessful FP32 work; adaptive
+reference arithmetic, recovery and original-model assessments remain material.
+Full pre/post native gates, 58 regular device tests, twelve fixed-work pairs and
+replays, eight COPT min/max/profile endpoints and ten source-only contracts pass.
+Runtime, kernels, settings, defaults and historical evidence remain unchanged;
+no preset is selected. CPU-only recovery/report review corrections are exactly bound.
+Task charge 1311.088550794 GPU seconds: timing
+634.748860654/800, profiles 441.911765452/800,
+acceptance 234.427924688/300; cumulative 17115.274617853 /
+18002.574545061 seconds, with no new allowance. The 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserves the
+15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
+and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
+Next is GPUP-7's accepted quantization/FP8 interface and resource contract,
+before any new numerical behavior.
+
+Final full pinned-native gate passes 217 Python tests, native Rust/exact-rational
+regressions, committed-record replay, documentation and smoke. Source-only review
+reproductions and exact measured/reviewed hashes are retained. The resource catalog
+records metered child CPU within 14400 seconds and four build jobs. Existing scoped
+sanitizer receipts carry forward because runtime/kernel bytes are unchanged.
+
 ## GPUP-COPT-ADAPTER protected integration (2026-09-30)
 
 Status: user authorized PR publication, self-review, protected merge and safe
