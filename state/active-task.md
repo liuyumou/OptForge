@@ -1,5 +1,40 @@
 # Active Task
 
+## Low-precision performance research review (2026-09-30)
+
+Status: complete; user-requested research and recommendations only.
+Objective: reconcile the completed LP studies with hardware documentation and
+numerical-method literature; propose bounded routes to faster FP32/FP16/FP8
+computation at the unchanged original-model 1e-9 acceptance criteria.
+Acceptance: trace findings to repository evidence and primary external sources;
+distinguish measured results from hypotheses, explain sm_120 applicability and
+failure conditions, and prioritize falsifiable follow-up experiments.
+Likely files: this task record only; recommendations are delivered in chat.
+Resources: at most one CPU-hour for research and required CPU/native validation,
+with at most four build jobs; zero GPU jobs or new campaign allowance.
+No runtime, accepted-contract, backlog or ledger changes.
+Preserve cumulative 17115.274617853 / 18002.574545061 GPU seconds and the
+16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+GPUP-7's accepted quantization/resource contract remains the next implementation
+prerequisite; this review does not accept or implement new numerical behavior.
+
+Acceptance evidence: reviewed the roadmap, candidate register, rounding analysis,
+FP64-pipe/GPUP-5C reports, adaptive host-cost report and latest convergence study.
+Cross-checked NVIDIA RTX Blackwell, PTX/CUTLASS and cuBLAS documentation, LP
+iterative refinement (Gleixner/Steffy/Wolter), mixed-precision linear-system
+refinement (Haidar et al.) and Ozaki-II primary sources. Recommendations delivered
+in chat distinguish established techniques, repository measurements and proposed
+adaptations: scaled correction LPs with anchored products; a lean precision
+executor; scaled double-float; selective operator-error budgets; active-face
+polishing; and layout-appropriate Tensor Core/integer emulation. End-to-end
+Amdahl limits and failed-convergence costs govern the proposed experiment order.
+No new performance result or accepted numerical behavior is claimed.
+Full pinned-native `bash tools/check.sh` passed: native/Rust gates, 217 Python
+tests, committed-record replay, 115 documentation pages and smoke. Log:
+`/tmp/ai-optimizer-low-precision-review-check.log`. No GPU workload ran.
+Only this task record changed; recommendations do not reorder the backlog.
+
 ## GPUP-CONVERGENCE (2026-09-30)
 
 Status: complete; bounded study, independent verification and all required gates pass.
