@@ -1,5 +1,64 @@
 # Active Task
 
+## Precision architecture and experiment redesign (2026-10-12)
+
+Status: complete; user-requested design/documentation and CPU mathematical artifacts only.
+Objective: turn the first-principles review into component designs, mathematical
+obligations, a dependency-ordered roadmap and experiments that distinguish exact
+storage, arithmetic accuracy, algorithmic convergence and certified total cost.
+Include compact mixed-format expansions, integer decoding, persistent expansion
+state, refinement/anchoring, selective precision, stable formulas, executor and
+assessment costs, and conditional alternative solver/Tensor Core directions.
+Acceptance: trace each proposal to motivation/evidence, state unproved assumptions
+and rejection gates, reconcile specs/backlog/navigation, preserve historical
+contracts and artifacts, and pass the full pinned-native tools/check.sh gate.
+Likely files: new design/specification/decision/experiment documents, roadmap,
+candidate register, backlog, known failures, status, README, AGENTS and changelog.
+Resources: at most one CPU-hour, four build jobs, zero GPU workloads; no new GPU
+allowance, runtime implementation, dependency provisioning, push or publication.
+Preserve cumulative 17115.274617853 / 18002.574545061 GPU seconds and the
+16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+New numerical contracts remain proposed until their bounded acceptance gates;
+this task may revise future planning order, as requested, but authorizes no new
+solver behavior, measurement, preset, seed, tolerance or benchmark split.
+
+Acceptance evidence: [ADR-0033](../docs/decisions/ADR-0033-lp-precision-design-order.md)
+records planning-only priority. The [architecture](../docs/plans/lp-precision-architecture-2026-10-12.md)
+maps measured failure mechanisms to component motivations and rejection gates;
+draft SPEC-0020 gives the normalized exact-tail proof, integer decoding, layouts,
+primitive/kernel construction and range/error obligations; draft SPEC-0021 derives
+the general equality/activity-variable correction, dual scaling and anchored-error
+identities. The [experiment design](../docs/benchmarks/lp-precision-design-experiments.md)
+separates component effects, small factorial interactions, full costs, coverage and
+frozen held-out selection. Existing SPEC-0012/0013 requirements remain unchanged;
+only navigation/current study metadata is updated there. Roadmap, candidate
+register, backlog, README, status, AGENTS and limitations are reconciled.
+
+CPU evidence: tools/check_lp_precision_design.py writes and byte-for-byte reproduces
+[data/lp-precision-design-examples.json](../docs/plans/data/lp-precision-design-examples.json).
+All 57429 finite patterns round-trip, covering every normal exponent and both
+signs plus subnormal/tie/carry samples; all 17 integer tails are exercised.
+Fifty rational correction/dual-scale cases and 353 proximal cases pass, with
+anchored/residual/gap identities, actual ABI sizes and preserved counterexamples.
+This finite sample supports the written derivations; it is not production
+primitive, convergence or device acceptance. Artifact SHA-256:
+bde0c7bb271a888403179c4a8ee2bf5b29da713fba45b41ed2a3a6a90e020e5c.
+
+Full pinned-native tools/check.sh passed with four build jobs and GPU opt-in unset:
+Rust formatting/clippy/build/tests/docs, dependency policy, all 217 Python tests,
+committed-record replay, 121 documentation pages and smoke. The log is
+/tmp/ai-optimizer-precision-design-check.log; target/lp-native-gate.json was written.
+Device tests were not enabled and no GPU workload/sanitizer was run. Final prose
+and task-state updates pass the documentation/whitespace check. The backlog
+has 40 unique tasks, no dependency cycle and dependency-ready GPUP-REP.
+The actual campaign ledger still has 16134 events and exactly the preserved hash
+above; tracked runtime, kernels, schemas, benchmark inputs and historical reports/
+data remain unchanged. No implementation, measurement campaign, preset, new GPU
+allowance or external publication. Next: GPUP-REP CPU validation/acceptance of a
+bounded draft subset, with its own active task before work. Commit locally after
+these gates; do not start that next task as part of this design request.
+
 ## Persist low-precision research analysis (2026-09-30)
 
 Status: complete; documentation only, explicitly requested by the user.

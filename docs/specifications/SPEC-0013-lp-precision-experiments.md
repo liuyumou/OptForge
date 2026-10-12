@@ -1,13 +1,23 @@
 # SPEC-0013: Bounded LP Precision Experiments
 
-Status: accepted; GPUP-2 through GPUP-5 implemented and measured; later slices pending
+Status: accepted experiment infrastructure; studies through GPUP-CONVERGENCE complete; new components and final recipe evaluation pending
 Scope: LP-only development measurement, ablations, evidence, and recipe selection
 Owner: experiment tooling and numerical backend
 Introduced: GPU LP precision research, GPUP-0
-Last reviewed commit: bootstrap (first commit containing this document)
+Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (proposed experiment navigation, 2026-10-12)
 Supersedes: none; extends SPEC-0007 for a separately versioned LP study
-Implementation: bounded LP harness, matched/tuned FP64 and FP32 studies, external COPT witnesses; GPUP-6 through GPUP-10 pending
+Implementation: bounded LP harness and completed studies through GPUP-CONVERGENCE; further precision components and GPUP-9/10 evaluation pending
 Tests: implementation mapping below; [baseline evidence](../benchmarks/lp-baseline-gpup2.md)
+
+## Proposed component experiments (2026-10-12)
+
+The [precision experiment design](../benchmarks/lp-precision-design-experiments.md)
+adds proposed CPU admission, isolated storage/arithmetic/executor comparisons,
+small interaction blocks and frozen finalist selection. It preserves this
+specification's primary endpoint, authority, three screening/at-least-ten finalist
+repetitions, held-out separation and campaign/phase accounting. It admits no new
+manifest, seed, grid or resource allocation and changes no historical trial.
+Concrete execution extensions need a frozen protocol and accepted bounded contract.
 
 ## Purpose
 

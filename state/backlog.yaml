@@ -16,7 +16,9 @@ active_research_track: GPUP
 # GPUP-COPT-ADAPTER and GPUP-CONVERGENCE are complete.
 # Listed priority is distinct from depends_on: setup and optional COPT adapter
 # investigations are not prerequisites for quantization. See the roadmap handoff.
-next_ready_task: GPUP-7
+# 2026-10-12: ADR-0033 changes planning only. CPU proof/codec contract validation
+# precedes more GPU arithmetic. SPEC-0020/0021 remain drafts; no new allowance.
+next_ready_task: GPUP-REP
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -220,24 +222,59 @@ tasks:
     depends_on: [GPUP-ADAPTIVE-COST]
     specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
     acceptance: "ADR-0032 complete; all 176 attempts retained, 174 endpoints verified, 87/104 timings certified; full native, 58 device, twelve fixed-work pairs/replays, eight COPT min/max/profile endpoints and source-only gates pass; work/cost diagnosis without arithmetic/default changes or preset; docs/benchmarks/lp-convergence.md"
-  - id: GPUP-7
-    title: Implement quantization candidates and sparse FP8 execution
+  - id: GPUP-DESIGN
+    title: Preserve precision architecture, numerical drafts and component experiments
+    status: complete
+    depends_on: [GPUP-CONVERGENCE]
+    acceptance: "ADR-0033 planning only; rationale and proposed SPEC-0020/0021; reproducible CPU design artifact and full pinned-native gate; no runtime or GPU work"
+  - id: GPUP-REP
+    title: Validate and accept a bounded exact-storage and expansion contract on CPU
+    status: ready
+    depends_on: [GPUP-DESIGN]
+    specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
+    acceptance: "Close codec/range/rounding proofs, independent primitive oracle and layout/memory analysis; accept bounded subset and future interfaces/resources before behavior; CPU-only, zero GPU"
+  - id: GPUP-EXEC
+    title: Implement and measure an admitted lean precision operator executor
     status: planned
-    depends_on: [GPUP-6, GPUP-EVIDENCE, GPUP-CONVERGENCE]
+    depends_on: [GPUP-REP, GPUP-5C]
+    specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
+    acceptance: "Accepted subset and explicit reservation first; cached splits and guarded execution; same-arithmetic controls, instruction inventory, range/oracle/replay/four sanitizer gates; total preparation and solve cost"
+  - id: GPUP-STATE
+    title: Investigate persistent accurate state and stable numerical formulas
+    status: planned
+    depends_on: [GPUP-EXEC]
+    specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
+    acceptance: "Accepted full primitive/state subset first; compensation and expansion masters with native FP64 controls; checkpoint every scalar/vector/scale; original residuals and charged full costs; retain a reasoned refusal if no format qualifies"
+  - id: GPUP-REFINE
+    title: Accept and evaluate residual-driven LP refinement and anchored products
+    status: planned
+    depends_on: [GPUP-REP, GPUP-EXEC, GPUP-CONVERGENCE]
+    specification: docs/specifications/SPEC-0021-lp-refinement.md
+    acceptance: "Accept bounded transformation/inner-oracle/progress/resource contract; rational ranged/equality/box primal-dual maps, guarded anchors, failure/recovery/replay and full refresh costs; native FP64 outer control first; retain a bounded negative/refusal result if oracle assumptions fail"
+  - id: GPUP-ASSESS
+    title: Validate a bounded assessment scheduling policy
+    status: planned
+    depends_on: [GPUP-CONVERGENCE, GPUP-DESIGN]
+    specification: docs/specifications/SPEC-0021-lp-refinement.md
+    acceptance: "CPU common-trajectory replay then accepted policy/resource contract; fixed-schedule control, delayed-success accounting, original-model final certification and charged required recovery"
+  - id: GPUP-7
+    title: Admit error-budgeted quantization and selective sparse FP8 candidates
+    status: planned
+    depends_on: [GPUP-6, GPUP-EVIDENCE, GPUP-REFINE, GPUP-EXEC]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
-    acceptance: "Accept bounded quantization/FP8 interface and resource contract first; quantizer boundary tests; identical represented transpose; guarded operands; seeded replay; numerical screening"
+    acceptance: "Accept bounded quantization/FP8 contract consistent with SPEC-0020/0021 first; original-unit error budgets, canonical transpose, guarded norm/scale/promotion and seeded replay; retain insufficient-accuracy refusals"
   - id: GPUP-8
-    title: Implement hybrid sparse and Tensor Core single-solve execution
+    title: Conditionally admit hybrid sparse and Tensor Core single-solve execution
     status: planned
     depends_on: [GPUP-7]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
-    acceptance: "Hardware/layout refusal; differential kernels, repeatability, sanitizers; packing and padding-inclusive comparisons"
+    acceptance: "Hardware/layout/error/cost admission first; retain a documented rejection or defer decision when unsuitable; otherwise differential kernels, repeatability, sanitizers and packing/padding-inclusive single-RHS comparisons"
   - id: GPUP-9
     title: Run controlled precision experiments and ablations
     status: planned
-    depends_on: [GPUP-8]
+    depends_on: [GPUP-7, GPUP-STATE, GPUP-ASSESS]
     specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
-    acceptance: "Frozen finalists and held-out evaluation; interactions, negative results, uncertainty and coverage; eight GPU-hour campaign ledger"
+    acceptance: "Accept concrete protocol from lp-precision-design-experiments first; bounded component/interaction blocks, frozen finalists and unseen grouped holdout; coverage, uncertainty and full costs; optional GPUP-8 disposition recorded; all campaign/phase caps preserved"
   - id: GPUP-10
     title: Package evidence-supported precision recipes
     status: planned

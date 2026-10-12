@@ -1,9 +1,9 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved roadmap; GPUP-0 through GPUP-6, GPUP-5B/5C, GPUP-THROUGHPUT, GPUP-COPT and its ordered follow-ups complete; GPUP-7 contract work is next, GPUP-7 through GPUP-10 behavior pending
+Status: approved planning order updated 2026-10-12; completed studies preserved; GPUP-REP CPU contract validation is next; new numerical designs remain draft
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: 15dd5c8d7bf47ea9dfb530cb2051f66b5971562c (follow-up ordering, 2026-09-27)
+Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
 Acceptance: the slice gates below; [GPUP-2 baseline evidence](../benchmarks/lp-baseline-gpup2.md), [GPUP-3 matched evidence](../benchmarks/lp-matched-fp64-gpup3.md), [GPUP-4 tuned evidence](../benchmarks/lp-tuned-fp64-gpup4.md)
 
@@ -27,6 +27,46 @@ FP32-to-FP8 computation and Tensor Core execution are in scope. FP8 is a candida
 not a required winner. The final recipe follows measurements and ablations; an
 experiment that finds the tuned baseline faster is a useful negative result.
 This track follows C6 but does not complete C7, C9, or the general C10 runner.
+
+## Current design order (2026-10-12)
+
+The user requested durable designs and experiments before more implementation.
+[ADR-0033](../decisions/ADR-0033-lp-precision-design-order.md) changes planning order
+only. The [architecture plan](lp-precision-architecture-2026-10-12.md) records
+component motivation, algorithm sensitivity, exact-tail proofs, low-level choices
+and rejection conditions. [SPEC-0020](../specifications/SPEC-0020-lp-expansion-arithmetic.md)
+and [SPEC-0021](../specifications/SPEC-0021-lp-refinement.md) are **draft numerical
+contracts**. The [experiment design](../benchmarks/lp-precision-design-experiments.md)
+is proposed; no new trials, seeds, defaults or GPU allowance are admitted.
+
+| Priority / slice | Bounded deliverable | Gate before advancing |
+| --- | --- | --- |
+| 1 — GPUP-REP | CPU validation and acceptance of a bounded exact-storage/expansion contract; compare original bits with compact mixed tails, prove range/rounding and reject invalid formats. | Independent oracle, exact codec and primitive obligations, actual layout/memory analysis, accepted SPEC-0020 subset and explicit later resource contract. Zero GPU work in this slice. |
+| 2 — GPUP-EXEC | Lean operator executor: cache vector splits, remove avoidable per-nonzero recombination/conversion, preserve integer-guard meaning and test admitted launch schedules. | Same-arithmetic controls, generated instruction review, full range and sanitizer acceptance; both tuned and precision FP64 comparisons; packing-inclusive cost. |
+| 3 — GPUP-STATE | Persistent accurate/compensated state and stable scalar/proximal formulas. | Every live/control operation specified, full-state replay, accurate reductions/division/comparisons and independent residual validation. Native FP64 and scaled-pair controls retained. |
+| 4 — GPUP-REFINE | Accept and test a bounded original-residual correction LP and anchored products, initially with native FP64 outer masters. | General equality/box transformation, inner oracle/progress contract, both orientations, range/failure tests and all refresh/correction costs. Expansion masters are a later combination, not a prerequisite. |
+| 5 — GPUP-ASSESS | Accept a bounded assessment scheduling policy after CPU common-trajectory replay. | Cheap indicators cannot certify; include delayed stopping, fixed-schedule controls, mandatory final host certification and charged recovery. |
+| 6 — GPUP-7 | Accept quantization/FP8 error-budget interface, then admitted uniform/selective sparse candidates. | Representation/arithmetic error in original units, canonical transpose, norm/step validity, bounded promotion and memory; reject insufficient-accuracy formats before timing. |
+| Conditional — GPUP-8 | Shape-admit sparse/dense Tensor Core or integer execution for actual sm_120 single-RHS work. | Same-operand accuracy, overflow/accumulator analysis, packing/padding costs and scoped device gates. A documented rejection/defer decision is valid; no mandatory Tensor Core implementation. |
+| 7 — GPUP-9 | Small component/interaction blocks, frozen finalists and independent held-out comparison. | Coverage-first certified total latency, repeatability/uncertainty, full failures and budget ledger; final recipe may omit optional components. |
+| 8 — GPUP-10 | Package only supported recipes. | Accepted evidence and admission rules; no preset if gains or coverage are inconclusive. |
+
+This is priority order. The [backlog](../../state/backlog.yaml) records actual
+prerequisites separately: refinement does not require expansion state, assessment
+scheduling does not require refinement, and final comparisons do not require an
+unhelpful Tensor Core path. Simplex/interior-point/ADMM, active-face polishing,
+stronger preconditioning and stochastic rounding are conditional branches needing
+separate bounded contracts; they do not block the primary PDHG experiment.
+An investigation can close with a documented negative/admission result. Completion
+of GPUP-STATE or GPUP-REFINE does not require making its candidate a winning or
+mandatory component of GPUP-7/9.
+
+Current charge stays **17115.274617853 / 18002.574545061 GPU seconds**, with all
+16134 events and SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserved.
+No new reservation follows from remaining headroom. Historical handoffs and
+budgets below describe their dated stages; this section and next_ready_task are
+the current handoff. All old racecheck/session/mixed-model gaps remain open.
 
 ## Contracts and status
 
@@ -52,9 +92,10 @@ and tolerance-based feasibility report retain their existing meanings. See
 
 ## Implementation slices
 
-The original precision sequence is below; GPUP-0 depends on C6 and C8. The
-[current follow-up order](#current-follow-up-order-2026-09-27) inserts the COPT
-findings before GPUP-7; the backlog records actual prerequisites separately from
+The original precision sequence is retained below; GPUP-0 depends on C6 and C8.
+The [current design order](#current-design-order-2026-10-12) adds the new bounded
+slices; the [2026-09-27 follow-up order](#current-follow-up-order-2026-09-27) records
+the completed COPT follow-ups. The backlog records prerequisites separately from
 priority. New behavior requires the relevant bounded contract to be accepted
 before implementation. Slice 1 repairs the existing SPEC-0011 certification
 contract. Later slices may be refined from earlier findings, with changes
@@ -149,11 +190,12 @@ The [2026-09-30 low-precision research review](lp-low-precision-research-2026-09
 and updated [candidate register](lp-precision-candidates.md) reconcile the completed
 studies with proposals for unchanged-1e-9 refinement, a lean precision executor,
 scaled double-float, selective error budgets, active-face polishing and
-layout-appropriate Tensor Core/integer emulation. This is non-normative research:
-it preserves the roadmap's accepted scope, backlog order, budgets and historical
-evidence. GPUP-7's accepted quantization/interface/resource contract remains the
-next implementation prerequisite; none of these proposals is an accepted preset
-or implicit numerical behavior.
+layout-appropriate Tensor Core/integer emulation. That review is preserved as
+non-normative historical research. The [2026-10-12 design](lp-precision-architecture-2026-10-12.md)
+now supplies proposed numerical contracts and the revised planning order above.
+GPUP-REP CPU contract validation is next. No proposal is an accepted preset or
+implicit numerical behavior; all budgets and historical evidence remain unchanged.
+The original candidate comparisons below are design space, not an admitted grid.
 
 Preserve the original FP64 model. Independent host validation and conservative
 certification decide whether a candidate meets the requested contract. Iteration
@@ -276,7 +318,9 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Current handoff: GPUP-7 contract work. GPUP-CONVERGENCE is complete under
+Current handoff: GPUP-REP CPU-only contract validation under the
+[2026-10-12 order](#current-design-order-2026-10-12); no runtime implementation
+is authorized by the documentation task. GPUP-CONVERGENCE is complete under
 ADR-0032/SPEC-0013; its [report](../benchmarks/lp-convergence.md) retains 176
 attempts and diagnoses work/cost amplification without selecting a preset.
 GPUP-COPT-ADAPTER is complete under
@@ -332,6 +376,9 @@ results and retained limitations. GPUP-7 still needs its accepted contract.
 
 
 ## Current follow-up order (2026-09-27)
+
+Historical ordering and budget snapshot, preserved for its completed studies.
+The [2026-10-12 section](#current-design-order-2026-10-12) is the current handoff.
 
 The user requested ordering after GPUP-6 and GPUP-COPT merged. The COPT
 [ranked experiments](../benchmarks/lp-copt-comparison.md#ranked-next-experiments)
@@ -427,7 +474,8 @@ acceptance 234.427924688/300; cumulative 17115.274617853 /
 60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserves the
 15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
 and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
-Next is GPUP-7's accepted quantization/FP8 interface and resource contract,
-before any new numerical behavior.
+At convergence-study completion the handoff was GPUP-7's contract. The
+2026-10-12 planning update above now makes GPUP-REP CPU-only proof/contract
+validation next, before any new numerical behavior.
 
 No new allowance or preset.

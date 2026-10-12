@@ -4,10 +4,21 @@ Status: accepted; GPUP-3/4/5/6 implemented and measured; later quantization and 
 Scope: opt-in LP arithmetic, resumable control, numerical audits, and recovery
 Owner: numerical backend
 Introduced: GPU LP precision research, GPUP-0
-Last reviewed commit: bootstrap (first commit containing this document)
+Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (companion-design navigation, 2026-10-12)
 Supersedes: ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
 Implementation: shared FP64 control, matched/tuned CUDA, fixed FP32 correction and explicit GPUP-6 adaptive audits/recovery; GPUP-7/8 pending
 Tests: continuation, bitwise trajectory, exact-rational, endpoint, native and scoped device gates; mapping below
+
+## Proposed companion designs (2026-10-12)
+
+The [precision architecture](../plans/lp-precision-architecture-2026-10-12.md)
+separates exact storage, arithmetic, method and original-model authority. Draft
+[SPEC-0020](SPEC-0020-lp-expansion-arithmetic.md) covers compact representations
+and persistent accurate state; draft [SPEC-0021](SPEC-0021-lp-refinement.md) covers
+correction LPs, anchors, selective error budgets and assessment policy. They do
+not relax this specification's accepted audits/recovery or exclusions. Their new
+behavior needs separately accepted bounded contracts and identities. Planning-only
+ADR-0033 makes GPUP-REP CPU validation next; it adds no GPU reservation or preset.
 
 ## GPUP-6 accepted bounded contract
 

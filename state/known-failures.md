@@ -1,5 +1,28 @@
 # Known Failures and Limitations
 
+## Proposed expansion/refinement contracts are not implemented or accepted
+
+The [2026-10-12 design](../docs/plans/lp-precision-architecture-2026-10-12.md) and
+draft SPEC-0020/0021 close several conceptual ambiguities but authorize no runtime
+change. GPUP-REP CPU validation is next. The reproducible design artifact checks
+57429 finite patterns, 50 correction maps and 353 proximal cases; it is neither
+an exhaustive binary64 proof nor primitive/device/convergence acceptance.
+
+A normalized binary64 codec can use two FP32 terms and a scaled integer tail in
+[-8,8], with a separate exponent. Raw FP16 tails underflow; three FP32 terms do
+not cover binary64's range without scaling. Existing Parts3 is 16 bytes including
+its i32 exponent, and measured component kernels still use FP64 recombination.
+Current double-float products return to FP64 state and have scheduling underflow;
+full persistent expansion state is untested. Generic intermediate expansions do
+not inherit the input codec's small-tail bound or correctly rounded arithmetic.
+
+A correction LP for ranged rows cannot just subtract A-transpose-y from the cost;
+that can change the optimum. SPEC-0021 derives an equality/activity-variable map.
+Its inner-oracle/progress assumptions, rounding bounds, quantitative policies,
+interfaces and resource caps still need acceptance. Removing mandatory final
+original-model certification would not meet the project's accuracy/authority
+contract. No preset or new GPU allowance follows, and historical gaps below remain.
+
 ## Convergence costs and incomplete FP32/mixed coverage
 
 The [convergence report](../docs/benchmarks/lp-convergence.md) retains all 176

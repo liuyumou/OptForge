@@ -1,14 +1,20 @@
 # LP Precision Candidate Register
 
-Status: research candidates, updated 2026-09-30. No supported preset. Preserve the
+Status: research candidates, updated 2026-10-12. No supported preset. Preserve the
 [rounding analysis](../benchmarks/lp-fp32-rounding-analysis.md) and
 [measured latency diagnosis](../benchmarks/lp-fp32-slowdown-diagnosis.md).
 The [2026-09-30 research review](lp-low-precision-research-2026-09-30.md)
 preserves the evidence, equations, primary sources, hardware qualifications and
 proposed experiments behind the current hypotheses. It is non-normative research,
 not an accepted numerical contract, implementation order, GPU allowance or preset.
-GPUP-7's quantization/interface/resource contract remains the next implementation
-prerequisite. All proposals retain original-model 1e-9 acceptance.
+The [2026-10-12 architecture](lp-precision-architecture-2026-10-12.md) now adds
+component IDs, low-level layouts, proofs and motivation, with draft
+[SPEC-0020](../specifications/SPEC-0020-lp-expansion-arithmetic.md) and
+[SPEC-0021](../specifications/SPEC-0021-lp-refinement.md). Its
+[experiment design](../benchmarks/lp-precision-design-experiments.md) isolates
+components and interactions. Under planning-only ADR-0033, GPUP-REP CPU contract
+validation is next; no GPU behavior or allowance follows. All proposals retain
+original-model 1e-9 acceptance.
 
 ## Completed investigations and remaining limits
 
@@ -23,13 +29,21 @@ prerequisite. All proposals retain original-model 1e-9 acceptance.
 | Larger development corpus, GPUP-5C | Frozen lp-manifest-v2 extension reaches 65536 rows, including an FP32-inexact mixed family. | Latest mixed-65536 primary samples remain uncertified. Larger or new instances need their own frozen development decision; no held-out tuning. |
 | Repeated-solve context reuse, GPUP-THROUGHPUT | Complete under [SPEC-0014](../specifications/SPEC-0014-lp-repeated-solve-throughput.md)/[ADR-0023](../decisions/ADR-0023-repeated-solve-throughput.md); [report](../benchmarks/lp-repeated-solve-throughput.md) and [host-input follow-up](../benchmarks/lp-throughput-host-input.md) retain successes and large-session gaps. | Separate throughput endpoint; never substitute amortized batch time for fresh-single latency. Adaptive sessions and full MILP search remain separate contracts. |
 
+## New representation and state candidates
+
+| ID | Candidate / motivation | Admission and rejection gate |
+| --- | --- | --- |
+| R1 | Exact compact h/l/q/exponent encoding; normalized binary64 leaves q in [-8,8], so scaled FP16/FP8/INT8 tails suffice. Original bits with integer decoding are the eight-byte control. | Proof is codec-only. Count i16/i32 metadata, ABI padding and both matrix views; raw FP16 tails fail. See SPEC-0020 and reproducible CPU artifact. |
+| R2 / S | Symbolically scaled arithmetic and persistent accurate state across updates, reductions and controller operations. | Range and rounding/error proof for every primitive, including comparison/division/sqrt; full-state replay. Current pair kernels still return to FP64 state and do not test this proposal. |
+| N | Stable support-function proximal map, scaled norms and residual-aware objective/gap formulas. | Exact-real identities plus rounded edge cases; preserve residual terms and final host authority. |
+
 ## Current research hypotheses
 
 The six main directions below are proposals, not implemented wins or claims of
 inventing their underlying numerical techniques. Their detailed derivations,
 failure conditions and falsifiable experiments live in the
 [research review](lp-low-precision-research-2026-09-30.md). Their order here does not
-reorder the backlog or approve behavior.
+approve behavior; the roadmap and ADR-0033 now own the revised planning priority.
 
 | Candidate | Question and mechanism | Prerequisite / rejection gate |
 | --- | --- | --- |

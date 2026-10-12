@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased — precision architecture and experiment design (2026-10-12)
+
+- Add [component motivations and first-principles design](docs/plans/lp-precision-architecture-2026-10-12.md),
+  draft SPEC-0020 for compact exact storage/expansion arithmetic and draft SPEC-0021
+  for ranged-LP correction, anchored products and controlled inexactness.
+- Preserve exact-tail derivation, memory/layout alternatives, full-state/primitive
+  obligations, algorithm sensitivity, authority boundaries and falsification gates.
+- Add reproducible CPU rational examples and a proposed component/interaction,
+  coverage-first, setup-inclusive experiment plan with frozen held-out selection.
+- ADR-0033 changes planning only: GPUP-REP CPU contract validation comes next,
+  followed by bounded executor/state/refinement/assessment investigations before
+  GPUP-7. Tensor Core and alternative-solver routes are conditional.
+- No solver, kernel, default, historical evidence, seed, split or GPU allowance
+  changes. Cumulative consumption remains 17115.274617853 / 18002.574545061 seconds.
+
 ## Unreleased — convergence and work amplification
 
 - Freeze gpup-convergence-v1 under ADR-0032/SPEC-0013 with eight unchanged project
