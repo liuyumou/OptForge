@@ -101,6 +101,17 @@ def _require(condition, message):
         raise ArithmeticRefusal(message)
 
 
+def _require_integer(value, message):
+    # bool and integral-valued floats compare equal to integers in Python, but
+    # are not canonical fields in these bit-pattern and receipt contracts.
+    _require(type(value) is int, message)
+
+
+def _require_bits(bits, width, message):
+    _require_integer(bits, message)
+    _require(0 <= bits < 1 << width, message)
+
+
 def _floor_log2_rational(numerator, denominator):
     """Return floor(log2(numerator / denominator)) using integers only."""
     _require(numerator > 0 and denominator > 0, "log2_domain")
@@ -241,7 +252,10 @@ def fused_multiply_add(left, right, addend, target):
     c, ce = _finite_operand(addend)
     product_exponent = ae + be
     product, c, exponent = _align(a * b, product_exponent, c, ce)
-    return round_rational(product + c, 1, exponent, target)
+    left_sign = int(a < 0) if a else left.zero_sign
+    right_sign = int(b < 0) if b else right.zero_sign
+    zero_sign = int(product == 0 and c == 0 and (left_sign ^ right_sign) and addend.zero_sign)
+    return round_rational(product + c, 1, exponent, target, zero_sign=zero_sign)
 
 
 def divide(left, right, target):
@@ -286,6 +300,12 @@ def square_root(value, target):
     if quotient >= 1 << target.precision:
         quotient >>= 1
         unit_exponent += 1
+    # The exact sum of squares passed by norm() can exceed the operand format.
+    # Check the rounded root, including a carry across the overflow midpoint.
+    if quotient and quotient.bit_length() - 1 + unit_exponent > target.maximum_exponent:
+        return Rounded(infinity_sign=1, flags=("overflow", "inexact"))
+    if quotient == 0:
+        return Rounded(flags=("underflow", "inexact"), error_exponent=unit_exponent - 1)
     flags = () if exact else ("inexact",)
     subnormal = quotient < 1 << (target.precision - 1)
     if subnormal and not exact:
@@ -357,6 +377,10 @@ def norm(values, kind, target):
 
 def project(value, lower, upper):
     """Project onto a tagged interval; ``None`` denotes an infinite bound."""
+    _finite_operand(value)
+    for bound in (lower, upper):
+        if bound is not None:
+            _finite_operand(bound)
     if lower is not None and upper is not None:
         _require(compare(lower, upper) <= 0, "invalid_bounds")
     if lower is not None and compare(value, lower) < 0:
@@ -368,6 +392,7 @@ def project(value, lower, upper):
 
 def binary64_bits_to_dyadic(bits):
     """Decode finite IEEE binary64 bits with integer operations."""
+    _require_bits(bits, 64, "binary64_bits")
     sign = -1 if bits >> 63 else 1
     exponent_field = bits >> 52 & 0x7FF
     fraction = bits & ((1 << 52) - 1)
@@ -420,6 +445,7 @@ def rounded_to_binary64_bits(value):
 
 
 def _f32_bits_to_dyadic(bits):
+    _require_bits(bits, 32, "codec_component_bits")
     sign = -1 if bits >> 31 else 1
     exponent_field = bits >> 23 & 0xFF
     fraction = bits & ((1 << 23) - 1)
@@ -457,6 +483,7 @@ def _dyadic_to_f32_bits(value):
 
 
 def _codec_normalized(bits):
+    _require_bits(bits, 64, "binary64_bits")
     sign = -1 if bits >> 63 else 1
     exponent_field = bits >> 52 & 0x7FF
     fraction = bits & ((1 << 52) - 1)
@@ -500,6 +527,9 @@ def encode_binary64(bits):
 
 def decode_binary64(codec):
     """Decode and validate a canonical tuple, returning original binary64 bits."""
+    _require(isinstance(codec, CodecTuple), "codec_tuple")
+    for field in (codec.tail, codec.exponent, codec.zero_sign):
+        _require_integer(field, "codec_integer_field")
     _require(-8 <= codec.tail <= 8, "codec_tail_range")
     _require(-1073 <= codec.exponent <= 1024, "codec_exponent_range")
     _require(codec.zero_sign in (0, 1), "codec_zero_sign")
@@ -530,10 +560,15 @@ def decode_binary64(codec):
 def expansion_chunks(value):
     """Encode a canonical finite expansion value as 24/24/16 FP32 chunks."""
     _require(not value.invalid and not value.infinity_sign, "expansion_nonfinite")
+    for field in (value.coefficient, value.exponent, value.zero_sign):
+        _require_integer(field, "expansion_integer_field")
+    _require(value.zero_sign in (0, 1), "expansion_sign")
     if value.coefficient == 0:
         return {"sign": value.zero_sign, "chunks": [0, 0, 0], "exponent": 0}
     magnitude = abs(value.coefficient)
+    _require(value.zero_sign == 0, "expansion_nonzero_zero_tag")
     _require(magnitude < 1 << 64, "expansion_significand_width")
+    _require(EXPANSION64.minimum_unit_exponent <= value.exponent <= 960, "expansion_exponent_range")
     _require(
         value.exponent == EXPANSION64.minimum_unit_exponent
         or magnitude >= 1 << (EXPANSION64.precision - 1),
@@ -549,9 +584,15 @@ def expansion_chunks(value):
 
 def decode_expansion_chunks(document):
     """Validate and decode canonical positional chunks."""
+    _require(isinstance(document, dict) and set(document) == {"sign", "chunks", "exponent"}, "expansion_fields")
+    _require_integer(document["sign"], "expansion_sign")
+    _require_integer(document["exponent"], "expansion_exponent_range")
     _require(document["sign"] in (0, 1), "expansion_sign")
+    _require(-1021 <= document["exponent"] <= 1024, "expansion_exponent_range")
     chunks = document["chunks"]
-    _require(len(chunks) == 3, "expansion_chunk_count")
+    _require(isinstance(chunks, list) and len(chunks) == 3, "expansion_chunk_count")
+    for chunk in chunks:
+        _require_integer(chunk, "expansion_chunk_integer")
     _require(0 <= chunks[0] < 1 << 24, "expansion_chunk0")
     _require(0 <= chunks[1] < 1 << 24, "expansion_chunk1")
     _require(0 <= chunks[2] < 1 << 16, "expansion_chunk2")
@@ -577,7 +618,8 @@ def decode_expansion_chunks(document):
 def _checked_sum(*values):
     total = 0
     for value in values:
-        _require(isinstance(value, int) and value >= 0, "layout_negative")
+        _require_integer(value, "layout_integer")
+        _require(value >= 0, "layout_negative")
         _require(value <= U64_MAX - total, "layout_integer_overflow")
         total += value
     return total
@@ -585,8 +627,11 @@ def _checked_sum(*values):
 
 def layout_receipt(rows, columns, nonzeros):
     """Return checked resident/peak bytes for the accepted bounded layout."""
+    for value in (rows, columns, nonzeros):
+        _require_integer(value, "layout_integer")
     _require(rows <= MAX_ROWS and columns <= MAX_COLUMNS and nonzeros <= MAX_NONZEROS, "layout_shape_limit")
     _require(rows >= 0 and columns >= 0 and nonzeros >= 0, "layout_negative")
+    _require(nonzeros <= rows * columns, "layout_nonzero_shape")
     offsets = _checked_sum((rows + 1) * 8, (columns + 1) * 8)
     sparse_maps = _checked_sum(nonzeros * 4, nonzeros * 4, offsets)
     compact = _checked_sum(nonzeros * 11, (nonzeros + 7) // 8)
@@ -654,14 +699,35 @@ def prepare_operator(rows, columns, coefficient_bits, transpose_map, source_kind
     _require(source_kind in ("original_binary64", "rounded_scaled_binary64"), "source_kind")
     _require(scale_policy in ("symbolic_power_of_two", "materialized_with_error"), "scale_policy")
     nonzeros = len(coefficient_bits)
+    layout = layout_receipt(rows, columns, nonzeros)
     _require(len(transpose_map) == nonzeros, "transpose_dimension")
-    _require(sorted(transpose_map) == list(range(nonzeros)), "transpose_not_permutation")
+    # Admit the shape and memory before visiting inputs or allocating scratch.
+    # A byte per coefficient avoids sorted Python integer copies at the shape cap.
+    seen = bytearray(nonzeros)
+    transpose_digest = hashlib.sha256()
+    for index in transpose_map:
+        _require_integer(index, "transpose_index")
+        _require(0 <= index < nonzeros and not seen[index], "transpose_not_permutation")
+        seen[index] = 1
+        transpose_digest.update(struct.pack(">I", index))
+    coefficients_digest = hashlib.sha256()
     for bits in coefficient_bits:
         decode_binary64(encode_binary64(bits))
-    payload = b"".join(struct.pack(">Q", bits) for bits in coefficient_bits)
-    digest = hashlib.sha256(payload).hexdigest()
+        coefficients_digest.update(struct.pack(">Q", bits))
+    digest = coefficients_digest.hexdigest()
+    metadata = {
+        "identity": "lp-expansion-operator-v1",
+        "rows": rows,
+        "columns": columns,
+        "nonzeros": nonzeros,
+        "coefficient_sha256": digest,
+        "transpose_sha256": transpose_digest.hexdigest(),
+        "source_kind": source_kind,
+        "scale_policy": scale_policy,
+        "layout_identity": layout["identity"],
+    }
     generation = int.from_bytes(
-        hashlib.sha256(payload + source_kind.encode() + scale_policy.encode()).digest()[:8],
+        hashlib.sha256(json.dumps(metadata, sort_keys=True, separators=(",", ":")).encode()).digest(),
         "big",
     )
     return PreparedOperator(
@@ -673,13 +739,15 @@ def prepare_operator(rows, columns, coefficient_bits, transpose_map, source_kind
         source_kind=source_kind,
         scale_policy=scale_policy,
         generation=generation,
-        layout=layout_receipt(rows, columns, nonzeros),
+        layout=layout,
     )
 
 
 def prepare_vector(dimension, operator, source_generation):
     """Bind one decoded vector to an operator and source epoch."""
+    _require_integer(dimension, "vector_dimension")
     _require(dimension in (operator.rows, operator.columns), "vector_dimension")
+    _require_integer(source_generation, "vector_source_generation")
     _require(source_generation >= 0, "vector_source_generation")
     return PreparedVector(dimension, operator.generation, source_generation)
 
@@ -690,14 +758,15 @@ def validate_apply(
     *,
     transpose=False,
     output_aliases_input=False,
-    source_generation=None,
+    source_generation,
 ):
     """Validate generation, dimension and alias rules before an apply."""
     expected = operator.rows if transpose else operator.columns
     _require(vector.dimension == expected, "apply_dimension")
     _require(vector.generation == operator.generation, "stale_operator_generation")
-    if source_generation is not None:
-        _require(vector.source_generation == source_generation, "stale_vector_generation")
+    _require_integer(source_generation, "vector_source_generation")
+    _require(source_generation >= 0, "vector_source_generation")
+    _require(vector.source_generation == source_generation, "stale_vector_generation")
     _require(not output_aliases_input, "apply_alias")
     return operator.columns if transpose else operator.rows
 

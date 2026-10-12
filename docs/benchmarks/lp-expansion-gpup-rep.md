@@ -3,7 +3,7 @@
 Status: accepted CPU contract and reproducible validation; no solver or GPU behavior
 Owner: numerical backend
 Introduced: GPUP-REP, 2026-10-12
-Last reviewed commit: bootstrap
+Last reviewed commit: dd57e4c71ce4eec311c58042222f92fc54af24a6
 Implementation: validation tools only
 Tests: independent oracle, integration suite and full pinned-native gate
 
@@ -138,3 +138,29 @@ cover the acceptance prose.
 No GPU work ran. The campaign remains 16134 events with SHA-256
 `60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823` and cumulative
 consumption 17115.274617853 / 18002.574545061 seconds.
+
+## PR 17 review corrections (2026-10-13)
+
+The review reproduced a shared candidate/oracle defect: the 2-norm of two maximum
+finite values returned an out-of-range finite tuple. Both square-root models now
+check the rounded output range, including carry at the overflow midpoint, and
+canonicalize tiny rounded zeros. FMA preserves two negative-zero terms while
+nonzero exact cancellation remains positive zero. Projection refuses nonfinite
+operands and endpoints before any clipping or unbounded branch.
+
+The codecs now reject out-of-width bits, noninteger fields and malformed positional
+documents; encoding and decoding enforce the same expansion range. Preparation
+checks shape and memory before touching input contents, binds dimensions and the
+transpose permutation into its generation, and requires a current source epoch at
+apply validation. Its hashes cover the metadata supplied to this CPU receipt;
+complete sparse connectivity and concrete scale data await GPUP-EXEC's contract.
+
+Thirteen added regression tests preserve the counterexamples, full-format overflow
+and underflow midpoint cases, every FMA zero-sign combination, malformed input,
+stale shape/map/epoch refusals and early resource admission. An exhaustive small
+format enumerates every representable result and all adjacent rounding boundaries
+independently of both models' rounding algorithms. The original 32852/1058/40/40/80
+fixture and its SHA-256 above are unchanged. Original acceptance logs, failing
+regressions and corrected checks are retained in
+`artifacts/pr17-review-20261013`; the review task record holds final gate results.
+No runtime, device behavior, benchmark setting or campaign ledger changed.

@@ -10,8 +10,8 @@
     {
       "path": "tools/report_lp_convergence.py",
       "measured_sha256": "8e5e8cf251800908b9212136e773757bc4f4dd3b609cc48c562fcce0562bc9a8",
-      "reviewed_sha256": "f34518db033a7ed22a8537a0de2fff20e51ce45dcaaf5a551fd89aee1b1437c6",
-      "reason": "Retain raw partial profiles without a worker envelope; reject nonpositive single-pair times; verify exact declared CPU review source repairs."
+      "reviewed_sha256": "79b37c741b645f54cb3ed90c42d737599216440a3b36829e7b9e4f660caae740",
+      "reason": "Retain partial profiles without worker envelopes; reject nonpositive paired times; bind exact source repairs and acceptance model/configuration/work/profile/code/dependency identities, with fresh state/work comparisons."
     },
     {
       "path": "tools/export_lp_convergence.py",

@@ -319,8 +319,8 @@ lease, sequentially with the CPU gate. No ordinary build may require a toolkit o
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
 Current handoff: GPUP-EXEC under the
-[2026-10-12 order](#current-design-order-2026-10-12); GPUP-REP added no runtime implementation
-is authorized by the documentation task. GPUP-CONVERGENCE is complete under
+[2026-10-12 order](#current-design-order-2026-10-12). GPUP-REP accepted CPU
+reference contracts; it added no runtime implementation or GPU reservation. GPUP-CONVERGENCE is complete under
 ADR-0032/SPEC-0013; its [report](../benchmarks/lp-convergence.md) retains 176
 attempts and diagnoses work/cost amplification without selecting a preset.
 GPUP-COPT-ADAPTER is complete under

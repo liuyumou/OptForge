@@ -8,8 +8,8 @@ preserves the evidence, equations, primary sources, hardware qualifications and
 proposed experiments behind the current hypotheses. It is non-normative research,
 not an accepted numerical contract, implementation order, GPU allowance or preset.
 The [2026-10-12 architecture](lp-precision-architecture-2026-10-12.md) now adds
-component IDs, low-level layouts, proofs and motivation, with the bounded CPU subset of
-[SPEC-0020](../specifications/SPEC-0020-lp-expansion-arithmetic.md) and
+component IDs, low-level layouts, proofs and motivation, with the accepted CPU subset
+of [SPEC-0020](../specifications/SPEC-0020-lp-expansion-arithmetic.md) and draft
 [SPEC-0021](../specifications/SPEC-0021-lp-refinement.md). Its
 [experiment design](../benchmarks/lp-precision-design-experiments.md) isolates
 components and interactions. GPUP-REP CPU validation is complete under ADR-0034; GPUP-EXEC is next. No GPU

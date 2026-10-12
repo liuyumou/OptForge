@@ -99,7 +99,8 @@ in every certified cell. Twelve readbacks and 24 acceptance endpoints pass. Carr
 GPUP-CONVERGENCE is complete under ADR-0032/SPEC-0013; its
 [report](../docs/benchmarks/lp-convergence.md) retains 176 attempts, independently
 verifies 174 endpoints and certifies 87/104 timings. No solver behavior or preset
-changes. The next task is GPUP-7's required quantization/FP8 contract. The
+changes. The historical handoff was GPUP-7; the accepted 2026-10-12 order now
+selects GPUP-EXEC after completed GPUP-REP. The
 [ordered follow-ups](../docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
 separate priority from prerequisites. No supported recipe is available. The
 campaign retains its eight GPU-hour cap; acceptance details remain

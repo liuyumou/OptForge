@@ -107,21 +107,86 @@ def check_archive(directory, value):
     return execution
 
 
+def check_project_acceptance_identity(value, config, model_sha, endpoint, profile, images):
+    record = endpoint['record']
+    expected_solve = dict(value['solve'], iteration_limit=value['acceptance_work'], time_limit_ms=30000)
+    expected_method = dict(value['lp_settings'], iteration_limit=value['acceptance_work'])
+    if endpoint['model_sha256'] != model_sha or endpoint['requested_backend'] != config['backend'] or record['backend'] != config['backend']:
+        raise ValueError('project acceptance model/backend differs')
+    if record['options'] != expected_solve or record['lp_settings'] != expected_method:
+        raise ValueError('project acceptance work/settings differ')
+    if record['termination'] in ('interrupted', 'time_limit') or endpoint['diagnostics']['profile'] is not profile:
+        raise ValueError('project acceptance deadline/profile differs')
+    for name in ['execution', 'precision', 'adaptive']:
+        if (endpoint.get(name) or {}).get('settings') != config.get(name):
+            raise ValueError('project acceptance configuration differs: ' + name)
+    image = 'lp_pdhg_precision.cubin' if 'precision' in config or 'adaptive' in config else 'lp_pdhg_tuned.cubin'
+    if endpoint['execution']['code_object_sha256'] != images[image]:
+        raise ValueError('project acceptance code image differs')
+
+
+def check_external_acceptance_model(original, sense, model):
+    import copy
+    if sense not in ['minimize', 'maximize']: raise ValueError('external acceptance sense differs')
+    expected = copy.deepcopy(original)
+    expected['objective'].update(sense=sense, offset=7.0)
+    if sense == 'maximize':
+        for term in expected['objective']['terms']: term['coefficient'] = -term['coefficient']
+    if model != expected: raise ValueError('external acceptance original model/sense/offset differs')
+
+
+def check_external_acceptance_identity(value, method, model_sha, endpoint, execution):
+    from lp_copt import parameters
+    witness = endpoint['witness']; gpu = method == 'copt-gpu-pdlp'
+    solve = dict(value['solve'], time_limit_ms=30000)
+    if witness['model_sha256'] != model_sha or witness['requested_backend'] != method or witness['executed_backend'] != method:
+        raise ValueError('external acceptance model/backend differs')
+    if witness['options'] != solve or witness['parameters'] != parameters(solve, gpu):
+        raise ValueError('external acceptance settings differ')
+    if witness['library_sha256'] != execution['copt_library_sha256'] or witness['binding_sha256'] != execution['copt_binding_sha256'] or witness['copt_version'] != '8.0.6':
+        raise ValueError('external acceptance dependency differs')
+    if witness['gpu_confirmed'] is not gpu or endpoint['assessment']['classification'] != 'certified_success':
+        raise ValueError('external acceptance execution/certification differs')
+
+
 def check_acceptance_archive(value, execution):
     from lp_convergence_accept import check_acceptance
+    from lp_cost import validate_profile
     result = check_acceptance(value); directory = ROOT / value['acceptance_output']; binary = ROOT / value['output'] / 'optimizer'
     models = {i['id']: i for ref in value['manifests'] for i in read_json(checked_reference(ROOT, ref))['instances']}
+    configurations = {c['id']: c for c in value['configurations']}
+    images = read_json(ROOT / value['output'] / 'code-objects.json')
     for pair in read_json(directory / 'project.json')['pairs']:
-        model = checked_reference(ROOT, models[pair['instance']]['model'])
-        for ref in pair['endpoints'].values():
+        model_ref = models[pair['instance']]['model']; model = checked_reference(ROOT, model_ref)
+        endpoints = []
+        for label, ref in pair['endpoints'].items():
+            evidence = checked_reference(ROOT, ref)
+            # check_acceptance already validates the compact schema and numerical
+            # digest; bind its metadata to the claimed acceptance cell as well.
+            endpoint = read_json(evidence)['endpoint']; endpoints.append(endpoint)
+            check_project_acceptance_identity(value, configurations[pair['configuration']], model_ref['sha256'], endpoint, label == 'on', images)
             check = subprocess.run([str(binary), 'lp-study', 'verify', '--model', str(model), '--model-byte-limit', str(value['model_byte_limit']),
-                                    '--evidence', str(checked_reference(ROOT, ref))], capture_output=True, timeout=value['verification_seconds'])
+                                    '--evidence', str(evidence)], capture_output=True, timeout=value['verification_seconds'])
             if check.returncode: raise ValueError('independent project acceptance verification failed')
+        if len({numerical_digest(e) for e in endpoints}) != 1 or any(e['execution'] != endpoints[0]['execution'] for e in endpoints):
+            raise ValueError('project acceptance profile/replay state or work differs')
+        validate_profile(read_json(checked_reference(ROOT, pair['cost'])))
+    original = read_json(checked_reference(ROOT, models['gpup-development-irregular-256']['model']))
     for name in ['external-cpu.json', 'external-gpu.json']:
+        pairs = {}
         for row in read_json(directory / name)['results']:
-            check = subprocess.run([str(binary), 'lp-study', 'external-verify', '--model', str(checked_reference(ROOT,row['model'])),
-                                    '--evidence', str(checked_reference(ROOT,row['endpoint']))], capture_output=True, timeout=value['verification_seconds'])
+            model = checked_reference(ROOT, row['model']); evidence = checked_reference(ROOT, row['endpoint'])
+            key = 'accept-' + row['sense'] + '-' + row['method'] + ('-on' if row['profile'] else '-off')
+            if evidence != directory / (key + '.json'): raise ValueError('external acceptance profile artifact differs')
+            check_external_acceptance_model(original, row['sense'], read_json(model))
+            endpoint = read_json(evidence)
+            check_external_acceptance_identity(value, row['method'], row['model']['sha256'], endpoint, execution)
+            pairs.setdefault(row['sense'], []).append(numerical_digest(endpoint))
+            if row['profile']: validate_profile(read_json(directory / (key + '.cost.json')))
+            check = subprocess.run([str(binary), 'lp-study', 'external-verify', '--model', str(model),
+                                    '--evidence', str(evidence)], capture_output=True, timeout=value['verification_seconds'])
             if check.returncode: raise ValueError('independent external acceptance verification failed')
+        if any(len(set(digests)) != 1 for digests in pairs.values()): raise ValueError('external acceptance profile state/work differs')
     return result
 
 

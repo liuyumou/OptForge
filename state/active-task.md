@@ -1,5 +1,49 @@
 # Active Task
 
+## PR 17 review and integration (2026-10-13)
+
+Status: review and repairs complete; protected merge and safe cleanup receipts
+are retained under artifacts/pr17-review-20261013.
+Objective: review GPUP-REP and the unmerged design prerequisites needed to land it
+on main, repair actionable defects, preserve useful artifacts and results, and
+integrate only after the required checks pass. Preserve the newer main-branch
+convergence-review fixes and all historical evidence.
+Acceptance: independent numerical and malformed-input regressions, reproducible
+oracle/design fixtures, full pinned-native `bash tools/check.sh`, final diff and
+GitHub checks, verified merge ancestry, and recoverable branch/artifact cleanup.
+Likely files: expansion candidate/oracle/tests, their accepted contract/report,
+design documents where review requires corrections, and this task record.
+Resources: at most two CPU-hours, four build jobs, zero GPU workloads and no new
+allowance. Preserve the 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 and cumulative
+17115.274617853 / 18002.574545061 GPU seconds. Do not start GPUP-EXEC.
+Keep existing ignored artifacts and unrelated worktrees; retain review logs and
+source-recovery references before deleting any integrated task branch.
+
+Acceptance evidence: self-review reproduced shared 2-norm/square-root overflow,
+noncanonical underflowed zero, FMA zero-sign loss, permissive malformed codecs,
+nonfinite projection acceptance, stale operator/vector receipts and late resource
+admission. Thirteen added regression tests cover these defects and exhaustive
+small-format rounding boundaries independently of both arithmetic models. All
+24 expansion tests pass, including byte-identical original fixture reproduction.
+The 57429-pattern design artifact also reproduces without changes.
+
+The full pinned-native `CARGO_BUILD_JOBS=4 bash tools/check.sh` gate passes:
+243 Python tests, all Rust/native gates, dependency policy, committed-record replay,
+123 documentation pages and smoke. AI_OPTIMIZER_GPU was unset; no project GPU job
+ran. The ledger retains exactly the preserved 16134 events and SHA-256 above.
+Logs, original native receipt, original implementation/design acceptance logs,
+failing regressions and frozen-artifact hashes are in the review directory.
+
+The sole open PR was stacked on an unmerged design branch. PR 17 includes the
+reviewed research/design prerequisites when retargeted to main. Current main was
+merged into the published PR branch to preserve shared history and its convergence
+acceptance-binding repairs; both task histories survive the conflict resolution.
+No runtime, CUDA, schema, benchmark input, dependency or historical result differs
+from current main. Final GitHub checks, merge identity, verified source bundle and
+ancestry-checked branch cleanup are recorded in the review directory before ending
+this task. Existing artifact directories and unrelated worktrees remain intact.
+
 ## GPUP-REP (2026-10-12)
 
 Status: complete; CPU-only contract, proof, oracle and layout validation accepted.
@@ -176,6 +220,38 @@ Full pinned-native `bash tools/check.sh` passed: native/Rust gates, 217 Python
 tests, committed-record replay, 115 documentation pages and smoke. Log:
 `/tmp/ai-optimizer-low-precision-review-check.log`. No GPU workload ran.
 Only this task record changed; recommendations do not reorder the backlog.
+
+## GPUP-CONVERGENCE PR integration (2026-09-30)
+
+Status: implementing the user's explicit authorization to publish a PR, self-review,
+fix substantiated problems, merge through required checks and clean up safely.
+Objective: integrate the completed bounded diagnosis and verified evidence without
+changing measured workers, numerical behavior, runtime defaults or campaign history.
+Acceptance: labeled self-review; full pinned-native tools/check.sh; source-only and
+artifact/provenance checks; current-head GitHub CPU/docs/smoke success, resolved
+conversations and merge without policy bypass. Preserve the separate research-docs
+branch at 62516e8cef59104442fa359a2e2440af8a59f033 and restore its checkout afterward.
+Likely files: this task record and substantiated review corrections only.
+Resources: four build jobs, at most one additional CPU-hour for integration checks,
+zero GPU jobs and no new allowance. Preserve cumulative 17115.274617853 /
+18002.574545061 GPU seconds and the 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+Starting source: ce72e80572fdd9eea88a33d31d5c92299903b9c5. This authorization
+supersedes the implementation-phase no-push scope below for this branch only.
+Keep integration receipts under artifacts/gpup-convergence-integration-20260930.
+
+Local self-review reproduced acceptance-label substitution with unchanged, valid
+retained endpoints. The independent report now binds claimed model/configuration,
+work limits, profile flags, code images, COPT parameters/dependencies and exact
+min/max offset-seven models, and rechecks state/work equality. Measured workers,
+schemas, protocols, endpoints and ledger bytes are unchanged. Twelve source-only
+contracts pass in an artifact-free copy; the full pinned-native gate passes
+514 Rust tests, 219 Python tests, record replay, 115 documentation pages and smoke.
+The original PR head passes required GitHub CPU/docs/smoke checks. Independent
+report re-verification and current-head remote checks must pass before merging.
+Self-review is explicitly labeled; no independent approval is claimed. Final
+verification, merge and safe-cleanup receipts are retained in the integration
+directory above; no additional GPU execution is authorized or needed.
 
 ## GPUP-CONVERGENCE (2026-09-30)
 

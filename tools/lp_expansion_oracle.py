@@ -203,7 +203,7 @@ def sqrt_result(value, format_tuple):
         return result_document(invalid=True, flags=("invalid",))
     if value == 0:
         return result_document()
-    precision, minimum_normal, _ = format_tuple
+    precision, minimum_normal, maximum = format_tuple
     minimum_unit = minimum_normal - (precision - 1)
     result_exponent = floor_log2(value) // 2
     unit_exponent = max(result_exponent - (precision - 1), minimum_unit)
@@ -218,6 +218,11 @@ def sqrt_result(value, format_tuple):
     if quotient >= 1 << precision:
         quotient >>= 1
         unit_exponent += 1
+    # Compare in rational value space, independently of the candidate's bit test.
+    if quotient * power2(unit_exponent) >= power2(maximum + 1):
+        return result_document(infinity_sign=1, flags=("overflow", "inexact"))
+    if quotient == 0:
+        return result_document(flags=("underflow", "inexact"), error_exponent=unit_exponent - 1)
     flags = []
     if quotient < 1 << (precision - 1) and not exact:
         flags.append("underflow")
@@ -277,6 +282,10 @@ def primitive_result(operation, operands, format_tuple):
             left_sign = int(values[0] < 0) if values[0] else operands[0]["zero_sign"]
             right_sign = int(values[1] < 0) if values[1] else operands[1]["zero_sign"]
             zero_sign = left_sign ^ right_sign
+        elif exact == 0 and operation == "fma" and values[0] * values[1] == 0 and values[2] == 0:
+            left_sign = int(values[0] < 0) if values[0] else operands[0]["zero_sign"]
+            right_sign = int(values[1] < 0) if values[1] else operands[1]["zero_sign"]
+            zero_sign = (left_sign ^ right_sign) & operands[2]["zero_sign"]
         return round_fraction(exact, format_tuple, zero_sign=zero_sign)
     if operation == "divide":
         if values[1] == 0:

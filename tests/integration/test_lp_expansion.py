@@ -213,13 +213,13 @@ class ExpansionPreparationTests(unittest.TestCase):
         with self.assertRaisesRegex(candidate.ArithmeticRefusal, "stale_vector_generation"):
             candidate.validate_apply(operator, vector, source_generation=8)
         with self.assertRaisesRegex(candidate.ArithmeticRefusal, "apply_alias"):
-            candidate.validate_apply(operator, vector, output_aliases_input=True)
+            candidate.validate_apply(operator, vector, output_aliases_input=True, source_generation=7)
         stale = replace(vector, generation=vector.generation + 1)
         with self.assertRaisesRegex(candidate.ArithmeticRefusal, "stale_operator_generation"):
-            candidate.validate_apply(operator, stale)
+            candidate.validate_apply(operator, stale, source_generation=7)
         wrong = replace(vector, dimension=2)
         with self.assertRaisesRegex(candidate.ArithmeticRefusal, "apply_dimension"):
-            candidate.validate_apply(operator, wrong)
+            candidate.validate_apply(operator, wrong, source_generation=7)
 
 
 if __name__ == "__main__":

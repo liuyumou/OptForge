@@ -12,13 +12,15 @@ Tests: continuation, bitwise trajectory, exact-rational, endpoint, native and sc
 ## Proposed companion designs (2026-10-12)
 
 The [precision architecture](../plans/lp-precision-architecture-2026-10-12.md)
-separates exact storage, arithmetic, method and original-model authority. Draft
+separates exact storage, arithmetic, method and original-model authority.
 [SPEC-0020](SPEC-0020-lp-expansion-arithmetic.md) covers compact representations
-and persistent accurate state; draft [SPEC-0021](SPEC-0021-lp-refinement.md) covers
+(with the bounded CPU subset now accepted under ADR-0034) and proposed persistent
+accurate state; draft [SPEC-0021](SPEC-0021-lp-refinement.md) covers
 correction LPs, anchors, selective error budgets and assessment policy. They do
 not relax this specification's accepted audits/recovery or exclusions. Their new
 behavior needs separately accepted bounded contracts and identities. Planning-only
-ADR-0033 makes GPUP-REP CPU validation next; it adds no GPU reservation or preset.
+ADR-0033 placed GPUP-REP CPU validation first. That task is now complete;
+GPUP-EXEC is next, with no GPU reservation or preset implied.
 
 ## GPUP-6 accepted bounded contract
 

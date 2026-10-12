@@ -4,7 +4,7 @@ Status: accepted for the bounded GPUP-REP CPU subset; device and solver behavior
 Scope: research-only representations and arithmetic, not solver convergence
 Owner: numerical backend
 Introduced: GPUP-DESIGN, 2026-10-12
-Last reviewed commit: bootstrap
+Last reviewed commit: dd57e4c71ce4eec311c58042222f92fc54af24a6
 Supersedes: none; accepted SPEC-0012 modes and research identities remain unchanged
 Implementation: CPU candidate and independent oracle tools only; no runtime behavior
 Tests: GPUP-REP fixture/integration/full native gates; device gates pending
@@ -51,7 +51,24 @@ unboundedness or proof. Original-model host certification remains authoritative.
 Negation flips a zero sign and absolute value clears it. Multiplication and division
 XOR operand signs. Square root preserves its zero sign. Exact addition/subtraction
 of like signed zeros preserves the effective sign; every other exact cancellation,
-including FMA and reductions, produces positive zero under nearest-even.
+including nonzero FMA cancellation and reductions, produces positive zero under
+nearest-even. FMA whose exact product and addend are both negative zero preserves
+negative zero. An overflowing rounded square root or 2-norm returns the explicit
+overflow/inexact outcome; an underflowed zero has the canonical zero exponent.
+The `lp-binary64-rne-v1` operation contract uses the `ieee-binary64-rne-v1`
+format identifier in the oracle fixture.
+
+Bit patterns, codec fields, positional chunks, dimensions, permutation indices and
+generations are strictly typed integers; booleans and numerically equal floats are
+not alternate encodings. The expansion encoder and decoder enforce the same range.
+Projection accepts only finite values/endpoints or the declared infinite-bound tag,
+including when an unbounded or clipping branch would otherwise hide an exception.
+Preparation admits shape and memory before traversing coefficients or transpose
+indices. Its generation binds dimensions, canonical coefficient bits, the transpose
+permutation, source kind, scale policy and layout identity. Apply validation requires
+the current source-vector generation, so omission cannot bypass stale-vector refusal.
+These are CPU metadata receipts: complete CSR connectivity, concrete scale values
+and device preparation remain obligations of the later executor contract.
 
 
 ## Terminology and exact codec derivation

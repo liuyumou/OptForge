@@ -1,5 +1,16 @@
 # Known Failures and Limitations
 
+## CPU expansion range and preparation defects corrected in PR 17
+
+The original candidate and rational oracle both accepted an overflowing 2-norm as
+finite. Review added independent rounding-boundary enumeration and repaired range
+checks, canonical underflowed zero, like-signed FMA zeros and nonfinite projection
+refusals. Strict codec-field/range checks reject malformed inputs. Preparation now
+admits resources before traversal and binds shape and transpose-map metadata into
+generations; apply validation requires a current vector epoch. Thirteen regressions
+retain the counterexamples. The original frozen fixture remains byte-identical;
+review logs and original receipts are in artifacts/pr17-review-20261013.
+
 ## CPU expansion reference is accepted; device and solver behavior are not implemented
 
 GPUP-REP accepts the bounded CPU subset of SPEC-0020 under ADR-0034. The exact
@@ -20,6 +31,18 @@ SPEC-0021 refinement remains draft. Its inner-oracle/progress assumptions,
 quantitative policies, interfaces and resource caps still need acceptance. Removing
 mandatory final original-model certification would not meet the project's authority
 contract. No preset or new GPU allowance follows, and historical gaps below remain.
+
+## Convergence acceptance labels corrected during PR self-review
+
+A CPU-only reproduction swapped tuned-FP64 and precision-FP64 acceptance labels
+while retaining valid endpoints and numerical digests; the original independent
+archive check accepted them. The reviewed report binds each acceptance endpoint
+back to its model, configuration, work limit, profile flag and code object. COPT
+checks also bind the original min/max model with offset seven, options, native
+parameters and dependency identities, and recheck profile state/work equality.
+Measured acceptance workers, endpoints, study results and GPU accounting are unchanged.
+The reproduction, regression tests and integration checks remain under
+artifacts/gpup-convergence-integration-20260930.
 
 ## Convergence costs and incomplete FP32/mixed coverage
 

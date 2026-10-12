@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased — GPUP-REP review corrections (2026-10-13)
+
+- Repair 2-norm/square-root overflow and canonical underflowed zero, FMA signed
+  zeros, and nonfinite projection refusal in the CPU reference models.
+- Enforce canonical field types and expansion range; admit resources before
+  preparation and bind dimensions, transpose permutations and required vector
+  epochs to stale-receipt checks.
+- Add boundary and malformed-input regressions plus exhaustive small-format
+  rounding checks. Preserve the original frozen fixtures and all GPU evidence.
+
 ## Unreleased — GPUP-REP CPU expansion contract (2026-10-12)
 
 - Accept the bounded CPU subset of SPEC-0020 under ADR-0034: canonical exact
@@ -29,6 +39,10 @@
   changes. Cumulative consumption remains 17115.274617853 / 18002.574545061 seconds.
 
 ## Unreleased — convergence and work amplification
+
+- PR self-review: bind acceptance labels to effective model/configuration/work and
+  execution identities, including COPT min/max offsets and dependency bytes; reject
+  valid endpoints substituted into a different acceptance cell without changing data.
 
 - Freeze gpup-convergence-v1 under ADR-0032/SPEC-0013 with eight unchanged project
   and scalar COPT configurations, strict identity/budget tooling and independent
