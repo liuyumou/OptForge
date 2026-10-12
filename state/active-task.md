@@ -1,5 +1,226 @@
 # Active Task
 
+## PR 17 review and integration (2026-10-13)
+
+Status: review and repairs complete; protected merge and safe cleanup receipts
+are retained under artifacts/pr17-review-20261013.
+Objective: review GPUP-REP and the unmerged design prerequisites needed to land it
+on main, repair actionable defects, preserve useful artifacts and results, and
+integrate only after the required checks pass. Preserve the newer main-branch
+convergence-review fixes and all historical evidence.
+Acceptance: independent numerical and malformed-input regressions, reproducible
+oracle/design fixtures, full pinned-native `bash tools/check.sh`, final diff and
+GitHub checks, verified merge ancestry, and recoverable branch/artifact cleanup.
+Likely files: expansion candidate/oracle/tests, their accepted contract/report,
+design documents where review requires corrections, and this task record.
+Resources: at most two CPU-hours, four build jobs, zero GPU workloads and no new
+allowance. Preserve the 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 and cumulative
+17115.274617853 / 18002.574545061 GPU seconds. Do not start GPUP-EXEC.
+Keep existing ignored artifacts and unrelated worktrees; retain review logs and
+source-recovery references before deleting any integrated task branch.
+
+Acceptance evidence: self-review reproduced shared 2-norm/square-root overflow,
+noncanonical underflowed zero, FMA zero-sign loss, permissive malformed codecs,
+nonfinite projection acceptance, stale operator/vector receipts and late resource
+admission. Thirteen added regression tests cover these defects and exhaustive
+small-format rounding boundaries independently of both arithmetic models. All
+24 expansion tests pass, including byte-identical original fixture reproduction.
+The 57429-pattern design artifact also reproduces without changes.
+
+The full pinned-native `CARGO_BUILD_JOBS=4 bash tools/check.sh` gate passes:
+243 Python tests, all Rust/native gates, dependency policy, committed-record replay,
+123 documentation pages and smoke. AI_OPTIMIZER_GPU was unset; no project GPU job
+ran. The ledger retains exactly the preserved 16134 events and SHA-256 above.
+Logs, original native receipt, original implementation/design acceptance logs,
+failing regressions and frozen-artifact hashes are in the review directory.
+
+The sole open PR was stacked on an unmerged design branch. PR 17 includes the
+reviewed research/design prerequisites when retargeted to main. Current main was
+merged into the published PR branch to preserve shared history and its convergence
+acceptance-binding repairs; both task histories survive the conflict resolution.
+No runtime, CUDA, schema, benchmark input, dependency or historical result differs
+from current main. Final GitHub checks, merge identity, verified source bundle and
+ancestry-checked branch cleanup are recorded in the review directory before ending
+this task. Existing artifact directories and unrelated worktrees remain intact.
+
+## GPUP-REP (2026-10-12)
+
+Status: complete; CPU-only contract, proof, oracle and layout validation accepted.
+Objective: validate and accept a bounded SPEC-0020 subset for exact binary64 input
+storage, correctly rounded binary64 reference primitives and separately identified
+64-significand-bit expansion primitives. Cover conversion, arithmetic, reductions,
+norms, comparisons and projection without changing solver behavior.
+Acceptance: independent integer and exact-rational oracles; reproducible fixtures;
+codec canonicality, range/rounding/error proofs and actual layout/peak-memory
+analysis; fault/refusal tests; accepted ADR/spec subset; full pinned-native
+`bash tools/check.sh` gate.
+Likely files: SPEC-0020 and a new ADR/report, CPU tools and integration tests,
+reproducible fixture, backlog/status/known-failures/changelog and this task record.
+Resources: one CPU-hour, four build jobs, 2 GiB validator RSS, zero GPU workloads
+and no new GPU allowance. Shape analysis is bounded to 65536 rows/columns and
+2^23 nonzeros, with 1 GiB resident and 2 GiB peak admission limits. Preserve all
+16134 ledger events, SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823, and cumulative
+17115.274617853 / 18002.574545061 GPU seconds. Existing runtime, certification
+authority, identities, defaults, benchmark inputs and historical evidence remain
+unchanged. Commit locally after acceptance; do not push or start GPUP-EXEC.
+
+Acceptance evidence: [ADR-0034](../docs/decisions/ADR-0034-lp-expansion-cpu-contract.md)
+and the bounded accepted [SPEC-0020](../docs/specifications/SPEC-0020-lp-expansion-arithmetic.md)
+subset define the exact input codec, direct binary64 and 64-significand-bit
+24/24/16 expansion reference semantics, primitive errors/exceptions and bounded
+preparation interfaces. The [report](../docs/benchmarks/lp-expansion-gpup-rep.md)
+records proofs, layouts and limitations. No runtime or device behavior changed.
+
+The seed-17004 independent fixture contains 32852 codec cases, 1058 primitives,
+40 reductions, 40 comparisons and 80 projections; the integer-only candidate
+agrees throughout. It covers all binary64 exponents/signs, every q in [-8,8],
+ties, carries, gradual underflow, overflow-safe FMA, division/sqrt, cancellation
+and 65536-term reductions. Fixture SHA-256 is
+0a7203554c7f15ccded04d5cac00504119851611205c4566969468848bd08760. Eleven
+integration tests cover corrupt/understated evidence, malformed tuples, explicit
+exceptions, cancellation, canonical transpose, dimensions, stale generations,
+aliasing and memory refusal. At 65536 by 65536 and 2^23 nonzeros, resident/peak
+receipts are 295960592/532414480 bytes under the 1/2 GiB caps.
+
+The earlier 57429-pattern design artifact reproduces. Full pinned-native
+`bash tools/check.sh` passed with four build jobs and GPU opt-in unset: Rust gates,
+dependency policy, all 228 Python tests, committed-record replay, 123 documentation
+pages and smoke. Final log: `/tmp/ai-optimizer-gpup-rep-check.log`. Final docs
+and whitespace checks pass. The preserved ledger still has 16134 events and SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823; GPU use
+remains 17115.274617853 / 18002.574545061 seconds. Next: GPUP-EXEC under its own
+active task, accepted subset and device reservation; it is not started here.
+
+## Precision architecture and experiment redesign (2026-10-12)
+
+Status: complete; user-requested design/documentation and CPU mathematical artifacts only.
+Objective: turn the first-principles review into component designs, mathematical
+obligations, a dependency-ordered roadmap and experiments that distinguish exact
+storage, arithmetic accuracy, algorithmic convergence and certified total cost.
+Include compact mixed-format expansions, integer decoding, persistent expansion
+state, refinement/anchoring, selective precision, stable formulas, executor and
+assessment costs, and conditional alternative solver/Tensor Core directions.
+Acceptance: trace each proposal to motivation/evidence, state unproved assumptions
+and rejection gates, reconcile specs/backlog/navigation, preserve historical
+contracts and artifacts, and pass the full pinned-native tools/check.sh gate.
+Likely files: new design/specification/decision/experiment documents, roadmap,
+candidate register, backlog, known failures, status, README, AGENTS and changelog.
+Resources: at most one CPU-hour, four build jobs, zero GPU workloads; no new GPU
+allowance, runtime implementation, dependency provisioning, push or publication.
+Preserve cumulative 17115.274617853 / 18002.574545061 GPU seconds and the
+16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+New numerical contracts remain proposed until their bounded acceptance gates;
+this task may revise future planning order, as requested, but authorizes no new
+solver behavior, measurement, preset, seed, tolerance or benchmark split.
+
+Acceptance evidence: [ADR-0033](../docs/decisions/ADR-0033-lp-precision-design-order.md)
+records planning-only priority. The [architecture](../docs/plans/lp-precision-architecture-2026-10-12.md)
+maps measured failure mechanisms to component motivations and rejection gates;
+draft SPEC-0020 gives the normalized exact-tail proof, integer decoding, layouts,
+primitive/kernel construction and range/error obligations; draft SPEC-0021 derives
+the general equality/activity-variable correction, dual scaling and anchored-error
+identities. The [experiment design](../docs/benchmarks/lp-precision-design-experiments.md)
+separates component effects, small factorial interactions, full costs, coverage and
+frozen held-out selection. Existing SPEC-0012/0013 requirements remain unchanged;
+only navigation/current study metadata is updated there. Roadmap, candidate
+register, backlog, README, status, AGENTS and limitations are reconciled.
+
+CPU evidence: tools/check_lp_precision_design.py writes and byte-for-byte reproduces
+[data/lp-precision-design-examples.json](../docs/plans/data/lp-precision-design-examples.json).
+All 57429 finite patterns round-trip, covering every normal exponent and both
+signs plus subnormal/tie/carry samples; all 17 integer tails are exercised.
+Fifty rational correction/dual-scale cases and 353 proximal cases pass, with
+anchored/residual/gap identities, actual ABI sizes and preserved counterexamples.
+This finite sample supports the written derivations; it is not production
+primitive, convergence or device acceptance. Artifact SHA-256:
+bde0c7bb271a888403179c4a8ee2bf5b29da713fba45b41ed2a3a6a90e020e5c.
+
+Full pinned-native tools/check.sh passed with four build jobs and GPU opt-in unset:
+Rust formatting/clippy/build/tests/docs, dependency policy, all 217 Python tests,
+committed-record replay, 121 documentation pages and smoke. The log is
+/tmp/ai-optimizer-precision-design-check.log; target/lp-native-gate.json was written.
+Device tests were not enabled and no GPU workload/sanitizer was run. Final prose
+and task-state updates pass the documentation/whitespace check. The backlog
+has 40 unique tasks, no dependency cycle and dependency-ready GPUP-REP.
+The actual campaign ledger still has 16134 events and exactly the preserved hash
+above; tracked runtime, kernels, schemas, benchmark inputs and historical reports/
+data remain unchanged. No implementation, measurement campaign, preset, new GPU
+allowance or external publication. Next: GPUP-REP CPU validation/acceptance of a
+bounded draft subset, with its own active task before work. Commit locally after
+these gates; do not start that next task as part of this design request.
+
+## Persist low-precision research analysis (2026-09-30)
+
+Status: complete; documentation only, explicitly requested by the user.
+Objective: save the complete preceding evidence review and research proposals in
+repository documentation so later sessions can discover and evaluate them.
+Acceptance: preserve measured-versus-proposed distinctions, equations and numerical
+caveats, primary sources, hardware applicability, experiment order and rejection
+gates; link from the roadmap, candidate register and session entry points; full
+pinned-native tools/check.sh and documentation/link validation.
+Likely files: docs/plans/lp-low-precision-research-2026-09-30.md, precision roadmap
+and candidate register, AGENTS.md, wiki/status.md and this task record.
+Resources: at most one CPU-hour, four build jobs, zero GPU workloads and no new
+allowance. Preserve runtime, accepted contracts, backlog order and all evidence.
+Campaign remains 17115.274617853 / 18002.574545061 GPU seconds; preserve the
+16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+GPUP-7's accepted quantization/resource contract remains the implementation handoff.
+Commit documentation locally after acceptance; no push or publication.
+
+Acceptance evidence: the complete
+[research note](../docs/plans/lp-low-precision-research-2026-09-30.md) records the
+measured failure mechanisms, all six primary proposals and supporting/speculative
+ideas, correction-LP and anchored-error equations, hardware/source qualifications,
+range/conditioning/authority caveats, falsifiable experiment sequence and resource
+handoff. AGENTS.md, wiki/status.md, roadmap and candidate register link to it.
+The register distinguishes completed investigations from unimplemented hypotheses.
+Independent numerical and hardware reviews found no blocking issues; minor scale,
+conservative-bound and cuOpt-mode clarifications were applied.
+Full pinned-native `bash tools/check.sh` passed: native/Rust gates, 217 Python
+tests, committed-record replay, 116 documentation pages and smoke. Log:
+`/tmp/ai-optimizer-low-precision-notes-check.log`. Final documentation links and
+whitespace checks pass. No GPU workload or runtime change; all campaign evidence,
+accepted contracts, defaults and backlog order remain unchanged.
+
+## Low-precision performance research review (2026-09-30)
+
+Status: complete; user-requested research and recommendations only.
+Objective: reconcile the completed LP studies with hardware documentation and
+numerical-method literature; propose bounded routes to faster FP32/FP16/FP8
+computation at the unchanged original-model 1e-9 acceptance criteria.
+Acceptance: trace findings to repository evidence and primary external sources;
+distinguish measured results from hypotheses, explain sm_120 applicability and
+failure conditions, and prioritize falsifiable follow-up experiments.
+Likely files: this task record only; recommendations are delivered in chat.
+Resources: at most one CPU-hour for research and required CPU/native validation,
+with at most four build jobs; zero GPU jobs or new campaign allowance.
+No runtime, accepted-contract, backlog or ledger changes.
+Preserve cumulative 17115.274617853 / 18002.574545061 GPU seconds and the
+16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+GPUP-7's accepted quantization/resource contract remains the next implementation
+prerequisite; this review does not accept or implement new numerical behavior.
+
+Acceptance evidence: reviewed the roadmap, candidate register, rounding analysis,
+FP64-pipe/GPUP-5C reports, adaptive host-cost report and latest convergence study.
+Cross-checked NVIDIA RTX Blackwell, PTX/CUTLASS and cuBLAS documentation, LP
+iterative refinement (Gleixner/Steffy/Wolter), mixed-precision linear-system
+refinement (Haidar et al.) and Ozaki-II primary sources. Recommendations delivered
+in chat distinguish established techniques, repository measurements and proposed
+adaptations: scaled correction LPs with anchored products; a lean precision
+executor; scaled double-float; selective operator-error budgets; active-face
+polishing; and layout-appropriate Tensor Core/integer emulation. End-to-end
+Amdahl limits and failed-convergence costs govern the proposed experiment order.
+No new performance result or accepted numerical behavior is claimed.
+Full pinned-native `bash tools/check.sh` passed: native/Rust gates, 217 Python
+tests, committed-record replay, 115 documentation pages and smoke. Log:
+`/tmp/ai-optimizer-low-precision-review-check.log`. No GPU workload ran.
+Only this task record changed; recommendations do not reorder the backlog.
+
 ## GPUP-CONVERGENCE PR integration (2026-09-30)
 
 Status: implementing the user's explicit authorization to publish a PR, self-review,

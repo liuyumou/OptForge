@@ -1,0 +1,57 @@
+{
+  "codec": {
+    "all_normal_exponent_fields_and_both_signs": true,
+    "finite_patterns": 57429,
+    "input_bits_sha256": "6ddf85a4d56cb4376cd866241345f68e3393254598fd6fefeb963f90cc022b54",
+    "sample_seed_not_benchmark_seed": 17003,
+    "signed_zero_preserved_by_tag": true,
+    "tail_integers_observed": [
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "example": {
+    "exponent": 0,
+    "high_hex": "0x1.2345680000000p-1",
+    "low_hex": "-0x1.d950c80000000p-27",
+    "m_hex": "0x1.23456789abcdep-1",
+    "raw_half_hex": "-0x0.0p+0",
+    "raw_tail_hex": "-0x1.0000000000000p-52",
+    "tail_integer": -2
+  },
+  "fp32_small_update": {
+    "exact": 1,
+    "expression": "(2^24 + 1) - 2^24",
+    "fp32": 0
+  },
+  "linux_host_abi_bytes": {
+    "parts3_i32": 16,
+    "two_fp32_half_i16": 12,
+    "two_fp32_half_i32": 16,
+    "two_fp32_i8_i16_separate_arrays_payload": 11
+  },
+  "lp_identities": {
+    "activity_cost_restores_original": true,
+    "correction_scale_and_sense_cases": 50,
+    "gap_identity": true,
+    "naive_ranged_cost_changes_minimizer": true,
+    "proximal_cases": 353
+  },
+  "schema": "lp-precision-design-examples-v1",
+  "scope": "CPU exact design examples; not runtime, GPU acceptance, or exhaustive proof"
+}

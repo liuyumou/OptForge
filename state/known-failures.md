@@ -1,5 +1,37 @@
 # Known Failures and Limitations
 
+## CPU expansion range and preparation defects corrected in PR 17
+
+The original candidate and rational oracle both accepted an overflowing 2-norm as
+finite. Review added independent rounding-boundary enumeration and repaired range
+checks, canonical underflowed zero, like-signed FMA zeros and nonfinite projection
+refusals. Strict codec-field/range checks reject malformed inputs. Preparation now
+admits resources before traversal and binds shape and transpose-map metadata into
+generations; apply validation requires a current vector epoch. Thirteen regressions
+retain the counterexamples. The original frozen fixture remains byte-identical;
+review logs and original receipts are in artifacts/pr17-review-20261013.
+
+## CPU expansion reference is accepted; device and solver behavior are not implemented
+
+GPUP-REP accepts the bounded CPU subset of SPEC-0020 under ADR-0034. The exact
+input codec, correctly rounded binary64 reference and separate 64-significand-bit
+expansion semantics pass an independent 32852-codec/1058-primitive rational
+oracle, long reductions and bounded layout analysis. This is validation tooling,
+not a runtime solver implementation or performance result.
+
+The compact codec uses FP32 h/l, an integer tail in [-8,8] with explicit weight
+and a symbolic exponent. Raw FP16 tails still underflow. Arithmetic intermediates
+use the distinct 24/24/16 positional format; they do not inherit the input codec's
+small-tail bound. The accepted exact accumulator needs 67 u64 magnitude limbs at
+the maximum admitted dot length and is a costly CPU control, not a proposed GPU
+default. GPUP-EXEC must select a smaller implementable subset, prove any bounded
+window or omitted-term error, reserve device work and pass instruction/differential/sanitizer gates. Persistent expansion solver state remains untested.
+
+SPEC-0021 refinement remains draft. Its inner-oracle/progress assumptions,
+quantitative policies, interfaces and resource caps still need acceptance. Removing
+mandatory final original-model certification would not meet the project's authority
+contract. No preset or new GPU allowance follows, and historical gaps below remain.
+
 ## Convergence acceptance labels corrected during PR self-review
 
 A CPU-only reproduction swapped tuned-FP64 and precision-FP64 acceptance labels

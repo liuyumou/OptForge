@@ -5,6 +5,29 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
+Current handoff (2026-10-12): GPUP-REP is complete under accepted ADR-0034 and
+the bounded CPU subset of [SPEC-0020](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md).
+Its [report](docs/benchmarks/lp-expansion-gpup-rep.md) records the exact codec,
+binary64 and 64-significand-bit reference semantics, independent oracle and bounded
+layout receipts. GPUP-EXEC is next, to choose and implement one admitted lean
+operator subset with its own GPU reservation and device gates. Read the [architecture
+and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md),
+draft [SPEC-0021](docs/specifications/SPEC-0021-lp-refinement.md), and
+[component/interaction experiment design](docs/benchmarks/lp-precision-design-experiments.md).
+No solver behavior, preset or new GPU reservation follows from GPUP-REP. Exact
+storage is distinct from accurate arithmetic; full expansion state and
+correction/anchored products remain independently gated.
+The dated GPUP-7 handoffs below remain historical; follow next_ready_task and the
+roadmap's 2026-10-12 order. Preserve all accepted identities, final original-model
+host authority and cumulative 17115.274617853 / 18002.574545061 GPU seconds.
+
+For low-precision LP follow-ups, read the preserved
+[2026-09-30 research analysis](docs/plans/lp-low-precision-research-2026-09-30.md)
+alongside the roadmap and candidate register. It records measured failure
+mechanisms, proposed correction-LP/anchored-product methods, SM120 bypasses,
+FP16/FP8 progression, limitations and experiment gates. It is research guidance,
+not an accepted numerical contract or a change to next_ready_task or GPU budgets.
+
 M1, C1, C2, C3, C4, C5, C6 and C8 are complete and specified. C6 was heterogeneous
 computation and GPU feasibility, specified as
 [SPEC-0010](docs/specifications/SPEC-0010-heterogeneous-computation.md) for device
@@ -210,8 +233,9 @@ acceptance 234.427924688/300; cumulative 17115.274617853 /
 60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserves the
 15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
 and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
-Next is GPUP-7's accepted quantization/FP8 interface and resource contract,
-before any new numerical behavior.
+At convergence-study completion the handoff was GPUP-7's contract. The
+2026-10-12 planning update above now makes GPUP-REP CPU-only proof/contract
+validation next, before any new numerical behavior.
 
 GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
 used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.

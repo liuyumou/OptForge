@@ -18,7 +18,12 @@ GPUP-THROUGHPUT, opt-in repeated-solve throughput sessions, is complete under
 Explicit FP32 execution and GPUP-6 adaptive audit/recovery policies are
 implemented experimentally; the [adaptive report](docs/benchmarks/lp-adaptive-gpup6.md)
 records acceptance and incomplete comparison coverage. No supported precision
-recipe is selected. GPUP-7 requires its bounded quantization/FP8 contract next.
+recipe is selected. The [2026-10-12 design](docs/plans/lp-precision-architecture-2026-10-12.md)
+now separates exact compact storage, accurate expansion arithmetic, residual-driven
+refinement and assessment costs. GPUP-REP CPU contract validation is complete under accepted ADR-0034 and the
+bounded CPU subset of SPEC-0020. Its exact codec, binary64/expansion reference
+semantics and layout receipts are validation tools only. GPUP-EXEC is next; no
+solver behavior or GPU allowance is added.
 
 The [COPT comparison and component report](docs/benchmarks/lp-copt-comparison.md)
 now covers all 1140 planned attempts through 65536 rows. It identifies evidence
@@ -109,6 +114,10 @@ acceptance was not covered.
 - [GPU LP backend specification](docs/specifications/SPEC-0011-gpu-lp-backend.md)
 - [LP certification arithmetic and limits](docs/architecture/lp-certification.md)
 - [GPU LP performance roadmap and slices](docs/plans/gpu-lp-precision-roadmap.md)
+- [Precision architecture and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md)
+- [Accepted CPU compact-storage and expansion reference; device behavior pending](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md)
+- [Proposed correction LP, anchors and assessment contract](docs/specifications/SPEC-0021-lp-refinement.md)
+- [Component and combination experiment design](docs/benchmarks/lp-precision-design-experiments.md)
 - [FP64-pipe root cause of the FP32 component slowdown](docs/benchmarks/lp-fp64-pipe-root-cause.md)
 - [GPUP-5C guards, fusion, double-float, tiers and corpus report](docs/benchmarks/lp-fp64-pipe-gpup5c.md)
 - [Accepted mixed-precision LP contract](docs/specifications/SPEC-0012-mixed-precision-lp.md)

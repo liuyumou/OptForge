@@ -1,5 +1,43 @@
 # Changelog
 
+## Unreleased — GPUP-REP review corrections (2026-10-13)
+
+- Repair 2-norm/square-root overflow and canonical underflowed zero, FMA signed
+  zeros, and nonfinite projection refusal in the CPU reference models.
+- Enforce canonical field types and expansion range; admit resources before
+  preparation and bind dimensions, transpose permutations and required vector
+  epochs to stale-receipt checks.
+- Add boundary and malformed-input regressions plus exhaustive small-format
+  rounding checks. Preserve the original frozen fixtures and all GPU evidence.
+
+## Unreleased — GPUP-REP CPU expansion contract (2026-10-12)
+
+- Accept the bounded CPU subset of SPEC-0020 under ADR-0034: canonical exact
+  binary64 input storage, direct binary64 rounding and distinct 64-significand-bit
+  24/24/16 expansion semantics with explicit range, errors and exceptions.
+- Add independent exact-rational and integer-only validators. The frozen seed-17004
+  fixture covers 32852 codec, 1058 primitive, 40 reduction, 40 comparison and 80
+  projection cases, including 65536-term reductions and overflow-safe FMA.
+- Bound canonical/transpose preparation through 65536 rows/columns and 2^23
+  nonzeros: 295960592 resident and 532414480 peak bytes at the maximum shape.
+- Preserve all solver behavior, original-model host authority, legacy identities,
+  GPU evidence and accounting. Advance the handoff to GPUP-EXEC with zero GPU work.
+
+## Unreleased — precision architecture and experiment design (2026-10-12)
+
+- Add [component motivations and first-principles design](docs/plans/lp-precision-architecture-2026-10-12.md),
+  draft SPEC-0020 for compact exact storage/expansion arithmetic and draft SPEC-0021
+  for ranged-LP correction, anchored products and controlled inexactness.
+- Preserve exact-tail derivation, memory/layout alternatives, full-state/primitive
+  obligations, algorithm sensitivity, authority boundaries and falsification gates.
+- Add reproducible CPU rational examples and a proposed component/interaction,
+  coverage-first, setup-inclusive experiment plan with frozen held-out selection.
+- ADR-0033 changes planning only: GPUP-REP CPU contract validation comes next,
+  followed by bounded executor/state/refinement/assessment investigations before
+  GPUP-7. Tensor Core and alternative-solver routes are conditional.
+- No solver, kernel, default, historical evidence, seed, split or GPU allowance
+  changes. Cumulative consumption remains 17115.274617853 / 18002.574545061 seconds.
+
 ## Unreleased — convergence and work amplification
 
 - PR self-review: bind acceptance labels to effective model/configuration/work and
