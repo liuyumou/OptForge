@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased — GPUP-REP CPU expansion contract (2026-10-12)
+
+- Accept the bounded CPU subset of SPEC-0020 under ADR-0034: canonical exact
+  binary64 input storage, direct binary64 rounding and distinct 64-significand-bit
+  24/24/16 expansion semantics with explicit range, errors and exceptions.
+- Add independent exact-rational and integer-only validators. The frozen seed-17004
+  fixture covers 32852 codec, 1058 primitive, 40 reduction, 40 comparison and 80
+  projection cases, including 65536-term reductions and overflow-safe FMA.
+- Bound canonical/transpose preparation through 65536 rows/columns and 2^23
+  nonzeros: 295960592 resident and 532414480 peak bytes at the maximum shape.
+- Preserve all solver behavior, original-model host authority, legacy identities,
+  GPU evidence and accounting. Advance the handoff to GPUP-EXEC with zero GPU work.
+
 ## Unreleased — precision architecture and experiment design (2026-10-12)
 
 - Add [component motivations and first-principles design](docs/plans/lp-precision-architecture-2026-10-12.md),

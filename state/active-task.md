@@ -1,5 +1,54 @@
 # Active Task
 
+## GPUP-REP (2026-10-12)
+
+Status: complete; CPU-only contract, proof, oracle and layout validation accepted.
+Objective: validate and accept a bounded SPEC-0020 subset for exact binary64 input
+storage, correctly rounded binary64 reference primitives and separately identified
+64-significand-bit expansion primitives. Cover conversion, arithmetic, reductions,
+norms, comparisons and projection without changing solver behavior.
+Acceptance: independent integer and exact-rational oracles; reproducible fixtures;
+codec canonicality, range/rounding/error proofs and actual layout/peak-memory
+analysis; fault/refusal tests; accepted ADR/spec subset; full pinned-native
+`bash tools/check.sh` gate.
+Likely files: SPEC-0020 and a new ADR/report, CPU tools and integration tests,
+reproducible fixture, backlog/status/known-failures/changelog and this task record.
+Resources: one CPU-hour, four build jobs, 2 GiB validator RSS, zero GPU workloads
+and no new GPU allowance. Shape analysis is bounded to 65536 rows/columns and
+2^23 nonzeros, with 1 GiB resident and 2 GiB peak admission limits. Preserve all
+16134 ledger events, SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823, and cumulative
+17115.274617853 / 18002.574545061 GPU seconds. Existing runtime, certification
+authority, identities, defaults, benchmark inputs and historical evidence remain
+unchanged. Commit locally after acceptance; do not push or start GPUP-EXEC.
+
+Acceptance evidence: [ADR-0034](../docs/decisions/ADR-0034-lp-expansion-cpu-contract.md)
+and the bounded accepted [SPEC-0020](../docs/specifications/SPEC-0020-lp-expansion-arithmetic.md)
+subset define the exact input codec, direct binary64 and 64-significand-bit
+24/24/16 expansion reference semantics, primitive errors/exceptions and bounded
+preparation interfaces. The [report](../docs/benchmarks/lp-expansion-gpup-rep.md)
+records proofs, layouts and limitations. No runtime or device behavior changed.
+
+The seed-17004 independent fixture contains 32852 codec cases, 1058 primitives,
+40 reductions, 40 comparisons and 80 projections; the integer-only candidate
+agrees throughout. It covers all binary64 exponents/signs, every q in [-8,8],
+ties, carries, gradual underflow, overflow-safe FMA, division/sqrt, cancellation
+and 65536-term reductions. Fixture SHA-256 is
+0a7203554c7f15ccded04d5cac00504119851611205c4566969468848bd08760. Eleven
+integration tests cover corrupt/understated evidence, malformed tuples, explicit
+exceptions, cancellation, canonical transpose, dimensions, stale generations,
+aliasing and memory refusal. At 65536 by 65536 and 2^23 nonzeros, resident/peak
+receipts are 295960592/532414480 bytes under the 1/2 GiB caps.
+
+The earlier 57429-pattern design artifact reproduces. Full pinned-native
+`bash tools/check.sh` passed with four build jobs and GPU opt-in unset: Rust gates,
+dependency policy, all 228 Python tests, committed-record replay, 123 documentation
+pages and smoke. Final log: `/tmp/ai-optimizer-gpup-rep-check.log`. Final docs
+and whitespace checks pass. The preserved ledger still has 16134 events and SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823; GPU use
+remains 17115.274617853 / 18002.574545061 seconds. Next: GPUP-EXEC under its own
+active task, accepted subset and device reservation; it is not started here.
+
 ## Precision architecture and experiment redesign (2026-10-12)
 
 Status: complete; user-requested design/documentation and CPU mathematical artifacts only.

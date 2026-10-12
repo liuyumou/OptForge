@@ -1,26 +1,24 @@
 # Known Failures and Limitations
 
-## Proposed expansion/refinement contracts are not implemented or accepted
+## CPU expansion reference is accepted; device and solver behavior are not implemented
 
-The [2026-10-12 design](../docs/plans/lp-precision-architecture-2026-10-12.md) and
-draft SPEC-0020/0021 close several conceptual ambiguities but authorize no runtime
-change. GPUP-REP CPU validation is next. The reproducible design artifact checks
-57429 finite patterns, 50 correction maps and 353 proximal cases; it is neither
-an exhaustive binary64 proof nor primitive/device/convergence acceptance.
+GPUP-REP accepts the bounded CPU subset of SPEC-0020 under ADR-0034. The exact
+input codec, correctly rounded binary64 reference and separate 64-significand-bit
+expansion semantics pass an independent 32852-codec/1058-primitive rational
+oracle, long reductions and bounded layout analysis. This is validation tooling,
+not a runtime solver implementation or performance result.
 
-A normalized binary64 codec can use two FP32 terms and a scaled integer tail in
-[-8,8], with a separate exponent. Raw FP16 tails underflow; three FP32 terms do
-not cover binary64's range without scaling. Existing Parts3 is 16 bytes including
-its i32 exponent, and measured component kernels still use FP64 recombination.
-Current double-float products return to FP64 state and have scheduling underflow;
-full persistent expansion state is untested. Generic intermediate expansions do
-not inherit the input codec's small-tail bound or correctly rounded arithmetic.
+The compact codec uses FP32 h/l, an integer tail in [-8,8] with explicit weight
+and a symbolic exponent. Raw FP16 tails still underflow. Arithmetic intermediates
+use the distinct 24/24/16 positional format; they do not inherit the input codec's
+small-tail bound. The accepted exact accumulator needs 67 u64 magnitude limbs at
+the maximum admitted dot length and is a costly CPU control, not a proposed GPU
+default. GPUP-EXEC must select a smaller implementable subset, prove any bounded
+window or omitted-term error, reserve device work and pass instruction/differential/sanitizer gates. Persistent expansion solver state remains untested.
 
-A correction LP for ranged rows cannot just subtract A-transpose-y from the cost;
-that can change the optimum. SPEC-0021 derives an equality/activity-variable map.
-Its inner-oracle/progress assumptions, rounding bounds, quantitative policies,
-interfaces and resource caps still need acceptance. Removing mandatory final
-original-model certification would not meet the project's accuracy/authority
+SPEC-0021 refinement remains draft. Its inner-oracle/progress assumptions,
+quantitative policies, interfaces and resource caps still need acceptance. Removing
+mandatory final original-model certification would not meet the project's authority
 contract. No preset or new GPU allowance follows, and historical gaps below remain.
 
 ## Convergence costs and incomplete FP32/mixed coverage

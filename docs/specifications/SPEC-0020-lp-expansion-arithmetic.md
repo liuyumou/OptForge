@@ -1,13 +1,13 @@
 # SPEC-0020: Exact compact LP storage and expansion arithmetic
 
-Status: draft; GPUP-REP must close and accept a bounded subset before behavior
+Status: accepted for the bounded GPUP-REP CPU subset; device and solver behavior remain draft
 Scope: research-only representations and arithmetic, not solver convergence
 Owner: numerical backend
 Introduced: GPUP-DESIGN, 2026-10-12
 Last reviewed commit: bootstrap
 Supersedes: none; accepted SPEC-0012 modes and research identities remain unchanged
-Implementation: none; CPU design validator is supporting mathematics only
-Tests: acceptance map below; device gates pending
+Implementation: CPU candidate and independent oracle tools only; no runtime behavior
+Tests: GPUP-REP fixture/integration/full native gates; device gates pending
 
 ## Purpose
 
@@ -15,7 +15,44 @@ Define the obligations needed to store original binary64 data and carry accurate
 state using lower-precision components. Avoid equating a lossless codec with
 correct arithmetic. Motivation and alternatives are in the
 [architecture plan](../plans/lp-precision-architecture-2026-10-12.md).
-This draft reserves no CLI options, record enums, public ABI or GPU allowance.
+The unaccepted portions reserve no CLI options, record enums, public ABI or GPU allowance.
+
+## Accepted GPUP-REP CPU subset
+
+[ADR-0034](../decisions/ADR-0034-lp-expansion-cpu-contract.md) accepts requirements 1-12, 14 and 17-23 as CPU reference and admission
+contracts only. Requirements 13 and 16 are accepted only to the extent exercised
+by the preparation generation, complete primitive inventory and explicit research
+identities below; persistent solver state, snapshots and replay remain draft.
+Requirement 15 and every device clause remain pending actual target code.
+
+The accepted identities are `lp-expansion-input-codec-v1`,
+`lp-binary64-rne-v1`, `fp32-24-24-16-expansion-rne-v1`,
+`lp-expansion-operator-v1` and `lp-expansion-layout-v1`. Binary64 reference
+operations round directly to binary64. Expansion operations use a signed 64-bit
+significand, positional 24/24/16-bit FP32 chunks, symbolic i16 exponent, normal
+range -1022 through 1023 and gradual underflow through `2^-1085`. Conversion,
+sign operations, add/subtract/multiply/FMA, division, square root, comparison,
+exact-then-rounded sum/dot, 1/2/infinity norms and tagged box projection are
+accepted. Every inexact finite result carries the conservative half-ulp absolute
+bound for its actual output unit.
+
+Reductions use an exact exponent-bin accumulator and round once. That establishes
+the oracle semantics and a costly correctness control, not an implementation choice
+for GPUP-EXEC. The bounded layout admits at most 65536 rows and columns and `2^23`
+nonzeros under 1 GiB resident and 2 GiB peak caps. Original binary64 coefficients
+and already-rounded materialized scaled coefficients have distinct preparation
+provenance. One canonical coefficient array supplies both orientations through a
+permutation map; overlap and stale generations are refused.
+
+Signed zero, underflow, overflow, division by zero, invalid square root, malformed
+encoding, unsupported shape, checked-size failure, memory refusal, aliasing, stale
+generation and cancellation have explicit outcomes. They are never infeasibility,
+unboundedness or proof. Original-model host certification remains authoritative.
+Negation flips a zero sign and absolute value clears it. Multiplication and division
+XOR operand signs. Square root preserves its zero sign. Exact addition/subtraction
+of like signed zeros preserves the effective sign; every other exact cancellation,
+including FMA and reductions, produces positive zero under nearest-even.
+
 
 ## Terminology and exact codec derivation
 
@@ -299,14 +336,15 @@ python3 tools/check_lp_precision_design.py --check docs/plans/data/lp-precision-
 | 20-21 | Original certifier regressions including exact-rational cases, old identity/replay controls and full pinned-native acceptance. |
 | All device behavior | CPU/device differentials, repeatability, memcheck/racecheck/initcheck/synccheck scoped to each new kernel family and recorded unsupported cases. |
 
-The current CPU design artifact demonstrates the codec formula and selected LP
-identities only. It does not implement the primitive set or pass these future gates.
+The earlier CPU design artifact demonstrates the codec formula and selected LP
+identities. GPUP-REP adds the independently generated arithmetic fixture and integer
+candidate for the accepted CPU subset. Neither artifact passes future device gates.
 
-## Open questions and acceptance blockers
+## Remaining acceptance blockers
 
-Select the first canonical layout and arithmetic target after CPU error/cost analysis;
-prove primitive bounds (especially reductions, division/sqrt and cancellation),
-choose exact failure policies and operation-specific limits, and freeze actual
-interfaces/record schemas and resource caps. Shared-exponent encoding and full
-FP64-free control may be refused independently. No correctness or latency result
-is assumed for their combination.
+GPUP-EXEC must select an implementable subset, freeze its device interface and
+reservation, prove any bounded exponent window or omitted-term envelope, inspect
+generated instructions and pass device differentials plus four sanitizer gates.
+Persistent complete solver state, snapshots, division/sqrt on a device, shared
+exponents and full FP64-free control remain independently gated. No convergence or
+latency result follows from the accepted CPU semantics.

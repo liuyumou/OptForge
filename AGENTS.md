@@ -5,16 +5,18 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-Current planning handoff (2026-10-12): GPUP-DESIGN records the user's design review;
-GPUP-REP is next, for CPU-only proof/oracle validation and acceptance of a bounded
-[SPEC-0020](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md) subset.
-Read the [architecture and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md),
+Current handoff (2026-10-12): GPUP-REP is complete under accepted ADR-0034 and
+the bounded CPU subset of [SPEC-0020](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md).
+Its [report](docs/benchmarks/lp-expansion-gpup-rep.md) records the exact codec,
+binary64 and 64-significand-bit reference semantics, independent oracle and bounded
+layout receipts. GPUP-EXEC is next, to choose and implement one admitted lean
+operator subset with its own GPU reservation and device gates. Read the [architecture
+and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md),
 draft [SPEC-0021](docs/specifications/SPEC-0021-lp-refinement.md), and
 [component/interaction experiment design](docs/benchmarks/lp-precision-design-experiments.md).
-[ADR-0033](docs/decisions/ADR-0033-lp-precision-design-order.md) changes planning
-only: specs remain draft, no solver behavior or new GPU reservation is authorized.
-Exact storage is distinct from accurate arithmetic; full expansion state and
-correction/anchored products are independently gated and may be combined later.
+No solver behavior, preset or new GPU reservation follows from GPUP-REP. Exact
+storage is distinct from accurate arithmetic; full expansion state and
+correction/anchored products remain independently gated.
 The dated GPUP-7 handoffs below remain historical; follow next_ready_task and the
 roadmap's 2026-10-12 order. Preserve all accepted identities, final original-model
 host authority and cumulative 17115.274617853 / 18002.574545061 GPU seconds.

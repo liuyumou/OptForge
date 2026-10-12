@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved planning order updated 2026-10-12; completed studies preserved; GPUP-REP CPU contract validation is next; new numerical designs remain draft
+Status: approved order updated 2026-10-12; GPUP-REP CPU contract complete; GPUP-EXEC is next; remaining numerical designs remain draft
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
@@ -41,7 +41,7 @@ is proposed; no new trials, seeds, defaults or GPU allowance are admitted.
 
 | Priority / slice | Bounded deliverable | Gate before advancing |
 | --- | --- | --- |
-| 1 — GPUP-REP | CPU validation and acceptance of a bounded exact-storage/expansion contract; compare original bits with compact mixed tails, prove range/rounding and reject invalid formats. | Independent oracle, exact codec and primitive obligations, actual layout/memory analysis, accepted SPEC-0020 subset and explicit later resource contract. Zero GPU work in this slice. |
+| 1 — GPUP-REP (complete) | CPU validation and acceptance of a bounded exact-storage/expansion contract; compare original bits with compact mixed tails, prove range/rounding and reject invalid formats. | Independent oracle, exact codec and primitive obligations, actual layout/memory analysis, accepted SPEC-0020 subset and explicit later resource contract. Zero GPU work in this slice. |
 | 2 — GPUP-EXEC | Lean operator executor: cache vector splits, remove avoidable per-nonzero recombination/conversion, preserve integer-guard meaning and test admitted launch schedules. | Same-arithmetic controls, generated instruction review, full range and sanitizer acceptance; both tuned and precision FP64 comparisons; packing-inclusive cost. |
 | 3 — GPUP-STATE | Persistent accurate/compensated state and stable scalar/proximal formulas. | Every live/control operation specified, full-state replay, accurate reductions/division/comparisons and independent residual validation. Native FP64 and scaled-pair controls retained. |
 | 4 — GPUP-REFINE | Accept and test a bounded original-residual correction LP and anchored products, initially with native FP64 outer masters. | General equality/box transformation, inner oracle/progress contract, both orientations, range/failure tests and all refresh/correction costs. Expansion masters are a later combination, not a prerequisite. |
@@ -193,7 +193,7 @@ scaled double-float, selective error budgets, active-face polishing and
 layout-appropriate Tensor Core/integer emulation. That review is preserved as
 non-normative historical research. The [2026-10-12 design](lp-precision-architecture-2026-10-12.md)
 now supplies proposed numerical contracts and the revised planning order above.
-GPUP-REP CPU contract validation is next. No proposal is an accepted preset or
+GPUP-REP CPU contract validation is complete under ADR-0034; GPUP-EXEC is next. No proposal is an accepted preset or
 implicit numerical behavior; all budgets and historical evidence remain unchanged.
 The original candidate comparisons below are design space, not an admitted grid.
 
@@ -318,8 +318,8 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Current handoff: GPUP-REP CPU-only contract validation under the
-[2026-10-12 order](#current-design-order-2026-10-12); no runtime implementation
+Current handoff: GPUP-EXEC under the
+[2026-10-12 order](#current-design-order-2026-10-12); GPUP-REP added no runtime implementation
 is authorized by the documentation task. GPUP-CONVERGENCE is complete under
 ADR-0032/SPEC-0013; its [report](../benchmarks/lp-convergence.md) retains 176
 attempts and diagnoses work/cost amplification without selecting a preset.
@@ -475,7 +475,7 @@ acceptance 234.427924688/300; cumulative 17115.274617853 /
 15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
 and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
 At convergence-study completion the handoff was GPUP-7's contract. The
-2026-10-12 planning update above now makes GPUP-REP CPU-only proof/contract
-validation next, before any new numerical behavior.
+2026-10-12 order inserted GPUP-REP CPU-only proof/contract validation, now
+complete. GPUP-EXEC is next before any new numerical behavior.
 
 No new allowance or preset.

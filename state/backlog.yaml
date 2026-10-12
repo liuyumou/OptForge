@@ -16,9 +16,9 @@ active_research_track: GPUP
 # GPUP-COPT-ADAPTER and GPUP-CONVERGENCE are complete.
 # Listed priority is distinct from depends_on: setup and optional COPT adapter
 # investigations are not prerequisites for quantization. See the roadmap handoff.
-# 2026-10-12: ADR-0033 changes planning only. CPU proof/codec contract validation
-# precedes more GPU arithmetic. SPEC-0020/0021 remain drafts; no new allowance.
-next_ready_task: GPUP-REP
+# 2026-10-12: GPUP-REP accepts CPU reference semantics under ADR-0034.
+# GPUP-EXEC is next; solver/device behavior and SPEC-0021 remain draft. No new allowance.
+next_ready_task: GPUP-EXEC
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -229,13 +229,13 @@ tasks:
     acceptance: "ADR-0033 planning only; rationale and proposed SPEC-0020/0021; reproducible CPU design artifact and full pinned-native gate; no runtime or GPU work"
   - id: GPUP-REP
     title: Validate and accept a bounded exact-storage and expansion contract on CPU
-    status: ready
+    status: complete
     depends_on: [GPUP-DESIGN]
     specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
-    acceptance: "Close codec/range/rounding proofs, independent primitive oracle and layout/memory analysis; accept bounded subset and future interfaces/resources before behavior; CPU-only, zero GPU"
+    acceptance: "ADR-0034; exact input codec plus binary64 and 64-bit-significand CPU semantics; independent 32852-codec/1058-primitive oracle; bounded layout/memory receipts; full native gate; CPU-only, zero GPU"
   - id: GPUP-EXEC
     title: Implement and measure an admitted lean precision operator executor
-    status: planned
+    status: ready
     depends_on: [GPUP-REP, GPUP-5C]
     specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
     acceptance: "Accepted subset and explicit reservation first; cached splits and guarded execution; same-arithmetic controls, instruction inventory, range/oracle/replay/four sanitizer gates; total preparation and solve cost"

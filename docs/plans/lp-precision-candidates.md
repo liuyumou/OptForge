@@ -8,12 +8,12 @@ preserves the evidence, equations, primary sources, hardware qualifications and
 proposed experiments behind the current hypotheses. It is non-normative research,
 not an accepted numerical contract, implementation order, GPU allowance or preset.
 The [2026-10-12 architecture](lp-precision-architecture-2026-10-12.md) now adds
-component IDs, low-level layouts, proofs and motivation, with draft
+component IDs, low-level layouts, proofs and motivation, with the bounded CPU subset of
 [SPEC-0020](../specifications/SPEC-0020-lp-expansion-arithmetic.md) and
 [SPEC-0021](../specifications/SPEC-0021-lp-refinement.md). Its
 [experiment design](../benchmarks/lp-precision-design-experiments.md) isolates
-components and interactions. Under planning-only ADR-0033, GPUP-REP CPU contract
-validation is next; no GPU behavior or allowance follows. All proposals retain
+components and interactions. GPUP-REP CPU validation is complete under ADR-0034; GPUP-EXEC is next. No GPU
+behavior or allowance follows. All proposals retain
 original-model 1e-9 acceptance.
 
 ## Completed investigations and remaining limits
@@ -33,8 +33,8 @@ original-model 1e-9 acceptance.
 
 | ID | Candidate / motivation | Admission and rejection gate |
 | --- | --- | --- |
-| R1 | Exact compact h/l/q/exponent encoding; normalized binary64 leaves q in [-8,8], so scaled FP16/FP8/INT8 tails suffice. Original bits with integer decoding are the eight-byte control. | Proof is codec-only. Count i16/i32 metadata, ABI padding and both matrix views; raw FP16 tails fail. See SPEC-0020 and reproducible CPU artifact. |
-| R2 / S | Symbolically scaled arithmetic and persistent accurate state across updates, reductions and controller operations. | Range and rounding/error proof for every primitive, including comparison/division/sqrt; full-state replay. Current pair kernels still return to FP64 state and do not test this proposal. |
+| R1 | Exact compact h/l/q/exponent encoding; normalized binary64 leaves q in [-8,8], so scaled FP16/FP8/INT8 tails suffice. Original bits with integer decoding are the eight-byte control. | CPU codec accepted under ADR-0034 with complete payload/layout receipts; raw FP16 tails fail. Device decode cost and total traffic remain GPUP-EXEC questions. |
+| R2 / S | Symbolically scaled arithmetic and persistent accurate state across updates, reductions and controller operations. | CPU 64-bit-significand primitive semantics are accepted. Device implementation and full persistent-state replay remain gated; current pair kernels still return to FP64 state. |
 | N | Stable support-function proximal map, scaled norms and residual-aware objective/gap formulas. | Exact-real identities plus rounded edge cases; preserve residual terms and final host authority. |
 
 ## Current research hypotheses

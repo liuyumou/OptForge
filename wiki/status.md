@@ -10,16 +10,17 @@ evidence is recorded in [active task](../state/active-task.md).
 The [2026-09-30 low-precision research analysis](../docs/plans/lp-low-precision-research-2026-09-30.md)
 preserves historical evidence and research guidance. The
 [2026-10-12 precision architecture](../docs/plans/lp-precision-architecture-2026-10-12.md)
-adds component motivations, exact encoding and algorithm designs, draft SPEC-0020
-and SPEC-0021, and an isolated/interaction experiment plan. GPUP-DESIGN is complete
-as documentation/CPU examples only. Planning-only ADR-0033 makes GPUP-REP CPU
-contract validation next; no new numerical behavior or GPU allowance is accepted.
+adds component motivations, exact encoding and algorithm designs, SPEC-0020/0021,
+and an isolated/interaction experiment plan. GPUP-REP is complete under ADR-0034
+and the accepted CPU subset of SPEC-0020: independent exact storage, binary64 and
+64-significand-bit arithmetic oracles plus bounded layout receipts. GPUP-EXEC is
+next; no solver behavior or GPU allowance is accepted.
 
 | State | Features |
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | GPU LP precision track (GPUP-REP CPU contract validation first, then bounded executor/state/refinement/assessment and GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| Planned | GPU LP precision track (GPUP-EXEC next, then bounded state/refinement/assessment and GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
 | Experimental | Opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
@@ -231,6 +232,6 @@ acceptance 234.427924688/300; cumulative 17115.274617853 /
 60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserves the
 15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
 and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
-That study handed off to GPUP-7; the 2026-10-12 planning update now makes
-GPUP-REP CPU-only proof/contract validation next. New numerical contracts must
+That study handed off to GPUP-7; the 2026-10-12 order inserted GPUP-REP, which is
+now complete. GPUP-EXEC is next. New device numerical contracts must
 be accepted before behavior; all historical evidence and caps remain unchanged.
