@@ -1,13 +1,13 @@
 # SPEC-0020: Exact compact LP storage and expansion arithmetic
 
-Status: accepted for the bounded GPUP-REP CPU subset; device and solver behavior remain draft
+Status: accepted for GPUP-REP CPU reference and GPUP-EXEC bounded exact-dot subset; full expansion state remains draft
 Scope: research-only representations and arithmetic, not solver convergence
 Owner: numerical backend
 Introduced: GPUP-DESIGN, 2026-10-12
 Last reviewed commit: dd57e4c71ce4eec311c58042222f92fc54af24a6
 Supersedes: none; accepted SPEC-0012 modes and research identities remain unchanged
-Implementation: CPU candidate and independent oracle tools only; no runtime behavior
-Tests: GPUP-REP fixture/integration/full native gates; device gates pending
+Implementation: CPU reference tools; feature-gated optimizer-lp/optimizer-lp-cuda exec modules and isolated study executable
+Tests: independent CPU oracles, native gates, GPUP-EXEC device differentials/replay/four sanitizers
 
 ## Purpose
 
@@ -359,9 +359,33 @@ candidate for the accepted CPU subset. Neither artifact passes future device gat
 
 ## Remaining acceptance blockers
 
-GPUP-EXEC must select an implementable subset, freeze its device interface and
-reservation, prove any bounded exponent window or omitted-term envelope, inspect
-generated instructions and pass device differentials plus four sanitizer gates.
+GPUP-EXEC closes only the bounded exact-dot device gates described below.
 Persistent complete solver state, snapshots, division/sqrt on a device, shared
 exponents and full FP64-free control remain independently gated. No convergence or
 latency result follows from the accepted CPU semantics.
+
+
+## Accepted GPUP-EXEC subset (2026-10-13)
+
+[ADR-0035](../decisions/ADR-0035-bounded-exact-executor.md) accepts `lp-exec-v1`:
+binary64 exact-dot rounding within a 128-bit product-exponent window and 65536-term
+rows using a signed 256-bit accumulator. Both matrix orientations use canonical
+coefficients and a validated permutation. Experimental prepare_operator,
+prepare_vector, apply and apply_transpose interfaces bind scale/connectivity and
+source generations, return explicit error/exception receipts and reject aliases,
+stale vectors, nonfinite operands, invalid resources and unsupported ranges.
+This extends the earlier CPU-only acceptance with the bounded device contract;
+implementation and measured acceptance are recorded in the
+[GPUP-EXEC report](../benchmarks/lp-exact-executor-gpup-exec.md).
+FP64 state/control, independent host authority and historical identities remain.
+The ADR freezes the task and amended campaign resource authority. It does not
+accept full expansion state, device division/sqrt, refinement or a preset.
+
+The study retains all 108 frozen attempts, independently verifies 94 endpoints,
+and certifies 58/96 timings. All 27 cached/uncached study pairs agree bitwise;
+regular device, oracle, replay and all four scoped sanitizer gates pass. Fourteen
+initial controls lack endpoints after a discovery-image packaging failure; the
+unchanged dependency was restored without retrying those attempts. Scheduling,
+scaling and mixed cases hit the explicit exponent-window refusal. The measured
+subset does not establish a fresh-solve speedup or a supported preset. Persistent
+expansion state and the remaining device primitives retain their separate gates.

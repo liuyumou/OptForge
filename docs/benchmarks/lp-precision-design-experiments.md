@@ -4,8 +4,17 @@ Status: proposed protocol; no new workload, seed, threshold or budget is admitte
 Owner: numerical backend and experiment tooling
 Introduced: GPUP-DESIGN, 2026-10-12
 Last reviewed commit: bootstrap
-Implementation: none; extends the design of SPEC-0013, not its historical trials
+Implementation: GPUP-REP and bounded GPUP-EXEC subsets; remaining design is not implemented
 Tests: per-stage admission and acceptance below
+
+## Execution update (2026-10-13)
+
+GPUP-REP CPU validation and the separately admitted [GPUP-EXEC study](lp-exact-executor-gpup-exec.md)
+are complete under ADR-0034/0035. GPUP-EXEC preserves 108 attempts, 94 verified
+endpoints and 58/96 certified timings, including all failures and range refusals.
+Its explicitly amended budget and final ledger supersede the historical resource
+snapshot below for current accounting. The remaining component/interaction plan
+still grants no workload, behavior or reservation; GPUP-STATE needs its own scope.
 
 ## Questions and primary endpoint
 
@@ -78,8 +87,8 @@ For P/T, establish a real admissible subproblem/tile population before kernel wo
 Reject candidates whose required mathematical assumptions or memory caps fail.
 A theoretical cost estimate may guide priority but cannot establish performance.
 
-The next bounded task is CPU-only. Its proposed maximum is one CPU-hour and four
-build jobs, with zero GPU time; refine this in active-task before starting. New
+The original GPUP-REP proposal was CPU-only, with one CPU-hour and four
+build jobs and zero GPU time. That task is now complete. New
 proof failures and minimized counterexamples are first-class outputs.
 
 ## Stage 1: Primitive and executor validation
@@ -219,7 +228,8 @@ part of the recipe and are frozen before holdout, not retroactive instance dispa
 
 ## Resource and implementation gates
 
-Current consumption remains 17115.274617853 / 18002.574545061 GPU seconds; all
+Historical planning snapshot (before ADR-0035): consumption was
+17115.274617853 / 18002.574545061 GPU seconds; all
 16134 events and ledger SHA-256
 60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 remain untouched.
 The initial 28800-second campaign cap and all phase caps persist. Neither the

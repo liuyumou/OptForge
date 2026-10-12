@@ -40,3 +40,7 @@ pub mod research;
 pub use research::ResearchSession;
 
 mod adaptive;
+
+/// ADR-0035 exact sparse-product executor.
+#[cfg(feature = "precision-research")]
+pub mod exec;
