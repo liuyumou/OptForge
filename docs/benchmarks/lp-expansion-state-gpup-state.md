@@ -99,8 +99,10 @@ failed launcher receipts are retained under the task artifacts.
 Final source-only review additionally rejects duplicate/boolean evidence fields
 before private file access and prevents an overlooked non-FMA kernel failure
 from passing the aggregate gate. The frozen numerical construction and outcome
-remain unchanged. Final exact-source acceptance is in native-reviewed.log and
-native-reviewed-resources.json under the same artifact directory.
+remain unchanged. Final exact-source acceptance passes 272 Python tests and
+all Rust/native/dependency, committed-record replay, documentation and smoke
+gates. Its receipts are native-reviewed.log and native-reviewed-resources.json
+under the same artifact directory.
 
 | Identity | SHA-256 |
 | --- | --- |

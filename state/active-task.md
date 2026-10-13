@@ -1,5 +1,25 @@
 # Active Task
 
+## GPUP-STATE draft PR preparation (2026-10-13)
+
+Status: source preparation accepted; user authorized opening a separate draft PR.
+Objective: publish the completed bounded admission-refusal result for review,
+without waiting for GPUP-REFINE or starting another numerical task.
+Acceptance: inspect the complete diff and remote base, preserve the frozen
+construction and evidence identities, renew the full pinned-native gate before
+publication, and verify the draft PR's base and head after creation.
+Likely files: this record and documentation consistency corrections only.
+Resources: 1800 CPU seconds, four build jobs, 8 GiB host RSS and zero GPU jobs.
+The accepted implementation is dd93b82; its full pinned-native gate passes
+272 Python tests, Rust/native/dependency checks, committed-record replay,
+127 documentation pages and smoke. PR preparation corrects the stale wiki
+handoff and makes the final test count explicit in the report. Gate and
+publication receipts belong in artifacts/gpup-state-pr-20261013.
+Preserve the 16366-event ledger and cumulative GPU consumption of
+17635.432015338 / 21602.574545061 seconds. This request authorizes publishing
+the task branch and creating a draft PR; it does not authorize merging or
+starting GPUP-REFINE. Keep all historical artifacts and the source branch.
+
 ## GPUP-STATE (2026-10-13)
 
 Status: complete as the user-authorized bounded resource admission refusal.

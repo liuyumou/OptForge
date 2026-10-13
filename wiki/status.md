@@ -241,7 +241,8 @@ acceptance 234.427924688/300; cumulative 17115.274617853 /
 15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
 and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
 That study handed off to GPUP-7; the 2026-10-12 order inserted GPUP-REP, which is
-now complete, followed by GPUP-EXEC under ADR-0035. GPUP-STATE is next and
+now complete, followed by GPUP-EXEC under ADR-0035. GPUP-STATE closes with the
+bounded resource admission refusal under ADR-0036; GPUP-REFINE is next and
 requires its own accepted numerical/resource contract. Current GPU consumption
 is 17635.432015338 / 21602.574545061 seconds; the 16366-event ledger preserves
 every historical prefix. No supported preset follows.
