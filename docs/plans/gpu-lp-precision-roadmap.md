@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved order updated 2026-10-12; GPUP-REP CPU contract complete; GPUP-EXEC is next; remaining numerical designs remain draft
+Status: approved 2026-10-12 order; GPUP-EXEC complete under ADR-0035; GPUP-STATE is next and needs its accepted subset
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
@@ -193,8 +193,9 @@ scaled double-float, selective error budgets, active-face polishing and
 layout-appropriate Tensor Core/integer emulation. That review is preserved as
 non-normative historical research. The [2026-10-12 design](lp-precision-architecture-2026-10-12.md)
 now supplies proposed numerical contracts and the revised planning order above.
-GPUP-REP CPU contract validation is complete under ADR-0034; GPUP-EXEC is next. No proposal is an accepted preset or
-implicit numerical behavior; all budgets and historical evidence remain unchanged.
+GPUP-REP CPU validation and the bounded GPUP-EXEC executor are complete under
+ADR-0034/0035. No proposal is a supported preset or implicit numerical behavior;
+GPUP-EXEC has its separately accepted resource amendment and retained evidence.
 The original candidate comparisons below are design space, not an admitted grid.
 
 Preserve the original FP64 model. Independent host validation and conservative
@@ -318,9 +319,12 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Current handoff: GPUP-EXEC under the
-[2026-10-12 order](#current-design-order-2026-10-12). GPUP-REP accepted CPU
-reference contracts; it added no runtime implementation or GPU reservation. GPUP-CONVERGENCE is complete under
+Current handoff: GPUP-STATE under the
+[2026-10-12 order](#current-design-order-2026-10-12).
+[GPUP-EXEC](../benchmarks/lp-exact-executor-gpup-exec.md) completes ADR-0035
+with explicit range refusals, preserved discovery failures and no total-cost win.
+GPUP-STATE requires its own accepted scope and reservation. GPUP-REP accepted CPU
+reference contracts without runtime behavior. GPUP-CONVERGENCE is complete under
 ADR-0032/SPEC-0013; its [report](../benchmarks/lp-convergence.md) retains 176
 attempts and diagnoses work/cost amplification without selecting a preset.
 GPUP-COPT-ADAPTER is complete under
@@ -476,6 +480,21 @@ acceptance 234.427924688/300; cumulative 17115.274617853 /
 and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
 At convergence-study completion the handoff was GPUP-7's contract. The
 2026-10-12 order inserted GPUP-REP CPU-only proof/contract validation, now
-complete. GPUP-EXEC is next before any new numerical behavior.
+complete. GPUP-EXEC then completed under its separately accepted ADR-0035.
 
-No new allowance or preset.
+## GPUP-EXEC completion (2026-10-13)
+
+The [bounded executor report](../benchmarks/lp-exact-executor-gpup-exec.md) retains
+108 attempts, verifies 94 endpoints and certifies 58/96 timings. Cached and
+uncached exact products agree on all 27 study pairs; native, device, replay and
+four scoped sanitizer gates pass. Range refusals, fourteen initial discovery
+failures and six control timeouts remain visible. No preset or total-cost win.
+
+Task charge is 520.157397485 seconds: timing 431.684266725/2300, profiles
+36.003675982/450 and acceptance 52.469454778/850. ADR-0035 explicitly amends the
+cumulative ceiling to 21602.574545061 seconds; consumption is 17635.432015338.
+The 16366-event ledger SHA-256 is
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b,
+preserving the 16134-event prefix above and every phase cap. GPUP-STATE is next,
+subject to its own primitive/state contract and resource gates. No reservation
+for that task follows from unused headroom.

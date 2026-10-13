@@ -1,5 +1,133 @@
 # Active Task
 
+## GPUP-EXEC PR 18 review and integration (2026-10-13)
+
+Status: self-review, repairs and local acceptance complete; user authorized
+protected merge after final GitHub checks. Integration/cleanup receipts are retained
+under artifacts/gpup-exec-pr-review-20261013.
+Objective: open the completed bounded executor as its own PR, reproduce and fix
+any actionable review findings, and preserve useful raw evidence and recovery
+references during safe cleanup. Merge the reviewed PR after required checks pass,
+then verify main ancestry before removing the integrated task branch.
+Acceptance: numerical, lifecycle and independent evidence review; focused
+regressions for any defects; full pinned-native `bash tools/check.sh`; final diff,
+GitHub checks and clean published branch; verified artifact inventory and recovery
+bundle. Preserve the measured study and its negative result, including failures.
+Likely files: executor runtime/tests/tooling and report if review requires changes,
+plus this task record. Resources: two CPU-hours, four build jobs, zero GPU jobs and
+no added allowance. Preserve cumulative 17635.432015338 / 21602.574545061 GPU
+seconds and the 16366-event ledger SHA-256
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b.
+Keep artifacts/gpup-exec-v1, all historical evidence and unrelated worktrees.
+Review receipts and recovery material belong in artifacts/gpup-exec-pr-review-20261013.
+Do not start GPUP-STATE. Delete the task branch only after verified integration
+and a checked source-recovery bundle; preserve unrelated worktrees.
+
+
+Acceptance evidence: [PR 18](https://github.com/liuyumou/OptForge/pull/18) was opened
+as a bounded GPUP-EXEC change. Self-review reproduced five missing acceptance
+checks (image directory, attempt key, executable, selected device and regular-test
+counts), rejection of complete recovered endpoints, and a recovered-reservation
+promotion gap. Six CPU regression tests now cover these cases plus the closed
+source-correction scope. No remaining actionable finding was identified within
+the admitted cold-solve contract. All 166 measured Rust/CUDA files remain exact.
+
+The full pinned-native gate passes 259 Python tests, Rust/native and dependency
+checks, committed-record replay, 125 documentation pages and smoke. All 16 executor
+tooling tests also pass in an isolated source copy with hash-checked input fixtures
+and no campaign artifacts. The hardened independent report is byte-for-byte equal
+to the completed report: all 108 attempts, 94 verified endpoints and 58/96 certified
+timings remain, with all failures and negative results preserved. The retained
+regular device log has 14 driver + 6 scheduling + 46 LP tests; the earlier prose
+count of 58 is corrected to 66. No new GPU work ran; the complete ledger and its
+historical prefix retain the hashes and consumption above.
+
+Every one of the 1153 original artifact references verifies. A compressed recovery
+copy preserves 1198 files / 360328297 uncompressed bytes, including the original
+source archives, executables, images, endpoints, failures, logs, ledgers and reviewed
+summaries. Its 80793840-byte archive has SHA-256
+c807b6ac2074d5377d86408b164c38991f9b813613d6d21be68cb979229823e3.
+The original bfe88c3 source bundle is verified; final source, CI, merge ancestry and
+owned-scratch cleanup receipts are kept beside it. Original raw artifacts and
+unrelated worktrees remain in place. The user explicitly approved finishing these
+repository commands outside the sandbox after automatic approval review timed out;
+the ordinary sandbox could not create a process namespace.
+
+## GPUP-EXEC (2026-10-13)
+
+Status: complete; bounded implementation, device acceptance, frozen study and
+final pinned-native acceptance passed.
+Objective: an isolated binary64 exact-dot CUDA executor with cached/uncached
+vector decoding, FP64 solver state and original-model host certification.
+Acceptance: independent integer/Fraction CPU oracle; range, transpose, cache,
+memory and failure contracts; generated-instruction/register/spill inventory;
+full pinned-native gate; regular device/differential/replay/four sanitizer gates;
+96 frozen fresh timing attempts and 12 fixed-work profiles; independently verified
+endpoints, retained refusals/timeouts and total-cost report. No supported preset.
+Likely files: ADR-0035/SPEC-0020, research modules in optimizer-lp/lp-cuda/experiment,
+a separate CUDA image, bounded study protocol/schema/tools/tests and handoff docs.
+Resources: CPU 21600 seconds, four jobs, 8 GiB host RSS; operator resident/peak
+1/2 GiB, 32 GiB new artifacts. GPU task cap 3600 seconds: timing 2300 screening,
+profile 450 ablations, acceptance 850 repeatability. User explicitly authorized
+cumulative ceiling 21602.574545061 seconds and phase ceilings screening 9500,
+ablations 7650, repeatability 4450; baseline 1800/finalists 9000 and total 28800
+remain. Every GPU job requires the shared host lease and deadline+6 reservation.
+Preserve prior 17115.274617853 seconds and the 16134-event prefix SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+Use GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48. Commit locally after acceptance;
+preserve all existing artifacts and unrelated worktrees. Next GPUP-STATE only
+when this task's gates pass. The retained first oracle gate passed its then-two
+device tests and charged 0.774594710 seconds. The resumed three-test suite and
+all subsequent device gates passed. The resume point was 16136 events and cumulative
+17116.049212563 seconds, ledger SHA-256
+7cc4544de557c68daa72fc44837627222d6ea27e11ea83d85e653428d6271d93.
+Keep that attempt and every earlier ledger byte; do not retry its identity.
+
+Acceptance evidence: [ADR-0035](../docs/decisions/ADR-0035-bounded-exact-executor.md)
+and the bounded SPEC-0020 subset implement exact binary64 sparse products with
+cached/uncached vector decoding, FP64 state and original-model host authority.
+The [report](../docs/benchmarks/lp-exact-executor-gpup-exec.md) retains all 108
+attempts, independently verifies 94 endpoints and certifies 58/96 timings. All
+27 cached/uncached timing/profile pairs match bitwise. Eighteen exact timings
+refuse the exponent window; six mixed FP64 controls time out. Fourteen initial
+controls failed discovery because the frozen archive omitted schedule_eval.cubin;
+the unchanged dependency was restored with a receipt, without retrying identities.
+No fresh-solve improvement over tuned FP64 or supported preset is selected.
+
+The 2347-case independent Fraction fixture reproduces byte-for-byte. Full
+pre-device native acceptance passes 250 Python contracts and all Rust/native,
+dependency, committed-record, documentation and smoke checks. The device oracle
+checks 2346 shape-admitted cases in both cache modes. All 66 regular device tests,
+three new device tests, three fixed-work cache pairs, six same-device replays and
+four scoped sanitizers pass. Decode/sparse paths use 14/39 registers, zero spills
+and no native FP64 arithmetic. Measured source SHA-256 is
+03df0db2362dee7284deb7d10d08dda60b36eb14607164f71a3ab1e818c1350e;
+image SHA-256 is
+ec3c6c03387c742ccac83742d905616f6ca4160026e00c4c8dfc36c2eb21a0c6.
+
+CPU-only review repairs require the discovery image before future freezes,
+classify nonzero child exits, reject malformed budgets without private artifacts,
+and bind complete acceptance identities. All ten final source-only contracts
+pass in an isolated source copy. The hardened independent report re-verifies all
+six acceptance endpoints and six replays; every original report result/statistic
+is unchanged. Measured runtime/CUDA sources, executables, numerical settings and
+primary receipts remain unchanged. Logs and raw archives are under
+artifacts/gpup-exec-v1; reviewed summaries and hashes are under
+docs/benchmarks/data/exec. Historical gaps stay open; GPUP-STATE is not started.
+Final `CARGO_BUILD_JOBS=4 bash tools/check.sh` passes 253 Python tests, all
+Rust/native/dependency gates, committed-record replay, 125 documentation pages
+and smoke. Log: artifacts/gpup-exec-v1/native-final.log. The final artifact audit
+checks all 1153 exported references and the exact historical ledger prefix.
+Maximum sampled worker RSS is 1178767360 bytes; cataloged artifacts total
+359546004 bytes, within the 8 GiB / 32 GiB limits. Final documentation links and
+new-file whitespace checks pass. Commit locally after this acceptance record.
+
+Task GPU charge is 520.157397485 seconds: timing 431.684266725/2300, profiles
+36.003675982/450 and acceptance 52.469454778/850. Cumulative consumption is
+17635.432015338 / 21602.574545061 seconds. The complete 16366-event ledger
+SHA-256 is 4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b,
+with the 16134-event prefix above intact and every task/phase cap enforced.
+
 ## PR 17 review and integration (2026-10-13)
 
 Status: review and repairs complete; protected merge and safe cleanup receipts

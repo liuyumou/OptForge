@@ -53,3 +53,7 @@ pub mod research;
 
 /// Explicit adaptive audit/recovery controller and CPU oracle.
 pub mod adaptive;
+
+/// ADR-0035 bounded exact sparse products.
+#[cfg(feature = "precision-research")]
+pub mod exec;

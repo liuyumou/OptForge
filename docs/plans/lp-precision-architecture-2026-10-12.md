@@ -4,7 +4,7 @@ Status: proposed numerical designs; planning order accepted by ADR-0033
 Owner: numerical backend and experiment tooling
 Introduced: GPUP-DESIGN, 2026-10-12
 Last reviewed commit: bootstrap
-Implementation: existing studies only; proposed components below are not implemented
+Implementation: existing studies and the bounded GPUP-EXEC exact-dot subset; remaining designs below are not implemented
 Tests: CPU design examples; future gates in the experiment design
 
 ## Goal and reading order
@@ -23,6 +23,16 @@ and rejection rules. The [roadmap](gpu-lp-precision-roadmap.md) and
 [backlog](../../state/backlog.yaml) own order. The
 [2026-09-30 review](lp-low-precision-research-2026-09-30.md) remains an unchanged
 historical research artifact; this document resolves and extends its proposals.
+
+## GPUP-EXEC implementation update (2026-10-13)
+
+The [bounded executor report](../benchmarks/lp-exact-executor-gpup-exec.md) closes
+one R1/R2/X subset under ADR-0035: canonical binary64 bits and integer exact dots
+inside a proven exponent window, with cached and uncached vectors. The 108-attempt
+study retains 94 verified endpoints and all 27 cache-equivalence pairs. It finds
+explicit range refusals and no total-cost improvement over tuned FP64. Full
+expansion state, the alternative compact tails and SPEC-0021 methods remain
+proposals with their own acceptance obligations. GPUP-STATE is next.
 
 ## Implemented foundation and evidence that motivates change
 

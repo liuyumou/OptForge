@@ -29,3 +29,7 @@ serde_json.workspace = true
 
 [lints]
 workspace = true
+
+[[example]]
+name = "lp_precision_exec"
+required-features = ["precision-research"]

@@ -12,14 +12,16 @@ component IDs, low-level layouts, proofs and motivation, with the accepted CPU s
 of [SPEC-0020](../specifications/SPEC-0020-lp-expansion-arithmetic.md) and draft
 [SPEC-0021](../specifications/SPEC-0021-lp-refinement.md). Its
 [experiment design](../benchmarks/lp-precision-design-experiments.md) isolates
-components and interactions. GPUP-REP CPU validation is complete under ADR-0034; GPUP-EXEC is next. No GPU
-behavior or allowance follows. All proposals retain
+components and interactions. GPUP-REP CPU validation is complete under ADR-0034;
+GPUP-EXEC is complete under ADR-0035 with a bounded negative total-cost result.
+GPUP-STATE needs its own accepted contract and resource gates. All proposals retain
 original-model 1e-9 acceptance.
 
 ## Completed investigations and remaining limits
 
 | Investigation | Evidence | Remaining limit |
 | --- | --- | --- |
+| Bounded exact-dot executor, GPUP-EXEC | [108 retained attempts](../benchmarks/lp-exact-executor-gpup-exec.md), 94 verified endpoints, 58/96 certified timings and 27/27 bitwise cache pairs; no FP64 in the audited sparse path. | No fresh-solve win. Exponent-window refusals on scheduling/scaling/mixed; fourteen discovery failures and six control timeouts retained. Persistent expansion state remains unimplemented. |
 | Exact power-of-two and factored scaling, GPUP-5B | [Matched study](../benchmarks/lp-exact-components-gpup5b.md) restores 27/36 timing coverage versus 12/36 for ordinary scaled FP32 storage; simple original coefficients become inexact after non-dyadic scaling. | Original-corpus exact representability is not a general LP property; changed scaling affects convergence and setup. No supported latency recipe. |
 | Scalar component sparse products, GPUP-5B | Three components preserve input information, but measured cross-products with per-nonzero FP64 compensated recombination lose badly on sm_120; [root cause](../benchmarks/lp-fp64-pipe-root-cause.md). | Deprioritize that measured implementation. This does not rule out Tensor Core/integer emulation that amortizes recombination across a dense dot product or tile. |
 | Double-float FP32 pairs, GPUP-5C | [Charged study](../benchmarks/lp-fp64-pipe-gpup5c.md) measures 100.3 us/update on dense_block-65536 versus 111.8 for integer-guard FP64; inner sparse arithmetic avoids FP64. | Product underflow loses scheduling coverage; scale policy and endpoint coverage remain unresolved. Early standalone microbenchmark gains are separately labeled, not certified solve gains. |
@@ -33,7 +35,7 @@ original-model 1e-9 acceptance.
 
 | ID | Candidate / motivation | Admission and rejection gate |
 | --- | --- | --- |
-| R1 | Exact compact h/l/q/exponent encoding; normalized binary64 leaves q in [-8,8], so scaled FP16/FP8/INT8 tails suffice. Original bits with integer decoding are the eight-byte control. | CPU codec accepted under ADR-0034 with complete payload/layout receipts; raw FP16 tails fail. Device decode cost and total traffic remain GPUP-EXEC questions. |
+| R1 | Exact compact h/l/q/exponent encoding; normalized binary64 leaves q in [-8,8], so scaled FP16/FP8/INT8 tails suffice. Original bits with integer decoding are the eight-byte control. | CPU codec accepted under ADR-0034 with complete payload/layout receipts; raw FP16 tails fail. GPUP-EXEC measures integer decoding and cache traffic without a fresh-solve win; compact tail formats remain separate candidates. |
 | R2 / S | Symbolically scaled arithmetic and persistent accurate state across updates, reductions and controller operations. | CPU 64-bit-significand primitive semantics are accepted. Device implementation and full persistent-state replay remain gated; current pair kernels still return to FP64 state. |
 | N | Stable support-function proximal map, scaled norms and residual-aware objective/gap formulas. | Exact-real identities plus rounded edge cases; preserve residual terms and final host authority. |
 

@@ -5,21 +5,31 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-Current handoff (2026-10-12): GPUP-REP is complete under accepted ADR-0034 and
-the bounded CPU subset of [SPEC-0020](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md).
-Its [report](docs/benchmarks/lp-expansion-gpup-rep.md) records the exact codec,
-binary64 and 64-significand-bit reference semantics, independent oracle and bounded
-layout receipts. GPUP-EXEC is next, to choose and implement one admitted lean
-operator subset with its own GPU reservation and device gates. Read the [architecture
-and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md),
+Current handoff (2026-10-13): GPUP-EXEC is complete under accepted ADR-0035 and
+the bounded exact-dot subset of [SPEC-0020](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md).
+Its [report](docs/benchmarks/lp-exact-executor-gpup-exec.md) retains all 108 attempts,
+independently verifies 94 endpoints and certifies 58/96 timings. All 27 cached/
+uncached study pairs match bitwise. Full native, 66 regular device tests, oracle,
+six replays and four scoped sanitizers pass. Fourteen initial FP64 controls failed
+discovery because the archive omitted an unchanged dependency; the repair and
+failed attempts are retained without retries. Scheduling/scaling/mixed exact
+solves refuse the bounded exponent window. No total-cost win or preset is selected.
+GPUP-STATE is next and needs its own accepted primitive/state subset and resource
+gates. Read the [architecture and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md),
 draft [SPEC-0021](docs/specifications/SPEC-0021-lp-refinement.md), and
 [component/interaction experiment design](docs/benchmarks/lp-precision-design-experiments.md).
-No solver behavior, preset or new GPU reservation follows from GPUP-REP. Exact
-storage is distinct from accurate arithmetic; full expansion state and
-correction/anchored products remain independently gated.
-The dated GPUP-7 handoffs below remain historical; follow next_ready_task and the
-roadmap's 2026-10-12 order. Preserve all accepted identities, final original-model
-host authority and cumulative 17115.274617853 / 18002.574545061 GPU seconds.
+GPUP-REP remains the CPU reference; full expansion state and correction/anchored
+products remain independently gated. No next-task reservation follows from unused
+GPUP-EXEC headroom. Preserve final original-model host authority and all identities.
+Task charge is 520.157397485 GPU seconds: timing 431.684266725/2300, profiles
+36.003675982/450 and acceptance 52.469454778/850. Cumulative consumption is
+17635.432015338 / 21602.574545061 seconds under ADR-0035's amended authority.
+The 16366-event ledger SHA-256 is
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b,
+preserving the 16134-event prefix
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+The dated handoffs below remain historical; follow next_ready_task and the
+roadmap's 2026-10-12 order.
 
 For low-precision LP follow-ups, read the preserved
 [2026-09-30 research analysis](docs/plans/lp-low-precision-research-2026-09-30.md)

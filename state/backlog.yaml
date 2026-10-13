@@ -17,8 +17,9 @@ active_research_track: GPUP
 # Listed priority is distinct from depends_on: setup and optional COPT adapter
 # investigations are not prerequisites for quantization. See the roadmap handoff.
 # 2026-10-12: GPUP-REP accepts CPU reference semantics under ADR-0034.
-# GPUP-EXEC is next; solver/device behavior and SPEC-0021 remain draft. No new allowance.
-next_ready_task: GPUP-EXEC
+# 2026-10-13: GPUP-EXEC is complete under ADR-0035; GPUP-STATE needs its own contract.
+# SPEC-0021 and full expansion state remain draft; no preset follows.
+next_ready_task: GPUP-STATE
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -235,13 +236,13 @@ tasks:
     acceptance: "ADR-0034; exact input codec plus binary64 and 64-bit-significand CPU semantics; independent 32852-codec/1058-primitive oracle; bounded layout/memory receipts; full native gate; CPU-only, zero GPU"
   - id: GPUP-EXEC
     title: Implement and measure an admitted lean precision operator executor
-    status: ready
+    status: complete
     depends_on: [GPUP-REP, GPUP-5C]
     specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
-    acceptance: "Accepted subset and explicit reservation first; cached splits and guarded execution; same-arithmetic controls, instruction inventory, range/oracle/replay/four sanitizer gates; total preparation and solve cost"
+    acceptance: "ADR-0035; 2347-case Fraction oracle; exact bounded cached/uncached executor, 27/27 identical study pairs; full native, 58 regular device tests, six replays and four scoped sanitizers; 108 attempts retained, 94 endpoints verified, 58/96 timings certified; explicit discovery failures, range refusals and total-cost negative result"
   - id: GPUP-STATE
     title: Investigate persistent accurate state and stable numerical formulas
-    status: planned
+    status: ready
     depends_on: [GPUP-EXEC]
     specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
     acceptance: "Accepted full primitive/state subset first; compensation and expansion masters with native FP64 controls; checkpoint every scalar/vector/scale; original residuals and charged full costs; retain a reasoned refusal if no format qualifies"

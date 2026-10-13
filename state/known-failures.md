@@ -1,5 +1,40 @@
 # Known Failures and Limitations
 
+## Bounded exact executor: range refusals and no fresh-solve speedup
+
+[GPUP-EXEC](../docs/benchmarks/lp-exact-executor-gpup-exec.md) passes its bounded
+exact-dot arithmetic and device gates under ADR-0035. All 27 cached/uncached
+study pairs match bitwise. The 128-bit product-exponent window refuses scheduling,
+scaling and mixed models; no term is dropped and no automatic fallback occurs.
+The remaining five timing models certify in both exact modes, but the measured
+executor provides no fresh-solve latency win over tuned FP64. Lower kernel-host
+cost than generic precision FP64 at scale is outweighed by preparation, allocation
+and complete witness/checking costs. FP64 state/control and prior scaled-matrix
+error remain; full expansion state and refinement are not implemented.
+
+Fourteen first-repetition FP64 controls exited during discovery because the frozen
+directory omitted schedule_eval.cubin. The unchanged dependency was restored from
+the accepted source archive, with an explicit repair receipt. Those identities
+remain failed, charged and unretried; paired timing cells therefore have at most
+two control repetitions. The final freeze helper requires the image before any
+reservation, and source-only regressions cover this failure and child exit status.
+All six mixed-model control timings time out. All 108 attempts remain, 94 endpoints
+independently verify and 58/96 timings certify. Scope: development data on one
+device; no supported preset, cross-device equivalence or historical gap closure.
+
+CPU review also moved malformed budget rejection ahead of private-ledger loading
+so source-only tests work without campaign artifacts. The accepted path still
+requires the entire historical prefix. Independent acceptance reporting now binds
+every request identity and re-verifies all six project endpoints and six replays
+with the frozen executable; measured workers and evidence are unchanged.
+
+PR 18 self-review binds acceptance commands, archived executables/images and the
+selected device, and requires all 66 regular tests (the previous prose said 58).
+Recovered complete endpoints are independently verified while their interrupted
+status and conservative crash charges remain. Six CPU regressions cover these
+checks and keep the declared source-correction scope limited to tooling. The
+measured runtime, raw results and GPU ledger are unchanged.
+
 ## CPU expansion range and preparation defects corrected in PR 17
 
 The original candidate and rational oracle both accepted an overflowing 2-norm as
@@ -11,7 +46,7 @@ generations; apply validation requires a current vector epoch. Thirteen regressi
 retain the counterexamples. The original frozen fixture remains byte-identical;
 review logs and original receipts are in artifacts/pr17-review-20261013.
 
-## CPU expansion reference is accepted; device and solver behavior are not implemented
+## CPU expansion reference is accepted; full expansion solver state remains unimplemented
 
 GPUP-REP accepts the bounded CPU subset of SPEC-0020 under ADR-0034. The exact
 input codec, correctly rounded binary64 reference and separate 64-significand-bit
@@ -24,8 +59,10 @@ and a symbolic exponent. Raw FP16 tails still underflow. Arithmetic intermediate
 use the distinct 24/24/16 positional format; they do not inherit the input codec's
 small-tail bound. The accepted exact accumulator needs 67 u64 magnitude limbs at
 the maximum admitted dot length and is a costly CPU control, not a proposed GPU
-default. GPUP-EXEC must select a smaller implementable subset, prove any bounded
-window or omitted-term error, reserve device work and pass instruction/differential/sanitizer gates. Persistent expansion solver state remains untested.
+default. GPUP-EXEC implements a separately admitted signed 256-bit exact-dot
+subset with a proven exponent window and its own instruction/differential/sanitizer
+gates. That subset still retains FP64 solver state. Persistent expansion solver
+state remains untested.
 
 SPEC-0021 refinement remains draft. Its inner-oracle/progress assumptions,
 quantitative policies, interfaces and resource caps still need acceptance. Removing
