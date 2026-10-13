@@ -1,5 +1,20 @@
 # Active Task
 
+## PR 19 integration and evidence retention (2026-10-13)
+
+The user has now authorized merging PR 19 and safe cleanup, superseding the
+earlier no-merge delivery scope below. Implementation, device validation and
+publication are complete; CPU/docs/smoke CI passed at 2320e32.
+Finish through the protected PR with a merge commit preserving evidence ancestry,
+then synchronize main and remove only the merged task branch and disposable build
+caches. Preserve all historical research artifacts, failed attempts, frozen source,
+executables, images, raw endpoints, native dependencies and the canonical ledger.
+Record a checksum inventory, merge/CI receipts and cleanup verification under
+artifacts/gpup-state-integration-20261013. Bound this administrative task to 1200
+CPU seconds/four jobs, 8 GiB RSS, 64 MiB new receipts and zero GPU jobs. Verify the
+retained reports and unchanged 16452-event ledger after cleanup. No subsequent
+numerical task or resource reservation is started by this handoff.
+
 ## PR 19 device validation and publication (2026-10-13)
 
 Status: implementation, device experiments and final native acceptance complete;
