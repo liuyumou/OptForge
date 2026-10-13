@@ -32,7 +32,11 @@ inside a proven exponent window, with cached and uncached vectors. The 108-attem
 study retains 94 verified endpoints and all 27 cache-equivalence pairs. It finds
 explicit range refusals and no total-cost improvement over tuned FP64. Full
 expansion state, the alternative compact tails and SPEC-0021 methods remain
-proposals with their own acceptance obligations. GPUP-STATE is next.
+proposals with their own acceptance obligations. GPUP-STATE subsequently closes
+with [ADR-0036's resource refusal](../benchmarks/lp-expansion-state-gpup-state.md):
+the first full-range exact-bin FMA construction exceeds register/spill limits in
+both expansion formats. Full controller/state remains unimplemented; alternative
+constructions are not proved impossible. GPUP-REFINE is next.
 
 ## Implemented foundation and evidence that motivates change
 

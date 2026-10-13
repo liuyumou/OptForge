@@ -1,6 +1,6 @@
 # SPEC-0020: Exact compact LP storage and expansion arithmetic
 
-Status: accepted for GPUP-REP CPU reference and GPUP-EXEC bounded exact-dot subset; full expansion state remains draft
+Status: accepted for GPUP-REP CPU reference, GPUP-EXEC bounded exact dots and GPUP-STATE admission refusal; full expansion state remains draft
 Scope: research-only representations and arithmetic, not solver convergence
 Owner: numerical backend
 Introduced: GPUP-DESIGN, 2026-10-12
@@ -389,3 +389,50 @@ unchanged dependency was restored without retrying those attempts. Scheduling,
 scaling and mixed cases hit the explicit exponent-window refusal. The measured
 subset does not establish a fresh-solve speedup or a supported preset. Persistent
 expansion state and the remaining device primitives retain their separate gates.
+
+## GPUP-STATE CPU admission and resource refusal (2026-10-13)
+
+[ADR-0036](../decisions/ADR-0036-full-expansion-state-admission.md) accepts a
+bounded admission investigation, with its [report](../benchmarks/lp-expansion-state-gpup-state.md).
+The requested full expansion controller is **not implemented or accepted**.
+Requirements 13/16, complete persistent state, snapshots/replay and the remaining
+device clauses still require their independent gates. The 96 timing/12 profile
+grid was not admitted and yields no solve, residual or latency evidence.
+
+24. A CPU transcendental validator MUST use directed enclosures and publish a
+    nearest-even result only when both endpoints round to the same result;
+    unresolved cells MUST refuse after 128/192/256 working bits.
+25. CPU working precision MUST distinguish endpoint resolution from intermediate
+    integer width, including twice-width multiplication before truncation.
+26. A full primitive family MUST satisfy the actual generated register, stack and
+    spill gates; a zero `LOCAL` field alone MUST NOT establish zero spills.
+27. A partial primitive resource pass MUST NOT be promoted to full controller,
+    device correctness, replay or comparative-study acceptance.
+28. An admission refusal MUST retain exact source/fixture/executable/image
+    identities and classify all planned but unexecuted work as unadmitted.
+
+The validation target `fp32-24-24-pair-rne-v1` has 48 output significand bits,
+normal exponents [-1022,1023], minimum unit 2^-1069 and a half-output-unit absolute
+error for inexact finite results. It uses the accepted generic CPU rounding
+semantics; this does not accept a pair storage ABI or solver controller. Existing
+Expansion64 reference semantics remain. Log/exp inputs are explicitly finite
+integer dyadics of at most 64 magnitude bits and unit exponent [-1085,1023].
+These are scalar mathematical inputs, not a native FP64 controller interface.
+Infinity/invalid encodings, boolean/non-integer fields and unsupported ranges
+refuse before shifts. Log requires positive input; exp has explicit overflow and
+tiny-inexact outcomes. Exact log(1) and exp(0) are handled directly.
+
+The integer candidate uses 2*atanh range reduction for log and exp remainder
+in [0,ln(2)) with a positive Taylor enclosure. Endpoints are fixed-point integers;
+the independent Fraction oracle instead uses log(1+t), argument halving and
+outward squaring. The 48-case fixture checks results and error flags in three
+output formats; this is finite supporting evidence for the written bounds, not
+exhaustive transcendental coverage. Stable proximal tests cover exact dyadic
+boundaries and tagged infinities; unsupported materialized endpoints refuse.
+
+The 320-bit reduction has magnitude below 2^272 for 65536 64-by-64-bit terms in
+a 128-bit base-exponent window. Full-range scalar FMA is a separate gate: the
+first exact-bin construction needs 3200 signed bits and fails at 255 registers
+and nonzero compiler spills in both expansion formats. Its CPU bits match 270
+independent FMA cases, but this is not a device differential. No kernel executes,
+no host authority changes and no new runtime identity becomes selectable.

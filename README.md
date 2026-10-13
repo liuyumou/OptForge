@@ -26,7 +26,11 @@ semantics and layout receipts remain CPU reference tools.
 [GPUP-EXEC](docs/benchmarks/lp-exact-executor-gpup-exec.md) adds the separate
 bounded exact-dot executor under ADR-0035: 108 retained attempts, 94 verified
 endpoints and explicit range/coverage limits, with no fresh-solve speedup or preset.
-GPUP-STATE is next and needs its own accepted contract and resource gates.
+[GPUP-STATE](docs/benchmarks/lp-expansion-state-gpup-state.md) closes with a
+resource admission refusal under ADR-0036: its first full-range exact-bin
+primitive exceeds the register/spill gate in both expansion formats. No full
+controller or comparative study is admitted; GPU charge is zero. GPUP-REFINE
+is next and requires its accepted contract and separate allocation.
 
 The [COPT comparison and component report](docs/benchmarks/lp-copt-comparison.md)
 now covers all 1140 planned attempts through 65536 rows. It identifies evidence
@@ -120,6 +124,7 @@ acceptance was not covered.
 - [Precision architecture and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md)
 - [Accepted CPU reference and bounded exact sparse-product executor](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md)
 - [GPUP-EXEC exact executor, costs and retained failures](docs/benchmarks/lp-exact-executor-gpup-exec.md)
+- [GPUP-STATE full-controller admission refusal](docs/benchmarks/lp-expansion-state-gpup-state.md)
 - [Proposed correction LP, anchors and assessment contract](docs/specifications/SPEC-0021-lp-refinement.md)
 - [Component and combination experiment design](docs/benchmarks/lp-precision-design-experiments.md)
 - [FP64-pipe root cause of the FP32 component slowdown](docs/benchmarks/lp-fp64-pipe-root-cause.md)

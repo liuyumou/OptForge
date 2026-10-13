@@ -1,5 +1,29 @@
 # Known Failures and Limitations
 
+## Full expansion state: first exact-bin primitive construction fails resource admission
+
+[GPUP-STATE](../docs/benchmarks/lp-expansion-state-gpup-state.md) closes its bounded
+investigation under ADR-0036 with an admission refusal. The 320-bit dot and
+unprojected update constructions fit at 62/76 registers with no spills. However,
+the required full-range scalar FMA cannot inherit the sparse row's exponent window.
+Its first 3200-bit exact-bin implementation uses 255 registers, 152 stack bytes,
+296 spill-store bytes and 152 spill-load bytes in both 48/64-bit variants, exceeding
+the accepted 128-register/zero-spill gate. LOCAL=0 alone does not mean no spills.
+
+The independent CPU fixture validates 192 integer cases, 270 FMA cases, 64 update
+graphs and 48 log/exp cases. Compilation and instruction inspection run no GPU
+job. Neither complete expansion controller, snapshots/replay nor the proposed
+96-timing/12-profile study is implemented/admitted. No residual, timing, device
+differential/sanitizer or preset claim follows. This rejects the tested full-bin
+construction, not all guard/sticky or explicit-scratch alternatives; those need
+their own bounded contracts and accounting. No automatic hybrid fallback occurs.
+
+GPU charge is zero; all 16366 ledger events and SHA-256
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b remain exact.
+The log/exp oracle initially used insufficient absolute squaring resolution and
+was corrected to 2048 bits; failed generation/parser receipts are preserved too.
+GPUP-REFINE is next and needs its own accepted SPEC-0021 subset and allocation.
+
 ## Bounded exact executor: range refusals and no fresh-solve speedup
 
 [GPUP-EXEC](../docs/benchmarks/lp-exact-executor-gpup-exec.md) passes its bounded

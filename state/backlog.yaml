@@ -17,9 +17,9 @@ active_research_track: GPUP
 # Listed priority is distinct from depends_on: setup and optional COPT adapter
 # investigations are not prerequisites for quantization. See the roadmap handoff.
 # 2026-10-12: GPUP-REP accepts CPU reference semantics under ADR-0034.
-# 2026-10-13: GPUP-EXEC is complete under ADR-0035; GPUP-STATE needs its own contract.
+# 2026-10-13: GPUP-STATE closes with ADR-0036's resource admission refusal.
 # SPEC-0021 and full expansion state remain draft; no preset follows.
-next_ready_task: GPUP-STATE
+next_ready_task: GPUP-REFINE
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -242,13 +242,13 @@ tasks:
     acceptance: "ADR-0035; 2347-case Fraction oracle; exact bounded cached/uncached executor, 27/27 identical study pairs; full native, 58 regular device tests, six replays and four scoped sanitizers; 108 attempts retained, 94 endpoints verified, 58/96 timings certified; explicit discovery failures, range refusals and total-cost negative result"
   - id: GPUP-STATE
     title: Investigate persistent accurate state and stable numerical formulas
-    status: ready
+    status: complete
     depends_on: [GPUP-EXEC]
     specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
-    acceptance: "Accepted full primitive/state subset first; compensation and expansion masters with native FP64 controls; checkpoint every scalar/vector/scale; original residuals and charged full costs; retain a reasoned refusal if no format qualifies"
+    acceptance: "ADR-0036 bounded admission refusal: independent 192 integer/270 FMA/64 update/48 transcendental cases; full-bin FMA in both formats exceeds 128-register/zero-spill gate at 255 registers; no controller or study admitted, zero GPU, original ledger retained; full native gate"
   - id: GPUP-REFINE
     title: Accept and evaluate residual-driven LP refinement and anchored products
-    status: planned
+    status: ready
     depends_on: [GPUP-REP, GPUP-EXEC, GPUP-CONVERGENCE]
     specification: docs/specifications/SPEC-0021-lp-refinement.md
     acceptance: "Accept bounded transformation/inner-oracle/progress/resource contract; rational ranged/equality/box primal-dual maps, guarded anchors, failure/recovery/replay and full refresh costs; native FP64 outer control first; retain a bounded negative/refusal result if oracle assumptions fail"

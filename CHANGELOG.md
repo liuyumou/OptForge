@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased — GPUP-STATE admission refusal (2026-10-13)
+
+- Accept ADR-0036's bounded CPU/resource refusal under SPEC-0020. Independent
+  integer/Fraction fixtures cover retained updates, stable projections/norms,
+  full-range FMA and directed log/exp intervals, with explicit range/domain and
+  ambiguous-rounding outcomes.
+- Retain the first exact full-bin primitive construction: both expansion formats
+  require 255 registers and nonzero spills, exceeding the 128-register/zero-spill
+  gate. Smaller 320-bit integer/update probes fit but cannot qualify a controller.
+- Preserve source/executable/image/resource identities and failed CPU/provisioning
+  attempts. No solver, complete state/replay or 96-timing/12-profile study is
+  admitted; no accuracy/latency benefit or preset is claimed. GPU charge is zero.
+- GPUP-REFINE is next under its own required contract/allocation. Historical
+  runtime, host authority, ledger and all phase ceilings remain unchanged.
+
 ## Unreleased — GPUP-EXEC bounded exact executor (2026-10-13)
 
 - Implement ADR-0035 / the bounded SPEC-0020 exact-dot subset behind the research

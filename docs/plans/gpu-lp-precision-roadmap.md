@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved 2026-10-12 order; GPUP-EXEC complete under ADR-0035; GPUP-STATE is next and needs its accepted subset
+Status: approved 2026-10-12 order; GPUP-STATE closes with ADR-0036 admission refusal; GPUP-REFINE is next
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
@@ -43,7 +43,7 @@ is proposed; no new trials, seeds, defaults or GPU allowance are admitted.
 | --- | --- | --- |
 | 1 — GPUP-REP (complete) | CPU validation and acceptance of a bounded exact-storage/expansion contract; compare original bits with compact mixed tails, prove range/rounding and reject invalid formats. | Independent oracle, exact codec and primitive obligations, actual layout/memory analysis, accepted SPEC-0020 subset and explicit later resource contract. Zero GPU work in this slice. |
 | 2 — GPUP-EXEC | Lean operator executor: cache vector splits, remove avoidable per-nonzero recombination/conversion, preserve integer-guard meaning and test admitted launch schedules. | Same-arithmetic controls, generated instruction review, full range and sanitizer acceptance; both tuned and precision FP64 comparisons; packing-inclusive cost. |
-| 3 — GPUP-STATE | Persistent accurate/compensated state and stable scalar/proximal formulas. | Every live/control operation specified, full-state replay, accurate reductions/division/comparisons and independent residual validation. Native FP64 and scaled-pair controls retained. |
+| 3 — GPUP-STATE (complete admission refusal) | CPU scalar/primitive validation and rejection of the first exact full-bin construction under ADR-0036. Full controller/state remains gated. | Both expansion formats fail at 255 registers and nonzero spills. No device execution or comparative study; independently retained source/CPU/resource evidence and full native gate. |
 | 4 — GPUP-REFINE | Accept and test a bounded original-residual correction LP and anchored products, initially with native FP64 outer masters. | General equality/box transformation, inner oracle/progress contract, both orientations, range/failure tests and all refresh/correction costs. Expansion masters are a later combination, not a prerequisite. |
 | 5 — GPUP-ASSESS | Accept a bounded assessment scheduling policy after CPU common-trajectory replay. | Cheap indicators cannot certify; include delayed stopping, fixed-schedule controls, mandatory final host certification and charged recovery. |
 | 6 — GPUP-7 | Accept quantization/FP8 error-budget interface, then admitted uniform/selective sparse candidates. | Representation/arithmetic error in original units, canonical transpose, norm/step validity, bounded promotion and memory; reject insufficient-accuracy formats before timing. |
@@ -61,9 +61,9 @@ An investigation can close with a documented negative/admission result. Completi
 of GPUP-STATE or GPUP-REFINE does not require making its candidate a winning or
 mandatory component of GPUP-7/9.
 
-Current charge stays **17115.274617853 / 18002.574545061 GPU seconds**, with all
-16134 events and SHA-256
-60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserved.
+Current charge stays **17635.432015338 / 21602.574545061 GPU seconds**, with all
+16366 events and SHA-256
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b preserved.
 No new reservation follows from remaining headroom. Historical handoffs and
 budgets below describe their dated stages; this section and next_ready_task are
 the current handoff. All old racecheck/session/mixed-model gaps remain open.
@@ -319,11 +319,16 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Current handoff: GPUP-STATE under the
+Current handoff: GPUP-REFINE under the
 [2026-10-12 order](#current-design-order-2026-10-12).
 [GPUP-EXEC](../benchmarks/lp-exact-executor-gpup-exec.md) completes ADR-0035
 with explicit range refusals, preserved discovery failures and no total-cost win.
-GPUP-STATE requires its own accepted scope and reservation. GPUP-REP accepted CPU
+GPUP-STATE closes with the [bounded resource-refusal report](../benchmarks/lp-expansion-state-gpup-state.md)
+under ADR-0036. Full-range scalar FMA in its first exact-bin construction exceeds
+the 128-register/zero-spill gate in both formats. This is not an impossibility
+claim for alternatives and admits no full controller or study. GPU charge is zero;
+the 16366-event ledger and 17635.432015338 / 21602.574545061 seconds remain exact.
+GPUP-REFINE needs its own accepted SPEC-0021 subset and allocation. GPUP-REP accepted CPU
 reference contracts without runtime behavior. GPUP-CONVERGENCE is complete under
 ADR-0032/SPEC-0013; its [report](../benchmarks/lp-convergence.md) retains 176
 attempts and diagnoses work/cost amplification without selecting a preset.

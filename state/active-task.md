@@ -1,5 +1,62 @@
 # Active Task
 
+## GPUP-STATE (2026-10-13)
+
+Status: complete as the user-authorized bounded resource admission refusal.
+Objective: investigate persistent compensated and 64-significand-bit expansion
+state with a full expansion controller, stable formulas, complete checkpoints and
+independent original-model certification. Follow the user-accepted implementation
+plan; a demonstrated numerical/resource admission refusal is a valid bounded result.
+Acceptance: ADR-0036/SPEC-0020 subset; independent integer/rational primitive and
+transcendental oracles; complete operation inventory and state/replay contracts;
+checked layouts; full pinned-native gate. Only admitted device behavior proceeds
+to instruction/register/spill audit, device differentials, four sanitizers and the
+frozen 96-timing/12-profile development study. Preserve every failure and all costs.
+Likely files: ADR/spec/report and admission tooling/tests first; research modules
+in optimizer-lp, optimizer-lp-cuda and optimizer-experiment plus a separate CUDA
+image/protocol only after CPU admission. Resources: CPU 21600 seconds, four build
+jobs, 8 GiB host RSS, device resident/peak 1/2 GiB, new artifacts 32 GiB. The user
+explicitly allocated 3600 GPU seconds within existing authority: timing 2300
+screening, profiles 450 ablations, acceptance 850 repeatability. No increased
+campaign or phase ceiling. Use GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 under the
+shared host lease with deadline+6 reservation; no primary retries. Preserve
+17635.432015338 / 21602.574545061 cumulative GPU seconds and all 16366 events,
+ledger SHA-256 4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b.
+Original-model host authority and every historical identity remain. Commit locally
+after acceptance; do not push or start GPUP-REFINE. Retain evidence under
+artifacts/gpup-state-v1 and reviewed summaries under docs/benchmarks/data/state.
+
+Admission evidence: the independent seed-17004 fixture checks 192 integer
+operations, 270 full-range FMA cases, 64 unprojected update graphs and 48 log/exp
+cases. All 13 CPU admission regressions pass. The first direct exact-bin full-FMA
+construction in both formats uses 255 registers, a 152-byte stack and 296/152
+spill-store/load bytes, exceeding the 128-register/zero-spill gate. Bounded
+integer/update probes fit at 62/76 registers with no spills; no full controller,
+state/replay, runtime selector or 96-timing/12-profile study is admitted.
+The verified construction's source SHA-256 is
+ae7eedf7e53d2a6e5b5ec70333a7a1cd72146431dde9ca676f9e8236644eb3b7;
+image SHA-256 is
+14bdccf1e246b6966bafc4d33a3aa59925a50a567b643d31c58f1052e1781c8d.
+All frozen CPU/source/image/resource files independently reverify. GPU charge
+is zero and the exact ledger above remains. Alternative guard/sticky or explicit
+scratch constructions are not proved impossible and retain separate gates.
+Initial full pinned-native `CARGO_BUILD_JOBS=4 bash tools/check.sh` passes all Rust/native,
+dependency and committed-record replay gates, 270 Python tests, 127 documentation
+pages and smoke. GPU opt-in was unset and native acceptance was not skipped.
+The measured gate took 128.209268496 elapsed seconds and 175.761509 CPU seconds;
+maximum recorded child RSS was 1663467520 bytes.
+The log/resource receipts are under artifacts/gpup-state-v1. The optional
+/usr/bin/time launcher was absent; that failure is preserved and Python's standard
+resource accounting was used without provisioning another dependency.
+Documentation/acceptance completion is followed by a final exact-source native
+gate and artifact/ledger audit before the local commit. The next task is
+GPUP-REFINE under its own accepted contract/allocation; it is not started here.
+Final CPU-only review rejects duplicate/boolean evidence fields before private
+archive access and includes every probed kernel in the aggregate resource gate.
+The frozen construction, image, numerical results and refusal are unchanged.
+Both added source-only regressions pass; final source acceptance is retained in
+artifacts/gpup-state-v1/native-reviewed.log and native-reviewed-resources.json.
+
 ## GPUP-EXEC PR 18 review and integration (2026-10-13)
 
 Status: self-review, repairs and local acceptance complete; user authorized
