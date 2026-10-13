@@ -22,15 +22,27 @@ def check_archive(directory,value):
     if images['lp_pdhg_exec.cubin']!=identity['code_object_sha256']:raise ValueError('exact image identity differs')
     gate=read_json(directory/'native-gate.json')
     if not gate['native'] or gate['source_tree_sha256']!=identity['source_tree_sha256']:raise ValueError('native source gate differs')
+    review=read_json(ROOT/'docs/benchmarks/data/exec/review-corrections.json')
+    corrections={item['path']:item for item in review['files']}
+    allowed={'tools/benchmark_lp_exec.py','tools/lp_exec_accept.py','tools/report_lp_exec.py'}
+    if review['identity']!='gpup-exec-review-corrections-v1' or review['source_tree_sha256']!=identity['source_tree_sha256'] or len(corrections)!=len(review['files']) or not set(corrections)<=allowed:raise ValueError('review correction scope differs')
+    changed=set()
     with tarfile.open(directory/'source.tar') as archive:
         members=archive.getmembers();names=[m.name for m in members]
         if names!=sorted(set(names)) or any(not m.isfile() or Path(m.name).is_absolute() or '..' in Path(m.name).parts for m in members):raise ValueError('source archive shape differs')
         digest=hashlib.sha256()
         for m in members:
             data=archive.extractfile(m).read();digest.update(m.name.encode()+b'\0'+data+b'\0')
-            # Measurement workers and arithmetic must still be inspectable as measured.
-            if m.name.startswith(('crates/','cuda/')) and (ROOT/m.name).read_bytes()!=data:raise ValueError('measured runtime source differs: '+m.name)
+            # Numerical workers stay byte-identical; CPU tooling corrections are
+            # explicit and bound to both the measured and reviewed source bytes.
+            if m.name.startswith(('crates/','cuda/','tools/','schemas/','benchmarks/')) or m.name in ['Cargo.toml','Cargo.lock']:
+                current=ROOT/m.name
+                if current.read_bytes()!=data:
+                    correction=corrections.get(m.name)
+                    if not correction or correction['measured_sha256']!=hashlib.sha256(data).hexdigest() or correction['reviewed_sha256']!=file_hash(current):raise ValueError('undeclared measured source change: '+m.name)
+                    changed.add(m.name)
         if digest.hexdigest()!=identity['source_tree_sha256']:raise ValueError('source archive content identity differs')
+    if changed!=set(corrections):raise ValueError('review corrections differ from changed source')
     return identity
 
 def check_trial(value,job,trial,directory,identity,events):
@@ -42,6 +54,7 @@ def check_trial(value,job,trial,directory,identity,events):
     if len(rows)!=2 or rows[0]['kind']!='reserve' or rows[1]['kind'] not in ['settle','recover']:raise ValueError('trial reservation/settlement differs')
     if any(e['resource']!='gpu' or e['phase']!=value['categories'][job['category']]['phase'] or e['reserved_ns']!=(effective(value,job)[2]+6)*10**9 for e in rows):raise ValueError('trial ledger phase/limit differs')
     charge=rows[1]['charged_ns']
+    if rows[1]['kind']=='recover' and (trial['status']!='interrupted' or charge!=rows[0]['reserved_ns']):raise ValueError('recovered reservation requires interrupted trial and full charge')
     worker=None
     if trial['artifacts']['worker']:
         worker=read_json(checked_reference(directory,trial['artifacts']['worker']))
@@ -51,6 +64,10 @@ def check_trial(value,job,trial,directory,identity,events):
     elif charge!=rows[0]['reserved_ns']:raise ValueError('missing worker was undercharged')
     if trial.get('charged_ns',charge)!=charge:raise ValueError('trial charge receipt differs')
     return worker
+
+def check_assessment(trial,assessment):
+    if trial['status']=='interrupted' and trial['assessment'] is None:return
+    if assessment!=trial['assessment']:raise ValueError('recorded assessment differs from independent verifier')
 
 def check_discovery_image(value,directory,identity,acceptance):
     # Bind the restored discovery-only dependency to the immutable acceptance
@@ -87,7 +104,10 @@ def report(value,directory):
                 assessment=verify_endpoint(value,job,directory,identity);verified+=1;e=read_json(directory/(key+'.endpoint.json'));e=e.get('endpoint',e)
             except Exception:
                 if trial['status'] not in ['invalid_evidence','interrupted']:raise
-        if assessment!=trial['assessment']:raise ValueError('recorded assessment differs from independent verifier')
+        # A crash after the endpoint was written can precede coordinator
+        # assessment. Recheck surviving bytes without making a recovered attempt
+        # eligible for primary timing or changing its conservative ledger charge.
+        check_assessment(trial,assessment)
         exact=job['configuration']['backend']=='lp-exec-v1'
         eligible=bool(assessment and assessment['classification']=='certified_success' and worker and worker['reason']=='completed' and worker['returncode']==0 and trial['status']=='completed' and (e['witness']['status']=='accepted' if exact else e['record']['backend']==job['configuration']['backend']))
         instance=job['instance']['id'];config=job['configuration']['id'];kind=job['kind']

@@ -176,7 +176,7 @@ with zero errors. These receipts do not close the historical tuned_cases
 racecheck gap.
 
 The full pinned-native gate passes, with 253 Python contracts, committed-record
-replay, documentation and smoke. The regular device suites pass 58 tests. Three
+replay, documentation and smoke. The regular device suites pass 66 tests (14 driver, 6 scheduling, 46 LP). Three
 8-update cache pairs and six same-device replays pass, and the independent report
 re-verifies all six endpoints and six replays using the frozen executable. Ten
 source-only GPUP-EXEC tests cover budgets, crash accounting, complete request
@@ -192,6 +192,26 @@ CPU-only post-study repairs cover the discovery-image freeze precondition,
 nonzero child exit status, artifact-free malformed-budget rejection, and complete
 acceptance request identities. Measured executables, numerical sources, primary
 receipts and settings remain exactly as archived.
+
+PR self-review reproduced missing acceptance bindings for the image directory,
+attempt key, executable and selected device, plus a check that admitted empty
+regular suites. The verifier now binds those fields to the archived files and
+requires the actual 14/6/46 regular-test counts; the earlier prose total of 58 is
+corrected to 66. Recovery independently verifies complete surviving endpoints
+without promoting interrupted attempts into primary timings or reducing their
+full crash reservation. Six new CPU regression tests retain these cases and
+prevent source-review exceptions from admitting numerical changes.
+
+The [review correction receipt](data/exec/review-corrections.json) binds every
+changed measurement/report tool to its measured and reviewed SHA-256; numerical
+Rust/CUDA, benchmark inputs, schemas and dependencies remain byte-identical.
+The independent report is rerun after these corrections. Review reproductions,
+validation logs, artifact inventories and recovery bundles are retained under
+artifacts/gpup-exec-pr-review-20261013; no additional GPU work is used.
+The final pinned-native review gate passes 259 Python contracts and all Rust,
+native, dependency, record, documentation and smoke checks. All 16 executor
+contracts pass without campaign artifacts. The hardened report is byte-for-byte
+identical to the completed study report; all 1153 catalog references verify.
 
 Task consumption is **520.157397485 GPU seconds**: timing 431.684266725/2300,
 profiles 36.003675982/450 and acceptance 52.469454778/850. Cumulative consumption

@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "measured_sha256": "f0547b765bbf2467ba6fa41fdb8200ff5ef9a3cbec7635204be6dfb273fd534c",
+      "path": "tools/benchmark_lp_exec.py",
+      "reviewed_sha256": "c6fd7ed23f505e4f589d93591cf25af8d2ddad4cba9ad81fd1b2990954a2585d"
+    },
+    {
+      "measured_sha256": "ef1921e47b5c3b7eb6e2d324a195d758f1c5a1108a1d61f7f1ec1bf3c36199f2",
+      "path": "tools/lp_exec_accept.py",
+      "reviewed_sha256": "bb01912904062ba09e25d32822e9e74321d19e33d9723405fb3eaa2c3f122218"
+    },
+    {
+      "measured_sha256": "dbef652b97777a69fca494547b1d16265d078555b426643536d4e8b9086d7db2",
+      "path": "tools/report_lp_exec.py",
+      "reviewed_sha256": "2554c5b5a0c0a8fb22aa305e57a326942c44d8584d59281c5bdcb1b4b0aaee0c"
+    }
+  ],
+  "identity": "gpup-exec-review-corrections-v1",
+  "scope": "CPU-only freeze preconditions, child-exit classification, acceptance bindings, recovered endpoint reporting and exact source-difference checks; all measured Rust/CUDA sources and executables remain unchanged.",
+  "source_tree_sha256": "03df0db2362dee7284deb7d10d08dda60b36eb14607164f71a3ab1e818c1350e"
+}

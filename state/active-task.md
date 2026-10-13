@@ -1,5 +1,58 @@
 # Active Task
 
+## GPUP-EXEC PR 18 review and integration (2026-10-13)
+
+Status: self-review, repairs and local acceptance complete; user authorized
+protected merge after final GitHub checks. Integration/cleanup receipts are retained
+under artifacts/gpup-exec-pr-review-20261013.
+Objective: open the completed bounded executor as its own PR, reproduce and fix
+any actionable review findings, and preserve useful raw evidence and recovery
+references during safe cleanup. Merge the reviewed PR after required checks pass,
+then verify main ancestry before removing the integrated task branch.
+Acceptance: numerical, lifecycle and independent evidence review; focused
+regressions for any defects; full pinned-native `bash tools/check.sh`; final diff,
+GitHub checks and clean published branch; verified artifact inventory and recovery
+bundle. Preserve the measured study and its negative result, including failures.
+Likely files: executor runtime/tests/tooling and report if review requires changes,
+plus this task record. Resources: two CPU-hours, four build jobs, zero GPU jobs and
+no added allowance. Preserve cumulative 17635.432015338 / 21602.574545061 GPU
+seconds and the 16366-event ledger SHA-256
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b.
+Keep artifacts/gpup-exec-v1, all historical evidence and unrelated worktrees.
+Review receipts and recovery material belong in artifacts/gpup-exec-pr-review-20261013.
+Do not start GPUP-STATE. Delete the task branch only after verified integration
+and a checked source-recovery bundle; preserve unrelated worktrees.
+
+
+Acceptance evidence: [PR 18](https://github.com/liuyumou/OptForge/pull/18) was opened
+as a bounded GPUP-EXEC change. Self-review reproduced five missing acceptance
+checks (image directory, attempt key, executable, selected device and regular-test
+counts), rejection of complete recovered endpoints, and a recovered-reservation
+promotion gap. Six CPU regression tests now cover these cases plus the closed
+source-correction scope. No remaining actionable finding was identified within
+the admitted cold-solve contract. All 166 measured Rust/CUDA files remain exact.
+
+The full pinned-native gate passes 259 Python tests, Rust/native and dependency
+checks, committed-record replay, 125 documentation pages and smoke. All 16 executor
+tooling tests also pass in an isolated source copy with hash-checked input fixtures
+and no campaign artifacts. The hardened independent report is byte-for-byte equal
+to the completed report: all 108 attempts, 94 verified endpoints and 58/96 certified
+timings remain, with all failures and negative results preserved. The retained
+regular device log has 14 driver + 6 scheduling + 46 LP tests; the earlier prose
+count of 58 is corrected to 66. No new GPU work ran; the complete ledger and its
+historical prefix retain the hashes and consumption above.
+
+Every one of the 1153 original artifact references verifies. A compressed recovery
+copy preserves 1198 files / 360328297 uncompressed bytes, including the original
+source archives, executables, images, endpoints, failures, logs, ledgers and reviewed
+summaries. Its 80793840-byte archive has SHA-256
+c807b6ac2074d5377d86408b164c38991f9b813613d6d21be68cb979229823e3.
+The original bfe88c3 source bundle is verified; final source, CI, merge ancestry and
+owned-scratch cleanup receipts are kept beside it. Original raw artifacts and
+unrelated worktrees remain in place. The user explicitly approved finishing these
+repository commands outside the sandbox after automatic approval review timed out;
+the ordinary sandbox could not create a process namespace.
+
 ## GPUP-EXEC (2026-10-13)
 
 Status: complete; bounded implementation, device acceptance, frozen study and
@@ -44,7 +97,7 @@ No fresh-solve improvement over tuned FP64 or supported preset is selected.
 The 2347-case independent Fraction fixture reproduces byte-for-byte. Full
 pre-device native acceptance passes 250 Python contracts and all Rust/native,
 dependency, committed-record, documentation and smoke checks. The device oracle
-checks 2346 shape-admitted cases in both cache modes. All 58 regular device tests,
+checks 2346 shape-admitted cases in both cache modes. All 66 regular device tests,
 three new device tests, three fixed-work cache pairs, six same-device replays and
 four scoped sanitizers pass. Decode/sparse paths use 14/39 registers, zero spills
 and no native FP64 arithmetic. Measured source SHA-256 is

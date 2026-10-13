@@ -13,6 +13,10 @@
 - Require all discovery images before future freezes; repair source-only budget
   rejection, child-failure classification and complete acceptance identity checks.
   Full native, regular device, replay and four scoped sanitizer gates pass.
+- PR self-review binds acceptance environment, executables and selected device,
+  requires all 66 regular tests, and preserves independently verified recovered
+  endpoints without promoting interrupted timings. Exact tooling correction
+  hashes and six CPU regressions preserve the measured runtime and results.
 - Preserve all historical identities/ledger bytes. Task GPU charge is
   520.157397485 seconds; cumulative 17635.432015338 / 21602.574545061 seconds.
   GPUP-STATE is the next separately gated contract task.

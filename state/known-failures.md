@@ -28,6 +28,13 @@ requires the entire historical prefix. Independent acceptance reporting now bind
 every request identity and re-verifies all six project endpoints and six replays
 with the frozen executable; measured workers and evidence are unchanged.
 
+PR 18 self-review binds acceptance commands, archived executables/images and the
+selected device, and requires all 66 regular tests (the previous prose said 58).
+Recovered complete endpoints are independently verified while their interrupted
+status and conservative crash charges remain. Six CPU regressions cover these
+checks and keep the declared source-correction scope limited to tooling. The
+measured runtime, raw results and GPU ledger are unchanged.
+
 ## CPU expansion range and preparation defects corrected in PR 17
 
 The original candidate and rational oracle both accepted an overflowing 2-norm as

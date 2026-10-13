@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import subprocess
 import struct
+import re
 from benchmark_lp import source_identity,reference
 from benchmark_lp_exec import instances
 from lp_exec_budget import protocol,validate_gate_command,ledger_for
@@ -60,10 +61,20 @@ def check_acceptance(value,identity):
         if gate['images']['lp_pdhg_exec.cubin']['sha256']!=identity['code_object_sha256']:raise ValueError('acceptance archived image differs')
         command=gate['command'][3:]
         validate_gate_command(gate['gate'],command)
+        archive=directory/'sources'/identity['source_tree_sha256']
+        expected_environment=['/usr/bin/env','AI_OPTIMIZER_CUDA_DIR='+str(archive/'images'),'AI_OPTIMIZER_EXEC_ACCEPT_KEY='+request['prefix']]
+        if gate['command'][:3]!=expected_environment:raise ValueError('acceptance command environment differs')
+        if not request['prefix'].startswith(value['id']+'-accept-') or request['directory']!=str(directory):raise ValueError('acceptance command attempt differs')
+        for name,ref in gate['images'].items():
+            if checked_reference(ROOT,ref)!=archive/'images'/name:raise ValueError('acceptance image archive differs')
+        executed=command[2:] if gate['gate']=='regular' else [command[4] if gate['gate']=='project' else command[2]]
+        archived=[checked_reference(ROOT,ref) for ref in gate['binaries']]
+        if archived!=[Path(p) for p in executed] or any(p.parent!=archive for p in archived):raise ValueError('acceptance executable archive/command differs')
+        if worker['activity']['device']!=value['device']:raise ValueError('acceptance worker device differs')
         stdout=checked_reference(ROOT,gate['stdout']).read_text();stderr=checked_reference(ROOT,gate['stderr']).read_text()
         if 'SKIP ' in stdout+stderr:raise ValueError('acceptance skipped device coverage')
         if gate['gate'] in ['oracle','memcheck','racecheck','initcheck','synccheck'] and '3 passed; 0 failed' not in stdout:raise ValueError('new device suite did not run all cases')
-        if gate['gate']=='regular' and stdout.count('test result: ok.')!=3:raise ValueError('regular suites incomplete')
+        if gate['gate']=='regular' and re.findall(r'test result: ok\. (\d+) passed; 0 failed;',stdout)!=['14','6','46']:raise ValueError('regular suites incomplete')
         if worker['reason']!='completed'  or worker['returncode']!=0 or worker['leased_ns']>(request['solve_seconds']+6)*1000000000:raise ValueError('acceptance worker failed')
         if gate['gate']=='project':
             project=read_json(checked_reference(ROOT,gate['project']))

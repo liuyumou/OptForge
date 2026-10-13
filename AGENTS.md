@@ -9,7 +9,7 @@ Current handoff (2026-10-13): GPUP-EXEC is complete under accepted ADR-0035 and
 the bounded exact-dot subset of [SPEC-0020](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md).
 Its [report](docs/benchmarks/lp-exact-executor-gpup-exec.md) retains all 108 attempts,
 independently verifies 94 endpoints and certifies 58/96 timings. All 27 cached/
-uncached study pairs match bitwise. Full native, 58 regular device tests, oracle,
+uncached study pairs match bitwise. Full native, 66 regular device tests, oracle,
 six replays and four scoped sanitizers pass. Fourteen initial FP64 controls failed
 discovery because the archive omitted an unchanged dependency; the repair and
 failed attempts are retained without retries. Scheduling/scaling/mixed exact
