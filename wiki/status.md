@@ -19,7 +19,9 @@ ADR-0035: bounded exact sparse products, 108 retained attempts, 94 independently
 verified endpoints and 58/96 certified timings. No total-cost win or preset is
 selected. [GPUP-STATE](../docs/benchmarks/lp-expansion-state-gpup-state.md) closes
 with ADR-0036's resource admission refusal: the first full-bin FMA primitive uses
-255 registers and nonzero spills in both expansion formats. No full controller,
+255 registers and nonzero spills in both expansion formats. PR 19's compact
+full-range FMA passes at 40 registers and zero spills, with 5900 additional
+independent cases per construction and host UBSan checks. No full controller,
 state/replay or comparative study is admitted. GPU charge is zero. GPUP-REFINE
 is next and needs its own accepted contract/allocation.
 
@@ -242,7 +244,7 @@ acceptance 234.427924688/300; cumulative 17115.274617853 /
 and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
 That study handed off to GPUP-7; the 2026-10-12 order inserted GPUP-REP, which is
 now complete, followed by GPUP-EXEC under ADR-0035. GPUP-STATE closes with the
-bounded resource admission refusal under ADR-0036; GPUP-REFINE is next and
+bounded resource admission refusal and compact FMA review under ADR-0036; GPUP-REFINE is next and
 requires its own accepted numerical/resource contract. Current GPU consumption
 is 17635.432015338 / 21602.574545061 seconds; the 16366-event ledger preserves
 every historical prefix. No supported preset follows.

@@ -13,6 +13,7 @@ from pathlib import Path
 import random
 import re
 import subprocess
+import sys
 
 from lp_state_oracle import FORMATS, expected, power2, round_fraction
 from lp_expansion_oracle import primitive_result
@@ -24,6 +25,11 @@ FIXTURE = ROOT / "tests/regression/lp-state-admission-v1.json"
 KERNELS = ["state_integer_p48", "state_integer_p64", "state_update_p48",
            "state_update_p64", "state_full_fma_p48", "state_full_fma_p64"]
 SEED = 17004
+FROZEN_FILES = {"compiler.log", "instructions.sass", "integer-host",
+                "integer-probe.cubin", "resources.txt"} | {
+    "sources/" + name for name in [SOURCE.name, HARNESS.name, FIXTURE.name,
+        "lp_state_admission.py", "lp_state_oracle.py", "lp_state_candidate.py",
+        "lp_expansion_oracle.py", "lp_expansion_candidate.py"]}
 
 
 def encoded(value):
@@ -72,9 +78,15 @@ def validate_record_header(record):
     if type(record["files"]) is not dict or type(record["kernels"]) is not dict or set(record["kernels"]) != set(KERNELS):
         raise ValueError("admission inventory")
     for item in record["kernels"].values():
+        if type(item) is not dict:
+            raise ValueError("admission kernel fields")
         for key in ["registers", "stack_bytes", "local_bytes", "shared_bytes", "spill_store_bytes", "spill_load_bytes"]:
             if type(item.get(key)) is not int or item[key] < 0:
                 raise ValueError("admission resource integer field")
+    if set(record["files"]) != FROZEN_FILES or any(
+            type(digest) is not str or not re.fullmatch(r"[0-9a-f]{64}", digest)
+            for digest in record["files"].values()):
+        raise ValueError("admission file inventory")
 
 
 def sha(path):
@@ -182,18 +194,58 @@ def verify_host(binary, document):
     return {key: len(document[key]) for key in ["integer_cases", "fma_cases", "update_cases"]}
 
 
-def resource_audit(resources, compiler_log, sass):
+def verify_transcendentals(source_directory, document):
+    """Execute the frozen candidate, then compare with independent fixture values.
+
+    Isolated Python prevents the current checkout or PYTHONPATH from supplying
+    the candidate. Historical v1 counts are preserved; this is an additional
+    verification obligation, not a rewrite of the frozen admission receipt.
+    """
+    script = """
+import json, sys
+sys.path.insert(0, sys.argv[1])
+import lp_expansion_candidate as arithmetic
+import lp_state_candidate as candidate
+formats = {"matched-fp64": arithmetic.BINARY64,
+           "compensated-pair": candidate.PAIR48,
+           "expansion64": arithmetic.EXPANSION64}
+results = []
+for case in json.load(sys.stdin):
+    function = {"ln": candidate.logarithm, "exp": candidate.exponential}[case["operation"]]
+    results.append(function(arithmetic.load_rounded(case["input"]),
+                            formats[case["format"]]).document())
+print(json.dumps(results, sort_keys=True, separators=(",", ":")))
+"""
+    cases = document["transcendental_cases"]
+    process = subprocess.run([sys.executable, "-I", "-B", "-c", script,
+                              str(Path(source_directory).resolve())],
+                             input=encoded(cases), text=True, capture_output=True,
+                             check=True, timeout=120)
+    if process.stdout.strip() != encoded([case["result"] for case in cases]).strip():
+        raise ValueError("independent transcendental result differs")
+    return len(cases)
+
+
+def resource_audit(resources, compiler_log, sass, kernels=KERNELS):
     inventory = {}
-    for name in KERNELS:
+    for name in kernels:
         props = re.search(r"Function " + name + r":\s+REG:(\d+) STACK:(\d+) SHARED:(\d+) LOCAL:(\d+)", resources)
         spills = re.search(r"Function properties for " + name + r"\s+(\d+) bytes stack frame, (\d+) bytes spill stores, (\d+) bytes spill loads", compiler_log)
         body = re.search(r"Function : " + name + r"\s+(.*?)(?=Function :|\Z)", sass, re.S)
         if not props or not spills or not body:
             raise ValueError("incomplete generated-code receipt: " + name)
-        instructions = re.findall(r"/\*[0-9a-f]+\*/\s+(?:@!?P\d+\s+)?([A-Z][A-Z0-9_.]*)", body.group(1))
-        if not instructions or any(re.fullmatch(r"[RP]\d+", item) for item in instructions):
+        instructions = []
+        # Parse every addressed instruction, including uniform predicates. Never
+        # treat an unrecognized line as absence of a forbidden operation.
+        for line in re.findall(r"^\s*/\*[0-9a-fA-F]+\*/([^\n]*)", body.group(1), re.M):
+            instruction = re.fullmatch(
+                r"\s*(?:@!?(?:U?P\d+|U?PT)\s+)?([A-Z][A-Z0-9_.]*)(?:\s+[^;]*)?;.*", line)
+            if not instruction or re.fullmatch(r"U?[RP]\d+", instruction.group(1)):
+                raise ValueError("empty instruction or unparsed instruction receipt")
+            instructions.append(instruction.group(1))
+        if not instructions:
             raise ValueError("empty instruction receipt")
-        forbidden = sorted({i for i in instructions if i.startswith(("DADD", "DMUL", "DFMA", "DSETP", "DSET", "DMNMX", "CALL", "JCAL")) or re.search(r"(?:F2F|I2F|F2I).*F64", i)})
+        forbidden = sorted({i for i in instructions if i.startswith(("DADD", "DMUL", "DFMA", "DSETP", "DSET", "DMNMX", "DMMA", "CALL", "JCAL")) or re.search(r"(?:F2F|I2F|F2I).*F64", i)})
         registers, stack, shared, local = map(int, props.groups())
         compiler_stack, stores, loads = map(int, spills.groups())
         if compiler_stack != stack:
@@ -241,7 +293,9 @@ def verify_admission(path, cuobjdump="/usr/local/cuda/bin/cuobjdump"):
         raise ValueError("compiled executable/image binding differs")
     if encoded(fixture()) != frozen_fixture.read_text():
         raise ValueError("independent fixture does not reproduce")
-    counts = verify_host(root / "integer-host", json.loads(frozen_fixture.read_text()))
+    document = read_document(frozen_fixture)
+    counts = verify_host(root / "integer-host", document)
+    verify_transcendentals(root / "sources", document)
     inventory = resource_audit((root / "resources.txt").read_text(),
                                (root / "compiler.log").read_text(), (root / "instructions.sass").read_text())
     resources = subprocess.check_output([cuobjdump, "--dump-resource-usage", str(root / "integer-probe.cubin")], text=True)
@@ -296,6 +350,7 @@ def main():
     subprocess.run(["g++", "-O2", "-Werror", "-Wno-unknown-pragmas", "-std=c++17",
                     str(frozen / HARNESS.name), "-o", str(binary)], check=True, timeout=120)
     cpu_counts = verify_host(binary, json.loads(FIXTURE.read_text()))
+    verify_transcendentals(frozen, read_document(FIXTURE))
     command = [args.nvcc, "--cubin", "-std=c++17", "-arch=sm_120", "-O3", "-lineinfo",
                "-fmad=false", "-ftz=false", "--ptxas-options=-v", str(frozen / SOURCE.name), "-o", str(image)]
     compile_result = subprocess.run(command, capture_output=True, text=True, timeout=300)

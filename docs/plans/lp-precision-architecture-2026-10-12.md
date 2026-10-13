@@ -35,8 +35,9 @@ expansion state, the alternative compact tails and SPEC-0021 methods remain
 proposals with their own acceptance obligations. GPUP-STATE subsequently closes
 with [ADR-0036's resource refusal](../benchmarks/lp-expansion-state-gpup-state.md):
 the first full-range exact-bin FMA construction exceeds register/spill limits in
-both expansion formats. Full controller/state remains unimplemented; alternative
-constructions are not proved impossible. GPUP-REFINE is next.
+both expansion formats. PR 19's compact full-range FMA fits at 40 registers and
+zero spills, so the first failure is construction-specific. Full controller/state
+remains unimplemented; device acceptance is separate. GPUP-REFINE is next.
 
 ## Implemented foundation and evidence that motivates change
 

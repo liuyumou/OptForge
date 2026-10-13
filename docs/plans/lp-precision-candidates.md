@@ -16,7 +16,9 @@ components and interactions. GPUP-REP CPU validation is complete under ADR-0034;
 GPUP-EXEC is complete under ADR-0035 with a bounded negative total-cost result.
 GPUP-STATE's first full-bin construction fails the resource gate under ADR-0036;
 its [report](../benchmarks/lp-expansion-state-gpup-state.md) retains a bounded
-admission refusal. Full state and alternative constructions remain gated, and
+admission refusal. PR 19's compact full-range FMA fits at 40 registers and zero
+spills, with 5900 additional independent cases per construction. Full state and
+device execution remain gated, and
 GPUP-REFINE is next under its own contract/allocation. All proposals retain
 original-model 1e-9 acceptance.
 

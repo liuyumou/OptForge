@@ -1,6 +1,6 @@
 # Known Failures and Limitations
 
-## Full expansion state: first exact-bin primitive construction fails resource admission
+## Full expansion state: first construction fails; compact scalar alternative fits
 
 [GPUP-STATE](../docs/benchmarks/lp-expansion-state-gpup-state.md) closes its bounded
 investigation under ADR-0036 with an admission refusal. The 320-bit dot and
@@ -9,6 +9,22 @@ the required full-range scalar FMA cannot inherit the sparse row's exponent wind
 Its first 3200-bit exact-bin implementation uses 255 registers, 152 stack bytes,
 296 spill-store bytes and 152 spill-load bytes in both 48/64-bit variants, exceeding
 the accepted 128-register/zero-spill gate. LOCAL=0 alone does not mean no spills.
+
+PR 19 review resolves this particular scalar obstacle with a full-range compact
+FMA: both formats compile to 40 registers and zero stack/spills under the same
+options and gate. The rounding proof and 5900 additional independent cases per
+construction pass, including host UBSan and the original FMA cases. The original
+refusal remains exact, but no longer supports stopping on scalar resource grounds.
+Device correctness, division/root/transcendental implementations, the complete
+controller and original-model error budgets are still open. No performance or
+whole-controller resource result follows from a standalone scalar kernel.
+
+The review also repairs skipped uniform-predicated instructions and missing
+frozen transcendental execution in the archive verifier. The complete file
+inventory is now required. Corruption and isolated-archive regressions pass;
+the original archive re-verifies unchanged. New evidence and the preliminary
+freeze with missing verifier-only imports remain under
+artifacts/gpup-state-pr-review-20261013.
 
 The independent CPU fixture validates 192 integer cases, 270 FMA cases, 64 update
 graphs and 48 log/exp cases. Compilation and instruction inspection run no GPU

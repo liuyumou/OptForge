@@ -11,7 +11,12 @@ Its [report](docs/benchmarks/lp-expansion-state-gpup-state.md) independently che
 192 integer, 270 FMA, 64 update and 48 transcendental cases. The first full-range
 exact-bin FMA construction in both expansion formats uses 255 registers and
 nonzero spills, exceeding the accepted 128-register/zero-spill gate. Bounded
-320-bit probes fit but do not qualify the complete family. No controller,
+320-bit probes fit but do not qualify the complete family. PR 19 review adds a
+full-range compact FMA: 40 registers and zero spills in both formats, with 5900
+additional independent cases per construction and host UBSan acceptance. The
+first refusal remains exact but no longer establishes a scalar resource obstacle.
+The instruction audit and frozen transcendental verification are repaired.
+No controller,
 state/replay or comparative study is admitted, and no format-impossibility or
 performance claim follows. GPU charge is zero; the 16366-event ledger and
 17635.432015338 / 21602.574545061 seconds below remain exact. GPUP-REFINE is next

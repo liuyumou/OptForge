@@ -18,6 +18,7 @@ active_research_track: GPUP
 # investigations are not prerequisites for quantization. See the roadmap handoff.
 # 2026-10-12: GPUP-REP accepts CPU reference semantics under ADR-0034.
 # 2026-10-13: GPUP-STATE closes with ADR-0036's resource admission refusal.
+# PR 19 review retains it and adds a compact full-range scalar FMA resource pass.
 # SPEC-0021 and full expansion state remain draft; no preset follows.
 next_ready_task: GPUP-REFINE
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
@@ -245,7 +246,7 @@ tasks:
     status: complete
     depends_on: [GPUP-EXEC]
     specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
-    acceptance: "ADR-0036 bounded admission refusal: independent 192 integer/270 FMA/64 update/48 transcendental cases; full-bin FMA in both formats exceeds 128-register/zero-spill gate at 255 registers; no controller or study admitted, zero GPU, original ledger retained; full native gate"
+    acceptance: "ADR-0036 bounded admission investigation: original 192 integer/270 FMA/64 update/48 transcendental cases and full-bin refusal at 255 registers retained; PR 19 compact full-range FMA fits at 40 registers/zero spills with 5900 additional cases per construction and host UBSan; instruction/frozen-candidate verifier fixes; no controller or study admitted, zero GPU, original ledger retained; full native gate"
   - id: GPUP-REFINE
     title: Accept and evaluate residual-driven LP refinement and anchored products
     status: ready

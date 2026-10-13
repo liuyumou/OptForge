@@ -17,7 +17,9 @@ snapshot below for current accounting. The remaining component/interaction plan
 still grants no workload, behavior or reservation. GPUP-STATE's bounded
 [admission refusal](lp-expansion-state-gpup-state.md) under ADR-0036 executes no
 GPU jobs: its first full-bin primitive fails register/spill limits in both
-formats. Full state and alternatives remain gated. GPUP-REFINE is next and
+formats. PR 19's compact full-range FMA fits at 40 registers and zero spills,
+resolving the scalar obstacle in a CPU/compile-only challenge. Full state and
+device execution remain gated. GPUP-REFINE is next and
 requires its own accepted contract and allocation.
 
 ## Questions and primary endpoint

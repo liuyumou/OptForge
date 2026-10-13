@@ -84,7 +84,7 @@ latency, work, conversion/control costs, memory and failures. A refusal report
 must identify the exact failed gate and retain its counterexample; it cannot
 claim runtime/device acceptance or measured solve performance.
 
-## Admitted result and rejected construction
+## Original admitted result and rejected construction
 
 Close this bounded investigation with the [resource-refusal report](../benchmarks/lp-expansion-state-gpup-state.md).
 CPU integer/rational validation checks 192 restoring integer operations, 270
@@ -113,3 +113,45 @@ register retention; they need a separately bounded proof, implementation and
 traffic/resource test. A narrowed scalar window would be a new numerical subset.
 Neither such alternative nor a hybrid FP64 controller is substituted here.
 GPUP-REFINE is the next priority and needs its own accepted contract/allocation.
+
+## PR 19 review experiment (2026-10-13)
+
+The user's request to challenge and improve the negative result authorizes one
+bounded CPU/compile-only alternative, separately identified from the frozen
+full-bin construction. It changes no format, rounding, register/spill threshold,
+solver behavior or GPU allocation. Use at most 7200 CPU seconds, four build jobs,
+8 GiB host RSS and 4 GiB new artifacts; execute no device workload.
+
+Test a compact FMA that aligns the exact 128-bit product and 64-bit addend at
+`max(product_unit, addend_unit) - 160`. Each retained magnitude fits 288 bits;
+one extra carry fits in the existing 320-bit container. At most one operand
+needs a right shift. Replace its discarded nonzero tail by a low odd bit.
+If this is inexact, the other term is divisible by 2^160 and the shifted term
+is below 2^127, so cancellation cannot lower the sum's leading bit below 159.
+For precision at most 64, final rounding therefore discards at least 96 bits
+(more at gradual underflow). The integer surrogate is odd and differs from the
+exact sum by less than one intermediate unit. Every nearest-even boundary is
+an even integer on this grid, so that perturbation cannot cross a rounding
+boundary, including ties, overflow and underflow. If no tail is discarded the
+sum is exact. Like-signed zeros and exact cancellation retain the original
+signed-zero contract. Zero terms do not select the alignment exponent.
+
+Before resource compilation, compare both constructions against independently
+rounded exact Fractions over an additional deterministic seed-17019 boundary corpus:
+midpoints on both sides, sign/cancellation, subnormal and overflow transitions,
+and alignment cutoffs. Keep the original seed-17004 fixture byte-identical.
+Use undefined-behavior checks on the host construction. Freeze and independently
+verify the new source, fixture, binary, image and complete instruction/resource
+receipts. Retain every failure. An alternative scalar resource pass establishes
+neither device correctness nor a full primitive family/controller; it challenges
+only the sufficiency of the original stopping reason. No runtime or subsequent
+GPUP task is started here.
+
+Review result: both compact variants fit at 40 registers and zero stack/spills;
+both original variants retain the 255-register/spill refusal. All 5900 additional
+cases per construction, host UBSan checks and the original 270 FMA cases pass.
+The [review report](../benchmarks/lp-expansion-state-gpup-state.md#pr-19-challenge-and-evidence-repairs)
+records the independent freeze, stronger evidence verifier and full pinned-native
+acceptance. The scalar obstruction is therefore construction-specific and does
+not remain a reason to reject all full-range FMA. Full device/controller behavior
+remains unaccepted and GPUP-REFINE retains its separate contract/allocation gate.

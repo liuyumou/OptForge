@@ -1,6 +1,6 @@
-# GPUP-STATE: full expansion controller admission refusal
+# GPUP-STATE: original admission refusal and compact FMA challenge
 
-Status: complete bounded CPU/resource admission refusal; full pinned-native acceptance passed
+Status: original refusal retained; compact FMA passes CPU/compile-only admission; full controller remains gated
 Owner: numerical backend and validation tooling
 Introduced: GPUP-STATE, 2026-10-13
 Last reviewed commit: bootstrap
@@ -9,14 +9,24 @@ Tests: independent fixture, CPU integer/Fraction differentials, resource audit a
 
 ## Result and limits
 
-The requested full expansion controller is unadmitted. Its first direct exact-bin
-implementation of full-range scalar FMA fails the accepted device resource gate:
+PR 19 review finds that the scalar resource obstacle is avoidable: a full-range
+compact FMA uses **40 registers and zero stack/spills** in each expansion format,
+under the same compiler options and 128-register/zero-spill limit. Independent
+Fraction comparisons and host undefined-behavior checks pass. This is a scalar
+CPU/compile-only result; the full controller remains unimplemented and unadmitted.
+There is no device correctness or solve-performance result.
+
+The original direct exact-bin implementation still fails the resource gate:
 both 48-bit compensated-pair and 64-bit expansion variants require **255 registers**,
 a **152-byte stack**, **296 spill-store bytes** and **152 spill-load bytes**.
 The limits are at most 128 registers/thread and zero compiler spills.
-This is the user-approved admission-refusal path under
+That original result is the user-approved admission-refusal path under
 [ADR-0036](../decisions/ADR-0036-full-expansion-state-admission.md), not a solver
 implementation or a mathematical impossibility result for expansion arithmetic.
+The review's counterexample means that failure is no longer a sufficient resource
+reason to stop full-range scalar FMA work. Remaining controller obligations,
+including device division/root/transcendentals, complete state and error handling,
+still need their own implementations and gates.
 
 The smaller 320-bit restoring division/root construction fits at 62 registers;
 an unprojected primal/Halpern update fits at 76. Both have zero stack/spills.
@@ -58,11 +68,89 @@ sum and all tie/sticky information, followed by one nearest-even rounding.
 
 The tested construction decodes finite dyadics and retains this bin in the
 thread's working values. The compiler exceeds the register ceiling and spills.
-Rejecting it does not establish that a guard/sticky algorithm or explicit global
-scratch would fail. Those alternatives can avoid retaining every aligned zero
-bit, but require their own proofs, range/rounding tests and accounting of traffic,
-allocations and launches. Narrowing scalar ranges or returning to FP64 changes
-the requested numerical contract; neither is silently substituted.
+The compact review construction below demonstrates that every aligned zero bit
+need not be retained. It needs no explicit global scratch and preserves the full
+scalar range. Device execution costs remain unmeasured. Other scratch algorithms
+retain their own proof and traffic/allocation gates. Narrowing scalar ranges or
+returning to FP64 changes the requested numerical contract.
+
+## PR 19 challenge and evidence repairs
+
+The original experiment tested one direct full-bin construction. Its large
+register footprint is a property of retaining thousands of aligned bits, rather
+than evidence against the two numerical formats. The review adds a separately
+identified construction and corpus under the bounded amendment to ADR-0036.
+The original fixture, sources, image, resource receipts and failed attempts stay
+byte-identical. No original result is relabeled as a device or performance pass.
+
+The compact FMA aligns at `max(product_unit, addend_unit) - 160`. The exact
+product has at most 128 bits and the addend at most 64; retained operands fit
+288 bits and the sum fits 289, within the existing 320-bit container. At most one
+operand loses a tail. A nonzero tail is represented by forcing its low bit odd.
+When that approximation is inexact, the other operand is divisible by 2^160,
+and the shifted operand is below 2^127. Even opposite signs leave a leading bit
+of at least 159. Final rounding discards at least 96 bits at precision 64, so
+all rounding boundaries are even integers in the intermediate grid. The odd
+surrogate differs from the true sum by less than one grid unit and cannot cross
+a boundary. Gradual underflow only increases the discarded width. Exact sums,
+overflow boundaries, signed zeros and cancellation use the original rounding
+contract. This proof applies to FMA's two terms, not arbitrary multi-term dots.
+
+| Compile-only construction | Formats | Registers/thread | Stack | Spill stores/loads |
+| --- | --- | ---: | ---: | ---: |
+| Original 3200-bit exact bin | 48 and 64 bits | 255 | 152 B | 296 / 152 B |
+| Compact 320-bit alignment with odd tail | 48 and 64 bits | 40 | 0 B | 0 / 0 B |
+
+Both are compiled together with NVCC 13.0.88 for sm_120 using the original flags.
+The integer/update controls retain 62/76 registers and zero spills. All eight
+generated kernels are inspected with the corrected instruction parser; none has
+native FP64 arithmetic or unaudited calls. Fewer registers establish admission
+headroom, not faster execution, occupancy under a full controller, or a preset.
+
+The new seed-17019 fixture contains 5,900 cases per construction: 992 alignment,
+512 cancellation, 4,096 full-range seeded, 208 midpoint, 12 overflow, 48 underflow
+and 32 signed-zero cases across both formats. Midpoints have positive/negative
+perturbations; alignment cases straddle the 160-bit retention and 64/128-bit
+shift cutoffs. Both constructions match all 11,800 supplementary comparisons
+under ordinary host compilation and UBSan. They also match the original 270
+FMA cases each, without changing that historical fixture. These finite tests
+support the proof; none substitutes for a CPU/device differential.
+
+Two evidence-verifier defects are corrected. Uniform predicates such as `@UP0`
+were silently skipped, allowing a predicated FP64 instruction to evade the audit.
+The parser now consumes every addressed instruction or refuses it, and covers
+FP64 conversions, matrix instructions and calls. The archive verifier previously
+reproduced the oracle fixture but did not execute the frozen log/exp candidate.
+It now runs that candidate in isolated Python, checks all 48 results and requires
+the complete frozen file inventory. Regression tests corrupt only the archived
+candidate and inject forbidden/malformed instructions. Original resource counts
+and numerical results reverify unchanged with these stronger checks.
+
+The self-contained review freeze is
+`artifacts/gpup-state-pr-review-20261013/compact-reviewed`, with a
+[reviewed summary](data/state/fma-review-v1.json). Its receipt SHA-256 is
+79a1b572f6cf73906d3e1632f8833c368dba7365d9e6fb8760e5e8f2c9fe0d44.
+The earlier `compact-v1` freeze omitted verifier-only import dependencies; it is
+retained as preliminary evidence. The reviewed freeze includes those dependencies
+and host compiler logs, with unchanged kernel sources and test inputs. A source-only
+isolated-archive regression checks that no checkout supplies missing imports.
+
+~~~bash
+python3 tools/lp_state_review.py
+python3 -m unittest discover -s tests/integration -p 'test_lp_state*.py' -v
+python3 tools/lp_state_review.py --output artifacts/gpup-state-pr-review-reproduction
+python3 tools/lp_state_review.py --verify artifacts/gpup-state-pr-review-20261013/compact-reviewed/review.json
+~~~
+
+The review adds no GPU reservation, workload or ledger event. All 21 focused CPU
+tests pass. Full pinned-native `CARGO_BUILD_JOBS=4 bash tools/check.sh` passes
+280 Python tests, Rust/native/dependency checks, committed-record replay,
+127 documentation pages and smoke. It uses 125.078377860 elapsed / 152.458983
+CPU seconds and 1663545344 bytes maximum child RSS. Logs and resource receipts
+are `native.log` and `native-resources.json` in the review artifact directory.
+Native coverage is enabled, and no GPU workload runs.
+
+## Original transcendental admission
 
 The CPU scalar candidate uses directed integer intervals at resolutions 128,
 192 and 256 bits. Multiplication uses twice-width intermediates before directed
@@ -148,8 +236,10 @@ or ledger event was appended. Cumulative consumption remains
 Every prior phase ceiling/prefix and historical limitation remains. Compiling and
 inspecting a code object is provisioning/CPU work, not executing a project GPU job.
 
-GPUP-STATE completes as this demonstrated admission refusal with the full
-pinned-native gate passed. No preset or accuracy/performance benefit is selected.
+GPUP-STATE retains the demonstrated first-construction refusal and the review's
+compact scalar counterexample. The original resource obstacle is resolved for
+this scalar primitive, while full state/controller/device acceptance remains
+open. No preset or accuracy/performance benefit is selected.
 GPUP-REFINE is next, with native FP64 outer state first and its own accepted
 SPEC-0021 subset and allocation. The unused state allocation does not reserve
-that next task or authorize any alternative expansion implementation.
+that next task or authorize runtime/device expansion implementation.

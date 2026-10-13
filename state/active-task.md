@@ -1,5 +1,58 @@
 # Active Task
 
+## PR 19 numerical and experiment review (2026-10-13)
+
+Status: review and targeted repairs complete; full pinned-native acceptance passed.
+Objective: independently challenge the primitive arithmetic, oracle coverage,
+resource evidence and conclusions of GPUP-STATE; reproduce and repair actionable
+defects while preserving the frozen first construction and all historical evidence.
+Acceptance: focused independent CPU regressions and compile-only checks where
+needed, strict evidence re-verification, full pinned-native `bash tools/check.sh`,
+and a final complete PR diff review with recorded findings and limitations.
+Likely files: state admission/candidate/oracle/diagnostic tooling and tests, report,
+accepted contract clarifications and this record. Resources: 7200 CPU seconds,
+four build jobs, 8 GiB host RSS, 4 GiB new artifacts and zero GPU jobs.
+Keep original artifacts/gpup-state-v1 immutable; new review receipts belong in
+artifacts/gpup-state-pr-review-20261013. Preserve all 16366 ledger events, SHA-256
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b and cumulative
+17635.432015338 / 21602.574545061 GPU seconds. No controller or subsequent
+GPUP task is admitted by this review. Commit accepted repairs locally; publication
+and merge are outside this request.
+
+Acceptance evidence: the original refusal is reproducible but does not establish
+an unavoidable scalar resource obstacle. A separately contracted full-range FMA
+uses compact alignment and an odd low bit for discarded tails, with a written
+rounding proof. Both formats compile to 40 registers and zero stack/spills under
+the original gate, versus the retained full-bin construction's 255 registers and
+296/152 spill-store/load bytes. Both constructions match 5900 supplementary
+Fraction cases each and the 270 historical FMA cases each. All 11800 supplementary
+comparisons also pass host UBSan; the focused suite checks all 12340 comparisons
+with UBSan. These are CPU/compile-only results, with no device/controller or
+performance promotion. The original seed-17004 fixture and evidence stay exact.
+
+Two reproduced verifier defects are repaired: uniform-predicated instructions
+could bypass the FP64/call audit, and the frozen transcendental candidate was
+never executed during archive verification. Every addressed instruction is now
+parsed or refused, the complete file inventory is required, and all 48 archived
+log/exp results are checked by executing the frozen candidate in isolated Python.
+Corruption and isolated-archive tests pass; the original archive re-verifies.
+The preliminary compact-v1 freeze omitted verifier-only import dependencies and
+is retained. The self-contained compact-reviewed freeze retains the same kernels
+and inputs and independently re-verifies in isolated Python. Its receipt hash is
+79a1b572f6cf73906d3e1632f8833c368dba7365d9e6fb8760e5e8f2c9fe0d44;
+the reviewed summary is docs/benchmarks/data/state/fma-review-v1.json.
+
+All 21 focused tests and the full `CARGO_BUILD_JOBS=4 bash tools/check.sh` pass:
+280 Python tests, Rust/native/dependency checks, committed-record replay,
+127 documentation pages and smoke. Native coverage is enabled; no GPU workload
+ran. The full gate used 125.078377860 elapsed / 152.458983 CPU seconds and
+1663545344 bytes maximum child RSS. Logs, resource receipts and final ledger/
+artifact audits remain in artifacts/gpup-state-pr-review-20261013. The unchanged
+16366-event ledger has the exact hash and cumulative consumption above. All
+current reports/handoffs distinguish the compact scalar pass from open full
+state/controller gates. Final documentation/whitespace checks precede the local
+review commit; no remote publication or merge is authorized by this review.
+
 ## GPUP-STATE draft PR preparation (2026-10-13)
 
 Status: source preparation accepted; user authorized opening a separate draft PR.

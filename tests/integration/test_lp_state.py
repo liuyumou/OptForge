@@ -33,7 +33,8 @@ class StateAdmissionTests(unittest.TestCase):
                       compiler_command=[], kernels={name:dict(registers=255, stack_bytes=152,
                       local_bytes=0, shared_bytes=0, spill_store_bytes=296, spill_load_bytes=152) for name in admission.KERNELS},
                       gpu_executed=False, gpu_seconds=0, solver_implemented=False, full_controller_accepted=False,
-                      primary_attempts=0, planned_primary_attempts=96, planned_profiles=12, files={})
+                      primary_attempts=0, planned_primary_attempts=96, planned_profiles=12,
+                      files={name:"0"*64 for name in admission.FROZEN_FILES})
         admission.validate_record_header(record)
         for key in ["schema_version", "gpu_seconds", "primary_attempts", "planned_primary_attempts", "planned_profiles"]:
             malformed = copy.deepcopy(record);malformed[key] = False
@@ -53,6 +54,32 @@ class StateAdmissionTests(unittest.TestCase):
         self.assertEqual(admission.admission_status(inventory), "partial_refusal")
         inventory["state_integer_p64"]["forbidden_instructions"] = ["DFMA"]
         self.assertEqual(admission.admission_status(inventory), "refused_instruction")
+
+    def test_frozen_transcendental_candidate_is_reexecuted(self):
+        document = admission.read_document(admission.FIXTURE)
+        self.assertEqual(admission.verify_transcendentals(ROOT / "tools", document), 48)
+        with tempfile.TemporaryDirectory() as temporary:
+            frozen = Path(temporary)
+            for name in ("lp_expansion_candidate.py", "lp_state_candidate.py"):
+                (frozen / name).write_bytes((ROOT / "tools" / name).read_bytes())
+            # The current checkout remains correct. Only the archive candidate
+            # is changed; verification must execute and reject that candidate.
+            with (frozen / "lp_state_candidate.py").open("a") as output:
+                output.write("\ndef exponential(*args, **kwargs):\n    return Rounded()\n")
+            with self.assertRaisesRegex(ValueError, "transcendental result differs"):
+                admission.verify_transcendentals(frozen, document)
+
+    def test_missing_frozen_source_inventory_refuses_before_private_files(self):
+        summary = admission.read_document(ROOT / "docs/benchmarks/data/state/admission-v1.json")
+        record = {key: value for key, value in summary.items()
+                  if key not in {"admission_sha256", "evidence_directory", "resource_limit"}}
+        record.update(compiler_command=[], files={name:"0"*64 for name in admission.FROZEN_FILES})
+        admission.validate_record_header(record)
+        for name in admission.FROZEN_FILES:
+            malformed = copy.deepcopy(record)
+            del malformed["files"][name]
+            with self.assertRaisesRegex(ValueError, "file inventory"):
+                admission.validate_record_header(malformed)
 
     def test_frozen_independent_fixture_and_transcendental_results(self):
         path = ROOT / "tests/regression/lp-state-admission-v1.json"
@@ -97,6 +124,15 @@ class StateAdmissionTests(unittest.TestCase):
         altered = "\n".join(sass).replace("IADD3", "DFMA")
         audit = admission.resource_audit("\n".join(resources), "\n".join(compiler), altered)
         self.assertEqual(admission.admission_status(audit), "refused_instruction")
+        for predicate in ["@UP0", "@!UP0", "@P0", "@!P0", "@PT", "@UPT"]:
+            for opcode in ["DFMA", "F2F.F64.F32", "CALL.REL.NOINC", "DMMA.884"]:
+                altered = "\n".join(sass) + f"\n /*0010*/ {predicate} {opcode} R0, R1, R2, R3;"
+                audit = admission.resource_audit("\n".join(resources), "\n".join(compiler), altered)
+                self.assertEqual(admission.admission_status(audit), "refused_instruction")
+        for instruction in ["@UNKNOWN DFMA R0, R1, R2, R3;", "DFMA R0, R1", "???;"]:
+            with self.assertRaisesRegex(ValueError, "unparsed instruction"):
+                admission.resource_audit("\n".join(resources), "\n".join(compiler),
+                                         "\n".join(sass) + "\n /*0010*/ " + instruction)
 
     def test_malformed_transcendental_operands_refuse_before_large_shifts(self):
         for value in [arithmetic.Rounded(True, 0), arithmetic.Rounded(1, -1000000),

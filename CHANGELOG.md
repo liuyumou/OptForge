@@ -9,6 +9,12 @@
 - Retain the first exact full-bin primitive construction: both expansion formats
   require 255 registers and nonzero spills, exceeding the 128-register/zero-spill
   gate. Smaller 320-bit integer/update probes fit but cannot qualify a controller.
+- PR 19 review adds full-range compact FMA with a rounding proof, 5900 additional
+  independent cases per construction and host UBSan checks. Both variants fit
+  at 40 registers with zero spills under the unchanged compile-only gate; the
+  original refusal remains reproducible. No device/performance claim follows.
+- Repair the instruction audit's uniform-predicate blind spot, require the full
+  archive inventory and execute the frozen log/exp candidate during verification.
 - Preserve source/executable/image/resource identities and failed CPU/provisioning
   attempts. No solver, complete state/replay or 96-timing/12-profile study is
   admitted; no accuracy/latency benefit or preset is claimed. GPU charge is zero.

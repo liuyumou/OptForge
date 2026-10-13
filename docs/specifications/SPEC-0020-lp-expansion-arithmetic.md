@@ -436,3 +436,17 @@ first exact-bin construction needs 3200 signed bits and fails at 255 registers
 and nonzero compiler spills in both expansion formats. Its CPU bits match 270
 independent FMA cases, but this is not a device differential. No kernel executes,
 no host authority changes and no new runtime identity becomes selectable.
+
+PR 19's user-authorized CPU/compile-only review accepts a compact FMA validation
+construction under the bounded amendment to ADR-0036. Exact product/addend
+alignment retains 160 low guard positions beneath the higher unit exponent;
+an inexact shifted tail is made odd. The written rounding proof and 5,900 new
+independent cases per construction preserve the entire scalar exponent range,
+nearest-even results and signed-zero/overflow/underflow behavior. Each compact
+variant compiles to 40 registers and zero stack/spills under the unchanged gate.
+The original 255-register refusal remains historical evidence; it no longer
+establishes a resource obstacle for full-range scalar FMA. This accepts no full
+primitive family, error-envelope ABI, controller, device execution or performance
+claim. Every addressed instruction MUST be parsed or refused, and archive
+verification MUST execute its frozen transcendental candidate against the
+independently reproduced fixture, not only reproduce the oracle's expectations.
