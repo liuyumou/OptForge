@@ -5,7 +5,30 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-Current handoff (2026-10-13): GPUP-EXEC is complete under accepted ADR-0035 and
+Current handoff (2026-10-13): GPUP-STATE is complete as a bounded resource
+admission refusal under [ADR-0036](docs/decisions/ADR-0036-full-expansion-state-admission.md).
+Its [report](docs/benchmarks/lp-expansion-state-gpup-state.md) independently checks
+192 integer, 270 FMA, 64 update and 48 transcendental cases. The first full-range
+exact-bin FMA construction in both expansion formats uses 255 registers and
+nonzero spills, exceeding the accepted 128-register/zero-spill gate. Bounded
+320-bit probes fit but do not qualify the complete family. PR 19 review adds a
+full-range compact FMA: 40 registers and zero spills in both formats, with 5900
+additional independent cases per construction and host UBSan acceptance. The
+first refusal remains exact but no longer establishes a scalar resource obstacle.
+The instruction audit and frozen transcendental verification are repaired.
+The compact scalar now passes 6170 device cases, two fresh checks, four scoped
+sanitizers and 36 independently verified primitive timings on the user-selected
+idle RTX PRO 6000 Blackwell. The busy-5090 admission refusal and a memcheck
+stdout-reader correction remain visible; no execution is retried. No controller,
+state/replay or solver benefit is admitted. Combined GPU charge is 30.114068273 s;
+cumulative consumption is 17665.546083611 / 21602.574545061 s. The 16452-event
+ledger SHA-256 is 24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18,
+preserving the original 16366-event prefix and every phase ceiling. GPUP-REFINE is next
+and requires an accepted SPEC-0021 subset and its own allocation; unused state
+allowance does not reserve it. Preserve full expansion/alternative construction
+gates, original-model host authority, identities and all historical evidence.
+
+Prior handoff (2026-10-13): GPUP-EXEC is complete under accepted ADR-0035 and
 the bounded exact-dot subset of [SPEC-0020](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md).
 Its [report](docs/benchmarks/lp-exact-executor-gpup-exec.md) retains all 108 attempts,
 independently verifies 94 endpoints and certifies 58/96 timings. All 27 cached/
@@ -14,8 +37,8 @@ six replays and four scoped sanitizers pass. Fourteen initial FP64 controls fail
 discovery because the archive omitted an unchanged dependency; the repair and
 failed attempts are retained without retries. Scheduling/scaling/mixed exact
 solves refuse the bounded exponent window. No total-cost win or preset is selected.
-GPUP-STATE is next and needs its own accepted primitive/state subset and resource
-gates. Read the [architecture and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md),
+The subsequent GPUP-STATE admission result is recorded above. Read the
+[architecture and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md),
 draft [SPEC-0021](docs/specifications/SPEC-0021-lp-refinement.md), and
 [component/interaction experiment design](docs/benchmarks/lp-precision-design-experiments.md).
 GPUP-REP remains the CPU reference; full expansion state and correction/anchored

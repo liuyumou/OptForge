@@ -1,0 +1,103 @@
+{
+  "admission_sha256": "0a0313286b831721d277fcdfbc3b012dfc7fd1940b9c8dcc3c2cd08b6c8977e2",
+  "cpu_counts": {
+    "fma_cases": 270,
+    "integer_cases": 192,
+    "update_cases": 64
+  },
+  "evidence_directory": "artifacts/gpup-state-v1/admission-v1",
+  "fixture_sha256": "624048e320d5c4cca9a9b53fff236f5fb1220f4583e160e3489c1fd47829e822",
+  "full_controller_accepted": false,
+  "gpu_executed": false,
+  "gpu_seconds": 0,
+  "host_binary_sha256": "d16036816b2dae3a7f42cdaadcaac7cea492dca7eb17f5e515121cee096db5c7",
+  "host_source_sha256": "4c3fa1bb587819931d4739c22e0e452cafe37b545e83016e6f394572354d5ec2",
+  "identity": "gpup-state-resource-admission-v1",
+  "image_sha256": "14bdccf1e246b6966bafc4d33a3aa59925a50a567b643d31c58f1052e1781c8d",
+  "kernels": {
+    "state_full_fma_p48": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [
+        "register_limit",
+        "compiler_spills"
+      ],
+      "registers": 255,
+      "shared_bytes": 0,
+      "spill_load_bytes": 152,
+      "spill_store_bytes": 296,
+      "stack_bytes": 152,
+      "status": "refused"
+    },
+    "state_full_fma_p64": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [
+        "register_limit",
+        "compiler_spills"
+      ],
+      "registers": 255,
+      "shared_bytes": 0,
+      "spill_load_bytes": 152,
+      "spill_store_bytes": 296,
+      "stack_bytes": 152,
+      "status": "refused"
+    },
+    "state_integer_p48": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 62,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_integer_p64": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 62,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_update_p48": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 76,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_update_p64": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 76,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    }
+  },
+  "nvcc_version": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0\n",
+  "planned_primary_attempts": 96,
+  "planned_profiles": 12,
+  "primary_attempts": 0,
+  "resource_limit": {
+    "compiler_spill_bytes": 0,
+    "registers_per_thread": 128
+  },
+  "schema_version": 1,
+  "solver_implemented": false,
+  "source_sha256": "ae7eedf7e53d2a6e5b5ec70333a7a1cd72146431dde9ca676f9e8236644eb3b7",
+  "status": "refused_resource"
+}

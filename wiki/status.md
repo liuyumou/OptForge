@@ -17,13 +17,22 @@ and the accepted CPU subset of SPEC-0020: independent exact storage, binary64 an
 [GPUP-EXEC](../docs/benchmarks/lp-exact-executor-gpup-exec.md) is complete under
 ADR-0035: bounded exact sparse products, 108 retained attempts, 94 independently
 verified endpoints and 58/96 certified timings. No total-cost win or preset is
-selected. GPUP-STATE is next, with a separate primitive/state contract required.
+selected. [GPUP-STATE](../docs/benchmarks/lp-expansion-state-gpup-state.md) closes
+with ADR-0036's resource admission refusal: the first full-bin FMA primitive uses
+255 registers and nonzero spills in both expansion formats. PR 19's compact
+full-range FMA passes at 40 registers and zero spills, with 5900 additional
+independent cases per construction and host UBSan checks. All 6170 device cases,
+four scoped sanitizers and 36 primitive timing attempts pass on RTX PRO 6000
+Blackwell. The blocked 5090 attempt and receipt-reader repair remain visible;
+combined charge is 30.114068273 seconds. No full controller, state/replay or
+solver benefit is admitted. GPUP-REFINE
+is next and needs its own accepted contract/allocation.
 
 | State | Features |
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | GPU LP precision track (GPUP-STATE next, then bounded refinement/assessment and GPUP-7 through GPUP-10), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| Planned | GPU LP precision track (GPUP-REFINE next, then bounded assessment and GPUP-7 through GPUP-10; full expansion state remains gated after the admission refusal), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
 | Experimental | Bounded exact-dot cached/uncached CUDA executor under ADR-0035; opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
@@ -237,7 +246,8 @@ acceptance 234.427924688/300; cumulative 17115.274617853 /
 15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
 and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
 That study handed off to GPUP-7; the 2026-10-12 order inserted GPUP-REP, which is
-now complete, followed by GPUP-EXEC under ADR-0035. GPUP-STATE is next and
+now complete, followed by GPUP-EXEC under ADR-0035. GPUP-STATE closes with the
+bounded resource admission refusal and compact FMA review under ADR-0036; GPUP-REFINE is next and
 requires its own accepted numerical/resource contract. Current GPU consumption
-is 17635.432015338 / 21602.574545061 seconds; the 16366-event ledger preserves
+is 17665.546083611 / 21602.574545061 seconds; the 16452-event ledger preserves
 every historical prefix. No supported preset follows.

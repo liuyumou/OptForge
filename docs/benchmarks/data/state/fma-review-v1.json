@@ -1,0 +1,155 @@
+{
+  "cpu": {
+    "cases_per_construction": 5900,
+    "categories": {
+      "alignment": 992,
+      "cancellation": 512,
+      "full_range": 4096,
+      "midpoint": 208,
+      "overflow": 12,
+      "signed_zero": 32,
+      "underflow": 48
+    },
+    "comparisons": 11800,
+    "constructions": 2
+  },
+  "device_correctness_accepted": false,
+  "evidence_directory": "artifacts/gpup-state-pr-review-20261013/compact-reviewed",
+  "fixture_sha256": "74ec309441a25c55ef5b9dc88bec3140812079caad81766544ffbc105f99795f",
+  "full_controller_accepted": false,
+  "gpu_executed": false,
+  "gpu_seconds": 0,
+  "host_compiler_version": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "identity": "gpup-state-fma-review-v1",
+  "image_sha256": "050230d08b926bd217f6a21d9752139e44e37aa10b3cabb5f57e50f11c20b54d",
+  "kernels": {
+    "state_compact_fma_p48": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 40,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_compact_fma_p64": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 40,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_full_fma_p48": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [
+        "register_limit",
+        "compiler_spills"
+      ],
+      "registers": 255,
+      "shared_bytes": 0,
+      "spill_load_bytes": 152,
+      "spill_store_bytes": 296,
+      "stack_bytes": 152,
+      "status": "refused"
+    },
+    "state_full_fma_p64": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [
+        "register_limit",
+        "compiler_spills"
+      ],
+      "registers": 255,
+      "shared_bytes": 0,
+      "spill_load_bytes": 152,
+      "spill_store_bytes": 296,
+      "stack_bytes": 152,
+      "status": "refused"
+    },
+    "state_integer_p48": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 62,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_integer_p64": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 62,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_update_p48": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 76,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_update_p64": {
+      "forbidden_instructions": [],
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 76,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    }
+  },
+  "nvcc_version": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0\n",
+  "original_admission_sha256": "0a0313286b831721d277fcdfbc3b012dfc7fd1940b9c8dcc3c2cd08b6c8977e2",
+  "original_cases_per_construction": 270,
+  "outcome": {
+    "state_compact_fma_p48": "fits_resource_gate",
+    "state_compact_fma_p64": "fits_resource_gate",
+    "state_full_fma_p48": "refused",
+    "state_full_fma_p64": "refused",
+    "state_integer_p48": "fits_resource_gate",
+    "state_integer_p64": "fits_resource_gate",
+    "state_update_p48": "fits_resource_gate",
+    "state_update_p64": "fits_resource_gate"
+  },
+  "resource_limit": {
+    "compiler_spill_bytes": 0,
+    "registers_per_thread": 128
+  },
+  "review_sha256": "79a1b572f6cf73906d3e1632f8833c368dba7365d9e6fb8760e5e8f2c9fe0d44",
+  "schema_version": 1,
+  "source_sha256": "f0a9e113233f17168c895e68937fabc36f6d5706f61306b4db40f93655e4a8da",
+  "ubsan": {
+    "cases_per_construction": 5900,
+    "categories": {
+      "alignment": 992,
+      "cancellation": 512,
+      "full_range": 4096,
+      "midpoint": 208,
+      "overflow": 12,
+      "signed_zero": 32,
+      "underflow": 48
+    },
+    "comparisons": 11800,
+    "constructions": 2
+  }
+}

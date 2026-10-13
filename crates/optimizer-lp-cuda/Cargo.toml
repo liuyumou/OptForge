@@ -18,6 +18,10 @@ optimizer-lp = { version = "0.1.0", path = "../optimizer-lp" }
 serde_json.workspace = true
 optimizer-highs = { version = "0.1.0", path = "../optimizer-highs" }
 
+[[example]]
+name = "lp_state_probe"
+required-features = ["precision-research"]
+
 # A separate crate rather than a module inside optimizer-cuda. That crate is what
 # every existing GPU consumer depends on, and putting the linear-programming
 # engine there would force optimizer-cuda to depend on optimizer-lp, so the CLI

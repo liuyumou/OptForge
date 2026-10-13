@@ -14,7 +14,13 @@ of [SPEC-0020](../specifications/SPEC-0020-lp-expansion-arithmetic.md) and draft
 [experiment design](../benchmarks/lp-precision-design-experiments.md) isolates
 components and interactions. GPUP-REP CPU validation is complete under ADR-0034;
 GPUP-EXEC is complete under ADR-0035 with a bounded negative total-cost result.
-GPUP-STATE needs its own accepted contract and resource gates. All proposals retain
+GPUP-STATE's first full-bin construction fails the resource gate under ADR-0036;
+its [report](../benchmarks/lp-expansion-state-gpup-state.md) retains a bounded
+admission refusal. PR 19's compact full-range FMA fits at 40 registers and zero
+spills, with 5900 additional independent cases per construction. Its scoped
+PRO 6000 device extension passes 6170 cases, four sanitizers and 36 descriptive
+timing attempts. Complete state and solver benefit remain open, and
+GPUP-REFINE is next under its own contract/allocation. All proposals retain
 original-model 1e-9 acceptance.
 
 ## Completed investigations and remaining limits

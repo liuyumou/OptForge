@@ -1,5 +1,192 @@
 # Active Task
 
+## PR 19 integration and evidence retention (2026-10-13)
+
+The user has now authorized merging PR 19 and safe cleanup, superseding the
+earlier no-merge delivery scope below. Implementation, device validation and
+publication are complete; CPU/docs/smoke CI passed at 2320e32.
+Finish through the protected PR with a merge commit preserving evidence ancestry,
+then synchronize main and remove only the merged task branch and disposable build
+caches. Preserve all historical research artifacts, failed attempts, frozen source,
+executables, images, raw endpoints, native dependencies and the canonical ledger.
+Record a checksum inventory, merge/CI receipts and cleanup verification under
+artifacts/gpup-state-integration-20261013. Bound this administrative task to 1200
+CPU seconds/four jobs, 8 GiB RSS, 64 MiB new receipts and zero GPU jobs. Verify the
+retained reports and unchanged 16452-event ledger after cleanup. No subsequent
+numerical task or resource reservation is started by this handoff.
+
+## PR 19 device validation and publication (2026-10-13)
+
+Status: implementation, device experiments and final native acceptance complete;
+publication in PR 19 is authorized and is the final delivery step.
+The first frozen cohort was refused before child launch by external GPU activity;
+retain its 3.002084480-second charge and all 41 unexecuted cells. The user then
+explicitly requested another idle GPU if available. Discovery found idle sm_120
+RTX PRO 6000 GPU-6721b13a-30f9-83ec-dace-ba2d9738556f; both 5090s were busy.
+Run a separately frozen gpup-state-device-v2 cohort on that device, under the same
+shared host lock. Its cap is 1096 seconds (496 acceptance/600 timing), so both
+cohorts together remain below the original 1100/500/600 limits. Preserve the
+16368-event prefix a97630527900a1a11cfd612bd3f96d55a86c211555bb0adc7de3ab52adebfc96
+and 17638.434099818 cumulative seconds. Do not retry either cohort's identities.
+V2's two ordinary device checks passed. Memcheck exited zero with an exact
+endpoint and its zero-error summary in stdout; the verifier incorrectly read
+only stderr. Repair receipt reading on CPU, preserve the original failed
+classification, bind a reviewed classification and continuation source archive,
+and resume only unattempted cells. No device/executable/input/protocol change or
+GPU retry is authorized by this evidence repair.
+Objective: validate the compact full-range FMA on the selected device, measure
+bounded primitive behavior, and publish the review commits and revised PR scope.
+Acceptance: exact independent corpus differentials at multiple block sizes,
+fresh-process repeatability, four scoped sanitizers, instruction/resource audit,
+frozen primitive timings with independent endpoints and complete cost accounting,
+full pinned-native gate, evidence/ledger verification and PR checks. No merge.
+Likely files: a safe Rust diagnostic example using optimizer-cuda-sys, separate
+CUDA probe, bounded protocol/runner/report/tests, ADR-0036 and handoff documents.
+Resources: 14400 CPU seconds/four jobs, 8 GiB host RSS, 64 MiB device allocation,
+4 GiB new artifacts; at most 1100 GPU seconds, comprising 600 screening timing
+and 500 repeatability acceptance, within the existing 2300/850 GPUP-STATE caps.
+Frozen roster: two 30-second device checks, four 90-second sanitizer checks and
+36 ten-second timing attempts; deadline+6 reservations total 1032 seconds.
+Use only GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 under the shared host lease and
+existing supervised ledger. Retain all failures without primary retries.
+Preserve the 16366-event prefix SHA-256
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b and inherited
+17635.432015338 / 21602.574545061 GPU seconds. No added campaign/phase allowance.
+Keep all prior evidence immutable; new receipts belong in
+artifacts/gpup-state-device-v1. Full controller, solver timings, runtime selectors
+and GPUP-REFINE remain outside this bounded extension. Push the completed changes
+to codex/gpup-state and update PR 19 after acceptance; do not merge it.
+
+## PR 19 numerical and experiment review (2026-10-13)
+
+Status: review and targeted repairs complete; full pinned-native acceptance passed.
+Objective: independently challenge the primitive arithmetic, oracle coverage,
+resource evidence and conclusions of GPUP-STATE; reproduce and repair actionable
+defects while preserving the frozen first construction and all historical evidence.
+Acceptance: focused independent CPU regressions and compile-only checks where
+needed, strict evidence re-verification, full pinned-native `bash tools/check.sh`,
+and a final complete PR diff review with recorded findings and limitations.
+Likely files: state admission/candidate/oracle/diagnostic tooling and tests, report,
+accepted contract clarifications and this record. Resources: 7200 CPU seconds,
+four build jobs, 8 GiB host RSS, 4 GiB new artifacts and zero GPU jobs.
+Keep original artifacts/gpup-state-v1 immutable; new review receipts belong in
+artifacts/gpup-state-pr-review-20261013. Preserve all 16366 ledger events, SHA-256
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b and cumulative
+17635.432015338 / 21602.574545061 GPU seconds. No controller or subsequent
+GPUP task is admitted by this review. Commit accepted repairs locally; publication
+and merge are outside this request.
+
+Acceptance evidence: the original refusal is reproducible but does not establish
+an unavoidable scalar resource obstacle. A separately contracted full-range FMA
+uses compact alignment and an odd low bit for discarded tails, with a written
+rounding proof. Both formats compile to 40 registers and zero stack/spills under
+the original gate, versus the retained full-bin construction's 255 registers and
+296/152 spill-store/load bytes. Both constructions match 5900 supplementary
+Fraction cases each and the 270 historical FMA cases each. All 11800 supplementary
+comparisons also pass host UBSan; the focused suite checks all 12340 comparisons
+with UBSan. These are CPU/compile-only results, with no device/controller or
+performance promotion. The original seed-17004 fixture and evidence stay exact.
+
+Two reproduced verifier defects are repaired: uniform-predicated instructions
+could bypass the FP64/call audit, and the frozen transcendental candidate was
+never executed during archive verification. Every addressed instruction is now
+parsed or refused, the complete file inventory is required, and all 48 archived
+log/exp results are checked by executing the frozen candidate in isolated Python.
+Corruption and isolated-archive tests pass; the original archive re-verifies.
+The preliminary compact-v1 freeze omitted verifier-only import dependencies and
+is retained. The self-contained compact-reviewed freeze retains the same kernels
+and inputs and independently re-verifies in isolated Python. Its receipt hash is
+79a1b572f6cf73906d3e1632f8833c368dba7365d9e6fb8760e5e8f2c9fe0d44;
+the reviewed summary is docs/benchmarks/data/state/fma-review-v1.json.
+
+All 21 focused tests and the full `CARGO_BUILD_JOBS=4 bash tools/check.sh` pass:
+280 Python tests, Rust/native/dependency checks, committed-record replay,
+127 documentation pages and smoke. Native coverage is enabled; no GPU workload
+ran. The full gate used 125.078377860 elapsed / 152.458983 CPU seconds and
+1663545344 bytes maximum child RSS. Logs, resource receipts and final ledger/
+artifact audits remain in artifacts/gpup-state-pr-review-20261013. The unchanged
+16366-event ledger has the exact hash and cumulative consumption above. All
+current reports/handoffs distinguish the compact scalar pass from open full
+state/controller gates. Final documentation/whitespace checks precede the local
+review commit; no remote publication or merge is authorized by this review.
+
+## GPUP-STATE draft PR preparation (2026-10-13)
+
+Status: source preparation accepted; user authorized opening a separate draft PR.
+Objective: publish the completed bounded admission-refusal result for review,
+without waiting for GPUP-REFINE or starting another numerical task.
+Acceptance: inspect the complete diff and remote base, preserve the frozen
+construction and evidence identities, renew the full pinned-native gate before
+publication, and verify the draft PR's base and head after creation.
+Likely files: this record and documentation consistency corrections only.
+Resources: 1800 CPU seconds, four build jobs, 8 GiB host RSS and zero GPU jobs.
+The accepted implementation is dd93b82; its full pinned-native gate passes
+272 Python tests, Rust/native/dependency checks, committed-record replay,
+127 documentation pages and smoke. PR preparation corrects the stale wiki
+handoff and makes the final test count explicit in the report. Gate and
+publication receipts belong in artifacts/gpup-state-pr-20261013.
+Preserve the 16366-event ledger and cumulative GPU consumption of
+17635.432015338 / 21602.574545061 seconds. This request authorizes publishing
+the task branch and creating a draft PR; it does not authorize merging or
+starting GPUP-REFINE. Keep all historical artifacts and the source branch.
+
+## GPUP-STATE (2026-10-13)
+
+Status: complete as the user-authorized bounded resource admission refusal.
+Objective: investigate persistent compensated and 64-significand-bit expansion
+state with a full expansion controller, stable formulas, complete checkpoints and
+independent original-model certification. Follow the user-accepted implementation
+plan; a demonstrated numerical/resource admission refusal is a valid bounded result.
+Acceptance: ADR-0036/SPEC-0020 subset; independent integer/rational primitive and
+transcendental oracles; complete operation inventory and state/replay contracts;
+checked layouts; full pinned-native gate. Only admitted device behavior proceeds
+to instruction/register/spill audit, device differentials, four sanitizers and the
+frozen 96-timing/12-profile development study. Preserve every failure and all costs.
+Likely files: ADR/spec/report and admission tooling/tests first; research modules
+in optimizer-lp, optimizer-lp-cuda and optimizer-experiment plus a separate CUDA
+image/protocol only after CPU admission. Resources: CPU 21600 seconds, four build
+jobs, 8 GiB host RSS, device resident/peak 1/2 GiB, new artifacts 32 GiB. The user
+explicitly allocated 3600 GPU seconds within existing authority: timing 2300
+screening, profiles 450 ablations, acceptance 850 repeatability. No increased
+campaign or phase ceiling. Use GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 under the
+shared host lease with deadline+6 reservation; no primary retries. Preserve
+17635.432015338 / 21602.574545061 cumulative GPU seconds and all 16366 events,
+ledger SHA-256 4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b.
+Original-model host authority and every historical identity remain. Commit locally
+after acceptance; do not push or start GPUP-REFINE. Retain evidence under
+artifacts/gpup-state-v1 and reviewed summaries under docs/benchmarks/data/state.
+
+Admission evidence: the independent seed-17004 fixture checks 192 integer
+operations, 270 full-range FMA cases, 64 unprojected update graphs and 48 log/exp
+cases. All 13 CPU admission regressions pass. The first direct exact-bin full-FMA
+construction in both formats uses 255 registers, a 152-byte stack and 296/152
+spill-store/load bytes, exceeding the 128-register/zero-spill gate. Bounded
+integer/update probes fit at 62/76 registers with no spills; no full controller,
+state/replay, runtime selector or 96-timing/12-profile study is admitted.
+The verified construction's source SHA-256 is
+ae7eedf7e53d2a6e5b5ec70333a7a1cd72146431dde9ca676f9e8236644eb3b7;
+image SHA-256 is
+14bdccf1e246b6966bafc4d33a3aa59925a50a567b643d31c58f1052e1781c8d.
+All frozen CPU/source/image/resource files independently reverify. GPU charge
+is zero and the exact ledger above remains. Alternative guard/sticky or explicit
+scratch constructions are not proved impossible and retain separate gates.
+Initial full pinned-native `CARGO_BUILD_JOBS=4 bash tools/check.sh` passes all Rust/native,
+dependency and committed-record replay gates, 270 Python tests, 127 documentation
+pages and smoke. GPU opt-in was unset and native acceptance was not skipped.
+The measured gate took 128.209268496 elapsed seconds and 175.761509 CPU seconds;
+maximum recorded child RSS was 1663467520 bytes.
+The log/resource receipts are under artifacts/gpup-state-v1. The optional
+/usr/bin/time launcher was absent; that failure is preserved and Python's standard
+resource accounting was used without provisioning another dependency.
+Documentation/acceptance completion is followed by a final exact-source native
+gate and artifact/ledger audit before the local commit. The next task is
+GPUP-REFINE under its own accepted contract/allocation; it is not started here.
+Final CPU-only review rejects duplicate/boolean evidence fields before private
+archive access and includes every probed kernel in the aggregate resource gate.
+The frozen construction, image, numerical results and refusal are unchanged.
+Both added source-only regressions pass; final source acceptance is retained in
+artifacts/gpup-state-v1/native-reviewed.log and native-reviewed-resources.json.
+
 ## GPUP-EXEC PR 18 review and integration (2026-10-13)
 
 Status: self-review, repairs and local acceptance complete; user authorized
@@ -5383,3 +5570,36 @@ artifact validation for a missing Python `jsonschema`. That diagnosis is stale.
 imports as a precondition, so this class of failure is reported in seconds rather
 than after several minutes of compilation. C1 native HiGHS and solve CLI
 implementation are now complete; see the C1 record at the top of this file.
+
+## PR 19 device-extension acceptance evidence (2026-10-13)
+
+Implementation, experiments and final pinned-native acceptance are complete.
+Final acceptance log: artifacts/gpup-state-device-v2/final-native.log (289 Python
+tests, all Rust/native/dependency, committed-record replay, documentation and smoke
+gates passed). Publication checks follow after pushing the reviewed commits.
+The user-selected idle RTX PRO 6000 Blackwell completed 42/42 endpoints: all 6170
+independent cases, two ordinary fresh checks, four scalar sanitizers and 36 fixed
+primitive timing attempts. Each correctness process retains 40 launches, including
+partial counts and short benchmark paths; all six numerical hashes match. Every
+warmup and measured endpoint independently verifies. Scalar/benchmark images use
+40/48 registers and no stack/spills. No full controller or solver speedup follows.
+
+The busy-5090 v1 attempt is retained (3.002084480 s), with 41 cells unexecuted.
+The v2 memcheck zero-error stdout was initially misclassified by a stderr-only
+reader; the original result and all raw receipts remain immutable. A separately
+frozen, exact-source-native-gated verifier correction changes only four permitted
+source files and never re-executes an attempted identity. Both cohort summaries,
+continuation/source hashes and all reservation/settlement bindings reverify.
+
+Evidence: artifacts/gpup-state-device-v1 and artifacts/gpup-state-device-v2;
+reviewed public summaries are docs/benchmarks/data/state/device-v1.json and
+device-v2.json. The original full-bin archive also re-verifies unchanged.
+Pre-device full native gates passed with 287, then 288, then 289 Python tests;
+the last includes nine device-runner regressions (30 focused state tests total).
+Artifacts total under 300 MiB and explicit device allocations peak at 4,980,812 B.
+
+Combined charge: 30.114068273 GPU s (acceptance 8.460919662, timing 21.653148611).
+Cumulative: 17665.546083611 / 21602.574545061 s. Final 16452-event ledger SHA-256:
+24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18. Both 16368- and
+16366-event prefixes and all historical phase ceilings remain exact. No reservation
+or behavior for GPUP-REFINE follows. Publish in existing PR 19 without merging.

@@ -1,0 +1,454 @@
+{
+  "attempts": [
+    {
+      "charged_ns": 3002084480,
+      "error": "supervised device execution failed",
+      "id": "gpup-state-device-v1-accept-oracle",
+      "status": "failed",
+      "worker_reason": "activity_blocked"
+    },
+    {
+      "id": "gpup-state-device-v1-accept-repeat",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-accept-memcheck",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-accept-racecheck",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-accept-initcheck",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-accept-synccheck",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-increment-chain-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-increment-batch-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-far_tail-chain-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-far_tail-batch-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-cancellation-chain-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-cancellation-batch-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-increment-chain-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-increment-batch-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-far_tail-chain-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-far_tail-batch-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-cancellation-chain-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-cancellation-batch-r0",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-cancellation-batch-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-cancellation-chain-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-far_tail-batch-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-far_tail-chain-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-increment-batch-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-increment-chain-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-cancellation-batch-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-cancellation-chain-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-far_tail-batch-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-far_tail-chain-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-increment-batch-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-increment-chain-r1",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-increment-chain-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-increment-batch-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-far_tail-chain-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-far_tail-batch-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-cancellation-chain-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p48-cancellation-batch-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-increment-chain-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-increment-batch-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-far_tail-chain-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-far_tail-batch-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-cancellation-chain-r2",
+      "status": "unexecuted"
+    },
+    {
+      "id": "gpup-state-device-v1-timing-p64-cancellation-batch-r2",
+      "status": "unexecuted"
+    }
+  ],
+  "budget": {
+    "categories_ns": {
+      "accept": 3002084480,
+      "timing": 0
+    },
+    "cpu_ns": 0,
+    "cumulative_ns": 17638434099818,
+    "events": 16368,
+    "ledger_sha256": "a97630527900a1a11cfd612bd3f96d55a86c211555bb0adc7de3ab52adebfc96"
+  },
+  "correctness_attempts": 0,
+  "device": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+  "freeze_sha256": "8216bda28f83c7b68cd0613d78a01429e81c410d5dcc858a22a283359d47fc04",
+  "full_controller_accepted": false,
+  "groups": [],
+  "identity": "gpup-state-device-v1",
+  "independent_cases": 6170,
+  "kernels": {
+    "state_bench_p48": {
+      "forbidden_instructions": [],
+      "instruction_counts": {
+        "BRA": 297,
+        "BRA.U": 2,
+        "BSSY.RECONVERGENT": 281,
+        "BSYNC.RECONVERGENT": 281,
+        "CS2R": 3,
+        "CS2UR": 1,
+        "EXIT": 3,
+        "FLO.U32": 30,
+        "HFMA2": 65,
+        "IADD.64": 36,
+        "IADD3": 286,
+        "IADD3.X": 1,
+        "IMAD": 2,
+        "IMAD.SHL.U32": 152,
+        "IMAD.U32": 6,
+        "IMAD.WIDE.U32": 9,
+        "IMAD.WIDE.U32.X": 1,
+        "ISETP.EQ.AND": 521,
+        "ISETP.EQ.U64.OR": 3,
+        "ISETP.GE.AND": 11,
+        "ISETP.GE.U32.AND": 151,
+        "ISETP.GT.U32.AND": 215,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.GT.U64.AND": 16,
+        "ISETP.NE.AND": 1375,
+        "ISETP.NE.S64.AND": 14,
+        "ISETP.NE.U32.AND": 3,
+        "LDC": 2,
+        "LDC.64": 4,
+        "LDCU": 2,
+        "LDCU.64": 1,
+        "LDG.E.64": 6,
+        "LOP3.LUT": 263,
+        "MOV": 602,
+        "MOV.64": 17,
+        "NOP": 12,
+        "P2R": 2,
+        "PLOP3.LUT": 6,
+        "S2R": 1,
+        "S2UR": 1,
+        "SEL": 1560,
+        "SEL.64": 22,
+        "SHF.L.U32": 54,
+        "SHF.L.U64.HI": 4,
+        "SHF.R.U32.HI": 172,
+        "SHF.R.U64": 5,
+        "SHF.R.W.U32.HI": 147,
+        "STG.E": 1,
+        "STG.E.64": 3,
+        "UIADD3": 2,
+        "UISETP.NE.AND": 2,
+        "UMOV.64": 3,
+        "VIMNMX.S32": 4
+      },
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 48,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_bench_p64": {
+      "forbidden_instructions": [],
+      "instruction_counts": {
+        "BRA": 345,
+        "BRA.U": 2,
+        "BSSY.RECONVERGENT": 329,
+        "BSYNC.RECONVERGENT": 329,
+        "CS2R": 3,
+        "CS2UR": 1,
+        "EXIT": 3,
+        "FLO.U32": 30,
+        "HFMA2": 65,
+        "IADD.64": 36,
+        "IADD3": 334,
+        "IADD3.X": 1,
+        "IMAD": 2,
+        "IMAD.SHL.U32": 194,
+        "IMAD.U32": 12,
+        "IMAD.WIDE.U32": 9,
+        "IMAD.WIDE.U32.X": 1,
+        "ISETP.EQ.AND": 521,
+        "ISETP.GE.AND": 11,
+        "ISETP.GE.U32.AND": 199,
+        "ISETP.GT.U32.AND": 263,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.GT.U64.AND": 16,
+        "ISETP.NE.AND": 1807,
+        "ISETP.NE.S64.AND": 14,
+        "ISETP.NE.U32.AND": 3,
+        "ISETP.NE.U64.AND": 3,
+        "LDC": 2,
+        "LDC.64": 4,
+        "LDCU": 2,
+        "LDCU.64": 1,
+        "LDG.E.64": 6,
+        "LOP3.LUT": 311,
+        "MOV": 602,
+        "MOV.64": 20,
+        "NOP": 12,
+        "P2R": 2,
+        "PLOP3.LUT": 9,
+        "S2R": 1,
+        "S2UR": 1,
+        "SEL": 2040,
+        "SEL.64": 19,
+        "SHF.L.U32": 54,
+        "SHF.L.U64.HI": 4,
+        "SHF.R.U32.HI": 220,
+        "SHF.R.U64": 5,
+        "SHF.R.W.U32.HI": 195,
+        "STG.E": 1,
+        "STG.E.64": 3,
+        "UIADD3": 2,
+        "UISETP.NE.AND": 2,
+        "VIMNMX.S32": 4
+      },
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 48,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_compact_fma_p48": {
+      "forbidden_instructions": [],
+      "instruction_counts": {
+        "BRA": 257,
+        "BSSY.RECONVERGENT": 239,
+        "BSYNC.RECONVERGENT": 239,
+        "CS2R": 1,
+        "EXIT": 3,
+        "FLO.U32": 30,
+        "HFMA2": 67,
+        "IADD.64": 35,
+        "IADD3": 311,
+        "IADD3.X": 1,
+        "IMAD": 5,
+        "IMAD.SHL.U32": 177,
+        "IMAD.U32": 6,
+        "IMAD.WIDE.U32": 9,
+        "IMAD.WIDE.U32.X": 1,
+        "ISETP.EQ.AND": 521,
+        "ISETP.EQ.U64.OR": 3,
+        "ISETP.GE.AND": 8,
+        "ISETP.GE.U32.AND": 151,
+        "ISETP.GT.AND": 3,
+        "ISETP.GT.U32.AND": 215,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.GT.U64.AND": 16,
+        "ISETP.NE.AND": 1374,
+        "ISETP.NE.S64.AND": 12,
+        "ISETP.NE.U32.AND": 3,
+        "LDC": 3,
+        "LDC.64": 3,
+        "LDCU": 1,
+        "LDCU.64": 1,
+        "LDG.E.64": 6,
+        "LOP3.LUT": 260,
+        "MOV": 603,
+        "MOV.64": 19,
+        "NOP": 9,
+        "PLOP3.LUT": 14,
+        "S2R": 2,
+        "S2UR": 1,
+        "SEL": 1560,
+        "SEL.64": 22,
+        "SHF.L.U32": 54,
+        "SHF.L.U64.HI": 4,
+        "SHF.R.U32.HI": 172,
+        "SHF.R.U64": 5,
+        "SHF.R.W.U32.HI": 147,
+        "STG.E": 1,
+        "STG.E.64": 2,
+        "UMOV.64": 3,
+        "VIMNMX.S32": 4
+      },
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 40,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_compact_fma_p64": {
+      "forbidden_instructions": [],
+      "instruction_counts": {
+        "BRA": 305,
+        "BSSY.RECONVERGENT": 287,
+        "BSYNC.RECONVERGENT": 287,
+        "CS2R": 1,
+        "EXIT": 3,
+        "FLO.U32": 30,
+        "HFMA2": 67,
+        "IADD.64": 35,
+        "IADD3": 359,
+        "IADD3.X": 1,
+        "IMAD": 5,
+        "IMAD.SHL.U32": 219,
+        "IMAD.U32": 12,
+        "IMAD.WIDE.U32": 9,
+        "IMAD.WIDE.U32.X": 1,
+        "ISETP.EQ.AND": 521,
+        "ISETP.GE.AND": 8,
+        "ISETP.GE.U32.AND": 199,
+        "ISETP.GT.AND": 3,
+        "ISETP.GT.U32.AND": 263,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.GT.U64.AND": 16,
+        "ISETP.NE.AND": 1806,
+        "ISETP.NE.S64.AND": 12,
+        "ISETP.NE.U32.AND": 3,
+        "ISETP.NE.U64.AND": 3,
+        "LDC": 3,
+        "LDC.64": 3,
+        "LDCU": 1,
+        "LDCU.64": 1,
+        "LDG.E.64": 6,
+        "LOP3.LUT": 308,
+        "MOV": 603,
+        "MOV.64": 22,
+        "NOP": 9,
+        "PLOP3.LUT": 17,
+        "S2R": 2,
+        "S2UR": 1,
+        "SEL": 2040,
+        "SEL.64": 19,
+        "SHF.L.U32": 54,
+        "SHF.L.U64.HI": 4,
+        "SHF.R.U32.HI": 220,
+        "SHF.R.U64": 5,
+        "SHF.R.W.U32.HI": 195,
+        "STG.E": 1,
+        "STG.E.64": 2,
+        "VIMNMX.S32": 4
+      },
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 40,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    }
+  },
+  "repeatability_equal": false,
+  "schema_version": 1,
+  "solver_performance_claim": false,
+  "source_tree_sha256": "ab201ce46899f21d98b7472bcd2b6348a76befe90ee8ec03ebca8c8b970a1c15",
+  "status": "incomplete",
+  "timing_attempts": 0
+}

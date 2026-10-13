@@ -1,5 +1,35 @@
 # Changelog
 
+## Unreleased — GPUP-STATE refusal and compact FMA validation (2026-10-13)
+
+- Accept ADR-0036's bounded CPU/resource refusal under SPEC-0020. Independent
+  integer/Fraction fixtures cover retained updates, stable projections/norms,
+  full-range FMA and directed log/exp intervals, with explicit range/domain and
+  ambiguous-rounding outcomes.
+- Retain the first exact full-bin primitive construction: both expansion formats
+  require 255 registers and nonzero spills, exceeding the 128-register/zero-spill
+  gate. Smaller 320-bit integer/update probes fit but cannot qualify a controller.
+- PR 19 review adds full-range compact FMA with a rounding proof, 5900 additional
+  independent cases per construction and host UBSan checks. Both variants fit
+  at 40 registers with zero spills under the unchanged compile-only gate; the
+  original refusal remains reproducible. Scoped device validation subsequently
+  passes all 6170 cases and four sanitizers on the idle RTX PRO 6000 Blackwell;
+  all 36 primitive timing attempts independently verify. Dependent patterns cost
+  about 7928–11724 cycles/FMA; no FP64 comparison or solver speedup is claimed.
+- Retain the busy-5090 admission refusal and correct memcheck receipt reading
+  across stdout/stderr without rerunning an attempt. Freeze the continuation
+  verifier separately and require unchanged executable/kernel/input sources.
+- Repair the instruction audit's uniform-predicate blind spot, require the full
+  archive inventory and execute the frozen log/exp candidate during verification.
+- Preserve source/executable/image/resource identities and failed CPU/provisioning
+  attempts. No solver, complete state/replay or 96-timing/12-profile study is
+  admitted; no solver accuracy/latency benefit or preset is claimed. Combined
+  device-extension charge is 30.114068273 seconds; cumulative consumption is
+  17665.546083611 / 21602.574545061 seconds. The 16452-event ledger preserves
+  every historical prefix and all phase ceilings.
+- GPUP-REFINE is next under its own required contract/allocation. Historical
+  runtime, host authority and all historical ledger prefixes remain unchanged.
+
 ## Unreleased — GPUP-EXEC bounded exact executor (2026-10-13)
 
 - Implement ADR-0035 / the bounded SPEC-0020 exact-dot subset behind the research

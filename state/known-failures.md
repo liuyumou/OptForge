@@ -1,5 +1,55 @@
 # Known Failures and Limitations
 
+## Full expansion state: first construction fails; compact scalar alternative fits
+
+[GPUP-STATE](../docs/benchmarks/lp-expansion-state-gpup-state.md) closes its bounded
+investigation under ADR-0036 with an admission refusal. The 320-bit dot and
+unprojected update constructions fit at 62/76 registers with no spills. However,
+the required full-range scalar FMA cannot inherit the sparse row's exponent window.
+Its first 3200-bit exact-bin implementation uses 255 registers, 152 stack bytes,
+296 spill-store bytes and 152 spill-load bytes in both 48/64-bit variants, exceeding
+the accepted 128-register/zero-spill gate. LOCAL=0 alone does not mean no spills.
+
+PR 19 review resolves this particular scalar obstacle with a full-range compact
+FMA: both formats compile to 40 registers and zero stack/spills under the same
+options and gate. The rounding proof and 5900 additional independent cases per
+construction pass, including host UBSan and the original FMA cases. The original
+refusal remains exact, but no longer supports stopping on scalar resource grounds.
+The compact scalar passes 6170 device cases, fresh-process repeatability, four
+scoped sanitizers and 36 independently verified primitive timing attempts on
+RTX PRO 6000 Blackwell. Division/root/transcendental implementations, the complete
+controller and original-model error budgets remain open. No solver performance or
+whole-controller resource result follows from the scalar kernel. Dependent
+patterns cost about 7928–11724 cycles/FMA; no FP64 comparator was executed.
+The first 5090 attempt was blocked before child launch by external activity;
+41 remaining v1 cells stay unexecuted. The user authorized the idle PRO 6000
+cohort. Memcheck's raw zero-error stdout and original missing-receipt classification
+are retained; a bound CPU-only correction accepts that receipt without reexecution.
+
+The review also repairs skipped uniform-predicated instructions and missing
+frozen transcendental execution in the archive verifier. The complete file
+inventory is now required. Corruption and isolated-archive regressions pass;
+the original archive re-verifies unchanged. New evidence and the preliminary
+freeze with missing verifier-only imports remain under
+artifacts/gpup-state-pr-review-20261013.
+
+The independent CPU fixture validates 192 integer cases, 270 FMA cases, 64 update
+graphs and 48 log/exp cases. Compilation and instruction inspection run no GPU
+job. Neither complete expansion controller, snapshots/replay nor the proposed
+96-timing/12-profile study is implemented/admitted. No solver residual/timing or preset claim follows; the separate scalar
+device checks above do not qualify the full primitive family. This rejects the tested full-bin
+construction, not all guard/sticky or explicit-scratch alternatives; those need
+their own bounded contracts and accounting. No automatic hybrid fallback occurs.
+
+The original CPU/compile-only result charged zero GPU seconds. Its device extension
+charges 30.114068273 seconds, including blocked admission; cumulative consumption
+is 17665.546083611 / 21602.574545061 seconds. The 16452-event ledger SHA-256 is
+24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18, preserving the
+16366-event prefix 4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b.
+The log/exp oracle initially used insufficient absolute squaring resolution and
+was corrected to 2048 bits; failed generation/parser receipts are preserved too.
+GPUP-REFINE is next and needs its own accepted SPEC-0021 subset and allocation.
+
 ## Bounded exact executor: range refusals and no fresh-solve speedup
 
 [GPUP-EXEC](../docs/benchmarks/lp-exact-executor-gpup-exec.md) passes its bounded
