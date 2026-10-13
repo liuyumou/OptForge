@@ -21,8 +21,11 @@ selected. [GPUP-STATE](../docs/benchmarks/lp-expansion-state-gpup-state.md) clos
 with ADR-0036's resource admission refusal: the first full-bin FMA primitive uses
 255 registers and nonzero spills in both expansion formats. PR 19's compact
 full-range FMA passes at 40 registers and zero spills, with 5900 additional
-independent cases per construction and host UBSan checks. No full controller,
-state/replay or comparative study is admitted. GPU charge is zero. GPUP-REFINE
+independent cases per construction and host UBSan checks. All 6170 device cases,
+four scoped sanitizers and 36 primitive timing attempts pass on RTX PRO 6000
+Blackwell. The blocked 5090 attempt and receipt-reader repair remain visible;
+combined charge is 30.114068273 seconds. No full controller, state/replay or
+solver benefit is admitted. GPUP-REFINE
 is next and needs its own accepted contract/allocation.
 
 | State | Features |
@@ -246,5 +249,5 @@ That study handed off to GPUP-7; the 2026-10-12 order inserted GPUP-REP, which i
 now complete, followed by GPUP-EXEC under ADR-0035. GPUP-STATE closes with the
 bounded resource admission refusal and compact FMA review under ADR-0036; GPUP-REFINE is next and
 requires its own accepted numerical/resource contract. Current GPU consumption
-is 17635.432015338 / 21602.574545061 seconds; the 16366-event ledger preserves
+is 17665.546083611 / 21602.574545061 seconds; the 16452-event ledger preserves
 every historical prefix. No supported preset follows.

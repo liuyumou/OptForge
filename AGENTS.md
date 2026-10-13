@@ -16,10 +16,14 @@ full-range compact FMA: 40 registers and zero spills in both formats, with 5900
 additional independent cases per construction and host UBSan acceptance. The
 first refusal remains exact but no longer establishes a scalar resource obstacle.
 The instruction audit and frozen transcendental verification are repaired.
-No controller,
-state/replay or comparative study is admitted, and no format-impossibility or
-performance claim follows. GPU charge is zero; the 16366-event ledger and
-17635.432015338 / 21602.574545061 seconds below remain exact. GPUP-REFINE is next
+The compact scalar now passes 6170 device cases, two fresh checks, four scoped
+sanitizers and 36 independently verified primitive timings on the user-selected
+idle RTX PRO 6000 Blackwell. The busy-5090 admission refusal and a memcheck
+stdout-reader correction remain visible; no execution is retried. No controller,
+state/replay or solver benefit is admitted. Combined GPU charge is 30.114068273 s;
+cumulative consumption is 17665.546083611 / 21602.574545061 s. The 16452-event
+ledger SHA-256 is 24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18,
+preserving the original 16366-event prefix and every phase ceiling. GPUP-REFINE is next
 and requires an accepted SPEC-0021 subset and its own allocation; unused state
 allowance does not reserve it. Preserve full expansion/alternative construction
 gates, original-model host authority, identities and all historical evidence.

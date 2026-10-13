@@ -1,6 +1,6 @@
 # SPEC-0020: Exact compact LP storage and expansion arithmetic
 
-Status: accepted for GPUP-REP CPU reference, GPUP-EXEC bounded exact dots and GPUP-STATE admission refusal; full expansion state remains draft
+Status: accepted for GPUP-REP CPU reference, GPUP-EXEC bounded exact dots and GPUP-STATE refusal/scoped scalar device validation; full expansion state remains draft
 Scope: research-only representations and arithmetic, not solver convergence
 Owner: numerical backend
 Introduced: GPUP-DESIGN, 2026-10-12
@@ -450,3 +450,21 @@ primitive family, error-envelope ABI, controller, device execution or performanc
 claim. Every addressed instruction MUST be parsed or refused, and archive
 verification MUST execute its frozen transcendental candidate against the
 independently reproduced fixture, not only reproduce the oracle's expectations.
+
+The subsequently authorized ADR-0036 primitive device extension admits only the
+compact FMA diagnostic and its bounded chain/batch benchmark after exact-source
+CPU, instruction and resource gates. It MUST execute through the existing CUDA
+driver boundary under the shared supervised lease, preserve the 16366-event
+ledger prefix and charge every attempt. All 6170 independent cases, signed-zero
+and overflow guard outcomes, partial launches, canaries, fresh-process repetitions
+and four scoped sanitizer checks MUST pass before descriptive timings are admitted.
+The timing roster and caps are frozen in ADR-0036; each warmup and measured
+endpoint MUST verify independently. Synchronized launch wall time and dependent
+chain cycles MUST retain their distinct scopes and setup/transfer costs. No
+complete controller, solver timing, error-envelope ABI or preset is admitted.
+
+The completed extension is scoped to the compact scalar: 6170 independent device
+cases, two ordinary fresh checks, four sanitizers and 36 verified primitive timing
+attempts on the user-selected idle RTX PRO 6000 Blackwell. The blocked 5090 cohort
+and CPU-only memcheck receipt correction are retained under ADR-0036. This fulfills
+those diagnostic obligations, with no full-family/controller or solver benefit.

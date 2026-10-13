@@ -37,7 +37,9 @@ with [ADR-0036's resource refusal](../benchmarks/lp-expansion-state-gpup-state.m
 the first full-range exact-bin FMA construction exceeds register/spill limits in
 both expansion formats. PR 19's compact full-range FMA fits at 40 registers and
 zero spills, so the first failure is construction-specific. Full controller/state
-remains unimplemented; device acceptance is separate. GPUP-REFINE is next.
+remains unimplemented. Scoped scalar device validation now passes 6170 cases,
+four sanitizers and 36 descriptive primitive timings on RTX PRO 6000 Blackwell;
+no solver benefit follows. GPUP-REFINE is next.
 
 ## Implemented foundation and evidence that motivates change
 

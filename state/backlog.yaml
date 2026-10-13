@@ -246,7 +246,7 @@ tasks:
     status: complete
     depends_on: [GPUP-EXEC]
     specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
-    acceptance: "ADR-0036 bounded admission investigation: original 192 integer/270 FMA/64 update/48 transcendental cases and full-bin refusal at 255 registers retained; PR 19 compact full-range FMA fits at 40 registers/zero spills with 5900 additional cases per construction and host UBSan; instruction/frozen-candidate verifier fixes; no controller or study admitted, zero GPU, original ledger retained; full native gate"
+    acceptance: "ADR-0036 bounded admission investigation: original 192 integer/270 FMA/64 update/48 transcendental cases and full-bin refusal at 255 registers retained; PR 19 compact full-range FMA fits at 40 registers/zero spills with 5900 additional cases per construction and host UBSan; instruction/frozen-candidate verifier fixes; 6170 device cases/four scoped sanitizers/36 verified primitive timings on PRO 6000; blocked 5090 and receipt-only correction retained; no controller or solver benefit; charge 30.114068273 GPU s, 16452 events; full native gate"
   - id: GPUP-REFINE
     title: Accept and evaluate residual-driven LP refinement and anchored products
     status: ready

@@ -155,3 +155,107 @@ records the independent freeze, stronger evidence verifier and full pinned-nativ
 acceptance. The scalar obstruction is therefore construction-specific and does
 not remain a reason to reject all full-range FMA. Full device/controller behavior
 remains unaccepted and GPUP-REFINE retains its separate contract/allocation gate.
+
+## Authorized primitive device extension (2026-10-13)
+
+The user explicitly authorizes device evaluation and publication in PR 19 after
+the compact CPU proof/resource pass. This supersedes the earlier review's
+zero-GPU restriction only for this bounded scalar experiment. No full controller,
+state/replay API, solver performance study or change of next_ready_task follows.
+
+Use an isolated safe Rust diagnostic example through optimizer-cuda-sys's
+existing driver boundary and the shared supervised lease on
+GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48. Ordinary Cargo builds require no toolkit.
+Retain the original refused construction; never launch its kernels. Audit the
+actual differential and benchmark images before execution under the unchanged
+128-register/zero-spill/no-native-FP64 gate. Bound allocations to 64 MiB and
+initialize outputs/guards, with guard outcomes and untouched overflow outputs
+checked explicitly. Device inputs are canonical finite 48/64-bit operands.
+
+Freeze two fresh-process correctness attempts. Each checks all 6170 historical
+and supplementary cases, block sizes 64/128/256, and zero/partial-block launches
+at counts 0/1/31/32/33/127/128/129. Repeated launches must match bitwise and both
+processes must match independent oracle expectations. Run memcheck, racecheck,
+initcheck and synccheck over the same correctness paths and bounded instances of
+the benchmark paths. Every failed or interrupted identity remains visible.
+
+The descriptive timing roster has two precisions, three patterns (exact unit
+increment, far-tail sign alternation, and exact cancellation), two shapes
+(one dependent chain of 16385 operations and 65536 independent chains of 129
+operations), and three fresh-process repetitions: 36 attempts. Cycle counts
+describe dependent-chain work including control; synchronized launch wall time
+includes submission and synchronization. Report input/output transfers, context,
+module, allocation and total process/lease costs separately. Timings do not imply
+FP64 equivalence, a speedup over the refused implementation, or a solver benefit.
+Inputs/results are exactly specified dyadics; independent expected endpoints
+are verified before timing is admitted. One warmup precedes one measured launch
+per fresh attempt, with both checked; no result-dependent tuning or retries.
+Odd iteration counts make alternating/cancelling endpoints differ from their
+initial values; generated-code inspection must also retain the dynamic loop.
+
+Reserve at most 1100 GPU seconds of the existing GPUP-STATE allocation: 600
+screening timing and 500 repeatability acceptance (inside 2300/850). Two 30-second
+correctness jobs, four 90-second sanitizer jobs and 36 ten-second timings reserve
+1032 seconds including deadline+6 per job. CPU cap 14400 seconds/four jobs, RSS
+8 GiB and new artifacts 4 GiB. Campaign and phase ceilings are unchanged.
+Every execution requires an exact-source full native gate and frozen executable,
+source, image, protocol, requests and independent fixtures. Append to the existing
+canonical ledger, preserving its 16366-event prefix and all historical identities;
+charge actual lease time or conservative crash reservations. Report device
+correctness and descriptive primitive measurements separately from open complete
+state/controller obligations, then publish the implementation and evidence in
+the existing PR 19 without merging it.
+
+### Explicit alternate-device cohort (2026-10-13)
+
+The first gpup-state-device-v1 attempt was blocked by external activity before
+child/context launch, charged 3.002084480 seconds, and retained without retry;
+its other 41 cells remain unexecuted. The user explicitly requested using another
+idle GPU if available, otherwise publishing the incomplete device result.
+Discovery found both RTX 5090s occupied and the sm_120 RTX PRO 6000 Blackwell
+Server Edition GPU-6721b13a-30f9-83ec-dace-ba2d9738556f idle. Admit a separately
+frozen gpup-state-device-v2 cohort on that device, retaining the same arithmetic,
+roster, compiler options and acceptance gates. This is an explicitly authorized
+device change before any numerical endpoint or timing, not outcome selection.
+Keep every v1 receipt and do not retry its identities. Use the same shared host
+lock; no simultaneous devices. Timings describe the PRO 6000 only and cannot be
+substituted for prior RTX 5090 results or treated as cross-device equivalence.
+
+The v2 cap is 1096 seconds: 496 acceptance and 600 timing. Adding the v1 charge
+stays below the original 1100 total/500 acceptance/600 timing authority; the
+unused fractional second is not reserved. Preserve the 16368-event prefix
+SHA-256 a97630527900a1a11cfd612bd3f96d55a86c211555bb0adc7de3ab52adebfc96 and
+17638.434099818 cumulative seconds, as well as all earlier prefixes. No further
+cohort, automatic device fallback or retry is admitted by this amendment.
+
+The v2 first two checks passed. Memcheck returned zero and wrote its zero-error
+summary to stdout, but the verifier read only stderr and classified the receipt
+as missing. A CPU-only evidence repair may inspect both captured streams, retain
+the original classification, and bind a reviewed result to its raw result,
+worker, endpoint and log hashes. No execution is repeated. Before continuing
+unattempted cells, freeze the revised verifier source and pass its exact-source
+full native gate; compare its archive against the original and permit differences
+only in the verifier, its source-only tests, this decision and active task.
+All executable/kernel/build/supervisor sources, corpus, protocol and compiled
+artifacts must remain identical. This repairs evidence interpretation, not the
+numerical result, sanitizer outcome, threshold, roster or device contract.
+
+### Recorded device outcome
+
+The v2 cohort completes all 42 endpoints: two ordinary checks, four scoped
+sanitizers and 36 independently verified primitive timings, on the PRO 6000 only.
+All six correctness processes agree over the 6170-case corpus and partial/benchmark
+paths. The original v1 has one activity-blocked attempt and 41 unexecuted cells.
+The memcheck classification repair retains its failed raw classification and
+accepts the unchanged zero-error endpoint; no execution is repeated. The
+[report](../benchmarks/lp-expansion-state-gpup-state.md#scoped-device-validation-and-primitive-costs)
+records all timings, limits and exact source/repair identities. Dependent patterns
+cost approximately 7928–11724 cycles/FMA; no FP64 or solver performance comparison
+is established. Scalar/resource admission passes; full controller obligations remain.
+
+Combined charge is 30.114068273 seconds: 8.460919662 acceptance and 21.653148611
+timing, within all original caps. Cumulative consumption is 17665.546083611 /
+21602.574545061 seconds. The 16452-event ledger SHA-256 is
+24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18, preserving both
+16368- and 16366-event prefixes and every historical phase ceiling. No next-task
+reservation follows. Full pinned-native acceptance includes 289 Python tests.

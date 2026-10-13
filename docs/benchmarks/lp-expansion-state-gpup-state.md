@@ -1,20 +1,22 @@
 # GPUP-STATE: original admission refusal and compact FMA challenge
 
-Status: original refusal retained; compact FMA passes CPU/compile-only admission; full controller remains gated
+Status: original refusal retained; compact FMA passes scoped device validation; full controller remains gated
 Owner: numerical backend and validation tooling
 Introduced: GPUP-STATE, 2026-10-13
 Last reviewed commit: bootstrap
-Implementation: CPU mathematical validation and compile-only diagnostics
-Tests: independent fixture, CPU integer/Fraction differentials, resource audit and native gate
+Implementation: CPU mathematical validation, compile-only controls and isolated Rust/CUDA scalar diagnostics
+Tests: independent CPU/device differentials, four scalar sanitizers, verified primitive timings, resource audit and native gate
 
 ## Result and limits
 
 PR 19 review finds that the scalar resource obstacle is avoidable: a full-range
 compact FMA uses **40 registers and zero stack/spills** in each expansion format,
 under the same compiler options and 128-register/zero-spill limit. Independent
-Fraction comparisons and host undefined-behavior checks pass. This is a scalar
-CPU/compile-only result; the full controller remains unimplemented and unadmitted.
-There is no device correctness or solve-performance result.
+Fraction comparisons and host undefined-behavior checks pass. The compact scalar
+implementation also passes all 6,170 independent cases on an RTX PRO 6000 Blackwell,
+fresh-process repeatability and four scoped sanitizers. All 36 descriptive primitive
+timing endpoints verify. The full controller remains unimplemented and unadmitted;
+no solve-performance result follows.
 
 The original direct exact-bin implementation still fails the resource gate:
 both 48-bit compensated-pair and 64-bit expansion variants require **255 registers**,
@@ -31,8 +33,9 @@ still need their own implementations and gates.
 The smaller 320-bit restoring division/root construction fits at 62 registers;
 an unprojected primal/Halpern update fits at 76. Both have zero stack/spills.
 Every inspected path contains no native FP64 arithmetic or unaudited calls.
-These are compile-only resource results. No CUDA context or device workload ran,
-so no device correctness, sanitizer, checkpoint/replay or performance pass is claimed.
+Those division/root and update controls remain compile-only: they were not
+launched. Device correctness, sanitizer and timing evidence below applies only to
+the compact scalar FMA and its chain/batch wrapper, with no checkpoint/replay pass.
 
 | Planned comparison | Timing cells | Profiles | Admitted/executed |
 | --- | ---: | ---: | ---: |
@@ -44,7 +47,7 @@ so no device correctness, sanitizer, checkpoint/replay or performance pass is cl
 All eight inherited development models, original tolerances/seeds/deadlines and
 the 96-timing/12-profile proposal remain documented inputs. No planned cell is
 reported as a failed solve, a primary attempt, a timing, or evidence of residual
-contraction. Full controller, pair codec, complete state/snapshots, publication
+contraction. Full controller, pair codec, complete state/snapshots, solver publication
 and runtime modules remain gated. Existing original-model certification remains
 the authority and all runtime sources/legacy behavior remain unchanged.
 
@@ -70,7 +73,7 @@ The tested construction decodes finite dyadics and retains this bin in the
 thread's working values. The compiler exceeds the register ceiling and spills.
 The compact review construction below demonstrates that every aligned zero bit
 need not be retained. It needs no explicit global scratch and preserves the full
-scalar range. Device execution costs remain unmeasured. Other scratch algorithms
+scalar range. Its separately measured primitive costs appear below. Other scratch algorithms
 retain their own proof and traffic/allocation gates. Narrowing scalar ranges or
 returning to FP64 changes the requested numerical contract.
 
@@ -150,6 +153,95 @@ CPU seconds and 1663545344 bytes maximum child RSS. Logs and resource receipts
 are `native.log` and `native-resources.json` in the review artifact directory.
 Native coverage is enabled, and no GPU workload runs.
 
+## Scoped device validation and primitive costs
+
+The original RTX 5090 cohort, gpup-state-device-v1, was refused by the quiet-device
+admission check before child/context launch. It retains one blocked attempt and
+41 unexecuted cells, with 3.002084480 seconds charged. Both RTX 5090s were busy;
+the user explicitly requested another idle GPU. The separately frozen v2 cohort
+uses **RTX PRO 6000 Blackwell Server Edition, sm_120, 188 multiprocessors**,
+GPU-6721b13a-30f9-83ec-dace-ba2d9738556f. These are PRO 6000 measurements and
+establish no equivalence with historical RTX 5090 timings. The shared host lease
+remained in force; no project workload used two GPUs simultaneously.
+
+V2 verifies all 42 endpoints: two ordinary fresh-process checks, four scoped
+compute-sanitizer checks and 36 timing attempts. Each correctness process checks
+all 6,170 cases (3,085 per precision), twice each at block sizes 64/128/256, plus
+counts 0/1/31/32/33/127/128/129 and short odd/even benchmark chains. Overflow
+refusals preserve initialized outputs; unused outputs and canaries remain exact.
+All six 40-launch correctness endpoints have the same numerical SHA-256:
+ab00b1babc428941e17fe073c2b0609e5cffc9c6666cb59c7a73ed95a23e4b1c.
+Memcheck, racecheck, initcheck and synccheck pass for these paths. The compact
+entry points use 40 registers and benchmark wrappers 48, with no stack/spills,
+native FP64 arithmetic or unaudited calls. The generated dynamic loops and clock
+reads remain present. No rejected full-bin kernel is launched.
+
+The first memcheck classification incorrectly reported a missing receipt because
+the verifier read stderr and this installation writes the summary to stdout.
+Its raw zero-exit worker, zero-error summary, endpoint and failed classification
+remain immutable. A separately hashed reviewed classification fixes only receipt
+interpretation; **no attempt is repeated**. The continuation archive differs only
+in the verifier, its source-only tests, ADR-0036 and active task. Every executable,
+kernel, build, supervisor, corpus and protocol source matches the original freeze.
+The repaired reader requires an exact zero-error/zero-hazard summary in either
+captured stream. Its own exact-source full native gate passed before continuation.
+
+The fixed timing roster is two precisions × three patterns × two shapes × three
+fresh-process repetitions, with one checked warmup and one checked measured launch.
+A chain is one thread performing 16,385 dependent FMAs. A batch is 65,536 threads
+each performing 129 dependent FMAs (8,454,144 operations). Inputs are runtime values;
+odd iteration counts produce endpoints different from the initial states. Every
+warmup and measured result is checked against independent exact dyadic endpoints.
+The table gives medians; the [full summary](data/state/device-v2.json) retains
+all attempts and min/max values, without selecting a best repetition.
+
+| Precision | Pattern | Chain launch (ms) | Cycles/FMA | Batch launch (ms) | Batch GFMA/s |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 48 | increment | 71.307 | 10139.0 | 0.680 | 12.437 |
+| 48 | far_tail | 55.769 | 7927.5 | 0.545 | 15.509 |
+| 48 | cancellation | 55.903 | 7948.9 | 0.896 | 9.432 |
+| 64 | increment | 82.461 | 11724.0 | 0.783 | 10.801 |
+| 64 | far_tail | 68.075 | 9679.0 | 0.657 | 12.872 |
+| 64 | cancellation | 62.061 | 8823.3 | 1.051 | 8.048 |
+
+Cycles/FMA includes dependent-loop control and is not a native instruction latency.
+Launch wall time includes host submission and synchronization. Batch GFMA/s divides
+logical scalar operations by that wall time; it is not solver throughput. Median
+context creation across cells ranges from 220.8 to 254.6 ms, module/stream setup
+25.1–26.1 ms, allocation 0.184–0.202 ms, measured upload 0.031–0.966 ms and download
+0.029–0.409 ms. Total process work is 410.7–503.2 ms, excluding final endpoint-file
+serialization; charged lease time includes that output and supervision. The
+maximum explicit device allocation is 4,980,812 bytes, below the 64 MiB limit.
+
+The engineering conclusion is narrower than a speedup: full-range scalar FMA is
+feasible under the register/spill gate, but these dependent patterns still cost
+roughly 7,928–11,724 cycles per operation. Batch parallelism changes throughput
+substantially. There is no executed FP64/full-bin comparator, full controller,
+LP workload, worst-case latency sweep or hardware-clock control. Three repetitions
+on one GPU are descriptive, not a general performance ranking. Successful scalar
+admission does not close division/root/transcendental, state/replay or numerical
+error-budget obligations for the full controller.
+
+The [blocked v1 summary](data/state/device-v1.json) and v2 summary preserve all
+planned outcomes. Raw source archives, binaries, images, endpoints, stream logs,
+requests, worker receipts and immutable ledger snapshots remain under
+artifacts/gpup-state-device-v1 and artifacts/gpup-state-device-v2. V2's original
+source identity is fa77a3fcf7ead3179b368fec802d3e7d392422063e7fb8638d9dd0ece29b46f9;
+freeze SHA-256 is 6bb24a27ab7265e161af22948087a6c522ee09898e6e83f2b128292744bb4671.
+The verifier continuation source is
+55b9d5592760156751ab4a0d44b2a3b2b717cf6bf35ca08bedce80e23b0d9741.
+Full pinned-native acceptance passes with 289 Python tests; 30 focused state tests
+cover the arithmetic and evidence readers. Preflight syntax/lint failures and all
+historical freezes are retained. Ordinary Cargo builds still need no CUDA toolkit.
+
+~~~bash
+# Reverify retained outcomes without executing a GPU job.
+python3 tools/lp_state_device.py report --cohort v1
+python3 tools/lp_state_device.py report --cohort v2
+python3 -m unittest discover -s tests/integration -p 'test_lp_state*.py' -v
+CARGO_BUILD_JOBS=4 bash tools/check.sh
+~~~
+
 ## Original transcendental admission
 
 The CPU scalar candidate uses directed integer intervals at resolutions 128,
@@ -228,18 +320,26 @@ under the task artifacts; none is promoted to accepted evidence.
 
 ## Accounting and handoff
 
-The user allocated 3600 GPU seconds inside existing authority, split 2300 timing,
-450 profiles and 850 acceptance. **Actual GPU charge is zero.** No GPU reservation
-or ledger event was appended. Cumulative consumption remains
-17635.432015338 / 21602.574545061 seconds, with exactly 16366 events and SHA-256
-4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b.
-Every prior phase ceiling/prefix and historical limitation remains. Compiling and
-inspecting a code object is provisioning/CPU work, not executing a project GPU job.
+The original CPU/compile-only investigation and review charged zero GPU seconds.
+The device extension uses the existing GPUP-STATE authority: 1100 seconds total,
+500 acceptance and 600 timing, within the original 3600/850/2300 allocation and
+unchanged campaign/phase ceilings. V1 charged 3.002084480 seconds for refused
+admission; v2 charged 27.111983793 seconds (5.458835182 acceptance and
+21.653148611 timing). **Combined charge is 30.114068273 GPU seconds**, including
+8.460919662 acceptance. No profiles or additional allowance were used.
 
-GPUP-STATE retains the demonstrated first-construction refusal and the review's
-compact scalar counterexample. The original resource obstacle is resolved for
-this scalar primitive, while full state/controller/device acceptance remains
-open. No preset or accuracy/performance benefit is selected.
-GPUP-REFINE is next, with native FP64 outer state first and its own accepted
-SPEC-0021 subset and allocation. The unused state allocation does not reserve
-that next task or authorize runtime/device expansion implementation.
+Cumulative consumption is **17665.546083611 / 21602.574545061 seconds**. The
+16452-event ledger SHA-256 is
+24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18,
+preserving the 16368-event v1 prefix
+a97630527900a1a11cfd612bd3f96d55a86c211555bb0adc7de3ab52adebfc96 and original
+16366-event prefix 4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b.
+Independent verification replays every reservation/settlement and checks phase,
+cohort and cumulative caps. All historical evidence and limitations remain.
+
+GPUP-STATE retains the first-construction refusal and the compact scalar
+counterexample, now with scoped device validation and descriptive measurements.
+Full state/controller acceptance remains open. No preset or solver benefit is
+selected. GPUP-REFINE is next, with native FP64 outer state first and its own
+accepted SPEC-0021 subset and allocation. Unused state allowance does not reserve
+that next task or authorize complete expansion-state implementation.

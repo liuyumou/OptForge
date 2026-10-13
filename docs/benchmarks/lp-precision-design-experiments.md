@@ -15,11 +15,12 @@ endpoints and 58/96 certified timings, including all failures and range refusals
 Its explicitly amended budget and final ledger supersede the historical resource
 snapshot below for current accounting. The remaining component/interaction plan
 still grants no workload, behavior or reservation. GPUP-STATE's bounded
-[admission refusal](lp-expansion-state-gpup-state.md) under ADR-0036 executes no
-GPU jobs: its first full-bin primitive fails register/spill limits in both
-formats. PR 19's compact full-range FMA fits at 40 registers and zero spills,
-resolving the scalar obstacle in a CPU/compile-only challenge. Full state and
-device execution remain gated. GPUP-REFINE is next and
+[admission refusal](lp-expansion-state-gpup-state.md) under ADR-0036 initially ran
+no GPU jobs: its first full-bin primitive fails register/spill limits in both
+formats. PR 19's compact full-range FMA fits at 40 registers and zero spills and
+passes 6170 device cases, four scoped sanitizers and 36 descriptive timing attempts
+on RTX PRO 6000 Blackwell. The busy-device refusal remains; combined charge is
+30.114068273 seconds. Full state and solver benefit remain open. GPUP-REFINE is next and
 requires its own accepted contract and allocation.
 
 ## Questions and primary endpoint

@@ -15,9 +15,16 @@ FMA: both formats compile to 40 registers and zero stack/spills under the same
 options and gate. The rounding proof and 5900 additional independent cases per
 construction pass, including host UBSan and the original FMA cases. The original
 refusal remains exact, but no longer supports stopping on scalar resource grounds.
-Device correctness, division/root/transcendental implementations, the complete
-controller and original-model error budgets are still open. No performance or
-whole-controller resource result follows from a standalone scalar kernel.
+The compact scalar passes 6170 device cases, fresh-process repeatability, four
+scoped sanitizers and 36 independently verified primitive timing attempts on
+RTX PRO 6000 Blackwell. Division/root/transcendental implementations, the complete
+controller and original-model error budgets remain open. No solver performance or
+whole-controller resource result follows from the scalar kernel. Dependent
+patterns cost about 7928–11724 cycles/FMA; no FP64 comparator was executed.
+The first 5090 attempt was blocked before child launch by external activity;
+41 remaining v1 cells stay unexecuted. The user authorized the idle PRO 6000
+cohort. Memcheck's raw zero-error stdout and original missing-receipt classification
+are retained; a bound CPU-only correction accepts that receipt without reexecution.
 
 The review also repairs skipped uniform-predicated instructions and missing
 frozen transcendental execution in the archive verifier. The complete file
@@ -29,13 +36,16 @@ artifacts/gpup-state-pr-review-20261013.
 The independent CPU fixture validates 192 integer cases, 270 FMA cases, 64 update
 graphs and 48 log/exp cases. Compilation and instruction inspection run no GPU
 job. Neither complete expansion controller, snapshots/replay nor the proposed
-96-timing/12-profile study is implemented/admitted. No residual, timing, device
-differential/sanitizer or preset claim follows. This rejects the tested full-bin
+96-timing/12-profile study is implemented/admitted. No solver residual/timing or preset claim follows; the separate scalar
+device checks above do not qualify the full primitive family. This rejects the tested full-bin
 construction, not all guard/sticky or explicit-scratch alternatives; those need
 their own bounded contracts and accounting. No automatic hybrid fallback occurs.
 
-GPU charge is zero; all 16366 ledger events and SHA-256
-4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b remain exact.
+The original CPU/compile-only result charged zero GPU seconds. Its device extension
+charges 30.114068273 seconds, including blocked admission; cumulative consumption
+is 17665.546083611 / 21602.574545061 seconds. The 16452-event ledger SHA-256 is
+24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18, preserving the
+16366-event prefix 4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b.
 The log/exp oracle initially used insufficient absolute squaring resolution and
 was corrected to 2048 bits; failed generation/parser receipts are preserved too.
 GPUP-REFINE is next and needs its own accepted SPEC-0021 subset and allocation.

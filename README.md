@@ -30,8 +30,10 @@ endpoints and explicit range/coverage limits, with no fresh-solve speedup or pre
 resource admission refusal under ADR-0036: its first full-range exact-bin
 primitive exceeds the register/spill gate in both expansion formats. PR 19's
 full-range compact FMA passes at 40 registers and zero spills, resolving that
-scalar obstacle. No full controller or comparative study is admitted; GPU charge is zero. GPUP-REFINE
-is next and requires its accepted contract and separate allocation.
+scalar obstacle. It passes 6170 device cases, four scoped sanitizers and 36
+independently verified primitive timings on RTX PRO 6000 Blackwell. The original
+busy-device refusal is retained; total charge is 30.114068273 GPU seconds. No
+full controller or solver performance benefit is admitted. GPUP-REFINE is next and requires its accepted contract and separate allocation.
 
 The [COPT comparison and component report](docs/benchmarks/lp-copt-comparison.md)
 now covers all 1140 planned attempts through 65536 rows. It identifies evidence

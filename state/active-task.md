@@ -1,5 +1,47 @@
 # Active Task
 
+## PR 19 device validation and publication (2026-10-13)
+
+Status: implementation, device experiments and final native acceptance complete;
+publication in PR 19 is authorized and is the final delivery step.
+The first frozen cohort was refused before child launch by external GPU activity;
+retain its 3.002084480-second charge and all 41 unexecuted cells. The user then
+explicitly requested another idle GPU if available. Discovery found idle sm_120
+RTX PRO 6000 GPU-6721b13a-30f9-83ec-dace-ba2d9738556f; both 5090s were busy.
+Run a separately frozen gpup-state-device-v2 cohort on that device, under the same
+shared host lock. Its cap is 1096 seconds (496 acceptance/600 timing), so both
+cohorts together remain below the original 1100/500/600 limits. Preserve the
+16368-event prefix a97630527900a1a11cfd612bd3f96d55a86c211555bb0adc7de3ab52adebfc96
+and 17638.434099818 cumulative seconds. Do not retry either cohort's identities.
+V2's two ordinary device checks passed. Memcheck exited zero with an exact
+endpoint and its zero-error summary in stdout; the verifier incorrectly read
+only stderr. Repair receipt reading on CPU, preserve the original failed
+classification, bind a reviewed classification and continuation source archive,
+and resume only unattempted cells. No device/executable/input/protocol change or
+GPU retry is authorized by this evidence repair.
+Objective: validate the compact full-range FMA on the selected device, measure
+bounded primitive behavior, and publish the review commits and revised PR scope.
+Acceptance: exact independent corpus differentials at multiple block sizes,
+fresh-process repeatability, four scoped sanitizers, instruction/resource audit,
+frozen primitive timings with independent endpoints and complete cost accounting,
+full pinned-native gate, evidence/ledger verification and PR checks. No merge.
+Likely files: a safe Rust diagnostic example using optimizer-cuda-sys, separate
+CUDA probe, bounded protocol/runner/report/tests, ADR-0036 and handoff documents.
+Resources: 14400 CPU seconds/four jobs, 8 GiB host RSS, 64 MiB device allocation,
+4 GiB new artifacts; at most 1100 GPU seconds, comprising 600 screening timing
+and 500 repeatability acceptance, within the existing 2300/850 GPUP-STATE caps.
+Frozen roster: two 30-second device checks, four 90-second sanitizer checks and
+36 ten-second timing attempts; deadline+6 reservations total 1032 seconds.
+Use only GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 under the shared host lease and
+existing supervised ledger. Retain all failures without primary retries.
+Preserve the 16366-event prefix SHA-256
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b and inherited
+17635.432015338 / 21602.574545061 GPU seconds. No added campaign/phase allowance.
+Keep all prior evidence immutable; new receipts belong in
+artifacts/gpup-state-device-v1. Full controller, solver timings, runtime selectors
+and GPUP-REFINE remain outside this bounded extension. Push the completed changes
+to codex/gpup-state and update PR 19 after acceptance; do not merge it.
+
 ## PR 19 numerical and experiment review (2026-10-13)
 
 Status: review and targeted repairs complete; full pinned-native acceptance passed.
@@ -5513,3 +5555,36 @@ artifact validation for a missing Python `jsonschema`. That diagnosis is stale.
 imports as a precondition, so this class of failure is reported in seconds rather
 than after several minutes of compilation. C1 native HiGHS and solve CLI
 implementation are now complete; see the C1 record at the top of this file.
+
+## PR 19 device-extension acceptance evidence (2026-10-13)
+
+Implementation, experiments and final pinned-native acceptance are complete.
+Final acceptance log: artifacts/gpup-state-device-v2/final-native.log (289 Python
+tests, all Rust/native/dependency, committed-record replay, documentation and smoke
+gates passed). Publication checks follow after pushing the reviewed commits.
+The user-selected idle RTX PRO 6000 Blackwell completed 42/42 endpoints: all 6170
+independent cases, two ordinary fresh checks, four scalar sanitizers and 36 fixed
+primitive timing attempts. Each correctness process retains 40 launches, including
+partial counts and short benchmark paths; all six numerical hashes match. Every
+warmup and measured endpoint independently verifies. Scalar/benchmark images use
+40/48 registers and no stack/spills. No full controller or solver speedup follows.
+
+The busy-5090 v1 attempt is retained (3.002084480 s), with 41 cells unexecuted.
+The v2 memcheck zero-error stdout was initially misclassified by a stderr-only
+reader; the original result and all raw receipts remain immutable. A separately
+frozen, exact-source-native-gated verifier correction changes only four permitted
+source files and never re-executes an attempted identity. Both cohort summaries,
+continuation/source hashes and all reservation/settlement bindings reverify.
+
+Evidence: artifacts/gpup-state-device-v1 and artifacts/gpup-state-device-v2;
+reviewed public summaries are docs/benchmarks/data/state/device-v1.json and
+device-v2.json. The original full-bin archive also re-verifies unchanged.
+Pre-device full native gates passed with 287, then 288, then 289 Python tests;
+the last includes nine device-runner regressions (30 focused state tests total).
+Artifacts total under 300 MiB and explicit device allocations peak at 4,980,812 B.
+
+Combined charge: 30.114068273 GPU s (acceptance 8.460919662, timing 21.653148611).
+Cumulative: 17665.546083611 / 21602.574545061 s. Final 16452-event ledger SHA-256:
+24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18. Both 16368- and
+16366-event prefixes and all historical phase ceilings remain exact. No reservation
+or behavior for GPUP-REFINE follows. Publish in existing PR 19 without merging.

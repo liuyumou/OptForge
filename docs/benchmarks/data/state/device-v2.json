@@ -1,0 +1,1658 @@
+{
+  "attempts": [
+    {
+      "charged_ns": 612262538,
+      "error": null,
+      "id": "gpup-state-device-v2-accept-oracle",
+      "numerical_sha256": "ab00b1babc428941e17fe073c2b0609e5cffc9c6666cb59c7a73ed95a23e4b1c",
+      "status": "passed",
+      "worker_reason": "completed"
+    },
+    {
+      "charged_ns": 501226255,
+      "error": null,
+      "id": "gpup-state-device-v2-accept-repeat",
+      "numerical_sha256": "ab00b1babc428941e17fe073c2b0609e5cffc9c6666cb59c7a73ed95a23e4b1c",
+      "status": "passed",
+      "worker_reason": "completed"
+    },
+    {
+      "charged_ns": 828988209,
+      "error": null,
+      "id": "gpup-state-device-v2-accept-memcheck",
+      "numerical_sha256": "ab00b1babc428941e17fe073c2b0609e5cffc9c6666cb59c7a73ed95a23e4b1c",
+      "status": "passed",
+      "worker_reason": "completed"
+    },
+    {
+      "charged_ns": 1821461153,
+      "error": null,
+      "id": "gpup-state-device-v2-accept-racecheck",
+      "numerical_sha256": "ab00b1babc428941e17fe073c2b0609e5cffc9c6666cb59c7a73ed95a23e4b1c",
+      "status": "passed",
+      "worker_reason": "completed"
+    },
+    {
+      "charged_ns": 856619685,
+      "error": null,
+      "id": "gpup-state-device-v2-accept-initcheck",
+      "numerical_sha256": "ab00b1babc428941e17fe073c2b0609e5cffc9c6666cb59c7a73ed95a23e4b1c",
+      "status": "passed",
+      "worker_reason": "completed"
+    },
+    {
+      "charged_ns": 838277342,
+      "error": null,
+      "id": "gpup-state-device-v2-accept-synccheck",
+      "numerical_sha256": "ab00b1babc428941e17fe073c2b0609e5cffc9c6666cb59c7a73ed95a23e4b1c",
+      "status": "passed",
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 192119,
+      "chain_cycles_per_fma": 10139.023619163869,
+      "charged_ns": 591399905,
+      "context_ns": 220786873,
+      "download_ns": 29779,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-increment-chain-r0",
+      "launch_sync_ns": 71328157,
+      "module_stream_ns": 25663398,
+      "numerical_sha256": "8da37d31da8cefb25a9e892c0432a4386e360ff44d0718bc72266f669ba2d7a1",
+      "operations": 16385,
+      "operations_per_second": 229712.93089768183,
+      "process_work_ns": 461488893,
+      "status": "passed",
+      "upload_ns": 32964,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 189741,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 548590734,
+      "context_ns": 218612617,
+      "download_ns": 449953,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-increment-batch-r0",
+      "launch_sync_ns": 679775,
+      "module_stream_ns": 25218141,
+      "numerical_sha256": "321a3ecdd112a47064255eec6b5abcf1e81c4eab8b62946734a536fcee6218e2",
+      "operations": 8454144,
+      "operations_per_second": 12436679783.751976,
+      "process_work_ns": 394606595,
+      "status": "passed",
+      "upload_ns": 947556,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 187581,
+      "chain_cycles_per_fma": 7927.5310344827585,
+      "charged_ns": 634591702,
+      "context_ns": 281452462,
+      "download_ns": 29765,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-far_tail-chain-r0",
+      "launch_sync_ns": 55769107,
+      "module_stream_ns": 25437199,
+      "numerical_sha256": "34d47ab4abfa49ea117c6f14c58d29f47419a341420c0bf49283f3451d451469",
+      "operations": 16385,
+      "operations_per_second": 293800.6520348264,
+      "process_work_ns": 490018800,
+      "status": "passed",
+      "upload_ns": 31374,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 200226,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 590056537,
+      "context_ns": 252266438,
+      "download_ns": 490667,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-far_tail-batch-r0",
+      "launch_sync_ns": 545821,
+      "module_stream_ns": 25228477,
+      "numerical_sha256": "3a2fa03bcdaac9c0f3db8940122e9f3782f67a35d1fbe4407acf920f98014b15",
+      "operations": 8454144,
+      "operations_per_second": 15488858068.854074,
+      "process_work_ns": 424906160,
+      "status": "passed",
+      "upload_ns": 1314132,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 187950,
+      "chain_cycles_per_fma": 7948.863167531279,
+      "charged_ns": 598417070,
+      "context_ns": 242313723,
+      "download_ns": 29402,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-cancellation-chain-r0",
+      "launch_sync_ns": 55902137,
+      "module_stream_ns": 25367662,
+      "numerical_sha256": "0e598f309cae2ec48603e60038a13096d85a774a122efb8e7187f1c371492656",
+      "operations": 16385,
+      "operations_per_second": 293101.4962809025,
+      "process_work_ns": 453695672,
+      "status": "passed",
+      "upload_ns": 32791,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 202238,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 579474605,
+      "context_ns": 241206636,
+      "download_ns": 468256,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-cancellation-batch-r0",
+      "launch_sync_ns": 896293,
+      "module_stream_ns": 25518442,
+      "numerical_sha256": "1c690582cb9a8a060f92943e98b72841c69d549eb2d41e64e6b758d59e4d2b3a",
+      "operations": 8454144,
+      "operations_per_second": 9432344110.68702,
+      "process_work_ns": 418359262,
+      "status": "passed",
+      "upload_ns": 939986,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 188623,
+      "chain_cycles_per_fma": 11724.0236801953,
+      "charged_ns": 637361385,
+      "context_ns": 218616315,
+      "download_ns": 30225,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-increment-chain-r0",
+      "launch_sync_ns": 82475747,
+      "module_stream_ns": 25094496,
+      "numerical_sha256": "af411883fcdd54056888cbb6492e429e9b172af93a466cee1142526522300c35",
+      "operations": 16385,
+      "operations_per_second": 198664.4631421162,
+      "process_work_ns": 503177007,
+      "status": "passed",
+      "upload_ns": 31075,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 192609,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 575113000,
+      "context_ns": 228805871,
+      "download_ns": 373621,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-increment-batch-r0",
+      "launch_sync_ns": 780931,
+      "module_stream_ns": 25138415,
+      "numerical_sha256": "821be9d2c8a4747e64fd26fb2ef040fea6f546d62d99ad12b12a6581c39b55d8",
+      "operations": 8454144,
+      "operations_per_second": 10825724679.901297,
+      "process_work_ns": 403509816,
+      "status": "passed",
+      "upload_ns": 929854,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 186539,
+      "chain_cycles_per_fma": 9679.041074153189,
+      "charged_ns": 625448382,
+      "context_ns": 248942755,
+      "download_ns": 30914,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-far_tail-chain-r0",
+      "launch_sync_ns": 68067223,
+      "module_stream_ns": 24920513,
+      "numerical_sha256": "309d67ba367931c0687cac5c89502d81bd51583b66801a3e660ed155f7724e98",
+      "operations": 16385,
+      "operations_per_second": 240717.9149941228,
+      "process_work_ns": 482344348,
+      "status": "passed",
+      "upload_ns": 32469,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 191339,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 590127858,
+      "context_ns": 252753628,
+      "download_ns": 452578,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-far_tail-batch-r0",
+      "launch_sync_ns": 659620,
+      "module_stream_ns": 25507299,
+      "numerical_sha256": "06306d52c30212a6aa84343724b94b4c853280e371b417f180652bbe8fbb336c",
+      "operations": 8454144,
+      "operations_per_second": 12816688396.349413,
+      "process_work_ns": 428295730,
+      "status": "passed",
+      "upload_ns": 935561,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 182594,
+      "chain_cycles_per_fma": 8823.322551113824,
+      "charged_ns": 609601424,
+      "context_ns": 245978811,
+      "download_ns": 26454,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-cancellation-chain-r0",
+      "launch_sync_ns": 62061283,
+      "module_stream_ns": 25414958,
+      "numerical_sha256": "f6c0385b22dc234536a801e1a53fffc2b9eae21e5b504b91e9927ce580cc442b",
+      "operations": 16385,
+      "operations_per_second": 264013.233500184,
+      "process_work_ns": 466803635,
+      "status": "passed",
+      "upload_ns": 32513,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 195429,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 587116766,
+      "context_ns": 238459700,
+      "download_ns": 451234,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-cancellation-batch-r0",
+      "launch_sync_ns": 1050507,
+      "module_stream_ns": 25725359,
+      "numerical_sha256": "18dd296f6f2fbeaf3e543f747cd4070fa5abfe3dfc99295418797dafd692b3ae",
+      "operations": 8454144,
+      "operations_per_second": 8047679834.594153,
+      "process_work_ns": 415110131,
+      "status": "passed",
+      "upload_ns": 949660,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 198881,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 552958297,
+      "context_ns": 220376850,
+      "download_ns": 381665,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-cancellation-batch-r1",
+      "launch_sync_ns": 1050028,
+      "module_stream_ns": 25773680,
+      "numerical_sha256": "18dd296f6f2fbeaf3e543f747cd4070fa5abfe3dfc99295418797dafd692b3ae",
+      "operations": 8454144,
+      "operations_per_second": 8051351011.592072,
+      "process_work_ns": 400400307,
+      "status": "passed",
+      "upload_ns": 936418,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 183940,
+      "chain_cycles_per_fma": 8823.322551113824,
+      "charged_ns": 592104047,
+      "context_ns": 222605606,
+      "download_ns": 29176,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-cancellation-chain-r1",
+      "launch_sync_ns": 62062229,
+      "module_stream_ns": 25714402,
+      "numerical_sha256": "f6c0385b22dc234536a801e1a53fffc2b9eae21e5b504b91e9927ce580cc442b",
+      "operations": 16385,
+      "operations_per_second": 264009.20920838986,
+      "process_work_ns": 444438642,
+      "status": "passed",
+      "upload_ns": 32094,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 194709,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 583929144,
+      "context_ns": 249753383,
+      "download_ns": 375568,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-far_tail-batch-r1",
+      "launch_sync_ns": 654647,
+      "module_stream_ns": 25662635,
+      "numerical_sha256": "06306d52c30212a6aa84343724b94b4c853280e371b417f180652bbe8fbb336c",
+      "operations": 8454144,
+      "operations_per_second": 12914049861.986689,
+      "process_work_ns": 424481438,
+      "status": "passed",
+      "upload_ns": 942846,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 196624,
+      "chain_cycles_per_fma": 9679.040952090327,
+      "charged_ns": 672247258,
+      "context_ns": 254552921,
+      "download_ns": 30531,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-far_tail-chain-r1",
+      "launch_sync_ns": 68094529,
+      "module_stream_ns": 26056923,
+      "numerical_sha256": "309d67ba367931c0687cac5c89502d81bd51583b66801a3e660ed155f7724e98",
+      "operations": 16385,
+      "operations_per_second": 240621.386778371,
+      "process_work_ns": 490322419,
+      "status": "passed",
+      "upload_ns": 30295,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 197137,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 585857454,
+      "context_ns": 237451638,
+      "download_ns": 411909,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-increment-batch-r1",
+      "launch_sync_ns": 782711,
+      "module_stream_ns": 24419507,
+      "numerical_sha256": "821be9d2c8a4747e64fd26fb2ef040fea6f546d62d99ad12b12a6581c39b55d8",
+      "operations": 8454144,
+      "operations_per_second": 10801105388.834448,
+      "process_work_ns": 410720779,
+      "status": "passed",
+      "upload_ns": 933073,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 192329,
+      "chain_cycles_per_fma": 11724.0236801953,
+      "charged_ns": 671363151,
+      "context_ns": 245640196,
+      "download_ns": 29698,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-increment-chain-r1",
+      "launch_sync_ns": 82461386,
+      "module_stream_ns": 24673095,
+      "numerical_sha256": "af411883fcdd54056888cbb6492e429e9b172af93a466cee1142526522300c35",
+      "operations": 16385,
+      "operations_per_second": 198699.06140069003,
+      "process_work_ns": 507615922,
+      "status": "passed",
+      "upload_ns": 31631,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 196006,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 561614687,
+      "context_ns": 226381875,
+      "download_ns": 389644,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-cancellation-batch-r1",
+      "launch_sync_ns": 898046,
+      "module_stream_ns": 25150697,
+      "numerical_sha256": "1c690582cb9a8a060f92943e98b72841c69d549eb2d41e64e6b758d59e4d2b3a",
+      "operations": 8454144,
+      "operations_per_second": 9413932025.753693,
+      "process_work_ns": 403410534,
+      "status": "passed",
+      "upload_ns": 938023,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 180148,
+      "chain_cycles_per_fma": 7948.863106499847,
+      "charged_ns": 609312164,
+      "context_ns": 257530882,
+      "download_ns": 30435,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-cancellation-chain-r1",
+      "launch_sync_ns": 55925128,
+      "module_stream_ns": 22120482,
+      "numerical_sha256": "0e598f309cae2ec48603e60038a13096d85a774a122efb8e7187f1c371492656",
+      "operations": 16385,
+      "operations_per_second": 292981.00131304126,
+      "process_work_ns": 464501780,
+      "status": "passed",
+      "upload_ns": 32364,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 195166,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 592083303,
+      "context_ns": 250165803,
+      "download_ns": 408835,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-far_tail-batch-r1",
+      "launch_sync_ns": 545097,
+      "module_stream_ns": 22785748,
+      "numerical_sha256": "3a2fa03bcdaac9c0f3db8940122e9f3782f67a35d1fbe4407acf920f98014b15",
+      "operations": 8454144,
+      "operations_per_second": 15509430431.647945,
+      "process_work_ns": 421741477,
+      "status": "passed",
+      "upload_ns": 965749,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 186959,
+      "chain_cycles_per_fma": 7927.530912419897,
+      "charged_ns": 602684695,
+      "context_ns": 239673278,
+      "download_ns": 30187,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-far_tail-chain-r1",
+      "launch_sync_ns": 55769954,
+      "module_stream_ns": 22948328,
+      "numerical_sha256": "34d47ab4abfa49ea117c6f14c58d29f47419a341420c0bf49283f3451d451469",
+      "operations": 16385,
+      "operations_per_second": 293796.18996996124,
+      "process_work_ns": 448081651,
+      "status": "passed",
+      "upload_ns": 33049,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 193831,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 574449272,
+      "context_ns": 238539375,
+      "download_ns": 389401,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-increment-batch-r1",
+      "launch_sync_ns": 679594,
+      "module_stream_ns": 26302697,
+      "numerical_sha256": "321a3ecdd112a47064255eec6b5abcf1e81c4eab8b62946734a536fcee6218e2",
+      "operations": 8454144,
+      "operations_per_second": 12439992112.938019,
+      "process_work_ns": 411885990,
+      "status": "passed",
+      "upload_ns": 949961,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 188384,
+      "chain_cycles_per_fma": 10139.023619163869,
+      "charged_ns": 706459751,
+      "context_ns": 278131807,
+      "download_ns": 30709,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-increment-chain-r1",
+      "launch_sync_ns": 71306635,
+      "module_stream_ns": 25407044,
+      "numerical_sha256": "8da37d31da8cefb25a9e892c0432a4386e360ff44d0718bc72266f669ba2d7a1",
+      "operations": 16385,
+      "operations_per_second": 229782.2636000142,
+      "process_work_ns": 562782250,
+      "status": "passed",
+      "upload_ns": 31608,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 184529,
+      "chain_cycles_per_fma": 10139.023558132438,
+      "charged_ns": 598154794,
+      "context_ns": 218484786,
+      "download_ns": 31092,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-increment-chain-r2",
+      "launch_sync_ns": 71301996,
+      "module_stream_ns": 25372900,
+      "numerical_sha256": "8da37d31da8cefb25a9e892c0432a4386e360ff44d0718bc72266f669ba2d7a1",
+      "operations": 16385,
+      "operations_per_second": 229797.2135310209,
+      "process_work_ns": 468400035,
+      "status": "passed",
+      "upload_ns": 30983,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 201282,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 593847563,
+      "context_ns": 238667404,
+      "download_ns": 372384,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-increment-batch-r2",
+      "launch_sync_ns": 680251,
+      "module_stream_ns": 26093507,
+      "numerical_sha256": "321a3ecdd112a47064255eec6b5abcf1e81c4eab8b62946734a536fcee6218e2",
+      "operations": 8454144,
+      "operations_per_second": 12427977320.136244,
+      "process_work_ns": 427728759,
+      "status": "passed",
+      "upload_ns": 958113,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 188808,
+      "chain_cycles_per_fma": 7927.530973451328,
+      "charged_ns": 606163227,
+      "context_ns": 253757611,
+      "download_ns": 30066,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-far_tail-chain-r2",
+      "launch_sync_ns": 55758278,
+      "module_stream_ns": 25610725,
+      "numerical_sha256": "34d47ab4abfa49ea117c6f14c58d29f47419a341420c0bf49283f3451d451469",
+      "operations": 16385,
+      "operations_per_second": 293857.71203335945,
+      "process_work_ns": 461629588,
+      "status": "passed",
+      "upload_ns": 24943,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 198631,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 579629261,
+      "context_ns": 247196399,
+      "download_ns": 396477,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-far_tail-batch-r2",
+      "launch_sync_ns": 544139,
+      "module_stream_ns": 25291675,
+      "numerical_sha256": "3a2fa03bcdaac9c0f3db8940122e9f3782f67a35d1fbe4407acf920f98014b15",
+      "operations": 8454144,
+      "operations_per_second": 15536736017.818975,
+      "process_work_ns": 416912835,
+      "status": "passed",
+      "upload_ns": 947662,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 188412,
+      "chain_cycles_per_fma": 7948.863106499847,
+      "charged_ns": 590055340,
+      "context_ns": 239175236,
+      "download_ns": 30404,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-cancellation-chain-r2",
+      "launch_sync_ns": 55902747,
+      "module_stream_ns": 25318034,
+      "numerical_sha256": "0e598f309cae2ec48603e60038a13096d85a774a122efb8e7187f1c371492656",
+      "operations": 16385,
+      "operations_per_second": 293098.29801387043,
+      "process_work_ns": 447277016,
+      "status": "passed",
+      "upload_ns": 31257,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 201786,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 597894114,
+      "context_ns": 238848054,
+      "download_ns": 398166,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p48-cancellation-batch-r2",
+      "launch_sync_ns": 894571,
+      "module_stream_ns": 25498666,
+      "numerical_sha256": "1c690582cb9a8a060f92943e98b72841c69d549eb2d41e64e6b758d59e4d2b3a",
+      "operations": 8454144,
+      "operations_per_second": 9450500854.599579,
+      "process_work_ns": 413864908,
+      "status": "passed",
+      "upload_ns": 945147,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 188711,
+      "chain_cycles_per_fma": 11724.023497101007,
+      "charged_ns": 616516183,
+      "context_ns": 222890764,
+      "download_ns": 29976,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-increment-chain-r2",
+      "launch_sync_ns": 82457641,
+      "module_stream_ns": 25553559,
+      "numerical_sha256": "af411883fcdd54056888cbb6492e429e9b172af93a466cee1142526522300c35",
+      "operations": 16385,
+      "operations_per_second": 198708.08576733357,
+      "process_work_ns": 485768708,
+      "status": "passed",
+      "upload_ns": 31651,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 206361,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 581032212,
+      "context_ns": 236384705,
+      "download_ns": 402912,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-increment-batch-r2",
+      "launch_sync_ns": 783035,
+      "module_stream_ns": 25915196,
+      "numerical_sha256": "821be9d2c8a4747e64fd26fb2ef040fea6f546d62d99ad12b12a6581c39b55d8",
+      "operations": 8454144,
+      "operations_per_second": 10796636165.688635,
+      "process_work_ns": 411162923,
+      "status": "passed",
+      "upload_ns": 943041,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 192629,
+      "chain_cycles_per_fma": 9679.041074153189,
+      "charged_ns": 637884402,
+      "context_ns": 272038483,
+      "download_ns": 29557,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-far_tail-chain-r2",
+      "launch_sync_ns": 68075251,
+      "module_stream_ns": 25725839,
+      "numerical_sha256": "309d67ba367931c0687cac5c89502d81bd51583b66801a3e660ed155f7724e98",
+      "operations": 16385,
+      "operations_per_second": 240689.5275347571,
+      "process_work_ns": 506350682,
+      "status": "passed",
+      "upload_ns": 32377,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 197261,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 590587528,
+      "context_ns": 246912163,
+      "download_ns": 384677,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-far_tail-batch-r2",
+      "launch_sync_ns": 656775,
+      "module_stream_ns": 25757291,
+      "numerical_sha256": "06306d52c30212a6aa84343724b94b4c853280e371b417f180652bbe8fbb336c",
+      "operations": 8454144,
+      "operations_per_second": 12872207376.955578,
+      "process_work_ns": 423965324,
+      "status": "passed",
+      "upload_ns": 951497,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 152,
+      "allocation_ns": 188411,
+      "chain_cycles_per_fma": 8823.322490082392,
+      "charged_ns": 609841502,
+      "context_ns": 239643446,
+      "download_ns": 30186,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-cancellation-chain-r2",
+      "launch_sync_ns": 62056227,
+      "module_stream_ns": 25701832,
+      "numerical_sha256": "f6c0385b22dc234536a801e1a53fffc2b9eae21e5b504b91e9927ce580cc442b",
+      "operations": 16385,
+      "operations_per_second": 264034.743846093,
+      "process_work_ns": 460391618,
+      "status": "passed",
+      "upload_ns": 32480,
+      "worker_reason": "completed"
+    },
+    {
+      "allocated_bytes": 4980812,
+      "allocation_ns": 197928,
+      "chain_cycles_per_fma": null,
+      "charged_ns": 579179894,
+      "context_ns": 241806074,
+      "download_ns": 379258,
+      "error": null,
+      "id": "gpup-state-device-v2-timing-p64-cancellation-batch-r2",
+      "launch_sync_ns": 1052412,
+      "module_stream_ns": 25840848,
+      "numerical_sha256": "18dd296f6f2fbeaf3e543f747cd4070fa5abfe3dfc99295418797dafd692b3ae",
+      "operations": 8454144,
+      "operations_per_second": 8033112507.269016,
+      "process_work_ns": 417241762,
+      "status": "passed",
+      "upload_ns": 940504,
+      "worker_reason": "completed"
+    }
+  ],
+  "budget": {
+    "categories_ns": {
+      "accept": 5458835182,
+      "timing": 21653148611
+    },
+    "cpu_ns": 0,
+    "cumulative_ns": 17665546083611,
+    "events": 16452,
+    "ledger_sha256": "24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18"
+  },
+  "correctness_attempts": 6,
+  "device": "GPU-6721b13a-30f9-83ec-dace-ba2d9738556f",
+  "freeze_sha256": "6bb24a27ab7265e161af22948087a6c522ee09898e6e83f2b128292744bb4671",
+  "full_controller_accepted": false,
+  "groups": [
+    {
+      "allocation_ns": {
+        "maximum": 202238,
+        "median": 201786,
+        "minimum": 196006
+      },
+      "charged_ns": {
+        "maximum": 597894114,
+        "median": 579474605,
+        "minimum": 561614687
+      },
+      "context_ns": {
+        "maximum": 241206636,
+        "median": 238848054,
+        "minimum": 226381875
+      },
+      "download_ns": {
+        "maximum": 468256,
+        "median": 398166,
+        "minimum": 389644
+      },
+      "launch_sync_ns": {
+        "maximum": 898046,
+        "median": 896293,
+        "minimum": 894571
+      },
+      "module_stream_ns": {
+        "maximum": 25518442,
+        "median": 25498666,
+        "minimum": 25150697
+      },
+      "operations_per_second": {
+        "maximum": 9450500854.599579,
+        "median": 9432344110.68702,
+        "minimum": 9413932025.753693
+      },
+      "pattern": "cancellation",
+      "precision": 48,
+      "process_work_ns": {
+        "maximum": 418359262,
+        "median": 413864908,
+        "minimum": 403410534
+      },
+      "repetitions": 3,
+      "shape": "batch",
+      "upload_ns": {
+        "maximum": 945147,
+        "median": 939986,
+        "minimum": 938023
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 188412,
+        "median": 187950,
+        "minimum": 180148
+      },
+      "chain_cycles_per_fma": {
+        "maximum": 7948.863167531279,
+        "median": 7948.863106499847,
+        "minimum": 7948.863106499847
+      },
+      "charged_ns": {
+        "maximum": 609312164,
+        "median": 598417070,
+        "minimum": 590055340
+      },
+      "context_ns": {
+        "maximum": 257530882,
+        "median": 242313723,
+        "minimum": 239175236
+      },
+      "download_ns": {
+        "maximum": 30435,
+        "median": 30404,
+        "minimum": 29402
+      },
+      "launch_sync_ns": {
+        "maximum": 55925128,
+        "median": 55902747,
+        "minimum": 55902137
+      },
+      "module_stream_ns": {
+        "maximum": 25367662,
+        "median": 25318034,
+        "minimum": 22120482
+      },
+      "operations_per_second": {
+        "maximum": 293101.4962809025,
+        "median": 293098.29801387043,
+        "minimum": 292981.00131304126
+      },
+      "pattern": "cancellation",
+      "precision": 48,
+      "process_work_ns": {
+        "maximum": 464501780,
+        "median": 453695672,
+        "minimum": 447277016
+      },
+      "repetitions": 3,
+      "shape": "chain",
+      "upload_ns": {
+        "maximum": 32791,
+        "median": 32364,
+        "minimum": 31257
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 200226,
+        "median": 198631,
+        "minimum": 195166
+      },
+      "charged_ns": {
+        "maximum": 592083303,
+        "median": 590056537,
+        "minimum": 579629261
+      },
+      "context_ns": {
+        "maximum": 252266438,
+        "median": 250165803,
+        "minimum": 247196399
+      },
+      "download_ns": {
+        "maximum": 490667,
+        "median": 408835,
+        "minimum": 396477
+      },
+      "launch_sync_ns": {
+        "maximum": 545821,
+        "median": 545097,
+        "minimum": 544139
+      },
+      "module_stream_ns": {
+        "maximum": 25291675,
+        "median": 25228477,
+        "minimum": 22785748
+      },
+      "operations_per_second": {
+        "maximum": 15536736017.818975,
+        "median": 15509430431.647945,
+        "minimum": 15488858068.854074
+      },
+      "pattern": "far_tail",
+      "precision": 48,
+      "process_work_ns": {
+        "maximum": 424906160,
+        "median": 421741477,
+        "minimum": 416912835
+      },
+      "repetitions": 3,
+      "shape": "batch",
+      "upload_ns": {
+        "maximum": 1314132,
+        "median": 965749,
+        "minimum": 947662
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 188808,
+        "median": 187581,
+        "minimum": 186959
+      },
+      "chain_cycles_per_fma": {
+        "maximum": 7927.5310344827585,
+        "median": 7927.530973451328,
+        "minimum": 7927.530912419897
+      },
+      "charged_ns": {
+        "maximum": 634591702,
+        "median": 606163227,
+        "minimum": 602684695
+      },
+      "context_ns": {
+        "maximum": 281452462,
+        "median": 253757611,
+        "minimum": 239673278
+      },
+      "download_ns": {
+        "maximum": 30187,
+        "median": 30066,
+        "minimum": 29765
+      },
+      "launch_sync_ns": {
+        "maximum": 55769954,
+        "median": 55769107,
+        "minimum": 55758278
+      },
+      "module_stream_ns": {
+        "maximum": 25610725,
+        "median": 25437199,
+        "minimum": 22948328
+      },
+      "operations_per_second": {
+        "maximum": 293857.71203335945,
+        "median": 293800.6520348264,
+        "minimum": 293796.18996996124
+      },
+      "pattern": "far_tail",
+      "precision": 48,
+      "process_work_ns": {
+        "maximum": 490018800,
+        "median": 461629588,
+        "minimum": 448081651
+      },
+      "repetitions": 3,
+      "shape": "chain",
+      "upload_ns": {
+        "maximum": 33049,
+        "median": 31374,
+        "minimum": 24943
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 201282,
+        "median": 193831,
+        "minimum": 189741
+      },
+      "charged_ns": {
+        "maximum": 593847563,
+        "median": 574449272,
+        "minimum": 548590734
+      },
+      "context_ns": {
+        "maximum": 238667404,
+        "median": 238539375,
+        "minimum": 218612617
+      },
+      "download_ns": {
+        "maximum": 449953,
+        "median": 389401,
+        "minimum": 372384
+      },
+      "launch_sync_ns": {
+        "maximum": 680251,
+        "median": 679775,
+        "minimum": 679594
+      },
+      "module_stream_ns": {
+        "maximum": 26302697,
+        "median": 26093507,
+        "minimum": 25218141
+      },
+      "operations_per_second": {
+        "maximum": 12439992112.938019,
+        "median": 12436679783.751976,
+        "minimum": 12427977320.136244
+      },
+      "pattern": "increment",
+      "precision": 48,
+      "process_work_ns": {
+        "maximum": 427728759,
+        "median": 411885990,
+        "minimum": 394606595
+      },
+      "repetitions": 3,
+      "shape": "batch",
+      "upload_ns": {
+        "maximum": 958113,
+        "median": 949961,
+        "minimum": 947556
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 192119,
+        "median": 188384,
+        "minimum": 184529
+      },
+      "chain_cycles_per_fma": {
+        "maximum": 10139.023619163869,
+        "median": 10139.023619163869,
+        "minimum": 10139.023558132438
+      },
+      "charged_ns": {
+        "maximum": 706459751,
+        "median": 598154794,
+        "minimum": 591399905
+      },
+      "context_ns": {
+        "maximum": 278131807,
+        "median": 220786873,
+        "minimum": 218484786
+      },
+      "download_ns": {
+        "maximum": 31092,
+        "median": 30709,
+        "minimum": 29779
+      },
+      "launch_sync_ns": {
+        "maximum": 71328157,
+        "median": 71306635,
+        "minimum": 71301996
+      },
+      "module_stream_ns": {
+        "maximum": 25663398,
+        "median": 25407044,
+        "minimum": 25372900
+      },
+      "operations_per_second": {
+        "maximum": 229797.2135310209,
+        "median": 229782.2636000142,
+        "minimum": 229712.93089768183
+      },
+      "pattern": "increment",
+      "precision": 48,
+      "process_work_ns": {
+        "maximum": 562782250,
+        "median": 468400035,
+        "minimum": 461488893
+      },
+      "repetitions": 3,
+      "shape": "chain",
+      "upload_ns": {
+        "maximum": 32964,
+        "median": 31608,
+        "minimum": 30983
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 198881,
+        "median": 197928,
+        "minimum": 195429
+      },
+      "charged_ns": {
+        "maximum": 587116766,
+        "median": 579179894,
+        "minimum": 552958297
+      },
+      "context_ns": {
+        "maximum": 241806074,
+        "median": 238459700,
+        "minimum": 220376850
+      },
+      "download_ns": {
+        "maximum": 451234,
+        "median": 381665,
+        "minimum": 379258
+      },
+      "launch_sync_ns": {
+        "maximum": 1052412,
+        "median": 1050507,
+        "minimum": 1050028
+      },
+      "module_stream_ns": {
+        "maximum": 25840848,
+        "median": 25773680,
+        "minimum": 25725359
+      },
+      "operations_per_second": {
+        "maximum": 8051351011.592072,
+        "median": 8047679834.594153,
+        "minimum": 8033112507.269016
+      },
+      "pattern": "cancellation",
+      "precision": 64,
+      "process_work_ns": {
+        "maximum": 417241762,
+        "median": 415110131,
+        "minimum": 400400307
+      },
+      "repetitions": 3,
+      "shape": "batch",
+      "upload_ns": {
+        "maximum": 949660,
+        "median": 940504,
+        "minimum": 936418
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 188411,
+        "median": 183940,
+        "minimum": 182594
+      },
+      "chain_cycles_per_fma": {
+        "maximum": 8823.322551113824,
+        "median": 8823.322551113824,
+        "minimum": 8823.322490082392
+      },
+      "charged_ns": {
+        "maximum": 609841502,
+        "median": 609601424,
+        "minimum": 592104047
+      },
+      "context_ns": {
+        "maximum": 245978811,
+        "median": 239643446,
+        "minimum": 222605606
+      },
+      "download_ns": {
+        "maximum": 30186,
+        "median": 29176,
+        "minimum": 26454
+      },
+      "launch_sync_ns": {
+        "maximum": 62062229,
+        "median": 62061283,
+        "minimum": 62056227
+      },
+      "module_stream_ns": {
+        "maximum": 25714402,
+        "median": 25701832,
+        "minimum": 25414958
+      },
+      "operations_per_second": {
+        "maximum": 264034.743846093,
+        "median": 264013.233500184,
+        "minimum": 264009.20920838986
+      },
+      "pattern": "cancellation",
+      "precision": 64,
+      "process_work_ns": {
+        "maximum": 466803635,
+        "median": 460391618,
+        "minimum": 444438642
+      },
+      "repetitions": 3,
+      "shape": "chain",
+      "upload_ns": {
+        "maximum": 32513,
+        "median": 32480,
+        "minimum": 32094
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 197261,
+        "median": 194709,
+        "minimum": 191339
+      },
+      "charged_ns": {
+        "maximum": 590587528,
+        "median": 590127858,
+        "minimum": 583929144
+      },
+      "context_ns": {
+        "maximum": 252753628,
+        "median": 249753383,
+        "minimum": 246912163
+      },
+      "download_ns": {
+        "maximum": 452578,
+        "median": 384677,
+        "minimum": 375568
+      },
+      "launch_sync_ns": {
+        "maximum": 659620,
+        "median": 656775,
+        "minimum": 654647
+      },
+      "module_stream_ns": {
+        "maximum": 25757291,
+        "median": 25662635,
+        "minimum": 25507299
+      },
+      "operations_per_second": {
+        "maximum": 12914049861.986689,
+        "median": 12872207376.955578,
+        "minimum": 12816688396.349413
+      },
+      "pattern": "far_tail",
+      "precision": 64,
+      "process_work_ns": {
+        "maximum": 428295730,
+        "median": 424481438,
+        "minimum": 423965324
+      },
+      "repetitions": 3,
+      "shape": "batch",
+      "upload_ns": {
+        "maximum": 951497,
+        "median": 942846,
+        "minimum": 935561
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 196624,
+        "median": 192629,
+        "minimum": 186539
+      },
+      "chain_cycles_per_fma": {
+        "maximum": 9679.041074153189,
+        "median": 9679.041074153189,
+        "minimum": 9679.040952090327
+      },
+      "charged_ns": {
+        "maximum": 672247258,
+        "median": 637884402,
+        "minimum": 625448382
+      },
+      "context_ns": {
+        "maximum": 272038483,
+        "median": 254552921,
+        "minimum": 248942755
+      },
+      "download_ns": {
+        "maximum": 30914,
+        "median": 30531,
+        "minimum": 29557
+      },
+      "launch_sync_ns": {
+        "maximum": 68094529,
+        "median": 68075251,
+        "minimum": 68067223
+      },
+      "module_stream_ns": {
+        "maximum": 26056923,
+        "median": 25725839,
+        "minimum": 24920513
+      },
+      "operations_per_second": {
+        "maximum": 240717.9149941228,
+        "median": 240689.5275347571,
+        "minimum": 240621.386778371
+      },
+      "pattern": "far_tail",
+      "precision": 64,
+      "process_work_ns": {
+        "maximum": 506350682,
+        "median": 490322419,
+        "minimum": 482344348
+      },
+      "repetitions": 3,
+      "shape": "chain",
+      "upload_ns": {
+        "maximum": 32469,
+        "median": 32377,
+        "minimum": 30295
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 206361,
+        "median": 197137,
+        "minimum": 192609
+      },
+      "charged_ns": {
+        "maximum": 585857454,
+        "median": 581032212,
+        "minimum": 575113000
+      },
+      "context_ns": {
+        "maximum": 237451638,
+        "median": 236384705,
+        "minimum": 228805871
+      },
+      "download_ns": {
+        "maximum": 411909,
+        "median": 402912,
+        "minimum": 373621
+      },
+      "launch_sync_ns": {
+        "maximum": 783035,
+        "median": 782711,
+        "minimum": 780931
+      },
+      "module_stream_ns": {
+        "maximum": 25915196,
+        "median": 25138415,
+        "minimum": 24419507
+      },
+      "operations_per_second": {
+        "maximum": 10825724679.901297,
+        "median": 10801105388.834448,
+        "minimum": 10796636165.688635
+      },
+      "pattern": "increment",
+      "precision": 64,
+      "process_work_ns": {
+        "maximum": 411162923,
+        "median": 410720779,
+        "minimum": 403509816
+      },
+      "repetitions": 3,
+      "shape": "batch",
+      "upload_ns": {
+        "maximum": 943041,
+        "median": 933073,
+        "minimum": 929854
+      }
+    },
+    {
+      "allocation_ns": {
+        "maximum": 192329,
+        "median": 188711,
+        "minimum": 188623
+      },
+      "chain_cycles_per_fma": {
+        "maximum": 11724.0236801953,
+        "median": 11724.0236801953,
+        "minimum": 11724.023497101007
+      },
+      "charged_ns": {
+        "maximum": 671363151,
+        "median": 637361385,
+        "minimum": 616516183
+      },
+      "context_ns": {
+        "maximum": 245640196,
+        "median": 222890764,
+        "minimum": 218616315
+      },
+      "download_ns": {
+        "maximum": 30225,
+        "median": 29976,
+        "minimum": 29698
+      },
+      "launch_sync_ns": {
+        "maximum": 82475747,
+        "median": 82461386,
+        "minimum": 82457641
+      },
+      "module_stream_ns": {
+        "maximum": 25553559,
+        "median": 25094496,
+        "minimum": 24673095
+      },
+      "operations_per_second": {
+        "maximum": 198708.08576733357,
+        "median": 198699.06140069003,
+        "minimum": 198664.4631421162
+      },
+      "pattern": "increment",
+      "precision": 64,
+      "process_work_ns": {
+        "maximum": 507615922,
+        "median": 503177007,
+        "minimum": 485768708
+      },
+      "repetitions": 3,
+      "shape": "chain",
+      "upload_ns": {
+        "maximum": 31651,
+        "median": 31631,
+        "minimum": 31075
+      }
+    }
+  ],
+  "identity": "gpup-state-device-v2",
+  "independent_cases": 6170,
+  "kernels": {
+    "state_bench_p48": {
+      "forbidden_instructions": [],
+      "instruction_counts": {
+        "BRA": 297,
+        "BRA.U": 2,
+        "BSSY.RECONVERGENT": 281,
+        "BSYNC.RECONVERGENT": 281,
+        "CS2R": 3,
+        "CS2UR": 1,
+        "EXIT": 3,
+        "FLO.U32": 30,
+        "HFMA2": 65,
+        "IADD.64": 36,
+        "IADD3": 286,
+        "IADD3.X": 1,
+        "IMAD": 2,
+        "IMAD.SHL.U32": 152,
+        "IMAD.U32": 6,
+        "IMAD.WIDE.U32": 9,
+        "IMAD.WIDE.U32.X": 1,
+        "ISETP.EQ.AND": 521,
+        "ISETP.EQ.U64.OR": 3,
+        "ISETP.GE.AND": 11,
+        "ISETP.GE.U32.AND": 151,
+        "ISETP.GT.U32.AND": 215,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.GT.U64.AND": 16,
+        "ISETP.NE.AND": 1375,
+        "ISETP.NE.S64.AND": 14,
+        "ISETP.NE.U32.AND": 3,
+        "LDC": 2,
+        "LDC.64": 4,
+        "LDCU": 2,
+        "LDCU.64": 1,
+        "LDG.E.64": 6,
+        "LOP3.LUT": 263,
+        "MOV": 602,
+        "MOV.64": 17,
+        "NOP": 12,
+        "P2R": 2,
+        "PLOP3.LUT": 6,
+        "S2R": 1,
+        "S2UR": 1,
+        "SEL": 1560,
+        "SEL.64": 22,
+        "SHF.L.U32": 54,
+        "SHF.L.U64.HI": 4,
+        "SHF.R.U32.HI": 172,
+        "SHF.R.U64": 5,
+        "SHF.R.W.U32.HI": 147,
+        "STG.E": 1,
+        "STG.E.64": 3,
+        "UIADD3": 2,
+        "UISETP.NE.AND": 2,
+        "UMOV.64": 3,
+        "VIMNMX.S32": 4
+      },
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 48,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_bench_p64": {
+      "forbidden_instructions": [],
+      "instruction_counts": {
+        "BRA": 345,
+        "BRA.U": 2,
+        "BSSY.RECONVERGENT": 329,
+        "BSYNC.RECONVERGENT": 329,
+        "CS2R": 3,
+        "CS2UR": 1,
+        "EXIT": 3,
+        "FLO.U32": 30,
+        "HFMA2": 65,
+        "IADD.64": 36,
+        "IADD3": 334,
+        "IADD3.X": 1,
+        "IMAD": 2,
+        "IMAD.SHL.U32": 194,
+        "IMAD.U32": 12,
+        "IMAD.WIDE.U32": 9,
+        "IMAD.WIDE.U32.X": 1,
+        "ISETP.EQ.AND": 521,
+        "ISETP.GE.AND": 11,
+        "ISETP.GE.U32.AND": 199,
+        "ISETP.GT.U32.AND": 263,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.GT.U64.AND": 16,
+        "ISETP.NE.AND": 1807,
+        "ISETP.NE.S64.AND": 14,
+        "ISETP.NE.U32.AND": 3,
+        "ISETP.NE.U64.AND": 3,
+        "LDC": 2,
+        "LDC.64": 4,
+        "LDCU": 2,
+        "LDCU.64": 1,
+        "LDG.E.64": 6,
+        "LOP3.LUT": 311,
+        "MOV": 602,
+        "MOV.64": 20,
+        "NOP": 12,
+        "P2R": 2,
+        "PLOP3.LUT": 9,
+        "S2R": 1,
+        "S2UR": 1,
+        "SEL": 2040,
+        "SEL.64": 19,
+        "SHF.L.U32": 54,
+        "SHF.L.U64.HI": 4,
+        "SHF.R.U32.HI": 220,
+        "SHF.R.U64": 5,
+        "SHF.R.W.U32.HI": 195,
+        "STG.E": 1,
+        "STG.E.64": 3,
+        "UIADD3": 2,
+        "UISETP.NE.AND": 2,
+        "VIMNMX.S32": 4
+      },
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 48,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_compact_fma_p48": {
+      "forbidden_instructions": [],
+      "instruction_counts": {
+        "BRA": 257,
+        "BSSY.RECONVERGENT": 239,
+        "BSYNC.RECONVERGENT": 239,
+        "CS2R": 1,
+        "EXIT": 3,
+        "FLO.U32": 30,
+        "HFMA2": 67,
+        "IADD.64": 35,
+        "IADD3": 311,
+        "IADD3.X": 1,
+        "IMAD": 5,
+        "IMAD.SHL.U32": 177,
+        "IMAD.U32": 6,
+        "IMAD.WIDE.U32": 9,
+        "IMAD.WIDE.U32.X": 1,
+        "ISETP.EQ.AND": 521,
+        "ISETP.EQ.U64.OR": 3,
+        "ISETP.GE.AND": 8,
+        "ISETP.GE.U32.AND": 151,
+        "ISETP.GT.AND": 3,
+        "ISETP.GT.U32.AND": 215,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.GT.U64.AND": 16,
+        "ISETP.NE.AND": 1374,
+        "ISETP.NE.S64.AND": 12,
+        "ISETP.NE.U32.AND": 3,
+        "LDC": 3,
+        "LDC.64": 3,
+        "LDCU": 1,
+        "LDCU.64": 1,
+        "LDG.E.64": 6,
+        "LOP3.LUT": 260,
+        "MOV": 603,
+        "MOV.64": 19,
+        "NOP": 9,
+        "PLOP3.LUT": 14,
+        "S2R": 2,
+        "S2UR": 1,
+        "SEL": 1560,
+        "SEL.64": 22,
+        "SHF.L.U32": 54,
+        "SHF.L.U64.HI": 4,
+        "SHF.R.U32.HI": 172,
+        "SHF.R.U64": 5,
+        "SHF.R.W.U32.HI": 147,
+        "STG.E": 1,
+        "STG.E.64": 2,
+        "UMOV.64": 3,
+        "VIMNMX.S32": 4
+      },
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 40,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    },
+    "state_compact_fma_p64": {
+      "forbidden_instructions": [],
+      "instruction_counts": {
+        "BRA": 305,
+        "BSSY.RECONVERGENT": 287,
+        "BSYNC.RECONVERGENT": 287,
+        "CS2R": 1,
+        "EXIT": 3,
+        "FLO.U32": 30,
+        "HFMA2": 67,
+        "IADD.64": 35,
+        "IADD3": 359,
+        "IADD3.X": 1,
+        "IMAD": 5,
+        "IMAD.SHL.U32": 219,
+        "IMAD.U32": 12,
+        "IMAD.WIDE.U32": 9,
+        "IMAD.WIDE.U32.X": 1,
+        "ISETP.EQ.AND": 521,
+        "ISETP.GE.AND": 8,
+        "ISETP.GE.U32.AND": 199,
+        "ISETP.GT.AND": 3,
+        "ISETP.GT.U32.AND": 263,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.GT.U64.AND": 16,
+        "ISETP.NE.AND": 1806,
+        "ISETP.NE.S64.AND": 12,
+        "ISETP.NE.U32.AND": 3,
+        "ISETP.NE.U64.AND": 3,
+        "LDC": 3,
+        "LDC.64": 3,
+        "LDCU": 1,
+        "LDCU.64": 1,
+        "LDG.E.64": 6,
+        "LOP3.LUT": 308,
+        "MOV": 603,
+        "MOV.64": 22,
+        "NOP": 9,
+        "PLOP3.LUT": 17,
+        "S2R": 2,
+        "S2UR": 1,
+        "SEL": 2040,
+        "SEL.64": 19,
+        "SHF.L.U32": 54,
+        "SHF.L.U64.HI": 4,
+        "SHF.R.U32.HI": 220,
+        "SHF.R.U64": 5,
+        "SHF.R.W.U32.HI": 195,
+        "STG.E": 1,
+        "STG.E.64": 2,
+        "VIMNMX.S32": 4
+      },
+      "local_bytes": 0,
+      "reasons": [],
+      "registers": 40,
+      "shared_bytes": 0,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0,
+      "status": "fits_resource_gate"
+    }
+  },
+  "repeatability_equal": true,
+  "schema_version": 1,
+  "solver_performance_claim": false,
+  "source_tree_sha256": "fa77a3fcf7ead3179b368fec802d3e7d392422063e7fb8638d9dd0ece29b46f9",
+  "status": "complete",
+  "timing_attempts": 36
+}
