@@ -9,6 +9,10 @@
   strict lp-assess-v1 evidence with bounded witness attachments, CPU trace/replay,
   selected-device execution and inherited-ledger supervision. Preserve existing
   images, numerical settings, records, defaults and mathematical authority.
+- PR review binds checkpoints to their originating session, rejects inconsistent
+  failure metadata and oversized counters, and prevents interrupted profiles
+  from borrowing discovery results from a longer trajectory. Preserve exact
+  before/after source receipts and all measured evidence; no GPU work is repeated.
 - Retain all 60 frozen attempts, independently verify 57 endpoints and certify
   24/48 timings. Six common-trajectory profile pairs match bitwise; full native,
   66 ordinary/three new device tests, six fixed-work pairs/twelve replays and

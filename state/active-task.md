@@ -1,5 +1,37 @@
 # Active Task
 
+## GPUP-ASSESS review and integration (2026-10-22)
+
+Status: draft PR 21 opened; three reproduced review counterexamples are repaired.
+Checkpoints reject transfer to a fresh same-engine session; evidence rejects
+inconsistent failure metadata/oversized counters; incomplete profile pairs cannot
+borrow discovery from a longer policy horizon. Targeted CPU regressions pass.
+Full pinned-native tools/check.sh passes 323 Python tests plus Rust/native,
+dependency, historical replay, 132 documentation pages and smoke. Gate resources:
+128.427299756 elapsed / 180.294952 CPU seconds, 1658880000 bytes sampled process-tree
+RSS, zero GPU work. All 1468 frozen artifacts remain byte-identical and the rebuilt
+report preserves every numerical result, outcome and charge. Exact PR source
+receipts and native acceptance are docs/benchmarks/data/assess/pr-*.json. Final
+retained-endpoint verification and reviewed-head CI precede merge.
+
+The user authorizes a draft PR, careful review and repairs, merge after required
+checks, and safe cleanup, superseding the local-only scope below. Review the
+scheduler/controller lifecycle, final witness authority, strict evidence and
+experiment accounting; retain counterexamples for any repairs. Run focused CPU
+regressions and full pinned-native tools/check.sh on the reviewed source before
+integration. Do not start GPUP-7.
+
+Resources: at most 7200 CPU seconds, four build jobs, 8 GiB host RSS and 2 GiB new
+review artifacts. No GPU execution or additional allowance. Preserve all of
+artifacts/gpup-assess-v1, frozen source/executable/image identities, original and
+reviewed reports, and the exact 16816-event ledger SHA-256
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c.
+Record review, acceptance, CI, merge ancestry and cleanup receipts under
+artifacts/gpup-assess-pr-review-20261022. Merge through the PR after successful
+checks without bypassing repository rules; remove only the verified merged task
+branch and explicitly disposable scratch files. Retain native dependencies and
+all research evidence.
+
 ## GPUP-ASSESS (2026-10-22)
 
 Status: complete; final pinned-native acceptance passed, local commit follows.

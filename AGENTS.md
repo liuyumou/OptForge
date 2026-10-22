@@ -26,6 +26,12 @@ CPU-only review strengthens signed-zero replay and unverified-profile eligibilit
 all twelve actual replays already match bitwise and the rebuilt host verifier
 accepts all 57 endpoints. Preserve the exact measured workers/images/source,
 original report, five-file review source bridge and all historical evidence.
+PR pinned-native acceptance passes 323 Python tests plus Rust/native, dependency,
+historical replay, documentation and smoke with no GPU work. PR review binds
+checkpoints to the originating session, rejects inconsistent
+failure metadata/oversized counters and excludes interrupted profile horizons
+from pair discovery. Preserve the additional PR source bridge and counterexamples;
+the measured execution loop and original-model authority bodies remain exact.
 Review adds no GPU work or allowance. Task charge is 523.674592721 GPU seconds
 (413.636131592 timing, 32.633232920 profiles, 77.405228209 acceptance), within 2300
 and every phase cap. Cumulative consumption is 19730.939812844 / 21602.574545061 s.
@@ -36,8 +42,9 @@ and all earlier history. GPUP-7 contract work is next and needs its own accepted
 quantization/error-budget and resource allocation. Unused headroom reserves
 nothing; full expansion state, selective precision, assessment/adaptive/refinement
 combinations, sessions and supported presets remain gated. Preserve original-model
-host authority and all identities. Delivery is a local commit only; publication,
-push and merge are outside this task.
+host authority and all identities. The user authorizes draft PR review, protected
+merge and safe cleanup for this slice; retain all research evidence/native
+dependencies and verify merge ancestry before deleting its branch.
 
 Prior handoff (2026-10-22): GPUP-REFINE is complete under accepted ADR-0037/0038
 and the native-FP64-outer subset of SPEC-0021. Its

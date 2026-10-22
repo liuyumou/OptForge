@@ -288,7 +288,9 @@ admission. Every 200-update numerical controller check remains; cheap normalized
 movement only schedules original-model assessments, at most 800 updates apart.
 The current safe final witness receives fresh host certification, including partial
 intervals; cancellation, deadlines and failures retain their termination reason.
-Complete scheduler/controller checkpoints preserve charged work and deadlines.
+Complete scheduler/controller checkpoints belong to the originating session and
+preserve charged work and deadlines, including rejection by a fresh session on
+the same immutable engine.
 The lp-assess-v1 interface and resource allocation are frozen in ADR-0039; legacy
 records/defaults/audits are unchanged. Full native, strict evidence, device
 differentials/replays and scoped sanitizer acceptance pass. The
@@ -298,3 +300,8 @@ indicators never publish a bound; every endpoint uses original-model authority.
 Six common-trajectory profile pairs match bitwise. CPU-only review strengthens
 signed-zero replay and rejects unverified profile comparisons, with exact source
 bridges preserving the original workers/report and all twelve retained replays.
+PR review adds regressions for cross-session checkpoint transfer, inconsistent
+failure metadata, overflowing counters and interrupted profile horizons. Partial
+profiles remain evidence with unavailable trajectory comparisons. Exact source
+receipts preserve the measured execution loop and original-model authority;
+review adds no GPU execution or revised-executable timing claim.

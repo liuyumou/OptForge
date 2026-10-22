@@ -314,6 +314,11 @@ impl Evidence {
                 "device_failure",
             ]
             .contains(&o.status.as_str())
+            || if ["numerical_failure", "device_failure"].contains(&o.status.as_str()) {
+                o.failure.as_ref().is_none_or(|reason| reason.is_empty())
+            } else {
+                o.failure.is_some()
+            }
             || o.status == "accepted"
                 && (expected.diagnostic || !self.assessment.gap_closed || o.point.is_none())
             || o.status == "device_failure" && (o.point.is_some() || o.physical_steps.is_some())
@@ -339,8 +344,9 @@ impl Evidence {
         {
             return Err(invalid("assessment initial state"));
         }
-        if o.kkt_evaluations != 1 + o.controller_checks + o.restarts
+        if o.controller_checks > o.events.len() as u64
             || o.restarts > o.controller_checks
+            || o.kkt_evaluations != 1 + o.controller_checks + o.restarts
             || o.status == "iteration_limit"
                 && o.physical_steps != Some(expected.method.iteration_limit)
             || w.executor == "gpu"
@@ -856,6 +862,33 @@ mod tests {
                 "mutation {k}"
             );
         }
+    }
+    #[test]
+    fn failure_metadata_cannot_be_dropped_or_added_to_a_completed_run() {
+        let (bytes, e) = fixture();
+        for status in ["iteration_limit", "numerical_failure"] {
+            let mut bad = e.clone();
+            bad.witness.outcome.status = status.into();
+            bad.witness.outcome.failure =
+                (status == "iteration_limit").then(|| "range_guard".into());
+            rehash(&mut bad);
+            assert!(
+                bad.verify(&bytes, &e.witness.request, Path::new("/tmp"))
+                    .is_err(),
+                "{status}"
+            );
+        }
+    }
+    #[test]
+    fn oversized_controller_counters_are_rejected_without_overflow() {
+        let (bytes, mut e) = fixture();
+        e.witness.outcome.controller_checks = u64::MAX;
+        e.witness.outcome.restarts = u64::MAX;
+        rehash(&mut e);
+        assert!(
+            e.verify(&bytes, &e.witness.request, Path::new("/tmp"))
+                .is_err()
+        );
     }
     #[test]
     fn original_objective_senses_offsets_and_perturbations_remain_authoritative() {

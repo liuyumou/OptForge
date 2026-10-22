@@ -134,9 +134,9 @@ substitutes for certified fresh latency.
 Full pinned-native tools/check.sh passes before the frozen cohort. All 66 ordinary
 device tests, three assessment-specific tests, six 2000-update policy pairs and
 twelve same-device replays pass. Memcheck, racecheck, initcheck and synccheck each
-pass the scoped assessment smoke case with zero reported errors/hazards. All CUDA
-images and the numerical scheduling/solver sources remain byte-identical to the
-measured archive.
+pass the scoped assessment smoke case with zero reported errors/hazards. Device
+acceptance remains bound to the measured source/executable and unchanged CUDA
+images; subsequent CPU review is recorded separately below.
 
 CPU-only final review strengthens signed-zero replay comparison and prevents
 unverified/partial profiles from entering trajectory comparisons. The old
@@ -149,6 +149,24 @@ bodies. The [review receipt](data/assess/host-review.json) adds no GPU execution
 allowance, and the reviewed report has identical numerical results and charges.
 Device acceptance/timings remain bound to their original frozen executable;
 reviewed-source acceptance is a separate CPU gate.
+
+PR review reproduces and repairs cross-session checkpoint restoration, which
+could import logical state with a new work allowance and deadline. Snapshots now
+belong to the originating session. It also rejects inconsistent failure metadata
+and oversized controller counters, and prevents an interrupted profile from
+borrowing success discovery from the other policy's longer horizon. Incomplete
+profile outcomes remain in the trial rows with unavailable pair comparisons.
+All retained profiles complete their horizons, so results and charges are
+unchanged. The [PR source bridge](data/assess/pr-review-source.json) preserves the
+prior bridge, exact before/after sources and unchanged execution-loop, original
+host authority and solve/output bodies. These are CPU-only repairs with no new
+device acceptance or timing claim for the revised executable.
+
+The [PR pinned-native gate](data/assess/pr-native-acceptance.json) passes all 323
+Python tests, Rust/native/dependency checks, historical replay, 132 documentation
+pages and smoke. It uses 128.427299756 elapsed / 180.294952 CPU seconds and
+1658880000 bytes sampled process-tree RSS. Native coverage is enabled and GPU
+work is zero. Every one of the 1468 frozen artifact files remains byte-identical.
 
 | Charge | Used GPU seconds | Task cap |
 | --- | ---: | ---: |

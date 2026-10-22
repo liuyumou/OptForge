@@ -7,7 +7,7 @@ use crate::{
 };
 use optimizer_core::{CancellationToken, LpPrecisionSettings, LpWidth};
 use serde::{Deserialize, Serialize};
-use std::time::Instant;
+use std::{sync::Arc, time::Instant};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -132,10 +132,12 @@ impl Scheduler {
 }
 #[derive(Clone)]
 pub struct Checkpoint<'e, 'p> {
+    origin: Arc<()>,
     controller: Fp64Checkpoint<'e, 'p>,
     scheduler: Scheduler,
 }
 pub struct Session<'e, 'p> {
+    origin: Arc<()>,
     pub controller: Fp64Controller<'e, 'p>,
     scheduler: Scheduler,
 }
@@ -146,17 +148,24 @@ impl<'e, 'p> Session<'e, 'p> {
         let scheduler =
             Scheduler::new(policy, &controller.state().primal, &controller.state().dual);
         Self {
+            origin: Arc::new(()),
             controller,
             scheduler,
         }
     }
     pub fn checkpoint(&self) -> Checkpoint<'e, 'p> {
         Checkpoint {
+            origin: Arc::clone(&self.origin),
             controller: self.controller.checkpoint(),
             scheduler: self.scheduler.clone(),
         }
     }
     pub fn restore(&mut self, snapshot: &Checkpoint<'e, 'p>) -> Result<(), String> {
+        // A new session has its own work allowance and deadline. Even when it
+        // shares the immutable engine, it cannot inherit another run's state.
+        if !Arc::ptr_eq(&self.origin, &snapshot.origin) {
+            return Err("assessment_checkpoint_session".into());
+        }
         if self.scheduler.policy != snapshot.scheduler.policy {
             return Err("assessment_checkpoint_policy".into());
         }
@@ -502,6 +511,31 @@ mod tests {
                 .restore(&cp)
                 .is_err()
         );
+    }
+    #[test]
+    fn checkpoint_cannot_transfer_work_or_deadline_to_a_fresh_session() {
+        let m = model();
+        let p = LinearProgram::new(&m).unwrap();
+        let e = Engine::new(&p, LpSettings::published(400, 200));
+        let deadline = Instant::now() + std::time::Duration::from_secs(20);
+        let mut origin = Session::new(&e, Policy::Bounded800, Some(deadline));
+        for _ in 0..4 {
+            origin
+                .controller
+                .advance_host(64, &CancellationToken::new());
+        }
+        origin.sample().unwrap();
+        origin.controller.continue_after_check();
+        let cp = origin.checkpoint();
+        let mut fresh = Session::new(&e, Policy::Bounded800, None);
+        assert!(fresh.restore(&cp).is_err());
+        assert_eq!(fresh.controller.state().iterations, 0);
+        assert_eq!(fresh.controller.physical_iterations(), 0);
+        assert_eq!(origin.controller.remaining(), 200);
+        assert!(origin.controller.expired_at(deadline));
+        origin.restore(&cp).unwrap();
+        assert_eq!(origin.controller.remaining(), 200);
+        assert!(origin.controller.expired_at(deadline));
     }
     #[test]
     fn policies_keep_numerical_trajectory_and_final_partial_point() {

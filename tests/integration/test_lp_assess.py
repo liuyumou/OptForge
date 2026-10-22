@@ -96,6 +96,28 @@ class AssessmentContracts(unittest.TestCase):
     def test_acceptance_labels_cannot_launch_unrelated_commands(self):
         for gate in ['regular','project','memcheck','racecheck','initcheck','synccheck']:
             with self.assertRaises(ValueError):budget.validate_command(gate,['true'])
+    def test_interrupted_profiles_cannot_borrow_a_completed_policy_horizon(self):
+        import json
+        import subprocess
+        from report_lp_assess import profile_comparisons
+        v=budget.protocol();verified=set()
+        with tempfile.TemporaryDirectory() as directory:
+            d=Path(directory);traces=[]
+            for i in range(1,11):
+                name=f'frame-{i}.json';traces.append(dict(name=name,sha256='a'*64))
+                (d/name).write_text(json.dumps(dict(point=dict(iteration=i*200),scaled_primal=[0.],scaled_dual=[])))
+            for name in v['profile_instances']:
+                for c in v['configurations']:
+                    complete=c['policy']=='fixed_200';iteration=2000 if complete else 100
+                    key=v['id']+'-profile-'+name+'-0-'+c['id'];verified.add(key)
+                    e=dict(witness=dict(outcome=dict(status='iteration_limit' if complete else 'time_limit',physical_steps=iteration,logical_steps=iteration,point=dict(iteration=iteration),assessments=11 if complete else 1),initial=dict(scaled_primal=[0.],scaled_dual=[]),traces=traces if complete else [],phases_ns={}),assessment=dict(gap_closed=complete))
+                    (d/(key+'.endpoint.json')).write_text(json.dumps(e))
+            checked=subprocess.CompletedProcess([],0,json.dumps([dict(gap_closed=True)]*10),'')
+            with patch('report_lp_assess.subprocess.run',return_value=checked):
+                rows=profile_comparisons(v,d,verified)
+            self.assertEqual(len(rows),6)
+            self.assertTrue(all(not r['available'] for r in rows))
+            self.assertTrue(all('first_bounded_success' not in r for r in rows))
     def test_full_unchanged_image_inventory_is_required(self):
         from benchmark_lp_refine import image_inventory
         names=list(image_inventory(ROOT/'target/native/cuda')) if (ROOT/'target/native/cuda/lp_pdhg_refine.cubin').exists() else ['schedule_eval.cubin','lp_pdhg.cubin','lp_pdhg_atomic.cubin','lp_pdhg_research.cubin','lp_pdhg_tuned.cubin','lp_pdhg_precision.cubin','lp_pdhg_exec.cubin','lp_pdhg_refine.cubin','lp_pdhg_refine.build.json','lp_pdhg_refine.compile.stdout','lp_pdhg_refine.compile.stderr']

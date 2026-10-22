@@ -9,7 +9,7 @@ from benchmark_lp_assess import jobs,effective,check_request,verify_endpoint,ref
 from lp_assess_budget import CONFIG,PREFIX,protocol
 from lp_protocol import ROOT,checked_reference,file_hash,read_json,validate,write_json
 from lp_assess_admission import replay
-from lp_assess_review import projected_sha,review,RECEIPT
+from lp_assess_pr_review import projected_sha,review,RECEIPT
 
 def ledger(value,path):
     raw=path.read_bytes();lines=raw.splitlines(keepends=True)
@@ -76,6 +76,8 @@ def profile_comparisons(value,directory,verified_ids):
                 result.append(dict(instance=instance,arithmetic=arithmetic,available=False));continue
             key,fixed=endpoints['fixed_200'];_,bounded=endpoints['bounded_800']
             wf=fixed['witness'];wb=bounded['witness'];of=wf['outcome'];ob=wb['outcome']
+            if any(o['status']!='iteration_limit' or o['physical_steps']!=value['profile_work'] or o['logical_steps']!=value['profile_work'] for o in [of,ob]):
+                result.append(dict(instance=instance,arithmetic=arithmetic,available=False,reason='incomplete diagnostic horizon'));continue
             frames=[read_json(directory/r['name']) for r in wf['traces']]
             model=checked_reference(ROOT,next(j for j in jobs(value) if j['instance']['id']==instance)['instance']['model'])
             checked=subprocess.run([str(directory/'lp_precision_assess'),'replay-trace',str(model),str(directory/(key+'.assess-request.json')),str(directory/(key+'.endpoint.json'))],capture_output=True,text=True,timeout=value['verification_seconds'])

@@ -26,6 +26,13 @@ original report/worker/image/ledger identities remain; no GPU job is repeated.
 Full pinned-native, 66 ordinary/three new device tests, six fixed-work policy
 pairs/twelve replays and all four scoped sanitizers pass.
 
+PR review reproduces and repairs checkpoint transfer into a fresh same-engine
+session with replenished resources, inconsistent failure metadata, oversized
+controller counters and partial profiles borrowing a longer policy horizon.
+CPU regressions and exact source receipts retain each repair; all retained
+profiles are complete and the study's numerical results/charges are unchanged.
+The revised executable has no new GPU acceptance or measured timing claim.
+
 Task charge is 523.674592721 GPU seconds (413.636131592 timing, 32.633232920
 profiles, 77.405228209 acceptance), within 2300 and every phase cap. Cumulative
 consumption is 19730.939812844 / 21602.574545061 seconds. The 16816-event ledger
