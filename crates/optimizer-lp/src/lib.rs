@@ -65,3 +65,7 @@ pub mod refine;
 /// ADR-0039 bounded assessment scheduling.
 #[cfg(feature = "precision-research")]
 pub mod assess;
+
+/// ADR-0040 isolated error-budgeted matrix quantization.
+#[cfg(feature = "precision-research")]
+pub mod quant;

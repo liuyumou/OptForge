@@ -1,6 +1,6 @@
 # SPEC-0021: Residual-driven LP refinement and controlled inexact products
 
-Status: accepted ADR-0037 refinement and ADR-0039 bounded assessment subsets; other extensions remain draft
+Status: accepted ADR-0037 refinement, ADR-0039 assessment and ADR-0040 direct matrix-selectivity subsets; combined extensions remain draft
 Scope: research LP correction, anchored products, selective precision and assessment
 Owner: numerical backend
 Introduced: GPUP-DESIGN, 2026-10-12
@@ -15,7 +15,7 @@ Tests: independent GPUP-REFINE rational/endpoint oracles, host/device fault and 
 FP64-outer, FP32-products-only subset, merit/error/progress parameters, recovery
 and resource allocation. CPU proof/oracle admission precedes dependent runtime
 work. A reproduced numerical admission refusal is a valid bounded outcome;
-full expansion masters and selective precision remain draft. Assessment scheduling
+full expansion masters and selective precision within refinement remain draft. Assessment scheduling
 is separately accepted under ADR-0039 below.
 
 The [implemented evaluation](../benchmarks/lp-refinement-gpup-refine.md) retains
@@ -305,3 +305,19 @@ failure metadata, overflowing counters and interrupted profile horizons. Partial
 profiles remain evidence with unavailable trajectory comparisons. Exact source
 receipts preserve the measured execution loop and original-model authority;
 review adds no GPU execution or revised-executable timing claim.
+
+## GPUP-7 accepted bounded matrix-only contract
+
+[ADR-0040](../decisions/ADR-0040-bounded-matrix-quantization.md) accepts the
+user-approved matrix-only uniform/selective FP16/E4M3/E5M2 subset. Canonical
+sparse 32-by-32 tiles, direct binary64 nearest-even conversion, conservative
+original-unit local product budgets, common safe norm envelope, sticky promotion
+and charged whole-window replay are isolated under lp-quant-v1. FP64 state,
+32-update audits and each 200-update controller/assessment boundary remain.
+Independent host certification at unchanged 1e-9 tolerances is authoritative.
+Vector quantization, stochastic rounding, Tensor Cores, combined refinement or
+assessment policies, sessions and supported presets remain separate extensions.
+Acceptance maps format/range/transpose/bounds to the quant CPU contracts and
+independent Fraction oracle; recovery to checkpoint/fault/limit regressions;
+execution to quant_device differentials, replay and four scoped sanitizers;
+authority and identity to strict lp-quant-v1 endpoint verification.

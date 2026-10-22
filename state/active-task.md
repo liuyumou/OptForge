@@ -1,5 +1,46 @@
 # Active Task
 
+## GPUP-7 implementation (2026-10-22)
+
+Status: complete; final pinned-native acceptance passed. Delivery is a local
+commit only. All 104 attempts remain:
+34 study endpoints verify and 33/96 timings certify. New modes and matched FP64
+only certify initial host-only small-4; tuned FP64 certifies 12/12. No preset or
+useful low-product solve benefit follows. All eight profile horizons are censored
+(seven timeouts; tuned FP64 early success at 1400/2000). Final CPU admission retains
+56 cases/7 scaling refusals, 162015 format and 3072 product components. All 66
+ordinary/three new device tests, 384 vector comparisons, six CPU/device controller
+comparisons, 18 fixed-work endpoints/18 bitwise replays and four sanitizers pass.
+Fresh host verification accepts all 182 retained endpoints. Exact CPU admission
+and report-reader source bridges retain both cohorts and reports. Final GPU task
+charge is 1382.959456122 s (1109.904216936 timing, 215.675211186 profiles,
+57.380028000 acceptance); cumulative 21113.899268966/25202.574545061 s.
+Ledger 17036 events, SHA-256
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97.
+Preserve the exact original 16816-event prefix and all artifacts. CPU review adds
+zero GPU work. Final source/gate receipts are under docs/benchmarks/data/quant. Final tools/check.sh
+passes 329 Python tests, Rust/native/dependency, committed replay, 134 docs pages
+and smoke. Gate source is stable; 122.521477555 elapsed / 141.162757 CPU seconds,
+1661800448 bytes sampled process-tree RSS and zero GPU work.
+Objective: lp-quant-v1 matrix-only uniform/selective binary16, E4M3 and E5M2,
+FP64 state and original-model host authority. CPU admission precedes CUDA work.
+Acceptance: independent exact format/error oracle; CPU preparation on eight frozen
+models; full pinned-native tools/check.sh; ordinary/new device differentials,
+fixed-work replay and four scoped sanitizers; frozen development study and report.
+Likely files: new quant modules in optimizer-lp/optimizer-lp-cuda and experiment,
+separate CUDA image, strict schemas and tools, ADR-0040 and SPEC-0012/0021.
+Resources: 21600 CPU seconds/four jobs, 8 GiB RSS, 1 GiB device buffers, 2 GiB
+preparation, 32 GiB artifacts. GPU cap 3600 seconds: timing 2300 screening,
+profiles 450 ablations, acceptance 850 repeatability. New cumulative ceiling
+25202.574545061 seconds; phase caps 1800/11800/8100/5300/9000 and independent
+28800-second overall cap. Preserve the exact 16816-event prefix SHA-256
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c
+and prior 19730.939812844 GPU seconds. Use only
+GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 under the shared host lease/activity
+admission, without automatic substitution or retries. Record artifacts under
+artifacts/gpup-quant-v1. Deliver a local commit after acceptance; no publication.
+This authorization supersedes the historical instruction below not to start GPUP-7.
+
 ## GPUP-ASSESS review and integration (2026-10-22)
 
 Status: PR 21 review and local acceptance complete; final publication/checks precede

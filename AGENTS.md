@@ -5,7 +5,44 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-Current handoff (2026-10-22): GPUP-ASSESS is complete under accepted ADR-0039
+Current handoff (2026-10-22): GPUP-7 implementation and bounded evaluation are
+complete under accepted ADR-0040. Final pinned-native acceptance passes 329
+Python tests plus Rust/native, dependency, historical replay, 134 documentation
+pages and smoke; no GPU work runs in that gate. Research-only
+lp-quant-v1 adds canonical 32x32 matrix tiles, uniform/selective FP16/E4M3/E5M2,
+FP64 state, conservative original-unit budgets, sticky promotion and charged
+whole-window replay. Its [report](docs/benchmarks/lp-quantization-gpup7.md)
+retains all 104 attempts, verifies 34 study endpoints and certifies 33/96 timings.
+Each new candidate and matched FP64 certifies only initial host-only small-4;
+unchanged tuned FP64 certifies 12/12. Seventy timeouts remain. Seven diagnostic
+paths time out and tuned FP64 certifies at 1400 rather than the requested 2000
+updates, leaving no complete profile horizon. No useful quantized solve benefit
+or supported preset follows. CPU admission retains all 56 cases, including seven
+scaling-256 refusals, with 162015 independent format and 3072 product components.
+All 66 ordinary/three new device tests, 384 product-vector comparisons, six
+CPU/device controller comparisons, 18 fixed-work endpoints/18 bitwise replays and
+four scoped sanitizers pass. Both CPU cohorts, their source bridge, the initial
+RSS sampler limitation/conservative bound and corrected monitor remain visible.
+CPU-only report review excludes CPU fallback and incomplete horizons, retaining
+the original report and exact measured execution/image/source bodies. Fresh host
+verification accepts all 182 retained study, acceptance/replay and CPU endpoints.
+No review GPU work or allowance is added. Preserve artifacts/gpup-quant-v1 in full,
+all historical reports/source bridges and native dependencies. Task charge is
+1382.959456122 GPU seconds: timing 1109.904216936, profiles 215.675211186 and
+acceptance 57.380028000, within 3600 and every phase cap. Cumulative consumption is
+21113.899268966 / 25202.574545061 seconds, retaining the independent 28800 ceiling.
+The 17036-event ledger SHA-256 is
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97,
+preserving the exact 16816-event prefix
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c
+and all earlier history. GPUP-8 conditional contract/disposition is next and needs
+its own accepted hardware/layout/error/cost and resource admission. Unused
+headroom reserves nothing. Vector quantization, stochastic rounding, Tensor Core
+execution, refinement/assessment combinations, sessions and presets remain gated.
+Preserve original-model host authority. Delivery is a local commit only; no
+publication or merge is authorized for this slice.
+
+Prior handoff (2026-10-22): GPUP-ASSESS is complete under accepted ADR-0039
 and SPEC-0021's bounded assessment subset. Its
 [report](docs/benchmarks/lp-assessment-scheduling-gpup-assess.md) retains all 60
 attempts, independently verifies 57 endpoints and certifies 24/48 timings.

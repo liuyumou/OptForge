@@ -1,12 +1,12 @@
 # SPEC-0012: Experimental Mixed-Precision LP Backend
 
-Status: accepted; GPUP-3/4/5/6 implemented and measured; later quantization and Tensor Core precision pending
+Status: accepted; GPUP-3/4/5/6 and bounded GPUP-7 matrix quantization implemented; vector quantization and Tensor Core precision pending
 Scope: opt-in LP arithmetic, resumable control, numerical audits, and recovery
 Owner: numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (companion-design navigation, 2026-10-12)
 Supersedes: ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
-Implementation: shared FP64 control, matched/tuned CUDA, fixed FP32 correction and explicit GPUP-6 adaptive audits/recovery; GPUP-7/8 pending
+Implementation: shared FP64 control, matched/tuned CUDA, fixed FP32 correction, GPUP-6 recovery and research-only lp-quant-v1; GPUP-8 pending
 Tests: continuation, bitwise trajectory, exact-rational, endpoint, native and scoped device gates; mapping below
 
 ## Proposed companion designs (2026-10-12)
@@ -496,3 +496,32 @@ specification's numerical contract changes: every solve starts from a fresh
 per-solve controller and the cold iterate, and original-model host certification
 is unchanged. Amortized throughput is a separately labeled endpoint, never
 substituted for fresh single-solve latency.
+
+## GPUP-7 accepted bounded matrix-only contract
+
+[ADR-0040](../decisions/ADR-0040-bounded-matrix-quantization.md) accepts the
+user-approved matrix-only uniform/selective FP16/E4M3/E5M2 subset. Canonical
+sparse 32-by-32 tiles, direct binary64 nearest-even conversion, conservative
+original-unit local product budgets, common safe norm envelope, sticky promotion
+and charged whole-window replay are isolated under lp-quant-v1. FP64 state,
+32-update audits and each 200-update controller/assessment boundary remain.
+Independent host certification at unchanged 1e-9 tolerances is authoritative.
+Vector quantization, stochastic rounding, Tensor Cores, combined refinement or
+assessment policies, sessions and supported presets remain separate extensions.
+Acceptance maps format/range/transpose/bounds to the quant CPU contracts and
+independent Fraction oracle; recovery to checkpoint/fault/limit regressions;
+execution to quant_device differentials, replay and four scoped sanitizers;
+authority and identity to strict lp-quant-v1 endpoint verification.
+
+The [bounded GPUP-7 evaluation](../benchmarks/lp-quantization-gpup7.md) retains
+104 attempts, verifies 34 study endpoints and certifies 33/96 timings. New paths
+only certify initially solved small-4; all diagnostic horizons are censored.
+No useful quantized solve benefit or preset follows. All 182 retained endpoints
+pass fresh CPU verification; measured runtime/image/source bodies remain exact.
+
+The bounded codec admits the closed finite range before nearest-even rounding;
+nonzero-to-zero conversion and even just-outside-range inputs are explicit
+refusals. Power-of-two tile scaling precedes that admission. Local product
+envelopes use the exact-real diagonal maps of current binary64 scaled operands;
+they do not bound accumulated trajectory error. Rounded publication witnesses
+are independently reassessed against the original model.

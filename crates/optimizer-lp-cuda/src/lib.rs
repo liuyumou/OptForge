@@ -52,3 +52,7 @@ pub mod refine;
 /// ADR-0039 research assessment scheduling.
 #[cfg(feature = "precision-research")]
 pub mod assess;
+
+/// ADR-0040 isolated quantized sparse executor.
+#[cfg(feature = "precision-research")]
+pub mod quant;

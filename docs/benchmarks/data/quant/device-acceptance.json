@@ -1,0 +1,163 @@
+{
+  "bitwise_replays": 18,
+  "controller_cpu_device_comparisons": 6,
+  "device": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+  "fixed_work_endpoints": 18,
+  "gates": [
+    {
+      "gate": "initcheck",
+      "request": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-initcheck.request.json",
+        "sha256": "c3a1ef95ee23bb3629c065382158d580d17a3e4046601b6c151a20214e4da4e1"
+      },
+      "source": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-initcheck.source.json",
+        "sha256": "8e7da54d905069dcc9a9376bcffbf9d190ddcebb6c3cc5fa678bd602c009ceb6"
+      },
+      "stderr": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-initcheck.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-initcheck.stdout",
+        "sha256": "6f9373a4ec9f285126753b61f55b446b2c685dbf1df2b6c4f89c0d13622a9bb4"
+      },
+      "worker": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-initcheck.worker.json",
+        "sha256": "fac9f433739bd650b3c061dc106f68e852f709fcebc8c8495bf9468097d5ebe8"
+      }
+    },
+    {
+      "gate": "memcheck",
+      "request": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-memcheck.request.json",
+        "sha256": "3a4ab1e110e71346a8f9289253848e3e93f7452396f6475521abcec59efbd2ee"
+      },
+      "source": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-memcheck.source.json",
+        "sha256": "9c852a1452f33971f153c3ed4efb75dc31092779fb404acd6fc0a7a6ea61185d"
+      },
+      "stderr": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-memcheck.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-memcheck.stdout",
+        "sha256": "e9e9eaf7e22ea4e612dce2471e8837616ea1ee429ea366f0e8cdef85fed71dea"
+      },
+      "worker": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-memcheck.worker.json",
+        "sha256": "259891e88490c7883e48330b1abd97d2183330c56d3a238caa02507802c8bdd2"
+      }
+    },
+    {
+      "gate": "project",
+      "request": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-project.request.json",
+        "sha256": "a96196cf8fcf0c58bd2ec61c31e4141b4d23a8b9c1081d9a38f4a155e64105ab"
+      },
+      "source": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-project.source.json",
+        "sha256": "e23e5f48dedd18b206e6fefb8a7df56f4f5ca13d558c61817daee7500a016a3a"
+      },
+      "stderr": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-project.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-project.stdout",
+        "sha256": "6de67579090e9f91a17be0b41784a3208f6636dbc95107c406801d7d5fbc7e7d"
+      },
+      "worker": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-project.worker.json",
+        "sha256": "01d866fcd86061a3e3a055f2b091d68c89a62d2a7fa19658b9bec855cad0ab66"
+      }
+    },
+    {
+      "gate": "racecheck",
+      "request": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-racecheck.request.json",
+        "sha256": "a9043d8cfa571ed0e892e09df23e5458e06895c734c38f5242c3a89536bc43db"
+      },
+      "source": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-racecheck.source.json",
+        "sha256": "7a02d58681862458d43a4f44b09ddad815f76ea6869966efbd2ede59e040ef26"
+      },
+      "stderr": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-racecheck.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-racecheck.stdout",
+        "sha256": "e64c88d590a359f06be8a1a821584c8dded8aa941c0f5fe20f6669ad6ae10e06"
+      },
+      "worker": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-racecheck.worker.json",
+        "sha256": "b3071cee81c48db9bee2eb878b6d1e484d2f574b19b2a0812de59150f6c5e78f"
+      }
+    },
+    {
+      "gate": "regular",
+      "request": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-regular.request.json",
+        "sha256": "cfc2fadf69412994484daac63f6f6768c0a127a3804862ddf7bc7d078e447c62"
+      },
+      "source": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-regular.source.json",
+        "sha256": "ee8de2eb3933a197636120e0642ee965701777717e93b1e392fa3c0b994e2e9f"
+      },
+      "stderr": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-regular.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-regular.stdout",
+        "sha256": "68952d5d0627cdf6d95ba6d8ea7a5a1d2f40f61c8f9302521ab00e06e2796270"
+      },
+      "worker": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-regular.worker.json",
+        "sha256": "5af4088cdaa448c51350c4e4ee33571d948a634ec574ebc99d56422a7e0e257f"
+      }
+    },
+    {
+      "gate": "synccheck",
+      "request": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-synccheck.request.json",
+        "sha256": "7645616d676b361f3350296990165cdde1781d46feda745733d25c5a937a1346"
+      },
+      "source": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-synccheck.source.json",
+        "sha256": "eadb2ea8d0dbdc44e623c8b4461ece2c763a2ec431377e8d62776474ad61f11d"
+      },
+      "stderr": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-synccheck.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-synccheck.stdout",
+        "sha256": "e9e9eaf7e22ea4e612dce2471e8837616ea1ee429ea366f0e8cdef85fed71dea"
+      },
+      "worker": {
+        "path": "artifacts/gpup-quant-v1/acceptance/gpup-quant-v1-accept-synccheck.worker.json",
+        "sha256": "7f070d3c094903faa017581ff31c2f1a08160da75a4d9abe4d895552eedbf9a2"
+      }
+    }
+  ],
+  "gpu_ns": 57380028000,
+  "identity": "gpup-quant-device-acceptance-v1",
+  "new_device_tests": 3,
+  "ordinary_tests": 66,
+  "product_vector_comparisons": 384,
+  "project": {
+    "path": "artifacts/gpup-quant-v1/acceptance/project/acceptance.json",
+    "sha256": "c1b7deef5645c33ebcad287ba8d40902a491cf68cb9f3ca0756ddfaa7f189a6c"
+  },
+  "sanitizers": [
+    "memcheck",
+    "racecheck",
+    "initcheck",
+    "synccheck"
+  ],
+  "source_tree_sha256": "c7703e13c46b29c114a484400c71a354f1f4ec96812f524480d9a7f59c380842",
+  "status": "passed"
+}

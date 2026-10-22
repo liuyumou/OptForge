@@ -1,5 +1,14 @@
 # Project Status
 
+GPUP-7's [bounded matrix quantization evaluation](../docs/benchmarks/lp-quantization-gpup7.md)
+is complete under ADR-0040: 104 attempts, 34 verified study endpoints and 33/96
+certified timings. New paths only certify initial host-only small-4; all profile
+horizons are censored and no supported preset follows. CPU/device/replay and
+sanitizer acceptance pass; all 182 retained endpoints reverify on CPU. Task charge
+is 1382.959456122 GPU seconds, cumulative 21113.899268966/25202.574545061.
+Next is GPUP-8's conditional contract/disposition, requiring its own resource
+admission. Final native gate and local delivery are recorded in active-task.
+
 The repository implements the C8 local extension registry on top of the C5
 flow-shop scheduling slice, the C4
 agent-independent run surface, C3

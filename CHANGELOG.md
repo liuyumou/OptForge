@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased — GPUP-7 bounded matrix quantization (2026-10-22)
+
+- Add research-only lp-quant-v1 uniform/selective FP16/E4M3/E5M2 matrices, canonical
+  transpose tiles, original-unit guards, FP64 state and charged sticky recovery
+  under accepted ADR-0040. Keep original-model host certification authoritative.
+- Add strict solve/verify/replay, independent codec/product oracles, complete
+  checkpoints, component costs, frozen accounting and source-bound acceptance.
+- Retain 104 attempts and 70 timeouts; verify 34 study endpoints and certify
+  33/96 timings. New paths only certify initial host-only small-4; no full
+  2000-update diagnostic horizon or useful quantized solve benefit follows.
+- Full native/device/replay/four sanitizer gates pass; fresh CPU verification
+  accepts all 182 retained endpoints. Preserve both CPU cohorts, original/reviewed
+  reports, resource-sampling correction and CPU-only reader counterexamples.
+  No supported preset; task charge 1382.959456122 GPU seconds.
+
 ## Unreleased — GPUP-ASSESS bounded assessment scheduling (2026-10-22)
 
 - Accept ADR-0039's assessment subset after 16 CPU common trajectories and

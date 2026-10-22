@@ -64,3 +64,7 @@ pub mod lp_refine;
 /// ADR-0039 assessment scheduling study.
 #[cfg(feature = "precision-research")]
 pub mod lp_assess;
+
+/// ADR-0040 strict quantized study evidence.
+#[cfg(feature = "precision-research")]
+pub mod lp_quant;

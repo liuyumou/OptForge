@@ -28,6 +28,17 @@ lose coverage. Small-4 succeeds at the initial host check without device work.
 GPUP-ASSESS is next under its own contract/allocation. All proposals retain
 original-model 1e-9 acceptance.
 
+## GPUP-7 bounded matrix result
+
+[ADR-0040 evaluation](../benchmarks/lp-quantization-gpup7.md) admits matrix-only
+uniform/selective FP16/E4M3/E5M2 with conservative local budgets and shared
+transpose identity. Only initial host-only small-4 certifies in new paths; all
+nontrivial timing/profile cells time out. Irregular CPU trajectories promote the
+whole operator after the initial zero-dual product. Metadata/guard scans and
+accurate host updates remain material. No useful quantized solve benefit or
+preset is admitted. Vector quantization, anchored/refinement combinations and
+alternative bounds need separate contracts; GPUP-8's conditional disposition is next.
+
 ## Completed investigations and remaining limits
 
 | Investigation | Evidence | Remaining limit |

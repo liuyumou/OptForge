@@ -1,5 +1,42 @@
 # Known Failures and Limitations
 
+## Bounded matrix quantization promotes before useful low-precision work
+
+[GPUP-7](../docs/benchmarks/lp-quantization-gpup7.md) completes the accepted
+ADR-0040 matrix-only subset. All 104 attempts remain, 34 study endpoints verify
+and 33/96 timings certify. Each of the six candidates and matched FP64 certifies
+only small-4 at the initial host point with zero iterations/kernel launches.
+Tuned FP64 certifies 12/12; 70 new-path timing/profile timeouts remain. No sparse
+FP16/FP8 solve benefit or supported preset is established.
+
+In CPU admission, irregular-2048 and irregular-32768 perform only the initial
+zero-dual product in low precision before whole-operator sticky promotion; all
+six candidates have the same one-transition disposition. Selective promotion
+exceeds the 25% coefficient cap. Accurate products, summary scans, transfers and
+host updates remain charged. Seven scaling-256 configurations, including native
+matched FP64, refuse the original-unit error budget. Admission preserves 49
+work-limit and seven numerical-failure endpoints; this is not a convergence claim.
+
+All eight GPU diagnostic cells are censored: seven time out and unchanged tuned
+FP64 certifies after 1400 rather than 2000 updates. No full-horizon comparison
+follows. CPU-only reader review explicitly rejects incomplete horizons and CPU
+fallback as a GPU timing; actual results/charges remain identical. Both reports,
+exact source bridges, frozen workers/images and all failed attempts remain.
+Fresh CPU verification accepts all 182 retained endpoints across the study,
+acceptance/replay and two CPU admission cohorts, adding zero GPU work.
+
+The initial CPU RSS sampler missed worker-thread subprocesses; retain its raw
+receipt and the conservative four-process bound below 8 GiB. The corrected
+monitor visits every thread child list and checks source stability. Full native,
+66 ordinary/three new device tests, 384 product vectors, six CPU/device controller
+comparisons, 18 fixed-work endpoints/18 bitwise replays and four sanitizers pass.
+Task charge is 1382.959456122 GPU seconds; cumulative 21113.899268966 /
+25202.574545061. The 17036-event ledger SHA-256 is
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97,
+retaining the exact 16816-event prefix and all earlier history. GPUP-8 needs its
+own conditional numerical/hardware/resource contract; unused headroom reserves
+nothing. Vector quantization, combined methods, sessions and presets remain gated.
+
 ## Assessment scheduling saves checks without recovering precision coverage
 
 [GPUP-ASSESS](../docs/benchmarks/lp-assessment-scheduling-gpup-assess.md) completes

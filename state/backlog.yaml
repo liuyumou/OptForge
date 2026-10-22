@@ -20,7 +20,7 @@ active_research_track: GPUP
 # 2026-10-13: GPUP-STATE closes with ADR-0036's resource admission refusal.
 # PR 19 review retains it and adds a compact full-range scalar FMA resource pass.
 # SPEC-0021 and full expansion state remain draft; no preset follows.
-next_ready_task: GPUP-7
+next_ready_task: GPUP-8
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -261,13 +261,13 @@ tasks:
     acceptance: "ADR-0039; 16 CPU trajectories/320 boundary checks; 60 retained attempts, 57 verified endpoints, 24/48 certified timings; six bitwise profile pairs, 66 ordinary/three new device tests, six fixed-work pairs/twelve replays/four sanitizers; CPU-only bitwise replay/report review; 523.674592721 GPU s, 16816 ledger events; scoped 1.0272x FP64 irregular-32768 gain, unchanged coverage/no preset; docs/benchmarks/lp-assessment-scheduling-gpup-assess.md"
   - id: GPUP-7
     title: Admit error-budgeted quantization and selective sparse FP8 candidates
-    status: ready
+    status: complete
     depends_on: [GPUP-6, GPUP-EVIDENCE, GPUP-REFINE, GPUP-EXEC]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
-    acceptance: "Accept bounded quantization/FP8 contract consistent with SPEC-0020/0021 first; original-unit error budgets, canonical transpose, guarded norm/scale/promotion and seeded replay; retain insufficient-accuracy refusals"
+    acceptance: "ADR-0040; 56 CPU cases/7 numerical refusals, 162015 codec/3072 product components; full native/device/18 replays/four sanitizers; 104 retained attempts, 34 verified study endpoints, 33/96 timings; initial host-only new-mode success and 70 timeouts/no full profile horizon; all 182 retained endpoints reverify; 1382.959456122 GPU s, 17036 events; no preset"
   - id: GPUP-8
     title: Conditionally admit hybrid sparse and Tensor Core single-solve execution
-    status: planned
+    status: ready
     depends_on: [GPUP-7]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     acceptance: "Hardware/layout/error/cost admission first; retain a documented rejection or defer decision when unsuitable; otherwise differential kernels, repeatability, sanitizers and packing/padding-inclusive single-RHS comparisons"

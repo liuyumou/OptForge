@@ -1,0 +1,22 @@
+{
+  "command": [
+    "bash",
+    "tools/check.sh"
+  ],
+  "cpu_seconds": 142.554002,
+  "elapsed_ns": 123105602304,
+  "gpu_seconds": 0,
+  "log": {
+    "path": "artifacts/gpup-quant-v1/pretrial-final-native.log",
+    "sha256": "b1ed3074cc6909e889d8f4e545c7a68f22c6cb8235c4d4e95b8bc06498e511cb"
+  },
+  "max_child_rss_bytes": 1663365120,
+  "native": true,
+  "peak_process_tree_rss_bytes": 1663336448,
+  "python_tests": 328,
+  "reason": "completed",
+  "returncode": 0,
+  "rss_method": "all thread child lists plus per-process VmRSS",
+  "source_after": "c7703e13c46b29c114a484400c71a354f1f4ec96812f524480d9a7f59c380842",
+  "source_before": "c7703e13c46b29c114a484400c71a354f1f4ec96812f524480d9a7f59c380842"
+}

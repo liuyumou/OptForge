@@ -1,0 +1,12 @@
+{
+  "identity": "gpup-quant-cpu-resource-bound-v1",
+  "gpu_seconds": 0,
+  "raw_receipt": "artifacts/gpup-quant-v1/final-admission-resources.json",
+  "raw_sampled_rss_covers_worker_threads": false,
+  "maximum_simultaneous_processes": 4,
+  "kernel_largest_descendant_rss_bytes": 1237278720,
+  "monitor_allowance_bytes": 67108864,
+  "conservative_combined_rss_bytes": 5016223744,
+  "host_rss_cap_bytes": 8589934592,
+  "proof": "Three sequential-subprocess workers and their Python parent; kernel wait resource usage bounds each process peak. Independent oracles precede that pool. Initial raw main-thread RSS sampler misses worker-thread child lists; retain it unchanged. New monitor visits all thread child lists."
+}
