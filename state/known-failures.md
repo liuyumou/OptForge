@@ -1,5 +1,50 @@
 # Known Failures and Limitations
 
+## Bounded refinement loses coverage and guards dominate costs
+
+Prepublication review repairs stale logical checkpoint metadata, missing-candidate
+trace acceptance, a skipped final assessment after refresh/promotion offsets,
+and incomplete instruction parsing. Regressions reproduce the original faults;
+all 39 available refinement endpoints pass the rebuilt host verifier. Exact
+before/after source hashes preserve the original measured workers, report and
+all GPU receipts; no GPU execution is repeated and the negative result below
+is unchanged. See the report's review section and source bridge.
+
+[GPUP-REFINE](../docs/benchmarks/lp-refinement-gpup-refine.md) completes the
+accepted ADR-0037 native-FP64-outer correction/anchored-product slice. It retains
+108 attempts, independently verifies 48 endpoints and certifies 30/96 timings.
+Tuned FP64 certifies 21/24; each refinement mode certifies only 3/24, on small-4
+at the initial host check with zero inner/device work. Its scoped latency gain
+is not evidence for correction LPs, FP32 products or anchors. No preset is selected.
+
+Scaling-256 promotes FP32 once, charges failures/refreshes and ultimately refuses
+`operator_error_budget` in native arithmetic; all nine endpoints fail original
+feasibility. Fifty-four other refinement timings and six larger profiles time out
+without complete endpoints. Original-model certification remains authoritative.
+The 2048-row fixed-work profiles spend about 2.34–2.39 seconds in product guards
+and about 13 ms in kernels/readback; additional host FP64 updates and error mapping
+dominate remaining cost. These results reject the evaluated implementation as a
+general latency improvement, without ruling out separately contracted alternatives.
+
+The first acceptance job was blocked before launch because an unselected device
+returned N/A telemetry. ADR-0038 binds both strict management queries to the selected
+UUID; v2 retains the same numerical source/ELFs/images and selected 5090. The v1
+refusal/0.125948387-second charge and all unexecuted v1 cells remain. The final CPU
+report initially read a compact wrapper as a record; its failure log and exactly
+bound reader/test correction remain, with no execution repeated. All v2 native,
+66 ordinary device tests, 1920 refinement product checks, nine replay pairs and
+four scoped sanitizers pass. Independent Fraction checks validate 93 endpoint
+merit enclosures/39 contractions. A subnormal rounded-step counterexample is
+retained and refused by the actual-step guard.
+
+Task charge is 1541.719136512 GPU seconds; cumulative consumption is
+19207.265220123 / 21602.574545061 seconds. The 16684-event ledger SHA-256 is
+e83d07792fb0775fc26d8d2cca8a2411f59fcbc94f742cafd8f6b844ffb60535, preserving the
+16452-event prefix and every earlier prefix/phase ceiling. No new allowance or
+next-task reservation follows. GPUP-ASSESS is next; full expansion masters,
+selective precision, assessment scheduling, sessions and supported presets remain
+gated. Historical unrelated racecheck/session/mixed-model gaps remain open.
+
 ## Full expansion state: first construction fails; compact scalar alternative fits
 
 [GPUP-STATE](../docs/benchmarks/lp-expansion-state-gpup-state.md) closes its bounded
@@ -48,7 +93,8 @@ is 17665.546083611 / 21602.574545061 seconds. The 16452-event ledger SHA-256 is
 16366-event prefix 4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b.
 The log/exp oracle initially used insufficient absolute squaring resolution and
 was corrected to 2048 bits; failed generation/parser receipts are preserved too.
-GPUP-REFINE is next and needs its own accepted SPEC-0021 subset and allocation.
+At that dated handoff GPUP-REFINE still needed its own accepted SPEC-0021 subset
+and allocation; its completed bounded evaluation is recorded above.
 
 ## Bounded exact executor: range refusals and no fresh-solve speedup
 
@@ -60,7 +106,8 @@ The remaining five timing models certify in both exact modes, but the measured
 executor provides no fresh-solve latency win over tuned FP64. Lower kernel-host
 cost than generic precision FP64 at scale is outweighed by preparation, allocation
 and complete witness/checking costs. FP64 state/control and prior scaled-matrix
-error remain; full expansion state and refinement are not implemented.
+error remain; full expansion state remains gated, and the subsequent bounded
+refinement evaluation is recorded above.
 
 Fourteen first-repetition FP64 controls exited during discovery because the frozen
 directory omitted schedule_eval.cubin. The unchanged dependency was restored from

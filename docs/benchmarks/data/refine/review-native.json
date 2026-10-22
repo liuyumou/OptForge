@@ -1,0 +1,16 @@
+{
+  "cpu_seconds": 178.747286,
+  "elapsed_seconds": 126.88233922515064,
+  "gate": {
+    "native": true,
+    "source_tree_sha256": "c6a959d1bcaab87f7510c5b6146930e3f8742f6d88e3e2691de613b69cc3f087"
+  },
+  "gpu_executed": false,
+  "identity": "gpup-refine-review-native-v1",
+  "log_sha256": "a521052e2b970f5e5024d24fb69aeebc4c2c356d1b0c6cf2a3ff7a6b42e0bf01",
+  "max_child_rss_bytes": 1663311872,
+  "peak_process_tree_rss_bytes": 1631154176,
+  "python_tests": 310,
+  "reason": "completed",
+  "returncode": 0
+}

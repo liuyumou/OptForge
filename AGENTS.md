@@ -5,7 +5,36 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-Current handoff (2026-10-13): GPUP-STATE is complete as a bounded resource
+Current handoff (2026-10-22): GPUP-REFINE is complete under accepted ADR-0037/0038
+and the native-FP64-outer subset of SPEC-0021. Its
+[report](docs/benchmarks/lp-refinement-gpup-refine.md) retains all 108 primary
+attempts, independently verifies 48 endpoints and certifies 30/96 timings.
+Correction LPs, guarded FP32/anchored products, charged sticky promotion,
+in-memory checkpoints and strict replay are implemented behind the research
+feature; iterates/updates/controller remain FP64 on the host. Refinement certifies
+only initially solved small-4 before any device work; scaling-256 refuses numerical
+budgets and other cells time out. No sparse-product benefit or preset follows.
+Full pinned-native, 66 ordinary device tests, 1920 product comparisons, nine
+fixed-work replays and four scoped sanitizers pass. Fraction oracles check 240
+models/1200 maps plus 93 endpoint merit enclosures/39 contractions. Preserve the
+first telemetry refusal, operational continuation and CPU-only report-reader
+correction; no attempt is retried or device substituted. Task charge is
+1541.719136512 GPU s (1275.123297404 timing, 217.195487188 profiles,
+49.400351920 acceptance), within 3600 and all phase caps. Cumulative consumption
+is 19207.265220123 / 21602.574545061 s. The 16684-event ledger SHA-256 is
+e83d07792fb0775fc26d8d2cca8a2411f59fcbc94f742cafd8f6b844ffb60535, preserving
+the exact 16452-event prefix below and all earlier history. GPUP-ASSESS is next
+and needs its own bounded contract/allocation; unused headroom reserves nothing.
+Expansion state, selective precision, assessment scheduling, sessions and supported
+presets remain gated. Preserve original-model host authority and all identities.
+Prepublication review repairs logical checkpoint restoration, candidate-free
+trace acceptance, final assessments after refresh/promotion offsets and instruction
+parsing. Exact before/after source receipts preserve the historical cohort and
+report; the rebuilt host verifier accepts all 39 available refinement endpoints
+on CPU. Review adds no GPU execution or allowance. Publication, protected merge
+and safe cleanup are now explicitly authorized by the user; preserve all evidence.
+
+Prior handoff (2026-10-13): GPUP-STATE is complete as a bounded resource
 admission refusal under [ADR-0036](docs/decisions/ADR-0036-full-expansion-state-admission.md).
 Its [report](docs/benchmarks/lp-expansion-state-gpup-state.md) independently checks
 192 integer, 270 FMA, 64 update and 48 transcendental cases. The first full-range

@@ -25,15 +25,24 @@ independent cases per construction and host UBSan checks. All 6170 device cases,
 four scoped sanitizers and 36 primitive timing attempts pass on RTX PRO 6000
 Blackwell. The blocked 5090 attempt and receipt-reader repair remain visible;
 combined charge is 30.114068273 seconds. No full controller, state/replay or
-solver benefit is admitted. GPUP-REFINE
-is next and needs its own accepted contract/allocation.
+solver benefit is admitted. [GPUP-REFINE](../docs/benchmarks/lp-refinement-gpup-refine.md)
+is complete under ADR-0037/0038: native FP64 correction state, guarded FP32 sparse
+products, sticky recovery and strict replay. All 108 attempts remain, 48 endpoints
+verify and 30/96 timings certify. Refinement certifies only initially solved
+small-4 without device work; other cells refuse or time out. No product benefit
+or preset is selected. Full native, 66 ordinary device tests, 1920 refinement
+product checks, nine replays and four scoped sanitizers pass. The telemetry
+refusal and CPU report-reader correction remain visible. Task GPU charge is
+1541.719136512 seconds; cumulative 19207.265220123 / 21602.574545061 seconds.
+The 16684-event ledger preserves every historical prefix and phase cap.
+GPUP-ASSESS is next under its own required bounded contract/allocation.
 
 | State | Features |
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | GPU LP precision track (GPUP-REFINE next, then bounded assessment and GPUP-7 through GPUP-10; full expansion state remains gated after the admission refusal), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
-| Experimental | Bounded exact-dot cached/uncached CUDA executor under ADR-0035; opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
+| Planned | GPU LP precision track (GPUP-ASSESS next, then GPUP-7 through GPUP-10; full expansion state remains gated after the admission refusal), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| Experimental | Bounded native-FP64-outer correction LPs and guarded FP32/anchored products under ADR-0037; bounded exact-dot cached/uncached CUDA executor under ADR-0035; opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
 GPUP-0 has saved the [precision roadmap](../docs/plans/gpu-lp-precision-roadmap.md),

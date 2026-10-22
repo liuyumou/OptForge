@@ -88,6 +88,21 @@ class ActivityTests(unittest.TestCase):
                 else:
                     with self.assertRaises(ValueError):sample(GPU,1)
 
+    def test_both_telemetry_queries_are_scoped_to_the_selected_device(self):
+        from types import SimpleNamespace
+        commands=[]
+        def query(command,**kwargs):
+            commands.append(command)
+            if '--id='+GPU not in command:
+                return SimpleNamespace(stdout='GPU-abcd, [N/A]')
+            return SimpleNamespace(stdout='0' if '--query-gpu=utilization.gpu' in command else '')
+        with patch('lp_activity.subprocess.run',side_effect=query):
+            self.assertEqual(sample(GPU,1),{'utilization':0,'pids':[]})
+        self.assertEqual(len(commands),2)
+        self.assertTrue(all('--id='+GPU in c for c in commands))
+        with patch('lp_activity.subprocess.run',side_effect=[SimpleNamespace(stdout='0'),SimpleNamespace(stdout=GPU+', [N/A]')]):
+            with self.assertRaises(ValueError):sample(GPU,1)
+
     def test_leased_activity_race_retains_blocked_attempt_without_child(self):
         import lp_supervise
         with tempfile.TemporaryDirectory() as tmp:

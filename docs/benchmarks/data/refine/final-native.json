@@ -1,0 +1,15 @@
+{
+  "cpu_seconds": 140.362833,
+  "documentation_pages": 130,
+  "elapsed_seconds": 116.0369601463899,
+  "gate": {
+    "native": true,
+    "source_tree_sha256": "5b53cfabf032b64ec6487289c3b56b71f12e6975996505ca6f8af978f0bc9fab"
+  },
+  "identity": "gpup-refine-final-native-v1",
+  "max_child_rss_bytes": 1663217664,
+  "peak_process_tree_rss_bytes": 1644863488,
+  "python_tests": 304,
+  "reason": "completed",
+  "returncode": 0
+}

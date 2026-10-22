@@ -1,0 +1,21 @@
+{
+  "identity": "gpup-refine-report-correction-v1",
+  "source_tree_sha256": "b6a462fb9b43a168e2da890a75e70abd345d929dcfc1ae2dfcad173838f6d3a2",
+  "reason": "Decode compact control wrappers before reading record metadata. Numerical workers, raw results, requests, images and ledger remain unchanged; no execution is repeated.",
+  "files": [
+    {
+      "path": "tools/report_lp_refine.py",
+      "measured_sha256": "1befa31660aaf0d14c889323dc21c55a7fe8eb060b0e914209fdfb3438d7ae7d",
+      "reviewed_sha256": "a5e42c4537c8ade541025897f3a9be196ff800ddf20eb59d8cba530aadf8f431"
+    },
+    {
+      "path": "tests/integration/test_lp_refine.py",
+      "measured_sha256": "65b827e5a2617f0f068d7de4f66cf69214854885f7810c68f6ea5e4dfc434f22",
+      "reviewed_sha256": "fbb6a179f6e937a9f971f647c441fab8890d3b775d324f273c8a4f8d33b8d400"
+    }
+  ],
+  "original_failure": {
+    "path": "artifacts/gpup-refine-v2/report-original.stderr",
+    "sha256": "9ccfe7730ce1ca51a31b64e43282209e57e5cd90814fd99097117ee83d036ccf"
+  }
+}
