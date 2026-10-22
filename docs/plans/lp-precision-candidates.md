@@ -1,6 +1,6 @@
 # LP Precision Candidate Register
 
-Status: research candidates, updated 2026-10-12. No supported preset. Preserve the
+Status: research candidates, updated 2026-10-22. No supported preset. Preserve the
 [rounding analysis](../benchmarks/lp-fp32-rounding-analysis.md) and
 [measured latency diagnosis](../benchmarks/lp-fp32-slowdown-diagnosis.md).
 The [2026-09-30 research review](lp-low-precision-research-2026-09-30.md)
@@ -9,7 +9,7 @@ proposed experiments behind the current hypotheses. It is non-normative research
 not an accepted numerical contract, implementation order, GPU allowance or preset.
 The [2026-10-12 architecture](lp-precision-architecture-2026-10-12.md) now adds
 component IDs, low-level layouts, proofs and motivation, with the accepted CPU subset
-of [SPEC-0020](../specifications/SPEC-0020-lp-expansion-arithmetic.md) and draft
+of [SPEC-0020](../specifications/SPEC-0020-lp-expansion-arithmetic.md) and bounded
 [SPEC-0021](../specifications/SPEC-0021-lp-refinement.md). Its
 [experiment design](../benchmarks/lp-precision-design-experiments.md) isolates
 components and interactions. GPUP-REP CPU validation is complete under ADR-0034;
@@ -19,14 +19,20 @@ its [report](../benchmarks/lp-expansion-state-gpup-state.md) retains a bounded
 admission refusal. PR 19's compact full-range FMA fits at 40 registers and zero
 spills, with 5900 additional independent cases per construction. Its scoped
 PRO 6000 device extension passes 6170 cases, four sanitizers and 36 descriptive
-timing attempts. Complete state and solver benefit remain open, and
-GPUP-REFINE is next under its own contract/allocation. All proposals retain
+timing attempts. Complete expansion state and its solver benefit remain open.
+[GPUP-REFINE](../benchmarks/lp-refinement-gpup-refine.md) completes the native
+FP64 subset under ADR-0037/0038: 108 attempts, 48 verified endpoints, 30/96
+certified timings; no product benefit or preset. Host guards and FP64 updates
+dominate profiles, scaling-256 refuses the numerical budget, and larger cells
+lose coverage. Small-4 succeeds at the initial host check without device work.
+GPUP-ASSESS is next under its own contract/allocation. All proposals retain
 original-model 1e-9 acceptance.
 
 ## Completed investigations and remaining limits
 
 | Investigation | Evidence | Remaining limit |
 | --- | --- | --- |
+| Native FP64 correction LPs and guarded anchors, GPUP-REFINE | [Frozen evaluation](../benchmarks/lp-refinement-gpup-refine.md), 240 rational models/1200 maps, 93 exact endpoint merit enclosures, full native/device/replay/sanitizer gates. | Only initial small-4 certifies, without inner work. Other modes refuse or time out; per-product host guards and FP64 host recurrences are expensive. This evaluated implementation establishes no general product/latency benefit; cheaper guards or other refinement methods need a separate contract. |
 | Bounded exact-dot executor, GPUP-EXEC | [108 retained attempts](../benchmarks/lp-exact-executor-gpup-exec.md), 94 verified endpoints, 58/96 certified timings and 27/27 bitwise cache pairs; no FP64 in the audited sparse path. | No fresh-solve win. Exponent-window refusals on scheduling/scaling/mixed; fourteen discovery failures and six control timeouts retained. Persistent expansion state remains unimplemented. |
 | Exact power-of-two and factored scaling, GPUP-5B | [Matched study](../benchmarks/lp-exact-components-gpup5b.md) restores 27/36 timing coverage versus 12/36 for ordinary scaled FP32 storage; simple original coefficients become inexact after non-dyadic scaling. | Original-corpus exact representability is not a general LP property; changed scaling affects convergence and setup. No supported latency recipe. |
 | Scalar component sparse products, GPUP-5B | Three components preserve input information, but measured cross-products with per-nonzero FP64 compensated recombination lose badly on sm_120; [root cause](../benchmarks/lp-fp64-pipe-root-cause.md). | Deprioritize that measured implementation. This does not rule out Tensor Core/integer emulation that amortizes recombination across a dense dot product or tile. |

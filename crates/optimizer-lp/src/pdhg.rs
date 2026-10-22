@@ -280,6 +280,62 @@ impl<'a> Engine<'a> {
         }
     }
 
+    /// Rebind correction vectors while retaining the prepared transformed matrix.
+    ///
+    /// # Errors
+    /// Rejects a different sparse matrix, dimensions or nonfinite objective.
+    #[cfg(feature = "precision-research")]
+    pub(crate) fn rebind_correction(
+        program: &'a LinearProgram,
+        base: &LinearProgram,
+        prepared: &PreparedMatrix,
+    ) -> Result<Self, &'static str> {
+        if program.row_major() != base.row_major()
+            || program.column_major() != base.column_major()
+            || !program.objective().iter().all(|x| x.is_finite())
+        {
+            return Err("correction_matrix_mismatch");
+        }
+        let mut engine = Self::from_prepared(program, prepared);
+        engine.scaled_objective = program
+            .objective()
+            .iter()
+            .zip(engine.preconditioner.column())
+            .map(|(c, s)| c * s)
+            .collect();
+        if engine
+            .scaled_objective
+            .iter()
+            .zip(program.objective())
+            .any(|(scaled, original)| !scaled.is_finite() || *original != 0.0 && *scaled == 0.0)
+        {
+            return Err("correction_objective_range");
+        }
+        for (bounds, lower, upper) in [
+            (
+                program.columns(),
+                engine.scaled_column_lower.as_slice(),
+                engine.scaled_column_upper.as_slice(),
+            ),
+            (
+                program.rows(),
+                engine.scaled_row_lower.as_slice(),
+                engine.scaled_row_upper.as_slice(),
+            ),
+        ] {
+            for (i, range) in bounds.iter().enumerate() {
+                for (original, scaled) in [(range.lower, lower[i]), (range.upper, upper[i])] {
+                    if original.is_finite()
+                        && (!scaled.is_finite() || original != 0.0 && scaled == 0.0)
+                    {
+                        return Err("correction_bound_scale_range");
+                    }
+                }
+            }
+        }
+        Ok(engine)
+    }
+
     /// Research-only exact power-of-two scaling, with explicit caller-supplied exponents.
     #[cfg(feature = "precision-research")]
     pub fn with_power2_scaling(

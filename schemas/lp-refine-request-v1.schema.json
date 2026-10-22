@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-refine-request-v1.schema.json",
+  "title": "lp-refine-request-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "identity": {
+      "const": "lp-refine-v1"
+    },
+    "width": {
+      "enum": [
+        "f64",
+        "f32"
+      ]
+    },
+    "anchored": {
+      "type": "boolean"
+    },
+    "model_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_tree_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "executable_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "code_object_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "device": {
+      "type": "string",
+      "pattern": "^GPU-"
+    },
+    "options": {
+      "$ref": "solve-config-v1.schema.json"
+    },
+    "method": {
+      "$ref": "lp-settings-v1.schema.json"
+    },
+    "profile": {
+      "type": "boolean"
+    },
+    "device_buffer_bytes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1073741824
+    }
+  },
+  "required": [
+    "schema_version",
+    "identity",
+    "width",
+    "anchored",
+    "model_sha256",
+    "source_tree_sha256",
+    "executable_sha256",
+    "code_object_sha256",
+    "device",
+    "options",
+    "method",
+    "profile",
+    "device_buffer_bytes"
+  ]
+}

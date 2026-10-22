@@ -1,0 +1,704 @@
+{
+  "contractions": 39,
+  "endpoints": 21,
+  "identity": "gpup-refine-exact-evidence-v1",
+  "merit_enclosures": 93,
+  "oracle_sha256": "be47907c38f0570aabe02a783d305311ddb8390daabb3087ea83286527552566",
+  "report_sha256": "569dde98ec556adffdc6b655b38e899d6df0e2bde47afff5d941706779535718",
+  "rows": [
+    {
+      "contractions": 0,
+      "endpoint_sha256": "845cf8a1e84220b4b3b40c0fe05016a4b3d30f3073d59deffc02ce3d0a5e5c9c",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "merit": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "original_violation": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "stationarity": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-small-4-0-refine-fp32",
+      "merit_enclosures": 0,
+      "model_sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+    },
+    {
+      "contractions": 0,
+      "endpoint_sha256": "c92bc6128423a20f4ad0ad431c39002a5adafc68c589e210094927ea6f628baf",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "merit": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "original_violation": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "stationarity": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-small-4-0-refine-fp64",
+      "merit_enclosures": 0,
+      "model_sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+    },
+    {
+      "contractions": 0,
+      "endpoint_sha256": "9f433f17e744c5314f88ae0caaf9e2a90b0711b835e58ea7be9799fbe04481ab",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "merit": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "original_violation": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "stationarity": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-small-4-0-refine-anchored-fp32",
+      "merit_enclosures": 0,
+      "model_sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+    },
+    {
+      "contractions": 4,
+      "endpoint_sha256": "a3f07dce6785796330d5d6bccaa000a84f8ebbcf33496efe8d70de6265e03fb3",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1139054627704272785456905702080512",
+          "numerator": "123408659791437829011872323"
+        },
+        "merit": {
+          "denominator": "40496088448444576163717709824",
+          "numerator": "39186730854205876427027365"
+        },
+        "objective": {
+          "denominator": "633825300114114700748351602688",
+          "numerator": "-76919516375475456210450856092204928423"
+        },
+        "original_violation": {
+          "denominator": "154742504910672534362390528",
+          "numerator": "30804296552871499893931653"
+        },
+        "stationarity": {
+          "denominator": "40496088448444576163717709824",
+          "numerator": "39186730854205876427027365"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-scaling-256-0-refine-fp64",
+      "merit_enclosures": 9,
+      "model_sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+    },
+    {
+      "contractions": 4,
+      "endpoint_sha256": "6c5dc706c108be75a28b1bc46c7c0178f17f66d1e03244e4bac30d4dabbab4e3",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1139054627704272785456905702080512",
+          "numerator": "134197137525128754781632367"
+        },
+        "merit": {
+          "denominator": "1341366336487424",
+          "numerator": "1442646753219"
+        },
+        "objective": {
+          "denominator": "633825300114114700748351602688",
+          "numerator": "-76919516489285704800582796476311151019"
+        },
+        "original_violation": {
+          "denominator": "154742504910672534362390528",
+          "numerator": "32237664621172123859065963"
+        },
+        "stationarity": {
+          "denominator": "1341366336487424",
+          "numerator": "1442646753219"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-scaling-256-0-refine-anchored-fp32",
+      "merit_enclosures": 10,
+      "model_sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+    },
+    {
+      "contractions": 4,
+      "endpoint_sha256": "bc75351af79abf080eebaffa1db10101a20cbd2cfd0117bf375fb4bad448bf68",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "284763656926068196364226425520128",
+          "numerator": "31204981977635399699492373"
+        },
+        "merit": {
+          "denominator": "5365465345949696",
+          "numerator": "5115581474403"
+        },
+        "objective": {
+          "denominator": "158456325028528675187087900672",
+          "numerator": "-19229879094971676571642863861344807951"
+        },
+        "original_violation": {
+          "denominator": "154742504910672534362390528",
+          "numerator": "30862675488316812673089713"
+        },
+        "stationarity": {
+          "denominator": "5365465345949696",
+          "numerator": "5115581474403"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-scaling-256-0-refine-fp32",
+      "merit_enclosures": 10,
+      "model_sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+    },
+    {
+      "contractions": 0,
+      "endpoint_sha256": "f5000f05a58cd99eab58608d3f8710e7e55d6ca3264c78bdc1dd2f32ab66a5b1",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "merit": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "original_violation": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "stationarity": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-small-4-1-refine-fp32",
+      "merit_enclosures": 0,
+      "model_sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+    },
+    {
+      "contractions": 0,
+      "endpoint_sha256": "82fa6e7e948eb746dae0ca278dd67c9de2a61aaf44bc6125e4384b3516957bdf",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "merit": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "original_violation": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "stationarity": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-small-4-1-refine-fp64",
+      "merit_enclosures": 0,
+      "model_sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+    },
+    {
+      "contractions": 0,
+      "endpoint_sha256": "56d3b6b478ae29489a89c19061ac77865771de070b19b335460104e4d10484a6",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "merit": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "original_violation": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "stationarity": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-small-4-1-refine-anchored-fp32",
+      "merit_enclosures": 0,
+      "model_sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+    },
+    {
+      "contractions": 4,
+      "endpoint_sha256": "c66dc2e9a673bdedd45ab3954c21120a4fcd744c63ee35b83beeb98e03e219dc",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1139054627704272785456905702080512",
+          "numerator": "123408659791437829011872323"
+        },
+        "merit": {
+          "denominator": "40496088448444576163717709824",
+          "numerator": "39186730854205876427027365"
+        },
+        "objective": {
+          "denominator": "633825300114114700748351602688",
+          "numerator": "-76919516375475456210450856092204928423"
+        },
+        "original_violation": {
+          "denominator": "154742504910672534362390528",
+          "numerator": "30804296552871499893931653"
+        },
+        "stationarity": {
+          "denominator": "40496088448444576163717709824",
+          "numerator": "39186730854205876427027365"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-scaling-256-1-refine-fp64",
+      "merit_enclosures": 9,
+      "model_sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+    },
+    {
+      "contractions": 4,
+      "endpoint_sha256": "3b3e69223766ebdd6bddb9e86013d95ed1578dd9a0bc4d22adabf6923975fe45",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1139054627704272785456905702080512",
+          "numerator": "134197137525128754781632367"
+        },
+        "merit": {
+          "denominator": "1341366336487424",
+          "numerator": "1442646753219"
+        },
+        "objective": {
+          "denominator": "633825300114114700748351602688",
+          "numerator": "-76919516489285704800582796476311151019"
+        },
+        "original_violation": {
+          "denominator": "154742504910672534362390528",
+          "numerator": "32237664621172123859065963"
+        },
+        "stationarity": {
+          "denominator": "1341366336487424",
+          "numerator": "1442646753219"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-scaling-256-1-refine-anchored-fp32",
+      "merit_enclosures": 10,
+      "model_sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+    },
+    {
+      "contractions": 4,
+      "endpoint_sha256": "88eda10b6cb3373d3cb7bd751d57ed563a5f42eb3ce050ba35fb4c8513633f3b",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "284763656926068196364226425520128",
+          "numerator": "31204981977635399699492373"
+        },
+        "merit": {
+          "denominator": "5365465345949696",
+          "numerator": "5115581474403"
+        },
+        "objective": {
+          "denominator": "158456325028528675187087900672",
+          "numerator": "-19229879094971676571642863861344807951"
+        },
+        "original_violation": {
+          "denominator": "154742504910672534362390528",
+          "numerator": "30862675488316812673089713"
+        },
+        "stationarity": {
+          "denominator": "5365465345949696",
+          "numerator": "5115581474403"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-scaling-256-1-refine-fp32",
+      "merit_enclosures": 10,
+      "model_sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+    },
+    {
+      "contractions": 0,
+      "endpoint_sha256": "3faeb925b3409a065eb9b3050e6b0f1a70fccd109c4ce837ed0ab5decf3375da",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "merit": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "original_violation": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "stationarity": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-small-4-2-refine-anchored-fp32",
+      "merit_enclosures": 0,
+      "model_sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+    },
+    {
+      "contractions": 0,
+      "endpoint_sha256": "78f6068bbccc12270944f0209ac0ca3f5862d2100157462272f3c3daf23a11c5",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "merit": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "original_violation": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "stationarity": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-small-4-2-refine-fp32",
+      "merit_enclosures": 0,
+      "model_sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+    },
+    {
+      "contractions": 0,
+      "endpoint_sha256": "b4563edba7d0817890a3cd9ba856f60d7e009d8834f217561bb8b6e10f5d448d",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "merit": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "objective": {
+          "denominator": "1",
+          "numerator": "1"
+        },
+        "original_violation": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "stationarity": {
+          "denominator": "1",
+          "numerator": "0"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-small-4-2-refine-fp64",
+      "merit_enclosures": 0,
+      "model_sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+    },
+    {
+      "contractions": 4,
+      "endpoint_sha256": "3f1ebfaa8d7acc22f5d4da08bf58baf0008bee80ba2056c7650e1f9d21a235ec",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1139054627704272785456905702080512",
+          "numerator": "134197137525128754781632367"
+        },
+        "merit": {
+          "denominator": "1341366336487424",
+          "numerator": "1442646753219"
+        },
+        "objective": {
+          "denominator": "633825300114114700748351602688",
+          "numerator": "-76919516489285704800582796476311151019"
+        },
+        "original_violation": {
+          "denominator": "154742504910672534362390528",
+          "numerator": "32237664621172123859065963"
+        },
+        "stationarity": {
+          "denominator": "1341366336487424",
+          "numerator": "1442646753219"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-scaling-256-2-refine-anchored-fp32",
+      "merit_enclosures": 10,
+      "model_sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+    },
+    {
+      "contractions": 4,
+      "endpoint_sha256": "a2c4837c2ba8b0baed25474655361f23c4fc06f23dbce218f9e521c0d09cee86",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "1139054627704272785456905702080512",
+          "numerator": "123408659791437829011872323"
+        },
+        "merit": {
+          "denominator": "40496088448444576163717709824",
+          "numerator": "39186730854205876427027365"
+        },
+        "objective": {
+          "denominator": "633825300114114700748351602688",
+          "numerator": "-76919516375475456210450856092204928423"
+        },
+        "original_violation": {
+          "denominator": "154742504910672534362390528",
+          "numerator": "30804296552871499893931653"
+        },
+        "stationarity": {
+          "denominator": "40496088448444576163717709824",
+          "numerator": "39186730854205876427027365"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-scaling-256-2-refine-fp64",
+      "merit_enclosures": 9,
+      "model_sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+    },
+    {
+      "contractions": 4,
+      "endpoint_sha256": "94f6a5423caf69f4a175cf2fe883dab726f5b78fecb5f853130139db69234f76",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "284763656926068196364226425520128",
+          "numerator": "31204981977635399699492373"
+        },
+        "merit": {
+          "denominator": "5365465345949696",
+          "numerator": "5115581474403"
+        },
+        "objective": {
+          "denominator": "158456325028528675187087900672",
+          "numerator": "-19229879094971676571642863861344807951"
+        },
+        "original_violation": {
+          "denominator": "154742504910672534362390528",
+          "numerator": "30862675488316812673089713"
+        },
+        "stationarity": {
+          "denominator": "5365465345949696",
+          "numerator": "5115581474403"
+        }
+      },
+      "id": "gpup-refine-v2-timing-gpup-development-scaling-256-2-refine-fp32",
+      "merit_enclosures": 10,
+      "model_sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+    },
+    {
+      "contractions": 1,
+      "endpoint_sha256": "bb49e183b03dd83d9ed72453d9df7416c2a73fc646d255acff827292fa9953bb",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "18446744073709551616",
+          "numerator": "231565670564105561"
+        },
+        "merit": {
+          "denominator": "36893488147419103232",
+          "numerator": "8896571773716033991"
+        },
+        "objective": {
+          "denominator": "147573952589676412928",
+          "numerator": "-116085003778620071096631"
+        },
+        "original_violation": {
+          "denominator": "144115188075855872",
+          "numerator": "130470695191216347"
+        },
+        "stationarity": {
+          "denominator": "36893488147419103232",
+          "numerator": "8896571773716033991"
+        }
+      },
+      "id": "gpup-refine-v2-profile-gpup-development-irregular-2048-0-refine-fp64",
+      "merit_enclosures": 2,
+      "model_sha256": "b2da8d3fb1864d4e21179666277729d923d47981418848b22e5d3957760a1c87"
+    },
+    {
+      "contractions": 1,
+      "endpoint_sha256": "62963b331fd35cc0a25290b8fed7fa2cb20d57b75e8ca86c20b8b12e3771e1c1",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "9223372036854775808",
+          "numerator": "115782816192821191"
+        },
+        "merit": {
+          "denominator": "36893488147419103232",
+          "numerator": "8896511116948724487"
+        },
+        "objective": {
+          "denominator": "36893488147419103232",
+          "numerator": "-29021251388674520527715"
+        },
+        "original_violation": {
+          "denominator": "144115188075855872",
+          "numerator": "130470625075288481"
+        },
+        "stationarity": {
+          "denominator": "36893488147419103232",
+          "numerator": "8896511116948724487"
+        }
+      },
+      "id": "gpup-refine-v2-profile-gpup-development-irregular-2048-0-refine-anchored-fp32",
+      "merit_enclosures": 2,
+      "model_sha256": "b2da8d3fb1864d4e21179666277729d923d47981418848b22e5d3957760a1c87"
+    },
+    {
+      "contractions": 1,
+      "endpoint_sha256": "7f177aee001e3c8f850fa5b7dbce78dbd2a1f45d824633e8929039384898ee49",
+      "final": {
+        "box": {
+          "denominator": "1",
+          "numerator": "0"
+        },
+        "equality": {
+          "denominator": "9223372036854775808",
+          "numerator": "115782816192821191"
+        },
+        "merit": {
+          "denominator": "36893488147419103232",
+          "numerator": "8896511116948724487"
+        },
+        "objective": {
+          "denominator": "36893488147419103232",
+          "numerator": "-29021251388674520527715"
+        },
+        "original_violation": {
+          "denominator": "144115188075855872",
+          "numerator": "130470625075288481"
+        },
+        "stationarity": {
+          "denominator": "36893488147419103232",
+          "numerator": "8896511116948724487"
+        }
+      },
+      "id": "gpup-refine-v2-profile-gpup-development-irregular-2048-0-refine-fp32",
+      "merit_enclosures": 2,
+      "model_sha256": "b2da8d3fb1864d4e21179666277729d923d47981418848b22e5d3957760a1c87"
+    }
+  ],
+  "source_tree_sha256": "b6a462fb9b43a168e2da890a75e70abd345d929dcfc1ae2dfcad173838f6d3a2"
+}

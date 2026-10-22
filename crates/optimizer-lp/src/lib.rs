@@ -57,3 +57,7 @@ pub mod adaptive;
 /// ADR-0035 bounded exact sparse products.
 #[cfg(feature = "precision-research")]
 pub mod exec;
+
+/// ADR-0037 original-residual correction admission.
+#[cfg(feature = "precision-research")]
+pub mod refine;

@@ -1,5 +1,74 @@
 # Active Task
 
+## GPUP-REFINE implementation (2026-10-22)
+
+Status: complete; final native acceptance passed, local commit follows.
+Implemented on codex/gpup-refine under
+accepted ADR-0037 / native-FP64-outer SPEC-0021 and ADR-0038's selected-device
+telemetry repair. The original implementation objective/budget was recorded here
+before runtime work; the user explicitly authorized this bounded slice and its
+3600-second allocation within the existing ceiling. No other task is started.
+
+Result: equality-plus-box correction LPs, host FP64 state/controller, GPU FP64 or
+FP32 sparse products, directly maintained guarded anchors, charged sticky native
+promotion, complete in-memory checkpoints and strict solve/verify/replay.
+Original-model host certification remains authoritative. The
+[report](../docs/benchmarks/lp-refinement-gpup-refine.md) retains all 108 attempts,
+48 verified endpoints and 30/96 certified timings. Only small-4 certifies in the
+new modes, at the initial host point before any device work. Scaling-256 refuses
+numerical budgets; other new timing cells expire. No sparse-product benefit,
+general convergence result or preset is admitted. Host guards/FP64 recurrences
+are expensive, and every refresh, failed correction and recovery remains charged.
+
+Acceptance evidence: Fraction admission covers 240 general models/1200 correction
+maps; independent sparse endpoint checks cover 21 endpoints, 93 merit enclosures
+and 39 exact contractions. The subnormal rounded-step counterexample is retained
+and refused. All 66 ordinary device tests, three refinement tests/1920 bitwise
+product checks, nine fixed-work solve/verify/replay pairs and memcheck, racecheck,
+initcheck and synccheck pass. New image uses 40 registers and zero stack/spills.
+The pretrial exact-source full pinned-native tools/check.sh gate passes (299
+Python tests, Rust/native/dependency checks, committed replay, docs and smoke).
+Final full pinned-native gate passes all 304 Python tests, Rust/native/dependency
+checks, committed-record replay, 130 documentation pages and smoke. It used
+116.036960146 elapsed / 140.362833 CPU seconds, 1644863488 bytes peak sampled
+process-tree RSS and 1663217664 bytes maximum child RSS. No GPU job ran in that
+gate; native coverage was enabled. The only post-gate changes record these CPU
+results and refresh the artifact inventory; measured numerical sources remain exact.
+
+Preserve the v1 activity refusal before child launch (0.125948387 GPU seconds),
+all unexecuted v1 cells, and the separately frozen v2 continuation on the same
+5090. No attempt identity is repeated or device substituted. Original source
+4e8af4e8fc3a197af2c5d8e31f7e25c798833588c7e8ae4986db487c80f294d6;
+measured v2 source b6a462fb9b43a168e2da890a75e70abd345d929dcfc1ae2dfcad173838f6d3a2.
+Numerical Rust/CUDA/ELFs/images are unchanged between cohorts. The first CPU final
+report failed to decode a compact control wrapper; its failure log and exact
+reader/test correction hashes are retained with no reexecution. Local artifacts
+are artifacts/gpup-refine-v1 and artifacts/gpup-refine-v2; reviewed summaries are
+under docs/benchmarks/data/refine. Final native log/resources remain in v2.
+
+Task GPU charges: timing 1275.123297404/2300, profiles 217.195487188/450,
+acceptance including refusal 49.400351920/850; total 1541.719136512/3600 s.
+V2 uses 1541.593188125/3599 s. Cumulative 19207.265220123/21602.574545061 s.
+Final 16684-event ledger SHA-256:
+e83d07792fb0775fc26d8d2cca8a2411f59fcbc94f742cafd8f6b844ffb60535.
+Original 16452-event prefix:
+24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18.
+Intermediate 16454-event prefix:
+900bbaed980f273db069819028e48ee8c896024e4492ade21382199b78ae8e6e.
+Every earlier prefix and phase ceiling is preserved; no campaign allowance added.
+All GPU work used the shared host lease and activity admission on
+GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48. CPU allocation 21600 seconds/four build
+jobs, host RSS 8 GiB, device resident/preparation 1/2 GiB, new artifacts 32 GiB.
+Observed primary RSS peaks at 835399680 bytes; retained cohort artifacts are well
+below the artifact cap. Shape/memory bounds include up to 131072 transformed
+variables and the implicit activity block; in-range shapes may still refuse.
+
+Hand off GPUP-ASSESS under its own bounded contract/allocation, without starting
+policy work or reserving unused headroom. Preserve expansion/alternative gates,
+original-model authority, defaults and all historical evidence. Final acceptance
+is followed by a local commit only; no push, publication or merge is authorized.
+
+
 ## PR 19 integration and evidence retention (2026-10-13)
 
 The user has now authorized merging PR 19 and safe cleanup, superseding the

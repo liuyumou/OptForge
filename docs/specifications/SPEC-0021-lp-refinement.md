@@ -1,13 +1,31 @@
 # SPEC-0021: Residual-driven LP refinement and controlled inexact products
 
-Status: draft; a bounded method contract must be accepted before implementation
+Status: accepted and implemented ADR-0037 native-FP64-outer subset; extensions remain draft
 Scope: research LP correction, anchored products, selective precision and assessment
 Owner: numerical backend
 Introduced: GPUP-DESIGN, 2026-10-12
 Last reviewed commit: bootstrap
 Supersedes: none; legacy SPEC-0012 audits/recovery and ADR-0010 authority remain
-Implementation: none; CPU algebraic examples only
-Tests: acceptance map below; solver convergence and device trials pending
+Implementation: optimizer-lp::refine, optimizer-lp-cuda::refine, optimizer-experiment::lp_refine
+Tests: independent GPUP-REFINE rational/endpoint oracles, host/device fault and replay tests; acceptance map below
+
+## Accepted subset (2026-10-22)
+
+[ADR-0037](../decisions/ADR-0037-bounded-lp-refinement.md) freezes the user-accepted
+FP64-outer, FP32-products-only subset, merit/error/progress parameters, recovery
+and resource allocation. CPU proof/oracle admission precedes dependent runtime
+work. A reproduced numerical admission refusal is a valid bounded outcome;
+full expansion masters, selective precision and assessment scheduling remain draft.
+
+The [implemented evaluation](../benchmarks/lp-refinement-gpup-refine.md) retains
+108 attempts, 48 independently verified endpoints and 30/96 certified timings,
+with no sparse-product benefit or supported preset. The accepted ADR fixes the
+parameters and projected-stationarity choice that the broader design below
+describes as proposed/unset. That proposed wording applies to independently gated
+extensions; it does not unset this accepted subset. ADR-0038 repairs selected-device
+activity telemetry without changing the method. Full native, device, replay and
+four scoped sanitizer acceptance pass; complete expansion state and requirements
+12–14's new assessment scheduling policy are not implemented here.
 
 ## Purpose and terminology
 

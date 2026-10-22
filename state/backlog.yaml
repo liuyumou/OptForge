@@ -20,7 +20,7 @@ active_research_track: GPUP
 # 2026-10-13: GPUP-STATE closes with ADR-0036's resource admission refusal.
 # PR 19 review retains it and adds a compact full-range scalar FMA resource pass.
 # SPEC-0021 and full expansion state remain draft; no preset follows.
-next_ready_task: GPUP-REFINE
+next_ready_task: GPUP-ASSESS
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -249,13 +249,13 @@ tasks:
     acceptance: "ADR-0036 bounded admission investigation: original 192 integer/270 FMA/64 update/48 transcendental cases and full-bin refusal at 255 registers retained; PR 19 compact full-range FMA fits at 40 registers/zero spills with 5900 additional cases per construction and host UBSan; instruction/frozen-candidate verifier fixes; 6170 device cases/four scoped sanitizers/36 verified primitive timings on PRO 6000; blocked 5090 and receipt-only correction retained; no controller or solver benefit; charge 30.114068273 GPU s, 16452 events; full native gate"
   - id: GPUP-REFINE
     title: Accept and evaluate residual-driven LP refinement and anchored products
-    status: ready
+    status: complete
     depends_on: [GPUP-REP, GPUP-EXEC, GPUP-CONVERGENCE]
     specification: docs/specifications/SPEC-0021-lp-refinement.md
-    acceptance: "Accept bounded transformation/inner-oracle/progress/resource contract; rational ranged/equality/box primal-dual maps, guarded anchors, failure/recovery/replay and full refresh costs; native FP64 outer control first; retain a bounded negative/refusal result if oracle assumptions fail"
+    acceptance: "ADR-0037/0038 bounded native-FP64-outer correction LPs and guarded FP32 anchors; 240 rational models/1200 maps, 93 independent endpoint merit enclosures/39 contractions; full native, 66 regular device tests, 1920 product checks, nine replays/four scoped sanitizers; 108 attempts retained, 48 endpoints verified, 30/96 timings certified; initial host-only success and numerical refusals/timeouts establish no product benefit or preset; task 1541.719136512 GPU s, 16684 events"
   - id: GPUP-ASSESS
     title: Validate a bounded assessment scheduling policy
-    status: planned
+    status: ready
     depends_on: [GPUP-CONVERGENCE, GPUP-DESIGN]
     specification: docs/specifications/SPEC-0021-lp-refinement.md
     acceptance: "CPU common-trajectory replay then accepted policy/resource contract; fixed-schedule control, delayed-success accounting, original-model final certification and charged required recovery"

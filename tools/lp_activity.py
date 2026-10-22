@@ -23,7 +23,7 @@ def sample(device, timeout):
     utilization = query('--query-gpu=utilization.gpu', True)
     if not utilization.isdigit() or not 0 <= int(utilization) <= 100:
         raise ValueError('GPU utilization telemetry unavailable or malformed')
-    applications = query('--query-compute-apps=gpu_uuid,pid', False)
+    applications = query('--query-compute-apps=gpu_uuid,pid', True)
     pids = []
     for line in applications.splitlines():
         fields = [field.strip() for field in line.split(',')]

@@ -44,3 +44,7 @@ mod adaptive;
 /// ADR-0035 exact sparse-product executor.
 #[cfg(feature = "precision-research")]
 pub mod exec;
+
+/// ADR-0037 isolated sparse correction products.
+#[cfg(feature = "precision-research")]
+pub mod refine;

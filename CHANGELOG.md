@@ -1,5 +1,30 @@
 # Changelog
 
+## Unreleased — GPUP-REFINE bounded correction LP evaluation (2026-10-22)
+
+- Accept ADR-0037's native-FP64-outer SPEC-0021 subset: equality-plus-box correction
+  LPs, original-operator interval merits, dyadic scaling, conservative step/error
+  guards and directly maintained anchors. Preserve FP64 iterates/updates/control
+  with optional FP32 sparse products and one charged sticky native promotion.
+- Add isolated research host/CUDA/evidence modules and image, strict lp-refine-v1
+  schemas, study-only solve/verify/replay, complete in-memory checkpoints and
+  monotonic accounting. Existing defaults, images and historical replay remain.
+- Validate 240 rational models/1200 correction maps, 93 endpoint merit enclosures
+  and 39 contractions; retain/refuse the exact subnormal rounded-step
+  counterexample. Full native, 66 ordinary device tests, 1920 refinement product
+  comparisons, nine fixed-work replays and all four scoped sanitizers pass.
+- Retain all 108 study attempts, 48 verified endpoints and 30/96 certified timings.
+  Refinement succeeds only on initially host-certified small-4, without device
+  work. Numerical budget refusals/timeouts and expensive host guards prevent a
+  general product/latency benefit; no supported preset is selected.
+- Accept ADR-0038's selected-device telemetry repair in a separately frozen
+  continuation, preserving the initial refusal. Retain the CPU compact-reader
+  failure and exactly bound correction without repeating any execution.
+- Charge 1541.719136512 GPU seconds within 3600; cumulative
+  19207.265220123 / 21602.574545061 seconds, 16684 ledger events, every historical
+  prefix and phase ceiling preserved. Hand off GPUP-ASSESS without starting it
+  or reserving another task's allowance. No push, publication or merge.
+
 ## Unreleased — GPUP-STATE refusal and compact FMA validation (2026-10-13)
 
 - Accept ADR-0036's bounded CPU/resource refusal under SPEC-0020. Independent

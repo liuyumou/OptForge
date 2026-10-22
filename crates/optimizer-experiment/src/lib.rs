@@ -56,3 +56,7 @@ pub mod lp_external_v2;
 /// ADR-0035 isolated exact-product research evidence.
 #[cfg(feature = "precision-research")]
 pub mod lp_exec;
+
+/// ADR-0037 original-residual refinement study.
+#[cfg(feature = "precision-research")]
+pub mod lp_refine;
