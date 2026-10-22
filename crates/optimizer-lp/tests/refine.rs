@@ -258,18 +258,97 @@ fn checkpoint_roundtrip_keeps_physical_work_deadline_and_sticky_promotion() {
     out.work.physical_updates = 4;
     out.work.promotions = 1;
     out.width = ProductWidth::F64;
+    out.status = "unsupported".into();
+    out.failure = Some("later_failure".into());
+    out.trace.push(Progress {
+        correction: 1,
+        physical_updates: 4,
+        width: ProductWidth::F64,
+        anchor_merit: eq.merit(&out.v, &out.y).unwrap(),
+        candidate_merit: None,
+        errors: ErrorBudget::default(),
+        decision: "later_failure".into(),
+        anchor_v: out.v.clone(),
+        anchor_y: out.y.clone(),
+        candidate_v: None,
+        candidate_y: None,
+        generation: op.generation(),
+        primal_exponent: a.correction.primal_exponent,
+        dual_exponent: a.correction.dual_exponent,
+    });
     a.delta_x[0] = 99.0;
-    restore(&mut controller, &mut a, &mut out, &snapshot, &op).unwrap();
+    let discarded = restore(&mut controller, &mut a, &mut out, &snapshot, &op).unwrap();
+    assert_eq!(discarded.len(), 1);
+    assert_eq!(discarded[0].decision, "later_failure");
     assert_eq!(a, original);
     assert_eq!(controller.physical_iterations(), 4);
     assert!(controller.expired_at(deadline));
     assert_eq!(out.work.physical_updates, 4);
     assert_eq!(out.width, ProductWidth::F64);
+    assert!(out.trace.is_empty());
+    assert_eq!(out.status, "iteration_limit");
+    assert_eq!(out.failure, None);
     a.generation.push('x');
     assert!(a.validate_generation(&op).is_err());
     let another = optimizer_lp::Engine::new(&cp, method());
     let mut other = Fp64Controller::new(&another);
     assert!(restore(&mut other, &mut a, &mut out, &snapshot, &op).is_err());
+}
+
+#[test]
+fn final_attempt_assessment_survives_refresh_and_promotion_offsets() {
+    use optimizer_lp::refine::{HostOracle, InnerOperator, ProductOracle, ProductWidth, run};
+    // The fixed box conflicts with the equality. Its merit cannot contract;
+    // an inaccurate low product first consumes nine proposals/eight refreshes.
+    let model = Model::from_json(br#"{"schema_version":1,"model_id":"refine-stalled","variables":[{"id":0,"domain":"continuous","lower":{"kind":"finite","value":0.0},"upper":{"kind":"finite","value":0.0}}],"constraints":[{"id":0,"lower":{"kind":"finite","value":1.0},"upper":{"kind":"finite","value":1.0},"terms":[{"variable_id":0,"coefficient":1.0}]}],"objective":{"sense":"minimize","offset":0.0,"terms":[]}}"#).unwrap();
+    let p = LinearProgram::new(&model).unwrap();
+    let eq = EqualityBox::new(&p).unwrap();
+    struct BadLow {
+        native_fault: bool,
+    }
+    impl ProductOracle for BadLow {
+        fn bind(&mut self, _: &InnerOperator) -> Result<(), String> {
+            Ok(())
+        }
+        fn apply(
+            &mut self,
+            op: &InnerOperator,
+            t: bool,
+            x: &[f64],
+            width: ProductWidth,
+        ) -> Result<Vec<f64>, String> {
+            if width == ProductWidth::F32 || self.native_fault {
+                if width == ProductWidth::F64 {
+                    self.native_fault = false;
+                }
+                Ok(vec![1e10; if t { op.columns() } else { op.rows() }])
+            } else {
+                HostOracle.apply(op, t, x, width)
+            }
+        }
+    }
+    let mut assessments = 0;
+    let result = run(
+        &eq,
+        method(),
+        ProductWidth::F32,
+        true,
+        1e-9,
+        std::time::Instant::now() + std::time::Duration::from_secs(10),
+        &optimizer_core::CancellationToken::new(),
+        &mut BadLow { native_fault: true },
+        |_, _| {
+            assessments += 1;
+            false
+        },
+    );
+    assert_eq!(result.work.physical_updates, 2009);
+    assert_eq!(result.work.committed_updates, 1999);
+    assert_eq!(result.work.promotions, 1);
+    assert_eq!(result.failure.as_deref(), Some("failed_progress"));
+    // Initial, ten inherited boundaries, correction boundary, and final.
+    assert_eq!(assessments, 13);
+    assert_eq!(result.work.certifications, 13);
 }
 
 #[test]

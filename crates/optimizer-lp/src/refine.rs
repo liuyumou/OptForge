@@ -1191,7 +1191,7 @@ pub fn run<O: ProductOracle>(
                     anchor_transform: transform_error(eq, &c).map_err(str::to_owned)?,
                     ..ErrorBudget::default()
                 };
-                for _ in 0..2000 {
+                for attempt_update in 0..2000 {
                     if cancel.is_cancelled() {
                         out.status = "interrupted".into();
                         return Ok(());
@@ -1452,7 +1452,7 @@ pub fn run<O: ProductOracle>(
                         .work
                         .physical_updates
                         .is_multiple_of(method.check_interval)
-                        || control.state().iterations == 2000
+                        || attempt_update == 1999
                         || out.work.physical_updates == method.iteration_limit.min(50000);
                     if boundary {
                         let mut candidate_v = Vec::new();
@@ -1819,25 +1819,37 @@ pub fn checkpoint<'e, 'p>(
         outer: outcome.clone(),
     }
 }
+/// Restore numerical and logical state, returning discarded progress for retention.
+/// Physical counters, the current deadline and sticky promotion are preserved.
+///
+/// # Errors
+/// Refuses a different operator/engine or a trace outside the snapshot's history.
 pub fn restore<'e, 'p>(
     controller: &mut crate::control::Fp64Controller<'e, 'p>,
     anchors: &mut AnchorState,
     outcome: &mut Outcome,
     snapshot: &Checkpoint<'e, 'p>,
     op: &InnerOperator,
-) -> Result<(), &'static str> {
+) -> Result<Vec<Progress>, &'static str> {
     snapshot.anchors.validate_generation(op)?;
+    if !outcome.trace.starts_with(&snapshot.outer.trace) {
+        return Err("checkpoint_trace_mismatch");
+    }
     controller.restore(&snapshot.numerical)?;
     *anchors = snapshot.anchors.clone();
-    // Numerical rollback keeps the full physical trace and every charged counter.
+    // Restore the logical history and return discarded progress to the caller
+    // for retention. Every charged counter, deadline and sticky promotion survive.
+    let discarded = outcome.trace.split_off(snapshot.outer.trace.len());
     outcome.v = snapshot.outer.v.clone();
     outcome.y = snapshot.outer.y.clone();
+    outcome.status = snapshot.outer.status.clone();
+    outcome.failure = snapshot.outer.failure.clone();
     outcome.width = if outcome.work.promotions > snapshot.outer.work.promotions {
         ProductWidth::F64
     } else {
         snapshot.outer.width
     };
-    Ok(())
+    Ok(discarded)
 }
 
 /// Conservative host preparation envelope within the separate 8-GiB RSS cap,

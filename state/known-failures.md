@@ -2,6 +2,14 @@
 
 ## Bounded refinement loses coverage and guards dominate costs
 
+Prepublication review repairs stale logical checkpoint metadata, missing-candidate
+trace acceptance, a skipped final assessment after refresh/promotion offsets,
+and incomplete instruction parsing. Regressions reproduce the original faults;
+all 39 available refinement endpoints pass the rebuilt host verifier. Exact
+before/after source hashes preserve the original measured workers, report and
+all GPU receipts; no GPU execution is repeated and the negative result below
+is unchanged. See the report's review section and source bridge.
+
 [GPUP-REFINE](../docs/benchmarks/lp-refinement-gpup-refine.md) completes the
 accepted ADR-0037 native-FP64-outer correction/anchored-product slice. It retains
 108 attempts, independently verifies 48 endpoints and certifies 30/96 timings.

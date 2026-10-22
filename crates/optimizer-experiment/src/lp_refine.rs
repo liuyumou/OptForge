@@ -215,10 +215,13 @@ impl Evidence {
             || self.payload_sha256 != crate::sha256::hex(&serde_json::to_vec(w).map_err(invalid)?)
             || o.work.physical_updates > expected.method.iteration_limit
             || o.work.committed_updates > o.work.physical_updates
+            || o.work.sparse_products < o.work.physical_updates + o.work.committed_updates
+            || o.work.guard_products < 4 * o.work.committed_updates
             || o.work.promotions > u64::from(expected.width == ProductWidth::F32)
             || o.work.corrections > 33
             || o.work.failed_corrections > 2
             || o.work.refreshes > 8 * o.work.corrections
+            || !expected.anchored && o.work.refreshes != 0
             || o.work.sparse_products > 2 * o.work.physical_updates
             || o.work.guard_products > 2 * o.work.sparse_products
             || o.work.anchor_products != 2 * o.work.refreshes
@@ -226,6 +229,15 @@ impl Evidence {
             || w.observations.device_peak_bytes > expected.device_buffer_bytes
             || self.assessment != assessment(&model, &p, &o.v, &o.y, &expected.options)?
             || o.status == "accepted" && !self.assessment.gap_closed
+            || o.status == "accepted" && o.failure.is_some()
+            || o.status == "accepted"
+                && o.work.physical_updates == 0
+                && (o.work
+                    != optimizer_lp::refine::Work {
+                        certifications: 2,
+                        ..Default::default()
+                    }
+                    || w.executed_device.is_some())
         {
             return Err(invalid("refine evidence identity/work/certification"));
         }
@@ -254,15 +266,28 @@ impl Evidence {
         let mut previous = 0;
         let mut previous_correction = 0;
         let mut saw_native = expected.width == ProductWidth::F64;
-        for event in &o.trace {
+        for (index, event) in o.trace.iter().enumerate() {
             if event.anchor_v != current_v
                 || event.anchor_y != current_y
                 || event.generation != generation
-                || event.physical_updates < previous
+                || event.physical_updates <= previous
                 || event.physical_updates > o.work.physical_updates
-                || event.correction < previous_correction
+                || event.correction <= previous_correction
                 || event.correction > o.work.corrections
                 || saw_native && event.width != ProductWidth::F64
+                || event.width == ProductWidth::F64 && o.width != ProductWidth::F64
+                || event.decision == "certified"
+                    && (index + 1 != o.trace.len() || o.status != "accepted")
+                || event.decision.is_empty()
+                || event.decision == "continue"
+                || [
+                    event.errors.representation,
+                    event.errors.arithmetic,
+                    event.errors.anchor_transform,
+                    event.errors.state_update,
+                ]
+                .iter()
+                .any(|x| !x.is_finite() || *x < 0.0)
                 || event.anchor_merit
                     != eq
                         .merit(&event.anchor_v, &event.anchor_y)
@@ -308,6 +333,7 @@ impl Evidence {
             } else if event.candidate_v.is_some()
                 || event.candidate_y.is_some()
                 || event.candidate_merit.is_some()
+                || ["contracted", "certified"].contains(&event.decision.as_str())
             {
                 return Err(invalid("partial trace witness"));
             }
@@ -558,5 +584,89 @@ mod tests {
         e.payload_sha256 = crate::sha256::hex(&serde_json::to_vec(&e.witness).unwrap());
         assert!(e.verify(bytes, &e.witness.request).is_err());
         assert!(e.verify(b"{}", &e.witness.request).is_err());
+    }
+
+    #[test]
+    fn missing_candidates_and_impossible_work_cannot_forge_a_trace() {
+        let bytes = include_bytes!("../../../examples/lp-model-v1.json");
+        let model = Model::from_json(bytes).unwrap();
+        let p = LinearProgram::new(&model).unwrap();
+        let eq = EqualityBox::new(&p).unwrap();
+        let (v, y) = eq.initial();
+        let c = eq.correction(&v, &y).unwrap();
+        let base = optimizer_lp::refine::correction_program(&eq, &c).unwrap();
+        let mut r = request();
+        r.options.iteration_limit = Some(50000);
+        r.options.time_limit_ms = Some(10000);
+        r.model_sha256 = crate::sha256::hex(bytes);
+        let generation = optimizer_lp::refine::InnerOperator::new(
+            &optimizer_lp::Engine::new(&base, r.method),
+            p.column_count(),
+        )
+        .unwrap()
+        .generation();
+        let mut outcome = Outcome {
+            v: v.clone(),
+            y: y.clone(),
+            status: "unsupported".into(),
+            failure: Some("test".into()),
+            width: ProductWidth::F32,
+            work: optimizer_lp::refine::Work {
+                physical_updates: 1,
+                corrections: 1,
+                sparse_products: 1,
+                certifications: 2,
+                ..Default::default()
+            },
+            trace: vec![optimizer_lp::refine::Progress {
+                correction: 1,
+                physical_updates: 1,
+                width: ProductWidth::F32,
+                anchor_merit: eq.merit(&v, &y).unwrap(),
+                candidate_merit: None,
+                errors: Default::default(),
+                decision: "certified".into(),
+                anchor_v: v.clone(),
+                anchor_y: y.clone(),
+                candidate_v: None,
+                candidate_y: None,
+                generation,
+                primal_exponent: c.primal_exponent,
+                dual_exponent: c.dual_exponent,
+            }],
+        };
+        let assessed = assessment(&model, &p, &v, &y, &r.options).unwrap();
+        let check = |outcome: Outcome| {
+            let witness = Witness {
+                request: r.clone(),
+                executed_device: Some(r.device.clone()),
+                outcome,
+                observations: Observations {
+                    phases_ns: BTreeMap::new(),
+                    kernel_launches: 0,
+                    upload_bytes: 0,
+                    readback_bytes: 0,
+                    allocations: 0,
+                    device_peak_bytes: 0,
+                    synchronizations: 0,
+                },
+            };
+            let e = Evidence {
+                schema_version: 1,
+                payload_sha256: crate::sha256::hex(&serde_json::to_vec(&witness).unwrap()),
+                witness,
+                assessment: assessed.clone(),
+            };
+            e.verify(bytes, &r)
+        };
+        assert!(check(outcome.clone()).is_err());
+        outcome.trace[0].decision = "failed_progress".into();
+        assert!(check(outcome.clone()).is_ok());
+        outcome.trace[0].width = ProductWidth::F64;
+        assert!(check(outcome.clone()).is_err());
+        outcome.trace.clear();
+        outcome.work.committed_updates = 1;
+        outcome.work.sparse_products = 0;
+        assert!(check(outcome).is_err());
     }
 }

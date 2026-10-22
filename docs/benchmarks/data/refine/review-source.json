@@ -1,0 +1,41 @@
+{
+  "base_revision": "bf03f327ce8ddfa73749b6c88f78a2e5694485b1",
+  "files": [
+    {
+      "before_sha256": "1399c1c2e13c17ebcccf2d51ad55a6eafbcb7cb8642f09bd4ab32b21b520b420",
+      "path": "crates/optimizer-experiment/src/lp_refine.rs",
+      "reviewed_sha256": "5ba573abe4be3d3a7674e317e09d01e82809a97eee4de1f0b593370529f824bc"
+    },
+    {
+      "before_sha256": "855bf787c49d01efeae882e806b4456565da46f0ae53356613d97f8ba0355c37",
+      "path": "crates/optimizer-lp/src/refine.rs",
+      "reviewed_sha256": "77e4871bcadc152dfbfb185d965b8bb40921555cfc636726fadf82751d31ba15"
+    },
+    {
+      "before_sha256": "d4b3c22b87fae9b825f8bf43182f26d748a52cce10e0f47aafdcb463be20ab6f",
+      "path": "crates/optimizer-lp/tests/refine.rs",
+      "reviewed_sha256": "b87703301e87fd1e3f5b349ef43aed423bc100afed3775447ef6360b536f7e2c"
+    },
+    {
+      "before_sha256": null,
+      "path": "tests/integration/test_lp_refine_review.py",
+      "reviewed_sha256": "02ddc5578817e11c61e6c9805d71dfa12574caccd284fa6939a48d6d979d94d5"
+    },
+    {
+      "before_sha256": "899a79978e1f809002b43691b5ff1c74456c4cc8d0ed243e3d105a72cf785ed1",
+      "path": "tools/lp_refine_admission.py",
+      "reviewed_sha256": "c72e21ced1f234758d0a7112d08c72d07dfc0118a82dd86f2fe625873d7f3393"
+    },
+    {
+      "before_sha256": null,
+      "path": "tools/lp_refine_review.py",
+      "reviewed_sha256": "c105d9142f27b996894735bb5bc540cb0bddbf777a05471794878a04d98071e5"
+    },
+    {
+      "before_sha256": "a5e42c4537c8ade541025897f3a9be196ff800ddf20eb59d8cba530aadf8f431",
+      "path": "tools/report_lp_refine.py",
+      "reviewed_sha256": "042319a7c1a8d50e61f39597d755747e6908c8ca45f8f669dc4ccc42870253c4"
+    }
+  ],
+  "identity": "gpup-refine-review-source-v1"
+}

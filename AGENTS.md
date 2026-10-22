@@ -27,6 +27,12 @@ the exact 16452-event prefix below and all earlier history. GPUP-ASSESS is next
 and needs its own bounded contract/allocation; unused headroom reserves nothing.
 Expansion state, selective precision, assessment scheduling, sessions and supported
 presets remain gated. Preserve original-model host authority and all identities.
+Prepublication review repairs logical checkpoint restoration, candidate-free
+trace acceptance, final assessments after refresh/promotion offsets and instruction
+parsing. Exact before/after source receipts preserve the historical cohort and
+report; the rebuilt host verifier accepts all 39 available refinement endpoints
+on CPU. Review adds no GPU execution or allowance. Publication, protected merge
+and safe cleanup are now explicitly authorized by the user; preserve all evidence.
 
 Prior handoff (2026-10-13): GPUP-STATE is complete as a bounded resource
 admission refusal under [ADR-0036](docs/decisions/ADR-0036-full-expansion-state-admission.md).

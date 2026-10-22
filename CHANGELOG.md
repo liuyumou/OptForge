@@ -9,6 +9,12 @@
 - Add isolated research host/CUDA/evidence modules and image, strict lp-refine-v1
   schemas, study-only solve/verify/replay, complete in-memory checkpoints and
   monotonic accounting. Existing defaults, images and historical replay remain.
+- Review repairs checkpoint logical metadata restoration, candidate-free trace
+  certification and final assessment after refresh/promotion offsets. Return
+  discarded checkpoint progress for retention without refunding work; strengthen
+  trace/work/width validation and fail closed on unparsed SASS/unaudited calls.
+  Bind exact review source hashes, preserve the historical report, and verify
+  all 39 available refinement endpoints with the rebuilt host verifier on CPU.
 - Validate 240 rational models/1200 correction maps, 93 endpoint merit enclosures
   and 39 contractions; retain/refuse the exact subnormal rounded-step
   counterexample. Full native, 66 ordinary device tests, 1920 refinement product

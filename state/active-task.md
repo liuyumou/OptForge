@@ -1,5 +1,34 @@
 # Active Task
 
+## GPUP-REFINE review and integration (2026-10-22)
+
+The user authorizes opening the PR, careful review and fixes, protected merge and
+safe cleanup, superseding the prior local-only delivery scope below. Review the
+numerical/controller, checkpoint and evidence boundaries locally before one
+publication of the reviewed head; keep GitHub CI runs to the required minimum.
+Preserve every measured source/ELF/image, raw attempt, failure and ledger prefix.
+Resources: 7200 CPU seconds, four build jobs, 8 GiB host RSS, 2 GiB new review
+receipts; no GPU work is planned. Any newly required device acceptance must use
+a new scoped identity inside the existing task/campaign allowance, never rerun
+primary identities. Record review findings, targeted regressions, full pinned-native
+acceptance and exact measured/reviewed identities under
+artifacts/gpup-refine-review-20261022. Local review reproduces and fixes stale
+checkpoint logical metadata, candidate-free trace claims, skipped final assessment
+after refresh/promotion offsets and incomplete generated-instruction parsing.
+The rebuilt host verifier accepts all 39 available refinement endpoints; all
+1088 original artifacts and the byte-identical historical report are retained.
+Exact source bridges bind every changed implementation/tool file. No GPU work
+ran and cumulative charge/16684-event ledger remain unchanged. Full pinned-native
+acceptance passes 310 Python tests, Rust/native/dependency checks, historical
+replay, 130 documentation pages and smoke: 126.882339225 elapsed / 178.747286 CPU
+seconds, 1631154176 bytes sampled process-tree RSS, 1663311872 bytes maximum child
+RSS. Reviewed-source receipts are docs/benchmarks/data/refine/review-*.json.
+Publish the reviewed head once and use the PR's required CI checks, cancelling
+only redundant push-triggered runs for that same head. Merge through the protected PR without
+bypassing checks, synchronize main and remove only the merged task branch and
+explicitly disposable caches; retain evidence and native dependencies. Hand off
+GPUP-ASSESS without starting it or reserving its allowance.
+
 ## GPUP-REFINE implementation (2026-10-22)
 
 Status: complete; final native acceptance passed, local commit follows.

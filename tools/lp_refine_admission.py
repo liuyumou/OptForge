@@ -9,6 +9,18 @@ import subprocess
 from lp_protocol import ROOT,file_hash,write_json
 import lp_refine_oracle
 
+def instruction_counts(sass):
+    instructions=collections.Counter()
+    for line in re.findall(r'^\s*/\*[0-9a-fA-F]+\*/([^\n]*)',sass,re.M):
+        match=re.fullmatch(r'\s*(?:@!?(?:U?P\d+|U?PT)\s+)?([A-Z][A-Z0-9_.]*)(?:\s+[^;]*)?;.*',line)
+        if not match or re.fullmatch(r'U?[RP]\d+',match.group(1)):
+            raise ValueError('unparsed addressed refinement instruction')
+        instructions[match.group(1)]+=1
+    if not instructions:raise ValueError('empty refinement instruction receipt')
+    if any('ATOM' in k or 'RED.' in k or k.startswith(('CALL','JCAL')) for k in instructions):
+        raise ValueError('atomic reduction or unaudited call in refinement image')
+    return instructions
+
 def audit(image,directory):
     directory=Path(directory);directory.mkdir(parents=True,exist_ok=True)
     image=Path(image)
@@ -25,12 +37,8 @@ def audit(image,directory):
     if len(entries)!=1 or entries[0][0]!='refine_product':raise ValueError('refine kernel family differs')
     _,registers,stack,shared,local=entries[0]
     if int(registers)>128 or any(int(x) for x in [stack,shared,local]):raise ValueError('refine register/stack/scratch admission')
-    instructions=collections.Counter()
-    for line in sass.splitlines():
-        match=re.search(r'/\*[0-9a-f]+\*/\s+(?:@!?U?P\d+\s+)?([A-Z][A-Z0-9_.]*)',line)
-        if match:instructions[match.group(1)]+=1
+    instructions=instruction_counts(sass)
     if not any(k.startswith('FMUL') for k in instructions) or not any(k.startswith('FADD') for k in instructions):raise ValueError('refine FP32 multiply/reduction missing')
-    if any('ATOM' in k or 'RED.' in k for k in instructions):raise ValueError('atomic refinement reduction')
     (directory/'refine.resources.txt').write_text(resources);(directory/'refine.sass.txt').write_text(sass)
     result=dict(image_sha256=file_hash(image),kernel='refine_product',registers=int(registers),stack_bytes=int(stack),shared_bytes=int(shared),local_bytes=int(local),instruction_counts=dict(instructions),resources_sha256=file_hash(directory/'refine.resources.txt'),sass_sha256=file_hash(directory/'refine.sass.txt'))
     write_json(directory/'refine.audit.json',result);return result

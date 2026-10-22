@@ -85,6 +85,9 @@ counts attempted proposals including rejected/uncertain work;
 `committed_updates` counts completed inner updates, including those in discarded
 corrections; `corrections` counts attempts, including promotion restarts.
 These are not interchangeable with the legacy control's iteration count.
+`certifications` counts controller assessment calls; witness construction and
+independent verification perform additional original-model checks. Those costs
+remain in complete process latency.
 
 Feature `precision-research` exposes the isolated host/CUDA modules and
 `lp_precision_refine solve|verify|replay` example. Strict `lp-refine-v1` requests
@@ -220,13 +223,14 @@ equal numerical work or progress between methods.
 | Kernels plus synchronization/readback | 3.30 | 12.92 | 13.51 | 13.24 |
 | Vector upload (new method) | — | 5.29 | 5.27 | 5.39 |
 | Host product interval guards | — | 2337.60 | 2387.94 | 2387.46 |
-| Original assessments + final (new method) | — | 13.18 | 13.22 | 13.24 |
+| Controller original assessments + final | — | 13.18 | 13.22 | 13.24 |
 
 New phases are host-observed and inclusive: preparation/context and product
 guards are within refinement, with teardown and serialization in complete cost.
 Do not add overlapping scopes or call them hardware-counter kernel times.
 The remaining time includes host FP64 recurrences, original-unit error mapping,
-correction/reconstruction and merit evaluation. No hardware-counter claim is made.
+correction/reconstruction, merit evaluation and witness verification. No
+hardware-counter claim is made.
 Each new 2048 profile launches 400 products, transfers 14101376 bytes to device
 and 19660800 bytes back, and records 1211 synchronizations. Anchored mode has
 zero refreshes in this particular profile; its refresh path is exercised by
@@ -256,9 +260,54 @@ plus all Rust/native, dependency, historical replay, 130 documentation-page and
 smoke checks. It uses 116.036960146 elapsed / 140.362833 CPU seconds, with
 1644863488 bytes peak sampled process-tree RSS (1663217664 bytes maximum child
 RSS). Native acceptance is enabled, not skipped. Ordinary Cargo builds do not
-invoke nvcc. Only this CPU evidence and the artifact inventory change afterward.
+invoke nvcc. These receipts describe the original completed implementation.
 The retained final log/resource receipt and exact-source marker are under
-`artifacts/gpup-refine-v2`; no numerical files changed after device freezing.
+`artifacts/gpup-refine-v2`; its measured sources and workers remain unchanged.
+Subsequent review changes are separately bound below.
+
+### Review repairs and evidence preservation
+
+Prepublication review reproduces and fixes three host/evidence faults. Checkpoint
+restore previously retained later status/failure/trace metadata after numerical
+rollback; it now restores the logical snapshot and returns discarded progress
+for the caller to retain, while preserving all physical counters, sticky promotion
+and deadline. A candidate-free `certified`/`contracted` trace entry previously
+escaped verification. Successful trace entries now require complete candidates;
+ordering, width/promotion, terminal certification and minimum product/work counts
+are also checked. Finally, a refresh inside a native recovery attempt can offset
+both the global assessment boundary and committed-update count. The final physical
+proposal now triggers the required correction-boundary assessment. The retained
+infeasible-box regression consumes 2009 physical proposals, 1999 committed
+updates, one promotion and nine refreshes, and requires 13 host assessments.
+
+Instruction inspection now parses every addressed SASS line, including PT/UPT
+predicates, and refuses unknown syntax, atomic reductions and unaudited calls.
+The unchanged image still passes with the same 40-register/zero-spill resource
+and instruction inventory. Original failing test logs remain local review
+artifacts; repaired fault tests and six Python corruption/parser tests pass.
+
+The [exact review source bridge](data/refine/review-source.json) binds the original
+implementation commit and each reviewed file's before/after hashes. It is an
+additional chain after the retained compact-reader correction, not a replacement
+for that correction or a relabeling of measured workers. The historical report
+re-verifies byte-for-byte, and the newly built host verifier separately accepts
+all **39 unchanged available refinement endpoints** (21 primary plus nine
+acceptance/replay pairs). Original-model certificates, coverage and all charges
+are unchanged. No kernel, model, seed, setting, primary attempt or GPU execution
+is repeated. Reviewed host fault paths have CPU acceptance; the original GPU
+receipts continue to identify their frozen workers and unchanged image.
+
+The [reviewed native receipt](data/refine/review-native.json) records a full gate
+pass with 310 Python tests, Rust/native/dependency checks, historical replay,
+130 documentation pages and smoke; 126.882339225 elapsed / 178.747286 CPU seconds,
+1631154176 bytes sampled process-tree RSS and 1663311872 bytes maximum child RSS.
+[Reviewed endpoint receipts](data/refine/review-verification.json) bind the rebuilt
+verifier and each unchanged endpoint. Only acceptance documentation is completed
+after this gate; all reviewed implementation/tool hashes remain exact.
+
+Reviewed verification outputs and the full pinned-native acceptance log are in
+`artifacts/gpup-refine-review-20261022`. Reports written with the review bridge
+default to that new directory and refuse to overwrite the historical report.
 
 All seven v2 GPU acceptance gates pass: 66 ordinary tests, three refinement tests
 with 1920 bitwise product comparisons in both orientations/widths and repeated
@@ -297,6 +346,8 @@ CARGO_BUILD_JOBS=4 bash tools/check.sh
 ```
 
 `verify` and report commands check original-model endpoints without CUDA execution.
+On the reviewed source, the report additionally checks the exact source bridge
+and writes to the separate review directory. The historical summary stays exact.
 `replay` executes work and requires a separately authorized, charged shared-lease
 job; it is not part of CPU verification. Never rerun primary study identities.
 Source/image/ELF hashes, frozen requests, ledger charges, raw stdout/stderr and

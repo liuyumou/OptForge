@@ -8,6 +8,7 @@ from benchmark_lp_refine import jobs,effective,check_request,verify_endpoint,ref
 from lp_refine_accept import check_acceptance
 from lp_refine_budget import CONFIG,PREFIX,protocol
 from lp_protocol import ROOT,checked_reference,file_hash,read_json,validate,write_json
+from lp_refine_review import pre_review_sha,changes,RECEIPT
 
 
 def archive(directory,value):
@@ -34,9 +35,10 @@ def archive(directory,value):
         for member in members:
             content=frozen.extractfile(member).read();digest.update(member.name.encode()+b'\0'+content+b'\0')
             if member.name.startswith(('crates/','cuda/','tools/','schemas/','benchmarks/','tests/')) or member.name in ['Cargo.toml','Cargo.lock']:
-                if (ROOT/member.name).read_bytes()!=content:
+                projected=pre_review_sha(member.name)
+                if projected!=hashlib.sha256(content).hexdigest():
                     fix=corrections.get(member.name)
-                    if not fix or fix['measured_sha256']!=hashlib.sha256(content).hexdigest() or fix['reviewed_sha256']!=file_hash(ROOT/member.name):raise ValueError('undeclared measured source change: '+member.name)
+                    if not fix or fix['measured_sha256']!=hashlib.sha256(content).hexdigest() or fix['reviewed_sha256']!=projected:raise ValueError('undeclared measured source change: '+member.name)
                     changed.add(member.name)
         if digest.hexdigest()!=identity['source_tree_sha256']:raise ValueError('refine archived source tree differs')
     if changed!=set(corrections):raise ValueError('report correction file set differs')
@@ -97,9 +99,10 @@ def verify_prior_refusal(value,events,directory):
             if not item.isfile() or Path(item.name).is_absolute() or '..' in Path(item.name).parts:raise ValueError('original refusal source shape')
             content=archive.extractfile(item).read();digest.update(item.name.encode()+b'\0'+content+b'\0')
             if item.name.startswith(('crates/','cuda/','tools/','schemas/','benchmarks/','tests/')) or item.name in ['Cargo.toml','Cargo.lock']:
-                if (ROOT/item.name).read_bytes()!=content:
+                projected=pre_review_sha(item.name)
+                if projected!=hashlib.sha256(content).hexdigest():
                     if item.name not in allowed:raise ValueError('continuation changed undeclared source: '+item.name)
-                    changed.append(dict(path=item.name,original_sha256=hashlib.sha256(content).hexdigest(),continued_sha256=file_hash(ROOT/item.name)))
+                    changed.append(dict(path=item.name,original_sha256=hashlib.sha256(content).hexdigest(),continued_sha256=projected))
     if digest.hexdigest()!=identity['source_tree_sha256']:raise ValueError('original refusal source identity')
     gate=read_json(original/'native-gate.json')
     if not gate['native'] or gate['source_tree_sha256']!=identity['source_tree_sha256']:raise ValueError('original source native gate differs')
@@ -163,5 +166,11 @@ def report():
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,default=ROOT/protocol()['output'].replace('/study','/report.json'));a=p.parse_args();value=report();write_json(a.output,value);print({k:value[k] for k in ['attempts','verified','certified_timings','task_gpu_ns','cumulative_gpu_ns','ledger_events','ledger_sha256']})
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path);a=p.parse_args()
+    historical=ROOT/protocol()['output'].replace('/study','/report.json')
+    output=a.output or (ROOT/'artifacts/gpup-refine-review-20261022/report.json' if changes() else historical)
+    if changes() and output.resolve()==historical.resolve():raise ValueError('review must not overwrite historical report')
+    value=report();write_json(output,value)
+    if changes():write_json(output.with_suffix('.source-review.json'),dict(review_source_sha256=file_hash(RECEIPT),report_sha256=file_hash(output)))
+    print({k:value[k] for k in ['attempts','verified','certified_timings','task_gpu_ns','cumulative_gpu_ns','ledger_events','ledger_sha256']})
 if __name__=='__main__':main()
