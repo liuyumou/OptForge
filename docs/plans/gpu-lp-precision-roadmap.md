@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: GPUP-7 bounded matrix-only evaluation complete; GPUP-8 conditional contract/disposition is next
+Status: GPUP-7 complete; GPUP-7R resident/guard follow-up proposed before GPUP-8
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
@@ -28,7 +28,20 @@ not a required winner. The final recipe follows measurements and ablations; an
 experiment that finds the tuned baseline faster is a useful negative result.
 This track follows C6 but does not complete C7, C9, or the general C10 runner.
 
-## Current handoff: GPUP-7 (2026-10-22)
+## Current handoff: GPUP-7R planning (2026-10-22)
+
+The user requests a bounded follow-up that shares tuned FP64's resident execution
+structure, reduces conservative guard overhead and separates policy/layout costs
+from precision costs. The [GPUP-7R plan](lp-quant-resident-follow-up.md) and
+[proposed ADR-0041](../decisions/ADR-0041-resident-matrix-quantization.md) precede
+GPUP-8. This is planning only: no implementation or GPU execution is authorized.
+The proposed 3600-second allocation fits existing cumulative and phase ceilings,
+with zero increase; it needs a new task-specific resource acceptance. Keep the
+1e-7 local budgets, 1e-9 certification, sticky promotion and charged recovery.
+CPU useful-low admission gates quantized timings. If no nontrivial quantized
+cell qualifies, retain that refusal without replacement or relaxed limits.
+
+## Completed GPUP-7 handoff (2026-10-22)
 
 Accepted [ADR-0040](../decisions/ADR-0040-bounded-matrix-quantization.md) implements
 matrix-only uniform/selective FP16/E4M3/E5M2 with canonical transpose tiles,
@@ -73,6 +86,7 @@ is proposed; it independently admits no trials, seeds, defaults or GPU allowance
 | 4 — GPUP-REFINE (complete) | ADR-0037 native FP64 outer correction LPs, guarded FP32/anchored products, charged recovery/checkpoints and strict replay. | 108 retained attempts, 48 verified endpoints, 30/96 certified timings; full native/device/sanitizer/replay gates. Only initial host-certified small-4 succeeds in refinement; no product benefit/preset. Expansion masters remain gated. |
 | 5 — GPUP-ASSESS (complete) | ADR-0039 fixed_200/bounded_800 on tuned FP64 and existing accumulation FP32, preserving 200-update numerical checks. | 16 CPU trajectories/320 boundary witnesses; all 60 attempts retained, 57 endpoints verified, 24/48 timings certified. Six bitwise profile pairs, full native/device/replay/sanitizer gates; scoped 1.0272x FP64 irregular-32768 gain, unchanged coverage and no preset. |
 | 6 — GPUP-7 (complete bounded subset) | ADR-0040 matrix-only uniform/selective FP16/E4M3/E5M2. | 56 CPU cases, 104 retained attempts/34 verified study endpoints/33 certified timings; host-only new-mode success and censored profiles establish no solve benefit or preset. |
+| Follow-up — GPUP-7R (proposed) | Resident FP64 state/updates, compact sparse execution and two-level conservative device guards. | Accept ADR-0041 first; CPU useful-low admission, policy-bridge/matched FP64 controls, bounded coverage/cost study within existing ceilings; no required quantized speedup. |
 | Conditional — GPUP-8 | Shape-admit sparse/dense Tensor Core or integer execution for actual sm_120 single-RHS work. | Same-operand accuracy, overflow/accumulator analysis, packing/padding costs and scoped device gates. A documented rejection/defer decision is valid; no mandatory Tensor Core implementation. |
 | 7 — GPUP-9 | Small component/interaction blocks, frozen finalists and independent held-out comparison. | Coverage-first certified total latency, repeatability/uncertainty, full failures and budget ledger; final recipe may omit optional components. |
 | 8 — GPUP-10 | Package only supported recipes. | Accepted evidence and admission rules; no preset if gains or coverage are inconclusive. |

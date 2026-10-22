@@ -5,6 +5,19 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
+Current planning handoff (2026-10-22): the user requests the bounded
+[GPUP-7R resident/guard follow-up](docs/plans/lp-quant-resident-follow-up.md)
+before GPUP-8. [ADR-0041](docs/decisions/ADR-0041-resident-matrix-quantization.md)
+is proposed, not accepted. Planning authorizes documentation and CPU checks only;
+do not implement or run GPU work without acceptance of the new contract/resource
+allocation. The proposed 3600 GPU seconds fit existing cumulative/phase ceilings
+with no increase, but unused GPUP-7 allowance does not authorize this task.
+Preserve its exact 17036-event ledger prefix and all historical numerical bodies,
+images, reports and evidence. Keep 1e-7 local budgets, 1e-9 certification, sticky
+promotion and host authority. CPU useful-low admission gates quantized timings;
+the policy bridge and resident matched FP64 controls separate execution costs.
+The completed GPUP-7 handoff below remains historical and exact.
+
 Current handoff (2026-10-22): GPUP-7 implementation and bounded evaluation are
 complete under accepted ADR-0040. Final pinned-native acceptance passes 329
 Python tests plus Rust/native, dependency, historical replay, 134 documentation

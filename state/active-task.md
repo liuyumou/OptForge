@@ -1,5 +1,33 @@
 # Active Task
 
+## GPUP-7R follow-up planning (2026-10-22)
+
+Status: planning complete at the user's request. Specify a bounded resident
+quantized executor, cheaper conservative guards, matched controls and a proposed
+resource allocation before implementation. This task authorizes documentation
+and CPU validation only; no runtime changes or GPU execution.
+Acceptance: reviewed plan and draft superseding ADR; consistent roadmap/backlog;
+checked reservation arithmetic and historical ledger identity; full pinned-native
+bash tools/check.sh with zero GPU work. Likely files: new plan and ADR-0041,
+state/active-task.md, state/backlog.yaml, roadmap and wiki/status.md.
+Planning resources: at most 900 CPU seconds, four build jobs, 8 GiB host RSS,
+256 MiB new planning receipts and zero GPU seconds. Preserve the 17036-event
+ledger SHA-256 861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97,
+all GPUP-7 sources/images/reports and all earlier evidence. Proposed execution
+allocation remains unaccepted until separately authorized by the user.
+
+Acceptance evidence: full pinned-native bash tools/check.sh passes 329 Python
+tests plus Rust/native/dependency, historical replay, 136 documentation pages
+and smoke, with zero project GPU work. Stable gate source SHA-256 is
+6373f11b118a630f2da38f0b30a10a883e8f6cab14f84e44d83680f0be81dcec;
+124.909852223 elapsed / 160.555184 CPU seconds and 1662705664 bytes sampled
+process-tree RSS. Planning arithmetic verifies 3516 seconds of reservations
+inside the proposed 3600-second allocation and all unchanged campaign/phase caps.
+Receipts: artifacts/gpup-quant-resident-plan-20261022/native-acceptance.json and
+planning-arithmetic.json. Subsequent edits only clarify planning/handoff text
+and record this acceptance; recheck their links and the unchanged ledger before
+the local documentation commit. No numerical/runtime/tooling behavior changes.
+
 ## GPUP-7 implementation (2026-10-22)
 
 Status: complete; final pinned-native acceptance passed. Delivery is a local
