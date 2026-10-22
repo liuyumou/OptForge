@@ -1,5 +1,102 @@
 # Active Task
 
+## GPUP-ASSESS review and integration (2026-10-22)
+
+Status: PR 21 review and local acceptance complete; final publication/checks precede
+protected merge. All review counterexamples are repaired.
+Checkpoints reject transfer to a fresh same-engine session; evidence rejects
+inconsistent failure metadata/oversized counters; incomplete profile pairs cannot
+borrow discovery from a longer policy horizon. Targeted CPU regressions pass.
+Full pinned-native tools/check.sh passes 323 Python tests plus Rust/native,
+dependency, historical replay, 132 documentation pages and smoke. Gate resources:
+128.427299756 elapsed / 180.294952 CPU seconds, 1658880000 bytes sampled process-tree
+RSS, zero GPU work. All 1468 frozen artifacts remain byte-identical and the rebuilt
+report preserves every numerical result, outcome and charge. Exact PR source
+receipts and native acceptance are docs/benchmarks/data/assess/pr-*.json. Final
+retained-endpoint verification and reviewed-head CI precede merge.
+
+Final review intercepts and repairs the report default overwriting the earlier
+CPU-review report. Protect both historical reports/aliases and write to a separate
+PR path. The first PR source/gate/report cohort remains exact; final source and
+native receipts use separate filenames. The final full pinned-native gate passes
+324 Python tests plus Rust/native/dependency, historical replay, docs and smoke:
+116.991061611 elapsed / 144.139803 CPU seconds, 1663926272 bytes sampled process-tree
+RSS. The rebuilt verifier accepts all 97 retained endpoints (57 study, 12 device
+acceptance, 12 replays, 16 CPU traces), using 1669.733762 CPU seconds and 512024576
+bytes sampled process-tree RSS. All numerical results and charges remain exact;
+zero GPU work is added. Required CI must pass on the final published head, with
+integration/cleanup receipts in the review artifact directory.
+
+The user authorizes a draft PR, careful review and repairs, merge after required
+checks, and safe cleanup, superseding the local-only scope below. Review the
+scheduler/controller lifecycle, final witness authority, strict evidence and
+experiment accounting; retain counterexamples for any repairs. Run focused CPU
+regressions and full pinned-native tools/check.sh on the reviewed source before
+integration. Do not start GPUP-7.
+
+Resources: at most 7200 CPU seconds, four build jobs, 8 GiB host RSS and 2 GiB new
+review artifacts. No GPU execution or additional allowance. Preserve all of
+artifacts/gpup-assess-v1, frozen source/executable/image identities, original and
+reviewed reports, and the exact 16816-event ledger SHA-256
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c.
+Record review, acceptance, CI, merge ancestry and cleanup receipts under
+artifacts/gpup-assess-pr-review-20261022. Merge through the PR after successful
+checks without bypassing repository rules; remove only the verified merged task
+branch and explicitly disposable scratch files. Retain native dependencies and
+all research evidence.
+
+## GPUP-ASSESS (2026-10-22)
+
+Status: complete; final pinned-native acceptance passed, local commit follows.
+All 60 attempts are retained; 57 endpoints verify and 24/48 timings certify.
+Task charge is 523.674592721 GPU seconds, with 16816 ledger events and SHA-256
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c.
+Review strengthens signed-zero replay comparison and unverified-profile handling.
+All twelve retained replays already match bitwise; preserve measured sources,
+executables, images and report with exact review source bridges. No further GPU
+execution or allowance is admitted.
+The original and reviewed reports have identical numerical results and charges.
+Six GPU profile pairs match bitwise; FP64 irregular-32768 gains 1.0272x in three
+screening repetitions, with unchanged coverage and no supported preset.
+CPU admission used 545.510899 seconds, 493043712 bytes maximum child RSS and
+zero GPU time. All 66 ordinary/three new device tests, six fixed-work pairs,
+twelve actual bitwise replays and four scoped sanitizers passed on the selected
+5090. The reviewed host verifier accepts all 57 available endpoints on CPU.
+Final full pinned-native tools/check.sh passes 322 Python tests, Rust/native and
+dependency checks, committed-record replay, 132 documentation pages and smoke.
+Native coverage was enabled; no GPU work ran. Gate resources are 123.223139896
+elapsed / 163.805355 CPU seconds, 1662132224 bytes sampled process-tree RSS and
+1663143936 bytes maximum child RSS. Only subsequent documentation records these
+results and the retained checksum inventory; measured numerical sources remain
+exact. Reviewed acceptance is docs/benchmarks/data/assess/native-acceptance.json.
+Preserve artifacts/gpup-assess-v1 in full, including original/CPU-review sources,
+executables, images, endpoints, first launch failure, report versions and receipts.
+GPUP-7's numerical/resource contract is the handoff; do not start it here.
+Objective: compare fixed_200 and bounded_800 original-model assessment scheduling
+on tuned FP64 and existing accumulation FP32, preserving every 200-update
+restart/weight decision. CPU common-trajectory admission precedes device work.
+No other task, numerical mode, default, promotion or recovery policy is admitted.
+Acceptance: independent CPU replay over the eight GPUP-EXEC models at up to 4000
+updates, strict requests/evidence and complete scheduler/controller checkpoints;
+full pinned-native tools/check.sh; all 66 ordinary device tests; six fixed-work
+policy pairs and twelve replays; four scoped sanitizers; 48 fresh timings and
+12 separate 2000-update diagnostic profiles with independent host endpoints.
+Likely files: optimizer-lp/optimizer-lp-cuda assessment modules, experiment example
+and strict evidence; CPU oracle/admission, bounded protocol/runner/report/tests;
+ADR-0039, SPEC-0021, reports and handoff documents.
+Resources: 21600 CPU seconds/four build jobs, 8 GiB host RSS, 1 GiB device buffers,
+32 GiB new artifacts; at most 2300 GPU seconds (1300 screening timing, 450 ablation
+profiles, 550 repeatability acceptance). Frozen reservations are 1248/432/516 s.
+Use only GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 under the shared host lease and
+selected-device activity admission. Retain failed/refused attempts without retry
+or substitution. Preserve the 16684-event prefix SHA-256
+e83d07792fb0775fc26d8d2cca8a2411f59fcbc94f742cafd8f6b844ffb60535
+and 19207.265220123 / 21602.574545061 cumulative GPU seconds, all phase ceilings
+and every historical artifact. No added campaign allowance or later reservation.
+Record new evidence under artifacts/gpup-assess-v1. Commit locally after acceptance;
+publication, push and merge are outside this task.
+
+
 ## GPUP-REFINE review and integration (2026-10-22)
 
 The user authorizes opening the PR, careful review and fixes, protected merge and

@@ -48,3 +48,7 @@ pub mod exec;
 /// ADR-0037 isolated sparse correction products.
 #[cfg(feature = "precision-research")]
 pub mod refine;
+
+/// ADR-0039 research assessment scheduling.
+#[cfg(feature = "precision-research")]
+pub mod assess;

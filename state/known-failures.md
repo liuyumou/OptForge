@@ -1,5 +1,49 @@
 # Known Failures and Limitations
 
+## Assessment scheduling saves checks without recovering precision coverage
+
+[GPUP-ASSESS](../docs/benchmarks/lp-assessment-scheduling-gpup-assess.md) completes
+ADR-0039 fixed_200/bounded_800 scheduling on tuned FP64 and existing accumulation
+FP32. All 60 attempts remain; 57 endpoints verify and 24/48 timings certify.
+All six 2000-update profile pairs match bitwise. Fewer assessments yield a scoped
+1.0272x FP64 irregular-32768 paired speedup (three repetitions; 95% interval
+1.0190–1.0342), with unchanged coverage and no supported preset. Small-case
+intervals cross one; diagnostics do not establish general benefit.
+
+FP32 retains its numerical failures after 47000/40464/20400 physical updates on
+irregular-2048/irregular-32768/mixed-65536. Bounded scheduling cuts assessments
+235→62/203→53/102→28 but cannot restore original-model feasibility/certification.
+Three fixed-FP64 mixed timings time out without endpoints; bounded FP64 reaches
+50000 updates with no certificate. A completed diagnostic or work limit is not a
+successful certified timing. No delayed/missed success occurs in retained traces;
+synthetic cases still demonstrate transient success loss and a 600-update delay.
+
+CPU-only final review repairs float-value replay equality, which can miss opposite
+signed-zero bits, and excludes unverified/partial profile files from comparisons.
+All twelve retained replays already agree bitwise; the rebuilt host verifier
+accepts all 57 available endpoints. Exact source bridges and the unchanged
+original report/worker/image/ledger identities remain; no GPU job is repeated.
+Full pinned-native, 66 ordinary/three new device tests, six fixed-work policy
+pairs/twelve replays and all four scoped sanitizers pass.
+
+PR review reproduces and repairs checkpoint transfer into a fresh same-engine
+session with replenished resources, inconsistent failure metadata, oversized
+controller counters and partial profiles borrowing a longer policy horizon.
+CPU regressions and exact source receipts retain each repair; all retained
+profiles are complete and the study's numerical results/charges are unchanged.
+The revised executable has no new GPU acceptance or measured timing claim.
+Final reader review also intercepts and repairs a default output collision with
+the earlier CPU-review report; both historical report paths and aliases are now
+protected. A separate final source bridge preserves both PR review cohorts.
+
+Task charge is 523.674592721 GPU seconds (413.636131592 timing, 32.633232920
+profiles, 77.405228209 acceptance), within 2300 and every phase cap. Cumulative
+consumption is 19730.939812844 / 21602.574545061 seconds. The 16816-event ledger
+SHA-256 dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c preserves
+the exact 16684-event prefix and all earlier history. GPUP-7 needs its own accepted
+quantization/error-budget and resource contract. No new allowance or reservation;
+full expansion state, selective precision, sessions and presets remain gated.
+
 ## Bounded refinement loses coverage and guards dominate costs
 
 Prepublication review repairs stale logical checkpoint metadata, missing-candidate

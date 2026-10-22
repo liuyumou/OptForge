@@ -61,3 +61,7 @@ pub mod exec;
 /// ADR-0037 original-residual correction admission.
 #[cfg(feature = "precision-research")]
 pub mod refine;
+
+/// ADR-0039 bounded assessment scheduling.
+#[cfg(feature = "precision-research")]
+pub mod assess;

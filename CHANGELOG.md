@@ -1,5 +1,33 @@
 # Changelog
 
+## Unreleased — GPUP-ASSESS bounded assessment scheduling (2026-10-22)
+
+- Accept ADR-0039's assessment subset after 16 CPU common trajectories and
+  independent scheduling replay. Add research-only fixed_200/bounded_800 on
+  tuned FP64 and existing accumulation FP32 while retaining numerical checks.
+- Add complete scheduler/controller snapshots, fresh final host certification,
+  strict lp-assess-v1 evidence with bounded witness attachments, CPU trace/replay,
+  selected-device execution and inherited-ledger supervision. Preserve existing
+  images, numerical settings, records, defaults and mathematical authority.
+- PR review binds checkpoints to their originating session, rejects inconsistent
+  failure metadata and oversized counters, and prevents interrupted profiles
+  from borrowing discovery results from a longer trajectory. Preserve exact
+  before/after source receipts and all measured evidence; no GPU work is repeated.
+- Keep PR report output separate and reject both historical report paths and
+  aliases, preserving the original report and its earlier CPU-review version.
+- Retain all 60 frozen attempts, independently verify 57 endpoints and certify
+  24/48 timings. Six common-trajectory profile pairs match bitwise; full native,
+  66 ordinary/three new device tests, six fixed-work pairs/twelve replays and
+  four scoped sanitizers pass. A scoped 1.0272x FP64 irregular-32768 benefit
+  leaves coverage unchanged; no supported preset is selected.
+- CPU-only review preserves signed-zero replay bits and excludes unverified
+  profile comparisons. Preserve all twelve already-bitwise replays, the original
+  report/workers and exact source bridges; the rebuilt host verifier accepts all
+  57 endpoints with no new GPU execution.
+- Charge 523.674592721 GPU seconds within 2300; cumulative
+  19730.939812844 / 21602.574545061 seconds, 16816 ledger events and every earlier
+  prefix/phase cap preserved. Hand off GPUP-7's contract without reserving work.
+
 ## Unreleased — GPUP-REFINE bounded correction LP evaluation (2026-10-22)
 
 - Accept ADR-0037's native-FP64-outer SPEC-0021 subset: equality-plus-box correction

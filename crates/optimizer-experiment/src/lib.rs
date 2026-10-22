@@ -60,3 +60,7 @@ pub mod lp_exec;
 /// ADR-0037 original-residual refinement study.
 #[cfg(feature = "precision-research")]
 pub mod lp_refine;
+
+/// ADR-0039 assessment scheduling study.
+#[cfg(feature = "precision-research")]
+pub mod lp_assess;
