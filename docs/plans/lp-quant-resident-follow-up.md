@@ -1,11 +1,11 @@
 # GPUP-7R: Resident quantized execution and matched comparison
 
-Status: proposed, 2026-10-22; planning only, no implementation or GPU authorization
+Status: complete, 2026-10-23; ADR-0041/allocation explicitly accepted before implementation
 Owner: numerical backend and experiment tooling
 Introduced: GPUP-7 follow-up
 Last reviewed commit: bootstrap
-Implementation: none; acceptance requires the proposed [ADR-0041](../decisions/ADR-0041-resident-matrix-quantization.md)
-Acceptance: the staged gates and frozen comparison below
+Implementation: isolated lp-quant-resident-v1; accepted [ADR-0041](../decisions/ADR-0041-resident-matrix-quantization.md)
+Acceptance: the staged gates below pass; see [GPUP-7R report](../benchmarks/lp-quant-resident-gpup7r.md)
 
 ## Problem and bounded objective
 
@@ -40,9 +40,9 @@ scheduling experiment, session, persistent checkpoint or supported preset.
 
 ## Proposed numerical and execution contract
 
-These are proposed requirements for a separate lp-quant-resident-v1 interface;
-they do not amend the behavior of lp-quant-v1. ADR-0041 must be accepted before
-implementation. The implemented subset of SPEC-0012/0021 must then identify the
+These are the accepted requirements for a separate lp-quant-resident-v1 interface;
+they do not amend the behavior of lp-quant-v1. ADR-0041 was accepted before
+implementation. The implemented subset of SPEC-0012/0021 identifies the
 new executor, guard arithmetic, reduction trees and evidence acceptance map.
 
 1. Preserve direct binary64 nearest-even binary16/E4M3/E5M2 conversion,

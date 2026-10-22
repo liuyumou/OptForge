@@ -1,17 +1,22 @@
 # Project Status
 
-GPUP-7's [bounded matrix quantization evaluation](../docs/benchmarks/lp-quantization-gpup7.md)
-is complete under ADR-0040: 104 attempts, 34 verified study endpoints and 33/96
-certified timings. New paths only certify initial host-only small-4; all profile
-horizons are censored and no supported preset follows. CPU/device/replay and
-sanitizer acceptance pass; all 182 retained endpoints reverify on CPU. Task charge
-is 1382.959456122 GPU seconds, cumulative 21113.899268966/25202.574545061.
-The user next requests [GPUP-7R planning](../docs/plans/lp-quant-resident-follow-up.md)
-for resident execution, conservative device guards and matched FP64 controls,
-before GPUP-8's conditional disposition. ADR-0041 is proposed, not accepted;
-planning grants no implementation or GPU allowance. The proposed 3600-second
-allocation fits existing ceilings without raising them. Final native gate and
-local delivery are recorded in active-task.
+[GPUP-7R resident execution](../docs/benchmarks/lp-quant-resident-gpup7r.md) is
+complete under accepted ADR-0041, preserving the
+[original GPUP-7 evaluation](../docs/benchmarks/lp-quantization-gpup7.md).
+All 36 admitted fresh timings certify (36/108 planned coverage), all three FP64
+profiles reach 2000 logical updates and 21 operator endpoints verify. The six
+quantized candidates have no useful-low CPU admission on eight models; 78
+dependent timing/profile cells remain refused without replacement. Resident
+matched FP64 recovers coverage but tuned FP64 stays faster on nontrivial models.
+No quantized solve benefit or supported preset follows.
+
+Full native, ordinary/new device, 29 fixed-work/replay pairs and four scoped
+sanitizers pass. Fresh CPU verification accepts all 313 LP and 21 operator
+endpoints. Task charge is 245.686586823 GPU seconds, cumulative
+21359.585855789 / 25202.574545061, with every ceiling unchanged and the exact
+historical ledger prefix retained. GPUP-8 needs its own conditional disposition
+and contract; unused allowance reserves nothing. Local delivery is recorded in
+[active task](../state/active-task.md).
 
 The repository implements the C8 local extension registry on top of the C5
 flow-shop scheduling slice, the C4

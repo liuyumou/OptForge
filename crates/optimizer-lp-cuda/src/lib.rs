@@ -56,3 +56,7 @@ pub mod assess;
 /// ADR-0040 isolated quantized sparse executor.
 #[cfg(feature = "precision-research")]
 pub mod quant;
+
+/// ADR-0041 bounded resident quantized windows.
+#[cfg(feature = "precision-research")]
+pub mod quant_resident;

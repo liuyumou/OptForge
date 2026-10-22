@@ -1,5 +1,58 @@
 # Active Task
 
+## GPUP-7R implementation (2026-10-22)
+
+Status: complete (2026-10-23), under the user's explicit ADR-0041/allocation approval.
+Acceptance evidence: full pinned-native gates pass 338 Python tests, Rust/native,
+dependencies, historical replay, 137 documentation pages and smoke. All 66 ordinary
+GPU tests, inherited/new quantization suites, 628 product/bound differentials,
+six CPU/device controller comparisons, 29 fixed-work endpoint/replay pairs and
+all four scoped sanitizers pass. A pre-sanitizer source bridge broadens the filter
+to include resident updates/windows; completed jobs are preserved without retry.
+The invalid project interpreter preflight reserved no GPU identity and remains.
+Independent final verification accepts 313 LP endpoints (39 study, 58 acceptance/
+replay, 216 CPU cohorts) plus 21 operator endpoints. Three CPU cohorts remain exact.
+The separate report is docs/benchmarks/lp-quant-resident-gpup7r.md, with acceptance
+and machine results under docs/benchmarks/data/quant-resident. All 36 admitted
+fresh timings certify (36/108 planned); 78 quantized timing/profile cells retain
+CPU useful-low refusals. Three FP64 profiles finish 2000 logical updates. Resident
+matched FP64 irregular-32768 median is 4.799867 s versus tuned FP64 2.564014 s;
+quantization remains inadmissible on actual trajectories. No preset follows.
+Task GPU charge is 245.686586823 / 3600 s: timing 69.376705845 / 2300,
+profiles 69.783306098 / 450 and acceptance 106.526574880 / 850. Cumulative
+21359.585855789 / 25202.574545061 s, with unchanged phase/campaign ceilings.
+The 17132-event ledger SHA-256 is
+930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035,
+preserving the exact 17036-event prefix and all historical evidence. CPU upper
+accounting (major measured jobs plus preparation/final-gate allowances) is below
+21600 s; RSS 3234975744 B and new artifacts approximately 2.12 GB stay within caps.
+Final CPU-only gate/log: artifacts/gpup-quant-resident-v1/delivery-native-resources.log.
+Local commit follows acceptance; no push, publication or merge. GPUP-8 is next
+for a conditional disposition/contract, with no allowance reserved.
+Objective: lp-quant-resident-v1 GPU-resident FP64 updates, compact sparse layout,
+two-level conservative device guards and the frozen bridge/matched comparison.
+Retain the existing numerical budgets, norm/step, promotion/recovery rules and
+original-model host authority. CPU admission precedes all device execution.
+Acceptance: exact guard/format oracles and eight-model CPU admission; full pinned
+native bash tools/check.sh; ordinary/new device differentials, fixed-work replay,
+four scoped sanitizers; independently verified bounded study and separate report.
+Likely files: new resident host/CUDA/experiment modules and image, strict schemas,
+tools and tests; accepted ADR-0041/spec mappings and state/evidence documents.
+Resources: 21600 CPU seconds/four build jobs, 8 GiB RSS, 1 GiB device buffers,
+2 GiB preparation, 32 GiB artifacts. Allocate 3600 GPU seconds from existing
+authority: timing 2300 screening, profiles 450 ablations, acceptance 850
+repeatability; planned reservations 2268/432/816 seconds. Additional GPU allowance
+is zero; cumulative ceiling remains 25202.574545061 and campaign cap 28800 s.
+Phase ceilings remain 1800/11800/8100/5300/9000 seconds. Prior consumption is
+21113.899268966 s. Preserve the exact 17036-event ledger prefix SHA-256
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97 and all prior
+artifacts/identities. Execute only on GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48
+under shared host lease/activity admission, without retry/substitution. Retain
+CPU-refused dependent cells without replacement. Store new evidence separately
+under artifacts/gpup-quant-resident-v1. Commit locally after acceptance; no push,
+publication or merge. This approval supersedes the historical planning-only
+handoff below.
+
 ## GPUP-7R follow-up planning (2026-10-22)
 
 Status: planning complete at the user's request. Specify a bounded resident

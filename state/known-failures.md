@@ -1,5 +1,34 @@
 # Known Failures and Limitations
 
+## Resident execution recovers FP64 coverage, not useful matrix quantization
+
+[GPUP-7R](../docs/benchmarks/lp-quant-resident-gpup7r.md) completes accepted
+ADR-0041 inside existing ceilings. All 36 admitted fresh timings certify, retaining
+36/108 planned coverage and 78 CPU-refused quantized timing/profile cells. All
+three native profiles finish 2000 logical updates; 21 operator endpoints verify.
+The 72-cell CPU cohort admits no useful low-precision audit window for any of
+the six candidates on eight models. Scaling-256 retains a bridge numerical
+refusal; every historical GPUP-7 refusal/outcome remains separate.
+
+Resident FP64 updates, compact segments and two-level device guards eliminate
+the old matched path's timeout behavior on this cohort, but unchanged tuned FP64
+remains faster on all nontrivial models. Irregular-32768 medians are 4.799867 s
+resident matched versus 2.564014 s tuned. Conservative steps, audits/assessment
+and preparation remain material. Quantized synthetic products pass but recorded
+trajectory products mostly fail 1e-7 bounds; even unguarded quantized products
+are slower in these single diagnostics. No LP FP16/FP8 benefit or preset follows.
+
+Full native/device/replay/four sanitizer gates pass. Preserve the invalid command
+preflight (no GPU reservation), source bridge broadening sanitizer scope before
+execution, all CPU cohorts, both frozen source cohorts, workers/images/requests
+and every historical artifact. Final CPU verification accepts 313 LP endpoints
+plus 21 operator endpoints. Task charge is 245.686586823 GPU seconds; cumulative
+21359.585855789 / 25202.574545061. The 17132-event ledger SHA-256 is
+930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035, preserving
+the exact 17036-event prefix below. GPUP-8 needs its own conditional contract;
+unused allowance reserves nothing. Tensor Cores, vector quantization, combined
+methods, sessions and supported presets remain gated.
+
 ## Bounded matrix quantization promotes before useful low-precision work
 
 [GPUP-7](../docs/benchmarks/lp-quantization-gpup7.md) completes the accepted

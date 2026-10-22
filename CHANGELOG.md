@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased — GPUP-7R resident quantization (2026-10-22)
+
+- Accept ADR-0041 and allocate 3600 GPU seconds within unchanged ceilings. Add
+  the separate lp-quant-resident-v1 research executor, strict evidence and CLI.
+- Keep FP64 state/updates resident, compact canonical sparse segments, two-level
+  outward guards, complete restoration/charged replay and original-model authority.
+- Add independent integer/Fraction program proofs, CPU admission, GPU differential
+  and replay gates, fixed logical-horizon diagnostics and matched FP64 controls.
+  Preserve historical numerical bodies, interfaces, evidence and resource ledger.
+- Certify all 36 admitted fresh timings (36/108 planned coverage), finish three
+  FP64 logical-2000 profiles and verify 21 operator endpoints. Retain 78 quantized
+  timing/profile CPU refusals; no useful quantized trajectory or preset follows.
+- Pass full native/device/replay/four sanitizer gates and freshly verify all 313
+  LP plus 21 operator endpoints. Preserve both execution/source cohorts and the
+  exact historical prefix. Charge 245.686586823 GPU seconds inside existing caps.
+
 ## Unreleased — GPUP-7 bounded matrix quantization (2026-10-22)
 
 - Add research-only lp-quant-v1 uniform/selective FP16/E4M3/E5M2 matrices, canonical

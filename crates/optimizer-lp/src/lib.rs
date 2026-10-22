@@ -69,3 +69,7 @@ pub mod assess;
 /// ADR-0040 isolated error-budgeted matrix quantization.
 #[cfg(feature = "precision-research")]
 pub mod quant;
+
+/// ADR-0041 isolated resident quantized execution contract.
+#[cfg(feature = "precision-research")]
+pub mod quant_resident;

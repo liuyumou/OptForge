@@ -5,7 +5,40 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-Current planning handoff (2026-10-22): the user requests the bounded
+Current handoff (2026-10-23): GPUP-7R is complete under accepted ADR-0041 and
+the bounded resident subset of SPEC-0012/0021. Its
+[report](docs/benchmarks/lp-quant-resident-gpup7r.md) retains all 120 planned
+study cells/jobs: 42 execute and 78 quantized timing/profile cells are CPU-refused.
+All 36 admitted timings certify (36/108 planned coverage), three FP64 profiles
+finish 2000 logical updates, and 21 product endpoints verify. None of six
+quantized candidates admits a useful low window on eight models. Residency
+recovers matched FP64 coverage, but tuned FP64 remains faster on nontrivial
+models; no quantized solve benefit or supported preset follows.
+Full native acceptance passes 338 Python tests plus Rust/native/dependencies,
+historical replay, 137 documentation pages and smoke. All 66 ordinary GPU tests,
+628 product/bound vectors, six CPU/device controller comparisons, 29 fixed-work
+endpoint/replay pairs and all four scoped sanitizers pass. Final CPU verification
+accepts 313 LP endpoints and 21 operator endpoints. Preserve the preflight with
+no GPU reservation, sanitizer-scope source bridge, all three CPU cohorts and
+both frozen execution cohorts. No completed GPU identity was retried.
+Task GPU charge is 245.686586823 s (timing 69.376705845, profiles 69.783306098,
+acceptance 106.526574880), within 3600 and every phase cap. Cumulative is
+21359.585855789 / 25202.574545061 s. The 17132-event ledger SHA-256 is
+930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035, preserving
+the exact 17036-event prefix and all earlier artifacts/authority. GPUP-8 is next
+for a conditional numerical/hardware/resource disposition, with no allowance
+reserved. Local commit is authorized after acceptance; publication/merge are
+outside this request. Historical handoffs below remain exact in their context.
+
+Prior implementation authorization (2026-10-22): the user explicitly accepts
+ADR-0041 and allocates 3600 GPU seconds within existing ceilings for GPUP-7R.
+Implement the approved resident/guard plan and bounded comparison, preserve all
+historical evidence and commit locally after acceptance. The exact resource,
+device, admission and validation limits are in state/active-task.md. This
+authorization supersedes the historical planning-only handoff below. No push,
+publication or merge is authorized.
+
+Prior planning handoff (2026-10-22): the user requests the bounded
 [GPUP-7R resident/guard follow-up](docs/plans/lp-quant-resident-follow-up.md)
 before GPUP-8. [ADR-0041](docs/decisions/ADR-0041-resident-matrix-quantization.md)
 is proposed, not accepted. Planning authorizes documentation and CPU checks only;

@@ -1,6 +1,6 @@
 # ADR-0041: Resident matrix quantization and matched execution
 
-Status: proposed, 2026-10-22; not accepted and grants no implementation/GPU authority
+Status: accepted, 2026-10-22, by the user's explicit contract/allocation approval
 Owner: numerical backend and experiment tooling
 Introduced: GPUP-7R planning
 Last reviewed commit: bootstrap

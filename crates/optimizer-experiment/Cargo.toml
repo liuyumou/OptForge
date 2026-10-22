@@ -45,3 +45,7 @@ required-features = ["precision-research"]
 [[example]]
 name = "lp_precision_quant"
 required-features = ["precision-research"]
+
+[[example]]
+name = "lp_precision_quant_resident"
+required-features = ["precision-research"]
