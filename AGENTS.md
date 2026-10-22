@@ -13,7 +13,7 @@ Research-only fixed_200/bounded_800 scheduling on tuned FP64 and existing
 accumulation FP32 preserves every 200-update restart/weight check. Cheap movement
 only schedules original-model host assessment; final certification remains fresh
 and cancellation/deadline/failure status cannot become a successful timing.
-Final full pinned-native acceptance passes 322 Python tests, Rust/native and
+Frozen-cohort pinned-native acceptance passes 322 Python tests, Rust/native and
 dependency checks, historical replay, 132 documentation pages and smoke; no GPU
 work runs in that gate. CPU admission checks 16 trajectories/320 boundary witnesses. Six 2000-update
 profile pairs match bitwise; no observed delayed success, while synthetic cases
@@ -26,12 +26,18 @@ CPU-only review strengthens signed-zero replay and unverified-profile eligibilit
 all twelve actual replays already match bitwise and the rebuilt host verifier
 accepts all 57 endpoints. Preserve the exact measured workers/images/source,
 original report, five-file review source bridge and all historical evidence.
-PR pinned-native acceptance passes 323 Python tests plus Rust/native, dependency,
+Final PR pinned-native acceptance passes 324 Python tests plus Rust/native, dependency,
 historical replay, documentation and smoke with no GPU work. PR review binds
 checkpoints to the originating session, rejects inconsistent
 failure metadata/oversized counters and excludes interrupted profile horizons
 from pair discovery. Preserve the additional PR source bridge and counterexamples;
 the measured execution loop and original-model authority bodies remain exact.
+The final PR reader protects both historical report paths/aliases and writes to
+a separate PR report; preserve both PR source bridges and their exact cohorts.
+The rebuilt host verifier accepts all 97 retained study/acceptance/replay/CPU-trace
+endpoints, including all 57 study endpoints. Final PR acceptance and source
+receipts are docs/benchmarks/data/assess/pr-final-native-acceptance.json and
+pr-review-final-source.json; prior gates/receipts remain exact and separate.
 Review adds no GPU work or allowance. Task charge is 523.674592721 GPU seconds
 (413.636131592 timing, 32.633232920 profiles, 77.405228209 acceptance), within 2300
 and every phase cap. Cumulative consumption is 19730.939812844 / 21602.574545061 s.

@@ -13,6 +13,8 @@
   failure metadata and oversized counters, and prevents interrupted profiles
   from borrowing discovery results from a longer trajectory. Preserve exact
   before/after source receipts and all measured evidence; no GPU work is repeated.
+- Keep PR report output separate and reject both historical report paths and
+  aliases, preserving the original report and its earlier CPU-review version.
 - Retain all 60 frozen attempts, independently verify 57 endpoints and certify
   24/48 timings. Six common-trajectory profile pairs match bitwise; full native,
   66 ordinary/three new device tests, six fixed-work pairs/twelve replays and

@@ -137,10 +137,14 @@ def report():
             comparisons.append(dict(instance=instance,arithmetic=arithmetic,pairs=len(pairs),paired_uncertainty=None if not pairs else paired_ratios(pairs,seed=value['analysis']['seed'],resamples=value['analysis']['resamples'])))
     return dict(source_review=None if review() is None else dict(path=str(RECEIPT.relative_to(ROOT)),sha256=file_hash(RECEIPT)),identity='gpup-assess-report-v1',source_tree_sha256=identity['source_tree_sha256'],cpu_admission=value['cpu_admission'],acceptance=acceptance,planned_attempts=60,attempts=sum(r['status']!='unexecuted' for r in rows),verified=sum(r['verified'] for r in rows),certified_timings=sum(r['kind']=='timing' and r['certified'] for r in rows),coverage=coverage,comparisons=comparisons,profiles=profile_comparisons(value,directory,{r['id'] for r in rows if r['verified']}),rows=rows,categories_ns=charges,task_gpu_ns=sum(charges.values()),cumulative_gpu_ns=cumulative,ledger_events=len(events),ledger_sha256=file_hash(directory/'ledger.jsonl'))
 
+def report_output(output=None):
+    historical=ROOT/'artifacts/gpup-assess-v1/report.json'
+    output=output or ROOT/'artifacts/gpup-assess-pr-review-20261022/report-final.json'
+    if output.resolve() in {historical.resolve(),historical.with_name('report-reviewed.json').resolve()}:raise ValueError('PR review cannot overwrite either historical report')
+    return output
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--output',type=Path);a=p.parse_args()
-    historical=ROOT/'artifacts/gpup-assess-v1/report.json'
-    output=a.output or (historical.with_name('report-reviewed.json') if review() else historical)
-    if review() and output.resolve()==historical.resolve():raise ValueError('CPU review cannot overwrite the measured report')
+    output=report_output(a.output)
     r=report();write_json(output,r);print({k:r[k] for k in ['attempts','verified','certified_timings','task_gpu_ns','cumulative_gpu_ns','ledger_events','ledger_sha256']})
 if __name__=='__main__':main()

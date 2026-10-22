@@ -96,6 +96,14 @@ class AssessmentContracts(unittest.TestCase):
     def test_acceptance_labels_cannot_launch_unrelated_commands(self):
         for gate in ['regular','project','memcheck','racecheck','initcheck','synccheck']:
             with self.assertRaises(ValueError):budget.validate_command(gate,['true'])
+    def test_pr_report_cannot_replace_either_historical_cohort(self):
+        from report_lp_assess import report_output
+        self.assertEqual(report_output(),ROOT/'artifacts/gpup-assess-pr-review-20261022/report-final.json')
+        for name in ['report.json','report-reviewed.json']:
+            with self.assertRaises(ValueError):report_output(ROOT/'artifacts/gpup-assess-v1'/name)
+        with tempfile.TemporaryDirectory() as d:
+            alias=Path(d)/'alias.json';alias.symlink_to(ROOT/'artifacts/gpup-assess-v1/report-reviewed.json')
+            with self.assertRaises(ValueError):report_output(alias)
     def test_interrupted_profiles_cannot_borrow_a_completed_policy_horizon(self):
         import json
         import subprocess

@@ -168,6 +168,22 @@ pages and smoke. It uses 128.427299756 elapsed / 180.294952 CPU seconds and
 1658880000 bytes sampled process-tree RSS. Native coverage is enabled and GPU
 work is zero. Every one of the 1468 frozen artifact files remains byte-identical.
 
+A final reader regression intercepts the previous default, which would replace
+the earlier CPU-review report. The PR reader now defaults to its separate
+`artifacts/gpup-assess-pr-review-20261022/report-final.json` and rejects either
+historical report path, including aliases. A separate
+[final source bridge](data/assess/pr-review-final-source.json) retains both PR
+source cohorts, tools and diffs. Both historical reports remain immutable.
+
+The [final PR pinned-native gate](data/assess/pr-final-native-acceptance.json)
+passes all 324 Python tests plus Rust/native, dependency, historical replay,
+documentation and smoke checks in 116.991061611 elapsed / 144.139803 CPU seconds,
+with 1663926272 bytes sampled process-tree RSS. The rebuilt host verifier accepts
+all 97 retained study/acceptance/replay/CPU-trace endpoints, including the 57 study
+endpoints, in 1669.733762 CPU seconds and 512024576 bytes sampled process-tree RSS.
+No GPU execution is added; both earlier review gates and their exact sources
+remain separate evidence.
+
 | Charge | Used GPU seconds | Task cap |
 | --- | ---: | ---: |
 | Timing / screening | 413.636131592 | 1300 |
@@ -203,7 +219,7 @@ Ordinary selectors, defaults, historical evidence and required adaptive audits
 retain their meaning. Sessions, refinement combinations, promotion/recovery and
 supported presets are outside this slice.
 
-Final [reviewed-source pinned-native acceptance](data/assess/native-acceptance.json)
+The earlier [reviewed-source pinned-native acceptance](data/assess/native-acceptance.json)
 passes 322 Python tests, Rust/native/dependency checks, historical replay,
 132 documentation pages and smoke. It uses 123.223139896 elapsed / 163.805355 CPU
 seconds, 1662132224 bytes sampled process-tree RSS and 1663143936 bytes maximum

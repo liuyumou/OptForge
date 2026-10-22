@@ -2,7 +2,8 @@
 
 ## GPUP-ASSESS review and integration (2026-10-22)
 
-Status: draft PR 21 opened; three reproduced review counterexamples are repaired.
+Status: PR 21 review and local acceptance complete; final publication/checks precede
+protected merge. All review counterexamples are repaired.
 Checkpoints reject transfer to a fresh same-engine session; evidence rejects
 inconsistent failure metadata/oversized counters; incomplete profile pairs cannot
 borrow discovery from a longer policy horizon. Targeted CPU regressions pass.
@@ -13,6 +14,18 @@ RSS, zero GPU work. All 1468 frozen artifacts remain byte-identical and the rebu
 report preserves every numerical result, outcome and charge. Exact PR source
 receipts and native acceptance are docs/benchmarks/data/assess/pr-*.json. Final
 retained-endpoint verification and reviewed-head CI precede merge.
+
+Final review intercepts and repairs the report default overwriting the earlier
+CPU-review report. Protect both historical reports/aliases and write to a separate
+PR path. The first PR source/gate/report cohort remains exact; final source and
+native receipts use separate filenames. The final full pinned-native gate passes
+324 Python tests plus Rust/native/dependency, historical replay, docs and smoke:
+116.991061611 elapsed / 144.139803 CPU seconds, 1663926272 bytes sampled process-tree
+RSS. The rebuilt verifier accepts all 97 retained endpoints (57 study, 12 device
+acceptance, 12 replays, 16 CPU traces), using 1669.733762 CPU seconds and 512024576
+bytes sampled process-tree RSS. All numerical results and charges remain exact;
+zero GPU work is added. Required CI must pass on the final published head, with
+integration/cleanup receipts in the review artifact directory.
 
 The user authorizes a draft PR, careful review and repairs, merge after required
 checks, and safe cleanup, superseding the local-only scope below. Review the

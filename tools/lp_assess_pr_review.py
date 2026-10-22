@@ -4,7 +4,7 @@ import hashlib
 import lp_assess_review as prior
 from lp_protocol import ROOT, checked_reference, file_hash, read_json
 
-RECEIPT = ROOT / 'docs/benchmarks/data/assess/pr-review-source.json'
+RECEIPT = ROOT / 'docs/benchmarks/data/assess/pr-review-final-source.json'
 ALLOWED = {
     'crates/optimizer-lp/src/assess.rs',
     'crates/optimizer-experiment/src/lp_assess.rs',
@@ -29,6 +29,24 @@ def review():
     parent = read_json(prior.RECEIPT)
     if parent['review_tool_sha256'] != file_hash(ROOT / 'tools/lp_assess_review.py'):
         raise ValueError('assessment prior review tool changed')
+    previous_path = checked_reference(ROOT, r['previous_pr_review'])
+    if previous_path != ROOT / 'docs/benchmarks/data/assess/pr-review-source.json':
+        raise ValueError('assessment previous PR review parent differs')
+    previous = read_json(previous_path)
+    if (previous['identity'] != 'gpup-assess-pr-review-v1'
+            or len(previous['files']) != len(ALLOWED)
+            or {f['path'] for f in previous['files']} != ALLOWED):
+        raise ValueError('assessment previous PR review differs')
+    previous_sources = {f['path']: f for f in r['previous_sources']}
+    if set(previous_sources) != ALLOWED or len(previous_sources) != len(r['previous_sources']):
+        raise ValueError('assessment previous PR source scope differs')
+    if file_hash(checked_reference(ROOT, r['previous_tool'])) != previous['review_tool_sha256']:
+        raise ValueError('assessment previous PR review tool differs')
+    for f in previous['files']:
+        if file_hash(checked_reference(ROOT, previous_sources[f['path']]['source'])) != f['reviewed_sha256']:
+            raise ValueError('assessment previous PR reviewed source differs')
+        checked_reference(ROOT, f['before'])
+        checked_reference(ROOT, f['diff'])
     files = {f['path']: f for f in r['files']}
     old_files = {f['path']: f for f in parent['files']}
     if (len(files) != len(r['files']) or set(files) != ALLOWED
