@@ -1,0 +1,76 @@
+{
+  "$id": "https://ai-optimizer.local/schemas/lp-assess-request-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "arithmetic": {
+      "enum": [
+        "tuned_fp64",
+        "accumulation_fp32"
+      ]
+    },
+    "code_object_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "device": {
+      "pattern": "^GPU-",
+      "type": "string"
+    },
+    "device_buffer_bytes": {
+      "maximum": 1073741824,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "diagnostic": {
+      "type": "boolean"
+    },
+    "executable_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "identity": {
+      "const": "lp-assess-v1"
+    },
+    "method": {
+      "$ref": "https://github.com/liuyumou/OptForge/schemas/lp-settings-v1.schema.json"
+    },
+    "model_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "options": {
+      "$ref": "https://github.com/liuyumou/OptForge/schemas/solve-config-v1.schema.json"
+    },
+    "policy": {
+      "enum": [
+        "fixed_200",
+        "bounded_800"
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "source_tree_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "identity",
+    "arithmetic",
+    "policy",
+    "model_sha256",
+    "source_tree_sha256",
+    "executable_sha256",
+    "code_object_sha256",
+    "device",
+    "options",
+    "method",
+    "diagnostic",
+    "device_buffer_bytes"
+  ],
+  "title": "Study-only bounded assessment request",
+  "type": "object"
+}

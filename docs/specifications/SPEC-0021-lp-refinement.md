@@ -1,12 +1,12 @@
 # SPEC-0021: Residual-driven LP refinement and controlled inexact products
 
-Status: accepted and implemented ADR-0037 native-FP64-outer subset; extensions remain draft
+Status: accepted ADR-0037 refinement and ADR-0039 bounded assessment subsets; other extensions remain draft
 Scope: research LP correction, anchored products, selective precision and assessment
 Owner: numerical backend
 Introduced: GPUP-DESIGN, 2026-10-12
 Last reviewed commit: bootstrap
 Supersedes: none; legacy SPEC-0012 audits/recovery and ADR-0010 authority remain
-Implementation: optimizer-lp::refine, optimizer-lp-cuda::refine, optimizer-experiment::lp_refine
+Implementation: refinement modules plus optimizer-lp::assess, optimizer-lp-cuda::assess and optimizer-experiment::lp_assess
 Tests: independent GPUP-REFINE rational/endpoint oracles, host/device fault and replay tests; acceptance map below
 
 ## Accepted subset (2026-10-22)
@@ -15,7 +15,8 @@ Tests: independent GPUP-REFINE rational/endpoint oracles, host/device fault and 
 FP64-outer, FP32-products-only subset, merit/error/progress parameters, recovery
 and resource allocation. CPU proof/oracle admission precedes dependent runtime
 work. A reproduced numerical admission refusal is a valid bounded outcome;
-full expansion masters, selective precision and assessment scheduling remain draft.
+full expansion masters and selective precision remain draft. Assessment scheduling
+is separately accepted under ADR-0039 below.
 
 The [implemented evaluation](../benchmarks/lp-refinement-gpup-refine.md) retains
 108 attempts, 48 independently verified endpoints and 30/96 certified timings,
@@ -25,7 +26,8 @@ describes as proposed/unset. That proposed wording applies to independently gate
 extensions; it does not unset this accepted subset. ADR-0038 repairs selected-device
 activity telemetry without changing the method. Full native, device, replay and
 four scoped sanitizer acceptance pass; complete expansion state and requirements
-12–14's new assessment scheduling policy are not implemented here.
+12–14's assessment policy are outside ADR-0037 and are implemented separately
+under ADR-0039 below.
 
 ## Purpose and terminology
 
@@ -276,3 +278,23 @@ and define precise interfaces and evidence. Determine whether added activity
 variables, refreshes and metadata repay their costs. Full expansion masters,
 selective blocks and assessment scheduling are independently gated extensions;
 a contract may accept a smaller valid native-FP64-outer refinement slice first.
+
+## Accepted bounded assessment subset (2026-10-22)
+
+[ADR-0039](../decisions/ADR-0039-bounded-assessment-scheduling.md) accepts
+requirements 12–20 for research-only fixed_200/bounded_800 scheduling on tuned
+FP64 and existing accumulation FP32 after independent CPU common-trajectory
+admission. Every 200-update numerical controller check remains; cheap normalized
+movement only schedules original-model assessments, at most 800 updates apart.
+The current safe final witness receives fresh host certification, including partial
+intervals; cancellation, deadlines and failures retain their termination reason.
+Complete scheduler/controller checkpoints preserve charged work and deadlines.
+The lp-assess-v1 interface and resource allocation are frozen in ADR-0039; legacy
+records/defaults/audits are unchanged. Full native, strict evidence, device
+differentials/replays and scoped sanitizer acceptance pass. The
+[assessment report](../benchmarks/lp-assessment-scheduling-gpup-assess.md) retains
+all 60 attempts, 57 verified endpoints and 24/48 certified timings. Cheap
+indicators never publish a bound; every endpoint uses original-model authority.
+Six common-trajectory profile pairs match bitwise. CPU-only review strengthens
+signed-zero replay and rejects unverified profile comparisons, with exact source
+bridges preserving the original workers/report and all twelve retained replays.

@@ -37,3 +37,7 @@ required-features = ["precision-research"]
 [[example]]
 name = "lp_precision_refine"
 required-features = ["precision-research"]
+
+[[example]]
+name = "lp_precision_assess"
+required-features = ["precision-research"]

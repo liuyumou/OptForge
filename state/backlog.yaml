@@ -20,7 +20,7 @@ active_research_track: GPUP
 # 2026-10-13: GPUP-STATE closes with ADR-0036's resource admission refusal.
 # PR 19 review retains it and adds a compact full-range scalar FMA resource pass.
 # SPEC-0021 and full expansion state remain draft; no preset follows.
-next_ready_task: GPUP-ASSESS
+next_ready_task: GPUP-7
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-COPT
@@ -255,13 +255,13 @@ tasks:
     acceptance: "ADR-0037/0038 bounded native-FP64-outer correction LPs and guarded FP32 anchors; 240 rational models/1200 maps, 93 independent endpoint merit enclosures/39 contractions; full native, 66 regular device tests, 1920 product checks, nine replays/four scoped sanitizers; 108 attempts retained, 48 endpoints verified, 30/96 timings certified; initial host-only success and numerical refusals/timeouts establish no product benefit or preset; task 1541.719136512 GPU s, 16684 events"
   - id: GPUP-ASSESS
     title: Validate a bounded assessment scheduling policy
-    status: ready
+    status: complete
     depends_on: [GPUP-CONVERGENCE, GPUP-DESIGN]
     specification: docs/specifications/SPEC-0021-lp-refinement.md
-    acceptance: "CPU common-trajectory replay then accepted policy/resource contract; fixed-schedule control, delayed-success accounting, original-model final certification and charged required recovery"
+    acceptance: "ADR-0039; 16 CPU trajectories/320 boundary checks; 60 retained attempts, 57 verified endpoints, 24/48 certified timings; six bitwise profile pairs, 66 ordinary/three new device tests, six fixed-work pairs/twelve replays/four sanitizers; CPU-only bitwise replay/report review; 523.674592721 GPU s, 16816 ledger events; scoped 1.0272x FP64 irregular-32768 gain, unchanged coverage/no preset; docs/benchmarks/lp-assessment-scheduling-gpup-assess.md"
   - id: GPUP-7
     title: Admit error-budgeted quantization and selective sparse FP8 candidates
-    status: planned
+    status: ready
     depends_on: [GPUP-6, GPUP-EVIDENCE, GPUP-REFINE, GPUP-EXEC]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
     acceptance: "Accept bounded quantization/FP8 contract consistent with SPEC-0020/0021 first; original-unit error budgets, canonical transpose, guarded norm/scale/promotion and seeded replay; retain insufficient-accuracy refusals"

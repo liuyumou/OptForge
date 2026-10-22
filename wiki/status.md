@@ -35,14 +35,26 @@ product checks, nine replays and four scoped sanitizers pass. The telemetry
 refusal and CPU report-reader correction remain visible. Task GPU charge is
 1541.719136512 seconds; cumulative 19207.265220123 / 21602.574545061 seconds.
 The 16684-event ledger preserves every historical prefix and phase cap.
-GPUP-ASSESS is next under its own required bounded contract/allocation.
+[GPUP-ASSESS](../docs/benchmarks/lp-assessment-scheduling-gpup-assess.md) is complete
+under ADR-0039: fixed_200/bounded_800 assessment scheduling preserves the numerical
+controller and original-model host authority. All 60 attempts remain, 57 endpoints
+verify and 24/48 timings certify. Six common-trajectory pairs match bitwise; full
+native, 66 ordinary/three new device tests, six fixed-work pairs/twelve replays
+and four scoped sanitizers pass. A scoped 1.0272x FP64 irregular-32768 gain leaves
+coverage unchanged; no preset is selected. CPU-only signed-zero replay/profile
+review retains the original workers/report and verifies all 57 available endpoints.
+Task charge is 523.674592721 GPU seconds; cumulative consumption is
+19730.939812844 / 21602.574545061 seconds. The 16816-event ledger SHA-256 is
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c, preserving every
+historical prefix and phase cap. GPUP-7's contract is next, with no resource
+reservation or new numerical behavior implied.
 
 | State | Features |
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
 | In progress | None |
-| Planned | GPU LP precision track (GPUP-ASSESS next, then GPUP-7 through GPUP-10; full expansion state remains gated after the admission refusal), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
-| Experimental | Bounded native-FP64-outer correction LPs and guarded FP32/anchored products under ADR-0037; bounded exact-dot cached/uncached CUDA executor under ADR-0035; opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
+| Planned | GPU LP precision track (GPUP-7 contract next, then GPUP-8 through GPUP-10; full expansion state remains gated after the admission refusal), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| Experimental | Bounded research assessment scheduling under ADR-0039; bounded native-FP64-outer correction LPs and guarded FP32/anchored products under ADR-0037; bounded exact-dot cached/uncached CUDA executor under ADR-0035; opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 
 GPUP-0 has saved the [precision roadmap](../docs/plans/gpu-lp-precision-roadmap.md),

@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved 2026-10-12 order; GPUP-REFINE evaluated with a negative result; GPUP-ASSESS is next
+Status: approved 2026-10-12 order; GPUP-ASSESS evaluated with scoped benefit; GPUP-7 contract is next
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
@@ -46,7 +46,7 @@ is proposed; it independently admits no trials, seeds, defaults or GPU allowance
 | 2 — GPUP-EXEC (complete) | Lean operator executor: cache vector splits, remove avoidable per-nonzero recombination/conversion, preserve integer-guard meaning and test admitted launch schedules. | Same-arithmetic controls, generated instruction review, full range and sanitizer acceptance; both tuned and precision FP64 comparisons; packing-inclusive cost. |
 | 3 — GPUP-STATE (complete bounded admission investigation) | CPU scalar/primitive validation, first full-bin refusal and compact FMA challenge under ADR-0036. Full controller/state remains gated. | Original construction uses 255 registers and spills; compact full-range FMA fits at 40 registers with zero spills and 5900 additional independent cases per construction. 6170 device cases, four scalar sanitizers and 36 verified primitive timings on PRO 6000; no solver benefit, original evidence retained. |
 | 4 — GPUP-REFINE (complete) | ADR-0037 native FP64 outer correction LPs, guarded FP32/anchored products, charged recovery/checkpoints and strict replay. | 108 retained attempts, 48 verified endpoints, 30/96 certified timings; full native/device/sanitizer/replay gates. Only initial host-certified small-4 succeeds in refinement; no product benefit/preset. Expansion masters remain gated. |
-| 5 — GPUP-ASSESS | Accept a bounded assessment scheduling policy after CPU common-trajectory replay. | Cheap indicators cannot certify; include delayed stopping, fixed-schedule controls, mandatory final host certification and charged recovery. |
+| 5 — GPUP-ASSESS (complete) | ADR-0039 fixed_200/bounded_800 on tuned FP64 and existing accumulation FP32, preserving 200-update numerical checks. | 16 CPU trajectories/320 boundary witnesses; all 60 attempts retained, 57 endpoints verified, 24/48 timings certified. Six bitwise profile pairs, full native/device/replay/sanitizer gates; scoped 1.0272x FP64 irregular-32768 gain, unchanged coverage and no preset. |
 | 6 — GPUP-7 | Accept quantization/FP8 error-budget interface, then admitted uniform/selective sparse candidates. | Representation/arithmetic error in original units, canonical transpose, norm/step validity, bounded promotion and memory; reject insufficient-accuracy formats before timing. |
 | Conditional — GPUP-8 | Shape-admit sparse/dense Tensor Core or integer execution for actual sm_120 single-RHS work. | Same-operand accuracy, overflow/accumulator analysis, packing/padding costs and scoped device gates. A documented rejection/defer decision is valid; no mandatory Tensor Core implementation. |
 | 7 — GPUP-9 | Small component/interaction blocks, frozen finalists and independent held-out comparison. | Coverage-first certified total latency, repeatability/uncertainty, full failures and budget ledger; final recipe may omit optional components. |
@@ -62,16 +62,19 @@ An investigation can close with a documented negative/admission result. Completi
 of GPUP-STATE or GPUP-REFINE does not require making its candidate a winning or
 mandatory component of GPUP-7/9.
 
-Current charge is **19207.265220123 / 21602.574545061 GPU seconds**, with
-16684 events and SHA-256
-e83d07792fb0775fc26d8d2cca8a2411f59fcbc94f742cafd8f6b844ffb60535.
-[GPUP-REFINE](../benchmarks/lp-refinement-gpup-refine.md) charges
-1541.719136512 seconds, preserving the exact 16452-event prefix
-24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18 and every earlier
-prefix. The telemetry refusal and CPU report-reader correction remain retained.
-No new reservation follows from remaining headroom. Historical handoffs and
-budgets below describe their dated stages; this section and next_ready_task are
-the current handoff. All old racecheck/session/mixed-model gaps remain open.
+Current charge is **19730.939812844 / 21602.574545061 GPU seconds**, with
+16816 events and SHA-256
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c.
+[GPUP-ASSESS](../benchmarks/lp-assessment-scheduling-gpup-assess.md) charges
+523.674592721 seconds within its 2300-second allocation, preserving the exact
+16684-event prefix e83d07792fb0775fc26d8d2cca8a2411f59fcbc94f742cafd8f6b844ffb60535
+and every earlier prefix/phase ceiling. Its CPU-only final review strengthens
+bitwise replay and profile eligibility while retaining all measured workers and
+results. [GPUP-REFINE](../benchmarks/lp-refinement-gpup-refine.md)'s earlier
+1541.719136512-second charge, telemetry refusal and report-reader correction remain.
+GPUP-7 needs its own accepted quantization/error-budget contract and resource
+allocation; unused headroom reserves nothing. Historical handoffs and budgets
+below retain their dated stages. Old racecheck/session/mixed-model gaps remain.
 
 ## Contracts and status
 
@@ -324,8 +327,11 @@ tests and sanitizers under `tools/gpu_job.sh`, on one device under the host-wide
 lease, sequentially with the CPU gate. No ordinary build may require a toolkit or
 device. Runtime work remains Rust inside the existing ownership/unsafe boundaries.
 
-Current handoff: GPUP-ASSESS, without starting its policy or reserving work, under the
-[2026-10-12 order](#current-design-order-2026-10-12).
+Current handoff: GPUP-7 contract work under the
+[2026-10-12 order](#current-design-order-2026-10-12), without starting quantization
+behavior or reserving GPU work. [GPUP-ASSESS](../benchmarks/lp-assessment-scheduling-gpup-assess.md)
+is complete under ADR-0039 with unchanged coverage and only a scoped FP64 latency
+gain. Cheap movement never certifies; mandatory final host authority remains.
 [GPUP-REFINE](../benchmarks/lp-refinement-gpup-refine.md) is complete under
 ADR-0037/0038 with a bounded negative performance result. Full native/device,
 independent rational residuals, strict replay and four scoped sanitizers pass;
