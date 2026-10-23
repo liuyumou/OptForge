@@ -82,7 +82,20 @@ pub struct Constant {
     pub beta: f64,
     pub tiny: f64,
 }
+/// A generation binds immutable coefficients, sparse layout and error summaries.
+///
+/// ```compile_fail
+/// fn corrupt(mut op: optimizer_lp::quant_resident::Operator) {
+///     op.low_error[0] = 0.0;
+///     op.base.quantized[0] = 0.0;
+/// }
+/// ```
 pub struct Operator {
+    data: OperatorData,
+    origin: Arc<()>,
+}
+/// Immutable operator data, accessible through shared dereferencing only.
+pub struct OperatorData {
     pub base: quant::Operator,
     pub layout: Layout,
     pub low_error: Vec<f64>,
@@ -94,9 +107,14 @@ pub struct Operator {
     pub ids: Vec<u32>,
     pub inputs: Vec<u32>,
     pub entries: Vec<u32>,
-    origin: Arc<()>,
 }
 impl std::ops::Deref for Operator {
+    type Target = OperatorData;
+    fn deref(&self) -> &Self::Target {
+        &self.data
+    }
+}
+impl std::ops::Deref for OperatorData {
     type Target = quant::Operator;
     fn deref(&self) -> &Self::Target {
         &self.base
@@ -168,17 +186,19 @@ impl Operator {
         }
         let preparation_bytes = base.preparation_bytes + extra;
         Ok(Self {
-            base,
-            layout,
-            low_error,
-            native_error,
-            preparation_bytes,
-            line,
-            group,
-            group_tiles: tiles,
-            ids,
-            inputs,
-            entries,
+            data: OperatorData {
+                base,
+                layout,
+                low_error,
+                native_error,
+                preparation_bytes,
+                line,
+                group,
+                group_tiles: tiles,
+                ids,
+                inputs,
+                entries,
+            },
             origin: Arc::new(()),
         })
     }
@@ -564,6 +584,7 @@ pub trait Oracle {
 }
 fn valid_window(a: &Window, op: &Operator, s: &Fp64State, len: u64) -> bool {
     let finite = |v: &[f64], n: usize| v.len() == n && v.iter().all(|x| x.is_finite());
+    let c = &a.counts;
     if a.started == 0
         || a.started > len
         || a.counts.windows != 1
@@ -573,6 +594,16 @@ fn valid_window(a: &Window, op: &Operator, s: &Fp64State, len: u64) -> bool {
                 * op.values.len() as u64
                 * a.started
         })
+        || u128::from(c.nonzero_t) + u128::from(c.nonzero_f) > u128::from(c.low)
+        || u128::from(c.coarse_pass) + u128::from(c.detailed_pass) + u128::from(c.detailed_fail)
+            > (op.rows + op.columns) as u128 * u128::from(a.started)
+        || c.guard_products > c.high
+        || op.layout != Layout::Tuned && c.guard_products != 0
+        || op.layout == Layout::Tuned && c.guard_products.checked_mul(2) != Some(c.high)
+        || c.accepted_nonzero_t != 0
+        || c.accepted_nonzero_f != 0
+        || c.useful_windows != 0
+        || c.uncertain != 0
         || a.bad.iter().any(|&i| i >= op.tiles.len())
         || a.bad.windows(2).any(|p| p[0] >= p[1])
     {

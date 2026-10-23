@@ -5,6 +5,23 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
+PR integration authorization (2026-10-23): the user explicitly requests opening
+the combined GPUP-7/7R PR, repeated review/fixes, merge and safe cleanup. This
+supersedes the historical local-only restrictions below. Review is CPU-only;
+preserve all measured sources/images/workers/reports and the exact 17132-event
+ledger. Prepared operators must be immutable, malformed physical counters must
+refuse before aggregation, and evidence/report boundaries must remain strict.
+Keep separate PR source/acceptance receipts and reports. Run every cpu/docs/smoke
+test command, retain native dependencies/artifacts, and verify merged ancestry
+before removing task branches. No additional GPU work or next-task allowance.
+PR acceptance passes 344 Python tests, Rust/native/dependencies, historical replay,
+138 documentation pages and smoke; 20 source-only portability tests pass. Fresh
+verification accepts 495 LP plus 21 operator endpoints. Rebuilt verifiers cover
+423 LP/21 operator endpoints; the 72 initial resident CPU records retain their
+earlier required-field layout and original frozen verifier. Do not normalize or
+re-sign historical payloads. Separate PR report/receipts are under
+docs/benchmarks/lp-quant-pr-review.md and docs/benchmarks/data/quant-resident/pr-*.
+
 Current handoff (2026-10-23): GPUP-7R is complete under accepted ADR-0041 and
 the bounded resident subset of SPEC-0012/0021. Its
 [report](docs/benchmarks/lp-quant-resident-gpup7r.md) retains all 120 planned

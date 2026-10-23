@@ -1,5 +1,46 @@
 # Active Task
 
+## GPUP-7/7R PR review and integration (2026-10-23)
+
+Status: in progress. The user explicitly authorizes opening a PR, repeated review
+and fixes, protected merge and safe cleanup. This supersedes prior local-only
+delivery restrictions for GPUP-7/7R. Main lacks the completed GPUP-7 prerequisite;
+the PR includes its preserved implementation, the resident plan and GPUP-7R.
+Objective: review the complete main-to-branch diff against accepted ADR-0040/0041
+and specifications; fix reproduced findings; preserve every measured source,
+executable, image, endpoint, report and ledger prefix. Use separate CPU-only PR
+source bridges/reports if verifier or reader changes are needed.
+Acceptance: regression counterexamples, full pinned-native bash tools/check.sh,
+independent retained-endpoint verification, clean-checkout CPU portability,
+all cpu/docs/smoke test commands and no unresolved actionable findings. GitHub
+Actions cannot start because its account budget is exhausted. The user reports
+disabling branch protection, explicitly requires every test, and authorizes
+integration after local acceptance. Verify effective remote rules before merging.
+Resources: CPU-only review, at most 21600 CPU seconds/four build jobs and 8 GiB
+RSS; zero GPU execution or additional allowance. Preserve 17132 ledger events,
+SHA-256 930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035,
+and all historical artifacts. Publication is authorized only through this PR;
+merge with ancestry preserved, then remove merged task branches after verifying
+ancestry. Retain native dependencies and all research artifacts.
+
+Review acceptance (2026-10-23): two passes reproduce and repair mutable prepared
+operators, partial promotion on invalid IDs, malformed window counters, JSON
+shape aliases, inconsistent promotion histories, physical counter validation and
+interrupted-profile/report-output eligibility. Full pinned-native acceptance
+passes 344 Python tests plus Rust/native, dependencies, historical replay, 138
+documentation pages and smoke; 20 quantization tests pass without ignored
+artifacts/dependencies. Fresh CPU verification accepts 495 LP plus 21 operator
+endpoints: rebuilt verifiers cover 423 LP/21 operator endpoints, and the original
+frozen verifier covers 72 initial resident CPU endpoints predating the required
+first-certification field. No payload/schema is normalized or re-signed.
+Separate report/receipts: docs/benchmarks/lp-quant-pr-review.md and
+docs/benchmarks/data/quant-resident/pr-{review-source,native-acceptance,retained-verification}.json.
+Original reports, workers, archives, kernels, mathematical authority and all
+17132 ledger events remain exact. PR #22 contains the preserved three prerequisite
+commits; the review commit follows acceptance. Merge and cleanup remain pending
+remote admission; the effective Protect main ruleset is still active despite the
+user's reported branch-protection change. No new GPU work or allowance.
+
 ## GPUP-7R implementation (2026-10-22)
 
 Status: complete (2026-10-23), under the user's explicit ADR-0041/allocation approval.

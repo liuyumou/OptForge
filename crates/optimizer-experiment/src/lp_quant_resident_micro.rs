@@ -43,7 +43,11 @@ deserialize_required_object!(MicroRequest {
 impl MicroRequest {
     pub fn from_json(b: &[u8]) -> Result<Self, ValidationError> {
         crate::lp::unique_json(b)?;
-        let r: Self = serde_json::from_slice(b).map_err(invalid)?;
+        let raw: serde_json::Value = serde_json::from_slice(b).map_err(invalid)?;
+        let r: Self = serde_json::from_value(raw.clone()).map_err(invalid)?;
+        if !crate::lp_quant::same_shape(&raw, &serde_json::to_value(&r).map_err(invalid)?) {
+            return Err(invalid("resident micro request JSON shape"));
+        }
         r.validate()?;
         Ok(r)
     }
@@ -125,6 +129,10 @@ fn prepare(b: &[u8], v: &[u8], r: &MicroRequest) -> Result<(Model, Vectors), Val
     r.validate()?;
     crate::lp::unique_json(v)?;
     let vectors: Vectors = serde_json::from_slice(v).map_err(invalid)?;
+    let raw: serde_json::Value = serde_json::from_slice(v).map_err(invalid)?;
+    if !crate::lp_quant::same_shape(&raw, &serde_json::to_value(&vectors).map_err(invalid)?) {
+        return Err(invalid("resident micro vectors JSON shape"));
+    }
     if sha256::hex(b) != r.request.model_sha256
         || sha256::hex(v) != r.vectors_sha256
         || vectors.schema_version != 1
@@ -158,7 +166,12 @@ fn prepare(b: &[u8], v: &[u8], r: &MicroRequest) -> Result<(Model, Vectors), Val
 impl Evidence {
     pub fn from_json(b: &[u8]) -> Result<Self, ValidationError> {
         crate::lp::unique_json(b)?;
-        serde_json::from_slice(b).map_err(invalid)
+        let raw: serde_json::Value = serde_json::from_slice(b).map_err(invalid)?;
+        let parsed: Self = serde_json::from_value(raw.clone()).map_err(invalid)?;
+        if !crate::lp_quant::same_shape(&raw, &serde_json::to_value(&parsed).map_err(invalid)?) {
+            return Err(invalid("resident micro evidence JSON shape"));
+        }
+        Ok(parsed)
     }
     pub fn verify(&self, b: &[u8], v: &[u8], r: &MicroRequest) -> Result<(), ValidationError> {
         let (model, vectors) = prepare(b, v, r)?;
@@ -172,6 +185,7 @@ impl Evidence {
             return Err(invalid("resident micro evidence identity"));
         }
         let p = LinearProgram::new(&model)?;
+        optimizer_lp::quant::admit_shape(&p).map_err(invalid)?;
         let e = Engine::new(&p, r.request.method);
         let op =
             Operator::new(&e, r.request.settings.clone(), Layout::Segmented).map_err(invalid)?;
@@ -259,6 +273,7 @@ pub fn execute(b: &[u8], v: &[u8], r: MicroRequest) -> Result<Evidence, Validati
         return Err(invalid("resident micro image identity"));
     }
     let p = LinearProgram::new(&model)?;
+    optimizer_lp::quant::admit_shape(&p).map_err(invalid)?;
     let e = Engine::new(&p, r.request.method);
     let op = Operator::new(&e, r.request.settings.clone(), Layout::Segmented).map_err(invalid)?;
     let g = op.generation(Promotion::new(&op)).map_err(invalid)?;

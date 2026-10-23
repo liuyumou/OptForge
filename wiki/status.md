@@ -1,5 +1,10 @@
 # Project Status
 
+The combined GPUP-7/7R [PR review](../docs/benchmarks/lp-quant-pr-review.md)
+strengthens operator immutability, malformed-window rejection, strict evidence
+and profile eligibility. Its CPU-only source bridge and acceptance remain separate
+from both measured studies; no GPU execution or allowance is added.
+
 [GPUP-7R resident execution](../docs/benchmarks/lp-quant-resident-gpup7r.md) is
 complete under accepted ADR-0041, preserving the
 [original GPUP-7 evaluation](../docs/benchmarks/lp-quantization-gpup7.md).

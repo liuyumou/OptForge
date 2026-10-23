@@ -204,8 +204,21 @@ pub struct Group {
     pub mass: f64,
     pub original_mass: f64,
 }
+/// Prepared coefficients and their error summaries are immutable together.
+///
+/// ```compile_fail
+/// fn corrupt(mut op: optimizer_lp::quant::Operator) {
+///     op.quantized[0] = 0.0;
+/// }
+/// ```
 #[derive(Clone, Debug)]
 pub struct Operator {
+    data: OperatorData,
+}
+/// Read-only view of one prepared operator. `Operator` deliberately has no
+/// `DerefMut`: coefficients, indices, scales and summaries must change together.
+#[derive(Clone, Debug)]
+pub struct OperatorData {
     pub settings: Settings,
     pub rows: usize,
     pub columns: usize,
@@ -223,6 +236,12 @@ pub struct Operator {
     pub norm: f64,
     pub step: f64,
     pub preparation_bytes: u64,
+}
+impl std::ops::Deref for Operator {
+    type Target = OperatorData;
+    fn deref(&self) -> &Self::Target {
+        &self.data
+    }
 }
 pub fn preparation_bytes(m: usize, n: usize, z: usize) -> Result<u64, &'static str> {
     if m > 65536 || n > 65536 || z > 1 << 23 {
@@ -412,23 +431,25 @@ impl Operator {
             return Err("operator_step_range");
         }
         Ok(Self {
-            settings,
-            rows: m,
-            columns: n,
-            values,
-            quantized,
-            codes,
-            tile_of,
-            row_of,
-            column_of,
-            tiles,
-            row_groups,
-            column_groups,
-            row_scale,
-            column_scale,
-            norm,
-            step,
-            preparation_bytes: bytes,
+            data: OperatorData {
+                settings,
+                rows: m,
+                columns: n,
+                values,
+                quantized,
+                codes,
+                tile_of,
+                row_of,
+                column_of,
+                tiles,
+                row_groups,
+                column_groups,
+                row_scale,
+                column_scale,
+                norm,
+                step,
+                preparation_bytes: bytes,
+            },
         })
     }
     pub fn groups(&self, transpose: bool) -> &Vec<Vec<Group>> {
@@ -647,14 +668,11 @@ impl Promotion {
     }
     pub fn promote(&mut self, op: &Operator, ids: &[usize]) -> bool {
         let _cost = optimizer_core::lp_cost::scope("quant_promotion");
-        if self.native {
+        if self.native || ids.iter().any(|&i| i >= self.mask.len()) {
             return false;
         }
         let old = self.mask.clone();
         for &i in ids {
-            if i >= self.mask.len() {
-                return false;
-            }
             self.mask[i] = true;
         }
         let promoted = op

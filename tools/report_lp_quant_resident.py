@@ -1,5 +1,5 @@
 """Independent append-only accounting and endpoint report for ADR-0041."""
-import hashlib,json,tarfile,subprocess,statistics
+import argparse,hashlib,json,tarfile,subprocess,statistics
 from pathlib import Path
 from collections import Counter
 from lp_protocol import ROOT,read_json,write_json,file_hash,checked_reference,validate
@@ -66,6 +66,9 @@ def profile_complete(e,work,verified=True):
  o=e['outcome'];c=o['core']
  return o['horizon']==work and c['stop']=='work_horizon' and c['iterations']==work and c['failure'] is None and o['counts']['uncertain']==0
 
+def profile_eligible(e,work,verified,trial,worker):
+ return bool(verified and trial and trial['status']=='completed' and worker and worker['reason']=='completed' and worker['returncode']==0 and profile_complete(e,work,verified))
+
 def verify_cpu_cohorts():
  rows=[]
  for cohort in ['cpu-admission','final-admission','accepted-admission']:
@@ -121,7 +124,7 @@ def report():
    if len(counts)!=len(core['promotion']['mask']):raise ValueError('promotion canonical tile count')
    promoted=sum(c for c,m in zip(counts,core['promotion']['mask']) if m)
    row.update(termination=core['stop'],failure=core['failure'],physical=core['physical'],logical=core['iterations'],work=core['work'],counts=o['counts'],first_certified_iteration=o['first_certified_iteration'],promoted_coefficients=promoted,promoted_fraction=promoted/max(1,sum(counts)),promotion={k:core['promotion'][k] for k in ['generation','transitions','native']},phases_ns=e['phases_ns'],launches=e['launches'],upload_bytes=e['upload_bytes'],readback_bytes=e['readback_bytes'],device_peak_bytes=e['device_peak_bytes'],device_windows=e['device_windows'],state_uploads=e['state_uploads'],host_product_scans=e['host_product_scans'],product_vector_transfers=e['product_vector_transfers'])
-  if j['kind']=='profile':profiles.append(dict(id=key,configuration=config,verified=a is not None,eligible=bool(e and profile_complete(e,v['profile_work'],a is not None)),physical=None if e is None else e['outcome']['core']['physical'],logical=None if e is None else e['outcome']['core']['iterations']))
+  if j['kind']=='profile':profiles.append(dict(id=key,configuration=config,verified=a is not None,eligible=bool(e and profile_eligible(e,v['profile_work'],a is not None,t,w)),physical=None if e is None else e['outcome']['core']['physical'],logical=None if e is None else e['outcome']['core']['iterations']))
   if j['kind']=='timing' and good:timings[(name,config,j['repetition'])]=w['elapsed_ns']
   rows.append(row)
  for j in jobs(v):
@@ -156,7 +159,9 @@ def report():
  return dict(identity='gpup-quant-resident-report-v1',source_tree_sha256=identity['source_tree_sha256'],cpu_admission=v['cpu_admission'],planned_attempts=120,planned_timings=108,attempts=sum(r['status'] not in ['unexecuted','cpu_admission_refusal'] for r in rows)+sum(m['status']!='unexecuted' for m in micro),cpu_refusals=sum(r['status']=='cpu_admission_refusal' for r in rows),verified=sum(r['verified'] for r in rows),acceptance_endpoints_verified=accept_verified,cpu_cohorts=verify_cpu_cohorts(),certified_timings=sum(r['kind']=='timing' and r['certified'] for r in rows),profiles=profiles,micro=micro,comparisons=comparisons,rows=rows,categories_ns=charges,task_gpu_ns=sum(charges.values()),cumulative_gpu_ns=cumulative,ledger_events=len(events),ledger_sha256=file_hash(d/'ledger.jsonl'))
 
 def main():
- r=report();write_json(ROOT/'artifacts/gpup-quant-resident-v1/report.json',r);write_json(ROOT/'docs/benchmarks/data/quant-resident/report.json',r)
+ from lp_quant_report_output import report_output
+ p=argparse.ArgumentParser();p.add_argument('--output',type=Path);a=p.parse_args();output=report_output(a.output)
+ r=report();write_json(output,r)
  print({k:r[k] for k in ['attempts','cpu_refusals','verified','certified_timings','task_gpu_ns','cumulative_gpu_ns','ledger_events','ledger_sha256']})
 if __name__=='__main__':main()
 

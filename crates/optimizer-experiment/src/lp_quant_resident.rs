@@ -59,7 +59,11 @@ deserialize_required_object!(Request {
 impl Request {
     pub fn from_json(b: &[u8]) -> Result<Self, ValidationError> {
         crate::lp::unique_json(b)?;
-        let r: Self = serde_json::from_slice(b).map_err(invalid)?;
+        let raw: serde_json::Value = serde_json::from_slice(b).map_err(invalid)?;
+        let r: Self = serde_json::from_value(raw.clone()).map_err(invalid)?;
+        if !crate::lp_quant::same_shape(&raw, &serde_json::to_value(&r).map_err(invalid)?) {
+            return Err(invalid("resident request JSON shape"));
+        }
         r.validate()?;
         Ok(r)
     }
@@ -175,7 +179,7 @@ impl Evidence {
                 (serde_json::Value::Array(a), serde_json::Value::Array(b)) => {
                     a.len() == b.len() && a.iter().zip(b).all(|(a, b)| keys(a, b))
                 }
-                _ => true,
+                _ => crate::lp_quant::same_shape(a, b),
             }
         }
         if !keys(&raw, &serde_json::to_value(&parsed).map_err(invalid)?) {
@@ -198,6 +202,8 @@ impl Evidence {
                 && (!expected.diagnostic
                     || self.executed_device.is_some()
                     || self.launches != 0
+                    || self.upload_bytes != 0
+                    || self.readback_bytes != 0
                     || self.device_peak_bytes != 0)
         {
             return Err(invalid("quant executor identity"));
@@ -288,6 +294,39 @@ impl Evidence {
         {
             return Err(invalid("quant outcome dimensions/counters"));
         }
+        if self.executor == "gpu" {
+            // Dimensions and physical work have already been bounded above.
+            // Use wider arithmetic while checking untrusted serialized counters.
+            let windows = u128::from(c.windows);
+            let slots = u128::from(o.work.proposals) + u128::from(c.predicated);
+            let original = expected.layout == Layout::OriginalTuned;
+            let per = if original {
+                6
+            } else if expected.layout == Layout::Tuned {
+                9
+            } else {
+                7
+            };
+            let exact_launches = per * slots + if original { 0 } else { 2 * windows };
+            let size = (op.rows + op.columns).max(1) as u128;
+            let peak = optimizer_lp_cuda::quant_resident::buffer_bytes(&op).map_err(invalid)?;
+            let upload_limit = u128::from(peak)
+                + 10 * (4 * op.tiles.len().max(1) as u128 + 24 * size)
+                + 64 * size * windows;
+            let readback_limit = (88 + 32 * size) * windows;
+            if c.predicated as u128 > if original { 199 } else { 31 } * windows
+                || original && o.failure.is_none() && c.uncertain == 0 && c.predicated != 0
+                || self.device_peak_bytes != peak
+                || self.launches as u128 > 10 * slots + 2 * windows
+                || c.uncertain == 0
+                    && o.failure.is_none()
+                    && self.launches as u128 != exact_launches
+                || self.upload_bytes as u128 > upload_limit
+                || self.readback_bytes as u128 > readback_limit
+            {
+                return Err(invalid("resident physical resource counters"));
+            }
+        }
         let bits = |a: &[f64], b: &[f64]| {
             a.len() == b.len() && a.iter().zip(b).all(|(a, b)| a.to_bits() == b.to_bits())
         };
@@ -314,46 +353,11 @@ impl Evidence {
         {
             return Err(invalid("quant failure metadata"));
         }
-        let initial = optimizer_lp::quant::Promotion::new(&op);
-        let mut last = initial.generation;
-        let mut promoted = op
-            .tiles
-            .iter()
-            .zip(&initial.mask)
-            .filter(|(_, m)| **m)
-            .map(|(t, _)| t.count as u64)
-            .sum::<u64>();
-        let mut native = initial.native;
-        for t in &o.transitions {
-            if t.generation != last + 1
-                || t.generation > o.promotion.generation
-                || t.iteration > o.iterations
-                || t.promoted_coefficients > op.values.len() as u64
-                || t.promoted_coefficients <= promoted
-                || native
-                || t.native && t.promoted_coefficients != op.values.len() as u64
-                || t.reason.is_empty()
-            {
-                return Err(invalid("quant transition metadata"));
-            }
-            last = t.generation;
-            promoted = t.promoted_coefficients;
-            native = t.native;
-        }
-        let final_promoted = op
-            .tiles
-            .iter()
-            .zip(&o.promotion.mask)
-            .filter(|(_, m)| **m)
-            .map(|(t, _)| t.count as u64)
-            .sum::<u64>();
-        if last != o.promotion.generation
-            || promoted != final_promoted
-            || native != o.promotion.native
-            || c.useful_windows > o.iterations / 32
+        crate::lp_quant::promotion_history(&op, o)?;
+        if c.useful_windows > o.iterations / 32
             || c.useful_windows != 0 && (c.accepted_nonzero_t == 0 || c.accepted_nonzero_f == 0)
         {
-            return Err(invalid("resident promotion history"));
+            return Err(invalid("resident useful-window metadata"));
         }
         let a = assessment(
             &model,
@@ -662,6 +666,51 @@ mod tests {
         }
     }
     #[test]
+    fn resigned_transfer_launch_and_predication_counters_are_bounded() {
+        let (b, r) = fixture();
+        let cpu = execute(&b, r.clone(), true, &CancellationToken::new()).unwrap();
+        for upload in [true, false] {
+            let mut bad = cpu.clone();
+            if upload {
+                bad.upload_bytes = 1;
+            } else {
+                bad.readback_bytes = 1;
+            }
+            bad.payload_sha256 = payload(&bad).unwrap();
+            assert!(bad.verify(&b, &r).is_err(), "CPU transfer accepted");
+        }
+        // A CPU-generated trajectory supplies an independently verified numerical
+        // endpoint; only its executor accounting is synthesized, without a device.
+        let mut gpu = cpu;
+        gpu.executor = "gpu".into();
+        gpu.executed_device = Some(r.device.clone());
+        gpu.device_windows = gpu.outcome.counts.windows;
+        gpu.state_uploads = gpu.device_windows;
+        gpu.launches = 7 * (gpu.outcome.core.work.proposals + gpu.outcome.counts.predicated)
+            + 2 * gpu.device_windows;
+        let model = Model::from_json(&b).unwrap();
+        let p = LinearProgram::new(&model).unwrap();
+        let engine = Engine::new(&p, r.method);
+        let op = Operator::new(&engine, r.settings.clone(), r.layout).unwrap();
+        gpu.device_peak_bytes = optimizer_lp_cuda::quant_resident::buffer_bytes(&op).unwrap();
+        gpu.upload_bytes = gpu.device_peak_bytes;
+        gpu.payload_sha256 = payload(&gpu).unwrap();
+        gpu.verify(&b, &r).unwrap();
+        for kind in 0..6 {
+            let mut bad = gpu.clone();
+            match kind {
+                0 => bad.launches = u64::MAX,
+                1 => bad.launches += 1,
+                2 => bad.upload_bytes = u64::MAX,
+                3 => bad.readback_bytes = u64::MAX,
+                4 => bad.outcome.counts.predicated = u64::MAX,
+                _ => bad.device_peak_bytes -= 1,
+            }
+            bad.payload_sha256 = payload(&bad).unwrap();
+            assert!(bad.verify(&b, &r).is_err(), "counter {kind} accepted");
+        }
+    }
+    #[test]
     fn duplicate_settings_and_opposite_zero_replay_are_rejected() {
         let (b, r) = fixture();
         let raw = serde_json::to_string(&r).unwrap().replace(
@@ -674,5 +723,22 @@ mod tests {
         a.outcome.core.scaled_primal[0] = 0.;
         c.outcome.core.scaled_primal[0] = -0.;
         assert!(!replay_matches(&a, &c));
+    }
+    #[test]
+    fn enum_objects_and_positional_controller_records_are_rejected() {
+        let (b, r) = fixture();
+        for field in ["layout", "settings"] {
+            let mut raw = serde_json::to_value(&r).unwrap();
+            if field == "layout" {
+                raw[field] = serde_json::json!({"segmented":null});
+            } else {
+                raw[field]["format"] = serde_json::json!({"fp16":null});
+            }
+            assert!(Request::from_json(&serde_json::to_vec(&raw).unwrap()).is_err());
+        }
+        let e = execute(&b, r, true, &CancellationToken::new()).unwrap();
+        let mut raw = serde_json::to_value(&e).unwrap();
+        raw["request"]["layout"] = serde_json::json!({"segmented":null});
+        assert!(Evidence::from_json(&serde_json::to_vec(&raw).unwrap()).is_err());
     }
 }

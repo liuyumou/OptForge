@@ -390,3 +390,11 @@ The completed resident evaluation certifies 36/108 planned timing cells, with
 and 21 verified operator endpoints. Full native/device/replay/sanitizer gates pass;
 all 313 LP and 21 operator endpoints freshly verify. No useful quantized solve
 benefit or supported preset follows; the remaining extensions stay gated.
+
+The [quantization PR review](../benchmarks/lp-quant-pr-review.md) adds CPU-only
+regressions for immutable prepared operators, atomic invalid-ID refusal, bounded
+device-window counters, canonical JSON shapes, promotion history, physical
+accounting and completed-worker profile eligibility. These strengthen the accepted
+resident subset; arithmetic budgets, kernels, original-model certification and
+the remaining gated extensions are unchanged. Historical measured cohorts and
+their evidence are preserved separately from the rebuilt host verifier.

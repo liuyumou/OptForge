@@ -1,5 +1,18 @@
 # Known Failures and Limitations
 
+## Quantization PR review preserves measured cohorts
+
+The [separate PR review](../docs/benchmarks/lp-quant-pr-review.md) repairs mutable
+prepared operators, partial promotion on an invalid tile ID, unchecked window
+counters, noncanonical JSON shapes, inconsistent promotion histories and physical
+accounting in host verification. Interrupted workers cannot provide profile
+comparisons, and review outputs cannot overwrite historical artifacts or aliases.
+The rebuilt executable has no new device acceptance or measured performance
+claim. Both original reports, admission receipts, workers, images, source cohorts
+and the exact 17132-event ledger remain unchanged. Live-source GPU admission
+continues to reject the rebuilt executable against the historical admission;
+the PR reader verifies retained evidence separately, on CPU.
+
 ## Resident execution recovers FP64 coverage, not useful matrix quantization
 
 [GPUP-7R](../docs/benchmarks/lp-quant-resident-gpup7r.md) completes accepted

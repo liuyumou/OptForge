@@ -1,5 +1,5 @@
 """Independent frozen-source, endpoint and append-only ledger report for GPUP-7."""
-import hashlib,json,tarfile
+import argparse,hashlib,json,tarfile
 from pathlib import Path
 from collections import Counter
 from lp_protocol import ROOT,read_json,write_json,file_hash,checked_reference,validate
@@ -68,6 +68,9 @@ def profile_complete(endpoint,work):
  d=endpoint['diagnostics'];c=endpoint.get('control',{})
  return d['profile'] and d['iterations']==work and c.get('physical_iterations')==work and c.get('logical_iterations')==work and endpoint['record']['termination'] in ['optimal','iteration_limit']
 
+def profile_eligible(endpoint,work,verified,trial,worker):
+ return bool(verified and trial and trial['status']=='completed' and worker and worker['reason']=='completed' and worker['returncode']==0 and profile_complete(endpoint,work))
+
 def report():
  v=protocol();d=ROOT/v['output'];identity=archive(v,d);check_acceptance(v,identity);events,charges,cumulative=ledger(v,d/'ledger.jsonl');rows=[];timings={};profiles=[];counts_cache={}
  admission=read_json(checked_reference(ROOT,v['cpu_admission']));eligibility={(r['model'],r['configuration']):r['eligible'] for r in admission['rows']}
@@ -115,7 +118,7 @@ def report():
   if j['kind']!='profile':continue
   row=next(r for r in rows if r['id']==j['id']);entry=dict(id=j['id'],configuration=j['configuration']['id'],verified=row['verified'],eligible=False,reason='missing_or_unverified_endpoint')
   if row['verified']:
-   path=d/(j['id']+'.endpoint.json');e=read_json(path) if j['configuration']['backend']=='lp-quant-v1' else endpoint_shape(path,'compact-v1');eligible=profile_complete(e,v['profile_work']);o=e.get('outcome');c=e.get('control',{})
+   path=d/(j['id']+'.endpoint.json');e=read_json(path) if j['configuration']['backend']=='lp-quant-v1' else endpoint_shape(path,'compact-v1');trial=read_json(d/(j['id']+'.trial.json'));worker=read_json(d/(j['id']+'.worker.json')) if trial['artifacts']['worker'] else None;eligible=profile_eligible(e,v['profile_work'],row['verified'],trial,worker);o=e.get('outcome');c=e.get('control',{})
    entry.update(eligible=eligible,reason=None if eligible else 'incomplete_horizon',physical=o['physical'] if o else c.get('physical_iterations'),logical=o['iterations'] if o else c.get('logical_iterations'))
   profiles.append(entry)
  comparisons=[]
@@ -128,7 +131,9 @@ def report():
  source_review()
  return dict(source_review=dict(path='docs/benchmarks/data/quant/cpu-review-source.json',sha256=file_hash(ROOT/'docs/benchmarks/data/quant/cpu-review-source.json')),identity='gpup-quant-report-v1',source_tree_sha256=identity['source_tree_sha256'],cpu_admission=v['cpu_admission'],planned_attempts=104,attempts=sum(r['status'] not in ['unexecuted','cpu_admission_refusal'] for r in rows),verified=sum(r['verified'] for r in rows),certified_timings=sum(r['kind']=='timing' and r['certified'] for r in rows),profiles=profiles,comparisons=comparisons,rows=rows,categories_ns=charges,task_gpu_ns=sum(charges.values()),cumulative_gpu_ns=cumulative,ledger_events=len(events),ledger_sha256=file_hash(d/'ledger.jsonl'))
 def main():
- r=report();write_json(ROOT/'artifacts/gpup-quant-v1/report-reviewed.json',r);write_json(ROOT/'docs/benchmarks/data/quant/report.json',r)
+ from lp_quant_report_output import report_output
+ p=argparse.ArgumentParser();p.add_argument('--output',type=Path);a=p.parse_args();output=report_output(a.output,kind='quant')
+ r=report();write_json(output,r)
  lines=['# Bounded matrix quantization: GPUP-7','', 'Status: bounded research evaluation under accepted ADR-0040. No supported preset.','',f"Retained {r['attempts']} of {r['planned_attempts']} planned attempts; independently verified {r['verified']} endpoints and certified {r['certified_timings']}/96 timing cells.",'','| Configuration | Verified timings | Certified timings |','| --- | ---: | ---: |']
  for c in protocol()['configurations']:
   cells=[x for x in r['rows'] if x['kind']=='timing' and x['configuration']==c['id']];lines.append(f"| {c['id']} | {sum(x['verified'] for x in cells)} / 12 | {sum(x['certified'] for x in cells)} / 12 |")
@@ -138,5 +143,5 @@ def main():
  'review excludes incomplete horizons and CPU fallback from GPU timing claims,',
  'with unchanged numerical results and charges. The original report is retained.',
  'The fixed comparison includes uniform/selective binary16, CUDA E4M3/E5M2,','matched FP64 with the same conservative step/audits and unchanged tuned FP64.','','Full pinned-native, ordinary device, new product/controller differentials,','18 fixed-work endpoint/replay pairs and four scoped sanitizers precede the study.','Exact sources, executable/image identities, raw outputs and all outcomes are','retained under artifacts/gpup-quant-v1; historical evidence remains separate.','',f"Task GPU charge: {r['task_gpu_ns']/1e9:.9f} / 3600 seconds.",f"Cumulative charge: {r['cumulative_gpu_ns']/1e9:.9f} / 25202.574545061 seconds.",f"Ledger: {r['ledger_events']} events, SHA-256",r['ledger_sha256']+'.','', 'No vector FP16/FP8 quantization, Tensor Core or combined-policy conclusion follows.','GPUP-8 needs its own conditional admission contract; unused allowance reserves nothing.']
- (ROOT/'docs/benchmarks/lp-quantization-gpup7.md').write_text('\n'.join(lines)+'\n');print({k:r[k] for k in ['attempts','verified','certified_timings','task_gpu_ns','cumulative_gpu_ns','ledger_events','ledger_sha256']})
+ markdown=report_output(output.with_suffix('.md'));markdown.write_text('\n'.join(lines)+'\n');print({k:r[k] for k in ['attempts','verified','certified_timings','task_gpu_ns','cumulative_gpu_ns','ledger_events','ledger_sha256']})
 if __name__=='__main__':main()

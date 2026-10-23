@@ -236,7 +236,13 @@ fn invalid_device_windows_are_named_and_conservatively_charged() {
             match self.0 {
                 0 => a.started = 0,
                 1 => a.primal[0] = f64::NAN,
-                _ => a.pre = None,
+                2 => a.pre = None,
+                3 => a.counts.nonzero_t = u64::MAX,
+                4 => a.counts.coarse_pass = u64::MAX,
+                5 => a.counts.guard_products = u64::MAX,
+                6 => a.counts.uncertain = u64::MAX,
+                7 => a.counts.accepted_nonzero_f = 1,
+                _ => a.counts.useful_windows = 1,
             };
             Ok(a)
         }
@@ -251,7 +257,7 @@ fn invalid_device_windows_are_named_and_conservatively_charged() {
     )
     .unwrap();
     e.restrict_step(op.step).unwrap();
-    for kind in 0..3 {
+    for kind in 0..9 {
         let o = run(
             &e,
             &op,

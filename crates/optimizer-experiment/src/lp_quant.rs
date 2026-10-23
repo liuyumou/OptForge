@@ -17,6 +17,67 @@ use std::{
 fn invalid(e: impl ToString) -> ValidationError {
     ValidationError::new(ErrorKind::Document, e.to_string())
 }
+/// Require the serialized object/array/scalar shapes, including enum strings.
+/// Serde also accepts positional structs and object-shaped unit enums.
+pub(crate) fn same_shape(a: &serde_json::Value, b: &serde_json::Value) -> bool {
+    use serde_json::Value;
+    match (a, b) {
+        (Value::Object(a), Value::Object(b)) => {
+            a.len() == b.len()
+                && b.iter()
+                    .all(|(k, v)| a.get(k).is_some_and(|x| same_shape(x, v)))
+        }
+        (Value::Array(a), Value::Array(b)) => {
+            a.len() == b.len() && a.iter().zip(b).all(|(a, b)| same_shape(a, b))
+        }
+        (Value::Null, Value::Null)
+        | (Value::Bool(_), Value::Bool(_))
+        | (Value::String(_), Value::String(_))
+        | (Value::Number(_), Value::Number(_)) => true,
+        _ => false,
+    }
+}
+pub(crate) fn promotion_history(op: &Operator, o: &Outcome) -> Result<(), ValidationError> {
+    let initial = optimizer_lp::quant::Promotion::new(op);
+    let count = |mask: &[bool]| {
+        op.tiles
+            .iter()
+            .zip(mask)
+            .filter(|(_, m)| **m)
+            .map(|(t, _)| t.count as u64)
+            .sum::<u64>()
+    };
+    let (mut generation, mut promoted, mut native, mut iteration) =
+        (initial.generation, count(&initial.mask), initial.native, 0);
+    for t in &o.transitions {
+        if t.generation != generation + 1
+            || t.generation > o.promotion.generation
+            || t.iteration < iteration
+            || t.iteration > o.iterations
+            || t.promoted_coefficients <= promoted
+            || t.promoted_coefficients > op.values.len() as u64
+            || native
+            || t.reason.is_empty()
+            || t.native && t.promoted_coefficients != op.values.len() as u64
+            || !t.native
+                && (t.promoted_coefficients * 4 > op.values.len() as u64
+                    || t.generation > 8
+                    || op.settings.policy == optimizer_lp::quant::Policy::Uniform)
+        {
+            return Err(invalid("quant transition metadata"));
+        }
+        (generation, promoted, native, iteration) =
+            (t.generation, t.promoted_coefficients, t.native, t.iteration);
+    }
+    if generation != o.promotion.generation
+        || promoted != count(&o.promotion.mask)
+        || native != o.promotion.native
+        || generation == initial.generation && o.promotion != initial
+    {
+        return Err(invalid("quant promotion history"));
+    }
+    Ok(())
+}
 #[derive(Clone, Debug, PartialEq, Serialize)]
 pub struct Request {
     pub schema_version: u32,
@@ -49,7 +110,11 @@ deserialize_required_object!(Request {
 impl Request {
     pub fn from_json(b: &[u8]) -> Result<Self, ValidationError> {
         crate::lp::unique_json(b)?;
-        let r: Self = serde_json::from_slice(b).map_err(invalid)?;
+        let raw: serde_json::Value = serde_json::from_slice(b).map_err(invalid)?;
+        let r: Self = serde_json::from_value(raw.clone()).map_err(invalid)?;
+        if !same_shape(&raw, &serde_json::to_value(&r).map_err(invalid)?) {
+            return Err(invalid("quant request JSON shape"));
+        }
         r.validate()?;
         Ok(r)
     }
@@ -145,7 +210,7 @@ impl Evidence {
                 (serde_json::Value::Array(a), serde_json::Value::Array(b)) => {
                     a.len() == b.len() && a.iter().zip(b).all(|(a, b)| keys(a, b))
                 }
-                _ => true,
+                _ => same_shape(a, b),
             }
         }
         if !keys(&raw, &serde_json::to_value(&parsed).map_err(invalid)?) {
@@ -168,6 +233,8 @@ impl Evidence {
                 && (!expected.diagnostic
                     || self.executed_device.is_some()
                     || self.launches != 0
+                    || self.upload_bytes != 0
+                    || self.readback_bytes != 0
                     || self.device_peak_bytes != 0)
         {
             return Err(invalid("quant executor identity"));
@@ -211,6 +278,19 @@ impl Evidence {
         {
             return Err(invalid("quant outcome dimensions/counters"));
         }
+        if self.executor == "gpu" {
+            let products = 2 * u128::from(o.work.proposals);
+            let size = op.rows.max(op.columns).max(1) as u128;
+            let upload_limit = u128::from(self.device_peak_bytes)
+                + 10 * 4 * op.tiles.len().max(1) as u128
+                + 8 * size * products;
+            if u128::from(self.launches) > products
+                || u128::from(self.upload_bytes) > upload_limit
+                || u128::from(self.readback_bytes) > 12 * size * products
+            {
+                return Err(invalid("quant physical resource counters"));
+            }
+        }
         let bits = |a: &[f64], b: &[f64]| {
             a.len() == b.len() && a.iter().zip(b).all(|(a, b)| a.to_bits() == b.to_bits())
         };
@@ -234,18 +314,7 @@ impl Evidence {
         {
             return Err(invalid("quant failure metadata"));
         }
-        let mut last = 0;
-        for t in &o.transitions {
-            if t.generation <= last
-                || t.generation > o.promotion.generation
-                || t.iteration > o.iterations
-                || t.promoted_coefficients > op.values.len() as u64
-                || t.reason.is_empty()
-            {
-                return Err(invalid("quant transition metadata"));
-            }
-            last = t.generation;
-        }
+        promotion_history(&op, o)?;
         let a = assessment(
             &model,
             &p,
@@ -527,5 +596,41 @@ mod tests {
         a.outcome.scaled_primal[0] = 0.;
         c.outcome.scaled_primal[0] = -0.;
         assert!(!replay_matches(&a, &c));
+    }
+    #[test]
+    fn noncanonical_enums_and_resigned_resource_counters_are_rejected() {
+        let (b, r) = fixture();
+        let mut raw = serde_json::to_value(&r).unwrap();
+        raw["settings"]["format"] = serde_json::json!({"fp16":null});
+        assert!(Request::from_json(&serde_json::to_vec(&raw).unwrap()).is_err());
+        let e = execute(&b, r.clone(), true, &CancellationToken::new()).unwrap();
+        for field in ["upload_bytes", "readback_bytes"] {
+            let mut bad = e.clone();
+            if field == "upload_bytes" {
+                bad.upload_bytes = 1;
+            } else {
+                bad.readback_bytes = 1;
+            }
+            bad.payload_sha256 = payload(&bad).unwrap();
+            assert!(bad.verify(&b, &r).is_err());
+        }
+        for kind in 0..3 {
+            let mut bad = e.clone();
+            bad.executor = "gpu".into();
+            bad.executed_device = Some(r.device.clone());
+            match kind {
+                0 => bad.launches = u64::MAX,
+                1 => bad.upload_bytes = u64::MAX,
+                _ => bad.readback_bytes = u64::MAX,
+            }
+            bad.payload_sha256 = payload(&bad).unwrap();
+            assert!(bad.verify(&b, &r).is_err());
+        }
+        if !e.outcome.transitions.is_empty() {
+            let mut bad = e.clone();
+            bad.outcome.transitions.clear();
+            bad.payload_sha256 = payload(&bad).unwrap();
+            assert!(bad.verify(&b, &r).is_err());
+        }
     }
 }

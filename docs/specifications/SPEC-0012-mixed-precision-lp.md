@@ -594,3 +594,12 @@ The completed resident evaluation certifies 36/108 planned timing cells, with
 and 21 verified operator endpoints. Full native/device/replay/sanitizer gates pass;
 all 313 LP and 21 operator endpoints freshly verify. No useful quantized solve
 benefit or supported preset follows; the remaining extensions stay gated.
+
+PR acceptance strengthens these existing boundaries without changing formats,
+budgets, steps or kernels: prepared coefficients/layouts/summaries are read-only;
+invalid promotion IDs leave the complete generation unchanged; malformed window
+counters produce a charged named device failure before aggregation. Standalone
+verification checks canonical JSON shapes, complete monotone promotion histories
+and bounded launch/transfer accounting. Profile eligibility additionally requires
+a completed successful worker. The [CPU-only PR review](../benchmarks/lp-quant-pr-review.md)
+preserves both historical studies and records separate source/acceptance evidence.

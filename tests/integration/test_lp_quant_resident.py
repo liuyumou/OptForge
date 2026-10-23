@@ -10,7 +10,7 @@ from validate_artifacts import SchemaSnapshot
 
 class ResidentContracts(unittest.TestCase):
  def test_allocation_and_roster_fit_unchanged_authority(self):
-  v=protocol();parent=read_json(ROOT/'benchmarks/configs/lp-quant-v1.json');roster=list(jobs(v))
+  v=read_json(CONFIG);parent=read_json(ROOT/'benchmarks/configs/lp-quant-v1.json');roster=list(jobs(v))
   self.assertEqual(len(roster),117);self.assertEqual(len(micro_jobs(v)),3)
   self.assertEqual(sum(effective(v,j)[2]+6 for j in roster if j['kind']=='timing'),2268)
   self.assertEqual(sum(effective(v,j)[2]+6 for j in roster if j['kind']=='profile')+108,432)
@@ -26,7 +26,7 @@ class ResidentContracts(unittest.TestCase):
   with self.assertRaises(Exception):validator.validate(bad)
 
  def test_cpu_refusals_remain_in_denominator(self):
-  v=protocol();a=read_json(ROOT/v['cpu_admission']['path']);eligible={(r['model'],r['configuration']):r['eligible'] for r in a['rows']}
+  v=read_json(CONFIG);a=read_json(ROOT/v['cpu_admission']['path']);eligible={(r['model'],r['configuration']):r['eligible'] for r in a['rows']}
   self.assertEqual(len(eligible),72);self.assertEqual(sum(r['useful_low'] for r in a['rows']),0)
   timing=[j for j in jobs(v) if j['kind']=='timing'];self.assertEqual(len(timing),108)
   self.assertEqual(sum(eligible[(j['instance']['id'],j['configuration']['id'])] for j in timing),36)
@@ -41,6 +41,30 @@ class ResidentContracts(unittest.TestCase):
   for field,value in [('stop','time_limit'),('stop','certified'),('iterations',1999),('failure',dict(reason='device_failure'))]:
    bad=copy.deepcopy(e);bad['outcome']['core'][field]=value;self.assertFalse(profile_complete(bad,2000))
   bad=copy.deepcopy(e);bad['outcome']['counts']['uncertain']=32;self.assertFalse(profile_complete(bad,2000))
+
+ def test_interrupted_or_failed_workers_cannot_supply_profile_comparisons(self):
+  from report_lp_quant_resident import profile_eligible
+  e=dict(executor='gpu',request=dict(diagnostic=True,horizon=2000),outcome=dict(horizon=2000,core=dict(stop='work_horizon',iterations=2000,failure=None),counts=dict(uncertain=0)))
+  trial=dict(status='completed');worker=dict(reason='completed',returncode=0)
+  self.assertTrue(profile_eligible(e,2000,True,trial,worker))
+  self.assertFalse(profile_eligible(e,2000,False,trial,worker))
+  self.assertFalse(profile_eligible(e,2000,True,dict(status='interrupted'),worker))
+  for w in [None,dict(reason='time_limit',returncode=0),dict(reason='completed',returncode=1)]:
+   self.assertFalse(profile_eligible(e,2000,True,trial,w))
+
+ def test_pr_report_outputs_cannot_overwrite_history_or_aliases(self):
+  import tempfile,os
+  from lp_quant_report_output import report_output,DIRECTORY
+  for old in ['artifacts/gpup-quant-v1/report.json','artifacts/gpup-quant-v1/report-reviewed.json','artifacts/gpup-quant-resident-v1/report.json','docs/benchmarks/data/quant/report.json','docs/benchmarks/data/quant-resident/report.json','docs/benchmarks/lp-quantization-gpup7.md']:
+   with self.assertRaises(ValueError):report_output(ROOT/old)
+  with tempfile.TemporaryDirectory(dir=ROOT/'target') as d:
+   p=Path(d)/'original.json';p.write_text('unchanged')
+   with tempfile.TemporaryDirectory(dir=DIRECTORY if DIRECTORY.is_dir() else ROOT/'target') as out:
+    alias=Path(out)/'alias.json';alias.symlink_to(p)
+    with self.assertRaises(ValueError):report_output(alias)
+    alias.unlink();os.link(p,alias)
+    with self.assertRaises(ValueError):report_output(alias)
+   self.assertEqual(p.read_text(),'unchanged')
 
  def test_fallback_never_counts_as_resident_success(self):
   from report_lp_quant_resident import successful_solve

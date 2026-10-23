@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — quantization PR review (2026-10-23)
+
+- Make prepared matrix coefficients, layouts and error summaries immutable;
+  reject invalid promotion IDs atomically and corrupted device-window counters
+  before aggregation. Preserve the measured arithmetic and CUDA bodies.
+- Reject noncanonical JSON shapes, inconsistent promotion histories and impossible
+  launch/transfer counters in standalone research verification. Keep interrupted
+  workers out of profile comparisons and review outputs separate from history.
+- Preserve both studies, all failed attempts and source cohorts. Rebuilt host
+  verifiers and CPU-only PR acceptance are recorded in a separate review report.
+
 ## Unreleased — GPUP-7R resident quantization (2026-10-22)
 
 - Accept ADR-0041 and allocate 3600 GPU seconds within unchanged ceilings. Add

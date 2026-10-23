@@ -62,6 +62,18 @@ fn canonical_tiles_transpose_norm_and_generation() {
     assert!(preparation_bytes(1, 1, (1 << 23) + 1).is_err());
 }
 #[test]
+fn invalid_promotion_is_atomic() {
+    let m = model(160);
+    let p = LinearProgram::new(&m).unwrap();
+    let e = Engine::new(&p, method());
+    let op = Operator::new(&e, Settings::new(Format::Fp16, Policy::Selective)).unwrap();
+    let mut state = Promotion::new(&op);
+    let before = state.clone();
+    assert!(!state.promote(&op, &[0, usize::MAX]));
+    assert_eq!(state, before);
+    state.validate(&op).unwrap();
+}
+#[test]
 fn checkpoint_binds_origin_and_preserves_physical_work() {
     let m = model(2);
     let p = LinearProgram::new(&m).unwrap();
