@@ -5,6 +5,18 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
+GPUP-8 latency planning (2026-10-23): the user requests CPU-only diagnosis and a
+bounded completion proposal, including repaired aggregate CPU admission. The
+separate diagnosis is docs/benchmarks/lp-tensor-latency-diagnosis.md. ADR-0044 is
+proposed, not accepted: at most 1806 GPU seconds (990 screening, 320 ablations,
+496 repeatability) and 2050 CPU seconds after a 400-CPU-second diagnosis charge,
+all within original ceilings. No new GPU work or numerical implementation is
+authorized by the proposal. Current cgroup controls are read-only; delegated
+task containment and one shared coordinator must pass CPU preflight before
+preparation. Preserve the historical uncertified overlap; prospective admission
+cannot certify it retroactively. Keep all 17362 ledger events and every measured
+source/image/worker/report exact. GPUP-8 remains incomplete and GPUP-9 unstarted.
+
 GPUP-8 continuation handoff (2026-10-23): the user explicitly approved
 ADR-0043's loss-preserving residual correction and separate frozen study using
 only the original unspent allowance. All 60 timings certify; all 30 Tensor solves

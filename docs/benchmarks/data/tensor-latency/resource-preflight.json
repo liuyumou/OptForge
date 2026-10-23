@@ -1,0 +1,46 @@
+{
+  "cgroup_membership": "0::/",
+  "controls": {
+    "cgroup.controllers": {
+      "present": true,
+      "value": "cpuset cpu io memory hugetlb pids rdma misc",
+      "writable": false
+    },
+    "cgroup.subtree_control": {
+      "present": true,
+      "value": "",
+      "writable": false
+    },
+    "cpu.max": {
+      "present": true,
+      "value": "9000000 100000",
+      "writable": false
+    },
+    "cpu.stat": {
+      "present": true,
+      "value": "usage_usec 92664643616\nuser_usec 76744242311\nsystem_usec 15920401304\nnr_periods 10275564\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0",
+      "writable": false
+    },
+    "memory.max": {
+      "present": true,
+      "value": "214748364800",
+      "writable": false
+    },
+    "memory.peak": {
+      "present": true,
+      "value": "31189921792",
+      "writable": false
+    },
+    "memory.swap.max": {
+      "present": true,
+      "value": "214748364800",
+      "writable": false
+    }
+  },
+  "gpu_seconds": 0,
+  "identity": "gpup8-cpu-admission-capability-v1",
+  "mode": "read-only",
+  "reason": "Task controllers are read-only; enclosing limits do not enforce four cores/8 GiB.",
+  "required_action": "Host-provided delegated task cgroup before ADR-0044 preparation; refuse if absent.",
+  "task_delegation_available": false
+}

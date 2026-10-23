@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — GPUP-8 latency diagnosis (2026-10-23)
+
+- Add a hash-bound CPU-only diagnosis distinguishing unchanged tuned timings
+  from research-wrapper profiles and identifying shared preparation/policy costs.
+- Propose ADR-0044 with repaired aggregate CPU admission, compact preparation,
+  a proved tighter norm and an equivalent device audit, within existing ceilings.
+  No new numerical implementation or GPU study is authorized by this proposal.
+- Preserve the historical CPU overlap, all measured evidence and the exact ledger.
+
 ## Unreleased — GPUP-8 loss-preserving continuation (2026-10-23)
 
 - Accept ADR-0043 for a separate residual-corrected INT8/FP16/BF16 research path

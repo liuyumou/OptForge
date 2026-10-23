@@ -28,6 +28,20 @@ not a required winner. The final recipe follows measurements and ablations; an
 experiment that finds the tuned baseline faster is a useful negative result.
 This track follows C6 but does not complete C7, C9, or the general C10 runner.
 
+## GPUP-8 latency diagnosis and proposed cost continuation (2026-10-23)
+
+The [CPU-only diagnosis](../benchmarks/lp-tensor-latency-diagnosis.md) identifies
+shared preparation, conservative norm restriction and host audits as the main
+costs; the forced original-tuned profile is a research wrapper, distinct from
+the unchanged timing control. [Proposed ADR-0044](../decisions/ADR-0044-tensor-cost-continuation.md)
+requires repaired aggregate CPU admission, compact preparation, a proved tighter
+norm and an equivalent device reference audit. It proposes at most 1806 GPU and
+2050 CPU seconds within the remaining allocations after a 400-CPU-second diagnosis
+charge, with CPU/cost refusal gates before timings. Current cgroup controls are
+read-only; delegated task containment is a prerequisite. The proposal is not
+accepted and grants no execution, retries, resource increases or GPUP-9 work.
+The historical CPU overlap remains uncertified; new admission is prospective.
+
 ## GPUP-8 residual continuation: latency gain incomplete (2026-10-23)
 
 Explicitly approved [ADR-0043](../decisions/ADR-0043-tensor-residual-continuation.md)

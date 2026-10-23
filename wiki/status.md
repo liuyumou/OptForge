@@ -1,5 +1,10 @@
 # Project Status
 
+[GPUP-8 latency diagnosis](../docs/benchmarks/lp-tensor-latency-diagnosis.md) is
+complete on CPU. [ADR-0044](../docs/decisions/ADR-0044-tensor-cost-continuation.md)
+proposes repaired CPU admission and one bounded cost continuation; it is not
+accepted and launches no GPU work. GPUP-8 remains incomplete.
+
 [GPUP-8 residual continuation](../docs/benchmarks/lp-tensor-residual-gpup8.md)
 now qualifies useful INT8/FP16/BF16 solves on both dense models: 60/60 timings
 certify overall, twelve full profiles and 120 LP records verify. All six adjusted

@@ -1,5 +1,17 @@
 # Known Failures and Limitations
 
+## GPUP-8 latency and CPU admission follow-up
+
+The [CPU-only diagnosis](../docs/benchmarks/lp-tensor-latency-diagnosis.md)
+separates shared preparation/policy costs from Tensor arithmetic. Existing forced
+tuned profiles use a research wrapper and cannot supply phase attribution for
+unchanged tuned timings. Per-tree CPU monitoring allowed overlapping four-worker
+admission and four-job compilation. Current cgroup controls are read-only and
+do not enforce task limits; delegated task containment is required by
+[proposed ADR-0044](../docs/decisions/ADR-0044-tensor-cost-continuation.md).
+The proposal remains unaccepted. Historical overlap stays uncertified; new
+source-bound resource admission must pass before any new device reservation.
+
 ## GPUP-8 residual continuation lacks a certified latency gain
 
 Initial CPU admission and native compilation overlapped with four workers/jobs

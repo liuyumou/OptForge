@@ -280,6 +280,8 @@ tasks:
     status: in_progress
     depends_on: [GPUP-7R]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    # CPU-only latency diagnosis complete; ADR-0044 proposes 1806 GPU/2050 CPU s,
+    # contingent on explicit acceptance and repaired aggregate CPU admission.
     acceptance: "ADR-0043 continuation: useful INT8/FP16/BF16 solves qualify, 60/60 timings certify, 12 complete profiles, 120 verified LP records; all six adjusted latency comparisons fail; GPUP-8 incomplete on gain and uncertified initial CPU concurrency; combined 825.114032275 GPU s, 17362 events; no GPUP-9 progression"
   - id: GPUP-9
     title: Run controlled precision experiments and ablations

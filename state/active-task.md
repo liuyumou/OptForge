@@ -1,5 +1,41 @@
 # Active Task
 
+## GPUP-8 latency diagnosis and bounded completion proposal (2026-10-23)
+
+Status: CPU-only diagnosis/proposal complete; user requests diagnosis and a concrete bounded proposal,
+including repaired CPU resource admission. This slice reads retained profiles
+and sources on CPU, writes a separate diagnosis/proposed ADR, and runs applicable
+CPU/native/docs/smoke acceptance. It authorizes no new GPU job or arithmetic.
+Acceptance: reproducible phase/work accounting from frozen evidence, source-based
+causal distinctions, exact task/phase/CPU headroom, enforceable prospective CPU
+admission and explicit stop/completion gates. Preserve every historical receipt,
+source/image/worker/report and the exact 17362-event ledger prefix.
+Likely files: separate diagnosis tool/report/receipt, proposed ADR-0044, roadmap,
+backlog, known failures and task status. Budget: at most 400 CPU seconds charged
+conservatively in full against the 2465.177154838 CPU seconds remaining; zero
+GPU seconds; four aggregate execution slots, 8 GiB RSS, 64 MiB new artifacts.
+Heavy jobs run sequentially; Cargo/Rayon/native pools stay within four workers.
+The proposal must fit the remaining resources after this diagnosis charge;
+unused allowance does not authorize new cells, retries, GPUP-9 or publication.
+
+
+Acceptance: separate diagnosis binds all 72 retained study LP endpoints, their
+workers/trials and the exact settled ledger; no solve/device execution or fresh
+numerical reverification runs. Counterexamples protect exclusive cost aggregation
+and distinguish actual tuned controls from research-wrapper profiles. Full
+pinned-native tools/check.sh passes 366 Python tests, Rust/native/dependencies,
+historical replay, 144 documentation pages and smoke. Stable gate source hash:
+b8d9d2fbd8a5242dfba4ffb21e45d4067b04c718d80fe7b3c4b31f6fd8617569.
+Gate CPU time is 234.500760 s; sampled peak process-tree RSS 1650266112 bytes;
+heavy jobs were sequential, affinity four CPUs, build slots four/test threads one.
+This diagnostic gate does not establish ADR-0044 delegated-containment admission.
+Charge the full 400-second diagnosis reservation; remaining CPU allowance is
+2065.177154838 s. The proposed 2050 CPU / 1806 GPU-second continuation fits the
+unchanged caps but remains unaccepted. Its CPU delegation prerequisite is absent
+in this container. Preserve the historical overlap and all old evidence.
+Receipt: docs/benchmarks/data/tensor-latency/acceptance.json. GPUP-8 stays incomplete;
+no GPUP-9, new GPU cells, numerical implementation, publication or merge.
+
 ## GPUP-8 residual continuation result (2026-10-23)
 
 CPU resource audit: initial CPU admission (four workers) overlapped the first
