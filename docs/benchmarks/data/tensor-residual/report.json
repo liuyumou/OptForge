@@ -1,0 +1,1402 @@
+{
+  "acceptance_endpoints": [
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-int8-tensor.endpoint.json",
+      "sha256": "cf67bb33361c4be80bf19edeae4e37d0240edf7c089972cc28f1e6cf4220daa0"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-int8-tensor.endpoint.json.replay.json",
+      "sha256": "eb6b06338d7fc2b7c1007e233105660e06208437b0a76c2ecbe5fd2f22f9b42f"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-fp16-tensor.endpoint.json",
+      "sha256": "31447cffc8795fde76554a1af9da30d3ac3fbe686e83d3b684ef31eb144cefd0"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-fp16-tensor.endpoint.json.replay.json",
+      "sha256": "7515711d0e567a756a5a7fe77edfa4b618e53e42af592d98087fe160eca71342"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-bf16-tensor.endpoint.json",
+      "sha256": "5934a073729dd85966cd83d676a539bf4eb4306fafc3e949dfd2d1de9b2663c8"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-bf16-tensor.endpoint.json.replay.json",
+      "sha256": "21f149f751bbd0afa42956c202c66f514466f7c24a226d295730248c586a558a"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-component-simt.endpoint.json",
+      "sha256": "1684523106197dd3a029f4d5a38d045df0c00e0996afaaca17ba7a79d96e68ef"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-component-simt.endpoint.json.replay.json",
+      "sha256": "51893dcfd9b6d1bc94c01721e88ca55d6a78edfa1249a02942dde80e34e0bbdc"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-matched-fp64.endpoint.json",
+      "sha256": "10539f735b0941151ec4d0d806489959dec34e410261322691ae7df484447595"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-matched-fp64.endpoint.json.replay.json",
+      "sha256": "bcf8dcdb10b4491f1f78bedef9e769a6423d55f8d6ba9f9d81f1f27f630b32d3"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-tuned-fp64.endpoint.json",
+      "sha256": "ba8d7822781334976fbea2d5dfe971ef0383b2138b298f1fdd473034ad6133e9"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-development-dense_block-1024-tuned-fp64.endpoint.json.replay.json",
+      "sha256": "463846c0f898a2900a3949f0d012bac30b24a1af50e2c5d96a7dd37c55c02a27"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-int8-tensor.endpoint.json",
+      "sha256": "0a939900855847e684026d2f5bb7fdb42ab3314656d985289c73ea32496540eb"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-int8-tensor.endpoint.json.replay.json",
+      "sha256": "8d918a9fcec83e95569029b805adcbb6973cb350bec9991ce46e89a50c6af172"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-fp16-tensor.endpoint.json",
+      "sha256": "81de33e361d4e5e7329aee12c6cebad1993c12a92398de64fc6d24d54667cd40"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-fp16-tensor.endpoint.json.replay.json",
+      "sha256": "ad6b22e28fd04dd899ff138ec97a32a0f559d096126c1d9d3bd4636441e7ec1e"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-bf16-tensor.endpoint.json",
+      "sha256": "e4b721df4d2caef1e16e965fa99f22c6c4482c84ee22997b698fa8626bbe8aa3"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-bf16-tensor.endpoint.json.replay.json",
+      "sha256": "e7f2d7e43eb75a6a14bab5f13c3a48550996a6785c995eebdea429a3967cf316"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-component-simt.endpoint.json",
+      "sha256": "db7ce2966b781befcf19cde94699005fa6f856813140cf7194bdf1628d68bf23"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-component-simt.endpoint.json.replay.json",
+      "sha256": "f9c3526715fcb88d55bc4fd431e8f0c3ad4fe48f641a05988c8b2036a5c4b13f"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-matched-fp64.endpoint.json",
+      "sha256": "5e38e0dc061d235e534ab0b8f4d5cb250a04454f98d1d2a9a2965fde98bcf75a"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-matched-fp64.endpoint.json.replay.json",
+      "sha256": "872bfd09ad9fd4624e06d1af432fb0a8c01d9022a41f9e84cbce1991a65a71a3"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-tuned-fp64.endpoint.json",
+      "sha256": "a607dec6522e9cc170236299a93ab6f523bc111082660467c1ece00388b283fc"
+    },
+    {
+      "path": "artifacts/gpup-tensor-residual-v1/acceptance-v1/project/gpup-extension-dense_block-65536-tuned-fp64.endpoint.json.replay.json",
+      "sha256": "549a77b53280bedac4234a65ede6b9c2d80c2018b9952b15bfbc788643de7e6b"
+    }
+  ],
+  "acceptance_verified": 24,
+  "categories_ns": {
+    "accept": 197986092163,
+    "profile": 67444213966,
+    "timing": 322826798512
+  },
+  "certified_latency_gain": false,
+  "certified_timings": 60,
+  "comparisons": [
+    {
+      "configuration": "int8-tensor",
+      "coverage_equal": true,
+      "model": "gpup-development-dense_block-1024",
+      "paired": 5,
+      "result": {
+        "confidence": 0.9916666666666667,
+        "gain": false,
+        "interval": [
+          0.728085538380588,
+          0.929149444377004
+        ],
+        "multiplicity": 6,
+        "speedup": 0.7516777833328048
+      }
+    },
+    {
+      "configuration": "int8-tensor",
+      "coverage_equal": true,
+      "model": "gpup-extension-dense_block-65536",
+      "paired": 5,
+      "result": {
+        "confidence": 0.9916666666666667,
+        "gain": false,
+        "interval": [
+          0.6039321469259442,
+          0.6143209261906156
+        ],
+        "multiplicity": 6,
+        "speedup": 0.6092863113618511
+      }
+    },
+    {
+      "configuration": "fp16-tensor",
+      "coverage_equal": true,
+      "model": "gpup-development-dense_block-1024",
+      "paired": 5,
+      "result": {
+        "confidence": 0.9916666666666667,
+        "gain": false,
+        "interval": [
+          0.6163953667426275,
+          0.8300015539504543
+        ],
+        "multiplicity": 6,
+        "speedup": 0.739372355271957
+      }
+    },
+    {
+      "configuration": "fp16-tensor",
+      "coverage_equal": true,
+      "model": "gpup-extension-dense_block-65536",
+      "paired": 5,
+      "result": {
+        "confidence": 0.9916666666666667,
+        "gain": false,
+        "interval": [
+          0.5969793841438499,
+          0.6111743766845764
+        ],
+        "multiplicity": 6,
+        "speedup": 0.6039700352506141
+      }
+    },
+    {
+      "configuration": "bf16-tensor",
+      "coverage_equal": true,
+      "model": "gpup-development-dense_block-1024",
+      "paired": 5,
+      "result": {
+        "confidence": 0.9916666666666667,
+        "gain": false,
+        "interval": [
+          0.535568523288087,
+          0.7731941914399099
+        ],
+        "multiplicity": 6,
+        "speedup": 0.6411286682323769
+      }
+    },
+    {
+      "configuration": "bf16-tensor",
+      "coverage_equal": true,
+      "model": "gpup-extension-dense_block-65536",
+      "paired": 5,
+      "result": {
+        "confidence": 0.9916666666666667,
+        "gain": false,
+        "interval": [
+          0.5842133656280863,
+          0.6017547852149039
+        ],
+        "multiplicity": 6,
+        "speedup": 0.5895048751686993
+      }
+    }
+  ],
+  "cpu_admission_refusals": 0,
+  "cpu_cohorts": [
+    {
+      "cohort": "cpu-admission",
+      "executable_sha256": "05639130440a207385365f9a7edf2ef3b09aa707a1579da927333bbd90ee3340",
+      "image_sha256": "47afa4aec47f2e4975dca7ac96bce3a7701fcf5d8e8332e5be382bd99b9d399d",
+      "source_archive": {
+        "path": "artifacts/gpup-tensor-residual-v1/cpu-admission/source.tar",
+        "sha256": "9153a6cfc04433a14ef3a1a1c61814c5cc4801a2a0478731de65825f15a4b887"
+      },
+      "source_tree_sha256": "2636c45623630bf4e74809c3c112375f09a48c045ad3f412208713ecc8bc6e14",
+      "verified": 24
+    }
+  ],
+  "cpu_verified": 24,
+  "cumulative_gpu_ns": 22184699888064,
+  "identity": "gpup-tensor-residual-report-v1",
+  "ledger_events": 17362,
+  "ledger_sha256": "e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5",
+  "micro": [
+    {
+      "artifacts": {
+        "endpoint": null,
+        "raw_cost": null,
+        "request": {
+          "path": "gpup-tensor-residual-v1-profile-micro-0.request.json",
+          "sha256": "06ed70de7b31ec8fa5c6d847241654fb38ba4a96681136899dbfe2d8009b0378"
+        },
+        "stderr": {
+          "path": "gpup-tensor-residual-v1-profile-micro-0.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "path": "gpup-tensor-residual-v1-profile-micro-0.stdout",
+          "sha256": "69ef3e57a8400704a98a6b7caecb1d6453eeb2a311d3c28eb5110097fa57d117"
+        },
+        "worker": {
+          "path": "gpup-tensor-residual-v1-profile-micro-0.worker.json",
+          "sha256": "055e6b6be5d290b1c294254530534e6fba69a5ab4bd5f56acf36f9d3ac95d9bc"
+        }
+      },
+      "charged_ns": 692409798,
+      "id": "gpup-tensor-residual-v1-profile-micro-0",
+      "job": {
+        "category": "profile",
+        "id": "gpup-tensor-residual-v1-profile-micro-0",
+        "kind": "micro",
+        "repetition": 0
+      },
+      "status": "completed"
+    },
+    {
+      "artifacts": {
+        "endpoint": null,
+        "raw_cost": null,
+        "request": {
+          "path": "gpup-tensor-residual-v1-profile-micro-1.request.json",
+          "sha256": "8945c2e3d2eea29cfd7315e6359718eaa0aae19e5c91408978f0d2e0bdbb6381"
+        },
+        "stderr": {
+          "path": "gpup-tensor-residual-v1-profile-micro-1.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "path": "gpup-tensor-residual-v1-profile-micro-1.stdout",
+          "sha256": "69ef3e57a8400704a98a6b7caecb1d6453eeb2a311d3c28eb5110097fa57d117"
+        },
+        "worker": {
+          "path": "gpup-tensor-residual-v1-profile-micro-1.worker.json",
+          "sha256": "6ae677ba5d4190a75d08a8fb60ef1513e71c1a77f4f55e1b28b1ffe482eec912"
+        }
+      },
+      "charged_ns": 1679466061,
+      "id": "gpup-tensor-residual-v1-profile-micro-1",
+      "job": {
+        "category": "profile",
+        "id": "gpup-tensor-residual-v1-profile-micro-1",
+        "kind": "micro",
+        "repetition": 1
+      },
+      "status": "completed"
+    },
+    {
+      "artifacts": {
+        "endpoint": null,
+        "raw_cost": null,
+        "request": {
+          "path": "gpup-tensor-residual-v1-profile-micro-2.request.json",
+          "sha256": "c2a16e96b80f6d3511262f4bb17b89ae024b026d2aab9250c8b52971c6beae44"
+        },
+        "stderr": {
+          "path": "gpup-tensor-residual-v1-profile-micro-2.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "path": "gpup-tensor-residual-v1-profile-micro-2.stdout",
+          "sha256": "67bd83f4e5d932b517e696aacd038991febe3ccd9f469903441b1841855ec03b"
+        },
+        "worker": {
+          "path": "gpup-tensor-residual-v1-profile-micro-2.worker.json",
+          "sha256": "b6b7f2a4dcb5d6c2ab164c03c5cc4315c421af0197f12cdfcf9c3bae2d1d6215"
+        }
+      },
+      "charged_ns": 1309124921,
+      "id": "gpup-tensor-residual-v1-profile-micro-2",
+      "job": {
+        "category": "profile",
+        "id": "gpup-tensor-residual-v1-profile-micro-2",
+        "kind": "micro",
+        "repetition": 2
+      },
+      "status": "completed"
+    }
+  ],
+  "planned_study_cells": 75,
+  "profiles": [
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-tuned-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-component-simt",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-fp16-tensor",
+      "kind": "profile",
+      "mma_instructions": 4096000,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-int8-tensor",
+      "kind": "profile",
+      "mma_instructions": 2048000,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-bf16-tensor",
+      "kind": "profile",
+      "mma_instructions": 14336000,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-matched-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-bf16-tensor",
+      "kind": "profile",
+      "mma_instructions": 917504000,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-int8-tensor",
+      "kind": "profile",
+      "mma_instructions": 131072000,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-component-simt",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-fp16-tensor",
+      "kind": "profile",
+      "mma_instructions": 262144000,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-matched-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-tuned-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    }
+  ],
+  "rows": [
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-0-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "seconds": 0.564648725,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-0-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 4505600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "seconds": 0.680298395,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-0-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 15769600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "seconds": 0.730280609,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-0-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 2252800,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "seconds": 0.607704959,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-0-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "seconds": 0.593824678,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-0-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "seconds": 0.596572205,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-0-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "seconds": 10.304616008,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-0-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "seconds": 10.362584113,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-0-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 1009254400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "seconds": 10.739557691,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-0-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 144179200,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "seconds": 10.375397618,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-0-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "seconds": 6.314272824,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-0-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 288358400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "seconds": 10.451877913,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-1-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "seconds": 0.680920293,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-1-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "seconds": 0.46231963,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-1-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 2252800,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "seconds": 0.614776491,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-1-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 15769600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "seconds": 0.720693096,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-1-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 4505600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "seconds": 0.625008261,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-1-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "seconds": 0.658122431,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-1-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "seconds": 10.32440873,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-1-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 288358400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "seconds": 10.527191933,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-1-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "seconds": 6.331021616,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-1-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 1009254400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "seconds": 10.795924513,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-1-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "seconds": 10.35144625,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-1-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 144179200,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "seconds": 10.459914974,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-2-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 4505600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "seconds": 0.740291705,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-2-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 15769600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "seconds": 0.71773424,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-2-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "seconds": 0.607746238,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-2-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "seconds": 0.456312377,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-2-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "seconds": 0.596535877,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-2-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 2252800,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "seconds": 0.607291524,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-2-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "seconds": 10.303085374,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-2-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "seconds": 10.40294879,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-2-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 144179200,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "seconds": 10.477599661,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-2-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 1009254400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "seconds": 10.696398078,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-2-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 288358400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "seconds": 10.531542181,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-2-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "seconds": 6.436608728,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-3-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 15769600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "seconds": 0.855177519,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-3-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "seconds": 0.597043308,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-3-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 4505600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "seconds": 0.597606003,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-3-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "seconds": 0.608621226,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-3-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "seconds": 0.458006161,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-3-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 2252800,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "seconds": 0.624160556,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-3-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "seconds": 6.257743207,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-3-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 144179200,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "seconds": 10.361666023,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-3-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 288358400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "seconds": 10.482343902,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-3-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "seconds": 10.371203022,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-3-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "seconds": 10.352773711,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-3-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 1009254400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "seconds": 10.711400278,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-4-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "seconds": 0.664992346,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-4-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "seconds": 0.619163407,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-4-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 2252800,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "seconds": 0.634697169,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-4-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "seconds": 0.46211383,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-4-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 15769600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "seconds": 0.720781729,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-development-dense_block-1024-4-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 4505600,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "seconds": 0.617618244,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-4-fp16-tensor",
+      "kind": "timing",
+      "mma_instructions": 288358400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "seconds": 10.392686678,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-4-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "seconds": 6.345960753,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-4-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "seconds": 10.373080884,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-4-bf16-tensor",
+      "kind": "timing",
+      "mma_instructions": 1009254400,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "seconds": 10.779620737,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-4-component-simt",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "seconds": 10.398146973,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-timing-gpup-extension-dense_block-65536-4-int8-tensor",
+      "kind": "timing",
+      "mma_instructions": 144179200,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "seconds": 10.390881098,
+      "status": "completed",
+      "useful_windows": 66,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-tuned-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-component-simt",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-fp16-tensor",
+      "kind": "profile",
+      "mma_instructions": 4096000,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-int8-tensor",
+      "kind": "profile",
+      "mma_instructions": 2048000,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-bf16-tensor",
+      "kind": "profile",
+      "mma_instructions": 14336000,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-profile-gpup-development-dense_block-1024-0-matched-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-bf16-tensor",
+      "kind": "profile",
+      "mma_instructions": 917504000,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-int8-tensor",
+      "kind": "profile",
+      "mma_instructions": 131072000,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-component-simt",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-fp16-tensor",
+      "kind": "profile",
+      "mma_instructions": 262144000,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 60,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-matched-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-residual-v1-profile-gpup-extension-dense_block-65536-0-tuned-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    }
+  ],
+  "source_tree_sha256": "71beaf4a3dc5aa4da85cce8995d41c65046bf7b0082b07284e65ee46aba78439",
+  "status": "incomplete",
+  "task_gpu_ns": 588257104641,
+  "verified": 72,
+  "working_families": true
+}

@@ -5,6 +5,33 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
+GPUP-8 continuation handoff (2026-10-23): the user explicitly approved
+ADR-0043's loss-preserving residual correction and separate frozen study using
+only the original unspent allowance. All 60 timings certify; all 30 Tensor solves
+perform 2200 logical updates with 66 useful windows and no native promotion.
+Useful integer/floating families now qualify, but all six multiplicity-adjusted
+latency comparisons fail. GPUP-8 remains incomplete on gain; no GPUP-9.
+The initial four-worker CPU admission overlapped a four-job native build;
+aggregate concurrency/RSS were not recorded. This preparation resource gate
+is not certified, despite passing software/device checks. Preserve the separate
+cpu-concurrency-limitation.json receipt and all initial evidence.
+All twelve profiles, three product diagnostics, 280 CPU/device product pairs,
+five controller pairs, twelve fixed-work/replay pairs, 66 ordinary GPU tests and
+four sanitizers pass. Independent CPU verification accepts 120 new LP records;
+all 1272 prior inventory files and both historical ledger prefixes remain exact.
+Separate report/receipts: docs/benchmarks/lp-tensor-residual-gpup8.md and
+ docs/benchmarks/data/tensor-residual. Continuation charge 588.257104641 GPU s;
+combined GPUP-8 825.114032275 / 3000, cumulative 22184.699888064 /
+25202.574545061. Ledger 17362 events, SHA-256
+e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5.
+Final stable-source software acceptance passes 363 Python tests plus Rust/native,
+dependencies, historical replay, 142 docs pages and smoke; 39 source-only tests
+pass. All 248 GPUP-8 LP records freshly verify. Software acceptance does not
+certify the recorded initial CPU concurrency limitation.
+The bounded continuation is exhausted; no retry, replacement cell, new numerical
+budget, supported preset or later-task allowance follows. Preserve every source,
+image, worker and report. Local commit after final acceptance; no publication/merge.
+
 GPUP-8 authorization (2026-10-23): the user explicitly approves ADR-0042's
 INT8 and FP16/BF16 component Tensor plan and 3000 GPU seconds inside existing
 ceilings (1600 screening, 550 ablations, 850 repeatability). This supersedes the

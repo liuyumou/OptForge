@@ -1,0 +1,16 @@
+{
+  "identity": "gpup-tensor-residual-cpu-concurrency-limitation-v1",
+  "status": "not_certified",
+  "gpu_seconds": 0,
+  "observed_overlap": true,
+  "phases": [
+    "initial CPU admission with max_workers=4",
+    "first native build with CARGO_BUILD_JOBS=4"
+  ],
+  "maximum_configured_jobs_per_phase": 4,
+  "maximum_possible_aggregate_configured_jobs": 8,
+  "aggregate_peak_active_jobs_recorded": false,
+  "aggregate_rss_of_overlap_recorded": false,
+  "resource_acceptance": "initial aggregate four-job limit not certified",
+  "effect": "Preserve all numerical/device/study evidence and charges; do not claim fully passed task resource acceptance. Subsequent acceptance stages are sequential."
+}

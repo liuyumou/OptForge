@@ -31,7 +31,14 @@ class QuantPrReview(unittest.TestCase):
             extension=extended[f['path']]
             self.assertEqual(extension['before_sha256'],f['sha256'])
             self.assertEqual(file_hash(ROOT/extension['frozen_path']),f['sha256'])
-            self.assertEqual(current,extension['after_sha256'])
+            if current!=extension['after_sha256']:
+                continuation=read_json(ROOT/'docs/benchmarks/data/tensor-residual/prerequisite-source-bridge.json')
+                followup={row['path']:row for row in continuation['files']}[f['path']]
+                self.assertEqual(followup['before_sha256'],extension['after_sha256'])
+                self.assertEqual(file_hash(ROOT/followup['frozen_path']),extension['after_sha256'])
+                self.assertEqual(current,followup['after_sha256'])
+            else:
+                self.assertEqual(current,extension['after_sha256'])
 
     def test_arithmetic_controller_and_authority_bodies_remain_exact(self):
         import hashlib

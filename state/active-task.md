@@ -1,5 +1,85 @@
 # Active Task
 
+## GPUP-8 residual continuation result (2026-10-23)
+
+CPU resource audit: initial CPU admission (four workers) overlapped the first
+native build (four jobs). Aggregate active jobs/RSS were not recorded, so the
+four-job preparation constraint is not certified. Record this additional
+resource-acceptance limitation separately; later gates and GPU work are
+sequential. Receipt: docs/benchmarks/data/tensor-residual/cpu-concurrency-limitation.json.
+
+
+Status: incomplete on certified total-latency gain; bounded ADR-0043
+implementation/evaluation finished under explicit user approval. The separate
+[report](../docs/benchmarks/lp-tensor-residual-gpup8.md) retains all 75 cells:
+60/60 timings certify, twelve profiles finish 2000 logical updates and three
+product diagnostics pass. All thirty Tensor timings perform 2200 logical updates,
+66 useful windows and no native promotion. Working integer/floating families now
+qualify; all six multiplicity-adjusted gain comparisons fail. INT8 median seconds
+are 0.614776 versus tuned 0.462114 at 1024 rows, and 10.390881 versus 6.331022 at
+65536 rows. No preset or GPUP-9 progression follows.
+
+CPU admission retains all eight models/six configurations, with complete useful
+400-update trajectories on both dense models. Exact proofs pass 27164 cases,
+12288 original-unit components, 961 BF16 products and 4608 lane addresses.
+Device acceptance passes 280 product pairs, five controller pairs, twelve
+fixed-work/replay pairs, all 66 ordinary GPU tests and four scoped sanitizers.
+Independent verification accepts all 120 continuation LP records. All 1272
+historical GPUP-8 inventory files remain byte-identical. Initial CPU acceptance
+failures and their separate registration receipt remain visible; no measured
+historical source/image/payload is changed or re-signed.
+
+Continuation GPU charge is 588.257104641 s: timing 322.826798512,
+profiles/diagnostics 67.444213966, acceptance
+197.986092163, inside 1440/525/700 reservations. Combined
+GPUP-8 charge is 825.114032275 / 3000 s; cumulative
+22184.699888064 / 25202.574545061 s. Ledger 17362 events, SHA-256
+e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5; exact 17200/17132-event prefixes preserved.
+All sources/executables/images/workers/requests/endpoints/reports remain separate
+under artifacts/gpup-tensor-residual-v1 and docs/benchmarks/data/tensor-residual.
+Final CPU/native/docs/smoke delivery acceptance follows this measured result.
+No new cells, retries, numerical relaxation, next-task allowance, publication or
+merge. Local commit after applicable acceptance remains authorized.
+
+
+Final software delivery acceptance (2026-10-23): stable-source pinned-native
+tools/check.sh passes 363 Python tests, Rust/native/dependencies, historical
+replay, 142 documentation pages and smoke. All 248 GPUP-8 LP records freshly
+verify (120 continuation plus 128 historical); the historical machine report
+reproduces exactly. Source-only portability passes 39 tests without study
+artifacts/native dependencies. Final gate source SHA-256 is
+ed68a106e072dfe19d568f32898d7f39aed1b4fe0eb14e4d6ff266939508511a.
+Conservative continuation CPU accounting is 8797.192667 / 10000
+seconds; combined GPUP-8 accounting is 19134.822845 / 21600.
+Monitored process-tree RSS peaks at 2671681536 bytes;
+combined task artifacts total 1818373856 bytes, below 32 GiB.
+These measurements do not certify the unrecorded aggregate four-job/RSS bound
+during the initial admission/build overlap. Software acceptance passes; task
+completion and full preparation-resource acceptance remain unmet. Separate
+delivery receipt: docs/benchmarks/data/tensor-residual/acceptance.json.
+Subsequent edits only record acceptance metadata; numerical sources stay exact.
+
+## GPUP-8 continuation diagnosis (2026-10-23)
+
+Status: bounded continuation evaluated; see the result above. The user explicitly
+approved ADR-0043 and its bounded
+continuation using only the existing unspent allowance. First
+bounded task: reproduce the range failure and prepare a concrete continuation
+contract with CPU arithmetic/admission evidence. The ADR-0042 frozen study stays
+exhausted; no historical cell, payload, image, report or ledger event is replaced
+or retried. Completion still requires useful integer/floating Tensor solves and
+a multiplicity-adjusted certified total-latency gain at unchanged tolerances.
+ADR-0043 now admits revised arithmetic and a separate study: 1440 screening,
+525 ablation and 700 repeatability seconds maximum reservation; no ceiling
+increases. Independent arithmetic proofs and CPU admission precede device work. Acceptance: exact-real counterexamples and a reviewable bounded plan;
+full CPU/native/docs/smoke gate for any committed changes. Likely files: separate
+continuation diagnosis/tooling, proposed decision/plan, task state and evidence.
+Diagnostic budget: 1800 CPU seconds, four jobs, 8 GiB RSS, 256 MiB new artifacts,
+zero GPU seconds. Preserve all 17200 ledger events, SHA-256
+5af7782a384ac73226f339d98d0b33e320518053c1accdf67c1339db36d0e0f1,
+and the exact 17132-event prefix. This entry grants no additional resources,
+GPUP-9 progression, publication or merge.
+
 ## GPUP-8 implementation (2026-10-23)
 
 Status: incomplete; bounded implementation/evaluation finished under explicit

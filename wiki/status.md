@@ -1,5 +1,12 @@
 # Project Status
 
+[GPUP-8 residual continuation](../docs/benchmarks/lp-tensor-residual-gpup8.md)
+now qualifies useful INT8/FP16/BF16 solves on both dense models: 60/60 timings
+certify overall, twelve full profiles and 120 LP records verify. All six adjusted
+latency comparisons fail, and initial CPU preparation concurrency is uncertified;
+GPUP-8 remains incomplete. The original evaluation
+below remains historical; GPUP-9 is unstarted and no preset follows.
+
 [GPUP-8](../docs/benchmarks/lp-tensor-gpup8.md) retains its bounded implementation
 and evaluation under ADR-0042 but remains incomplete. INT8/FP16/BF16 operators
 pass device/replay/sanitizer gates, while useful solve windows are CPU-refused.

@@ -53,3 +53,7 @@ required-features = ["precision-research"]
 [[example]]
 name = "lp_precision_tensor"
 required-features = ["precision-research"]
+
+[[example]]
+name = "lp_precision_tensor_residual"
+required-features = ["precision-research"]

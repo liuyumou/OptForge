@@ -77,3 +77,6 @@ pub mod quant_resident;
 /// ADR-0042 isolated hybrid Tensor Core research.
 #[cfg(feature = "precision-research")]
 pub mod tensor;
+/// Loss-preserving component Tensor research under ADR-0043.
+#[cfg(feature = "precision-research")]
+pub mod tensor_residual;

@@ -1,0 +1,345 @@
+{
+  "$id": "lp-tensor-residual-study-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acceptance_output": {
+      "const": "artifacts/gpup-tensor-residual-v1/acceptance-v1"
+    },
+    "acceptance_work": {
+      "const": 64
+    },
+    "additional_gpu_seconds": {
+      "const": 0
+    },
+    "allocated_gpu_seconds": {
+      "const": 2665
+    },
+    "analysis": {
+      "const": {
+        "comparisons": 6,
+        "confidence": 0.95,
+        "resamples": 10000,
+        "seed": 17002
+      }
+    },
+    "artifact_bytes": {
+      "const": 34359738368
+    },
+    "budget_authority": {
+      "const": {
+        "path": "benchmarks/configs/lp-campaign-v1.json",
+        "sha256": "a65d0ac2ce2b2676453d0e15752f887af1ee759318bed8b4538ae3f6f0cf137f"
+      }
+    },
+    "categories": {
+      "const": {
+        "accept": {
+          "phase": "repeatability",
+          "seconds": 700
+        },
+        "profile": {
+          "phase": "ablations",
+          "seconds": 525
+        },
+        "timing": {
+          "phase": "screening",
+          "seconds": 1440
+        }
+      }
+    },
+    "combined_cap_seconds": {
+      "const": 2665
+    },
+    "configurations": {
+      "const": [
+        {
+          "backend": "lp-tensor-residual-v1",
+          "id": "int8-tensor",
+          "layout": "int8",
+          "settings": {
+            "audit_absolute": 1e-07,
+            "audit_interval": 32,
+            "audit_relative": 1e-07,
+            "dual_budget": 1e-07,
+            "format": "fp64",
+            "policy": "uniform",
+            "primal_budget": 1e-07,
+            "rounding": "nearest_even",
+            "tile_size": 32
+          }
+        },
+        {
+          "backend": "lp-tensor-residual-v1",
+          "id": "fp16-tensor",
+          "layout": "fp16",
+          "settings": {
+            "audit_absolute": 1e-07,
+            "audit_interval": 32,
+            "audit_relative": 1e-07,
+            "dual_budget": 1e-07,
+            "format": "fp64",
+            "policy": "uniform",
+            "primal_budget": 1e-07,
+            "rounding": "nearest_even",
+            "tile_size": 32
+          }
+        },
+        {
+          "backend": "lp-tensor-residual-v1",
+          "id": "bf16-tensor",
+          "layout": "bf16",
+          "settings": {
+            "audit_absolute": 1e-07,
+            "audit_interval": 32,
+            "audit_relative": 1e-07,
+            "dual_budget": 1e-07,
+            "format": "fp64",
+            "policy": "uniform",
+            "primal_budget": 1e-07,
+            "rounding": "nearest_even",
+            "tile_size": 32
+          }
+        },
+        {
+          "backend": "lp-tensor-residual-v1",
+          "id": "component-simt",
+          "layout": "simt",
+          "settings": {
+            "audit_absolute": 1e-07,
+            "audit_interval": 32,
+            "audit_relative": 1e-07,
+            "dual_budget": 1e-07,
+            "format": "fp64",
+            "policy": "uniform",
+            "primal_budget": 1e-07,
+            "rounding": "nearest_even",
+            "tile_size": 32
+          }
+        },
+        {
+          "backend": "lp-tensor-residual-v1",
+          "id": "matched-fp64",
+          "layout": "segmented",
+          "settings": {
+            "audit_absolute": 1e-07,
+            "audit_interval": 32,
+            "audit_relative": 1e-07,
+            "dual_budget": 1e-07,
+            "format": "fp64",
+            "policy": "uniform",
+            "primal_budget": 1e-07,
+            "rounding": "nearest_even",
+            "tile_size": 32
+          }
+        },
+        {
+          "backend": "cuda-lp-tuned",
+          "execution": {
+            "allocation": "resident",
+            "fusion": "separate",
+            "reduction": "warp32_v1",
+            "schema_version": 1,
+            "uploads": "necessary"
+          },
+          "id": "tuned-fp64",
+          "layout": "original_tuned",
+          "settings": {
+            "audit_absolute": 1e-07,
+            "audit_interval": 32,
+            "audit_relative": 1e-07,
+            "dual_budget": 1e-07,
+            "format": "fp64",
+            "policy": "uniform",
+            "primal_budget": 1e-07,
+            "rounding": "nearest_even",
+            "tile_size": 32
+          }
+        }
+      ]
+    },
+    "cpu_cap_seconds": {
+      "const": 10000
+    },
+    "cumulative_gpu_ns": {
+      "const": 25202574545061
+    },
+    "decision": {
+      "const": {
+        "path": "docs/decisions/ADR-0043-tensor-residual-continuation.md",
+        "sha256": "46c36d4cf4d79bf7a51b35510e4b520772b88553600f7806f7a8a13fff4083f2"
+      }
+    },
+    "device": {
+      "const": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48"
+    },
+    "id": {
+      "const": "gpup-tensor-residual-v1"
+    },
+    "limits": {
+      "const": {
+        "cleanup_seconds": 2,
+        "device_buffer_bytes": 1073741824,
+        "host_rss_bytes": 8589934592,
+        "output_bytes": 33554432,
+        "poll_ms": 10,
+        "solve_seconds": 10
+      }
+    },
+    "lp_settings": {
+      "const": {
+        "check_interval": 200,
+        "iteration_limit": 50000,
+        "power_iterations": 20,
+        "preconditioner": {
+          "pock_chambolle_alpha": 1.0,
+          "ruiz_passes": 10
+        },
+        "primal_weight": {
+          "derivative": 0.0,
+          "integral": 0.0,
+          "proportional": 0.5
+        },
+        "restart": {
+          "artificial": 0.36,
+          "necessary": 0.8,
+          "sufficient": 0.2
+        },
+        "schema_version": 1
+      }
+    },
+    "manifests": {
+      "const": [
+        {
+          "path": "benchmarks/manifests/lp-development-v1.json",
+          "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+        },
+        {
+          "path": "benchmarks/manifests/lp-development-extension-v1.json",
+          "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+        }
+      ]
+    },
+    "oracle_seed": {
+      "const": 17022
+    },
+    "order_seed": {
+      "const": 17001
+    },
+    "output": {
+      "const": "artifacts/gpup-tensor-residual-v1/study-v1"
+    },
+    "phase_gpu_seconds": {
+      "const": {
+        "ablations": 8100,
+        "baseline": 1800,
+        "finalists": 9000,
+        "repeatability": 5300,
+        "screening": 11800
+      }
+    },
+    "planned_attempts": {
+      "const": 75
+    },
+    "prior_events": {
+      "const": 17200
+    },
+    "prior_gpu_ns": {
+      "const": 21596442783423
+    },
+    "prior_ledger_sha256": {
+      "const": "5af7782a384ac73226f339d98d0b33e320518053c1accdf67c1339db36d0e0f1"
+    },
+    "profile_instances": {
+      "const": [
+        "gpup-development-dense_block-1024",
+        "gpup-extension-dense_block-65536"
+      ]
+    },
+    "profile_seconds": {
+      "const": 29
+    },
+    "profile_work": {
+      "const": 2000
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "solve": {
+      "const": {
+        "iteration_limit": 50000,
+        "node_limit": null,
+        "schema_version": 1,
+        "seed": 17,
+        "threads": 1,
+        "time_limit_ms": 10000,
+        "tolerances": {
+          "absolute": 1e-09,
+          "integrality": 1e-09,
+          "relative": 1e-09
+        }
+      }
+    },
+    "timing_instances": {
+      "const": [
+        "gpup-development-dense_block-1024",
+        "gpup-extension-dense_block-65536"
+      ]
+    },
+    "timing_repetitions": {
+      "const": 5
+    },
+    "total_gpu_seconds": {
+      "const": 28800
+    },
+    "verification_seconds": {
+      "const": 120
+    },
+    "model_byte_limit": {
+      "const": 134217728
+    },
+    "partition": {
+      "const": "development"
+    }
+  },
+  "required": [
+    "acceptance_output",
+    "acceptance_work",
+    "additional_gpu_seconds",
+    "allocated_gpu_seconds",
+    "analysis",
+    "artifact_bytes",
+    "budget_authority",
+    "categories",
+    "combined_cap_seconds",
+    "configurations",
+    "cpu_cap_seconds",
+    "cumulative_gpu_ns",
+    "decision",
+    "device",
+    "id",
+    "limits",
+    "lp_settings",
+    "manifests",
+    "oracle_seed",
+    "order_seed",
+    "output",
+    "phase_gpu_seconds",
+    "planned_attempts",
+    "prior_events",
+    "prior_gpu_ns",
+    "prior_ledger_sha256",
+    "profile_instances",
+    "profile_seconds",
+    "profile_work",
+    "schema_version",
+    "solve",
+    "timing_instances",
+    "timing_repetitions",
+    "total_gpu_seconds",
+    "verification_seconds",
+    "model_byte_limit",
+    "partition"
+  ],
+  "type": "object"
+}

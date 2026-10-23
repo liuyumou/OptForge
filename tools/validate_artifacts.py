@@ -231,6 +231,8 @@ def main():
         validator("lp-quant-study-v1.schema.json").validate(read_json(ROOT / "benchmarks/configs/lp-quant-v1.json"))
         validator("lp-quant-resident-study-v1.schema.json").validate(read_json(ROOT / "benchmarks/configs/lp-quant-resident-v1.json"))
         validator("lp-tensor-study-v1.schema.json").validate(read_json(ROOT / "benchmarks/configs/lp-tensor-v1.json"))
+        validator("lp-tensor-residual-study-v1.schema.json").validate(read_json(ROOT / "benchmarks/configs/lp-tensor-residual-v1.json"))
+        validator("lp-tensor-residual-evidence-v1.schema.json").validate(read_json(ROOT / "tests/fixtures/lp-tensor-residual-evidence-v1.json"))
         validator("lp-tensor-evidence-v1.schema.json").validate(read_json(ROOT / "tests/fixtures/lp-tensor-evidence-v1.json"))
         validator("lp-campaign-v6.schema.json").validate(read_json(ROOT / "benchmarks/configs/lp-copt-comparison-v1.json"))
         validator("run-config-v1.schema.json").validate(read_json(ROOT / "examples/run-config.json"))

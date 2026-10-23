@@ -1,0 +1,51 @@
+{
+  "identity": "gpup-tensor-residual-prerequisite-registration-bridge-v1",
+  "status": "passed",
+  "gpu_seconds": 0,
+  "decision": "docs/decisions/ADR-0043-tensor-residual-continuation.md",
+  "scope": "New isolated module/example and schema/anti-atomic registration; strict chained source-boundary test only. No historical numerical body changes.",
+  "files": [
+    {
+      "path": "tests/integration/test_lp_quant_pr_review.py",
+      "before_sha256": "47020aaa4ec873fa7442c0618580a4a28c3c65b1bea30a3b31f93759cbd6b5d7",
+      "after_sha256": "e7e4feb3f9c7fada8a229b709524f53cac7f3c54f5e29af0bf5188ec9b160638",
+      "frozen_path": "tests/fixtures/tensor-prerequisite-originals/tests__integration__test_lp_quant_pr_review.py.source"
+    },
+    {
+      "path": "crates/optimizer-experiment/Cargo.toml",
+      "before_sha256": "c997039648adda58aef0d959f8075e99ab1de2cd002e4e0ef8a3ffeca5d67b50",
+      "after_sha256": "b670f85ea0522a539542da221d8670ccf95bed4ae0031be002955a20769c95cc",
+      "frozen_path": "tests/fixtures/tensor-prerequisite-originals/crates__optimizer-experiment__Cargo.toml.source"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lib.rs",
+      "before_sha256": "f077c11d1707b15c298223ac6bb1e98d7cb47f2cdcfcbffb1d24766bf2ba6446",
+      "after_sha256": "98a10f10107dca56f18a33a961a03b40de483acb84c01a440bb483761286054c",
+      "frozen_path": "tests/fixtures/tensor-prerequisite-originals/crates__optimizer-experiment__src__lib.rs.source"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/lib.rs",
+      "before_sha256": "dc30ca1bb70dd767d678d7467e05b3c564ded722e3465f564c158f74a2fed506",
+      "after_sha256": "860ba9437efaeedf6b060ceb285b292660e53d5f8097e7301c0ae3c2fc90eb7e",
+      "frozen_path": "tests/fixtures/tensor-prerequisite-originals/crates__optimizer-lp-cuda__src__lib.rs.source"
+    },
+    {
+      "path": "crates/optimizer-lp/src/lib.rs",
+      "before_sha256": "d5dd6e81edc23411fd81194d13939b8c41e2e79701ea77d22fdbe598a0c6ee21",
+      "after_sha256": "d12efe5a9edda4b6cc1f6c54a7f33c6ed36a8ee78d49a9c5aabb7547e12e215b",
+      "frozen_path": "tests/fixtures/tensor-prerequisite-originals/crates__optimizer-lp__src__lib.rs.source"
+    },
+    {
+      "path": "tools/check.sh",
+      "before_sha256": "7a67add1c1133de974e1338c6da124b0ffe3f37e7c4f28fdbd1487138014370d",
+      "after_sha256": "80ad2e63d47f10b2b3c3c54b17b70c9e0fadab363abf1ee7ed95ade489dc9921",
+      "frozen_path": "tests/fixtures/tensor-prerequisite-originals/tools__check.sh.source"
+    },
+    {
+      "path": "tools/validate_artifacts.py",
+      "before_sha256": "6d2b74a49dcb7d2c7ab0b530210b0dfda69645ef48a84b1877b5a51bddbe7887",
+      "after_sha256": "0440a047b4afe38b2c1bdc1020913d08db31c7c83163bcb335eb40340233ed7d",
+      "frozen_path": "tests/fixtures/tensor-prerequisite-originals/tools__validate_artifacts.py.source"
+    }
+  ]
+}

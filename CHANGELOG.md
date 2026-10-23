@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased — GPUP-8 loss-preserving continuation (2026-10-23)
+
+- Accept ADR-0043 for a separate residual-corrected INT8/FP16/BF16 research path
+  using only GPUP-8's unspent allocation. Preserve the exhausted ADR-0042 study.
+- Keep tiny vector values as explicit FP64 residuals, bound their correction
+  arithmetic and count native correction work separately from useful Tensor work.
+- Retain unchanged local budgets, original-model certification, charged replay
+  and the useful-solve/certified-latency-gain completion requirements.
+- Retain 60/60 certified timings, twelve full profiles and 120 verified LP records.
+  Useful Tensor solves qualify, but all six adjusted latency comparisons fail;
+  GPUP-8 remains incomplete. Continuation GPU charge is 588.257104641 seconds.
+- Record the initial CPU admission/build overlap explicitly: aggregate four-job
+  concurrency and RSS for that overlap are not certified.
+
 ## Unreleased — GPUP-8 hybrid component execution (2026-10-23)
 
 - Accept ADR-0042 and allocate 3000 GPU seconds within existing ceilings. Add

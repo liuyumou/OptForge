@@ -80,3 +80,6 @@ pub mod lp_quant_resident_micro;
 /// ADR-0042 isolated hybrid Tensor Core research.
 #[cfg(feature = "precision-research")]
 pub mod lp_tensor;
+/// Loss-preserving component Tensor experiment protocol.
+#[cfg(feature = "precision-research")]
+pub mod lp_tensor_residual;

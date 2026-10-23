@@ -1,5 +1,24 @@
 # Known Failures and Limitations
 
+## GPUP-8 residual continuation lacks a certified latency gain
+
+Initial CPU admission and native compilation overlapped with four workers/jobs
+configured for each. Aggregate four-job concurrency and overlap RSS are not
+certified. Preserve this resource limitation separately from numerical/device
+correctness and the latency failure; see the separate CPU concurrency receipt.
+
+
+Accepted [ADR-0043](../docs/decisions/ADR-0043-tensor-residual-continuation.md)
+repairs the ADR-0042 vector-range refusal with explicit FP64 residuals. All thirty
+Tensor timings certify with useful work on both dense models and no promotion;
+all sixty timings certify overall. Nevertheless every adjusted speedup interval
+is below one. INT8 medians are 0.614776/10.390881 s versus tuned FP64
+0.462114/6.331022 s. The [separate report](../docs/benchmarks/lp-tensor-residual-gpup8.md)
+retains all 75 cells, twelve full profiles and 120 verified LP records. GPUP-8
+remains incomplete on latency; the frozen continuation is exhausted. Preserve
+all historical evidence and exact ledger prefixes. No retry, additional study,
+preset or GPUP-9 allowance follows from unused resources.
+
 ## GPUP-8 component range admission remains incomplete
 
 Accepted [ADR-0042](../docs/decisions/ADR-0042-hybrid-tensor-components.md)
