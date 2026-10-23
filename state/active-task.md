@@ -1,5 +1,74 @@
 # Active Task
 
+## GPUP-8 implementation (2026-10-23)
+
+Status: incomplete; bounded implementation/evaluation finished under explicit
+user approval of the GPUP-8 implementation
+plan and 3000 GPU seconds from existing headroom. Implement research-only
+lp-tensor-v1 INT8/FP16/BF16 component products on selected dense 32x32 tiles,
+resident FP64 state, guarded original-unit arithmetic and fresh host authority.
+Completion requires useful INT8 and floating Tensor Core certified nontrivial
+solves plus a multiplicity-adjusted certified total-latency gain over tuned FP64.
+A refusal or no gain leaves GPUP-8 incomplete and does not authorize GPUP-9.
+Acceptance: independent integer/Fraction oracles and eight-model CPU admission;
+full pinned-native tools/check.sh; instruction/register/spill gates; ordinary and
+new device differentials, replay and four scoped sanitizers; independently
+verified frozen study. Preserve all historical sources/images/workers/reports.
+Resources: 21600 CPU seconds, four jobs, 8 GiB RSS, 2 GiB preparation, 1 GiB
+device buffers, 32 GiB artifacts. GPU allocations: screening 1600, ablations 550,
+repeatability 850 seconds; planned reservations 1560+540+816=2916 seconds.
+No ceiling increase: cumulative 25202.574545061, independent campaign 28800,
+phase ceilings baseline/screening/ablations/repeatability/finalists
+1800/11800/8100/5300/9000 seconds. Starting consumption 21359.585855789 s.
+Preserve exact 17132-event ledger prefix SHA-256
+930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035.
+Device GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 only, shared lease/activity
+admission; no substitution or study retries. Separate artifacts/gpup-tensor-v1
+and docs/benchmarks/data/tensor receipts. Local commit after applicable checks;
+publication and merge are outside this task. The approved plan is ADR-0042.
+Pre-device evidence: exact conversion/rounding (27091 cases), 12288 original-unit
+components, 961 BF16 products and 4608 lane addresses pass. Four CPU cohorts retain
+48 cells each, with the same useful-low refusals. Native gates pass up to 351
+Python tests, Rust/native/dependencies, replay, 140 docs pages and smoke. The first
+allocator preflight reserved no GPU job. The first leased device gate reproduces
+a packing-index defect, retained with 2.105369475 GPU seconds; its repair has a
+fresh CPU/image cohort before further device admission. All sources remain exact
+in their archived cohorts; current numerical source matches the latest CPU cohort.
+
+
+Final delivery acceptance: pinned-native tools/check.sh passes 353 Python tests,
+Rust/native/dependency checks, historical replay, 140 documentation pages and
+smoke, with zero GPU work. Independent verification accepts all 128 LP records.
+Full-gate source SHA-256 is 2f98dce5bb37ec0e9b363ad2a33cffc1c735ce0dbcc5c96befc5737a7a5d154f.
+Source-only portability passes 20 inherited plus nine Tensor tests with study
+artifacts/native dependencies absent and only an empty scratch build directory.
+Measured CPU jobs plus the conservative preparation/coordination allowance and
+delivery reserve account for 10337.630178 / 21600 CPU seconds; sampled process-tree RSS
+is 3535245312 bytes and retained task artifacts approximately 1.166 GiB, within caps.
+The delivery receipt is docs/benchmarks/data/tensor/acceptance.json. Subsequent
+edits only record acceptance metadata; measured numerical sources remain exact.
+
+GPUP-8 result: all 75 planned cells are retained: 27 execute and 48 are CPU-refused.
+All 20 admitted FP64 timings certify (20/60 planned); four profiles finish 2000
+logical updates. Matched profiles use 2070 physical updates and remain unclosed;
+tuned profiles use 2000 and first certify at 1400. Correct INT8/FP16/BF16 operators
+pass 260 CPU/device product pairs, five controller comparisons, four fixed-work/
+replay pairs, 66 ordinary GPU tests and all four scoped sanitizers. No useful
+component window passes CPU admission on either dense model, so working-family
+solve and certified latency-gain requirements remain unmet. GPUP-9 is not started.
+Fresh independent CPU verification accepts all 128 LP records: 96 from four CPU
+cohorts, eight device/replay and 24 study records, without normalization/re-signing.
+Separate report and receipts: docs/benchmarks/lp-tensor-gpup8.md and
+ docs/benchmarks/data/tensor. Final CPU/docs/smoke delivery gate follows this result.
+GPU charge is 236.856927634 / 3000 s (timing 92.278436607, profiles 22.601859333,
+acceptance 121.976631694, including the failed first 2.105369475-second device gate).
+Cumulative is 21596.442783423 / 25202.574545061 s. The 17200-event ledger SHA-256
+is 5af7782a384ac73226f339d98d0b33e320518053c1accdf67c1339db36d0e0f1,
+with the exact 17132-event prefix and all previous sources/images/workers/reports
+preserved. The authority preflight reserved no GPU identity. No completed identity
+was retried. Local evidence commit follows applicable acceptance; no publication,
+merge, replacement study cells, tolerance relaxation or next-task allowance.
+
 ## GPUP-7/7R PR review and integration (2026-10-23)
 
 Status: in progress. The user explicitly authorizes opening a PR, repeated review

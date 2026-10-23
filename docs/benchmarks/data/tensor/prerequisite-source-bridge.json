@@ -1,0 +1,57 @@
+{
+  "identity": "gpup-tensor-prerequisite-registration-bridge-v1",
+  "status": "passed",
+  "gpu_seconds": 0,
+  "original_receipt_sha256": "08860d5bff903f5854d551150629b5495f2981c4e318f986400a4683e4a56a5b",
+  "files": [
+    {
+      "path": "tests/integration/test_lp_quant_pr_review.py",
+      "before_sha256": "4b78ca3c4dd54e4b64894951839988b4e4ff9f7eea26d7a9d25124960060ff6a",
+      "after_sha256": "47020aaa4ec873fa7442c0618580a4a28c3c65b1bea30a3b31f93759cbd6b5d7",
+      "frozen_path": "tests/fixtures/quant-pr-review-originals/tests__integration__test_lp_quant_pr_review.py.source"
+    },
+    {
+      "path": "crates/optimizer-experiment/Cargo.toml",
+      "before_sha256": "f3e9d296b7bc21b1eefded7f569dff9aaea075f91eb118c41a6d48d24ccddceb",
+      "after_sha256": "c997039648adda58aef0d959f8075e99ab1de2cd002e4e0ef8a3ffeca5d67b50",
+      "frozen_path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-experiment__Cargo.toml.source"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lib.rs",
+      "before_sha256": "2fdfcdf359e4fcfb45882d2cf23e9bfb1b65d1c94e47b2787da09622398e1546",
+      "after_sha256": "f077c11d1707b15c298223ac6bb1e98d7cb47f2cdcfcbffb1d24766bf2ba6446",
+      "frozen_path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-experiment__src__lib.rs.source"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/lib.rs",
+      "before_sha256": "0fdbf63c6665e5c901236fd4f98a2efa13eb4e0bc7a9099c7a209d09ad0a26f4",
+      "after_sha256": "dc30ca1bb70dd767d678d7467e05b3c564ded722e3465f564c158f74a2fed506",
+      "frozen_path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-lp-cuda__src__lib.rs.source"
+    },
+    {
+      "path": "crates/optimizer-lp/Cargo.toml",
+      "before_sha256": "0b53a5fbb39ef3a0f6e82b188071e0f277640e3efe44f2b1b644cbfedb0c5ed1",
+      "after_sha256": "9dc1768aedfc32ae3cecbf8c82a72f5cf204867addf84f82ba8145b2388fe05c",
+      "frozen_path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-lp__Cargo.toml.source"
+    },
+    {
+      "path": "crates/optimizer-lp/src/lib.rs",
+      "before_sha256": "b931cefc63a64372f6d5b05bc40669aad08b808a339a6d8953c372ab54f52f55",
+      "after_sha256": "d5dd6e81edc23411fd81194d13939b8c41e2e79701ea77d22fdbe598a0c6ee21",
+      "frozen_path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-lp__src__lib.rs.source"
+    },
+    {
+      "path": "tools/check.sh",
+      "before_sha256": "b1e87f8b3b795104cd09945bb6fb4245850ff50511082adcb6b33daa97adcab4",
+      "after_sha256": "7a67add1c1133de974e1338c6da124b0ffe3f37e7c4f28fdbd1487138014370d",
+      "frozen_path": "tests/fixtures/quant-pr-review-originals/tools__check.sh.source"
+    },
+    {
+      "path": "tools/validate_artifacts.py",
+      "before_sha256": "f11a0374ea6b5df15def3ec5d9e5c0e0cd748e2cbb9b6e5796b0e4e821352401",
+      "after_sha256": "6d2b74a49dcb7d2c7ab0b530210b0dfda69645ef48a84b1877b5a51bddbe7887",
+      "frozen_path": "tests/fixtures/quant-pr-review-originals/tools__validate_artifacts.py.source"
+    }
+  ],
+  "scope": "Module/example registration, new anti-atomic/schema acceptance checks, and historical-source test continuation only. Original measured arithmetic/controller/authority bodies and original PR receipt remain exact."
+}

@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased — GPUP-8 hybrid component execution (2026-10-23)
+
+- Accept ADR-0042 and allocate 3000 GPU seconds within existing ceilings. Add
+  isolated lp-tensor-v1 INT8/FP16/BF16 components and exact tile reconstruction.
+- Add strict CPU/device admission, independent rational proofs, resource-bound
+  study and evidence verification. Retain 27 executed jobs and 48 CPU refusals,
+  20/60 certified FP64 timings, four complete profiles and 128 verified LP records.
+  GPU charge is 236.856927634 seconds; useful Tensor solve/gain gates remain unmet,
+  leaving GPUP-8 incomplete with no preset or GPUP-9 progression.
+
 ## Unreleased — quantization PR review (2026-10-23)
 
 - Make prepared matrix coefficients, layouts and error summaries immutable;

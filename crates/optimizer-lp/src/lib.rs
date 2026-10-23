@@ -73,3 +73,7 @@ pub mod quant;
 /// ADR-0041 isolated resident quantized execution contract.
 #[cfg(feature = "precision-research")]
 pub mod quant_resident;
+
+/// ADR-0042 isolated hybrid Tensor Core research.
+#[cfg(feature = "precision-research")]
+pub mod tensor;

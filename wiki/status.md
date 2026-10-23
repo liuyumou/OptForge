@@ -1,5 +1,12 @@
 # Project Status
 
+[GPUP-8](../docs/benchmarks/lp-tensor-gpup8.md) retains its bounded implementation
+and evaluation under ADR-0042 but remains incomplete. INT8/FP16/BF16 operators
+pass device/replay/sanitizer gates, while useful solve windows are CPU-refused.
+All 20 admitted FP64 timings certify (20/60 planned), four profiles finish and
+128 LP records verify. GPU charge is 236.856927634 seconds; no working-family
+solve/gain gate or supported preset follows. GPUP-9 remains unstarted.
+
 The combined GPUP-7/7R [PR review](../docs/benchmarks/lp-quant-pr-review.md)
 strengthens operator immutability, malformed-window rejection, strict evidence
 and profile eligibility. Its CPU-only source bridge and acceptance remain separate
@@ -75,8 +82,8 @@ reservation or new numerical behavior implied.
 | State | Features |
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
-| In progress | GPUP-7R resident/guard follow-up planning only |
-| Planned | GPU LP precision track (GPUP-7R contract acceptance, then GPUP-8 through GPUP-10; full expansion state remains gated), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| In progress | GPUP-8 working-family/gain qualification; bounded result retained |
+| Planned | GPU LP precision track (GPUP-8 revised admission, then GPUP-9/10; full expansion state remains gated), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
 | Experimental | Bounded research assessment scheduling under ADR-0039; bounded native-FP64-outer correction LPs and guarded FP32/anchored products under ADR-0037; bounded exact-dot cached/uncached CUDA executor under ADR-0035; opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 

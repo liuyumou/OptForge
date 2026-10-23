@@ -60,3 +60,7 @@ pub mod quant;
 /// ADR-0041 bounded resident quantized windows.
 #[cfg(feature = "precision-research")]
 pub mod quant_resident;
+
+/// ADR-0042 isolated hybrid Tensor Core research.
+#[cfg(feature = "precision-research")]
+pub mod tensor;

@@ -76,3 +76,7 @@ pub mod lp_quant_resident;
 /// ADR-0041 product/guard diagnostics, without LP certificate authority.
 #[cfg(feature = "precision-research")]
 pub mod lp_quant_resident_micro;
+
+/// ADR-0042 isolated hybrid Tensor Core research.
+#[cfg(feature = "precision-research")]
+pub mod lp_tensor;

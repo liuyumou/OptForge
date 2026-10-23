@@ -1,0 +1,1069 @@
+{
+  "acceptance_endpoints": [
+    {
+      "path": "artifacts/gpup-tensor-v1/acceptance-v2/project/gpup-development-dense_block-1024-matched-fp64.endpoint.json",
+      "sha256": "4199a87ee54e1c4a6f58cecb0ce7d0e7a11797c00058111121c167528f5de52a"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/acceptance-v2/project/gpup-development-dense_block-1024-matched-fp64.endpoint.json.replay.json",
+      "sha256": "7001c59ab625f24c816f3aed131a79485ba3602970f8806cd53b97edf3cf6b25"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/acceptance-v2/project/gpup-development-dense_block-1024-tuned-fp64.endpoint.json",
+      "sha256": "8887461a6cd54bd4270ba3903f929e2ed2dfb703867986b244d3652fbdb07789"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/acceptance-v2/project/gpup-development-dense_block-1024-tuned-fp64.endpoint.json.replay.json",
+      "sha256": "f93e5e3321e808686313d83db8cfda412e182e26074fc64621c0967c218bcf6d"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/acceptance-v2/project/gpup-extension-dense_block-65536-matched-fp64.endpoint.json",
+      "sha256": "a35ac058b231c98c3dd5468d9dbee0ab13b0c5d6b93fc52ff8b0ac19b8821bcd"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/acceptance-v2/project/gpup-extension-dense_block-65536-matched-fp64.endpoint.json.replay.json",
+      "sha256": "6955fce61781891f2b5edc10ec8b8e86649fd530af3679557acff9ea3408614a"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/acceptance-v2/project/gpup-extension-dense_block-65536-tuned-fp64.endpoint.json",
+      "sha256": "60679569f4119864020f672d46b14deeff263ea5fd7041d017325c37a81b083c"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/acceptance-v2/project/gpup-extension-dense_block-65536-tuned-fp64.endpoint.json.replay.json",
+      "sha256": "f80d0754d6ec4255e9f1329872c278349019d9212884a8380770bfaf209eb44e"
+    }
+  ],
+  "acceptance_verified": 8,
+  "categories_ns": {
+    "accept": 121976631694,
+    "profile": 22601859333,
+    "timing": 92278436607
+  },
+  "certified_latency_gain": false,
+  "certified_timings": 20,
+  "comparisons": [
+    {
+      "configuration": "int8-tensor",
+      "coverage_equal": false,
+      "model": "gpup-development-dense_block-1024",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "int8-tensor",
+      "coverage_equal": false,
+      "model": "gpup-extension-dense_block-65536",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "fp16-tensor",
+      "coverage_equal": false,
+      "model": "gpup-development-dense_block-1024",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "fp16-tensor",
+      "coverage_equal": false,
+      "model": "gpup-extension-dense_block-65536",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "bf16-tensor",
+      "coverage_equal": false,
+      "model": "gpup-development-dense_block-1024",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "bf16-tensor",
+      "coverage_equal": false,
+      "model": "gpup-extension-dense_block-65536",
+      "paired": 0,
+      "result": null
+    }
+  ],
+  "cpu_admission_refusals": 48,
+  "cpu_cohorts": [
+    {
+      "cohort": "cpu-admission",
+      "executable_sha256": "244e3c095911b5ebb4570363ad20ec32d535281bd5e6237cb14d82dc48331c48",
+      "image_sha256": "a8ffbf118e64759ba9a18a044cb903eddbf37f22bc662939cb0303ecfb22b676",
+      "source_archive": {
+        "path": "artifacts/gpup-tensor-v1/cpu-admission/source.tar",
+        "sha256": "5d2634a4e263d4ea293acfa5be9cc928a1d82e2f219ecbc86684d28db454a3ca"
+      },
+      "source_tree_sha256": "e1bacc32a82ca2a77d5c140c0fe804f6cc638c773d6ca15ddd8eea96a866417e",
+      "verified": 24
+    },
+    {
+      "cohort": "accepted-admission",
+      "executable_sha256": "244e3c095911b5ebb4570363ad20ec32d535281bd5e6237cb14d82dc48331c48",
+      "image_sha256": "a8ffbf118e64759ba9a18a044cb903eddbf37f22bc662939cb0303ecfb22b676",
+      "source_archive": {
+        "path": "artifacts/gpup-tensor-v1/accepted-admission/source.tar",
+        "sha256": "3b56159a15c79afdedd36503a13949dbd069f8be971a646f6db6d05d00818190"
+      },
+      "source_tree_sha256": "580a325061ea24bc8f285cb480e50b9880d2fcfb4d6d4d356e0a61662c0710ff",
+      "verified": 24
+    },
+    {
+      "cohort": "final-admission",
+      "executable_sha256": "036d146365c99baa3374d213be18eb5eff18f353240b0c20a22a90719cb9449c",
+      "image_sha256": "a8ffbf118e64759ba9a18a044cb903eddbf37f22bc662939cb0303ecfb22b676",
+      "source_archive": {
+        "path": "artifacts/gpup-tensor-v1/final-admission/source.tar",
+        "sha256": "d2c69d6f903f943774ca55f6168662f756c28761feaff47ca3445e108511852b"
+      },
+      "source_tree_sha256": "2e286cd6c5746f38822ed7066d1d7d62b6182b7571b51c42458beaac098cee64",
+      "verified": 24
+    },
+    {
+      "cohort": "device-fix-admission",
+      "executable_sha256": "01f098bd24102a46a9a3203811f182bcd489f5fe851f8134cd6d008a9352fc62",
+      "image_sha256": "58df34bc5d3233d7c3d955279cdf33e2f75309f3c438b284921587655a55b7a9",
+      "source_archive": {
+        "path": "artifacts/gpup-tensor-v1/device-fix-admission/source.tar",
+        "sha256": "aa4101e98c4cb99b81b9518443c595a68b1f398351031fcc1c40b262030e4a9e"
+      },
+      "source_tree_sha256": "94a1680fe0a00edb03cd4af5fb095de3f007e0751d4222db238fe5e4d0f5398d",
+      "verified": 24
+    }
+  ],
+  "cpu_verified": 96,
+  "cumulative_gpu_ns": 21596442783423,
+  "identity": "gpup-tensor-report-v1",
+  "ledger_events": 17200,
+  "ledger_sha256": "5af7782a384ac73226f339d98d0b33e320518053c1accdf67c1339db36d0e0f1",
+  "micro": [
+    {
+      "artifacts": {
+        "endpoint": null,
+        "raw_cost": null,
+        "request": {
+          "path": "gpup-tensor-v1-profile-micro-0.request.json",
+          "sha256": "1ecd3ab2766ea79ca3492c33b6a68c69d4da9536bab101e5101ae0d3173a316a"
+        },
+        "stderr": {
+          "path": "gpup-tensor-v1-profile-micro-0.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "path": "gpup-tensor-v1-profile-micro-0.stdout",
+          "sha256": "171951fa5ad2f007c097c896dcb5e09adc1dc071350ce075eac32ac662f61ac1"
+        },
+        "worker": {
+          "path": "gpup-tensor-v1-profile-micro-0.worker.json",
+          "sha256": "6e5cf8befe28c30b675c21ed85a62b91af05690988e593f9e130a5257f384a5e"
+        }
+      },
+      "charged_ns": 670942017,
+      "id": "gpup-tensor-v1-profile-micro-0",
+      "job": {
+        "category": "profile",
+        "id": "gpup-tensor-v1-profile-micro-0",
+        "kind": "micro",
+        "repetition": 0
+      },
+      "status": "completed"
+    },
+    {
+      "artifacts": {
+        "endpoint": null,
+        "raw_cost": null,
+        "request": {
+          "path": "gpup-tensor-v1-profile-micro-1.request.json",
+          "sha256": "7488c4f8666df0d5ca745280e894052765c0d3b3c3534832f0ed5359b4c4ba2a"
+        },
+        "stderr": {
+          "path": "gpup-tensor-v1-profile-micro-1.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "path": "gpup-tensor-v1-profile-micro-1.stdout",
+          "sha256": "fdcfe01f5ef4255c2b08c4d3d418c8542f63e54f4f5f1f5b3559aa439d50a331"
+        },
+        "worker": {
+          "path": "gpup-tensor-v1-profile-micro-1.worker.json",
+          "sha256": "2cc10efd024dd8263c73202e0814182ba91d2063702aefd35cd178e9bb46c327"
+        }
+      },
+      "charged_ns": 1294536598,
+      "id": "gpup-tensor-v1-profile-micro-1",
+      "job": {
+        "category": "profile",
+        "id": "gpup-tensor-v1-profile-micro-1",
+        "kind": "micro",
+        "repetition": 1
+      },
+      "status": "completed"
+    },
+    {
+      "artifacts": {
+        "endpoint": null,
+        "raw_cost": null,
+        "request": {
+          "path": "gpup-tensor-v1-profile-micro-2.request.json",
+          "sha256": "4ab361e63fd0b2176375b63a08953b39de9cc2829df47c6080a705540031a74f"
+        },
+        "stderr": {
+          "path": "gpup-tensor-v1-profile-micro-2.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "path": "gpup-tensor-v1-profile-micro-2.stdout",
+          "sha256": "fdcfe01f5ef4255c2b08c4d3d418c8542f63e54f4f5f1f5b3559aa439d50a331"
+        },
+        "worker": {
+          "path": "gpup-tensor-v1-profile-micro-2.worker.json",
+          "sha256": "84edef8949153e42f6bab86181df327056bfa674e556c5a5f429099f95cd9c28"
+        }
+      },
+      "charged_ns": 602201153,
+      "id": "gpup-tensor-v1-profile-micro-2",
+      "job": {
+        "category": "profile",
+        "id": "gpup-tensor-v1-profile-micro-2",
+        "kind": "micro",
+        "repetition": 2
+      },
+      "status": "completed"
+    }
+  ],
+  "planned_study_cells": 75,
+  "profiles": [
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-profile-gpup-development-dense_block-1024-0-tuned-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-profile-gpup-development-dense_block-1024-0-matched-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-profile-gpup-extension-dense_block-65536-0-matched-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-profile-gpup-extension-dense_block-65536-0-tuned-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    }
+  ],
+  "rows": [
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-0-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "seconds": 0.607679311,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-0-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-0-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-0-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-0-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-0-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "seconds": 0.62844545,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-0-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-0-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "seconds": 10.250545949,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-0-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-0-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-0-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "seconds": 6.353891518,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-0-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-1-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-1-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "seconds": 0.584707733,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-1-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-1-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-1-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-1-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "seconds": 0.630775745,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-1-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "seconds": 10.312325792,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-1-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-1-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "seconds": 6.322525845,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-1-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-1-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-1-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-2-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-2-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-2-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-2-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "seconds": 0.523445319,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-2-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "seconds": 0.688315712,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-2-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-2-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "seconds": 10.239453954,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-2-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-2-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-2-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-2-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-2-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "seconds": 6.331951699,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-3-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-3-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "seconds": 0.733049462,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-3-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-3-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-3-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "seconds": 0.452159298,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-3-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-3-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "seconds": 6.289456937,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-3-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-3-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-3-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-3-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "seconds": 10.339784836,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-3-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-4-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "seconds": 0.757505821,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-4-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-4-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-4-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "seconds": 0.464972429,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-4-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-development-dense_block-1024-4-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-4-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": true,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-4-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "seconds": 6.367518388,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": true,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-4-matched-fp64",
+      "kind": "timing",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "seconds": 10.290469365,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-4-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-4-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-timing-gpup-extension-dense_block-65536-4-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-profile-gpup-development-dense_block-1024-0-tuned-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-profile-gpup-development-dense_block-1024-0-component-simt",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-profile-gpup-development-dense_block-1024-0-fp16-tensor",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-profile-gpup-development-dense_block-1024-0-int8-tensor",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-profile-gpup-development-dense_block-1024-0-bf16-tensor",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-profile-gpup-development-dense_block-1024-0-matched-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-development-dense_block-1024",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-v1-profile-gpup-extension-dense_block-65536-0-bf16-tensor",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-v1-profile-gpup-extension-dense_block-65536-0-int8-tensor",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-v1-profile-gpup-extension-dense_block-65536-0-component-simt",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-v1-profile-gpup-extension-dense_block-65536-0-fp16-tensor",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "cpu_admission_refusal",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-v1-profile-gpup-extension-dense_block-65536-0-matched-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-v1-profile-gpup-extension-dense_block-65536-0-tuned-fp64",
+      "kind": "profile",
+      "mma_instructions": 0,
+      "model": "gpup-extension-dense_block-65536",
+      "profile_complete": true,
+      "repetition": 0,
+      "status": "completed",
+      "useful_windows": 0,
+      "verified": true
+    }
+  ],
+  "source_tree_sha256": "4c483954b761b2aa41c86891b450ebe835d877d35800e7edf56546358e22f228",
+  "status": "incomplete",
+  "task_gpu_ns": 236856927634,
+  "verified": 24,
+  "working_families": false
+}

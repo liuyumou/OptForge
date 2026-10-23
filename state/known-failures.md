@@ -1,5 +1,25 @@
 # Known Failures and Limitations
 
+## GPUP-8 component range admission remains incomplete
+
+Accepted [ADR-0042](../docs/decisions/ADR-0042-hybrid-tensor-components.md)
+implements bounded 56-bit block components. The two dense models select 96.97%
+of coefficients, but both lose nonzero dual values below their block integer
+unit before a useful 32-update window. Uniform sticky native replay restores
+progress while consuming charged work. The first 1024-row witness is
+2.0816681711721685e-17 at update four; the 65536-row case refuses at update three.
+CPU cohorts, witnesses and compiler receipts are retained separately. The first
+BF16 compile used 136 registers; bounded loop scheduling reaches 48 with zero
+spills. The first GPU gate caught a repeated vector-fragment input; its source/image and
+2.105369475-second charge remain. Corrected loaders pass 260 product pairs, five
+controller pairs and all four sanitizers. The frozen study retains 27 executions
+and 48 CPU refusals; all 20 admitted FP64 timings certify but no Tensor solve or
+gain qualifies. All four profiles finish; the matched endpoints remain unclosed.
+All 128 retained LP records freshly verify. Total task charge is 236.856927634 s;
+17200 ledger events retain the exact prior prefix. The bounded evaluation is
+finished and GPUP-8 remains incomplete.
+GPUP-8 cannot complete from native promotion, operator-only evidence or no gain.
+
 ## Quantization PR review preserves measured cohorts
 
 The [separate PR review](../docs/benchmarks/lp-quant-pr-review.md) repairs mutable

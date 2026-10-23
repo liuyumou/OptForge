@@ -1,0 +1,151 @@
+{
+  "acceptance_replay_verified": 8,
+  "acceptance_status": "passed",
+  "accounted_cpu_upper_seconds": 10337.630178,
+  "artifact_bytes": 1251494243,
+  "artifact_cap_bytes": 34359738368,
+  "completion_unmet": [
+    "useful_tensor_certified_nontrivial_solve",
+    "certified_total_latency_gain"
+  ],
+  "cpu_cap_seconds": 21600,
+  "cpu_cohorts": [
+    {
+      "cohort": "cpu-admission",
+      "executable_sha256": "244e3c095911b5ebb4570363ad20ec32d535281bd5e6237cb14d82dc48331c48",
+      "image_sha256": "a8ffbf118e64759ba9a18a044cb903eddbf37f22bc662939cb0303ecfb22b676",
+      "source_archive": {
+        "path": "artifacts/gpup-tensor-v1/cpu-admission/source.tar",
+        "sha256": "5d2634a4e263d4ea293acfa5be9cc928a1d82e2f219ecbc86684d28db454a3ca"
+      },
+      "source_tree_sha256": "e1bacc32a82ca2a77d5c140c0fe804f6cc638c773d6ca15ddd8eea96a866417e",
+      "verified": 24
+    },
+    {
+      "cohort": "accepted-admission",
+      "executable_sha256": "244e3c095911b5ebb4570363ad20ec32d535281bd5e6237cb14d82dc48331c48",
+      "image_sha256": "a8ffbf118e64759ba9a18a044cb903eddbf37f22bc662939cb0303ecfb22b676",
+      "source_archive": {
+        "path": "artifacts/gpup-tensor-v1/accepted-admission/source.tar",
+        "sha256": "3b56159a15c79afdedd36503a13949dbd069f8be971a646f6db6d05d00818190"
+      },
+      "source_tree_sha256": "580a325061ea24bc8f285cb480e50b9880d2fcfb4d6d4d356e0a61662c0710ff",
+      "verified": 24
+    },
+    {
+      "cohort": "final-admission",
+      "executable_sha256": "036d146365c99baa3374d213be18eb5eff18f353240b0c20a22a90719cb9449c",
+      "image_sha256": "a8ffbf118e64759ba9a18a044cb903eddbf37f22bc662939cb0303ecfb22b676",
+      "source_archive": {
+        "path": "artifacts/gpup-tensor-v1/final-admission/source.tar",
+        "sha256": "d2c69d6f903f943774ca55f6168662f756c28761feaff47ca3445e108511852b"
+      },
+      "source_tree_sha256": "2e286cd6c5746f38822ed7066d1d7d62b6182b7571b51c42458beaac098cee64",
+      "verified": 24
+    },
+    {
+      "cohort": "device-fix-admission",
+      "executable_sha256": "01f098bd24102a46a9a3203811f182bcd489f5fe851f8134cd6d008a9352fc62",
+      "image_sha256": "58df34bc5d3233d7c3d955279cdf33e2f75309f3c438b284921587655a55b7a9",
+      "source_archive": {
+        "path": "artifacts/gpup-tensor-v1/device-fix-admission/source.tar",
+        "sha256": "aa4101e98c4cb99b81b9518443c595a68b1f398351031fcc1c40b262030e4a9e"
+      },
+      "source_tree_sha256": "94a1680fe0a00edb03cd4af5fb095de3f007e0751d4222db238fe5e4d0f5398d",
+      "verified": 24
+    }
+  ],
+  "cpu_verified": 96,
+  "cumulative_gpu_ns": 21596442783423,
+  "delivery_cpu_reserve_seconds": 1000,
+  "failed_device_gate": {
+    "path": "artifacts/gpup-tensor-v1/acceptance/gpup-tensor-v1-accept-project-v1.worker.json",
+    "sha256": "8dddf77e220d09493f62e58a236a2a2bfb5934e914ed7631b33bb65f7c63ba31"
+  },
+  "failed_device_gate_gpu_ns": 2105369475,
+  "gpu_verification_seconds": 0,
+  "historical_prefix_events": 17132,
+  "historical_prefix_sha256": "930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035",
+  "identity": "gpup-tensor-delivery-v1",
+  "ledger_events": 17200,
+  "ledger_sha256": "5af7782a384ac73226f339d98d0b33e320518053c1accdf67c1339db36d0e0f1",
+  "lp_records_verified": 128,
+  "measured_cpu_seconds": 3337.6301780000003,
+  "measured_source_tree_sha256": "4c483954b761b2aa41c86891b450ebe835d877d35800e7edf56546358e22f228",
+  "native_acceptance": {
+    "path": "artifacts/gpup-tensor-v1/final-native-resources.json",
+    "sha256": "3d6b7536178101a689b5a89e3df44b413f36b9addad3a3b076f31a6f24506696"
+  },
+  "native_gate_source_tree_sha256": "2f98dce5bb37ec0e9b363ad2a33cffc1c735ce0dbcc5c96befc5737a7a5d154f",
+  "numerical_sources_identical": true,
+  "peak_process_tree_rss_bytes": 3535245312,
+  "preparation_coordination_allowance_seconds": 6000,
+  "report": {
+    "path": "docs/benchmarks/data/tensor/report.json",
+    "sha256": "c8c563ecc870bb641fc87546b8747f9770355600eba10e0f1897278514ab8465"
+  },
+  "resource_receipts": [
+    {
+      "path": "artifacts/gpup-tensor-v1/accepted-admission-resources.json",
+      "sha256": "1db8975719a043136160d22966050b868a299c1771f967b1bfb02c4934aad5ae"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/cpu-admission-resources.json",
+      "sha256": "ef237e699f4dc252470ceac2e03e15a7df0044bf9e06d485dc1088b96e6d090e"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/device-fix-admission-resources.json",
+      "sha256": "44879f085afb06a504bde8a5f144e144325e5a357e615608e78ca983fc0baef6"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/final-admission-resources.json",
+      "sha256": "c9967f454908c4ddd292657fde20a0dbd203da0e4ae8a39b41ce3eb4512557b2"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/final-native-resources.json",
+      "sha256": "3d6b7536178101a689b5a89e3df44b413f36b9addad3a3b076f31a6f24506696"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/pre-device-native-resources.json",
+      "sha256": "761b53acca57829ac95fb18a53ff35044e6f209d7eb485a3486436e98806095a"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/pre-device-native-v2-resources.json",
+      "sha256": "02cfd7073bd7cf0d104bb785dad551faf3d2d53313aa0a7ea5a0f3abf7c11d0d"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/pre-device-native-v3-resources.json",
+      "sha256": "4068d13654cccfc8bbc83e4c118cb6b6dd434681726195720b0fa47800514c9f"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/pre-device-native-v4-resources.json",
+      "sha256": "96c4fdc13bc37aa696de72de6eee51282d6327e65bcaef806d8d78a32c7f112f"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/pre-device-native-v5-resources.json",
+      "sha256": "b435c22b1d61a0c812e0142a217635e4684b4dfc8f3695bc5b80c62477a9497c"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/pre-device-native-v6-resources.json",
+      "sha256": "de24c8654a8795cba70c907d5fdd7cdef0c45a4e9d21e961bff1269fe676f3bc"
+    },
+    {
+      "path": "artifacts/gpup-tensor-v1/retained-verification-resources.json",
+      "sha256": "fea1522d8844b7ec851e4718c1174cdc55453b99f729b855058699062852abff"
+    }
+  ],
+  "retained_inventory": {
+    "path": "artifacts/gpup-tensor-v1/retained-inventory.json",
+    "sha256": "47fd929c6829454aeccee8b70963297b3a6c58051556e743012088b0e5d87f9e"
+  },
+  "source_only_portability": {
+    "native_dependencies_absent": true,
+    "passed_tests": 29,
+    "path": "artifacts/gpup-tensor-v1/source-only-portability.json",
+    "sha256": "8bf78ec4132d0c27ccc22835e0c40a08ed9a0fcc90d0e0f7a81a979b64a86294",
+    "study_artifacts_absent": true
+  },
+  "study_verified": 24,
+  "task_gpu_ns": 236856927634,
+  "task_status": "incomplete"
+}

@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: GPUP-7/7R complete; GPUP-8 conditional disposition/contract is next
+Status: GPUP-7/7R complete; GPUP-8 bounded evaluation retained; working/gain requirements incomplete
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
@@ -27,6 +27,18 @@ FP32-to-FP8 computation and Tensor Core execution are in scope. FP8 is a candida
 not a required winner. The final recipe follows measurements and ablations; an
 experiment that finds the tuned baseline faster is a useful negative result.
 This track follows C6 but does not complete C7, C9, or the general C10 runner.
+
+## GPUP-8 bounded result: incomplete (2026-10-23)
+
+The user explicitly accepts [ADR-0042](../decisions/ADR-0042-hybrid-tensor-components.md)
+and allocates 3000 GPU seconds within unchanged ceilings for INT8 and FP16/BF16
+component Tensor execution. Its [separate report](../benchmarks/lp-tensor-gpup8.md)
+records 27 executed jobs, 48 CPU refusals, 20/60 certified timings and four complete
+profiles. Correct integer/floating operators do not admit useful dense-model
+solve windows; the working-family and certified latency-gain requirements remain
+unmet. All 128 retained LP records independently verify. GPU charge is
+236.856927634 s, cumulative 21596.442783423 s; 17200 ledger events preserve the
+exact 17132-event prefix. GPUP-8 remains incomplete; GPUP-9 is not authorized.
 
 ## Current handoff: GPUP-7R complete (2026-10-23)
 

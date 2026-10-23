@@ -22,6 +22,8 @@ active_research_track: GPUP
 # SPEC-0021 and full expansion state remain draft; no preset follows.
 # 2026-10-22: user requests GPUP-7R resident/guard planning before GPUP-8.
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
+# GPUP-8's user-approved working-family/gain requirement remains unmet.
+# Do not advance GPUP-9; unused headroom reserves no later task.
 next_ready_task: GPUP-8
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
@@ -274,11 +276,11 @@ tasks:
     specification: docs/plans/lp-quant-resident-follow-up.md
     acceptance: "ADR-0041; 72-cell CPU admission/no useful quantized window; 42 executed study jobs plus 78 CPU refusals; 39 verified study LP endpoints/36 certified of 108 timings; three complete logical-2000 profiles/21 product endpoints; full native, 66 ordinary device tests, 628 vectors, 29 fixed-work/replay pairs/four sanitizers; all 313 LP plus 21 operator endpoints freshly verify; 245.686586823 GPU s, 17132 ledger events; separate resident report, no preset"
   - id: GPUP-8
-    title: Conditionally admit hybrid sparse and Tensor Core single-solve execution
-    status: planned
+    title: Implement hybrid Tensor components with a certified latency gain
+    status: in_progress
     depends_on: [GPUP-7R]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
-    acceptance: "Hardware/layout/error/cost admission first; retain a documented rejection or defer decision when unsuitable; otherwise differential kernels, repeatability, sanitizers and packing/padding-inclusive single-RHS comparisons"
+    acceptance: "ADR-0042 implementation/evaluation retained but incomplete: correct INT8/FP16/BF16 kernels; useful-low CPU refusals on both dense models; 27 executed plus 48 refused study cells, 20/60 certified timings, four full profiles, 128 verified LP records; working-family/gain gates unmet; 236.856927634 GPU s, 17200 events; no GPUP-9 progression"
   - id: GPUP-9
     title: Run controlled precision experiments and ablations
     status: planned

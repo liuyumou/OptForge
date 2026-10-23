@@ -20,8 +20,18 @@ class QuantPrReview(unittest.TestCase):
         self.assertEqual({f['path'] for f in receipt['added']},review.ADDED)
         for f in receipt['files']:
             self.assertEqual(file_hash(ROOT/f['path']),f['reviewed_sha256'])
+        # Later accepted slices extend module/example/acceptance registration.
+        # Verify the original receipt against immutable original bytes, then bind
+        # each authorized live extension through its separate follow-up receipt.
+        bridge=read_json(ROOT/'docs/benchmarks/data/tensor/prerequisite-source-bridge.json')
+        extended={f['path']:f for f in bridge['files']}
         for f in receipt['added']+receipt['unchanged_sources']:
-            self.assertEqual(file_hash(ROOT/f['path']),f['sha256'])
+            current=file_hash(ROOT/f['path'])
+            if current==f['sha256']:continue
+            extension=extended[f['path']]
+            self.assertEqual(extension['before_sha256'],f['sha256'])
+            self.assertEqual(file_hash(ROOT/extension['frozen_path']),f['sha256'])
+            self.assertEqual(current,extension['after_sha256'])
 
     def test_arithmetic_controller_and_authority_bodies_remain_exact(self):
         import hashlib

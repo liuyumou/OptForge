@@ -23,3 +23,15 @@ workspace = true
 [[example]]
 name = "quant_probe"
 required-features = ["precision-research"]
+
+[[example]]
+name = "tensor_probe"
+required-features = ["precision-research"]
+
+[[example]]
+name = "tensor_diagnose"
+required-features = ["precision-research"]
+
+[[example]]
+name = "tensor_product_probe"
+required-features = ["precision-research"]

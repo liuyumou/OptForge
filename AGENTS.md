@@ -5,6 +5,36 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
+GPUP-8 authorization (2026-10-23): the user explicitly approves ADR-0042's
+INT8 and FP16/BF16 component Tensor plan and 3000 GPU seconds inside existing
+ceilings (1600 screening, 550 ablations, 850 repeatability). This supersedes the
+historical no-next-task-allocation handoffs only for GPUP-8. Preserve the exact
+17132-event ledger prefix and all historical sources/images/workers/reports.
+CPU admission precedes device execution; no study retry or device substitution.
+Keep 1e-7 local budgets, 1e-9 original-model host certification, resident FP64
+state, charged whole-window replay and uniform sticky promotion. Completion
+requires useful integer/floating Tensor solves and a multiplicity-adjusted
+certified total-latency gain. Refusal/no gain leaves GPUP-8 incomplete and does
+not authorize GPUP-9 or additional resources. Local commit after applicable
+acceptance is authorized; publication and merge are outside this task.
+
+GPUP-8 handoff (2026-10-23): the bounded ADR-0042 implementation/evaluation is
+retained, but GPUP-8 remains incomplete under the user's working-family and
+certified latency-gain requirements. Correct INT8/FP16/BF16 operators pass 260
+CPU/device pairs, five controller comparisons, four fixed-work/replay pairs,
+66 ordinary GPU tests and four sanitizers. Forty-eight study cells are CPU-refused;
+27 execute, all 20 admitted FP64 timings certify (20/60 planned), and four profiles
+finish. All 128 LP records verify across four CPU cohorts and device/study data.
+No useful Tensor solve window or gain qualifies; do not advance GPUP-9. Preserve
+all four CPU cohorts, the unreserved allocator preflight, failed first device
+cohort/charge, corrected cohort and every source/image/worker/report. Task charge
+is 236.856927634 GPU s; cumulative 21596.442783423 / 25202.574545061. Ledger has
+17200 events, SHA-256 5af7782a384ac73226f339d98d0b33e320518053c1accdf67c1339db36d0e0f1,
+retaining the exact 17132-event prefix. Final pinned-native acceptance passes 353 Python tests plus Rust/native,
+dependencies, replay, 140 docs pages and smoke. CPU/native/docs/smoke evidence is
+under docs/benchmarks/data/tensor. No preset, new cells, study retries or later-task
+allowance follows. Local commit after applicable checks; no publication/merge.
+
 PR integration authorization (2026-10-23): the user explicitly requests opening
 the combined GPUP-7/7R PR, repeated review/fixes, merge and safe cleanup. This
 supersedes the historical local-only restrictions below. Review is CPU-only;
