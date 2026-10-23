@@ -1,6 +1,6 @@
 # SPEC-0021: Residual-driven LP refinement and controlled inexact products
 
-Status: accepted ADR-0037 refinement and ADR-0039 bounded assessment subsets; other extensions remain draft
+Status: accepted ADR-0037 refinement, ADR-0039 assessment and ADR-0040 direct matrix-selectivity subsets; combined extensions remain draft
 Scope: research LP correction, anchored products, selective precision and assessment
 Owner: numerical backend
 Introduced: GPUP-DESIGN, 2026-10-12
@@ -15,7 +15,7 @@ Tests: independent GPUP-REFINE rational/endpoint oracles, host/device fault and 
 FP64-outer, FP32-products-only subset, merit/error/progress parameters, recovery
 and resource allocation. CPU proof/oracle admission precedes dependent runtime
 work. A reproduced numerical admission refusal is a valid bounded outcome;
-full expansion masters and selective precision remain draft. Assessment scheduling
+full expansion masters and selective precision within refinement remain draft. Assessment scheduling
 is separately accepted under ADR-0039 below.
 
 The [implemented evaluation](../benchmarks/lp-refinement-gpup-refine.md) retains
@@ -305,3 +305,96 @@ failure metadata, overflowing counters and interrupted profile horizons. Partial
 profiles remain evidence with unavailable trajectory comparisons. Exact source
 receipts preserve the measured execution loop and original-model authority;
 review adds no GPU execution or revised-executable timing claim.
+
+## GPUP-7 accepted bounded matrix-only contract
+
+[ADR-0040](../decisions/ADR-0040-bounded-matrix-quantization.md) accepts the
+user-approved matrix-only uniform/selective FP16/E4M3/E5M2 subset. Canonical
+sparse 32-by-32 tiles, direct binary64 nearest-even conversion, conservative
+original-unit local product budgets, common safe norm envelope, sticky promotion
+and charged whole-window replay are isolated under lp-quant-v1. FP64 state,
+32-update audits and each 200-update controller/assessment boundary remain.
+Independent host certification at unchanged 1e-9 tolerances is authoritative.
+Vector quantization, stochastic rounding, Tensor Cores, combined refinement or
+assessment policies, sessions and supported presets remain separate extensions.
+Acceptance maps format/range/transpose/bounds to the quant CPU contracts and
+independent Fraction oracle; recovery to checkpoint/fault/limit regressions;
+execution to quant_device differentials, replay and four scoped sanitizers;
+authority and identity to strict lp-quant-v1 endpoint verification.
+
+## GPUP-7R accepted resident subset (2026-10-22)
+
+[ADR-0041](../decisions/ADR-0041-resident-matrix-quantization.md) accepts only
+SPEC-0012 requirements 9–21 and 24–38 and SPEC-0021 requirements 7–10 and 14–20
+as narrowed by the [resident plan](../plans/lp-quant-resident-follow-up.md).
+The new research-only lp-quant-resident-v1 interface supersedes executor placement,
+reduction layout, bound construction and diagnostic horizons for this interface
+alone. Existing lp-quant-v1 and tuned numerical bodies, identities and evidence
+remain unchanged. No other draft extension becomes accepted.
+
+1. The executor MUST retain FP64 working vectors/updates on-device and canonical
+   coefficient IDs in compact oriented sparse segments. Segmented low groups use
+   serial RN32 products/sums followed by serial RN64 group combination. The FP64
+   policy bridge uses the unchanged tuned warp32 tree and duplicate guarded reads.
+   Guard arithmetic identity is global-then-coordinate-successor-rn-v1; the two
+   tree identities are segmented-serial-fp32-fp64-v1 and tuned-warp32-v1.
+2. Nonnegative bound add/multiply/divide MUST advance the RN64 result one positive
+   representable value, with exact-zero shortcuts. This encloses the exact result,
+   including gradual underflow. Coefficient summaries include exact-real original
+   diagonal preconditioning error. Detailed bounds add coefficient/conversion
+   errors, gamma(group length + 1) multiplication/reduction allowances, native
+   outer-tree allowances, their propagation, subnormal and original-unit unscaling
+   allowances. Nonfinite values fail admission. Coarse alpha/beta/tiny constants
+   use the same outward operations and are generation-bound. No cancellation
+   credit, saturation, nonzero deletion, contraction or arithmetic FTZ is allowed.
+3. The runner MUST submit at most 32 proposals between host observations, cut at
+   each 200-update controller boundary, audit with the host FP64 reference and
+   adopt its endpoint. Failure restores the complete window/controller snapshot;
+   started/rejected/replayed proposals, audits, uncertain and predicated work stay
+   charged. Immutable operator origin, unique generation token, promotion state
+   and originating session bind every cache/checkpoint. No demotion is permitted.
+4. Strict evidence MUST distinguish fresh solves, exact logical-horizon profiles
+   and independent-product diagnostics. Profiles retain the first timely host
+   certification iteration while continuing to exactly 2000 logical updates, with
+   a separate 50000 total charged-update limit. Interrupted/failed/incomplete or
+   unverified horizons are ineligible for comparisons. Original tuned profiles use
+   its exact kernels/controller with forced continuation; its primary timings use
+   the unchanged CLI. Every endpoint receives fresh original-model certification.
+5. Reporting MUST retain every frozen cell, CPU refusal, failed attempt and full
+   fresh-process cost. Low/native coefficient operations, duplicate bridge guard
+   products, coarse/detailed decisions, promotion fractions, window state uploads,
+   transfers and audits are separate counters. Guard-only diagnostics include
+   product reads/range checks and overlap fused work; intervals are not additive.
+   Unguarded product diagnostics have no solve or certificate authority.
+
+Acceptance mapping: optimizer-lp quant_resident.rs and tests/quant_resident.rs
+cover origin/generation validation, failure at every window position, restoration,
+audit adoption, promotion, cancellation/deadlines and invalid-device work charging.
+The isolated experiment module covers strict parsing, oversized counters, fresh
+original assessment and signed-zero replay. The integer/Fraction interpreter in
+tools/lp_quant_resident_oracle.py independently models the RN24/RN53 and outward
+programs, including the bridge tree and original-unit bounds; the inherited codec
+oracle enumerates formats and adjacent rounding boundaries. quant_resident_device
+covers both orientations, partial/full masks, subnormal coefficients/operands,
+range failures and resident/controller equivalence. The full pinned-native gate,
+ordinary device suite, fixed-work endpoint/replay pairs and four scoped sanitizers
+are required. Toolkit provisioning remains separate from ordinary builds.
+
+The frozen [protocol](../../benchmarks/configs/lp-quant-resident-v1.json) allocates
+3600 GPU seconds from existing authority with zero ceiling increase, binds the
+17036-event prefix and selected UUID, and retains CPU useful-low refusals without
+replacement. Results belong in the [separate report](../benchmarks/lp-quant-resident-gpup7r.md).
+
+The completed resident evaluation certifies 36/108 planned timing cells, with
+78 quantized timing/profile CPU refusals, three complete FP64 logical horizons
+and 21 verified operator endpoints. Full native/device/replay/sanitizer gates pass;
+all 313 LP and 21 operator endpoints freshly verify. No useful quantized solve
+benefit or supported preset follows; the remaining extensions stay gated.
+
+The [quantization PR review](../benchmarks/lp-quant-pr-review.md) adds CPU-only
+regressions for immutable prepared operators, atomic invalid-ID refusal, bounded
+device-window counters, canonical JSON shapes, promotion history, physical
+accounting and completed-worker profile eligibility. These strengthen the accepted
+resident subset; arithmetic budgets, kernels, original-model certification and
+the remaining gated extensions are unchanged. Historical measured cohorts and
+their evidence are preserved separately from the rebuilt host verifier.

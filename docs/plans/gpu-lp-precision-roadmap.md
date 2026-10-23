@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: approved 2026-10-12 order; GPUP-ASSESS evaluated with scoped benefit; GPUP-7 contract is next
+Status: GPUP-7/7R complete; GPUP-8 conditional disposition/contract is next
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
@@ -28,6 +28,49 @@ not a required winner. The final recipe follows measurements and ablations; an
 experiment that finds the tuned baseline faster is a useful negative result.
 This track follows C6 but does not complete C7, C9, or the general C10 runner.
 
+## Current handoff: GPUP-7R complete (2026-10-23)
+
+Accepted [ADR-0041](../decisions/ADR-0041-resident-matrix-quantization.md) and the
+[resident plan](lp-quant-resident-follow-up.md) produce the
+[GPUP-7R report](../benchmarks/lp-quant-resident-gpup7r.md). All 36 admitted
+fresh timings certify, three FP64 profiles finish 2000 logical updates, and
+21 operator endpoints verify. CPU useful-low admission refuses all quantized
+model cells, retaining 78 dependent study cells without replacement. The planned
+timing denominator remains 108. Resident matched FP64 recovers coverage but
+unchanged tuned FP64 stays faster on nontrivial models; no preset follows.
+Full native/device/replay/four sanitizer acceptance passes, and final CPU
+verification accepts all 313 LP plus 21 operator endpoints. Preserve every
+historical source/image/worker and both resident execution cohorts.
+Task charge is 245.686586823 GPU s, cumulative 21359.585855789 / 25202.574545061;
+17132 ledger events preserve the exact 17036-event prefix. No ceiling increases.
+GPUP-8 is next for a conditional numerical/hardware/resource disposition before
+behavior. No unused allowance is reserved for it.
+
+## Completed GPUP-7 handoff (2026-10-22)
+
+Accepted [ADR-0040](../decisions/ADR-0040-bounded-matrix-quantization.md) implements
+matrix-only uniform/selective FP16/E4M3/E5M2 with canonical transpose tiles,
+original-unit bounds, FP64 state and charged sticky recovery. The
+[report](../benchmarks/lp-quantization-gpup7.md) retains all 104 attempts, verifies
+34 study endpoints and certifies 33/96 timings. New paths only certify initial
+host-only small-4; tuned FP64 certifies 12/12. Seventy timeouts and all eight
+censored profile horizons remain; no useful low-product solve benefit or preset.
+CPU admission, full native/device/replay/four sanitizer gates and fresh CPU
+verification of all 182 retained endpoints pass. Both admission cohorts, reports,
+source bridges, raw failures and the resource-sampling correction are retained.
+
+Task charge is 1382.959456122 GPU seconds (1109.904216936 timing,
+215.675211186 profiles, 57.380028000 acceptance), within 3600 and phase caps.
+Current cumulative charge is **21113.899268966 / 25202.574545061 seconds**;
+17036 events, SHA-256
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97.
+The exact 16816-event prefix dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c
+and all earlier history remain. The independent 28800-second campaign ceiling
+holds. GPUP-8 needs its conditional hardware/layout/error/cost and resource
+contract before behavior; no Tensor Core implementation is mandatory. Unused
+headroom reserves nothing. Vector quantization, stochastic rounding, combined
+refinement/assessment policies, sessions and supported presets remain gated.
+
 ## Current design order (2026-10-12)
 
 The user requested durable designs and experiments before more implementation.
@@ -47,7 +90,8 @@ is proposed; it independently admits no trials, seeds, defaults or GPU allowance
 | 3 — GPUP-STATE (complete bounded admission investigation) | CPU scalar/primitive validation, first full-bin refusal and compact FMA challenge under ADR-0036. Full controller/state remains gated. | Original construction uses 255 registers and spills; compact full-range FMA fits at 40 registers with zero spills and 5900 additional independent cases per construction. 6170 device cases, four scalar sanitizers and 36 verified primitive timings on PRO 6000; no solver benefit, original evidence retained. |
 | 4 — GPUP-REFINE (complete) | ADR-0037 native FP64 outer correction LPs, guarded FP32/anchored products, charged recovery/checkpoints and strict replay. | 108 retained attempts, 48 verified endpoints, 30/96 certified timings; full native/device/sanitizer/replay gates. Only initial host-certified small-4 succeeds in refinement; no product benefit/preset. Expansion masters remain gated. |
 | 5 — GPUP-ASSESS (complete) | ADR-0039 fixed_200/bounded_800 on tuned FP64 and existing accumulation FP32, preserving 200-update numerical checks. | 16 CPU trajectories/320 boundary witnesses; all 60 attempts retained, 57 endpoints verified, 24/48 timings certified. Six bitwise profile pairs, full native/device/replay/sanitizer gates; scoped 1.0272x FP64 irregular-32768 gain, unchanged coverage and no preset. |
-| 6 — GPUP-7 | Accept quantization/FP8 error-budget interface, then admitted uniform/selective sparse candidates. | Representation/arithmetic error in original units, canonical transpose, norm/step validity, bounded promotion and memory; reject insufficient-accuracy formats before timing. |
+| 6 — GPUP-7 (complete bounded subset) | ADR-0040 matrix-only uniform/selective FP16/E4M3/E5M2. | 56 CPU cases, 104 retained attempts/34 verified study endpoints/33 certified timings; host-only new-mode success and censored profiles establish no solve benefit or preset. |
+| Follow-up — GPUP-7R (complete) | Resident FP64 state/updates, compact sparse execution and two-level conservative device guards. | 36/108 planned timing coverage, three complete FP64 profiles, 78 CPU refusals, 21 product endpoints; resident matched recovery but no useful quantized window or preset; 245.686586823 GPU s within existing ceilings. |
 | Conditional — GPUP-8 | Shape-admit sparse/dense Tensor Core or integer execution for actual sm_120 single-RHS work. | Same-operand accuracy, overflow/accumulator analysis, packing/padding costs and scoped device gates. A documented rejection/defer decision is valid; no mandatory Tensor Core implementation. |
 | 7 — GPUP-9 | Small component/interaction blocks, frozen finalists and independent held-out comparison. | Coverage-first certified total latency, repeatability/uncertainty, full failures and budget ledger; final recipe may omit optional components. |
 | 8 — GPUP-10 | Package only supported recipes. | Accepted evidence and admission rules; no preset if gains or coverage are inconclusive. |
@@ -62,7 +106,7 @@ An investigation can close with a documented negative/admission result. Completi
 of GPUP-STATE or GPUP-REFINE does not require making its candidate a winning or
 mandatory component of GPUP-7/9.
 
-Current charge is **19730.939812844 / 21602.574545061 GPU seconds**, with
+At the GPUP-ASSESS handoff, charge was **19730.939812844 / 21602.574545061 GPU seconds**, with
 16816 events and SHA-256
 dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c.
 [GPUP-ASSESS](../benchmarks/lp-assessment-scheduling-gpup-assess.md) charges
@@ -72,8 +116,7 @@ and every earlier prefix/phase ceiling. Its CPU-only final review strengthens
 bitwise replay and profile eligibility while retaining all measured workers and
 results. [GPUP-REFINE](../benchmarks/lp-refinement-gpup-refine.md)'s earlier
 1541.719136512-second charge, telemetry refusal and report-reader correction remain.
-GPUP-7 needs its own accepted quantization/error-budget contract and resource
-allocation; unused headroom reserves nothing. Historical handoffs and budgets
+That handoff required GPUP-7's contract/allocation, now completed above under ADR-0040; unused headroom reserves nothing. Historical handoffs and budgets
 below retain their dated stages. Old racecheck/session/mixed-model gaps remain.
 
 ## Contracts and status

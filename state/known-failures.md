@@ -1,5 +1,84 @@
 # Known Failures and Limitations
 
+## Quantization PR review preserves measured cohorts
+
+The [separate PR review](../docs/benchmarks/lp-quant-pr-review.md) repairs mutable
+prepared operators, partial promotion on an invalid tile ID, unchecked window
+counters, noncanonical JSON shapes, inconsistent promotion histories and physical
+accounting in host verification. Interrupted workers cannot provide profile
+comparisons, and review outputs cannot overwrite historical artifacts or aliases.
+The rebuilt executable has no new device acceptance or measured performance
+claim. Both original reports, admission receipts, workers, images, source cohorts
+and the exact 17132-event ledger remain unchanged. Live-source GPU admission
+continues to reject the rebuilt executable against the historical admission;
+the PR reader verifies retained evidence separately, on CPU.
+
+## Resident execution recovers FP64 coverage, not useful matrix quantization
+
+[GPUP-7R](../docs/benchmarks/lp-quant-resident-gpup7r.md) completes accepted
+ADR-0041 inside existing ceilings. All 36 admitted fresh timings certify, retaining
+36/108 planned coverage and 78 CPU-refused quantized timing/profile cells. All
+three native profiles finish 2000 logical updates; 21 operator endpoints verify.
+The 72-cell CPU cohort admits no useful low-precision audit window for any of
+the six candidates on eight models. Scaling-256 retains a bridge numerical
+refusal; every historical GPUP-7 refusal/outcome remains separate.
+
+Resident FP64 updates, compact segments and two-level device guards eliminate
+the old matched path's timeout behavior on this cohort, but unchanged tuned FP64
+remains faster on all nontrivial models. Irregular-32768 medians are 4.799867 s
+resident matched versus 2.564014 s tuned. Conservative steps, audits/assessment
+and preparation remain material. Quantized synthetic products pass but recorded
+trajectory products mostly fail 1e-7 bounds; even unguarded quantized products
+are slower in these single diagnostics. No LP FP16/FP8 benefit or preset follows.
+
+Full native/device/replay/four sanitizer gates pass. Preserve the invalid command
+preflight (no GPU reservation), source bridge broadening sanitizer scope before
+execution, all CPU cohorts, both frozen source cohorts, workers/images/requests
+and every historical artifact. Final CPU verification accepts 313 LP endpoints
+plus 21 operator endpoints. Task charge is 245.686586823 GPU seconds; cumulative
+21359.585855789 / 25202.574545061. The 17132-event ledger SHA-256 is
+930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035, preserving
+the exact 17036-event prefix below. GPUP-8 needs its own conditional contract;
+unused allowance reserves nothing. Tensor Cores, vector quantization, combined
+methods, sessions and supported presets remain gated.
+
+## Bounded matrix quantization promotes before useful low-precision work
+
+[GPUP-7](../docs/benchmarks/lp-quantization-gpup7.md) completes the accepted
+ADR-0040 matrix-only subset. All 104 attempts remain, 34 study endpoints verify
+and 33/96 timings certify. Each of the six candidates and matched FP64 certifies
+only small-4 at the initial host point with zero iterations/kernel launches.
+Tuned FP64 certifies 12/12; 70 new-path timing/profile timeouts remain. No sparse
+FP16/FP8 solve benefit or supported preset is established.
+
+In CPU admission, irregular-2048 and irregular-32768 perform only the initial
+zero-dual product in low precision before whole-operator sticky promotion; all
+six candidates have the same one-transition disposition. Selective promotion
+exceeds the 25% coefficient cap. Accurate products, summary scans, transfers and
+host updates remain charged. Seven scaling-256 configurations, including native
+matched FP64, refuse the original-unit error budget. Admission preserves 49
+work-limit and seven numerical-failure endpoints; this is not a convergence claim.
+
+All eight GPU diagnostic cells are censored: seven time out and unchanged tuned
+FP64 certifies after 1400 rather than 2000 updates. No full-horizon comparison
+follows. CPU-only reader review explicitly rejects incomplete horizons and CPU
+fallback as a GPU timing; actual results/charges remain identical. Both reports,
+exact source bridges, frozen workers/images and all failed attempts remain.
+Fresh CPU verification accepts all 182 retained endpoints across the study,
+acceptance/replay and two CPU admission cohorts, adding zero GPU work.
+
+The initial CPU RSS sampler missed worker-thread subprocesses; retain its raw
+receipt and the conservative four-process bound below 8 GiB. The corrected
+monitor visits every thread child list and checks source stability. Full native,
+66 ordinary/three new device tests, 384 product vectors, six CPU/device controller
+comparisons, 18 fixed-work endpoints/18 bitwise replays and four sanitizers pass.
+Task charge is 1382.959456122 GPU seconds; cumulative 21113.899268966 /
+25202.574545061. The 17036-event ledger SHA-256 is
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97,
+retaining the exact 16816-event prefix and all earlier history. GPUP-8 needs its
+own conditional numerical/hardware/resource contract; unused headroom reserves
+nothing. Vector quantization, combined methods, sessions and presets remain gated.
+
 ## Assessment scheduling saves checks without recovering precision coverage
 
 [GPUP-ASSESS](../docs/benchmarks/lp-assessment-scheduling-gpup-assess.md) completes

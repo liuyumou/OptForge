@@ -1,5 +1,47 @@
 # Changelog
 
+## Unreleased — quantization PR review (2026-10-23)
+
+- Make prepared matrix coefficients, layouts and error summaries immutable;
+  reject invalid promotion IDs atomically and corrupted device-window counters
+  before aggregation. Preserve the measured arithmetic and CUDA bodies.
+- Reject noncanonical JSON shapes, inconsistent promotion histories and impossible
+  launch/transfer counters in standalone research verification. Keep interrupted
+  workers out of profile comparisons and review outputs separate from history.
+- Preserve both studies, all failed attempts and source cohorts. Rebuilt host
+  verifiers and CPU-only PR acceptance are recorded in a separate review report.
+
+## Unreleased — GPUP-7R resident quantization (2026-10-22)
+
+- Accept ADR-0041 and allocate 3600 GPU seconds within unchanged ceilings. Add
+  the separate lp-quant-resident-v1 research executor, strict evidence and CLI.
+- Keep FP64 state/updates resident, compact canonical sparse segments, two-level
+  outward guards, complete restoration/charged replay and original-model authority.
+- Add independent integer/Fraction program proofs, CPU admission, GPU differential
+  and replay gates, fixed logical-horizon diagnostics and matched FP64 controls.
+  Preserve historical numerical bodies, interfaces, evidence and resource ledger.
+- Certify all 36 admitted fresh timings (36/108 planned coverage), finish three
+  FP64 logical-2000 profiles and verify 21 operator endpoints. Retain 78 quantized
+  timing/profile CPU refusals; no useful quantized trajectory or preset follows.
+- Pass full native/device/replay/four sanitizer gates and freshly verify all 313
+  LP plus 21 operator endpoints. Preserve both execution/source cohorts and the
+  exact historical prefix. Charge 245.686586823 GPU seconds inside existing caps.
+
+## Unreleased — GPUP-7 bounded matrix quantization (2026-10-22)
+
+- Add research-only lp-quant-v1 uniform/selective FP16/E4M3/E5M2 matrices, canonical
+  transpose tiles, original-unit guards, FP64 state and charged sticky recovery
+  under accepted ADR-0040. Keep original-model host certification authoritative.
+- Add strict solve/verify/replay, independent codec/product oracles, complete
+  checkpoints, component costs, frozen accounting and source-bound acceptance.
+- Retain 104 attempts and 70 timeouts; verify 34 study endpoints and certify
+  33/96 timings. New paths only certify initial host-only small-4; no full
+  2000-update diagnostic horizon or useful quantized solve benefit follows.
+- Full native/device/replay/four sanitizer gates pass; fresh CPU verification
+  accepts all 182 retained endpoints. Preserve both CPU cohorts, original/reviewed
+  reports, resource-sampling correction and CPU-only reader counterexamples.
+  No supported preset; task charge 1382.959456122 GPU seconds.
+
 ## Unreleased — GPUP-ASSESS bounded assessment scheduling (2026-10-22)
 
 - Accept ADR-0039's assessment subset after 16 CPU common trajectories and

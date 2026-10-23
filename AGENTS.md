@@ -5,7 +5,107 @@ Implement one dependency-ready bounded task at a time. Follow
 Update state/active-task.md before work and record acceptance evidence afterward.
 Read state/known-failures.md before implementing related behavior.
 
-Current handoff (2026-10-22): GPUP-ASSESS is complete under accepted ADR-0039
+PR integration authorization (2026-10-23): the user explicitly requests opening
+the combined GPUP-7/7R PR, repeated review/fixes, merge and safe cleanup. This
+supersedes the historical local-only restrictions below. Review is CPU-only;
+preserve all measured sources/images/workers/reports and the exact 17132-event
+ledger. Prepared operators must be immutable, malformed physical counters must
+refuse before aggregation, and evidence/report boundaries must remain strict.
+Keep separate PR source/acceptance receipts and reports. Run every cpu/docs/smoke
+test command, retain native dependencies/artifacts, and verify merged ancestry
+before removing task branches. No additional GPU work or next-task allowance.
+PR acceptance passes 344 Python tests, Rust/native/dependencies, historical replay,
+138 documentation pages and smoke; 20 source-only portability tests pass. Fresh
+verification accepts 495 LP plus 21 operator endpoints. Rebuilt verifiers cover
+423 LP/21 operator endpoints; the 72 initial resident CPU records retain their
+earlier required-field layout and original frozen verifier. Do not normalize or
+re-sign historical payloads. Separate PR report/receipts are under
+docs/benchmarks/lp-quant-pr-review.md and docs/benchmarks/data/quant-resident/pr-*.
+
+Current handoff (2026-10-23): GPUP-7R is complete under accepted ADR-0041 and
+the bounded resident subset of SPEC-0012/0021. Its
+[report](docs/benchmarks/lp-quant-resident-gpup7r.md) retains all 120 planned
+study cells/jobs: 42 execute and 78 quantized timing/profile cells are CPU-refused.
+All 36 admitted timings certify (36/108 planned coverage), three FP64 profiles
+finish 2000 logical updates, and 21 product endpoints verify. None of six
+quantized candidates admits a useful low window on eight models. Residency
+recovers matched FP64 coverage, but tuned FP64 remains faster on nontrivial
+models; no quantized solve benefit or supported preset follows.
+Full native acceptance passes 338 Python tests plus Rust/native/dependencies,
+historical replay, 137 documentation pages and smoke. All 66 ordinary GPU tests,
+628 product/bound vectors, six CPU/device controller comparisons, 29 fixed-work
+endpoint/replay pairs and all four scoped sanitizers pass. Final CPU verification
+accepts 313 LP endpoints and 21 operator endpoints. Preserve the preflight with
+no GPU reservation, sanitizer-scope source bridge, all three CPU cohorts and
+both frozen execution cohorts. No completed GPU identity was retried.
+Task GPU charge is 245.686586823 s (timing 69.376705845, profiles 69.783306098,
+acceptance 106.526574880), within 3600 and every phase cap. Cumulative is
+21359.585855789 / 25202.574545061 s. The 17132-event ledger SHA-256 is
+930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035, preserving
+the exact 17036-event prefix and all earlier artifacts/authority. GPUP-8 is next
+for a conditional numerical/hardware/resource disposition, with no allowance
+reserved. Local commit is authorized after acceptance; publication/merge are
+outside this request. Historical handoffs below remain exact in their context.
+
+Prior implementation authorization (2026-10-22): the user explicitly accepts
+ADR-0041 and allocates 3600 GPU seconds within existing ceilings for GPUP-7R.
+Implement the approved resident/guard plan and bounded comparison, preserve all
+historical evidence and commit locally after acceptance. The exact resource,
+device, admission and validation limits are in state/active-task.md. This
+authorization supersedes the historical planning-only handoff below. No push,
+publication or merge is authorized.
+
+Prior planning handoff (2026-10-22): the user requests the bounded
+[GPUP-7R resident/guard follow-up](docs/plans/lp-quant-resident-follow-up.md)
+before GPUP-8. [ADR-0041](docs/decisions/ADR-0041-resident-matrix-quantization.md)
+is proposed, not accepted. Planning authorizes documentation and CPU checks only;
+do not implement or run GPU work without acceptance of the new contract/resource
+allocation. The proposed 3600 GPU seconds fit existing cumulative/phase ceilings
+with no increase, but unused GPUP-7 allowance does not authorize this task.
+Preserve its exact 17036-event ledger prefix and all historical numerical bodies,
+images, reports and evidence. Keep 1e-7 local budgets, 1e-9 certification, sticky
+promotion and host authority. CPU useful-low admission gates quantized timings;
+the policy bridge and resident matched FP64 controls separate execution costs.
+The completed GPUP-7 handoff below remains historical and exact.
+
+Current handoff (2026-10-22): GPUP-7 implementation and bounded evaluation are
+complete under accepted ADR-0040. Final pinned-native acceptance passes 329
+Python tests plus Rust/native, dependency, historical replay, 134 documentation
+pages and smoke; no GPU work runs in that gate. Research-only
+lp-quant-v1 adds canonical 32x32 matrix tiles, uniform/selective FP16/E4M3/E5M2,
+FP64 state, conservative original-unit budgets, sticky promotion and charged
+whole-window replay. Its [report](docs/benchmarks/lp-quantization-gpup7.md)
+retains all 104 attempts, verifies 34 study endpoints and certifies 33/96 timings.
+Each new candidate and matched FP64 certifies only initial host-only small-4;
+unchanged tuned FP64 certifies 12/12. Seventy timeouts remain. Seven diagnostic
+paths time out and tuned FP64 certifies at 1400 rather than the requested 2000
+updates, leaving no complete profile horizon. No useful quantized solve benefit
+or supported preset follows. CPU admission retains all 56 cases, including seven
+scaling-256 refusals, with 162015 independent format and 3072 product components.
+All 66 ordinary/three new device tests, 384 product-vector comparisons, six
+CPU/device controller comparisons, 18 fixed-work endpoints/18 bitwise replays and
+four scoped sanitizers pass. Both CPU cohorts, their source bridge, the initial
+RSS sampler limitation/conservative bound and corrected monitor remain visible.
+CPU-only report review excludes CPU fallback and incomplete horizons, retaining
+the original report and exact measured execution/image/source bodies. Fresh host
+verification accepts all 182 retained study, acceptance/replay and CPU endpoints.
+No review GPU work or allowance is added. Preserve artifacts/gpup-quant-v1 in full,
+all historical reports/source bridges and native dependencies. Task charge is
+1382.959456122 GPU seconds: timing 1109.904216936, profiles 215.675211186 and
+acceptance 57.380028000, within 3600 and every phase cap. Cumulative consumption is
+21113.899268966 / 25202.574545061 seconds, retaining the independent 28800 ceiling.
+The 17036-event ledger SHA-256 is
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97,
+preserving the exact 16816-event prefix
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c
+and all earlier history. GPUP-8 conditional contract/disposition is next and needs
+its own accepted hardware/layout/error/cost and resource admission. Unused
+headroom reserves nothing. Vector quantization, stochastic rounding, Tensor Core
+execution, refinement/assessment combinations, sessions and presets remain gated.
+Preserve original-model host authority. Delivery is a local commit only; no
+publication or merge is authorized for this slice.
+
+Prior handoff (2026-10-22): GPUP-ASSESS is complete under accepted ADR-0039
 and SPEC-0021's bounded assessment subset. Its
 [report](docs/benchmarks/lp-assessment-scheduling-gpup-assess.md) retains all 60
 attempts, independently verifies 57 endpoints and certifies 24/48 timings.

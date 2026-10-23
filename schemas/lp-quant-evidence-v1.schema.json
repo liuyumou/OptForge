@@ -1,0 +1,380 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "request": {
+      "$ref": "lp-quant-request-v1.schema.json"
+    },
+    "executor": {
+      "enum": [
+        "cpu",
+        "gpu"
+      ]
+    },
+    "executed_device": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "primal": {
+          "type": "array",
+          "maxItems": 65536,
+          "items": {
+            "type": "number"
+          }
+        },
+        "dual": {
+          "type": "array",
+          "maxItems": 65536,
+          "items": {
+            "type": "number"
+          }
+        },
+        "scaled_primal": {
+          "type": "array",
+          "maxItems": 65536,
+          "items": {
+            "type": "number"
+          }
+        },
+        "scaled_dual": {
+          "type": "array",
+          "maxItems": 65536,
+          "items": {
+            "type": "number"
+          }
+        },
+        "iterations": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50000
+        },
+        "physical": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50000
+        },
+        "stop": {
+          "enum": [
+            "certified",
+            "iteration_limit",
+            "numerical_failure",
+            "device_failure",
+            "time_limit",
+            "interrupted"
+          ]
+        },
+        "failure": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "work": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "proposals": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100002
+            },
+            "rejected": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100002
+            },
+            "audits": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100002
+            },
+            "replays": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100002
+            },
+            "low_products": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 838860800000
+            },
+            "high_products": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 838860800000
+            },
+            "assessments": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100002
+            }
+          },
+          "required": [
+            "proposals",
+            "rejected",
+            "audits",
+            "replays",
+            "low_products",
+            "high_products",
+            "assessments"
+          ]
+        },
+        "promotion": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mask": {
+              "type": "array",
+              "maxItems": 8388608,
+              "items": {
+                "type": "boolean"
+              }
+            },
+            "generation": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9
+            },
+            "transitions": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9
+            },
+            "native": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "mask",
+            "generation",
+            "transitions",
+            "native"
+          ]
+        },
+        "transitions": {
+          "type": "array",
+          "maxItems": 9,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "iteration": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 50000
+              },
+              "generation": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "promoted_coefficients": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 8388608
+              },
+              "native": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "iteration",
+              "generation",
+              "reason",
+              "promoted_coefficients",
+              "native"
+            ]
+          }
+        },
+        "norm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "step": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "primal",
+        "dual",
+        "scaled_primal",
+        "scaled_dual",
+        "iterations",
+        "physical",
+        "stop",
+        "failure",
+        "work",
+        "promotion",
+        "transitions",
+        "norm",
+        "step"
+      ]
+    },
+    "assessment": {
+      "additionalProperties": false,
+      "properties": {
+        "allowance": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "classification": {
+          "enum": [
+            "missing_candidate",
+            "certified_success",
+            "feasible_unclosed",
+            "missing_certificate",
+            "numerical_rejection",
+            "interrupted",
+            "timeout",
+            "work_limit",
+            "unsupported",
+            "backend_failure",
+            "reference_only",
+            "missing_endpoint"
+          ]
+        },
+        "feasible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "gap_closed": {
+          "type": "boolean"
+        },
+        "gap_upper": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "objective": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "repaired": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "classification",
+        "feasible",
+        "objective",
+        "bound",
+        "gap_upper",
+        "gap_closed",
+        "allowance",
+        "repaired",
+        "reason"
+      ],
+      "type": "object"
+    },
+    "phases_ns": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "launches": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "upload_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "readback_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "device_peak_bytes": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1073741824
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "request",
+    "executor",
+    "executed_device",
+    "outcome",
+    "assessment",
+    "phases_ns",
+    "launches",
+    "upload_bytes",
+    "readback_bytes",
+    "device_peak_bytes",
+    "payload_sha256"
+  ],
+  "$id": "lp-quant-evidence-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

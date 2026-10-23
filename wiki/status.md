@@ -1,5 +1,28 @@
 # Project Status
 
+The combined GPUP-7/7R [PR review](../docs/benchmarks/lp-quant-pr-review.md)
+strengthens operator immutability, malformed-window rejection, strict evidence
+and profile eligibility. Its CPU-only source bridge and acceptance remain separate
+from both measured studies; no GPU execution or allowance is added.
+
+[GPUP-7R resident execution](../docs/benchmarks/lp-quant-resident-gpup7r.md) is
+complete under accepted ADR-0041, preserving the
+[original GPUP-7 evaluation](../docs/benchmarks/lp-quantization-gpup7.md).
+All 36 admitted fresh timings certify (36/108 planned coverage), all three FP64
+profiles reach 2000 logical updates and 21 operator endpoints verify. The six
+quantized candidates have no useful-low CPU admission on eight models; 78
+dependent timing/profile cells remain refused without replacement. Resident
+matched FP64 recovers coverage but tuned FP64 stays faster on nontrivial models.
+No quantized solve benefit or supported preset follows.
+
+Full native, ordinary/new device, 29 fixed-work/replay pairs and four scoped
+sanitizers pass. Fresh CPU verification accepts all 313 LP and 21 operator
+endpoints. Task charge is 245.686586823 GPU seconds, cumulative
+21359.585855789 / 25202.574545061, with every ceiling unchanged and the exact
+historical ledger prefix retained. GPUP-8 needs its own conditional disposition
+and contract; unused allowance reserves nothing. Local delivery is recorded in
+[active task](../state/active-task.md).
+
 The repository implements the C8 local extension registry on top of the C5
 flow-shop scheduling slice, the C4
 agent-independent run surface, C3
@@ -52,8 +75,8 @@ reservation or new numerical behavior implied.
 | State | Features |
 | --- | --- |
 | Implemented | LP-only frozen study infrastructure, independently certified endpoints and a development baseline (GPUP-2), a backend capability declaration a caller cannot widen, a first-order linear programming method with a host-side certified dual bound, host and device backends for it, first-order LP kernels in f64 whose reduction order is fixed so a result cannot depend on scheduling, Original linear models, Rust/JSON/CLI candidate validation with explicit tolerances, backend-neutral solve contract, pinned CPU HiGHS LP/MILP solving with validated incumbents and reproducible records, owned branch-and-bound executive with budgets, cancellation and proof completion, extension runtime with declared authority, validated candidate producers and checked search advisers, typed extension failure records, CLI search over the executive with provenance-bearing run records and re-execution verification, flow-shop instances with an independent makespan recurrence, a big-M-free positional encoding, deterministic NEH and insertion producers, a frozen generated Taillard development subset and CLI scheduling commands, a local extension registry resolving a named identity to an extension this build provides with checked licenses, authority, compatibility, requirements and promotion, a reusable conformance suite and its record, workspace, CLI hello, GPU discovery, simulated leases, artifact schemas, CI and documentation tooling |
-| In progress | None |
-| Planned | GPU LP precision track (GPUP-7 contract next, then GPUP-8 through GPUP-10; full expansion state remains gated after the admission refusal), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
+| In progress | GPUP-7R resident/guard follow-up planning only |
+| Planned | GPU LP precision track (GPUP-7R contract acceptance, then GPUP-8 through GPUP-10; full expansion state remains gated), adaptive research (C7), Python SDK (C9), comparative runner (C10); full MILP performance is a later track |
 | Experimental | Bounded research assessment scheduling under ADR-0039; bounded native-FP64-outer correction LPs and guarded FP32/anchored products under ADR-0037; bounded exact-dot cached/uncached CUDA executor under ADR-0035; opt-in cuda-lp-matched shared FP64 control and cuda-lp-tuned explicit residency/reduction/fusion execution plus explicit FP32 comparisons with fixed FP64 correction and opt-in adaptive audit/recovery policies and isolated COPT CPU/GPU PDLP controls; feature-gated exact scaling and component sparse research; independently checked versioned endpoints, no supported precision recipe |
 | Deprecated | None |
 

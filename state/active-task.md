@@ -1,5 +1,168 @@
 # Active Task
 
+## GPUP-7/7R PR review and integration (2026-10-23)
+
+Status: in progress. The user explicitly authorizes opening a PR, repeated review
+and fixes, protected merge and safe cleanup. This supersedes prior local-only
+delivery restrictions for GPUP-7/7R. Main lacks the completed GPUP-7 prerequisite;
+the PR includes its preserved implementation, the resident plan and GPUP-7R.
+Objective: review the complete main-to-branch diff against accepted ADR-0040/0041
+and specifications; fix reproduced findings; preserve every measured source,
+executable, image, endpoint, report and ledger prefix. Use separate CPU-only PR
+source bridges/reports if verifier or reader changes are needed.
+Acceptance: regression counterexamples, full pinned-native bash tools/check.sh,
+independent retained-endpoint verification, clean-checkout CPU portability,
+all cpu/docs/smoke test commands and no unresolved actionable findings. GitHub
+Actions cannot start because its account budget is exhausted. The user reports
+disabling branch protection, explicitly requires every test, and authorizes
+integration after local acceptance. Verify effective remote rules before merging.
+Resources: CPU-only review, at most 21600 CPU seconds/four build jobs and 8 GiB
+RSS; zero GPU execution or additional allowance. Preserve 17132 ledger events,
+SHA-256 930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035,
+and all historical artifacts. Publication is authorized only through this PR;
+merge with ancestry preserved, then remove merged task branches after verifying
+ancestry. Retain native dependencies and all research artifacts.
+
+Review acceptance (2026-10-23): two passes reproduce and repair mutable prepared
+operators, partial promotion on invalid IDs, malformed window counters, JSON
+shape aliases, inconsistent promotion histories, physical counter validation and
+interrupted-profile/report-output eligibility. Full pinned-native acceptance
+passes 344 Python tests plus Rust/native, dependencies, historical replay, 138
+documentation pages and smoke; 20 quantization tests pass without ignored
+artifacts/dependencies. Fresh CPU verification accepts 495 LP plus 21 operator
+endpoints: rebuilt verifiers cover 423 LP/21 operator endpoints, and the original
+frozen verifier covers 72 initial resident CPU endpoints predating the required
+first-certification field. No payload/schema is normalized or re-signed.
+Separate report/receipts: docs/benchmarks/lp-quant-pr-review.md and
+docs/benchmarks/data/quant-resident/pr-{review-source,native-acceptance,retained-verification}.json.
+Original reports, workers, archives, kernels, mathematical authority and all
+17132 ledger events remain exact. PR #22 contains the preserved three prerequisite
+commits; the review commit follows acceptance. Merge and cleanup remain pending
+remote admission; the effective Protect main ruleset is still active despite the
+user's reported branch-protection change. No new GPU work or allowance.
+
+## GPUP-7R implementation (2026-10-22)
+
+Status: complete (2026-10-23), under the user's explicit ADR-0041/allocation approval.
+Acceptance evidence: full pinned-native gates pass 338 Python tests, Rust/native,
+dependencies, historical replay, 137 documentation pages and smoke. All 66 ordinary
+GPU tests, inherited/new quantization suites, 628 product/bound differentials,
+six CPU/device controller comparisons, 29 fixed-work endpoint/replay pairs and
+all four scoped sanitizers pass. A pre-sanitizer source bridge broadens the filter
+to include resident updates/windows; completed jobs are preserved without retry.
+The invalid project interpreter preflight reserved no GPU identity and remains.
+Independent final verification accepts 313 LP endpoints (39 study, 58 acceptance/
+replay, 216 CPU cohorts) plus 21 operator endpoints. Three CPU cohorts remain exact.
+The separate report is docs/benchmarks/lp-quant-resident-gpup7r.md, with acceptance
+and machine results under docs/benchmarks/data/quant-resident. All 36 admitted
+fresh timings certify (36/108 planned); 78 quantized timing/profile cells retain
+CPU useful-low refusals. Three FP64 profiles finish 2000 logical updates. Resident
+matched FP64 irregular-32768 median is 4.799867 s versus tuned FP64 2.564014 s;
+quantization remains inadmissible on actual trajectories. No preset follows.
+Task GPU charge is 245.686586823 / 3600 s: timing 69.376705845 / 2300,
+profiles 69.783306098 / 450 and acceptance 106.526574880 / 850. Cumulative
+21359.585855789 / 25202.574545061 s, with unchanged phase/campaign ceilings.
+The 17132-event ledger SHA-256 is
+930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035,
+preserving the exact 17036-event prefix and all historical evidence. CPU upper
+accounting (major measured jobs plus preparation/final-gate allowances) is below
+21600 s; RSS 3234975744 B and new artifacts approximately 2.12 GB stay within caps.
+Final CPU-only gate/log: artifacts/gpup-quant-resident-v1/delivery-native-resources.log.
+Local commit follows acceptance; no push, publication or merge. GPUP-8 is next
+for a conditional disposition/contract, with no allowance reserved.
+Objective: lp-quant-resident-v1 GPU-resident FP64 updates, compact sparse layout,
+two-level conservative device guards and the frozen bridge/matched comparison.
+Retain the existing numerical budgets, norm/step, promotion/recovery rules and
+original-model host authority. CPU admission precedes all device execution.
+Acceptance: exact guard/format oracles and eight-model CPU admission; full pinned
+native bash tools/check.sh; ordinary/new device differentials, fixed-work replay,
+four scoped sanitizers; independently verified bounded study and separate report.
+Likely files: new resident host/CUDA/experiment modules and image, strict schemas,
+tools and tests; accepted ADR-0041/spec mappings and state/evidence documents.
+Resources: 21600 CPU seconds/four build jobs, 8 GiB RSS, 1 GiB device buffers,
+2 GiB preparation, 32 GiB artifacts. Allocate 3600 GPU seconds from existing
+authority: timing 2300 screening, profiles 450 ablations, acceptance 850
+repeatability; planned reservations 2268/432/816 seconds. Additional GPU allowance
+is zero; cumulative ceiling remains 25202.574545061 and campaign cap 28800 s.
+Phase ceilings remain 1800/11800/8100/5300/9000 seconds. Prior consumption is
+21113.899268966 s. Preserve the exact 17036-event ledger prefix SHA-256
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97 and all prior
+artifacts/identities. Execute only on GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48
+under shared host lease/activity admission, without retry/substitution. Retain
+CPU-refused dependent cells without replacement. Store new evidence separately
+under artifacts/gpup-quant-resident-v1. Commit locally after acceptance; no push,
+publication or merge. This approval supersedes the historical planning-only
+handoff below.
+
+## GPUP-7R follow-up planning (2026-10-22)
+
+Status: planning complete at the user's request. Specify a bounded resident
+quantized executor, cheaper conservative guards, matched controls and a proposed
+resource allocation before implementation. This task authorizes documentation
+and CPU validation only; no runtime changes or GPU execution.
+Acceptance: reviewed plan and draft superseding ADR; consistent roadmap/backlog;
+checked reservation arithmetic and historical ledger identity; full pinned-native
+bash tools/check.sh with zero GPU work. Likely files: new plan and ADR-0041,
+state/active-task.md, state/backlog.yaml, roadmap and wiki/status.md.
+Planning resources: at most 900 CPU seconds, four build jobs, 8 GiB host RSS,
+256 MiB new planning receipts and zero GPU seconds. Preserve the 17036-event
+ledger SHA-256 861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97,
+all GPUP-7 sources/images/reports and all earlier evidence. Proposed execution
+allocation remains unaccepted until separately authorized by the user.
+
+Acceptance evidence: full pinned-native bash tools/check.sh passes 329 Python
+tests plus Rust/native/dependency, historical replay, 136 documentation pages
+and smoke, with zero project GPU work. Stable gate source SHA-256 is
+6373f11b118a630f2da38f0b30a10a883e8f6cab14f84e44d83680f0be81dcec;
+124.909852223 elapsed / 160.555184 CPU seconds and 1662705664 bytes sampled
+process-tree RSS. Planning arithmetic verifies 3516 seconds of reservations
+inside the proposed 3600-second allocation and all unchanged campaign/phase caps.
+Receipts: artifacts/gpup-quant-resident-plan-20261022/native-acceptance.json and
+planning-arithmetic.json. Subsequent edits only clarify planning/handoff text
+and record this acceptance; recheck their links and the unchanged ledger before
+the local documentation commit. No numerical/runtime/tooling behavior changes.
+
+## GPUP-7 implementation (2026-10-22)
+
+Status: complete; final pinned-native acceptance passed. Delivery is a local
+commit only. All 104 attempts remain:
+34 study endpoints verify and 33/96 timings certify. New modes and matched FP64
+only certify initial host-only small-4; tuned FP64 certifies 12/12. No preset or
+useful low-product solve benefit follows. All eight profile horizons are censored
+(seven timeouts; tuned FP64 early success at 1400/2000). Final CPU admission retains
+56 cases/7 scaling refusals, 162015 format and 3072 product components. All 66
+ordinary/three new device tests, 384 vector comparisons, six CPU/device controller
+comparisons, 18 fixed-work endpoints/18 bitwise replays and four sanitizers pass.
+Fresh host verification accepts all 182 retained endpoints. Exact CPU admission
+and report-reader source bridges retain both cohorts and reports. Final GPU task
+charge is 1382.959456122 s (1109.904216936 timing, 215.675211186 profiles,
+57.380028000 acceptance); cumulative 21113.899268966/25202.574545061 s.
+Ledger 17036 events, SHA-256
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97.
+Preserve the exact original 16816-event prefix and all artifacts. CPU review adds
+zero GPU work. Final source/gate receipts are under docs/benchmarks/data/quant. Final tools/check.sh
+passes 329 Python tests, Rust/native/dependency, committed replay, 134 docs pages
+and smoke. Gate source is stable; 122.521477555 elapsed / 141.162757 CPU seconds,
+1661800448 bytes sampled process-tree RSS and zero GPU work.
+Objective: lp-quant-v1 matrix-only uniform/selective binary16, E4M3 and E5M2,
+FP64 state and original-model host authority. CPU admission precedes CUDA work.
+Acceptance: independent exact format/error oracle; CPU preparation on eight frozen
+models; full pinned-native tools/check.sh; ordinary/new device differentials,
+fixed-work replay and four scoped sanitizers; frozen development study and report.
+Likely files: new quant modules in optimizer-lp/optimizer-lp-cuda and experiment,
+separate CUDA image, strict schemas and tools, ADR-0040 and SPEC-0012/0021.
+Resources: 21600 CPU seconds/four jobs, 8 GiB RSS, 1 GiB device buffers, 2 GiB
+preparation, 32 GiB artifacts. GPU cap 3600 seconds: timing 2300 screening,
+profiles 450 ablations, acceptance 850 repeatability. New cumulative ceiling
+25202.574545061 seconds; phase caps 1800/11800/8100/5300/9000 and independent
+28800-second overall cap. Preserve the exact 16816-event prefix SHA-256
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c
+and prior 19730.939812844 GPU seconds. Use only
+GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48 under the shared host lease/activity
+admission, without automatic substitution or retries. Record artifacts under
+artifacts/gpup-quant-v1. Deliver a local commit after acceptance; no publication.
+This authorization supersedes the historical instruction below not to start GPUP-7.
+
 ## GPUP-ASSESS review and integration (2026-10-22)
 
 Status: PR 21 review and local acceptance complete; final publication/checks precede

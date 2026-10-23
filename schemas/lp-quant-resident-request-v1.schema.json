@@ -1,0 +1,237 @@
+{
+  "$id": "lp-quant-resident-request-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "code_object_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "device": {
+      "pattern": "^GPU-",
+      "type": "string"
+    },
+    "device_buffer_bytes": {
+      "maximum": 1073741824,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "diagnostic": {
+      "type": "boolean"
+    },
+    "executable_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "identity": {
+      "const": "lp-quant-resident-v1"
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "check_interval": {
+          "const": 200
+        },
+        "iteration_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50000
+        },
+        "power_iterations": {
+          "const": 20
+        },
+        "preconditioner": {
+          "const": {
+            "pock_chambolle_alpha": 1.0,
+            "ruiz_passes": 10
+          }
+        },
+        "primal_weight": {
+          "const": {
+            "derivative": 0.0,
+            "integral": 0.0,
+            "proportional": 0.5
+          }
+        },
+        "restart": {
+          "const": {
+            "artificial": 0.36,
+            "necessary": 0.8,
+            "sufficient": 0.2
+          }
+        },
+        "schema_version": {
+          "const": 1
+        }
+      },
+      "required": [
+        "check_interval",
+        "iteration_limit",
+        "power_iterations",
+        "preconditioner",
+        "primal_weight",
+        "restart",
+        "schema_version"
+      ]
+    },
+    "model_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "iteration_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50000
+        },
+        "node_limit": {
+          "const": null
+        },
+        "schema_version": {
+          "const": 1
+        },
+        "seed": {
+          "const": 17
+        },
+        "threads": {
+          "const": 1
+        },
+        "time_limit_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30000
+        },
+        "tolerances": {
+          "const": {
+            "absolute": 1e-09,
+            "integrality": 1e-09,
+            "relative": 1e-09
+          }
+        }
+      },
+      "required": [
+        "iteration_limit",
+        "node_limit",
+        "schema_version",
+        "seed",
+        "threads",
+        "time_limit_ms",
+        "tolerances"
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "source_tree_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "enum": [
+            "fp16",
+            "e4m3",
+            "e5m2",
+            "fp64"
+          ]
+        },
+        "policy": {
+          "enum": [
+            "uniform",
+            "selective"
+          ]
+        },
+        "tile_size": {
+          "const": 32
+        },
+        "rounding": {
+          "const": "nearest_even"
+        },
+        "primal_budget": {
+          "const": 1e-07
+        },
+        "dual_budget": {
+          "const": 1e-07
+        },
+        "audit_interval": {
+          "const": 32
+        },
+        "audit_absolute": {
+          "const": 1e-07
+        },
+        "audit_relative": {
+          "const": 1e-07
+        }
+      },
+      "required": [
+        "format",
+        "policy",
+        "tile_size",
+        "rounding",
+        "primal_budget",
+        "dual_budget",
+        "audit_interval",
+        "audit_absolute",
+        "audit_relative"
+      ]
+    },
+    "layout": {
+      "enum": [
+        "segmented",
+        "tuned",
+        "original_tuned"
+      ]
+    },
+    "horizon": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2000
+    },
+    "guard": {
+      "enum": [
+        "global-then-coordinate-successor-rn-v1",
+        "none-original-tuned-v1"
+      ]
+    },
+    "reduction": {
+      "enum": [
+        "segmented-serial-fp32-fp64-v1",
+        "tuned-warp32-v1"
+      ]
+    },
+    "norm_policy": {
+      "enum": [
+        "twice-absolute-original-v1",
+        "original-tuned-v1"
+      ]
+    }
+  },
+  "required": [
+    "code_object_sha256",
+    "device",
+    "device_buffer_bytes",
+    "diagnostic",
+    "executable_sha256",
+    "identity",
+    "method",
+    "model_sha256",
+    "options",
+    "schema_version",
+    "source_tree_sha256",
+    "settings",
+    "layout",
+    "horizon",
+    "guard",
+    "reduction",
+    "norm_policy"
+  ],
+  "title": "ADR-0041 resident quantization request",
+  "type": "object"
+}

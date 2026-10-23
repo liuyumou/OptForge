@@ -64,3 +64,15 @@ pub mod lp_refine;
 /// ADR-0039 assessment scheduling study.
 #[cfg(feature = "precision-research")]
 pub mod lp_assess;
+
+/// ADR-0040 strict quantized study evidence.
+#[cfg(feature = "precision-research")]
+pub mod lp_quant;
+
+/// ADR-0041 strict resident quantization research evidence.
+#[cfg(feature = "precision-research")]
+pub mod lp_quant_resident;
+
+/// ADR-0041 product/guard diagnostics, without LP certificate authority.
+#[cfg(feature = "precision-research")]
+pub mod lp_quant_resident_micro;

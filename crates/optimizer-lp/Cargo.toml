@@ -19,3 +19,7 @@ serde_json = { workspace = true }
 # dependency and depends on this crate, never the other way around.
 [lints]
 workspace = true
+
+[[example]]
+name = "quant_probe"
+required-features = ["precision-research"]
