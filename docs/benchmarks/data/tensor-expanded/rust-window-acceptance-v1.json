@@ -1,0 +1,50 @@
+{
+  "command": [
+    "/tmp/ai-optimizer-cargo/bin/cargo",
+    "test",
+    "--offline",
+    "--release",
+    "--manifest-path",
+    "/workspace/AI-Optimizer/research/lp-tensor-expanded/Cargo.toml",
+    "--bin",
+    "expanded_solver",
+    "-j",
+    "4",
+    "--",
+    "--test-threads=1"
+  ],
+  "gpu_seconds": 0,
+  "passed_tests_rerun": false,
+  "returncode": 0,
+  "scalar_source": {
+    "path": "research/lp-tensor-expanded/src/value.rs",
+    "sha256": "9965c41636b3444381d233560cf31a67496b9cce34d6a21b9ee6a2f4eaaefc3c"
+  },
+  "sources": [
+    {
+      "path": "research/lp-tensor-expanded/src/bin/expanded_solver.rs",
+      "sha256": "6852ad8d0fdd39f0185180a64e141b98eb1661e6bd6b6315b87a217a6e651581"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/solver.rs",
+      "sha256": "ff2b353227fc865facf25b73db3df6b5c69e8240f84b47812fe5876b5041781e"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/prepared.rs",
+      "sha256": "c2f23f7411bf415fe48f4e32e446349bb6e8cf407983f40fd6e9dc15482d25d3"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/outward.rs",
+      "sha256": "2b2615b2e88561c3a8e2f6feefc38c298046a9ab8c007b1a2c9ebcc83d42d6b2"
+    }
+  ],
+  "status": "passed",
+  "stderr": {
+    "path": "artifacts/gpup-tensor-expanded-v1/rust-window-v1/accept.stderr",
+    "sha256": "74fa311700bcc685aa906a43b681223ddce9bcbff5b837721ee1e3195fba3af4"
+  },
+  "stdout": {
+    "path": "artifacts/gpup-tensor-expanded-v1/rust-window-v1/accept.stdout",
+    "sha256": "a953c0a4fd45fd3dfe0a1e37e9b2a00de73875489233609c7850bc6afe221109"
+  }
+}

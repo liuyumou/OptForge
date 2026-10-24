@@ -1,0 +1,59 @@
+{
+  "command": [
+    "/tmp/ai-optimizer-cargo/bin/cargo",
+    "test",
+    "--offline",
+    "--release",
+    "--manifest-path",
+    "/workspace/AI-Optimizer/research/lp-tensor-expanded-device/Cargo.toml",
+    "-p",
+    "optimizer-cuda-sys",
+    "--lib",
+    "expanded_argument_tests::",
+    "-j",
+    "4"
+  ],
+  "gpu_seconds": 0,
+  "new_test_count": 1,
+  "retained_tests_filtered": true,
+  "returncode": 0,
+  "sources": [
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/lib.rs",
+      "sha256": "7874ab25a9e945e70cf46c702106a54334138d72e5522577d0b2fbb79eb319cb"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/primary.rs",
+      "sha256": "8b5ad93af537f4d39516806c0069c44a756171b05ec7a7125af0cbcf686a2d7c"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/setup.rs",
+      "sha256": "9e2eb9915dcf8dd3ef37b53ae9279df18e3f5b38477d71306337d84b3cf24653"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/status.rs",
+      "sha256": "ea72ed4eb38e348a535b1971a87c60e0c6d503d74ef9ebf7dc468df77f23d95b"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/Cargo.toml",
+      "sha256": "a2ecd81d59c3f9f362edd6abdf214f62e7922fdd1e85537936cc81f19ee382b2"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/Cargo.toml",
+      "sha256": "d8fdcb3fad67451ab16447889924709ccb05b727f5d4e1583b03a478d41d2d28"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/src/lib.rs",
+      "sha256": "a385067d4859536cf928ea2ba1b3ce397571d51ead06f5dc770b0df48a839426"
+    }
+  ],
+  "status": "passed",
+  "stderr": {
+    "path": "artifacts/gpup-tensor-expanded-v1/launch-abi-v1/stderr",
+    "sha256": "3fec2d08f890ad6d574e7c1194c534fced1bf7d8519acfe99cd0a7f454f9e747"
+  },
+  "stdout": {
+    "path": "artifacts/gpup-tensor-expanded-v1/launch-abi-v1/stdout",
+    "sha256": "252a9c353063451855d7e84ca03d8e69f484a2d6b5a1903c8b505e706a66addd"
+  }
+}

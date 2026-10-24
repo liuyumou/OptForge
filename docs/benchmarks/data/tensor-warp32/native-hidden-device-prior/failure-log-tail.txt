@@ -1,0 +1,48 @@
+test device_work_is_launched_in_bounded_chunks ... ok
+test discovery_reports_a_driver_version_for_every_device ... ok
+test repeating_a_device_evaluation_is_bitwise_identical ... ok
+test the_device_neighborhood_agrees_with_a_full_recomputation ... ok
+test the_device_neighborhood_equals_the_cpu_path ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/optimizer_cuda_sys-e2a53b5d82a74c66)
+
+running 12 tests
+test primary::tests::primary_cleanup_failures_are_observed_without_retry ... ok
+test primary::tests::primary_missing_symbols_refuse_without_resources ... ok
+test primary::tests::primary_partial_initialization_releases_exactly_once ... ok
+test primary::tests::primary_preconditions_never_retain_or_reset ... ok
+test setup::tests::disabled_nested_and_failed_observations ... ok
+test status::tests::a_status_this_build_does_not_name_keeps_its_number ... ok
+test status::tests::documented_statuses_map_to_their_names ... ok
+test status::tests::every_mapped_number_round_trips_to_a_named_status ... ok
+test status::tests::every_named_status_has_a_distinct_name ... ok
+test status::tests::faults_inside_a_kernel_are_sticky_and_ordinary_refusals_are_not ... ok
+test tests::a_raw_uuid_renders_in_the_form_management_tooling_prints ... ok
+test tests::an_absent_driver_is_an_availability_failure_rather_than_a_panic ... FAILED
+
+failures:
+
+---- tests::an_absent_driver_is_an_availability_failure_rather_than_a_panic stdout ----
+
+thread 'tests::an_absent_driver_is_an_availability_failure_rather_than_a_panic' (2061096) panicked at crates/optimizer-cuda-sys/src/lib.rs:1047:27:
+assertion failed: matches!(error, DeviceError::DriverUnavailable(_) |
+    DeviceError::SymbolMissing(_))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::an_absent_driver_is_an_availability_failure_rather_than_a_panic
+
+test result: FAILED. 11 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+error: test failed, to rerun pass `-p optimizer-cuda-sys --lib`
+Traceback (most recent call last):
+  File "/workspace/AI-Optimizer/tools/lp_tensor_warp32_native.py", line 29, in <module>
+    main()
+  File "/workspace/AI-Optimizer/tools/lp_tensor_warp32_native.py", line 16, in main
+    subprocess.run(['bash', str(ROOT / 'tools/check.sh')], cwd=ROOT, check=True)
+  File "/opt/conda/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['bash', '/workspace/AI-Optimizer/tools/check.sh']' returned non-zero exit status 101.

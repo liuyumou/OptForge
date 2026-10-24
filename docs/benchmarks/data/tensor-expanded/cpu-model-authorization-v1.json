@@ -1,0 +1,31 @@
+{
+  "authorization": "User-authorized conditional continuation with unused-budget reallocation.",
+  "full_candidate_inventory": false,
+  "gpu_seconds": 0,
+  "matrix_cells": 48,
+  "new_tests": "window_recovery only",
+  "prior_checks_reused": [
+    "authority",
+    "prototype",
+    "corrected_proof",
+    "CUDA_primitives",
+    "Rust_scalar",
+    "Rust_window"
+  ],
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/rust-window-v1/cpu-journal-v8.json",
+    "sha256": "0aced62f31f244b612889aa04bda4fb52931fe023bad99fe79967679fd65df35"
+  },
+  "reuse_unchanged_tuned_control": true,
+  "source_manifest": {
+    "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/source-manifest.json",
+    "sha256": "a3d0f31c4ad22641a4810cbc76fca47b4c84cf486cf5add5226c8a5719f8175c"
+  },
+  "status": "accepted",
+  "transfer": {
+    "cpu_seconds": 4000,
+    "source": "native",
+    "target": "cpu_models"
+  },
+  "work_wall_seconds": 998
+}

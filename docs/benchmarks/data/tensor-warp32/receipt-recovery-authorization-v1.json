@@ -1,0 +1,49 @@
+{
+  "additional_cpu_ns": 0,
+  "additional_gpu_ns": 0,
+  "all_prior_charges_preserved": true,
+  "authorization": "User explicitly requests receipt-link correction preserving originals and continued GPUP-8 from unused budget; no passed checks/profiles rerun; all criteria unchanged, 2026-10-24",
+  "automatic_retry": false,
+  "bookkeeping_cpu_ns": 24000000000,
+  "combined_gpu_cap_seconds": 1640,
+  "completion_criteria_changed": false,
+  "cpu_ceiling_ns": 53640000000000,
+  "cpu_headrooms_seconds": {
+    "implementation": 240,
+    "margin": 400,
+    "native": 0,
+    "proofs": 0,
+    "reporting": 600,
+    "workers": 6800
+  },
+  "gpu_categories_seconds": {
+    "accept": 330,
+    "profile": 320,
+    "timing": 990
+  },
+  "identity": "gpup-tensor-warp32-receipt-recovery-authorization-v1",
+  "passed_checks_rerun": false,
+  "plan": {
+    "path": "docs/plans/lp-tensor-warp32-receipt-recovery.md",
+    "sha256": "e4e257d1b2d462b7f769feb5941e0b8421ee92066385f817e5e2ce85b25b10a9"
+  },
+  "prior_accounting": {
+    "path": "docs/benchmarks/data/tensor-warp32/funded-final-cpu-accounting-v1.json",
+    "sha256": "a14c9fd67bfa8228260ffc7f7878fcf7e479d3b064637a9c4047d38e8b7d6418"
+  },
+  "prior_gpu_events": 17412,
+  "prior_gpu_ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "9913d391634bdb0f74012be909be377e5a693d00b76e6882abcf336796ac863e"
+  },
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-warp32-v1/cpu-journal-funded-final-v28.json",
+    "sha256": "4a6df30a512f45980ca1f79394fc1721c9fe8a5b8a81325332e5e9d880012348"
+  },
+  "profiles_rerun": false,
+  "unassigned_retained_stage_cpu_ns": 295590819556,
+  "worker_phase_cpu_seconds": {
+    "forecast": 400,
+    "timings": 6400
+  }
+}

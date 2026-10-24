@@ -1,0 +1,44 @@
+{
+  "bootstrap_rerun": false,
+  "cleanup_empty": true,
+  "clippy_passed": true,
+  "compile_only_device_inventory_run": false,
+  "completion_criteria_changed": false,
+  "diagnosis": {
+    "exact_driver_call_and_status_recorded": false,
+    "likely_trigger": "native wrapper explicitly sets CUDA_VISIBLE_DEVICES to the empty string",
+    "observed": "driver_version returned an error rejected by a test accepting only DriverUnavailable and SymbolMissing",
+    "scope": "availability test/harness boundary; no Tensor numerical failure demonstrated",
+    "source_inference": "the current driver_version call graph can additionally return DeviceError::Driver from cuInit or cuDriverGetVersion"
+  },
+  "failed_cpu_charge_ns": 1200000000000,
+  "full_native_pass": false,
+  "gate_log_sha256": "9ab287ca196ac0d4851de05b829ad5257ed75636075efb029199960758802f11",
+  "gate_receipt": "artifacts/gpup-tensor-warp32-v1/native-acceptance-v2.json",
+  "gate_receipt_sha256": "c693c5cf0e6440e65222ecbd77dc82dabcc79df49191ba39382289acdfb38894",
+  "gpu_execution_seconds": 0,
+  "gpu_ledger_event_count": 17366,
+  "gpu_ledger_sha256": "9142829b3be8afdb1865425c83ca9122371284ca0e16f7bc8b18d303a5894426",
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-native-hidden-device-refusal-v2",
+  "partial_native_only": true,
+  "peak_sampled_rss_bytes": 1691017216,
+  "python_integration_run": false,
+  "reason": "native_driver_availability_assertion",
+  "retry_authorized": false,
+  "sources": {
+    "crates/optimizer-cuda-sys/src/lib.rs": {
+      "archive": "docs/benchmarks/data/tensor-warp32/native-hidden-device-prior/crates__optimizer-cuda-sys__src__lib.rs.txt",
+      "sha256": "052c1f1fb990150027e71b22769aa665d8ee1d9e06842b5d982d513b2234a5aa"
+    },
+    "tools/check.sh": {
+      "archive": "docs/benchmarks/data/tensor-warp32/native-hidden-device-prior/tools__check.sh.txt",
+      "sha256": "c6e4bb977ccd3e1b45a0e3514d5340725e64c659733ebfa6949d59f97219bd71"
+    },
+    "tools/lp_tensor_warp32_native.py": {
+      "archive": "docs/benchmarks/data/tensor-warp32/native-hidden-device-prior/tools__lp_tensor_warp32_native.py.txt",
+      "sha256": "9704a096b0bbd4caa4426909f0c0ddc05d8aaac386d678214bdd7c1c542cd537"
+    }
+  },
+  "status": "incomplete"
+}

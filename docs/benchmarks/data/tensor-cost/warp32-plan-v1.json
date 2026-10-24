@@ -1,0 +1,51 @@
+{
+  "accepted_adr0044_sha256": "5ddb5babf43a1dd4cf71cd26a1a2f27e1d42eb454a6930c825b31b5712d850c4",
+  "bootstrap_rerun": false,
+  "cpu_acceptance_schedule": "proposed: one full gate on final behavioral sources before device work; targeted final delivery checks; any behavioral change stops",
+  "cpu_journal": "artifacts/gpup-tensor-cost-v1/cpu-journal-warp32-planning-v12.json",
+  "cpu_journal_sha256": "3b76f71c1e30d887b71111bab18af22a85f501da81408f7be92116a1d30a8a83",
+  "cumulative_cpu_ceiling_ns": 35900000000000,
+  "cumulative_cpu_ns": 29754705814258,
+  "cumulative_gpu_ceiling_ns": 25202574545061,
+  "cumulative_gpu_ns": 22222794320335,
+  "gpu_execution_performed": false,
+  "gpup8_gpu_ceiling_ns": 3000000000000,
+  "gpup8_gpu_ns": 863208464546,
+  "historical_refusal_report_sha256": "139faeb92734e1fee437156647e2e64fc0f56e9cd1538f9da8074453f410f3ca",
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-plan-v1",
+  "ledger_events": 17366,
+  "ledger_sha256": "9142829b3be8afdb1865425c83ca9122371284ca0e16f7bc8b18d303a5894426",
+  "maximum_cumulative_cpu_ns": 35854705814258,
+  "numerical_and_latency_criteria_changed": false,
+  "planning_cpu_ns": 5000000000,
+  "proposed_cpu_seconds": {
+    "implementation": 150,
+    "margin": 400,
+    "native": 1200,
+    "proofs": 800,
+    "reporting": 150,
+    "workers": 3400
+  },
+  "proposed_cpu_total_seconds": 6100,
+  "proposed_gpu_seconds": {
+    "ablations": 200,
+    "repeatability": 290,
+    "screening": 300
+  },
+  "proposed_gpu_total_seconds": 790,
+  "remaining_allocated_cpu_ns": 6145117030904,
+  "remaining_cumulative_cpu_ns": 6145294185742,
+  "remaining_gpu_phase_ns": {
+    "ablations": 459953926701,
+    "repeatability": 491942843872,
+    "screening": 1184894764881
+  },
+  "remaining_gpup8_gpu_ns": 2136791535454,
+  "status": "proposed_not_execution_authorized",
+  "validation": [
+    "Exact integer CPU allocation arithmetic and stage availability",
+    "GPU phase arithmetic against retained refusal report",
+    "Historical ADR and refusal report read and hashed; neither modified"
+  ]
+}

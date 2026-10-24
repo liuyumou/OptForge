@@ -1,5 +1,124 @@
 # Changelog
 
+## GPUP-8 expanded-window recovery (2026-10-24)
+
+- Correct the versioned fixture generator and pass the independent proof.
+- Add isolated expanded CPU/CUDA window execution, exact reference adoption, bounds, counters and interfaces.
+- Pass device/replay/sanitizer acceptance; retain six complete profiles and the large-model deadline refusal.
+- Preserve all prior evidence/charges; GPUP-8 remains incomplete, with no timing or GPUP-9 execution.
+
+## GPUP-8 expanded-window research attempt (2026-10-24)
+
+- Add accepted ADR-0046, budget/evidence adapters and an expanded-window CPU prototype.
+- Preserve the failed independent scalar fixture gate; no GPU implementation or latency result is admitted.
+- Document cross-window persistence as separate unallocated future work.
+
+- GPUP-8: separate receipt-link corrections pass without profile/test reruns;
+  unchanged gain forecast refuses all six candidates. No new GPU work or timings.
+
+- GPUP-8: authorize separate receipt-link corrections and continuation from
+  retained profiles, preserving original records and all completion criteria.
+
+- GPUP-8: complete device acceptance; sixteen profile workers and independent
+  receipts retained. Strict forecast stops on missing trial verification links;
+  no timings or retry. CPU-only receipt report preserves the failed gate.
+
+- GPUP-8: approved fully funded continuation with retained passed checks, separate
+  CPU phase reservations, and unchanged scientific completion criteria.
+
+## 2026-10-24: GPUP-8 deadline recovery reaches acceptance budget limit
+
+The extended project deadline completes all twelve fixed-work/replay pairs and
+24 endpoint verifications while reusing passed checks. Memcheck and racecheck
+pass; initcheck cannot reserve 36 seconds under the unchanged acceptance cap.
+Preserved all old/new evidence and charges, exact ledger prefixes and the passing
+CPU-only final report. No profiles/timings or GPUP-8 completion claim follows.
+
+## 2026-10-24: GPUP-8 operational deadline amendment
+
+Recorded user-authorized 180-second remaining-project and 60-second reporting
+deadlines, supported by retained timing observations. Prepared the separate CPU
+funding proposal; no passed check rerun, numerical/latency relaxation or new GPU
+work occurs. Worker CPU allocation remains exhausted pending funding.
+
+## 2026-10-24: GPUP-8 inventory passes; bounded device acceptance stops
+
+Completed the four-suite compile-only inventory and explicit reused-software
+composition without rerunning passed checks. Retained ordinary/project unit
+passes and the fixed-work acceptance timeout, all endpoint evidence, the
+96.035220400-second GPU charge and unchanged historical ledger prefix. Preserved
+the later CPU-report deadline and full reserved charges; GPUP-8 remains incomplete.
+
+## 2026-10-24: GPUP-8 inventory provenance admission stop
+
+Recorded the approved 2500 CPU seconds and unchanged completion limits. Preserved
+the 64-second failed adapter reservation and eleven passing focused checks; the
+missing extracted-cache checksum file is an adapter assumption error. Read-only
+diagnosis verifies all 26 locked archives and extracted members. No compilation,
+passed-check rerun or GPU work occurred; GPUP-8 remains incomplete.
+
+## Unreleased — GPUP-8 availability-test recovery (2026-10-24)
+
+- Correct CPU-only availability tests to distinguish driver initialization from
+  version-query failures, with deterministic positive and negative fixtures.
+- Preserve production driver/numerical bytes and prior CPU evidence through a
+  separate exact source bridge. Retain every prior failure and resource charge.
+- Record the approved 1240 additional CPU seconds; one native gate and conditional
+  device continuation retain the 790-GPU-second cap and all completion criteria.
+- All check.sh commands pass, including 424 Python tests; the supervisor deadline
+  prevents completion of the device-binary inventory. Retain the full native
+  charge, exact passing source archive, empty cleanup and unchanged GPU ledger.
+
+## Unreleased — GPUP-8 bounded cost continuation (2026-10-23)
+
+- Add cooperative in-container CPU admission with portable pidfds, guarded
+  process cleanup, conservative accounting and bounded completion transport.
+  Preserve every earlier failed attempt and charge; all 26 resource checks pass.
+- Retain isolated compact preparation, interval-Gram norm and device reference
+  audit research sources. Native acceptance passes; device controller acceptance
+  detects serial-versus-warp32 reference reduction differences and stops.
+- Preserve 66 ordinary device passes and 280 product pairs, with no profiles,
+  timings, preset or GPUP-9 progression. The separate device-stop report retains
+  38.094432271 GPU seconds and unchanged numerical/latency criteria.
+
+## Unreleased — GPUP-8 in-container supervisor bootstrap (2026-10-23)
+
+- Accept the revised ADR-0044 resource contract and CPU allocation. Implement
+  cooperative launch/slot ownership, affinity, process discovery, watchdog cleanup
+  and durable conservative CPU reservations without host access.
+- Retain the first bootstrap refusal on Python's missing pidfd binding before
+  workload release. Add a portable binding and four mocked regressions; runtime
+  admission remains unaccepted and requires an explicitly authorized retry.
+- Preserve failed sources/journal and every historical GPU event. No numerical
+  preparation, native acceptance or device execution runs after this refusal.
+
+## Unreleased — GPUP-8 in-container admission amendment (2026-10-23)
+
+- Propose an ADR-0044 process supervisor/guardian that uses ordinary container
+  interfaces, with serialized slots, inherited CPU affinity, sampled memory and
+  conservative four-times-wall CPU charging; state limits versus cgroups.
+- Propose 16000 prospective CPU seconds, including 14300 additional CPU seconds;
+  retain the original numerical, latency and GPU experiment sections exactly.
+- Archive the accepted ADR and previous planning sources without rewriting their
+  receipts. The resource/budget amendment requires acceptance before execution.
+
+## Unreleased — GPUP-8 Kubernetes constraint revision (2026-10-23)
+
+- Record the user's container-only boundary and withdraw host provisioning from
+  the active plan; retain the accepted resource refusal and stop before execution.
+- Make the exhausted admission/reporting CPU stages explicit. Preserve remaining
+  stage allocations, numerical criteria and historical evidence; record the
+  additional GPU offer without reserving it or changing campaign ceilings.
+
+## Unreleased — GPUP-8 CPU resource admission refusal (2026-10-23)
+
+- Accept ADR-0044 under explicit user approval and retain its first resource
+  preflight refusal: no delegated task cgroup or reachable host manager.
+- Add a read-only admission probe and seven simulated refusal counterexamples;
+  capability observations never authorize preparation or device execution.
+- Stop before preparation/GPU reservations as required. Preserve all historical
+  evidence and the exact ledger; GPUP-8 remains incomplete.
+
 ## Unreleased — GPUP-8 latency diagnosis (2026-10-23)
 
 - Add a hash-bound CPU-only diagnosis distinguishing unchanged tuned timings

@@ -67,3 +67,7 @@ pub mod tensor;
 /// Loss-preserving component Tensor research under ADR-0043.
 #[cfg(feature = "precision-research")]
 pub mod tensor_residual;
+
+/// ADR-0044 isolated Tensor cost executor.
+#[cfg(feature = "precision-research")]
+pub mod tensor_cost;

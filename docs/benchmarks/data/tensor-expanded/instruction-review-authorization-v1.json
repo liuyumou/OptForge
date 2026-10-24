@@ -1,0 +1,24 @@
+{
+  "authorization": "User explicitly permits harness correction and unused-budget reallocation; no passed check/profile rerun.",
+  "compiler_rerun": false,
+  "correction": "Read opcode modifiers, never operand register names.",
+  "diagnosed_match": "fma.rn.f32 \t%f284, %f58, %f61, %f64",
+  "gpu_seconds": 0,
+  "numerical_checks_rerun": false,
+  "original_inventory": {
+    "path": "docs/benchmarks/data/tensor-expanded/product-inventory-v1.json",
+    "sha256": "264174ab087f17968092de957f3e8b45df883cd093a2f1d899bcbe07faa03eb9"
+  },
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/cpu-journal-v10.json",
+    "sha256": "029a190a8e19b3a63a2f0ef22b72b930769d5fc26afcaf7ee706f4ecc3773c6b"
+  },
+  "retained_failed_charge_ns": 800000000000,
+  "scientific_criteria_changed": false,
+  "status": "accepted",
+  "transfer": {
+    "cpu_seconds": 160,
+    "source": "cpu_models",
+    "target": "instruction_review"
+  }
+}

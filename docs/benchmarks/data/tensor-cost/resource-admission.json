@@ -1,0 +1,15 @@
+{
+  "aggregate_rss_policy_bytes": 8589934592,
+  "bootstrap": "artifacts/gpup-tensor-cost-v1/bootstrap-corrected-v1.json",
+  "bootstrap_source_bridge": "Core entry/identity/sampling/guardian/cleanup functions AST-identical; CLI log forwarding only was added for finalization",
+  "gpu_seconds": 0,
+  "hard_memory_enclosure": false,
+  "host_access": false,
+  "identity": "gpup-tensor-cost-cooperative-admission-v1",
+  "mode": "cooperative_process_supervision_v1",
+  "sampled_stop_bytes": 6442450944,
+  "status": "passed",
+  "supervisor_sha256": "1654b6a84fd2fbd6ece2876e9eb8510fd15e444134ae9eeb303660ab4b713f7c",
+  "test_count": 20,
+  "tests": "artifacts/gpup-tensor-cost-v1/resource-tests-v1.json"
+}

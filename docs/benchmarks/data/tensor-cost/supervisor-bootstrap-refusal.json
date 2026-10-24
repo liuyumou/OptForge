@@ -1,0 +1,22 @@
+{
+  "bootstrap_attempts": 1,
+  "bootstrap_cpu_charge_seconds": 100,
+  "failed_source": {
+    "path": "artifacts/gpup-tensor-cost-v1/bootstrap-failed-source/lp_cpu_admission.py.source",
+    "sha256": "0b0f66fe4052ba598035d8565b2cd69c4d034532b9c4c7e4ba6a82d04e7abb4e"
+  },
+  "gpu_reservations": 0,
+  "gpu_seconds": 0,
+  "host_access": false,
+  "identity": "gpup-tensor-cost-supervisor-bootstrap-refusal-v1",
+  "process_cleanup_scope": "Recorded guardian exited; both fork branches fail at the missing API before any command launch; no remaining supervisor/bootstrap processes observed",
+  "raw_failure": {
+    "path": "artifacts/gpup-tensor-cost-v1/bootstrap-launch.stderr",
+    "sha256": "32f22cf17c01ad16df0d9edba37acb933df36f0304cdc89407a746ea5f440a46"
+  },
+  "reason": "Python 3.11.14 does not expose os.pidfd_open; first source directly assumed the binding",
+  "remaining_bootstrap_processes": 0,
+  "retry_authorized": false,
+  "status": "cpu_admission_refusal",
+  "workload_commands_released": 0
+}

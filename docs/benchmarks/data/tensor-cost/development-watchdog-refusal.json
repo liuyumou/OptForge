@@ -1,0 +1,23 @@
+{
+  "automatic_retry": false,
+  "bootstrap_rerun": false,
+  "cpu_ceiling_seconds": 35900,
+  "cumulative_cpu_upper_seconds": 23020.21309777,
+  "failed_receipt": "artifacts/gpup-tensor-cost-v1/study-report-and-development-tests.json",
+  "failed_receipt_sha256": "2aca6e21c5e082286c1cc069a27def8def240e940fa284d2cff38d4333cf802a",
+  "failed_reservation_cpu_seconds": 160,
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-cost-development-watchdog-refusal-v1",
+  "journal": "artifacts/gpup-tensor-cost-v1/cpu-journal-resource-v5.json",
+  "proposed_recovery": "Preserve failed journal; explicitly authorize continuation of implementation and first full native gate under existing stage caps, without bootstrap or study retries.",
+  "reason": "guardian_cpu_wall_deadline",
+  "remaining_stage_cpu_seconds": {
+    "implementation": 638.28518148,
+    "margin": 400.0,
+    "native": 2200.0,
+    "proofs": 1041.324565912,
+    "reporting": 200.0,
+    "workers": 8400.0
+  },
+  "status": "stopped"
+}

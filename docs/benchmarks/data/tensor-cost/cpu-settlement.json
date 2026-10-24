@@ -1,0 +1,25 @@
+{
+  "charges_cpu_seconds": {
+    "leased_cpu_verification": 0,
+    "native_acceptance": 0,
+    "proofs_admission": 0,
+    "reporting": 100,
+    "resource_admission": 250,
+    "supervisor_margin": 0
+  },
+  "combined_cpu_cap_seconds": 21600,
+  "combined_cpu_upper_seconds": "19884.822845162",
+  "continuation_cpu_cap_seconds": 2050,
+  "continuation_unspent_cpu_seconds": 1700,
+  "gpu_reservations": 0,
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-cost-cpu-bootstrap-settlement-v1",
+  "prior_cpu_upper_seconds": "19534.822845162",
+  "reason": "No admitted task enclosure; charge full admission/reporting reservations.",
+  "remaining_cpu_seconds": "1715.177154838",
+  "reservation": {
+    "path": "docs/benchmarks/data/tensor-cost/cpu-reservations.json",
+    "sha256": "acc58601916a86de387b7249270c84150570f4e5cb74f7eac98383a6007ea85f"
+  },
+  "total_charged_cpu_seconds": 350
+}

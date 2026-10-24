@@ -1,0 +1,10 @@
+{
+  "exception": "AssertionError",
+  "gpu_seconds": 0,
+  "proof_source": {
+    "path": "tools/lp_tensor_expanded_proof.py",
+    "sha256": "72af72df5f5abfba20c691138e13547b3b51ef31e08ac6b5e648253942b9c1b4"
+  },
+  "reason": "",
+  "status": "refused"
+}

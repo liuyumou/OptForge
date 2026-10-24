@@ -1,0 +1,97 @@
+{
+  "command": [
+    "/usr/local/cuda/bin/nvcc",
+    "--cubin",
+    "-arch=sm_120",
+    "-O3",
+    "-lineinfo",
+    "-fmad=false",
+    "-ftz=false",
+    "-Xptxas=-v",
+    "--keep",
+    "--keep-dir",
+    "/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/residual-build-v1/nvcc-kept",
+    "-o",
+    "/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/residual-build-v1/expanded_reconstruct.cubin",
+    "/workspace/AI-Optimizer/cuda/lp_pdhg_tensor_expanded/expanded_reconstruct.cu"
+  ],
+  "complete_candidate_inventory": false,
+  "device_differential_validation_pending": true,
+  "elapsed_ns": 30280982562,
+  "fp64_metadata_arithmetic": true,
+  "ftz_instructions": [],
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-expanded-residual-inventory-v1",
+  "image": {
+    "path": "artifacts/gpup-tensor-expanded-v1/residual-build-v1/expanded_reconstruct.cubin",
+    "sha256": "98b4daf87104ff86f3a77bd5bd8d1156a91135a798c410d22c3dd8ebd58109e4"
+  },
+  "limits": {
+    "registers": 128,
+    "spill_bytes": 0
+  },
+  "ptx": {
+    "path": "artifacts/gpup-tensor-expanded-v1/residual-build-v1/nvcc-kept/expanded_reconstruct.ptx",
+    "sha256": "2a1a272b138351d26510bbdbd21432dc1b85f8d5dcab3b2df1e11c97d555a52d"
+  },
+  "reason": null,
+  "resource_dump": {
+    "path": "artifacts/gpup-tensor-expanded-v1/residual-build-v1/residual.resources",
+    "sha256": "a0e634b2fac9ce2c22df3094e73ad006829477e52293546d1fa3731c1b498573"
+  },
+  "resources": [
+    {
+      "entry": "xe_reconstruct",
+      "registers": 96,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_abs_finish",
+      "registers": 38,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_abs_blocks",
+      "registers": 27,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    }
+  ],
+  "returncode": 0,
+  "sass": {
+    "path": "artifacts/gpup-tensor-expanded-v1/residual-build-v1/residual.sass",
+    "sha256": "76eb683e0fd927bd9c5db49ec4d3c46a6b66b1977ccc173cdba25fd1e9a87cf3"
+  },
+  "sources": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_reconstruct.cu",
+      "sha256": "82c20d5fb4e85df37a0cfb4ac384861135ba604369b2664a8d36f3071c876528"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_fast.h",
+      "sha256": "7ac6e3d3f3f745d4a7a5b7686f260df037618ccda6779886b0da95b7b2b5feda"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_storage.h",
+      "sha256": "d021dba2675c5e07d0ddf4338855294ad18025ad6dcc8838e147861dbc1ad2fa"
+    }
+  ],
+  "status": "passed",
+  "stderr": {
+    "path": "artifacts/gpup-tensor-expanded-v1/residual-build-v1/compile.stderr",
+    "sha256": "ed057279db6fb149410ec74d1733f52851111ab00c67c147babe712bdbb8e949"
+  },
+  "stdout": {
+    "path": "artifacts/gpup-tensor-expanded-v1/residual-build-v1/compile.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

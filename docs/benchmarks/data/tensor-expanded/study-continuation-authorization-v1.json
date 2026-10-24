@@ -1,0 +1,20 @@
+{
+  "acceptance_cpu_seconds": 4000,
+  "added_cpu_seconds": 0,
+  "authorization": "User authorizes unused-budget transfers and necessary harness corrections; approved ADR-0046 scientific attempt continues once.",
+  "completion_criteria_changed": false,
+  "passed_checks_rerun": false,
+  "passed_profiles_rerun": false,
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/telemetry-build-v1/cpu-journal-v17.json",
+    "sha256": "3f33fef9d24e00c636e52ee598fc987214f54babad9140bb40450cfe84aff59b"
+  },
+  "profiles_cpu_seconds": 3200,
+  "status": "accepted",
+  "timings_cpu_seconds": 6400,
+  "transfer": {
+    "cpu_seconds": 400,
+    "source": "implementation",
+    "target": "study_adapter"
+  }
+}

@@ -1,0 +1,323 @@
+schema_version: 1
+current_milestone: C7
+next_ready_milestone: C7
+# Capability milestones stay numbered as before. The user prioritized this
+# separate research track before C7 behavior; next_ready_task selects its slice.
+active_research_track: GPUP
+# 2026-09-20: the user pulled GPUP-THROUGHPUT ahead of GPUP-6. The GPUP-5C report
+# showed that after every arithmetic change context creation (208-330 ms) and the
+# fixed host phases dominate 400-600 ms solves, and that at 65536 rows
+# preconditioning (~940 ms) and research preparation (~1020 ms) each exceed total
+# kernel time. Those costs are outside GPUP-6's adaptive-recovery scope. The slice
+# keeps its own specification, endpoint and budget: amortized throughput never
+# substitutes for the single-solve latency endpoint (ADR-0013).
+# 2026-09-27: order the COPT report's follow-ups before more arithmetic work.
+# GPUP-EVIDENCE, GPUP-HOST, GPUP-ADAPTIVE-COST, GPUP-SETUP and
+# GPUP-COPT-ADAPTER and GPUP-CONVERGENCE are complete.
+# Listed priority is distinct from depends_on: setup and optional COPT adapter
+# investigations are not prerequisites for quantization. See the roadmap handoff.
+# 2026-10-12: GPUP-REP accepts CPU reference semantics under ADR-0034.
+# 2026-10-13: GPUP-STATE closes with ADR-0036's resource admission refusal.
+# PR 19 review retains it and adds a compact full-range scalar FMA resource pass.
+# SPEC-0021 and full expansion state remain draft; no preset follows.
+# 2026-10-22: user requests GPUP-7R resident/guard planning before GPUP-8.
+# ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
+# GPUP-8's user-approved working-family/gain requirement remains unmet.
+# Do not advance GPUP-9; unused headroom reserves no later task.
+next_ready_task: GPUP-8
+research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
+tasks:
+  - id: GPUP-COPT
+    title: COPT comparison and component-cost diagnosis
+    status: complete
+    depends_on: [GPUP-6]
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "ADR-0026; native/device gates; all 1140 attempts, 948 verified endpoints, 402/816 primary certified; component report and preserved 15340-event ledger"
+  - id: M0
+    title: Repository and process bootstrap
+    status: complete
+    depends_on: []
+    specification: docs/specifications/SPEC-0000-bootstrap.md
+    acceptance: "tools/check.sh; discovery; simulated serialization and cancellation"
+  - id: M1
+    title: Core model and validation authority
+    status: complete
+    depends_on: [M0]
+    specification: docs/specifications/SPEC-0001-model-and-validation.md
+    acceptance: "Property and exhaustive model tests, round trips, independent objective and violation recomputation"
+  - id: C1
+    title: Backend-neutral solve and session contract with HiGHS adapter
+    status: complete
+    depends_on: [M1]
+    specification: docs/specifications/SPEC-0002-backend-contract.md
+    acceptance: "Differential LP/MILP, cancellation, limits, lifecycle, warm starts, explicit statuses, reproducible records"
+  - id: C2
+    title: Owned solver executive
+    status: complete
+    depends_on: [C1]
+    specification: docs/specifications/SPEC-0003-solver-executive.md
+    acceptance: "Tiny exhaustive search, termination semantics, budgets, cancellation, proof completion"
+  - id: C3
+    title: Extension runtime and authority model
+    status: complete
+    depends_on: [C2]
+    specification: docs/specifications/SPEC-0004-extension-runtime.md
+    acceptance: "Independent extension conformance, invalid-action rejection, compatibility and resource failures"
+  - id: C4
+    title: Agent-independent run surface with pinned reproducible records
+    status: complete
+    depends_on: [C1, C3]
+    specification: docs/specifications/SPEC-0005-run-surface.md
+    acceptance: "Provenance-bearing run records, re-execution verification, named divergence, CLI search over the executive"
+  - id: C5
+    title: Flow-shop scheduling vertical slice
+    status: complete
+    depends_on: [C1, C3, C4]
+    specification: docs/specifications/SPEC-0008-flow-shop.md
+    acceptance: "Exhaustive permutations, independent evaluator, validated incumbents, frozen development subset"
+  # C6's line bundles two contracts that authorize different things, and
+  # CONTRIBUTING.md mandates one complete vertical slice, so they are separated
+  # without renumbering. SPEC-0010 owns heterogeneous computation itself and the
+  # batched integer evaluator that is its first workload; SPEC-0011 owns the GPU
+  # linear-programming backend, which needs a capability concept on the solve
+  # contract that nothing in C1 through C8 required. Both are C6. The
+  # specification key names the first, because it is the one the second depends
+  # on for device selection, residency, lease ownership and fallback.
+  # Both are now implemented with their evidence recorded, so this line closes. It
+  # was kept as one id throughout for the reason that still applies to anyone
+  # reading it later: splitting C6 in two would have let the finished half look
+  # complete on its own, and the acceptance string below is one capability's --
+  # the LP backend had to meet its equivalence and fallback parts too.
+  #
+  # The `in_progress` status this line carried while only one contract was done is
+  # no longer used anywhere. It was a fourth value beside complete, ready and
+  # planned, introduced deliberately rather than reusing `ready`, which would have
+  # said the work had not started, or `complete`, which would have said it had
+  # finished. Nothing parses this file, so the vocabulary is for a reader.
+  - id: C6
+    title: Heterogeneous backend and GPU feasibility
+    status: complete
+    depends_on: [C1, C4, C5]
+    specification: docs/specifications/SPEC-0010-heterogeneous-computation.md
+    acceptance: "CPU/GPU equivalence, sanitizers, lease recovery, fallback and transfer-inclusive measurements"
+  - id: C7
+    title: Adaptive portfolios and agent-developed algorithms
+    status: planned
+    depends_on: [C2, C3, C4, C5, C6]
+    acceptance: "Held-out comparison, discovery cost, overhead, interaction and negative-result records"
+  # C4 was one line covering four deliverables. The run surface is the
+  # reproducibility spine the later items build on, so it ships first and the
+  # registry, SDK and comparative runner keep their own specifications and gates.
+  # C8's own line bundled three deliverables the same way. The registry is the
+  # seam the other two build on and the one two recorded known-failures point at,
+  # so C8 is now the registry alone under SPEC-0009, and the SDK and the
+  # comparative runner become C9 and C10 with their own gates and their recorded
+  # blockers. Existing references to "C8's registry" therefore stay accurate.
+  - id: C8
+    title: Local extension registry and conformance workflow
+    status: complete
+    depends_on: [C4]
+    specification: docs/specifications/SPEC-0009-extension-registry.md
+    acceptance: "Registry resolution refusals, promotion checked against a conformance record, registry-backed run records verifiable by re-execution"
+  - id: C9
+    title: Python SDK over the versioned records
+    status: planned
+    depends_on: [C8]
+    acceptance: "Decision record amending ADR-0003 or a subprocess boundary needing none, packaging, and a Python test layer in the gate"
+  - id: C10
+    title: Comparative experiment runner over a frozen manifest
+    status: planned
+    depends_on: [C8]
+    acceptance: "Comparative records over a frozen manifest with per-instance provenance and no aggregate score"
+  # Execute one GPUP slice at a time. Draft specifications must be accepted
+  # before the behavior they own; GPUP-1 repairs the existing SPEC-0011 contract.
+  - id: GPUP-0
+    title: Persist GPU LP roadmap and draft contracts
+    status: complete
+    depends_on: [C6, C8]
+    specification: docs/plans/gpu-lp-precision-roadmap.md
+    acceptance: "Full native gate; documentation links; requirement-to-test and dependency mapping; zero GPU work"
+  - id: GPUP-1
+    title: Repair LP certification and review objective and gap arithmetic
+    status: complete
+    depends_on: [GPUP-0]
+    specification: docs/specifications/SPEC-0011-gpu-lp-backend.md
+    acceptance: "Independent exact-arithmetic cancellation, uncertain-sign, infinite-bound and objective-sense regressions; full native gate"
+  - id: GPUP-2
+    title: Establish bounded LP experiment infrastructure and baseline evidence
+    status: complete
+    depends_on: [GPUP-1]
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "Accept experiment contract and freeze manifests first; strict artifacts, independent endpoints, budget ledger, baseline bottleneck report"
+  - id: GPUP-3
+    title: Create shared resumable FP64 controller and reference
+    status: complete
+    depends_on: [GPUP-2]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "Accept numerical contract first; whole trajectories, restart/history checkpoints, cancellation and work accounting"
+  - id: GPUP-4
+    title: Optimize FP64 residency and sparse execution
+    status: complete
+    depends_on: [GPUP-3]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "Isolated residency, transfer, kernel and fusion measurements; numerical and device gates"
+  - id: GPUP-5
+    title: Implement FP32 storage, computation and working-state comparisons
+    status: complete
+    depends_on: [GPUP-4]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    handoff: docs/plans/gpup5-interface-handoff.md
+    acceptance: "Versioned interface acceptance; original-model checks; range diagnostics; convergence and total-cost comparison; ADR-0020 equal-work, trace and representation diagnosis complete"
+  - id: GPUP-5B
+    title: Investigate exact scaling and component-based sparse products
+    status: complete
+    depends_on: [GPUP-5]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "ADR-0021 complete; reproduced rounding note and candidates; rational/device/full-native/sanitizer gates; all 840 attempts verified; coverage recovered, negative component latency retained"
+  - id: GPUP-5C
+    title: FP64-pipe execution modes, tolerance tiers and corpus extension
+    status: complete
+    depends_on: [GPUP-5B]
+    specification: docs/decisions/ADR-0022-fp64-pipe-execution-and-tolerance-tiers.md
+    acceptance: "Root-cause note; integer-guard/fused/double-float modes with CPU oracles and bitwise device differentials; research-v2 evidence; explicit tiers; manifest v2 extension with byte-identical v1 outputs; full native and four sanitizer gates; frozen gpup5c-v1 study verified"
+  - id: GPUP-THROUGHPUT
+    title: Repeated-solve throughput with explicit matrix and device reuse
+    status: complete
+    depends_on: [GPUP-5C]
+    specification: docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md
+    acceptance: "Separate specification, API and resource budget accepted before implementation; amortized throughput plus complete setup-cost evidence; single-solve endpoint, protocol, defaults and archived evidence unchanged"
+  - id: GPUP-6
+    title: Implement configurable audits and adaptive precision recovery
+    status: complete
+    depends_on: [GPUP-5C, GPUP-THROUGHPUT]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "ADR-0025 complete; host fault injection, CPU/device differentials, v5 identity/replay/schema gates, clean-checkout budgets, full pinned-native and four adaptive sanitizers; frozen comparison with independently verified endpoints and retained failures; docs/benchmarks/lp-adaptive-gpup6.md"
+  - id: GPUP-EVIDENCE
+    title: Specify and implement compact independently verifiable LP evidence
+    status: complete
+    depends_on: [GPUP-COPT]
+    specification: docs/specifications/SPEC-0015-compact-lp-evidence.md
+    acceptance: "ADR-0027 complete; strict v1-v5 codec/identity/replay and verified transcode; four full-witness CPU roundtrips; full pinned-native gate, 55 device tests, six format pairs and six replays; all 24 fresh attempts retained, 15 independently verified and 12 certified; docs/benchmarks/lp-compact-evidence.md"
+  - id: GPUP-HOST
+    title: Remove repeated immutable host reconstruction within fresh solves
+    status: complete
+    depends_on: [GPUP-EVIDENCE]
+    specification: docs/specifications/SPEC-0016-lp-immutable-host-input.md
+    acceptance: "ADR-0028 complete; v1-v5 immutable input/identity and exact-rational gates; full native and 55 device tests; six old/new pairs and six replays; all 28 attempts independently verify, 24 timings certify, 14 numerical pairs match; parse/validation calls 2 to 1 with fresh assessments; docs/benchmarks/lp-immutable-host-input.md"
+  - id: GPUP-ADAPTIVE-COST
+    title: Reduce adaptive ladder preparation and audit or probe host overhead
+    status: complete
+    depends_on: [GPUP-HOST, GPUP-6]
+    specification: docs/specifications/SPEC-0017-lp-adaptive-host-cost.md
+    acceptance: "ADR-0029/SPEC-0017 complete; full native, 55 device and four adaptive sanitizer gates; twelve old/new pairs and twelve replays bitwise; 32 verified attempts, 24 certified timings, 16 identical numerical/work pairs; docs/benchmarks/lp-adaptive-host-cost.md"
+  - id: GPUP-SETUP
+    title: Investigate fresh device discovery, context, module and teardown costs
+    status: complete
+    depends_on: [GPUP-COPT]
+    specification: docs/specifications/SPEC-0018-lp-fresh-setup.md
+    acceptance: "ADR-0030 complete; four prior control profiles; 32 verified attempts, 24 certified timings, 16 equal comparisons; full native, 58 device, four primary sanitizers, twelve fixed-work pairs/replays; no consistent benefit or default change; docs/benchmarks/lp-fresh-setup.md"
+  - id: GPUP-COPT-ADAPTER
+    title: Investigate optional COPT bulk model construction
+    status: complete
+    depends_on: [GPUP-EVIDENCE]
+    specification: docs/specifications/SPEC-0019-copt-bulk-adapter.md
+    acceptance: "ADR-0031 complete; full native and source-only gates, 12 native readbacks, 24 certified acceptance endpoints; all 84 study attempts verify, 42/72 timings certify; bulk slower in all certified cells; docs/benchmarks/lp-copt-adapter.md"
+  - id: GPUP-CONVERGENCE
+    title: Review convergence and equal-work mixtures before lower precision
+    status: complete
+    depends_on: [GPUP-ADAPTIVE-COST]
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "ADR-0032 complete; all 176 attempts retained, 174 endpoints verified, 87/104 timings certified; full native, 58 device, twelve fixed-work pairs/replays, eight COPT min/max/profile endpoints and source-only gates pass; work/cost diagnosis without arithmetic/default changes or preset; docs/benchmarks/lp-convergence.md"
+  - id: GPUP-DESIGN
+    title: Preserve precision architecture, numerical drafts and component experiments
+    status: complete
+    depends_on: [GPUP-CONVERGENCE]
+    acceptance: "ADR-0033 planning only; rationale and proposed SPEC-0020/0021; reproducible CPU design artifact and full pinned-native gate; no runtime or GPU work"
+  - id: GPUP-REP
+    title: Validate and accept a bounded exact-storage and expansion contract on CPU
+    status: complete
+    depends_on: [GPUP-DESIGN]
+    specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
+    acceptance: "ADR-0034; exact input codec plus binary64 and 64-bit-significand CPU semantics; independent 32852-codec/1058-primitive oracle; bounded layout/memory receipts; full native gate; CPU-only, zero GPU"
+  - id: GPUP-EXEC
+    title: Implement and measure an admitted lean precision operator executor
+    status: complete
+    depends_on: [GPUP-REP, GPUP-5C]
+    specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
+    acceptance: "ADR-0035; 2347-case Fraction oracle; exact bounded cached/uncached executor, 27/27 identical study pairs; full native, 58 regular device tests, six replays and four scoped sanitizers; 108 attempts retained, 94 endpoints verified, 58/96 timings certified; explicit discovery failures, range refusals and total-cost negative result"
+  - id: GPUP-STATE
+    title: Investigate persistent accurate state and stable numerical formulas
+    status: complete
+    depends_on: [GPUP-EXEC]
+    specification: docs/specifications/SPEC-0020-lp-expansion-arithmetic.md
+    acceptance: "ADR-0036 bounded admission investigation: original 192 integer/270 FMA/64 update/48 transcendental cases and full-bin refusal at 255 registers retained; PR 19 compact full-range FMA fits at 40 registers/zero spills with 5900 additional cases per construction and host UBSan; instruction/frozen-candidate verifier fixes; 6170 device cases/four scoped sanitizers/36 verified primitive timings on PRO 6000; blocked 5090 and receipt-only correction retained; no controller or solver benefit; charge 30.114068273 GPU s, 16452 events; full native gate"
+  - id: GPUP-REFINE
+    title: Accept and evaluate residual-driven LP refinement and anchored products
+    status: complete
+    depends_on: [GPUP-REP, GPUP-EXEC, GPUP-CONVERGENCE]
+    specification: docs/specifications/SPEC-0021-lp-refinement.md
+    acceptance: "ADR-0037/0038 bounded native-FP64-outer correction LPs and guarded FP32 anchors; 240 rational models/1200 maps, 93 independent endpoint merit enclosures/39 contractions; full native, 66 regular device tests, 1920 product checks, nine replays/four scoped sanitizers; 108 attempts retained, 48 endpoints verified, 30/96 timings certified; initial host-only success and numerical refusals/timeouts establish no product benefit or preset; task 1541.719136512 GPU s, 16684 events"
+  - id: GPUP-ASSESS
+    title: Validate a bounded assessment scheduling policy
+    status: complete
+    depends_on: [GPUP-CONVERGENCE, GPUP-DESIGN]
+    specification: docs/specifications/SPEC-0021-lp-refinement.md
+    acceptance: "ADR-0039; 16 CPU trajectories/320 boundary checks; 60 retained attempts, 57 verified endpoints, 24/48 certified timings; six bitwise profile pairs, 66 ordinary/three new device tests, six fixed-work pairs/twelve replays/four sanitizers; CPU-only bitwise replay/report review; 523.674592721 GPU s, 16816 ledger events; scoped 1.0272x FP64 irregular-32768 gain, unchanged coverage/no preset; docs/benchmarks/lp-assessment-scheduling-gpup-assess.md"
+  - id: GPUP-7
+    title: Admit error-budgeted quantization and selective sparse FP8 candidates
+    status: complete
+    depends_on: [GPUP-6, GPUP-EVIDENCE, GPUP-REFINE, GPUP-EXEC]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    acceptance: "ADR-0040; 56 CPU cases/7 numerical refusals, 162015 codec/3072 product components; full native/device/18 replays/four sanitizers; 104 retained attempts, 34 verified study endpoints, 33/96 timings; initial host-only new-mode success and 70 timeouts/no full profile horizon; all 182 retained endpoints reverify; 1382.959456122 GPU s, 17036 events; no preset"
+  - id: GPUP-7R
+    title: Implement resident quantized execution with matched FP64 controls
+    status: complete
+    depends_on: [GPUP-7]
+    specification: docs/plans/lp-quant-resident-follow-up.md
+    acceptance: "ADR-0041; 72-cell CPU admission/no useful quantized window; 42 executed study jobs plus 78 CPU refusals; 39 verified study LP endpoints/36 certified of 108 timings; three complete logical-2000 profiles/21 product endpoints; full native, 66 ordinary device tests, 628 vectors, 29 fixed-work/replay pairs/four sanitizers; all 313 LP plus 21 operator endpoints freshly verify; 245.686586823 GPU s, 17132 ledger events; separate resident report, no preset"
+  - id: GPUP-8
+    title: Implement hybrid Tensor components with a certified latency gain
+    status: in_progress
+    depends_on: [GPUP-7R]
+    specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
+    # ADR-0044 accepted: CPU resource preflight refuses absent delegation;
+    # no preparation/GPU reservation, 350 CPU s conservatively charged.
+    # Kubernetes/container-only constraint: no host provisioning or equivalent
+    # in-container enclosure; see docs/plans/lp-tensor-kubernetes-constraint.md.
+    # Admission/reporting CPU stages exhausted; extra GPU offer unreserved.
+    # Proposed amendment: cooperative in-container supervisor, 16000 CPU s from
+    # 1700 remaining + 14300 new; cumulative CPU cap 35900, awaiting acceptance.
+    acceptance: "ADR-0044 original accepted/cgroup-refused; proposed in-container resource/budget amendment awaits acceptance and keeps numerical/latency criteria exact. No preparation/GPU reservation. Historical ADR-0043: useful INT8/FP16/BF16 solves qualify, 60/60 timings certify, 12 complete profiles, 120 verified LP records; all six adjusted latency comparisons fail. GPUP-8 remains incomplete; 825.114032275 GPU s and exact 17362-event ledger preserved; no GPUP-9 progression"
+  - id: GPUP-9
+    title: Run controlled precision experiments and ablations
+    status: planned
+    depends_on: [GPUP-7, GPUP-STATE, GPUP-ASSESS]
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "Accept concrete protocol from lp-precision-design-experiments first; bounded component/interaction blocks, frozen finalists and unseen grouped holdout; coverage, uncertainty and full costs; optional GPUP-8 disposition recorded; all campaign/phase caps preserved"
+  - id: GPUP-10
+    title: Package evidence-supported precision recipes
+    status: planned
+    depends_on: [GPUP-9]
+    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    acceptance: "Preset evidence and decision record; reproducible report and tutorials; full gates; no promotion from incomplete evidence"
+  - id: GPUP-MILP
+    title: Full MILP search integration and end-to-end performance study
+    status: planned
+    depends_on: [GPUP-10]
+    acceptance: "Separate integration specification and budget; pruning authority and proof preservation; full integer-search timing"
+research_phases:
+  - "Priority GPUP track: certified single-solve latency; eight GPU-hour initial study; see research_roadmap and next_ready_task"
+  - "Adaptive portfolios and bounded agent-generated candidate/search advisers"
+  # SPEC-0011 keeps this ordering in substance rather than skipping it: the CPU
+  # first-order method is built first and is what the device kernels are checked
+  # against, so it is a differential oracle rather than a preliminary step that
+  # the device work replaces.
+  - "CPU first-order LP as the oracle for, and therefore before, approximate GPU LP"
+  - "Evidence-driven presolve, scaling, recovery, cuts, CPU parallelism, checkpointing"
+  - "Python SDK and local extension registry after stable Rust contracts"
+  - "Independent held-out evaluation, ablations, negative results, authorized release"
+deferred:
+  - public_plugin_distribution
+  - multi_gpu_algorithms
+  - broad_commercial_solver_compatibility
+  - natural_language_model_generation

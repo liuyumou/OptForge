@@ -1,0 +1,23 @@
+{
+  "authorization": "User authorizes continuation, necessary harness corrections and unused-budget transfers.",
+  "gpu_seconds": 0,
+  "new_cpu_seconds": 0,
+  "numerical_criteria_changed": false,
+  "passed_checks_rerun": false,
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/launch-abi-v1/cpu-journal-v14.json",
+    "sha256": "98a744c6322c7d60a3d3c5e78ad87bf6c7c7c7e7ae86cb2ae97bda30ff63d579"
+  },
+  "status": "accepted",
+  "target": "executor_build",
+  "transfers_cpu_seconds": [
+    {
+      "amount": 800,
+      "source": "proof_retry"
+    },
+    {
+      "amount": 800,
+      "source": "cpu_models"
+    }
+  ]
+}

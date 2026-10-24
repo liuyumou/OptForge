@@ -1,0 +1,31 @@
+{
+  "files": [
+    {
+      "after_sha256": "854a823283b2b297e09e32b624d6da886cee2c3d2b86f080e9da4395a0f6b47d",
+      "before_sha256": "052c1f1fb990150027e71b22769aa665d8ee1d9e06842b5d982d513b2234a5aa",
+      "frozen_path": "docs/benchmarks/data/tensor-warp32/availability-recovery-prior/crates__optimizer-cuda-sys__src__lib.rs.txt",
+      "path": "crates/optimizer-cuda-sys/src/lib.rs"
+    },
+    {
+      "after_sha256": "d9d2851e57f1325aa4ff712a1fc4c82b4e0a5f6de28df59da087e10e69bb4902",
+      "before_sha256": "87fa41b324444c42972919c09b0d4565e6e5559b31e1d9ad6d59e94e0551fec8",
+      "frozen_path": "docs/benchmarks/data/tensor-warp32/availability-recovery-prior/tests__integration__test_lp_quant_pr_review.py.txt",
+      "path": "tests/integration/test_lp_quant_pr_review.py"
+    },
+    {
+      "after_sha256": "290d9a9dce2bf9d865e0bf24007ccc18c141130128256a7af41fd006324c1af9",
+      "before_sha256": "7af232f3c9bb2714ec6a9da82168634c2de6424109fef6f062d283a55936282c",
+      "frozen_path": "docs/benchmarks/data/tensor-warp32/availability-recovery-prior/tools__lp_tensor_warp32_build.py.txt",
+      "path": "tools/lp_tensor_warp32_build.py"
+    },
+    {
+      "after_sha256": "cc17179bd8f672dfd7272874f38181276cc9555c8c96379ab6cb1e76c1565ef6",
+      "before_sha256": "7cb3e24c3bf261d1703101f6795e2e939b582f3d9479eae9e318f83877475edf",
+      "frozen_path": "docs/benchmarks/data/tensor-warp32/availability-recovery-prior/tools__benchmark_lp_tensor_warp32.py.txt",
+      "path": "tools/benchmark_lp_tensor_warp32.py"
+    }
+  ],
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-warp32-availability-source-bridge-v1",
+  "scope": "CUDA-sys test module and exact source bridge only; production and numerical bytes unchanged"
+}

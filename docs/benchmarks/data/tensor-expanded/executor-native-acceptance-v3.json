@@ -1,0 +1,31 @@
+{
+  "binary": {
+    "path": "artifacts/gpup-tensor-expanded-v1/telemetry-build-v1/target/release/lp-tensor-expanded-device",
+    "sha256": "540bae2462e1bee159486173055de9f718579a5a6f4de44ad91fbaef9a649fdc"
+  },
+  "checks": [
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/telemetry-build-v1/clippy.json",
+      "sha256": "cbb759a1046976883be19c640128381e9ffe6a8f978d81bc8905a6276080a3ec"
+    },
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/telemetry-build-v1/build.json",
+      "sha256": "f84db164b07eed31b49bdd51f361f6377ba6526f69e9b6dc0e669d2b6d2e4d5c"
+    },
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/telemetry-build-v1/telemetry-test.json",
+      "sha256": "954fe88f8d15aa23dc43a4a0a78f9ea6d2c5950b848d51cbd5410eda4ff8e367"
+    }
+  ],
+  "gpu_seconds": 0,
+  "old_tests_filtered": true,
+  "reused_native": {
+    "path": "docs/benchmarks/data/tensor-expanded/executor-native-acceptance-v2.json",
+    "sha256": "8071ad19a034980a476f65884cabd17f9618e19fca4307bb50261918b975fcf8"
+  },
+  "source_manifest": {
+    "path": "artifacts/gpup-tensor-expanded-v1/telemetry-build-v1/source-manifest.json",
+    "sha256": "70b9b0a7ae7b006a6e86dec04349fe03aa276d17bc415e5f80af5131f7090c00"
+  },
+  "status": "passed"
+}

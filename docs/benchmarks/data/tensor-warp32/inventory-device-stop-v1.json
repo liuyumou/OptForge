@@ -1,0 +1,229 @@
+{
+  "acceptance_pass": false,
+  "all_prior_charges_preserved": true,
+  "automatic_retry_authorized": false,
+  "bootstrap_rerun": false,
+  "campaign_gpu_ns": 22318829540735,
+  "certified_latency_gain": false,
+  "cleanup_empty": true,
+  "commit": false,
+  "compile_only_inventory_pass": true,
+  "completed_verification_receipts": 15,
+  "completed_verifications": [
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-bf16-tensor.verify-replay.json",
+      "sha256": "9217641b7dd4840c4b8463b415777668e13950a082a94afd699238b49180c951"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-bf16-tensor.verify.json",
+      "sha256": "5a7a8d7ac8e5fca3de20c73b5d19d065497b2f9491bb5e4e8ae1f95c2d955522"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-component-simt.verify-replay.json",
+      "sha256": "1f0e657127d315a2ade9a9afa70682eaf13c4b4de88c1d4351c659c4786b070c"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-component-simt.verify.json",
+      "sha256": "87590ae48d2f3c12896ac13d6fc9974a92ed2b899740b473e7d2065ffe4ab8c0"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-fp16-tensor.verify-replay.json",
+      "sha256": "3d10f632387e6be5caa018347ff5f866be9e10e0b076bd9f2262167112deab86"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-fp16-tensor.verify.json",
+      "sha256": "6cf191b702a07124ad11af1d0a0325ec3ad80012bbe7e02adb136dc89b40e07c"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-int8-tensor.verify-replay.json",
+      "sha256": "952fad66ffe51181de3b81111cd8e9ef7dcf4f931c22017df783ee544ed895d2"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-int8-tensor.verify.json",
+      "sha256": "fbede9f0bc90f669212b256ce4fa33f7295b3ef1c6c0aa0dfae815cbf05ad3ef"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-matched-fp64.verify-replay.json",
+      "sha256": "351f848f2b0e9a26942e07ef4f1d41e91fbce9621369decba2194565264f4097"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-matched-fp64.verify.json",
+      "sha256": "29729cd39974a8512ba9abeb300a9d6e29c2f5652dbd6345b8b4f64fbcd8cf90"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-tuned-fp64.verify-replay.json",
+      "sha256": "f3ea08837d8f081918e21db4567243f1f052c1cd4c3d411c7da6c824e7261b5b"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-tuned-fp64.verify.json",
+      "sha256": "fa6db247baea3775f97287e040fc93396b67bd81dfa5677051b7c7375d093882"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-extension-dense_block-65536-fp16-tensor.verify.json",
+      "sha256": "2842ff4b65b778a494e6244c2e118d53a447cb0fc7f699b7ec2c66aea77f6ed6"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-extension-dense_block-65536-int8-tensor.verify-replay.json",
+      "sha256": "5e64a0a1c7b5e22c1e19009bd4cf838cda5a571721604f573771a1b71dd9f6a1"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-extension-dense_block-65536-int8-tensor.verify.json",
+      "sha256": "e4606f2505c519f5d801bc22bf1726b68e9108b29240513a2a09bf4c20f19ea5"
+    }
+  ],
+  "completion_criteria_changed": false,
+  "composite": {
+    "path": "artifacts/gpup-tensor-warp32-v1/composite-native-acceptance-v2.json",
+    "sha256": "1ec451ea0b0d79980b615bf98928f6153f0cad9d60b526b6d0c3d930f514b051"
+  },
+  "composite_acceptance_pass": true,
+  "container_change": false,
+  "controller_comparisons_passed": 5,
+  "cpu_at_report_stop_ns": 38684699832818,
+  "cpu_at_worker_stop_ns": 38616699832818,
+  "cpu_ceiling_ns": 39640000000000,
+  "endpoints": [
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-bf16-tensor.endpoint.json",
+      "sha256": "e8fe1d16d0e0cadead348a730f60f1be2f3cfea50cb3dac0611391e33f2acb26"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-bf16-tensor.endpoint.json.replay.json",
+      "sha256": "0f18633b89ff14cd67b6a662f005ac6d42b266d7d5e9119fad016029f20aa75a"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-component-simt.endpoint.json",
+      "sha256": "a6dd411f99419c0b16873f8f9b25ec56b6a1162f697dec3e6a7029d2a77b88b7"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-component-simt.endpoint.json.replay.json",
+      "sha256": "f9fe1ec95468aa4287da7be42c9cc28aa85a64e7d13e2134920771820e178373"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-fp16-tensor.endpoint.json",
+      "sha256": "86dfb0ace258b0975a78f5b74ba15cea906cf84160fabc744199a80e420c28fd"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-fp16-tensor.endpoint.json.replay.json",
+      "sha256": "8d18557dc8817ba75c888f81c0c01b3747f317c5b107a46afd6cad1bd18ae836"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-int8-tensor.endpoint.json",
+      "sha256": "a422b2c8315c301dba3d6cf75d70e65dd510cdc8c87d470c7bbe1773b3c272bc"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-int8-tensor.endpoint.json.replay.json",
+      "sha256": "1491291246fad482a1f99aeec10404090cb03fde5935e8c7a3d7596e43b2127b"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-matched-fp64.endpoint.json",
+      "sha256": "8f28802555c2bb0d0d452ac7b29ab4bd4c6d1ed595dbb98a4a9dc3cb97ca08be"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-matched-fp64.endpoint.json.replay.json",
+      "sha256": "b79bae6c9ed24d7b263e46de1db7ba595a9756d97e593e101381339f27c2c977"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-tuned-fp64.endpoint.json",
+      "sha256": "a35c2afc590a049784943bee74d4f46893365c99b9881883214e7005f6101b55"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-development-dense_block-1024-tuned-fp64.endpoint.json.replay.json",
+      "sha256": "27d970cc74b627e5c99ac044159ef9d1ac3e515d69f1ff16b93ca91c5337105d"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-extension-dense_block-65536-fp16-tensor.endpoint.json",
+      "sha256": "310358ebe9b55c5ce9b7cc1a23f7062c933237662ed472a583cee500bfefe525"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-extension-dense_block-65536-fp16-tensor.endpoint.json.replay.json",
+      "sha256": "503ac8ca7c7526b28eb869d9ed93744fd2f0f95ca8e14a67bebb974692fd4ee3"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-extension-dense_block-65536-int8-tensor.endpoint.json",
+      "sha256": "035e4c1d28318ef9d1b9427632856508bddfe01c4e9a06284880531b6b9eedbe"
+    },
+    {
+      "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-extension-dense_block-65536-int8-tensor.endpoint.json.replay.json",
+      "sha256": "5a8bb915cba03db0a2de4413731297ff778577a7b1a8463692cdfecdbafd973f"
+    }
+  ],
+  "executed_study_cells": 0,
+  "execution": {
+    "path": "artifacts/gpup-tensor-warp32-v1/study-v1/execution.json",
+    "sha256": "22aa9dcb497d631607769f4cfbd7d7b1742f7774f1d93d00b836db07098f82da"
+  },
+  "failed_report_log": {
+    "path": "artifacts/gpup-tensor-warp32-v1/inventory-device-report-resource-v1.json.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "failed_report_source": {
+    "path": "artifacts/gpup-tensor-warp32-v1/inventory-device-stop-report-v1.py",
+    "sha256": "8d0a8691238401a48c46d90a569871448b987bb6360d9b846ab897d8b177fff1"
+  },
+  "fixed_work_replay_pairs_fully_verified_before_timeout": 7,
+  "full_final_verification_report_pass": false,
+  "gpu_cap_seconds": 790,
+  "gpu_ledger": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+  "gpu_ledger_events": 17370,
+  "gpu_ledger_sha256": "2dac176a925a0bba6096eea8f57ed694465c0199625d120eeb32d468310dc4e4",
+  "gpup8_complete": false,
+  "gpup8_gpu_ns": 959243684946,
+  "gpup9_started": false,
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-inventory-device-stop-v1",
+  "new_adapter_checks_passed": 6,
+  "new_gpu_ns": 96035220400,
+  "ordinary_device_tests_passed": 66,
+  "planned_study_cells": 76,
+  "prior_gpu_prefix_events": 17366,
+  "prior_gpu_prefix_sha256": "9142829b3be8afdb1865425c83ca9122371284ca0e16f7bc8b18d303a5894426",
+  "product_pairs_passed": 280,
+  "profiles_executed": 0,
+  "project_device_unit_tests_passed": 4,
+  "reason": "project_acceptance_fixed_60_second_timeout",
+  "remaining_unverified_endpoint": {
+    "path": "artifacts/gpup-tensor-warp32-v1/acceptance-v1/project/gpup-extension-dense_block-65536-fp16-tensor.endpoint.json.replay.json",
+    "sha256": "503ac8ca7c7526b28eb869d9ed93744fd2f0f95ca8e14a67bebb974692fd4ee3"
+  },
+  "report_failure_cpu_charge_ns": 64000000000,
+  "required_fixed_work_replay_pairs": 12,
+  "resources": {
+    "inventory-composition-resource-v2.json": {
+      "path": "artifacts/gpup-tensor-warp32-v1/inventory-composition-resource-v2.json",
+      "sha256": "2658b9ecc07efe4bd21aefd30ca6e64c3d99c66081d9a1120c63163ac22b14f5"
+    },
+    "inventory-device-report-resource-v1.json": {
+      "path": "artifacts/gpup-tensor-warp32-v1/inventory-device-report-resource-v1.json",
+      "sha256": "fc82ba386dda0fe30a1d24944dd9278ce83d789841970f7b559c59a4ce530c74"
+    },
+    "inventory-recovery-workers-resource-v2.json": {
+      "path": "artifacts/gpup-tensor-warp32-v1/inventory-recovery-workers-resource-v2.json",
+      "sha256": "98317bcbc3e363d04820699b0e367ac2a469708fa2c73c543d7b72145f0f8cad"
+    },
+    "inventory-resource-v1.json": {
+      "path": "artifacts/gpup-tensor-warp32-v1/inventory-resource-v1.json",
+      "sha256": "fbb6987f41d28b0a950726a029e2a7a6e68487c6bebd19ff8fd39c0a42bdb4d4"
+    },
+    "inventory-setup-resource-v2.json": {
+      "path": "artifacts/gpup-tensor-warp32-v1/inventory-setup-resource-v2.json",
+      "sha256": "4370ed5b13265cacbccc6a02790ce897697e7b74262eca214159d886aa9ec6d2"
+    }
+  },
+  "retained_endpoint_pairs": 8,
+  "retained_endpoints": 16,
+  "sanitizers_executed": 0,
+  "scientific_report_pass": false,
+  "secondary_delivery_failure": "cpu_only_report_guardian_deadline",
+  "software_checks_rerun": false,
+  "software_pass_preserved": true,
+  "source_archive": {
+    "path": "artifacts/gpup-tensor-warp32-v1/study-v1/source.tar",
+    "sha256": "5839a0161120303ab80e2d82ff96080d52a4a09f0c8b788c2abf7f43a1d69573"
+  },
+  "status": "incomplete",
+  "timings_executed": 0,
+  "warp32_bit_refusal_witnesses_passed": 32,
+  "worker_failure_cpu_charge_ns": 3964000000000,
+  "working_certified_tensor_families": false
+}

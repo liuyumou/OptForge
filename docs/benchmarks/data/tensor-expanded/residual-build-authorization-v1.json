@@ -1,0 +1,40 @@
+{
+  "authorization": "User-authorized continuation and unused-budget reallocation.",
+  "compile_timeout_seconds": 280,
+  "fp64_operations": "Outward error/magnitude metadata only; product iterates remain Expansion64.",
+  "full_candidate_inventory": false,
+  "gpu_seconds": 0,
+  "implementation_bookkeeping_cpu_seconds": 16,
+  "passed_checks_rerun": false,
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/instruction-review-v1/cpu-journal-v11.json",
+    "sha256": "21825887b1122e73083bd0dd49e1c9fb965e7720a5cd0cc446847c8c18dae383"
+  },
+  "register_limit": 128,
+  "sources": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_reconstruct.cu",
+      "sha256": "82c20d5fb4e85df37a0cfb4ac384861135ba604369b2664a8d36f3071c876528"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_fast.h",
+      "sha256": "7ac6e3d3f3f745d4a7a5b7686f260df037618ccda6779886b0da95b7b2b5feda"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_storage.h",
+      "sha256": "d021dba2675c5e07d0ddf4338855294ad18025ad6dcc8838e147861dbc1ad2fa"
+    }
+  ],
+  "spill_bytes_limit": 0,
+  "status": "accepted",
+  "transfer": {
+    "cpu_seconds": 1200,
+    "source": "implementation",
+    "target": "residual_compile"
+  },
+  "work_wall_seconds": 298
+}

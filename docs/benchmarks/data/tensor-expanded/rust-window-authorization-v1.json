@@ -1,0 +1,39 @@
+{
+  "authorization": "User-authorized conditional continuation using unused allocations.",
+  "gpu_seconds": 0,
+  "historical_sources_unchanged": true,
+  "implementation_bookkeeping_cpu_seconds": 16,
+  "new_sources": [
+    {
+      "path": "research/lp-tensor-expanded/src/bin/expanded_solver.rs",
+      "sha256": "6852ad8d0fdd39f0185180a64e141b98eb1661e6bd6b6315b87a217a6e651581"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/solver.rs",
+      "sha256": "ff2b353227fc865facf25b73db3df6b5c69e8240f84b47812fe5876b5041781e"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/prepared.rs",
+      "sha256": "c2f23f7411bf415fe48f4e32e446349bb6e8cf407983f40fd6e9dc15482d25d3"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/outward.rs",
+      "sha256": "2b2615b2e88561c3a8e2f6feefc38c298046a9ab8c007b1a2c9ebcc83d42d6b2"
+    }
+  ],
+  "passed_checks_rerun": false,
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/rust-scalar-v1/cpu-journal-v7.json",
+    "sha256": "6030a321d4f489ccd3da6a808a3c8921a0582353c319772cf794c6ca747de487"
+  },
+  "prior_scalar": {
+    "path": "docs/benchmarks/data/tensor-expanded/rust-scalar-acceptance-v1.json",
+    "sha256": "b0439ad25f3068169e7a8270dcf8d46d1dce3687449a224562839ec6bb1fd074"
+  },
+  "status": "accepted",
+  "transfer": {
+    "cpu_seconds": 400,
+    "source": "implementation",
+    "target": "cpu_window"
+  }
+}

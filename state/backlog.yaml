@@ -1,3 +1,12 @@
+# GPUP-8 corrected proof/device acceptance pass; large BF16 profile deadline stop; no timings, GPUP-9 gated.
+# GPUP-8 expanded-window proof refuses noncanonical fixture; no GPU, no retry, GPUP-9 gated.
+# GPUP-8 2026-10-24: 12 pairs/24 verifications and memcheck/racecheck pass; initcheck admission refused.
+# Acceptance 256.421358210/290 GPU seconds; GPUP-8 incomplete, GPUP-9 gated.
+# GPUP-8 2026-10-24: operational deadlines selected (project remaining 180s/report 60s); CPU funding pending.
+# GPUP-8 2026-10-24: inventory/composite pass; project fixed-work timeout, final CPU-report deadline.
+# GPUP-8 incomplete, GPUP-9 gated, ledger 17370 preserves exact 17366-event prefix.
+# GPUP-8 2026-10-24: inventory admission stopped on cache-metadata assumption; no compilation/GPU work.
+# Approved CPU ceiling 39640; GPUP-8 incomplete and GPUP-9 gated. See inventory-admission report.
 schema_version: 1
 current_milestone: C7
 next_ready_milestone: C7
@@ -280,9 +289,10 @@ tasks:
     status: in_progress
     depends_on: [GPUP-7R]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
-    # CPU-only latency diagnosis complete; ADR-0044 proposes 1806 GPU/2050 CPU s,
-    # contingent on explicit acceptance and repaired aggregate CPU admission.
-    acceptance: "ADR-0043 continuation: useful INT8/FP16/BF16 solves qualify, 60/60 timings certify, 12 complete profiles, 120 verified LP records; all six adjusted latency comparisons fail; GPUP-8 incomplete on gain and uncertified initial CPU concurrency; combined 825.114032275 GPU s, 17362 events; no GPUP-9 progression"
+    # Accepted cooperative resource recovery: 26 tests and full native pass.
+    # Frozen device cohort stops at exact INT8 reference/controller mismatch.
+    # No automatic repair/retry, timing continuation or GPUP-9 authorization.
+    acceptance: "ADR-0045 remains incomplete after user-authorized receipt-link correction. Seventeen focused checks pass; sixteen corrected trial views bind retained receipts while all originals remain exact. No passed check, profile or numerical verification rerun. Unchanged strict forecast accepts complete profiles and useful integer/floating families but all six gain forecasts refuse: best small 0.642764297 s exceeds 0.415902600; best large 8.977063370 exceeds 5.697919800. No primary timing comparison is claimed. Full 400 forecast CPU seconds charged; 6400 timing CPU seconds unused. Zero new GPU; exact 17412-event ledger unchanged. CPU-only report passes; GPUP-9 gated. See lp-tensor-warp32-receipt-recovery-gpup8.md."
   - id: GPUP-9
     title: Run controlled precision experiments and ablations
     status: planned

@@ -1,0 +1,41 @@
+{
+  "authorization": "User explicitly permits harness adjustments and unused-budget reallocation; original records must remain exact.",
+  "exception": "Only blank-at-eof for these four exact hash-bound files; all other whitespace checks remain active.",
+  "numerical_criteria_changed": false,
+  "passed_documentation_check_reused": {
+    "path": "artifacts/gpup-tensor-expanded-v1/recovery-delivery-v1/docs.stdout",
+    "sha256": "f2b8474cde8a4ce5ff8068d6708d612c6ff4d5a72bcbbd1bee73e1fc3b558180"
+  },
+  "prior_diff": {
+    "path": "artifacts/gpup-tensor-expanded-v1/recovery-delivery-v1/diff.stdout",
+    "sha256": "c9409a82a48a4aab047f52e895c6ed252866bbb1808db2d39b95827b92d17bbd"
+  },
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/recovery-delivery-v1/cpu-journal-v19.json",
+    "sha256": "b892698e9cd062d4f55cb32760f2b8d1f75532f97118de86f9e5823fa8979b4f"
+  },
+  "status": "accepted",
+  "transfer": {
+    "cpu_seconds": 120,
+    "source": "delivery_report",
+    "target": "delivery_hygiene"
+  },
+  "unchanged_frozen_files": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-warp32-deadline-recovery-gpup8.md",
+      "sha256": "1b431cbaa12960761721b51d4bc77814d69d1a2f042e0c6b16e98c147d0f7096"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-warp32-inventory-admission-gpup8.md",
+      "sha256": "b57875b3c6086295940539fb79a36344b64ba3e0a8f0e7d14b15b2f5bc8f96a8"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-warp32-inventory-device-gpup8.md",
+      "sha256": "b94666380324bf884a2ef9ccbc7079a5fa2c650db4f92d50d48454e7b9caa08b"
+    }
+  ]
+}

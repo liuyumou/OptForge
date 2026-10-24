@@ -1,0 +1,165 @@
+"""Independent CPU verification and strict completion gate for ADR-0044."""
+import argparse,hashlib,json,tarfile,subprocess,statistics,random,concurrent.futures
+from pathlib import Path
+from collections import Counter
+from lp_protocol import ROOT,read_json,write_json,file_hash,checked_reference,validate
+from lp_tensor_warp32_common import protocol,CONFIG,BASE,instances
+from benchmark_lp_tensor_warp32 import jobs,effective,prepare_inputs,verify_endpoint,refs
+from benchmark_lp_adaptive_cost import endpoint_shape
+from lp_tensor_warp32_accept import check_acceptance
+PREFIX='9142829b3be8afdb1865425c83ca9122371284ca0e16f7bc8b18d303a5894426'
+def ledger(v,path):
+ raw=path.read_bytes();lines=raw.splitlines(keepends=True)
+ if not raw.endswith(b'\n') or hashlib.sha256(b''.join(lines[:17366])).hexdigest()!=PREFIX:raise ValueError('warp32 historical prefix differs')
+ events=[json.loads(x) for x in lines];pending={};seen=set();phases=Counter();charges=Counter()
+ for n,e in enumerate(events):
+  validate('ledger',e)
+  if e['sequence']!=n or e['campaign_sha256']!=v['budget_authority']['sha256']:raise ValueError('ledger sequence/identity')
+  key=e['reservation_id']
+  if e['kind']=='reserve':
+   if key in seen or e['charged_ns']!=0:raise ValueError('duplicate reservation')
+   pending[key]=e;seen.add(key)
+  else:
+   previous=pending.pop(key,None)
+   if previous is None or any(previous[k]!=e[k] for k in ['trial_id','resource','phase','reserved_ns']):raise ValueError('unmatched settlement')
+   if e['kind']=='recover' and e['charged_ns']!=e['reserved_ns']:raise ValueError('undercharged recovery')
+  if e['resource']=='gpu':
+   phases[e['phase']]+=e['charged_ns']
+   for c in v['categories']:
+    if e['trial_id'].startswith(v['id']+'-'+c+'-'):charges[c]+=e['charged_ns']
+ if pending or sum(phases.values())>min(v['cumulative_gpu_ns'],28800*10**9) or any(phases[k]>cap*10**9 for k,cap in v['phase_gpu_seconds'].items()) or any(charges[k]>cap['seconds']*10**9 for k,cap in v['categories'].items()) or sum(charges.values())>790*10**9:raise ValueError('unsettled/exceeded resource contract')
+ return events,dict(charges),sum(phases.values())
+def archive(v,d):
+ identity=read_json(d/'execution.json')
+ if read_json(d/'campaign.json')!=v:raise ValueError('frozen campaign differs')
+ for name,key in [('source.tar','source_archive_sha256'),('optimizer','binary_sha256'),('lp_precision_tensor_cost','exec_binary_sha256')]:
+  if file_hash(d/name)!=identity[key]:raise ValueError('frozen archive binding '+name)
+ for name,sha in read_json(d/'code-objects.json').items():
+  if file_hash(d/name)!=sha:raise ValueError('frozen image inventory '+name)
+ digest=hashlib.sha256()
+ with tarfile.open(d/'source.tar') as source:
+  members=source.getmembers();names=[m.name for m in members]
+  if names!=sorted(set(names)) or any(not m.isfile() or Path(m.name).is_absolute() or '..' in Path(m.name).parts for m in members):raise ValueError('source archive layout')
+  for m in members:digest.update(m.name.encode()+b'\0'+source.extractfile(m).read()+b'\0')
+ if digest.hexdigest()!=identity['source_tree_sha256']:raise ValueError('frozen source digest')
+ gate=read_json(d/'native-gate.json')
+ if not gate['native'] or gate['source_tree_sha256']!=identity['source_tree_sha256']:raise ValueError('frozen native gate')
+ return identity
+
+
+def profile_eligible(e,work,verified,trial,worker):
+ return bool(verified and trial and trial['status']=='completed' and worker and worker['reason']=='completed' and worker['returncode']==0 and e.get('executor')=='gpu' and e['request']['diagnostic'] and e['request']['horizon']==work and e['outcome']['core']['iterations']==work and e['outcome']['core']['stop']=='work_horizon' and e['outcome']['core']['failure'] is None and e['outcome']['counts']['uncertain']==0)
+
+def useful_tensor(e):
+ if e.get('executor')!='gpu' or 'outcome' not in e:return False
+ o=e['outcome'];c=o['counts'];return o['core']['stop']=='certified' and o['core']['failure'] is None and c['useful_windows']>0 and c['mma_instructions']>0 and c['accepted_nonzero_t']>0 and c['accepted_nonzero_f']>0
+
+def worker_bounds(worker,reserved,device):
+ for key in ['elapsed_ns','leased_ns','peak_rss_bytes','queue_ns']:
+  if type(worker[key]) is not int or worker[key]<0:raise ValueError('worker physical counter type/range')
+ if worker['elapsed_ns']>worker['leased_ns'] or worker['leased_ns']>reserved or worker['peak_rss_bytes']>8<<30 or worker['activity']['device']!=device:raise ValueError('worker physical accounting differs')
+
+
+def gain(pairs,coverage_equal=True):
+ if len(pairs)!=5 or not coverage_equal:return None
+ if any(a<=0 or b<=0 for a,b in pairs):raise ValueError('invalid latency')
+ rng=random.Random(17002);ratios=[]
+ for _ in range(10000):
+  sampled=[pairs[rng.randrange(5)] for _ in range(5)];ratios.append(statistics.median(a for a,b in sampled)/statistics.median(b for a,b in sampled))
+ ratios.sort();tail=.05/6/2;lo=ratios[int(tail*len(ratios))];hi=ratios[min(len(ratios)-1,int((1-tail)*len(ratios)))];ratio=statistics.median(a for a,b in pairs)/statistics.median(b for a,b in pairs)
+ return dict(speedup=ratio,interval=[lo,hi],confidence=1-.05/6,multiplicity=6,gain=lo>1)
+
+def report_output(path):
+ path=Path(path);allowed=[BASE.resolve(),(ROOT/'docs/benchmarks/data/tensor-warp32').resolve()]
+ if not any(path.parent.resolve().is_relative_to(root) for root in allowed) or path.is_symlink() or path.exists() and path.stat().st_nlink!=1:raise ValueError('protected report output')
+ if path.exists():raise ValueError('report already exists; retain it and choose a new version')
+ return path
+
+def report():
+ v=protocol();d=ROOT/v['output'];identity=archive(v,d);check_acceptance(v,identity);events,charges,cumulative=ledger(v,d/'ledger.jsonl');rows=[];timings={};profiles=[]
+ admission=read_json(d/'cpu-admission.json');eligible={(r['model'],r['configuration']):r['eligible'] for r in admission['rows']}
+ transactions={}
+ for event in events:transactions.setdefault(event['trial_id'],[]).append(event)
+ for j in jobs(v):
+  key=j['id']
+  if not (d/(key+'.trial.json')).exists():
+   if transactions.get(key) or (d/(key+'.endpoint.json')).exists() or (d/(key+'.worker.json')).exists():raise ValueError('unreported attempted study identity')
+   rows.append(dict(id=key,model=j['instance']['id'],configuration=j['configuration']['id'],kind=j['kind'],repetition=j['repetition'],status='not_executed',verified=False,certified=False));continue
+  trial=read_json(d/(key+'.trial.json'));row=dict(id=key,model=j['instance']['id'],configuration=j['configuration']['id'],kind=j['kind'],repetition=j['repetition'],status=trial['status'],verified=False,certified=False)
+  tx=transactions.get(key,[])
+  if trial['status']=='cpu_admission_refusal':
+   if eligible[(j['instance']['id'],j['configuration']['id'])] or tx or (d/(key+'.endpoint.json')).exists() or (d/(key+'.worker.json')).exists():raise ValueError('refusal identity has execution or was eligible')
+  else:
+   expected,docs=prepare_inputs(v,j,d,identity)
+   if read_json(d/(key+'.request.json'))!=expected or any(read_json(d/name)!=doc for name,doc in docs.items()):raise ValueError('frozen worker request differs')
+   worker_doc=read_json(d/(key+'.worker.json'));worker_bounds(worker_doc,tx[0]['reserved_ns'] if tx else 0,v['device'])
+   if len(tx)!=2 or tx[0]['reserved_ns']!=(effective(v,j)[2]+6)*10**9 or tx[1]['charged_ns']!=trial['charged_ns'] or trial['charged_ns']!=worker_doc['leased_ns'] or worker_doc['activity']['device']!=v['device'] or trial['source_tree_sha256']!=identity['source_tree_sha256']:raise ValueError('trial/worker ledger binding differs')
+  ep=d/(key+'.endpoint.json');worker=read_json(d/(key+'.worker.json')) if (d/(key+'.worker.json')).exists() else None
+  if ep.exists():
+   assessment=verify_endpoint(v,j,d,identity);raw=read_json(ep);e=raw if 'outcome' in raw else endpoint_shape(ep,'compact-v1');row['verified']=True
+   complete=trial['status']=='completed' and worker is not None and worker['reason']=='completed' and worker['returncode']==0
+   numerical=(e['executor']=='gpu' and e['outcome']['core']['stop']=='certified' and e['outcome']['core']['failure'] is None) if 'outcome' in e else e['record']['backend']=='cuda-lp-tuned' and e['record']['termination']=='optimal'
+   row['certified']=bool(j['kind']=='timing' and complete and assessment['gap_closed'] and numerical)
+   if j['configuration']['id'] in ['int8-tensor','fp16-tensor','bf16-tensor'] and not useful_tensor(e):row['certified']=False
+   if row['certified']:
+    seconds=worker['elapsed_ns']/1e9;row['seconds']=seconds;timings[(row['model'],row['configuration'],j['repetition'])]=seconds
+   if 'outcome' in e:
+    row['useful_windows']=e['outcome']['counts']['useful_windows'];row['mma_instructions']=e['outcome']['counts']['mma_instructions']
+   if j['kind']=='profile':
+    from lp_tensor_warp32_screen import profile_complete
+    row['profile_complete']=profile_complete(e,j,trial,worker);profiles.append(row)
+  rows.append(row)
+ comparisons=[]
+ for c in v['configurations'][:3]:
+  coverage_equal=all(sum((n,c['id'],r) in timings for r in range(5))>=sum((n,'tuned-fp64',r) in timings for r in range(5)) for n in v['timing_instances'])
+  for n in v['timing_instances']:
+   pairs=[(timings[(n,'tuned-fp64',r)],timings[(n,c['id'],r)]) for r in range(5) if (n,'tuned-fp64',r) in timings and (n,c['id'],r) in timings]
+   comparisons.append(dict(model=n,configuration=c['id'],paired=len(pairs),coverage_equal=coverage_equal,result=gain(pairs,coverage_equal)))
+ cpu=[];cpu_cohorts=[];cpu_tasks=[]
+ for cohort in ['cpu-admission-v1']:
+  directory=BASE/cohort;admission=read_json(directory/'admission.json');binary=directory/'lp_precision_tensor_cost'
+  if file_hash(binary)!=admission['executable_sha256']:raise ValueError('CPU binary binding')
+  archive_path=checked_reference(ROOT,admission['source_archive']);digest=hashlib.sha256()
+  with tarfile.open(archive_path) as source:
+   members=source.getmembers();names=[m.name for m in members]
+   if names!=sorted(set(names)) or any(not m.isfile() or Path(m.name).is_absolute() or '..' in Path(m.name).parts for m in members):raise ValueError('CPU source layout')
+   for m in members:digest.update(m.name.encode()+b'\0'+source.extractfile(m).read()+b'\0')
+  if digest.hexdigest()!=admission['source_tree_sha256']:raise ValueError('CPU source identity')
+  present=[r for r in admission['rows'] if 'endpoint' in r]
+  cpu_cohorts.append(dict(cohort=cohort,verified=len(present),source_tree_sha256=admission['source_tree_sha256'],executable_sha256=admission['executable_sha256'],image_sha256=admission['image_sha256'],source_archive=admission['source_archive']))
+  for row in present:cpu_tasks.append((binary,row))
+ def verify_cpu(task):
+  binary,row=task;ep=checked_reference(ROOT,row['endpoint']);rp=ep.parent/'request.json';model=checked_reference(ROOT,instances(v)[row['model']]['model'])
+  from lp_tensor_warp32_common import read_verification
+  if file_hash(binary)!=file_hash(d/'lp_precision_tensor_cost'):raise ValueError('CPU/final verifier executable differs')
+  source=read_json(binary.parent/'execution.json')['source_tree_sha256']
+  verified=read_verification(ep.parent/'verification.json',model,rp,ep,binary,source)
+  if verified['assessment']!=read_json(ep)['assessment']:raise ValueError('CPU cached assessment differs')
+  return row['endpoint']
+ with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:cpu=list(pool.map(verify_cpu,cpu_tasks))
+ acceptance=read_json(ROOT/v['acceptance_output']/'project/acceptance.json');acceptance_endpoints=[]
+ for row in acceptance['rows']:
+  if row['status']!='passed':continue
+  ep=checked_reference(ROOT,row['endpoint']);rp=ep.parent/(row['instance']+'-'+row['configuration']+'.request.json');model=checked_reference(ROOT,instances(v)[row['instance']]['model'])
+  for kind in ['endpoint','replay']:
+   endpoint=checked_reference(ROOT,row[kind])
+   from lp_tensor_warp32_common import read_verification
+   proof=checked_reference(ROOT,row['verification'][kind])
+   verified=read_verification(proof,model,rp,endpoint,d/'lp_precision_tensor_cost',identity['source_tree_sha256'])
+   if verified['assessment']!=read_json(endpoint)['assessment']:raise ValueError('project cached assessment differs')
+   acceptance_endpoints.append(row[kind])
+ diagnostics=[]
+ from lp_tensor_warp32_screen import forecast
+ screen=forecast(v,d,identity,persist=False)
+ from lp_tensor_warp32_screen import resource_estimate,RESOURCE_RULE
+ resource=read_json(d/'resource-fit.json') if (d/'resource-fit.json').exists() else dict(passed=False)
+ if resource.get('passed') and (resource['estimate']!=resource_estimate(v,d,identity) or resource['rule_sha256']!=file_hash(d/'resource-rule.json')):raise ValueError('resource forecast binding differs')
+
+ useful={r['configuration'] for r in rows if r['certified'] and r.get('useful_windows',0)>0 and r.get('mma_instructions',0)>0}
+ working='int8-tensor' in useful and bool(useful&{'fp16-tensor','bf16-tensor'});winning=any(c['result'] and c['result']['gain'] for c in comparisons)
+ return dict(identity='gpup-tensor-warp32-report-v1',status='complete' if working and winning and screen['passed'] and resource['passed'] and len(timings)==60 else 'incomplete',working_families=working,certified_latency_gain=winning,planned_study_cells=76,rows=rows,comparisons=comparisons,profiles=profiles,cpu_verified=len(cpu),cpu_cohorts=cpu_cohorts,acceptance_verified=len(acceptance_endpoints),acceptance_endpoints=acceptance_endpoints,verified=sum(r['verified'] for r in rows),certified_timings=sum(r['certified'] for r in rows),cpu_admission_refusals=sum(r['status']=='cpu_admission_refusal' for r in rows),forecast=screen,resource_forecast=resource,micro=diagnostics,source_tree_sha256=identity['source_tree_sha256'],task_gpu_ns=sum(charges.values()),categories_ns=charges,cumulative_gpu_ns=cumulative,ledger_events=len(events),ledger_sha256=file_hash(d/'ledger.jsonl'))
+
+if __name__=='__main__':
+ p=argparse.ArgumentParser();p.add_argument('--output',type=Path,default=BASE/'report.json');a=p.parse_args();out=report_output(a.output);result=report();out.parent.mkdir(parents=True,exist_ok=True)
+ with out.open('x') as stream:json.dump(result,stream,sort_keys=True,indent=2);stream.write('\n')
+ print({k:v for k,v in result.items() if k not in ['rows','comparisons','profiles','micro']})

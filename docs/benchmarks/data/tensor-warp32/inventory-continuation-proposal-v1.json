@@ -1,0 +1,37 @@
+{
+  "assigned_surplus_after_maximum_planning_ns": 27913707936,
+  "compiler_run": false,
+  "completion_criteria_changed": false,
+  "full_gate_rerun_proposed": false,
+  "gpu_cap_seconds": 790,
+  "gpu_phase_caps_seconds": {
+    "acceptance": 290,
+    "profiles": 200,
+    "timings": 300
+  },
+  "gpu_run": false,
+  "identity": "gpup-tensor-warp32-inventory-continuation-proposal-v1",
+  "maximum_cumulative_cpu_ns": 39566792106322,
+  "new_resources_authorized": false,
+  "overall_surplus_at_maximum_ns": 73207893678,
+  "plan": "docs/plans/lp-tensor-warp32-inventory-continuation.md",
+  "plan_sha256": "790b774cb054cabf8ced90743500a7b500c121a32b73079a39257a85b24191e4",
+  "planning_max_cpu_ns": 24000000000,
+  "prior_accounting": "docs/benchmarks/data/tensor-warp32/native-final-cpu-accounting-v3.json",
+  "prior_accounting_sha256": "1316d38aa91360edffad789e164350ebc587b4c4387d45da62241e8e0c2a36b1",
+  "prior_unspent_assigned_cpu_ns": 2601913707936,
+  "proposed_additional_cpu_ns": 2500000000000,
+  "proposed_continuation_allocation_cpu_ns": 9840000000000,
+  "proposed_cpu_ceiling_ns": 39640000000000,
+  "proposed_headroom_cpu_seconds": {
+    "implementation": 100,
+    "margin": 400,
+    "native": 400,
+    "reporting": 150,
+    "workers": 4000
+  },
+  "proposed_total_headroom_cpu_ns": 5050000000000,
+  "source_audit": "artifacts/gpup-tensor-warp32-v1/inventory-planning-source-audit-v1.json",
+  "source_audit_sha256": "93ec97ada5231ccc50c60ae38a54390b915bee908e865a697227cb849f1766ba",
+  "status": "proposed_not_accepted"
+}

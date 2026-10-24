@@ -23,22 +23,20 @@ class QuantPrReview(unittest.TestCase):
         # Later accepted slices extend module/example/acceptance registration.
         # Verify the original receipt against immutable original bytes, then bind
         # each authorized live extension through its separate follow-up receipt.
-        bridge=read_json(ROOT/'docs/benchmarks/data/tensor/prerequisite-source-bridge.json')
-        extended={f['path']:f for f in bridge['files']}
         for f in receipt['added']+receipt['unchanged_sources']:
             current=file_hash(ROOT/f['path'])
             if current==f['sha256']:continue
-            extension=extended[f['path']]
-            self.assertEqual(extension['before_sha256'],f['sha256'])
-            self.assertEqual(file_hash(ROOT/extension['frozen_path']),f['sha256'])
-            if current!=extension['after_sha256']:
-                continuation=read_json(ROOT/'docs/benchmarks/data/tensor-residual/prerequisite-source-bridge.json')
-                followup={row['path']:row for row in continuation['files']}[f['path']]
-                self.assertEqual(followup['before_sha256'],extension['after_sha256'])
-                self.assertEqual(file_hash(ROOT/followup['frozen_path']),extension['after_sha256'])
-                self.assertEqual(current,followup['after_sha256'])
-            else:
-                self.assertEqual(current,extension['after_sha256'])
+            previous=f['sha256']
+            for cohort in ['tensor','tensor-residual','tensor-cost','tensor-warp32']:
+                path=ROOT/('docs/benchmarks/data/'+cohort+'/prerequisite-source-bridge.json')
+                if not path.exists():continue
+                rows={row['path']:row for row in read_json(path)['files']}
+                if f['path'] not in rows:continue
+                extension=rows[f['path']]
+                self.assertEqual(extension['before_sha256'],previous)
+                self.assertEqual(file_hash(ROOT/extension['frozen_path']),previous)
+                previous=extension['after_sha256']
+            self.assertEqual(current,previous)
 
     def test_arithmetic_controller_and_authority_bodies_remain_exact(self):
         import hashlib

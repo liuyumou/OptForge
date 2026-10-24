@@ -1,0 +1,44 @@
+{
+  "bootstrap_cpu_charge_seconds": 100,
+  "combined_cpu_cap_seconds": 35900,
+  "combined_cpu_upper_seconds": "20099.822845162",
+  "delivery_cpu_charge_seconds": 100,
+  "full_native_gate": "not_run",
+  "gpu_reservations": 0,
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-cost-supervisor-refusal-delivery-v1",
+  "mocked_portability_tests": 4,
+  "real_bootstrap_witnesses": "not_run_workload_not_released",
+  "remaining_allocated_cpu_seconds": 15800,
+  "sources": [
+    {
+      "path": "tools/lp_cpu_admission.py",
+      "sha256": "a012f69f4ad4debef3b230c5186fd9fa4a82db158841820f0d4a0b37e1447495"
+    },
+    {
+      "path": "tools/lp_cpu_bootstrap.py",
+      "sha256": "7558f5995dafa5f17445fd789da89c833580652ef874c282381f591f551b0487"
+    },
+    {
+      "path": "tests/integration/test_lp_cpu_admission.py",
+      "sha256": "599c749b81df67d618de47e54e30295edfdb65c3ec3ba52d21d369b9ee561654"
+    },
+    {
+      "path": "docs/decisions/ADR-0044-tensor-cost-continuation.md",
+      "sha256": "94b80a3ee8b232a2d6147d1c24e5a8845e8e85564c0606a78ef797695402812f"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-cost-supervisor-gpup8.md",
+      "sha256": "b62da414b1cf92bb7ee0210fd8e30305c9eb34a4735bd8ed50c955e0386fcd4c"
+    }
+  ],
+  "static_checks": [
+    "Python syntax",
+    "report links",
+    "four unchanged numerical/study/completion sections",
+    "exact 17362-event GPU ledger",
+    "CPU arithmetic",
+    "git diff --check"
+  ],
+  "status": "refused_bootstrap_repair_awaits_authorized_retry"
+}

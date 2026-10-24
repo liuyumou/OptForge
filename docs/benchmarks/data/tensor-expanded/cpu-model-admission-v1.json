@@ -1,0 +1,1547 @@
+{
+  "binary": {
+    "path": "artifacts/gpup-tensor-expanded-v1/rust-window-v1/target/release/expanded_solver",
+    "sha256": "5066daafe1f49c86b31bfd3842440277b0deec6767368c257f40233d7a6d7c5a"
+  },
+  "complete_candidate_inventory": false,
+  "gpu_seconds": 0,
+  "historical_profiles_rerun": false,
+  "missing_required": [],
+  "ordinary_checks_rerun": false,
+  "required_dense_cells": 12,
+  "rows": [
+    {
+      "configuration": "int8-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 8,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-small-4",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-small-4.json",
+        "sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "fp16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 8,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-small-4",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-small-4.json",
+        "sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "bf16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 8,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-small-4",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-small-4.json",
+        "sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "component-simt",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 8,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-small-4",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-small-4.json",
+        "sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "eligible": true,
+      "layout": {
+        "nonzeros": 8,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-small-4",
+      "original": {
+        "configuration": "tuned-fp64",
+        "counts": {
+          "accepted_nonzero_f": 0,
+          "accepted_nonzero_t": 0,
+          "coarse_pass": 3200,
+          "component_products": 0,
+          "detailed_fail": 0,
+          "detailed_pass": 0,
+          "guard_products": 0,
+          "high": 6400,
+          "low": 0,
+          "mma_instructions": 0,
+          "nonzero_f": 0,
+          "nonzero_t": 0,
+          "padded_products": 0,
+          "predicated": 0,
+          "residual_products": 0,
+          "uncertain": 0,
+          "useful_windows": 0,
+          "windows": 2
+        },
+        "eligible": true,
+        "endpoint": {
+          "path": "artifacts/gpup-tensor-warp32-v1/cpu-admission-v1/gpup-development-small-4-tuned-fp64/endpoint.json",
+          "sha256": "ac33644d14e148d7c2f09e96bb753579fbd5c784ead6b0ffbadbb8f5dca99f3e"
+        },
+        "iterations": 400,
+        "layout": {
+          "nonzeros": 8,
+          "selected_nonzeros": 0,
+          "selected_tiles": 0
+        },
+        "model": "gpup-development-small-4",
+        "physical": 400,
+        "status": "work_horizon",
+        "useful_low": false
+      },
+      "passed_check_rerun": false,
+      "prior_admission": {
+        "path": "docs/benchmarks/data/tensor-warp32/cpu-admission-v1.json",
+        "sha256": "9f2ae7d99d40c7f6537998d2413f4ae8faa33880b6b0ab967d90985e150c49f4"
+      },
+      "status": "retained_control"
+    },
+    {
+      "configuration": "int8-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 5175,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scheduling-20x5",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scheduling-20x5.json",
+        "sha256": "e481e152970ef18e9e2ad0c3543cdaca63f104605943ab8e22c9234fbc4555f1"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "fp16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 5175,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scheduling-20x5",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scheduling-20x5.json",
+        "sha256": "e481e152970ef18e9e2ad0c3543cdaca63f104605943ab8e22c9234fbc4555f1"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "bf16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 5175,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scheduling-20x5",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scheduling-20x5.json",
+        "sha256": "e481e152970ef18e9e2ad0c3543cdaca63f104605943ab8e22c9234fbc4555f1"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "component-simt",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 5175,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scheduling-20x5",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scheduling-20x5.json",
+        "sha256": "e481e152970ef18e9e2ad0c3543cdaca63f104605943ab8e22c9234fbc4555f1"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "eligible": true,
+      "layout": {
+        "nonzeros": 5175,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scheduling-20x5",
+      "original": {
+        "configuration": "tuned-fp64",
+        "counts": {
+          "accepted_nonzero_f": 0,
+          "accepted_nonzero_t": 0,
+          "coarse_pass": 296000,
+          "component_products": 0,
+          "detailed_fail": 0,
+          "detailed_pass": 0,
+          "guard_products": 0,
+          "high": 4140000,
+          "low": 0,
+          "mma_instructions": 0,
+          "nonzero_f": 0,
+          "nonzero_t": 0,
+          "padded_products": 0,
+          "predicated": 0,
+          "residual_products": 0,
+          "uncertain": 0,
+          "useful_windows": 0,
+          "windows": 2
+        },
+        "eligible": true,
+        "endpoint": {
+          "path": "artifacts/gpup-tensor-warp32-v1/cpu-admission-v1/gpup-development-scheduling-20x5-tuned-fp64/endpoint.json",
+          "sha256": "e7379a9167e711fcefc5ef646acd89bae44318af57183504d0009d6826ad5656"
+        },
+        "iterations": 400,
+        "layout": {
+          "nonzeros": 5175,
+          "selected_nonzeros": 0,
+          "selected_tiles": 0
+        },
+        "model": "gpup-development-scheduling-20x5",
+        "physical": 400,
+        "status": "work_horizon",
+        "useful_low": false
+      },
+      "passed_check_rerun": false,
+      "prior_admission": {
+        "path": "docs/benchmarks/data/tensor-warp32/cpu-admission-v1.json",
+        "sha256": "9f2ae7d99d40c7f6537998d2413f4ae8faa33880b6b0ab967d90985e150c49f4"
+      },
+      "status": "retained_control"
+    },
+    {
+      "configuration": "int8-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 36645,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-irregular-2048",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-irregular-2048.json",
+        "sha256": "b2da8d3fb1864d4e21179666277729d923d47981418848b22e5d3957760a1c87"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "fp16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 36645,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-irregular-2048",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-irregular-2048.json",
+        "sha256": "b2da8d3fb1864d4e21179666277729d923d47981418848b22e5d3957760a1c87"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "bf16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 36645,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-irregular-2048",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-irregular-2048.json",
+        "sha256": "b2da8d3fb1864d4e21179666277729d923d47981418848b22e5d3957760a1c87"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "component-simt",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 36645,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-irregular-2048",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-irregular-2048.json",
+        "sha256": "b2da8d3fb1864d4e21179666277729d923d47981418848b22e5d3957760a1c87"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "eligible": true,
+      "layout": {
+        "nonzeros": 36645,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-irregular-2048",
+      "original": {
+        "configuration": "tuned-fp64",
+        "counts": {
+          "accepted_nonzero_f": 0,
+          "accepted_nonzero_t": 0,
+          "coarse_pass": 1638400,
+          "component_products": 0,
+          "detailed_fail": 0,
+          "detailed_pass": 0,
+          "guard_products": 0,
+          "high": 29316000,
+          "low": 0,
+          "mma_instructions": 0,
+          "nonzero_f": 0,
+          "nonzero_t": 0,
+          "padded_products": 0,
+          "predicated": 0,
+          "residual_products": 0,
+          "uncertain": 0,
+          "useful_windows": 0,
+          "windows": 2
+        },
+        "eligible": true,
+        "endpoint": {
+          "path": "artifacts/gpup-tensor-warp32-v1/cpu-admission-v1/gpup-development-irregular-2048-tuned-fp64/endpoint.json",
+          "sha256": "57a1e8a278b6a295ed57e7e71d5449aaa35d0e9b11bba15beaff02dedff16678"
+        },
+        "iterations": 400,
+        "layout": {
+          "nonzeros": 36645,
+          "selected_nonzeros": 0,
+          "selected_tiles": 0
+        },
+        "model": "gpup-development-irregular-2048",
+        "physical": 400,
+        "status": "work_horizon",
+        "useful_low": false
+      },
+      "passed_check_rerun": false,
+      "prior_admission": {
+        "path": "docs/benchmarks/data/tensor-warp32/cpu-admission-v1.json",
+        "sha256": "9f2ae7d99d40c7f6537998d2413f4ae8faa33880b6b0ab967d90985e150c49f4"
+      },
+      "status": "retained_control"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "eligible": true,
+      "layout": {
+        "nonzeros": 33792,
+        "selected_nonzeros": 32768,
+        "selected_tiles": 32
+      },
+      "model": "gpup-development-dense_block-1024",
+      "original": {
+        "configuration": "tuned-fp64",
+        "counts": {
+          "accepted_nonzero_f": 0,
+          "accepted_nonzero_t": 0,
+          "coarse_pass": 819200,
+          "component_products": 0,
+          "detailed_fail": 0,
+          "detailed_pass": 0,
+          "guard_products": 0,
+          "high": 27033600,
+          "low": 0,
+          "mma_instructions": 0,
+          "nonzero_f": 0,
+          "nonzero_t": 0,
+          "padded_products": 0,
+          "predicated": 0,
+          "residual_products": 0,
+          "uncertain": 0,
+          "useful_windows": 0,
+          "windows": 2
+        },
+        "eligible": true,
+        "endpoint": {
+          "path": "artifacts/gpup-tensor-warp32-v1/cpu-admission-v1/gpup-development-dense_block-1024-tuned-fp64/endpoint.json",
+          "sha256": "b048cd561ec22e6fc18dfba3e09f4b84bfe8c38dbc1b9241b5944fcda9b37960"
+        },
+        "iterations": 400,
+        "layout": {
+          "nonzeros": 33792,
+          "selected_nonzeros": 32768,
+          "selected_tiles": 32
+        },
+        "model": "gpup-development-dense_block-1024",
+        "physical": 400,
+        "status": "work_horizon",
+        "useful_low": false
+      },
+      "passed_check_rerun": false,
+      "prior_admission": {
+        "path": "docs/benchmarks/data/tensor-warp32/cpu-admission-v1.json",
+        "sha256": "9f2ae7d99d40c7f6537998d2413f4ae8faa33880b6b0ab967d90985e150c49f4"
+      },
+      "status": "retained_control"
+    },
+    {
+      "configuration": "int8-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 4828,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scaling-256",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scaling-256.json",
+        "sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "fp16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 4828,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scaling-256",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scaling-256.json",
+        "sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "bf16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 4828,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scaling-256",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scaling-256.json",
+        "sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "component-simt",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 4828,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scaling-256",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scaling-256.json",
+        "sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 4828,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scaling-256",
+      "original": {
+        "configuration": "tuned-fp64",
+        "counts": {
+          "accepted_nonzero_f": 0,
+          "accepted_nonzero_t": 0,
+          "coarse_pass": 7935,
+          "component_products": 0,
+          "detailed_fail": 1,
+          "detailed_pass": 0,
+          "guard_products": 0,
+          "high": 149668,
+          "low": 0,
+          "mma_instructions": 0,
+          "nonzero_f": 0,
+          "nonzero_t": 0,
+          "padded_products": 0,
+          "predicated": 184,
+          "residual_products": 0,
+          "uncertain": 0,
+          "useful_windows": 0,
+          "windows": 1
+        },
+        "eligible": false,
+        "endpoint": {
+          "path": "artifacts/gpup-tensor-warp32-v1/cpu-admission-v1/gpup-development-scaling-256-tuned-fp64/endpoint.json",
+          "sha256": "e1402b7bcd8d118205f6abcd680b08f52479ccb6b7c85b151037e7a69797ff65"
+        },
+        "iterations": 0,
+        "layout": {
+          "nonzeros": 4828,
+          "selected_nonzeros": 0,
+          "selected_tiles": 0
+        },
+        "model": "gpup-development-scaling-256",
+        "physical": 16,
+        "status": "numerical_failure",
+        "useful_low": false
+      },
+      "passed_check_rerun": false,
+      "prior_admission": {
+        "path": "docs/benchmarks/data/tensor-warp32/cpu-admission-v1.json",
+        "sha256": "9f2ae7d99d40c7f6537998d2413f4ae8faa33880b6b0ab967d90985e150c49f4"
+      },
+      "status": "retained_control"
+    },
+    {
+      "configuration": "int8-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 589482,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-irregular-32768",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-irregular-32768.json",
+        "sha256": "02dc7f126a09bb4ccef2fe4f76cb14ccf6ae6fddea5e545f282e1c4edbeb7485"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "fp16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 589482,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-irregular-32768",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-irregular-32768.json",
+        "sha256": "02dc7f126a09bb4ccef2fe4f76cb14ccf6ae6fddea5e545f282e1c4edbeb7485"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "bf16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 589482,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-irregular-32768",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-irregular-32768.json",
+        "sha256": "02dc7f126a09bb4ccef2fe4f76cb14ccf6ae6fddea5e545f282e1c4edbeb7485"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "component-simt",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 589482,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-irregular-32768",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-irregular-32768.json",
+        "sha256": "02dc7f126a09bb4ccef2fe4f76cb14ccf6ae6fddea5e545f282e1c4edbeb7485"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "eligible": true,
+      "layout": {
+        "nonzeros": 589482,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-irregular-32768",
+      "original": {
+        "configuration": "tuned-fp64",
+        "counts": {
+          "accepted_nonzero_f": 0,
+          "accepted_nonzero_t": 0,
+          "coarse_pass": 26214400,
+          "component_products": 0,
+          "detailed_fail": 0,
+          "detailed_pass": 0,
+          "guard_products": 0,
+          "high": 471585600,
+          "low": 0,
+          "mma_instructions": 0,
+          "nonzero_f": 0,
+          "nonzero_t": 0,
+          "padded_products": 0,
+          "predicated": 0,
+          "residual_products": 0,
+          "uncertain": 0,
+          "useful_windows": 0,
+          "windows": 2
+        },
+        "eligible": true,
+        "endpoint": {
+          "path": "artifacts/gpup-tensor-warp32-v1/cpu-admission-v1/gpup-extension-irregular-32768-tuned-fp64/endpoint.json",
+          "sha256": "26691c68cc89606c3a3d39cc7c4b0253f20da4a5d9b3e8e54194c8c0443b2687"
+        },
+        "iterations": 400,
+        "layout": {
+          "nonzeros": 589482,
+          "selected_nonzeros": 0,
+          "selected_tiles": 0
+        },
+        "model": "gpup-extension-irregular-32768",
+        "physical": 400,
+        "status": "work_horizon",
+        "useful_low": false
+      },
+      "passed_check_rerun": false,
+      "prior_admission": {
+        "path": "docs/benchmarks/data/tensor-warp32/cpu-admission-v1.json",
+        "sha256": "9f2ae7d99d40c7f6537998d2413f4ae8faa33880b6b0ab967d90985e150c49f4"
+      },
+      "status": "retained_control"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "eligible": true,
+      "layout": {
+        "nonzeros": 2162688,
+        "selected_nonzeros": 2097152,
+        "selected_tiles": 2048
+      },
+      "model": "gpup-extension-dense_block-65536",
+      "original": {
+        "configuration": "tuned-fp64",
+        "counts": {
+          "accepted_nonzero_f": 0,
+          "accepted_nonzero_t": 0,
+          "coarse_pass": 52428800,
+          "component_products": 0,
+          "detailed_fail": 0,
+          "detailed_pass": 0,
+          "guard_products": 0,
+          "high": 1730150400,
+          "low": 0,
+          "mma_instructions": 0,
+          "nonzero_f": 0,
+          "nonzero_t": 0,
+          "padded_products": 0,
+          "predicated": 0,
+          "residual_products": 0,
+          "uncertain": 0,
+          "useful_windows": 0,
+          "windows": 2
+        },
+        "eligible": true,
+        "endpoint": {
+          "path": "artifacts/gpup-tensor-warp32-v1/cpu-admission-v1/gpup-extension-dense_block-65536-tuned-fp64/endpoint.json",
+          "sha256": "a9f0a50053c2590706030a2ed0541079222a2f2ad12d6ba03adf11c2369e66e3"
+        },
+        "iterations": 400,
+        "layout": {
+          "nonzeros": 2162688,
+          "selected_nonzeros": 2097152,
+          "selected_tiles": 2048
+        },
+        "model": "gpup-extension-dense_block-65536",
+        "physical": 400,
+        "status": "work_horizon",
+        "useful_low": false
+      },
+      "passed_check_rerun": false,
+      "prior_admission": {
+        "path": "docs/benchmarks/data/tensor-warp32/cpu-admission-v1.json",
+        "sha256": "9f2ae7d99d40c7f6537998d2413f4ae8faa33880b6b0ab967d90985e150c49f4"
+      },
+      "status": "retained_control"
+    },
+    {
+      "configuration": "int8-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 1177425,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-mixed-65536",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json",
+        "sha256": "416bb549a28a9cdcf178054f285d7a310a6ede141784bdc2eb8deb0ce7d15ff3"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "fp16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 1177425,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-mixed-65536",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json",
+        "sha256": "416bb549a28a9cdcf178054f285d7a310a6ede141784bdc2eb8deb0ce7d15ff3"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "bf16-tensor",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 1177425,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-mixed-65536",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json",
+        "sha256": "416bb549a28a9cdcf178054f285d7a310a6ede141784bdc2eb8deb0ce7d15ff3"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "component-simt",
+      "eligible": false,
+      "layout": {
+        "nonzeros": 1177425,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-mixed-65536",
+      "model_binding": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json",
+        "sha256": "416bb549a28a9cdcf178054f285d7a310a6ede141784bdc2eb8deb0ce7d15ff3"
+      },
+      "status": "layout_refusal"
+    },
+    {
+      "configuration": "tuned-fp64",
+      "eligible": true,
+      "layout": {
+        "nonzeros": 1177425,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-mixed-65536",
+      "original": {
+        "configuration": "tuned-fp64",
+        "counts": {
+          "accepted_nonzero_f": 0,
+          "accepted_nonzero_t": 0,
+          "coarse_pass": 52428800,
+          "component_products": 0,
+          "detailed_fail": 0,
+          "detailed_pass": 0,
+          "guard_products": 0,
+          "high": 941940000,
+          "low": 0,
+          "mma_instructions": 0,
+          "nonzero_f": 0,
+          "nonzero_t": 0,
+          "padded_products": 0,
+          "predicated": 0,
+          "residual_products": 0,
+          "uncertain": 0,
+          "useful_windows": 0,
+          "windows": 2
+        },
+        "eligible": true,
+        "endpoint": {
+          "path": "artifacts/gpup-tensor-warp32-v1/cpu-admission-v1/gpup-extension-mixed-65536-tuned-fp64/endpoint.json",
+          "sha256": "87a6e9c2d82e794b6dcbb632a646c61e3807915d4c31c75bec34b102acf0699a"
+        },
+        "iterations": 400,
+        "layout": {
+          "nonzeros": 1177425,
+          "selected_nonzeros": 0,
+          "selected_tiles": 0
+        },
+        "model": "gpup-extension-mixed-65536",
+        "physical": 400,
+        "status": "work_horizon",
+        "useful_low": false
+      },
+      "passed_check_rerun": false,
+      "prior_admission": {
+        "path": "docs/benchmarks/data/tensor-warp32/cpu-admission-v1.json",
+        "sha256": "9f2ae7d99d40c7f6537998d2413f4ae8faa33880b6b0ab967d90985e150c49f4"
+      },
+      "status": "retained_control"
+    },
+    {
+      "configuration": "matched-fp64",
+      "counts": {
+        "accepted_nonzero_f": 0,
+        "accepted_nonzero_t": 0,
+        "coarse_pass": 3200,
+        "component_products": 0,
+        "decoded_coordinates": 0,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 0,
+        "expanded_updates": 0,
+        "expansion_counter_version": 0,
+        "guard_products": 0,
+        "high": 6400,
+        "low": 0,
+        "mma_instructions": 0,
+        "nonzero_f": 0,
+        "nonzero_t": 0,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 0,
+        "uncertain": 0,
+        "useful_windows": 0,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-small-4-matched-fp64/endpoint.json",
+        "sha256": "755b58aa26cd84e4947118afaad30d922b389ebc2fb2e968d0e178fe574defb4"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 8,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-small-4",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-small-4-matched-fp64/verification.json",
+        "sha256": "a52acea8984d3bb53e7206a5112753da72876bf50ebd777cf089ff5971240087"
+      }
+    },
+    {
+      "configuration": "matched-fp64",
+      "counts": {
+        "accepted_nonzero_f": 0,
+        "accepted_nonzero_t": 0,
+        "coarse_pass": 296000,
+        "component_products": 0,
+        "decoded_coordinates": 0,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 0,
+        "expanded_updates": 0,
+        "expansion_counter_version": 0,
+        "guard_products": 0,
+        "high": 4140000,
+        "low": 0,
+        "mma_instructions": 0,
+        "nonzero_f": 0,
+        "nonzero_t": 0,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 0,
+        "uncertain": 0,
+        "useful_windows": 0,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-scheduling-20x5-matched-fp64/endpoint.json",
+        "sha256": "7619b831c06022e4eb28622576d57801fa6a8ead986f216508c36e6c5b9dcebb"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 5175,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scheduling-20x5",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-scheduling-20x5-matched-fp64/verification.json",
+        "sha256": "4013b9166247419de89189962ace2c7acc766106b452838c54da7299737edb11"
+      }
+    },
+    {
+      "configuration": "matched-fp64",
+      "counts": {
+        "accepted_nonzero_f": 0,
+        "accepted_nonzero_t": 0,
+        "coarse_pass": 1638400,
+        "component_products": 0,
+        "decoded_coordinates": 0,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 0,
+        "expanded_updates": 0,
+        "expansion_counter_version": 0,
+        "guard_products": 0,
+        "high": 29316000,
+        "low": 0,
+        "mma_instructions": 0,
+        "nonzero_f": 0,
+        "nonzero_t": 0,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 0,
+        "uncertain": 0,
+        "useful_windows": 0,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-irregular-2048-matched-fp64/endpoint.json",
+        "sha256": "0c6a27862764f3dad3c05f24f8160f425e279710c6576809d4ba954323dbb088"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 36645,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-irregular-2048",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-irregular-2048-matched-fp64/verification.json",
+        "sha256": "3b230a7c0ebb26c2df342c0778f001ebcfc9ef579945a711e5d5f316447b8960"
+      }
+    },
+    {
+      "configuration": "int8-tensor",
+      "counts": {
+        "accepted_nonzero_f": 9163456,
+        "accepted_nonzero_t": 12348608,
+        "coarse_pass": 819200,
+        "component_products": 2097152000,
+        "decoded_coordinates": 57344,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 86016,
+        "expanded_updates": 400,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 819200,
+        "low": 26214400,
+        "mma_instructions": 819200,
+        "nonzero_f": 9163456,
+        "nonzero_t": 12348608,
+        "padded_products": 3355443200,
+        "predicated": 0,
+        "residual_products": 9194080,
+        "uncertain": 0,
+        "useful_windows": 12,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-int8-tensor/endpoint.json",
+        "sha256": "308dda41ec832edc944ccd55dae6021e1fa2ba05bc1cb77e870c911432f61d96"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 33792,
+        "selected_nonzeros": 32768,
+        "selected_tiles": 32
+      },
+      "model": "gpup-development-dense_block-1024",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-int8-tensor/verification.json",
+        "sha256": "bff2d6ae2b185cebd750d7dbbdd8b0261c4ac0c6a58c2ef1d2f98e11b9f39bb8"
+      }
+    },
+    {
+      "configuration": "fp16-tensor",
+      "counts": {
+        "accepted_nonzero_f": 9163456,
+        "accepted_nonzero_t": 12348608,
+        "coarse_pass": 819200,
+        "component_products": 2097152000,
+        "decoded_coordinates": 57344,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 86016,
+        "expanded_updates": 400,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 819200,
+        "low": 26214400,
+        "mma_instructions": 1638400,
+        "nonzero_f": 9163456,
+        "nonzero_t": 12348608,
+        "padded_products": 3355443200,
+        "predicated": 0,
+        "residual_products": 9194080,
+        "uncertain": 0,
+        "useful_windows": 12,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-fp16-tensor/endpoint.json",
+        "sha256": "c5a06512e284cbf06b9822dd7da479895935b612223f0e52e2b66ad65c88227f"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 33792,
+        "selected_nonzeros": 32768,
+        "selected_tiles": 32
+      },
+      "model": "gpup-development-dense_block-1024",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-fp16-tensor/verification.json",
+        "sha256": "0fb5b0fa977d4e649ad0eb41a5a809d3dc72e07105ea6889e03334872d2b5900"
+      }
+    },
+    {
+      "configuration": "bf16-tensor",
+      "counts": {
+        "accepted_nonzero_f": 9163456,
+        "accepted_nonzero_t": 12348608,
+        "coarse_pass": 819200,
+        "component_products": 5872025600,
+        "decoded_coordinates": 57344,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 86016,
+        "expanded_updates": 400,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 819200,
+        "low": 26214400,
+        "mma_instructions": 2867200,
+        "nonzero_f": 9163456,
+        "nonzero_t": 12348608,
+        "padded_products": 5872025600,
+        "predicated": 0,
+        "residual_products": 9194080,
+        "uncertain": 0,
+        "useful_windows": 12,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-bf16-tensor/endpoint.json",
+        "sha256": "4c06f2455e35b7eeea8cac1d417f6b8033ef5eb7980a356598ffd103345a2b26"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 33792,
+        "selected_nonzeros": 32768,
+        "selected_tiles": 32
+      },
+      "model": "gpup-development-dense_block-1024",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-bf16-tensor/verification.json",
+        "sha256": "ec4b35b49058f2dda5019f3626efd5056f75782bfaf10402cb635bfd5cca288b"
+      }
+    },
+    {
+      "configuration": "component-simt",
+      "counts": {
+        "accepted_nonzero_f": 9163456,
+        "accepted_nonzero_t": 12348608,
+        "coarse_pass": 819200,
+        "component_products": 26214400,
+        "decoded_coordinates": 57344,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 86016,
+        "expanded_updates": 400,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 819200,
+        "low": 26214400,
+        "mma_instructions": 0,
+        "nonzero_f": 9163456,
+        "nonzero_t": 12348608,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 9194080,
+        "uncertain": 0,
+        "useful_windows": 12,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-component-simt/endpoint.json",
+        "sha256": "4f7dfa8ed9524b70e61c8a664b53a881a9468cd99ff68ce75eeb94dd2e85a654"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 33792,
+        "selected_nonzeros": 32768,
+        "selected_tiles": 32
+      },
+      "model": "gpup-development-dense_block-1024",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-component-simt/verification.json",
+        "sha256": "2b364466647585d5c96f09ddcba55a37b0e73e2601bb9e0ad09673a621983d64"
+      }
+    },
+    {
+      "configuration": "matched-fp64",
+      "counts": {
+        "accepted_nonzero_f": 0,
+        "accepted_nonzero_t": 0,
+        "coarse_pass": 819200,
+        "component_products": 0,
+        "decoded_coordinates": 0,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 0,
+        "expanded_updates": 0,
+        "expansion_counter_version": 0,
+        "guard_products": 0,
+        "high": 27033600,
+        "low": 0,
+        "mma_instructions": 0,
+        "nonzero_f": 0,
+        "nonzero_t": 0,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 0,
+        "uncertain": 0,
+        "useful_windows": 0,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-matched-fp64/endpoint.json",
+        "sha256": "af96be2c941b1bb85b4096d0fc51a1bde7128735fd0b9a04968c261dff9f9b23"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 33792,
+        "selected_nonzeros": 32768,
+        "selected_tiles": 32
+      },
+      "model": "gpup-development-dense_block-1024",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-dense_block-1024-matched-fp64/verification.json",
+        "sha256": "dceb4dd1efa1b6dbdddd227b055eeacd0184dc1e0d833ea62eb6a86f23fc6a20"
+      }
+    },
+    {
+      "configuration": "matched-fp64",
+      "counts": {
+        "accepted_nonzero_f": 0,
+        "accepted_nonzero_t": 0,
+        "coarse_pass": 17663,
+        "component_products": 0,
+        "decoded_coordinates": 0,
+        "detailed_fail": 1,
+        "detailed_pass": 0,
+        "encoded_coordinates": 0,
+        "expanded_updates": 0,
+        "expansion_counter_version": 0,
+        "guard_products": 0,
+        "high": 333132,
+        "low": 0,
+        "mma_instructions": 0,
+        "nonzero_f": 0,
+        "nonzero_t": 0,
+        "padded_products": 0,
+        "predicated": 29,
+        "residual_products": 0,
+        "uncertain": 0,
+        "useful_windows": 0,
+        "windows": 2
+      },
+      "eligible": false,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-scaling-256-matched-fp64/endpoint.json",
+        "sha256": "c2d4f8e9729086a0333e4658dbc952e379d77283f38800fd21b09626e6f9e02c"
+      },
+      "failure": "native_operator_error_budget",
+      "iterations": 32,
+      "layout": {
+        "nonzeros": 4828,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-development-scaling-256",
+      "physical": 36,
+      "status": "numerical_failure",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-development-scaling-256-matched-fp64/verification.json",
+        "sha256": "011c7e5a4a4bed5e2ff7a0e6b9f8b0eabf2d939dd974c9670549a9e8c611d845"
+      }
+    },
+    {
+      "configuration": "matched-fp64",
+      "counts": {
+        "accepted_nonzero_f": 0,
+        "accepted_nonzero_t": 0,
+        "coarse_pass": 26214400,
+        "component_products": 0,
+        "decoded_coordinates": 0,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 0,
+        "expanded_updates": 0,
+        "expansion_counter_version": 0,
+        "guard_products": 0,
+        "high": 471585600,
+        "low": 0,
+        "mma_instructions": 0,
+        "nonzero_f": 0,
+        "nonzero_t": 0,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 0,
+        "uncertain": 0,
+        "useful_windows": 0,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-irregular-32768-matched-fp64/endpoint.json",
+        "sha256": "b6274b3328fa214da8cd56e9aaa64b6b16af62a0a924d2592fd3414fda7ba1b8"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 589482,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-irregular-32768",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-irregular-32768-matched-fp64/verification.json",
+        "sha256": "c1d90bc7e767672f9550a2c1590001c83f2d12fdcf6dee0ef22c7497520ec7b0"
+      }
+    },
+    {
+      "configuration": "int8-tensor",
+      "counts": {
+        "accepted_nonzero_f": 602092640,
+        "accepted_nonzero_t": 798990016,
+        "coarse_pass": 52428800,
+        "component_products": 134217728000,
+        "decoded_coordinates": 3670016,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 5505024,
+        "expanded_updates": 400,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 52428800,
+        "low": 1677721600,
+        "mma_instructions": 52428800,
+        "nonzero_f": 602092640,
+        "nonzero_t": 798990016,
+        "padded_products": 214748364800,
+        "predicated": 0,
+        "residual_products": 615364000,
+        "uncertain": 0,
+        "useful_windows": 12,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-int8-tensor/endpoint.json",
+        "sha256": "5d3841b1d703577ee076e0627f24b1a278886edf5a5086fd0edd48f8599dacba"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 2162688,
+        "selected_nonzeros": 2097152,
+        "selected_tiles": 2048
+      },
+      "model": "gpup-extension-dense_block-65536",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-int8-tensor/verification.json",
+        "sha256": "ad2d778b9b320b2250025e5608155610a8130830ccff57c03663f8a8537c2cb4"
+      }
+    },
+    {
+      "configuration": "fp16-tensor",
+      "counts": {
+        "accepted_nonzero_f": 602092640,
+        "accepted_nonzero_t": 798990016,
+        "coarse_pass": 52428800,
+        "component_products": 134217728000,
+        "decoded_coordinates": 3670016,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 5505024,
+        "expanded_updates": 400,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 52428800,
+        "low": 1677721600,
+        "mma_instructions": 104857600,
+        "nonzero_f": 602092640,
+        "nonzero_t": 798990016,
+        "padded_products": 214748364800,
+        "predicated": 0,
+        "residual_products": 615364000,
+        "uncertain": 0,
+        "useful_windows": 12,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-fp16-tensor/endpoint.json",
+        "sha256": "52cbed4242737aa28cf878445e1cadec35ff9493cc4cabeeb5c13fab0d05de14"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 2162688,
+        "selected_nonzeros": 2097152,
+        "selected_tiles": 2048
+      },
+      "model": "gpup-extension-dense_block-65536",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-fp16-tensor/verification.json",
+        "sha256": "bfc08286e5a91ac6faf3cca2737bf730f9288cf4ac07de1a07244dec85d48cd2"
+      }
+    },
+    {
+      "configuration": "bf16-tensor",
+      "counts": {
+        "accepted_nonzero_f": 602092640,
+        "accepted_nonzero_t": 798990016,
+        "coarse_pass": 52428800,
+        "component_products": 375809638400,
+        "decoded_coordinates": 3670016,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 5505024,
+        "expanded_updates": 400,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 52428800,
+        "low": 1677721600,
+        "mma_instructions": 183500800,
+        "nonzero_f": 602092640,
+        "nonzero_t": 798990016,
+        "padded_products": 375809638400,
+        "predicated": 0,
+        "residual_products": 615364000,
+        "uncertain": 0,
+        "useful_windows": 12,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-bf16-tensor/endpoint.json",
+        "sha256": "06ce49c638041a6dc368fa97b8eeabb1d5b431aa82e1fd807090fae0a87cbebd"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 2162688,
+        "selected_nonzeros": 2097152,
+        "selected_tiles": 2048
+      },
+      "model": "gpup-extension-dense_block-65536",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-bf16-tensor/verification.json",
+        "sha256": "42c41e8ac71bd9b305568bbb10c9a50461de8c6b655de4c250b5e9c1b7580e19"
+      }
+    },
+    {
+      "configuration": "component-simt",
+      "counts": {
+        "accepted_nonzero_f": 602092640,
+        "accepted_nonzero_t": 798990016,
+        "coarse_pass": 52428800,
+        "component_products": 1677721600,
+        "decoded_coordinates": 3670016,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 5505024,
+        "expanded_updates": 400,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 52428800,
+        "low": 1677721600,
+        "mma_instructions": 0,
+        "nonzero_f": 602092640,
+        "nonzero_t": 798990016,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 615364000,
+        "uncertain": 0,
+        "useful_windows": 12,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-component-simt/endpoint.json",
+        "sha256": "29d4c94b09ae4c81c38523bbe2d2367ca74a40ec87a0cc42603121a5c3f8041b"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 2162688,
+        "selected_nonzeros": 2097152,
+        "selected_tiles": 2048
+      },
+      "model": "gpup-extension-dense_block-65536",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-component-simt/verification.json",
+        "sha256": "eaa45739702c2155a55ac3959987d097f9bcfdc986c87553f37eb82acf6be520"
+      }
+    },
+    {
+      "configuration": "matched-fp64",
+      "counts": {
+        "accepted_nonzero_f": 0,
+        "accepted_nonzero_t": 0,
+        "coarse_pass": 52428800,
+        "component_products": 0,
+        "decoded_coordinates": 0,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 0,
+        "expanded_updates": 0,
+        "expansion_counter_version": 0,
+        "guard_products": 0,
+        "high": 1730150400,
+        "low": 0,
+        "mma_instructions": 0,
+        "nonzero_f": 0,
+        "nonzero_t": 0,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 0,
+        "uncertain": 0,
+        "useful_windows": 0,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-matched-fp64/endpoint.json",
+        "sha256": "897dddfceaf2bd3c4f04c39d8824073a8f392bb613cb6523fd22d6754ba23655"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 2162688,
+        "selected_nonzeros": 2097152,
+        "selected_tiles": 2048
+      },
+      "model": "gpup-extension-dense_block-65536",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-dense_block-65536-matched-fp64/verification.json",
+        "sha256": "b2687f09032fd9c9071dfd5db2af037c6064dfa32e386ea7962363db9cbf42e6"
+      }
+    },
+    {
+      "configuration": "matched-fp64",
+      "counts": {
+        "accepted_nonzero_f": 0,
+        "accepted_nonzero_t": 0,
+        "coarse_pass": 52428800,
+        "component_products": 0,
+        "decoded_coordinates": 0,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 0,
+        "expanded_updates": 0,
+        "expansion_counter_version": 0,
+        "guard_products": 0,
+        "high": 941940000,
+        "low": 0,
+        "mma_instructions": 0,
+        "nonzero_f": 0,
+        "nonzero_t": 0,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 0,
+        "uncertain": 0,
+        "useful_windows": 0,
+        "windows": 14
+      },
+      "eligible": true,
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-mixed-65536-matched-fp64/endpoint.json",
+        "sha256": "59eab39b8c92d4fbec3143284a12f3c47e7673730a06b10390757f5e0401a3df"
+      },
+      "failure": null,
+      "iterations": 400,
+      "layout": {
+        "nonzeros": 1177425,
+        "selected_nonzeros": 0,
+        "selected_tiles": 0
+      },
+      "model": "gpup-extension-mixed-65536",
+      "physical": 414,
+      "status": "work_horizon",
+      "verification": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/gpup-extension-mixed-65536-matched-fp64/verification.json",
+        "sha256": "28436a197af6a944cc5aaafa433e05d1eb9fda6cb283a78c22b2e03724296af8"
+      }
+    }
+  ],
+  "source_manifest": {
+    "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/source-manifest.json",
+    "sha256": "a3d0f31c4ad22641a4810cbc76fca47b4c84cf486cf5add5226c8a5719f8175c"
+  },
+  "status": "passed"
+}

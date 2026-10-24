@@ -1,0 +1,17 @@
+{
+  "all_charges_retained": true,
+  "allocated_headroom_cpu_seconds": {
+    "implementation": 258,
+    "margin": 400,
+    "native": 1200,
+    "proofs": 800,
+    "reporting": 150,
+    "workers": 3292
+  },
+  "authorization": "User explicitly approves bounded launch recovery and 108 CPU-second transfer, 2026-10-24",
+  "bootstrap_rerun": false,
+  "failed_journal": "artifacts/gpup-tensor-warp32-v1/cpu-journal-accounting-v3.json",
+  "failed_journal_sha256": "51ae9d8438199f986b2dea85751e7fc6573190981d50b797e1848d24796ed1b4",
+  "gpu_cap_seconds": 790,
+  "host_access": false
+}

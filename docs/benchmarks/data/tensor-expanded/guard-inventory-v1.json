@@ -1,0 +1,104 @@
+{
+  "command": [
+    "/usr/local/cuda/bin/nvcc",
+    "--cubin",
+    "-arch=sm_120",
+    "-O3",
+    "-lineinfo",
+    "-fmad=false",
+    "-ftz=false",
+    "-Xptxas=-v",
+    "--keep",
+    "--keep-dir",
+    "/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/guard-build-v1/nvcc-kept",
+    "-o",
+    "/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/guard-build-v1/expanded_guard.cubin",
+    "/workspace/AI-Optimizer/cuda/lp_pdhg_tensor_expanded/expanded_guard.cu"
+  ],
+  "complete_candidate_inventory": false,
+  "device_differential_validation_pending": true,
+  "elapsed_ns": 1787336833,
+  "enclosure_proof": {
+    "path": "artifacts/gpup-tensor-expanded-v1/guard-build-v1/enclosure-proof-v1.json",
+    "sha256": "00ddd09c200459801e145ec0c1090c7bce6f171d22320ffd281bfd0f560c9373"
+  },
+  "fp64_metadata_arithmetic": true,
+  "ftz_instructions": [],
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-expanded-guard-inventory-v1",
+  "image": {
+    "path": "artifacts/gpup-tensor-expanded-v1/guard-build-v1/expanded_guard.cubin",
+    "sha256": "e07b916c69dc29265a4803be6d56f584901df7fb531db846171882b40783b7b7"
+  },
+  "limits": {
+    "registers": 128,
+    "spill_bytes": 0
+  },
+  "ptx": {
+    "path": "artifacts/gpup-tensor-expanded-v1/guard-build-v1/nvcc-kept/expanded_guard.ptx",
+    "sha256": "17103cc7f1daa78697e5550c91589de1d72a2c9db7082bb3e2d9ca861aeacaa7"
+  },
+  "reason": null,
+  "resource_dump": {
+    "path": "artifacts/gpup-tensor-expanded-v1/guard-build-v1/guard.resources",
+    "sha256": "c7efe632d1b3a657908fc77e97c8d07a10d705d3bd716edfef52400140a48abf"
+  },
+  "resources": [
+    {
+      "entry": "xe_boundary_enclosure",
+      "registers": 14,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_dual_enclosure",
+      "registers": 40,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_primal_enclosure",
+      "registers": 33,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_check_flags",
+      "registers": 8,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    }
+  ],
+  "returncode": 0,
+  "sass": {
+    "path": "artifacts/gpup-tensor-expanded-v1/guard-build-v1/guard.sass",
+    "sha256": "e8ccd45a5ea0e1f736ec55887af6fa91bf7bd2403b0dcff2aef4e4e111772d6b"
+  },
+  "sources": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_guard.cu",
+      "sha256": "3e7fff5bfd995d30d8b8091750dbaa6f818ae705d0d562249263cfc5debb9cbc"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_storage.h",
+      "sha256": "d021dba2675c5e07d0ddf4338855294ad18025ad6dcc8838e147861dbc1ad2fa"
+    }
+  ],
+  "status": "passed",
+  "stderr": {
+    "path": "artifacts/gpup-tensor-expanded-v1/guard-build-v1/compile.stderr",
+    "sha256": "79c595ba2b79dd0cd5d16426e768a3fe8c97d4e6f47dc63ef4e77a218f40efb7"
+  },
+  "stdout": {
+    "path": "artifacts/gpup-tensor-expanded-v1/guard-build-v1/compile.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

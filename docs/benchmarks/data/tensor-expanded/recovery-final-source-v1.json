@@ -1,0 +1,44 @@
+{
+  "accounting": {
+    "path": "docs/benchmarks/data/tensor-expanded/recovery-final-accounting-v1.json",
+    "sha256": "cfaa3a61843cfb62cf02ed0c79239bb639293ea3e62a93b8438a96c56b6ec989"
+  },
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "4f32c9161c03979c9d2d1add4ca997ac609d7c2123563eb0311226239cdd19a7"
+    },
+    {
+      "path": "state/active-task.md",
+      "sha256": "7fe9bf927ea0c71c534df44c3ebf23071fe63a791ddc3cb474272a022546494a"
+    },
+    {
+      "path": "state/known-failures.md",
+      "sha256": "da9428dd3bead78a137a2b70e10a7dd0ff3858341d746a1db9bbd10e940a6915"
+    },
+    {
+      "path": "wiki/status.md",
+      "sha256": "84388092492a45eb3657b1c7bc4cc6893685c7c55f43879210f8ee8f9ce09814"
+    },
+    {
+      "path": "state/backlog.yaml",
+      "sha256": "db716fa2b132fa0daff9feb7a8dff73201bfe7974e3d519b049e2087aba0c6db"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "624d90a9df9e105f44e26decc60342f52dbe176bdaea3abcd7a051c6d061675e"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-expanded-recovery-gpup8.md",
+      "sha256": "137e198084d3495dcfb6503c19abb4d8cd34ca9f02219964cd67c2b1a10c6655"
+    }
+  ],
+  "report": {
+    "path": "docs/benchmarks/data/tensor-expanded/recovery-result-v1.json",
+    "sha256": "dd1e82fffff64c9543ee1652c6c37b879bf7b09102b1171f5bc394cfb615fd5c"
+  },
+  "scientific_freeze": {
+    "path": "artifacts/gpup-tensor-expanded-v1/study-v1/freeze.json",
+    "sha256": "18fa3c906ac6aeae253a9bfdc09b5462a9160d1fc0049dfe96a11c0065ed4cf3"
+  }
+}

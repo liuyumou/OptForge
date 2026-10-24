@@ -1,6 +1,6 @@
 # ADR-0044: Bounded Tensor cost and CPU admission continuation
 
-Status: proposed, 2026-10-23; implementation and new GPU cells require acceptance.
+Status: revised in-container resource/budget contract accepted, 2026-10-23, by explicit user approval.
 Owner: numerical backend and experiment tooling.
 Introduced: GPUP-8 latency follow-up.
 Last reviewed commit: bootstrap (parent 6521c3a).
@@ -17,10 +17,22 @@ policy-matched FP64. Conservative step restriction, generic preparation and host
 reference audits dominate the actionable large-model costs. The previous CPU
 admission/build overlap has no aggregate concurrency/RSS receipt.
 
-This proposal adds no resources. It is a bounded attempt to satisfy the existing
-completion criteria, not a promise of a speedup or permission to continue after
-a failed gate. Acceptance must explicitly include the prospective disposition
-of the historical CPU resource limitation described below.
+The original accepted cgroup contract refused in the current Kubernetes
+container. The user now requests an in-container admission method and its CPU
+budget, with no host access and unchanged numerical/latency completion criteria.
+This amendment replaces only the resource-admission mechanism and CPU allocation.
+It requests 14300 additional CPU seconds, not additional GPU execution. It is a
+bounded attempt, not a promise of a speedup or permission to continue after a
+failed gate. The user explicitly accepts the amended resource risk, 14300 additional CPU
+seconds, reallocation of the remaining 1700 and implementation of this bounded
+continuation. Host access remains prohibited.
+
+The [prior-source bridge](../benchmarks/data/tensor-cost/adr0044-amendment-prior/source-bridge.json)
+retains the exact accepted ADR (SHA-256
+`b985e5175f8fa546dff959408a3561d128fa5026a4685adf6d73d801d4141651`) and all eight
+previously receipted planning sources. Resolve historical source bindings through
+those exact snapshots, not this amended path. Do not rewrite prior receipts.
+The original cgroup refusal and conservative CPU charges remain valid.
 
 ## Decision: one fixed package, in dependency order
 
@@ -32,45 +44,148 @@ workers/payloads/reports and all 17362 ledger events remain byte-identical.
 
 ### 1. Repair CPU resource admission before preparation
 
-Implement one task coordinator with a project-wide exclusive admission lock.
-Every compiler, proof, admission process, verifier, check, GPU worker and reporting
-child of this continuation runs beneath it. A second coordinator refuses or
-waits without starting work. Child launches require atomic weighted slot and
-memory reservations; no two top-level phases overlap. A four-job build owns
-all four work slots; an admission pool may own at most four single-thread slots.
-Explicitly configure Cargo/CMake/test/Rayon/BLAS/OpenMP/nvcc worker counts;
-descendants inherit CPU affinity and the task enclosure. Coordinator/monitor
-CPU and RSS are included even though they are not additional work slots.
+Use a **cooperative, source-bound process supervisor** inside the existing
+container. It needs ordinary process, affinity, signal, `/proc` and filesystem
+interfaces only. It does not require a writable cgroup, host manager, new PID/user
+namespace, privileged helper, ptrace, Kubernetes API call or extra capability.
+No host access, namespace escape, cgroup remount or privileged replacement is
+authorized. A missing required in-container primitive still causes CPU refusal.
 
-Preflight requires a delegated cgroup v2 task subtree: inherited cpuset of at
-most four CPUs, CPU quota at most four cores, `memory.max=8589934592`, no swap
-escape, complete descendant membership and authoritative aggregate `cpu.stat`
-and memory-peak/event accounting. Work-slot limits are enforced separately;
-CPU quota alone does not stop eight queued workers. Put every child into the
-enclosure before allowing it to execute. Use an atomic start handshake, durable
-reservation journal and retained per-stage receipts. The current container's
-cgroup controls are read-only, so delegated containment must be provisioned and
-validated by the host before this stage can pass. Do not silently fall back to
-the existing per-tree sampler. If delegation is unavailable, retain a CPU
-admission refusal and stop before preparation/device reservations.
+This is an explicit change from cgroup-enforced containment. It covers the frozen
+project commands and their cooperating descendants, not arbitrary hostile code.
+It supplies conservative CPU charging, serialized work admission and sampled
+aggregate RSS with early termination. It cannot prove an instantaneous 8-GiB
+kernel-enforced aggregate memory ceiling, disable swap for the task, or guarantee
+cleanup after simultaneous loss of both supervisors. Acceptance includes those
+specific limitations. Receipts must say `cooperative_process_supervision_v1`;
+they must never claim cgroup admission, an exact aggregate memory peak, or
+historical resource recertification.
 
-Reserve each stage's CPU time against the **remaining cumulative** cap before
-launch, including final acceptance/reporting reserves. Poll aggregate CPU usage
-and process-tree RSS at most 10 ms apart; retain aggregate memory peak and OOM
-events. Stop below the CPU cap with a margin covering four cores times the
-sampling/termination bound; include that margin in the stage reservation.
-Freeze/kill and reap the whole enclosure on limit, cancellation, lost monitor or
-coordinator failure. If accounting is incomplete, charge the full reservation
-and refuse subsequent work. Require an empty enclosure before releasing slots.
-Never reset the ledger or infer completion from child exit alone.
+#### Ownership, slots and launch handshake
 
-CPU-only tests cover concurrent coordinators, a build plus admission request,
-grandchildren/thread-spawned children, cumulative exhaustion across sequential
-jobs, memory-limit events, failed entry/telemetry, SIGTERM/SIGKILL, orphan cleanup
-and stale reservation recovery. Receipts bind source, command, executable,
-configured/peak work slots, aggregate CPU delta, memory peak/events and status.
-No missing aggregate observation can be recorded as passed. These tests and the
-delegation preflight spend only the CPU reservation below, zero GPU seconds.
+Implement one coordinator and one small independent guardian. The guardian is
+the parent and a Linux child subreaper; both retain the project-wide admission
+lock until all work has exited and settlement is durable. Work children close
+the lock descriptor before exec. Use `artifacts/lp-cpu-admission.lock`, an atomic
+reservation journal and source-bound command manifests. A competing coordinator
+refuses before starting work. No two top-level phases overlap, including builds,
+CPU admission, native checks, device workers, verification and report generation.
+
+Reserve weighted work slots and a phase memory envelope before launch. A build
+owns all four slots, with at most four compiler jobs; CPU admission owns at most
+four single-thread workers. Tests and nested build tools run sequentially unless
+their combined declared width fits four. Explicitly set Cargo/CMake/Rust-test,
+Rayon, OpenMP/BLAS and nvcc counts; independent pools may not each assume four.
+The coordinator and guardian are charged overhead, not extra work slots. Use one
+GPU worker at a time, reserving all four slots for its complete process family.
+No background build, orphan worker or external build daemon
+is admitted. Command/environment changes invalidate the frozen resource receipt.
+
+Before creating threads or children, pin both supervisors to the same four CPUs
+chosen from the existing allowed affinity; refuse if four are unavailable. Launch
+each phase through a minimal child handshake: establish its process group,
+inherit affinity/limits, register PID plus start time and a pidfd, report ready,
+then wait for the coordinator's release before exec. Validate the effective
+affinity at readiness. Every known thread must remain within that four-CPU mask.
+Frozen commands may narrow affinity but may not widen it. Audit launch paths and
+check thread masks during monitoring; a change or unreadable mask stops the phase.
+Affinities are kernel scheduling restrictions once set, but this contract relies
+on cooperating commands not changing them between observations. No isolation from
+unrelated workloads on those CPUs is claimed.
+
+Apply the same frozen CPU mask, supervisor, monitoring policy and worker limits
+to all six study configurations, including unchanged tuned FP64. Preserve the
+original fresh-solve latency measurement boundaries; conservative CPU charges
+are resource accounting, not replacement timings or evidence of a speedup.
+
+#### Descendants, memory and failure handling
+
+Track ancestry, process groups and PID start times, including new sessions created
+by existing supervised test tools. A single `killpg` is not complete cleanup.
+The guardian's subreaper role keeps live orphaned descendants attributable after
+intermediate parents exit. Record all observed processes and thread counts;
+sample process RSS once per address space, not once per thread. Short-lived
+processes can escape RSS sampling: label that limit explicitly. Known numerical
+workers must acknowledge allocation/phase checkpoints before their largest host
+buffers are built. Do not normalize or modify historical workers to add this.
+
+Target a complete sample every 10 ms, retain actual intervals and maximum gap,
+and stop if an interval exceeds 100 ms or required live-process telemetry fails.
+Sum RSS conservatively (shared pages may be counted more than once), including
+supervisors. Admit a phase only when its declared host-memory envelope plus
+supervisor reserve fits **6 GiB**. Stop on sampled aggregate RSS >=6 GiB, reserving
+2 GiB below the unchanged **8-GiB policy limit**. Any observed 8-GiB breach makes
+the cohort ineligible; no sub-sample peak guarantee is inferred from the margin.
+Retain per-process high-water marks as supporting observations, not a replacement
+aggregate maximum. An RSS sample is not a kernel memory reservation.
+
+For CPU-only commands, use compatible per-process `RLIMIT_AS` and CPU/file-size
+limits as additional safeguards. They are not aggregate limits. Do not impose
+an 8-GiB address-space limit on CUDA workers: virtual address reservations and
+resident host memory are different quantities. Keep the existing 2-GiB numerical
+preparation and 1-GiB device-buffer checks. Report observed `VmSwap`; nonzero task
+swap makes timings ineligible, but task-wide swap prevention and between-sample
+swap absence are not claimed. Shared-root cgroup counters cannot certify this
+task's memory peak or OOM status.
+
+The guardian watches coordinator liveness/heartbeats and the coordinator watches
+the guardian through pidfds/EOF, independently of workload exit. Either surviving
+supervisor stops launches and kills the registered groups and live descendants on
+cancellation, timeout, memory/affinity violation, missing telemetry or peer death.
+Use parent-death signaling for direct launchers only; it is not inherited by
+grandchildren and cannot replace the guardian. Repeat discovery, signal remaining
+descendants and reap until none remain; keep process identities protected against
+PID reuse and never signal unrelated container processes. Target cleanup within
+one second; failure to prove quiescence retains the lock/refusal and prevents any
+new phase. Bootstrap tests must exercise nested sessions as well as double forks.
+
+A durable incomplete journal prevents a restarted coordinator from starting work.
+It must identify/clean the recorded descendants or refuse, charge the full prior
+reservation and preserve the failure. Simultaneous supervisor loss, an unkillable
+process or incomplete identity/accounting is an execution failure, not a passed
+resource cohort. No assertion that user-space monitoring always enforces a hard
+deadline or contains hostile descendants is permitted.
+
+#### Conservative CPU accounting and bootstrap
+
+Charge **four times elapsed wall time** over each active supervision interval,
+from before child launch until verified quiescence, including both supervisors,
+setup, idle waits, monitoring, teardown and receipt work. Round elapsed nanoseconds
+up, retain the raw timestamps and never settle below this charge using sampled
+CPU or `wait4` values. This is a conservative CPU upper charge for cooperating
+work confined to the four-CPU mask; it is not a measured aggregate CPU counter.
+Affinities/ancestry violations invalidate that premise: charge the full reservation,
+retain any known excess and stop rather than claiming compliant accounting.
+
+Reserve each phase against the **remaining cumulative CPU cap**, and reserve
+every remaining mandatory validation/delivery phase before admitting work. The
+journal stores CPU seconds and corresponding wall deadlines, not interchangeable
+numbers. Deduct termination/monitor margins before work begins. Avoid nested
+double charges by assigning each active interval exactly one owner; never omit
+time merely because the GPU lease or numerical solve timer is not active yet.
+If a deadline overruns, record the excess as well as the violation; do not clip
+consumption to its reservation. Incomplete accounting charges the full reservation
+and refuses further work. GPU accounting remains the existing leased-wall ledger.
+
+The first **100 CPU seconds** of the 2000-second admission/build stage fund one
+bootstrap attempt, including a minimal launcher/guardian build if required.
+Use one foreground build job, inherited four-CPU affinity, a 25-second total wall
+cap and no numerical work or GPU access. The bootstrap cannot certify itself;
+charge all 100 seconds conservatively. It must establish locks, handshakes,
+subreaping, pidfds, affinity and watchdog cleanup before the remaining stage runs.
+Failure retains a new CPU refusal; there is no automatic retry or host fallback.
+
+Real CPU-only tests then cover competing coordinators; build/admission exclusion;
+all configured pool widths; grandchildren and thread-spawned children; nested
+sessions; transient exits and PID reuse; cumulative exhaustion across phases;
+synthetic low-threshold memory growth; affinity changes; unreadable telemetry;
+delayed sampling; SIGTERM/SIGKILL of either supervisor; orphan cleanup; stale
+reservations and interrupted receipt writes. Deliberate refusal tests are isolated
+fixtures with their own expected outcomes, not successful study cohorts. They
+must not allocate 8 GiB or deliberately OOM the shared container. Retain source,
+command/environment, configured slots, sample gaps, sampled RSS, supervisor/work
+identities, conservative CPU charge, cleanup and status. A missing observation is
+never a pass. Successful tests admit only this prospective cooperative contract.
 
 ### 2. Remove shared costs without relaxing numerical budgets
 
@@ -199,31 +314,72 @@ caps 1800/11800/8100/5300/9000 unchanged. Device remains exclusively
 
 ## CPU and memory reservation
 
-After charging the diagnosis 400 CPU seconds, prior conservative accounting is
-19534.822845162 / 21600. Reserve at most **2050 additional CPU seconds**:
+The original 2050-second allocation is historical: its 250-second admission and
+100-second reporting stages are fully charged. Keep the 350-second settlement
+and the subsequent 10-second Kubernetes planning charge. Charge this amendment's
+documentation/static checks 5 seconds from the last unallocated headroom. Prior
+conservative accounting for resumed execution becomes **19899.822845162 / 21600
+CPU seconds**, leaving 1700.177154838 overall, of which 1700 is still allocated
+to the original continuation's unstarted stages. No historical charge is reclaimed.
+
+Request **14300 additional CPU seconds** and explicitly replace the 1700 unspent
+stage allocations with this **16000-CPU-second** prospective allocation. The
+cumulative CPU ceiling would increase from **21600 to 35900 seconds**. The user explicitly approves these CPU seconds and reallocation. The separate
+3600-GPU-second offer remains unreserved; this stage table and CPU ceiling are active.
 
 | Stage, including its children | CPU s cap |
 | --- | ---: |
-| Resource coordinator/preflight/tests and incremental compilation | 250 |
-| Independent proofs, compact-layout comparison and eight-model CPU admission | 550 |
-| Pre-device and final full pinned-native acceptance | 550 |
-| All leased GPU-worker CPU, monitoring and independent endpoint verification | 550 |
-| Report, preservation checks and local delivery | 100 |
-| Supervisor/termination accounting margin | 50 |
-| **Total** | **2050** |
+| Coordinator/guardian bootstrap (100 included), real resource tests, numerical implementation and incremental compilation | 2000 |
+| Independent proofs, compact-layout comparison and eight-model CPU admission | 2600 |
+| Pre-device and final full pinned-native acceptance | 2200 |
+| All leased GPU-worker CPU, monitoring and independent endpoint verification | 8400 |
+| Report, preservation checks and local delivery | 400 |
+| Explicit supervisor/termination margin | 400 |
+| **Total prospective allocation** | **16000** |
 
 Each stage cap is a hard reservation, not a predicted success time. No borrowing
 across stage caps is implicit. Freeze CPU stage order, commands, pool widths and
 limits before execution. Before starting another stage, reserve all remaining
 mandatory acceptance/delivery work as well. If actual code or proof work cannot
-fit, stop on CPU with no study attempt. In particular the earlier conservative
-`8 x leased wall time` estimate would consume too much CPU allowance here;
-complete aggregate CPU accounting is essential, not optional bookkeeping.
+fit, stop on CPU with no study attempt. The margin is reserved upfront, assigned
+to named phase termination allowances and charged once; unused margin cannot
+extend numerical work or replace a failed cohort. A resource test refusal fixture
+does not authorize retrying a failed real admission or device identity.
 
-Maximum cumulative CPU accounting would be 21584.822845162 / 21600 seconds.
-Keep four aggregate work slots, 8 GiB aggregate RSS, 2 GiB preparation, 1 GiB
-device buffers and 32 GiB combined artifacts. Every new process and retained
-artifact counts, including refusals and monitoring. No old reserves are reclaimed.
+The budget is intentionally derived from conservative wall charging rather than
+an unverifiable exact CPU accumulator:
+
+- The unchanged GPU reservation is 1806 leased wall seconds. Four times that is
+  **7224 CPU seconds**, leaving 1176 in the 8400-second worker stage for CPU work
+  outside leases, endpoint verification and monitoring/receipt overhead. Every
+  actual interval is charged, including lease waits; queue delays can still refuse.
+- The retained [diagnosis native gate](../../artifacts/gpup-tensor-latency-v1/native-acceptance.json)
+  took 238.91736781504005 wall seconds and measured 234.50076 CPU seconds. Two
+  equivalent wall durations would charge **1911.338942520321 CPU seconds** (rounded upward) under
+  the new rule, fitting 2200. The measured CPU figure cannot justify retaining
+  the original 550-second reservation when charging four times wall time.
+- The [residual continuation](../benchmarks/data/tensor-residual/acceptance.json)
+  retains 365.1783400170001 CPU-trajectory wall seconds, equivalent to
+  **1460.713360068001 CPU seconds** (rounded upward) under this rule. The 2600-second proof stage
+  also reserves time for the new norm/oracles and layout comparisons. Historical
+  duration is sizing evidence, not a guarantee of admission or future duration.
+- The 2000-second implementation/resource stage permits at most 500 wall seconds
+  under four-times-wall charging (including the full 100-second bootstrap charge).
+  Retain native dependencies and incremental artifacts; no clean rebuild is
+  assumed. The report and margin stages each correspond to at most 100 seconds
+  of four-CPU wall exposure. These are explicit stop limits, not work estimates.
+
+Maximum prospective cumulative CPU accounting is **35899.822845162 / 35900
+seconds**, leaving 0.177154838 unallocated. Actual charges can be lower, but no
+unspent stage automatically funds another attempt. Keep four aggregate work slots,
+the 8-GiB aggregate RSS policy/6-GiB stop threshold defined above, 2-GiB numerical
+preparation, 1-GiB device buffers and 32-GiB combined artifacts. Every new process
+and retained artifact counts, including supervisors, refusals and monitoring.
+
+The new CPU allocation does not increase GPU reservations. The existing 1806
+GPU seconds still fit all inherited phase and cumulative ceilings; the extra
+3600-GPU-second offer remains unreserved. No new cells, repetitions, retries or
+GPU time conversion is implied. Only CPU admission/budget terms change.
 
 ## Completion, refusal and historical resource disposition
 
@@ -260,6 +416,21 @@ restrict the step; a serial device reference audit may also be expensive. The
 CPU and cost gates deliberately permit a documented refusal. No guaranteed
 GPUP-8 completion is inferred from the remaining GPU allowance.
 
+The in-container amendment trades kernel-enforced task memory/swap containment
+for explicit cooperative admission, sampled RSS and conservative CPU charging.
+It is practical with ordinary container process interfaces, but compatibility
+and real cleanup still require the bootstrap/failure tests. A cgroup-equivalent
+claim would be false. A larger CPU allocation funds this accounting method and
+the original mandatory checks; it does not relax numerical or latency gates.
+
+Interface basis: Linux documents inherited [CPU affinity](https://man7.org/linux/man-pages/man2/sched_setaffinity.2.html),
+orphan reparenting to a [child subreaper](https://man7.org/linux/man-pages/man2/PR_SET_CHILD_SUBREAPER.2const.html),
+stable [pidfd references](https://man7.org/linux/man-pages/man2/pidfd_open.2.html),
+the non-inherited nature of [parent-death signals](https://man7.org/linux/man-pages/man2/PR_SET_PDEATHSIG.2const.html)
+and the per-process/virtual-memory scope of [rlimits](https://man7.org/linux/man-pages/man2/getrlimit.2.html).
+These primitives support this design; the documentation is not evidence that
+its implementation or failure tests have passed in this container.
+
 ## Implementation and acceptance artifacts
 
 Likely implementation: a shared CPU admission coordinator with CPU-only failure
@@ -272,4 +443,21 @@ CPU/native/dependency/replay/docs/smoke command. Preserve the exact ledger prefi
 SHA-256 `e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5`,
 including the 17200/17132 prefixes and every historical source/image/worker/report.
 Local commit follows applicable acceptance; publication and merge remain outside
-this task. This proposed ADR reserves nothing until explicitly accepted.
+this task. Original user acceptance remains historical. The user explicitly accepts this amended cooperative
+resource contract, 14300 additional CPU seconds and reallocation of the
+remaining 1700, and authorizes implementation. Resource and numerical
+admission still precede preparation/device execution. Preserve the numerical,
+frozen comparison/GPU and completion sections byte-for-byte against the archived
+accepted ADR; only resource terms and their contextual explanation change.
+
+## Accepted CPU stage reallocation (2026-10-23)
+
+Explicit user approval of the transport recovery transfers supersedes only the
+previous CPU stage caps: implementation 1600, proofs 1600, native acceptance
+3800, device workers/verification 7800, reporting 800 and termination margin 400
+CPU seconds. Their sum stays 16000 and the cumulative ceiling stays 35900.
+Every prior charge is retained. The exact previous accepted ADR is preserved in
+../benchmarks/data/tensor-cost/transport-recovery-prior/94b80a3ee8b232a2d6147d1c24e5a8845e8e85564c0606a78ef797695402812f.txt.
+The bounded recovery plan is ../plans/lp-tensor-cost-transport-recovery.md.
+No bootstrap rerun, host access, device study retry, new GPU allocation or change
+to numerical, forecast, comparison or completion criteria is authorized.

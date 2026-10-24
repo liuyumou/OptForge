@@ -1,0 +1,26 @@
+{
+  "authorization": "User explicitly approves one corrected bootstrap using 100 CPU seconds from existing implementation stage",
+  "gpu_seconds": 0,
+  "host_access": false,
+  "identity": "gpup-tensor-cost-corrected-bootstrap-authorization-v1",
+  "new_budget_seconds": 0,
+  "prior_failed_journal_sha256": "74acb190123d9258c8f1e573ab20fe77fb58c28b01b7e158bd652d7beff20bf8",
+  "reserved_cpu_seconds": 100,
+  "sources": [
+    {
+      "archive": "artifacts/gpup-tensor-cost-v1/bootstrap-corrected-v1-source/lp_cpu_admission.py.source",
+      "path": "tools/lp_cpu_admission.py",
+      "sha256": "a012f69f4ad4debef3b230c5186fd9fa4a82db158841820f0d4a0b37e1447495"
+    },
+    {
+      "archive": "artifacts/gpup-tensor-cost-v1/bootstrap-corrected-v1-source/lp_cpu_bootstrap.py.source",
+      "path": "tools/lp_cpu_bootstrap.py",
+      "sha256": "7558f5995dafa5f17445fd789da89c833580652ef874c282381f591f551b0487"
+    },
+    {
+      "archive": "artifacts/gpup-tensor-cost-v1/bootstrap-corrected-v1-source/test_lp_cpu_admission.py.source",
+      "path": "tests/integration/test_lp_cpu_admission.py",
+      "sha256": "599c749b81df67d618de47e54e30295edfdb65c3ec3ba52d21d369b9ee561654"
+    }
+  ]
+}

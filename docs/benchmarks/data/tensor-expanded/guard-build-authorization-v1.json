@@ -1,0 +1,36 @@
+{
+  "authorization": "User-authorized continuation and unused-budget reallocation.",
+  "compile_timeout_seconds": 175,
+  "fp64_operations": "Outward error/magnitude metadata only; product iterates remain Expansion64.",
+  "full_candidate_inventory": false,
+  "gpu_seconds": 0,
+  "implementation_bookkeeping_cpu_seconds": 16,
+  "passed_checks_rerun": false,
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/residual-build-v1/cpu-journal-v12.json",
+    "sha256": "e7e1ab579d8ddc9b120548cd8436779d3ea9baa6866628d71a3e06adcebc3be7"
+  },
+  "register_limit": 128,
+  "sources": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_guard.cu",
+      "sha256": "3e7fff5bfd995d30d8b8091750dbaa6f818ae705d0d562249263cfc5debb9cbc"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_storage.h",
+      "sha256": "d021dba2675c5e07d0ddf4338855294ad18025ad6dcc8838e147861dbc1ad2fa"
+    }
+  ],
+  "spill_bytes_limit": 0,
+  "status": "accepted",
+  "transfer": {
+    "cpu_seconds": 800,
+    "source": "cpu_models",
+    "target": "guard_compile"
+  },
+  "work_wall_seconds": 198
+}

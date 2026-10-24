@@ -83,3 +83,7 @@ pub mod lp_tensor;
 /// Loss-preserving component Tensor experiment protocol.
 #[cfg(feature = "precision-research")]
 pub mod lp_tensor_residual;
+
+/// ADR-0044 isolated Tensor cost evidence.
+#[cfg(feature = "precision-research")]
+pub mod lp_tensor_cost;

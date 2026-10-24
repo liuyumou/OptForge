@@ -1,0 +1,79 @@
+{
+  "automatic_retry": false,
+  "campaign_gpu_ns": 22592495266813,
+  "checks": {
+    "path": "docs/benchmarks/data/tensor-expanded/delivery-checks-v1.json",
+    "sha256": "d011435a2ff8491c637074afcde7c2453eabd50e501dbcc03c4b64bd4b963113"
+  },
+  "cleanup_empty": true,
+  "commit": false,
+  "continuation_cpu_charge_ns": 5666151624356,
+  "cpu_ceiling_ns": 77640000000000,
+  "cpu_total_ns": 51568693453526,
+  "diagnosis": {
+    "path": "docs/benchmarks/data/tensor-expanded/proof-fixture-diagnosis-v1.json",
+    "sha256": "dde61f49251cda7fccc677aca36d1ea573446fe6d96f8eb0188fb31db03309ad"
+  },
+  "failed_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/cpu-journal-proof-stop-v2.json",
+    "sha256": "74ceef2227e5f56ab5fb7d31d8fcfae3fafe74e1ff7f98b073685a0e619f93b3"
+  },
+  "gpup8_complete": false,
+  "gpup8_gpu_ns": 1232909411024,
+  "gpup9_started": false,
+  "identity": "gpup-tensor-expanded-final-accounting-v1",
+  "implicit_transfer": false,
+  "journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/cpu-journal-final-v4.json",
+    "sha256": "5116dafbc54b51f447bbca3a955f025209cd15659337e0e3342b8004ab798223"
+  },
+  "ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "9913d391634bdb0f74012be909be377e5a693d00b76e6882abcf336796ac863e"
+  },
+  "ledger_events": 17412,
+  "new_gpu_ns": 0,
+  "old_checks_rerun": false,
+  "old_profiles_rerun": false,
+  "overall_unspent_cpu_ns": 26071306546474,
+  "preserved_old_checks": true,
+  "prior_cpu_ns": 45902541829170,
+  "proof_stage_cpu_charge_ns": 5600000000000,
+  "resources": [
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/authority-resource-v1.json",
+      "sha256": "c715aa917622b0db72965220aeb89d33c4f6624264f2b73284963e8a94f25f6c"
+    },
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/prototype-resource-v1.json",
+      "sha256": "ad11396ddcb87eb82e0de9bb7a0d66bfec063c75fc1affc875166c308ee99fc6"
+    },
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/proofs-resource-v1.json",
+      "sha256": "2ba061973abfac2b1c9cdeaf02e79b1c48163b7f85bf27dfdd989591bf09fbaa"
+    },
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/delivery-report-resource-v1.json",
+      "sha256": "5ce4ac793f63fcff75003f1d0bd58c0af89bfcc8146b8fe7a1e1d87d1a206029"
+    },
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/delivery-checks-resource-v1.json",
+      "sha256": "40ad8c6d298edb2377e69d64fb027d90baae0eb88eb287115be4e8246f7a9e22"
+    }
+  ],
+  "scientific_execution_closed": true,
+  "status": "incomplete_cpu_fixture_refusal",
+  "unassigned_cpu_ns": 137458170830,
+  "unspent_stage_cpu_ns": {
+    "acceptance": 4000000000000,
+    "authority": 376399170604,
+    "implementation": 4000000000000,
+    "margin": 400000000000,
+    "native": 4800000000000,
+    "profiles": 3200000000000,
+    "proofs": 0,
+    "prototype": 1995686878616,
+    "reporting": 761762326424,
+    "timings": 6400000000000
+  }
+}

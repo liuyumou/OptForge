@@ -1,0 +1,23 @@
+{
+  "additional_resources": 0,
+  "bookkeeping_cpu_seconds": 32,
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/continuation-v1/cpu-journal-v18.json",
+    "sha256": "23029319e3759ea18da1507dfcd6a0789853f6103c87c5c82228114ec1bdee0b"
+  },
+  "report_work_wall_seconds": 120,
+  "scope": "CPU-only evidence/report/documentation/accounting after actual profile deadline refusal; no scientific retry.",
+  "status": "accepted",
+  "transfers": [
+    {
+      "seconds": 488,
+      "source": "reporting",
+      "target": "delivery_report"
+    },
+    {
+      "seconds": 200,
+      "source": "reporting",
+      "target": "delivery_checks"
+    }
+  ]
+}

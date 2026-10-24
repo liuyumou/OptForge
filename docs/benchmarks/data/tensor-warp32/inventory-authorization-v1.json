@@ -1,0 +1,40 @@
+{
+  "additional_cpu_ns": 2500000000000,
+  "all_prior_charges_retained": true,
+  "authorization": "User explicitly approves 2500 additional CPU seconds, proposed unused-fund reallocation, inventory without rerunning passed checks, and conditional GPUP-8 continuation, 2026-10-24",
+  "automatic_retry": false,
+  "bootstrap_rerun": false,
+  "completion_criteria_changed": false,
+  "continuation_allocation_cpu_ns": 9840000000000,
+  "cpu_ceiling_ns": 39640000000000,
+  "full_check_rerun": false,
+  "gpu_cap_seconds": 790,
+  "gpu_phase_caps_seconds": {
+    "acceptance": 290,
+    "profiles": 200,
+    "timings": 300
+  },
+  "gpu_prefix_events": 17366,
+  "gpu_prefix_sha256": "9142829b3be8afdb1865425c83ca9122371284ca0e16f7bc8b18d303a5894426",
+  "headroom_cpu_seconds": {
+    "implementation": 100,
+    "margin": 400,
+    "native": 400,
+    "proofs": 0,
+    "reporting": 150,
+    "workers": 4000
+  },
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-inventory-authorization-v1",
+  "maximum_cumulative_cpu_ns": 39559056321890,
+  "plan": "docs/plans/lp-tensor-warp32-inventory-continuation.md",
+  "plan_sha256": "790b774cb054cabf8ced90743500a7b500c121a32b73079a39257a85b24191e4",
+  "prior_cpu_total_ns": 34509056321890,
+  "prior_journal": "artifacts/gpup-tensor-warp32-v1/cpu-journal-inventory-planning-final-v13.json",
+  "prior_journal_sha256": "8ea76e579fd9ab5c56d60bc839b8a37333d6e353e3b836d444f7b27ba4a25bd4",
+  "setup_cpu_ns": 8000000000,
+  "status": "accepted",
+  "supervisor_change": false,
+  "unused_assigned_cpu_ns": 35649492368,
+  "unused_overall_ceiling_cpu_ns": 80943678110
+}

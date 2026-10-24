@@ -1,0 +1,33 @@
+{
+  "authorization": "User authorizes relaxing the deadline and delegates reasonable deadline selection, 2026-10-24",
+  "execution_started": false,
+  "failed_charges_refunded": false,
+  "gpu_cap_seconds": 790,
+  "gpu_phase_caps_seconds": {
+    "acceptance": 290,
+    "profiles": 200,
+    "timings": 300
+  },
+  "identity": "gpup-tensor-warp32-deadline-amendment-v1",
+  "new_cpu_budget_authorized": 0,
+  "new_gpu_budget": 0,
+  "numerical_and_completion_criteria_changed": false,
+  "old_failed_attempts_preserved": true,
+  "per_action_timeout_seconds": 40,
+  "prior_accounting": "docs/benchmarks/data/tensor-warp32/native-final-cpu-accounting-v5.json",
+  "prior_accounting_sha256": "0af299176c78015f69a8232c4b3fd90f0df3f6280f46c2957745cd4459dfad19",
+  "prior_journal": "artifacts/gpup-tensor-warp32-v1/cpu-journal-inventory-device-final-v20.json",
+  "prior_journal_sha256": "bb14ea0c2361355d6bef41eb6339f00f55421d641d45fef8950b47afe6a54559",
+  "prior_ledger_events": 17370,
+  "prior_ledger_sha256": "2dac176a925a0bba6096eea8f57ed694465c0199625d120eeb32d468310dc4e4",
+  "project_gpu_reservation_seconds": 186,
+  "project_lease_overhead_seconds": 6,
+  "project_remaining_work_deadline_seconds": 180,
+  "report_cpu_reservation_seconds": 248,
+  "report_work_deadline_seconds": 60,
+  "resume_scope": "one interrupted replay verification and four unexecuted large-model fixed-work/replay pairs; never replay a completed solve/check",
+  "reuse_completed_software_inventory_and_device_checks": true,
+  "status": "deadline_selection_authorized_execution_resource_blocked",
+  "supervisor_reserved_work_wall_seconds": 2,
+  "worker_cpu_allocation_remaining_ns": 0
+}

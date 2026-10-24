@@ -1,0 +1,17 @@
+{
+  "accepted": true,
+  "bootstrap_rerun": false,
+  "cpu_headroom_seconds": {
+    "implementation": 150,
+    "margin": 400,
+    "native": 1200,
+    "proofs": 800,
+    "reporting": 150,
+    "workers": 3400
+  },
+  "cpu_journal": "artifacts/gpup-tensor-warp32-v1/cpu-journal-v1.json",
+  "gpu_cap_seconds": 790,
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-authorization-v1",
+  "proposed_adr_sha256": "d38bdff0c7b32923d5820a00538b91bc4fb32b9a0f109df0fe1fea27bd5e9796"
+}

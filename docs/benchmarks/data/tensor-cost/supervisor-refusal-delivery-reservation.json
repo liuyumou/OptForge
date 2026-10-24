@@ -1,0 +1,8 @@
+{
+  "identity": "gpup-tensor-cost-bootstrap-refusal-delivery-reservation-v1",
+  "stage": "reporting",
+  "reserved_cpu_seconds": 100,
+  "scope": "Retain failed bootstrap, inspect only its exited processes, source-only mocked portability regressions, static preservation checks and refusal delivery; no bootstrap retry or numerical work",
+  "gpu_seconds": 0,
+  "bootstrap_retry_authorized": false
+}

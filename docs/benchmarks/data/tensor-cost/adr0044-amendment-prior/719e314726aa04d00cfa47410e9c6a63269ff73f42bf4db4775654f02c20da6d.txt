@@ -1,0 +1,592 @@
+# Agent Instructions
+
+Implement one dependency-ready bounded task at a time. Follow
+[CONTRIBUTING.md](CONTRIBUTING.md), accepted specifications, and ADRs.
+Update state/active-task.md before work and record acceptance evidence afterward.
+Read state/known-failures.md before implementing related behavior.
+
+GPUP-8 Kubernetes constraint (2026-10-23): the user confirms Kubernetes and
+prohibits escaping this container. Follow the documentation-only disposition in
+docs/plans/lp-tensor-kubernetes-constraint.md. No host/namespace/privileged-helper
+route or cluster mutation; no new admission, preparation or GPU attempt. Current
+read-only controls cannot implement accepted ADR-0044 containment. Admission and
+reporting stage reserves are exhausted; 1700 CPU seconds in other stages cannot
+be transferred implicitly. The separate planning charge is 10 CPU seconds from
+unallocated original-ceiling headroom: cumulative CPU upper 19894.822845162 /
+21600, overall remaining 1705.177154838. The additional 3600-GPU-second offer is
+unreserved and does not amend cumulative/phase ceilings or remove the CPU gate.
+GPUP-8 stays incomplete. Preserve the accepted ADR, reports and exact ledger.
+
+GPUP-8 ADR-0044 admission result (2026-10-23): approved continuation starts with
+CPU resource admission and refuses because the only cgroup mount is read-only,
+no delegated subtree exists, and no system/user host manager is accessible.
+Retain docs/benchmarks/lp-tensor-cost-gpup8.md and data/tensor-cost receipts.
+Seven simulated refusal tests pass; full coordinator/containment, native,
+numerical and device acceptance have not run. No preparation or GPU reservation.
+Charge the full admission/reporting CPU reservations, 350 seconds; cumulative
+CPU upper accounting is 19884.822845162 / 21600. Task/campaign GPU consumption
+and the exact 17362-event ledger are unchanged. The accepted ADR requires stop
+on absent delegation; a host-provided task enclosure is required before further
+admission. GPUP-8 remains incomplete. No new retry or later-task allowance.
+
+GPUP-8 ADR-0044 approval (2026-10-23): the user explicitly approves the bounded
+continuation and directs starting with CPU resource admission. Implement/evaluate
+only within its 2050 CPU seconds and 1806 GPU seconds (990/320/496 by phase),
+without raising existing ceilings. Delegated task cgroup containment and complete
+aggregate admission/accounting must pass first. If unavailable, retain the CPU
+admission refusal and stop before preparation/device reservations. The historical
+CPU overlap remains uncertified. Preserve all 17362 ledger events and every
+historical artifact. No retries, substitute device, GPUP-9, publication or merge.
+
+GPUP-8 latency planning (2026-10-23): the user requests CPU-only diagnosis and a
+bounded completion proposal, including repaired aggregate CPU admission. The
+separate diagnosis is docs/benchmarks/lp-tensor-latency-diagnosis.md. ADR-0044 is
+proposed, not accepted: at most 1806 GPU seconds (990 screening, 320 ablations,
+496 repeatability) and 2050 CPU seconds after a 400-CPU-second diagnosis charge,
+all within original ceilings. No new GPU work or numerical implementation is
+authorized by the proposal. Current cgroup controls are read-only; delegated
+task containment and one shared coordinator must pass CPU preflight before
+preparation. Preserve the historical uncertified overlap; prospective admission
+cannot certify it retroactively. Keep all 17362 ledger events and every measured
+source/image/worker/report exact. GPUP-8 remains incomplete and GPUP-9 unstarted.
+
+GPUP-8 continuation handoff (2026-10-23): the user explicitly approved
+ADR-0043's loss-preserving residual correction and separate frozen study using
+only the original unspent allowance. All 60 timings certify; all 30 Tensor solves
+perform 2200 logical updates with 66 useful windows and no native promotion.
+Useful integer/floating families now qualify, but all six multiplicity-adjusted
+latency comparisons fail. GPUP-8 remains incomplete on gain; no GPUP-9.
+The initial four-worker CPU admission overlapped a four-job native build;
+aggregate concurrency/RSS were not recorded. This preparation resource gate
+is not certified, despite passing software/device checks. Preserve the separate
+cpu-concurrency-limitation.json receipt and all initial evidence.
+All twelve profiles, three product diagnostics, 280 CPU/device product pairs,
+five controller pairs, twelve fixed-work/replay pairs, 66 ordinary GPU tests and
+four sanitizers pass. Independent CPU verification accepts 120 new LP records;
+all 1272 prior inventory files and both historical ledger prefixes remain exact.
+Separate report/receipts: docs/benchmarks/lp-tensor-residual-gpup8.md and
+ docs/benchmarks/data/tensor-residual. Continuation charge 588.257104641 GPU s;
+combined GPUP-8 825.114032275 / 3000, cumulative 22184.699888064 /
+25202.574545061. Ledger 17362 events, SHA-256
+e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5.
+Final stable-source software acceptance passes 363 Python tests plus Rust/native,
+dependencies, historical replay, 142 docs pages and smoke; 39 source-only tests
+pass. All 248 GPUP-8 LP records freshly verify. Software acceptance does not
+certify the recorded initial CPU concurrency limitation.
+The bounded continuation is exhausted; no retry, replacement cell, new numerical
+budget, supported preset or later-task allowance follows. Preserve every source,
+image, worker and report. Local commit after final acceptance; no publication/merge.
+
+GPUP-8 authorization (2026-10-23): the user explicitly approves ADR-0042's
+INT8 and FP16/BF16 component Tensor plan and 3000 GPU seconds inside existing
+ceilings (1600 screening, 550 ablations, 850 repeatability). This supersedes the
+historical no-next-task-allocation handoffs only for GPUP-8. Preserve the exact
+17132-event ledger prefix and all historical sources/images/workers/reports.
+CPU admission precedes device execution; no study retry or device substitution.
+Keep 1e-7 local budgets, 1e-9 original-model host certification, resident FP64
+state, charged whole-window replay and uniform sticky promotion. Completion
+requires useful integer/floating Tensor solves and a multiplicity-adjusted
+certified total-latency gain. Refusal/no gain leaves GPUP-8 incomplete and does
+not authorize GPUP-9 or additional resources. Local commit after applicable
+acceptance is authorized; publication and merge are outside this task.
+
+GPUP-8 handoff (2026-10-23): the bounded ADR-0042 implementation/evaluation is
+retained, but GPUP-8 remains incomplete under the user's working-family and
+certified latency-gain requirements. Correct INT8/FP16/BF16 operators pass 260
+CPU/device pairs, five controller comparisons, four fixed-work/replay pairs,
+66 ordinary GPU tests and four sanitizers. Forty-eight study cells are CPU-refused;
+27 execute, all 20 admitted FP64 timings certify (20/60 planned), and four profiles
+finish. All 128 LP records verify across four CPU cohorts and device/study data.
+No useful Tensor solve window or gain qualifies; do not advance GPUP-9. Preserve
+all four CPU cohorts, the unreserved allocator preflight, failed first device
+cohort/charge, corrected cohort and every source/image/worker/report. Task charge
+is 236.856927634 GPU s; cumulative 21596.442783423 / 25202.574545061. Ledger has
+17200 events, SHA-256 5af7782a384ac73226f339d98d0b33e320518053c1accdf67c1339db36d0e0f1,
+retaining the exact 17132-event prefix. Final pinned-native acceptance passes 353 Python tests plus Rust/native,
+dependencies, replay, 140 docs pages and smoke. CPU/native/docs/smoke evidence is
+under docs/benchmarks/data/tensor. No preset, new cells, study retries or later-task
+allowance follows. Local commit after applicable checks; no publication/merge.
+
+PR integration authorization (2026-10-23): the user explicitly requests opening
+the combined GPUP-7/7R PR, repeated review/fixes, merge and safe cleanup. This
+supersedes the historical local-only restrictions below. Review is CPU-only;
+preserve all measured sources/images/workers/reports and the exact 17132-event
+ledger. Prepared operators must be immutable, malformed physical counters must
+refuse before aggregation, and evidence/report boundaries must remain strict.
+Keep separate PR source/acceptance receipts and reports. Run every cpu/docs/smoke
+test command, retain native dependencies/artifacts, and verify merged ancestry
+before removing task branches. No additional GPU work or next-task allowance.
+PR acceptance passes 344 Python tests, Rust/native/dependencies, historical replay,
+138 documentation pages and smoke; 20 source-only portability tests pass. Fresh
+verification accepts 495 LP plus 21 operator endpoints. Rebuilt verifiers cover
+423 LP/21 operator endpoints; the 72 initial resident CPU records retain their
+earlier required-field layout and original frozen verifier. Do not normalize or
+re-sign historical payloads. Separate PR report/receipts are under
+docs/benchmarks/lp-quant-pr-review.md and docs/benchmarks/data/quant-resident/pr-*.
+
+Current handoff (2026-10-23): GPUP-7R is complete under accepted ADR-0041 and
+the bounded resident subset of SPEC-0012/0021. Its
+[report](docs/benchmarks/lp-quant-resident-gpup7r.md) retains all 120 planned
+study cells/jobs: 42 execute and 78 quantized timing/profile cells are CPU-refused.
+All 36 admitted timings certify (36/108 planned coverage), three FP64 profiles
+finish 2000 logical updates, and 21 product endpoints verify. None of six
+quantized candidates admits a useful low window on eight models. Residency
+recovers matched FP64 coverage, but tuned FP64 remains faster on nontrivial
+models; no quantized solve benefit or supported preset follows.
+Full native acceptance passes 338 Python tests plus Rust/native/dependencies,
+historical replay, 137 documentation pages and smoke. All 66 ordinary GPU tests,
+628 product/bound vectors, six CPU/device controller comparisons, 29 fixed-work
+endpoint/replay pairs and all four scoped sanitizers pass. Final CPU verification
+accepts 313 LP endpoints and 21 operator endpoints. Preserve the preflight with
+no GPU reservation, sanitizer-scope source bridge, all three CPU cohorts and
+both frozen execution cohorts. No completed GPU identity was retried.
+Task GPU charge is 245.686586823 s (timing 69.376705845, profiles 69.783306098,
+acceptance 106.526574880), within 3600 and every phase cap. Cumulative is
+21359.585855789 / 25202.574545061 s. The 17132-event ledger SHA-256 is
+930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035, preserving
+the exact 17036-event prefix and all earlier artifacts/authority. GPUP-8 is next
+for a conditional numerical/hardware/resource disposition, with no allowance
+reserved. Local commit is authorized after acceptance; publication/merge are
+outside this request. Historical handoffs below remain exact in their context.
+
+Prior implementation authorization (2026-10-22): the user explicitly accepts
+ADR-0041 and allocates 3600 GPU seconds within existing ceilings for GPUP-7R.
+Implement the approved resident/guard plan and bounded comparison, preserve all
+historical evidence and commit locally after acceptance. The exact resource,
+device, admission and validation limits are in state/active-task.md. This
+authorization supersedes the historical planning-only handoff below. No push,
+publication or merge is authorized.
+
+Prior planning handoff (2026-10-22): the user requests the bounded
+[GPUP-7R resident/guard follow-up](docs/plans/lp-quant-resident-follow-up.md)
+before GPUP-8. [ADR-0041](docs/decisions/ADR-0041-resident-matrix-quantization.md)
+is proposed, not accepted. Planning authorizes documentation and CPU checks only;
+do not implement or run GPU work without acceptance of the new contract/resource
+allocation. The proposed 3600 GPU seconds fit existing cumulative/phase ceilings
+with no increase, but unused GPUP-7 allowance does not authorize this task.
+Preserve its exact 17036-event ledger prefix and all historical numerical bodies,
+images, reports and evidence. Keep 1e-7 local budgets, 1e-9 certification, sticky
+promotion and host authority. CPU useful-low admission gates quantized timings;
+the policy bridge and resident matched FP64 controls separate execution costs.
+The completed GPUP-7 handoff below remains historical and exact.
+
+Current handoff (2026-10-22): GPUP-7 implementation and bounded evaluation are
+complete under accepted ADR-0040. Final pinned-native acceptance passes 329
+Python tests plus Rust/native, dependency, historical replay, 134 documentation
+pages and smoke; no GPU work runs in that gate. Research-only
+lp-quant-v1 adds canonical 32x32 matrix tiles, uniform/selective FP16/E4M3/E5M2,
+FP64 state, conservative original-unit budgets, sticky promotion and charged
+whole-window replay. Its [report](docs/benchmarks/lp-quantization-gpup7.md)
+retains all 104 attempts, verifies 34 study endpoints and certifies 33/96 timings.
+Each new candidate and matched FP64 certifies only initial host-only small-4;
+unchanged tuned FP64 certifies 12/12. Seventy timeouts remain. Seven diagnostic
+paths time out and tuned FP64 certifies at 1400 rather than the requested 2000
+updates, leaving no complete profile horizon. No useful quantized solve benefit
+or supported preset follows. CPU admission retains all 56 cases, including seven
+scaling-256 refusals, with 162015 independent format and 3072 product components.
+All 66 ordinary/three new device tests, 384 product-vector comparisons, six
+CPU/device controller comparisons, 18 fixed-work endpoints/18 bitwise replays and
+four scoped sanitizers pass. Both CPU cohorts, their source bridge, the initial
+RSS sampler limitation/conservative bound and corrected monitor remain visible.
+CPU-only report review excludes CPU fallback and incomplete horizons, retaining
+the original report and exact measured execution/image/source bodies. Fresh host
+verification accepts all 182 retained study, acceptance/replay and CPU endpoints.
+No review GPU work or allowance is added. Preserve artifacts/gpup-quant-v1 in full,
+all historical reports/source bridges and native dependencies. Task charge is
+1382.959456122 GPU seconds: timing 1109.904216936, profiles 215.675211186 and
+acceptance 57.380028000, within 3600 and every phase cap. Cumulative consumption is
+21113.899268966 / 25202.574545061 seconds, retaining the independent 28800 ceiling.
+The 17036-event ledger SHA-256 is
+861c90d8d82a20ff9655173742db37a5047d315e8cc4c983e0d6b2e6fa09bb97,
+preserving the exact 16816-event prefix
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c
+and all earlier history. GPUP-8 conditional contract/disposition is next and needs
+its own accepted hardware/layout/error/cost and resource admission. Unused
+headroom reserves nothing. Vector quantization, stochastic rounding, Tensor Core
+execution, refinement/assessment combinations, sessions and presets remain gated.
+Preserve original-model host authority. Delivery is a local commit only; no
+publication or merge is authorized for this slice.
+
+Prior handoff (2026-10-22): GPUP-ASSESS is complete under accepted ADR-0039
+and SPEC-0021's bounded assessment subset. Its
+[report](docs/benchmarks/lp-assessment-scheduling-gpup-assess.md) retains all 60
+attempts, independently verifies 57 endpoints and certifies 24/48 timings.
+Research-only fixed_200/bounded_800 scheduling on tuned FP64 and existing
+accumulation FP32 preserves every 200-update restart/weight check. Cheap movement
+only schedules original-model host assessment; final certification remains fresh
+and cancellation/deadline/failure status cannot become a successful timing.
+Frozen-cohort pinned-native acceptance passes 322 Python tests, Rust/native and
+dependency checks, historical replay, 132 documentation pages and smoke; no GPU
+work runs in that gate. CPU admission checks 16 trajectories/320 boundary witnesses. Six 2000-update
+profile pairs match bitwise; no observed delayed success, while synthetic cases
+retain transient-success loss and a 600-update delay. All 66 ordinary/three new
+device tests, six fixed-work policy pairs/twelve replays and four scoped
+sanitizers pass. FP64 irregular-32768 has a scoped 1.0272x paired gain over three
+repetitions; coverage is unchanged and no supported preset follows. FP32 retains
+its numerical failures and three fixed-FP64 mixed timings lack endpoints.
+CPU-only review strengthens signed-zero replay and unverified-profile eligibility;
+all twelve actual replays already match bitwise and the rebuilt host verifier
+accepts all 57 endpoints. Preserve the exact measured workers/images/source,
+original report, five-file review source bridge and all historical evidence.
+Final PR pinned-native acceptance passes 324 Python tests plus Rust/native, dependency,
+historical replay, documentation and smoke with no GPU work. PR review binds
+checkpoints to the originating session, rejects inconsistent
+failure metadata/oversized counters and excludes interrupted profile horizons
+from pair discovery. Preserve the additional PR source bridge and counterexamples;
+the measured execution loop and original-model authority bodies remain exact.
+The final PR reader protects both historical report paths/aliases and writes to
+a separate PR report; preserve both PR source bridges and their exact cohorts.
+The rebuilt host verifier accepts all 97 retained study/acceptance/replay/CPU-trace
+endpoints, including all 57 study endpoints. Final PR acceptance and source
+receipts are docs/benchmarks/data/assess/pr-final-native-acceptance.json and
+pr-review-final-source.json; prior gates/receipts remain exact and separate.
+Review adds no GPU work or allowance. Task charge is 523.674592721 GPU seconds
+(413.636131592 timing, 32.633232920 profiles, 77.405228209 acceptance), within 2300
+and every phase cap. Cumulative consumption is 19730.939812844 / 21602.574545061 s.
+The 16816-event ledger SHA-256 is
+dd5d7281a152d8fb56df373d913ac2dc7077aac9cf6ba2eb5f6e7781493ea52c, preserving the exact
+16684-event prefix e83d07792fb0775fc26d8d2cca8a2411f59fcbc94f742cafd8f6b844ffb60535
+and all earlier history. GPUP-7 contract work is next and needs its own accepted
+quantization/error-budget and resource allocation. Unused headroom reserves
+nothing; full expansion state, selective precision, assessment/adaptive/refinement
+combinations, sessions and supported presets remain gated. Preserve original-model
+host authority and all identities. The user authorizes draft PR review, protected
+merge and safe cleanup for this slice; retain all research evidence/native
+dependencies and verify merge ancestry before deleting its branch.
+
+Prior handoff (2026-10-22): GPUP-REFINE is complete under accepted ADR-0037/0038
+and the native-FP64-outer subset of SPEC-0021. Its
+[report](docs/benchmarks/lp-refinement-gpup-refine.md) retains all 108 primary
+attempts, independently verifies 48 endpoints and certifies 30/96 timings.
+Correction LPs, guarded FP32/anchored products, charged sticky promotion,
+in-memory checkpoints and strict replay are implemented behind the research
+feature; iterates/updates/controller remain FP64 on the host. Refinement certifies
+only initially solved small-4 before any device work; scaling-256 refuses numerical
+budgets and other cells time out. No sparse-product benefit or preset follows.
+Full pinned-native, 66 ordinary device tests, 1920 product comparisons, nine
+fixed-work replays and four scoped sanitizers pass. Fraction oracles check 240
+models/1200 maps plus 93 endpoint merit enclosures/39 contractions. Preserve the
+first telemetry refusal, operational continuation and CPU-only report-reader
+correction; no attempt is retried or device substituted. Task charge is
+1541.719136512 GPU s (1275.123297404 timing, 217.195487188 profiles,
+49.400351920 acceptance), within 3600 and all phase caps. Cumulative consumption
+is 19207.265220123 / 21602.574545061 s. The 16684-event ledger SHA-256 is
+e83d07792fb0775fc26d8d2cca8a2411f59fcbc94f742cafd8f6b844ffb60535, preserving
+the exact 16452-event prefix below and all earlier history. GPUP-ASSESS is next
+and needs its own bounded contract/allocation; unused headroom reserves nothing.
+Expansion state, selective precision, assessment scheduling, sessions and supported
+presets remain gated. Preserve original-model host authority and all identities.
+Prepublication review repairs logical checkpoint restoration, candidate-free
+trace acceptance, final assessments after refresh/promotion offsets and instruction
+parsing. Exact before/after source receipts preserve the historical cohort and
+report; the rebuilt host verifier accepts all 39 available refinement endpoints
+on CPU. Review adds no GPU execution or allowance. Publication, protected merge
+and safe cleanup are now explicitly authorized by the user; preserve all evidence.
+
+Prior handoff (2026-10-13): GPUP-STATE is complete as a bounded resource
+admission refusal under [ADR-0036](docs/decisions/ADR-0036-full-expansion-state-admission.md).
+Its [report](docs/benchmarks/lp-expansion-state-gpup-state.md) independently checks
+192 integer, 270 FMA, 64 update and 48 transcendental cases. The first full-range
+exact-bin FMA construction in both expansion formats uses 255 registers and
+nonzero spills, exceeding the accepted 128-register/zero-spill gate. Bounded
+320-bit probes fit but do not qualify the complete family. PR 19 review adds a
+full-range compact FMA: 40 registers and zero spills in both formats, with 5900
+additional independent cases per construction and host UBSan acceptance. The
+first refusal remains exact but no longer establishes a scalar resource obstacle.
+The instruction audit and frozen transcendental verification are repaired.
+The compact scalar now passes 6170 device cases, two fresh checks, four scoped
+sanitizers and 36 independently verified primitive timings on the user-selected
+idle RTX PRO 6000 Blackwell. The busy-5090 admission refusal and a memcheck
+stdout-reader correction remain visible; no execution is retried. No controller,
+state/replay or solver benefit is admitted. Combined GPU charge is 30.114068273 s;
+cumulative consumption is 17665.546083611 / 21602.574545061 s. The 16452-event
+ledger SHA-256 is 24949150272600fe58364f25ebbf7bf892f7454da342edc268d50684568c5f18,
+preserving the original 16366-event prefix and every phase ceiling. GPUP-REFINE is next
+and requires an accepted SPEC-0021 subset and its own allocation; unused state
+allowance does not reserve it. Preserve full expansion/alternative construction
+gates, original-model host authority, identities and all historical evidence.
+
+Prior handoff (2026-10-13): GPUP-EXEC is complete under accepted ADR-0035 and
+the bounded exact-dot subset of [SPEC-0020](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md).
+Its [report](docs/benchmarks/lp-exact-executor-gpup-exec.md) retains all 108 attempts,
+independently verifies 94 endpoints and certifies 58/96 timings. All 27 cached/
+uncached study pairs match bitwise. Full native, 66 regular device tests, oracle,
+six replays and four scoped sanitizers pass. Fourteen initial FP64 controls failed
+discovery because the archive omitted an unchanged dependency; the repair and
+failed attempts are retained without retries. Scheduling/scaling/mixed exact
+solves refuse the bounded exponent window. No total-cost win or preset is selected.
+The subsequent GPUP-STATE admission result is recorded above. Read the
+[architecture and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md),
+draft [SPEC-0021](docs/specifications/SPEC-0021-lp-refinement.md), and
+[component/interaction experiment design](docs/benchmarks/lp-precision-design-experiments.md).
+GPUP-REP remains the CPU reference; full expansion state and correction/anchored
+products remain independently gated. No next-task reservation follows from unused
+GPUP-EXEC headroom. Preserve final original-model host authority and all identities.
+Task charge is 520.157397485 GPU seconds: timing 431.684266725/2300, profiles
+36.003675982/450 and acceptance 52.469454778/850. Cumulative consumption is
+17635.432015338 / 21602.574545061 seconds under ADR-0035's amended authority.
+The 16366-event ledger SHA-256 is
+4d083cdb06b4baa38452bb331541fa8874614aeb037f34e40001ce9692ede26b,
+preserving the 16134-event prefix
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823.
+The dated handoffs below remain historical; follow next_ready_task and the
+roadmap's 2026-10-12 order.
+
+For low-precision LP follow-ups, read the preserved
+[2026-09-30 research analysis](docs/plans/lp-low-precision-research-2026-09-30.md)
+alongside the roadmap and candidate register. It records measured failure
+mechanisms, proposed correction-LP/anchored-product methods, SM120 bypasses,
+FP16/FP8 progression, limitations and experiment gates. It is research guidance,
+not an accepted numerical contract or a change to next_ready_task or GPU budgets.
+
+M1, C1, C2, C3, C4, C5, C6 and C8 are complete and specified. C6 was heterogeneous
+computation and GPU feasibility, specified as
+[SPEC-0010](docs/specifications/SPEC-0010-heterogeneous-computation.md) for device
+selection, residency, batching, arithmetic width, fallback, cancellation, recovery and
+the batched integer schedule evaluator, and
+[SPEC-0011](docs/specifications/SPEC-0011-gpu-lp-backend.md) for the GPU linear
+programming backend. Both are implemented with evidence: a search can register a
+device-backed candidate producer and re-execute from the record it writes, and
+`optimizer solve --backend host-lp|cuda-lp` runs a first-order linear programming
+method whose dual bound comes only from a host-side certification. The next capability
+is C7, adaptive portfolios, which has no specification yet and needs one before any
+behavior. The user has prioritized the separate
+[GPU LP precision research track](docs/plans/gpu-lp-precision-roadmap.md) before C7;
+follow `next_ready_task` in state/backlog.yaml and implement one GPUP slice at a time.
+SPEC-0013 is accepted and GPUP-2 implements the bounded LP study and baseline report.
+SPEC-0012 is accepted for implemented GPUP-3 shared resumable FP64 control. The
+opt-in cuda-lp-matched backend and measured overhead repairs preserve legacy cuda-lp.
+GPUP-4 adds explicit experimental cuda-lp-tuned under ADR-0017, with the preserved
+first round and complete ADR-0018 correction documented in
+[the report](docs/benchmarks/lp-tuned-fp64-gpup4.md). Matched remains the general
+reference; scoped provisional fusion results are not supported presets. GPUP-5 is
+implemented under ADR-0019: lp-precision-v1 on cuda-lp-tuned, separate precision
+code identity, FP32 storage/products/accumulation/state and fixed FP64 correction,
+v4 evidence and optional isolated COPT 8.0.6 CPU/GPU PDLP baselines. Its
+[report](docs/benchmarks/lp-fp32-gpup5.md) verifies all 480 attempts and records
+coverage losses; no supported preset is selected. Existing identities/replay and
+original-model authority remain. GPUP-6 is a separate explicit adaptive contract (below); no audit/rollback/promotion/demotion is implicit
+in GPUP-5. Later quantization and precision requirements remain pending.
+The [FP32 latency diagnosis](docs/benchmarks/lp-fp32-slowdown-diagnosis.md) adds
+213 equal-work/profiler diagnostics under ADR-0020: convergence amplification,
+scaled-matrix bias and executor/correction overhead, with hardware counters denied.
+The diagnosis reached 1467.266874696 campaign GPU seconds: the prior 1324.210639253
+plus 143.056235443 diagnostic screening seconds. Never reset the ledger or evidence.
+GPUP-5B is complete under ADR-0021: feature-gated exact scaling and two/three-component
+sparse products, separate research code object/executable and strict research-v1
+host evidence. Its [report](docs/benchmarks/lp-exact-components-gpup5b.md) verifies
+all 840 attempts and full native/device/four scoped sanitizer gates. New modes
+restore 27/36 timing coverage; component cross-products remain slower. Preserve
+the [rounding note](docs/benchmarks/lp-fp32-rounding-analysis.md) and
+[candidate register](docs/plans/lp-precision-candidates.md). No preset or adaptive
+recovery is selected. Carry forward 2235.353878971 campaign seconds, including
+697.211414922 GPUP-5B study and 70.875589353 acceptance screening seconds. All 4996
+ledger events retain the 3288-event prefix; the final ledger SHA-256 is
+737e1301cb31cf5d0ad0585aa81a4dc0b814615d39e4974827e504e880b11e5f.
+GPUP-5C is complete under ADR-0022 after the
+[FP64-pipe root-cause note](docs/benchmarks/lp-fp64-pipe-root-cause.md): three
+feature-gated research modes (integer-pipe guards, fused two-launch schedule,
+double-float FP32 pairs), research-v2 evidence, explicit tolerance tiers
+1e-9/1e-6/1e-4 recorded per request, a frozen lp-manifest-v2 development extension
+up to 65536 rows, and a protocol-driven harness (`--protocol`) whose v1 behavior is
+byte-identical. Its [report](docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies 806
+of 850 admitted attempts under identity gpup5c-v1: integer guards and fusion are
+bitwise identical to the FP64 control and halve update cost at study size;
+double-float is fastest at scale but underflows on scheduling LPs; tiers recover
+FP32 storage coverage without changing latency. Cumulative campaign consumption is
+3794.758955639 seconds; the 6722-event ledger SHA-256 is
+ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b with the
+4996-event prefix intact. On 2026-09-20 the user pulled GPUP-THROUGHPUT ahead of
+GPUP-6: after GPUP-5C, context creation (208-330 ms) and the fixed host phases, not
+arithmetic, dominate solves, and at 65536 rows preconditioning and research
+preparation each exceed total kernel time. GPUP-THROUGHPUT is complete under
+[SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md) and
+[ADR-0023](docs/decisions/ADR-0023-repeated-solve-throughput.md), both accepted
+2026-09-20: opt-in TunedSession/ResearchSession reuse one context, prepared matrix
+and residency per batch, with per-solve cold iterates, fresh certification and
+bound rebinds counted separately. Its
+[report](docs/benchmarks/lp-repeated-solve-throughput.md) verifies 687 of 705
+admitted attempts under identity gpup-throughput-v1: 4785/4785 batch solves are
+bitwise identical to fresh singles, amortized throughput reaches 26.6x fresh
+single-solve latency at N=32 on small-4 as a separately labeled endpoint, a batch
+of one does not pay off, sessions lose at 32768 rows, and all 18 65536-row short
+batches timed out. It leaves the single-solve endpoint, protocol, defaults and
+archived evidence unchanged and never reports amortized throughput as
+single-solve latency. Cumulative campaign consumption is 6951.059845871 seconds
+inside the 8102.574545061-second ceiling (2617.929459541 study / 2700,
+538.371430691 acceptance / 600); the 8178-event ledger SHA-256 is
+dd957404ed65763775afba63bc11f8b03ffa9c64dcad19112f76fc9b1f5f32f6 with the
+6722-event prefix ff6f1b5471e80791e964d1e6679017ea33593a7899718d0431f666cfaa5fa23b
+intact. The pre-existing tuned_cases filter lacks a clean racecheck receipt (the
+session_ scope passed all four sanitizers); the partial receipts are retained.
+The [review corrections](docs/benchmarks/lp-throughput-corrections.md) under
+ADR-0024 repair outcome identity, common session identity and binary64 comparison;
+48 new ordinary fresh-variant controls validate 360/360 retained comparisons.
+Historical fresh-variant controls were N=1 sessions and remain labeled as such.
+After the correction: cumulative 6982.408046756 s, study 2645.977139698/2700,
+acceptance 541.671951419/600; 8276-event ledger SHA-256
+b3451186b7a5fc0029fbbd612b07e795072476ab76137a78a375b1d97866c236 preserves the
+8178-event prefix above. No new GPU allowance.
+The subsequent [host-input repair](docs/benchmarks/lp-throughput-host-input.md)
+removes repeated host parsing/reconstruction without caching assessments:
+16/16 new 32768-row N=8 diagnostic results match, with original and new verifier
+acceptance. Whole-batch historical comparisons are 4.53x repeat and 2.20x variant
+(one repetition, no general preset). Campaign consumption is now 7015.920961503 s;
+study 2679.490054445/2700, acceptance 541.671951419/600. The 8278-event ledger
+SHA-256 is c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a, preserving
+the 8276-event prefix above and all prior prefixes. No new allowance or kernel
+change; 65536-row coverage and the old tuned_cases racecheck gap remain open.
+GPUP-6 is complete under accepted ADR-0025 and SPEC-0012: explicit lp-adaptive-v1
+ladders/audits, whole-window rollback and charged replay, direct/gradual promotion,
+sticky or probed demotion, fresh-single v5 evidence and replay. Original-model
+host certification remains authoritative; old kernels, records and defaults remain.
+Its [report](docs/benchmarks/lp-adaptive-gpup6.md) independently verifies
+2086 endpoints from 2376 admitted of 2376 planned attempts.
+Failed archive-discovery attempts and comparison gaps remain visible; no preset
+is selected. Native, regular device and four adaptive sanitizer gates pass.
+Campaign consumption is 8912.494084146 s inside the 14402.574545061 s ceiling;
+GPUP-6 study 1826.094392481/5400 s, acceptance 70.478730162/900 s.
+The 13056-event ledger SHA-256 is
+6db55153153e66ed5c2398417d008e4edd278e11153cf87b975345f1a574d34d, preserving the 8278-event prefix
+c185d5c069a892f10654b737b0a96737005b1fe9a70b5f0f3ee445d162af976a and every earlier prefix.
+GPUP-7 remains the next precision feature after the COPT follow-ups ordered below;
+it needs its bounded quantization/FP8 interface and resource contract before behavior.
+Adaptive sessions, persistent checkpoints and supported presets remain outside GPUP-6; old 65536-row and tuned_cases racecheck gaps remain.
+
+GPUP-COPT is complete under ADR-0026. Its [component-cost report](docs/benchmarks/lp-copt-comparison.md)
+retains all 1140 attempts, independently verifies 948 endpoints and certifies
+402/816 primary timings. Evidence output at 65536 rows and COPT graph internals
+remain explicit gaps; no winner or preset is selected. Task charge is
+5853.941357570 GPU s; cumulative 14766.435441716/18002.574545061 s.
+The 15340-event ledger SHA-256 is
+5cf76ffbea09e21fdf21692c4030f8176ae5ef7f481c2e5c6e83fe302371b51b,
+preserving the 13056-event prefix and every phase cap. The user requested follow-up
+ordering on 2026-09-27. GPUP-EVIDENCE and GPUP-HOST are now complete (below).
+GPUP-SETUP, GPUP-COPT-ADAPTER and GPUP-CONVERGENCE are now complete (below);
+continue with GPUP-7's required contract work. Fresh setup diagnosis and optional COPT adapter
+construction were separately prioritized investigations, not quantization prerequisites;
+see the [ordered roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-follow-up-order-2026-09-27)
+and next_ready_task. Planning adds no GPU allowance or accepted numerical behavior;
+GPUP-7 still needs its accepted contract.
+GPUP-EVIDENCE is complete under accepted SPEC-0015 and ADR-0027. Its
+[report](docs/benchmarks/lp-compact-evidence.md) records strict study-only compact
+v1-v5 evidence, verified transcode and replay, four full-witness CPU round trips,
+full native acceptance, 55 device tests and six format pairs plus six replays.
+All 24 fresh attempts are retained: 15 verify and 12 certify; compact verifies
+12/12 and certifies 9/12, while mixed-65536 remains time-limited. Historical outputs,
+legacy defaults, numerical settings and kernels are unchanged; the old racecheck
+and session gaps remain. Task charge is 305.274714773 GPU s; cumulative
+15071.710156489/18002.574545061 s, with no new allowance. The 15392-event ledger
+SHA-256 is 6a30c1954ff9bc80c733364d8e8a7c0fc4c4439d70b959d2c10996d71993e518,
+preserving the 15340-event prefix above and all phase caps.
+GPUP-HOST is complete under accepted SPEC-0016 and ADR-0028. Its
+[report](docs/benchmarks/lp-immutable-host-input.md) verifies all 28 attempts,
+certifies all 24 fresh timings and matches all 14 numerical/work pairs. LpInput
+removes one duplicate parse/structural validation, retaining fresh sparse construction
+and every candidate/certificate assessment. Native, 55 regular device tests, six
+old/new fixed-work pairs and six compact replays pass. No numerical/default/kernel
+change or cross-solve reuse; historical racecheck/session/mixed-65536 gaps remain.
+Task charge is 134.072418846 GPU seconds; cumulative 15205.782575335 /
+18002.574545061 seconds, no added allowance. The 15452-event ledger SHA-256 is
+90dab78c269b74f511416ddd73cf05e123555ae006b9ad75fc896933a35f9cd2,
+preserving the 15392-event prefix above and all phase caps.
+GPUP-ADAPTIVE-COST is complete under accepted SPEC-0017 and ADR-0029. Its
+[report](docs/benchmarks/lp-adaptive-host-cost.md) verifies all 32 attempts,
+certifies all 24 timings and matches all 16 timing/profile pairs. Shared operators
+reduce full-ladder preparation from five operators to two; streamed audits and
+borrowed probes preserve arithmetic and charged recovery. Twelve fixed-work pairs
+and twelve replays match; full native, 55 regular device tests and four adaptive
+sanitizers pass. No preset or cross-solve reuse. Historical gaps remain open.
+Task charge 201.890184622 GPU seconds; cumulative 15407.672759957 /
+18002.574545061 seconds, with no added allowance. The 15528-event ledger SHA-256
+cb0dc57f9f92546f4cc2d93b0de3c8556d6b24517f71b7a6efaa91fa96afedb6
+preserves the 15452-event prefix above and all phase caps.
+GPUP-SETUP is complete under accepted SPEC-0018/ADR-0030. Its
+[report](docs/benchmarks/lp-fresh-setup.md) verifies all 32 attempts, certifies 24
+fresh timings and matches all 16 numerical/work comparisons. Four control profiles
+precede the sole experimental primary-context repair; retain/release provides no
+consistent fresh-process latency benefit. User contexts remain the default, primary
+contexts are study-only, with checked lifecycle receipts and setup-bound replay.
+Full native, 58 candidate device tests, four primary sanitizers, twelve fixed-work
+pairs and twelve replays pass. Historical racecheck/session/mixed-65536 gaps remain.
+Task charge 224.608447458 GPU seconds; cumulative 15632.281207415 /
+18002.574545061 seconds, no new allowance. The 15606-event ledger SHA-256
+ad3d84354f0b74ae62fcc019ee4dcbf29b0a3251d066f1e0f2df11ccb107230b preserves the 15528-event prefix above
+and every phase cap. The following adapter slice retains this prefix.
+GPUP-COPT-ADAPTER is complete under accepted SPEC-0019/ADR-0031. Its
+[report](docs/benchmarks/lp-copt-adapter.md) independently verifies all 84 attempts,
+certifies 42/72 timings and 10/12 profiles, and retains all interrupted/rejected
+outcomes. Twelve native readbacks and 24 min/max/profile endpoints pass; 27/36
+timing pairs and 10/12 profile comparisons match, with the remaining CPU-default
+pairs deadline-limited. Bulk loading is cheaper, but CSC preparation and cold
+SciPy import make this adapter slower in every certified cell. No preset or
+runtime/kernel/default change; historical wrappers and evidence remain intact.
+Task charge 171.904859644 GPU seconds; cumulative 15804.186067059 /
+18002.574545061 seconds, no added allowance. The 15776-event ledger SHA-256
+2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0 preserves the
+15606-event prefix above and every phase cap. The subsequent convergence study
+retains this prefix. GPUP-7 still needs its accepted quantization contract.
+GPUP-CONVERGENCE is complete under accepted ADR-0032/SPEC-0013. Its
+[report](docs/benchmarks/lp-convergence.md) retains all 176 frozen attempts,
+independently verifies 174 endpoints and certifies 87/104 timings
+and 32/72 diagnostic profiles. Two dense-65536 accumulation-FP32 timings
+have no endpoint; every interruption and rejection remains visible, without retries.
+Scoped per-proposal savings do not overcome unsuccessful FP32 work; adaptive
+reference arithmetic, recovery and original-model assessments remain material.
+Full pre/post native gates, 58 regular device tests, twelve fixed-work pairs and
+replays, eight COPT min/max/profile endpoints and ten source-only contracts pass.
+Runtime, kernels, settings, defaults and historical evidence remain unchanged;
+no preset is selected. CPU-only recovery/report review corrections are exactly bound.
+Task charge 1311.088550794 GPU seconds: timing
+634.748860654/800, profiles 441.911765452/800,
+acceptance 234.427924688/300; cumulative 17115.274617853 /
+18002.574545061 seconds, with no new allowance. The 16134-event ledger SHA-256
+60649d29992d21508e60aa60f3e334e9ac18fe3254525ec38cc0eef298e84823 preserves the
+15776-event prefix 2b99b615dc77da07fb078e1cefc188d2131db5ca671fe9b86f989a6d660606f0
+and every phase cap. Historical racecheck/session/mixed-model gaps remain open.
+At convergence-study completion the handoff was GPUP-7's contract. The
+2026-10-12 planning update above now makes GPUP-REP CPU-only proof/contract
+validation next, before any new numerical behavior.
+
+GPUP-5's exact cumulative ceiling was 4502.574545061 seconds. Its separate acceptance
+used 80.458622460 of 900 GPU seconds. Future work must retain the campaign/phase caps.
+GPUP-1 repairs certification and objective/gap arithmetic; preserve its independent
+exact-rational regressions before introducing lower precision. The initial
+experiment campaign is capped at eight GPU-hours. Repeated-solve throughput is
+GPUP-THROUGHPUT above; full MILP search performance remains a separate future direction.
+Unsafe CUDA code is permitted only inside optimizer-cuda-sys under
+[ADR-0009](docs/decisions/ADR-0009-cuda-driver-boundary.md), which amends ADR-0003's
+single-boundary rule; optimizer-cuda keeps the prohibition and keeps discovery and the
+lease. A device never holds mathematical authority:
+[ADR-0010](docs/decisions/ADR-0010-certified-gpu-lp.md) requires every bound to come
+from a host-side certification that does not assume the device computed correctly.
+`optimizer-lp` holds that certification and the method, takes no device dependency, and
+is the oracle the kernels are differentially checked against; `optimizer-lp-cuda`
+depends on it and never the reverse. Neither is a fallback: a fallback is the pinned
+HiGHS adapter, because SPEC-0010 requirement 23 requires one to be the implementation
+the project already treats as authoritative.
+The C8 local extension registry is implemented under SPEC-0009 and ADR-0008;
+it resolves a named extension identity to an extension this build provides and
+deliberately does not load dynamically distributed native components, which would
+need a boundary ADR-0009 does not authorize either. The Python SDK (C9) and the
+comparative experiment runner (C10) are unspecified, and
+[known failures](state/known-failures.md) records each blocker along with the C8
+requirements whose acceptance tests are thinner than SPEC-0009 describes. Later
+SDK and comparative-runner APIs require their own specifications and
+acceptance gates; do not introduce them without one.
+Use Rust for runtime work; Python under tools/ is build and validation tooling,
+not the SDK. Native HiGHS code is permitted only inside optimizer-highs behind its
+private ownership boundary, with the pinned 1.11.0 CPU contract, and CUDA driver
+calls only inside optimizer-cuda-sys. Those two crates declare their own lints
+because a workspace-level unsafe prohibition cannot be relaxed per crate; every
+other runtime crate keeps the prohibition, and no third boundary is authorized.
+
+Run bash tools/check.sh for acceptance; it requires the pinned native HiGHS build.
+AI_OPTIMIZER_SKIP_NATIVE=1 skips it and reports uncovered native acceptance, which
+must never be recorded as a full gate pass. Discovering GPUs does not authorize a
+kernel workload; all actual project GPU jobs require the shared host lock, and the
+lock permits one holder across device selections, so two devices are never used at
+once. nvcc is a provisioning dependency, never a build dependency: an ordinary
+cargo build must keep working on a host with no toolkit and no device.
+Do not change experiment seeds, thresholds, splits, or defaults silently.
+Do not publish, push, or configure external hosting without authorization.

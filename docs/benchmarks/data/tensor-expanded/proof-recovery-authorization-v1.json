@@ -1,0 +1,57 @@
+{
+  "additional_cpu_ns": 0,
+  "authorization": "User explicitly authorizes fixture/harness correction, one corrected proof retry, unused-budget transfers and conditional GPUP-8 continuation on 2026-10-24.",
+  "automatic_numerical_retry": false,
+  "cpu_ceiling_ns": 77640000000000,
+  "gpu_allocation_changed": false,
+  "historical_failed_proof_charge_ns": 5600000000000,
+  "identity": "gpup-tensor-expanded-proof-recovery-v1",
+  "ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "9913d391634bdb0f74012be909be377e5a693d00b76e6882abcf336796ac863e"
+  },
+  "passed_checks_rerun": false,
+  "passed_profiles_rerun": false,
+  "prior_accounting": {
+    "path": "docs/benchmarks/data/tensor-expanded/final-cpu-accounting-v1.json",
+    "sha256": "d08ddd514470fb062e22c2c0f5f6b3f7c2e2f2391b9551afa18dcc544c6296eb"
+  },
+  "prior_files": {
+    "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/prior-files.json",
+    "sha256": "6d8029ffa4aedd516b6589b2f9b1b04edc713ca1527d40892790db20a6a05257"
+  },
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/cpu-journal-final-v4.json",
+    "sha256": "5116dafbc54b51f447bbca3a955f025209cd15659337e0e3342b8004ab798223"
+  },
+  "proof_attempts": 1,
+  "proof_work_wall_seconds": 398,
+  "scientific_criteria_changed": false,
+  "sizing": "Retained compilation/worker elapsed about two seconds; 398 work-wall seconds covers both retained 120-second subprocess ceilings and independent product/projection checks.",
+  "status": "accepted",
+  "supervisor": {
+    "path": "tools/lp_cpu_admission.py",
+    "sha256": "523184f432ff32fdf1150b79bed4aefe3f03872464e736d466da39095564263a"
+  },
+  "transfers_cpu_seconds": [
+    {
+      "amount": 100,
+      "source": "authority",
+      "target": "recovery_setup"
+    },
+    {
+      "amount": 1600,
+      "source": "prototype",
+      "target": "proof_retry"
+    }
+  ],
+  "unchanged_later_stages": [
+    "implementation",
+    "native",
+    "acceptance",
+    "profiles",
+    "timings",
+    "reporting",
+    "margin"
+  ]
+}

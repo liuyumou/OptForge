@@ -1,0 +1,23 @@
+{
+  "all_recorded_supervisors_exited": true,
+  "automatic_retry": false,
+  "bootstrap_rerun": false,
+  "cpu_ceiling_seconds": 35900,
+  "cumulative_cpu_upper_seconds": 25507.557917574,
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-cost-native-transport-refusal-v1",
+  "native_acceptance": false,
+  "native_cpu_charge_seconds": 2200,
+  "python_failures": 1,
+  "python_tests": 401,
+  "reason": "SOCK_SEQPACKET completion message truncated by recv(65536); integration suite also has one historical registration-bridge failure",
+  "remaining_stage_cpu_seconds": {
+    "implementation": 550.940361676,
+    "margin": 400.0,
+    "native": 0.0,
+    "proofs": 1041.324565912,
+    "reporting": 0.0,
+    "workers": 8400.0
+  },
+  "status": "stopped"
+}

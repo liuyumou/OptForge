@@ -1,0 +1,33 @@
+{
+  "authorization": "Explicit user authorization to adjust the harness as needed and reallocate unused funds.",
+  "construction_source_manifest": {
+    "path": "artifacts/gpup-tensor-expanded-v1/executor-build-v1/source-manifest.json",
+    "sha256": "c928c208db34ffa7ec576e0f8a8003083ab6e4da1df656b17bc3309f47a1d19c"
+  },
+  "correction": "Scope an unused-code annotation to the exact retained outward helper module in the new wrapper; no arithmetic change.",
+  "failure": {
+    "path": "artifacts/gpup-tensor-expanded-v1/executor-build-v1/clippy.json",
+    "sha256": "d54541c017073de1766de4368dbb9dee0d16eac90fdc7b1222929c8127c61c39"
+  },
+  "gpu_seconds": 0,
+  "new_cpu_seconds": 0,
+  "passed_checks_rerun": false,
+  "previous_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/executor-build-v1/cpu-journal-v15.json",
+    "sha256": "d610cbb0007b03651ca99058c7c1e68ba6b7dba410950751b2161766ba3cfe92"
+  },
+  "retained_full_failure_cpu_seconds": 1600,
+  "source_snapshot_note": "The initial construction reservation captured pre-format source hashes; its compiler inputs are preserved separately in source-manifest.json and source/.",
+  "status": "accepted",
+  "target": "executor_recovery",
+  "transfers_cpu_seconds": [
+    {
+      "amount": 700,
+      "source": "primitive_compile"
+    },
+    {
+      "amount": 100,
+      "source": "authority"
+    }
+  ]
+}

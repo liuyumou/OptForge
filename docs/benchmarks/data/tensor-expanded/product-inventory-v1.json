@@ -1,0 +1,142 @@
+{
+  "command": [
+    "/usr/local/cuda/bin/nvcc",
+    "--cubin",
+    "-arch=sm_120",
+    "-O3",
+    "-lineinfo",
+    "-fmad=false",
+    "-ftz=false",
+    "-Xptxas=-v",
+    "--keep",
+    "--keep-dir",
+    "/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/product-build-v1/nvcc-kept",
+    "-o",
+    "/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/product-build-v1/expanded_products.cubin",
+    "/workspace/AI-Optimizer/cuda/lp_pdhg_tensor_expanded/expanded_products.cu"
+  ],
+  "complete_candidate_inventory": false,
+  "elapsed_ns": 67845286338,
+  "execution_counter_validation_pending": true,
+  "forbidden_fp64_or_ftz": true,
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-expanded-product-inventory-v1",
+  "image": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/expanded_products.cubin",
+    "sha256": "0dcbb3257617df9a5ed7053ad00fa2c179719ed5218857ca7f7b2e24012b3964"
+  },
+  "limits": {
+    "registers": 128,
+    "spill_bytes": 0
+  },
+  "planned_mma_per_tile_product": {
+    "bf16": 112,
+    "fp16": 64,
+    "int8": 32
+  },
+  "ptx": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/nvcc-kept/expanded_products.ptx",
+    "sha256": "d108a802165e18ff001adacd06d57e5e535765227dbefae57045aa7c1275b557"
+  },
+  "reason": "unchanged register/spill/instruction gate refused",
+  "resource_dump": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/product.resources",
+    "sha256": "ec734190ce725f1ba1ece98468e27c1a101d2a88ad0a4ce570856ce6ca4436bb"
+  },
+  "resources": [
+    {
+      "entry": "xe_pack64",
+      "registers": 28,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_dual_update",
+      "registers": 71,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_primal_update",
+      "registers": 72,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_simt_main",
+      "registers": 40,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_bf16_main",
+      "registers": 48,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_fp16_main",
+      "registers": 40,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_int8_main",
+      "registers": 72,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    }
+  ],
+  "returncode": 0,
+  "sass": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/product.sass",
+    "sha256": "a138d86b18a651b13144b11b963ef5fab9a765b689e519090fb3a8c5b30cf4b3"
+  },
+  "sources": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_products.cu",
+      "sha256": "ad8d35a6453608dd1e7268bc59b31dc4b76c7d3a0f67479694c6e6a455eb0822"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_updates.cuh",
+      "sha256": "9a4fa7aadcf58ff90e2040fa78b496b4ecd073e53a63bf5e52035ac1d97b86f6"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_fast.h",
+      "sha256": "7ac6e3d3f3f745d4a7a5b7686f260df037618ccda6779886b0da95b7b2b5feda"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_storage.h",
+      "sha256": "d021dba2675c5e07d0ddf4338855294ad18025ad6dcc8838e147861dbc1ad2fa"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_warp32/fragment_layout.h",
+      "sha256": "401f35a9fa72e862b016c302355d7efd8a173b7dccbb11f39314b74199ae636e"
+    }
+  ],
+  "status": "refused",
+  "stderr": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/compile.stderr",
+    "sha256": "d45d9ff8d5e582710e7b047bdd4ffec5e0c77ff1ceda8053bc272d52405657d6"
+  },
+  "stdout": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/compile.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tensor_instructions": {
+    "xe_bf16_main": true,
+    "xe_fp16_main": true,
+    "xe_int8_main": true
+  }
+}

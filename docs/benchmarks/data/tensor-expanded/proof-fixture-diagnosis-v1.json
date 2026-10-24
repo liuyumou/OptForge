@@ -1,0 +1,62 @@
+{
+  "cause": "scalar_cases creates a subnormal operand with a short significand, then overwrites its exponent with -63 without canonical normalization",
+  "correction_applied": false,
+  "equivalent_canonical_operand": [
+    17170124791618716040,
+    -64,
+    1
+  ],
+  "failed_predicate": "nonzero coefficient at a normal exponent must have its top significand bit set",
+  "first_unreported_index": 18,
+  "first_unreported_line": 19,
+  "generated_inputs": 7376,
+  "gpu_seconds": 0,
+  "host_outputs": 18,
+  "independently_compared_scalar_outputs": 0,
+  "input": {
+    "path": "artifacts/gpup-tensor-expanded-v1/scalar-input-v1.txt",
+    "sha256": "01a7e78e2d7e20d67d20924d3dc31c9cceb93289a26498ec41d51322117801ee"
+  },
+  "invalid_operand_index": 2,
+  "no_numerical_failure_inferred": true,
+  "operands_magnitude_exponent_sign": [
+    [
+      14645537891164916992,
+      -63,
+      1
+    ],
+    [
+      14809490714372851472,
+      -63,
+      1
+    ],
+    [
+      8585062395809358020,
+      -63,
+      1
+    ]
+  ],
+  "original_sources": {
+    "path": "artifacts/gpup-tensor-expanded-v1/stopped-source-manifest-v1.json",
+    "sha256": "282dbd33240e1a1ec6a27548c7f2a029da054e1672e32c672b4befa875521e7e"
+  },
+  "output": {
+    "path": "artifacts/gpup-tensor-expanded-v1/scalar-output-v1.txt",
+    "sha256": "69b4ce244e6aa26a3e21443b8c768c273c3f69edb067abdfb507fad5c4b9fd81"
+  },
+  "product_conversion_projection_checks_executed": false,
+  "proof_refusal": {
+    "path": "docs/benchmarks/data/tensor-expanded/independent-proof-refusal-v1.json",
+    "sha256": "29ec7a2ecb8801569eafa00359c599158d04c757a560e36c094e2e01938928a4"
+  },
+  "proof_retry": false,
+  "proposed_correction": "Normalize every operand after assigning the directed fast-path exponents; retain this rejected corpus and run only a separately authorized new proof identity.",
+  "resources": {
+    "path": "artifacts/gpup-tensor-expanded-v1/proofs-resource-v1.json",
+    "sha256": "2ba061973abfac2b1c9cdeaf02e79b1c48163b7f85bf27dfdd989591bf09fbaa"
+  },
+  "scalar_subprocess_returncode_retained": false,
+  "scalar_subprocess_status": "nonzero return observed by proof driver; exact subprocess code was not persisted",
+  "scientific_execution_closed": true,
+  "status": "cpu_proof_fixture_refusal"
+}

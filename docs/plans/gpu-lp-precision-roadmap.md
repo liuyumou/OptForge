@@ -1,6 +1,13 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: GPUP-7/7R complete; GPUP-8 useful Tensor solves qualify; certified latency gain remains unmet
+Current GPUP-8 disposition (2026-10-24): the corrected warp32 image and CPU
+admission pass, but the approved new full native gate fails the existing
+CUDA driver-availability assertion. Clippy passes; no complete native gate,
+new GPU execution or latency acceptance follows. GPUP-8 remains incomplete
+and GPUP-9 stays gated. All criteria and budgets remain unchanged; see the
+[retained native-stop report](../benchmarks/lp-tensor-warp32-availability-gpup8.md).
+
+Status: GPUP-8 incomplete; ADR-0044 fails exact device reference acceptance; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
@@ -8,6 +15,16 @@ Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/a
 Acceptance: the slice gates below; [GPUP-2 baseline evidence](../benchmarks/lp-baseline-gpup2.md), [GPUP-3 matched evidence](../benchmarks/lp-matched-fp64-gpup3.md), [GPUP-4 tuned evidence](../benchmarks/lp-tuned-fp64-gpup4.md)
 
 ## Objective and working agreement
+
+Current GPUP-8 disposition (2026-10-23): the accepted in-container supervisor and
+full pre-device native gate pass. The bounded cost continuation stops at its first
+INT8 controller mismatch: device reference products sum serially, while the host
+oracle uses warp32 order. All 66 ordinary tests and 280 product pairs pass; no
+profile or primary timing runs. The [separate report](../benchmarks/lp-tensor-cost-device-gpup8.md)
+retains both acceptance attempts, every CPU failure/charge and the 17366-event
+ledger. Numerical/latency criteria stay unchanged; no retry, new cohort or GPUP-9
+work is authorized by unused allowance. Earlier dated dispositions below remain
+historical in their original context.
 
 Optimize **end-to-end single-solve latency at the required feasibility and
 certified-gap tolerances**, including setup, transfers, numerical checks, recovery,
@@ -28,7 +45,51 @@ not a required winner. The final recipe follows measurements and ablations; an
 experiment that finds the tuned baseline faster is a useful negative result.
 This track follows C6 but does not complete C7, C9, or the general C10 runner.
 
-## GPUP-8 latency diagnosis and proposed cost continuation (2026-10-23)
+## GPUP-8 accepted in-container supervisor: bootstrap refusal (2026-10-23)
+
+The user accepts revised ADR-0044 and the CPU allocation. The first supervisor
+bootstrap stops before workload release because Python lacks os.pidfd_open.
+The separate refusal retains the failed source and unsettled journal; no
+numerical preparation or device reservation runs. A portable binding repair has
+four mocked regressions, while real resource acceptance remains unrun. A corrected
+bootstrap requires authorization under the accepted single-attempt rule. GPUP-8
+remains incomplete; the numerical/latency gates and exact GPU ledger are preserved.
+
+## GPUP-8 proposed in-container admission amendment (2026-10-23)
+
+At the user's request, [ADR-0044](../decisions/ADR-0044-tensor-cost-continuation.md)
+now proposes a cooperative in-container supervisor/guardian, serialized slots,
+four-CPU affinity, sampled-memory admission and conservative four-times-wall CPU
+charging. It explicitly cannot promise cgroup-equivalent memory/swap enforcement.
+The 16000-second prospective CPU allocation requires 14300 additional CPU seconds,
+transfer of the remaining 1700 and a cumulative CPU ceiling of 35900. Acceptance
+of those changed resource terms is pending; implementation has not started.
+All numerical, GPU study and latency completion sections remain byte-identical
+to the archived accepted ADR. GPUP-8 remains incomplete and GPUP-9 stays gated.
+
+## GPUP-8 Kubernetes constraint revision (2026-10-23)
+
+The user confirms Kubernetes and prohibits escaping the container. The
+[revised continuation plan](lp-tensor-kubernetes-constraint.md) withdraws host
+provisioning, preserves ADR-0044's failed admission and records the exhausted CPU
+admission/reporting stages. No equivalent permitted enclosure is demonstrated.
+The additional 3600-GPU-second offer stays unreserved; the existing 1806-second
+GPU package already fits its allowance. GPUP-8 remains incomplete, with no
+preparation, device attempt, implicit CPU transfer or GPUP-9 progression.
+
+## GPUP-8 approved cost continuation: CPU admission refusal (2026-10-23)
+
+The user accepted [ADR-0044](../decisions/ADR-0044-tensor-cost-continuation.md).
+The [resource-admission report](../benchmarks/lp-tensor-cost-gpup8.md) retains a
+CPU refusal: the executor has no writable delegated task cgroup or reachable
+host manager. The accepted decision stops before preparation/device reservations.
+Seven bootstrap refusal tests pass; real containment/coordinator, native and
+numerical/device gates remain unrun. Conservative CPU charge is 350 seconds;
+GPU charge and all 17362 ledger events remain exact. GPUP-8 stays incomplete.
+Further admission requires host-provided delegated containment, not renewed
+approval of the already accepted ADR or a relaxation of the resource contract.
+
+## GPUP-8 latency diagnosis and initial cost proposal (2026-10-23)
 
 The [CPU-only diagnosis](../benchmarks/lp-tensor-latency-diagnosis.md) identifies
 shared preparation, conservative norm restriction and host audits as the main
@@ -38,8 +99,9 @@ requires repaired aggregate CPU admission, compact preparation, a proved tighter
 norm and an equivalent device reference audit. It proposes at most 1806 GPU and
 2050 CPU seconds within the remaining allocations after a 400-CPU-second diagnosis
 charge, with CPU/cost refusal gates before timings. Current cgroup controls are
-read-only; delegated task containment is a prerequisite. The proposal is not
-accepted and grants no execution, retries, resource increases or GPUP-9 work.
+read-only; delegated task containment is a prerequisite. At diagnosis time this
+proposal was unaccepted; the subsequent acceptance/refusal is recorded above.
+No retries, resource increases or GPUP-9 work follow from this history.
 The historical CPU overlap remains uncertified; new admission is prospective.
 
 ## GPUP-8 residual continuation: latency gain incomplete (2026-10-23)

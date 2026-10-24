@@ -1,0 +1,97 @@
+{
+  "acceptance_complete": true,
+  "adapter_checks_passed": 14,
+  "all_prior_charges_preserved": true,
+  "automatic_retry": false,
+  "bootstrap_rerun": false,
+  "campaign_gpu_ns": 22592495266813,
+  "certified_latency_gain": false,
+  "cleanup_empty": true,
+  "combined_warp32_gpu_cap_ns": 1640000000000,
+  "combined_warp32_gpu_ns": 369700946478,
+  "commit": false,
+  "completed_profile_workers": 16,
+  "completion_criteria_changed": false,
+  "container_change": false,
+  "continuation_cpu_charge_ns": 15304512140948,
+  "cpu_ceiling_ns": 53640000000000,
+  "cpu_total_ns": 45059217955206,
+  "delivery_checks": {
+    "path": "artifacts/gpup-tensor-warp32-v1/funded-continuation-v1/delivery-checks.json",
+    "sha256": "d8df79fcc7dfc1dbb5464431c3879ebc46d54fc2c093a101e87097534aa6736a"
+  },
+  "diff_hygiene_pass": true,
+  "documentation_pages": 166,
+  "forecast_produced": false,
+  "full_profile_failure_charge_cpu_ns": 2400000000000,
+  "funded_continuation_cpu_charge_ns": 2664409180444,
+  "gpu_categories_ns": {
+    "accept": 261200177856,
+    "profile": 108500768622
+  },
+  "gpu_ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "9913d391634bdb0f74012be909be377e5a693d00b76e6882abcf336796ac863e"
+  },
+  "gpu_ledger_events": 17412,
+  "gpup8_complete": false,
+  "gpup8_gpu_ns": 1232909411024,
+  "gpup9_started": false,
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-funded-final-cpu-accounting-v1",
+  "independent_profile_verification_receipts": 16,
+  "journal": {
+    "path": "artifacts/gpup-tensor-warp32-v1/cpu-journal-funded-final-v28.json",
+    "sha256": "4a6df30a512f45980ca1f79394fc1721c9fe8a5b8a81325332e5e9d880012348"
+  },
+  "missing_trial_verification_links": 16,
+  "numerical_verification_reruns": 0,
+  "overall_unspent_cpu_ns": 8580782044794,
+  "post_stop_reader_checks_passed": 4,
+  "prior_17376_prefix_preserved": true,
+  "prior_cpu_accounting": {
+    "path": "docs/benchmarks/data/tensor-warp32/deadline-final-cpu-accounting-v1.json",
+    "sha256": "4578dfe342003bc89e3b7abaa3b08c9ab1d570f61c5d090d9bb4707aa99834b5"
+  },
+  "report": {
+    "path": "artifacts/gpup-tensor-warp32-v1/funded-continuation-v1/delivery/report.json",
+    "sha256": "acdcf9c1432ee3df8875a59fa90f371cea8df7237696a71b9add9b825dbdcdf0"
+  },
+  "resources": {
+    "delivery-checks": {
+      "path": "artifacts/gpup-tensor-warp32-v1/funded-delivery-checks-resource-v1.json",
+      "sha256": "b180b80063586df8f8d709a28d6f3b0e09856cbc2f0f2ba1a3b85ffc05fd6593"
+    },
+    "profiles": {
+      "path": "artifacts/gpup-tensor-warp32-v1/funded-profiles-resource-v1.json",
+      "sha256": "387ee0c7fa8438e1c735375dbab5548fb370aa8c1765e86fda579c6f3afd3e7c"
+    },
+    "sanitizers": {
+      "path": "artifacts/gpup-tensor-warp32-v1/funded-sanitizers-resource-v1.json",
+      "sha256": "c23c504e56593116631a57437f232baa89edbaa17df79ca647599ba8fdff8251"
+    },
+    "setup": {
+      "path": "artifacts/gpup-tensor-warp32-v1/funded-setup-resource-v1.json",
+      "sha256": "7fa68f84fd64151b38558d426459a96a2fbcee4a3e96b516425a838651ca3f55"
+    },
+    "stop-report": {
+      "path": "artifacts/gpup-tensor-warp32-v1/funded-stop-report-resource-v1.json",
+      "sha256": "31e64409c74a502c88270197152eb2e9f94e7da8014552baa12407a50c6131cc"
+    }
+  },
+  "software_checks_rerun": false,
+  "status": "incomplete_profile_receipt_binding",
+  "supervisor_change": false,
+  "this_continuation_gpu_ns": 113279588268,
+  "timings_executed": 0,
+  "unassigned_allocated_cpu_ns": 84390824880,
+  "unspent_authorized_stage_cpu_ns": {
+    "implementation": 129592950416,
+    "margin": 400000000000,
+    "native": 0,
+    "proofs": 0,
+    "reporting": 466729267256,
+    "workers": 7339268601884
+  },
+  "unused_timing_reservation_cpu_ns": 6400000000000
+}

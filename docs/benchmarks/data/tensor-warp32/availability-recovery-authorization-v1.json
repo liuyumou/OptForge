@@ -1,0 +1,36 @@
+{
+  "additional_cpu_seconds": {
+    "native": 1200,
+    "reporting": 40
+  },
+  "all_prior_charges_retained": true,
+  "authorization": "User explicitly approved 1240 additional CPU seconds, availability-test correction, one bounded native recovery and conditional continuation, 2026-10-24",
+  "automatic_retry": false,
+  "bootstrap_rerun": false,
+  "completion_criteria_changed": false,
+  "continuation_allocations_cpu_seconds": {
+    "implementation": 258,
+    "margin": 400,
+    "native": 3600,
+    "proofs": 800,
+    "reporting": 230,
+    "workers": 2052
+  },
+  "continuation_total_cpu_seconds": 7340,
+  "cumulative_cpu_ceiling_seconds": 37140,
+  "gpu_cap_seconds": 790,
+  "gpu_phase_caps_seconds": {
+    "acceptance": 290,
+    "profiles": 200,
+    "timings": 300
+  },
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-availability-recovery-authorization-v1",
+  "prior_accounting_sha256": "cfe4f52acbd541146c6353728046d0e0b9edc4468586daf3abdce779564ff260",
+  "prior_gpu_ledger_events": 17366,
+  "prior_gpu_ledger_sha256": "9142829b3be8afdb1865425c83ca9122371284ca0e16f7bc8b18d303a5894426",
+  "prior_journal": "artifacts/gpup-tensor-warp32-v1/cpu-journal-native-stop-final-v8.json",
+  "prior_journal_sha256": "89fbcd1e645168c1cd4eea199b06874b99881b6e417bd10945929e074558aa45",
+  "setup_cpu_ns": 8000000000,
+  "supervisor_change": false
+}

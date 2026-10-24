@@ -1,0 +1,50 @@
+{
+  "additional_cpu_ns": 10400000000000,
+  "authorization": "User explicitly requests implementation of the fully funded continuation, 2026-10-24",
+  "automatic_retry": false,
+  "bootstrap_rerun": false,
+  "combined_gpu_cap_seconds": 1640,
+  "completion_criteria_changed": false,
+  "continuation_allocation_cpu_ns": 23840000000000,
+  "cpu_ceiling_ns": 53640000000000,
+  "cpu_headrooms_seconds": {
+    "implementation": 200,
+    "margin": 400,
+    "native": 0,
+    "proofs": 0,
+    "reporting": 600,
+    "workers": 9800
+  },
+  "gpu_categories_seconds": {
+    "accept": 330,
+    "profile": 320,
+    "timing": 990
+  },
+  "identity": "gpup-tensor-warp32-funded-authorization-v1",
+  "plan": {
+    "path": "docs/plans/lp-tensor-warp32-funded-continuation.md",
+    "sha256": "cf38e241e17517410f888b644d48482004f93159030ef7623688207ce2d3aad3"
+  },
+  "prior_accounting": {
+    "path": "docs/benchmarks/data/tensor-warp32/deadline-final-cpu-accounting-v1.json",
+    "sha256": "4578dfe342003bc89e3b7abaa3b08c9ab1d570f61c5d090d9bb4707aa99834b5"
+  },
+  "prior_cpu_ns": 42394808774762,
+  "prior_gpu_events": 17376,
+  "prior_gpu_ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "32951d3e1368fa31cb4292aaa785437b3b91b88adf94fc56b97fbea951b9d357"
+  },
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-warp32-v1/cpu-journal-deadline-final-v25.json",
+    "sha256": "aed6d5e669db905eaafd547e435bab14b83e5181373b3c5780b9f2545695e566"
+  },
+  "setup_bookkeeping_cpu_ns": 32000000000,
+  "supervisor_change": false,
+  "unassigned_allocated_cpu_ns": 84390824880,
+  "worker_phase_cpu_seconds": {
+    "profiles": 2400,
+    "sanitizers": 1000,
+    "timings": 6400
+  }
+}
