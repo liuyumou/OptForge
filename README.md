@@ -3,8 +3,33 @@
 A Rust-first research project for mathematical optimization and scheduling with
 selective GPU acceleration. **C6 is implemented under SPEC-0010 and SPEC-0011**:
 a search can evaluate integer schedules on a GPU, and a first-order LP backend
-runs on the host or device with host-side validation and certification. The next
-prioritized work is the [GPU LP precision roadmap](docs/plans/gpu-lp-precision-roadmap.md).
+runs on the host or device with host-side validation and certification.
+
+As of 2026-11-10, **GPUP-8 is implemented experimentally but incomplete**.
+Its corrected proof and device acceptance pass; six small profiles complete,
+then the first large BF16 profile times out. No certified latency gain or supported
+precision preset is established, and GPUP-9 remains gated. The
+[system diagnosis](docs/benchmarks/lp-system-diagnosis-2026-11-10.md) identifies
+expanded reconstruction and state-update costs as the dominant current bottleneck.
+The [revised roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-11-10)
+prioritizes comparable cuOpt/COPT baselines, lean resident execution and simpler
+mixed precision, with selective Tensor work conditional on total-cost evidence.
+[ADR-0047](docs/decisions/ADR-0047-certified-performance-roadmap.md) records the
+design choices. [cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
+Gurobi remains unavailable and was excluded from the baseline.
+
+[GPUP-BASELINE](docs/benchmarks/lp-external-baseline-native-return.md) is complete
+under the user's amended comparison policy: all 240 planned cells have settled
+attempts, 198 meet their comparison policy and 135 certify strictly.
+For cuOpt, 90/96 native returns pass its explicit error/status policy, while
+24/96 meet the independent certificate. Limits, native errors, outer failures
+and numerical discrepancies remain visible. This is not a quality-matched
+performance claim. Total baseline GPU charge is 3091.996 / 3600 seconds.
+The next ready task is resident execution with explicit preparation/checking costs;
+[SPEC-0023](docs/specifications/SPEC-0023-baseline-native-return.md) records the
+cuOpt policy, and SPEC-0022's strict mathematical checker remains unchanged.
+
+The earlier research slices provide the following foundation.
 Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)
 and the objective/gap checks. Slice 2 adds the [bounded LP study harness](docs/benchmarks/lp-precision-study.md),
 with independent endpoints, frozen workloads and a [measured baseline report](docs/benchmarks/lp-baseline-gpup2.md).
@@ -33,7 +58,12 @@ full-range compact FMA passes at 40 registers and zero spills, resolving that
 scalar obstacle. It passes 6170 device cases, four scoped sanitizers and 36
 independently verified primitive timings on RTX PRO 6000 Blackwell. The original
 busy-device refusal is retained; total charge is 30.114068273 GPU seconds. No
-full controller or solver performance benefit is admitted. GPUP-REFINE is next and requires its accepted contract and separate allocation.
+full controller or solver performance benefit is admitted.
+[GPUP-REFINE](docs/benchmarks/lp-refinement-gpup-refine.md),
+[GPUP-ASSESS](docs/benchmarks/lp-assessment-scheduling-gpup-assess.md),
+[GPUP-7](docs/benchmarks/lp-quantization-gpup7.md) and
+[GPUP-7R](docs/benchmarks/lp-quant-resident-gpup7r.md) have since completed their
+bounded investigations, with negative results and coverage limits retained.
 
 The [COPT comparison and component report](docs/benchmarks/lp-copt-comparison.md)
 now covers all 1140 planned attempts through 65536 rows. It identifies evidence
@@ -124,11 +154,14 @@ acceptance was not covered.
 - [GPU LP backend specification](docs/specifications/SPEC-0011-gpu-lp-backend.md)
 - [LP certification arithmetic and limits](docs/architecture/lp-certification.md)
 - [GPU LP performance roadmap and slices](docs/plans/gpu-lp-precision-roadmap.md)
+- [Current system diagnosis and cuOpt/COPT/Gurobi comparison](docs/benchmarks/lp-system-diagnosis-2026-11-10.md)
+- [Certified-performance design decision](docs/decisions/ADR-0047-certified-performance-roadmap.md)
+- [Optional cuOpt installation and acceptance status](docs/operations/cuopt.md)
 - [Precision architecture and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md)
 - [Accepted CPU reference and bounded exact sparse-product executor](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md)
 - [GPUP-EXEC exact executor, costs and retained failures](docs/benchmarks/lp-exact-executor-gpup-exec.md)
 - [GPUP-STATE original refusal and compact FMA challenge](docs/benchmarks/lp-expansion-state-gpup-state.md)
-- [Proposed correction LP, anchors and assessment contract](docs/specifications/SPEC-0021-lp-refinement.md)
+- [Correction LP, anchors and assessment contract](docs/specifications/SPEC-0021-lp-refinement.md)
 - [Component and combination experiment design](docs/benchmarks/lp-precision-design-experiments.md)
 - [FP64-pipe root cause of the FP32 component slowdown](docs/benchmarks/lp-fp64-pipe-root-cause.md)
 - [GPUP-5C guards, fusion, double-float, tiers and corpus report](docs/benchmarks/lp-fp64-pipe-gpup5c.md)
@@ -170,9 +203,10 @@ optimizer-cuda-sys owns the CUDA driver boundary and optimizer-cuda owns discove
 the host lease, device selection and residency; `cuda/` holds the kernels, built out
 of tracked source by `tools/setup_cuda.sh`. `docs/` is authoritative; `wiki/`
 provides navigation. optimizer-lp owns the host LP method and certification without
-a device dependency; optimizer-lp-cuda owns the device backend. Python SDK,
-quantized/FP8 LP, dynamically loaded native extensions, persistent checkpoint restart and
-performance suites remain planned, with limits recorded in
+a device dependency; optimizer-lp-cuda owns the device backend. Quantized/FP8 and
+Tensor LP candidates exist as research implementations, with no supported precision
+preset. Python SDK, dynamically loaded native extensions, persistent checkpoint
+restart and broader performance suites remain planned, with limits recorded in
 [known failures](state/known-failures.md).
 
 ## License

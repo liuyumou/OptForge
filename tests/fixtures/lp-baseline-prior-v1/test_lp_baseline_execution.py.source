@@ -1,0 +1,175 @@
+"""New neutral-checker and execution-boundary acceptance; no vendor or GPU calls."""
+import copy
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import unittest
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/'tools'))
+from lp_baseline_common import (CPU_CAPS, GPU_CAPS, digest, equal_f64, load, put,
+    ref, tiny_model, verify_certificate)
+from lp_baseline_adapters import native_bounds, native_status
+from lp_baseline_budget import accounting
+from lp_baseline_budget import admission_open
+from lp_baseline_contract import canonicalize, screening_jobs
+from lp_baseline_study import CHECKER, paired_comparisons
+
+
+class NeutralChecker(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(dir=ROOT/'artifacts')
+        self.addCleanup(self.temp.cleanup)
+        self.directory = Path(self.temp.name)
+        self.counter = 0
+
+    def check(self, sense='minimize', shape='ranged', change=None, model_change=None, raw_change=None):
+        self.counter += 1
+        directory = self.directory/str(self.counter)
+        directory.mkdir()
+        doc = tiny_model(sense,shape)
+        if model_change: model_change(doc)
+        model = directory/'model.json'
+        put(model,doc)
+        canonical = canonicalize(model.read_bytes())
+        candidate = dict(schema_version=1,kind='lp-baseline-candidate',model_sha256=ref(model)['sha256'],
+            row_ids=canonical['row_ids'],variable_ids=canonical['variable_ids'],
+            primal=[2. if sense=='maximize' and shape=='ranged' else 1.],
+            dual=[1. if sense=='minimize' else -1.],transport='completed',native_status='optimal')
+        if change: change(candidate)
+        source=directory/'candidate.json'
+        put(source,candidate)
+        if raw_change: source.write_text(raw_change(source.read_text()))
+        output=directory/'certificate.json'
+        p=subprocess.run([str(CHECKER),'check',str(model),str(source),str(output)],capture_output=True,timeout=5)
+        self.last=(model,source,output)
+        return p, load(output) if output.exists() else None
+
+    def test_four_original_sense_cases(self):
+        for sense in ('minimize','maximize'):
+            for shape in ('ranged','equality'):
+                with self.subTest(sense=sense,shape=shape):
+                    p,c=self.check(sense,shape)
+                    self.assertEqual(p.returncode,0,p.stderr)
+                    self.assertTrue(c['accepted'])
+                    self.assertAlmostEqual(c['validation']['objective'],5.25 if sense=='maximize' and shape=='ranged' else 4.25)
+
+    def test_native_optimal_is_not_authority(self):
+        _,c=self.check(change=lambda w:w.update(dual=[0.]))
+        self.assertFalse(c['accepted'])
+        self.assertFalse(c['gap_closed'])
+
+    def test_limit_can_certify(self):
+        _,c=self.check(change=lambda w:w.update(native_status='limit'))
+        self.assertTrue(c['accepted'])
+
+    def test_timeout_cannot_certify(self):
+        _,c=self.check(change=lambda w:w.update(transport='timeout'))
+        self.assertFalse(c['accepted'])
+
+    def test_infeasibility_claim_never_certifies(self):
+        for status in ('infeasible','unbounded','infeasible_or_unbounded','not_run'):
+            _,c=self.check(change=lambda w:w.update(native_status=status))
+            self.assertFalse(c['accepted'])
+
+    def test_no_dual_does_not_fabricate_zero(self):
+        _,c=self.check(change=lambda w:w.update(dual=None))
+        self.assertFalse(c['accepted'])
+        self.assertIsNone(c['bound'])
+
+    def test_bad_primal(self):
+        _,c=self.check(change=lambda w:w.update(primal=[0.]))
+        self.assertFalse(c['accepted'])
+        self.assertFalse(c['validation']['feasible'])
+
+    def test_identity_and_vector_shape_refuse(self):
+        for update in (dict(row_ids=[8]),dict(variable_ids=[8]),dict(model_sha256='0'*64),dict(primal=[]),dict(dual=[]),dict(extra=1)):
+            p,c=self.check(change=lambda w:w.update(update))
+            self.assertNotEqual(p.returncode,0)
+            self.assertIsNone(c)
+
+    def test_duplicate_missing_nonfinite_refuse(self):
+        for mutation in (lambda s:s.replace('"dual":','"dual": null, "dual":',1),
+                         lambda s:s.replace('1.0','NaN'),
+                         lambda s:json.dumps({k:v for k,v in json.loads(s).items() if k!='primal'})):
+            p,c=self.check(raw_change=mutation)
+            self.assertNotEqual(p.returncode,0)
+            self.assertIsNone(c)
+
+    def test_no_bound_on_free_column_is_not_unbounded_proof(self):
+        def change(m):
+            m['variables'][0]['lower']={'kind':'negative_infinity'}
+        _,c=self.check(change=lambda w:w.update(dual=[0.]),model_change=change)
+        self.assertFalse(c['accepted'])
+        self.assertIsNone(c['bound'])
+        self.assertIn('infinite bound',c['refusal'])
+
+    def test_actual_certificate_binding_and_tamper(self):
+        _,c=self.check()
+        model,candidate,certificate=self.last
+        verified=verify_certificate(ref(certificate),ref(candidate),ref(model),ref(CHECKER))
+        self.assertTrue(verified['accepted'])
+        wrong=ref(candidate)
+        candidate.write_bytes(candidate.read_bytes()+b' ')
+        with self.assertRaisesRegex(ValueError,'binding differs'):
+            verify_certificate(ref(certificate),wrong,ref(model),ref(CHECKER))
+
+
+class ExecutionBoundary(unittest.TestCase):
+    def test_exact_readback_and_infinity(self):
+        equal_f64([-0.,1.,float('inf')],[-0.,1.,float('inf')])
+        with self.assertRaises(ValueError): equal_f64([0.],[-0.])
+        with self.assertRaises(ValueError): equal_f64([1.0000000001],[1.])
+        model={key:[None,1e30] for key in ('variable_lower','variable_upper','row_lower','row_upper')}
+        with self.assertRaises(ValueError): native_bounds(model,1e30)
+        self.assertEqual(native_bounds(model)['variable_lower'][0],-float('inf'))
+
+    def test_status_separation(self):
+        self.assertEqual(native_status('InfeasibleOrUnbounded'),'infeasible_or_unbounded')
+        self.assertEqual(native_status('IterationLimit'),'limit')
+        self.assertEqual(native_status('Unrecognized'),'unknown')
+
+    def test_unsettled_reservation_keeps_full_charge(self):
+        with tempfile.TemporaryDirectory(dir=ROOT/'artifacts') as tmp:
+            root=Path(tmp)
+            path=root/'resources/a.reservation.json'
+            put(path,dict(phase='admission',gpu=True,cpu_ns=120_000_000_000,gpu_ns=30_000_000_000))
+            cpu,gpu=accounting(root)
+            self.assertEqual(cpu['admission'],120_000_000_000)
+            self.assertEqual(gpu['admission'],30_000_000_000)
+
+    def test_new_cap_and_full_grid(self):
+        self.assertEqual(sum(CPU_CAPS.values()),16000)
+        self.assertEqual(sum(GPU_CAPS.values()),3600)
+        p=load(ROOT/'benchmarks/configs/lp-external-baseline-proposal-v1.json')
+        jobs=list(screening_jobs(p))
+        self.assertEqual(len(jobs),240)
+        self.assertEqual(sum(j['gpu'] for j in jobs),168)
+
+
+class ReleaseBoundary(unittest.TestCase):
+    def test_unsettled_and_overrun_block_release(self):
+        with tempfile.TemporaryDirectory(dir=ROOT/'artifacts') as tmp:
+            root=Path(tmp)
+            put(root/'resources/a.reservation.json',{})
+            with self.assertRaisesRegex(ValueError,'unsettled'): admission_open(root)
+            put(root/'resources/a.settlement.json',dict(overrun=True))
+            with self.assertRaisesRegex(ValueError,'overrun'): admission_open(root)
+
+    def test_failed_pair_never_removed_from_comparison(self):
+        configs=[dict(id='project-tuned-fp64',gpu=True),dict(id='highs-cpu',gpu=False)]
+        rows=[dict(model='m',configuration=c['id'],phase='screening',repetition=r,
+                   certified=True,gpu_confirmed=c['gpu'],elapsed_ns=200 if c['gpu'] else 100)
+              for r in range(3) for c in configs]
+        comparison=paired_comparisons(rows,dict(configurations=configs))[0]
+        self.assertEqual(comparison['median_speedup'],2.)
+        self.assertEqual(comparison['confidence95'],[2.,2.])
+        rows[-1]['certified']=False
+        comparison=paired_comparisons(rows,dict(configurations=configs))[0]
+        self.assertIsNone(comparison['median_speedup'])
+        self.assertEqual(comparison['missing_repetitions'],[2])
+
+
+if __name__=='__main__': unittest.main()

@@ -1,0 +1,89 @@
+{
+  "copt_version": "8.0.6",
+  "cuopt_cpu_parameter_defaults": {
+    "absolute_dual_tolerance": "0.000100",
+    "absolute_gap_tolerance": "0.000100",
+    "absolute_primal_tolerance": "0.000100",
+    "crossover": "false",
+    "dual_postsolve": "true",
+    "iteration_limit": "2147483647",
+    "method": "0",
+    "num_cpu_threads": "-1",
+    "pdlp_precision": "-1",
+    "pdlp_solver_mode": "4",
+    "presolve": "-1",
+    "random_seed": "-1",
+    "relative_dual_tolerance": "0.000100",
+    "relative_gap_tolerance": "0.000100",
+    "relative_primal_tolerance": "0.000100",
+    "time_limit": "inf"
+  },
+  "cuopt_version": "26.10.0",
+  "date": "2026-11-10",
+  "gpu_jobs": 0,
+  "kind": "read_only_source_and_cpu_parameter_metadata",
+  "limitations": [
+    "API presence is not postsolve/sign correctness or device compatibility acceptance.",
+    "COPT license availability was not exercised.",
+    "Existing Rust external witness readers are COPT-specific; solver-neutral bridge remains to implement."
+  ],
+  "metadata_command": "CUDA_VISIBLE_DEVICES= timeout 30 venv/bin/python: get_solver_setting over declared parameter names; no model or solve",
+  "schema_version": 1,
+  "solver_runs": 0,
+  "source_files": [
+    {
+      "path": "artifacts/cuopt-26.10.0-cu13/venv/lib/python3.11/site-packages/cuopt/linear_programming/data_model/data_model.py",
+      "sha256": "85fa7ae21512b16b44ccbcdb541bd90565d58210bdb3699dd3273ff3fe167649"
+    },
+    {
+      "path": "artifacts/cuopt-26.10.0-cu13/venv/lib/python3.11/site-packages/cuopt/linear_programming/solution/solution.py",
+      "sha256": "9b07871be598dda3341ffcc8ae5b8942d2d1364e53edcd559470b78446501fb9"
+    },
+    {
+      "path": "artifacts/cuopt-26.10.0-cu13/venv/lib/python3.11/site-packages/cuopt/linear_programming/solver_settings/solver_settings.pyx",
+      "sha256": "24122214c59cca67c77524718f88863b4e0410ac4ad3fbd1ff4f05900919feb9"
+    },
+    {
+      "path": "artifacts/cuopt-26.10.0-cu13/venv/lib/python3.11/site-packages/libcuopt_client/include/cuopt/mathematical_optimization/constants.h",
+      "sha256": "3a8c81b7e6ae12be45c88f43b62a5dbceb19539492d4106682695b4979ab0e2c"
+    },
+    {
+      "path": "/root/copt80/include/copt.h",
+      "sha256": "e310f52acbc49d7c9de20d6b3048d50edfdfb611680513ed3de4bf4f3f603211"
+    },
+    {
+      "path": "/root/copt80/release-notes.txt",
+      "sha256": "e0ceac180c11ac13c68d035fd432807f309dce4e194fc45c6a76784176081302"
+    },
+    {
+      "path": "tools/lp_copt.py",
+      "sha256": "9091a1e29dced4dfd04b237155a8f785afa00f69c79a4c626a7aa614002ff1b4"
+    },
+    {
+      "path": "tools/lp_copt_matrix.py",
+      "sha256": "fe09b54969384c67ec8edd118dfbdc42a8b7b8cfe401f768276d9b490096bceb"
+    },
+    {
+      "path": "tools/lp_copt_bulk.py",
+      "sha256": "8be1982ee54a1b6e8ad1a47bfd3f0e461b0c82f3c42ecfdddf82ff94bd26600a"
+    },
+    {
+      "path": "crates/optimizer-lp/src/certify.rs",
+      "sha256": "eb6e6db5f99ea51b08b68ff5f199f23d649a5622badc922a755b999a1ceda707"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_external.rs",
+      "sha256": "6f0c2539478bad0e7cfcc57e203bd639605cb8afe92f36d7a0a54f896ee5c211"
+    },
+    {
+      "path": "crates/optimizer-cli/src/lp_study.rs",
+      "sha256": "9988c7592b17c10b02ee41feb63dbaf3b25a1e7808317735264b72a75e2bff7f"
+    }
+  ],
+  "task": "GPUP-BASELINE-SPEC",
+  "unsupported_inspected_cuopt_parameter_names": [
+    "barrier_primal_tolerance",
+    "barrier_dual_tolerance",
+    "barrier_gap_tolerance"
+  ]
+}

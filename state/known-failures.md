@@ -1,5 +1,62 @@
 # Known Failures and Limitations
 
+## Completed baseline retains native and quality failures (2026-11-10)
+
+The [completed native-return report](../docs/benchmarks/lp-external-baseline-native-return.md) has no unexecuted
+screening cells. Completion means all planned attempts are accounted for, not
+that every solver succeeds. CuOpt has 90/96 native-return passes and 24/96
+strict certificates; the native termination counts are {'IterationLimit': 45, 'Optimal': 42, 'NumericalError': 3, 'TimeLimit': 3, 'unavailable': 3}.
+Error-free time/iteration limits are passes under the user's rule but remain
+limits. A return may pass natively while outer transport times out; those rows
+have no successful complete-delivery time or fabricated certificate.
+
+The large mixed model has no strict certificate from any configuration. Project
+native limit endpoints remain available, but nonzero CLI exit prevents
+export through the retained adapter. Native project assessment and independent
+vendor checks lack a finite bound for an unbounded variable; this does not prove
+the model unbounded. See the completed report for exact source-bound differences.
+
+Raw numerical differences, all prior failures and the unresolved presolve-only
+maximization dual mapping remain. That mapping may involve the adapter, so it is
+not attributed to a cuOpt design defect. Reused small-model v2 and new v5 transport
+are different cohorts; their cross-cohort paired ratios are withheld. The new
+report supersedes the incomplete coverage status below without changing it.
+
+## External baseline admission and coverage (2026-11-10)
+
+The [implemented baseline](../docs/benchmarks/lp-external-baseline-gpup-baseline.md)
+admits six configurations and certifies 108 of 123 executed screening cells.
+cuOpt double violates original componentwise feasibility on admission; mixed
+reaches its iteration limit with violations; single misses the strict gap on a
+tiny equality; concurrent has an unresolved presolve-only maximization dual sign.
+The installed CUDA stack executes cuOpt. These are quality/mapping limits, not
+an installation failure or a general commercial-solver ranking.
+
+Fifteen executed screening cells are uncertified: three each for HiGHS native
+failure/missing-candidate handling on scaling, COPT default scaling gap, COPT GPU
+scheduling gap, HiGHS large-irregular numerical failure, and COPT default
+large-irregular native limit without a witness. Raw records remain available.
+Ninety-six planned cells are cuOpt-admission-blocked; 21 further cells cannot fit
+the CPU screening phase. No unsupported timing or speedup is substituted.
+
+The new harness initially hit a mistaken artifact size limit, then expensive
+schema validation and unbuffered certificate output. Separate v3/v4 corrections
+preserve the cancelled job, all sixteen timeout trials and full charges. Passed
+admissions/small-model blocks and numerical refusals are reused. Complete delivery
+still includes substantial host/evidence cost; native-only times are diagnostic.
+See the [follow-up decisions](../docs/plans/gpu-lp-precision-roadmap.md#baseline-follow-up-decisions).
+
+## Current precision-performance limitation (2026-11-10)
+
+GPUP-8 remains incomplete after proof/device acceptance and a large BF16 profile
+timeout. Retained small profiles identify expanded reconstruction and state-update
+cost as the dominant bottleneck; no supported low-precision recipe or certified
+latency gain follows. See the [system diagnosis](../docs/benchmarks/lp-system-diagnosis-2026-11-10.md)
+and [current roadmap](../docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-11-10).
+cuOpt is installed and executes, but its four baseline configurations remain
+unadmitted for the reasons above. Gurobi is unavailable. Historical failures and scientific execution stops below
+remain preserved; the new plan does not reopen them.
+
 ## GPUP-8 corrected proof and device acceptance pass; profile timeout (2026-10-24)
 
 Final delivery passes 173 documentation pages/internal links, immutable evidence

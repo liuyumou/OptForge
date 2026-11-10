@@ -1,0 +1,112 @@
+{
+  "backlog_acyclic": true,
+  "backlog_tasks": 50,
+  "build_receipts": [
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/format-lint-v1.resource.json",
+      "sha256": "b6966b0696725033e57f9b8ad2729262a7e9ce3d23921c328600555b2df4511a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/checker-build-formatted.resource.json",
+      "sha256": "9ef78a5382a98c07545c871ccd48d98a18532006ef9e05f800cc1e6cdaab6a65"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/buffered-checker-final-build.resource.json",
+      "sha256": "a137fab864639e95b9ef084bb4d18e7da0f883a0ff1f115d00f61c38657e0345"
+    }
+  ],
+  "cleanup_empty": true,
+  "commit_created": false,
+  "corrected_api_readback": "12 explicitly pinned source-file hashes pass, including two read-only absolute COPT paths; artifact root-containment policy is unchanged",
+  "date": "2026-11-10",
+  "documentation_pages": 184,
+  "final_accounting": {
+    "path": "docs/benchmarks/data/external-baseline-final-accounting-v1.json",
+    "sha256": "7b1c054af4d0cec97fc3f1137706e76ae7b73c2aaa79cf8a0c3a93d16b274d2c"
+  },
+  "final_documentation_receipt": {
+    "path": "artifacts/gpup-external-baseline-v4/resources/documentation-final.resource.json",
+    "sha256": "11f0640dddc3f6a85373db125e8c0627f9e070aafe0227dd477cf61d21b0de0f"
+  },
+  "freeze_and_dependency_identity": "passed before the first delivery metadata reader refused an absolute API reference; retained and reused by the correction",
+  "full_comparison_complete": false,
+  "gpu_jobs_after_screening": 0,
+  "historical_ledger_events": 17438,
+  "implementation_delivered": true,
+  "kind": "lp-external-baseline-delivery-acceptance",
+  "metadata_checks": {
+    "path": "artifacts/gpup-external-baseline-v4/delivery-checks.json",
+    "sha256": "c5c3f04120008a1a25fc72fefd1bc866685ea6da3be2cc06ecfecfe87e7899bf"
+  },
+  "new_text_hygiene": "passed",
+  "next_ready_task": "GPUP-BASELINE-FOLLOWUP",
+  "numerical_sources_unchanged": true,
+  "report": {
+    "path": "artifacts/gpup-external-baseline-v4/report.json",
+    "sha256": "e8964d37c8567dc50a58aca40b243bd2e23bb2074b971dcac177c458ebe03658"
+  },
+  "report_delivery_sources": [
+    {
+      "path": "artifacts/gpup-external-baseline-v4/delivery/delivery-summary.py",
+      "sha256": "b4efe57232eb41ca50cfeae20e02630281ae5e1ac4d0eef01f3fe19f6eaf0d0a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/delivery/delivery-check.py",
+      "sha256": "37221132b6f92b623ccc6a2c76a4b00751d5a1974182c0f6decda384897b0b0d"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/delivery/delivery-check-v2.py",
+      "sha256": "85e05cdcb20dc95ed2cab5e9d11b553be9db253628e28003745f4d14df378734"
+    }
+  ],
+  "resource_settlements_checked": 195,
+  "retained_historical_evidence_files": 15,
+  "schema_version": 1,
+  "scientific_gate_reruns": 0,
+  "scoped_diff_hygiene": "passed",
+  "status": "passed",
+  "summary": {
+    "path": "docs/benchmarks/data/external-baseline-result-v1.json",
+    "sha256": "ce07d868a837ce75ec256530090f0969e209f20f16a8d92801138fc3241bcd4e"
+  },
+  "tests": {
+    "new_python": 25,
+    "new_rust": 1,
+    "note": "The initial compiled-schema suite passes unchanged numeric-source equivalence and fails the boolean-constant case. Only the failed case is rerun after correction. The final project export test replaces the earlier filename-only assertion; unchanged tests are reused.",
+    "prior_spec_reused": 20,
+    "receipts": [
+      {
+        "path": "artifacts/gpup-external-baseline-v1/resources/execution-tests-v1.resource.json",
+        "sha256": "89070f9ff490717086b770a69eef232c3da7cfa5be9a7d4f2ef3691034de6e95"
+      },
+      {
+        "path": "artifacts/gpup-external-baseline-v1/resources/release-tests-v1.resource.json",
+        "sha256": "c99b7ec7f6875576ce905ab71bb405f60a3682eb7989a13d81c38a83f709314b"
+      },
+      {
+        "path": "artifacts/gpup-external-baseline-v2/resources/adapter-correction-tests.resource.json",
+        "sha256": "bc00dfeb8ed96a23e2e1a26a118f59d8685d6b7e8f321f87a0d6be191302a0f4"
+      },
+      {
+        "path": "artifacts/gpup-external-baseline-v2/resources/project-export-correction.resource.json",
+        "sha256": "dd2f624f97615604882dc8d46a78775568892cd9b11f399f53672cde1b125123"
+      },
+      {
+        "path": "artifacts/gpup-external-baseline-v3/resources/artifact-transport-tests.resource.json",
+        "sha256": "434c83acb7850a29fc66faa0dabeb3bbb466cbbb8bf3391d4185d019047a1cb4"
+      },
+      {
+        "path": "artifacts/gpup-external-baseline-v4/resources/compiled-schema-tests.resource.json",
+        "sha256": "33b603cc1e859279dcdbf7d605683afb37a1150f1d53d1fdbb33182554413b09"
+      },
+      {
+        "path": "artifacts/gpup-external-baseline-v4/resources/compiled-schema-const-correction.resource.json",
+        "sha256": "019a04a2f5df3e021e0d42a6d9eb037dc0b8812547ebc8ebe296251a6cf406cb"
+      },
+      {
+        "path": "artifacts/gpup-external-baseline-v4/resources/buffered-checker-build.resource.json",
+        "sha256": "329ab0f882f64b9fd8eafa51779c258a8aab433af6c08fa7b12e6fa8c46aa779"
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "kind": "lp-baseline-pr-ci-source-bridge",
+  "gpu_seconds": 0,
+  "files": [
+    {
+      "path": "tools/requirements.txt",
+      "before_sha256": "7eb7e24c06de46d86bd44ddc51237b8e1165a4d1fa7eea00d15c73f1f1f3dac4",
+      "after_sha256": "ad62f679464e97672daabd264f8c98694e3620a384307be5362514f411a5267e",
+      "frozen_path": "tests/fixtures/lp-baseline-prior-v1/requirements.txt.source"
+    },
+    {
+      "path": "tests/integration/test_lp_quant_pr_review.py",
+      "before_sha256": "d9d2851e57f1325aa4ff712a1fc4c82b4e0a5f6de28df59da087e10e69bb4902",
+      "after_sha256": "b9cd91d6eea2611626083a18dc67b5f2cb1ffb71df31ed70dbe4fe893033e925",
+      "frozen_path": "tests/fixtures/lp-baseline-prior-v1/test_lp_quant_pr_review.py.source"
+    },
+    {
+      "path": "schemas/README.md",
+      "before_sha256": "5f9e5b7e8446196658d6636da6d840480609ce3a93114730d1304c0211defef4",
+      "after_sha256": "94138937af962c84f054964750edb5947e2882cdc3a3401a8fdb9226263ea200",
+      "frozen_path": "tests/fixtures/lp-baseline-prior-v1/schemas-README.md.source"
+    }
+  ],
+  "scope": "Append pinned CPU test dependencies through the unchanged workflow, admit the exact source-test extension, and register baseline schemas in documentation. No numerical change."
+}

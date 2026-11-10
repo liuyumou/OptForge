@@ -1,5 +1,61 @@
 # Changelog
 
+## GPUP-BASELINE PR integration (2026-11-10)
+
+- Make baseline CPU tests build their checkers and mock context from checked-in
+  sources; pin the NumPy and compiled-schema test dependencies in CI.
+- Preserve exact prior test sources through an explicit integration bridge.
+  Numerical implementations, measured results and historical charges are unchanged.
+
+## GPUP-BASELINE native-return completion (2026-11-10)
+
+- Add SPEC-0023 / ADR-0052 for the user's cuOpt no-reported-error pass policy,
+  keeping strict certificates, native limits/errors and transport separate.
+- Reuse 123 completed trials and execute the remaining 117; all 240 cells have
+  settled attempts, with 198 comparison passes and 135 strict certificates.
+- Preserve raw cuOpt errors/status/objectives/residuals/duals and numerical
+  differences; native-return comparisons are explicitly not quality matched.
+- Pass nine new boundary/export tests and one installed Solution API check;
+  retain every historical failure/source/charge and keep total GPU charge at
+  3091.995889713 / 3600 seconds. Make RESIDENT2 the next ready task.
+
+## GPUP-BASELINE implementation and bounded comparison (2026-11-10)
+
+- Add isolated cuOpt/COPT/project/HiGHS adapters, a neutral Rust certificate
+  bridge, frozen execution manifests, bounded resource accounting and paired reports.
+- Admit six configurations; execute 123 of 240 planned screening cells, certify
+  108, and retain 96 cuOpt-blocked plus 21 CPU-budget-blocked cells explicitly.
+- Preserve integration failures and timeouts through separate source versions;
+  correct log/artifact limits, schema cost and buffered certificate serialization.
+- Pass 25 new Python tests, one Rust writer test and scoped format/lint/build
+  checks; reuse prior evidence and preserve the historical GPU ledger.
+- Record 1277.244626616 / 3600 GPU seconds and concrete follow-ups for cuOpt
+  postsolve/quality, remaining coverage and complete delivery cost. GPUP-8 remains
+  incomplete, GPUP-9 gated, and no supported precision preset is selected.
+
+## GPUP-BASELINE-SPEC CPU comparison contracts (2026-11-10)
+
+- Add SPEC-0022 and an explicit cuOpt/COPT/project/HiGHS comparison protocol,
+  including original-model quality, endpoint export, timing and failure rules.
+- Add three strict schemas, lossless canonical CSC/CSR conversion, CPU validation
+  and synthetic examples; twenty focused tests cover malformed records, dual
+  normalization, identity, GPU evidence, ordering and resource arithmetic.
+- Bind local API inspection and eight development model identities; propose
+  admission and screening resources separately with execution disabled.
+- Advance the backlog to GPUP-BASELINE adapter/checker implementation. No solver
+  job, GPU reservation, historical source change or GPUP-9 progression occurs.
+
+## System diagnosis and certified-performance roadmap (2026-11-10)
+
+- Save the source-bound GPUP-8 bottleneck diagnosis and cuOpt/COPT/Gurobi comparison.
+- Add ADR-0047 and concrete task dependencies, deliverables and go/no-go criteria:
+  external baselines, resident execution, simpler mixed precision and conditional
+  Tensor work; preserve GPUP-8's incomplete result and GPUP-9's gate.
+- Correct stale README, roadmap and structured backlog handoffs.
+- Install optional cuOpt 26.10.0 in an isolated environment; record package hashes
+  and passing dependency/LP import checks with GPUs hidden. No solver benchmark
+  or scientific gate is run; Gurobi remains unavailable.
+
 ## GPUP-8 expanded-window recovery (2026-10-24)
 
 - Correct the versioned fixture generator and pass the independent proof.

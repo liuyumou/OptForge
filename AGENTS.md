@@ -1,5 +1,186 @@
 # Agent Instructions
 
+## GPUP-BASELINE PR integration (2026-11-10)
+
+The user explicitly requests merging the current changes through a PR before
+starting the next task. This authorizes commits, push, PR creation and merge;
+older no-publication handoffs below describe their original scope. Integrate the
+four unmerged GPUP-8 commits and the completed baseline, diagnosis and roadmap.
+GPUP-8 remains incomplete and GPUP-9 remains gated; no new GPU study follows.
+
+Acceptance: preserve recorded scientific sources/results and charges, make the
+baseline CPU tests reproducible without local benchmark installations, run the
+repository CPU integration gate, inspect the complete PR diff and lockfiles,
+require passing CPU/docs/smoke CI, then merge and verify main ancestry. Test-only
+portability changes retain their exact prior sources and a separate source bridge.
+Likely writes: test support/fixtures, CI dependency pins, integration receipt and
+current handoff. No vendor binaries, credentials or ignored experiment directories
+are published. Local validation is bounded to four CPU slots and 6000 CPU seconds
+(including 128 for preparation); GPU allocation is zero. Hosted CI keeps its
+existing 30/10/10-minute CPU/docs/smoke deadlines. Historical allocations remain
+closed. The full CPU integration gate is newly authorized for this PR; it does
+not rerun the GPU campaign or its formal proof/profile sequence.
+
+Local clean-checkout baseline tests pass with no historical study artifacts or
+vendor environments. The source bridge preserves 817 frozen runtime files, four exact prior test sources and
+the original requirements manifest. Full CPU/docs/smoke CI is required before merge.
+
+## GPUP-BASELINE completed with native-return reporting (2026-11-10)
+
+The user authorized completion and counting cuOpt returns without reported errors
+as passes while logging differences. ADR-0052 / SPEC-0023 implement that policy
+separately from unchanged strict certification. All 240 planned screening cells
+now have settled attempts: 123 reused and 117 new. 198 meet their
+comparison policy; 135 certify strictly. CuOpt has 90/96 native-return
+passes and 24/96 strict certificates. Normal limits remain limits; explicit
+NumericalError remains a native failure. Outer failures and missing certificates
+remain separate even when a native return passed. Nothing is relabeled optimal.
+
+Report: docs/benchmarks/lp-external-baseline-native-return.md. Full machine rows:
+docs/benchmarks/data/external-baseline-native-result-v1.json. Final accounting and
+acceptance: external-baseline-native-accounting-v1.json and
+external-baseline-native-acceptance-v1.json in the same directory. Total baseline
+GPU charge is 3091.995889713 / 3600 seconds, including all prior failures.
+The new CPU allocation is separately bounded at 32000; final settled charges are
+in the accounting receipt. Historical CPU caps/charges remain closed and exact.
+
+Nine new policy/export tests and one installed Solution API check pass. Prior
+hardware/tests/certificates are reused; source/input/settings admission and final
+metadata/documentation/cleanup checks are recorded in the delivery receipt.
+Versions v1 through v5, their sources, partial native returns and all failed
+reservations stay immutable. No old numerical gate/profile was rerun. The
+historical 17438-event GPU ledger remains exact. No vendor installation, native
+settings, checker mathematics or public solver defaults changed.
+
+GPUP-BASELINE and its follow-up protocol are complete under the amended policy.
+Next ready: GPUP-RESIDENT2, with explicit phase attribution and cold/prepared
+model lifecycles before claims about faster arithmetic. No new scientific task
+or spending is released by this handoff. GPUP-8 remains incomplete and GPUP-9
+stays gated. No commit, publication or merge was requested.
+
+## GPUP-BASELINE native-return continuation (2026-11-10)
+
+Status: accepted continuation, now closed by the delivery above; the user requested
+to complete the baseline and
+accept cuOpt results without vendor-reported error while logging discrepancies.
+ADR-0052 and SPEC-0023 supersede the CPU-only handoff and cuOpt certificate gate
+for this separate v5 cohort. Strict mathematical certification remains unchanged
+and separately reported; native success never becomes certified optimality.
+
+Reuse all 123 settled screening trials and run only the 117 unexecuted cells.
+Retain all original models, settings, deadlines, order, failures and charges.
+Likely files: new policy/metadata adapter, versioned coordinator/worker/budget,
+new focused tests and execution schema, frozen evidence, report and task state.
+Acceptance: actual cuOpt error/status metadata, immutable prior bindings, full
+240-cell disposition, separate native and strict-quality results, cleanup,
+resource accounting and documentation. No historical solver check/profile rerun.
+
+New continuation CPU ceiling: 32000 seconds (implementation 1600 including 128
+preparation, screening 28080, reporting 1600, cleanup 720). This is a separate
+allocation for the newly requested work; old CPU caps/charges remain historical.
+Total baseline GPU cap remains 3600 seconds, including 1277.244626616 already
+charged; v5 may reserve 2322 whole GPU seconds. Entire jobs must fit. Four CPUs,
+one shared GPU lease and existing memory/output limits remain. No automatic
+retry, new vendor installation, native parameter change or GPUP-9 execution.
+
+## GPUP-BASELINE bounded implementation delivery (2026-11-10)
+
+Implementation is delivered; the full scientific comparison remains incomplete.
+Report: docs/benchmarks/lp-external-baseline-gpup-baseline.md. Machine summary:
+docs/benchmarks/data/external-baseline-result-v1.json. Final accounting and
+acceptance: docs/benchmarks/data/external-baseline-final-accounting-v1.json and
+external-baseline-acceptance-v1.json in the same directory.
+
+Six configurations/twelve admission suites pass. Of 240 planned screening cells,
+123 execute and 108 certify; 96 are blocked by four cuOpt admission failures and
+21 remain unexecuted after CPU reservation admission exhausts. Preserve cuOpt
+numerical/postsolve refusals, the native failures and all unexecuted cells.
+GPU charge is 1277.244626616 / 3600 seconds. CPU screening charges
+9775.536859960 / 9860; total baseline CPU ceiling is 16000. ADR-0051's current
+phase caps supersede the initial allocation below. Final CPU delivery totals
+are in the accounting receipt. No unused phase or GPU headroom authorizes a retry.
+
+Active implementation: tools/lp_baseline_study_v4.py and the buffered research
+checker; v1 through v4 sources, artifacts, failed charges and source bridges stay
+immutable. The active v4 reuses all admission outcomes and five small-model
+blocks; its 33 large-model executions are separate from sixteen retained v3
+transport timeouts. The lost-guardian v2 cancellation retains its full 240 CPU
+charge and cleanup record. No passed numerical acceptance or historical profile
+is rerun. Twenty-five new Python tests and one Rust writer test pass; scoped
+format/lint/build and delivery checks are recorded in the report.
+
+Next ready task: GPUP-BASELINE-FOLLOWUP, a CPU-only protocol using retained
+records. Specify the exact 21 missing cells (5040 worker CPU / 720 GPU seconds
+plus itemized overhead), per-path cuOpt postsolve/quality admission and native
+missing-candidate error handling, and cold versus prepared model/evidence costs.
+Do not launch those jobs, relax certification or silently transfer funds from
+this handoff. GPUP-BASELINE stays in progress; RESIDENT2/MIXED2 remain gated on
+its disposition. Historical GPUP-8 is incomplete with scientific stages closed;
+GPUP-9 remains gated. The 17438-event historical GPU ledger and original numerical
+sources remain exact. No commit, publication or merge is part of this delivery.
+
+## GPUP-BASELINE initial implementation authorization (2026-11-10)
+
+Status: accepted initial allocation, superseded by the delivery above and ADR-0051;
+authorized by the user's instruction to implement GPUP-BASELINE
+with 3600 additional GPU seconds. Implement separate vendor adapters, a neutral
+Rust checker, immutable execution manifests, bounded admission and conditional
+screening. Keep all ten lanes and 240 planned screening cells visible. Reuse the
+retained numerical libraries and supervisor; do not reopen GPUP-8 or GPUP-9.
+
+Bounds: new baseline GPU cap 3600 seconds (480 admission, 3120 screening),
+charged separately without changing the historical ledger. CPU ceiling for this
+new work is 16000 seconds, conservatively within the 18036.902496786 seconds below
+the existing cumulative ceiling: 2400 implementation, 240 hardware, 2400 adapter
+admission, 8960 screening, 1200 reporting and 800 reserved cleanup. Four CPUs,
+one foreground job, 16 GiB sampled aggregate host RSS, 12 GiB sampled GPU memory.
+This is an explicit allocation for the newly authorized baseline; no prior
+failure is refunded or old stage retried. Whole-job reservations must fit before
+launch; failed/unsettled jobs retain the full reservation. A partial grid is
+reported as partial, never silently reduced to a favorable subset.
+
+Acceptance: new checker/conversion/runner tests; pinned input readback and
+min/max/offset/ranged dual mapping; nontrivial original-model certificates and
+actual execution evidence; frozen dependencies; cleanup and immutable history.
+Likely files: research/lp-external-baseline, new lp_baseline tools/tests/schemas,
+ADR-0048, run artifacts/report and task state. No public solver defaults change.
+
+
+## GPUP-BASELINE-SPEC CPU contract delivery (2026-11-10)
+
+The user explicitly requested GPUP-BASELINE-SPEC implementation. SPEC-0022 and
+docs/benchmarks/lp-external-baseline-v1.md now define the comparison, including
+three schemas and tools/lp_baseline_contract.py with twenty focused CPU tests.
+The non-executable proposal fixes ten lanes/eight development models/240 screening
+cells; no held-out manifest is accessed. Gurobi is excluded. Existing Rust external
+readers are COPT-specific, so GPUP-BASELINE must add a separate solver-neutral bridge.
+
+Next ready implementation task is GPUP-BASELINE. Phase A proposes 6040 CPU / 480 GPU
+seconds; phase B separately proposes 58600 CPU / 10080 GPU seconds. Neither is an
+allocation or execution authorization. Freeze actual sources, device, settings,
+supervisor and accepted resource authority before numerical jobs; the proposal
+validator cannot execute them. Preserve all historical sources/receipts/charges;
+no passed GPUP-8 check/profile is rerun. GPUP-8 stays incomplete and GPUP-9 gated.
+
+## System diagnosis and roadmap revision (2026-11-10)
+
+The user requests a saved diagnosis, concrete roadmap decisions and optional
+cuOpt installation; Gurobi is unavailable. Current direction is ADR-0047 and
+docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-11-10. Next ready task is
+GPUP-BASELINE-SPEC: CPU-only common-checker comparison contract and resource
+proposal, followed by separately admitted cuOpt/COPT adapters, resident execution,
+simpler mixed precision and conditional Tensor work. This is not GPUP-9 execution.
+
+cuOpt 26.10.0 is installed under artifacts/cuopt-26.10.0-cu13/venv; pip check and
+cuopt.linear_programming import pass with GPUs hidden. The package lock and setup
+receipt are documented in docs/operations/cuopt.md. Device/solver acceptance is
+unrun. COPT and all historical environments are unchanged. No numerical source,
+passed scientific check/profile, historical charge or ledger is changed/rerun.
+GPUP-8 remains incomplete and its scientific stages closed; GPUP-9 stays gated.
+New numerical protocols and resource packages require separate acceptance; unused
+historical funds do not authorize retries or transfers. Dated entries below are
+historical handoffs, not the current planning priority.
+
 ## GPUP-8 corrected proof and device acceptance pass; profile timeout (2026-10-24)
 
 Final delivery passes 173 documentation pages/internal links, immutable evidence

@@ -1,5 +1,76 @@
 # Project Status
 
+## GPUP-BASELINE complete under the amended comparison policy (2026-11-10)
+
+The [completed report](../docs/benchmarks/lp-external-baseline-native-return.md) includes all 240 planned screening
+attempts: 198 comparison passes and 135 strict certificates. CuOpt's
+90/96 native-return passes follow the user's explicit policy; only 24/96
+meet the unchanged strict checker. Native limits/errors, outer timeouts, raw
+vectors and original-model discrepancies are reported separately. No failure
+is silently dropped and no native pass becomes certified optimality.
+
+The continuation reuses 123 results and executes only 117 unexecuted cells.
+Nine new policy tests and one installed API check pass. GPU charge totals
+3091.995889713 / 3600 seconds; CPU charges and all cleanup/evidence checks are
+in the linked report. Next ready: GPUP-RESIDENT2. GPUP-8 remains incomplete,
+GPUP-9 gated, and no supported precision recipe is selected. Entries below
+retain earlier phase outcomes.
+
+## GPUP-BASELINE implementation delivered; comparison incomplete (2026-11-10)
+
+The [baseline report](../docs/benchmarks/lp-external-baseline-gpup-baseline.md)
+records six admitted configurations, 123/240 executed screening cells and 108
+independently certified results. Four cuOpt configurations fail quality or
+postsolve admission, blocking 96 cells; another 21 eligible cells cannot fit the
+CPU screening allocation. GPU charge is 1277.244626616 / 3600 seconds. The full
+comparison remains incomplete, with every failure and unexecuted cell retained.
+
+Adapters, neutral Rust checker, immutable manifests, resource runner and paired
+statistics are implemented. Twenty-five new Python tests and one Rust writer
+test pass, with scoped format/lint/build checks. Historical numerical sources,
+passed checks and the 17438-event ledger remain preserved. Full source/evidence
+and documentation checks are in the linked report's delivery receipt.
+
+Next ready: `GPUP-BASELINE-FOLLOWUP`, a CPU-only protocol for the exact remaining
+cells, cuOpt dual/quality admission and cold/prepared delivery-cost decisions.
+The [roadmap](../docs/plans/gpu-lp-precision-roadmap.md#baseline-follow-up-decisions)
+gives concrete gates and reservation arithmetic. GPUP-8 remains incomplete and
+GPUP-9 stays gated. The dated entries below describe earlier deliveries.
+
+## GPUP-BASELINE-SPEC CPU contracts complete (2026-11-10)
+
+[SPEC-0022](../docs/specifications/SPEC-0022-external-lp-baseline.md) defines canonical
+LP arrays, solver-neutral endpoint/checker outcomes, strict original-model quality,
+fresh-process timing and the external comparison admission contract. Three schemas,
+lossless CPU conversion/validation, synthetic examples and twenty new tests pass.
+The [protocol](../docs/benchmarks/lp-external-baseline-v1.md) fixes ten lanes, eight
+development models and 240 proposed screening cells. Phase A proposes 6040 CPU /
+480 GPU seconds; conditional phase B proposes 58600 CPU / 10080 GPU seconds.
+Both are proposals, not resource allocations; no solver or GPU work ran.
+
+Next ready implementation task: GPUP-BASELINE, including the new Rust checker
+bridge because existing external readers are COPT-specific. Actual device/solver
+acceptance, source/device freeze and resource release remain required. Gurobi is
+excluded. Historical evidence/charges are preserved; GPUP-8 stays incomplete and
+GPUP-9 stays gated.
+
+## Current direction and solver availability (2026-11-10)
+
+The [system diagnosis](../docs/benchmarks/lp-system-diagnosis-2026-11-10.md) records
+the current bottlenecks and cuOpt/COPT/Gurobi comparison. The
+[revised roadmap](../docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-11-10)
+and [ADR-0047](../docs/decisions/ADR-0047-certified-performance-roadmap.md) prioritize
+external baselines, lean resident execution and simpler mixed precision before
+conditional Tensor work. Next ready: `GPUP-BASELINE-SPEC`, a CPU-only comparison
+contract and resource proposal. Future scientific execution needs its own admission.
+
+cuOpt 26.10.0 is [installed in an isolated environment](../docs/operations/cuopt.md);
+dependency and LP import checks pass with GPUs hidden. No solver run or speed claim
+follows. COPT 8.0.6 is locally available; Gurobi is unavailable and not a dependency.
+GPUP-8's latest result is the proof/device pass and profile timeout below. It stays
+incomplete with science closed, and GPUP-9 stays gated. Historical budgets,
+completion criteria, failed charges and evidence are preserved.
+
 ## GPUP-8 corrected proof and device acceptance pass; profile timeout (2026-10-24)
 
 Final delivery passes 173 documentation pages/internal links, immutable evidence

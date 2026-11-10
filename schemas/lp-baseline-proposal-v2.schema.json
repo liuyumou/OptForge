@@ -1,0 +1,309 @@
+{
+  "$id": "lp-baseline-proposal-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bootstrap_resamples": {
+      "const": 10000
+    },
+    "bootstrap_seed": {
+      "const": 17111
+    },
+    "confidence": {
+      "const": 0.95
+    },
+    "configurations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "algorithm": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "gpu": {
+            "type": "boolean"
+          },
+          "id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "type": [
+                "number",
+                "boolean",
+                "string"
+              ]
+            },
+            "type": "object"
+          },
+          "precision": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "solver": {
+            "enum": [
+              "project",
+              "highs",
+              "cuopt",
+              "copt"
+            ]
+          },
+          "version": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "solver",
+          "version",
+          "gpu",
+          "algorithm",
+          "precision",
+          "parameters"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "cpu_affinity_policy": {
+      "const": "four_lowest_allowed_cpu_ids_frozen_at_admission"
+    },
+    "cpu_slots": {
+      "const": 4
+    },
+    "deferred": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "device_memory_limit_bytes": {
+      "const": 12884901888
+    },
+    "device_selection": {
+      "const": "RTX_PRO_6000_Blackwell_Server_Edition_then_freeze_uuid"
+    },
+    "execution_authorized": {
+      "const": false
+    },
+    "held_out_access": {
+      "const": false
+    },
+    "historical_accounting": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "host_memory_limit_bytes": {
+      "const": 17179869184
+    },
+    "id": {
+      "const": "gpup-external-baseline-v2"
+    },
+    "instances": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "family": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "group": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "license": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "model": {
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "type": "object"
+          },
+          "partition": {
+            "const": "development"
+          },
+          "source_manifest": {
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "family",
+          "group",
+          "partition",
+          "source_manifest",
+          "model",
+          "license"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "kind": {
+      "const": "lp-baseline-proposal"
+    },
+    "order_seed": {
+      "const": 17110
+    },
+    "phases": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "cpu_seconds": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "gpu_jobs": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "gpu_seconds": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "job_wall_seconds": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "jobs": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "cpu_seconds",
+          "gpu_seconds",
+          "jobs",
+          "gpu_jobs",
+          "job_wall_seconds"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "quality": {
+      "additionalProperties": false,
+      "properties": {
+        "absolute": {
+          "const": 1e-09
+        },
+        "relative": {
+          "const": 1e-09
+        }
+      },
+      "required": [
+        "absolute",
+        "relative"
+      ],
+      "type": "object"
+    },
+    "repetitions": {
+      "const": 3
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "selected_device_uuid": {
+      "const": null
+    },
+    "smoke_instance_ids": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "total_cpu_seconds": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "total_gpu_seconds": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "id",
+    "execution_authorized",
+    "held_out_access",
+    "repetitions",
+    "order_seed",
+    "bootstrap_seed",
+    "bootstrap_resamples",
+    "confidence",
+    "quality",
+    "cpu_slots",
+    "cpu_affinity_policy",
+    "host_memory_limit_bytes",
+    "device_memory_limit_bytes",
+    "device_selection",
+    "selected_device_uuid",
+    "configurations",
+    "instances",
+    "smoke_instance_ids",
+    "phases",
+    "total_cpu_seconds",
+    "total_gpu_seconds",
+    "historical_accounting",
+    "deferred"
+  ],
+  "type": "object",
+  "title": "Corrected LP baseline proposal v2"
+}

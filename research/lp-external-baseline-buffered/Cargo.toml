@@ -1,0 +1,22 @@
+[package]
+name = "lp-external-baseline-buffered"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.93"
+license = "MIT"
+
+[workspace]
+
+[dependencies]
+optimizer-core = { path = "../../crates/optimizer-core" }
+optimizer-lp = { path = "../../crates/optimizer-lp" }
+optimizer-highs = { path = "../../crates/optimizer-highs" }
+optimizer-experiment = { path = "../../crates/optimizer-experiment" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["float_roundtrip"] }
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = "warn"

@@ -1,0 +1,1128 @@
+{
+  "accounted_historical_spec_baseline_cpu_ns": 74551986950494,
+  "accounting_policy": "Successful jobs charge at least four times leased/supervised active wall; failed jobs retain full reservations. Separate fixed preparation allowances cover editing and unsupervised metadata/finalization; no historical refund or phase borrowing.",
+  "charged_jobs": 195,
+  "cleanup_empty": true,
+  "cpu_caps_seconds": {
+    "admission": 2400,
+    "cleanup": 200,
+    "hardware": 240,
+    "implementation": 2700,
+    "reporting": 600,
+    "screening": 9860
+  },
+  "cpu_ceiling_seconds": 16000,
+  "cpu_charged_ns": {
+    "admission": 1638867388808,
+    "cleanup": 0,
+    "hardware": 11587867208,
+    "implementation": 2471464275620,
+    "reporting": 559441769684,
+    "screening": 9775536859960
+  },
+  "cpu_remaining_ns": {
+    "admission": 761132611192,
+    "cleanup": 200000000000,
+    "hardware": 228412132792,
+    "implementation": 228535724380,
+    "reporting": 40558230316,
+    "screening": 84463140040
+  },
+  "cpu_total_ns": 14456898161280,
+  "date": "2026-11-10",
+  "decisions": [
+    {
+      "path": "docs/decisions/ADR-0048-external-baseline-execution.md",
+      "sha256": "6b0402b40a4aac4b657dfd679ab8da00bd3b83ffef57bec9f6957bcc5eaef871"
+    },
+    {
+      "path": "docs/decisions/ADR-0049-baseline-adapter-correction.md",
+      "sha256": "f30d8dfe7b5e4e0f105b91286bd39aeb0c682d32944889982da3c2759abf87ba"
+    },
+    {
+      "path": "docs/decisions/ADR-0050-baseline-artifact-transport.md",
+      "sha256": "90fd3cb151b9a3c1596de42d7d798f65f50c4de490b678735df609cf2602d1c9"
+    },
+    {
+      "path": "docs/decisions/ADR-0051-baseline-cpu-transport-cost.md",
+      "sha256": "50dc16986db41b508b91803966fb5036800f302987e3e142c2982fed32d32e2b"
+    }
+  ],
+  "finalization_note": "These two delivery documents were mutable drafts during link checks and are sealed only after every reservation settles. Final JSON and book copies add no numerical work; finalization is covered by the preparation allowance.",
+  "full_comparison_complete": false,
+  "gpu_caps_seconds": {
+    "admission": 420,
+    "hardware": 60,
+    "screening": 3120
+  },
+  "gpu_ceiling_seconds": 3600,
+  "gpu_charged_ns": {
+    "admission": 332704088347,
+    "hardware": 1144213732,
+    "screening": 943396324537
+  },
+  "gpu_remaining_ns": {
+    "admission": 87295911653,
+    "hardware": 58855786268,
+    "screening": 2176603675463
+  },
+  "gpu_total_ns": 1277244626616,
+  "historical_campaign_gpu_ns": 22770545043263,
+  "historical_cpu_ceiling_seconds": 77640,
+  "historical_cpu_ns": 59603097503214,
+  "historical_gpu_ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "fabe2e22047bac9194867e1f745c627a2271bc7c0cd283f17b207957c7bbb59d"
+  },
+  "historical_gpu_ledger_events": 17438,
+  "historical_gpup8_gpu_ns": 1410959187474,
+  "kind": "lp-external-baseline-final-accounting",
+  "pending_reservations": [],
+  "preparation_cpu_ns": 768000000000,
+  "prior_spec_cpu_ns": 491991286000,
+  "resource_overruns": [],
+  "retained_failed_reservations": [
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v1/resources/admission-cuopt-concurrent-0.settlement.json",
+        "sha256": "52099dc242e9d9401952d8e5fa7cbb145e818dd674055f2f89073304bc754c33"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v1/resources/admission-cuopt-pdlp-double-0.settlement.json",
+        "sha256": "851b074e8d5abcfc4ec28be9538d0f2e787e68c6f9f6f71caf82a89f20e0fae0"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v1/resources/admission-cuopt-pdlp-mixed-0.settlement.json",
+        "sha256": "19707316ede3d268d33de82e3616e4688b552f9aa0fe7d8dc89fcd85285e8d5a"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v1/resources/admission-cuopt-pdlp-single-0.settlement.json",
+        "sha256": "9a4cb7b311aca0204f5f612850866f1680b56ea80dc4b9160deb1629ba4b4785"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v1/resources/admission-highs-cpu-0.settlement.json",
+        "sha256": "46eb84a2a5ad30a3f58bcfa7f0e2bd737f3d0b4d4d04e3c6f3977d6ca5767e66"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v1/resources/admission-project-precision-fp64-0.settlement.json",
+        "sha256": "2a63a467e1dde20242fa10d7d11c7ee49f2a63ce590f2c76071376919c00f01d"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v1/resources/admission-project-tuned-fp64-0.settlement.json",
+        "sha256": "80ba79bb8f71b6c17082d508f3525445ce5636373610e2f54574e78e74c1041b"
+      }
+    },
+    {
+      "cpu_ns": 600000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v1/resources/checker-build-v1.settlement.json",
+        "sha256": "0a0b3729a0552b1d730186b0e474be6ca7000211d154a5f089433fca2f90f2de"
+      }
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v1/resources/checker-build-v2.settlement.json",
+        "sha256": "83904dfb51c3fe224b615f9caaffad3a5575f108fa6d56ae6be153801f07b337"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v2/resources/admission-cuopt-concurrent-0.settlement.json",
+        "sha256": "146006d4f5551ead7d741a9d5a21689561e3ac6cdb7aa432baf2ef8f3b0ff0bb"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v2/resources/admission-cuopt-pdlp-double-0.settlement.json",
+        "sha256": "5c09a890901815790d4ca4aad73d3172fe875b3965150476a2df63e62d50c6b7"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v2/resources/admission-cuopt-pdlp-mixed-0.settlement.json",
+        "sha256": "40a0fde626d8668fa6229520e1fdbbc927498170fbea9df217e45d36cea01e6a"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 30000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v2/resources/admission-cuopt-pdlp-single-0.settlement.json",
+        "sha256": "04d37846b952289993baac503c8f70b0c7cb3de096114b5e7270c5ec0bd58e81"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-extension-dense_block-65536-0-highs-cpu.settlement.json",
+        "sha256": "78b8b082baad29ffaf441efa9085390b4a303a2ca784683f1895da6349f7fb95"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-copt-cpu-default.settlement.json",
+        "sha256": "4349caef04eb17ba5a786b759b82f3c8074f912deb85a4f2bace4ab2ce6d0a71"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-copt-cpu-pdlp.settlement.json",
+        "sha256": "d813f2456eaef3b167351a49f28c5317423132165a9b27a0f041b89335dc656b"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-copt-gpu-pdlp.settlement.json",
+        "sha256": "75d37ed24b2b8ddf032692b50594aa0bbe52ac6fe2f9f26c0637e2b7f862f004"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-highs-cpu.settlement.json",
+        "sha256": "daf4835c382cdb983e3e0a6c8501f187e90de045764ea60f567c241623b9fb71"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-project-precision-fp64.settlement.json",
+        "sha256": "ef0200f0bf1e077dcadfd2e4ddb3afb1e9efad459f4d3de90e8f888ca3fe03be"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-project-tuned-fp64.settlement.json",
+        "sha256": "ba1e99f3ade8285a1a1c55716c97725a6a86ea75cdd28777bac7a053f3f35b69"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-copt-cpu-default.settlement.json",
+        "sha256": "0603e1f4e10411eb304a30f4df05d9183a0ad350d38ef784c8127fd3320cacc0"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-copt-cpu-pdlp.settlement.json",
+        "sha256": "805c09b1838b4b046be9a10d72e71d1f25657ed3785c198234f84e8acd4e0e50"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-copt-gpu-pdlp.settlement.json",
+        "sha256": "12743814e20af59a6a8ac2b54a415af783a6eacebfc6fbd6d8b86bfb3329ebe6"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-highs-cpu.settlement.json",
+        "sha256": "48595f4995dfbefa02f03743983264ba574d2ceefddcc320dd962751de4426fe"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-project-precision-fp64.settlement.json",
+        "sha256": "3e603091723e34986d72b0f5ed3f6527108bef6f1a26da6f3cb2a04745c1d919"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-project-tuned-fp64.settlement.json",
+        "sha256": "a34b771142a215c3eff78c3d508633f0e0137aa126cbaf1e9e20880476caa40d"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-2-copt-cpu-pdlp.settlement.json",
+        "sha256": "f40b017ce043111a25f9355ff962af2ae72c815501e0d7114d5d750e9beec79c"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-2-copt-gpu-pdlp.settlement.json",
+        "sha256": "cdf43cd2add5aa889ff67fe089b9ad957e1ea2e05473d5b498abf802fc948eaf"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-2-highs-cpu.settlement.json",
+        "sha256": "ad2fc80a4b753c601dcad127de6de661223154f2384643f7f0beff7589ed2a01"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-2-project-tuned-fp64.settlement.json",
+        "sha256": "4d4eac8b33cc00c8717ccd60e70f6f218942e20d77a13ba5792ec20a53a0e560"
+      }
+    },
+    {
+      "cpu_ns": 80000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v4/resources/compiled-schema-tests.settlement.json",
+        "sha256": "7bdb6680ad87193801c85a61a1c222251b5c81eba9823ec1eaccbca873dd7a5a"
+      }
+    },
+    {
+      "cpu_ns": 280000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "path": "artifacts/gpup-external-baseline-v4/resources/delivery-checks.settlement.json",
+        "sha256": "0ad397c5a4201a5ceaf122ffa9ff84c5c1caa9b185f1bacb15364770fccf5776"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "scientific_execution_closed": true,
+  "settlements": [
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-copt-cpu-default-0.settlement.json",
+      "sha256": "e924453e12c6d79a35cf08a8a50310bad2b693c5bf71fde643cd553cecd61493"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-copt-cpu-default-1.settlement.json",
+      "sha256": "38ef2b0665618da03925e922074349f319bfdca069a5accef150ca6b8b1993ea"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-copt-cpu-pdlp-0.settlement.json",
+      "sha256": "9c7209a74f35ea816dc561ceac48a17a4273b7f803d5906d0cd96ea5c0b44d2b"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-copt-cpu-pdlp-1.settlement.json",
+      "sha256": "5efca1a560e0b9f5d341fd9fb4a6f3ad654dd5557cbb7a1f5f17e4e8aaf19597"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-copt-gpu-pdlp-0.settlement.json",
+      "sha256": "f334d8bbe9591ac471c689ccca2392919f5250266dd2a73c5ae12e03b542c7af"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-copt-gpu-pdlp-1.settlement.json",
+      "sha256": "10b090ddf407e8189e1ae2bf1969af9c2a3d1d2275b19ca40e80e7837b60c709"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-cuopt-concurrent-0.settlement.json",
+      "sha256": "52099dc242e9d9401952d8e5fa7cbb145e818dd674055f2f89073304bc754c33"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-cuopt-pdlp-double-0.settlement.json",
+      "sha256": "851b074e8d5abcfc4ec28be9538d0f2e787e68c6f9f6f71caf82a89f20e0fae0"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-cuopt-pdlp-mixed-0.settlement.json",
+      "sha256": "19707316ede3d268d33de82e3616e4688b552f9aa0fe7d8dc89fcd85285e8d5a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-cuopt-pdlp-single-0.settlement.json",
+      "sha256": "9a4cb7b311aca0204f5f612850866f1680b56ea80dc4b9160deb1629ba4b4785"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-highs-cpu-0.settlement.json",
+      "sha256": "46eb84a2a5ad30a3f58bcfa7f0e2bd737f3d0b4d4d04e3c6f3977d6ca5767e66"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-project-precision-fp64-0.settlement.json",
+      "sha256": "2a63a467e1dde20242fa10d7d11c7ee49f2a63ce590f2c76071376919c00f01d"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-project-tuned-fp64-0.settlement.json",
+      "sha256": "80ba79bb8f71b6c17082d508f3525445ce5636373610e2f54574e78e74c1041b"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/admission-report-v1.settlement.json",
+      "sha256": "c46108983691dc09c14335faebfa5e038499b1bc499c8987189731e119d3fa37"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/checker-build-formatted.settlement.json",
+      "sha256": "96be442f472581d682194cec3ad18b8a95c1497156da602586fb8b7a29149920"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/checker-build-v1.settlement.json",
+      "sha256": "0a0b3729a0552b1d730186b0e474be6ca7000211d154a5f089433fca2f90f2de"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/checker-build-v2.settlement.json",
+      "sha256": "83904dfb51c3fe224b615f9caaffad3a5575f108fa6d56ae6be153801f07b337"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/checker-build-v3.settlement.json",
+      "sha256": "92bdd3c593d292d9f5e34130b61a50ae538a9efc08f986c512773162c4ee50aa"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/cuopt-context-probe.settlement.json",
+      "sha256": "6b7766ccfb65ecc2febf017c0881601e98a03c6cd5dab5221ca5a9869f8ce492"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/execution-tests-v1.settlement.json",
+      "sha256": "d8d6044e9d1695e78681e04a36776b73f8c9d113be11e1630a248bd390bbd19d"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/format-lint-v1.settlement.json",
+      "sha256": "a8d93aee02f0815e9a0fab3182f8a3a3b86140d2bc3530ba0d906a1b71acf202"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/freeze-v1.settlement.json",
+      "sha256": "85a068d33f1164a7ecf2a247aaa290a56a61c9962cf5df59ca63c6dbdb7524b0"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/project-device-probe.settlement.json",
+      "sha256": "2c2a73995e6dc76938718919b7e05ae2b23117795a27dab51dc8fffcbb768e24"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v1/resources/release-tests-v1.settlement.json",
+      "sha256": "4aba5f61c7a3be2dd5f2f466a99b7c65c1e29a98b64c5bc0b5dc9473b41901db"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/adapter-correction-tests.settlement.json",
+      "sha256": "b6d8b379f479c03950f18ca0e1c9c309460eaa2bba4e9bc0f21de8a531a3bffd"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-cuopt-concurrent-0.settlement.json",
+      "sha256": "146006d4f5551ead7d741a9d5a21689561e3ac6cdb7aa432baf2ef8f3b0ff0bb"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-cuopt-pdlp-double-0.settlement.json",
+      "sha256": "5c09a890901815790d4ca4aad73d3172fe875b3965150476a2df63e62d50c6b7"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-cuopt-pdlp-mixed-0.settlement.json",
+      "sha256": "40a0fde626d8668fa6229520e1fdbbc927498170fbea9df217e45d36cea01e6a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-cuopt-pdlp-single-0.settlement.json",
+      "sha256": "04d37846b952289993baac503c8f70b0c7cb3de096114b5e7270c5ec0bd58e81"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-highs-cpu-0.settlement.json",
+      "sha256": "c9d8c75c3d02c94f0e5b77b3f067d7c928fad8734ddfcd929e489092912aeef4"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-highs-cpu-1.settlement.json",
+      "sha256": "179be80357d31a5041c1d69b7defa2c4b59ebcf04538da7e33dd2dfd044a75c7"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-project-precision-fp64-0.settlement.json",
+      "sha256": "ced9cb2591d7f0d834c648da735ef86508096afb76342bcebdf45c7eececfb08"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-project-precision-fp64-1.settlement.json",
+      "sha256": "08f3942cc93a8f75fe85df6c2e9984723b65f6be5137fd7ab93abd45af6706ef"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-project-tuned-fp64-0.settlement.json",
+      "sha256": "a91b21d9dbd1d18312dc6f211ded944c59158bdd00233e1d82d1bceb17dcb2cb"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/admission-project-tuned-fp64-1.settlement.json",
+      "sha256": "f20ab760ff37bd960d3a0aba551d3a9c5e937f1057300e0145e226f7705db9dc"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/corrected-freeze.settlement.json",
+      "sha256": "3885409688ec05ec782b4725fafadcc687c2a0b2120d97d9cc33a128ca676121"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/project-export-correction.settlement.json",
+      "sha256": "6884e162b07cffedc05eda8eba4a8a90785eeb9b176d68e32b1860c342f66e18"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-block-report.settlement.json",
+      "sha256": "82546500efbb4e59c38e59be70e13754ad38d4f2614121e1f43128828112f068"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-0-copt-cpu-default.settlement.json",
+      "sha256": "79ba46804371fa7f2748506e8134ad1de24483a5a40d5ce125d47d302340dbdb"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-0-copt-cpu-pdlp.settlement.json",
+      "sha256": "c5e651f195b68c10ebf69395ecb7fb44cc51046013218f496ca8b902cb114fcc"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-0-copt-gpu-pdlp.settlement.json",
+      "sha256": "3af92ed07ac1fc34a89608a8a0d529ae3d0d5c75f3afcc95c830bb52bcf2f14a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-0-highs-cpu.settlement.json",
+      "sha256": "226099a8dc71bbf702272679a8ae9910c7bfb10307f3b239498c10508a764452"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-0-project-precision-fp64.settlement.json",
+      "sha256": "6bd22a8f462dfb28f4ab6213c3180f74cd4ded8d7ffd84170df60494db77204e"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-0-project-tuned-fp64.settlement.json",
+      "sha256": "94f18eb9af54c33fc338d7c84c716a08726d6bd61d0747575b4ecc29a3e41fa2"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-1-copt-cpu-default.settlement.json",
+      "sha256": "ec943dd3006e19ad5e0cfde7f1e6236c7151a16ad5b4f7d676616a688b7d84c2"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-1-copt-cpu-pdlp.settlement.json",
+      "sha256": "8de99c73d80cc153f48a60d702d0f2397cb38d2808c5eaa3e78aa54e2b379e86"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-1-copt-gpu-pdlp.settlement.json",
+      "sha256": "3c00e07f2d6a419750c7e4e28bedc1bfac96b26a755b662c67f87393ce13f0b6"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-1-highs-cpu.settlement.json",
+      "sha256": "75af5ee501255a330e7b8b7012d43caf523ac292ae6e525830182f88f8fcb461"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-1-project-precision-fp64.settlement.json",
+      "sha256": "e619f6c06e9a2fc7f1c021a08fc530fcc1de33031ddae222dc428c3fef3dfbf6"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-1-project-tuned-fp64.settlement.json",
+      "sha256": "0a5bcd6bc12e7782012298f949c2599a8732ac6a601970a77cdeb93ad54e11d7"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-2-copt-cpu-default.settlement.json",
+      "sha256": "7d125c232794b90f630d231d6c88a0b3d7dc4bbfcc32e9d986ddf84c5b681a0d"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-2-copt-cpu-pdlp.settlement.json",
+      "sha256": "ef29b16ddc475ef051a2979447ef33f201bf778d91904f835f8c8e3515be3975"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-2-copt-gpu-pdlp.settlement.json",
+      "sha256": "019896fbc526200db027847844c5ff33a527bb5d7b28674d789d4bf6ae597d8f"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-2-highs-cpu.settlement.json",
+      "sha256": "9b523f42245857164a210a1b6da419d1d3f9e774f7faeeee5f933b048eaf813a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-2-project-precision-fp64.settlement.json",
+      "sha256": "80eadeb49ea6e2367b670d7205a5e86bc2db500bcb68c1600a9000a1baf7251a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-dense_block-1024-2-project-tuned-fp64.settlement.json",
+      "sha256": "c889b72315acda8e705558a895b21dda736854cfed2daa61b155b7fd14be241f"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-0-copt-cpu-default.settlement.json",
+      "sha256": "780a18c326948937745ad6d9c8d7dcdb4a1f8ad405e2f8a40dbc3422b19e3f15"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-0-copt-cpu-pdlp.settlement.json",
+      "sha256": "b0d1abd1649deb23d390fdf8870c5f80f533e2d696bc7cb9ea95d61bd22e0d24"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-0-copt-gpu-pdlp.settlement.json",
+      "sha256": "31f15f6e40d0511d735c2166d53a072b519c32fd4c0be531bfe913ecef85ad01"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-0-highs-cpu.settlement.json",
+      "sha256": "03283893a5d55fc01f4358bc62116e34606ece1e84b52a3a05ca9b9d3c6af393"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-0-project-precision-fp64.settlement.json",
+      "sha256": "7eac8634ab2923344dc7450af3e1154553f16bc70c17c864e8918acc71ec81c9"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-0-project-tuned-fp64.settlement.json",
+      "sha256": "0d3db336c1a819f1cb52a05df542829b02ca5e21916a5abc9f11873df984c24e"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-1-copt-cpu-default.settlement.json",
+      "sha256": "2ce193f10af12c916c0537a5e1c8c0bc29ff525443a1abffeac00eca80bfd09e"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-1-copt-cpu-pdlp.settlement.json",
+      "sha256": "8ee482b93cc134461dc6c7c8d937878a2ac73b0d3b3ac84bf3377dec7c44b6b6"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-1-copt-gpu-pdlp.settlement.json",
+      "sha256": "731d32d587c06bfed54703812a51adddad6d6e14598e9acd9875214cfdb85f99"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-1-highs-cpu.settlement.json",
+      "sha256": "9f3b03347366bb6ff8f31d72a34967281d942c123cb0db3eadeb31e3d24f9a92"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-1-project-precision-fp64.settlement.json",
+      "sha256": "7157555a2b361bffe9a9a739894518db9c91eb5eceaa08d74360ee739553d087"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-1-project-tuned-fp64.settlement.json",
+      "sha256": "2a85a99fd03582a59c5ab265ce74a8eebc737ff555243680a77ff8eac0e1da9f"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-2-copt-cpu-default.settlement.json",
+      "sha256": "7fac2176e4ccf9d00953f9be29c34107a9979132e7ba96da8d1d1a583ea8a7f3"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-2-copt-cpu-pdlp.settlement.json",
+      "sha256": "5f8a73586b5411f5dd6a37d6b91dfaa38eb6c20cb723ee8f76072725dbaf04a4"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-2-copt-gpu-pdlp.settlement.json",
+      "sha256": "4b72a4cb02b34b9cee630de9f93e942caad0f02a0ad90341f9903a690cf6786c"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-2-highs-cpu.settlement.json",
+      "sha256": "b109dabafbffa3f2d6737f532b3df092645691445c9021d3526f08b9e6f4529c"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-2-project-precision-fp64.settlement.json",
+      "sha256": "bac46bcd44b50d447415cad05ef68f88ac4d49ac770e7670bbe87ec6416bbff7"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-irregular-2048-2-project-tuned-fp64.settlement.json",
+      "sha256": "127ff6d2c71cee716536fbcc5382c8f27d396a236c3d76160a84abc8fd65a087"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-0-copt-cpu-default.settlement.json",
+      "sha256": "c7de56283298a6c9b242ef3028d032f6bcd974e009572347c284ca3a029e85d2"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-0-copt-cpu-pdlp.settlement.json",
+      "sha256": "746be6b8ca27dcbf02d23f6f0787473528fed6a490c2e9a1fa3587700ba070d8"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-0-copt-gpu-pdlp.settlement.json",
+      "sha256": "3834734cd340b8749af71534159b9379e3456f2fc53c218abd3ff6b5021c98f8"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-0-highs-cpu.settlement.json",
+      "sha256": "d4cf1ca097383c5825f1c1427c234dc86b86f2ba26fc641003b883ac90bbeb1a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-0-project-precision-fp64.settlement.json",
+      "sha256": "1543b943ce4f380d3facbfc6e3e1200db27d9f6c8b68cf6ae03b0a8cf40ff7f1"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-0-project-tuned-fp64.settlement.json",
+      "sha256": "266cfaf5bb96e1a7852795d224a091529afed105d58d33fef8fd16fa733335a6"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-1-copt-cpu-default.settlement.json",
+      "sha256": "147def25030c66ae4b6a1b7b272e8bd3ab945a96b974b3ba26bd7ed9ec152685"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-1-copt-cpu-pdlp.settlement.json",
+      "sha256": "fea8437ebd748a3a297af4593d6e4893b629e4e8812cc26f162e1ee5b52421b0"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-1-copt-gpu-pdlp.settlement.json",
+      "sha256": "eaf275a5349d6c7897d19da18986324c17509389fee1b753cdb0ae841941465b"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-1-highs-cpu.settlement.json",
+      "sha256": "da6a9bf7fc82c74e60d3198b10d56c5f0d8fd6ac5a052f7c1e6f4c1ea5b55498"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-1-project-precision-fp64.settlement.json",
+      "sha256": "71a63fa47641ddcbf49a3ddd850a162e8c05d0057bd0baeb92c4e8a500d6bb88"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-1-project-tuned-fp64.settlement.json",
+      "sha256": "6b1ef402a095e7ed52c539639df9c7a8b31252124e566ce76c96543d6835f4d0"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-2-copt-cpu-default.settlement.json",
+      "sha256": "110cdcfa3d69c9eb7057ef8e1ca90f92b794886a04a8b612f2b87dfdba5480e5"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-2-copt-cpu-pdlp.settlement.json",
+      "sha256": "a8a98b5daf1aea3e929bac25ed50b455586c184fe9731c560c8f18690263a6cf"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-2-copt-gpu-pdlp.settlement.json",
+      "sha256": "27325e577a73b784d584c5c881364134edafffb9c6cc7ee2140291034a92c785"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-2-highs-cpu.settlement.json",
+      "sha256": "53bc07f451930e6e0f123fd10b240f9897094ced1f0384e09665f32470378387"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-2-project-precision-fp64.settlement.json",
+      "sha256": "9a6cd1ca0af0ff55a99f6728bb6e9503043587e19ced386b2d548ff7b018aced"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scaling-256-2-project-tuned-fp64.settlement.json",
+      "sha256": "83132ea440e30d4cc9906b828c000eeb950b52ad6fd9fa783b4134109b00f108"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-0-copt-cpu-default.settlement.json",
+      "sha256": "c5797a7a14e3e6d1ba0682156703d6946ad79197eacf9948bce12ebca9e92b5a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-0-copt-cpu-pdlp.settlement.json",
+      "sha256": "67812a80da6cbd1a2056a7131fb4f88f26fa90f1ae57125f40be97464e14d2bf"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-0-copt-gpu-pdlp.settlement.json",
+      "sha256": "043c2b41c84a693b6fbe48bc6159d070f0f6636115c842932f47427833e30685"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-0-highs-cpu.settlement.json",
+      "sha256": "afdbc0bd4feac135659e1c32e82cc425c5f74b5519c74f522ca85d3bd3dc2247"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-0-project-precision-fp64.settlement.json",
+      "sha256": "fe03c552d04277ce86416f0472b58b1f0a38884e1eacf726b9f3dff2fa09821c"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-0-project-tuned-fp64.settlement.json",
+      "sha256": "4c3803e90990b45bc1649a4fe20e2db536ee37d6a939bd19561e8c0dc0ebab49"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-1-copt-cpu-default.settlement.json",
+      "sha256": "bf0ecbc2cc47d76966ec224c7c9ce286791adbb1852c5ccd530223ec352e6b2b"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-1-copt-cpu-pdlp.settlement.json",
+      "sha256": "04efe5988980f2cb8bb86ef9d1e6b878a17fca76eb64c203d670d2b9f000ca6c"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-1-copt-gpu-pdlp.settlement.json",
+      "sha256": "32960c2298b582ef04fe17d61a572b6062cef587f9c7d5e785d7a9bdeef10801"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-1-highs-cpu.settlement.json",
+      "sha256": "4ff40bd01a329bb841f1d84b0065f59251fea5abdeb24768b4b2c8d60c899dd8"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-1-project-precision-fp64.settlement.json",
+      "sha256": "57782135de81d2bdb03a184df68483f0b17edf574147085d26cc937df649d382"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-1-project-tuned-fp64.settlement.json",
+      "sha256": "3d7a613f59ae6e0d08490b0a016834a448010f2d9913d99a32d64323c1c9622f"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-2-copt-cpu-default.settlement.json",
+      "sha256": "a836e7c501ddafdb7501ff832f7da7a51bc7e01bdacc189972242b9c30cbb25e"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-2-copt-cpu-pdlp.settlement.json",
+      "sha256": "6557b768b9eba0fcd2e55d3817e7a4244587cdbf8ed8f8952f600feb3e9a5873"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-2-copt-gpu-pdlp.settlement.json",
+      "sha256": "0df71020fd4146d63a823c51c118f008685983be174c7e674db2b0f45ac76b0b"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-2-highs-cpu.settlement.json",
+      "sha256": "57d98e4cb8049e9eb157e9b61fe516963939f9e0f8e3d7a3fea6745fbf356d1a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-2-project-precision-fp64.settlement.json",
+      "sha256": "174332db8ba1f741e42803337bde1ef6a3d39dcb892dc3c436aabb1da4416523"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-scheduling-20x5-2-project-tuned-fp64.settlement.json",
+      "sha256": "c7674d60c929f7242039408083a1d15504fdaab4fc60fad1c5eb06652e7f4384"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-0-copt-cpu-default.settlement.json",
+      "sha256": "f1e473775304d60b182a7931e8bd4ce38d21726ed49a1c506779bc930c689031"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-0-copt-cpu-pdlp.settlement.json",
+      "sha256": "b2da19bf9c96bf4ee5d7b0057c20aeea3c44e11289cf364b433138636b4c2a93"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-0-copt-gpu-pdlp.settlement.json",
+      "sha256": "4154b24de9524b490cb989f0bc19b48861268f867c6005a508b68a966ab95106"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-0-highs-cpu.settlement.json",
+      "sha256": "d17b24eb9582f8f0b6c1a0114cc68439a4dfb00522e5edcfe6dceb7404f207f0"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-0-project-precision-fp64.settlement.json",
+      "sha256": "6a19c06bdeb1ede743ce1577b1472a6bc270c2aed7c38aa136901ddae85227bd"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-0-project-tuned-fp64.settlement.json",
+      "sha256": "6e7bc5a16547a3664fd0b101603835d9673fea8c2777ce26d0b386809d66148b"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-1-copt-cpu-default.settlement.json",
+      "sha256": "2d1718aa4bfdd4c16e4f43a93c6faae94a5fdd4bfea05a45a58f156db3848da4"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-1-copt-cpu-pdlp.settlement.json",
+      "sha256": "240ce716ed4e5868d9c654dddb6533f17d36cb294c00e7a26aee102afb5dd2b1"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-1-copt-gpu-pdlp.settlement.json",
+      "sha256": "589a39543912ddb33b16dd4d4dee1c10fd923e93d5a19da0822d89bbdb2c6a81"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-1-highs-cpu.settlement.json",
+      "sha256": "a6cf5dc4269da01676a4b430226389a0bdd6071f905a60ec9d83047ab2d21a11"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-1-project-precision-fp64.settlement.json",
+      "sha256": "67a20b1e83223f57ec4fb82d7aed601de3d01cf6de7b0b01ab34dfad0c6a4265"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-1-project-tuned-fp64.settlement.json",
+      "sha256": "529cc320e4317c358b983618d26c6f56fd642e183b4163a6dae61529e09ac359"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-2-copt-cpu-default.settlement.json",
+      "sha256": "0b928e3aa6c96fde14f524eef194c704d387c535d7f96302f88c52c23ae5d596"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-2-copt-cpu-pdlp.settlement.json",
+      "sha256": "aeddd37d708bd2fe5170472a9b15b7b519f71291aec43a3b658fce37ab2e4c4e"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-2-copt-gpu-pdlp.settlement.json",
+      "sha256": "a7a1e86dabd8c0ca6f3420391e21336e13b4c188439ac37ad670826a0a6d8737"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-2-highs-cpu.settlement.json",
+      "sha256": "02ab0e38adbb6545c87b72fe5540829e5128e23fd70410f0c2c0dec70ec83b21"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-2-project-precision-fp64.settlement.json",
+      "sha256": "b7f715dbbbb93b59c3075939f199dd3a91ea2b9ba1a5af64e6126b33f285feb5"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-development-small-4-2-project-tuned-fp64.settlement.json",
+      "sha256": "a5ed89de69472c1bb13ac37f97b90f7f356e57eca7d5c786af373f04b000b37a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v2/resources/screening-gpup-extension-dense_block-65536-0-highs-cpu.settlement.json",
+      "sha256": "78b8b082baad29ffaf441efa9085390b4a303a2ca784683f1895da6349f7fb95"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/artifact-transport-tests.settlement.json",
+      "sha256": "784a85d0ce6df547fc3f3d6ff4671b3dce281c1b28296a708a4b60ff9f23fa4a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-copt-cpu-default.settlement.json",
+      "sha256": "4349caef04eb17ba5a786b759b82f3c8074f912deb85a4f2bace4ab2ce6d0a71"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-copt-cpu-pdlp.settlement.json",
+      "sha256": "d813f2456eaef3b167351a49f28c5317423132165a9b27a0f041b89335dc656b"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-copt-gpu-pdlp.settlement.json",
+      "sha256": "75d37ed24b2b8ddf032692b50594aa0bbe52ac6fe2f9f26c0637e2b7f862f004"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-highs-cpu.settlement.json",
+      "sha256": "daf4835c382cdb983e3e0a6c8501f187e90de045764ea60f567c241623b9fb71"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-project-precision-fp64.settlement.json",
+      "sha256": "ef0200f0bf1e077dcadfd2e4ddb3afb1e9efad459f4d3de90e8f888ca3fe03be"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-0-project-tuned-fp64.settlement.json",
+      "sha256": "ba1e99f3ade8285a1a1c55716c97725a6a86ea75cdd28777bac7a053f3f35b69"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-copt-cpu-default.settlement.json",
+      "sha256": "0603e1f4e10411eb304a30f4df05d9183a0ad350d38ef784c8127fd3320cacc0"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-copt-cpu-pdlp.settlement.json",
+      "sha256": "805c09b1838b4b046be9a10d72e71d1f25657ed3785c198234f84e8acd4e0e50"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-copt-gpu-pdlp.settlement.json",
+      "sha256": "12743814e20af59a6a8ac2b54a415af783a6eacebfc6fbd6d8b86bfb3329ebe6"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-highs-cpu.settlement.json",
+      "sha256": "48595f4995dfbefa02f03743983264ba574d2ceefddcc320dd962751de4426fe"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-project-precision-fp64.settlement.json",
+      "sha256": "3e603091723e34986d72b0f5ed3f6527108bef6f1a26da6f3cb2a04745c1d919"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-1-project-tuned-fp64.settlement.json",
+      "sha256": "a34b771142a215c3eff78c3d508633f0e0137aa126cbaf1e9e20880476caa40d"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-2-copt-cpu-pdlp.settlement.json",
+      "sha256": "f40b017ce043111a25f9355ff962af2ae72c815501e0d7114d5d750e9beec79c"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-2-copt-gpu-pdlp.settlement.json",
+      "sha256": "cdf43cd2add5aa889ff67fe089b9ad957e1ea2e05473d5b498abf802fc948eaf"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-2-highs-cpu.settlement.json",
+      "sha256": "ad2fc80a4b753c601dcad127de6de661223154f2384643f7f0beff7589ed2a01"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/screening-gpup-extension-dense_block-65536-2-project-tuned-fp64.settlement.json",
+      "sha256": "4d4eac8b33cc00c8717ccd60e70f6f218942e20d77a13ba5792ec20a53a0e560"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v3/resources/transport-freeze.settlement.json",
+      "sha256": "5fb7630ccd9ad5c6268c5818089074504d7de85c6a726bde1a9f3d15c514bac9"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/buffered-checker-build.settlement.json",
+      "sha256": "a125a555f4f5cf6f29771c82af621f1facaa3e14464ec320a6add5a7f3d341b8"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/buffered-checker-executable.settlement.json",
+      "sha256": "e0ab9e1ed41df945eccc9ae40a18952e8a0fc72d515914c576df01573ca43969"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/buffered-checker-final-build.settlement.json",
+      "sha256": "7be8461c2e92bbc4dac9cc6fa221982d8b311b3f96c97d20c9ae7888e3761d77"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/compiled-large-conversion.settlement.json",
+      "sha256": "434977948a6fa0691a640421230942b88ab61bd9ababf3929ea4b4783162bba6"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/compiled-schema-const-correction.settlement.json",
+      "sha256": "911bbb045813113b356a6b294e0c4c2d6a4a66a98238d7a4b81a90dbf4f8f424"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/compiled-schema-tests.settlement.json",
+      "sha256": "7bdb6680ad87193801c85a61a1c222251b5c81eba9823ec1eaccbca873dd7a5a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/cpu-transport-freeze.settlement.json",
+      "sha256": "497b5d8e749c747f96fb4c1e09a7348fed94fa0f0753a75f719ab080d1a1b5ef"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/delivery-checks-final.settlement.json",
+      "sha256": "c8b5419f8b48168151dd04484348f411b6bf17b34ca6841bc8ee506d173cbe1c"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/delivery-checks.settlement.json",
+      "sha256": "0ad397c5a4201a5ceaf122ffa9ff84c5c1caa9b185f1bacb15364770fccf5776"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/delivery-summary.settlement.json",
+      "sha256": "1f01305faf6ec16439ca9e6b58981244e5c3598aa54915a0b71f33bc03d3ddc9"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/documentation-final.settlement.json",
+      "sha256": "56f1f1582b9f62ef402448c55e004c28d26d1deba6db16648c3623a09aadbc14"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/fast-validator-download.settlement.json",
+      "sha256": "881a9527725e15c0444b5c2da9ef9b92d6ccc6ebdeaa264aef3a9b33306dba29"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/fast-validator-install.settlement.json",
+      "sha256": "137212103ed723eecb7c8836abc436bb2cf25e7bfd8fd167aa9b3108dc734f50"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/final-report.settlement.json",
+      "sha256": "f3f1cc31d98c26de80950f0bf1e42bf97e3e64d4e272714a5e07be7dce58f2ff"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/prior-transport-report.settlement.json",
+      "sha256": "48a0ce1c9de80ba670e25356a182cc19495ec38456cad73a578ee96a1a193173"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-0-copt-cpu-default.settlement.json",
+      "sha256": "71a68435081346d566f88ace65c0ba96a2d341cdc6cb75452ecf46cbe6d01b6d"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-0-copt-cpu-pdlp.settlement.json",
+      "sha256": "377a39d8fff42358bfa85180213b578efe23e7993c3a12d6e650862e9c631012"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-0-copt-gpu-pdlp.settlement.json",
+      "sha256": "df3a9a48b326ada7b1232dbd706d7af9dab6684447f88890b006ce20991d0b3d"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-0-highs-cpu.settlement.json",
+      "sha256": "727afb4d6b5fb7b11a3ff0d0f141edf51604a43ed713b7abb8ac0ed3f2986303"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-0-project-precision-fp64.settlement.json",
+      "sha256": "10e3444e2c7cc678ef65804838c8b780d05bc8d41f7016e7f4294802e5462358"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-0-project-tuned-fp64.settlement.json",
+      "sha256": "bfe7a6a1a6c683ab42d1faaa03476e7e0fd9803aea1dc66065099c4a227602e8"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-1-copt-cpu-default.settlement.json",
+      "sha256": "83137a1f804729544610e2e91cab44949defa0aec01754349439115362ce4aa0"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-1-copt-cpu-pdlp.settlement.json",
+      "sha256": "773e46bc99031fa823689c5734ea48d6f635ee026ddc7efb322e4c15c711dab8"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-1-copt-gpu-pdlp.settlement.json",
+      "sha256": "58cbd500778d1486c60606a21f0259858fae756b5b6a5650a13886c33242042d"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-1-highs-cpu.settlement.json",
+      "sha256": "a998aadae45b75f81f6465e6fd70f0c0b74c513dabaefc08d3c0b6e15b0c119c"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-1-project-precision-fp64.settlement.json",
+      "sha256": "4e66ec585d13f99484023b1d109b201be05ee7b8a0bb705b11b8e993825668ab"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-1-project-tuned-fp64.settlement.json",
+      "sha256": "f09e2f72a9e8143ec25ccc3716e848cf5fd0502aab53ae80d20b9593971d6227"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-2-copt-cpu-default.settlement.json",
+      "sha256": "ed0687097c81ca9faf65861540e654339fe824fd320f70410f84d5d51b780c76"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-2-copt-cpu-pdlp.settlement.json",
+      "sha256": "ae79f4497cb98ba2b6f2dca4d739f025bee6912e851a271ba195a6d84bc12c61"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-2-copt-gpu-pdlp.settlement.json",
+      "sha256": "379af5d906d0069d31fb1686202822d46755679151b728513fa5d76687cfb194"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-2-highs-cpu.settlement.json",
+      "sha256": "be7a8750a78bbb8a96de6e1c29662640df66f82caaeefac52cd8829b123c085a"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-2-project-precision-fp64.settlement.json",
+      "sha256": "be3180152139e703a964c82732f291dc4d6f02294f5d418c68a017edcd189f63"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-dense_block-65536-2-project-tuned-fp64.settlement.json",
+      "sha256": "9989d52cd95c628ccf0348e7286b7c563551a15cfdfbfeb209e0126e4299c08f"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-0-copt-cpu-default.settlement.json",
+      "sha256": "bc510975080af10769763710b4700a0b7ff13f570f5dac41b3286572253a91ed"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-0-copt-cpu-pdlp.settlement.json",
+      "sha256": "5677255d2f79d8e509548f73ffcf949141a3f5ac6f27fe7f652f7128ed1eead5"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-0-copt-gpu-pdlp.settlement.json",
+      "sha256": "5f7c319569f0e75646f947f94c0215bc5c940934bf92032b70691aa4dd383b1e"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-0-highs-cpu.settlement.json",
+      "sha256": "dd49e6bf993dfc21595454c9bdb7a3c9f65e428dfb66c7ffddacfef827493081"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-0-project-precision-fp64.settlement.json",
+      "sha256": "e9b378ba9ba32fd489778c13d6d48caf962ef0a2db9da115208bfebacf09b24b"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-0-project-tuned-fp64.settlement.json",
+      "sha256": "70f738b23308f99dccbfedd50dca9260a28a9104590fce0892a5cbe21edf179b"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-1-copt-cpu-default.settlement.json",
+      "sha256": "0b087dd88e7cab0955f8ff797f7413f66d05f83ad6d793582cedc4c356dbc571"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-1-copt-cpu-pdlp.settlement.json",
+      "sha256": "76d253b6c8192c276b984474e3952f5dc8ad6bc2bcae7381e71fd9374b38b532"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-1-copt-gpu-pdlp.settlement.json",
+      "sha256": "c5ed1d9130f9e04f69602e039503ac2ed997e449219ebbff6ae6d1677aede552"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-1-highs-cpu.settlement.json",
+      "sha256": "57a677517452e166414dd0923f917e654bf426164279d22b7055296d10069ad5"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-1-project-precision-fp64.settlement.json",
+      "sha256": "4a19dbbf530b8801765cdce1cc12604eb2fe827803ec142d040bdcbbf26fd190"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-1-project-tuned-fp64.settlement.json",
+      "sha256": "2ecb8439bf612616c11e96ff34644ff6d97b5716a0e50d9886e2d12f8d720c57"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-2-copt-cpu-default.settlement.json",
+      "sha256": "1f69a81e751f3b511b6b4662ec7aa094519a0b586cb7b4118408577fbc904249"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-2-copt-cpu-pdlp.settlement.json",
+      "sha256": "c83d8574785b28e2c2636189e722b10e2b034465970a3b8b4e361d7d95bc4ffd"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v4/resources/screening-gpup-extension-irregular-32768-2-highs-cpu.settlement.json",
+      "sha256": "2b65431cf569fc582fde0b645d0535667591171aad5102d16600ba784cb255fd"
+    }
+  ],
+  "status": "closed",
+  "task": "GPUP-BASELINE"
+}

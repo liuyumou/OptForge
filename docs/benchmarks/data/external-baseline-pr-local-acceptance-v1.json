@@ -1,0 +1,76 @@
+{
+  "base_commit": "bc2530cfb39a025d0b06428a1cee9f4d13472c4f",
+  "clean_checkout_without_study_artifacts": true,
+  "credential_signature_matches": [],
+  "date": "2026-11-10",
+  "documentation_pages": 187,
+  "exact_frozen_eof_exceptions": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-warp32-deadline-recovery-gpup8.md",
+      "sha256": "1b431cbaa12960761721b51d4bc77814d69d1a2f042e0c6b16e98c147d0f7096"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-warp32-inventory-admission-gpup8.md",
+      "sha256": "b57875b3c6086295940539fb79a36344b64ba3e0a8f0e7d14b15b2f5bc8f96a8"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-warp32-inventory-device-gpup8.md",
+      "sha256": "b94666380324bf884a2ef9ccbc7079a5fa2c650db4f92d50d48454e7b9caa08b"
+    },
+    {
+      "path": "tools/lp_baseline_adapters_v5.py",
+      "sha256": "455dfd7fabf3298e1600a5991cc91d0e8a48b27cc144aff90284bc953d59e34d"
+    }
+  ],
+  "full_ci": "Required on the PR head before merge: cpu (bash tools/check.sh), docs, smoke. Not replaced by this scoped local receipt.",
+  "gpu_seconds": 0,
+  "historical_allocations_reopened": false,
+  "kind": "lp-baseline-pr-local-acceptance",
+  "local_cpu_ceiling_seconds": 6000,
+  "local_cpu_charged_ns": 394103558992,
+  "locked_rust_dependencies_match_workspace": true,
+  "native_test_dependency": "Existing pinned HiGHS installation and workspace CLI used for deterministic CPU fixture generation; CI builds both from source before the same gate.",
+  "new_scientific_task_started": false,
+  "other_diff_hygiene": true,
+  "python_tests": 54,
+  "schema_version": 1,
+  "scientific_parent": "396bd0e2ea095f1d038dfa862bb31f29a61e0d68",
+  "setup_failures": [
+    {
+      "log": {
+        "path": "artifacts/gpup-baseline-pr-integration/clean-baseline-tests.log",
+        "sha256": "edbe47204943cdd0e2c73b656876576a393789ba9a090b2cef9ce504500c3189"
+      },
+      "reason": "Optional /usr/bin/time unavailable; no test started."
+    },
+    {
+      "log": {
+        "path": "artifacts/gpup-baseline-pr-integration/clean-baseline-tests-v2.log",
+        "sha256": "05fd85d09da1210ec4a067cebf1162d181fce44bda8c2e8c540d47495f328cb4"
+      },
+      "reason": "Fresh checkout had no workspace CLI for fixture generation; no test started.",
+      "receipt": {
+        "path": "artifacts/gpup-baseline-pr-integration/clean-baseline-tests-v2.json",
+        "sha256": "8487a40752d6c13b8066204a4ce910fb75dc5a92f6c46dcfd7df87bb02ef52fe"
+      }
+    }
+  ],
+  "source_bridge": {
+    "path": "docs/benchmarks/data/external-baseline-pr-source-bridge-v1.json",
+    "sha256": "97ba52639b9fa4a09d7ba2c6a78a779de9e0d06c148dc208e859e4a8b3bacfe6"
+  },
+  "standalone_rust_tests": 1,
+  "status": "passed",
+  "test_log": {
+    "path": "artifacts/gpup-baseline-pr-integration/clean-baseline-tests-v3.log",
+    "sha256": "40954546be358bb0f8ff135d1eabd3a731fde8113d4a5e7c1dbf53c4c5526381"
+  },
+  "test_receipt": {
+    "path": "artifacts/gpup-baseline-pr-integration/clean-baseline-tests-v3.json",
+    "sha256": "01f5af32a7101eb8761aaa923fc6118d73b5d79c0925108d09ec6838356a642e"
+  }
+}

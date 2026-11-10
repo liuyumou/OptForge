@@ -1,0 +1,454 @@
+{
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 17111,
+  "confidence": 0.95,
+  "configurations": [
+    {
+      "algorithm": "tuned-pdhg",
+      "gpu": true,
+      "id": "project-tuned-fp64",
+      "parameters": {
+        "absolute": 1e-09,
+        "crossover": "none",
+        "execution_config": "benchmarks/configs/lp-convergence-v1.json#tuned-fp64",
+        "iteration_limit": 50000,
+        "presolve": "none",
+        "relative": 1e-09,
+        "scaling": "retained_tuned",
+        "seed": 17,
+        "threads": 4,
+        "time_limit_ms": 40000
+      },
+      "precision": "fp64",
+      "solver": "project",
+      "version": "source_snapshot"
+    },
+    {
+      "algorithm": "tuned-pdhg",
+      "gpu": true,
+      "id": "project-precision-fp64",
+      "parameters": {
+        "absolute": 1e-09,
+        "crossover": "none",
+        "execution_config": "benchmarks/configs/lp-convergence-v1.json#precision-fp64",
+        "iteration_limit": 50000,
+        "presolve": "none",
+        "relative": 1e-09,
+        "scaling": "retained_tuned",
+        "seed": 17,
+        "threads": 4,
+        "time_limit_ms": 40000
+      },
+      "precision": "fp64",
+      "solver": "project",
+      "version": "source_snapshot"
+    },
+    {
+      "algorithm": "default-lp",
+      "gpu": false,
+      "id": "highs-cpu",
+      "parameters": {
+        "absolute": 1e-09,
+        "crossover": "native_default",
+        "presolve": "native_default",
+        "relative": 1e-09,
+        "seed": 17,
+        "threads": 4,
+        "time_limit_ms": 40000
+      },
+      "precision": "native",
+      "solver": "highs",
+      "version": "1.11.0"
+    },
+    {
+      "algorithm": "pdlp",
+      "gpu": true,
+      "id": "cuopt-pdlp-double",
+      "parameters": {
+        "absolute_dual_tolerance": 1e-09,
+        "absolute_gap_tolerance": 1e-09,
+        "absolute_primal_tolerance": 1e-09,
+        "crossover": false,
+        "dual_postsolve": true,
+        "iteration_limit": 50000,
+        "method": 1,
+        "num_cpu_threads": 4,
+        "pdlp_precision": 1,
+        "pdlp_solver_mode": 4,
+        "presolve": 0,
+        "random_seed": 17,
+        "relative_dual_tolerance": 1e-09,
+        "relative_gap_tolerance": 1e-09,
+        "relative_primal_tolerance": 1e-09,
+        "time_limit": 40
+      },
+      "precision": "double",
+      "solver": "cuopt",
+      "version": "26.10.0"
+    },
+    {
+      "algorithm": "pdlp",
+      "gpu": true,
+      "id": "cuopt-pdlp-mixed",
+      "parameters": {
+        "absolute_dual_tolerance": 1e-09,
+        "absolute_gap_tolerance": 1e-09,
+        "absolute_primal_tolerance": 1e-09,
+        "crossover": false,
+        "dual_postsolve": true,
+        "iteration_limit": 50000,
+        "method": 1,
+        "num_cpu_threads": 4,
+        "pdlp_precision": 2,
+        "pdlp_solver_mode": 4,
+        "presolve": 0,
+        "random_seed": 17,
+        "relative_dual_tolerance": 1e-09,
+        "relative_gap_tolerance": 1e-09,
+        "relative_primal_tolerance": 1e-09,
+        "time_limit": 40
+      },
+      "precision": "mixed",
+      "solver": "cuopt",
+      "version": "26.10.0"
+    },
+    {
+      "algorithm": "pdlp",
+      "gpu": true,
+      "id": "cuopt-pdlp-single",
+      "parameters": {
+        "absolute_dual_tolerance": 1e-09,
+        "absolute_gap_tolerance": 1e-09,
+        "absolute_primal_tolerance": 1e-09,
+        "crossover": false,
+        "dual_postsolve": true,
+        "iteration_limit": 50000,
+        "method": 1,
+        "num_cpu_threads": 4,
+        "pdlp_precision": 0,
+        "pdlp_solver_mode": 4,
+        "presolve": 0,
+        "random_seed": 17,
+        "relative_dual_tolerance": 1e-09,
+        "relative_gap_tolerance": 1e-09,
+        "relative_primal_tolerance": 1e-09,
+        "time_limit": 40
+      },
+      "precision": "single",
+      "solver": "cuopt",
+      "version": "26.10.0"
+    },
+    {
+      "algorithm": "pdlp",
+      "gpu": false,
+      "id": "copt-cpu-pdlp",
+      "parameters": {
+        "Crossover": 0,
+        "DualTol": 1e-09,
+        "FeasTol": 1e-09,
+        "GPUDevice": 0,
+        "GPUMode": 0,
+        "LpMethod": 6,
+        "PDLPTol": 1e-09,
+        "Presolve": 0,
+        "Scaling": -1,
+        "Threads": 4,
+        "TimeLimit": 40
+      },
+      "precision": "opaque",
+      "solver": "copt",
+      "version": "8.0.6"
+    },
+    {
+      "algorithm": "pdlp",
+      "gpu": true,
+      "id": "copt-gpu-pdlp",
+      "parameters": {
+        "Crossover": 0,
+        "DualTol": 1e-09,
+        "FeasTol": 1e-09,
+        "GPUDevice": 0,
+        "GPUMode": 1,
+        "LpMethod": 6,
+        "PDLPTol": 1e-09,
+        "Presolve": 0,
+        "Scaling": -1,
+        "Threads": 4,
+        "TimeLimit": 40
+      },
+      "precision": "opaque",
+      "solver": "copt",
+      "version": "8.0.6"
+    },
+    {
+      "algorithm": "concurrent",
+      "gpu": true,
+      "id": "cuopt-concurrent",
+      "parameters": {
+        "absolute_dual_tolerance": 1e-09,
+        "absolute_gap_tolerance": 1e-09,
+        "absolute_primal_tolerance": 1e-09,
+        "crossover": true,
+        "dual_postsolve": true,
+        "iteration_limit": 50000,
+        "method": 0,
+        "num_cpu_threads": 4,
+        "pdlp_precision": 1,
+        "pdlp_solver_mode": 4,
+        "presolve": 2,
+        "random_seed": 17,
+        "relative_dual_tolerance": 1e-09,
+        "relative_gap_tolerance": 1e-09,
+        "relative_primal_tolerance": 1e-09,
+        "time_limit": 40
+      },
+      "precision": "native",
+      "solver": "cuopt",
+      "version": "26.10.0"
+    },
+    {
+      "algorithm": "default-lp",
+      "gpu": false,
+      "id": "copt-cpu-default",
+      "parameters": {
+        "Crossover": 1,
+        "DualTol": 1e-09,
+        "FeasTol": 1e-09,
+        "GPUDevice": 0,
+        "GPUMode": 0,
+        "LpMethod": -1,
+        "Presolve": -1,
+        "Scaling": -1,
+        "Threads": 4,
+        "TimeLimit": 40
+      },
+      "precision": "opaque",
+      "solver": "copt",
+      "version": "8.0.6"
+    }
+  ],
+  "cpu_affinity_policy": "four_lowest_allowed_cpu_ids_frozen_at_admission",
+  "cpu_slots": 4,
+  "deferred": [
+    "real_sparse_external_dataset_cohort",
+    "warm_sessions",
+    "profiles_and_hardware_counters",
+    "vendor_recommended_parallel_cohort",
+    "lower_quality_tiers",
+    "held_out_evaluation",
+    "gurobi"
+  ],
+  "device_memory_limit_bytes": 12884901888,
+  "device_selection": "RTX_PRO_6000_Blackwell_Server_Edition_then_freeze_uuid",
+  "execution_authorized": false,
+  "held_out_access": false,
+  "historical_accounting": {
+    "path": "docs/benchmarks/data/tensor-expanded/recovery-final-accounting-v1.json",
+    "sha256": "cfaa3a61843cfb62cf02ed0c79239bb639293ea3e62a93b8438a96c56b6ec989"
+  },
+  "host_memory_limit_bytes": 17179869184,
+  "id": "gpup-external-baseline-v1",
+  "instances": [
+    {
+      "family": "small",
+      "group": "development-small-17104",
+      "id": "gpup-development-small-4",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-small-4.json",
+        "sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920"
+      },
+      "partition": "development",
+      "source_manifest": {
+        "path": "benchmarks/manifests/lp-development-v1.json",
+        "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+      }
+    },
+    {
+      "family": "irregular",
+      "group": "development-irregular-17101",
+      "id": "gpup-development-irregular-2048",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-irregular-2048.json",
+        "sha256": "b2da8d3fb1864d4e21179666277729d923d47981418848b22e5d3957760a1c87"
+      },
+      "partition": "development",
+      "source_manifest": {
+        "path": "benchmarks/manifests/lp-development-v1.json",
+        "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+      }
+    },
+    {
+      "family": "dense_block",
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "partition": "development",
+      "source_manifest": {
+        "path": "benchmarks/manifests/lp-development-v1.json",
+        "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+      }
+    },
+    {
+      "family": "scaling",
+      "group": "development-scaling-17103",
+      "id": "gpup-development-scaling-256",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scaling-256.json",
+        "sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3"
+      },
+      "partition": "development",
+      "source_manifest": {
+        "path": "benchmarks/manifests/lp-development-v1.json",
+        "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+      }
+    },
+    {
+      "family": "scheduling",
+      "group": "development-scheduling-17100",
+      "id": "gpup-development-scheduling-20x5",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-scheduling-20x5.json",
+        "sha256": "e481e152970ef18e9e2ad0c3543cdaca63f104605943ab8e22c9234fbc4555f1"
+      },
+      "partition": "development",
+      "source_manifest": {
+        "path": "benchmarks/manifests/lp-development-v1.json",
+        "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+      }
+    },
+    {
+      "family": "irregular",
+      "group": "development-extension-irregular-17110",
+      "id": "gpup-extension-irregular-32768",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-irregular-32768.json",
+        "sha256": "02dc7f126a09bb4ccef2fe4f76cb14ccf6ae6fddea5e545f282e1c4edbeb7485"
+      },
+      "partition": "development",
+      "source_manifest": {
+        "path": "benchmarks/manifests/lp-development-extension-v1.json",
+        "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+      }
+    },
+    {
+      "family": "dense_block",
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "partition": "development",
+      "source_manifest": {
+        "path": "benchmarks/manifests/lp-development-extension-v1.json",
+        "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+      }
+    },
+    {
+      "family": "mixed",
+      "group": "development-extension-mixed-17112",
+      "id": "gpup-extension-mixed-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json",
+        "sha256": "416bb549a28a9cdcf178054f285d7a310a6ede141784bdc2eb8deb0ce7d15ff3"
+      },
+      "partition": "development",
+      "source_manifest": {
+        "path": "benchmarks/manifests/lp-development-extension-v1.json",
+        "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+      }
+    }
+  ],
+  "kind": "lp-baseline-proposal",
+  "order_seed": 17110,
+  "phases": [
+    {
+      "cpu_seconds": 2400,
+      "gpu_jobs": 0,
+      "gpu_seconds": 0,
+      "id": "A-software",
+      "job_wall_seconds": 0,
+      "jobs": 0
+    },
+    {
+      "cpu_seconds": 240,
+      "gpu_jobs": 2,
+      "gpu_seconds": 60,
+      "id": "A-hardware",
+      "job_wall_seconds": 30,
+      "jobs": 2
+    },
+    {
+      "cpu_seconds": 2400,
+      "gpu_jobs": 14,
+      "gpu_seconds": 420,
+      "id": "A-adapter-acceptance",
+      "job_wall_seconds": 30,
+      "jobs": 20
+    },
+    {
+      "cpu_seconds": 600,
+      "gpu_jobs": 0,
+      "gpu_seconds": 0,
+      "id": "A-report",
+      "job_wall_seconds": 0,
+      "jobs": 0
+    },
+    {
+      "cpu_seconds": 400,
+      "gpu_jobs": 0,
+      "gpu_seconds": 0,
+      "id": "A-cleanup-margin",
+      "job_wall_seconds": 0,
+      "jobs": 0
+    },
+    {
+      "cpu_seconds": 57600,
+      "gpu_jobs": 168,
+      "gpu_seconds": 10080,
+      "id": "B-screening",
+      "job_wall_seconds": 60,
+      "jobs": 240
+    },
+    {
+      "cpu_seconds": 600,
+      "gpu_jobs": 0,
+      "gpu_seconds": 0,
+      "id": "B-report",
+      "job_wall_seconds": 0,
+      "jobs": 0
+    },
+    {
+      "cpu_seconds": 400,
+      "gpu_jobs": 0,
+      "gpu_seconds": 0,
+      "id": "B-cleanup-margin",
+      "job_wall_seconds": 0,
+      "jobs": 0
+    }
+  ],
+  "quality": {
+    "absolute": 1e-09,
+    "relative": 1e-09
+  },
+  "repetitions": 3,
+  "schema_version": 1,
+  "selected_device_uuid": null,
+  "smoke_instance_ids": [
+    "gpup-development-irregular-2048",
+    "gpup-development-dense_block-1024"
+  ],
+  "total_cpu_seconds": 64640,
+  "total_gpu_seconds": 10560
+}
