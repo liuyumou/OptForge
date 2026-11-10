@@ -15,7 +15,7 @@ gate prepares HiGHS before these tests. The buffered checker's standalone Rust t
 also runs. Vendor Solve calls in these tests are mocked and no GPU is used.
 
 The [PR source bridge](../benchmarks/data/external-baseline-pr-source-bridge-v3.json)
-preserves four original test files and the requirements manifest, binding only
+preserves eight original test files and the requirements manifest, binding only
 CPU test setup/dependency and historical-admission changes.
 Historical experiment receipts continue to bind their original frozen source
 archive; this integration bridge does not amend any numerical result or charge.

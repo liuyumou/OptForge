@@ -2,6 +2,17 @@
 
 ## GPUP-BASELINE PR integration (2026-11-10)
 
+PR #23 is ready for the normal merge path. Local composite acceptance passes
+634 Rust tests, 512 Python tests, committed-record replay, all 188 documentation
+pages/internal links and CPU smoke. The native build, Clippy, dependency and
+artifact gates also pass. The initial full-gate failures and all charges remain
+preserved; the last documentation failure is resolved by publishing the original
+733-byte JSON receipt at its existing ADR link target. No executable/test source
+changed after the passing numerical suite. Final acceptance:
+`docs/benchmarks/data/external-baseline-pr-local-acceptance-v5.json`.
+Hosted Actions still starts no jobs and reports startup_failure; the full local
+command coverage is disclosed in the PR. Integration GPU usage is zero.
+
 The user explicitly requests merging the current changes through a PR before
 starting the next task. This authorizes commits, push, PR creation and merge;
 older no-publication handoffs below describe their original scope. Integrate the
