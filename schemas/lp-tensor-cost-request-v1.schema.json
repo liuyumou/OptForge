@@ -1,0 +1,240 @@
+{
+  "$id": "lp-tensor-cost-request-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "audit_policy": {
+      "enum": [
+        "device_ordered_v1",
+        "host_oracle_v1"
+      ]
+    },
+    "code_object_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "device": {
+      "pattern": "^GPU-",
+      "type": "string"
+    },
+    "device_buffer_bytes": {
+      "maximum": 1073741824,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "diagnostic": {
+      "type": "boolean"
+    },
+    "executable_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "guard": {
+      "enum": [
+        "tensor-cost-successor-bound-v1",
+        "none-original-tuned-v1"
+      ]
+    },
+    "horizon": {
+      "maximum": 2000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "identity": {
+      "const": "lp-tensor-cost-v1"
+    },
+    "layout": {
+      "enum": [
+        "segmented",
+        "original_tuned",
+        "int8",
+        "fp16",
+        "bf16",
+        "simt"
+      ]
+    },
+    "method": {
+      "additionalProperties": false,
+      "properties": {
+        "check_interval": {
+          "const": 200
+        },
+        "iteration_limit": {
+          "maximum": 50000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "power_iterations": {
+          "const": 20
+        },
+        "preconditioner": {
+          "const": {
+            "pock_chambolle_alpha": 1.0,
+            "ruiz_passes": 10
+          }
+        },
+        "primal_weight": {
+          "const": {
+            "derivative": 0.0,
+            "integral": 0.0,
+            "proportional": 0.5
+          }
+        },
+        "restart": {
+          "const": {
+            "artificial": 0.36,
+            "necessary": 0.8,
+            "sufficient": 0.2
+          }
+        },
+        "schema_version": {
+          "const": 1
+        }
+      },
+      "required": [
+        "check_interval",
+        "iteration_limit",
+        "power_iterations",
+        "preconditioner",
+        "primal_weight",
+        "restart",
+        "schema_version"
+      ],
+      "type": "object"
+    },
+    "model_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "norm_policy": {
+      "enum": [
+        "original-tuned-v1",
+        "disjoint-interval-gram-v1",
+        "legacy-twice-absolute-v1"
+      ]
+    },
+    "options": {
+      "additionalProperties": false,
+      "properties": {
+        "iteration_limit": {
+          "maximum": 50000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "node_limit": {
+          "const": null
+        },
+        "schema_version": {
+          "const": 1
+        },
+        "seed": {
+          "const": 17
+        },
+        "threads": {
+          "const": 1
+        },
+        "time_limit_ms": {
+          "maximum": 30000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "tolerances": {
+          "const": {
+            "absolute": 1e-09,
+            "integrality": 1e-09,
+            "relative": 1e-09
+          }
+        }
+      },
+      "required": [
+        "iteration_limit",
+        "node_limit",
+        "schema_version",
+        "seed",
+        "threads",
+        "time_limit_ms",
+        "tolerances"
+      ],
+      "type": "object"
+    },
+    "reduction": {
+      "enum": [
+        "exact-tile128-residual-fp64-v1",
+        "tuned-warp32-v1"
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "settings": {
+      "additionalProperties": false,
+      "properties": {
+        "audit_absolute": {
+          "const": 1e-07
+        },
+        "audit_interval": {
+          "const": 32
+        },
+        "audit_relative": {
+          "const": 1e-07
+        },
+        "dual_budget": {
+          "const": 1e-07
+        },
+        "format": {
+          "const": "fp64"
+        },
+        "policy": {
+          "const": "uniform"
+        },
+        "primal_budget": {
+          "const": 1e-07
+        },
+        "rounding": {
+          "const": "nearest_even"
+        },
+        "tile_size": {
+          "const": 32
+        }
+      },
+      "required": [
+        "format",
+        "policy",
+        "tile_size",
+        "rounding",
+        "primal_budget",
+        "dual_budget",
+        "audit_interval",
+        "audit_absolute",
+        "audit_relative"
+      ],
+      "type": "object"
+    },
+    "source_tree_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "code_object_sha256",
+    "device",
+    "device_buffer_bytes",
+    "diagnostic",
+    "executable_sha256",
+    "identity",
+    "method",
+    "model_sha256",
+    "options",
+    "schema_version",
+    "source_tree_sha256",
+    "settings",
+    "layout",
+    "horizon",
+    "guard",
+    "reduction",
+    "norm_policy",
+    "audit_policy"
+  ],
+  "title": "ADR-0041 resident quantization request",
+  "type": "object"
+}

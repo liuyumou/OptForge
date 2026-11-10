@@ -1,0 +1,107 @@
+{
+  "additional_cpu_ns": 0,
+  "additional_gpu_ns": 0,
+  "all_prior_charges_preserved": true,
+  "authorization": {
+    "path": "docs/benchmarks/data/tensor-warp32/receipt-recovery-authorization-v1.json",
+    "sha256": "5b7020e6ea67170f4bb3060370b9743154dbb6b2895e826704f2e1bfda866ce1"
+  },
+  "automatic_retry": false,
+  "bootstrap_rerun": false,
+  "campaign_gpu_ns": 22592495266813,
+  "certified_latency_gain": false,
+  "cleanup_empty": true,
+  "combined_warp32_gpu_cap_ns": 1640000000000,
+  "combined_warp32_gpu_ns": 369700946478,
+  "commit": false,
+  "completion_criteria_changed": false,
+  "container_change": false,
+  "continuation_cpu_charge_ns": 16147836014912,
+  "corrected_trial_views": 16,
+  "correction_checks_passed": 17,
+  "cpu_ceiling_ns": 53640000000000,
+  "cpu_total_ns": 45902541829170,
+  "delivery_checks": {
+    "path": "artifacts/gpup-tensor-warp32-v1/receipt-recovery-v1/delivery-checks.json",
+    "sha256": "587b50d9278a0486f4d7c91f14ddd97041be57ff7f39c35a3907a58c89621141"
+  },
+  "diff_hygiene_pass": true,
+  "documentation_pages": 168,
+  "exact_17412_ledger_unchanged": true,
+  "forecast": {
+    "path": "artifacts/gpup-tensor-warp32-v1/study-v1/forecast.json",
+    "sha256": "22e1b12be362ea70831d35130ca5f4733418c33dfed5a73f0802bb5740714c3a"
+  },
+  "forecast_evaluated": true,
+  "forecast_pass": false,
+  "forecast_working_families": true,
+  "full_forecast_failure_charge_cpu_ns": 400000000000,
+  "gain_forecasts_refused": 6,
+  "gpu_ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "9913d391634bdb0f74012be909be377e5a693d00b76e6882abcf336796ac863e"
+  },
+  "gpu_ledger_events": 17412,
+  "gpup8_complete": false,
+  "gpup8_gpu_ns": 1232909411024,
+  "gpup9_started": false,
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-receipt-final-cpu-accounting-v1",
+  "journal": {
+    "path": "artifacts/gpup-tensor-warp32-v1/cpu-journal-receipt-final-v31.json",
+    "sha256": "d1bdeb7f37ef1e6ca6b032347f63f245d8dd0b85d061d547e10115d428ef7697"
+  },
+  "original_null_trial_links_preserved": 16,
+  "overall_unspent_cpu_ns": 7737458170830,
+  "passed_checks_rerun": false,
+  "prior_accounting": {
+    "path": "docs/benchmarks/data/tensor-warp32/funded-final-cpu-accounting-v1.json",
+    "sha256": "a14c9fd67bfa8228260ffc7f7878fcf7e479d3b064637a9c4047d38e8b7d6418"
+  },
+  "profile_gate_pass": true,
+  "profile_links": {
+    "path": "artifacts/gpup-tensor-warp32-v1/receipt-recovery-v1/profile-links.json",
+    "sha256": "e3f0dff0305c89509bb3b2aeba2843ef033d61be99415db991ee5411cd8b9f2e"
+  },
+  "profiles_rerun": false,
+  "receipt_link_correction_passed": true,
+  "receipt_recovery_cpu_charge_ns": 843323873964,
+  "report": {
+    "path": "artifacts/gpup-tensor-warp32-v1/receipt-recovery-v1/delivery/report.json",
+    "sha256": "91335a6c90abcb6ed84d74d24898b1df659105a27f4a94a7e7e32d2f34cd0227"
+  },
+  "resource_fit_evaluated": false,
+  "resources": {
+    "delivery-checks": {
+      "path": "artifacts/gpup-tensor-warp32-v1/receipt-delivery-checks-resource-v1.json",
+      "sha256": "a20c19fe793b9293deec9019477c1815edbaba7c2cd1cb31b11d89c75de49fcb"
+    },
+    "forecast": {
+      "path": "artifacts/gpup-tensor-warp32-v1/receipt-forecast-resource-v1.json",
+      "sha256": "4c59e1cd627b1e9ca162667b3e48243ee204aa4810ed93db061f1714448a59f0"
+    },
+    "report": {
+      "path": "artifacts/gpup-tensor-warp32-v1/receipt-report-resource-v1.json",
+      "sha256": "d2c4a6f4bd94d62bd04cffe2e460e10f6264224802752f662a588248f1e45ef9"
+    },
+    "setup": {
+      "path": "artifacts/gpup-tensor-warp32-v1/receipt-setup-resource-v1.json",
+      "sha256": "c555c1ee1840055823f9bec98a933b5600385178bbf0716cb17acd2d17db21ad"
+    }
+  },
+  "retained_numerical_verification_reruns": 0,
+  "status": "incomplete_gain_forecast_refusal",
+  "supervisor_change": false,
+  "this_recovery_gpu_ns": 0,
+  "timings_executed": 0,
+  "unassigned_retained_stage_cpu_ns": 295590819556,
+  "unspent_authorized_stage_cpu_ns": {
+    "implementation": 80913180412,
+    "margin": 400000000000,
+    "native": 0,
+    "proofs": 0,
+    "reporting": 315762945624,
+    "workers": 6400000000000
+  },
+  "unused_timing_cpu_reservation_ns": 6400000000000
+}

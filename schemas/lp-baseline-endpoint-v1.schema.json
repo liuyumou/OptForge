@@ -1,0 +1,345 @@
+{
+  "$id": "lp-baseline-endpoint-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "adapter": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "algorithm_executed": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "algorithm_requested": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "certificate_ns": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "checker": {
+      "additionalProperties": false,
+      "properties": {
+        "receipt": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "sha256"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "state": {
+          "enum": [
+            "not_run",
+            "accepted",
+            "rejected",
+            "unavailable"
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "receipt"
+      ],
+      "type": "object"
+    },
+    "configuration_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "device_uuid": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "dual": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "dual_convention": {
+      "const": "original_units_min_lower_positive"
+    },
+    "elapsed_ns": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "environment": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "evidence_kind": {
+      "enum": [
+        "fixture",
+        "measurement"
+      ]
+    },
+    "executed_device": {
+      "enum": [
+        "cpu",
+        "gpu",
+        "unknown",
+        "not_run"
+      ]
+    },
+    "gpu_evidence": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kind": {
+      "const": "lp-baseline-endpoint"
+    },
+    "limitations": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "model_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "native_reduced_costs": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "native_solve_ns": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "native_status": {
+      "enum": [
+        "optimal",
+        "limit",
+        "infeasible",
+        "unbounded",
+        "infeasible_or_unbounded",
+        "numerical_failure",
+        "unknown",
+        "not_run"
+      ]
+    },
+    "original_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "primal": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "proposal_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "requested_device": {
+      "enum": [
+        "cpu",
+        "gpu"
+      ]
+    },
+    "row_ids": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "solver": {
+      "enum": [
+        "project",
+        "highs",
+        "cuopt",
+        "copt"
+      ]
+    },
+    "solver_version": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "transport": {
+      "enum": [
+        "completed",
+        "timeout",
+        "cancelled",
+        "error",
+        "unavailable"
+      ]
+    },
+    "variable_ids": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "evidence_kind",
+    "model_sha256",
+    "original_sha256",
+    "proposal_sha256",
+    "configuration_id",
+    "solver",
+    "solver_version",
+    "adapter",
+    "environment",
+    "requested_device",
+    "executed_device",
+    "device_uuid",
+    "gpu_evidence",
+    "algorithm_requested",
+    "algorithm_executed",
+    "transport",
+    "native_status",
+    "variable_ids",
+    "row_ids",
+    "primal",
+    "dual",
+    "dual_convention",
+    "native_reduced_costs",
+    "checker",
+    "elapsed_ns",
+    "native_solve_ns",
+    "certificate_ns",
+    "limitations"
+  ],
+  "type": "object"
+}

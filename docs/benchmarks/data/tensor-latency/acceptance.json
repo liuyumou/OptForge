@@ -1,0 +1,46 @@
+{
+  "adr0044_status": "proposed",
+  "diagnosis": {
+    "path": "docs/benchmarks/data/tensor-latency/diagnosis.json",
+    "sha256": "7de7b62a3e08fef08c75e86c5d3f5d21cb9ad57e382811bfa80c8989c614174b"
+  },
+  "diagnosis_cpu_charge_seconds": 400,
+  "docs_pages": 144,
+  "gpu_seconds": 0,
+  "gpup8_status": "incomplete",
+  "historical_cpu_overlap": "not certified; unchanged",
+  "historical_prefixes_unchanged": true,
+  "identity": "gpup8-latency-planning-acceptance-v1",
+  "ledger_events": 17362,
+  "ledger_sha256": "e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5",
+  "native_gate": {
+    "path": "artifacts/gpup-tensor-latency-v1/native-acceptance.json",
+    "sha256": "c1c7dc0b8796adef8ba7fb0fb399c52f31b5fd0be19bb3cadacc3f6cc52be4c0"
+  },
+  "native_log": {
+    "path": "artifacts/gpup-tensor-latency-v1/native-acceptance.log",
+    "sha256": "94bafbc16b0296a9ca705408038c529aaf1e4cd63ccaecc5b091344c653885a0"
+  },
+  "native_runner": {
+    "path": "artifacts/gpup-tensor-latency-v1/native-acceptance-runner.py",
+    "sha256": "af438a4dfe5b458d05ce9085633d588b46035ac7e7a70b0f3f41214f27f7ba6e"
+  },
+  "prior_cpu_upper_seconds": "19134.822845161998",
+  "proposed_cpu_seconds": 2050,
+  "proposed_gpu_seconds": {
+    "ablations": 320,
+    "repeatability": 496,
+    "screening": 990,
+    "total": 1806
+  },
+  "prospective_cpu_containment": "not provisioned; proposed prerequisite",
+  "python_tests": 366,
+  "remaining_cpu_seconds": "2065.177154838002",
+  "resource_capability": {
+    "path": "docs/benchmarks/data/tensor-latency/resource-preflight.json",
+    "sha256": "362b8f1d52148823e0c9ae1b7be9a0a230764abd65e8bce60d439ed30cf774ce"
+  },
+  "source_after": "b8d9d2fbd8a5242dfba4ffb21e45d4067b04c718d80fe7b3c4b31f6fd8617569",
+  "source_before": "b8d9d2fbd8a5242dfba4ffb21e45d4067b04c718d80fe7b3c4b31f6fd8617569",
+  "status": "passed_cpu_diagnosis_and_proposal_only"
+}

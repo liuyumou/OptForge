@@ -1,0 +1,31 @@
+{
+  "binary": {
+    "path": "artifacts/gpup-tensor-expanded-v1/executor-recovery-v1/target/release/lp-tensor-expanded-device",
+    "sha256": "5def499acabac977333f4b63602d86e449d3e942d4823b8c7ebcbe95ce316597"
+  },
+  "checks": [
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/executor-recovery-v1/clippy.json",
+      "sha256": "bb4b465bc1664e4ffaf0cfc4fed412f351318e434f34805d1aba90d3a3be9124"
+    },
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/executor-recovery-v1/build.json",
+      "sha256": "83f72aea1d30ea099598265763077baa1a8300771e65953c53c9a03b1ab5d541"
+    },
+    {
+      "path": "artifacts/gpup-tensor-expanded-v1/executor-recovery-v1/new-tests.json",
+      "sha256": "9753de972cd8410802c1f62b1969d1b9177648f06a7523f0038fce183e1716ee"
+    }
+  ],
+  "gpu_seconds": 0,
+  "historical_checks_rerun": false,
+  "retained_format": {
+    "path": "artifacts/gpup-tensor-expanded-v1/executor-build-v1/format.json",
+    "sha256": "a22e51b8b4f0e60b3fe2ead47af9696e822471c9ee2013fa9b1aa38f02603004"
+  },
+  "source_manifest": {
+    "path": "artifacts/gpup-tensor-expanded-v1/executor-recovery-v1/source-manifest.json",
+    "sha256": "ef0e517fe216a078c8cf1cd664cc7a02e7a74b1e51371b97c9fa8dbb52df6c79"
+  },
+  "status": "passed"
+}

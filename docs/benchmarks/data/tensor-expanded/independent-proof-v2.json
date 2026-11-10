@@ -1,0 +1,40 @@
+{
+  "gpu_seconds": 0,
+  "historical_checks_rerun": false,
+  "preflight": {
+    "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/preflight-v2.json",
+    "sha256": "2e1548a9f7fec7dc1564a9b09dd0b835c47b8e6b66ff2f6e0b5eb3c5ebc9ff8f"
+  },
+  "products": {
+    "component_products": 720,
+    "conversions": 1400,
+    "exact_splits": 1400,
+    "maximum_main_dot_bound_bits": 125
+  },
+  "projection": {
+    "cases": 2400,
+    "identity": "positive-step-clamp-with-rounded-bound-enclosure-v1"
+  },
+  "proof_source": {
+    "path": "tools/lp_tensor_expanded_proof_v2.py",
+    "sha256": "781941f67ffe6ba39163d6aabddea4968e57a81900412e0ae13b6848af8e4099"
+  },
+  "scalar": {
+    "binary": {
+      "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/expanded-scalar-host-v2",
+      "sha256": "a10d9f8230a2595cf74c71090b626ede4a6d7294ac83e9d4e0e45723f05bcc51"
+    },
+    "cases": 7376,
+    "fallback_cases": 4592,
+    "fast_cases": 2784,
+    "input": {
+      "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/scalar-input-v2.txt",
+      "sha256": "3dfb78f9f31517482918c493cecfd27bbc5926c5de110730606ff73d75e11b53"
+    },
+    "output": {
+      "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/scalar-execution-v2.stdout",
+      "sha256": "f9bfcd405e874283d28674bd5633d08ae92df47eeb702f723582a73c08b04d07"
+    }
+  },
+  "status": "passed"
+}

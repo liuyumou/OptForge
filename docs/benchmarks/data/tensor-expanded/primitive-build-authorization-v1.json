@@ -1,0 +1,31 @@
+{
+  "authorization": "User authorizes conditional continuation and unused-budget reallocations, 2026-10-24.",
+  "compile_timeout_seconds": 180,
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-expanded-primitive-build-v1",
+  "implementation_bookkeeping_cpu_seconds": 32,
+  "inventory": "primitive-module-only",
+  "numerical_criteria_unchanged": true,
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/cpu-journal-v5.json",
+    "sha256": "2be0d88bb93d54d6b42fd9a066e90ac9ab9425ab18b06209f1111484cb55dea1"
+  },
+  "proof": {
+    "path": "docs/benchmarks/data/tensor-expanded/independent-proof-v2.json",
+    "sha256": "2906ac3cb7f8e56bc25c12e19ebaa16e525c064845552750f0b6b2c03dfd3665"
+  },
+  "remaining_native_cpu_seconds": 4000,
+  "resource_limits": {
+    "max_registers": 128,
+    "spill_load_bytes": 0,
+    "spill_store_bytes": 0
+  },
+  "retries": 0,
+  "status": "accepted",
+  "transfer": {
+    "cpu_seconds": 800,
+    "source": "native",
+    "target": "primitive_compile"
+  },
+  "work_wall_seconds": 198
+}

@@ -1,0 +1,37 @@
+{
+  "binary": {
+    "path": "artifacts/gpup-tensor-expanded-v1/rust-scalar-v1/target/release/lp-tensor-expanded-research",
+    "sha256": "22028790a512c16f66ec88b8374b597c9c7d06933677961ce727643131255e1e"
+  },
+  "cases": 11482,
+  "execution": {
+    "path": "artifacts/gpup-tensor-expanded-v1/rust-scalar-v1/execution.json",
+    "sha256": "8fcb29d56ba1fb31319ff00e35990e43ac2293bfbb892f6ac72a7f0c275b981d"
+  },
+  "expected": {
+    "path": "artifacts/gpup-tensor-expanded-v1/rust-scalar-v1/expected.json",
+    "sha256": "38244b7c50628b086c56cbdc33a31df454ed05c4634c1b24d21a510c2b5f4e27"
+  },
+  "gpu_seconds": 0,
+  "source_bound_cpp_not_rerun": true,
+  "source_bound_expected_fma_reused": 7376,
+  "sources": [
+    {
+      "path": "research/lp-tensor-expanded/Cargo.toml",
+      "sha256": "b6b9beb0ec0310d237e95fff08e5d0d778d146a77aa20e720659f949e28ae59d"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/lib.rs",
+      "sha256": "3136e6dc7cb477ef366d9d8a397e13fbe6867c578f33949417310ae7697eb3dc"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/main.rs",
+      "sha256": "6dca680b51bcd803307c0a167f2f16e8a145c99653f6bb09acf3fefa3bc9a746"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/value.rs",
+      "sha256": "9965c41636b3444381d233560cf31a67496b9cce34d6a21b9ee6a2f4eaaefc3c"
+    }
+  ],
+  "status": "passed"
+}

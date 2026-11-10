@@ -1,0 +1,19 @@
+{
+  "identity": "gpup-tensor-cost-approved-in-container-v1",
+  "prior_cpu_upper_seconds": "19899.822845162",
+  "cpu_ceiling_seconds": 35900,
+  "prospective_cpu_seconds": 16000,
+  "additional_cpu_seconds": 14300,
+  "reallocated_cpu_seconds": 1700,
+  "stages": {
+    "implementation": 2000,
+    "proofs": 2600,
+    "native": 2200,
+    "workers": 8400,
+    "reporting": 400,
+    "margin": 400
+  },
+  "gpu_max_seconds": 1806,
+  "host_access": false,
+  "authority_sha256": "94b80a3ee8b232a2d6147d1c24e5a8845e8e85564c0606a78ef797695402812f"
+}

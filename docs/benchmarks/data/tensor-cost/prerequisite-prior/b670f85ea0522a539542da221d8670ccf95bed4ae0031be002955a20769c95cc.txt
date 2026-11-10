@@ -1,0 +1,59 @@
+[package]
+name = "optimizer-experiment"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+# optimizer-extension is a direct dependency because ExtensionDifference compares
+# the ExtensionSummary values a run record already embeds through its search
+# record. optimizer-solver uses that type without re-exporting it, and depending on
+# the crate that defines it is clearer than adding a re-export purely to avoid an
+# edge that already exists transitively.
+[features]
+precision-research = ["optimizer-lp/precision-research", "dep:optimizer-lp-cuda", "dep:optimizer-cuda-sys"]
+
+[[example]]
+name = "lp_precision_research"
+required-features = ["precision-research"]
+
+[dependencies]
+optimizer-lp-cuda = { version = "0.1.0", path = "../optimizer-lp-cuda", optional = true, features = ["precision-research"] }
+optimizer-cuda-sys = { version = "0.1.0", path = "../optimizer-cuda-sys", optional = true }
+optimizer-lp = { version = "0.1.0", path = "../optimizer-lp" }
+optimizer-core = { version = "0.1.0", path = "../optimizer-core" }
+optimizer-extension = { version = "0.1.0", path = "../optimizer-extension" }
+optimizer-solver = { version = "0.1.0", path = "../optimizer-solver" }
+serde.workspace = true
+serde_json.workspace = true
+
+[lints]
+workspace = true
+
+[[example]]
+name = "lp_precision_exec"
+required-features = ["precision-research"]
+
+[[example]]
+name = "lp_precision_refine"
+required-features = ["precision-research"]
+
+[[example]]
+name = "lp_precision_assess"
+required-features = ["precision-research"]
+
+[[example]]
+name = "lp_precision_quant"
+required-features = ["precision-research"]
+
+[[example]]
+name = "lp_precision_quant_resident"
+required-features = ["precision-research"]
+
+[[example]]
+name = "lp_precision_tensor"
+required-features = ["precision-research"]
+
+[[example]]
+name = "lp_precision_tensor_residual"
+required-features = ["precision-research"]

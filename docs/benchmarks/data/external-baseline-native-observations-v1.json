@@ -1,0 +1,170 @@
+{
+  "certificate_recomputations": 0,
+  "kind": "lp-baseline-retained-native-limit-observations",
+  "prior_metadata_refusal": {
+    "path": "artifacts/gpup-external-baseline-v5/resources/native-retained-findings.settlement.json",
+    "sha256": "a0739e7cf571f1cb20388c20397ec23e6354ef02ecde496f6a4ff48a3a0efa28"
+  },
+  "project_mixed": [
+    {
+      "adapter_error": "CalledProcessError: Command '['/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/study-v1/optimizer', 'lp-study', 'solve', '--model', '/workspace/AI-Optimizer/artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json', '--model-byte-limit', '134217728', '--config', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-precision-fp64/solve/solve.json', '--backend', 'cuda-lp-tuned', '--device', 'GPU-6721b13a-30f9-83ec-dace-ba2d9738556f', '--lp-settings', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-precision-fp64/solve/method.json', '--lp-profile', 'false', '--lp-device-memory-bytes', '12884901888', '--lp-evidence', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-precision-fp64/solve/native.json', '--evidence-format', 'compact-v1', '--lp-execution', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-precision-fp64/solve/execution-settings.json', '--lp-precision', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-precision-fp64/solve/precision-settings.json']' returned non-zero exit status 1.",
+      "exported_candidate_unavailable": true,
+      "id": "screening-gpup-extension-mixed-65536-0-project-precision-fp64",
+      "iterations": 40400,
+      "kernel_launches": 242400,
+      "meaning": "Retained project-internal assessment only; not a rerun or a new independent certificate. The adapter reports nonzero CLI exit before exporting this native candidate.",
+      "native_assessment": {
+        "allowance": null,
+        "bound": null,
+        "classification": "timeout",
+        "feasible": true,
+        "gap_closed": false,
+        "gap_upper": null,
+        "objective": -18591.000012496486,
+        "reason": "no certified bound: variable 3 has an infinite bound on the side its reduced-cost enclosure needs, so no finite contribution is certified",
+        "repaired": null
+      },
+      "native_elapsed_ms": 40202,
+      "source": {
+        "path": "artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-precision-fp64/solve/native.json",
+        "sha256": "30321504bbb165fedac657403d5647f8d74403390f71a56090f75aa8ef3a02b4"
+      },
+      "termination": "time_limit"
+    },
+    {
+      "adapter_error": "CalledProcessError: Command '['/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/study-v1/optimizer', 'lp-study', 'solve', '--model', '/workspace/AI-Optimizer/artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json', '--model-byte-limit', '134217728', '--config', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-tuned-fp64/solve/solve.json', '--backend', 'cuda-lp-tuned', '--device', 'GPU-6721b13a-30f9-83ec-dace-ba2d9738556f', '--lp-settings', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-tuned-fp64/solve/method.json', '--lp-profile', 'false', '--lp-device-memory-bytes', '12884901888', '--lp-evidence', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-tuned-fp64/solve/native.json', '--evidence-format', 'compact-v1', '--lp-execution', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-tuned-fp64/solve/execution-settings.json']' returned non-zero exit status 1.",
+      "exported_candidate_unavailable": true,
+      "id": "screening-gpup-extension-mixed-65536-0-project-tuned-fp64",
+      "iterations": 49800,
+      "kernel_launches": 298800,
+      "meaning": "Retained project-internal assessment only; not a rerun or a new independent certificate. The adapter reports nonzero CLI exit before exporting this native candidate.",
+      "native_assessment": {
+        "allowance": null,
+        "bound": null,
+        "classification": "timeout",
+        "feasible": true,
+        "gap_closed": false,
+        "gap_upper": null,
+        "objective": -18591.000012496486,
+        "reason": "no certified bound: variable 3 has an infinite bound on the side its reduced-cost enclosure needs, so no finite contribution is certified",
+        "repaired": null
+      },
+      "native_elapsed_ms": 40174,
+      "source": {
+        "path": "artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-0-project-tuned-fp64/solve/native.json",
+        "sha256": "52ae4ca206795139abd8ac0a973999620dbf736eb710a29daf7ab523772b8910"
+      },
+      "termination": "time_limit"
+    },
+    {
+      "adapter_error": "CalledProcessError: Command '['/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/study-v1/optimizer', 'lp-study', 'solve', '--model', '/workspace/AI-Optimizer/artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json', '--model-byte-limit', '134217728', '--config', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-precision-fp64/solve/solve.json', '--backend', 'cuda-lp-tuned', '--device', 'GPU-6721b13a-30f9-83ec-dace-ba2d9738556f', '--lp-settings', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-precision-fp64/solve/method.json', '--lp-profile', 'false', '--lp-device-memory-bytes', '12884901888', '--lp-evidence', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-precision-fp64/solve/native.json', '--evidence-format', 'compact-v1', '--lp-execution', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-precision-fp64/solve/execution-settings.json', '--lp-precision', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-precision-fp64/solve/precision-settings.json']' returned non-zero exit status 1.",
+      "exported_candidate_unavailable": true,
+      "id": "screening-gpup-extension-mixed-65536-1-project-precision-fp64",
+      "iterations": 39800,
+      "kernel_launches": 238800,
+      "meaning": "Retained project-internal assessment only; not a rerun or a new independent certificate. The adapter reports nonzero CLI exit before exporting this native candidate.",
+      "native_assessment": {
+        "allowance": null,
+        "bound": null,
+        "classification": "timeout",
+        "feasible": true,
+        "gap_closed": false,
+        "gap_upper": null,
+        "objective": -18591.000012496486,
+        "reason": "no certified bound: variable 3 has an infinite bound on the side its reduced-cost enclosure needs, so no finite contribution is certified",
+        "repaired": null
+      },
+      "native_elapsed_ms": 40155,
+      "source": {
+        "path": "artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-precision-fp64/solve/native.json",
+        "sha256": "69695182bb18755c1f3b62cab8e603b711727e8dc6fec3f1146496dc53f8b580"
+      },
+      "termination": "time_limit"
+    },
+    {
+      "adapter_error": "CalledProcessError: Command '['/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/study-v1/optimizer', 'lp-study', 'solve', '--model', '/workspace/AI-Optimizer/artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json', '--model-byte-limit', '134217728', '--config', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-tuned-fp64/solve/solve.json', '--backend', 'cuda-lp-tuned', '--device', 'GPU-6721b13a-30f9-83ec-dace-ba2d9738556f', '--lp-settings', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-tuned-fp64/solve/method.json', '--lp-profile', 'false', '--lp-device-memory-bytes', '12884901888', '--lp-evidence', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-tuned-fp64/solve/native.json', '--evidence-format', 'compact-v1', '--lp-execution', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-tuned-fp64/solve/execution-settings.json']' returned non-zero exit status 1.",
+      "exported_candidate_unavailable": true,
+      "id": "screening-gpup-extension-mixed-65536-1-project-tuned-fp64",
+      "iterations": 50000,
+      "kernel_launches": 300000,
+      "meaning": "Retained project-internal assessment only; not a rerun or a new independent certificate. The adapter reports nonzero CLI exit before exporting this native candidate.",
+      "native_assessment": {
+        "allowance": null,
+        "bound": null,
+        "classification": "work_limit",
+        "feasible": true,
+        "gap_closed": false,
+        "gap_upper": null,
+        "objective": -18591.000012496486,
+        "reason": "no certified bound: variable 3 has an infinite bound on the side its reduced-cost enclosure needs, so no finite contribution is certified",
+        "repaired": null
+      },
+      "native_elapsed_ms": 37820,
+      "source": {
+        "path": "artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-1-project-tuned-fp64/solve/native.json",
+        "sha256": "c65e93a7bf89ce5018501fd72aabc2bcb33205b22c9998589a0558922f29186e"
+      },
+      "termination": "iteration_limit"
+    },
+    {
+      "adapter_error": "CalledProcessError: Command '['/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/study-v1/optimizer', 'lp-study', 'solve', '--model', '/workspace/AI-Optimizer/artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json', '--model-byte-limit', '134217728', '--config', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-precision-fp64/solve/solve.json', '--backend', 'cuda-lp-tuned', '--device', 'GPU-6721b13a-30f9-83ec-dace-ba2d9738556f', '--lp-settings', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-precision-fp64/solve/method.json', '--lp-profile', 'false', '--lp-device-memory-bytes', '12884901888', '--lp-evidence', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-precision-fp64/solve/native.json', '--evidence-format', 'compact-v1', '--lp-execution', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-precision-fp64/solve/execution-settings.json', '--lp-precision', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-precision-fp64/solve/precision-settings.json']' returned non-zero exit status 1.",
+      "exported_candidate_unavailable": true,
+      "id": "screening-gpup-extension-mixed-65536-2-project-precision-fp64",
+      "iterations": 39600,
+      "kernel_launches": 237600,
+      "meaning": "Retained project-internal assessment only; not a rerun or a new independent certificate. The adapter reports nonzero CLI exit before exporting this native candidate.",
+      "native_assessment": {
+        "allowance": null,
+        "bound": null,
+        "classification": "timeout",
+        "feasible": true,
+        "gap_closed": false,
+        "gap_upper": null,
+        "objective": -18591.000012496486,
+        "reason": "no certified bound: variable 3 has an infinite bound on the side its reduced-cost enclosure needs, so no finite contribution is certified",
+        "repaired": null
+      },
+      "native_elapsed_ms": 40125,
+      "source": {
+        "path": "artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-precision-fp64/solve/native.json",
+        "sha256": "56456bcdfb8a7fe4bb59336e8493a32e9ae82422adc39a00086572b992ec7fbf"
+      },
+      "termination": "time_limit"
+    },
+    {
+      "adapter_error": "CalledProcessError: Command '['/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/study-v1/optimizer', 'lp-study', 'solve', '--model', '/workspace/AI-Optimizer/artifacts/lp-inputs-v1/gpup-extension-mixed-65536.json', '--model-byte-limit', '134217728', '--config', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-tuned-fp64/solve/solve.json', '--backend', 'cuda-lp-tuned', '--device', 'GPU-6721b13a-30f9-83ec-dace-ba2d9738556f', '--lp-settings', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-tuned-fp64/solve/method.json', '--lp-profile', 'false', '--lp-device-memory-bytes', '12884901888', '--lp-evidence', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-tuned-fp64/solve/native.json', '--evidence-format', 'compact-v1', '--lp-execution', '/workspace/AI-Optimizer/artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-tuned-fp64/solve/execution-settings.json']' returned non-zero exit status 1.",
+      "exported_candidate_unavailable": true,
+      "id": "screening-gpup-extension-mixed-65536-2-project-tuned-fp64",
+      "iterations": 50000,
+      "kernel_launches": 300000,
+      "meaning": "Retained project-internal assessment only; not a rerun or a new independent certificate. The adapter reports nonzero CLI exit before exporting this native candidate.",
+      "native_assessment": {
+        "allowance": null,
+        "bound": null,
+        "classification": "work_limit",
+        "feasible": true,
+        "gap_closed": false,
+        "gap_upper": null,
+        "objective": -18591.000012496486,
+        "reason": "no certified bound: variable 3 has an infinite bound on the side its reduced-cost enclosure needs, so no finite contribution is certified",
+        "repaired": null
+      },
+      "native_elapsed_ms": 37912,
+      "source": {
+        "path": "artifacts/gpup-external-baseline-v5/jobs/screening-gpup-extension-mixed-65536-2-project-tuned-fp64/solve/native.json",
+        "sha256": "93f2c7969b06b48dc303fd3bec8efccab330d9af8d2a2f101db659098b86dee4"
+      },
+      "termination": "iteration_limit"
+    }
+  ],
+  "report": {
+    "path": "artifacts/gpup-external-baseline-v5/report.json",
+    "sha256": "30109efb44282a43ba66cf0e5ab5ebb1768344fe86d76fd12dac1689ede71159"
+  },
+  "schema_version": 1,
+  "solver_runs": 0,
+  "source": {
+    "path": "artifacts/gpup-external-baseline-v5/delivery/findings-v2.py",
+    "sha256": "1af707bb84317c8418fe4184ecedffcfbb5db2a6f87b6f323a96f7690b30d84c"
+  }
+}

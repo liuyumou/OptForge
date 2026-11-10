@@ -1,0 +1,39 @@
+{
+  "all_16_independent_receipts_exist_and_validate": true,
+  "all_16_trial_verification_references_null": true,
+  "automatic_retry": false,
+  "cleanup_empty": true,
+  "failed_journal": {
+    "path": "artifacts/gpup-tensor-warp32-v1/cpu-journal-funded-continuation-v26.json",
+    "sha256": "1918c8eeb8d511b18987a0d410d2dafc3dc67c0fc107c4f36331c87d5b83d438"
+  },
+  "failed_resource": {
+    "path": "artifacts/gpup-tensor-warp32-v1/funded-profiles-resource-v1.json",
+    "sha256": "387ee0c7fa8438e1c735375dbab5548fb370aa8c1765e86fda579c6f3afd3e7c"
+  },
+  "forecast_produced": false,
+  "gain_failure_inferred": false,
+  "identity": "gpup-tensor-warp32-funded-profile-refusal-v1",
+  "numerical_failure_inferred": false,
+  "original_trials_unmodified": true,
+  "profile_cpu_charge_ns": 2400000000000,
+  "report": {
+    "path": "artifacts/gpup-tensor-warp32-v1/funded-continuation-v1/delivery/report.json",
+    "sha256": "acdcf9c1432ee3df8875a59fa90f371cea8df7237696a71b9add9b825dbdcdf0"
+  },
+  "source": {
+    "path": "tools/benchmark_lp_tensor_warp32.py",
+    "sha256": "cc17179bd8f672dfd7272874f38181276cc9555c8c96379ab6cb1e76c1565ef6"
+  },
+  "source_locations": {
+    "artifact_capture": 201,
+    "strict_cache_reader": 162,
+    "verification_creation": 203
+  },
+  "status": "incomplete_profile_receipt_binding",
+  "stop": {
+    "path": "artifacts/gpup-tensor-warp32-v1/funded-continuation-v1/execution-stop.json",
+    "sha256": "5d9037084c31b55df77b388da2fc64f894fa6797b410068adaebbaf669cbda2d"
+  },
+  "timings_executed": 0
+}

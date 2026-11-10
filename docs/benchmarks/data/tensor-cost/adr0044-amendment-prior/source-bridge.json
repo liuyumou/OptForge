@@ -1,0 +1,51 @@
+{
+  "identity": "adr0044-in-container-amendment-prior-source-v1",
+  "purpose": "Exact pre-amendment ADR and prior planning source snapshots; historical receipts unchanged",
+  "sources": [
+    {
+      "archive_path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/dbfaeae2149b3f3d6dfee8b8e9c61e879a7980321c9213b93752a7e1f917aaaf.txt",
+      "historical_path": "docs/plans/lp-tensor-kubernetes-constraint.md",
+      "sha256": "dbfaeae2149b3f3d6dfee8b8e9c61e879a7980321c9213b93752a7e1f917aaaf"
+    },
+    {
+      "archive_path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/05b4d319aff2b15295d20d3f2bdc9542bdc1b49dd1768453495e8dc5241a9a06.txt",
+      "historical_path": "docs/plans/gpu-lp-precision-roadmap.md",
+      "sha256": "05b4d319aff2b15295d20d3f2bdc9542bdc1b49dd1768453495e8dc5241a9a06"
+    },
+    {
+      "archive_path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/9e008a9fb6a7e4fe90bee8e072110ba371e00b21735a0d77ed0dd3c184d853dd.txt",
+      "historical_path": "state/active-task.md",
+      "sha256": "9e008a9fb6a7e4fe90bee8e072110ba371e00b21735a0d77ed0dd3c184d853dd"
+    },
+    {
+      "archive_path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/ef0761420170ecb62d23b4a76d79eefde99fab1b8d9dd5d9ae4e99787304edb3.txt",
+      "historical_path": "state/known-failures.md",
+      "sha256": "ef0761420170ecb62d23b4a76d79eefde99fab1b8d9dd5d9ae4e99787304edb3"
+    },
+    {
+      "archive_path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/799e4f879c680798dea30fa42c6a14a5a9c55c0ad5fbb4cb349fd874d38a0372.txt",
+      "historical_path": "state/backlog.yaml",
+      "sha256": "799e4f879c680798dea30fa42c6a14a5a9c55c0ad5fbb4cb349fd874d38a0372"
+    },
+    {
+      "archive_path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/719e314726aa04d00cfa47410e9c6a63269ff73f42bf4db4775654f02c20da6d.txt",
+      "historical_path": "AGENTS.md",
+      "sha256": "719e314726aa04d00cfa47410e9c6a63269ff73f42bf4db4775654f02c20da6d"
+    },
+    {
+      "archive_path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/d4db15c2ff8e3abe6360c5334efa07777c328b85219a51468476a73672802071.txt",
+      "historical_path": "wiki/status.md",
+      "sha256": "d4db15c2ff8e3abe6360c5334efa07777c328b85219a51468476a73672802071"
+    },
+    {
+      "archive_path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/59eb82117ab4d9aa0e887cc5c9b488c2de25f68e18b48ef72b143307364a2520.txt",
+      "historical_path": "CHANGELOG.md",
+      "sha256": "59eb82117ab4d9aa0e887cc5c9b488c2de25f68e18b48ef72b143307364a2520"
+    },
+    {
+      "archive_path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/b985e5175f8fa546dff959408a3561d128fa5026a4685adf6d73d801d4141651.txt",
+      "historical_path": "docs/decisions/ADR-0044-tensor-cost-continuation.md",
+      "sha256": "b985e5175f8fa546dff959408a3561d128fa5026a4685adf6d73d801d4141651"
+    }
+  ]
+}

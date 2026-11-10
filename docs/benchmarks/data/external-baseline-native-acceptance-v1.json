@@ -1,0 +1,113 @@
+{
+  "attempted": 240,
+  "backlog_acyclic": true,
+  "backlog_tasks": 50,
+  "certificate_recomputations": 0,
+  "cleanup_empty": true,
+  "commit_created": false,
+  "comparison_passes": 198,
+  "cuopt_native_return_passes": 90,
+  "cuopt_strict_certified": 24,
+  "date": "2026-11-10",
+  "documentation_pages": 187,
+  "exact_frozen_eof_exceptions": [
+    {
+      "path": "tools/lp_baseline_adapters_v5.py",
+      "sha256": "455dfd7fabf3298e1600a5991cc91d0e8a48b27cc144aff90284bc953d59e34d"
+    }
+  ],
+  "final_accounting": {
+    "path": "docs/benchmarks/data/external-baseline-native-accounting-v1.json",
+    "sha256": "7da58b68f400951f67b2cafc8e3d67dcc1dc5c216b586d10bb34fa345a4ca892"
+  },
+  "final_audit_settlement": {
+    "path": "artifacts/gpup-external-baseline-v5/resources/native-final-delivery-audit-v2.settlement.json",
+    "sha256": "8e1d5b5abd3d6bde63f11d998f13e3c47b3582aec161b6bfa338025da4d43944"
+  },
+  "findings_delivery": {
+    "path": "artifacts/gpup-external-baseline-v5/delivery-findings.json",
+    "sha256": "1de4207760ebbe5a588ea1f1176f31c4db5266bafb353c323282219f8b46119c"
+  },
+  "freeze_and_dependency_identity": true,
+  "full_comparison_complete": true,
+  "historical_ledger_events": 17438,
+  "human_report": {
+    "path": "docs/benchmarks/lp-external-baseline-native-return.md",
+    "sha256": "2fdf521df379ca2b8411c41d83a21da118adb6cc53c813050b3dabb61e0a1ba3"
+  },
+  "installed_api_check": {
+    "path": "artifacts/gpup-external-baseline-v5/resources/native-return-api.settlement.json",
+    "sha256": "857f62c3ede443d3717643e75efe6dafb7364e0722959f826bedf36d4b2e2ccd"
+  },
+  "installed_api_checks": 1,
+  "kind": "lp-baseline-native-final-acceptance",
+  "machine_delivery": {
+    "path": "docs/benchmarks/data/external-baseline-native-result-v1.json",
+    "sha256": "30109efb44282a43ba66cf0e5ab5ebb1768344fe86d76fd12dac1689ede71159"
+  },
+  "metadata_checks": {
+    "path": "artifacts/gpup-external-baseline-v5/delivery-checks.json",
+    "sha256": "c210eeb3b56b678ad33f9daef4dee8ad90df5736279300b20cc753eb00d68003"
+  },
+  "native_pass_is_mathematical_certificate": false,
+  "new": 117,
+  "new_policy_tests": 9,
+  "new_text_hygiene": true,
+  "next_ready_task": "GPUP-RESIDENT2",
+  "numerical_sources_unchanged": true,
+  "planned": 240,
+  "policy_tests": {
+    "path": "artifacts/gpup-external-baseline-v5/resources/native-return-tests.settlement.json",
+    "sha256": "31270cdefd99b37e822ed5b2b853a2fb7918674b13d1037e8c87ad615521f284"
+  },
+  "previous_acceptance": {
+    "path": "docs/benchmarks/data/external-baseline-acceptance-v1.json",
+    "sha256": "9e43e22034c53b81c08d1cf880ec30fda3a1ae01fcc0fa4d0ccb4594b98be6dd"
+  },
+  "report": {
+    "path": "artifacts/gpup-external-baseline-v5/report.json",
+    "sha256": "30109efb44282a43ba66cf0e5ab5ebb1768344fe86d76fd12dac1689ede71159"
+  },
+  "report_delivery_sources": [
+    {
+      "path": "tools/lp_baseline_native_delivery.py",
+      "sha256": "580f243879fddd536fc2f7b50775ccff8c0def666e31c4ae4aa49b9f76bd0db7"
+    },
+    {
+      "path": "tools/lp_baseline_native_audit.py",
+      "sha256": "5865ffa5c08b9674dfb33f239b00f1931706dbe56f4dcd936dd7a50c134db683"
+    },
+    {
+      "path": "tools/lp_baseline_native_audit_v2.py",
+      "sha256": "d2852f0d463becc5bd66ce257ac11def81b06f0b668f49aba8dab7786a14532c"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v5/delivery/update-docs.py",
+      "sha256": "d582e8b655123c920efb5060a5e95c201936f6da1b564246fe879be4df7a7749"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v5/delivery/findings.py",
+      "sha256": "231c681d0792b499c1d325d1ac37d987ecfc892f1f45fbc575366625f91adf50"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v5/delivery/findings-v2.py",
+      "sha256": "1af707bb84317c8418fe4184ecedffcfbb5db2a6f87b6f323a96f7690b30d84c"
+    },
+    {
+      "path": "artifacts/gpup-external-baseline-v5/delivery/finalize.py",
+      "sha256": "0b094dc88d515e94b95e4a6dec9d0ee09e49f4258cb1b77751751b03f8cb9d6a"
+    }
+  ],
+  "resource_settlements_checked": 127,
+  "retained_historical_evidence_files": 15,
+  "retained_native_observations": {
+    "path": "docs/benchmarks/data/external-baseline-native-observations-v1.json",
+    "sha256": "06ac86c95b0c37c3a9e170f0578174bc2e6d2a89454da75126e4dc59e448c2a4"
+  },
+  "reused": 123,
+  "schema_version": 1,
+  "scientific_gate_reruns": 0,
+  "scoped_diff_hygiene": true,
+  "status": "passed",
+  "strict_certified": 135
+}

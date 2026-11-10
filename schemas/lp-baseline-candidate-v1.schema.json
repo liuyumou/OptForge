@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "Solver-neutral untrusted LP candidate v1",
+  "required": [
+    "schema_version",
+    "kind",
+    "model_sha256",
+    "row_ids",
+    "variable_ids",
+    "primal",
+    "dual",
+    "transport",
+    "native_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "lp-baseline-candidate"
+    },
+    "model_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "row_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "uniqueItems": true
+    },
+    "variable_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "uniqueItems": true
+    },
+    "primal": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "number"
+      }
+    },
+    "dual": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "number"
+      }
+    },
+    "transport": {
+      "enum": [
+        "completed",
+        "timeout",
+        "cancelled",
+        "error",
+        "unavailable"
+      ]
+    },
+    "native_status": {
+      "enum": [
+        "optimal",
+        "limit",
+        "infeasible",
+        "unbounded",
+        "infeasible_or_unbounded",
+        "numerical_failure",
+        "unknown",
+        "not_run"
+      ]
+    }
+  }
+}

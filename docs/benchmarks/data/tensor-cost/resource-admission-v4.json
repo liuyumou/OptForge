@@ -1,0 +1,12 @@
+{
+  "gpu_seconds": 0,
+  "hard_memory_enclosure": false,
+  "host_access": false,
+  "identity": "gpup-tensor-cost-resource-admission-v4",
+  "mode": "cooperative_process_supervision_v1",
+  "prior_refusals_preserved": true,
+  "receipt": "artifacts/gpup-tensor-cost-v1/resource-and-source-proof-v5.json",
+  "status": "passed",
+  "supervisor_sha256": "523184f432ff32fdf1150b79bed4aefe3f03872464e736d466da39095564263a",
+  "tests": 26
+}

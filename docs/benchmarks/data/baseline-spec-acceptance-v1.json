@@ -1,0 +1,165 @@
+{
+  "accounted_validation_cpu_seconds": 491.991286,
+  "check_artifacts": [
+    {
+      "path": "artifacts/gpup-baseline-spec-v1/contracts-resource.json",
+      "sha256": "0da8395080ca3403ab04faf2a6dd819252713a07e3bdf8fc0d23debcb84aa759"
+    },
+    {
+      "path": "artifacts/gpup-baseline-spec-v1/contracts.log",
+      "sha256": "e8e8d196757baf794c1a3d98a45a29461284df07fb8ea532c712226898e7ec9d"
+    },
+    {
+      "path": "artifacts/gpup-baseline-spec-v1/delivery-checks.json",
+      "sha256": "91b17c6358770507d2b8687d1fdc8010a7529206f2812d848bb558379ba69f8a"
+    },
+    {
+      "path": "artifacts/gpup-baseline-spec-v1/documentation-resource.json",
+      "sha256": "03811b677654f1348103ccd0f7f1d9cc33b8231e23e7348a5236022ac2a12dcb"
+    },
+    {
+      "path": "artifacts/gpup-baseline-spec-v1/proposal-resource.json",
+      "sha256": "6e26ab93f54909e046a9964b70e4f1768dbdd2e75c945eddcc681113a82f9181"
+    }
+  ],
+  "checks": {
+    "contracts-resource.json": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/integration",
+        "-p",
+        "test_lp_baseline_contract.py",
+        "-v"
+      ],
+      "cpu_seconds": 1.198301,
+      "elapsed_seconds": 1.2158596543595195,
+      "exit_code": 0,
+      "initial_instrumentation": "/usr/bin/time unavailable; initial command did not launch tests; no package installed",
+      "scope": "new CPU contracts only"
+    },
+    "documentation-resource.json": {
+      "command": [
+        "python3",
+        "tools/build_docs.py"
+      ],
+      "cpu_seconds": 2.287757,
+      "elapsed_seconds": 2.3138367980718613,
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "documentation built: 178 pages; internal links and anchors passed\n"
+    },
+    "proposal-resource.json": {
+      "checks": [
+        {
+          "command": [
+            "python3",
+            "tools/lp_baseline_contract.py",
+            "proposal",
+            "benchmarks/configs/lp-external-baseline-proposal-v1.json",
+            "--verify-artifacts"
+          ],
+          "exit_code": 0,
+          "stderr": "",
+          "stdout": "{\"contract_valid\": true, \"execution_authorized\": false, \"proposed_cpu_seconds\": 64640, \"proposed_gpu_seconds\": 10560, \"screening_jobs\": 240}\n"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/lp_baseline_contract.py",
+            "endpoint",
+            "examples/lp-baseline-endpoint-v1.synthetic.json",
+            "--model",
+            "examples/lp-baseline-model-v1.json"
+          ],
+          "exit_code": 0,
+          "stderr": "",
+          "stdout": "{\"contract_valid\": true, \"solver_accepted\": false}\n"
+        }
+      ],
+      "cpu_seconds": 8.505228,
+      "elapsed_seconds": 8.507447773590684
+    }
+  },
+  "cpu_accounting_note": "Measured child CPU covers tests, proposal/example validation and documentation. The separate 120-second bounded metadata/diff inspection was unmetered and conservatively retains a 480 CPU-second reservation; these are new task records, not historical campaign charges.",
+  "cpu_contract_exit_code": 0,
+  "cpu_contract_tests": 20,
+  "date": "2026-11-10",
+  "delivery_checks": {
+    "historical_numerical_sources_adrs_manifests_unchanged": true,
+    "inspected_sources_unchanged": 12,
+    "new_file_whitespace_passed": true,
+    "next_ready_task": "GPUP-BASELINE",
+    "resource_shortfalls_checked_decimal": true,
+    "retained_evidence_files_unchanged": 15,
+    "unique_acyclic_tasks": 49
+  },
+  "documentation_pages": 178,
+  "execution_authorized": false,
+  "files": [
+    {
+      "path": "docs/specifications/SPEC-0022-external-lp-baseline.md",
+      "sha256": "d855900d3349d81785eb552514204f6c29e43723e91b8d06552dd99502ffcce5"
+    },
+    {
+      "path": "docs/benchmarks/lp-external-baseline-v1.md",
+      "sha256": "a1de57aeea03fbad2dd1554bcd5a852656dd186c4a2083bb7068c8f89360a57a"
+    },
+    {
+      "path": "benchmarks/configs/lp-external-baseline-proposal-v1.json",
+      "sha256": "f338b9a10e489c05222da7d44ee5b106d3c966f80ceaa7557daca658bd713995"
+    },
+    {
+      "path": "tools/lp_baseline_contract.py",
+      "sha256": "990177c92ccfdc8f44c2632429b25eae69a89e22981091cf85d4ae825941bd6b"
+    },
+    {
+      "path": "tests/integration/test_lp_baseline_contract.py",
+      "sha256": "c7cf066876793b9d33241c5e3f8282aab5bb4d5e8f4ce98165286f500cb970b1"
+    },
+    {
+      "path": "schemas/lp-baseline-model-v1.schema.json",
+      "sha256": "af400ddfec849a16ffdded991bddf0a995d945eb10af27958b80dfcd2d42b7dd"
+    },
+    {
+      "path": "schemas/lp-baseline-endpoint-v1.schema.json",
+      "sha256": "a5cfae8850ab46e4abcb224b60c3b48d2cd3b5d3c21337beda284c072bdbb7ad"
+    },
+    {
+      "path": "schemas/lp-baseline-proposal-v1.schema.json",
+      "sha256": "cd75c549a14a07d6bb28f4edde950c1a681bbaa8f6fa2a70b8ddc7d88f7c1e4e"
+    },
+    {
+      "path": "examples/lp-baseline-model-v1.json",
+      "sha256": "48d75f966fdae0bf6cb433cdf06d7cbdccd7059a111eac134886313b0ed34baf"
+    },
+    {
+      "path": "examples/lp-baseline-endpoint-v1.synthetic.json",
+      "sha256": "01f06e2e2a9ba758b05890982c187bd3e7f83ff53ddd32321ac33794285400de"
+    },
+    {
+      "path": "docs/benchmarks/data/baseline-spec-api-inspection-v1.json",
+      "sha256": "38cc5c1f9341a9763dd85ecfad874947ae864b70d1259e2206eebe6a0edf1026"
+    }
+  ],
+  "gpu_jobs": 0,
+  "historical_resource_transfers": 0,
+  "limits": [
+    "This is contract/metadata acceptance, not independent verification of a solver endpoint.",
+    "No benchmark/solver or historical scientific gate ran.",
+    "The two-phase resource package is a proposal only."
+  ],
+  "proposal_valid": true,
+  "schema_version": 1,
+  "solver_acceptance": false,
+  "solver_executions": 0,
+  "status": "complete_cpu_contract_only",
+  "synthetic_endpoint_valid": true,
+  "task": "GPUP-BASELINE-SPEC",
+  "unmetered_metadata_check_reserved_cpu_seconds": 480,
+  "validation_cpu_ceiling_seconds": 600,
+  "validation_process_cpu_seconds": 11.991286000000002
+}

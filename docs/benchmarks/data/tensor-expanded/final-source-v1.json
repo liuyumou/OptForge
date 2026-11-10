@@ -1,0 +1,37 @@
+{
+  "accounting": {
+    "path": "docs/benchmarks/data/tensor-expanded/final-cpu-accounting-v1.json",
+    "sha256": "d08ddd514470fb062e22c2c0f5f6b3f7c2e2f2391b9551afa18dcc544c6296eb"
+  },
+  "final_report": {
+    "path": "docs/benchmarks/lp-tensor-expanded-final-gpup8.md",
+    "sha256": "3a379d9c902462f902c98142feb558ed924f79f788193abbdba19efc4cffce88"
+  },
+  "ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "9913d391634bdb0f74012be909be377e5a693d00b76e6882abcf336796ac863e"
+  },
+  "metadata_checks_pass": true,
+  "new_sources": [
+    {
+      "path": "tools/lp_tensor_expanded_authority.py",
+      "sha256": "1971a02c9c65911b1da5118b83ab30bfa4ff79836c5430f605e70296545f6798"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_cpu.py",
+      "sha256": "8f5ab62621f759761b12e758db98107f272f87900a6b043af8c9c0baed62113b"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_proof.py",
+      "sha256": "72af72df5f5abfba20c691138e13547b3b51ef31e08ac6b5e648253942b9c1b4"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_fast.h",
+      "sha256": "7ac6e3d3f3f745d4a7a5b7686f260df037618ccda6779886b0da95b7b2b5feda"
+    },
+    {
+      "path": "tools/diagnostics/lp_tensor_expanded_host.cpp",
+      "sha256": "e37f943bc2b7cca55b6b5903ccd3ecb8362823b6fc66f551800c7fe7d6cd6e2d"
+    }
+  ]
+}

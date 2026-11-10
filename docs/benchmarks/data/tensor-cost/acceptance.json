@@ -1,0 +1,57 @@
+{
+  "admission": {
+    "path": "docs/benchmarks/data/tensor-cost/cpu-admission.json",
+    "sha256": "b7f306e4ba10dc5d4162d5fd497ba292dc30ef338e17fee208a1dbea163beaab"
+  },
+  "adr0044_status": "accepted",
+  "campaign_gpu_seconds": "22184.699888064",
+  "cpu_settlement": {
+    "path": "docs/benchmarks/data/tensor-cost/cpu-settlement.json",
+    "sha256": "cffa3f254caf0452103961cf8e15a5ebcf6e4f025b4ccc02786f54acf6d52281"
+  },
+  "documentation_log": {
+    "path": "artifacts/gpup-tensor-cost-v1/refusal-docs.log",
+    "sha256": "f10e2b1f95892ae8ed74a4e84ef09253e0b146a0a8c12caa22b91a87a77174a8"
+  },
+  "documentation_pages": 145,
+  "documentation_status": "passed",
+  "gpu_acceptance": "not_started",
+  "gpu_reservations": 0,
+  "gpu_seconds": 0,
+  "gpu_study": "not_started",
+  "gpup8_status": "incomplete",
+  "historical_cpu_overlap": "not_certified_unchanged",
+  "identity": "gpup-tensor-cost-refusal-delivery-v1",
+  "ledger_events": 17362,
+  "ledger_sha256": "e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5",
+  "local_commit": "not_created_full_native_gate_not_admitted",
+  "native_acceptance": "not_run_resource_admission_refused",
+  "numerical_preparation": "not_started",
+  "prefixes_verified": {
+    "17132": "930de6771ab9bfbcb855bd05a07a58f6700aa1ade36bca09346790a94e7ff035",
+    "17200": "5af7782a384ac73226f339d98d0b33e320518053c1accdf67c1339db36d0e0f1",
+    "17362": "e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5"
+  },
+  "preflight_returncode": 2,
+  "preflight_tests": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/integration",
+      "-p",
+      "test_lp_tensor_cost_preflight.py"
+    ],
+    "passed": 7,
+    "scope": "Bootstrap simulations only; no real coordinator/containment acceptance",
+    "source": {
+      "path": "tests/integration/test_lp_tensor_cost_preflight.py",
+      "sha256": "d8af14760092f0c3a3a10d21c71b67deed97b079fad44a0716307865d78b6358"
+    }
+  },
+  "status": "cpu_admission_refusal",
+  "task_gpu_seconds": "825.114032275",
+  "whitespace_status": "passed"
+}

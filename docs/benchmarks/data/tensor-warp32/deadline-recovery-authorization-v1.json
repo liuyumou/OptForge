@@ -1,0 +1,41 @@
+{
+  "additional_cpu_ns": 3600000000000,
+  "all_prior_charges_preserved": true,
+  "authorization": "User explicitly approves the selected deadlines, 3600 additional CPU seconds and unused-fund reallocation, 2026-10-24",
+  "automatic_retry": false,
+  "bootstrap_rerun": false,
+  "completion_criteria_changed": false,
+  "continuation_allocation_cpu_ns": 13440000000000,
+  "cpu_ceiling_ns": 43240000000000,
+  "gpu_cap_seconds": 790,
+  "gpu_phase_caps_seconds": {
+    "acceptance": 290,
+    "profiles": 200,
+    "timings": 300
+  },
+  "headroom_cpu_seconds": {
+    "implementation": 100,
+    "margin": 400,
+    "native": 0,
+    "proofs": 0,
+    "reporting": 248,
+    "workers": 3600
+  },
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-deadline-recovery-authorization-v1",
+  "plan": "docs/plans/lp-tensor-warp32-deadline-recovery.md",
+  "plan_sha256": "e7a3dfe7078d206919cd1e0f50fab3d336d72060c8280782714cc688eac57268",
+  "prior_accounting": "docs/benchmarks/data/tensor-warp32/deadline-amendment-accounting-v1.json",
+  "prior_accounting_sha256": "62b11d9cca091329a642aabf18baa9681385eb57d603a653cc86264b0c837818",
+  "prior_cpu_total_ns": 38731199599642,
+  "prior_gpu_prefix_events": 17370,
+  "prior_gpu_prefix_sha256": "2dac176a925a0bba6096eea8f57ed694465c0199625d120eeb32d468310dc4e4",
+  "prior_journal": "artifacts/gpup-tensor-warp32-v1/cpu-journal-deadline-amendment-final-v22.json",
+  "prior_journal_sha256": "d34454968e4c73c08855624c5e38b63ca2cd2fe2fe932a83f5e8f7be27743ff4",
+  "project_work_deadline_seconds": 180,
+  "report_work_deadline_seconds": 60,
+  "setup_cpu_ns": 8000000000,
+  "software_checks_reused": true,
+  "status": "accepted",
+  "supervisor_change": false
+}

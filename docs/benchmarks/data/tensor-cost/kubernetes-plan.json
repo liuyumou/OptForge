@@ -1,0 +1,62 @@
+{
+  "additional_gpu_offer_reserved_seconds": 0,
+  "additional_gpu_seconds_offered": 3600,
+  "adr0044_unspent_cpu_seconds": 1700,
+  "aggregate_resource_compliance_claimed": false,
+  "checks": {
+    "accepted_adr_and_probe_bindings": "pass",
+    "budget_arithmetic": "pass",
+    "exact_17362_event_gpu_ledger": "pass",
+    "full_native_gate": "not_run_resource_blocked",
+    "git_diff_check": "pass",
+    "local_plan_links": "pass"
+  },
+  "combined_cpu_cap_seconds": 21600,
+  "combined_cpu_upper_seconds": "19894.822845162",
+  "conservative_planning_cpu_charge_seconds": 10,
+  "gpu_reservations": 0,
+  "gpu_seconds": 0,
+  "host_or_namespace_operations": 0,
+  "identity": "gpup-tensor-kubernetes-plan-v1",
+  "ledger_sha256": "e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5",
+  "new_resource_admission_attempts": 0,
+  "numerical_workload_launches": 0,
+  "planning_charge_source": "Previously unallocated original-ceiling headroom; no transfer from ADR-0044 stages",
+  "prior_cpu_upper_seconds": "19884.822845162",
+  "remaining_cpu_seconds": "1705.177154838",
+  "scope": "Documentation-only response to user-confirmed Kubernetes/container-only constraint; no execution admission",
+  "sources": [
+    {
+      "path": "docs/plans/lp-tensor-kubernetes-constraint.md",
+      "sha256": "dbfaeae2149b3f3d6dfee8b8e9c61e879a7980321c9213b93752a7e1f917aaaf"
+    },
+    {
+      "path": "docs/plans/gpu-lp-precision-roadmap.md",
+      "sha256": "05b4d319aff2b15295d20d3f2bdc9542bdc1b49dd1768453495e8dc5241a9a06"
+    },
+    {
+      "path": "state/active-task.md",
+      "sha256": "9e008a9fb6a7e4fe90bee8e072110ba371e00b21735a0d77ed0dd3c184d853dd"
+    },
+    {
+      "path": "state/known-failures.md",
+      "sha256": "ef0761420170ecb62d23b4a76d79eefde99fab1b8d9dd5d9ae4e99787304edb3"
+    },
+    {
+      "path": "state/backlog.yaml",
+      "sha256": "799e4f879c680798dea30fa42c6a14a5a9c55c0ad5fbb4cb349fd874d38a0372"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "719e314726aa04d00cfa47410e9c6a63269ff73f42bf4db4775654f02c20da6d"
+    },
+    {
+      "path": "wiki/status.md",
+      "sha256": "d4db15c2ff8e3abe6360c5334efa07777c328b85219a51468476a73672802071"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "59eb82117ab4d9aa0e887cc5c9b488c2de25f68e18b48ef72b143307364a2520"
+    }
+  ]
+}

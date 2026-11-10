@@ -61,7 +61,23 @@ if ! awk '
     echo "acceptance gate: SPEC-0011 requirements 6 to 8 make the reduction order a contract" >&2
     exit 1
 fi
-if rg -n 'atomicAdd\(' cuda/lp_pdhg_tuned cuda/lp_pdhg_precision cuda/lp_pdhg_research cuda/lp_pdhg_exec cuda/lp_pdhg_refine cuda/lp_pdhg_quant cuda/lp_pdhg_quant_resident cuda/diagnostics; then
+if python3 - <<'PYATOM'
+from pathlib import Path
+import re
+directories = ['lp_pdhg_tuned', 'lp_pdhg_precision', 'lp_pdhg_research',
+    'lp_pdhg_exec', 'lp_pdhg_refine', 'lp_pdhg_quant', 'lp_pdhg_quant_resident',
+    'lp_pdhg_tensor', 'lp_pdhg_tensor_residual', 'lp_pdhg_tensor_cost', 'diagnostics']
+found = False
+for directory in directories:
+    for path in sorted((Path('cuda') / directory).rglob('*')):
+        if path.is_file() and path.suffix in {'.cu', '.h'}:
+            for number, line in enumerate(path.read_text().splitlines(), 1):
+                if re.search(r'atomicAdd\s*\(', line):
+                    print(f'{path}:{number}:{line}')
+                    found = True
+raise SystemExit(0 if found else 1)
+PYATOM
+then
     echo "acceptance gate: atomic accumulation in tuned kernels" >&2
     exit 1
 fi

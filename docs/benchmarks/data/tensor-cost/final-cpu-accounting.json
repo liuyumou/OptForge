@@ -1,0 +1,28 @@
+{
+  "all_final_descendants_reaped": true,
+  "bootstrap_rerun": false,
+  "container_configuration_changes": false,
+  "cumulative_cpu_ceiling_seconds": 35900,
+  "cumulative_cpu_upper_seconds": 29749.705814258,
+  "final_combined_cpu_gate_pass": false,
+  "final_combined_cpu_gate_reason": "guardian_cpu_wall_deadline; full 530 CPU seconds charged",
+  "final_docs_pages": 150,
+  "final_docs_smoke_pass": true,
+  "host_access": false,
+  "identity": "gpup-tensor-cost-final-cpu-accounting-v1",
+  "independent_cpu_records_verified": 48,
+  "journal_sha256": "44a246d1d0c43057ca46daa6454c3ee3212b5ab08434b43cc2712de02561a3cb",
+  "numerical_commit_created": false,
+  "posthoc_reader_tests_passed": 5,
+  "predevice_full_native_pass": true,
+  "predevice_python_tests": 405,
+  "stage_charged_cpu_seconds": {
+    "implementation": 1585.059638324,
+    "margin": 0.0,
+    "native": 3799.880040068,
+    "proofs": 1580.675732976,
+    "reporting": 794.806759144,
+    "workers": 2089.460798584
+  },
+  "status": "device_correctness_stop"
+}

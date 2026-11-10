@@ -1,0 +1,112 @@
+{
+  "completion": {
+    "documentation_pages": 188,
+    "historical_receipt_published_byte_exact": {
+      "path": "artifacts/gpup-tensor-latency-v1/native-acceptance.json",
+      "sha256": "c1c7dc0b8796adef8ba7fb0fb399c52f31b5fd0be19bb3cadacc3f6cc52be4c0"
+    },
+    "log": {
+      "path": "artifacts/gpup-baseline-pr-integration/docs-smoke-completion.log",
+      "sha256": "6ef9afb3352ffbc4803239be7a52d49c1cac36a546d4bee3eb0084f3b73b5ac1"
+    },
+    "receipt": {
+      "path": "artifacts/gpup-baseline-pr-integration/docs-smoke-completion.json",
+      "sha256": "07d0d5ae0beb6724df8a401e5a2577619740e8c59e264f09492fc5d1f5759ab0"
+    },
+    "smoke": "passed"
+  },
+  "composition": "Reuse the exact code pass at tested_code_commit. The only validation repair after it is adding the original historical documentation receipt at its existing link target. Complete the remaining unchanged documentation and smoke commands separately. Final follow-up changes only integration metadata/documentation and that receipt; no executable, test, dependency, workflow or scientific-source change.",
+  "coverage": [
+    "pinned native HiGHS build",
+    "shell syntax",
+    "CUDA source atomic guards",
+    "format",
+    "clippy",
+    "Rust workspace tests",
+    "workspace build",
+    "Rust docs with warnings denied",
+    "dependency advisories/bans/licenses/sources",
+    "artifact schemas and provenance",
+    "512 Python integration tests",
+    "committed-record replay",
+    "documentation links and anchors",
+    "CPU benchmark smoke"
+  ],
+  "date": "2026-11-10",
+  "exact_frozen_eof_exceptions": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-warp32-deadline-recovery-gpup8.md",
+      "sha256": "1b431cbaa12960761721b51d4bc77814d69d1a2f042e0c6b16e98c147d0f7096"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-warp32-inventory-admission-gpup8.md",
+      "sha256": "b57875b3c6086295940539fb79a36344b64ba3e0a8f0e7d14b15b2f5bc8f96a8"
+    },
+    {
+      "path": "docs/benchmarks/lp-tensor-warp32-inventory-device-gpup8.md",
+      "sha256": "b94666380324bf884a2ef9ccbc7079a5fa2c650db4f92d50d48454e7b9caa08b"
+    },
+    {
+      "path": "tools/lp_baseline_adapters_v5.py",
+      "sha256": "455dfd7fabf3298e1600a5991cc91d0e8a48b27cc144aff90284bc953d59e34d"
+    }
+  ],
+  "final_metadata_cpu_allowance_ns": 64000000000,
+  "full_gate": {
+    "log": {
+      "path": "artifacts/gpup-baseline-pr-integration/full-cpu-gate-v2.log",
+      "sha256": "d89aa37776b9fa7dd8f426805f98745fcf6ad37e88604b8969c16d2c70307a71"
+    },
+    "python_tests_passed": 512,
+    "receipt": {
+      "path": "artifacts/gpup-baseline-pr-integration/full-cpu-gate-v2.json",
+      "sha256": "f891ed6bb7b7d44364cbb38df87ff7ca1a01df42beb94beb9b25eb1f7cac1608"
+    },
+    "retained_failure": "Frozen ADR-0044 linked one ignored 733-byte historical JSON receipt. The original failed command and charge remain preserved.",
+    "rust_tests_passed": 634,
+    "status": "passed_through_committed_record_replay_then_failed_documentation_link"
+  },
+  "github_actions": {
+    "conclusion": "startup_failure",
+    "current_detailed_cause_available": false,
+    "head": "61c2760dea94094b95bc623925a1b3d5be28f31d",
+    "hosted_success_claimed": false,
+    "jobs_started": 0,
+    "local_equivalent_used": true,
+    "prior_main_annotation": "The job was not started because an Actions budget is preventing further use.",
+    "prior_main_run": 39885575387,
+    "protection_bypass": false,
+    "runs": [
+      42837837852,
+      42837823132
+    ]
+  },
+  "gpu_seconds": 0,
+  "historical_allocations_reopened": false,
+  "historical_evidence_hashes_checked": 15,
+  "historical_ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "fabe2e22047bac9194867e1f745c627a2271bc7c0cd283f17b207957c7bbb59d"
+  },
+  "kind": "lp-baseline-pr-local-composite-acceptance",
+  "local_cpu_ceiling_seconds": 6000,
+  "local_cpu_charged_ns": 2845914088804,
+  "new_scientific_task_started": false,
+  "other_diff_hygiene": true,
+  "prior_acceptance": {
+    "path": "docs/benchmarks/data/external-baseline-pr-local-acceptance-v4.json",
+    "sha256": "6ed2f601b64485c40ce45c6e3d1f744b2aa4c3221d4d09c36065e3a6cbec4825"
+  },
+  "schema_version": 1,
+  "source_bridge": {
+    "path": "docs/benchmarks/data/external-baseline-pr-source-bridge-v3.json",
+    "sha256": "3b8d556a509324af2e0c702114a47ab4a8ef0d721637a74ebe899a9da64a92d4"
+  },
+  "status": "passed",
+  "tested_code_commit": "61c2760dea94094b95bc623925a1b3d5be28f31d",
+  "unchanged_frozen_runtime_files": 813
+}

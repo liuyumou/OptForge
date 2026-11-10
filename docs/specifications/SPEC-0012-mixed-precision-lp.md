@@ -1,12 +1,12 @@
 # SPEC-0012: Experimental Mixed-Precision LP Backend
 
-Status: accepted; GPUP-3/4/5/6 and bounded GPUP-7 matrix quantization implemented; vector quantization and Tensor Core precision pending
+Status: accepted; GPUP-3/4/5/6 and bounded GPUP-7 matrix quantization implemented; bounded GPUP-8 component execution implemented; working/gain qualification incomplete; broader precision pending
 Scope: opt-in LP arithmetic, resumable control, numerical audits, and recovery
 Owner: numerical backend
 Introduced: GPU LP precision research, GPUP-0
 Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (companion-design navigation, 2026-10-12)
 Supersedes: ADR-0012 defines the intended exception to SPEC-0011 requirements 5-8 and 27 for the new backend only
-Implementation: shared FP64 control, matched/tuned CUDA, fixed FP32 correction, GPUP-6 recovery and research-only lp-quant-v1; GPUP-8 pending
+Implementation: shared FP64 control, matched/tuned CUDA, fixed FP32 correction, GPUP-6 recovery and research-only lp-quant-v1 and lp-tensor-v1; GPUP-8 working/gain qualification incomplete
 Tests: continuation, bitwise trajectory, exact-rational, endpoint, native and scoped device gates; mapping below
 
 ## Proposed companion designs (2026-10-12)
@@ -603,3 +603,24 @@ verification checks canonical JSON shapes, complete monotone promotion histories
 and bounded launch/transfer accounting. Profile eligibility additionally requires
 a completed successful worker. The [CPU-only PR review](../benchmarks/lp-quant-pr-review.md)
 preserves both historical studies and records separate source/acceptance evidence.
+
+## GPUP-8 bounded component execution (ADR-0042, accepted 2026-10-23)
+
+The user's approved [ADR-0042](../decisions/ADR-0042-hybrid-tensor-components.md)
+adds research-only lp-tensor-v1 canonical dense tiles, signed 56-bit matrix/vector
+representations, INT8/FP16/BF16 component products and exact 128-bit tile
+reconstruction. This bounded subset maps SPEC-0012 requirements 16-28 to same
+represented operands in both orientations, explicit range/padding/hardware checks,
+original-unit bounds, reference audits, full rollback and charged sticky promotion.
+SPEC-0021's guarded-product/window obligations remain FP64-state/original-model
+authority obligations; no refinement combination is added.
+
+Acceptance maps to optimizer-lp/tests/tensor.rs (codec, rounding, common operands,
+checkpoint ownership, malformed counters and rollback), tensor_device.rs (device
+products/controllers/range refusal), lp_tensor_oracle.py (independent Fraction
+proof), test_lp_tensor.py (strict evidence, resources and report eligibility),
+and the separate GPUP-8 study and four sanitizer receipts. Device admission
+requires an exact CPU source/image cohort and compile/register/spill admission.
+Completion additionally requires the two working families and multiplicity-
+adjusted certified total-latency gain specified in ADR-0042; refusal/no gain leaves
+GPUP-8 incomplete. Historical interfaces, evidence and requirements stay exact.

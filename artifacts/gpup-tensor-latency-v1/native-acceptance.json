@@ -1,0 +1,25 @@
+{
+  "command": [
+    "bash",
+    "tools/check.sh"
+  ],
+  "configured_build_jobs": 4,
+  "configured_test_threads": 1,
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "cpu_seconds": 234.50076,
+  "elapsed_seconds": 238.91736781504005,
+  "gpu_seconds": 0,
+  "identity": "gpup8-latency-cpu-acceptance-v1",
+  "other_top_level_heavy_jobs": 0,
+  "peak_process_tree_rss_bytes": 1650266112,
+  "reason": "completed",
+  "resource_scope": "Sequential diagnosis gate only; sampled process-tree RSS, not ADR-0044 delegated containment acceptance.",
+  "returncode": 0,
+  "source_after": "b8d9d2fbd8a5242dfba4ffb21e45d4067b04c718d80fe7b3c4b31f6fd8617569",
+  "source_before": "b8d9d2fbd8a5242dfba4ffb21e45d4067b04c718d80fe7b3c4b31f6fd8617569"
+}

@@ -1,0 +1,66 @@
+{
+  "adr_sha256": "b985e5175f8fa546dff959408a3561d128fa5026a4685adf6d73d801d4141651",
+  "bootstrap_scope": "Capability reads, simulated refusal tests and refusal documentation only; no workload enclosure admission claimed.",
+  "continuation_cpu_cap_seconds": 2050,
+  "gpu_reservations": 0,
+  "identity": "gpup-tensor-cost-cpu-bootstrap-reservation-v1",
+  "prior_cpu_upper_seconds": "19534.822845162",
+  "stages": [
+    {
+      "commands": [
+        [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/integration",
+          "-p",
+          "test_lp_tensor_cost_preflight.py"
+        ],
+        [
+          "python3",
+          "tools/lp_tensor_cost_preflight.py",
+          "--output",
+          "docs/benchmarks/data/tensor-cost/cpu-admission.json"
+        ]
+      ],
+      "reserved_cpu_seconds": 250,
+      "stage": "resource_admission"
+    },
+    {
+      "requires": "resource_admission_pass",
+      "reserved_cpu_seconds": 550,
+      "stage": "proofs_admission"
+    },
+    {
+      "requires": "resource_admission_pass",
+      "reserved_cpu_seconds": 550,
+      "stage": "native_acceptance"
+    },
+    {
+      "requires": "resource_admission_pass",
+      "reserved_cpu_seconds": 550,
+      "stage": "leased_cpu_verification"
+    },
+    {
+      "commands": [
+        [
+          "/tmp/ai-optimizer-venv/bin/python3",
+          "tools/build_docs.py"
+        ],
+        [
+          "git",
+          "diff",
+          "--check"
+        ]
+      ],
+      "reserved_cpu_seconds": 100,
+      "stage": "reporting"
+    },
+    {
+      "reserved_cpu_seconds": 50,
+      "stage": "supervisor_margin"
+    }
+  ]
+}

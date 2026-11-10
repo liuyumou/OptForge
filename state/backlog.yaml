@@ -1,3 +1,14 @@
+# Current plan 2026-11-10: baseline complete; 240 attempted, 135 strictly certified; explicit cuOpt native-return tier.
+# User-authorized native-return policy is separate from strict certificates; RESIDENT2 is next ready.
+# Historical comments below retain earlier handoffs; GPUP-8 science is closed, GPUP-9 gated.
+# GPUP-8 expanded-window proof refuses noncanonical fixture; no GPU, no retry, GPUP-9 gated.
+# GPUP-8 2026-10-24: 12 pairs/24 verifications and memcheck/racecheck pass; initcheck admission refused.
+# Acceptance 256.421358210/290 GPU seconds; GPUP-8 incomplete, GPUP-9 gated.
+# GPUP-8 2026-10-24: operational deadlines selected (project remaining 180s/report 60s); CPU funding pending.
+# GPUP-8 2026-10-24: inventory/composite pass; project fixed-work timeout, final CPU-report deadline.
+# GPUP-8 incomplete, GPUP-9 gated, ledger 17370 preserves exact 17366-event prefix.
+# GPUP-8 2026-10-24: inventory admission stopped on cache-metadata assumption; no compilation/GPU work.
+# Approved CPU ceiling 39640; GPUP-8 incomplete and GPUP-9 gated. See inventory-admission report.
 schema_version: 1
 current_milestone: C7
 next_ready_milestone: C7
@@ -22,9 +33,65 @@ active_research_track: GPUP
 # SPEC-0021 and full expansion state remain draft; no preset follows.
 # 2026-10-22: user requests GPUP-7R resident/guard planning before GPUP-8.
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
-next_ready_task: GPUP-8
+# GPUP-8's user-approved working-family/gain requirement remains unmet.
+# Do not advance GPUP-9; unused headroom reserves no later task.
+next_ready_task: GPUP-RESIDENT2
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-DIAG
+    title: Record system diagnosis, concrete design priorities and isolated cuOpt setup
+    status: complete
+    depends_on: []
+    specification: docs/decisions/ADR-0047-certified-performance-roadmap.md
+    acceptance: "Source-bound retained-profile diagnosis; current roadmap with dependencies and go/no-go decisions; optional cuOpt installation recorded separately from solver acceptance; Gurobi unavailable; documentation/dependency and scoped preservation checks; no numerical runs or historical resource transfers"
+  - id: GPUP-BASELINE-SPEC
+    title: Prepare the common-checker cuOpt and COPT comparison contract
+    status: complete
+    depends_on: [GPUP-DIAG]
+    specification: docs/specifications/SPEC-0022-external-lp-baseline.md
+    acceptance: "SPEC-0022; three strict schemas, lossless CSC/CSR CPU contract, solver-neutral endpoint/status rules, source-bound API inspection and 20 new focused CPU tests; ten lanes/eight development models/240 proposed screening cells; phase A 6040 CPU/480 GPU seconds and conditional phase B 58600 CPU/10080 GPU seconds proposed only; execution_authorized=false; original 1e-9 checker, timing/coverage/order contracts and all historical evidence preserved; no solver or GPU execution"
+  - id: GPUP-BASELINE
+    title: Implement the external baseline with separate native and certified outcomes
+    status: complete
+    depends_on: [GPUP-BASELINE-SPEC]
+    specification: docs/specifications/SPEC-0023-baseline-native-return.md
+    acceptance: "ADR-0052 user amendment; 240 settled screening attempts, 123 reused and 117 new; 198 comparison passes and 135 strict certificates. CuOpt 90/96 native-return passes and 24/96 strict certificates, with exact error/status, quality, transport and GPU observations kept separate. Nine new tests plus installed Solution API check pass; historical evidence/settings/math and every failed charge preserved. Report: docs/benchmarks/lp-external-baseline-native-return.md."
+  - id: GPUP-BASELINE-FOLLOWUP
+    title: Specify baseline completion and the user-selected cuOpt native-return policy
+    status: complete
+    depends_on: [GPUP-BASELINE-SPEC]
+    specification: docs/specifications/SPEC-0023-baseline-native-return.md
+    acceptance: "ADR-0052 / SPEC-0023; user selected error-free cuOpt returns as a separate pass tier instead of requiring strict cuOpt qualification. Exact 117-cell continuation and source reuse, bounded new CPU and remaining GPU reservations, preserved postsolve uncertainty and native-error evidence, separate cold/prepared delivery-cost decisions. No strict certificate relaxation, historical numerical rerun or GPUP-9 release."
+  - id: GPUP-RESIDENT2
+    title: Reduce synchronization and preparation cost in a matched native baseline
+    status: ready
+    depends_on: [GPUP-BASELINE]
+    specification: docs/plans/gpu-lp-precision-roadmap.md
+    acceptance: "New bounded contract/allocation; non-overlapping preparation/import/native/check/output phase clocks and explicit cold/prepared lifecycles first; diagnose mixed-model normal-limit export and finite-bound authority, retaining failed coverage and requiring a certifying control for speed claims; device coefficients and sticky flags with safe observations, rollback/cancellation and unchanged required boundaries; separate source identity; useful total-latency improvement without coverage loss, not only fewer launches"
+  - id: GPUP-MIXED2
+    title: Evaluate simpler mixed precision with reliable residuals and escalation
+    status: planned
+    depends_on: [GPUP-BASELINE, GPUP-RESIDENT2]
+    specification: docs/plans/gpu-lp-precision-roadmap.md
+    acceptance: "New numerical protocol/allocation; begin FP32 matrix and native FP64 state/arithmetic, then separately admit lower-precision state; useful nonzero low-precision work, progress/error guards, charged native fallback and 1e-9 independent certificate; include prior refinement/quantization failure mechanisms"
+  - id: GPUP-TENSOR2
+    title: Admit selective Tensor work only with a complete-path cost case
+    status: planned
+    depends_on: [GPUP-MIXED2]
+    specification: docs/plans/gpu-lp-precision-roadmap.md
+    acceptance: "Conditional new protocol/allocation; CPU cost model includes packing/padding/component/residual/update/guard and convergence cost; proposed 10-percent complete-path screening headroom before campaign; original GPUP-8 thresholds unchanged; multiple RHS is a separate throughput endpoint"
+  - id: GPUP-PRESOLVE
+    title: Add independently validated reversible presolve and postsolve
+    status: planned
+    depends_on: [GPUP-BASELINE]
+    specification: docs/plans/gpu-lp-precision-roadmap.md
+    acceptance: "Evidence-supported separate contract/allocation; fixed variables, singleton rows and bound tightening with reversible primal/dual maps; original-model validation and measured total-cost benefit; no solver-status substitution for proof"
+  - id: GPUP-8-DISPOSITION
+    title: Decide a funded GPUP-8 recovery or an explicit negative-result closure
+    status: planned
+    depends_on: [GPUP-BASELINE, GPUP-MIXED2]
+    specification: docs/decisions/ADR-0047-certified-performance-roadmap.md
+    acceptance: "Review retained incomplete evidence and new engineering results; no automatic retry or pass; separate accepted recovery or negative-result progression ADR required before changing the GPUP-9 gate"
   - id: GPUP-COPT
     title: COPT comparison and component-cost diagnosis
     status: complete
@@ -274,17 +341,19 @@ tasks:
     specification: docs/plans/lp-quant-resident-follow-up.md
     acceptance: "ADR-0041; 72-cell CPU admission/no useful quantized window; 42 executed study jobs plus 78 CPU refusals; 39 verified study LP endpoints/36 certified of 108 timings; three complete logical-2000 profiles/21 product endpoints; full native, 66 ordinary device tests, 628 vectors, 29 fixed-work/replay pairs/four sanitizers; all 313 LP plus 21 operator endpoints freshly verify; 245.686586823 GPU s, 17132 ledger events; separate resident report, no preset"
   - id: GPUP-8
-    title: Conditionally admit hybrid sparse and Tensor Core single-solve execution
-    status: planned
+    title: Implement hybrid Tensor components with a certified latency gain
+    status: in_progress
     depends_on: [GPUP-7R]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
-    acceptance: "Hardware/layout/error/cost admission first; retain a documented rejection or defer decision when unsuitable; otherwise differential kernels, repeatability, sanitizers and packing/padding-inclusive single-RHS comparisons"
+    # Incomplete task; scientific execution closed, not the next ready task.
+    # No automatic retry or transfer; historical criteria remain unchanged.
+    acceptance: "Latest ADR-0046 recovery: corrected 7376-case proof, CPU/model/native gates and all six device jobs pass; twelve fixed-work/replay pairs accounted for, twenty new changed endpoints verified. Six small profiles complete; first large BF16 profile times out at unchanged 18-second deadline without endpoint. Nine profiles and sixty timings unexecuted; no complete forecast or certified gain. Retain full 3200 profile CPU charge and all historical failures. CPU 59603.097503214/77640; GPUP-8 GPU 1410.959187474/3000; campaign 22770.545043263/25202.574545061; ledger 17438 events. GPUP-9 gated. See lp-tensor-expanded-recovery-gpup8.md."
   - id: GPUP-9
     title: Run controlled precision experiments and ablations
     status: planned
-    depends_on: [GPUP-7, GPUP-STATE, GPUP-ASSESS]
+    depends_on: [GPUP-7, GPUP-STATE, GPUP-ASSESS, GPUP-8]
     specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
-    acceptance: "Accept concrete protocol from lp-precision-design-experiments first; bounded component/interaction blocks, frozen finalists and unseen grouped holdout; coverage, uncertainty and full costs; optional GPUP-8 disposition recorded; all campaign/phase caps preserved"
+    acceptance: "Gated on GPUP-8 completion; a negative-result closure requires a separate accepted ADR explicitly replacing that gate. Then accept concrete protocol/allocation; bounded component/interaction blocks, frozen finalists and unseen grouped holdout; coverage, uncertainty and full costs; all historical caps preserved. ADR-0047 engineering tasks do not authorize this campaign."
   - id: GPUP-10
     title: Package evidence-supported precision recipes
     status: planned

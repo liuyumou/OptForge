@@ -1,0 +1,145 @@
+{
+  "$id": "lp-baseline-model-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "column_pointers": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "kind": {
+      "const": "lp-baseline-model"
+    },
+    "model_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "objective": {
+      "items": {
+        "type": "number"
+      },
+      "type": "array"
+    },
+    "offset": {
+      "type": "number"
+    },
+    "original_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "row_ids": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "row_indices": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "row_lower": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "row_upper": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "sense": {
+      "enum": [
+        "minimize",
+        "maximize"
+      ]
+    },
+    "values": {
+      "items": {
+        "type": "number"
+      },
+      "type": "array"
+    },
+    "variable_ids": {
+      "items": {
+        "maximum": 4294967295,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "variable_lower": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "variable_upper": {
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "model_id",
+    "original_sha256",
+    "variable_ids",
+    "row_ids",
+    "sense",
+    "offset",
+    "objective",
+    "variable_lower",
+    "variable_upper",
+    "row_lower",
+    "row_upper",
+    "column_pointers",
+    "row_indices",
+    "values"
+  ],
+  "type": "object"
+}

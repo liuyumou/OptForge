@@ -1,0 +1,635 @@
+{
+  "$id": "lp-tensor-cost-evidence-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assessment": {
+      "additionalProperties": false,
+      "properties": {
+        "allowance": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "bound": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "classification": {
+          "enum": [
+            "missing_candidate",
+            "certified_success",
+            "feasible_unclosed",
+            "missing_certificate",
+            "numerical_rejection",
+            "interrupted",
+            "timeout",
+            "work_limit",
+            "unsupported",
+            "backend_failure",
+            "reference_only",
+            "missing_endpoint"
+          ]
+        },
+        "feasible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "gap_closed": {
+          "type": "boolean"
+        },
+        "gap_upper": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "objective": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "repaired": {
+          "anyOf": [
+            {
+              "maximum": 18446744073709551615,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "classification",
+        "feasible",
+        "objective",
+        "bound",
+        "gap_upper",
+        "gap_closed",
+        "allowance",
+        "repaired",
+        "reason"
+      ],
+      "type": "object"
+    },
+    "device_peak_bytes": {
+      "maximum": 1073741824,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "device_windows": {
+      "maximum": 50000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "executed_device": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "executor": {
+      "enum": [
+        "cpu",
+        "gpu"
+      ]
+    },
+    "host_product_scans": {
+      "maximum": 50000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "launches": {
+      "maximum": 18446744073709551615,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "norm_proof": {
+      "additionalProperties": false,
+      "properties": {
+        "blocks": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "fallback": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gram_bound": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "gram_terms": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "legacy_bound": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "selected_bound": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "legacy_bound",
+        "gram_bound",
+        "selected_bound",
+        "blocks",
+        "gram_terms",
+        "fallback"
+      ],
+      "type": "object"
+    },
+    "outcome": {
+      "additionalProperties": false,
+      "properties": {
+        "core": {
+          "additionalProperties": false,
+          "properties": {
+            "dual": {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 65536,
+              "type": "array"
+            },
+            "failure": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "iterations": {
+              "maximum": 50000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "norm": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "physical": {
+              "maximum": 50000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "primal": {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 65536,
+              "type": "array"
+            },
+            "promotion": {
+              "additionalProperties": false,
+              "properties": {
+                "generation": {
+                  "maximum": 9,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "mask": {
+                  "items": {
+                    "type": "boolean"
+                  },
+                  "maxItems": 8388608,
+                  "type": "array"
+                },
+                "native": {
+                  "type": "boolean"
+                },
+                "transitions": {
+                  "maximum": 9,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "mask",
+                "generation",
+                "transitions",
+                "native"
+              ],
+              "type": "object"
+            },
+            "scaled_dual": {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 65536,
+              "type": "array"
+            },
+            "scaled_primal": {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 65536,
+              "type": "array"
+            },
+            "step": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            "stop": {
+              "enum": [
+                "certified",
+                "iteration_limit",
+                "numerical_failure",
+                "device_failure",
+                "time_limit",
+                "interrupted",
+                "work_horizon"
+              ]
+            },
+            "transitions": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "generation": {
+                    "maximum": 9,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "iteration": {
+                    "maximum": 50000,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "native": {
+                    "type": "boolean"
+                  },
+                  "promoted_coefficients": {
+                    "maximum": 8388608,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "reason": {
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "iteration",
+                  "generation",
+                  "reason",
+                  "promoted_coefficients",
+                  "native"
+                ],
+                "type": "object"
+              },
+              "maxItems": 9,
+              "type": "array"
+            },
+            "work": {
+              "additionalProperties": false,
+              "properties": {
+                "assessments": {
+                  "maximum": 100002,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "audits": {
+                  "maximum": 100002,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "high_products": {
+                  "maximum": 1677721600000,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "low_products": {
+                  "maximum": 838860800000,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "proposals": {
+                  "maximum": 100002,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "rejected": {
+                  "maximum": 100002,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "replays": {
+                  "maximum": 100002,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "proposals",
+                "rejected",
+                "audits",
+                "replays",
+                "low_products",
+                "high_products",
+                "assessments"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "primal",
+            "dual",
+            "scaled_primal",
+            "scaled_dual",
+            "iterations",
+            "physical",
+            "stop",
+            "failure",
+            "work",
+            "promotion",
+            "transitions",
+            "norm",
+            "step"
+          ],
+          "type": "object"
+        },
+        "counts": {
+          "additionalProperties": false,
+          "properties": {
+            "accepted_nonzero_f": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "accepted_nonzero_t": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "coarse_pass": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "component_products": {
+              "maximum": 9223372036854775807,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "detailed_fail": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "detailed_pass": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "guard_products": {
+              "maximum": 1677721600000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "high": {
+              "maximum": 1677721600000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "low": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "mma_instructions": {
+              "maximum": 9223372036854775807,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "nonzero_f": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "nonzero_t": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "padded_products": {
+              "maximum": 9223372036854775807,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "predicated": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "residual_products": {
+              "maximum": 1677721600000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "uncertain": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "useful_windows": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "windows": {
+              "maximum": 838860800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "low",
+            "high",
+            "nonzero_t",
+            "nonzero_f",
+            "coarse_pass",
+            "detailed_pass",
+            "detailed_fail",
+            "predicated",
+            "accepted_nonzero_t",
+            "accepted_nonzero_f",
+            "useful_windows",
+            "windows",
+            "uncertain",
+            "guard_products",
+            "component_products",
+            "mma_instructions",
+            "padded_products",
+            "residual_products"
+          ],
+          "type": "object"
+        },
+        "first_certified_iteration": {
+          "maximum": 50000,
+          "minimum": 0,
+          "type": [
+            "null",
+            "integer"
+          ]
+        },
+        "guard": {
+          "enum": [
+            "tensor-cost-successor-bound-v1",
+            "none-original-tuned-v1"
+          ]
+        },
+        "horizon": {
+          "maximum": 2000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "layout": {
+          "enum": [
+            "segmented",
+            "original_tuned",
+            "int8",
+            "fp16",
+            "bf16",
+            "simt"
+          ]
+        },
+        "reduction": {
+          "enum": [
+            "exact-tile128-residual-fp64-v1",
+            "tuned-warp32-v1"
+          ]
+        }
+      },
+      "required": [
+        "core",
+        "counts",
+        "layout",
+        "guard",
+        "reduction",
+        "horizon",
+        "first_certified_iteration"
+      ],
+      "type": "object"
+    },
+    "payload_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phases_ns": {
+      "additionalProperties": {
+        "maximum": 18446744073709551615,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "object"
+    },
+    "product_vector_transfers": {
+      "maximum": 50000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "readback_bytes": {
+      "maximum": 18446744073709551615,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "reference_launches": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "reference_readback_bytes": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "reference_updates": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "request": {
+      "$ref": "lp-tensor-cost-request-v1.schema.json"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "state_uploads": {
+      "maximum": 50000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "upload_bytes": {
+      "maximum": 18446744073709551615,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "request",
+    "executor",
+    "executed_device",
+    "outcome",
+    "assessment",
+    "phases_ns",
+    "launches",
+    "upload_bytes",
+    "readback_bytes",
+    "device_peak_bytes",
+    "payload_sha256",
+    "state_uploads",
+    "device_windows",
+    "host_product_scans",
+    "product_vector_transfers",
+    "reference_updates",
+    "reference_launches",
+    "reference_readback_bytes",
+    "norm_proof"
+  ],
+  "title": "ADR-0041 resident quantization evidence",
+  "type": "object"
+}

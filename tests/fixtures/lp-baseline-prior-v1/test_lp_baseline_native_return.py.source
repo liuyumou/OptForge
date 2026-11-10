@@ -1,0 +1,149 @@
+"""New native-return policy and export boundaries; no vendor solve or GPU work."""
+import copy
+import json
+from pathlib import Path
+import sys
+import tempfile
+import types
+import unittest
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT/'tools'))
+from lp_baseline_common_v4 import load, put, ref, tiny_model
+from lp_baseline_native_policy import (comparison_pass, diagnostic, native_return_pass,
+    observe_solution, pending_screening, quality_summary)
+from lp_baseline_study_v5 import paired_comparisons
+import lp_baseline_adapters_v5 as adapters
+import lp_baseline_worker_v4 as worker
+
+
+class Solution:
+    def get_error_status(self): return 0
+    def get_error_message(self): return ''
+    def get_termination_status(self): return 1
+    def get_termination_reason(self): return 'Optimal'
+    def get_primal_objective(self): return 4.25
+    def get_dual_objective(self): return 3.75
+    def get_lp_stats(self): return dict(nb_iterations=12, primal_residual=0., dual_residual=0., gap=.5)
+    def get_solve_time(self): return .01
+    def get_solved_by(self): return 1
+    def get_primal_solution(self): return [1.]
+    def get_dual_solution(self): return [.5]
+    def get_reduced_cost(self): return [.5]
+
+
+class NativePolicy(unittest.TestCase):
+    def observation(self):
+        return observe_solution(Solution(), dict(path='canonical.json', sha256='0'*64), dict(time_limit=40))
+
+    def test_explicit_errors_missing_data_and_unknown_termination_refuse(self):
+        base = self.observation()
+        self.assertTrue(native_return_pass(base))
+        for key, value in [('error_status',1), ('error_status',False), ('error_status',None),
+                           ('error_message','native error'), ('error_message',None),
+                           ('termination_reason','NumericalError'), ('termination_reason','NoTermination'),
+                           ('termination_reason','Unknown'), ('solution_returned',False)]:
+            with self.subTest(key=key,value=value):
+                self.assertFalse(native_return_pass(dict(base, **{key:value})))
+        for key in ('error_status','error_message','termination_reason','solution_returned'):
+            value = dict(base);value.pop(key)
+            self.assertFalse(native_return_pass(value))
+
+    def test_normal_limits_and_infeasible_claims_are_not_optimality(self):
+        for reason in ('IterationLimit','TimeLimit','PrimalInfeasible','DualInfeasible','PrimalFeasible','UnboundedOrInfeasible'):
+            observation = dict(self.observation(), termination_reason=reason)
+            self.assertTrue(native_return_pass(observation))
+            self.assertTrue(comparison_pass('cuopt',True,False,observation))
+            self.assertFalse(comparison_pass('copt',True,False,observation))
+
+    def test_worker_failure_never_acquires_complete_latency_pass(self):
+        observation = self.observation()
+        self.assertTrue(native_return_pass(observation))
+        self.assertFalse(comparison_pass('cuopt',False,True,observation))
+        self.assertFalse(comparison_pass('cuopt',True,True,None))
+
+    def test_no_solution_or_missing_error_api_is_not_assumed_zero(self):
+        with self.assertRaises(ValueError): observe_solution(None,{}, {})
+        with self.assertRaises(AttributeError): observe_solution(object(),{}, {})
+
+    def test_nonfinite_diagnostics_are_explicit_and_serializable(self):
+        values = diagnostic([float('nan'),float('inf'),-float('inf'),-0.0,1.25])
+        json.dumps(values,allow_nan=False)
+        self.assertEqual(values[:3],[{'nonfinite':'nan'},{'nonfinite':'+infinity'},{'nonfinite':'-infinity'}])
+        self.assertEqual(json.dumps(values[3]),'-0.0')
+
+    def test_resume_reuses_both_successful_and_failed_settled_trials(self):
+        jobs = [dict(id=k,phase=p) for k,p in [('admission','admission'),('ok','screening'),('failed','screening'),('missing','screening')]]
+        trials = {k:dict(status=s) for k,s in [('admission','unexecuted'),('ok','passed'),('failed','refused'),('missing','unexecuted')]}
+        self.assertEqual([j['id'] for j in pending_screening(jobs,trials)],['missing'])
+
+    def test_pair_statistics_never_drop_a_failed_repeat_or_mix_transport(self):
+        rows=[]
+        for rep in range(3):
+            for config,time in [('project-tuned-fp64',20),('cuopt-pdlp-double',10)]:
+                rows.append(dict(model='m',configuration=config,repetition=rep,certified=True,
+                    comparison_pass=True,gpu_confirmed=True,elapsed_ns=time,transport_family='v4'))
+        configs=[dict(id='project-tuned-fp64',solver='project',gpu=True),dict(id='cuopt-pdlp-double',solver='cuopt',gpu=True)]
+        complete=paired_comparisons(rows,configs)
+        self.assertEqual([v['median_ratio'] for v in complete],[2.,2.])
+        rows[-1]['comparison_pass']=False;rows[-1]['certified']=False
+        self.assertTrue(all(v['median_ratio'] is None and v['complete_pairs']==2 for v in paired_comparisons(rows,configs)))
+        rows[-1]['comparison_pass']=True;rows[-1]['certified']=True;rows[-1]['transport_family']='v2'
+        self.assertTrue(all(v['median_ratio'] is None and not v['transport_matched'] for v in paired_comparisons(rows,configs)))
+
+
+class Settings:
+    def __init__(self): self.values={}
+    def set_parameter(self,key,value): self.values[key]=value
+    def get_parameter(self,key): return self.values[key]
+
+
+class DataModel:
+    def __getattr__(self,name):
+        if name.startswith('set_'): return lambda *args: None
+        raise AttributeError(name)
+
+
+class ExportBoundary(unittest.TestCase):
+    def test_actual_worker_retains_native_pass_with_independent_gap_refusal(self):
+        manifest=load(ROOT/'artifacts/gpup-external-baseline-v4/manifest.json')
+        manifest['self_reference']=ref(ROOT/'artifacts/gpup-external-baseline-v4/manifest.json')
+        manifest['adapter']=ref(ROOT/'tools/lp_baseline_adapters_v5.py')
+        config=next(c for c in manifest['configurations'] if c['id']=='cuopt-pdlp-double')
+        lp=types.SimpleNamespace(DataModel=DataModel,SolverSettings=Settings,Solve=lambda *args:Solution())
+        module=types.ModuleType('cuopt');module.linear_programming=lp
+        with tempfile.TemporaryDirectory(dir=ROOT/'artifacts') as name:
+            root=Path(name);original=root/'original.json';put(original,tiny_model('minimize','ranged'))
+            activity=types.SimpleNamespace(error=None,samples=[])
+            with patch.dict(sys.modules,{'cuopt':module}),patch.object(worker,'adapters',adapters):
+                result=worker.solve_one(manifest,config,original,root/'solve',40,False,activity)
+            native=load(root/'solve/vendor-return.json');certificate=load(root/'solve/certificate.json')
+            self.assertTrue(native['native_return_pass'])
+            self.assertFalse(result['accepted'])
+            self.assertTrue(certificate['validation']['feasible'])
+            self.assertGreater(certificate['gap_upper'],.49)
+            self.assertEqual(quality_summary(certificate)['constraints']['violated_sides'],0)
+            self.assertTrue(comparison_pass('cuopt',True,result['accepted'],native))
+            raw=load(root/'solve/vendor-vectors.json');self.assertEqual(raw['dual'],[.5])
+            self.assertEqual(native['termination_reason'],'Optimal')
+            self.assertEqual(native['original_sha256'],ref(original)['sha256'])
+
+    def test_vendor_return_survives_vector_extraction_failure(self):
+        class Broken(Solution):
+            def get_primal_solution(self): raise RuntimeError('export failed')
+        lp=types.SimpleNamespace(DataModel=DataModel,SolverSettings=Settings,Solve=lambda *args:Broken())
+        module=types.ModuleType('cuopt');module.linear_programming=lp
+        from lp_baseline_contract import canonicalize
+        with tempfile.TemporaryDirectory(dir=ROOT/'artifacts') as name:
+            root=Path(name);model=canonicalize(json.dumps(tiny_model('minimize','ranged')).encode())
+            put(root/'canonical.json',model)
+            config=dict(algorithm='pdlp',parameters={})
+            with patch.dict(sys.modules,{'cuopt':module}):
+                with self.assertRaisesRegex(RuntimeError,'export failed'):
+                    adapters.cuopt(model,config,40,root,False)
+            self.assertTrue(load(root/'vendor-return.json')['native_return_pass'])
+
+
+if __name__=='__main__':
+    unittest.main()

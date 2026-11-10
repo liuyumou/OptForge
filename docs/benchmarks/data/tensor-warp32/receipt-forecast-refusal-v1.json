@@ -1,0 +1,81 @@
+{
+  "all_six_gain_forecasts_refused": true,
+  "automatic_retry": false,
+  "comparisons": [
+    {
+      "configuration": "fp16-tensor",
+      "forecast_ns": 705380423,
+      "limit_ns": 415902600,
+      "model": "gpup-development-dense_block-1024",
+      "passes": false
+    },
+    {
+      "configuration": "int8-tensor",
+      "forecast_ns": 642764297,
+      "limit_ns": 415902600,
+      "model": "gpup-development-dense_block-1024",
+      "passes": false
+    },
+    {
+      "configuration": "bf16-tensor",
+      "forecast_ns": 722332868,
+      "limit_ns": 415902600,
+      "model": "gpup-development-dense_block-1024",
+      "passes": false
+    },
+    {
+      "configuration": "bf16-tensor",
+      "forecast_ns": 9177217471,
+      "limit_ns": 5697919800,
+      "model": "gpup-extension-dense_block-65536",
+      "passes": false
+    },
+    {
+      "configuration": "int8-tensor",
+      "forecast_ns": 8990098918,
+      "limit_ns": 5697919800,
+      "model": "gpup-extension-dense_block-65536",
+      "passes": false
+    },
+    {
+      "configuration": "fp16-tensor",
+      "forecast_ns": 8977063370,
+      "limit_ns": 5697919800,
+      "model": "gpup-extension-dense_block-65536",
+      "passes": false
+    }
+  ],
+  "completion_criteria_changed": false,
+  "failed_journal": {
+    "path": "artifacts/gpup-tensor-warp32-v1/cpu-journal-receipt-recovery-v29.json",
+    "sha256": "e95f68816607d797931c028b09075b040da8c3e0f3e1f95e8c3fb3828642f161"
+  },
+  "failed_resource": {
+    "path": "artifacts/gpup-tensor-warp32-v1/receipt-forecast-resource-v1.json",
+    "sha256": "4c59e1cd627b1e9ca162667b3e48243ee204aa4810ed93db061f1714448a59f0"
+  },
+  "forecast": {
+    "path": "artifacts/gpup-tensor-warp32-v1/study-v1/forecast.json",
+    "sha256": "22e1b12be362ea70831d35130ca5f4733418c33dfed5a73f0802bb5740714c3a"
+  },
+  "forecast_working_families": true,
+  "full_forecast_cpu_charge_ns": 400000000000,
+  "identity": "gpup-tensor-warp32-receipt-forecast-refusal-v1",
+  "new_gpu_ns": 0,
+  "numerical_failure_inferred": false,
+  "passed_check_reruns": 0,
+  "primary_timing_result_claimed": false,
+  "profile_corrections": {
+    "path": "artifacts/gpup-tensor-warp32-v1/receipt-recovery-v1/profile-links.json",
+    "sha256": "e3f0dff0305c89509bb3b2aeba2843ef033d61be99415db991ee5411cd8b9f2e"
+  },
+  "profile_reruns": 0,
+  "profiles_complete": true,
+  "report": {
+    "path": "artifacts/gpup-tensor-warp32-v1/receipt-recovery-v1/delivery/report.json",
+    "sha256": "91335a6c90abcb6ed84d74d24898b1df659105a27f4a94a7e7e32d2f34cd0227"
+  },
+  "status": "incomplete_gain_forecast_refusal",
+  "timings_executed": 0,
+  "unused_timing_cpu_reservation_ns": 6400000000000
+}

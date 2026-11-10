@@ -1,0 +1,18 @@
+{
+  "authorization": "User-authorized conditional continuation with unused-budget transfers.",
+  "gpu_seconds": 0,
+  "new_implementation": true,
+  "passed_checks_rerun": false,
+  "prior_independent_proof": {
+    "path": "docs/benchmarks/data/tensor-expanded/independent-proof-v2.json",
+    "sha256": "2906ac3cb7f8e56bc25c12e19ebaa16e525c064845552750f0b6b2c03dfd3665"
+  },
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/primitive-build-v1/cpu-journal-v6.json",
+    "sha256": "4e6b7e5fd7ebd67a6624cef0438336ec5260cf2d12fe055e6bfa230b8efac361"
+  },
+  "source": "implementation",
+  "status": "accepted",
+  "target": "rust_scalar",
+  "transfer_cpu_seconds": 600
+}

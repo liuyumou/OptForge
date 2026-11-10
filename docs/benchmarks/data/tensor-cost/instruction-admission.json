@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "gpu_seconds": 0,
+  "command": [
+    "/usr/local/cuda/bin/nvcc",
+    "--cubin",
+    "-arch=sm_120",
+    "-O3",
+    "-lineinfo",
+    "-fmad=false",
+    "-ftz=false",
+    "-Xptxas=-v",
+    "-o",
+    "target/native/cuda/lp_pdhg_tensor_cost.cubin",
+    "cuda/lp_pdhg_tensor_cost/lp_pdhg_tensor_cost.cu"
+  ],
+  "sources": {
+    "cuda/lp_pdhg_tensor_cost/lp_pdhg_tensor_cost.cu": "31191de9c9a2efedf79d63382b52cdc9937d05f8f7ca83ba969f53467d6cb5b3",
+    "cuda/lp_pdhg_tensor_cost/fragment_layout.h": "401f35a9fa72e862b016c302355d7efd8a173b7dccbb11f39314b74199ae636e",
+    "cuda/lp_pdhg_tensor_cost/reference_audit.h": "d00aa6c6c61099d644745dfc01b0e78bbbf3565dd359a0ed32e7b8116aa272a3",
+    "cuda/lp_pdhg_quant_resident/lp_pdhg_quant_resident.cu": "2bd668ef1d7e5cb9cfbc8bd281189816595b9a0d2078696ea2b56a3d59af7c35",
+    "cuda/lp_pdhg_tuned/lp_pdhg_tuned.cu": "9791c5e90f096c8ba6921d7306d5f765641cc940c6664999297cc086cad93f57",
+    "cuda/lp_pdhg/lp_pdhg.cu": "996887e45e7ac6c0f810a9b7b26e82c8490ec2541f6c7e7d88d70ad7f9da37b3"
+  },
+  "image_sha256": "9cd7526c0f105e7b211ce2c7cec85ccc9ec8caa67f12ee9a9bc77840ad7a3cf5",
+  "max_registers": 88,
+  "spill_bytes": 0,
+  "nvcc_version": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0\n",
+  "ptx_sha256": "5f54df52c6f313b90ed4001314e8ef99227cf3b0aa5ba55fd7ff5b5df2c74c9f",
+  "sass_sha256": "0ef604791360f2e2a412f08d271dec558118ee8f7031264d316ee436ee5d5de9"
+}

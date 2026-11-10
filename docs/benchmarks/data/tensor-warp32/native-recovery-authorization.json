@@ -1,0 +1,25 @@
+{
+  "accepted_plan_prior_sha256": "cdd46172c9792be6f5eadb6ac0ed0ee0f925eb02291203c639da597d4a9db120",
+  "active_journal": "artifacts/gpup-tensor-warp32-v1/cpu-journal-native-recovery-v6.json",
+  "all_charges_retained": true,
+  "allocations_cpu_seconds": {
+    "implementation": 258,
+    "margin": 400,
+    "native": 2400,
+    "proofs": 800,
+    "reporting": 190,
+    "workers": 2052
+  },
+  "authorization": "User explicitly approves native recovery and transfers, 2026-10-24",
+  "gpu_cap_seconds": 790,
+  "host_access": false,
+  "prior_journal": "artifacts/gpup-tensor-warp32-v1/cpu-journal-native-handoff-v5.json",
+  "prior_journal_sha256": "20d0218ad854c098419496ff9ee1a99d1566ba6fe0fb0114b3b8c88397f00d2e",
+  "resource_bootstrap_rerun": false,
+  "runtime_journal_binding": "lp_tensor_warp32_common.JOURNAL selected before runner main; cache helper source unchanged",
+  "transfers_cpu_seconds": {
+    "from_workers": 1240,
+    "to_native": 1200,
+    "to_reporting": 40
+  }
+}

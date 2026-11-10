@@ -1,0 +1,352 @@
+{
+  "allocated_remaining_cpu_ns": 17899444325956,
+  "campaign_gpu_ns": 22770545043263,
+  "cleanup": [
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/authority-resource-v1.json",
+        "sha256": "c715aa917622b0db72965220aeb89d33c4f6624264f2b73284963e8a94f25f6c"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/prototype-resource-v1.json",
+        "sha256": "ad11396ddcb87eb82e0de9bb7a0d66bfec063c75fc1affc875166c308ee99fc6"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/proofs-resource-v1.json",
+        "sha256": "2ba061973abfac2b1c9cdeaf02e79b1c48163b7f85bf27dfdd989591bf09fbaa"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/delivery-report-resource-v1.json",
+        "sha256": "5ce4ac793f63fcff75003f1d0bd58c0af89bfcc8146b8fe7a1e1d87d1a206029"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/delivery-checks-resource-v1.json",
+        "sha256": "40ad8c6d298edb2377e69d64fb027d90baae0eb88eb287115be4e8246f7a9e22"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/recovery_setup-resource-v1.json",
+        "sha256": "185e7996ecb043d94d21f1a50540e2202525dd87c75ecc254c1de700b9e56345"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/proof_retry-resource-v1.json",
+        "sha256": "d381e19bfec4a934af655d0b1db91fdbeec99e28409c15afd541d92bebcf9c60"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/primitive-build-v1/compile-resource-v1.json",
+        "sha256": "b53ace33f9902178bf78a7900c9488f45fd0942a6add178326a3782e12bb0bb5"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/rust-scalar-v1/resource-v1.json",
+        "sha256": "f131a57c29b99db1a1f0db89c45331fd5e7935627524b9de09bb40dbf39dd2db"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/rust-window-v1/resource-v1.json",
+        "sha256": "bc017d2df1ada6f6e4b6c2a78046a0513ce678e912ebe0ed1a6bd829d0d7de3b"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/resource-v1.json",
+        "sha256": "daa8c5ae1126884bd75c54818fbd418505a93872f043570334329195e5e86e01"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/resource-v1.json",
+        "sha256": "de39255561faee3ec20960f6d3c85701ac2b5cb1796484ad09a0a1326a67cca4"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/instruction-review-v1/resource-v1.json",
+        "sha256": "2a6162bb92d9a10844d6612946133adf897436790961b57fb1e9e1bb116ac167"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/residual-build-v1/resource-v1.json",
+        "sha256": "8443111e4eee47e220829699d486faaaaa5ecfc6101dc6de8063b07954b9763a"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/guard-build-v1/resource-v1.json",
+        "sha256": "83da8d40a15d9109034fc30a757e9292c2dd0ff5dc260a60e28df28e6964ca5c"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/launch-abi-v1/resource-v1.json",
+        "sha256": "1b5184cb142d40acae9e6dfb95d8c16d077580634ccc0e19dbf9a19c54273771"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/executor-build-v1/resource-v1.json",
+        "sha256": "8872318e1d66bec22caa684faefcdab315971f9427bbe2e2f24b088ca39b0caf"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/executor-recovery-v1/resource-v1.json",
+        "sha256": "6ebab9e8371805c04d784207b8e61eeef35b66789e99fd92497b53275f122e0e"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/telemetry-build-v1/resource-v1.json",
+        "sha256": "8aaa6193e34877c62fa1c4b90276f8285e32ef22d533eb139582ccdb43991e50"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/continuation-v1/adapter-resource-v1.json",
+        "sha256": "efa92efd364090540288ae10b0eb3eb8dc8b26876e42b264a06d9b85be5bbac8"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/continuation-v1/acceptance-resource-v1.json",
+        "sha256": "375053aca2a01f6a5b17d24968de5dd47b516dbe3b50f043bfa0d6d90eda5cb2"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/continuation-v1/profiles-resource-v1.json",
+        "sha256": "a0be9dd2745b34f3481f41b129cf576f2a8c809bc140812f3ce9b792fee33313"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/recovery-delivery-v1/delivery_report-resource-v1.json",
+        "sha256": "e1e82b3b4bbd513f99fb051ef6b701e753b1dc437c05fecb518cfd24daa3403a"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/recovery-delivery-v1/delivery_checks-resource-v1.json",
+        "sha256": "aabf5370484ddbdf62ad22dad2d89178b86d57608460d957cdf4e70b1ac2d4cf"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/recovery-hygiene-v1/resource-v1.json",
+        "sha256": "f930b30ca57f3eb6fbb0a4243b1f944f9d942a0b421444b51eca8ddf743ee898"
+      }
+    }
+  ],
+  "commit_authorized": "Applicable software/device acceptance passes; local-only research implementation, incomplete performance result.",
+  "cpu_ceiling_ns": 77640000000000,
+  "cpu_total_ns": 59603097503214,
+  "delivery_checks": {
+    "path": "docs/benchmarks/data/tensor-expanded/recovery-delivery-checks-v2.json",
+    "sha256": "f09c81e92c806ab8632cc16bfb73fa26683631f5d96429bb22baf7ff9ad650d2"
+  },
+  "gpup8_gpu_ns": 1410959187474,
+  "identity": "gpup-tensor-expanded-recovery-accounting-v1",
+  "journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/recovery-hygiene-v1/cpu-journal-final-v21.json",
+    "sha256": "2b40488e02aa1266ff4bd0f4f9c8640ebff078c58f2fc23fa38ff52244f1d0f1"
+  },
+  "ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "fabe2e22047bac9194867e1f745c627a2271bc7c0cd283f17b207957c7bbb59d"
+  },
+  "ledger_events": 17438,
+  "ledger_prefix": {
+    "events": 17412,
+    "sha256": "9913d391634bdb0f74012be909be377e5a693d00b76e6882abcf336796ac863e"
+  },
+  "new_gpu_ns": 178049776450,
+  "passed_checks_rerun": false,
+  "passed_profiles_rerun": false,
+  "recovery_cpu_ns": 8034404049688,
+  "scientific_result": {
+    "path": "docs/benchmarks/data/tensor-expanded/recovery-result-v1.json",
+    "sha256": "dd1e82fffff64c9543ee1652c6c37b879bf7b09102b1171f5bc394cfb615fd5c"
+  },
+  "stages": {
+    "acceptance": {
+      "cap_cpu_ns": 4000000000000,
+      "charged_cpu_ns": 579965578680
+    },
+    "authority": {
+      "cap_cpu_ns": 200000000000,
+      "charged_cpu_ns": 23600829396
+    },
+    "cpu_models": {
+      "cap_cpu_ns": 1440000000000,
+      "charged_cpu_ns": 940347221328
+    },
+    "cpu_window": {
+      "cap_cpu_ns": 400000000000,
+      "charged_cpu_ns": 49905518124
+    },
+    "delivery_checks": {
+      "cap_cpu_ns": 200000000000,
+      "charged_cpu_ns": 200000000000
+    },
+    "delivery_hygiene": {
+      "cap_cpu_ns": 120000000000,
+      "charged_cpu_ns": 9128000900
+    },
+    "delivery_report": {
+      "cap_cpu_ns": 368000000000,
+      "charged_cpu_ns": 14952641488
+    },
+    "executor_build": {
+      "cap_cpu_ns": 1600000000000,
+      "charged_cpu_ns": 1600000000000
+    },
+    "executor_recovery": {
+      "cap_cpu_ns": 480000000000,
+      "charged_cpu_ns": 35170875988
+    },
+    "guard_compile": {
+      "cap_cpu_ns": 800000000000,
+      "charged_cpu_ns": 18695295284
+    },
+    "implementation": {
+      "cap_cpu_ns": 1400000000000,
+      "charged_cpu_ns": 128000000000
+    },
+    "instruction_review": {
+      "cap_cpu_ns": 160000000000,
+      "charged_cpu_ns": 26643288848
+    },
+    "launch_abi": {
+      "cap_cpu_ns": 600000000000,
+      "charged_cpu_ns": 33340802148
+    },
+    "margin": {
+      "cap_cpu_ns": 400000000000,
+      "charged_cpu_ns": 0
+    },
+    "native": {
+      "cap_cpu_ns": 0,
+      "charged_cpu_ns": 0
+    },
+    "primitive_compile": {
+      "cap_cpu_ns": 100000000000,
+      "charged_cpu_ns": 29056546020
+    },
+    "products_compile": {
+      "cap_cpu_ns": 800000000000,
+      "charged_cpu_ns": 800000000000
+    },
+    "profiles": {
+      "cap_cpu_ns": 3200000000000,
+      "charged_cpu_ns": 3200000000000
+    },
+    "proof_retry": {
+      "cap_cpu_ns": 200000000000,
+      "charged_cpu_ns": 11025489280
+    },
+    "proofs": {
+      "cap_cpu_ns": 5600000000000,
+      "charged_cpu_ns": 5600000000000
+    },
+    "prototype": {
+      "cap_cpu_ns": 400000000000,
+      "charged_cpu_ns": 4313121384
+    },
+    "recovery_setup": {
+      "cap_cpu_ns": 100000000000,
+      "charged_cpu_ns": 31889485812
+    },
+    "reporting": {
+      "cap_cpu_ns": 112000000000,
+      "charged_cpu_ns": 70237673576
+    },
+    "residual_compile": {
+      "cap_cpu_ns": 1200000000000,
+      "charged_cpu_ns": 137404879268
+    },
+    "rust_scalar": {
+      "cap_cpu_ns": 600000000000,
+      "charged_cpu_ns": 46920464524
+    },
+    "study_adapter": {
+      "cap_cpu_ns": 400000000000,
+      "charged_cpu_ns": 80829883028
+    },
+    "telemetry_build": {
+      "cap_cpu_ns": 320000000000,
+      "charged_cpu_ns": 29128078968
+    },
+    "timings": {
+      "cap_cpu_ns": 6400000000000,
+      "charged_cpu_ns": 0
+    }
+  },
+  "status": "reconciled",
+  "unassigned_cpu_ns": 137458170830
+}

@@ -1,0 +1,51 @@
+{
+  "authorization": "User-authorized continuation and unused-budget reallocation.",
+  "compile_timeout_seconds": 180,
+  "full_candidate_inventory": false,
+  "gpu_seconds": 0,
+  "implementation_bookkeeping_cpu_seconds": 16,
+  "model_admission": {
+    "path": "docs/benchmarks/data/tensor-expanded/cpu-model-admission-v1.json",
+    "sha256": "3169108da145fa5a29539878b56553c3d897def451572dca6bfd2fbdb51b226a"
+  },
+  "passed_checks_rerun": false,
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/cpu-journal-v9.json",
+    "sha256": "4f8805dda721b44e96bcda0aa384f2063d33ab27e989719ac5f57cc194b23058"
+  },
+  "register_limit": 128,
+  "sources": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_products.cu",
+      "sha256": "ad8d35a6453608dd1e7268bc59b31dc4b76c7d3a0f67479694c6e6a455eb0822"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_updates.cuh",
+      "sha256": "9a4fa7aadcf58ff90e2040fa78b496b4ecd073e53a63bf5e52035ac1d97b86f6"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_fast.h",
+      "sha256": "7ac6e3d3f3f745d4a7a5b7686f260df037618ccda6779886b0da95b7b2b5feda"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_storage.h",
+      "sha256": "d021dba2675c5e07d0ddf4338855294ad18025ad6dcc8838e147861dbc1ad2fa"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_warp32/fragment_layout.h",
+      "sha256": "401f35a9fa72e862b016c302355d7efd8a173b7dccbb11f39314b74199ae636e"
+    }
+  ],
+  "spill_bytes_limit": 0,
+  "status": "accepted",
+  "transfer": {
+    "cpu_seconds": 800,
+    "source": "cpu_models",
+    "target": "products_compile"
+  },
+  "work_wall_seconds": 198
+}

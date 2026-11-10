@@ -1,0 +1,45 @@
+{
+  "identity": "gpup8-approved-amendment-prior-v1",
+  "sources": [
+    {
+      "historical_path": "docs/decisions/ADR-0044-tensor-cost-continuation.md",
+      "archive_path": "docs/benchmarks/data/tensor-cost/accepted-amendment-prior/3d2a11352f26824e6b7e18b194c7466ebffdd507d70b456798d5dc7468a8396e.txt",
+      "sha256": "3d2a11352f26824e6b7e18b194c7466ebffdd507d70b456798d5dc7468a8396e"
+    },
+    {
+      "historical_path": "docs/plans/gpu-lp-precision-roadmap.md",
+      "archive_path": "docs/benchmarks/data/tensor-cost/accepted-amendment-prior/44a003752fbf7b45ccf7f1c59712d7546d9cf7be0cb1c762a86b921f29d9ea2a.txt",
+      "sha256": "44a003752fbf7b45ccf7f1c59712d7546d9cf7be0cb1c762a86b921f29d9ea2a"
+    },
+    {
+      "historical_path": "state/active-task.md",
+      "archive_path": "docs/benchmarks/data/tensor-cost/accepted-amendment-prior/f56aff8a2e697a8f312d44bf2b21076d1d8a8a0d39073a7fa5a88cce3a3cf294.txt",
+      "sha256": "f56aff8a2e697a8f312d44bf2b21076d1d8a8a0d39073a7fa5a88cce3a3cf294"
+    },
+    {
+      "historical_path": "state/known-failures.md",
+      "archive_path": "docs/benchmarks/data/tensor-cost/accepted-amendment-prior/1a44905fd1ede3eedfd5c43d63899ec1e5c104f04fa2e09551a4641f4f51296d.txt",
+      "sha256": "1a44905fd1ede3eedfd5c43d63899ec1e5c104f04fa2e09551a4641f4f51296d"
+    },
+    {
+      "historical_path": "state/backlog.yaml",
+      "archive_path": "docs/benchmarks/data/tensor-cost/accepted-amendment-prior/ddcb60c1bf2f745bab4f14465611e28218217830759dd9f618b6103dd08e12ca.txt",
+      "sha256": "ddcb60c1bf2f745bab4f14465611e28218217830759dd9f618b6103dd08e12ca"
+    },
+    {
+      "historical_path": "AGENTS.md",
+      "archive_path": "docs/benchmarks/data/tensor-cost/accepted-amendment-prior/8683cc18809851bfac782d53080691d5f4c5e86b2c31bd3d5772612328f706b3.txt",
+      "sha256": "8683cc18809851bfac782d53080691d5f4c5e86b2c31bd3d5772612328f706b3"
+    },
+    {
+      "historical_path": "wiki/status.md",
+      "archive_path": "docs/benchmarks/data/tensor-cost/accepted-amendment-prior/62fc55a214b6d4264f6946ea265253b560f6b70f7f76beda17b428cfaa7c809c.txt",
+      "sha256": "62fc55a214b6d4264f6946ea265253b560f6b70f7f76beda17b428cfaa7c809c"
+    },
+    {
+      "historical_path": "CHANGELOG.md",
+      "archive_path": "docs/benchmarks/data/tensor-cost/accepted-amendment-prior/9edc66535dac1484a256a254db83ed3a407a2d2bc103a664de2700d63532d8c3.txt",
+      "sha256": "9edc66535dac1484a256a254db83ed3a407a2d2bc103a664de2700d63532d8c3"
+    }
+  ]
+}

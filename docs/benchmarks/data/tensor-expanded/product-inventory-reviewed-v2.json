@@ -1,0 +1,120 @@
+{
+  "compiler_rerun": false,
+  "complete_candidate_inventory": false,
+  "execution_counter_validation_pending": true,
+  "forbidden_opcodes": [],
+  "gpu_seconds": 0,
+  "identity": "gpup-tensor-expanded-product-inventory-reviewed-v2",
+  "image": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/expanded_products.cubin",
+    "sha256": "0dcbb3257617df9a5ed7053ad00fa2c179719ed5218857ca7f7b2e24012b3964"
+  },
+  "numerical_checks_rerun": false,
+  "opcode_parser_cases": 10,
+  "original_charge_retained_ns": 800000000000,
+  "original_inventory": {
+    "path": "docs/benchmarks/data/tensor-expanded/product-inventory-v1.json",
+    "sha256": "264174ab087f17968092de957f3e8b45df883cd093a2f1d899bcbe07faa03eb9"
+  },
+  "parsed_instructions": 234479,
+  "planned_mma_per_tile_product": {
+    "bf16": 112,
+    "fp16": 64,
+    "int8": 32
+  },
+  "ptx": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/nvcc-kept/expanded_products.ptx",
+    "sha256": "d108a802165e18ff001adacd06d57e5e535765227dbefae57045aa7c1275b557"
+  },
+  "resources": [
+    {
+      "entry": "xe_pack64",
+      "registers": 28,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_dual_update",
+      "registers": 71,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_primal_update",
+      "registers": 72,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_simt_main",
+      "registers": 40,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_bf16_main",
+      "registers": 48,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_fp16_main",
+      "registers": 40,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    },
+    {
+      "entry": "xe_int8_main",
+      "registers": 72,
+      "spill_load_bytes": 0,
+      "spill_store_bytes": 0,
+      "stack_bytes": 0
+    }
+  ],
+  "reviewer": {
+    "path": "tools/lp_tensor_expanded_instruction_review.py",
+    "sha256": "50e5829a72ab35ee9bc141559c8820ef93e24c8503c8dbac3bdf4636465c9d3d"
+  },
+  "sass": {
+    "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/product.sass",
+    "sha256": "a138d86b18a651b13144b11b963ef5fab9a765b689e519090fb3a8c5b30cf4b3"
+  },
+  "sources": [
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_products.cu",
+      "sha256": "ad8d35a6453608dd1e7268bc59b31dc4b76c7d3a0f67479694c6e6a455eb0822"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_updates.cuh",
+      "sha256": "9a4fa7aadcf58ff90e2040fa78b496b4ecd073e53a63bf5e52035ac1d97b86f6"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_fast.h",
+      "sha256": "7ac6e3d3f3f745d4a7a5b7686f260df037618ccda6779886b0da95b7b2b5feda"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_storage.h",
+      "sha256": "d021dba2675c5e07d0ddf4338855294ad18025ad6dcc8838e147861dbc1ad2fa"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_warp32/fragment_layout.h",
+      "sha256": "401f35a9fa72e862b016c302355d7efd8a173b7dccbb11f39314b74199ae636e"
+    }
+  ],
+  "status": "passed",
+  "tensor_instructions": {
+    "xe_bf16_main": true,
+    "xe_fp16_main": true,
+    "xe_int8_main": true
+  }
+}

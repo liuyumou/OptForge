@@ -1,0 +1,3858 @@
+[
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-tuned-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "profile",
+    "order": 0,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-component-simt",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "profile",
+    "order": 1,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-fp16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "profile",
+    "order": 2,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-int8-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "profile",
+    "order": 3,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-bf16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "profile",
+    "order": 4,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-matched-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "profile",
+    "order": 5,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-bf16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 0,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-int8-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 1,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-component-simt",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 2,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-fp16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 3,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-matched-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 4,
+    "repetition": 0
+  },
+  {
+    "category": "profile",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-tuned-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 5,
+    "repetition": 0
+  },
+  {
+    "ablation": "old-norm",
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "norm_policy": "legacy-twice-absolute-v1",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-ablation-int8-tensor-old-norm",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 0,
+    "repetition": 0
+  },
+  {
+    "ablation": "host-audit",
+    "category": "profile",
+    "configuration": {
+      "audit_policy": "host_oracle_v1",
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-ablation-int8-tensor-host-audit",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 0,
+    "repetition": 0
+  },
+  {
+    "ablation": "old-norm",
+    "category": "profile",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "norm_policy": "legacy-twice-absolute-v1",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-ablation-fp16-tensor-old-norm",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 0,
+    "repetition": 0
+  },
+  {
+    "ablation": "host-audit",
+    "category": "profile",
+    "configuration": {
+      "audit_policy": "host_oracle_v1",
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-profiles-ablation-fp16-tensor-host-audit",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "profile",
+    "order": 0,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-tuned-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-fp16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-bf16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-int8-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-component-simt",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-matched-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-component-simt",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-matched-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-bf16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-int8-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-tuned-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-fp16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 0
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-component-simt",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-tuned-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-int8-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-bf16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-fp16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-matched-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-matched-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-fp16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-tuned-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-bf16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-component-simt",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-int8-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 1
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-fp16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-bf16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-component-simt",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-tuned-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-matched-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-int8-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-matched-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-component-simt",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-int8-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-bf16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-fp16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-tuned-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 2
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-bf16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-matched-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-fp16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-component-simt",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-tuned-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-int8-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-tuned-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-int8-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-fp16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-component-simt",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-matched-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-bf16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 3
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-matched-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-component-simt",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-int8-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-tuned-fp64",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-bf16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-fp16-tensor",
+    "instance": {
+      "bytes": 1550702,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v1",
+        "parameters": {
+          "size": [
+            1024
+          ]
+        },
+        "seed": 17102,
+        "version": 1
+      },
+      "group": "development-dense_block-17102",
+      "id": "gpup-development-dense_block-1024",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024.json",
+        "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4"
+      },
+      "source": "repository generation under ADR-0014",
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-development-dense_block-1024-witness.json",
+        "sha256": "da141ef924b4d1b24062108281d7ddf91dff8536db4ec3330271ab60fa439f8a"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-fp16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 0,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-tuned-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 1,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-matched-fp64",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 2,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-bf16-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 3,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-component-simt",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 4,
+    "repetition": 4
+  },
+  {
+    "category": "timing",
+    "configuration": {
+      "backend": "lp-tensor-expanded-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-int8-tensor",
+    "instance": {
+      "bytes": 103743588,
+      "family": "dense_block",
+      "generator": {
+        "name": "sha256-counter-lp-v2",
+        "parameters": {
+          "size": [
+            65536
+          ]
+        },
+        "seed": 17111,
+        "version": 2
+      },
+      "group": "development-extension-dense_block-17111",
+      "id": "gpup-extension-dense_block-65536",
+      "license": "MIT repository generator; no third-party dataset redistribution",
+      "model": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536.json",
+        "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda"
+      },
+      "source": "repository generation under ADR-0022",
+      "time_limit_seconds": 30,
+      "witness": {
+        "path": "artifacts/lp-inputs-v1/gpup-extension-dense_block-65536-witness.json",
+        "sha256": "5c59176c0b6b9009786d70d0159f909fc1eae9ca6cd2e5f1b50bb36b79932fcc"
+      }
+    },
+    "kind": "timing",
+    "order": 5,
+    "repetition": 4
+  }
+]

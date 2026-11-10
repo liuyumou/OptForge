@@ -1,0 +1,20 @@
+{
+  "authority_checks": 12,
+  "cpu_scalar_outputs": 18,
+  "cuda_implemented": false,
+  "diagnosis": {
+    "path": "docs/benchmarks/data/tensor-expanded/proof-fixture-diagnosis-v1.json",
+    "sha256": "dde61f49251cda7fccc677aca36d1ea573446fe6d96f8eb0188fb31db03309ad"
+  },
+  "gpup8_complete": false,
+  "independently_verified_scalar_outputs": 0,
+  "new_gpu_seconds": 0,
+  "old_checks_rerun": false,
+  "old_profiles_rerun": false,
+  "prototype_checks": 16,
+  "report": {
+    "path": "docs/benchmarks/lp-tensor-expanded-gpup8.md",
+    "sha256": "e0d47fac3a70b2ba5f4a28ef46e0feeb11d04090f8839c7a20d521919b10fa26"
+  },
+  "status": "incomplete_cpu_fixture_refusal"
+}

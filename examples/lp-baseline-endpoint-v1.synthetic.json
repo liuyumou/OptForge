@@ -1,0 +1,48 @@
+{
+  "adapter": {
+    "path": "examples/lp-model-v1.json",
+    "sha256": "624a55bdb93ee8b2a6bc576ac694c178365960d7f2fc03a63ade34e13c20a501"
+  },
+  "algorithm_executed": null,
+  "algorithm_requested": "pdlp",
+  "certificate_ns": null,
+  "checker": {
+    "receipt": null,
+    "state": "not_run"
+  },
+  "configuration_id": "cuopt-pdlp-double",
+  "device_uuid": null,
+  "dual": null,
+  "dual_convention": "original_units_min_lower_positive",
+  "elapsed_ns": null,
+  "environment": {
+    "path": "examples/lp-model-v1.json",
+    "sha256": "624a55bdb93ee8b2a6bc576ac694c178365960d7f2fc03a63ade34e13c20a501"
+  },
+  "evidence_kind": "fixture",
+  "executed_device": "not_run",
+  "gpu_evidence": null,
+  "kind": "lp-baseline-endpoint",
+  "limitations": [
+    "Synthetic wire-format fixture; no solver executed. Adapter/environment references are fixture placeholders, not vendor provenance."
+  ],
+  "model_sha256": "48d75f966fdae0bf6cb433cdf06d7cbdccd7059a111eac134886313b0ed34baf",
+  "native_reduced_costs": null,
+  "native_solve_ns": null,
+  "native_status": "not_run",
+  "original_sha256": "624a55bdb93ee8b2a6bc576ac694c178365960d7f2fc03a63ade34e13c20a501",
+  "primal": null,
+  "proposal_sha256": "f338b9a10e489c05222da7d44ee5b106d3c966f80ceaa7557daca658bd713995",
+  "requested_device": "gpu",
+  "row_ids": [
+    0
+  ],
+  "schema_version": 1,
+  "solver": "cuopt",
+  "solver_version": "26.10.0",
+  "transport": "unavailable",
+  "variable_ids": [
+    0,
+    1
+  ]
+}

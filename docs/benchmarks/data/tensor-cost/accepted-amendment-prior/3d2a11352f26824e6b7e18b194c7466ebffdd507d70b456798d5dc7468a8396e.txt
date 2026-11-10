@@ -1,0 +1,451 @@
+# ADR-0044: Bounded Tensor cost and CPU admission continuation
+
+Status: original continuation accepted, 2026-10-23; in-container resource/budget amendment proposed, 2026-10-23.
+Owner: numerical backend and experiment tooling.
+Introduced: GPUP-8 latency follow-up.
+Last reviewed commit: bootstrap (parent 6521c3a).
+Supersedes: ADR-0043 only for a separate future continuation; history unchanged.
+Superseded by: none.
+
+## Context
+
+The user requests a diagnosis and bounded completion plan, including a CPU
+admission repair. [The CPU-only diagnosis](../benchmarks/lp-tensor-latency-diagnosis.md)
+finds useful Tensor solves but no latency gain: INT8 is 0.614776/10.390881 seconds
+against tuned FP64's 0.462114/6.331022. Most of the gap also occurs with
+policy-matched FP64. Conservative step restriction, generic preparation and host
+reference audits dominate the actionable large-model costs. The previous CPU
+admission/build overlap has no aggregate concurrency/RSS receipt.
+
+The original accepted cgroup contract refused in the current Kubernetes
+container. The user now requests an in-container admission method and its CPU
+budget, with no host access and unchanged numerical/latency completion criteria.
+This amendment replaces only the resource-admission mechanism and CPU allocation.
+It requests 14300 additional CPU seconds, not additional GPU execution. It is a
+bounded attempt, not a promise of a speedup or permission to continue after a
+failed gate. The amended resource risk and CPU ceiling require explicit acceptance
+before implementation; the request to revise this document is planning authority.
+
+The [prior-source bridge](../benchmarks/data/tensor-cost/adr0044-amendment-prior/source-bridge.json)
+retains the exact accepted ADR (SHA-256
+`b985e5175f8fa546dff959408a3561d128fa5026a4685adf6d73d801d4141651`) and all eight
+previously receipted planning sources. Resolve historical source bindings through
+those exact snapshots, not this amended path. Do not rewrite prior receipts.
+The original cgroup refusal and conservative CPU charges remain valid.
+
+## Decision: one fixed package, in dependency order
+
+Use separate identity `lp-tensor-cost-v1`, campaign `gpup-tensor-cost-v1`, new
+request/evidence schemas, sources, CPU cohort, executable, image, workers and
+reports. Freeze the numerical implementation, controls, resource limits, seeds,
+complete roster and order before any device identity. Historical sources/images,
+workers/payloads/reports and all 17362 ledger events remain byte-identical.
+
+### 1. Repair CPU resource admission before preparation
+
+Use a **cooperative, source-bound process supervisor** inside the existing
+container. It needs ordinary process, affinity, signal, `/proc` and filesystem
+interfaces only. It does not require a writable cgroup, host manager, new PID/user
+namespace, privileged helper, ptrace, Kubernetes API call or extra capability.
+No host access, namespace escape, cgroup remount or privileged replacement is
+authorized. A missing required in-container primitive still causes CPU refusal.
+
+This is an explicit change from cgroup-enforced containment. It covers the frozen
+project commands and their cooperating descendants, not arbitrary hostile code.
+It supplies conservative CPU charging, serialized work admission and sampled
+aggregate RSS with early termination. It cannot prove an instantaneous 8-GiB
+kernel-enforced aggregate memory ceiling, disable swap for the task, or guarantee
+cleanup after simultaneous loss of both supervisors. Acceptance includes those
+specific limitations. Receipts must say `cooperative_process_supervision_v1`;
+they must never claim cgroup admission, an exact aggregate memory peak, or
+historical resource recertification.
+
+#### Ownership, slots and launch handshake
+
+Implement one coordinator and one small independent guardian. The guardian is
+the parent and a Linux child subreaper; both retain the project-wide admission
+lock until all work has exited and settlement is durable. Work children close
+the lock descriptor before exec. Use `artifacts/lp-cpu-admission.lock`, an atomic
+reservation journal and source-bound command manifests. A competing coordinator
+refuses before starting work. No two top-level phases overlap, including builds,
+CPU admission, native checks, device workers, verification and report generation.
+
+Reserve weighted work slots and a phase memory envelope before launch. A build
+owns all four slots, with at most four compiler jobs; CPU admission owns at most
+four single-thread workers. Tests and nested build tools run sequentially unless
+their combined declared width fits four. Explicitly set Cargo/CMake/Rust-test,
+Rayon, OpenMP/BLAS and nvcc counts; independent pools may not each assume four.
+The coordinator and guardian are charged overhead, not extra work slots. Use one
+GPU worker at a time, reserving all four slots for its complete process family.
+No background build, orphan worker or external build daemon
+is admitted. Command/environment changes invalidate the frozen resource receipt.
+
+Before creating threads or children, pin both supervisors to the same four CPUs
+chosen from the existing allowed affinity; refuse if four are unavailable. Launch
+each phase through a minimal child handshake: establish its process group,
+inherit affinity/limits, register PID plus start time and a pidfd, report ready,
+then wait for the coordinator's release before exec. Validate the effective
+affinity at readiness. Every known thread must remain within that four-CPU mask.
+Frozen commands may narrow affinity but may not widen it. Audit launch paths and
+check thread masks during monitoring; a change or unreadable mask stops the phase.
+Affinities are kernel scheduling restrictions once set, but this contract relies
+on cooperating commands not changing them between observations. No isolation from
+unrelated workloads on those CPUs is claimed.
+
+Apply the same frozen CPU mask, supervisor, monitoring policy and worker limits
+to all six study configurations, including unchanged tuned FP64. Preserve the
+original fresh-solve latency measurement boundaries; conservative CPU charges
+are resource accounting, not replacement timings or evidence of a speedup.
+
+#### Descendants, memory and failure handling
+
+Track ancestry, process groups and PID start times, including new sessions created
+by existing supervised test tools. A single `killpg` is not complete cleanup.
+The guardian's subreaper role keeps live orphaned descendants attributable after
+intermediate parents exit. Record all observed processes and thread counts;
+sample process RSS once per address space, not once per thread. Short-lived
+processes can escape RSS sampling: label that limit explicitly. Known numerical
+workers must acknowledge allocation/phase checkpoints before their largest host
+buffers are built. Do not normalize or modify historical workers to add this.
+
+Target a complete sample every 10 ms, retain actual intervals and maximum gap,
+and stop if an interval exceeds 100 ms or required live-process telemetry fails.
+Sum RSS conservatively (shared pages may be counted more than once), including
+supervisors. Admit a phase only when its declared host-memory envelope plus
+supervisor reserve fits **6 GiB**. Stop on sampled aggregate RSS >=6 GiB, reserving
+2 GiB below the unchanged **8-GiB policy limit**. Any observed 8-GiB breach makes
+the cohort ineligible; no sub-sample peak guarantee is inferred from the margin.
+Retain per-process high-water marks as supporting observations, not a replacement
+aggregate maximum. An RSS sample is not a kernel memory reservation.
+
+For CPU-only commands, use compatible per-process `RLIMIT_AS` and CPU/file-size
+limits as additional safeguards. They are not aggregate limits. Do not impose
+an 8-GiB address-space limit on CUDA workers: virtual address reservations and
+resident host memory are different quantities. Keep the existing 2-GiB numerical
+preparation and 1-GiB device-buffer checks. Report observed `VmSwap`; nonzero task
+swap makes timings ineligible, but task-wide swap prevention and between-sample
+swap absence are not claimed. Shared-root cgroup counters cannot certify this
+task's memory peak or OOM status.
+
+The guardian watches coordinator liveness/heartbeats and the coordinator watches
+the guardian through pidfds/EOF, independently of workload exit. Either surviving
+supervisor stops launches and kills the registered groups and live descendants on
+cancellation, timeout, memory/affinity violation, missing telemetry or peer death.
+Use parent-death signaling for direct launchers only; it is not inherited by
+grandchildren and cannot replace the guardian. Repeat discovery, signal remaining
+descendants and reap until none remain; keep process identities protected against
+PID reuse and never signal unrelated container processes. Target cleanup within
+one second; failure to prove quiescence retains the lock/refusal and prevents any
+new phase. Bootstrap tests must exercise nested sessions as well as double forks.
+
+A durable incomplete journal prevents a restarted coordinator from starting work.
+It must identify/clean the recorded descendants or refuse, charge the full prior
+reservation and preserve the failure. Simultaneous supervisor loss, an unkillable
+process or incomplete identity/accounting is an execution failure, not a passed
+resource cohort. No assertion that user-space monitoring always enforces a hard
+deadline or contains hostile descendants is permitted.
+
+#### Conservative CPU accounting and bootstrap
+
+Charge **four times elapsed wall time** over each active supervision interval,
+from before child launch until verified quiescence, including both supervisors,
+setup, idle waits, monitoring, teardown and receipt work. Round elapsed nanoseconds
+up, retain the raw timestamps and never settle below this charge using sampled
+CPU or `wait4` values. This is a conservative CPU upper charge for cooperating
+work confined to the four-CPU mask; it is not a measured aggregate CPU counter.
+Affinities/ancestry violations invalidate that premise: charge the full reservation,
+retain any known excess and stop rather than claiming compliant accounting.
+
+Reserve each phase against the **remaining cumulative CPU cap**, and reserve
+every remaining mandatory validation/delivery phase before admitting work. The
+journal stores CPU seconds and corresponding wall deadlines, not interchangeable
+numbers. Deduct termination/monitor margins before work begins. Avoid nested
+double charges by assigning each active interval exactly one owner; never omit
+time merely because the GPU lease or numerical solve timer is not active yet.
+If a deadline overruns, record the excess as well as the violation; do not clip
+consumption to its reservation. Incomplete accounting charges the full reservation
+and refuses further work. GPU accounting remains the existing leased-wall ledger.
+
+The first **100 CPU seconds** of the 2000-second admission/build stage fund one
+bootstrap attempt, including a minimal launcher/guardian build if required.
+Use one foreground build job, inherited four-CPU affinity, a 25-second total wall
+cap and no numerical work or GPU access. The bootstrap cannot certify itself;
+charge all 100 seconds conservatively. It must establish locks, handshakes,
+subreaping, pidfds, affinity and watchdog cleanup before the remaining stage runs.
+Failure retains a new CPU refusal; there is no automatic retry or host fallback.
+
+Real CPU-only tests then cover competing coordinators; build/admission exclusion;
+all configured pool widths; grandchildren and thread-spawned children; nested
+sessions; transient exits and PID reuse; cumulative exhaustion across phases;
+synthetic low-threshold memory growth; affinity changes; unreadable telemetry;
+delayed sampling; SIGTERM/SIGKILL of either supervisor; orphan cleanup; stale
+reservations and interrupted receipt writes. Deliberate refusal tests are isolated
+fixtures with their own expected outcomes, not successful study cohorts. They
+must not allocate 8 GiB or deliberately OOM the shared container. Retain source,
+command/environment, configured slots, sample gaps, sampled RSS, supervisor/work
+identities, conservative CPU charge, cleanup and status. A missing observation is
+never a pass. Successful tests admit only this prospective cooperative contract.
+
+### 2. Remove shared costs without relaxing numerical budgets
+
+Implement the following fixed package; do not conduct a parameter sweep.
+
+1. **Compact fresh preparation.** Construct immutable Tensor metadata directly
+   from the canonical scaled CSR/CSC input. Reuse indices within this solve;
+   compute coefficient enclosures and tile groups once, eliminating the full
+   generic quantization object followed by duplicate Tensor construction.
+   Compare canonical indices, represented coefficients, bounds, promotion masks
+   and replay inputs bitwise against ADR-0043. No cross-solve cache or session.
+2. **Tighter certified norm.** For a matrix whose selected 32x32 tiles are
+   disjoint in block rows and block columns, write its represented target as
+   `M = D + R`. Bound each dense block with an outward interval Gram matrix:
+   `||D_b||_2 <= sqrt(max_i sum_j |(D_b^T D_b)_ij|)` using interval absolute
+   upper endpoints and upward sums/square roots. Then
+   `N_M = max_b N_b + sqrt(||R||_1 ||R||_infinity)` bounds the full represented
+   matrix. Build a nonnegative coefficient-error envelope E covering both the
+   exactly scaled original matrix and the native FP64 matrix relative to M;
+   `N = N_M + sqrt(||E||_1 ||E||_infinity)` bounds all three target operators.
+   Include rounding, subnormal and overflow cases explicitly. Use the smaller
+   of this proved bound and the existing proved bound; otherwise fall back to
+   the latter. Step is at most both the original engine step and downward
+   `0.9/N`. No power-iteration estimate alone can authorize a larger step.
+   Admission depends on layout, never model name. Cap Gram work at 2048 blocks
+   and 67108864 scalar product terms per model; stream one block at a time.
+   Include its full setup time in every solve. Prove the corrected product is
+   M*x plus the existing bounded arithmetic error before using this norm.
+3. **Equivalent device reference audit.** Compute the final pre-window FP64
+   reference update on the device in the exact host oracle's multiplication,
+   serial sum, projection and update order; prohibit contraction/reassociation.
+   Keep resident FP64 state and the 32-update audit/adoption schedule. Compare
+   reference and candidate in the same original-unit 1e-7 absolute/relative
+   budget, with checked finite/range behavior and conservative decision bounds.
+   Preserve whole-window rollback, charged reference work/replay, uniform sticky
+   promotion, cancellation and checkpoint/session ownership. Validate all audit
+   decisions and adopted binary64 endpoints against the independent CPU oracle.
+   Final 1e-9 original-model certification remains freshly executed on the host
+   at the existing 200-update boundaries and at delivery. Report device audit
+   work and transfers separately from useful Tensor work.
+
+Keep ADR-0043's exact x=x0+xr split, 56-bit component products, deterministic
+FP64 residual correction and original-unit error enclosures. No component
+truncation, residual omission, tolerance change, delayed assessment, refinement,
+FP8, stochastic rounding, Tensor-only certification or public default is allowed.
+Do not add speculative kernel fusion/graph/session work to this bounded package.
+
+### 3. CPU admission, then device correctness, then cost admission
+
+Before any device reservation, pass independent Fraction/integer tests of the
+unchanged component arithmetic, new norm enclosure and layout/transposition;
+compare compact preparation against the historical oracle on all eight inherited
+models. Preserve all refused shapes/numerical cases. Require complete useful
+400-update trajectories on both dense models for INT8/FP16/BF16/SIMT, plus matched
+controls; exact host comparisons cover controller, reference adoption, failure,
+promotion and whole-window replay. No successful short trajectory implies a
+certified full solve. Charge all CPU preparation and verification.
+
+Pass the full pinned-native `bash tools/check.sh` before freezing device work.
+The new image must show actual IMMA/HMMA, at most 128 registers and zero spills.
+Device acceptance retains all 66 ordinary tests, at least the existing 280
+product pairs (augmented for the norm/audit path), five controller comparisons,
+twelve actual-model fixed-work/replay pairs and all four scoped sanitizers.
+CPU admission and resource receipts must bind the exact source/executable/image.
+If any reservation or validation fails, preserve the attempted identity and
+stop; no retry, alternate source cohort, device substitution or replacement cell.
+
+Run the 16 frozen diagnostic profiles below before primary timings. Collect
+disjoint host phases and scoped CUDA-event durations for norm/packing, MMA,
+reconstruction/correction, native remainder, guards, updates and reference audit.
+Instrumentation overhead is charged and excluded from primary timing kernels.
+Actual unchanged tuned diagnostics must use its own CLI/backend and packing path.
+That backend stops at a certificate even in profile mode: its two diagnostics
+therefore measure time-to-certificate with raw phase instrumentation, and must
+certify. The other ten primary profiles and four ablations require exactly 2000
+logical updates. Use policy-matched FP64 for equal-work attribution; do not call
+the tuned diagnostics 2000-update comparisons or substitute the research wrapper.
+
+Freeze a conservative cost forecast before reading these new profiles: for each
+candidate, add measured preparation/context/upload, cumulative per-boundary solve
+cost through its first fresh host certificate, measured final host certificate,
+and the largest measured producer tail/output cost across the profiles. No
+overlapping envelope may be counted twice or negative residual cost admitted.
+Continue to timings only if all required profiles complete and verify, each
+arithmetic family has useful work on both models, and at least one Tensor forecast
+is <=90% of the retained tuned median on one of the two models. The forecast is
+an early resource-saving screen, not evidence of a speedup. If no certificate
+occurs by 2000 updates, that candidate has no admissible forecast. Do not change
+source, thresholds, configurations or roster after examining the profiles.
+
+## Frozen comparison and GPU reservations
+
+Keep the inherited two dense models, eight-model CPU cohort, six configurations
+(INT8, FP16, BF16, represented SIMT, policy-matched FP64, unchanged tuned FP64),
+five fresh-process repetitions, ordering seed 17001, and all six predeclared
+Tensor-vs-tuned comparisons. The matched controls use the new norm/audit policy.
+Pair each candidate with the unchanged tuned repetition of the same model.
+BF16 remains in the family and multiplicity even if INT8/FP16 appear promising.
+
+| Phase and cells | Per-job solve deadline + overhead | Maximum GPU s |
+| --- | --- | ---: |
+| 60 primary timings: 6 configurations x 2 models x 5 | 5+6 s at 1024; 16+6 s at 65536 | 990 |
+| 12 primary profiles: 5 research configurations x 2 models at 2000 updates; 2 actual tuned time-to-certificate profiles | 6+6 s at 1024; 18+6 s at 65536 | 216 |
+| 4 ablations: INT8/FP16 at 65536, one retaining old norm and one retaining host audit | 20+6 s, forced 2000 updates | 104 |
+| 66 ordinary device tests, one job | 60+6 s | 66 |
+| New project differentials/replay, one job | 180+6 s | 186 |
+| memcheck / racecheck / initcheck / synccheck | 40+6 / 100+6 / 40+6 / 40+6 s | 244 |
+| **Total** | Screening 990; ablations 320; repeatability 496 | **1806** |
+
+The six seconds cover admission, teardown and accounting overhead under the
+existing allocator. Reserve full per-job caps, even if observations suggest
+shorter runs. Actual leased time settles each reservation; failed telemetry
+charges the full reservation. No additional microbenchmark cells are allowed;
+product diagnostics are part of the project correctness job. There are 76 study
+cells and six acceptance jobs, each attempted at most once. The shortened
+deadlines belong solely to this new protocol and leave old cells unchanged.
+
+Starting task charges in screening/ablations/repeatability are respectively
+415.105235119 / 90.046073299 / 319.962723857 GPU seconds. Remaining allocations
+are 1184.894764881 / 459.953926701 / 530.037276143 seconds. The proposal fits each
+without transfers, leaves 368.885967725 task seconds unreserved, and cannot
+exceed task total 2631.114032275 / 3000 or campaign 23990.699888064 /
+25202.574545061. Keep the independent 28800-second ceiling and campaign phase
+caps 1800/11800/8100/5300/9000 unchanged. Device remains exclusively
+`GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48` under shared host admission.
+
+## CPU and memory reservation
+
+The original 2050-second allocation is historical: its 250-second admission and
+100-second reporting stages are fully charged. Keep the 350-second settlement
+and the subsequent 10-second Kubernetes planning charge. Charge this amendment's
+documentation/static checks 5 seconds from the last unallocated headroom. Prior
+conservative accounting for resumed execution becomes **19899.822845162 / 21600
+CPU seconds**, leaving 1700.177154838 overall, of which 1700 is still allocated
+to the original continuation's unstarted stages. No historical charge is reclaimed.
+
+Request **14300 additional CPU seconds** and explicitly replace the 1700 unspent
+stage allocations with this **16000-CPU-second** prospective allocation. The
+cumulative CPU ceiling would increase from **21600 to 35900 seconds**. Approval
+must name CPU seconds: the user's separate 3600-GPU-second offer is not CPU
+authority. Until approved, neither this ceiling nor the new stage table is active.
+
+| Stage, including its children | CPU s cap |
+| --- | ---: |
+| Coordinator/guardian bootstrap (100 included), real resource tests, numerical implementation and incremental compilation | 2000 |
+| Independent proofs, compact-layout comparison and eight-model CPU admission | 2600 |
+| Pre-device and final full pinned-native acceptance | 2200 |
+| All leased GPU-worker CPU, monitoring and independent endpoint verification | 8400 |
+| Report, preservation checks and local delivery | 400 |
+| Explicit supervisor/termination margin | 400 |
+| **Total prospective allocation** | **16000** |
+
+Each stage cap is a hard reservation, not a predicted success time. No borrowing
+across stage caps is implicit. Freeze CPU stage order, commands, pool widths and
+limits before execution. Before starting another stage, reserve all remaining
+mandatory acceptance/delivery work as well. If actual code or proof work cannot
+fit, stop on CPU with no study attempt. The margin is reserved upfront, assigned
+to named phase termination allowances and charged once; unused margin cannot
+extend numerical work or replace a failed cohort. A resource test refusal fixture
+does not authorize retrying a failed real admission or device identity.
+
+The budget is intentionally derived from conservative wall charging rather than
+an unverifiable exact CPU accumulator:
+
+- The unchanged GPU reservation is 1806 leased wall seconds. Four times that is
+  **7224 CPU seconds**, leaving 1176 in the 8400-second worker stage for CPU work
+  outside leases, endpoint verification and monitoring/receipt overhead. Every
+  actual interval is charged, including lease waits; queue delays can still refuse.
+- The retained [diagnosis native gate](../../artifacts/gpup-tensor-latency-v1/native-acceptance.json)
+  took 238.91736781504005 wall seconds and measured 234.50076 CPU seconds. Two
+  equivalent wall durations would charge **1911.338942520321 CPU seconds** (rounded upward) under
+  the new rule, fitting 2200. The measured CPU figure cannot justify retaining
+  the original 550-second reservation when charging four times wall time.
+- The [residual continuation](../benchmarks/data/tensor-residual/acceptance.json)
+  retains 365.1783400170001 CPU-trajectory wall seconds, equivalent to
+  **1460.713360068001 CPU seconds** (rounded upward) under this rule. The 2600-second proof stage
+  also reserves time for the new norm/oracles and layout comparisons. Historical
+  duration is sizing evidence, not a guarantee of admission or future duration.
+- The 2000-second implementation/resource stage permits at most 500 wall seconds
+  under four-times-wall charging (including the full 100-second bootstrap charge).
+  Retain native dependencies and incremental artifacts; no clean rebuild is
+  assumed. The report and margin stages each correspond to at most 100 seconds
+  of four-CPU wall exposure. These are explicit stop limits, not work estimates.
+
+Maximum prospective cumulative CPU accounting is **35899.822845162 / 35900
+seconds**, leaving 0.177154838 unallocated. Actual charges can be lower, but no
+unspent stage automatically funds another attempt. Keep four aggregate work slots,
+the 8-GiB aggregate RSS policy/6-GiB stop threshold defined above, 2-GiB numerical
+preparation, 1-GiB device buffers and 32-GiB combined artifacts. Every new process
+and retained artifact counts, including supervisors, refusals and monitoring.
+
+The new CPU allocation does not increase GPU reservations. The existing 1806
+GPU seconds still fit all inherited phase and cumulative ceilings; the extra
+3600-GPU-second offer remains unreserved. No new cells, repetitions, retries or
+GPU time conversion is implied. Only CPU admission/budget terms change.
+
+## Completion, refusal and historical resource disposition
+
+Completion requires all new software/numerical/device/resource gates; useful
+INT8 and at least one FP16/BF16 nontrivial certified solve; all five repetitions
+certifying with no coverage loss against tuned on either timing model; and at
+least one paired **total-latency** bootstrap speedup interval excluding one after
+Bonferroni adjustment across six comparisons at 95% family confidence, 10000
+resamples, seed 17002. Independently verify every retained endpoint, including
+failed or interrupted records when available. Native promotion, residual-only
+work, host-only initial certificates, microbenchmarks and forecasts cannot win.
+
+Retain the original unrecorded concurrency/RSS overlap as **not certified**.
+Passing new source-bound preparation and the complete eight-model CPU cohort
+under the repaired coordinator supplies prospective admission for this new
+implementation only. Acceptance of this ADR authorizes that remedial disposition
+for completion; it does not assert historical compliance or alter old reports.
+If the new resource cohort cannot certify, GPUP-8 remains incomplete regardless
+of a latency result. A refusal or no gain ends this bounded experiment; leftover
+time does not authorize another version, new cells, retries, GPUP-9 or presets.
+
+## Alternatives and consequences
+
+MMA-only tuning has little measured large-model headroom. Reusing preparation
+across solves would change the endpoint. Copying tuned's step or deleting audits
+would weaken the accepted numerical contract. Removing BF16 after observing its
+cost would change the predeclared comparison family. Additional assessment
+scheduling or refinement would expand the interaction contract and scarce CPU
+work. These are outside this proposal.
+
+The fixed package has a plausible path to a win by removing shared overhead and
+reducing work amplification, but the new Gram bound has setup cost and may still
+restrict the step; a serial device reference audit may also be expensive. The
+CPU and cost gates deliberately permit a documented refusal. No guaranteed
+GPUP-8 completion is inferred from the remaining GPU allowance.
+
+The in-container amendment trades kernel-enforced task memory/swap containment
+for explicit cooperative admission, sampled RSS and conservative CPU charging.
+It is practical with ordinary container process interfaces, but compatibility
+and real cleanup still require the bootstrap/failure tests. A cgroup-equivalent
+claim would be false. A larger CPU allocation funds this accounting method and
+the original mandatory checks; it does not relax numerical or latency gates.
+
+Interface basis: Linux documents inherited [CPU affinity](https://man7.org/linux/man-pages/man2/sched_setaffinity.2.html),
+orphan reparenting to a [child subreaper](https://man7.org/linux/man-pages/man2/PR_SET_CHILD_SUBREAPER.2const.html),
+stable [pidfd references](https://man7.org/linux/man-pages/man2/pidfd_open.2.html),
+the non-inherited nature of [parent-death signals](https://man7.org/linux/man-pages/man2/PR_SET_PDEATHSIG.2const.html)
+and the per-process/virtual-memory scope of [rlimits](https://man7.org/linux/man-pages/man2/getrlimit.2.html).
+These primitives support this design; the documentation is not evidence that
+its implementation or failure tests have passed in this container.
+
+## Implementation and acceptance artifacts
+
+Likely implementation: a shared CPU admission coordinator with CPU-only failure
+tests; isolated `tensor_cost` host/CUDA/experiment modules and image; strict new
+request/evidence/protocol schemas; source-bound proof/admission/worker/report
+tools; separate `artifacts/gpup-tensor-cost-v1` and
+`docs/benchmarks/data/tensor-cost`. Keep source bridges for registration-only
+changes and source-only portability tests. Full `tools/check.sh` includes every
+CPU/native/dependency/replay/docs/smoke command. Preserve the exact ledger prefix
+SHA-256 `e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5`,
+including the 17200/17132 prefixes and every historical source/image/worker/report.
+Local commit follows applicable acceptance; publication and merge remain outside
+this task. Original user acceptance remains historical. This amended cooperative
+resource contract, 14300 additional CPU seconds and explicit reallocation of the
+remaining 1700 need acceptance before implementation. Resource and numerical
+admission still precede preparation/device execution. Preserve the numerical,
+frozen comparison/GPU and completion sections byte-for-byte against the archived
+accepted ADR; only resource terms and their contextual explanation change.

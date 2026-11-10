@@ -1,0 +1,61 @@
+{
+  "additional_cpu_ns": 24000000000000,
+  "authorization": "User explicitly requested implementation of the complete expanded-within-audit-window plan, including 24000 additional CPU seconds and 1760 GPU seconds reallocated within existing ceilings, 2026-10-24.",
+  "automatic_retry": false,
+  "bootstrap_rerun": false,
+  "campaign_gpu_cap_ns": 25202574545061,
+  "cpu_ceiling_ns": 77640000000000,
+  "future_cross_window_allocation": 0,
+  "gpu_caps_seconds": {
+    "acceptance": 450,
+    "profiles": 320,
+    "timings": 990
+  },
+  "gpu_ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "9913d391634bdb0f74012be909be377e5a693d00b76e6882abcf336796ac863e"
+  },
+  "gpu_prefix_events": 17412,
+  "gpup8_gpu_cap_ns": 3000000000000,
+  "gpup8_phase_caps_seconds": {
+    "ablations": 520,
+    "repeatability": 1070,
+    "screening": 1410
+  },
+  "historical_profiles_rerun": false,
+  "identity": "gpup-tensor-expanded-authorization-v1",
+  "passed_checks_rerun": false,
+  "prior_accounting": {
+    "path": "docs/benchmarks/data/tensor-warp32/receipt-final-cpu-accounting-v1.json",
+    "sha256": "5dee2269337e9071186e91062712a0a84339a78f29c59d34596d833aa748bd94"
+  },
+  "prior_campaign_gpu_ns": 22592495266813,
+  "prior_cpu_ns": 45902541829170,
+  "prior_gpup8_gpu_ns": 1232909411024,
+  "prior_gpup8_phase_ns": {
+    "ablations": 198546841921,
+    "repeatability": 619257333984,
+    "screening": 415105235119
+  },
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-warp32-v1/cpu-journal-receipt-final-v31.json",
+    "sha256": "d1bdeb7f37ef1e6ca6b032347f63f245d8dd0b85d061d547e10115d428ef7697"
+  },
+  "prospective_cpu_ns": 31600000000000,
+  "reallocated_cpu_ns": 7600000000000,
+  "stages_cpu_seconds": {
+    "acceptance": 4000,
+    "authority": 400,
+    "implementation": 4000,
+    "margin": 400,
+    "native": 4800,
+    "profiles": 3200,
+    "proofs": 5600,
+    "prototype": 2000,
+    "reporting": 800,
+    "timings": 6400
+  },
+  "status": "accepted",
+  "supervisor_change": false,
+  "unassigned_cpu_ns": 137458170830
+}

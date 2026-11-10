@@ -1,0 +1,28 @@
+{
+  "bootstrap_rerun": false,
+  "charged_failed_cpu_ns": 108000000000,
+  "compilation_started": false,
+  "container_configuration_changed": false,
+  "coordinator_cleanup_empty": true,
+  "cumulative_cpu_at_failure_ns": 29900459145450,
+  "cumulative_gpu_ns": 22222794320335,
+  "delivery_setup_cpu_ns": 4000000000,
+  "failed_journal_sha256": "aa9a70ab3410df84cdf0efa9e78789f43ed36241bd9a816da9c75d695fc9626e",
+  "failed_resource_receipt": {
+    "path": "artifacts/gpup-tensor-warp32-v1/image-construction-v1.json",
+    "sha256": "5743501f7dee6e616770c4deac188160ce7a135d2c55b4d157b4bb0a7f5d9fff"
+  },
+  "gpu_execution_performed": false,
+  "gpup8_gpu_ns": 863208464546,
+  "guardian_cleanup_empty": true,
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-compiler-refusal-v1",
+  "ledger_events": 17366,
+  "ledger_sha256": "9142829b3be8afdb1865425c83ca9122371284ca0e16f7bc8b18d303a5894426",
+  "new_image_exists": false,
+  "numerical_and_latency_criteria_changed": false,
+  "reason": "launcher_PATH_omits_working_python",
+  "returncode": 127,
+  "status": "incomplete",
+  "working_interpreter": "/opt/conda/bin/python"
+}

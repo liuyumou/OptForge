@@ -1,0 +1,277 @@
+# ADR-0045: Bounded warp32 Tensor reference recovery
+
+Status: Proposed (2026-10-24). Documentation only; execution is not authorized.
+
+## Context and retained stop
+
+[ADR-0044](ADR-0044-tensor-cost-continuation.md)'s frozen device cohort passes
+66 ordinary GPU tests, 280 product comparisons and range refusal, then fails its
+first INT8 controller comparison after 64 logical / 66 physical updates and
+two audits. The device audit's `tc_ref_product` sums entries serially. The host
+`precision::product` uses lane-strided warp32 sums and a fixed reduction tree.
+The resulting 1–4 ulp endpoint differences violate the required bitwise
+controller comparison even though the observed controller decisions agree.
+This is an implementation defect, not evidence that a tolerance should change.
+
+The [retained failure report](../benchmarks/lp-tensor-cost-device-gpup8.md) and
+[machine report](../benchmarks/data/tensor-cost/device-refusal-v1.json) remain
+historical and immutable. No fixed-work/replay pair, sanitizer, profile or primary
+timing followed the failure. All 76 old study identities remain unexecuted.
+Neither accepting this proposal nor creating new identities erases that stop.
+
+The user requests a bounded proposal without host access or changes to numerical
+or latency completion criteria. Acceptance of this ADR would authorize exactly
+one corrected source cohort and one new sequence of gates/study, as an explicit
+exception to the previous stop. It would also reopen and reallocate the closed
+CPU stages described below. Existing unused totals alone authorize neither.
+
+## One correction, with the existing reference arithmetic
+
+Create `artifacts/gpup-tensor-warp32-v1` and a separate recovery source tree.
+Preserve the failed source tree and image byte-for-byte. In the recovery copy,
+change only the body of the device reference sparse-product reduction:
+
+1. Initialize 32 FP64 lane accumulators exactly as the host reference does.
+   Lane `l` visits entries `first + l, first + l + 32, ...` in stored order.
+2. Use separately rounded FP64 multiply/add operations and the same finite and
+   underflow checks as the host. Combine lane sums in the host's exact
+   `16, 8, 4, 2, 1` order, with the same active-lane operations at each stage.
+3. Keep the existing kernel ABI, sparse indexing, output ownership and launch
+   shape. Implement these arithmetic lanes within the existing output thread
+   using explicitly unrolled accumulators/tree operations. No new cross-warp
+   synchronization or launch scheduling is needed.
+
+This is one prescribed construction. Compile and inspect it before device
+admission: at most 128 registers, zero spills, the existing FP64 rounding flags,
+and the same required Tensor instructions for the represented-product kernels.
+If scalarization fails the resource gate, stop on CPU; there is no automatic
+alternative construction or tuning sweep.
+
+Keep the norm bound, represented products, tiny-value FP64 residual corrections,
+state, controller, audit cadence, guards, sticky promotion and whole-window
+replay unchanged. Other reference kernels and all host numerical bodies must
+match the failed frozen source byte-for-byte. Use the unchanged host executable
+and existing code-object loading interface with the corrected image in a
+separate frozen directory. Record and check the resolved image path/hash;
+fallback to an old image refuses. If this cannot be done through the existing
+interface, stop before device execution rather than expanding the repair.
+
+## CPU acceptance before device work
+
+Retain the accepted in-container supervisor and its successful bootstrap.
+Do not rerun bootstrap or change supervisor/admission code. Reuse its inherited
+four-CPU mask, serialized top-level phases, descendant accounting and cleanup,
+durable completion transport, sampling/stop rules and conservative four-times-
+wall charging. Every wait, monitor, verifier and termination interval counts.
+Keep the 8-GiB aggregate RSS policy, 6-GiB stop threshold, 2-GiB numerical
+preparation, 1-GiB device buffers and 32-GiB combined-artifact ceiling.
+
+Before any lease:
+
+- Cross-check an independent reduction oracle against the actual host reference
+  and the recovery kernel's host-testable arithmetic. Cover empty/tail lines,
+  31/32/33 and 63/64/65 entries, multiple stride rounds, CSR and CSC order,
+  cancellation, signed zero, small values, and overflow/underflow refusal.
+  Include `[1e16, 1, -1e16, 1]` with unit multipliers: the prescribed tree gives
+  2 while the defective serial order gives 1. Compare bits and refusal behavior;
+  exact-real agreement alone is insufficient.
+- Retain the previous unchanged norm/layout/component proofs with a strict
+  source bridge. Run the complete eight-model CPU admission cohort under the
+  supervisor, binding its new records to the recovery source/image and unchanged
+  host executable. Independently verify new retained endpoints, including
+  available failed/interrupted endpoints. Do not rerun historical CPU cohorts.
+- Prepare and test the new harness/report reader, aggregate budget admission,
+  refusal paths and endpoint-verification receipts before freezing. Run
+  `bash tools/check.sh` once, including the 26 resource regressions, applicable
+  historical source-bridge checks, Rust/native/dependencies, Python, replay,
+  docs and smoke, with CUDA hidden. The retained complete gate charged
+  1069.880040068 CPU seconds; reserve 1200 for this gate. This is sizing evidence,
+  not a guarantee under shared-server contention.
+- Freeze exact source/image/executable hashes, all 76 study cells, six acceptance
+  jobs, request schemas, job order, commands, stage limits and forecast/report
+  rules. A command/source mismatch or a real failure stops this continuation.
+
+No cgroup, host, Kubernetes, privilege, system-service or container configuration
+change is involved. Do not inspect or signal unrelated users' processes. Wait
+only through the existing allocator's bounded admission; a busy device may
+refuse. Do not substitute devices.
+
+## CPU allocation from existing unspent funds
+
+The [planning receipt](../benchmarks/data/tensor-cost/warp32-plan-v1.json)
+carries every historical charge and five additional planning CPU seconds.
+Current accounting is **29754.705814258 / 35900 CPU seconds**. The old allocation
+has **6145.117030904** CPU seconds unspent; the cumulative ceiling has
+6145.294185742 seconds left. The 0.177154838 difference remains unallocated.
+The delivery journal's closed stages stay closed until this ADR is accepted.
+
+Propose replacing only the unspent allocations with these additional stage
+headrooms; add each headroom to that stage's retained charged amount:
+
+| Stage, including all children | Additional CPU s |
+| --- | ---: |
+| Isolated correction, oracle/harness implementation and incremental image compilation | 150 |
+| Reduction checks, source bridges and complete eight-model CPU admission/verification | 800 |
+| One full pre-device pinned-native gate | 1200 |
+| Freeze, all device workers/monitors, profiles/forecast, timings and independent endpoint verification | 3400 |
+| Final report, preservation, targeted report/schema checks, docs and smoke | 150 |
+| Named supervisor/termination allowances, reserved before launch | 400 |
+| **Total reallocated unspent CPU seconds** | **6100** |
+
+Maximum cumulative CPU accounting is **35854.705814258 / 35900**. Leave
+45.117030904 allocated CPU seconds unused, plus the historical 0.177154838
+unallocated. No new CPU seconds are requested. Do not reclaim failed/full
+reservations, reset counters, borrow across stages or use termination margin
+for additional scientific work. Assign named termination allowances before
+execution and charge each interval once.
+
+Reserve all remaining mandatory stages before starting a stage. The 3400-worker-
+CPU-second cap permits at most 850 aggregate wall seconds at four-times-wall
+charging. The GPU limits below use at most 790 of those seconds, leaving 60 wall
+seconds (240 CPU seconds) for work outside leases, verification and monitoring.
+These are joint hard limits: queue delays or slow verification may stop work
+earlier. Do not raise a cap to complete a row.
+
+All numerical and harness changes and their fixtures must precede the full
+native gate. After measurement, reporting uses hash-bound independent
+verification receipts already produced for every available endpoint. Do not
+repeat the full integration suite or all historical endpoint verifications in
+the final reporting window. Final documentation/schema/smoke checks have their
+own 150-CPU-second reservation. A required post-freeze behavior change or a
+failed final check leaves acceptance incomplete and stops; this plan supplies
+no repair/retest loop.
+
+This explicitly proposes changing ADR-0044's CPU acceptance schedule from
+pre-device and final full native runs to one full run on the final behavioral
+sources before device execution, followed by targeted delivery checks. Every
+command in `tools/check.sh` remains required in that full run. Final changes
+are restricted to evidence, reports and state/documentation; a behavioral
+change would invalidate this scheduling assumption. Numerical, device and
+latency acceptance criteria remain unchanged.
+
+## GPU roster and aggregate limits
+
+Current GPUP-8 consumption is **863.208464546 / 3000 GPU seconds**, leaving
+2136.791535454. Campaign consumption is **22222.794320335 / 25202.574545061**.
+The latest failure used 38.094432271 repeatability seconds. Thus repeatability
+has only 491.942843872 seconds left: ADR-0044's old 496-second acceptance
+reservation no longer fits unchanged.
+
+Keep the same six acceptance jobs and required work, with these new resource
+deadlines in the new protocol. Six overhead seconds remain reserved per job:
+
+| Acceptance job | Work deadline + overhead, s | GPU s |
+| --- | --- | ---: |
+| All 66 ordinary tests | 54 + 6 | 60 |
+| Project products, five controllers and 12 actual-model fixed-work/replay pairs | 60 + 6 | 66 |
+| memcheck | 30 + 6 | 36 |
+| racecheck | 50 + 6 | 56 |
+| initcheck | 30 + 6 | 36 |
+| synccheck | 30 + 6 | 36 |
+| **Repeatability maximum** | | **290** |
+
+Keep at least the existing 280 independent CPU/device product pairs, all five
+bitwise controller comparisons, all 12 fixed-work/replay pairs, range-refusal
+checks and all four scoped sanitizers. Add the adversarial reduction witness
+to the project gate without a new job. A shorter resource deadline changes no
+test, work horizon or acceptance rule. A timeout fails the gate; it does not
+permit a subset pass. The previous ordinary job used 35.504810680 GPU seconds;
+the failed project job's 2.589621591 seconds do not forecast a complete project
+run. The project and sanitizer limits therefore remain explicit uncertainties.
+
+Preserve all 76 study cells: six configurations, two dense models, five fresh
+timing repetitions, 12 primary profiles and four ablations. Keep ordering seed
+17001, the existing 5/16-second timing deadlines, 6/18-second primary-profile
+deadlines and 20-second ablation deadlines. Keep forced 2000-update profile
+horizons and actual tuned time-to-certificate profiles as specified by ADR-0044.
+Do not omit BF16, controls, repetitions or ablations based on observations.
+
+| Phase | Remaining before continuation, GPU s | New aggregate cap, GPU s |
+| --- | ---: | ---: |
+| Screening: 60 primary timings | 1184.894764881 | 300 |
+| Ablations: 12 primary profiles plus four ablations | 459.953926701 | 200 |
+| Repeatability: six acceptance jobs | 491.942843872 | 290 |
+| **Total** | **2136.791535454** | **790** |
+
+Reserve each job's full deadline plus six seconds before launch against both
+its remaining phase cap and the worker CPU envelope. Settle actual lease time;
+failed telemetry charges the full reservation. The profile/timing aggregate
+caps are deliberately smaller than their respective per-cell sums, 320/990.
+The CPU allowance cannot support reserving the former 1806 GPU seconds at four
+times wall time, even before mandatory CPU checks. This plan consequently funds
+one conditional attempt at the complete roster, not a guarantee that all cell
+maxima can be spent. Insufficient admission leaves explicit unattempted rows.
+
+After device correctness, execute the frozen profiles/ablations in the inherited
+order. Only complete, independently verified horizons may supply a forecast.
+Keep ADR-0044's existing first-certificate and gain forecast gates unchanged.
+Add a resource-fit gate before timings: freeze the estimator before profiles,
+use the largest observed end-to-end/first-certificate tail and worker/lease
+overhead for each configuration/model, and apply a 1.25 safety multiplier to
+the full five-repetition timing roster. All configurations, including BF16 and
+both controls, count. Require that estimate to fit the remaining 300-second
+screening allocation and remaining worker CPU envelope after verification and
+termination reservations. A missing estimator input refuses; do not substitute an
+incomplete horizon, a microbenchmark or another family's cost. Keep per-job
+worst-case reservations and stop on any actual budget exhaustion even if this
+empirical estimate passed. The forecast is admission evidence, not a confidence
+bound or a measured speedup.
+
+If all new GPU caps were consumed, task consumption would be at most
+**1653.208464546 / 3000** and campaign consumption
+**23012.794320335 / 25202.574545061**. Retain the independent 28800-second
+ceiling and every campaign phase ceiling. Device remains exclusively
+`GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48`. The separate 3600-GPU-second offer
+stays unreserved; this proposal requests no new GPU budget.
+
+## Unchanged completion and stop rules
+
+Retain the 1e-7 local budgets, 1e-9 original-model host certification, resident
+FP64 state, explicit tiny-value corrections, charged whole-window replay and
+uniform sticky promotion. Every fresh solve still performs its required fresh
+host assessments/certification. Receipt reuse avoids duplicate report-time
+verification; it never replaces a solve's certification.
+
+Completion still requires every software/numerical/device/resource gate; useful
+INT8 and at least one FP16/BF16 nontrivial certified solve; all five repetitions
+certifying with no coverage loss against tuned on either timing model; and at
+least one paired total-latency bootstrap speedup interval excluding one after
+Bonferroni adjustment across all six comparisons at 95% family confidence,
+10000 resamples and seed 17002. Independently verify every retained endpoint,
+including available failed/interrupted records. Native promotion, residual-only
+work, host-only initial certificates, forecasts and microbenchmarks cannot win.
+
+A CPU/resource admission failure, incorrect bit, missing required gate, timeout,
+sanitizer finding, unavailable forecast, exhausted cap or absence of an adjusted
+certified total-latency gain ends this continuation with GPUP-8 incomplete.
+No automatic repair, second image, device substitution, new cells, retries,
+GPUP-9 or preset follows. Even a gain cannot complete GPUP-8 without the full
+prospective resource cohort. Do not reinterpret historical resource overlap
+as certified. Local commit follows applicable acceptance; publication and merge
+remain outside scope.
+
+## Preservation and approval boundary
+
+The new campaign/study identity is `gpup-tensor-warp32-v1`, with new request,
+worker, CPU-cohort, source/image and report receipts under its own artifact/data
+directories. Existing strict schemas and numerical modes remain authoritative;
+bind the corrected code object explicitly rather than relabeling old payloads.
+Record every old cell as historically failed/unexecuted and every new cell as
+newly attempted or unattempted. Do not overwrite historical harnesses, reports,
+identities or the failed image. Preserve native dependencies and incremental
+artifacts; do not clean the container or repository to make space.
+
+The exact **17366-event** ledger prefix has SHA-256
+`9142829b3be8afdb1865425c83ca9122371284ca0e16f7bc8b18d303a5894426`.
+Preserve it and every earlier prefix, including the 17362-, 17200- and
+17132-event histories, plus all sources/images/workers/reports and failed
+journals. The accepted ADR-0044 remains byte-for-byte unchanged, SHA-256
+`5ddb5babf43a1dd4cf71cd26a1a2f27e1d42eb454a6930c825b31b5712d850c4`.
+
+Planning performed only bounded local reads, integer budget checks, preservation
+hashes and documentation/accounting edits. It spent five already allocated
+reporting CPU seconds and no GPU seconds. No compiler, workload, native suite,
+bootstrap, host access or container configuration action ran. The proposal is
+unimplemented and unaccepted. Acceptance must explicitly authorize the
+6100-CPU-second reallocation and the one corrected frozen continuation; it
+does not raise either cumulative ceiling or change completion criteria.

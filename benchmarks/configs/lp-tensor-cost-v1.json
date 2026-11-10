@@ -1,0 +1,226 @@
+{
+  "acceptance_output": "artifacts/gpup-tensor-cost-v1/acceptance-v1",
+  "acceptance_work": 64,
+  "additional_gpu_seconds": 0,
+  "allocated_gpu_seconds": 1806,
+  "analysis": {
+    "comparisons": 6,
+    "confidence": 0.95,
+    "resamples": 10000,
+    "seed": 17002
+  },
+  "artifact_bytes": 34359738368,
+  "budget_authority": {
+    "path": "benchmarks/configs/lp-campaign-v1.json",
+    "sha256": "a65d0ac2ce2b2676453d0e15752f887af1ee759318bed8b4538ae3f6f0cf137f"
+  },
+  "categories": {
+    "accept": {
+      "phase": "repeatability",
+      "seconds": 496
+    },
+    "profile": {
+      "phase": "ablations",
+      "seconds": 320
+    },
+    "timing": {
+      "phase": "screening",
+      "seconds": 990
+    }
+  },
+  "combined_cap_seconds": 1806,
+  "configurations": [
+    {
+      "backend": "lp-tensor-cost-v1",
+      "id": "int8-tensor",
+      "layout": "int8",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    {
+      "backend": "lp-tensor-cost-v1",
+      "id": "fp16-tensor",
+      "layout": "fp16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    {
+      "backend": "lp-tensor-cost-v1",
+      "id": "bf16-tensor",
+      "layout": "bf16",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    {
+      "backend": "lp-tensor-cost-v1",
+      "id": "component-simt",
+      "layout": "simt",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    {
+      "backend": "lp-tensor-cost-v1",
+      "id": "matched-fp64",
+      "layout": "segmented",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    },
+    {
+      "backend": "cuda-lp-tuned",
+      "execution": {
+        "allocation": "resident",
+        "fusion": "separate",
+        "reduction": "warp32_v1",
+        "schema_version": 1,
+        "uploads": "necessary"
+      },
+      "id": "tuned-fp64",
+      "layout": "original_tuned",
+      "settings": {
+        "audit_absolute": 1e-07,
+        "audit_interval": 32,
+        "audit_relative": 1e-07,
+        "dual_budget": 1e-07,
+        "format": "fp64",
+        "policy": "uniform",
+        "primal_budget": 1e-07,
+        "rounding": "nearest_even",
+        "tile_size": 32
+      }
+    }
+  ],
+  "cpu_cap_seconds": 16000,
+  "cumulative_gpu_ns": 25202574545061,
+  "decision": {
+    "path": "docs/decisions/ADR-0044-tensor-cost-continuation.md",
+    "sha256": "5ddb5babf43a1dd4cf71cd26a1a2f27e1d42eb454a6930c825b31b5712d850c4"
+  },
+  "device": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48",
+  "id": "gpup-tensor-cost-v1",
+  "limits": {
+    "cleanup_seconds": 2,
+    "device_buffer_bytes": 1073741824,
+    "host_rss_bytes": 8589934592,
+    "output_bytes": 33554432,
+    "poll_ms": 10,
+    "solve_seconds": 10
+  },
+  "lp_settings": {
+    "check_interval": 200,
+    "iteration_limit": 50000,
+    "power_iterations": 20,
+    "preconditioner": {
+      "pock_chambolle_alpha": 1.0,
+      "ruiz_passes": 10
+    },
+    "primal_weight": {
+      "derivative": 0.0,
+      "integral": 0.0,
+      "proportional": 0.5
+    },
+    "restart": {
+      "artificial": 0.36,
+      "necessary": 0.8,
+      "sufficient": 0.2
+    },
+    "schema_version": 1
+  },
+  "manifests": [
+    {
+      "path": "benchmarks/manifests/lp-development-v1.json",
+      "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+    },
+    {
+      "path": "benchmarks/manifests/lp-development-extension-v1.json",
+      "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+    }
+  ],
+  "model_byte_limit": 134217728,
+  "oracle_seed": 17022,
+  "order_seed": 17001,
+  "output": "artifacts/gpup-tensor-cost-v1/study-v1",
+  "partition": "development",
+  "phase_gpu_seconds": {
+    "ablations": 8100,
+    "baseline": 1800,
+    "finalists": 9000,
+    "repeatability": 5300,
+    "screening": 11800
+  },
+  "planned_attempts": 76,
+  "prior_events": 17362,
+  "prior_gpu_ns": 22184699888064,
+  "prior_ledger_sha256": "e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5",
+  "profile_instances": [
+    "gpup-development-dense_block-1024",
+    "gpup-extension-dense_block-65536"
+  ],
+  "profile_seconds": 18,
+  "profile_work": 2000,
+  "schema_version": 1,
+  "solve": {
+    "iteration_limit": 50000,
+    "node_limit": null,
+    "schema_version": 1,
+    "seed": 17,
+    "threads": 1,
+    "time_limit_ms": 10000,
+    "tolerances": {
+      "absolute": 1e-09,
+      "integrality": 1e-09,
+      "relative": 1e-09
+    }
+  },
+  "timing_instances": [
+    "gpup-development-dense_block-1024",
+    "gpup-extension-dense_block-65536"
+  ],
+  "timing_repetitions": 5,
+  "total_gpu_seconds": 28800,
+  "verification_seconds": 120
+}

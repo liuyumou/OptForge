@@ -1,0 +1,349 @@
+{
+  "accounting_source": {
+    "path": "docs/benchmarks/data/tensor-expanded/recovery-final-accounting-v1.json",
+    "sha256": "cfaa3a61843cfb62cf02ed0c79239bb639293ea3e62a93b8438a96c56b6ec989"
+  },
+  "date": "2026-11-10",
+  "derived_int8": {
+    "ideal_speedup_if_main_event_cost_removed_all_else_fixed": 1.0117427898651359,
+    "reconstruction_fraction_of_execute_envelope": 0.669609904438736
+  },
+  "kind": "read_only_extraction_of_retained_profiles",
+  "ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "fabe2e22047bac9194867e1f745c627a2271bc7c0cd283f17b207957c7bbb59d"
+  },
+  "ledger_events": 17438,
+  "limits": [
+    "Host scopes and CUDA events overlap; do not add them.",
+    "Event durations are not hardware utilization counters.",
+    "Only small-model complete profiles; no fresh numerical verification."
+  ],
+  "new_numerical_runs": 0,
+  "profiles": [
+    {
+      "certificate_prefix_ns": 4017579259,
+      "counts": {
+        "accepted_nonzero_f": 44741088,
+        "accepted_nonzero_t": 64659520,
+        "coarse_pass": 4096000,
+        "component_products": 131072000,
+        "decoded_coordinates": 286720,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 430080,
+        "expanded_updates": 2000,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 4096000,
+        "low": 131072000,
+        "mma_instructions": 0,
+        "nonzero_f": 44741088,
+        "nonzero_t": 64659520,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 48467136,
+        "uncertain": 0,
+        "useful_windows": 60,
+        "windows": 70
+      },
+      "device_event_milliseconds": {
+        "reference_audit": 6.218080006539822,
+        "xe_abs_blocks": 24.329247980378568,
+        "xe_abs_finish": 16.89337592443917,
+        "xe_boundary_enclosure": 1.5555519945919514,
+        "xe_check_flags": 14.116063958615996,
+        "xe_decode64": 1.5810239946004003,
+        "xe_dual_enclosure": 52.50630468316376,
+        "xe_dual_update": 477.8986564427614,
+        "xe_encode64": 1.8037759964354336,
+        "xe_pack64": 27.56425585807301,
+        "xe_primal_enclosure": 23.878239437937737,
+        "xe_primal_update": 366.3546874448657,
+        "xe_reconstruct": 3905.476286580786,
+        "xe_simt_main": 35.862687991932034
+      },
+      "execute_total_ns": 5770621544,
+      "first_certified_iteration": 1400,
+      "host_profile": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-component-simt.endpoint.json.host-profile.json",
+        "sha256": "05d09ee855b808790f50342e798307748f523f9dd645bd8456e1022b8a5e6e05"
+      },
+      "method": "component-simt",
+      "preparation_ns": 525546355,
+      "resident_device_to_host": [
+        {
+          "calls": 8700,
+          "exclusive_ns": 4849865521,
+          "inclusive_ns": 4851769532,
+          "max_ns": 2197277,
+          "min_ns": 6435,
+          "path": [
+            "resident_solve_loop",
+            "device_to_host"
+          ]
+        }
+      ],
+      "source": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-component-simt.endpoint.json",
+        "sha256": "0f4db77d237ee8f096a194680a005a5dadff699057fd0cafe4e0d07b1f2140bb"
+      },
+      "synchronization_calls": 11616
+    },
+    {
+      "certificate_prefix_ns": 4005442375,
+      "counts": {
+        "accepted_nonzero_f": 44741088,
+        "accepted_nonzero_t": 64659520,
+        "coarse_pass": 4096000,
+        "component_products": 10485760000,
+        "decoded_coordinates": 286720,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 430080,
+        "expanded_updates": 2000,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 4096000,
+        "low": 131072000,
+        "mma_instructions": 8192000,
+        "nonzero_f": 44741088,
+        "nonzero_t": 64659520,
+        "padded_products": 16777216000,
+        "predicated": 0,
+        "residual_products": 48467136,
+        "uncertain": 0,
+        "useful_windows": 60,
+        "windows": 70
+      },
+      "device_event_milliseconds": {
+        "reference_audit": 6.133535988628864,
+        "xe_abs_blocks": 23.742559995036572,
+        "xe_abs_finish": 16.91280008375179,
+        "xe_boundary_enclosure": 1.550335997948423,
+        "xe_check_flags": 14.067967960727401,
+        "xe_decode64": 1.572287994204089,
+        "xe_dual_enclosure": 52.57766382209957,
+        "xe_dual_update": 477.85772766172886,
+        "xe_encode64": 1.7761919982731342,
+        "xe_fp16_main": 89.18956775963306,
+        "xe_pack64": 26.93126381910406,
+        "xe_primal_enclosure": 23.896095538511872,
+        "xe_primal_update": 366.11929553747177,
+        "xe_reconstruct": 3909.6229105740786
+      },
+      "execute_total_ns": 5776514313,
+      "first_certified_iteration": 1400,
+      "host_profile": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-fp16-tensor.endpoint.json.host-profile.json",
+        "sha256": "c4cd25cbc6eee3ca4b8b3251bab14e72530b542b0e0e6111b753f4dadb3580cf"
+      },
+      "method": "fp16-tensor",
+      "preparation_ns": 476734089,
+      "resident_device_to_host": [
+        {
+          "calls": 8700,
+          "exclusive_ns": 4908410584,
+          "inclusive_ns": 4910329017,
+          "max_ns": 1574381,
+          "min_ns": 6441,
+          "path": [
+            "resident_solve_loop",
+            "device_to_host"
+          ]
+        }
+      ],
+      "source": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-fp16-tensor.endpoint.json",
+        "sha256": "ca990c0ebe5a7c6ce75130248ef8ec3fab529e8bb9713f5eb91ce1a12795131d"
+      },
+      "synchronization_calls": 11616
+    },
+    {
+      "certificate_prefix_ns": 4060474840,
+      "counts": {
+        "accepted_nonzero_f": 44741088,
+        "accepted_nonzero_t": 64659520,
+        "coarse_pass": 4096000,
+        "component_products": 10485760000,
+        "decoded_coordinates": 286720,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 430080,
+        "expanded_updates": 2000,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 4096000,
+        "low": 131072000,
+        "mma_instructions": 4096000,
+        "nonzero_f": 44741088,
+        "nonzero_t": 64659520,
+        "padded_products": 16777216000,
+        "predicated": 0,
+        "residual_products": 48467136,
+        "uncertain": 0,
+        "useful_windows": 60,
+        "windows": 70
+      },
+      "device_event_milliseconds": {
+        "reference_audit": 6.199103988707066,
+        "xe_abs_blocks": 24.81718396442011,
+        "xe_abs_finish": 17.87516800640151,
+        "xe_boundary_enclosure": 1.583135997178033,
+        "xe_check_flags": 14.098975917208008,
+        "xe_decode64": 1.6141119948588312,
+        "xe_dual_enclosure": 52.49161528609693,
+        "xe_dual_update": 477.92918418347836,
+        "xe_encode64": 1.923168003326282,
+        "xe_int8_main": 67.70079945400357,
+        "xe_pack64": 28.24022390996106,
+        "xe_primal_enclosure": 23.910143598914146,
+        "xe_primal_update": 366.07804771512747,
+        "xe_reconstruct": 3905.8404135983437
+      },
+      "execute_total_ns": 5833008723,
+      "first_certified_iteration": 1400,
+      "host_profile": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-int8-tensor.endpoint.json.host-profile.json",
+        "sha256": "f82cd383e0278c7478d95b44f299bded1a16da9fdfe72748b5831a8a536fbb8d"
+      },
+      "method": "int8-tensor",
+      "preparation_ns": 546393215,
+      "resident_device_to_host": [
+        {
+          "calls": 8700,
+          "exclusive_ns": 4876845910,
+          "inclusive_ns": 4878712333,
+          "max_ns": 1444598,
+          "min_ns": 6375,
+          "path": [
+            "resident_solve_loop",
+            "device_to_host"
+          ]
+        }
+      ],
+      "source": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-int8-tensor.endpoint.json",
+        "sha256": "217c390dd6cea387197d46728caf415e220c317d5833df2985f502b70ef9c5be"
+      },
+      "synchronization_calls": 11616
+    },
+    {
+      "certificate_prefix_ns": 4073043179,
+      "counts": {
+        "accepted_nonzero_f": 44741088,
+        "accepted_nonzero_t": 64659520,
+        "coarse_pass": 4096000,
+        "component_products": 29360128000,
+        "decoded_coordinates": 286720,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 430080,
+        "expanded_updates": 2000,
+        "expansion_counter_version": 1,
+        "guard_products": 0,
+        "high": 4096000,
+        "low": 131072000,
+        "mma_instructions": 14336000,
+        "nonzero_f": 44741088,
+        "nonzero_t": 64659520,
+        "padded_products": 29360128000,
+        "predicated": 0,
+        "residual_products": 48467136,
+        "uncertain": 0,
+        "useful_windows": 60,
+        "windows": 70
+      },
+      "device_event_milliseconds": {
+        "reference_audit": 6.284575998783112,
+        "xe_abs_blocks": 24.677151984302327,
+        "xe_abs_finish": 17.881152003537863,
+        "xe_bf16_main": 108.62956810928881,
+        "xe_boundary_enclosure": 1.5977279976941645,
+        "xe_check_flags": 14.2421759320423,
+        "xe_decode64": 1.6235839971341193,
+        "xe_dual_enclosure": 52.5543351713568,
+        "xe_dual_update": 477.84553614258766,
+        "xe_encode64": 1.925567998085171,
+        "xe_pack64": 28.21798390406184,
+        "xe_primal_enclosure": 23.913535597734153,
+        "xe_primal_update": 366.3753598704934,
+        "xe_reconstruct": 3901.4617891311646
+      },
+      "execute_total_ns": 5849124074,
+      "first_certified_iteration": 1400,
+      "host_profile": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-bf16-tensor.endpoint.json.host-profile.json",
+        "sha256": "5b1718e9e4b632f4dd0b7df1996f3bdc2f85a96117afc02b218548806837a8ff"
+      },
+      "method": "bf16-tensor",
+      "preparation_ns": 533973171,
+      "resident_device_to_host": [
+        {
+          "calls": 8700,
+          "exclusive_ns": 4907728527,
+          "inclusive_ns": 4909624785,
+          "max_ns": 1731167,
+          "min_ns": 5938,
+          "path": [
+            "resident_solve_loop",
+            "device_to_host"
+          ]
+        }
+      ],
+      "source": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-bf16-tensor.endpoint.json",
+        "sha256": "ce64aad890d7a9e3624d7984ee56c643b4227bebbc5f24430fa3dd2e445fdec7"
+      },
+      "synchronization_calls": 11616
+    },
+    {
+      "certificate_prefix_ns": 666707624,
+      "counts": {
+        "accepted_nonzero_f": 0,
+        "accepted_nonzero_t": 0,
+        "coarse_pass": 4096000,
+        "component_products": 0,
+        "decoded_coordinates": 0,
+        "detailed_fail": 0,
+        "detailed_pass": 0,
+        "encoded_coordinates": 0,
+        "expanded_updates": 0,
+        "expansion_counter_version": 0,
+        "guard_products": 0,
+        "high": 135168000,
+        "low": 0,
+        "mma_instructions": 0,
+        "nonzero_f": 0,
+        "nonzero_t": 0,
+        "padded_products": 0,
+        "predicated": 0,
+        "residual_products": 0,
+        "uncertain": 0,
+        "useful_windows": 0,
+        "windows": 70
+      },
+      "device_event_milliseconds": {
+        "native_window": 138.08547174930573,
+        "reference_audit": 6.075391985476017
+      },
+      "execute_total_ns": 806667735,
+      "first_certified_iteration": 1400,
+      "host_profile": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-matched-fp64.endpoint.json.host-profile.json",
+        "sha256": "7f1748ab67f67ac5213320d8c62bd60070d23ba755a8e533f44ba5b5ca586b53"
+      },
+      "method": "matched-fp64",
+      "preparation_ns": 533467824,
+      "resident_device_to_host": [],
+      "source": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-matched-fp64.endpoint.json",
+        "sha256": "2f2d8b5c444f1b7be4117a09eb0901e2c8c633f846ee2bb3885f564bd65c1052"
+      },
+      "synchronization_calls": 1074
+    }
+  ],
+  "reviewed_commit": "396bd0e2ea095f1d038dfa862bb31f29a61e0d68",
+  "schema_version": 1,
+  "scope": "dense_block 1024 seed 0; instrumented 2000-update profiles, not primary latency timings"
+}

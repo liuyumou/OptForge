@@ -1,0 +1,13 @@
+{
+  "diff_hygiene": true,
+  "docs_output": {
+    "path": "artifacts/gpup-tensor-expanded-v1/docs-check-v1.stdout",
+    "sha256": "1bf92081de8fc9d369393c4aaba321cc450301aedbe062508af49f1dc7422a00"
+  },
+  "exact_gpu_ledger_unchanged": true,
+  "historical_artifacts_preserved": true,
+  "new_python_syntax": true,
+  "new_source_preserved": true,
+  "passed_numerical_checks_rerun": false,
+  "status": "passed"
+}

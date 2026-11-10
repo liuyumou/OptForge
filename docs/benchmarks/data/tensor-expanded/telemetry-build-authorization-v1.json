@@ -1,0 +1,22 @@
+{
+  "authorization": "Required pre-freeze instrumentation under the approved plan; unused-budget transfers authorized.",
+  "change": "Record the retained cumulative certificate-boundary/final-assessment/execute envelopes; bind actual executor; preserve deadline status after final assessment.",
+  "gpu_seconds": 0,
+  "numerical_sources_changed": false,
+  "old_arithmetic_tests_rerun": false,
+  "old_interface_tests_rerun": false,
+  "prior_journal": {
+    "path": "artifacts/gpup-tensor-expanded-v1/executor-recovery-v1/cpu-journal-v16.json",
+    "sha256": "a24a579f6b0de227f4929128c1771412fd2466c5e2af3c59280b77c7107bec65"
+  },
+  "prior_native_acceptance": {
+    "path": "docs/benchmarks/data/tensor-expanded/executor-native-acceptance-v2.json",
+    "sha256": "8071ad19a034980a476f65884cabd17f9618e19fca4307bb50261918b975fcf8"
+  },
+  "status": "accepted",
+  "transfer": {
+    "cpu_seconds": 320,
+    "source": "executor_recovery",
+    "target": "telemetry_build"
+  }
+}

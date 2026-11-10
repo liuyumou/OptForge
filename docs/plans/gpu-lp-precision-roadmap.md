@@ -1,13 +1,192 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: GPUP-7/7R complete; GPUP-8 conditional disposition/contract is next
+Status: baseline complete under the native-return amendment 2026-11-10; GPUP-8 incomplete, science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: 62516e8cef59104442fa359a2e2440af8a59f033 (precision architecture review, 2026-10-12)
+Last reviewed commit: 396bd0e2ea095f1d038dfa862bb31f29a61e0d68
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
-Acceptance: the slice gates below; [GPUP-2 baseline evidence](../benchmarks/lp-baseline-gpup2.md), [GPUP-3 matched evidence](../benchmarks/lp-matched-fp64-gpup3.md), [GPUP-4 tuned evidence](../benchmarks/lp-tuned-fp64-gpup4.md)
+Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md)
+Evidence: [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+
+## Current plan (2026-11-10)
+
+The objective is a faster independently certified answer using modern GPU
+low-precision computation where it reduces total cost. The comparable cuOpt/COPT
+baseline is now complete under an explicit native-return policy; the next step
+is lean execution, followed by simpler mixed precision. Another exact-expansion
+Tensor implementation is conditional on a credible cost case. This priority supersedes the dated planning order below;
+historical evidence and accepted numerical contracts remain unchanged.
+
+GPUP-8's corrected proof, CPU/native/model gates and six device jobs passed.
+Six small profiles completed; the first large BF16 profile timed out. Nine profiles
+and sixty timings remain unexecuted. GPUP-8 has neither a complete gain forecast
+nor a certified latency win. Its stages remain closed, and GPUP-9 remains gated.
+The [final accounting](../benchmarks/data/tensor-expanded/recovery-final-accounting-v1.json)
+is authoritative; unused allocations are not new spending authority.
+
+The user authorized the diagnosis, roadmap, cuOpt installation, baseline contract
+and then GPUP-BASELINE implementation with 3600 additional GPU seconds.
+GPUP-BASELINE-SPEC is delivered as
+[SPEC-0022](../specifications/SPEC-0022-external-lp-baseline.md), with
+[CPU contracts and a two-phase resource proposal](../benchmarks/lp-external-baseline-v1.md).
+The [completed baseline](../benchmarks/lp-external-baseline-native-return.md)
+accounts for all 240 planned attempts: 198 comparison passes and 135
+strict certificates. The user selected cuOpt error-free native returns as a
+separate pass tier; 90/96 pass natively and 24/96 certify strictly. Limits,
+native errors, delivery failures and original-model differences remain explicit.
+Total baseline GPU charge is 3091.995889713 / 3600 seconds. Gurobi remains
+unavailable. This is not a quality-matched commercial-solver ranking or a
+supported low-precision preset. New scientific tasks still need their own
+concrete protocol/allocation; GPUP-8 stays closed and incomplete, GPUP-9 gated.
+
+### Ordered deliverables and decision gates
+
+| Task / priority | Deliverable and prerequisite | Acceptance / go-no-go decision |
+| --- | --- | --- |
+| **GPUP-DIAG**, delivered | Saved source-bound diagnosis, ADR-0047, corrected status/backlog and isolated cuOpt setup record | Evidence and numerical sources preserved; documentation/dependency/package checks; no solver timing claim |
+| **GPUP-BASELINE-SPEC**, delivered, CPU-only | SPEC-0022, three schemas, canonical conversion/endpoint/proposal validation, fixtures and resource arithmetic | Twenty focused tests pass; ten lanes and eight source-bound development models; proposal remains non-executable |
+| **GPUP-BASELINE**, complete under the user amendment | Separate adapters/checker, frozen 240-cell report; 123 results reused and 117 new attempts | 198 comparison passes, 135 strict certificates; cuOpt 90/96 native passes and 24/96 strict certificates. Separate native/quality/transport outcomes and retained failures; no equal-quality speedup claim |
+| **GPUP-BASELINE-FOLLOWUP**, delivered | ADR-0052 / SPEC-0023, exact continuation roster, explicit native-return policy and resource allocation | Original certificate unchanged; native errors and normal limits distinguished; raw vectors and mapping uncertainty preserved; previous numerical trials not rerun |
+| **GPUP-RESIDENT2**, next ready | First attribute conversion/import/native/check/output costs with explicit cold/prepared lifecycles; then a versioned native baseline with per-window coefficients, device sticky flags and bounded asynchronous submission; reusable immutable preparation within explicitly named lifecycle; depends on GPUP-BASELINE | Preserve boundary state, refusal/rollback/cancellation and fresh certificate semantics; measure launch/copy counts and total time against matched native control; retain only if total latency improves without coverage loss |
+| **GPUP-MIXED2**, planned | FP32 matrix / FP64 state-and-compute candidate first; only then bounded FP32 state with residual-driven escalation; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Explicit matrix-error and residual contract; useful nonzero work on admitted models, original 1e-9 checker, charged correction/fallback; reject if convergence/guard cost erases total gain |
+| **GPUP-TENSOR2**, conditional | CPU cost admission for dense-block or batched alternatives; device prototype only after admission; depends on GPUP-MIXED2 | Compare packing, padding, all component/residual work, state updates, guards and convergence with native/SIMT; no full campaign unless a conservative complete-path estimate has at least 10% headroom; this is a proposed new screen, not a GPUP-8 criterion change |
+| **GPUP-PRESOLVE**, planned | Minimal reversible fixed-variable, singleton and bound-tightening transformations plus postsolve maps; depends on GPUP-BASELINE evidence | Independent original-model validation of postsolved primal/dual information and statuses; benchmark saved total work; reject transformations that cannot preserve required proof information |
+| **GPUP-8-DISPOSITION**, planned review | Review new engineering evidence and the retained incomplete GPUP-8 record; depends on GPUP-BASELINE and GPUP-MIXED2 | Either propose a separately funded bounded recovery with unchanged GPUP-8 criteria, or seek an explicit negative-result closure and superseding progression decision; neither marks GPUP-8 passed by default |
+| **GPUP-9 / GPUP-10**, gated | Controlled held-out ablations, then evidence-supported dispatcher/recipes | GPUP-8 completion or a separately accepted replacement gate is required; retain coverage, uncertainty, total costs and native fallback; no preset from partial profiles |
+| **GPUP-MILP**, deferred | Relaxation adapter, bound authority, warm starts and full search study after supported LP recipes | Correct pruning/bounds, cancellation and reproducibility, followed by full MILP time/node/coverage comparisons |
+
+One task owner handles each accepted slice. Expected ownership is experiment
+tooling for BASELINE-SPEC/BASELINE, CUDA runtime for RESIDENT2, numerical backend
+for MIXED2/TENSOR2/PRESOLVE, and solver executive for MILP. Tasks are sequential
+unless their accepted resource plans explicitly permit independent work.
+
+### External comparison contract
+
+SPEC-0022 supplies the strict mathematical contract; the accepted
+[SPEC-0023 amendment](../specifications/SPEC-0023-baseline-native-return.md) adds
+cuOpt native-return acceptance separately. The completed run binds executable,
+source, device and resource identities before release. The current comparison
+policy is explicit below:
+
+| Dimension | Selected design |
+| --- | --- |
+| Required solvers | Current tuned project FP64, explicit project FP32/mixed candidates when admitted, cuOpt 26.10.0, local COPT 8.0.6; Gurobi excluded until available |
+| Algorithm cohorts | Forced PDLP/PDHG where supported, forced native FP64 control, and vendor portfolio/default mode as separate rows; no attribution of a concurrent winner to PDLP without evidence |
+| Precision | Explicit cuOpt single/double/mixed settings; record actual supported mode and arithmetic/storage distinction; do not label all GPU execution as Tensor or low precision |
+| Primary endpoint | Complete cold worker delivery, including setup, conversion, solve, export and independent checking; strict certificate required for project/HiGHS/COPT, explicit error-free native-return policy for cuOpt. Publish the two acceptance bases separately |
+| Secondary endpoints | Warm in-process solve and native solve time with exact boundaries; repeated RHS/batches reported as throughput; none substitutes for cold latency |
+| Quality | Original 1e-9 certificate is unchanged. CuOpt native-return passes can fail it; log exact termination, raw vectors and original-model discrepancies. Native-return comparisons are not quality-matched speedups. Any future relaxed tolerance tier needs its own identity |
+| Resources | Pin one GPU/driver and explicit CPU affinity/thread limits per matched cohort; separate any vendor-recommended parallel cohort; disclose memory, presolve, scaling, crossover and seed/settings |
+| Models | Retain development families and add real sparse, dense-block, ill-scaled, degenerate and trivial controls; freeze exact IDs, hashes and grouped holdout before tuning; do not inspect holdout for selection |
+| Endpoints | Export actual primal/dual/reduced-cost information, objective offset, row/column mapping and bounds needed by the common checker; unsupported exports cannot count as certified |
+| Statistics | Predeclare repetitions and paired order, include all timeout/refusal/error rows, uncertainty and coverage; compare only like endpoints and disclose excluded/missing pairs |
+| Admission and budget | CPU fixtures first; a separately reserved small solver smoke before a timed cohort; predeclare total/phase/job CPU, GPU, memory and deadline limits plus stop policy; no implicit historical transfer |
+
+The initial adapter should consume canonical arrays and export the solver's actual
+endpoint without invoking another optimizer to repair it silently. Test objective
+sense/offsets, free variables, ranged rows, fixed variables, infinities, duplicate
+entries, missing duals, limits and infeasible/unbounded statuses. Postsolve and any
+explicit repair must be visible and charged. Compare native sparse-array import
+with existing row-by-row construction before attributing adapter time to a solver.
+
+### Baseline follow-up decisions
+
+The user's native-return amendment resolves baseline comparison eligibility; it
+preserves strict certification as a separate quality result. All 240 attempts
+are now accounted for. Native success is not evidence that an uncertified answer
+meets the project's tolerance, and native limits are not optimality claims. The
+postsolve mapping uncertainty remains an optional adapter follow-up rather than
+an implicit prerequisite or an attributed vendor defect.
+
+The large mixed model has no strict certificate from any configuration. The
+project's native limit endpoints retain candidates and internal assessments,
+but nonzero CLI exit prevents export through the current adapter. The strict
+checker also lacks finite bound authority for an unbounded variable's reduced-cost
+enclosure. Preserve these as separate transport and mathematical limitations;
+first diagnose normal-limit extraction and sound bound construction without
+inventing finite bounds or relaxing the certificate. Use certifying models for
+matched latency claims, keep mixed-model failures in the coverage denominator,
+and require an explicit bound-authority contract before claiming a certified win
+there. The [completed report](../benchmarks/lp-external-baseline-native-return.md#what-the-completed-comparison-changes)
+binds those observations.
+
+RESIDENT2 is now the next ready implementation task. Its first deliverable is
+phase attribution for conversion, import/readback, native solve, export, checking
+and durable output without additional device synchronizations. COPT's first
+retained dense-65536 GPU PDLP solve took 0.574 native seconds but 25.574 complete
+seconds, including 4.326 seconds in independent checking. Faster arithmetic can
+only improve the portion it actually accelerates; preparation/evidence costs
+must remain visible.
+
+Define cold and prepared-model lifecycles before introducing immutable canonical
+preparation, binary/buffered transport or compact evidence. Cold time must still
+charge preparation; amortized prepared throughput is a separate endpoint. Preserve
+exact original coefficients, independent assessment, source bindings and bounded
+cancellation/cleanup. Compare native controls under the same transport before
+claiming an algorithmic improvement. The old v2/new v5 small-model transport
+mismatch is explicitly excluded from paired speedup claims.
+
+After that control is established, reduce redundant per-update synchronization
+and preparation under the existing safe controller boundaries. MIXED2 follows
+with FP32 matrix storage and FP64 state/arithmetic before a separately guarded
+low-precision state. Require useful work, explicit error/progress guards and
+charged correction/fallback; retain the project's 1e-9 certificate even though
+the external cuOpt comparison has a user-selected native-return tier. Tensor
+work remains conditional on a complete-path cost case. No new task is funded or
+executed by this handoff, and GPUP-8/GPUP-9 gates remain unchanged.
+
+### Resident execution and precision choices
+
+After phase attribution and lifecycle definition, RESIDENT2 can remove redundant
+synchronization in a separate native control,
+keeping the existing 200-update controller boundaries. Precompute coefficients
+for bounded blocks, accumulate sticky flags on device, and read results at a
+proved safe boundary. Predicated execution must not publish invalid work. A
+failure must restore the entire checkpoint and charge all attempted work; a
+bounded block must preserve cancellation responsiveness. Graph capture or fusion
+is optional and must earn its complexity through full-path measurements.
+
+For MIXED2, begin with fewer representation changes than GPUP-8: original FP64
+matrix for residual/check authority, FP32 stored matrix for an approximate inner
+operator, and native FP64 state/arithmetic as the first comparison. Add FP32 state
+only under a separately defined accumulated-error and progress policy. Escalate
+when residual progress stalls or an error budget fails; preserve a native recovery
+path. Scaling, primal/dual progress and final certification all remain explicit.
+The prior refinement and resident-quantization failures are required design inputs,
+so zero inner updates or zero useful low-precision windows cannot pass admission.
+
+For TENSOR2, require a workload that amortizes packing and reconstruction. A dense
+tile test alone is insufficient. Prefer a bounded approximate product with a
+cheaper reliable correction if its numerical contract admits it. Expensive exact
+digit reconstruction remains available for reference/special cases. Multiple
+right-hand sides require a separate throughput cohort and memory accounting.
+Cross-window expanded persistence is a distinct numerical change, not presumed
+to cure the measured reconstruction cost.
+
+No supported dispatcher is chosen yet. Its eventual candidates are native CPU,
+native GPU, admitted mixed precision and selective dense/batch Tensor execution,
+chosen by dimensions, sparsity/block coverage, numerical range and required quality.
+Selection thresholds must be fixed on development data and tested on held-out
+groups; a runtime refusal falls back explicitly and charges the transition.
+
+### Historical record below
+
+The dated sections and slice descriptions below explain earlier decisions.
+Statements such as “next”, “current handoff” and “proposed” in those sections are
+historical to their dates. The current priority, status and authorization boundary
+are the sections above and the structured backlog.
 
 ## Objective and working agreement
+
+Historical GPUP-8 disposition (2026-10-23): the accepted in-container supervisor and
+full pre-device native gate pass. The bounded cost continuation stops at its first
+INT8 controller mismatch: device reference products sum serially, while the host
+oracle uses warp32 order. All 66 ordinary tests and 280 product pairs pass; no
+profile or primary timing runs. The [separate report](../benchmarks/lp-tensor-cost-device-gpup8.md)
+retains both acceptance attempts, every CPU failure/charge and the 17366-event
+ledger. Numerical/latency criteria stay unchanged; no retry, new cohort or GPUP-9
+work is authorized by unused allowance. Earlier dated dispositions below remain
+historical in their original context.
 
 Optimize **end-to-end single-solve latency at the required feasibility and
 certified-gap tolerances**, including setup, transfers, numerical checks, recovery,
@@ -27,6 +206,92 @@ FP32-to-FP8 computation and Tensor Core execution are in scope. FP8 is a candida
 not a required winner. The final recipe follows measurements and ablations; an
 experiment that finds the tuned baseline faster is a useful negative result.
 This track follows C6 but does not complete C7, C9, or the general C10 runner.
+
+## GPUP-8 accepted in-container supervisor: bootstrap refusal (2026-10-23)
+
+The user accepts revised ADR-0044 and the CPU allocation. The first supervisor
+bootstrap stops before workload release because Python lacks os.pidfd_open.
+The separate refusal retains the failed source and unsettled journal; no
+numerical preparation or device reservation runs. A portable binding repair has
+four mocked regressions, while real resource acceptance remains unrun. A corrected
+bootstrap requires authorization under the accepted single-attempt rule. GPUP-8
+remains incomplete; the numerical/latency gates and exact GPU ledger are preserved.
+
+## GPUP-8 proposed in-container admission amendment (2026-10-23)
+
+At the user's request, [ADR-0044](../decisions/ADR-0044-tensor-cost-continuation.md)
+now proposes a cooperative in-container supervisor/guardian, serialized slots,
+four-CPU affinity, sampled-memory admission and conservative four-times-wall CPU
+charging. It explicitly cannot promise cgroup-equivalent memory/swap enforcement.
+The 16000-second prospective CPU allocation requires 14300 additional CPU seconds,
+transfer of the remaining 1700 and a cumulative CPU ceiling of 35900. Acceptance
+of those changed resource terms is pending; implementation has not started.
+All numerical, GPU study and latency completion sections remain byte-identical
+to the archived accepted ADR. GPUP-8 remains incomplete and GPUP-9 stays gated.
+
+## GPUP-8 Kubernetes constraint revision (2026-10-23)
+
+The user confirms Kubernetes and prohibits escaping the container. The
+[revised continuation plan](lp-tensor-kubernetes-constraint.md) withdraws host
+provisioning, preserves ADR-0044's failed admission and records the exhausted CPU
+admission/reporting stages. No equivalent permitted enclosure is demonstrated.
+The additional 3600-GPU-second offer stays unreserved; the existing 1806-second
+GPU package already fits its allowance. GPUP-8 remains incomplete, with no
+preparation, device attempt, implicit CPU transfer or GPUP-9 progression.
+
+## GPUP-8 approved cost continuation: CPU admission refusal (2026-10-23)
+
+The user accepted [ADR-0044](../decisions/ADR-0044-tensor-cost-continuation.md).
+The [resource-admission report](../benchmarks/lp-tensor-cost-gpup8.md) retains a
+CPU refusal: the executor has no writable delegated task cgroup or reachable
+host manager. The accepted decision stops before preparation/device reservations.
+Seven bootstrap refusal tests pass; real containment/coordinator, native and
+numerical/device gates remain unrun. Conservative CPU charge is 350 seconds;
+GPU charge and all 17362 ledger events remain exact. GPUP-8 stays incomplete.
+Further admission requires host-provided delegated containment, not renewed
+approval of the already accepted ADR or a relaxation of the resource contract.
+
+## GPUP-8 latency diagnosis and initial cost proposal (2026-10-23)
+
+The [CPU-only diagnosis](../benchmarks/lp-tensor-latency-diagnosis.md) identifies
+shared preparation, conservative norm restriction and host audits as the main
+costs; the forced original-tuned profile is a research wrapper, distinct from
+the unchanged timing control. [Proposed ADR-0044](../decisions/ADR-0044-tensor-cost-continuation.md)
+requires repaired aggregate CPU admission, compact preparation, a proved tighter
+norm and an equivalent device reference audit. It proposes at most 1806 GPU and
+2050 CPU seconds within the remaining allocations after a 400-CPU-second diagnosis
+charge, with CPU/cost refusal gates before timings. Current cgroup controls are
+read-only; delegated task containment is a prerequisite. At diagnosis time this
+proposal was unaccepted; the subsequent acceptance/refusal is recorded above.
+No retries, resource increases or GPUP-9 work follow from this history.
+The historical CPU overlap remains uncertified; new admission is prospective.
+
+## GPUP-8 residual continuation: latency gain incomplete (2026-10-23)
+
+Explicitly approved [ADR-0043](../decisions/ADR-0043-tensor-residual-continuation.md)
+and its [separate report](../benchmarks/lp-tensor-residual-gpup8.md) preserve the
+ADR-0042 result below. Explicit FP64 vector residuals recover useful integer and
+floating Tensor solves: all 30 Tensor timings certify, with 66 useful windows
+and no native promotion; total coverage is 60/60 timings. All twelve profiles
+finish and 120 continuation LP records verify. All six adjusted latency-gain
+comparisons fail. The initial CPU admission/build overlap also leaves aggregate
+four-job resource acceptance uncertified. INT8 medians are 0.614776/10.390881 s versus tuned FP64
+0.462114/6.331022 s. GPUP-8 remains incomplete on gain; GPUP-9 is not authorized.
+Continuation charge is 588.257104641 GPU s, combined GPUP-8 825.114032275 / 3000;
+cumulative 22184.699888064 s. All 17362 ledger events retain the exact
+17200-event and 17132-event prefixes. No retries or later-task reservation follow.
+
+## GPUP-8 bounded result: incomplete (2026-10-23)
+
+The user explicitly accepts [ADR-0042](../decisions/ADR-0042-hybrid-tensor-components.md)
+and allocates 3000 GPU seconds within unchanged ceilings for INT8 and FP16/BF16
+component Tensor execution. Its [separate report](../benchmarks/lp-tensor-gpup8.md)
+records 27 executed jobs, 48 CPU refusals, 20/60 certified timings and four complete
+profiles. Correct integer/floating operators do not admit useful dense-model
+solve windows; the working-family and certified latency-gain requirements remain
+unmet. All 128 retained LP records independently verify. GPU charge is
+236.856927634 s, cumulative 21596.442783423 s; 17200 ledger events preserve the
+exact 17132-event prefix. GPUP-8 remains incomplete; GPUP-9 is not authorized.
 
 ## Current handoff: GPUP-7R complete (2026-10-23)
 

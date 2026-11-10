@@ -1,0 +1,20 @@
+{
+  "identity": "gpup-tensor-reader-bridge-v1",
+  "status": "passed",
+  "gpu_seconds": 0,
+  "measured_source_tree_sha256": "4c483954b761b2aa41c86891b450ebe835d877d35800e7edf56546358e22f228",
+  "files": [
+    {
+      "path": "tools/report_lp_tensor.py",
+      "before_sha256": "6bcdd92d507a8974d79946856b0ef86589e66420affc20c05d0e8dd350111081",
+      "after_sha256": "81ba14a35ad6e34b88d2ef9215c918542212c1be3a7316fa3d2058fe2706cb7b"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor.py",
+      "before_sha256": "09ae1c6690fce3ec9df7a290b57c8c86fe4a93018baf58946c7e9aeaf99447b5",
+      "after_sha256": "f2e56013d29215c82dd513309ac899038506227bc903adde9a41f60685d1640c"
+    }
+  ],
+  "numerical_sources_unchanged": true,
+  "scope": "CPU-only independent cohort/worker verification, native-promotion gain exclusion, atomic report output and regression tests; measured numerical sources/executables/images/requests/workers and payloads remain exact."
+}

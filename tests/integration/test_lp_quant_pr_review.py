@@ -20,8 +20,23 @@ class QuantPrReview(unittest.TestCase):
         self.assertEqual({f['path'] for f in receipt['added']},review.ADDED)
         for f in receipt['files']:
             self.assertEqual(file_hash(ROOT/f['path']),f['reviewed_sha256'])
+        # Later accepted slices extend module/example/acceptance registration.
+        # Verify the original receipt against immutable original bytes, then bind
+        # each authorized live extension through its separate follow-up receipt.
         for f in receipt['added']+receipt['unchanged_sources']:
-            self.assertEqual(file_hash(ROOT/f['path']),f['sha256'])
+            current=file_hash(ROOT/f['path'])
+            if current==f['sha256']:continue
+            previous=f['sha256']
+            for cohort in ['tensor','tensor-residual','tensor-cost','tensor-warp32','baseline-pr']:
+                path=ROOT/('docs/benchmarks/data/'+cohort+'/prerequisite-source-bridge.json')
+                if not path.exists():continue
+                rows={row['path']:row for row in read_json(path)['files']}
+                if f['path'] not in rows:continue
+                extension=rows[f['path']]
+                self.assertEqual(extension['before_sha256'],previous)
+                self.assertEqual(file_hash(ROOT/extension['frozen_path']),previous)
+                previous=extension['after_sha256']
+            self.assertEqual(current,previous)
 
     def test_arithmetic_controller_and_authority_bodies_remain_exact(self):
         import hashlib

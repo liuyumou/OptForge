@@ -1,0 +1,1207 @@
+# Changelog
+
+## Unreleased — GPUP-8 in-container admission amendment (2026-10-23)
+
+- Propose an ADR-0044 process supervisor/guardian that uses ordinary container
+  interfaces, with serialized slots, inherited CPU affinity, sampled memory and
+  conservative four-times-wall CPU charging; state limits versus cgroups.
+- Propose 16000 prospective CPU seconds, including 14300 additional CPU seconds;
+  retain the original numerical, latency and GPU experiment sections exactly.
+- Archive the accepted ADR and previous planning sources without rewriting their
+  receipts. The resource/budget amendment requires acceptance before execution.
+
+## Unreleased — GPUP-8 Kubernetes constraint revision (2026-10-23)
+
+- Record the user's container-only boundary and withdraw host provisioning from
+  the active plan; retain the accepted resource refusal and stop before execution.
+- Make the exhausted admission/reporting CPU stages explicit. Preserve remaining
+  stage allocations, numerical criteria and historical evidence; record the
+  additional GPU offer without reserving it or changing campaign ceilings.
+
+## Unreleased — GPUP-8 CPU resource admission refusal (2026-10-23)
+
+- Accept ADR-0044 under explicit user approval and retain its first resource
+  preflight refusal: no delegated task cgroup or reachable host manager.
+- Add a read-only admission probe and seven simulated refusal counterexamples;
+  capability observations never authorize preparation or device execution.
+- Stop before preparation/GPU reservations as required. Preserve all historical
+  evidence and the exact ledger; GPUP-8 remains incomplete.
+
+## Unreleased — GPUP-8 latency diagnosis (2026-10-23)
+
+- Add a hash-bound CPU-only diagnosis distinguishing unchanged tuned timings
+  from research-wrapper profiles and identifying shared preparation/policy costs.
+- Propose ADR-0044 with repaired aggregate CPU admission, compact preparation,
+  a proved tighter norm and an equivalent device audit, within existing ceilings.
+  No new numerical implementation or GPU study is authorized by this proposal.
+- Preserve the historical CPU overlap, all measured evidence and the exact ledger.
+
+## Unreleased — GPUP-8 loss-preserving continuation (2026-10-23)
+
+- Accept ADR-0043 for a separate residual-corrected INT8/FP16/BF16 research path
+  using only GPUP-8's unspent allocation. Preserve the exhausted ADR-0042 study.
+- Keep tiny vector values as explicit FP64 residuals, bound their correction
+  arithmetic and count native correction work separately from useful Tensor work.
+- Retain unchanged local budgets, original-model certification, charged replay
+  and the useful-solve/certified-latency-gain completion requirements.
+- Retain 60/60 certified timings, twelve full profiles and 120 verified LP records.
+  Useful Tensor solves qualify, but all six adjusted latency comparisons fail;
+  GPUP-8 remains incomplete. Continuation GPU charge is 588.257104641 seconds.
+- Record the initial CPU admission/build overlap explicitly: aggregate four-job
+  concurrency and RSS for that overlap are not certified.
+
+## Unreleased — GPUP-8 hybrid component execution (2026-10-23)
+
+- Accept ADR-0042 and allocate 3000 GPU seconds within existing ceilings. Add
+  isolated lp-tensor-v1 INT8/FP16/BF16 components and exact tile reconstruction.
+- Add strict CPU/device admission, independent rational proofs, resource-bound
+  study and evidence verification. Retain 27 executed jobs and 48 CPU refusals,
+  20/60 certified FP64 timings, four complete profiles and 128 verified LP records.
+  GPU charge is 236.856927634 seconds; useful Tensor solve/gain gates remain unmet,
+  leaving GPUP-8 incomplete with no preset or GPUP-9 progression.
+
+## Unreleased — quantization PR review (2026-10-23)
+
+- Make prepared matrix coefficients, layouts and error summaries immutable;
+  reject invalid promotion IDs atomically and corrupted device-window counters
+  before aggregation. Preserve the measured arithmetic and CUDA bodies.
+- Reject noncanonical JSON shapes, inconsistent promotion histories and impossible
+  launch/transfer counters in standalone research verification. Keep interrupted
+  workers out of profile comparisons and review outputs separate from history.
+- Preserve both studies, all failed attempts and source cohorts. Rebuilt host
+  verifiers and CPU-only PR acceptance are recorded in a separate review report.
+
+## Unreleased — GPUP-7R resident quantization (2026-10-22)
+
+- Accept ADR-0041 and allocate 3600 GPU seconds within unchanged ceilings. Add
+  the separate lp-quant-resident-v1 research executor, strict evidence and CLI.
+- Keep FP64 state/updates resident, compact canonical sparse segments, two-level
+  outward guards, complete restoration/charged replay and original-model authority.
+- Add independent integer/Fraction program proofs, CPU admission, GPU differential
+  and replay gates, fixed logical-horizon diagnostics and matched FP64 controls.
+  Preserve historical numerical bodies, interfaces, evidence and resource ledger.
+- Certify all 36 admitted fresh timings (36/108 planned coverage), finish three
+  FP64 logical-2000 profiles and verify 21 operator endpoints. Retain 78 quantized
+  timing/profile CPU refusals; no useful quantized trajectory or preset follows.
+- Pass full native/device/replay/four sanitizer gates and freshly verify all 313
+  LP plus 21 operator endpoints. Preserve both execution/source cohorts and the
+  exact historical prefix. Charge 245.686586823 GPU seconds inside existing caps.
+
+## Unreleased — GPUP-7 bounded matrix quantization (2026-10-22)
+
+- Add research-only lp-quant-v1 uniform/selective FP16/E4M3/E5M2 matrices, canonical
+  transpose tiles, original-unit guards, FP64 state and charged sticky recovery
+  under accepted ADR-0040. Keep original-model host certification authoritative.
+- Add strict solve/verify/replay, independent codec/product oracles, complete
+  checkpoints, component costs, frozen accounting and source-bound acceptance.
+- Retain 104 attempts and 70 timeouts; verify 34 study endpoints and certify
+  33/96 timings. New paths only certify initial host-only small-4; no full
+  2000-update diagnostic horizon or useful quantized solve benefit follows.
+- Full native/device/replay/four sanitizer gates pass; fresh CPU verification
+  accepts all 182 retained endpoints. Preserve both CPU cohorts, original/reviewed
+  reports, resource-sampling correction and CPU-only reader counterexamples.
+  No supported preset; task charge 1382.959456122 GPU seconds.
+
+## Unreleased — GPUP-ASSESS bounded assessment scheduling (2026-10-22)
+
+- Accept ADR-0039's assessment subset after 16 CPU common trajectories and
+  independent scheduling replay. Add research-only fixed_200/bounded_800 on
+  tuned FP64 and existing accumulation FP32 while retaining numerical checks.
+- Add complete scheduler/controller snapshots, fresh final host certification,
+  strict lp-assess-v1 evidence with bounded witness attachments, CPU trace/replay,
+  selected-device execution and inherited-ledger supervision. Preserve existing
+  images, numerical settings, records, defaults and mathematical authority.
+- PR review binds checkpoints to their originating session, rejects inconsistent
+  failure metadata and oversized counters, and prevents interrupted profiles
+  from borrowing discovery results from a longer trajectory. Preserve exact
+  before/after source receipts and all measured evidence; no GPU work is repeated.
+- Keep PR report output separate and reject both historical report paths and
+  aliases, preserving the original report and its earlier CPU-review version.
+- Retain all 60 frozen attempts, independently verify 57 endpoints and certify
+  24/48 timings. Six common-trajectory profile pairs match bitwise; full native,
+  66 ordinary/three new device tests, six fixed-work pairs/twelve replays and
+  four scoped sanitizers pass. A scoped 1.0272x FP64 irregular-32768 benefit
+  leaves coverage unchanged; no supported preset is selected.
+- CPU-only review preserves signed-zero replay bits and excludes unverified
+  profile comparisons. Preserve all twelve already-bitwise replays, the original
+  report/workers and exact source bridges; the rebuilt host verifier accepts all
+  57 endpoints with no new GPU execution.
+- Charge 523.674592721 GPU seconds within 2300; cumulative
+  19730.939812844 / 21602.574545061 seconds, 16816 ledger events and every earlier
+  prefix/phase cap preserved. Hand off GPUP-7's contract without reserving work.
+
+## Unreleased — GPUP-REFINE bounded correction LP evaluation (2026-10-22)
+
+- Accept ADR-0037's native-FP64-outer SPEC-0021 subset: equality-plus-box correction
+  LPs, original-operator interval merits, dyadic scaling, conservative step/error
+  guards and directly maintained anchors. Preserve FP64 iterates/updates/control
+  with optional FP32 sparse products and one charged sticky native promotion.
+- Add isolated research host/CUDA/evidence modules and image, strict lp-refine-v1
+  schemas, study-only solve/verify/replay, complete in-memory checkpoints and
+  monotonic accounting. Existing defaults, images and historical replay remain.
+- Review repairs checkpoint logical metadata restoration, candidate-free trace
+  certification and final assessment after refresh/promotion offsets. Return
+  discarded checkpoint progress for retention without refunding work; strengthen
+  trace/work/width validation and fail closed on unparsed SASS/unaudited calls.
+  Bind exact review source hashes, preserve the historical report, and verify
+  all 39 available refinement endpoints with the rebuilt host verifier on CPU.
+- Validate 240 rational models/1200 correction maps, 93 endpoint merit enclosures
+  and 39 contractions; retain/refuse the exact subnormal rounded-step
+  counterexample. Full native, 66 ordinary device tests, 1920 refinement product
+  comparisons, nine fixed-work replays and all four scoped sanitizers pass.
+- Retain all 108 study attempts, 48 verified endpoints and 30/96 certified timings.
+  Refinement succeeds only on initially host-certified small-4, without device
+  work. Numerical budget refusals/timeouts and expensive host guards prevent a
+  general product/latency benefit; no supported preset is selected.
+- Accept ADR-0038's selected-device telemetry repair in a separately frozen
+  continuation, preserving the initial refusal. Retain the CPU compact-reader
+  failure and exactly bound correction without repeating any execution.
+- Charge 1541.719136512 GPU seconds within 3600; cumulative
+  19207.265220123 / 21602.574545061 seconds, 16684 ledger events, every historical
+  prefix and phase ceiling preserved. Hand off GPUP-ASSESS without starting it
+  or reserving another task's allowance. No push, publication or merge.
+
+## Unreleased — GPUP-STATE refusal and compact FMA validation (2026-10-13)
+
+- Accept ADR-0036's bounded CPU/resource refusal under SPEC-0020. Independent
+  integer/Fraction fixtures cover retained updates, stable projections/norms,
+  full-range FMA and directed log/exp intervals, with explicit range/domain and
+  ambiguous-rounding outcomes.
+- Retain the first exact full-bin primitive construction: both expansion formats
+  require 255 registers and nonzero spills, exceeding the 128-register/zero-spill
+  gate. Smaller 320-bit integer/update probes fit but cannot qualify a controller.
+- PR 19 review adds full-range compact FMA with a rounding proof, 5900 additional
+  independent cases per construction and host UBSan checks. Both variants fit
+  at 40 registers with zero spills under the unchanged compile-only gate; the
+  original refusal remains reproducible. Scoped device validation subsequently
+  passes all 6170 cases and four sanitizers on the idle RTX PRO 6000 Blackwell;
+  all 36 primitive timing attempts independently verify. Dependent patterns cost
+  about 7928–11724 cycles/FMA; no FP64 comparison or solver speedup is claimed.
+- Retain the busy-5090 admission refusal and correct memcheck receipt reading
+  across stdout/stderr without rerunning an attempt. Freeze the continuation
+  verifier separately and require unchanged executable/kernel/input sources.
+- Repair the instruction audit's uniform-predicate blind spot, require the full
+  archive inventory and execute the frozen log/exp candidate during verification.
+- Preserve source/executable/image/resource identities and failed CPU/provisioning
+  attempts. No solver, complete state/replay or 96-timing/12-profile study is
+  admitted; no solver accuracy/latency benefit or preset is claimed. Combined
+  device-extension charge is 30.114068273 seconds; cumulative consumption is
+  17665.546083611 / 21602.574545061 seconds. The 16452-event ledger preserves
+  every historical prefix and all phase ceilings.
+- GPUP-REFINE is next under its own required contract/allocation. Historical
+  runtime, host authority and all historical ledger prefixes remain unchanged.
+
+## Unreleased — GPUP-EXEC bounded exact executor (2026-10-13)
+
+- Implement ADR-0035 / the bounded SPEC-0020 exact-dot subset behind the research
+  feature: canonical binary64 coefficient bits, cached/uncached integer decoding,
+  signed 256-bit accumulation, explicit range refusals and FP64 solver state.
+- Add a separate sm_120 image, 2347-case independent Fraction oracle, strict
+  witness/replay format, admission receipts and frozen 108-attempt study.
+- Retain 94 independently verified endpoints, 58/96 certified timings and all
+  27 bitwise cache pairs. Fourteen discovery failures, six control timeouts and
+  exact exponent-window refusals remain visible; no total-cost win or preset.
+- Require all discovery images before future freezes; repair source-only budget
+  rejection, child-failure classification and complete acceptance identity checks.
+  Full native, regular device, replay and four scoped sanitizer gates pass.
+- PR self-review binds acceptance environment, executables and selected device,
+  requires all 66 regular tests, and preserves independently verified recovered
+  endpoints without promoting interrupted timings. Exact tooling correction
+  hashes and six CPU regressions preserve the measured runtime and results.
+- Preserve all historical identities/ledger bytes. Task GPU charge is
+  520.157397485 seconds; cumulative 17635.432015338 / 21602.574545061 seconds.
+  GPUP-STATE is the next separately gated contract task.
+
+## Unreleased — GPUP-REP review corrections (2026-10-13)
+
+- Repair 2-norm/square-root overflow and canonical underflowed zero, FMA signed
+  zeros, and nonfinite projection refusal in the CPU reference models.
+- Enforce canonical field types and expansion range; admit resources before
+  preparation and bind dimensions, transpose permutations and required vector
+  epochs to stale-receipt checks.
+- Add boundary and malformed-input regressions plus exhaustive small-format
+  rounding checks. Preserve the original frozen fixtures and all GPU evidence.
+
+## Unreleased — GPUP-REP CPU expansion contract (2026-10-12)
+
+- Accept the bounded CPU subset of SPEC-0020 under ADR-0034: canonical exact
+  binary64 input storage, direct binary64 rounding and distinct 64-significand-bit
+  24/24/16 expansion semantics with explicit range, errors and exceptions.
+- Add independent exact-rational and integer-only validators. The frozen seed-17004
+  fixture covers 32852 codec, 1058 primitive, 40 reduction, 40 comparison and 80
+  projection cases, including 65536-term reductions and overflow-safe FMA.
+- Bound canonical/transpose preparation through 65536 rows/columns and 2^23
+  nonzeros: 295960592 resident and 532414480 peak bytes at the maximum shape.
+- Preserve all solver behavior, original-model host authority, legacy identities,
+  GPU evidence and accounting. Advance the handoff to GPUP-EXEC with zero GPU work.
+
+## Unreleased — precision architecture and experiment design (2026-10-12)
+
+- Add [component motivations and first-principles design](docs/plans/lp-precision-architecture-2026-10-12.md),
+  draft SPEC-0020 for compact exact storage/expansion arithmetic and draft SPEC-0021
+  for ranged-LP correction, anchored products and controlled inexactness.
+- Preserve exact-tail derivation, memory/layout alternatives, full-state/primitive
+  obligations, algorithm sensitivity, authority boundaries and falsification gates.
+- Add reproducible CPU rational examples and a proposed component/interaction,
+  coverage-first, setup-inclusive experiment plan with frozen held-out selection.
+- ADR-0033 changes planning only: GPUP-REP CPU contract validation comes next,
+  followed by bounded executor/state/refinement/assessment investigations before
+  GPUP-7. Tensor Core and alternative-solver routes are conditional.
+- No solver, kernel, default, historical evidence, seed, split or GPU allowance
+  changes. Cumulative consumption remains 17115.274617853 / 18002.574545061 seconds.
+
+## Unreleased — convergence and work amplification
+
+- PR self-review: bind acceptance labels to effective model/configuration/work and
+  execution identities, including COPT min/max offsets and dependency bytes; reject
+  valid endpoints substituted into a different acceptance cell without changing data.
+
+- Freeze gpup-convergence-v1 under ADR-0032/SPEC-0013 with eight unchanged project
+  and scalar COPT configurations, strict identity/budget tooling and independent
+  compact/external verification. Preserve runtime, kernels and defaults.
+- The [report](docs/benchmarks/lp-convergence.md) retains all 176 attempts, verifies
+  174 endpoints and certifies 87/104 timings. Export work, transitions, disjoint
+  host costs, paired certified ratios and static figures without selecting a preset.
+- Full pre/post pinned-native gates, 58 device tests, twelve fixed-work pairs and
+  replays, eight COPT min/max/profile endpoints and source-only contracts pass.
+  Retain missing/failed outcomes and exactly bound CPU recovery review repairs.
+- Preserve every campaign prefix and phase cap: task 1311.088550794 GPU
+  seconds; cumulative 17115.274617853/18002.574545061. No new allowance.
+  Hand off to GPUP-7's required quantization/FP8 interface and resource contract.
+
+## Unreleased — isolated COPT bulk adapter
+
+- GPUP-COPT-ADAPTER integration: preserve scalar COPT construction and runtime
+  defaults; bind interrupted partial outputs and surviving worker receipts while
+  retaining conservative reservation charges and failed-trial classification.
+
+- Add optional loadMatrix construction with pinned isolated dependencies and strict
+  adapter/source/request/evidence identities under SPEC-0019/ADR-0031. Preserve
+  external v2 certification, original wrappers, runtime and defaults.
+- The [report](docs/benchmarks/lp-copt-adapter.md) verifies all 84 attempts and
+  certifies 42/72 timings; this candidate is slower in every certified cell.
+- Twelve native readbacks, 24 certified min/max/profile endpoints and full native
+  and source-only gates pass. Preserve every failure and campaign prefix; hand
+  off to GPUP-CONVERGENCE with no preset or new allowance.
+
+## Unreleased — fresh LP setup diagnosis
+
+- Separate discovery, driver initialization, context/module work and checked teardown
+  under SPEC-0018/ADR-0030. Add study-only experimental primary contexts and
+  setup-bound replay while preserving ordinary defaults and numerical evidence.
+- The [setup report](docs/benchmarks/lp-fresh-setup.md) verifies 32 attempts, certifies
+  24 timings and matches all 16 comparisons. No consistent latency benefit or preset.
+- Full native, 58 device tests, four primary sanitizers and twelve fixed-work
+  pairs/replays pass. Preserve every old limitation and the cumulative allowance;
+  hand off to optional GPUP-COPT-ADAPTER.
+
+## Unreleased — adaptive host costs
+
+- Share canonical adaptive operators by matrix width, stream original-unit audits
+  and borrow probe state when narrowing is unnecessary (SPEC-0017/ADR-0029).
+- Preserve reference arithmetic, recovery/work accounting, original-model
+  certification, kernels, evidence identities and numerical settings.
+- Publish the [adaptive host-cost report](docs/benchmarks/lp-adaptive-host-cost.md):
+  all 32 attempts verify, 24 timings certify and 16 numerical/work pairs match;
+  twelve fixed-work pairs/replays, regular device and four adaptive sanitizers pass.
+- Advance the bounded handoff to GPUP-SETUP; no new allowance or preset.
+
+## Unreleased — immutable LP host input
+
+- Reuse one validated model within fresh-solve evidence construction through
+  opaque LpInput (SPEC-0016); retain fresh sparse reconstruction and assessments.
+- Preserve raw-byte constructors, endpoint v1-v5 identities, compact/legacy output,
+  replay, numerical settings and kernels.
+- Publish the [GPUP-HOST report](docs/benchmarks/lp-immutable-host-input.md):
+  all 28 attempts verify, all 24 timings certify and all 14 numerical pairs match;
+  profile counts confirm one removed parse with unchanged certification work.
+- Advance the bounded research handoff to GPUP-ADAPTIVE-COST; no new GPU allowance.
+
+## Unreleased — compact LP study evidence
+
+- Add opt-in compact study endpoints, host reconstruction of validation details,
+  automatic verification, replay and explicit verified transcode (SPEC-0015).
+- Preserve legacy record identities/defaults and print only an assessment for
+  compact study solves; atomically publish new outputs without replacing files.
+- Freeze a bounded four-extension CPU codec comparison and 24 fresh format timings
+  under ADR-0027, using existing campaign headroom and unchanged numerical settings.
+- Publish the [compact evidence report](docs/benchmarks/lp-compact-evidence.md):
+  all 24 attempts retained, 15 verified endpoints and 12 certified timings;
+  compact restores large-model output coverage while mixed-65536 remains limited.
+
+## Unreleased — COPT component study
+
+- Add explicit large-input LP study solves, COPT method/native-counter evidence
+  v2, and opt-in hierarchical host component costs without changing solver math.
+- Complete all 1140 ADR-0026 attempts on sixteen development instances; publish
+  [certified latency and component costs](docs/benchmarks/lp-copt-comparison.md),
+  retaining output/deadline failures and opaque COPT graph phases. No preset.
+- Apply the explicit study input allowance to verification evidence as well as
+  models; preserve ordinary 16 MiB parsing and historical v1 external witnesses.
+
+
+## Matched FP64 prerequisites (2026-09-15)
+
+- Reuse strictly checked LP schema snapshots and wait for quiet GPU admission.
+- Prune padding-only outward certification work, preserving all enclosure/result
+  bits and conservative refusals. Independent rational and padded-oracle tests pass.
+
+User-visible changes are recorded here using Conventional Commit terminology.
+
+## Unreleased
+
+- Setup-source replay enforces the strict receipt schema's required nullable error
+  field and 4096-event limit; the setup report also binds each artifact path to its
+  attempt. Post-study validation corrections are separately hash-bound.
+
+### Added
+
+- Experimental GPUP-6 `--lp-adaptive`: explicit FP32/FP64 ladders, configurable
+  original-unit audits, complete-window rollback, charged replay, sticky promotion
+  and guarded demotion probes. Version-5 evidence and replay retain original-model
+  host certification. Existing precision paths, kernel bytes and defaults remain.
+- Frozen 2376-attempt adaptive policy study with chained budget authority,
+  independently checked endpoints and separate ablation/acceptance phase caps.
+  The [GPUP-6 report](docs/benchmarks/lp-adaptive-gpup6.md) verifies 2086 endpoints,
+  retains failed comparison attempts and selects no supported preset.
+
+### Fixed
+
+- Make throughput budget-authority tests independent of retained local campaign
+  artifacts, using a real temporary CPU ledger while preserving reference,
+  ceiling, prefix and output-binding checks in clean checkouts.
+
+- GPUP-THROUGHPUT review corrections: stamp tuned identity on failure and
+  cancellation; reject mixed method/code identities and fallback in batch
+  verification; compare binary64 encodings, including signed zero. ADR-0024
+  freezes 48 ordinary fresh-variant controls within the existing GPU caps and
+  preserves the original protocol and N=1-session controls. Revised analyses
+  refuse to overwrite archived results.
+
+### Performance
+
+- Reuse independently validated host models and canonical LPs in research
+  evidence generation/verification; repeated batches parse and serialize their
+  model once per boundary, while bound variants retain fresh certification.
+  The [host-input report](docs/benchmarks/lp-throughput-host-input.md) records
+  paired CPU measurements and the bounded producer diagnostic.
+
+- Reuse independently recomputed host operator metadata across research batch
+  evidence checks. Every solve still receives original-model certification and
+  complete identity/work checks. Retained N=8 evidence verifies 1.48–1.52x faster
+  on the CPU; no new GPU solve-throughput claim. See the
+  [branch review and measurements](docs/benchmarks/lp-throughput-review.md).
+
+### Added
+
+- GPUP-THROUGHPUT (documentation phase): [SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md)
+  and [ADR-0023](docs/decisions/ADR-0023-repeated-solve-throughput.md) are accepted
+  on 2026-09-20 for opt-in repeated-solve throughput sessions over a fixed matrix.
+  Amortized throughput is a separately labeled endpoint, never substituted for
+  fresh-process single-solve latency; no runtime behavior changes yet.
+
+- GPUP-THROUGHPUT (behavior phase): opt-in repeated-solve sessions implement
+  SPEC-0014. `optimizer solve-batch` runs one `TunedSession` per batch over a
+  fixed matrix, writing one individually verifiable lp-endpoint-v3 per solve plus
+  an lp-batch-endpoint-v1 record; `optimizer lp-study materialize` and
+  `lp-study verify-batch` expose the deterministic variant materialization and
+  the evidence-only batch verification. The isolated research executable gains
+  `batch`/`verify-batch` actions limited to the `intguard-fp64` and `fused-fp64`
+  modes. New lp-batch-request-v1 and lp-batch-endpoint-v1 schemas, the
+  `tools/lp_variants.py` witness-tightening generator, the frozen
+  `tools/benchmark_lp_throughput.py` planner and the
+  `tools/analyze_lp_throughput.py` verifier with separate-endpoint labeling and
+  bitwise identity counts. `Backend::solve`, backend selectors, defaults, the
+  fresh-process single-solve endpoint, prior protocols, manifests and archived
+  evidence are unchanged; no dispatch, preset, warm start or fallback change.
+
+- The frozen GPUP-THROUGHPUT protocol benchmarks/configs/lp-throughput-v1.json
+  raises the cumulative screening ceiling by 3600 seconds to 8102.574545061
+  seconds under identity gpup-throughput-v1 (study 2700 s, acceptance 600 s,
+  combined 3300 s).
+
+- GPUP-THROUGHPUT (study phase): the frozen 705-attempt gpup-throughput-v1 study
+  is measured and verified in the
+  [repeated-solve report](docs/benchmarks/lp-repeated-solve-throughput.md). 687
+  attempts verify independently; 4785/4785 compared batch solves are bitwise
+  identical to fresh-process single solves, and amortized per-solve time reaches
+  26.6x fresh single-solve latency at N=32 on small-4 as a separately labeled
+  endpoint. Study 2617.929459541 and acceptance 538.371430691 GPU seconds;
+  cumulative campaign consumption is 6951.059845871 seconds.
+
+- GPUP-5C (ADR-0022) records the [FP64-pipe root cause](docs/benchmarks/lp-fp64-pipe-root-cause.md)
+  of the component slowdown and adds feature-gated research modes `intguard-fp64`,
+  `fused-fp64` and `doublefloat-fp32` with CPU oracles, research-v2 evidence,
+  explicit tolerance tiers, a frozen lp-manifest-v2 development extension with a
+  `mixed` family, a protocol-driven research harness and charged diagnostic
+  microbenchmarks. The [report](docs/benchmarks/lp-fp64-pipe-gpup5c.md) verifies
+  806 of 850 admitted attempts. Runtime selectors, defaults, existing code objects,
+  v1 artifacts and the 1e-9 default remain unchanged; no supported preset or
+  recovery is added.
+
+- GPUP-5B isolates exact power-of-two/factored scaling and two/three-component
+  sparse products behind a research feature, with strict independent host evidence.
+  The [investigation](docs/benchmarks/lp-exact-components-gpup5b.md) restores FP64
+  certified coverage but retains negative component-product performance results.
+  Includes reproducible rounding analysis, future candidates and complete work,
+  memory and packing costs. Runtime interfaces, historical evidence and defaults
+  remain unchanged; no supported preset or adaptive recovery is introduced.
+
+- A [213-job FP32 latency investigation](docs/benchmarks/lp-fp32-slowdown-diagnosis.md)
+  separates convergence loss, scaled-matrix error, guarded executor costs and fixed
+  correction overhead. Includes equal-work timings, CUDA traces and exact-rational
+  row diagnostics; unavailable hardware counters remain explicit. Solver behavior
+  and all 480 original study results are preserved.
+
+- GPUP-5 adds explicit lp-precision-v1 on cuda-lp-tuned, canonical FP32 storage,
+  product/accumulation/state comparisons, fixed charged FP64 correction, guarded
+  conversion, conservative operator steps and v4 evidence/replay. Existing defaults
+  and records retain their meaning. Isolated COPT CPU/GPU PDLP study controls use
+  original-model host assessment; no runtime COPT dependency or preset is added.
+  See [precision operations](docs/operations/lp-precision.md).
+  The [480-attempt report](docs/benchmarks/lp-fp32-gpup5.md) retains lower certified
+  FP32 coverage; GPUP-6 adaptive recovery remains deferred.
+
+### Changed
+
+- Protect GitHub main with required PRs, current CPU/docs/smoke checks, resolved
+  conversations, and blocked force pushes/deletion. No actor bypasses the rules;
+  mandatory human approval remains disabled for the autonomous workflow.
+
+### Fixed
+
+- Historical GPUP-5 reports use their verified settled ledger prefix, preserving
+  original totals when later diagnostics append to the shared campaign ledger.
+
+- Verify supervisor timeout and released lease ownership without imposing an
+  undeclared one-second cleanup ceiling in the coordinator-loss CI fixture.
+
+- Tuned execution reports actual buffer peaks on early stops and refuses mismatched
+  residency settings. Execution enums reject object-wrapped names. Study archives
+  preserve execute permission and check the exact prior campaign ledger prefix.
+
+- Fetch full CI history for frozen LP schema comparisons; synchronize the lease
+  exclusion test with worker readiness so import latency cannot cause false failures.
+
+### Added
+
+- A [GPUP-5 interface handoff](docs/plans/gpup5-interface-handoff.md) recommending
+  versioned experimental precision settings while preserving current backend/replay
+  compatibility. The interface decision remains pending before GPUP-5 behavior.
+
+- Experimental cuda-lp-tuned with explicit FP64 execution settings, resident buffers,
+  necessary state uploads, deterministic warp32 reduction and two-kernel fusion.
+  Versioned execution records and replay preserve existing backend/schema contracts.
+  The [GPUP-4 report](docs/benchmarks/lp-tuned-fp64-gpup4.md) retains the original
+  launch failures and a verified complete correction round. All configurations
+  certify 27/36 timings; scoped provisional fusion gains do not promote a preset.
+  Both rounds consume 456.586499157 additional GPU seconds, preserving all history.
+
+- Opt-in cuda-lp-matched shares the host FP64 restart/weight controller, with
+  in-memory checkpoints, bounded cancellation and non-rollback work/deadlines.
+  Endpoint-v2 and LP replay preserve candidate/dual alignment and independent checks.
+- Frozen ADR-0016 supplementary study uses strict v2 campaign/trial schemas and
+  the existing cumulative budget ledger. Legacy schemas and cuda-lp control remain.
+  The [matched FP64 report](docs/benchmarks/lp-matched-fp64-gpup3.md) records all 160
+  attempts: matched CUDA certifies 27/36 timing trials, versus legacy CUDA 6/36.
+  Cumulative study consumption is 445.988 GPU seconds; three scheduling instances
+  remain unclosed. Full native and scoped device/sanitizer gates pass.
+
+- A [measured GPU LP slowdown diagnosis](docs/benchmarks/lp-gpu-slowdown-diagnosis.md):
+  CPU replay matches two 50,000-step GPU endpoints bit-for-bit; component timings
+  isolate certification costs; seven supplementary jobs and decoded CUDA traces
+  separate startup, kernel, transfer and harness overhead. Existing solver behavior
+  is unchanged; cumulative study use is 194.143 GPU seconds.
+- GPUP-2 LP-only measurement infrastructure: strict frozen campaigns/manifests,
+  optional solve evidence and independent verification, conservative host certification
+  of HiGHS row multipliers, crash-safe budget accounting, bounded supervised GPU
+  jobs, paired coverage analysis and separate phase profiles. See
+  [study operations](docs/benchmarks/lp-precision-study.md). Existing solve formats,
+  arithmetic, controllers and defaults remain compatible. The [baseline report](docs/benchmarks/lp-baseline-gpup2.md)
+  records 144 trials and 173.148 GPU seconds; CUDA certified only the two small
+  witness cases. No low-precision recipe is promoted.
+- Accurate observed LP device-buffer peak and per-call kernel launch counts for
+  study accounting; the old launch counter omitted the second Halpern launch.
+
+- The approved [GPU LP precision roadmap](docs/plans/gpu-lp-precision-roadmap.md),
+  GPUP-0 through GPUP-10 backlog slices, draft numerical/experiment specifications,
+  and ADR-0012/ADR-0013. The selected objective is certified single-solve latency
+  with an eight GPU-hour first experiment campaign and component/interaction
+  ablations before recipe selection. Repeated-solve throughput and full MILP search
+  performance are separate future tracks. That initial planning change shipped
+  no mixed-precision backend, experiment result, or new default; GPUP-2 evidence
+  is recorded separately above.
+- A recorded reduced-cost cancellation defect in the existing LP certification,
+  with an exact binary64-coefficient counterexample and GPUP-1 repair prerequisite.
+  The earlier certification claims below describe the intended contract; the
+  GPUP-1 repair recorded below resolves this case with exact-arithmetic regressions.
+
+- `optimizer-lp`, the host half of SPEC-0011: the canonical linear-program form,
+  the fixed reduction order, and diagonal preconditioning. It takes no device
+  dependency and adds no third-party crate. Being device-free is the point rather
+  than a convenience: this is the oracle the LP kernels are checked against under
+  requirement 24, and an oracle that needed the thing it checks would establish
+  nothing. It is not the fallback path -- requirement 26 keeps that the pinned CPU
+  backend, because falling back to a second implementation written to match the
+  kernel would make an agreement test compare a component with itself.
+
+  The constraint matrix is held in both row-major and column-major form so that
+  neither product needs atomic accumulation, which is a determinism requirement
+  before it is a performance one: floating-point addition is not associative, so an
+  atomic reduction would make a result depend on how the hardware scheduled it.
+  Reductions use one shared partition and tree order, defined once here for both
+  engines rather than restated by the kernel.
+- Host certification of a dual bound, under SPEC-0011 requirements 11 to 13. A
+  bound is produced only by a host-side procedure in `f64` that recomputes the
+  reduced costs from the original model's own coefficients and evaluates weak
+  duality. It reads no residual, no norm and no objective the device computed, so
+  it cannot be checking the device against itself.
+
+  The bound is valid for an arbitrary multiplier vector, including one nowhere near
+  optimal: a bad guess makes the bounded terms small, so the bound is weak, but it
+  cannot make the bound invalid. Where a variable's bound is infinite on the side
+  its reduced cost needs, no finite number is a bound and none is reported --
+  the refusal names the variable rather than clamping to something large.
+
+  A conservative rounding allowance is subtracted, because the underlying argument
+  is exact in the reals and a `f64` sum that landed above the true value would be a
+  bound stronger than the evidence supports.
+- `HostLpBackend`, a first-order linear programming backend that runs entirely on
+  the host, under SPEC-0011 requirements 24 and 25. It refuses any model with a
+  discrete variable as `Unsupported` before doing any work, because a first-order
+  method has no branch and bound and a relaxed answer to a discrete question would
+  be wrong rather than refused. `Optimal` requires a candidate `Model::evaluate`
+  accepted and a certified bound to close, so two independent computations must
+  agree and neither of them is the iteration's.
+
+  It is not a default and not a fallback. Requirement 26 keeps the fallback the
+  pinned CPU backend, because SPEC-0010 requirement 23 requires a fallback to be
+  the implementation the project already treats as authoritative.
+
+  Two departures from the published method are deliberate and made for
+  determinism: the step size is fixed rather than line-searched, and the power
+  iteration count is fixed rather than convergence-driven. An adaptive step retries
+  an input-dependent number of times, and the trial count would then depend on
+  rounding. The cost is convergence rate, about which this project claims nothing
+  in either direction.
+
+- `optimizer solve --backend highs|host-lp` and `--lp-settings <path>`, under
+  SPEC-0011 requirements 18 and 25. The pinned CPU backend stays the default, and
+  it is the default in the strongest available sense: no threshold exists anywhere
+  that could promote a solve to another backend, so nothing could say otherwise. A
+  dispatch threshold is a recorded measurement under requirements 18 and 19 and is
+  deliberately not committed here; `state/known-failures.md` records why.
+
+  Settings are required when the first-order backend is named and refused for a
+  backend that has none, so a caller who thinks they configured something is told
+  they did not rather than having the flag ignored.
+- `schemas/lp-settings-v1.schema.json`, and `examples/lp-settings-v1.json` and
+  `examples/lp-model-v1.json` alongside it. The settings are their own document
+  because a caller passes one on the command line, so it must be checkable on its
+  own; a solve record `$ref`s it exactly as it already `$ref`s the solve
+  configuration. The new example model is continuous because the existing one is
+  discrete, which the first-order backend refuses by design.
+
+- `optimizer-lp-cuda` and the `lp_pdhg` code object: the first-order method's
+  kernels running on a device SPEC-0010 selected and leased. A separate crate
+  rather than a module inside `optimizer-cuda`, which every existing GPU consumer
+  depends on and which would otherwise compile a linear-programming engine none of
+  them calls. It inherits the workspace lints, so it forbids unsafe and opens no
+  second boundary: it reaches hardware only through `optimizer-cuda-sys`, the one
+  ADR-0009 authorizes, which gains an `f64` kernel argument and nothing else.
+
+  The device proposes and the host certifies. Every claim a record carries --
+  objective, feasibility, bound, termination -- is produced on the host from the
+  original model, so a wrong kernel yields a refused candidate or a weak bound
+  rather than a wrong answer.
+
+  Reductions use the same fixed partition and tree the host uses, including the
+  second level that reduces per-segment partials. Accumulating those partials left
+  to right instead would agree on every line of at most one segment and disagree on
+  every wider one, which is why a deliberately wide row is part of the acceptance.
+  The kernels are built with `-fmad=false`, which makes device iterates bitwise
+  identical to the host engine's; that is a property of this toolchain pair and is
+  re-verified by the suite rather than claimed as a contract, since requirement 8
+  asks only for same-device reproducibility.
+- `tools/check.sh` refuses atomic accumulation in the LP kernels outside the
+  deliberately nondeterministic build. It is CPU-only and is the only guard on a
+  host with no GPU, where the device suite that would catch it reports a skip.
+- `optimizer solve --backend cuda-lp --device GPU-<uuid>`, which runs the
+  first-order method on a leased device and falls back to the pinned CPU backend on
+  an availability failure, under SPEC-0011 requirement 20 and SPEC-0010
+  requirements 24 and 26. The fallback is the pinned adapter and never the host
+  first-order method: SPEC-0010 requirement 23 requires a fallback to be the
+  implementation the project already treats as authoritative.
+
+  A device that cannot be opened is refused rather than fallen back from, because a
+  record must not claim a device the run did not use. A device that opens and then
+  cannot do the work is an availability failure and does fall back. Both rules are
+  deliberate and they are not the same rule; `state/known-failures.md` records the
+  boundary.
+
+### Changed
+
+- **Breaking:** solve records move to `solve-record-v2`, under SPEC-0011
+  requirements 9 and 10. The record gains `lp_settings`, carrying the
+  preconditioner, the termination check interval and the rest of a first-order
+  method's configuration. Both change the iterates, so a record without them would
+  not describe the solve it came from. The field is absent for a backend that has
+  no such settings, which is what the pinned CPU adapter writes; an empty block
+  would claim a preconditioner that was never applied.
+
+  The embedded solve *configuration* stays at version 1, and that is what confines
+  the change. A configuration is embedded in `search-config-v3`, so bumping it
+  would have moved the search configuration, the search record and the run record
+  too -- four documents to record something no configuration carries. Nothing
+  embeds a solve record, so it moves alone. `SOLVE_SCHEMA_VERSION` keeps its value
+  and now names the configuration only; `SOLVE_RECORD_SCHEMA_VERSION` names the
+  record.
+
+  Migration: set a version-1 record's `schema_version` to 2. There is no automatic
+  migration and version 1 is refused rather than upgraded, in both the Rust parser
+  and the JSON Schema.
+
+- **Breaking:** `Backend` gains a `capabilities` method, under SPEC-0011
+  requirements 1, 2 and 4. A backend now states the problem classes it accepts, its
+  arithmetic width, whether it takes a warm start and whether it runs on a device,
+  so a caller can know what an implementation supports without knowing which
+  implementation it holds. `solve` is unchanged, and no schema or wire format moves.
+
+  Migration: an out-of-tree `impl Backend` adds one method returning
+  `BackendCapabilities::declare(..)`. The trait had exactly one implementor in this
+  workspace and two test doubles, all updated here.
+
+  A declaration's fields are private, which is requirement 4 in the type rather than
+  in prose: a caller must not be able to widen one. Privacy alone would only stop a
+  local mutation, so `capabilities` also takes no argument, and a backend consults
+  its own declaration inside `solve` -- which is what makes a widened copy useless
+  to whoever holds it.
+- `ProblemClass` now lives in `optimizer-core` beside the solve contract and is
+  re-exported from `optimizer-extension`, so every existing path keeps working and
+  no document changes. Both a backend declaration and an extension declaration need
+  the concept, and two enums with the same variants and the same wire form would let
+  a registry entry's `continuous` and a backend's `continuous` drift into unrelated
+  facts.
+
+- A registry entry requiring a GPU now resolves when the run holds a device, and is
+  still refused when it does not, under SPEC-0010 requirement 35. This narrows
+  SPEC-0009 requirement 9's unconditional refusal rather than removing it, and
+  requirement 14a is unaffected: the decision is still made from the entry and the
+  context, before the provider is consulted and with nothing constructed.
+- A configuration naming a device but registering no extension that needs one is
+  refused. Requirement 6 has two halves and they live in two places: the executive
+  refuses a device with no registrations at all, which is all it can see, and the
+  run surface refuses a device no registered entry requires, because the hardware
+  requirement lives in the registry it resolved. Running anyway would record a
+  device that sat idle and verification would agree with it.
+- **Breaking:** search configurations, search records and run records move to
+  `search-config-v3`, `search-record-v3` and `run-record-v2`, under SPEC-0010
+  requirements 40 and 41. The configuration gains one field, `device`, which is
+  `"cpu"` or a physical GPU UUID; the other two move only because a search record
+  embeds its configuration and a run record embeds that search record. Earlier
+  versions are refused rather than migrated, in both the Rust parsers and the JSON
+  Schemas, which are asserted to refuse the same documents.
+
+  The device is in the configuration rather than in provenance, and that is what
+  costs the cascade. Provenance would have moved no versions at all -- and would
+  have put the device somewhere `optimizer verify` never reads, because
+  verification re-runs a search from the embedded configuration alone. A device
+  recorded only in provenance would describe a run the run surface could not repeat.
+
+  Migration: add `"device": "cpu"` to a version-2 configuration and set
+  `schema_version` to 3. There is deliberately no automatic migration: a version-2
+  record of a device run and a version-2 record of a CPU run are the same bytes, so
+  defaulting an absent device would have to invent the fact that distinguishes them.
+
+  One value governs a whole search rather than one per component, because SPEC-0006
+  requirement 6 permits one lease holder across device selections -- a search cannot
+  use two devices, so a per-component field could express what the lease forbids.
+  The solve configuration is therefore unchanged at version 1 and a relaxation
+  inherits the search's device.
+- A search configuration naming a GPU is **refused** as unsupported rather than run
+  on the CPU. No search path dispatches to a device yet, and running one anyway
+  would be worse than an error: the record would name the device it was asked for,
+  verification would re-run it on the CPU and agree, and that agreement would
+  certify a hardware claim nothing checked.
+- `neh` and `insertion` score insertion positions from head and tail completion-time
+  arrays instead of rebuilding and re-evaluating each trial sequence, which is
+  Taillard's exact acceleration and reduces a pass from `O(n^3 m)` to `O(n^2 m)`. The
+  arithmetic is the recurrence's own and lives in `evaluate`, so requirement 8's rule
+  that nothing proposing a schedule owns a second definition of what one costs is
+  preserved. Behavior is unchanged, and that is asserted rather than argued: a
+  contract test compares both heuristics against the pre-change algorithm over the
+  fixed grid and all ten frozen Taillard instances and requires the *same
+  permutation*, not merely the same makespan, because requirement 17 fixes which of
+  several tied permutations a caller receives.
+
+  Measured on the development host, release build, best of three after a warmup,
+  over the whole scale split: the improvement pass on `ta081` (100x20) falls from
+  32.49 ms to 0.92 ms and on `ta101` (200x20) from 257.39 ms to 3.75 ms, a speedup
+  growing from roughly 4x at twenty jobs to roughly 69x at two hundred. The ratio
+  tracks the job count rather than the machine count, which is what an `O(n)` factor
+  should do. This is a development diagnostic on one host and is not a benchmark
+  result, not evidence, and not a claim about the engine.
+
+### Added
+
+- Device work is launched in bounded chunks with a cancellation check between them,
+  under SPEC-0010 requirement 27, so a cancelled run waits for one chunk rather than
+  for a whole batch. The chunks bound *work* rather than calls: 4,096 permutations
+  for the batch kernel and 128 removed jobs for the neighbourhood kernel, which at
+  the largest supported shape are 4.1e7 and 2.6e6 integer operations respectively.
+  `makespans` and `insertion_neighborhood` therefore take a `CancellationToken`.
+- A sticky device fault poisons its residency, which then refuses without touching
+  the device. Requirement 29 allows rebuilding the context or falling back for the
+  rest of the run; this takes the second, so one fault does not become a stream of
+  them with the first buried.
+- `GpuSchedulingProducer` falls back to the host when the device declines, and the
+  fallback is `optimizer_schedule::insertion_neighborhood` -- the CPU path this
+  project already treats as authoritative, not a second implementation written to
+  match the kernel, so the two cannot drift. A caller cannot tell which ran, which
+  is the point; the producer's `fallbacks()` counter is how a test can.
+- `flow-shop-neh-gpu`, the first candidate producer whose work runs on a device,
+  under SPEC-0010 requirements 26 and 33 to 35. Construction stays on the CPU --
+  NEH is `O(n^2 m)` and the measured crossover puts a device behind the CPU below
+  roughly fifty jobs -- and the device evaluates the full insertion neighbourhood,
+  which is the batched part and the part the crossover measured.
+
+  It holds no more authority than any other producer. Its proposals are complete
+  permutations that `Model::evaluate` validates against the original model, so a
+  wrong kernel produces a recorded refusal rather than a wrong incumbent; that is a
+  property of the seam it reaches the engine through, not of the producer's good
+  behaviour.
+- `DeviceSession`, one leased open device for the duration of a run. Holding one
+  means, by construction, that the host lease was taken and a context was created on
+  the named device and its identity was read back from the driver; the lease is
+  released after the context is destroyed. A run naming a device that cannot be
+  opened is refused rather than falling back, because the caller asked for that
+  device and a silent CPU run would record hardware it never touched.
+- A run record's `hardware` block now names the device when one was held, which
+  gives SPEC-0007 requirement 9 its producer. The three GPU fields are all null or
+  all populated, and they come from a `DeviceSession` rather than a configuration
+  string, so a record cannot name a device the run did not open.
+- `optimizer gpu probe --device GPU-<uuid> [--lease acquire|inherited]
+  [--timeout-ms N]`, under SPEC-0010 requirements 3, 4 and 9. It takes the shared
+  host lease, creates a context on one named device, and writes one JSON report; a
+  refusal exits 2 and writes nothing, so a partial report can never be read as a
+  successful one. It names exactly one UUID because the lock permits one holder
+  across device selections, so a probe-everything form would be a command the lease
+  forbids.
+
+  The report keeps `requested` and `observed` as separate fields. Equality of the
+  two is the check requirement 3 makes, and one field would record the answer
+  without recording that anything was compared. It also reports the compute
+  capability, multiprocessor count, the shared memory a block may address, free and
+  total memory, and which kernels the provisioned code object actually provides --
+  resolving each entry point without launching any of it, so a build mismatch is
+  found by a probe rather than by a first launch.
+
+  Under `tools/gpu_job.sh` the lease is inherited. `--lease acquire` inside a
+  wrapped job waits on the lock its own parent holds and refuses at the timeout,
+  which is the deadlock the inherited form exists to prevent, now bounded and
+  visible rather than a 300-second hang.
+- Discovery reports the driver version, SPEC-0006 requirement 1a. SPEC-0007
+  requirement 9 has required a GPU record to identify its driver since M0 and
+  nothing produced the field until now. A row without one is refused rather than
+  accepted with a hole, so the producer cannot sometimes produce nothing. Note that
+  `Hardware::driver` in a run record is still null and correctly so: every search
+  this build performs is a CPU search, and requirement 9 forbids a CPU record
+  claiming GPU execution.
+- The CUDA driver boundary, under SPEC-0010 and ADR-0009. `optimizer-cuda-sys` is the
+  workspace's second and last unsafe crate; it resolves `libcuda.so.1` with `dlopen`
+  rather than linking it, so an ordinary `cargo build` still works on a host with no
+  CUDA toolkit and no device, an absent driver is a typed error rather than a link
+  failure, and no NVIDIA code is linked or redistributed. No third-party crate was
+  added: `libc` was already in the lockfile. `optimizer-cuda` keeps
+  `unsafe_code = "forbid"` and keeps discovery, the lease and residency.
+- Two device kernels for batched flow-shop evaluation, compiled out of tracked source
+  by `tools/setup_cuda.sh`. `nvcc` is a provisioning dependency, never a build
+  dependency. Both are pure 32-bit integer: at compute capability 12.0 that runs at
+  the full lane rate, and it makes CPU/GPU agreement an exact identity rather than a
+  tolerance. The head and tail tables are 32-bit because 64-bit ones would need
+  160,000 bytes at the largest supported instance, where a block may address 99 KB.
+- `ScheduleResidency`, which uploads an instance once and reuses it across calls, and
+  refuses a device before any allocation when the instance's own makespan bound
+  exceeds the kernel's range, when the shape needs more shared memory than the device
+  allows, or when the compute capability is older than the code object.
+- `Ownership::acquire_or_inherit`, which accepts a lease an ancestor already holds.
+  `tools/gpu_job.sh` takes the lock and execs its child, so a child that acquired
+  again would block on itself until the wrapper's 300-second timeout.
+- `optimizer_schedule::insertion_neighborhood`, the whole insertion neighborhood of
+  one permutation scored from a single starting point. Unlike `insertion`, which is
+  sequential because an accepted move is visible to the next job, this scores the
+  jobs independently, which is what makes it expressible as a batch and therefore
+  what a device can compute. It is also the CPU path the device must agree with.
+- Device acceptance tests, opt-in behind `AI_OPTIMIZER_GPU=1` so the ordinary gate
+  stays CPU-only and no task record's "CPU only" resource budget is made false. They
+  assert equality against the host recurrence at tolerance exactly zero, agreement
+  with a full recomputation, bitwise-identical repeats, one upload per residency, and
+  that a nonexistent UUID and an absent code object are each refused by name.
+- `tools/gpu_check.sh`, device acceptance plus `compute-sanitizer` with memcheck,
+  racecheck, initcheck and synccheck. It refuses to run without an inherited lease
+  rather than taking one, so it cannot be invoked outside the wrapper that names a
+  single device, and it warns loudly rather than passing silently when
+  `compute-sanitizer` is absent. All four are clean on an RTX 5090.
+- A first crossover measurement, recorded in
+  [known failures](state/known-failures.md). The device loses at 20 jobs by a factor
+  of four, crosses over at roughly 50, peaks at 16x on 200x20 and falls back to 9.5x
+  at 500x20; context creation costs about 148 ms and dwarfs every other number. It is
+  a development diagnostic on one host, not a benchmark result and not evidence, and
+  no default consults it yet.
+- A frozen Taillard scale split, under ADR-0011, at
+  `benchmarks/manifests/taillard-flow-shop-scale-v1.json`. It takes the first
+  instance of each of the paper's twelve published classes, spanning 20 to 500 jobs
+  and 5 to 20 machines, and exists to locate a crossover rather than to sample one
+  shape. The development subset is unchanged: its ten instances, its shape and its
+  seeds are untouched, so every C5 claim that cites it still holds. Instances are
+  generated from the published seeds by the committed generator and checked by
+  regenerating them with an independently written one, so the split needs no
+  download and no third-party host. It commits no best-known bound, because a
+  committed bound is an acceptance threshold.
+- `SCALE_SUBSET`, the published seed table behind that split. Taillard reuses seeds
+  across classes — `ta051` and `ta071` share one — so a seed is unique only together
+  with its shape, and the contracts assert that pair rather than the seed alone.
+
+- `Model::rebound`, which replaces a model's variable domains and bounds while
+  reusing its already-validated rows and objective, under new SPEC-0001
+  requirement 2a. It is the relaxation path branch-and-bound builds one subproblem
+  per node with, not a general-purpose constructor: it refuses any variable list
+  that does not name exactly the original variable IDs, and that refusal is what
+  makes skipping the row checks sound rather than merely cheaper.
+- C8 local extension registry and conformance, under SPEC-0009 and ADR-0008. A
+  registry document maps a declared extension identity to an extension this build
+  provides, together with the facts needed to decide whether to permit it: version,
+  license, category, authority basis, host contract compatibility, declared
+  determinism, counted limits, data and hardware needs, inter-extension
+  requirements and conflicts, and promotion state. Before this, the extension
+  runtime was reachable only from Rust test code.
+- `optimizer search`, `optimizer verify` and `optimizer schedule solve` accept
+  `--registry` and resolve a configuration's extension policy through it. This
+  closes the gap C5 recorded: a scheduling run performed with the NEH producer is
+  now verifiable by re-execution, where before it was refused as unsupported.
+- `optimizer registry list` reports every entry a registry records, and separately
+  whether this build provides the identity at all, so an entry that would be
+  refused is visible without attempting a search. `optimizer registry check` runs
+  the conformance suite over one entry and writes its record.
+- The registry resolves; it does not load. An entry names an extension the binary
+  already provides through a caller-owned provider seam, and an entry naming an
+  identity this build does not provide is refused rather than skipped. Dynamic
+  loading of separately distributed native components stays deferred with its
+  recorded blocker: it needs an unsafe boundary, an ABI stability contract, a
+  lifecycle and unload story and crash-isolation evidence. ADR-0009 has since
+  authorized one unsafe boundary, for CUDA and no other, so the blocker is narrower
+  than it was when this was written but is not removed.
+- Resolution is total: it either produces a resolved set for every named entry or
+  refuses, so a search never begins with a subset of what it was configured with.
+  The extension's own declaration is authoritative and an entry is a claim about
+  it; a disagreement on version, category, host contract version, problem class,
+  determinism or limits is refused in both directions rather than reconciled.
+- Promotion is checkable rather than assertable. A promoted entry cites a
+  conformance record by path and SHA-256, and is refused when the record is absent,
+  its bytes do not match, its outcome is not a pass, or it names another extension
+  or version. An experimental entry needs `--allow-experimental`, and a record
+  written with one registered carries a warning naming it.
+- A conformance record and a registry document are new versioned strict-JSON
+  documents at `schema_version` 1, each with a JSON Schema that accepts exactly
+  what the Rust parser accepts. No existing schema version changed and no existing
+  document gained or lost a field, so the committed C4 example record still
+  verifies unchanged.
+- Nothing here grants an extension mathematical authority. Resolution decides which
+  extensions a search may consult; SPEC-0004 continues to decide what their output
+  is worth. Promotion means the contract conformance suite passed, never that the
+  extension improves a search, and no performance or solution-quality claim is made
+  or measured.
+- C5 flow-shop scheduling slice, under SPEC-0008 and ADR-0007. This is the first
+  application workload with an independent notion of a correct answer: a makespan
+  recurrence computes a schedule's cost from a job order, so a candidate is checked
+  against a definition rather than against another solver.
+- `optimizer schedule generate` writes a flow-shop instance from a published
+  Taillard seed, and `optimizer schedule solve` encodes an instance, registers the
+  NEH producer, runs the executive and writes a SPEC-0005 run record. `solve` also
+  writes the encoded model, which is what a caller hands `optimizer verify`: a run
+  record's fingerprint is computed from the model that was searched, and for a
+  scheduling run that is the encoded model rather than the instance.
+- Flow-shop instances are versioned strict-JSON documents. A ragged matrix, a
+  processing time that is zero or negative, a matrix disagreeing with its declared
+  shape, an unknown or duplicate field, and a positional array are each refused at
+  parse time rather than clamped or repaired.
+- The positional encoding turns an instance into an ordinary model with no big-M
+  constant, so the existing solve, search, extension and run-record contracts apply
+  unchanged: no new record type, and no schema version changed anywhere.
+- Deterministic NEH and insertion candidate producers, registered by a caller and
+  never loaded by default. They hold no authority: every proposal is validated
+  against the original model and the recorded objective is that recomputation.
+- A frozen Taillard development subset, the published 20x5 class, generated from
+  the seeds in the cited paper rather than downloaded. The manifest records each
+  instance's generator, seed and parameters beside its checksum, so the derivation
+  is verifiable and the gate needs no network access.
+- C5 acceptance evidence: the proven optimum on encoded models equals exhaustive
+  enumeration of every permutation over a fixed grid; the generator reproduces
+  Taillard's published `ta001` matrix exactly; a producer whose proposals are all
+  refused leaves the outcome, proven optimum, dual bound, forfeiture state and both
+  prune counters identical to the producer-free run; and a scheduling run record
+  verifies by re-execution.
+- No performance or solution-quality claim is made. The positional encoding's
+  linear relaxation is weak, so proven optimality is asserted only for tiny
+  instances, and no best-known bound is committed as a threshold.
+
+### Fixed
+
+- CI reuses the verified pinned cargo-deny 0.19.0 binary restored from cache;
+  missing or mismatched binaries are replaced with the same locked version.
+  This avoids an installation failure when Cargo metadata was not cached.
+- GPUP-1 repairs host LP certification used by both `host-lp` and `cuda-lp`.
+  Products, fixed-tree sums, reduced costs, variable contributions, and the final
+  bound now carry outward binary64 enclosures. A reduced cost rounded to zero
+  retains uncertainty; an infinite variable side or nonfinite arithmetic that
+  prevents certification yields no bound. The original cancellation reproducer
+  previously returned an invalid zero lower bound.
+- Both first-order backends share a conservative, objective-sense-aware gap check.
+  It encloses the original objective including its offset, fixes maximization gap
+  direction, and prevents objective cancellation or overflowing tolerance arithmetic
+  from producing an optimality claim. LP record gaps remain absolute objective-unit
+  diagnostics, now nonnegative upper enclosures; the reported objective and caller
+  feasibility tolerances retain their existing meanings. Bounds can be weaker or
+  absent when uncertainty prevents a finite certificate.
+- Independent rational fixtures cover 1,083 primitive cases, five reductions,
+  26 certification cases, and 18 gap cases, with native host and leased-device
+  maximization integration tests. See
+  [LP certification arithmetic](docs/architecture/lp-certification.md).
+
+- The branch-and-bound node path no longer performs work it discards. The backend
+  extracted an LP basis on every node — computing the model's canonical
+  fingerprint, which serializes the whole model — for a value `Backend::solve`
+  dropped immediately and that SPEC-0003 requirement 23 forbids reusing across
+  nodes. Evaluation and structural diagnostics were formatted eagerly, costing
+  several string allocations per matrix nonzero on the success path for text a
+  valid model never produces. Both are now built only when a check fails.
+  `Candidate::canonical` cloned and re-sorted a candidate the backend had just
+  built by iterating the model's own sorted variables, and now borrows when the
+  input is already canonical. `node::relaxation` rebuilt each subproblem through
+  `Model::new`, revalidating every row and the objective once per node for data
+  the node did not touch, and now uses `Model::rebound`, which validates the
+  supplied bounds and refuses any variable list that is not the original's IDs.
+  Conclusions are unchanged: every field verification compares, every node
+  counter and every diagnostic message is identical, and the messages are pinned
+  byte-exactly by tests written against the previous code. No performance
+  property is claimed of the engine; `tools/benchmark_search.py` is a development
+  diagnostic that records no threshold.
+
+- `tools/verify_committed_record.py` now re-executes a record whose search
+  branched. Both committed records reported `nodes_explored: 1`, so the only check
+  that re-runs a record against a later build had never descended past the root
+  node — the exact blind spot that matters for work on the per-node path. The new
+  fixture explores 37 nodes, prunes 23 by bound and proves optimality, and its
+  counters are asserted against the committed record so the check cannot decay
+  into a third single-node case.
+
+- A run record's identifier no longer depends on measured elapsed time. `optimizer
+  search` built `record_id` as `run-{model_id}-{elapsed_ms}` and `optimizer
+  schedule solve` built `schedule-{model_id}-{elapsed_ms}`, so a record's identity
+  was a property of how busy the host happened to be: two runs of the same search
+  got different identifiers, and two unrelated searches that took equally long got
+  the same one. Both now derive it from the SHA-256 digests of the input documents
+  the record already carries. SPEC-0005 requirement 1a states the rule, so the
+  derivation is specified rather than incidental. `record_id` is not among the
+  fields verification compares, so no record version changed and existing records
+  remain valid.
+
+- `optimizer verify` now refuses a record whose configuration names an extension
+  policy, reporting it as unsupported instead of as a divergence. Re-execution
+  loads no extension, so such a record was reproduced by a search it does not
+  describe and its node counters differed for that reason alone; calling that a
+  divergence blamed the record for a limitation of the verifier. SPEC-0005
+  requirement 14 already refused such a configuration on the search path, and this
+  applies the same rule to verification.
+
+- C4 agent-independent run surface, under SPEC-0005 and ADR-0006. `optimizer
+  search` runs the owned executive over the pinned backend and writes a run
+  record; `optimizer verify` re-runs that search from the record alone and fails
+  on disagreement. Before this, the C2 executive and the C3 extension host were
+  reachable only from Rust test code.
+- Reproducibility is established by re-execution rather than asserted.
+  Verification reads only the configuration embedded in a record, never its
+  recorded outcome, objective, bound or counters, so it cannot confirm its own
+  input. Divergence in the outcome, recomputed objective, dual bound, gap,
+  forfeiture state or any of the five counters is reported by name.
+- Measured elapsed time is recorded and excluded from agreement. It describes the
+  host rather than the search, so including it would make every verification
+  fail.
+- A record is bound to model bytes by `Model::fingerprint`, not by `model_id`, so
+  a model edited under an unchanged identifier is refused before any search runs.
+  This is the rule C1 already applied to LP bases.
+- `RunRecord` in optimizer-experiment at schema version 1, carrying source
+  revision, dirty state, hardware, toolchain, the canonical model fingerprint,
+  the SHA-256 of each input document, and the complete `SearchRecord` embedded
+  verbatim. Provenance field names are taken from SPEC-0007's experiment result
+  so the repository's two provenance shapes cannot drift apart.
+- A search that reached a limit or was interrupted still writes its record and
+  reports exit 1 or 130. Only a run that could not start writes nothing, because
+  there was no run to describe.
+- A configuration naming an extension policy is refused as unsupported rather
+  than run without the extension it names, which would record a search the caller
+  did not request. That refusal marks the seam the deferred registry fills.
+- JSON Schemas for the run record, the search record and search configuration,
+  giving C2 and C3 documents their first schema coverage. The Rust parsers and the
+  schemas accept the same documents, and nested versions are validated on the
+  parse path so neither authority is laxer than the other.
+- SHA-256 in safe Rust, checked against the FIPS 180-4 vectors and independently
+  against Python's `hashlib` over the committed documents, rather than adding six
+  transitive dependencies under a `multiple-versions = "deny"` policy.
+- A divergence reports whether the backend library, source revision or compiler
+  differs from the one the record names, so a changed engine is distinguishable
+  from a wrong result. This is diagnostic only: the ten compared fields are
+  unchanged, a record from another build still verifies when its search agrees,
+  and a divergence still fails. Whether such a mismatch should ever be tolerated
+  is unresolved and needs its own record version and decision record.
+- The acceptance gate re-executes the committed example run record against the
+  current build. Every other verification test produces its record moments
+  earlier in the same process, so none of them covered the property actually
+  claimed, that a record outlives its author.
+- Fixed: a build that linked no native library recorded `backend_version:
+  "1.11.0"` for a pre-cancelled solve, making its record indistinguishable from
+  one produced against the real library. It now records the adapter's own report,
+  `unavailable`, so provenance cannot claim a library that was never called.
+- C4 acceptance evidence: verification is shown to fail as well as pass. A
+  perturbed model is refused on its fingerprint, and a mutated outcome,
+  objective, forfeiture flag and each counter are detected individually, so no
+  field is nominally compared and actually ignored. Agreement establishes
+  determinism on one host, not correctness and not optimality; a forfeited search
+  stays forfeited after it verifies. Cross-host reproducibility is untested and
+  no performance claim is made. The Python SDK, the local registry, checkpoint
+  restart and comparative experiment execution are deferred with recorded
+  blockers.
+
+- C3 extension runtime and authority model in optimizer-extension, under
+  SPEC-0004 and ADR-0005. Extensions declare identity, category, host contract
+  version, determinism and counted budgets; the core derives their authority
+  from the category and decides what is true. Candidate producers and search
+  advisers are the admitted categories.
+- Every proposed candidate is validated by `Model::evaluate` against the
+  original model before it can become an incumbent, and the recorded objective
+  is that recomputation. An objective an extension asserts is never read.
+- No extension path can forfeit a proof claim, end a search or return an error.
+  An adversarial extension can waste its budget and have everything refused; it
+  cannot deny a proof the engine would otherwise complete.
+- Advised branching is restricted to variables the executive itself found above
+  its integrality tolerance at that node. Branching on an integral value would
+  produce two children that do not tighten the node, so the search could
+  regenerate an identical child forever.
+- Typed extension failures in search records: invalid candidates, invalid
+  advice, both directions of contract-version mismatch, a refused
+  transformation category, an unclaimed problem class, contained panics and
+  exhausted budgets. Counters stay exact while retained messages are capped, so
+  an extension refused once per node cannot grow a record with the search.
+- Search configuration, search records and checkpoints move to schema version 2.
+  Configuration carries the caller's extension policy and records carry one
+  summary per permitted extension, so a record cannot conceal that extensions
+  influenced it. Version-1 documents are rejected rather than migrated.
+- `search_with_extensions` alongside `search`, which remains the extension-free
+  entry point. A search with an empty policy produces the same record as the
+  extension-free one apart from measured elapsed time.
+- optimizer-extension-examples: three honest extensions and three hostile ones
+  covering 17 distinct misbehavior modes, depending only on the published
+  extension and core APIs with the executive as a test-only dependency. That
+  they build and run is the evidence that a third-party extension needs no
+  engine-internal change.
+- C3 acceptance evidence: over a fixed model grid every hostile extension leaves
+  the outcome, proven optimum, dual bound, forfeiture state and both prune
+  counters identical to the extension-free run, which itself agrees with
+  brute-force enumeration. Extension containment covers panics, not a process
+  abort. No performance claim is made.
+
+- C2 owned branch-and-bound executive in optimizer-solver, under SPEC-0003 and
+  ADR-0004. It owns node state, budgets, cancellation, incumbent acceptance and
+  proof completion, and consumes the C1 backend contract purely as a relaxation
+  service without depending on any particular backend.
+- `SearchOutcome`, a proof claim distinct from the backend's `Termination`:
+  proven optimality means the executive exhausted its own node tree, not that
+  one relaxation solve reported optimality.
+- A relaxation objective is admitted as a dual bound only when that relaxation
+  proved optimality. Any limit, interruption or failure leaves the node bound
+  unavailable, forbids pruning that node, and permanently forfeits the search's
+  proof claim, recorded as `forfeited` so a reader can see why a completed-looking
+  search claimed nothing.
+- Versioned search configuration, search record and checkpoint documents at
+  schema version 1, with absent measurements omitted rather than serialized as
+  null. The checkpoint shape is defined and serializable; restart is deliberately
+  not implemented and needs its own acceptance evidence.
+- C2 acceptance evidence: 192 tiny discrete models agree with brute-force
+  enumeration of the entire assignment space on both proven optimum and proven
+  infeasibility, plus end-to-end agreement with independent subset enumeration
+  over the pinned HiGHS relaxation service. No performance claim is made.
+
+- C1 backend-neutral solve contract: explicit solve options with no default
+  seed, limits or tolerances; cooperative cancellation; engine-owned termination
+  that never reports a limit, interruption or failure as proven optimality;
+  model-bound candidate and LP-basis warm starts; and reproducible solve records
+  in which an absent measurement is omitted rather than serialized as null.
+- Pinned CPU HiGHS 1.11.0 LP/MILP backend behind a private FFI boundary, with
+  every native model status mapped explicitly, native handles destroyed exactly
+  once, and every extracted candidate re-validated against the original model
+  before publication.
+- `optimizer solve --model PATH --config PATH [--candidate PATH | --basis PATH]`,
+  with exit 0 for a completed outcome, 1 for a limit, 130 for interruption and 2
+  for argument, I/O, unsupported, backend or numerical errors.
+- Versioned solve configuration and solve record JSON Schemas, plus their
+  negative acceptance tests.
+- `tools/setup_highs.sh` is now part of the acceptance gate. Running without the
+  native library requires `AI_OPTIMIZER_SKIP_NATIVE=1` and is reported as
+  uncovered native acceptance rather than a full pass.
+
+### Changed
+
+- Replaced the narrow M0-M6 implementation sequence with an evidence-staged
+  roadmap covering the completed contract stage and the planned execution,
+  application, research, hardening and reproduction stages.
+- Solve errors use the existing `ErrorKind` taxonomy, extended with
+  `unsupported` and `backend` categories, instead of unstructured strings.
+- `optimizer-highs` declares its own lints rather than inheriting the workspace
+  set, because a workspace-level `unsafe_code = "forbid"` cannot be relaxed by an
+  inner crate; every other runtime crate keeps the prohibition.
+- The acceptance gate runs cheap preconditions before compilation and falls back
+  to the cached RustSec database when the advisory fetch is unavailable.
+
+### Fixed
+
+- Record parsing validates the versions of the documents nested inside a
+  record, not only the record's own version. The version-1 JSON Schemas already
+  pin every nested `schema_version`, so `SolveRecord::from_json`,
+  `SearchRecord::from_json` and `Checkpoint::from_json` previously accepted
+  documents `tools/validate_artifacts.py` rejects. A wrongly versioned
+  incumbent, validation report, relaxation configuration, extension summary or
+  extension policy is now a document error at parse time. Strictly narrowing:
+  no document that was valid under both paths becomes invalid.
+
+- Model and candidate file paths preserve native OS strings, including non-UTF-8
+  Unix names; malformed command/flag/tolerance text returns an argument error.
+- Incomplete and unknown model commands include the argument error category.
+- Model and candidate JSON now reject positional records and object-wrapped
+  domain/objective enums, including direct Serde parsing and nested records.
+- Model validation report write and flush failures return a categorized I/O
+  diagnostic and exit code 2, including full output devices and closed pipes.
+- Candidate domain evaluation no longer relies on an unreachable branch, so
+  adding a variable domain cannot introduce a latent panic.
+
+### Added
+
+- M1 original linear models with stable IDs, explicit bounds and continuous,
+  integer and binary domains, immutable structural validation and canonical JSON.
+- Original candidate objective, bounds, row and domain checks with explicit
+  tolerances, inspectable violations/allowances and checked numerical failures.
+- CPU model/candidate validation CLI, versioned examples, independent exhaustive
+  tests, file-size boundaries and strict JSON regression coverage.
+
+- M0 Rust workspace with a pinned toolchain and seven ownership boundaries.
+- Bootstrap CLI, JSON GPU discovery, and cancellable simulated exclusive leases.
+- Versioned configuration, manifest, and result schemas with provenance checks.
+- CPU CI, documentation builds, dependency policy, and manual serialized GPU CI.
+- Contract tests, bounded smoke artifacts, project rules, and milestone backlog.
+
+No CUDA kernels, Python SDK, extension registry, dynamically loaded native
+extensions, or solver performance claims are included. Owned branch-and-bound
+search proves optimality but is not tuned and is not compared against any other
+solver. Extensions may propose candidates and search actions; the core validates
+every one, and extension containment covers panics rather than a process abort.
+Relaxations are single-threaded CPU HiGHS under recorded numerical settings; no
+benchmark comparison is claimed.

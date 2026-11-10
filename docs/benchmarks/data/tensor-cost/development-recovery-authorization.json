@@ -1,0 +1,11 @@
+{
+  "authorization": "User explicitly approves bounded recovery after retained development-test deadline, 2026-10-23",
+  "bootstrap_rerun": false,
+  "carry_all_charges": true,
+  "failed_journal_sha256": "da055205c49945266ceb9c3c110efd51efb30450c9909e79d4f9810df5b07633",
+  "host_access": false,
+  "identity": "gpup-tensor-cost-authorized-development-recovery-v6",
+  "new_budget": false,
+  "setup_cpu_ns": 20000000000,
+  "study_retry": false
+}

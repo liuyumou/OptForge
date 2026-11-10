@@ -1037,18 +1037,96 @@ mod tests {
         );
     }
 
+    // Initialization is cached, but querying its version is a separate fallible
+    // call. A version-query failure does not undo successful initialization.
+    fn availability_observation_is_consistent(
+        available: bool,
+        version: &Result<(u32, u32)>,
+    ) -> bool {
+        match version {
+            Ok((major, _)) => available && *major >= 12,
+            Err(DeviceError::DriverUnavailable(_) | DeviceError::SymbolMissing(_)) => !available,
+            Err(DeviceError::Driver { call, status, .. }) => {
+                *status != DriverStatus::Success
+                    && match *call {
+                        "cuInit" => !available,
+                        "cuDriverGetVersion" => available,
+                        _ => false,
+                    }
+            }
+            Err(_) => false,
+        }
+    }
+
+    fn mocked_driver_failure(call: &'static str, status: DriverStatus) -> Result<(u32, u32)> {
+        Err(DeviceError::Driver {
+            call,
+            status,
+            detail: "injected availability failure".to_string(),
+        })
+    }
+
     #[test]
     fn an_absent_driver_is_an_availability_failure_rather_than_a_panic() {
-        // This asserts the shape of the answer, not which answer this host gives:
-        // the point is that asking is always safe and never aborts, which is what
-        // SPEC-0010 requirement 24 needs in order to make a fallback possible.
-        match driver_version() {
-            Ok((major, _)) => assert!(major >= 12, "a CUDA 12 or later driver is expected"),
-            Err(error) => assert!(matches!(
-                error,
-                DeviceError::DriverUnavailable(_) | DeviceError::SymbolMissing(_)
-            )),
+        let version = driver_version();
+        let available = driver_available();
+        assert!(
+            availability_observation_is_consistent(available, &version),
+            "driver initialization={available}, version={version:?}"
+        );
+    }
+
+    #[test]
+    fn mocked_load_and_initialization_failures_preserve_unavailability() {
+        for error in [
+            DeviceError::DriverUnavailable("injected missing library".to_string()),
+            DeviceError::SymbolMissing("cuInit"),
+        ] {
+            let version = Err(error);
+            assert!(availability_observation_is_consistent(false, &version));
+            assert!(!availability_observation_is_consistent(true, &version));
         }
-        assert_eq!(driver_available(), driver_version().is_ok());
+        for status in [
+            DriverStatus::NoDevice,
+            DriverStatus::StubLibrary,
+            DriverStatus::Unrecognized(9999),
+        ] {
+            let version = mocked_driver_failure("cuInit", status);
+            assert!(availability_observation_is_consistent(false, &version));
+            assert!(!availability_observation_is_consistent(true, &version));
+        }
+    }
+
+    #[test]
+    fn mocked_version_query_failure_preserves_initialized_driver() {
+        let version = mocked_driver_failure("cuDriverGetVersion", DriverStatus::NotInitialized);
+        assert!(availability_observation_is_consistent(true, &version));
+        assert!(!availability_observation_is_consistent(false, &version));
+    }
+
+    #[test]
+    fn mocked_unrelated_errors_and_success_status_errors_are_rejected() {
+        for call in ["cuInit", "cuDriverGetVersion", "cuLaunchKernel"] {
+            let version = mocked_driver_failure(call, DriverStatus::Success);
+            for available in [false, true] {
+                assert!(!availability_observation_is_consistent(available, &version));
+            }
+        }
+        for version in [
+            mocked_driver_failure("cuLaunchKernel", DriverStatus::NoDevice),
+            Err(DeviceError::Unsupported("unrelated failure".to_string())),
+        ] {
+            for available in [false, true] {
+                assert!(!availability_observation_is_consistent(available, &version));
+            }
+        }
+    }
+
+    #[test]
+    fn mocked_success_keeps_the_existing_supported_driver_requirement() {
+        assert!(availability_observation_is_consistent(true, &Ok((12, 0))));
+        assert!(availability_observation_is_consistent(true, &Ok((13, 0))));
+        assert!(!availability_observation_is_consistent(false, &Ok((12, 0))));
+        assert!(!availability_observation_is_consistent(true, &Ok((11, 9))));
     }
 }

@@ -1,0 +1,29 @@
+{
+  "bootstrap_rerun": false,
+  "charged_native_cpu_ns": 1200000000000,
+  "cleanup_empty": true,
+  "compiler_image_status": "passed_88_registers_zero_spills",
+  "cpu_cohort_cells": 48,
+  "cpu_eligible": 22,
+  "cpu_verified_endpoints": 24,
+  "cumulative_cpu_at_failure_ns": 31950822722026,
+  "device_jobs": 0,
+  "host_access": false,
+  "identity": "gpup-tensor-warp32-native-refusal-v1",
+  "native_gate_passed": false,
+  "native_resource_receipt_sha256": "ad65caa3c9c9aaabcf828615ec82de0c7fc0b2fda85e7964d5797d05196764d5",
+  "new_gpu_ns": 0,
+  "new_test_source_sha256": "4951e583810bb38c8b6c12953a90161e49324743cf39f3d60f7d04d518f8f286",
+  "numerical_sources_unchanged": true,
+  "old_test_source_archive": "docs/benchmarks/data/tensor-warp32/native-clippy-prior-fb0416579fd6ca64c231a6f3a4211d68a35d407d6a0612dbe11e9047044e609d.rs.txt",
+  "old_test_source_sha256": "fb0416579fd6ca64c231a6f3a4211d68a35d407d6a0612dbe11e9047044e609d",
+  "proposed_transfers_cpu_seconds": {
+    "from_workers": 1240,
+    "native": 1200,
+    "reporting": 40
+  },
+  "reason": "new_device_fixture_redundant_i32_cast",
+  "recovery_authorized": false,
+  "reduction_cases": 592,
+  "status": "incomplete"
+}

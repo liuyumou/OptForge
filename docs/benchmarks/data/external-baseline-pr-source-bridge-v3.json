@@ -1,0 +1,3412 @@
+{
+  "additions": [
+    {
+      "path": "tools/lp_baseline_test_support.py",
+      "sha256": "a9af2b7ec878aee9106a22f069b5ca248a4f24283287aee868277d1444132aa0"
+    },
+    {
+      "path": "tools/baseline-test-requirements.txt",
+      "sha256": "75d527c3891068448763ac60ae8951b1c4e9061eb586f638efe8394997a187da"
+    },
+    {
+      "path": "tools/lp_gpup8_test_support.py",
+      "sha256": "c8be092e87701b5acafb53d956e6dd6364073ad466c33f1e69dd40f5a7ea94da"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/README.md",
+      "sha256": "c378c789bc901f75a7d7121355804a5ed535fbdf102ae27c5120282117d39a4c"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/artifacts/gpup-tensor-expanded-v1/cpu-journal-v1.json",
+      "sha256": "74ceef2227e5f56ab5fb7d31d8fcfae3fafe74e1ff7f98b073685a0e619f93b3"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/artifacts/gpup-tensor-expanded-v1/study-v1/campaign.json",
+      "sha256": "0864c0ea1461c8946eacc96a9e1831946be651ef9e7363b2f012f1fefd3d1925"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/artifacts/gpup-tensor-expanded-v1/study-v1/execution.json",
+      "sha256": "bfa530de908e2cca70a8bbd5afe1938c25522cf00638bfffd6f54e2740fc675d"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/artifacts/gpup-tensor-expanded-v1/study-v1/roster.json",
+      "sha256": "79f87adbe25758e1b26e5c982f03e75812344bc8254f5fd0d43d566abfb148a5"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/artifacts/gpup-tensor-warp32-v1/cpu-journal-receipt-final-v31.json",
+      "sha256": "d1bdeb7f37ef1e6ca6b032347f63f245d8dd0b85d061d547e10115d428ef7697"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/artifacts/gpup-tensor-warp32-v1/historical-bindings.json",
+      "sha256": "01163145016829cfdedd536fa49f9c37dc85cab14e8dace2dfb23128855508f8"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/artifacts/gpup-tensor-warp32-v1/historical-numerical-sources.json",
+      "sha256": "4dd65620da9bab6aa443ff9522f1827d16f6eb288d885138e74364bcf13b3ef3"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/artifacts/gpup-tensor-warp32-v1/study-v1/campaign.json",
+      "sha256": "88f5e278eeda941c847985063fae75d3545478f38d2f9f0546c1d3f08098c071"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/ledger-prefix.jsonl.gz",
+      "sha256": "4f9d15276737974ad555d44cec3bbd1974ee5fe1f3ffeeea4831bc2d9c1c6e8e"
+    },
+    {
+      "path": "tests/fixtures/lp-gpup8-portable-v1/manifest.json",
+      "sha256": "65d05ef8f18d73cdabb3eb69397b0e5ebd78e1333345da80c94c839163dfcafb"
+    }
+  ],
+  "ci_prerequisite_bridge": {
+    "path": "docs/benchmarks/data/baseline-pr/prerequisite-source-bridge.json",
+    "sha256": "77553490a33ebc44a4e87e723488068348f16f39971edf72aa51d1570e85dc94"
+  },
+  "closed_scientific_gates_reopened": false,
+  "frozen_sources": {
+    "path": "artifacts/gpup-external-baseline-v5/sources.json",
+    "sha256": "f91ca79e24c210f0b877a257ee52b368c5d5b624c3623f35984e95488ab8488f"
+  },
+  "gpu_seconds": 0,
+  "kind": "lp-baseline-pr-test-source-bridge",
+  "meaning": "PR-only CPU test portability. Eight exact prior test files and the requirements manifest remain preserved. Four historical GPUP-8 tests now use explicit portable fixtures: archived metadata/ledger, a synthetic preservation tree and image bytes for hash refusal, and the four named later CUDA additions. Historical scientific source, settings, receipts and measured evidence remain unchanged. Synthetic fixtures are not scientific acceptance evidence.",
+  "preserved_unpublished_workflow_attempt": {
+    "path": "tests/fixtures/lp-baseline-prior-v1/ci-with-test-cache.yml.source",
+    "sha256": "761da6371efa61eca4b6c03ba4f899b13c3d1520323787ab847a1abe342f02c9"
+  },
+  "prior_acceptance": {
+    "path": "docs/benchmarks/data/external-baseline-native-acceptance-v1.json",
+    "sha256": "c44750196cd6351b070ec032b546a6315e763961e5b9625b8176bf1ddcb16913"
+  },
+  "prior_bridge": {
+    "path": "docs/benchmarks/data/external-baseline-pr-source-bridge-v2.json",
+    "sha256": "7a4cd256c3df643c0152711099ddad221070a9b60e95fc54702ff12340ced09c"
+  },
+  "schema_version": 1,
+  "scientific_sources_changed": false,
+  "status": "passed",
+  "supersedes_live_admission_only": true,
+  "test_changes": [
+    {
+      "current_sha256": "7ecfbb40606276c4981af22a0e41e8179b3391f9bf7524323b52b5d84001f319",
+      "original_sha256": "5b1a614c999b71d26f7642b4a9fa3ec0cddb61d3623277df578ae87669791403",
+      "path": "tests/integration/test_lp_baseline_execution.py",
+      "preserved_source": "tests/fixtures/lp-baseline-prior-v1/test_lp_baseline_execution.py.source",
+      "scope": "test setup only; existing numerical and policy assertions retained"
+    },
+    {
+      "current_sha256": "6c2f9b3b0aa89ed76b1a6e011f223201a43fbfd0330acf97aa10b60e84ed8053",
+      "original_sha256": "88d4cfb59ece920f2c316547d222a86ed8e3a08b43ea635f41798e0e2f506b10",
+      "path": "tests/integration/test_lp_baseline_correction.py",
+      "preserved_source": "tests/fixtures/lp-baseline-prior-v1/test_lp_baseline_correction.py.source",
+      "scope": "test setup only; existing numerical and policy assertions retained"
+    },
+    {
+      "current_sha256": "a149a257e32b8614e3934da50906692a87356a522ac091faa9e0732fe117e7ec",
+      "original_sha256": "4f4f9a10d6850c6a1fad61065f763e14098a19ffb152f55c5a63e0c98de95279",
+      "path": "tests/integration/test_lp_baseline_native_return.py",
+      "preserved_source": "tests/fixtures/lp-baseline-prior-v1/test_lp_baseline_native_return.py.source",
+      "scope": "test setup only; existing numerical and policy assertions retained"
+    },
+    {
+      "current_sha256": "ad62f679464e97672daabd264f8c98694e3620a384307be5362514f411a5267e",
+      "original_sha256": "7eb7e24c06de46d86bd44ddc51237b8e1165a4d1fa7eea00d15c73f1f1f3dac4",
+      "path": "tools/requirements.txt",
+      "preserved_source": "tests/fixtures/lp-baseline-prior-v1/requirements.txt.source",
+      "scope": "CPU integration dependency declaration / exact historical source admission only"
+    },
+    {
+      "current_sha256": "b9cd91d6eea2611626083a18dc67b5f2cb1ffb71df31ed70dbe4fe893033e925",
+      "original_sha256": "d9d2851e57f1325aa4ff712a1fc4c82b4e0a5f6de28df59da087e10e69bb4902",
+      "path": "tests/integration/test_lp_quant_pr_review.py",
+      "preserved_source": "tests/fixtures/lp-baseline-prior-v1/test_lp_quant_pr_review.py.source",
+      "scope": "CPU integration dependency declaration / exact historical source admission only"
+    },
+    {
+      "current_sha256": "31c36cdc6400872ec9258b598e1252a713d893a6d18a3654fbf83f76a1fa889b",
+      "original_sha256": "2009a7fe65520505886f955c57d614ff3002b608dd1f86f32948bb36b09805fc",
+      "path": "tests/integration/test_lp_tensor_expanded_authority.py",
+      "preserved_source": "tests/fixtures/lp-baseline-prior-v1/test_lp_tensor_expanded_authority.py.source",
+      "scope": "CPU regression portability: exact archived metadata, explicitly synthetic preservation/image fixtures, and explicit later source additions; original scientific gates unchanged"
+    },
+    {
+      "current_sha256": "7feb39e1f96a60a43e6b8c5f199dd1b632ac0b6946e5f25cce3676c1b6ee0d8a",
+      "original_sha256": "b9775488211a5600123358099ec02f21de47a4ff424b29d4476d91fbc0f549ee",
+      "path": "tests/integration/test_lp_tensor_expanded_study.py",
+      "preserved_source": "tests/fixtures/lp-baseline-prior-v1/test_lp_tensor_expanded_study.py.source",
+      "scope": "CPU regression portability: exact archived metadata, explicitly synthetic preservation/image fixtures, and explicit later source additions; original scientific gates unchanged"
+    },
+    {
+      "current_sha256": "e139e34440a0bd94b0d74fbfd337dcb259f8c0577e977b33cbd74e8f597a03c3",
+      "original_sha256": "adc7e6c4ec6862d2dd2418233c7f20650d3f088e5a44eea2d56b5189794fa187",
+      "path": "tests/integration/test_lp_tensor_warp32_availability.py",
+      "preserved_source": "tests/fixtures/lp-baseline-prior-v1/test_lp_tensor_warp32_availability.py.source",
+      "scope": "CPU regression portability: exact archived metadata, explicitly synthetic preservation/image fixtures, and explicit later source additions; original scientific gates unchanged"
+    },
+    {
+      "current_sha256": "f0408c6bfd09700107240d5b64d2372b484321029c9f7820256110490ccd2313",
+      "original_sha256": "c6d5761fdb90ecb77c35e0982b9c3129ec4bd703d3ca00f74d76d764ddca67bc",
+      "path": "tests/integration/test_lp_tensor_warp32_study.py",
+      "preserved_source": "tests/fixtures/lp-baseline-prior-v1/test_lp_tensor_warp32_study.py.source",
+      "scope": "CPU regression portability: exact archived metadata, explicitly synthetic preservation/image fixtures, and explicit later source additions; original scientific gates unchanged"
+    }
+  ],
+  "unchanged_frozen_runtime_files": [
+    {
+      "path": "benchmarks/configs/lp-adaptive-cost-v1.json",
+      "sha256": "79dbd67b51911a02bf0ed1cf4e892a62705f6811e7244c91e556b09d1cf6a7b3"
+    },
+    {
+      "path": "benchmarks/configs/lp-adaptive-v1.json",
+      "sha256": "52060731e175f7d8bacd9135559049f9eda598cd79339136fb01b5c6d5d1621e"
+    },
+    {
+      "path": "benchmarks/configs/lp-assess-v1.json",
+      "sha256": "d801c14e4d0aff12ce5c40baf12921f881cb2bbbf46f4784b9e83be2d2906366"
+    },
+    {
+      "path": "benchmarks/configs/lp-campaign-v1.json",
+      "sha256": "a65d0ac2ce2b2676453d0e15752f887af1ee759318bed8b4538ae3f6f0cf137f"
+    },
+    {
+      "path": "benchmarks/configs/lp-convergence-v1.json",
+      "sha256": "cbfd478369386646defb471f09b505c9168636eae36b54687ecb2ae6c32a980e"
+    },
+    {
+      "path": "benchmarks/configs/lp-copt-adapter-v1.json",
+      "sha256": "187cf6f356ea7b1f2908f1a8558df461b32c131f99f187b5fade4f16988caf12"
+    },
+    {
+      "path": "benchmarks/configs/lp-copt-comparison-v1.json",
+      "sha256": "caf36e06885fdc1917d8fbcf4884d4a3dc6a6cb811da93c0ae3fe89ce0943a49"
+    },
+    {
+      "path": "benchmarks/configs/lp-evidence-v1.json",
+      "sha256": "48fef481c9fddc7b32be7f9ac8c3d49c860834ab808caf5440c251c7f0767877"
+    },
+    {
+      "path": "benchmarks/configs/lp-exec-v1.json",
+      "sha256": "1f6182b46882c37ee6a8f5fb2e705c56a42934479e26ee6ff38e27dd1824c30c"
+    },
+    {
+      "path": "benchmarks/configs/lp-external-baseline-proposal-v1.json",
+      "sha256": "f338b9a10e489c05222da7d44ee5b106d3c966f80ceaa7557daca658bd713995"
+    },
+    {
+      "path": "benchmarks/configs/lp-external-baseline-proposal-v2.json",
+      "sha256": "2625363653fb64ff2898a2f923259529ca79e8f0d0e5d6762184bda2cae969a3"
+    },
+    {
+      "path": "benchmarks/configs/lp-host-v1.json",
+      "sha256": "af51bf05f276d653833311267c3ed9b22ec0424e2e2951e7d2f7b39d3cbea184"
+    },
+    {
+      "path": "benchmarks/configs/lp-matched-v2.json",
+      "sha256": "2fff49cff6f290f68324faeb49f1f1352ab6912c9db7f55b4fa8fab77627483e"
+    },
+    {
+      "path": "benchmarks/configs/lp-precision-v4.json",
+      "sha256": "b40217f3e5ce7260f903b8f16882a14c1fc0521c2c397871240e51d90da7ec48"
+    },
+    {
+      "path": "benchmarks/configs/lp-quant-resident-v1.json",
+      "sha256": "e4591624302ec14a8d7257b151fbd16c58f5a65285fef144558a655bbb6da35f"
+    },
+    {
+      "path": "benchmarks/configs/lp-quant-v1.json",
+      "sha256": "c84781d74058a1a8429ff135fa8845def47cf2b670ae473325b406b1284cb2a9"
+    },
+    {
+      "path": "benchmarks/configs/lp-refine-v1.json",
+      "sha256": "365e603fd24b28eb410c73077e23edb659f0a5c8a9a54c4e8a83ed99a08ff47f"
+    },
+    {
+      "path": "benchmarks/configs/lp-refine-v2.json",
+      "sha256": "7dc573c7c75ab29990db1c74452a8f415f1131d4bb9157fd55ad8d5ae1d93087"
+    },
+    {
+      "path": "benchmarks/configs/lp-research-v1.json",
+      "sha256": "693a59dca5ae1a21ffaf5ae43bc64e28b93a75059ca3379e0a592bae260f0b24"
+    },
+    {
+      "path": "benchmarks/configs/lp-research-v2.json",
+      "sha256": "bae3daf7442dbce4cce6c6dd5b984d30e2228cbf86bda3b278149962ba33a830"
+    },
+    {
+      "path": "benchmarks/configs/lp-setup-v1.json",
+      "sha256": "3c2541811ea212dcf7960cc3f57e72c44e591e703cdad3283dd8f0320ea3878b"
+    },
+    {
+      "path": "benchmarks/configs/lp-tensor-cost-v1.json",
+      "sha256": "9d713e7f359e9557e95a7ed0b11365de633916287e132d07656dd4651a6eab27"
+    },
+    {
+      "path": "benchmarks/configs/lp-tensor-residual-v1.json",
+      "sha256": "d06f109e34e093f75e9b2c92fcd7ee01848c9cb9d878194f1f445cd1988efb3c"
+    },
+    {
+      "path": "benchmarks/configs/lp-tensor-v1.json",
+      "sha256": "ce31cd77e89ce048ab460f2182b2f525a2c56268362b1255aa6047a33782a445"
+    },
+    {
+      "path": "benchmarks/configs/lp-tensor-warp32-v1.json",
+      "sha256": "88f5e278eeda941c847985063fae75d3545478f38d2f9f0546c1d3f08098c071"
+    },
+    {
+      "path": "benchmarks/configs/lp-throughput-controls-v1.json",
+      "sha256": "2ba7ae4a057b9892d057121acbd7f78e649d72cfa346ec996b7250439cf81dcb"
+    },
+    {
+      "path": "benchmarks/configs/lp-throughput-v1.json",
+      "sha256": "6039196ee82df47099bab66f780c6a3f7730d34ac0a56e2ba28a58508ca086f1"
+    },
+    {
+      "path": "benchmarks/configs/lp-tuned-correction-v3.json",
+      "sha256": "d1b709359e28a6f1a5410fca27f1fae19538296896fb2bdef1f090f6cccb6071"
+    },
+    {
+      "path": "benchmarks/configs/lp-tuned-v3.json",
+      "sha256": "9e11bd16eb892d00b0f1ad2afbd179b861ee1191d3f2ade3fc14955dbb259454"
+    },
+    {
+      "path": "benchmarks/configs/search-node-budget-v3.json",
+      "sha256": "8f00468645a0d078dbec5dfabfbd26bc3ed97971c1cad14464822b301c4a0bfc"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta001.json",
+      "sha256": "6d08edd4c25c6bf2cef6fe2de3c1b97bd3ed2c75201123a1ac05654156abd6c7"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta002.json",
+      "sha256": "a91f66bb8dfec99831bfadc665ccb1f9162d5ea5c78e86026edf0d8acdf72f70"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta003.json",
+      "sha256": "aaeb3ef7bb16c69f4f726fb7cc4d2fe911e2d9acc60b6e9d5a572dbb368bac70"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta004.json",
+      "sha256": "abbefb2aefd18eea08697c6de165d4e6fcbedf1a68d39c363a45e568c6c3a2db"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta005.json",
+      "sha256": "2880d61a92c7f6920e624aee12bd7f2f3cebaed0f63bab431d9a425885fed627"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta006.json",
+      "sha256": "457f5db5e508440b8b6237a4b9dac7959ef3ff6c756d71941025dfe4b35c0997"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta007.json",
+      "sha256": "3fc17bc3b2a886bc511d0a6e39687ae36397fc5a9d9d2dd819867e00e75e23e1"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta008.json",
+      "sha256": "6fb90c0e610276af5108cedb8fceab33e1a78fdc6ae6ad88ec93a51706aac886"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta009.json",
+      "sha256": "cb5d912f674ec408628d266a8d745842e2c7f5d0d678f0723adb2cfbaff10348"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta010.json",
+      "sha256": "883140100c6f05b2e27d4bf874d00f9b90dd1144be89489d218926da267363d9"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta011.json",
+      "sha256": "43bc07078eb0a01189fc5e44b58f724df81196bbbc2b61825a92296fa6d7eca2"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta021.json",
+      "sha256": "d846040824b17e3b90cd8ad7a5b0934c41e6e9ad991a8d1126c19ac24fd314f2"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta031.json",
+      "sha256": "a444ca813f84016c5e427c8d72127ade3e89164ea440b4a758ba408ab278d1db"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta041.json",
+      "sha256": "b74fb1c5332a5e4acb34d5b03f8eba02cae3ea0556cf5c2a116ab986cd7e6b9d"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta051.json",
+      "sha256": "dce86c3c2365c07851780537d80aa78f6e124ea9a0b1df8b3a77d7ec420468f3"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta061.json",
+      "sha256": "434839ecc91ecfeceb8492a57e8cc29e8507feb5a53b69e977e840e4a95c6b94"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta071.json",
+      "sha256": "55dcf1d88e03ca294d744e839dbe3c8617597e55fae19abdd525862d7352a316"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta081.json",
+      "sha256": "823877f2ff9f9aa00f3a2c262d8a2d5512e5fe6abc6c31b1dcd7a5daf40df56e"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta091.json",
+      "sha256": "c6940e9bb36ed76b6b246b896cb715d57fc993d9012760010fcfb744c7640d0b"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta101.json",
+      "sha256": "d147e53639e89b29aa3acd32f9980d1ab670a774647cad476a396fa0aa13e9f4"
+    },
+    {
+      "path": "benchmarks/instances/flow-shop/ta111.json",
+      "sha256": "e4cb6e4c04193e6940875c5fdc1218a663703a99ea97e26bd8825030cd800579"
+    },
+    {
+      "path": "benchmarks/manifests/bootstrap-smoke.json",
+      "sha256": "bb798f97a32392adb5a8b521f7df75c5fe3e0265720543f09eee1e896e879622"
+    },
+    {
+      "path": "benchmarks/manifests/lp-development-extension-v1.json",
+      "sha256": "4d1bb10d3e82ab8fcea45b2acad01097cb7b6f7c89297884a2cf9f541df4770e"
+    },
+    {
+      "path": "benchmarks/manifests/lp-development-v1.json",
+      "sha256": "2c3089b4f8d5148e1444ac4b0835d4ae7c341d1e60041ce295fed9adb88f828d"
+    },
+    {
+      "path": "benchmarks/manifests/lp-held_out-v1.json",
+      "sha256": "0f7a16ff64f1929b81cb4c8ba71523f4f7b1a39f84011aa39620968e28d15930"
+    },
+    {
+      "path": "benchmarks/manifests/lp-validation-v1.json",
+      "sha256": "f1fbda485e4ec02172aed2fb889f3f0797eb41fb7c1da6f30cfc6ec7c777f4ff"
+    },
+    {
+      "path": "benchmarks/manifests/perf-node-budget-v1.json",
+      "sha256": "9df4a760817d3c7f09d6a08feae24fcafbb484e315fa805f58867e5e7f038e48"
+    },
+    {
+      "path": "benchmarks/manifests/taillard-flow-shop-development.json",
+      "sha256": "74a81c9e05eae7115dfe21bf708c81c733fe1b7190fef74ec946701c1f172cd8"
+    },
+    {
+      "path": "benchmarks/manifests/taillard-flow-shop-scale-v1.json",
+      "sha256": "1e4a4e1592c6bbb96394f053a65c2bf72f03f04dcdc8d2e308b482649a48a4e6"
+    },
+    {
+      "path": "benchmarks/reports/README.md",
+      "sha256": "141f96c788962ccd8a0ec398b4c090ee747b3ba47157d3324ca89b013797fabb"
+    },
+    {
+      "path": "benchmarks/scripts/README.md",
+      "sha256": "474f7048aa2adabf612e8a90fed0caf1fcfee3a402e99ee73c2b8cfe72f3e68e"
+    },
+    {
+      "path": "crates/optimizer-cli/Cargo.toml",
+      "sha256": "4d5cda1de1a298492e647135862f7013f80a9cdaec6cbb9530144216b2bcb00c"
+    },
+    {
+      "path": "crates/optimizer-cli/src/batch.rs",
+      "sha256": "3d37d64d0ffc57d45608a31d3d36f3efe80741aded666b7204c8c75607ed0a09"
+    },
+    {
+      "path": "crates/optimizer-cli/src/input.rs",
+      "sha256": "28f4a56acbda91fe1d8956f57a6bf2fb3c6611fba40f1e8067bad53fac9bb77a"
+    },
+    {
+      "path": "crates/optimizer-cli/src/lp_setup.rs",
+      "sha256": "430d240571fd287739fd299f4fadf63f311aa836df5711f0b37591f5587fff40"
+    },
+    {
+      "path": "crates/optimizer-cli/src/lp_study.rs",
+      "sha256": "9988c7592b17c10b02ee41feb63dbaf3b25a1e7808317735264b72a75e2bff7f"
+    },
+    {
+      "path": "crates/optimizer-cli/src/main.rs",
+      "sha256": "b272a4c9752952bcedbbc9a353b380aaaadce032327151b2659c2d039ab51252"
+    },
+    {
+      "path": "crates/optimizer-cli/src/model.rs",
+      "sha256": "bf68282b40fe8a9f097755e29acf44e4c7af14af550e75148ee140c26fb62027"
+    },
+    {
+      "path": "crates/optimizer-cli/src/provenance.rs",
+      "sha256": "3156a13ea44c06d22c7b12fac0a221529d6ba7fbca35e2e1370b4218ec1aecbb"
+    },
+    {
+      "path": "crates/optimizer-cli/src/registry.rs",
+      "sha256": "18579e57f501caa3775eca4d06a480e118c96274923b4e73857c53a82b0e8e6b"
+    },
+    {
+      "path": "crates/optimizer-cli/src/schedule.rs",
+      "sha256": "f77b6ab301086f0eead0d448619d6b13c07db69e0cb574b9d3109d6713993682"
+    },
+    {
+      "path": "crates/optimizer-cli/src/search.rs",
+      "sha256": "cbec3bd79297c6b6a9836dcb32c45f4bb3613b5ad0b9c12b86751fa8fca5b965"
+    },
+    {
+      "path": "crates/optimizer-cli/src/solve.rs",
+      "sha256": "53dd5deda12689f9365342cc836c1272caaa3e8aff2a8c12bafb53355f244ab5"
+    },
+    {
+      "path": "crates/optimizer-cli/src/study_output.rs",
+      "sha256": "2f2ff7e1b79d0d722929cd3ee4f49e3e25ce7b0edda03f16eaf6ff57c0b9ab01"
+    },
+    {
+      "path": "crates/optimizer-cli/tests/batch.rs",
+      "sha256": "37064d36257495644e6864687f73ccf039f051ec44e24532fb783e866c8ac37b"
+    },
+    {
+      "path": "crates/optimizer-cli/tests/cli.rs",
+      "sha256": "b33bb275e7f412851fb9fb649961eb2a085b9d0567e15d594da86a024a43f8a5"
+    },
+    {
+      "path": "crates/optimizer-cli/tests/lp_study.rs",
+      "sha256": "9edd519ab247344d505f12fb89216dfb2876684f6658c580d9bfc06f2c107b62"
+    },
+    {
+      "path": "crates/optimizer-cli/tests/model.rs",
+      "sha256": "39984584d8d2566e03898d0a27fc3af049d5e872d6fb4449a26ffbd6cff679b8"
+    },
+    {
+      "path": "crates/optimizer-cli/tests/registry.rs",
+      "sha256": "49f67cd13318047d14948618d04ab24ac253e7b3deba530c578d5832ef50ae16"
+    },
+    {
+      "path": "crates/optimizer-cli/tests/schedule.rs",
+      "sha256": "614dc700ea162f6c310397aa4d6775f77f0caf6085a8f24b445fef31cdd07f28"
+    },
+    {
+      "path": "crates/optimizer-cli/tests/search.rs",
+      "sha256": "97d693ba64eb14397879f9b4b12cf1bbaa5431f59ae588fd016602fddb72c82e"
+    },
+    {
+      "path": "crates/optimizer-cli/tests/solve.rs",
+      "sha256": "ba9929b5697e5ceb5c04466c0ff40b6cd0c5aa242fa3f4e78cd717edbd11ccdb"
+    },
+    {
+      "path": "crates/optimizer-core/Cargo.toml",
+      "sha256": "9c33fe79a14456a03cb2b88b304a6f2daedb1a8e40d2ddd3b52c222e7c40661b"
+    },
+    {
+      "path": "crates/optimizer-core/src/capability.rs",
+      "sha256": "e2e110895638ca48c95c51dc297f41a3df7f758cc7631bb1f9ed2886c6898ebc"
+    },
+    {
+      "path": "crates/optimizer-core/src/document.rs",
+      "sha256": "2586616d6cf32121871f113ddb7bbc194f1760d02e568f77c2d977bc01875743"
+    },
+    {
+      "path": "crates/optimizer-core/src/evaluate.rs",
+      "sha256": "fe100314c476519bd9d46185e642f6cff45ab917aca5dd652f5ab4c0f374ef1d"
+    },
+    {
+      "path": "crates/optimizer-core/src/lib.rs",
+      "sha256": "ac6dae3a69a4b1106a6234f7245d7366c0ff11fb15e1f2efbd1750a6b974c47c"
+    },
+    {
+      "path": "crates/optimizer-core/src/lp_adaptive.rs",
+      "sha256": "aedaf37c7452449bd1095313a6dbd43f91e3a119891d3559200f4f922fcbcc35"
+    },
+    {
+      "path": "crates/optimizer-core/src/lp_cost.rs",
+      "sha256": "0738960d9ade2033731fe7525c858dd66fe88cd721cff65615c36644cda42408"
+    },
+    {
+      "path": "crates/optimizer-core/src/lp_diagnostics.rs",
+      "sha256": "2e8fa6f7d1a09fb304f41da9f0f589a10a0a542eb91358e5baa18249d1f4cfe4"
+    },
+    {
+      "path": "crates/optimizer-core/src/lp_execution.rs",
+      "sha256": "4aca540b2d862f59d5c4f6560e63aeefb0f4d3909a3a896b2a1b08a902ecf28b"
+    },
+    {
+      "path": "crates/optimizer-core/src/lp_precision.rs",
+      "sha256": "87e22f38580a02e6b30cd69c59e99837d9b9d4d034dd726af4bff8b46cebd2ae"
+    },
+    {
+      "path": "crates/optimizer-core/src/lp_settings.rs",
+      "sha256": "bebf3cc0510d75322900747736077e265d3e4464f95cd0dd1db321db959e4c3b"
+    },
+    {
+      "path": "crates/optimizer-core/src/serde_strict.rs",
+      "sha256": "7f6c7f55a206e3db5ee8b388298961d9d780e42f41f3ac5ac40b23b71c21bc30"
+    },
+    {
+      "path": "crates/optimizer-core/src/sha256.rs",
+      "sha256": "3e15b160859e1d85c733a5b42daa4d39db9accda3fa2ea910468df8e4ad05e4d"
+    },
+    {
+      "path": "crates/optimizer-core/src/solve.rs",
+      "sha256": "9042934f1cca245bbfc843071e4f6fe190e820a5d9583391cf57449027e21029"
+    },
+    {
+      "path": "crates/optimizer-core/tests/contracts.rs",
+      "sha256": "f575091310255028e3b82f28924414182e326cc26dd20a1410aedc74eb73ee23"
+    },
+    {
+      "path": "crates/optimizer-core/tests/solve.rs",
+      "sha256": "e25a2591f43d8433dc2c549e5d5c2df469f3edc7564bf103b11f1e302e20b4df"
+    },
+    {
+      "path": "crates/optimizer-cuda-sys/Cargo.toml",
+      "sha256": "b9e9ac50f7e0bf1728d25d1530f66796433aa4e6675ba10c9720ed2b9c1f7c1b"
+    },
+    {
+      "path": "crates/optimizer-cuda-sys/src/lib.rs",
+      "sha256": "854a823283b2b297e09e32b624d6da886cee2c3d2b86f080e9da4395a0f6b47d"
+    },
+    {
+      "path": "crates/optimizer-cuda-sys/src/primary.rs",
+      "sha256": "8b5ad93af537f4d39516806c0069c44a756171b05ec7a7125af0cbcf686a2d7c"
+    },
+    {
+      "path": "crates/optimizer-cuda-sys/src/setup.rs",
+      "sha256": "9e2eb9915dcf8dd3ef37b53ae9279df18e3f5b38477d71306337d84b3cf24653"
+    },
+    {
+      "path": "crates/optimizer-cuda-sys/src/status.rs",
+      "sha256": "ea72ed4eb38e348a535b1971a87c60e0c6d503d74ef9ebf7dc468df77f23d95b"
+    },
+    {
+      "path": "crates/optimizer-cuda/Cargo.toml",
+      "sha256": "d497ed60d7e4835edd007eebb88785c109378ba6f759f9d4d785b90f339e614f"
+    },
+    {
+      "path": "crates/optimizer-cuda/build.rs",
+      "sha256": "33060824bce1a032023c89646a35f3bd9caaf447d4de33af084bb488f4d67d6d"
+    },
+    {
+      "path": "crates/optimizer-cuda/src/lib.rs",
+      "sha256": "d3ac28b340214399a0bc36ee5574880744901c01a9a0e73efc7bd947b7625fb4"
+    },
+    {
+      "path": "crates/optimizer-cuda/src/probe.rs",
+      "sha256": "18ea0e329c947c1ae03539ec0dddcc2c88240381dd52414ca44288f3a5b16e8f"
+    },
+    {
+      "path": "crates/optimizer-cuda/src/schedule.rs",
+      "sha256": "4afbc80313387170e2b3e727100b15f685eec0119ae86172f7278cd9e221deab"
+    },
+    {
+      "path": "crates/optimizer-cuda/src/session.rs",
+      "sha256": "e9475df0b80c9ad70c47266de01deae4a42bece839a4ecaa41c47bd28bb60ad5"
+    },
+    {
+      "path": "crates/optimizer-cuda/tests/device.rs",
+      "sha256": "f99cba8a6a164f0d15290fbf39b4107a4df925ab3f05d0c950581db343d6c162"
+    },
+    {
+      "path": "crates/optimizer-experiment/Cargo.toml",
+      "sha256": "d983203b2a57b1de5b7e15b2a49e583c6f50d1be2a72f19272dc0c3f5b08e6c3"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_diagnose.rs",
+      "sha256": "3edcf5842498037401aac619a06328b7177e5b88fc905f1b243cd7c8657796a2"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_evidence_fixture.rs",
+      "sha256": "07c2fc1cd4dbc46711ac4ccb6c7bd04e3134378dc06b198ef023bb539b37bb2b"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_assess.rs",
+      "sha256": "537f71d510969be6edc91992c94762aa80d80d5b5df1d8ad45c602c5c2de0212"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_diagnose.rs",
+      "sha256": "b5ce26f8666da0d5560a42383d86facde5f1cf1649e8f9428c87d21ccd077951"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_exec.rs",
+      "sha256": "f85c2a15cc0870586da02685e6c6cbbf120d1b6b9c58669643ecff98a65ecb99"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_quant.rs",
+      "sha256": "0d5afc88352c8a786808457bb3b1fe6eb026528885c4548552ac61f1bf472903"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_quant_resident.rs",
+      "sha256": "f5be50c964aa8443242b2f371b8879f311ee69440571ca072aa8cd4414dd65a5"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_refine.rs",
+      "sha256": "876e59d29e7a3572a153c31b1466af97452802b967ea9b1f6f29e11037531a4b"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_research.rs",
+      "sha256": "de0209b8a2d6136f40af7d5fd72b35b8d0c3e7349f9bc29766c48d9483a90ef4"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_tensor.rs",
+      "sha256": "35d64e35036a203f130ad054a3c4f91b84cd63d44667bb678fddc0507ff1c897"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_tensor_cost.rs",
+      "sha256": "b46133c3a2aa7e640fe06e743e1c3836fd71559c899bf659ae4bffae8b86a17d"
+    },
+    {
+      "path": "crates/optimizer-experiment/examples/lp_precision_tensor_residual.rs",
+      "sha256": "a8198d3d39d016b66b27bc8c9f1fe6528459dfcc2813998ff861e103e3ed697a"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lib.rs",
+      "sha256": "0bf11627836a5134a6382a1abf2ce925621422fa2467319ea8766ff6411b3a28"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp.rs",
+      "sha256": "2ffa466c0a1c4ee53432edd57a36b497b8041c41b76c8bc2b609e7dfb5634fc0"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_assess.rs",
+      "sha256": "ba2bf06b3d582394fd03c91595551ca213cb08802361217347150b8d941879d1"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_batch.rs",
+      "sha256": "bf712d036b6ddf0ea7153ca41613d0fc1ff0d7e71ca928705fba83f118668d35"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_compact.rs",
+      "sha256": "bd66b897077491b20920ceebfaea6ae761d1df30442aecdb0ee0f7bfa3b37064"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_exec.rs",
+      "sha256": "f44b144cea59051f40d6b2c881498b72033b338cf5fe129ffc1a6063ec45874a"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_external.rs",
+      "sha256": "6f0c2539478bad0e7cfcc57e203bd639605cb8afe92f36d7a0a54f896ee5c211"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_external_v2.rs",
+      "sha256": "2194efc2154ee06dab564ff8e4faf5717549fa65b3ee91136b336b50f6710714"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_quant.rs",
+      "sha256": "d379037d866ac266e146a25c4c754f57410c4ad042cbc55514e2a1e9227d57f2"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_quant_resident.rs",
+      "sha256": "e768de10c483f3ba0eb8b9ee53162f1b3d23bd6da7aaa3c057a15cba35adbda5"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_quant_resident_micro.rs",
+      "sha256": "cf766e6cf58008b3a68fa5a8deba1ba5dfc5aaf461dbb1e4f6c02d954f2cd93d"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_refine.rs",
+      "sha256": "5ba573abe4be3d3a7674e317e09d01e82809a97eee4de1f0b593370529f824bc"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_research.rs",
+      "sha256": "a3b5b00e48c628dd0f94beacc6c2c1da709ae01a1a70a7eac5cf83890a8d582a"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_tensor.rs",
+      "sha256": "8b08a6629dd9ed0e9d4700f7d94e166c74e17d64c3db3e9331b49e56e0463aff"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_tensor_cost.rs",
+      "sha256": "b61cb65867777fd4a32f5ae04ff1a62c0b68bb87a511b29029bac7e35f6e8df4"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/lp_tensor_residual.rs",
+      "sha256": "8eb8952f139706b285583bb9cad895b20133175cca62dce195c35cfc2d9f3283"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/run.rs",
+      "sha256": "ed1de7abdc0576e1af7a43ba0f4968f8ff579c36c8a3a867cdce19faca4a5b9f"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/serde_strict.rs",
+      "sha256": "7f6c7f55a206e3db5ee8b388298961d9d780e42f41f3ac5ac40b23b71c21bc30"
+    },
+    {
+      "path": "crates/optimizer-experiment/src/sha256.rs",
+      "sha256": "4a9ebc9809b4a93644543d4a05e6babbbe52f1ee34c24b32ff4fdd49c16e0e50"
+    },
+    {
+      "path": "crates/optimizer-experiment/tests/lp_tensor.rs",
+      "sha256": "3feff7703db031fab28fbf0641ca7bbbcea70d3a331ae7a13ffb66ab0be374b5"
+    },
+    {
+      "path": "crates/optimizer-experiment/tests/lp_tensor_residual.rs",
+      "sha256": "da77204f0b32f58a3b235438bae69a10f2c99e09ad3cbc7e5ff942f3cc256a6a"
+    },
+    {
+      "path": "crates/optimizer-experiment/tests/run.rs",
+      "sha256": "545ce00a88d73b728e0367e7f710d4461a9b9bb676830ad686d96eb6227f4e93"
+    },
+    {
+      "path": "crates/optimizer-extension-examples/Cargo.toml",
+      "sha256": "b5fa334d4fd63e68a292eb14b66a9ba1db1bb3d6d89fc8bd0a8415ee1c96f556"
+    },
+    {
+      "path": "crates/optimizer-extension-examples/src/lib.rs",
+      "sha256": "4dc85705095b577f5e1608884f6fc590fc5dfabb4e7c1a4240aff2cefb6e6652"
+    },
+    {
+      "path": "crates/optimizer-extension-examples/tests/acceptance.rs",
+      "sha256": "6886da373653c1d1ee647b1014e2758dc24fb39f2e428138c33eeb221778bc6a"
+    },
+    {
+      "path": "crates/optimizer-extension/Cargo.toml",
+      "sha256": "392dedd17757366d5b9f536888f0fa7f639956e945ca777f541a83cdebc98786"
+    },
+    {
+      "path": "crates/optimizer-extension/src/declare.rs",
+      "sha256": "a0fa1c4f251ff42596b9401203da17fe4e68049810bbf67c1fbda95510b39b80"
+    },
+    {
+      "path": "crates/optimizer-extension/src/guard.rs",
+      "sha256": "599b14f8d46b04fff1344facf761c92650375a72f8ca5e9047bc4fbdc5e0b7ca"
+    },
+    {
+      "path": "crates/optimizer-extension/src/hook.rs",
+      "sha256": "ac1b5881c8deddfbbcff66d1ee2a52203a5d05b294854201fcb53afab2d2dcb6"
+    },
+    {
+      "path": "crates/optimizer-extension/src/lib.rs",
+      "sha256": "5922db5d4c4c2e2263d6d74d22ebffaca1b2012e0196c50dc2d98691902c2eb5"
+    },
+    {
+      "path": "crates/optimizer-extension/src/record.rs",
+      "sha256": "1efc633246d27925bdc944b8edc9cb4fcdce814a2be43ec8ac751593cf3b1e74"
+    },
+    {
+      "path": "crates/optimizer-extension/src/serde_strict.rs",
+      "sha256": "e55705810c46c3dd08beb003d52492bc7bd1c1b80b52388f5c029bb97fd2ac6d"
+    },
+    {
+      "path": "crates/optimizer-extension/src/view.rs",
+      "sha256": "6ceda503f1fd8d47119db87feaca9977bb6fa77f47f0eee69f9e806ccf9ad85c"
+    },
+    {
+      "path": "crates/optimizer-extension/tests/contracts.rs",
+      "sha256": "2293809e4bd294bd31c13b16735cd60757ae689f67253c56edf24c1fa5e28a34"
+    },
+    {
+      "path": "crates/optimizer-highs/Cargo.toml",
+      "sha256": "542227216392f88ebd78c1d7ab903cf39b6045162e80181616d66fa955e8639a"
+    },
+    {
+      "path": "crates/optimizer-highs/build.rs",
+      "sha256": "b66e432f2a5b97e7ff53f27326da5ef5449831f7d7c73c4e70cc56c0df90d329"
+    },
+    {
+      "path": "crates/optimizer-highs/src/ffi.rs",
+      "sha256": "3cecb3913e859c8184167291c6c67984b93a6466ca25ba15c622f7e0387bed68"
+    },
+    {
+      "path": "crates/optimizer-highs/src/lib.rs",
+      "sha256": "b85ddf2ed38d113e0337393af9ef197ff38932648ace5b75ef9b6bfbbb5e016a"
+    },
+    {
+      "path": "crates/optimizer-highs/src/native.rs",
+      "sha256": "cf1f7c0fe97dd3ed8c65911fdce6be612474e98385bba5a4e6f93bc95722114c"
+    },
+    {
+      "path": "crates/optimizer-highs/tests/backend.rs",
+      "sha256": "a687a87ee9e0b38b1bec49d87dce586cb382a11d7e2b662b16ff269ad001137e"
+    },
+    {
+      "path": "crates/optimizer-highs/tests/differential.rs",
+      "sha256": "e88456cd43708bf5406116e007c13e6d451411a6f017535065696de7a71f9d2e"
+    },
+    {
+      "path": "crates/optimizer-highs/tests/executive.rs",
+      "sha256": "f9406fc1912da84de3a2cf00c1ef352d860e93754065e575dc81646d883465e5"
+    },
+    {
+      "path": "crates/optimizer-highs/tests/first_order.rs",
+      "sha256": "c65924b67a7a26f9bf59b3c8e6b183c20e57e19a88cd57854148df0c5e48172a"
+    },
+    {
+      "path": "crates/optimizer-highs/tests/schedule.rs",
+      "sha256": "73b2be109d4fff48184aeccb206c983218dde91e67ca781b6ff3d003df8eb557"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/Cargo.toml",
+      "sha256": "525437b06555caae07e3a35e12c3fbec6232d9cdba7dd2045bd0fe8bf8691d02"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/examples/lp_state_probe.rs",
+      "sha256": "b9c778b1479328a50f550b84ecfc21cc6fd0e9a19396df16b2a27945965b9e10"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/adaptive.rs",
+      "sha256": "175d3afcf269c078fbfb160ad3aa02792386c6cf57786879170516670f066f7e"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/assess.rs",
+      "sha256": "08b0615a2cccd660a32f046a66cad088f68c94f919cb6fa677f5f663d0029602"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/backend.rs",
+      "sha256": "6c666abeeb124486c817bd5869744d6692da75ff93e2bdf6b4b576e99761f7fe"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/exec.rs",
+      "sha256": "a031aec78df40e3db13d67e6f1cd5f865018c241ebac92f87b7a476078c5dd80"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/lib.rs",
+      "sha256": "7c1814bc055ba8f08c5c9ee8a11e3e822b3d556345d267965905933c21b2bf2b"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/precision.rs",
+      "sha256": "466a98ba721b85e386e813b610ac79e0f093504e565c55a3416b22aa4538628e"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/quant.rs",
+      "sha256": "0bf8c61441767f5765a05ce126804bc2a60e005f06c135194b0408dbaba4caa2"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/quant_resident.rs",
+      "sha256": "3fbadc0530ee287a6da2971d6f4897573805640abce8517a8ea9ee874476787b"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/refine.rs",
+      "sha256": "687383857f17fd8d3ce9c36aa73aa890a20b7a542bf9a4f2c857e6c17fd2a1b7"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/research.rs",
+      "sha256": "82348180f8db6b0299b0ab8eced04580abacb2579044774d5d454e7a6a21d8a7"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/residency.rs",
+      "sha256": "60aa1a22f299dfaf6c642b2ebd58cc2be4e4432aa4a8458c2e73425d431374bf"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/session.rs",
+      "sha256": "98732653fc489e819d62b7f9b19debb62d5f2574fc43f5e30eda6d948f9a7cad"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/tensor.rs",
+      "sha256": "f6f3129b796d227699878e38c4c2377ad743310132a8cd77cae5ed4928ddf19d"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/tensor_cost.rs",
+      "sha256": "e7e2aebbcc2399236c620dd094bc9a82803556d0e1ea6fa33d7d344862b92085"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/tensor_residual.rs",
+      "sha256": "d22741092da18418d1672f2a4d25330974dda3e9f0c66ed56833e05ddda2cc13"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/src/tuned.rs",
+      "sha256": "da208be0df80c29eddbf70b052aece4f9486f8c9c74cafcbe6cce55da8624143"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/assess_device.rs",
+      "sha256": "4d7955e45709b65a04b9640430d6014305748ed8aa711206c75f139d243295d5"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/device.rs",
+      "sha256": "f4c26d3b1539e7922d86ec6fbcc54f14630ff1910a1e3584409829ec738a0e0b"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/device/adaptive.rs",
+      "sha256": "c06e60ef161b5dd08332d1e75ccefcd059f31055282ef2f0d148af007149df01"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/device/precision.rs",
+      "sha256": "158084f7b6a064c696bb08b45ecad853e3cb68c1739ca3c3c1d735530e33a6e4"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/device/primary.rs",
+      "sha256": "a71e63af9639de5667438fb8e3ecfc3003cab74ee6daec9340fbfed942b89cf1"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/device/research.rs",
+      "sha256": "73324e99042fc9ca164578f00eed585c5d5a3e5f0810b35f26d37566d392dc41"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/device/session.rs",
+      "sha256": "af85b54050c41fb69ca9caa0fade38d964ff23df0fca33f7cf505768b7096cc1"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/device/tuned.rs",
+      "sha256": "94e25aebcfa82a93d5756a6799ec58a9afc3808671b951a087a284c0c49795e5"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/exec_device.rs",
+      "sha256": "b2d0e1f8d9a3d1375e8702a1dc9033337dc7c05dd363026afc5ab0e9f40631ff"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/quant_device.rs",
+      "sha256": "15f47c190feddfe283e98790234ba02719b93d874a1e61617442cf21e72c8ea5"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/quant_resident_device.rs",
+      "sha256": "fcafb61fb71a6e318ba08e124e64e384f732e8d1f69a819bb73008de47ba9e39"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/refine_device.rs",
+      "sha256": "f64c1eb65f0ee51a94ff2de6c6e33e8677d4425043a4e11a024b0dea1055a7ce"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/tensor_cost_device.rs",
+      "sha256": "0722bbc4ffeca0a03a624accd411c3384235cb65eabbe1bde8117b6eaa46b7f7"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/tensor_device.rs",
+      "sha256": "bb3a7f24c0909f2a0c6cdeaaa1650c5ba5d0300fc14ba5534b57f1172674d5ed"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/tensor_residual_device.rs",
+      "sha256": "f7173199b1a131a4a7f0118974ed777649938ef8fdfec95bd86fd39c9e4a2742"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/tests/tensor_warp32_device.rs",
+      "sha256": "4951e583810bb38c8b6c12953a90161e49324743cf39f3d60f7d04d518f8f286"
+    },
+    {
+      "path": "crates/optimizer-lp/Cargo.toml",
+      "sha256": "9dc1768aedfc32ae3cecbf8c82a72f5cf204867addf84f82ba8145b2388fe05c"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/quant_probe.rs",
+      "sha256": "3b1d849f9010431ab022c7abbf161bbd8e27d55e5118c7127fcb168ce03d5c51"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/quant_resident_probe.rs",
+      "sha256": "a9dbdac436136fe5fed1e889da2857ef4c6c98859e0a55a977257963590772b6"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_cost_compact_probe.rs",
+      "sha256": "779279a183885a084bd61a59f74909638f7751025eb9b904d8a5defb7e1cb65e"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_cost_norm_probe.rs",
+      "sha256": "7cf2eee6a8164a6c2c62412149e936f322330041ed389584527dcec9931e6e69"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_cost_probe.rs",
+      "sha256": "6d2e34dbba656894c51efb525ab4709b999beabe704fa92f754a5150a75a7f53"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_cost_product_probe.rs",
+      "sha256": "56dd8178492bc0aac1ffe8af1244cf18ee3b9810ca212a849e41963579dc9aff"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_diagnose.rs",
+      "sha256": "1f0074a0257429b255b9f53e274d598504ebc787b8e4a6a0235d54796d809fec"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_probe.rs",
+      "sha256": "2b4ebbe8db60c40c98e90fc00cdc8a5e5bcfa4a0094741c580cfce73c636b1f0"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_product_probe.rs",
+      "sha256": "c0d16c91fa2eb48568de3c181c4611f8cd9cd90d982acf93db4cd5eddc330d17"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_residual_probe.rs",
+      "sha256": "d8aa85d266f0624294e24f15f3231be32450c3a673df818a5bb5ecf84f861706"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_residual_product_probe.rs",
+      "sha256": "0237dc582eb610bd7aab30606eaaf2fc78e9fb71d65dea47fc861e1a6904ab59"
+    },
+    {
+      "path": "crates/optimizer-lp/examples/tensor_warp32_probe.rs",
+      "sha256": "c8e2c13f9b6732c84012567865b00c4dc79842e666a81cc795b22ef491b7d666"
+    },
+    {
+      "path": "crates/optimizer-lp/src/adaptive.rs",
+      "sha256": "a56df25fbc852f37eafde95456d302a70ae13fd0c6878d45716bb36d96bf4636"
+    },
+    {
+      "path": "crates/optimizer-lp/src/assess.rs",
+      "sha256": "fa657cdffb49208469c7c22342703258c8c87ad88d85b2870576d5190bdd5a28"
+    },
+    {
+      "path": "crates/optimizer-lp/src/backend.rs",
+      "sha256": "d5f1e986485ea6c44fafa2732f6e6cbf3dcdf128d182c61400c501164fc18873"
+    },
+    {
+      "path": "crates/optimizer-lp/src/certify.rs",
+      "sha256": "eb6e6db5f99ea51b08b68ff5f199f23d649a5622badc922a755b999a1ceda707"
+    },
+    {
+      "path": "crates/optimizer-lp/src/control.rs",
+      "sha256": "1108151e8fe3247a588cca7b62a1ea50d57b4510369436852050e3b485f19d01"
+    },
+    {
+      "path": "crates/optimizer-lp/src/exec.rs",
+      "sha256": "36cfa54a90c396f78b62e73cb2f55728501859ac83218db1823c54ccbc37d0bd"
+    },
+    {
+      "path": "crates/optimizer-lp/src/lib.rs",
+      "sha256": "cc660465ea80262dfe71ca4632a5047fedaa2062207cf87a58f1aa3e217c98cb"
+    },
+    {
+      "path": "crates/optimizer-lp/src/outward.rs",
+      "sha256": "c75d14ffc5ba96a751f1443367962397f39bc62c50d77abf76d0890d5ee1bdba"
+    },
+    {
+      "path": "crates/optimizer-lp/src/pdhg.rs",
+      "sha256": "2fa78f60be5b24677db6e61d023f960b468ef645682e1b5bbeb46e485e2e230c"
+    },
+    {
+      "path": "crates/optimizer-lp/src/precision.rs",
+      "sha256": "aa4646589c712996047665ee6c9cf6c6342eaa23fc2acda2b8c4e8c959969417"
+    },
+    {
+      "path": "crates/optimizer-lp/src/precondition.rs",
+      "sha256": "bf636c2ba5c7a04c7efc718d4d20beba1f23e73b0306de8f144d7291e97e8c0c"
+    },
+    {
+      "path": "crates/optimizer-lp/src/problem.rs",
+      "sha256": "8a8bb9876fa5e8b751fab4663b84091bafbd8ec94ac650a98068260abf5ee58b"
+    },
+    {
+      "path": "crates/optimizer-lp/src/quant.rs",
+      "sha256": "4604d9acffdcbcd522034f8b9df1243c768c633afeca57df6ce52e186f84feb1"
+    },
+    {
+      "path": "crates/optimizer-lp/src/quant_resident.rs",
+      "sha256": "859b1124457c2ac1a1d6dd6eee8e608afa583e8891e49cd83f3bcbcf684096de"
+    },
+    {
+      "path": "crates/optimizer-lp/src/reduce.rs",
+      "sha256": "4c61189553dd5abe14c4439102eb46c600d6837e0e17fa981ccf92209e640e25"
+    },
+    {
+      "path": "crates/optimizer-lp/src/refine.rs",
+      "sha256": "77e4871bcadc152dfbfb185d965b8bb40921555cfc636726fadf82751d31ba15"
+    },
+    {
+      "path": "crates/optimizer-lp/src/research.rs",
+      "sha256": "8898c630c997353a6e43b64cc7f2609d5c813f89316cbe0f35aaee6c0f1c5c72"
+    },
+    {
+      "path": "crates/optimizer-lp/src/tensor.rs",
+      "sha256": "45b22f7cf386721848574e97eca508aa32a04f5d047db6186e850ae06a09d679"
+    },
+    {
+      "path": "crates/optimizer-lp/src/tensor_cost.rs",
+      "sha256": "47fa7f42afe77f7b2e70e5d78da1d6d1978abb05840191b9a853e8d0eee240a0"
+    },
+    {
+      "path": "crates/optimizer-lp/src/tensor_cost_prepare.rs",
+      "sha256": "afea7f7ff046c8d26f79b35a71a8ac983e168443eff3f60f7fa2a9efe42ab09a"
+    },
+    {
+      "path": "crates/optimizer-lp/src/tensor_residual.rs",
+      "sha256": "0ce9ec451fe5572b5f88cd31d48bc2067d7d7e804e05f891d589564eb94fe5f8"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/adaptive.rs",
+      "sha256": "4245ca9db419102066628ef9ac2fc0207e9d3f5931f81afa410208c6256e10c2"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/adaptive_cost.rs",
+      "sha256": "f9e39a36dc1a268ec92d2eb083135e9a6305505b92cf98044cf67671bb2f8806"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/certification.rs",
+      "sha256": "b8c49b32a2300f90aec5a744f57f358a4ff05f9c3a73ed86d67cb19f7a9e8d5b"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/exec.rs",
+      "sha256": "42487e3083e2ecf16f643423ebb7cabdb62e5c6cc14d0259fbb94aba8621b6ff"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/fixtures/research-doublefloat.json",
+      "sha256": "1d706dba0051d05fb184612249759fba1e53e0a86b92924aba086bac78089e74"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/fixtures/research-products.json",
+      "sha256": "cdc40b4fc9ccaeab9d92004e60dcc4b714fbe5d1197b95020faccd787def26a5"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/fixtures/research-sparse.json",
+      "sha256": "7ba547620ef7347c2d3b954be3a5d80d8e2008139d6cd6f19fd90748fcf0b9ed"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/precision.rs",
+      "sha256": "f5203ce1bf6ef647fb6c31dfe0e92b26ef90cd64e8624bc8e731422a03eeb6a5"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/quant.rs",
+      "sha256": "8a3b0c66d8591abdc88f3ee653cb66e85b4cd42b2867ed94dd615a62be3df1d8"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/quant_resident.rs",
+      "sha256": "2ebf1a8372bf22dcc938c22fcc7c535f22790cd6e97c500c44179d22a8e73b4e"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/refine.rs",
+      "sha256": "b87703301e87fd1e3f5b349ef43aed423bc100afed3775447ef6360b536f7e2c"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/research.rs",
+      "sha256": "0e231a5a268dff255b72e36e1f9f6192005caa87eceeb350163dddeec93e016f"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/tensor.rs",
+      "sha256": "6dfeab0165b2be98acba37631ee8369e730d5ea26cfd6493c6642c0876687d22"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/tensor_cost.rs",
+      "sha256": "bd4a0e47eaecaba62a7d0cdef5090c6bd96db299f1a86330bee545525a65b28f"
+    },
+    {
+      "path": "crates/optimizer-lp/tests/tensor_residual.rs",
+      "sha256": "307c1cfcaca0aadb26d9e18e045a369ccff94462820d9189a1579399f0710b43"
+    },
+    {
+      "path": "crates/optimizer-registry/Cargo.toml",
+      "sha256": "4c4ed04cd515c6dd4bfd9aee204d4a51900c35a96f6c56ee1b688e20e4c3f56c"
+    },
+    {
+      "path": "crates/optimizer-registry/src/conformance.rs",
+      "sha256": "087769009231ea4a3889ce63bb5f09726ac85d2ed0519196976e29a42a93c191"
+    },
+    {
+      "path": "crates/optimizer-registry/src/document.rs",
+      "sha256": "b8c49723fe767ae3c4db9c6f17b01d4d6eca13267980398d63a180b222d89f8d"
+    },
+    {
+      "path": "crates/optimizer-registry/src/lib.rs",
+      "sha256": "b89ae4b18936b5ad06ec11a20a7a3210e315d7009b53fc3462068da1b5d93112"
+    },
+    {
+      "path": "crates/optimizer-registry/src/resolve.rs",
+      "sha256": "6c26b1bec87c3027a83b0313ed41c35a4edd142cb5494fee5130cb0af42747a9"
+    },
+    {
+      "path": "crates/optimizer-registry/src/serde_strict.rs",
+      "sha256": "e55705810c46c3dd08beb003d52492bc7bd1c1b80b52388f5c029bb97fd2ac6d"
+    },
+    {
+      "path": "crates/optimizer-registry/tests/contracts.rs",
+      "sha256": "ed63371f33ee81a3a47556d7aaae7fb7053b8592528ad21201baa6db7eb1ce8d"
+    },
+    {
+      "path": "crates/optimizer-schedule-examples/Cargo.toml",
+      "sha256": "7ac6fcdb53173e45eb286547bb5bbd1cf56bc2a7609f6e7df1b544941d34a8ce"
+    },
+    {
+      "path": "crates/optimizer-schedule-examples/src/lib.rs",
+      "sha256": "e14353677dec9d1995a59d4482fdd735b940ebf724819c553be0c350e9955175"
+    },
+    {
+      "path": "crates/optimizer-schedule-examples/tests/device.rs",
+      "sha256": "1543957561bf5441d0a6c42add0ebecbc79d3d2b1919060b1e60cb4616cfbbe9"
+    },
+    {
+      "path": "crates/optimizer-schedule/Cargo.toml",
+      "sha256": "4a677b7030597890dab3a2e0bee667440a3543960b1897dd94a39d2923f12431"
+    },
+    {
+      "path": "crates/optimizer-schedule/src/encode.rs",
+      "sha256": "c13d087a684284fb31f4b7c9221f51f3da310128378e4ed9c2d5424c60f51455"
+    },
+    {
+      "path": "crates/optimizer-schedule/src/evaluate.rs",
+      "sha256": "f5fa6774c1128793f9fb4896b011bf0a3d9c87f8963f3543ac78c7b3a33b1e03"
+    },
+    {
+      "path": "crates/optimizer-schedule/src/generate.rs",
+      "sha256": "52f8ae9906a7f7d1e2ac0035deaa88435d11d35e69a71e11a332eb1db2ae1105"
+    },
+    {
+      "path": "crates/optimizer-schedule/src/heuristic.rs",
+      "sha256": "6072129b984b148b15018186f7d80e4e7546c55d5a59ad6c06a632dee22aebe5"
+    },
+    {
+      "path": "crates/optimizer-schedule/src/instance.rs",
+      "sha256": "5f4a436e69af69362b0e97e61b822847783c31b43feeba3874a46b5ca173743a"
+    },
+    {
+      "path": "crates/optimizer-schedule/src/lib.rs",
+      "sha256": "9c262a444672a37ae8e2a94563ff30b170bad5bc3a391579ce0521b0601252dc"
+    },
+    {
+      "path": "crates/optimizer-schedule/src/serde_strict.rs",
+      "sha256": "1ae8821e6c356232ecdc9e6cacdf616f9a9af1795aa6f11d16fc7faebc1b31c3"
+    },
+    {
+      "path": "crates/optimizer-schedule/tests/contracts.rs",
+      "sha256": "81f961229c78b0b05b267036f6ebb17f85071564d6eaed3692c977f40e0569bc"
+    },
+    {
+      "path": "crates/optimizer-solver/Cargo.toml",
+      "sha256": "18ac110a12a55e543765443859a56fe8d513a56c278b69606208abda71f96058"
+    },
+    {
+      "path": "crates/optimizer-solver/src/executive.rs",
+      "sha256": "27a19f2c10259d90a0d3e6d35cf298f14836eae3461dea6895662ff4fb803526"
+    },
+    {
+      "path": "crates/optimizer-solver/src/hooks.rs",
+      "sha256": "8d04357f753438054ea71dc7960f812a2c3c5fe1cd785711e09d0652cc10a300"
+    },
+    {
+      "path": "crates/optimizer-solver/src/lib.rs",
+      "sha256": "86effe801221421fcc04599eae6709ae427430ee66066788f6decd4db8b616c5"
+    },
+    {
+      "path": "crates/optimizer-solver/src/node.rs",
+      "sha256": "faa0fe8ef8fe517832672d7727f68d9fffa4b65af9eb22df94657eb06274492c"
+    },
+    {
+      "path": "crates/optimizer-solver/src/search.rs",
+      "sha256": "f8bad80a4d2513089d60ffdb5e803aab0428afcd5e7c03e7128aaf811ee4098b"
+    },
+    {
+      "path": "crates/optimizer-solver/src/serde_strict.rs",
+      "sha256": "65e1900f21d4da03cd340d8989cc4cc27ee868baed57e8302370e30efbcad8cd"
+    },
+    {
+      "path": "crates/optimizer-solver/tests/executive.rs",
+      "sha256": "ec741432f18ab85db9c21a91eadc2cfd2dfa083d6374937f02c897cd349c1a05"
+    },
+    {
+      "path": "cuda/diagnostics/fp64_pipe_bench.cu",
+      "sha256": "778880ae1a90ac882b22c467d254b99b9ba7549ec312ed1bdede7e571395bd39"
+    },
+    {
+      "path": "cuda/diagnostics/launch_overhead.cu",
+      "sha256": "a4def818d06f6a7e1d25b8bf2bb8d300e999981105c5a8c08fc71667224e892d"
+    },
+    {
+      "path": "cuda/lp_pdhg/lp_pdhg.cu",
+      "sha256": "996887e45e7ac6c0f810a9b7b26e82c8490ec2541f6c7e7d88d70ad7f9da37b3"
+    },
+    {
+      "path": "cuda/lp_pdhg_exec/lp_pdhg_exec.cu",
+      "sha256": "c21f56300e14d8775e0d6f18a4752f232f2a1013cc5a9602f60eaa64d44c3cc1"
+    },
+    {
+      "path": "cuda/lp_pdhg_precision/lp_pdhg_precision.cu",
+      "sha256": "14a9c9f07411d6382d1b282a974344fbba9d33d22c5ea4f2b06a1b61cf25c786"
+    },
+    {
+      "path": "cuda/lp_pdhg_quant/lp_pdhg_quant.cu",
+      "sha256": "44738b111ed39757418e43244e4b2f69de28eca37c8b1fb2b6ed9ea6b35e5576"
+    },
+    {
+      "path": "cuda/lp_pdhg_quant_resident/lp_pdhg_quant_resident.cu",
+      "sha256": "2bd668ef1d7e5cb9cfbc8bd281189816595b9a0d2078696ea2b56a3d59af7c35"
+    },
+    {
+      "path": "cuda/lp_pdhg_refine/lp_pdhg_refine.cu",
+      "sha256": "2cfce92af5d87879ef641e2eb02ea656d169848caacce6ed5e75009e35aaf045"
+    },
+    {
+      "path": "cuda/lp_pdhg_research/lp_pdhg_research.cu",
+      "sha256": "c44805578f022658b9ae6c7af19388df0a60686fa9937128371fef5b30e17b9b"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor/fragment_layout.h",
+      "sha256": "401f35a9fa72e862b016c302355d7efd8a173b7dccbb11f39314b74199ae636e"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor/lp_pdhg_tensor.cu",
+      "sha256": "44b942080e0b2556e97922f287200ee4893c1431a6ab0a0a70a7b67255226c78"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_cost/fragment_layout.h",
+      "sha256": "401f35a9fa72e862b016c302355d7efd8a173b7dccbb11f39314b74199ae636e"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_cost/lp_pdhg_tensor_cost.cu",
+      "sha256": "31191de9c9a2efedf79d63382b52cdc9937d05f8f7ca83ba969f53467d6cb5b3"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_cost/reference_audit.h",
+      "sha256": "d00aa6c6c61099d644745dfc01b0e78bbbf3565dd359a0ed32e7b8116aa272a3"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_compact_helpers.h",
+      "sha256": "791144f4f19097be7a87929d555a6f8360b556e1a3523e211c69f96a1be1dd78"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_fast.h",
+      "sha256": "7ac6e3d3f3f745d4a7a5b7686f260df037618ccda6779886b0da95b7b2b5feda"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_guard.cu",
+      "sha256": "3e7fff5bfd995d30d8b8091750dbaa6f818ae705d0d562249263cfc5debb9cbc"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_primitives.cu",
+      "sha256": "f79d5ed4eae0d4de694a79f812dea87edea8d2dcb0dd8edbf7c87b40b5c1b0d8"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_products.cu",
+      "sha256": "ad8d35a6453608dd1e7268bc59b31dc4b76c7d3a0f67479694c6e6a455eb0822"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_reconstruct.cu",
+      "sha256": "82c20d5fb4e85df37a0cfb4ac384861135ba604369b2664a8d36f3071c876528"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_storage.h",
+      "sha256": "d021dba2675c5e07d0ddf4338855294ad18025ad6dcc8838e147861dbc1ad2fa"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_expanded/expanded_updates.cuh",
+      "sha256": "9a4fa7aadcf58ff90e2040fa78b496b4ecd073e53a63bf5e52035ac1d97b86f6"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_residual/fragment_layout.h",
+      "sha256": "401f35a9fa72e862b016c302355d7efd8a173b7dccbb11f39314b74199ae636e"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_residual/lp_pdhg_tensor_residual.cu",
+      "sha256": "ed95f7be445ca5391372a88b0255ab5e3bbf415d39a9fa6846125b1fa5b31bbc"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_warp32/fragment_layout.h",
+      "sha256": "401f35a9fa72e862b016c302355d7efd8a173b7dccbb11f39314b74199ae636e"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_warp32/lp_pdhg_tensor_cost.cu",
+      "sha256": "31191de9c9a2efedf79d63382b52cdc9937d05f8f7ca83ba969f53467d6cb5b3"
+    },
+    {
+      "path": "cuda/lp_pdhg_tensor_warp32/reference_audit.h",
+      "sha256": "000bd40902dad6530a1003af18542050d027164e2f14990770774723296fea48"
+    },
+    {
+      "path": "cuda/lp_pdhg_tuned/lp_pdhg_tuned.cu",
+      "sha256": "9791c5e90f096c8ba6921d7306d5f765641cc940c6664999297cc086cad93f57"
+    },
+    {
+      "path": "cuda/schedule_eval/README.md",
+      "sha256": "e187d6d057009122d96dd3c3214a8e3f707f926a3dbf98adff53af8de9d05559"
+    },
+    {
+      "path": "cuda/schedule_eval/schedule_eval.cu",
+      "sha256": "df6fdcf51774f4f2110ad710f974aec008573a189f13eba656cd4fa597651e93"
+    },
+    {
+      "path": "research/lp-external-baseline-buffered/.gitignore",
+      "sha256": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368"
+    },
+    {
+      "path": "research/lp-external-baseline-buffered/Cargo.lock",
+      "sha256": "968af25dc3b1e2c79e7c2370246354021f8f46f8eee7ca6a6c6ff8a491513c02"
+    },
+    {
+      "path": "research/lp-external-baseline-buffered/Cargo.toml",
+      "sha256": "dd99c1febfe34c13f87a035552c01296444abeae955d18a21b5ff10c2d4c1826"
+    },
+    {
+      "path": "research/lp-external-baseline-buffered/src/main.rs",
+      "sha256": "1d1e867ecad2097b71dafd446c185e45eabc1feaffde148c4dca19488cb2d0dd"
+    },
+    {
+      "path": "research/lp-external-baseline-buffered/src/strict.rs",
+      "sha256": "c505ea5cacf5a5d2ac6bc6f194de11c879fe7a3cd443c8a319d803b1c9ecb1bc"
+    },
+    {
+      "path": "research/lp-external-baseline/.gitignore",
+      "sha256": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368"
+    },
+    {
+      "path": "research/lp-external-baseline/Cargo.lock",
+      "sha256": "b36cf28cbd9015a6e9c6b5b881c166cf65749ef9dd0be527986f46897bc0faed"
+    },
+    {
+      "path": "research/lp-external-baseline/Cargo.toml",
+      "sha256": "5e10a3546a4417ffee14643da9df7210f4516bd31d154b0006008787d077cb49"
+    },
+    {
+      "path": "research/lp-external-baseline/src/main.rs",
+      "sha256": "04bda34b7413284cc092f85d90ecb7c9d4306475bfd6ea12c43c087b1b4a2a86"
+    },
+    {
+      "path": "research/lp-external-baseline/src/strict.rs",
+      "sha256": "c505ea5cacf5a5d2ac6bc6f194de11c879fe7a3cd443c8a319d803b1c9ecb1bc"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/Cargo.lock",
+      "sha256": "d088ae3c1a5180098745ac4d35d9b6a9345eb1f069c7a7671c7cc08d6de03913"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/Cargo.toml",
+      "sha256": "a2ecd81d59c3f9f362edd6abdf214f62e7922fdd1e85537936cc81f19ee382b2"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/Cargo.toml",
+      "sha256": "d8fdcb3fad67451ab16447889924709ccb05b727f5d4e1583b03a478d41d2d28"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/events.rs",
+      "sha256": "ee0906c18f20170f06c4ebba5e03cf4c152c149e0842dd1c0332fe193478de77"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/lib.rs",
+      "sha256": "a7954d1b1764ea92048fb99d4962a5aba66e7c2666312aefe13d2719ff0b9950"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/primary.rs",
+      "sha256": "8b5ad93af537f4d39516806c0069c44a756171b05ec7a7125af0cbcf686a2d7c"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/setup.rs",
+      "sha256": "9e2eb9915dcf8dd3ef37b53ae9279df18e3f5b38477d71306337d84b3cf24653"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/status.rs",
+      "sha256": "ea72ed4eb38e348a535b1971a87c60e0c6d503d74ef9ebf7dc468df77f23d95b"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/src/device.rs",
+      "sha256": "7ff7b77f4f360e83243e8131bcdbc25564ae3285265ad0a8fb34e8acc5850418"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/src/device_checks.rs",
+      "sha256": "b4536c46f3bb0c6021e5f2b00684a7f124fb3e5b1aff64f12ef3eef112c73b21"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/src/lib.rs",
+      "sha256": "22bc285cf74807d160a9154934c25459aa298cb158d9bf6173aabf71b7d3df44"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/src/main.rs",
+      "sha256": "3b7578957c435da0d9f1fe42909a08fbe5e11a1cf61a39bedceecd6fae7d3e7c"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/src/native.rs",
+      "sha256": "0209d1465738d60c72bb3caac6957a64c4bb53367e89fd4f775c5fae87cad4d9"
+    },
+    {
+      "path": "research/lp-tensor-expanded-device/src/solver_adapter.rs",
+      "sha256": "ef8f1de56d0377c27f33043c3fc1230ab52fdf494d34edbf8b2ec5273a31882f"
+    },
+    {
+      "path": "research/lp-tensor-expanded/Cargo.lock",
+      "sha256": "7a673cfbc939a0469630c37c428da22801d1febc5325d6509fc5b71e715a8ae5"
+    },
+    {
+      "path": "research/lp-tensor-expanded/Cargo.toml",
+      "sha256": "b6b9beb0ec0310d237e95fff08e5d0d778d146a77aa20e720659f949e28ae59d"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/bin/expanded_solver.rs",
+      "sha256": "6852ad8d0fdd39f0185180a64e141b98eb1661e6bd6b6315b87a217a6e651581"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/lib.rs",
+      "sha256": "3136e6dc7cb477ef366d9d8a397e13fbe6867c578f33949417310ae7697eb3dc"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/main.rs",
+      "sha256": "6dca680b51bcd803307c0a167f2f16e8a145c99653f6bb09acf3fefa3bc9a746"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/outward.rs",
+      "sha256": "2b2615b2e88561c3a8e2f6feefc38c298046a9ab8c007b1a2c9ebcc83d42d6b2"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/prepared.rs",
+      "sha256": "c2f23f7411bf415fe48f4e32e446349bb6e8cf407983f40fd6e9dc15482d25d3"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/solver.rs",
+      "sha256": "ff2b353227fc865facf25b73db3df6b5c69e8240f84b47812fe5876b5041781e"
+    },
+    {
+      "path": "research/lp-tensor-expanded/src/value.rs",
+      "sha256": "9965c41636b3444381d233560cf31a67496b9cce34d6a21b9ee6a2f4eaaefc3c"
+    },
+    {
+      "path": "research/lp-tensor-expanded/tests/window_recovery.rs",
+      "sha256": "a925a2de46e004bfc47237c39b49013f60df82f01f6ccfde255c1137e7e1d797"
+    },
+    {
+      "path": "schemas/README.md",
+      "sha256": "94138937af962c84f054964750edb5947e2882cdc3a3401a8fdb9226263ea200"
+    },
+    {
+      "path": "schemas/benchmark-manifest-v1.schema.json",
+      "sha256": "7727fe61b78b800cbf7d52173a99aa1bb29636dec93852d563889d6656b1bfc5"
+    },
+    {
+      "path": "schemas/conformance-record-v1.schema.json",
+      "sha256": "1378bfa7a855d09fff62e2db389350840f47598757d90745ee71566cace02320"
+    },
+    {
+      "path": "schemas/experiment-result-v1.schema.json",
+      "sha256": "1792d81b65797bb9ef6098e539dd15cf80d5fb950ad1c516b60249d0123ca7ec"
+    },
+    {
+      "path": "schemas/extension-registry-v1.schema.json",
+      "sha256": "71662b788643fc7f29c10f5458a597b45c678b4aa594057b18b738aac693ea1a"
+    },
+    {
+      "path": "schemas/lp-adaptive-cost-study-v1.schema.json",
+      "sha256": "f5474f0451a8c16f5d1165d5fdf8c700aa416cdb3fd6d681317a7fc055ce90f5"
+    },
+    {
+      "path": "schemas/lp-adaptive-cost-trial-v1.schema.json",
+      "sha256": "56768c5c9effaf30cc7875419114e0e31c79278217eb8e8b85dc190934bda3ce"
+    },
+    {
+      "path": "schemas/lp-adaptive-v1.schema.json",
+      "sha256": "951bcb6298d4e13d619a618e16ba8312c5949f2c97799e93bc0fd976e87fe3c7"
+    },
+    {
+      "path": "schemas/lp-assess-evidence-v1.schema.json",
+      "sha256": "2b7e2f5f4038a3aac31f17d310bd2c200cfee08102468a02a02d437152479b80"
+    },
+    {
+      "path": "schemas/lp-assess-request-v1.schema.json",
+      "sha256": "54b7b8118470d93fd787298ec9d326c3598b804250316e3db2a1ef416f47a2b6"
+    },
+    {
+      "path": "schemas/lp-assess-study-v1.schema.json",
+      "sha256": "0e043d60dc99f0916ef7adaf5642d1990b244bfc192fbd0c0d668fb84d12d365"
+    },
+    {
+      "path": "schemas/lp-baseline-candidate-v1.schema.json",
+      "sha256": "58794938f05614f89c6afaf1cf8d9c1c94a973dd981f8a33de1cf1aa6bab9e97"
+    },
+    {
+      "path": "schemas/lp-baseline-endpoint-v1.schema.json",
+      "sha256": "a5cfae8850ab46e4abcb224b60c3b48d2cd3b5d3c21337beda284c072bdbb7ad"
+    },
+    {
+      "path": "schemas/lp-baseline-execution-v1.schema.json",
+      "sha256": "0b6091c4d00624ecbfa11593d029be3a2a602027fbb1f8e04ddcb00710370add"
+    },
+    {
+      "path": "schemas/lp-baseline-execution-v2.schema.json",
+      "sha256": "8b3a1a2a6d6fb190cb263c8b0115eb4c299d298a8569125315198cec4bb1aa37"
+    },
+    {
+      "path": "schemas/lp-baseline-execution-v3.schema.json",
+      "sha256": "eb3a2eda4bc1ce98e2d17d9fbdee056489666c4eb8e162bebc7fb34a10996860"
+    },
+    {
+      "path": "schemas/lp-baseline-execution-v4.schema.json",
+      "sha256": "3aa397b8606e6403ab907dac5ac09ebc54a7e2fafa1606badfaffa2fa2599bd6"
+    },
+    {
+      "path": "schemas/lp-baseline-execution-v5.schema.json",
+      "sha256": "b8edf79afeded9a46a131f0a4f43c50b69cc4e00f6eaf29416fe76dbe3972b7c"
+    },
+    {
+      "path": "schemas/lp-baseline-model-v1.schema.json",
+      "sha256": "af400ddfec849a16ffdded991bddf0a995d945eb10af27958b80dfcd2d42b7dd"
+    },
+    {
+      "path": "schemas/lp-baseline-proposal-v1.schema.json",
+      "sha256": "cd75c549a14a07d6bb28f4edde950c1a681bbaa8f6fa2a70b8ddc7d88f7c1e4e"
+    },
+    {
+      "path": "schemas/lp-baseline-proposal-v2.schema.json",
+      "sha256": "ffd64a01b5b86191ee5fa18698e36de5a3184923aa632d31ab19bbe7fc077041"
+    },
+    {
+      "path": "schemas/lp-batch-endpoint-v1.schema.json",
+      "sha256": "170457ebdb630a7d347fe58a4ab8f90f8e62d70e754d71c5a9b270ae0e39a01d"
+    },
+    {
+      "path": "schemas/lp-batch-request-v1.schema.json",
+      "sha256": "4e6e329b42276aef0669718b12f148ec38ca7ddae73fbdf19eb456a4f1de44bf"
+    },
+    {
+      "path": "schemas/lp-campaign-v1.schema.json",
+      "sha256": "e3fe6459ec0096747baca3346a55ce370bf1da0e6630a09176b90769ea041ad3"
+    },
+    {
+      "path": "schemas/lp-campaign-v2.schema.json",
+      "sha256": "951622629ad1f7015e78eada20121c850a8e51a0c6ab121002773de5e02f3284"
+    },
+    {
+      "path": "schemas/lp-campaign-v3.schema.json",
+      "sha256": "9da0c1115d04cc9d6e93b661482de8b98ed40f480b8ff6fe3216f2212adf2144"
+    },
+    {
+      "path": "schemas/lp-campaign-v4.schema.json",
+      "sha256": "8c66ce84d6808691e893358a1772c8253a3fcf13a4686d3a172af9583c14f2e7"
+    },
+    {
+      "path": "schemas/lp-campaign-v5.schema.json",
+      "sha256": "e6f64da0baec9807d36a9d0ac69350c95e9a6f141d6fc19089a0c125d1111bb1"
+    },
+    {
+      "path": "schemas/lp-campaign-v6.schema.json",
+      "sha256": "8c96db9d48d7d3e9a70e5fc6e97bd0c715cfea16e7a4036e377975f8abf02277"
+    },
+    {
+      "path": "schemas/lp-compact-endpoint-v1.schema.json",
+      "sha256": "3bd27fbbab45e1f234a230f1ab64473a76823f3210f9a6413aa91aaa6a41eadc"
+    },
+    {
+      "path": "schemas/lp-convergence-study-v1.schema.json",
+      "sha256": "be464ba8f0ef78b954632052d7806e4b00ea42e9277a7120d3bb014817348f8c"
+    },
+    {
+      "path": "schemas/lp-convergence-trial-v1.schema.json",
+      "sha256": "ea1e79583948e89b78fbaec45b6538d3e517a11365c33ffa8687c32ac13aa89c"
+    },
+    {
+      "path": "schemas/lp-copt-adapter-study-v1.schema.json",
+      "sha256": "e57a24074659374c53d8fd8e8d55497afb91e2d06ac14d964fef2725ead343f7"
+    },
+    {
+      "path": "schemas/lp-copt-adapter-trial-v1.schema.json",
+      "sha256": "1b133a443fdaeff9d22050122312c2980c0e132706feb4d485cb8667241614a9"
+    },
+    {
+      "path": "schemas/lp-cost-raw-v1.schema.json",
+      "sha256": "7f201e3ea23491a23f0d128e935b4f2c22f96a0a0453d53ec1bcde6df5f092b3"
+    },
+    {
+      "path": "schemas/lp-cost-v1.schema.json",
+      "sha256": "5f0d79b7919f5d3eee3abf637110fa40045b8105ac226be14cc49b1243f7e53b"
+    },
+    {
+      "path": "schemas/lp-endpoint-v1.schema.json",
+      "sha256": "c1a33efbc0ad7ca086b23dd17d81dae706f1ce6e004e69acd63076ed246341d6"
+    },
+    {
+      "path": "schemas/lp-endpoint-v2.schema.json",
+      "sha256": "fc92eb5ac1ece1464a7638a1a407a2070a7fd7e9637755dad8bf91147af8e051"
+    },
+    {
+      "path": "schemas/lp-endpoint-v3.schema.json",
+      "sha256": "4dc2ce71587594f27d5b4f1ed9b97b7422aff4727cbd913ed9f9457550e7887d"
+    },
+    {
+      "path": "schemas/lp-endpoint-v4.schema.json",
+      "sha256": "8e6f7001edf87ed0fd074ea28d03de93f7fd137d3356bc480bbf0aa7a8d732c7"
+    },
+    {
+      "path": "schemas/lp-endpoint-v5.schema.json",
+      "sha256": "507a68639e08362ead19e0514f3a5dc7ce3f14cec99d1c44b5e8c41be99cf203"
+    },
+    {
+      "path": "schemas/lp-evidence-study-v1.schema.json",
+      "sha256": "c9e23a54aead43dac09e8446b670b424efe4e17a6eafea7c4a47dce5d79d5cd3"
+    },
+    {
+      "path": "schemas/lp-evidence-trial-v1.schema.json",
+      "sha256": "845794c7e737d457f8d911c4061885e0e21b0c6124bc02b5591d8d3ceaf20ac5"
+    },
+    {
+      "path": "schemas/lp-exec-study-v1.schema.json",
+      "sha256": "0a5600499aecc451df1d2f3e676132e27da13ac4eb36dfd19dc54eb95e926f72"
+    },
+    {
+      "path": "schemas/lp-execution-v1.schema.json",
+      "sha256": "9a0bfe1ff892b19e7b6334e1bc3b9c5e0703b5d6fa6d6bc6ca7d0269c94f986a"
+    },
+    {
+      "path": "schemas/lp-external-endpoint-v1.schema.json",
+      "sha256": "16ff07a7b1a8438246a660982e23ebf8d986e0a2f7bdebc453a637575cf64778"
+    },
+    {
+      "path": "schemas/lp-external-endpoint-v2.schema.json",
+      "sha256": "22ad1270815c997e69517a87db4d2f2d2607cf6c3ca8310fba68e09a697244fd"
+    },
+    {
+      "path": "schemas/lp-external-witness-v1.schema.json",
+      "sha256": "582d5829194cbeafdd4685654fe666039f5fc33d94879f839718f6ebf3c1116d"
+    },
+    {
+      "path": "schemas/lp-external-witness-v2.schema.json",
+      "sha256": "4d032d27304e5cb9c75a37b4cb23780818955e37828f3c2a792c2388b28311f1"
+    },
+    {
+      "path": "schemas/lp-host-study-v1.schema.json",
+      "sha256": "bd67df85c6040f46d68d57346fda99fb82b74f9358d9528d764e40572103d600"
+    },
+    {
+      "path": "schemas/lp-host-trial-v1.schema.json",
+      "sha256": "a8ffd29f629ecdb91be88e74b6c9d9f0c7b42cb9a172436a270378a6605e6cb3"
+    },
+    {
+      "path": "schemas/lp-ledger-v1.schema.json",
+      "sha256": "56d778b781f2e736dd20069a7977f5f681e39bdff2a3593da1839ef0179868bd"
+    },
+    {
+      "path": "schemas/lp-manifest-v1.schema.json",
+      "sha256": "627e85ed3dcae29bd20e54760a85353aa818687afce29711e5269eb38adf2f73"
+    },
+    {
+      "path": "schemas/lp-manifest-v2.schema.json",
+      "sha256": "aecd7cdcdafdc45e4e3ae9fb3e0896dcc6e06b04f1b5b63a7e2e9b941db97e93"
+    },
+    {
+      "path": "schemas/lp-precision-v1.schema.json",
+      "sha256": "16962f4be5ba63b3186dc0b865449a02dad2c0db6e17ee4302c521e8bcd2d1b8"
+    },
+    {
+      "path": "schemas/lp-quant-evidence-v1.schema.json",
+      "sha256": "51f5445f022c3880b0222cdebf2be337bb6df8461849ff797eb1c8cdd09cce68"
+    },
+    {
+      "path": "schemas/lp-quant-request-v1.schema.json",
+      "sha256": "2f1660c3c8b98dd319137a31bf1ffa4289ea98452ab5bb4137a36a46e05278d0"
+    },
+    {
+      "path": "schemas/lp-quant-resident-evidence-v1.schema.json",
+      "sha256": "58b5d816cee9dd22bd9dd542dd749e815d78f9639d5a5e568c8b863a41537e96"
+    },
+    {
+      "path": "schemas/lp-quant-resident-request-v1.schema.json",
+      "sha256": "342b5c74d5c1269d901cbad9dd698dcbc23be148e578ef9d891857ea8a395312"
+    },
+    {
+      "path": "schemas/lp-quant-resident-study-v1.schema.json",
+      "sha256": "cdd44dbe1a02a6d085da599fea8005a100f57f0868467d0cf3cf6518c4b677cb"
+    },
+    {
+      "path": "schemas/lp-quant-study-v1.schema.json",
+      "sha256": "95fc7bda113dd8008c06664aa1fab15c523e397afafb5162645ca58d3622d45d"
+    },
+    {
+      "path": "schemas/lp-refine-endpoint-v1.schema.json",
+      "sha256": "167e35c1ab90b9520ef93255199db6299987c1aa13797452a91d3c0621f24b83"
+    },
+    {
+      "path": "schemas/lp-refine-request-v1.schema.json",
+      "sha256": "a4606f6ca968513b1dfd96c26bab0cb820088bd0f38025ec4cd3f6fe1d650651"
+    },
+    {
+      "path": "schemas/lp-refine-study-v1.schema.json",
+      "sha256": "e6a3f310d15637182291d6686a1e30a33bdb1ebb102894b26ac370f1c1718a29"
+    },
+    {
+      "path": "schemas/lp-refine-study-v2.schema.json",
+      "sha256": "3a81353afbfcc35970e2fc44a0cbc18903bcd6554cfe91f4e08c8661bc256167"
+    },
+    {
+      "path": "schemas/lp-settings-v1.schema.json",
+      "sha256": "cdb07f5163dacc00f96240f6a045ed2ac77b1a2696c1b73de29ba4e42ded52ac"
+    },
+    {
+      "path": "schemas/lp-setup-receipt-v1.schema.json",
+      "sha256": "31edb28686c80cbf8b06cfa18b0422414f595faa67fdd2fb0e291f87e744b93a"
+    },
+    {
+      "path": "schemas/lp-setup-study-v1.schema.json",
+      "sha256": "75aa12c93a08718c4947b1b36c3112fe5a34d31fbe6f397ed812187c1866c19c"
+    },
+    {
+      "path": "schemas/lp-setup-trial-v1.schema.json",
+      "sha256": "4623a4994801406e329c370ecc6e237c80e40f5c9d2fda48912e6fba921a7425"
+    },
+    {
+      "path": "schemas/lp-tensor-cost-evidence-v1.schema.json",
+      "sha256": "968e08f83095dda7d83471c2a072f09ad996914e68f8677241130b3d98d47db8"
+    },
+    {
+      "path": "schemas/lp-tensor-cost-request-v1.schema.json",
+      "sha256": "11a14ebb9f871c375efb5ab83b94394e140a56f07bd386cc0d8827e83438a834"
+    },
+    {
+      "path": "schemas/lp-tensor-cost-study-v1.schema.json",
+      "sha256": "ddb40fd78ea0326c04694d011e819e6f5dfa897b4c60a36bb4f2dae8d2fdb2fe"
+    },
+    {
+      "path": "schemas/lp-tensor-evidence-v1.schema.json",
+      "sha256": "be740f35912245c150f0d5ebdf16afbd839f406d050ad807e3c94870231bad9d"
+    },
+    {
+      "path": "schemas/lp-tensor-request-v1.schema.json",
+      "sha256": "1388822c36b75e11f42cad81c38946b2f890f57e7c2d584ea63fd7af232983d6"
+    },
+    {
+      "path": "schemas/lp-tensor-residual-evidence-v1.schema.json",
+      "sha256": "28091f3bb6c6a4230c768b2c63824335231308cadaa046ded3ad1375d4d934a3"
+    },
+    {
+      "path": "schemas/lp-tensor-residual-request-v1.schema.json",
+      "sha256": "5679c42228a37ea5aff1a9f24eb6c68763f72b9524cd861019a39c8d32b6ba65"
+    },
+    {
+      "path": "schemas/lp-tensor-residual-study-v1.schema.json",
+      "sha256": "4063dcb6ba09aa16b2a46d22e1fc92fa94ac0ecad8ec0ccedf1e6ba11ff4639e"
+    },
+    {
+      "path": "schemas/lp-tensor-study-v1.schema.json",
+      "sha256": "a29d5b6bc94b5baeb0332c06a3ae01edc96d76e41b5b1169403639b857c34898"
+    },
+    {
+      "path": "schemas/lp-trial-v1.schema.json",
+      "sha256": "32a1ea5865ffef9ca456c6657c06a5354df455a94e1096f1539be61b6587f726"
+    },
+    {
+      "path": "schemas/lp-trial-v2.schema.json",
+      "sha256": "7202170160d40fcc55a2bfa9becb9cab3e6d6040ce16b7f41e0d183c88976616"
+    },
+    {
+      "path": "schemas/lp-trial-v3.schema.json",
+      "sha256": "f95da878fb6020245df2cf8a195c44bcc0f89260741cf3b4282195349bd6d475"
+    },
+    {
+      "path": "schemas/lp-trial-v4.schema.json",
+      "sha256": "8df25610b552f15dbcd26e6b6e8bb6960abbf7fb24df38fea7614c20ddb84d44"
+    },
+    {
+      "path": "schemas/lp-trial-v5.schema.json",
+      "sha256": "08c1ba647473fd45d5205678aa048e39d680996e955614a935b42019fbef1b30"
+    },
+    {
+      "path": "schemas/lp-trial-v6.schema.json",
+      "sha256": "192909cd23b9ce82e0f0144af1c7d567cb1c0f5ce0ef8b0a23c4102258c09a8d"
+    },
+    {
+      "path": "schemas/run-config-v1.schema.json",
+      "sha256": "c0a6e8b4406f86c6ae4e15cb23cc77408ff0135c9be54ced9645d71057e589bf"
+    },
+    {
+      "path": "schemas/run-record-v2.schema.json",
+      "sha256": "f7dc1d75ade705317dc121f941669ae7edbe81002c83f4ab7cbb8614a20c1259"
+    },
+    {
+      "path": "schemas/search-config-v3.schema.json",
+      "sha256": "3ebdcf0e17fd09d56ae67a3f2eb9bffb8967b9aa9450c4925c17ee6ba05a02c7"
+    },
+    {
+      "path": "schemas/search-record-v3.schema.json",
+      "sha256": "dd64a38481092bb9543dc4d6f7f6b36a06bff92449d12e3d0f9d228c0a222ce2"
+    },
+    {
+      "path": "schemas/solve-config-v1.schema.json",
+      "sha256": "75e98ffe5238b7c9419d24cf443f3d9d391584ec118ca169e97ba49cc9e8b0ad"
+    },
+    {
+      "path": "schemas/solve-record-v2.schema.json",
+      "sha256": "f7505d3c0c9881f255f64a606bfdfc48b79e2ecce3009ab6971071379fe6dbbd"
+    },
+    {
+      "path": "schemas/solve-record-v3.schema.json",
+      "sha256": "bde7fc7fff5bf3e0b8352c401558851367955a31823737284d311060efb93ad0"
+    },
+    {
+      "path": "schemas/solve-record-v4.schema.json",
+      "sha256": "1dcc2f47d2195135311e1f685039df40c5911f77f676eb7738f72341d8dd94ad"
+    },
+    {
+      "path": "schemas/solve-record-v5.schema.json",
+      "sha256": "9556874cc5f4a422f40ff7f4744fd0e9cb5e86bfaeb4a5b9ca121947e3933c1a"
+    },
+    {
+      "path": "tests/README.md",
+      "sha256": "0338aa60e463d782392b53a3906a207dc492f071f1a4a4dfe044e33d5426773a"
+    },
+    {
+      "path": "tests/differential/README.md",
+      "sha256": "338b28653dacf5328bf976f12894186247d2a166f07548eefab7cb8a487c76dd"
+    },
+    {
+      "path": "tests/fixtures/README.md",
+      "sha256": "c09fcdd954952c6aeb077c8a995bdf11ea2801dd99c8a926e8b41228ee30b9b0"
+    },
+    {
+      "path": "tests/fixtures/bootstrap.txt",
+      "sha256": "f9c6dd4ce78558c65387db9034b1196f7b173a04ff93b27f094ef27836c6fe3e"
+    },
+    {
+      "path": "tests/fixtures/lp-quant-resident-evidence-v1.json",
+      "sha256": "edcc1f353fb7dffc7c401ff93fc35a6b858254640471b2890005628986ee9638"
+    },
+    {
+      "path": "tests/fixtures/lp-tensor-evidence-v1.json",
+      "sha256": "97313392a05cb412781162b50b22906d09bc377c2234160b8bbbf6c14b716585"
+    },
+    {
+      "path": "tests/fixtures/lp-tensor-residual-evidence-v1.json",
+      "sha256": "1dce6da37b226885b799ea398c7874472deb5af2d061f3d09b74dca4e6e6cf4c"
+    },
+    {
+      "path": "tests/fixtures/models/degenerate.json",
+      "sha256": "732ff4de2979a10d2de8b8b8882084f48cdd474445aeba58d3c8e6862d12abda"
+    },
+    {
+      "path": "tests/fixtures/models/infeasible.json",
+      "sha256": "3ca831ecf320fb33ba09a7cdfa9e115396b9dd8356528f07bf5d2f714a55c684"
+    },
+    {
+      "path": "tests/fixtures/models/overflow-prone.json",
+      "sha256": "bd99834d02194a51ab39c0289a9d66e44a11239243c6df7e03295f9542e3afcf"
+    },
+    {
+      "path": "tests/fixtures/models/poorly-scaled.json",
+      "sha256": "02433d317600cc46c463853ad939ce0da8c1ac68fc62d7dd3a62823914f1f841"
+    },
+    {
+      "path": "tests/fixtures/models/unbounded.json",
+      "sha256": "95ddae1baaf518f5715af7fee576149275a74d246a71a74eec4dfc40875e6197"
+    },
+    {
+      "path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-experiment__Cargo.toml.source",
+      "sha256": "f3e9d296b7bc21b1eefded7f569dff9aaea075f91eb118c41a6d48d24ccddceb"
+    },
+    {
+      "path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-experiment__src__lib.rs.source",
+      "sha256": "2fdfcdf359e4fcfb45882d2cf23e9bfb1b65d1c94e47b2787da09622398e1546"
+    },
+    {
+      "path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-lp-cuda__src__lib.rs.source",
+      "sha256": "0fdbf63c6665e5c901236fd4f98a2efa13eb4e0bc7a9099c7a209d09ad0a26f4"
+    },
+    {
+      "path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-lp__Cargo.toml.source",
+      "sha256": "0b53a5fbb39ef3a0f6e82b188071e0f277640e3efe44f2b1b644cbfedb0c5ed1"
+    },
+    {
+      "path": "tests/fixtures/quant-pr-review-originals/crates__optimizer-lp__src__lib.rs.source",
+      "sha256": "b931cefc63a64372f6d5b05bc40669aad08b808a339a6d8953c372ab54f52f55"
+    },
+    {
+      "path": "tests/fixtures/quant-pr-review-originals/tests__integration__test_lp_quant_pr_review.py.source",
+      "sha256": "4b78ca3c4dd54e4b64894951839988b4e4ff9f7eea26d7a9d25124960060ff6a"
+    },
+    {
+      "path": "tests/fixtures/quant-pr-review-originals/tools__check.sh.source",
+      "sha256": "b1e87f8b3b795104cd09945bb6fb4245850ff50511082adcb6b33daa97adcab4"
+    },
+    {
+      "path": "tests/fixtures/quant-pr-review-originals/tools__validate_artifacts.py.source",
+      "sha256": "f11a0374ea6b5df15def3ec5d9e5c0e0cd748e2cbb9b6e5796b0e4e821352401"
+    },
+    {
+      "path": "tests/fixtures/tensor-prerequisite-originals/crates__optimizer-experiment__Cargo.toml.source",
+      "sha256": "c997039648adda58aef0d959f8075e99ab1de2cd002e4e0ef8a3ffeca5d67b50"
+    },
+    {
+      "path": "tests/fixtures/tensor-prerequisite-originals/crates__optimizer-experiment__src__lib.rs.source",
+      "sha256": "f077c11d1707b15c298223ac6bb1e98d7cb47f2cdcfcbffb1d24766bf2ba6446"
+    },
+    {
+      "path": "tests/fixtures/tensor-prerequisite-originals/crates__optimizer-lp-cuda__src__lib.rs.source",
+      "sha256": "dc30ca1bb70dd767d678d7467e05b3c564ded722e3465f564c158f74a2fed506"
+    },
+    {
+      "path": "tests/fixtures/tensor-prerequisite-originals/crates__optimizer-lp__src__lib.rs.source",
+      "sha256": "d5dd6e81edc23411fd81194d13939b8c41e2e79701ea77d22fdbe598a0c6ee21"
+    },
+    {
+      "path": "tests/fixtures/tensor-prerequisite-originals/tests__integration__test_lp_quant_pr_review.py.source",
+      "sha256": "47020aaa4ec873fa7442c0618580a4a28c3c65b1bea30a3b31f93759cbd6b5d7"
+    },
+    {
+      "path": "tests/fixtures/tensor-prerequisite-originals/tools__check.sh.source",
+      "sha256": "7a67add1c1133de974e1338c6da124b0ffe3f37e7c4f28fdbd1487138014370d"
+    },
+    {
+      "path": "tests/fixtures/tensor-prerequisite-originals/tools__validate_artifacts.py.source",
+      "sha256": "6d2b74a49dcb7d2c7ab0b530210b0dfda69645ef48a84b1877b5a51bddbe7887"
+    },
+    {
+      "path": "tests/integration/test_artifacts.py",
+      "sha256": "8de3df67260580135315ccad0f776d509eade96b5f0e172e7dffc10bda26faa6"
+    },
+    {
+      "path": "tests/integration/test_flow_shop_manifest.py",
+      "sha256": "7f7c2f6d2cf77191a5e5a340d0415552863900c6e65874362b33f42effac9fdc"
+    },
+    {
+      "path": "tests/integration/test_lp_adaptive.py",
+      "sha256": "dc04033388b231f92ae0b07d65de467745132198400511d9b48a93de49a1b5f1"
+    },
+    {
+      "path": "tests/integration/test_lp_adaptive_cost.py",
+      "sha256": "87d287bc682530d017b0b45755df3d71810414e065f5a312b65017d2fe2c3626"
+    },
+    {
+      "path": "tests/integration/test_lp_assess.py",
+      "sha256": "b050f79ffe6d9f24a3ab6c5827586478cee1c73d6362fd1a12d9d0077bb96110"
+    },
+    {
+      "path": "tests/integration/test_lp_baseline_contract.py",
+      "sha256": "c7cf066876793b9d33241c5e3f8282aab5bb4d5e8f4ce98165286f500cb970b1"
+    },
+    {
+      "path": "tests/integration/test_lp_baseline_fast.py",
+      "sha256": "84fc72597f9433eb477ee6b5c5cd5e677d07475201e28155bbd71990de2f3767"
+    },
+    {
+      "path": "tests/integration/test_lp_baseline_transport.py",
+      "sha256": "75b545e3571b6ee623c7a824d46b9eef4b401e66c96091b97a29069285af7aac"
+    },
+    {
+      "path": "tests/integration/test_lp_certification_oracle.py",
+      "sha256": "a09f0e63a6bf91d32fd61b62425c9f23bbc4df9bc3ae9d81e7c51d86c7e02bd9"
+    },
+    {
+      "path": "tests/integration/test_lp_convergence.py",
+      "sha256": "7db7d310c27ab0a46bd275da1d87cf4dd04132d85d825c0b0b454e9d87cd434c"
+    },
+    {
+      "path": "tests/integration/test_lp_copt_adapter.py",
+      "sha256": "418e8c9eecda0fdd3c329bb170a6958b3af24513d8eb0fc290ea5c2ee3ff0521"
+    },
+    {
+      "path": "tests/integration/test_lp_copt_comparison.py",
+      "sha256": "c77e2cf83d08281153fdc9299190d657047d5faa869c9cc00d2306a4e14967b2"
+    },
+    {
+      "path": "tests/integration/test_lp_cpu_admission.py",
+      "sha256": "4fcbe0d3f8b849d5a2c923aecb30b4fbebe3687365211635fb4132a401bb96fa"
+    },
+    {
+      "path": "tests/integration/test_lp_evidence.py",
+      "sha256": "c8c95327a678bb6842ee81fc145fc6d6ec5d08ad7df1a7c8bca1b714dc3de874"
+    },
+    {
+      "path": "tests/integration/test_lp_exec.py",
+      "sha256": "e90f3eba2b34629decca6ce14d085da4555d363dcd01910c9a1cdc9302c7eb17"
+    },
+    {
+      "path": "tests/integration/test_lp_exec_review.py",
+      "sha256": "a214fdd150de123574d26938ca2f4f5bfd888e6f5cbcd3940dc24bb6d1c0d5cb"
+    },
+    {
+      "path": "tests/integration/test_lp_expansion.py",
+      "sha256": "b507e1ee6261a8d32b514e6c2d2bec8887d66e2766a0bd2b34f4ba0b3088560a"
+    },
+    {
+      "path": "tests/integration/test_lp_expansion_review.py",
+      "sha256": "61e8fa92425fd0a82f177dd040d2aeea93fe197fbddfa04fdf7acb0d6e667cd0"
+    },
+    {
+      "path": "tests/integration/test_lp_host.py",
+      "sha256": "4bbf50c8fec906608910ac42b4b4bd77732f2364b108d8e9c66da804f6c39cc6"
+    },
+    {
+      "path": "tests/integration/test_lp_matched.py",
+      "sha256": "07f355a20d70496fe6993f55ba546e9cd9893a2d49c4e83fb8a77090a9654af8"
+    },
+    {
+      "path": "tests/integration/test_lp_overheads.py",
+      "sha256": "0a79c0657866f7170918926aa1ed2f595801bfd2b394112e81fc2128e0007f42"
+    },
+    {
+      "path": "tests/integration/test_lp_precision.py",
+      "sha256": "51c54c51147cc8efe9a55c8487b32d35a150b0307e87d09db161d413102dcb64"
+    },
+    {
+      "path": "tests/integration/test_lp_precision_diagnosis.py",
+      "sha256": "5b056e1ed16d41636a0803c12be21b5c7b617c080d76b832c9037f5dfd9720b6"
+    },
+    {
+      "path": "tests/integration/test_lp_quant.py",
+      "sha256": "8fd75dd24620869ba0512d3e8b4f2e3d868da40ef3b225d40c8ada0d938119fd"
+    },
+    {
+      "path": "tests/integration/test_lp_quant_resident.py",
+      "sha256": "443a97447e614e9b2640395cdd44ea817a34da93b81be8a73b7fd0fb17df805f"
+    },
+    {
+      "path": "tests/integration/test_lp_refine.py",
+      "sha256": "fbb6a179f6e937a9f971f647c441fab8890d3b775d324f273c8a4f8d33b8d400"
+    },
+    {
+      "path": "tests/integration/test_lp_refine_evidence_oracle.py",
+      "sha256": "c11c1c89b5a5f8b241fae5a8917bf1902609346af129b250d371cfe13d9dedae"
+    },
+    {
+      "path": "tests/integration/test_lp_refine_review.py",
+      "sha256": "02ddc5578817e11c61e6c9805d71dfa12574caccd284fa6939a48d6d979d94d5"
+    },
+    {
+      "path": "tests/integration/test_lp_research.py",
+      "sha256": "9044c9fe9fe023a98202637900191d955fe4584e2ee8ef9e805c5983efd65b74"
+    },
+    {
+      "path": "tests/integration/test_lp_setup.py",
+      "sha256": "45926300187000171f5536e13d88a396ffb0775f3658cbcb6bef9784ff21f135"
+    },
+    {
+      "path": "tests/integration/test_lp_state.py",
+      "sha256": "5effa2e6be424c70f523298476421561de1b6f84a9aeecda3a52c7c5981dc288"
+    },
+    {
+      "path": "tests/integration/test_lp_state_device.py",
+      "sha256": "b26df366964283464a4b5604812644d89d4ee6bc01ecc653472e92f3324440b7"
+    },
+    {
+      "path": "tests/integration/test_lp_state_review.py",
+      "sha256": "11356549946d1240292e79414f5ca18805a528d908f540dc9dec7d8138d3d2df"
+    },
+    {
+      "path": "tests/integration/test_lp_study.py",
+      "sha256": "5f3c1b480f4cdb8d522cd2b3e46012dd54c1f96ef7ae9e483162dce19b614fba"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor.py",
+      "sha256": "f2e56013d29215c82dd513309ac899038506227bc903adde9a41f60685d1640c"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor_cost_failure_report.py",
+      "sha256": "8f93c037cc49731e5f5b1f75b7d11d2b2d564f70d37f916dad88b420c5c405d6"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor_cost_preflight.py",
+      "sha256": "d8af14760092f0c3a3a10d21c71b67deed97b079fad44a0716307865d78b6358"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor_cost_study.py",
+      "sha256": "4035617c8cf5da64f46cbdc3fe29a2747afe2c3e7a731aa6082ed647d6769be4"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor_expanded_cpu.py",
+      "sha256": "e5e0dba6e3d9d522ef2f8c59bdd45dea872f8365e1450e045f2cfd1e0d88df07"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor_latency_diagnosis.py",
+      "sha256": "731192d9cc72f5703f4a4436124cbbace6b167f7f8e834e0e5761e39418294ed"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor_residual.py",
+      "sha256": "79b4ffd436ac5646a77bafa4c38ef9e1cbb9006c2c550b186d1e5cebce75ae18"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor_warp32_compile.py",
+      "sha256": "81ed085c6d068ebba6632296ae57fff5ad91af76544597fb8cf7d32f582e87af"
+    },
+    {
+      "path": "tests/integration/test_lp_throughput.py",
+      "sha256": "f18769db0a21d14af5c2bfba81ce8a1f24640538a83070544bd057d34d78e2ea"
+    },
+    {
+      "path": "tests/integration/test_lp_tuned.py",
+      "sha256": "c245a61fc6d962c223d8e2ee77c0ee4791f260db0f24f2d17a2b858cfba278a7"
+    },
+    {
+      "path": "tests/integration/test_registry.py",
+      "sha256": "be8312d44440ea2e640ff01ddb699965c7104eef17477ad1ea3bea50def6119d"
+    },
+    {
+      "path": "tests/integration/test_run_records.py",
+      "sha256": "666c6d6dd023993cb08958b820eedef074d8a185daef65fabdf63d53cd12d87c"
+    },
+    {
+      "path": "tests/integration/test_solve_artifacts.py",
+      "sha256": "fd27b7ea53a7c5fb77536e695e81d2a312feb17d90fcfb6c3305d12001a8721d"
+    },
+    {
+      "path": "tests/regression/README.md",
+      "sha256": "4359419ed14983340ea9055bda77fbab0123cc93b7bb237070bfc1e3450c5d9c"
+    },
+    {
+      "path": "tests/regression/infinite-bound-extra-field.json",
+      "sha256": "2c61f4453f05cea9380d0d1428ab6f1f50ab558e8204a19d9e30a5c3cb05c0a0"
+    },
+    {
+      "path": "tests/regression/lp-certification-oracle.json",
+      "sha256": "366552bf24a760dd765b9e84e0f8237ff5e2a46905c397a4c30e63c06b5ba65a"
+    },
+    {
+      "path": "tests/regression/lp-exec-oracle.json",
+      "sha256": "94accfa154c399bf687adfcdb0954b62d7abf42f0e7f9ca3d3166a600a04a4a2"
+    },
+    {
+      "path": "tests/regression/lp-expansion-oracle-v1.json",
+      "sha256": "0a7203554c7f15ccded04d5cac00504119851611205c4566969468848bd08760"
+    },
+    {
+      "path": "tests/regression/lp-refine-oracle.json",
+      "sha256": "ed83c38a962da0b276f1ab82e287b12887a200d20a9a2e8801553ffe2be662a1"
+    },
+    {
+      "path": "tests/regression/lp-state-admission-v1.json",
+      "sha256": "624048e320d5c4cca9a9b53fff236f5fb1220f4583e160e3489c1fd47829e822"
+    },
+    {
+      "path": "tests/regression/lp-state-review-v1.json",
+      "sha256": "74ec309441a25c55ef5b9dc88bec3140812079caad81766544ffbc105f99795f"
+    },
+    {
+      "path": "tests/regression/lp-warp32-oracle.json",
+      "sha256": "9550407693678b6f0521cd4a1110d2b7f9cc82b094daf5dc7cffb90fe903c16e"
+    },
+    {
+      "path": "tests/regression/object-enum-model.json",
+      "sha256": "3356883d39f088b6e691482fcd3833c20203ffd59e1d8a36b2ebc980b35b1103"
+    },
+    {
+      "path": "tests/regression/positional-model.json",
+      "sha256": "2f4ffc34997f24e2898a9793145e0dead5131564e1307edd0592cab8cf4cd618"
+    },
+    {
+      "path": "tools/analyze_lp_diagnosis.py",
+      "sha256": "8e0dfa530ab8ceec7ce082f826c847fd82dea728b489a6c58e18259832dbc2f3"
+    },
+    {
+      "path": "tools/analyze_lp_precision_diagnosis.py",
+      "sha256": "f2df140bf9647b406ba071f49c715a48cfb813fbe2a17fbe498d9df0bdefd420"
+    },
+    {
+      "path": "tools/analyze_lp_research.py",
+      "sha256": "4bef4fe847341163fc3ceaf24b47f44695415a0d7450461c12829cc265903955"
+    },
+    {
+      "path": "tools/analyze_lp_rounding.py",
+      "sha256": "48eaa6772dd0f08829d98ef87104ef5cbfc2bc27192a4c23988e9bb36e9ea3be"
+    },
+    {
+      "path": "tools/analyze_lp_throughput.py",
+      "sha256": "85bfa5411be6bfb5456ee0857a46b29c45551086a531d2911186a906c4a01f30"
+    },
+    {
+      "path": "tools/analyze_lp_throughput_controls.py",
+      "sha256": "9413246264e66b6361f58ec84206118df24ad1c1ecf4b2a3831fc04f0ee226f4"
+    },
+    {
+      "path": "tools/benchmark_lp.py",
+      "sha256": "b12e50d75182a51dac05e445f013fa23381f020d8e86267420b59de2785e44fb"
+    },
+    {
+      "path": "tools/benchmark_lp_adaptive.py",
+      "sha256": "ced7e3491d86f846a2385261ec9c7d83f637083e04df3f9d03c5b4686b0dd0e4"
+    },
+    {
+      "path": "tools/benchmark_lp_adaptive_cost.py",
+      "sha256": "64bd2b6e5de9da02a1a3b4b3f3dfe6c97b2e390f23e3ca8debb7b18af53502a0"
+    },
+    {
+      "path": "tools/benchmark_lp_assess.py",
+      "sha256": "9f109ee8b37591186d8df452c0ebe58140fb45567294ec2e10270e19468217a4"
+    },
+    {
+      "path": "tools/benchmark_lp_batch_verify.py",
+      "sha256": "19a0419e1e634d029a1d1c43e23c79f96e621b6cc0afefc9f0723d0ec12f2a67"
+    },
+    {
+      "path": "tools/benchmark_lp_convergence.py",
+      "sha256": "3ec55cb26e5c581ccce27ccd383e69eda94affd4aa99feb85bb5f09a4b96429e"
+    },
+    {
+      "path": "tools/benchmark_lp_copt.py",
+      "sha256": "ef57edb09d40177b51b0dc2aedd669c73f73f9dab3195d70cae0ef7ce0d6e75c"
+    },
+    {
+      "path": "tools/benchmark_lp_copt_adapter.py",
+      "sha256": "de2c325652ab69893469451dacb34a06a8b6a5babbedc24ae5bc54d3fa1db137"
+    },
+    {
+      "path": "tools/benchmark_lp_evidence.py",
+      "sha256": "9f77c81865ff34390257fed4d53733bb3e6a1d77efc9787c2d143bbd59d0aa6c"
+    },
+    {
+      "path": "tools/benchmark_lp_exec.py",
+      "sha256": "c6fd7ed23f505e4f589d93591cf25af8d2ddad4cba9ad81fd1b2990954a2585d"
+    },
+    {
+      "path": "tools/benchmark_lp_host.py",
+      "sha256": "4d18c4f72d755eb7cb290094bd819ad90167f98e85c77c65a3c82f19c52af6b5"
+    },
+    {
+      "path": "tools/benchmark_lp_matched.py",
+      "sha256": "f30cf249519bc4073e1830d775ead60a6ff7ff3ed13594aebf2c4f393a1f34c2"
+    },
+    {
+      "path": "tools/benchmark_lp_precision.py",
+      "sha256": "7bcc4af39a17110bc374ac76a703bfaaa5eeaf1f04695a88305f7732625ea996"
+    },
+    {
+      "path": "tools/benchmark_lp_quant.py",
+      "sha256": "d327e018bb80b5d754d815012954bcb5a7e1ac5f4576cb1751870ce459d5b1a6"
+    },
+    {
+      "path": "tools/benchmark_lp_quant_resident.py",
+      "sha256": "1168ef9dc68ec93b427175d85e205ad0eeb882c8ba16940faab56cbcd5976c5b"
+    },
+    {
+      "path": "tools/benchmark_lp_refine.py",
+      "sha256": "30e93f37226709674ddef1a6f89a2a9bc38f8d04647aa8eb99209fa2740f433a"
+    },
+    {
+      "path": "tools/benchmark_lp_research.py",
+      "sha256": "b3fbca58e5361ec822b9e9e08be733732e42e77b5167af31337a5702cffdd060"
+    },
+    {
+      "path": "tools/benchmark_lp_setup.py",
+      "sha256": "858bcb469cda8605c09f623c211fc1dd351c2148c0e12a0520b6239d88031653"
+    },
+    {
+      "path": "tools/benchmark_lp_tensor.py",
+      "sha256": "003b70b0d86fd46a19faba78b8faf6337c135f679ad8cc27296fe03697be80ab"
+    },
+    {
+      "path": "tools/benchmark_lp_tensor_cost.py",
+      "sha256": "5fd702e5ea587210135199650f5b458b5047249334393e125190e0909b37c09e"
+    },
+    {
+      "path": "tools/benchmark_lp_tensor_residual.py",
+      "sha256": "36cd97749e55a39f75c2c5c2943e0b2f93dbf11fd26f81da989287b016827154"
+    },
+    {
+      "path": "tools/benchmark_lp_tensor_warp32.py",
+      "sha256": "cc17179bd8f672dfd7272874f38181276cc9555c8c96379ab6cb1e76c1565ef6"
+    },
+    {
+      "path": "tools/benchmark_lp_throughput.py",
+      "sha256": "afb596d99eec40f01e2c9d87399ecf12c2d323a1eeaf5aedaa45d487c1e7356d"
+    },
+    {
+      "path": "tools/benchmark_lp_tuned.py",
+      "sha256": "5e082f6fe7f55b79e64619ce1c68224d57a362f8e4d90596894e63316a8fca0a"
+    },
+    {
+      "path": "tools/benchmark_search.py",
+      "sha256": "cb8a42dae317b33c7928822a52eeff4817ebb956bfa6ccf19bd8e321aa5c19a7"
+    },
+    {
+      "path": "tools/benchmark_smoke.py",
+      "sha256": "9a386c6e141920049a395af8cec51560dea7cdd08efe89ab0119e09fbafcf04b"
+    },
+    {
+      "path": "tools/build_docs.py",
+      "sha256": "9325c688f69b5f7c429ec1475f86ee89e7725cb563b32dc2737b333547a1934d"
+    },
+    {
+      "path": "tools/check.sh",
+      "sha256": "c6e4bb977ccd3e1b45a0e3514d5340725e64c659733ebfa6949d59f97219bd71"
+    },
+    {
+      "path": "tools/check_lp_exec_instructions.py",
+      "sha256": "fa12bf88be614c9de84fc65a87ca1b3aa67f34f6d1ef15a350f050bae697b75c"
+    },
+    {
+      "path": "tools/check_lp_host_input.py",
+      "sha256": "9a97e0d158736a774f129ae4746d38752a381cc948d128ffd6bd0e706d4e0fe6"
+    },
+    {
+      "path": "tools/check_lp_precision_design.py",
+      "sha256": "f2cb71382e4b64682d82ea633ac22c404b279a4a22b74a493e9e4aeede050b89"
+    },
+    {
+      "path": "tools/cuopt-requirements-cu13.lock",
+      "sha256": "310dd66642eb4b862d7841ba9669a0972d4fdc7e7baa6739eb149285ea42ecfd"
+    },
+    {
+      "path": "tools/diagnose_lp.py",
+      "sha256": "1e218c8784359db85398c844010e123132fbf43d19efa69b83eb3ed1f674aa99"
+    },
+    {
+      "path": "tools/diagnose_lp_precision.py",
+      "sha256": "c4c3d44264b92534ef00458a7aca2822a25e54fe4629698399c6a34242a32e59"
+    },
+    {
+      "path": "tools/diagnose_lp_tensor_latency.py",
+      "sha256": "eda4fb09ac3b69ad2add894186e684d01c3b33a8bd124e1fc1b5e3ef51ae1c63"
+    },
+    {
+      "path": "tools/diagnostics/lp_state_compact_host.cpp",
+      "sha256": "c9759651c757b1977665b052a8ac678d8fcb867a602c1681f9c32e1374ed4d29"
+    },
+    {
+      "path": "tools/diagnostics/lp_state_compact_probe.cu",
+      "sha256": "f0a9e113233f17168c895e68937fabc36f6d5706f61306b4db40f93655e4a8da"
+    },
+    {
+      "path": "tools/diagnostics/lp_state_device_probe.cu",
+      "sha256": "353f55fc275c476d34896e75f39ef3b1d519ebbc7a8bec82e0b2fe7974996760"
+    },
+    {
+      "path": "tools/diagnostics/lp_state_integer_host.cpp",
+      "sha256": "4c3fa1bb587819931d4739c22e0e452cafe37b545e83016e6f394572354d5ec2"
+    },
+    {
+      "path": "tools/diagnostics/lp_state_integer_probe.cu",
+      "sha256": "ae7eedf7e53d2a6e5b5ec70333a7a1cd72146431dde9ca676f9e8236644eb3b7"
+    },
+    {
+      "path": "tools/diagnostics/lp_tensor_expanded_host.cpp",
+      "sha256": "e37f943bc2b7cca55b6b5903ccd3ecb8362823b6fc66f551800c7fe7d6cd6e2d"
+    },
+    {
+      "path": "tools/diagnostics/lp_tensor_expanded_host_v2.cpp",
+      "sha256": "b6b86f152b89c28d150d6a48470570b5b87e5ba4f88b4126e9a2910a9411d504"
+    },
+    {
+      "path": "tools/export_lp_convergence.py",
+      "sha256": "523c797e8a31650dc3b1cec2343f6d3b66ddd66c940642645ec698d8a21649f9"
+    },
+    {
+      "path": "tools/export_lp_copt.py",
+      "sha256": "4c21d67454086b7b4b7d0218b88c980876b874b3a83d9596243c8ed56dc48764"
+    },
+    {
+      "path": "tools/export_lp_copt_adapter.py",
+      "sha256": "55bc403898c3ecf756e5f84e3ab968cffd020cdd16c8c3139458aeb0a46df687"
+    },
+    {
+      "path": "tools/export_lp_setup.py",
+      "sha256": "1c21002c62b9929793beccdafb1c729c69ce460038e5859032675cdaec8130cc"
+    },
+    {
+      "path": "tools/gpu_check.sh",
+      "sha256": "ff801d70fc60771c2b855c6bcd6b0d9a442cc743e9af934acffe3ad651b4b742"
+    },
+    {
+      "path": "tools/gpu_job.sh",
+      "sha256": "db7050c036d19162d144cec26a1b794814ee97a9559198c2a93c42a20880e769"
+    },
+    {
+      "path": "tools/lp-baseline-validator-requirements.lock",
+      "sha256": "ccab0141974aaf3dcdbd3576186b5d65249f60b31749009cd24c4ef3b8050c35"
+    },
+    {
+      "path": "tools/lp_activity.py",
+      "sha256": "a2b31495057f69f7a2453c730720349ad60b071ece488cdffd1ab2c915b1fa3c"
+    },
+    {
+      "path": "tools/lp_adaptive_budget.py",
+      "sha256": "3e7693f4d119d1fb299efa641665645eaf96047c8e5a17cb4563f1bc299ae397"
+    },
+    {
+      "path": "tools/lp_adaptive_cli_check.py",
+      "sha256": "065d8d703908c32bfc980938b3e6a5dee280463056a4a6e9ad995897cc9e610b"
+    },
+    {
+      "path": "tools/lp_adaptive_cost_budget.py",
+      "sha256": "8d3f22db2a5732b92ca413c3c47c4097ae01380b13a7e7273dc20775af61ec53"
+    },
+    {
+      "path": "tools/lp_adaptive_cost_gpu_check.py",
+      "sha256": "1ee1fda03cd7306b8e76b83b9d8900784244bfea47adc158c9aafb983def4365"
+    },
+    {
+      "path": "tools/lp_adaptive_gpu_check.sh",
+      "sha256": "2f0237ab228fb949be7e4972a58865a8d17e4b4ee5402b805c438890e9772bb7"
+    },
+    {
+      "path": "tools/lp_assess_accept.py",
+      "sha256": "ab0d979a0c3ad4d3aadc1b2045c81dcdd88f48763aa1f076a1d0feeeac09e19b"
+    },
+    {
+      "path": "tools/lp_assess_admission.py",
+      "sha256": "af99759c8af926f4939f7db4be7f8113eb04b52eb44fa4e6bcea512b94573eef"
+    },
+    {
+      "path": "tools/lp_assess_budget.py",
+      "sha256": "885ebbacfd87db791334cc307e1199e77242b37b0bad5dd1375da52aba1e3675"
+    },
+    {
+      "path": "tools/lp_assess_build.py",
+      "sha256": "25e8e4fa77638dd81b497cca797c1b0f2ffac94a5b8f65305cbd9c0d6c38c3ad"
+    },
+    {
+      "path": "tools/lp_assess_gpu_check.sh",
+      "sha256": "b635be0fb28ec3c74dd4a9cc6a77744cf205daa5c27212db3f5111778f88e28f"
+    },
+    {
+      "path": "tools/lp_assess_pr_review.py",
+      "sha256": "cf30313fcc6094ad0932ea425d5c995923f342b8ab149c9221c49a9e2b4cab51"
+    },
+    {
+      "path": "tools/lp_assess_resources.py",
+      "sha256": "aa3709b4223b1dfb6ddb664679992dfaf39a1f1c3aabb04b978ea1185e6727af"
+    },
+    {
+      "path": "tools/lp_assess_review.py",
+      "sha256": "5ab5b2509644465c558213a2bc796c456600e126d831b12e88a1d49f27e18be0"
+    },
+    {
+      "path": "tools/lp_baseline_adapters.py",
+      "sha256": "427beed84aa564c78bfbef42665b68a9d9e8f6dd04a5b3e2265610c23a6b6b49"
+    },
+    {
+      "path": "tools/lp_baseline_adapters_v2.py",
+      "sha256": "7b28de195a3b4ab8d73c1454f088b546cccd585e721d86c6728af0706e297580"
+    },
+    {
+      "path": "tools/lp_baseline_adapters_v3.py",
+      "sha256": "0cc96778b70788c60b5709ce0cb2b8e4fa9bf09a53fe085e8bca7591ee0448f3"
+    },
+    {
+      "path": "tools/lp_baseline_adapters_v5.py",
+      "sha256": "455dfd7fabf3298e1600a5991cc91d0e8a48b27cc144aff90284bc953d59e34d"
+    },
+    {
+      "path": "tools/lp_baseline_budget.py",
+      "sha256": "5b74a902ac1af6e45f7e4f1e1dfd357e8a8269c66ba8e7d521b2b398b0ddee27"
+    },
+    {
+      "path": "tools/lp_baseline_budget_v2.py",
+      "sha256": "9e2d1b5b0a04058d580900be76741ac1bcc1fc52443d865a05c4f7d8afde6ff2"
+    },
+    {
+      "path": "tools/lp_baseline_budget_v3.py",
+      "sha256": "62b59fbd2dd6c6d6ffd60169c3df8fb8e10e49bf443bc874f02da7a97fa9a037"
+    },
+    {
+      "path": "tools/lp_baseline_budget_v4.py",
+      "sha256": "790667aaf3c446fe78e27771708547a1868c18a75fd1c9bb928a80353cfe024a"
+    },
+    {
+      "path": "tools/lp_baseline_budget_v5.py",
+      "sha256": "e9af9b71d3c3e263fd54c22e0f245b4cc10e8d65cee5feed1d9848678e2ee662"
+    },
+    {
+      "path": "tools/lp_baseline_buffered_build.py",
+      "sha256": "91d76e9f29f286dba12cb0ad610abf83c96a03152f8d504e9f4cc70e7b2210dd"
+    },
+    {
+      "path": "tools/lp_baseline_common.py",
+      "sha256": "661fc8b7058be2b516b137e0d6b4f30953de7a79d70594ed405583ffdf6ea83b"
+    },
+    {
+      "path": "tools/lp_baseline_common_v2.py",
+      "sha256": "6d36122b8228d06151fb8f0aa5fc9ad9baed548fdfb7a1d8fb277688fc022d12"
+    },
+    {
+      "path": "tools/lp_baseline_common_v3.py",
+      "sha256": "8c2075882a84abc9d11159143c651e7d8cdc27caf8f71f0ee5e8b9a3678ef785"
+    },
+    {
+      "path": "tools/lp_baseline_common_v4.py",
+      "sha256": "8058e5b6248f1465884957850e1e6596b22891d34735345f5eb9ee8b6727ce34"
+    },
+    {
+      "path": "tools/lp_baseline_common_v5.py",
+      "sha256": "1eb179432c4da804609381897a0d054a516956a0bdc46065ba6da843211d911e"
+    },
+    {
+      "path": "tools/lp_baseline_contract.py",
+      "sha256": "990177c92ccfdc8f44c2632429b25eae69a89e22981091cf85d4ae825941bd6b"
+    },
+    {
+      "path": "tools/lp_baseline_fast.py",
+      "sha256": "0ae819d21719974b20f95ce024d144592ad61dc4e3b1ed0f6aa3f3392a61cf04"
+    },
+    {
+      "path": "tools/lp_baseline_fast_preflight.py",
+      "sha256": "5eeb807434d662a944492a7bd12a42d9379b2e702ec718b5a6228ccc8b9f98ff"
+    },
+    {
+      "path": "tools/lp_baseline_hardware.py",
+      "sha256": "b930af73ed1f4f433e37178c2ab7f9e11da09667d73c4aef5a853db4a59f7adc"
+    },
+    {
+      "path": "tools/lp_baseline_hardware_v2.py",
+      "sha256": "182a761703dd153a18f25c835e4cbd96d1509fdb3fa8173260390560584823a1"
+    },
+    {
+      "path": "tools/lp_baseline_hardware_v3.py",
+      "sha256": "10a46ab046e031ba56f6882607a4937f0c2fecdccec50cf1072e58f08d2b7ffa"
+    },
+    {
+      "path": "tools/lp_baseline_native_api_check.py",
+      "sha256": "d9dd1d3e68d4949e70263138486629b24b49cc174c1f6038ebeb46b8da13b6f0"
+    },
+    {
+      "path": "tools/lp_baseline_native_policy.py",
+      "sha256": "85feabeed0d368fe89630b7d8317df40849a2a1ecd73f22e94cd481f86675334"
+    },
+    {
+      "path": "tools/lp_baseline_study.py",
+      "sha256": "cfa8faba8baad017cc961f31efcffbccf5d990c2a3e8d80d1fa89887ca4d16ae"
+    },
+    {
+      "path": "tools/lp_baseline_study_v2.py",
+      "sha256": "dde5be5f617c375b3c5045113d1e1a833c50d70eecd996dd10cf54e49bc5aca2"
+    },
+    {
+      "path": "tools/lp_baseline_study_v3.py",
+      "sha256": "c4c8928beb41eeaa7bb4b8fc2028c542091682f2b9e9d624a25e0ac47be3dfb3"
+    },
+    {
+      "path": "tools/lp_baseline_study_v4.py",
+      "sha256": "537a2d62f390daf44c8badd2a014ea5b1681608c8b37e03292ec183038630de3"
+    },
+    {
+      "path": "tools/lp_baseline_study_v5.py",
+      "sha256": "56bedf19e8a995800b955dfa949bdb49bfeccc8c5e2563216047a8d3d9dfc785"
+    },
+    {
+      "path": "tools/lp_baseline_transport.py",
+      "sha256": "94b4d73aef067cb0d2a2fcf3d4ef46533139a362ed5973d2d5f68856691e0fe6"
+    },
+    {
+      "path": "tools/lp_baseline_worker.py",
+      "sha256": "101d1ed598f7ac2c2f9b5b35129aa4deadb7e75475d9395d571de61611cbc9be"
+    },
+    {
+      "path": "tools/lp_baseline_worker_v2.py",
+      "sha256": "2e95019d2b9bc6cce7240520d33d926ab530b9ad2acf222039f3f9b77c32a0d4"
+    },
+    {
+      "path": "tools/lp_baseline_worker_v3.py",
+      "sha256": "de4ca2f31b9321ff27683492b776e5696f5e6a2d943112571ae5b0ec21f075c1"
+    },
+    {
+      "path": "tools/lp_baseline_worker_v4.py",
+      "sha256": "f49f28783717a8f19d67554ad8e0ad6e5cc7239d172be5fcf4ce629b75c58429"
+    },
+    {
+      "path": "tools/lp_baseline_worker_v5.py",
+      "sha256": "f474ded36d83d404131376b87d743e239972e02b9c21be9f600e54769061f8ad"
+    },
+    {
+      "path": "tools/lp_certification_oracle.py",
+      "sha256": "b16c93628cb563f8b3dcf00befee04b83f778e68dd609f58517317330c2cd30c"
+    },
+    {
+      "path": "tools/lp_convergence_accept.py",
+      "sha256": "7867096a0f4cb54ad22244194cc3518f3a8410b20671a674a4a39166db0fedd3"
+    },
+    {
+      "path": "tools/lp_convergence_budget.py",
+      "sha256": "84be86ad287e255a7cb6331a9d75d1ee7a5f3663ac9c89135ff02e7577cf4ee6"
+    },
+    {
+      "path": "tools/lp_convergence_cpu.py",
+      "sha256": "7afbd791db0aff09f8f6b9f3a3a9f424d4f5aa088136e01dc45f647d5eb40a27"
+    },
+    {
+      "path": "tools/lp_copt.py",
+      "sha256": "9091a1e29dced4dfd04b237155a8f785afa00f69c79a4c626a7aa614002ff1b4"
+    },
+    {
+      "path": "tools/lp_copt_accept.py",
+      "sha256": "d8df3d1210a23e91a3046e11af5426b2eca5b637a87cfb30420cce2977c366b4"
+    },
+    {
+      "path": "tools/lp_copt_adapter_accept.py",
+      "sha256": "fec2c00da06ff07442eeb987acb6d5541713afb7e25a5c71f354acf8c5ab9667"
+    },
+    {
+      "path": "tools/lp_copt_adapter_budget.py",
+      "sha256": "9fb33ce7b7258b05f24974fcbf261940f892ada11e71c65828998936723ff62e"
+    },
+    {
+      "path": "tools/lp_copt_budget.py",
+      "sha256": "1bd2451dbe22d549abea4ca2aa84d81ddf23364be1c88a9fa6aea063059e7228"
+    },
+    {
+      "path": "tools/lp_copt_bulk.py",
+      "sha256": "8be1982ee54a1b6e8ad1a47bfd3f0e461b0c82f3c42ecfdddf82ff94bd26600a"
+    },
+    {
+      "path": "tools/lp_copt_comparison.py",
+      "sha256": "674db2f0ac2096bd36de618805d49362216cd31612bd1c29d6805388f391bc2a"
+    },
+    {
+      "path": "tools/lp_copt_matrix.py",
+      "sha256": "fe09b54969384c67ec8edd118dfbdc42a8b7b8cfe401f768276d9b490096bceb"
+    },
+    {
+      "path": "tools/lp_copt_trace.py",
+      "sha256": "7c5d237022b2823afad385706d017c822005b391be6b2e0df97b3d64aea7d9d2"
+    },
+    {
+      "path": "tools/lp_copt_trace_recover.py",
+      "sha256": "5680a1c0737cc8a5ea0a6b0a062691a394dee6b1afd3f37fd5c8bca063f13733"
+    },
+    {
+      "path": "tools/lp_cost.py",
+      "sha256": "35e240b4a564d1a02748a5c165757df15c3062bf3fe045e875f7b4ccb865e4aa"
+    },
+    {
+      "path": "tools/lp_cpu_admission.py",
+      "sha256": "523184f432ff32fdf1150b79bed4aefe3f03872464e736d466da39095564263a"
+    },
+    {
+      "path": "tools/lp_cpu_bootstrap.py",
+      "sha256": "7558f5995dafa5f17445fd789da89c833580652ef874c282381f591f551b0487"
+    },
+    {
+      "path": "tools/lp_csr_export.py",
+      "sha256": "1f2191304ac510a0902a34576a637c4956902bc3512263d9a8f4f1777852884d"
+    },
+    {
+      "path": "tools/lp_evidence_budget.py",
+      "sha256": "88f02738a92053ba990676ad322fba9b07646621b4dd1c4dacc5b59c7f09c6e1"
+    },
+    {
+      "path": "tools/lp_evidence_cpu.py",
+      "sha256": "bbdafae53aa0121a9d1f41eaec5325faea7e73c0c13bac9cb5cc6efe8e6f6808"
+    },
+    {
+      "path": "tools/lp_evidence_gpu_check.py",
+      "sha256": "0b57b1f7a130fc8022292382a658c9c521b8313ac11f14ba27c45ba03ee3ac94"
+    },
+    {
+      "path": "tools/lp_exec_accept.py",
+      "sha256": "bb01912904062ba09e25d32822e9e74321d19e33d9723405fb3eaa2c3f122218"
+    },
+    {
+      "path": "tools/lp_exec_budget.py",
+      "sha256": "998ccabdac71e9ab24ef2e6aba3104d0d0ac29abc7aae40b63e6f9f128070e98"
+    },
+    {
+      "path": "tools/lp_exec_gpu_check.sh",
+      "sha256": "90c02e80d10a8b7fe29403db0c9c1a84b6fa157ebf39614e36f3216fd2404f10"
+    },
+    {
+      "path": "tools/lp_exec_oracle.py",
+      "sha256": "09bddf42b43d4062e3e6aee3fc8917f0595944921346f734202ec94de2de2baa"
+    },
+    {
+      "path": "tools/lp_exec_regular_check.sh",
+      "sha256": "b2ec4327d151854eb37d92e0c37b4dded0334bf80a92afe8bd71ba8d2fb3f7c8"
+    },
+    {
+      "path": "tools/lp_expansion_candidate.py",
+      "sha256": "4492e49afeeed8b8cb93cfe75ccf3c4ed6348b55c7c031c00b40aa41d4fa336b"
+    },
+    {
+      "path": "tools/lp_expansion_oracle.py",
+      "sha256": "a604305a9f7494ef54f07dc798027680a2fa54061f58782deb6cba777ec4c893"
+    },
+    {
+      "path": "tools/lp_generate.py",
+      "sha256": "0dbc6cdade08fb397207a87ed1ab20b88e7c9374145b9bf41c101e104aadf553"
+    },
+    {
+      "path": "tools/lp_gpu_check.sh",
+      "sha256": "67b743d2ab77669b90ffc5e3595429d42ef3c09544f9f1d0d9ad65c1d4698426"
+    },
+    {
+      "path": "tools/lp_gpu_cli_check.py",
+      "sha256": "9646ce7c0d3127e637e5cf515aafbd33621075381d597cef0cae5cb8c9894f04"
+    },
+    {
+      "path": "tools/lp_host_budget.py",
+      "sha256": "0a7306d551170c880a6a79581db50a55a46c8b1f817e602fc31824da5a5fbbda"
+    },
+    {
+      "path": "tools/lp_host_gpu_check.py",
+      "sha256": "34da71518c6b5498904da5cc39d60444f62e2d37c1dfa08059dc18cc1ebf0fb8"
+    },
+    {
+      "path": "tools/lp_matched_cost.py",
+      "sha256": "a24e7e5cfbb3080f5426a83d9926d1a8849e35637a5f77820b49971394b13f6d"
+    },
+    {
+      "path": "tools/lp_precision_accept.py",
+      "sha256": "5a42b55c1a5e90d34912f4249f6787c40fa5a9e23fe79e8d0fab20c6e4fb5455"
+    },
+    {
+      "path": "tools/lp_precision_cli_check.py",
+      "sha256": "0a0dc1d27d944b2d0ee874a596cd2ed26b074298604a9561d1645ea09f4b6f90"
+    },
+    {
+      "path": "tools/lp_precision_gpu_check.sh",
+      "sha256": "48766b5168d2d17a5c56c6a78cd8bf18f2c2b49e49ad9d8eb5450e5202ed4457"
+    },
+    {
+      "path": "tools/lp_protocol.py",
+      "sha256": "dc8f00cf2a799a2a789bdfbc38f1214784848d4cd94732282710759379deac43"
+    },
+    {
+      "path": "tools/lp_quant_accept.py",
+      "sha256": "670384384e3228e63b1b249d52377e5db50a2c55207624f0e560db80f68fd393"
+    },
+    {
+      "path": "tools/lp_quant_admission.py",
+      "sha256": "66fe9af1af461ef0d8eea69fc04d03006d5d243e7a9d2c9a0d7c01174397ed98"
+    },
+    {
+      "path": "tools/lp_quant_audit.py",
+      "sha256": "498cc54b1a4c41c6b35ac1cf8da0bd451d6424025887073cb147b3c4d431224b"
+    },
+    {
+      "path": "tools/lp_quant_budget.py",
+      "sha256": "6294fd1f009032fc922cc44b9b590e3ae57acfce7e9cb561f6fc8db9423c4894"
+    },
+    {
+      "path": "tools/lp_quant_build.py",
+      "sha256": "44db4031528f65cae3bab48a13e8dcf458f043d7bbc34c6bbf452a3674e3e1da"
+    },
+    {
+      "path": "tools/lp_quant_cpu_bridge.py",
+      "sha256": "bb3d0b31b8722ea1a22d4da92ffafa03007d9cf82ba16fb77ef76d0e31ffcb9d"
+    },
+    {
+      "path": "tools/lp_quant_final_admission.py",
+      "sha256": "90e6eaaffd535f1338eb0376e0fbbcf6ce766d7a615df6603a344d6c885b5bd0"
+    },
+    {
+      "path": "tools/lp_quant_gpu_check.sh",
+      "sha256": "b09ba851548475d9ac51fc5e0d33f4e976482c99f83caa94a8fe0cde02e0a2af"
+    },
+    {
+      "path": "tools/lp_quant_oracle.py",
+      "sha256": "eac9da9dc5159948aef6541739355b3d1257da489f2db07b1ef482f394b3eb74"
+    },
+    {
+      "path": "tools/lp_quant_pr_review.py",
+      "sha256": "f0ae2979b3ef05a3373152113c3fa263807bebeda5a5727f89b96a47b7605039"
+    },
+    {
+      "path": "tools/lp_quant_report_output.py",
+      "sha256": "3a2a68ddbde560d6017dd2351229ca0b2c343bcd058ef72d2a688b40478dbbc2"
+    },
+    {
+      "path": "tools/lp_quant_resident_accept.py",
+      "sha256": "7175be0aa94ab764eaf24218e84b61cf346b820240c30111ad2766ff4ff87a1f"
+    },
+    {
+      "path": "tools/lp_quant_resident_admission.py",
+      "sha256": "c1ea201fde4feb6f062a75ddc84dced28b80b1e1c4ff877fc1cd71bb825c25d8"
+    },
+    {
+      "path": "tools/lp_quant_resident_audit.py",
+      "sha256": "09465022afa203f32b0a45985a883e2a91db31b49696f299ca0ef36b6c3a1bd0"
+    },
+    {
+      "path": "tools/lp_quant_resident_bridge.py",
+      "sha256": "9200f11eae56c87f26a77cbe9f48494f523e038bcc5ddf2468739bc0db02e540"
+    },
+    {
+      "path": "tools/lp_quant_resident_budget.py",
+      "sha256": "54a5eb648b91e58297b2540f7d52f5e352d4acdef5f839104127deca0e238cf1"
+    },
+    {
+      "path": "tools/lp_quant_resident_build.py",
+      "sha256": "9202d80619f71e7405c46034475578f1aacfbb67e40691ec17e38b4c6c8baad9"
+    },
+    {
+      "path": "tools/lp_quant_resident_common.py",
+      "sha256": "9fe5f052e2d4d22032f8a27908a2dab936f9e39ca9e8ebdfe372d8b9ded2e42b"
+    },
+    {
+      "path": "tools/lp_quant_resident_delivery.py",
+      "sha256": "464453ebe25adb6036a238343e7786528d0c5e8d1581bdfadf75fbb292c56576"
+    },
+    {
+      "path": "tools/lp_quant_resident_gpu_check.sh",
+      "sha256": "561a77abfec39a6c68f395e00cbe1d0a3ccfe5b2b957e0c9c2e4aed61645ce40"
+    },
+    {
+      "path": "tools/lp_quant_resident_micro.py",
+      "sha256": "38486fc0285de12f299c115837d3ca4d8221f1afeab2deeec51b3612fc1c2d14"
+    },
+    {
+      "path": "tools/lp_quant_resident_oracle.py",
+      "sha256": "d44f4f9c9742b12d3d861855b10d05efadad4fd98ceb9793c8b83b80f1973bb4"
+    },
+    {
+      "path": "tools/lp_quant_resident_resources.py",
+      "sha256": "0d6c1491fa68e4d945ad8159962b22c23c944d18f97657c788a00ff661aa157c"
+    },
+    {
+      "path": "tools/lp_quant_resources.py",
+      "sha256": "e1a15ebf53d584ff7960d7d6b7a74a088a62d9261e1030447508f18ed3286125"
+    },
+    {
+      "path": "tools/lp_quant_review.py",
+      "sha256": "8bfa7eaee7bb066b7bf8e8e5e5962deead70f72dcb150b769cda231a057791c8"
+    },
+    {
+      "path": "tools/lp_quant_verify_retained.py",
+      "sha256": "a1d07424455e552b7f1641a1671383f88a10d9f8dc1a69d50bf364a7f2ec92a9"
+    },
+    {
+      "path": "tools/lp_refine_accept.py",
+      "sha256": "82047906318d7e8a0d1bbd9869119705dcd4a7f0ad12cf2053483a40d7c7c946"
+    },
+    {
+      "path": "tools/lp_refine_admission.py",
+      "sha256": "c72e21ced1f234758d0a7112d08c72d07dfc0118a82dd86f2fe625873d7f3393"
+    },
+    {
+      "path": "tools/lp_refine_budget.py",
+      "sha256": "190b21210cd5c06e1092157a4eb0f8fc716803e4bd886308ff2c49c0c1978894"
+    },
+    {
+      "path": "tools/lp_refine_evidence_oracle.py",
+      "sha256": "be47907c38f0570aabe02a783d305311ddb8390daabb3087ea83286527552566"
+    },
+    {
+      "path": "tools/lp_refine_gpu_check.sh",
+      "sha256": "a7180ae6cb8bec1fa9e19632b82cf91ec3cde7d33829a1377fa9cf6f80adeb18"
+    },
+    {
+      "path": "tools/lp_refine_oracle.py",
+      "sha256": "04a83008f28930ff715e00c36b37982a4d499a229fa6e99ca0ddbd4e8c2a6bdc"
+    },
+    {
+      "path": "tools/lp_refine_review.py",
+      "sha256": "c105d9142f27b996894735bb5bc540cb0bddbf777a05471794878a04d98071e5"
+    },
+    {
+      "path": "tools/lp_report.py",
+      "sha256": "775991ac2f15c7525d312c32928f67bcfa379c27d78936d85d73cbe34e12aa70"
+    },
+    {
+      "path": "tools/lp_research_budget.py",
+      "sha256": "9897a2a395ba02deeaf5d037c40b299c8972a12e7da2f29797ef152a5f4dee64"
+    },
+    {
+      "path": "tools/lp_research_gpu_check.sh",
+      "sha256": "8b57463002e1c6d9c037d1f70422391bc6afb0eb4d9a1a539e69bcec333c02cc"
+    },
+    {
+      "path": "tools/lp_research_oracle.py",
+      "sha256": "1d08395d6f3c71de8ac19ff644e2c15a60059eea03fec44c51ed4a1e12d3c29c"
+    },
+    {
+      "path": "tools/lp_setup_budget.py",
+      "sha256": "fc5524cf27a4f7a1febe39894c9cfd13610f5b5fa40bc4903502c8c7e4084fb5"
+    },
+    {
+      "path": "tools/lp_setup_gpu_check.py",
+      "sha256": "915337b1a83abb44c335679a76a042c47673d77afd85c3c42478d8bc97de032d"
+    },
+    {
+      "path": "tools/lp_setup_gpu_check.sh",
+      "sha256": "cd50be5e1b3ca9870444235544d8a81ee2b3c7a0597da2409d457ff716a9aeb5"
+    },
+    {
+      "path": "tools/lp_state_admission.py",
+      "sha256": "c33d9b85ec36b73c8f72d0a33e4d2d7ab6fcd6927eb5102fdd240b74f0b0faef"
+    },
+    {
+      "path": "tools/lp_state_candidate.py",
+      "sha256": "cd7e0e8dc2aa1c6c74386bc250a7347c1d457577781ad2b8e020376764cd5f74"
+    },
+    {
+      "path": "tools/lp_state_device.py",
+      "sha256": "a063b1faf2a415f72638cc22792d4e95459fb03572ae98907c339a05c0ef5bb3"
+    },
+    {
+      "path": "tools/lp_state_oracle.py",
+      "sha256": "b5714d37720f97cd7d7a58647c3003d310d37107923438dbf80078194867bdae"
+    },
+    {
+      "path": "tools/lp_state_review.py",
+      "sha256": "5d568a8eb2fe2e079b79fe4ce9e5b44a4dc728462bdd9767284fc4568fcfe7a5"
+    },
+    {
+      "path": "tools/lp_supervise.py",
+      "sha256": "89dbf138bcbc96743b2968cdddbec5a71cf12f12d148bd08bffd28d45b7928a1"
+    },
+    {
+      "path": "tools/lp_tensor_accept.py",
+      "sha256": "2390938b9b1ef17c5c08f055ee2dc6fdffea97fd6167ce0ab74dc34f4b78af5c"
+    },
+    {
+      "path": "tools/lp_tensor_admission.py",
+      "sha256": "b3d43f1ba2297550b9f82c9a3536048be10fa6faf713a907d1f172fbb78ae9d0"
+    },
+    {
+      "path": "tools/lp_tensor_budget.py",
+      "sha256": "87b91712496dfac7264fca22e5eeeee1226b23520941cde2f0b1cff97e486459"
+    },
+    {
+      "path": "tools/lp_tensor_build.py",
+      "sha256": "69fd5b2b05699f6072e38124ad1392732ab9ce856c92a1100b2486bb68990e8a"
+    },
+    {
+      "path": "tools/lp_tensor_common.py",
+      "sha256": "3b81464cee0538c5ba9c716e928f18e42a01c6904dcafad1ffa692d95b7b5de3"
+    },
+    {
+      "path": "tools/lp_tensor_cost_accept.py",
+      "sha256": "89fb671f16d70b9a8285f13f0edcf6f09d0137d9d424f5793877577a03a1bb1d"
+    },
+    {
+      "path": "tools/lp_tensor_cost_admission.py",
+      "sha256": "4bda48247c437c8a9cc28475c6de166575f4a0b3ba62ed92ecb4c1c012cc5294"
+    },
+    {
+      "path": "tools/lp_tensor_cost_build.py",
+      "sha256": "1cf6abd8ec01235d8b92df3a0314f29e192490679c161d672fab297370e6e034"
+    },
+    {
+      "path": "tools/lp_tensor_cost_common.py",
+      "sha256": "926664d9d483c3e6008b5ee035f435223f69345099bdf356e9875b0787916594"
+    },
+    {
+      "path": "tools/lp_tensor_cost_exec.py",
+      "sha256": "d407c672208339220030b66dca7c7630349db378ae0412815fb0f905a80fd757"
+    },
+    {
+      "path": "tools/lp_tensor_cost_gpu_check.sh",
+      "sha256": "61395f86957a9782be63bac7023b13e8f53a66de6f4532e983210ee028b4ba42"
+    },
+    {
+      "path": "tools/lp_tensor_cost_layout_oracle.py",
+      "sha256": "071c5dda16061a5131904472ab205fe042c0fb3e6d628b21c99238f25e20130f"
+    },
+    {
+      "path": "tools/lp_tensor_cost_norm_oracle.py",
+      "sha256": "26871f879d9127b320a120bdd4456785bd837367168dc127a021b6cd7538eb3c"
+    },
+    {
+      "path": "tools/lp_tensor_cost_oracle.py",
+      "sha256": "b24263a4ac066ae83aafe3c8d480bcffc96cc1e3b68eb76653ea51cda0c24517"
+    },
+    {
+      "path": "tools/lp_tensor_cost_preflight.py",
+      "sha256": "1938fa96602987bf46fd8690310598c60e5c4093d7157dda552e583139e37ac7"
+    },
+    {
+      "path": "tools/lp_tensor_cost_registration_bridge.py",
+      "sha256": "e0cf608eddf3adb4f3a360a1eb4c48ceeba41996400ff97fd868a36bc08eb57e"
+    },
+    {
+      "path": "tools/lp_tensor_cost_screen.py",
+      "sha256": "ab1101872d320451ed63d4a2af49c084694ff51bd1032cb305de68b0adb603c8"
+    },
+    {
+      "path": "tools/lp_tensor_delivery.py",
+      "sha256": "2d4fdc661edf5094918d5bdb1363b07e3cd118f94c7fd35aa20a66d21fc699fd"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_authority.py",
+      "sha256": "1971a02c9c65911b1da5118b83ab30bfa4ff79836c5430f605e70296545f6798"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_build.py",
+      "sha256": "7d04865cb1499961f1ed38b87c2c80b011b6414d668907dc12dc0affa8a42313"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_cpu.py",
+      "sha256": "8f5ab62621f759761b12e758db98107f272f87900a6b043af8c9c0baed62113b"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_cpu_build.py",
+      "sha256": "3650fc2b34392968eca695c270ad8be2bd690102dcca30f70ec79db637ab1ac3"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_delivery.py",
+      "sha256": "fe89ef43c0ea141bfe3de075743013ab493156426b21ae5df34b6edc12a81051"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_executor_build.py",
+      "sha256": "ec5e8a67504c91b7e046fcd2700803d4d695540364a7dc4cc57e4d3ce9776d02"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_executor_recovery.py",
+      "sha256": "d4103987d1c4086257c308203a4bbb4aceeca5bee02b1a26faed08268aeb4eea"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_finish.py",
+      "sha256": "405209529b1fd9591b601c4c33d256a99b4e311093ea6a15b09618d2ed378c56"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_freeze.py",
+      "sha256": "bdb29a1fca6e56eb6e13096ab4169abeac9351137d748e0a54f7503581c067d3"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_guard_build.py",
+      "sha256": "34751c59d0f226b7e5d6f35fae35ec7ce514a9934efaaf5eec045cd03b7e0176"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_guard_proof.py",
+      "sha256": "632fe64ff8e6f38d12a64dc0f971f3394082ceb761db104fbcff87b253c74d41"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_instruction_review.py",
+      "sha256": "50e5829a72ab35ee9bc141559c8820ef93e24c8503c8dbac3bdf4636465c9d3d"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_launch_abi.py",
+      "sha256": "cf656f25b12838e82081d413937bcd0917ae2c42155c2ad28519b5192e1355e9"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_model_admission.py",
+      "sha256": "790c1868fb6d77f4890fa1408f32b6f1d1b899cf279c68f2b99af2af9679a976"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_products_build.py",
+      "sha256": "0b048f72a41f488af0732d4f6837ce95e4f922ea84048d6e0cae1cb476543a6e"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_proof.py",
+      "sha256": "72af72df5f5abfba20c691138e13547b3b51ef31e08ac6b5e648253942b9c1b4"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_proof_v2.py",
+      "sha256": "781941f67ffe6ba39163d6aabddea4968e57a81900412e0ae13b6848af8e4099"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_recovery.py",
+      "sha256": "bcbfecaae2b7fb6b426a8cb5f8a6094294819e4cc6d077d74ad6bb59525a5827"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_residual_build.py",
+      "sha256": "bdc0355b85e226a83241be113350cbb37ac8b3a7485231f4dff94ea8a24dce72"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_study.py",
+      "sha256": "cde9cf5433239cb90498ffc92eea1ddb158f71889c954cad1a1f1668ae820977"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_telemetry_build.py",
+      "sha256": "75432d0855b42e0b19985ff3892b3159e5f2afc0a4fbcce10dba2c778b26095d"
+    },
+    {
+      "path": "tools/lp_tensor_expanded_window_accept.py",
+      "sha256": "83148abc92177863f33f842e047a7d2ee2d7503ed7273af7a3b95c5ae444d3c3"
+    },
+    {
+      "path": "tools/lp_tensor_gpu_check.sh",
+      "sha256": "61395f86957a9782be63bac7023b13e8f53a66de6f4532e983210ee028b4ba42"
+    },
+    {
+      "path": "tools/lp_tensor_layout_oracle.py",
+      "sha256": "84ae23bd776077bc96cade3b0caaaa028c0652b51adc6bf209d507ad044ad813"
+    },
+    {
+      "path": "tools/lp_tensor_oracle.py",
+      "sha256": "bdde330f8709bd2d61f0becfd67ea6d0d5f7db0fbcd4ccaecce336792be9a5cc"
+    },
+    {
+      "path": "tools/lp_tensor_residual_accept.py",
+      "sha256": "493fcece94b8d621388fd9c5c69ba4b97cab9cf0ce82e76c6437e2d327708dcb"
+    },
+    {
+      "path": "tools/lp_tensor_residual_admission.py",
+      "sha256": "626833b0dbc667964c0b636b478dacc5fd9d7c4258a81444822ac3055151a8f1"
+    },
+    {
+      "path": "tools/lp_tensor_residual_budget.py",
+      "sha256": "4301c664b0eecf9aef36d5e02acae1e9007757d28f9ff7d3f256f906f2785855"
+    },
+    {
+      "path": "tools/lp_tensor_residual_build.py",
+      "sha256": "fc9b347cfb3d44fe1f330557da626102abd6a7c101f5fe35a10b8c6d0bbc4501"
+    },
+    {
+      "path": "tools/lp_tensor_residual_common.py",
+      "sha256": "be0366b0ef0b501dbb36d9735e1a29f1b003a639033aeadbc6204d00da190d9d"
+    },
+    {
+      "path": "tools/lp_tensor_residual_delivery.py",
+      "sha256": "794f8a61dce3b85b9db225bbdba50e1565d1f7df88f818f0661e89243aa84e5d"
+    },
+    {
+      "path": "tools/lp_tensor_residual_gpu_check.sh",
+      "sha256": "61395f86957a9782be63bac7023b13e8f53a66de6f4532e983210ee028b4ba42"
+    },
+    {
+      "path": "tools/lp_tensor_residual_layout_oracle.py",
+      "sha256": "c37d2919ad7fc0eb7465bd4969bad2a9876855cf51efc918a8b0827bd4534e10"
+    },
+    {
+      "path": "tools/lp_tensor_residual_oracle.py",
+      "sha256": "7a5429df62ccbaa06003a494604a58e0540ff6a67749187b77c1d2b49ee61a40"
+    },
+    {
+      "path": "tools/lp_tensor_residual_resources.py",
+      "sha256": "a27ea8d6f92496a7e83da3eaec04e25d7a6dc91a5bf28a892d926a0b2eb1133a"
+    },
+    {
+      "path": "tools/lp_tensor_resources.py",
+      "sha256": "496e41fd9476e6a321d6069e5919e3e495795f2c89d911da9e7dd4f5356061f3"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_accept.py",
+      "sha256": "3eeaefcde7233e6333debaac906e3732b4500c6791ff9bdf1556eb66907110ae"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_admission.py",
+      "sha256": "40e049cbe7ab6e598b01c096c75b30c4dedcd368d3e1373ff4cc6c1186e12ca5"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_availability_bridge.py",
+      "sha256": "ff604f66782996cbeae9e30b6a29608c1acc0ba6c88eee5b3c49675134144f7f"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_availability_native.py",
+      "sha256": "32ceef9fe99506ad1e9e44c1b44ef1dbd9af85ca19ce8aac904d3f4a1cf14713"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_availability_run.py",
+      "sha256": "7bd0f6a7cb0bdebf9d95af6b2e291cc8eb6cd061022e703ef85157595365ce2a"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_build.py",
+      "sha256": "290d9a9dce2bf9d865e0bf24007ccc18c141130128256a7af41fd006324c1af9"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_common.py",
+      "sha256": "b5cb3dc2235737122696e7dc907732fc7bd7adcf03af9a7ba881cfd3255ddadb"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_compile.py",
+      "sha256": "4667e01caaaefbcbd3710d838c7a71beac47ca8e528b76ae22ef4f06b763c850"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_inventory.py",
+      "sha256": "8b45f36573c7487b8494663f8b84c25a0868e636c73b5ce770a99d7a24e66b0e"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_native.py",
+      "sha256": "9704a096b0bbd4caa4426909f0c0ddc05d8aaac386d678214bdd7c1c542cd537"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_oracle.py",
+      "sha256": "e127e6c19592266567275613fa31c56b8e9471990961c084ce560609403c4125"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_run.py",
+      "sha256": "4220b563fb0be751f4d06173c1f60a0ed2210d13f2722e3027a286cb91a87d90"
+    },
+    {
+      "path": "tools/lp_tensor_warp32_screen.py",
+      "sha256": "2f25d0e8a3a1295237d20f76b010f3c42971d5a2e7c0aaea54f891753b6a87cb"
+    },
+    {
+      "path": "tools/lp_tuned_gpu_check.sh",
+      "sha256": "47711ce6b679a895e11ee5f932131ce41ccb6f62d8a646361b9d2c659a095032"
+    },
+    {
+      "path": "tools/lp_variants.py",
+      "sha256": "2e5893163cba09290a8d3fca3ab9009f592f3bb031d15b3b5e8cfbaf1f59a0c2"
+    },
+    {
+      "path": "tools/lp_warp_oracle.py",
+      "sha256": "5e4cf036db5c3828b503d8b2fec2ffbb13324bab6fa63d983944935ae24445f1"
+    },
+    {
+      "path": "tools/plot_lp_copt.py",
+      "sha256": "68787fcc1c50ff3a27d764c568bdb7480f79c33065354b6b2430ea15cb8889b8"
+    },
+    {
+      "path": "tools/report_lp_adaptive.py",
+      "sha256": "299bbfef6ac1f1a44bd8c60ef11a69023a465e48da0d84ea6a50767e21704485"
+    },
+    {
+      "path": "tools/report_lp_adaptive_cost.py",
+      "sha256": "8489bfaae2d47ada240daa57fbe874ced9162b577828419fc50f3d3dd98407de"
+    },
+    {
+      "path": "tools/report_lp_assess.py",
+      "sha256": "8120b8ad77a3584c2b7202cb5267f22c16be1dfb60c0e214849126022752fc47"
+    },
+    {
+      "path": "tools/report_lp_convergence.py",
+      "sha256": "79b37c741b645f54cb3ed90c42d737599216440a3b36829e7b9e4f660caae740"
+    },
+    {
+      "path": "tools/report_lp_copt.py",
+      "sha256": "31aeb1ea2029a62796cb8cbad1e13034c3aa684041467e85f8fb9c90f12e3768"
+    },
+    {
+      "path": "tools/report_lp_copt_adapter.py",
+      "sha256": "1bc4aa6f47c8139487b88cef5b0134121d57f1ce2ece9dc5b3eec2575a46ae76"
+    },
+    {
+      "path": "tools/report_lp_evidence.py",
+      "sha256": "2ee9e383c132bd7345808a860fb30dc972ed33d263e5b78ffb73b42d5ef242f3"
+    },
+    {
+      "path": "tools/report_lp_exec.py",
+      "sha256": "2554c5b5a0c0a8fb22aa305e57a326942c44d8584d59281c5bdcb1b4b0aaee0c"
+    },
+    {
+      "path": "tools/report_lp_host.py",
+      "sha256": "e125dafb84b6b2b3e4c8c6b27ad7440ba7ce88ef9e4c6502ac326bfd4c6e14a7"
+    },
+    {
+      "path": "tools/report_lp_matched.py",
+      "sha256": "eb5dc6a3c878a8689060697a6252b4d11632d624d58ea2ddde09e7e35d3ef1a8"
+    },
+    {
+      "path": "tools/report_lp_precision.py",
+      "sha256": "da3929e55a7ca307581b43955b1629de8b882c8cfc68a2ed3649c03a4300de00"
+    },
+    {
+      "path": "tools/report_lp_quant.py",
+      "sha256": "164cd1542c85aceaf9dca2a450f4daf790d756020fa3e078a24a2df30f7c27c1"
+    },
+    {
+      "path": "tools/report_lp_quant_resident.py",
+      "sha256": "2df61681e79b85cffca8eda3feba2fd45196e72e58d3fe42902df018f91ea127"
+    },
+    {
+      "path": "tools/report_lp_refine.py",
+      "sha256": "042319a7c1a8d50e61f39597d755747e6908c8ca45f8f669dc4ccc42870253c4"
+    },
+    {
+      "path": "tools/report_lp_setup.py",
+      "sha256": "50d98060d9b57511574340029cd2cf6d612d72d08e8170b74c5d0377e0407368"
+    },
+    {
+      "path": "tools/report_lp_tensor.py",
+      "sha256": "81ba14a35ad6e34b88d2ef9215c918542212c1be3a7316fa3d2058fe2706cb7b"
+    },
+    {
+      "path": "tools/report_lp_tensor_cost.py",
+      "sha256": "b8036b0603ce4d880cb8d7f6a6b3fdeee84c98ec3fe5bd28f9f5f238307f33c0"
+    },
+    {
+      "path": "tools/report_lp_tensor_cost_failure.py",
+      "sha256": "3ad6d963da01940cb3e4924a17adbc70bde00ea73ac441cbb36de8941dce9ba0"
+    },
+    {
+      "path": "tools/report_lp_tensor_residual.py",
+      "sha256": "9b06445db05ea9d04b4cb9528fa5e320dbaf885ce9c732217ad43f595018db19"
+    },
+    {
+      "path": "tools/report_lp_tensor_warp32.py",
+      "sha256": "73d81c94f43ce8ef7e91cdf9fb4e9714330614fe43a5d26195132ed32f56bf59"
+    },
+    {
+      "path": "tools/report_lp_tuned.py",
+      "sha256": "3aeeadc2b20d6269c6d98a18d420d64fb7d256954ce5d9239dbe0e6341deb22d"
+    },
+    {
+      "path": "tools/setup_copt.py",
+      "sha256": "36a47c5e1ffa4f332ce04dee457d068437080cd2e90ec82b94bb4f0c29f2e335"
+    },
+    {
+      "path": "tools/setup_copt_adapter.py",
+      "sha256": "949926525de1b45b1164c92bae0e175c5195ee6614270d0cad9ea80be6875cc5"
+    },
+    {
+      "path": "tools/setup_cuda.sh",
+      "sha256": "673ba7731b1a06ac5cb2ecc4af0d982b847fb6d358062266426fd9adadd3c2b3"
+    },
+    {
+      "path": "tools/setup_cuda_diagnostics.sh",
+      "sha256": "be020fc77dc1d56d4948ef84455c207a951067de2308edc78a5e0b508195f738"
+    },
+    {
+      "path": "tools/setup_cuda_exec.sh",
+      "sha256": "555fd98597c979f41956f1e7c661b6ad8ed7f8d943d13127278d903aff1fc47c"
+    },
+    {
+      "path": "tools/setup_cuda_research.sh",
+      "sha256": "f1f9600c6b92b30c203919fc78d75d1f2fe54675bead421e70857d63623ba235"
+    },
+    {
+      "path": "tools/setup_highs.sh",
+      "sha256": "9260ed8396dc9f22e418536aa48019a70bf923ead5bab5186f9f4d62832e024c"
+    },
+    {
+      "path": "tools/setup_quant_cuda.sh",
+      "sha256": "32df18b3170db15d3af2c344fd05ccf9afeed45d9a66dc12bf42fbb9df7362b5"
+    },
+    {
+      "path": "tools/setup_quant_resident_cuda.sh",
+      "sha256": "9b06524a36c412fd50e83880b353b93ff87688d075618cd02234ec9a525be8cd"
+    },
+    {
+      "path": "tools/setup_refine_cuda.sh",
+      "sha256": "c16f83142c7dd28087279de89208a0ca3b1012fa0e0a4b8ebdceb71c1f69a1ee"
+    },
+    {
+      "path": "tools/setup_tensor_cost_cuda.sh",
+      "sha256": "22d10a0d5b03f8269884997f294a3700a4cab712c0c98e8185b331f8fc45172c"
+    },
+    {
+      "path": "tools/setup_tensor_cuda.sh",
+      "sha256": "7239929547645e8d45e362f9a50f9f34fd2cdc373af0f184d4fd9e801b9e2f57"
+    },
+    {
+      "path": "tools/setup_tensor_residual_cuda.sh",
+      "sha256": "6c1aba7e0120d755e5ca9f60f777243fc80d0709f7ceefe83f33d55732b0fa42"
+    },
+    {
+      "path": "tools/validate_artifacts.py",
+      "sha256": "0440a047b4afe38b2c1bdc1020913d08db31c7c83163bcb335eb40340233ed7d"
+    },
+    {
+      "path": "tools/verify_committed_record.py",
+      "sha256": "f35aa25d8105fc70e41fa20fc5692819517d83460a2c5c1a87a50098f8fa2f08"
+    }
+  ],
+  "unchanged_workflow": true,
+  "workflow": {
+    "path": ".github/workflows/ci.yml",
+    "sha256": "5e75faa2d51b1501888c12214485feb2a6c84b641812fce50e12ff7d2787188a"
+  }
+}

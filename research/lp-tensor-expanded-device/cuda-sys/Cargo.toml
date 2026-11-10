@@ -1,0 +1,16 @@
+[package]
+name = "optimizer-cuda-sys"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.93"
+license = "MIT"
+[dependencies]
+optimizer-core = { path = "../../../crates/optimizer-core" }
+libc = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+[lints.rust]
+unsafe_code = "allow"
+unsafe_op_in_unsafe_fn = "deny"
+missing_docs = "warn"
+[lints.clippy]
+all = "warn"

@@ -1,0 +1,1115 @@
+{
+  "attempted_profiles": 7,
+  "campaign_gpu_ns": 22770545043263,
+  "certified_latency_gain": false,
+  "certified_timings": 0,
+  "cleanup": [
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/authority-resource-v1.json",
+        "sha256": "c715aa917622b0db72965220aeb89d33c4f6624264f2b73284963e8a94f25f6c"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/prototype-resource-v1.json",
+        "sha256": "ad11396ddcb87eb82e0de9bb7a0d66bfec063c75fc1affc875166c308ee99fc6"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/proofs-resource-v1.json",
+        "sha256": "2ba061973abfac2b1c9cdeaf02e79b1c48163b7f85bf27dfdd989591bf09fbaa"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/delivery-report-resource-v1.json",
+        "sha256": "5ce4ac793f63fcff75003f1d0bd58c0af89bfcc8146b8fe7a1e1d87d1a206029"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/delivery-checks-resource-v1.json",
+        "sha256": "40ad8c6d298edb2377e69d64fb027d90baae0eb88eb287115be4e8246f7a9e22"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/recovery_setup-resource-v1.json",
+        "sha256": "185e7996ecb043d94d21f1a50540e2202525dd87c75ecc254c1de700b9e56345"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/proof-recovery-v1/proof_retry-resource-v1.json",
+        "sha256": "d381e19bfec4a934af655d0b1db91fdbeec99e28409c15afd541d92bebcf9c60"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/primitive-build-v1/compile-resource-v1.json",
+        "sha256": "b53ace33f9902178bf78a7900c9488f45fd0942a6add178326a3782e12bb0bb5"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/rust-scalar-v1/resource-v1.json",
+        "sha256": "f131a57c29b99db1a1f0db89c45331fd5e7935627524b9de09bb40dbf39dd2db"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/rust-window-v1/resource-v1.json",
+        "sha256": "bc017d2df1ada6f6e4b6c2a78046a0513ce678e912ebe0ed1a6bd829d0d7de3b"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/cpu-model-admission-v1/resource-v1.json",
+        "sha256": "daa8c5ae1126884bd75c54818fbd418505a93872f043570334329195e5e86e01"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/product-build-v1/resource-v1.json",
+        "sha256": "de39255561faee3ec20960f6d3c85701ac2b5cb1796484ad09a0a1326a67cca4"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/instruction-review-v1/resource-v1.json",
+        "sha256": "2a6162bb92d9a10844d6612946133adf897436790961b57fb1e9e1bb116ac167"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/residual-build-v1/resource-v1.json",
+        "sha256": "8443111e4eee47e220829699d486faaaaa5ecfc6101dc6de8063b07954b9763a"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/guard-build-v1/resource-v1.json",
+        "sha256": "83da8d40a15d9109034fc30a757e9292c2dd0ff5dc260a60e28df28e6964ca5c"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/launch-abi-v1/resource-v1.json",
+        "sha256": "1b5184cb142d40acae9e6dfb95d8c16d077580634ccc0e19dbf9a19c54273771"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/executor-build-v1/resource-v1.json",
+        "sha256": "8872318e1d66bec22caa684faefcdab315971f9427bbe2e2f24b088ca39b0caf"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/executor-recovery-v1/resource-v1.json",
+        "sha256": "6ebab9e8371805c04d784207b8e61eeef35b66789e99fd92497b53275f122e0e"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/telemetry-build-v1/resource-v1.json",
+        "sha256": "8aaa6193e34877c62fa1c4b90276f8285e32ef22d533eb139582ccdb43991e50"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/continuation-v1/adapter-resource-v1.json",
+        "sha256": "efa92efd364090540288ae10b0eb3eb8dc8b26876e42b264a06d9b85be5bbac8"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/continuation-v1/acceptance-resource-v1.json",
+        "sha256": "375053aca2a01f6a5b17d24968de5dd47b516dbe3b50f043bfa0d6d90eda5cb2"
+      }
+    },
+    {
+      "coordinator_empty": true,
+      "guardian_empty": true,
+      "receipt": {
+        "path": "artifacts/gpup-tensor-expanded-v1/continuation-v1/profiles-resource-v1.json",
+        "sha256": "a0be9dd2745b34f3481f41b129cf576f2a8c809bc140812f3ce9b792fee33313"
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "configuration": "int8-tensor",
+      "coverage_equal": true,
+      "model": "gpup-development-dense_block-1024",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "int8-tensor",
+      "coverage_equal": true,
+      "model": "gpup-extension-dense_block-65536",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "fp16-tensor",
+      "coverage_equal": true,
+      "model": "gpup-development-dense_block-1024",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "fp16-tensor",
+      "coverage_equal": true,
+      "model": "gpup-extension-dense_block-65536",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "bf16-tensor",
+      "coverage_equal": true,
+      "model": "gpup-development-dense_block-1024",
+      "paired": 0,
+      "result": null
+    },
+    {
+      "configuration": "bf16-tensor",
+      "coverage_equal": true,
+      "model": "gpup-extension-dense_block-65536",
+      "paired": 0,
+      "result": null
+    }
+  ],
+  "completed_profiles": 6,
+  "completion_criteria_changed": false,
+  "cpu_proofs": {
+    "path": "docs/benchmarks/data/tensor-expanded/independent-proof-v2.json",
+    "sha256": "2906ac3cb7f8e56bc25c12e19ebaa16e525c064845552750f0b6b2c03dfd3665"
+  },
+  "device_acceptance": {
+    "path": "artifacts/gpup-tensor-expanded-v1/study-v1/acceptance.json",
+    "sha256": "0e1c262c2d0edd25cf2cef7cc63a7a7d9c8ccae5d99aa3cd866a82202505b645"
+  },
+  "forecast": {
+    "passed": false
+  },
+  "frozen_sources": {
+    "path": "artifacts/gpup-tensor-expanded-v1/study-v1/freeze.json",
+    "sha256": "18fa3c906ac6aeae253a9bfdc09b5462a9160d1fc0049dfe96a11c0065ed4cf3"
+  },
+  "identity": "gpup-tensor-expanded-report-v1",
+  "ledger": {
+    "path": "artifacts/lp-campaign-ledgers/gpup-baseline-v1/ledger.jsonl",
+    "sha256": "fabe2e22047bac9194867e1f745c627a2271bc7c0cd283f17b207957c7bbb59d"
+  },
+  "ledger_events": 17438,
+  "new_gpu_ns": 178049776450,
+  "partial_profile_observations": [
+    {
+      "configuration": "component-simt",
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-component-simt.endpoint.json",
+        "sha256": "0f4db77d237ee8f096a194680a005a5dadff699057fd0cafe4e0d07b1f2140bb"
+      },
+      "execute_ns": 5770621544,
+      "final_assessment_ns": 3173492,
+      "first_certified_iteration": 1400,
+      "iterations": 2000,
+      "model": "gpup-development-dense_block-1024",
+      "prefix_ns": 4017579259
+    },
+    {
+      "configuration": "fp16-tensor",
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-fp16-tensor.endpoint.json",
+        "sha256": "ca990c0ebe5a7c6ce75130248ef8ec3fab529e8bb9713f5eb91ce1a12795131d"
+      },
+      "execute_ns": 5776514313,
+      "final_assessment_ns": 3080329,
+      "first_certified_iteration": 1400,
+      "iterations": 2000,
+      "model": "gpup-development-dense_block-1024",
+      "prefix_ns": 4005442375
+    },
+    {
+      "configuration": "int8-tensor",
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-int8-tensor.endpoint.json",
+        "sha256": "217c390dd6cea387197d46728caf415e220c317d5833df2985f502b70ef9c5be"
+      },
+      "execute_ns": 5833008723,
+      "final_assessment_ns": 3229389,
+      "first_certified_iteration": 1400,
+      "iterations": 2000,
+      "model": "gpup-development-dense_block-1024",
+      "prefix_ns": 4060474840
+    },
+    {
+      "configuration": "bf16-tensor",
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-bf16-tensor.endpoint.json",
+        "sha256": "ce64aad890d7a9e3624d7984ee56c643b4227bebbc5f24430fa3dd2e445fdec7"
+      },
+      "execute_ns": 5849124074,
+      "final_assessment_ns": 3164140,
+      "first_certified_iteration": 1400,
+      "iterations": 2000,
+      "model": "gpup-development-dense_block-1024",
+      "prefix_ns": 4073043179
+    },
+    {
+      "configuration": "matched-fp64",
+      "endpoint": {
+        "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-matched-fp64.endpoint.json",
+        "sha256": "2f2d8b5c444f1b7be4117a09eb0901e2c8c633f846ee2bb3885f564bd65c1052"
+      },
+      "execute_ns": 806667735,
+      "final_assessment_ns": 2950695,
+      "first_certified_iteration": 1400,
+      "iterations": 2000,
+      "model": "gpup-development-dense_block-1024",
+      "prefix_ns": 666707624
+    }
+  ],
+  "passed_checks_rerun": false,
+  "passed_profiles_rerun": false,
+  "phase_gpu_ns": {
+    "acceptance": 134217543503,
+    "profiles": 43832232947,
+    "timings": 0
+  },
+  "planned_study_cells": 76,
+  "resource_forecast": {
+    "passed": false
+  },
+  "rows": [
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-tuned-fp64",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "completed",
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-component-simt",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "completed",
+      "useful": false,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-fp16-tensor",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "completed",
+      "useful": false,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-int8-tensor",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "completed",
+      "useful": false,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-bf16-tensor",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "completed",
+      "useful": false,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-development-dense_block-1024-0-matched-fp64",
+      "kind": "profile",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "completed",
+      "useful": false,
+      "verified": true
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-bf16-tensor",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "incomplete",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-int8-tensor",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-component-simt",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-fp16-tensor",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-matched-fp64",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-tuned-fp64",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-ablation-int8-tensor-old-norm",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-ablation-int8-tensor-host-audit",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-ablation-fp16-tensor-old-norm",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-profiles-ablation-fp16-tensor-host-audit",
+      "kind": "profile",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-0-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-0-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 0,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-1-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-1-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 1,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-2-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-2-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 2,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-3-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-3-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 3,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-component-simt",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-development-dense_block-1024-4-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-development-dense_block-1024",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "fp16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-fp16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "tuned-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-tuned-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "matched-fp64",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-matched-fp64",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "bf16-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-bf16-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "component-simt",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-component-simt",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    },
+    {
+      "certified": false,
+      "configuration": "int8-tensor",
+      "id": "gpup-tensor-expanded-v1-timings-gpup-extension-dense_block-65536-4-int8-tensor",
+      "kind": "timing",
+      "model": "gpup-extension-dense_block-65536",
+      "repetition": 4,
+      "status": "not_executed",
+      "verified": false
+    }
+  ],
+  "source_changes_after_observation": false,
+  "status": "incomplete",
+  "stop": {
+    "endpoint_available": false,
+    "reason": "unchanged 18-second BF16 large-model profile deadline",
+    "stage": "profiles",
+    "trial": {
+      "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-bf16-tensor.trial.json",
+      "sha256": "2a9fb0e38b0479f13bb6a576ab38eaa45203fbca5f9193587c19426175708e81"
+    },
+    "worker": {
+      "path": "artifacts/gpup-tensor-expanded-v1/study-v1/gpup-tensor-expanded-v1-profiles-gpup-extension-dense_block-65536-0-bf16-tensor.worker.json",
+      "sha256": "74e659157aed7c64a5e287433a6718408ac45cc95d1ff6961760a6e0d02801da"
+    }
+  },
+  "timings_executed": 0,
+  "unexecuted_profiles": 9,
+  "working_families": false
+}

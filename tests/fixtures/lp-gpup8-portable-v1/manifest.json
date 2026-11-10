@@ -1,0 +1,51 @@
+{
+  "exact_metadata": [
+    {
+      "bytes": 2802,
+      "path": "artifacts/gpup-tensor-expanded-v1/cpu-journal-v1.json",
+      "sha256": "74ceef2227e5f56ab5fb7d31d8fcfae3fafe74e1ff7f98b073685a0e619f93b3"
+    },
+    {
+      "bytes": 5834,
+      "path": "artifacts/gpup-tensor-expanded-v1/study-v1/campaign.json",
+      "sha256": "0864c0ea1461c8946eacc96a9e1831946be651ef9e7363b2f012f1fefd3d1925"
+    },
+    {
+      "bytes": 119701,
+      "path": "artifacts/gpup-tensor-expanded-v1/study-v1/roster.json",
+      "sha256": "79f87adbe25758e1b26e5c982f03e75812344bc8254f5fd0d43d566abfb148a5"
+    },
+    {
+      "bytes": 5746,
+      "path": "artifacts/gpup-tensor-expanded-v1/study-v1/execution.json",
+      "sha256": "bfa530de908e2cca70a8bbd5afe1938c25522cf00638bfffd6f54e2740fc675d"
+    },
+    {
+      "bytes": 4272,
+      "path": "artifacts/gpup-tensor-warp32-v1/study-v1/campaign.json",
+      "sha256": "88f5e278eeda941c847985063fae75d3545478f38d2f9f0546c1d3f08098c071"
+    },
+    {
+      "bytes": 54615,
+      "path": "artifacts/gpup-tensor-warp32-v1/cpu-journal-receipt-final-v31.json",
+      "sha256": "d1bdeb7f37ef1e6ca6b032347f63f245d8dd0b85d061d547e10115d428ef7697"
+    },
+    {
+      "bytes": 14842,
+      "path": "artifacts/gpup-tensor-warp32-v1/historical-numerical-sources.json",
+      "sha256": "4dd65620da9bab6aa443ff9522f1827d16f6eb288d885138e74364bcf13b3ef3"
+    },
+    {
+      "bytes": 4487,
+      "path": "artifacts/gpup-tensor-warp32-v1/historical-bindings.json",
+      "sha256": "01163145016829cfdedd536fa49f9c37dc85cab14e8dace2dfb23128855508f8"
+    }
+  ],
+  "kind": "CPU regression fixtures; not new scientific evidence",
+  "ledger": {
+    "events": 17412,
+    "path": "ledger-prefix.jsonl.gz",
+    "sha256": "4f9d15276737974ad555d44cec3bbd1974ee5fe1f3ffeeea4831bc2d9c1c6e8e",
+    "uncompressed_sha256": "9913d391634bdb0f74012be909be377e5a693d00b76e6882abcf336796ac863e"
+  }
+}

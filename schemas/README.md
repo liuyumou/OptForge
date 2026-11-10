@@ -79,6 +79,15 @@ provenance, where a re-execution would never see it.
 
 ## LP study artifacts
 
+[SPEC-0022](../docs/specifications/SPEC-0022-external-lp-baseline.md) introduces
+separate baseline [canonical model](lp-baseline-model-v1.schema.json),
+[endpoint envelope](lp-baseline-endpoint-v1.schema.json) and
+[non-executable proposal](lp-baseline-proposal-v1.schema.json) contracts. Use
+`tools/lp_baseline_contract.py` for their dimension, identity, status and resource
+checks. These are CPU contracts; the new endpoint is not a COPT v1/v2 witness
+and is not yet accepted by the historical Rust external-checker CLI. JSON
+validation never establishes a solver certificate or execution authority.
+
 SPEC-0013 defines separate [campaign](lp-campaign-v1.schema.json),
 [manifest](lp-manifest-v1.schema.json), [endpoint](lp-endpoint-v1.schema.json),
 [trial](lp-trial-v1.schema.json) and append-only [ledger event](lp-ledger-v1.schema.json)

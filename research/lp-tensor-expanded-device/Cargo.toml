@@ -1,0 +1,19 @@
+[package]
+name = "lp-tensor-expanded-device"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.93"
+license = "MIT"
+[workspace]
+members = ["cuda-sys"]
+[dependencies]
+optimizer-core = { path = "../../crates/optimizer-core" }
+optimizer-lp = { path = "../../crates/optimizer-lp", features = ["precision-research"] }
+optimizer-cuda-sys = { path = "cuda-sys" }
+lp-tensor-expanded-research = { path = "../lp-tensor-expanded" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["float_roundtrip"] }
+[lints.rust]
+unsafe_code = "forbid"
+[lints.clippy]
+all = "warn"

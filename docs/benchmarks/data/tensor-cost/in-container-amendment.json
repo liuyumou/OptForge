@@ -1,0 +1,100 @@
+{
+  "active_combined_cpu_cap_seconds": 21600,
+  "additional_gpu_offer_reserved_seconds": 0,
+  "checks": {
+    "budget_arithmetic": "pass",
+    "exact_gpu_ledger": "pass",
+    "four_unchanged_numerical_study_completion_sections": "pass",
+    "full_native_gate": "not_run_resource_amendment_pending",
+    "git_diff_check": "pass",
+    "local_changed_document_links": "pass",
+    "nine_exact_prior_source_snapshots": "pass",
+    "runtime_resource_acceptance": "not_run"
+  },
+  "combined_cpu_upper_seconds": "19899.822845162",
+  "conservative_planning_cpu_charge_seconds": 5,
+  "gpu_package_max_seconds_unchanged": 1806,
+  "gpu_reservations": 0,
+  "gpu_seconds": 0,
+  "host_or_namespace_operations": 0,
+  "identity": "adr0044-in-container-resource-amendment-v1",
+  "implementation_authorized": false,
+  "ledger_events": 17362,
+  "ledger_sha256": "e1766490f8de2affa14f4f950afed18be7f69531c3c28eedfd74539fcc0d9db5",
+  "numerical_workload_launches": 0,
+  "planning_charge_source": "Previously unallocated original-ceiling headroom; old stage charges unchanged",
+  "prior_cpu_upper_seconds": "19894.822845162",
+  "prior_source_bridge": {
+    "path": "docs/benchmarks/data/tensor-cost/adr0044-amendment-prior/source-bridge.json",
+    "sha256": "cb33ad9b0a9fe4dfca4c77da12c38fbd1dcda4172cf8d5d4a45d875048a64f8f"
+  },
+  "proposed_additional_cpu_seconds": 14300,
+  "proposed_combined_cpu_cap_seconds": 35900,
+  "proposed_containment": "cooperative_process_supervision_v1; not cgroup-equivalent",
+  "proposed_cpu_charge": "4 * active supervised wall time; full reservation on incomplete accounting, retain known excess",
+  "proposed_explicit_reallocation_cpu_seconds": 1700,
+  "proposed_prospective_cpu_seconds": 16000,
+  "proposed_stage_caps_cpu_seconds": {
+    "coordinator_implementation_compile": 2000,
+    "native_acceptance": 2200,
+    "proofs_admission": 2600,
+    "reporting": 400,
+    "termination_margin": 400,
+    "workers_verification": 8400
+  },
+  "remaining_cpu_seconds": "1700.177154838",
+  "resource_admission_attempts": 0,
+  "sources": [
+    {
+      "path": "docs/decisions/ADR-0044-tensor-cost-continuation.md",
+      "sha256": "3d2a11352f26824e6b7e18b194c7466ebffdd507d70b456798d5dc7468a8396e"
+    },
+    {
+      "path": "docs/plans/gpu-lp-precision-roadmap.md",
+      "sha256": "44a003752fbf7b45ccf7f1c59712d7546d9cf7be0cb1c762a86b921f29d9ea2a"
+    },
+    {
+      "path": "state/active-task.md",
+      "sha256": "f56aff8a2e697a8f312d44bf2b21076d1d8a8a0d39073a7fa5a88cce3a3cf294"
+    },
+    {
+      "path": "state/known-failures.md",
+      "sha256": "1a44905fd1ede3eedfd5c43d63899ec1e5c104f04fa2e09551a4641f4f51296d"
+    },
+    {
+      "path": "state/backlog.yaml",
+      "sha256": "ddcb60c1bf2f745bab4f14465611e28218217830759dd9f618b6103dd08e12ca"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "8683cc18809851bfac782d53080691d5f4c5e86b2c31bd3d5772612328f706b3"
+    },
+    {
+      "path": "wiki/status.md",
+      "sha256": "62fc55a214b6d4264f6946ea265253b560f6b70f7f76beda17b428cfaa7c809c"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "9edc66535dac1484a256a254db83ed3a407a2d2bc103a664de2700d63532d8c3"
+    }
+  ],
+  "status": "proposed_resource_and_cpu_budget_amendment_only",
+  "unchanged_sections": [
+    {
+      "heading": "### 2. Remove shared costs without relaxing numerical budgets",
+      "sha256": "ae54413a3566db5200aaa2045b4bca96fed37ac83bf855b4e61debea80a31943"
+    },
+    {
+      "heading": "### 3. CPU admission, then device correctness, then cost admission",
+      "sha256": "ed263d1da2916a75df0f4c667aec640065f74a9efe9b46644202cc1887fae5ac"
+    },
+    {
+      "heading": "## Frozen comparison and GPU reservations",
+      "sha256": "3a46f523f109d8efeb433acbc51625bcafb7741a28c5f0ae7f91f85c4aa08350"
+    },
+    {
+      "heading": "## Completion, refusal and historical resource disposition",
+      "sha256": "986917c6064f86497e0a2a4a09e7094d1bcc1d40c0920a576675672902d72e1a"
+    }
+  ]
+}

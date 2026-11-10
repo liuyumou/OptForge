@@ -1,0 +1,65 @@
+{
+  "all_historical_charges_preserved": true,
+  "authorization": {
+    "path": "docs/benchmarks/data/tensor-warp32/inventory-authorization-v1.json",
+    "sha256": "79dbb99fe46c41132c67344cf6917a27009acc3fc94206e1d5ed7c4d1f48f252"
+  },
+  "automatic_retry_authorized": false,
+  "cleanup_empty": true,
+  "composite_acceptance_pass": false,
+  "cpu_at_setup_stop_ns": 34581056321890,
+  "cpu_ceiling_ns": 39640000000000,
+  "diagnosis": {
+    "path": "artifacts/gpup-tensor-warp32-v1/inventory-cache-diagnosis-v1.json",
+    "sha256": "df4c18b41b356b42ed28977dac84f9b79d9c94232ed9d07246db3a1ac8b8e02a"
+  },
+  "diagnosis_resource": {
+    "path": "artifacts/gpup-tensor-warp32-v1/inventory-cache-diagnosis-resource-v1.json",
+    "sha256": "5500da49dd231f443a6ebafd1c9e13d557195c669c7c9074c0abb1dd0c0e72d0"
+  },
+  "draft_correction": {
+    "path": "artifacts/gpup-tensor-warp32-v1/inventory-adapter-correction-draft-v2.json",
+    "sha256": "4b04d0e7b89e6e78e654b4229093a3f71937eef033e4760f65bac47c8421cf8e"
+  },
+  "failed_adapter": {
+    "path": "artifacts/gpup-tensor-warp32-v1/inventory_admission_v1.py",
+    "sha256": "38574e833242c079c52a44eb2e95e15bb68f17681dcd0c1c58ebc731c70b62c7"
+  },
+  "failed_combined_native_receipt": {
+    "path": "artifacts/gpup-tensor-warp32-v1/native-acceptance-v3.json",
+    "sha256": "46aa724ea3bca81b1a34214dda1133b520019e84a4c4ca81d3ba1c868faecad2"
+  },
+  "failed_package": "bitflags-2.13.1",
+  "failed_reservation_cpu_ns": 64000000000,
+  "failure_log": {
+    "path": "artifacts/gpup-tensor-warp32-v1/inventory-setup-resource-v1.json.log",
+    "sha256": "3d366e7fd06559d0dbfd6a29057b8d54a6eaea6f7d322b88065a0af1fcf7c259"
+  },
+  "failure_resource": {
+    "path": "artifacts/gpup-tensor-warp32-v1/inventory-setup-resource-v1.json",
+    "sha256": "b74a5363271129d77a3f7480b3c0d46e0bf8484efa53d0a75b9c84cf9a413caa"
+  },
+  "full_source_admission_pass": false,
+  "gpu_ledger_events": 17366,
+  "gpu_ledger_sha256": "9142829b3be8afdb1865425c83ca9122371284ca0e16f7bc8b18d303a5894426",
+  "gpu_work": false,
+  "gpup8_complete": false,
+  "gpup9_started": false,
+  "identity": "gpup-tensor-warp32-inventory-admission-refusal-v1",
+  "inventory_attempted": false,
+  "inventory_complete": false,
+  "negative_adapter_tests_passed": 11,
+  "new_gpu_ns": 0,
+  "passed_software_archive_receipt": {
+    "path": "artifacts/gpup-tensor-warp32-v1/availability-native-source-v1.json",
+    "sha256": "191c94666afcb691bd8260ed0ed1dc5a8da8805bcaeca687dc21d42845bc015a"
+  },
+  "passed_software_receipt": {
+    "path": "artifacts/gpup-tensor-warp32-v1/native-gate-v3.json",
+    "sha256": "8a2e1322150154bb813d4376dba76b1c4d806ca92626126ababb1c657883f20d"
+  },
+  "reason": "adapter_assumed_absent_extracted_registry_cargo_checksum_file",
+  "source_comparison_passed_before_provenance_stop": true,
+  "status": "incomplete_stopped_before_inventory",
+  "underlying_dependency_change_observed": false
+}

@@ -1,0 +1,124 @@
+//! ADR-0045: retain the entire previous suite and directly test reference order.
+#![cfg(feature = "precision-research")]
+#[path = "tensor_cost_device.rs"]
+mod legacy;
+
+use optimizer_core::LpWidth;
+use optimizer_cuda_sys::{Argument as A, Context, DeviceBuffer, LaunchConfig, Stream, launch};
+use std::rc::Rc;
+
+fn upload<T: Copy>(context: &Rc<Context>, stream: &Stream, data: &[T]) -> DeviceBuffer<T> {
+    let mut buffer = context.allocate(data.len()).unwrap();
+    buffer.copy_from(data, stream).unwrap();
+    buffer
+}
+
+#[test]
+fn tensor_reference_warp32_bits_match_host() {
+    if std::env::var("AI_OPTIMIZER_GPU").ok().as_deref() != Some("1") {
+        eprintln!("SKIP tensor reference: explicit opt-in required");
+        return;
+    }
+    assert_eq!(
+        std::env::var("AI_OPTIMIZER_GPU_LEASE").unwrap(),
+        "inherited"
+    );
+    let context =
+        Rc::new(Context::create(&std::env::var("CUDA_VISIBLE_DEVICES").unwrap()).unwrap());
+    let stream = context.stream().unwrap();
+    let module = context
+        .load_module(&std::fs::read(optimizer_lp_cuda::tensor_cost::code_object_path()).unwrap())
+        .unwrap();
+    let function = module.function("tc_ref_product").unwrap();
+    let mut cases = vec![
+        (vec![1e16, 1., -1e16, 1.], vec![1.; 4]),
+        (vec![-0., 0., -0., 0.], vec![1.; 4]),
+        (vec![f64::from_bits(1)], vec![0.5]),
+        (vec![f64::MAX], vec![2.]),
+    ];
+    for length in [0, 1, 31, 32, 33, 63, 64, 65, 127, 128, 129, 1024] {
+        cases.push((
+            (0..length)
+                .map(|i| ((i * 37 % 127) as f64 - 63.) * 2f64.powi((i % 7) as i32 * 20 - 60))
+                .collect(),
+            (0..length.max(1))
+                .map(|i| (i % 5 + 1) as f64 / 8.)
+                .collect(),
+        ));
+    }
+    let mut checked = 0;
+    for (values, input) in cases {
+        for reverse in [false, true] {
+            let indices = (0..values.len())
+                .map(|i| {
+                    if reverse {
+                        (input.len() - 1 - i) as u32
+                    } else {
+                        i as u32
+                    }
+                })
+                .collect::<Vec<_>>();
+            let expected = optimizer_lp::precision::product(
+                &values,
+                &indices,
+                &input,
+                LpWidth::F64,
+                LpWidth::F64,
+            );
+            let mut padded_values = vec![0.; 5];
+            padded_values.extend_from_slice(&values);
+            let mut padded_indices = vec![0; 5];
+            padded_indices.extend_from_slice(&indices);
+            let offsets = [99, 2, 2 + values.len() as u32];
+            let v = upload(&context, &stream, &padded_values);
+            let i = upload(&context, &stream, &padded_indices);
+            let o = upload(&context, &stream, &offsets);
+            let x = upload(&context, &stream, &input);
+            let y = upload(&context, &stream, &[f64::NAN]);
+            let bad = upload(&context, &stream, &[0u32]);
+            launch(
+                &function,
+                LaunchConfig {
+                    grid: 1,
+                    block: 256,
+                    shared_memory: 0,
+                },
+                &[
+                    A::DevicePtr(v.as_device_ptr()),
+                    A::DevicePtr(i.as_device_ptr()),
+                    A::DevicePtr(o.as_device_ptr()),
+                    A::DevicePtr(x.as_device_ptr()),
+                    A::DevicePtr(y.as_device_ptr()),
+                    A::DevicePtr(bad.as_device_ptr()),
+                    A::U32(1),
+                    A::U32(1),
+                    A::U32(3),
+                ],
+                &stream,
+            )
+            .unwrap();
+            stream.synchronize().unwrap();
+            let mut actual = [0.0_f64];
+            let mut flags = [0u32];
+            y.copy_to(&mut actual, &stream).unwrap();
+            bad.copy_to(&mut flags, &stream).unwrap();
+            stream.synchronize().unwrap();
+            match expected {
+                Ok(value) => {
+                    assert_eq!(flags[0], 0);
+                    assert_eq!(
+                        actual[0].to_bits(),
+                        value.to_bits(),
+                        "length={} reverse={reverse}",
+                        values.len()
+                    );
+                }
+                Err(_) => assert_ne!(flags[0], 0),
+            }
+            checked += 1;
+        }
+    }
+    println!(
+        "tensor reference: {checked} direct bit/refusal witnesses including serial-order cancellation"
+    );
+}

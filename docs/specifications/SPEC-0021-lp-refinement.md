@@ -398,3 +398,24 @@ accounting and completed-worker profile eligibility. These strengthen the accept
 resident subset; arithmetic budgets, kernels, original-model certification and
 the remaining gated extensions are unchanged. Historical measured cohorts and
 their evidence are preserved separately from the rebuilt host verifier.
+
+## GPUP-8 bounded component execution (ADR-0042, accepted 2026-10-23)
+
+The user's approved [ADR-0042](../decisions/ADR-0042-hybrid-tensor-components.md)
+adds research-only lp-tensor-v1 canonical dense tiles, signed 56-bit matrix/vector
+representations, INT8/FP16/BF16 component products and exact 128-bit tile
+reconstruction. This bounded subset maps SPEC-0012 requirements 16-28 to same
+represented operands in both orientations, explicit range/padding/hardware checks,
+original-unit bounds, reference audits, full rollback and charged sticky promotion.
+SPEC-0021's guarded-product/window obligations remain FP64-state/original-model
+authority obligations; no refinement combination is added.
+
+Acceptance maps to optimizer-lp/tests/tensor.rs (codec, rounding, common operands,
+checkpoint ownership, malformed counters and rollback), tensor_device.rs (device
+products/controllers/range refusal), lp_tensor_oracle.py (independent Fraction
+proof), test_lp_tensor.py (strict evidence, resources and report eligibility),
+and the separate GPUP-8 study and four sanitizer receipts. Device admission
+requires an exact CPU source/image cohort and compile/register/spill admission.
+Completion additionally requires the two working families and multiplicity-
+adjusted certified total-latency gain specified in ADR-0042; refusal/no gain leaves
+GPUP-8 incomplete. Historical interfaces, evidence and requirements stay exact.

@@ -1,0 +1,16 @@
+{
+  "freeze": {
+    "path": "artifacts/gpup-tensor-expanded-v1/study-v1/freeze.json",
+    "sha256": "18fa3c906ac6aeae253a9bfdc09b5462a9160d1fc0049dfe96a11c0065ed4cf3"
+  },
+  "gpu_seconds": 0,
+  "status": "passed",
+  "stderr": {
+    "path": "artifacts/gpup-tensor-expanded-v1/continuation-v1/adapter-tests.stderr",
+    "sha256": "8c06ad9beb8a79a0a47b640eca897a4a0f884fcc243cfebfa1e09cae6d8b2488"
+  },
+  "stdout": {
+    "path": "artifacts/gpup-tensor-expanded-v1/continuation-v1/adapter-tests.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
