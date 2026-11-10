@@ -7,10 +7,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
 import lp_tensor_expanded_authority as a
+from lp_gpup8_test_support import authority_tree
 
 
 class ExpandedAuthorityTests(unittest.TestCase):
     def setUp(self):
+        self.root = self.enterContext(authority_tree())
         self.auth = a.authority()
 
     def event(self, i, kind, trial, ns):
@@ -47,7 +49,8 @@ class ExpandedAuthorityTests(unittest.TestCase):
             a.checked(dict(path="tools/lp_expansion_oracle.py",sha256="0"*64))
 
     def test_stage_isolation(self):
-        j=a.read(a.JOURNAL);j["active"]=None;j["stage_attempts"]={}
+        j=a.read(a.JOURNAL)
+        j.update(active=None, stage_attempts={}, failed=False, scientific_closed=False)
         with self.assertRaisesRegex(ValueError,"stage exhausted"):
             a.stage_admission(j,"prototype",2001*a.NS)
 
@@ -65,8 +68,11 @@ class ExpandedAuthorityTests(unittest.TestCase):
         r["timings_certified"]=59
         self.assertFalse(a.report_view(r)["complete"])
 
-    def test_exact_prefix_and_preservation(self):
+    def test_exact_prefix_and_synthetic_preservation_guards(self):
         self.assertEqual(a.preserve(),17412)
+        (self.root / "synthetic-prior-source.txt").write_text("changed")
+        with self.assertRaisesRegex(ValueError, "source/cache mismatch"):
+            a.preserve()
 
     def test_actual_historical_aggregate(self):
         phases, _, _, pending = a.aggregate(a.ledger_events())

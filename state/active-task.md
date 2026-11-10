@@ -11,7 +11,7 @@ GPUP-8 remains incomplete and GPUP-9 remains gated; no new GPU study follows.
 Acceptance: preserve recorded scientific sources/results and charges, make the
 baseline CPU tests reproducible without local benchmark installations, run the
 repository CPU integration gate, inspect the complete PR diff and lockfiles,
-require passing CPU/docs/smoke CI, then merge and verify main ancestry. Test-only
+require passing CPU/docs/smoke checks, then merge and verify main ancestry. Test-only
 portability changes retain their exact prior sources and a separate source bridge.
 Likely writes: test support/fixtures, CI dependency pins, integration receipt and
 current handoff. No vendor binaries, credentials or ignored experiment directories
@@ -22,8 +22,18 @@ closed. The full CPU integration gate is newly authorized for this PR; it does
 not rerun the GPU campaign or its formal proof/profile sequence.
 
 Local clean-checkout baseline tests pass with no historical study artifacts or
-vendor environments. The source bridge preserves 817 frozen runtime files, four exact prior test sources and
-the original requirements manifest. Full CPU/docs/smoke CI is required before merge.
+vendor environments. The v3 source bridge preserves 813 frozen runtime files,
+eight exact prior test sources and the original requirements manifest. The first
+full local gate found 22 historical test-fixture errors; the portable GPUP-8
+fixture correction passes all 79 affected/neighboring CPU tests. Both failed
+attempts retain their logs and charges in the v4 integration receipt.
+
+Hosted Actions currently returns startup_failure without starting any jobs;
+the earlier main CI annotation explicitly reports an Actions budget restriction.
+Run the identical full CPU gate and separate docs/smoke commands locally before
+normal merging, record the hosted limitation in the PR, and never bypass branch
+protection or manufacture a successful hosted status. This operational fallback
+implements the user's already authorized merge; no scientific criterion changes.
 
 ## GPUP-BASELINE completed with native-return reporting (2026-11-10)
 

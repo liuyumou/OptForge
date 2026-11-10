@@ -1,0 +1,98 @@
+{
+  "active": null,
+  "authorization": {
+    "path": "docs/benchmarks/data/tensor-expanded/authorization-v1.json",
+    "sha256": "ebb7a590a79c90bd750aafc3fcaf676292e4e667e505ca05cb85ff266a2bac62"
+  },
+  "ceiling_cpu_ns": 77640000000000,
+  "failed": true,
+  "identity": "gpup-tensor-expanded-cpu-journal-v1",
+  "prior_closed_journal": {
+    "path": "artifacts/gpup-tensor-warp32-v1/cpu-journal-receipt-final-v31.json",
+    "sha256": "d1bdeb7f37ef1e6ca6b032347f63f245d8dd0b85d061d547e10115d428ef7697"
+  },
+  "prior_cpu_ns": 45902541829170,
+  "runs": [
+    {
+      "charged_cpu_ns": 16000000000,
+      "output": "/workspace/AI-Optimizer/docs/benchmarks/data/tensor-expanded/authorization-v1.json",
+      "stage": "authority",
+      "status": "conservative_authorization_bookkeeping"
+    },
+    {
+      "charged_cpu_ns": 7600829396,
+      "output": "/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/authority-resource-v1.json",
+      "stage": "authority",
+      "status": "passed"
+    },
+    {
+      "charged_cpu_ns": 4313121384,
+      "output": "/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/prototype-resource-v1.json",
+      "stage": "prototype",
+      "status": "passed"
+    },
+    {
+      "charged_cpu_ns": 5600000000000,
+      "output": "/workspace/AI-Optimizer/artifacts/gpup-tensor-expanded-v1/proofs-resource-v1.json",
+      "stage": "proofs",
+      "status": "refused"
+    }
+  ],
+  "scientific_closed": false,
+  "stage_attempts": {
+    "authority": {
+      "output": "artifacts/gpup-tensor-expanded-v1/authority-resource-v1.json",
+      "reserved_cpu_ns": 384000000000
+    },
+    "proofs": {
+      "output": "artifacts/gpup-tensor-expanded-v1/proofs-resource-v1.json",
+      "reserved_cpu_ns": 5600000000000
+    },
+    "prototype": {
+      "output": "artifacts/gpup-tensor-expanded-v1/prototype-resource-v1.json",
+      "reserved_cpu_ns": 2000000000000
+    }
+  },
+  "stages": {
+    "acceptance": {
+      "cap_cpu_ns": 4000000000000,
+      "charged_cpu_ns": 0
+    },
+    "authority": {
+      "cap_cpu_ns": 400000000000,
+      "charged_cpu_ns": 23600829396
+    },
+    "implementation": {
+      "cap_cpu_ns": 4000000000000,
+      "charged_cpu_ns": 0
+    },
+    "margin": {
+      "cap_cpu_ns": 400000000000,
+      "charged_cpu_ns": 0
+    },
+    "native": {
+      "cap_cpu_ns": 4800000000000,
+      "charged_cpu_ns": 0
+    },
+    "profiles": {
+      "cap_cpu_ns": 3200000000000,
+      "charged_cpu_ns": 0
+    },
+    "proofs": {
+      "cap_cpu_ns": 5600000000000,
+      "charged_cpu_ns": 5600000000000
+    },
+    "prototype": {
+      "cap_cpu_ns": 2000000000000,
+      "charged_cpu_ns": 4313121384
+    },
+    "reporting": {
+      "cap_cpu_ns": 800000000000,
+      "charged_cpu_ns": 0
+    },
+    "timings": {
+      "cap_cpu_ns": 6400000000000,
+      "charged_cpu_ns": 0
+    }
+  }
+}

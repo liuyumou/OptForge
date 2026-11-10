@@ -1,0 +1,82 @@
+{
+  "additional_preparation_cpu_ns": 256000000000,
+  "failed_full_gate": {
+    "errors": 22,
+    "log": {
+      "path": "artifacts/gpup-baseline-pr-integration/full-cpu-gate.log",
+      "sha256": "cbc528f7c83b35f8b8327383bfffa7e0a058dda9b025df51a85d8d51c52c0b48"
+    },
+    "not_reached": [
+      "committed-record replay",
+      "final documentation links",
+      "final CPU smoke"
+    ],
+    "passed_before_failure": [
+      "native HiGHS build",
+      "format",
+      "clippy",
+      "Rust workspace tests/build/docs",
+      "dependency policy",
+      "artifact contracts"
+    ],
+    "python_tests": 512,
+    "reason": "Historical GPUP-8 tests depended on ignored campaign metadata and an outdated current-source roster.",
+    "receipt": {
+      "path": "artifacts/gpup-baseline-pr-integration/full-cpu-gate.json",
+      "sha256": "52e2f921416400ee72de63cee872eb93dad5bb3ec45d35c75be626d0407b2fa3"
+    }
+  },
+  "focused_attempts": [
+    {
+      "log": {
+        "path": "artifacts/gpup-baseline-pr-integration/gpup8-portability-focused.log",
+        "sha256": "43b1d3a5fee6b4a9d9c7f6bd108fe4d7f4c16ebf3f0161d30b0c0fb42d2f1e01"
+      },
+      "receipt": {
+        "path": "artifacts/gpup-baseline-pr-integration/gpup8-portability-focused.json",
+        "sha256": "a602263b030591803563d235b4c54ec3997ea9476b311a3cbde717299e19f621"
+      },
+      "status": "failed_one_closed_journal_fixture",
+      "tests": 79
+    },
+    {
+      "log": {
+        "path": "artifacts/gpup-baseline-pr-integration/gpup8-portability-focused-v2.log",
+        "sha256": "b8f7d16b9f66e779b82e26fd87326dcc282c402775a4e5309a430248541a72a8"
+      },
+      "receipt": {
+        "path": "artifacts/gpup-baseline-pr-integration/gpup8-portability-focused-v2.json",
+        "sha256": "149cfb6520ffbf38dc4787070b6283bdc8e97ed36d8f3465d5ad5f41e2e78678"
+      },
+      "status": "passed",
+      "tests": 79
+    }
+  ],
+  "github_actions": {
+    "current_conclusion": "startup_failure",
+    "current_detailed_cause_available": false,
+    "current_runs": [
+      42833684776,
+      42833671398
+    ],
+    "jobs_started": 0,
+    "local_equivalent_required": true,
+    "no_protection_bypass": true,
+    "prior_main_annotation": "The job was not started because an Actions budget is preventing further use.",
+    "prior_main_run": 39885575387
+  },
+  "gpu_seconds": 0,
+  "kind": "lp-baseline-pr-full-gate-portability-correction",
+  "local_cpu_ceiling_seconds": 6000,
+  "local_cpu_charged_ns": 1965715998620,
+  "prior_acceptance": {
+    "path": "docs/benchmarks/data/external-baseline-pr-local-acceptance-v3.json",
+    "sha256": "784711e085039f3a86d3db01230e9ffeff57317b99fac85a4eb157d86741c206"
+  },
+  "schema_version": 1,
+  "source_bridge": {
+    "path": "docs/benchmarks/data/external-baseline-pr-source-bridge-v3.json",
+    "sha256": "3b8d556a509324af2e0c702114a47ab4a8ef0d721637a74ebe899a9da64a92d4"
+  },
+  "status": "focused_pass_full_gate_pending"
+}

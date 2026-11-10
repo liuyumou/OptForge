@@ -10,8 +10,21 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'tools'))
 import lp_tensor_expanded_study as s
 import lp_tensor_expanded_authority as a
+from lp_gpup8_test_support import historical_path
 
 class StudyAdapters(unittest.TestCase):
+    def setUp(self):
+        # No live campaign directory or ledger is required or mutated.
+        (a.ROOT / 'artifacts').mkdir(exist_ok=True)
+        directory = Path(self.enterContext(tempfile.TemporaryDirectory(dir=a.ROOT / 'artifacts')))
+        expanded = 'artifacts/gpup-tensor-expanded-v1/study-v1/'
+        for name in ['campaign.json', 'roster.json', 'execution.json']:
+            historical_path(expanded + name)
+        self.enterContext(patch.object(s, 'D', historical_path(expanded + 'campaign.json').parent))
+        self.enterContext(patch.object(s, 'OLD', historical_path('artifacts/gpup-tensor-warp32-v1/study-v1/campaign.json').parent))
+        self.enterContext(patch.object(a, 'LEDGER', directory / 'ledger.jsonl'))
+        self.enterContext(patch.object(a, 'authority', return_value=a.read(a.DATA / 'authorization-v1.json')))
+
     def test_frozen_roster_order_and_caps(self):
         old=list(s.legacy.jobs(a.read(s.OLD/'campaign.json')));new=s.jobs()
         self.assertEqual(len(new),76)

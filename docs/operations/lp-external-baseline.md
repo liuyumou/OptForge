@@ -14,7 +14,7 @@ and `tools/baseline-test-requirements.txt`, then run `bash tools/check.sh`; the 
 gate prepares HiGHS before these tests. The buffered checker's standalone Rust test
 also runs. Vendor Solve calls in these tests are mocked and no GPU is used.
 
-The [PR source bridge](../benchmarks/data/external-baseline-pr-source-bridge-v2.json)
+The [PR source bridge](../benchmarks/data/external-baseline-pr-source-bridge-v3.json)
 preserves four original test files and the requirements manifest, binding only
 CPU test setup/dependency and historical-admission changes.
 Historical experiment receipts continue to bind their original frozen source

@@ -15,9 +15,13 @@ from lp_tensor_warp32_screen import RULE, RESOURCE_RULE, integer
 from lp_tensor_warp32_build import preserve
 from report_lp_tensor_warp32 import gain, worker_bounds
 import lp_tensor_cost_common as retained
+from lp_gpup8_test_support import warp32_preservation_tree
 
 
 class Warp32StudyTests(unittest.TestCase):
+    def setUp(self):
+        (ROOT / 'artifacts').mkdir(exist_ok=True)
+
     def test_complete_roster_and_tighter_aggregate_caps(self):
         value = protocol()
         rows = list(jobs(value))
@@ -42,12 +46,16 @@ class Warp32StudyTests(unittest.TestCase):
         self.assertIsNone(gain([(2., 1.)] * 5, False))
 
     def test_only_reference_product_body_changes(self):
-        preserve()
+        with warp32_preservation_tree() as image:
+            preserve()
+            image.write_bytes(b'changed')
+            with self.assertRaisesRegex(ValueError, 'historical image changed'):
+                preserve()
         for path in (ROOT / 'cuda/lp_pdhg_tensor_warp32').iterdir():
             self.assertNotIn('atomicAdd(', path.read_text())
 
     def test_joint_cpu_guard_precedes_any_ledger_mutation(self):
-        with tempfile.TemporaryDirectory(dir=BASE) as directory:
+        with tempfile.TemporaryDirectory(dir=ROOT / 'artifacts') as directory:
             value = protocol()
             ledger = JointLedger(Path(directory), value['budget_authority']['sha256'], value)
             with patch('lp_tensor_warp32_common.worker_remaining_ns', return_value=0):
@@ -56,7 +64,7 @@ class Warp32StudyTests(unittest.TestCase):
             self.assertFalse(ledger.path.exists())
 
     def test_receipt_rejects_changed_endpoint_request_and_executable(self):
-        with tempfile.TemporaryDirectory(dir=BASE) as directory:
+        with tempfile.TemporaryDirectory(dir=ROOT / 'artifacts') as directory:
             d = Path(directory)
             paths = [d / name for name in ['model', 'request', 'endpoint', 'binary']]
             for path in paths:
