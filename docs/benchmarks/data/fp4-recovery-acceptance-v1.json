@@ -1,0 +1,108 @@
+{
+  "artifact_schema_and_provenance": "passed",
+  "checks": [
+    {
+      "charged_cpu_ns": 10665261296,
+      "cleanup_empty": true,
+      "id": "cpu-v1",
+      "log": {
+        "bytes": 4522,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-v1.json.log",
+        "sha256": "11cd4d88b5ed4161f3a5590a508bf190b5d3f431ef78ca07ea5d713e22ca51aa"
+      },
+      "receipt": {
+        "bytes": 3203,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-v1.json",
+        "sha256": "471f37f6f167a5af322b60db733adfd639b2230a62af8ddc58daf64e367d19cb"
+      }
+    },
+    {
+      "charged_cpu_ns": 60732115232,
+      "cleanup_empty": true,
+      "id": "cpu-v2",
+      "log": {
+        "bytes": 208,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-v2.json.log",
+        "sha256": "4af166c5b5948cee796cb5d9ca465ab85a23642b1b3238f7bc0aa3028ebb70d3"
+      },
+      "receipt": {
+        "bytes": 3175,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-v2.json",
+        "sha256": "a6b3ec99726630896dbc36d7aa2a89e17189eaddce494ec2e68c4586836ad02d"
+      }
+    },
+    {
+      "charged_cpu_ns": 510043183008,
+      "cleanup_empty": true,
+      "id": "python-integration-v1",
+      "log": {
+        "bytes": 2415,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/python-integration-v1.json.log",
+        "sha256": "f5ee5c229ba4876195d80563a833849e7ceb610af9fa6f531dcffed13e78ab62"
+      },
+      "receipt": {
+        "bytes": 43699,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/python-integration-v1.json",
+        "sha256": "382a32ba6a3ae8676608b89aab000c2b6ce46341130ae748e27583433930a677"
+      }
+    },
+    {
+      "charged_cpu_ns": 31223613360,
+      "cleanup_empty": true,
+      "id": "delivery-v1",
+      "log": {
+        "bytes": 200,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/delivery-v1.json.log",
+        "sha256": "647991d1b8c0b2189201885b29a7ed8886b59ff5719ca58510975b75d66e523f"
+      },
+      "receipt": {
+        "bytes": 4116,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/delivery-v1.json",
+        "sha256": "152e7aa8a20d9c9cde437a1acbb11e274ee9c6751498a3460c1a545893504206"
+      }
+    },
+    {
+      "charged_cpu_ns": 10748264600,
+      "cleanup_empty": true,
+      "id": "cpu-v3",
+      "log": {
+        "bytes": 129,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-v3.json.log",
+        "sha256": "6ceabb6a7dc05d422108dfd80006b6bd0ecdb05eae0e46a4e5ac61dca293a0e5"
+      },
+      "receipt": {
+        "bytes": 3191,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-v3.json",
+        "sha256": "8dbf639a6cf8c15e485cab6c1906130af87c28eb4476943cf73b73efeba74efa"
+      }
+    }
+  ],
+  "docs_pages": 214,
+  "final_numerical_source": {
+    "bytes": 17069,
+    "path": "tools/lp_fp4_recovery_contract.py",
+    "sha256": "c7f9849044af66397979564fa33d9d1eb982d3b1a5272f8bfaa96e96ee7c7bdb"
+  },
+  "final_tests_source": {
+    "bytes": 18012,
+    "path": "tests/integration/test_lp_fp4_recovery_contract.py",
+    "sha256": "03217225270bab7b82c298c455d136b38bf616e06b1b0c3b2c0ddd25063e1eb3"
+  },
+  "gpu_seconds": 0,
+  "kind": "lp-fp4-recovery-acceptance",
+  "native_rust": "No Rust/kernel/checker changes; earlier native acceptance retained, not rerun",
+  "neighboring_fp4_tests": 107,
+  "new_focused_tests": 30,
+  "not_established": [
+    "global trajectory enclosure",
+    "convergence",
+    "coupled device trajectory admission",
+    "certified solver performance"
+  ],
+  "repository_python_tests": 624,
+  "schema_version": 1,
+  "scope": "CPU contract only; no original qualification or device rerun",
+  "source_delta_after_full_python": "Certified terminal Monitor now records the actually certified checkpoint and iteration; all 30 focused tests passed after this change. Full 624-test suite source snapshot is retained.",
+  "status": "passed",
+  "unchanged_historical_files": 1539
+}

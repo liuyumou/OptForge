@@ -1,0 +1,742 @@
+{
+  "actual_gpu_seconds": 0,
+  "allowed_navigation_changes": [
+    "AGENTS.md",
+    "docs/plans/gpu-lp-precision-roadmap.md",
+    "state/active-task.md",
+    "state/backlog.yaml"
+  ],
+  "authority": "CPU operational-policy contract; no global enclosure or device qualification",
+  "historical_files_unchanged": 1539,
+  "historical_head": "2473abdb0e649d185175c6f91cc15bfc43b945b1",
+  "history": {
+    "bytes": 277677,
+    "path": "artifacts/gpup-fp4-recovery-spec-v1/history-v1.json",
+    "sha256": "b9bcd3fcc82cf4333d96e81f3e2758a810340302700ee9e3531a5647963f05bb"
+  },
+  "integration_dependencies_complete": true,
+  "kind": "lp-fp4-recovery-evidence",
+  "old_dated_handoffs_exact": true,
+  "proposal_cells": [
+    {
+      "id": "coupled-equality/native-fp64/certified-1e-7",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-equality/native-fp64/certified-1e-9",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-equality/fp8-4/certified-1e-7",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-equality/fp8-4/certified-1e-9",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-equality/fp16-2/certified-1e-7",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-equality/fp16-2/certified-1e-9",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-equality/adaptive-fp4-start-2/certified-1e-7",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-equality/adaptive-fp4-start-2/certified-1e-9",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-equality/adaptive-fp4-start-4/certified-1e-7",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-equality/adaptive-fp4-start-4/certified-1e-9",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-equality/adaptive-fp4-start-8/certified-1e-7",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-equality/adaptive-fp4-start-8/certified-1e-9",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "coupled-equality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-inequality/native-fp64/certified-1e-7",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-inequality/native-fp64/certified-1e-9",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-inequality/fp8-4/certified-1e-7",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-inequality/fp8-4/certified-1e-9",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-inequality/fp16-2/certified-1e-7",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-inequality/fp16-2/certified-1e-9",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-inequality/adaptive-fp4-start-2/certified-1e-7",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-inequality/adaptive-fp4-start-2/certified-1e-9",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-inequality/adaptive-fp4-start-4/certified-1e-7",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-inequality/adaptive-fp4-start-4/certified-1e-9",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "coupled-inequality/adaptive-fp4-start-8/certified-1e-7",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "coupled-inequality/adaptive-fp4-start-8/certified-1e-9",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "coupled-inequality",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ranged-one-sided/native-fp64/certified-1e-7",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ranged-one-sided/native-fp64/certified-1e-9",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ranged-one-sided/fp8-4/certified-1e-7",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ranged-one-sided/fp8-4/certified-1e-9",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ranged-one-sided/fp16-2/certified-1e-7",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ranged-one-sided/fp16-2/certified-1e-9",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ranged-one-sided/adaptive-fp4-start-2/certified-1e-7",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ranged-one-sided/adaptive-fp4-start-2/certified-1e-9",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ranged-one-sided/adaptive-fp4-start-4/certified-1e-7",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ranged-one-sided/adaptive-fp4-start-4/certified-1e-9",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ranged-one-sided/adaptive-fp4-start-8/certified-1e-7",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ranged-one-sided/adaptive-fp4-start-8/certified-1e-9",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "ranged-one-sided",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "fixed-active-bounds/native-fp64/certified-1e-7",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "fixed-active-bounds/native-fp64/certified-1e-9",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "fixed-active-bounds/fp8-4/certified-1e-7",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "fixed-active-bounds/fp8-4/certified-1e-9",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "fixed-active-bounds/fp16-2/certified-1e-7",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "fixed-active-bounds/fp16-2/certified-1e-9",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "fixed-active-bounds/adaptive-fp4-start-2/certified-1e-7",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "fixed-active-bounds/adaptive-fp4-start-2/certified-1e-9",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "fixed-active-bounds/adaptive-fp4-start-4/certified-1e-7",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "fixed-active-bounds/adaptive-fp4-start-4/certified-1e-9",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "fixed-active-bounds/adaptive-fp4-start-8/certified-1e-7",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "fixed-active-bounds/adaptive-fp4-start-8/certified-1e-9",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "fixed-active-bounds",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ill-scaled-coupled/native-fp64/certified-1e-7",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ill-scaled-coupled/native-fp64/certified-1e-9",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ill-scaled-coupled/fp8-4/certified-1e-7",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ill-scaled-coupled/fp8-4/certified-1e-9",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ill-scaled-coupled/fp16-2/certified-1e-7",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ill-scaled-coupled/fp16-2/certified-1e-9",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ill-scaled-coupled/adaptive-fp4-start-2/certified-1e-7",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ill-scaled-coupled/adaptive-fp4-start-2/certified-1e-9",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ill-scaled-coupled/adaptive-fp4-start-4/certified-1e-7",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ill-scaled-coupled/adaptive-fp4-start-4/certified-1e-9",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "ill-scaled-coupled/adaptive-fp4-start-8/certified-1e-7",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "ill-scaled-coupled/adaptive-fp4-start-8/certified-1e-9",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "ill-scaled-coupled",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "irregular-tail-33/native-fp64/certified-1e-7",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "irregular-tail-33/native-fp64/certified-1e-9",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "irregular-tail-33/fp8-4/certified-1e-7",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "irregular-tail-33/fp8-4/certified-1e-9",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "irregular-tail-33/fp16-2/certified-1e-7",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "irregular-tail-33/fp16-2/certified-1e-9",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "irregular-tail-33/adaptive-fp4-start-2/certified-1e-7",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "irregular-tail-33/adaptive-fp4-start-2/certified-1e-9",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "irregular-tail-33/adaptive-fp4-start-4/certified-1e-7",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "irregular-tail-33/adaptive-fp4-start-4/certified-1e-9",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "irregular-tail-33/adaptive-fp4-start-8/certified-1e-7",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "irregular-tail-33/adaptive-fp4-start-8/certified-1e-9",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "irregular-tail-33",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "dense-rich-65/native-fp64/certified-1e-7",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "dense-rich-65/native-fp64/certified-1e-9",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "dense-rich-65/fp8-4/certified-1e-7",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "dense-rich-65/fp8-4/certified-1e-9",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "dense-rich-65/fp16-2/certified-1e-7",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "dense-rich-65/fp16-2/certified-1e-9",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "dense-rich-65/adaptive-fp4-start-2/certified-1e-7",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "dense-rich-65/adaptive-fp4-start-2/certified-1e-9",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "dense-rich-65/adaptive-fp4-start-4/certified-1e-7",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "dense-rich-65/adaptive-fp4-start-4/certified-1e-9",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "dense-rich-65/adaptive-fp4-start-8/certified-1e-7",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "dense-rich-65/adaptive-fp4-start-8/certified-1e-9",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "dense-rich-65",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "infinite-bound-refusal/native-fp64/certified-1e-7",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "infinite-bound-refusal/native-fp64/certified-1e-9",
+      "lane": "native-fp64",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "infinite-bound-refusal/fp8-4/certified-1e-7",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "infinite-bound-refusal/fp8-4/certified-1e-9",
+      "lane": "fp8-4",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "infinite-bound-refusal/fp16-2/certified-1e-7",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "infinite-bound-refusal/fp16-2/certified-1e-9",
+      "lane": "fp16-2",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "infinite-bound-refusal/adaptive-fp4-start-2/certified-1e-7",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "infinite-bound-refusal/adaptive-fp4-start-2/certified-1e-9",
+      "lane": "adaptive-fp4-start-2",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "infinite-bound-refusal/adaptive-fp4-start-4/certified-1e-7",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "infinite-bound-refusal/adaptive-fp4-start-4/certified-1e-9",
+      "lane": "adaptive-fp4-start-4",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-9"
+    },
+    {
+      "id": "infinite-bound-refusal/adaptive-fp4-start-8/certified-1e-7",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-7"
+    },
+    {
+      "id": "infinite-bound-refusal/adaptive-fp4-start-8/certified-1e-9",
+      "lane": "adaptive-fp4-start-8",
+      "minimum_updates": 600,
+      "model": "infinite-bound-refusal",
+      "tier": "certified-1e-9"
+    }
+  ],
+  "proposed_resources": {
+    "cpu_seconds": 51760,
+    "executable": false,
+    "gpu_seconds": 5880
+  },
+  "schema_version": 1,
+  "sources": [
+    {
+      "bytes": 16977,
+      "path": "tools/lp_fp4_recovery_contract.py",
+      "sha256": "6be6cb30f99e9d89e1317320d53eb7420ff23d85afcf31968d8d2c371037cfbb"
+    },
+    {
+      "bytes": 5398,
+      "path": "tools/lp_fp4_recovery_delivery.py",
+      "sha256": "a02cfa63e412e78da07aceab458555c17261aa82ebbe0057936acc064423e725"
+    },
+    {
+      "bytes": 17907,
+      "path": "tests/integration/test_lp_fp4_recovery_contract.py",
+      "sha256": "2190d9bb343cc85f23be7ae9459c3b39c9c495ceb49bb7a45357ee8d9f80c5f2"
+    },
+    {
+      "bytes": 2894,
+      "path": "benchmarks/configs/lp-fp4-recovery-v1.json",
+      "sha256": "ab5feb26fcc80cf6bf9176a61ac9b885f694f96fb398b5378a4c30dc8162a924"
+    },
+    {
+      "bytes": 4360,
+      "path": "schemas/lp-fp4-recovery-v1.schema.json",
+      "sha256": "3b179c9b95fee8d25516baf07a47c1ec2fe4eee8015bfd821d1b8e446fb418a9"
+    },
+    {
+      "bytes": 17414,
+      "path": "schemas/lp-fp4-recovery-checkpoint-v1.schema.json",
+      "sha256": "3a2efb7fe2f54a2809b2ca986210dcc72c6865a617f7c655aef7b3c975edcdba"
+    },
+    {
+      "bytes": 17862,
+      "path": "docs/specifications/SPEC-0029-fp4-recovery-policy.md",
+      "sha256": "51c5750411e034b36c6305d0324cf039e6d76adacaaf29dd1454fddb9d90c34c"
+    },
+    {
+      "bytes": 2818,
+      "path": "docs/decisions/ADR-0061-fp4-operational-recovery.md",
+      "sha256": "cd118fe6e54ca883687821191b96179edf9b043e0782c9119fa96bf11afecf1f"
+    }
+  ]
+}

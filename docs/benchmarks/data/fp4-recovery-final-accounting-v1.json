@@ -1,0 +1,114 @@
+{
+  "all_cleanup_empty": true,
+  "allocation": {
+    "bytes": 486,
+    "path": "artifacts/gpup-fp4-recovery-spec-v1/allocation-v1.json",
+    "sha256": "9c1f0facb6eb9c788cab451ec0da782dd8f29585385444bf4f754646ab57a910"
+  },
+  "charged_cpu_ns": 910831742920,
+  "charged_cpu_seconds": "910.83174292",
+  "charged_gpu_ns": 0,
+  "closed": true,
+  "cpu_ceiling_ns": 16000000000000,
+  "failed_reservations": 0,
+  "final_evidence": {
+    "bytes": 21985,
+    "path": "docs/benchmarks/data/fp4-recovery-evidence-v2.json",
+    "sha256": "149287b7d9b3cbce5ad9cdb4a2b78cc114659138b17bf2f0ec0f89764985685e"
+  },
+  "gpu_ceiling_ns": 0,
+  "historical_transfer": false,
+  "journal": {
+    "bytes": 1622,
+    "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-journal-final-v1.json",
+    "sha256": "b68f9fb3c2236e54a7f44552b0f05a9b085a0c268fad89e61cd633c5628e571e"
+  },
+  "kind": "lp-fp4-recovery-final-accounting",
+  "phase_totals": {
+    "implementation": {
+      "cap_cpu_ns": 4096000000000,
+      "charged_cpu_ns": 338145641128
+    },
+    "margin": {
+      "cap_cpu_ns": 904000000000,
+      "charged_cpu_ns": 31419305424
+    },
+    "native": {
+      "cap_cpu_ns": 8000000000000,
+      "charged_cpu_ns": 510043183008
+    },
+    "reporting": {
+      "cap_cpu_ns": 3000000000000,
+      "charged_cpu_ns": 31223613360
+    }
+  },
+  "preparation_and_final_packaging_cpu_ns": 256000000000,
+  "schema_version": 1,
+  "settled_reservations": [
+    {
+      "charged_cpu_ns": 10665261296,
+      "cleanup_empty": true,
+      "receipt": {
+        "bytes": 3203,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-v1.json",
+        "sha256": "471f37f6f167a5af322b60db733adfd639b2230a62af8ddc58daf64e367d19cb"
+      },
+      "status": "passed"
+    },
+    {
+      "charged_cpu_ns": 60732115232,
+      "cleanup_empty": true,
+      "receipt": {
+        "bytes": 3175,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-v2.json",
+        "sha256": "a6b3ec99726630896dbc36d7aa2a89e17189eaddce494ec2e68c4586836ad02d"
+      },
+      "status": "passed"
+    },
+    {
+      "charged_cpu_ns": 510043183008,
+      "cleanup_empty": true,
+      "receipt": {
+        "bytes": 43699,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/python-integration-v1.json",
+        "sha256": "382a32ba6a3ae8676608b89aab000c2b6ce46341130ae748e27583433930a677"
+      },
+      "status": "passed"
+    },
+    {
+      "charged_cpu_ns": 31223613360,
+      "cleanup_empty": true,
+      "receipt": {
+        "bytes": 4116,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/delivery-v1.json",
+        "sha256": "152e7aa8a20d9c9cde437a1acbb11e274ee9c6751498a3460c1a545893504206"
+      },
+      "status": "passed"
+    },
+    {
+      "charged_cpu_ns": 10748264600,
+      "cleanup_empty": true,
+      "receipt": {
+        "bytes": 3191,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/cpu-v3.json",
+        "sha256": "8dbf639a6cf8c15e485cab6c1906130af87c28eb4476943cf73b73efeba74efa"
+      },
+      "status": "passed"
+    },
+    {
+      "charged_cpu_ns": 31419305424,
+      "cleanup_empty": true,
+      "receipt": {
+        "bytes": 4623,
+        "path": "artifacts/gpup-fp4-recovery-spec-v1/final-cleanup-v1.json",
+        "sha256": "f276f03205d357f07a01d6f7167c2a730b1a964a17237275a1c675a0b6b573f7"
+      },
+      "status": "passed"
+    }
+  ],
+  "source_bridge": {
+    "bytes": 891,
+    "path": "docs/benchmarks/data/fp4-recovery-source-bridge-v1.json",
+    "sha256": "3f8099590f0ddc49cb518bb44e6bcd65bdefcf463e84cddf437b1ccf10959ce2"
+  }
+}

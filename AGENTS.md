@@ -1,5 +1,37 @@
 # Agent Instructions
 
+## GPUP-FP4-RECOVERY-SPEC complete; integration next (2026-11-11)
+
+The user requests implementation. SPEC-0029 / ADR-0061 select a versioned
+operational residual guard, compatible separate local rounding/encoding budgets,
+complete checkpoints and monotone FP4 2 -> 4 -> 8 -> native recovery. This is not
+a proved global trajectory enclosure or a convergence claim. Original-model
+independent checking remains the final authority at explicit 1e-7/1e-9 tiers.
+Source-bound CPU acceptance and accounting are in [the report](docs/benchmarks/lp-fp4-recovery-spec.md).
+
+New independent ceiling: 16000 CPU / zero GPU seconds; implementation 4096
+(including 256 conservative preparation), software acceptance 8000, reporting
+3000 and cleanup 904. Four CPU slots and 6 GiB sampled RSS under the unchanged
+in-container supervisor. No historical transfer, old qualification retry,
+device run or public checker/default change. The 96-cell integration package's
+51760 CPU / 5880 GPU seconds are proposals, not allocations. Existing optimized
+kernels remain frozen. All numerical sources/results and historical charges stay
+exact; only current navigation/handoff files change.
+
+Acceptance: 30 new recovery tests, 107 neighboring FP4 checks and 624 repository
+Python tests pass; the final endpoint-metadata correction has all 30 focused
+tests passing. Artifact/docs checks pass, with 214 documentation pages.
+1539 historical files and all older dated handoffs remain exact. Closed charge:
+910.83174292 / 16000 CPU seconds; GPU zero. All six reservations pass and
+cleanup is empty. Unused funds do not release the next task.
+
+Next ready: GPUP-FP4-INTEGRATE, implementing the selected
+policy around the optimized candidate with coupled trajectories, original-A
+FP64 audits, complete recovery and independent final checks. Actual integration
+model/source/device freeze and its concrete resource package remain required.
+Native control stays supported; FP4-PROTO and GPUP-8 incomplete, GPUP-9 gated.
+Commit locally after delivery; no push or publication. Older entries retain scope.
+
 ## GPUP-FP4-FAST completed; identical-state FP4 acceleration (2026-11-11)
 
 SPEC-0028 / ADR-0060 deliver the separate optimization in

@@ -1,0 +1,22 @@
+{
+  "bridges": [
+    {
+      "original": {
+        "bytes": 16977,
+        "path": "tools/lp_fp4_recovery_contract.py",
+        "sha256": "6be6cb30f99e9d89e1317320d53eb7420ff23d85afcf31968d8d2c371037cfbb"
+      },
+      "retained_exact_source": "artifacts/gpup-fp4-recovery-spec-v1/sources/delivery-v1/tools/lp_fp4_recovery_contract.py"
+    },
+    {
+      "original": {
+        "bytes": 17907,
+        "path": "tests/integration/test_lp_fp4_recovery_contract.py",
+        "sha256": "2190d9bb343cc85f23be7ae9459c3b39c9c495ceb49bb7a45357ee8d9f80c5f2"
+      },
+      "retained_exact_source": "artifacts/gpup-fp4-recovery-spec-v1/sources/delivery-v1/tests/integration/test_lp_fp4_recovery_contract.py"
+    }
+  ],
+  "kind": "lp-fp4-recovery-source-bridge",
+  "reason": "Final certified-endpoint metadata correction and focused regression assertions; all older passing sources retained exactly"
+}
