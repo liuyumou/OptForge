@@ -110,6 +110,12 @@ tasks:
     depends_on: [GPUP-FP4-GPU-PILOT, GPUP-FP4-RECOVERY-SPEC]
     specification: docs/specifications/SPEC-0030-fp4-integration.md
     acceptance: "SPEC-0030 / ADR-0062 complete: bounded coupled persistent FP4, original-A audits, full rollback/cancellation, transactional conversion and explicit native recovery; 96/96 diagnostics and 576/576 cold/prepared solves, 432 same-tier performance certificates and matched six-of-eight family coverage. Final native/software gate, 117 device cases, four sanitizers/200 processes and 176 unique endpoint replays across 672 cells pass. Cold FP4 geometric means 0.959–0.986x fail retention; prepared 0.623–0.770x, no preset, native retained. All failures/charges/history preserved. Report: docs/benchmarks/lp-fp4-integrate.md."
+  - id: GPUP-FP4-ACCEL
+    title: Correct FP4 state and recovery costs and accelerate complete certified solves
+    status: complete
+    depends_on: [GPUP-FP4-INTEGRATE]
+    specification: docs/specifications/SPEC-0031-fp4-corrected-acceleration.md
+    acceptance: "SPEC-0031 / ADR-0063: cached preparation/checker, retained corrections, original-A window references, scaling, parallel dense tiles and exact parallel certificate scheduling. All 1800 cells complete, 1650 certificates, same eleven bounded families at both tiers. 270 component comparisons, 42 lifecycle cases, four sanitizers/112 processes and 102 serial endpoint replays pass. Strict dense512 FP4 6.19x GPU / 2.27x complete versus fused FP4; 1.20x GPU but 1.5% total regression against parallel native. EOF cold ratios 0.9850/0.9863x fail retention; no public preset. Every failed source/charge retained; report: docs/benchmarks/lp-fp4-accel.md."
   - id: GPUP-MIXED2
     title: Admit complete-delivery cost before simpler mixed precision
     status: ready

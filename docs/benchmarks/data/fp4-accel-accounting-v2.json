@@ -1,0 +1,903 @@
+{
+  "acceptance": {
+    "path": "docs/benchmarks/data/fp4-accel-acceptance-v2.json",
+    "sha256": "93e509bff313a7ca336f8bcc5dd6a0d620bde6f810cd0304a205d12e39ea1c26"
+  },
+  "administration_method": "explicit conservative charge for final metadata/docs/local commit after supervisor settlement; not a fabricated execution receipt",
+  "attempts": [
+    {
+      "cpu_ns": 17681249132,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "additive-evidence-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "queue_ns": 321,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/additive-evidence-v1.resource.json",
+        "sha256": "3ec6f7386a72827d13a8db7700765da2d4ebbbf35450682237ee77acbe976174"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/additive-evidence-v1.settlement.json",
+        "sha256": "4bb3c3a11d9d658eb143f7e908ade19e287c81684cea316254f6443496ce18ef"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 33165788956,
+      "gpu": true,
+      "gpu_ns": 7421109615,
+      "id": "centered-audit64-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22152,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/centered-audit64-v1.resource.json",
+        "sha256": "e4e7b636ecc2e4c9328432a2aab68c7be4a5f02500e6d7d0613c0a05e6544dca"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/centered-audit64-v1.settlement.json",
+        "sha256": "df1bc710343c396fd978e5dc61752386bead862ba42c409bf22794be4f2b3011"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 27636444648,
+      "gpu": true,
+      "gpu_ns": 6037379378,
+      "id": "centered-device-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22576,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/centered-device-v1.resource.json",
+        "sha256": "860241bbde86ca0a74db5019af1a3ba6b52323fd1c8bfbac18a21fd17bcfe71d"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/centered-device-v1.settlement.json",
+        "sha256": "9186fbd1c516243fb1cf127b8126ea0b499107fe4beebb0a6035158d7dffc693"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 31340411584,
+      "gpu": true,
+      "gpu_ns": 6964034566,
+      "id": "centered-trajectories-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22560,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/centered-trajectories-v1.resource.json",
+        "sha256": "9f358d52a09162ae647f703106680115a3905a45962875f07f34e9bd45a7dc68"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/centered-trajectories-v1.settlement.json",
+        "sha256": "4f520db61ee7503f9a5faade571c9ceccab3e50139887aeb44bbe950f335f884"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 110254158456,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "checkpoint-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 609,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/checkpoint-build-v1.resource.json",
+        "sha256": "4e335caec5eefff18d0bb9a090d07f12f72c597f7ecf05c680fe68aea62be5a4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/checkpoint-build-v1.settlement.json",
+        "sha256": "d99633b932335aee4a55a3dfbc7508f06b78433bc30c14873efe1392bb2826ce"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 593127868468,
+      "gpu": true,
+      "gpu_ns": 147408855820,
+      "id": "cold-eof-cohort-v1",
+      "overrun": false,
+      "phase": "study",
+      "queue_ns": 20037,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cold-eof-cohort-v1.resource.json",
+        "sha256": "5d144879ec7f13ee3ca9c0efd2fd10d903cac06395e386412f7ac81c36ea5cb7"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cold-eof-cohort-v1.settlement.json",
+        "sha256": "805f0072fa9e5c9221347a85c92190b29ea18331bbf34a6937a3b05adeaa6bc4"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 4768456264,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "cold-eof-contract-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "queue_ns": 442,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cold-eof-contract-v1.resource.json",
+        "sha256": "6a1e483612d269e8aebfce845b60af6efee923926957ecea227defc691bda71b"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cold-eof-contract-v1.settlement.json",
+        "sha256": "36a5d2a8566cd651e7d4c59dd1e6c0bf447ba770253542fc1075d64e9f541d74"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 4676809508,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "cold-eof-freeze-v1",
+      "overrun": false,
+      "phase": "study",
+      "queue_ns": 603,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cold-eof-freeze-v1.resource.json",
+        "sha256": "33a91311386b81b0132fbf8a03268a6fb94658e4b60f7d5eeb9e02e60abeca9c"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cold-eof-freeze-v1.settlement.json",
+        "sha256": "8d0fd548251a2f3594392831fdb0380967011dfd4ca7430750d1f71fb24532bf"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 27777892516,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "cpu-admission-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 540,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cpu-admission-v1.resource.json",
+        "sha256": "d0da464fb016fffc4357ff4c4524639bebbb596251e9fda0b85f57fda5c58d9f"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cpu-admission-v1.settlement.json",
+        "sha256": "9f37f136baec139012b76e913a213d64748d79755ec300691e20b9afbbe0c529"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "cpu-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 319,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cpu-build-v1.resource.json",
+        "sha256": "716d0767867a7f74e73e3fe003fb10f9ddbaf7c537f77fd9ae9c317b25ab548e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cpu-build-v1.settlement.json",
+        "sha256": "fbd997c472d766b11f349c541388e9b00a855370f5eb91affc1809455b8a7f5f"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 76979550044,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "cpu-build-v2",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 291,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cpu-build-v2.resource.json",
+        "sha256": "9f78a8ffec4ae2a2b11814a1f42a0ad0454bce077bbd420a27740fc5fc4eccf9"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/cpu-build-v2.settlement.json",
+        "sha256": "f4fb71f3596fb907a137f4a8af8da4fb2c30272b77d2dbda1b6940ccbc087754"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 720000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "delivery-check-v1",
+      "overrun": false,
+      "phase": "cleanup",
+      "queue_ns": 366,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/delivery-check-v1.resource.json",
+        "sha256": "6b2295ffc8471408181d30843600847b33478dc94eaba1d044f55f719f3ca2ac"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/delivery-check-v1.settlement.json",
+        "sha256": "9fb349c5621f96902bf59f764373f26bdb0eef37de414e7e8717c0796cb47d25"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 27190988860,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "delivery-check-v2",
+      "overrun": false,
+      "phase": "cleanup",
+      "queue_ns": 366,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/delivery-check-v2.resource.json",
+        "sha256": "7aa47ed4794bd6e54437de19da689aaa87590e811bc6ef1dd0dd18ccac5c628a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/delivery-check-v2.settlement.json",
+        "sha256": "5df94cede9dd06fe17c5d8145880a5e326786e0e0cd1ee99db75153ca8798f92"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 27797316488,
+      "gpu": true,
+      "gpu_ns": 6076854413,
+      "id": "device-differential-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 23291,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/device-differential-v1.resource.json",
+        "sha256": "4fed3f02aa119122a2c0faca98f84a51fbc60f5dfa439b4aab48af3d2d711752"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/device-differential-v1.settlement.json",
+        "sha256": "0535337b458d76d9752578b515fb13f4ae913892bf50fdb658b375eb3d6d1bdf"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 31662348976,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "export-barrier-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 329,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/export-barrier-build-v1.resource.json",
+        "sha256": "ffc001ea422bbaba211fac69ac8f6d46339d3a6924967948081c549f0d5e7f25"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/export-barrier-build-v1.settlement.json",
+        "sha256": "7dac50635f891d47653901bb19ef5d9b121821d04ff3e3403ae7fadb31e0b2b8"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "figure-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "queue_ns": 365,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/figure-v1.resource.json",
+        "sha256": "d1499664f7248e0d1fc6d217acf7defd711b83850ac69547188c5bad0413615e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/figure-v1.settlement.json",
+        "sha256": "9c3c22ed2ff159b0652d298baf2ab4a9e07dc2fa9558d2eada22939a831c11b4"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 95885731780,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "final-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 337,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-build-v1.resource.json",
+        "sha256": "52f7106db11204c7b23c630b22ea4fd3c348a6c230a033867f52d52fb805e8e8"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-build-v1.settlement.json",
+        "sha256": "b36d0d3ae748d0976c540dd189241d8076cd00664e5e3c38c37d8a0344bb6097"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 94671944176,
+      "gpu": true,
+      "gpu_ns": 22795849057,
+      "id": "final-device-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22598,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-device-v1.resource.json",
+        "sha256": "9addf832e24aeb2d92413bdfdbe6b2b140bb12cc4a8c023b8ed1e56169ab60ab"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-device-v1.settlement.json",
+        "sha256": "56dae945914bccd732e46722eb186e0ad0c8557b53c1da3aacb75a7283027731"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 111576605560,
+      "gpu": true,
+      "gpu_ns": 27022490084,
+      "id": "final-device-v2",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 24088,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-device-v2.resource.json",
+        "sha256": "fe43d7b12784ad8425684a143e0786b531d5a92a060ebdee0f033a497e9d8084"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-device-v2.settlement.json",
+        "sha256": "facae00fa4012611abbd13eae6d9e41ffb543f930f4c469f3273c0fc728955d7"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 1530127997536,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "final-native-v1",
+      "overrun": false,
+      "phase": "native",
+      "queue_ns": 373,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-native-v1.resource.json",
+        "sha256": "29272e27367ed267d083de095fd8d54ac5176dbdecd4ad7b214be0f2237ff7fe"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-native-v1.settlement.json",
+        "sha256": "e226e33716c1dcde570de2ce7bb690262671d240b49b3880d39281e9b41b9f39"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 1246136758560,
+      "gpu": true,
+      "gpu_ns": 310669783864,
+      "id": "formal-cohort-v1",
+      "overrun": false,
+      "phase": "study",
+      "queue_ns": 22528,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/formal-cohort-v1.resource.json",
+        "sha256": "7b088eac2abb122cb4426faee29144c862a5cf78746d68b3625486e39020c68d"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/formal-cohort-v1.settlement.json",
+        "sha256": "78e98eeb2b5e9551d89098b959f78db64b1e590bb9f13c80ff173ef16bf22888"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 7727729840,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "formal-freeze-v1",
+      "overrun": false,
+      "phase": "study",
+      "queue_ns": 369,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/formal-freeze-v1.resource.json",
+        "sha256": "abd18bb99541011ef3d4471061a06e8e0898d0c117bb89840842dc3b911e21d7"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/formal-freeze-v1.settlement.json",
+        "sha256": "c2c14b5d48ce7a8614283c3733b0f745f8767791852d89c69234aaa43ca793f6"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 40874915940,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "grid-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 385,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/grid-build-v1.resource.json",
+        "sha256": "095b12797a88623e360ed97a5c49315d818ad2e5d5718238b644be7f4253d447"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/grid-build-v1.settlement.json",
+        "sha256": "e24f8ae881f4b28dc2964969bb324dba470e629d66d3cb246888b5f6c741147e"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 26943257076,
+      "gpu": true,
+      "gpu_ns": 5863254300,
+      "id": "grid-device-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 23939,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/grid-device-v1.resource.json",
+        "sha256": "4d744ec77639d362b530911580328898df305976f3eceea212708fbddbb5bc5a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/grid-device-v1.settlement.json",
+        "sha256": "cda130be9b51cb75999ddf4028e5f9817a067259f28210bc587847851c6d6a38"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 31848317132,
+      "gpu": true,
+      "gpu_ns": 7089631868,
+      "id": "grid-trajectories-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22681,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/grid-trajectories-v1.resource.json",
+        "sha256": "b9435b2ea0bc976e5af10f5db75ddc90ccbd2fd7603f440354a32aff9c94c9b5"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/grid-trajectories-v1.settlement.json",
+        "sha256": "0ae13c18ce7556ba8f4223d11c52cc69186fc7b0f881234ce3672df99e735e2a"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 31180843100,
+      "gpu": true,
+      "gpu_ns": 6923518145,
+      "id": "guard-trajectories-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22307,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/guard-trajectories-v1.resource.json",
+        "sha256": "f5003a587925dfcf613b57616d246aa5ee31934730684eea9343e65295be8d11"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/guard-trajectories-v1.settlement.json",
+        "sha256": "873af5ebde07e9437f3ce54bb87bd90a0d68cc4351c3315c11eed1f04602e66f"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 90322261348,
+      "gpu": true,
+      "gpu_ns": 21707493688,
+      "id": "initcheck-final-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22274,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/initcheck-final-v1.resource.json",
+        "sha256": "37f10b0f7e7d68e6fc1ec529a9f629e35f2202808b8af9c220bb296806bc439a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/initcheck-final-v1.settlement.json",
+        "sha256": "f17a78258f1129ce82e17271e4d2720432193b56f5a385322fb672c331283012"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 53989515040,
+      "gpu": true,
+      "gpu_ns": 12626276236,
+      "id": "lifecycle-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22502,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/lifecycle-v1.resource.json",
+        "sha256": "48e3527255073f29907ac43c30da3d06807466896956e9a52ab312eae412bd81"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/lifecycle-v1.settlement.json",
+        "sha256": "87d0588e21e738ddc33e89c77e64dec770c89ffd0dd1477e17cb66927baa80d6"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 170096626644,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "lto-guard-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 383,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/lto-guard-build-v1.resource.json",
+        "sha256": "9b2666b6666b7829fd79deefe750218aa472a92a98fda86b3e17e7500aa3a558"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/lto-guard-build-v1.settlement.json",
+        "sha256": "944712f4047ff052b3b49ca53811c5d4a97e266bb76c29bdc7ccf5bd33799f0e"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 95060752352,
+      "gpu": true,
+      "gpu_ns": 22894037367,
+      "id": "memcheck-final-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 21945,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/memcheck-final-v1.resource.json",
+        "sha256": "12b6c79390dadbbd9de40a7761b8b3a4692f4b63cf9a82d23535c0a721a2f607"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/memcheck-final-v1.settlement.json",
+        "sha256": "616a1f91f4e3f4e934291b5d0a409ccdc12f9f49fea894cc329c5f9e51b1675b"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 93095665608,
+      "gpu": true,
+      "gpu_ns": 22402227091,
+      "id": "memcheck-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 23955,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/memcheck-v1.resource.json",
+        "sha256": "d51f00a61abb2d3396dc1d941165ab265c5c5510f88e293203ba72b4d66a8ae5"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/memcheck-v1.settlement.json",
+        "sha256": "83e8d6c7e5ba0072379397cb75b84ded67ede37e0d186e166a0160feb03c664c"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "parallel-checker-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 363,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/parallel-checker-build-v1.resource.json",
+        "sha256": "d915c0993ece7eb9e8a4f7530d2ad338142f74fd0af3ea89aac2a80db8b55015"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/parallel-checker-build-v1.settlement.json",
+        "sha256": "cca323c08a86da72164e62a16bea1a898a94030c095c658d4447c1c4504f1566"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 108028451564,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "parallel-checker-build-v2",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 276,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/parallel-checker-build-v2.resource.json",
+        "sha256": "67a4dc6297558fc8033d8b194fb5c40e9ed13ded9f3533e03b5fe1d809239e17"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/parallel-checker-build-v2.settlement.json",
+        "sha256": "af1500f1762f2928a30599e9593856a603a3d215f408f3af72db65d5427bc550"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 1464954777528,
+      "gpu": true,
+      "gpu_ns": 365365382480,
+      "id": "racecheck-final-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 64651,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/racecheck-final-v1.resource.json",
+        "sha256": "3bf3ac2e9374cbd7aa6a736c059012d49a438335aab521a3369abad810b80dc8"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/racecheck-final-v1.settlement.json",
+        "sha256": "2b09e931a9d6290ff50db9e23bb600de98167da9da0bfc5cdb7a03b514f38b00"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu": true,
+      "gpu_ns": 600000000000,
+      "id": "racecheck-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22479,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/racecheck-v1.resource.json",
+        "sha256": "40c6716c4864e9e0f233dc500dc1f1153d48d0b746897b5c7c43f3169c9c5cb4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/racecheck-v1.settlement.json",
+        "sha256": "091bdd8d79f74023b25c8e4d2f8ddf9377488aad41024520955ff8e104f1b257"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 50795011240,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "recenter-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 325,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/recenter-build-v1.resource.json",
+        "sha256": "f30bd9d9bd6d062978261dc94cea3c3c65b413ac0d08c4b91b1c6cdbb74e246b"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/recenter-build-v1.settlement.json",
+        "sha256": "6fac768b697db8fb2f7c8da9fd090cf8b982d150df9ea3f32591cc9be70de311"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "scoped-lint-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 461,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/scoped-lint-v1.resource.json",
+        "sha256": "340db77ce7a61d8fad0f78550503fab95f89eb4a3cb6d2e034cf598791a4db2c"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/scoped-lint-v1.settlement.json",
+        "sha256": "767be074f2faf9ae8ea5e29d932b16eecf77ba15768ca5f5bb92f181edcb5d49"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 34095728864,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "serial-replay-report-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "queue_ns": 415,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/serial-replay-report-v1.resource.json",
+        "sha256": "3ae73a30698ab27b41949f23eae8ac29468d9bf0ed799b90c2a48c2c1febd98b"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/serial-replay-report-v1.settlement.json",
+        "sha256": "c0647f6a23835c13d7f1051202d60de4f458c113a1e946c84025efad4ec01587"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 80577384532,
+      "gpu": true,
+      "gpu_ns": 19271510396,
+      "id": "synccheck-final-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 21027,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/synccheck-final-v1.resource.json",
+        "sha256": "695c79e34373a73849e673a2ae37fdc8613f622e5fa89a4f6b96995e470f8749"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/synccheck-final-v1.settlement.json",
+        "sha256": "d1cf3767bda591684de75ddb5f48c3b0dc3b99a801f1763de8cf0fb3bb92eaca"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 31805392408,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "tiled-address-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 338,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-address-build-v1.resource.json",
+        "sha256": "ffbf1e9deeb7e773500754bb222e75b95a0d48869a0cb8f9b2f72d2101706465"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-address-build-v1.settlement.json",
+        "sha256": "3d91a0d0353f18532df1fc77af13d3eebc729415065118461de82bd0f6a8a549"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 8247176228,
+      "gpu": true,
+      "gpu_ns": 1189469712,
+      "id": "tiled-address-diagnostic-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 21804,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-address-diagnostic-v1.resource.json",
+        "sha256": "f3a98ead02aad02744c3b2fb782e334c1e4ec211a0749ee1007a48ddcf211b2a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-address-diagnostic-v1.settlement.json",
+        "sha256": "426af8375d877de330a0bdb8d474ebf31151997c6acb331bc41ba27e9c12b688"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu": true,
+      "gpu_ns": 300000000000,
+      "id": "tiled-address-diagnostic-v2",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 21605,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-address-diagnostic-v2.resource.json",
+        "sha256": "9679f37ee079112a21b6dd8a51ce93df2b581fe1b05233f9cd423d69ea62cebe"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-address-diagnostic-v2.settlement.json",
+        "sha256": "e59a460a0517262a239e754b9d21b2fb48d58185d3184de55b878d29ecbf4cc3"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 39284547976,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "tiled-build-v1",
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 416,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-build-v1.resource.json",
+        "sha256": "7402970a13c29f6807091c681159603f18103a5c243ebc1fb98d8641d3216ead"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-build-v1.settlement.json",
+        "sha256": "926be30ca97ed3515ebe6d4f3e6221cd6a2d47be8ec7719dfe4d48127fd845bb"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu": true,
+      "gpu_ns": 300000000000,
+      "id": "tiled-device-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 21244,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-device-v1.resource.json",
+        "sha256": "a79901f3415fc6ea476ff93d41f59a2c3ec44a6ab8015b1ab129b1fc4a91b329"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-device-v1.settlement.json",
+        "sha256": "e056ec9e1ce4b923e23584c1a69f000f7f6fd7a7c8913f27a332f626a30dd096"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 27737383208,
+      "gpu": true,
+      "gpu_ns": 6061682273,
+      "id": "tiled-device-v2",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 21817,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-device-v2.resource.json",
+        "sha256": "e244b65c20512f22dd464cac73341f21de6273269bf75f3af06ac7a698f225e4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-device-v2.settlement.json",
+        "sha256": "bd7c9cbd4a527c4853ca44a6b41e95286213950026020c1fcd1cf5cb96383945"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu": true,
+      "gpu_ns": 300000000000,
+      "id": "tiled-trajectories-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22928,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-trajectories-v1.resource.json",
+        "sha256": "f78945c604be81c30cd47c3c110078afa3e976f40bd0ace77de0a61b72377980"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-trajectories-v1.settlement.json",
+        "sha256": "0c112db210afd2f8276f4c9c87ff8e898bee656fc2fb23763341aa6078cc13a7"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 31128649388,
+      "gpu": true,
+      "gpu_ns": 6911851636,
+      "id": "tiled-trajectories-v2",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 23310,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-trajectories-v2.resource.json",
+        "sha256": "087fdf375aafb73e9ae506d4b3f3309e53769083952c35fd86363f0cc79f13e5"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/tiled-trajectories-v2.settlement.json",
+        "sha256": "5ab0dea8f3c8a25ff8b4ee1225da94a91cde13be7b6c11bfc9d288eccb620315"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 34198740064,
+      "gpu": true,
+      "gpu_ns": 7676806820,
+      "id": "trajectories-v1",
+      "overrun": false,
+      "phase": "acceptance",
+      "queue_ns": 22636,
+      "resource": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/trajectories-v1.resource.json",
+        "sha256": "f3c27b89661bb1b19c300d6556adf366d5f2107646f3a04d613f5cc4e15c4e02"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/trajectories-v1.settlement.json",
+        "sha256": "99fbf035aa63b24df53126bc72ad8cf22c2f079ace4d6f32e480291950871a93"
+      },
+      "status": "passed"
+    }
+  ],
+  "closing_administration_cpu_seconds": 64,
+  "cpu_by_phase_ns": {
+    "acceptance": 8423251126532,
+    "cleanup": 811190988860,
+    "implementation": 6547666735028,
+    "native": 1530127997536,
+    "reporting": 296545434260,
+    "study": 1851669166376
+  },
+  "cpu_caps_seconds": {
+    "acceptance": 40000,
+    "cleanup": 4000,
+    "implementation": 48000,
+    "native": 16000,
+    "reporting": 12000,
+    "study": 40000
+  },
+  "cpu_ns": 19460451448592,
+  "gpu_by_phase_ns": {
+    "acceptance": 2082300859125,
+    "study": 458078639684
+  },
+  "gpu_caps_seconds": {
+    "acceptance": 8000,
+    "study": 16000
+  },
+  "gpu_ns": 2540379498809,
+  "historical_transfer": false,
+  "preparation_cpu_seconds": 512,
+  "status": "closed"
+}

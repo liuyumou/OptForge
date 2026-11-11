@@ -1,5 +1,55 @@
 # Agent Instructions
 
+## GPUP-FP4-ACCEL complete; dense acceleration, no broad retained preset (2026-11-11)
+
+SPEC-0031 / ADR-0063 deliver cached model/checker/device preparation, retained
+FP32-pair correction state, original-A FP64 window references, row equilibration,
+noise-aware recovery, parallel dense tiles and bit-identical parallel certificate
+columns. Both final tiers keep original-model authority. Native receives the same
+scheduling/delivery improvements; the public solver default is unchanged.
+
+All 1440 original and 360 separate EOF cold cells complete: 1650 certificates,
+all eleven bounded families at both tiers, and 150 intentional unbounded-direction
+refusals. All 102 distinct endpoints replay with the original serial checker;
+the 360 new delivery cells match original endpoints/certificates/work exactly.
+Final admission: 270 device comparisons, 42 lifecycle/failure cases and four
+zero-error sanitizers/112 service processes. Full repository gate: 638 Rust /
+646 Python tests plus replay/dependency/docs/smoke; final isolated corrections:
+17 Rust / ten Python tests, including 600 exact serial/parallel comparisons.
+
+Strict dense-512 FP4 improves from fused 27.588/43.050 ms GPU/complete to parallel
+4.457/18.955 ms: 6.19x GPU and 2.27x complete. Strong parallel native is
+5.347/18.676 ms, so FP4's 1.20x GPU gain does not give a strict total-time win.
+EOF cold FP4 geometric means 0.984997/0.986329x fail 1.10x retention. Keep native
+supported, select no public preset. Forty x2-to-x4 local-budget promotions finish
+certified; no natural conversion/stagnation failure or native fallback occurs.
+
+Independent allocation closed: 19460.451448592 / 160000 CPU seconds and
+2540.379498809 / 24000 GPU seconds. Final charges and empty cleanup are in the report. Nine failed reservations, exact sources/images and
+all closed history are preserved. No scientific cell retry or historical transfer.
+Next worthwhile work: exact-checker, launch/delivery and useful larger/batched
+dense costs under a new protocol. TENSOR2 conditional, FP4-PROTO/GPUP-8 incomplete,
+GPUP-9 gated. Local commit only; no push/publication. Older entries retain scope.
+Report: [delivery](docs/benchmarks/lp-fp4-accel.md).
+
+## GPUP-FP4-ACCEL implementation (2026-11-11)
+
+The user requests fixing the diagnosed costs/recovery problems and sustained FP4
+acceleration. SPEC-0031 / ADR-0063 authorize a separate research executor with
+cached model/checker/device preparation, full correction state, original-A window
+references, row equilibration, explicit operational guards and independent final
+1e-7/1e-9 certificates. Native receives the same delivery/scheduling improvements.
+Development variants, failures and charges are immutable; scientific timings
+freeze only after arithmetic/lifecycle/four-sanitizer admission. No public default
+change, historical retry, push or publication. Commit locally after delivery.
+
+Independent ceiling: 160000 CPU / 24000 GPU seconds, four CPUs, one pinned shared
+SM120 lease, 16 GiB sampled RSS / 12 GiB device buffers. Allocation and receipts:
+`artifacts/gpup-fp4-accel-v1`; unchanged in-container supervisor. Old budgets stay
+closed. New versioned development corrections are within this user's instruction;
+no automatic retry of the final frozen scientific cohort. Earlier entries retain
+their historical scope.
+
 ## GPUP-FP4-INTEGRATE overhead/recovery diagnosis (2026-11-11)
 
 Retained-record analysis confirms the dense x4/1e-7 iteration win: mean GPU time

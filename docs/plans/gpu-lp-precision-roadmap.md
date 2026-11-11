@@ -1,12 +1,28 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
+Status: FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 59ae62d872b30885a57e02412b1f44478769ef16
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
 Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md), [cost gates](../decisions/ADR-0054-resident2-cost-priorities.md), [FP4 GPU exploration and quality tiers](../decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
 Evidence: [RESIDENT2 result](../benchmarks/lp-resident2-gpup-resident2.md), [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+
+## Corrected FP4 acceleration (2026-11-11)
+
+[GPUP-FP4-ACCEL is complete](../benchmarks/lp-fp4-accel.md) under
+[SPEC-0031](../specifications/SPEC-0031-fp4-corrected-acceleration.md) /
+[ADR-0063](../decisions/ADR-0063-fp4-corrected-acceleration.md). Cached preparation,
+correction state, original-A window references, scaling, parallel tiles and exact
+parallel checking resolve the bounded-family refusals. All 1800 cells complete;
+eleven bounded families certify at both tiers, and all safety/serial replay gates
+pass. Strict dense512 FP4 improves 6.19x in GPU and 2.27x in total prepared time
+against fused FP4. Against improved parallel native, GPU improves 1.20x but strict
+total time regresses 1.5%. EOF cold geometric means 0.9850/0.9863x fail retention.
+Keep native supported and select no public preset. Exact checking and complete
+delivery remain the main next costs; larger/batched dense work needs a new
+protocol. Historical sources/results/budgets remain closed, TENSOR2 conditional,
+and GPUP-9 gated.
 
 ## FP4 integration disposition (2026-11-11)
 
