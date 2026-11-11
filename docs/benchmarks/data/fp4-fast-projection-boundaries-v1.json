@@ -1,0 +1,1019 @@
+{
+  "cases": 36,
+  "certified": false,
+  "manifest": {
+    "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/manifest.json",
+    "sha256": "85c40d101754730a22033b2889b43189d15a95555abc9654313fe5553e033da0"
+  },
+  "rows": [
+    {
+      "elapsed_ns": 787195015,
+      "id": "64-1-1-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-1-legacy.input.bin",
+        "sha256": "0211394e8b83290068c87beb13dc4c345c5c77fe823b91311f83e38b7390490e"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-1-legacy.output.json",
+        "sha256": "c6c1c09648249788507d50cb46c8c3d6cbb5a25f0139e69ea096bcb5e02efbec"
+      },
+      "returncode": 0,
+      "serialization_ns": 118607,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-1-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-1-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 809555058,
+      "id": "64-1-1-native_cached",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-1-native_cached.input.bin",
+        "sha256": "521878c9a6954003e77b01c9c7eb0815319abc7b5abcaa05878d6b4d1db08069"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-1-native_cached.output.json",
+        "sha256": "66c7a43b24cbb47b0aabcaacfadd417cbcb3e793dbc53fca45f207f1a70e33b7"
+      },
+      "returncode": 0,
+      "serialization_ns": 111884,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-1-native_cached.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-1-native_cached.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 1144142277,
+      "id": "64-1-8-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-8-legacy.input.bin",
+        "sha256": "3cbf78c610c46b5dab08fc473aa9eb8bc9b083224695a00c448d9b3aafda5330"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-8-legacy.output.json",
+        "sha256": "aa3087e69d574fbccaaeb87be81f352876b200ecd1f301a418d6a9afcbe5bc96"
+      },
+      "returncode": 0,
+      "serialization_ns": 121961,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-8-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-8-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 622527913,
+      "id": "64-1-8-native_cached",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-8-native_cached.input.bin",
+        "sha256": "418ed63a16a01d73cc0272b5a87fda0a5b53a46d42d5d61b0c3dc46afaa1c006"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-8-native_cached.output.json",
+        "sha256": "957856a62b453b0395677870716a7ddb37d292a82b5ecdcfd6ebe6c6ca099fcd"
+      },
+      "returncode": 0,
+      "serialization_ns": 118142,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-8-native_cached.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-8-native_cached.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 444375621,
+      "id": "64-1-32-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-32-legacy.input.bin",
+        "sha256": "2aadd74e143621d46f3bf68742afa01370ef27558151ae8f6b4e78c551a35670"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-32-legacy.output.json",
+        "sha256": "0f491ce58083d7d324899f93633400f21d62d73b849eb83a8eeb36cdde2b0730"
+      },
+      "returncode": 0,
+      "serialization_ns": 109510,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-32-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-32-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 774966473,
+      "id": "64-1-32-native_cached",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-32-native_cached.input.bin",
+        "sha256": "4b1325d8b08d7545a54648c9bc699aca99517bb64312d4b03d766234e679dc58"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-32-native_cached.output.json",
+        "sha256": "410859f53a3d7181e78b8121f3c3bbbfbc76275147e2d3b7bf344d4e402e1eb8"
+      },
+      "returncode": 0,
+      "serialization_ns": 115810,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-32-native_cached.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/64-1-32-native_cached.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 402243268,
+      "id": "8-4-1-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-1-legacy.input.bin",
+        "sha256": "e2fe6fb8f3ed93430e686a5b5f6410621a996f356d6bd6ae8f29343615b6594a"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-1-legacy.output.json",
+        "sha256": "6868f4e9ddc9fb2aead23915c7ec6eed905302516989c5b6cddcf50125ae6497"
+      },
+      "returncode": 0,
+      "serialization_ns": 141032,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-1-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-1-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 405819105,
+      "id": "8-4-1-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-1-hardware.input.bin",
+        "sha256": "1e399ab47aa604c0b233f9c6de3d8f68b6a962567a9a9cf4eadd089ed1b7fc9d"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-1-hardware.output.json",
+        "sha256": "e7da5fdc7936b65f16c36c37064c4dbfaf6d0586cdf399f7458704a6c5dd8698"
+      },
+      "returncode": 0,
+      "serialization_ns": 146440,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-1-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-1-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 394827153,
+      "id": "8-4-8-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-8-legacy.input.bin",
+        "sha256": "9c70235a9c755ce5bc4aa777defbfb1e68b04986cc4b2abca04489a245686573"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-8-legacy.output.json",
+        "sha256": "19da3bb12477d92c9cf4fbf8420d2c1b1a08a540e7e1a604bb08f2692041754b"
+      },
+      "returncode": 0,
+      "serialization_ns": 127873,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-8-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-8-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 391782326,
+      "id": "8-4-8-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-8-hardware.input.bin",
+        "sha256": "57050780b3a7128e712424bff35ca83a139ed86245008419597476cc1bfda793"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-8-hardware.output.json",
+        "sha256": "af1a0830d41c0a6b753371aac2b4e00dc4df111b14de1f43d6841102a89bc7bc"
+      },
+      "returncode": 0,
+      "serialization_ns": 115833,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-8-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-8-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 395554411,
+      "id": "8-4-32-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-32-legacy.input.bin",
+        "sha256": "de79fa11f9e57e12988e48e9ab1295b5b56f632e06771333411180f2ae224e3e"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-32-legacy.output.json",
+        "sha256": "b8616702a8f191921781922fee846035246b0bf7eabd3639cac392ad63e4c5f5"
+      },
+      "returncode": 0,
+      "serialization_ns": 123135,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-32-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-32-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 390209988,
+      "id": "8-4-32-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-32-hardware.input.bin",
+        "sha256": "847d518192a5ef03455e196645e89cfe8c60fd7aeb343897a0223ef85ef76fe2"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-32-hardware.output.json",
+        "sha256": "6e0be8400dc331efefb2a337a113471a2df26c13834cd27bf8d9c40f1c0d7de5"
+      },
+      "returncode": 0,
+      "serialization_ns": 113910,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-32-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/8-4-32-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 388702365,
+      "id": "16-2-1-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-1-legacy.input.bin",
+        "sha256": "0b17cbf47750f0aa1eae1651b393300267c37ac93968fee6deafa2d3c177b6d5"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-1-legacy.output.json",
+        "sha256": "09d40ad1e78bb7b1457ee85dc60e18eb8c69e54c1d6e333c00fac0317661d5d1"
+      },
+      "returncode": 0,
+      "serialization_ns": 119616,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-1-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-1-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 374889598,
+      "id": "16-2-1-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-1-hardware.input.bin",
+        "sha256": "db070a7d6f0545842c6a01603a0e3ec5f4ff7d7f7acb0c12df40c7d52e0d082b"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-1-hardware.output.json",
+        "sha256": "146ec9669669dd0cddb7e81296c63aead00f7f7221f3bb0e7977e3eac4c26c91"
+      },
+      "returncode": 0,
+      "serialization_ns": 100098,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-1-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-1-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 356716935,
+      "id": "16-2-8-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-8-legacy.input.bin",
+        "sha256": "bb9d74b194bc7d800c71e1cb10a2efb45e74d6c0adb8101a22e7ed528ba85a9a"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-8-legacy.output.json",
+        "sha256": "ad3b40cea7b50fb9808bb171053497f974ee7615d75bb62a4919d9d609d2fffd"
+      },
+      "returncode": 0,
+      "serialization_ns": 118478,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-8-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-8-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 372664088,
+      "id": "16-2-8-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-8-hardware.input.bin",
+        "sha256": "fa1e2b553d8031be30e160e0df52fad52bbb13a52f083eb0fa23cdd6ab51461b"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-8-hardware.output.json",
+        "sha256": "3ac019ffaf217ebed115f7c8290da0f5299cd1a5ae3190452350c845e5ba781f"
+      },
+      "returncode": 0,
+      "serialization_ns": 101682,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-8-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-8-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 383188498,
+      "id": "16-2-32-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-32-legacy.input.bin",
+        "sha256": "7b859fd408fd6b9d664408f3565a284f856800e13aaba5e10f42bcc725a04c9f"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-32-legacy.output.json",
+        "sha256": "5dbf5be484652020d79c13f4fa2829fded0e39757a5ce38f5132f01b8f01caaa"
+      },
+      "returncode": 0,
+      "serialization_ns": 122733,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-32-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-32-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 387851665,
+      "id": "16-2-32-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-32-hardware.input.bin",
+        "sha256": "2f3dad0d9eaf51b288a39cc6b26689adbec44082533765f0c6d93c71aa83b856"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-32-hardware.output.json",
+        "sha256": "705f56a1d4fc0148d2bfe05e6cc445e50edafc4aa7125c9aed7dae1894666d21"
+      },
+      "returncode": 0,
+      "serialization_ns": 104103,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-32-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/16-2-32-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 385707779,
+      "id": "4-2-1-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-1-legacy.input.bin",
+        "sha256": "05556a044a5d13f430665d1848eda04cabd1488f1c455f2307cd438c6d0b5a20"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-1-legacy.output.json",
+        "sha256": "cdf017794b37df9a0b363c63479d968e0d33009a6dcc0cc384223edbd5bb7f2c"
+      },
+      "returncode": 0,
+      "serialization_ns": 118646,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-1-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-1-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 383948838,
+      "id": "4-2-1-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-1-hardware.input.bin",
+        "sha256": "935f32000426048ca0a4d9515033b3bfb073adc95bc98cfe9ec580272a211f59"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-1-hardware.output.json",
+        "sha256": "90b3f1872086794f61dc6f554c79ada7a3c51c30c5dc8c957cb37e4e90b4147d"
+      },
+      "returncode": 0,
+      "serialization_ns": 97706,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-1-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-1-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 382312430,
+      "id": "4-2-8-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-8-legacy.input.bin",
+        "sha256": "d09717553606655738fcd3883911d75b94a922b9b9c0cfbce8715290bd33b65f"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 3.725290298461914e-09,
+        "proved_enclosure": false,
+        "relative": 3.725290298461914e-09
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-8-legacy.output.json",
+        "sha256": "49ac4be94c49901c3f1642da9e22cf4765eedad34d286bee9cc743876a516826"
+      },
+      "returncode": 0,
+      "serialization_ns": 115343,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-8-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-8-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 374789378,
+      "id": "4-2-8-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-8-hardware.input.bin",
+        "sha256": "726a93a6a6d1192ac14d7fcef55b5bb035e61f85c64208dab22a039a93e36802"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 3.725290298461914e-09,
+        "proved_enclosure": false,
+        "relative": 3.725290298461914e-09
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-8-hardware.output.json",
+        "sha256": "d532cdae268623e0a9137cb4f876c572f9f488250fa5cfc3a41f2131b184c7f1"
+      },
+      "returncode": 0,
+      "serialization_ns": 101642,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-8-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-8-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 366291679,
+      "id": "4-2-32-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-32-legacy.input.bin",
+        "sha256": "670f78d1867ad7923d79440941b07034f71228c12d1363ac9932bac90a2d9aa5"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 2.60770320892334e-08,
+        "proved_enclosure": false,
+        "relative": 2.60770320892334e-08
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-32-legacy.output.json",
+        "sha256": "47a59f9e332ac46ddc6e4efdd5ac57ae8786d774f4ba8f64d9bf9401a9f70324"
+      },
+      "returncode": 0,
+      "serialization_ns": 115747,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-32-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-32-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 353894412,
+      "id": "4-2-32-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-32-hardware.input.bin",
+        "sha256": "e864d22a5447139e89511819c07f0d93bf3a763c7e4f0fa3115aa3af49de3d3b"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 2.60770320892334e-08,
+        "proved_enclosure": false,
+        "relative": 2.60770320892334e-08
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-32-hardware.output.json",
+        "sha256": "d0b209aa41cad7e17dfe2169a8000d663fd8b806bf09d92d3de7bd1881a18ece"
+      },
+      "returncode": 0,
+      "serialization_ns": 99473,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-32-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-2-32-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 390421030,
+      "id": "4-4-1-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-1-legacy.input.bin",
+        "sha256": "069f6fdd319d17491a0a14645c0b8e56db8bd72026a90b994ffaea2ece5ee6df"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-1-legacy.output.json",
+        "sha256": "bb5766bf1203b7a0e9f9de7d8c344f2c72338acbb06829b6c1f9027b25e2f0d8"
+      },
+      "returncode": 0,
+      "serialization_ns": 120246,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-1-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-1-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 383335405,
+      "id": "4-4-1-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-1-hardware.input.bin",
+        "sha256": "627311f803b44f1a945db6c903dd134ec737c24852c385db97845c0f082df8b7"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-1-hardware.output.json",
+        "sha256": "f19d281b198d9c5a8a8ee0cb62520cf8daf617a6e74ceb1fada2d3dac56fa6cf"
+      },
+      "returncode": 0,
+      "serialization_ns": 104654,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-1-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-1-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 385253264,
+      "id": "4-4-8-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-8-legacy.input.bin",
+        "sha256": "373c2886f69d7731d5264a2be6aea5b2b0130ba0f659d84e7ef2aa6a0c05ed09"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-8-legacy.output.json",
+        "sha256": "8fa5d30af0a5a159b467baa2da143400d8534264173474e356cacbc2dcb614e6"
+      },
+      "returncode": 0,
+      "serialization_ns": 114686,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-8-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-8-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 392764831,
+      "id": "4-4-8-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-8-hardware.input.bin",
+        "sha256": "aafd5459536e49b5307cade53a70fd8a18602014bf3b010aeaf625a54372d9b8"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-8-hardware.output.json",
+        "sha256": "6025b6a7edcf956f3790006cfe767cb919855cc6d6c7dcf73d3c3a0b1c54a0f0"
+      },
+      "returncode": 0,
+      "serialization_ns": 105426,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-8-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-8-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 383016496,
+      "id": "4-4-32-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-32-legacy.input.bin",
+        "sha256": "68dfb8618577a709f77ab66e71d90ed271582bb5fdb55091026a561c92669bcc"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-32-legacy.output.json",
+        "sha256": "5f35e946de47411f67359e772583ba6e1046caa38e87977c38559dd654cd3013"
+      },
+      "returncode": 0,
+      "serialization_ns": 119970,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-32-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-32-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 380740908,
+      "id": "4-4-32-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-32-hardware.input.bin",
+        "sha256": "caf469101d2f3163456d2786c21d365a8291872337807ac10ead1dc17e076cfd"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-32-hardware.output.json",
+        "sha256": "e18d6cadece4dbb06c8a885529eaac1f40343745e5b2f85d1fa540fc0e34924d"
+      },
+      "returncode": 0,
+      "serialization_ns": 99060,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-32-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-4-32-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 383080921,
+      "id": "4-8-1-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-1-legacy.input.bin",
+        "sha256": "2a797206359759595ca6e6071aa13f73275fe612f7f04fcb017b36a7884cf645"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-1-legacy.output.json",
+        "sha256": "bf0a210cb053d3b78e7854e4f84a93c4621a4693e4fb8dcdde8ed405129f88ba"
+      },
+      "returncode": 0,
+      "serialization_ns": 125491,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-1-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-1-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 366701817,
+      "id": "4-8-1-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-1-hardware.input.bin",
+        "sha256": "bd1112bae5a669aa5eb3bece672aba5e0c3e2bf970e8d3a47af6631af1258f2c"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-1-hardware.output.json",
+        "sha256": "ccc8ebec4afd6ad8fb22f22405d4e946baffeb37aad0d67ad6b6cbe32af93813"
+      },
+      "returncode": 0,
+      "serialization_ns": 113242,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-1-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-1-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 354942465,
+      "id": "4-8-8-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-8-legacy.input.bin",
+        "sha256": "88f95a3c71eea1bf0560b1be39747fbd973fe123fab0188cde35a44a850431f2"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-8-legacy.output.json",
+        "sha256": "08e918ad4807fb9c4d1d3d45a66e6a7b896de073021860646f0661aa08266b76"
+      },
+      "returncode": 0,
+      "serialization_ns": 127365,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-8-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-8-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 352879007,
+      "id": "4-8-8-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-8-hardware.input.bin",
+        "sha256": "9cb02f999002017351c4d8fec2a72acf6e792e8da5a5dc4f206cc95f5143c2d6"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-8-hardware.output.json",
+        "sha256": "8d72afc15bbcc46b877381f5ae8e79dd38bd02c1b804ddbb8eb9c9318a384807"
+      },
+      "returncode": 0,
+      "serialization_ns": 106948,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-8-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-8-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 383540957,
+      "id": "4-8-32-legacy",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-32-legacy.input.bin",
+        "sha256": "14b1f59baaa1fac4883bfeb5918a776f827099c4cdb8c5eb666e79eb259dc282"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-32-legacy.output.json",
+        "sha256": "36bd2981bac791016fdedeb91c551a47289f399bf505abf07d0f0e368081092e"
+      },
+      "returncode": 0,
+      "serialization_ns": 125355,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-32-legacy.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-32-legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "elapsed_ns": 379731050,
+      "id": "4-8-32-hardware",
+      "input": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-32-hardware.input.bin",
+        "sha256": "f619ed33c17c680acc7fc2b66ce2e467d45e2eec39e185c287e9a6482dd8776a"
+      },
+      "observed_error": {
+        "certified": false,
+        "max_absolute": 0.0,
+        "proved_enclosure": false,
+        "relative": 0.0
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-32-hardware.output.json",
+        "sha256": "65e5bf1211de5f1fcf68e5446f7556f5eaf5d6a1092c1e7ac39aefd4fc50ace9"
+      },
+      "returncode": 0,
+      "serialization_ns": 101648,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-32-hardware.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-fast-v1/projection-boundaries-v1/4-8-32-hardware.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "status": "passed"
+}

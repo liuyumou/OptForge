@@ -1,5 +1,35 @@
 # Agent Instructions
 
+## GPUP-FP4-FAST completed; identical-state FP4 acceleration (2026-11-11)
+
+SPEC-0028 / ADR-0060 deliver the separate optimization in
+[the report](docs/benchmarks/lp-fp4-fast.md). All 288 frozen cells and 2016 fresh
+windows pass with exact same-lane endpoint hashes. FP4 CUDA time improves
+4.16–7.81x (5.27x geometric mean); host FP4 preparation improves 107–227x.
+Native E2M1 conversion, pair-aware midpoint handling, constant-time scales,
+warp reductions, zero-plane pruning, component columns, binary transport and
+device checkpoint resets remove the measured overheads. Rich eight-component
+FP4 still loses to native FP64; no universal or certified-solver speed claim.
+
+Final image: artifacts/gpup-fp4-fast-v1/build-v8/fast.cubin. Acceptance passes
+60 independent products, 72 stress/midpoint comparisons, 42 transaction cases
+and four 24-path sanitizers, including fresh device resets. Full workspace gate:
+638 Rust / 593 Python plus replay, dependencies, artifacts, docs and smoke;
+updated research runtime: four Rust and seven focused final Python tests.
+Seven failed reservations and all source/image/log bytes remain preserved.
+An exact-hash exception preserves seven blank lines in the frozen CUDA source;
+36 additional projection-boundary cases pass. Four
+earlier executors were reconstructed byte-for-byte and archived; no scientific
+cells were reexecuted for that archive. The three completed pilot manifests
+remain exact. Final accounting and cleanup are linked from the report.
+
+Closed charges: 13029.974968908 / 128000 CPU seconds and
+2013.455708259 / 18000 GPU seconds, including all seven failures.
+All cleanup receipts are empty. The independent allocation is closed; unused funds do not
+release another experiment. CPU recovery policy and certified integration remain
+separate. FP4-PROTO and GPUP-8 stay incomplete; GPUP-9 gated. Commit locally after
+delivery; no push or publication. Older entries retain their original scope.
+
 ## GPUP-FP4-GPU-PILOT completed; measured FP4 candidate slower (2026-11-11)
 
 SPEC-0027 / ADR-0059 and docs/benchmarks/lp-fp4-gpu-pilot.md deliver actual E2M1

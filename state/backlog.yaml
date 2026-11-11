@@ -91,6 +91,12 @@ tasks:
     depends_on: [GPUP-FP4-SPEC]
     specification: docs/specifications/SPEC-0027-fp4-gpu-pilot.md
     acceptance: "SPEC-0027 / ADR-0059: all 216 empirical profiles complete, 60 primitive and 90 trajectory/transaction cases admitted, four 24-path sanitizers pass. V3 retains v1 packing failure and v2 racecheck refusal with explicit releases, exact sources and full charges. All matched FP4 iteration/cold medians slower in the bounded grid; dense-2048 persistent FP4 x2/x4/x8 ratios 0.349/0.178/0.079 against native. No certificate or preset; native retained. GPU charge 953.281143916 / 9600 seconds. Report: docs/benchmarks/lp-fp4-gpu-pilot.md."
+  - id: GPUP-FP4-FAST
+    title: Accelerate FP4 encoding and component products with validated arithmetic
+    status: complete
+    depends_on: [GPUP-FP4-GPU-PILOT]
+    specification: docs/specifications/SPEC-0028-fp4-fast.md
+    acceptance: "SPEC-0028 / ADR-0060 complete: 288 frozen cells / 2016 fresh windows, identical endpoint hashes, 4.16–7.81x FP4 kernel gains (5.27x geometric mean), 107–227x host preparation gains. Independent arithmetic/stress/rollback and all four sanitizers pass. Rich FP4 x8 still loses to native; no certified solver preset. Historical sources, failures and charges preserved. Report: docs/benchmarks/lp-fp4-fast.md."
   - id: GPUP-FP4-RECOVERY-SPEC
     title: Specify corrected FP4 error accounting and trajectory admission
     status: ready

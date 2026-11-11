@@ -1,0 +1,3561 @@
+{
+  "archive_bridge": {
+    "executor_archive": {
+      "path": "artifacts/gpup-fp4-fast-v1/executor-archive/receipt.json",
+      "sha256": "0f2ed993ce8fd2b28dbb92e09ca671daad2c028984eaa77bebd11602ee033d50"
+    },
+    "rows": [
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/executor-archive/cpu-build-v4-executor",
+          "sha256": "8c8984eba84de84aa44b34a620c5a75a79e2a813f438b1b609d7328d1c821bae"
+        },
+        "field": "binary",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/diagnostics-v4/manifest.json",
+          "sha256": "8adf81d936e36d9cb2058748697f3c3469bdd01a07319307acd95b20cc59c07f"
+        },
+        "original": {
+          "path": "research/lp-fp4-fast/target/release/lp-fp4-fast",
+          "sha256": "8c8984eba84de84aa44b34a620c5a75a79e2a813f438b1b609d7328d1c821bae"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/sources/diagnostics-v4/tools/lp_fp4_fast_experiment.py",
+          "sha256": "92388a5e3d839534d9e0ef7ac945bff4b76c243805d75f92c5576af3c3e4f017"
+        },
+        "field": "driver",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/diagnostics-v4/manifest.json",
+          "sha256": "8adf81d936e36d9cb2058748697f3c3469bdd01a07319307acd95b20cc59c07f"
+        },
+        "original": {
+          "path": "tools/lp_fp4_fast_experiment.py",
+          "sha256": "92388a5e3d839534d9e0ef7ac945bff4b76c243805d75f92c5576af3c3e4f017"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/executor-archive/cpu-build-v2-executor",
+          "sha256": "ecc50fca092b923790d74ca10d1f950f4c7772603ef557b4928ea51d9f5ce4dc"
+        },
+        "field": "binary",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/differential-v1/manifest.json",
+          "sha256": "5dbe21e682ac779af0b6f44d372ceb01ad79ed3bd928692b8d84ccba539c6325"
+        },
+        "original": {
+          "path": "research/lp-fp4-fast/target/release/lp-fp4-fast",
+          "sha256": "ecc50fca092b923790d74ca10d1f950f4c7772603ef557b4928ea51d9f5ce4dc"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/sources/counters-v1/tools/lp_fp4_fast_experiment.py",
+          "sha256": "5036cd4181951ad30350643cfdfb5f2a377985becdc15ab6435582aa7104b780"
+        },
+        "field": "driver",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/differential-v1/manifest.json",
+          "sha256": "5dbe21e682ac779af0b6f44d372ceb01ad79ed3bd928692b8d84ccba539c6325"
+        },
+        "original": {
+          "path": "tools/lp_fp4_fast_experiment.py",
+          "sha256": "5036cd4181951ad30350643cfdfb5f2a377985becdc15ab6435582aa7104b780"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/executor-archive/cpu-build-v3-executor",
+          "sha256": "ddb4fb0c90e285a24abfc40430d70c0e6310b95a7eb9044d956b346abad96c56"
+        },
+        "field": "binary",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/differential-v2/manifest.json",
+          "sha256": "0fa4cbdb3c06f9f37db7dac9919b84ed2b65fd8ed149fef8c9bbbf9cbc22b74e"
+        },
+        "original": {
+          "path": "research/lp-fp4-fast/target/release/lp-fp4-fast",
+          "sha256": "ddb4fb0c90e285a24abfc40430d70c0e6310b95a7eb9044d956b346abad96c56"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/sources/differential-v2/tools/lp_fp4_fast_experiment.py",
+          "sha256": "93ed700644715f40da936fa3109091aed6864ea57719ba123784e579da973a17"
+        },
+        "field": "driver",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/differential-v2/manifest.json",
+          "sha256": "0fa4cbdb3c06f9f37db7dac9919b84ed2b65fd8ed149fef8c9bbbf9cbc22b74e"
+        },
+        "original": {
+          "path": "tools/lp_fp4_fast_experiment.py",
+          "sha256": "93ed700644715f40da936fa3109091aed6864ea57719ba123784e579da973a17"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/executor-archive/cpu-build-v5-executor",
+          "sha256": "2237d175a8459d0ed4b665e4befdf62c512e36d939ac675e8847ee52acc902ed"
+        },
+        "field": "binary",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/hardware-v5/manifest.json",
+          "sha256": "d67bd04cd063c172919adf536f7b1e6bc308bf6465a9c1a95ebf3adaaf35aec2"
+        },
+        "original": {
+          "path": "research/lp-fp4-fast/target/release/lp-fp4-fast",
+          "sha256": "2237d175a8459d0ed4b665e4befdf62c512e36d939ac675e8847ee52acc902ed"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/sources/primitives-v6/tools/lp_fp4_fast_experiment.py",
+          "sha256": "2b4b73ea9815382128dd3a781870b76e1d71846a23e1e8fa5082b12f674483f7"
+        },
+        "field": "driver",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/hardware-v5/manifest.json",
+          "sha256": "d67bd04cd063c172919adf536f7b1e6bc308bf6465a9c1a95ebf3adaaf35aec2"
+        },
+        "original": {
+          "path": "tools/lp_fp4_fast_experiment.py",
+          "sha256": "2b4b73ea9815382128dd3a781870b76e1d71846a23e1e8fa5082b12f674483f7"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/executor-archive/cpu-build-v5-executor",
+          "sha256": "2237d175a8459d0ed4b665e4befdf62c512e36d939ac675e8847ee52acc902ed"
+        },
+        "field": "binary",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/primitives-v6/manifest.json",
+          "sha256": "b62bfcbc5f58a0a385aa1074ebaea431baed3ef546ee25f2aded7109da6dbd84"
+        },
+        "original": {
+          "path": "research/lp-fp4-fast/target/release/lp-fp4-fast",
+          "sha256": "2237d175a8459d0ed4b665e4befdf62c512e36d939ac675e8847ee52acc902ed"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/sources/primitives-v6/tools/lp_fp4_fast_experiment.py",
+          "sha256": "2b4b73ea9815382128dd3a781870b76e1d71846a23e1e8fa5082b12f674483f7"
+        },
+        "field": "driver",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/primitives-v6/manifest.json",
+          "sha256": "b62bfcbc5f58a0a385aa1074ebaea431baed3ef546ee25f2aded7109da6dbd84"
+        },
+        "original": {
+          "path": "tools/lp_fp4_fast_experiment.py",
+          "sha256": "2b4b73ea9815382128dd3a781870b76e1d71846a23e1e8fa5082b12f674483f7"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/executor-archive/cpu-build-v5-executor",
+          "sha256": "2237d175a8459d0ed4b665e4befdf62c512e36d939ac675e8847ee52acc902ed"
+        },
+        "field": "binary",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/primitives-v7/manifest.json",
+          "sha256": "f2f3d27df9b6e632be0e98fcccf55bcb30995175380495b95617644ba28f39a6"
+        },
+        "original": {
+          "path": "research/lp-fp4-fast/target/release/lp-fp4-fast",
+          "sha256": "2237d175a8459d0ed4b665e4befdf62c512e36d939ac675e8847ee52acc902ed"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/sources/primitives-v6/tools/lp_fp4_fast_experiment.py",
+          "sha256": "2b4b73ea9815382128dd3a781870b76e1d71846a23e1e8fa5082b12f674483f7"
+        },
+        "field": "driver",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/primitives-v7/manifest.json",
+          "sha256": "f2f3d27df9b6e632be0e98fcccf55bcb30995175380495b95617644ba28f39a6"
+        },
+        "original": {
+          "path": "tools/lp_fp4_fast_experiment.py",
+          "sha256": "2b4b73ea9815382128dd3a781870b76e1d71846a23e1e8fa5082b12f674483f7"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/executor-archive/cpu-build-v3-executor",
+          "sha256": "ddb4fb0c90e285a24abfc40430d70c0e6310b95a7eb9044d956b346abad96c56"
+        },
+        "field": "binary",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/scaling-v3/manifest.json",
+          "sha256": "b5df96fd6f0aaf9d2571987326ca61e33f27a57a5193eff707a058a1e45510be"
+        },
+        "original": {
+          "path": "research/lp-fp4-fast/target/release/lp-fp4-fast",
+          "sha256": "ddb4fb0c90e285a24abfc40430d70c0e6310b95a7eb9044d956b346abad96c56"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/sources/scaling-v3/tools/lp_fp4_fast_experiment.py",
+          "sha256": "4c4a5d336f5c5db0dd6faa53271992c64d45921ce652d01f3527ba2b1bd055fa"
+        },
+        "field": "driver",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/scaling-v3/manifest.json",
+          "sha256": "b5df96fd6f0aaf9d2571987326ca61e33f27a57a5193eff707a058a1e45510be"
+        },
+        "original": {
+          "path": "tools/lp_fp4_fast_experiment.py",
+          "sha256": "4c4a5d336f5c5db0dd6faa53271992c64d45921ce652d01f3527ba2b1bd055fa"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/executor-archive/cpu-build-v5-executor",
+          "sha256": "2237d175a8459d0ed4b665e4befdf62c512e36d939ac675e8847ee52acc902ed"
+        },
+        "field": "binary",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/stress-v7/manifest.json",
+          "sha256": "c16fc617d446b83c7b6aa2def47e691976be91e9fb0e2806b33ffacaee6a793e"
+        },
+        "original": {
+          "path": "research/lp-fp4-fast/target/release/lp-fp4-fast",
+          "sha256": "2237d175a8459d0ed4b665e4befdf62c512e36d939ac675e8847ee52acc902ed"
+        }
+      },
+      {
+        "exact_archived_bytes": {
+          "path": "artifacts/gpup-fp4-fast-v1/sources/primitives-v6/tools/lp_fp4_fast_experiment.py",
+          "sha256": "2b4b73ea9815382128dd3a781870b76e1d71846a23e1e8fa5082b12f674483f7"
+        },
+        "field": "driver",
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/stress-v7/manifest.json",
+          "sha256": "c16fc617d446b83c7b6aa2def47e691976be91e9fb0e2806b33ffacaee6a793e"
+        },
+        "original": {
+          "path": "tools/lp_fp4_fast_experiment.py",
+          "sha256": "2b4b73ea9815382128dd3a781870b76e1d71846a23e1e8fa5082b12f674483f7"
+        }
+      }
+    ],
+    "scientific_reexecution": false,
+    "status": "passed"
+  },
+  "compiler": {
+    "commands": [
+      [
+        "/usr/local/cuda/bin/nvcc",
+        "--cubin",
+        "-arch=sm_120a",
+        "-O3",
+        "-lineinfo",
+        "-fmad=false",
+        "-ftz=false",
+        "-Xptxas=-v",
+        "/workspace/AI-Optimizer/research/lp-fp4-fast/cuda/fast.cu",
+        "-o",
+        "/workspace/AI-Optimizer/artifacts/gpup-fp4-fast-v1/build-v8/fast.cubin"
+      ],
+      [
+        "/usr/local/cuda/bin/nvcc",
+        "--ptx",
+        "-arch=sm_120a",
+        "-O3",
+        "-lineinfo",
+        "-fmad=false",
+        "-ftz=false",
+        "-Xptxas=-v",
+        "/workspace/AI-Optimizer/research/lp-fp4-fast/cuda/fast.cu",
+        "-o",
+        "/workspace/AI-Optimizer/artifacts/gpup-fp4-fast-v1/build-v8/fast.ptx"
+      ]
+    ],
+    "image": {
+      "path": "artifacts/gpup-fp4-fast-v1/build-v8/fast.cubin",
+      "sha256": "d6b39b4153af483ebef0309604d87ddacbbf9b97a503a7016bda874677c9a2f8"
+    },
+    "reference": {
+      "path": "research/lp-fp4-gpu-pilot/cuda/pilot_v3.cu",
+      "sha256": "dd9c9d989d397335899a305115d7db4fb6788ecd245e62a454d9a984f5cefb46"
+    },
+    "registers": [
+      16,
+      39,
+      40,
+      48,
+      46,
+      40,
+      53,
+      48,
+      56,
+      148,
+      40,
+      94,
+      56,
+      40,
+      96,
+      56,
+      40,
+      168,
+      64,
+      40,
+      96,
+      63,
+      40,
+      72,
+      64,
+      40,
+      37,
+      40,
+      48,
+      40,
+      40,
+      40,
+      40,
+      56,
+      40,
+      40,
+      40,
+      40,
+      56,
+      40,
+      40,
+      40,
+      40,
+      64,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      38,
+      48,
+      72,
+      64,
+      72,
+      56
+    ],
+    "source": {
+      "path": "research/lp-fp4-fast/cuda/fast.cu",
+      "sha256": "08bd035160664b207bf183ad282e5a4e92002a8fef1a4fe338b16272085eb44c"
+    },
+    "spills": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ]
+  },
+  "counter_refusal": {
+    "path": "artifacts/gpup-fp4-fast-v1/counters-v1/attempt.json",
+    "sha256": "b81a18710a1164bafe27bdc2159fb8a80f1f8d67056add5d7880a0b982e5a25d"
+  },
+  "exploratory": {
+    "admission-v8": {
+      "path": "artifacts/gpup-fp4-fast-v1/admission-v8/result.json",
+      "sha256": "c5b96ad37aa6220267831d2fa672de68be2f1dadb08f7e0c0d48b41abf350cda"
+    },
+    "diagnostics-v4": {
+      "path": "artifacts/gpup-fp4-fast-v1/diagnostics-v4/result.json",
+      "sha256": "eaf5392d524daf20582f7f7fbc4cb3fae4644141fbbc5f0dedac9cafda62672d"
+    },
+    "differential-v1": {
+      "path": "artifacts/gpup-fp4-fast-v1/differential-v1/result.json",
+      "sha256": "6812ccd22ad95f4d44e4a2b8ace9a594771380d16c50f4eba30a7f9441281dc3"
+    },
+    "differential-v2": {
+      "path": "artifacts/gpup-fp4-fast-v1/differential-v2/result.json",
+      "sha256": "d79354b45ef0dfe28a2648c61badb08262072e424abe850de5d6ad102c2b84f1"
+    },
+    "hardware-v8": {
+      "path": "artifacts/gpup-fp4-fast-v1/hardware-v8/result.json",
+      "sha256": "6b463ebe7875f871aa8d6988d8785f4759fb3253a65c17024e52ae77a2544479"
+    },
+    "initcheck-v8": {
+      "path": "artifacts/gpup-fp4-fast-v1/initcheck-v8/result.json",
+      "sha256": "5a00b8b32b97189e328db9076e1bfa118416ac8cc5c30184dfa9622788e02128"
+    },
+    "memcheck-v8": {
+      "path": "artifacts/gpup-fp4-fast-v1/memcheck-v8/result.json",
+      "sha256": "c10e471290c083f060bdc16cde4a82d8773b46a056b47dd0fd8b17bdceb941cc"
+    },
+    "primitives-v7": {
+      "path": "artifacts/gpup-fp4-fast-v1/primitives-v7/result.json",
+      "sha256": "dcd68bea39c8652bf8cf77d6a515716e5a42a83e44e6c6bf5e3682e3f28727b6"
+    },
+    "primitives-v8": {
+      "path": "artifacts/gpup-fp4-fast-v1/primitives-v8/result.json",
+      "sha256": "d102612e8da86091dcd0d87ae7e7ed63be277f9d1781208776c52d86b82fa2bc"
+    },
+    "racecheck-v8": {
+      "path": "artifacts/gpup-fp4-fast-v1/racecheck-v8/result.json",
+      "sha256": "060347535ddabbf5582f0ff0668b8396c1a3af5f89160c34190b105ddee430ce"
+    },
+    "scaling-v3": {
+      "path": "artifacts/gpup-fp4-fast-v1/scaling-v3/result.json",
+      "sha256": "cb76d85e1992323abd5da38c23863792fb7f6678b99ffcff8c067924f079b6b0"
+    },
+    "stress-v7": {
+      "path": "artifacts/gpup-fp4-fast-v1/stress-v7/result.json",
+      "sha256": "48633882665ff2c4b3ff9296819a9259d9031e75520393c3c7d9f356e8f974d1"
+    },
+    "stress-v8": {
+      "path": "artifacts/gpup-fp4-fast-v1/stress-v8/result.json",
+      "sha256": "ebb01c69a39cfe4ea19c3b1fe41ac3616f1815d2cf94c09958ed99ba7b12155f"
+    },
+    "synccheck-v8": {
+      "path": "artifacts/gpup-fp4-fast-v1/synccheck-v8/result.json",
+      "sha256": "81494246ce2c9c4c9228d4878bf31c271892febc799fe9a74e81998601cb94d5"
+    },
+    "transactions-v8": {
+      "path": "artifacts/gpup-fp4-fast-v1/transactions-v8/result.json",
+      "sha256": "6bff0c834c70ee24607aa623d0b40c6a7053f8aeeb684ab262830092fbd152d9"
+    }
+  },
+  "failures": [
+    {
+      "charged": {
+        "cpu_ns": 240000000000,
+        "gpu": true,
+        "gpu_ns": 60000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20654,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/aligned-word-diagnosis-v6.resource.json",
+          "sha256": "23a7f71acbf633f9fb7053de9a2290a397e01f10ae8beae62c7d28d484cb1635"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/aligned-word-diagnosis-v6.reservation.json",
+        "sha256": "dfa80d4256d38f0aefe8583eb4b69669fcf6da1b100e584df34c27a9bb8c16a0"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/aligned-word-diagnosis-v6.settlement.json",
+        "sha256": "9a3fbd673ee2a215323172708ae5f3135ae5b79f7817513a894a4e5d075aa8d4"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 720000000000,
+        "gpu": true,
+        "gpu_ns": 180000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 21939,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/counters-v1.resource.json",
+          "sha256": "3198ba5dbe6bf6f50e12507d6557b94fa6bf3d36c482c2f2a4e17ef4f21a152b"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/counters-v1.reservation.json",
+        "sha256": "98542b84de6f71081e8d292528e4d51167a62be51577cd1d1ebbbe1c356d8a07"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/counters-v1.settlement.json",
+        "sha256": "b78f4eae5ffe12b47d0737a63ee1339ef8806be3be84058620d832c4a662d8bd"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 1200000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 366,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-v1.resource.json",
+          "sha256": "9afa459c5ff70cc47a09e722950b01c187fc9dd92b58b2fdb9b741a3358a4d23"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-v1.reservation.json",
+        "sha256": "17ec1617bc67f01d1057f0836548df3e1ade5ff1b7c5d09632347680d1da59ba"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-v1.settlement.json",
+        "sha256": "16c435d46b02f333edf5aa65a228d923d34390e74250307312ed93eb4eafcd68"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 1200000000000,
+        "gpu": true,
+        "gpu_ns": 300000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 21841,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/hardware-v5.resource.json",
+          "sha256": "3bd36181bf6171c708633e2911da370d007f5c60c9aa0609412dd11971a0351a"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/hardware-v5.reservation.json",
+        "sha256": "23a3bcdaeed23079a997b63415550b29d3d74fe30e89a033a72417ffdf786d93"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/hardware-v5.settlement.json",
+        "sha256": "e2fee9c23e3c42e507ac407888cc51da3eb882c0a63cd0fcb578b428cf5a75e4"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 720000000000,
+        "gpu": true,
+        "gpu_ns": 180000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 21747,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v6.resource.json",
+          "sha256": "bcb993521a0a9867fa3c5b8918597870205d401aa2b45ef9155e346cf1c44343"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v6.reservation.json",
+        "sha256": "3d4c0d3fae337672716bb7c4a701a133a22c32d48802383cdf9ba11831a0b0cf"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v6.settlement.json",
+        "sha256": "f342a5ecc5490cd540ef6a8bd283f2c1922fdd993f6834fdae44ce47e25c1112"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 240000000000,
+        "gpu": true,
+        "gpu_ns": 60000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20158,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/vector-load-diagnosis-v5.resource.json",
+          "sha256": "16e492d641b556e216a761f89e4fc96c6fa2371f94a72697f14e628864f57a1e"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/vector-load-diagnosis-v5.reservation.json",
+        "sha256": "44ebe527fec7063aab6fe14321192e7f834a1a38763e83de288edc57d044412b"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/vector-load-diagnosis-v5.settlement.json",
+        "sha256": "89f68557a48e277494f9739e95be2b3d573751788a9fcfee3ff25ca7251c2e2b"
+      }
+    }
+  ],
+  "inventory": {
+    "device": "GPU-6721b13a-30f9-83ec-dace-ba2d9738556f",
+    "inventory": "GPU-dfb2449a-9eff-e868-3597-2c448c9a8e48, NVIDIA GeForce RTX 5090, 580.105.08, 32607 MiB, 123 MiB, 0 %\nGPU-c62a3b14-42bb-3c9b-c2b2-3374726b1a02, NVIDIA GeForce RTX 5090, 580.105.08, 32607 MiB, 271 MiB, 0 %\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.105.08, 97887 MiB, 15 MiB, 0 %\n",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0\n"
+  },
+  "manifest": {
+    "admission": {
+      "path": "artifacts/gpup-fp4-fast-v1/admission-v8/result.json",
+      "sha256": "c5b96ad37aa6220267831d2fa672de68be2f1dadb08f7e0c0d48b41abf350cda"
+    },
+    "binary": {
+      "path": "artifacts/gpup-fp4-fast-v1/study-v1/executor",
+      "sha256": "fed87577faddcf1eca60227e9981d34f3c4013078c23d56a3b9b2ad57a5310c6"
+    },
+    "build": {
+      "path": "artifacts/gpup-fp4-fast-v1/build-v8/receipt.json",
+      "sha256": "82a48d918ee1cd593076f4f26474f8b4ddad604ac44eb9d0528bec101a433094"
+    },
+    "cells": [
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-4096-16-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-4096-8-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-8-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-8-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-64-8-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-8-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-1-16-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-1-16-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-1-64-1-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-64-16-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 512,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-512-64-1-native_cached-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-512-8-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-64-64-1-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-1-16-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-1-16-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-512-64-1-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-512-8-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-64-8-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-4096-16-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-8-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 4096,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-4096-64-1-native_cached-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-64-8-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-64-16-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-512-8-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 512,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-512-64-1-native_cached-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-8-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-512-64-1-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-1-16-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-1-8-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-64-64-1-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-4096-16-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-8-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-1-8-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 4096,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-4096-64-1-native_cached-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-1-16-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-8-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-512-8-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-512-16-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-64-16-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-4096-8-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-8-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-512-16-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-512-16-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-4096-16-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 512,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-512-64-1-native_cached-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-512-64-1-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-1-64-1-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-8-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-512-64-1-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-512-8-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-4096-16-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 64,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-64-64-1-native_cached-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 4096,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-4096-64-1-native_cached-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-8-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-8-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 64,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-64-64-1-native_cached-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-1-8-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-1-8-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 64,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-64-64-1-native_cached-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-8-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 512,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-512-64-1-native_cached-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-8-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-8-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-4096-16-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-64-16-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-4096-8-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 4096,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-4096-64-1-native_cached-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-64-64-1-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-8-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-1-8-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-8-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-512-16-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 1,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-1-64-1-native_cached-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-8-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-512-8-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-4096-8-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-512-8-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-64-16-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 1,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-1-64-1-native_cached-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-1-8-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-64-8-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-64-16-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-1-16-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-512-8-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-512-16-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-512-8-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-4096-16-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 4096,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-4096-64-1-native_cached-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-512-8-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-8-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-64-8-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-8-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-64-16-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-64-8-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-512-8-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-64-8-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-8-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-64-8-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-1-8-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-64-16-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-8-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-1-16-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-1-64-1-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-8-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-4096-8-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-1-64-1-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-4096-8-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-512-64-1-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-8-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-64-16-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 64,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-64-64-1-native_cached-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-1-8-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-8-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-8-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-512-16-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-4096-16-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-8-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-1-64-1-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-2-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-8-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-8-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-512-16-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-64-16-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 1,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-1-64-1-native_cached-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-512-16-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-4096-8-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-64-16-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-1-8-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-512-16-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-4096-8-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-64-64-1-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 64,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-64-64-1-native_cached-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-8-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 1,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-1-64-1-native_cached-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-8-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-8-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-4096-8-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-1-16-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-8-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-512-64-1-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-8-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-512-8-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-64-8-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-8-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-8-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-1-64-1-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-1-8-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-64-64-1-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-64-64-1-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-8-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-512-16-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-4096-8-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-4096-64-1-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-1-16-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-8-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-8-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-4096-64-1-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-8-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-4096-64-1-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-1-16-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-8-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-2-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-8-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 64,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-64-64-1-native_cached-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-4-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-8-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 1,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-1-64-1-native_cached-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-4096-16-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-512-16-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-512-16-2-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-4096-64-1-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-64-8-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-4096-16-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-64-8-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-1-16-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "rich",
+        "format": 16,
+        "id": "rich-4096-16-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-8-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-4096-64-1-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 8,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-8-hardware-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 512,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-512-64-1-native_cached-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-8-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 1,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-1-4-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-512-4-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 4096,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-4096-64-1-native_cached-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-4096-4-8-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 1,
+        "components": 1,
+        "family": "dyadic",
+        "format": 64,
+        "id": "dyadic-1-64-1-native_cached-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-4096-4-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 2,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-1-4-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "native_cached",
+        "blocks": 512,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-512-64-1-native_cached-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-8-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 1,
+        "family": "rich",
+        "format": 64,
+        "id": "rich-4096-64-1-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-64-8-4-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-64-16-2-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 8,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-8-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "hardware",
+        "blocks": 64,
+        "components": 2,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-64-4-2-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-4096-8-4-hardware-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 4096,
+        "components": 2,
+        "family": "dyadic",
+        "format": 16,
+        "id": "dyadic-4096-16-2-legacy-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 64,
+        "components": 4,
+        "family": "rich",
+        "format": 4,
+        "id": "rich-64-4-4-legacy-r2",
+        "repetition": 2
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-1-8-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "legacy",
+        "blocks": 1,
+        "components": 4,
+        "family": "rich",
+        "format": 8,
+        "id": "rich-1-8-4-legacy-r1",
+        "repetition": 1
+      },
+      {
+        "backend": "hardware",
+        "blocks": 4096,
+        "components": 4,
+        "family": "dyadic",
+        "format": 8,
+        "id": "dyadic-4096-8-4-hardware-r0",
+        "repetition": 0
+      },
+      {
+        "backend": "legacy",
+        "blocks": 512,
+        "components": 4,
+        "family": "dyadic",
+        "format": 4,
+        "id": "dyadic-512-4-4-legacy-r0",
+        "repetition": 0
+      }
+    ],
+    "certified": false,
+    "device": "GPU-6721b13a-30f9-83ec-dace-ba2d9738556f",
+    "grid_cpu": {
+      "path": "artifacts/gpup-fp4-fast-v1/resources/grid-cpu-v1.settlement.json",
+      "sha256": "e891931257cf55fd88675acf9257f69dc3fbdb55653bd5d6520a02e593ef8bae"
+    },
+    "image": {
+      "path": "artifacts/gpup-fp4-fast-v1/build-v8/fast.cubin",
+      "sha256": "d6b39b4153af483ebef0309604d87ddacbbf9b97a503a7016bda874677c9a2f8"
+    },
+    "inventory": {
+      "path": "artifacts/gpup-fp4-fast-v1/study-v1/inventory.json",
+      "sha256": "328b306fa3ee2327b31346a010fc60f8329d0816e5740278b7288bac4d796b8e"
+    },
+    "kind": "fp4-fast-study-v1",
+    "repetitions": 7,
+    "sources": [
+      {
+        "path": "crates/optimizer-core/src/capability.rs",
+        "sha256": "e2e110895638ca48c95c51dc297f41a3df7f758cc7631bb1f9ed2886c6898ebc"
+      },
+      {
+        "path": "crates/optimizer-core/src/document.rs",
+        "sha256": "2586616d6cf32121871f113ddb7bbc194f1760d02e568f77c2d977bc01875743"
+      },
+      {
+        "path": "crates/optimizer-core/src/evaluate.rs",
+        "sha256": "fe100314c476519bd9d46185e642f6cff45ab917aca5dd652f5ab4c0f374ef1d"
+      },
+      {
+        "path": "crates/optimizer-core/src/lib.rs",
+        "sha256": "ac6dae3a69a4b1106a6234f7245d7366c0ff11fb15e1f2efbd1750a6b974c47c"
+      },
+      {
+        "path": "crates/optimizer-core/src/lp_adaptive.rs",
+        "sha256": "aedaf37c7452449bd1095313a6dbd43f91e3a119891d3559200f4f922fcbcc35"
+      },
+      {
+        "path": "crates/optimizer-core/src/lp_cost.rs",
+        "sha256": "0738960d9ade2033731fe7525c858dd66fe88cd721cff65615c36644cda42408"
+      },
+      {
+        "path": "crates/optimizer-core/src/lp_diagnostics.rs",
+        "sha256": "2e8fa6f7d1a09fb304f41da9f0f589a10a0a542eb91358e5baa18249d1f4cfe4"
+      },
+      {
+        "path": "crates/optimizer-core/src/lp_execution.rs",
+        "sha256": "4aca540b2d862f59d5c4f6560e63aeefb0f4d3909a3a896b2a1b08a902ecf28b"
+      },
+      {
+        "path": "crates/optimizer-core/src/lp_precision.rs",
+        "sha256": "87e22f38580a02e6b30cd69c59e99837d9b9d4d034dd726af4bff8b46cebd2ae"
+      },
+      {
+        "path": "crates/optimizer-core/src/lp_settings.rs",
+        "sha256": "bebf3cc0510d75322900747736077e265d3e4464f95cd0dd1db321db959e4c3b"
+      },
+      {
+        "path": "crates/optimizer-core/src/serde_strict.rs",
+        "sha256": "7f6c7f55a206e3db5ee8b388298961d9d780e42f41f3ac5ac40b23b71c21bc30"
+      },
+      {
+        "path": "crates/optimizer-core/src/sha256.rs",
+        "sha256": "3e15b160859e1d85c733a5b42daa4d39db9accda3fa2ea910468df8e4ad05e4d"
+      },
+      {
+        "path": "crates/optimizer-core/src/solve.rs",
+        "sha256": "9042934f1cca245bbfc843071e4f6fe190e820a5d9583391cf57449027e21029"
+      },
+      {
+        "path": "docs/specifications/SPEC-0028-fp4-fast.md",
+        "sha256": "9a5826a91c19075c42045bc7c3fd339d2afcf21883268a29e7407e51745172ac"
+      },
+      {
+        "path": "research/lp-fp4-fast/Cargo.lock",
+        "sha256": "58c832d7fa589f93d67b2c3d55639271d9af4e3ae7e03976de22ce48f5e15844"
+      },
+      {
+        "path": "research/lp-fp4-fast/Cargo.toml",
+        "sha256": "bce637b20d08725a691ed74f4adadcb7567b9de341f4ec51f038950de5913283"
+      },
+      {
+        "path": "research/lp-fp4-fast/cuda/fast.cu",
+        "sha256": "08bd035160664b207bf183ad282e5a4e92002a8fef1a4fe338b16272085eb44c"
+      },
+      {
+        "path": "research/lp-fp4-fast/src/main.rs",
+        "sha256": "80206e0adc85da6128c986320d066ea122e3e277ab3585d487145e5fb9f74e88"
+      },
+      {
+        "path": "research/lp-fp4-gpu-pilot/cuda/pilot_v3.cu",
+        "sha256": "dd9c9d989d397335899a305115d7db4fb6788ecd245e62a454d9a984f5cefb46"
+      },
+      {
+        "path": "research/lp-tensor-expanded-device/cuda-sys/src/events.rs",
+        "sha256": "ee0906c18f20170f06c4ebba5e03cf4c152c149e0842dd1c0332fe193478de77"
+      },
+      {
+        "path": "research/lp-tensor-expanded-device/cuda-sys/src/lib.rs",
+        "sha256": "a7954d1b1764ea92048fb99d4962a5aba66e7c2666312aefe13d2719ff0b9950"
+      },
+      {
+        "path": "research/lp-tensor-expanded-device/cuda-sys/src/primary.rs",
+        "sha256": "8b5ad93af537f4d39516806c0069c44a756171b05ec7a7125af0cbcf686a2d7c"
+      },
+      {
+        "path": "research/lp-tensor-expanded-device/cuda-sys/src/setup.rs",
+        "sha256": "9e2eb9915dcf8dd3ef37b53ae9279df18e3f5b38477d71306337d84b3cf24653"
+      },
+      {
+        "path": "research/lp-tensor-expanded-device/cuda-sys/src/status.rs",
+        "sha256": "ea72ed4eb38e348a535b1971a87c60e0c6d503d74ef9ebf7dc468df77f23d95b"
+      },
+      {
+        "path": "tests/integration/test_lp_fp4_fast.py",
+        "sha256": "4fc3860f2a907c00b1e63ee289404a1e1f3356c9555ccc8ec90e887460f0de71"
+      },
+      {
+        "path": "tools/lp_cpu_admission.py",
+        "sha256": "523184f432ff32fdf1150b79bed4aefe3f03872464e736d466da39095564263a"
+      },
+      {
+        "path": "tools/lp_fp4_fast_admission.py",
+        "sha256": "1368c311d6a0d89273bb9ab9d75630a710aaf05a90638cfd18ccac72b3077caf"
+      },
+      {
+        "path": "tools/lp_fp4_fast_budget.py",
+        "sha256": "9bc3a70a07d65c5fcea04298216f9d16b168e3d3a131e5be4b96bb6e5da4d285"
+      },
+      {
+        "path": "tools/lp_fp4_fast_common.py",
+        "sha256": "c50f9172758ad290cd1bea74620d5a7f2fb9ecb23cd3edfb15e349d89a6fd32e"
+      },
+      {
+        "path": "tools/lp_fp4_fast_experiment.py",
+        "sha256": "6f25ed6d4cb4b1be5021d12edbbea914a3ccff90b8bdfd345e32065a8fd5bb42"
+      },
+      {
+        "path": "tools/lp_fp4_fast_prepare.py",
+        "sha256": "ef006d5b4f7b9f55a81486ccf26e78970f3f5955ac001e0f58f596e71b94ef9a"
+      },
+      {
+        "path": "tools/lp_fp4_fast_study.py",
+        "sha256": "efb4cbb72e069c2acfd47cdbbe3530880ddfd163d89084935addabf0b2756795"
+      },
+      {
+        "path": "tools/lp_fp4_gpu_oracle.py",
+        "sha256": "eae3194a179dde6035e0e432e83ec03704aafc62009b3df4303b856898618ca1"
+      },
+      {
+        "path": "tools/setup_fp4_fast.py",
+        "sha256": "3a1f2a3ffaf2c509246d2d91d6e6a6714411627b2c5241e791ae69cca5f623b3"
+      }
+    ]
+  },
+  "prior_pilot": {
+    "path": "docs/benchmarks/data/fp4-gpu-pilot-result-v3.json",
+    "sha256": "1514e1bef9237ba0d1fec06616f712b84aff840f5654774a34ba8abc3ff68a65"
+  }
+}

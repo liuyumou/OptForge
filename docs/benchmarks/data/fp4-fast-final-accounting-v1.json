@@ -1,0 +1,1104 @@
+{
+  "bookkeeping_note": "Final settlement publication and local Git operations are covered by the initial 512 conservative preparation CPU seconds; no further numerical execution is released.",
+  "cleanup": {
+    "path": "artifacts/gpup-fp4-fast-v1/cleanup-v2.json",
+    "sha256": "d2ea8667c4a83d922ca13fc6b5b632b0ebde5e3aba055b678e0a85e085579ec2"
+  },
+  "cleanup_settlement": {
+    "path": "artifacts/gpup-fp4-fast-v1/resources/final-cleanup-v2.settlement.json",
+    "sha256": "51a39a96732a22852912fe9897447f6cbbd81ce9e6019f665250868d98eb5421"
+  },
+  "cpu_caps_seconds": {
+    "acceptance": 32000,
+    "cleanup": 1600,
+    "implementation": 24000,
+    "native": 16000,
+    "reporting": 6400,
+    "study": 48000
+  },
+  "cpu_ns": {
+    "acceptance": 6195269925824,
+    "cleanup": 506665746944,
+    "implementation": 3115515418612,
+    "native": 1256659300980,
+    "reporting": 30922505076,
+    "study": 1924942071472
+  },
+  "gpu_caps_seconds": {
+    "acceptance": 7200,
+    "study": 10800
+  },
+  "gpu_ns": {
+    "acceptance": 1534376379509,
+    "study": 479079328750
+  },
+  "hygiene": {
+    "path": "docs/benchmarks/data/fp4-fast-hygiene-v1.json",
+    "sha256": "687a04f0271d6682fd0fc7bdefcad7f1b6d52add0b9aed9e7dc94aecc7343e10"
+  },
+  "projection_boundaries": {
+    "path": "docs/benchmarks/data/fp4-fast-projection-boundaries-v1.json",
+    "sha256": "40820f69053a6480d810cfb06fd13921a716091a540cf044f853d70709d71447"
+  },
+  "resources": [
+    {
+      "charged": {
+        "cpu_ns": 5184799688,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 419,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/admission-v8.resource.json",
+          "sha256": "547f69b9ce3c70f78fb89b63eb51ed59ba39aa805ee2a416d972e063a20816fe"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/admission-v8.reservation.json",
+        "sha256": "048bc72373efd931b4835301f1e100f80824fa6169d7590554de2fa84d0c0dc6"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/admission-v8.settlement.json",
+        "sha256": "8e5501eed31a751ad101610f14796a3a0440277e0e0da2377593e745b8d6981b"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 240000000000,
+        "gpu": true,
+        "gpu_ns": 60000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20654,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/aligned-word-diagnosis-v6.resource.json",
+          "sha256": "23a7f71acbf633f9fb7053de9a2290a397e01f10ae8beae62c7d28d484cb1635"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/aligned-word-diagnosis-v6.reservation.json",
+        "sha256": "dfa80d4256d38f0aefe8583eb4b69669fcf6da1b100e584df34c27a9bb8c16a0"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/aligned-word-diagnosis-v6.settlement.json",
+        "sha256": "9a3fbd673ee2a215323172708ae5f3135ae5b79f7817513a894a4e5d075aa8d4"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 25942616048,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 359,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/archive-executors-v1.resource.json",
+          "sha256": "eed70f73c9836ead9dbe468924969e7af2a4a338a769996a76a814d58e545fc3"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/archive-executors-v1.reservation.json",
+        "sha256": "4b814c43d2fa4e0c26c0b4bc6b2e44e5a4c7f88a152ee0a5f08c6dc4cfce5191"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/archive-executors-v1.settlement.json",
+        "sha256": "af47eff0e3cc85e9e9343b00ce0ec0a54b25a9f2d0f5e8768fa35c444bc656ce"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 73672978276,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 281,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v1.resource.json",
+          "sha256": "21ac79ab0cf9d0b49fc2a51dd02f84145a6431dc2a3162108281aacbc14356c5"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v1.reservation.json",
+        "sha256": "3a053f0974c429dc9e46fa32c6d60c94898f597098849953f42b26f0d747fba5"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v1.settlement.json",
+        "sha256": "436fd3a6f17ba37ac41117ba12d232cce136da124d738255afbbed69bfc3bff5"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 125183542608,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 411,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v2.resource.json",
+          "sha256": "188a458338f9c82accc56580491077977f13c3ee1ab105448ad14c002da2bd4d"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v2.reservation.json",
+        "sha256": "b830eb5f12c3dae2682e2fa6fa1800a5400d49a37e0909b0ba676a85c4463d3f"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v2.settlement.json",
+        "sha256": "ddebbb5aeca010edf09227c7e0c84cbec22562116d0b2d5dbca624758b277e7a"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 136550836968,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 364,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v3.resource.json",
+          "sha256": "36fd4ad3962d095bc2165614a70973746610bf8274a4556e151e11a3f23eb3a1"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v3.reservation.json",
+        "sha256": "2c5be3f9f852fe2b9576ed3f9901e4d5ea584a1394891037c6674bf95e09f98c"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v3.settlement.json",
+        "sha256": "09a74b206a5097028093a1e26819a5a197e7189e2b9113e9bb2695f0e5c77ee4"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 144440249036,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 376,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v4.resource.json",
+          "sha256": "6ffa443872823d535f09ad90e7481f1e65a7f33e41364727e2b879d0a0b68fc2"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v4.reservation.json",
+        "sha256": "f36d7fe6622d652402ac8014a62c2ad1e96318ea1ca0a0b3984ea9bc1ce5a793"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v4.settlement.json",
+        "sha256": "6176db586f169213daff329cb44936da57779280333be321f6014878351a5d76"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 155221108304,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 323,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v5.resource.json",
+          "sha256": "0e1f24cde10223e3c2ea8bb18711f2bfb01d933405a138d778b0a59b8d15db95"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v5.reservation.json",
+        "sha256": "296f370639755765dc1c599575114d0502533108e7d0cc4b3546fea9427a5342"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v5.settlement.json",
+        "sha256": "64bdc141f671f5005d981e22975cf9a79b2210a5be46c8c46c29f23ff934db8b"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 154729045332,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 244,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v6.resource.json",
+          "sha256": "09975146d28725aebe9712250e874a2cc3d213ffe81d445f0a734993eaeb4673"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v6.reservation.json",
+        "sha256": "e39c45a881497c3d8d9fa9baa3972f1ed860aa66188e56d202d5ee593feff837"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v6.settlement.json",
+        "sha256": "152510bb72a950352ea15ac9fdbe048d36fd34c100153da7fdec30eaa420886a"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 154316346452,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 376,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v7.resource.json",
+          "sha256": "a3272033e5f53c89707c0cadbcd0155818470c3ff43f70c59899eb10402c5f5c"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v7.reservation.json",
+        "sha256": "1ff51887f1996749d037d3c6aab2b46b15c71307bebf941b9494cb09c757c8b0"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v7.settlement.json",
+        "sha256": "5f32549f803e3c0b51786cca955abf22665e2474a73396f638c9858ab84ea462"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 155449160360,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 367,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v8.resource.json",
+          "sha256": "a58dcb307554d2c211b196fac0d9f56a7d5fbf79982064cfe9f33c274c696a13"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v8.reservation.json",
+        "sha256": "00b5a3339c965fef7e2bfd3cb8fd035c89a4a5c1e3b2cab9a03be332ed95a00f"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/compile-v8.settlement.json",
+        "sha256": "86835d1245a3f67c6e7e6f49cb2e84c38df926709badc77fcf7687d0dc00e10f"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 720000000000,
+        "gpu": true,
+        "gpu_ns": 180000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 21939,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/counters-v1.resource.json",
+          "sha256": "3198ba5dbe6bf6f50e12507d6557b94fa6bf3d36c482c2f2a4e17ef4f21a152b"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/counters-v1.reservation.json",
+        "sha256": "98542b84de6f71081e8d292528e4d51167a62be51577cd1d1ebbbe1c356d8a07"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/counters-v1.settlement.json",
+        "sha256": "b78f4eae5ffe12b47d0737a63ee1339ef8806be3be84058620d832c4a662d8bd"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 77827279840,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 500,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v2.resource.json",
+          "sha256": "5cede7b70b1f2630bb7b7d114abca2a6a02aeb00986973e9e12b892906fbdef6"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v2.reservation.json",
+        "sha256": "fa3c88cdd5cb0aa08c2744e67f067a4fec7970486c827c459f723447f151d7c9"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v2.settlement.json",
+        "sha256": "151f03e5049d57f830474f369b3c2c1aa5309e433914cfde7b032178b60b7bc5"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 17230709712,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 431,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v3.resource.json",
+          "sha256": "de584ffdfcc2a9467aa8b6c693245d076f3736c4b0c200dde23405649d121bcf"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v3.reservation.json",
+        "sha256": "6b39869f387bbe062ac94173f4e463262a0a2c91d6809247e332b7893d54ff51"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v3.settlement.json",
+        "sha256": "74d8fc4f378483d116d90ea07d9f33e69f4545729541930d9b0883e2ff2a369e"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 18468563764,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 398,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v4.resource.json",
+          "sha256": "4c3b84282734d5c42c33ca61fbf5981be070b1a7a066a720e8639430f3bea8de"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v4.reservation.json",
+        "sha256": "60074c401d799791748f8f4da457d1abd82d7b421fd5ae7763c31738585d5a96"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v4.settlement.json",
+        "sha256": "bf66d5450966b2916d07a2ca614955e4188263722655cbd7075be4a8ec6e6902"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 17922615664,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 315,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v5.resource.json",
+          "sha256": "ca039dc6fe2c80ce990888249d9359fbd4e0e13ad850387d1ff088acc2c79bda"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v5.reservation.json",
+        "sha256": "6b39869f387bbe062ac94173f4e463262a0a2c91d6809247e332b7893d54ff51"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v5.settlement.json",
+        "sha256": "4618be21c1559aeb6120b0835dd4d00395db97e202f13eb25de0e4cb87cccc7e"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 18002379392,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 371,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v6.resource.json",
+          "sha256": "94651b6a5d484aa67d8adf942ab91d706b5201b78dca804a4a597e605d2ed78a"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v6.reservation.json",
+        "sha256": "60074c401d799791748f8f4da457d1abd82d7b421fd5ae7763c31738585d5a96"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v6.settlement.json",
+        "sha256": "245ef3076dead8154933ff5f92e1eeecd3a61ed571cf7b6221316b99caea9e74"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 1200000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 366,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-v1.resource.json",
+          "sha256": "9afa459c5ff70cc47a09e722950b01c187fc9dd92b58b2fdb9b741a3358a4d23"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-v1.reservation.json",
+        "sha256": "17ec1617bc67f01d1057f0836548df3e1ade5ff1b7c5d09632347680d1da59ba"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-v1.settlement.json",
+        "sha256": "16c435d46b02f333edf5aa65a228d923d34390e74250307312ed93eb4eafcd68"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 30922505076,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 313,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/delivery-v1.resource.json",
+          "sha256": "61af0469b05ef23ae1b332f3d2245c7cfd90e1925121e1c21e26ce9d3c37d38f"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/delivery-v1.reservation.json",
+        "sha256": "4ba8c305a3b697bf24426c59480a1eed64a6b614d745ecaa9486cdd1b70ed78e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/delivery-v1.settlement.json",
+        "sha256": "d4f21226b6900ba06bfab61cf605333b1fb3dffba485f8e68dc800b2b16e1beb"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 219491438196,
+        "gpu": true,
+        "gpu_ns": 53999607193,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 21229,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/diagnostics-v4.resource.json",
+          "sha256": "d149b98c9eadaa54de4785a1d4faedc159da161c41e0cbd4c468bbd5e53a1c91"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/diagnostics-v4.reservation.json",
+        "sha256": "c5f7f41f9f30ba19420f44ca6df33a3ae9cad959c8a67015217a891cb8bd119c"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/diagnostics-v4.settlement.json",
+        "sha256": "fbda06a824dbde987298f06177334164d6f8b64d7f2a24f2cc929053a66fafd3"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 123349980648,
+        "gpu": true,
+        "gpu_ns": 29959918141,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20275,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/differential-v1.resource.json",
+          "sha256": "f249cdc8dfb296a1c48ed0dd3e3a64e1936ff8e393c33be4982ed6e77fba398f"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/differential-v1.reservation.json",
+        "sha256": "370db5da33fede683c02ebc7979e6086392e1f4403024ac85e63e7f2bb91d6cb"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/differential-v1.settlement.json",
+        "sha256": "2a3fe9efebc53e341d1935c8ab3650c319211c5920ac3cce2e1df423644283ac"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 205018468376,
+        "gpu": true,
+        "gpu_ns": 50383655261,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 24775,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/differential-v2.resource.json",
+          "sha256": "6c0a6aa2625b2861599a1b76a87c953f6613684a3f575a5fde043d36a8dcfec4"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/differential-v2.reservation.json",
+        "sha256": "929917d8bba65e889681e2ab97baf56eade59f4b7f284590ae1859071cd6d1fa"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/differential-v2.settlement.json",
+        "sha256": "bdb5882a0a922488881faf94cc7eb0d2307df858a131a2f2ed83bc86d01b91f7"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 480000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "cleanup",
+        "queue_ns": 544,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/final-cleanup-v1.resource.json",
+          "sha256": "6b2e60594ea5232b275dd20aecf6690cbc8762a3527f6ed179c3c915d46756a9"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/final-cleanup-v1.reservation.json",
+        "sha256": "0279d32f8173225ff8366913c9f3859cfaa3089117455596354334c1c9ec24a5"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/final-cleanup-v1.settlement.json",
+        "sha256": "fe08608fb94b04c10634dfe5715e41d4b192e423294399da0b4eb64a93850cb8"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 26665746944,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "cleanup",
+        "queue_ns": 591,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/final-cleanup-v2.resource.json",
+          "sha256": "46da4727fe58d11c777ede18be561a7268abfd08496c783a788099d64d5cfd4c"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/final-cleanup-v2.reservation.json",
+        "sha256": "0279d32f8173225ff8366913c9f3859cfaa3089117455596354334c1c9ec24a5"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/final-cleanup-v2.settlement.json",
+        "sha256": "51a39a96732a22852912fe9897447f6cbbd81ce9e6019f665250868d98eb5421"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 1919803594172,
+        "gpu": true,
+        "gpu_ns": 479079328750,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 21732,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/formal-study-v1.resource.json",
+          "sha256": "7873d4af5214a18ac4245cde2082018587f86fa87ae37799d2dbc90a66171c3b"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/formal-study-v1.reservation.json",
+        "sha256": "71e64aa9a19dba7befbd443c3fca378870a9f6f256d0a7fcaeded6705e209e70"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/formal-study-v1.settlement.json",
+        "sha256": "daec58752ca8fbe4289110882d5ae18f4062e3340c6089446187622f42d9dbd4"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 12282121852,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 700,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/grid-cpu-v1.resource.json",
+          "sha256": "35e7f225f8352a0399250750e5f9a4144c3041797cb7d0515f0a62d949e0c7e9"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/grid-cpu-v1.reservation.json",
+        "sha256": "3754cc0724b33017d804ea14b41fc2eacb7e213445da7aa4394ccd47bf3dd455"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/grid-cpu-v1.settlement.json",
+        "sha256": "e891931257cf55fd88675acf9257f69dc3fbdb55653bd5d6520a02e593ef8bae"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 1200000000000,
+        "gpu": true,
+        "gpu_ns": 300000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 21841,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/hardware-v5.resource.json",
+          "sha256": "3bd36181bf6171c708633e2911da370d007f5c60c9aa0609412dd11971a0351a"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/hardware-v5.reservation.json",
+        "sha256": "23a3bcdaeed23079a997b63415550b29d3d74fe30e89a033a72417ffdf786d93"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/hardware-v5.settlement.json",
+        "sha256": "e2fee9c23e3c42e507ac407888cc51da3eb882c0a63cd0fcb578b428cf5a75e4"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 434664958764,
+        "gpu": true,
+        "gpu_ns": 107788548540,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 19771,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/hardware-v8.resource.json",
+          "sha256": "0d2f28445ea4513f630e659999a2a068301773ee85710b136571fcff3a4ee19d"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/hardware-v8.reservation.json",
+        "sha256": "a512c5a29d8df2a9e508218a6f5737acc0b02160fd7292c298d59b7b9e30ab98"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/hardware-v8.settlement.json",
+        "sha256": "7b206eed444ae2399f9b6ba347240e1febc93602e00af8878a9b21bb322e568f"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 116275865004,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 393,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/host-preparation-v1.resource.json",
+          "sha256": "6e906cce4f0d66a832488822c81432870a5a315d5b47a484b85b8757155c6eda"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/host-preparation-v1.reservation.json",
+        "sha256": "274ab997f07232935489352f35d5461ed2b302960975eb32a90d69abe62e62ef"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/host-preparation-v1.settlement.json",
+        "sha256": "69a4c26e26395e83f6c9396b943573b67cfd3ab3c5656cdc621aa8d6c983d6bf"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 68956281468,
+        "gpu": true,
+        "gpu_ns": 16361003378,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20838,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/initcheck-v8.resource.json",
+          "sha256": "9413a2ef687fc26b7bac13cc1df998736528f6470060e08fd70e985d5048ae7e"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/initcheck-v8.reservation.json",
+        "sha256": "655ba6c5b113c662383c5ca38324bd825960001061c45ff9ef819e5fdf613149"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/initcheck-v8.settlement.json",
+        "sha256": "22f38884eb9858544992bf92d2540dec796b6639d6b21760972b7f990ecca26f"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 70577524368,
+        "gpu": true,
+        "gpu_ns": 16765277543,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20154,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/memcheck-v8.resource.json",
+          "sha256": "a1cb5a9fc4177457cc0cd2c5ccb5687b91680bba6be1df066e09ca4a2087289b"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/memcheck-v8.reservation.json",
+        "sha256": "868e6e9ee204df383ccdacdd68eaa400038bee1c1ec82d8f1a169149abbf3bda"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/memcheck-v8.settlement.json",
+        "sha256": "f91471c88e0aedc4b3d359fe82b66fca2091fd1254ee8838117dbb51abbf5f01"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 1256659300980,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "queue_ns": 357,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/native-gate-v1.resource.json",
+          "sha256": "89283a7460136107c810c5f09655790d15f35bc3684a867cb6eda6051f5963d0"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/native-gate-v1.reservation.json",
+        "sha256": "16bb93b5277e2cba7e3003b9ff789b7d1a0c1f83ae09825d5aca5150764e40af"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/native-gate-v1.settlement.json",
+        "sha256": "d598a0a7eefb499e9972f07ff238901da6ead5c4ac7770f5cf969c7e97bb2fd0"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 720000000000,
+        "gpu": true,
+        "gpu_ns": 180000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 21747,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v6.resource.json",
+          "sha256": "bcb993521a0a9867fa3c5b8918597870205d401aa2b45ef9155e346cf1c44343"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v6.reservation.json",
+        "sha256": "3d4c0d3fae337672716bb7c4a701a133a22c32d48802383cdf9ba11831a0b0cf"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v6.settlement.json",
+        "sha256": "f342a5ecc5490cd540ef6a8bd283f2c1922fdd993f6834fdae44ce47e25c1112"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 110652557252,
+        "gpu": true,
+        "gpu_ns": 26790869769,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 23251,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v7.resource.json",
+          "sha256": "14f8ad0e3f4b90567be99a1bbc061fddd651de6cfc6c4921571c7f37228685d1"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v7.reservation.json",
+        "sha256": "5231479c956b73590765c676587e0e2e43bdcde173ae74e7db470225549ca488"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v7.settlement.json",
+        "sha256": "222b1a423013a08505bdb9d5c73a21469ad6efd0b61dc03836ae48e8cbf13886"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 111223017300,
+        "gpu": true,
+        "gpu_ns": 26928952976,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20958,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v8.resource.json",
+          "sha256": "d35caab8d8982dd93445db6489434886a54e34fe81e2488be252157f55f084d9"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v8.reservation.json",
+        "sha256": "9c5eedb15871ffa773b544a6162168fe3e92f1572967cc5da881c32c82712aff"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/primitives-v8.settlement.json",
+        "sha256": "47ceb6f0f0dfb6df30f671f39d06c6f462ad172cffbe13faaa4aceddec63a23c"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 70598692640,
+        "gpu": true,
+        "gpu_ns": 16777311245,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 21933,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/projection-boundaries-v1.resource.json",
+          "sha256": "df04ac07a1b196ec1f2e08a1327297127f684a70baa81232fecbb1432ae58257"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/projection-boundaries-v1.reservation.json",
+        "sha256": "0f703a5e13fe6010144a86962def10818e258d20f27093137e3921b105c04bbd"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/projection-boundaries-v1.settlement.json",
+        "sha256": "cf25d068d6c2627834605118e975417b725a00d401f616891ffb4925f6685e3d"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 216910816464,
+        "gpu": true,
+        "gpu_ns": 53348095733,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 19525,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/racecheck-v8.resource.json",
+          "sha256": "ce236a81663940d7b88187597d763eb2364f45ad67469e6040d75ab4e2b21252"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/racecheck-v8.reservation.json",
+        "sha256": "aeee8387a5e1b4fd852767550e6f257a18afb39ab37cacbebec1ecba96adaf88"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/racecheck-v8.settlement.json",
+        "sha256": "682fb0d192f2ec760e4bc94f67317e706035dfa269fcce94c85efbece5fcd1a0"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 1052528533268,
+        "gpu": true,
+        "gpu_ns": 262260722463,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 22003,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/scaling-v3.resource.json",
+          "sha256": "f2c0aaf744186067004c169cc6a9681f4afeb8288656219cc0ada2fd58910db1"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/scaling-v3.reservation.json",
+        "sha256": "000360a8805950ae1ba63231f5bdb791ee6ec182bfcfdc51f90e4fb7bdc2a440"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/scaling-v3.settlement.json",
+        "sha256": "149e817727fbed8fd4da141b8f4f0ae51c7bc3fc55caed0e7d003f8fd98233e8"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 128583439044,
+        "gpu": true,
+        "gpu_ns": 31268485412,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 21283,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/stress-v7.resource.json",
+          "sha256": "e7c219820cb1010f928eef8ebd29a2ae4cfafe93471a3ed9347c47233ae658be"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/stress-v7.reservation.json",
+        "sha256": "57faa23db1e5e5f8f177d85eea5fe0dc68e3f0edbff15b6b7d2487618d0386f4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/stress-v7.settlement.json",
+        "sha256": "638ea967d43926998df708fadbb9e47297d3162b3b031991bee499a9c8307dff"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 129774669868,
+        "gpu": true,
+        "gpu_ns": 31564485592,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20902,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/stress-v8.resource.json",
+          "sha256": "f450d75371af946eaea9c09ad85a5e3bc0e4cf79b43c3197df368c1211dbc6b8"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/stress-v8.reservation.json",
+        "sha256": "afa28b503d65203177e17b0fc3457a8fcc03245da2956f3c56e58a3719e7a13d"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/stress-v8.settlement.json",
+        "sha256": "a97ca49c602d60356f39fd031988379bd974e0afc9b2f7e2b525cc4a3f3d5815"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 5138477300,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 391,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/study-freeze-v1.resource.json",
+          "sha256": "a9ae0dc601ccb61df0033d52c90ce7e2541184f46b60cbfb9b9f6abc6d78e7f3"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/study-freeze-v1.reservation.json",
+        "sha256": "688e959dd44f5f91ecedb7849f986c01f354c967ac0e134ace205bf7004ad7f5"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/study-freeze-v1.settlement.json",
+        "sha256": "60015d5e1369acf27b78c26c204465e937646612278af09a1477a692b6c1b2ba"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 67349236988,
+        "gpu": true,
+        "gpu_ns": 15958200656,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20265,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/synccheck-v8.resource.json",
+          "sha256": "2f201914a0820e8a1afa40dba07361f276bdb0cf0484d8d74e4579b42df18358"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/synccheck-v8.reservation.json",
+        "sha256": "4f341c9e318fe70b37e48a393567c270d7fab38b719b354055d0ef1c6d4fd314"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/synccheck-v8.settlement.json",
+        "sha256": "c98499e9a626273a6c85df87a500ee04c4daac5f4ed3ac2be0eed40509765991"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 60405511492,
+        "gpu": true,
+        "gpu_ns": 14221245607,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20486,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/transactions-v8.resource.json",
+          "sha256": "8ab7ce1ab14ca53247a8a66307316a285886d121e6fa099348daae131d42532a"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/transactions-v8.reservation.json",
+        "sha256": "2f8cdba46410669ee3b4d7756903fcdb12e12fa9901c19cfcdfdd233b6acaae2"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/transactions-v8.settlement.json",
+        "sha256": "d140f419b1752697dd0c176a0cbc13d27b1b4b561a252f3dbb06a9b885609579"
+      }
+    },
+    {
+      "charged": {
+        "cpu_ns": 240000000000,
+        "gpu": true,
+        "gpu_ns": 60000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20158,
+        "resource": {
+          "path": "artifacts/gpup-fp4-fast-v1/resources/vector-load-diagnosis-v5.resource.json",
+          "sha256": "16e492d641b556e216a761f89e4fc96c6fa2371f94a72697f14e628864f57a1e"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/vector-load-diagnosis-v5.reservation.json",
+        "sha256": "44ebe527fec7063aab6fe14321192e7f834a1a38763e83de288edc57d044412b"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/vector-load-diagnosis-v5.settlement.json",
+        "sha256": "89f68557a48e277494f9739e95be2b3d573751788a9fcfee3ff25ca7251c2e2b"
+      }
+    }
+  ],
+  "status": "closed",
+  "total_cpu_ns": 13029974968908,
+  "total_gpu_ns": 2013455708259
+}

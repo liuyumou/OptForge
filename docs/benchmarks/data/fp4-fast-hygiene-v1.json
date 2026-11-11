@@ -1,0 +1,18 @@
+{
+  "status": "accepted_exact_source_exception",
+  "source": {
+    "path": "research/lp-fp4-fast/cuda/fast.cu",
+    "sha256": "08bd035160664b207bf183ad282e5a4e92002a8fef1a4fe338b16272085eb44c"
+  },
+  "blank_only_lines": [
+    166,
+    170,
+    174,
+    178,
+    185,
+    189,
+    200
+  ],
+  "exception": "Only blank-at-eol on these seven existing blank lines in this exact frozen source; every other file and whitespace rule remains checked.",
+  "reason": "Preserve the exact source of the admitted and timed v8 image. The failed final-cleanup-v1 reservation remains fully charged."
+}
