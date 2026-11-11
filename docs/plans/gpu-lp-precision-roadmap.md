@@ -3,20 +3,22 @@
 Status: GPUP-RESIDENT2 bounded negative result complete 2026-11-11; GPUP-8 incomplete, science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: 4e62cab04ca2236d419c2deea4063a42a4f519ef
+Last reviewed commit: 0c4a395334a44121970322cacec10fb4ff709f91
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
-Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md)
-Evidence: [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md), [RESIDENT2 planning amendment](../decisions/ADR-0054-resident2-cost-priorities.md)
+Evidence: [RESIDENT2 result](../benchmarks/lp-resident2-gpup-resident2.md), [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
 
 ## Current plan (2026-11-10)
 
 The objective is a faster independently certified answer using modern GPU
 low-precision computation where it reduces total cost. The comparable cuOpt/COPT
-baseline is now complete under an explicit native-return policy; the next step
-is simpler mixed precision using the measured native control. Lean resident
+baseline is now complete under an explicit native-return policy. Simpler mixed
+precision remains the next numerical candidate, beginning with CPU-only cost
+admission against the measured native control. Delivery-cost optimization is an
+explicit alternative when the arithmetic opportunity is too small. Lean resident
 execution is implemented; its bounded study does not pass the latency retention
-gate. Another exact-expansion
-Tensor implementation is conditional on a credible cost case. This priority supersedes the dated planning order below;
+gate. Another exact-expansion Tensor implementation is conditional on a credible
+cost case. This priority supersedes the dated planning order below;
 historical evidence and accepted numerical contracts remain unchanged.
 
 GPUP-8's corrected proof, CPU/native/model gates and six device jobs passed.
@@ -55,6 +57,63 @@ mean is 1.027370x and four certified medians regress, so the latency retention g
 fails. Keep the native control; prepared throughput is a separate endpoint.
 GPUP-MIXED2 is next ready, with no new execution released by this handoff.
 
+### RESIDENT2 lessons and planning changes (2026-11-11)
+
+The result changes admission and optimization priorities, not the accuracy
+objective. The existing control already retains device state and batches 64
+updates. The resident admission trace removes 14 of 58 synchronizations but
+keeps all 2800 launches, nearly doubles uploads and more than doubles readback.
+Safety flags, coefficient transport and transactional adoption are real costs;
+their separate latency contributions have not been isolated. All 42 certified
+pairs have identical bytes and iteration counts, so extra iterations do not
+explain those pairs' timings. This is evidence against selecting this executor,
+not against every resident design or mixed precision.
+
+1. **Require a complete-delivery cost case before MIXED2 device work.** Use
+   retained per-trial phase partitions under the same lifecycle and transport.
+   Identify the portion actually accelerated, expected iteration changes and
+   added conversion, guard, correction, fallback and evidence costs. Predeclare
+   the total-latency target and regression/coverage rule before a new cohort.
+   Do not sum marginal phase medians or treat all native time as kernel time.
+   If the attainable saving cannot meet the target, defer the candidate before
+   a full device study. Unknown costs require explicit ranges or a separately
+   bounded measurement pilot, not assumed zero overhead.
+2. **Make delivery cost an actionable alternative: GPUP-DELIVERY2.** On
+   dense-65536, control native time is about 2.40 s versus 9.78 s total; checking
+   takes 3.16 s and conversion/preparation about 2.33 s (separate medians).
+   Inspect parsing, immutable preparation, checker input preparation, provenance
+   and process/transport overhead. Remove demonstrated duplicate work while
+   retaining exact original inputs, fresh independent certificates and durable
+   evidence. Select a bounded delivery slice ahead of precision device work
+   when its cost case is stronger; this is not an automatic dependency or a
+   claim that the recorded unattributed residual is removable.
+3. **Keep prepared throughput explicit.** Reuse immutable models and residency
+   across fresh solves, and charge setup in the cold endpoint. The observed
+   control cold/prepared ratios are 1.24–2.98 on certified models; each prepared
+   configuration has only one batch. They motivate lifecycle reuse, not a
+   supported throughput preset or a resident-candidate win.
+4. **Reopen resident optimization only for a new cost mechanism.** A future
+   proposal must quantify changes in launches, copies, bytes, allocations,
+   guards and observation cost. Compact flag transport or graph submission are
+   hypotheses requiring their own admission; fewer waits alone is insufficient.
+   Preserve the 200-update controller boundary, bounded cancellation and whole
+   checkpoint rollback unless a separate numerical contract changes them.
+5. **Separate mathematical coverage from transport and performance.** Normal-limit
+   export is fixed. The mixed-model finite-dual-bound refusal remains a distinct
+   bound-authority problem; diagnose it from retained candidates before proposing
+   any new numerical work. Keep these endpoints in the coverage denominator and
+   out of certified speedup claims. Do not clip infinite bounds or relax 1e-9.
+6. **Match the strength of the claim to the experiment.** Three cold repetitions
+   and one prepared batch do not establish a general ranking. Future protocols
+   must predeclare repetitions, paired order, uncertainty reporting and stop
+   rules. Freeze actual executable hashes and validate produced counter/export
+   schemas before device admission; retain every failed attempt and its charge.
+
+These are prospective gates under [ADR-0054](../decisions/ADR-0054-resident2-cost-priorities.md).
+The RESIDENT2 retention decision and all prior scientific criteria stay fixed.
+MIXED2 remains next ready for contract/cost preparation; no new experiment,
+budget transfer, RESIDENT2 retry or GPUP-9 execution follows from this revision.
+
 ### Ordered deliverables and decision gates
 
 | Task / priority | Deliverable and prerequisite | Acceptance / go-no-go decision |
@@ -64,7 +123,8 @@ GPUP-MIXED2 is next ready, with no new execution released by this handoff.
 | **GPUP-BASELINE**, complete under the user amendment | Separate adapters/checker, frozen 240-cell report; 123 results reused and 117 new attempts | 198 comparison passes, 135 strict certificates; cuOpt 90/96 native passes and 24/96 strict certificates. Separate native/quality/transport outcomes and retained failures; no equal-quality speedup claim |
 | **GPUP-BASELINE-FOLLOWUP**, delivered | ADR-0052 / SPEC-0023, exact continuation roster, explicit native-return policy and resource allocation | Original certificate unchanged; native errors and normal limits distinguished; raw vectors and mapping uncertainty preserved; previous numerical trials not rerun |
 | **GPUP-RESIDENT2**, complete as bounded negative result | SPEC-0024 / ADR-0053; cold/prepared phases, immutable preparation, coefficient/flag transport, transactional native windows and normal-limit export | 64 cells/96 endpoints; 42/48 strict certificates per mode and 42 bitwise pairs. Four sanitizers pass. Cold geomean 1.027370x and four regressions fail latency retention; keep the native control |
-| **GPUP-MIXED2**, next ready | FP32 matrix / FP64 state-and-compute candidate first; only then bounded FP32 state with residual-driven escalation; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Explicit matrix-error and residual contract; useful nonzero work on admitted models, original 1e-9 checker, charged correction/fallback; reject if convergence/guard cost erases total gain |
+| **GPUP-MIXED2**, next ready for contract/cost preparation | CPU-only complete-delivery cost admission against the native control, then separately admitted FP32 matrix / FP64 state-and-compute; lower-precision state is a later candidate; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Predeclared latency/coverage rule and accelerated cost fraction, iteration/guard/transfer/fallback costs; defer device study if the cost case fails. Explicit matrix-error/residual contract, useful nonzero work and original 1e-9 certificate |
+| **GPUP-DELIVERY2**, conditional alternative before precision device work | Target demonstrated parsing/preparation/checker/provenance/transport overhead using retained native phase evidence; depends on GPUP-RESIDENT2 | New bounded protocol/allocation; exact original inputs and fresh independent certificates; matched native controls isolate transport changes. Cold total cost and prepared throughput remain separate; no unmeasured residual assigned to removable overhead |
 | **GPUP-TENSOR2**, conditional | CPU cost admission for dense-block or batched alternatives; device prototype only after admission; depends on GPUP-MIXED2 | Compare packing, padding, all component/residual work, state updates, guards and convergence with native/SIMT; no full campaign unless a conservative complete-path estimate has at least 10% headroom; this is a proposed new screen, not a GPUP-8 criterion change |
 | **GPUP-PRESOLVE**, planned | Minimal reversible fixed-variable, singleton and bound-tightening transformations plus postsolve maps; depends on GPUP-BASELINE evidence | Independent original-model validation of postsolved primal/dual information and statuses; benchmark saved total work; reject transformations that cannot preserve required proof information |
 | **GPUP-8-DISPOSITION**, planned review | Review new engineering evidence and the retained incomplete GPUP-8 record; depends on GPUP-BASELINE and GPUP-MIXED2 | Either propose a separately funded bounded recovery with unchanged GPUP-8 criteria, or seek an explicit negative-result closure and superseding progression decision; neither marks GPUP-8 passed by default |
@@ -72,8 +132,8 @@ GPUP-MIXED2 is next ready, with no new execution released by this handoff.
 | **GPUP-MILP**, deferred | Relaxation adapter, bound authority, warm starts and full search study after supported LP recipes | Correct pruning/bounds, cancellation and reproducibility, followed by full MILP time/node/coverage comparisons |
 
 One task owner handles each accepted slice. Expected ownership is experiment
-tooling for BASELINE-SPEC/BASELINE, CUDA runtime for RESIDENT2, numerical backend
-for MIXED2/TENSOR2/PRESOLVE, and solver executive for MILP. Tasks are sequential
+tooling for BASELINE-SPEC/BASELINE/DELIVERY2, CUDA runtime for RESIDENT2,
+numerical backend for MIXED2/TENSOR2/PRESOLVE, and solver executive for MILP. Tasks are sequential
 unless their accepted resource plans explicitly permit independent work.
 
 ### External comparison contract
@@ -115,13 +175,12 @@ postsolve mapping uncertainty remains an optional adapter follow-up rather than
 an implicit prerequisite or an attributed vendor defect.
 
 The large mixed model has no strict certificate from any configuration. The
-project's native limit endpoints retain candidates and internal assessments,
-but nonzero CLI exit prevents export through the current adapter. The strict
-checker also lacks finite bound authority for an unbounded variable's reduced-cost
-enclosure. Preserve these as separate transport and mathematical limitations;
-first diagnose normal-limit extraction and sound bound construction without
-inventing finite bounds or relaxing the certificate. Use certifying models for
-matched latency claims, keep mixed-model failures in the coverage denominator,
+baseline adapter's normal-limit export failure is historical: RESIDENT2 now
+exports complete primal/dual vectors from all twelve mixed-model limit endpoints.
+The strict checker still lacks finite bound authority for variable 3's
+reduced-cost enclosure. Diagnose sound bound construction from retained evidence
+without inventing finite bounds or relaxing the certificate. Use certifying
+models for matched latency claims, keep mixed-model failures in the coverage denominator,
 and require an explicit bound-authority contract before claiming a certified win
 there. The [completed report](../benchmarks/lp-external-baseline-native-return.md#what-the-completed-comparison-changes)
 binds those observations.
@@ -134,33 +193,35 @@ seconds, including 4.326 seconds in independent checking. Faster arithmetic can
 only improve the portion it actually accelerates; preparation/evidence costs
 must remain visible.
 
-Define cold and prepared-model lifecycles before introducing immutable canonical
-preparation, binary/buffered transport or compact evidence. Cold time must still
-charge preparation; amortized prepared throughput is a separate endpoint. Preserve
+RESIDENT2 defines cold and prepared-model lifecycles and immutable preparation.
+Further binary/buffered transport or compact evidence must use those explicit
+boundaries. Cold time must still charge preparation; amortized prepared
+throughput is a separate endpoint. Preserve
 exact original coefficients, independent assessment, source bindings and bounded
 cancellation/cleanup. Compare native controls under the same transport before
 claiming an algorithmic improvement. The old v2/new v5 small-model transport
 mismatch is explicitly excluded from paired speedup claims.
 
-After that control is established, reduce redundant per-update synchronization
-and preparation under the existing safe controller boundaries. MIXED2 follows
-with FP32 matrix storage and FP64 state/arithmetic before a separately guarded
-low-precision state. Require useful work, explicit error/progress guards and
-charged correction/fallback; retain the project's 1e-9 certificate even though
+Keep the measured native control. MIXED2 starts with complete-delivery cost
+admission; DELIVERY2 is the alternative when host/evidence savings offer the
+stronger cost case. An admitted MIXED2 prototype uses FP32 matrix storage and
+FP64 state/arithmetic before a separately guarded low-precision state. Require
+useful work, explicit error/progress guards and charged correction/fallback;
+retain the project's 1e-9 certificate even though
 the external cuOpt comparison has a user-selected native-return tier. Tensor
 work remains conditional on a complete-path cost case. No new task is funded or
 executed by this handoff, and GPUP-8/GPUP-9 gates remain unchanged.
 
 ### Resident execution and precision choices
 
-After phase attribution and lifecycle definition, RESIDENT2 can remove redundant
-synchronization in a separate native control,
-keeping the existing 200-update controller boundaries. Precompute coefficients
-for bounded blocks, accumulate sticky flags on device, and read results at a
-proved safe boundary. Predicated execution must not publish invalid work. A
-failure must restore the entire checkpoint and charge all attempted work; a
-bounded block must preserve cancellation responsiveness. Graph capture or fusion
-is optional and must earn its complexity through full-path measurements.
+RESIDENT2 implemented bounded coefficient tables, sticky flags and transactional
+observation under the existing 200-update controller boundaries. Its latency gate
+failed, so it remains a research candidate and is not the base for MIXED2.
+A future resident proposal must identify a materially different cost mechanism
+and include the full safety/transport cost before device admission. Predicated
+execution must not publish invalid work; refusal must preserve the entire host
+checkpoint and charge attempted work. Graph capture, compact flags or additional
+fusion remain unmeasured proposals, with bounded cancellation required.
 
 For MIXED2, begin with fewer representation changes than GPUP-8: original FP64
 matrix for residual/check authority, FP32 stored matrix for an approximate inner

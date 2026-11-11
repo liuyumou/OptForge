@@ -1,4 +1,5 @@
-# Current plan 2026-11-11: RESIDENT2 bounded negative result complete; native control retained; MIXED2 next.
+# Current plan 2026-11-11: ADR-0054; MIXED2 contract/cost admission next; DELIVERY2 conditional alternative.
+# RESIDENT2 bounded negative result complete; native control retained; no new scientific execution.
 # Current plan 2026-11-10: baseline complete; 240 attempted, 135 strictly certified; explicit cuOpt native-return tier.
 # User-authorized native-return policy is separate from strict certificates; RESIDENT2 is next ready.
 # Historical comments below retain earlier handoffs; GPUP-8 science is closed, GPUP-9 gated.
@@ -70,11 +71,17 @@ tasks:
     specification: docs/specifications/SPEC-0024-native-resident-execution.md
     acceptance: "SPEC-0024 / ADR-0053 implemented; 64 completed cells, 96 endpoints, 42/48 certificates per mode, 42 bitwise certified pairs. Cold/prepared phases and normal-limit export are explicit; mixed infinite-bound refusal unchanged. Device/transport/four sanitizers pass; full CPU native gate and exact correction bridges retained. Synchronizations drop 58 to 44 but cold geomean 1.027370x and four regressions fail latency retention. Native control remains; no preset. Report: docs/benchmarks/lp-resident2-gpup-resident2.md."
   - id: GPUP-MIXED2
-    title: Evaluate simpler mixed precision with reliable residuals and escalation
+    title: Admit complete-delivery cost before simpler mixed precision
     status: ready
     depends_on: [GPUP-BASELINE, GPUP-RESIDENT2]
     specification: docs/plans/gpu-lp-precision-roadmap.md
-    acceptance: "New numerical protocol/allocation; begin FP32 matrix and native FP64 state/arithmetic, then separately admit lower-precision state; useful nonzero low-precision work, progress/error guards, charged native fallback and 1e-9 independent certificate; include prior refinement/quantization failure mechanisms"
+    acceptance: "ADR-0054; first CPU-only cost/numerical contract preparation from retained per-trial phases using the native control. Predeclare total-latency/coverage/uncertainty rules; quantify accelerated fraction, work multiplier and added representation/guard/transfer/correction/fallback costs. Defer device study if the cost case fails; unknown attribution requires a separately bounded measurement pilot. New protocol/allocation before execution; FP32 matrix with native FP64 state/arithmetic first, useful nonzero work and original 1e-9 independent certificate; lower-precision state separately admitted; include prior refinement/quantization failures"
+  - id: GPUP-DELIVERY2
+    title: Reduce demonstrated setup and evidence delivery cost
+    status: planned
+    depends_on: [GPUP-RESIDENT2]
+    specification: docs/decisions/ADR-0054-resident2-cost-priorities.md
+    acceptance: "Conditional alternative before precision device work when its cost case is stronger; not an automatic MIXED2 prerequisite. New bounded protocol/allocation; target demonstrated parsing/preparation/checker/provenance/transport overhead with matched native controls. Preserve exact inputs, fresh independent original-model certificates, source bindings and complete durable output; cold total latency and prepared throughput separate; no unmeasured residual assigned to removable overhead"
   - id: GPUP-TENSOR2
     title: Admit selective Tensor work only with a complete-path cost case
     status: planned

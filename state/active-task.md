@@ -1,5 +1,37 @@
 # Active Task
 
+## RESIDENT2 lessons: roadmap revision completed (2026-11-11)
+
+Objective: turn the retained negative result into concrete planning gates and
+correct stale forward-looking text. MIXED2 remains the next numerical candidate;
+its first step is CPU-only cost admission from retained per-trial evidence.
+Make delivery-cost optimization an explicit alternative when arithmetic cannot
+meet the proposed total-latency target. Preserve cold/prepared distinctions,
+independent 1e-9 certificates and the unresolved mixed-model bound limitation.
+
+Scope: roadmap, a new superseding planning ADR, backlog and current handoff.
+Acceptance: documentation/internal links, backlog consistency, diff hygiene and
+unchanged numerical sources/evidence. No solver, GPU or historical gate rerun.
+Separate documentation-only envelope: 256 CPU seconds (64 preparation/editing,
+160 validation, 32 cleanup), four CPU slots, 6 GiB sampled host RSS, zero GPU.
+Historical allocations stay closed. Validation uses the unchanged CPU supervisor
+with a new journal under artifacts/gpup-resident2-roadmap-v1. Local commit after
+acceptance; no push or publication. No future scientific task is released.
+
+ADR-0054 and the roadmap/backlog now record the cost gate, conditional DELIVERY2
+alternative, measured limits of synchronization reduction, lifecycle distinction
+and separate mixed-model bound-authority problem. Stale export and future
+RESIDENT2 implementation text is corrected. MIXED2 remains next ready for
+contract/cost preparation against the native control.
+
+Acceptance passes 192 documentation pages/internal links, YAML task/dependency
+consistency, unchanged historical handoff/roadmap text, documentation-only scope
+and diff hygiene. The supervised validation charges 13.687409792 CPU seconds;
+preparation is conservatively charged 64 seconds. Cleanup uses the separately
+reserved 32-second stage. Exact receipts/journal are retained under
+artifacts/gpup-resident2-roadmap-v1. No numerical code, data, historical charge,
+solver setting or scientific criterion changes; no solver/GPU test is rerun.
+
 ## GPUP-RESIDENT2 completed; latency retention gate fails (2026-11-11)
 
 The requested bounded implementation and comparison are complete under

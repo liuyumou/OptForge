@@ -1,5 +1,21 @@
 # Agent Instructions
 
+## RESIDENT2 lessons applied to the roadmap (2026-11-11)
+
+ADR-0054 refines future planning from the completed RESIDENT2 evidence. Keep the
+native control. GPUP-MIXED2 remains next ready for CPU-only contract/cost
+preparation; quantify the accelerated fraction and all added costs before device
+work. GPUP-DELIVERY2 is a planned alternative before precision device work when
+its setup/checker/transport cost case is stronger, not an automatic prerequisite.
+Cold latency and prepared throughput remain separate. Normal-limit export is
+fixed; mixed-model finite-bound authority remains unresolved at original 1e-9.
+
+This is a documentation-only revision, with a separate 256 CPU / zero GPU
+envelope and no historical allocation reuse. No scientific task, retry, new
+precision default or publication is released. RESIDENT2 stays complete as a
+negative result, GPUP-8 incomplete/science closed and GPUP-9 gated. See
+docs/plans/gpu-lp-precision-roadmap.md and state/active-task.md for acceptance.
+
 ## GPUP-RESIDENT2 completed; latency retention gate fails (2026-11-11)
 
 The requested bounded implementation and comparison are complete under
