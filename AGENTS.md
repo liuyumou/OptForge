@@ -1,5 +1,27 @@
 # Agent Instructions
 
+## Persistent multi-FP4 feasibility direction (2026-11-11)
+
+The user prioritizes multiple FP4 components, reconstruction-free inner iterations
+and fused kernels, and explicitly accepts approximate inner arithmetic with
+original-model FP64 residual checks and unchanged 1e-9 final certification.
+ADR-0055 and docs/plans/lp-fp4-persistent-state.md assess this as a worthwhile
+bounded hypothesis, not an FP64-equivalent implementation or measured speedup.
+
+Next ready: GPUP-FP4-SPEC, CPU-only numerical/cost contract and resource proposal.
+Then conditional FP4-PROTO (CPU admission before device/profile) and TENSOR2 study.
+MIXED2 remains a simpler alternative, not an FP4 prerequisite; DELIVERY2 remains
+conditional. Keep the native control. Define observation-only 200-update audits,
+full component checkpoints and cross-window error/recovery before persistence.
+Count local normalization, projection decisions, component cross-products and
+all correction/exception costs; no routine per-update FP64 state round trip.
+
+This literature/roadmap review has a separate 512 CPU / zero GPU envelope.
+No numerical implementation, compiler/device test or study ran; no future
+execution allocation, historical retry, push or publication is released.
+GPUP-8 remains incomplete/science closed; GPUP-9 gated. Exact historical evidence
+and charges stay unchanged. Acceptance and receipts: state/active-task.md.
+
 ## RESIDENT2 lessons applied to the roadmap (2026-11-11)
 
 ADR-0054 refines future planning from the completed RESIDENT2 evidence. Keep the

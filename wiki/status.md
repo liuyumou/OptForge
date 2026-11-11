@@ -1,5 +1,15 @@
 # Project Status
 
+## Persistent multi-FP4 planning priority (2026-11-11)
+
+The [FP4 assessment](../docs/plans/lp-fp4-persistent-state.md) and
+[ADR-0055](../docs/decisions/ADR-0055-persistent-fp4-direction.md) prioritize
+approximate persistent component state with fused iterations, original-model
+residual checks and strict final certification. GPUP-FP4-SPEC is next ready for
+CPU-only numerical/cost contract work; prototype and study remain conditional.
+MIXED2 and DELIVERY2 remain alternatives. The native control, historical evidence
+and GPUP-8/GPUP-9 gates are unchanged. No new solver or GPU execution occurred.
+
 ## GPUP-RESIDENT2 bounded result (2026-11-11)
 
 The [resident execution report](../docs/benchmarks/lp-resident2-gpup-resident2.md)

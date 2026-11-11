@@ -1,5 +1,40 @@
 # Active Task
 
+## FP4 persistent-state feasibility and roadmap review completed (2026-11-11)
+
+The user requests assessment and roadmap changes for multiple FP4 components,
+reconstruction-free inner iterations and fused kernels. They explicitly select
+approximate inner arithmetic with original-model FP64 residual checks and the
+unchanged 1e-9 final certificate; exact FP64-equivalent arithmetic is not required.
+
+Scope: primary-source literature/ISA review, retained expansion/resident evidence,
+a concrete design proposal, a new planning ADR, roadmap/backlog and handoff.
+Acceptance: sourced hardware claims, explicit numerical/cost unknowns, no hidden
+per-iteration FP64 round trip, bounded future gates, documentation links, backlog
+consistency and unchanged historical numerical sources/results/charges.
+This review runs no solver, GPU, compiler, formal arithmetic proof or benchmark.
+
+Separate documentation envelope: 512 CPU seconds (128 preparation/editing,
+320 validation, 64 cleanup), four CPU slots, 6 GiB sampled host RSS, zero GPU.
+Use the unchanged supervisor with a fresh journal under
+artifacts/gpup-fp4-roadmap-v1; historical allocations stay closed. Local commit
+after acceptance; no push/publication. Proposed implementation and studies need
+their own numerical contracts and resource allocations.
+
+Delivered: docs/plans/lp-fp4-persistent-state.md and ADR-0055, with current
+roadmap/backlog/README/wiki navigation aligned. GPUP-FP4-SPEC is next ready;
+FP4-PROTO and TENSOR2 remain conditional. MIXED2/DELIVERY2 remain alternatives.
+The assessment distinguishes persistent component state from zero-cost local
+normalization, counts cross-products and projection/error work, and requires
+original-model observation-only audits plus native and FP8/FP16 comparisons.
+
+Acceptance passes 194 documentation pages/internal links, acyclic task/dependency
+checks, completed-task and historical-text preservation, documentation-only scope
+and diff hygiene. Supervised validation charges 13.863842980 CPU seconds, plus
+128 conservatively charged preparation seconds. Final cleanup is separately
+reserved within 64 CPU seconds; exact receipts and closed accounting remain in
+artifacts/gpup-fp4-roadmap-v1. No arithmetic, device, profile or solver gate ran.
+
 ## RESIDENT2 lessons: roadmap revision completed (2026-11-11)
 
 Objective: turn the retained negative result into concrete planning gates and

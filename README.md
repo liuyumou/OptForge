@@ -5,17 +5,18 @@ selective GPU acceleration. **C6 is implemented under SPEC-0010 and SPEC-0011**:
 a search can evaluate integer schedules on a GPU, and a first-order LP backend
 runs on the host or device with host-side validation and certification.
 
-As of 2026-11-10, **GPUP-8 is implemented experimentally but incomplete**.
+As of 2026-11-11, **GPUP-8 is implemented experimentally but incomplete**.
 Its corrected proof and device acceptance pass; six small profiles complete,
 then the first large BF16 profile times out. No certified latency gain or supported
 precision preset is established, and GPUP-9 remains gated. The
 [system diagnosis](docs/benchmarks/lp-system-diagnosis-2026-11-10.md) identifies
 expanded reconstruction and state-update costs as the dominant current bottleneck.
 The [revised roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-11-10)
-prioritizes comparable cuOpt/COPT baselines, lean resident execution and simpler
-mixed precision, with selective Tensor work conditional on total-cost evidence.
-[ADR-0047](docs/decisions/ADR-0047-certified-performance-roadmap.md) records the
-design choices. [cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
+now prioritizes a [persistent multi-FP4 feasibility contract](docs/plans/lp-fp4-persistent-state.md):
+approximate inner iterations and fused kernels with strict final certification.
+Device work remains conditional on numerical and total-cost evidence.
+[ADR-0055](docs/decisions/ADR-0055-persistent-fp4-direction.md) records this priority.
+[cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
 Gurobi remains unavailable and was excluded from the baseline.
 
 [GPUP-BASELINE](docs/benchmarks/lp-external-baseline-native-return.md) is complete
@@ -25,9 +26,13 @@ For cuOpt, 90/96 native returns pass its explicit error/status policy, while
 24/96 meet the independent certificate. Limits, native errors, outer failures
 and numerical discrepancies remain visible. This is not a quality-matched
 performance claim. Total baseline GPU charge is 3091.996 / 3600 seconds.
-The next ready task is resident execution with explicit preparation/checking costs;
 [SPEC-0023](docs/specifications/SPEC-0023-baseline-native-return.md) records the
 cuOpt policy, and SPEC-0022's strict mathematical checker remains unchanged.
+
+[GPUP-RESIDENT2](docs/benchmarks/lp-resident2-gpup-resident2.md) is complete as a
+bounded negative result: certified coverage is preserved, but complete latency
+fails the retention gate. Keep the native control. GPUP-FP4-SPEC is next ready
+for CPU-only contract/cost preparation; MIXED2 and DELIVERY2 remain alternatives.
 
 The earlier research slices provide the following foundation.
 Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)

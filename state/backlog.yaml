@@ -1,4 +1,5 @@
-# Current plan 2026-11-11: ADR-0054; MIXED2 contract/cost admission next; DELIVERY2 conditional alternative.
+# Current plan 2026-11-11: ADR-0055; FP4-SPEC next, approximate persistent components with strict final certification.
+# Prior handoff: ADR-0054; MIXED2 contract/cost admission first; DELIVERY2 conditional alternative.
 # RESIDENT2 bounded negative result complete; native control retained; no new scientific execution.
 # Current plan 2026-11-10: baseline complete; 240 attempted, 135 strictly certified; explicit cuOpt native-return tier.
 # User-authorized native-return policy is separate from strict certificates; RESIDENT2 is next ready.
@@ -37,7 +38,7 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-MIXED2
+next_ready_task: GPUP-FP4-SPEC
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-DIAG
@@ -70,6 +71,18 @@ tasks:
     depends_on: [GPUP-BASELINE]
     specification: docs/specifications/SPEC-0024-native-resident-execution.md
     acceptance: "SPEC-0024 / ADR-0053 implemented; 64 completed cells, 96 endpoints, 42/48 certificates per mode, 42 bitwise certified pairs. Cold/prepared phases and normal-limit export are explicit; mixed infinite-bound refusal unchanged. Device/transport/four sanitizers pass; full CPU native gate and exact correction bridges retained. Synchronizations drop 58 to 44 but cold geomean 1.027370x and four regressions fail latency retention. Native control remains; no preset. Report: docs/benchmarks/lp-resident2-gpup-resident2.md."
+  - id: GPUP-FP4-SPEC
+    title: Specify approximate persistent multi-FP4 iterations and cost admission
+    status: ready
+    depends_on: [GPUP-BASELINE, GPUP-RESIDENT2]
+    specification: docs/plans/lp-fp4-persistent-state.md
+    acceptance: "ADR-0055 user-selected priority; CPU-only contract and resource proposal before implementation. Define FP4 components/scales/accumulators, projection and error policy, original-model observation-only audits at 200 updates, complete checkpoints and charged escalation. No routine per-update full FP64 reconstruction/re-encoding; normalization/local combination remain charged. Bound cross-window errors and actual ISA behavior; compare native and FP8/FP16 component cost; strict 1e-9 final certificate; no numerical execution released by the roadmap review"
+  - id: GPUP-FP4-PROTO
+    title: Validate and profile fused iterations with persistent FP4 component state
+    status: planned
+    depends_on: [GPUP-FP4-SPEC]
+    specification: docs/plans/lp-fp4-persistent-state.md
+    acceptance: "New accepted numerical contract and resource envelope; independent CPU primitive/long-trajectory/error/recovery admission before device work; actual FP4 MMA and architecture binding, no routine FP64 state round trip, legal primal/dual dependencies, four sanitizers, full rollback/cancellation. Bounded profiles count component products, scales, packing/normalization, sparse tails, exceptions, audits, spills and work amplification; stop on numerical or complete-cost infeasibility"
   - id: GPUP-MIXED2
     title: Admit complete-delivery cost before simpler mixed precision
     status: ready
@@ -83,11 +96,11 @@ tasks:
     specification: docs/decisions/ADR-0054-resident2-cost-priorities.md
     acceptance: "Conditional alternative before precision device work when its cost case is stronger; not an automatic MIXED2 prerequisite. New bounded protocol/allocation; target demonstrated parsing/preparation/checker/provenance/transport overhead with matched native controls. Preserve exact inputs, fresh independent original-model certificates, source bindings and complete durable output; cold total latency and prepared throughput separate; no unmeasured residual assigned to removable overhead"
   - id: GPUP-TENSOR2
-    title: Admit selective Tensor work only with a complete-path cost case
+    title: Compare admitted persistent FP4 iterations at complete certified cost
     status: planned
-    depends_on: [GPUP-MIXED2]
-    specification: docs/plans/gpu-lp-precision-roadmap.md
-    acceptance: "Conditional new protocol/allocation; CPU cost model includes packing/padding/component/residual/update/guard and convergence cost; proposed 10-percent complete-path screening headroom before campaign; original GPUP-8 thresholds unchanged; multiple RHS is a separate throughput endpoint"
+    depends_on: [GPUP-FP4-PROTO]
+    specification: docs/plans/lp-fp4-persistent-state.md
+    acceptance: "ADR-0055 conditional new protocol/allocation; prototype numerical/device gates and proposed 10-percent complete-path screening headroom before campaign. Freeze native FP64, FP8/FP16 component and persistent FP4 comparisons, plus fused/unfused and persistent/reconstructed diagnostics; original 1e-9 certificates, total cold cost, separate prepared throughput, predeclared coverage/uncertainty and all failures. Original GPUP-8 thresholds unchanged; multiple RHS is a separate throughput endpoint"
   - id: GPUP-PRESOLVE
     title: Add independently validated reversible presolve and postsolve
     status: planned
