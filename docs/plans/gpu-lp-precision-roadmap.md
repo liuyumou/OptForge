@@ -1,9 +1,9 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: baseline complete under the native-return amendment 2026-11-10; GPUP-8 incomplete, science closed; GPUP-9 gated
+Status: GPUP-RESIDENT2 bounded negative result complete 2026-11-11; GPUP-8 incomplete, science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: 396bd0e2ea095f1d038dfa862bb31f29a61e0d68
+Last reviewed commit: 4e62cab04ca2236d419c2deea4063a42a4f519ef
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
 Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md)
 Evidence: [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
@@ -13,7 +13,9 @@ Evidence: [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [
 The objective is a faster independently certified answer using modern GPU
 low-precision computation where it reduces total cost. The comparable cuOpt/COPT
 baseline is now complete under an explicit native-return policy; the next step
-is lean execution, followed by simpler mixed precision. Another exact-expansion
+is simpler mixed precision using the measured native control. Lean resident
+execution is implemented; its bounded study does not pass the latency retention
+gate. Another exact-expansion
 Tensor implementation is conditional on a credible cost case. This priority supersedes the dated planning order below;
 historical evidence and accepted numerical contracts remain unchanged.
 
@@ -39,6 +41,20 @@ unavailable. This is not a quality-matched commercial-solver ranking or a
 supported low-precision preset. New scientific tasks still need their own
 concrete protocol/allocation; GPUP-8 stays closed and incomplete, GPUP-9 gated.
 
+The user requested GPUP-RESIDENT2 implementation on 2026-11-11 and permitted
+additional time. [SPEC-0024](../specifications/SPEC-0024-native-resident-execution.md)
+and [ADR-0053](../decisions/ADR-0053-native-resident-execution.md) define the new
+research-only lifecycle, transactional window and separate bounded allocation.
+The baseline PR is merged; historical scientific stages and ledgers stay closed.
+
+The [completed RESIDENT2 report](../benchmarks/lp-resident2-gpup-resident2.md)
+retains all 64 cells and 96 endpoints. Both modes certify 42/48, with identical
+certified candidate bytes and work. All twelve mixed-model limit endpoints export
+successfully but retain the infinite-bound refusal. The cold model-median geometric
+mean is 1.027370x and four certified medians regress, so the latency retention gate
+fails. Keep the native control; prepared throughput is a separate endpoint.
+GPUP-MIXED2 is next ready, with no new execution released by this handoff.
+
 ### Ordered deliverables and decision gates
 
 | Task / priority | Deliverable and prerequisite | Acceptance / go-no-go decision |
@@ -47,8 +63,8 @@ concrete protocol/allocation; GPUP-8 stays closed and incomplete, GPUP-9 gated.
 | **GPUP-BASELINE-SPEC**, delivered, CPU-only | SPEC-0022, three schemas, canonical conversion/endpoint/proposal validation, fixtures and resource arithmetic | Twenty focused tests pass; ten lanes and eight source-bound development models; proposal remains non-executable |
 | **GPUP-BASELINE**, complete under the user amendment | Separate adapters/checker, frozen 240-cell report; 123 results reused and 117 new attempts | 198 comparison passes, 135 strict certificates; cuOpt 90/96 native passes and 24/96 strict certificates. Separate native/quality/transport outcomes and retained failures; no equal-quality speedup claim |
 | **GPUP-BASELINE-FOLLOWUP**, delivered | ADR-0052 / SPEC-0023, exact continuation roster, explicit native-return policy and resource allocation | Original certificate unchanged; native errors and normal limits distinguished; raw vectors and mapping uncertainty preserved; previous numerical trials not rerun |
-| **GPUP-RESIDENT2**, next ready | First attribute conversion/import/native/check/output costs with explicit cold/prepared lifecycles; then a versioned native baseline with per-window coefficients, device sticky flags and bounded asynchronous submission; reusable immutable preparation within explicitly named lifecycle; depends on GPUP-BASELINE | Preserve boundary state, refusal/rollback/cancellation and fresh certificate semantics; measure launch/copy counts and total time against matched native control; retain only if total latency improves without coverage loss |
-| **GPUP-MIXED2**, planned | FP32 matrix / FP64 state-and-compute candidate first; only then bounded FP32 state with residual-driven escalation; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Explicit matrix-error and residual contract; useful nonzero work on admitted models, original 1e-9 checker, charged correction/fallback; reject if convergence/guard cost erases total gain |
+| **GPUP-RESIDENT2**, complete as bounded negative result | SPEC-0024 / ADR-0053; cold/prepared phases, immutable preparation, coefficient/flag transport, transactional native windows and normal-limit export | 64 cells/96 endpoints; 42/48 strict certificates per mode and 42 bitwise pairs. Four sanitizers pass. Cold geomean 1.027370x and four regressions fail latency retention; keep the native control |
+| **GPUP-MIXED2**, next ready | FP32 matrix / FP64 state-and-compute candidate first; only then bounded FP32 state with residual-driven escalation; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Explicit matrix-error and residual contract; useful nonzero work on admitted models, original 1e-9 checker, charged correction/fallback; reject if convergence/guard cost erases total gain |
 | **GPUP-TENSOR2**, conditional | CPU cost admission for dense-block or batched alternatives; device prototype only after admission; depends on GPUP-MIXED2 | Compare packing, padding, all component/residual work, state updates, guards and convergence with native/SIMT; no full campaign unless a conservative complete-path estimate has at least 10% headroom; this is a proposed new screen, not a GPUP-8 criterion change |
 | **GPUP-PRESOLVE**, planned | Minimal reversible fixed-variable, singleton and bound-tightening transformations plus postsolve maps; depends on GPUP-BASELINE evidence | Independent original-model validation of postsolved primal/dual information and statuses; benchmark saved total work; reject transformations that cannot preserve required proof information |
 | **GPUP-8-DISPOSITION**, planned review | Review new engineering evidence and the retained incomplete GPUP-8 record; depends on GPUP-BASELINE and GPUP-MIXED2 | Either propose a separately funded bounded recovery with unchanged GPUP-8 criteria, or seek an explicit negative-result closure and superseding progression decision; neither marks GPUP-8 passed by default |
@@ -110,7 +126,7 @@ and require an explicit bound-authority contract before claiming a certified win
 there. The [completed report](../benchmarks/lp-external-baseline-native-return.md#what-the-completed-comparison-changes)
 binds those observations.
 
-RESIDENT2 is now the next ready implementation task. Its first deliverable is
+The completed RESIDENT2 result is linked above. Its first required deliverable was
 phase attribution for conversion, import/readback, native solve, export, checking
 and durable output without additional device synchronizations. COPT's first
 retained dense-65536 GPU PDLP solve took 0.574 native seconds but 25.574 complete

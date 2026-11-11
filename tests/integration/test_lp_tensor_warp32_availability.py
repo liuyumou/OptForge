@@ -16,12 +16,15 @@ class AvailabilitySourceBridgeTests(unittest.TestCase):
     def setUp(self):
         from lp_tensor_warp32_common import numeric_sources
         cpu = read_json(ROOT / 'docs/benchmarks/data/tensor-warp32/cpu-admission-v1.json')
+        from lp_resident2_test_support import historical_registration
+        self.enterContext(historical_registration())
         current = numeric_sources()
         # The later expanded cohort added four independent translation units.
         # Explicitly assert that delta, then exercise the frozen warp32 roster.
         additions = {'cuda/lp_pdhg_tensor_expanded/' + name for name in [
             'expanded_guard.cu', 'expanded_primitives.cu',
             'expanded_products.cu', 'expanded_reconstruct.cu']}
+        additions |= {'cuda/lp_pdhg_resident2/lp_pdhg_resident2.cu', 'crates/optimizer-lp-cuda/src/resident2.rs'}
         self.assertEqual(set(current), set(cpu['numerical_sources']) | additions)
         self.assertTrue(additions.isdisjoint(cpu['numerical_sources']))
         historical = {name: current[name] for name in cpu['numerical_sources']}

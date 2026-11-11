@@ -1,0 +1,1207 @@
+{
+  "acceptance": {
+    "path": "docs/benchmarks/data/resident2-acceptance-v1.json",
+    "sha256": "0dd0d0fb7606e7ede15edd5870b4c5c8620a22d31a5ebd7949627f0ea106a8b3"
+  },
+  "all_cleanup_empty": true,
+  "all_reservations_settled": true,
+  "cpu_caps_seconds": {
+    "acceptance": 4000,
+    "cleanup": 800,
+    "implementation": 8000,
+    "native": 8000,
+    "reporting": 3200,
+    "study": 8000
+  },
+  "cpu_charged_ns": {
+    "acceptance": 1011433510016,
+    "cleanup": 0,
+    "implementation": 1502212724904,
+    "native": 5279834089656,
+    "reporting": 96938982356,
+    "study": 1629250025536
+  },
+  "final_documentation_pages": 191,
+  "final_validation": {
+    "path": "artifacts/gpup-resident2-v1/resources/final-validation-v1.resource.json",
+    "sha256": "3dc5baa3aae9070e985cfa6e240cc74fddaef08261ddedd0178369c97ef5c662"
+  },
+  "gpu_caps_seconds": {
+    "acceptance": 600,
+    "study": 1200
+  },
+  "gpu_charged_ns": {
+    "acceptance": 247592544461,
+    "study": 351038677606
+  },
+  "kind": "lp-resident2-final-accounting",
+  "masked_compile_failure": {
+    "path": "artifacts/gpup-resident2-v1/masked-compile-failure.json",
+    "sha256": "37c5b31280bfe5349deb59df4b24dce9218bf9c9c65da8bd116c97d4cd1ec12d"
+  },
+  "note": "The earlier acceptance audit conservatively charged its then-active 360-CPU-second reservation. This closed receipt uses its successful measured settlement. Failed reservations remain fully charged; no historical ledger is modified. Final light metadata and commit checks use the precharged 128-second preparation/metadata allowance.",
+  "preparation_and_metadata_cpu_ns": 128000000000,
+  "reservations": [
+    {
+      "cpu_ns": 6752541620,
+      "gpu_ns": 809397274,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-0-control.reservation.json",
+        "sha256": "3158bbb2d04095d5534a9428b854e67f54f3523a36553d018150072c03d50644"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-0-control.settlement.json",
+        "sha256": "aac4e292888ac6621b116cdc1e74b186d1abbee222fbc55c1ec7d12743f9c26a"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6199091648,
+      "gpu_ns": 669640269,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-0-resident.reservation.json",
+        "sha256": "f10d848f19c22cb33170a791f68111a6f8e2c4838e27eaa524a05cce34a4d0a7"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-0-resident.settlement.json",
+        "sha256": "66e45c76f2bb3b8696a862a9a72e2adc73b5d4e65362edfab83230cf6cc46bd2"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6345668556,
+      "gpu_ns": 707094390,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-1-control.reservation.json",
+        "sha256": "35c58f14bde226992d7caa73f79ac1416931cff87e2eb4c5b14cd7980c035ff7"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-1-control.settlement.json",
+        "sha256": "2797b18cf1b07f20f3fd2845769470fe0d688ee498d089a8e8f749c17fbd9c72"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6976182568,
+      "gpu_ns": 863834916,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-1-resident.reservation.json",
+        "sha256": "670875ef87500a84e04132ddacdf844fcec8c63566f81004c2e03a135ef93e6d"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-1-resident.settlement.json",
+        "sha256": "ff6431d7b1e4d206bcd9311250eff594358886fe06c00f3c43da6486fc9fac10"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 9249402332,
+      "gpu_ns": 1433639988,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-2-control.reservation.json",
+        "sha256": "e57f59a5ed2cb4eb4758f0ed64393ea25dab742156a3de494da938ef0a865884"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-2-control.settlement.json",
+        "sha256": "674f8914c9fe7841cef0d42397724b6a658c0a1b40ded6a0ab2ae1bc78ffb061"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 8437903228,
+      "gpu_ns": 1230868601,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-2-resident.reservation.json",
+        "sha256": "e6fbfc30bd2076b48ab542fd61273b82d7ad021b7bd08c108e9f378d921226ae"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-cold-2-resident.settlement.json",
+        "sha256": "52a96ba6028188a761ce5dde0edfc9ad6198b553b32ff7e06701c266f2f36526"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6769187092,
+      "gpu_ns": 812636105,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-prepared-0-control.reservation.json",
+        "sha256": "fb168078fe96ba7375feb07cd9dc10fef5c54cfc7a474d52ddd38f94af2b3b8a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-prepared-0-control.settlement.json",
+        "sha256": "5593311c91c58f913e880517089abc8ec4a1c10f1448df6a0c9508b45e3c79a8"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 7702419668,
+      "gpu_ns": 1045570705,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-prepared-0-resident.reservation.json",
+        "sha256": "2737b8767c489affdc23694dd3121266cd6eb95458a28f11629969913820acfb"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/00-prepared-0-resident.settlement.json",
+        "sha256": "390a5499039a3b611895881c8d96ae88ce46e80c7f406d773c4ffceb013671ab"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6862293960,
+      "gpu_ns": 836230602,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-0-control.reservation.json",
+        "sha256": "3f3e655eebcae6906da028c4e1f881d1571a2b334347c1faa308f2a7f68e1284"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-0-control.settlement.json",
+        "sha256": "5c3a61344a8be9d630f7b589f5bbbfb0353a8fa08ae6239e90abba43d46f0133"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6887602456,
+      "gpu_ns": 842692663,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-0-resident.reservation.json",
+        "sha256": "78370f8bd5f0384950166b720cb81b43488bfe32fe1bea1607134b330ececa51"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-0-resident.settlement.json",
+        "sha256": "7ba8539c51f5b139993670357d138545ad2b4e20a65e39624a454fa12a0fdeef"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6936010320,
+      "gpu_ns": 855235306,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-1-control.reservation.json",
+        "sha256": "6bb6a471c3849bb86e0279ffb9dd238a8f68f72b85718f80a9688344b3f339d0"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-1-control.settlement.json",
+        "sha256": "e0154d225577c7dbae9f4b5fdfd2ef44b38b7dd271547a77e29d212f55373ab0"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6937791116,
+      "gpu_ns": 854098688,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-1-resident.reservation.json",
+        "sha256": "bf9d05230ba1bd32cc0f3bad218335aa1acefe63710b4f424750b7e08a40f867"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-1-resident.settlement.json",
+        "sha256": "6de9b9d9fd5579c20f0029db6163fc23feab1b26605cf0991a902da6e8a46bc7"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6870346708,
+      "gpu_ns": 838982506,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-2-control.reservation.json",
+        "sha256": "ab93574301c82d51b3554015a2794b82e15399fee0565293cf9739cd2882a544"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-2-control.settlement.json",
+        "sha256": "5641444976499869cf6d48627eac353e7897511afce40e17b0e932bba39f89c8"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6962021256,
+      "gpu_ns": 861514670,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-2-resident.reservation.json",
+        "sha256": "0902edec96306e1b417cad8238de684345d5c9eed0c34e13c27fddc3e626a2b8"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-cold-2-resident.settlement.json",
+        "sha256": "0ee4141b802e5d050357ca4dc8d633164ef74f2fed02da02ba03c2d69e2c5670"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 8436015576,
+      "gpu_ns": 1230357308,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-prepared-0-control.reservation.json",
+        "sha256": "aed7c4ce1226fbbd3c41198305a14043e1a75bf7500a02d9a8d52371d20aac62"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-prepared-0-control.settlement.json",
+        "sha256": "4684cf2d045dbfc076109e7981b1481ec0d6548e416d0a02093e6fd785e098eb"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 8440323620,
+      "gpu_ns": 1230596563,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-prepared-0-resident.reservation.json",
+        "sha256": "43fdb991f0a347d89f0222fe536464288719565f3ab46cbd71e5f70dee1d97f1"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/01-prepared-0-resident.settlement.json",
+        "sha256": "7a065455009712418c4a140bf7494727f7d5d4a093bffc04b874aae81fc9bd91"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6573442148,
+      "gpu_ns": 763154504,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-0-control.reservation.json",
+        "sha256": "86ec35dc6d64b64e6348293cfd64a2d386e42401a59bd2d9e7974c9d592f0dd0"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-0-control.settlement.json",
+        "sha256": "85d48282c93d9ee2c4bbf3c48374f3da7b29819e5b1bc1f44a0aedd6a80daf6f"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6655877788,
+      "gpu_ns": 784255611,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-0-resident.reservation.json",
+        "sha256": "06f1d53386e591e14d3729719d414855aaf90fa24b67b0d8cf8f5fdc4aae3b1c"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-0-resident.settlement.json",
+        "sha256": "b3dba18ac39c7c0026780c9bf03ecbc234a26dc1697869fc641842141e170f76"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6629384536,
+      "gpu_ns": 777633980,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-1-control.reservation.json",
+        "sha256": "6c333c122d5d71dd55101b0b25c614b52c8b9023301cfe8e6f1c4af4297c4e5c"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-1-control.settlement.json",
+        "sha256": "e6fda6d6c9cad7b70d004bcee8198110b52eb5b92eb50263c97cf3f382d31965"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6631080856,
+      "gpu_ns": 778066982,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-1-resident.reservation.json",
+        "sha256": "7e45f129f031d2cbaa446c94e1c7f8afd0b9addcdc059bfdda38d228cb98c347"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-1-resident.settlement.json",
+        "sha256": "710603922216579b2b191f055963f585b66bd9a672f7a6cfb8f8dcc658302a83"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6643856292,
+      "gpu_ns": 780707736,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-2-control.reservation.json",
+        "sha256": "7600fb6ba319fc5aeb0b53ff964b85771926f302c7b01c0c9d00f6d1e189a488"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-2-control.settlement.json",
+        "sha256": "181c0b97394b77cab2f46c5ab91469cf576ca2c61edd68eff6e4831eb47780bc"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6579324008,
+      "gpu_ns": 764573707,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-2-resident.reservation.json",
+        "sha256": "929bcf33498caed78839fea34654d34bfe35b3c9082b3c80f5c950f553c6fea0"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-cold-2-resident.settlement.json",
+        "sha256": "e2a6d08098cac42ea1502b1f29c0bef0a97741d1ea3368a9b25687b35c501944"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 7726430384,
+      "gpu_ns": 1051471671,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-prepared-0-control.reservation.json",
+        "sha256": "f9ad03035fb3e5de550dac2bb472265f6a88c6cef811ed52c5994bc3311a2e86"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-prepared-0-control.settlement.json",
+        "sha256": "236d6f1e71285369feb335dd40d589df42fc2f37408aa35e04874ee488c694c0"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 7755474336,
+      "gpu_ns": 1059061059,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-prepared-0-resident.reservation.json",
+        "sha256": "23073c62b96ebc399378ff66930bb3bef395795a53a9c2c099963c4571e04211"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/02-prepared-0-resident.settlement.json",
+        "sha256": "a0707f74a03e4c4c8bc1cc9d7a6b8927459aca9d6eca276aa3ebea95a075de79"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6330733912,
+      "gpu_ns": 702034431,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-0-control.reservation.json",
+        "sha256": "be4dd913370841a329f3f239c51341cab510b930c635ceb57ce7b5570694caee"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-0-control.settlement.json",
+        "sha256": "334b784691ca4a4a768663f73085ec9ad2324918b58799d6cceb15b663aecdfb"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6357043160,
+      "gpu_ns": 708006609,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-0-resident.reservation.json",
+        "sha256": "3734ac8d65624f30796e2eb48d776729df936b39acf407358be78d0688391fa6"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-0-resident.settlement.json",
+        "sha256": "f529dd594690127227aaeb8a4084f77dd1e727bcc8f27c180611138c3973046e"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6411669996,
+      "gpu_ns": 723758982,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-1-control.reservation.json",
+        "sha256": "35c066d1647535db3696eca436cf0cc9ce9243e57ffd8b0426f180a0fa80b081"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-1-control.settlement.json",
+        "sha256": "c435b9d81651cc4127f8376690b941c5a1c71d30495e59a7ec15af8ff2ebb75a"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6403230828,
+      "gpu_ns": 720224429,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-1-resident.reservation.json",
+        "sha256": "e1a155d8c53d8fc89941ec8b46723d0149271330c0494600d0f146f989ad0d02"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-1-resident.settlement.json",
+        "sha256": "4b1e31ca828907d50b46b61d64adb790db4b9949bef844cd1aef1b9faa4b3e14"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6392924160,
+      "gpu_ns": 716692011,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-2-control.reservation.json",
+        "sha256": "c29cb73d050667f46a28756d98831fd951002f2794da7500799d4293761cdee8"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-2-control.settlement.json",
+        "sha256": "05bd17bbc111deaabbce990b03c156c7243ce1d4c92dc49014f7c61f4231a4ee"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6433508268,
+      "gpu_ns": 728062067,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-2-resident.reservation.json",
+        "sha256": "22e7a821bc847047821338f399300774711d98dda28b0b80eb1d82aa905788bf"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-cold-2-resident.settlement.json",
+        "sha256": "6adb7ae39703a8945bf69e97844bbe9177bdbaa5a7d14b4fa2a2a7fac8f361ae"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 7301559160,
+      "gpu_ns": 944971408,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-prepared-0-control.reservation.json",
+        "sha256": "5be59f0e81f0fcbd854700ce518821ab4abfe862e9662c66c48aa1b5d1d27733"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-prepared-0-control.settlement.json",
+        "sha256": "188477d6f1e8e0ce16c8cc18a76d82d9770a851574345466da5fcb166e344389"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 7381458512,
+      "gpu_ns": 965059605,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-prepared-0-resident.reservation.json",
+        "sha256": "88f703740e23b3cb0370acb8bcd8ccf6263e81b44efd77fa93285b006922c117"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/03-prepared-0-resident.settlement.json",
+        "sha256": "19c65345ab5f3381021a1f735402f783ec2c5f9d4fee9466d7d1d96393224e38"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6845839904,
+      "gpu_ns": 830117136,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-0-control.reservation.json",
+        "sha256": "3c4bd1be16a00d20e8661dde24ad0ab1ad1f576f9bc2481000b916ea90b02d85"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-0-control.settlement.json",
+        "sha256": "f6b4d93d07431b2a4b40dbe837710e1e707d863e997c9b8af7627e9f386b45b1"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6780781564,
+      "gpu_ns": 814263175,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-0-resident.reservation.json",
+        "sha256": "cfd35128b8c816d8d89bd9ef24b87b0d275e598be5332f0993c301fd349bdab8"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-0-resident.settlement.json",
+        "sha256": "44f5babba9e9791a7325c9ad8fce2e39d8653207f6650e9d79db7b2884067a22"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6845197432,
+      "gpu_ns": 831629103,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-1-control.reservation.json",
+        "sha256": "1bec7a067e85da8ffd6891bc02e20a83ba0798bf0087c2b86c2fac7f9331262a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-1-control.settlement.json",
+        "sha256": "d30c6c2155aaf61198548d7cbb747c1a250c5f36577b0661a341a120a48d408f"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6765924988,
+      "gpu_ns": 810258527,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-1-resident.reservation.json",
+        "sha256": "7385b440e2d6e0eed1abe6f3bcf23b357fc7669173c83972af8c2c0326c54ec4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-1-resident.settlement.json",
+        "sha256": "f909ee6a9bac6f2ea539af5c072ff89537ecd3986c0e54a0a5c1102b1d2cdfdf"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6839527260,
+      "gpu_ns": 828889154,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-2-control.reservation.json",
+        "sha256": "32f8e73c72d3bbe336918c616f793b56854862c84a6e12a88d5246c66175b218"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-2-control.settlement.json",
+        "sha256": "f835d0394627875bdd8e1135a49a3adb68c7a7c766d40858c43d2bb80af48fbf"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6848397112,
+      "gpu_ns": 831293973,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-2-resident.reservation.json",
+        "sha256": "999247bb4681bf2eba3aea7b1b6d81fdb4d9ff1bb9bb563d2f032622516c5065"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-cold-2-resident.settlement.json",
+        "sha256": "2d0c41b71bee15bc1c3187991e94198711ddf226922402a78b99cf38e8216ed8"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 8631543736,
+      "gpu_ns": 1278116384,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-prepared-0-control.reservation.json",
+        "sha256": "17364973d8bafa3fdb227cda9b10d04423d5194abc811419df7940b676f940bf"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-prepared-0-control.settlement.json",
+        "sha256": "34e88e87d161569fc8726e81b3cf637214e1ced547e4a186680602675cf50243"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 8634308500,
+      "gpu_ns": 1278767183,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-prepared-0-resident.reservation.json",
+        "sha256": "ddcf0b8ab7ee7f6daa297d6a53182b7d6248b1b97947ed9b344910358a299689"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/04-prepared-0-resident.settlement.json",
+        "sha256": "9ad4dc08cbea76c4e3c721471729b6f87449b69f85bd470c43930649c8063a1e"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 20190712024,
+      "gpu_ns": 4169903698,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-0-control.reservation.json",
+        "sha256": "9985b1b647ea115b2825963a3230e33b2e5e05e32f050fa8c851db5c011a31c0"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-0-control.settlement.json",
+        "sha256": "2cc91dfa56cf3fa24d106fbd6840d194f0a298032f7a88fa103e5c5a3dd11ec2"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 19754310340,
+      "gpu_ns": 4059032891,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-0-resident.reservation.json",
+        "sha256": "8f5cca4a756e8325a8549e6ed6698ea20969f7fc84f946c1790bd11014694269"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-0-resident.settlement.json",
+        "sha256": "b905203b2ed3d86ae5e50ca9ba2cb40ff0e492fc43f8fd0f23f93c41928f979d"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 20163672564,
+      "gpu_ns": 4162009267,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-1-control.reservation.json",
+        "sha256": "0498fbe84567b3fd18c403b55aa6dc9b1729464b1a80149463942cd5f5d26a8d"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-1-control.settlement.json",
+        "sha256": "135bc859aac3de55bfd55dfb893be80e8b5a427707879a278d2d476a59d1e447"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 20059277012,
+      "gpu_ns": 4136797026,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-1-resident.reservation.json",
+        "sha256": "2cd7e2bf5ce54df8b854c6a10bdf86c0053a2522bcf386130df8260d962737ab"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-1-resident.settlement.json",
+        "sha256": "e75184c56d17b46b2b23bde52ff3094a00cd8110643289b7ff4d8fffa0378e9c"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 19866318508,
+      "gpu_ns": 4088301720,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-2-control.reservation.json",
+        "sha256": "73d729e0d44fb99c5634d5a061afa5951d8abef9231880badc21c4dcd47edb63"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-2-control.settlement.json",
+        "sha256": "3dbe7fe9efc71934fe0bd6cb5671c6c10b72e573defe3c40c7f855e3dec2d70f"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 20162789792,
+      "gpu_ns": 4163298767,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-2-resident.reservation.json",
+        "sha256": "11365c13e60bb96e2fab68473de9aefa03d0f21b520cac6ff178bb13b2774a56"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-cold-2-resident.settlement.json",
+        "sha256": "21c7e85837168427ffa9952407bbeb7a6ac4aa704489099b51b8002bf96aaa5c"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 39985495348,
+      "gpu_ns": 9119012130,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-prepared-0-control.reservation.json",
+        "sha256": "cc2ff9c71e6e1d942fa1eeb288544785b1c09d4152744a723da46a0885585258"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-prepared-0-control.settlement.json",
+        "sha256": "3da47746a95f4d544182d4a6650167940e593788d1cb14217cae51188dcf44bd"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 41080335756,
+      "gpu_ns": 9392899821,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-prepared-0-resident.reservation.json",
+        "sha256": "5c83c02f8467ece2480694958d4d0b0f1baeae39e5d61bd44c5b37b9cadaed51"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/05-prepared-0-resident.settlement.json",
+        "sha256": "ce9fb4b0549b63d9ec39db1e18151aecde208005702d4c5f6dd4bc0815eeea73"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 43993796812,
+      "gpu_ns": 10121248242,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-0-control.reservation.json",
+        "sha256": "cf7d3bed1feeda2e988ca6a8017adbd7fcea06d26cfe5bc834c2c2e8c16d67af"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-0-control.settlement.json",
+        "sha256": "cb40f935da8704708ccc8362bb8eba237c73534311347850aebd7056c06af6cc"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 44307852272,
+      "gpu_ns": 10198255691,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-0-resident.reservation.json",
+        "sha256": "314fbbe38f29aef147ff9277b4a54d2346ae545577b04f5678214aecd0f81474"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-0-resident.settlement.json",
+        "sha256": "bcd797049eefcc53ddd2643c91683d0392fe8992482e4a8e93ac9c745dbf29c9"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 43917964168,
+      "gpu_ns": 10101215652,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-1-control.reservation.json",
+        "sha256": "aba8a2df86ecaf8b4517ec0cef4e311069cff347c4d2137cf25b18a0f4e843e2"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-1-control.settlement.json",
+        "sha256": "c23ddcf05a047989486eb84d8a0975d6d51a161d382e9655266dc33fd3cb7283"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 43457216936,
+      "gpu_ns": 9985460508,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-1-resident.reservation.json",
+        "sha256": "d9656c5876818a136b380c19bca0be1a58ce32da827dbba8dbc3ea59024d0656"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-1-resident.settlement.json",
+        "sha256": "db98e291c9705b0af99bd787af256c5d7eedf61d21f54497452da99e9841466f"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 42947274120,
+      "gpu_ns": 9857944685,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-2-control.reservation.json",
+        "sha256": "7d5c469d17a12e7493eae5cdb071ee08b33e30e5f1b27bd90a902e1d10d352ad"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-2-control.settlement.json",
+        "sha256": "2a6329913c1206c61fdfc3a77d70bfa2871b53800e6ea35455ffce4272502da2"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 44672938524,
+      "gpu_ns": 10290401334,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-2-resident.reservation.json",
+        "sha256": "519281cdc1733c6d3b8370e9b9222338d7d8908f24e2715e1d04d6886c35e090"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-cold-2-resident.settlement.json",
+        "sha256": "e72f2ac8ca41ecdc35310b52c118a838ec7e8e01b58ae48135a890ffedcf8748"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 99208156940,
+      "gpu_ns": 23923840757,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-prepared-0-control.reservation.json",
+        "sha256": "b460705d026329471f5d06b9ab2b8ad8de8a6d9844b3bb271a4ac11fc483064e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-prepared-0-control.settlement.json",
+        "sha256": "39bd84e78a4e031a4632177399baa182614b7df8aed5e1eb162907b8c096120a"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 100225722860,
+      "gpu_ns": 24178368215,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-prepared-0-resident.reservation.json",
+        "sha256": "3f71807ec58c67d35ab99f1badfbae91615798c956a0180008ea999a0361e8d2"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/06-prepared-0-resident.settlement.json",
+        "sha256": "3b21a2c3328271e848651af3911515d3c11f32a22172b22f7724c9a19c4423cf"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 61479122540,
+      "gpu_ns": 14491361664,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-0-control.reservation.json",
+        "sha256": "8dcf2761edc22285dd1ab295678bb32dcf8ff3d6af42eae672fdf59c8417d200"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-0-control.settlement.json",
+        "sha256": "edd2f434fbcd726cdb3c840b5226b02a401406b0420c65c7d6e0945fd4202712"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 61463332968,
+      "gpu_ns": 14487534241,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-0-resident.reservation.json",
+        "sha256": "9ca91626d343b8384223837e246582c0c9c0be223c4e5c4416d0630b2d5c80a6"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-0-resident.settlement.json",
+        "sha256": "267a07f15cb7977c81d66a8e68d514ae574eef58b9fd5685158d266407f65b2c"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 61633347716,
+      "gpu_ns": 14529948771,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-1-control.reservation.json",
+        "sha256": "555da94e5bcaedc3ae8261e1bc91a812f9103bf9f37f0308d68324236285c1f4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-1-control.settlement.json",
+        "sha256": "add74c837faf4c20d3726969687aeb2563454b6cd5d3fc8463c9b7991c9c9e35"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 61387090916,
+      "gpu_ns": 14469115947,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-1-resident.reservation.json",
+        "sha256": "3cee55e9abef4c6ee573d39e3b030f607594d7b36cef40cebc493832bb88138f"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-1-resident.settlement.json",
+        "sha256": "58d0bd3c25b72f84b7ca4eeafbbfb7029b4477531cbef76b3033aadeb48c8e10"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 61501279216,
+      "gpu_ns": 14496497042,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-2-control.reservation.json",
+        "sha256": "199282cfb799e165180d53369aaf53cb45f93427a8ece6b0c055192e66cb698e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-2-control.settlement.json",
+        "sha256": "1b246e42881c27a24c85662d12429c7d9600838d2cc404c8390350a77a14ca55"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 62101582084,
+      "gpu_ns": 14647235427,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-2-resident.reservation.json",
+        "sha256": "4c6b1dad3acff0669716a9e74c4dcf6825b8d7cde940f20bd2942a35122f7c03"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-cold-2-resident.settlement.json",
+        "sha256": "148e7606c0d6aa1837265e6aafa5ed7ee06528c6d27b4b89745e5c4aa87be3a4"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 155504789088,
+      "gpu_ns": 37998438481,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-prepared-0-control.reservation.json",
+        "sha256": "0c7e216856b07fba91db2c5846644b44886fc1d2026f57a603be196e82f1c500"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-prepared-0-control.settlement.json",
+        "sha256": "6a8f8f2515142da5f7b1f1c4747dd36c3d0da4656ed84ee4eb978fd7830edc01"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 157022326468,
+      "gpu_ns": 38377095648,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-prepared-0-resident.reservation.json",
+        "sha256": "7135b6292d139230ed2ce9ec9b7459de55a3e374d990e4816e25408a8999be22"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/07-prepared-0-resident.settlement.json",
+        "sha256": "d6a9dad740f1a5f99a2de19e18dbdb0ebd00537be6663517e6365b9b8d622c01"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 80609654980,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/build-development-v3.reservation.json",
+        "sha256": "accbf9675ed5735db8d2b5649c50d6da92ce0080953840b6b44468c248d31a6b"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/build-development-v3.settlement.json",
+        "sha256": "00dc4467c684cf938d3ae756fbe4bac10bd250f309e33d8052976d1f27f725a0"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 720000000000,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/compile-development-v1.reservation.json",
+        "sha256": "33ca19456c3ee9cabacd58670c5f009c82d210df18b5bc88c2db06cdaf354e2d"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/compile-development-v1.settlement.json",
+        "sha256": "313dd2ecb6863507b5e34c65c99b4b23774ec6979e893648ad56bc7bc8e82851"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 30272448432,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/compile-development-v2.reservation.json",
+        "sha256": "7ce8c8843bc3cc84a006d0b1275d4167915bcceacfacfdd047ccdee41012b428"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/compile-development-v2.settlement.json",
+        "sha256": "7567a3a826c1487488d6e58d151e43332e0976a5bab0929b96e81bd60d2c9041"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 7795646296,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/cpu-contracts-v1.reservation.json",
+        "sha256": "488fdcf1d96fc1ad7c53d2e02bfaa7d6728fc53c2e0f05f9103bfb21654a6b55"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/cpu-contracts-v1.settlement.json",
+        "sha256": "41729a23bd2faed0919a1fb0b3f8cb517aa477452d326f7f851602484b4d94ef"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 4523004236,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/delivery-report-v1.reservation.json",
+        "sha256": "aea3172b833e293f3c1c548daf15a02a380cc1a18f7dd4993efa727431067151"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/delivery-report-v1.settlement.json",
+        "sha256": "2c7bfe3ecbb020bef897829c9d39cbf4f56b1d59e6abd3349723cdea6581c305"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/device-differential-v1.reservation.json",
+        "sha256": "a89710a4f94dbaff83c89735679727e0d6c83f2fa431de84e71f398653a9b882"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/device-differential-v1.settlement.json",
+        "sha256": "e17d4972cae37d3ad85afb4c0f4034391163bdba320b6cc10237704668678572"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 60000000000,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/device-differential-v2.reservation.json",
+        "sha256": "727164b2598433a9d30fb79c9aba546b6b393029e6c4169a8d2cf41b96530838"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/device-differential-v2.settlement.json",
+        "sha256": "c24657d44f0678024bf77637408512db0106af69785c759b3d3e4fe789ae5f00"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 6277598488,
+      "gpu_ns": 689685525,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/device-differential-v3.reservation.json",
+        "sha256": "ba5c369cb27f2fd82ceb680f882908b8969227a6c07ae6bcf7d209740f927aeb"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/device-differential-v3.settlement.json",
+        "sha256": "2430c2f29afa81f962adbf853828af79c27475fd7d682c83d02c68ee56eb86fe"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 65258125268,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/final-audit-v1.reservation.json",
+        "sha256": "a47b83eea027a3b48bee4fe8e3091072a29af247b0e3eaaf5144ae167b53b300"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/final-audit-v1.settlement.json",
+        "sha256": "ec176bf375e90b57ec1b97792fa077b1d5248d0b84b78c1593a9fbb9f44e8b34"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 22584500976,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/final-validation-v1.reservation.json",
+        "sha256": "1d2b21b3c6b8bc287bf29a8525c0b4d5c43529f2fd2169d8b6e1fcb0051816b6"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/final-validation-v1.settlement.json",
+        "sha256": "3f790f04139fa05750d8e9f0e203bc16ad797bca35b01926f5baf80de3c045bf"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 10072449696,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/fixture-correction-v2.reservation.json",
+        "sha256": "65f261e3e6a4e136321950f3996fca75ec590bf4bd918e3018428e1d8faf5094"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/fixture-correction-v2.settlement.json",
+        "sha256": "588325b892cb956129ca2e3410122d2583107433320b3b268d7fbb63c6f16988"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 10228284008,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/fixture-correction-v3.reservation.json",
+        "sha256": "8efb7f69c4226a57265d044c1752dad4583d45eacb8c5fe450edb137469dfae4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/fixture-correction-v3.settlement.json",
+        "sha256": "8734d73f1925d61660b02f19a2bf29a3a49b82136901c64cdea257d7bc44c4e9"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6661658772,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/freeze-v1.reservation.json",
+        "sha256": "28c3f7dfb6132adee28086d99adf23ac415073f45f57760743f8a660c12fdf67"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/freeze-v1.settlement.json",
+        "sha256": "fd1465be59089c123c08dbf6eaaab0e6669c5d37fa0f9e07bb0bc7f66b6a9208"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6245106268,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/freeze-v2.reservation.json",
+        "sha256": "2aaecbb33a66fd9c79a7d7175eb49cd9295ae5098f67d97db7d198e177880c01"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/freeze-v2.settlement.json",
+        "sha256": "154a15403fcf0e32f4a6097875851dfcdb7d275e48f39f65dd4d72508a240570"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 6285376056,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/freeze-v3.reservation.json",
+        "sha256": "f657f6a5c488dc9ffe4db79d3b729b5c9531285757a144693069d71f6eaf727f"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/freeze-v3.settlement.json",
+        "sha256": "f78868f992005231824a1c642d677660f9dcd37dc44b32801aee93b703c04695"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 4000000000000,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/native-gate-v1.reservation.json",
+        "sha256": "115915534dfe19fc12d7491e40774aaf35ba02b4daee277d7cf1e77713f513d4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/native-gate-v1.settlement.json",
+        "sha256": "502f2c8b65d76b306ff3c529a4229140c82b6036b1732e20ee48ed3af197191a"
+      },
+      "status": "refused"
+    },
+    {
+      "cpu_ns": 1279834089656,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/native-gate-v2.reservation.json",
+        "sha256": "ccbece016aa0172d9b3b9a15c1e26ef7a46d4761c4a8dce6c6ea09903a8fdfbc"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/native-gate-v2.settlement.json",
+        "sha256": "342a30b5a8cdcd2475450b8b74c9007b66b2acc297e80d828e2c6bd1c7bc55b3"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 41763630856,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/pre-device-build-v2.reservation.json",
+        "sha256": "65498d9234bc1ef182d7076de01ab21aeaa1c887740b7bed098e0102b2ef8a86"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/pre-device-build-v2.settlement.json",
+        "sha256": "08a3ef9d0b1934ea09e49c8ec61dc80192dbd0602a9c30d097f1a2c6c9c304f9"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 4550917972,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/reader-admission-v4.reservation.json",
+        "sha256": "0fb733cab7f4e5b128170219a706e646ff327bb3f74945baa307c059deb1b830"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/reader-admission-v4.settlement.json",
+        "sha256": "cf87ed6acd0e4d74d4d557ba2863bfb4f9183283b20f505647305be36ec99ace"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 4573351876,
+      "gpu_ns": 0,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/report-v1.reservation.json",
+        "sha256": "6888b533f938fa69e1a5b52ee42d7d9d64a6a3ca81e71fafa44be5504cba8bbf"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/report-v1.settlement.json",
+        "sha256": "86e63ad7313c28d5f5b0a103150e5422630d9344cb32519181174ccd5fdea92f"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 12242593976,
+      "gpu_ns": 2182186101,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/sanitizer-initcheck-v1.reservation.json",
+        "sha256": "ff020991ea3360b82346c7f07c4c38d64ecf5db4b11bd2b5dfd6877277cc9503"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/sanitizer-initcheck-v1.settlement.json",
+        "sha256": "e938a3d7c32a245493d09f618c3e36ff2fd86755a465c8c592c2afcda470f257"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 12891260044,
+      "gpu_ns": 2345310347,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/sanitizer-memcheck-v1.reservation.json",
+        "sha256": "97439a4757c1f10e38889768d10db816ea7b9a30a57ca40c4884c673b872122b"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/sanitizer-memcheck-v1.settlement.json",
+        "sha256": "9403713117ccf6859eb7c5ca1a9fae3f248e5ab50ea5f6708656832226484337"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 464563520380,
+      "gpu_ns": 115268484597,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/sanitizer-racecheck-v1.reservation.json",
+        "sha256": "1d8f17d16f75d9671ceead1922221f6fd7c49be390c0c869ab2f815be05eefc8"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/sanitizer-racecheck-v1.settlement.json",
+        "sha256": "8559d1801bb1c08169e7e6d5d91be9e43d0b646e8853c9a79a46cf7aa0eb6d01"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 11438173280,
+      "gpu_ns": 1979316755,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/sanitizer-synccheck-v1.reservation.json",
+        "sha256": "2fe6d633c25e296b2b0e55ac24bd56bb078ce2d7b45187d55fe43718576a7ee3"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/sanitizer-synccheck-v1.settlement.json",
+        "sha256": "6aa6f69c19f4b33e6204ea441bccd635de103dc99b72b778ce7e65b3ffcbebad"
+      },
+      "status": "passed"
+    },
+    {
+      "cpu_ns": 24020363848,
+      "gpu_ns": 5127561136,
+      "reservation": {
+        "path": "artifacts/gpup-resident2-v1/resources/transport-admission-v1.reservation.json",
+        "sha256": "2a8663cffa1b377c940b444a2c27d3489c6d12304678a55cbe1f1a8ab2363b07"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-resident2-v1/resources/transport-admission-v1.settlement.json",
+        "sha256": "e66b5058f8e579660b07885119395791a068c320e940df2e8ea59b1745efcaaf"
+      },
+      "status": "passed"
+    }
+  ],
+  "schema_version": 1,
+  "status": "closed",
+  "total_cpu_ns": 9519669332468,
+  "total_gpu_ns": 598631222067
+}

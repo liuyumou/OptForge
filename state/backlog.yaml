@@ -1,3 +1,4 @@
+# Current plan 2026-11-11: RESIDENT2 bounded negative result complete; native control retained; MIXED2 next.
 # Current plan 2026-11-10: baseline complete; 240 attempted, 135 strictly certified; explicit cuOpt native-return tier.
 # User-authorized native-return policy is separate from strict certificates; RESIDENT2 is next ready.
 # Historical comments below retain earlier handoffs; GPUP-8 science is closed, GPUP-9 gated.
@@ -35,7 +36,7 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-RESIDENT2
+next_ready_task: GPUP-MIXED2
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-DIAG
@@ -64,13 +65,13 @@ tasks:
     acceptance: "ADR-0052 / SPEC-0023; user selected error-free cuOpt returns as a separate pass tier instead of requiring strict cuOpt qualification. Exact 117-cell continuation and source reuse, bounded new CPU and remaining GPU reservations, preserved postsolve uncertainty and native-error evidence, separate cold/prepared delivery-cost decisions. No strict certificate relaxation, historical numerical rerun or GPUP-9 release."
   - id: GPUP-RESIDENT2
     title: Reduce synchronization and preparation cost in a matched native baseline
-    status: ready
+    status: complete
     depends_on: [GPUP-BASELINE]
-    specification: docs/plans/gpu-lp-precision-roadmap.md
-    acceptance: "New bounded contract/allocation; non-overlapping preparation/import/native/check/output phase clocks and explicit cold/prepared lifecycles first; diagnose mixed-model normal-limit export and finite-bound authority, retaining failed coverage and requiring a certifying control for speed claims; device coefficients and sticky flags with safe observations, rollback/cancellation and unchanged required boundaries; separate source identity; useful total-latency improvement without coverage loss, not only fewer launches"
+    specification: docs/specifications/SPEC-0024-native-resident-execution.md
+    acceptance: "SPEC-0024 / ADR-0053 implemented; 64 completed cells, 96 endpoints, 42/48 certificates per mode, 42 bitwise certified pairs. Cold/prepared phases and normal-limit export are explicit; mixed infinite-bound refusal unchanged. Device/transport/four sanitizers pass; full CPU native gate and exact correction bridges retained. Synchronizations drop 58 to 44 but cold geomean 1.027370x and four regressions fail latency retention. Native control remains; no preset. Report: docs/benchmarks/lp-resident2-gpup-resident2.md."
   - id: GPUP-MIXED2
     title: Evaluate simpler mixed precision with reliable residuals and escalation
-    status: planned
+    status: ready
     depends_on: [GPUP-BASELINE, GPUP-RESIDENT2]
     specification: docs/plans/gpu-lp-precision-roadmap.md
     acceptance: "New numerical protocol/allocation; begin FP32 matrix and native FP64 state/arithmetic, then separately admit lower-precision state; useful nonzero low-precision work, progress/error guards, charged native fallback and 1e-9 independent certificate; include prior refinement/quantization failure mechanisms"

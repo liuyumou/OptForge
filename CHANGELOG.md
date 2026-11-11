@@ -1,5 +1,18 @@
 # Changelog
 
+## GPUP-RESIDENT2 bounded native execution (2026-11-11)
+
+- Add feature-gated immutable preparation, cold/prepared research lifecycles,
+  bounded coefficient/flag transport and transactional native FP64 windows.
+- Export normal-limit vectors and record disjoint complete-delivery phases,
+  physical CUDA calls/bytes and fresh independent certificates.
+- Complete 64 cells/96 endpoints; preserve 42/48 certified coverage per mode
+  and bitwise equality of all certified pairs. The latency retention gate fails;
+  retain the native control and keep prepared throughput separately labeled.
+- Preserve all historical sources and failed charges through exact bridges;
+  pass CPU/native, device, transport and four sanitizer acceptance gates.
+
+
 ## GPUP-BASELINE PR integration (2026-11-10)
 
 - Make baseline CPU tests build their checkers and mock context from checked-in

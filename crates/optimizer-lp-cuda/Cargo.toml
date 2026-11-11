@@ -34,3 +34,7 @@ required-features = ["precision-research"]
 # boundary ADR-0009 authorizes; no second boundary is opened here.
 [lints]
 workspace = true
+
+[[example]]
+name = "lp_resident2"
+required-features = ["precision-research"]

@@ -1,5 +1,16 @@
 # Project Status
 
+## GPUP-RESIDENT2 bounded result (2026-11-11)
+
+The [resident execution report](../docs/benchmarks/lp-resident2-gpup-resident2.md)
+delivers explicit cold/prepared phases, transactional native FP64 windows and
+normal-limit export. All 64 cells complete; both modes certify 42/48 endpoints
+and all 42 certified pairs match bitwise. All four sanitizers pass.
+Synchronization decreases, but 1.027370x cold geomean and four regressing models
+fail the retention criterion. Keep the native control and select no preset.
+GPUP-MIXED2 is next ready; GPUP-8 remains incomplete and GPUP-9 gated.
+
+
 ## GPUP-BASELINE complete under the amended comparison policy (2026-11-10)
 
 The [completed report](../docs/benchmarks/lp-external-baseline-native-return.md) includes all 240 planned screening

@@ -71,3 +71,7 @@ pub mod tensor_residual;
 /// ADR-0044 isolated Tensor cost executor.
 #[cfg(feature = "precision-research")]
 pub mod tensor_cost;
+
+/// SPEC-0024 isolated native resident execution.
+#[cfg(feature = "precision-research")]
+pub mod resident2;

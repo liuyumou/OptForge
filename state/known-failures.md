@@ -1,5 +1,17 @@
 # Known Failures and Limitations
 
+## RESIDENT2 synchronization savings do not establish a latency win (2026-11-11)
+
+The [completed resident study](../docs/benchmarks/lp-resident2-gpup-resident2.md)
+reduces waits but increases transfer bytes; the cold geomean is 1.027370x and
+four certified medians regress. Keep the native control. Prepared batches are
+throughput observations, not single-solve wins. All twelve mixed-model normal
+limits deliver actual vectors but retain the unchanged variable-3 infinite-bound
+refusal. No artificial finite bound or certificate relaxation is introduced.
+The initial overflow stimulus and stale test executable failures are preserved;
+the corrected acceptance and four sanitizer gates pass with all charges retained.
+
+
 ## Completed baseline retains native and quality failures (2026-11-10)
 
 The [completed native-return report](../docs/benchmarks/lp-external-baseline-native-return.md) has no unexecuted

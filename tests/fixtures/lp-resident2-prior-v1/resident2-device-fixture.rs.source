@@ -1,0 +1,785 @@
+//! SPEC-0024 bounded native FP64 windows; no runtime backend selects this module.
+use crate::residency::{AdvanceResult, LpResidency};
+use optimizer_core::{
+    CancellationToken, Fp64ExecutionSettings, Fp64Fusion, Fp64Reduction, LpDiagnostics,
+    LpExecutionDiagnostics, LpSettings, Model, StateUploads, WorkingAllocation,
+};
+use optimizer_cuda_sys::{
+    Argument as A, Context, DeviceBuffer, DeviceError, Function, LaunchConfig, launch,
+};
+use optimizer_lp::{Engine, LinearProgram, PreparedMatrix};
+use std::{rc::Rc, time::Instant};
+
+/// Distinct execution modes sharing model, arithmetic, transport and certificate.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Mode {
+    /// Unchanged tuned FP64 executor under the same transport.
+    Control,
+    /// Bounded transactional native resident executor.
+    Resident,
+}
+/// The exact native control settings; no global/default settings are modified.
+#[must_use]
+pub fn settings() -> Fp64ExecutionSettings {
+    Fp64ExecutionSettings {
+        schema_version: 1,
+        reduction: Fp64Reduction::Warp32V1,
+        fusion: Fp64Fusion::PrimalDual,
+        allocation: WorkingAllocation::Resident,
+        uploads: StateUploads::Necessary,
+    }
+}
+/// Separate provisioned image, containing both control and candidate kernels.
+#[must_use]
+pub fn code_object_path() -> std::path::PathBuf {
+    crate::code_object_path().with_file_name("lp_pdhg_resident2.cubin")
+}
+fn invalid(message: &str) -> DeviceError {
+    DeviceError::Unsupported(message.into())
+}
+/// Exact host coefficient expressions, bounded before allocation or integer addition.
+pub fn coefficients(since: u64, count: u64) -> Result<Vec<f64>, DeviceError> {
+    if count == 0 || count > 200 || since.checked_add(count + 1).is_none() {
+        return Err(invalid("resident2 coefficient window exceeds its bound"));
+    }
+    Ok((0..count)
+        .flat_map(|k| {
+            let i = since + k;
+            [(i + 1) as f64 / (i + 2) as f64, 1.0 / (i + 2) as f64]
+        })
+        .collect())
+}
+/// Immutable original model and preconditioner, reusable only for this exact model.
+pub struct PreparedModel {
+    model: Model,
+    program: LinearProgram,
+    prepared: PreparedMatrix,
+}
+impl PreparedModel {
+    /// Prepare once. The fixed 200-update boundary is part of this experiment.
+    pub fn new(model: Model, method: LpSettings) -> Result<Self, DeviceError> {
+        method.validate().map_err(|e| invalid(&e.to_string()))?;
+        if method.check_interval != 200 {
+            return Err(invalid("resident2 requires 200-update checks"));
+        }
+        let program = LinearProgram::new(&model).map_err(|e| invalid(&e.to_string()))?;
+        let prepared = PreparedMatrix::new(&program, &method);
+        Ok(Self {
+            model,
+            program,
+            prepared,
+        })
+    }
+    /// Original model, never a scaled replacement for mathematical authority.
+    #[must_use]
+    pub fn model(&self) -> &Model {
+        &self.model
+    }
+}
+/// Imported immutable preparation. Working iterates are allocated afresh per solve.
+pub struct ResidentSession {
+    data: PreparedModel,
+    residency: LpResidency,
+    mode: Mode,
+}
+impl ResidentSession {
+    /// Import a separately bound image after memory admission.
+    pub fn open(
+        context: Rc<Context>,
+        data: PreparedModel,
+        mode: Mode,
+        image: &[u8],
+        diagnostics: &mut LpDiagnostics,
+    ) -> Result<Self, DeviceError> {
+        let peak = crate::tuned::peak_buffer_bytes(&data.program, settings())?
+            .checked_add(
+                3200 + 8
+                    * (data.program.column_count().max(1) + data.program.row_count().max(1)) as u64,
+            )
+            .ok_or_else(|| invalid("resident2 byte overflow"))?;
+        if peak
+            > diagnostics
+                .device_buffer_limit_bytes
+                .unwrap_or(12 << 30)
+                .min(12 << 30)
+        {
+            return Err(invalid("resident2 device memory admission"));
+        }
+        let engine = Engine::from_prepared(&data.program, &data.prepared);
+        let mut counters = LpExecutionDiagnostics::new(settings());
+        counters.code_object_sha256 = Some(optimizer_core::sha256::hex(image));
+        let residency = LpResidency::open_prepared_tuned(
+            context,
+            &data.program,
+            &data.prepared,
+            engine.scaled_column_bounds(),
+            settings(),
+            Some(image),
+            Some(&mut counters),
+        )?;
+        diagnostics.execution = Some(counters);
+        Ok(Self {
+            data,
+            residency,
+            mode,
+        })
+    }
+    /// Original immutable model used by every solve and certificate.
+    #[must_use]
+    pub fn model(&self) -> &Model {
+        self.data.model()
+    }
+    /// Run a fresh controller. Returned vectors are untrusted, even on a normal limit.
+    pub fn solve(
+        &self,
+        cancel: &CancellationToken,
+        diagnostics: &mut LpDiagnostics,
+        deadline: Option<Instant>,
+        fixed_work: bool,
+    ) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
+        let engine = Engine::from_prepared(&self.data.program, &self.data.prepared);
+        diagnostics.execution = Some(LpExecutionDiagnostics::new(settings()));
+        let check = |x: &[f64], y: &[f64], d: &mut LpDiagnostics| {
+            if fixed_work {
+                return false;
+            }
+            let phase = d.start();
+            let scope = optimizer_core::lp_cost::scope("host_checks");
+            let accepted = crate::backend::assess(
+                &self.data.model,
+                &self.data.program,
+                optimizer_core::Tolerances {
+                    absolute: 1e-9,
+                    relative: 1e-9,
+                    integrality: 1e-9,
+                },
+                x,
+                y,
+            )
+            .is_some_and(|(_, _, _, _, closed)| closed);
+            drop(scope);
+            d.finish("host_checks", phase);
+            accepted
+        };
+        if self.mode == Mode::Control {
+            crate::backend::run_matched(
+                &engine,
+                &self.residency,
+                Some(settings()),
+                200,
+                cancel,
+                diagnostics,
+                check,
+                deadline,
+            )
+        } else {
+            run_resident(
+                &engine,
+                &self.residency,
+                cancel,
+                diagnostics,
+                check,
+                deadline,
+            )
+        }
+    }
+}
+
+/// One solve's working state. Failed windows never modify the caller's state.
+pub struct ResidentExecutor<'r> {
+    r: &'r LpResidency,
+    primal: Function<'r>,
+    dual: Function<'r>,
+    working: Vec<DeviceBuffer<f64>>,
+    window: DeviceBuffer<u64>,
+    staging: Vec<u64>,
+    loaded: Option<(u64, u64)>,
+    /// Submitted updates including refused windows. This is never rolled back.
+    pub attempted: u64,
+}
+impl<'r> ResidentExecutor<'r> {
+    /// Allocate once per solve, with all allocation observations retained.
+    pub fn new(r: &'r LpResidency, d: &mut LpDiagnostics) -> Result<Self, DeviceError> {
+        let c = d
+            .execution
+            .as_mut()
+            .ok_or_else(|| invalid("resident2 missing counters"))?;
+        let mut working = Vec::new();
+        for n in [r.columns, r.rows, r.columns, r.rows, r.columns] {
+            working.push(
+                r.context
+                    .allocate::<f64>(n.max(1))
+                    .map_err(|e| r.observe(e))?,
+            );
+            c.allocations += 1;
+            c.allocated_bytes += 8 * n.max(1) as u64;
+        }
+        // Binary64 coefficient bits and disjoint u64 flags share one allocation.
+        // This removes two flag-reset synchronizations and one flag-read synchronization.
+        let size = 400 + r.columns.max(1) + r.rows.max(1);
+        let window = r.context.allocate::<u64>(size)?;
+        c.allocations += 1;
+        c.allocated_bytes += 8 * size as u64;
+        Ok(Self {
+            r,
+            primal: r.module.function("resident2_primal")?,
+            dual: r.module.function("resident2_dual")?,
+            working,
+            window,
+            staging: vec![0; size],
+            loaded: None,
+            attempted: 0,
+        })
+    }
+    /// Transactional boundary adoption; cancellation is observed at bounded submission intervals.
+    #[allow(clippy::too_many_arguments)]
+    pub fn advance(
+        &mut self,
+        x: &mut [f64],
+        y: &mut [f64],
+        ax: &[f64],
+        ay: &[f64],
+        generation: u64,
+        restarts: u64,
+        since: u64,
+        count: u64,
+        step: f64,
+        weight: f64,
+        mut stop: impl FnMut(u64) -> bool,
+        d: &mut LpDiagnostics,
+    ) -> Result<AdvanceResult, DeviceError> {
+        self.r.usable()?;
+        if x.len() != self.r.columns
+            || y.len() != self.r.rows
+            || ax.len() != x.len()
+            || ay.len() != y.len()
+            || !step.is_finite()
+            || !weight.is_finite()
+            || step <= 0.0
+            || weight <= 0.0
+            || !(step / weight).is_finite()
+            || !(step * weight).is_finite()
+            || step / weight == 0.0
+            || step * weight == 0.0
+            || x.iter()
+                .chain(y.iter())
+                .chain(ax)
+                .chain(ay)
+                .any(|v| !v.is_finite())
+        {
+            return Err(invalid("resident2 invalid window input"));
+        }
+        let coeff = coefficients(since, count)?;
+        if stop(0) {
+            return Ok(AdvanceResult {
+                completed: 0,
+                interrupted: true,
+            });
+        }
+        let r = self.r;
+        let c = d
+            .execution
+            .as_mut()
+            .ok_or_else(|| invalid("resident2 missing counters"))?;
+        let full = self.loaded.is_none_or(|(g, _)| g != generation);
+        let anchors = full || self.loaded.is_none_or(|(_, a)| a != restarts);
+        // Invalidate first: any upload/launch/readback error cannot leave a reusable generation.
+        self.loaded = None;
+        for (i, values, needed) in [
+            (0, &*x, full),
+            (1, &*y, full),
+            (2, ax, anchors),
+            (3, ay, anchors),
+        ] {
+            if needed && !values.is_empty() {
+                self.working[i]
+                    .copy_from(values, &r.stream)
+                    .map_err(|e| r.observe(e))?;
+                c.upload_calls += 1;
+                c.upload_bytes += 8 * values.len() as u64;
+                c.synchronizations += 1;
+            }
+        }
+        self.staging.fill(0);
+        for (target, value) in self.staging.iter_mut().zip(&coeff) {
+            *target = value.to_bits();
+        }
+        self.window
+            .copy_from(&self.staging, &r.stream)
+            .map_err(|e| r.observe(e))?;
+        c.upload_calls += 1;
+        c.upload_bytes += 8 * self.staging.len() as u64;
+        c.synchronizations += 1;
+        let ptr = |i: usize| A::DevicePtr(self.working[i].as_device_ptr());
+        let mut done = 0;
+        let mut interrupted = false;
+        while done < count {
+            if done.is_multiple_of(64) && stop(done) {
+                interrupted = true;
+                break;
+            }
+            // Count the attempted update before either submission, including partial launch failure.
+            self.attempted += 1;
+            for (function, n, args) in [
+                (
+                    &self.primal,
+                    r.columns,
+                    vec![
+                        A::DevicePtr(r.column_values.as_device_ptr()),
+                        A::DevicePtr(r.column_indices.as_device_ptr()),
+                        A::DevicePtr(r.column_offsets.as_device_ptr()),
+                        ptr(1),
+                        ptr(0),
+                        A::DevicePtr(r.objective.as_device_ptr()),
+                        A::DevicePtr(r.column_lower.as_device_ptr()),
+                        A::DevicePtr(r.column_upper.as_device_ptr()),
+                        ptr(2),
+                        ptr(4),
+                        A::DevicePtr(self.window.as_device_ptr()),
+                        A::U32(done as u32),
+                        A::F64(step / weight),
+                        A::U32(r.columns as u32),
+                        A::DevicePtr(self.window.as_device_ptr() + 3200),
+                    ],
+                ),
+                (
+                    &self.dual,
+                    r.rows,
+                    vec![
+                        A::DevicePtr(r.row_values.as_device_ptr()),
+                        A::DevicePtr(r.row_indices.as_device_ptr()),
+                        A::DevicePtr(r.row_offsets.as_device_ptr()),
+                        ptr(4),
+                        ptr(1),
+                        A::DevicePtr(r.row_lower.as_device_ptr()),
+                        A::DevicePtr(r.row_upper.as_device_ptr()),
+                        ptr(3),
+                        A::DevicePtr(self.window.as_device_ptr()),
+                        A::U32(done as u32),
+                        A::F64(step * weight),
+                        A::U32(r.rows as u32),
+                        A::DevicePtr(
+                            self.window.as_device_ptr() + 3200 + 8 * r.columns.max(1) as u64,
+                        ),
+                    ],
+                ),
+            ] {
+                launch(
+                    function,
+                    LaunchConfig {
+                        grid: (n.max(1) as u32).div_ceil(8),
+                        block: 256,
+                        shared_memory: 0,
+                    },
+                    &args,
+                    &r.stream,
+                )
+                .map_err(|e| r.observe(e))?;
+                c.kernel_launches += 1;
+                r.launches.set(r.launches.get() + 1);
+            }
+            done += 1;
+        }
+        self.window
+            .copy_to(&mut self.staging, &r.stream)
+            .map_err(|e| r.observe(e))?;
+        c.readback_calls += 1;
+        c.readback_bytes += 8 * self.staging.len() as u64;
+        c.synchronizations += 1;
+        let refused = self.staging[400..].iter().any(|v| *v != 0);
+        let mut sx = vec![0.0; x.len()];
+        let mut sy = vec![0.0; y.len()];
+        for (i, values) in [(0, &mut sx), (1, &mut sy)] {
+            if !values.is_empty() {
+                self.working[i]
+                    .copy_to(values, &r.stream)
+                    .map_err(|e| r.observe(e))?;
+                c.readback_calls += 1;
+                c.readback_bytes += 8 * values.len() as u64;
+                c.synchronizations += 1;
+            }
+        }
+        if refused || sx.iter().chain(&sy).any(|v| !v.is_finite()) {
+            return Err(invalid(
+                "resident2 sticky numerical refusal; host checkpoint preserved",
+            ));
+        }
+        interrupted |= stop(done);
+        x.copy_from_slice(&sx);
+        y.copy_from_slice(&sy);
+        self.loaded = Some((generation, restarts));
+        Ok(AdvanceResult {
+            completed: done,
+            interrupted,
+        })
+    }
+}
+
+fn run_resident(
+    engine: &Engine<'_>,
+    residency: &LpResidency,
+    cancel: &CancellationToken,
+    diagnostics: &mut optimizer_core::LpDiagnostics,
+    mut check: impl FnMut(&[f64], &[f64], &mut optimizer_core::LpDiagnostics) -> bool,
+    deadline: Option<Instant>,
+) -> Result<(Vec<f64>, Vec<f64>, u64), DeviceError> {
+    let initial = diagnostics.start();
+    let component_initial = optimizer_core::lp_cost::scope("controller");
+    let mut control = optimizer_lp::control::Fp64Controller::new(engine);
+    control.set_deadline(deadline);
+    drop(component_initial);
+    diagnostics.finish("controller", initial);
+    let mut resident = ResidentExecutor::new(residency, diagnostics)?;
+    let launch_base = residency.launches();
+    let mut assessed = None;
+    let mut assessments = 0;
+    let mut stop = "iteration_limit";
+    while control.remaining() > 0 {
+        if cancel.is_cancelled() {
+            stop = "interrupted";
+            break;
+        }
+        if control.expired() {
+            stop = "time_limit";
+            break;
+        }
+        let chunk = control.next_chunk(200);
+        let since_restart = control.state().since_restart;
+        let weight = control.state().weight;
+        let generation = control.generation();
+        let restarts = control.state().restarts;
+        let (x, y, anchor_x, anchor_y) = control.buffers();
+        let result = resident.advance(
+            x,
+            y,
+            anchor_x,
+            anchor_y,
+            generation,
+            restarts,
+            since_restart,
+            chunk,
+            engine.step(),
+            weight,
+            |_| cancel.is_cancelled() || deadline.is_some_and(|d| Instant::now() >= d),
+            diagnostics,
+        );
+        if diagnostics.enabled {
+            diagnostics.kernel_launches = Some(residency.launches() - launch_base);
+        }
+        let result = match result {
+            Ok(result) => result,
+            Err(error) => {
+                diagnostics.iterations = None;
+                diagnostics.control = Some(optimizer_core::LpControlDiagnostics {
+                    controller: "host-restart-weight-v1".into(),
+                    logical_iterations: control.state().iterations,
+                    physical_iterations: Some(resident.attempted),
+                    device_kernel_launches: residency.launches() - launch_base,
+                    assessments,
+                    kkt_evaluations: control.kkt_evaluations(),
+                    restarts: control.state().restarts,
+                    weight: control.state().weight,
+                    stop: "device_failure".into(),
+                });
+                diagnostics
+                    .unavailable
+                    .push("completed device work after fault is unavailable".into());
+                return Err(error);
+            }
+        };
+        control
+            .commit_steps(result.completed)
+            .expect("admitted device chunk");
+        if diagnostics.enabled {
+            diagnostics.iterations = Some(control.physical_iterations());
+        }
+        if result.interrupted || cancel.is_cancelled() || control.expired() {
+            stop = if cancel.is_cancelled() {
+                "interrupted"
+            } else {
+                "time_limit"
+            };
+            break;
+        }
+        if control.check_pending() {
+            let iterate = control.iterate();
+            assessments += 1;
+            let accepted = check(&iterate.primal, &iterate.dual, diagnostics);
+            assessed = Some(iterate);
+            if accepted {
+                stop = "accepted";
+                break;
+            }
+            let phase = diagnostics.start();
+            let component_phase = optimizer_core::lp_cost::scope("controller");
+            control.continue_after_check();
+            drop(component_phase);
+            diagnostics.finish("controller", phase);
+        }
+    }
+    if diagnostics.enabled {
+        diagnostics.iterations = Some(control.physical_iterations());
+        diagnostics.restarts = Some(control.state().restarts);
+    }
+    diagnostics.control = Some(optimizer_core::LpControlDiagnostics {
+        controller: "host-restart-weight-v1".into(),
+        logical_iterations: control.state().iterations,
+        physical_iterations: Some(control.physical_iterations()),
+        device_kernel_launches: residency.launches() - launch_base,
+        assessments,
+        kkt_evaluations: control.kkt_evaluations(),
+        restarts: control.state().restarts,
+        weight: control.state().weight,
+        stop: stop.into(),
+    });
+    if control.physical_iterations() == 0 && stop == "interrupted" {
+        return Err(DeviceError::Cancelled);
+    }
+    let iterate = assessed.unwrap_or_else(|| control.iterate());
+    Ok((iterate.primal, iterate.dual, iterate.iterations))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn coefficient_bits_and_extreme_indices() {
+        for since in [0, 63, 199, 10000, (1_u64 << 53) - 1, u64::MAX - 202] {
+            let c = coefficients(since, 200).unwrap();
+            for k in 0..200 {
+                let i = since + k;
+                assert_eq!(
+                    c[2 * k as usize].to_bits(),
+                    ((i + 1) as f64 / (i + 2) as f64).to_bits()
+                );
+                assert_eq!(
+                    c[2 * k as usize + 1].to_bits(),
+                    (1.0 / (i + 2) as f64).to_bits()
+                );
+            }
+        }
+        for (s, n) in [(0, 0), (0, 201), (u64::MAX, 1), (u64::MAX - 200, 200)] {
+            assert!(coefficients(s, n).is_err());
+        }
+    }
+    #[test]
+    fn immutable_preparation_refuses_changed_boundary() {
+        let model = Model::from_json(include_bytes!("../../../examples/lp-model-v1.json")).unwrap();
+        assert!(PreparedModel::new(model.clone(), LpSettings::published(400, 64)).is_err());
+        let p = PreparedModel::new(model, LpSettings::published(400, 200)).unwrap();
+        assert_eq!(p.model().document().model_id, "tiny-continuous");
+    }
+}
+
+#[cfg(test)]
+mod device_tests {
+    use super::*;
+    fn context() -> Option<Rc<Context>> {
+        if std::env::var("AI_OPTIMIZER_GPU").as_deref() != Ok("1") {
+            eprintln!("SKIP resident2 device acceptance: explicit opt-in required");
+            return None;
+        }
+        assert_eq!(
+            std::env::var("AI_OPTIMIZER_GPU_LEASE").as_deref(),
+            Ok("inherited")
+        );
+        Some(Rc::new(
+            Context::create(&std::env::var("CUDA_VISIBLE_DEVICES").unwrap()).unwrap(),
+        ))
+    }
+    fn model() -> Model {
+        let finite = |x: f64| serde_json::json!({"kind":"finite","value":x});
+        let v=(0..96).map(|i|serde_json::json!({"id":i,"domain":"continuous","lower":finite(-2.),"upper":finite(2.)})).collect::<Vec<_>>();
+        let rows=(0..65).map(|i|serde_json::json!({"id":i,"lower":finite(-1.),"upper":finite(1.),"terms":(0..7).map(|k|serde_json::json!({"variable_id":(i*7+k*11)%96,"coefficient":((i+k)%17+1) as f64/13.})).collect::<Vec<_>>()})).collect::<Vec<_>>();
+        Model::from_json(&serde_json::to_vec(&serde_json::json!({"schema_version":1,"model_id":"resident2-device","variables":v,"constraints":rows,"objective":{"sense":"minimize","offset":0.125,"terms":(0..96).map(|i|serde_json::json!({"variable_id":i,"coefficient":(i%11) as f64/7.-0.5})).collect::<Vec<_>>()}})).unwrap()).unwrap()
+    }
+    fn bits(x: &[f64]) -> Vec<u64> {
+        x.iter().map(|x| x.to_bits()).collect()
+    }
+    #[test]
+    fn resident2_device_boundaries_cancellation_and_rollback() {
+        let Some(context) = context() else {
+            return;
+        };
+        let data = PreparedModel::new(model(), LpSettings::published(2000, 200)).unwrap();
+        let image = std::fs::read(code_object_path()).unwrap();
+        let mut d = LpDiagnostics::new(true, false);
+        let s = ResidentSession::open(context, data, Mode::Resident, &image, &mut d).unwrap();
+        let e = Engine::from_prepared(&s.data.program, &s.data.prepared);
+        let mut dc = LpDiagnostics::new(true, false);
+        dc.execution = Some(LpExecutionDiagnostics::new(settings()));
+        let mut dr = LpDiagnostics::new(true, false);
+        dr.execution = Some(LpExecutionDiagnostics::new(settings()));
+        let mut control = crate::tuned::TunedExecutor::new(&s.residency, settings()).unwrap();
+        let mut resident = ResidentExecutor::new(&s.residency, &mut dr).unwrap();
+        for n in [1, 63, 64, 65, 199, 200] {
+            let mut x = e.start_primal();
+            let mut y = e.start_dual();
+            let ax = x.clone();
+            let ay = y.clone();
+            let mut cx = x.clone();
+            let mut cy = y.clone();
+            control
+                .advance(
+                    &mut cx,
+                    &mut cy,
+                    &ax,
+                    &ay,
+                    n,
+                    0,
+                    0,
+                    n,
+                    e.step(),
+                    1.,
+                    |_| false,
+                    &mut dc,
+                )
+                .unwrap();
+            resident
+                .advance(
+                    &mut x,
+                    &mut y,
+                    &ax,
+                    &ay,
+                    n,
+                    0,
+                    0,
+                    n,
+                    e.step(),
+                    1.,
+                    |_| false,
+                    &mut dr,
+                )
+                .unwrap();
+            assert_eq!(bits(&x), bits(&cx));
+            assert_eq!(bits(&y), bits(&cy));
+        }
+        let mut x = e.start_primal();
+        let mut y = e.start_dual();
+        let ax = x.clone();
+        let ay = y.clone();
+        let before = (bits(&x), bits(&y));
+        let work = resident.attempted;
+        let r = resident
+            .advance(
+                &mut x,
+                &mut y,
+                &ax,
+                &ay,
+                1000,
+                0,
+                0,
+                200,
+                e.step(),
+                1.,
+                |n| n >= 64,
+                &mut dr,
+            )
+            .unwrap();
+        assert!(r.interrupted);
+        assert_eq!(r.completed, 64);
+        assert_eq!(resident.attempted - work, 64);
+        let cancelled = (bits(&x), bits(&y));
+        let r = resident
+            .advance(
+                &mut x,
+                &mut y,
+                &ax,
+                &ay,
+                1001,
+                0,
+                0,
+                200,
+                e.step(),
+                1.,
+                |_| true,
+                &mut dr,
+            )
+            .unwrap();
+        assert_eq!(r.completed, 0);
+        assert_eq!((bits(&x), bits(&y)), cancelled);
+        // All input values are finite. Deliberately overflowing a product must
+        // latch a device flag, reject the full window and preserve both host vectors.
+        y.fill(f64::MAX);
+        let checkpoint = (bits(&x), bits(&y));
+        let work = resident.attempted;
+        assert!(
+            resident
+                .advance(
+                    &mut x,
+                    &mut y,
+                    &ax,
+                    &ay,
+                    1002,
+                    0,
+                    0,
+                    200,
+                    1.,
+                    1.,
+                    |_| false,
+                    &mut dr
+                )
+                .is_err()
+        );
+        assert_eq!((bits(&x), bits(&y)), checkpoint);
+        assert_eq!(resident.attempted - work, 200);
+        assert!(resident.loaded.is_none());
+        x = e.start_primal();
+        y = e.start_dual();
+        assert_eq!((bits(&x), bits(&y)), before);
+        resident
+            .advance(
+                &mut x,
+                &mut y,
+                &ax,
+                &ay,
+                1003,
+                0,
+                0,
+                200,
+                e.step(),
+                1.,
+                |_| false,
+                &mut dr,
+            )
+            .unwrap();
+    }
+    #[test]
+    fn resident2_device_fresh_prepared_and_controller_equal() {
+        let Some(context) = context() else {
+            return;
+        };
+        let image = std::fs::read(code_object_path()).unwrap();
+        let mut results = Vec::new();
+        for mode in [Mode::Control, Mode::Resident] {
+            let data = PreparedModel::new(model(), LpSettings::published(2000, 200)).unwrap();
+            let s = ResidentSession::open(
+                Rc::clone(&context),
+                data,
+                mode,
+                &image,
+                &mut LpDiagnostics::new(true, false),
+            )
+            .unwrap();
+            for _ in 0..2 {
+                let mut d = LpDiagnostics::new(true, false);
+                let (x, y, n) = s
+                    .solve(&CancellationToken::new(), &mut d, None, true)
+                    .unwrap();
+                assert_eq!(n, 2000);
+                let c = d.control.unwrap();
+                results.push((
+                    bits(&x),
+                    bits(&y),
+                    n,
+                    c.restarts,
+                    c.weight.to_bits(),
+                    c.kkt_evaluations,
+                ));
+            }
+        }
+        for r in &results[1..] {
+            assert_eq!(r, &results[0]);
+        }
+    }
+}

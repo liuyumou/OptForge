@@ -1,5 +1,72 @@
 # Agent Instructions
 
+## GPUP-RESIDENT2 completed; latency retention gate fails (2026-11-11)
+
+The requested bounded implementation and comparison are complete under
+SPEC-0024 / ADR-0053. Report: docs/benchmarks/lp-resident2-gpup-resident2.md.
+All 64 planned cells completed and delivered 96 endpoints. Control and resident
+each certify 42/48; all 42 certified pairs have identical candidate bytes and
+iteration counts. All twelve mixed-model normal-limit endpoints now export
+65536 primal/dual entries and remain uncertified at variable 3's infinite-bound
+refusal. The original 1e-9 authority is unchanged.
+
+The candidate uses exact per-window coefficients, u64 sticky flags, bounded
+asynchronous submission and transactional host adoption. Prepared lifecycles
+reuse immutable preparation with fresh iterates/controller/checking per solve.
+The nontrivial trace reduces synchronizations 58 to 44 at the same 2800 launches,
+but increases transfer bytes. The cold model-median geometric mean is 1.027370x;
+four of seven certified medians regress. The predeclared total-latency criterion
+fails, so retain the native control and select no supported preset.
+
+Acceptance: full CPU/native gate (638 Rust tests, 515 Python tests, replay,
+dependency/artifact/docs/smoke), separately verified test-only overflow correction,
+five focused Python contracts, device boundary/controller/cancellation/rollback,
+four independent transport certificates, and all four zero-error sanitizers.
+The original overflow fixture and stale-test-binary failures retain their full
+charges; all development/native failures remain recorded. Active study reader:
+tools/lp_resident2_study_v4.py. No timing cell was retried. Exact sources and old
+scientific results/charges are preserved; the six historical source edits have
+an exact additive/test-only bridge.
+
+Task GPU charge is 598.631222067 / 1800 seconds, including all failures.
+CPU and final cleanup receipts are in the report's acceptance/accounting files,
+within the independent 32000-second ceiling. Historical allocations stay closed.
+Next ready: GPUP-MIXED2, using the native control; no next-task execution is
+released. GPUP-8 stays incomplete and GPUP-9 gated. Local commit after delivery;
+no push or publication was requested.
+
+
+## GPUP-RESIDENT2 implementation (2026-11-11)
+
+The user requests implementation and permits more time as needed. PR #23 is
+merged at 4e62cab04ca2236d419c2deea4063a42a4f519ef; the prerequisite is met.
+Implement SPEC-0024 / ADR-0053: non-overlapping delivery phases, cold/prepared
+immutable model lifecycles, separate native resident FP64 execution with bounded
+submission, coefficient tables and sticky device flags. Preserve exact original
+coefficients, host controller boundaries, fresh independent certificates and all
+historical evidence. Diagnose normal-limit export without changing bound authority.
+
+New task envelope selected under this implementation/time authorization: 32000
+CPU seconds (implementation 8000 including 128 preparation, native acceptance
+8000, device acceptance 4000, study 8000, reporting 3200, cleanup 800); four CPU
+slots, one shared GPU lease, 16 GiB sampled host RSS, 12 GiB device buffer limit.
+New GPU ceiling 1800 seconds (acceptance 600, study 1200), independently accounted
+in artifacts/gpup-resident2-v1/resources. No historical funds are transferred.
+Per-job full reservations must fit; failed/unsettled reservations remain charged.
+Use the unchanged in-container supervisor. All jobs stay in this container.
+Development fixes retain failed logs and sources; scientific cells have no automatic
+retry. CPU/native admission precedes device checks, sanitizer admission precedes
+matched study. No GPUP-8 rerun or GPUP-9 release. No push/publication requested.
+
+Acceptance: focused CPU contracts, full tools/check.sh, device differential and
+failure/cancellation checks, four scoped sanitizers, frozen same-transport native
+control/candidate cold and prepared cohorts with launch/copy counts, independent
+endpoint checking, all-cell coverage and total latency decision. Record an honest
+negative or blocked result if admission or performance fails. Likely writes:
+new research module/kernels/driver/tools/tests/specification/report and task state;
+no legacy numerical source or public solver default changes.
+
+
 ## GPUP-BASELINE PR integration (2026-11-10)
 
 PR #23 is ready for the normal merge path. Local composite acceptance passes
