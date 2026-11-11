@@ -15,8 +15,11 @@ The [revised roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-1
 now prioritizes [persistent multi-FP4 iterations](docs/plans/lp-fp4-persistent-state.md):
 approximate inner iterations and fused kernels. The
 [new planning amendment](docs/decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
-makes a bounded GPU feasibility pilot next, independent of the failed long CPU
-trajectory gate. CPU recovery remains independently ready. Future certified
+admits independent device exploration after the failed long CPU trajectory gate.
+The [FP4 GPU pilot](docs/benchmarks/lp-fp4-gpu-pilot.md) now completes all 216
+profile cells after corrected arithmetic and four-sanitizer admission. This
+candidate is slower than native FP64 in the bounded grid; no solver preset is
+selected. CPU numerical recovery is next ready. Future certified
 comparisons have explicit 1e-7 and strict 1e-9 tiers, with same-tolerance controls
 and complete-solve speed/coverage criteria; current solver defaults stay unchanged.
 [SPEC-0025](docs/specifications/SPEC-0025-persistent-fp4-contract.md) implements
@@ -25,9 +28,9 @@ the CPU numerical/transaction/cost contract; its
 and retained-data feasibility bounds. The
 [FP4-PROTO CPU attempt](docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md) qualifies
 none of twelve cells: nine error-guard and three metadata refusals. That v1
-attempt remains closed; the new GPU pilot begins with its own primitive/device
-admission and resource package. Full prototype
-acceptance and any speedup remain unestablished.
+attempt remains closed; the independent GPU pilot preserves its sources,
+criteria and charges. Full prototype acceptance and certified-solver speedup
+remain unestablished.
 [cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
 Gurobi remains unavailable and was excluded from the baseline.
 

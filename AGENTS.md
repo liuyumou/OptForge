@@ -1,5 +1,105 @@
 # Agent Instructions
 
+## GPUP-FP4-GPU-PILOT completed; measured FP4 candidate slower (2026-11-11)
+
+SPEC-0027 / ADR-0059 and docs/benchmarks/lp-fp4-gpu-pilot.md deliver actual E2M1
+MMA, packed persistent components, local FP32 pairs, safe Rust execution and
+matched FP64/FP8/FP16 split/fused/persistent/roundtrip paths. All 216 profiles
+complete. Final admission: 60 primitives, 90 trajectory/transaction cases and
+four 24-path sanitizers, with explicit unchanged-native reuse. V1 packing and
+v2 shared-state race failures remain exact; the user explicitly released both
+versioned corrections. V3 is the active image; no profile was retried.
+
+All matched FP4 cold/iteration medians are slower in this bounded grid.
+Dense-2048 persistent FP4 x2/x4/x8 takes 503.451/988.228/2213.443 µs per 32 updates
+versus native FP64 175.686 µs. Eight-component observed iterate difference is
+1.1119941378812115e-7, not a proved enclosure or final certificate. Blocks are
+independent, only 32 updates run, and the cold proxy excludes certificate and
+coordinator work. Keep native control; no supported solver preset.
+
+Composite software gate passes 638 workspace Rust, three research Rust, 583
+Python plus four corrected packing tests; replay/native/dependency/artifact/docs
+and smoke pass. Exact preservation covers 1246 historical files and all three
+manifests. Final acceptance/accounting is linked in the report; 207 documentation pages
+and internal links pass. Closed CPU charge is 21522.216081528 / 72000 seconds. GPU charge is
+953.281143916 / 9600 seconds (acceptance 723.193855166, study 230.087288750),
+including failed reservations of 300 and 240 seconds. Independent CPU ceiling
+72000; all six failed reservations and their 18560 CPU seconds remain charged.
+All supervisor cleanup is empty; no historical budget transfer.
+
+Next ready: GPUP-FP4-RECOVERY-SPEC. Integration still requires its numerical
+policy and nontrivial original-model checks before TENSOR2. Old FP4-PROTO and
+GPUP-8 remain incomplete; GPUP-9 gated. Local commit after delivery; no push or
+publication. Earlier entries retain their original scope.
+
+
+## FP4 pilot synchronization recovery approved (2026-11-11)
+
+The user explicitly approves docs/plans/lp-fp4-gpu-pilot-synchronization-recovery.md.
+V2 passes corrected arithmetic, 90 device cases and memcheck, but racecheck
+refuses 128 shared-state warnings in FP8 split updates. Retain full 960 CPU /
+240 GPU failure charge and all sources/results. V3 adds one encode-entry warp
+barrier, with exact source-delta and unchanged native SASS verified on CPU.
+Reuse the ten native primitive, fifteen native device and four native memcheck /
+racecheck passes. Execute 50 changed-lane primitives, 75 device cases, 20 each
+memcheck/racecheck, all 24 each initcheck/synccheck and conditional 216 profiles.
+New full acceptance reservation 1560 GPU / 6240 CPU fits the existing caps after
+599.495183240 GPU charged. Total ceiling stays 72000 CPU / 9600 GPU; no historical
+transfers, relaxed criteria or automatic further retry. No push/publication.
+
+
+## GPUP-FP4-GPU-PILOT packing recovery approved (2026-11-11)
+
+The user explicitly approves the concrete versioned recovery in
+[the recovery plan](docs/plans/lp-fp4-gpu-pilot-packing-recovery.md).
+Use the two-site E2M1 bits-5:2 correction and fresh v2 manifest. Reuse the 30
+unaffected control primitives; execute 30 corrected FP4 cases, then conditional
+90 device/safety cases, four 24-path sanitizers and 216 profiles. Preserve the
+v1 mismatch, all 31 attempted primitive rows, 216 unexecuted profile identities,
+failed CPU diagnosis and every source/charge. V1 is never relabeled as passing.
+
+All work remains within this task's amended 72000 CPU / 9600 GPU envelope;
+acceptance GPU cap 2400 includes the v1 failure's full 300 seconds. The accepted
+recovery reserves at most 1560 GPU acceptance seconds and nine conditional
+180-second profile batches, with four-times-wall CPU reservations. No old
+historical funds, criteria relaxation or automatic further numerical retry.
+Release: artifacts/gpup-fp4-gpu-pilot-v1/recovery-authorization-v2.json.
+
+
+## GPUP-FP4-GPU-PILOT implementation (2026-11-11)
+
+Implementation amendment: select 8000 additional native-acceptance CPU seconds
+under the user's time authorization, raising this task ceiling to 72000 CPU and
+native phase to 24000. The first missing-CMake launcher retains 8000 CPU seconds;
+the second full software gate retains 7200 after Python environment and historical
+source-roster failures. All Rust/native/dependency checks passed in that second
+attempt; resume the Python/replay/docs/smoke tail with the complete installed
+environment. No scientific gate or GPU cell has run or been retried. Move only
+the new kernel into the isolated research package with an exact-byte path bridge;
+no historical test, source roster or result changes.
+
+The user requests implementation and permits GPU time as needed. Implement the
+independent ADR-0058 pilot with actual E2M1 MMA, persistent components, ordered
+primal/dual phases, matched FP64/FP8/FP16 controls and fusion/persistence ablations.
+This is empirical kernel exploration, with no certified-solver speed claim.
+
+New independent ceiling: 64000 CPU seconds, 9600 GPU seconds. CPU phases:
+implementation 16000 (including 512 conservative preparation), native 16000,
+acceptance 16000, study 8000, reporting 6400, cleanup 1600. GPU phases:
+acceptance 2400, study 7200. Four CPU slots, one shared GPU lease, 16 GiB sampled
+host RSS and 12 GiB device buffer cap. Use the unchanged in-container supervisor
+and separate artifacts/gpup-fp4-gpu-pilot-v1/resources reservations. Full jobs must
+fit; failed/unsettled jobs retain full charges. Preserve failed development
+sources/logs; never retry a frozen scientific identity. No historical transfers.
+
+Acceptance: corrected CPU encoding/packing/transpose/projection contracts,
+source/compiler/device freeze, instruction and independent device differential,
+bounded failure/cancellation/rollback, four sanitizers, then frozen short
+trajectories and complete-cost profiles. Preserve all old evidence/defaults.
+GPUP-FP4-PROTO and GPUP-8 remain incomplete; GPUP-9 gated. Local commit after
+review and delivery; no push/publication.
+
+
 ## FP4 GPU pilot and final-quality tiers planned (2026-11-11)
 
 The user accepts independent GPU exploration and says 1e-7 final certification

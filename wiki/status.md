@@ -1,5 +1,21 @@
 # Project Status
 
+## GPUP-FP4-GPU-PILOT completed (2026-11-11)
+
+The [independent pilot](../docs/benchmarks/lp-fp4-gpu-pilot.md) completes all
+216 profile cells. Corrected E2M1 packing and shared-state synchronization pass
+primitive/transaction admission and all four sanitizers. Both failed versions,
+explicit recovery releases, exact sources and full charges remain preserved.
+
+This candidate has no FP4 speed advantage: dense-2048 persistent FP4 with
+2/4/8 components takes 503/988/2213 µs per 32 updates versus native FP64's 176 µs.
+The eight-component iterate difference is about 1.1e-7, not a certificate.
+GPU charge is 953.281143916 / 9600 seconds. Keep native control; no preset.
+Next ready is GPUP-FP4-RECOVERY-SPEC. Integration and certified comparisons remain
+gated; GPUP-FP4-PROTO and GPUP-8 incomplete, GPUP-9 gated. Earlier entries retain
+their original planning scope.
+
+
 ## FP4 GPU pilot and final-quality tiers (2026-11-11)
 
 The user accepts [ADR-0058](../docs/decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md):

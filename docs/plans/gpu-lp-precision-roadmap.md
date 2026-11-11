@@ -113,10 +113,11 @@ A separate local rounding/encoding correction passes primitive tests but has no
 scientific qualification. Device implementation, actual MMA, sanitizers and all
 36 pilot/diagnostic cells remain unexecuted; prototype acceptance is incomplete.
 
-Next: **GPUP-FP4-GPU-PILOT**, while **GPUP-FP4-RECOVERY-SPEC** remains independently
-ready. The new path below measures the hardware hypothesis without first requiring
-a successful long-trajectory enclosure. Numerical integration and complete-cost
-admission still precede **GPUP-TENSOR2**. No failed v1 cell is retried by this handoff.
+The [GPUP-FP4-GPU-PILOT delivery](../benchmarks/lp-fp4-gpu-pilot.md) completes
+216 empirical profile cells after corrected instruction/device and four-sanitizer
+admission. FP4 is slower than native in this bounded grid. Next ready is
+**GPUP-FP4-RECOVERY-SPEC**; the pilot does not qualify a long-trajectory enclosure.
+Numerical integration and complete-cost admission still precede **GPUP-TENSOR2**. No failed v1 cell is retried by this handoff.
 MIXED2 remains a simpler alternative, not a prerequisite to this FP4 contract.
 The [ADR-0055 decision](../decisions/ADR-0055-persistent-fp4-direction.md) records
 the planning priority; ADR-0056 implements its CPU specification. ADR-0057's
@@ -136,7 +137,7 @@ status supplies the final certificate.
 
 | Path | What is planned | Required admission |
 | --- | --- | --- |
-| **GPUP-FP4-GPU-PILOT**, next ready | Actual FP4 component products, fused ordered primal/dual updates, persistent state, short trajectory diagnostics and profiles; native FP64 and FP8/FP16 controls; fusion/persistence ablations | First freeze concrete workload/compiler/device/resource package; corrected CPU primitives and packing, actual instruction/differential checks, bounded failure/cancellation/rollback and four sanitizers before profiling. No dependency on successful 600-update admission or a favorable full-solve forecast |
+| **GPUP-FP4-GPU-PILOT**, complete empirical negative result | [SPEC-0027 delivery](../benchmarks/lp-fp4-gpu-pilot.md): actual FP4, native FP64 and FP8/FP16; split/fused/persistent/roundtrip; 216/216 cells | Corrected packing and synchronization, 60 primitives, 90 transaction cases and four sanitizers pass; retained failed attempts and charges. All matched FP4 iteration/cold medians are slower in this bounded grid. No certified solver or preset |
 | **GPUP-FP4-RECOVERY-SPEC**, independently ready | Correct local error budgets; specify component precision and a proved coupled enclosure or explicit residual-driven operational guard | Distinguish proved bounds from empirical progress/error observations; version the changed policy, retain original-A FP64 audits, complete checkpoints and explicit recovery. No GPU-pilot prerequisite |
 | **GPUP-FP4-INTEGRATE**, after both | Implement the selected controller/error/recovery policy around the admitted device path and validate nontrivial trajectories and independent endpoint certificates | Fresh executable numerical contract and source-bound tests at declared final tolerance; a certified 1e-7 lane may advance even if it cannot certify at 1e-9. Show useful FP4 work and charge all recovery; old prototype remains incomplete |
 | **GPUP-TENSOR2**, conditional solver study | Complete cold/prepared comparison with separately labeled 1e-7 and 1e-9 cohorts | New frozen quality/grid/resource protocol, integration admission and conservative complete-cost screen informed by the pilot; original-model independent certification and matched controls |
@@ -170,8 +171,9 @@ attribution. Prepared throughput remains separate from cold single-solve latency
 The old 192-cell/288-endpoint strict proposal remains immutable. Enumerate new
 dual-tier cells, stop rules, measured time-to-certificate events, controls and
 full reservations before execution; do not infer a new grid or earlier completion
-time from old endpoints. These tasks are planning-ready, not already executed.
-No recovery work or old unused GPU allowance automatically funds the new pilot.
+time from old endpoints. The GPU pilot is now complete under its independent
+task allocation; numerical recovery, integration and the dual-tier solver study remain prospective. No old
+unused GPU allowance funded the pilot or authorizes a later task.
 
 ### RESIDENT2 lessons and planning changes (2026-11-11)
 
@@ -246,7 +248,7 @@ execution follows this documentation update.
 | **GPUP-RESIDENT2**, complete as bounded negative result | SPEC-0024 / ADR-0053; cold/prepared phases, immutable preparation, coefficient/flag transport, transactional native windows and normal-limit export | 64 cells/96 endpoints; 42/48 strict certificates per mode and 42 bitwise pairs. Four sanitizers pass. Cold geomean 1.027370x and four regressions fail latency retention; keep the native control |
 | **GPUP-FP4-SPEC**, complete, CPU-only | [SPEC-0025](../specifications/SPEC-0025-persistent-fp4-contract.md) / ADR-0056; E2M1/error/projection oracles, observation-only checkpoint contracts, three schemas and frozen resource/grid proposal | 32 focused CPU contracts and full native integration pass; source-bound cost review admits no forecast; strict 1e-9 final certificate unchanged; no GPU execution |
 | **GPUP-FP4-PROTO**, incomplete; bounded CPU attempt closed | SPEC-0026 / ADR-0057 independent CPU reference, component trajectories, rollback and frozen twelve-cell admission; depends on GPUP-FP4-SPEC | Zero qualified lanes: nine guard and three metadata refusals, zero observations; separate local-budget correction has primitive tests only. Device/MMA/four-sanitizer/profile work unexecuted; no performance or certification claim |
-| **GPUP-FP4-GPU-PILOT**, next ready | Independently admitted actual FP4 fused/persistent GPU experiment; depends only on GPUP-FP4-SPEC | Primitive/device/safety admission before profiling; no 600-update qualification or positive full-solve forecast prerequisite; empirical error and complete kernel costs, matched controls/ablations, concrete resource package |
+| **GPUP-FP4-GPU-PILOT**, complete as bounded negative result | SPEC-0027 / ADR-0059; actual E2M1 MMA and persistent state, six lanes/four variants/three workloads; depends only on GPUP-FP4-SPEC | [216 cells complete](../benchmarks/lp-fp4-gpu-pilot.md), all four sanitizers pass after two explicitly released corrections. Dense-2048 persistent FP4 ×2/×4/×8 iteration ratios 0.349/0.178/0.079 versus native; observed errors are not certificates. Native retained; no preset |
 | **GPUP-FP4-RECOVERY-SPEC**, independently ready, CPU-only | Correct local budgets and specify a proved enclosure or explicit operational residual guard with precision/cost/recovery policy; depends on GPUP-FP4-SPEC | New versioned contract; empirical inner error never masquerades as a proof; original-model FP64 audits and independent final certification at the declared 1e-7/1e-9 tier; no automatic old scientific retry |
 | **GPUP-FP4-INTEGRATE**, planned | Implement and validate the selected policy around the device candidate; depends on GPU-PILOT and RECOVERY-SPEC | Nontrivial trajectory, full checkpoint/cancellation/recovery and original-model endpoint admission; a useful certified-1e-7 lane may proceed without a strict pass; retain all costs and failures |
 | **GPUP-MIXED2**, simpler alternative, dependency-ready | CPU-only complete-delivery cost admission against the native control, then separately admitted FP32 matrix / FP64 state-and-compute; lower-precision state is a later candidate; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Predeclared latency/coverage rule and accelerated cost fraction, iteration/guard/transfer/fallback costs; defer device study if the cost case fails. Explicit matrix-error/residual contract, useful nonzero work and original 1e-9 certificate |
