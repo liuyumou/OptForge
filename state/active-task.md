@@ -1,5 +1,65 @@
 # Active Task
 
+## GPUP-FP4-PROTO bounded CPU delivery (2026-11-11)
+
+The requested prototype's CPU slice is implemented under SPEC-0026 / ADR-0057.
+Its frozen twelve-cell numerical attempt admits no lane: nine error-guard and
+three metadata refusals, zero observations or certificates. Full component
+rollback preserves physical work and deadlines. Full prototype acceptance is
+incomplete; device implementation/MMA/sanitizers and all 36 pilot/diagnostic cells
+are closed and unexecuted. No GPU time is charged.
+
+Frozen v1 sources/results remain exact. The separate v2 local-budget correction
+addresses cancellation between pair-rounding and encoding errors; three primitive
+tests pass, with no corrected scientific attempt. Full native acceptance passed
+638 Rust and 571 Python tests, replay/dependency/artifact/docs/smoke. The later
+Python-only launcher failure (Cargo absent from PATH) retains its full 1000 CPU
+charge; an environment-only software rerun passes all 574 Python tests. Final receipts:
+docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md.
+
+All new charges remain within the independent 32000 CPU / 1560 GPU envelope.
+The formal refusal retains 2400 CPU seconds, preparation 256. Two development
+1200-second caps carve disjoint subsets from unused original implementation
+headroom, adding no authority. Closed failed journals and all historical charges
+are preserved. The reporting/cleanup journal remains separate.
+
+Next ready: GPUP-FP4-RECOVERY-SPEC, CPU-only corrected accounting and proved
+trajectory enclosure/precision/cost proposal. Preserve original-model FP64 checks
+and 1e-9 certification; no automatic retry, GPU stage, TENSOR2 or GPUP-9 release.
+Native control stays supported and GPUP-8 incomplete. Local commit after software
+and delivery acceptance; no publication. Earlier task entries retain their scope.
+
+## GPUP-FP4-PROTO implementation (2026-11-11)
+
+The user requests the next prototype. Implement an independent rational PDHG
+reference, persistent E2M1 component trajectory with explicitly charged local
+FP32-pair rounding, original-unit error/projection admission, rollback/escalation
+and source-bound execution records under SPEC-0025. CPU numerical admission
+precedes any actual-MMA implementation/admission, sanitizers or profiles. Preserve
+the original 1e-9 certificate, all historical sources/results/charges and native
+control. A failed numerical gate closes subsequent device/profile execution;
+report the remaining unexecuted work and distinguish enclosure refusal from
+actual trajectory error. No automatic scientific retry or TENSOR2 execution.
+
+Independent allocation selected under the implementation/time authorization:
+32000 CPU seconds, 1560 GPU seconds, four CPU slots, one shared GPU lease,
+16 GiB sampled host RSS and 12 GiB admitted device buffers. CPU phases:
+implementation 6000 including 256 preparation, proofs 8000, native 8000,
+workers 6240, reporting 2960, margin/cleanup 800. Conditional GPU phases:
+admission/sanitizers 480, pilot 720, diagnostics 360. The CPU increase over the
+proposal funds implementation and trajectory analysis explicitly; no transfer
+from any closed task. Use the unchanged in-container supervisor with a new
+artifacts/gpup-fp4-proto-v1 journal. Whole reservations must fit; failed/unsettled
+jobs retain their full charge. Development fixes preserve failed sources/logs.
+
+Acceptance: independent CPU primitive/trajectory/recovery contracts and one
+frozen numerical admission, full CPU/native integration, conditional actual FP4
+instruction/device/four-sanitizer/profile gates, explicit all-cell disposition,
+source/evidence preservation, settled accounting and empty cleanup. Likely new
+reference/runner/tests/specification/ADR/records and conditional device kernel
+files; no old numerical source or public default changes. Local commit after
+acceptance; no push/publication.
+
 ## GPUP-FP4-SPEC completed (2026-11-11)
 
 The executable CPU contract is delivered under SPEC-0025 / ADR-0056: bounded

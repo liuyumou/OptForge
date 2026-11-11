@@ -1,5 +1,38 @@
 # Agent Instructions
 
+## GPUP-FP4-PROTO CPU admission refused (2026-11-11)
+
+SPEC-0026 / ADR-0057 deliver independent rational/component CPU trajectories,
+explicit local FP32-pair arithmetic, persistent E2M1 state, complete rollback and
+one frozen twelve-cell admission. All twelve cells refuse: nine cumulative error
+guards and three checkpoint metadata failures. No lane reaches a 200-update
+observation. Device implementation, actual MMA, four sanitizers and all 36
+pilot/diagnostic cells remain unexecuted. Full prototype acceptance is incomplete.
+Report: docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md.
+
+Frozen v1 sources/results stay exact. Separate lp_fp4_reference_v2.py sums local
+pair-rounding and encoding errors to meet the checkpoint remainder contract;
+three primitive tests pass, but no corrected scientific qualification ran.
+Low component counts show excessive actual error; eight-component cases also
+expose conservative enclosure growth. Observed iterate error is not a residual
+or certificate. Native control and original-model FP64/1e-9 authority remain.
+
+The independent task ceiling is 32000 CPU / conditional 1560 GPU seconds, GPU
+charge zero. The formal refusal retains its full 2400 CPU reservation. A later
+software launcher omitted Cargo from PATH and retains its full 1000 CPU charge.
+The environment-corrected run passes all 574 Python tests; the earlier full native
+gate passed 638 Rust tests plus replay, dependency/artifact/docs and smoke checks.
+Development correction/environment journals use disjoint subsets of the original
+implementation headroom; no added funds or historical transfers. Final acceptance,
+all charges and cleanup are linked from the report. The failed journals remain
+closed; no automatic scientific retry or device continuation is released.
+
+Next ready: GPUP-FP4-RECOVERY-SPEC, CPU-only local-budget and proved trajectory
+enclosure/precision/cost contract preparation. A replacement monotone policy needs
+a versioned contract and proof before a newly admitted attempt. TENSOR2 remains
+conditional, GPUP-8 incomplete and GPUP-9 gated. Commit locally after acceptance;
+no push/publication. Older handoffs retain their original scope.
+
 ## GPUP-FP4-SPEC completed (2026-11-11)
 
 SPEC-0025 / ADR-0056 implement the CPU-only E2M1 representation/error/projection

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lp-fp4-cpu-admission-fixtures",
+  "updates": 600,
+  "components": [2, 4, 8],
+  "controller": "fixed binary64 coefficient replay; observation only",
+  "fixtures": [
+    {
+      "id": "scalar-equality",
+      "matrix": [[1]], "objective": [0.125],
+      "column_lower": [-2], "column_upper": [2],
+      "row_lower": [0.75], "row_upper": [0.75],
+      "tau": 0.25, "sigma": 0.25,
+      "inverse_scale_x": [1], "inverse_scale_y": [1]
+    },
+    {
+      "id": "coupled-equality",
+      "matrix": [[1, 0.25], [-0.25, 1]], "objective": [0.125, -0.25],
+      "column_lower": [-2, -2], "column_upper": [2, 2],
+      "row_lower": [0.5, -0.75], "row_upper": [0.5, -0.75],
+      "tau": 0.125, "sigma": 0.125,
+      "inverse_scale_x": [1, 1], "inverse_scale_y": [1, 1]
+    },
+    {
+      "id": "diagonally-dominant-equality",
+      "matrix": [[1, 0.125, 0, 0], [0.125, 1, -0.125, 0], [0, -0.125, 1, 0.125], [0, 0, 0.125, 1]],
+      "objective": [0.125, -0.25, 0.0625, -0.125],
+      "column_lower": [-2, -2, -2, -2], "column_upper": [2, 2, 2, 2],
+      "row_lower": [0.46875, -0.28125, 0.796875, 0.21875],
+      "row_upper": [0.46875, -0.28125, 0.796875, 0.21875],
+      "tau": 0.125, "sigma": 0.125,
+      "inverse_scale_x": [1, 1, 1, 1], "inverse_scale_y": [1, 1, 1, 1]
+    },
+    {
+      "id": "bounded-ranged",
+      "matrix": [[1, 0.25], [0.5, 1]], "objective": [-0.125, 0.25],
+      "column_lower": [-2, -2], "column_upper": [2, 2],
+      "row_lower": [-0.5, -0.25], "row_upper": [0.75, 1],
+      "tau": 0.125, "sigma": 0.125,
+      "inverse_scale_x": [1, 1], "inverse_scale_y": [1, 1]
+    }
+  ]
+}

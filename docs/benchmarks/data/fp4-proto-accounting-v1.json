@@ -1,0 +1,391 @@
+{
+  "all_guardians_empty": true,
+  "all_workloads_empty": true,
+  "cpu_ceiling_ns": 32000000000000,
+  "cpu_charged_ns": 5661891520724,
+  "cpu_stages": {
+    "implementation": {
+      "cap_cpu_ns": 6000000000000,
+      "charged_cpu_ns": 1850892645696
+    },
+    "margin": {
+      "cap_cpu_ns": 800000000000,
+      "charged_cpu_ns": 128000000000
+    },
+    "native": {
+      "cap_cpu_ns": 8000000000000,
+      "charged_cpu_ns": 1253949418388
+    },
+    "proofs": {
+      "cap_cpu_ns": 8000000000000,
+      "charged_cpu_ns": 2400000000000
+    },
+    "reporting": {
+      "cap_cpu_ns": 2960000000000,
+      "charged_cpu_ns": 29049456640
+    },
+    "workers": {
+      "cap_cpu_ns": 6240000000000,
+      "charged_cpu_ns": 0
+    }
+  },
+  "failed_reservations": [
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1.json",
+        "sha256": "fb484fb4f2d647370c4b2b61364057d44aaa4fbd3bb974a68d6b9d9148d8de22"
+      },
+      "charged_cpu_ns": 2400000000000,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 67866624,
+      "reason": "command_failed",
+      "sources": [
+        {
+          "path": "tools/lp_fp4_reference.py",
+          "sha256": "34131cb8541733c6e363e32e6e3273743bcb0b0ce2d1b85197ee42033c53b938"
+        },
+        {
+          "path": "tools/lp_fp4_admission.py",
+          "sha256": "f2a7d0dd7323afcb4f9985a79675690c290148fe55e1756c314899fad036c9ea"
+        },
+        {
+          "path": "artifacts/gpup-fp4-proto-v1/manifest-v1.json",
+          "sha256": "c01bdebf6962d383a355fbe2b65f0c6af09b50859ee6c50f8c6b37660b945e41"
+        }
+      ],
+      "stage": "proofs",
+      "status": "refused",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/python-v2.json",
+        "sha256": "041f35b08cefad06053c853481a774877c87969871f2d9e7c4fb3335c8f2de23"
+      },
+      "charged_cpu_ns": 1000000000000,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 1519067136,
+      "reason": "command_failed",
+      "sources": [
+        {
+          "path": "tools/lp_fp4_reference_v2.py",
+          "sha256": "5bfe0aed0ee6b103b0390eb4e4c512d6189c55fdbc06bc9ff923d68b4100b844"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_reference_v2.py",
+          "sha256": "ab54cfa9bcadd9f09e91ebcfe4e3e8d884fab32401faa2271174ed7e29a23b84"
+        }
+      ],
+      "stage": "implementation",
+      "status": "refused",
+      "workload_empty": true
+    }
+  ],
+  "gpu_ceiling_ns": 1560000000000,
+  "gpu_charged_ns": 0,
+  "historical_fund_transfers": 0,
+  "journal_relationship": "Core 28240 plus reporting/cleanup 3760; each development 1200 cap carves a disjoint subset of unused original implementation 6000, not new authority. Failed journals stay closed.",
+  "journals": [
+    {
+      "path": "artifacts/gpup-fp4-proto-v1/cpu-journal.json",
+      "sha256": "4a2c2f366f20e474a6973125a30017f84b282a329ab92ff48403b9a6547efe28"
+    },
+    {
+      "path": "artifacts/gpup-fp4-proto-v1/development-journal-v2.json",
+      "sha256": "1541889c8b123b6a17f3b641173768b599fb14c6fa807b95f3f7b9c436981e61"
+    },
+    {
+      "path": "artifacts/gpup-fp4-proto-v1/development-journal-v3.json",
+      "sha256": "086ce8e4b2d31ccfec912cdfe3ff861a62386ec238bef8c10cb0393f404bdcaa"
+    },
+    {
+      "path": "artifacts/gpup-fp4-proto-v1/reporting-journal.json",
+      "sha256": "b574f32e6765a3748109845287ca1748e90aa1602927ead7c162c17aaf35737b"
+    }
+  ],
+  "kind": "lp-fp4-proto-accounting",
+  "memory_enclosure": "Sampled aggregate RSS, not a hard cgroup enclosure",
+  "preparation_allowance_ns": 256000000000,
+  "preparation_scope": "Non-workload inspection, editing and final receipt packaging; all validation workloads separately supervised",
+  "receipts": [
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/software-v1.json",
+        "sha256": "0dc8ac45a6f1b301a79ccc5d48d295ff138a4341e4d22ce7fee4a8168c7eb3fd"
+      },
+      "charged_cpu_ns": 42263871056,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 80707584,
+      "reason": "completed",
+      "sources": [
+        {
+          "path": "tools/lp_fp4_reference.py",
+          "sha256": "4212643af1c7c9ee81576530bc1a926c3cb4692274a4bd9d9f3824ab6ed7f726"
+        },
+        {
+          "path": "tools/lp_fp4_admission.py",
+          "sha256": "18852d2f553aa83178aeef2dfabd7b3db0db7af463373593b3ee6b0e52dcac25"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_reference.py",
+          "sha256": "22fe8484353d82ae98b90d0525255697736f1e18aeff39f24f83e256eec5e2c3"
+        }
+      ],
+      "stage": "implementation",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/software-v2.json",
+        "sha256": "500fb33140731b089f17d2f7d6d37bbd16db915bd4724a700f0573aa2baa74fb"
+      },
+      "charged_cpu_ns": 43793345928,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 80404480,
+      "reason": "completed",
+      "sources": [
+        {
+          "path": "tools/lp_fp4_reference.py",
+          "sha256": "34131cb8541733c6e363e32e6e3273743bcb0b0ce2d1b85197ee42033c53b938"
+        },
+        {
+          "path": "tools/lp_fp4_admission.py",
+          "sha256": "f2a7d0dd7323afcb4f9985a79675690c290148fe55e1756c314899fad036c9ea"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_reference.py",
+          "sha256": "5c6a1b0d6436389701fb19a57cf578c2879021157588c5463271ca5d47d85dec"
+        }
+      ],
+      "stage": "implementation",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/native-v1.json",
+        "sha256": "06146f1043a9936f1c4a01dd44e04d36db4254b6c7026544007347343720ca43"
+      },
+      "charged_cpu_ns": 1253949418388,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 1700184064,
+      "reason": "completed",
+      "sources": [
+        {
+          "path": "tools/check.sh",
+          "sha256": "3b5bda274aaa8e0ef6951f80b23f537faa2674eed59ce04c7676d072dd135107"
+        },
+        {
+          "path": "tools/lp_fp4_reference.py",
+          "sha256": "34131cb8541733c6e363e32e6e3273743bcb0b0ce2d1b85197ee42033c53b938"
+        },
+        {
+          "path": "tools/lp_fp4_admission.py",
+          "sha256": "f2a7d0dd7323afcb4f9985a79675690c290148fe55e1756c314899fad036c9ea"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_reference.py",
+          "sha256": "5c6a1b0d6436389701fb19a57cf578c2879021157588c5463271ca5d47d85dec"
+        },
+        {
+          "path": "benchmarks/configs/lp-fp4-cpu-admission-v1.json",
+          "sha256": "b8422e55e4d395a7d705d9eaff44d108cc57cf284cb81f1b00a6f2c81509659e"
+        }
+      ],
+      "stage": "native",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/freeze-v1.json",
+        "sha256": "eb0e47072e147731c0dc570700d765b390e8f2e755b17fbefe0bb6b0f086f48c"
+      },
+      "charged_cpu_ns": 9261464452,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 66850816,
+      "reason": "completed",
+      "sources": [
+        {
+          "path": "tools/lp_fp4_admission.py",
+          "sha256": "f2a7d0dd7323afcb4f9985a79675690c290148fe55e1756c314899fad036c9ea"
+        },
+        {
+          "path": "tools/lp_fp4_reference.py",
+          "sha256": "34131cb8541733c6e363e32e6e3273743bcb0b0ce2d1b85197ee42033c53b938"
+        },
+        {
+          "path": "benchmarks/configs/lp-fp4-cpu-admission-v1.json",
+          "sha256": "b8422e55e4d395a7d705d9eaff44d108cc57cf284cb81f1b00a6f2c81509659e"
+        }
+      ],
+      "stage": "implementation",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1.json",
+        "sha256": "fb484fb4f2d647370c4b2b61364057d44aaa4fbd3bb974a68d6b9d9148d8de22"
+      },
+      "charged_cpu_ns": 2400000000000,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 67866624,
+      "reason": "command_failed",
+      "sources": [
+        {
+          "path": "tools/lp_fp4_reference.py",
+          "sha256": "34131cb8541733c6e363e32e6e3273743bcb0b0ce2d1b85197ee42033c53b938"
+        },
+        {
+          "path": "tools/lp_fp4_admission.py",
+          "sha256": "f2a7d0dd7323afcb4f9985a79675690c290148fe55e1756c314899fad036c9ea"
+        },
+        {
+          "path": "artifacts/gpup-fp4-proto-v1/manifest-v1.json",
+          "sha256": "c01bdebf6962d383a355fbe2b65f0c6af09b50859ee6c50f8c6b37660b945e41"
+        }
+      ],
+      "stage": "proofs",
+      "status": "refused",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/software-v3.json",
+        "sha256": "c8791c86fb0afd53649a6a5fcd7e05a05bff9b6ab1d387e1ad8c4f827f72ae08"
+      },
+      "charged_cpu_ns": 4757004848,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 65527808,
+      "reason": "completed",
+      "sources": [
+        {
+          "path": "tools/lp_fp4_reference_v2.py",
+          "sha256": "5bfe0aed0ee6b103b0390eb4e4c512d6189c55fdbc06bc9ff923d68b4100b844"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_reference_v2.py",
+          "sha256": "ab54cfa9bcadd9f09e91ebcfe4e3e8d884fab32401faa2271174ed7e29a23b84"
+        }
+      ],
+      "stage": "implementation",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/python-v2.json",
+        "sha256": "041f35b08cefad06053c853481a774877c87969871f2d9e7c4fb3335c8f2de23"
+      },
+      "charged_cpu_ns": 1000000000000,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 1519067136,
+      "reason": "command_failed",
+      "sources": [
+        {
+          "path": "tools/lp_fp4_reference_v2.py",
+          "sha256": "5bfe0aed0ee6b103b0390eb4e4c512d6189c55fdbc06bc9ff923d68b4100b844"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_reference_v2.py",
+          "sha256": "ab54cfa9bcadd9f09e91ebcfe4e3e8d884fab32401faa2271174ed7e29a23b84"
+        }
+      ],
+      "stage": "implementation",
+      "status": "refused",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/python-v3.json",
+        "sha256": "5e61b94324ea05ab6a531366d727d40448995766fc6b3d4bafafa6b8fc71d94e"
+      },
+      "charged_cpu_ns": 494816959412,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 1544642560,
+      "reason": "completed",
+      "sources": [
+        {
+          "path": "artifacts/gpup-fp4-proto-v1/python-v3.sh",
+          "sha256": "865778549612f7b41b448e3d2f459c544aaa7ed55e1b9644fb5e88864e3aa7a3"
+        },
+        {
+          "path": "tools/lp_fp4_reference_v2.py",
+          "sha256": "5bfe0aed0ee6b103b0390eb4e4c512d6189c55fdbc06bc9ff923d68b4100b844"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_reference_v2.py",
+          "sha256": "ab54cfa9bcadd9f09e91ebcfe4e3e8d884fab32401faa2271174ed7e29a23b84"
+        }
+      ],
+      "stage": "implementation",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/report-v1.json",
+        "sha256": "3dc4d39429051080e679d0a8d261cfdca12977120f6ea658c23fa7fdadd37118"
+      },
+      "charged_cpu_ns": 4234332580,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 52592640,
+      "reason": "completed",
+      "sources": [
+        {
+          "path": "artifacts/gpup-fp4-proto-v1/report.py",
+          "sha256": "95c6b36a31cd5ad589451b053edc8dc3488869ae9f0aec55d1cdb3090d30a6e2"
+        }
+      ],
+      "stage": "reporting",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/delivery-v1.json",
+        "sha256": "d0ff939e3c08eb38c93ae84ef2d77b8f9a2f4aaa4dc1965ca7659eddcaf86da1"
+      },
+      "charged_cpu_ns": 24815124060,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 145616896,
+      "reason": "completed",
+      "sources": [
+        {
+          "path": "artifacts/gpup-fp4-proto-v1/delivery.py",
+          "sha256": "1f32a93698ad0d2c8ea27c0e87865796e41358bbf9cfb37cbbb49b23c82f2ecb"
+        },
+        {
+          "path": "docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md",
+          "sha256": "5127d8dcf8bddb9f100c692809e2f69a01c52393020fd86e0155cc26a36d4613"
+        }
+      ],
+      "stage": "reporting",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/cleanup-v1.json",
+        "sha256": "fda06b10a69db74d398ebd080e705790c092f54ffd3af36985c7c72fbce55a0c"
+      },
+      "charged_cpu_ns": 128000000000,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 47366144,
+      "reason": "completed",
+      "sources": [
+        {
+          "path": "artifacts/gpup-fp4-proto-v1/cleanup.py",
+          "sha256": "e05245d69c86e2ce5b45cab2081f1c7592b2e62142ccf41983ec303c2b0deb7d"
+        }
+      ],
+      "stage": "margin",
+      "status": "passed",
+      "workload_empty": true
+    }
+  ],
+  "schema_version": 1,
+  "status": "settled"
+}

@@ -1,5 +1,18 @@
 # Changelog
 
+## GPUP-FP4-PROTO bounded CPU implementation (2026-11-11)
+
+- Add independent rational PDHG and persistent E2M1 component CPU trajectories,
+  exact local FP32-pair rounding, transpose tile reuse, guarded updates and full
+  checkpoint rollback under SPEC-0026 / ADR-0057.
+- Freeze and retain all twelve admission cells: nine error-guard and three
+  metadata refusals, zero qualified lanes or observation boundaries. Device and
+  profile stages remain unexecuted; no GPU performance or certification claim.
+- Preserve v1 and add a separate local rounding/encoding budget correction with
+  primitive regression checks. Record source-bound results, software acceptance,
+  failed charges and CPU-only recovery-contract follow-up in the
+  [delivery report](docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md).
+
 ## GPUP-FP4-SPEC CPU contracts (2026-11-11)
 
 - Add SPEC-0025 / ADR-0056, bounded E2M1 component oracles, consistent transpose

@@ -1,5 +1,20 @@
 # Project Status
 
+## GPUP-FP4-PROTO CPU refusal (2026-11-11)
+
+The [bounded prototype attempt](../docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md)
+implements independent original-A and persistent-component CPU trajectories,
+explicit local rounding and transactional rollback. No lane qualifies: nine
+guard and three metadata refusals across twelve cells, before any 200-update
+observation. Device implementation, actual MMA, sanitizers and all 36 profiles
+remain unexecuted; full prototype acceptance is incomplete and GPU usage zero.
+
+A separate local error-budget correction passes primitive software tests; the
+scientific attempt is not repeated. Next ready is GPUP-FP4-RECOVERY-SPEC for a
+proved error policy and justified precision/cost proposal. Keep native control,
+original-model checks and strict 1e-9 certification. GPUP-8 stays incomplete and
+GPUP-9 gated. Earlier dated entries describe their original handoffs.
+
 ## GPUP-FP4-SPEC CPU contract (2026-11-11)
 
 [SPEC-0025](../docs/specifications/SPEC-0025-persistent-fp4-contract.md) implements

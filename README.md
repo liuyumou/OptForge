@@ -18,7 +18,11 @@ Device work remains conditional on numerical and total-cost evidence.
 [SPEC-0025](docs/specifications/SPEC-0025-persistent-fp4-contract.md) implements
 the CPU numerical/transaction/cost contract; its
 [report](docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md) records the frozen proposal
-and retained-data feasibility bounds.
+and retained-data feasibility bounds. The
+[FP4-PROTO CPU attempt](docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md) qualifies
+none of twelve cells: nine error-guard and three metadata refusals. Device work
+is closed; next is CPU-only recovery-contract preparation. Full prototype
+acceptance and any speedup remain unestablished.
 [cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
 Gurobi remains unavailable and was excluded from the baseline.
 
@@ -34,9 +38,8 @@ cuOpt policy, and SPEC-0022's strict mathematical checker remains unchanged.
 
 [GPUP-RESIDENT2](docs/benchmarks/lp-resident2-gpup-resident2.md) is complete as a
 bounded negative result: certified coverage is preserved, but complete latency
-fails the retention gate. Keep the native control. GPUP-FP4-PROTO follows the
-FP4 specification, with CPU admission before device work; MIXED2 and DELIVERY2
-remain alternatives.
+fails the retention gate. Keep the native control. GPUP-FP4-RECOVERY-SPEC follows
+the refused FP4 prototype admission; MIXED2 and DELIVERY2 remain alternatives.
 
 The earlier research slices provide the following foundation.
 Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)

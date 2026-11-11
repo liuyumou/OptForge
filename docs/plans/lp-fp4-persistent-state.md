@@ -1,6 +1,6 @@
 # Persistent multi-FP4 iterations: feasibility and proposed gates
 
-Status: design assessment, 2026-11-11; CPU specification delivered; device admission pending
+Status: design assessment, 2026-11-11; CPU prototype admission refused; device work closed
 Owner: numerical backend and CUDA runtime
 Last reviewed commit: b93ddc4c745a684c56915b3fb00e73c1447ec99b
 Decision: [ADR-0055](../decisions/ADR-0055-persistent-fp4-direction.md)
@@ -12,8 +12,12 @@ Implementation update (2026-11-11): the CPU contract is now
 [ADR-0056](../decisions/ADR-0056-fp4-executable-contract.md). Its
 [delivery report](../benchmarks/lp-fp4-spec-gpup-fp4-spec.md) contains executable
 oracles, strict validation, the frozen comparison/resource proposal and retained
-cost bounds. The assessment below records the design motivation; device execution
-and numerical admission remain subsequent GPUP-FP4-PROTO work.
+cost bounds. The subsequent [prototype attempt](../benchmarks/lp-fp4-proto-gpup-fp4-proto.md)
+qualifies no lane: nine error-guard and three metadata refusals among twelve CPU
+cells. No observation boundary or device stage was reached. A separate local
+error-budget correction has primitive tests only. FP4-RECOVERY-SPEC is next for
+CPU-only enclosure/precision contract preparation. The assessment below retains
+the original design motivation; it is not a new execution authorization.
 
 ## Assessment and user-selected semantics
 
@@ -184,8 +188,9 @@ kernel throughput or prepared throughput alone cannot satisfy it.
 
 | Stage | Deliverable | Gate before proceeding |
 | --- | --- | --- |
-| **GPUP-FP4-SPEC**, next ready, CPU-only contract work | Freeze component/scaling/accumulator semantics, projection/error policy, observation-only audits, full checkpoints, useful-work counters, comparison roster and resource proposal | Numerical argument and full-path cost case; explicit supported hardware/ISA mapping; no claim that this assessment is an executable specification or proof |
-| **GPUP-FP4-PROTO**, conditional | Independently checked CPU reference first, then separately admitted minimal fused device iteration and bounded profiles | Long-trajectory/error/recovery tests; actual FP4 instructions; four sanitizers; persistent state demonstrably avoids routine FP64 round trips; count all normalization, exceptions, sparse work and audits; refuse when these erase the gain |
+| **GPUP-FP4-SPEC**, complete, CPU-only | SPEC-0025 implements the representation/error/transaction/cost contract and frozen proposal | 32 focused CPU contracts and full native gate pass; no actual MMA or forecast admission |
+| **GPUP-FP4-PROTO**, incomplete, CPU attempt closed | Independent reference and component trajectories implemented; twelve-cell admission qualifies no lane | Nine guard/three metadata refusals; no 200-update observation; actual instructions, device implementation, sanitizers and profiles unexecuted |
+| **GPUP-FP4-RECOVERY-SPEC**, next ready, CPU-only | Separate local error-accounting correction from coupled/projection-aware enclosure and precision/cost preparation | New versioned proof/contract and resource proposal before any future scientific attempt; preserve all failed evidence and final certification |
 | **GPUP-TENSOR2**, conditional study | Frozen matched native, FP8/FP16 component and admitted FP4 cohorts; fused/unfused and persistent/reconstructed diagnostic comparisons | CPU/device/cost gates and separately funded complete cold/prepared study; unchanged original 1e-9 certificate; predeclared coverage, uncertainty and latency criteria; full failure accounting |
 
 The user prioritizes the FP4 feasibility contract ahead of generic MIXED2 work.

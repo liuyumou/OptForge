@@ -1,6 +1,6 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: GPUP-FP4-SPEC complete 2026-11-11; FP4-PROTO next ready; RESIDENT2 complete/negative; GPUP-8 incomplete/science closed; GPUP-9 gated
+Status: FP4-PROTO CPU admission refused 2026-11-11, prototype incomplete; FP4-RECOVERY-SPEC next ready; RESIDENT2 complete/negative; GPUP-8 incomplete/science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: f4312c8ea875e43c62cf277e4509b82f2d8863d2
@@ -16,8 +16,10 @@ baseline is now complete under an explicit native-return policy. The user now
 prioritizes approximate persistent multi-FP4 state and fused iterations, with
 original-model residual checks and strict final certification. GPUP-FP4-SPEC is
 complete under [SPEC-0025](../specifications/SPEC-0025-persistent-fp4-contract.md)
-and [ADR-0056](../decisions/ADR-0056-fp4-executable-contract.md); FP4-PROTO's CPU
-reference/admission is next. Simpler mixed precision
+and [ADR-0056](../decisions/ADR-0056-fp4-executable-contract.md). FP4-PROTO's
+[bounded CPU attempt](../benchmarks/lp-fp4-proto-gpup-fp4-proto.md) qualifies no
+lane; device work is closed under ADR-0057. FP4-RECOVERY-SPEC is next for CPU-only
+error-accounting and trajectory-contract preparation. Simpler mixed precision
 and delivery-cost optimization remain alternatives. Lean resident execution is
 implemented; its bounded study does not pass the latency retention gate, so the
 tuned native control remains authoritative for comparisons. FP4 implementation
@@ -95,13 +97,31 @@ The frozen prospective comparison has 192 cells / 288 endpoints; its resource
 amounts are proposals only. The CPU implementation used a separate allocation
 and zero GPU time.
 
-Next: **GPUP-FP4-PROTO**, then **GPUP-TENSOR2**
-only after complete-cost admission. Compare with native FP64 and a matched
-FP8/FP16 component design to distinguish FP4 benefits from fusion/persistence.
+The [FP4-PROTO CPU attempt](../benchmarks/lp-fp4-proto-gpup-fp4-proto.md) now
+delivers independent rational/component recurrences, full checkpoint rollback and
+one frozen twelve-cell admission under SPEC-0026 / ADR-0057. Nine cells exceed the
+inner error guard and three refuse incompatible metadata; none reaches the first
+200-update observation. Short expansions exhibit actual error above the guard,
+while eight-component cases also expose substantial enclosure overestimation.
+A separate local rounding/encoding correction passes primitive tests but has no
+scientific qualification. Device implementation, actual MMA, sanitizers and all
+36 pilot/diagnostic cells remain unexecuted; prototype acceptance is incomplete.
+
+Next: **GPUP-FP4-RECOVERY-SPEC**, CPU-only preparation of corrected local budgets
+and a proved trajectory enclosure that can preserve useful primal/dual coupling.
+Keep observed errors separate from certified bounds; assess precision and its
+component-product cost before proposing a new frozen admission. Changing the
+monotone enclosure policy requires a versioned contract/proof, with unchanged
+original-model final certification. No failed cell is retried by this handoff.
+**GPUP-TENSOR2** still requires full prototype and complete-cost admission.
+Compare with native FP64 and matched FP8/FP16 components to distinguish FP4
+benefits from fusion/persistence.
 MIXED2 remains a simpler alternative, not a prerequisite to this FP4 contract.
 The [ADR-0055 decision](../decisions/ADR-0055-persistent-fp4-direction.md) records
-the planning priority; ADR-0056 implements its CPU specification. No device
-execution, GPU allocation or GPUP-9 release follows this delivery.
+the planning priority; ADR-0056 implements its CPU specification. ADR-0057's
+independent 32000 CPU / conditional 1560 GPU allocation covers the bounded
+prototype attempt; GPU charge is zero and its later stages are closed. Future
+recovery/study resources are proposals, with no automatic spending or GPUP-9 release.
 
 ### RESIDENT2 lessons and planning changes (2026-11-11)
 
@@ -170,7 +190,8 @@ experiment, budget transfer, RESIDENT2 retry or GPUP-9 execution follows.
 | **GPUP-BASELINE-FOLLOWUP**, delivered | ADR-0052 / SPEC-0023, exact continuation roster, explicit native-return policy and resource allocation | Original certificate unchanged; native errors and normal limits distinguished; raw vectors and mapping uncertainty preserved; previous numerical trials not rerun |
 | **GPUP-RESIDENT2**, complete as bounded negative result | SPEC-0024 / ADR-0053; cold/prepared phases, immutable preparation, coefficient/flag transport, transactional native windows and normal-limit export | 64 cells/96 endpoints; 42/48 strict certificates per mode and 42 bitwise pairs. Four sanitizers pass. Cold geomean 1.027370x and four regressions fail latency retention; keep the native control |
 | **GPUP-FP4-SPEC**, complete, CPU-only | [SPEC-0025](../specifications/SPEC-0025-persistent-fp4-contract.md) / ADR-0056; E2M1/error/projection oracles, observation-only checkpoint contracts, three schemas and frozen resource/grid proposal | 32 focused CPU contracts and full native integration pass; source-bound cost review admits no forecast; strict 1e-9 final certificate unchanged; no GPU execution |
-| **GPUP-FP4-PROTO**, next ready | Independent CPU reference/trajectory checks, then separately admitted fused device iterations and bounded profiles; depends on GPUP-FP4-SPEC | Actual FP4 instructions, persistent state without routine FP64 round trips, bounded exceptions/cancellation/rollback, four sanitizers, charged products/scales/normalization/sparse work and audits; reject numerical or total-cost infeasibility; proposed resources require a concrete execution package |
+| **GPUP-FP4-PROTO**, incomplete; bounded CPU attempt closed | SPEC-0026 / ADR-0057 independent CPU reference, component trajectories, rollback and frozen twelve-cell admission; depends on GPUP-FP4-SPEC | Zero qualified lanes: nine guard and three metadata refusals, zero observations; separate local-budget correction has primitive tests only. Device/MMA/four-sanitizer/profile work unexecuted; no performance or certification claim |
+| **GPUP-FP4-RECOVERY-SPEC**, next ready, CPU-only | Specify corrected local budgets, prove a suitable coupled/projection-aware trajectory enclosure and justify precision/cost; depends on GPUP-FP4-SPEC and uses retained prototype refusals | New versioned contract/proof and concrete resource proposal before any corrected scientific attempt; preserve all failed evidence/charges, original-model checks and 1e-9 certificate; no automatic retry or device execution |
 | **GPUP-MIXED2**, simpler alternative, dependency-ready | CPU-only complete-delivery cost admission against the native control, then separately admitted FP32 matrix / FP64 state-and-compute; lower-precision state is a later candidate; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Predeclared latency/coverage rule and accelerated cost fraction, iteration/guard/transfer/fallback costs; defer device study if the cost case fails. Explicit matrix-error/residual contract, useful nonzero work and original 1e-9 certificate |
 | **GPUP-DELIVERY2**, conditional alternative before precision device work | Target demonstrated parsing/preparation/checker/provenance/transport overhead using retained native phase evidence; depends on GPUP-RESIDENT2 | New bounded protocol/allocation; exact original inputs and fresh independent certificates; matched native controls isolate transport changes. Cold total cost and prepared throughput remain separate; no unmeasured residual assigned to removable overhead |
 | **GPUP-TENSOR2**, conditional FP4 study | Frozen native FP64, FP8/FP16 component and admitted persistent FP4 cohorts; fused/unfused and persistent/reconstructed diagnostics; depends on GPUP-FP4-PROTO | Complete prototype acceptance and conservative complete-path estimate with at least 10% headroom before campaign; original 1e-9 certificates, complete cold/prepared costs and predeclared uncertainty/coverage; no GPUP-8 criterion change |
@@ -251,7 +272,8 @@ cancellation/cleanup. Compare native controls under the same transport before
 claiming an algorithmic improvement. The old v2/new v5 small-model transport
 mismatch is explicitly excluded from paired speedup claims.
 
-Keep the measured native control. FP4-SPEC is complete and FP4-PROTO follows;
+Keep the measured native control. FP4-SPEC is complete; FP4-PROTO's CPU admission
+refused and FP4-RECOVERY-SPEC is next for contract preparation;
 MIXED2 is the simpler numerical alternative and DELIVERY2 targets host/evidence
 savings when those offer the stronger cost case. An admitted MIXED2 prototype
 uses FP32 matrix storage and FP64 state/arithmetic before a separately guarded
