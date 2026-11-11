@@ -1,0 +1,3974 @@
+{
+  "durable_put_includes_json_encoding": true,
+  "rows": [
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 0,
+      "wall_ns": 1606888
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 0,
+      "wall_ns": 16578853
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 0,
+      "wall_ns": 16977625
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 0,
+      "wall_ns": 911862
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 0,
+      "wall_ns": 1149083
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 0,
+      "wall_ns": 1975312
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 0,
+      "wall_ns": 2298390
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 0,
+      "wall_ns": 230875
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 0,
+      "wall_ns": 469384
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 1,
+      "wall_ns": 1776603
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 1,
+      "wall_ns": 15557618
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 1,
+      "wall_ns": 15841365
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 1,
+      "wall_ns": 916540
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 1,
+      "wall_ns": 1166027
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 1,
+      "wall_ns": 1982614
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 1,
+      "wall_ns": 2280625
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 1,
+      "wall_ns": 222594
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 1,
+      "wall_ns": 455243
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 2,
+      "wall_ns": 1643324
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 2,
+      "wall_ns": 15050927
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 2,
+      "wall_ns": 15956950
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 2,
+      "wall_ns": 933556
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 2,
+      "wall_ns": 1124706
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 2,
+      "wall_ns": 1981563
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 2,
+      "wall_ns": 2253215
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 2,
+      "wall_ns": 220003
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 2,
+      "wall_ns": 454688
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 3,
+      "wall_ns": 1629337
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 3,
+      "wall_ns": 14935791
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 3,
+      "wall_ns": 15878777
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 3,
+      "wall_ns": 900407
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 3,
+      "wall_ns": 1162209
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 3,
+      "wall_ns": 1998027
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 3,
+      "wall_ns": 2278799
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 3,
+      "wall_ns": 215705
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 3,
+      "wall_ns": 457791
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 4,
+      "wall_ns": 1609228
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 4,
+      "wall_ns": 15038399
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 4,
+      "wall_ns": 16143237
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 4,
+      "wall_ns": 902900
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 4,
+      "wall_ns": 1132650
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 4,
+      "wall_ns": 1975520
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 4,
+      "wall_ns": 2277279
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 4,
+      "wall_ns": 218928
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 4,
+      "wall_ns": 461711
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 5,
+      "wall_ns": 1640551
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 5,
+      "wall_ns": 14917329
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 5,
+      "wall_ns": 16113904
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 5,
+      "wall_ns": 909765
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 5,
+      "wall_ns": 1125265
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 5,
+      "wall_ns": 1958329
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 5,
+      "wall_ns": 2285051
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 5,
+      "wall_ns": 218110
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 5,
+      "wall_ns": 451240
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 6,
+      "wall_ns": 1620692
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 6,
+      "wall_ns": 14908627
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 6,
+      "wall_ns": 15866473
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 6,
+      "wall_ns": 913026
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 6,
+      "wall_ns": 1111882
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 6,
+      "wall_ns": 1948601
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 6,
+      "wall_ns": 2311520
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 6,
+      "wall_ns": 216789
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 6,
+      "wall_ns": 455275
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 7,
+      "wall_ns": 1629452
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 7,
+      "wall_ns": 14940360
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 7,
+      "wall_ns": 16089248
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 7,
+      "wall_ns": 911085
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 7,
+      "wall_ns": 1140554
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 7,
+      "wall_ns": 1962463
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 7,
+      "wall_ns": 2308781
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 7,
+      "wall_ns": 215748
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 7,
+      "wall_ns": 460781
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 8,
+      "wall_ns": 1635159
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 8,
+      "wall_ns": 14888109
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 8,
+      "wall_ns": 15799750
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 8,
+      "wall_ns": 905686
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 8,
+      "wall_ns": 1156927
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 8,
+      "wall_ns": 1947383
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 8,
+      "wall_ns": 2332767
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 8,
+      "wall_ns": 218261
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 8,
+      "wall_ns": 450786
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 0,
+      "wall_ns": 1596965
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 0,
+      "wall_ns": 14783764
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 0,
+      "wall_ns": 15968174
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 0,
+      "wall_ns": 1082111
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 0,
+      "wall_ns": 1330156
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 0,
+      "wall_ns": 2010937
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 0,
+      "wall_ns": 2298444
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 0,
+      "wall_ns": 256798
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 0,
+      "wall_ns": 488624
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 1,
+      "wall_ns": 1692330
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 1,
+      "wall_ns": 15032751
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 1,
+      "wall_ns": 15903518
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 1,
+      "wall_ns": 1093458
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 1,
+      "wall_ns": 1330338
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 1,
+      "wall_ns": 2001422
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 1,
+      "wall_ns": 2264353
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 1,
+      "wall_ns": 272081
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 1,
+      "wall_ns": 505577
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 2,
+      "wall_ns": 1625772
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 2,
+      "wall_ns": 15117483
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 2,
+      "wall_ns": 16020031
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 2,
+      "wall_ns": 1090979
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 2,
+      "wall_ns": 1354667
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 2,
+      "wall_ns": 1959254
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 2,
+      "wall_ns": 2264302
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 2,
+      "wall_ns": 250922
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 2,
+      "wall_ns": 488732
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 3,
+      "wall_ns": 1654891
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 3,
+      "wall_ns": 14939322
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 3,
+      "wall_ns": 16003764
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 3,
+      "wall_ns": 1079465
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 3,
+      "wall_ns": 1335505
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 3,
+      "wall_ns": 1989743
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 3,
+      "wall_ns": 2261141
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 3,
+      "wall_ns": 252300
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 3,
+      "wall_ns": 494517
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 4,
+      "wall_ns": 1632358
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 4,
+      "wall_ns": 14936395
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 4,
+      "wall_ns": 16023782
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 4,
+      "wall_ns": 1084392
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 4,
+      "wall_ns": 1326450
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 4,
+      "wall_ns": 1960946
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 4,
+      "wall_ns": 2253834
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 4,
+      "wall_ns": 247240
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 4,
+      "wall_ns": 480096
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 5,
+      "wall_ns": 1631683
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 5,
+      "wall_ns": 14965289
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 5,
+      "wall_ns": 15847925
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 5,
+      "wall_ns": 1085208
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 5,
+      "wall_ns": 1331260
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 5,
+      "wall_ns": 1984591
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 5,
+      "wall_ns": 2303597
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 5,
+      "wall_ns": 250171
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 5,
+      "wall_ns": 492835
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 6,
+      "wall_ns": 1655333
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 6,
+      "wall_ns": 14933006
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 6,
+      "wall_ns": 15926547
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 6,
+      "wall_ns": 1091453
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 6,
+      "wall_ns": 1399110
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 6,
+      "wall_ns": 2003053
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 6,
+      "wall_ns": 2320433
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 6,
+      "wall_ns": 249399
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 6,
+      "wall_ns": 495359
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 7,
+      "wall_ns": 1647310
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 7,
+      "wall_ns": 15069131
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 7,
+      "wall_ns": 16139096
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 7,
+      "wall_ns": 1105683
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 7,
+      "wall_ns": 1327482
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 7,
+      "wall_ns": 1985246
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 7,
+      "wall_ns": 2713435
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 7,
+      "wall_ns": 265491
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 7,
+      "wall_ns": 509758
+    },
+    {
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 8,
+      "wall_ns": 1643750
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 8,
+      "wall_ns": 14951338
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 8,
+      "wall_ns": 16137394
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 8,
+      "wall_ns": 1082129
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 8,
+      "wall_ns": 1343551
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 8,
+      "wall_ns": 1978528
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 8,
+      "wall_ns": 2274334
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 8,
+      "wall_ns": 250760
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 8,
+      "wall_ns": 489786
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 0,
+      "wall_ns": 836924
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 0,
+      "wall_ns": 1951099
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 0,
+      "wall_ns": 2266988
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 0,
+      "wall_ns": 727194
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 0,
+      "wall_ns": 971390
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 0,
+      "wall_ns": 1983306
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 0,
+      "wall_ns": 2246966
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 0,
+      "wall_ns": 213996
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 0,
+      "wall_ns": 442624
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 1,
+      "wall_ns": 752023
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 1,
+      "wall_ns": 1957942
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 1,
+      "wall_ns": 2222042
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 1,
+      "wall_ns": 719000
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 1,
+      "wall_ns": 978398
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 1,
+      "wall_ns": 1926236
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 1,
+      "wall_ns": 2220510
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 1,
+      "wall_ns": 201887
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 1,
+      "wall_ns": 453258
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 2,
+      "wall_ns": 725101
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 2,
+      "wall_ns": 1920276
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 2,
+      "wall_ns": 2250070
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 2,
+      "wall_ns": 713104
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 2,
+      "wall_ns": 978124
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 2,
+      "wall_ns": 1910965
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 2,
+      "wall_ns": 2243756
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 2,
+      "wall_ns": 198978
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 2,
+      "wall_ns": 435436
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 3,
+      "wall_ns": 776796
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 3,
+      "wall_ns": 1923129
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 3,
+      "wall_ns": 2239630
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 3,
+      "wall_ns": 703844
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 3,
+      "wall_ns": 977749
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 3,
+      "wall_ns": 1907897
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 3,
+      "wall_ns": 2243585
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 3,
+      "wall_ns": 201070
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 3,
+      "wall_ns": 440737
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 4,
+      "wall_ns": 720226
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 4,
+      "wall_ns": 1912834
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 4,
+      "wall_ns": 2280239
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 4,
+      "wall_ns": 718019
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 4,
+      "wall_ns": 970449
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 4,
+      "wall_ns": 1934115
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 4,
+      "wall_ns": 2249999
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 4,
+      "wall_ns": 204819
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 4,
+      "wall_ns": 442133
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 5,
+      "wall_ns": 731199
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 5,
+      "wall_ns": 1929090
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 5,
+      "wall_ns": 2244901
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 5,
+      "wall_ns": 712155
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 5,
+      "wall_ns": 964936
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 5,
+      "wall_ns": 1939628
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 5,
+      "wall_ns": 2258916
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 5,
+      "wall_ns": 198172
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 5,
+      "wall_ns": 515360
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 6,
+      "wall_ns": 727039
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 6,
+      "wall_ns": 1924807
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 6,
+      "wall_ns": 2258812
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 6,
+      "wall_ns": 717538
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 6,
+      "wall_ns": 970532
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 6,
+      "wall_ns": 1972436
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 6,
+      "wall_ns": 2199676
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 6,
+      "wall_ns": 204552
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 6,
+      "wall_ns": 442313
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 7,
+      "wall_ns": 728533
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 7,
+      "wall_ns": 1900194
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 7,
+      "wall_ns": 2205375
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 7,
+      "wall_ns": 710422
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 7,
+      "wall_ns": 975656
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 7,
+      "wall_ns": 1936219
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 7,
+      "wall_ns": 2306999
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 7,
+      "wall_ns": 195815
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 7,
+      "wall_ns": 492528
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_construct",
+      "repetition": 8,
+      "wall_ns": 722302
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_json_encode",
+      "repetition": 8,
+      "wall_ns": 1915917
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "model_durable_put",
+      "repetition": 8,
+      "wall_ns": 2249827
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 8,
+      "wall_ns": 722169
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 8,
+      "wall_ns": 974710
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 8,
+      "wall_ns": 1941018
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 8,
+      "wall_ns": 2244100
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_json_encode",
+      "repetition": 8,
+      "wall_ns": 205834
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "operation": "result_durable_put",
+      "repetition": 8,
+      "wall_ns": 448599
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 0,
+      "wall_ns": 680591
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 0,
+      "wall_ns": 1935140
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 0,
+      "wall_ns": 2252621
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 0,
+      "wall_ns": 837721
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 0,
+      "wall_ns": 1138705
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 0,
+      "wall_ns": 1939767
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 0,
+      "wall_ns": 2266029
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 0,
+      "wall_ns": 229317
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 0,
+      "wall_ns": 477192
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 1,
+      "wall_ns": 750572
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 1,
+      "wall_ns": 1961590
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 1,
+      "wall_ns": 2212423
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 1,
+      "wall_ns": 824381
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 1,
+      "wall_ns": 1122716
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 1,
+      "wall_ns": 1925309
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 1,
+      "wall_ns": 2245079
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 1,
+      "wall_ns": 225006
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 1,
+      "wall_ns": 463478
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 2,
+      "wall_ns": 727353
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 2,
+      "wall_ns": 1930423
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 2,
+      "wall_ns": 2284257
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 2,
+      "wall_ns": 831983
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 2,
+      "wall_ns": 1129792
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 2,
+      "wall_ns": 1941936
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 2,
+      "wall_ns": 2262114
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 2,
+      "wall_ns": 227440
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 2,
+      "wall_ns": 460958
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 3,
+      "wall_ns": 721518
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 3,
+      "wall_ns": 1986302
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 3,
+      "wall_ns": 2234050
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 3,
+      "wall_ns": 836989
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 3,
+      "wall_ns": 1111393
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 3,
+      "wall_ns": 1929319
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 3,
+      "wall_ns": 2282471
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 3,
+      "wall_ns": 226236
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 3,
+      "wall_ns": 470406
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 4,
+      "wall_ns": 726808
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 4,
+      "wall_ns": 1868856
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 4,
+      "wall_ns": 2212308
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 4,
+      "wall_ns": 831782
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 4,
+      "wall_ns": 1108342
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 4,
+      "wall_ns": 1920811
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 4,
+      "wall_ns": 2279598
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 4,
+      "wall_ns": 220683
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 4,
+      "wall_ns": 467312
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 5,
+      "wall_ns": 722488
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 5,
+      "wall_ns": 1951637
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 5,
+      "wall_ns": 2292480
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 5,
+      "wall_ns": 828149
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 5,
+      "wall_ns": 1114423
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 5,
+      "wall_ns": 1930571
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 5,
+      "wall_ns": 2266069
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 5,
+      "wall_ns": 228268
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 5,
+      "wall_ns": 461083
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 6,
+      "wall_ns": 785020
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 6,
+      "wall_ns": 1937699
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 6,
+      "wall_ns": 2251948
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 6,
+      "wall_ns": 832199
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 6,
+      "wall_ns": 1121446
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 6,
+      "wall_ns": 1922160
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 6,
+      "wall_ns": 2237585
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 6,
+      "wall_ns": 223788
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 6,
+      "wall_ns": 476542
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 7,
+      "wall_ns": 722571
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 7,
+      "wall_ns": 1921001
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 7,
+      "wall_ns": 2241892
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 7,
+      "wall_ns": 834533
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 7,
+      "wall_ns": 1093728
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 7,
+      "wall_ns": 1951784
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 7,
+      "wall_ns": 2216588
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 7,
+      "wall_ns": 221967
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 7,
+      "wall_ns": 468778
+    },
+    {
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_construct",
+      "repetition": 8,
+      "wall_ns": 725404
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_json_encode",
+      "repetition": 8,
+      "wall_ns": 1930387
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "model_durable_put",
+      "repetition": 8,
+      "wall_ns": 2224018
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_json_encode",
+      "repetition": 8,
+      "wall_ns": 835998
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "checkpoint_durable_put",
+      "repetition": 8,
+      "wall_ns": 1077814
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_json_encode",
+      "repetition": 8,
+      "wall_ns": 1936915
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "certificate_durable_put",
+      "repetition": 8,
+      "wall_ns": 2263787
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_json_encode",
+      "repetition": 8,
+      "wall_ns": 240256
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "operation": "result_durable_put",
+      "repetition": 8,
+      "wall_ns": 474170
+    }
+  ],
+  "schema_version": 1,
+  "scope": "new CPU-only microprofile; not a decomposition of historical timing or a solver speedup",
+  "source": {
+    "path": "tools/lp_fp4_integrate_diagnose.py",
+    "sha256": "8e8f9d6ca465afce9bef54bdd6af57022b4a3553b8fe5aeacb96b8daeb8501d0"
+  },
+  "summary": [
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 2.282471,
+      "median_ms": 2.263787,
+      "min_ms": 2.216588,
+      "operation": "certificate_durable_put"
+    },
+    {
+      "bytes": 52942,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 1.951784,
+      "median_ms": 1.930571,
+      "min_ms": 1.920811,
+      "operation": "certificate_json_encode"
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 1.138705,
+      "median_ms": 1.114423,
+      "min_ms": 1.077814,
+      "operation": "checkpoint_durable_put"
+    },
+    {
+      "bytes": 28250,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 0.837721,
+      "median_ms": 0.832199,
+      "min_ms": 0.824381,
+      "operation": "checkpoint_json_encode"
+    },
+    {
+      "bytes": null,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 0.78502,
+      "median_ms": 0.725404,
+      "min_ms": 0.680591,
+      "operation": "model_construct"
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 2.29248,
+      "median_ms": 2.241892,
+      "min_ms": 2.212308,
+      "operation": "model_durable_put"
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 1.986302,
+      "median_ms": 1.93514,
+      "min_ms": 1.868856,
+      "operation": "model_json_encode"
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 0.477192,
+      "median_ms": 0.468778,
+      "min_ms": 0.460958,
+      "operation": "result_durable_put"
+    },
+    {
+      "bytes": 6817,
+      "family": "coupled-equality",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 0.240256,
+      "median_ms": 0.226236,
+      "min_ms": 0.220683,
+      "operation": "result_json_encode"
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 2.306999,
+      "median_ms": 2.2441,
+      "min_ms": 2.199676,
+      "operation": "certificate_durable_put"
+    },
+    {
+      "bytes": 52981,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 1.983306,
+      "median_ms": 1.936219,
+      "min_ms": 1.907897,
+      "operation": "certificate_json_encode"
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 0.978398,
+      "median_ms": 0.97471,
+      "min_ms": 0.964936,
+      "operation": "checkpoint_durable_put"
+    },
+    {
+      "bytes": 22785,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 0.727194,
+      "median_ms": 0.717538,
+      "min_ms": 0.703844,
+      "operation": "checkpoint_json_encode"
+    },
+    {
+      "bytes": null,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 0.836924,
+      "median_ms": 0.728533,
+      "min_ms": 0.720226,
+      "operation": "model_construct"
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 2.280239,
+      "median_ms": 2.249827,
+      "min_ms": 2.205375,
+      "operation": "model_durable_put"
+    },
+    {
+      "bytes": 47562,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 1.957942,
+      "median_ms": 1.923129,
+      "min_ms": 1.900194,
+      "operation": "model_json_encode"
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 0.51536,
+      "median_ms": 0.442624,
+      "min_ms": 0.435436,
+      "operation": "result_durable_put"
+    },
+    {
+      "bytes": 6301,
+      "family": "coupled-equality",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 0.213996,
+      "median_ms": 0.201887,
+      "min_ms": 0.195815,
+      "operation": "result_json_encode"
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 2.713435,
+      "median_ms": 2.274334,
+      "min_ms": 2.253834,
+      "operation": "certificate_durable_put"
+    },
+    {
+      "bytes": 54390,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 2.010937,
+      "median_ms": 1.985246,
+      "min_ms": 1.959254,
+      "operation": "certificate_json_encode"
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 1.39911,
+      "median_ms": 1.33126,
+      "min_ms": 1.32645,
+      "operation": "checkpoint_durable_put"
+    },
+    {
+      "bytes": 34867,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 1.105683,
+      "median_ms": 1.085208,
+      "min_ms": 1.079465,
+      "operation": "checkpoint_json_encode"
+    },
+    {
+      "bytes": null,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 1.69233,
+      "median_ms": 1.64375,
+      "min_ms": 1.596965,
+      "operation": "model_construct"
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 16.139096,
+      "median_ms": 16.003764,
+      "min_ms": 15.847925,
+      "operation": "model_durable_put"
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 15.117483,
+      "median_ms": 14.951338,
+      "min_ms": 14.783764,
+      "operation": "model_json_encode"
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 0.509758,
+      "median_ms": 0.492835,
+      "min_ms": 0.480096,
+      "operation": "result_durable_put"
+    },
+    {
+      "bytes": 7712,
+      "family": "dense-rich-65",
+      "lane": [
+        4,
+        4
+      ],
+      "max_ms": 0.272081,
+      "median_ms": 0.250922,
+      "min_ms": 0.24724,
+      "operation": "result_json_encode"
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 2.332767,
+      "median_ms": 2.285051,
+      "min_ms": 2.253215,
+      "operation": "certificate_durable_put"
+    },
+    {
+      "bytes": 54342,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 1.998027,
+      "median_ms": 1.975312,
+      "min_ms": 1.947383,
+      "operation": "certificate_json_encode"
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 1.166027,
+      "median_ms": 1.140554,
+      "min_ms": 1.111882,
+      "operation": "checkpoint_durable_put"
+    },
+    {
+      "bytes": 27230,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 0.933556,
+      "median_ms": 0.911085,
+      "min_ms": 0.900407,
+      "operation": "checkpoint_json_encode"
+    },
+    {
+      "bytes": null,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 1.776603,
+      "median_ms": 1.629452,
+      "min_ms": 1.606888,
+      "operation": "model_construct"
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 16.977625,
+      "median_ms": 15.95695,
+      "min_ms": 15.79975,
+      "operation": "model_durable_put"
+    },
+    {
+      "bytes": 380447,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 16.578853,
+      "median_ms": 14.94036,
+      "min_ms": 14.888109,
+      "operation": "model_json_encode"
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 0.469384,
+      "median_ms": 0.455275,
+      "min_ms": 0.450786,
+      "operation": "result_durable_put"
+    },
+    {
+      "bytes": 6941,
+      "family": "dense-rich-65",
+      "lane": [
+        64,
+        1
+      ],
+      "max_ms": 0.230875,
+      "median_ms": 0.218261,
+      "min_ms": 0.215705,
+      "operation": "result_json_encode"
+    }
+  ],
+  "warm_order": "9 repeats per family/lane, fixed operation order"
+}

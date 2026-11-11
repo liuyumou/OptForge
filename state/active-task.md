@@ -1,5 +1,33 @@
 # Active Task
 
+## GPUP-FP4-INTEGRATE overhead/recovery diagnosis (2026-11-11)
+
+Retained-record analysis confirms the dense x4/1e-7 iteration win: mean GPU time
+3.716 -> 2.766 ms, while complete prepared time rises 51.365 -> 55.502 ms.
+A separate CPU microprofile finds dense model reconstruction plus durable JSON
+writing costs about 17.65 ms per solve. Prepared execution still rebuilds immutable
+representations/buffers; the checker reparses its original model each assessment.
+
+All formal restores are exact; 288 local-budget and 126 stagnation events across
+576 cells are recovery triggers, not conversion/rollback failures. State encoding
+loss dominates ranged/active-bound promotions. Their selected native endpoints
+lose about 1e-4 in x4 and 1e-8 in x8 CPU re-encoding, while the dense fixture's
+eighth-integer solution is especially representable. Dense strict native and FP4
+both need the second audit for their gap certificate. The ill-scaled policy calls
+26.90% progress across three windows stagnation; native from the same checkpoint
+makes almost identical progress. Conditioning/control, not precision alone,
+requires work. The unbounded fixture cannot yield a finite optimal certificate.
+
+Next design priorities: immutable host/device/checker preparation reuse, compact
+complete-cost evidence, correction state and responsive precision/audit control,
+conditioning and larger dense cases with generic solution significands. These are
+recommendations, not an execution release or measured optimized-solver claim.
+Numerical sources and historical results/policies/charges stay exact. This new
+CPU-only diagnosis has a separate 512 CPU / zero GPU envelope, including 256
+conservative preparation seconds; final charges and cleanup are in the report.
+No solver, checker or device run, historical retry, push or publication.
+Report: [diagnosis](../docs/benchmarks/lp-fp4-integrate-diagnosis.md). Older handoffs retain their scope.
+
 ## GPUP-FP4-INTEGRATE complete; latency retention fails (2026-11-11)
 
 SPEC-0030 / ADR-0062 deliver a separate coupled persistent FP4 research executor,
