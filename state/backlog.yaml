@@ -1,3 +1,4 @@
+# Current plan 2026-11-11: FP4-INTEGRATE complete; latency retention fails; native retained; TENSOR2 conditional.
 # Current plan 2026-11-11: SPEC-0029 / ADR-0061 recovery contract complete; FP4-INTEGRATE next; separate 1e-7/1e-9 tiers.
 # Prior handoff: ADR-0057; FP4-PROTO CPU admission refused, incomplete; FP4-RECOVERY-SPEC next.
 # Prior handoff: ADR-0055; FP4-SPEC next, approximate persistent components with strict final certification.
@@ -40,7 +41,7 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-FP4-INTEGRATE
+next_ready_task: GPUP-MIXED2
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-DIAG
@@ -105,10 +106,10 @@ tasks:
     acceptance: "SPEC-0029 / ADR-0061: versioned operational original-model residual guard, separate exact local rounding/encoding budgets, monotone 2/4/8/native recovery, complete checkpoints and independent final-tier receipt contracts. No proved global trajectory enclosure or convergence claim. CPU contracts and history/docs validation; no trajectory or device qualification rerun. Frozen non-executable 96-cell integration proposal with all costs and separate resources. Report: docs/benchmarks/lp-fp4-recovery-spec.md."
   - id: GPUP-FP4-INTEGRATE
     title: Integrate admitted FP4 device iterations with the selected numerical recovery policy
-    status: ready
+    status: complete
     depends_on: [GPUP-FP4-GPU-PILOT, GPUP-FP4-RECOVERY-SPEC]
-    specification: docs/decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md
-    acceptance: "New executable specification and concrete resource package; implement SPEC-0029 operational recovery around the admitted optimized FP4-FAST candidate, freezing actual models, checker adapter and source/device bindings first. Nontrivial trajectories, observation-only original-A FP64 audits by 200 updates, full checkpoints, bounded cancellation, explicit correction/escalation/native recovery and independent original-model endpoint checks. A useful certified-1e-7 lane may advance without reaching 1e-9; show actual FP4 work and charge all recovery. Preserve old prototype's incomplete status and failed cells. This is the new TENSOR2 integration gate, not a retroactive prototype pass."
+    specification: docs/specifications/SPEC-0030-fp4-integration.md
+    acceptance: "SPEC-0030 / ADR-0062 complete: bounded coupled persistent FP4, original-A audits, full rollback/cancellation, transactional conversion and explicit native recovery; 96/96 diagnostics and 576/576 cold/prepared solves, 432 same-tier performance certificates and matched six-of-eight family coverage. Final native/software gate, 117 device cases, four sanitizers/200 processes and 176 unique endpoint replays across 672 cells pass. Cold FP4 geometric means 0.959–0.986x fail retention; prepared 0.623–0.770x, no preset, native retained. All failures/charges/history preserved. Report: docs/benchmarks/lp-fp4-integrate.md."
   - id: GPUP-MIXED2
     title: Admit complete-delivery cost before simpler mixed precision
     status: ready

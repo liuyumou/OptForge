@@ -1,5 +1,54 @@
 # Agent Instructions
 
+## GPUP-FP4-INTEGRATE complete; latency retention fails (2026-11-11)
+
+SPEC-0030 / ADR-0062 deliver a separate coupled persistent FP4 research executor,
+original-A audits, complete rollback/cancellation, monotone precision/native
+recovery and independent original-model 1e-7/1e-9 certificates. All 96 diagnostic
+cells complete 600 physical updates; all 576 cold/prepared solve cells complete.
+Performance coverage is 432/576, identical across lanes: six of eight families.
+The ill-scaled and intentional infinite-bound-refusal families remain uncertified.
+All certified x2/x4 starts at 1e-7 use only FP4 physical updates; strict solves
+explicitly account for native recovery when required.
+
+Final CPU/native gate, 90 arithmetic, 13 boundary/lifecycle and 14 safety cases
+pass. Four sanitizers cover 200 zero-error service processes; 176 unique endpoints
+replay independently across all 672 cells. Preserve the three failed development
+reservations, exact archived binaries, sources and all earlier history.
+
+Host policy/checker/context optimizations substantially reduce setup/repeated-solve
+cost. FP4 cold native/candidate geometric means are 0.959–0.986x; prepared ratios
+0.623–0.770x. No retention gate passes. Keep the supported native solver; no preset.
+The implementation is bounded to one CTA and at most 128 coordinates per direction,
+not a general large sparse solver or a proved global trajectory enclosure.
+
+The separate 96000 CPU / 14400 GPU allocation is closed after final acceptance.
+CPU charge: 8339.119853692 seconds; GPU charge: 707.739821097 seconds. Final cleanup and all evidence: [the report](docs/benchmarks/lp-fp4-integrate.md).
+TENSOR2 remains conditional on a new viable complete-cost case and resource
+protocol. MIXED2 remains the independently ready CPU contract/cost alternative;
+no next-task execution is released. FP4-PROTO and GPUP-8 remain incomplete;
+GPUP-9 gated. Commit locally; no push/publication. Older entries retain scope.
+
+## GPUP-FP4-INTEGRATE implementation (2026-11-11)
+
+The user requests integration and aggressive performance optimization. Implement
+SPEC-0030 / ADR-0062: bounded genuinely coupled persistent FP4 kernels, general
+bounds, original-A audits, complete checkpoints, monotone precision/native
+recovery and independently checked 1e-7/1e-9 endpoints. Keep the admitted prior
+sources exact; all new code belongs to the separate lp-fp4-integrate package.
+No claim of a global trajectory proof or general certified speedup follows.
+
+New independent allocation: 96000 CPU / 14400 GPU seconds. CPU phases:
+implementation 24000 (512 preparation), native 16000, acceptance 24000, study
+24000, reporting 6400, cleanup 1600. GPU: acceptance 6000, study 8400. Four CPU
+slots, one pinned shared GPU lease, 16 GiB sampled host RSS, 12 GiB device buffers,
+unchanged in-container supervisor; all whole jobs must fit. Versioned development
+repairs/optimization are authorized; preserve failed sources and full charges.
+Formal 96-cell integration and later paired performance grids freeze only after
+CPU/device/sanitizer admission; no automatic scientific cell retry. No historical
+funds, old qualification rerun, public solver/checker default change or GPUP-9.
+Commit locally after delivery; no push/publication. Older entries retain scope.
+
 ## GPUP-FP4-RECOVERY-SPEC complete; integration next (2026-11-11)
 
 The user requests implementation. SPEC-0029 / ADR-0061 select a versioned

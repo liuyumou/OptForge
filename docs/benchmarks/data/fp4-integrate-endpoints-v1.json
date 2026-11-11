@@ -1,0 +1,12 @@
+{
+  "formal_cells": 672,
+  "format": "gzip-compressed UTF-8 JSON",
+  "models": 8,
+  "payload": {
+    "path": "docs/benchmarks/data/fp4-integrate-endpoints-v1.json.gz",
+    "sha256": "7c8b214f00a67da2fd1bce7425a8acfb1cc121dfbec2442fd2e35c4ffe224ada"
+  },
+  "schema_version": 1,
+  "uncompressed_sha256": "8185c43057bcbdb70f7ddcd12402ace7ad907cfb6c0d613157d09b57c0c9b36b",
+  "unique_endpoints": 176
+}

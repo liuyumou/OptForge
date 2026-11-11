@@ -1,0 +1,571 @@
+{
+  "acceptance": {
+    "path": "docs/benchmarks/data/fp4-integrate-evidence-v1.json",
+    "sha256": "51b8fcdb025bfeca2d4d775c0b7541a793aa189ad0e610e0385b5ea6106e2db7"
+  },
+  "all_cleanup_empty": true,
+  "allocation": {
+    "path": "artifacts/gpup-fp4-integrate-v1/allocation.json",
+    "sha256": "9ccdd62eb063e17f76926b43e4da5059f197636d7112d1ceb06a57ed1688ef87"
+  },
+  "conservative_preparation_cpu_ns": 512000000000,
+  "cpu_caps_seconds": {
+    "acceptance": 24000,
+    "cleanup": 1600,
+    "implementation": 24000,
+    "native": 16000,
+    "reporting": 6400,
+    "study": 24000
+  },
+  "cpu_ns": 8339119853692,
+  "cpu_ns_by_phase": {
+    "acceptance": 1818508966784,
+    "cleanup": 27476062796,
+    "implementation": 2745643532364,
+    "native": 2619965067016,
+    "reporting": 66306244044,
+    "study": 1061219980688
+  },
+  "failures_retain_full_reservations": true,
+  "final_cleanup": {
+    "path": "artifacts/gpup-fp4-integrate-v1/resources/final-cleanup-v1.settlement.json",
+    "sha256": "94ad8f2f64fe019c111219b446d1c5d013780b6fae5e6a7e31f50918a45f3f6d"
+  },
+  "final_readback": {
+    "path": "artifacts/gpup-fp4-integrate-v1/final-readback-v1.json",
+    "sha256": "cbe3434ba30732083003dfbb843a4056640746d02e3516849da69a78e3a2d7e3"
+  },
+  "formal_cell_retries": 0,
+  "gpu_caps_seconds": {
+    "acceptance": 6000,
+    "study": 8400
+  },
+  "gpu_ns": 707739821097,
+  "gpu_ns_by_phase": {
+    "acceptance": 444173734072,
+    "study": 263566087025
+  },
+  "historical_allocations_reopened": false,
+  "jobs": [
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 49065743832,
+      "gpu_ns": 0,
+      "job": "analysis-replay-v1",
+      "phase": "reporting",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/analysis-replay-v1.reservation.json",
+        "sha256": "f8d11d8b04b883a1fe1ec39bfcd7bafcccf1e21560b174a92c491f9d445acd0d"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/analysis-replay-v1.settlement.json",
+        "sha256": "24dd273c363489da5ef9625a70fece7bf450f91de2ad67ed9a19ab3be70205b9"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 57606264068,
+      "gpu_ns": 13529237633,
+      "job": "cached-pairs-ablation-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cached-pairs-ablation-v1.reservation.json",
+        "sha256": "47c18de889a3ba2a73a6c134f8edbf69011504bfdd290b6c73ef704d2f3adc90"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cached-pairs-ablation-v1.settlement.json",
+        "sha256": "442dd6a8f7158745da0aabff9355a75c255df8350364ee880c07878ed7bb2132"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 29156879680,
+      "gpu_ns": 0,
+      "job": "cached-pairs-build-v1",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cached-pairs-build-v1.reservation.json",
+        "sha256": "099aa7cb4b4ee3eb6d1eeddfa55567fbe42d422732924d2719eba75a125bd6ea"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cached-pairs-build-v1.settlement.json",
+        "sha256": "a522aefc614274d117eb448410ddb2f2d8e40b2cdfd03102d2c03b116b1fed51"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 14804920564,
+      "gpu_ns": 0,
+      "job": "cancellation-build-v1",
+      "phase": "native",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cancellation-build-v1.reservation.json",
+        "sha256": "462409a373963d6711272958e5f3867a89e6f91856f4eb9c2e791496a6936d7f"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cancellation-build-v1.settlement.json",
+        "sha256": "9095e067d90e0d4d8c7b0841652a137f1eb8c054d935744172193f133f1fb81e"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "job": "compile-v1",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/compile-v1.reservation.json",
+        "sha256": "934f7097a10ad72ef7f5be8d95cf611e52279d8ed5521e5b4352536289b27246"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/compile-v1.settlement.json",
+        "sha256": "027d41beb7df6581f340d3ad80c46fd0bbb62d1bcb9b1d026924da2c7cf65b43"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 100089278544,
+      "gpu_ns": 0,
+      "job": "compile-v2",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/compile-v2.reservation.json",
+        "sha256": "a3303a469c46c742455203d8ebb6ae2ec89df9966cdaa3584cbb6ee64610f932"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/compile-v2.settlement.json",
+        "sha256": "67043a721905d0449c83c6ba8a9e5657faf63f7b8c766983d81551e4d517fbc6"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "job": "cpu-admission-v1",
+      "phase": "native",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cpu-admission-v1.reservation.json",
+        "sha256": "4b16eff542a59f1995f4442a147f0e3501d7fdf8c8d4936aeced281d5ae9bed8"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cpu-admission-v1.settlement.json",
+        "sha256": "ddcff92ee8e9fda6b2bd0ed8a6ae583b15e17a89c807f1527cba534136917bb3"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 70860579404,
+      "gpu_ns": 0,
+      "job": "cpu-admission-v2",
+      "phase": "native",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cpu-admission-v2.reservation.json",
+        "sha256": "1ec8637b610d4a62720be5b995960c457c92ed79ca115c687c7690ceed63febe"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/cpu-admission-v2.settlement.json",
+        "sha256": "4237b308b7df4278ff90432c60ff13f42b0b93f174f49861956f850bdf183711"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 17240500212,
+      "gpu_ns": 0,
+      "job": "delivery-evidence-v1",
+      "phase": "reporting",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/delivery-evidence-v1.reservation.json",
+        "sha256": "a50a6f75e6f75234cbf4521a9f33835b46a32772cf3b81984f12901d0130ba83"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/delivery-evidence-v1.settlement.json",
+        "sha256": "26cc3c0438e57984ac51d51d8ece8920b70e2ba36de3b409542fed6e15e30733"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 61962804380,
+      "gpu_ns": 14620232708,
+      "job": "device-differential-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/device-differential-v1.reservation.json",
+        "sha256": "a80427c26e1553cdad64fa6dd46bdac3b56bb9e1c50d88a54cce8fcf649e3eb5"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/device-differential-v1.settlement.json",
+        "sha256": "fcd116c14f59744ee7983acf8338c224d6af95f16da17bd9837b613b980bdbf8"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 62231077252,
+      "gpu_ns": 14684645210,
+      "job": "device-differential-v2",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/device-differential-v2.reservation.json",
+        "sha256": "1a509c539faa33be53db0ca4b82c0f41246367fc108aa918cc6bf2e3c24b079e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/device-differential-v2.settlement.json",
+        "sha256": "829956c9a57bfa9706568d47e9027bb27c67651c5c9e75f3c25bc57e831994dc"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 159793204572,
+      "gpu_ns": 39076522521,
+      "job": "diagnostic-v1",
+      "phase": "study",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/diagnostic-v1.reservation.json",
+        "sha256": "24e32bf7dab1d96e58fa8a5e4fb051ea8187cbfd3cfe5ba33ee1d7f85b8ab760"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/diagnostic-v1.settlement.json",
+        "sha256": "3c652b983abacdb8ffc13a401f52388e50394d7f37b7236121ebe3016bd73e9c"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 720000000000,
+      "gpu_ns": 0,
+      "job": "early-binary-archive-v1",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/early-binary-archive-v1.reservation.json",
+        "sha256": "e92e23980dc1704df4132e2294e5c55ab7e3f72413b4787284ee0fa24141cbf8"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/early-binary-archive-v1.settlement.json",
+        "sha256": "996dc7939f0ed93bff7d87f6de79c6f72982c91dd80aea34cbe9390634ea94f6"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 27476062796,
+      "gpu_ns": 0,
+      "job": "final-cleanup-v1",
+      "phase": "cleanup",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/final-cleanup-v1.reservation.json",
+        "sha256": "9561644b1ac9fe1508d8db03c2a5ac99f0d3faac90e0cc42c9e56a6a44632287"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/final-cleanup-v1.settlement.json",
+        "sha256": "94ad8f2f64fe019c111219b446d1c5d013780b6fae5e6a7e31f50918a45f3f6d"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1276893841988,
+      "gpu_ns": 0,
+      "job": "final-cpu-v1",
+      "phase": "native",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/final-cpu-v1.reservation.json",
+        "sha256": "8974af487e0d854a53b12325b8aa4550b57711aa3f1c8acf004be4b7e9ff8ffa"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/final-cpu-v1.settlement.json",
+        "sha256": "3ed72e69219708c53b09b3dc5e7175b676cb03f39eef41e65d405a0431ef7a12"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 98374345096,
+      "gpu_ns": 23715956844,
+      "job": "final-device-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/final-device-v1.reservation.json",
+        "sha256": "f9a22eaa06333bc3f5564a1be7615c5837626736ac0a4e4ac6d8cde926ae155c"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/final-device-v1.settlement.json",
+        "sha256": "54b85ef1694cce7139ceeacc730268c8b33cfa21f3de407bfc60322f8887c976"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 640232476856,
+      "gpu_ns": 159190348134,
+      "job": "final-sanitizers-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/final-sanitizers-v1.reservation.json",
+        "sha256": "a69a44edb0cfbebd561e8c5d0df528890c1d6680d06d3c2ea97b3c0da533335f"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/final-sanitizers-v1.settlement.json",
+        "sha256": "fb3aa77075bebf8e502ffcabb10ca0c9334858d4759f8b545d0eb03eaddf7aac"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 15849858040,
+      "gpu_ns": 0,
+      "job": "freeze-v1",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/freeze-v1.reservation.json",
+        "sha256": "7c9c36965cbdd25b377cbb56d8e0c4d1f798c5bdb2af61ebffc635b8912da51c"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/freeze-v1.settlement.json",
+        "sha256": "2ff41bffaffc31ba9acc303699e6308bf5ac82467cdf80d635edd92cd71c8a3a"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 9758060992,
+      "gpu_ns": 0,
+      "job": "host-profile-v1",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/host-profile-v1.reservation.json",
+        "sha256": "1db3911fb75877fde8ae9bb3fe9fd851335cb06c11ca16f5cc137dd92a7b4f97"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/host-profile-v1.settlement.json",
+        "sha256": "6596796335ea3508635a597a62636f734352f05b383d95dc73888bd7e23862e3"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 22138757152,
+      "gpu_ns": 0,
+      "job": "lifecycle-build-v1",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/lifecycle-build-v1.reservation.json",
+        "sha256": "0ad227e7f00651d9c12a226fdf7918cbcca6eea80e0a3091702bac6bb3316fa6"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/lifecycle-build-v1.settlement.json",
+        "sha256": "0d1001074b4e6c5c33a45b02472fd58f5e75da7f726002eb986c9d9665d93ff8"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 44917459592,
+      "gpu_ns": 10357963044,
+      "job": "lifecycle-device-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/lifecycle-device-v1.reservation.json",
+        "sha256": "ba923aa26174d99a1db6408854df588e9e515e2bbec523258def7fe646c94a75"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/lifecycle-device-v1.settlement.json",
+        "sha256": "aee7f52bdf25b3fdd9c1b5c37ac9e8a9ea00bea82c628decf59ecc7d150725f5"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 181854629112,
+      "gpu_ns": 44595404083,
+      "job": "lifecycle-sanitizers-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/lifecycle-sanitizers-v1.reservation.json",
+        "sha256": "3e88626ca94cb21cf334afa8d7965cc18043b9e613fd9f839cfbc1fce0073859"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/lifecycle-sanitizers-v1.settlement.json",
+        "sha256": "85a0e69cfa1885d5e5eef72e51c77f5e1ae234d409b70de156aeeb7aadaa87fb"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 88238106096,
+      "gpu_ns": 21188329058,
+      "job": "memcheck-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/memcheck-v1.reservation.json",
+        "sha256": "fe855128f1b077fc6787fd3d10eead755891d6398b5163f292583de4c2938bf4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/memcheck-v1.settlement.json",
+        "sha256": "b34d5d1813dd50a4b0da706e4ff435d694ef836905fbbfd8d8c95580938dbb37"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 46823397612,
+      "gpu_ns": 0,
+      "job": "norm-storage-build-v1",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/norm-storage-build-v1.reservation.json",
+        "sha256": "9c98ed15031e10a0b6e0c7aa4f2d68f23f8e659a3bad5ac1f07c88469438693e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/norm-storage-build-v1.settlement.json",
+        "sha256": "0e71c7feeb575fcf06094442a4c07efaf69d61668c9fb3b013f57eb17ad152b5"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 61333943648,
+      "gpu_ns": 0,
+      "job": "optimized-build-v1",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/optimized-build-v1.reservation.json",
+        "sha256": "35db6d186ebfd5a50e29f504de804a4a582f8a502d1aeea1cd72b8e2062f37d9"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/optimized-build-v1.settlement.json",
+        "sha256": "cfd3d07a0b2de8d892e1202671d30b4e80a4c273a9162766cb7198217e12615b"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 77980990788,
+      "gpu_ns": 18623515336,
+      "job": "optimized-device-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/optimized-device-v1.reservation.json",
+        "sha256": "173235e79e8504fa6479747f860081bff59ecee9c616b63ccf37b4cdf0b19ac4"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/optimized-device-v1.settlement.json",
+        "sha256": "5365f70752ff58be94463b2a8d7eaed2e4283dff7eca7941fbffd6b011194a1b"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 458060432968,
+      "gpu_ns": 113647751946,
+      "job": "optimized-sanitizers-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/optimized-sanitizers-v1.reservation.json",
+        "sha256": "6022daa723a5d8a387e8f2ff3d97142e2a4356120329be13d83f095c03ea5662"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/optimized-sanitizers-v1.settlement.json",
+        "sha256": "5110b5443e25ae2f06a3862df35ba4c93fb3f79ef065f95ea497674228e9f1dc"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 901426776116,
+      "gpu_ns": 224489564504,
+      "job": "performance-v1",
+      "phase": "study",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/performance-v1.reservation.json",
+        "sha256": "624a45f9b0dca092112ab6c5354c55bee2cb9555a2eff40ed5358f1aeb214994"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/performance-v1.settlement.json",
+        "sha256": "1a2eb12893ae42ae16615b61de190ef330a18313008624c8eb6ca76be0aa7a00"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 57405725060,
+      "gpu_ns": 0,
+      "job": "probes-build-v1",
+      "phase": "native",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/probes-build-v1.reservation.json",
+        "sha256": "957867988fb39a65727c0cc07bc5cc1d31c43fe08f1cfc630371c412c82406e0"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/probes-build-v1.settlement.json",
+        "sha256": "4df9e22a0dd4d849e7c57a85bdb5b47f50304e5e78ee7e84215f64735d2993fb"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 13445479604,
+      "gpu_ns": 2491121346,
+      "job": "recovery-smoke-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/recovery-smoke-v1.reservation.json",
+        "sha256": "cdb3068659f1e3d2339c1552a5e433712fe1d5e1070715da20ecf0adbc5ffd04"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/recovery-smoke-v1.settlement.json",
+        "sha256": "41785d2ced3a296b66189f367c121c9829c429e6bc8f56d3756e716a1bea5dd5"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 33604900972,
+      "gpu_ns": 7529228730,
+      "job": "safety-v1",
+      "phase": "acceptance",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/safety-v1.reservation.json",
+        "sha256": "b9f423fd81292f64472327bd03bae343ef9b33cad68cae3db8ee9dd87feb6983"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/safety-v1.settlement.json",
+        "sha256": "83c111c806bd7d0cc95732bc7eb3e7f8103b14f796d059d70c014c4b1d492c00"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 28493356696,
+      "gpu_ns": 0,
+      "job": "sticky-refusal-build-v1",
+      "phase": "implementation",
+      "reservation": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/sticky-refusal-build-v1.reservation.json",
+        "sha256": "61cbfa7d05c6f71c803ead64a5c024afc94e251905b00a9d76b2e3226d57e1bf"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-integrate-v1/resources/sticky-refusal-build-v1.settlement.json",
+        "sha256": "c07fbdc01872b7960c072171e0b50c6ea645762a442b775d1f816010ddd9f590"
+      },
+      "status": "passed"
+    }
+  ],
+  "notes": [
+    "512 conservative CPU seconds cover non-job preparation and final bookkeeping.",
+    "Compiler/device/software failures remain charged; exact early binaries are archived.",
+    "Metadata finalization does not rerun any numerical or scientific cell."
+  ],
+  "old_scientific_retries": 0,
+  "schema_version": 1,
+  "status": "closed"
+}
