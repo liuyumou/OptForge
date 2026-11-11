@@ -1,5 +1,40 @@
 # Agent Instructions
 
+## FP4 GPU pilot and final-quality tiers planned (2026-11-11)
+
+The user accepts independent GPU exploration and says 1e-7 final certification
+is encouraging if FP4 is sufficiently faster. ADR-0058 supersedes the blanket
+pre-device long-trajectory gate for a new path. Next ready: GPUP-FP4-GPU-PILOT;
+start with its concrete bounded protocol/resource package, corrected CPU
+primitive/packing tests, actual-instruction/device differential and safety checks,
+then four sanitizers and bounded fused/persistent iteration profiles. It does not
+depend on successful 600-update CPU admission or a favorable full-solve forecast.
+Empirical error/kernel results do not establish certified-solver performance.
+
+GPUP-FP4-RECOVERY-SPEC is independently ready. Specify compatible local budgets
+and a proved coupled enclosure or explicitly operational residual guard; do not
+call empirical errors proved enclosures. New GPUP-FP4-INTEGRATE joins recovery
+and the admitted device candidate, validating nontrivial trajectories, 200-update
+original-A FP64 audits, complete checkpoints/cancellation and explicit recovery.
+TENSOR2 now depends on that new integration gate; old FP4-PROTO stays incomplete.
+
+Future certified cohorts have explicit 1e-7 and strict 1e-9 final tiers using
+original-model independent checking and unchanged gap/bound/refusal mathematics.
+The final tolerance differs from v1's inner 1e-7 enclosure guard. A valid 1e-7
+result need not pass 1e-9. Initial retention: at least 1.10x cold model-median
+geometric mean, no certified model-median regression or coverage loss, against
+native controls targeting the same tolerance; report uncertainty and all costs.
+FP4 at 1e-7 versus native at 1e-9 is a separate quality/time tradeoff. Freeze a
+new dual-tier protocol/grid; retain the original strict proposal unchanged.
+
+This roadmap amendment has a separate 512 CPU / zero GPU envelope. No numerical
+code, checker default, scientific retry or device job changes/runs now. All old
+specifications, ADRs, sources/results/charges and closed budgets stay exact.
+Future implementation starts with its own concrete resource package; do not reuse
+old unused funds. Native control remains supported, GPUP-8 incomplete and GPUP-9
+gated. Acceptance/accounting: state/active-task.md. Commit locally after delivery;
+no push/publication. Older entries retain their original scope.
+
 ## GPUP-FP4-PROTO CPU admission refused (2026-11-11)
 
 SPEC-0026 / ADR-0057 deliver independent rational/component CPU trajectories,

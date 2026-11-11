@@ -1,5 +1,51 @@
 # Active Task
 
+## FP4 GPU exploration and quality-tier roadmap amendment (2026-11-11)
+
+The user authorizes the recommended split between CPU numerical recovery,
+bounded GPU feasibility and subsequent certified solver comparison. They also
+accept a separately labeled 1e-7 final certificate as an encouraging result when
+FP4 produces sufficient speedup. Keep 1e-9 as the strict tier; the old 1e-7 inner
+enclosure guard is a different quantity and remains part of the frozen v1 record.
+
+Scope: a superseding planning ADR, explicit independent GPU-pilot/integration
+tasks, dual-quality complete-cost criteria, roadmap/design/backlog navigation and
+handoffs. No numerical implementation, solver/checker default change, GPU job or
+scientific retry runs in this documentation task. Preserve exact old specifications,
+ADRs, proposal, sources, results and charges. The old prototype stays incomplete.
+
+Independent documentation envelope: 512 CPU seconds, zero GPU; 128 preparation
+and receipt packaging, 320 validation, 64 cleanup; four CPU slots, 6 GiB sampled
+host RSS. Use the unchanged supervisor and a new journal under
+artifacts/gpup-fp4-gpu-roadmap-v1. No closed-budget transfers. Acceptance: document
+links, acyclic/ready dependencies, explicit pilot admission independent of the
+600-update gate, matched quality/performance rules, exact historical preservation
+and diff hygiene. Local commit after acceptance; no push/publication. Future
+experiments begin with a concrete protocol/resource package under their own task.
+
+Delivered: ADR-0058 and aligned roadmap/design/backlog/README/wiki. Next ready is
+GPUP-FP4-GPU-PILOT, independently of CPU recovery and old 600-update qualification;
+new FP4-INTEGRATE precedes TENSOR2. Future original-model final tiers are 1e-7 and
+strict 1e-9. The initial 1.10x cold model-median geometric-mean target uses
+same-tolerance native controls, no certified model-median regression or coverage
+loss, uncertainty and complete setup/audit/recovery/checking costs.
+
+Acceptance passes 201 documentation pages/internal links, acyclic/ready dependency
+checks, unchanged completed tasks and old prototype, exact numerical source/input
+bindings, historical roadmap/handoff preservation, documentation-only scope and
+diff hygiene. The first memory preflight refused before launching/reserving a
+workload; its operator note is retained. The first admitted validator assumed
+every old backlog entry had a specification and retains its full 240 CPU-second
+failure charge. The separate corrected validator passes at 14.173538052 seconds;
+its journal uses only unused 80-second reporting and 64-second cleanup headrooms
+inside the original 512-second ceiling. No budget is added or transferred.
+
+Preparation charges 128 seconds; final cleanup reserves and fully charges 64.
+Total including that reservation is 446.173538052 CPU / zero GPU seconds. Final
+receipts, both journals, failed sources/logs and exact accounting are under
+`artifacts/gpup-fp4-gpu-roadmap-v1`; the settled summary is `final-accounting-v1.json`.
+No numerical or device experiment ran. Local commit after cleanup; no publication.
+
 ## GPUP-FP4-PROTO bounded CPU delivery (2026-11-11)
 
 The requested prototype's CPU slice is implemented under SPEC-0026 / ADR-0057.

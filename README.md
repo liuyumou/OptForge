@@ -13,15 +13,20 @@ precision preset is established, and GPUP-9 remains gated. The
 expanded reconstruction and state-update costs as the dominant current bottleneck.
 The [revised roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-11-10)
 now prioritizes [persistent multi-FP4 iterations](docs/plans/lp-fp4-persistent-state.md):
-approximate inner iterations and fused kernels with strict final certification.
-Device work remains conditional on numerical and total-cost evidence.
+approximate inner iterations and fused kernels. The
+[new planning amendment](docs/decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
+makes a bounded GPU feasibility pilot next, independent of the failed long CPU
+trajectory gate. CPU recovery remains independently ready. Future certified
+comparisons have explicit 1e-7 and strict 1e-9 tiers, with same-tolerance controls
+and complete-solve speed/coverage criteria; current solver defaults stay unchanged.
 [SPEC-0025](docs/specifications/SPEC-0025-persistent-fp4-contract.md) implements
 the CPU numerical/transaction/cost contract; its
 [report](docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md) records the frozen proposal
 and retained-data feasibility bounds. The
 [FP4-PROTO CPU attempt](docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md) qualifies
-none of twelve cells: nine error-guard and three metadata refusals. Device work
-is closed; next is CPU-only recovery-contract preparation. Full prototype
+none of twelve cells: nine error-guard and three metadata refusals. That v1
+attempt remains closed; the new GPU pilot begins with its own primitive/device
+admission and resource package. Full prototype
 acceptance and any speedup remain unestablished.
 [cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
 Gurobi remains unavailable and was excluded from the baseline.
@@ -38,8 +43,9 @@ cuOpt policy, and SPEC-0022's strict mathematical checker remains unchanged.
 
 [GPUP-RESIDENT2](docs/benchmarks/lp-resident2-gpup-resident2.md) is complete as a
 bounded negative result: certified coverage is preserved, but complete latency
-fails the retention gate. Keep the native control. GPUP-FP4-RECOVERY-SPEC follows
-the refused FP4 prototype admission; MIXED2 and DELIVERY2 remain alternatives.
+fails the retention gate. Keep the native control. The new FP4 pilot and numerical
+recovery lead to integration before a certified study; MIXED2 and DELIVERY2
+remain alternatives.
 
 The earlier research slices provide the following foundation.
 Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)

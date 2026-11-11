@@ -1,5 +1,16 @@
 # Changelog
 
+## FP4 GPU exploration and quality-tier planning (2026-11-11)
+
+- Accept ADR-0058: make a bounded actual-FP4 fused/persistent GPU pilot next,
+  independently of CPU numerical recovery and the failed 600-update admission.
+  Add a later integration task before the certified TENSOR2 study.
+- Add the user-approved 1e-7 final-quality tier alongside strict 1e-9. Require
+  same-tolerance controls and the initial 1.10x complete-latency/coverage target;
+  distinguish exploratory kernel evidence from certified solver results.
+- Preserve old contracts, sources, proposal, outcomes and charges. This amendment
+  changes planning only; no numerical/GPU execution or public checker change.
+
 ## GPUP-FP4-PROTO bounded CPU implementation (2026-11-11)
 
 - Add independent rational PDHG and persistent E2M1 component CPU trajectories,

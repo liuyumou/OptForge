@@ -1,5 +1,22 @@
 # Project Status
 
+## FP4 GPU pilot and final-quality tiers (2026-11-11)
+
+The user accepts [ADR-0058](../docs/decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md):
+**GPUP-FP4-GPU-PILOT is next**, independent of the old 600-update CPU trajectory
+gate. Correct primitives and device/sanitizer safety checks precede bounded
+actual-FP4 fused/persistent iteration measurements. CPU recovery remains
+independently ready; GPUP-FP4-INTEGRATE joins both paths before GPUP-TENSOR2.
+
+A separately labeled 1e-7 final certificate is an encouraging result if FP4 is
+sufficiently faster; 1e-9 remains the strict tier. Initial retention requires at
+least 1.10x complete cold model-median geometric-mean speedup, no certified
+model-median regression or coverage loss against native at the same tolerance,
+with uncertainty reported. A kernel result or comparison across different
+tolerances cannot establish FP4 solver acceleration. This is a roadmap update:
+no GPU job, numerical retry or checker-default change occurred. The old failed
+prototype and all historical evidence stay exact; GPUP-8 incomplete, GPUP-9 gated.
+
 ## GPUP-FP4-PROTO CPU refusal (2026-11-11)
 
 The [bounded prototype attempt](../docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md)

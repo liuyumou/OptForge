@@ -1,9 +1,9 @@
 # Persistent multi-FP4 iterations: feasibility and proposed gates
 
-Status: design assessment, 2026-11-11; CPU prototype admission refused; device work closed
+Status: amended design, 2026-11-11; independent GPU pilot next; future 1e-7/1e-9 final tiers; old prototype attempt closed
 Owner: numerical backend and CUDA runtime
-Last reviewed commit: b93ddc4c745a684c56915b3fb00e73c1447ec99b
-Decision: [ADR-0055](../decisions/ADR-0055-persistent-fp4-direction.md)
+Last reviewed commit: 59ae62d872b30885a57e02412b1f44478769ef16
+Decision: [ADR-0055](../decisions/ADR-0055-persistent-fp4-direction.md), [ADR-0058 amendment](../decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
 Implementation: [SPEC-0025](../specifications/SPEC-0025-persistent-fp4-contract.md); [roadmap](gpu-lp-precision-roadmap.md#persistent-multi-fp4-direction-2026-11-11), [backlog](../../state/backlog.yaml)
 Acceptance: [CPU contract delivery](../benchmarks/lp-fp4-spec-gpup-fp4-spec.md); device gates below
 
@@ -15,15 +15,19 @@ oracles, strict validation, the frozen comparison/resource proposal and retained
 cost bounds. The subsequent [prototype attempt](../benchmarks/lp-fp4-proto-gpup-fp4-proto.md)
 qualifies no lane: nine error-guard and three metadata refusals among twelve CPU
 cells. No observation boundary or device stage was reached. A separate local
-error-budget correction has primitive tests only. FP4-RECOVERY-SPEC is next for
-CPU-only enclosure/precision contract preparation. The assessment below retains
-the original design motivation; it is not a new execution authorization.
+error-budget correction has primitive tests only. That v1 attempt remains closed.
+The user-authorized ADR-0058 amendment now makes FP4-GPU-PILOT next, independent
+of CPU recovery and the failed 600-update gate. Correct primitives and device
+safety precede exploratory profiling; solver integration and complete-cost
+admission precede certified comparison. This document plans those experiments;
+their concrete protocols/resources are prepared when their tasks begin.
 
 ## Assessment and user-selected semantics
 
 This is a worthwhile bounded research direction. The user explicitly accepts
-approximate inner iterations with original-model FP64 residual checks and the
-unchanged 1e-9 final certificate. A short FP4 expansion therefore need not emulate
+approximate inner iterations with original-model FP64 residual checks. They now
+also accept a separately labeled 1e-7 final certificate if FP4 is sufficiently
+faster; 1e-9 remains the strict final tier. A short FP4 expansion therefore need not emulate
 every binary64 operation or preserve the native trajectory. Its component count
 must follow an error/cost contract, not the assumption that four FP4 bits supply
 four useful significand bits or that several components automatically equal FP64.
@@ -135,6 +139,15 @@ component escalation or native recovery. A strict final certificate alone does
 not establish convergence of the approximate iteration or justify unchecked
 cross-window error growth.
 
+Under ADR-0058, a bounded GPU pilot may measure empirical local/trajectory error
+before a full trajectory enclosure is available. It must label that limitation
+and cannot claim solver qualification from kernel measurements. CPU recovery may
+select a proved coupled bound or a separately specified operational residual
+guard; the latter claims no rigorous iterate-error enclosure. Integration must
+validate its progress, refusal and recovery behavior, with independent final
+checking as the certificate authority. This avoids making the failed monotone
+bound a universal prerequisite for learning about the hardware.
+
 As one accounting identity, if `A = A_hat + E_A`, `x = x_hat + e_x`, and the
 computed product is `p = A_hat*x_hat + e_compute`, a compatible norm gives
 `||A*x - p|| <= ||E_A||*||x_hat|| + ||A||*||e_x|| + ||e_compute||`.
@@ -145,7 +158,10 @@ these errors. This identity is not a convergence theorem or a selected budget.
 Use an independent high-precision/exact CPU oracle for primitive cases and long
 trajectories: alternating cancellation, tiny progress near active bounds,
 outliers, underflow, finite/infinite bound combinations, restarts, rollback and escalation.
-Test the actual returned FP64 snapshot independently at 1e-9. The mixed-65536
+For a solver cohort, test the actual returned FP64 snapshot independently at its
+declared 1e-7 or 1e-9 final tier, using the same original-model feasibility/gap and
+bound-authority rules with explicit absolute/relative target tolerances. This
+final tolerance is unrelated to the old 1e-7 inner-error guard. The mixed-65536
 bound-authority refusal remains unresolved and cannot be counted as a speed win.
 
 ## Work, memory and useful Tensor utilization
@@ -181,8 +197,13 @@ exceptional paths, audit/correction, launches, copies/bytes, register use, spill
 and occupancy. Compare whole fused iterations before a solve campaign. Use
 [ADR-0054's complete-cost model](../decisions/ADR-0054-resident2-cost-priorities.md),
 including changed iteration counts and cold preparation/checker cost. Require the
-existing proposed TENSOR2 10% complete-path screening headroom before its campaign;
-kernel throughput or prepared throughput alone cannot satisfy it.
+prospective TENSOR2 complete-path screening before its campaign; it does not
+block the exploratory pilot that supplies missing measurements. The initial
+retention target is at least 1.10x cold model-median geometric-mean speedup, no
+certified model-median regression and no loss of coverage against a native
+control targeting the same final tolerance. Report uncertainty and all failed
+rows. Kernel throughput or prepared throughput alone cannot satisfy this target;
+FP4 at 1e-7 versus FP64 at 1e-9 is a separate quality/time tradeoff.
 
 ## Roadmap and stop decisions
 
@@ -190,8 +211,10 @@ kernel throughput or prepared throughput alone cannot satisfy it.
 | --- | --- | --- |
 | **GPUP-FP4-SPEC**, complete, CPU-only | SPEC-0025 implements the representation/error/transaction/cost contract and frozen proposal | 32 focused CPU contracts and full native gate pass; no actual MMA or forecast admission |
 | **GPUP-FP4-PROTO**, incomplete, CPU attempt closed | Independent reference and component trajectories implemented; twelve-cell admission qualifies no lane | Nine guard/three metadata refusals; no 200-update observation; actual instructions, device implementation, sanitizers and profiles unexecuted |
-| **GPUP-FP4-RECOVERY-SPEC**, next ready, CPU-only | Separate local error-accounting correction from coupled/projection-aware enclosure and precision/cost preparation | New versioned proof/contract and resource proposal before any future scientific attempt; preserve all failed evidence and final certification |
-| **GPUP-TENSOR2**, conditional study | Frozen matched native, FP8/FP16 component and admitted FP4 cohorts; fused/unfused and persistent/reconstructed diagnostic comparisons | CPU/device/cost gates and separately funded complete cold/prepared study; unchanged original 1e-9 certificate; predeclared coverage, uncertainty and latency criteria; full failure accounting |
+| **GPUP-FP4-GPU-PILOT**, next ready | Actual FP4 products and fused persistent iterations, bounded empirical errors and profiles; matched controls and ablations | Concrete protocol/resources; CPU primitive and actual-instruction/device/sanitizer admission; independent of the failed 600-update trajectory gate and full-solve forecast |
+| **GPUP-FP4-RECOVERY-SPEC**, independently ready, CPU-only | Correct local budgets and specify an enclosure or explicit operational residual guard, precision and recovery | Versioned numerical contract; separate proved bounds from empirical progress; original-model FP64 checks and declared final-quality tier |
+| **GPUP-FP4-INTEGRATE**, after both paths | Implement and validate the new solver policy and device candidate | Nontrivial trajectories, full checkpoint/recovery/cancellation and final endpoint admission; 1e-7 success need not also reach 1e-9 |
+| **GPUP-TENSOR2**, conditional study | New frozen matched native/FP8/FP16/FP4 cohorts at explicit 1e-7 and 1e-9 final tiers | Integration and complete-cost gates; same-tolerance controls, latency/coverage/uncertainty rules, full costs/failures; old strict 192-cell proposal remains exact |
 
 The user prioritizes the FP4 feasibility contract ahead of generic MIXED2 work.
 MIXED2 remains a simpler alternative and is not a prerequisite for FP4 planning.
