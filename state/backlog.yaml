@@ -116,6 +116,12 @@ tasks:
     depends_on: [GPUP-FP4-INTEGRATE]
     specification: docs/specifications/SPEC-0031-fp4-corrected-acceleration.md
     acceptance: "SPEC-0031 / ADR-0063: cached preparation/checker, retained corrections, original-A window references, scaling, parallel dense tiles and exact parallel certificate scheduling. All 1800 cells complete, 1650 certificates, same eleven bounded families at both tiers. 270 component comparisons, 42 lifecycle cases, four sanitizers/112 processes and 102 serial endpoint replays pass. Strict dense512 FP4 6.19x GPU / 2.27x complete versus fused FP4; 1.20x GPU but 1.5% total regression against parallel native. EOF cold ratios 0.9850/0.9863x fail retention; no public preset. Every failed source/charge retained; report: docs/benchmarks/lp-fp4-accel.md."
+  - id: GPUP-FP4-CHECKER
+    title: Accelerate exact independent checking and diagnose cold and iteration costs
+    status: complete
+    depends_on: [GPUP-FP4-ACCEL]
+    specification: docs/specifications/SPEC-0032-exact-checker-acceleration.md
+    acceptance: "SPEC-0032 / ADR-0064: cached original feasibility indices, independent row scheduling, exact integer product classification and original-tree scratch reuse. All 102 serial receipts, 2880 feasibility cases, 720 certificate cases and 500169 product pairs match. 960 new complete-cost cells, 880 certificates, identical audits/checkpoints/recovery/work. Dense512 CPU checker 2.54x; strict FP4 prepared total 19.203 to 15.924 ms (1.206x). Native 16.527 ms; observed FP4 lead uncertain. Broad cold 0.9994/0.9934x fails retention; no preset. Report: docs/benchmarks/lp-fp4-checker.md."
   - id: GPUP-MIXED2
     title: Admit complete-delivery cost before simpler mixed precision
     status: ready

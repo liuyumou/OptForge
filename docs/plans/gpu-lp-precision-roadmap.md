@@ -1,12 +1,27 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
+Status: FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
 Last reviewed commit: 59ae62d872b30885a57e02412b1f44478769ef16
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
 Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md), [cost gates](../decisions/ADR-0054-resident2-cost-priorities.md), [FP4 GPU exploration and quality tiers](../decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
 Evidence: [RESIDENT2 result](../benchmarks/lp-resident2-gpup-resident2.md), [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+
+## Exact checker acceleration (2026-11-12)
+
+[GPUP-FP4-CHECKER is complete](../benchmarks/lp-fp4-checker.md) under
+[SPEC-0032](../specifications/SPEC-0032-exact-checker-acceleration.md) /
+[ADR-0064](../decisions/ADR-0064-exact-checker-acceleration.md). Cached feasibility
+indices, independent row scheduling and exact product/reduction optimizations
+preserve every certificate bit and refusal. All 960 new comparison cells complete
+with identical original numerical evidence; eleven bounded families certify at
+both tiers. Dense512 CPU assessment improves 2.54x; strict FP4 prepared total
+improves 19.203 to 15.924 ms. New native is 16.527 ms; FP4's observed 3.8% lead
+has an interval including parity. Broad cold ratios 0.9994/0.9934x still fail
+retention, dominated by startup/preparation and unfavorable small tensor work.
+Keep defaults unchanged. Further work should measure exact dual/transport and
+cold setup/teardown costs; historical experiments and allocations stay closed.
 
 ## Corrected FP4 acceleration (2026-11-11)
 

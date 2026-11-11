@@ -1,0 +1,85 @@
+{
+  "binary_archive": {
+    "path": "artifacts/gpup-fp4-checker-v1/binaries/a3baf7e1d7d2f2fc63ab1482a77981ffd02d3c0065e7f10c16a334935589b132",
+    "sha256": "a3baf7e1d7d2f2fc63ab1482a77981ffd02d3c0065e7f10c16a334935589b132"
+  },
+  "cpu_endpoint_profiles": {
+    "path": "artifacts/gpup-fp4-checker-v1/profile-final/result.json",
+    "sha256": "ec97de7675eb5d6ded8428c77eb4280d00acdd8308b98b56cc9919205a8c6450"
+  },
+  "device_sanitizers": "unchanged image and device sources; exact prior four-sanitizer admission reused",
+  "exact_historical_files": 1636,
+  "gpu_integration": {
+    "path": "artifacts/gpup-fp4-checker-v1/smoke-v1/result.json",
+    "sha256": "76ee5c25b51b9f830e3b3b072f3304b62454a7b605872b8827c00fbcf3937d8c"
+  },
+  "history": {
+    "path": "docs/benchmarks/data/fp4-checker-history-v1.json",
+    "sha256": "1a4ecd1a086628977b0730bb9e6087d7a710cd0f138efa2b58f7b5289a856b5f"
+  },
+  "receipts": [
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/build-v1.settlement.json",
+      "sha256": "b87d0744163201990f2016cef01cceb0d41b07311f62a04e7a1a68407940e006"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/build-v2.settlement.json",
+      "sha256": "96b126c717e536330a5333bbf64d3c21405aa4bd34874bac2886c82a5100d8d7"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/build-v3.settlement.json",
+      "sha256": "6c3cf46c857e79c6818331d7ed69b75fe07dcdbc7d5fa7b6e8b4b3ab6e6330ed"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/build-v4.settlement.json",
+      "sha256": "3cc25e4e03b3b098aa5cc83c1d6b33e0a33ba98ca2e7c93e6bd71a2217f7697e"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/build-v5.settlement.json",
+      "sha256": "e5161150b0402aa1e5d63438775a718b0a46685cb4d7f1ccb90ea8285d33717c"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/cpu-acceptance-v1.settlement.json",
+      "sha256": "e2f2259eb3918a15814121fc525f7893f29aa60df3eac95993720f51707ad483"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/profile-final.settlement.json",
+      "sha256": "84915121690fe45098d1c18a5da8d3364a3c58381370b4c70971a4ecb5425e99"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/profile-v1.settlement.json",
+      "sha256": "82bf6848b8c0929d6337b2ff935e606f934562f9a98d9b0263372245323fffdc"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/profile-v2.settlement.json",
+      "sha256": "feaeee8571e41074df01b6275321fed00b73770331606725ea9e2b96c7c582b8"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/report-v1.settlement.json",
+      "sha256": "1b771ad8262c5b4b89bdb746b1b9dc3ae1df13f5a283ff840c4de3d83075ee0c"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/smoke-v1.settlement.json",
+      "sha256": "dd15957efc711b2163a968f6a17a53ad97b64e44092a08cb0edefd7bb8b70e7e"
+    },
+    {
+      "path": "artifacts/gpup-fp4-checker-v1/resources/study-v1.settlement.json",
+      "sha256": "f2ea9e42506a30d866a8a4984eda768f15d52fa5fe8136c7ed483c9fba27335a"
+    }
+  ],
+  "result": {
+    "path": "docs/benchmarks/data/fp4-checker-result-v1.json",
+    "sha256": "f23f59975bb7324e289593c7a41d99e10f56e64d7cdc6edfee39c195afe29a43"
+  },
+  "status": "passed",
+  "tests": {
+    "cached_certificate_cases": 720,
+    "feasibility_cases": 2880,
+    "isolated_rust": 21,
+    "original_core": 18,
+    "original_lp": 45,
+    "product_edges": 169,
+    "product_random_pairs": 500000,
+    "python_contracts": 4
+  }
+}

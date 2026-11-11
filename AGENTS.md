@@ -1,5 +1,56 @@
 # Agent Instructions
 
+## GPUP-FP4-CHECKER complete; exact checker and dense prepared gains (2026-11-12)
+
+SPEC-0032 / ADR-0064 deliver cached original feasibility indices, parallel rows,
+cached exact product decomposition/representability and original-tree scratch
+reuse. Full reports, signed zeros, overflow/refusals and final-tier mathematics
+remain exact. The checker remains an independent original-model CPU process.
+Historical sources, public defaults and admitted GPU/controller code are unchanged.
+
+All 960 new cells complete: 880 certificates across eleven bounded families and
+both tiers, plus 80 intentional refusals. All original audits/endpoints/certificates,
+checkpoints, recovery and physical work match. Twenty-one isolated Rust tests,
+63 original core/LP tests, four Python contracts, 102 original serial receipt
+comparisons and 32 device integration cells pass. Original four-sanitizer admission
+is reused only for its unchanged source-bound device image; no new sanitizer run.
+
+Dense512 CPU assessment improves 7.399 to 2.916 ms (2.54x). Strict FP4 complete
+prepared time improves 19.203 to 15.924 ms (1.206x); native improves to 16.527 ms.
+FP4's observed 3.8% lead has a 95% interval including parity. Both dense lanes take
+200 updates; FP4 per-update GPU work wins at 256/512, loses at 128 and small sparse
+cases. Cold setup dominates: optimized strict dense512 remains about 719 ms, with
+583 ms session setup. Broad cold FP4 ratios 0.9994/0.9934x fail retention. No public
+preset. Further targets: exact dual/transport costs and measured cold setup/teardown.
+
+Independent ceiling: 24000 CPU / 1200 GPU seconds, no historical transfers. Both
+failed development reservations and all source/log versions are preserved. Allocation closed at
+3105.019900448 CPU / 216.672767949 GPU seconds, including all failures; cleanup
+is empty and 1636 historical files remain exact. Receipts are in the report.
+GPUP-8 incomplete, TENSOR2 conditional, GPUP-9 gated. Commit locally only.
+Report: [delivery](docs/benchmarks/lp-fp4-checker.md). Older entries retain their scope.
+
+
+## GPUP-FP4-CHECKER implementation (2026-11-11)
+
+The user requests explanation of cold-retention/iteration costs and continued
+independent-checker acceleration. Implement a separate research checker with
+cached original-model term indices and exact certificate optimizations. Preserve
+all original arithmetic order, signed-zero/overflow/refusal behavior, final tiers,
+endpoint identity and independent CPU checking. Historical sources/results and
+closed allocations stay exact; no public default change. Commit locally only.
+
+New independent allocation: 24000 CPU / conditional 1200 GPU seconds, four CPUs,
+one pinned shared GPU lease, 16 GiB sampled RSS / 12 GiB device buffers. CPU phases:
+implementation 8000 (including 256 preparation), acceptance 6000, study 6000,
+reporting 3000, cleanup 1000. GPU acceptance 300 / study 900. Use the unchanged
+in-container supervisor with separate artifacts/gpup-fp4-checker-v1 reservations.
+Full failed reservations and development source versions remain preserved.
+Require exact CPU differential admission before a new same-image complete-cost
+cohort. Device kernels are unchanged; reuse their existing source-bound sanitizer
+admission. No historical timing retry or GPUP-9 release.
+
+
 ## GPUP-FP4-ACCEL complete; dense acceleration, no broad retained preset (2026-11-11)
 
 SPEC-0031 / ADR-0063 deliver cached model/checker/device preparation, retained
