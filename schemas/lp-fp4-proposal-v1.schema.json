@@ -1,0 +1,443 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lp-fp4-proposal-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "lp-fp4-proposal"
+    },
+    "execution_authorized": {
+      "const": false
+    },
+    "specification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 20
+    },
+    "retained_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ]
+    },
+    "representation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "e2m1"
+        },
+        "components": {
+          "const": [
+            2,
+            4,
+            8
+          ]
+        },
+        "tile": {
+          "const": [
+            32,
+            32
+          ]
+        },
+        "vector_block": {
+          "const": 32
+        },
+        "exponent_range": {
+          "const": [
+            -48,
+            48
+          ]
+        },
+        "scale_format": {
+          "const": "ue8m0"
+        },
+        "mma_k": {
+          "const": 64
+        },
+        "active_k": {
+          "const": 32
+        },
+        "compensation": {
+          "const": false
+        }
+      },
+      "required": [
+        "format",
+        "components",
+        "tile",
+        "vector_block",
+        "exponent_range",
+        "scale_format",
+        "mma_k",
+        "active_k",
+        "compensation"
+      ]
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "inner": {
+          "const": "approximate"
+        },
+        "final_tolerance": {
+          "const": 1e-9
+        },
+        "audit_updates": {
+          "const": 200
+        },
+        "relative_error_guard": {
+          "const": 1e-7
+        },
+        "latency_gain": {
+          "const": 1.1
+        },
+        "no_model_regression": {
+          "const": true
+        },
+        "no_coverage_loss": {
+          "const": true
+        },
+        "scientific_retries": {
+          "const": 0
+        },
+        "hardware_admitted": {
+          "const": false
+        }
+      },
+      "required": [
+        "inner",
+        "final_tolerance",
+        "audit_updates",
+        "relative_error_guard",
+        "latency_gain",
+        "no_model_regression",
+        "no_coverage_loss",
+        "scientific_retries",
+        "hardware_admitted"
+      ]
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "source_trial": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "sha256",
+          "source_trial"
+        ]
+      },
+      "minItems": 8,
+      "maxItems": 8
+    },
+    "lanes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "format": {
+            "enum": [
+              "fp64",
+              "e4m3",
+              "binary16",
+              "e2m1"
+            ]
+          },
+          "components": {
+            "enum": [
+              1,
+              2,
+              4,
+              8
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "format",
+          "components"
+        ]
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "grid": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cold_repetitions": {
+          "const": 3
+        },
+        "prepared_batches": {
+          "const": 1
+        },
+        "prepared_solves": {
+          "const": 3
+        },
+        "cells": {
+          "const": 192
+        },
+        "endpoints": {
+          "const": 288
+        },
+        "order_seed": {
+          "const": 17112
+        }
+      },
+      "required": [
+        "cold_repetitions",
+        "prepared_batches",
+        "prepared_solves",
+        "cells",
+        "endpoints",
+        "order_seed"
+      ]
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cpu_slots": {
+          "const": 4
+        },
+        "gpu_leases": {
+          "const": 1
+        },
+        "host_rss_bytes": {
+          "const": 17179869184
+        },
+        "device_bytes": {
+          "const": 12884901888
+        }
+      },
+      "required": [
+        "cpu_slots",
+        "gpu_leases",
+        "host_rss_bytes",
+        "device_bytes"
+      ]
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "prototype": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cpu_seconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "gpu_seconds": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "jobs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "wall_seconds": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "cpu_seconds": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "gpu_seconds": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "name",
+                  "count",
+                  "wall_seconds",
+                  "cpu_seconds",
+                  "gpu_seconds"
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 100
+            }
+          },
+          "required": [
+            "cpu_seconds",
+            "gpu_seconds",
+            "jobs"
+          ]
+        },
+        "study": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cpu_seconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "gpu_seconds": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "jobs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "wall_seconds": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "cpu_seconds": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "gpu_seconds": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "name",
+                  "count",
+                  "wall_seconds",
+                  "cpu_seconds",
+                  "gpu_seconds"
+                ]
+              },
+              "minItems": 1,
+              "maxItems": 100
+            }
+          },
+          "required": [
+            "cpu_seconds",
+            "gpu_seconds",
+            "jobs"
+          ]
+        }
+      },
+      "required": [
+        "prototype",
+        "study"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "execution_authorized",
+    "specification",
+    "sources",
+    "retained_result",
+    "representation",
+    "policy",
+    "models",
+    "lanes",
+    "grid",
+    "limits",
+    "resources"
+  ]
+}

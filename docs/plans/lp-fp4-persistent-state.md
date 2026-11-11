@@ -1,11 +1,19 @@
 # Persistent multi-FP4 iterations: feasibility and proposed gates
 
-Status: design assessment, 2026-11-11; no implementation or numerical admission
+Status: design assessment, 2026-11-11; CPU specification delivered; device admission pending
 Owner: numerical backend and CUDA runtime
 Last reviewed commit: b93ddc4c745a684c56915b3fb00e73c1447ec99b
 Decision: [ADR-0055](../decisions/ADR-0055-persistent-fp4-direction.md)
-Implementation: none; [roadmap](gpu-lp-precision-roadmap.md#persistent-multi-fp4-direction-2026-11-11), [backlog](../../state/backlog.yaml)
-Acceptance: sourced assessment and documentation checks now; future gates below
+Implementation: [SPEC-0025](../specifications/SPEC-0025-persistent-fp4-contract.md); [roadmap](gpu-lp-precision-roadmap.md#persistent-multi-fp4-direction-2026-11-11), [backlog](../../state/backlog.yaml)
+Acceptance: [CPU contract delivery](../benchmarks/lp-fp4-spec-gpup-fp4-spec.md); device gates below
+
+Implementation update (2026-11-11): the CPU contract is now
+[SPEC-0025](../specifications/SPEC-0025-persistent-fp4-contract.md), accepted under
+[ADR-0056](../decisions/ADR-0056-fp4-executable-contract.md). Its
+[delivery report](../benchmarks/lp-fp4-spec-gpup-fp4-spec.md) contains executable
+oracles, strict validation, the frozen comparison/resource proposal and retained
+cost bounds. The assessment below records the design motivation; device execution
+and numerical admission remain subsequent GPUP-FP4-PROTO work.
 
 ## Assessment and user-selected semantics
 

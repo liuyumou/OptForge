@@ -1,5 +1,17 @@
 # Project Status
 
+## GPUP-FP4-SPEC CPU contract (2026-11-11)
+
+[SPEC-0025](../docs/specifications/SPEC-0025-persistent-fp4-contract.md) implements
+the E2M1 reference, interval/error guards, observation-only audits, complete
+checkpoints and strict source-bound proposal/cost validation. The
+[delivery report](../docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md) records acceptance
+and the proposed 192-cell / 288-endpoint comparison. Six of 24 retained native
+cold trials fail even the ideal per-trial 10% arithmetic-only speedup bound;
+fifteen need profiles and three remain uncertified. No GPU work or FP4 speedup
+claim follows. Next is FP4-PROTO's CPU reference/admission, then conditional device
+work. Older dated entries retain their original handoffs.
+
 ## Persistent multi-FP4 planning priority (2026-11-11)
 
 The [FP4 assessment](../docs/plans/lp-fp4-persistent-state.md) and

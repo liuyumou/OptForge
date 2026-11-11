@@ -1,5 +1,52 @@
 # Active Task
 
+## GPUP-FP4-SPEC completed (2026-11-11)
+
+The executable CPU contract is delivered under SPEC-0025 / ADR-0056: bounded
+2/4/8-plane E2M1 encoding, consistent transpose tiles, exact error/projection
+oracles, original-unit observation guards, complete transactional checkpoints,
+three schemas and frozen source-bound cost/resource admission. The 32 focused
+tests and full CPU/native integration pass, including 549 Python tests, replay,
+197 documentation pages and smoke. Final accounting/source/cleanup receipts:
+docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md.
+
+The prospective comparison retains 192 cells / 288 endpoints. Retained cold
+control review: six ideal per-trial 10% speedup refusals, fifteen profile-needed
+rows, three uncertified rows and zero admitted forecasts. No GPU work, native
+solver change, final-certificate relaxation or historical scientific rerun.
+The independent 16000 CPU / zero GPU envelope remains authoritative; phase
+`proofs` in the unchanged supervisor journal implements the contracts allocation.
+
+Next ready: GPUP-FP4-PROTO, starting with CPU reference/trajectory admission.
+Prototype and study resource amounts remain proposals, not execution allocations.
+Keep native control; GPUP-8 incomplete and GPUP-9 gated. Local commit after
+acceptance; no push/publication. The implementation entry below records the
+accepted task envelope, and older handoffs remain exact.
+
+## GPUP-FP4-SPEC implementation (2026-11-11)
+
+The user requests implementation and permits as much budget as needed. Implement
+SPEC-0025 / ADR-0056 as a separate CPU-only executable numerical/cost contract:
+E2M1 component encoding, consistent matrix/transpose tile scales, bounded error
+and projection decisions, observation-only audits with full checkpoints, strict
+proposal/checkpoint/cost schemas, a frozen development comparison/resource
+proposal and focused adversarial contracts. No device executor or solver is
+implemented by this slice; FP4-PROTO remains subsequent work.
+
+New independent ceiling: 16000 CPU seconds, zero GPU; four slots, 16 GiB sampled
+host RSS. Phases: implementation 3200 including a conservative 256 preparation
+charge, contracts 1600, native integration 8000, reporting 2400, cleanup 800.
+Use the unchanged in-container CPU supervisor with a fresh journal under
+artifacts/gpup-fp4-spec-v1. Whole reservations must fit; failed/unsettled work
+retains its full charge. No historical allocation transfer or scientific rerun.
+
+Acceptance: focused independent CPU contracts and proposal/evidence binding,
+full tools/check.sh with GPUs hidden, documentation/schema consistency, diff and
+historical-source preservation, final accounting and empty cleanup. Likely writes:
+new tools/tests/schemas/config/specification/ADR/protocol/report plus current
+roadmap/backlog/handoff/changelog. Legacy numerical/checker sources and public
+defaults stay unchanged. Local commit after acceptance; no push/publication.
+
 ## FP4 persistent-state feasibility and roadmap review completed (2026-11-11)
 
 The user requests assessment and roadmap changes for multiple FP4 components,

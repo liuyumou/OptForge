@@ -1,0 +1,264 @@
+{
+  "execution_authorized": false,
+  "grid": {
+    "cells": 192,
+    "cold_repetitions": 3,
+    "endpoints": 288,
+    "order_seed": 17112,
+    "prepared_batches": 1,
+    "prepared_solves": 3
+  },
+  "kind": "lp-fp4-proposal",
+  "lanes": [
+    {
+      "components": 1,
+      "format": "fp64",
+      "id": "native"
+    },
+    {
+      "components": 4,
+      "format": "e4m3",
+      "id": "fp8-4"
+    },
+    {
+      "components": 2,
+      "format": "binary16",
+      "id": "fp16-2"
+    },
+    {
+      "components": 2,
+      "format": "e2m1",
+      "id": "fp4-2"
+    },
+    {
+      "components": 4,
+      "format": "e2m1",
+      "id": "fp4-4"
+    },
+    {
+      "components": 8,
+      "format": "e2m1",
+      "id": "fp4-8"
+    }
+  ],
+  "limits": {
+    "cpu_slots": 4,
+    "device_bytes": 12884901888,
+    "gpu_leases": 1,
+    "host_rss_bytes": 17179869184
+  },
+  "models": [
+    {
+      "id": "gpup-development-small-4",
+      "sha256": "ae8334a3741e9c72fd8e6506edde951d3e95c48dc2b6e57bad214b3b26238920",
+      "source_trial": "00-cold-0-control"
+    },
+    {
+      "id": "gpup-development-irregular-2048",
+      "sha256": "b2da8d3fb1864d4e21179666277729d923d47981418848b22e5d3957760a1c87",
+      "source_trial": "01-cold-0-control"
+    },
+    {
+      "id": "gpup-development-dense_block-1024",
+      "sha256": "64dcfc5fa12494975d083463995b284f469d4bcc2d13f0dd65231eb8c06e8fc4",
+      "source_trial": "02-cold-0-control"
+    },
+    {
+      "id": "gpup-development-scaling-256",
+      "sha256": "bbbb54bfd1778859ff60c73ef9b2d3db78ee09c21148f02d4bf3226785d827d3",
+      "source_trial": "03-cold-0-control"
+    },
+    {
+      "id": "gpup-development-scheduling-20x5",
+      "sha256": "e481e152970ef18e9e2ad0c3543cdaca63f104605943ab8e22c9234fbc4555f1",
+      "source_trial": "04-cold-0-control"
+    },
+    {
+      "id": "gpup-extension-irregular-32768",
+      "sha256": "02dc7f126a09bb4ccef2fe4f76cb14ccf6ae6fddea5e545f282e1c4edbeb7485",
+      "source_trial": "05-cold-0-control"
+    },
+    {
+      "id": "gpup-extension-dense_block-65536",
+      "sha256": "c84af57790fe9800ff28ffd13f255db4a336a450f4c413def4581258a22b9fda",
+      "source_trial": "06-cold-0-control"
+    },
+    {
+      "id": "gpup-extension-mixed-65536",
+      "sha256": "416bb549a28a9cdcf178054f285d7a310a6ede141784bdc2eb8deb0ce7d15ff3",
+      "source_trial": "07-cold-0-control"
+    }
+  ],
+  "policy": {
+    "audit_updates": 200,
+    "final_tolerance": 1e-09,
+    "hardware_admitted": false,
+    "inner": "approximate",
+    "latency_gain": 1.1,
+    "no_coverage_loss": true,
+    "no_model_regression": true,
+    "relative_error_guard": 1e-07,
+    "scientific_retries": 0
+  },
+  "representation": {
+    "active_k": 32,
+    "compensation": false,
+    "components": [
+      2,
+      4,
+      8
+    ],
+    "exponent_range": [
+      -48,
+      48
+    ],
+    "format": "e2m1",
+    "mma_k": 64,
+    "scale_format": "ue8m0",
+    "tile": [
+      32,
+      32
+    ],
+    "vector_block": 32
+  },
+  "resources": {
+    "prototype": {
+      "cpu_seconds": 19040,
+      "gpu_seconds": 1560,
+      "jobs": [
+        {
+          "count": 1,
+          "cpu_seconds": 4000,
+          "gpu_seconds": 0,
+          "name": "cpu-reference",
+          "wall_seconds": 1000
+        },
+        {
+          "count": 1,
+          "cpu_seconds": 8000,
+          "gpu_seconds": 0,
+          "name": "native-integration",
+          "wall_seconds": 2000
+        },
+        {
+          "count": 4,
+          "cpu_seconds": 240,
+          "gpu_seconds": 60,
+          "name": "device-admission",
+          "wall_seconds": 60
+        },
+        {
+          "count": 4,
+          "cpu_seconds": 240,
+          "gpu_seconds": 60,
+          "name": "sanitizer",
+          "wall_seconds": 60
+        },
+        {
+          "count": 24,
+          "cpu_seconds": 120,
+          "gpu_seconds": 30,
+          "name": "pilot",
+          "wall_seconds": 30
+        },
+        {
+          "count": 12,
+          "cpu_seconds": 120,
+          "gpu_seconds": 30,
+          "name": "diagnostics",
+          "wall_seconds": 30
+        },
+        {
+          "count": 1,
+          "cpu_seconds": 400,
+          "gpu_seconds": 0,
+          "name": "report",
+          "wall_seconds": 100
+        },
+        {
+          "count": 1,
+          "cpu_seconds": 400,
+          "gpu_seconds": 0,
+          "name": "cleanup",
+          "wall_seconds": 100
+        }
+      ]
+    },
+    "study": {
+      "cpu_seconds": 55760,
+      "gpu_seconds": 13440,
+      "jobs": [
+        {
+          "count": 144,
+          "cpu_seconds": 240,
+          "gpu_seconds": 60,
+          "name": "cold",
+          "wall_seconds": 60
+        },
+        {
+          "count": 48,
+          "cpu_seconds": 400,
+          "gpu_seconds": 100,
+          "name": "prepared",
+          "wall_seconds": 100
+        },
+        {
+          "count": 1,
+          "cpu_seconds": 800,
+          "gpu_seconds": 0,
+          "name": "coordination",
+          "wall_seconds": 200
+        },
+        {
+          "count": 1,
+          "cpu_seconds": 800,
+          "gpu_seconds": 0,
+          "name": "report",
+          "wall_seconds": 200
+        },
+        {
+          "count": 1,
+          "cpu_seconds": 400,
+          "gpu_seconds": 0,
+          "name": "cleanup",
+          "wall_seconds": 100
+        }
+      ]
+    }
+  },
+  "retained_result": {
+    "path": "docs/benchmarks/data/resident2-result-v1.json",
+    "sha256": "e5c045747bbc1ea7c6333de8b6c1c2b36ab13ae1419710c01092f0ddc40c81f1"
+  },
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "tools/lp_fp4_contract.py",
+      "sha256": "1b663e3a0f6231d8dcf665af007309416a1c2ee741bc67c0326587a6d3c2f1ea"
+    },
+    {
+      "path": "tools/lp_fp4_protocol.py",
+      "sha256": "25992ecafdda99a2e03298fc4ff2c51b00404bfa8bb971fd988a6b0570809e2c"
+    },
+    {
+      "path": "schemas/lp-fp4-proposal-v1.schema.json",
+      "sha256": "bc6073342507c22969322ce8be4aadabce044a13aabdfe394081cfae02798dda"
+    },
+    {
+      "path": "schemas/lp-fp4-checkpoint-v1.schema.json",
+      "sha256": "dc58f9e35f8c6c7805eed364624a42cf13e3417fffacf881bbcb78a027b4e3ce"
+    },
+    {
+      "path": "schemas/lp-fp4-cost-v1.schema.json",
+      "sha256": "ed2ab174336f34f0319626af08c17701efd108010f9edf569be989880b2c0308"
+    },
+    {
+      "path": "tests/integration/test_lp_fp4_contract.py",
+      "sha256": "f0a0af8df4b39cdcc43156057a67cd1c461f4ddff1d812febe7d1dcd17eed51c"
+    }
+  ],
+  "specification": {
+    "path": "docs/specifications/SPEC-0025-persistent-fp4-contract.md",
+    "sha256": "493260209421257bd97c9e0b0e19f0150baadb90ee7013949a418f85cba6a347"
+  }
+}

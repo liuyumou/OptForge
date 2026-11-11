@@ -1,5 +1,14 @@
 # Changelog
 
+## GPUP-FP4-SPEC CPU contracts (2026-11-11)
+
+- Add SPEC-0025 / ADR-0056, bounded E2M1 component oracles, consistent transpose
+  tiles, projection/error guards and observation-only checkpoint transactions.
+- Add strict proposal/checkpoint/cost schemas, source-bound cost admission and a
+  frozen 192-cell comparison/resource proposal with native, FP8/FP16 and FP4 lanes.
+- Preserve original-model FP64 checks and 1e-9 certification. This CPU-only slice
+  implements no device solver and selects no precision preset.
+
 ## GPUP-RESIDENT2 bounded native execution (2026-11-11)
 
 - Add feature-gated immutable preparation, cold/prepared research lifecycles,

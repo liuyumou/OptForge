@@ -1,5 +1,27 @@
 # Agent Instructions
 
+## GPUP-FP4-SPEC completed (2026-11-11)
+
+SPEC-0025 / ADR-0056 implement the CPU-only E2M1 representation/error/projection
+oracles, shared matrix/transpose tile contract, observation-only audit guards,
+complete checkpoints and strict source-bound proposal/cost validation. All 32
+focused tests and the full CPU/native gate pass. Delivery and accounting:
+docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md.
+
+The frozen proposal retains eight models, six native/FP8/FP16/FP4 lanes, 192 cells
+and 288 endpoints. Six of 24 retained cold control trials fail the ideal per-row
+10% arithmetic-only speed bound; fifteen need profiles, three remain uncertified.
+No performance forecast or actual MMA behavior is admitted. Approximate inner
+iterations still owe original-model FP64 checks and the unchanged 1e-9 certificate.
+
+This implementation has an independent 16000 CPU / zero GPU ceiling. All charges,
+including 256 conservative preparation seconds, are separate from closed history.
+Next ready: GPUP-FP4-PROTO, beginning with the independent CPU reference/trajectory
+admission. Its 19040 CPU / 1560 GPU and TENSOR2's 55760 CPU / 13440 GPU are proposals,
+not allocations. Device execution requires its concrete admitted package. Native
+control stays supported, GPUP-8 incomplete and GPUP-9 gated. Local commit after
+acceptance; no push/publication. Older entries retain their original scope.
+
 ## Persistent multi-FP4 feasibility direction (2026-11-11)
 
 The user prioritizes multiple FP4 components, reconstruction-free inner iterations

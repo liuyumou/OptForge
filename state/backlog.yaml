@@ -38,7 +38,7 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-FP4-SPEC
+next_ready_task: GPUP-FP4-PROTO
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-DIAG
@@ -73,15 +73,15 @@ tasks:
     acceptance: "SPEC-0024 / ADR-0053 implemented; 64 completed cells, 96 endpoints, 42/48 certificates per mode, 42 bitwise certified pairs. Cold/prepared phases and normal-limit export are explicit; mixed infinite-bound refusal unchanged. Device/transport/four sanitizers pass; full CPU native gate and exact correction bridges retained. Synchronizations drop 58 to 44 but cold geomean 1.027370x and four regressions fail latency retention. Native control remains; no preset. Report: docs/benchmarks/lp-resident2-gpup-resident2.md."
   - id: GPUP-FP4-SPEC
     title: Specify approximate persistent multi-FP4 iterations and cost admission
-    status: ready
+    status: complete
     depends_on: [GPUP-BASELINE, GPUP-RESIDENT2]
-    specification: docs/plans/lp-fp4-persistent-state.md
-    acceptance: "ADR-0055 user-selected priority; CPU-only contract and resource proposal before implementation. Define FP4 components/scales/accumulators, projection and error policy, original-model observation-only audits at 200 updates, complete checkpoints and charged escalation. No routine per-update full FP64 reconstruction/re-encoding; normalization/local combination remain charged. Bound cross-window errors and actual ISA behavior; compare native and FP8/FP16 component cost; strict 1e-9 final certificate; no numerical execution released by the roadmap review"
+    specification: docs/specifications/SPEC-0025-persistent-fp4-contract.md
+    acceptance: "SPEC-0025 / ADR-0056 implemented: 32 focused CPU contracts plus full native gate, strict E2M1/checkpoint/proposal/cost artifacts, original-unit guards and observation-only audits, frozen 192-cell/288-endpoint grid. Six of 24 retained cold rows fail the ideal per-trial 10-percent bound, fifteen need profiles, three are uncertified. No GPU, actual MMA accuracy or forecast admission. Original 1e-9 certificate and historical sources/charges unchanged. Report: docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md."
   - id: GPUP-FP4-PROTO
     title: Validate and profile fused iterations with persistent FP4 component state
-    status: planned
+    status: ready
     depends_on: [GPUP-FP4-SPEC]
-    specification: docs/plans/lp-fp4-persistent-state.md
+    specification: docs/specifications/SPEC-0025-persistent-fp4-contract.md
     acceptance: "New accepted numerical contract and resource envelope; independent CPU primitive/long-trajectory/error/recovery admission before device work; actual FP4 MMA and architecture binding, no routine FP64 state round trip, legal primal/dual dependencies, four sanitizers, full rollback/cancellation. Bounded profiles count component products, scales, packing/normalization, sparse tails, exceptions, audits, spills and work amplification; stop on numerical or complete-cost infeasibility"
   - id: GPUP-MIXED2
     title: Admit complete-delivery cost before simpler mixed precision
@@ -99,8 +99,8 @@ tasks:
     title: Compare admitted persistent FP4 iterations at complete certified cost
     status: planned
     depends_on: [GPUP-FP4-PROTO]
-    specification: docs/plans/lp-fp4-persistent-state.md
-    acceptance: "ADR-0055 conditional new protocol/allocation; prototype numerical/device gates and proposed 10-percent complete-path screening headroom before campaign. Freeze native FP64, FP8/FP16 component and persistent FP4 comparisons, plus fused/unfused and persistent/reconstructed diagnostics; original 1e-9 certificates, total cold cost, separate prepared throughput, predeclared coverage/uncertainty and all failures. Original GPUP-8 thresholds unchanged; multiple RHS is a separate throughput endpoint"
+    specification: docs/specifications/SPEC-0025-persistent-fp4-contract.md
+    acceptance: "SPEC-0025 / ADR-0056 prospective 192-cell/288-endpoint proposal; a new concrete execution allocation and prototype numerical/device/cost admission precede the campaign. Native FP64, FP8/FP16 component and persistent FP4 comparisons, with prototype fusion/persistence diagnostics. Original 1e-9 certificates, unchanged coverage, at least 1.10x cold model-median geometric mean and no certified model-median regression; report all trials/ranges and separate prepared throughput. No significance claim from three repetitions; no GPUP-8 threshold change; multiple RHS remains separate."
   - id: GPUP-PRESOLVE
     title: Add independently validated reversible presolve and postsolve
     status: planned

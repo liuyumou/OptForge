@@ -12,10 +12,13 @@ precision preset is established, and GPUP-9 remains gated. The
 [system diagnosis](docs/benchmarks/lp-system-diagnosis-2026-11-10.md) identifies
 expanded reconstruction and state-update costs as the dominant current bottleneck.
 The [revised roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-11-10)
-now prioritizes a [persistent multi-FP4 feasibility contract](docs/plans/lp-fp4-persistent-state.md):
+now prioritizes [persistent multi-FP4 iterations](docs/plans/lp-fp4-persistent-state.md):
 approximate inner iterations and fused kernels with strict final certification.
 Device work remains conditional on numerical and total-cost evidence.
-[ADR-0055](docs/decisions/ADR-0055-persistent-fp4-direction.md) records this priority.
+[SPEC-0025](docs/specifications/SPEC-0025-persistent-fp4-contract.md) implements
+the CPU numerical/transaction/cost contract; its
+[report](docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md) records the frozen proposal
+and retained-data feasibility bounds.
 [cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
 Gurobi remains unavailable and was excluded from the baseline.
 
@@ -31,8 +34,9 @@ cuOpt policy, and SPEC-0022's strict mathematical checker remains unchanged.
 
 [GPUP-RESIDENT2](docs/benchmarks/lp-resident2-gpup-resident2.md) is complete as a
 bounded negative result: certified coverage is preserved, but complete latency
-fails the retention gate. Keep the native control. GPUP-FP4-SPEC is next ready
-for CPU-only contract/cost preparation; MIXED2 and DELIVERY2 remain alternatives.
+fails the retention gate. Keep the native control. GPUP-FP4-PROTO follows the
+FP4 specification, with CPU admission before device work; MIXED2 and DELIVERY2
+remain alternatives.
 
 The earlier research slices provide the following foundation.
 Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)
