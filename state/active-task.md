@@ -1,5 +1,51 @@
 # Active Task
 
+## FP4 research PR integration accepted (2026-11-12)
+
+Local integration acceptance is complete at code commit bc0d33a. The full
+CPU/native gate passes 638 Rust tests (including the buffered transport test),
+650 Python tests, dependency/replay/artifact/docs/smoke checks. All five isolated
+FP4 packages build and pass 48 Rust / 133 Python tests. A clean local Git clone,
+with dependencies and fixtures provisioned from repository instructions, passes
+all 650 Python tests, committed-record replay and artifact validation.
+
+All 1662 prior tracked files outside the two current handoffs remain byte-exact.
+The seven admitted blank-line whitespace exceptions retain their exact source
+hash. Two failed clean-checkout launcher attempts and full charges are preserved;
+no numerical source changed and no scientific GPU cell ran. The isolated
+research CPU validation script covers packages outside the root workspace. GitHub
+rejected the optional workflow addition because the login lacks workflow scope;
+the existing hosted workflows are unchanged. The two unpublished integration
+commits are archived locally and replaced without that workflow. All thirteen
+research commits retain their original ancestry.
+
+The separate integration allocation is closed at 8007.255518236 / 12000
+CPU seconds, zero GPU, including 512 closing-administration seconds. All supervisor
+cleanup is empty; historical allocations remain closed. Acceptance and accounting:
+[acceptance](../docs/benchmarks/data/fp4-pr-acceptance-v1.json),
+[accounting](../docs/benchmarks/data/fp4-pr-accounting-v1.json).
+The user authorizes PR creation, push and normal merge; hosted CI status must be
+reported separately. Preserve commit ancestry. No follow-on performance task,
+public preset or GPUP-9 release is implied.
+
+## FP4 research PR integration authorized (2026-11-12)
+
+The user explicitly requests merging the implemented features to main through a
+PR. This authorizes local integration commits, push, PR creation and normal merge;
+older local-only handoffs retain their completed-task scope. Integrate the thirteen
+commits from RESIDENT2 through FP4-CHECKER, preserve exact scientific code/evidence,
+and report failed latency retention honestly. No new scientific GPU run or preset.
+
+Separate CPU-only integration ceiling: 12000 seconds, four slots, 16 GiB sampled
+RSS, unchanged in-container supervisor. Phases: implementation 2400 (128 preparation),
+acceptance 8000, reporting 1200, cleanup 400. GPU zero. Preserve failed reservations;
+no closed scientific funds transfer. Run full tools/check.sh, clean-checkout Python
+portability, research-package CPU acceptance and exact historical/source review.
+Inspect hosted CI; report any startup/budget limitation and use complete local
+coverage without falsifying hosted status or bypassing branch protection.
+Receipts: artifacts/gpup-fp4-pr-v1. No follow-on performance task is released.
+
+
 ## GPUP-FP4-CHECKER complete; exact checker and dense prepared gains (2026-11-12)
 
 SPEC-0032 / ADR-0064 deliver cached original feasibility indices, parallel rows,
