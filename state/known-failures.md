@@ -1,5 +1,17 @@
 # Known Failures and Limitations
 
+## MIXED2 pilot scope and retained development failures (2026-11-12)
+
+The new pilot separates diagnostic admission from the provisional 1.10x adoption
+target. Instrumentation perturbs timing, product probes are not a solver, and
+useful mixed windows, work amplification and recovery costs remain unmeasured.
+No adoption or public preset follows from eight descriptive blocks.
+
+Three development reservations are preserved in full: Rust buffer type inference
+1440 CPU seconds, an expected pre-CUDA model refusal misclassified by the sanitizer
+report parser 600 CPU / 150 GPU seconds, and a reporting syntax error 360 CPU
+seconds. Corrected versions pass; no scientific cell was retried. [Report](../docs/benchmarks/lp-mixed2-pilot.md).
+
 ## MIXED2 device work deferred by complete-cost admission (2026-11-12)
 
 The [CPU admission report](../docs/benchmarks/lp-mixed2.md) rejects cold arithmetic

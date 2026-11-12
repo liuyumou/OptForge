@@ -44,6 +44,12 @@ active_research_track: GPUP
 next_ready_task: GPUP-8-DISPOSITION
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-MIXED2-PILOT
+    title: Measure prepared matrix attribution and FP32 storage plus guard costs
+    status: complete
+    depends_on: [GPUP-MIXED2, GPUP-DELIVERY4]
+    specification: docs/specifications/SPEC-0037-mixed2-pilot.md
+    acceptance: "576 exact native solves / 528 certificates / 48 intentional refusals; 192 product cells and independent rational replay; all four new-image sanitizers; FP32 ties or loses and guarded throughput 0.350-0.429x; profiler disturbance leaves native matrix share inconclusive; 1.10x provisional adoption target separated from diagnostic admission; historical results/defaults exact; independent resource closure and portable evidence in report"
   - id: GPUP-DIAG
     title: Record system diagnosis, concrete design priorities and isolated cuOpt setup
     status: complete

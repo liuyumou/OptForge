@@ -1,5 +1,47 @@
 # Active Task
 
+## MIXED2 GPU pilot complete; product/guard cost is unfavorable (2026-11-12)
+
+SPEC-0037 / ADR-0070 separate diagnostic admission from provisional 1.10x
+adoption. Future adoption requires workload-value and sample-size justification;
+historical criteria/results remain exact. All 192 sessions / 576 strict solves
+complete: 528 certificates and 48 intentional refusals, with exact original
+endpoints, audits, checkpoints, recovery and physical work. All 192 product cells
+complete; 14864 original-product outputs pass independent rational guard checks.
+
+FP32 storage ties at dense128/256 and loses at dense512 (0.876x throughput).
+Product plus conservative guard reaches only 0.350–0.429x native throughput.
+Do not integrate this version into a mixed solver. Dense profiling inflates
+complete time 7.7–9.2x, so uninstrumented matrix attribution remains inconclusive.
+Next useful work would reduce profiling disturbance and guard/representation
+cost before any full-solver study; it is not released by this completed pilot.
+
+Full gate: 638 Rust / 694 Python; isolated 30 Rust; 204 exact CPU assessments
+of 102 retained endpoints, 48 representations, 21 process/configuration cases,
+32 device cases and four zero-error scoped sanitizers. Three failed development
+reservations preserve 2400 CPU / 150 GPU seconds and sources. No scientific retry.
+New independent 48000 CPU / 2400 GPU ceiling; final charges and exact historical
+preservation are linked in [the report](../docs/benchmarks/lp-mixed2-pilot.md).
+Allocation closed at 7288.301963996 CPU / 553.262778531 GPU seconds, including
+128 closing CPU seconds. All cleanup is empty; 1862 historical files and every
+prior backlog entry remain exact. Portable replay reproduces every study cell.
+Public defaults stay unchanged; GPUP-8 incomplete, GPUP-9 gated. Commit locally only.
+
+## MIXED2 GPU pilot authorized (2026-11-12)
+
+The user accepts separating pilot admission from adoption and authorizes GPU
+studies. SPEC-0037 / ADR-0070 govern an isolated prepared attribution and FP32
+storage product pilot. 1.10x is provisional for adoption, not a diagnostic veto.
+New independent ceiling 48000 CPU / 2400 GPU seconds; four CPUs, 16 GiB sampled
+RSS, 12 GiB device buffers, one pinned shared lease and unchanged supervisor.
+CPU phases 12000 implementation (512 preparation), 8000 native, 12000 acceptance,
+10000 study, 4000 reporting, 2000 cleanup (128 closing). GPU acceptance 1200,
+study 1200. Receipts: artifacts/gpup-mixed2-pilot-v1. Preserve failed versions
+and full charges, historical records and original 1e-9 checker authority.
+CPU/native then new-image device/four-sanitizer admission precede frozen pilot.
+No scientific retry, public default, historical regrading or GPUP-9 release.
+Record all useful findings and limits. Commit locally only. Older entries retain scope.
+
 ## GPUP-MIXED2 CPU admission complete; device work deferred (2026-11-12)
 
 SPEC-0036 / ADR-0069 implement an isolated FP32-matrix/FP64-arithmetic CPU

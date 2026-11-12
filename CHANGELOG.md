@@ -1,5 +1,13 @@
 # Changelog
 
+## MIXED2 prepared GPU pilot (2026-11-12)
+
+- Separate bounded diagnostic admission from the provisional 1.10x adoption target.
+- Deliver source-bound native profiling, FP32-storage/FP64-FMA products, conservative
+  guards, four-sanitizer admission and portable replay of 576 solves / 192 product cells.
+- Retain the negative product/guard result and inconclusive uninstrumented attribution;
+  preserve historical evidence and defaults. [Report](docs/benchmarks/lp-mixed2-pilot.md).
+
 ## GPUP-MIXED2 CPU admission (2026-11-12)
 
 - Implement the isolated FP32-matrix/FP64 CPU reference, outward local product

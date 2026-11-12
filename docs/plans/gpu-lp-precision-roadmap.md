@@ -1,5 +1,33 @@
 # GPU LP Performance Research and Implementation Roadmap
 
+## MIXED2 GPU pilot complete; retain native (2026-11-12)
+
+The [completed pilot](../benchmarks/lp-mixed2-pilot.md) retains all 576 solves
+and 192 product cells. FP32 products tie at 128/256 and lose at 512; adding
+the conservative guard gives 0.350–0.429x native product throughput. Do not
+integrate this version into a mixed solver. Dense profiling causes 7.7–9.2x
+complete-cost disturbance, leaving uninstrumented matrix share inconclusive.
+
+The provisional 1.10x adoption target no longer blocks bounded diagnostic
+admission; future adoption requires workload-value and sample-size justification.
+No historical result is regraded. Lower-overhead attribution and cheaper guards
+are next design questions, without a follow-on allocation or execution release.
+GPUP-8-DISPOSITION remains independently ready; GPUP-8 incomplete, GPUP-9 gated.
+
+## MIXED2 GPU diagnostic pilot authorized (2026-11-12)
+
+[ADR-0070](../decisions/ADR-0070-mixed2-pilot.md) separates bounded pilot admission
+from adoption. The provisional 1.10x numerical adoption target requires workload
+value and sample-size justification before a future confirmation. It does not
+block a useful, safe attribution experiment. Historical criteria remain exact.
+
+[SPEC-0037](../specifications/SPEC-0037-mixed2-pilot.md) authorizes prepared native
+matrix attribution, profiling-disturbance controls and a separate FP32-storage
+product/guard cost cohort under new 48000 CPU / 2400 GPU ceilings. Original
+certificates, all costs and unfavorable evidence remain mandatory. This is not
+a mixed solver, public preset or GPUP-8/GPUP-9 release.
+[Results and limitations](../benchmarks/lp-mixed2-pilot.md).
+
 ## MIXED2 CPU admission complete; device study deferred (2026-11-12)
 
 [SPEC-0036](../specifications/SPEC-0036-mixed2.md) and
