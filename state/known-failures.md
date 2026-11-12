@@ -1,5 +1,16 @@
 # Known Failures and Limitations
 
+## MIXED2 device work deferred by complete-cost admission (2026-11-12)
+
+The [CPU admission report](../docs/benchmarks/lp-mixed2.md) rejects cold arithmetic
+optimization: even eliminating every GPU event yields only 1.010266x dense gain.
+Prepared 1.151630x is a hypothetical whole-event 2x scenario, not a measured
+mixed result. Matrix-only attribution, work amplification and added representation,
+guard, transfer, correction/fallback/checking costs remain unknown. There is no
+GPU implementation or new mixed certificate. A separate attribution/admission
+slice is required; opaque CPU checkpoints and local bounds do not establish
+executor completeness, accumulated-state error or convergence. No default change.
+
 ## FP4 prototype has no CPU-qualified persistent lane (2026-11-11)
 
 The [frozen prototype admission](../docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md)

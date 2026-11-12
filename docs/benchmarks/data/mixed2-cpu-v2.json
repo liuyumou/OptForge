@@ -1,0 +1,69 @@
+{
+  "binary_archive": {
+    "path": "artifacts/gpup-mixed2-v1/binaries/be7b200d16e05c961a14b6284f10323801180db22f4b788c7c7b7091abe9aec1",
+    "sha256": "be7b200d16e05c961a14b6284f10323801180db22f4b788c7c7b7091abe9aec1"
+  },
+  "isolated": {
+    "path": "artifacts/gpup-mixed2-v1/resources/final-cpu-v2.settlement.json",
+    "sha256": "4843f0075087deeb91349315cf142398fa13faaddcc26713579319a96ac711af"
+  },
+  "oracle": {
+    "binary": {
+      "path": "research/lp-mixed2/target/debug/lp-mixed2",
+      "sha256": "be7b200d16e05c961a14b6284f10323801180db22f4b788c7c7b7091abe9aec1"
+    },
+    "contains_subnormal_and_cancellation": true,
+    "exact_original_and_represented_dots": true,
+    "no_solver_or_certificate_claim": true,
+    "outputs": 5121,
+    "requests": 1049,
+    "seed": 360069,
+    "source": {
+      "path": "tools/lp_mixed2_oracle.py",
+      "sha256": "caa58bc9132b04e8352826a2bcc1eaeb0b9d6169bce72189e3519604d044fc42"
+    },
+    "status": "passed"
+  },
+  "prior_oracles": [
+    {
+      "binary": {
+        "path": "research/lp-mixed2/target/debug/lp-mixed2",
+        "sha256": "07a31f3ccdc658e7f5ef3347793e979a0eb5fff67608f806decbd42ac3717a47"
+      },
+      "contains_subnormal_and_cancellation": true,
+      "exact_original_and_represented_dots": true,
+      "no_solver_or_certificate_claim": true,
+      "outputs": 5121,
+      "requests": 1049,
+      "seed": 360069,
+      "source": {
+        "path": "tools/lp_mixed2_oracle.py",
+        "sha256": "caa58bc9132b04e8352826a2bcc1eaeb0b9d6169bce72189e3519604d044fc42"
+      },
+      "status": "passed"
+    },
+    {
+      "binary": {
+        "path": "research/lp-mixed2/target/debug/lp-mixed2",
+        "sha256": "b6971640c3806dedc263969b899758c6d6c5ee0db5b24fa4a2edd55e4bb8e5a1"
+      },
+      "contains_subnormal_and_cancellation": true,
+      "exact_original_and_represented_dots": true,
+      "no_solver_or_certificate_claim": true,
+      "outputs": 5121,
+      "requests": 1049,
+      "seed": 360069,
+      "source": {
+        "path": "tools/lp_mixed2_oracle.py",
+        "sha256": "caa58bc9132b04e8352826a2bcc1eaeb0b9d6169bce72189e3519604d044fc42"
+      },
+      "status": "passed"
+    }
+  ],
+  "python_tests": 10,
+  "rust_tests": 11,
+  "sources": {
+    "research/lp-mixed2/src/lib.rs": "e03509ed40c3cbe92f4a59d108278e21ad0c0340bd43a3a40a30f4f29d5e4e98",
+    "research/lp-mixed2/src/main.rs": "c8f5afd02af92264ab0e0d176132bcf4186d9fcdeff99921ad511c367296d8d0"
+  }
+}

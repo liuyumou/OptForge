@@ -1,5 +1,15 @@
 # Changelog
 
+## GPUP-MIXED2 CPU admission (2026-11-12)
+
+- Implement the isolated FP32-matrix/FP64 CPU reference, outward local product
+  error bounds, transactional guard and charged native promotion under SPEC-0036.
+- Preserve all retained native cells in a reproducible cost gate: cold benefit
+  fails even ideal event removal; prepared opportunity needs matrix attribution
+  and measured added costs before device work.
+- Keep original 1e-9 authority and public defaults. No GPU solver or measured
+  mixed speedup is claimed. [Report](docs/benchmarks/lp-mixed2.md).
+
 ## FP4 GPU exploration and quality-tier planning (2026-11-11)
 
 - Accept ADR-0058: make a bounded actual-FP4 fused/persistent GPU pilot next,

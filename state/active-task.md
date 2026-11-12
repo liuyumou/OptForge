@@ -1,5 +1,47 @@
 # Active Task
 
+## GPUP-MIXED2 CPU admission complete; device work deferred (2026-11-12)
+
+SPEC-0036 / ADR-0069 implement an isolated FP32-matrix/FP64-arithmetic CPU
+reference, outward local product bounds, transactional rollback/native promotion
+and source-bound complete-cost admission. Eleven Rust and ten Python contracts
+pass; an independent rational oracle checks 1049 requests / 5121 outputs.
+No GPU solver or new mixed certificate is claimed. Full native acceptance passes
+638 repository Rust / 688 Python tests, replay, artifacts, docs and smoke; final
+isolated CPU checks also pass. Allocation closure is recorded in the report.
+
+All 768 retained native cells / 1536 solves remain visible, with 1408 historical
+certificates and 128 intentional refusals. All 145 scenarios per lifecycle replay.
+Even ideal removal of all GPU events gives only 1.010266x dense cold gain, below
+1.10x. Prepared hypothetical 2x whole-event gain is 1.151630x with zero overhead
+and unchanged work; matrix attribution and added costs remain unknown. These
+are forecasts, not measured mixed speedups. A separate attribution/overhead pilot
+is needed before any device study. Preserve DELIVERY4's measured context setup
+about 222 ms, owned destruction about 74 ms and unassigned outer 37–38 ms; cold
+arithmetic remains a small fraction. The opaque checkpoint reference proves byte
+restoration, not executor completeness or a global trajectory enclosure.
+
+Independent allocation: 16000 CPU / zero GPU seconds; four slots, 16 GiB sampled
+RSS, unchanged supervisor, artifacts/gpup-mixed2-v1. All historical allocations
+stay closed. GPUP-8-DISPOSITION is ready for a separately requested review only;
+no follow-on funding or execution, GPUP-8 pass, TENSOR2 or GPUP-9 release. Public
+defaults are unchanged. Commit locally only. Report: [delivery](../docs/benchmarks/lp-mixed2.md).
+Allocation closed at 2050.255325136 / 16000 CPU seconds, zero GPU,
+including 128 closing CPU seconds. No failed reservation; all cleanup is empty.
+Portable replay passes; 1838 historical files and prior handoffs remain exact.
+Older entries retain their scope.
+
+## GPUP-MIXED2 implementation (2026-11-12)
+
+The user requests MIXED2. SPEC-0036 / ADR-0069 implement the CPU-only numerical
+contract and retained-record complete-cost gate before any device admission.
+Independent 16000 CPU / zero GPU seconds: implementation 4096 (512 preparation),
+native 8000, diagnosis 2048, reporting 1200, cleanup 656 (128 closing). Four CPUs,
+16 GiB sampled RSS, unchanged supervisor and artifacts/gpup-mixed2-v1 receipts.
+Preserve failures, old evidence and original 1e-9 authority. Device work requires
+a supported cost case and separate attribution/admission; no historical transfer,
+public default or GPUP-9 change. Commit locally only. Older entries retain scope.
+
 ## GPUP-DELIVERY4 complete; exact hash acceleration and measured lifecycle costs (2026-11-12)
 
 SPEC-0035 / ADR-0068 deliver an isolated SHA-256 candidate against the strong

@@ -41,7 +41,7 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-MIXED2
+next_ready_task: GPUP-8-DISPOSITION
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-DIAG
@@ -130,10 +130,10 @@ tasks:
     acceptance: "SPEC-0035 / ADR-0068: exact SHA-256 acceleration and complete lifecycle attribution. All 192 pilot and 3072 confirmation cells match originals; 2816 certificates, 256 intentional refusals. Dense ratios 1.0760–1.0869x. No comparison meets all predeclared retention requirements. Host startup halves; measured context teardown remains about 69 ms. Full CPU/native/device acceptance and portable replay; three CPU failures fully charged. No public preset or follow-on release. Report: docs/benchmarks/lp-delivery4.md."
   - id: GPUP-MIXED2
     title: Admit complete-delivery cost before simpler mixed precision
-    status: ready
+    status: complete
     depends_on: [GPUP-BASELINE, GPUP-RESIDENT2]
-    specification: docs/plans/gpu-lp-precision-roadmap.md
-    acceptance: "ADR-0054; first CPU-only cost/numerical contract preparation from retained per-trial phases using the native control. Predeclare total-latency/coverage/uncertainty rules; quantify accelerated fraction, work multiplier and added representation/guard/transfer/correction/fallback costs. Defer device study if the cost case fails; unknown attribution requires a separately bounded measurement pilot. New protocol/allocation before execution; FP32 matrix with native FP64 state/arithmetic first, useful nonzero work and original 1e-9 independent certificate; lower-precision state separately admitted; include prior refinement/quantization failures"
+    specification: docs/specifications/SPEC-0036-mixed2.md
+    acceptance: "SPEC-0036 / ADR-0069: bounded CPU admission complete, device deferred. Isolated FP32 matrix / FP64 products, outward local error bounds and transactional guard reference; 11 Rust, 10 Python contracts and 1049 rational requests / 5121 outputs pass. All 768 retained native cells / 1536 solves and 145 scenarios per lifecycle replay. Ideal cold dense gain 1.010266x fails 1.10x; hypothetical prepared 2x whole-event gain 1.151630x leaves matrix fraction/work/added costs unknown. No GPU solver, new mixed certificate, speedup claim or public default. Separate attribution/admission required. Report: docs/benchmarks/lp-mixed2.md."
   - id: GPUP-DELIVERY2
     title: Reduce demonstrated setup and evidence delivery cost
     status: complete
@@ -160,7 +160,7 @@ tasks:
     acceptance: "Evidence-supported separate contract/allocation; fixed variables, singleton rows and bound tightening with reversible primal/dual maps; original-model validation and measured total-cost benefit; no solver-status substitution for proof"
   - id: GPUP-8-DISPOSITION
     title: Decide a funded GPUP-8 recovery or an explicit negative-result closure
-    status: planned
+    status: ready
     depends_on: [GPUP-BASELINE, GPUP-MIXED2]
     specification: docs/decisions/ADR-0047-certified-performance-roadmap.md
     acceptance: "Review retained incomplete evidence and new engineering results; no automatic retry or pass; separate accepted recovery or negative-result progression ADR required before changing the GPUP-9 gate"
