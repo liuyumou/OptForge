@@ -41,7 +41,7 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-DELIVERY3
+next_ready_task: GPUP-MIXED2
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-DIAG
@@ -136,10 +136,10 @@ tasks:
     acceptance: "SPEC-0033 / ADR-0065; docs/benchmarks/lp-delivery2.md. Batched checker transport and checker/device setup overlap with unchanged arithmetic, original inputs and fresh independent certificates. All 960 cells complete: 880 certificates and 80 intentional refusals, exact endpoints/audits/checkpoints/recovery/work. 1020 CPU replay assessments, 84 device lifecycle cases, startup cleanup, 32 smoke cells and full native gate pass. Strict dense512 cold gains about 1.40x; broad strict native/FP4 1.0584/1.0665x fails retention, prepared dense512 regresses. 1666 historical files exact; separate allocation closed, failed reservation preserved; no public preset or GPUP-9 release"
   - id: GPUP-DELIVERY3
     title: Isolate delivery mechanisms and confirm scoped cold and prepared retention
-    status: ready
+    status: complete
     depends_on: [GPUP-DELIVERY2]
-    specification: docs/plans/lp-delivery3.md
-    acceptance: "ADR-0066; separate batching/overlap controls, exact numerical and lifecycle admission, preserved diagnostic pilot, candidate frozen per lifecycle before 32 fresh confirmation blocks. Dense128/256/512 target at least 1.10x complete-time benefit; per-family maximum 2% or 0.10 ms slowdown, simultaneous median intervals and explicit inconclusive decisions. All twelve families, both lanes/tiers, independent prepared sessions, exact certificates/coverage/work. New full resource package before execution; no historical regrading, public preset or GPUP-9 release"
+    specification: docs/specifications/SPEC-0034-delivery3.md
+    acceptance: "SPEC-0034 / ADR-0067; docs/benchmarks/lp-delivery3.md. Four configurations, optional diagnostic spans, exact numerical body. 768 diagnostic and 6144 confirmation lifecycle cells; 12288 confirmation solves, 11264 certificates and 1024 intentional refusals, exact original evidence/work. Frozen overlap-only cold and batching-only prepared. Dense cold benefit 1.186–1.199x; full retention native/1e-9 and FP4/1e-7, other cold guards inconclusive. Prepared gains 4.4–6.0% do not qualify; no supported material regression. Full 638 Rust / 663 Python gate, 25 isolated Rust, 1224 CPU assessments, 77 process cases, 168 lifecycle, eight setup failures and 128 smoke cells pass. No scientific retry, default change, historical regrading or GPUP-9 release."
   - id: GPUP-TENSOR2
     title: Compare admitted persistent FP4 iterations at complete certified cost
     status: planned

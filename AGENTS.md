@@ -1,5 +1,64 @@
 # Agent Instructions
 
+## GPUP-DELIVERY3 complete; scoped cold retention, modest prepared gains (2026-11-12)
+
+SPEC-0034 / ADR-0067 deliver independent batching/overlap configurations and
+optional diagnostic spans with the numerical state machine byte-exact. All 768
+diagnostic cells / 1536 solves and 6144 confirmation cells / 12288 solves complete.
+Confirmation yields 11264 certificates across eleven bounded families at both
+tiers and 1024 intentional refusals. All endpoints/audits/certificates/checkpoints,
+recovery and per-solve work match; no scientific retry or public-default change.
+
+The frozen choices are overlap-only cold and batching-only prepared. Dense cold
+block-ratio medians are 1.186–1.199x, with every simultaneous lower bound above
+1.16x. Full retention passes native/1e-9 and FP4/1e-7; the other cold comparisons
+have inconclusive family guards. Prepared dense block-ratio medians are 1.044–1.060x; no
+prepared route passes the 1.10x gate. No statistically supported material
+regression; unresolved guards remain inconclusive, not declared safe. Shared-device
+conditions and independence limitations remain explicit; no universal preset.
+
+Strict dense512 cold: native 715.848 -> 517.069 ms; FP4 725.834 -> 515.360 ms.
+Prepared: native 22.442 -> 20.836 ms; FP4 22.031 -> 20.131 ms. Both retain 200
+updates. Prior DELIVERY2's unfavorable result is unchanged, not retrospectively
+regraded or assigned an unproved cause.
+
+Full native gate: 638 Rust / 663 Python plus replay/dependencies/artifacts/docs/
+smoke. Isolated crate: 25 Rust tests; nine new Python contracts are included above.
+1224 CPU assessments match 102 original serial endpoints; 77 process/configuration,
+168 device lifecycle, eight setup-failure and 128 smoke / 384-solve cases pass.
+Reuse only the unchanged image's original four-sanitizer admission. The 39 portable
+archives retain all scientific records and model inputs (about 81.1 MiB).
+
+Final acceptance preserves 1692 historical files and all older handoff/backlog
+entries. All 237 documentation pages validate. No failed reservation; all cleanup
+is empty. Allocation closed at 16305.576622052 / 64000 CPU and
+3232.921317950 / 7800 GPU seconds, including 128 closing-administration
+CPU seconds. [Acceptance](docs/benchmarks/data/delivery3-acceptance-v1.json),
+[accounting](docs/benchmarks/data/delivery3-accounting-v1.json). Historical
+allocations stay closed; no transfer. Keep native supported; MIXED2 is the next
+independently ready CPU alternative. TENSOR2 conditional, GPUP-8 incomplete,
+GPUP-9 gated. Local commit only; no push/publication or follow-on execution.
+Report: [delivery](docs/benchmarks/lp-delivery3.md). Older entries retain scope.
+
+## GPUP-DELIVERY3 implementation (2026-11-12)
+
+The user requests implementing DELIVERY3. SPEC-0034 / ADR-0067 authorize an
+isolated four-configuration delivery executor, optional timing instrumentation,
+256 instrumented / 512 uninstrumented diagnostic lifecycle cells, and a separate
+32-block / 6144-cell confirmation after candidate/source admission. Preserve
+exact numerical state machines, original-model checks and all historical files.
+Use ADR-0066's scoped 1.10x benefit, max(2%, 0.10 ms) family guards and simultaneous
+median intervals; cold and prepared qualify separately. No default or GPUP-9 change.
+
+Independent ceiling: 64000 CPU / 7800 GPU seconds; four CPUs, 16 GiB sampled RSS,
+12 GiB device buffers and one pinned shared GPU lease under the unchanged
+supervisor. CPU phases: implementation 10000 (512 preparation), native 12000,
+acceptance 6000, diagnosis 8000, confirmation 24000, reporting 3000, cleanup 1000.
+GPU: acceptance 600, diagnosis 1200, confirmation 6000. Whole confirmation blocks
+reserve at most 180 GPU / 720 CPU seconds each. Receipts: artifacts/gpup-delivery3-v1.
+Archive failed development sources and full charges; no frozen scientific retry
+or historical transfer. Commit locally after delivery; no push/publication.
+
 ## Delivery retention protocol revised; DELIVERY3 next (2026-11-12)
 
 The user permits protocol revision and requests the next task. ADR-0066 and

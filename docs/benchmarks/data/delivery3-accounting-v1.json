@@ -1,0 +1,1026 @@
+{
+  "cleanup_empty": true,
+  "closing_administration_cpu_seconds": 128,
+  "cpu_caps_seconds": {
+    "acceptance": 6000,
+    "cleanup": 1000,
+    "confirmation": 24000,
+    "diagnosis": 8000,
+    "implementation": 10000,
+    "native": 12000,
+    "reporting": 3000
+  },
+  "cpu_ns": {
+    "acceptance": 773453193200,
+    "cleanup": 156960063216,
+    "confirmation": 10943584903316,
+    "diagnosis": 1529623400304,
+    "implementation": 816442174124,
+    "native": 1277035468380,
+    "reporting": 808477419512
+  },
+  "cpu_seconds": 16305.576622052,
+  "gpu_caps_seconds": {
+    "acceptance": 600,
+    "confirmation": 6000,
+    "diagnosis": 1200
+  },
+  "gpu_ns": {
+    "acceptance": 148009011715,
+    "confirmation": 2707746365165,
+    "diagnosis": 377165941070
+  },
+  "gpu_seconds": 3232.92131795,
+  "historical_transfers": 0,
+  "settlements": [
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/build-v1.settlement.json",
+        "sha256": "5fce846a4148a0ee657f8525d2b22986519a5c1d0f7f7ee7ee4c63e7bc23b751"
+      },
+      "settlement": {
+        "cpu_ns": 283604453712,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 309,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/build-v1.resource.json",
+          "sha256": "1445579a48d4f5814f75fa1fe73179c9991c0c8b1c09e1ca2e183253f0a6ae0c"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-00-v1.settlement.json",
+        "sha256": "202d4b0292065376d2dedf71c8e4992d0f2bb2eb5ed17ddf1717ecbc8a109294"
+      },
+      "settlement": {
+        "cpu_ns": 349307087992,
+        "gpu": true,
+        "gpu_ns": 86446811985,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19485,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-00-v1.resource.json",
+          "sha256": "6748d0bf17d39f2a88e2ac4fe2379bf8fae759e188c9bf5921876932692b0f8a"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-01-v1.settlement.json",
+        "sha256": "3c2ee6b6d4ce69585be95f41593c45ff0f6599e27c38496522f2112ea84077e4"
+      },
+      "settlement": {
+        "cpu_ns": 355456967720,
+        "gpu": true,
+        "gpu_ns": 87985238781,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19863,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-01-v1.resource.json",
+          "sha256": "0dd41d212c3b71fd47d04927cf8b8f772a3fe7716e3fb04ff91d9ece32c269c5"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-02-v1.settlement.json",
+        "sha256": "da8bceed5622f7b940b98f676e44fb5f667ca44b26c9f53b95e667097791dffc"
+      },
+      "settlement": {
+        "cpu_ns": 360257722644,
+        "gpu": true,
+        "gpu_ns": 89184882509,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19825,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-02-v1.resource.json",
+          "sha256": "08fc2944480ad16d937da1fc37241e7b4728208873e2844993583ebb3109c6f6"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-03-v1.settlement.json",
+        "sha256": "856520b6ea71e6179663fe2686cdbb167095c8be133c5cde97f0a1880b709f3a"
+      },
+      "settlement": {
+        "cpu_ns": 362622444372,
+        "gpu": true,
+        "gpu_ns": 89775967864,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 20654,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-03-v1.resource.json",
+          "sha256": "8a90d48203ad89f41879193f93e2c0137fa99154d393c552bd2635f66d98b7de"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-04-v1.settlement.json",
+        "sha256": "2e1bedf596a91bb400209ba4d32aa8331a521cb26e88ea1b7fa96378231f14f9"
+      },
+      "settlement": {
+        "cpu_ns": 361823884736,
+        "gpu": true,
+        "gpu_ns": 89575348761,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19936,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-04-v1.resource.json",
+          "sha256": "8a912bd2d9210b1ffd73a692930bdb7834e2595b905ed9d88f27e335060b2ba2"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-05-v1.settlement.json",
+        "sha256": "75207112d3714bf6b39894dfc5c574be280eca0420f4bcefb5da7d49013edf58"
+      },
+      "settlement": {
+        "cpu_ns": 346619630140,
+        "gpu": true,
+        "gpu_ns": 85774415060,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19173,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-05-v1.resource.json",
+          "sha256": "ad3d009864c8010f624b79b0911f32d1b5c27ed966f5e8809aeb5120c33b2f88"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-06-v1.settlement.json",
+        "sha256": "e7e600a7948891916b0f3bc7e1bccd23532dada5a722bb39c0d161eb2e28dde7"
+      },
+      "settlement": {
+        "cpu_ns": 352005741708,
+        "gpu": true,
+        "gpu_ns": 87122337409,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19602,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-06-v1.resource.json",
+          "sha256": "dccf584cdc62da6b50c17882a21c17ceccfcfd1da26ab88eff2544b227dd2df9"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-07-v1.settlement.json",
+        "sha256": "b81dad240f182fe5c1b39f30944f9f8096f4613c1423fe59d53b48bbc6f35700"
+      },
+      "settlement": {
+        "cpu_ns": 353302917404,
+        "gpu": true,
+        "gpu_ns": 87444922474,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18143,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-07-v1.resource.json",
+          "sha256": "a47e29e83df1675ed432b69d538384045a53e4c6250e74a99a5e46d522fb4be1"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-08-v1.settlement.json",
+        "sha256": "205c1e3097d184274ec37b9a477938558816c5adcf5aedf0635f3574acabaaaa"
+      },
+      "settlement": {
+        "cpu_ns": 352842485748,
+        "gpu": true,
+        "gpu_ns": 87331874884,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18564,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-08-v1.resource.json",
+          "sha256": "f8d13d076bb271f1a4b542d1ad0bc9ff58ace18da5cde09a3c6c3d45f066e99f"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-09-v1.settlement.json",
+        "sha256": "d82f6edd5cf5e17c7d9aedda235514c0d7d86bb9eeffba958387d337d19abc60"
+      },
+      "settlement": {
+        "cpu_ns": 352110324156,
+        "gpu": true,
+        "gpu_ns": 87148133730,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18599,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-09-v1.resource.json",
+          "sha256": "570f7a5209e1a9c0fbf7ee799aca72f5931b64cbe3d226764684bba7f6a1303e"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-10-v1.settlement.json",
+        "sha256": "64b13cdecbf538bd01f7997a1f8eeb942995726debd061b8731f571e34ad166f"
+      },
+      "settlement": {
+        "cpu_ns": 336158484120,
+        "gpu": true,
+        "gpu_ns": 83159560379,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19508,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-10-v1.resource.json",
+          "sha256": "0a5d1031e05b0da023726c1c48264309dd80db8b3fc3d60c426ad0cf395b0546"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-11-v1.settlement.json",
+        "sha256": "1937d8a541aaeea0c8908cbab10ebd82f2c0e268cfccdf82dbc4c141a113a714"
+      },
+      "settlement": {
+        "cpu_ns": 347256442484,
+        "gpu": true,
+        "gpu_ns": 85934839636,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18629,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-11-v1.resource.json",
+          "sha256": "d217ad56e15955513f177fe263fc06a41d6d09bb0509c6a427882e34560691de"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-12-v1.settlement.json",
+        "sha256": "2145b028fd96498ca5f8b5e9f05f115a8d41f44668ca44d0c2086f8bbafec234"
+      },
+      "settlement": {
+        "cpu_ns": 348219739316,
+        "gpu": true,
+        "gpu_ns": 86174233524,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 20287,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-12-v1.resource.json",
+          "sha256": "321e7fb4f66c21716c1733baef29ab9ad3141dd78f01575342f608dc7dff7928"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-13-v1.settlement.json",
+        "sha256": "9b9cc4a4a57a159a30a8fe454499d524098b8d67a7a398aa711fe6fed66ec7c2"
+      },
+      "settlement": {
+        "cpu_ns": 349635852388,
+        "gpu": true,
+        "gpu_ns": 86530696652,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19155,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-13-v1.resource.json",
+          "sha256": "d5f4782526bb5734d3de17db90b539bbf8abd1d6974370dcec85604a1408f8ad"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-14-v1.settlement.json",
+        "sha256": "fd398332861bc7df16b7450821eb534c7598ac5c45bd94058c78c8aa68401030"
+      },
+      "settlement": {
+        "cpu_ns": 341577823024,
+        "gpu": true,
+        "gpu_ns": 84513770277,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19712,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-14-v1.resource.json",
+          "sha256": "be334c87192bf0c34b9a22fa7080574c8bfe15b4b538085408976f9021200bc0"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-15-v1.settlement.json",
+        "sha256": "f5815d73e3ee25784956c8309db72c2f4c1724bc4c6e78ad7914b1df0642a313"
+      },
+      "settlement": {
+        "cpu_ns": 331229272756,
+        "gpu": true,
+        "gpu_ns": 81926666436,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 21408,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-15-v1.resource.json",
+          "sha256": "68fcd82a4fb584d767974fbb6f6c8bba483a9d452e3fc4ee3eb6ffe7c19e167e"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-16-v1.settlement.json",
+        "sha256": "3bf5430ecf5697062e86fee0d2954a2c56804c6209b9e6cd2c4ffc74562120bb"
+      },
+      "settlement": {
+        "cpu_ns": 332031157416,
+        "gpu": true,
+        "gpu_ns": 82128242772,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18668,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-16-v1.resource.json",
+          "sha256": "65dceb618abec62278beccdc137464ecb6e4842b243a81c7fa9c3549df27d914"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-17-v1.settlement.json",
+        "sha256": "c9836a48ee881d26a3c240dbeb3b796ececb8e74beb72ef0646d01dbff27556d"
+      },
+      "settlement": {
+        "cpu_ns": 327944903592,
+        "gpu": true,
+        "gpu_ns": 81106006166,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18277,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-17-v1.resource.json",
+          "sha256": "252df9f4bfd5c014ff1d3ee6f13dd82857d3dfcba4307e2cc984f5f335cf6466"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-18-v1.settlement.json",
+        "sha256": "669f5b52a66825d87aa793c475b6ab17dcbc7a8329bd9b769a3e35da93f2133a"
+      },
+      "settlement": {
+        "cpu_ns": 328814455472,
+        "gpu": true,
+        "gpu_ns": 81324133313,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19491,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-18-v1.resource.json",
+          "sha256": "d9030d9127f8befbad3291967e7fe53a46ad95cfa2380520d594ce7658c337c5"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-19-v1.settlement.json",
+        "sha256": "51cf7d02ed645fe03e2850e641a2ada4d7648d3dbbd585262592d0845d97ff8d"
+      },
+      "settlement": {
+        "cpu_ns": 328384277092,
+        "gpu": true,
+        "gpu_ns": 81215736762,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18508,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-19-v1.resource.json",
+          "sha256": "be54ef33c0a40a92505a9ec5653e64f510cad5ca118f01434493dbe0a4b90786"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-20-v1.settlement.json",
+        "sha256": "980dc1e0b0374da0a52265bee6e96873db6be50fcc242305e4abf54818ca232c"
+      },
+      "settlement": {
+        "cpu_ns": 336632113592,
+        "gpu": true,
+        "gpu_ns": 83278246547,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19618,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-20-v1.resource.json",
+          "sha256": "58c0b19d7316134892a2c0288119fac6b5b306f6e060399999395475ca53901f"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-21-v1.settlement.json",
+        "sha256": "3a242bfb0b04f903f5508fb1020a4720e6a6e5a2b416305493b75218c07100f2"
+      },
+      "settlement": {
+        "cpu_ns": 336675591712,
+        "gpu": true,
+        "gpu_ns": 83289571114,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18541,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-21-v1.resource.json",
+          "sha256": "0f827bbf34ac5a247b6663f89c4f664b9ad3f670bf74f29f620674b138708489"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-22-v1.settlement.json",
+        "sha256": "f7044aec992e382f8388d795b519ac1f40466fa62da484c7c46deb0e966aed06"
+      },
+      "settlement": {
+        "cpu_ns": 336396031664,
+        "gpu": true,
+        "gpu_ns": 83219721121,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18714,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-22-v1.resource.json",
+          "sha256": "f2daa798453f8492a4adb2e01d48ee76785eb3a5748e1980049de620aab926fc"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-23-v1.settlement.json",
+        "sha256": "49b8bb2c8b0468f6d6a10d438c08c47ec5998244558c50484b000d060c0bdcf3"
+      },
+      "settlement": {
+        "cpu_ns": 336425634196,
+        "gpu": true,
+        "gpu_ns": 83226378654,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18561,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-23-v1.resource.json",
+          "sha256": "6f159ab81335ae8a8d21fd8e6bef9962bcab5a6d17f5dc41a633b892eeb5661a"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-24-v1.settlement.json",
+        "sha256": "541ee055922a1e878d4d704fcd736a09a45c21ffa02a4506405a889b49758593"
+      },
+      "settlement": {
+        "cpu_ns": 332699277928,
+        "gpu": true,
+        "gpu_ns": 82294649450,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18818,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-24-v1.resource.json",
+          "sha256": "f7410044544b641cab37b4b7df3e1941cde06291ed2df19badd702d6603d2b99"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-25-v1.settlement.json",
+        "sha256": "55f45f94106d0d1e578812804d114395f587fbed4204fd45b9812386e5e741ef"
+      },
+      "settlement": {
+        "cpu_ns": 336514827104,
+        "gpu": true,
+        "gpu_ns": 83249908356,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19484,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-25-v1.resource.json",
+          "sha256": "a1c825b78321e1cc0941ec402a2c1a56a9931de9aa55f38253b63b7a434190f1"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-26-v1.settlement.json",
+        "sha256": "75be1bf27141dd5a66c456a916d5ffd1c7bc20ccb51a939baf7b2fd98ad362d0"
+      },
+      "settlement": {
+        "cpu_ns": 337302584268,
+        "gpu": true,
+        "gpu_ns": 83446340611,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 18931,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-26-v1.resource.json",
+          "sha256": "17458e27856a7e90c3fdbd4e433c5272200c4d171f81fea27d1c257131178c39"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-27-v1.settlement.json",
+        "sha256": "b1fd8caf43ac791417b6c7ef365e6cb9ad805e29ebbf63059d22d162a3c6af59"
+      },
+      "settlement": {
+        "cpu_ns": 337201262132,
+        "gpu": true,
+        "gpu_ns": 83421790502,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19402,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-27-v1.resource.json",
+          "sha256": "ee8f908b2ed796e79b4de6b901bde2731d028fa8fba8c7d8005c28e15d38ac4f"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-28-v1.settlement.json",
+        "sha256": "c3d7344298bb45d24622e534f5d228ff392a94cbde7da26eaf374c6a3973b0cd"
+      },
+      "settlement": {
+        "cpu_ns": 336309563340,
+        "gpu": true,
+        "gpu_ns": 83197601883,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19481,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-28-v1.resource.json",
+          "sha256": "573e9028a0239b69416c735187239b0eef9ea69590b184cd8335f41fddf6281c"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-29-v1.settlement.json",
+        "sha256": "f7e717adbfc48ddf96b5a54cedea5b89b416a56e30e62c84420bd1012d271f67"
+      },
+      "settlement": {
+        "cpu_ns": 333989796168,
+        "gpu": true,
+        "gpu_ns": 82617993731,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19274,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-29-v1.resource.json",
+          "sha256": "69495b5b6674b9a57355ea834ce9ca08721f1249be0eae26925c379ebae79abd"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-30-v1.settlement.json",
+        "sha256": "35f4ad3cef1996a66ae7c356f53f6a40de871803d4911ca5f08d9b6a2f19f15f"
+      },
+      "settlement": {
+        "cpu_ns": 332794295492,
+        "gpu": true,
+        "gpu_ns": 82318457393,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19879,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-30-v1.resource.json",
+          "sha256": "744d4eb4ba244af6303307483904079eae7cb8e8633063d290c919336b01b6f1"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-31-v1.settlement.json",
+        "sha256": "818f11e09b412d87851d40a98eb5609e2bec5bf00733ba0bb58900c5b9422a83"
+      },
+      "settlement": {
+        "cpu_ns": 333042311440,
+        "gpu": true,
+        "gpu_ns": 82381886429,
+        "overrun": false,
+        "phase": "confirmation",
+        "queue_ns": 19403,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-block-31-v1.resource.json",
+          "sha256": "f189166cbfb4a73fbc6608a289390cb4cfe831bbeca0a870890d486c1afed2db"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-collect-v1.settlement.json",
+        "sha256": "7ae1ae0ec7bc14920a599f5ce813f3659354ba368ef241fe810d78d7151af27b"
+      },
+      "settlement": {
+        "cpu_ns": 7442577040,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 277,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-collect-v1.resource.json",
+          "sha256": "4126d3341a859a0c1e4731b36981ca2d6a877c708b34c20c23dafa5eba0cc963"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/confirmation-freeze-v1.settlement.json",
+        "sha256": "a7458108dcebae380acb467ae1e6b9773e203608a2b89943e407a6752b180937"
+      },
+      "settlement": {
+        "cpu_ns": 6360493716,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 309,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/confirmation-freeze-v1.resource.json",
+          "sha256": "9e5cf337ddd527bc4c6528bcfcb292314dc0590573f2110b6d71c66c5ed93668"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/cpu-acceptance-v1.settlement.json",
+        "sha256": "94733352b05afa67ba3084e14853686707d878f726e67e2b37322c81a142cc31"
+      },
+      "settlement": {
+        "cpu_ns": 177923861180,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 364,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/cpu-acceptance-v1.resource.json",
+          "sha256": "be6ba45c5ddde5f360429d6efdfec847c9405494eb25c111583fdff55a54aad8"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/device-acceptance-v1.settlement.json",
+        "sha256": "66029fd637eb61a8b4f59ff22bbababaf40516ea1a9c7a0cf4843e4bce8b7121"
+      },
+      "settlement": {
+        "cpu_ns": 595529332020,
+        "gpu": true,
+        "gpu_ns": 148009011715,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 22422,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/device-acceptance-v1.resource.json",
+          "sha256": "6e817b3a299fb6eb355352895215463b03b48441141b8096facfc1c36fed82c2"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/diagnosis-summary-v1.settlement.json",
+        "sha256": "cc261151c8d2c904884e348985819338414101be1de5e62b0cd3da83c4693949"
+      },
+      "settlement": {
+        "cpu_ns": 5831472788,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 344,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/diagnosis-summary-v1.resource.json",
+          "sha256": "947652878b1c09bebab24f45dfad8c01d852fd989fababb00b955454f04776e5"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-block-00-v1.settlement.json",
+        "sha256": "00c8e9988dc8fef5a370cdae7b47981b85ab931d5230e7a8d553df2d5bc12940"
+      },
+      "settlement": {
+        "cpu_ns": 254822641012,
+        "gpu": true,
+        "gpu_ns": 62827697528,
+        "overrun": false,
+        "phase": "diagnosis",
+        "queue_ns": 20737,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-block-00-v1.resource.json",
+          "sha256": "6a993ddc6d98c05bcbb31fc05ef5239b029eeda5f01873534c91c363854913f1"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-block-01-v1.settlement.json",
+        "sha256": "efc51f7750cf52147efcf03b8fac204c35adb0dbef3af2ea90a6c18ef8b74984"
+      },
+      "settlement": {
+        "cpu_ns": 257406933880,
+        "gpu": true,
+        "gpu_ns": 63480022627,
+        "overrun": false,
+        "phase": "diagnosis",
+        "queue_ns": 22211,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-block-01-v1.resource.json",
+          "sha256": "b76ddb113a8aaa5c90fc12688d818b435bf5880e9c78e21f8884f82cf5447ab1"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-block-02-v1.settlement.json",
+        "sha256": "7401372ffbd6f7951e2482c216fc7182b9141f077a340b4396f119a04722fb48"
+      },
+      "settlement": {
+        "cpu_ns": 258116513872,
+        "gpu": true,
+        "gpu_ns": 63657110226,
+        "overrun": false,
+        "phase": "diagnosis",
+        "queue_ns": 22849,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-block-02-v1.resource.json",
+          "sha256": "ef2f5d633a3213e52be09614b45923223c4f3640c2dcb3611bd250873afb2e8f"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-block-03-v1.settlement.json",
+        "sha256": "6c4257e93bf02fe3d0e4684299daf7c7d742e17a69d7556bd6ed5babb5076615"
+      },
+      "settlement": {
+        "cpu_ns": 257430042332,
+        "gpu": true,
+        "gpu_ns": 63486597689,
+        "overrun": false,
+        "phase": "diagnosis",
+        "queue_ns": 23202,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-block-03-v1.resource.json",
+          "sha256": "71231d6b454fb31edaef0db9a23a8b56745abd4634a29a377c8da79e9df85df6"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-collect-v1.settlement.json",
+        "sha256": "75b20f2d8c2e6b1b2b41dfc82c3e2276cdf85d31c64c54a40a41c46379c75f10"
+      },
+      "settlement": {
+        "cpu_ns": 4898811672,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 407,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-collect-v1.resource.json",
+          "sha256": "96733676bfc68231389af0030852429f70bcb2e6bcdb0a2b96f40435ae9494cf"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-freeze-v1.settlement.json",
+        "sha256": "7ccfdeddabc2941fbabed9987d587c4167e94e1cdb19fe7afc19fbc80708e8f6"
+      },
+      "settlement": {
+        "cpu_ns": 4747590028,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 340,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/diagnostic-freeze-v1.resource.json",
+          "sha256": "0e436a4a8b5d77fd846d1d41d509e82ffad167a0c5686caca3a9d8eb9dd3a46d"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/final-acceptance-v1.settlement.json",
+        "sha256": "41b14b0c311caab90945da6392c7343a66578f5ebc2f0a3b1d1178f5abcb2fb0"
+      },
+      "settlement": {
+        "cpu_ns": 28960063216,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "cleanup",
+        "queue_ns": 395,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/final-acceptance-v1.resource.json",
+          "sha256": "519c9342e2d29e527de44bbcbd8bbca3791fd2c52d99c42a6a5a9155b4cdd930"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/native-gate-v1.settlement.json",
+        "sha256": "0c3bb01f847505c8f7eaf97c6ce34805e10ef3a5fc04b09bc9166b0718726bf7"
+      },
+      "settlement": {
+        "cpu_ns": 1277035468380,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "queue_ns": 369,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/native-gate-v1.resource.json",
+          "sha256": "da4985cf4fa767988f3c23d07320d3bb1b1f70fb3b838383013127b607d63c37"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/package-v1.settlement.json",
+        "sha256": "4555353fc83b0cef9771a1040d652e15898f9b844b4a32d4578f02ff097f91f7"
+      },
+      "settlement": {
+        "cpu_ns": 785452018488,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 291,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/package-v1.resource.json",
+          "sha256": "f974fbbc9b611065eff49aac933a86e3d67b88c5348d457baf1e23503cca7d3c"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/profile-block-00-v1.settlement.json",
+        "sha256": "dd307873955dd14eb1e55bc67ec4e70abaa14d15e76515529612f632137248c7"
+      },
+      "settlement": {
+        "cpu_ns": 251307073896,
+        "gpu": true,
+        "gpu_ns": 61949091078,
+        "overrun": false,
+        "phase": "diagnosis",
+        "queue_ns": 20763,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/profile-block-00-v1.resource.json",
+          "sha256": "27663dcbe7fee7eb70a85e266b45eef5ad245246daebdfa02202c41b9266978a"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/profile-block-01-v1.settlement.json",
+        "sha256": "ea2c4b2d48e81f807386bdd30088e7a14548edb270a629c0ba453a0482873010"
+      },
+      "settlement": {
+        "cpu_ns": 250540195312,
+        "gpu": true,
+        "gpu_ns": 61765421922,
+        "overrun": false,
+        "phase": "diagnosis",
+        "queue_ns": 23360,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/profile-block-01-v1.resource.json",
+          "sha256": "8930e2e3c3f0902f4b3f2f930a17026b1a0bc50357c00425671673f8a578c5aa"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/profile-collect-v1.settlement.json",
+        "sha256": "45a4c0466e59b9b27b5204cb48a191e15d38fe9a4a73e1fab88922fc855b94f1"
+      },
+      "settlement": {
+        "cpu_ns": 4852539524,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 559,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/profile-collect-v1.resource.json",
+          "sha256": "3c46829f6841d0f82f6b983e64b0f593072e9b6789ca11836f5dc8f274104796"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/profile-freeze-v1.settlement.json",
+        "sha256": "6d707120b5a2d3cb7605ffd74d7b7e6d569d302217c40c016afcd0395c0bd165"
+      },
+      "settlement": {
+        "cpu_ns": 4705847648,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 366,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/profile-freeze-v1.resource.json",
+          "sha256": "c62d6b7d40c23a150f11bebf54c9a4bcabbdbdc2ef9b688ebb7266acea407efe"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery3-v1/resources/selection-v1.settlement.json",
+        "sha256": "bfdfdfcf2b1ba4789d7108826b29971584b196c964348882db7d2f774d90bba8"
+      },
+      "settlement": {
+        "cpu_ns": 5023789020,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 507,
+        "resource": {
+          "path": "artifacts/gpup-delivery3-v1/resources/selection-v1.resource.json",
+          "sha256": "b1bfa6d6d0f0a3b19e45f9d381227c8b0f6c33ad9e2349dab6acd6bc8a1ea95b"
+        },
+        "status": "passed"
+      }
+    }
+  ],
+  "status": "closed"
+}
