@@ -1,12 +1,25 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
+Status: DELIVERY2 complete with dense cold gains but failed broad retention; FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: 59ae62d872b30885a57e02412b1f44478769ef16
+Last reviewed commit: 8fe3a20
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
 Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md), [cost gates](../decisions/ADR-0054-resident2-cost-priorities.md), [FP4 GPU exploration and quality tiers](../decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
 Evidence: [RESIDENT2 result](../benchmarks/lp-resident2-gpup-resident2.md), [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+
+## DELIVERY2 complete (2026-11-12)
+
+[GPUP-DELIVERY2](../benchmarks/lp-delivery2.md) implements batched independent-
+checker transport and overlapping original-model checker/device setup under
+[SPEC-0033](../specifications/SPEC-0033-delivery2.md) /
+[ADR-0065](../decisions/ADR-0065-delivery2.md). All 960 cells complete with exact
+retained numerical evidence: 880 certificates and 80 intentional refusals.
+Strict dense512 cold delivery improves about 1.40x in both native and FP4 lanes.
+Broad strict cold ratios 1.0584/1.0665x fail 1.10x/no-regression retention, and
+prepared dense512 medians regress despite faster checker transport. Keep the
+supported native solver and public defaults unchanged. The separate allocation
+is closed; historical budgets remain closed and GPUP-9 remains gated.
 
 ## Exact checker acceleration (2026-11-12)
 
@@ -310,7 +323,7 @@ execution follows this documentation update.
 | **GPUP-FP4-RECOVERY-SPEC**, complete, CPU-only | [SPEC-0029](../specifications/SPEC-0029-fp4-recovery-policy.md) delivers local accounting, operational guards, complete checkpoints, dual-tier receipt validation and a non-executable integration proposal | New versioned contract; empirical inner error never masquerades as a proof; original-model FP64 audits and independent final certification at the declared 1e-7/1e-9 tier; no automatic old scientific retry |
 | **GPUP-FP4-INTEGRATE**, complete; retention fails | [SPEC-0030](../specifications/SPEC-0030-fp4-integration.md): coupled recovery and certificates admitted; 672 cells complete, same coverage, no retained speedup | Nontrivial trajectory, full checkpoint/cancellation/recovery and original-model endpoint admission; a useful certified-1e-7 lane may proceed without a strict pass; retain all costs and failures |
 | **GPUP-MIXED2**, simpler alternative, dependency-ready | CPU-only complete-delivery cost admission against the native control, then separately admitted FP32 matrix / FP64 state-and-compute; lower-precision state is a later candidate; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Predeclared latency/coverage rule and accelerated cost fraction, iteration/guard/transfer/fallback costs; defer device study if the cost case fails. Explicit matrix-error/residual contract, useful nonzero work and original 1e-9 certificate |
-| **GPUP-DELIVERY2**, conditional alternative before precision device work | Target demonstrated parsing/preparation/checker/provenance/transport overhead using retained native phase evidence; depends on GPUP-RESIDENT2 | New bounded protocol/allocation; exact original inputs and fresh independent certificates; matched native controls isolate transport changes. Cold total cost and prepared throughput remain separate; no unmeasured residual assigned to removable overhead |
+| **GPUP-DELIVERY2**, complete; broad retention fails | [SPEC-0033 delivery](../benchmarks/lp-delivery2.md): batched checker IPC and overlapping independent checker/device setup; depends on GPUP-RESIDENT2 | 960 cells / 880 certificates / 80 intentional refusals; exact numerical evidence. Strict dense512 cold improves about 1.40x for native and FP4; broad 1.0584/1.0665x fails retention. Prepared dense512 regresses; no preset or GPUP-9 release |
 | **GPUP-TENSOR2**, conditional FP4 study | New versioned native FP64, FP8/FP16 and FP4 cohorts at explicit 1e-7/1e-9 final tiers; depends on GPUP-FP4-INTEGRATE | Integration and complete-cost admission before campaign; at least 1.10x cold model-median geometric mean, no certified model-median regression or coverage loss against same-tolerance control; uncertainty and complete cold/prepared costs; old proposal/GPUP-8 criteria unchanged |
 | **GPUP-PRESOLVE**, planned | Minimal reversible fixed-variable, singleton and bound-tightening transformations plus postsolve maps; depends on GPUP-BASELINE evidence | Independent original-model validation of postsolved primal/dual information and statuses; benchmark saved total work; reject transformations that cannot preserve required proof information |
 | **GPUP-8-DISPOSITION**, planned review | Review new engineering evidence and the retained incomplete GPUP-8 record; depends on GPUP-BASELINE and GPUP-MIXED2 | Either propose a separately funded bounded recovery with unchanged GPUP-8 criteria, or seek an explicit negative-result closure and superseding progression decision; neither marks GPUP-8 passed by default |

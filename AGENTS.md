@@ -1,5 +1,55 @@
 # Agent Instructions
 
+## GPUP-DELIVERY2 complete; dense cold gains, broad retention fails (2026-11-12)
+
+SPEC-0033 / ADR-0065 deliver batched independent-checker pipe transport and
+checker/device setup overlap in an isolated research executor. Exact numerical
+orchestration, original-model authority, public defaults and old sources remain.
+All 960 cells complete: 880 certificates across eleven bounded families at both
+tiers, plus 80 intentional refusals. All audits/endpoints/certificates/checkpoints,
+recovery and physical work match the retained originals, including zero signs.
+
+Strict dense512 cold native improves 700.889 to 500.806 ms (1.3995x), FP4
+710.809 to 509.217 ms (1.3959x). About 194 ms of independent checker preparation
+is overlapped with device setup. Broad strict cold geometric means 1.0584/1.0665x
+fail 1.10x/no-regression retention. Prepared strict dense512 total medians regress,
+despite faster checker transport; prepared broad intervals include parity.
+Keep native supported and select no public preset.
+
+Full native gate: 638 Rust / 653 Python plus replay/dependencies/artifacts/docs/
+smoke. Isolated crate: 24 Rust tests; final four Python guards cover the added
+partial-transcript regression (654 distinct Python tests across the runs).
+1020 fresh CPU assessments match 102 serial endpoints; 20 process cases,
+84 device lifecycle cases, one setup-failure cleanup and 32 integration cells pass.
+Reuse only the unchanged device image's original four-sanitizer admission.
+
+1666 historical tracked files outside current navigation/handoffs and all older
+handoff text remain exact. One failed environment gate retains its full 4000 CPU
+seconds and source/log snapshot; prelaunch permission/CLI refusals are preserved.
+No scientific cell retry. Independent allocation closed at 7489.258294208 / 32000
+CPU and 231.550283498 / 1800 GPU seconds, including 128 closing-administration CPU
+seconds. Cleanup is empty; no historical transfer. No TENSOR2 or GPUP-9 release.
+Local commit only. Report: [delivery](docs/benchmarks/lp-delivery2.md). Older entries retain scope.
+
+## GPUP-DELIVERY2 implementation (2026-11-12)
+
+The user requests GPUP-DELIVERY2 implementation. SPEC-0033 / ADR-0065 select
+bounded checker transport batching and independent checker/device setup overlap,
+with identical numerical orchestration, exact original inputs and fresh original-
+model certificates. Matched native and FP4 controls use the same executable.
+Cold complete delivery and prepared throughput remain separate. Historical code,
+results, allocations and public defaults stay exact; no GPUP-9 release.
+
+Independent ceiling: 32000 CPU / conditional 1800 GPU seconds, four slots,
+16 GiB sampled RSS / 12 GiB device buffers, unchanged in-container supervisor.
+CPU phases: implementation 8000 (512 preparation), acceptance 12000, study 8000,
+reporting 3000, cleanup 1000. GPU acceptance 300 / study 1500. Receipts:
+artifacts/gpup-delivery2-v1. Preserve failed reservations and development versions;
+no automatic frozen scientific retry or historical transfers. CPU differential
+and lifecycle admission precede device smoke and a separately frozen cohort.
+Reuse the exact unchanged device image's sanitizer admission. Commit locally;
+no push or publication is requested for this task.
+
 ## FP4 research PR integration accepted (2026-11-12)
 
 Local integration acceptance is complete at code commit bc0d33a. The full

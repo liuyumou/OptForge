@@ -130,10 +130,10 @@ tasks:
     acceptance: "ADR-0054; first CPU-only cost/numerical contract preparation from retained per-trial phases using the native control. Predeclare total-latency/coverage/uncertainty rules; quantify accelerated fraction, work multiplier and added representation/guard/transfer/correction/fallback costs. Defer device study if the cost case fails; unknown attribution requires a separately bounded measurement pilot. New protocol/allocation before execution; FP32 matrix with native FP64 state/arithmetic first, useful nonzero work and original 1e-9 independent certificate; lower-precision state separately admitted; include prior refinement/quantization failures"
   - id: GPUP-DELIVERY2
     title: Reduce demonstrated setup and evidence delivery cost
-    status: planned
+    status: complete
     depends_on: [GPUP-RESIDENT2]
-    specification: docs/decisions/ADR-0054-resident2-cost-priorities.md
-    acceptance: "Conditional alternative before precision device work when its cost case is stronger; not an automatic MIXED2 prerequisite. New bounded protocol/allocation; target demonstrated parsing/preparation/checker/provenance/transport overhead with matched native controls. Preserve exact inputs, fresh independent original-model certificates, source bindings and complete durable output; cold total latency and prepared throughput separate; no unmeasured residual assigned to removable overhead"
+    specification: docs/specifications/SPEC-0033-delivery2.md
+    acceptance: "SPEC-0033 / ADR-0065; docs/benchmarks/lp-delivery2.md. Batched checker transport and checker/device setup overlap with unchanged arithmetic, original inputs and fresh independent certificates. All 960 cells complete: 880 certificates and 80 intentional refusals, exact endpoints/audits/checkpoints/recovery/work. 1020 CPU replay assessments, 84 device lifecycle cases, startup cleanup, 32 smoke cells and full native gate pass. Strict dense512 cold gains about 1.40x; broad strict native/FP4 1.0584/1.0665x fails retention, prepared dense512 regresses. 1666 historical files exact; separate allocation closed, failed reservation preserved; no public preset or GPUP-9 release"
   - id: GPUP-TENSOR2
     title: Compare admitted persistent FP4 iterations at complete certified cost
     status: planned

@@ -1,0 +1,203 @@
+{
+  "all_settlements": [
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery2-v1/resources/build-v1.settlement.json",
+        "sha256": "5532b33c4b9602749ce4eacbc19d3d69c8d0788a50cf2bc3a947da71c36e15d8"
+      },
+      "settlement": {
+        "cpu_ns": 280213091792,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 321,
+        "resource": {
+          "path": "artifacts/gpup-delivery2-v1/resources/build-v1.resource.json",
+          "sha256": "2d205e5ec3ebc37c8cdbbb7e69f2729ce2e93d88638a3a5930b665734c7f1fb7"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery2-v1/resources/cpu-acceptance-v1.settlement.json",
+        "sha256": "ae685a25c98fc84c3436a3428f2717510b3fb7aa582c69a104636bff17783501"
+      },
+      "settlement": {
+        "cpu_ns": 192697869084,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 385,
+        "resource": {
+          "path": "artifacts/gpup-delivery2-v1/resources/cpu-acceptance-v1.resource.json",
+          "sha256": "36b21c938b31341560269995298178f0df180e36c2038f87eb80c6a1350f03e9"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery2-v1/resources/delivery-v1.settlement.json",
+        "sha256": "1cdbe1ab85b6da590acd734fd0782dd4c70475c9a97f5b5034ee86e9e7c1bd1f"
+      },
+      "settlement": {
+        "cpu_ns": 78826997600,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 348,
+        "resource": {
+          "path": "artifacts/gpup-delivery2-v1/resources/delivery-v1.resource.json",
+          "sha256": "22efabe270bcce7c5a7ed51a6be1124a8e3da70914527e5cd9802caa8eaa1ca3"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery2-v1/resources/device-acceptance-v1.settlement.json",
+        "sha256": "5a1959cf5cf768ff53557f44b5fe8b4911f95c9aadfcb76ca0603e20fce9a4c8"
+      },
+      "settlement": {
+        "cpu_ns": 118194625188,
+        "gpu": true,
+        "gpu_ns": 28677190941,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 23341,
+        "resource": {
+          "path": "artifacts/gpup-delivery2-v1/resources/device-acceptance-v1.resource.json",
+          "sha256": "51a43ba83dc60e28f1467096fe0e4bf7539ac2e6a4f3ecac45b3116ebab1629f"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery2-v1/resources/native-gate-v1.settlement.json",
+        "sha256": "371ff79010d409c9705c25f19ea80435757dde59e7a75f3cb9511fdf0a6df4db"
+      },
+      "settlement": {
+        "cpu_ns": 4000000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 351,
+        "resource": {
+          "path": "artifacts/gpup-delivery2-v1/resources/native-gate-v1.resource.json",
+          "sha256": "e379ea26469c78548ed27b670156b370fcee3e71800fab23bf02d09201359f27"
+        },
+        "status": "refused"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery2-v1/resources/native-gate-v2.settlement.json",
+        "sha256": "5e0284412193789f26bee06582bdac492e39e57f117202fc6176815a817718e4"
+      },
+      "settlement": {
+        "cpu_ns": 1287884316656,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 326,
+        "resource": {
+          "path": "artifacts/gpup-delivery2-v1/resources/native-gate-v2.resource.json",
+          "sha256": "4c7bd0c038bee4c0d2989a095e897f899e083ae5f6c99941ce953dd73750bab0"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery2-v1/resources/report-v1.settlement.json",
+        "sha256": "7cc9dee2061146382bda0c174def523230cb6711185d0f7508ded6becc50e2b5"
+      },
+      "settlement": {
+        "cpu_ns": 69833232104,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 339,
+        "resource": {
+          "path": "artifacts/gpup-delivery2-v1/resources/report-v1.resource.json",
+          "sha256": "08b477ed288fa4036913de5b81239cc73f7c1c4f5325dc8a3e80677176c4148a"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery2-v1/resources/software-tail-v1.settlement.json",
+        "sha256": "9121b74f7b78082e51083a01f8d6f84656e098804603b9bc480ed6d5d86f6605"
+      },
+      "settlement": {
+        "cpu_ns": 6643229796,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 420,
+        "resource": {
+          "path": "artifacts/gpup-delivery2-v1/resources/software-tail-v1.resource.json",
+          "sha256": "48b18bbbc23e84b268a33a11ff81d8c7a55775c2e94488bd6b6e6a382ca2b5e3"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery2-v1/resources/study-v1.settlement.json",
+        "sha256": "fdf3faa15da0b3853f2e573b501665a4d0898c79120f2ad416b8f071dcc55b50"
+      },
+      "settlement": {
+        "cpu_ns": 814964931988,
+        "gpu": true,
+        "gpu_ns": 202873092557,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 22675,
+        "resource": {
+          "path": "artifacts/gpup-delivery2-v1/resources/study-v1.resource.json",
+          "sha256": "e1610b13697e0b72fea7eee936460440bfa6e8e3a534cffa2a6957687dbdf64f"
+        },
+        "status": "passed"
+      }
+    }
+  ],
+  "cleanup_empty": true,
+  "closing_administration_cpu_seconds": 128,
+  "cpu_caps_seconds": {
+    "acceptance": 12000,
+    "cleanup": 1000,
+    "implementation": 8000,
+    "reporting": 3000,
+    "study": 8000
+  },
+  "cpu_ns": {
+    "acceptance": 5605420040724,
+    "cleanup": 128000000000,
+    "implementation": 792213091792,
+    "reporting": 148660229704,
+    "study": 814964931988
+  },
+  "cpu_seconds": 7489.258294208,
+  "gpu_caps_seconds": {
+    "acceptance": 300,
+    "study": 1500
+  },
+  "gpu_ns": {
+    "acceptance": 28677190941,
+    "study": 202873092557
+  },
+  "gpu_seconds": 231.550283498,
+  "historical_transfers": 0,
+  "status": "closed"
+}
