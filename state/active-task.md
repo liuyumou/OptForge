@@ -1,5 +1,36 @@
 # Active Task
 
+## Delivery retention protocol revised; DELIVERY3 next (2026-11-12)
+
+The user permits protocol revision and requests the next task. ADR-0066 and
+[the DELIVERY3 plan](../docs/plans/lp-delivery3.md) prioritize independent
+batching/overlap controls, diagnosis of prepared regressions and fresh scoped
+confirmation. Next ready: GPUP-DELIVERY3; MIXED2 remains an independent alternative.
+Dense128/256/512 retain a 1.10x benefit target. Family guards permit at most the
+larger of 2% or 0.10 ms, using simultaneous uncertainty bounds and an explicit
+inconclusive outcome. Exact correctness/coverage remain hard gates. Cold and
+prepared retention are separate; no timing-selected routing or historical regrading.
+
+The proposed confirmation uses 32 independent blocks, fresh prepared sessions,
+matched native/FP4 at both tiers, all twelve families and frozen candidate choices.
+Source admission and a separately funded complete resource manifest precede
+execution. This documentation revision runs no solver/device study and changes
+no numerical sources, public default, historical result or TENSOR2 criterion.
+DELIVERY2 remains complete with failed broad retention; its allocation stays closed.
+GPUP-8 remains incomplete and GPUP-9 gated. No follow-on execution release.
+
+Separate documentation envelope: 512 CPU / zero GPU seconds, four slots,
+6 GiB sampled RSS; preparation/packaging 128, validation 320, cleanup 64.
+Use the unchanged supervisor with artifacts/gpup-delivery-protocol-v2 receipts.
+Acceptance: documentation links, dependency readiness, decision arithmetic,
+exact historical preservation and diff hygiene. Local commit only.
+
+Delivered: ADR-0066 and the DELIVERY3 plan; 233 documentation pages, artifact
+validation, 60-task dependency checks and decision arithmetic pass. All 1689
+other historical tracked files and every older handoff/backlog task remain exact.
+Planning charge including the full 64-second closing reserve: 220.425797092 CPU
+seconds; GPU zero. [Acceptance/accounting](../docs/benchmarks/data/delivery-protocol-v2-acceptance.json).
+
 ## GPUP-DELIVERY2 complete; dense cold gains, broad retention fails (2026-11-12)
 
 SPEC-0033 / ADR-0065 deliver batched independent-checker pipe transport and
