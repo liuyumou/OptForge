@@ -1,0 +1,655 @@
+{
+  "$id": "lp-fp4-recovery-checkpoint-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "binding": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "operator": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "proposal": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "settings": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "model",
+        "operator",
+        "settings",
+        "proposal"
+      ],
+      "type": "object"
+    },
+    "columns": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "components": {
+      "enum": [
+        2,
+        4,
+        8
+      ]
+    },
+    "controller": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor_error": {
+          "pattern": "^[0-9a-f]{16}$",
+          "type": "string"
+        },
+        "checked_iteration": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "integral": {
+          "pattern": "^[0-9a-f]{16}$",
+          "type": "string"
+        },
+        "iterations": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "last_check_error": {
+          "pattern": "^[0-9a-f]{16}$",
+          "type": "string"
+        },
+        "previous_error": {
+          "oneOf": [
+            {
+              "pattern": "^[0-9a-f]{16}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "restarts": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "since_restart": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "weight": {
+          "pattern": "^[0-9a-f]{16}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "weight",
+        "integral",
+        "previous_error",
+        "anchor_error",
+        "last_check_error",
+        "iterations",
+        "restarts",
+        "since_restart",
+        "checked_iteration"
+      ],
+      "type": "object"
+    },
+    "error_authority": {
+      "const": "local-representation-only"
+    },
+    "generation": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "kind": {
+      "const": "lp-fp4-recovery-checkpoint"
+    },
+    "local_representation_bounds": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor_x": {
+          "additionalProperties": false,
+          "properties": {
+            "denominator": {
+              "pattern": "^[1-9][0-9]{0,399}$",
+              "type": "string"
+            },
+            "numerator": {
+              "pattern": "^(0|[1-9][0-9]{0,399})$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "type": "object"
+        },
+        "anchor_y": {
+          "additionalProperties": false,
+          "properties": {
+            "denominator": {
+              "pattern": "^[1-9][0-9]{0,399}$",
+              "type": "string"
+            },
+            "numerator": {
+              "pattern": "^(0|[1-9][0-9]{0,399})$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "type": "object"
+        },
+        "bar": {
+          "additionalProperties": false,
+          "properties": {
+            "denominator": {
+              "pattern": "^[1-9][0-9]{0,399}$",
+              "type": "string"
+            },
+            "numerator": {
+              "pattern": "^(0|[1-9][0-9]{0,399})$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "type": "object"
+        },
+        "x": {
+          "additionalProperties": false,
+          "properties": {
+            "denominator": {
+              "pattern": "^[1-9][0-9]{0,399}$",
+              "type": "string"
+            },
+            "numerator": {
+              "pattern": "^(0|[1-9][0-9]{0,399})$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "type": "object"
+        },
+        "y": {
+          "additionalProperties": false,
+          "properties": {
+            "denominator": {
+              "pattern": "^[1-9][0-9]{0,399}$",
+              "type": "string"
+            },
+            "numerator": {
+              "pattern": "^(0|[1-9][0-9]{0,399})$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "bar",
+        "anchor_x",
+        "anchor_y"
+      ],
+      "type": "object"
+    },
+    "policy_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "rows": {
+      "maximum": 1000000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": 2
+    },
+    "vectors": {
+      "additionalProperties": false,
+      "properties": {
+        "anchor_x": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "length": {
+                "maximum": 1024,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "planes": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data_hex": {
+                      "maxLength": 1024,
+                      "pattern": "^[0-9a-f]+$",
+                      "type": "string"
+                    },
+                    "exponent": {
+                      "maximum": 48,
+                      "minimum": -48,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "exponent",
+                    "data_hex"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 8,
+                "minItems": 2,
+                "oneOf": [
+                  {
+                    "maxItems": 2,
+                    "minItems": 2
+                  },
+                  {
+                    "maxItems": 4,
+                    "minItems": 4
+                  },
+                  {
+                    "maxItems": 8,
+                    "minItems": 8
+                  }
+                ],
+                "type": "array"
+              },
+              "remainder_bound": {
+                "additionalProperties": false,
+                "properties": {
+                  "denominator": {
+                    "pattern": "^[1-9][0-9]{0,399}$",
+                    "type": "string"
+                  },
+                  "numerator": {
+                    "pattern": "^(0|[1-9][0-9]{0,399})$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "numerator",
+                  "denominator"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "length",
+              "planes",
+              "remainder_bound"
+            ],
+            "type": "object"
+          },
+          "maxItems": 31250,
+          "minItems": 1,
+          "type": "array"
+        },
+        "anchor_y": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "length": {
+                "maximum": 1024,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "planes": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data_hex": {
+                      "maxLength": 1024,
+                      "pattern": "^[0-9a-f]+$",
+                      "type": "string"
+                    },
+                    "exponent": {
+                      "maximum": 48,
+                      "minimum": -48,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "exponent",
+                    "data_hex"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 8,
+                "minItems": 2,
+                "oneOf": [
+                  {
+                    "maxItems": 2,
+                    "minItems": 2
+                  },
+                  {
+                    "maxItems": 4,
+                    "minItems": 4
+                  },
+                  {
+                    "maxItems": 8,
+                    "minItems": 8
+                  }
+                ],
+                "type": "array"
+              },
+              "remainder_bound": {
+                "additionalProperties": false,
+                "properties": {
+                  "denominator": {
+                    "pattern": "^[1-9][0-9]{0,399}$",
+                    "type": "string"
+                  },
+                  "numerator": {
+                    "pattern": "^(0|[1-9][0-9]{0,399})$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "numerator",
+                  "denominator"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "length",
+              "planes",
+              "remainder_bound"
+            ],
+            "type": "object"
+          },
+          "maxItems": 31250,
+          "minItems": 1,
+          "type": "array"
+        },
+        "bar": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "length": {
+                "maximum": 1024,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "planes": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data_hex": {
+                      "maxLength": 1024,
+                      "pattern": "^[0-9a-f]+$",
+                      "type": "string"
+                    },
+                    "exponent": {
+                      "maximum": 48,
+                      "minimum": -48,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "exponent",
+                    "data_hex"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 8,
+                "minItems": 2,
+                "oneOf": [
+                  {
+                    "maxItems": 2,
+                    "minItems": 2
+                  },
+                  {
+                    "maxItems": 4,
+                    "minItems": 4
+                  },
+                  {
+                    "maxItems": 8,
+                    "minItems": 8
+                  }
+                ],
+                "type": "array"
+              },
+              "remainder_bound": {
+                "additionalProperties": false,
+                "properties": {
+                  "denominator": {
+                    "pattern": "^[1-9][0-9]{0,399}$",
+                    "type": "string"
+                  },
+                  "numerator": {
+                    "pattern": "^(0|[1-9][0-9]{0,399})$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "numerator",
+                  "denominator"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "length",
+              "planes",
+              "remainder_bound"
+            ],
+            "type": "object"
+          },
+          "maxItems": 31250,
+          "minItems": 1,
+          "type": "array"
+        },
+        "x": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "length": {
+                "maximum": 1024,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "planes": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data_hex": {
+                      "maxLength": 1024,
+                      "pattern": "^[0-9a-f]+$",
+                      "type": "string"
+                    },
+                    "exponent": {
+                      "maximum": 48,
+                      "minimum": -48,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "exponent",
+                    "data_hex"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 8,
+                "minItems": 2,
+                "oneOf": [
+                  {
+                    "maxItems": 2,
+                    "minItems": 2
+                  },
+                  {
+                    "maxItems": 4,
+                    "minItems": 4
+                  },
+                  {
+                    "maxItems": 8,
+                    "minItems": 8
+                  }
+                ],
+                "type": "array"
+              },
+              "remainder_bound": {
+                "additionalProperties": false,
+                "properties": {
+                  "denominator": {
+                    "pattern": "^[1-9][0-9]{0,399}$",
+                    "type": "string"
+                  },
+                  "numerator": {
+                    "pattern": "^(0|[1-9][0-9]{0,399})$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "numerator",
+                  "denominator"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "length",
+              "planes",
+              "remainder_bound"
+            ],
+            "type": "object"
+          },
+          "maxItems": 31250,
+          "minItems": 1,
+          "type": "array"
+        },
+        "y": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "length": {
+                "maximum": 1024,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "planes": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data_hex": {
+                      "maxLength": 1024,
+                      "pattern": "^[0-9a-f]+$",
+                      "type": "string"
+                    },
+                    "exponent": {
+                      "maximum": 48,
+                      "minimum": -48,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "exponent",
+                    "data_hex"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 8,
+                "minItems": 2,
+                "oneOf": [
+                  {
+                    "maxItems": 2,
+                    "minItems": 2
+                  },
+                  {
+                    "maxItems": 4,
+                    "minItems": 4
+                  },
+                  {
+                    "maxItems": 8,
+                    "minItems": 8
+                  }
+                ],
+                "type": "array"
+              },
+              "remainder_bound": {
+                "additionalProperties": false,
+                "properties": {
+                  "denominator": {
+                    "pattern": "^[1-9][0-9]{0,399}$",
+                    "type": "string"
+                  },
+                  "numerator": {
+                    "pattern": "^(0|[1-9][0-9]{0,399})$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "numerator",
+                  "denominator"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "length",
+              "planes",
+              "remainder_bound"
+            ],
+            "type": "object"
+          },
+          "maxItems": 31250,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "bar",
+        "anchor_x",
+        "anchor_y"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "binding",
+    "rows",
+    "columns",
+    "components",
+    "generation",
+    "vectors",
+    "controller",
+    "local_representation_bounds",
+    "policy_sha256",
+    "error_authority"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,168 @@
+{
+  "candidate": {
+    "path": "research/lp-fp4-gpu-pilot/cuda/pilot_v3.cu",
+    "sha256": "dd9c9d989d397335899a305115d7db4fb6788ecd245e62a454d9a984f5cefb46"
+  },
+  "candidate_build": {
+    "path": "artifacts/gpup-fp4-gpu-pilot-v1/build-v3/receipt.json",
+    "sha256": "7f04aa98d78f3b57c6d8e6252be445b90b3f92e32ff64ff983d407d53d01f28a"
+  },
+  "candidate_device_validated": false,
+  "candidate_native_sass_unchanged": true,
+  "complete_pilot": false,
+  "device_cases_passed": 90,
+  "documentation": "https://docs.nvidia.com/compute-sanitizer/ComputeSanitizer/index.html",
+  "executed_profiles": 0,
+  "failure_charge_cpu_ns": 960000000000,
+  "failure_charge_gpu_ns": 240000000000,
+  "initcheck_cases_unexecuted": 24,
+  "memcheck_cases_passed": 24,
+  "previous": {
+    "path": "research/lp-fp4-gpu-pilot/cuda/pilot_v2.cu",
+    "sha256": "92416e71bf36c3d80d8b9aa6e837ff3880db3b1a5ac881662ca2e4d4efa4c1c4"
+  },
+  "primitives": {
+    "new_fp4_passed": 30,
+    "retained_controls_passed": 30
+  },
+  "racecheck_cases": [
+    {
+      "elapsed_ns": 1339269405,
+      "id": "64-1-fused",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-fused.input.json",
+        "sha256": "c543a2dda7f5716f8134968fa4380a293edee24a330463cace518ecef47b1d4a"
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-fused.output.json",
+        "sha256": "763797f8aac306c1a7c2d1c1f15bdb0e5e8de92c54e8595b41ff07704d3c48ae"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-fused.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-fused.stdout",
+        "sha256": "91dbb142f8feb8786cd6fde6ac035e816b67db14e4b7b400a01386ec106b75c4"
+      },
+      "summary": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "elapsed_ns": 1188424107,
+      "id": "64-1-persistent",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-persistent.input.json",
+        "sha256": "7ad253d7201c56900f5d84fbb0691e35e284b3e9d8a8fd4b83c3ce9c4eab6f0d"
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-persistent.output.json",
+        "sha256": "917f1cb2326dfb6af44d580f2f93000b79c199b1ff5ee03174e40a6c978ebadb"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-persistent.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-persistent.stdout",
+        "sha256": "91dbb142f8feb8786cd6fde6ac035e816b67db14e4b7b400a01386ec106b75c4"
+      },
+      "summary": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "elapsed_ns": 1744960422,
+      "id": "64-1-roundtrip",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-roundtrip.input.json",
+        "sha256": "ec885a08608e83a9ed6b8bc81e814770658d7fd0ef86782b7ae5f1457b92f643"
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-roundtrip.output.json",
+        "sha256": "4f5e5a266af26c31a9064d072681f7bd2f930521e64ee699946fd536ae3c53ab"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-roundtrip.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-roundtrip.stdout",
+        "sha256": "91dbb142f8feb8786cd6fde6ac035e816b67db14e4b7b400a01386ec106b75c4"
+      },
+      "summary": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "elapsed_ns": 1891017186,
+      "id": "64-1-split",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-split.input.json",
+        "sha256": "acd676545ed6551c9a1baaa4ecc33fb74f74da1c49165218a12f6a07b2113226"
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-split.output.json",
+        "sha256": "7da564b682c8654ed2ba0c97f2850738b404edd3494deaac7298d129dd311ff6"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-split.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/64-1-split.stdout",
+        "sha256": "91dbb142f8feb8786cd6fde6ac035e816b67db14e4b7b400a01386ec106b75c4"
+      },
+      "summary": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "elapsed_ns": 2293565967,
+      "id": "8-4-split",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/8-4-split.input.json",
+        "sha256": "9fa0a68be97eebaac029c91672464d54ebf976b2c630c4bd7383fb5b3b16a0f5"
+      },
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/8-4-split.output.json",
+        "sha256": "9709820e28b5094f96d230de0f38d21956f8f91a4eab1ebca9180f15ea505d92"
+      },
+      "returncode": 86,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/8-4-split.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v2/racecheck/8-4-split.stdout",
+        "sha256": "d9ec7a0103ec1b704c90cd2de05f8a16ceacb0a975545f3f7e4a0f60191990b3"
+      },
+      "summary": [
+        100,
+        0,
+        128
+      ]
+    }
+  ],
+  "racecheck_cases_unexecuted": 19,
+  "semantics": "The barrier orders aliasing shared-state accesses. Vote/shuffle synchronization alone does not supply shared-memory ordering.",
+  "source_delta": "One full-warp barrier at encode entry, after all calling-lane shared-state reads and before any overwrite.",
+  "status": "v2_safety_refused",
+  "synccheck_cases_unexecuted": 24,
+  "total_cpu_ns": 20236463788668,
+  "total_gpu_ns": 599495183240,
+  "unexecuted_profiles": 216
+}

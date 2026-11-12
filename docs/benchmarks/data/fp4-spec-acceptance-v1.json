@@ -1,0 +1,232 @@
+{
+  "base_commit": "f4312c8ea875e43c62cf277e4509b82f2d8863d2",
+  "cleanup_receipt": {
+    "path": "artifacts/gpup-fp4-spec-v1/cleanup-v1.json",
+    "sha256": "5747e425738817ab3eaa20f1677ce84a6a1f496daad87d2a69c3ba2743cb12df"
+  },
+  "completed_receipts": [
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/prepare-v1.json",
+        "sha256": "ad4aab3f4bd8a31982d3ee7a5cc2d8a62dfab19d082674146465931275d2b826"
+      },
+      "charged_cpu_ns": 9342958228,
+      "guardian_empty": true,
+      "peak_rss_bytes": 66273280,
+      "sources": [
+        {
+          "path": "artifacts/gpup-fp4-spec-v1/prepare.py",
+          "sha256": "71b3035792c6ded0fc90874a74d12348f8dba93410f0e1f59e591e7851ebc476"
+        },
+        {
+          "path": "tools/lp_fp4_protocol.py",
+          "sha256": "7cc613d5d8cf65631d35cd75c353d7c6db4c811c9b73b4cc8c98f0571b88a9de"
+        }
+      ],
+      "stage": "implementation",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/contracts-v1.json",
+        "sha256": "bfe2a8a7d4ef079e94f1a3f97a4476b02728076c5ad79ea7f1dbd460a272649d"
+      },
+      "charged_cpu_ns": 11794233556,
+      "guardian_empty": true,
+      "peak_rss_bytes": 68071424,
+      "sources": [
+        {
+          "path": "tools/lp_fp4_contract.py",
+          "sha256": "48ddfe58491d66ced348d069c6a70da62b5ce61923700f428851099d56e99da5"
+        },
+        {
+          "path": "tools/lp_fp4_protocol.py",
+          "sha256": "7cc613d5d8cf65631d35cd75c353d7c6db4c811c9b73b4cc8c98f0571b88a9de"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_contract.py",
+          "sha256": "a6f6dc289911f601f2590745bb594481ec09970755a73320a8eb191d80147eb2"
+        },
+        {
+          "path": "benchmarks/configs/lp-fp4-proposal-v1.json",
+          "sha256": "12cd40cedeb1be346a30cacc203c4030b7dc2ee56ce4415287768c824c51cadf"
+        }
+      ],
+      "stage": "proofs",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/contracts-v2.json",
+        "sha256": "0d79f7394b29598a7f3015d29285c65d9240fa872cac946662e1f026b56bbac7"
+      },
+      "charged_cpu_ns": 22814352284,
+      "guardian_empty": true,
+      "peak_rss_bytes": 79896576,
+      "sources": [
+        {
+          "path": "tools/lp_fp4_contract.py",
+          "sha256": "1b663e3a0f6231d8dcf665af007309416a1c2ee741bc67c0326587a6d3c2f1ea"
+        },
+        {
+          "path": "tools/lp_fp4_protocol.py",
+          "sha256": "7cc613d5d8cf65631d35cd75c353d7c6db4c811c9b73b4cc8c98f0571b88a9de"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_contract.py",
+          "sha256": "cf28055072a50c5226b8108d6705762b1f42555494d74b36c043a635442f946d"
+        },
+        {
+          "path": "artifacts/gpup-fp4-spec-v1/contracts.py",
+          "sha256": "d6092e298c8d30eb7f097becbb23bc1c25e5c64074ef312955b28005d1c3569a"
+        }
+      ],
+      "stage": "proofs",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/contracts-v3.json",
+        "sha256": "6db65151bde9f6787667c56a7a02f06a6db52d47f1398a68c0e0083ef587db14"
+      },
+      "charged_cpu_ns": 28230979712,
+      "guardian_empty": true,
+      "peak_rss_bytes": 100462592,
+      "sources": [
+        {
+          "path": "tools/lp_fp4_contract.py",
+          "sha256": "1b663e3a0f6231d8dcf665af007309416a1c2ee741bc67c0326587a6d3c2f1ea"
+        },
+        {
+          "path": "tools/lp_fp4_protocol.py",
+          "sha256": "25992ecafdda99a2e03298fc4ff2c51b00404bfa8bb971fd988a6b0570809e2c"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_contract.py",
+          "sha256": "f0a0af8df4b39cdcc43156057a67cd1c461f4ddff1d812febe7d1dcd17eed51c"
+        },
+        {
+          "path": "artifacts/gpup-fp4-spec-v1/contracts-v3.py",
+          "sha256": "22448ab463f460317d1c929f65d254471ceea164a6295d93c9e47a59ba76f5e7"
+        }
+      ],
+      "stage": "proofs",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/native-v1.json",
+        "sha256": "ea558b1090bffaa1bf3035af116d29c975c889fd652ce2cb017261b1af14b952"
+      },
+      "charged_cpu_ns": 1257295158868,
+      "guardian_empty": true,
+      "peak_rss_bytes": 1701036032,
+      "sources": [
+        {
+          "path": "tools/check.sh",
+          "sha256": "3b5bda274aaa8e0ef6951f80b23f537faa2674eed59ce04c7676d072dd135107"
+        },
+        {
+          "path": "tools/lp_fp4_contract.py",
+          "sha256": "1b663e3a0f6231d8dcf665af007309416a1c2ee741bc67c0326587a6d3c2f1ea"
+        },
+        {
+          "path": "tools/lp_fp4_protocol.py",
+          "sha256": "25992ecafdda99a2e03298fc4ff2c51b00404bfa8bb971fd988a6b0570809e2c"
+        },
+        {
+          "path": "tests/integration/test_lp_fp4_contract.py",
+          "sha256": "f0a0af8df4b39cdcc43156057a67cd1c461f4ddff1d812febe7d1dcd17eed51c"
+        },
+        {
+          "path": "benchmarks/configs/lp-fp4-proposal-v1.json",
+          "sha256": "cc144af164d258dfdd2a91e7a247205958fb5b2aecc3959a439e8f23ca828fd7"
+        }
+      ],
+      "stage": "native",
+      "status": "passed",
+      "workload_empty": true
+    }
+  ],
+  "contract_sources": [
+    {
+      "path": "tools/lp_fp4_contract.py",
+      "sha256": "1b663e3a0f6231d8dcf665af007309416a1c2ee741bc67c0326587a6d3c2f1ea"
+    },
+    {
+      "path": "tools/lp_fp4_protocol.py",
+      "sha256": "25992ecafdda99a2e03298fc4ff2c51b00404bfa8bb971fd988a6b0570809e2c"
+    },
+    {
+      "path": "schemas/lp-fp4-proposal-v1.schema.json",
+      "sha256": "bc6073342507c22969322ce8be4aadabce044a13aabdfe394081cfae02798dda"
+    },
+    {
+      "path": "schemas/lp-fp4-checkpoint-v1.schema.json",
+      "sha256": "dc58f9e35f8c6c7805eed364624a42cf13e3417fffacf881bbcb78a027b4e3ce"
+    },
+    {
+      "path": "schemas/lp-fp4-cost-v1.schema.json",
+      "sha256": "ed2ab174336f34f0319626af08c17701efd108010f9edf569be989880b2c0308"
+    },
+    {
+      "path": "tests/integration/test_lp_fp4_contract.py",
+      "sha256": "f0a0af8df4b39cdcc43156057a67cd1c461f4ddff1d812febe7d1dcd17eed51c"
+    }
+  ],
+  "cost_review": {
+    "path": "docs/benchmarks/data/fp4-spec-cost-review-v1.json",
+    "sha256": "a89f52935cf447112d167ccbe8ba1f30bacd2b8bb0d7eaaa59c2a71b2399c13c"
+  },
+  "delivery_receipt": {
+    "path": "artifacts/gpup-fp4-spec-v1/delivery-v1.json",
+    "sha256": "104db94ef9f543e0d250daa2359b45a86cc5ba59e82ab8756783f85b15005afd"
+  },
+  "enclosing_delivery_receipt": "artifacts/gpup-fp4-spec-v1/delivery-v1.json",
+  "final_accounting": {
+    "path": "docs/benchmarks/data/fp4-spec-accounting-v1.json",
+    "sha256": "8996efc90280903e9d99e7506970b5d15203a9caa4990be24e0522652ae50af1"
+  },
+  "finalization_complete": true,
+  "gpu_seconds": 0,
+  "historical_handoffs_preserved": true,
+  "historical_tracked_numerical_changes": [],
+  "kind": "lp-fp4-spec-acceptance",
+  "limitations": [
+    "Actual MMA behavior and long trajectories unadmitted",
+    "Enclosures are declared inputs; future executor must derive all error terms",
+    "Prototype/study resource amounts are proposals, not allocations"
+  ],
+  "native_document_bindings": [
+    {
+      "path": "artifacts/gpup-fp4-spec-v1/native-proposal.json",
+      "sha256": "cc144af164d258dfdd2a91e7a247205958fb5b2aecc3959a439e8f23ca828fd7"
+    },
+    {
+      "path": "artifacts/gpup-fp4-spec-v1/native-specification.md",
+      "sha256": "1609ea91af87b68d89e28b1d0b66fc053dbd9cae053410ed10d82798daae39b2"
+    }
+  ],
+  "post_native_changes": "Documentation/status and SPEC review marker/proposal hash only; executable/test source unchanged",
+  "proposal": {
+    "path": "benchmarks/configs/lp-fp4-proposal-v1.json",
+    "sha256": "11db06a49d1affe640ec7ac748e52014ecae7d6091631c036f4bc902e29da3ac"
+  },
+  "schema_version": 1,
+  "scope": "CPU-only executable specification; no GPU solver or hardware admission",
+  "specification": {
+    "path": "docs/specifications/SPEC-0025-persistent-fp4-contract.md",
+    "sha256": "493260209421257bd97c9e0b0e19f0150baadb90ee7013949a418f85cba6a347"
+  },
+  "status": "passed",
+  "tests": {
+    "focused": 32,
+    "native_full_gate": true,
+    "python": 549,
+    "rust": 638
+  }
+}

@@ -1,5 +1,34 @@
 # Known Failures and Limitations
 
+## FP4 prototype has no CPU-qualified persistent lane (2026-11-11)
+
+The [frozen prototype admission](../docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md)
+refuses all twelve cells before any 200-update observation: nine cumulative
+error-guard refusals and three incompatible checkpoint error budgets. Low
+component counts show actual quantization error; eight-component cases also show
+bound inflation from losing primal/dual cancellation. No device, actual-MMA,
+sanitizer or profile stage ran. Full prototype acceptance remains incomplete.
+
+Frozen v1 remains exact. The separate v2 correction sums rounding and encoding
+errors so cancellation cannot hide the checkpoint's representation remainder;
+three primitive regressions pass. No corrected scientific attempt has run and
+this fix does not qualify a lane. Future enclosure changes require a versioned
+proof/contract and new admission; original-model checks and the 1e-9 final
+certificate stay unchanged. The failed CPU qualification and software launcher
+retain their full charges. GPUP-FP4-RECOVERY-SPEC is the next planning task.
+
+## RESIDENT2 synchronization savings do not establish a latency win (2026-11-11)
+
+The [completed resident study](../docs/benchmarks/lp-resident2-gpup-resident2.md)
+reduces waits but increases transfer bytes; the cold geomean is 1.027370x and
+four certified medians regress. Keep the native control. Prepared batches are
+throughput observations, not single-solve wins. All twelve mixed-model normal
+limits deliver actual vectors but retain the unchanged variable-3 infinite-bound
+refusal. No artificial finite bound or certificate relaxation is introduced.
+The initial overflow stimulus and stale test executable failures are preserved;
+the corrected acceptance and four sanitizer gates pass with all charges retained.
+
+
 ## Completed baseline retains native and quality failures (2026-11-10)
 
 The [completed native-return report](../docs/benchmarks/lp-external-baseline-native-return.md) has no unexecuted

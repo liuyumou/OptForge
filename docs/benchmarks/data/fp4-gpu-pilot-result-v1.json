@@ -1,0 +1,2207 @@
+{
+  "cells": [
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-split-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-4-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-8-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-4-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-split-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "irregular-29-16-2-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "irregular-29-64-1-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-2048-16-2-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-8-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-roundtrip-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "irregular-29-8-4-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-fused-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-2-fused-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 16,
+      "id": "dense-32-16-2-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-4-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 8,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-2048-4-8-fused-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "fused",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-persistent-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-2048-64-1-persistent-r0",
+      "repetition": 0,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "dense-32-4-2-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-persistent-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "persistent",
+      "workload": "dense-32"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-2048-8-4-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-2048"
+    },
+    {
+      "components": 1,
+      "disposition": "unexecuted",
+      "format": 64,
+      "id": "dense-32-64-1-roundtrip-r2",
+      "repetition": 2,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    },
+    {
+      "components": 2,
+      "disposition": "unexecuted",
+      "format": 4,
+      "id": "irregular-29-4-2-split-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "split",
+      "workload": "irregular-29"
+    },
+    {
+      "components": 4,
+      "disposition": "unexecuted",
+      "format": 8,
+      "id": "dense-32-8-4-roundtrip-r1",
+      "repetition": 1,
+      "result": null,
+      "variant": "roundtrip",
+      "workload": "dense-32"
+    }
+  ],
+  "certified": 0,
+  "completed": 0,
+  "gates": {
+    "device": {
+      "status": "unexecuted_or_refused"
+    },
+    "initcheck": {
+      "status": "unexecuted_or_refused"
+    },
+    "memcheck": {
+      "status": "unexecuted_or_refused"
+    },
+    "primitive": {
+      "status": "unexecuted_or_refused"
+    },
+    "racecheck": {
+      "status": "unexecuted_or_refused"
+    },
+    "synccheck": {
+      "status": "unexecuted_or_refused"
+    }
+  },
+  "historical_files_preserved": 1246,
+  "historical_hashes": {
+    "path": "artifacts/gpup-fp4-gpu-pilot-v1/prior-tracked.json",
+    "sha256": "e9b219a86e8a828b16a6434c49a2a12e368868c6fdb53c5374d508b71fb3c4c2"
+  },
+  "kind": "fp4-gpu-pilot-result-v1",
+  "limitations": [
+    "Block-diagonal 32-variable independent blocks only; no coupled sparse LP integration.",
+    "Empirical differences/residuals are not certified bounds or solver convergence.",
+    "CUDA stream span includes host submission gaps; it is not isolated kernel busy time.",
+    "Cold cost includes CPU preparation and process execution; no certified endpoint/checker cost exists.",
+    "Three repetitions report ranges, not statistically established acceleration."
+  ],
+  "manifest": {
+    "path": "artifacts/gpup-fp4-gpu-pilot-v1/manifest.json",
+    "sha256": "073e769b70cbd90e4ea6492ad5a51a2822580fff312c42b9fcf93ed774b8af6c"
+  },
+  "planned": 216,
+  "profile_receipts": [],
+  "status": "blocked",
+  "summaries": []
+}

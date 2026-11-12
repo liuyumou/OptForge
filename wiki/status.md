@@ -1,5 +1,86 @@
 # Project Status
 
+## GPUP-FP4-GPU-PILOT completed (2026-11-11)
+
+The [independent pilot](../docs/benchmarks/lp-fp4-gpu-pilot.md) completes all
+216 profile cells. Corrected E2M1 packing and shared-state synchronization pass
+primitive/transaction admission and all four sanitizers. Both failed versions,
+explicit recovery releases, exact sources and full charges remain preserved.
+
+This candidate has no FP4 speed advantage: dense-2048 persistent FP4 with
+2/4/8 components takes 503/988/2213 µs per 32 updates versus native FP64's 176 µs.
+The eight-component iterate difference is about 1.1e-7, not a certificate.
+GPU charge is 953.281143916 / 9600 seconds. Keep native control; no preset.
+Next ready is GPUP-FP4-RECOVERY-SPEC. Integration and certified comparisons remain
+gated; GPUP-FP4-PROTO and GPUP-8 incomplete, GPUP-9 gated. Earlier entries retain
+their original planning scope.
+
+
+## FP4 GPU pilot and final-quality tiers (2026-11-11)
+
+The user accepts [ADR-0058](../docs/decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md):
+**GPUP-FP4-GPU-PILOT is next**, independent of the old 600-update CPU trajectory
+gate. Correct primitives and device/sanitizer safety checks precede bounded
+actual-FP4 fused/persistent iteration measurements. CPU recovery remains
+independently ready; GPUP-FP4-INTEGRATE joins both paths before GPUP-TENSOR2.
+
+A separately labeled 1e-7 final certificate is an encouraging result if FP4 is
+sufficiently faster; 1e-9 remains the strict tier. Initial retention requires at
+least 1.10x complete cold model-median geometric-mean speedup, no certified
+model-median regression or coverage loss against native at the same tolerance,
+with uncertainty reported. A kernel result or comparison across different
+tolerances cannot establish FP4 solver acceleration. This is a roadmap update:
+no GPU job, numerical retry or checker-default change occurred. The old failed
+prototype and all historical evidence stay exact; GPUP-8 incomplete, GPUP-9 gated.
+
+## GPUP-FP4-PROTO CPU refusal (2026-11-11)
+
+The [bounded prototype attempt](../docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md)
+implements independent original-A and persistent-component CPU trajectories,
+explicit local rounding and transactional rollback. No lane qualifies: nine
+guard and three metadata refusals across twelve cells, before any 200-update
+observation. Device implementation, actual MMA, sanitizers and all 36 profiles
+remain unexecuted; full prototype acceptance is incomplete and GPU usage zero.
+
+A separate local error-budget correction passes primitive software tests; the
+scientific attempt is not repeated. Next ready is GPUP-FP4-RECOVERY-SPEC for a
+proved error policy and justified precision/cost proposal. Keep native control,
+original-model checks and strict 1e-9 certification. GPUP-8 stays incomplete and
+GPUP-9 gated. Earlier dated entries describe their original handoffs.
+
+## GPUP-FP4-SPEC CPU contract (2026-11-11)
+
+[SPEC-0025](../docs/specifications/SPEC-0025-persistent-fp4-contract.md) implements
+the E2M1 reference, interval/error guards, observation-only audits, complete
+checkpoints and strict source-bound proposal/cost validation. The
+[delivery report](../docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md) records acceptance
+and the proposed 192-cell / 288-endpoint comparison. Six of 24 retained native
+cold trials fail even the ideal per-trial 10% arithmetic-only speedup bound;
+fifteen need profiles and three remain uncertified. No GPU work or FP4 speedup
+claim follows. Next is FP4-PROTO's CPU reference/admission, then conditional device
+work. Older dated entries retain their original handoffs.
+
+## Persistent multi-FP4 planning priority (2026-11-11)
+
+The [FP4 assessment](../docs/plans/lp-fp4-persistent-state.md) and
+[ADR-0055](../docs/decisions/ADR-0055-persistent-fp4-direction.md) prioritize
+approximate persistent component state with fused iterations, original-model
+residual checks and strict final certification. GPUP-FP4-SPEC is next ready for
+CPU-only numerical/cost contract work; prototype and study remain conditional.
+MIXED2 and DELIVERY2 remain alternatives. The native control, historical evidence
+and GPUP-8/GPUP-9 gates are unchanged. No new solver or GPU execution occurred.
+
+## GPUP-RESIDENT2 bounded result (2026-11-11)
+
+The [resident execution report](../docs/benchmarks/lp-resident2-gpup-resident2.md)
+delivers explicit cold/prepared phases, transactional native FP64 windows and
+normal-limit export. All 64 cells complete; both modes certify 42/48 endpoints
+and all 42 certified pairs match bitwise. All four sanitizers pass.
+Synchronization decreases, but 1.027370x cold geomean and four regressing models
+fail the retention criterion. Keep the native control and select no preset.
+GPUP-MIXED2 is next ready; GPUP-8 remains incomplete and GPUP-9 gated.
+
+
 ## GPUP-BASELINE complete under the amended comparison policy (2026-11-10)
 
 The [completed report](../docs/benchmarks/lp-external-baseline-native-return.md) includes all 240 planned screening

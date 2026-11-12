@@ -1,20 +1,88 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: baseline complete under the native-return amendment 2026-11-10; GPUP-8 incomplete, science closed; GPUP-9 gated
+Status: FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: 396bd0e2ea095f1d038dfa862bb31f29a61e0d68
+Last reviewed commit: 59ae62d872b30885a57e02412b1f44478769ef16
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
-Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md)
-Evidence: [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md), [cost gates](../decisions/ADR-0054-resident2-cost-priorities.md), [FP4 GPU exploration and quality tiers](../decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
+Evidence: [RESIDENT2 result](../benchmarks/lp-resident2-gpup-resident2.md), [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+
+## Exact checker acceleration (2026-11-12)
+
+[GPUP-FP4-CHECKER is complete](../benchmarks/lp-fp4-checker.md) under
+[SPEC-0032](../specifications/SPEC-0032-exact-checker-acceleration.md) /
+[ADR-0064](../decisions/ADR-0064-exact-checker-acceleration.md). Cached feasibility
+indices, independent row scheduling and exact product/reduction optimizations
+preserve every certificate bit and refusal. All 960 new comparison cells complete
+with identical original numerical evidence; eleven bounded families certify at
+both tiers. Dense512 CPU assessment improves 2.54x; strict FP4 prepared total
+improves 19.203 to 15.924 ms. New native is 16.527 ms; FP4's observed 3.8% lead
+has an interval including parity. Broad cold ratios 0.9994/0.9934x still fail
+retention, dominated by startup/preparation and unfavorable small tensor work.
+Keep defaults unchanged. Further work should measure exact dual/transport and
+cold setup/teardown costs; historical experiments and allocations stay closed.
+
+## Corrected FP4 acceleration (2026-11-11)
+
+[GPUP-FP4-ACCEL is complete](../benchmarks/lp-fp4-accel.md) under
+[SPEC-0031](../specifications/SPEC-0031-fp4-corrected-acceleration.md) /
+[ADR-0063](../decisions/ADR-0063-fp4-corrected-acceleration.md). Cached preparation,
+correction state, original-A window references, scaling, parallel tiles and exact
+parallel checking resolve the bounded-family refusals. All 1800 cells complete;
+eleven bounded families certify at both tiers, and all safety/serial replay gates
+pass. Strict dense512 FP4 improves 6.19x in GPU and 2.27x in total prepared time
+against fused FP4. Against improved parallel native, GPU improves 1.20x but strict
+total time regresses 1.5%. EOF cold geometric means 0.9850/0.9863x fail retention.
+Keep native supported and select no public preset. Exact checking and complete
+delivery remain the main next costs; larger/batched dense work needs a new
+protocol. Historical sources/results/budgets remain closed, TENSOR2 conditional,
+and GPUP-9 gated.
+
+## FP4 integration disposition (2026-11-11)
+
+[GPUP-FP4-INTEGRATE](../benchmarks/lp-fp4-integrate.md) is complete under
+SPEC-0030 / ADR-0062. Its actual FP4 work certifies coupled endpoints at both final
+tiers, and its safety/rollback/checker gates pass. Complete latency fails retention:
+cold native/candidate ratios are 0.959–0.986x and prepared ratios 0.623–0.770x.
+The eight-model bounded domain is not a large sparse production solver. Keep the
+native control and require a new viable complete-cost case before TENSOR2.
+MIXED2 remains an independent CPU-only contract/cost preparation alternative;
+no follow-on execution or historical retry is released.
 
 ## Current plan (2026-11-10)
 
 The objective is a faster independently certified answer using modern GPU
 low-precision computation where it reduces total cost. The comparable cuOpt/COPT
-baseline is now complete under an explicit native-return policy; the next step
-is lean execution, followed by simpler mixed precision. Another exact-expansion
-Tensor implementation is conditional on a credible cost case. This priority supersedes the dated planning order below;
+baseline is now complete under an explicit native-return policy. The user now
+prioritizes approximate persistent multi-FP4 state and fused iterations, with
+original-model FP64 checks and explicit 1e-7 and strict 1e-9 final-quality tiers.
+GPUP-FP4-SPEC is complete under
+[SPEC-0025](../specifications/SPEC-0025-persistent-fp4-contract.md)
+and [ADR-0056](../decisions/ADR-0056-fp4-executable-contract.md). FP4-PROTO's
+[bounded CPU attempt](../benchmarks/lp-fp4-proto-gpup-fp4-proto.md) qualifies no
+lane; that v1 attempt remains closed under ADR-0057. The separately scoped
+**FP4-GPU-PILOT** is complete as a negative performance result under ADR-0058.
+**FP4-FAST** is now [complete](../benchmarks/lp-fp4-fast.md): 288 matched cells
+show 4.16–7.81x FP4 kernel gains with unchanged endpoint hashes. Its independent
+optimization contract is in
+[ADR-0060](../decisions/ADR-0060-fp4-fast.md) and
+[SPEC-0028](../specifications/SPEC-0028-fp4-fast.md), to fix measured encoding,
+component-product, preparation and utilization costs. It does not reopen the
+failed 600-update trajectory gate or change final certificate authority. **FP4-RECOVERY-SPEC** is now [complete](../benchmarks/lp-fp4-recovery-spec.md) under
+[SPEC-0029](../specifications/SPEC-0029-fp4-recovery-policy.md): explicit operational
+residual guards, compatible local errors and bounded precision/native recovery,
+without a global enclosure claim. **FP4-INTEGRATE is complete** under
+[SPEC-0030](../specifications/SPEC-0030-fp4-integration.md), joining that policy
+with the device path and completing the bounded same-tier comparison. Its latency
+retention gate fails, so broader TENSOR2 execution remains conditional.
+Simpler mixed precision and delivery-cost optimization remain alternatives.
+Lean resident execution is
+implemented; its bounded study does not pass the latency retention gate, so the
+tuned native control remains authoritative for comparisons. Primitive/device
+safety gates precede exploratory GPU measurements; solver qualification and
+complete-cost admission precede the larger Tensor comparison.
+This priority supersedes the dated planning order below;
 historical evidence and accepted numerical contracts remain unchanged.
 
 GPUP-8's corrected proof, CPU/native/model gates and six device jobs passed.
@@ -39,6 +107,193 @@ unavailable. This is not a quality-matched commercial-solver ranking or a
 supported low-precision preset. New scientific tasks still need their own
 concrete protocol/allocation; GPUP-8 stays closed and incomplete, GPUP-9 gated.
 
+The user requested GPUP-RESIDENT2 implementation on 2026-11-11 and permitted
+additional time. [SPEC-0024](../specifications/SPEC-0024-native-resident-execution.md)
+and [ADR-0053](../decisions/ADR-0053-native-resident-execution.md) define the new
+research-only lifecycle, transactional window and separate bounded allocation.
+The baseline PR is merged; historical scientific stages and ledgers stay closed.
+
+The [completed RESIDENT2 report](../benchmarks/lp-resident2-gpup-resident2.md)
+retains all 64 cells and 96 endpoints. Both modes certify 42/48, with identical
+certified candidate bytes and work. All twelve mixed-model limit endpoints export
+successfully but retain the infinite-bound refusal. The cold model-median geometric
+mean is 1.027370x and four certified medians regress, so the latency retention gate
+fails. Keep the native control; prepared throughput is a separate endpoint.
+The FP4 planning priority below supersedes the MIXED2-first handoff; no new
+numerical execution is released by this review.
+
+### Persistent multi-FP4 direction (2026-11-11)
+
+The user requests several FP4 components per higher-precision value,
+reconstruction-free iterations and fused kernels, and explicitly permits
+approximate inner arithmetic. The initial strict 1e-9 final target is retained;
+the new user-authorized 1e-7 final tier is defined below.
+The [design assessment](lp-fp4-persistent-state.md) finds this worth a bounded
+feasibility effort: it directly targets the retained reconstruction/update cost.
+It does not establish an FP64-equivalent representation or a solver speedup.
+
+The proposed fast path preserves component state across updates and accepted
+audit windows, with no routine full-vector FP64 reconstruction/re-encoding.
+FP32 accumulation, local component combination, normalization and projection
+decisions remain charged work. Original-model FP64 snapshots at 200-update
+controller boundaries serve observation and certification, with explicit
+correction/escalation. The prototype must establish cross-window error and
+whole-checkpoint recovery under SPEC-0025; historical reference adoption is unchanged.
+
+Fuse each product with its legal update/projection/encoding epilogue. Preserve
+the dependency between primal and dual phases and all necessary global
+reductions. A single persistent kernel is not assumed. Account for component
+cross-products, block scales, sparse tails, packing, register pressure and
+fallback; a small low-precision GEMM alone cannot admit this solver.
+
+The [completed CPU contract](../benchmarks/lp-fp4-spec-gpup-fp4-spec.md) provides
+bounded 2/4/8-plane E2M1 oracles, one approximate operator for both orientations,
+original-unit error/projection guards and complete observation/rollback state.
+Its source-bound review of 24 retained cold control trials rejects six even at
+the ideal per-row 10% gain bound, leaves fifteen needing profiles and preserves
+three uncertified endpoints. No forecast or device arithmetic is admitted.
+The frozen prospective comparison has 192 cells / 288 endpoints; its resource
+amounts are proposals only. The CPU implementation used a separate allocation
+and zero GPU time.
+
+The [FP4-PROTO CPU attempt](../benchmarks/lp-fp4-proto-gpup-fp4-proto.md) now
+delivers independent rational/component recurrences, full checkpoint rollback and
+one frozen twelve-cell admission under SPEC-0026 / ADR-0057. Nine cells exceed the
+inner error guard and three refuse incompatible metadata; none reaches the first
+200-update observation. Short expansions exhibit actual error above the guard,
+while eight-component cases also expose substantial enclosure overestimation.
+A separate local rounding/encoding correction passes primitive tests but has no
+scientific qualification. Device implementation, actual MMA, sanitizers and all
+36 pilot/diagnostic cells remain unexecuted; prototype acceptance is incomplete.
+
+The [GPUP-FP4-GPU-PILOT delivery](../benchmarks/lp-fp4-gpu-pilot.md) completes
+216 empirical profile cells after corrected instruction/device and four-sanitizer
+admission. The [FP4 integration](../benchmarks/lp-fp4-integrate.md) now completes
+96 coupled trajectory cells and 576 cold/prepared solve cells with independent
+certificates and explicit recovery. Its FP4 cold geometric means of 0.959–0.986x
+fail retention. Keep native; a viable new complete-cost case still precedes
+**GPUP-TENSOR2**. The pilot/integration does not establish a global trajectory enclosure. No failed v1 cell is retried by this handoff.
+MIXED2 remains a simpler alternative, not a prerequisite to this FP4 contract.
+The [ADR-0055 decision](../decisions/ADR-0055-persistent-fp4-direction.md) records
+the planning priority; ADR-0056 implements its CPU specification. ADR-0057's
+independent 32000 CPU / conditional 1560 GPU allocation covers the bounded
+prototype attempt; GPU charge is zero and its later stages are closed. Future
+pilot/recovery/study resources need new concrete packages; no automatic spending
+or GPUP-9 release follows.
+
+### FP4 GPU exploration and quality tiers (2026-11-11)
+
+The user accepts a separate GPU experiment and says a **1e-7 final certificate is
+encouraging when FP4 is sufficiently faster**. [ADR-0058](../decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
+separates hardware exploration, numerical recovery and certified comparison.
+The old monotone 1e-7 iterate-error envelope and a new 1e-7 final LP certificate
+are different criteria. Neither a small iterate difference nor a native success
+status supplies the final certificate.
+
+| Path | What is planned | Required admission |
+| --- | --- | --- |
+| **GPUP-FP4-GPU-PILOT**, complete empirical negative result | [SPEC-0027 delivery](../benchmarks/lp-fp4-gpu-pilot.md): actual FP4, native FP64 and FP8/FP16; split/fused/persistent/roundtrip; 216/216 cells | Corrected packing and synchronization, 60 primitives, 90 transaction cases and four sanitizers pass; retained failed attempts and charges. All matched FP4 iteration/cold medians are slower in this bounded grid. No certified solver or preset |
+| **GPUP-FP4-FAST**, complete | [SPEC-0028 delivery](../benchmarks/lp-fp4-fast.md): hardware encoding, component columns, zero-plane pruning, exact host preparation and prepared lifecycle | 288/288 cells and 2016 fresh windows; same-lane endpoint hashes match; 4.16–7.81x kernel gains and four sanitizer passes. Rich FP4 x8 still loses to native; no certificate or preset |
+| **GPUP-FP4-RECOVERY-SPEC**, complete | [SPEC-0029](../specifications/SPEC-0029-fp4-recovery-policy.md): compatible local errors and explicit operational residual recovery | Distinguish proved bounds from empirical progress/error observations; version the changed policy, retain original-A FP64 audits, complete checkpoints and explicit recovery. No GPU-pilot prerequisite |
+| **GPUP-FP4-INTEGRATE**, complete; retention fails | [SPEC-0030 delivery](../benchmarks/lp-fp4-integrate.md): 96 coupled diagnostics and 576 same-tier cold/prepared solves, complete rollback and original-model certificates | Final native/device/four-sanitizer gates and 176 unique endpoint replays pass; matched six-of-eight-family coverage at both tiers. Cold FP4 geometric means 0.959–0.986x fail retention. Native retained; old prototype stays incomplete |
+| **GPUP-TENSOR2**, conditional solver study | Complete cold/prepared comparison with separately labeled 1e-7 and 1e-9 cohorts | New frozen quality/grid/resource protocol, integration admission and conservative complete-cost screen informed by the pilot; original-model independent certification and matched controls |
+
+The pilot measures actual arithmetic error, component pairs and padded MMA work,
+scales/packing/normalization, sparse tails and single-RHS utilization, register
+pressure/spills, launches, copies and audit costs. Ordinary updates retain packed
+component state without full-vector FP64 reconstruction; local combination and
+normalization remain measured work. Short trajectories may be empirical and
+uncertified. Their profiles answer hardware/cost questions and cannot establish
+a certified-solver speedup. A missing full error proof does not prohibit this
+bounded exploration; primitive correctness and device safety still apply.
+
+Final results use explicit `certified-1e-7` and `certified-1e-9` labels, with both
+absolute and relative target tolerances set to the named value. The future
+versioned checker retains original coefficients, feasibility/dual-bound authority,
+objective offsets, normalization and conservative gap/refusal rules. Existing
+defaults remain 1e-9. Assess both tiers where endpoint evidence permits; a 1e-7
+pass is never relabeled as strict and need not also pass 1e-9 to be useful.
+
+The initial "sufficiently faster" criterion is **at least 1.10x cold model-median
+geometric-mean speedup**, no certified model-median regression and no loss of
+certified coverage against a native control **targeting the same tolerance**.
+Keep failures/limits in the coverage accounting and report repetition ranges and
+uncertainty; gains indistinguishable from variability remain inconclusive. Time
+includes setup, extra iterations, audits, correction/fallback, export and checking.
+FP4 at 1e-7 versus FP64 at 1e-9 is a labeled quality/time tradeoff, not attribution
+of the gain to FP4. Matched FP8/FP16 and fusion/persistence comparisons test that
+attribution. Prepared throughput remains separate from cold single-solve latency.
+
+The old 192-cell/288-endpoint strict proposal remains immutable. Enumerate new
+dual-tier cells, stop rules, measured time-to-certificate events, controls and
+full reservations before execution; do not infer a new grid or earlier completion
+time from old endpoints. The GPU pilot is now complete under its independent
+task allocation; recovery and bounded integration are now complete under their
+own allocations. A broader TENSOR2 solver study remains prospective. No old
+unused GPU allowance funded the pilot or authorizes a later task.
+
+### RESIDENT2 lessons and planning changes (2026-11-11)
+
+The result changes admission and optimization priorities, not the accuracy
+objective. The existing control already retains device state and batches 64
+updates. The resident admission trace removes 14 of 58 synchronizations but
+keeps all 2800 launches, nearly doubles uploads and more than doubles readback.
+Safety flags, coefficient transport and transactional adoption are real costs;
+their separate latency contributions have not been isolated. All 42 certified
+pairs have identical bytes and iteration counts, so extra iterations do not
+explain those pairs' timings. This is evidence against selecting this executor,
+not against every resident design or mixed precision.
+
+1. **Require a complete-delivery cost case before a certified solver campaign.** Use
+   retained per-trial phase partitions under the same lifecycle and transport.
+   Identify the portion actually accelerated, expected iteration changes and
+   added conversion, guard, correction, fallback and evidence costs. Predeclare
+   the total-latency target and regression/coverage rule before a new cohort.
+   Do not sum marginal phase medians or treat all native time as kernel time.
+   If the attainable saving cannot meet the target, defer the candidate before
+   a full device study. Unknown costs require explicit ranges or a separately
+   bounded measurement pilot, not assumed zero overhead. ADR-0058 explicitly
+   permits the FP4 GPU pilot to collect these missing measurements before the
+   complete-solve cost gate; MIXED2 retains its separate contract.
+2. **Make delivery cost an actionable alternative: GPUP-DELIVERY2.** On
+   dense-65536, control native time is about 2.40 s versus 9.78 s total; checking
+   takes 3.16 s and conversion/preparation about 2.33 s (separate medians).
+   Inspect parsing, immutable preparation, checker input preparation, provenance
+   and process/transport overhead. Remove demonstrated duplicate work while
+   retaining exact original inputs, fresh independent certificates and durable
+   evidence. Select a bounded delivery slice ahead of precision device work
+   when its cost case is stronger; this is not an automatic dependency or a
+   claim that the recorded unattributed residual is removable.
+3. **Keep prepared throughput explicit.** Reuse immutable models and residency
+   across fresh solves, and charge setup in the cold endpoint. The observed
+   control cold/prepared ratios are 1.24–2.98 on certified models; each prepared
+   configuration has only one batch. They motivate lifecycle reuse, not a
+   supported throughput preset or a resident-candidate win.
+4. **Reopen resident optimization only for a new cost mechanism.** A future
+   proposal must quantify changes in launches, copies, bytes, allocations,
+   guards and observation cost. Compact flag transport or graph submission are
+   hypotheses requiring their own admission; fewer waits alone is insufficient.
+   Preserve the 200-update controller boundary, bounded cancellation and whole
+   checkpoint rollback unless a separate numerical contract changes them.
+5. **Separate mathematical coverage from transport and performance.** Normal-limit
+   export is fixed. The mixed-model finite-dual-bound refusal remains a distinct
+   bound-authority problem; diagnose it from retained candidates before proposing
+   any new numerical work. Keep these endpoints in the coverage denominator and
+   out of certified speedup claims. Do not clip infinite bounds or relabel old
+   1e-9 failures. The future FP4 1e-7 tier has separate authority under ADR-0058;
+   it does not resolve missing finite-bound authority by changing tolerance.
+6. **Match the strength of the claim to the experiment.** Three cold repetitions
+   and one prepared batch do not establish a general ranking. Future protocols
+   must predeclare repetitions, paired order, uncertainty reporting and stop
+   rules. Freeze actual executable hashes and validate produced counter/export
+   schemas before device admission; retain every failed attempt and its charge.
+
+These are prospective gates under [ADR-0054](../decisions/ADR-0054-resident2-cost-priorities.md).
+The RESIDENT2 retention decision and all prior scientific criteria stay fixed.
+ADR-0058 refines their ordering for FP4 exploration and adds a separate future
+quality tier; no new experiment, budget transfer, RESIDENT2 retry or GPUP-9
+execution follows this documentation update.
+
 ### Ordered deliverables and decision gates
 
 | Task / priority | Deliverable and prerequisite | Acceptance / go-no-go decision |
@@ -47,17 +302,25 @@ concrete protocol/allocation; GPUP-8 stays closed and incomplete, GPUP-9 gated.
 | **GPUP-BASELINE-SPEC**, delivered, CPU-only | SPEC-0022, three schemas, canonical conversion/endpoint/proposal validation, fixtures and resource arithmetic | Twenty focused tests pass; ten lanes and eight source-bound development models; proposal remains non-executable |
 | **GPUP-BASELINE**, complete under the user amendment | Separate adapters/checker, frozen 240-cell report; 123 results reused and 117 new attempts | 198 comparison passes, 135 strict certificates; cuOpt 90/96 native passes and 24/96 strict certificates. Separate native/quality/transport outcomes and retained failures; no equal-quality speedup claim |
 | **GPUP-BASELINE-FOLLOWUP**, delivered | ADR-0052 / SPEC-0023, exact continuation roster, explicit native-return policy and resource allocation | Original certificate unchanged; native errors and normal limits distinguished; raw vectors and mapping uncertainty preserved; previous numerical trials not rerun |
-| **GPUP-RESIDENT2**, next ready | First attribute conversion/import/native/check/output costs with explicit cold/prepared lifecycles; then a versioned native baseline with per-window coefficients, device sticky flags and bounded asynchronous submission; reusable immutable preparation within explicitly named lifecycle; depends on GPUP-BASELINE | Preserve boundary state, refusal/rollback/cancellation and fresh certificate semantics; measure launch/copy counts and total time against matched native control; retain only if total latency improves without coverage loss |
-| **GPUP-MIXED2**, planned | FP32 matrix / FP64 state-and-compute candidate first; only then bounded FP32 state with residual-driven escalation; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Explicit matrix-error and residual contract; useful nonzero work on admitted models, original 1e-9 checker, charged correction/fallback; reject if convergence/guard cost erases total gain |
-| **GPUP-TENSOR2**, conditional | CPU cost admission for dense-block or batched alternatives; device prototype only after admission; depends on GPUP-MIXED2 | Compare packing, padding, all component/residual work, state updates, guards and convergence with native/SIMT; no full campaign unless a conservative complete-path estimate has at least 10% headroom; this is a proposed new screen, not a GPUP-8 criterion change |
+| **GPUP-RESIDENT2**, complete as bounded negative result | SPEC-0024 / ADR-0053; cold/prepared phases, immutable preparation, coefficient/flag transport, transactional native windows and normal-limit export | 64 cells/96 endpoints; 42/48 strict certificates per mode and 42 bitwise pairs. Four sanitizers pass. Cold geomean 1.027370x and four regressions fail latency retention; keep the native control |
+| **GPUP-FP4-SPEC**, complete, CPU-only | [SPEC-0025](../specifications/SPEC-0025-persistent-fp4-contract.md) / ADR-0056; E2M1/error/projection oracles, observation-only checkpoint contracts, three schemas and frozen resource/grid proposal | 32 focused CPU contracts and full native integration pass; source-bound cost review admits no forecast; strict 1e-9 final certificate unchanged; no GPU execution |
+| **GPUP-FP4-PROTO**, incomplete; bounded CPU attempt closed | SPEC-0026 / ADR-0057 independent CPU reference, component trajectories, rollback and frozen twelve-cell admission; depends on GPUP-FP4-SPEC | Zero qualified lanes: nine guard and three metadata refusals, zero observations; separate local-budget correction has primitive tests only. Device/MMA/four-sanitizer/profile work unexecuted; no performance or certification claim |
+| **GPUP-FP4-GPU-PILOT**, complete as bounded negative result | SPEC-0027 / ADR-0059; actual E2M1 MMA and persistent state, six lanes/four variants/three workloads; depends only on GPUP-FP4-SPEC | [216 cells complete](../benchmarks/lp-fp4-gpu-pilot.md), all four sanitizers pass after two explicitly released corrections. Dense-2048 persistent FP4 ×2/×4/×8 iteration ratios 0.349/0.178/0.079 versus native; observed errors are not certificates. Native retained; no preset |
+| **GPUP-FP4-FAST**, complete | [SPEC-0028 delivery](../benchmarks/lp-fp4-fast.md): hardware encoding, component columns, zero-plane pruning, exact host preparation and prepared lifecycle | 288/288 cells and 2016 fresh windows; same-lane endpoint hashes match; 4.16–7.81x kernel gains and four sanitizer passes. Rich FP4 x8 still loses to native; no certificate or preset |
+| **GPUP-FP4-RECOVERY-SPEC**, complete, CPU-only | [SPEC-0029](../specifications/SPEC-0029-fp4-recovery-policy.md) delivers local accounting, operational guards, complete checkpoints, dual-tier receipt validation and a non-executable integration proposal | New versioned contract; empirical inner error never masquerades as a proof; original-model FP64 audits and independent final certification at the declared 1e-7/1e-9 tier; no automatic old scientific retry |
+| **GPUP-FP4-INTEGRATE**, complete; retention fails | [SPEC-0030](../specifications/SPEC-0030-fp4-integration.md): coupled recovery and certificates admitted; 672 cells complete, same coverage, no retained speedup | Nontrivial trajectory, full checkpoint/cancellation/recovery and original-model endpoint admission; a useful certified-1e-7 lane may proceed without a strict pass; retain all costs and failures |
+| **GPUP-MIXED2**, simpler alternative, dependency-ready | CPU-only complete-delivery cost admission against the native control, then separately admitted FP32 matrix / FP64 state-and-compute; lower-precision state is a later candidate; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Predeclared latency/coverage rule and accelerated cost fraction, iteration/guard/transfer/fallback costs; defer device study if the cost case fails. Explicit matrix-error/residual contract, useful nonzero work and original 1e-9 certificate |
+| **GPUP-DELIVERY2**, conditional alternative before precision device work | Target demonstrated parsing/preparation/checker/provenance/transport overhead using retained native phase evidence; depends on GPUP-RESIDENT2 | New bounded protocol/allocation; exact original inputs and fresh independent certificates; matched native controls isolate transport changes. Cold total cost and prepared throughput remain separate; no unmeasured residual assigned to removable overhead |
+| **GPUP-TENSOR2**, conditional FP4 study | New versioned native FP64, FP8/FP16 and FP4 cohorts at explicit 1e-7/1e-9 final tiers; depends on GPUP-FP4-INTEGRATE | Integration and complete-cost admission before campaign; at least 1.10x cold model-median geometric mean, no certified model-median regression or coverage loss against same-tolerance control; uncertainty and complete cold/prepared costs; old proposal/GPUP-8 criteria unchanged |
 | **GPUP-PRESOLVE**, planned | Minimal reversible fixed-variable, singleton and bound-tightening transformations plus postsolve maps; depends on GPUP-BASELINE evidence | Independent original-model validation of postsolved primal/dual information and statuses; benchmark saved total work; reject transformations that cannot preserve required proof information |
 | **GPUP-8-DISPOSITION**, planned review | Review new engineering evidence and the retained incomplete GPUP-8 record; depends on GPUP-BASELINE and GPUP-MIXED2 | Either propose a separately funded bounded recovery with unchanged GPUP-8 criteria, or seek an explicit negative-result closure and superseding progression decision; neither marks GPUP-8 passed by default |
 | **GPUP-9 / GPUP-10**, gated | Controlled held-out ablations, then evidence-supported dispatcher/recipes | GPUP-8 completion or a separately accepted replacement gate is required; retain coverage, uncertainty, total costs and native fallback; no preset from partial profiles |
 | **GPUP-MILP**, deferred | Relaxation adapter, bound authority, warm starts and full search study after supported LP recipes | Correct pruning/bounds, cancellation and reproducibility, followed by full MILP time/node/coverage comparisons |
 
 One task owner handles each accepted slice. Expected ownership is experiment
-tooling for BASELINE-SPEC/BASELINE, CUDA runtime for RESIDENT2, numerical backend
-for MIXED2/TENSOR2/PRESOLVE, and solver executive for MILP. Tasks are sequential
+tooling for BASELINE-SPEC/BASELINE/DELIVERY2, CUDA runtime for RESIDENT2,
+numerical backend/CUDA runtime for the FP4 pilot/recovery/integration path, numerical backend for
+MIXED2/TENSOR2/PRESOLVE, and solver executive for MILP. Tasks are sequential
 unless their accepted resource plans explicitly permit independent work.
 
 ### External comparison contract
@@ -99,18 +362,17 @@ postsolve mapping uncertainty remains an optional adapter follow-up rather than
 an implicit prerequisite or an attributed vendor defect.
 
 The large mixed model has no strict certificate from any configuration. The
-project's native limit endpoints retain candidates and internal assessments,
-but nonzero CLI exit prevents export through the current adapter. The strict
-checker also lacks finite bound authority for an unbounded variable's reduced-cost
-enclosure. Preserve these as separate transport and mathematical limitations;
-first diagnose normal-limit extraction and sound bound construction without
-inventing finite bounds or relaxing the certificate. Use certifying models for
-matched latency claims, keep mixed-model failures in the coverage denominator,
+baseline adapter's normal-limit export failure is historical: RESIDENT2 now
+exports complete primal/dual vectors from all twelve mixed-model limit endpoints.
+The strict checker still lacks finite bound authority for variable 3's
+reduced-cost enclosure. Diagnose sound bound construction from retained evidence
+without inventing finite bounds or relaxing the certificate. Use certifying
+models for matched latency claims, keep mixed-model failures in the coverage denominator,
 and require an explicit bound-authority contract before claiming a certified win
 there. The [completed report](../benchmarks/lp-external-baseline-native-return.md#what-the-completed-comparison-changes)
 binds those observations.
 
-RESIDENT2 is now the next ready implementation task. Its first deliverable is
+The completed RESIDENT2 result is linked above. Its first required deliverable was
 phase attribution for conversion, import/readback, native solve, export, checking
 and durable output without additional device synchronizations. COPT's first
 retained dense-65536 GPU PDLP solve took 0.574 native seconds but 25.574 complete
@@ -118,33 +380,37 @@ seconds, including 4.326 seconds in independent checking. Faster arithmetic can
 only improve the portion it actually accelerates; preparation/evidence costs
 must remain visible.
 
-Define cold and prepared-model lifecycles before introducing immutable canonical
-preparation, binary/buffered transport or compact evidence. Cold time must still
-charge preparation; amortized prepared throughput is a separate endpoint. Preserve
+RESIDENT2 defines cold and prepared-model lifecycles and immutable preparation.
+Further binary/buffered transport or compact evidence must use those explicit
+boundaries. Cold time must still charge preparation; amortized prepared
+throughput is a separate endpoint. Preserve
 exact original coefficients, independent assessment, source bindings and bounded
 cancellation/cleanup. Compare native controls under the same transport before
 claiming an algorithmic improvement. The old v2/new v5 small-model transport
 mismatch is explicitly excluded from paired speedup claims.
 
-After that control is established, reduce redundant per-update synchronization
-and preparation under the existing safe controller boundaries. MIXED2 follows
-with FP32 matrix storage and FP64 state/arithmetic before a separately guarded
-low-precision state. Require useful work, explicit error/progress guards and
-charged correction/fallback; retain the project's 1e-9 certificate even though
-the external cuOpt comparison has a user-selected native-return tier. Tensor
-work remains conditional on a complete-path cost case. No new task is funded or
-executed by this handoff, and GPUP-8/GPUP-9 gates remain unchanged.
+Keep the measured native control. FP4-SPEC is complete; the old FP4-PROTO CPU
+attempt remains refused. FP4-GPU-PILOT and FP4-FAST are complete; CPU recovery is complete under SPEC-0029; FP4-INTEGRATE is complete under SPEC-0030 with failed latency retention;
+MIXED2 is the simpler numerical alternative and DELIVERY2 targets host/evidence
+savings when those offer the stronger cost case. An admitted MIXED2 prototype
+uses FP32 matrix storage and FP64 state/arithmetic before a separately guarded
+low-precision state. MIXED2 requires useful work, explicit error/progress guards,
+charged correction/fallback and its existing 1e-9 certificate; the new FP4 tier
+does not change that scope. The certified Tensor solver campaign requires a
+complete-path cost case, while the exploratory GPU pilot follows its separate
+gates above. No future experiment is funded or executed by this handoff, and
+GPUP-8/GPUP-9 gates remain unchanged.
 
 ### Resident execution and precision choices
 
-After phase attribution and lifecycle definition, RESIDENT2 can remove redundant
-synchronization in a separate native control,
-keeping the existing 200-update controller boundaries. Precompute coefficients
-for bounded blocks, accumulate sticky flags on device, and read results at a
-proved safe boundary. Predicated execution must not publish invalid work. A
-failure must restore the entire checkpoint and charge all attempted work; a
-bounded block must preserve cancellation responsiveness. Graph capture or fusion
-is optional and must earn its complexity through full-path measurements.
+RESIDENT2 implemented bounded coefficient tables, sticky flags and transactional
+observation under the existing 200-update controller boundaries. Its latency gate
+failed, so it remains a research candidate and is not the base for FP4 or MIXED2.
+A future resident proposal must identify a materially different cost mechanism
+and include the full safety/transport cost before device admission. Predicated
+execution must not publish invalid work; refusal must preserve the entire host
+checkpoint and charge attempted work. Graph capture, compact flags or additional
+fusion remain unmeasured proposals, with bounded cancellation required.
 
 For MIXED2, begin with fewer representation changes than GPUP-8: original FP64
 matrix for residual/check authority, FP32 stored matrix for an approximate inner
@@ -155,13 +421,15 @@ path. Scaling, primal/dual progress and final certification all remain explicit.
 The prior refinement and resident-quantization failures are required design inputs,
 so zero inner updates or zero useful low-precision windows cannot pass admission.
 
-For TENSOR2, require a workload that amortizes packing and reconstruction. A dense
-tile test alone is insufficient. Prefer a bounded approximate product with a
-cheaper reliable correction if its numerical contract admits it. Expensive exact
-digit reconstruction remains available for reference/special cases. Multiple
-right-hand sides require a separate throughput cohort and memory accounting.
-Cross-window expanded persistence is a distinct numerical change, not presumed
-to cure the measured reconstruction cost.
+For TENSOR2, retain the bounded FP4-INTEGRATE safety/certificate evidence and
+first establish a new complete-cost case at the declared 1e-7 or 1e-9 final tier.
+Its present cold latency gate fails. Require a coupled workload that
+amortizes packing, component products, normalization and correction. A dense tile
+test alone is insufficient. Compare actual sparse tails and single-RHS utilization;
+multiple right-hand sides require a separate throughput cohort and memory
+accounting. Cross-window persistence is the proposed numerical change requiring
+a new error/recovery contract, not an inherited GPUP-8 pass. Exact reconstruction
+remains available for reference or exceptional paths, with its cost reported.
 
 No supported dispatcher is chosen yet. Its eventual candidates are native CPU,
 native GPU, admitted mixed precision and selective dense/batch Tensor execution,

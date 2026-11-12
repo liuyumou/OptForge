@@ -11,4 +11,5 @@ Concise navigation only. Normative behavior lives in
 - [Benchmark definitions](../docs/benchmarks/protocol.md)
 - [Experimental FP32 operation and COPT study](../docs/operations/lp-precision.md)
 - [GPU LP precision roadmap and slices](../docs/plans/gpu-lp-precision-roadmap.md)
+- [Persistent FP4 CPU contract and proposal](../docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md)
 - [FP32 and COPT study](../docs/benchmarks/lp-fp32-gpup5.md)

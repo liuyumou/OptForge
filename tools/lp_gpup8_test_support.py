@@ -83,6 +83,8 @@ def warp32_preservation_tree():
     """Check actual source contracts with a synthetic image for the hash guard."""
     import lp_tensor_warp32_build as build
     with tempfile.TemporaryDirectory() as temp, contextlib.ExitStack() as stack:
+        from lp_resident2_test_support import historical_registration
+        stack.enter_context(historical_registration())
         root = Path(temp)
         base = root / 'artifacts/gpup-tensor-warp32-v1'
         base.mkdir(parents=True)

@@ -1,0 +1,129 @@
+{
+  "cells": [
+    {
+      "components": 2,
+      "id": "scalar-equality-k2",
+      "model": "scalar-equality",
+      "updates": 600
+    },
+    {
+      "components": 4,
+      "id": "scalar-equality-k4",
+      "model": "scalar-equality",
+      "updates": 600
+    },
+    {
+      "components": 8,
+      "id": "scalar-equality-k8",
+      "model": "scalar-equality",
+      "updates": 600
+    },
+    {
+      "components": 2,
+      "id": "coupled-equality-k2",
+      "model": "coupled-equality",
+      "updates": 600
+    },
+    {
+      "components": 4,
+      "id": "coupled-equality-k4",
+      "model": "coupled-equality",
+      "updates": 600
+    },
+    {
+      "components": 8,
+      "id": "coupled-equality-k8",
+      "model": "coupled-equality",
+      "updates": 600
+    },
+    {
+      "components": 2,
+      "id": "diagonally-dominant-equality-k2",
+      "model": "diagonally-dominant-equality",
+      "updates": 600
+    },
+    {
+      "components": 4,
+      "id": "diagonally-dominant-equality-k4",
+      "model": "diagonally-dominant-equality",
+      "updates": 600
+    },
+    {
+      "components": 8,
+      "id": "diagonally-dominant-equality-k8",
+      "model": "diagonally-dominant-equality",
+      "updates": 600
+    },
+    {
+      "components": 2,
+      "id": "bounded-ranged-k2",
+      "model": "bounded-ranged",
+      "updates": 600
+    },
+    {
+      "components": 4,
+      "id": "bounded-ranged-k4",
+      "model": "bounded-ranged",
+      "updates": 600
+    },
+    {
+      "components": 8,
+      "id": "bounded-ranged-k8",
+      "model": "bounded-ranged",
+      "updates": 600
+    }
+  ],
+  "conditional_gpu_seconds": {
+    "admission": 480,
+    "diagnostics": 360,
+    "pilot": 720
+  },
+  "fixtures": {
+    "path": "benchmarks/configs/lp-fp4-cpu-admission-v1.json",
+    "sha256": "b8422e55e4d395a7d705d9eaff44d108cc57cf284cb81f1b00a6f2c81509659e"
+  },
+  "gate": "One lane must retain all four nontrivial 600-update trajectories",
+  "gpu_authorized": false,
+  "kind": "lp-fp4-cpu-execution",
+  "phase": "cpu-admission",
+  "proposal": {
+    "path": "benchmarks/configs/lp-fp4-proposal-v1.json",
+    "sha256": "11db06a49d1affe640ec7ac748e52014ecae7d6091631c036f4bc902e29da3ac"
+  },
+  "retry_policy": "No scientific automatic retry",
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "tools/lp_fp4_reference.py",
+      "sha256": "34131cb8541733c6e363e32e6e3273743bcb0b0ce2d1b85197ee42033c53b938"
+    },
+    {
+      "path": "tools/lp_fp4_admission.py",
+      "sha256": "f2a7d0dd7323afcb4f9985a79675690c290148fe55e1756c314899fad036c9ea"
+    },
+    {
+      "path": "tests/integration/test_lp_fp4_reference.py",
+      "sha256": "5c6a1b0d6436389701fb19a57cf578c2879021157588c5463271ca5d47d85dec"
+    },
+    {
+      "path": "tools/lp_fp4_contract.py",
+      "sha256": "1b663e3a0f6231d8dcf665af007309416a1c2ee741bc67c0326587a6d3c2f1ea"
+    },
+    {
+      "path": "tools/lp_fp4_protocol.py",
+      "sha256": "25992ecafdda99a2e03298fc4ff2c51b00404bfa8bb971fd988a6b0570809e2c"
+    },
+    {
+      "path": "docs/specifications/SPEC-0025-persistent-fp4-contract.md",
+      "sha256": "493260209421257bd97c9e0b0e19f0150baadb90ee7013949a418f85cba6a347"
+    },
+    {
+      "path": "docs/specifications/SPEC-0026-fp4-prototype-admission.md",
+      "sha256": "6caa30f82973ee36872c57a9e566cbabf536975f41558014486027670dda7358"
+    },
+    {
+      "path": "docs/decisions/ADR-0057-fp4-prototype-admission.md",
+      "sha256": "26afa27acbf19642cb47c7b03baeac8fe3d8050490799f7e1480d33a8d5ddb55"
+    }
+  ]
+}

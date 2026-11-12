@@ -5,17 +5,33 @@ selective GPU acceleration. **C6 is implemented under SPEC-0010 and SPEC-0011**:
 a search can evaluate integer schedules on a GPU, and a first-order LP backend
 runs on the host or device with host-side validation and certification.
 
-As of 2026-11-10, **GPUP-8 is implemented experimentally but incomplete**.
+As of 2026-11-11, **GPUP-8 is implemented experimentally but incomplete**.
 Its corrected proof and device acceptance pass; six small profiles complete,
 then the first large BF16 profile times out. No certified latency gain or supported
 precision preset is established, and GPUP-9 remains gated. The
 [system diagnosis](docs/benchmarks/lp-system-diagnosis-2026-11-10.md) identifies
 expanded reconstruction and state-update costs as the dominant current bottleneck.
 The [revised roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-11-10)
-prioritizes comparable cuOpt/COPT baselines, lean resident execution and simpler
-mixed precision, with selective Tensor work conditional on total-cost evidence.
-[ADR-0047](docs/decisions/ADR-0047-certified-performance-roadmap.md) records the
-design choices. [cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
+now prioritizes [persistent multi-FP4 iterations](docs/plans/lp-fp4-persistent-state.md):
+approximate inner iterations and fused kernels. The
+[new planning amendment](docs/decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
+admits independent device exploration after the failed long CPU trajectory gate.
+The [FP4 GPU pilot](docs/benchmarks/lp-fp4-gpu-pilot.md) now completes all 216
+profile cells after corrected arithmetic and four-sanitizer admission. This
+candidate is slower than native FP64 in the bounded grid; no solver preset is
+selected. CPU numerical recovery is next ready. Future certified
+comparisons have explicit 1e-7 and strict 1e-9 tiers, with same-tolerance controls
+and complete-solve speed/coverage criteria; current solver defaults stay unchanged.
+[SPEC-0025](docs/specifications/SPEC-0025-persistent-fp4-contract.md) implements
+the CPU numerical/transaction/cost contract; its
+[report](docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md) records the frozen proposal
+and retained-data feasibility bounds. The
+[FP4-PROTO CPU attempt](docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md) qualifies
+none of twelve cells: nine error-guard and three metadata refusals. That v1
+attempt remains closed; the independent GPU pilot preserves its sources,
+criteria and charges. Full prototype acceptance and certified-solver speedup
+remain unestablished.
+[cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
 Gurobi remains unavailable and was excluded from the baseline.
 
 [GPUP-BASELINE](docs/benchmarks/lp-external-baseline-native-return.md) is complete
@@ -25,9 +41,14 @@ For cuOpt, 90/96 native returns pass its explicit error/status policy, while
 24/96 meet the independent certificate. Limits, native errors, outer failures
 and numerical discrepancies remain visible. This is not a quality-matched
 performance claim. Total baseline GPU charge is 3091.996 / 3600 seconds.
-The next ready task is resident execution with explicit preparation/checking costs;
 [SPEC-0023](docs/specifications/SPEC-0023-baseline-native-return.md) records the
 cuOpt policy, and SPEC-0022's strict mathematical checker remains unchanged.
+
+[GPUP-RESIDENT2](docs/benchmarks/lp-resident2-gpup-resident2.md) is complete as a
+bounded negative result: certified coverage is preserved, but complete latency
+fails the retention gate. Keep the native control. The new FP4 pilot and numerical
+recovery lead to integration before a certified study; MIXED2 and DELIVERY2
+remain alternatives.
 
 The earlier research slices provide the following foundation.
 Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)

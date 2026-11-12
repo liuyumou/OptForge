@@ -1,0 +1,186 @@
+{
+  "base_main": "4e62cab04ca2236d419c2deea4063a42a4f519ef",
+  "clean_checkout": "Local Git clone with full history, no copied worktree artifacts or binaries; pinned dependencies, generated models and native build provisioned locally.",
+  "gpu_runs": 0,
+  "history": {
+    "path": "docs/benchmarks/data/fp4-pr-history-v1.json",
+    "sha256": "28f80b261cbe62dbb15cf50d5c1c3c888a29ac185794dd4fe6d4cc9bf3296e2f"
+  },
+  "hosted_ci": "Separate hosted status is disclosed in the pull request; local acceptance is not a hosted check pass.",
+  "preserved_historical_files": 1662,
+  "public_default_changed": false,
+  "receipts": [
+    {
+      "binding": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/clean-checkout-v1.settlement.json",
+        "sha256": "751f4ba22274b8506538345fadbfa5a376536b20e1980c256839f6c55f0ffc59"
+      },
+      "cleanup_empty": true,
+      "log": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/clean-checkout-v1.resource.json.log",
+        "sha256": "d1f2f2026a08aa154d4aa6227cc36ea6385e7b9855839b1abda9c4b781b3a4ac"
+      },
+      "settlement": {
+        "cpu_ns": 2400000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 444,
+        "resource": {
+          "path": "artifacts/gpup-fp4-pr-v1/resources/clean-checkout-v1.resource.json",
+          "sha256": "ab167d95b261fd420b480ca2f65645bab4a9e9909329d74c519880c39bb81f59"
+        },
+        "status": "refused"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/clean-checkout-v2.settlement.json",
+        "sha256": "2c871152b8c198667823c9c1f8f16d96f445d3de74321236a0806cfc1a23961b"
+      },
+      "cleanup_empty": true,
+      "log": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/clean-checkout-v2.resource.json.log",
+        "sha256": "72e429dff03b81bce081afa9a53820b14a062b4b782f313ea0a7b5d12fd31891"
+      },
+      "settlement": {
+        "cpu_ns": 2400000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 374,
+        "resource": {
+          "path": "artifacts/gpup-fp4-pr-v1/resources/clean-checkout-v2.resource.json",
+          "sha256": "eceb2b63132e41796e386de14c3dd3a696e3dc4d6138bd3cd796dd7c2f977a20"
+        },
+        "status": "refused"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/clean-prepare-v3.settlement.json",
+        "sha256": "e43a72146c3b76bc3fcc3db88764db050aba4a26cf67c610dd4006b43c2f62e5"
+      },
+      "cleanup_empty": true,
+      "log": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/clean-prepare-v3.resource.json.log",
+        "sha256": "d54692dab068ae7961a16e93cb1184358dfd6da1175ca343145379f4f06b41fa"
+      },
+      "settlement": {
+        "cpu_ns": 459382343144,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 545,
+        "resource": {
+          "path": "artifacts/gpup-fp4-pr-v1/resources/clean-prepare-v3.resource.json",
+          "sha256": "2569ce56e35c5fc7e98d93b78ec4c7cfae60806667aa48bedf218771a97852c9"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/clean-python-v3.settlement.json",
+        "sha256": "a21d150ac1d3428ab254e1103f316b434dfba53ebdd4b73d1a19d32a450b2049"
+      },
+      "cleanup_empty": true,
+      "log": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/clean-python-v3.resource.json.log",
+        "sha256": "40a29cd774687d87f3cea5937f4822dae24cb4587f4c15f7371d80a4141a2480"
+      },
+      "settlement": {
+        "cpu_ns": 536874676608,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 409,
+        "resource": {
+          "path": "artifacts/gpup-fp4-pr-v1/resources/clean-python-v3.resource.json",
+          "sha256": "9a4369371041a2a464824309d919f43e68b843222ebb23322e9fa1af881d4018"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/full-native-v1.settlement.json",
+        "sha256": "0e2a64336daf9c40f2895c3b8aadc8a1f2c3156a6868139eb4f4efda232e490c"
+      },
+      "cleanup_empty": true,
+      "log": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/full-native-v1.resource.json.log",
+        "sha256": "a63ab9afa522682bf557abae685b7f61454981e977e774a95fb6df4793b0b9e8"
+      },
+      "settlement": {
+        "cpu_ns": 1275181343848,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 427,
+        "resource": {
+          "path": "artifacts/gpup-fp4-pr-v1/resources/full-native-v1.resource.json",
+          "sha256": "d2fa49bdc5289a65f5b3731b44552ecb5d92520ddfb42160384cb86dde9f5f70"
+        },
+        "status": "passed"
+      }
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/research-cpu-v1.settlement.json",
+        "sha256": "617a09d45265d8d8f207e6d88c8a848fa88d6f2a0566f4eb2426e9adfb2b8802"
+      },
+      "cleanup_empty": true,
+      "log": {
+        "path": "artifacts/gpup-fp4-pr-v1/resources/research-cpu-v1.resource.json.log",
+        "sha256": "bb32f5b87e2f6143bfe4eb2f95b1be974d7cfc17a66afa83e0c6ff67b406b728"
+      },
+      "settlement": {
+        "cpu_ns": 268050648024,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 331,
+        "resource": {
+          "path": "artifacts/gpup-fp4-pr-v1/resources/research-cpu-v1.resource.json",
+          "sha256": "dbefebc59d2207df8d51a441ecbad2c635300f800bd432e402b26edd2d6422f5"
+        },
+        "status": "passed"
+      }
+    }
+  ],
+  "retained_failures": {
+    "clean-checkout-v1": "Launcher incorrectly rejected a tracked historical artifacts receipt.",
+    "clean-checkout-v2": "Launcher omitted native library, root CLI, generated fixtures and declared Python dependencies; isolated FP4 checks passed."
+  },
+  "status": "passed",
+  "tested_code_commit": "bc0d33abb2132742b0b1856896aeb795c28d3eb3",
+  "tests": {
+    "clean_python": 650,
+    "fp4_python": 133,
+    "full_native_rust": 638,
+    "full_python": 650,
+    "isolated_research_rust": 48
+  },
+  "whitespace_exception": {
+    "path": "docs/benchmarks/data/fp4-fast-hygiene-v1.json",
+    "sha256": "687a04f0271d6682fd0fc7bdefcad7f1b6d52add0b9aed9e7dc94aecc7343e10"
+  },
+  "delivery_adjustment": {
+    "reason": "GitHub rejected workflow creation because the OAuth login lacks workflow scope.",
+    "change": "Remove the optional new workflow; retain the tested isolated CPU validation script and unchanged existing CI.",
+    "archive": {
+      "path": "artifacts/gpup-fp4-pr-v1/integration-before-workflow-restriction.bundle",
+      "sha256": "ec22e44f83c7de7d9e48803564382372f67ae539db269787eb80e99162cc574c"
+    },
+    "research_ancestry_unchanged": true,
+    "numerical_sources_and_tests_unchanged": true,
+    "tested_local_commits_preserved_in_archive": true
+  }
+}

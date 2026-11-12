@@ -1,0 +1,162 @@
+{
+  "admission": {
+    "binary": {
+      "path": "research/lp-fp4-fast/target/release/lp-fp4-fast",
+      "sha256": "fed87577faddcf1eca60227e9981d34f3c4013078c23d56a3b9b2ad57a5310c6"
+    },
+    "build": {
+      "path": "artifacts/gpup-fp4-fast-v1/build-v8/receipt.json",
+      "sha256": "82a48d918ee1cd593076f4f26474f8b4ddad604ac44eb9d0528bec101a433094"
+    },
+    "certified": false,
+    "checks": [
+      {
+        "count": 60,
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/primitives-v8/manifest.json",
+          "sha256": "3352d8305deb402f50006f22dcfaf6cdefae9bb3cec37977770570f5601eca1d"
+        },
+        "result": {
+          "path": "artifacts/gpup-fp4-fast-v1/primitives-v8/result.json",
+          "sha256": "d102612e8da86091dcd0d87ae7e7ed63be277f9d1781208776c52d86b82fa2bc"
+        },
+        "stage": "primitives"
+      },
+      {
+        "count": 72,
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/stress-v8/manifest.json",
+          "sha256": "e5795d0fafe3cab3512dd9f414004109a6ee14f1202ca3b0dd05a8c96912e261"
+        },
+        "result": {
+          "path": "artifacts/gpup-fp4-fast-v1/stress-v8/result.json",
+          "sha256": "ebb01c69a39cfe4ea19c3b1fe41ac3616f1815d2cf94c09958ed99ba7b12155f"
+        },
+        "stage": "stress"
+      },
+      {
+        "count": 42,
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/transactions-v8/manifest.json",
+          "sha256": "0c9f29a3df521f1be997faf88e996e1dc095c727472fade0980db82b8285d2e6"
+        },
+        "result": {
+          "path": "artifacts/gpup-fp4-fast-v1/transactions-v8/result.json",
+          "sha256": "6bff0c834c70ee24607aa623d0b40c6a7053f8aeeb684ab262830092fbd152d9"
+        },
+        "stage": "transactions"
+      },
+      {
+        "count": 24,
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/memcheck-v8/manifest.json",
+          "sha256": "e7da546b7978a2372ff27d3b369c7a53530fc478605b2749f3e1e64e401f88ce"
+        },
+        "result": {
+          "path": "artifacts/gpup-fp4-fast-v1/memcheck-v8/result.json",
+          "sha256": "c10e471290c083f060bdc16cde4a82d8773b46a056b47dd0fd8b17bdceb941cc"
+        },
+        "stage": "memcheck"
+      },
+      {
+        "count": 24,
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/racecheck-v8/manifest.json",
+          "sha256": "59172fd0e18e8f69001516bb7c9bbb7c5129815924397701fde466dc9a0d1fc4"
+        },
+        "result": {
+          "path": "artifacts/gpup-fp4-fast-v1/racecheck-v8/result.json",
+          "sha256": "060347535ddabbf5582f0ff0668b8396c1a3af5f89160c34190b105ddee430ce"
+        },
+        "stage": "racecheck"
+      },
+      {
+        "count": 24,
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/initcheck-v8/manifest.json",
+          "sha256": "21375cf8b51f8cb502c1e2813a16ff34a5ea6584d88c82d29feaebae69d4fceb"
+        },
+        "result": {
+          "path": "artifacts/gpup-fp4-fast-v1/initcheck-v8/result.json",
+          "sha256": "5a00b8b32b97189e328db9076e1bfa118416ac8cc5c30184dfa9622788e02128"
+        },
+        "stage": "initcheck"
+      },
+      {
+        "count": 24,
+        "manifest": {
+          "path": "artifacts/gpup-fp4-fast-v1/synccheck-v8/manifest.json",
+          "sha256": "54836731fe38bc51022824a55c3c1aa7da48865bcef045e2794344a992ee680b"
+        },
+        "result": {
+          "path": "artifacts/gpup-fp4-fast-v1/synccheck-v8/result.json",
+          "sha256": "81494246ce2c9c4c9228d4878bf31c271892febc799fe9a74e81998601cb94d5"
+        },
+        "stage": "synccheck"
+      }
+    ],
+    "software": [
+      {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/native-gate-v1.settlement.json",
+        "sha256": "d598a0a7eefb499e9972f07ff238901da6ead5c4ac7770f5cf969c7e97bb2fd0"
+      },
+      {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v6.settlement.json",
+        "sha256": "245ef3076dead8154933ff5f92e1eeecd3a61ed571cf7b6221316b99caea9e74"
+      }
+    ],
+    "source": {
+      "path": "research/lp-fp4-fast/cuda/fast.cu",
+      "sha256": "08bd035160664b207bf183ad282e5a4e92002a8fef1a4fe338b16272085eb44c"
+    },
+    "status": "passed"
+  },
+  "fresh_windows": 2016,
+  "matched_endpoints": 48,
+  "software": {
+    "cpu-build-v6": {
+      "cpu_ns": 18002379392,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 371,
+      "resource": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/cpu-build-v6.resource.json",
+        "sha256": "94651b6a5d484aa67d8adf942ab91d706b5201b78dca804a4a597e605d2ed78a"
+      },
+      "status": "passed"
+    },
+    "grid-cpu-v1": {
+      "cpu_ns": 12282121852,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "implementation",
+      "queue_ns": 700,
+      "resource": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/grid-cpu-v1.resource.json",
+        "sha256": "35e7f225f8352a0399250750e5f9a4144c3041797cb7d0515f0a62d949e0c7e9"
+      },
+      "status": "passed"
+    },
+    "native-gate-v1": {
+      "cpu_ns": 1256659300980,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "native",
+      "queue_ns": 357,
+      "resource": {
+        "path": "artifacts/gpup-fp4-fast-v1/resources/native-gate-v1.resource.json",
+        "sha256": "89283a7460136107c810c5f09655790d15f35bc3684a867cb6eda6051f5963d0"
+      },
+      "status": "passed"
+    }
+  },
+  "status": "passed",
+  "study": {
+    "path": "artifacts/gpup-fp4-fast-v1/study-v1/result.json",
+    "sha256": "f819a519bb8e7a7b15e935c87bdce63707a77020090b83434b4af2215ae6bc6b"
+  }
+}

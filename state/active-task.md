@@ -1,5 +1,678 @@
 # Active Task
 
+## FP4 research PR integration accepted (2026-11-12)
+
+Local integration acceptance is complete at code commit bc0d33a. The full
+CPU/native gate passes 638 Rust tests (including the buffered transport test),
+650 Python tests, dependency/replay/artifact/docs/smoke checks. All five isolated
+FP4 packages build and pass 48 Rust / 133 Python tests. A clean local Git clone,
+with dependencies and fixtures provisioned from repository instructions, passes
+all 650 Python tests, committed-record replay and artifact validation.
+
+All 1662 prior tracked files outside the two current handoffs remain byte-exact.
+The seven admitted blank-line whitespace exceptions retain their exact source
+hash. Two failed clean-checkout launcher attempts and full charges are preserved;
+no numerical source changed and no scientific GPU cell ran. The isolated
+research CPU validation script covers packages outside the root workspace. GitHub
+rejected the optional workflow addition because the login lacks workflow scope;
+the existing hosted workflows are unchanged. The two unpublished integration
+commits are archived locally and replaced without that workflow. All thirteen
+research commits retain their original ancestry.
+
+The separate integration allocation is closed at 8007.255518236 / 12000
+CPU seconds, zero GPU, including 512 closing-administration seconds. All supervisor
+cleanup is empty; historical allocations remain closed. Acceptance and accounting:
+[acceptance](../docs/benchmarks/data/fp4-pr-acceptance-v1.json),
+[accounting](../docs/benchmarks/data/fp4-pr-accounting-v1.json).
+The user authorizes PR creation, push and normal merge; hosted CI status must be
+reported separately. Preserve commit ancestry. No follow-on performance task,
+public preset or GPUP-9 release is implied.
+
+## FP4 research PR integration authorized (2026-11-12)
+
+The user explicitly requests merging the implemented features to main through a
+PR. This authorizes local integration commits, push, PR creation and normal merge;
+older local-only handoffs retain their completed-task scope. Integrate the thirteen
+commits from RESIDENT2 through FP4-CHECKER, preserve exact scientific code/evidence,
+and report failed latency retention honestly. No new scientific GPU run or preset.
+
+Separate CPU-only integration ceiling: 12000 seconds, four slots, 16 GiB sampled
+RSS, unchanged in-container supervisor. Phases: implementation 2400 (128 preparation),
+acceptance 8000, reporting 1200, cleanup 400. GPU zero. Preserve failed reservations;
+no closed scientific funds transfer. Run full tools/check.sh, clean-checkout Python
+portability, research-package CPU acceptance and exact historical/source review.
+Inspect hosted CI; report any startup/budget limitation and use complete local
+coverage without falsifying hosted status or bypassing branch protection.
+Receipts: artifacts/gpup-fp4-pr-v1. No follow-on performance task is released.
+
+
+## GPUP-FP4-CHECKER complete; exact checker and dense prepared gains (2026-11-12)
+
+SPEC-0032 / ADR-0064 deliver cached original feasibility indices, parallel rows,
+cached exact product decomposition/representability and original-tree scratch
+reuse. Full reports, signed zeros, overflow/refusals and final-tier mathematics
+remain exact. The checker remains an independent original-model CPU process.
+Historical sources, public defaults and admitted GPU/controller code are unchanged.
+
+All 960 new cells complete: 880 certificates across eleven bounded families and
+both tiers, plus 80 intentional refusals. All original audits/endpoints/certificates,
+checkpoints, recovery and physical work match. Twenty-one isolated Rust tests,
+63 original core/LP tests, four Python contracts, 102 original serial receipt
+comparisons and 32 device integration cells pass. Original four-sanitizer admission
+is reused only for its unchanged source-bound device image; no new sanitizer run.
+
+Dense512 CPU assessment improves 7.399 to 2.916 ms (2.54x). Strict FP4 complete
+prepared time improves 19.203 to 15.924 ms (1.206x); native improves to 16.527 ms.
+FP4's observed 3.8% lead has a 95% interval including parity. Both dense lanes take
+200 updates; FP4 per-update GPU work wins at 256/512, loses at 128 and small sparse
+cases. Cold setup dominates: optimized strict dense512 remains about 719 ms, with
+583 ms session setup. Broad cold FP4 ratios 0.9994/0.9934x fail retention. No public
+preset. Further targets: exact dual/transport costs and measured cold setup/teardown.
+
+Independent ceiling: 24000 CPU / 1200 GPU seconds, no historical transfers. Both
+failed development reservations and all source/log versions are preserved. Allocation closed at
+3105.019900448 CPU / 216.672767949 GPU seconds, including all failures; cleanup
+is empty and 1636 historical files remain exact. Receipts are in the report.
+GPUP-8 incomplete, TENSOR2 conditional, GPUP-9 gated. Commit locally only.
+Report: [delivery](../docs/benchmarks/lp-fp4-checker.md). Older entries retain their scope.
+
+
+## GPUP-FP4-CHECKER implementation (2026-11-11)
+
+The user requests explanation of cold-retention/iteration costs and continued
+independent-checker acceleration. Implement a separate research checker with
+cached original-model term indices and exact certificate optimizations. Preserve
+all original arithmetic order, signed-zero/overflow/refusal behavior, final tiers,
+endpoint identity and independent CPU checking. Historical sources/results and
+closed allocations stay exact; no public default change. Commit locally only.
+
+New independent allocation: 24000 CPU / conditional 1200 GPU seconds, four CPUs,
+one pinned shared GPU lease, 16 GiB sampled RSS / 12 GiB device buffers. CPU phases:
+implementation 8000 (including 256 preparation), acceptance 6000, study 6000,
+reporting 3000, cleanup 1000. GPU acceptance 300 / study 900. Use the unchanged
+in-container supervisor with separate artifacts/gpup-fp4-checker-v1 reservations.
+Full failed reservations and development source versions remain preserved.
+Require exact CPU differential admission before a new same-image complete-cost
+cohort. Device kernels are unchanged; reuse their existing source-bound sanitizer
+admission. No historical timing retry or GPUP-9 release.
+
+
+## GPUP-FP4-ACCEL complete; dense acceleration, no broad retained preset (2026-11-11)
+
+SPEC-0031 / ADR-0063 deliver cached model/checker/device preparation, retained
+FP32-pair correction state, original-A FP64 window references, row equilibration,
+noise-aware recovery, parallel dense tiles and bit-identical parallel certificate
+columns. Both final tiers keep original-model authority. Native receives the same
+scheduling/delivery improvements; the public solver default is unchanged.
+
+All 1440 original and 360 separate EOF cold cells complete: 1650 certificates,
+all eleven bounded families at both tiers, and 150 intentional unbounded-direction
+refusals. All 102 distinct endpoints replay with the original serial checker;
+the 360 new delivery cells match original endpoints/certificates/work exactly.
+Final admission: 270 device comparisons, 42 lifecycle/failure cases and four
+zero-error sanitizers/112 service processes. Full repository gate: 638 Rust /
+646 Python tests plus replay/dependency/docs/smoke; final isolated corrections:
+17 Rust / ten Python tests, including 600 exact serial/parallel comparisons.
+
+Strict dense-512 FP4 improves from fused 27.588/43.050 ms GPU/complete to parallel
+4.457/18.955 ms: 6.19x GPU and 2.27x complete. Strong parallel native is
+5.347/18.676 ms, so FP4's 1.20x GPU gain does not give a strict total-time win.
+EOF cold FP4 geometric means 0.984997/0.986329x fail 1.10x retention. Keep native
+supported, select no public preset. Forty x2-to-x4 local-budget promotions finish
+certified; no natural conversion/stagnation failure or native fallback occurs.
+
+Independent allocation closed: 19460.451448592 / 160000 CPU seconds and
+2540.379498809 / 24000 GPU seconds. Final charges and empty cleanup are in the report. Nine failed reservations, exact sources/images and
+all closed history are preserved. No scientific cell retry or historical transfer.
+Next worthwhile work: exact-checker, launch/delivery and useful larger/batched
+dense costs under a new protocol. TENSOR2 conditional, FP4-PROTO/GPUP-8 incomplete,
+GPUP-9 gated. Local commit only; no push/publication. Older entries retain scope.
+Report: [delivery](../docs/benchmarks/lp-fp4-accel.md).
+
+## GPUP-FP4-ACCEL implementation (2026-11-11)
+
+The user requests fixing the diagnosed costs/recovery problems and sustained FP4
+acceleration. SPEC-0031 / ADR-0063 authorize a separate research executor with
+cached model/checker/device preparation, full correction state, original-A window
+references, row equilibration, explicit operational guards and independent final
+1e-7/1e-9 certificates. Native receives the same delivery/scheduling improvements.
+Development variants, failures and charges are immutable; scientific timings
+freeze only after arithmetic/lifecycle/four-sanitizer admission. No public default
+change, historical retry, push or publication. Commit locally after delivery.
+
+Independent ceiling: 160000 CPU / 24000 GPU seconds, four CPUs, one pinned shared
+SM120 lease, 16 GiB sampled RSS / 12 GiB device buffers. Allocation and receipts:
+`artifacts/gpup-fp4-accel-v1`; unchanged in-container supervisor. Old budgets stay
+closed. New versioned development corrections are within this user's instruction;
+no automatic retry of the final frozen scientific cohort. Earlier entries retain
+their historical scope.
+
+## GPUP-FP4-INTEGRATE overhead/recovery diagnosis (2026-11-11)
+
+Retained-record analysis confirms the dense x4/1e-7 iteration win: mean GPU time
+3.716 -> 2.766 ms, while complete prepared time rises 51.365 -> 55.502 ms.
+A separate CPU microprofile finds dense model reconstruction plus durable JSON
+writing costs about 17.65 ms per solve. Prepared execution still rebuilds immutable
+representations/buffers; the checker reparses its original model each assessment.
+
+All formal restores are exact; 288 local-budget and 126 stagnation events across
+576 cells are recovery triggers, not conversion/rollback failures. State encoding
+loss dominates ranged/active-bound promotions. Their selected native endpoints
+lose about 1e-4 in x4 and 1e-8 in x8 CPU re-encoding, while the dense fixture's
+eighth-integer solution is especially representable. Dense strict native and FP4
+both need the second audit for their gap certificate. The ill-scaled policy calls
+26.90% progress across three windows stagnation; native from the same checkpoint
+makes almost identical progress. Conditioning/control, not precision alone,
+requires work. The unbounded fixture cannot yield a finite optimal certificate.
+
+Next design priorities: immutable host/device/checker preparation reuse, compact
+complete-cost evidence, correction state and responsive precision/audit control,
+conditioning and larger dense cases with generic solution significands. These are
+recommendations, not an execution release or measured optimized-solver claim.
+Numerical sources and historical results/policies/charges stay exact. This new
+CPU-only diagnosis has a separate 512 CPU / zero GPU envelope, including 256
+conservative preparation seconds; final charges and cleanup are in the report.
+No solver, checker or device run, historical retry, push or publication.
+Report: [diagnosis](../docs/benchmarks/lp-fp4-integrate-diagnosis.md). Older handoffs retain their scope.
+
+## GPUP-FP4-INTEGRATE complete; latency retention fails (2026-11-11)
+
+SPEC-0030 / ADR-0062 deliver a separate coupled persistent FP4 research executor,
+original-A audits, complete rollback/cancellation, monotone precision/native
+recovery and independent original-model 1e-7/1e-9 certificates. All 96 diagnostic
+cells complete 600 physical updates; all 576 cold/prepared solve cells complete.
+Performance coverage is 432/576, identical across lanes: six of eight families.
+The ill-scaled and intentional infinite-bound-refusal families remain uncertified.
+All certified x2/x4 starts at 1e-7 use only FP4 physical updates; strict solves
+explicitly account for native recovery when required.
+
+Final CPU/native gate, 90 arithmetic, 13 boundary/lifecycle and 14 safety cases
+pass. Four sanitizers cover 200 zero-error service processes; 176 unique endpoints
+replay independently across all 672 cells. Preserve the three failed development
+reservations, exact archived binaries, sources and all earlier history.
+
+Host policy/checker/context optimizations substantially reduce setup/repeated-solve
+cost. FP4 cold native/candidate geometric means are 0.959–0.986x; prepared ratios
+0.623–0.770x. No retention gate passes. Keep the supported native solver; no preset.
+The implementation is bounded to one CTA and at most 128 coordinates per direction,
+not a general large sparse solver or a proved global trajectory enclosure.
+
+The separate 96000 CPU / 14400 GPU allocation is closed after final acceptance.
+CPU charge: 8339.119853692 seconds; GPU charge: 707.739821097 seconds. Final cleanup and all evidence: [the report](../docs/benchmarks/lp-fp4-integrate.md).
+TENSOR2 remains conditional on a new viable complete-cost case and resource
+protocol. MIXED2 remains the independently ready CPU contract/cost alternative;
+no next-task execution is released. FP4-PROTO and GPUP-8 remain incomplete;
+GPUP-9 gated. Commit locally; no push/publication. Older entries retain scope.
+
+## GPUP-FP4-INTEGRATE implementation (2026-11-11)
+
+The user requests integration and aggressive performance optimization. Implement
+SPEC-0030 / ADR-0062: bounded genuinely coupled persistent FP4 kernels, general
+bounds, original-A audits, complete checkpoints, monotone precision/native
+recovery and independently checked 1e-7/1e-9 endpoints. Keep the admitted prior
+sources exact; all new code belongs to the separate lp-fp4-integrate package.
+No claim of a global trajectory proof or general certified speedup follows.
+
+New independent allocation: 96000 CPU / 14400 GPU seconds. CPU phases:
+implementation 24000 (512 preparation), native 16000, acceptance 24000, study
+24000, reporting 6400, cleanup 1600. GPU: acceptance 6000, study 8400. Four CPU
+slots, one pinned shared GPU lease, 16 GiB sampled host RSS, 12 GiB device buffers,
+unchanged in-container supervisor; all whole jobs must fit. Versioned development
+repairs/optimization are authorized; preserve failed sources and full charges.
+Formal 96-cell integration and later paired performance grids freeze only after
+CPU/device/sanitizer admission; no automatic scientific cell retry. No historical
+funds, old qualification rerun, public solver/checker default change or GPUP-9.
+Commit locally after delivery; no push/publication. Older entries retain scope.
+
+## GPUP-FP4-RECOVERY-SPEC complete; integration next (2026-11-11)
+
+The user requests implementation. SPEC-0029 / ADR-0061 select a versioned
+operational residual guard, compatible separate local rounding/encoding budgets,
+complete checkpoints and monotone FP4 2 -> 4 -> 8 -> native recovery. This is not
+a proved global trajectory enclosure or a convergence claim. Original-model
+independent checking remains the final authority at explicit 1e-7/1e-9 tiers.
+Source-bound CPU acceptance and accounting are in [the report](../docs/benchmarks/lp-fp4-recovery-spec.md).
+
+New independent ceiling: 16000 CPU / zero GPU seconds; implementation 4096
+(including 256 conservative preparation), software acceptance 8000, reporting
+3000 and cleanup 904. Four CPU slots and 6 GiB sampled RSS under the unchanged
+in-container supervisor. No historical transfer, old qualification retry,
+device run or public checker/default change. The 96-cell integration package's
+51760 CPU / 5880 GPU seconds are proposals, not allocations. Existing optimized
+kernels remain frozen. All numerical sources/results and historical charges stay
+exact; only current navigation/handoff files change.
+
+Acceptance: 30 new recovery tests, 107 neighboring FP4 checks and 624 repository
+Python tests pass; the final endpoint-metadata correction has all 30 focused
+tests passing. Artifact/docs checks pass, with 214 documentation pages.
+1539 historical files and all older dated handoffs remain exact. Closed charge:
+910.83174292 / 16000 CPU seconds; GPU zero. All six reservations pass and
+cleanup is empty. Unused funds do not release the next task.
+
+Next ready: GPUP-FP4-INTEGRATE, implementing the selected
+policy around the optimized candidate with coupled trajectories, original-A
+FP64 audits, complete recovery and independent final checks. Actual integration
+model/source/device freeze and its concrete resource package remain required.
+Native control stays supported; FP4-PROTO and GPUP-8 incomplete, GPUP-9 gated.
+Commit locally after delivery; no push or publication. Older entries retain scope.
+
+## GPUP-FP4-FAST completed; identical-state FP4 acceleration (2026-11-11)
+
+SPEC-0028 / ADR-0060 deliver the separate optimization in
+[the report](../docs/benchmarks/lp-fp4-fast.md). All 288 frozen cells and 2016 fresh
+windows pass with exact same-lane endpoint hashes. FP4 CUDA time improves
+4.16–7.81x (5.27x geometric mean); host FP4 preparation improves 107–227x.
+Native E2M1 conversion, pair-aware midpoint handling, constant-time scales,
+warp reductions, zero-plane pruning, component columns, binary transport and
+device checkpoint resets remove the measured overheads. Rich eight-component
+FP4 still loses to native FP64; no universal or certified-solver speed claim.
+
+Final image: artifacts/gpup-fp4-fast-v1/build-v8/fast.cubin. Acceptance passes
+60 independent products, 72 stress/midpoint comparisons, 42 transaction cases
+and four 24-path sanitizers, including fresh device resets. Full workspace gate:
+638 Rust / 593 Python plus replay, dependencies, artifacts, docs and smoke;
+updated research runtime: four Rust and seven focused final Python tests.
+Seven failed reservations and all source/image/log bytes remain preserved.
+An exact-hash exception preserves seven blank lines in the frozen CUDA source;
+36 additional projection-boundary cases pass. Four
+earlier executors were reconstructed byte-for-byte and archived; no scientific
+cells were reexecuted for that archive. The three completed pilot manifests
+remain exact. Final accounting and cleanup are linked from the report.
+
+Closed charges: 13029.974968908 / 128000 CPU seconds and
+2013.455708259 / 18000 GPU seconds, including all seven failures.
+All cleanup receipts are empty. The independent allocation is closed; unused funds do not
+release another experiment. CPU recovery policy and certified integration remain
+separate. FP4-PROTO and GPUP-8 stay incomplete; GPUP-9 gated. Commit locally after
+delivery; no push or publication. Older entries retain their original scope.
+
+## GPUP-FP4-GPU-PILOT completed; measured FP4 candidate slower (2026-11-11)
+
+SPEC-0027 / ADR-0059 and docs/benchmarks/lp-fp4-gpu-pilot.md deliver actual E2M1
+MMA, packed persistent components, local FP32 pairs, safe Rust execution and
+matched FP64/FP8/FP16 split/fused/persistent/roundtrip paths. All 216 profiles
+complete. Final admission: 60 primitives, 90 trajectory/transaction cases and
+four 24-path sanitizers, with explicit unchanged-native reuse. V1 packing and
+v2 shared-state race failures remain exact; the user explicitly released both
+versioned corrections. V3 is the active image; no profile was retried.
+
+All matched FP4 cold/iteration medians are slower in this bounded grid.
+Dense-2048 persistent FP4 x2/x4/x8 takes 503.451/988.228/2213.443 µs per 32 updates
+versus native FP64 175.686 µs. Eight-component observed iterate difference is
+1.1119941378812115e-7, not a proved enclosure or final certificate. Blocks are
+independent, only 32 updates run, and the cold proxy excludes certificate and
+coordinator work. Keep native control; no supported solver preset.
+
+Composite software gate passes 638 workspace Rust, three research Rust, 583
+Python plus four corrected packing tests; replay/native/dependency/artifact/docs
+and smoke pass. Exact preservation covers 1246 historical files and all three
+manifests. Final acceptance/accounting is linked in the report; 207 documentation pages
+and internal links pass. Closed CPU charge is 21522.216081528 / 72000 seconds. GPU charge is
+953.281143916 / 9600 seconds (acceptance 723.193855166, study 230.087288750),
+including failed reservations of 300 and 240 seconds. Independent CPU ceiling
+72000; all six failed reservations and their 18560 CPU seconds remain charged.
+All supervisor cleanup is empty; no historical budget transfer.
+
+Next ready: GPUP-FP4-RECOVERY-SPEC. Integration still requires its numerical
+policy and nontrivial original-model checks before TENSOR2. Old FP4-PROTO and
+GPUP-8 remain incomplete; GPUP-9 gated. Local commit after delivery; no push or
+publication. Earlier entries retain their original scope.
+
+
+## FP4 pilot synchronization recovery approved (2026-11-11)
+
+The user explicitly approves docs/plans/lp-fp4-gpu-pilot-synchronization-recovery.md.
+V2 passes corrected arithmetic, 90 device cases and memcheck, but racecheck
+refuses 128 shared-state warnings in FP8 split updates. Retain full 960 CPU /
+240 GPU failure charge and all sources/results. V3 adds one encode-entry warp
+barrier, with exact source-delta and unchanged native SASS verified on CPU.
+Reuse the ten native primitive, fifteen native device and four native memcheck /
+racecheck passes. Execute 50 changed-lane primitives, 75 device cases, 20 each
+memcheck/racecheck, all 24 each initcheck/synccheck and conditional 216 profiles.
+New full acceptance reservation 1560 GPU / 6240 CPU fits the existing caps after
+599.495183240 GPU charged. Total ceiling stays 72000 CPU / 9600 GPU; no historical
+transfers, relaxed criteria or automatic further retry. No push/publication.
+
+
+## GPUP-FP4-GPU-PILOT packing recovery approved (2026-11-11)
+
+The user explicitly approves the concrete versioned recovery in
+[the recovery plan](../docs/plans/lp-fp4-gpu-pilot-packing-recovery.md).
+Use the two-site E2M1 bits-5:2 correction and fresh v2 manifest. Reuse the 30
+unaffected control primitives; execute 30 corrected FP4 cases, then conditional
+90 device/safety cases, four 24-path sanitizers and 216 profiles. Preserve the
+v1 mismatch, all 31 attempted primitive rows, 216 unexecuted profile identities,
+failed CPU diagnosis and every source/charge. V1 is never relabeled as passing.
+
+All work remains within this task's amended 72000 CPU / 9600 GPU envelope;
+acceptance GPU cap 2400 includes the v1 failure's full 300 seconds. The accepted
+recovery reserves at most 1560 GPU acceptance seconds and nine conditional
+180-second profile batches, with four-times-wall CPU reservations. No old
+historical funds, criteria relaxation or automatic further numerical retry.
+Release: artifacts/gpup-fp4-gpu-pilot-v1/recovery-authorization-v2.json.
+
+
+## GPUP-FP4-GPU-PILOT implementation (2026-11-11)
+
+Implementation amendment: select 8000 additional native-acceptance CPU seconds
+under the user's time authorization, raising this task ceiling to 72000 CPU and
+native phase to 24000. The first missing-CMake launcher retains 8000 CPU seconds;
+the second full software gate retains 7200 after Python environment and historical
+source-roster failures. All Rust/native/dependency checks passed in that second
+attempt; resume the Python/replay/docs/smoke tail with the complete installed
+environment. No scientific gate or GPU cell has run or been retried. Move only
+the new kernel into the isolated research package with an exact-byte path bridge;
+no historical test, source roster or result changes.
+
+The user requests implementation and permits GPU time as needed. Implement the
+independent ADR-0058 pilot with actual E2M1 MMA, persistent components, ordered
+primal/dual phases, matched FP64/FP8/FP16 controls and fusion/persistence ablations.
+This is empirical kernel exploration, with no certified-solver speed claim.
+
+New independent ceiling: 64000 CPU seconds, 9600 GPU seconds. CPU phases:
+implementation 16000 (including 512 conservative preparation), native 16000,
+acceptance 16000, study 8000, reporting 6400, cleanup 1600. GPU phases:
+acceptance 2400, study 7200. Four CPU slots, one shared GPU lease, 16 GiB sampled
+host RSS and 12 GiB device buffer cap. Use the unchanged in-container supervisor
+and separate artifacts/gpup-fp4-gpu-pilot-v1/resources reservations. Full jobs must
+fit; failed/unsettled jobs retain full charges. Preserve failed development
+sources/logs; never retry a frozen scientific identity. No historical transfers.
+
+Acceptance: corrected CPU encoding/packing/transpose/projection contracts,
+source/compiler/device freeze, instruction and independent device differential,
+bounded failure/cancellation/rollback, four sanitizers, then frozen short
+trajectories and complete-cost profiles. Preserve all old evidence/defaults.
+GPUP-FP4-PROTO and GPUP-8 remain incomplete; GPUP-9 gated. Local commit after
+review and delivery; no push/publication.
+
+
+## FP4 GPU exploration and quality-tier roadmap amendment (2026-11-11)
+
+The user authorizes the recommended split between CPU numerical recovery,
+bounded GPU feasibility and subsequent certified solver comparison. They also
+accept a separately labeled 1e-7 final certificate as an encouraging result when
+FP4 produces sufficient speedup. Keep 1e-9 as the strict tier; the old 1e-7 inner
+enclosure guard is a different quantity and remains part of the frozen v1 record.
+
+Scope: a superseding planning ADR, explicit independent GPU-pilot/integration
+tasks, dual-quality complete-cost criteria, roadmap/design/backlog navigation and
+handoffs. No numerical implementation, solver/checker default change, GPU job or
+scientific retry runs in this documentation task. Preserve exact old specifications,
+ADRs, proposal, sources, results and charges. The old prototype stays incomplete.
+
+Independent documentation envelope: 512 CPU seconds, zero GPU; 128 preparation
+and receipt packaging, 320 validation, 64 cleanup; four CPU slots, 6 GiB sampled
+host RSS. Use the unchanged supervisor and a new journal under
+artifacts/gpup-fp4-gpu-roadmap-v1. No closed-budget transfers. Acceptance: document
+links, acyclic/ready dependencies, explicit pilot admission independent of the
+600-update gate, matched quality/performance rules, exact historical preservation
+and diff hygiene. Local commit after acceptance; no push/publication. Future
+experiments begin with a concrete protocol/resource package under their own task.
+
+Delivered: ADR-0058 and aligned roadmap/design/backlog/README/wiki. Next ready is
+GPUP-FP4-GPU-PILOT, independently of CPU recovery and old 600-update qualification;
+new FP4-INTEGRATE precedes TENSOR2. Future original-model final tiers are 1e-7 and
+strict 1e-9. The initial 1.10x cold model-median geometric-mean target uses
+same-tolerance native controls, no certified model-median regression or coverage
+loss, uncertainty and complete setup/audit/recovery/checking costs.
+
+Acceptance passes 201 documentation pages/internal links, acyclic/ready dependency
+checks, unchanged completed tasks and old prototype, exact numerical source/input
+bindings, historical roadmap/handoff preservation, documentation-only scope and
+diff hygiene. The first memory preflight refused before launching/reserving a
+workload; its operator note is retained. The first admitted validator assumed
+every old backlog entry had a specification and retains its full 240 CPU-second
+failure charge. The separate corrected validator passes at 14.173538052 seconds;
+its journal uses only unused 80-second reporting and 64-second cleanup headrooms
+inside the original 512-second ceiling. No budget is added or transferred.
+
+Preparation charges 128 seconds; final cleanup reserves and fully charges 64.
+Total including that reservation is 446.173538052 CPU / zero GPU seconds. Final
+receipts, both journals, failed sources/logs and exact accounting are under
+`artifacts/gpup-fp4-gpu-roadmap-v1`; the settled summary is `final-accounting-v1.json`.
+No numerical or device experiment ran. Local commit after cleanup; no publication.
+
+## GPUP-FP4-PROTO bounded CPU delivery (2026-11-11)
+
+The requested prototype's CPU slice is implemented under SPEC-0026 / ADR-0057.
+Its frozen twelve-cell numerical attempt admits no lane: nine error-guard and
+three metadata refusals, zero observations or certificates. Full component
+rollback preserves physical work and deadlines. Full prototype acceptance is
+incomplete; device implementation/MMA/sanitizers and all 36 pilot/diagnostic cells
+are closed and unexecuted. No GPU time is charged.
+
+Frozen v1 sources/results remain exact. The separate v2 local-budget correction
+addresses cancellation between pair-rounding and encoding errors; three primitive
+tests pass, with no corrected scientific attempt. Full native acceptance passed
+638 Rust and 571 Python tests, replay/dependency/artifact/docs/smoke. The later
+Python-only launcher failure (Cargo absent from PATH) retains its full 1000 CPU
+charge; an environment-only software rerun passes all 574 Python tests. Final receipts:
+docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md.
+
+All new charges remain within the independent 32000 CPU / 1560 GPU envelope.
+The formal refusal retains 2400 CPU seconds, preparation 256. Two development
+1200-second caps carve disjoint subsets from unused original implementation
+headroom, adding no authority. Closed failed journals and all historical charges
+are preserved. The reporting/cleanup journal remains separate.
+
+Next ready: GPUP-FP4-RECOVERY-SPEC, CPU-only corrected accounting and proved
+trajectory enclosure/precision/cost proposal. Preserve original-model FP64 checks
+and 1e-9 certification; no automatic retry, GPU stage, TENSOR2 or GPUP-9 release.
+Native control stays supported and GPUP-8 incomplete. Local commit after software
+and delivery acceptance; no publication. Earlier task entries retain their scope.
+
+## GPUP-FP4-PROTO implementation (2026-11-11)
+
+The user requests the next prototype. Implement an independent rational PDHG
+reference, persistent E2M1 component trajectory with explicitly charged local
+FP32-pair rounding, original-unit error/projection admission, rollback/escalation
+and source-bound execution records under SPEC-0025. CPU numerical admission
+precedes any actual-MMA implementation/admission, sanitizers or profiles. Preserve
+the original 1e-9 certificate, all historical sources/results/charges and native
+control. A failed numerical gate closes subsequent device/profile execution;
+report the remaining unexecuted work and distinguish enclosure refusal from
+actual trajectory error. No automatic scientific retry or TENSOR2 execution.
+
+Independent allocation selected under the implementation/time authorization:
+32000 CPU seconds, 1560 GPU seconds, four CPU slots, one shared GPU lease,
+16 GiB sampled host RSS and 12 GiB admitted device buffers. CPU phases:
+implementation 6000 including 256 preparation, proofs 8000, native 8000,
+workers 6240, reporting 2960, margin/cleanup 800. Conditional GPU phases:
+admission/sanitizers 480, pilot 720, diagnostics 360. The CPU increase over the
+proposal funds implementation and trajectory analysis explicitly; no transfer
+from any closed task. Use the unchanged in-container supervisor with a new
+artifacts/gpup-fp4-proto-v1 journal. Whole reservations must fit; failed/unsettled
+jobs retain their full charge. Development fixes preserve failed sources/logs.
+
+Acceptance: independent CPU primitive/trajectory/recovery contracts and one
+frozen numerical admission, full CPU/native integration, conditional actual FP4
+instruction/device/four-sanitizer/profile gates, explicit all-cell disposition,
+source/evidence preservation, settled accounting and empty cleanup. Likely new
+reference/runner/tests/specification/ADR/records and conditional device kernel
+files; no old numerical source or public default changes. Local commit after
+acceptance; no push/publication.
+
+## GPUP-FP4-SPEC completed (2026-11-11)
+
+The executable CPU contract is delivered under SPEC-0025 / ADR-0056: bounded
+2/4/8-plane E2M1 encoding, consistent transpose tiles, exact error/projection
+oracles, original-unit observation guards, complete transactional checkpoints,
+three schemas and frozen source-bound cost/resource admission. The 32 focused
+tests and full CPU/native integration pass, including 549 Python tests, replay,
+197 documentation pages and smoke. Final accounting/source/cleanup receipts:
+docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md.
+
+The prospective comparison retains 192 cells / 288 endpoints. Retained cold
+control review: six ideal per-trial 10% speedup refusals, fifteen profile-needed
+rows, three uncertified rows and zero admitted forecasts. No GPU work, native
+solver change, final-certificate relaxation or historical scientific rerun.
+The independent 16000 CPU / zero GPU envelope remains authoritative; phase
+`proofs` in the unchanged supervisor journal implements the contracts allocation.
+
+Next ready: GPUP-FP4-PROTO, starting with CPU reference/trajectory admission.
+Prototype and study resource amounts remain proposals, not execution allocations.
+Keep native control; GPUP-8 incomplete and GPUP-9 gated. Local commit after
+acceptance; no push/publication. The implementation entry below records the
+accepted task envelope, and older handoffs remain exact.
+
+## GPUP-FP4-SPEC implementation (2026-11-11)
+
+The user requests implementation and permits as much budget as needed. Implement
+SPEC-0025 / ADR-0056 as a separate CPU-only executable numerical/cost contract:
+E2M1 component encoding, consistent matrix/transpose tile scales, bounded error
+and projection decisions, observation-only audits with full checkpoints, strict
+proposal/checkpoint/cost schemas, a frozen development comparison/resource
+proposal and focused adversarial contracts. No device executor or solver is
+implemented by this slice; FP4-PROTO remains subsequent work.
+
+New independent ceiling: 16000 CPU seconds, zero GPU; four slots, 16 GiB sampled
+host RSS. Phases: implementation 3200 including a conservative 256 preparation
+charge, contracts 1600, native integration 8000, reporting 2400, cleanup 800.
+Use the unchanged in-container CPU supervisor with a fresh journal under
+artifacts/gpup-fp4-spec-v1. Whole reservations must fit; failed/unsettled work
+retains its full charge. No historical allocation transfer or scientific rerun.
+
+Acceptance: focused independent CPU contracts and proposal/evidence binding,
+full tools/check.sh with GPUs hidden, documentation/schema consistency, diff and
+historical-source preservation, final accounting and empty cleanup. Likely writes:
+new tools/tests/schemas/config/specification/ADR/protocol/report plus current
+roadmap/backlog/handoff/changelog. Legacy numerical/checker sources and public
+defaults stay unchanged. Local commit after acceptance; no push/publication.
+
+## FP4 persistent-state feasibility and roadmap review completed (2026-11-11)
+
+The user requests assessment and roadmap changes for multiple FP4 components,
+reconstruction-free inner iterations and fused kernels. They explicitly select
+approximate inner arithmetic with original-model FP64 residual checks and the
+unchanged 1e-9 final certificate; exact FP64-equivalent arithmetic is not required.
+
+Scope: primary-source literature/ISA review, retained expansion/resident evidence,
+a concrete design proposal, a new planning ADR, roadmap/backlog and handoff.
+Acceptance: sourced hardware claims, explicit numerical/cost unknowns, no hidden
+per-iteration FP64 round trip, bounded future gates, documentation links, backlog
+consistency and unchanged historical numerical sources/results/charges.
+This review runs no solver, GPU, compiler, formal arithmetic proof or benchmark.
+
+Separate documentation envelope: 512 CPU seconds (128 preparation/editing,
+320 validation, 64 cleanup), four CPU slots, 6 GiB sampled host RSS, zero GPU.
+Use the unchanged supervisor with a fresh journal under
+artifacts/gpup-fp4-roadmap-v1; historical allocations stay closed. Local commit
+after acceptance; no push/publication. Proposed implementation and studies need
+their own numerical contracts and resource allocations.
+
+Delivered: docs/plans/lp-fp4-persistent-state.md and ADR-0055, with current
+roadmap/backlog/README/wiki navigation aligned. GPUP-FP4-SPEC is next ready;
+FP4-PROTO and TENSOR2 remain conditional. MIXED2/DELIVERY2 remain alternatives.
+The assessment distinguishes persistent component state from zero-cost local
+normalization, counts cross-products and projection/error work, and requires
+original-model observation-only audits plus native and FP8/FP16 comparisons.
+
+Acceptance passes 194 documentation pages/internal links, acyclic task/dependency
+checks, completed-task and historical-text preservation, documentation-only scope
+and diff hygiene. Supervised validation charges 13.863842980 CPU seconds, plus
+128 conservatively charged preparation seconds. Final cleanup is separately
+reserved within 64 CPU seconds; exact receipts and closed accounting remain in
+artifacts/gpup-fp4-roadmap-v1. No arithmetic, device, profile or solver gate ran.
+
+## RESIDENT2 lessons: roadmap revision completed (2026-11-11)
+
+Objective: turn the retained negative result into concrete planning gates and
+correct stale forward-looking text. MIXED2 remains the next numerical candidate;
+its first step is CPU-only cost admission from retained per-trial evidence.
+Make delivery-cost optimization an explicit alternative when arithmetic cannot
+meet the proposed total-latency target. Preserve cold/prepared distinctions,
+independent 1e-9 certificates and the unresolved mixed-model bound limitation.
+
+Scope: roadmap, a new superseding planning ADR, backlog and current handoff.
+Acceptance: documentation/internal links, backlog consistency, diff hygiene and
+unchanged numerical sources/evidence. No solver, GPU or historical gate rerun.
+Separate documentation-only envelope: 256 CPU seconds (64 preparation/editing,
+160 validation, 32 cleanup), four CPU slots, 6 GiB sampled host RSS, zero GPU.
+Historical allocations stay closed. Validation uses the unchanged CPU supervisor
+with a new journal under artifacts/gpup-resident2-roadmap-v1. Local commit after
+acceptance; no push or publication. No future scientific task is released.
+
+ADR-0054 and the roadmap/backlog now record the cost gate, conditional DELIVERY2
+alternative, measured limits of synchronization reduction, lifecycle distinction
+and separate mixed-model bound-authority problem. Stale export and future
+RESIDENT2 implementation text is corrected. MIXED2 remains next ready for
+contract/cost preparation against the native control.
+
+Acceptance passes 192 documentation pages/internal links, YAML task/dependency
+consistency, unchanged historical handoff/roadmap text, documentation-only scope
+and diff hygiene. The supervised validation charges 13.687409792 CPU seconds;
+preparation is conservatively charged 64 seconds. Cleanup uses the separately
+reserved 32-second stage. Exact receipts/journal are retained under
+artifacts/gpup-resident2-roadmap-v1. No numerical code, data, historical charge,
+solver setting or scientific criterion changes; no solver/GPU test is rerun.
+
+## GPUP-RESIDENT2 completed; latency retention gate fails (2026-11-11)
+
+The requested bounded implementation and comparison are complete under
+SPEC-0024 / ADR-0053. Report: docs/benchmarks/lp-resident2-gpup-resident2.md.
+All 64 planned cells completed and delivered 96 endpoints. Control and resident
+each certify 42/48; all 42 certified pairs have identical candidate bytes and
+iteration counts. All twelve mixed-model normal-limit endpoints now export
+65536 primal/dual entries and remain uncertified at variable 3's infinite-bound
+refusal. The original 1e-9 authority is unchanged.
+
+The candidate uses exact per-window coefficients, u64 sticky flags, bounded
+asynchronous submission and transactional host adoption. Prepared lifecycles
+reuse immutable preparation with fresh iterates/controller/checking per solve.
+The nontrivial trace reduces synchronizations 58 to 44 at the same 2800 launches,
+but increases transfer bytes. The cold model-median geometric mean is 1.027370x;
+four of seven certified medians regress. The predeclared total-latency criterion
+fails, so retain the native control and select no supported preset.
+
+Acceptance: full CPU/native gate (638 Rust tests, 515 Python tests, replay,
+dependency/artifact/docs/smoke), separately verified test-only overflow correction,
+five focused Python contracts, device boundary/controller/cancellation/rollback,
+four independent transport certificates, and all four zero-error sanitizers.
+The original overflow fixture and stale-test-binary failures retain their full
+charges; all development/native failures remain recorded. Active study reader:
+tools/lp_resident2_study_v4.py. No timing cell was retried. Exact sources and old
+scientific results/charges are preserved; the six historical source edits have
+an exact additive/test-only bridge.
+
+Task GPU charge is 598.631222067 / 1800 seconds, including all failures.
+CPU and final cleanup receipts are in the report's acceptance/accounting files,
+within the independent 32000-second ceiling. Historical allocations stay closed.
+Next ready: GPUP-MIXED2, using the native control; no next-task execution is
+released. GPUP-8 stays incomplete and GPUP-9 gated. Local commit after delivery;
+no push or publication was requested.
+
+
+## GPUP-RESIDENT2 implementation (2026-11-11)
+
+The user requests implementation and permits more time as needed. PR #23 is
+merged at 4e62cab04ca2236d419c2deea4063a42a4f519ef; the prerequisite is met.
+Implement SPEC-0024 / ADR-0053: non-overlapping delivery phases, cold/prepared
+immutable model lifecycles, separate native resident FP64 execution with bounded
+submission, coefficient tables and sticky device flags. Preserve exact original
+coefficients, host controller boundaries, fresh independent certificates and all
+historical evidence. Diagnose normal-limit export without changing bound authority.
+
+New task envelope selected under this implementation/time authorization: 32000
+CPU seconds (implementation 8000 including 128 preparation, native acceptance
+8000, device acceptance 4000, study 8000, reporting 3200, cleanup 800); four CPU
+slots, one shared GPU lease, 16 GiB sampled host RSS, 12 GiB device buffer limit.
+New GPU ceiling 1800 seconds (acceptance 600, study 1200), independently accounted
+in artifacts/gpup-resident2-v1/resources. No historical funds are transferred.
+Per-job full reservations must fit; failed/unsettled reservations remain charged.
+Use the unchanged in-container supervisor. All jobs stay in this container.
+Development fixes retain failed logs and sources; scientific cells have no automatic
+retry. CPU/native admission precedes device checks, sanitizer admission precedes
+matched study. No GPUP-8 rerun or GPUP-9 release. No push/publication requested.
+
+Acceptance: focused CPU contracts, full tools/check.sh, device differential and
+failure/cancellation checks, four scoped sanitizers, frozen same-transport native
+control/candidate cold and prepared cohorts with launch/copy counts, independent
+endpoint checking, all-cell coverage and total latency decision. Record an honest
+negative or blocked result if admission or performance fails. Likely writes:
+new research module/kernels/driver/tools/tests/specification/report and task state;
+no legacy numerical source or public solver default changes.
+
+
 ## GPUP-BASELINE PR integration (2026-11-10)
 
 PR #23 is ready for the normal merge path. Local composite acceptance passes

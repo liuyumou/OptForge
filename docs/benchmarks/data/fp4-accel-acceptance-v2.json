@@ -1,0 +1,98 @@
+{
+  "admission": {
+    "archived_binary": {
+      "path": "artifacts/gpup-fp4-accel-v1/binaries/b7c0ea4cdd3deb5ab34bf89a2a6fc629307d954e30da9ad0b1e6cde70c41989e",
+      "sha256": "b7c0ea4cdd3deb5ab34bf89a2a6fc629307d954e30da9ad0b1e6cde70c41989e"
+    },
+    "binary": {
+      "path": "research/lp-fp4-accel/target/release/lp-fp4-accel",
+      "sha256": "b7c0ea4cdd3deb5ab34bf89a2a6fc629307d954e30da9ad0b1e6cde70c41989e"
+    },
+    "device_comparisons": 270,
+    "final_isolated": {
+      "python_tests": 10,
+      "rust_tests": 17,
+      "serial_certificate_differentials": 600
+    },
+    "full_native": {
+      "python_tests": 646,
+      "rust_tests": 638,
+      "scope": "full repository gate before isolated checkpoint consistency correction"
+    },
+    "global_enclosure": false,
+    "image": {
+      "path": "artifacts/gpup-fp4-accel-v1/build-v6/accel.cubin",
+      "sha256": "690da8010ecee3ff013eb82a30030f8538a7c4c6a99e9a15b2e7da9bbd077e17"
+    },
+    "lifecycle_cases": 42,
+    "receipts": [
+      {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-native-v1.settlement.json",
+        "sha256": "e226e33716c1dcde570de2ce7bb690262671d240b49b3880d39281e9b41b9f39"
+      },
+      {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/checkpoint-build-v1.settlement.json",
+        "sha256": "d99633b932335aee4a55a3dfbc7508f06b78433bc30c14873efe1392bb2826ce"
+      },
+      {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/final-device-v2.settlement.json",
+        "sha256": "facae00fa4012611abbd13eae6d9e41ffb543f930f4c469f3273c0fc728955d7"
+      },
+      {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/memcheck-final-v1.settlement.json",
+        "sha256": "616a1f91f4e3f4e934291b5d0a409ccdc12f9f49fea894cc329c5f9e51b1675b"
+      },
+      {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/racecheck-final-v1.settlement.json",
+        "sha256": "2b09e931a9d6290ff50db9e23bb600de98167da9da0bfc5cdb7a03b514f38b00"
+      },
+      {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/initcheck-final-v1.settlement.json",
+        "sha256": "f17a78258f1129ce82e17271e4d2720432193b56f5a385322fb672c331283012"
+      },
+      {
+        "path": "artifacts/gpup-fp4-accel-v1/resources/synccheck-final-v1.settlement.json",
+        "sha256": "d1cf3767bda591684de75ddb5f48c3b0dc3b99a801f1763de8cf0fb3bb92eaca"
+      }
+    ],
+    "sanitizer_zero_error_processes": 112,
+    "status": "passed",
+    "unchanged_serial_certificate_authority": true
+  },
+  "cold_results": {
+    "path": "docs/benchmarks/data/fp4-accel-cold-eof-v1.json",
+    "sha256": "e85a8f0a29b241998edf681a69029ddc9144ff516f235c1826b61729d654744c"
+  },
+  "frozen_results": {
+    "path": "docs/benchmarks/data/fp4-accel-result-v1.json",
+    "sha256": "4aeb3d13e0ac9af473e93f9eb872bcab49617249e4ad4717d629567d6a29f9bb"
+  },
+  "historical_files_exact": 1594,
+  "history": {
+    "path": "docs/benchmarks/data/fp4-accel-history-v1.json",
+    "sha256": "1d11595970e51e268e28cabb5fd56962f908b2901fe88a72b99b15b2d526250a"
+  },
+  "sanitizers": {
+    "initcheck": {
+      "processes": 28,
+      "zero_errors": true
+    },
+    "memcheck": {
+      "processes": 28,
+      "zero_errors": true
+    },
+    "racecheck": {
+      "processes": 28,
+      "zero_errors": true
+    },
+    "synccheck": {
+      "processes": 28,
+      "zero_errors": true
+    }
+  },
+  "serial_evidence": {
+    "path": "docs/benchmarks/data/fp4-accel-evidence-v1.json",
+    "sha256": "d6f1c853b323ac8f31b4a23e558f533f8a5d787620e48fe6ed39a72c33aefc57"
+  },
+  "status": "passed"
+}

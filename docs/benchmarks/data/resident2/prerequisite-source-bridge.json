@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "resident2-additive-source-bridge",
+  "files": [
+    {
+      "path": "crates/optimizer-lp-cuda/src/lib.rs",
+      "before_sha256": "7c1814bc055ba8f08c5c9ee8a11e3e822b3d556345d267965905933c21b2bf2b",
+      "after_sha256": "752975ef75c5458aef1ace82761d7494cdac42ab263641d5438adced980eabb0",
+      "frozen_path": "tests/fixtures/lp-resident2-prior-v1/crates__optimizer-lp-cuda__src__lib.rs.source"
+    },
+    {
+      "path": "crates/optimizer-lp-cuda/Cargo.toml",
+      "before_sha256": "525437b06555caae07e3a35e12c3fbec6232d9cdba7dd2045bd0fe8bf8691d02",
+      "after_sha256": "6cb077d73412118805d4987b961b9e0a62c7ee36640536fb3b8d593a02c54b26",
+      "frozen_path": "tests/fixtures/lp-resident2-prior-v1/crates__optimizer-lp-cuda__Cargo.toml.source"
+    },
+    {
+      "path": "tools/check.sh",
+      "before_sha256": "c6e4bb977ccd3e1b45a0e3514d5340725e64c659733ebfa6949d59f97219bd71",
+      "after_sha256": "3b5bda274aaa8e0ef6951f80b23f537faa2674eed59ce04c7676d072dd135107",
+      "frozen_path": "tests/fixtures/lp-resident2-prior-v1/tools__check.sh.source"
+    },
+    {
+      "path": "tests/integration/test_lp_quant_pr_review.py",
+      "before_sha256": "b9cd91d6eea2611626083a18dc67b5f2cb1ffb71df31ed70dbe4fe893033e925",
+      "after_sha256": "00333e9a5fee9170899ac57c7410a94a4f70fb7629e5e026165e47f6e8c1e306",
+      "frozen_path": "tests/fixtures/lp-resident2-prior-v1/tests__integration__test_lp_quant_pr_review.py.source"
+    },
+    {
+      "path": "tests/integration/test_lp_tensor_warp32_availability.py",
+      "before_sha256": "e139e34440a0bd94b0d74fbfd337dcb259f8c0577e977b33cbd74e8f597a03c3",
+      "after_sha256": "b06dc14f846dcc8a3a992d0b6b97adc80984e5907279d2c86edf225464d603a8",
+      "frozen_path": "tests/fixtures/lp-resident2-prior-v1/tests__integration__test_lp_tensor_warp32_availability.py.source"
+    },
+    {
+      "path": "tools/lp_gpup8_test_support.py",
+      "before_sha256": "c8be092e87701b5acafb53d956e6dd6364073ad466c33f1e69dd40f5a7ea94da",
+      "after_sha256": "877d5b94865634a973a66997212ac01355d6eb1326c834309761c6e3679c3a1d",
+      "frozen_path": "tests/fixtures/lp-resident2-prior-v1/tools__lp_gpup8_test_support.py.source"
+    }
+  ],
+  "scope": "Exact additive module/example/atomic-guard registration and test-only projection of prior sources. No retained numerical/controller/checker body changed."
+}

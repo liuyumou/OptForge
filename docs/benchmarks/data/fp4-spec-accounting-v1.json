@@ -1,0 +1,129 @@
+{
+  "all_guardians_empty": true,
+  "all_workloads_empty": true,
+  "cleanup_full_reservation_ns": 128000000000,
+  "cpu_ceiling_ns": 16000000000000,
+  "cpu_charged_ns": 1737428356852,
+  "cpu_stages": {
+    "implementation": {
+      "cap_cpu_ns": 3200000000000,
+      "charged_cpu_ns": 265342958228
+    },
+    "margin": {
+      "cap_cpu_ns": 800000000000,
+      "charged_cpu_ns": 128000000000
+    },
+    "native": {
+      "cap_cpu_ns": 8000000000000,
+      "charged_cpu_ns": 1257295158868
+    },
+    "proofs": {
+      "cap_cpu_ns": 1600000000000,
+      "charged_cpu_ns": 62839565552
+    },
+    "reporting": {
+      "cap_cpu_ns": 2400000000000,
+      "charged_cpu_ns": 23950674204
+    }
+  },
+  "failed_reservations": [],
+  "gpu_ceiling_ns": 0,
+  "gpu_charged_ns": 0,
+  "historical_fund_transfers": 0,
+  "journal": {
+    "path": "artifacts/gpup-fp4-spec-v1/cpu-journal.json",
+    "sha256": "d8b93c8daee509cec45f261854a0444907c0089835d78135e4912c39e4d3b5f5"
+  },
+  "kind": "lp-fp4-spec-accounting",
+  "memory_enclosure": "Sampled aggregate RSS; not a hard enclosure",
+  "preparation_allowance_ns": 256000000000,
+  "preparation_scope": "Non-workload inspection, editing and final receipt packaging; all validation workloads separately supervised",
+  "receipts": [
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/prepare-v1.json",
+        "sha256": "ad4aab3f4bd8a31982d3ee7a5cc2d8a62dfab19d082674146465931275d2b826"
+      },
+      "charged_cpu_ns": 9342958228,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 66273280,
+      "stage": "implementation",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/contracts-v1.json",
+        "sha256": "bfe2a8a7d4ef079e94f1a3f97a4476b02728076c5ad79ea7f1dbd460a272649d"
+      },
+      "charged_cpu_ns": 11794233556,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 68071424,
+      "stage": "proofs",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/contracts-v2.json",
+        "sha256": "0d79f7394b29598a7f3015d29285c65d9240fa872cac946662e1f026b56bbac7"
+      },
+      "charged_cpu_ns": 22814352284,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 79896576,
+      "stage": "proofs",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/contracts-v3.json",
+        "sha256": "6db65151bde9f6787667c56a7a02f06a6db52d47f1398a68c0e0083ef587db14"
+      },
+      "charged_cpu_ns": 28230979712,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 100462592,
+      "stage": "proofs",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/native-v1.json",
+        "sha256": "ea558b1090bffaa1bf3035af116d29c975c889fd652ce2cb017261b1af14b952"
+      },
+      "charged_cpu_ns": 1257295158868,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 1701036032,
+      "stage": "native",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/delivery-v1.json",
+        "sha256": "104db94ef9f543e0d250daa2359b45a86cc5ba59e82ab8756783f85b15005afd"
+      },
+      "charged_cpu_ns": 23950674204,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 162041856,
+      "stage": "reporting",
+      "status": "passed",
+      "workload_empty": true
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-spec-v1/cleanup-v1.json",
+        "sha256": "5747e425738817ab3eaa20f1677ce84a6a1f496daad87d2a69c3ba2743cb12df"
+      },
+      "charged_cpu_ns": 128000000000,
+      "guardian_empty": true,
+      "peak_sampled_rss_bytes": 157917184,
+      "stage": "margin",
+      "status": "passed",
+      "workload_empty": true
+    }
+  ],
+  "schema_version": 1,
+  "status": "settled"
+}

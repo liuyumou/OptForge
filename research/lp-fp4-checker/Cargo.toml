@@ -1,0 +1,24 @@
+[package]
+name = "lp-fp4-checker"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.93"
+license = "MIT"
+[workspace]
+[dependencies]
+optimizer-cuda-sys = { path = "../lp-tensor-expanded-device/cuda-sys" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["float_roundtrip"] }
+optimizer-core = { path = "../../crates/optimizer-core" }
+optimizer-lp = { path = "../../crates/optimizer-lp" }
+optimizer-experiment = { path = "../../crates/optimizer-experiment" }
+
+[lints.rust]
+unsafe_code = "forbid"
+[lints.clippy]
+all = "warn"
+
+# Keep original arithmetic semantics; optimize across checker crate boundaries.
+[profile.release]
+lto = "fat"
+codegen-units = 1

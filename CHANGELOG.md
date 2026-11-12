@@ -1,5 +1,51 @@
 # Changelog
 
+## FP4 GPU exploration and quality-tier planning (2026-11-11)
+
+- Accept ADR-0058: make a bounded actual-FP4 fused/persistent GPU pilot next,
+  independently of CPU numerical recovery and the failed 600-update admission.
+  Add a later integration task before the certified TENSOR2 study.
+- Add the user-approved 1e-7 final-quality tier alongside strict 1e-9. Require
+  same-tolerance controls and the initial 1.10x complete-latency/coverage target;
+  distinguish exploratory kernel evidence from certified solver results.
+- Preserve old contracts, sources, proposal, outcomes and charges. This amendment
+  changes planning only; no numerical/GPU execution or public checker change.
+
+## GPUP-FP4-PROTO bounded CPU implementation (2026-11-11)
+
+- Add independent rational PDHG and persistent E2M1 component CPU trajectories,
+  exact local FP32-pair rounding, transpose tile reuse, guarded updates and full
+  checkpoint rollback under SPEC-0026 / ADR-0057.
+- Freeze and retain all twelve admission cells: nine error-guard and three
+  metadata refusals, zero qualified lanes or observation boundaries. Device and
+  profile stages remain unexecuted; no GPU performance or certification claim.
+- Preserve v1 and add a separate local rounding/encoding budget correction with
+  primitive regression checks. Record source-bound results, software acceptance,
+  failed charges and CPU-only recovery-contract follow-up in the
+  [delivery report](docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md).
+
+## GPUP-FP4-SPEC CPU contracts (2026-11-11)
+
+- Add SPEC-0025 / ADR-0056, bounded E2M1 component oracles, consistent transpose
+  tiles, projection/error guards and observation-only checkpoint transactions.
+- Add strict proposal/checkpoint/cost schemas, source-bound cost admission and a
+  frozen 192-cell comparison/resource proposal with native, FP8/FP16 and FP4 lanes.
+- Preserve original-model FP64 checks and 1e-9 certification. This CPU-only slice
+  implements no device solver and selects no precision preset.
+
+## GPUP-RESIDENT2 bounded native execution (2026-11-11)
+
+- Add feature-gated immutable preparation, cold/prepared research lifecycles,
+  bounded coefficient/flag transport and transactional native FP64 windows.
+- Export normal-limit vectors and record disjoint complete-delivery phases,
+  physical CUDA calls/bytes and fresh independent certificates.
+- Complete 64 cells/96 endpoints; preserve 42/48 certified coverage per mode
+  and bitwise equality of all certified pairs. The latency retention gate fails;
+  retain the native control and keep prepared throughput separately labeled.
+- Preserve all historical sources and failed charges through exact bridges;
+  pass CPU/native, device, transport and four sanitizer acceptance gates.
+
+
 ## GPUP-BASELINE PR integration (2026-11-10)
 
 - Make baseline CPU tests build their checkers and mock context from checked-in

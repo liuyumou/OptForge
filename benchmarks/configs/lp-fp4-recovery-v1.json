@@ -1,0 +1,133 @@
+{
+  "audit_max_updates": 200,
+  "authority": "operational-residual-guard",
+  "cost_phases": [
+    "prepare",
+    "transport",
+    "iteration",
+    "audit",
+    "conversion",
+    "rollback",
+    "native_recovery",
+    "export",
+    "checker"
+  ],
+  "escalation": [
+    2,
+    4,
+    8,
+    "native"
+  ],
+  "final_tiers": [
+    "certified-1e-7",
+    "certified-1e-9"
+  ],
+  "growth_ratio": "2",
+  "identity": "fp4-operational-recovery-v1",
+  "initial_components": 2,
+  "integration_proposal": {
+    "cpu_seconds": 51760,
+    "cpu_slots": 4,
+    "device_buffer_bytes": 12884901888,
+    "executable": false,
+    "gpu_seconds": 5880,
+    "lanes": [
+      "native-fp64",
+      "fp8-4",
+      "fp16-2",
+      "adaptive-fp4-start-2",
+      "adaptive-fp4-start-4",
+      "adaptive-fp4-start-8"
+    ],
+    "minimum_updates": 600,
+    "models": [
+      "coupled-equality",
+      "coupled-inequality",
+      "ranged-one-sided",
+      "fixed-active-bounds",
+      "ill-scaled-coupled",
+      "irregular-tail-33",
+      "dense-rich-65",
+      "infinite-bound-refusal"
+    ],
+    "resource_jobs": [
+      {
+        "cpu_seconds_each": 16000,
+        "gpu_seconds_each": 0,
+        "jobs": 1,
+        "phase": "implementation"
+      },
+      {
+        "cpu_seconds_each": 8000,
+        "gpu_seconds_each": 0,
+        "jobs": 1,
+        "phase": "native-contracts"
+      },
+      {
+        "cpu_seconds_each": 480,
+        "gpu_seconds_each": 120,
+        "jobs": 1,
+        "phase": "primitives"
+      },
+      {
+        "cpu_seconds_each": 240,
+        "gpu_seconds_each": 60,
+        "jobs": 12,
+        "phase": "safety"
+      },
+      {
+        "cpu_seconds_each": 720,
+        "gpu_seconds_each": 180,
+        "jobs": 4,
+        "phase": "sanitizers"
+      },
+      {
+        "cpu_seconds_each": 180,
+        "gpu_seconds_each": 45,
+        "jobs": 96,
+        "phase": "trajectories"
+      },
+      {
+        "cpu_seconds_each": 3200,
+        "gpu_seconds_each": 0,
+        "jobs": 1,
+        "phase": "reporting"
+      },
+      {
+        "cpu_seconds_each": 1040,
+        "gpu_seconds_each": 0,
+        "jobs": 1,
+        "phase": "cleanup"
+      }
+    ],
+    "safety_cases": [
+      "stale-generation",
+      "cancel-before-launch",
+      "cancel-in-window",
+      "cancel-at-audit",
+      "deadline",
+      "nonfinite",
+      "local-budget",
+      "ambiguous-projection",
+      "residual-growth",
+      "three-stalls",
+      "conversion-refusal",
+      "checker-bound-refusal"
+    ],
+    "sampled_host_rss_bytes": 17179869184,
+    "shared_gpu_leases": 1,
+    "tiers": [
+      "certified-1e-7",
+      "certified-1e-9"
+    ],
+    "trajectory_cells": 96
+  },
+  "kind": "lp-fp4-recovery-policy",
+  "local_budget_divisor": 64,
+  "observation_mutates_state": false,
+  "progress_ratio": "9/10",
+  "schema_version": 1,
+  "stagnant_audits": 3,
+  "submission_max_updates": 32,
+  "trajectory_enclosure": false
+}

@@ -1,0 +1,956 @@
+{
+  "cpu_cap_seconds": {
+    "acceptance": 16000,
+    "cleanup": 1600,
+    "implementation": 16000,
+    "native": 24000,
+    "reporting": 6400,
+    "study": 8000
+  },
+  "cpu_ns": {
+    "acceptance": 2924342407716,
+    "cleanup": 0,
+    "implementation": 1880111489440,
+    "native": 15712158552296,
+    "reporting": 485300930648,
+    "study": 951991726916
+  },
+  "gpu_cap_seconds": {
+    "acceptance": 2400,
+    "study": 7200
+  },
+  "gpu_ns": {
+    "acceptance": 723193855166,
+    "study": 230087288750
+  },
+  "note": "Active delivery reservation counted in full. Final settled accounting is additive; all failed charges retained.",
+  "resources": [
+    {
+      "charged": {
+        "cpu_ns": 27697583652,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 325,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/compile-v1.resource.json",
+          "sha256": "ddb454b7e1e18ea9a59ed781fa2a80779fc98119733e569ea8d5d4c8d098b43a"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/compile-v1.reservation.json",
+        "sha256": "342694f76898deead05e0db6b0ccfe46d31e56f2325aeb3cbe60074e523504e7"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/compile-v1.settlement.json",
+        "sha256": "e0d3152869e9e4528ca38f5cbd4bceddcfa186952f5082d917694ec72bd7e959"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 27756817376,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 365,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/corrected-compile-v2.resource.json",
+          "sha256": "2c41a3bdda98720775acd52e99b2ca502bf89ea17294204dd56e6369af71dc92"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/corrected-compile-v2.reservation.json",
+        "sha256": "8b6d1cbf2a06b521c3357f55847df5b40b626b538ae3fd5ca8e669677e383cf7"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/corrected-compile-v2.settlement.json",
+        "sha256": "1b32ef321a9fa90c1a7fda4a0dec210712cfadb54ec08f071407c8b697a7e3cf"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 5300930648,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 241,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/delivery-v1.resource.json",
+          "sha256": "ec70892a3d8ce151eee18495df8098e0cc4255fd816b4eaac0cfcee6b204e4f5"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/delivery-v1.reservation.json",
+        "sha256": "9e251979a5c5adab2629fe385341d683be0403200126de183916f58b09c1b042"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/delivery-v1.settlement.json",
+        "sha256": "04b60755d68673a5565987f853509152a7bed7c24f5cc576885132973cb74fa3"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "command": [
+          "/opt/conda/bin/python3",
+          "-B",
+          "tools/lp_fp4_gpu_delivery_v3.py"
+        ],
+        "cpu_ns": 480000000000,
+        "device": null,
+        "gpu": false,
+        "gpu_ns": 0,
+        "phase": "reporting",
+        "supervisor": {
+          "path": "tools/lp_cpu_admission.py",
+          "sha256": "523184f432ff32fdf1150b79bed4aefe3f03872464e736d466da39095564263a"
+        }
+      },
+      "cleanup_empty": null,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/delivery-v3.reservation.json",
+        "sha256": "b90f6d7d4d2a5244a9c67588e97a982d662919051b75c99bfeb695a7757b1447"
+      },
+      "settlement": null,
+      "status": "unsettled"
+    },
+    {
+      "charged": {
+        "cpu_ns": 102317836312,
+        "gpu": true,
+        "gpu_ns": 24700205999,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 19967,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-device-v3.resource.json",
+          "sha256": "20cec4b1c854c00f6ad68663323772d2b70caab44f188e2a6ad05e913be32e8f"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-device-v3.reservation.json",
+        "sha256": "c2271829d7cdc2e5411dc0dfb4f7ee3e8b18e16d1030f9eb941060744e585e5b"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-device-v3.settlement.json",
+        "sha256": "48a3573d3d119c604b3f8747609d46cc7a384c0d725ed8eed1e6497740c1aacb"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 86534273160,
+        "gpu": true,
+        "gpu_ns": 20756871710,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20608,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-primitive-v3.resource.json",
+          "sha256": "5f05bbe1f8197e9a94fbecd2fbf647643ccbb9addf18ee75e933fe41c71d6f57"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-primitive-v3.reservation.json",
+        "sha256": "fc330401267c9906d8ea03bb918f006d640304558fa0e0640fe01c20999a872f"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-primitive-v3.settlement.json",
+        "sha256": "95137bb98cb1e8560b36aebe5345359ee0807c2d5012f6ef9e4d6f64e9c8ed21"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 1200000000000,
+        "gpu": true,
+        "gpu_ns": 300000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20749,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-primitives-v1.resource.json",
+          "sha256": "430d0108ab80fc11aab18828585f84ad22ee670eba07de5bf6bafa895b4982b6"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-primitives-v1.reservation.json",
+        "sha256": "e889a640d2153ea5ec70fb263c684857e0608edfcb0edc1f40d0b24c1370e541"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-primitives-v1.settlement.json",
+        "sha256": "4a756199cea11cda6a94183f7458832c325edc156572409dad46b1234d775cc4"
+      },
+      "status": "refused"
+    },
+    {
+      "charged": {
+        "cpu_ns": 57500054044,
+        "gpu": true,
+        "gpu_ns": 13498228384,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20443,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-primitives-v2.resource.json",
+          "sha256": "3a62611ef620a04a3100331ef5cb649638c0872d41f4a7758318c54ad76613c8"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-primitives-v2.reservation.json",
+        "sha256": "06983497f4ae7189e537b6365d89843ef54716678e461c5fae001788ea5b4bc3"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-primitives-v2.settlement.json",
+        "sha256": "8ce5b23a53c99deecd5bcec0489b1a405db32009c3d99c4badf07fa018623570"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 131399290996,
+        "gpu": true,
+        "gpu_ns": 31972078974,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20136,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-safety-v2.resource.json",
+          "sha256": "dab2fb9a347d2d917482e26877bf1654d585dfb2a30794790c699996bd82d8cb"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-safety-v2.reservation.json",
+        "sha256": "a78f84c2a492155e8b40ba5fa8c50f90646e784963ee32b65d70b851feda565d"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/device-safety-v2.settlement.json",
+        "sha256": "eaf94cbf6a6c0f76a744857d3e14e4b36f8302fab0ee382afbc1d90a2d9784ca"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 8000000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "queue_ns": 301,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/native-acceptance-v1.resource.json",
+          "sha256": "3e16ac60f6b227560aee4dff07a724af07fc0a02bc1f4a5fcbd635c4ce58706e"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/native-acceptance-v1.reservation.json",
+        "sha256": "655d5a6bd066f76125fac31f18648aec98f0ceaee34475c5406346cb8d354a2a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/native-acceptance-v1.settlement.json",
+        "sha256": "48b942846f8264fc71ed38b15b4df281cb5da261ac8f84c5016101145d89c1c9"
+      },
+      "status": "refused"
+    },
+    {
+      "charged": {
+        "cpu_ns": 7200000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "queue_ns": 209,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/native-acceptance-v2.resource.json",
+          "sha256": "9daaaba104ed76089ef363145ab5d896561538d153779bf3795a0546df014db7"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/native-acceptance-v2.reservation.json",
+        "sha256": "f59bf539563e6fa9ad1a965a2ed623eb52f3d74c2fe5150a7e6894bac15baadf"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/native-acceptance-v2.settlement.json",
+        "sha256": "928a72067779d681b7c53b62fed3fd0b134fd5f2a63fc2366fa2d96c1fccff51"
+      },
+      "status": "refused"
+    },
+    {
+      "charged": {
+        "cpu_ns": 512158552296,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "queue_ns": 343,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/native-completion-v3.resource.json",
+          "sha256": "86f687a5561fd382253c2df5a7df3b81a7f0b915db0b3cec3e0599e8cb75757d"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/native-completion-v3.reservation.json",
+        "sha256": "87b3bf5d260aeb61a04f1aa61c549beb820722edfaf6651514606ce82fa3d31a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/native-completion-v3.settlement.json",
+        "sha256": "af7f8e1306764f96a8d3bd82467f4be155147281620eca8a99dc08b50101737d"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 4555525416,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 531,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/packing-correction-cpu-v2.resource.json",
+          "sha256": "b11d67fb480f804b5ad5407eff8ba4659b1b7bb1c3ad2c25d8ae3b3ea7656f1c"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/packing-correction-cpu-v2.reservation.json",
+        "sha256": "461b39a884be978c57241f6fe31ce4b85213bae2209c26ec6f07a8bb8d195392"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/packing-correction-cpu-v2.settlement.json",
+        "sha256": "1173e9fcdf6169c7eabb540e9ec29f7cd6441b8f989e912b8986655dca7ee0e4"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 480000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 279,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/packing-diagnosis-v2.resource.json",
+          "sha256": "29cf89f00d7b8860c94378754b4b83810cc654a7cb24883210f21db5e59c3ddb"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/packing-diagnosis-v2.reservation.json",
+        "sha256": "ed75455f324dd349b392742e5de934d738c1ab5f733e2d53f3adf696fe9a7e0e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/packing-diagnosis-v2.settlement.json",
+        "sha256": "6019cb14b52a3ecbba8f6567f1e1719f4c5923fa6908fe2927542b600196b959"
+      },
+      "status": "refused"
+    },
+    {
+      "charged": {
+        "cpu_ns": 7580851932,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 379,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/packing-diagnosis-v3.resource.json",
+          "sha256": "47e2cfdfed07ecbcbbf3d138d9b411bdb89124431cfbd1cd22bd4e2983fff293"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/packing-diagnosis-v3.reservation.json",
+        "sha256": "8676f759a8a5140e03f39d4fb818d12561b916af747b947e710226783c1112f0"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/packing-diagnosis-v3.settlement.json",
+        "sha256": "54cb684cb476cb2debe83b32563aa19bc7c923148d649ee43ad40faa9fc63bfb"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 224976417360,
+        "gpu": true,
+        "gpu_ns": 55365022559,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 20212,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-2048-r0-v3.resource.json",
+          "sha256": "7a4fecaa5d09f68720e9382306f334562aafdbb87544bdfc94b4ab2904f9333c"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-2048-r0-v3.reservation.json",
+        "sha256": "3731dfdd8888e945b40689d6afa970fe5e6bd6f6829aa8dce4761e59e88b914f"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-2048-r0-v3.settlement.json",
+        "sha256": "a3918b58bc50969ddb63022259c321e41d6f0d21da3f5af597edca7b94c5e304"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 224571810844,
+        "gpu": true,
+        "gpu_ns": 55263711829,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 19307,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-2048-r1-v3.resource.json",
+          "sha256": "ea40b4571d8cf2cca282003e8aea1cdf6fb548a4ac4c4556432845068d5fc58b"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-2048-r1-v3.reservation.json",
+        "sha256": "4dac85c460131652f7f61ad5aa0a10dfd48b586c8d77d0b188767d727f216edc"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-2048-r1-v3.settlement.json",
+        "sha256": "dda168ea3d67498b4132bdd9e057f15b9dc4118e7d0a9b63cfec664a2f511db7"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 225128404660,
+        "gpu": true,
+        "gpu_ns": 55404556943,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 20152,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-2048-r2-v3.resource.json",
+          "sha256": "3f9752961ff8c8baf44ad9ef59b10238e99dfc9baeeef946b4834a542432172e"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-2048-r2-v3.reservation.json",
+        "sha256": "a59da8b9fd32a8a4b13ae3666538bf18a93a781f81defc23633d9796ab7e428c"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-2048-r2-v3.settlement.json",
+        "sha256": "7f6cfe4e59ca52a81449e613f2adb7498f392a6453aba44e49c9ca44b026e6ed"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 46579367204,
+        "gpu": true,
+        "gpu_ns": 10767355662,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 21269,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-32-r0-v3.resource.json",
+          "sha256": "01bea2342fdacbfd936978077d2fce3e478bedc2ff1a36d76611d53f4d34b21e"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-32-r0-v3.reservation.json",
+        "sha256": "a7c9f714470cd9a00a73a33f431035f18fdb1eee31c1bdade1b02e3f961d1bcd"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-32-r0-v3.settlement.json",
+        "sha256": "1523d0fae10da33b0f14cd8b0ae5ed0843e6c695e5ac28e64b92e2e50fdd71bb"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 46414482484,
+        "gpu": true,
+        "gpu_ns": 10723989908,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 19310,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-32-r1-v3.resource.json",
+          "sha256": "48592f421db2fb20391fd849d083f0c461f535671444142f5d81536d9981be07"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-32-r1-v3.reservation.json",
+        "sha256": "134285d93639c3141949d5e5e58d39a70446205b09b8c551e625737b47f1da2d"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-32-r1-v3.settlement.json",
+        "sha256": "0fa3ed62e25088f5d2a5c8873c687ca3f094ad8f43286f5b47e812a370b60561"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 45997407984,
+        "gpu": true,
+        "gpu_ns": 10619839715,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 20016,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-32-r2-v3.resource.json",
+          "sha256": "743b0c9692c16e071d5af0443c4467ed85a19ab59548d8227cfa99d7b1ec654b"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-32-r2-v3.reservation.json",
+        "sha256": "750a0ffad40406351d7df6033a05e555b70ce2dd1f6570750fff68016be1a40a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-dense-32-r2-v3.settlement.json",
+        "sha256": "663175a6e1115dbf5a57be95631ee74f286573a14efa72574be670da4cce051d"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 46161693288,
+        "gpu": true,
+        "gpu_ns": 10661742963,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 19647,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-irregular-29-r0-v3.resource.json",
+          "sha256": "de7006fd2fce5d8f6404e34ca94968ed8cdfc75844d24961e751c727ce0b8fc5"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-irregular-29-r0-v3.reservation.json",
+        "sha256": "c4e4e5f0d9ebfc9d3096837d782e40a94cdadf99476d01bd916e17b2bac834fe"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-irregular-29-r0-v3.settlement.json",
+        "sha256": "263c254cf05dc89cd4cae399408861f95fb76dca256b555c8aa4009956959aae"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 45679379884,
+        "gpu": true,
+        "gpu_ns": 10539950629,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 19790,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-irregular-29-r1-v3.resource.json",
+          "sha256": "02c57119382be1afc281441adc034143ae4f23c79bd83a00c46bad9d5380dd7a"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-irregular-29-r1-v3.reservation.json",
+        "sha256": "4515a7e15c21e31d44dffdb72557682ceffdff1fc04f28396a633418a076c1c3"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-irregular-29-r1-v3.settlement.json",
+        "sha256": "aa79b0177bd52cc16f524aeb79b8f04a646507d02a3c1a342c889d509cf3778d"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 46482763208,
+        "gpu": true,
+        "gpu_ns": 10741118542,
+        "overrun": false,
+        "phase": "study",
+        "queue_ns": 19445,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-irregular-29-r2-v3.resource.json",
+          "sha256": "faed350f6e417b794552954d2dbfa81a9527c2b650999bc25f9caa572c55ba0b"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-irregular-29-r2-v3.reservation.json",
+        "sha256": "f0cf9bd8e91e4c4cf881697415ddf968a982dd5337c427adcf00c81787ac0a62"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/profiles-irregular-29-r2-v3.settlement.json",
+        "sha256": "6669e92d3c5b07afc6ba9cc09dcfc64b4078cb4fb6a88ceaaca4fe4a0bb2f54b"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 4939772052,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 355,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/recovery-freeze-v2.resource.json",
+          "sha256": "a9128b9974f2e8ce4de21e1bee7066e834225aa400d52dcf44cabf6e9a573ac2"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/recovery-freeze-v2.reservation.json",
+        "sha256": "10e106bee0311fd9ac1f72c73865320eca3576858c32eeb543916dfdb01d1043"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/recovery-freeze-v2.settlement.json",
+        "sha256": "40fdcd65492db8425692ef6e7ddbbadcfcdfb618f5bb92a86f7f71cfee39d1a3"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 4879527436,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 338,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/recovery-freeze-v3.resource.json",
+          "sha256": "87570c707d60f6e8a4f28b7268c80a0ae0cc9953b952dc0295ee5ce932cb3b49"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/recovery-freeze-v3.reservation.json",
+        "sha256": "b3bcd8e5a2e648584471c79dd006b9755b635a3752150636893e20b3d190e98a"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/recovery-freeze-v3.settlement.json",
+        "sha256": "f759c3309f8b5e981dc4399f14ef6c51208705f564e8fdae8f6aea1ee8f37db5"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 720000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 297,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/research-build-v1.resource.json",
+          "sha256": "aa1174d8d19f1f6ec21df6c5941fa5dc6db08ee0983cc846529f4146129f38ae"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/research-build-v1.reservation.json",
+        "sha256": "6617021fd6d9d8bc55f0306a733cc4de88bddc3e2bcdfdcd19db86e916da7924"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/research-build-v1.settlement.json",
+        "sha256": "22f43a354fa5e6b599ad6f792549df79557fb97034bf6c8892ed52cb730096e9"
+      },
+      "status": "refused"
+    },
+    {
+      "charged": {
+        "cpu_ns": 53619847228,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 399,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/research-build-v2.resource.json",
+          "sha256": "f518a27c6ce2581eeedc6b055672e99549754c352cd0b89990de739691081245"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/research-build-v2.reservation.json",
+        "sha256": "f5ebe92213e59f0495679763ad53a18f64b8ef0b6762d08a669df912dc831eff"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/research-build-v2.settlement.json",
+        "sha256": "40fecc9eaf9182a2aae6e21dc7d074647bc5d7c1ee36f52f6324b365d5cc42b4"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 59265427716,
+        "gpu": true,
+        "gpu_ns": 13938739020,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 19561,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-initcheck-v3.resource.json",
+          "sha256": "6acb7834cc672ae1e60997425fd03e813ff59b8461147789b0f6f307294ee78b"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-initcheck-v3.reservation.json",
+        "sha256": "b85d86e8ab3123d08fa23246ef90e644fd47e7d87c845a96bb7fdb27462b49cd"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-initcheck-v3.settlement.json",
+        "sha256": "729e2e6b0ae983aa4c169ccb719e4863b1e58fe3cc550d7e143c8e8e488df0bd"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 59585691544,
+        "gpu": true,
+        "gpu_ns": 14024875882,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 20306,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-memcheck-v2.resource.json",
+          "sha256": "87b157a0f996651ebd308a2a4f84ca6b851cbc1e9fce90bad78e1092052c2bb6"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-memcheck-v2.reservation.json",
+        "sha256": "0409f6f3d16a05ed785798df52af6062fb770428c43991193177e934dc9f5b26"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-memcheck-v2.settlement.json",
+        "sha256": "64cd4fff3b6137423404420bc04cde73732d9348dda591e622ed9b11cf6156c6"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 50561983540,
+        "gpu": true,
+        "gpu_ns": 11763728234,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 19158,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-memcheck-v3.resource.json",
+          "sha256": "a7e97bd2b8191ad9382230bd99a13add6ebc53f67b9d906e5860ee5f76ac4688"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-memcheck-v3.reservation.json",
+        "sha256": "7576f97013e5e567fede34c51fc61fcaa57a57962e777bd565d3e0a2da476d4b"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-memcheck-v3.settlement.json",
+        "sha256": "0af850ccc7a47ec46eb61746b499d61daa458c1a17fbabe666b1f5155ed78686"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 960000000000,
+        "gpu": true,
+        "gpu_ns": 240000000000,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 19638,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-racecheck-v2.resource.json",
+          "sha256": "b7a5044e279c795c1631111ea3d10196d1f437582bf66996094d5a513b05939a"
+        },
+        "status": "refused"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-racecheck-v2.reservation.json",
+        "sha256": "3b32cc2dcd34c630003613c547680986c43e7ea6742fd5edc113febeb99bdd38"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-racecheck-v2.settlement.json",
+        "sha256": "676684cfb9681c207fe7314f7b29430260f5d1f543a349d02a958c46a0279b4b"
+      },
+      "status": "refused"
+    },
+    {
+      "charged": {
+        "cpu_ns": 158852433940,
+        "gpu": true,
+        "gpu_ns": 38834544516,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 18545,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-racecheck-v3.resource.json",
+          "sha256": "966ad571a11dcc5ef478185f9a13e0effa84899cc369bf6d5bfb5c2dc87088bb"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-racecheck-v3.reservation.json",
+        "sha256": "1dc82b588cf49516ac9f1761abcd0e364d1df08bdd15c810b241705f654dea0e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-racecheck-v3.settlement.json",
+        "sha256": "65eeaed32f93c2dc0b414a283d125aa9054acd4c011dab70d67e574780cb52b5"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 58325416464,
+        "gpu": true,
+        "gpu_ns": 13704582447,
+        "overrun": false,
+        "phase": "acceptance",
+        "queue_ns": 18565,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-synccheck-v3.resource.json",
+          "sha256": "f503c3db448796738a32571dce31cd6960def3555f8329babed8b3418d10160d"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-synccheck-v3.reservation.json",
+        "sha256": "605b07fbf8055fa42241e11d914caea41a11ee17d6a673ef3b33fd78cdc57496"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/sanitizer-synccheck-v3.settlement.json",
+        "sha256": "22faa2a352694af40d6dc6cbf74bbf41ee66907978bacd04562fe6cfee5b8e4a"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 4849305352,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 373,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/source-freeze-v1.resource.json",
+          "sha256": "b05edcb0a4676e1986dcd83dcd5a56df85e926ef1cc0a9c34a29c78f770b67ea"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/source-freeze-v1.reservation.json",
+        "sha256": "baff2133332af01e77849965a6d04e2fe3b47a8af5b6fa9b037a7fa6bea3cae1"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/source-freeze-v1.settlement.json",
+        "sha256": "2a6b9df71954a9d17eb6893ccc82bab212c65257d1435e26e7eac0fed1937448"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 4712692864,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 323,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/synchronization-audit-v3.resource.json",
+          "sha256": "f26ab7752ef9beb95ca7c1ca517789a8299fe3e6ca3622d2c7a6bd843a5acfd0"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/synchronization-audit-v3.reservation.json",
+        "sha256": "ac338129bcf01f6ec9cb6f0cc3ff401fd8edb2e9731d0ce5ff9ef7def3daa287"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/synchronization-audit-v3.settlement.json",
+        "sha256": "878d43a128e2dc16317ebc9d5433b8038c3eb1d085a8e923b95f407fba88ad0e"
+      },
+      "status": "passed"
+    },
+    {
+      "charged": {
+        "cpu_ns": 27519566132,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "queue_ns": 450,
+        "resource": {
+          "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/synchronization-compile-v3.resource.json",
+          "sha256": "303028f2a214cba612cb9768a88b11b657fa0b268c5efa0ece29496ede4133aa"
+        },
+        "status": "passed"
+      },
+      "cleanup_empty": true,
+      "reservation": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/synchronization-compile-v3.reservation.json",
+        "sha256": "55431805a29d75ed99fd69c1ba7f093099838aad5a5b4efba2493ec6ee7e354e"
+      },
+      "settlement": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/resources/synchronization-compile-v3.settlement.json",
+        "sha256": "fbe95be8d966c7e8f001663b04118530c5a6240d4c83306eb3ae12c645705afa"
+      },
+      "status": "passed"
+    }
+  ],
+  "total_cpu_ns": 21953905107016,
+  "total_gpu_ns": 953281143916
+}

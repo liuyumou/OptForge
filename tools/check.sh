@@ -66,7 +66,7 @@ from pathlib import Path
 import re
 directories = ['lp_pdhg_tuned', 'lp_pdhg_precision', 'lp_pdhg_research',
     'lp_pdhg_exec', 'lp_pdhg_refine', 'lp_pdhg_quant', 'lp_pdhg_quant_resident',
-    'lp_pdhg_tensor', 'lp_pdhg_tensor_residual', 'lp_pdhg_tensor_cost', 'diagnostics']
+    'lp_pdhg_tensor', 'lp_pdhg_tensor_residual', 'lp_pdhg_tensor_cost', 'lp_pdhg_resident2', 'diagnostics']
 found = False
 for directory in directories:
     for path in sorted((Path('cuda') / directory).rglob('*')):

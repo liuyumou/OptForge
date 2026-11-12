@@ -1,0 +1,157 @@
+{
+  "numpy": "2.3.4",
+  "reference": {
+    "path": "tools/lp_fp4_gpu_oracle.py",
+    "sha256": "eae3194a179dde6035e0e432e83ec03704aafc62009b3df4303b856898618ca1"
+  },
+  "rows": [
+    {
+      "components": 1,
+      "exact_match": true,
+      "format": 64,
+      "rational_ns": 15641702,
+      "repetition": 0,
+      "vectorized_ns": 3631791
+    },
+    {
+      "components": 4,
+      "exact_match": true,
+      "format": 8,
+      "rational_ns": 1479499553,
+      "repetition": 0,
+      "vectorized_ns": 17845036
+    },
+    {
+      "components": 2,
+      "exact_match": true,
+      "format": 16,
+      "rational_ns": 465445071,
+      "repetition": 0,
+      "vectorized_ns": 7698911
+    },
+    {
+      "components": 2,
+      "exact_match": true,
+      "format": 4,
+      "rational_ns": 1073027769,
+      "repetition": 0,
+      "vectorized_ns": 10500501
+    },
+    {
+      "components": 4,
+      "exact_match": true,
+      "format": 4,
+      "rational_ns": 2083545500,
+      "repetition": 0,
+      "vectorized_ns": 13491259
+    },
+    {
+      "components": 8,
+      "exact_match": true,
+      "format": 4,
+      "rational_ns": 4106684232,
+      "repetition": 0,
+      "vectorized_ns": 17485970
+    },
+    {
+      "components": 1,
+      "exact_match": true,
+      "format": 64,
+      "rational_ns": 14265733,
+      "repetition": 1,
+      "vectorized_ns": 2296621
+    },
+    {
+      "components": 4,
+      "exact_match": true,
+      "format": 8,
+      "rational_ns": 1479871663,
+      "repetition": 1,
+      "vectorized_ns": 14820830
+    },
+    {
+      "components": 2,
+      "exact_match": true,
+      "format": 16,
+      "rational_ns": 465851831,
+      "repetition": 1,
+      "vectorized_ns": 7677853
+    },
+    {
+      "components": 2,
+      "exact_match": true,
+      "format": 4,
+      "rational_ns": 1073465567,
+      "repetition": 1,
+      "vectorized_ns": 8140310
+    },
+    {
+      "components": 4,
+      "exact_match": true,
+      "format": 4,
+      "rational_ns": 2081838223,
+      "repetition": 1,
+      "vectorized_ns": 10881298
+    },
+    {
+      "components": 8,
+      "exact_match": true,
+      "format": 4,
+      "rational_ns": 4097950022,
+      "repetition": 1,
+      "vectorized_ns": 18114258
+    },
+    {
+      "components": 1,
+      "exact_match": true,
+      "format": 64,
+      "rational_ns": 14613324,
+      "repetition": 2,
+      "vectorized_ns": 2200828
+    },
+    {
+      "components": 4,
+      "exact_match": true,
+      "format": 8,
+      "rational_ns": 1472895947,
+      "repetition": 2,
+      "vectorized_ns": 14399055
+    },
+    {
+      "components": 2,
+      "exact_match": true,
+      "format": 16,
+      "rational_ns": 464847325,
+      "repetition": 2,
+      "vectorized_ns": 7878250
+    },
+    {
+      "components": 2,
+      "exact_match": true,
+      "format": 4,
+      "rational_ns": 1070375678,
+      "repetition": 2,
+      "vectorized_ns": 9996810
+    },
+    {
+      "components": 4,
+      "exact_match": true,
+      "format": 4,
+      "rational_ns": 2086005817,
+      "repetition": 2,
+      "vectorized_ns": 12834237
+    },
+    {
+      "components": 8,
+      "exact_match": true,
+      "format": 4,
+      "rational_ns": 4105613269,
+      "repetition": 2,
+      "vectorized_ns": 19821052
+    }
+  ],
+  "source": {
+    "path": "tools/lp_fp4_fast_prepare.py",
+    "sha256": "ef006d5b4f7b9f55a81486ccf26e78970f3f5955ac001e0f58f596e71b94ef9a"
+  }
+}

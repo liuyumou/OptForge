@@ -1,0 +1,1048 @@
+{
+  "certificates": 0,
+  "deferred": [
+    {
+      "kind": "pilot",
+      "lane": "native",
+      "lifecycle": "cold",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "native",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp8-4",
+      "lifecycle": "cold",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp8-4",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp16-2",
+      "lifecycle": "cold",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp16-2",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-2",
+      "lifecycle": "cold",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-2",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-4",
+      "lifecycle": "cold",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-4",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-8",
+      "lifecycle": "cold",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-8",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-2",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed",
+      "variant": "unfused"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-2",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed",
+      "variant": "per-update-reconstructed"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-4",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed",
+      "variant": "unfused"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-4",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed",
+      "variant": "per-update-reconstructed"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-8",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed",
+      "variant": "unfused"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-8",
+      "lifecycle": "prepared",
+      "model": "gpup-development-irregular-2048",
+      "status": "not_executed",
+      "variant": "per-update-reconstructed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "native",
+      "lifecycle": "cold",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "native",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp8-4",
+      "lifecycle": "cold",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp8-4",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp16-2",
+      "lifecycle": "cold",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp16-2",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-2",
+      "lifecycle": "cold",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-2",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-4",
+      "lifecycle": "cold",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-4",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-8",
+      "lifecycle": "cold",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "pilot",
+      "lane": "fp4-8",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-2",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed",
+      "variant": "unfused"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-2",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed",
+      "variant": "per-update-reconstructed"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-4",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed",
+      "variant": "unfused"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-4",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed",
+      "variant": "per-update-reconstructed"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-8",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed",
+      "variant": "unfused"
+    },
+    {
+      "kind": "diagnostic",
+      "lane": "fp4-8",
+      "lifecycle": "prepared",
+      "model": "gpup-development-dense_block-1024",
+      "status": "not_executed",
+      "variant": "per-update-reconstructed"
+    }
+  ],
+  "gpu_execution_started": false,
+  "gpu_seconds": 0,
+  "kind": "lp-fp4-cpu-admission-result",
+  "later_stages": "closed by CPU admission refusal",
+  "manifest": {
+    "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/manifest.json",
+    "sha256": "c01bdebf6962d383a355fbe2b65f0c6af09b50859ee6c50f8c6b37660b945e41"
+  },
+  "numerical_admitted": false,
+  "qualified_components": [],
+  "rows": [
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/scalar-equality-k2.json",
+        "sha256": "4dcb325413ee6e0666ddf23377952c2e9e413d5560b4fdbb5fd1da91ad83d01a"
+      },
+      "completed_updates": 1,
+      "components": 2,
+      "id": "scalar-equality-k2",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 0.0,
+          "x": 0.00016276041666666587,
+          "y": 0.0019531249999999892
+        },
+        "error_bounds": {
+          "bar": 0.0,
+          "x": 0.00016276041666666587,
+          "y": 0.0019531249999999892
+        },
+        "iteration": 2,
+        "local_errors": {
+          "blend_x": 0.00016276041666666587,
+          "blend_y": 0.0019531249999999892,
+          "dual": 0.0,
+          "extrapolate": 0.0,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 0.00016276041666666587,
+          "y": 0.0019531249999999892
+        }
+      },
+      "model": "scalar-equality",
+      "nonzero_groups": 5,
+      "observations": 0,
+      "physical_updates": 2,
+      "refusal": {
+        "details": {
+          "actual_errors": {
+            "bar": 0.0,
+            "x": 0.00016276041666666587,
+            "y": 0.0019531249999999892
+          },
+          "error_bounds": {
+            "bar": 0.0,
+            "x": 0.00016276041666666587,
+            "y": 0.0019531249999999892
+          },
+          "iteration": 2,
+          "local_errors": {
+            "blend_x": 0.00016276041666666587,
+            "blend_y": 0.0019531249999999892,
+            "dual": 0.0,
+            "extrapolate": 0.0,
+            "forward": 0.0,
+            "primal": 0.0,
+            "transpose": 0.0
+          },
+          "relative_bounds": {
+            "x": 0.00016276041666666587,
+            "y": 0.0019531249999999892
+          }
+        },
+        "iteration": 2,
+        "reason": "cumulative_enclosure_guard"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/scalar-equality-k4.json",
+        "sha256": "bc69c871898eb13c1a9d6251ba4a082effeb5b124853962b1791bb2bed7b9614"
+      },
+      "completed_updates": 1,
+      "components": 4,
+      "id": "scalar-equality-k4",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 0.0,
+          "x": 2.5431315104158716e-06,
+          "y": 1.0950441942103595e-17
+        },
+        "error_bounds": {
+          "bar": 0.0,
+          "x": 2.5431315104158716e-06,
+          "y": 1.0950441942103595e-17
+        },
+        "iteration": 2,
+        "local_errors": {
+          "blend_x": 2.5431315104158716e-06,
+          "blend_y": 1.0950441942103595e-17,
+          "dual": 0.0,
+          "extrapolate": 0.0,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 2.5431315104158716e-06,
+          "y": 1.0950441942103595e-17
+        }
+      },
+      "model": "scalar-equality",
+      "nonzero_groups": 5,
+      "observations": 0,
+      "physical_updates": 2,
+      "refusal": {
+        "details": {
+          "actual_errors": {
+            "bar": 0.0,
+            "x": 2.5431315104158716e-06,
+            "y": 1.0950441942103595e-17
+          },
+          "error_bounds": {
+            "bar": 0.0,
+            "x": 2.5431315104158716e-06,
+            "y": 1.0950441942103595e-17
+          },
+          "iteration": 2,
+          "local_errors": {
+            "blend_x": 2.5431315104158716e-06,
+            "blend_y": 1.0950441942103595e-17,
+            "dual": 0.0,
+            "extrapolate": 0.0,
+            "forward": 0.0,
+            "primal": 0.0,
+            "transpose": 0.0
+          },
+          "relative_bounds": {
+            "x": 2.5431315104158716e-06,
+            "y": 1.0950441942103595e-17
+          }
+        },
+        "iteration": 2,
+        "reason": "cumulative_enclosure_guard"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/scalar-equality-k8.json",
+        "sha256": "17e3848cdadc940f7aac4a260fcbd3a3bdb78f03a02209f5028ede012d4feecf"
+      },
+      "completed_updates": 16,
+      "components": 8,
+      "id": "scalar-equality-k8",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 7.208155548856727e-10,
+          "x": 1.2784111492642628e-09,
+          "y": 7.753928032645746e-10
+        },
+        "error_bounds": {
+          "bar": 1.5997183651024467e-07,
+          "x": 5.842887238707187e-08,
+          "y": 1.1401607480488673e-07
+        },
+        "iteration": 17,
+        "local_errors": {
+          "blend_x": 1.7640154830796532e-09,
+          "blend_y": 3.848173228680327e-10,
+          "dual": 0.0,
+          "extrapolate": 5.820766091346741e-11,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 5.842887238707187e-08,
+          "y": 1.1401607480488673e-07
+        }
+      },
+      "model": "scalar-equality",
+      "nonzero_groups": 233,
+      "observations": 0,
+      "physical_updates": 17,
+      "refusal": {
+        "details": {
+          "actual_errors": {
+            "bar": 7.208155548856727e-10,
+            "x": 1.2784111492642628e-09,
+            "y": 7.753928032645746e-10
+          },
+          "error_bounds": {
+            "bar": 1.5997183651024467e-07,
+            "x": 5.842887238707187e-08,
+            "y": 1.1401607480488673e-07
+          },
+          "iteration": 17,
+          "local_errors": {
+            "blend_x": 1.7640154830796532e-09,
+            "blend_y": 3.848173228680327e-10,
+            "dual": 0.0,
+            "extrapolate": 5.820766091346741e-11,
+            "forward": 0.0,
+            "primal": 0.0,
+            "transpose": 0.0
+          },
+          "relative_bounds": {
+            "x": 5.842887238707187e-08,
+            "y": 1.1401607480488673e-07
+          }
+        },
+        "iteration": 17,
+        "reason": "cumulative_enclosure_guard"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/coupled-equality-k2.json",
+        "sha256": "2b6ec0ea656a432f2137765d647e78baa7192f6f86097071a2686d90faa7e428"
+      },
+      "completed_updates": 0,
+      "components": 2,
+      "id": "coupled-equality-k2",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.00048828125
+        },
+        "error_bounds": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.00048828125
+        },
+        "iteration": 1,
+        "local_errors": {
+          "blend_x": 0.0,
+          "blend_y": 0.00048828125,
+          "dual": 0.0,
+          "extrapolate": 0.0,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 0.0,
+          "y": 0.00048828125
+        }
+      },
+      "model": "coupled-equality",
+      "nonzero_groups": 2,
+      "observations": 0,
+      "physical_updates": 1,
+      "refusal": {
+        "details": {
+          "actual_errors": {
+            "bar": 0.0,
+            "x": 0.0,
+            "y": 0.00048828125
+          },
+          "error_bounds": {
+            "bar": 0.0,
+            "x": 0.0,
+            "y": 0.00048828125
+          },
+          "iteration": 1,
+          "local_errors": {
+            "blend_x": 0.0,
+            "blend_y": 0.00048828125,
+            "dual": 0.0,
+            "extrapolate": 0.0,
+            "forward": 0.0,
+            "primal": 0.0,
+            "transpose": 0.0
+          },
+          "relative_bounds": {
+            "x": 0.0,
+            "y": 0.00048828125
+          }
+        },
+        "iteration": 1,
+        "reason": "cumulative_enclosure_guard"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/coupled-equality-k4.json",
+        "sha256": "434de5c8072ce1e4ca8c4727255feb91785026fbb7854f9fa381805ec75c35a6"
+      },
+      "completed_updates": 1,
+      "components": 4,
+      "id": "coupled-equality-k4",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 0.0,
+          "x": 1.5348237004247922e-18,
+          "y": 2.479553222655679e-05
+        },
+        "error_bounds": {
+          "bar": 0.0,
+          "x": 1.5348237004247922e-18,
+          "y": 2.479553222655679e-05
+        },
+        "iteration": 2,
+        "local_errors": {
+          "blend_x": 1.5348237004247922e-18,
+          "blend_y": 2.479553222655679e-05,
+          "dual": 0.0,
+          "extrapolate": 0.0,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 1.5348237004247922e-18,
+          "y": 2.479553222655679e-05
+        }
+      },
+      "model": "coupled-equality",
+      "nonzero_groups": 16,
+      "observations": 0,
+      "physical_updates": 2,
+      "refusal": {
+        "details": {
+          "actual_errors": {
+            "bar": 0.0,
+            "x": 1.5348237004247922e-18,
+            "y": 2.479553222655679e-05
+          },
+          "error_bounds": {
+            "bar": 0.0,
+            "x": 1.5348237004247922e-18,
+            "y": 2.479553222655679e-05
+          },
+          "iteration": 2,
+          "local_errors": {
+            "blend_x": 1.5348237004247922e-18,
+            "blend_y": 2.479553222655679e-05,
+            "dual": 0.0,
+            "extrapolate": 0.0,
+            "forward": 0.0,
+            "primal": 0.0,
+            "transpose": 0.0
+          },
+          "relative_bounds": {
+            "x": 1.5348237004247922e-18,
+            "y": 2.479553222655679e-05
+          }
+        },
+        "iteration": 2,
+        "reason": "cumulative_enclosure_guard"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/coupled-equality-k8.json",
+        "sha256": "449969801e1bd6ea17b773afbc7a8dff2d745df7b5055437f2d5a12dd34eb4b9"
+      },
+      "completed_updates": 1,
+      "components": 8,
+      "id": "coupled-equality-k8",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.0
+        },
+        "error_bounds": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.0
+        },
+        "iteration": 1,
+        "local_errors": {
+          "blend_x": 0.0,
+          "blend_y": 0.0,
+          "dual": 0.0,
+          "extrapolate": 0.0,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      "model": "coupled-equality",
+      "nonzero_groups": 16,
+      "observations": 0,
+      "physical_updates": 2,
+      "refusal": {
+        "details": "enclosure omits representation remainder",
+        "iteration": 2,
+        "reason": "contract_refusal"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/diagonally-dominant-equality-k2.json",
+        "sha256": "8ffcb1a639a52720916267c3c32986bcfc49b2638223a9737910d4d14722c16a"
+      },
+      "completed_updates": 0,
+      "components": 2,
+      "id": "diagonally-dominant-equality-k2",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.000244140625
+        },
+        "error_bounds": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.000244140625
+        },
+        "iteration": 1,
+        "local_errors": {
+          "blend_x": 0.0,
+          "blend_y": 0.000244140625,
+          "dual": 0.0,
+          "extrapolate": 0.0,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 0.0,
+          "y": 0.000244140625
+        }
+      },
+      "model": "diagonally-dominant-equality",
+      "nonzero_groups": 4,
+      "observations": 0,
+      "physical_updates": 1,
+      "refusal": {
+        "details": {
+          "actual_errors": {
+            "bar": 0.0,
+            "x": 0.0,
+            "y": 0.000244140625
+          },
+          "error_bounds": {
+            "bar": 0.0,
+            "x": 0.0,
+            "y": 0.000244140625
+          },
+          "iteration": 1,
+          "local_errors": {
+            "blend_x": 0.0,
+            "blend_y": 0.000244140625,
+            "dual": 0.0,
+            "extrapolate": 0.0,
+            "forward": 0.0,
+            "primal": 0.0,
+            "transpose": 0.0
+          },
+          "relative_bounds": {
+            "x": 0.0,
+            "y": 0.000244140625
+          }
+        },
+        "iteration": 1,
+        "reason": "cumulative_enclosure_guard"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/diagonally-dominant-equality-k4.json",
+        "sha256": "9209eb1bfdce5be066d9719cd6df40deb9114fc58ee323a8d4c31e80d17f7136"
+      },
+      "completed_updates": 1,
+      "components": 4,
+      "id": "diagonally-dominant-equality-k4",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.0
+        },
+        "error_bounds": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.0
+        },
+        "iteration": 1,
+        "local_errors": {
+          "blend_x": 0.0,
+          "blend_y": 0.0,
+          "dual": 0.0,
+          "extrapolate": 0.0,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      "model": "diagonally-dominant-equality",
+      "nonzero_groups": 31,
+      "observations": 0,
+      "physical_updates": 2,
+      "refusal": {
+        "details": "enclosure omits representation remainder",
+        "iteration": 2,
+        "reason": "contract_refusal"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/diagonally-dominant-equality-k8.json",
+        "sha256": "5013919fe77b2f169ce3b7572320308201a400650cb152f744c6a213ba5e95d6"
+      },
+      "completed_updates": 1,
+      "components": 8,
+      "id": "diagonally-dominant-equality-k8",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.0
+        },
+        "error_bounds": {
+          "bar": 0.0,
+          "x": 0.0,
+          "y": 0.0
+        },
+        "iteration": 1,
+        "local_errors": {
+          "blend_x": 0.0,
+          "blend_y": 0.0,
+          "dual": 0.0,
+          "extrapolate": 0.0,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      "model": "diagonally-dominant-equality",
+      "nonzero_groups": 34,
+      "observations": 0,
+      "physical_updates": 2,
+      "refusal": {
+        "details": "enclosure omits representation remainder",
+        "iteration": 2,
+        "reason": "contract_refusal"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/bounded-ranged-k2.json",
+        "sha256": "16343b507e8d0dce51eda157694402a22fc1d9c776e1fced5a09f64062c09aba"
+      },
+      "completed_updates": 18,
+      "components": 2,
+      "id": "bounded-ranged-k2",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 1.935586194247806e-17,
+          "x": 3.2265856653168614e-17,
+          "y": 3.0517578125017675e-06
+        },
+        "error_bounds": {
+          "bar": 9.38648264247901e-16,
+          "x": 3.3767578900482324e-16,
+          "y": 3.0517578130921905e-06
+        },
+        "iteration": 19,
+        "local_errors": {
+          "blend_x": 1.3877787807814457e-17,
+          "blend_y": 3.0517578125000434e-06,
+          "dual": 0.0,
+          "extrapolate": 0.0,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 3.3767578900482324e-16,
+          "y": 3.0517578130921905e-06
+        }
+      },
+      "model": "bounded-ranged",
+      "nonzero_groups": 66,
+      "observations": 0,
+      "physical_updates": 19,
+      "refusal": {
+        "details": {
+          "actual_errors": {
+            "bar": 1.935586194247806e-17,
+            "x": 3.2265856653168614e-17,
+            "y": 3.0517578125017675e-06
+          },
+          "error_bounds": {
+            "bar": 9.38648264247901e-16,
+            "x": 3.3767578900482324e-16,
+            "y": 3.0517578130921905e-06
+          },
+          "iteration": 19,
+          "local_errors": {
+            "blend_x": 1.3877787807814457e-17,
+            "blend_y": 3.0517578125000434e-06,
+            "dual": 0.0,
+            "extrapolate": 0.0,
+            "forward": 0.0,
+            "primal": 0.0,
+            "transpose": 0.0
+          },
+          "relative_bounds": {
+            "x": 3.3767578900482324e-16,
+            "y": 3.0517578130921905e-06
+          }
+        },
+        "iteration": 19,
+        "reason": "cumulative_enclosure_guard"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/bounded-ranged-k4.json",
+        "sha256": "12071293ea28981dbee684fbf5e45ae0e94e92edc8edb1c0c3599ea1e16a36f6"
+      },
+      "completed_updates": 19,
+      "components": 4,
+      "id": "bounded-ranged-k4",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 7.629394530931761e-07,
+          "x": 1.8165225069618752e-07,
+          "y": 1.0253418059108683e-07
+        },
+        "error_bounds": {
+          "bar": 7.644295704794835e-07,
+          "x": 1.8236183025851972e-07,
+          "y": 1.4821333623031687e-07
+        },
+        "iteration": 20,
+        "local_errors": {
+          "blend_x": 1.8023309251776865e-07,
+          "blend_y": 3.5478955205827066e-10,
+          "dual": 0.0,
+          "extrapolate": 7.599592208862305e-07,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 1.8236183025851972e-07,
+          "y": 1.4821333623031687e-07
+        }
+      },
+      "model": "bounded-ranged",
+      "nonzero_groups": 82,
+      "observations": 0,
+      "physical_updates": 20,
+      "refusal": {
+        "details": {
+          "actual_errors": {
+            "bar": 7.629394530931761e-07,
+            "x": 1.8165225069618752e-07,
+            "y": 1.0253418059108683e-07
+          },
+          "error_bounds": {
+            "bar": 7.644295704794835e-07,
+            "x": 1.8236183025851972e-07,
+            "y": 1.4821333623031687e-07
+          },
+          "iteration": 20,
+          "local_errors": {
+            "blend_x": 1.8023309251776865e-07,
+            "blend_y": 3.5478955205827066e-10,
+            "dual": 0.0,
+            "extrapolate": 7.599592208862305e-07,
+            "forward": 0.0,
+            "primal": 0.0,
+            "transpose": 0.0
+          },
+          "relative_bounds": {
+            "x": 1.8236183025851972e-07,
+            "y": 1.4821333623031687e-07
+          }
+        },
+        "iteration": 20,
+        "reason": "cumulative_enclosure_guard"
+      },
+      "retained_fast_path": false
+    },
+    {
+      "artifact": {
+        "path": "artifacts/gpup-fp4-proto-v1/qualification-v1/bounded-ranged-k8.json",
+        "sha256": "8c2c0b7aed9d8d9e66d38e8e9afa685b989eeba46050a825683108e116a4e5fa"
+      },
+      "completed_updates": 32,
+      "components": 8,
+      "id": "bounded-ranged-k8",
+      "last_diagnostic": {
+        "actual_errors": {
+          "bar": 4.175235781688824e-09,
+          "x": 1.4417129229332535e-08,
+          "y": 3.34837321862645e-10
+        },
+        "error_bounds": {
+          "bar": 1.8145502978999733e-07,
+          "x": 7.503432804324906e-08,
+          "y": 1.2291655307281157e-07
+        },
+        "iteration": 33,
+        "local_errors": {
+          "blend_x": 1.0945394239945066e-08,
+          "blend_y": 1.7119906621859572e-12,
+          "dual": 0.0,
+          "extrapolate": 7.275957614183426e-10,
+          "forward": 0.0,
+          "primal": 0.0,
+          "transpose": 0.0
+        },
+        "relative_bounds": {
+          "x": 7.503432804324906e-08,
+          "y": 1.2291655307281157e-07
+        }
+      },
+      "model": "bounded-ranged",
+      "nonzero_groups": 507,
+      "observations": 0,
+      "physical_updates": 33,
+      "refusal": {
+        "details": {
+          "actual_errors": {
+            "bar": 4.175235781688824e-09,
+            "x": 1.4417129229332535e-08,
+            "y": 3.34837321862645e-10
+          },
+          "error_bounds": {
+            "bar": 1.8145502978999733e-07,
+            "x": 7.503432804324906e-08,
+            "y": 1.2291655307281157e-07
+          },
+          "iteration": 33,
+          "local_errors": {
+            "blend_x": 1.0945394239945066e-08,
+            "blend_y": 1.7119906621859572e-12,
+            "dual": 0.0,
+            "extrapolate": 7.275957614183426e-10,
+            "forward": 0.0,
+            "primal": 0.0,
+            "transpose": 0.0
+          },
+          "relative_bounds": {
+            "x": 7.503432804324906e-08,
+            "y": 1.2291655307281157e-07
+          }
+        },
+        "iteration": 33,
+        "reason": "cumulative_enclosure_guard"
+      },
+      "retained_fast_path": false
+    }
+  ],
+  "schema_version": 1,
+  "status": "cpu_numerical_refusal"
+}

@@ -1,0 +1,764 @@
+{
+  "cause": "For kind::f8f6f4, each E2M1 nibble occupies bits 5:2 of its MMA byte. V1 puts it in bits 3:0. Storage packing and arithmetic codebook are distinct from this ISA byte layout.",
+  "corrected_candidate": {
+    "path": "research/lp-fp4-gpu-pilot/cuda/pilot_v2.cu",
+    "sha256": "92416e71bf36c3d80d8b9aa6e837ff3880db3b1a5ac881662ca2e4d4efa4c1c4"
+  },
+  "corrected_cpu_mapping_matches_oracle": true,
+  "device_correction_validated": false,
+  "failed": 1,
+  "failed_case": "4-2-forward-dense",
+  "kind": "fp4-gpu-pilot-packing-diagnosis-v1",
+  "noncanonical_padding_empirical_model_matches_all_32": true,
+  "note": "No v1 result or source modified. Nonzero padding is outside the ISA contract; any model matching those outputs is empirical only. The prior mask-only CPU hypothesis failed and its full 480 CPU-second charge remains. CPU diagnosis is not corrected device admission.",
+  "passed": 30,
+  "rows": [
+    {
+      "comparison_limit": 0.0002651214599609375,
+      "comparison_passed": true,
+      "elapsed_ns": 335416127,
+      "id": "16-2-forward-codebook",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-codebook.input.json",
+        "sha256": "357883619dff38413a94bf68f1115de8238755351abe4cb14543ee824a0807e4"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-codebook.output.json",
+        "sha256": "424cea2879e2fedeffd2b2da919ab804f21dc9670684a40d8efd800c5c141d36"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-codebook.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-codebook.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.3075768947601318e-06,
+      "comparison_passed": true,
+      "elapsed_ns": 333506542,
+      "id": "16-2-forward-dense",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-dense.input.json",
+        "sha256": "83975ff4cc2524929ea5c43660554909bf965bf77070ac17b575fce8e3dde832"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-dense.output.json",
+        "sha256": "0aa0f30120bec277865d143bdcf067a2752e38227008cc49ad2eb0b4158dae2b"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-dense.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-dense.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 2.100508611580418e+25,
+      "comparison_passed": true,
+      "elapsed_ns": 310986666,
+      "id": "16-2-forward-huge",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-huge.input.json",
+        "sha256": "d50ecb56b822e0106c076847dbca8422fd3d93a126f7a7a11b232c41048cce32"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-huge.output.json",
+        "sha256": "430130796b974db655cceb61c8e75ba18ed0aa2bdbc2658bbaafdefcc9d1d8ff"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-huge.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-huge.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.043081283569336e-06,
+      "comparison_passed": true,
+      "elapsed_ns": 337373907,
+      "id": "16-2-forward-tail",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-tail.input.json",
+        "sha256": "ad2d7b15fdbd4840b8331a5108759e63bd7a56d0b02b15700b2fc73f5fe90ac0"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-tail.output.json",
+        "sha256": "1d5df2920f8c69ce5046bd1a07189bdabc358761298e47329260b03ed6aaacd0"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-tail.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-tail.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 3.346303278372822e-33,
+      "comparison_passed": true,
+      "elapsed_ns": 324754240,
+      "id": "16-2-forward-tiny",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-tiny.input.json",
+        "sha256": "2aac16d4ee8752268823a63feae585d098a2411307c651b84e9a8b4734c0909d"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-tiny.output.json",
+        "sha256": "cde15ce20cb501a5388a1921dd20991b1dca0925d9ff220b69f8323155465ec7"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-tiny.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-forward-tiny.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 0.000232696533203125,
+      "comparison_passed": true,
+      "elapsed_ns": 314449909,
+      "id": "16-2-transpose-codebook",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-codebook.input.json",
+        "sha256": "53bdb052c572d5eae33addf2b5c66f40dc530d914fcd798414badc6d30f6e086"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-codebook.output.json",
+        "sha256": "b0049a96fc51f8bf293ade04d6525fa89d074be4f0c4885978babb3d1c8afc46"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-codebook.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-codebook.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.3262033462524414e-06,
+      "comparison_passed": true,
+      "elapsed_ns": 293153202,
+      "id": "16-2-transpose-dense",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-dense.input.json",
+        "sha256": "5efe320daed12054a83a120157637a7acdedb9c1400150626e0b785aa3224e8b"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-dense.output.json",
+        "sha256": "aa05fd0b48c2acbd4217b8cbf9a5f7296563508c94d958ca1aca521ebce4f0d8"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-dense.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-dense.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.8436118749123095e+25,
+      "comparison_passed": true,
+      "elapsed_ns": 337549963,
+      "id": "16-2-transpose-huge",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-huge.input.json",
+        "sha256": "856e07631013a46c5376974fb222f1d468c08b5b1817069644fc7c923cebee60"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-huge.output.json",
+        "sha256": "8e9f206929a53583d5e5b634026edb1f65a4e283f4323c493264a249383c0549"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-huge.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-huge.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 9.872019290924072e-07,
+      "comparison_passed": true,
+      "elapsed_ns": 292035539,
+      "id": "16-2-transpose-tail",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-tail.input.json",
+        "sha256": "06f5b890d3ad3dfae1dd42f5e4240c157d278d50a33ecfa8cc964f08f5f75668"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-tail.output.json",
+        "sha256": "efc24bb49da148391e74f010709b3d7ed257f324926255cb60fde0d208b72331"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-tail.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-tail.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 2.9370431651905347e-33,
+      "comparison_passed": true,
+      "elapsed_ns": 335840764,
+      "id": "16-2-transpose-tiny",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-tiny.input.json",
+        "sha256": "84fd23b2b5b28a410297ce5e77dcc35e0f75168b6135c09591e57d5b846ee1c0"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-tiny.output.json",
+        "sha256": "ad2ebb651637a443a0fae5e66dee3485a07acf0e73c6ea8ed743431931f1d336"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-tiny.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/16-2-transpose-tiny.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 2.4940050025179517e-12,
+      "comparison_passed": false,
+      "elapsed_ns": 336099861,
+      "id": "4-2-forward-dense",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/4-2-forward-dense.input.json",
+        "sha256": "f274c3c6465cb50e67d4ac49c3d533795df6bc5702d8e5c51ac1a0632132b290"
+      },
+      "max_error": 1.31915283203125,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/4-2-forward-dense.output.json",
+        "sha256": "a1f220e0a4e6bc86cc34b70a0d7eda9685fdffc79b72b1abfef0672408feb2e9"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/4-2-forward-dense.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/4-2-forward-dense.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 5.056790541857481e-10,
+      "comparison_passed": true,
+      "elapsed_ns": 849672037,
+      "id": "64-1-forward-codebook",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-codebook.input.json",
+        "sha256": "bb1e379a99a23844dfe54e1ae9061b8e4ea971ab6c0cf06f91593ff8b0e765d2"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-codebook.output.json",
+        "sha256": "34ab827b6458ed39b66e11d3705a272bff7f022ebdd5087a7c4bba44b30683f2"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-codebook.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-codebook.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 2.4940050025179517e-12,
+      "comparison_passed": true,
+      "elapsed_ns": 1001676244,
+      "id": "64-1-forward-dense",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-dense.input.json",
+        "sha256": "11dfcf2595d8f40e6e3b579060149eae6601ae6c127e4e9443a0c04e2c0f5622"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-dense.output.json",
+        "sha256": "ac4ea95cd02720ee858707bb62c40688c3379cadca8ac11a527b83a440a461bd"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-dense.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-dense.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 4.006402228508793e+19,
+      "comparison_passed": true,
+      "elapsed_ns": 1562952324,
+      "id": "64-1-forward-huge",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-huge.input.json",
+        "sha256": "3e7f4cfe37247933f36eadb9f44e4a50732cba1afe4b4c50d82ac70447ab9f52"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-huge.output.json",
+        "sha256": "558916dcde2b79066a0964701bcf4308dbb2a7350b5acc05ed610990e7e6e9c1"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-huge.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-huge.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.9895196601282805e-12,
+      "comparison_passed": true,
+      "elapsed_ns": 405993124,
+      "id": "64-1-forward-tail",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-tail.input.json",
+        "sha256": "8d38743d0f22283f7c3cb6ea496a25ff78de573c192435af1616e503bbadedfb"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-tail.output.json",
+        "sha256": "18aac50dd35e7d3e4b9cba7c6b8f6c86595a472f0515087fc5eb1abecb62f37c"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-tail.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-tail.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 6.382566982980389e-39,
+      "comparison_passed": true,
+      "elapsed_ns": 408022682,
+      "id": "64-1-forward-tiny",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-tiny.input.json",
+        "sha256": "d2f29a480c967cc5f40a1abcfe2708067bce006cce02b8f6bf99d58edc85ae2e"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-tiny.output.json",
+        "sha256": "659cbdcbbe0067abc67ada00137ad5bb9dfb50f0d39c870a555c598e51b5ac7f"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-tiny.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-forward-tiny.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 4.43833414465189e-10,
+      "comparison_passed": true,
+      "elapsed_ns": 295643523,
+      "id": "64-1-transpose-codebook",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-codebook.input.json",
+        "sha256": "cc78a5074560fffc257da733a94343cdf8ccf268d54c3232770ff10606c6f45e"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-codebook.output.json",
+        "sha256": "0d628bcfeda15580e0625267f526fc84b177a935963f635bd5e88782264536b7"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-codebook.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-codebook.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 2.5295321393059567e-12,
+      "comparison_passed": true,
+      "elapsed_ns": 384496720,
+      "id": "64-1-transpose-dense",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-dense.input.json",
+        "sha256": "41398816d80ba0031223da5cf51da2b9e7278d19a7c50cc88c9b90a695849f9d"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-dense.output.json",
+        "sha256": "f196f6edd7f3f08a6a07495ac94630ce4e7739a2394778e515ca4e5ef3e96ac1"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-dense.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-dense.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 3.5164105890508833e+19,
+      "comparison_passed": true,
+      "elapsed_ns": 341971992,
+      "id": "64-1-transpose-huge",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-huge.input.json",
+        "sha256": "f2c4e2b1615cb47f5d9bb9b0ba7152264d970d7436f8dc13e7cf8bc3dcfa5a75"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-huge.output.json",
+        "sha256": "56420bc40e992abb7ed3ad0ec3d5650afab7f9526f7bf3a2c2a81ead3175358e"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-huge.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-huge.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.8829382497642655e-12,
+      "comparison_passed": true,
+      "elapsed_ns": 297830755,
+      "id": "64-1-transpose-tail",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-tail.input.json",
+        "sha256": "208eebf7abeb0d552b5c58e575c2439012c3eb6787eb167e42b3794aeff26196"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-tail.output.json",
+        "sha256": "7c6983716508b31c2bc560b25763b566483b458130326f2af6f0f22c65bae4f1"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-tail.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-tail.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 5.601965265637464e-39,
+      "comparison_passed": true,
+      "elapsed_ns": 345197004,
+      "id": "64-1-transpose-tiny",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-tiny.input.json",
+        "sha256": "7ee2157bdd30a89122cd156d09fce821317633b9c61341ed9f5a54d7b5790c1d"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-tiny.output.json",
+        "sha256": "2c1418dd6718f7b37c745a168c1abf6944276f76be9e9541d601c25dd93a0a27"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-tiny.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/64-1-transpose-tiny.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 0.0002651214599609375,
+      "comparison_passed": true,
+      "elapsed_ns": 342928331,
+      "id": "8-4-forward-codebook",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-codebook.input.json",
+        "sha256": "765968447eb6551dc93966be501fb813b73df5b5a21a0a5db40319e01548f98e"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-codebook.output.json",
+        "sha256": "4882f881a16ddbcc972eb1552d11164318bfeb8ef7ad7841fded4518e951bc6c"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-codebook.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-codebook.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.3075768947601318e-06,
+      "comparison_passed": true,
+      "elapsed_ns": 338840399,
+      "id": "8-4-forward-dense",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-dense.input.json",
+        "sha256": "045bf36a441605eff1c56b927c3b20e49cbc0907e86ed7b9e9f441c107c4bf1a"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-dense.output.json",
+        "sha256": "f6d0ded6b484567db5634a1d3978ca82d6ecab0e107c3fdc66dd71962db6900e"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-dense.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-dense.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 2.100508611580418e+25,
+      "comparison_passed": true,
+      "elapsed_ns": 338357939,
+      "id": "8-4-forward-huge",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-huge.input.json",
+        "sha256": "79b2ff9f03f8792bd11f59d272563beea8d704356a9713c599072aefadc8667d"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-huge.output.json",
+        "sha256": "cce0cc4ec88e6a7c2e4ae11abd9616fd751f88a82d42fec82315547ebf6b7321"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-huge.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-huge.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.043081283569336e-06,
+      "comparison_passed": true,
+      "elapsed_ns": 335883073,
+      "id": "8-4-forward-tail",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-tail.input.json",
+        "sha256": "f32a37f7cd4f580ef356afac53b860a014341571d11d0134d132667807e98b97"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-tail.output.json",
+        "sha256": "d349d25d3c11117c742e2b34b30acc8ebb60ab4a41309884fc80e599dd7db0ae"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-tail.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-tail.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 3.346303278372822e-33,
+      "comparison_passed": true,
+      "elapsed_ns": 341723038,
+      "id": "8-4-forward-tiny",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-tiny.input.json",
+        "sha256": "51a3cc81edca08051a1cf52a792a4464dd0a5542c73d192975e107797b23b4dd"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-tiny.output.json",
+        "sha256": "d0262cd581a364fa6011eb4d8483659302a3055551ff810f36b3e7b162fa9947"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-tiny.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-forward-tiny.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 0.000232696533203125,
+      "comparison_passed": true,
+      "elapsed_ns": 334005106,
+      "id": "8-4-transpose-codebook",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-codebook.input.json",
+        "sha256": "54f6d28fca0a091b129b62913bd6a710f3352b5cacde8c977b422229ac4073f2"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-codebook.output.json",
+        "sha256": "ec70d79d94bf0f3e25815247394db76a0676e67e81dc36923abbe053eb49c6f0"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-codebook.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-codebook.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.3262033462524414e-06,
+      "comparison_passed": true,
+      "elapsed_ns": 339746443,
+      "id": "8-4-transpose-dense",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-dense.input.json",
+        "sha256": "64139ab728fc1cde64f4e0e66a582f7709c85ac142ff70dea9bc8d7db6f33118"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-dense.output.json",
+        "sha256": "c05c834f6402cc614a66d491f2c0e3337e74c1a99dfb49c3db908ed97e102312"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-dense.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-dense.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 1.8436118749123095e+25,
+      "comparison_passed": true,
+      "elapsed_ns": 335432819,
+      "id": "8-4-transpose-huge",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-huge.input.json",
+        "sha256": "a61682f580916a93574bbd1aeaf4136aeb1b5b3b29b75e6af339a4331c428002"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-huge.output.json",
+        "sha256": "459f1b2d975fc0eaa2e617273fc888107ce2e8b0e15d5e9b4abe83bddefccc65"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-huge.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-huge.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 9.872019290924072e-07,
+      "comparison_passed": true,
+      "elapsed_ns": 338543904,
+      "id": "8-4-transpose-tail",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-tail.input.json",
+        "sha256": "84cc0728b10f2b1f79e478b9923f4f2d45c2ca7a13f4a25135992350fa6980b0"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-tail.output.json",
+        "sha256": "655d252bf5f85639acb0ba8a6255400e02b8a3b2a0f9ff7b9ce44aa33863b118"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-tail.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-tail.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "comparison_limit": 2.9370431651905347e-33,
+      "comparison_passed": true,
+      "elapsed_ns": 343387743,
+      "id": "8-4-transpose-tiny",
+      "input": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-tiny.input.json",
+        "sha256": "e6275ce67eb5fd413767bc7d24141a19191cac31a88789c390ac3d81cf94f0c1"
+      },
+      "max_error": 0.0,
+      "output": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-tiny.output.json",
+        "sha256": "8f48b39dda6bed70f00facc8562233304802e300cc1eadea7a9242b987eb090a"
+      },
+      "returncode": 0,
+      "stderr": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-tiny.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "artifacts/gpup-fp4-gpu-pilot-v1/primitive/8-4-transpose-tiny.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "source_url": "https://docs.nvidia.com/cuda/archive/13.0.0/parallel-thread-execution/index.html#warp-level-matrix-instructions-mma",
+  "unexecuted": 29,
+  "v1_error": 1.31915283203125
+}

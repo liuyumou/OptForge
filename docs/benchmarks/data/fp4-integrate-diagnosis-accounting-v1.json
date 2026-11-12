@@ -1,0 +1,75 @@
+{
+  "all_cleanup_empty": true,
+  "allocation": {
+    "path": "artifacts/gpup-fp4-integrate-diagnosis-v1/allocation.json",
+    "sha256": "2ae2522185a9631f9a5ab71e4d4bf967291db661aed287910caae71eccaa34c8"
+  },
+  "analysis": {
+    "path": "docs/benchmarks/data/fp4-integrate-diagnosis-v1.json",
+    "sha256": "6bc7dc71b378afb4611b73eb7e9d616ec9d22ae5addbcea7ddac0a6406ad69b2"
+  },
+  "checks": {
+    "analysis": {
+      "path": "artifacts/gpup-fp4-integrate-diagnosis-v1/retained-analysis.json",
+      "sha256": "6bc7dc71b378afb4611b73eb7e9d616ec9d22ae5addbcea7ddac0a6406ad69b2"
+    },
+    "analysis_syntax_passed": true,
+    "documentation_links_passed": true,
+    "existing_file_changes": [
+      "AGENTS.md",
+      "state/active-task.md"
+    ],
+    "gpu_jobs": 0,
+    "original_study_and_sources_exact": true,
+    "phase_sums_verified": true,
+    "profile": {
+      "path": "artifacts/gpup-fp4-integrate-diagnosis-v1/host-serialization-profile.json",
+      "sha256": "047826004f3473936f3de37731a51c7cf30b82e9d89b7d04898e4cd13637caa2"
+    },
+    "recovery_counts_verified": true,
+    "solver_jobs": 0,
+    "status": "passed"
+  },
+  "conservative_preparation_cpu_ns": 256000000000,
+  "cpu_ceiling_seconds": 512,
+  "cpu_ns": 283137759816,
+  "device_jobs": 0,
+  "gpu_ns": 0,
+  "historical_allocations_reopened": false,
+  "jobs": [
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 12293527128,
+      "gpu_ns": 0,
+      "name": "profile",
+      "receipt": {
+        "path": "artifacts/gpup-fp4-integrate-diagnosis-v1/profile-resource.json",
+        "sha256": "8f64647da8262519d4d09f389c54ac8afb11bbafed43fe7855215135c6e29cb5"
+      },
+      "sampled_peak_rss_bytes": 190578688
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 14844232688,
+      "gpu_ns": 0,
+      "name": "delivery",
+      "receipt": {
+        "path": "artifacts/gpup-fp4-integrate-diagnosis-v1/delivery-resource.json",
+        "sha256": "4ab4a57477d6293b5bba2ebb0c400a11772b89f73a2087923238e3ccb906784f"
+      },
+      "sampled_peak_rss_bytes": 176156672
+    }
+  ],
+  "journal": {
+    "path": "artifacts/gpup-fp4-integrate-diagnosis-v1/cpu-journal.json",
+    "sha256": "d2be7e8174c0191a99ec7f9c24f6fdd446d6f776b555e801c7a8f8bd701e3bf8"
+  },
+  "numerical_sources_changed": false,
+  "profile": {
+    "path": "docs/benchmarks/data/fp4-integrate-host-serialization-v1.json",
+    "sha256": "047826004f3473936f3de37731a51c7cf30b82e9d89b7d04898e4cd13637caa2"
+  },
+  "schema_version": 1,
+  "solver_or_checker_jobs": 0,
+  "status": "complete"
+}
