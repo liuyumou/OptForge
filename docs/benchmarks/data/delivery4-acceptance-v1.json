@@ -1,0 +1,280 @@
+{
+  "cleanup_empty": true,
+  "cpu": {
+    "path": "artifacts/gpup-delivery4-v1/cpu-v1/result.json",
+    "sha256": "18e9d092d839a3b828cacc1efda5689687fd178880ad1f77895dfc13a23b2c27"
+  },
+  "device": {
+    "path": "artifacts/gpup-delivery4-v1/device-v1/result.json",
+    "sha256": "a0fcd7e06570faa18b4cea0d55bd0fb8e7008ed883b6f2ac9ead47e36937f175"
+  },
+  "exact_historical_files": 1767,
+  "history": {
+    "path": "docs/benchmarks/data/delivery4-history-v1.json",
+    "sha256": "0ac9b07b9ecc683a83f801aecd0dcb6df36a64bddfe1322aee0bfeca9e31a90d"
+  },
+  "isolated_rust_tests": 27,
+  "native": {
+    "path": "artifacts/gpup-delivery4-v1/resources/native-gate-v1.settlement.json",
+    "sha256": "0bbe6ff477b260c7126f9f677f72faefe7561091c305f4e6873a87d2f8e3971d"
+  },
+  "portable_replay": {
+    "all_numerical_values_exact": true,
+    "cells": 3264,
+    "confirmation_cells": 3072,
+    "decisions": 4,
+    "no_solver_or_device_execution": true,
+    "profile_partition_exact": true,
+    "status": "passed"
+  },
+  "python_tests": 678,
+  "result": {
+    "path": "docs/benchmarks/data/delivery4-result-v1.json",
+    "sha256": "669031237b1ce57db05cf1e15cb9a64dacafbafa900c16aa59b18b6c1aea448d"
+  },
+  "settlements": [
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/archive-development-v1.settlement.json",
+      "sha256": "295c9918c979ccfc889299f669978898f040428fd64640627613324c61d7f01f"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/build-v1.settlement.json",
+      "sha256": "4efa44ca23ee7d7a507cf3c49a503ef304e84ded971744e0f6834fcec524f433"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/build-v2.settlement.json",
+      "sha256": "13754c4d1bfa6ab6158a8b6b49bd8ef16dda573d925521e414cc5d7789019846"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/build-v3.settlement.json",
+      "sha256": "43c13a1ae8c8b66e4d0162b5ae9337cb62908e191769b0feda0dc8f8f8d71b0c"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-00-v1.settlement.json",
+      "sha256": "788746702a01f1ede62d7e49d7bd7943e93ecbeb6639d65d97fde25c58ba251f"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-01-v1.settlement.json",
+      "sha256": "9606ca28d8a0675f8c48b41f2742ecffdecd3e3a3cae3a189894351ef7dc3a37"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-02-v1.settlement.json",
+      "sha256": "de3402c6bd5b502674773019674e526359e138ff23ef12b25bcec24c48cbe2f4"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-03-v1.settlement.json",
+      "sha256": "ee9db9c5a339bf855d6d79da735858c711703804d5130a17ebfc83413cd8f5d7"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-04-v1.settlement.json",
+      "sha256": "d3209f25abdbd56e09b06331332568d0c6045ce2305113e4d13b8a0767c7eb68"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-05-v1.settlement.json",
+      "sha256": "c59eb61df233d55d9f9667f5e2d58bdeb19919d0f0a26aad45ca784617011ed1"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-06-v1.settlement.json",
+      "sha256": "8d6ab319d713c1479efd327c34fa168fbba20867073ff0b6b818c11b56dc8bf9"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-07-v1.settlement.json",
+      "sha256": "7936e403f9072e5ff4088784e812935da76621f6929b173e50266b49e16bdd3d"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-08-v1.settlement.json",
+      "sha256": "b81c820706d7869ada0d3e435135e7d56132564b3886adaf8ba6bc17a11e3a70"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-09-v1.settlement.json",
+      "sha256": "dc1de8d24b683aa742024cdcc1ffbbb1d05f71a89c50ed0bfc74b152601bc503"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-10-v1.settlement.json",
+      "sha256": "1ffd7ccade3f5d38862cd1c6fd19ceada88d0c2b8bed64f3871e20c16007ee54"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-11-v1.settlement.json",
+      "sha256": "3be9d41b95b59e8f6f0f98d2ffda371dc35dbbc7ab4167b090018ebf4fc1489d"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-12-v1.settlement.json",
+      "sha256": "a5d590a978315f0fb231c7d4a8c64bec56c74b673390c6f7296cde4034c3237d"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-13-v1.settlement.json",
+      "sha256": "754d61d50933c24adedc703ceaf011d91f9816acffef4fb3ceba213366292cb7"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-14-v1.settlement.json",
+      "sha256": "754ba99c1da8d76ab0edd6e0713f46a10119490494bf379ef608bb66b594c310"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-15-v1.settlement.json",
+      "sha256": "90d18b06116af8d3e86bb997ee5f7dfa5dd7b9551de3eac4c29c90dc1f3908ad"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-16-v1.settlement.json",
+      "sha256": "18033c7af2f5078bd74c374f94ac070aa0be2773a08ec1608663cc06420260e9"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-17-v1.settlement.json",
+      "sha256": "142b73eed42a416117952f445cc34d4f0d29eea580184d5f20b0f3452d7c5e1e"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-18-v1.settlement.json",
+      "sha256": "cf95b14bd43b7be27ea362bb7f061a5b50e965a9d1b59741da1da2aa7dd99068"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-19-v1.settlement.json",
+      "sha256": "8689e7dde4a50a665f180709fce67929575f0a9a34ccd090844788f41cba8ad8"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-20-v1.settlement.json",
+      "sha256": "a577d564fd417468af9b3ae5619a94e8329c09f3096cd2ee3b9b54447204c7b1"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-21-v1.settlement.json",
+      "sha256": "e98806791c0d7178d7f23aec4bafbb1bed5dec89596e21341e5fb41730b2be92"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-22-v1.settlement.json",
+      "sha256": "b99a6ceecf2dcb85173a57f828a311e527333a05bec63daa477dc7344b3e6859"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-23-v1.settlement.json",
+      "sha256": "c391529fe3510e24f164c5c9ca4c7ebf38a50300d8f959e42bc2ea9be9e98e50"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-24-v1.settlement.json",
+      "sha256": "bbf2b1c88bdd700d972eeb80360673ea8c8298066576df679c60e87b5c2a4c2c"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-25-v1.settlement.json",
+      "sha256": "1a308eaa22b6dc8969ca815af3393e1a3d15e88aad9da50529f51b2a2d1e7814"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-26-v1.settlement.json",
+      "sha256": "4db2864884701c5e33899540756ae3119313a1cd6b4883c74516b22eb87061d2"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-27-v1.settlement.json",
+      "sha256": "8528c28ec19a1040683bc1a6c2c6cc478e1381d36ac315ad6cb11a7f396792e5"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-28-v1.settlement.json",
+      "sha256": "be258bd8238071457af95ac2207b7fa831b39e565b956296824f732c1f91422b"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-29-v1.settlement.json",
+      "sha256": "950f89f8351a6182a7bd410fdca5d7a8cd46b4ae20fb188248f8b6e680c955ef"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-30-v1.settlement.json",
+      "sha256": "b75c3a225dff0974034a783b589b950636356d26681b44a5b4e394685b43d5d2"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-block-31-v1.settlement.json",
+      "sha256": "4a9993d9173512a34e245d8a26aade5c93a75073c5b93d035970785ef30e32d8"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-collect-v1.settlement.json",
+      "sha256": "61cd55a55fecb5a432c864461f5cf0ab6ea45eb7e7281997e5d24f9bb5c4ce97"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/confirmation-freeze-v1.settlement.json",
+      "sha256": "f6d6626fb8b59c77c8bd434edf591ca3a0fbe99ed80284e8ad01f5e5d82165b4"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/cpu-acceptance-v1.settlement.json",
+      "sha256": "7578f4a44e5f509b712126a6143e5b9e89197d13e45ece85a6911d7b41fd60d2"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/cpu-acceptance-v2.settlement.json",
+      "sha256": "d801153a4a21bce79e0e5a69c273253f587e7e84943b247a73d4e0128a738579"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/delivery-docs-v1.settlement.json",
+      "sha256": "0d2cd436dc465f495b0aebdd707dec1b524f22c4889c1cd2d292ceb2d3624b68"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/dependencies-v1.settlement.json",
+      "sha256": "985c772ec9685d9bb285f61824cdc6787dc003ef779f2739d293c707b4a565f0"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/device-acceptance-v1.settlement.json",
+      "sha256": "84669e6d67edb3a4d05ee47b81754115bae00def373ab2608d29735d80c75f51"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/diagnostic-block-00-v1.settlement.json",
+      "sha256": "22068b90c7927be66f1e71aca80845fbfb9ac5f5e7943f923084fc44ca552374"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/diagnostic-block-01-v1.settlement.json",
+      "sha256": "f5b0ebdeb9730a5fdf693d2c949bab2579991b949539a8b6645613b7f5d322ef"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/diagnostic-block-02-v1.settlement.json",
+      "sha256": "6d28d6b8a8b6d2ab25b4e96ef81e0aabaa7d936b127819e93e3d6750998db059"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/diagnostic-block-03-v1.settlement.json",
+      "sha256": "00f60f062a8b79785ff6c05ba087f1363dd0e9dd1b0666d6758aaa0bd21e3a51"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/diagnostic-collect-v1.settlement.json",
+      "sha256": "cf92b29ee9d770329204b329d4d85518e3e690cf3e3bdbbd4716b1a9fedd20eb"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/diagnostic-freeze-v1.settlement.json",
+      "sha256": "d08c32511317f7096cac2eb932ad8f561811be4388f7d9bec5f9475aabee34d0"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/environment-v1.settlement.json",
+      "sha256": "934ca114039734024a56c15b4f0cd74bfba1f233cf5e3d9f3ca09498f5cad197"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/final-isolated-v1.settlement.json",
+      "sha256": "400c2856c4fdb353bfd2f21c16f35cf47eb28fbe8c2bb5d6c8a15bdbfe9b1b7d"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/native-gate-v1.settlement.json",
+      "sha256": "0bbe6ff477b260c7126f9f677f72faefe7561091c305f4e6873a87d2f8e3971d"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/pilot-selection-v1.settlement.json",
+      "sha256": "2c08e5cb43b53e7d242ad6d1b43660a95d815c7952eaada33977a377ec75bcba"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/profile-attribution-v1.settlement.json",
+      "sha256": "356563694b447af07b395d8c75ba0665060ef922fa190e96ac8f4309acdf0e83"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/profile-block-00-v1.settlement.json",
+      "sha256": "31e08ba3ab11672130157a2f6e710bd3572b8e6a06172ef72617c0d32047acb5"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/profile-block-01-v1.settlement.json",
+      "sha256": "027fc787957a6f8bb3efa4124d800821a5ce8f7b5c1acb145e9a00445ebf1f59"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/profile-collect-v1.settlement.json",
+      "sha256": "f1f733b7d46654f004464c9b72e0ee61fcaacf1dc6ec0a8e9e71aa3e4aaa111a"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/profile-freeze-v1.settlement.json",
+      "sha256": "a5bd775691e30d6fa3fbea26c6a8d382eba9726f92467ef3ffe3723c811c67c2"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/report-package-v1.settlement.json",
+      "sha256": "fba40d5b2732dbc88dc068288ee8da5b98fd12694d4ec78aae94427bce3e592e"
+    },
+    {
+      "path": "artifacts/gpup-delivery4-v1/resources/startup-profile-v1.settlement.json",
+      "sha256": "322e97a4adb3c2ca36101af5a8e7d54e9181033f154997187db8141cdbde6c2b"
+    }
+  ],
+  "status": "passed",
+  "total_rust_tests": 638,
+  "workspace_rust_tests": 637
+}

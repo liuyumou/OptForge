@@ -41,7 +41,7 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-DELIVERY4
+next_ready_task: GPUP-MIXED2
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
   - id: GPUP-DIAG
@@ -124,10 +124,10 @@ tasks:
     acceptance: "SPEC-0032 / ADR-0064: cached original feasibility indices, independent row scheduling, exact integer product classification and original-tree scratch reuse. All 102 serial receipts, 2880 feasibility cases, 720 certificate cases and 500169 product pairs match. 960 new complete-cost cells, 880 certificates, identical audits/checkpoints/recovery/work. Dense512 CPU checker 2.54x; strict FP4 prepared total 19.203 to 15.924 ms (1.206x). Native 16.527 ms; observed FP4 lead uncertain. Broad cold 0.9994/0.9934x fails retention; no preset. Report: docs/benchmarks/lp-fp4-checker.md."
   - id: GPUP-DELIVERY4
     title: Attribute and reduce cold startup and lifecycle costs
-    status: ready
+    status: complete
     depends_on: [GPUP-DELIVERY3]
-    specification: docs/plans/lp-delivery4.md
-    acceptance: "Retained DELIVERY3 diagnosis: ideal dense cold event-removal bound 1.0094x; strict dense512 setup 371 ms and unresolved outer latency 112-114 ms. Begin CPU model/readiness attribution and exact contracts, then a separately allocated bounded lifecycle pilot. Preserve complete cold timing, independent checking, hash binding, ownership and failure cleanup; choose one measured optimization before a new frozen confirmation. No inherited allocation, historical retry, public default or GPUP-9 release. MIXED2 remains an independent prepared alternative."
+    specification: docs/specifications/SPEC-0035-delivery4.md
+    acceptance: "SPEC-0035 / ADR-0068: exact SHA-256 acceleration and complete lifecycle attribution. All 192 pilot and 3072 confirmation cells match originals; 2816 certificates, 256 intentional refusals. Dense ratios 1.0760–1.0869x. No comparison meets all predeclared retention requirements. Host startup halves; measured context teardown remains about 69 ms. Full CPU/native/device acceptance and portable replay; three CPU failures fully charged. No public preset or follow-on release. Report: docs/benchmarks/lp-delivery4.md."
   - id: GPUP-MIXED2
     title: Admit complete-delivery cost before simpler mixed precision
     status: ready

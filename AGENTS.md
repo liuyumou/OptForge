@@ -1,5 +1,59 @@
 # Agent Instructions
 
+## GPUP-DELIVERY4 complete; exact hash acceleration and measured lifecycle costs (2026-11-12)
+
+SPEC-0035 / ADR-0068 deliver an isolated SHA-256 candidate against the strong
+DELIVERY3 overlap control. Original-model validation precedes CUDA; numerical
+state machines and independent final 1e-7/1e-9 checking remain exact. All 192 pilot
+and 3072 confirmation cold cells complete, with 2816 confirmation certificates
+and 256 intentional refusals. No scientific retry or public default change.
+
+Dense target block-ratio medians are 1.0760–1.0869x.
+No comparison meets all predeclared retention requirements.
+Strict dense512 native improves 512.561 to 444.136 ms; FP4
+516.338 to 448.920 ms. All uncertainty and family guards remain
+visible; no retrospective regrading or public preset.
+
+Useful diagnosis: dense512 warm host preparation 110.9 -> 53.2 ms; model hashing
+61.3 -> 9.8 ms. Profiled candidate context setup is about 222 ms (113 driver init,
+107 context creation). Owned destruction is about 74 ms, including 69 ms measured
+context destruction. Another 37–38 ms remains outside Rust main and is not assigned
+to a cause. Record these measurements and limits in future diagnosis. Even ideal
+removal of all GPU events gives only 1.0098–1.0103x dense cold gain.
+
+Admission: 638 total Rust / 678 Python tests, 27 isolated Rust tests, 612 exact
+assessments of 102 original endpoints, 48 representation comparisons, 42 process
+cases, 84 device lifecycle cases, six early refusals, four setup failures and
+192 prepared smoke solves. Four source-bound sanitizers are reused for the exact
+unchanged image. Three failed CPU reservations retain all 3560 seconds and sources.
+
+Independent allocation closed at 12602.090947756 / 64000 CPU and
+1311.837400940 / 4800 GPU seconds, including 128 closing CPU seconds. All cleanup
+is empty; 1767 historical files and all other backlog entries remain exact.
+Isolated portable replay reproduces all 3264 cells, decisions and partitions.
+Final receipts and all failed charges are linked in the report. MIXED2 remains independently
+ready for CPU contract/cost work; no follow-on allocation or performance task is
+released. GPUP-8 incomplete, TENSOR2 conditional, GPUP-9 gated. Commit locally only.
+Report: [delivery](docs/benchmarks/lp-delivery4.md). Older entries retain their scope.
+
+## GPUP-DELIVERY4 implementation (2026-11-12)
+
+The user requests implementing DELIVERY4. SPEC-0035 / ADR-0068 authorize isolated
+CPU startup attribution, lifecycle instrumentation, one measured optimization,
+exact CPU/device admission, a 192-cell cold pilot and conditional new 3072-cell
+cold confirmation. Keep original input admission, independent checking, numerical
+state machines and complete EOF/durability/cleanup costs. Record all useful
+findings with limitations; historical evidence and allocations remain exact.
+
+New independent ceiling: 64000 CPU / 4800 GPU seconds. CPU phases implementation
+12000 (512 preparation), native 12000, acceptance 8000, diagnosis 8000,
+confirmation 16000, reporting 6000, cleanup 2000 (128 closing administration).
+GPU acceptance 600, diagnosis 600, confirmation 3600. Four CPU slots, 16 GiB sampled
+RSS, 12 GiB owned device buffers, one pinned shared lease, unchanged supervisor.
+Receipts: artifacts/gpup-delivery4-v1. Preserve failed versions/full reservations;
+no frozen scientific retry, historical transfer, public default or GPUP-9 release.
+Commit locally only; older handoffs retain their completed-task scope.
+
 ## DELIVERY3 diagnosis complete; startup/lifecycle next (2026-11-12)
 
 The user requests diagnosis and durable findings. The

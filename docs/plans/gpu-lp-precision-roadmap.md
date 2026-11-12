@@ -1,12 +1,28 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: DELIVERY3 diagnosis complete; DELIVERY4 startup/lifecycle attribution next; DELIVERY3 complete with scoped cold retention and modest prepared gains; DELIVERY2 complete with dense cold gains but failed broad retention; FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
+Status: DELIVERY4 complete; exact hash gains and measured context lifecycle; DELIVERY3 complete with scoped cold retention and modest prepared gains; DELIVERY2 complete with dense cold gains but failed broad retention; FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: 1fce17e
+Last reviewed commit: eac5d00
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
 Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md), [cost gates](../decisions/ADR-0054-resident2-cost-priorities.md), [FP4 GPU exploration and quality tiers](../decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
 Evidence: [RESIDENT2 result](../benchmarks/lp-resident2-gpup-resident2.md), [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+
+## DELIVERY4 complete: hash gains and remaining context costs (2026-11-12)
+
+[Delivery and durable findings](../benchmarks/lp-delivery4.md),
+[SPEC-0035](../specifications/SPEC-0035-delivery4.md) / [ADR-0068](../decisions/ADR-0068-delivery4.md).
+All 192 pilot and 3072 confirmation cells retain exact numerical behavior and
+coverage. Dense target medians are 1.0760–1.0869x.
+No comparison meets all predeclared retention requirements. No public preset.
+
+Dense512 host preparation drops 110.9 to 53.2 ms through exact provenance hashing.
+Profiled context creation/initialization remains about 222 ms, owned destruction
+74 ms (69 ms context destructor), and 37–38 ms outside Rust main remains unresolved.
+The report preserves direct measurements, failures, full uncertainty and portable
+replay. Cold arithmetic is still a small fraction; MIXED2 stays independently ready
+for prepared CPU contract/cost admission. No new execution allocation follows;
+TENSOR2 conditional, GPUP-8 incomplete and GPUP-9 gated.
 
 ## DELIVERY3 diagnosis: startup/lifecycle next (2026-11-12)
 
@@ -268,6 +284,7 @@ status supplies the final certificate.
 | **GPUP-FP4-FAST**, complete | [SPEC-0028 delivery](../benchmarks/lp-fp4-fast.md): hardware encoding, component columns, zero-plane pruning, exact host preparation and prepared lifecycle | 288/288 cells and 2016 fresh windows; same-lane endpoint hashes match; 4.16–7.81x kernel gains and four sanitizer passes. Rich FP4 x8 still loses to native; no certificate or preset |
 | **GPUP-FP4-RECOVERY-SPEC**, complete | [SPEC-0029](../specifications/SPEC-0029-fp4-recovery-policy.md): compatible local errors and explicit operational residual recovery | Distinguish proved bounds from empirical progress/error observations; version the changed policy, retain original-A FP64 audits, complete checkpoints and explicit recovery. No GPU-pilot prerequisite |
 | **GPUP-FP4-INTEGRATE**, complete; retention fails | [SPEC-0030 delivery](../benchmarks/lp-fp4-integrate.md): 96 coupled diagnostics and 576 same-tier cold/prepared solves, complete rollback and original-model certificates | Final native/device/four-sanitizer gates and 176 unique endpoint replays pass; matched six-of-eight-family coverage at both tiers. Cold FP4 geometric means 0.959–0.986x fail retention. Native retained; old prototype stays incomplete |
+| **GPUP-DELIVERY4**, complete | [SPEC-0035 delivery](../benchmarks/lp-delivery4.md): exact provenance hashing, process lifecycle attribution and 32 fresh cold confirmation blocks; depends on GPUP-DELIVERY3 | 3072 cells, exact evidence; dense ratios 1.0760–1.0869x. No comparison meets all predeclared retention requirements. Measured context destruction about 69 ms; no public preset |
 | **GPUP-TENSOR2**, conditional solver study | Complete cold/prepared comparison with separately labeled 1e-7 and 1e-9 cohorts | New frozen quality/grid/resource protocol, integration admission and conservative complete-cost screen informed by the pilot; original-model independent certification and matched controls |
 
 The pilot measures actual arithmetic error, component pairs and padded MMA work,
