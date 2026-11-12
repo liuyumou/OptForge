@@ -1,0 +1,30 @@
+{
+  "analysis": {
+    "path": "docs/benchmarks/data/delivery3-diagnosis-v1.json",
+    "sha256": "2ab0e9e368d89a675b81f57a0c473caabe2a7b2c55297b20e85ac7ac1cac2243"
+  },
+  "buffered_transport_rust_tests": 1,
+  "composite_full_coverage": true,
+  "historical_files": 1756,
+  "history": {
+    "path": "docs/benchmarks/data/delivery3-diagnosis-history-v1.json",
+    "sha256": "a7d78c39d5fae8142134c754b6151082311e6bd4ccda0dd822d4886a5c80c0c7"
+  },
+  "native_gate": {
+    "path": "artifacts/gpup-delivery3-diagnosis-v1/resources/native-gate-v1.settlement.json",
+    "sha256": "835197777a0cd438c9012e406bb6c6e6c942a3b71d872727b120b6e212190931"
+  },
+  "native_gate_status": "failed_at_documentation",
+  "native_tail": {
+    "path": "artifacts/gpup-delivery3-diagnosis-v1/resources/native-tail-v1.settlement.json",
+    "sha256": "716f2742b2a44214f62d3dc600ad96d5b489b5a12c765a6b406bfa09d76dfd11"
+  },
+  "new_python_tests": 6,
+  "no_new_scientific_solver_checker_or_device_run": true,
+  "primary_decisions_unchanged": true,
+  "python_tests": 669,
+  "reproduces_exactly": true,
+  "status": "passed",
+  "total_rust_tests": 638,
+  "workspace_rust_tests": 637
+}

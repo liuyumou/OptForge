@@ -1,5 +1,70 @@
 # Agent Instructions
 
+## DELIVERY3 diagnosis complete; startup/lifecycle next (2026-11-12)
+
+The user requests diagnosis and durable findings. The
+[report](docs/benchmarks/lp-delivery3-diagnosis.md) and source-bound machine record
+preserve all observations and reproduce all eight original decisions exactly.
+All 6144 confirmation cells / 12288 solves are analyzed; no scientific rerun.
+Even removing all GPU event time gives only 1.0094x dense cold gain. Strict
+selected dense512 cold means spend 371 ms in setup and 112-114 ms outside setup/
+solve. The latter is unresolved outer latency, not measured CUDA teardown.
+Instrumented host preparation remains a serial prerequisite of about 125 ms.
+
+Prepared dense whole-event 2x forecasts are 1.15-1.16x, assuming unchanged work
+and zero overhead; actual matrix-only attribution remains missing. Strict
+128/256/512 median extra-cost allowances are only 0.47/0.56/0.79 ms. Batched
+checker requests cost about 0.08 ms while child assessment remains 4-5 ms.
+Iteration outside events is highly variable; synchronous reset/readback are
+source-supported measurement targets, not established causes. Short three-solve
+batches do not amortize the 715-720 ms prepared setup/teardown mean.
+
+All nine uncertain guards have 6-9 positive excess-cost blocks. Pair order and
+coarse environment associations do not establish a cause; no block is removed
+and no gate is regraded. Next ready: GPUP-DELIVERY4, CPU startup attribution and
+exact contracts before any separately admitted lifecycle pilot/optimization.
+MIXED2 remains an independent prepared alternative. No new device allocation,
+public default, TENSOR2 or GPUP-9 release. Preserve historical evidence exactly.
+
+Separate 8000 CPU / zero GPU allocation. A development KeyError on zero-update
+refusals retains its source and full 480 CPU seconds; the corrected analysis
+includes those refusals with zero GPU/iteration cost. Six focused tests and the
+composite CPU/native gate validate the diagnosis. The first full launcher passed
+Rust/Python/replay but failed a new handoff link; its full 3600 CPU seconds remain
+charged, with the corrected docs/smoke tail separately recorded. A final-verifier
+undeclared YAML import retains another 480 CPU seconds; standard-library metadata
+validation corrects that packaging error. A count-boundary correction retains
+240 more CPU seconds: coverage is 637 workspace plus one buffered-transport Rust
+test (638 total), with 669 Python tests. A pending-receipt publication collision
+retains 240 CPU seconds; drafts are archived before the final transition.
+All five failures total 5040 CPU seconds. Allocation closed at 5784.673587084 /
+8000 CPU seconds, zero GPU, including 512 preparation and 128 closing CPU seconds.
+All cleanup is empty; 1756 historical files and all prior backlog entries remain
+exact. Final preservation, charges and
+cleanup are in [acceptance](docs/benchmarks/data/delivery3-diagnosis-acceptance-v1.json)
+and [accounting](docs/benchmarks/data/delivery3-diagnosis-accounting-v1.json).
+Record useful positive, negative and inconclusive findings with evidence and
+limits in every future diagnosis. Local commit only; older entries retain scope.
+
+## Diagnostic findings must be retained (2026-11-12)
+
+The user asks that useful diagnostic findings always be written down. For each
+diagnosis, record supported findings, negative/inconclusive results, source
+references, limitations and next-task implications in a durable report and the
+current handoff. Distinguish observations, hypotheses and forecasts; preserve
+historical decisions and do not silently discard unfavorable evidence.
+
+## DELIVERY3 retained-record diagnosis authorized (2026-11-12)
+
+The user authorizes the bounded CPU-only diagnosis in
+[the plan](docs/plans/lp-delivery3-diagnosis.md). Analyze existing paired records,
+timer boundaries, uncertainty/order/environment and attainable complete-cost
+gains before choosing further implementation. Separate 8000 CPU / zero GPU
+ceiling, including 512 preparation and 128 closing-administration CPU seconds;
+unchanged supervisor, four CPUs and 16 GiB sampled RSS. All old evidence and
+allocations remain exact and closed. No new solver/device study, regrading,
+public-default change, follow-on execution or GPUP-9 release. Commit locally only.
+
 ## GPUP-DELIVERY3 complete; scoped cold retention, modest prepared gains (2026-11-12)
 
 SPEC-0034 / ADR-0067 deliver independent batching/overlap configurations and

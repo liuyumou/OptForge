@@ -1,12 +1,34 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: DELIVERY3 complete with scoped cold retention and modest prepared gains; DELIVERY2 complete with dense cold gains but failed broad retention; FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
+Status: DELIVERY3 diagnosis complete; DELIVERY4 startup/lifecycle attribution next; DELIVERY3 complete with scoped cold retention and modest prepared gains; DELIVERY2 complete with dense cold gains but failed broad retention; FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: 96ab3b6
+Last reviewed commit: 1fce17e
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
 Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md), [cost gates](../decisions/ADR-0054-resident2-cost-priorities.md), [FP4 GPU exploration and quality tiers](../decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
 Evidence: [RESIDENT2 result](../benchmarks/lp-resident2-gpup-resident2.md), [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+
+## DELIVERY3 diagnosis: startup/lifecycle next (2026-11-12)
+
+[Retained-record diagnosis](../benchmarks/lp-delivery3-diagnosis.md) finds that even
+removing all GPU event time gives only 1.0094x on the dense cold target. Strict
+dense512 selected cold means spend 371 ms in setup and 112-114 ms outside the
+setup/solve timers. Instrumented host preparation remains a serial prerequisite
+of about 125 ms. Do not label the outer remainder teardown without measurement.
+
+Next ready: [GPUP-DELIVERY4](lp-delivery4.md), CPU attribution and exact contracts
+first, followed only by a separately funded lifecycle pilot and concrete selected
+optimization. MIXED2 stays ready as a prepared dense alternative: optimistic 2x
+whole-event acceleration forecasts 1.15-1.16x, but matrix-only attribution and
+added costs remain unadmitted. Strict dense128/256/512 have only about
+0.47/0.56/0.79 ms median added-cost allowance under that optimistic assumption.
+
+All original retention decisions reproduce exactly. Nine uncertain guards have
+6-9 positive excess-cost blocks; order and coarse environment associations do not
+establish a cause or justify excluding observations. Save supported, negative and
+inconclusive findings with evidence and limitations in every diagnosis. No new
+scientific/device run or public preset; old allocations remain closed, TENSOR2
+conditional and GPUP-9 gated.
 
 ## DELIVERY3 complete: scoped cold benefit confirmed (2026-11-12)
 
