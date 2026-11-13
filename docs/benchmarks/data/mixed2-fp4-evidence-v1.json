@@ -1,0 +1,27 @@
+{
+  "bytes": 151199422,
+  "format": "concatenated-tar-gzip-v1",
+  "parts": [
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-fp4-evidence-v1.part00",
+      "sha256": "cb3252bad3050bb0b444d7e729bb5ecdda37463016e448df425d604b707f85a1"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-fp4-evidence-v1.part01",
+      "sha256": "2b6e322a293ceacef44fae32b383e15605c35ebbea4a883ec36047c7413958fa"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-fp4-evidence-v1.part02",
+      "sha256": "887c191aa623e34e6f092ea2ebb1563f3334aab7c4124a01693a551cd5e05cdb"
+    },
+    {
+      "bytes": 204478,
+      "path": "docs/benchmarks/data/mixed2-fp4-evidence-v1.part03",
+      "sha256": "575fe10836037c2c121e38324a4cf3653823c43f96b04010c85e022fd06c3327"
+    }
+  ],
+  "sha256": "5f8ef36b7bb88ae168d1a59d6ef5a4b51d4282eb41d06d1a0fe3c0b15f62d0d1"
+}

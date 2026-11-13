@@ -44,6 +44,12 @@ active_research_track: GPUP
 next_ready_task: GPUP-8-DISPOSITION
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-MIXED2-FP4
+    title: Implement and evaluate FP4 tensor increments with high-precision authority
+    status: complete
+    depends_on: [GPUP-MIXED2-PILOT]
+    specification: docs/specifications/SPEC-0038-mixed2-fp4.md
+    acceptance: "SPEC-0038 / ADR-0071 implementation and bounded evaluation delivered; scientific confirmation incomplete. Isolated FP4 tensor increments, FP64 state/references, conservative local bounds, exact recovery and independent final checking. Larger dense512/1024/2048 available strict pairs show 1.10–1.13x prepared and up to 1.89x GPU-phase gains; small families regress. A supervisor heartbeat stop leaves one frozen block incomplete, never retried. Retain 1000 complete sessions / 6000 solves plus six retained response files without complete teardown, 5634 certificates and 372 intentional refusals. All missing cells, partial data, failed reservations and old history remain exact; no adoption/default/GPUP-9 release. Report: docs/benchmarks/lp-mixed2-fp4.md."
   - id: GPUP-MIXED2-PILOT
     title: Measure prepared matrix attribution and FP32 storage plus guard costs
     status: complete

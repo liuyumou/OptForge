@@ -1,5 +1,55 @@
 # Active Task
 
+## MIXED2 FP4 implemented; larger gains, confirmation incomplete (2026-11-13)
+
+SPEC-0038 / ADR-0071 deliver isolated normal-E2M1 tensor increments, FP64 state
+and original-A references, outward local bounds, exact recovery and independent
+original-model certificates. FP32 temporary reconstruction, cooperative guard
+summaries, exact CPU audit/checker improvements, cached initial observations and
+fixed 200-update audits improve complete cost. Native receives shared improvements.
+Selected research settings: native window 32, FP4 x2 window 16; no public preset.
+
+Available strict dense512/1024/2048 pairs show 1.10–1.13x prepared speedups and
+up to 1.89x GPU-phase gain. Small families regress. Dense2048 has 16x dense512
+coefficients; stronger coupled 1024/2048 cases require 600/800 updates by tier.
+Setup amortization, all costs, variability, negative versions and limits are in
+[the report](../docs/benchmarks/lp-mixed2-fp4.md). These constructed shared-device
+observations do not establish production workload value or universal gains.
+
+The frozen 32-block confirmation is incomplete: block 26 stopped after a lost
+coordinator heartbeat, retaining its full 720 CPU / 180 GPU seconds. It was not
+retried. The other 31 blocks and eight sessions in the failed block complete:
+1000 complete sessions / 6000 solves, plus six retained certified responses whose
+session teardown did not complete. All 6006 responses retain 5634 certificates
+and 372 intentional refusals. Twenty-three later sessions in the failed block
+remain unexecuted; no confirmation/retention/adoption pass is claimed. Intervals
+are descriptive and conditional on available complete pairs; missingness may
+be informative. All planned cells and partial records remain visible.
+
+Independent exact replay covers 95232 FP4 / 47616 native product outputs and
+293 distinct endpoints/audits from 16854 retained assessment requests. Current
+admission: 130 device cases, four scoped sanitizers with 97 cases each, 2304
+rational outputs per suite and 22 process/configuration cases. Forty timer-ablation
+pairs preserve full numerical transcripts. One earlier all-process racecheck
+exit 11 remains unexplained despite nonreproduction; later scoped passes do not
+prove a repair. A CPU oracle heartbeat failure also retains its full reservation.
+
+Final CPU acceptance passes 638 repository Rust / 700 Python tests, 27 isolated
+Rust tests, Clippy/dependency checks, native replay, documentation and smoke.
+Portable replay retains every available cell and the explicit missing-cell ledger.
+
+Independent ceiling 160000 CPU / 24000 GPU seconds, four slots, 16 GiB sampled
+RSS / 12 GiB device buffers, unchanged supervisor, artifacts/gpup-mixed2-fp4-v1.
+Preserve all failures and historical files. Public defaults and old allocations
+stay exact; GPUP-8 incomplete, TENSOR2 conditional, GPUP-9 gated. No follow-on
+allocation or scientific retry is released. Commit locally only.
+
+Allocation closed at 21920.478063592 CPU / 2888.679726775 GPU seconds, including
+128 closing CPU seconds. All six failed reservations and sources are preserved;
+cleanup is empty. All 1900 historical files and earlier backlog entries remain
+exact. Portable confirmation replay and the 10424-file evidence archive pass.
+
+
 ## MIXED2 GPU pilot complete; product/guard cost is unfavorable (2026-11-12)
 
 SPEC-0037 / ADR-0070 separate diagnostic admission from provisional 1.10x

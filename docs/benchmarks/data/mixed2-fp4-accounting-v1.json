@@ -1,0 +1,75 @@
+{
+  "cleanup_empty": true,
+  "closing_administration_cpu_seconds": 128,
+  "cpu_caps_seconds": {
+    "acceptance": 30000,
+    "cleanup": 4000,
+    "confirmation": 32000,
+    "development": 30000,
+    "implementation": 40000,
+    "native": 12000,
+    "reporting": 12000
+  },
+  "cpu_ns": {
+    "acceptance": 6748484630856,
+    "cleanup": 128000000000,
+    "confirmation": 4783281061008,
+    "development": 2357338019708,
+    "implementation": 4312489535952,
+    "native": 2650452072392,
+    "reporting": 940432743676
+  },
+  "cpu_seconds": 21920.478063592,
+  "evidence": {
+    "path": "docs/benchmarks/data/mixed2-fp4-evidence-v1.json",
+    "sha256": "819a624b403dd509e5554d80f5e39edd26d54de47865b8688b9f71f4f361985f"
+  },
+  "evidence_verification": {
+    "path": "docs/benchmarks/data/mixed2-fp4-evidence-check-v1.json",
+    "sha256": "f0d85cd1d8aa63b6faa2cf63141f4f3005bfeef3da457ce865cb5495f96bef5f"
+  },
+  "failed_jobs": 6,
+  "failed_reservations": [
+    {
+      "path": "artifacts/gpup-mixed2-fp4-v1/resources/build-v1.settlement.json",
+      "sha256": "cbebd057a69642bc8a14430fa01a584d7ff091cbc622eea6d012d704a8921f7f"
+    },
+    {
+      "path": "artifacts/gpup-mixed2-fp4-v1/resources/build-v2.settlement.json",
+      "sha256": "cea6d68f7fae7d3be27fa35673983a302cc83a6a0cb2171ea6bb28104c1b9db4"
+    },
+    {
+      "path": "artifacts/gpup-mixed2-fp4-v1/resources/confirmation-b25.settlement.json",
+      "sha256": "011ec323a0d2f1cc40870e867f394f5a1d1f5efc8317a6d6c3e604143ab39934"
+    },
+    {
+      "path": "artifacts/gpup-mixed2-fp4-v1/resources/device-v1.settlement.json",
+      "sha256": "4343ff28b6088b1d04082cc46cee65ca3de3fe4b91cc2492badfc65f6df309b4"
+    },
+    {
+      "path": "artifacts/gpup-mixed2-fp4-v1/resources/product-oracle-v1.settlement.json",
+      "sha256": "93594a8952ec1a6198edc59aa28609ea1e0f1a1406b2981e13467ca5af2f6f60"
+    },
+    {
+      "path": "artifacts/gpup-mixed2-fp4-v1/resources/racecheck-v3.settlement.json",
+      "sha256": "f3f85fca106ad26cdb52a2afe8dbd449a3720c95436b90d6b136ceffb0c9d41e"
+    }
+  ],
+  "full_receipts": {
+    "path": "docs/benchmarks/data/mixed2-fp4-resources-v1.json.gz",
+    "sha256": "c8e2a8fa4af734b19d93feac3d28ba61af5e2250168e4ca04e30c2c6ec7eaed1"
+  },
+  "gpu_caps_seconds": {
+    "acceptance": 6000,
+    "confirmation": 12000,
+    "development": 6000
+  },
+  "gpu_ns": {
+    "acceptance": 1139020731827,
+    "confirmation": 1168751172235,
+    "development": 580907822713
+  },
+  "gpu_seconds": 2888.679726775,
+  "historical_transfers": 0,
+  "status": "closed"
+}

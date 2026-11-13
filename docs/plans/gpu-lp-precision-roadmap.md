@@ -1,5 +1,32 @@
 # GPU LP Performance Research and Implementation Roadmap
 
+## MIXED2 FP4 delivered; larger gains, confirmation incomplete (2026-11-13)
+
+The [implementation and measured report](../benchmarks/lp-mixed2-fp4.md) retain
+FP4 tensor increments with FP64 state, bounds, recovery and original certificates.
+Strict larger dense pairs show about 1.10–1.13x complete prepared speedups and
+up to 1.89x GPU-phase gains; small families regress. New 1024/2048 generic and
+stronger coupled full solves extend the scale to 16x dense512 coefficients.
+
+The 32-block confirmation remains incomplete after a supervisor heartbeat stop
+in block 26. No retry: 1000 complete sessions plus six retained response files from an
+interrupted session retain 5634 certificates and 372 intentional refusals. Missing
+cells, partial lifecycle data, unfavorable versions and costs remain explicit.
+These are descriptive performance observations, not a retention/adoption pass.
+Independent original-checker and exact product replay pass. Public defaults,
+historical criteria and GPUP-9 gating are unchanged; no follow-on execution release.
+
+## MIXED2 FP4 tensor implementation authorized (2026-11-13)
+
+[SPEC-0038](../specifications/SPEC-0038-mixed2-fp4.md) and
+[ADR-0071](../decisions/ADR-0071-mixed2-fp4.md) authorize FP4 tensor increment
+products with FP64 state, inexpensive conservative local bounds, exact recovery
+and independent original-model certification. The new study includes dense1024
+and dense2048 full solves, versioned optimization, complete-cost diagnosis and
+fresh frozen confirmation after CPU/device/sanitizer admission. Independent
+160000 CPU / 24000 GPU ceilings; historical evidence remains exact. No public
+preset or GPUP-9 release. Older entries retain their completed-task scope.
+
 ## MIXED2 GPU pilot complete; retain native (2026-11-12)
 
 The [completed pilot](../benchmarks/lp-mixed2-pilot.md) retains all 576 solves
