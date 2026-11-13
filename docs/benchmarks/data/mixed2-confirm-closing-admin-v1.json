@@ -1,0 +1,10 @@
+{
+  "additional_gpu_seconds": 0,
+  "backlog_exact_line_checks": true,
+  "closing_reserve_cpu_seconds": 128,
+  "failed_source_archive": "docs/benchmarks/data/mixed2-confirm-resources-v1.json.gz",
+  "handoff_links": true,
+  "preserved_failed_source": "artifacts/gpup-mixed2-confirm-v1/closing-admin-v1.sh",
+  "recovered_error": "The closing shell reached an undeclared yaml import after allocation closure and byte verification. Standard-library exact-line checks completed the remaining metadata validation.",
+  "status": "passed"
+}

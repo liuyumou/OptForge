@@ -1,0 +1,56 @@
+{
+  "all_original_endpoint_and_certificate_bytes_match_admission": true,
+  "analysis": {
+    "path": "docs/benchmarks/data/mixed2-confirm-analysis-v1.json",
+    "sha256": "e47b69cebada7756d8e750be98a5caa5875bd83ea820050e0ce20884323d1561"
+  },
+  "archive": {
+    "path": "docs/benchmarks/data/mixed2-confirm-records-v1.json",
+    "sha256": "c07e5da1c85d32c3e3e1c718573febfa7d0d0628e5ee98ee7d01adab4a149dc9"
+  },
+  "binary": {
+    "path": "artifacts/gpup-mixed2-reuse-v1/build-v2/executor",
+    "sha256": "4fde7896e07c7b01554d0ad9e2563f3e8436785ff41b6b51cbdb7f7842a30b34"
+  },
+  "cleanup_empty": true,
+  "evidence": {
+    "path": "docs/benchmarks/data/mixed2-confirm-evidence-v1.json",
+    "sha256": "0ed359c87139771fd21479a2e925e721b9b4d789ba8507e16535d2b7c5fdf0c0"
+  },
+  "exact_trajectories": {
+    "path": "artifacts/gpup-mixed2-confirm-v1/exact-final-v1.json",
+    "sha256": "2452021f0a1f6b448edaa5dbf5995f047582c94b3acabf41db2b4c9c884c8a05"
+  },
+  "historical_files": 2018,
+  "history": {
+    "path": "docs/benchmarks/data/mixed2-confirm-history-v1.json",
+    "sha256": "0bbf9aa3e534a5fc68a23b34cda18a155775df71f51ab2b996239394f01f1101"
+  },
+  "image": {
+    "path": "artifacts/gpup-mixed2-fp4-v1/build-v8/mixed.cubin",
+    "sha256": "40234ea66c9d781b2da03be2172f7699fcef375c093490f33e546db76c86cff0"
+  },
+  "isolated_rust_tests": 28,
+  "native": {
+    "path": "artifacts/gpup-mixed2-confirm-v1/resources/native-v5.settlement.json",
+    "sha256": "2ef044c2d0ca3e6ecdd7a290c954183637869e2344c1dec160b4b3cf0c308cf1"
+  },
+  "portable_replay": true,
+  "portable_replay_receipt": {
+    "path": "artifacts/gpup-mixed2-confirm-v1/portable-v4.json",
+    "sha256": "e1029e7c077f279e3c7e9b4502926277a38768b4abf7a5010a01a62e6a6f8103"
+  },
+  "production_adoption": false,
+  "python_tests": 742,
+  "rust_tests": 638,
+  "scientific_confirmation": "incomplete-confirmation",
+  "serial": {
+    "path": "artifacts/gpup-mixed2-confirm-v1/serial-final-v1/result.json",
+    "sha256": "32708ff61d1954c86122fd56abac1452649b9bc3f39a7b5edd6cd31efdf627b1"
+  },
+  "serial_requests": 36312,
+  "serial_responses": 11224,
+  "serial_unique": 144,
+  "status": "passed",
+  "supervisor_contracts": 36
+}

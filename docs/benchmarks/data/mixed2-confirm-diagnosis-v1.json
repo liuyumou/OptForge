@@ -1,0 +1,3179 @@
+{
+  "admission": {
+    "path": "artifacts/gpup-mixed2-confirm-v1/supervisor-admission-v1.json",
+    "sha256": "4e6a4a8fa4caad9595cf191a0bc264a5fde872807abfd6d7c09d0211f56b4397"
+  },
+  "all_retained_responses": 10648,
+  "blocks": [
+    {
+      "block": 0,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896025945108035,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 25, 34.04 W, 180 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794588395104215119
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 18798,
+        "max_delivery_lag_ns": 9522429,
+        "max_loop_gap_ns": 14414135,
+        "max_sample_gap_ns": 91750679,
+        "recent_samples": [
+          [
+            7896136945834530,
+            7896136945876036
+          ],
+          [
+            7896136966988078,
+            7896136976510507
+          ],
+          [
+            7896136987656357,
+            7896136994361126
+          ],
+          [
+            7896137020653625,
+            7896137020705810
+          ],
+          [
+            7896137041350665,
+            7896137041396568
+          ],
+          [
+            7896137060863142,
+            7896137060911162
+          ],
+          [
+            7896137129044176,
+            7896137129100035
+          ],
+          [
+            7896137200104904,
+            7896137200162868
+          ],
+          [
+            7896137254703021,
+            7896137254762644
+          ],
+          [
+            7896137321956647,
+            7896137322009493
+          ],
+          [
+            7896137342512100,
+            7896137346549939
+          ],
+          [
+            7896137364940897,
+            7896137370353377
+          ],
+          [
+            7896137418509120,
+            7896137418564825
+          ],
+          [
+            7896137510259799,
+            7896137510313429
+          ],
+          [
+            7896137572770769,
+            7896137572823534
+          ],
+          [
+            7896137651166421,
+            7896137651221274
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b00.resource.json",
+        "sha256": "052e75af86bcf5133a2b57b6fb9a3343b657de8a18dbd2f47a65c99ead891466"
+      },
+      "responses": 319,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 9,
+      "status": "refused"
+    },
+    {
+      "block": 1,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896143842659811,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.28 W, 180 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794588513001766765
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 9340,
+        "max_delivery_lag_ns": 5430898,
+        "max_loop_gap_ns": 19647823,
+        "max_sample_gap_ns": 74783842,
+        "recent_samples": [
+          [
+            7896196840859880,
+            7896196840891743
+          ],
+          [
+            7896196848885083,
+            7896196848916847
+          ],
+          [
+            7896196860014858,
+            7896196860051330
+          ],
+          [
+            7896196873261624,
+            7896196873294906
+          ],
+          [
+            7896196887746048,
+            7896196887782158
+          ],
+          [
+            7896196905645226,
+            7896196905693397
+          ],
+          [
+            7896196926046673,
+            7896196926090153
+          ],
+          [
+            7896196946138727,
+            7896196946182925
+          ],
+          [
+            7896196967805488,
+            7896196967853657
+          ],
+          [
+            7896196996656380,
+            7896196996709198
+          ],
+          [
+            7896197018287041,
+            7896197018331540
+          ],
+          [
+            7896197048977290,
+            7896197049021217
+          ],
+          [
+            7896197105218787,
+            7896197105269380
+          ],
+          [
+            7896197140908291,
+            7896197146339189
+          ],
+          [
+            7896197202645681,
+            7896197202705729
+          ],
+          [
+            7896197277429523,
+            7896197277485927
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b01.resource.json",
+        "sha256": "0e197a9c019cbeb4ff53beb47d9026fb35df6e44f0317ddb24b0158d85e0ace9"
+      },
+      "responses": 209,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 6,
+      "status": "refused"
+    },
+    {
+      "block": 2,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896201674682736,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.02 W, 217 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794588570833790680
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19393,
+        "max_delivery_lag_ns": 13656199,
+        "max_loop_gap_ns": 24974874,
+        "max_sample_gap_ns": 87181131,
+        "recent_samples": [
+          [
+            7896316901105612,
+            7896316901143747
+          ],
+          [
+            7896316916907078,
+            7896316916954561
+          ],
+          [
+            7896316933921733,
+            7896316933963025
+          ],
+          [
+            7896316953051189,
+            7896316953092894
+          ],
+          [
+            7896316975140459,
+            7896316975184233
+          ],
+          [
+            7896316996226777,
+            7896316996266595
+          ],
+          [
+            7896317016706528,
+            7896317026473963
+          ],
+          [
+            7896317042975003,
+            7896317043015560
+          ],
+          [
+            7896317077930057,
+            7896317077976895
+          ],
+          [
+            7896317100019923,
+            7896317100064947
+          ],
+          [
+            7896317122114574,
+            7896317122164194
+          ],
+          [
+            7896317144302921,
+            7896317144345852
+          ],
+          [
+            7896317186438925,
+            7896317200095124
+          ],
+          [
+            7896317273620056,
+            7896317273674559
+          ],
+          [
+            7896317342484304,
+            7896317344187607
+          ],
+          [
+            7896317414213186,
+            7896317414270510
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b02.resource.json",
+        "sha256": "300c30ebe8900b8055b060c3b0fe905519ce1b7bb7d103a208b8f902f36f22d8"
+      },
+      "responses": 378,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 11,
+      "status": "refused"
+    },
+    {
+      "block": 3,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896322613420676,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.72 W, 180 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794588691772527431
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 9605,
+        "max_delivery_lag_ns": 10150130,
+        "max_loop_gap_ns": 14206298,
+        "max_sample_gap_ns": 99879198,
+        "recent_samples": [
+          [
+            7896376939087795,
+            7896376939130818
+          ],
+          [
+            7896376958663741,
+            7896376958708484
+          ],
+          [
+            7896376976846980,
+            7896376976889740
+          ],
+          [
+            7896377013707238,
+            7896377013754596
+          ],
+          [
+            7896377050727336,
+            7896377058230639
+          ],
+          [
+            7896377069888165,
+            7896377069929280
+          ],
+          [
+            7896377138290468,
+            7896377138344999
+          ],
+          [
+            7896377182442310,
+            7896377182495132
+          ],
+          [
+            7896377214791394,
+            7896377214839836
+          ],
+          [
+            7896377236896404,
+            7896377236933940
+          ],
+          [
+            7896377270649376,
+            7896377270694202
+          ],
+          [
+            7896377327943651,
+            7896377327994222
+          ],
+          [
+            7896377356967607,
+            7896377357011444
+          ],
+          [
+            7896377434138518,
+            7896377434196250
+          ],
+          [
+            7896377500156815,
+            7896377500228447
+          ],
+          [
+            7896377600036013,
+            7896377600110981
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b03.resource.json",
+        "sha256": "212ae1eb335e3bb0c1e96397014e2dfac35a97878dd90f983462e3ed216a3c61"
+      },
+      "responses": 144,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 4,
+      "status": "refused"
+    },
+    {
+      "block": 4,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896382676920464,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.02 W, 187 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794588751836027713
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19346,
+        "max_delivery_lag_ns": 12421021,
+        "max_loop_gap_ns": 19358091,
+        "max_sample_gap_ns": 78778661,
+        "recent_samples": [
+          [
+            7896496882705660,
+            7896496893878368
+          ],
+          [
+            7896496898934130,
+            7896496898984858
+          ],
+          [
+            7896496917852691,
+            7896496917898597
+          ],
+          [
+            7896496940280055,
+            7896496940328333
+          ],
+          [
+            7896496965446564,
+            7896496965498467
+          ],
+          [
+            7896496984080495,
+            7896496984124895
+          ],
+          [
+            7896497005798693,
+            7896497005847047
+          ],
+          [
+            7896497028326681,
+            7896497038172503
+          ],
+          [
+            7896497047763537,
+            7896497047806207
+          ],
+          [
+            7896497070113608,
+            7896497082534629
+          ],
+          [
+            7896497092880436,
+            7896497100051738
+          ],
+          [
+            7896497119345833,
+            7896497119401139
+          ],
+          [
+            7896497194243202,
+            7896497194302416
+          ],
+          [
+            7896497221279525,
+            7896497221327844
+          ],
+          [
+            7896497300058186,
+            7896497300166941
+          ],
+          [
+            7896497366387165,
+            7896497366446382
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b04.resource.json",
+        "sha256": "051e8e6a61d22bbc71f387ee6291965c170e0ff351d7c81ab6c4237d2c44f163"
+      },
+      "responses": 384,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 12,
+      "status": "refused"
+    },
+    {
+      "block": 5,
+      "cpu_ns": 580627848228,
+      "environment_end": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896642298451134,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 31, 89.99 W, 2325 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589011457559008
+      },
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896502563212984,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.53 W, 202 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794588871722320342
+      },
+      "gpu_ns": 144284626811,
+      "observation": {
+        "heartbeats": 23389,
+        "max_delivery_lag_ns": 10565710,
+        "max_loop_gap_ns": 16164496,
+        "max_sample_gap_ns": 70028882,
+        "recent_samples": [
+          [
+            7896642246064805,
+            7896642246092392
+          ],
+          [
+            7896642251640071,
+            7896642251667986
+          ],
+          [
+            7896642257234079,
+            7896642257263202
+          ],
+          [
+            7896642262851609,
+            7896642262880246
+          ],
+          [
+            7896642268537541,
+            7896642268566577
+          ],
+          [
+            7896642274118849,
+            7896642274152565
+          ],
+          [
+            7896642279710584,
+            7896642279743549
+          ],
+          [
+            7896642285389455,
+            7896642285429679
+          ],
+          [
+            7896642291178727,
+            7896642291220099
+          ],
+          [
+            7896642296973154,
+            7896642297013994
+          ],
+          [
+            7896642302778541,
+            7896642302806698
+          ],
+          [
+            7896642308228161,
+            7896642308266631
+          ],
+          [
+            7896642313829448,
+            7896642313867365
+          ],
+          [
+            7896642319437657,
+            7896642319465392
+          ],
+          [
+            7896642324892271,
+            7896642324921254
+          ],
+          [
+            7896642330351288,
+            7896642330380988
+          ]
+        ]
+      },
+      "peak_rss_bytes": 3114999808,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b05.resource.json",
+        "sha256": "61830ed69bc9b18cfd6efd1316c713ea55437c64bdd9ddf9182caac1f8de5a46"
+      },
+      "responses": 512,
+      "sample_gap_ns": 70028882,
+      "sample_work_ns": 58189115,
+      "sessions": 16,
+      "status": "passed"
+    },
+    {
+      "block": 6,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896646965309850,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.02 W, 285 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589016124416887
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 5662,
+        "max_delivery_lag_ns": 15889178,
+        "max_loop_gap_ns": 20429431,
+        "max_sample_gap_ns": 58910799,
+        "recent_samples": [
+          [
+            7896676855238526,
+            7896676855271696
+          ],
+          [
+            7896676864782475,
+            7896676864809240
+          ],
+          [
+            7896676877951711,
+            7896676878003415
+          ],
+          [
+            7896676895532205,
+            7896676910340941
+          ],
+          [
+            7896676916223759,
+            7896676916280441
+          ],
+          [
+            7896676941716237,
+            7896676941762057
+          ],
+          [
+            7896676964341197,
+            7896676964388615
+          ],
+          [
+            7896676984164935,
+            7896677000054113
+          ],
+          [
+            7896677007290996,
+            7896677007332645
+          ],
+          [
+            7896677041169625,
+            7896677041220319
+          ],
+          [
+            7896677077685113,
+            7896677077732414
+          ],
+          [
+            7896677105202122,
+            7896677105248593
+          ],
+          [
+            7896677156401901,
+            7896677156449709
+          ],
+          [
+            7896677215312700,
+            7896677215364922
+          ],
+          [
+            7896677255036972,
+            7896677255089216
+          ],
+          [
+            7896677286883096,
+            7896677286932153
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b06.resource.json",
+        "sha256": "58bd43820e30c5ffd0768a9f1b0d22bc44033780cb2b1c379b5a62623c4c5d98"
+      },
+      "responses": 124,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 3,
+      "status": "refused"
+    },
+    {
+      "block": 7,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896682553694317,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.06 W, 232 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589051712801520
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19350,
+        "max_delivery_lag_ns": 1234611,
+        "max_loop_gap_ns": 10886981,
+        "max_sample_gap_ns": 94621858,
+        "recent_samples": [
+          [
+            7896796902484283,
+            7896796902533588
+          ],
+          [
+            7896796923034943,
+            7896796923081294
+          ],
+          [
+            7896796942133164,
+            7896796942176056
+          ],
+          [
+            7896796961632031,
+            7896796961672675
+          ],
+          [
+            7896796983309105,
+            7896796983351853
+          ],
+          [
+            7896797014710435,
+            7896797014759480
+          ],
+          [
+            7896797037903824,
+            7896797037949860
+          ],
+          [
+            7896797079351861,
+            7896797079397039
+          ],
+          [
+            7896797104765217,
+            7896797104810948
+          ],
+          [
+            7896797139153793,
+            7896797139198668
+          ],
+          [
+            7896797160279469,
+            7896797160322760
+          ],
+          [
+            7896797206895170,
+            7896797206940433
+          ],
+          [
+            7896797266428548,
+            7896797266482536
+          ],
+          [
+            7896797361050406,
+            7896797361107886
+          ],
+          [
+            7896797415429513,
+            7896797415482079
+          ],
+          [
+            7896797494210196,
+            7896797494269617
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b07.resource.json",
+        "sha256": "9f44bf29a07719e6d7df86cdf99b4d30481292829bfab964834a454e6b94247e"
+      },
+      "responses": 449,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 14,
+      "status": "refused"
+    },
+    {
+      "block": 8,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896801528375757,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.02 W, 330 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589170687483153
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 9653,
+        "max_delivery_lag_ns": 7770000,
+        "max_loop_gap_ns": 12750765,
+        "max_sample_gap_ns": 64215621,
+        "recent_samples": [
+          [
+            7896856855007258,
+            7896856855037531
+          ],
+          [
+            7896856865543600,
+            7896856865575881
+          ],
+          [
+            7896856878377870,
+            7896856878423105
+          ],
+          [
+            7896856893402467,
+            7896856893434770
+          ],
+          [
+            7896856911553883,
+            7896856911607300
+          ],
+          [
+            7896856930646810,
+            7896856930697056
+          ],
+          [
+            7896856953865947,
+            7896856953915530
+          ],
+          [
+            7896856974557205,
+            7896856982327205
+          ],
+          [
+            7896856997158771,
+            7896856997208025
+          ],
+          [
+            7896857015879268,
+            7896857015927973
+          ],
+          [
+            7896857061959150,
+            7896857062005628
+          ],
+          [
+            7896857092737624,
+            7896857092780687
+          ],
+          [
+            7896857136118824,
+            7896857136168527
+          ],
+          [
+            7896857186923187,
+            7896857186978498
+          ],
+          [
+            7896857251138808,
+            7896857251192032
+          ],
+          [
+            7896857303463340,
+            7896857303519330
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b08.resource.json",
+        "sha256": "e41fa93e6e9241770ff3d724b4e360b1ebe37be9dab75ed52853c8ce65d62b78"
+      },
+      "responses": 197,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 6,
+      "status": "refused"
+    },
+    {
+      "block": 9,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896861547055467,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.06 W, 277 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589230706163116
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19387,
+        "max_delivery_lag_ns": 13085719,
+        "max_loop_gap_ns": 16300089,
+        "max_sample_gap_ns": 93984848,
+        "recent_samples": [
+          [
+            7896976838921727,
+            7896976838951019
+          ],
+          [
+            7896976847476572,
+            7896976847507954
+          ],
+          [
+            7896976856769423,
+            7896976856813994
+          ],
+          [
+            7896976868938385,
+            7896976868967443
+          ],
+          [
+            7896976882383020,
+            7896976895468739
+          ],
+          [
+            7896976900525498,
+            7896976900566904
+          ],
+          [
+            7896976920571562,
+            7896976920617852
+          ],
+          [
+            7896976941018323,
+            7896976941058169
+          ],
+          [
+            7896976982737803,
+            7896976990168093
+          ],
+          [
+            7896977010573083,
+            7896977010616040
+          ],
+          [
+            7896977057281707,
+            7896977057334781
+          ],
+          [
+            7896977088101884,
+            7896977088146852
+          ],
+          [
+            7896977182086732,
+            7896977182150355
+          ],
+          [
+            7896977221724195,
+            7896977221774652
+          ],
+          [
+            7896977253674616,
+            7896977253725231
+          ],
+          [
+            7896977334173252,
+            7896977334229278
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b09.resource.json",
+        "sha256": "1ddd2732ece5f24d178d3ab22e781843dca75c5ad5f3e68cffa499d5c8791094"
+      },
+      "responses": 408,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 12,
+      "status": "refused"
+    },
+    {
+      "block": 10,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7896982639589963,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.02 W, 195 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589351798697154
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 9648,
+        "max_delivery_lag_ns": 12040201,
+        "max_loop_gap_ns": 14347883,
+        "max_sample_gap_ns": 99640844,
+        "recent_samples": [
+          [
+            7897036942472364,
+            7897036942520858
+          ],
+          [
+            7897036962643424,
+            7897036970339204
+          ],
+          [
+            7897036985217193,
+            7897036985271639
+          ],
+          [
+            7897037005144586,
+            7897037005178794
+          ],
+          [
+            7897037035974525,
+            7897037036024610
+          ],
+          [
+            7897037080726738,
+            7897037080774510
+          ],
+          [
+            7897037103379081,
+            7897037103422969
+          ],
+          [
+            7897037139182364,
+            7897037139232839
+          ],
+          [
+            7897037192220036,
+            7897037192284689
+          ],
+          [
+            7897037242358782,
+            7897037254398983
+          ],
+          [
+            7897037264692753,
+            7897037264745540
+          ],
+          [
+            7897037286426575,
+            7897037286468120
+          ],
+          [
+            7897037317076824,
+            7897037317119494
+          ],
+          [
+            7897037342938259,
+            7897037354405557
+          ],
+          [
+            7897037363413879,
+            7897037363463011
+          ],
+          [
+            7897037463054723,
+            7897037463128605
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b10.resource.json",
+        "sha256": "3461f68a9099d2858edce4ab92147244d92a242c902fcfd197671e50e0df2683"
+      },
+      "responses": 224,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 7,
+      "status": "refused"
+    },
+    {
+      "block": 11,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897041693970953,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.26 W, 232 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589410853078044
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19374,
+        "max_delivery_lag_ns": 8990780,
+        "max_loop_gap_ns": 13417852,
+        "max_sample_gap_ns": 81186739,
+        "recent_samples": [
+          [
+            7897156991893913,
+            7897156992434864
+          ],
+          [
+            7897157004325733,
+            7897157004366869
+          ],
+          [
+            7897157025766937,
+            7897157034332644
+          ],
+          [
+            7897157049772550,
+            7897157054771572
+          ],
+          [
+            7897157072777905,
+            7897157072828479
+          ],
+          [
+            7897157094174825,
+            7897157100199049
+          ],
+          [
+            7897157105316867,
+            7897157105363718
+          ],
+          [
+            7897157128048953,
+            7897157128093525
+          ],
+          [
+            7897157148298143,
+            7897157152130224
+          ],
+          [
+            7897157171845150,
+            7897157171890497
+          ],
+          [
+            7897157196254259,
+            7897157196294311
+          ],
+          [
+            7897157217177980,
+            7897157217217823
+          ],
+          [
+            7897157258387321,
+            7897157258435941
+          ],
+          [
+            7897157317676012,
+            7897157317726164
+          ],
+          [
+            7897157368734702,
+            7897157368784953
+          ],
+          [
+            7897157449921441,
+            7897157449975833
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b11.resource.json",
+        "sha256": "1ae872f75d79d297c1eb7c93b4f1fa6054882a0d85bc2db48138230d2d345947"
+      },
+      "responses": 454,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 14,
+      "status": "refused"
+    },
+    {
+      "block": 12,
+      "cpu_ns": 577047633820,
+      "environment_end": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897301575095194,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 32, 95.31 W, 2325 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589670734202666
+      },
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897161769182219,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.78 W, 292 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589530928290046
+      },
+      "gpu_ns": 143391507602,
+      "observation": {
+        "heartbeats": 23243,
+        "max_delivery_lag_ns": 14981052,
+        "max_loop_gap_ns": 21364488,
+        "max_sample_gap_ns": 94887751,
+        "recent_samples": [
+          [
+            7897301524290900,
+            7897301524319431
+          ],
+          [
+            7897301530044710,
+            7897301530082836
+          ],
+          [
+            7897301535850229,
+            7897301535889037
+          ],
+          [
+            7897301541635491,
+            7897301541673396
+          ],
+          [
+            7897301547440931,
+            7897301547469154
+          ],
+          [
+            7897301553011883,
+            7897301553049675
+          ],
+          [
+            7897301558792061,
+            7897301558830496
+          ],
+          [
+            7897301564591703,
+            7897301564630869
+          ],
+          [
+            7897301570385486,
+            7897301570423716
+          ],
+          [
+            7897301576169418,
+            7897301576198085
+          ],
+          [
+            7897301581617854,
+            7897301581645297
+          ],
+          [
+            7897301587070221,
+            7897301587109799
+          ],
+          [
+            7897301592673323,
+            7897301592711946
+          ],
+          [
+            7897301598284893,
+            7897301598323868
+          ],
+          [
+            7897301603893254,
+            7897301603931697
+          ],
+          [
+            7897301609508251,
+            7897301609546928
+          ]
+        ]
+      },
+      "peak_rss_bytes": 3123290112,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b12.resource.json",
+        "sha256": "3f854a0232a1fd958447f21724197e563de8179608317375d3a2b4cfd1c6276e"
+      },
+      "responses": 512,
+      "sample_gap_ns": 94887751,
+      "sample_work_ns": 73718138,
+      "sessions": 16,
+      "status": "passed"
+    },
+    {
+      "block": 13,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897305268315124,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 39.84 W, 480 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589674427422062
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 5762,
+        "max_delivery_lag_ns": 12650910,
+        "max_loop_gap_ns": 17226492,
+        "max_sample_gap_ns": 46711161,
+        "recent_samples": [
+          [
+            7897336893374474,
+            7897336893416721
+          ],
+          [
+            7897336908190021,
+            7897336920840931
+          ],
+          [
+            7897336925883019,
+            7897336925921553
+          ],
+          [
+            7897336946752376,
+            7897336946799874
+          ],
+          [
+            7897336966385534,
+            7897336966432423
+          ],
+          [
+            7897336986489616,
+            7897336986535762
+          ],
+          [
+            7897337005477981,
+            7897337014171169
+          ],
+          [
+            7897337029065579,
+            7897337029114300
+          ],
+          [
+            7897337061116979,
+            7897337061169478
+          ],
+          [
+            7897337107828140,
+            7897337107884718
+          ],
+          [
+            7897337130798673,
+            7897337130844627
+          ],
+          [
+            7897337160048044,
+            7897337160102358
+          ],
+          [
+            7897337183182062,
+            7897337183224835
+          ],
+          [
+            7897337217763349,
+            7897337230262794
+          ],
+          [
+            7897337238903849,
+            7897337238941528
+          ],
+          [
+            7897337260574257,
+            7897337260623829
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b13.resource.json",
+        "sha256": "57113a198484b0fc1272f22b1879218e15a2b175496dfef8a6f905c2fab5a02f"
+      },
+      "responses": 101,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 3,
+      "status": "refused"
+    },
+    {
+      "block": 14,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897341700327086,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.02 W, 307 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589710859434352
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19377,
+        "max_delivery_lag_ns": 7864054,
+        "max_loop_gap_ns": 13001188,
+        "max_sample_gap_ns": 28443060,
+        "recent_samples": [
+          [
+            7897456885038652,
+            7897456885074006
+          ],
+          [
+            7897456902519867,
+            7897456902558338
+          ],
+          [
+            7897456920532375,
+            7897456920568744
+          ],
+          [
+            7897456939525610,
+            7897456942652784
+          ],
+          [
+            7897456963042040,
+            7897456963087594
+          ],
+          [
+            7897456983881795,
+            7897456983925784
+          ],
+          [
+            7897457003747628,
+            7897457003788834
+          ],
+          [
+            7897457023985424,
+            7897457024031131
+          ],
+          [
+            7897457047988571,
+            7897457048031625
+          ],
+          [
+            7897457072694754,
+            7897457072741067
+          ],
+          [
+            7897457097717073,
+            7897457097761815
+          ],
+          [
+            7897457123147384,
+            7897457123189699
+          ],
+          [
+            7897457143566391,
+            7897457143614272
+          ],
+          [
+            7897457165054982,
+            7897457165094865
+          ],
+          [
+            7897457192101340,
+            7897457192141964
+          ],
+          [
+            7897457220544400,
+            7897457220586528
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b14.resource.json",
+        "sha256": "0a4d6e3dd0d65e4fc5a99cc519aef7b864aed2eb1515e1e5ebd2686ed781c0c3"
+      },
+      "responses": 306,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 9,
+      "status": "refused"
+    },
+    {
+      "block": 15,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897462718449566,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.45 W, 202 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589831877556906
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 9626,
+        "max_delivery_lag_ns": 8657224,
+        "max_loop_gap_ns": 11192332,
+        "max_sample_gap_ns": 55969938,
+        "recent_samples": [
+          [
+            7897516870220200,
+            7897516870253902
+          ],
+          [
+            7897516880728691,
+            7897516880760320
+          ],
+          [
+            7897516892545493,
+            7897516901202717
+          ],
+          [
+            7897516906245732,
+            7897516906273126
+          ],
+          [
+            7897516924806194,
+            7897516924856237
+          ],
+          [
+            7897516945288701,
+            7897516945341841
+          ],
+          [
+            7897516965647534,
+            7897516965697422
+          ],
+          [
+            7897516985966843,
+            7897516986008607
+          ],
+          [
+            7897517006696386,
+            7897517006737219
+          ],
+          [
+            7897517027074946,
+            7897517027113916
+          ],
+          [
+            7897517050896081,
+            7897517050938475
+          ],
+          [
+            7897517100912170,
+            7897517100961794
+          ],
+          [
+            7897517156882108,
+            7897517156929732
+          ],
+          [
+            7897517182404923,
+            7897517182448915
+          ],
+          [
+            7897517223778624,
+            7897517223828891
+          ],
+          [
+            7897517253070056,
+            7897517253116604
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b15.resource.json",
+        "sha256": "dacf443e2d8d2efa3970cc8fb30147a8f9294bc48af9234a31e36042f3b9cfbd"
+      },
+      "responses": 166,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 5,
+      "status": "refused"
+    },
+    {
+      "block": 16,
+      "cpu_ns": 582359654020,
+      "environment_end": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897662829323566,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 32, 85.74 W, 2325 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590031988431043
+      },
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897522781966359,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 29, 35.02 W, 180 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794589891941073522
+      },
+      "gpu_ns": 144717077612,
+      "observation": {
+        "heartbeats": 23416,
+        "max_delivery_lag_ns": 7617616,
+        "max_loop_gap_ns": 14543230,
+        "max_sample_gap_ns": 90344005,
+        "recent_samples": [
+          [
+            7897662779637860,
+            7897662779667130
+          ],
+          [
+            7897662785239053,
+            7897662785267946
+          ],
+          [
+            7897662790815517,
+            7897662790855592
+          ],
+          [
+            7897662796620713,
+            7897662796660929
+          ],
+          [
+            7897662802392050,
+            7897662802423458
+          ],
+          [
+            7897662808059994,
+            7897662808097336
+          ],
+          [
+            7897662813844229,
+            7897662813871954
+          ],
+          [
+            7897662819426926,
+            7897662819456997
+          ],
+          [
+            7897662825015879,
+            7897662825044911
+          ],
+          [
+            7897662830595757,
+            7897662830624398
+          ],
+          [
+            7897662836045639,
+            7897662836085600
+          ],
+          [
+            7897662841653472,
+            7897662841692221
+          ],
+          [
+            7897662847262026,
+            7897662847289949
+          ],
+          [
+            7897662852709694,
+            7897662852739431
+          ],
+          [
+            7897662858131004,
+            7897662858158645
+          ],
+          [
+            7897662863580798,
+            7897662863620066
+          ]
+        ]
+      },
+      "peak_rss_bytes": 3126657024,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b16.resource.json",
+        "sha256": "03c31917e7c3187ef57d3b2f79c6eacf6d2b7a40aaf2c23faa67dc40978ea065"
+      },
+      "responses": 512,
+      "sample_gap_ns": 90344005,
+      "sample_work_ns": 52196375,
+      "sessions": 16,
+      "status": "passed"
+    },
+    {
+      "block": 17,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897667543793671,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.02 W, 247 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590036702900941
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 5545,
+        "max_delivery_lag_ns": 15684261,
+        "max_loop_gap_ns": 16444600,
+        "max_sample_gap_ns": 43736566,
+        "recent_samples": [
+          [
+            7897696869314249,
+            7897696869344912
+          ],
+          [
+            7897696876221088,
+            7897696876250255
+          ],
+          [
+            7897696883782404,
+            7897696883825721
+          ],
+          [
+            7897696891031680,
+            7897696891062676
+          ],
+          [
+            7897696899150841,
+            7897696899181256
+          ],
+          [
+            7897696910133334,
+            7897696910164502
+          ],
+          [
+            7897696923981539,
+            7897696924030111
+          ],
+          [
+            7897696941302639,
+            7897696941342434
+          ],
+          [
+            7897696962551935,
+            7897696978236196
+          ],
+          [
+            7897696983789569,
+            7897696983845039
+          ],
+          [
+            7897697005089881,
+            7897697005127393
+          ],
+          [
+            7897697026080943,
+            7897697026121956
+          ],
+          [
+            7897697045618252,
+            7897697045799987
+          ],
+          [
+            7897697066952813,
+            7897697078206737
+          ],
+          [
+            7897697110689379,
+            7897697110738465
+          ],
+          [
+            7897697146224611,
+            7897697146277054
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b17.resource.json",
+        "sha256": "ad1bf1fa4a3d05a0c744749cbd1fda1cb5aa4c8fefdb15400fa6cd755810c3f2"
+      },
+      "responses": 59,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 1,
+      "status": "refused"
+    },
+    {
+      "block": 18,
+      "cpu_ns": 579512553104,
+      "environment_end": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897842071019736,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 32, 93.32 W, 2325 MHz, 15 MiB, 10 %\n",
+        "time_ns": 1794590211230126907
+      },
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897701706411553,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.02 W, 345 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590070865518673
+      },
+      "gpu_ns": 144006906137,
+      "observation": {
+        "heartbeats": 23145,
+        "max_delivery_lag_ns": 8211120,
+        "max_loop_gap_ns": 13620625,
+        "max_sample_gap_ns": 94661781,
+        "recent_samples": [
+          [
+            7897842022541752,
+            7897842022573865
+          ],
+          [
+            7897842028187083,
+            7897842028216379
+          ],
+          [
+            7897842033944406,
+            7897842033986799
+          ],
+          [
+            7897842039786161,
+            7897842039816511
+          ],
+          [
+            7897842045376265,
+            7897842045404495
+          ],
+          [
+            7897842050969134,
+            7897842050999425
+          ],
+          [
+            7897842056573916,
+            7897842056603524
+          ],
+          [
+            7897842062144167,
+            7897842062174039
+          ],
+          [
+            7897842067733286,
+            7897842067762337
+          ],
+          [
+            7897842073366986,
+            7897842073396811
+          ],
+          [
+            7897842078897475,
+            7897842078926563
+          ],
+          [
+            7897842084412175,
+            7897842084439653
+          ],
+          [
+            7897842089946851,
+            7897842089977761
+          ],
+          [
+            7897842095417882,
+            7897842095449265
+          ],
+          [
+            7897842100876177,
+            7897842100905301
+          ],
+          [
+            7897842106333191,
+            7897842106361646
+          ]
+        ]
+      },
+      "peak_rss_bytes": 3125735424,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b18.resource.json",
+        "sha256": "6c30ad5817a987bbc9d81264ff198d72eb6698c0dbdbf76815efda2ad302391d"
+      },
+      "responses": 512,
+      "sample_gap_ns": 94661781,
+      "sample_work_ns": 62220495,
+      "sessions": 16,
+      "status": "passed"
+    },
+    {
+      "block": 19,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897845763852636,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.51 W, 525 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590214922959822
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 5703,
+        "max_delivery_lag_ns": 7790362,
+        "max_loop_gap_ns": 14160622,
+        "max_sample_gap_ns": 60443895,
+        "recent_samples": [
+          [
+            7897877273145968,
+            7897877273198192
+          ],
+          [
+            7897877325556142,
+            7897877325606910
+          ],
+          [
+            7897877356258001,
+            7897877356299359
+          ],
+          [
+            7897877370716847,
+            7897877370754505
+          ],
+          [
+            7897877428802875,
+            7897877428856341
+          ],
+          [
+            7897877469557381,
+            7897877469604558
+          ],
+          [
+            7897877510282547,
+            7897877510332584
+          ],
+          [
+            7897877539378271,
+            7897877539427065
+          ],
+          [
+            7897877568817230,
+            7897877568863577
+          ],
+          [
+            7897877615415716,
+            7897877615465975
+          ],
+          [
+            7897877666275495,
+            7897877666326562
+          ],
+          [
+            7897877708540440,
+            7897877708591023
+          ],
+          [
+            7897877760930421,
+            7897877760986358
+          ],
+          [
+            7897877800176334,
+            7897877800227186
+          ],
+          [
+            7897877815466923,
+            7897877815517578
+          ],
+          [
+            7897877857144072,
+            7897877857193387
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b19.resource.json",
+        "sha256": "1d6d0ea572e8c04c7cd8f8820231ec1c994bf7658b6f4a7411e002d37d6274a7"
+      },
+      "responses": 224,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 7,
+      "status": "refused"
+    },
+    {
+      "block": 20,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7897881825207651,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.02 W, 240 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590250984314284
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19280,
+        "max_delivery_lag_ns": 13486734,
+        "max_loop_gap_ns": 18532178,
+        "max_sample_gap_ns": 56299400,
+        "recent_samples": [
+          [
+            7897996891412833,
+            7897996891443421
+          ],
+          [
+            7897996899004851,
+            7897996899041140
+          ],
+          [
+            7897996906477843,
+            7897996906511692
+          ],
+          [
+            7897996918938365,
+            7897996931795214
+          ],
+          [
+            7897996936838422,
+            7897996950325156
+          ],
+          [
+            7897996957621622,
+            7897996957666527
+          ],
+          [
+            7897996977340922,
+            7897996977389408
+          ],
+          [
+            7897996997836491,
+            7897996997877616
+          ],
+          [
+            7897997017880648,
+            7897997017920410
+          ],
+          [
+            7897997037106287,
+            7897997037145668
+          ],
+          [
+            7897997058416951,
+            7897997058484381
+          ],
+          [
+            7897997091848770,
+            7897997091898069
+          ],
+          [
+            7897997128599906,
+            7897997128650598
+          ],
+          [
+            7897997179655122,
+            7897997179705985
+          ],
+          [
+            7897997235954522,
+            7897997236004745
+          ],
+          [
+            7897997269823040,
+            7897997269873778
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b20.resource.json",
+        "sha256": "58063f4d8130a6582a2bd84375810d0a84baa586151ee611dc3c37b906f0d039"
+      },
+      "responses": 368,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 11,
+      "status": "refused"
+    },
+    {
+      "block": 21,
+      "cpu_ns": 577898136620,
+      "environment_end": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898141764895702,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 32, 87.66 W, 2325 MHz, 15 MiB, 5 %\n",
+        "time_ns": 1794590510924003271
+      },
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898001727762103,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.02 W, 412 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590370886869549
+      },
+      "gpu_ns": 143599643023,
+      "observation": {
+        "heartbeats": 23175,
+        "max_delivery_lag_ns": 8651292,
+        "max_loop_gap_ns": 17775521,
+        "max_sample_gap_ns": 94931353,
+        "recent_samples": [
+          [
+            7898141714813868,
+            7898141714854228
+          ],
+          [
+            7898141720592071,
+            7898141720621193
+          ],
+          [
+            7898141726141994,
+            7898141726170342
+          ],
+          [
+            7898141731726902,
+            7898141731765563
+          ],
+          [
+            7898141737521888,
+            7898141737549667
+          ],
+          [
+            7898141743334593,
+            7898141743377673
+          ],
+          [
+            7898141749142460,
+            7898141749172868
+          ],
+          [
+            7898141754731628,
+            7898141754759833
+          ],
+          [
+            7898141760318201,
+            7898141760346518
+          ],
+          [
+            7898141765902085,
+            7898141765930955
+          ],
+          [
+            7898141771369430,
+            7898141771397602
+          ],
+          [
+            7898141776821262,
+            7898141776849461
+          ],
+          [
+            7898141782274122,
+            7898141782301837
+          ],
+          [
+            7898141787724547,
+            7898141787752731
+          ],
+          [
+            7898141793176977,
+            7898141793205397
+          ],
+          [
+            7898141798633127,
+            7898141798661265
+          ]
+        ]
+      },
+      "peak_rss_bytes": 3126865920,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b21.resource.json",
+        "sha256": "bb8404cee17788071e63b3a64ca05ef6e64d353b93247d8e575daa6fac201f25"
+      },
+      "responses": 512,
+      "sample_gap_ns": 94931353,
+      "sample_work_ns": 86656311,
+      "sessions": 16,
+      "status": "passed"
+    },
+    {
+      "block": 22,
+      "cpu_ns": 577428501492,
+      "environment_end": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898285398313189,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 32, 95.20 W, 2325 MHz, 15 MiB, 1 %\n",
+        "time_ns": 1794590654557420923
+      },
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898145448874976,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.02 W, 375 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590514607982422
+      },
+      "gpu_ns": 143482794720,
+      "observation": {
+        "heartbeats": 23241,
+        "max_delivery_lag_ns": 15168180,
+        "max_loop_gap_ns": 15634883,
+        "max_sample_gap_ns": 96915890,
+        "recent_samples": [
+          [
+            7898285347901169,
+            7898285347940917
+          ],
+          [
+            7898285353667451,
+            7898285353694941
+          ],
+          [
+            7898285359261327,
+            7898285359288857
+          ],
+          [
+            7898285364828149,
+            7898285364856049
+          ],
+          [
+            7898285370481228,
+            7898285370509725
+          ],
+          [
+            7898285376194260,
+            7898285376233796
+          ],
+          [
+            7898285381974811,
+            7898285382014284
+          ],
+          [
+            7898285387790357,
+            7898285387828898
+          ],
+          [
+            7898285393574686,
+            7898285393602711
+          ],
+          [
+            7898285399151201,
+            7898285399179699
+          ],
+          [
+            7898285404633775,
+            7898285404661510
+          ],
+          [
+            7898285410079468,
+            7898285410108723
+          ],
+          [
+            7898285415536781,
+            7898285415566334
+          ],
+          [
+            7898285420977566,
+            7898285421005446
+          ],
+          [
+            7898285426429193,
+            7898285426456237
+          ],
+          [
+            7898285431869265,
+            7898285431896439
+          ]
+        ]
+      },
+      "peak_rss_bytes": 3125002240,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b22.resource.json",
+        "sha256": "51a86dcd91229c6e8b1aa0642866a8db4641c58d9d9063c4305fdc1f969c804a"
+      },
+      "responses": 512,
+      "sample_gap_ns": 96915890,
+      "sample_work_ns": 86758172,
+      "sessions": 16,
+      "status": "passed"
+    },
+    {
+      "block": 23,
+      "cpu_ns": 581286448952,
+      "environment_end": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898429995464899,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 32, 95.07 W, 2325 MHz, 15 MiB, 10 %\n",
+        "time_ns": 1794590799154572320
+      },
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898289088628008,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.26 W, 307 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590658247735637
+      },
+      "gpu_ns": 144448698308,
+      "observation": {
+        "heartbeats": 23109,
+        "max_delivery_lag_ns": 8888237,
+        "max_loop_gap_ns": 13297163,
+        "max_sample_gap_ns": 91955530,
+        "recent_samples": [
+          [
+            7898429948072318,
+            7898429948100575
+          ],
+          [
+            7898429953675024,
+            7898429953704946
+          ],
+          [
+            7898429959290545,
+            7898429959319841
+          ],
+          [
+            7898429964911171,
+            7898429964939492
+          ],
+          [
+            7898429970521353,
+            7898429970549039
+          ],
+          [
+            7898429976141255,
+            7898429976167997
+          ],
+          [
+            7898429981730401,
+            7898429981758370
+          ],
+          [
+            7898429987336835,
+            7898429987363970
+          ],
+          [
+            7898429992981000,
+            7898429993008880
+          ],
+          [
+            7898429998660133,
+            7898429998687956
+          ],
+          [
+            7898430004135831,
+            7898430004164479
+          ],
+          [
+            7898430009600410,
+            7898430009628908
+          ],
+          [
+            7898430015068330,
+            7898430015097216
+          ],
+          [
+            7898430020531965,
+            7898430020559318
+          ],
+          [
+            7898430025989823,
+            7898430026017602
+          ],
+          [
+            7898430031460222,
+            7898430031490187
+          ]
+        ]
+      },
+      "peak_rss_bytes": 3126194176,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b23.resource.json",
+        "sha256": "1dc3244173deb0c2e132f933915d13dc8401341ff1ce68401a73fafefdd30e55"
+      },
+      "responses": 512,
+      "sample_gap_ns": 91955530,
+      "sample_work_ns": 81155594,
+      "sessions": 16,
+      "status": "passed"
+    },
+    {
+      "block": 24,
+      "cpu_ns": 580676779660,
+      "environment_end": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898574441171710,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 32, 86.73 W, 2325 MHz, 15 MiB, 1 %\n",
+        "time_ns": 1794590943600279175
+      },
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898434655415696,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.02 W, 337 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590803814523075
+      },
+      "gpu_ns": 144296526834,
+      "observation": {
+        "heartbeats": 23492,
+        "max_delivery_lag_ns": 1175389,
+        "max_loop_gap_ns": 11721733,
+        "max_sample_gap_ns": 11777737,
+        "recent_samples": [
+          [
+            7898574392788619,
+            7898574392815990
+          ],
+          [
+            7898574398416486,
+            7898574398444593
+          ],
+          [
+            7898574404078045,
+            7898574404106731
+          ],
+          [
+            7898574409874246,
+            7898574409913469
+          ],
+          [
+            7898574415693451,
+            7898574415732681
+          ],
+          [
+            7898574421507238,
+            7898574421545770
+          ],
+          [
+            7898574427347037,
+            7898574427378853
+          ],
+          [
+            7898574433043006,
+            7898574433070183
+          ],
+          [
+            7898574438717311,
+            7898574438745510
+          ],
+          [
+            7898574444355626,
+            7898574444383750
+          ],
+          [
+            7898574449835401,
+            7898574449862499
+          ],
+          [
+            7898574455295309,
+            7898574455323351
+          ],
+          [
+            7898574460755743,
+            7898574460783775
+          ],
+          [
+            7898574466213920,
+            7898574466242027
+          ],
+          [
+            7898574471711259,
+            7898574471738852
+          ],
+          [
+            7898574477156513,
+            7898574477183559
+          ]
+        ]
+      },
+      "peak_rss_bytes": 3125035008,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b24.resource.json",
+        "sha256": "d88da7eb601fb8d2a4b0536bcf3e35ae466d15ad6d4cc0dcb670c665cd6fb7a5"
+      },
+      "responses": 512,
+      "sample_gap_ns": 11777737,
+      "sample_work_ns": 2329581,
+      "sessions": 16,
+      "status": "passed"
+    },
+    {
+      "block": 25,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898579136993571,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.02 W, 180 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590948296100455
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 3736,
+        "max_delivery_lag_ns": 9548726,
+        "max_loop_gap_ns": 13558258,
+        "max_sample_gap_ns": 66940672,
+        "recent_samples": [
+          [
+            7898597192194637,
+            7898597192238975
+          ],
+          [
+            7898597220580026,
+            7898597220624404
+          ],
+          [
+            7898597261421316,
+            7898597261465815
+          ],
+          [
+            7898597308392406,
+            7898597308440690
+          ],
+          [
+            7898597348565320,
+            7898597348612824
+          ],
+          [
+            7898597415505992,
+            7898597415557448
+          ],
+          [
+            7898597457546156,
+            7898597457598327
+          ],
+          [
+            7898597505097618,
+            7898597505146760
+          ],
+          [
+            7898597533294302,
+            7898597538183834
+          ],
+          [
+            7898597553536119,
+            7898597558556848
+          ],
+          [
+            7898597570937576,
+            7898597578186272
+          ],
+          [
+            7898597600120066,
+            7898597600182037
+          ],
+          [
+            7898597654072662,
+            7898597654123024
+          ],
+          [
+            7898597687139122,
+            7898597687183789
+          ],
+          [
+            7898597700447973,
+            7898597700500416
+          ],
+          [
+            7898597726036188,
+            7898597726080535
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b25.resource.json",
+        "sha256": "574a66c376c4d17b9305668ffb384a05afe0a142ce89a1f8dd13cee8630034d3"
+      },
+      "responses": 128,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 4,
+      "status": "refused"
+    },
+    {
+      "block": 26,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898601943692184,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 37.31 W, 180 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794590971102799446
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19278,
+        "max_delivery_lag_ns": 17394893,
+        "max_loop_gap_ns": 18257765,
+        "max_sample_gap_ns": 31252655,
+        "recent_samples": [
+          [
+            7898716926069835,
+            7898716926102138
+          ],
+          [
+            7898716937357205,
+            7898716944673627
+          ],
+          [
+            7898716949706240,
+            7898716949740626
+          ],
+          [
+            7898716962062618,
+            7898716962104451
+          ],
+          [
+            7898716975122211,
+            7898716975164367
+          ],
+          [
+            7898716988515762,
+            7898716988555257
+          ],
+          [
+            7898717001097853,
+            7898717001140674
+          ],
+          [
+            7898717013991857,
+            7898717022019986
+          ],
+          [
+            7898717027801568,
+            7898717034423681
+          ],
+          [
+            7898717040811611,
+            7898717058206504
+          ],
+          [
+            7898717065923579,
+            7898717065961584
+          ],
+          [
+            7898717091109924,
+            7898717091155108
+          ],
+          [
+            7898717114648687,
+            7898717114690255
+          ],
+          [
+            7898717144336088,
+            7898717144379307
+          ],
+          [
+            7898717175588743,
+            7898717175637346
+          ],
+          [
+            7898717201142222,
+            7898717201194557
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b26.resource.json",
+        "sha256": "a03c783122587d3ad6fed9a584de27ec6635864e88a32bdd50f9f046f9d825ce"
+      },
+      "responses": 384,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 12,
+      "status": "refused"
+    },
+    {
+      "block": 27,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898721733190792,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.26 W, 337 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794591090892298071
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 9527,
+        "max_delivery_lag_ns": 4030367,
+        "max_loop_gap_ns": 22349746,
+        "max_sample_gap_ns": 52923619,
+        "recent_samples": [
+          [
+            7898777123045461,
+            7898777123099850
+          ],
+          [
+            7898777173688082,
+            7898777173741254
+          ],
+          [
+            7898777204231476,
+            7898777204278816
+          ],
+          [
+            7898777236764276,
+            7898777236816014
+          ],
+          [
+            7898777267908724,
+            7898777267956941
+          ],
+          [
+            7898777306876276,
+            7898777306928930
+          ],
+          [
+            7898777332147747,
+            7898777336178114
+          ],
+          [
+            7898777359210962,
+            7898777359254994
+          ],
+          [
+            7898777387046850,
+            7898777387100483
+          ],
+          [
+            7898777410447866,
+            7898777410485178
+          ],
+          [
+            7898777440736095,
+            7898777440780181
+          ],
+          [
+            7898777471399453,
+            7898777471442189
+          ],
+          [
+            7898777514343440,
+            7898777514393505
+          ],
+          [
+            7898777564318923,
+            7898777564372039
+          ],
+          [
+            7898777610274831,
+            7898777610323767
+          ],
+          [
+            7898777646484346,
+            7898777646538656
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b27.resource.json",
+        "sha256": "71b38de9c3c13da2b68323a45046ff648c18986390c65e12e0df2b676d2904f9"
+      },
+      "responses": 125,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 3,
+      "status": "refused"
+    },
+    {
+      "block": 28,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898781766681640,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.73 W, 307 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794591150925788750
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19268,
+        "max_delivery_lag_ns": 11314054,
+        "max_loop_gap_ns": 21970345,
+        "max_sample_gap_ns": 41562391,
+        "recent_samples": [
+          [
+            7898896877624136,
+            7898896877654841
+          ],
+          [
+            7898896884319604,
+            7898896884350297
+          ],
+          [
+            7898896891351502,
+            7898896891385110
+          ],
+          [
+            7898896898826240,
+            7898896898861909
+          ],
+          [
+            7898896906986397,
+            7898896907018861
+          ],
+          [
+            7898896915945012,
+            7898896915980517
+          ],
+          [
+            7898896927416444,
+            7898896927452133
+          ],
+          [
+            7898896942947066,
+            7898896942995166
+          ],
+          [
+            7898896959738536,
+            7898896959786678
+          ],
+          [
+            7898896977329795,
+            7898896977376243
+          ],
+          [
+            7898896994840963,
+            7898896994891560
+          ],
+          [
+            7898897014333644,
+            7898897025647698
+          ],
+          [
+            7898897030736327,
+            7898897030770442
+          ],
+          [
+            7898897048990724,
+            7898897049035184
+          ],
+          [
+            7898897065709700,
+            7898897065753474
+          ],
+          [
+            7898897107272091,
+            7898897107332757
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b28.resource.json",
+        "sha256": "cf292faf3dfc766c9a14c5a2978ccffdefc4524e2b4da557ac584d7fe8aae9ed"
+      },
+      "responses": 448,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 14,
+      "status": "refused"
+    },
+    {
+      "block": 29,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898901703030635,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.51 W, 337 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794591270862137713
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 9615,
+        "max_delivery_lag_ns": 1809270,
+        "max_loop_gap_ns": 40025704,
+        "max_sample_gap_ns": 60532579,
+        "recent_samples": [
+          [
+            7898956829014708,
+            7898956829050875
+          ],
+          [
+            7898956834904905,
+            7898956834939716
+          ],
+          [
+            7898956840757410,
+            7898956840789982
+          ],
+          [
+            7898956846603726,
+            7898956846637249
+          ],
+          [
+            7898956852437880,
+            7898956852459847
+          ],
+          [
+            7898956858223254,
+            7898956858253124
+          ],
+          [
+            7898956864661338,
+            7898956864690071
+          ],
+          [
+            7898956878150888,
+            7898956878189289
+          ],
+          [
+            7898956886153617,
+            7898956886195166
+          ],
+          [
+            7898956892316060,
+            7898956892339460
+          ],
+          [
+            7898956914196389,
+            7898956914265161
+          ],
+          [
+            7898956929679642,
+            7898956929738580
+          ],
+          [
+            7898956950159769,
+            7898956950216793
+          ],
+          [
+            7898956998807343,
+            7898956998890457
+          ],
+          [
+            7898957046946377,
+            7898957047031265
+          ],
+          [
+            7898957107478956,
+            7898957107749381
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b29.resource.json",
+        "sha256": "ba291544d9b2dfe77fef6a9d9d963af845066edc7a63e8bd1bde01eea480a932"
+      },
+      "responses": 261,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 8,
+      "status": "refused"
+    },
+    {
+      "block": 30,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7898963226344127,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.02 W, 180 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794591332385451652
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 19308,
+        "max_delivery_lag_ns": 15314132,
+        "max_loop_gap_ns": 19924432,
+        "max_sample_gap_ns": 93617988,
+        "recent_samples": [
+          [
+            7899077239599354,
+            7899077250202037
+          ],
+          [
+            7899077256192629,
+            7899077266236028
+          ],
+          [
+            7899077273697872,
+            7899077273734864
+          ],
+          [
+            7899077305086832,
+            7899077305133228
+          ],
+          [
+            7899077337097515,
+            7899077342246243
+          ],
+          [
+            7899077357530891,
+            7899077357578796
+          ],
+          [
+            7899077400156982,
+            7899077400207557
+          ],
+          [
+            7899077474394280,
+            7899077474445863
+          ],
+          [
+            7899077520639394,
+            7899077520689670
+          ],
+          [
+            7899077614257382,
+            7899077614320835
+          ],
+          [
+            7899077700115892,
+            7899077700172891
+          ],
+          [
+            7899077735902491,
+            7899077735953187
+          ],
+          [
+            7899077758109885,
+            7899077766236964
+          ],
+          [
+            7899077776454863,
+            7899077776490322
+          ],
+          [
+            7899077794875031,
+            7899077794913969
+          ],
+          [
+            7899077816753517,
+            7899077816799764
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b30.resource.json",
+        "sha256": "a39f423211f441673885222e0c1190914ca7bd32dc08d1fe913f2613ac6dfe31"
+      },
+      "responses": 416,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 13,
+      "status": "refused"
+    },
+    {
+      "block": 31,
+      "cpu_ns": 880000000000,
+      "environment_end": null,
+      "environment_start": {
+        "fields": "uuid,driver_version,temperature.gpu,power.draw,clocks.sm,memory.used,utilization.gpu",
+        "monotonic_ns": 7899082874810366,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "uuid, driver_version, temperature.gpu, power.draw [W], clocks.current.sm [MHz], memory.used [MiB], utilization.gpu [%]\nGPU-6721b13a-30f9-83ec-dace-ba2d9738556f, 580.105.08, 30, 35.23 W, 180 MHz, 15 MiB, 0 %\n",
+        "time_ns": 1794591452033917525
+      },
+      "gpu_ns": 220000000000,
+      "observation": {
+        "heartbeats": 9574,
+        "max_delivery_lag_ns": 14987089,
+        "max_loop_gap_ns": 19807423,
+        "max_sample_gap_ns": 99998802,
+        "recent_samples": [
+          [
+            7899136941339639,
+            7899136941365320
+          ],
+          [
+            7899136959000592,
+            7899136959044447
+          ],
+          [
+            7899136979186770,
+            7899136994173859
+          ],
+          [
+            7899136999269093,
+            7899136999305614
+          ],
+          [
+            7899137019890713,
+            7899137019933408
+          ],
+          [
+            7899137041566774,
+            7899137041628142
+          ],
+          [
+            7899137067414083,
+            7899137067452472
+          ],
+          [
+            7899137092483464,
+            7899137092523526
+          ],
+          [
+            7899137115412678,
+            7899137115459795
+          ],
+          [
+            7899137138248131,
+            7899137138284201
+          ],
+          [
+            7899137184233539,
+            7899137184282788
+          ],
+          [
+            7899137239810116,
+            7899137239860504
+          ],
+          [
+            7899137289491968,
+            7899137289547149
+          ],
+          [
+            7899137361058495,
+            7899137361109738
+          ],
+          [
+            7899137400101664,
+            7899137400154167
+          ],
+          [
+            7899137500100466,
+            7899137500202981
+          ]
+        ]
+      },
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/confirmation-b31.resource.json",
+        "sha256": "92f4b7dd556104da0dea5eb93653a2699c24a374ba1de8cf24d94679249818b4"
+      },
+      "responses": 276,
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "sessions": 8,
+      "status": "refused"
+    }
+  ],
+  "historical_cause_established": false,
+  "limitations": [
+    "Shared host and shared device; successful cohort does not prove universal availability.",
+    "Coarse environment associations are descriptive, not causal and never exclude blocks."
+  ],
+  "max_delivery_lag_ns": 17394893,
+  "max_guardian_gap_ns": 40025704,
+  "max_sample_gap_ns": 96915890,
+  "max_sample_work_ns": 86758172,
+  "status": "recorded"
+}

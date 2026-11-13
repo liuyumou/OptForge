@@ -1,5 +1,55 @@
 # Agent Instructions
 
+## MIXED2 confirmation attempts complete; coverage refused (2026-11-14)
+
+SPEC-0040 / ADR-0073 execute all 32 independent frozen blocks. Scientific status:
+incomplete-confirmation; 324 / 512 complete sessions, 10368 certified
+solves, 280 additional retained partial-session responses, 188 missing cells
+and 24 refused blocks. No scientific retry, historical pooling or regrading.
+No scoped confirmation or adoption pass; available-pair intervals are conditional
+on observed coverage and missingness may be informative. Public defaults stay exact.
+
+Two controlled defects are corrected in an isolated supervisor: drain queued
+sample messages before freshness assessment, and publish sample-start timestamps
+at the start of scanning. Cadence/freshness stay at 100 ms; an additional 100 ms
+scan-work guard covers the terminal scan. All 36 supervision contracts pass.
+The frozen cohort still has progress refusals. These do not establish a kernel,
+scheduler or memory cause. Diagnose control stalls before further confirmation;
+successful bounded probes are not production-availability evidence.
+Two CPU-only workload probes also refuse, so GPU execution is not a necessary
+trigger. Hash-only probes do not reproduce the refusal. Post-refusal runnable
+state, pending signals and unchanged scheduler counters support delayed execution
+as a hypothesis, with capture delay and incomplete stack evidence retained.
+
+Final uninstrumented native acceptance: 638 repository Rust / 742 Python and
+28 isolated Rust tests. Fresh smoke/pilot: 576 exact original-scenario comparisons.
+Independent original serial checking covers 11224 responses /
+36312 assessments / 144 distinct endpoint/tier pairs.
+All 10648 retained cohort trajectories match admission exactly,
+including partial-session outputs; every archived response byte is verified.
+Portable replay passes without the original artifacts tree. All 2018
+historical files and older handoffs/backlog entries remain exact; cleanup is empty.
+
+Independent allocation closed at 58479.574258236 CPU /
+6668.617079311 GPU seconds, including 128 closing CPU seconds.
+Final ceiling 90000 CPU / 9000 GPU includes the recorded prospective native-only
+extension. All 33 failed reservations retain full charges and sources;
+no historical funding transfer. GPUP-8 incomplete, GPUP-9 gated. No follow-on
+execution is released. Commit locally only. Report: [confirmation](docs/benchmarks/lp-mixed2-confirm.md).
+
+## MIXED2 independent confirmation authorized (2026-11-14)
+
+The user requests completing confirmation. SPEC-0040 / ADR-0073 authorize a
+separate supervision correction, fault admission and a fresh independent
+32-block cohort. Keep all earlier incomplete cohorts, sources and closed charges
+exact. Retain 100 ms sampling/freshness, original-model certificates and full
+lifecycle costs; no timeout enlargement, historical retry or default change.
+Independent 90000 CPU / 9000 GPU ceiling (including the prospective 10000 CPU
+native-admission extension), phase caps in SPEC-0040; four CPUs,
+16 GiB sampled RSS, 12 GiB device buffers and one pinned shared lease.
+Receipts: artifacts/gpup-mixed2-confirm-v1. Preserve all failures and versions.
+Commit locally only; no GPUP-9 release. Older entries retain their scope.
+
 ## MIXED2 scenario reuse delivered; confirmation stopped (2026-11-13)
 
 SPEC-0039 / ADR-0072 deliver a four-model cache with exact operator admission,

@@ -1,0 +1,424 @@
+{
+  "findings": [
+    "Both fixed hashing probes validate all 20 original model hashes for 12 rounds.",
+    "A CPU-only experiment workload reproduces the progress refusal; GPU execution is not a necessary trigger.",
+    "Whole-file versus streaming probes are fixed-order diagnostics, not randomized performance confirmation.",
+    "Post-refusal observations occur after the decision and may observe a progressing or descheduled coordinator.",
+    "Missing signal-stack output is retained as missing; it does not identify a kernel or scheduler cause."
+  ],
+  "gpu_seconds": 0,
+  "historical_cause_established": false,
+  "per_sample_trace": false,
+  "post_refusal_capture": true,
+  "production_availability_established": false,
+  "rows": [
+    {
+      "capture": null,
+      "elapsed_ns": 37673729861,
+      "guardian_observation": {
+        "heartbeats": 6793,
+        "max_delivery_lag_ns": 1035138,
+        "max_loop_gap_ns": 14620606,
+        "max_sample_gap_ns": 14669649,
+        "recent_samples": [
+          [
+            7899216736906985,
+            7899216736946310
+          ],
+          [
+            7899216742515037,
+            7899216742554201
+          ],
+          [
+            7899216748115502,
+            7899216748153293
+          ],
+          [
+            7899216753729007,
+            7899216753768767
+          ],
+          [
+            7899216759365080,
+            7899216759392853
+          ],
+          [
+            7899216764811673,
+            7899216764840491
+          ],
+          [
+            7899216770296988,
+            7899216770324551
+          ],
+          [
+            7899216775748876,
+            7899216775789032
+          ],
+          [
+            7899216781353729,
+            7899216781394476
+          ],
+          [
+            7899216786964308,
+            7899216787002020
+          ],
+          [
+            7899216792577591,
+            7899216792616328
+          ],
+          [
+            7899216798182286,
+            7899216798210686
+          ],
+          [
+            7899216803639594,
+            7899216803667791
+          ],
+          [
+            7899216809102817,
+            7899216809131152
+          ],
+          [
+            7899216814560462,
+            7899216814590328
+          ],
+          [
+            7899216820020587,
+            7899216820060600
+          ]
+        ]
+      },
+      "name": "hash-whole-v1",
+      "peak_rss_bytes": 318390272,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/hash-whole-v1.resource.json",
+        "sha256": "5c5dc9f21a7b4a41da61251deccbeaf05b76ac7718d29c73856869336ea30b4d"
+      },
+      "sample_gap_ns": 14669649,
+      "sample_work_ns": 1977072,
+      "settlement": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/hash-whole-v1.settlement.json",
+        "sha256": "cfc34a3bd988b8a13f792a7b59957b075ac885e8420c692fdbc88373720c1cef"
+      },
+      "stack": "",
+      "status": "passed"
+    },
+    {
+      "capture": null,
+      "elapsed_ns": 25620904949,
+      "guardian_observation": {
+        "heartbeats": 4637,
+        "max_delivery_lag_ns": 1216762,
+        "max_loop_gap_ns": 10009947,
+        "max_sample_gap_ns": 10067147,
+        "recent_samples": [
+          [
+            7899242628143778,
+            7899242628182638
+          ],
+          [
+            7899242633750964,
+            7899242633789842
+          ],
+          [
+            7899242639375051,
+            7899242639403765
+          ],
+          [
+            7899242644823704,
+            7899242644851306
+          ],
+          [
+            7899242650277776,
+            7899242650306556
+          ],
+          [
+            7899242655735846,
+            7899242655774726
+          ],
+          [
+            7899242661334415,
+            7899242661362790
+          ],
+          [
+            7899242666895900,
+            7899242666923437
+          ],
+          [
+            7899242672488425,
+            7899242672520497
+          ],
+          [
+            7899242678066912,
+            7899242678094348
+          ],
+          [
+            7899242683603542,
+            7899242683630591
+          ],
+          [
+            7899242689121728,
+            7899242689149749
+          ],
+          [
+            7899242694620472,
+            7899242694647810
+          ],
+          [
+            7899242700140901,
+            7899242700180715
+          ],
+          [
+            7899242705744728,
+            7899242705772028
+          ],
+          [
+            7899242711217353,
+            7899242711256292
+          ]
+        ]
+      },
+      "name": "hash-streaming-v1",
+      "peak_rss_bytes": 84271104,
+      "reason": "completed",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/hash-streaming-v1.resource.json",
+        "sha256": "69fbe282b2c26cffdba85280b9abcf08f7cc5217ec5dc9fd9d11641e0194cd28"
+      },
+      "sample_gap_ns": 10067147,
+      "sample_work_ns": 1855360,
+      "settlement": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/hash-streaming-v1.settlement.json",
+        "sha256": "c98fabfd81596508301db6cd3768fd320161c288c11b00f7f0fd88b09b32742b"
+      },
+      "stack": "",
+      "status": "passed"
+    },
+    {
+      "capture": {
+        "capture_finished_ns": 7899318783536087,
+        "decision_already_refused": true,
+        "fields": {
+          "schedstat": "8334584484 1939716842 26178\n",
+          "status": "Name:\tpython3\nUmask:\t0022\nState:\tR (running)\nTgid:\t3734510\nNgid:\t0\nPid:\t3734510\nPPid:\t3734509\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t3734510\nNSpid:\t3734510\nNSpgid:\t3734474\nNSsid:\t3734474\nVmPeak:\t   38620 kB\nVmSize:\t   38620 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   22956 kB\nVmRSS:\t   22932 kB\nRssAnon:\t   18148 kB\nRssFile:\t    4784 kB\nRssShmem:\t       0 kB\nVmData:\t   19228 kB\nVmStk:\t     132 kB\nVmExe:\t    2284 kB\nVmLib:\t    7964 kB\nVmPTE:\t     108 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t1\nSigQ:\t12/1029324\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000000004202\nCapInh:\t0000000000000000\nCapPrm:\t00000000a80425fb\nCapEff:\t00000000a80425fb\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\t00000000,00000000,00000008\nCpus_allowed_list:\t3\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t12971\nnonvoluntary_ctxt_switches:\t13207\n",
+          "syscall": "running\n",
+          "wchan": "0"
+        },
+        "guardian_pid": 3734509,
+        "pid": 3734510,
+        "reason": "lost_coordinator_heartbeat",
+        "requested_capture_sleep_seconds": 0.015,
+        "source": "/workspace/AI-Optimizer/tools/lp_confirmation_supervisor.py",
+        "time_ns": 7899318768445607
+      },
+      "elapsed_ns": 75819468689,
+      "guardian_observation": {
+        "heartbeats": 12967,
+        "max_delivery_lag_ns": 7671752,
+        "max_loop_gap_ns": 15920626,
+        "max_sample_gap_ns": 84936955,
+        "recent_samples": [
+          [
+            7899318342561479,
+            7899318342607947
+          ],
+          [
+            7899318355013093,
+            7899318355076994
+          ],
+          [
+            7899318367105971,
+            7899318374777723
+          ],
+          [
+            7899318379804172,
+            7899318386303818
+          ],
+          [
+            7899318393414420,
+            7899318393450683
+          ],
+          [
+            7899318402508842,
+            7899318409831964
+          ],
+          [
+            7899318414864292,
+            7899318418243954
+          ],
+          [
+            7899318427613333,
+            7899318427652137
+          ],
+          [
+            7899318442199488,
+            7899318442237323
+          ],
+          [
+            7899318492876839,
+            7899318492931725
+          ],
+          [
+            7899318523093903,
+            7899318523143860
+          ],
+          [
+            7899318558273691,
+            7899318558319015
+          ],
+          [
+            7899318588863844,
+            7899318588905183
+          ],
+          [
+            7899318603177384,
+            7899318603221027
+          ],
+          [
+            7899318622195275,
+            7899318622239463
+          ],
+          [
+            7899318662530261,
+            7899318662578787
+          ]
+        ]
+      },
+      "name": "cpu-library-observation-v1",
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/cpu-library-observation-v1.resource.json",
+        "sha256": "b2824616a49ab0ab36e580b40618c42d66315ce58126f562c933087e3d731974"
+      },
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "settlement": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/cpu-library-observation-v1.settlement.json",
+        "sha256": "7e7a43ded53d21d26866d977edc4f5e02a4b7b6f30c955af5f4d55a7b31a7173"
+      },
+      "stack": "",
+      "status": "refused"
+    },
+    {
+      "capture": {
+        "after_capture": {
+          "fields": {
+            "schedstat": "13228057579 1076458961 45691\n",
+            "status": "Name:\tpython3\nUmask:\t0022\nState:\tR (running)\nTgid:\t3738968\nNgid:\t0\nPid:\t3738968\nPPid:\t3738967\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t3738968\nNSpid:\t3738968\nNSpgid:\t3738966\nNSsid:\t3738966\nVmPeak:\t   38620 kB\nVmSize:\t   38620 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   22892 kB\nVmRSS:\t   22868 kB\nRssAnon:\t   18144 kB\nRssFile:\t    4724 kB\nRssShmem:\t       0 kB\nVmData:\t   19228 kB\nVmStk:\t     132 kB\nVmExe:\t    2284 kB\nVmLib:\t    7964 kB\nVmPTE:\t     108 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t1\nSigQ:\t13/1029324\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000200\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000000004202\nCapInh:\t0000000000000000\nCapPrm:\t00000000a80425fb\nCapEff:\t00000000a80425fb\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\t00000000,00000000,00000008\nCpus_allowed_list:\t3\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t22820\nnonvoluntary_ctxt_switches:\t22871\n",
+            "syscall": "running\n",
+            "wchan": "0"
+          },
+          "pid": 3738968,
+          "time_ns": 7899797268062548
+        },
+        "capture_finished_ns": 7899797268063477,
+        "decision_already_refused": true,
+        "fields": {
+          "schedstat": "13228057579 1076458961 45691\n",
+          "status": "Name:\tpython3\nUmask:\t0022\nState:\tR (running)\nTgid:\t3738968\nNgid:\t0\nPid:\t3738968\nPPid:\t3738967\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t3738968\nNSpid:\t3738968\nNSpgid:\t3738966\nNSsid:\t3738966\nVmPeak:\t   38620 kB\nVmSize:\t   38620 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   22892 kB\nVmRSS:\t   22868 kB\nRssAnon:\t   18144 kB\nRssFile:\t    4724 kB\nRssShmem:\t       0 kB\nVmData:\t   19228 kB\nVmStk:\t     132 kB\nVmExe:\t    2284 kB\nVmLib:\t    7964 kB\nVmPTE:\t     108 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t1\nSigQ:\t12/1029324\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000000004202\nCapInh:\t0000000000000000\nCapPrm:\t00000000a80425fb\nCapEff:\t00000000a80425fb\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\t00000000,00000000,00000008\nCpus_allowed_list:\t3\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t22820\nnonvoluntary_ctxt_switches:\t22871\n",
+          "syscall": "running\n",
+          "wchan": "0"
+        },
+        "guardian_pid": 3738967,
+        "pid": 3738968,
+        "reason": "lost_coordinator_heartbeat",
+        "requested_capture_sleep_seconds": 0.015,
+        "source": "/workspace/AI-Optimizer/tools/lp_confirmation_supervisor.py",
+        "time_ns": 7899797224081574
+      },
+      "capture_observation_span_ns": 43980974,
+      "elapsed_ns": 129956584670,
+      "guardian_observation": {
+        "heartbeats": 22816,
+        "max_delivery_lag_ns": 1156984,
+        "max_loop_gap_ns": 59935145,
+        "max_sample_gap_ns": 76009050,
+        "recent_samples": [
+          [
+            7899796848476812,
+            7899796848501142
+          ],
+          [
+            7899796853933879,
+            7899796853959876
+          ],
+          [
+            7899796859397912,
+            7899796859423238
+          ],
+          [
+            7899796864867286,
+            7899796864890420
+          ],
+          [
+            7899796874145606,
+            7899796874172911
+          ],
+          [
+            7899796882140199,
+            7899796882166489
+          ],
+          [
+            7899796890153528,
+            7899796890178253
+          ],
+          [
+            7899796898142522,
+            7899796898168478
+          ],
+          [
+            7899796906141909,
+            7899796906167148
+          ],
+          [
+            7899796914144599,
+            7899796914170291
+          ],
+          [
+            7899796926141273,
+            7899796926169088
+          ],
+          [
+            7899796946140835,
+            7899796946169987
+          ],
+          [
+            7899796970151869,
+            7899796970181131
+          ],
+          [
+            7899796986151940,
+            7899796986181829
+          ],
+          [
+            7899797042147979,
+            7899797042188633
+          ],
+          [
+            7899797118157029,
+            7899797118200463
+          ]
+        ]
+      },
+      "name": "cpu-library-observation-v2",
+      "peak_rss_bytes": null,
+      "reason": "lost_coordinator_heartbeat",
+      "resource": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/cpu-library-observation-v2.resource.json",
+        "sha256": "1f1032623330fa68dd4bcd5ebd46fc06fb5836e9f8fd352b082d2e4ed63aeac8"
+      },
+      "sample_gap_ns": null,
+      "sample_work_ns": null,
+      "scheduler_counters_unchanged": true,
+      "settlement": {
+        "path": "artifacts/gpup-mixed2-confirm-v1/resources/cpu-library-observation-v2.settlement.json",
+        "sha256": "545253c38571fe84cde3d0cf74d668b544c617faa2cad2336b907c7fe994e286"
+      },
+      "stack": "Current thread 0x",
+      "status": "refused"
+    }
+  ],
+  "scientific_retry": false,
+  "status": "recorded"
+}

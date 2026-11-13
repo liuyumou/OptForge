@@ -44,6 +44,12 @@ active_research_track: GPUP
 next_ready_task: GPUP-8-DISPOSITION
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-MIXED2-CONFIRM
+    title: Execute independent MIXED2 confirmation under corrected supervision
+    status: complete
+    depends_on: [GPUP-MIXED2-REUSE]
+    specification: docs/specifications/SPEC-0040-mixed2-confirm.md
+    acceptance: "All 32 frozen blocks attempted; scientific confirmation incomplete with 324 complete sessions / 10368 certified solves, 280 additional partial-session responses, 188 missing cells and 24 resource refusals. Controlled supervision fixes, 36 contracts, uninstrumented native acceptance, 576 exact smoke/pilot comparisons, original serial checking and portable replay pass. Preserve every failure/full charge and all history. No scientific retry, confirmed speedup, public default or GPUP-9 release. Report: docs/benchmarks/lp-mixed2-confirm.md."
   - id: GPUP-MIXED2-REUSE
     title: Diagnose reliability and confirm changing-model FP4 reuse
     status: complete

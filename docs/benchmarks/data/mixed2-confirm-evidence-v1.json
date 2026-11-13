@@ -1,0 +1,40 @@
+{
+  "bytes": 254098956,
+  "files": 7893,
+  "format": "tar+gzip with exact-content hardlinks",
+  "manifest_sha256": "9635c6101407c755a4030d6c605f958723431123fcc2f6ef1692cf7130595062",
+  "parts": [
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm-evidence-v1.part00",
+      "sha256": "6bc9f0b0a41fbf9007dfb8908d415bcc73ee3165370e6286c56b90cd99f87286"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm-evidence-v1.part01",
+      "sha256": "d91906c8781d87f6eee06970eea096304c3eef387fa607db89f781d21bda6bcf"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm-evidence-v1.part02",
+      "sha256": "9dfb47921202123d4f72b8f16174bfe7488e7282677926f45e443d019abf39c7"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm-evidence-v1.part03",
+      "sha256": "5924af91d15cd91fe34d131cf6dd2250c48187c6fa18c1cfbacdde967de96d00"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm-evidence-v1.part04",
+      "sha256": "7cbefbf7d9adb0003a81018aca9248c12355053e145f8895a85265318a4725ef"
+    },
+    {
+      "bytes": 2440716,
+      "path": "docs/benchmarks/data/mixed2-confirm-evidence-v1.part05",
+      "sha256": "a540c6007826529163a51f8ce8f33f4eacc0551e38d0446a3580b85d8169e3e9"
+    }
+  ],
+  "sha256": "a8c4b325256674410c870513e857b98ba4f0f08e6cf741c03a97a598c6093426",
+  "unique_files": 1504
+}
