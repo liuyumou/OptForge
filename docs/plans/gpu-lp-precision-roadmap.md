@@ -1,5 +1,37 @@
 # GPU LP Performance Research and Implementation Roadmap
 
+## MIXED2 scenario reuse delivered; confirmation stopped (2026-11-13)
+
+The [report](../benchmarks/lp-mixed2-reuse.md) retains four-model original-authority
+reuse and overlapping CPU preparation. Fresh confirmation stopped after two
+consecutive watchdog heartbeat failures: 31 complete sessions / 992 certified
+solves plus 26 certified partial-session responses. No retry; 29 later blocks
+remain unattempted and all 481 missing cells stay explicit. No confirmation pass.
+
+Generic full-session ratios are near parity; coupled 1.03–1.06x observations have
+only one or two complete pairs and no finite simultaneous bounds. Setup/checking
+consume about 80% of available strict coupled2048 FP4 session cost. Availability
+must be resolved before another independent confirmation; exact preparation and
+checking remain larger cost targets. No production/default/GPUP-9 change.
+All prior sources, results, allocations and handoffs remain exact. Final acceptance,
+portable evidence and independent accounting are linked in the report.
+
+Allocation closed at 25496.532357332 CPU / 1685.317121775 GPU seconds,
+including 128 closing CPU seconds. All 8 failed reservations retain their
+full charges and sources; cleanup is empty. Portable replay without the original
+artifacts tree passes; 1957 historical files and all older handoffs/backlog entries
+remain exact. No historical funding transfer.
+
+## MIXED2 reliability and changing-model confirmation authorized (2026-11-13)
+
+[SPEC-0039](../specifications/SPEC-0039-mixed2-reuse.md) and
+[ADR-0072](../decisions/ADR-0072-mixed2-reuse.md) authorize an independent
+reliability diagnosis and fresh scoped confirmation of larger scenario streams.
+Keep original-model checking, full setup/switch/delivery/teardown costs and the
+unchanged watchdog. The old incomplete cohort is never retried or regraded.
+New independent ceilings: 80000 CPU / 8400 GPU seconds; public defaults and
+GPUP-9 remain unchanged. No production adoption follows automatically.
+
 ## MIXED2 FP4 delivered; larger gains, confirmation incomplete (2026-11-13)
 
 The [implementation and measured report](../benchmarks/lp-mixed2-fp4.md) retain

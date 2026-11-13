@@ -1,0 +1,1467 @@
+{
+  "certificates": 992,
+  "failed_blocks": [
+    1,
+    2
+  ],
+  "missing_cells": [
+    "b01-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b01-dense-coupled-1024-certified-1e-7-native",
+    "b01-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b01-dense-coupled-1024-certified-1e-9-native",
+    "b01-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b01-dense-coupled-2048-certified-1e-7-native",
+    "b01-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b01-dense-coupled-2048-certified-1e-9-native",
+    "b01-dense-generic-1024-certified-1e-7-fp4x2",
+    "b01-dense-generic-1024-certified-1e-7-native",
+    "b01-dense-generic-1024-certified-1e-9-fp4x2",
+    "b01-dense-generic-1024-certified-1e-9-native",
+    "b01-dense-generic-2048-certified-1e-7-fp4x2",
+    "b01-dense-generic-2048-certified-1e-7-native",
+    "b01-dense-generic-2048-certified-1e-9-fp4x2",
+    "b01-dense-generic-2048-certified-1e-9-native",
+    "b02-dense-coupled-2048-certified-1e-7-native",
+    "b03-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b03-dense-coupled-1024-certified-1e-7-native",
+    "b03-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b03-dense-coupled-1024-certified-1e-9-native",
+    "b03-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b03-dense-coupled-2048-certified-1e-7-native",
+    "b03-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b03-dense-coupled-2048-certified-1e-9-native",
+    "b03-dense-generic-1024-certified-1e-7-fp4x2",
+    "b03-dense-generic-1024-certified-1e-7-native",
+    "b03-dense-generic-1024-certified-1e-9-fp4x2",
+    "b03-dense-generic-1024-certified-1e-9-native",
+    "b03-dense-generic-2048-certified-1e-7-fp4x2",
+    "b03-dense-generic-2048-certified-1e-7-native",
+    "b03-dense-generic-2048-certified-1e-9-fp4x2",
+    "b03-dense-generic-2048-certified-1e-9-native",
+    "b04-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b04-dense-coupled-1024-certified-1e-7-native",
+    "b04-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b04-dense-coupled-1024-certified-1e-9-native",
+    "b04-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b04-dense-coupled-2048-certified-1e-7-native",
+    "b04-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b04-dense-coupled-2048-certified-1e-9-native",
+    "b04-dense-generic-1024-certified-1e-7-fp4x2",
+    "b04-dense-generic-1024-certified-1e-7-native",
+    "b04-dense-generic-1024-certified-1e-9-fp4x2",
+    "b04-dense-generic-1024-certified-1e-9-native",
+    "b04-dense-generic-2048-certified-1e-7-fp4x2",
+    "b04-dense-generic-2048-certified-1e-7-native",
+    "b04-dense-generic-2048-certified-1e-9-fp4x2",
+    "b04-dense-generic-2048-certified-1e-9-native",
+    "b05-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b05-dense-coupled-1024-certified-1e-7-native",
+    "b05-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b05-dense-coupled-1024-certified-1e-9-native",
+    "b05-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b05-dense-coupled-2048-certified-1e-7-native",
+    "b05-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b05-dense-coupled-2048-certified-1e-9-native",
+    "b05-dense-generic-1024-certified-1e-7-fp4x2",
+    "b05-dense-generic-1024-certified-1e-7-native",
+    "b05-dense-generic-1024-certified-1e-9-fp4x2",
+    "b05-dense-generic-1024-certified-1e-9-native",
+    "b05-dense-generic-2048-certified-1e-7-fp4x2",
+    "b05-dense-generic-2048-certified-1e-7-native",
+    "b05-dense-generic-2048-certified-1e-9-fp4x2",
+    "b05-dense-generic-2048-certified-1e-9-native",
+    "b06-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b06-dense-coupled-1024-certified-1e-7-native",
+    "b06-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b06-dense-coupled-1024-certified-1e-9-native",
+    "b06-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b06-dense-coupled-2048-certified-1e-7-native",
+    "b06-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b06-dense-coupled-2048-certified-1e-9-native",
+    "b06-dense-generic-1024-certified-1e-7-fp4x2",
+    "b06-dense-generic-1024-certified-1e-7-native",
+    "b06-dense-generic-1024-certified-1e-9-fp4x2",
+    "b06-dense-generic-1024-certified-1e-9-native",
+    "b06-dense-generic-2048-certified-1e-7-fp4x2",
+    "b06-dense-generic-2048-certified-1e-7-native",
+    "b06-dense-generic-2048-certified-1e-9-fp4x2",
+    "b06-dense-generic-2048-certified-1e-9-native",
+    "b07-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b07-dense-coupled-1024-certified-1e-7-native",
+    "b07-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b07-dense-coupled-1024-certified-1e-9-native",
+    "b07-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b07-dense-coupled-2048-certified-1e-7-native",
+    "b07-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b07-dense-coupled-2048-certified-1e-9-native",
+    "b07-dense-generic-1024-certified-1e-7-fp4x2",
+    "b07-dense-generic-1024-certified-1e-7-native",
+    "b07-dense-generic-1024-certified-1e-9-fp4x2",
+    "b07-dense-generic-1024-certified-1e-9-native",
+    "b07-dense-generic-2048-certified-1e-7-fp4x2",
+    "b07-dense-generic-2048-certified-1e-7-native",
+    "b07-dense-generic-2048-certified-1e-9-fp4x2",
+    "b07-dense-generic-2048-certified-1e-9-native",
+    "b08-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b08-dense-coupled-1024-certified-1e-7-native",
+    "b08-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b08-dense-coupled-1024-certified-1e-9-native",
+    "b08-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b08-dense-coupled-2048-certified-1e-7-native",
+    "b08-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b08-dense-coupled-2048-certified-1e-9-native",
+    "b08-dense-generic-1024-certified-1e-7-fp4x2",
+    "b08-dense-generic-1024-certified-1e-7-native",
+    "b08-dense-generic-1024-certified-1e-9-fp4x2",
+    "b08-dense-generic-1024-certified-1e-9-native",
+    "b08-dense-generic-2048-certified-1e-7-fp4x2",
+    "b08-dense-generic-2048-certified-1e-7-native",
+    "b08-dense-generic-2048-certified-1e-9-fp4x2",
+    "b08-dense-generic-2048-certified-1e-9-native",
+    "b09-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b09-dense-coupled-1024-certified-1e-7-native",
+    "b09-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b09-dense-coupled-1024-certified-1e-9-native",
+    "b09-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b09-dense-coupled-2048-certified-1e-7-native",
+    "b09-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b09-dense-coupled-2048-certified-1e-9-native",
+    "b09-dense-generic-1024-certified-1e-7-fp4x2",
+    "b09-dense-generic-1024-certified-1e-7-native",
+    "b09-dense-generic-1024-certified-1e-9-fp4x2",
+    "b09-dense-generic-1024-certified-1e-9-native",
+    "b09-dense-generic-2048-certified-1e-7-fp4x2",
+    "b09-dense-generic-2048-certified-1e-7-native",
+    "b09-dense-generic-2048-certified-1e-9-fp4x2",
+    "b09-dense-generic-2048-certified-1e-9-native",
+    "b10-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b10-dense-coupled-1024-certified-1e-7-native",
+    "b10-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b10-dense-coupled-1024-certified-1e-9-native",
+    "b10-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b10-dense-coupled-2048-certified-1e-7-native",
+    "b10-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b10-dense-coupled-2048-certified-1e-9-native",
+    "b10-dense-generic-1024-certified-1e-7-fp4x2",
+    "b10-dense-generic-1024-certified-1e-7-native",
+    "b10-dense-generic-1024-certified-1e-9-fp4x2",
+    "b10-dense-generic-1024-certified-1e-9-native",
+    "b10-dense-generic-2048-certified-1e-7-fp4x2",
+    "b10-dense-generic-2048-certified-1e-7-native",
+    "b10-dense-generic-2048-certified-1e-9-fp4x2",
+    "b10-dense-generic-2048-certified-1e-9-native",
+    "b11-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b11-dense-coupled-1024-certified-1e-7-native",
+    "b11-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b11-dense-coupled-1024-certified-1e-9-native",
+    "b11-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b11-dense-coupled-2048-certified-1e-7-native",
+    "b11-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b11-dense-coupled-2048-certified-1e-9-native",
+    "b11-dense-generic-1024-certified-1e-7-fp4x2",
+    "b11-dense-generic-1024-certified-1e-7-native",
+    "b11-dense-generic-1024-certified-1e-9-fp4x2",
+    "b11-dense-generic-1024-certified-1e-9-native",
+    "b11-dense-generic-2048-certified-1e-7-fp4x2",
+    "b11-dense-generic-2048-certified-1e-7-native",
+    "b11-dense-generic-2048-certified-1e-9-fp4x2",
+    "b11-dense-generic-2048-certified-1e-9-native",
+    "b12-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b12-dense-coupled-1024-certified-1e-7-native",
+    "b12-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b12-dense-coupled-1024-certified-1e-9-native",
+    "b12-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b12-dense-coupled-2048-certified-1e-7-native",
+    "b12-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b12-dense-coupled-2048-certified-1e-9-native",
+    "b12-dense-generic-1024-certified-1e-7-fp4x2",
+    "b12-dense-generic-1024-certified-1e-7-native",
+    "b12-dense-generic-1024-certified-1e-9-fp4x2",
+    "b12-dense-generic-1024-certified-1e-9-native",
+    "b12-dense-generic-2048-certified-1e-7-fp4x2",
+    "b12-dense-generic-2048-certified-1e-7-native",
+    "b12-dense-generic-2048-certified-1e-9-fp4x2",
+    "b12-dense-generic-2048-certified-1e-9-native",
+    "b13-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b13-dense-coupled-1024-certified-1e-7-native",
+    "b13-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b13-dense-coupled-1024-certified-1e-9-native",
+    "b13-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b13-dense-coupled-2048-certified-1e-7-native",
+    "b13-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b13-dense-coupled-2048-certified-1e-9-native",
+    "b13-dense-generic-1024-certified-1e-7-fp4x2",
+    "b13-dense-generic-1024-certified-1e-7-native",
+    "b13-dense-generic-1024-certified-1e-9-fp4x2",
+    "b13-dense-generic-1024-certified-1e-9-native",
+    "b13-dense-generic-2048-certified-1e-7-fp4x2",
+    "b13-dense-generic-2048-certified-1e-7-native",
+    "b13-dense-generic-2048-certified-1e-9-fp4x2",
+    "b13-dense-generic-2048-certified-1e-9-native",
+    "b14-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b14-dense-coupled-1024-certified-1e-7-native",
+    "b14-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b14-dense-coupled-1024-certified-1e-9-native",
+    "b14-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b14-dense-coupled-2048-certified-1e-7-native",
+    "b14-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b14-dense-coupled-2048-certified-1e-9-native",
+    "b14-dense-generic-1024-certified-1e-7-fp4x2",
+    "b14-dense-generic-1024-certified-1e-7-native",
+    "b14-dense-generic-1024-certified-1e-9-fp4x2",
+    "b14-dense-generic-1024-certified-1e-9-native",
+    "b14-dense-generic-2048-certified-1e-7-fp4x2",
+    "b14-dense-generic-2048-certified-1e-7-native",
+    "b14-dense-generic-2048-certified-1e-9-fp4x2",
+    "b14-dense-generic-2048-certified-1e-9-native",
+    "b15-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b15-dense-coupled-1024-certified-1e-7-native",
+    "b15-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b15-dense-coupled-1024-certified-1e-9-native",
+    "b15-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b15-dense-coupled-2048-certified-1e-7-native",
+    "b15-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b15-dense-coupled-2048-certified-1e-9-native",
+    "b15-dense-generic-1024-certified-1e-7-fp4x2",
+    "b15-dense-generic-1024-certified-1e-7-native",
+    "b15-dense-generic-1024-certified-1e-9-fp4x2",
+    "b15-dense-generic-1024-certified-1e-9-native",
+    "b15-dense-generic-2048-certified-1e-7-fp4x2",
+    "b15-dense-generic-2048-certified-1e-7-native",
+    "b15-dense-generic-2048-certified-1e-9-fp4x2",
+    "b15-dense-generic-2048-certified-1e-9-native",
+    "b16-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b16-dense-coupled-1024-certified-1e-7-native",
+    "b16-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b16-dense-coupled-1024-certified-1e-9-native",
+    "b16-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b16-dense-coupled-2048-certified-1e-7-native",
+    "b16-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b16-dense-coupled-2048-certified-1e-9-native",
+    "b16-dense-generic-1024-certified-1e-7-fp4x2",
+    "b16-dense-generic-1024-certified-1e-7-native",
+    "b16-dense-generic-1024-certified-1e-9-fp4x2",
+    "b16-dense-generic-1024-certified-1e-9-native",
+    "b16-dense-generic-2048-certified-1e-7-fp4x2",
+    "b16-dense-generic-2048-certified-1e-7-native",
+    "b16-dense-generic-2048-certified-1e-9-fp4x2",
+    "b16-dense-generic-2048-certified-1e-9-native",
+    "b17-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b17-dense-coupled-1024-certified-1e-7-native",
+    "b17-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b17-dense-coupled-1024-certified-1e-9-native",
+    "b17-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b17-dense-coupled-2048-certified-1e-7-native",
+    "b17-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b17-dense-coupled-2048-certified-1e-9-native",
+    "b17-dense-generic-1024-certified-1e-7-fp4x2",
+    "b17-dense-generic-1024-certified-1e-7-native",
+    "b17-dense-generic-1024-certified-1e-9-fp4x2",
+    "b17-dense-generic-1024-certified-1e-9-native",
+    "b17-dense-generic-2048-certified-1e-7-fp4x2",
+    "b17-dense-generic-2048-certified-1e-7-native",
+    "b17-dense-generic-2048-certified-1e-9-fp4x2",
+    "b17-dense-generic-2048-certified-1e-9-native",
+    "b18-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b18-dense-coupled-1024-certified-1e-7-native",
+    "b18-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b18-dense-coupled-1024-certified-1e-9-native",
+    "b18-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b18-dense-coupled-2048-certified-1e-7-native",
+    "b18-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b18-dense-coupled-2048-certified-1e-9-native",
+    "b18-dense-generic-1024-certified-1e-7-fp4x2",
+    "b18-dense-generic-1024-certified-1e-7-native",
+    "b18-dense-generic-1024-certified-1e-9-fp4x2",
+    "b18-dense-generic-1024-certified-1e-9-native",
+    "b18-dense-generic-2048-certified-1e-7-fp4x2",
+    "b18-dense-generic-2048-certified-1e-7-native",
+    "b18-dense-generic-2048-certified-1e-9-fp4x2",
+    "b18-dense-generic-2048-certified-1e-9-native",
+    "b19-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b19-dense-coupled-1024-certified-1e-7-native",
+    "b19-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b19-dense-coupled-1024-certified-1e-9-native",
+    "b19-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b19-dense-coupled-2048-certified-1e-7-native",
+    "b19-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b19-dense-coupled-2048-certified-1e-9-native",
+    "b19-dense-generic-1024-certified-1e-7-fp4x2",
+    "b19-dense-generic-1024-certified-1e-7-native",
+    "b19-dense-generic-1024-certified-1e-9-fp4x2",
+    "b19-dense-generic-1024-certified-1e-9-native",
+    "b19-dense-generic-2048-certified-1e-7-fp4x2",
+    "b19-dense-generic-2048-certified-1e-7-native",
+    "b19-dense-generic-2048-certified-1e-9-fp4x2",
+    "b19-dense-generic-2048-certified-1e-9-native",
+    "b20-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b20-dense-coupled-1024-certified-1e-7-native",
+    "b20-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b20-dense-coupled-1024-certified-1e-9-native",
+    "b20-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b20-dense-coupled-2048-certified-1e-7-native",
+    "b20-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b20-dense-coupled-2048-certified-1e-9-native",
+    "b20-dense-generic-1024-certified-1e-7-fp4x2",
+    "b20-dense-generic-1024-certified-1e-7-native",
+    "b20-dense-generic-1024-certified-1e-9-fp4x2",
+    "b20-dense-generic-1024-certified-1e-9-native",
+    "b20-dense-generic-2048-certified-1e-7-fp4x2",
+    "b20-dense-generic-2048-certified-1e-7-native",
+    "b20-dense-generic-2048-certified-1e-9-fp4x2",
+    "b20-dense-generic-2048-certified-1e-9-native",
+    "b21-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b21-dense-coupled-1024-certified-1e-7-native",
+    "b21-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b21-dense-coupled-1024-certified-1e-9-native",
+    "b21-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b21-dense-coupled-2048-certified-1e-7-native",
+    "b21-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b21-dense-coupled-2048-certified-1e-9-native",
+    "b21-dense-generic-1024-certified-1e-7-fp4x2",
+    "b21-dense-generic-1024-certified-1e-7-native",
+    "b21-dense-generic-1024-certified-1e-9-fp4x2",
+    "b21-dense-generic-1024-certified-1e-9-native",
+    "b21-dense-generic-2048-certified-1e-7-fp4x2",
+    "b21-dense-generic-2048-certified-1e-7-native",
+    "b21-dense-generic-2048-certified-1e-9-fp4x2",
+    "b21-dense-generic-2048-certified-1e-9-native",
+    "b22-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b22-dense-coupled-1024-certified-1e-7-native",
+    "b22-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b22-dense-coupled-1024-certified-1e-9-native",
+    "b22-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b22-dense-coupled-2048-certified-1e-7-native",
+    "b22-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b22-dense-coupled-2048-certified-1e-9-native",
+    "b22-dense-generic-1024-certified-1e-7-fp4x2",
+    "b22-dense-generic-1024-certified-1e-7-native",
+    "b22-dense-generic-1024-certified-1e-9-fp4x2",
+    "b22-dense-generic-1024-certified-1e-9-native",
+    "b22-dense-generic-2048-certified-1e-7-fp4x2",
+    "b22-dense-generic-2048-certified-1e-7-native",
+    "b22-dense-generic-2048-certified-1e-9-fp4x2",
+    "b22-dense-generic-2048-certified-1e-9-native",
+    "b23-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b23-dense-coupled-1024-certified-1e-7-native",
+    "b23-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b23-dense-coupled-1024-certified-1e-9-native",
+    "b23-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b23-dense-coupled-2048-certified-1e-7-native",
+    "b23-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b23-dense-coupled-2048-certified-1e-9-native",
+    "b23-dense-generic-1024-certified-1e-7-fp4x2",
+    "b23-dense-generic-1024-certified-1e-7-native",
+    "b23-dense-generic-1024-certified-1e-9-fp4x2",
+    "b23-dense-generic-1024-certified-1e-9-native",
+    "b23-dense-generic-2048-certified-1e-7-fp4x2",
+    "b23-dense-generic-2048-certified-1e-7-native",
+    "b23-dense-generic-2048-certified-1e-9-fp4x2",
+    "b23-dense-generic-2048-certified-1e-9-native",
+    "b24-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b24-dense-coupled-1024-certified-1e-7-native",
+    "b24-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b24-dense-coupled-1024-certified-1e-9-native",
+    "b24-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b24-dense-coupled-2048-certified-1e-7-native",
+    "b24-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b24-dense-coupled-2048-certified-1e-9-native",
+    "b24-dense-generic-1024-certified-1e-7-fp4x2",
+    "b24-dense-generic-1024-certified-1e-7-native",
+    "b24-dense-generic-1024-certified-1e-9-fp4x2",
+    "b24-dense-generic-1024-certified-1e-9-native",
+    "b24-dense-generic-2048-certified-1e-7-fp4x2",
+    "b24-dense-generic-2048-certified-1e-7-native",
+    "b24-dense-generic-2048-certified-1e-9-fp4x2",
+    "b24-dense-generic-2048-certified-1e-9-native",
+    "b25-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b25-dense-coupled-1024-certified-1e-7-native",
+    "b25-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b25-dense-coupled-1024-certified-1e-9-native",
+    "b25-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b25-dense-coupled-2048-certified-1e-7-native",
+    "b25-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b25-dense-coupled-2048-certified-1e-9-native",
+    "b25-dense-generic-1024-certified-1e-7-fp4x2",
+    "b25-dense-generic-1024-certified-1e-7-native",
+    "b25-dense-generic-1024-certified-1e-9-fp4x2",
+    "b25-dense-generic-1024-certified-1e-9-native",
+    "b25-dense-generic-2048-certified-1e-7-fp4x2",
+    "b25-dense-generic-2048-certified-1e-7-native",
+    "b25-dense-generic-2048-certified-1e-9-fp4x2",
+    "b25-dense-generic-2048-certified-1e-9-native",
+    "b26-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b26-dense-coupled-1024-certified-1e-7-native",
+    "b26-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b26-dense-coupled-1024-certified-1e-9-native",
+    "b26-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b26-dense-coupled-2048-certified-1e-7-native",
+    "b26-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b26-dense-coupled-2048-certified-1e-9-native",
+    "b26-dense-generic-1024-certified-1e-7-fp4x2",
+    "b26-dense-generic-1024-certified-1e-7-native",
+    "b26-dense-generic-1024-certified-1e-9-fp4x2",
+    "b26-dense-generic-1024-certified-1e-9-native",
+    "b26-dense-generic-2048-certified-1e-7-fp4x2",
+    "b26-dense-generic-2048-certified-1e-7-native",
+    "b26-dense-generic-2048-certified-1e-9-fp4x2",
+    "b26-dense-generic-2048-certified-1e-9-native",
+    "b27-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b27-dense-coupled-1024-certified-1e-7-native",
+    "b27-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b27-dense-coupled-1024-certified-1e-9-native",
+    "b27-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b27-dense-coupled-2048-certified-1e-7-native",
+    "b27-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b27-dense-coupled-2048-certified-1e-9-native",
+    "b27-dense-generic-1024-certified-1e-7-fp4x2",
+    "b27-dense-generic-1024-certified-1e-7-native",
+    "b27-dense-generic-1024-certified-1e-9-fp4x2",
+    "b27-dense-generic-1024-certified-1e-9-native",
+    "b27-dense-generic-2048-certified-1e-7-fp4x2",
+    "b27-dense-generic-2048-certified-1e-7-native",
+    "b27-dense-generic-2048-certified-1e-9-fp4x2",
+    "b27-dense-generic-2048-certified-1e-9-native",
+    "b28-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b28-dense-coupled-1024-certified-1e-7-native",
+    "b28-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b28-dense-coupled-1024-certified-1e-9-native",
+    "b28-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b28-dense-coupled-2048-certified-1e-7-native",
+    "b28-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b28-dense-coupled-2048-certified-1e-9-native",
+    "b28-dense-generic-1024-certified-1e-7-fp4x2",
+    "b28-dense-generic-1024-certified-1e-7-native",
+    "b28-dense-generic-1024-certified-1e-9-fp4x2",
+    "b28-dense-generic-1024-certified-1e-9-native",
+    "b28-dense-generic-2048-certified-1e-7-fp4x2",
+    "b28-dense-generic-2048-certified-1e-7-native",
+    "b28-dense-generic-2048-certified-1e-9-fp4x2",
+    "b28-dense-generic-2048-certified-1e-9-native",
+    "b29-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b29-dense-coupled-1024-certified-1e-7-native",
+    "b29-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b29-dense-coupled-1024-certified-1e-9-native",
+    "b29-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b29-dense-coupled-2048-certified-1e-7-native",
+    "b29-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b29-dense-coupled-2048-certified-1e-9-native",
+    "b29-dense-generic-1024-certified-1e-7-fp4x2",
+    "b29-dense-generic-1024-certified-1e-7-native",
+    "b29-dense-generic-1024-certified-1e-9-fp4x2",
+    "b29-dense-generic-1024-certified-1e-9-native",
+    "b29-dense-generic-2048-certified-1e-7-fp4x2",
+    "b29-dense-generic-2048-certified-1e-7-native",
+    "b29-dense-generic-2048-certified-1e-9-fp4x2",
+    "b29-dense-generic-2048-certified-1e-9-native",
+    "b30-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b30-dense-coupled-1024-certified-1e-7-native",
+    "b30-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b30-dense-coupled-1024-certified-1e-9-native",
+    "b30-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b30-dense-coupled-2048-certified-1e-7-native",
+    "b30-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b30-dense-coupled-2048-certified-1e-9-native",
+    "b30-dense-generic-1024-certified-1e-7-fp4x2",
+    "b30-dense-generic-1024-certified-1e-7-native",
+    "b30-dense-generic-1024-certified-1e-9-fp4x2",
+    "b30-dense-generic-1024-certified-1e-9-native",
+    "b30-dense-generic-2048-certified-1e-7-fp4x2",
+    "b30-dense-generic-2048-certified-1e-7-native",
+    "b30-dense-generic-2048-certified-1e-9-fp4x2",
+    "b30-dense-generic-2048-certified-1e-9-native",
+    "b31-dense-coupled-1024-certified-1e-7-fp4x2",
+    "b31-dense-coupled-1024-certified-1e-7-native",
+    "b31-dense-coupled-1024-certified-1e-9-fp4x2",
+    "b31-dense-coupled-1024-certified-1e-9-native",
+    "b31-dense-coupled-2048-certified-1e-7-fp4x2",
+    "b31-dense-coupled-2048-certified-1e-7-native",
+    "b31-dense-coupled-2048-certified-1e-9-fp4x2",
+    "b31-dense-coupled-2048-certified-1e-9-native",
+    "b31-dense-generic-1024-certified-1e-7-fp4x2",
+    "b31-dense-generic-1024-certified-1e-7-native",
+    "b31-dense-generic-1024-certified-1e-9-fp4x2",
+    "b31-dense-generic-1024-certified-1e-9-native",
+    "b31-dense-generic-2048-certified-1e-7-fp4x2",
+    "b31-dense-generic-2048-certified-1e-7-native",
+    "b31-dense-generic-2048-certified-1e-9-fp4x2",
+    "b31-dense-generic-2048-certified-1e-9-native"
+  ],
+  "physical_updates": 441600,
+  "planned_sessions": 512,
+  "production_adoption": false,
+  "recoveries": {},
+  "rows": [
+    {
+      "blocks": [
+        0,
+        2
+      ],
+      "family": "dense-coupled-1024",
+      "first_16": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.056340443770109,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0465385315841955,
+          1.0661423559560224
+        ]
+      },
+      "order_medians": {
+        "0": 1.056340443770109
+      },
+      "provisional_110_lower_pass": false,
+      "saved_ms": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 269.99886200000003,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          224.551294,
+          315.44643
+        ]
+      },
+      "speedup": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.056340443770109,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0465385315841955,
+          1.0661423559560224
+        ]
+      },
+      "summaries": {
+        "fp4x2": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 540108541,
+            "setup": 3300068664,
+            "solver/audit": 625470643,
+            "solver/checker": 3510595724,
+            "solver/checkpoint": 3172032,
+            "solver/coordination": 13199928,
+            "solver/export": 8395535,
+            "solver/initial_audit": 5085,
+            "solver/iteration": 1254929572,
+            "solver/prepare_reset": 3817310,
+            "switch": 7077768,
+            "teardown": 327425689
+          },
+          "aggregate_session_ns": 9594266491,
+          "costs_ms": {
+            "audit": 9.3889025,
+            "checker": 54.98752175,
+            "checkpoint": 0.046771499999999994,
+            "coordination": 0.19765,
+            "export": 0.12685025,
+            "initial_audit": 8.075000000000001e-05,
+            "iteration": 19.49429775,
+            "prepare_reset": 0.05915125
+          },
+          "gpu_ms": 17.85639202594757,
+          "request_ms": 92.399367,
+          "session_ms": 4797.133245499999,
+          "setup_ms": 1650.0343320000002,
+          "switch_ms": 0.10847224999999999,
+          "teardown_ms": 163.71284450000002,
+          "work": [
+            600
+          ]
+        },
+        "native": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 533825917,
+            "setup": 3174757394,
+            "solver/audit": 644099576,
+            "solver/checker": 3541175131,
+            "solver/checkpoint": 3415052,
+            "solver/coordination": 12001571,
+            "solver/export": 8559969,
+            "solver/initial_audit": 6188,
+            "solver/iteration": 1878205446,
+            "solver/prepare_reset": 3475041,
+            "switch": 7334406,
+            "teardown": 327408524
+          },
+          "aggregate_session_ns": 10134264215,
+          "costs_ms": {
+            "audit": 9.445729,
+            "checker": 55.12484675,
+            "checkpoint": 0.048150250000000006,
+            "coordination": 0.17635125000000001,
+            "export": 0.127948,
+            "initial_audit": 8.025e-05,
+            "iteration": 29.276346750000002,
+            "prepare_reset": 0.05293925
+          },
+          "gpu_ms": 28.356360003352165,
+          "request_ms": 102.5003955,
+          "session_ms": 5067.1321075,
+          "setup_ms": 1587.378697,
+          "switch_ms": 0.10690050000000001,
+          "teardown_ms": 163.704262,
+          "work": [
+            600
+          ]
+        }
+      },
+      "tier": "certified-1e-7",
+      "useful_scoped_gain": false
+    },
+    {
+      "blocks": [
+        0,
+        2
+      ],
+      "family": "dense-coupled-1024",
+      "first_16": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0610657727093855,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0603751440984721,
+          1.0617564013202987
+        ]
+      },
+      "order_medians": {
+        "0": 1.0603751440984721,
+        "1": 1.0617564013202987
+      },
+      "provisional_110_lower_pass": false,
+      "saved_ms": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 349.95957899999996,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          345.679018,
+          354.24014
+        ]
+      },
+      "speedup": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0610657727093855,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0603751440984721,
+          1.0617564013202987
+        ]
+      },
+      "summaries": {
+        "fp4x2": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 606349063,
+            "setup": 3369421727,
+            "solver/audit": 813375156,
+            "solver/checker": 4628099918,
+            "solver/checkpoint": 4642125,
+            "solver/coordination": 18691563,
+            "solver/export": 10180415,
+            "solver/initial_audit": 6096,
+            "solver/iteration": 1671528989,
+            "solver/prepare_reset": 4143219,
+            "switch": 7727293,
+            "teardown": 327440957
+          },
+          "aggregate_session_ns": 11461606521,
+          "costs_ms": {
+            "audit": 12.2357525,
+            "checker": 72.28167175,
+            "checkpoint": 0.06878000000000001,
+            "coordination": 0.28199775,
+            "export": 0.15453025,
+            "initial_audit": 8.35e-05,
+            "iteration": 26.027694249999996,
+            "prepare_reset": 0.06350075000000001
+          },
+          "gpu_ms": 23.805255994200706,
+          "request_ms": 120.49788699999999,
+          "session_ms": 5730.8032605,
+          "setup_ms": 1684.7108635,
+          "switch_ms": 0.11574525,
+          "teardown_ms": 163.7204785,
+          "work": [
+            800
+          ]
+        },
+        "native": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 599902745,
+            "setup": 3254934171,
+            "solver/audit": 814914243,
+            "solver/checker": 4620408414,
+            "solver/checkpoint": 4624168,
+            "solver/coordination": 16080628,
+            "solver/export": 10015616,
+            "solver/initial_audit": 5597,
+            "solver/iteration": 2502396871,
+            "solver/prepare_reset": 3541987,
+            "switch": 7318730,
+            "teardown": 327382509
+          },
+          "aggregate_session_ns": 12161525679,
+          "costs_ms": {
+            "audit": 12.085534249999998,
+            "checker": 72.15954249999999,
+            "checkpoint": 0.067657,
+            "coordination": 0.24519400000000002,
+            "export": 0.15037075,
+            "initial_audit": 8.3e-05,
+            "iteration": 39.025564,
+            "prepare_reset": 0.05462375
+          },
+          "gpu_ms": 37.806536026299,
+          "request_ms": 132.93227325,
+          "session_ms": 6080.7628395,
+          "setup_ms": 1627.4670855,
+          "switch_ms": 0.112153,
+          "teardown_ms": 163.6912545,
+          "work": [
+            800
+          ]
+        }
+      },
+      "tier": "certified-1e-9",
+      "useful_scoped_gain": false
+    },
+    {
+      "blocks": [
+        0
+      ],
+      "family": "dense-coupled-2048",
+      "first_16": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0317460571617973,
+        "n": 1,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0317460571617973
+        ]
+      },
+      "order_medians": {
+        "0": 1.0317460571617973
+      },
+      "provisional_110_lower_pass": false,
+      "saved_ms": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 475.399808,
+        "n": 1,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          475.399808
+        ]
+      },
+      "speedup": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0317460571617973,
+        "n": 1,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0317460571617973
+        ]
+      },
+      "summaries": {
+        "fp4x2": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 463471202,
+            "setup": 6152275436,
+            "solver/audit": 1120856249,
+            "solver/checker": 5995405602,
+            "solver/checkpoint": 1795988,
+            "solver/coordination": 10848641,
+            "solver/export": 6139963,
+            "solver/initial_audit": 4613,
+            "solver/iteration": 951702458,
+            "solver/prepare_reset": 3466206,
+            "switch": 5165089,
+            "teardown": 263950516
+          },
+          "aggregate_session_ns": 14975081963,
+          "costs_ms": {
+            "audit": 33.7898275,
+            "checker": 185.57430349999998,
+            "checkpoint": 0.052033499999999996,
+            "coordination": 0.32137,
+            "export": 0.1876175,
+            "initial_audit": 0.000152,
+            "iteration": 29.740297499999997,
+            "prepare_reset": 0.10911
+          },
+          "gpu_ms": 28.01600018143654,
+          "request_ms": 266.07543050000004,
+          "session_ms": 14975.081963,
+          "setup_ms": 6152.275436,
+          "switch_ms": 0.1478835,
+          "teardown_ms": 263.950516,
+          "work": [
+            600
+          ]
+        },
+        "native": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 454348268,
+            "setup": 5894648220,
+            "solver/audit": 1121946006,
+            "solver/checker": 5965192985,
+            "solver/checkpoint": 1839722,
+            "solver/coordination": 9745777,
+            "solver/export": 6528622,
+            "solver/initial_audit": 4659,
+            "solver/iteration": 1724603512,
+            "solver/prepare_reset": 2884402,
+            "switch": 4988240,
+            "teardown": 263751358
+          },
+          "aggregate_session_ns": 15450481771,
+          "costs_ms": {
+            "audit": 33.765595000000005,
+            "checker": 185.29391199999998,
+            "checkpoint": 0.054817500000000005,
+            "coordination": 0.3100735,
+            "export": 0.195277,
+            "initial_audit": 0.000152,
+            "iteration": 53.882707499999995,
+            "prepare_reset": 0.08931249999999999
+          },
+          "gpu_ms": 52.91993573307991,
+          "request_ms": 286.8763675,
+          "session_ms": 15450.481771,
+          "setup_ms": 5894.64822,
+          "switch_ms": 0.148748,
+          "teardown_ms": 263.751358,
+          "work": [
+            600
+          ]
+        }
+      },
+      "tier": "certified-1e-7",
+      "useful_scoped_gain": false
+    },
+    {
+      "blocks": [
+        0,
+        2
+      ],
+      "family": "dense-coupled-2048",
+      "first_16": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0374214783811775,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0513908228531235,
+          1.0234521339092317
+        ]
+      },
+      "order_medians": {
+        "0": 1.0513908228531235,
+        "1": 1.0234521339092317
+      },
+      "provisional_110_lower_pass": false,
+      "saved_ms": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 666.605071,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          908.417205,
+          424.792937
+        ]
+      },
+      "speedup": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0374214783811775,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0513908228531235,
+          1.0234521339092317
+        ]
+      },
+      "summaries": {
+        "fp4x2": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 1102210190,
+            "setup": 12337009085,
+            "solver/audit": 3017581147,
+            "solver/checker": 16180058546,
+            "solver/checkpoint": 5237394,
+            "solver/coordination": 28326358,
+            "solver/export": 15625534,
+            "solver/initial_audit": 8870,
+            "solver/iteration": 2541871549,
+            "solver/prepare_reset": 6920925,
+            "switch": 27303141,
+            "teardown": 527678923
+          },
+          "aggregate_session_ns": 35789831662,
+          "costs_ms": {
+            "audit": 45.06119149999999,
+            "checker": 248.93980349999998,
+            "checkpoint": 0.07557049999999998,
+            "coordination": 0.43897475,
+            "export": 0.23631375,
+            "initial_audit": 0.00014225,
+            "iteration": 39.63918475,
+            "prepare_reset": 0.11051775
+          },
+          "gpu_ms": 37.34388796240091,
+          "request_ms": 351.9338905,
+          "session_ms": 17894.915831,
+          "setup_ms": 6168.5045425,
+          "switch_ms": 0.15183125,
+          "teardown_ms": 263.83946149999997,
+          "work": [
+            800
+          ]
+        },
+        "native": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 1074399585,
+            "setup": 12050828199,
+            "solver/audit": 2978953387,
+            "solver/checker": 15828413368,
+            "solver/checkpoint": 4803320,
+            "solver/coordination": 25285693,
+            "solver/export": 15139306,
+            "solver/initial_audit": 8939,
+            "solver/iteration": 4601723850,
+            "solver/prepare_reset": 5741895,
+            "switch": 9986647,
+            "teardown": 527757615
+          },
+          "aggregate_session_ns": 37123041804,
+          "costs_ms": {
+            "audit": 44.985722,
+            "checker": 246.36377349999998,
+            "checkpoint": 0.07137825,
+            "coordination": 0.3796355,
+            "export": 0.23036450000000003,
+            "initial_audit": 0.00014675000000000002,
+            "iteration": 71.85826825000001,
+            "prepare_reset": 0.089252
+          },
+          "gpu_ms": 70.58290404081345,
+          "request_ms": 380.96877475,
+          "session_ms": 18561.520902,
+          "setup_ms": 6025.4140995,
+          "switch_ms": 0.15054099999999998,
+          "teardown_ms": 263.8788075,
+          "work": [
+            800
+          ]
+        }
+      },
+      "tier": "certified-1e-9",
+      "useful_scoped_gain": false
+    },
+    {
+      "blocks": [
+        0,
+        2
+      ],
+      "family": "dense-generic-1024",
+      "first_16": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 0.9931669585907249,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          0.9858434630912145,
+          1.0004904540902353
+        ]
+      },
+      "order_medians": {
+        "1": 0.9931669585907249
+      },
+      "provisional_110_lower_pass": false,
+      "saved_ms": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": -19.912049500000002,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          -41.291854,
+          1.467755
+        ]
+      },
+      "speedup": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 0.9931669585907249,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          0.9858434630912145,
+          1.0004904540902353
+        ]
+      },
+      "summaries": {
+        "fp4x2": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 280581812,
+            "setup": 3498814738,
+            "solver/audit": 195456346,
+            "solver/checker": 1173663059,
+            "solver/coordination": 4281546,
+            "solver/export": 5250023,
+            "solver/initial_audit": 3136,
+            "solver/iteration": 415439063,
+            "solver/prepare_reset": 3008092,
+            "switch": 5383035,
+            "teardown": 327568932
+          },
+          "aggregate_session_ns": 5909449782,
+          "costs_ms": {
+            "audit": 2.96234225,
+            "checker": 18.390532,
+            "coordination": 0.06322950000000001,
+            "export": 0.07960525,
+            "initial_audit": 4.2749999999999996e-05,
+            "iteration": 6.4897012499999995,
+            "prepare_reset": 0.04662425
+          },
+          "gpu_ms": 5.949856027960777,
+          "request_ms": 32.121449,
+          "session_ms": 2954.724891,
+          "setup_ms": 1749.407369,
+          "switch_ms": 0.08197125,
+          "teardown_ms": 163.784466,
+          "work": [
+            200
+          ]
+        },
+        "native": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 280474497,
+            "setup": 3242650760,
+            "solver/audit": 199852519,
+            "solver/checker": 1177606218,
+            "solver/coordination": 4008546,
+            "solver/export": 5422955,
+            "solver/initial_audit": 3090,
+            "solver/iteration": 623928238,
+            "solver/prepare_reset": 2830081,
+            "switch": 5317455,
+            "teardown": 327531324
+          },
+          "aggregate_session_ns": 5869625683,
+          "costs_ms": {
+            "audit": 3.0385039999999996,
+            "checker": 18.405485,
+            "coordination": 0.0546595,
+            "export": 0.08253275,
+            "initial_audit": 4.3249999999999994e-05,
+            "iteration": 9.748503500000002,
+            "prepare_reset": 0.04405375
+          },
+          "gpu_ms": 9.449263989925385,
+          "request_ms": 35.49440125,
+          "session_ms": 2934.8128415,
+          "setup_ms": 1621.32538,
+          "switch_ms": 0.082362,
+          "teardown_ms": 163.765662,
+          "work": [
+            200
+          ]
+        }
+      },
+      "tier": "certified-1e-7",
+      "useful_scoped_gain": false
+    },
+    {
+      "blocks": [
+        0,
+        2
+      ],
+      "family": "dense-generic-1024",
+      "first_16": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0234766225042693,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0094202289370156,
+          1.037533016071523
+        ]
+      },
+      "order_medians": {
+        "0": 1.0234766225042693
+      },
+      "provisional_110_lower_pass": false,
+      "saved_ms": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 67.75065599999999,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          27.199765,
+          108.301547
+        ]
+      },
+      "speedup": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0234766225042693,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0094202289370156,
+          1.037533016071523
+        ]
+      },
+      "summaries": {
+        "fp4x2": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 320192700,
+            "setup": 3298188138,
+            "solver/audit": 210421799,
+            "solver/checker": 1181234026,
+            "solver/coordination": 5277368,
+            "solver/export": 5805333,
+            "solver/initial_audit": 3177,
+            "solver/iteration": 415744389,
+            "solver/prepare_reset": 3064026,
+            "switch": 5364601,
+            "teardown": 327583560
+          },
+          "aggregate_session_ns": 5772879117,
+          "costs_ms": {
+            "audit": 3.149886,
+            "checker": 18.444626999999997,
+            "coordination": 0.08669450000000001,
+            "export": 0.0890685,
+            "initial_audit": 4.675e-05,
+            "iteration": 6.490852,
+            "prepare_reset": 0.0467825
+          },
+          "gpu_ms": 5.950271986424923,
+          "request_ms": 33.1687375,
+          "session_ms": 2886.4395585,
+          "setup_ms": 1649.094069,
+          "switch_ms": 0.08261275,
+          "teardown_ms": 163.79178000000002,
+          "work": [
+            200
+          ]
+        },
+        "native": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 316606138,
+            "setup": 3250435435,
+            "solver/audit": 197636277,
+            "solver/checker": 1174952348,
+            "solver/coordination": 3604156,
+            "solver/export": 5399338,
+            "solver/initial_audit": 3178,
+            "solver/iteration": 624048366,
+            "solver/prepare_reset": 2909743,
+            "switch": 5423169,
+            "teardown": 327362281
+          },
+          "aggregate_session_ns": 5908380429,
+          "costs_ms": {
+            "audit": 3.0070915,
+            "checker": 18.411009,
+            "coordination": 0.05133175,
+            "export": 0.08142775,
+            "initial_audit": 4.575e-05,
+            "iteration": 9.74719175,
+            "prepare_reset": 0.04451
+          },
+          "gpu_ms": 9.448191992938519,
+          "request_ms": 36.0187175,
+          "session_ms": 2954.1902145,
+          "setup_ms": 1625.2177175000002,
+          "switch_ms": 0.08186950000000001,
+          "teardown_ms": 163.68114050000003,
+          "work": [
+            200
+          ]
+        }
+      },
+      "tier": "certified-1e-9",
+      "useful_scoped_gain": false
+    },
+    {
+      "blocks": [
+        0,
+        2
+      ],
+      "family": "dense-generic-2048",
+      "first_16": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0066878005669317,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0072879389042737,
+          1.0060876622295898
+        ]
+      },
+      "order_medians": {
+        "0": 1.0066878005669317
+      },
+      "provisional_110_lower_pass": false,
+      "saved_ms": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 63.180259,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          68.819486,
+          57.541032
+        ]
+      },
+      "speedup": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 1.0066878005669317,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.0072879389042737,
+          1.0060876622295898
+        ]
+      },
+      "summaries": {
+        "fp4x2": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 527389181,
+            "setup": 12350483919,
+            "solver/audit": 789803860,
+            "solver/checker": 4036691040,
+            "solver/coordination": 7604281,
+            "solver/export": 7581281,
+            "solver/initial_audit": 6222,
+            "solver/iteration": 634449196,
+            "solver/prepare_reset": 5435665,
+            "switch": 7889913,
+            "teardown": 527667635
+          },
+          "aggregate_session_ns": 18895002193,
+          "costs_ms": {
+            "audit": 11.2902305,
+            "checker": 61.8314915,
+            "coordination": 0.11397099999999999,
+            "export": 0.1166845,
+            "initial_audit": 9.525e-05,
+            "iteration": 9.9122135,
+            "prepare_reset": 0.087484
+          },
+          "gpu_ms": 9.340936042368412,
+          "request_ms": 91.31054900000001,
+          "session_ms": 9447.5010965,
+          "setup_ms": 6175.2419595,
+          "switch_ms": 0.12851875000000001,
+          "teardown_ms": 263.8338175,
+          "work": [
+            200
+          ]
+        },
+        "native": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 529976986,
+            "setup": 11979983961,
+            "solver/audit": 796563782,
+            "solver/checker": 4010697763,
+            "solver/coordination": 7624955,
+            "solver/export": 8072955,
+            "solver/initial_audit": 4956,
+            "solver/iteration": 1149513838,
+            "solver/prepare_reset": 4213349,
+            "switch": 7090144,
+            "teardown": 527620022
+          },
+          "aggregate_session_ns": 19021362711,
+          "costs_ms": {
+            "audit": 11.3019015,
+            "checker": 61.42743325,
+            "coordination": 0.11267625,
+            "export": 0.11995375,
+            "initial_audit": 7.6e-05,
+            "iteration": 17.954928,
+            "prepare_reset": 0.0654445
+          },
+          "gpu_ms": 17.644151970744133,
+          "request_ms": 99.218301,
+          "session_ms": 9510.6813555,
+          "setup_ms": 5989.991980500001,
+          "switch_ms": 0.10734099999999999,
+          "teardown_ms": 263.81001100000003,
+          "work": [
+            200
+          ]
+        }
+      },
+      "tier": "certified-1e-7",
+      "useful_scoped_gain": false
+    },
+    {
+      "blocks": [
+        0,
+        2
+      ],
+      "family": "dense-generic-2048",
+      "first_16": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 0.9961209358261165,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.005563750103194,
+          0.9866781215490389
+        ]
+      },
+      "order_medians": {
+        "0": 0.9961209358261165
+      },
+      "provisional_110_lower_pass": false,
+      "saved_ms": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": -36.437203499999995,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          52.767273,
+          -125.64168
+        ]
+      },
+      "speedup": {
+        "coverage": 1.0,
+        "lower": null,
+        "median": 0.9961209358261165,
+        "n": 2,
+        "rank": 0,
+        "upper": null,
+        "values": [
+          1.005563750103194,
+          0.9866781215490389
+        ]
+      },
+      "summaries": {
+        "fp4x2": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 559666931,
+            "setup": 12333487002,
+            "solver/audit": 765154735,
+            "solver/checker": 4066252514,
+            "solver/coordination": 8170752,
+            "solver/export": 7599871,
+            "solver/initial_audit": 5499,
+            "solver/iteration": 634659373,
+            "solver/prepare_reset": 5209234,
+            "switch": 7433580,
+            "teardown": 527708917
+          },
+          "aggregate_session_ns": 18915348408,
+          "costs_ms": {
+            "audit": 11.3498875,
+            "checker": 62.7687375,
+            "coordination": 0.11587025000000001,
+            "export": 0.11392225,
+            "initial_audit": 8.099999999999999e-05,
+            "iteration": 9.915801,
+            "prepare_reset": 0.08013825000000001
+          },
+          "gpu_ms": 9.340128034353256,
+          "request_ms": 93.94582,
+          "session_ms": 9457.674203999999,
+          "setup_ms": 6166.743501,
+          "switch_ms": 0.11446425,
+          "teardown_ms": 263.85445849999996,
+          "work": [
+            200
+          ]
+        },
+        "native": {
+          "aggregate_cost_ns": {
+            "delivery_and_bookkeeping": 532546995,
+            "setup": 11815031518,
+            "solver/audit": 783434845,
+            "solver/checker": 4008112220,
+            "solver/coordination": 7161538,
+            "solver/export": 7621985,
+            "solver/initial_audit": 5317,
+            "solver/iteration": 1149424468,
+            "solver/prepare_reset": 4443004,
+            "switch": 7124988,
+            "teardown": 527567123
+          },
+          "aggregate_session_ns": 18842474001,
+          "costs_ms": {
+            "audit": 11.29580075,
+            "checker": 61.3170135,
+            "coordination": 0.10003325,
+            "export": 0.11406649999999999,
+            "initial_audit": 8.125e-05,
+            "iteration": 17.959998,
+            "prepare_reset": 0.06549025
+          },
+          "gpu_ms": 17.64879997074604,
+          "request_ms": 99.182931,
+          "session_ms": 9421.237000500001,
+          "setup_ms": 5907.515759,
+          "switch_ms": 0.107684,
+          "teardown_ms": 263.7835615,
+          "work": [
+            200
+          ]
+        }
+      },
+      "tier": "certified-1e-9",
+      "useful_scoped_gain": false
+    }
+  ],
+  "schema_version": 1,
+  "sessions": 31,
+  "solves": 992,
+  "status": "incomplete-confirmation",
+  "unique_endpoints": 64
+}

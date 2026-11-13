@@ -1,0 +1,45 @@
+{
+  "bytes": 348906008,
+  "files": 8450,
+  "format": "tar+gzip with exact-content hardlinks",
+  "manifest_sha256": "77fd90e134c047c783a4bb13cd98d7de70031656269a2c4e3110b56471f377fc",
+  "parts": [
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-reuse-evidence-v1.part00",
+      "sha256": "06b3f049166bede2ab9826bd79a0d1cb5919eba9be2fabfb67c6e06abadd3d90"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-reuse-evidence-v1.part01",
+      "sha256": "00b9aa0575fa82955d519895fbd53d468b80718c6ec8e2c0402eb582ce50bea1"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-reuse-evidence-v1.part02",
+      "sha256": "c4f18d4f818b8825f1f10d4c5c25b6dbf4b0554fe808da9ad77a431485c79233"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-reuse-evidence-v1.part03",
+      "sha256": "461a87ca0d1702f9388f913a69a07d0b5bfd6618fcb343f0961b8e3b54ccd2ad"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-reuse-evidence-v1.part04",
+      "sha256": "40de971f846d5d3f77172e8d34e46212ba1b755f00a42402d01ffbeafd07a755"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-reuse-evidence-v1.part05",
+      "sha256": "c48acd0c89527d0293ab83eb9df90538c96dda1bbb51ff025f7262f774de9550"
+    },
+    {
+      "bytes": 46916120,
+      "path": "docs/benchmarks/data/mixed2-reuse-evidence-v1.part06",
+      "sha256": "540b0751bf0bbb6f9ada76b7f23fbcbd28ece38f7c28887099170155420be4fb"
+    }
+  ],
+  "sha256": "ce61c97b47fad21d15ee277e6095b28c7e285ea3d181b83b6f912a1fbfdef5a0",
+  "unique_files": 2459
+}

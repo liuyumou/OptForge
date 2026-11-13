@@ -1,0 +1,19 @@
+{
+  "bytes": 101307932,
+  "format": "tar+gzip ordered responses",
+  "parts": [
+    {
+      "path": "docs/benchmarks/data/mixed2-reuse-records-v1.part00",
+      "sha256": "98f6540c421a59a23c588511ccca3ad5e5ae2c893b4444b336a657bb8e01cdcb"
+    },
+    {
+      "path": "docs/benchmarks/data/mixed2-reuse-records-v1.part01",
+      "sha256": "144d840adc777a6ede285cae03275faae0f6835da9d2f2526cb3ce52594a64a5"
+    },
+    {
+      "path": "docs/benchmarks/data/mixed2-reuse-records-v1.part02",
+      "sha256": "3d105f2f5d96caaf2d87ec6c5e1d1c905e997409e3f61ee13c45e75ba4ae7ad6"
+    }
+  ],
+  "sha256": "1a0839d9ffd8b21faf9ffe9f805d2fa1901f235beded2fc32fe9f93e6151a844"
+}

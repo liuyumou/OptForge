@@ -1,5 +1,67 @@
 # Agent Instructions
 
+## MIXED2 scenario reuse delivered; confirmation stopped (2026-11-13)
+
+SPEC-0039 / ADR-0072 deliver a four-model cache with exact operator admission,
+original-model checker ownership, bounds/objective switching and FP64 reset per
+solve. CPU preparation overlaps checker startup. Both native and FP4 receive
+these changes; the numerical solve body and CUDA image remain exact.
+
+Fresh confirmation stopped after two consecutive missed coordinator heartbeats
+at unchanged 100 ms. Block 0 passed; blocks 1 and 2 retain full 800 CPU / 200 GPU
+charges each. No retry. Retain 31 complete sessions / 992 certified solves and
+26 additional certified response files without complete lifecycle receipts.
+All 1018 responses remain visible; 29 later blocks were never launched. The
+481 missing session cells remain explicit. No confirmation or adoption pass.
+
+Only one or two complete pairs remain per comparison, with no finite simultaneous
+bounds. Generic full sessions are near parity; coupled ratios 1.03–1.06x are
+strictly descriptive. Setup plus independent checking consume about 80% of the
+available strict coupled2048 FP4 session cost. Admission preparation fell from
+roughly 10–11 to 6.0–6.6 seconds after CPU overlap, an exploratory version
+comparison. Four changing RHS/objective scenarios are constructed streams,
+not production traces or warm starts. Public defaults remain unchanged.
+
+CPU pinning did not eliminate the heartbeat problem. Sixteen sanitizer process
+probes and nine later CPU preparations did not reproduce a failure; the earlier
+exit 11 and failed heartbeat instants remain unassigned. No production-readiness
+claim. Resolve availability before another independent confirmation; retain
+exact checker/preparation costs as future targets. No follow-on work is released.
+
+Final native gate: 638 repository Rust / 706 Python; 28 isolated Rust tests.
+Original serial checking covers 1778 admission/study responses, 5820 assessment
+requests and 197 distinct endpoint/tier assessments. Current host admission:
+130 device cases / 2304 rational outputs, 160 scenario/fresh comparisons,
+seven invalid cases, four recovery comparisons and 22 process cases. Four full
+97-case sanitizers and four bounded scenario-switch sanitizer suites pass.
+All failures, source versions, original inputs and partial files are preserved.
+
+Independent 80000 CPU / 8400 GPU ceiling; four CPUs, 16 GiB sampled RSS,
+12 GiB device buffers, one pinned shared lease and unchanged supervisor.
+Final charges, exact historical preservation and portable replay are recorded
+in [the report](docs/benchmarks/lp-mixed2-reuse.md). Historical allocations stay
+closed. GPUP-8 incomplete, GPUP-8-DISPOSITION separately ready, GPUP-9 gated.
+Commit locally only. Older entries retain their historical scope.
+
+Allocation closed at 25496.532357332 CPU / 1685.317121775 GPU seconds,
+including 128 closing CPU seconds. All 8 failed reservations retain their
+full charges and sources; cleanup is empty. Portable replay without the original
+artifacts tree passes; 1957 historical files and all older handoffs/backlog entries
+remain exact. No historical funding transfer.
+
+## MIXED2 reliability and changing-model confirmation authorized (2026-11-13)
+
+The user requests proceeding with reliability diagnosis and fresh scoped
+confirmation. SPEC-0039 / ADR-0072 govern a separate four-scenario reuse executor,
+CPU placement diagnosis with the unchanged watchdog, original-model checking,
+full lifecycle costs, prospective independent 32-block confirmation and exact
+historical preservation. Old confirmation stays incomplete; no scientific retry.
+New independent 80000 CPU / 8400 GPU ceiling and phase caps in SPEC-0039;
+four CPUs, 16 GiB sampled RSS, 12 GiB device buffers, one pinned shared lease.
+Receipts: artifacts/gpup-mixed2-reuse-v1. Preserve all failures and source versions.
+No public default, GPUP-9 release, push or publication. Commit locally only.
+Older entries retain their historical scope.
+
 ## MIXED2 FP4 implemented; larger gains, confirmation incomplete (2026-11-13)
 
 SPEC-0038 / ADR-0071 deliver isolated normal-E2M1 tensor increments, FP64 state

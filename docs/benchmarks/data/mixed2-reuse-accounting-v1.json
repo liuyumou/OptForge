@@ -1,0 +1,61 @@
+{
+  "cleanup_empty": true,
+  "closing_administration_cpu_seconds": 128,
+  "cpu_caps_seconds": {
+    "acceptance": 12000,
+    "cleanup": 2000,
+    "confirmation": 27200,
+    "diagnosis": 4000,
+    "implementation": 12000,
+    "native": 16000,
+    "reporting": 6800
+  },
+  "cpu_ns": {
+    "acceptance": 6572608706904,
+    "cleanup": 257677629552,
+    "confirmation": 2169557415340,
+    "diagnosis": 2251695840132,
+    "implementation": 4152841103964,
+    "native": 9367518683932,
+    "reporting": 724632977508
+  },
+  "cpu_seconds": 25496.532357332,
+  "evidence": {
+    "path": "docs/benchmarks/data/mixed2-reuse-evidence-v1.json",
+    "sha256": "65585eb8b9f1f0f08676a232ce390b5d7da8cdc3c41715e02376c5d5eaa94f58"
+  },
+  "evidence_verification": {
+    "path": "docs/benchmarks/data/mixed2-reuse-evidence-check-v1.json",
+    "sha256": "4ff273cf13775139771fe7b762f95604710a8419f7f8d727f4b352c7758255cd"
+  },
+  "failed_cpu_seconds": 13320.0,
+  "failed_gpu_seconds": 730.0,
+  "failed_jobs": 8,
+  "failed_reservations": [
+    "confirmation-b01",
+    "confirmation-b02",
+    "models-v1",
+    "models-v2",
+    "native-v1",
+    "scenario-large-v1",
+    "scenario-racecheck-v2",
+    "serial-admission-v2"
+  ],
+  "full_receipts": {
+    "path": "docs/benchmarks/data/mixed2-reuse-resources-v1.json.gz",
+    "sha256": "77af39d8b6354917b9d8b711ebaa4ace15467b808df5bd13dc2cc2cf443cc410"
+  },
+  "gpu_caps_seconds": {
+    "acceptance": 1600,
+    "confirmation": 6600,
+    "diagnosis": 200
+  },
+  "gpu_ns": {
+    "acceptance": 1062744263450,
+    "confirmation": 541515694859,
+    "diagnosis": 81057163466
+  },
+  "gpu_seconds": 1685.317121775,
+  "historical_transfers": 0,
+  "status": "closed"
+}

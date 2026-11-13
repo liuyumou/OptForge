@@ -44,6 +44,12 @@ active_research_track: GPUP
 next_ready_task: GPUP-8-DISPOSITION
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-MIXED2-REUSE
+    title: Diagnose reliability and confirm changing-model FP4 reuse
+    status: complete
+    depends_on: [GPUP-MIXED2-FP4]
+    specification: docs/specifications/SPEC-0039-mixed2-reuse.md
+    acceptance: "SPEC-0039 / ADR-0072 implementation and bounded evaluation delivered; confirmation incomplete after two consecutive supervisor heartbeat failures. Four original-authority scenarios with identical operator, CPU preparation overlap, exact switching/reset and unchanged numerical solve/image. Retain 31 complete sessions / 992 certified solves plus 26 certified partial-session files; 29 blocks unattempted, 481 missing cells, no retry or confirmation pass. Independent serial checking, current-host device/four-sanitizer admission, native acceptance, portable evidence and historical preservation pass. No public default or GPUP-9 release. Report: docs/benchmarks/lp-mixed2-reuse.md."
   - id: GPUP-MIXED2-FP4
     title: Implement and evaluate FP4 tensor increments with high-precision authority
     status: complete
