@@ -1,5 +1,58 @@
 # GPU LP Performance Research and Implementation Roadmap
 
+## MIXED2 confirmation complete under revised sampling policy (2026-11-14)
+
+SPEC-0041 / ADR-0074 complete all 32 independent frozen blocks, 512 sessions and
+16384 original-model certified solves. Scoped value passes 5/8 comparisons;
+full results, uncertainty, order sensitivity and cost partitions are in the report.
+No historical pooling, retry, regrading or public-default change.
+Coupled session speedups are 1.0367–1.0651x; generic1024/1e-9
+also passes, while the other generic value comparisons remain unestablished.
+No comparison passes the provisional 1.10x lower bound. Strict coupled2048 GPU
+time falls 70.530 -> 37.345 ms/request with the same 800 updates;
+complete-session medians are 18.772 -> 17.898 seconds.
+FP4 independent checking occupies about 46% and setup 34% of complete cost.
+The useful next targets are exact checking and preparation; no follow-on study
+is released by this confirmation. All unfavorable and sensitivity results remain.
+
+The user authorizes revising the 100 ms resource rule. A one-second finite hard
+sampling/freshness/scan bound retains a 5–10 ms target and all 100 ms exceedances.
+All 39 supervisor contracts pass, including beyond-bound refusal/cleanup. Exact
+source comparison preserves other enforcement. Sampled RSS is not a hard memory
+enclosure. CPU phase observations support limited margin at 100 ms but do not
+establish the cause of historical stalls; detailed findings and limits are retained.
+
+Full native acceptance: 638 repository Rust / 781 Python plus 28 isolated Rust.
+Fresh smoke and three full-size pilots compare 1600 outputs exactly. All 16384
+scientific trajectories match admission; independent serial checking covers
+17984 responses / 58448 assessments /
+144 distinct endpoint/tier pairs. Portable replay passes; all
+2082 historical files and prior handoffs/backlog entries remain exact.
+
+Independent allocation closed at 31824.747879588 CPU /
+5192.117661357 GPU seconds, including 128 closing CPU seconds.
+All 1 failed reservations/full charges/sources are retained and cleanup is empty. No funding
+transfer, GPUP-8 completion or GPUP-9 release. Commit locally only.
+Report: [complete confirmation](../benchmarks/lp-mixed2-confirm2.md).
+
+## MIXED2 complete confirmation remains active (2026-11-14)
+
+The user explicitly keeps the goal "Complete the confirmation" active and permits
+changing or waiving an inappropriate 100 ms limit. SPEC-0041 / ADR-0074 authorize
+continued availability diagnosis and a new independently frozen complete cohort.
+Measure actual scan/wait delays before selecting a prospective finite bound;
+retain old 100 ms exceedances, sampled-memory limitations and all old refusals.
+The 512-session / 16384-solve endpoint is unchanged. A valid negative performance
+decision completes confirmation; missing coverage does not. No historical retry,
+pooling, public default or GPUP-9 release.
+
+Independent 96000 CPU / conditional 12000 GPU seconds; phase caps in SPEC-0041,
+four CPUs, 16 GiB sampled RSS, 12 GiB device buffers and one pinned shared lease.
+Receipts: artifacts/gpup-mixed2-confirm2-v1. Stronger operational admission,
+source-bound native/device checks and frozen criteria precede the new cohort.
+Preserve all failures and full charges; older allocations stay closed. Keep this
+goal active until the full confirmation is verified. Commit locally only.
+
 ## MIXED2 confirmation attempts complete; coverage refused (2026-11-14)
 
 SPEC-0040 / ADR-0073 execute all 32 independent frozen blocks. Scientific status:

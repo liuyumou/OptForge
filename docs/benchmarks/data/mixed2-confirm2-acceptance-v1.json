@@ -1,0 +1,56 @@
+{
+  "all_original_endpoint_and_certificate_bytes_match_admission": true,
+  "analysis": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-analysis-v1.json",
+    "sha256": "1c067897ab3dd4073e66230600f8486ac15ac1a0e96f7b3eabd8e65e84078161"
+  },
+  "archive": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-records-v1.json",
+    "sha256": "68a99c53f7e4c6f93ef34055e115a86c030ef9b69b96e3d8c8f77ea9b857ab2e"
+  },
+  "binary": {
+    "path": "artifacts/gpup-mixed2-reuse-v1/build-v2/executor",
+    "sha256": "4fde7896e07c7b01554d0ad9e2563f3e8436785ff41b6b51cbdb7f7842a30b34"
+  },
+  "cleanup_empty": true,
+  "evidence": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.json",
+    "sha256": "ae1f800771a891f1c94b928d4b945c48db0382e3319bb0db39133891cbd6d2c9"
+  },
+  "exact_trajectories": {
+    "path": "artifacts/gpup-mixed2-confirm2-v1/exact-final-v1.json",
+    "sha256": "7715863ba8a67a6069a7560aa51b4ecc7229d3a48b45fc528463e99e88737eee"
+  },
+  "historical_files": 2082,
+  "history": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-history-v1.json",
+    "sha256": "422ca13d1cfc512d9825c409634f10abcc7afbe089778703da475bf9a06b2337"
+  },
+  "image": {
+    "path": "artifacts/gpup-mixed2-fp4-v1/build-v8/mixed.cubin",
+    "sha256": "40234ea66c9d781b2da03be2172f7699fcef375c093490f33e546db76c86cff0"
+  },
+  "isolated_rust_tests": 28,
+  "native": {
+    "path": "artifacts/gpup-mixed2-confirm2-v1/resources/native-v1.settlement.json",
+    "sha256": "7f4ad42954e719061287a48e9876d14a4253517448dc8e2be4d9bdd95c0328e2"
+  },
+  "portable_replay": true,
+  "portable_replay_receipt": {
+    "path": "artifacts/gpup-mixed2-confirm2-v1/portable-v1.json",
+    "sha256": "a3776d73901eac72af0e9764fe6598798f2b23537803fa322bc8e951678b7156"
+  },
+  "production_adoption": false,
+  "python_tests": 781,
+  "rust_tests": 638,
+  "scientific_confirmation": "complete-confirmation",
+  "serial": {
+    "path": "artifacts/gpup-mixed2-confirm2-v1/serial-final-v1/result.json",
+    "sha256": "3a79ba772f988b859066a7467d23fca56113d0d951af754183da759f9a6ec746"
+  },
+  "serial_requests": 58448,
+  "serial_responses": 17984,
+  "serial_unique": 144,
+  "status": "passed",
+  "supervisor_contracts": 39
+}

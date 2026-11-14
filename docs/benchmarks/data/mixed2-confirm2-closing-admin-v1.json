@@ -1,0 +1,21 @@
+{
+  "acceptance": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-acceptance-v1.json",
+    "sha256": "8df5623f2ae3d9144eda2f793096e27740e5b4b5f3051dbb8416d1a421cf9ffe"
+  },
+  "accounting": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-accounting-v1.json",
+    "sha256": "5419504102d6e67e005841adde7bfbe459b7c3152e9eba88518e0f1afbd4912b"
+  },
+  "closed_resource_files": 402,
+  "closing_cpu_seconds_charged": 128,
+  "exact_closing_sources": true,
+  "historical_files": 2082,
+  "metadata_and_links": true,
+  "resources": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-resources-v1.json.gz",
+    "sha256": "9a77aa6e77f0922560a96d989c10d111fbe8c4625f5d0d1fcb423b826d780530"
+  },
+  "scope": "Closing records, historical preservation and metadata verified before final Git update; full closing elapsed checked after commit.",
+  "status": "passed"
+}

@@ -44,6 +44,12 @@ active_research_track: GPUP
 next_ready_task: GPUP-8-DISPOSITION
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-MIXED2-CONFIRM2
+    title: Complete independent MIXED2 confirmation after availability diagnosis
+    status: complete
+    depends_on: [GPUP-MIXED2-CONFIRM]
+    specification: docs/specifications/SPEC-0041-mixed2-confirm2.md
+    acceptance: "All 32 frozen blocks, 512 complete sessions and 16384 certified solves; scoped value passes 5/8 comparisons. Revised finite one-second sampling policy retains all 100 ms exceedances and sampled-memory limitations. 39 supervisor contracts, full native checks, three full-size pilots, exact trajectories, independent serial checking, portable replay and historical preservation pass. Old results/charges remain exact. No public default or GPUP-9 release. Report: docs/benchmarks/lp-mixed2-confirm2.md."
   - id: GPUP-MIXED2-CONFIRM
     title: Execute independent MIXED2 confirmation under corrected supervision
     status: complete

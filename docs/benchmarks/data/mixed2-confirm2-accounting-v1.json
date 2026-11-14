@@ -1,0 +1,52 @@
+{
+  "cleanup_empty": true,
+  "closing_administration_cpu_seconds": 128,
+  "cpu_caps_seconds": {
+    "acceptance": 8000,
+    "cleanup": 2000,
+    "confirmation": 40000,
+    "diagnosis": 14000,
+    "implementation": 8000,
+    "native": 12000,
+    "reporting": 12000
+  },
+  "cpu_ns": {
+    "acceptance": 2894778073172,
+    "cleanup": 193248427996,
+    "confirmation": 18647858603200,
+    "diagnosis": 1100195749736,
+    "implementation": 555892128356,
+    "native": 1603413621152,
+    "reporting": 6829361275976
+  },
+  "cpu_seconds": 31824.747879588,
+  "evidence": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.json",
+    "sha256": "ae1f800771a891f1c94b928d4b945c48db0382e3319bb0db39133891cbd6d2c9"
+  },
+  "evidence_verification": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-evidence-check-v1.json",
+    "sha256": "5970013d48f6d47f6cd3b41c143052fb865d2cd0bd9af80931ea5c73d0088c09"
+  },
+  "failed_cpu_seconds": 960.0,
+  "failed_gpu_seconds": 0.0,
+  "failed_jobs": 1,
+  "failed_reservations": [
+    "exact-final-v1"
+  ],
+  "full_receipts": {
+    "path": "docs/benchmarks/data/mixed2-confirm2-resources-v1.json.gz",
+    "sha256": "9a77aa6e77f0922560a96d989c10d111fbe8c4625f5d0d1fcb423b826d780530"
+  },
+  "gpu_caps_seconds": {
+    "acceptance": 1800,
+    "confirmation": 10200
+  },
+  "gpu_ns": {
+    "acceptance": 558252608451,
+    "confirmation": 4633865052906
+  },
+  "gpu_seconds": 5192.117661357,
+  "historical_transfers": 0,
+  "status": "closed"
+}
