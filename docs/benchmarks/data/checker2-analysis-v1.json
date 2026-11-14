@@ -1,0 +1,3529 @@
+{
+  "comparisons": [
+    {
+      "baseline_session_ms": 4900.910575,
+      "candidate_session_ms": 3884.7654114999996,
+      "complete_pairs": 16,
+      "family": "dense-coupled-1024",
+      "lane": "fp4x2",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 4900.910575,
+          "candidate_session_ms": 3884.7654114999996,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1052.7216065,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              894.762204,
+              1148.676561,
+              1119.249769,
+              1069.84488,
+              1016.951185,
+              1069.337571,
+              945.772048,
+              1036.105642
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2709886668033035,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.227937982061288,
+              1.3017266297402614,
+              1.2968929326277896,
+              1.2817900960490793,
+              1.2610416223588528,
+              1.2753583600051226,
+              1.2433627447841005,
+              1.2666189736014843
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 4890.6507385,
+          "candidate_session_ms": 3900.1901774999997,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1007.8940709999999,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1053.347892,
+              906.589683,
+              1099.143339,
+              819.409774,
+              846.50204,
+              976.607672,
+              1069.90073,
+              1039.18047
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2597598922165936,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2724476824872986,
+              1.2307736869854704,
+              1.285669362908588,
+              1.2059187782950536,
+              1.212761665645442,
+              1.2476633470109766,
+              1.2763244079725447,
+              1.2718564374222106
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 1772.782444,
+          "session_count": 16,
+          "setup_median_ms": 1724.479142,
+          "totals_ns": {
+            "audit": 5078206298,
+            "checker": 28387993981,
+            "checkpoint": 26773423,
+            "complete_session_ns": 78199846918,
+            "coordination": 117365561,
+            "export": 66060638,
+            "gpu_ns": 9158393441.319466,
+            "initial_audit": 43690,
+            "iteration": 10039779288,
+            "prepare_reset": 30641494,
+            "setup_ns": 27450752306,
+            "teardown_ns": 2619509549
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 925.7203870000001,
+          "session_count": 16,
+          "setup_median_ms": 1599.216392,
+          "totals_ns": {
+            "audit": 4742588086,
+            "checker": 14816413430,
+            "checkpoint": 23050093,
+            "complete_session_ns": 62088465458,
+            "coordination": 96139577,
+            "export": 63071183,
+            "gpu_ns": 9142610531.330109,
+            "initial_audit": 44396,
+            "iteration": 10006502722,
+            "prepare_reset": 30400185,
+            "setup_ns": 25534562544,
+            "teardown_ns": 2619337008
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 846.50204,
+        "median": 1037.643056,
+        "n": 16,
+        "rank": 2,
+        "upper": 1119.249769,
+        "values": [
+          1053.347892,
+          894.762204,
+          1148.676561,
+          906.589683,
+          1099.143339,
+          1119.249769,
+          1069.84488,
+          1016.951185,
+          819.409774,
+          1069.337571,
+          846.50204,
+          945.772048,
+          976.607672,
+          1036.105642,
+          1069.90073,
+          1039.18047
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.212761665645442,
+        "median": 1.2692377055118476,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.2968929326277896,
+        "values": [
+          1.2724476824872986,
+          1.227937982061288,
+          1.3017266297402614,
+          1.2307736869854704,
+          1.285669362908588,
+          1.2968929326277896,
+          1.2817900960490793,
+          1.2610416223588528,
+          1.2059187782950536,
+          1.2753583600051226,
+          1.212761665645442,
+          1.2433627447841005,
+          1.2476633470109766,
+          1.2666189736014843,
+          1.2763244079725447,
+          1.2718564374222106
+        ]
+      },
+      "tier": "certified-1e-7"
+    },
+    {
+      "baseline_session_ms": 5136.2712945,
+      "candidate_session_ms": 4115.881098,
+      "complete_pairs": 16,
+      "family": "dense-coupled-1024",
+      "lane": "native",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 5140.754139000001,
+          "candidate_session_ms": 4111.4322605,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1026.8765885,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1010.339018,
+              969.126389,
+              1092.233316,
+              913.428186,
+              1046.178231,
+              1026.225772,
+              1048.6923,
+              1027.527405
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2497615415082057,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2493810220347827,
+              1.2323135463216783,
+              1.2665611864340252,
+              1.217837561881347,
+              1.25409715635058,
+              1.2494153614511598,
+              1.2554455313994277,
+              1.2501077215652519
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 5105.822608500001,
+          "candidate_session_ms": 4132.7866755,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 970.9737465000001,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1017.972228,
+              929.558999,
+              911.171135,
+              972.220388,
+              1003.082809,
+              964.893091,
+              999.508031,
+              969.727105
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2372733363651605,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.245766588518477,
+              1.2209491784890767,
+              1.216554272464725,
+              1.2386001547969117,
+              1.2462142593808447,
+              1.2337438721657474,
+              1.2415682524285288,
+              1.2359465179334093
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 1774.701754,
+          "session_count": 16,
+          "setup_median_ms": 1654.6818560000002,
+          "totals_ns": {
+            "audit": 5034441947,
+            "checker": 28403850892,
+            "checkpoint": 24925811,
+            "complete_session_ns": 81941967486,
+            "coordination": 91562289,
+            "export": 67277949,
+            "gpu_ns": 14520004676.818848,
+            "initial_audit": 49461,
+            "iteration": 15019657372,
+            "prepare_reset": 27703630,
+            "setup_ns": 26371175600,
+            "teardown_ns": 2619354614
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 930.7140455,
+          "session_count": 16,
+          "setup_median_ms": 1515.6937965,
+          "totals_ns": {
+            "audit": 4900775393,
+            "checker": 14888953599,
+            "checkpoint": 22617711,
+            "complete_session_ns": 66040083083,
+            "coordination": 81348834,
+            "export": 63519553,
+            "gpu_ns": 14515312967.717648,
+            "initial_audit": 43421,
+            "iteration": 15002892694,
+            "prepare_reset": 28733067,
+            "setup_ns": 24343626408,
+            "teardown_ns": 2619434278
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 913.428186,
+        "median": 1001.2954199999999,
+        "n": 16,
+        "rank": 2,
+        "upper": 1048.6923,
+        "values": [
+          1017.972228,
+          1010.339018,
+          929.558999,
+          969.126389,
+          1092.233316,
+          911.171135,
+          972.220388,
+          913.428186,
+          1003.082809,
+          1046.178231,
+          1026.225772,
+          1048.6923,
+          964.893091,
+          999.508031,
+          969.727105,
+          1027.527405
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.217837561881347,
+        "median": 1.243667420473503,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.2554455313994277,
+        "values": [
+          1.245766588518477,
+          1.2493810220347827,
+          1.2209491784890767,
+          1.2323135463216783,
+          1.2665611864340252,
+          1.216554272464725,
+          1.2386001547969117,
+          1.217837561881347,
+          1.2462142593808447,
+          1.25409715635058,
+          1.2494153614511598,
+          1.2554455313994277,
+          1.2337438721657474,
+          1.2415682524285288,
+          1.2359465179334093,
+          1.2501077215652519
+        ]
+      },
+      "tier": "certified-1e-7"
+    },
+    {
+      "baseline_session_ms": 5799.278685,
+      "candidate_session_ms": 4537.8946805,
+      "complete_pairs": 16,
+      "family": "dense-coupled-1024",
+      "lane": "fp4x2",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 5789.8014490000005,
+          "candidate_session_ms": 4500.8312485,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1294.075241,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1195.433715,
+              1322.215423,
+              1332.191026,
+              1155.076374,
+              1307.479798,
+              1280.670684,
+              1180.522275,
+              1382.348926
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2843597639624347,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2661157709557165,
+              1.2954716047274157,
+              1.2993509995377994,
+              1.2519003989997037,
+              1.2870159498296745,
+              1.2817035780951949,
+              1.261785282053375,
+              1.3112702390589763
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 5807.024890500001,
+          "candidate_session_ms": 4553.5629995,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1256.965109,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1309.191465,
+              1221.403851,
+              1331.083859,
+              1186.262341,
+              -121.021978,
+              1296.678949,
+              1283.179696,
+              1230.750522
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2766861683945159,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.289028645801043,
+              1.2673324315108443,
+              1.2945583744447076,
+              1.2602616062774004,
+              0.9795654917885105,
+              1.285036715006535,
+              1.2847603381336192,
+              1.2686119986554123
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 2334.914911,
+          "session_count": 16,
+          "setup_median_ms": 1700.313676,
+          "totals_ns": {
+            "audit": 6652268923,
+            "checker": 37401889447,
+            "checkpoint": 38888813,
+            "complete_session_ns": 92683375347,
+            "coordination": 155017181,
+            "export": 80761156,
+            "gpu_ns": 12198394913.13696,
+            "initial_audit": 52211,
+            "iteration": 13378422247,
+            "prepare_reset": 34227007,
+            "setup_ns": 27131510848,
+            "teardown_ns": 2619925012
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 1181.705547,
+          "session_count": 16,
+          "setup_median_ms": 1628.631879,
+          "totals_ns": {
+            "audit": 6416321875,
+            "checker": 18908960671,
+            "checkpoint": 34080190,
+            "complete_session_ns": 73789908421,
+            "coordination": 133869166,
+            "export": 75756920,
+            "gpu_ns": 12196652323.246002,
+            "initial_audit": 50075,
+            "iteration": 13370390466,
+            "prepare_reset": 34278555,
+            "setup_ns": 27232441486,
+            "teardown_ns": 2618978758
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 1155.076374,
+        "median": 1281.92519,
+        "n": 16,
+        "rank": 2,
+        "upper": 1332.191026,
+        "values": [
+          1309.191465,
+          1195.433715,
+          1322.215423,
+          1221.403851,
+          1331.083859,
+          1186.262341,
+          1332.191026,
+          1155.076374,
+          1307.479798,
+          1280.670684,
+          -121.021978,
+          1296.678949,
+          1283.179696,
+          1230.750522,
+          1180.522275,
+          1382.348926
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.2519003989997037,
+        "median": 1.2832319581144072,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.2993509995377994,
+        "values": [
+          1.289028645801043,
+          1.2661157709557165,
+          1.2954716047274157,
+          1.2673324315108443,
+          1.2945583744447076,
+          1.2602616062774004,
+          1.2993509995377994,
+          1.2519003989997037,
+          1.2870159498296745,
+          1.2817035780951949,
+          0.9795654917885105,
+          1.285036715006535,
+          1.2847603381336192,
+          1.2686119986554123,
+          1.261785282053375,
+          1.3112702390589763
+        ]
+      },
+      "tier": "certified-1e-9"
+    },
+    {
+      "baseline_session_ms": 6108.6130575,
+      "candidate_session_ms": 4852.7417555,
+      "complete_pairs": 16,
+      "family": "dense-coupled-1024",
+      "lane": "native",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 6130.000325999999,
+          "candidate_session_ms": 4851.227081999999,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1263.4150224999998,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1253.841829,
+              1386.280776,
+              1225.020332,
+              1315.022932,
+              1272.988216,
+              1334.485363,
+              -221.641024,
+              1216.782404
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2602738481847409,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2594727999756496,
+              1.28833718528424,
+              1.2521496299184427,
+              1.273725134600494,
+              1.2610748963938319,
+              1.275335536519355,
+              0.9651641779192439,
+              1.2505887834186105
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 6099.567698,
+          "candidate_session_ms": 4856.248306,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1240.9477745,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1135.298248,
+              1225.491751,
+              1255.5102,
+              1210.744561,
+              1249.098599,
+              1286.08154,
+              1284.251466,
+              1232.79695
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2562508138646398,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2299930214888277,
+              1.2547743561745275,
+              1.2581916252604646,
+              1.2489735629847034,
+              1.257727271554752,
+              1.2651829499337777,
+              1.2664867401988356,
+              1.2525714454055081
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 2333.9054045000003,
+          "session_count": 16,
+          "setup_median_ms": 1600.397587,
+          "totals_ns": {
+            "audit": 6539751241,
+            "checker": 37321301719,
+            "checkpoint": 37294383,
+            "complete_session_ns": 97774042073,
+            "coordination": 127715221,
+            "export": 81644329,
+            "gpu_ns": 19364097165.01833,
+            "initial_audit": 51745,
+            "iteration": 20018836896,
+            "prepare_reset": 30339695,
+            "setup_ns": 25929026777,
+            "teardown_ns": 2620503938
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 1183.7821055,
+          "session_count": 16,
+          "setup_median_ms": 1537.1283374999998,
+          "totals_ns": {
+            "audit": 6865012558,
+            "checker": 19878968234,
+            "checkpoint": 33829995,
+            "complete_session_ns": 79111987930,
+            "coordination": 109652049,
+            "export": 75582291,
+            "gpu_ns": 19354857440.531246,
+            "initial_audit": 46003,
+            "iteration": 20024498556,
+            "prepare_reset": 32078718,
+            "setup_ns": 24630420094,
+            "teardown_ns": 2618889928
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 1135.298248,
+        "median": 1251.470214,
+        "n": 16,
+        "rank": 2,
+        "upper": 1334.485363,
+        "values": [
+          1135.298248,
+          1225.491751,
+          1253.841829,
+          1386.280776,
+          1225.020332,
+          1315.022932,
+          1255.5102,
+          1210.744561,
+          1272.988216,
+          1249.098599,
+          1286.08154,
+          1284.251466,
+          1334.485363,
+          -221.641024,
+          1216.782404,
+          1232.79695
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.2299930214888277,
+        "median": 1.2579594484076084,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.275335536519355,
+        "values": [
+          1.2299930214888277,
+          1.2547743561745275,
+          1.2594727999756496,
+          1.28833718528424,
+          1.2521496299184427,
+          1.273725134600494,
+          1.2581916252604646,
+          1.2489735629847034,
+          1.2610748963938319,
+          1.257727271554752,
+          1.2651829499337777,
+          1.2664867401988356,
+          1.275335536519355,
+          0.9651641779192439,
+          1.2505887834186105,
+          1.2525714454055081
+        ]
+      },
+      "tier": "certified-1e-9"
+    },
+    {
+      "baseline_session_ms": 15073.135649,
+      "candidate_session_ms": 12099.626790999999,
+      "complete_pairs": 16,
+      "family": "dense-coupled-2048",
+      "lane": "fp4x2",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 15049.8666205,
+          "candidate_session_ms": 12161.535068500001,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 2920.06931,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              4487.109427,
+              3143.298743,
+              2729.641879,
+              2875.381169,
+              2820.696801,
+              2960.029091,
+              2880.109529,
+              3001.218205
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2407476965495703,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.3664936223834485,
+              1.2602133831822582,
+              1.2218446824621159,
+              1.236544510504111,
+              1.2343045938640271,
+              1.2447863449560634,
+              1.236709048143077,
+              1.2465680870835738
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 15135.665754,
+          "candidate_session_ms": 12033.839161,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 3082.140878,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              3205.34792,
+              2859.058867,
+              3081.196968,
+              3288.678899,
+              4683.206984,
+              3083.084788,
+              3073.508076,
+              1392.472899
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2567147180413891,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2677361966722351,
+              1.236150080921676,
+              1.2577392357535195,
+              1.2729819177197939,
+              1.3952967130724787,
+              1.253731550706347,
+              1.255690200329259,
+              1.1029987521150983
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 6115.509672,
+          "session_count": 16,
+          "setup_median_ms": 6197.167906,
+          "totals_ns": {
+            "audit": 18050950798,
+            "checker": 98210851715,
+            "checkpoint": 27239060,
+            "complete_session_ns": 244436290520,
+            "coordination": 166546467,
+            "export": 99076983,
+            "gpu_ns": 14346647233.456373,
+            "initial_audit": 71729,
+            "iteration": 15290848409,
+            "prepare_reset": 55243741,
+            "setup_ns": 101092485903,
+            "teardown_ns": 4221232804
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 3692.732667,
+          "session_count": 16,
+          "setup_median_ms": 5650.68593,
+          "totals_ns": {
+            "audit": 18117095333,
+            "checker": 60164071932,
+            "checkpoint": 25838205,
+            "complete_session_ns": 194872250275,
+            "coordination": 159401998,
+            "export": 96174741,
+            "gpu_ns": 14341431782.573462,
+            "initial_audit": 81150,
+            "iteration": 15257701191,
+            "prepare_reset": 55736633,
+            "setup_ns": 90149018645,
+            "teardown_ns": 3419816552
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 2729.641879,
+        "median": 3037.3631405,
+        "n": 16,
+        "rank": 2,
+        "upper": 4487.109427,
+        "values": [
+          4487.109427,
+          3143.298743,
+          3205.34792,
+          2859.058867,
+          3081.196968,
+          2729.641879,
+          2875.381169,
+          3288.678899,
+          4683.206984,
+          3083.084788,
+          3073.508076,
+          2820.696801,
+          1392.472899,
+          2960.029091,
+          2880.109529,
+          3001.218205
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.2218446824621159,
+        "median": 1.2501498188949602,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.3664936223834485,
+        "values": [
+          1.3664936223834485,
+          1.2602133831822582,
+          1.2677361966722351,
+          1.236150080921676,
+          1.2577392357535195,
+          1.2218446824621159,
+          1.236544510504111,
+          1.2729819177197939,
+          1.3952967130724787,
+          1.253731550706347,
+          1.255690200329259,
+          1.2343045938640271,
+          1.1029987521150983,
+          1.2447863449560634,
+          1.236709048143077,
+          1.2465680870835738
+        ]
+      },
+      "tier": "certified-1e-7"
+    },
+    {
+      "baseline_session_ms": 15678.012393500001,
+      "candidate_session_ms": 12726.390298999999,
+      "complete_pairs": 16,
+      "family": "dense-coupled-2048",
+      "lane": "native",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 15620.0206865,
+          "candidate_session_ms": 12599.5266375,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 3022.0501050000003,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              2838.148933,
+              2886.396782,
+              2643.105064,
+              3143.229204,
+              3494.52741,
+              2976.860494,
+              3117.914271,
+              3067.239716
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2398938347204485,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.221329564448666,
+              1.2276592515991032,
+              1.2097391895064782,
+              1.2495183265800114,
+              1.282898512638747,
+              1.2357330259709973,
+              1.2499619419673489,
+              1.2440546434698996
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 15737.0797705,
+          "candidate_session_ms": 12762.187159500001,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 2975.1753895,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              2970.651522,
+              2979.699257,
+              2750.944717,
+              2939.408965,
+              2961.172476,
+              4059.10134,
+              3028.085901,
+              3196.64652
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2331293704733903,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2330915819147121,
+              1.2331671590320685,
+              1.2147830714915424,
+              1.230629906376243,
+              1.2329740605236892,
+              1.3172640903564667,
+              1.2362226175324014,
+              1.2508655159107531
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 6108.8028045,
+          "session_count": 16,
+          "setup_median_ms": 6004.229391999999,
+          "totals_ns": {
+            "audit": 18117173891,
+            "checker": 98510374897,
+            "checkpoint": 27448489,
+            "complete_session_ns": 251918625402,
+            "coordination": 148454465,
+            "export": 98880892,
+            "gpu_ns": 27094904663.50317,
+            "initial_audit": 72120,
+            "iteration": 27631394726,
+            "prepare_reset": 45771444,
+            "setup_ns": 95857524352,
+            "teardown_ns": 4221696497
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 3695.04342,
+          "session_count": 16,
+          "setup_median_ms": 5489.5952735,
+          "totals_ns": {
+            "audit": 17861233939,
+            "checker": 59080795530,
+            "checkpoint": 25653519,
+            "complete_session_ns": 202865492830,
+            "coordination": 139447443,
+            "export": 97492092,
+            "gpu_ns": 27093036341.9652,
+            "initial_audit": 80500,
+            "iteration": 27605055255,
+            "prepare_reset": 52068112,
+            "setup_ns": 87240766806,
+            "teardown_ns": 3420033548
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 2750.944717,
+        "median": 2978.2798755000003,
+        "n": 16,
+        "rank": 2,
+        "upper": 3494.52741,
+        "values": [
+          2838.148933,
+          2886.396782,
+          2970.651522,
+          2979.699257,
+          2750.944717,
+          2643.105064,
+          3143.229204,
+          2939.408965,
+          2961.172476,
+          4059.10134,
+          3494.52741,
+          3028.085901,
+          2976.860494,
+          3196.64652,
+          3117.914271,
+          3067.239716
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.2147830714915424,
+        "median": 1.234450092501533,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.282898512638747,
+        "values": [
+          1.221329564448666,
+          1.2276592515991032,
+          1.2330915819147121,
+          1.2331671590320685,
+          1.2147830714915424,
+          1.2097391895064782,
+          1.2495183265800114,
+          1.230629906376243,
+          1.2329740605236892,
+          1.3172640903564667,
+          1.282898512638747,
+          1.2362226175324014,
+          1.2357330259709973,
+          1.2508655159107531,
+          1.2499619419673489,
+          1.2440546434698996
+        ]
+      },
+      "tier": "certified-1e-7"
+    },
+    {
+      "baseline_session_ms": 17852.911997,
+      "candidate_session_ms": 14049.482164500001,
+      "complete_pairs": 16,
+      "family": "dense-coupled-2048",
+      "lane": "fp4x2",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 17842.791182,
+          "candidate_session_ms": 14112.7235985,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 3803.8033100000002,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              5215.954164,
+              3845.391145,
+              3866.606433,
+              3611.358737,
+              3360.849485,
+              3921.466237,
+              3762.215475,
+              1854.340676
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.269522097493458,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.3673103984652928,
+              1.2711488575443193,
+              1.2784847241792694,
+              1.258606261527651,
+              1.2354563223058932,
+              1.2803880197479593,
+              1.2678953374425965,
+              1.1157124230835045
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 17862.677905999997,
+          "candidate_session_ms": 14049.482164500001,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 3775.5791085,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              3895.742855,
+              3776.659365,
+              3449.962843,
+              3789.966357,
+              3763.211633,
+              3774.498852,
+              3971.560618,
+              3736.539358
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2690809220092545,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2781967258910973,
+              1.2688128643689542,
+              1.2406188002695298,
+              1.2685338326346947,
+              1.2702555657731702,
+              1.269348979649555,
+              1.2826821123134486,
+              1.2631777227331982
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 8162.228286,
+          "session_count": 16,
+          "setup_median_ms": 6184.1838984999995,
+          "totals_ns": {
+            "audit": 23935118389,
+            "checker": 131110310478,
+            "checkpoint": 38655217,
+            "complete_session_ns": 286846149751,
+            "coordination": 209041707,
+            "export": 116174591,
+            "gpu_ns": 19127375426.083797,
+            "initial_audit": 73372,
+            "iteration": 20319417661,
+            "prepare_reset": 54992895,
+            "setup_ns": 98528463653,
+            "teardown_ns": 4221298703
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 4935.246085,
+          "session_count": 16,
+          "setup_median_ms": 5613.847382,
+          "totals_ns": {
+            "audit": 23501280671,
+            "checker": 78980446699,
+            "checkpoint": 38296144,
+            "complete_session_ns": 227249825518,
+            "coordination": 203504273,
+            "export": 115278668,
+            "gpu_ns": 19121157351.881275,
+            "initial_audit": 72743,
+            "iteration": 20314243992,
+            "prepare_reset": 55594433,
+            "setup_ns": 92095076726,
+            "teardown_ns": 3419359999
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 3360.849485,
+        "median": 3775.5791085,
+        "n": 16,
+        "rank": 2,
+        "upper": 3971.560618,
+        "values": [
+          3895.742855,
+          5215.954164,
+          3845.391145,
+          3776.659365,
+          3866.606433,
+          3449.962843,
+          3611.358737,
+          3360.849485,
+          3789.966357,
+          3763.211633,
+          3774.498852,
+          3921.466237,
+          3971.560618,
+          3762.215475,
+          3736.539358,
+          1854.340676
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.2354563223058932,
+        "median": 1.2690809220092545,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.2826821123134486,
+        "values": [
+          1.2781967258910973,
+          1.3673103984652928,
+          1.2711488575443193,
+          1.2688128643689542,
+          1.2784847241792694,
+          1.2406188002695298,
+          1.258606261527651,
+          1.2354563223058932,
+          1.2685338326346947,
+          1.2702555657731702,
+          1.269348979649555,
+          1.2803880197479593,
+          1.2826821123134486,
+          1.2678953374425965,
+          1.2631777227331982,
+          1.1157124230835045
+        ]
+      },
+      "tier": "certified-1e-9"
+    },
+    {
+      "baseline_session_ms": 18735.502021,
+      "candidate_session_ms": 14971.152875,
+      "complete_pairs": 16,
+      "family": "dense-coupled-2048",
+      "lane": "native",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 18561.667521,
+          "candidate_session_ms": 14953.2043195,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 3647.783662,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              3376.852683,
+              3843.082864,
+              3692.258823,
+              3595.441937,
+              3817.284563,
+              3603.308501,
+              4022.947491,
+              3594.118237
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.242320210195138,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.222804461248613,
+              1.2609794209739003,
+              1.2435715303686907,
+              1.240349981147764,
+              1.2535926547696543,
+              1.2410688900215854,
+              1.2741477652303377,
+              1.2410326495652435
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 18851.595486500002,
+          "candidate_session_ms": 14995.834049000001,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 3878.159596,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              4083.86408,
+              5111.120202,
+              3462.45603,
+              3820.185891,
+              3599.261301,
+              2488.055986,
+              4068.352875,
+              3936.133301
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.2586192643847713,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2780064811553402,
+              1.3438371482891058,
+              1.2282581739678338,
+              1.254533871531879,
+              1.2389365124107241,
+              1.1514648928593048,
+              1.2747755280273305,
+              1.2627046572376635
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 8137.8186705,
+          "session_count": 16,
+          "setup_median_ms": 6059.9084745,
+          "totals_ns": {
+            "audit": 23857558392,
+            "checker": 129981439429,
+            "checkpoint": 39820884,
+            "complete_session_ns": 300712083837,
+            "coordination": 191784901,
+            "export": 119520105,
+            "gpu_ns": 36117052771.925934,
+            "initial_audit": 73266,
+            "iteration": 36790032117,
+            "prepare_reset": 45274630,
+            "setup_ns": 97304944605,
+            "teardown_ns": 4221034172
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 4919.735725500001,
+          "session_count": 16,
+          "setup_median_ms": 5445.835124,
+          "totals_ns": {
+            "audit": 24013503552,
+            "checker": 79928813667,
+            "checkpoint": 38576271,
+            "complete_session_ns": 240597359072,
+            "coordination": 180563297,
+            "export": 116847145,
+            "gpu_ns": 36122408959.15033,
+            "initial_audit": 81715,
+            "iteration": 36893650595,
+            "prepare_reset": 52660017,
+            "setup_ns": 87527688221,
+            "teardown_ns": 3420301463
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 3376.852683,
+        "median": 3754.771693,
+        "n": 16,
+        "rank": 2,
+        "upper": 4083.86408,
+        "values": [
+          3376.852683,
+          3843.082864,
+          3692.258823,
+          4083.86408,
+          5111.120202,
+          3595.441937,
+          3462.45603,
+          3817.284563,
+          3820.185891,
+          3599.261301,
+          3603.308501,
+          2488.055986,
+          4068.352875,
+          4022.947491,
+          3936.133301,
+          3594.118237
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.222804461248613,
+        "median": 1.2485820925691726,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.2780064811553402,
+        "values": [
+          1.222804461248613,
+          1.2609794209739003,
+          1.2435715303686907,
+          1.2780064811553402,
+          1.3438371482891058,
+          1.240349981147764,
+          1.2282581739678338,
+          1.2535926547696543,
+          1.254533871531879,
+          1.2389365124107241,
+          1.2410688900215854,
+          1.1514648928593048,
+          1.2747755280273305,
+          1.2741477652303377,
+          1.2627046572376635,
+          1.2410326495652435
+        ]
+      },
+      "tier": "certified-1e-9"
+    },
+    {
+      "baseline_session_ms": 2922.5622295,
+      "candidate_session_ms": 2527.2265964999997,
+      "complete_pairs": 16,
+      "family": "dense-generic-1024",
+      "lane": "fp4x2",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 2944.1104565,
+          "candidate_session_ms": 2516.5796474999997,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 426.155029,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              417.697091,
+              415.848757,
+              444.303809,
+              -581.712583,
+              379.430111,
+              515.74641,
+              434.612967,
+              498.786527
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1691376237040294,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1641552060467977,
+              1.1650364706806875,
+              1.1767725557013555,
+              0.8312908376516451,
+              1.1490377827511744,
+              1.2056090705949727,
+              1.1732387767273713,
+              1.2039134024970515
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 2910.5106495,
+          "candidate_session_ms": 2528.9172415,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 369.4214865,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              431.271815,
+              393.00856,
+              322.15385,
+              313.656472,
+              424.281938,
+              317.701705,
+              374.679124,
+              364.163849
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.146080008644718,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.173760316975905,
+              1.155534812623585,
+              1.1245952458778565,
+              1.1228460087147594,
+              1.1685969925478565,
+              1.1222135478423962,
+              1.1482332190543854,
+              1.1439267982350507
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 588.795894,
+          "session_count": 16,
+          "setup_median_ms": 1705.7460925,
+          "totals_ns": {
+            "audit": 1611089369,
+            "checker": 9443067383,
+            "complete_session_ns": 46822012454,
+            "coordination": 39714918,
+            "export": 44450348,
+            "gpu_ns": 3047768450.140953,
+            "initial_audit": 26702,
+            "iteration": 3327709750,
+            "prepare_reset": 24858997,
+            "setup_ns": 27140703413,
+            "teardown_ns": 2620000448
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 308.765198,
+          "session_count": 16,
+          "setup_median_ms": 1578.7404775,
+          "totals_ns": {
+            "audit": 1841335542,
+            "checker": 5577964696,
+            "complete_session_ns": 41356382052,
+            "coordination": 35122860,
+            "export": 40382998,
+            "gpu_ns": 3047922080.96385,
+            "initial_audit": 26116,
+            "iteration": 3329158075,
+            "prepare_reset": 24657543,
+            "setup_ns": 25372022235,
+            "teardown_ns": 2690400913
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 313.656472,
+        "median": 404.4286585,
+        "n": 16,
+        "rank": 2,
+        "upper": 498.786527,
+        "values": [
+          417.697091,
+          431.271815,
+          415.848757,
+          393.00856,
+          444.303809,
+          -581.712583,
+          379.430111,
+          322.15385,
+          313.656472,
+          424.281938,
+          515.74641,
+          317.701705,
+          434.612967,
+          374.679124,
+          364.163849,
+          498.786527
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.1222135478423962,
+        "median": 1.1598450093351913,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.2039134024970515,
+        "values": [
+          1.1641552060467977,
+          1.173760316975905,
+          1.1650364706806875,
+          1.155534812623585,
+          1.1767725557013555,
+          0.8312908376516451,
+          1.1490377827511744,
+          1.1245952458778565,
+          1.1228460087147594,
+          1.1685969925478565,
+          1.2056090705949727,
+          1.1222135478423962,
+          1.1732387767273713,
+          1.1482332190543854,
+          1.1439267982350507,
+          1.2039134024970515
+        ]
+      },
+      "tier": "certified-1e-7"
+    },
+    {
+      "baseline_session_ms": 2946.417252,
+      "candidate_session_ms": 2590.517534,
+      "complete_pairs": 16,
+      "family": "dense-generic-1024",
+      "lane": "native",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 2998.6946355,
+          "candidate_session_ms": 2572.9961055000003,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 433.212696,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              291.242751,
+              364.53317,
+              485.524849,
+              474.195466,
+              500.79875,
+              367.264773,
+              445.2917,
+              421.133692
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1688667412511147,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.110715290284709,
+              1.140481943137448,
+              1.1883287700485294,
+              1.1832639469376807,
+              1.1975632633035302,
+              1.1437500602815946,
+              1.1737356111917474,
+              1.1639978713104817
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 2929.9760880000003,
+          "candidate_session_ms": 2623.5916209999996,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 327.979852,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              450.541053,
+              334.169809,
+              330.940853,
+              292.708605,
+              334.932137,
+              260.360428,
+              325.018851,
+              263.082582
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.125537765961918,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1790856153117657,
+              1.1263784003319424,
+              1.1289329836530537,
+              1.1108443629030245,
+              1.1291411646817728,
+              1.098039829934884,
+              1.1246971315918934,
+              1.0987259685899096
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 588.375162,
+          "session_count": 16,
+          "setup_median_ms": 1610.3328985,
+          "totals_ns": {
+            "audit": 1582590418,
+            "checker": 9441557684,
+            "complete_session_ns": 47441374038,
+            "coordination": 30809327,
+            "export": 43167146,
+            "gpu_ns": 4839186627.417803,
+            "initial_audit": 24931,
+            "iteration": 4993020873,
+            "prepare_reset": 23252595,
+            "setup_ns": 26085874812,
+            "teardown_ns": 2618492945
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 309.57915049999997,
+          "session_count": 16,
+          "setup_median_ms": 1546.7306705,
+          "totals_ns": {
+            "audit": 1618109632,
+            "checker": 4973753109,
+            "complete_session_ns": 41499634569,
+            "coordination": 30379715,
+            "export": 41129562,
+            "gpu_ns": 4839715937.495232,
+            "initial_audit": 24655,
+            "iteration": 4993479833,
+            "prepare_reset": 23738609,
+            "setup_ns": 24821633362,
+            "teardown_ns": 2618592993
+          }
+        }
+      },
+      "provisional_pass": false,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 263.082582,
+        "median": 349.73265349999997,
+        "n": 16,
+        "rank": 2,
+        "upper": 485.524849,
+        "values": [
+          291.242751,
+          364.53317,
+          450.541053,
+          334.169809,
+          485.524849,
+          474.195466,
+          330.940853,
+          500.79875,
+          292.708605,
+          367.264773,
+          334.932137,
+          260.360428,
+          325.018851,
+          263.082582,
+          445.2917,
+          421.133692
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.0987259685899096,
+        "median": 1.1348115539096104,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.1883287700485294,
+        "values": [
+          1.110715290284709,
+          1.140481943137448,
+          1.1790856153117657,
+          1.1263784003319424,
+          1.1883287700485294,
+          1.1832639469376807,
+          1.1289329836530537,
+          1.1975632633035302,
+          1.1108443629030245,
+          1.1437500602815946,
+          1.1291411646817728,
+          1.098039829934884,
+          1.1246971315918934,
+          1.0987259685899096,
+          1.1737356111917474,
+          1.1639978713104817
+        ]
+      },
+      "tier": "certified-1e-7"
+    },
+    {
+      "baseline_session_ms": 2892.7070475,
+      "candidate_session_ms": 2519.5912005,
+      "complete_pairs": 16,
+      "family": "dense-generic-1024",
+      "lane": "fp4x2",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 2945.7072875,
+          "candidate_session_ms": 2491.363909,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 424.9136955,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              483.611786,
+              400.733873,
+              384.417366,
+              211.81606,
+              519.923498,
+              481.812385,
+              449.093518,
+              363.045431
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1705293987932825,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1964320061487017,
+              1.161289967003313,
+              1.1534548074136277,
+              1.0795511637003083,
+              1.2095668307500655,
+              1.1942538504533196,
+              1.1797688305832519,
+              1.1405639988778433
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 2887.391777,
+          "candidate_session_ms": 2540.4018345,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 346.8730255,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              334.592044,
+              388.802536,
+              321.206731,
+              420.189562,
+              281.380484,
+              218.580062,
+              382.521328,
+              359.154007
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1376556451103095,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1332401701433488,
+              1.155593236299205,
+              1.126024954988072,
+              1.165948452332568,
+              1.1086848157198776,
+              1.0816410161402528,
+              1.1479158237634615,
+              1.1420711200772702
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 589.01778,
+          "session_count": 16,
+          "setup_median_ms": 1680.7855555,
+          "totals_ns": {
+            "audit": 1636679999,
+            "checker": 9432827627,
+            "complete_session_ns": 46628547623,
+            "coordination": 40960866,
+            "export": 45056340,
+            "gpu_ns": 3048105568.20035,
+            "initial_audit": 27740,
+            "iteration": 3329161814,
+            "prepare_reset": 25306379,
+            "setup_ns": 26879173560,
+            "teardown_ns": 2619644297
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 310.707028,
+          "session_count": 16,
+          "setup_median_ms": 1579.2661524999999,
+          "totals_ns": {
+            "audit": 1672231949,
+            "checker": 4957803255,
+            "complete_session_ns": 40627666952,
+            "coordination": 34571116,
+            "export": 39805439,
+            "gpu_ns": 3047625024.6167183,
+            "initial_audit": 22422,
+            "iteration": 3329941074,
+            "prepare_reset": 24655597,
+            "setup_ns": 25562007158,
+            "teardown_ns": 2618657167
+          }
+        }
+      },
+      "provisional_pass": false,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 218.580062,
+        "median": 383.46934699999997,
+        "n": 16,
+        "rank": 2,
+        "upper": 483.611786,
+        "values": [
+          334.592044,
+          388.802536,
+          321.206731,
+          420.189562,
+          483.611786,
+          281.380484,
+          218.580062,
+          400.733873,
+          384.417366,
+          382.521328,
+          211.81606,
+          359.154007,
+          519.923498,
+          481.812385,
+          449.093518,
+          363.045431
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.0816410161402528,
+        "median": 1.1506853155885446,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.1964320061487017,
+        "values": [
+          1.1332401701433488,
+          1.155593236299205,
+          1.126024954988072,
+          1.165948452332568,
+          1.1964320061487017,
+          1.1086848157198776,
+          1.0816410161402528,
+          1.161289967003313,
+          1.1534548074136277,
+          1.1479158237634615,
+          1.0795511637003083,
+          1.1420711200772702,
+          1.2095668307500655,
+          1.1942538504533196,
+          1.1797688305832519,
+          1.1405639988778433
+        ]
+      },
+      "tier": "certified-1e-9"
+    },
+    {
+      "baseline_session_ms": 2937.040099,
+      "candidate_session_ms": 2575.4303655,
+      "complete_pairs": 16,
+      "family": "dense-generic-1024",
+      "lane": "native",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 2936.228701,
+          "candidate_session_ms": 2552.8050949999997,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 369.40533800000003,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              330.772007,
+              497.405143,
+              383.224064,
+              356.759964,
+              370.983716,
+              367.82696,
+              475.619803,
+              296.768198
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.142270277332746,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1272229170268135,
+              1.197163831884656,
+              1.1497834414789554,
+              1.1400657464188633,
+              1.1400585250306077,
+              1.1444748082466287,
+              1.18708262043128,
+              1.1145464943108523
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 2937.040099,
+          "candidate_session_ms": 2636.6284370000003,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 292.94602150000003,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              231.583662,
+              281.787853,
+              447.615423,
+              304.10419,
+              378.697761,
+              412.329115,
+              272.648792,
+              258.314064
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1102521591521441,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.0865402083644728,
+              1.1048909510761427,
+              1.1748463067787576,
+              1.1156133672281456,
+              1.148649019363687,
+              1.1614787796181103,
+              1.1022315803663636,
+              1.0977387996537207
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 590.1265745000001,
+          "session_count": 16,
+          "setup_median_ms": 1601.1718785,
+          "totals_ns": {
+            "audit": 1584916400,
+            "checker": 9460559111,
+            "complete_session_ns": 47186477621,
+            "coordination": 30567651,
+            "export": 41970271,
+            "gpu_ns": 4839439425.617456,
+            "initial_audit": 25739,
+            "iteration": 4993534413,
+            "prepare_reset": 23179507,
+            "setup_ns": 25884646845,
+            "teardown_ns": 2619468693
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 311.99586150000005,
+          "session_count": 16,
+          "setup_median_ms": 1541.5099535,
+          "totals_ns": {
+            "audit": 1624122587,
+            "checker": 4967875079,
+            "complete_session_ns": 41520036906,
+            "coordination": 30640401,
+            "export": 41005341,
+            "gpu_ns": 4839432576.298714,
+            "initial_audit": 23185,
+            "iteration": 4993611855,
+            "prepare_reset": 23631895,
+            "setup_ns": 24851709288,
+            "teardown_ns": 2618800610
+          }
+        }
+      },
+      "provisional_pass": false,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 258.314064,
+        "median": 362.293462,
+        "n": 16,
+        "rank": 2,
+        "upper": 475.619803,
+        "values": [
+          330.772007,
+          231.583662,
+          497.405143,
+          383.224064,
+          281.787853,
+          356.759964,
+          447.615423,
+          304.10419,
+          378.697761,
+          412.329115,
+          370.983716,
+          367.82696,
+          475.619803,
+          296.768198,
+          272.648792,
+          258.314064
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.0977387996537207,
+        "median": 1.1400621357247354,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.18708262043128,
+        "values": [
+          1.1272229170268135,
+          1.0865402083644728,
+          1.197163831884656,
+          1.1497834414789554,
+          1.1048909510761427,
+          1.1400657464188633,
+          1.1748463067787576,
+          1.1156133672281456,
+          1.148649019363687,
+          1.1614787796181103,
+          1.1400585250306077,
+          1.1444748082466287,
+          1.18708262043128,
+          1.1145464943108523,
+          1.1022315803663636,
+          1.0977387996537207
+        ]
+      },
+      "tier": "certified-1e-9"
+    },
+    {
+      "baseline_session_ms": 9429.009218,
+      "candidate_session_ms": 8127.5728425,
+      "complete_pairs": 16,
+      "family": "dense-generic-2048",
+      "lane": "fp4x2",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 9431.65449,
+          "candidate_session_ms": 8146.9596,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1305.2812145,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              2766.903728,
+              1272.009162,
+              795.375955,
+              1216.419071,
+              1686.505441,
+              1229.299183,
+              1494.406112,
+              1338.553267
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1618891654151255,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.3394511297052958,
+              1.1593936147481356,
+              1.0948134939318523,
+              1.1491758772538838,
+              1.2138670712293749,
+              1.1469764612854978,
+              1.1894641304599665,
+              1.1643847160821155
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 9429.009218,
+          "candidate_session_ms": 8086.1281275,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1314.2598954999999,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1378.527408,
+              1208.546298,
+              1249.992383,
+              1186.586876,
+              1436.043471,
+              1408.294831,
+              1400.46678,
+              1203.350394
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1629783421913005,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1718713255169515,
+              1.1444570095699607,
+              1.1540853588656494,
+              1.1404768034094668,
+              1.1781709536545308,
+              1.1765468168144717,
+              1.173791199498647,
+              1.1471445501603212
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 2040.6301640000001,
+          "session_count": 16,
+          "setup_median_ms": 6111.355901999999,
+          "totals_ns": {
+            "audit": 6240558933,
+            "checker": 32789847676,
+            "complete_session_ns": 152445006564,
+            "coordination": 65053724,
+            "export": 62524845,
+            "gpu_ns": 4786031648.367643,
+            "initial_audit": 44507,
+            "iteration": 5083713947,
+            "prepare_reset": 42169569,
+            "setup_ns": 99431515059,
+            "teardown_ns": 4222975971
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 1245.9003360000002,
+          "session_count": 16,
+          "setup_median_ms": 5655.3982485,
+          "totals_ns": {
+            "audit": 6134171614,
+            "checker": 19955374779,
+            "complete_session_ns": 130173726204,
+            "coordination": 61566418,
+            "export": 60963577,
+            "gpu_ns": 4783189887.285233,
+            "initial_audit": 50500,
+            "iteration": 5078242535,
+            "prepare_reset": 42673976,
+            "setup_ns": 90739861571,
+            "teardown_ns": 3420068761
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 1186.586876,
+        "median": 1305.2812145,
+        "n": 16,
+        "rank": 2,
+        "upper": 1686.505441,
+        "values": [
+          1378.527408,
+          1208.546298,
+          1249.992383,
+          2766.903728,
+          1186.586876,
+          1436.043471,
+          1272.009162,
+          795.375955,
+          1216.419071,
+          1408.294831,
+          1686.505441,
+          1229.299183,
+          1400.46678,
+          1203.350394,
+          1494.406112,
+          1338.553267
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.1404768034094668,
+        "median": 1.1618891654151255,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.2138670712293749,
+        "values": [
+          1.1718713255169515,
+          1.1444570095699607,
+          1.1540853588656494,
+          1.3394511297052958,
+          1.1404768034094668,
+          1.1781709536545308,
+          1.1593936147481356,
+          1.0948134939318523,
+          1.1491758772538838,
+          1.1765468168144717,
+          1.2138670712293749,
+          1.1469764612854978,
+          1.173791199498647,
+          1.1471445501603212,
+          1.1894641304599665,
+          1.1643847160821155
+        ]
+      },
+      "tier": "certified-1e-7"
+    },
+    {
+      "baseline_session_ms": 9585.884362,
+      "candidate_session_ms": 8155.9546095000005,
+      "complete_pairs": 16,
+      "family": "dense-generic-2048",
+      "lane": "native",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 9605.218039,
+          "candidate_session_ms": 8155.9546095000005,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1427.88183,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1568.165387,
+              1425.326067,
+              1604.195786,
+              1328.552049,
+              1430.437593,
+              1680.84857,
+              1236.554337,
+              1277.47836
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1750722807199496,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1967686494765453,
+              1.1747774922633505,
+              1.2000497841943443,
+              1.1615464887286084,
+              1.1753670691765485,
+              1.208496689370435,
+              1.146962418458263,
+              1.1525386160540403
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 9583.286005,
+          "candidate_session_ms": 8164.5917245,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1501.7900845,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1409.082622,
+              2634.923725,
+              3040.366772,
+              1483.665344,
+              1334.698834,
+              1519.914825,
+              1193.737778,
+              1580.531106
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1870031880148697,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1732021479882027,
+              1.3172517160918695,
+              1.3710613661663564,
+              1.183149433742625,
+              1.161833426136807,
+              1.1908569422871147,
+              1.1450411146434223,
+              1.1945295779867398
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 2043.783637,
+          "session_count": 16,
+          "setup_median_ms": 6017.4391705,
+          "totals_ns": {
+            "audit": 6509555350,
+            "checker": 33708339308,
+            "complete_session_ns": 156425267271,
+            "coordination": 59152237,
+            "export": 62228077,
+            "gpu_ns": 9034389343.79816,
+            "initial_audit": 45680,
+            "iteration": 9274591218,
+            "prepare_reset": 35840222,
+            "setup_ns": 97980484433,
+            "teardown_ns": 4221473664
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 1241.12603,
+          "session_count": 16,
+          "setup_median_ms": 5454.1740895,
+          "totals_ns": {
+            "audit": 6170116418,
+            "checker": 19918347454,
+            "complete_session_ns": 130676788116,
+            "coordination": 51479285,
+            "export": 62649014,
+            "gpu_ns": 9033442111.194134,
+            "initial_audit": 51241,
+            "iteration": 9197681291,
+            "prepare_reset": 40492791,
+            "setup_ns": 87170421325,
+            "teardown_ns": 3419449358
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 1236.554337,
+        "median": 1457.0514685,
+        "n": 16,
+        "rank": 2,
+        "upper": 2634.923725,
+        "values": [
+          1568.165387,
+          1409.082622,
+          2634.923725,
+          1425.326067,
+          1604.195786,
+          1328.552049,
+          3040.366772,
+          1430.437593,
+          1483.665344,
+          1334.698834,
+          1519.914825,
+          1680.84857,
+          1193.737778,
+          1236.554337,
+          1580.531106,
+          1277.47836
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.146962418458263,
+        "median": 1.1792582514595868,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.3172517160918695,
+        "values": [
+          1.1967686494765453,
+          1.1732021479882027,
+          1.3172517160918695,
+          1.1747774922633505,
+          1.2000497841943443,
+          1.1615464887286084,
+          1.3710613661663564,
+          1.1753670691765485,
+          1.183149433742625,
+          1.161833426136807,
+          1.1908569422871147,
+          1.208496689370435,
+          1.1450411146434223,
+          1.146962418458263,
+          1.1945295779867398,
+          1.1525386160540403
+        ]
+      },
+      "tier": "certified-1e-7"
+    },
+    {
+      "baseline_session_ms": 9555.5268865,
+      "candidate_session_ms": 8103.754185,
+      "complete_pairs": 16,
+      "family": "dense-generic-2048",
+      "lane": "fp4x2",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 9587.918624,
+          "candidate_session_ms": 8012.91646,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1562.5177845,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1759.595698,
+              1340.137651,
+              1743.390287,
+              1332.627843,
+              965.031673,
+              1537.687517,
+              1587.348052,
+              1740.519433
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1949878849922273,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.2216626908043529,
+              1.1633297775262632,
+              1.220770185116458,
+              1.1609960178366736,
+              1.1147391835067706,
+              1.1936851607406482,
+              1.1962906092438061,
+              1.222422251080175
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 9465.407984,
+          "candidate_session_ms": 8121.119837,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1363.7263135,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1235.862639,
+              1071.751101,
+              1701.71814,
+              1314.643143,
+              1412.809484,
+              1199.8247,
+              1549.551084,
+              1730.933138
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.168341546918419,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1521725525168713,
+              1.1301057707831588,
+              1.2138516401898232,
+              1.1618862343668783,
+              1.1747968594699598,
+              1.1464744917371221,
+              1.1888079375986278,
+              1.2184979186079605
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 2054.321833,
+          "session_count": 16,
+          "setup_median_ms": 6243.2444694999995,
+          "totals_ns": {
+            "audit": 6253980942,
+            "checker": 32883708735,
+            "complete_session_ns": 152642907929,
+            "coordination": 64495808,
+            "export": 63121835,
+            "gpu_ns": 4783030209.600925,
+            "initial_audit": 41778,
+            "iteration": 5079652987,
+            "prepare_reset": 41166398,
+            "setup_ns": 99573629320,
+            "teardown_ns": 4221437010
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 1241.5811135,
+          "session_count": 16,
+          "setup_median_ms": 5640.283536999999,
+          "totals_ns": {
+            "audit": 6198145991,
+            "checker": 19908031402,
+            "complete_session_ns": 129419476346,
+            "coordination": 60912514,
+            "export": 59378743,
+            "gpu_ns": 4783081438.869238,
+            "initial_audit": 44844,
+            "iteration": 5080452913,
+            "prepare_reset": 42516835,
+            "setup_ns": 89995186386,
+            "teardown_ns": 3419711522
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 1071.751101,
+        "median": 1475.2485005,
+        "n": 16,
+        "rank": 2,
+        "upper": 1743.390287,
+        "values": [
+          1235.862639,
+          1759.595698,
+          1071.751101,
+          1340.137651,
+          1701.71814,
+          1314.643143,
+          1743.390287,
+          1332.627843,
+          1412.809484,
+          965.031673,
+          1199.8247,
+          1549.551084,
+          1730.933138,
+          1537.687517,
+          1587.348052,
+          1740.519433
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.1301057707831588,
+        "median": 1.1818023985342938,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.2216626908043529,
+        "values": [
+          1.1521725525168713,
+          1.2216626908043529,
+          1.1301057707831588,
+          1.1633297775262632,
+          1.2138516401898232,
+          1.1618862343668783,
+          1.220770185116458,
+          1.1609960178366736,
+          1.1747968594699598,
+          1.1147391835067706,
+          1.1464744917371221,
+          1.1888079375986278,
+          1.2184979186079605,
+          1.1936851607406482,
+          1.1962906092438061,
+          1.222422251080175
+        ]
+      },
+      "tier": "certified-1e-9"
+    },
+    {
+      "baseline_session_ms": 9556.7164405,
+      "candidate_session_ms": 8238.8052075,
+      "complete_pairs": 16,
+      "family": "dense-generic-2048",
+      "lane": "native",
+      "missing_pairs": 0,
+      "order_sensitivity": {
+        "0": {
+          "baseline_session_ms": 9540.2056665,
+          "candidate_session_ms": 8352.102133,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1181.519513,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              -232.869697,
+              1030.458197,
+              1298.226453,
+              1521.395089,
+              1086.533303,
+              1592.94834,
+              1131.329346,
+              1231.70968
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1411010692722918,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              0.9760733805858923,
+              1.1222672629796644,
+              1.1552175369082354,
+              1.1897573651872455,
+              1.1310388833068987,
+              1.1963043346254663,
+              1.1345202296370196,
+              1.1476819089075638
+            ]
+          }
+        },
+        "1": {
+          "baseline_session_ms": 9577.694756500001,
+          "candidate_session_ms": 8182.830675499999,
+          "complete_pairs": 8,
+          "missing_pairs": 0,
+          "provisional_pass": false,
+          "saved_ms": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1400.916467,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1432.967426,
+              1510.378789,
+              1148.10832,
+              1618.07557,
+              1466.711178,
+              1304.210978,
+              1368.865508,
+              1159.832495
+            ]
+          },
+          "scoped_pass": false,
+          "speedup": {
+            "coverage": 1.0,
+            "lower": null,
+            "median": 1.1711398491938372,
+            "n": 8,
+            "rank": 0,
+            "upper": null,
+            "values": [
+              1.1758379537569867,
+              1.1873296288740325,
+              1.1410748505135835,
+              1.2014774335527054,
+              1.1775072312793045,
+              1.1587346300098456,
+              1.1664417446306878,
+              1.1405292315136437
+            ]
+          }
+        }
+      },
+      "partitions": {
+        "baseline": {
+          "checker_median_ms": 2023.758595,
+          "session_count": 16,
+          "setup_median_ms": 6008.055796000001,
+          "totals_ns": {
+            "audit": 6292787570,
+            "checker": 32416208968,
+            "complete_session_ns": 152705843044,
+            "coordination": 58871588,
+            "export": 61630031,
+            "gpu_ns": 9031604032.635689,
+            "initial_audit": 45905,
+            "iteration": 9194714287,
+            "prepare_reset": 35830518,
+            "setup_ns": 95956144079,
+            "teardown_ns": 4221372158
+          }
+        },
+        "candidate": {
+          "checker_median_ms": 1240.808144,
+          "session_count": 16,
+          "setup_median_ms": 5537.809098,
+          "totals_ns": {
+            "audit": 6134608536,
+            "checker": 19843542177,
+            "complete_session_ns": 133036962069,
+            "coordination": 50927052,
+            "export": 62899709,
+            "gpu_ns": 9034326048.43378,
+            "initial_audit": 43740,
+            "iteration": 9200169193,
+            "prepare_reset": 39822394,
+            "setup_ns": 89651265811,
+            "teardown_ns": 3421162652
+          }
+        }
+      },
+      "provisional_pass": true,
+      "saved_ms": {
+        "coverage": 0.999481201171875,
+        "lower": 1030.458197,
+        "median": 1301.2187155000001,
+        "n": 16,
+        "rank": 2,
+        "upper": 1592.94834,
+        "values": [
+          -232.869697,
+          1432.967426,
+          1030.458197,
+          1298.226453,
+          1510.378789,
+          1148.10832,
+          1521.395089,
+          1618.07557,
+          1086.533303,
+          1592.94834,
+          1131.329346,
+          1466.711178,
+          1304.210978,
+          1368.865508,
+          1159.832495,
+          1231.70968
+        ]
+      },
+      "scoped_pass": true,
+      "speedup": {
+        "coverage": 0.999481201171875,
+        "lower": 1.1222672629796644,
+        "median": 1.1569760834590403,
+        "n": 16,
+        "rank": 2,
+        "upper": 1.1963043346254663,
+        "values": [
+          0.9760733805858923,
+          1.1758379537569867,
+          1.1222672629796644,
+          1.1552175369082354,
+          1.1873296288740325,
+          1.1410748505135835,
+          1.1897573651872455,
+          1.2014774335527054,
+          1.1310388833068987,
+          1.1963043346254663,
+          1.1345202296370196,
+          1.1775072312793045,
+          1.1587346300098456,
+          1.1664417446306878,
+          1.1405292315136437,
+          1.1476819089075638
+        ]
+      },
+      "tier": "certified-1e-9"
+    }
+  ],
+  "complete_sessions": 512,
+  "complete_solves": 16384,
+  "descriptive_lane_ratios": [
+    {
+      "complete_pairs": 16,
+      "family": "dense-coupled-1024",
+      "inferential_claim": false,
+      "median": 1.0479183432250498,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-7",
+      "values": [
+        1.0488686870929236,
+        1.0501014666721216,
+        1.0365213416505468,
+        1.0632231421446345,
+        1.0491189236945273,
+        1.0469679993571759,
+        1.037082089352016,
+        1.039468272350462,
+        1.0580180025016408,
+        1.042529287496946,
+        1.065409271820992,
+        1.066638891588251,
+        1.0351616171387783,
+        1.043657632704949,
+        1.027898732225362,
+        1.0563900553525125
+      ],
+      "variant": "baseline"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-coupled-1024",
+      "inferential_claim": false,
+      "median": 1.0633048740157078,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-7",
+      "values": [
+        1.0713327379506061,
+        1.0320786479091126,
+        1.1050971297514098,
+        1.0618945727340403,
+        1.0649466229414934,
+        1.1161075422495368,
+        1.0732451031699284,
+        1.0763444958376904,
+        1.0238077179640421,
+        1.0602036976373843,
+        1.03415370336651,
+        1.0563732370454337,
+        1.0468406263850136,
+        1.0647151752973756,
+        1.0614797823589557,
+        1.0747685732607226
+      ],
+      "variant": "candidate"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-coupled-1024",
+      "inferential_claim": false,
+      "median": 1.0570544116984562,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-9",
+      "values": [
+        1.0398557804715214,
+        1.061187213592108,
+        1.0498453826958871,
+        1.0697490339762454,
+        1.039885470317044,
+        1.0652781610705542,
+        1.0580656324881843,
+        1.058037144654324,
+        1.0487869260803755,
+        1.046140755064317,
+        1.0576517776589913,
+        1.0440659219599722,
+        1.0676918017705692,
+        1.056457045737921,
+        1.0672137326861557,
+        1.049874829948159
+      ],
+      "variant": "baseline"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-coupled-1024",
+      "inferential_claim": false,
+      "median": 1.0729419813383592,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-9",
+      "values": [
+        1.0897654418454497,
+        1.0707788698852243,
+        1.0798525245348718,
+        1.0523080912520457,
+        1.0751050927914942,
+        1.0540179587679237,
+        1.0926782610443082,
+        1.0605165415862992,
+        1.0703610909218644,
+        1.066083545520682,
+        0.8188848765135118,
+        1.059358144085325,
+        1.0755821044624612,
+        1.3886073633363907,
+        1.0767684778265676,
+        1.0990747268731174
+      ],
+      "variant": "candidate"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-coupled-2048",
+      "inferential_claim": false,
+      "median": 1.0357965431898046,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-7",
+      "values": [
+        0.9360968285537512,
+        1.0224650028668856,
+        1.0354365127766925,
+        1.0529816465451405,
+        1.0347871115444003,
+        1.0140373199483976,
+        1.0471862421831348,
+        1.0227324378100957,
+        0.9480327798658336,
+        1.1062830995704571,
+        1.0498984840980867,
+        1.0664621609258518,
+        1.046484730216227,
+        1.05891392893051,
+        1.0361565736029168,
+        1.0304416151850375
+      ],
+      "variant": "baseline"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-coupled-2048",
+      "inferential_claim": false,
+      "median": 1.0512521329743794,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-7",
+      "values": [
+        1.04735886478726,
+        1.0495779498830409,
+        1.0645278630195674,
+        1.055528715675087,
+        1.0713784060584906,
+        1.0241844836840759,
+        1.036313251035832,
+        1.0579296775189022,
+        1.0728425390149134,
+        1.0529263160657176,
+        1.0276317454845678,
+        1.0648075239397043,
+        0.9340782574205432,
+        1.0537676372481593,
+        1.02517058067447,
+        1.032523482658099
+      ],
+      "variant": "candidate"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-coupled-2048",
+      "inferential_claim": false,
+      "median": 1.0508732759599204,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-9",
+      "values": [
+        1.0354026628814172,
+        0.956343311542153,
+        1.045700290530882,
+        1.0531593183173116,
+        1.1253453118415624,
+        1.043107848130166,
+        1.0600494080292153,
+        1.0700601766131972,
+        1.0516782816308052,
+        1.055127170004923,
+        1.0428723814912189,
+        1.0562536900312156,
+        1.0473512989540235,
+        1.0500682702890354,
+        1.0549185123688616,
+        1.0349941305184842
+      ],
+      "variant": "baseline"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-coupled-2048",
+      "inferential_claim": false,
+      "median": 1.059364104620621,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-9",
+      "values": [
+        1.0823057452068585,
+        1.036986117794371,
+        1.0688896434031454,
+        1.0455831883599205,
+        1.070618409714234,
+        1.0433339192712983,
+        1.0862413544248803,
+        1.0545790974560656,
+        1.0634144773363297,
+        1.0817997103736388,
+        1.0666361907819286,
+        1.1745165475017154,
+        1.0538473220893043,
+        1.0449154330661143,
+        1.0553137319049122,
+        0.930479798128208
+      ],
+      "variant": "candidate"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-generic-1024",
+      "inferential_claim": false,
+      "median": 1.012740034604508,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-7",
+      "values": [
+        0.9863535166078472,
+        1.0158394185920607,
+        1.010471354726069,
+        1.0200494758065644,
+        1.0357946810108574,
+        1.0681671330703324,
+        0.9905691300667208,
+        1.043992581088238,
+        1.0232027338492888,
+        0.993648734297059,
+        0.9683668452319866,
+        0.9995736988183531,
+        0.9959641244376961,
+        1.00880219425303,
+        1.0393758807430638,
+        1.0150087144829467
+      ],
+      "variant": "baseline"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-generic-1024",
+      "inferential_claim": false,
+      "median": 1.0297659153822754,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-7",
+      "values": [
+        1.0338100064034024,
+        1.045480820751177,
+        0.9984312975633375,
+        1.0464535537485113,
+        1.0257218243611483,
+        0.7504306651952433,
+        1.0082098524489735,
+        0.980381687882496,
+        1.0342574929274784,
+        1.0152348514522855,
+        1.0339467630729333,
+        1.021579651575492,
+        1.0389496853839513,
+        1.054257589253927,
+        1.0129793388597397,
+        1.0498151458314602
+      ],
+      "variant": "candidate"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-generic-1024",
+      "inferential_claim": false,
+      "median": 1.0084640847761328,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-9",
+      "values": [
+        1.0298425152061432,
+        1.0069140870832598,
+        1.052350730912505,
+        0.9964456452731504,
+        1.0076994343141927,
+        1.0116746556717917,
+        1.0385904958246592,
+        1.017041532690113,
+        1.0127329760870674,
+        0.9990535376860122,
+        1.0505503378957424,
+        1.0092287352380727,
+        1.005681964965148,
+        0.9748297490141655,
+        0.997406150513916,
+        0.9848578135554624
+      ],
+      "variant": "baseline"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-generic-1024",
+      "inferential_claim": false,
+      "median": 1.020124694054077,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-9",
+      "values": [
+        1.035339939886356,
+        1.0709066260136848,
+        0.9898170599941644,
+        1.0104548526506338,
+        1.091188098352301,
+        0.9838277596841875,
+        0.9561949276050661,
+        1.0586823021610197,
+        1.0169701102788122,
+        0.9873872728640916,
+        0.9947935258592558,
+        1.0071090982189015,
+        1.0247303146123452,
+        1.0445451914650328,
+        1.0675693826675035,
+        1.0232792778293418
+      ],
+      "variant": "candidate"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-generic-2048",
+      "inferential_claim": false,
+      "median": 1.0167984234962266,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-7",
+      "values": [
+        1.0147387760673487,
+        0.996854741693692,
+        1.1685543518038433,
+        0.8774869740724173,
+        0.9989348536579807,
+        1.0059552306177304,
+        1.2141907159121332,
+        1.0438832802515445,
+        1.0228191519011223,
+        1.0209771268953303,
+        0.990731398931431,
+        1.015571674047542,
+        0.9963295486726201,
+        1.0287030646223907,
+        1.0344781610272016,
+        1.0180251729449115
+      ],
+      "variant": "baseline"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-generic-2048",
+      "inferential_claim": false,
+      "median": 1.0151137273625825,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-7",
+      "values": [
+        0.9936283634131061,
+        0.972430368126014,
+        1.0238069550265807,
+        1.0004881149523266,
+        0.9493456385886551,
+        1.0203528183257848,
+        1.0267410327891844,
+        0.9723409233422814,
+        0.9934494009264214,
+        1.033906721622967,
+        1.0098746363993802,
+        0.9638725659129931,
+        1.0213457325474025,
+        1.0288664173504811,
+        1.0300914175435383,
+        1.0284887078424167
+      ],
+      "variant": "candidate"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-generic-2048",
+      "inferential_claim": false,
+      "median": 0.9989376470371425,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-9",
+      "values": [
+        1.015225931761736,
+        0.9880969751820056,
+        1.0160147466004361,
+        1.0122471361400995,
+        0.991083072057026,
+        0.9842056030287935,
+        0.989495119159383,
+        1.0040689336886013,
+        0.9876604005116791,
+        1.0354053370210223,
+        1.0159995177960932,
+        0.9972287453768873,
+        0.9862848773606813,
+        1.0122785620890633,
+        0.9730287836593582,
+        1.0006465486973977
+      ],
+      "variant": "baseline"
+    },
+    {
+      "complete_pairs": 16,
+      "family": "dense-generic-2048",
+      "inferential_claim": false,
+      "median": 1.0218560312264189,
+      "scope": "descriptive FP4/native contrast; primary inference compares implementations within each lane",
+      "tier": "certified-1e-9",
+      "values": [
+        1.1983888470322914,
+        1.0266050739555983,
+        1.0231111306636653,
+        1.019355401095335,
+        1.0132214200041854,
+        1.0021559422076622,
+        1.0152878016417437,
+        0.9702388085633938,
+        1.0258713063440499,
+        0.9648104304083468,
+        1.0267049457047683,
+        1.0067992931283842,
+        1.037153839277494,
+        1.035921342547779,
+        1.0206009317891722,
+        1.0658115259119245
+      ],
+      "variant": "candidate"
+    }
+  ],
+  "failed_blocks": [],
+  "freeze": {
+    "path": "artifacts/gpup-checker2-v1/freeze.json",
+    "sha256": "3412c8c033748f5287db5e2a13c168dadfbaa21217cb65003cfa364b5a6ee66c"
+  },
+  "limitations": [
+    "constructed cyclic model streams",
+    "shared device and temporal independence assumption",
+    "intervals condition on complete pairs when coverage is missing",
+    "no public/default adoption"
+  ],
+  "missing": [],
+  "partial_responses": [],
+  "planned_sessions": 512,
+  "provisional_passes": 13,
+  "schema_version": 1,
+  "scoped_passes": 16
+}

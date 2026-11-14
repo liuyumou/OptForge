@@ -1,0 +1,55 @@
+{
+  "acceptance": {
+    "path": "docs/benchmarks/data/checker2-acceptance-v1.json",
+    "sha256": "710c5130cbde713a966661475507c37541abe9489cebb96cddd4047559e7854b"
+  },
+  "cleanup_empty": true,
+  "closing_administration_cpu_seconds": 128,
+  "cpu_caps_seconds": {
+    "acceptance": 12000,
+    "cleanup": 2000,
+    "confirmation": 32000,
+    "diagnosis": 12000,
+    "implementation": 16000,
+    "native": 16000,
+    "reporting": 6000
+  },
+  "cpu_ns": {
+    "acceptance": 11920056816972,
+    "cleanup": 485794686820,
+    "confirmation": 18786083231360,
+    "diagnosis": 1981111653536,
+    "implementation": 2929726934008,
+    "native": 3031537262572,
+    "reporting": 5758415601316
+  },
+  "cpu_seconds": 44892.726186584,
+  "evidence": {
+    "path": "docs/benchmarks/data/checker2-evidence-v1.json",
+    "sha256": "6bae84b77822b7784135f2d63536ff3445e676530bcb21ce57250fe292d94e08"
+  },
+  "failed_cpu_seconds": 5040.0,
+  "failed_gpu_seconds": 0.0,
+  "failed_jobs": 3,
+  "failed_reservations": [
+    "build-vector3",
+    "memory-probe",
+    "portable"
+  ],
+  "full_receipts": {
+    "path": "docs/benchmarks/data/checker2-resources-v1.json.gz",
+    "sha256": "6ec9c37ecac318c10f5e3c8aad5d900fa568971efaadefc49dae6878fc9f275c"
+  },
+  "gpu_caps_seconds": {
+    "acceptance": 2000,
+    "confirmation": 10000
+  },
+  "gpu_ns": {
+    "acceptance": 1125352029197,
+    "confirmation": 4682411215939
+  },
+  "gpu_seconds": 5807.763245136,
+  "historical_transfers": 0,
+  "preparation_cpu_seconds": 512,
+  "status": "closed"
+}

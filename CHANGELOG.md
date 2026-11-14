@@ -1,5 +1,16 @@
 # Changelog
 
+## Exact checker and preparation (2026-11-15)
+
+- Add an isolated exact checker/preparation executor with guarded original-order
+  arithmetic, validated parallel parsing and lower retained checker memory.
+- Complete 512 independent sessions / 16384 certified solves: 16/16 scoped
+  implementation comparisons pass; retain uncertainty, cost partitions, target
+  dependence and every unfavorable development observation.
+- Preserve public defaults, original authority and all historical evidence.
+  [Report](docs/benchmarks/lp-checker2.md).
+
+
 ## DELIVERY/MIXED2 integration (2026-11-14)
 
 - Integrate DELIVERY2 batching/overlap, DELIVERY3 scoped delivery improvements and

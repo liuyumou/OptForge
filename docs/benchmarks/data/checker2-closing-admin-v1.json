@@ -1,0 +1,54 @@
+{
+  "accounting": {
+    "path": "docs/benchmarks/data/checker2-accounting-v1.json",
+    "sha256": "85e5b0031d3574da61d0495af637f52ac2089f69d21bed546da9b1feee1e1538"
+  },
+  "charged_closing_cpu_seconds": 128,
+  "checks": [
+    "all supervised jobs settled",
+    "allocation closed within caps",
+    "current report and handoffs",
+    "changed document links",
+    "historical navigation and backlog",
+    "diff whitespace"
+  ],
+  "commands": [
+    {
+      "command": [
+        "/tmp/fp4-pr-clean-v2/.venv/bin/python",
+        "tools/lp_checker2_report_v2.py",
+        "close"
+      ],
+      "stderr": "",
+      "stdout": "{'status': 'closed', 'cpu_caps_seconds': {'implementation': 16000, 'diagnosis': 12000, 'native': 16000, 'acceptance': 12000, 'confirmation': 32000, 'reporting': 6000, 'cleanup': 2000}, 'gpu_caps_seconds': {'acceptance': 2000, 'confirmation': 10000}, 'cpu_ns': {'implementation': 2929726934008, 'diagnosis': 1981111653536, 'native': 3031537262572, 'acceptance': 11920056816972, 'confirmation': 18786083231360, 'reporting': 5758415601316, 'cleanup': 485794686820}, 'gpu_ns': {'acceptance': 1125352029197, 'confirmation': 4682411215939}, 'cpu_seconds': 44892.726186584, 'gpu_seconds': 5807.763245136, 'preparation_cpu_seconds': 512, 'closing_administration_cpu_seconds': 128, 'failed_jobs': 3, 'failed_cpu_seconds': 5040.0, 'failed_gpu_seconds': 0.0, 'failed_reservations': ['build-vector3', 'memory-probe', 'portable'], 'full_receipts': {'path': 'docs/benchmarks/data/checker2-resources-v1.json.gz', 'sha256': '6ec9c37ecac318c10f5e3c8aad5d900fa568971efaadefc49dae6878fc9f275c'}, 'acceptance': {'path': 'docs/benchmarks/data/checker2-acceptance-v1.json', 'sha256': '710c5130cbde713a966661475507c37541abe9489cebb96cddd4047559e7854b'}, 'evidence': {'path': 'docs/benchmarks/data/checker2-evidence-v1.json', 'sha256': '6bae84b77822b7784135f2d63536ff3445e676530bcb21ce57250fe292d94e08'}, 'historical_transfers': 0, 'cleanup_empty': True}\n"
+    },
+    {
+      "command": [
+        "/tmp/fp4-pr-clean-v2/.venv/bin/python",
+        "/workspace/AI-Optimizer/artifacts/gpup-checker2-v1/render_report_v2.py"
+      ],
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/fp4-pr-clean-v2/.venv/bin/python",
+        "/workspace/AI-Optimizer/artifacts/gpup-checker2-v1/complete_handoff.py"
+      ],
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "stderr": "",
+      "stdout": ""
+    }
+  ],
+  "elapsed_before_commit_ns": 2041023930,
+  "note": "Heavy artifact staging and full documentation/native gates precede this separately reserved closing administration.",
+  "status": "passed"
+}

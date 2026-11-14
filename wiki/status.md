@@ -1,5 +1,56 @@
 # Project Status
 
+## Exact checker and preparation optimization complete (2026-11-15)
+
+SPEC-0042 / ADR-0075 deliver an isolated exact checker/preparation executor shared
+by native and FP4. Guarded products and vectorized original-order reductions,
+validated parallel parsing, contiguous norm preparation, one original-byte hash
+and transient-buffer release preserve original authority and full fallback.
+The measured candidate uses an admitted x86-64-v4 host target; public build and
+solver defaults remain exact. Numerical solve, CUDA image and work are unchanged.
+
+All 16 independent frozen blocks complete: 512 sessions / 16384 certified solves.
+Scoped benefit passes 16/16 comparisons; 13/16 pass the provisional 1.10 bound.
+Complete-session paired medians are 1.1348–1.2832x versus the original admitted
+implementation within each lane. Strict coupled2048 FP4 session medians fall
+17.853 → 14.049 seconds with the same 800 updates. All intervals,
+order sensitivity, cost partitions, rejected versions and limitations remain.
+All four individual regressing pairs are retained; their cost locations are
+reported without assigning an unproved scheduler, cache or device cause.
+Four idle 2048 checkers use 1916.7 → 1019.2 MiB sampled RSS; this is not a peak
+memory enclosure. Wider-vector compilation is included in the measured gain;
+the separate source/target factorial diagnosis remains explicit.
+
+Final native acceptance: 638 repository Rust / 785 Python and 31 isolated Rust.
+All 20 preparations, fresh device/process/recovery contracts and 1152 admission
+trajectories match. Original serial checking covers 17536 responses /
+56992 assessments / 144 distinct endpoint/tier pairs. Portable replay
+without the original artifacts tree passes. All 2158 historical files,
+earlier navigation and backlog entries remain exact. No scientific retry.
+
+Independent allocation closed at 44892.726186584 CPU /
+5807.763245136 GPU seconds, including 128 closing CPU seconds. All
+3 failed development reservations retain full charges and sources; cleanup
+is empty. The one-second supervisor and all 100 ms advisories remain unchanged.
+GPUP-8 incomplete, GPUP-9 gated; no public adoption or follow-on study released.
+Commit locally only. Report: [checker/preparation](../docs/benchmarks/lp-checker2.md).
+
+
+## Exact checker and preparation optimization authorized (2026-11-14)
+
+The user requests continuing exact-checker and preparation optimization.
+SPEC-0042 / ADR-0075 govern isolated CPU attribution, exact original-authority
+optimizations shared by native and FP4, current admission and an independent
+16-block / 512-session / 16384-solve full-lifecycle comparison. No endpoint-answer
+memoization, numerical work change, public default or historical regrading.
+Independent 96000 CPU / 12000 GPU seconds; four slots, 16 GiB sampled RSS,
+12 GiB device buffers, one pinned shared lease and unchanged one-second supervisor.
+Phase caps and 512 preparation / 128 closing reserves are in SPEC-0042.
+Receipts: artifacts/gpup-checker2-v1. Preserve all failures, old files and closed
+allocations. Record positive, negative and inconclusive findings. Commit locally.
+GPUP-8 remains incomplete and GPUP-9 gated.
+
+
 ## DELIVERY/MIXED2 integration (2026-11-14)
 
 The eleven commits from DELIVERY2 through MIXED2-CONFIRM2 have passed acceptance
