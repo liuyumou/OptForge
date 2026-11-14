@@ -1,5 +1,15 @@
 # Changelog
 
+## DELIVERY/MIXED2 integration (2026-11-14)
+
+- Integrate DELIVERY2 batching/overlap, DELIVERY3 scoped delivery improvements and
+  DELIVERY4 exact hashing/lifecycle diagnosis with their original evidence.
+- Integrate MIXED2 CPU contracts, the diagnostic pilot, guarded FP4 increments,
+  scenario reuse and completed independent confirmation; retain all failed and
+  incomplete studies and unchanged public defaults.
+- Record separate [PR integration acceptance](docs/benchmarks/lp-delivery-mixed2-pr.md).
+
+
 ## MIXED2 prepared GPU pilot (2026-11-12)
 
 - Separate bounded diagnostic admission from the provisional 1.10x adoption target.

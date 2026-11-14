@@ -1,0 +1,171 @@
+{
+  "closing_administration_cpu_seconds": 1000,
+  "closing_scope": "Final receipt packaging, documentation, commit, publication, normal merge and guarded cleanup",
+  "cpu_caps_seconds": {
+    "cleanup": 1000,
+    "implementation": 2000,
+    "native": 16000,
+    "portability": 8000,
+    "publishing": 10000,
+    "reporting": 3000,
+    "research": 8000
+  },
+  "cpu_ns": {
+    "cleanup": 1000000000000,
+    "implementation": 512000000000,
+    "native": 8960878745904,
+    "portability": 2635962349008,
+    "publishing": 1426693531120,
+    "reporting": 43670111368,
+    "research": 675105058844
+  },
+  "cpu_seconds": 15254.309796244,
+  "failed_reservations": 1,
+  "full_failed_charge_cpu_seconds": 7200,
+  "gpu_seconds": 0,
+  "historical_transfers": 0,
+  "settlements": [
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery-pr-v1/resources/clean-portability-v1.settlement.json",
+        "sha256": "3c8d8530663cb21c4c0cb83ec644e1110d3e3ed906fe17ebf1b960785fd26e31"
+      },
+      "settlement": {
+        "cpu_ns": 2310078733824,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "portability",
+        "queue_ns": 517,
+        "resource": {
+          "path": "artifacts/gpup-delivery-pr-v1/resources/clean-portability-v1.resource.json",
+          "sha256": "0a69ed8039e200ece5c3f4d703065a71c0289896c4f259b738a1559a141fd9c3"
+        },
+        "status": "passed"
+      },
+      "supervisor_cleanup_empty": true
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery-pr-v1/resources/clean-process-v1.settlement.json",
+        "sha256": "db7c54b4fe9a65bf5e6c5e47bdcde321fcc1488f8bfd0f25d6ef35188c9b91a1"
+      },
+      "settlement": {
+        "cpu_ns": 325883615184,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "portability",
+        "queue_ns": 425,
+        "resource": {
+          "path": "artifacts/gpup-delivery-pr-v1/resources/clean-process-v1.resource.json",
+          "sha256": "caec3ed1edbc202d98ca324f74e6c511fd042cce65cfb76a318a9c5cdcffc72a"
+        },
+        "status": "passed"
+      },
+      "supervisor_cleanup_empty": true
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery-pr-v1/resources/final-review-v1.settlement.json",
+        "sha256": "53fba448fcb29f31bb790c11f16302f19692e799a477d486fa3ea53fe36767d3"
+      },
+      "settlement": {
+        "cpu_ns": 43670111368,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "queue_ns": 390,
+        "resource": {
+          "path": "artifacts/gpup-delivery-pr-v1/resources/final-review-v1.resource.json",
+          "sha256": "940fc67c78913c2ed7c3591115ab2307cc55c8a8425a49ab7808adfd301c6ada"
+        },
+        "status": "passed"
+      },
+      "supervisor_cleanup_empty": true
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery-pr-v1/resources/full-native-v1.settlement.json",
+        "sha256": "64357b4e1346211494fa5ee439e9d05e0cbca54b9c4c5cc11b7deda50a595dd2"
+      },
+      "settlement": {
+        "cpu_ns": 7200000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "queue_ns": 347,
+        "resource": {
+          "path": "artifacts/gpup-delivery-pr-v1/resources/full-native-v1.resource.json",
+          "sha256": "f8bb589fe9ad8035dab6ee91efc77ddeb142907bdac09b94040de62f03b5bba3"
+        },
+        "status": "refused"
+      },
+      "supervisor_cleanup_empty": true
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery-pr-v1/resources/full-native-v2.settlement.json",
+        "sha256": "bafa0c431eacd9710c9c196cb539fc5e5886e8798a3d272c2c9044dbc48506ea"
+      },
+      "settlement": {
+        "cpu_ns": 1760878745904,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "queue_ns": 506,
+        "resource": {
+          "path": "artifacts/gpup-delivery-pr-v1/resources/full-native-v2.resource.json",
+          "sha256": "827e4c248ff580883a69dfea4e80b745e2c3e3911b73d5f8dc35d9d2010380b2"
+        },
+        "status": "passed"
+      },
+      "supervisor_cleanup_empty": true
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery-pr-v1/resources/isolated-research-v1.settlement.json",
+        "sha256": "f81f842a47e905dd6c8d051e6e850253bbe798a8d0e8f1605560956fa923e22a"
+      },
+      "settlement": {
+        "cpu_ns": 675105058844,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "research",
+        "queue_ns": 453,
+        "resource": {
+          "path": "artifacts/gpup-delivery-pr-v1/resources/isolated-research-v1.resource.json",
+          "sha256": "3de043e1f5cd28f910cd56e514123b66c3279c4da1d4b17c3239c637d46a196d"
+        },
+        "status": "passed"
+      },
+      "supervisor_cleanup_empty": true
+    },
+    {
+      "binding": {
+        "path": "artifacts/gpup-delivery-pr-v1/resources/publish-features-v1.settlement.json",
+        "sha256": "94a939a03cecb89ed6eddf7780f5e2d08fb34ffa11b0f1ca704bdcb7ceaf79c0"
+      },
+      "settlement": {
+        "cpu_ns": 1426693531120,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "publishing",
+        "queue_ns": 496,
+        "resource": {
+          "path": "artifacts/gpup-delivery-pr-v1/resources/publish-features-v1.resource.json",
+          "sha256": "4ed52b44a851b76d01d4ca5ec31d1b8910fc6b22dafac456d6cb39c76ba53727"
+        },
+        "status": "passed"
+      },
+      "supervisor_cleanup_empty": true
+    }
+  ],
+  "status": "closed",
+  "supervisor_cleanup_empty": true
+}

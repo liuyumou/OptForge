@@ -1,5 +1,47 @@
 # Agent Instructions
 
+## DELIVERY/MIXED2 PR acceptance complete (2026-11-14)
+
+The user requests publishing, normally merging and safely cleaning up all
+unmerged features. PR #25 integrates eleven original commits from DELIVERY2
+through MIXED2-CONFIRM2 with their ancestry and scientific evidence unchanged.
+Local acceptance passes 810 Rust / 781 Python tests, the 1049-request / 5121-output
+CPU oracle and portable replay, including all 16384 final confirmation responses.
+Clean-checkout prerequisite builds resolve all three skipped process-test groups
+with 12 passing cases. All 2153 historical files and earlier navigation remain exact.
+
+Hosted Actions reports startup_failure with zero jobs at the original feature
+head; final-head status is recorded separately in the PR. Use a normal merge
+without changing or bypassing protection. Remove verified merged branches and
+clean obsolete worktrees, preserving the unique pre-CI archival branch and all
+scientific artifacts. Public defaults, GPUP-8 and GPUP-9 gates stay unchanged.
+
+Separate integration allocation closed at 15254.309796244 / 48000 CPU seconds,
+zero GPU, including the failed 7200-second environment reservation and 1000
+closing-administration seconds. All supervised cleanup is empty; historical
+allocations remain closed. No follow-on performance study is released.
+Report: [PR acceptance](docs/benchmarks/lp-delivery-mixed2-pr.md).
+
+
+## DELIVERY/MIXED2 PR integration authorized (2026-11-14)
+
+The user requests checking all unmerged features, integrating them through a PR,
+merging and safe cleanup. This authorizes publishing the eleven original commits
+from DELIVERY2 through MIXED2-CONFIRM2, preserving ancestry and every scientific
+record. Earlier local-only entries retain their completed-task scope. No new GPU
+study, default change, historical regrading or GPUP-9 release is implied.
+
+Separate CPU-only ceiling 48000 seconds: implementation 2000 (512 preparation),
+native 16000, isolated research 8000, portability 8000, publishing 10000,
+reporting 3000 and cleanup 1000 (reserved for closing publication, merge and cleanup). Four slots,
+16 GiB sampled RSS and the unchanged admitted one-second supervisor; retain
+100 ms advisories and full failed reservations. Historical allocations stay closed.
+Receipts: artifacts/gpup-delivery-pr-v1. Run the full native gate, isolated CPU
+packages, portable replay, exact source/history checks and hosted CI inspection.
+Merge normally without bypassing protection; remove only verified merged refs
+and clean obsolete worktrees. Preserve unique archival history and study artifacts.
+
+
 ## MIXED2 confirmation complete under revised sampling policy (2026-11-14)
 
 SPEC-0041 / ADR-0074 complete all 32 independent frozen blocks, 512 sessions and
