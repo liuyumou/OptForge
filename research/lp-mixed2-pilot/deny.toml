@@ -1,0 +1,16 @@
+[advisories]
+version = 2
+
+[licenses]
+version = 2
+allow = ["MIT", "Apache-2.0", "Unicode-3.0"]
+
+[bans]
+multiple-versions = "deny"
+wildcards = "allow"
+# lp_mixed2_pilot_dependencies.py rejects every non-path wildcard and binds the five
+# retained in-repository paths; cargo-deny cannot exempt these public path crates.
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

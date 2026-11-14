@@ -1,0 +1,36 @@
+{
+  "analysis": {
+    "path": "docs/benchmarks/data/mixed2-fp4-analysis-v1.json",
+    "sha256": "b9deed74149e38213560b36e5409a6a4bec6626fac8b170a9954eb3f8a1b4d62"
+  },
+  "archive": {
+    "path": "docs/benchmarks/data/mixed2-fp4-records-v1.json",
+    "sha256": "a8864a28da5eafa76c8920ca0fe2340145a644dc9afa9999cd3ca9032f796589"
+  },
+  "binary": {
+    "path": "artifacts/gpup-mixed2-fp4-v1/build-v10/executor",
+    "sha256": "a95bfafc4cd5ec62549f5e015f769aa9bf5223e8d15f99ebedebcaf9491b06b9"
+  },
+  "cleanup_empty": true,
+  "endpoint_assessments": 293,
+  "historical_files": 1900,
+  "history": {
+    "path": "docs/benchmarks/data/mixed2-fp4-history-v1.json",
+    "sha256": "868c5d1de2352c107a77bad1e0714bbe7022cc74fe4fb26856991a2e5a1c758d"
+  },
+  "image": {
+    "path": "artifacts/gpup-mixed2-fp4-v1/build-v8/mixed.cubin",
+    "sha256": "40234ea66c9d781b2da03be2172f7699fcef375c093490f33e546db76c86cff0"
+  },
+  "isolated_rust_tests": 27,
+  "native": {
+    "path": "artifacts/gpup-mixed2-fp4-v1/resources/native-v2.settlement.json",
+    "sha256": "4a49ba892fd15df3faccbb71df0d0a61099515bb281f2bc3bffc72294fe7de83"
+  },
+  "portable_replay": true,
+  "python_tests": 700,
+  "retention_pass": false,
+  "rust_tests": 638,
+  "scientific_confirmation": "incomplete-confirmation",
+  "status": "passed"
+}

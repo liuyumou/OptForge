@@ -1,0 +1,86 @@
+{
+  "cleanup_empty": true,
+  "closing_administration_cpu_seconds": 128,
+  "cpu_caps_seconds": {
+    "acceptance": 6000,
+    "cleanup": 3200,
+    "confirmation": 28800,
+    "diagnosis": 8000,
+    "implementation": 10000,
+    "native": 20000,
+    "reporting": 14000
+  },
+  "cpu_ns": {
+    "acceptance": 1572328132352,
+    "cleanup": 128000000000,
+    "confirmation": 25756837555896,
+    "diagnosis": 3269687388024,
+    "implementation": 1025107484892,
+    "native": 16480358479532,
+    "reporting": 10247255217540
+  },
+  "cpu_seconds": 58479.574258236,
+  "evidence": {
+    "path": "docs/benchmarks/data/mixed2-confirm-evidence-v1.json",
+    "sha256": "0ed359c87139771fd21479a2e925e721b9b4d789ba8507e16535d2b7c5fdf0c0"
+  },
+  "evidence_verification": {
+    "path": "docs/benchmarks/data/mixed2-confirm-evidence-check-v1.json",
+    "sha256": "2a4e8dcdffbd1fc61dd306ad1f1746d6ca4c22c8d397256466802a07d0be02c5"
+  },
+  "failed_cpu_seconds": 42520.0,
+  "failed_gpu_seconds": 5280.0,
+  "failed_jobs": 33,
+  "failed_reservations": [
+    "confirmation-b00",
+    "confirmation-b01",
+    "confirmation-b02",
+    "confirmation-b03",
+    "confirmation-b04",
+    "confirmation-b06",
+    "confirmation-b07",
+    "confirmation-b08",
+    "confirmation-b09",
+    "confirmation-b10",
+    "confirmation-b11",
+    "confirmation-b13",
+    "confirmation-b14",
+    "confirmation-b15",
+    "confirmation-b17",
+    "confirmation-b19",
+    "confirmation-b20",
+    "confirmation-b25",
+    "confirmation-b26",
+    "confirmation-b27",
+    "confirmation-b28",
+    "confirmation-b29",
+    "confirmation-b30",
+    "confirmation-b31",
+    "cpu-library-observation-v1",
+    "cpu-library-observation-v2",
+    "final-acceptance-v1",
+    "native-v1",
+    "native-v2",
+    "native-v3",
+    "portable-v2",
+    "staging-v1",
+    "supervisor-contracts-v1"
+  ],
+  "full_receipts": {
+    "path": "docs/benchmarks/data/mixed2-confirm-resources-v1.json.gz",
+    "sha256": "c4afff563598a71d6f5397406a15e52eb45a57cc9e5a2da3370b19dbf4b5e5cf"
+  },
+  "gpu_caps_seconds": {
+    "acceptance": 1200,
+    "confirmation": 7400,
+    "diagnosis": 400
+  },
+  "gpu_ns": {
+    "acceptance": 236389298264,
+    "confirmation": 6432227781047,
+    "diagnosis": 0
+  },
+  "gpu_seconds": 6668.617079311,
+  "historical_transfers": 0,
+  "status": "closed"
+}

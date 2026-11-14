@@ -1,5 +1,15 @@
 # Project Status
 
+## DELIVERY/MIXED2 integration (2026-11-14)
+
+The eleven commits from DELIVERY2 through MIXED2-CONFIRM2 have passed acceptance
+for the user-requested [PR #25](https://github.com/liuyumou/OptForge/pull/25). The completed confirmation covers 512 sessions /
+16384 certified solves and passes five of eight scoped value comparisons.
+The [integration report](../docs/benchmarks/lp-delivery-mixed2-pr.md) records
+acceptance and cleanup scope. Next ready remains GPUP-8-DISPOSITION; public
+defaults and the GPUP-9 gate are unchanged. Earlier entries retain their scope.
+
+
 ## GPUP-FP4-GPU-PILOT completed (2026-11-11)
 
 The [independent pilot](../docs/benchmarks/lp-fp4-gpu-pilot.md) completes all

@@ -1,0 +1,90 @@
+{
+  "binary_archive": {
+    "path": "artifacts/gpup-delivery2-v1/binaries/df8ad9a98ac6549d3ee48009e01ecb28fd0e6e28a255e3a2d110c35806f9a76c",
+    "sha256": "df8ad9a98ac6549d3ee48009e01ecb28fd0e6e28a255e3a2d110c35806f9a76c"
+  },
+  "cleanup": [
+    {
+      "empty": true,
+      "settlement": {
+        "path": "artifacts/gpup-delivery2-v1/resources/build-v1.settlement.json",
+        "sha256": "5532b33c4b9602749ce4eacbc19d3d69c8d0788a50cf2bc3a947da71c36e15d8"
+      }
+    },
+    {
+      "empty": true,
+      "settlement": {
+        "path": "artifacts/gpup-delivery2-v1/resources/cpu-acceptance-v1.settlement.json",
+        "sha256": "ae685a25c98fc84c3436a3428f2717510b3fb7aa582c69a104636bff17783501"
+      }
+    },
+    {
+      "empty": true,
+      "settlement": {
+        "path": "artifacts/gpup-delivery2-v1/resources/device-acceptance-v1.settlement.json",
+        "sha256": "5a1959cf5cf768ff53557f44b5fe8b4911f95c9aadfcb76ca0603e20fce9a4c8"
+      }
+    },
+    {
+      "empty": true,
+      "settlement": {
+        "path": "artifacts/gpup-delivery2-v1/resources/native-gate-v1.settlement.json",
+        "sha256": "371ff79010d409c9705c25f19ea80435757dde59e7a75f3cb9511fdf0a6df4db"
+      }
+    },
+    {
+      "empty": true,
+      "settlement": {
+        "path": "artifacts/gpup-delivery2-v1/resources/native-gate-v2.settlement.json",
+        "sha256": "5e0284412193789f26bee06582bdac492e39e57f117202fc6176815a817718e4"
+      }
+    },
+    {
+      "empty": true,
+      "settlement": {
+        "path": "artifacts/gpup-delivery2-v1/resources/report-v1.settlement.json",
+        "sha256": "7cc9dee2061146382bda0c174def523230cb6711185d0f7508ded6becc50e2b5"
+      }
+    },
+    {
+      "empty": true,
+      "settlement": {
+        "path": "artifacts/gpup-delivery2-v1/resources/software-tail-v1.settlement.json",
+        "sha256": "9121b74f7b78082e51083a01f8d6f84656e098804603b9bc480ed6d5d86f6605"
+      }
+    },
+    {
+      "empty": true,
+      "settlement": {
+        "path": "artifacts/gpup-delivery2-v1/resources/study-v1.settlement.json",
+        "sha256": "fdf3faa15da0b3853f2e573b501665a4d0898c79120f2ad416b8f071dcc55b50"
+      }
+    }
+  ],
+  "cpu": {
+    "path": "artifacts/gpup-delivery2-v1/cpu-v1/result.json",
+    "sha256": "398e498f9835ba98a58604676fde0560ee84d1543794bcb70419efcf5c13efa3"
+  },
+  "device": {
+    "path": "artifacts/gpup-delivery2-v1/lifecycle-v1/result.json",
+    "sha256": "9996cfc6bced600e9b2782fcaf20728dd6c1bbe7170bbacf321d3cba9933818b"
+  },
+  "exact_historical_files": 1666,
+  "history": {
+    "path": "docs/benchmarks/data/delivery2-history-v1.json",
+    "sha256": "5cc77517a8293b54dc114f65aca0fb6ebc607cca0e681c0d4ae3a1ea31ae65a6"
+  },
+  "native": {
+    "path": "artifacts/gpup-delivery2-v1/resources/native-gate-v2.settlement.json",
+    "sha256": "5e0284412193789f26bee06582bdac492e39e57f117202fc6176815a817718e4"
+  },
+  "result": {
+    "path": "docs/benchmarks/data/delivery2-result-v1.json",
+    "sha256": "d4c0f2ad2dd934446ebb8929a62d9bfd8afae12da0746e3347ad98ea2b0e14f7"
+  },
+  "smoke": {
+    "path": "artifacts/gpup-delivery2-v1/smoke-v1/result.json",
+    "sha256": "167d5507730ad728d14e029bf4031c6de6be12a6e120e534fb3b10e650f97ebc"
+  },
+  "status": "passed"
+}

@@ -1,0 +1,46 @@
+{
+  "analysis": {
+    "path": "docs/benchmarks/data/mixed2-reuse-analysis-v1.json",
+    "sha256": "020f352b22054bd510053c215f330c0a4340f71818707073bd9907698d62b071"
+  },
+  "archive": {
+    "path": "docs/benchmarks/data/mixed2-reuse-records-v1.json",
+    "sha256": "89ac3ca7dbedbf140a1f68cfa5f9e767e38250c66207090dcb7ccaf86236466a"
+  },
+  "binary": {
+    "path": "artifacts/gpup-mixed2-reuse-v1/build-v2/executor",
+    "sha256": "4fde7896e07c7b01554d0ad9e2563f3e8436785ff41b6b51cbdb7f7842a30b34"
+  },
+  "cleanup_empty": true,
+  "evidence": {
+    "path": "docs/benchmarks/data/mixed2-reuse-evidence-v1.json",
+    "sha256": "65585eb8b9f1f0f08676a232ce390b5d7da8cdc3c41715e02376c5d5eaa94f58"
+  },
+  "historical_files": 1957,
+  "history": {
+    "path": "docs/benchmarks/data/mixed2-reuse-history-v1.json",
+    "sha256": "eddd182d7270b87a01d0c290bc1c79287e13de1fafdd61fbb9ce53b5bd1a3bed"
+  },
+  "image": {
+    "path": "artifacts/gpup-mixed2-fp4-v1/build-v8/mixed.cubin",
+    "sha256": "40234ea66c9d781b2da03be2172f7699fcef375c093490f33e546db76c86cff0"
+  },
+  "isolated_rust_tests": 28,
+  "native": {
+    "path": "artifacts/gpup-mixed2-reuse-v1/resources/final-native-v1.settlement.json",
+    "sha256": "7b8cf3ff0fed55b3b058893d07261c8f905f457e436bdce92ed657b6d80dd96d"
+  },
+  "portable_replay": true,
+  "production_adoption": false,
+  "python_tests": 706,
+  "rust_tests": 638,
+  "scientific_confirmation": "incomplete-confirmation",
+  "serial": {
+    "path": "artifacts/gpup-mixed2-reuse-v1/serial-final-v1/result.json",
+    "sha256": "3efae2ecf37a59331f1fb26b73c2ff9027372b7584cef5be15f88c0a5845c47c"
+  },
+  "serial_requests": 5820,
+  "serial_responses": 1778,
+  "serial_unique": 197,
+  "status": "passed"
+}

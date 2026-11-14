@@ -41,9 +41,39 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-MIXED2
+next_ready_task: GPUP-8-DISPOSITION
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-MIXED2-CONFIRM2
+    title: Complete independent MIXED2 confirmation after availability diagnosis
+    status: complete
+    depends_on: [GPUP-MIXED2-CONFIRM]
+    specification: docs/specifications/SPEC-0041-mixed2-confirm2.md
+    acceptance: "All 32 frozen blocks, 512 complete sessions and 16384 certified solves; scoped value passes 5/8 comparisons. Revised finite one-second sampling policy retains all 100 ms exceedances and sampled-memory limitations. 39 supervisor contracts, full native checks, three full-size pilots, exact trajectories, independent serial checking, portable replay and historical preservation pass. Old results/charges remain exact. No public default or GPUP-9 release. Report: docs/benchmarks/lp-mixed2-confirm2.md."
+  - id: GPUP-MIXED2-CONFIRM
+    title: Execute independent MIXED2 confirmation under corrected supervision
+    status: complete
+    depends_on: [GPUP-MIXED2-REUSE]
+    specification: docs/specifications/SPEC-0040-mixed2-confirm.md
+    acceptance: "All 32 frozen blocks attempted; scientific confirmation incomplete with 324 complete sessions / 10368 certified solves, 280 additional partial-session responses, 188 missing cells and 24 resource refusals. Controlled supervision fixes, 36 contracts, uninstrumented native acceptance, 576 exact smoke/pilot comparisons, original serial checking and portable replay pass. Preserve every failure/full charge and all history. No scientific retry, confirmed speedup, public default or GPUP-9 release. Report: docs/benchmarks/lp-mixed2-confirm.md."
+  - id: GPUP-MIXED2-REUSE
+    title: Diagnose reliability and confirm changing-model FP4 reuse
+    status: complete
+    depends_on: [GPUP-MIXED2-FP4]
+    specification: docs/specifications/SPEC-0039-mixed2-reuse.md
+    acceptance: "SPEC-0039 / ADR-0072 implementation and bounded evaluation delivered; confirmation incomplete after two consecutive supervisor heartbeat failures. Four original-authority scenarios with identical operator, CPU preparation overlap, exact switching/reset and unchanged numerical solve/image. Retain 31 complete sessions / 992 certified solves plus 26 certified partial-session files; 29 blocks unattempted, 481 missing cells, no retry or confirmation pass. Independent serial checking, current-host device/four-sanitizer admission, native acceptance, portable evidence and historical preservation pass. No public default or GPUP-9 release. Report: docs/benchmarks/lp-mixed2-reuse.md."
+  - id: GPUP-MIXED2-FP4
+    title: Implement and evaluate FP4 tensor increments with high-precision authority
+    status: complete
+    depends_on: [GPUP-MIXED2-PILOT]
+    specification: docs/specifications/SPEC-0038-mixed2-fp4.md
+    acceptance: "SPEC-0038 / ADR-0071 implementation and bounded evaluation delivered; scientific confirmation incomplete. Isolated FP4 tensor increments, FP64 state/references, conservative local bounds, exact recovery and independent final checking. Larger dense512/1024/2048 available strict pairs show 1.10–1.13x prepared and up to 1.89x GPU-phase gains; small families regress. A supervisor heartbeat stop leaves one frozen block incomplete, never retried. Retain 1000 complete sessions / 6000 solves plus six retained response files without complete teardown, 5634 certificates and 372 intentional refusals. All missing cells, partial data, failed reservations and old history remain exact; no adoption/default/GPUP-9 release. Report: docs/benchmarks/lp-mixed2-fp4.md."
+  - id: GPUP-MIXED2-PILOT
+    title: Measure prepared matrix attribution and FP32 storage plus guard costs
+    status: complete
+    depends_on: [GPUP-MIXED2, GPUP-DELIVERY4]
+    specification: docs/specifications/SPEC-0037-mixed2-pilot.md
+    acceptance: "576 exact native solves / 528 certificates / 48 intentional refusals; 192 product cells and independent rational replay; all four new-image sanitizers; FP32 ties or loses and guarded throughput 0.350-0.429x; profiler disturbance leaves native matrix share inconclusive; 1.10x provisional adoption target separated from diagnostic admission; historical results/defaults exact; independent resource closure and portable evidence in report"
   - id: GPUP-DIAG
     title: Record system diagnosis, concrete design priorities and isolated cuOpt setup
     status: complete
@@ -122,18 +152,30 @@ tasks:
     depends_on: [GPUP-FP4-ACCEL]
     specification: docs/specifications/SPEC-0032-exact-checker-acceleration.md
     acceptance: "SPEC-0032 / ADR-0064: cached original feasibility indices, independent row scheduling, exact integer product classification and original-tree scratch reuse. All 102 serial receipts, 2880 feasibility cases, 720 certificate cases and 500169 product pairs match. 960 new complete-cost cells, 880 certificates, identical audits/checkpoints/recovery/work. Dense512 CPU checker 2.54x; strict FP4 prepared total 19.203 to 15.924 ms (1.206x). Native 16.527 ms; observed FP4 lead uncertain. Broad cold 0.9994/0.9934x fails retention; no preset. Report: docs/benchmarks/lp-fp4-checker.md."
+  - id: GPUP-DELIVERY4
+    title: Attribute and reduce cold startup and lifecycle costs
+    status: complete
+    depends_on: [GPUP-DELIVERY3]
+    specification: docs/specifications/SPEC-0035-delivery4.md
+    acceptance: "SPEC-0035 / ADR-0068: exact SHA-256 acceleration and complete lifecycle attribution. All 192 pilot and 3072 confirmation cells match originals; 2816 certificates, 256 intentional refusals. Dense ratios 1.0760–1.0869x. No comparison meets all predeclared retention requirements. Host startup halves; measured context teardown remains about 69 ms. Full CPU/native/device acceptance and portable replay; three CPU failures fully charged. No public preset or follow-on release. Report: docs/benchmarks/lp-delivery4.md."
   - id: GPUP-MIXED2
     title: Admit complete-delivery cost before simpler mixed precision
-    status: ready
+    status: complete
     depends_on: [GPUP-BASELINE, GPUP-RESIDENT2]
-    specification: docs/plans/gpu-lp-precision-roadmap.md
-    acceptance: "ADR-0054; first CPU-only cost/numerical contract preparation from retained per-trial phases using the native control. Predeclare total-latency/coverage/uncertainty rules; quantify accelerated fraction, work multiplier and added representation/guard/transfer/correction/fallback costs. Defer device study if the cost case fails; unknown attribution requires a separately bounded measurement pilot. New protocol/allocation before execution; FP32 matrix with native FP64 state/arithmetic first, useful nonzero work and original 1e-9 independent certificate; lower-precision state separately admitted; include prior refinement/quantization failures"
+    specification: docs/specifications/SPEC-0036-mixed2.md
+    acceptance: "SPEC-0036 / ADR-0069: bounded CPU admission complete, device deferred. Isolated FP32 matrix / FP64 products, outward local error bounds and transactional guard reference; 11 Rust, 10 Python contracts and 1049 rational requests / 5121 outputs pass. All 768 retained native cells / 1536 solves and 145 scenarios per lifecycle replay. Ideal cold dense gain 1.010266x fails 1.10x; hypothetical prepared 2x whole-event gain 1.151630x leaves matrix fraction/work/added costs unknown. No GPU solver, new mixed certificate, speedup claim or public default. Separate attribution/admission required. Report: docs/benchmarks/lp-mixed2.md."
   - id: GPUP-DELIVERY2
     title: Reduce demonstrated setup and evidence delivery cost
-    status: planned
+    status: complete
     depends_on: [GPUP-RESIDENT2]
-    specification: docs/decisions/ADR-0054-resident2-cost-priorities.md
-    acceptance: "Conditional alternative before precision device work when its cost case is stronger; not an automatic MIXED2 prerequisite. New bounded protocol/allocation; target demonstrated parsing/preparation/checker/provenance/transport overhead with matched native controls. Preserve exact inputs, fresh independent original-model certificates, source bindings and complete durable output; cold total latency and prepared throughput separate; no unmeasured residual assigned to removable overhead"
+    specification: docs/specifications/SPEC-0033-delivery2.md
+    acceptance: "SPEC-0033 / ADR-0065; docs/benchmarks/lp-delivery2.md. Batched checker transport and checker/device setup overlap with unchanged arithmetic, original inputs and fresh independent certificates. All 960 cells complete: 880 certificates and 80 intentional refusals, exact endpoints/audits/checkpoints/recovery/work. 1020 CPU replay assessments, 84 device lifecycle cases, startup cleanup, 32 smoke cells and full native gate pass. Strict dense512 cold gains about 1.40x; broad strict native/FP4 1.0584/1.0665x fails retention, prepared dense512 regresses. 1666 historical files exact; separate allocation closed, failed reservation preserved; no public preset or GPUP-9 release"
+  - id: GPUP-DELIVERY3
+    title: Isolate delivery mechanisms and confirm scoped cold and prepared retention
+    status: complete
+    depends_on: [GPUP-DELIVERY2]
+    specification: docs/specifications/SPEC-0034-delivery3.md
+    acceptance: "SPEC-0034 / ADR-0067; docs/benchmarks/lp-delivery3.md. Four configurations, optional diagnostic spans, exact numerical body. 768 diagnostic and 6144 confirmation lifecycle cells; 12288 confirmation solves, 11264 certificates and 1024 intentional refusals, exact original evidence/work. Frozen overlap-only cold and batching-only prepared. Dense cold benefit 1.186–1.199x; full retention native/1e-9 and FP4/1e-7, other cold guards inconclusive. Prepared gains 4.4–6.0% do not qualify; no supported material regression. Full 638 Rust / 663 Python gate, 25 isolated Rust, 1224 CPU assessments, 77 process cases, 168 lifecycle, eight setup failures and 128 smoke cells pass. No scientific retry, default change, historical regrading or GPUP-9 release."
   - id: GPUP-TENSOR2
     title: Compare admitted persistent FP4 iterations at complete certified cost
     status: planned
@@ -148,7 +190,7 @@ tasks:
     acceptance: "Evidence-supported separate contract/allocation; fixed variables, singleton rows and bound tightening with reversible primal/dual maps; original-model validation and measured total-cost benefit; no solver-status substitution for proof"
   - id: GPUP-8-DISPOSITION
     title: Decide a funded GPUP-8 recovery or an explicit negative-result closure
-    status: planned
+    status: ready
     depends_on: [GPUP-BASELINE, GPUP-MIXED2]
     specification: docs/decisions/ADR-0047-certified-performance-roadmap.md
     acceptance: "Review retained incomplete evidence and new engineering results; no automatic retry or pass; separate accepted recovery or negative-result progression ADR required before changing the GPUP-9 gate"

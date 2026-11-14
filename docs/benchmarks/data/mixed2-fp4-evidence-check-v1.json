@@ -1,0 +1,9 @@
+{
+  "files": 10424,
+  "index": {
+    "path": "docs/benchmarks/data/mixed2-fp4-evidence-v1.json",
+    "sha256": "819a624b403dd509e5554d80f5e39edd26d54de47865b8688b9f71f4f361985f"
+  },
+  "original_bytes_exact": true,
+  "status": "passed"
+}

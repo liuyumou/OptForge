@@ -1,0 +1,211 @@
+{
+  "admission": {
+    "path": "docs/benchmarks/data/mixed2-pilot-admission-v1.json.gz",
+    "sha256": "cc8c06dbae8b96a34edcab909c4e20db0c61743e3537d08b43dcb0484031ea5a"
+  },
+  "analysis": {
+    "path": "docs/benchmarks/data/mixed2-pilot-analysis-v1.json",
+    "sha256": "c39e269021f1f428ed96a4f18cead1dd6be3195e3aace224e4b5798220e117b4"
+  },
+  "archive": {
+    "path": "docs/benchmarks/data/mixed2-pilot-records-v1.json.gz",
+    "sha256": "6f79a52bf5be66e321ce9d370de3cd18f30156c756ef271c5b8d518210b0f079"
+  },
+  "binary": {
+    "path": "research/lp-mixed2-pilot/target/release/lp-mixed2-pilot",
+    "sha256": "d787756d08db2704d85f07b9d945a5dbeabd48930f96ae16f569c93ffda6f048"
+  },
+  "cleanup_empty": true,
+  "dependencies": {
+    "external": [
+      {
+        "name": "block-buffer",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "0.10.4"
+      },
+      {
+        "name": "cfg-if",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.5"
+      },
+      {
+        "name": "cpufeatures",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "0.2.17"
+      },
+      {
+        "name": "crypto-common",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "0.1.7"
+      },
+      {
+        "name": "digest",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "0.10.7"
+      },
+      {
+        "name": "generic-array",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "0.14.7"
+      },
+      {
+        "name": "itoa",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.19"
+      },
+      {
+        "name": "libc",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "0.2.191"
+      },
+      {
+        "name": "memchr",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "2.8.3"
+      },
+      {
+        "name": "proc-macro2",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.107"
+      },
+      {
+        "name": "quote",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.47"
+      },
+      {
+        "name": "serde",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.229"
+      },
+      {
+        "name": "serde_core",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.229"
+      },
+      {
+        "name": "serde_derive",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.229"
+      },
+      {
+        "name": "serde_json",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.154"
+      },
+      {
+        "name": "sha2",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "0.10.9"
+      },
+      {
+        "name": "syn",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "3.0.10"
+      },
+      {
+        "name": "typenum",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.20.1"
+      },
+      {
+        "name": "unicode-ident",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.27"
+      },
+      {
+        "name": "version_check",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "0.9.5"
+      },
+      {
+        "name": "zmij",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "version": "1.0.23"
+      }
+    ],
+    "local_wildcards": [
+      [
+        "lp-mixed2-pilot",
+        "optimizer-core"
+      ],
+      [
+        "lp-mixed2-pilot",
+        "optimizer-cuda-sys"
+      ],
+      [
+        "lp-mixed2-pilot",
+        "optimizer-experiment"
+      ],
+      [
+        "lp-mixed2-pilot",
+        "optimizer-lp"
+      ],
+      [
+        "optimizer-cuda-sys",
+        "optimizer-core"
+      ]
+    ],
+    "lock": {
+      "path": "research/lp-mixed2-pilot/Cargo.lock",
+      "sha256": "06d8772ff85183456f3868965f75abd8d15a83b4b359d9c681f456d91aed9196"
+    },
+    "paths": [
+      {
+        "path": "research/lp-mixed2-pilot/Cargo.toml",
+        "sha256": "a145b325c46f983cd8acfabf47c9cfaa9adbe68f0de855c5feb2068be2ef0adc"
+      },
+      {
+        "path": "crates/optimizer-core/Cargo.toml",
+        "sha256": "9c33fe79a14456a03cb2b88b304a6f2daedb1a8e40d2ddd3b52c222e7c40661b"
+      },
+      {
+        "path": "research/lp-tensor-expanded-device/cuda-sys/Cargo.toml",
+        "sha256": "d8fdcb3fad67451ab16447889924709ccb05b727f5d4e1583b03a478d41d2d28"
+      },
+      {
+        "path": "crates/optimizer-experiment/Cargo.toml",
+        "sha256": "d983203b2a57b1de5b7e15b2a49e583c6f50d1be2a72f19272dc0c3f5b08e6c3"
+      },
+      {
+        "path": "crates/optimizer-extension/Cargo.toml",
+        "sha256": "392dedd17757366d5b9f536888f0fa7f639956e945ca777f541a83cdebc98786"
+      },
+      {
+        "path": "crates/optimizer-lp/Cargo.toml",
+        "sha256": "9dc1768aedfc32ae3cecbf8c82a72f5cf204867addf84f82ba8145b2388fe05c"
+      },
+      {
+        "path": "crates/optimizer-solver/Cargo.toml",
+        "sha256": "18ac110a12a55e543765443859a56fe8d513a56c278b69606208abda71f96058"
+      }
+    ],
+    "policy": {
+      "path": "research/lp-mixed2-pilot/deny.toml",
+      "sha256": "781c383e604cd540b1ff90db2cf8f039e1aab31da381dfe7ccc475a30d2c87e5"
+    },
+    "source": {
+      "path": "tools/lp_mixed2_pilot_dependencies.py",
+      "sha256": "55dffb0f8979610cd7e8eada4eb1d34922848bc2d998e72f1275db98b276244d"
+    },
+    "status": "passed"
+  },
+  "historical_files": 1862,
+  "history": {
+    "path": "docs/benchmarks/data/mixed2-pilot-history-v1.json",
+    "sha256": "e10b7ada09a0b56ea58a91097c4777c0d201ea9d84d623b6b041a0f8c881ac00"
+  },
+  "image": {
+    "path": "artifacts/gpup-mixed2-pilot-v1/build-v2/pilot.cubin",
+    "sha256": "6123cf12253833f0ddbcde5f01ef17ec6108a4b1301c6225c8dce24ef9e4c479"
+  },
+  "isolated_rust_tests": 30,
+  "native": {
+    "path": "artifacts/gpup-mixed2-pilot-v1/resources/cpu-native-v1.settlement.json",
+    "sha256": "5ec1dd3abdede07af6957fee98c659c20f45603c850ff38942be6d47b7303396"
+  },
+  "portable_replay": true,
+  "python_tests": 694,
+  "rust_tests": 638,
+  "status": "passed"
+}

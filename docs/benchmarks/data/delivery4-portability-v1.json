@@ -1,0 +1,181 @@
+{
+  "inputs": [
+    {
+      "path": "docs/benchmarks/data/delivery4-result-v1.json",
+      "sha256": "669031237b1ce57db05cf1e15cb9a64dacafbafa900c16aa59b18b6c1aea448d"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-cohorts-v1.json.gz",
+      "sha256": "3e0d91afb1fc6188368e2d236e416f11452a086d6d8db4cfc4195b19721cf259"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-00-evidence-v1.json.gz",
+      "sha256": "c6f607f17f0aa49d233c32657bf725d970f7ed168acc849f9aba644d70977223"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-01-evidence-v1.json.gz",
+      "sha256": "fd481d04516f75fae9442ffb869dfcffe8802bb56e63f95eadf50f0d7d66d87a"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-02-evidence-v1.json.gz",
+      "sha256": "3c03abe0b5319265302d24c611dffd3fc7604657353b6cc567c5084780bc6451"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-03-evidence-v1.json.gz",
+      "sha256": "e0a1011740d15c293e986c37cc2d52cfa1d1f33f078e8e2d274f6c53b00afe98"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-04-evidence-v1.json.gz",
+      "sha256": "281b4e0c4f4c57357e71b5990967616d71a3bd1faa9448047947e3e078b760aa"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-05-evidence-v1.json.gz",
+      "sha256": "8ad2b242ad242bc95de094b31547179fecd52e195d3fe2e11d933850c7412278"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-06-evidence-v1.json.gz",
+      "sha256": "abe299a0b562d8f19f61db927faa30e6dd8e88ed2a2ef9a9d483c39eb5bcfcb2"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-07-evidence-v1.json.gz",
+      "sha256": "2e1dce63b70696472084ab1c78afb1fbfe838fc5f1f9b1a394af14026e540e24"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-08-evidence-v1.json.gz",
+      "sha256": "8d825c24c98db087cabc6645fc5687f8e2476b633d5a29d04814128d4a59b7ba"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-09-evidence-v1.json.gz",
+      "sha256": "c2c4d0661832263753001e6f3c0fbe97987f570ae5a3f537ac84ee986d196b83"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-10-evidence-v1.json.gz",
+      "sha256": "30d2e1d8c2e415a721670f9970685adf35bfefecf467480d093abf2bb636df19"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-11-evidence-v1.json.gz",
+      "sha256": "32d5e731aa2edd063fd5d032f6dceb487499c0b26aac13434d5e11506f2f3576"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-12-evidence-v1.json.gz",
+      "sha256": "750af6ec42035cb5ffb70b9ffd86044366b0bc37f64f2b2aed64c8aa32a39938"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-13-evidence-v1.json.gz",
+      "sha256": "ecea27282ec34c20744ec09003ea549366441182e5b9324b61c25dbbf02b39ea"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-14-evidence-v1.json.gz",
+      "sha256": "28905f995913aedc793699d0e45802efd3b12624fbb091f6691a253d0e49059c"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-15-evidence-v1.json.gz",
+      "sha256": "9410cfa401fe1636f49a292265b0d094cd3fd193e6eea598247258a91c344719"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-16-evidence-v1.json.gz",
+      "sha256": "5b648d78f9089d13fdcd14bf912f4381e9da1921aecf17a1b40e8e7370fcd989"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-17-evidence-v1.json.gz",
+      "sha256": "86ffe3527b6b973d69c4c5f800f2ed1c7591e40433224bcd2a309f4eb80ae45f"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-18-evidence-v1.json.gz",
+      "sha256": "6a353760d60500ca982143c8e00822e4d7262ebabdf34c70dde467cc1a8f77cb"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-19-evidence-v1.json.gz",
+      "sha256": "c3a77a096afd7771756e25965088166213f62d4adfa4c1c486e5798eb5b337bd"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-20-evidence-v1.json.gz",
+      "sha256": "ba2f503621fcb45aee2a718b917dc7ad8edd8f0208786102ca45968519794729"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-21-evidence-v1.json.gz",
+      "sha256": "531a080c95dc37e2b539c9184885e5c8404d7efce1e8f78850ab6a9a89e60d8a"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-22-evidence-v1.json.gz",
+      "sha256": "7f0c22d58a5f50eb03589220285780969bf4c22fc4517e7793e0cb12bb7223a3"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-23-evidence-v1.json.gz",
+      "sha256": "797d2ea15be635a3435bed0b5352dc93af44fa0aedd3994726a82851be0ab3bb"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-24-evidence-v1.json.gz",
+      "sha256": "3673060c8ddf859d8e90248c3e59b6adbb6c15b90c2562e29731a1211f6bf84b"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-25-evidence-v1.json.gz",
+      "sha256": "3c3fc2bb0056beccdb91a6d32363bbd3c7d04ba9379d1cd96a87c34cddc53b26"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-26-evidence-v1.json.gz",
+      "sha256": "baa85f8c778d2af927cc72d08744a56832b5e3e4c02edd70ea596585a85c62fd"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-27-evidence-v1.json.gz",
+      "sha256": "7857a1f9d64fed6c6cd70ffe89eb76bf42efbe40b1a9b0881d7a461629bd9866"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-28-evidence-v1.json.gz",
+      "sha256": "8a210c46cd01e2a35651f85d7d996ed99444206de810829b3a4c78600adc8819"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-29-evidence-v1.json.gz",
+      "sha256": "a53655d1fa5b1d9a9e872eb016734dea171db94660df11b02497b0d060d77d70"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-30-evidence-v1.json.gz",
+      "sha256": "3ea157bfe901b9ae80c04620a0c97f4dbe7adc47a8b32aa0780953b53e81b273"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-confirmation-block-31-evidence-v1.json.gz",
+      "sha256": "68052db294b99da682640336bbb3676bba2292e2589ee95fc0d498c3856e6fe9"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-diagnostic-block-00-evidence-v1.json.gz",
+      "sha256": "6dfc23073e91ed1e63b240a7f8383d617a4f77b80ef56e1cf967f4a8ccd754ef"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-diagnostic-block-01-evidence-v1.json.gz",
+      "sha256": "38317db007b6b7216abb7e398c942fa0eb7943a89f607edd1ee76a40141ab5ab"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-diagnostic-block-02-evidence-v1.json.gz",
+      "sha256": "b64f779ea9be5744c0a9845461441cec9d2544aed0316ceb214c088a5b3e36f0"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-diagnostic-block-03-evidence-v1.json.gz",
+      "sha256": "a370a0e337d23160cc89b308738fc253a6823b0ebc6b9645b1cca3c04a6336e9"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-profile-block-00-evidence-v1.json.gz",
+      "sha256": "8d165513553e60402d251441e3dfc3a54a8938e5db01093ee24fef336ab2e3c7"
+    },
+    {
+      "path": "docs/benchmarks/data/delivery4-profile-block-01-evidence-v1.json.gz",
+      "sha256": "6c078f49393bcd4c14a6ee9706eb41742a0f75df4138306a19f6e3425af02e6a"
+    }
+  ],
+  "no_artifact_or_research_directory": true,
+  "replay": {
+    "all_numerical_values_exact": true,
+    "cells": 3264,
+    "confirmation_cells": 3072,
+    "decisions": 4,
+    "no_solver_or_device_execution": true,
+    "profile_partition_exact": true,
+    "status": "passed"
+  },
+  "source": {
+    "path": "artifacts/gpup-delivery4-v1/portable-clean.py",
+    "sha256": "4fc12f50ef4077f98bf24d2d31b921bb23457ab2dd1b62cc85f16b57001fc8bc"
+  },
+  "status": "passed",
+  "stderr": "",
+  "stdout": "{'status': 'passed', 'cells': 3264, 'confirmation_cells': 3072, 'decisions': 4, 'all_numerical_values_exact': True, 'profile_partition_exact': True, 'no_solver_or_device_execution': True}\n"
+}

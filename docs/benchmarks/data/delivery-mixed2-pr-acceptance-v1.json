@@ -1,0 +1,58 @@
+{
+  "accounting": {
+    "path": "docs/benchmarks/data/delivery-mixed2-pr-accounting-v1.json",
+    "sha256": "7d717e9a8b941826f474ec880bb8fdcb40f405d82a0df2a8ba87aca9f4e6e578"
+  },
+  "base_main": "8fe3a20753f641b160e88b2f521d3ebe7c290297",
+  "clean_checkout": {
+    "copied_project_binaries": false,
+    "copied_study_artifacts": false,
+    "distinct_cases_covered": 781,
+    "followup_process_tests": 12,
+    "initial_skip_entries": 3,
+    "initial_tests_run": 770,
+    "shared_dependencies": [
+      "immutable Git objects",
+      "pinned HiGHS installation",
+      "pinned Python/Rust tooling"
+    ]
+  },
+  "evidence_archive": {
+    "path": "docs/benchmarks/data/delivery-mixed2-pr-evidence-v1.tar.gz",
+    "sha256": "9058212eccc5ccf6bb119202b33dfd63ddac2de94e98f30e7f508fb99ce3be5f"
+  },
+  "feature_head": "2008aa91f7617dcc11479c94f08127191cd67972",
+  "final_hosted_status": "Recorded separately in PR #25 and local closing receipts",
+  "history": {
+    "path": "docs/benchmarks/data/delivery-mixed2-pr-history-v1.json",
+    "sha256": "7de105969b5876f09b914bdf7e11cbe213f7df46ca15b616eb0fe8cfaae0fc7b"
+  },
+  "hosted_initial": {
+    "base": "8fe3a20753f641b160e88b2f521d3ebe7c290297",
+    "draft": true,
+    "head": "2008aa91f7617dcc11479c94f08127191cd67972",
+    "hosted_conclusion": "startup_failure",
+    "hosted_jobs": 0,
+    "hosted_run_id": 43568950701,
+    "mergeable": true,
+    "mergeable_state": "clean",
+    "normal_merge_only": true,
+    "protection_inspection": "HTTP 403: private repository plan does not expose protection/rulesets",
+    "pull_request": "https://github.com/liuyumou/OptForge/pull/25"
+  },
+  "isolated_python_subset": 50,
+  "isolated_rust_tests": 172,
+  "new_scientific_gpu_runs": 0,
+  "oracle_outputs": 5121,
+  "oracle_requests": 1049,
+  "original_feature_commits": 11,
+  "portable_final_confirmation": {
+    "evidence_files": 9543,
+    "responses": 16384
+  },
+  "public_default_changed": false,
+  "python_tests": 781,
+  "repository_rust_tests": 638,
+  "status": "passed",
+  "total_rust_tests": 810
+}

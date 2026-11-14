@@ -1,0 +1,50 @@
+{
+  "bytes": 361418354,
+  "files": 9543,
+  "format": "tar+gzip with exact-content hardlinks",
+  "manifest_sha256": "357aca7420f93a9ada53c918b47d67932f8a4d39406ce7ebabd70bb3cb2d20ca",
+  "parts": [
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.part00",
+      "sha256": "9b16db66369b10937f5f068b06f6034e147c809e1b623d39372c28e347808ca3"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.part01",
+      "sha256": "9a55367db6804623a2683c1db365fdb923ce1d3bb5ab9e3d43b03f7dc10c9c49"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.part02",
+      "sha256": "ec0c0f1ba23d4764cd33ab8f2a47bcf6ad0dfd37ca3a859bf41dbc0bcdb9b5eb"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.part03",
+      "sha256": "6807b6fcc5129034e68d2699e2e2dbf11ebc54412b165ffa2411f838e5f28fa7"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.part04",
+      "sha256": "48b54b024a7292b704649406a9cda701f6a6fd9d032c2d4c469e78c7a32be7f0"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.part05",
+      "sha256": "3cb4f5980e47b7aac23c3cabdffb1acf1800d6aa693b45486d25f23668dd28fa"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.part06",
+      "sha256": "1f4a72fb6cc3793e346282531e84cfa418968a07517ea64199772126c47adc16"
+    },
+    {
+      "bytes": 9096818,
+      "path": "docs/benchmarks/data/mixed2-confirm2-evidence-v1.part07",
+      "sha256": "79b9875ae591adf7a638457d3e3076e86d781fe8ee99bca25296551752c3dc3b"
+    }
+  ],
+  "sha256": "0efd4f93f100e600c5781670040b7fc86aca3268dc5af755855824cbfd0bbee1",
+  "unique_files": 2694
+}

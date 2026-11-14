@@ -1,0 +1,52 @@
+{
+  "capture": {
+    "after_capture": {
+      "fields": {
+        "schedstat": "15621723359 2399341827 49881\n",
+        "status": "Name:\tpython3\nUmask:\t0022\nState:\tR (running)\nTgid:\t3744123\nNgid:\t0\nPid:\t3744123\nPPid:\t3744122\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t3744123\nNSpid:\t3744123\nNSpgid:\t3744032\nNSsid:\t3744032\nVmPeak:\t   38620 kB\nVmSize:\t   38616 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   22808 kB\nVmRSS:\t   22792 kB\nRssAnon:\t   18136 kB\nRssFile:\t    4656 kB\nRssShmem:\t       0 kB\nVmData:\t   19224 kB\nVmStk:\t     132 kB\nVmExe:\t    2284 kB\nVmLib:\t    7964 kB\nVmPTE:\t     104 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t1\nSigQ:\t13/1029324\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000200\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000000004202\nCapInh:\t0000000000000000\nCapPrm:\t00000000a80425fb\nCapEff:\t00000000a80425fb\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\t00000000,00000000,00000008\nCpus_allowed_list:\t3\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t24797\nnonvoluntary_ctxt_switches:\t25084\n",
+        "syscall": "running\n",
+        "wchan": "0"
+      },
+      "pid": 3744123,
+      "time_ns": 7900998942160414
+    },
+    "capture_finished_ns": 7900998942161792,
+    "decision_already_refused": true,
+    "fields": {
+      "schedstat": "15621723359 2399341827 49881\n",
+      "status": "Name:\tpython3\nUmask:\t0022\nState:\tR (running)\nTgid:\t3744123\nNgid:\t0\nPid:\t3744123\nPPid:\t3744122\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t64\nGroups:\t0 \nNStgid:\t3744123\nNSpid:\t3744123\nNSpgid:\t3744032\nNSsid:\t3744032\nVmPeak:\t   38620 kB\nVmSize:\t   38616 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   22808 kB\nVmRSS:\t   22792 kB\nRssAnon:\t   18136 kB\nRssFile:\t    4656 kB\nRssShmem:\t       0 kB\nVmData:\t   19224 kB\nVmStk:\t     132 kB\nVmExe:\t    2284 kB\nVmLib:\t    7964 kB\nVmPTE:\t     104 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t1\nSigQ:\t12/1029324\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000000004202\nCapInh:\t0000000000000000\nCapPrm:\t00000000a80425fb\nCapEff:\t00000000a80425fb\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\t00000000,00000000,00000008\nCpus_allowed_list:\t3\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t24797\nnonvoluntary_ctxt_switches:\t25084\n",
+      "syscall": "running\n",
+      "wchan": "0"
+    },
+    "guardian_pid": 3744122,
+    "pid": 3744123,
+    "reason": "lost_coordinator_heartbeat",
+    "requested_capture_sleep_seconds": 0.015,
+    "source": "/workspace/AI-Optimizer/tools/lp_confirmation_supervisor.py",
+    "time_ns": 7900998917415674
+  },
+  "capture_span_ns": 24744740,
+  "cause_established": false,
+  "finding": "Post-refusal stack identifies the 5 ms pidfd wait. Capture timing does not attribute the entire missed interval.",
+  "packaging_failure": "Cross-filesystem hardlink refused; corrected version preserves the copy fallback.",
+  "packaging_failure_resource": {
+    "path": "artifacts/gpup-mixed2-confirm-v1/resources/portable-v2.resource.json",
+    "sha256": "1227b88200257dab827b8f7d47b7fd6c44fdd52e3e6502699573448e58828024"
+  },
+  "packaging_failure_settlement": {
+    "path": "artifacts/gpup-mixed2-confirm-v1/resources/portable-v2.settlement.json",
+    "sha256": "6e32299c8567b5a503b2fcb2354f4337547db05b805ae65e0947e299abdcd41d"
+  },
+  "resource": {
+    "path": "artifacts/gpup-mixed2-confirm-v1/resources/final-acceptance-v1.resource.json",
+    "sha256": "b42df4fbaf3d5f53711ca86428c05048312c3046983d9d862487ced0fa9cffc5"
+  },
+  "scheduler_counters_unchanged": true,
+  "scientific_retry": false,
+  "settlement": {
+    "path": "artifacts/gpup-mixed2-confirm-v1/resources/final-acceptance-v1.settlement.json",
+    "sha256": "41a5bb803ca6a7522e32183eed2ea7a809d1920364bfcf402ef7df7f04883959"
+  },
+  "stack": "Current thread 0x00007ff7256fc740 (most recent call first):\n  File \"/workspace/AI-Optimizer/tools/lp_confirmation_supervisor.py\", line 349 in coordinator\n  File \"/workspace/AI-Optimizer/tools/lp_mixed2_confirm_failure_trace.py\", line 25 in coordinator\n  File \"/workspace/AI-Optimizer/tools/lp_confirmation_supervisor.py\", line 475 in run\n  File \"/workspace/AI-Optimizer/tools/lp_mixed2_confirm_observe_budget.py\", line 144 in main\n  File \"/workspace/AI-Optimizer/tools/lp_mixed2_confirm_observe_budget.py\", line 161 in <module>\n",
+  "status": "recorded"
+}

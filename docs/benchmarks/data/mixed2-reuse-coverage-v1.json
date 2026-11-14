@@ -1,0 +1,77 @@
+{
+  "adapter": {
+    "path": "tools/lp_mixed2_reuse_incomplete.py",
+    "sha256": "f0a7c376e71a269e2646f4d63d6de934995c57fbd541469a24daf1bea94db136"
+  },
+  "analysis": {
+    "path": "docs/benchmarks/data/mixed2-reuse-analysis-v1.json",
+    "sha256": "020f352b22054bd510053c215f330c0a4340f71818707073bd9907698d62b071"
+  },
+  "frozen_analysis": {
+    "path": "tools/lp_mixed2_reuse_analysis.py",
+    "sha256": "d88fdb71e734de268764b787a15f2355ed58248bf6e29cc3d1c10c8a97c22698"
+  },
+  "historical_regrading": false,
+  "scientific_retry": false,
+  "stop": {
+    "disposition": "Preserve all complete and partial results. Do not spend the remaining scientific allocation on repeated operational failures. Missingness remains explicit and potentially informative; no confirmation pass. Diagnose within the separate remaining CPU diagnostic allowance.",
+    "failed_blocks": [
+      1,
+      2
+    ],
+    "failures": [
+      {
+        "path": "artifacts/gpup-mixed2-reuse-v1/resources/confirmation-b01.resource.json",
+        "sha256": "9d51fdfeafc12c5862816ac5ae746960409b553c5daa96fdbfa744c8ddce8607"
+      },
+      {
+        "path": "artifacts/gpup-mixed2-reuse-v1/resources/confirmation-b02.resource.json",
+        "sha256": "5ac8debd80cc1fd701b6073ab8997f046c5729a427cdf7c6b505c941d5f077d6"
+      }
+    ],
+    "freeze": {
+      "path": "artifacts/gpup-mixed2-reuse-v1/confirmation-freeze.json",
+      "sha256": "02ece7a6b32f0de7d9023104da00a62728e21cf9ffd8622f31ebe69b7f9e4019"
+    },
+    "numerical_timing_selection": false,
+    "reason": "Two consecutive untouched blocks lost the coordinator heartbeat after an earlier admitted block passed; placement has not established reliable supervision.",
+    "retry": false,
+    "status": "operational-stop",
+    "supervisor_changed": false,
+    "unattempted_blocks": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ]
+  },
+  "stop_binding": {
+    "path": "artifacts/gpup-mixed2-reuse-v1/confirmation-stop-v1.json",
+    "sha256": "9155ca93d5c10fc02cf995d45ace3409c13c40d6aa4fd8e3687f8a939b0aba04"
+  }
+}

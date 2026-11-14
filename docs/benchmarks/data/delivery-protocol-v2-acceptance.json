@@ -1,0 +1,423 @@
+{
+  "status": "complete",
+  "validation": {
+    "kind": "delivery-protocol-v2-validation",
+    "base_commit": "d453675575da798f86f52c08150192f932585fa6",
+    "documentation_only": true,
+    "next_ready_task": "GPUP-DELIVERY3",
+    "historical_files_byte_exact": 1689,
+    "prior_handoffs_and_all_prior_backlog_tasks_exact": true,
+    "dependencies_acyclic": true,
+    "confirmation_lifecycle_cells": 6144,
+    "cold_solves": 3072,
+    "prepared_sessions": 3072,
+    "prepared_solves": 9216,
+    "simultaneous_metrics_max": 96,
+    "independent_blocks": 32,
+    "median_interval_ranks": [
+      6,
+      27
+    ],
+    "sources": [
+      {
+        "path": "AGENTS.md",
+        "sha256": "aea0927161f61dedb9bcbdd06df73b3077b825a4b37c16ec48525be3c61026b2"
+      },
+      {
+        "path": "docs/decisions/ADR-0066-delivery-retention-scope.md",
+        "sha256": "5a2756dfa1893681af7d3ece8ed9d653d75bb489765f8db6e042ec1ee286ead1"
+      },
+      {
+        "path": "docs/plans/gpu-lp-precision-roadmap.md",
+        "sha256": "60f076d2dcb9ebfc8dcc48b6cd389ac6c4db9d2ca7853d7057e20836a947fca2"
+      },
+      {
+        "path": "docs/plans/lp-delivery3.md",
+        "sha256": "335ed02beb414f84f5d15173425391da8c4e9cbd4201eaa61d275f67547fc52b"
+      },
+      {
+        "path": "state/active-task.md",
+        "sha256": "da6fb46fbe8e3431328824ca6f4b56091c57c41a5e864c52768a86ffe0d56306"
+      },
+      {
+        "path": "state/backlog.yaml",
+        "sha256": "2fbae69503c37fef5ee4dde597c81ebca5c1a47893033ef5bd8dbe76e6e1323a"
+      }
+    ],
+    "gpu_seconds": 0
+  },
+  "accounting": {
+    "ceiling_cpu_ns": 512000000000,
+    "preparation_cpu_ns": 128000000000,
+    "validation_cpu_ns": 28425797092,
+    "closing_cpu_ns": 64000000000,
+    "charged_cpu_ns": 220425797092,
+    "gpu_ns": 0,
+    "note": "Closing administration conservatively charges its entire 64 CPU-second reservation; no historical transfer.",
+    "closed": true,
+    "closing_supervised_cpu_ns": 15002000320
+  },
+  "validation_resource": {
+    "active_elapsed_ns": 6106449273,
+    "charged_cpu_ns": 28425797092,
+    "cpu_method": "4 * active wall including reserved finalization; full reservation on failure/bootstrap",
+    "exact_aggregate_peak": false,
+    "finalization_wall_reserve_ns": 1000000000,
+    "guardian_cleanup": {
+      "empty": true,
+      "killed": [
+        {
+          "pgid": 2783535,
+          "pid": 2783538,
+          "ppid": 2783535,
+          "sid": 2783535,
+          "start_ticks": 777821532,
+          "state": "Z"
+        }
+      ]
+    },
+    "hard_memory_enclosure": false,
+    "identity": "cooperative_process_supervision_v1",
+    "memory_method": "sampled aggregate VmRSS; not hard cgroup containment",
+    "request": {
+      "address_space_bytes": 0,
+      "affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "bootstrap": false,
+      "command": [
+        "/tmp/fp4-pr-clean-v2/.venv/bin/python3",
+        "-B",
+        "artifacts/gpup-delivery-protocol-v2/validate.py"
+      ],
+      "command_sources": [
+        {
+          "path": "artifacts/gpup-delivery-protocol-v2/validate.py",
+          "sha256": "8909d7125a27832ebf4295887d8d2cd957293aa303301aad1457dace00e1a81f"
+        },
+        {
+          "path": "/workspace/AI-Optimizer/artifacts/gpup-delivery-protocol-v2/supervise.py",
+          "sha256": "d4ed9addb9cf96c9477f834a94c8fac96f641de88e7eb816a42e58e6583d85df"
+        }
+      ],
+      "declared_memory_bytes": 5368709120,
+      "guardian_pid": 2783535,
+      "journal": "artifacts/gpup-delivery-protocol-v2/validation-journal.json",
+      "lock": "artifacts/gpup-delivery-protocol-v2/cpu.lock",
+      "log": "artifacts/gpup-delivery-protocol-v2/validation-v1.log",
+      "max_gap_ns": 100000000,
+      "output": "artifacts/gpup-delivery-protocol-v2/validation-v1.json",
+      "request_sha256": "cc3f88bb3fc76034b27e3a3c1b58bcd780637ca1658793cc9a55d892c168d664",
+      "reserve_cpu_seconds": 320,
+      "rss_stop_bytes": 6442450944,
+      "show_log": true,
+      "slots": 4,
+      "source_sha256": "523184f432ff32fdf1150b79bed4aefe3f03872464e736d466da39095564263a",
+      "sources": [
+        "artifacts/gpup-delivery-protocol-v2/validate.py",
+        "/workspace/AI-Optimizer/artifacts/gpup-delivery-protocol-v2/supervise.py"
+      ],
+      "stage": "validation",
+      "started_ns": 7778215321828565,
+      "thread_environment": {
+        "CARGO_BUILD_JOBS": "4",
+        "CMAKE_BUILD_PARALLEL_LEVEL": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "NVCC_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1",
+        "RUST_TEST_THREADS": "1"
+      },
+      "work_deadline_ns": 7778293321828565
+    },
+    "result": {
+      "allocation_acknowledgements": [],
+      "cleanup": {
+        "empty": true,
+        "killed": []
+      },
+      "entry": {
+        "pgid": 2783539,
+        "pid": 2783539,
+        "ppid": 2783538,
+        "sid": 2783539,
+        "start_ticks": 777821532,
+        "state": "R"
+      },
+      "max_sample_gap_ns": 6641632,
+      "observed_processes": [
+        {
+          "pgid": 2783535,
+          "pid": 2783535,
+          "ppid": 1437995,
+          "sid": 2783535,
+          "start_ticks": 777821527,
+          "state": "R"
+        },
+        {
+          "pgid": 2783535,
+          "pid": 2783538,
+          "ppid": 2783535,
+          "sid": 2783535,
+          "start_ticks": 777821532,
+          "state": "R"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783539,
+          "ppid": 2783538,
+          "sid": 2783539,
+          "start_ticks": 777821532,
+          "state": "R"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783540,
+          "ppid": 2783539,
+          "sid": 2783539,
+          "start_ticks": 777821535,
+          "state": "S"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783544,
+          "ppid": 2783539,
+          "sid": 2783539,
+          "start_ticks": 777821536,
+          "state": "R"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783546,
+          "ppid": 2783539,
+          "sid": 2783539,
+          "start_ticks": 777821537,
+          "state": "R"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783547,
+          "ppid": 2783539,
+          "sid": 2783539,
+          "start_ticks": 777821538,
+          "state": "R"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783549,
+          "ppid": 2783539,
+          "sid": 2783539,
+          "start_ticks": 777821538,
+          "state": "R"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783548,
+          "ppid": 2783539,
+          "sid": 2783539,
+          "start_ticks": 777821538,
+          "state": "R"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783550,
+          "ppid": 2783539,
+          "sid": 2783539,
+          "start_ticks": 777821594,
+          "state": "R"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783558,
+          "ppid": 2783539,
+          "sid": 2783539,
+          "start_ticks": 777821861,
+          "state": "R"
+        },
+        {
+          "pgid": 2783539,
+          "pid": 2783559,
+          "ppid": 2783539,
+          "sid": 2783539,
+          "start_ticks": 777822139,
+          "state": "R"
+        }
+      ],
+      "observed_swap": false,
+      "peak_active_numerical_allocations": 0,
+      "peak_rss_bytes": 174862336,
+      "peak_threads": 7,
+      "reason": "completed",
+      "returncode": 0,
+      "samples": 1084
+    },
+    "status": "passed"
+  },
+  "cleanup_resource": {
+    "active_elapsed_ns": 2750500080,
+    "charged_cpu_ns": 15002000320,
+    "cpu_method": "4 * active wall including reserved finalization; full reservation on failure/bootstrap",
+    "exact_aggregate_peak": false,
+    "finalization_wall_reserve_ns": 1000000000,
+    "guardian_cleanup": {
+      "empty": true,
+      "killed": [
+        {
+          "pgid": 2783672,
+          "pid": 2783675,
+          "ppid": 2783672,
+          "sid": 2783672,
+          "start_ticks": 777829559,
+          "state": "Z"
+        }
+      ]
+    },
+    "hard_memory_enclosure": false,
+    "identity": "cooperative_process_supervision_v1",
+    "memory_method": "sampled aggregate VmRSS; not hard cgroup containment",
+    "request": {
+      "address_space_bytes": 0,
+      "affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "bootstrap": false,
+      "command": [
+        "/tmp/fp4-pr-clean-v2/.venv/bin/python3",
+        "-B",
+        "artifacts/gpup-delivery-protocol-v2/cleanup.py"
+      ],
+      "command_sources": [
+        {
+          "path": "artifacts/gpup-delivery-protocol-v2/cleanup.py",
+          "sha256": "ae947a1b8195e161cb495d1a98bf59844e0661839fdd0e48050a810275696487"
+        },
+        {
+          "path": "/workspace/AI-Optimizer/artifacts/gpup-delivery-protocol-v2/supervise.py",
+          "sha256": "d4ed9addb9cf96c9477f834a94c8fac96f641de88e7eb816a42e58e6583d85df"
+        }
+      ],
+      "declared_memory_bytes": 5368709120,
+      "guardian_pid": 2783672,
+      "journal": "artifacts/gpup-delivery-protocol-v2/cleanup-journal.json",
+      "lock": "artifacts/gpup-delivery-protocol-v2/cpu.lock",
+      "log": "artifacts/gpup-delivery-protocol-v2/cleanup-v1.log",
+      "max_gap_ns": 100000000,
+      "output": "artifacts/gpup-delivery-protocol-v2/cleanup-v1.json",
+      "request_sha256": "76c39e3b5fe7dd23085cd3cba931389733c22fe3ff29598fae46b3c7f964591f",
+      "reserve_cpu_seconds": 64,
+      "rss_stop_bytes": 6442450944,
+      "show_log": true,
+      "slots": 4,
+      "source_sha256": "523184f432ff32fdf1150b79bed4aefe3f03872464e736d466da39095564263a",
+      "sources": [
+        "artifacts/gpup-delivery-protocol-v2/cleanup.py",
+        "/workspace/AI-Optimizer/artifacts/gpup-delivery-protocol-v2/supervise.py"
+      ],
+      "stage": "cleanup",
+      "started_ns": 7778295587991650,
+      "thread_environment": {
+        "CARGO_BUILD_JOBS": "4",
+        "CMAKE_BUILD_PARALLEL_LEVEL": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "NVCC_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1",
+        "RUST_TEST_THREADS": "1"
+      },
+      "work_deadline_ns": 7778309587991650
+    },
+    "result": {
+      "allocation_acknowledgements": [],
+      "cleanup": {
+        "empty": true,
+        "killed": []
+      },
+      "entry": {
+        "pgid": 2783676,
+        "pid": 2783676,
+        "ppid": 2783675,
+        "sid": 2783676,
+        "start_ticks": 777829559,
+        "state": "R"
+      },
+      "max_sample_gap_ns": 6509557,
+      "observed_processes": [
+        {
+          "pgid": 2783672,
+          "pid": 2783672,
+          "ppid": 1437995,
+          "sid": 2783672,
+          "start_ticks": 777829550,
+          "state": "S"
+        },
+        {
+          "pgid": 2783672,
+          "pid": 2783675,
+          "ppid": 2783672,
+          "sid": 2783672,
+          "start_ticks": 777829559,
+          "state": "R"
+        },
+        {
+          "pgid": 2783676,
+          "pid": 2783676,
+          "ppid": 2783675,
+          "sid": 2783676,
+          "start_ticks": 777829559,
+          "state": "R"
+        },
+        {
+          "pgid": 2783676,
+          "pid": 2783677,
+          "ppid": 2783676,
+          "sid": 2783676,
+          "start_ticks": 777829562,
+          "state": "R"
+        },
+        {
+          "pgid": 2783676,
+          "pid": 2783678,
+          "ppid": 2783676,
+          "sid": 2783676,
+          "start_ticks": 777829562,
+          "state": "R"
+        },
+        {
+          "pgid": 2783676,
+          "pid": 2783679,
+          "ppid": 2783676,
+          "sid": 2783676,
+          "start_ticks": 777829563,
+          "state": "R"
+        },
+        {
+          "pgid": 2783676,
+          "pid": 2783700,
+          "ppid": 2783676,
+          "sid": 2783676,
+          "start_ticks": 777829830,
+          "state": "R"
+        }
+      ],
+      "observed_swap": false,
+      "peak_active_numerical_allocations": 0,
+      "peak_rss_bytes": 145657856,
+      "peak_threads": 6,
+      "reason": "completed",
+      "returncode": 0,
+      "samples": 487
+    },
+    "status": "passed"
+  },
+  "all_cleanup_empty": true
+}

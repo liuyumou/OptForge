@@ -1,5 +1,28 @@
 # Known Failures and Limitations
 
+## MIXED2 pilot scope and retained development failures (2026-11-12)
+
+The new pilot separates diagnostic admission from the provisional 1.10x adoption
+target. Instrumentation perturbs timing, product probes are not a solver, and
+useful mixed windows, work amplification and recovery costs remain unmeasured.
+No adoption or public preset follows from eight descriptive blocks.
+
+Three development reservations are preserved in full: Rust buffer type inference
+1440 CPU seconds, an expected pre-CUDA model refusal misclassified by the sanitizer
+report parser 600 CPU / 150 GPU seconds, and a reporting syntax error 360 CPU
+seconds. Corrected versions pass; no scientific cell was retried. [Report](../docs/benchmarks/lp-mixed2-pilot.md).
+
+## MIXED2 device work deferred by complete-cost admission (2026-11-12)
+
+The [CPU admission report](../docs/benchmarks/lp-mixed2.md) rejects cold arithmetic
+optimization: even eliminating every GPU event yields only 1.010266x dense gain.
+Prepared 1.151630x is a hypothetical whole-event 2x scenario, not a measured
+mixed result. Matrix-only attribution, work amplification and added representation,
+guard, transfer, correction/fallback/checking costs remain unknown. There is no
+GPU implementation or new mixed certificate. A separate attribution/admission
+slice is required; opaque CPU checkpoints and local bounds do not establish
+executor completeness, accumulated-state error or convergence. No default change.
+
 ## FP4 prototype has no CPU-qualified persistent lane (2026-11-11)
 
 The [frozen prototype admission](../docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md)

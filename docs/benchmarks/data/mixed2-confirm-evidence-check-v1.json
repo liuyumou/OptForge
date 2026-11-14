@@ -1,0 +1,11 @@
+{
+  "all_response_bytes_exact": true,
+  "files": 7893,
+  "index": {
+    "path": "docs/benchmarks/data/mixed2-confirm-evidence-v1.json",
+    "sha256": "0ed359c87139771fd21479a2e925e721b9b4d789ba8507e16535d2b7c5fdf0c0"
+  },
+  "original_bytes_exact": true,
+  "responses": 10648,
+  "status": "passed"
+}

@@ -1,0 +1,28 @@
+{
+  "all_145_scenarios_each_lifecycle_reproduced": true,
+  "analysis": {
+    "path": "docs/benchmarks/data/mixed2-cost-v1.json",
+    "sha256": "493824be5d77d994b0898d35e11625cd10b362fea36f94dbf3ac31d68afb75d5"
+  },
+  "cleanup_empty": true,
+  "cpu": {
+    "path": "docs/benchmarks/data/mixed2-cpu-v2.json",
+    "sha256": "4b285969b2305f3354b569692c053288c57eec6c3ba08471d69ef17720bdacb7"
+  },
+  "gpu_seconds": 0,
+  "historical_decisions_unchanged": true,
+  "historical_files": 1838,
+  "history": {
+    "path": "docs/benchmarks/data/mixed2-history-v1.json",
+    "sha256": "4d62330b02413814f69995076947d9070e42c84bc228e2909f21c0d1543ffac9"
+  },
+  "isolated_rust_tests": 11,
+  "native": {
+    "path": "artifacts/gpup-mixed2-v1/resources/native-gate-v1.settlement.json",
+    "sha256": "a50fb8119325ccd74d2600560384caeddeda46281544d3d50925c5bb9a7988ce"
+  },
+  "portable_replay": true,
+  "python_tests": 688,
+  "status": "passed",
+  "total_rust_tests": 638
+}

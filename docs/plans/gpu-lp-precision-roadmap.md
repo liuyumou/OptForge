@@ -1,12 +1,310 @@
 # GPU LP Performance Research and Implementation Roadmap
 
-Status: FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
+## MIXED2 confirmation complete under revised sampling policy (2026-11-14)
+
+SPEC-0041 / ADR-0074 complete all 32 independent frozen blocks, 512 sessions and
+16384 original-model certified solves. Scoped value passes 5/8 comparisons;
+full results, uncertainty, order sensitivity and cost partitions are in the report.
+No historical pooling, retry, regrading or public-default change.
+Coupled session speedups are 1.0367–1.0651x; generic1024/1e-9
+also passes, while the other generic value comparisons remain unestablished.
+No comparison passes the provisional 1.10x lower bound. Strict coupled2048 GPU
+time falls 70.530 -> 37.345 ms/request with the same 800 updates;
+complete-session medians are 18.772 -> 17.898 seconds.
+FP4 independent checking occupies about 46% and setup 34% of complete cost.
+The useful next targets are exact checking and preparation; no follow-on study
+is released by this confirmation. All unfavorable and sensitivity results remain.
+
+The user authorizes revising the 100 ms resource rule. A one-second finite hard
+sampling/freshness/scan bound retains a 5–10 ms target and all 100 ms exceedances.
+All 39 supervisor contracts pass, including beyond-bound refusal/cleanup. Exact
+source comparison preserves other enforcement. Sampled RSS is not a hard memory
+enclosure. CPU phase observations support limited margin at 100 ms but do not
+establish the cause of historical stalls; detailed findings and limits are retained.
+
+Full native acceptance: 638 repository Rust / 781 Python plus 28 isolated Rust.
+Fresh smoke and three full-size pilots compare 1600 outputs exactly. All 16384
+scientific trajectories match admission; independent serial checking covers
+17984 responses / 58448 assessments /
+144 distinct endpoint/tier pairs. Portable replay passes; all
+2082 historical files and prior handoffs/backlog entries remain exact.
+
+Independent allocation closed at 31824.747879588 CPU /
+5192.117661357 GPU seconds, including 128 closing CPU seconds.
+All 1 failed reservations/full charges/sources are retained and cleanup is empty. No funding
+transfer, GPUP-8 completion or GPUP-9 release. Commit locally only.
+Report: [complete confirmation](../benchmarks/lp-mixed2-confirm2.md).
+
+## MIXED2 complete confirmation remains active (2026-11-14)
+
+The user explicitly keeps the goal "Complete the confirmation" active and permits
+changing or waiving an inappropriate 100 ms limit. SPEC-0041 / ADR-0074 authorize
+continued availability diagnosis and a new independently frozen complete cohort.
+Measure actual scan/wait delays before selecting a prospective finite bound;
+retain old 100 ms exceedances, sampled-memory limitations and all old refusals.
+The 512-session / 16384-solve endpoint is unchanged. A valid negative performance
+decision completes confirmation; missing coverage does not. No historical retry,
+pooling, public default or GPUP-9 release.
+
+Independent 96000 CPU / conditional 12000 GPU seconds; phase caps in SPEC-0041,
+four CPUs, 16 GiB sampled RSS, 12 GiB device buffers and one pinned shared lease.
+Receipts: artifacts/gpup-mixed2-confirm2-v1. Stronger operational admission,
+source-bound native/device checks and frozen criteria precede the new cohort.
+Preserve all failures and full charges; older allocations stay closed. Keep this
+goal active until the full confirmation is verified. Commit locally only.
+
+## MIXED2 confirmation attempts complete; coverage refused (2026-11-14)
+
+SPEC-0040 / ADR-0073 execute all 32 independent frozen blocks. Scientific status:
+incomplete-confirmation; 324 / 512 complete sessions, 10368 certified
+solves, 280 additional retained partial-session responses, 188 missing cells
+and 24 refused blocks. No scientific retry, historical pooling or regrading.
+No scoped confirmation or adoption pass; available-pair intervals are conditional
+on observed coverage and missingness may be informative. Public defaults stay exact.
+
+Two controlled defects are corrected in an isolated supervisor: drain queued
+sample messages before freshness assessment, and publish sample-start timestamps
+at the start of scanning. Cadence/freshness stay at 100 ms; an additional 100 ms
+scan-work guard covers the terminal scan. All 36 supervision contracts pass.
+The frozen cohort still has progress refusals. These do not establish a kernel,
+scheduler or memory cause. Diagnose control stalls before further confirmation;
+successful bounded probes are not production-availability evidence.
+Two CPU-only workload probes also refuse, so GPU execution is not a necessary
+trigger. Hash-only probes do not reproduce the refusal. Post-refusal runnable
+state, pending signals and unchanged scheduler counters support delayed execution
+as a hypothesis, with capture delay and incomplete stack evidence retained.
+
+Final uninstrumented native acceptance: 638 repository Rust / 742 Python and
+28 isolated Rust tests. Fresh smoke/pilot: 576 exact original-scenario comparisons.
+Independent original serial checking covers 11224 responses /
+36312 assessments / 144 distinct endpoint/tier pairs.
+All 10648 retained cohort trajectories match admission exactly,
+including partial-session outputs; every archived response byte is verified.
+Portable replay passes without the original artifacts tree. All 2018
+historical files and older handoffs/backlog entries remain exact; cleanup is empty.
+
+Independent allocation closed at 58479.574258236 CPU /
+6668.617079311 GPU seconds, including 128 closing CPU seconds.
+Final ceiling 90000 CPU / 9000 GPU includes the recorded prospective native-only
+extension. All 33 failed reservations retain full charges and sources;
+no historical funding transfer. GPUP-8 incomplete, GPUP-9 gated. No follow-on
+execution is released. Commit locally only. Report: [confirmation](../benchmarks/lp-mixed2-confirm.md).
+
+## MIXED2 independent confirmation authorized (2026-11-14)
+
+The user requests completing confirmation. SPEC-0040 / ADR-0073 authorize a
+separate supervision correction, fault admission and a fresh independent
+32-block cohort. Keep all earlier incomplete cohorts, sources and closed charges
+exact. Retain 100 ms sampling/freshness, original-model certificates and full
+lifecycle costs; no timeout enlargement, historical retry or default change.
+Independent 90000 CPU / 9000 GPU ceiling (including the prospective 10000 CPU
+native-admission extension), phase caps in SPEC-0040; four CPUs,
+16 GiB sampled RSS, 12 GiB device buffers and one pinned shared lease.
+Receipts: artifacts/gpup-mixed2-confirm-v1. Preserve all failures and versions.
+Commit locally only; no GPUP-9 release. Older entries retain their scope.
+
+## MIXED2 scenario reuse delivered; confirmation stopped (2026-11-13)
+
+The [report](../benchmarks/lp-mixed2-reuse.md) retains four-model original-authority
+reuse and overlapping CPU preparation. Fresh confirmation stopped after two
+consecutive watchdog heartbeat failures: 31 complete sessions / 992 certified
+solves plus 26 certified partial-session responses. No retry; 29 later blocks
+remain unattempted and all 481 missing cells stay explicit. No confirmation pass.
+
+Generic full-session ratios are near parity; coupled 1.03–1.06x observations have
+only one or two complete pairs and no finite simultaneous bounds. Setup/checking
+consume about 80% of available strict coupled2048 FP4 session cost. Availability
+must be resolved before another independent confirmation; exact preparation and
+checking remain larger cost targets. No production/default/GPUP-9 change.
+All prior sources, results, allocations and handoffs remain exact. Final acceptance,
+portable evidence and independent accounting are linked in the report.
+
+Allocation closed at 25496.532357332 CPU / 1685.317121775 GPU seconds,
+including 128 closing CPU seconds. All 8 failed reservations retain their
+full charges and sources; cleanup is empty. Portable replay without the original
+artifacts tree passes; 1957 historical files and all older handoffs/backlog entries
+remain exact. No historical funding transfer.
+
+## MIXED2 reliability and changing-model confirmation authorized (2026-11-13)
+
+[SPEC-0039](../specifications/SPEC-0039-mixed2-reuse.md) and
+[ADR-0072](../decisions/ADR-0072-mixed2-reuse.md) authorize an independent
+reliability diagnosis and fresh scoped confirmation of larger scenario streams.
+Keep original-model checking, full setup/switch/delivery/teardown costs and the
+unchanged watchdog. The old incomplete cohort is never retried or regraded.
+New independent ceilings: 80000 CPU / 8400 GPU seconds; public defaults and
+GPUP-9 remain unchanged. No production adoption follows automatically.
+
+## MIXED2 FP4 delivered; larger gains, confirmation incomplete (2026-11-13)
+
+The [implementation and measured report](../benchmarks/lp-mixed2-fp4.md) retain
+FP4 tensor increments with FP64 state, bounds, recovery and original certificates.
+Strict larger dense pairs show about 1.10–1.13x complete prepared speedups and
+up to 1.89x GPU-phase gains; small families regress. New 1024/2048 generic and
+stronger coupled full solves extend the scale to 16x dense512 coefficients.
+
+The 32-block confirmation remains incomplete after a supervisor heartbeat stop
+in block 26. No retry: 1000 complete sessions plus six retained response files from an
+interrupted session retain 5634 certificates and 372 intentional refusals. Missing
+cells, partial lifecycle data, unfavorable versions and costs remain explicit.
+These are descriptive performance observations, not a retention/adoption pass.
+Independent original-checker and exact product replay pass. Public defaults,
+historical criteria and GPUP-9 gating are unchanged; no follow-on execution release.
+
+## MIXED2 FP4 tensor implementation authorized (2026-11-13)
+
+[SPEC-0038](../specifications/SPEC-0038-mixed2-fp4.md) and
+[ADR-0071](../decisions/ADR-0071-mixed2-fp4.md) authorize FP4 tensor increment
+products with FP64 state, inexpensive conservative local bounds, exact recovery
+and independent original-model certification. The new study includes dense1024
+and dense2048 full solves, versioned optimization, complete-cost diagnosis and
+fresh frozen confirmation after CPU/device/sanitizer admission. Independent
+160000 CPU / 24000 GPU ceilings; historical evidence remains exact. No public
+preset or GPUP-9 release. Older entries retain their completed-task scope.
+
+## MIXED2 GPU pilot complete; retain native (2026-11-12)
+
+The [completed pilot](../benchmarks/lp-mixed2-pilot.md) retains all 576 solves
+and 192 product cells. FP32 products tie at 128/256 and lose at 512; adding
+the conservative guard gives 0.350–0.429x native product throughput. Do not
+integrate this version into a mixed solver. Dense profiling causes 7.7–9.2x
+complete-cost disturbance, leaving uninstrumented matrix share inconclusive.
+
+The provisional 1.10x adoption target no longer blocks bounded diagnostic
+admission; future adoption requires workload-value and sample-size justification.
+No historical result is regraded. Lower-overhead attribution and cheaper guards
+are next design questions, without a follow-on allocation or execution release.
+GPUP-8-DISPOSITION remains independently ready; GPUP-8 incomplete, GPUP-9 gated.
+
+## MIXED2 GPU diagnostic pilot authorized (2026-11-12)
+
+[ADR-0070](../decisions/ADR-0070-mixed2-pilot.md) separates bounded pilot admission
+from adoption. The provisional 1.10x numerical adoption target requires workload
+value and sample-size justification before a future confirmation. It does not
+block a useful, safe attribution experiment. Historical criteria remain exact.
+
+[SPEC-0037](../specifications/SPEC-0037-mixed2-pilot.md) authorizes prepared native
+matrix attribution, profiling-disturbance controls and a separate FP32-storage
+product/guard cost cohort under new 48000 CPU / 2400 GPU ceilings. Original
+certificates, all costs and unfavorable evidence remain mandatory. This is not
+a mixed solver, public preset or GPUP-8/GPUP-9 release.
+[Results and limitations](../benchmarks/lp-mixed2-pilot.md).
+
+## MIXED2 CPU admission complete; device study deferred (2026-11-12)
+
+[SPEC-0036](../specifications/SPEC-0036-mixed2.md) and
+[the report](../benchmarks/lp-mixed2.md) deliver the isolated FP32-matrix/FP64
+CPU reference, conservative local product bounds and transactional guard contract.
+All 1049 rational requests / 5121 outputs pass; this is not a GPU solver or a
+new original-model certificate. The retained native cost analysis keeps all
+768 cells / 1536 solves and 145 frozen scenarios per lifecycle.
+
+Ideal removal of all GPU event time gives only 1.010266x dense cold gain, failing
+the 1.10x target. Prepared hypothetical 2x whole-event acceleration gives 1.151630x,
+with unchanged work and zero overhead; the actual matrix fraction and added costs
+remain unknown. Device work is deferred. A separate matrix-attribution and
+complete-overhead pilot must precede any numerical solver cohort. Original 1e-9
+checking, public defaults, historical outcomes and allocations remain exact.
+
+GPUP-8-DISPOSITION is now ready for a separately requested review; no execution,
+funding, GPUP-8 completion, TENSOR2 or GPUP-9 release follows. The independent
+MIXED2 CPU allocation and full acceptance are linked in the report.
+
+Status: DELIVERY4 complete; exact hash gains and measured context lifecycle; DELIVERY3 complete with scoped cold retention and modest prepared gains; DELIVERY2 complete with dense cold gains but failed broad retention; FP4-CHECKER complete, exact dense checker gains without cold retention; FP4-ACCEL complete, dense gains without broad latency retention; FP4-GPU-PILOT complete; FP4-FAST optimization complete; FP4 recovery/integration complete; integrated FP4 latency retention fails; 1e-7/1e-9 final-quality tiers planned; old FP4-PROTO incomplete; GPUP-8 science closed; GPUP-9 gated
 Owner: numerical backend and experiment tooling
 Introduced: GPU LP precision research track (GPUP)
-Last reviewed commit: 59ae62d872b30885a57e02412b1f44478769ef16
+Last reviewed commit: eac5d00
 Implementation: [backlog](../../state/backlog.yaml), [active task](../../state/active-task.md)
 Decision: [ADR-0047](../decisions/ADR-0047-certified-performance-roadmap.md), [cost gates](../decisions/ADR-0054-resident2-cost-priorities.md), [FP4 GPU exploration and quality tiers](../decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
 Evidence: [RESIDENT2 result](../benchmarks/lp-resident2-gpup-resident2.md), [system diagnosis](../benchmarks/lp-system-diagnosis-2026-11-10.md), [latest GPUP-8 result](../benchmarks/lp-tensor-expanded-recovery-gpup8.md)
+
+## DELIVERY4 complete: hash gains and remaining context costs (2026-11-12)
+
+[Delivery and durable findings](../benchmarks/lp-delivery4.md),
+[SPEC-0035](../specifications/SPEC-0035-delivery4.md) / [ADR-0068](../decisions/ADR-0068-delivery4.md).
+All 192 pilot and 3072 confirmation cells retain exact numerical behavior and
+coverage. Dense target medians are 1.0760–1.0869x.
+No comparison meets all predeclared retention requirements. No public preset.
+
+Dense512 host preparation drops 110.9 to 53.2 ms through exact provenance hashing.
+Profiled context creation/initialization remains about 222 ms, owned destruction
+74 ms (69 ms context destructor), and 37–38 ms outside Rust main remains unresolved.
+The report preserves direct measurements, failures, full uncertainty and portable
+replay. Cold arithmetic is still a small fraction; MIXED2 stays independently ready
+for prepared CPU contract/cost admission. No new execution allocation follows;
+TENSOR2 conditional, GPUP-8 incomplete and GPUP-9 gated.
+
+## DELIVERY3 diagnosis: startup/lifecycle next (2026-11-12)
+
+[Retained-record diagnosis](../benchmarks/lp-delivery3-diagnosis.md) finds that even
+removing all GPU event time gives only 1.0094x on the dense cold target. Strict
+dense512 selected cold means spend 371 ms in setup and 112-114 ms outside the
+setup/solve timers. Instrumented host preparation remains a serial prerequisite
+of about 125 ms. Do not label the outer remainder teardown without measurement.
+
+Next ready: [GPUP-DELIVERY4](lp-delivery4.md), CPU attribution and exact contracts
+first, followed only by a separately funded lifecycle pilot and concrete selected
+optimization. MIXED2 stays ready as a prepared dense alternative: optimistic 2x
+whole-event acceleration forecasts 1.15-1.16x, but matrix-only attribution and
+added costs remain unadmitted. Strict dense128/256/512 have only about
+0.47/0.56/0.79 ms median added-cost allowance under that optimistic assumption.
+
+All original retention decisions reproduce exactly. Nine uncertain guards have
+6-9 positive excess-cost blocks; order and coarse environment associations do not
+establish a cause or justify excluding observations. Save supported, negative and
+inconclusive findings with evidence and limitations in every diagnosis. No new
+scientific/device run or public preset; old allocations remain closed, TENSOR2
+conditional and GPUP-9 gated.
+
+## DELIVERY3 complete: scoped cold benefit confirmed (2026-11-12)
+
+[GPUP-DELIVERY3](../benchmarks/lp-delivery3.md) implements independent delivery
+configurations under [SPEC-0034](../specifications/SPEC-0034-delivery3.md) /
+[ADR-0067](../decisions/ADR-0067-delivery3.md). All 768 diagnostic and 6144
+confirmation cells complete with exact original numerical evidence. Confirmation
+contains 12288 solves, 11264 certificates and 1024 intentional refusals.
+
+Frozen overlap-only cold achieves dense block-ratio medians 1.186–1.199x;
+all four benefit intervals exceed 1.10x. Full retention passes native/1e-9 and
+FP4/1e-7; other cold comparisons have inconclusive family guards. Batching-only
+prepared achieves dense block-ratio medians 1.044–1.060x but does not qualify under the 10%
+benefit rule. No family has a statistically supported material regression.
+Strict dense512 cold improves about 1.38x native / 1.41x FP4, prepared 1.08x / 1.09x.
+Shared-device conditions limit inference; no outcome-selected dispatcher or public
+preset follows. All historical decisions remain exact. MIXED2 is the next ready
+CPU contract/cost alternative; TENSOR2 remains conditional and GPUP-9 gated.
+
+## Next: isolate delivery mechanisms and confirm scoped gains (2026-11-12)
+
+The user permits revising the protocol. [ADR-0066](../decisions/ADR-0066-delivery-retention-scope.md)
+and [GPUP-DELIVERY3](lp-delivery3.md) make the next task explicit: independently
+switch checker batching and startup overlap, diagnose prepared total regressions,
+then confirm a frozen candidate using fresh cold processes and prepared sessions.
+Dense128/256/512 are the declared target class; retain a 1.10x benefit target
+there and guard every certified family against material regression with
+simultaneous uncertainty bounds. The engineering allowance is the larger of 2%
+or 0.10 ms, with supported, unfavorable and inconclusive outcomes. Exact original-
+model checking and coverage remain hard requirements. Cold and prepared routes
+qualify separately. The plan specifies a new 32-block confirmation design;
+implementation must first supply its complete independent resource package.
+
+DELIVERY2's historical gate and failed broad decision remain exact. Its timing
+results guide this hypothesis, not a retrospective pass. No new numerical/device
+execution or TENSOR2/GPUP-9 release follows from this documentation revision.
+MIXED2 remains independently ready as the simpler numerical alternative.
+
+## DELIVERY2 complete (2026-11-12)
+
+[GPUP-DELIVERY2](../benchmarks/lp-delivery2.md) implements batched independent-
+checker transport and overlapping original-model checker/device setup under
+[SPEC-0033](../specifications/SPEC-0033-delivery2.md) /
+[ADR-0065](../decisions/ADR-0065-delivery2.md). All 960 cells complete with exact
+retained numerical evidence: 880 certificates and 80 intentional refusals.
+Strict dense512 cold delivery improves about 1.40x in both native and FP4 lanes.
+Broad strict cold ratios 1.0584/1.0665x fail 1.10x/no-regression retention, and
+prepared dense512 medians regress despite faster checker transport. Keep the
+supported native solver and public defaults unchanged. The separate allocation
+is closed; historical budgets remain closed and GPUP-9 remains gated.
 
 ## Exact checker acceleration (2026-11-12)
 
@@ -196,6 +494,7 @@ status supplies the final certificate.
 | **GPUP-FP4-FAST**, complete | [SPEC-0028 delivery](../benchmarks/lp-fp4-fast.md): hardware encoding, component columns, zero-plane pruning, exact host preparation and prepared lifecycle | 288/288 cells and 2016 fresh windows; same-lane endpoint hashes match; 4.16–7.81x kernel gains and four sanitizer passes. Rich FP4 x8 still loses to native; no certificate or preset |
 | **GPUP-FP4-RECOVERY-SPEC**, complete | [SPEC-0029](../specifications/SPEC-0029-fp4-recovery-policy.md): compatible local errors and explicit operational residual recovery | Distinguish proved bounds from empirical progress/error observations; version the changed policy, retain original-A FP64 audits, complete checkpoints and explicit recovery. No GPU-pilot prerequisite |
 | **GPUP-FP4-INTEGRATE**, complete; retention fails | [SPEC-0030 delivery](../benchmarks/lp-fp4-integrate.md): 96 coupled diagnostics and 576 same-tier cold/prepared solves, complete rollback and original-model certificates | Final native/device/four-sanitizer gates and 176 unique endpoint replays pass; matched six-of-eight-family coverage at both tiers. Cold FP4 geometric means 0.959–0.986x fail retention. Native retained; old prototype stays incomplete |
+| **GPUP-DELIVERY4**, complete | [SPEC-0035 delivery](../benchmarks/lp-delivery4.md): exact provenance hashing, process lifecycle attribution and 32 fresh cold confirmation blocks; depends on GPUP-DELIVERY3 | 3072 cells, exact evidence; dense ratios 1.0760–1.0869x. No comparison meets all predeclared retention requirements. Measured context destruction about 69 ms; no public preset |
 | **GPUP-TENSOR2**, conditional solver study | Complete cold/prepared comparison with separately labeled 1e-7 and 1e-9 cohorts | New frozen quality/grid/resource protocol, integration admission and conservative complete-cost screen informed by the pilot; original-model independent certification and matched controls |
 
 The pilot measures actual arithmetic error, component pairs and padded MMA work,
@@ -309,11 +608,12 @@ execution follows this documentation update.
 | **GPUP-FP4-FAST**, complete | [SPEC-0028 delivery](../benchmarks/lp-fp4-fast.md): hardware encoding, component columns, zero-plane pruning, exact host preparation and prepared lifecycle | 288/288 cells and 2016 fresh windows; same-lane endpoint hashes match; 4.16–7.81x kernel gains and four sanitizer passes. Rich FP4 x8 still loses to native; no certificate or preset |
 | **GPUP-FP4-RECOVERY-SPEC**, complete, CPU-only | [SPEC-0029](../specifications/SPEC-0029-fp4-recovery-policy.md) delivers local accounting, operational guards, complete checkpoints, dual-tier receipt validation and a non-executable integration proposal | New versioned contract; empirical inner error never masquerades as a proof; original-model FP64 audits and independent final certification at the declared 1e-7/1e-9 tier; no automatic old scientific retry |
 | **GPUP-FP4-INTEGRATE**, complete; retention fails | [SPEC-0030](../specifications/SPEC-0030-fp4-integration.md): coupled recovery and certificates admitted; 672 cells complete, same coverage, no retained speedup | Nontrivial trajectory, full checkpoint/cancellation/recovery and original-model endpoint admission; a useful certified-1e-7 lane may proceed without a strict pass; retain all costs and failures |
-| **GPUP-MIXED2**, simpler alternative, dependency-ready | CPU-only complete-delivery cost admission against the native control, then separately admitted FP32 matrix / FP64 state-and-compute; lower-precision state is a later candidate; depends on GPUP-BASELINE and GPUP-RESIDENT2 | Predeclared latency/coverage rule and accelerated cost fraction, iteration/guard/transfer/fallback costs; defer device study if the cost case fails. Explicit matrix-error/residual contract, useful nonzero work and original 1e-9 certificate |
-| **GPUP-DELIVERY2**, conditional alternative before precision device work | Target demonstrated parsing/preparation/checker/provenance/transport overhead using retained native phase evidence; depends on GPUP-RESIDENT2 | New bounded protocol/allocation; exact original inputs and fresh independent certificates; matched native controls isolate transport changes. Cold total cost and prepared throughput remain separate; no unmeasured residual assigned to removable overhead |
+| **GPUP-MIXED2**, CPU admission complete; device deferred | [SPEC-0036](../specifications/SPEC-0036-mixed2.md): FP32-matrix/FP64 CPU reference, local bounds and retained native cost analysis | Ideal cold 1.010266x fails 1.10x; prepared hypothetical 2x events gives 1.151630x, with matrix attribution and added costs unknown. No GPU solver or new certificate; separately funded attribution/admission required |
+| **GPUP-DELIVERY2**, complete; broad retention fails | [SPEC-0033 delivery](../benchmarks/lp-delivery2.md): batched checker IPC and overlapping independent checker/device setup; depends on GPUP-RESIDENT2 | 960 cells / 880 certificates / 80 intentional refusals; exact numerical evidence. Strict dense512 cold improves about 1.40x for native and FP4; broad 1.0584/1.0665x fails retention. Prepared dense512 regresses; no preset or GPUP-9 release |
+| **GPUP-DELIVERY3**, complete | [SPEC-0034 delivery](../benchmarks/lp-delivery3.md): four configurations, disjoint diagnosis and 32 fresh confirmation blocks; depends on GPUP-DELIVERY2 | 6144 cells / 12288 solves, exact evidence. Dense cold benefit passes all lane/tiers; full retention native/1e-9 and FP4/1e-7, other cold guards inconclusive. Prepared gains below/inconclusive against 10% target; no public preset |
 | **GPUP-TENSOR2**, conditional FP4 study | New versioned native FP64, FP8/FP16 and FP4 cohorts at explicit 1e-7/1e-9 final tiers; depends on GPUP-FP4-INTEGRATE | Integration and complete-cost admission before campaign; at least 1.10x cold model-median geometric mean, no certified model-median regression or coverage loss against same-tolerance control; uncertainty and complete cold/prepared costs; old proposal/GPUP-8 criteria unchanged |
 | **GPUP-PRESOLVE**, planned | Minimal reversible fixed-variable, singleton and bound-tightening transformations plus postsolve maps; depends on GPUP-BASELINE evidence | Independent original-model validation of postsolved primal/dual information and statuses; benchmark saved total work; reject transformations that cannot preserve required proof information |
-| **GPUP-8-DISPOSITION**, planned review | Review new engineering evidence and the retained incomplete GPUP-8 record; depends on GPUP-BASELINE and GPUP-MIXED2 | Either propose a separately funded bounded recovery with unchanged GPUP-8 criteria, or seek an explicit negative-result closure and superseding progression decision; neither marks GPUP-8 passed by default |
+| **GPUP-8-DISPOSITION**, ready review; separate request required | Review new engineering evidence and the retained incomplete GPUP-8 record; depends on GPUP-BASELINE and GPUP-MIXED2 | Either propose a separately funded bounded recovery with unchanged GPUP-8 criteria, or seek an explicit negative-result closure and superseding progression decision; neither marks GPUP-8 passed by default |
 | **GPUP-9 / GPUP-10**, gated | Controlled held-out ablations, then evidence-supported dispatcher/recipes | GPUP-8 completion or a separately accepted replacement gate is required; retain coverage, uncertainty, total costs and native fallback; no preset from partial profiles |
 | **GPUP-MILP**, deferred | Relaxation adapter, bound authority, warm starts and full search study after supported LP recipes | Correct pruning/bounds, cancellation and reproducibility, followed by full MILP time/node/coverage comparisons |
 

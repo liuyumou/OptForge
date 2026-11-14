@@ -1,0 +1,4290 @@
+{
+  "development": {
+    "development-v1": {
+      "manifest": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/development-v1/manifest.json",
+        "sha256": "0567080044933eab350a4a1f5070b42c2be0ee51d866939a32034e47a193fdec"
+      },
+      "result": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/development-v1/result.json",
+        "sha256": "d31851a204a43cc2cd206480778a16b9dd7bf2c75110bc3ec3f97c79ffdc22f2"
+      },
+      "rows": [
+        {
+          "complete_ms": 61.430011,
+          "costs_ms": {
+            "audit": 5.600119,
+            "checker": 27.632057,
+            "checkpoint": 0.022778,
+            "coordination": 3.486744,
+            "export": 0.112351,
+            "iteration": 21.683072,
+            "prepare_reset": 0.059048
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 21.334720015525818,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 899.86365,
+          "solves": 9
+        },
+        {
+          "complete_ms": 71.899299,
+          "costs_ms": {
+            "audit": 2.832753,
+            "checker": 13.906958,
+            "coordination": 3.361674,
+            "export": 0.082214,
+            "iteration": 49.755448,
+            "prepare_reset": 0.056066
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 49.44230341911316,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 936.735545,
+          "solves": 9
+        },
+        {
+          "complete_ms": 31.654587,
+          "costs_ms": {
+            "audit": 2.835902,
+            "checker": 13.58051,
+            "coordination": 3.413504,
+            "export": 0.081147,
+            "iteration": 10.25654,
+            "prepare_reset": 0.057236
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 9.954719990491867,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 887.662108,
+          "solves": 9
+        },
+        {
+          "complete_ms": 10.147475,
+          "costs_ms": {
+            "audit": 0.090249,
+            "checker": 1.692957,
+            "checkpoint": 0.012694,
+            "coordination": 0.081561,
+            "export": 0.055587,
+            "iteration": 7.622534,
+            "prepare_reset": 0.03202
+          },
+          "family": "dense-generic-128",
+          "gpu_ms": 7.290143936872482,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 252.538056,
+          "solves": 9
+        },
+        {
+          "complete_ms": 14.259315,
+          "costs_ms": {
+            "audit": 0.044765,
+            "checker": 1.106622,
+            "coordination": 0.06893,
+            "export": 0.041665,
+            "iteration": 12.343121,
+            "prepare_reset": 0.029674
+          },
+          "family": "dense-generic-128",
+          "gpu_ms": 12.046239852905273,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 242.816568,
+          "solves": 9
+        },
+        {
+          "complete_ms": 4.480976,
+          "costs_ms": {
+            "audit": 0.044896,
+            "checker": 0.630047,
+            "coordination": 0.067508,
+            "export": 0.042314,
+            "iteration": 3.173379,
+            "prepare_reset": 0.03117
+          },
+          "family": "dense-generic-128",
+          "gpu_ms": 2.88857601583004,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 247.503387,
+          "solves": 9
+        },
+        {
+          "complete_ms": 189.208434,
+          "costs_ms": {
+            "audit": 23.542749,
+            "checker": 110.118119,
+            "checkpoint": 0.030724,
+            "coordination": 13.12721,
+            "export": 0.176436,
+            "iteration": 38.263169,
+            "prepare_reset": 0.07321
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 37.894976019859314,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 3701.957935,
+          "solves": 9
+        },
+        {
+          "complete_ms": 181.134507,
+          "costs_ms": {
+            "audit": 13.746157,
+            "checker": 54.426308,
+            "coordination": 12.998608,
+            "export": 0.152207,
+            "iteration": 94.263531,
+            "prepare_reset": 0.07581
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 93.92649483680725,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 3838.413895,
+          "solves": 9
+        },
+        {
+          "complete_ms": 104.154204,
+          "costs_ms": {
+            "audit": 11.778473,
+            "checker": 57.368788,
+            "coordination": 13.495218,
+            "export": 0.145983,
+            "iteration": 18.108606,
+            "prepare_reset": 0.063779
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 17.800895750522614,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 3511.132781,
+          "solves": 9
+        },
+        {
+          "complete_ms": 14.650571,
+          "costs_ms": {
+            "audit": 0.35462,
+            "checker": 3.611666,
+            "checkpoint": 0.014092,
+            "coordination": 0.221388,
+            "export": 0.063596,
+            "iteration": 9.558751,
+            "prepare_reset": 0.034027
+          },
+          "family": "dense-generic-256",
+          "gpu_ms": 9.227168053388596,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 254.754775,
+          "solves": 9
+        },
+        {
+          "complete_ms": 21.19267,
+          "costs_ms": {
+            "audit": 0.173788,
+            "checker": 2.810227,
+            "coordination": 0.20947,
+            "export": 0.039765,
+            "iteration": 17.278129,
+            "prepare_reset": 0.032034
+          },
+          "family": "dense-generic-256",
+          "gpu_ms": 16.992512047290802,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 261.768833,
+          "solves": 9
+        },
+        {
+          "complete_ms": 7.739426,
+          "costs_ms": {
+            "audit": 0.173164,
+            "checker": 2.207064,
+            "coordination": 0.208667,
+            "export": 0.051926,
+            "iteration": 4.384388,
+            "prepare_reset": 0.03516
+          },
+          "family": "dense-generic-256",
+          "gpu_ms": 4.088192045688629,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 252.900083,
+          "solves": 9
+        },
+        {
+          "complete_ms": 25.116096,
+          "costs_ms": {
+            "audit": 1.381231,
+            "checker": 8.232705,
+            "checkpoint": 0.022906,
+            "coordination": 0.805533,
+            "export": 0.081237,
+            "iteration": 13.457298,
+            "prepare_reset": 0.044897
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 13.10832017660141,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 319.014136,
+          "solves": 9
+        },
+        {
+          "complete_ms": 35.219485,
+          "costs_ms": {
+            "audit": 0.688294,
+            "checker": 4.788557,
+            "coordination": 0.778799,
+            "export": 0.058252,
+            "iteration": 28.024552,
+            "prepare_reset": 0.045632
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 27.707679629325867,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 343.802555,
+          "solves": 9
+        },
+        {
+          "complete_ms": 13.481985,
+          "costs_ms": {
+            "audit": 0.68758,
+            "checker": 4.591176,
+            "coordination": 0.761727,
+            "export": 0.061766,
+            "iteration": 6.461088,
+            "prepare_reset": 0.048558
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 6.161535918712616,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 308.365784,
+          "solves": 9
+        },
+        {
+          "complete_ms": 7.306691,
+          "costs_ms": {
+            "audit": 0.002793,
+            "checker": 0.169279,
+            "coordination": 0.018427,
+            "export": 0.034322,
+            "iteration": 6.551671,
+            "prepare_reset": 0.027367
+          },
+          "family": "irregular-tail-33",
+          "gpu_ms": 6.259008020162582,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 241.029915,
+          "solves": 9
+        },
+        {
+          "complete_ms": 9.838114,
+          "costs_ms": {
+            "audit": 0.002502,
+            "checker": 0.212455,
+            "coordination": 0.018586,
+            "export": 0.029275,
+            "iteration": 9.02637,
+            "prepare_reset": 0.027532
+          },
+          "family": "irregular-tail-33",
+          "gpu_ms": 8.74860805273056,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 218.332421,
+          "solves": 9
+        },
+        {
+          "complete_ms": 3.727759,
+          "costs_ms": {
+            "audit": 0.002557,
+            "checker": 0.157731,
+            "coordination": 0.018766,
+            "export": 0.030329,
+            "iteration": 3.160507,
+            "prepare_reset": 0.027973
+          },
+          "family": "irregular-tail-33",
+          "gpu_ms": 2.874432012438774,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 3,
+          "settings": {},
+          "setup_ms": 240.658775,
+          "solves": 9
+        }
+      ]
+    },
+    "development-v2": {
+      "manifest": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/development-v2/manifest.json",
+        "sha256": "f87a5f41e51a4a7dcb08d6e9919a32fdddc9ef76e027429933559e0d9e606030"
+      },
+      "result": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/development-v2/result.json",
+        "sha256": "ab33fffbc251b440d770db193df37a9c63ac4d2e3c56d5ca803932caa1774782"
+      },
+      "rows": [
+        {
+          "complete_ms": 50.3224175,
+          "costs_ms": {
+            "audit": 5.618893,
+            "checker": 26.820859,
+            "checkpoint": 0.0222205,
+            "coordination": 3.2745555,
+            "export": 0.11176,
+            "iteration": 11.698669,
+            "prepare_reset": 0.0534235
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 11.349088042974472,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 924.1356485,
+          "solves": 6
+        },
+        {
+          "complete_ms": 34.720839,
+          "costs_ms": {
+            "audit": 2.9544355,
+            "checker": 13.972163,
+            "coordination": 3.397685,
+            "export": 0.080222,
+            "iteration": 12.586093,
+            "prepare_reset": 0.059791
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 12.275904089212418,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 951.910886,
+          "solves": 6
+        },
+        {
+          "complete_ms": 34.7355895,
+          "costs_ms": {
+            "audit": 2.7742295,
+            "checker": 15.786215,
+            "coordination": 3.438274,
+            "export": 0.0798115,
+            "iteration": 10.271139,
+            "prepare_reset": 0.0592095
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 9.965392053127289,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 895.426911,
+          "solves": 6
+        },
+        {
+          "complete_ms": 8.7656435,
+          "costs_ms": {
+            "audit": 0.089525,
+            "checker": 1.3384445,
+            "checkpoint": 0.012175,
+            "coordination": 0.077126,
+            "export": 0.052193,
+            "iteration": 6.6602705,
+            "prepare_reset": 0.0295455
+          },
+          "family": "dense-generic-128",
+          "gpu_ms": 6.33123192191124,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 239.9958305,
+          "solves": 6
+        },
+        {
+          "complete_ms": 9.4719465,
+          "costs_ms": {
+            "audit": 0.045178,
+            "checker": 1.293157,
+            "coordination": 0.073581,
+            "export": 0.0434315,
+            "iteration": 7.4328325,
+            "prepare_reset": 0.036096
+          },
+          "family": "dense-generic-128",
+          "gpu_ms": 7.129984125494957,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 231.4588515,
+          "solves": 6
+        },
+        {
+          "complete_ms": 4.4446965,
+          "costs_ms": {
+            "audit": 0.0449125,
+            "checker": 0.5717945,
+            "coordination": 0.0694795,
+            "export": 0.0417145,
+            "iteration": 3.186196,
+            "prepare_reset": 0.0304055
+          },
+          "family": "dense-generic-128",
+          "gpu_ms": 2.8919199667871,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 231.398333,
+          "solves": 6
+        },
+        {
+          "complete_ms": 178.919763,
+          "costs_ms": {
+            "audit": 29.919404,
+            "checker": 110.1688775,
+            "checkpoint": 0.0290845,
+            "coordination": 16.133553,
+            "export": 0.173024,
+            "iteration": 17.7400205,
+            "prepare_reset": 0.073157
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 17.370319932699203,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 3775.578682,
+          "solves": 6
+        },
+        {
+          "complete_ms": 104.807955,
+          "costs_ms": {
+            "audit": 11.749834,
+            "checker": 55.020526,
+            "coordination": 13.288762,
+            "export": 0.142044,
+            "iteration": 19.8029135,
+            "prepare_reset": 0.0698715
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 19.49204793572426,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 3829.9066775,
+          "solves": 6
+        },
+        {
+          "complete_ms": 106.367718,
+          "costs_ms": {
+            "audit": 13.685316,
+            "checker": 54.931126,
+            "coordination": 14.567769,
+            "export": 0.127991,
+            "iteration": 18.132007,
+            "prepare_reset": 0.0686985
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 17.80883228778839,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 3668.202508,
+          "solves": 6
+        },
+        {
+          "complete_ms": 11.4436265,
+          "costs_ms": {
+            "audit": 0.354899,
+            "checker": 3.382226,
+            "checkpoint": 0.02349,
+            "coordination": 0.2249775,
+            "export": 0.0625465,
+            "iteration": 6.716024,
+            "prepare_reset": 0.039492
+          },
+          "family": "dense-generic-256",
+          "gpu_ms": 6.37566402554512,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 266.7580535,
+          "solves": 6
+        },
+        {
+          "complete_ms": 11.170225,
+          "costs_ms": {
+            "audit": 0.1726415,
+            "checker": 2.6450435,
+            "coordination": 0.206969,
+            "export": 0.0485685,
+            "iteration": 7.453217,
+            "prepare_reset": 0.0350435
+          },
+          "family": "dense-generic-256",
+          "gpu_ms": 7.164560005068779,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 263.7616095,
+          "solves": 6
+        },
+        {
+          "complete_ms": 7.771342,
+          "costs_ms": {
+            "audit": 0.172725,
+            "checker": 2.3466945,
+            "coordination": 0.212336,
+            "export": 0.052169,
+            "iteration": 4.3758725,
+            "prepare_reset": 0.036401
+          },
+          "family": "dense-generic-256",
+          "gpu_ms": 4.082768000662327,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 251.650696,
+          "solves": 6
+        },
+        {
+          "complete_ms": 20.2671515,
+          "costs_ms": {
+            "audit": 1.3866025,
+            "checker": 8.159279,
+            "checkpoint": 0.0216885,
+            "coordination": 0.768806,
+            "export": 0.078404,
+            "iteration": 8.7038835,
+            "prepare_reset": 0.0451745
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 8.35175995528698,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 321.9983615,
+          "solves": 6
+        },
+        {
+          "complete_ms": 15.9678555,
+          "costs_ms": {
+            "audit": 0.6933555,
+            "checker": 4.30378,
+            "coordination": 0.754562,
+            "export": 0.061124,
+            "iteration": 9.1748335,
+            "prepare_reset": 0.04834
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 8.8696960657835,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 366.8371765,
+          "solves": 6
+        },
+        {
+          "complete_ms": 13.4098965,
+          "costs_ms": {
+            "audit": 0.69707,
+            "checker": 4.422649,
+            "coordination": 0.7353545,
+            "export": 0.060872,
+            "iteration": 6.453949,
+            "prepare_reset": 0.0453775
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 6.163487993180752,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 321.111816,
+          "solves": 6
+        },
+        {
+          "complete_ms": 6.321572,
+          "costs_ms": {
+            "audit": 0.0027395,
+            "checker": 0.117792,
+            "coordination": 0.0179365,
+            "export": 0.0338695,
+            "iteration": 5.7239715,
+            "prepare_reset": 0.028192
+          },
+          "family": "irregular-tail-33",
+          "gpu_ms": 5.439088016748428,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 227.672747,
+          "solves": 6
+        },
+        {
+          "complete_ms": 7.2186615,
+          "costs_ms": {
+            "audit": 0.002538,
+            "checker": 0.175441,
+            "coordination": 0.018567,
+            "export": 0.0292915,
+            "iteration": 6.56659,
+            "prepare_reset": 0.0277415
+          },
+          "family": "irregular-tail-33",
+          "gpu_ms": 6.288896024227142,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 218.372812,
+          "solves": 6
+        },
+        {
+          "complete_ms": 3.6359185,
+          "costs_ms": {
+            "audit": 0.002487,
+            "checker": 0.0807275,
+            "coordination": 0.0181815,
+            "export": 0.0301965,
+            "iteration": 3.154967,
+            "prepare_reset": 0.027946
+          },
+          "family": "irregular-tail-33",
+          "gpu_ms": 2.873199999332428,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {},
+          "setup_ms": 242.839128,
+          "solves": 6
+        }
+      ]
+    },
+    "schedule-v1": {
+      "manifest": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/schedule-v1/manifest.json",
+        "sha256": "12ffd4f9b487360e09a1fcf0819c4c4753828e7dda5525a248cd2b76f98c50b4"
+      },
+      "result": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/schedule-v1/result.json",
+        "sha256": "f174b6c37c1b9106409c6fc2c98b9e473bdfca9d9b6726e92f53b980c6531c94"
+      },
+      "rows": [
+        {
+          "complete_ms": 172.115057,
+          "costs_ms": {
+            "audit": 22.6203805,
+            "checker": 119.4773165,
+            "checkpoint": 0.24653,
+            "coordination": 0.508843,
+            "export": 0.332599,
+            "initial_audit": 0.0001865,
+            "iteration": 23.529369,
+            "prepare_reset": 0.1003495
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 21.423744022846222,
+          "lane": "fp4x2",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 678.5542645,
+          "solves": 6
+        },
+        {
+          "complete_ms": 79.7467405,
+          "costs_ms": {
+            "audit": 10.329329,
+            "checker": 39.962158,
+            "checkpoint": 0.064289,
+            "coordination": 0.2509015,
+            "export": 0.143235,
+            "initial_audit": 8.2e-05,
+            "iteration": 26.0775745,
+            "prepare_reset": 0.06267
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 23.811392039060593,
+          "lane": "fp4x2",
+          "physical": [
+            800
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 685.0884485,
+          "solves": 6
+        },
+        {
+          "complete_ms": 184.0437075,
+          "costs_ms": {
+            "audit": 22.4631755,
+            "checker": 119.9318615,
+            "checkpoint": 0.245242,
+            "coordination": 0.4508595,
+            "export": 0.3311495,
+            "initial_audit": 0.000158,
+            "iteration": 35.2019855,
+            "prepare_reset": 0.086058
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 34.04401598870754,
+          "lane": "native",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 635.010298,
+          "solves": 6
+        },
+        {
+          "complete_ms": 93.09033,
+          "costs_ms": {
+            "audit": 11.037029,
+            "checker": 40.423668,
+            "checkpoint": 0.0645265,
+            "coordination": 0.184102,
+            "export": 0.1447345,
+            "initial_audit": 8.5e-05,
+            "iteration": 39.0326925,
+            "prepare_reset": 0.0571425
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 37.79828800261021,
+          "lane": "native",
+          "physical": [
+            800
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 617.067328,
+          "solves": 6
+        },
+        {
+          "complete_ms": 655.3257075,
+          "costs_ms": {
+            "audit": 89.3284155,
+            "checker": 514.656504,
+            "checkpoint": 0.353275,
+            "coordination": 0.8888935,
+            "export": 0.555714,
+            "initial_audit": 0.000187,
+            "iteration": 35.826875,
+            "prepare_reset": 0.1165135
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 33.61078383028507,
+          "lane": "fp4x2",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 2728.4779065,
+          "solves": 6
+        },
+        {
+          "complete_ms": 250.5863235,
+          "costs_ms": {
+            "audit": 32.281166,
+            "checker": 171.1609835,
+            "checkpoint": 0.0905395,
+            "coordination": 0.4031225,
+            "export": 0.245771,
+            "initial_audit": 0.0001785,
+            "iteration": 39.650097,
+            "prepare_reset": 0.128633
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 37.35545590519905,
+          "lane": "fp4x2",
+          "physical": [
+            800
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 2733.1732405,
+          "solves": 6
+        },
+        {
+          "complete_ms": 688.496833,
+          "costs_ms": {
+            "audit": 91.8872285,
+            "checker": 516.0371455,
+            "checkpoint": 0.368804,
+            "coordination": 0.868207,
+            "export": 0.5780955,
+            "initial_audit": 0.0001965,
+            "iteration": 64.792669,
+            "prepare_reset": 0.12353
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 63.53934398293495,
+          "lane": "native",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 2664.1780935,
+          "solves": 6
+        },
+        {
+          "complete_ms": 280.913866,
+          "costs_ms": {
+            "audit": 31.4001945,
+            "checker": 170.9761465,
+            "checkpoint": 0.092506,
+            "coordination": 0.3587395,
+            "export": 0.244492,
+            "initial_audit": 0.0001515,
+            "iteration": 71.8394795,
+            "prepare_reset": 0.1166535
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 70.56604817509651,
+          "lane": "native",
+          "physical": [
+            800
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 2746.8604295,
+          "solves": 6
+        },
+        {
+          "complete_ms": 22.1144035,
+          "costs_ms": {
+            "audit": 2.718583,
+            "checker": 10.9211435,
+            "coordination": 0.0609855,
+            "export": 0.0758115,
+            "initial_audit": 5.05e-05,
+            "iteration": 6.525486,
+            "prepare_reset": 0.0543435
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 5.962767958641052,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 674.63414,
+          "solves": 6
+        },
+        {
+          "complete_ms": 22.1588165,
+          "costs_ms": {
+            "audit": 2.714341,
+            "checker": 10.7657695,
+            "coordination": 0.059865,
+            "export": 0.077351,
+            "initial_audit": 7.15e-05,
+            "iteration": 6.5338005,
+            "prepare_reset": 0.054326
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 5.961935997009277,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 688.759944,
+          "solves": 6
+        },
+        {
+          "complete_ms": 25.06495,
+          "costs_ms": {
+            "audit": 2.8362825,
+            "checker": 10.763288,
+            "coordination": 0.0535645,
+            "export": 0.07973,
+            "initial_audit": 5.85e-05,
+            "iteration": 9.771846,
+            "prepare_reset": 0.0545575
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 9.451520070433617,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 665.769224,
+          "solves": 6
+        },
+        {
+          "complete_ms": 25.6179985,
+          "costs_ms": {
+            "audit": 3.1118635,
+            "checker": 10.679935,
+            "coordination": 0.0518375,
+            "export": 0.078399,
+            "initial_audit": 6.2e-05,
+            "iteration": 9.748941,
+            "prepare_reset": 0.052484
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 9.451488092541695,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 628.04062,
+          "solves": 6
+        },
+        {
+          "complete_ms": 65.1393825,
+          "costs_ms": {
+            "audit": 8.381682,
+            "checker": 43.2977385,
+            "coordination": 0.1262065,
+            "export": 0.133454,
+            "initial_audit": 9e-05,
+            "iteration": 9.937196,
+            "prepare_reset": 0.086685
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 9.347968012094498,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 2782.230399,
+          "solves": 6
+        },
+        {
+          "complete_ms": 65.198378,
+          "costs_ms": {
+            "audit": 8.515018,
+            "checker": 43.341113,
+            "coordination": 0.1263175,
+            "export": 0.11871,
+            "initial_audit": 0.000134,
+            "iteration": 9.941767,
+            "prepare_reset": 0.0813005
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 9.348352015018463,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 2907.0006115,
+          "solves": 6
+        },
+        {
+          "complete_ms": 72.97674,
+          "costs_ms": {
+            "audit": 8.259628,
+            "checker": 43.1577045,
+            "coordination": 0.1176225,
+            "export": 0.1301535,
+            "initial_audit": 0.000159,
+            "iteration": 17.9672205,
+            "prepare_reset": 0.0859365
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 17.650095969438553,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 2771.483597,
+          "solves": 6
+        },
+        {
+          "complete_ms": 72.81962,
+          "costs_ms": {
+            "audit": 8.3535245,
+            "checker": 42.97064,
+            "coordination": 0.11579,
+            "export": 0.1267485,
+            "initial_audit": 0.00014,
+            "iteration": 17.9541785,
+            "prepare_reset": 0.0760675
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 17.645712107419968,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 2648.806351,
+          "solves": 6
+        },
+        {
+          "complete_ms": 11.491681,
+          "costs_ms": {
+            "audit": 0.716526,
+            "checker": 4.244664,
+            "coordination": 0.036639,
+            "export": 0.0574745,
+            "initial_audit": 5.4e-05,
+            "iteration": 5.4304215,
+            "prepare_reset": 0.0410975
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 4.879487998783588,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 337.833245,
+          "solves": 6
+        },
+        {
+          "complete_ms": 12.0128245,
+          "costs_ms": {
+            "audit": 0.7285145,
+            "checker": 4.636817,
+            "coordination": 0.0371295,
+            "export": 0.058351,
+            "initial_audit": 4.15e-05,
+            "iteration": 5.4414425,
+            "prepare_reset": 0.043952
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 4.878640003502369,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 311.8436475,
+          "solves": 6
+        },
+        {
+          "complete_ms": 12.410951,
+          "costs_ms": {
+            "audit": 0.724686,
+            "checker": 4.188161,
+            "coordination": 0.031284,
+            "export": 0.055071,
+            "initial_audit": 3.95e-05,
+            "iteration": 6.462806,
+            "prepare_reset": 0.040529
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 6.158160015940666,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": false
+          },
+          "setup_ms": 304.673444,
+          "solves": 6
+        },
+        {
+          "complete_ms": 12.698397,
+          "costs_ms": {
+            "audit": 0.75634,
+            "checker": 4.384443,
+            "coordination": 0.0311865,
+            "export": 0.060808,
+            "initial_audit": 3.95e-05,
+            "iteration": 6.463179,
+            "prepare_reset": 0.039356
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 6.161152020096779,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "fixed_audit": true
+          },
+          "setup_ms": 304.10932,
+          "solves": 6
+        }
+      ]
+    },
+    "windows-v1": {
+      "manifest": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/windows-v1/manifest.json",
+        "sha256": "e6419f09f1f7b148fc523e23c7087363f3e03568a5f2927d7d52f3de5c0c798b"
+      },
+      "result": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/windows-v1/result.json",
+        "sha256": "2fc513859d52473788f4199a4de1fae86941bdba9192b01dee2f47e08a1f52b0"
+      },
+      "rows": [
+        {
+          "complete_ms": 180.2540945,
+          "costs_ms": {
+            "audit": 22.312526,
+            "checker": 120.3973095,
+            "checkpoint": 0.2627085,
+            "coordination": 0.575278,
+            "export": 0.325321,
+            "initial_audit": 3.002898,
+            "iteration": 27.4181895,
+            "prepare_reset": 0.065015
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 23.504399925470352,
+          "lane": "fp4x2",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 689.376189,
+          "solves": 6
+        },
+        {
+          "complete_ms": 175.8609165,
+          "costs_ms": {
+            "audit": 21.9074735,
+            "checker": 120.681408,
+            "checkpoint": 0.264581,
+            "coordination": 0.495625,
+            "export": 0.3343345,
+            "initial_audit": 2.8609645,
+            "iteration": 23.4697475,
+            "prepare_reset": 0.067072
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 21.40164804458618,
+          "lane": "fp4x2",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 655.6582255,
+          "solves": 6
+        },
+        {
+          "complete_ms": 174.9958055,
+          "costs_ms": {
+            "audit": 21.859838,
+            "checker": 121.9034305,
+            "checkpoint": 0.2742585,
+            "coordination": 0.4421185,
+            "export": 0.3450665,
+            "initial_audit": 2.839968,
+            "iteration": 21.545461,
+            "prepare_reset": 0.059453
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 20.379199907183647,
+          "lane": "fp4x2",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 656.5745305,
+          "solves": 6
+        },
+        {
+          "complete_ms": 189.618425,
+          "costs_ms": {
+            "audit": 22.70126,
+            "checker": 123.6138095,
+            "checkpoint": 0.24634,
+            "coordination": 0.566758,
+            "export": 0.3368105,
+            "initial_audit": 2.837691,
+            "iteration": 33.1523065,
+            "prepare_reset": 0.059454
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 29.222432032227516,
+          "lane": "fp4x4",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 700.5103855,
+          "solves": 6
+        },
+        {
+          "complete_ms": 182.1996535,
+          "costs_ms": {
+            "audit": 23.165696,
+            "checker": 120.495439,
+            "checkpoint": 0.2541145,
+            "coordination": 0.4883225,
+            "export": 0.3366355,
+            "initial_audit": 2.684568,
+            "iteration": 29.319321,
+            "prepare_reset": 0.063559
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 27.20759980380535,
+          "lane": "fp4x4",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 693.1118,
+          "solves": 6
+        },
+        {
+          "complete_ms": 180.6330325,
+          "costs_ms": {
+            "audit": 22.3244405,
+            "checker": 121.2491085,
+            "checkpoint": 0.258307,
+            "coordination": 0.4495295,
+            "export": 0.3400525,
+            "initial_audit": 2.939656,
+            "iteration": 27.3448135,
+            "prepare_reset": 0.0641085
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 26.207056015729904,
+          "lane": "fp4x4",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 692.796077,
+          "solves": 6
+        },
+        {
+          "complete_ms": 192.551546,
+          "costs_ms": {
+            "audit": 22.807149,
+            "checker": 122.0839935,
+            "checkpoint": 0.263637,
+            "coordination": 0.590282,
+            "export": 0.3189895,
+            "initial_audit": 2.6686525,
+            "iteration": 38.174059,
+            "prepare_reset": 0.0612395
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 34.23601596057415,
+          "lane": "native",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 662.959759,
+          "solves": 6
+        },
+        {
+          "complete_ms": 190.5453735,
+          "costs_ms": {
+            "audit": 23.231655,
+            "checker": 120.659065,
+            "checkpoint": 0.268402,
+            "coordination": 0.5100465,
+            "export": 0.3394605,
+            "initial_audit": 2.7960405,
+            "iteration": 36.212071,
+            "prepare_reset": 0.056962
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 34.09430405497551,
+          "lane": "native",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 638.3735035,
+          "solves": 6
+        },
+        {
+          "complete_ms": 188.621069,
+          "costs_ms": {
+            "audit": 23.1585875,
+            "checker": 120.920636,
+            "checkpoint": 0.261164,
+            "coordination": 0.4346865,
+            "export": 0.3328295,
+            "initial_audit": 2.9821215,
+            "iteration": 35.186858,
+            "prepare_reset": 0.058658
+          },
+          "family": "dense-coupled-1024",
+          "gpu_ms": 34.04340796172619,
+          "lane": "native",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 649.813648,
+          "solves": 6
+        },
+        {
+          "complete_ms": 682.2444635,
+          "costs_ms": {
+            "audit": 85.6718925,
+            "checker": 530.266774,
+            "checkpoint": 0.3976345,
+            "coordination": 1.050436,
+            "export": 0.592261,
+            "initial_audit": 7.8114595,
+            "iteration": 41.5753345,
+            "prepare_reset": 0.0847085
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 37.46392001211643,
+          "lane": "fp4x2",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 2777.1580665,
+          "solves": 6
+        },
+        {
+          "complete_ms": 675.702267,
+          "costs_ms": {
+            "audit": 85.3357535,
+            "checker": 531.9191075,
+            "checkpoint": 0.3858105,
+            "coordination": 0.9336965,
+            "export": 0.575868,
+            "initial_audit": 8.4129535,
+            "iteration": 35.813781,
+            "prepare_reset": 0.0928265
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 33.607167929410934,
+          "lane": "fp4x2",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 2858.974872,
+          "solves": 6
+        },
+        {
+          "complete_ms": 669.3883005,
+          "costs_ms": {
+            "audit": 82.599817,
+            "checker": 528.432628,
+            "checkpoint": 0.383352,
+            "coordination": 0.883794,
+            "export": 0.5916535,
+            "initial_audit": 7.874271,
+            "iteration": 32.9196755,
+            "prepare_reset": 0.086997
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 31.662895992398262,
+          "lane": "fp4x2",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 2852.5276055,
+          "solves": 6
+        },
+        {
+          "complete_ms": 693.313038,
+          "costs_ms": {
+            "audit": 86.9241105,
+            "checker": 527.063422,
+            "checkpoint": 0.4047935,
+            "coordination": 0.9593475,
+            "export": 0.5850075,
+            "initial_audit": 7.9837005,
+            "iteration": 52.846808,
+            "prepare_reset": 0.08476
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 48.66020813584328,
+          "lane": "fp4x4",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 3033.698391,
+          "solves": 6
+        },
+        {
+          "complete_ms": 680.437484,
+          "costs_ms": {
+            "audit": 85.730158,
+            "checker": 524.92307,
+            "checkpoint": 0.375365,
+            "coordination": 0.9062755,
+            "export": 0.582568,
+            "initial_audit": 8.0018385,
+            "iteration": 47.311514,
+            "prepare_reset": 0.078262
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 45.08625614643097,
+          "lane": "fp4x4",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 2915.212423,
+          "solves": 6
+        },
+        {
+          "complete_ms": 682.7704375,
+          "costs_ms": {
+            "audit": 87.371161,
+            "checker": 529.7062775,
+            "checkpoint": 0.4150695,
+            "coordination": 0.8445405,
+            "export": 0.5897885,
+            "initial_audit": 7.972591,
+            "iteration": 44.541625,
+            "prepare_reset": 0.087348
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 43.29052793979645,
+          "lane": "fp4x4",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 2910.137475,
+          "solves": 6
+        },
+        {
+          "complete_ms": 701.500202,
+          "costs_ms": {
+            "audit": 85.592718,
+            "checker": 522.8217965,
+            "checkpoint": 0.398111,
+            "coordination": 0.9973725,
+            "export": 0.581138,
+            "initial_audit": 8.068731,
+            "iteration": 67.7571105,
+            "prepare_reset": 0.0887415
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 63.6623520553112,
+          "lane": "native",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 2710.311716,
+          "solves": 6
+        },
+        {
+          "complete_ms": 857.582518,
+          "costs_ms": {
+            "audit": 111.8958075,
+            "checker": 653.4916135,
+            "checkpoint": 0.4176655,
+            "coordination": 0.9205965,
+            "export": 0.587187,
+            "initial_audit": 10.346485,
+            "iteration": 65.8512345,
+            "prepare_reset": 0.091621
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 63.58950391411781,
+          "lane": "native",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 2712.122018,
+          "solves": 6
+        },
+        {
+          "complete_ms": 704.7051945,
+          "costs_ms": {
+            "audit": 86.62234,
+            "checker": 527.2503085,
+            "checkpoint": 0.406845,
+            "coordination": 0.872464,
+            "export": 0.562785,
+            "initial_audit": 7.91472,
+            "iteration": 64.825874,
+            "prepare_reset": 0.0848495
+          },
+          "family": "dense-coupled-2048",
+          "gpu_ms": 63.569984167814255,
+          "lane": "native",
+          "physical": [
+            720
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 2596.31219,
+          "solves": 6
+        },
+        {
+          "complete_ms": 25.6737005,
+          "costs_ms": {
+            "audit": 2.7137465,
+            "checker": 11.0967265,
+            "coordination": 0.0882695,
+            "export": 0.075806,
+            "initial_audit": 2.476581,
+            "iteration": 7.617361,
+            "prepare_reset": 0.062368
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 6.539679989218712,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 692.1716425,
+          "solves": 6
+        },
+        {
+          "complete_ms": 24.567057,
+          "costs_ms": {
+            "audit": 2.3968045,
+            "checker": 11.1372945,
+            "coordination": 0.06321,
+            "export": 0.081599,
+            "initial_audit": 2.393045,
+            "iteration": 6.5184125,
+            "prepare_reset": 0.0631495
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 5.964207962155342,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 684.102332,
+          "solves": 6
+        },
+        {
+          "complete_ms": 36.718158,
+          "costs_ms": {
+            "audit": 4.036469,
+            "checker": 20.7178015,
+            "checkpoint": 0.0234455,
+            "coordination": 0.0906185,
+            "export": 0.1006825,
+            "initial_audit": 2.7155235,
+            "iteration": 6.9347715,
+            "prepare_reset": 0.063594
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 6.571632027626038,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 695.149282,
+          "solves": 6
+        },
+        {
+          "complete_ms": 27.4891675,
+          "costs_ms": {
+            "audit": 2.436861,
+            "checker": 10.869737,
+            "coordination": 0.0853745,
+            "export": 0.0788175,
+            "initial_audit": 2.7250075,
+            "iteration": 9.231152,
+            "prepare_reset": 0.0634095
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 8.12974400818348,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 717.5280255,
+          "solves": 6
+        },
+        {
+          "complete_ms": 25.5343295,
+          "costs_ms": {
+            "audit": 2.481502,
+            "checker": 10.933271,
+            "coordination": 0.0652415,
+            "export": 0.076407,
+            "initial_audit": 2.3102775,
+            "iteration": 8.1252695,
+            "prepare_reset": 0.0600375
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 7.572063997387886,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 726.010723,
+          "solves": 6
+        },
+        {
+          "complete_ms": 25.5183645,
+          "costs_ms": {
+            "audit": 2.5591475,
+            "checker": 11.291893,
+            "coordination": 0.056656,
+            "export": 0.0817125,
+            "initial_audit": 2.5766185,
+            "iteration": 7.5898205,
+            "prepare_reset": 0.063503
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 7.292064011096954,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 732.416093,
+          "solves": 6
+        },
+        {
+          "complete_ms": 29.060189,
+          "costs_ms": {
+            "audit": 2.6103685,
+            "checker": 11.0866745,
+            "coordination": 0.0874555,
+            "export": 0.082746,
+            "initial_audit": 2.3843125,
+            "iteration": 10.582627,
+            "prepare_reset": 0.065851
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 9.516544073820114,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 659.872104,
+          "solves": 6
+        },
+        {
+          "complete_ms": 28.55907,
+          "costs_ms": {
+            "audit": 2.674041,
+            "checker": 10.985059,
+            "coordination": 0.061246,
+            "export": 0.079317,
+            "initial_audit": 2.553066,
+            "iteration": 10.0209305,
+            "prepare_reset": 0.06169
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 9.47835198044777,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 619.545466,
+          "solves": 6
+        },
+        {
+          "complete_ms": 28.178008,
+          "costs_ms": {
+            "audit": 2.573544,
+            "checker": 11.1044765,
+            "coordination": 0.054226,
+            "export": 0.0775695,
+            "initial_audit": 2.544516,
+            "iteration": 9.754309,
+            "prepare_reset": 0.059141
+          },
+          "family": "dense-generic-1024",
+          "gpu_ms": 9.451248109340668,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 657.2701705,
+          "solves": 6
+        },
+        {
+          "complete_ms": 76.361036,
+          "costs_ms": {
+            "audit": 7.5867915,
+            "checker": 44.6212355,
+            "coordination": 0.1329565,
+            "export": 0.136924,
+            "initial_audit": 7.9231275,
+            "iteration": 11.487998,
+            "prepare_reset": 0.078287
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 10.395792007446289,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 3012.348901,
+          "solves": 6
+        },
+        {
+          "complete_ms": 72.8763755,
+          "costs_ms": {
+            "audit": 7.6308305,
+            "checker": 43.719544,
+            "coordination": 0.1282465,
+            "export": 0.1310605,
+            "initial_audit": 7.327053,
+            "iteration": 9.908602,
+            "prepare_reset": 0.0755515
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 9.340400010347366,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 2812.4872515,
+          "solves": 6
+        },
+        {
+          "complete_ms": 131.201297,
+          "costs_ms": {
+            "audit": 15.2375605,
+            "checker": 89.5813985,
+            "checkpoint": 0.0333755,
+            "coordination": 0.2006895,
+            "export": 0.20331,
+            "initial_audit": 8.1503005,
+            "iteration": 10.6003075,
+            "prepare_reset": 0.0781305
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 10.21835207939148,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 3014.06292,
+          "solves": 6
+        },
+        {
+          "complete_ms": 78.1711045,
+          "costs_ms": {
+            "audit": 7.7706215,
+            "checker": 44.442585,
+            "coordination": 0.1472585,
+            "export": 0.1357325,
+            "initial_audit": 8.087805,
+            "iteration": 14.5611145,
+            "prepare_reset": 0.081384
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 13.505007922649384,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 3143.264598,
+          "solves": 6
+        },
+        {
+          "complete_ms": 77.4563955,
+          "costs_ms": {
+            "audit": 7.45014,
+            "checker": 43.5281535,
+            "coordination": 0.114142,
+            "export": 0.1397385,
+            "initial_audit": 7.5549905,
+            "iteration": 13.120072,
+            "prepare_reset": 0.076515
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 12.53313598036766,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 3143.1385615,
+          "solves": 6
+        },
+        {
+          "complete_ms": 75.295929,
+          "costs_ms": {
+            "audit": 7.469466,
+            "checker": 43.312526,
+            "coordination": 0.101771,
+            "export": 0.143323,
+            "initial_audit": 8.2271725,
+            "iteration": 12.3581715,
+            "prepare_reset": 0.079858
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 12.044527918100357,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 2939.372101,
+          "solves": 6
+        },
+        {
+          "complete_ms": 81.830118,
+          "costs_ms": {
+            "audit": 7.6872375,
+            "checker": 43.2190925,
+            "coordination": 0.1348135,
+            "export": 0.147408,
+            "initial_audit": 7.481095,
+            "iteration": 18.7930555,
+            "prepare_reset": 0.0766625
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 17.69560006260872,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 2682.5226305,
+          "solves": 6
+        },
+        {
+          "complete_ms": 81.844764,
+          "costs_ms": {
+            "audit": 7.7785415,
+            "checker": 43.2598335,
+            "coordination": 0.1208265,
+            "export": 0.1442405,
+            "initial_audit": 7.4432795,
+            "iteration": 18.24546,
+            "prepare_reset": 0.078352
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 17.66745612025261,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 2820.2905695,
+          "solves": 6
+        },
+        {
+          "complete_ms": 82.14804,
+          "costs_ms": {
+            "audit": 8.187714,
+            "checker": 43.2850505,
+            "coordination": 0.1151695,
+            "export": 0.1393225,
+            "initial_audit": 8.2770145,
+            "iteration": 17.9567765,
+            "prepare_reset": 0.0782685
+          },
+          "family": "dense-generic-2048",
+          "gpu_ms": 17.63348799943924,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 2748.7320785,
+          "solves": 6
+        },
+        {
+          "complete_ms": 12.78447,
+          "costs_ms": {
+            "audit": 0.7113345,
+            "checker": 3.9424705,
+            "coordination": 0.052793,
+            "export": 0.057192,
+            "initial_audit": 0.729163,
+            "iteration": 6.22221,
+            "prepare_reset": 0.0452985
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 5.226911999285221,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 310.90117,
+          "solves": 6
+        },
+        {
+          "complete_ms": 11.9347275,
+          "costs_ms": {
+            "audit": 0.699941,
+            "checker": 3.966812,
+            "coordination": 0.039987,
+            "export": 0.057088,
+            "initial_audit": 0.73605,
+            "iteration": 5.445361,
+            "prepare_reset": 0.0457155
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 4.883087985217571,
+          "lane": "fp4x2",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 324.809774,
+          "solves": 6
+        },
+        {
+          "complete_ms": 16.0711775,
+          "costs_ms": {
+            "audit": 1.3793065,
+            "checker": 6.8285225,
+            "checkpoint": 0.018669,
+            "coordination": 0.050938,
+            "export": 0.067983,
+            "initial_audit": 0.7357435,
+            "iteration": 5.8130125,
+            "prepare_reset": 0.0456875
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 5.456656001508236,
+          "lane": "fp4x2",
+          "physical": [
+            232
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 332.3085685,
+          "solves": 6
+        },
+        {
+          "complete_ms": 13.878709,
+          "costs_ms": {
+            "audit": 0.6841335,
+            "checker": 4.257962,
+            "coordination": 0.0535075,
+            "export": 0.0586825,
+            "initial_audit": 0.759769,
+            "iteration": 7.0767085,
+            "prepare_reset": 0.047457
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 6.029680013656616,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 317.444082,
+          "solves": 6
+        },
+        {
+          "complete_ms": 12.8607245,
+          "costs_ms": {
+            "audit": 0.6811575,
+            "checker": 4.172666,
+            "coordination": 0.0387025,
+            "export": 0.059024,
+            "initial_audit": 0.7285445,
+            "iteration": 6.2489725,
+            "prepare_reset": 0.044081
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 5.691664010286331,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 332.072194,
+          "solves": 6
+        },
+        {
+          "complete_ms": 12.411608,
+          "costs_ms": {
+            "audit": 0.6879125,
+            "checker": 4.24886,
+            "coordination": 0.0321295,
+            "export": 0.0591555,
+            "initial_audit": 0.714466,
+            "iteration": 5.82485,
+            "prepare_reset": 0.0461625
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 5.523215986788273,
+          "lane": "fp4x4",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 320.1046285,
+          "solves": 6
+        },
+        {
+          "complete_ms": 14.0914155,
+          "costs_ms": {
+            "audit": 0.691044,
+            "checker": 4.2201635,
+            "coordination": 0.0513985,
+            "export": 0.057857,
+            "initial_audit": 0.7016115,
+            "iteration": 7.313108,
+            "prepare_reset": 0.0460515
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 6.187967985868454,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 8
+          },
+          "setup_ms": 304.484801,
+          "solves": 6
+        },
+        {
+          "complete_ms": 13.6923575,
+          "costs_ms": {
+            "audit": 0.691332,
+            "checker": 4.138033,
+            "coordination": 0.039362,
+            "export": 0.060527,
+            "initial_audit": 0.739344,
+            "iteration": 6.6986125,
+            "prepare_reset": 0.0482005
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 6.171167992055416,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 16
+          },
+          "setup_ms": 315.313308,
+          "solves": 6
+        },
+        {
+          "complete_ms": 12.8525325,
+          "costs_ms": {
+            "audit": 0.6895275,
+            "checker": 4.004615,
+            "coordination": 0.033053,
+            "export": 0.0592225,
+            "initial_audit": 0.719135,
+            "iteration": 6.4689555,
+            "prepare_reset": 0.0443815
+          },
+          "family": "dense-generic-512",
+          "gpu_ms": 6.161088064312935,
+          "lane": "native",
+          "physical": [
+            200
+          ],
+          "recoveries": 0,
+          "sessions": 2,
+          "settings": {
+            "window_max": 32
+          },
+          "setup_ms": 314.440357,
+          "solves": 6
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Development cells are selection/diagnostic evidence, not confirmation or independent production samples.",
+    "Product event batches include host launch gaps; guard-free results never authorize a solver.",
+    "Four-block timer ablation is descriptive; noisy differences do not identify individual timer costs."
+  ],
+  "products": {
+    "products-v1": {
+      "result": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/products-v1/result.json",
+        "sha256": "711e3282d62a8d415875717572b1549d981b743e8025206aea537afe37f9c61f"
+      },
+      "rows": [
+        {
+          "block_values_us": [
+            8.225499652326107,
+            8.232999593019485,
+            8.210999891161919
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 8.225499652326107,
+          "transpose": false,
+          "vector_preparation_us": 37.907
+        },
+        {
+          "block_values_us": [
+            16.40000008046627,
+            16.419999301433563,
+            16.416750848293304
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 16.416750848293304,
+          "transpose": false,
+          "vector_preparation_us": 44.743
+        },
+        {
+          "block_values_us": [
+            8.224749937653542,
+            8.22525005787611,
+            8.208749815821648
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 8.224749937653542,
+          "transpose": true,
+          "vector_preparation_us": 37.395
+        },
+        {
+          "block_values_us": [
+            16.404500231146812,
+            16.418250277638435,
+            16.421249136328697
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 16.418250277638435,
+          "transpose": true,
+          "vector_preparation_us": 51.63
+        },
+        {
+          "block_values_us": [
+            12.350499629974365,
+            12.322500348091125,
+            12.311750091612339
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 12.322500348091125,
+          "transpose": false,
+          "vector_preparation_us": 39.551
+        },
+        {
+          "block_values_us": [
+            20.50675079226494,
+            20.513249561190605,
+            20.503999665379524
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 20.50675079226494,
+          "transpose": false,
+          "vector_preparation_us": 40.695
+        },
+        {
+          "block_values_us": [
+            12.328250333666801,
+            12.314749881625175,
+            12.333749793469906
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 12.328250333666801,
+          "transpose": true,
+          "vector_preparation_us": 39.098
+        },
+        {
+          "block_values_us": [
+            20.502500236034393,
+            20.502250641584396,
+            20.489249378442764
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 20.502250641584396,
+          "transpose": true,
+          "vector_preparation_us": 40.335
+        },
+        {
+          "block_values_us": [
+            22.541750222444534,
+            22.574249655008316,
+            22.721000015735626
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 22.574249655008316,
+          "transpose": false,
+          "vector_preparation_us": 22.561
+        },
+        {
+          "block_values_us": [
+            22.54750020802021,
+            22.55050092935562,
+            22.54525013267994
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 22.54750020802021,
+          "transpose": false,
+          "vector_preparation_us": 21.987
+        },
+        {
+          "block_values_us": [
+            22.547250613570213,
+            22.697750478982925,
+            22.570250555872917
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 22.570250555872917,
+          "transpose": true,
+          "vector_preparation_us": 23.636
+        },
+        {
+          "block_values_us": [
+            22.724000737071037,
+            22.586500272154808,
+            22.551249712705612
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 22.586500272154808,
+          "transpose": true,
+          "vector_preparation_us": 18.959
+        },
+        {
+          "block_values_us": [
+            4.1149999015033245,
+            4.141749814152718,
+            4.146750085055828
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 4.141749814152718,
+          "transpose": false,
+          "vector_preparation_us": 51.003
+        },
+        {
+          "block_values_us": [
+            6.161749828606844,
+            6.1542498879134655,
+            6.16149976849556
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 6.16149976849556,
+          "transpose": false,
+          "vector_preparation_us": 33.433
+        },
+        {
+          "block_values_us": [
+            4.14525019004941,
+            4.1184998117387295,
+            4.125500097870827
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 4.125500097870827,
+          "transpose": true,
+          "vector_preparation_us": 34.67
+        },
+        {
+          "block_values_us": [
+            6.146749947220087,
+            6.1622499488294125,
+            6.177249830216169
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 6.1622499488294125,
+          "transpose": true,
+          "vector_preparation_us": 34.408
+        },
+        {
+          "block_values_us": [
+            6.162750069051981,
+            6.160249933600426,
+            6.159250158816576
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 6.160249933600426,
+          "transpose": false,
+          "vector_preparation_us": 35.713
+        },
+        {
+          "block_values_us": [
+            8.195499889552593,
+            8.214999921619892,
+            8.20824969559908
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 8.20824969559908,
+          "transpose": false,
+          "vector_preparation_us": 38.548
+        },
+        {
+          "block_values_us": [
+            6.163499783724546,
+            6.1667500995099545,
+            6.161999888718128
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 6.163499783724546,
+          "transpose": true,
+          "vector_preparation_us": 38.187
+        },
+        {
+          "block_values_us": [
+            8.212249726057053,
+            8.18725023418665,
+            8.209249936044216
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 8.209249936044216,
+          "transpose": true,
+          "vector_preparation_us": 38.032
+        },
+        {
+          "block_values_us": [
+            6.163999903947115,
+            6.26474991440773,
+            6.158499978482723
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 6.163999903947115,
+          "transpose": false,
+          "vector_preparation_us": 19.428
+        },
+        {
+          "block_values_us": [
+            6.16149976849556,
+            6.162750069051981,
+            6.272499915212393
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 6.162750069051981,
+          "transpose": false,
+          "vector_preparation_us": 18.43
+        },
+        {
+          "block_values_us": [
+            6.156750023365021,
+            6.163000129163265,
+            6.1542498879134655
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 6.156750023365021,
+          "transpose": true,
+          "vector_preparation_us": 19.693
+        },
+        {
+          "block_values_us": [
+            6.2777497805655,
+            6.159000098705292,
+            6.163000129163265
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 6.163000129163265,
+          "transpose": true,
+          "vector_preparation_us": 18.218
+        },
+        {
+          "block_values_us": [
+            14.361499808728695,
+            14.398249797523022,
+            14.351749792695045
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 14.361499808728695,
+          "transpose": false,
+          "vector_preparation_us": 43.942
+        },
+        {
+          "block_values_us": [
+            28.712250292301178,
+            28.704000636935234,
+            28.71824987232685
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 28.712250292301178,
+          "transpose": false,
+          "vector_preparation_us": 47.932
+        },
+        {
+          "block_values_us": [
+            14.378749765455723,
+            14.380750246345997,
+            14.358250424265862
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 14.378749765455723,
+          "transpose": true,
+          "vector_preparation_us": 47.212
+        },
+        {
+          "block_values_us": [
+            28.720999136567116,
+            28.70124951004982,
+            28.717750683426857
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 28.717750683426857,
+          "transpose": true,
+          "vector_preparation_us": 47.794
+        },
+        {
+          "block_values_us": [
+            22.57625013589859,
+            22.565750405192375,
+            22.575749084353447
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 22.575749084353447,
+          "transpose": false,
+          "vector_preparation_us": 49.704
+        },
+        {
+          "block_values_us": [
+            36.94950044155121,
+            36.92274913191795,
+            36.936499178409576
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 36.936499178409576,
+          "transpose": false,
+          "vector_preparation_us": 55.718
+        },
+        {
+          "block_values_us": [
+            22.580500692129135,
+            22.56624959409237,
+            22.553250193595886
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 22.56624959409237,
+          "transpose": true,
+          "vector_preparation_us": 53.208
+        },
+        {
+          "block_values_us": [
+            36.92450001835823,
+            36.93674877285957,
+            36.92074865102768
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 36.92450001835823,
+          "transpose": true,
+          "vector_preparation_us": 46.57
+        },
+        {
+          "block_values_us": [
+            41.21049866080284,
+            41.24550148844719,
+            41.32074862718582
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 41.24550148844719,
+          "transpose": false,
+          "vector_preparation_us": 23.884
+        },
+        {
+          "block_values_us": [
+            42.868249118328094,
+            41.322000324726105,
+            41.236501187086105
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 41.322000324726105,
+          "transpose": false,
+          "vector_preparation_us": 31.588
+        },
+        {
+          "block_values_us": [
+            41.16024821996689,
+            41.31074994802475,
+            41.103750467300415
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 41.16024821996689,
+          "transpose": true,
+          "vector_preparation_us": 21.628
+        },
+        {
+          "block_values_us": [
+            41.128501296043396,
+            41.2912517786026,
+            41.46900027990341
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 41.2912517786026,
+          "transpose": true,
+          "vector_preparation_us": 25.374
+        },
+        {
+          "block_values_us": [
+            4.141500219702721,
+            4.120250232517719,
+            4.103499930351973
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 4.120250232517719,
+          "transpose": false,
+          "vector_preparation_us": 34.694
+        },
+        {
+          "block_values_us": [
+            8.194750174880028,
+            8.21600016206503,
+            8.212000131607056
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 8.212000131607056,
+          "transpose": false,
+          "vector_preparation_us": 34.606
+        },
+        {
+          "block_values_us": [
+            4.108000081032515,
+            4.1184998117387295,
+            4.115750081837177
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 4.115750081837177,
+          "transpose": true,
+          "vector_preparation_us": 34.313
+        },
+        {
+          "block_values_us": [
+            8.194999769330025,
+            8.237999863922596,
+            8.197000250220299
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 8.197000250220299,
+          "transpose": true,
+          "vector_preparation_us": 33.744
+        },
+        {
+          "block_values_us": [
+            6.163000129163265,
+            6.161749828606844,
+            6.1610001139342785
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 6.161749828606844,
+          "transpose": false,
+          "vector_preparation_us": 35.454
+        },
+        {
+          "block_values_us": [
+            8.23500007390976,
+            8.20900034159422,
+            8.20349995046854
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 8.20900034159422,
+          "transpose": false,
+          "vector_preparation_us": 36.115
+        },
+        {
+          "block_values_us": [
+            6.15950021892786,
+            6.146749947220087,
+            6.161250174045563
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 6.15950021892786,
+          "transpose": true,
+          "vector_preparation_us": 36.33
+        },
+        {
+          "block_values_us": [
+            8.225000463426113,
+            8.217999711632729,
+            8.231000043451786
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 8.225000463426113,
+          "transpose": true,
+          "vector_preparation_us": 69.363
+        },
+        {
+          "block_values_us": [
+            8.379249833524227,
+            8.211500011384487,
+            8.212749846279621
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 8.212749846279621,
+          "transpose": false,
+          "vector_preparation_us": 20.075
+        },
+        {
+          "block_values_us": [
+            8.208749815821648,
+            8.370749652385712,
+            8.355749770998955
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 8.355749770998955,
+          "transpose": false,
+          "vector_preparation_us": 19.209
+        },
+        {
+          "block_values_us": [
+            8.213499560952187,
+            8.20900034159422,
+            8.210999891161919
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 8.210999891161919,
+          "transpose": true,
+          "vector_preparation_us": 19.154
+        },
+        {
+          "block_values_us": [
+            8.20124987512827,
+            8.188500069081783,
+            8.225750178098679
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 8.20124987512827,
+          "transpose": true,
+          "vector_preparation_us": 18.549
+        },
+        {
+          "block_values_us": [
+            6.161749828606844,
+            6.151500158011913,
+            6.167250219732523
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 6.161749828606844,
+          "transpose": false,
+          "vector_preparation_us": 35.576
+        },
+        {
+          "block_values_us": [
+            10.258750058710575,
+            10.258750058710575,
+            10.311749763786793
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 10.258750058710575,
+          "transpose": false,
+          "vector_preparation_us": 36.104
+        },
+        {
+          "block_values_us": [
+            6.16049999371171,
+            6.169749889522791,
+            6.170500069856644
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 6.169749889522791,
+          "transpose": true,
+          "vector_preparation_us": 59.534
+        },
+        {
+          "block_values_us": [
+            10.263999924063683,
+            10.26224996894598,
+            10.258750058710575
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 10.26224996894598,
+          "transpose": true,
+          "vector_preparation_us": 35.689
+        },
+        {
+          "block_values_us": [
+            8.21049977093935,
+            8.205500431358814,
+            8.221499621868134
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 8.21049977093935,
+          "transpose": false,
+          "vector_preparation_us": 39.315
+        },
+        {
+          "block_values_us": [
+            12.310249730944633,
+            12.310000136494637,
+            12.305250391364098
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 12.310000136494637,
+          "transpose": false,
+          "vector_preparation_us": 33.054
+        },
+        {
+          "block_values_us": [
+            8.209249936044216,
+            8.241250179708004,
+            8.207250386476517
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 8.209249936044216,
+          "transpose": true,
+          "vector_preparation_us": 39.654
+        },
+        {
+          "block_values_us": [
+            12.314249761402607,
+            12.298000045120716,
+            12.333249673247337
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 12.314249761402607,
+          "transpose": true,
+          "vector_preparation_us": 69.634
+        },
+        {
+          "block_values_us": [
+            12.312499806284904,
+            12.314749881625175,
+            12.322249822318554
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 12.314749881625175,
+          "transpose": false,
+          "vector_preparation_us": 19.764
+        },
+        {
+          "block_values_us": [
+            12.327750213444233,
+            12.312499806284904,
+            12.310500256717205
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 12.312499806284904,
+          "transpose": false,
+          "vector_preparation_us": 19.781
+        },
+        {
+          "block_values_us": [
+            12.474999763071537,
+            12.482250109314919,
+            12.53649964928627
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 12.482250109314919,
+          "transpose": true,
+          "vector_preparation_us": 18.863
+        },
+        {
+          "block_values_us": [
+            12.322500348091125,
+            12.347499839961529,
+            12.324750423431396
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 12.324750423431396,
+          "transpose": true,
+          "vector_preparation_us": 19.662
+        }
+      ]
+    },
+    "products-v2": {
+      "result": {
+        "path": "artifacts/gpup-mixed2-fp4-v1/products-v2/result.json",
+        "sha256": "c3ef7a27aa133cd045bc5145e947e94b14599fd266064c66d5af78395151b5f2"
+      },
+      "rows": [
+        {
+          "block_values_us": [
+            8.230750449001789,
+            8.233999833464622,
+            8.212000131607056
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 8.230750449001789,
+          "transpose": false,
+          "vector_preparation_us": 29.153
+        },
+        {
+          "block_values_us": [
+            10.255750268697739,
+            10.273500345647335,
+            10.277749970555305
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 10.273500345647335,
+          "transpose": false,
+          "vector_preparation_us": 33.75
+        },
+        {
+          "block_values_us": [
+            8.224249817430973,
+            8.225000463426113,
+            8.224000222980976
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 8.224249817430973,
+          "transpose": true,
+          "vector_preparation_us": 30.361
+        },
+        {
+          "block_values_us": [
+            10.2937500923872,
+            10.254999622702599,
+            10.281999595463276
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 10.281999595463276,
+          "transpose": true,
+          "vector_preparation_us": 49.785
+        },
+        {
+          "block_values_us": [
+            12.334249913692474,
+            12.31400016695261,
+            12.322249822318554
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 12.322249822318554,
+          "transpose": false,
+          "vector_preparation_us": 34.736
+        },
+        {
+          "block_values_us": [
+            14.358749613165855,
+            14.346250332891941,
+            14.352000318467617
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 14.352000318467617,
+          "transpose": false,
+          "vector_preparation_us": 31.834
+        },
+        {
+          "block_values_us": [
+            12.330500409007072,
+            12.333749793469906,
+            12.314249761402607
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 12.330500409007072,
+          "transpose": true,
+          "vector_preparation_us": 34.53
+        },
+        {
+          "block_values_us": [
+            14.365499839186668,
+            14.362500049173832,
+            14.372999779880047
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 14.365499839186668,
+          "transpose": true,
+          "vector_preparation_us": 38.144
+        },
+        {
+          "block_values_us": [
+            22.55599945783615,
+            22.591250017285347,
+            22.738249972462654
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 22.591250017285347,
+          "transpose": false,
+          "vector_preparation_us": 21.701
+        },
+        {
+          "block_values_us": [
+            22.568250074982643,
+            22.5832499563694,
+            22.55525067448616
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 22.568250074982643,
+          "transpose": false,
+          "vector_preparation_us": 21.815
+        },
+        {
+          "block_values_us": [
+            22.568250074982643,
+            22.713499143719673,
+            22.555500268936157
+          ],
+          "family": "dense-generic-1024",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 22.568250074982643,
+          "transpose": true,
+          "vector_preparation_us": 22.501
+        },
+        {
+          "block_values_us": [
+            22.705750539898872,
+            22.59949967265129,
+            22.54674956202507
+          ],
+          "family": "dense-generic-1024",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 22.59949967265129,
+          "transpose": true,
+          "vector_preparation_us": 22.962
+        },
+        {
+          "block_values_us": [
+            4.129999782890081,
+            4.144750069826841,
+            4.147000145167112
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 4.144750069826841,
+          "transpose": false,
+          "vector_preparation_us": 49.881
+        },
+        {
+          "block_values_us": [
+            6.161250174045563,
+            6.168500054627657,
+            6.163499783724546
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 6.163499783724546,
+          "transpose": false,
+          "vector_preparation_us": 25.443
+        },
+        {
+          "block_values_us": [
+            4.132499918341637,
+            4.131500143557787,
+            4.113500006496906
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 4.131500143557787,
+          "transpose": true,
+          "vector_preparation_us": 31.493
+        },
+        {
+          "block_values_us": [
+            6.161749828606844,
+            6.161250174045563,
+            6.1622499488294125
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 6.161749828606844,
+          "transpose": true,
+          "vector_preparation_us": 25.652
+        },
+        {
+          "block_values_us": [
+            6.161999888718128,
+            6.395999807864428,
+            6.150499917566776
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 6.161999888718128,
+          "transpose": false,
+          "vector_preparation_us": 55.501
+        },
+        {
+          "block_values_us": [
+            6.163000129163265,
+            6.162750069051981,
+            6.169499829411507
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 6.163000129163265,
+          "transpose": false,
+          "vector_preparation_us": 32.213
+        },
+        {
+          "block_values_us": [
+            6.163749843835831,
+            6.164249964058399,
+            6.163499783724546
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 6.163749843835831,
+          "transpose": true,
+          "vector_preparation_us": 34.089
+        },
+        {
+          "block_values_us": [
+            6.18324987590313,
+            6.2317498959600925,
+            6.162500008940697
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 6.18324987590313,
+          "transpose": true,
+          "vector_preparation_us": 43.731
+        },
+        {
+          "block_values_us": [
+            6.170500069856644,
+            6.341250147670507,
+            6.151250097900629
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 6.170500069856644,
+          "transpose": false,
+          "vector_preparation_us": 18.283
+        },
+        {
+          "block_values_us": [
+            6.158249918371439,
+            6.155999843031168,
+            6.258000154048204
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 6.158249918371439,
+          "transpose": false,
+          "vector_preparation_us": 17.144
+        },
+        {
+          "block_values_us": [
+            6.1530000530183315,
+            6.163749843835831,
+            6.163000129163265
+          ],
+          "family": "dense-generic-128",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 6.163000129163265,
+          "transpose": true,
+          "vector_preparation_us": 18.639
+        },
+        {
+          "block_values_us": [
+            6.270249839872122,
+            6.160750053822994,
+            6.1587500385940075
+          ],
+          "family": "dense-generic-128",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 6.160750053822994,
+          "transpose": true,
+          "vector_preparation_us": 19.342
+        },
+        {
+          "block_values_us": [
+            14.35524970293045,
+            14.395250007510185,
+            14.397249557077885
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 14.395250007510185,
+          "transpose": false,
+          "vector_preparation_us": 42.851
+        },
+        {
+          "block_values_us": [
+            16.45275019109249,
+            16.428500413894653,
+            16.43900014460087
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 16.43900014460087,
+          "transpose": false,
+          "vector_preparation_us": 45.422
+        },
+        {
+          "block_values_us": [
+            14.38399963080883,
+            14.379500411450863,
+            14.36774991452694
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 14.379500411450863,
+          "transpose": true,
+          "vector_preparation_us": 46.076
+        },
+        {
+          "block_values_us": [
+            16.429750248789787,
+            16.43200032413006,
+            16.448000445961952
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 16.43200032413006,
+          "transpose": true,
+          "vector_preparation_us": 41.862
+        },
+        {
+          "block_values_us": [
+            22.577999159693718,
+            22.56550081074238,
+            22.55075052380562
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 22.56550081074238,
+          "transpose": false,
+          "vector_preparation_us": 41.818
+        },
+        {
+          "block_values_us": [
+            24.622250348329544,
+            24.61949922144413,
+            24.609500542283058
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 24.61949922144413,
+          "transpose": false,
+          "vector_preparation_us": 47.707
+        },
+        {
+          "block_values_us": [
+            22.579500451683998,
+            22.546499967575073,
+            22.590499371290207
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 22.579500451683998,
+          "transpose": true,
+          "vector_preparation_us": 47.501
+        },
+        {
+          "block_values_us": [
+            24.624500423669815,
+            24.611499160528183,
+            24.61099997162819
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 24.611499160528183,
+          "transpose": true,
+          "vector_preparation_us": 39.771
+        },
+        {
+          "block_values_us": [
+            41.22849926352501,
+            41.13849997520447,
+            41.21999815106392
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 41.21999815106392,
+          "transpose": false,
+          "vector_preparation_us": 29.492
+        },
+        {
+          "block_values_us": [
+            41.381750255823135,
+            41.33849963545799,
+            41.35825112462044
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 41.35825112462044,
+          "transpose": false,
+          "vector_preparation_us": 30.447
+        },
+        {
+          "block_values_us": [
+            41.16575047373772,
+            42.0832484960556,
+            41.27449914813042
+          ],
+          "family": "dense-generic-2048",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 41.27449914813042,
+          "transpose": true,
+          "vector_preparation_us": 29.193
+        },
+        {
+          "block_values_us": [
+            41.29200056195259,
+            41.33149981498718,
+            41.469499468803406
+          ],
+          "family": "dense-generic-2048",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 41.33149981498718,
+          "transpose": true,
+          "vector_preparation_us": 27.961
+        },
+        {
+          "block_values_us": [
+            4.140750039368868,
+            4.1149999015033245,
+            4.1207498870790005
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 4.1207498870790005,
+          "transpose": false,
+          "vector_preparation_us": 26.597
+        },
+        {
+          "block_values_us": [
+            6.16749981418252,
+            6.1622499488294125,
+            6.162500008940697
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 6.162500008940697,
+          "transpose": false,
+          "vector_preparation_us": 29.138
+        },
+        {
+          "block_values_us": [
+            4.11474984139204,
+            4.1195000521838665,
+            4.1127498261630535
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 4.11474984139204,
+          "transpose": true,
+          "vector_preparation_us": 25.89
+        },
+        {
+          "block_values_us": [
+            6.1599998734891415,
+            6.18825014680624,
+            6.1564999632537365
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 6.1599998734891415,
+          "transpose": true,
+          "vector_preparation_us": 28.664
+        },
+        {
+          "block_values_us": [
+            6.16149976849556,
+            6.160249933600426,
+            6.161250174045563
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 6.161250174045563,
+          "transpose": false,
+          "vector_preparation_us": 33.705
+        },
+        {
+          "block_values_us": [
+            7.366999983787537,
+            7.16850021854043,
+            7.200499996542931
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 7.200499996542931,
+          "transpose": false,
+          "vector_preparation_us": 27.024
+        },
+        {
+          "block_values_us": [
+            6.153999827802181,
+            6.155000068247318,
+            6.1517502181231976
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 6.153999827802181,
+          "transpose": true,
+          "vector_preparation_us": 27.556
+        },
+        {
+          "block_values_us": [
+            7.545750122517347,
+            7.209000177681446,
+            7.113750092685223
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 7.209000177681446,
+          "transpose": true,
+          "vector_preparation_us": 54.156
+        },
+        {
+          "block_values_us": [
+            8.6899995803833,
+            8.20850022137165,
+            8.250249549746513
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 8.250249549746513,
+          "transpose": false,
+          "vector_preparation_us": 26.179
+        },
+        {
+          "block_values_us": [
+            8.213000372052193,
+            8.356500416994095,
+            8.37124977260828
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 8.356500416994095,
+          "transpose": false,
+          "vector_preparation_us": 19.203
+        },
+        {
+          "block_values_us": [
+            8.213999681174755,
+            8.212500251829624,
+            8.20850022137165
+          ],
+          "family": "dense-generic-256",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 8.212500251829624,
+          "transpose": true,
+          "vector_preparation_us": 19.38
+        },
+        {
+          "block_values_us": [
+            8.210999891161919,
+            8.20774957537651,
+            8.209249936044216
+          ],
+          "family": "dense-generic-256",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 8.209249936044216,
+          "transpose": true,
+          "vector_preparation_us": 19.493
+        },
+        {
+          "block_values_us": [
+            6.1587500385940075,
+            6.161250174045563,
+            6.1632501892745495
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 6.161250174045563,
+          "transpose": false,
+          "vector_preparation_us": 27.039
+        },
+        {
+          "block_values_us": [
+            8.194750174880028,
+            8.214250206947327,
+            8.195250295102596
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 8.195250295102596,
+          "transpose": false,
+          "vector_preparation_us": 23.339
+        },
+        {
+          "block_values_us": [
+            6.1542498879134655,
+            6.16749981418252,
+            6.165000144392252
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "fp4x2",
+          "product_us": 6.165000144392252,
+          "transpose": true,
+          "vector_preparation_us": 47.813
+        },
+        {
+          "block_values_us": [
+            8.210999891161919,
+            8.205999620258808,
+            8.195250295102596
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "fp4x2",
+          "product_us": 8.205999620258808,
+          "transpose": true,
+          "vector_preparation_us": 28.279
+        },
+        {
+          "block_values_us": [
+            8.220500312745571,
+            8.202250115573406,
+            8.203250356018543
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 8.203250356018543,
+          "transpose": false,
+          "vector_preparation_us": 27.537
+        },
+        {
+          "block_values_us": [
+            10.25024987757206,
+            10.257000103592873,
+            10.242249816656113
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 10.25024987757206,
+          "transpose": false,
+          "vector_preparation_us": 27.132
+        },
+        {
+          "block_values_us": [
+            8.213000372052193,
+            8.237750269472599,
+            8.207250386476517
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "fp4x4",
+          "product_us": 8.213000372052193,
+          "transpose": true,
+          "vector_preparation_us": 34.673
+        },
+        {
+          "block_values_us": [
+            10.245749726891518,
+            10.243499651551247,
+            10.270499624311924
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "fp4x4",
+          "product_us": 10.245749726891518,
+          "transpose": true,
+          "vector_preparation_us": 55.045
+        },
+        {
+          "block_values_us": [
+            12.323499657213688,
+            12.319499626755714,
+            12.311999686062336
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 12.319499626755714,
+          "transpose": false,
+          "vector_preparation_us": 19.622
+        },
+        {
+          "block_values_us": [
+            12.324750423431396,
+            12.310749851167202,
+            12.32099998742342
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 12.32099998742342,
+          "transpose": false,
+          "vector_preparation_us": 20.559
+        },
+        {
+          "block_values_us": [
+            12.466750107705593,
+            12.517750263214111,
+            12.472500093281269
+          ],
+          "family": "dense-generic-512",
+          "guarded": false,
+          "lane": "native",
+          "product_us": 12.472500093281269,
+          "transpose": true,
+          "vector_preparation_us": 19.247
+        },
+        {
+          "block_values_us": [
+            12.304499745368958,
+            12.312499806284904,
+            12.314249761402607
+          ],
+          "family": "dense-generic-512",
+          "guarded": true,
+          "lane": "native",
+          "product_us": 12.312499806284904,
+          "transpose": true,
+          "vector_preparation_us": 19.754
+        }
+      ]
+    }
+  },
+  "timing_ablation": {
+    "exact_pairs": 40,
+    "result": {
+      "path": "artifacts/gpup-mixed2-fp4-v1/timing-ablation-v1/result.json",
+      "sha256": "4ade8c1d025358a89f1f165387d1b4e34ff1243cbe455424ba59d3a5798ae146"
+    },
+    "rows": [
+      {
+        "difference_ms": [
+          10.955812999999978,
+          -1.5693129999999655,
+          13.513458000000014,
+          -3.2640949999999975
+        ],
+        "family": "dense-coupled-2048",
+        "lane": "fp4x2",
+        "minimal_ms": 363.06467150000003,
+        "ratios": [
+          1.0323964144742044,
+          0.9957099423573627,
+          1.0373871233422367,
+          0.9910494880571343
+        ],
+        "timed_ms": 362.82569750000005,
+        "timed_over_minimal": 1.0140531784157836
+      },
+      {
+        "difference_ms": [
+          1.8288789999999722,
+          -24.800540000000012,
+          8.853509999999972,
+          21.172605999999973
+        ],
+        "family": "dense-coupled-2048",
+        "lane": "native",
+        "minimal_ms": 380.528991,
+        "ratios": [
+          1.0049426038302958,
+          0.9377318545027693,
+          1.024085359866223,
+          1.0541450965270982
+        ],
+        "timed_ms": 374.96399099999996,
+        "timed_over_minimal": 1.0145139818482594
+      },
+      {
+        "difference_ms": [
+          -0.48632299999999873,
+          0.1552449999999972,
+          -2.081398,
+          -1.2365549999999992
+        ],
+        "family": "dense-generic-1024",
+        "lane": "fp4x2",
+        "minimal_ms": 30.5498245,
+        "ratios": [
+          0.9840878528853988,
+          1.0050838916624962,
+          0.9347654361662223,
+          0.9590101142560891
+        ],
+        "timed_ms": 29.950825000000002,
+        "timed_over_minimal": 0.9715489835707439
+      },
+      {
+        "difference_ms": [
+          0.6817980000000006,
+          6.107504999999996,
+          0.13757500000000533,
+          1.7936580000000006
+        ],
+        "family": "dense-generic-1024",
+        "lane": "native",
+        "minimal_ms": 32.748209,
+        "ratios": [
+          1.0214495482368344,
+          1.1876169705992543,
+          1.0041761063517312,
+          1.0539732763286118
+        ],
+        "timed_ms": 34.053467,
+        "timed_over_minimal": 1.0377114122827231
+      },
+      {
+        "difference_ms": [
+          0.5606749999999998,
+          -0.035528000000000226,
+          -0.004067000000000043,
+          0.30482999999999993
+        ],
+        "family": "dense-generic-128",
+        "lane": "fp4x2",
+        "minimal_ms": 5.972521,
+        "ratios": [
+          1.0930737245824527,
+          0.9939997169422876,
+          0.9993271431161794,
+          1.053484999618378
+        ],
+        "timed_ms": 6.022247,
+        "timed_over_minimal": 1.0264060713672787
+      },
+      {
+        "difference_ms": [
+          -0.13106699999999982,
+          -0.21380599999999994,
+          0.19057999999999975,
+          -0.10801600000000011
+        ],
+        "family": "dense-generic-128",
+        "lane": "native",
+        "minimal_ms": 4.640583,
+        "ratios": [
+          0.9714153737644833,
+          0.9562129392253471,
+          1.0406331938526143,
+          0.9764717772852104
+        ],
+        "timed_ms": 4.575974,
+        "timed_over_minimal": 0.9739435755248469
+      },
+      {
+        "difference_ms": [
+          0.580568999999997,
+          -5.499299000000008,
+          7.560841000000011,
+          -4.802171000000001
+        ],
+        "family": "dense-generic-2048",
+        "lane": "fp4x2",
+        "minimal_ms": 93.5942,
+        "ratios": [
+          1.0066021154689548,
+          0.9398626638090135,
+          1.078791511421581,
+          0.9498429698004224
+        ],
+        "timed_ms": 89.728971,
+        "timed_over_minimal": 0.9782225426346887
+      },
+      {
+        "difference_ms": [
+          0.08366700000000549,
+          -4.663600000000002,
+          2.9088840000000005,
+          -3.070682000000005
+        ],
+        "family": "dense-generic-2048",
+        "lane": "native",
+        "minimal_ms": 98.97237050000001,
+        "ratios": [
+          1.000888157040967,
+          0.9555371430318605,
+          1.0307426530082113,
+          0.9702811188231846
+        ],
+        "timed_ms": 98.876646,
+        "timed_over_minimal": 0.9855846379320757
+      },
+      {
+        "difference_ms": [
+          0.02627999999999986,
+          0.31721800000000044,
+          0.004150000000000986,
+          0.24203600000000058
+        ],
+        "family": "dense-generic-512",
+        "lane": "fp4x2",
+        "minimal_ms": 13.2651875,
+        "ratios": [
+          1.001998255404414,
+          1.025651459147194,
+          1.0003083393459506,
+          1.0180908703800304
+        ],
+        "timed_ms": 13.3205495,
+        "timed_over_minimal": 1.0100445628922223
+      },
+      {
+        "difference_ms": [
+          -1.022689999999999,
+          0.14645800000000087,
+          -0.38325799999999965,
+          0.36709199999999953
+        ],
+        "family": "dense-generic-512",
+        "lane": "native",
+        "minimal_ms": 14.3450445,
+        "ratios": [
+          0.9323519563619219,
+          1.0109530945232958,
+          0.973877162314076,
+          1.026185857873391
+        ],
+        "timed_ms": 14.1916175,
+        "timed_over_minimal": 0.992415128418686
+      }
+    ]
+  }
+}

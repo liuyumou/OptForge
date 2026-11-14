@@ -1,5 +1,33 @@
 # Changelog
 
+## DELIVERY/MIXED2 integration (2026-11-14)
+
+- Integrate DELIVERY2 batching/overlap, DELIVERY3 scoped delivery improvements and
+  DELIVERY4 exact hashing/lifecycle diagnosis with their original evidence.
+- Integrate MIXED2 CPU contracts, the diagnostic pilot, guarded FP4 increments,
+  scenario reuse and completed independent confirmation; retain all failed and
+  incomplete studies and unchanged public defaults.
+- Record separate [PR integration acceptance](docs/benchmarks/lp-delivery-mixed2-pr.md).
+
+
+## MIXED2 prepared GPU pilot (2026-11-12)
+
+- Separate bounded diagnostic admission from the provisional 1.10x adoption target.
+- Deliver source-bound native profiling, FP32-storage/FP64-FMA products, conservative
+  guards, four-sanitizer admission and portable replay of 576 solves / 192 product cells.
+- Retain the negative product/guard result and inconclusive uninstrumented attribution;
+  preserve historical evidence and defaults. [Report](docs/benchmarks/lp-mixed2-pilot.md).
+
+## GPUP-MIXED2 CPU admission (2026-11-12)
+
+- Implement the isolated FP32-matrix/FP64 CPU reference, outward local product
+  error bounds, transactional guard and charged native promotion under SPEC-0036.
+- Preserve all retained native cells in a reproducible cost gate: cold benefit
+  fails even ideal event removal; prepared opportunity needs matrix attribution
+  and measured added costs before device work.
+- Keep original 1e-9 authority and public defaults. No GPU solver or measured
+  mixed speedup is claimed. [Report](docs/benchmarks/lp-mixed2.md).
+
 ## FP4 GPU exploration and quality-tier planning (2026-11-11)
 
 - Accept ADR-0058: make a bounded actual-FP4 fused/persistent GPU pilot next,

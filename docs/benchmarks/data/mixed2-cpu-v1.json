@@ -1,0 +1,50 @@
+{
+  "binary_archive": {
+    "path": "artifacts/gpup-mixed2-v1/binaries/b6971640c3806dedc263969b899758c6d6c5ee0db5b24fa4a2edd55e4bb8e5a1",
+    "sha256": "b6971640c3806dedc263969b899758c6d6c5ee0db5b24fa4a2edd55e4bb8e5a1"
+  },
+  "isolated": {
+    "path": "artifacts/gpup-mixed2-v1/resources/final-cpu-v1.settlement.json",
+    "sha256": "6d0e1809a2669dc2c6cf05cee1cb45d5d13eb5067d692a7b142b53cfd70e6243"
+  },
+  "oracle": {
+    "binary": {
+      "path": "research/lp-mixed2/target/debug/lp-mixed2",
+      "sha256": "b6971640c3806dedc263969b899758c6d6c5ee0db5b24fa4a2edd55e4bb8e5a1"
+    },
+    "contains_subnormal_and_cancellation": true,
+    "exact_original_and_represented_dots": true,
+    "no_solver_or_certificate_claim": true,
+    "outputs": 5121,
+    "requests": 1049,
+    "seed": 360069,
+    "source": {
+      "path": "tools/lp_mixed2_oracle.py",
+      "sha256": "caa58bc9132b04e8352826a2bcc1eaeb0b9d6169bce72189e3519604d044fc42"
+    },
+    "status": "passed"
+  },
+  "prior_oracle": {
+    "binary": {
+      "path": "research/lp-mixed2/target/debug/lp-mixed2",
+      "sha256": "07a31f3ccdc658e7f5ef3347793e979a0eb5fff67608f806decbd42ac3717a47"
+    },
+    "contains_subnormal_and_cancellation": true,
+    "exact_original_and_represented_dots": true,
+    "no_solver_or_certificate_claim": true,
+    "outputs": 5121,
+    "requests": 1049,
+    "seed": 360069,
+    "source": {
+      "path": "tools/lp_mixed2_oracle.py",
+      "sha256": "caa58bc9132b04e8352826a2bcc1eaeb0b9d6169bce72189e3519604d044fc42"
+    },
+    "status": "passed"
+  },
+  "python_tests": 10,
+  "rust_tests": 11,
+  "sources": {
+    "research/lp-mixed2/src/lib.rs": "307ad59a40a0d518df6d63d4d550f8ca97bacf0a376797b7e595eb3a1e44cb3a",
+    "research/lp-mixed2/src/main.rs": "c8f5afd02af92264ab0e0d176132bcf4186d9fcdeff99921ad511c367296d8d0"
+  }
+}
