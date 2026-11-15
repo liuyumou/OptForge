@@ -1,5 +1,14 @@
 # PREP3: final-source attribution and exact preparation
 
+## Current routing under ADR-0077 (2026-11-15)
+
+This is an optional preparation/source-target experiment. Its proposed 24000 CPU /
+zero GPU allocation remains unopened. It is no longer a GPUP-9 prerequisite:
+[ADR-0077](../decisions/ADR-0077-gpup8-fp4-redesign.md) supersedes ADR-0076's
+progression gate and recognizes the scoped FP4 capability already demonstrated.
+The prospective experimental design below is retained; it does not itself
+establish full-session, cold, portable or public-adoption claims.
+
 Status: prospective CPU-only protocol; execution and allocation not opened
 Owner: LP research
 Introduced: GPUP-8-DISPOSITION / ADR-0076

@@ -1,5 +1,19 @@
 # Known Failures and Limitations
 
+## GPUP-8 gate waived; remaining limits are claim-specific (2026-11-15)
+
+[ADR-0077](../docs/decisions/ADR-0077-gpup8-fp4-redesign.md) supersedes the prior
+current-routing statements below. GPUP-8 scoped FP4 research capability is
+complete; the old exact-component study remains retired_incomplete and its
+failures/missing cells remain exact. GPUP-9 is ready for its own protocol and
+budget. PREP3, cold superiority, external superiority and hosted CI are not
+blanket research prerequisites. No new scientific allocation opens here.
+
+Generic2048 value, current CHECKER2 direct FP4/native inference, final target
+attribution, cold value, production/held-out robustness and hosted startup remain
+unresolved in their stated scopes. No public-default or broad readiness claim
+follows. Historical failure entries retain their original meaning.
+
 ## GPUP-8 closure and hosted startup remain separate (2026-11-15)
 
 [ADR-0076](../docs/decisions/ADR-0076-gpup8-disposition.md) closes GPUP-8

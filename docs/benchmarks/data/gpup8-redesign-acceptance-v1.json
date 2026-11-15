@@ -1,0 +1,98 @@
+{
+  "accounting": {
+    "cleanup_empty": true,
+    "closing_admin_cpu_ns": 128000000000,
+    "cpu_ceiling_ns": 8000000000000,
+    "cpu_ns": 2275200818008,
+    "failed_reservations": 0,
+    "gpu_ns": 0,
+    "historical_transfer": 0,
+    "method": "four times supervised wall plus reserved finalization; separate fixed preparation/closing admin",
+    "next_experiment_allocation_opened": false,
+    "preparation_admin_cpu_ns": 512000000000,
+    "status": "closed"
+  },
+  "advisory_exceedances": 0,
+  "archive_files": 49,
+  "baseline": "3b64b08ed21f39b8ef49f3429c991ca610e1bdb9",
+  "buffered_transport_rust_tests": 1,
+  "checks": [
+    "full native tools/check.sh",
+    "exact historical bytes",
+    "retained summary mapping",
+    "dependency graph",
+    "all original FP4 comparison decisions and exact interval arithmetic",
+    "final documentation and diff hygiene",
+    "archive byte verification"
+  ],
+  "cleanup_empty": true,
+  "docs_pages": 278,
+  "evidence": {
+    "path": "docs/benchmarks/data/gpup8-redesign-evidence-v1.tar.gz",
+    "sha256": "ae01e6ce5d37ef0ab499b525821dd6b3c64c35911212da0fad01adad41d5638f"
+  },
+  "gpup8_scope": "retained FP4 complete prepared-session research capability",
+  "gpup9_research_ready": true,
+  "gpup9_scientific_execution_released": false,
+  "hard_memory_enclosure": false,
+  "historical_files_exact": 2248,
+  "hosted_ci_resolved": false,
+  "hosted_ci_status": "prior observation: startup_failure; zero jobs; not requeried here",
+  "legacy_status": "retired_incomplete",
+  "max_sample_gap_ns": 14064843,
+  "max_sample_work_ns": 2919389,
+  "numerical_replay_performed": false,
+  "peak_sampled_rss_bytes": 13443751936,
+  "prior_handoff_text_exact": true,
+  "prior_hosted_observation": {
+    "path": "docs/benchmarks/data/gpup8-disposition-acceptance-v1.json",
+    "sha256": "4634c425264b3c128ccc8fe789c0564d96afd2825928e0f8357e8bd7df85bc86"
+  },
+  "public_defaults_changed": false,
+  "python_tests": 785,
+  "resource_receipts": [
+    {
+      "path": "artifacts/gpup8-redesign-v1/native-v1.json",
+      "sha256": "203286dded722bb547bff68e7acfeae31ebc3475a6a7706cda7eca0dd78ee1f2"
+    },
+    {
+      "path": "artifacts/gpup8-redesign-v1/verification-v1.json",
+      "sha256": "670630f27513f7da3a121671578f9bb1d666c1f5361a2f6e3997045814315608"
+    },
+    {
+      "path": "artifacts/gpup8-redesign-v1/delivery-v1.json",
+      "sha256": "749c7b4598402b54ae5577cb0d49d5ae877c7d3c551c0b270dbfc02a99f55154"
+    }
+  ],
+  "rust_tests": 638,
+  "scientific_cells_executed": 0,
+  "source_manifest": {
+    "path": "artifacts/gpup8-redesign-v1/sources/delivery-v1/manifest.json",
+    "sha256": "79e042d42acea1eb9d873a7cee2276db46cb0b7a5f9818858930400b29b00a4c"
+  },
+  "stages": {
+    "implementation": {
+      "cap_cpu_ns": 1024000000000,
+      "charged_cpu_ns": 512000000000
+    },
+    "margin": {
+      "cap_cpu_ns": 568000000000,
+      "charged_cpu_ns": 128000000000
+    },
+    "native": {
+      "cap_cpu_ns": 5000000000000,
+      "charged_cpu_ns": 1568224760908
+    },
+    "reporting": {
+      "cap_cpu_ns": 1408000000000,
+      "charged_cpu_ns": 66976057100
+    }
+  },
+  "status": "passed",
+  "unrelated_backlog_tasks_exact": 66,
+  "verification": {
+    "path": "docs/benchmarks/data/gpup8-redesign-verification-v1.json",
+    "sha256": "c23387d1572c1c5c5e433e153fc3bc92a4455f2297963b1557a70539acf97d43"
+  },
+  "workspace_rust_tests": 637
+}
