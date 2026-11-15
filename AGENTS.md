@@ -1,5 +1,41 @@
 # Agent Instructions
 
+## GPUP-9 controlled study complete (2026-11-15)
+
+SPEC-0044 / ADR-0078 deliver the independent controlled native/FP4 study on the
+same CHECKER2 executable and x86-64-v4 target. All 768 sessions / 14592 solves
+complete with strict original-model 1e-9 certificates: screening 144/576,
+validation 240/7680, held-out 384/6336. Eight development configurations cross
+precision, window 16/32 and scaling; validation freezes native-w32-s0 and
+fp4x2-w16-s1 before unseen grouped holdout. No scientific retry or retuning.
+
+Held-out scoped value passes 0/6 prepared and 0/6 cold comparisons under
+unchanged simultaneous ratio and >10 ms savings criteria. These compare whole
+configurations; every matched component/interaction contrast, negative result,
+order sensitivity and full cost partition remains visible. Fixed mechanisms have
+no separately measured causal effects. One constructed operator per family/split
+limits generalization; fresh-process cold observations do not imply flushed caches.
+
+Final native acceptance passes 638 repository Rust / 810 Python tests,
+plus 31 isolated Rust. Original serial checking covers every final/intermediate
+assessment; independent accepted-work replay excludes rejected FP4 attempts.
+Portable replay preserves every response byte and retained source version; generated models remain locally retained with generator, seed and hash bindings.
+All earlier scientific files, navigation and unrelated backlog entries stay exact.
+
+Independent allocation closed at 44710.832486852 CPU /
+5263.717809413 GPU seconds, including 512 preparation / 128 closing CPU
+administration. All 6 failed development/administrative reservations retain
+full charges and sources; cleanup is empty. One-second supervision and all
+100 ms advisories remain; sampled RSS is not a hard peak enclosure.
+
+PREP3 remains deferred and unopened. Public defaults remain unchanged. GPUP-10
+is dependency-ready after final acceptance, with its own protocol/adoption decision
+and allocation still required. No follow-on execution or publication is released.
+Commit locally only. Earlier handoffs below retain their historical scope.
+
+Report: [controlled study](docs/benchmarks/lp-gpup9.md).
+
+
 ## GPUP-8 redesigned around scoped FP4 capability (2026-11-15)
 
 The user authorizes waiving the inappropriate legacy progression gate.
