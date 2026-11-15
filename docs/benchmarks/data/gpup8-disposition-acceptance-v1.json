@@ -1,0 +1,95 @@
+{
+  "accounting": {
+    "cleanup_empty": true,
+    "closing_admin_cpu_ns": 128000000000,
+    "cpu_ceiling_ns": 16000000000000,
+    "cpu_ns": 2277820986600,
+    "failed_reservations": 0,
+    "gpu_ns": 0,
+    "historical_transfer": 0,
+    "method": "four times supervised wall plus reserved finalization; separate fixed preparation/closing admin",
+    "next_experiment_allocation_opened": false,
+    "preparation_admin_cpu_ns": 512000000000,
+    "status": "closed"
+  },
+  "advisory_exceedances": 0,
+  "archive_files": 47,
+  "baseline": "e0d9e8ad3ebea268299150b47df758002ce695a8",
+  "buffered_transport_rust_tests": 1,
+  "checks": [
+    "full native tools/check.sh",
+    "exact historical bytes",
+    "retained summary mapping",
+    "dependency graph",
+    "prospective factorial balance and interval arithmetic",
+    "final documentation and diff hygiene",
+    "archive byte verification"
+  ],
+  "cleanup_empty": true,
+  "docs_pages": 275,
+  "evidence": {
+    "path": "docs/benchmarks/data/gpup8-disposition-evidence-v1.tar.gz",
+    "sha256": "f15e16c6b46787779c80dbb39db498ac1481d1f10752e4522fc3d4e201e802ca"
+  },
+  "gpup9_released": false,
+  "hard_memory_enclosure": false,
+  "historical_files_exact": 2243,
+  "hosted_ci": {
+    "path": "artifacts/gpup8-disposition-v1/hosted-ci.json",
+    "sha256": "4719d22fc3500e4bb1c664a77a73cac2a549933536c7f8f62b6c85d4df865084"
+  },
+  "hosted_ci_resolved": false,
+  "hosted_ci_status": "startup_failure; zero jobs",
+  "max_sample_gap_ns": 15779196,
+  "max_sample_work_ns": 3032814,
+  "numerical_replay_performed": false,
+  "peak_sampled_rss_bytes": 13443100672,
+  "prior_handoff_text_exact": true,
+  "public_defaults_changed": false,
+  "python_tests": 785,
+  "resource_receipts": [
+    {
+      "path": "artifacts/gpup8-disposition-v1/native-v1.json",
+      "sha256": "93581617975e14729ec1de059316d4e5374c59336a69de8a7443de9ab6bd4887"
+    },
+    {
+      "path": "artifacts/gpup8-disposition-v1/verification-v1.json",
+      "sha256": "416f99a317240db5ec48cdd656d0488798bb704b1a64f8b815c3c8bed3496464"
+    },
+    {
+      "path": "artifacts/gpup8-disposition-v1/delivery-v1.json",
+      "sha256": "b65c313e9cac9b6d3b297d5e3fe2b212788ae452318fe3535f67a37c13cecc01"
+    }
+  ],
+  "rust_tests": 638,
+  "scientific_cells_executed": 0,
+  "source_manifest": {
+    "path": "artifacts/gpup8-disposition-v1/sources/delivery-v1/manifest.json",
+    "sha256": "d2f3522aa36c846d22ab54d0fbeac1644ce7205b10457c0d8c85b1c70f39ddf8"
+  },
+  "stages": {
+    "implementation": {
+      "cap_cpu_ns": 1024000000000,
+      "charged_cpu_ns": 512000000000
+    },
+    "margin": {
+      "cap_cpu_ns": 928000000000,
+      "charged_cpu_ns": 128000000000
+    },
+    "native": {
+      "cap_cpu_ns": 12000000000000,
+      "charged_cpu_ns": 1570614639140
+    },
+    "reporting": {
+      "cap_cpu_ns": 2048000000000,
+      "charged_cpu_ns": 67206347460
+    }
+  },
+  "status": "passed",
+  "unchanged_backlog_tasks": 64,
+  "verification": {
+    "path": "docs/benchmarks/data/gpup8-disposition-verification-v1.json",
+    "sha256": "5d299c11c11e8d766719f198f59f75d1289f87375ba661f59f2c2003668da4f5"
+  },
+  "workspace_rust_tests": 637
+}

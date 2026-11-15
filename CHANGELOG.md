@@ -1,5 +1,14 @@
 # Changelog
 
+## GPUP-8 disposition (2026-11-15)
+
+- Close the exact-component investigation negatively, preserving its incomplete
+  scientific result and every historical criterion, failure and charge.
+- Define a replacement complete-cost progression gate, keeping GPUP-9 blocked;
+  specify the next CPU preparation/source-target experiment and its separate budget.
+- Record current zero-job hosted CI failure separately from local acceptance.
+  [Decision and evidence](docs/benchmarks/lp-gpup8-disposition.md).
+
 ## Exact checker and preparation (2026-11-15)
 
 - Add an isolated exact checker/preparation executor with guarded original-order

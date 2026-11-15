@@ -1,5 +1,18 @@
 # Known Failures and Limitations
 
+## GPUP-8 closure and hosted startup remain separate (2026-11-15)
+
+[ADR-0076](../docs/decisions/ADR-0076-gpup8-disposition.md) closes GPUP-8
+negatively without changing its incomplete scientific result. The replacement
+complete-cost gate remains unpassed; prepared and within-lane gains are not
+cold FP4 superiority. All earlier failures below retain their historical scope.
+
+CI-STARTUP: main run 43677094346 at e0d9e8ad3ebea268299150b47df758002ce695a8
+reports startup_failure with zero jobs and zero GitHub Actions check runs, while
+Actions is enabled. No runner evidence identifies a build/test or account cause.
+Owner/service diagnostics and a normal hosted pass are required; local acceptance
+is separate. See [current observation](../docs/benchmarks/lp-gpup8-disposition.md#hosted-ci-observation).
+
 ## MIXED2 pilot scope and retained development failures (2026-11-12)
 
 The new pilot separates diagnostic admission from the provisional 1.10x adoption

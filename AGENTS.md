@@ -1,5 +1,26 @@
 # Agent Instructions
 
+## GPUP-8 negative disposition (2026-11-15)
+
+[ADR-0076](docs/decisions/ADR-0076-gpup8-disposition.md) closes the old exact-component investigation as
+closed_negative; the scientific result remains incomplete with no certified
+latency gain established. Historical criteria, sources, failures, missing cells
+and closed charges remain exact. The GPUP-9 dependency is explicitly replaced
+by GPUP-CERTIFIED-COST-GATE; GPUP-9 stays blocked on all six conditions and a
+separate accepted protocol/allocation. Public defaults are unchanged.
+
+MIXED2's scoped prepared-session benefits and CHECKER2's 1.1348–1.2832x
+within-lane implementation gains are not general FP4 superiority or an old
+GPUP-8 pass. Final-source/target attribution and fresh-process value remain open.
+Next: [PREP3](docs/plans/lp-prep3.md), a prospective 24000 CPU / zero GPU experiment; its
+allocation is not opened by this review. Preparation is the measured priority.
+CI-STARTUP separately tracks current zero-job hosted startup_failure.
+
+The [disposition report](docs/benchmarks/lp-gpup8-disposition.md) maps the evidence and records local
+acceptance, preservation and the independent 16000 CPU / zero GPU review budget.
+Commit locally only. Earlier entries retain their historical completed-task scope.
+
+
 ## Exact checker and preparation optimization complete (2026-11-15)
 
 SPEC-0042 / ADR-0075 deliver an isolated exact checker/preparation executor shared

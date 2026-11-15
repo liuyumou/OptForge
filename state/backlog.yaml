@@ -1,3 +1,4 @@
+# Current plan 2026-11-15: ADR-0076 closes GPUP-8 negatively; original science incomplete; GPUP-9 blocked on GPUP-CERTIFIED-COST-GATE.
 # Current plan 2026-11-11: FP4-INTEGRATE complete; latency retention fails; native retained; TENSOR2 conditional.
 # Current plan 2026-11-11: SPEC-0029 / ADR-0061 recovery contract complete; FP4-INTEGRATE next; separate 1e-7/1e-9 tiers.
 # Prior handoff: ADR-0057; FP4-PROTO CPU admission refused, incomplete; FP4-RECOVERY-SPEC next.
@@ -41,9 +42,27 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-8-DISPOSITION
+next_ready_task: GPUP-PREP3
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-PREP3
+    title: Attribute final checker source and compiler target and test exact preparation
+    status: ready
+    depends_on: [GPUP-CHECKER2, GPUP-8-DISPOSITION]
+    specification: docs/plans/lp-prep3.md
+    acceptance: "Prospective 24000 CPU / zero GPU protocol; execution allocation not opened. Final-source portable/v4 factorial, exact serial/model/process admission and one independently evaluated preparation candidate. Full planned coverage, bounded resources, preserved failures and separate positive/negative/incomplete disposition. No full-session claim, public default or GPUP-9 release."
+  - id: GPUP-CERTIFIED-COST-GATE
+    title: Establish current certified complete-cost value before GPUP-9
+    status: planned
+    depends_on: [GPUP-8-DISPOSITION, GPUP-PREP3]
+    specification: docs/decisions/ADR-0076-gpup8-disposition.md
+    acceptance: "All six ADR-0076 conditions: original strict authority/useful work; fair current native and external controls; full cold coverage/cost; prospective simultaneous value and regression guards; operational/portable evidence closure; hosted CI and explicit release review. Own frozen protocol and independent allocation required. PREP3 and within-lane CHECKER2 gains do not pass this gate."
+  - id: CI-STARTUP
+    title: Diagnose hosted Actions startup refusal and obtain normal CPU CI
+    status: ready
+    depends_on: []
+    specification: docs/benchmarks/lp-gpup8-disposition.md
+    acceptance: "Resolve the observed zero-job startup_failure with repository-owner/service diagnostics and obtain a full hosted CPU gate pass at the intended release source. Keep raw failures and local acceptance separate; no protection bypass. Separate infrastructure work, no scientific or GPU allocation."
   - id: GPUP-CHECKER2
     title: Optimize exact checker and preparation with original authority
     status: complete
@@ -196,10 +215,11 @@ tasks:
     acceptance: "Evidence-supported separate contract/allocation; fixed variables, singleton rows and bound tightening with reversible primal/dual maps; original-model validation and measured total-cost benefit; no solver-status substitution for proof"
   - id: GPUP-8-DISPOSITION
     title: Decide a funded GPUP-8 recovery or an explicit negative-result closure
-    status: ready
-    depends_on: [GPUP-BASELINE, GPUP-MIXED2]
-    specification: docs/decisions/ADR-0047-certified-performance-roadmap.md
-    acceptance: "Review retained incomplete evidence and new engineering results; no automatic retry or pass; separate accepted recovery or negative-result progression ADR required before changing the GPUP-9 gate"
+    status: complete
+    depends_on: [GPUP-BASELINE, GPUP-MIXED2, GPUP-MIXED2-CONFIRM2, GPUP-CHECKER2]
+    specification: docs/decisions/ADR-0076-gpup8-disposition.md
+    historical_acceptance: "Review retained incomplete evidence and new engineering results; no automatic retry or pass; separate accepted recovery or negative-result progression ADR required before changing the GPUP-9 gate"
+    acceptance: "ADR-0076 maps retained GPUP-8/MIXED2/CHECKER2 evidence, closes the old investigation negatively without regrading incomplete science, explicitly replaces the GPUP-9 dependency with GPUP-CERTIFIED-COST-GATE, and defines prospective PREP3 resources. Historical evidence/defaults/allocations exact; local validation and current CI observation recorded. No new scientific execution or GPUP-9 release."
   - id: GPUP-COPT
     title: COPT comparison and component-cost diagnosis
     status: complete
@@ -450,18 +470,20 @@ tasks:
     acceptance: "ADR-0041; 72-cell CPU admission/no useful quantized window; 42 executed study jobs plus 78 CPU refusals; 39 verified study LP endpoints/36 certified of 108 timings; three complete logical-2000 profiles/21 product endpoints; full native, 66 ordinary device tests, 628 vectors, 29 fixed-work/replay pairs/four sanitizers; all 313 LP plus 21 operator endpoints freshly verify; 245.686586823 GPU s, 17132 ledger events; separate resident report, no preset"
   - id: GPUP-8
     title: Implement hybrid Tensor components with a certified latency gain
-    status: in_progress
+    status: closed_negative
     depends_on: [GPUP-7R]
     specification: docs/specifications/SPEC-0012-mixed-precision-lp.md
-    # Incomplete task; scientific execution closed, not the next ready task.
+    # Historical scientific outcome remains incomplete; administrative closure is negative.
     # No automatic retry or transfer; historical criteria remain unchanged.
     acceptance: "Latest ADR-0046 recovery: corrected 7376-case proof, CPU/model/native gates and all six device jobs pass; twelve fixed-work/replay pairs accounted for, twenty new changed endpoints verified. Six small profiles complete; first large BF16 profile times out at unchanged 18-second deadline without endpoint. Nine profiles and sixty timings unexecuted; no complete forecast or certified gain. Retain full 3200 profile CPU charge and all historical failures. CPU 59603.097503214/77640; GPUP-8 GPU 1410.959187474/3000; campaign 22770.545043263/25202.574545061; ledger 17438 events. GPUP-9 gated. See lp-tensor-expanded-recovery-gpup8.md."
+    disposition: docs/decisions/ADR-0076-gpup8-disposition.md
   - id: GPUP-9
     title: Run controlled precision experiments and ablations
     status: planned
-    depends_on: [GPUP-7, GPUP-STATE, GPUP-ASSESS, GPUP-8]
+    depends_on: [GPUP-7, GPUP-STATE, GPUP-ASSESS, GPUP-CERTIFIED-COST-GATE]
     specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
-    acceptance: "Gated on GPUP-8 completion; a negative-result closure requires a separate accepted ADR explicitly replacing that gate. Then accept concrete protocol/allocation; bounded component/interaction blocks, frozen finalists and unseen grouped holdout; coverage, uncertainty and full costs; all historical caps preserved. ADR-0047 engineering tasks do not authorize this campaign."
+    historical_acceptance: "Gated on GPUP-8 completion; a negative-result closure requires a separate accepted ADR explicitly replacing that gate. Then accept concrete protocol/allocation; bounded component/interaction blocks, frozen finalists and unseen grouped holdout; coverage, uncertainty and full costs; all historical caps preserved. ADR-0047 engineering tasks do not authorize this campaign."
+    acceptance: "ADR-0076 replaces only the historical GPUP-8 dependency. Blocked until every GPUP-CERTIFIED-COST-GATE condition passes and a separate release ADR accepts a concrete GPUP-9 protocol/allocation under SPEC-0013. Preserve bounded interactions, frozen finalists, unseen grouped holdout, coverage, uncertainty and full costs. No public-default or GPUP-10 adoption implied."
   - id: GPUP-10
     title: Package evidence-supported precision recipes
     status: planned
