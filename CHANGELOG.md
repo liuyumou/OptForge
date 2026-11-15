@@ -1,5 +1,24 @@
 # Changelog
 
+## GPUP-8 FP4 redesign and gate waiver (2026-11-15)
+
+- Waive the legacy arithmetic-family/cold-only progression gate and supersede
+  ADR-0076's blanket replacement gate under the user's explicit instruction.
+- Recognize GPUP-8 as complete for scoped certified FP4 prepared-session capability
+  from unchanged predeclared MIXED2 results; retain the incomplete legacy record.
+- Make GPUP-9 ready for its own protocol/budget; keep PREP3 optional, CI repair
+  separate, and public adoption distinct. No numerical implementation/default change.
+  [Evidence and decision](docs/benchmarks/lp-gpup8-redesign.md).
+
+## GPUP-8 disposition (2026-11-15)
+
+- Close the exact-component investigation negatively, preserving its incomplete
+  scientific result and every historical criterion, failure and charge.
+- Define a replacement complete-cost progression gate, keeping GPUP-9 blocked;
+  specify the next CPU preparation/source-target experiment and its separate budget.
+- Record current zero-job hosted CI failure separately from local acceptance.
+  [Decision and evidence](docs/benchmarks/lp-gpup8-disposition.md).
+
 ## Exact checker and preparation (2026-11-15)
 
 - Add an isolated exact checker/preparation executor with guarded original-order

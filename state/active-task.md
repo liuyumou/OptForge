@@ -1,5 +1,58 @@
 # Active Task
 
+## GPUP-8 redesigned around scoped FP4 capability (2026-11-15)
+
+The user authorizes waiving the inappropriate legacy progression gate.
+[ADR-0077](../docs/decisions/ADR-0077-gpup8-fp4-redesign.md) /
+[SPEC-0043](../docs/specifications/SPEC-0043-gpup8-fp4-capability.md) recognize
+GPUP-8 as complete for scoped FP4 prepared-session research capability.
+MIXED2-CONFIRM2 completes 512 sessions / 16384 certified solves with 5/8 unchanged
+predeclared value comparisons passing, including three strict 1e-9 cases.
+CHECKER2's shared within-lane gains remain separate supporting evidence.
+
+The original exact-component experiment is GPUP-8-LEGACY, retired_incomplete.
+Its original criteria, failed/missing cells, sources, decisions and charges stay
+exact. ADR-0076's blanket GPUP-CERTIFIED-COST-GATE is superseded, not passed.
+GPUP-9 is now dependency-ready; next define its controlled protocol and independent
+budget before execution. PREP3 is optional, with its proposed allocation unopened.
+CI-STARTUP remains separate infrastructure work. Correctness, current execution
+admission and full costs remain required; public defaults/adoption stay separate.
+
+[Evidence and validation](../docs/benchmarks/lp-gpup8-redesign.md) record the
+8000 CPU / zero GPU decision-review allocation. Local acceptance passes 638 Rust /
+785 Python tests and 278 documentation pages; 2248 historical files and
+66 unrelated backlog task blocks remain exact. All original statistical decisions
+are reproduced, with no new scientific study. No historical
+regrading, old funding transfer or publication. Commit locally only. Earlier
+handoffs below retain their historical scope and are superseded for current routing.
+
+
+## GPUP-8 disposition complete (2026-11-15)
+
+ADR-0076 closes the old exact-component investigation as closed_negative; its
+scientific result remains incomplete, with no certified latency gain established.
+The GPUP-9 dependency is explicitly replaced by GPUP-CERTIFIED-COST-GATE; all six
+conditions and a separate accepted GPUP-9 protocol/allocation still block release.
+MIXED2 scoped prepared gains and CHECKER2 within-lane gains do not establish
+cold FP4 superiority. Public defaults and every historical scientific record remain.
+
+Next: GPUP-PREP3, a prospective 24000 CPU / zero GPU final-source/target factorial
+and exact preparation experiment. Its allocation is not opened. CI-STARTUP remains
+a separate zero-job hosted startup failure with no established root cause.
+Local acceptance passes 638 Rust / 785 Python tests, format, Clippy, dependency,
+artifact, committed-record replay, documentation/link and smoke checks.
+All 2243 unchanged historical files, prior handoff text and
+64 unrelated backlog task blocks are exact. Original GPUP-8 acceptance is
+preserved; the old GPUP-9 and disposition acceptance strings remain explicitly
+historical. Dependency consistency and the prospective factorial design pass.
+
+Independent review ceiling 16000 CPU / zero GPU seconds; all failed reservations
+retain full charges, and cleanup is empty. Final charges and source-bound receipts
+are in the [disposition report](../docs/benchmarks/lp-gpup8-disposition.md).
+The unchanged one-second supervisor and 100 ms advisories apply; sampled RSS is
+not a hard peak enclosure. No scientific execution, old funding transfer, public
+adoption or publication. Commit locally only.
+
 ## Exact checker and preparation optimization complete (2026-11-15)
 
 SPEC-0042 / ADR-0075 deliver an isolated exact checker/preparation executor shared
