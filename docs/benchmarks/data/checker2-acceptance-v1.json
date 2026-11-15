@@ -1,0 +1,60 @@
+{
+  "analysis": {
+    "path": "docs/benchmarks/data/checker2-analysis-v1.json",
+    "sha256": "d2006bd39aae1c0e7dbc7a4d98936a9350bf09e576c6b8fc1854623b498adebb"
+  },
+  "binary": {
+    "path": "artifacts/gpup-checker2-v1/build-v5/executor",
+    "sha256": "bdc1528298747fac4ab9cb35c758a6de76b97f3e47bd7085cf5c64085901993f"
+  },
+  "cleanup_empty": true,
+  "complete_sessions": 512,
+  "complete_solves": 16384,
+  "diagnosis": {
+    "path": "docs/benchmarks/data/checker2-diagnosis-v1.json",
+    "sha256": "0127ed459474736c6c854c4bb809e9e928b9869977b717541eeb93f20dc8efd9"
+  },
+  "evidence": {
+    "path": "docs/benchmarks/data/checker2-evidence-v1.json",
+    "sha256": "6bae84b77822b7784135f2d63536ff3445e676530bcb21ce57250fe292d94e08"
+  },
+  "frozen": {
+    "path": "artifacts/gpup-checker2-v1/freeze.json",
+    "sha256": "3412c8c033748f5287db5e2a13c168dadfbaa21217cb65003cfa364b5a6ee66c"
+  },
+  "historical_files": 2158,
+  "history": {
+    "path": "docs/benchmarks/data/checker2-history-v1.json",
+    "sha256": "fb0fec9cee7a856839e179783afbf90a7b851f1cc5361fb835528b5d3f450655"
+  },
+  "image": {
+    "path": "artifacts/gpup-mixed2-fp4-v1/build-v8/mixed.cubin",
+    "sha256": "40234ea66c9d781b2da03be2172f7699fcef375c093490f33e546db76c86cff0"
+  },
+  "isolated_rust_tests": 31,
+  "native": {
+    "path": "artifacts/gpup-checker2-v1/resources/native-optimized.settlement.json",
+    "sha256": "3a8231b8292208b63fef70949209ab01c527aee9eabb66a954777adf8bb61b1f"
+  },
+  "portable": {
+    "path": "artifacts/gpup-checker2-v1/portable.json",
+    "sha256": "f2f112f2f21e37b5e278b52ae891e3ef07d8abe4c9dae7a792561f96a85cacc3"
+  },
+  "provisional_passes": 13,
+  "public_adoption": false,
+  "python_tests": 785,
+  "retained_portable_setup_failure": {
+    "path": "artifacts/gpup-checker2-v1/resources/portable.settlement.json",
+    "sha256": "8f7625fc5ce4f9c96184732ba0bdfc756b311b75c5ddb746bf3bd4613fbe92ac"
+  },
+  "rust_tests": 638,
+  "scoped_passes": 16,
+  "serial": {
+    "path": "artifacts/gpup-checker2-v1/serial-confirmation/result.json",
+    "sha256": "cb7266edc1aea5172618dfdd3b1755a85ad35feb594a19d34d9dad599642d219"
+  },
+  "serial_assessments": 56992,
+  "serial_responses": 17536,
+  "serial_unique": 144,
+  "status": "passed"
+}

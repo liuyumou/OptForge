@@ -44,6 +44,12 @@ active_research_track: GPUP
 next_ready_task: GPUP-8-DISPOSITION
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-CHECKER2
+    title: Optimize exact checker and preparation with original authority
+    status: complete
+    depends_on: [GPUP-MIXED2-CONFIRM2]
+    specification: docs/specifications/SPEC-0042-checker2.md
+    acceptance: "All 16 frozen blocks / 512 sessions / 16384 certified solves; 16/16 scoped comparisons and 13/16 provisional 1.10 bounds pass. Exact preparations, original serial certificates, numerical trajectories, full native gate, source-bound device admission, portable replay and historical preservation pass. Rejected versions and all failed charges retained. No public default or GPUP-9 release. Report: docs/benchmarks/lp-checker2.md."
   - id: GPUP-MIXED2-CONFIRM2
     title: Complete independent MIXED2 confirmation after availability diagnosis
     status: complete
