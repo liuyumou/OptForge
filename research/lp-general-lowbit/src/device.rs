@@ -1,5 +1,6 @@
 //! Safe driver client; all ownership and unsafe CUDA calls remain in cuda-sys.
 use crate::control::Fp64State;
+use crate::engine::Engine;
 use crate::{
     Result,
     operator::{Format, Operator, Orientation, Product},
@@ -7,7 +8,6 @@ use crate::{
 use optimizer_cuda_sys::{
     Argument as A, Context, DeviceBuffer, LaunchConfig, Module, Stream, launch,
 };
-use optimizer_lp::Engine;
 use std::{path::Path, rc::Rc};
 
 pub const DEVICE: &str = "GPU-6721b13a-30f9-83ec-dace-ba2d9738556f";

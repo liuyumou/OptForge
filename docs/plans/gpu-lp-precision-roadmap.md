@@ -1,5 +1,18 @@
 # GPU LP Performance Research and Implementation Roadmap
 
+## Scale development with COPT (2026-11-17)
+
+The [scale implementation and evaluation](../benchmarks/lp-general-scale.md)
+adds compact exact original inputs, faster original-tree host products and
+preparation, lazy exact-checker geometry reuse, structural kernel scheduling,
+and installed COPT 8.0.6 CPU/GPU baselines. Complete single-solve costs and strict
+original-model certificates remain primary. The original broad roster and all
+six structural families remain visible, including unsuccessful solves and
+capacity limits. Actual FP4 execution gains have not yet established broad
+complete-solve superiority. The report also diagnoses a conservative gap-enclosure
+rejection on a numerically accurate COPT PDS endpoint; historical gates and
+outcomes remain unchanged. The survey below records the earlier design stage.
+
 ## Benchmark scale design (2026-11-17)
 
 The [scale survey and proposed evaluation](lp-benchmark-scaling.md) compares

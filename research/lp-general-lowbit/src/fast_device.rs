@@ -1,4 +1,5 @@
 //! Specialized unenclosed proposals. Original residual/certificate authority is external.
+use crate::engine::Engine;
 use crate::{
     Result,
     control::Fp64State,
@@ -9,7 +10,6 @@ use crate::{
 use optimizer_cuda_sys::{
     Argument as A, Context, DeviceBuffer, Function, LaunchConfig, Module, Stream, launch,
 };
-use optimizer_lp::Engine;
 use serde::{Deserialize, Serialize};
 use std::{path::Path, rc::Rc};
 
@@ -23,6 +23,19 @@ pub struct Config {
     pub combined: bool,
     /// Eight lanes for short rows; a full warp for groups containing >64 entries.
     pub adaptive_rows: bool,
+    /// Preserve original host arithmetic while skipping padded-zero reductions.
+    #[serde(skip_serializing_if = "disabled")]
+    pub host_reductions: bool,
+    #[serde(skip_serializing_if = "disabled")]
+    pub host_preparation: bool,
+    #[serde(skip_serializing_if = "disabled")]
+    pub host_certificates: bool,
+    /// Split heavily tiled output groups to expose independent product CTAs.
+    #[serde(skip_serializing_if = "disabled")]
+    pub auto_schedule: bool,
+}
+fn disabled(value: &bool) -> bool {
+    !*value
 }
 impl Default for Config {
     fn default() -> Self {
@@ -31,10 +44,28 @@ impl Default for Config {
             fused_encode: true,
             combined: true,
             adaptive_rows: true,
+            host_reductions: false,
+            host_preparation: false,
+            host_certificates: false,
+            auto_schedule: false,
         }
     }
 }
 impl Config {
+    pub fn resolved(&self, packed: Option<&Packed>) -> Self {
+        let mut result = self.clone();
+        if self.auto_schedule
+            && self.combined
+            && packed.is_some_and(|p| {
+                [&p.rows, &p.columns]
+                    .iter()
+                    .any(|t| t.columns.len() > 4 * t.offsets.len().saturating_sub(1))
+            })
+        {
+            result.combined = false;
+        }
+        result
+    }
     pub fn validate(&self) -> Result<()> {
         if ![0, 1, 4, 8, 32].contains(&self.lanes) {
             return Err("fast lane domain".into());
@@ -193,6 +224,8 @@ impl Device {
     ) -> Result<Self> {
         c.validate()?;
         t.validate()?;
+        let resolved = c.resolved(packed);
+        let c = &resolved;
         if std::env::var("AI_OPTIMIZER_GPU_LEASE").as_deref() != Ok("inherited")
             || std::env::var("CUDA_VISIBLE_DEVICES").as_deref() != Ok(DEVICE)
         {

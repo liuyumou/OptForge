@@ -1,0 +1,110 @@
+{
+  "claim": "Exact rational objective at unchanged retained endpoints. Does not re-evaluate feasibility, prove a new dual bound, regrade a historical certificate or repair a missing timing. The lower-guard diagnosis follows the unchanged assess_gap predicate; the displayed allowance is diagnostic, not a replacement outward computation.",
+  "original_gap_source": {
+    "path": "crates/optimizer-lp/src/certify.rs",
+    "sha256": "eb6e6db5f99ea51b08b68ff5f199f23d649a5622badc922a755b999a1ceda707"
+  },
+  "rows": [
+    {
+      "approximate_upper_gap_allowance": 10.928229969,
+      "cell": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-tail-v2/m00/m20-r0-t0-copt-cpu-auto.cell.json",
+        "sha256": "fda73e93a22724f82d7626b88082105c45f62c156f7999eb97bff1858fd3c7a7"
+      },
+      "exact_directed_gap_denominator": "35184372088832",
+      "exact_directed_gap_float": 3.510081114654895e-11,
+      "exact_directed_gap_numerator": "1235",
+      "exact_objective_denominator": "35184372088832",
+      "exact_objective_numerator": "384502909466436620518611",
+      "lane": "copt-cpu-auto",
+      "lower_gap_guard_implicated": true,
+      "model": {
+        "path": "artifacts/gpup-general-v1/scale-public-pds-v2/pds-100.lpcsr",
+        "sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15"
+      },
+      "objective_ulp": 1.9073486328125e-06,
+      "original_certificate": {
+        "accepted": false,
+        "bound": 10928229968.0,
+        "feasible": true,
+        "gap_upper": 9.5367431640625e-06,
+        "model_sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15",
+        "objective": 10928229968.0,
+        "tolerance": 1e-09
+      },
+      "response": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-tail-v2/m00/m20-r0-t0-copt-cpu-auto.response.json",
+        "sha256": "1e2acd7a51777b6780b0473d36b8e182269f13544ecd5fc01ca3bab09e24d39b"
+      }
+    },
+    {
+      "approximate_upper_gap_allowance": 10.92822996899644,
+      "cell": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-tail-v2/m00/m20-r0-t0-copt-gpu-tight.cell.json",
+        "sha256": "755fc41b4a12c13facac3c9f8f85f1f231b34aa6b2dcf3b7a5272511ba0bbac7"
+      },
+      "exact_directed_gap_denominator": "2305843009213693952",
+      "exact_directed_gap_float": -0.000869021968379419,
+      "exact_directed_gap_numerator": "-2003828230640807",
+      "exact_objective_denominator": "2305843009213693952",
+      "exact_objective_numerator": "25198782674782175381159881561",
+      "lane": "copt-gpu-tight",
+      "lower_gap_guard_implicated": false,
+      "model": {
+        "path": "artifacts/gpup-general-v1/scale-public-pds-v2/pds-100.lpcsr",
+        "sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15"
+      },
+      "objective_ulp": 1.9073486328125e-06,
+      "original_certificate": {
+        "accepted": false,
+        "bound": 10928229967.996439,
+        "feasible": false,
+        "gap_upper": 0.0,
+        "model_sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15",
+        "objective": 10928229967.995577,
+        "tolerance": 1e-09
+      },
+      "response": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-tail-v2/m00/m20-r0-t0-copt-gpu-tight.response.json",
+        "sha256": "488c788ad028c1b85ca7c287375ef75d7e814257142d5c9181bfc457fc0b9acd"
+      }
+    },
+    {
+      "approximate_upper_gap_allowance": 10.934043392376584,
+      "cell": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-tail-v2/m00/m20-r0-t0-fp4x2.cell.json",
+        "sha256": "14f157f4e8a9410f61bffc4d3c310614ca42d7b4d80bbfedbb8ccdbadae2e1c2"
+      },
+      "exact_directed_gap_denominator": "971334446112864535459730953411759453321203419526069760625906204869452142602604249088",
+      "exact_directed_gap_float": 5841120.208713577,
+      "exact_directed_gap_numerator": "5673681262609462029188505597028829993829917114670827665397731509319221358697467436707764097",
+      "exact_objective_denominator": "971334446112864535459730953411759453321203419526069760625906204869452142602604249088",
+      "exact_objective_numerator": "10620612981336800294482855107586322958405677861168144095688130018152509238813564278688359798657",
+      "lane": "fp4x2",
+      "lower_gap_guard_implicated": false,
+      "model": {
+        "path": "artifacts/gpup-general-v1/scale-public-pds-v2/pds-100.lpcsr",
+        "sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15"
+      },
+      "objective_ulp": 1.9073486328125e-06,
+      "original_certificate": {
+        "accepted": false,
+        "bound": 10928202271.16787,
+        "feasible": false,
+        "gap_upper": 5841120.208732605,
+        "model_sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15",
+        "objective": 10934043391.376577,
+        "tolerance": 1e-09
+      },
+      "response": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-tail-v2/m00/m20-r0-t0-fp4x2.response.json",
+        "sha256": "97c3e2151cfc909cd47548b85251dd28fca8c31d62380e457e690dc5a08d2e7e"
+      }
+    }
+  ],
+  "source": {
+    "path": "tools/lp_general_scale_gap_diagnose.py",
+    "sha256": "eb99335285b6f6161a7b2a7c89811e54a2e29c940dc12a5794de91ee490c365b"
+  },
+  "status": "passed"
+}

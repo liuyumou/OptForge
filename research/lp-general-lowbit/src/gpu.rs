@@ -1,4 +1,5 @@
 //! Checkpointed sparse GPU execution with original-model host certification.
+use crate::engine::Engine;
 use crate::{
     Result,
     device::Device,
@@ -7,7 +8,7 @@ use crate::{
 };
 use crate::{control::Fp64Controller, merit::EngineMerit};
 use optimizer_core::Model;
-use optimizer_lp::{Engine, LinearProgram};
+use optimizer_lp::LinearProgram;
 use serde_json::{Value, json};
 use std::{
     path::Path,

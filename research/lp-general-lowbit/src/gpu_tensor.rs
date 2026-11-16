@@ -1,14 +1,15 @@
 //! Checkpointed sparse GPU execution with original-model host certification.
+use crate::engine::Engine;
 use crate::{
     Result,
     operator::{Format, Operator},
-    solve::{Settings, assess_repaired, same_state},
+    solve::{Settings, same_state},
     tensor::{Config, Packed},
     tensor_device::Device as LocalDevice,
 };
 use crate::{control::Fp64Controller, merit::EngineMerit};
 use optimizer_core::Model;
-use optimizer_lp::{Engine, LinearProgram};
+use optimizer_lp::LinearProgram;
 use serde_json::{Value, json};
 use std::{
     path::Path,
@@ -70,7 +71,16 @@ pub fn solve_with_fast(
     let started = Instant::now();
     let program = LinearProgram::new(model)?;
     let certificate_context = crate::implied::Context::new(model, &program)?;
-    let engine = Engine::new(&program, control_settings.lp());
+    let mut assessor = crate::assessment::Assessor::new(
+        model,
+        certificate_context.program(&program),
+        fast.is_some_and(|f| f.host_certificates),
+    );
+    let engine = if fast.is_some_and(|f| f.host_preparation) {
+        crate::host::engine(&program, control_settings.lp())
+    } else {
+        Engine::new(&program, control_settings.lp())
+    };
     let op = Operator::new_for(&engine, Format::Native)?;
     let packed = if settings.format.components() > 0 {
         Some(if fast.is_some() {
@@ -82,8 +92,14 @@ pub fn solve_with_fast(
     } else {
         None
     };
-    let mut control =
-        Fp64Controller::new_with_merit(&engine, |x, y, w| engine.projected_residual(x, y, w));
+    let merit = |x: &[f64], y: &[f64], w| {
+        if fast.is_some_and(|f| f.host_reductions) {
+            crate::host::projected_residual(&engine, x, y, w)
+        } else {
+            engine.projected_residual(x, y, w)
+        }
+    };
+    let mut control = Fp64Controller::new_with_merit(&engine, merit);
     control.set_deadline(Some(started + Duration::from_millis(settings.wall_ms)));
     let selected_format = if settings.format.components() > 0 && packed.is_none() {
         if fast.is_some() {
@@ -226,7 +242,7 @@ pub fn solve_with_fast(
         let check_start = Instant::now();
         if !rejected && !interrupted {
             let s = control.state();
-            let error = engine.projected_residual(&s.primal, &s.dual, s.weight);
+            let error = merit(&s.primal, &s.dual, s.weight);
             current_merit = error;
             rejected = !error.is_finite()
                 || (format != Format::Native && error > 2. * before_error.max(settings.tolerance));
@@ -268,12 +284,11 @@ pub fn solve_with_fast(
         if due {
             last_certificate = control.state().iterations;
             let endpoint = control.iterate();
-            let certificate = assess_repaired(
-                model,
-                certificate_context.program(&program),
+            let certificate = assessor.evaluate(
                 &endpoint.primal,
                 &endpoint.dual,
                 settings.tolerance,
+                control.remaining() > 0 && !control.expired(),
             )?;
             assessments.push(
             json!({"physical":control.physical_iterations(),"logical":control.state().iterations,
@@ -312,7 +327,7 @@ pub fn solve_with_fast(
                 current_merit = if w.to_bits() == checked_weight.to_bits() {
                     checked_merit
                 } else {
-                    engine.projected_residual(x, y, w)
+                    merit(x, y, w)
                 };
                 current_merit
             });
@@ -325,13 +340,7 @@ pub fn solve_with_fast(
     let certificate = if status == "certified" {
         assessments.last().ok_or("missing accepted assessment")?["certificate"].clone()
     } else {
-        assess_repaired(
-            model,
-            certificate_context.program(&program),
-            &endpoint.primal,
-            &endpoint.dual,
-            settings.tolerance,
-        )?
+        assessor.evaluate(&endpoint.primal, &endpoint.dual, settings.tolerance, false)?
     };
     if control.expired() {
         status = "deadline";
@@ -343,6 +352,10 @@ pub fn solve_with_fast(
     let teardown_start = Instant::now();
     drop(device);
     let teardown_ns = teardown_start.elapsed().as_nanos();
+    let cached_assessments = assessor.cached_calls;
+    let release_check = Instant::now();
+    drop(assessor);
+    assessment_ns += release_check.elapsed().as_nanos();
     let mut result = json!({"schema_version":1,"kind":"general-lowbit-solve","execution":"sparse-tensor-local","settings":settings,"tensor_config":config,"selected_initial_format":selected_format,
         "reference_product_nnz":reference_work,
         "physical_product_work":physical_work,"accepted_product_work":accepted_work,
@@ -360,6 +373,18 @@ pub fn solve_with_fast(
         result["guard_policy"] = json!("original-residual-checkpoint-v1");
         result["fast_config"] = json!(fast);
         result["initial_fast_lanes"] = json!(fast_shapes);
+        if fast.is_some_and(|f| f.host_certificates) {
+            result["cached_assessments"] = json!(cached_assessments);
+        }
+        if let Some(f) = fast.filter(|f| f.auto_schedule) {
+            result["selected_schedule"] = json!(if selected_format.components() == 0 {
+                "sparse"
+            } else if f.resolved(packed.as_ref()).combined {
+                "combined"
+            } else {
+                "split"
+            });
+        }
     }
     Ok(result)
 }

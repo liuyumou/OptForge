@@ -1,15 +1,13 @@
+use lp_general_lowbit::engine::Engine;
 use lp_general_lowbit::merit::EngineMerit;
 use lp_general_lowbit::{
     Result,
     operator::{Format, Operator},
     solve::{Settings, cpu},
 };
-use optimizer_core::Model;
-use optimizer_lp::{Engine, LinearProgram};
+use optimizer_lp::LinearProgram;
 use serde_json::{Value, json};
-use sha2::{Digest, Sha256};
 use std::{
-    fs::File,
     io::{self, BufRead, Read, Write},
     path::Path,
 };
@@ -30,7 +28,9 @@ fn run() -> Result<()> {
             "gpu-fast-probe",
             "assess",
             "assess-proven",
+            "assess-fast",
             "tighten",
+            "host-probe",
         ]
         .contains(&args[1].as_str())
         || args.len() != if args[1].starts_with("gpu") { 4 } else { 3 }
@@ -40,16 +40,22 @@ fn run() -> Result<()> {
                 .into(),
         );
     }
-    let mut bytes = Vec::new();
-    File::open(&args[2])?
-        .take((384 << 20) + 1)
-        .read_to_end(&mut bytes)?;
-    if bytes.len() > 384 << 20 {
-        return Err("model byte limit".into());
-    }
-    let hash = format!("{:x}", Sha256::digest(&bytes));
-    let model = Model::from_json(&bytes)?;
-    drop(bytes);
+    let (model, hash) = lp_general_lowbit::input::load(Path::new(&args[2]))?;
+    // Reuse immutable original geometry for a batch of independent assessments.
+    // No endpoint answer or certificate is cached.
+    let check_program = if matches!(args[1].as_str(), "assess" | "assess-proven" | "assess-fast") {
+        Some(LinearProgram::new(&model)?)
+    } else {
+        None
+    };
+    let check_context = if matches!(args[1].as_str(), "assess-proven" | "assess-fast") {
+        Some(lp_general_lowbit::implied::Context::new(
+            &model,
+            check_program.as_ref().ok_or("check program")?,
+        )?)
+    } else {
+        None
+    };
     let mut input = io::stdin().lock();
     let mut cached: Option<(bool, lp_general_lowbit::device::Device)> = None;
     loop {
@@ -166,23 +172,62 @@ fn run() -> Result<()> {
                     json!({"operator":op,"packed":packed,"product":product,"tensor_config":config})
                 }
             }
+        } else if args[1] == "host-probe" {
+            let p = LinearProgram::new(&model)?;
+            let e = Engine::new(&p, settings.lp());
+            let prepared = lp_general_lowbit::host::engine(&p, settings.lp());
+            let x: Vec<f64> = serde_json::from_value(request["primal"].clone())?;
+            let y: Vec<f64> = serde_json::from_value(request["dual"].clone())?;
+            let w = request["weight"].as_f64().ok_or("weight")?;
+            if x.len() != p.column_count()
+                || y.len() != p.row_count()
+                || x.iter().chain(&y).any(|v| !v.is_finite())
+                || !w.is_finite()
+                || w <= 0.
+            {
+                return Err("host probe domain".into());
+            }
+            let original = e.step_once(&x, &y, w);
+            let optimized = lp_general_lowbit::host::step_once(&prepared, &x, &y, w);
+            let bits = |v: &[f64]| v.iter().map(|x| x.to_bits()).collect::<Vec<_>>();
+            if e.step().to_bits() != prepared.step().to_bits()
+                || bits(e.scaled_matrix().0) != bits(prepared.scaled_matrix().0)
+                || bits(e.scaled_matrix().1) != bits(prepared.scaled_matrix().1)
+                || bits(e.scaled_objective()) != bits(prepared.scaled_objective())
+                || bits(e.preconditioner().row()) != bits(prepared.preconditioner().row())
+                || bits(e.preconditioner().column()) != bits(prepared.preconditioner().column())
+            {
+                return Err("host preparation differs from original bits".into());
+            }
+            json!({"original":original,"optimized":optimized,
+                "original_merit":e.projected_residual(&x,&y,w),
+                "optimized_merit":lp_general_lowbit::host::projected_residual(&prepared,&x,&y,w),"preparation_exact":true})
         } else if args[1] == "cpu" {
             cpu(&model, &settings)?
         } else if args[1] == "tighten" {
             let (tightened, proof) = lp_general_lowbit::implied::derive(&model)?;
             json!({"model":tightened.as_ref().unwrap_or(&model).document(),"bound_proof":proof})
-        } else if args[1] == "assess" || args[1] == "assess-proven" {
-            let p = LinearProgram::new(&model)?;
+        } else if args[1] == "assess" || args[1] == "assess-proven" || args[1] == "assess-fast" {
+            let p = check_program.as_ref().ok_or("check program")?;
             let x: Vec<f64> = serde_json::from_value(request["primal"].clone())?;
             let y: Vec<f64> = serde_json::from_value(request["dual"].clone())?;
             if x.len() != p.column_count() || y.len() != p.row_count() {
                 return Err("witness dimensions".into());
             }
-            if args[1] == "assess-proven" {
-                let context = lp_general_lowbit::implied::Context::new(&model, &p)?;
+            if args[1] == "assess-fast" {
+                let context = check_context.as_ref().ok_or("check context")?;
+                let mut assessor =
+                    lp_general_lowbit::assessment::Assessor::new(&model, context.program(p), true);
+                assessor.prepare();
+                let mut result = assessor.evaluate(&x, &y, settings.tolerance, false)?;
+                drop(assessor);
+                result["bound_proof"] = json!(context.proof);
+                result
+            } else if args[1] == "assess-proven" {
+                let context = check_context.as_ref().ok_or("check context")?;
                 let mut r = lp_general_lowbit::solve::assess_repaired(
                     &model,
-                    context.program(&p),
+                    context.program(p),
                     &x,
                     &y,
                     settings.tolerance,
@@ -190,7 +235,7 @@ fn run() -> Result<()> {
                 r["bound_proof"] = json!(context.proof);
                 r
             } else {
-                lp_general_lowbit::solve::assess(&model, &p, &x, &y, settings.tolerance)?
+                lp_general_lowbit::solve::assess(&model, p, &x, &y, settings.tolerance)?
             }
         } else if args[1] == "gpu" {
             lp_general_lowbit::gpu::solve(&model, &settings, Path::new(&args[3]))?

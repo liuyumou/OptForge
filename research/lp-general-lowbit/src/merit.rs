@@ -1,5 +1,6 @@
 //! Experimental progress diagnostic and the retained primal-weight formula.
-use optimizer_lp::{Engine, tree_sum};
+use crate::engine::Engine;
+use optimizer_lp::tree_sum;
 
 /// Bound an inexact map displacement relative to the exact map displacement.
 /// Both quantities already have state units. Capping the residual at one or

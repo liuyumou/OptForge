@@ -1,5 +1,97 @@
 # SPEC-0045: General low-bit LP implementation and evaluation
 
+## Scale development continuation (2026-11-17)
+
+After the frozen 16 M cohort, an explicit x86-64-v4 host build may be compared
+with the default-target scale-image-v6. Preserve the numerical Rust source and
+the device image exactly; record compiler flags and fingerprints. CPU arithmetic,
+whole-response GPU comparisons and all four scoped sanitizers precede comparison.
+Use all six connected 1 M structural families plus square31 and scpm1, both host
+builds, native/FP32/FP4x2 and two timing repetitions. Hold requests identical,
+including the 1,000-update cap, 250-update certificate cadence and structural
+scheduling. Both builds receive a 30-second solver wall budget to reduce the
+earlier pilot's unequal-work deadline censoring. Reserve 300 seconds per model,
+900 for scpm1's twelve solves and full audits, within unchanged phase ceilings.
+Equal-work comparisons require exact numerical transcripts; deadline
+differences remain separate. This is a host-target development attribution, not
+an FP4-specific gain, broad confirmation or a change to the frozen scale studies.
+The complete prior broad roster and all larger-scale results remain visible.
+Current phase and total ceilings remain unchanged; whole-cohort preflight applies.
+
+The user authorizes implementing, evaluating and improving the
+[benchmark scale design](../plans/lp-benchmark-scaling.md), using the installed
+`/root/copt80` as an external baseline. Start with compact original-model input,
+bounded model generation/import, matched 1 M and 4 M development, then larger
+rungs when complete memory and lifecycle reservations fit. Preserve the broad
+22-model controls and strict 1e-7/1e-9 original-model certificates. COPT CPU auto
+and actual GPU PDLP are separate baselines with explicit algorithm, threads,
+presolve, library identity, endpoint checking and all conversion costs; COPT
+status alone is not certificate authority.
+
+Prospectively rebalance the existing 240000 CPU / 30000 GPU-second allocation,
+without changing total ceilings or previous charges. CPU phase caps become
+implementation 40000, native 32000, admission 48000, development 56000,
+confirmation 40000, reporting 20000 and cleanup 4000. GPU phase caps become
+admission 10000, development 16000, confirmation 2000 and reporting 2000.
+This reserves more capacity for development; confirmation remains unfrozen.
+Fresh operational readmission binds the accounting changes before new science.
+Four slots, 16 GiB sampled RSS, 12 GiB owned GPU buffers, the pinned shared lease,
+one-second supervision and all 100 ms advisories remain unchanged.
+
+Compact inputs preserve exact binary64 coefficients and original row/bound
+semantics, with full structural validation and byte identity. Numerical/device
+domain caps are unchanged. Admit input equivalence, malformed-input refusal,
+independent original checking, baseline dual conventions and recovery before
+comparison. Keep any faster shared checker or control implementation separately
+selectable for matched attribution, and admit its numerical behavior. All failed,
+unsupported, limited and missing cells remain visible. Large inputs and witnesses
+stay local; compact manifests and findings are tracked. Commit locally only.
+
+After the first scale cohort, prospectively assign CPU caps of implementation
+22000, native 30000, admission 44000, development 104000, confirmation 6000,
+reporting 30000 and cleanup 4000 seconds; GPU caps are admission 8000,
+development 20000, confirmation 1000 and reporting 1000. Total ceilings remain
+240000 / 30000. This funds final broad/scale development and evidence replay;
+no confirmation is frozen. Fresh operational readmission precedes execution.
+The first scale cohort's final PDS group remains incomplete after its response
+exceeded the old JSON reader's 128 MiB limit. Retain its raw output and full
+reservation. Future evidence uses bounded exact-byte chunks under the unchanged
+512 MiB file limit. No scientific cell is retried.
+
+The final candidate may reuse the admitted exact checker lazily after a failed
+assessment and choose split products for heavily tiled output groups. Explicit
+schedule controls establish unchanged arithmetic within each schedule; split
+and combined schedules may differ in FP32 reduction order. A uniform COPT GPU
+PDLPTol=1e-12 configuration is an additional development control, with the same
+strict 1e-9 certificate and 30-second solver limit. Preserve its earlier 1e-9
+configuration and every uncertified endpoint.
+
+The four-million-nonzero stage prospectively separates historical endpoint
+audits into CPU reporting reservations after releasing the GPU lease. The fresh
+independent final certificate remains in the primary path; all intermediate
+audits and their reservations must pass before timing eligibility. Source-bound
+audit admission precedes the cohort. Preflight includes trajectory serialization
+and audit objects as well as numerical host/device storage. No checks are removed.
+
+After the final one-million-nonzero cohort settles, the four-million stage uses
+prospective CPU phase caps: implementation 20000, native 28000, admission 44000,
+development 98000, confirmation 2000, reporting 44000 and cleanup 4000. GPU caps:
+admission 7800, development 21700, confirmation 500 and reporting 0. Totals stay
+240000 / 30000. The larger reporting allowance funds the separate history audits
+and extracted-root replay; it does not remove or transfer any historical charge.
+Operational readmission again binds the new accounting source before execution.
+
+Prospectively include a 16 M extension after the full 4 M cohort, subject to
+unchanged total ceilings and a complete cohort/audit reservation. Apply the same
+dimension, 15 GiB pipeline allowance, 12 GiB device allowance, 4 GiB response
+transport bound and 512 MiB file ceiling to all six families and three seeds.
+This admits tall and coupled-block constructions; retain the other twelve model
+cells as unsupported, including all sixty planned lane comparisons. No measured
+performance selects this subset. The complete lower-scale and historical rosters
+remain mandatory. Use the same candidate, baselines, accuracy and iteration/time
+settings; reserve 600 GPU wall seconds per admitted model and separate 300-second
+CPU history audits. No further arithmetic retuning or confirmation is implied.
+
 Status: active under ADR-0079 and the user's 2026-11-16 execution instruction
 Scope: shared sparse LP method, isolated low-bit execution, broad evaluation
 Owner: LP backend

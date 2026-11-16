@@ -1,4 +1,5 @@
 //! Explicit opt-in sparse Tensor Core driver; no changes to the retained backend.
+use crate::engine::Engine;
 use crate::{
     Result,
     control::Fp64State,
@@ -9,7 +10,6 @@ use crate::{
 use optimizer_cuda_sys::{
     Argument as A, Context, DeviceBuffer, Function, LaunchConfig, Module, Stream, launch,
 };
-use optimizer_lp::Engine;
 use std::{path::Path, rc::Rc};
 struct Matrix {
     offsets: DeviceBuffer<u32>,

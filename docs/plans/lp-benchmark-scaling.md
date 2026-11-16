@@ -1,5 +1,16 @@
 # LP benchmark scale survey and proposed evaluation
 
+## Execution continuation (2026-11-17)
+
+The user subsequently authorized implementation, evaluation and improvement with
+the installed COPT baseline. The [scale development report](../benchmarks/lp-general-scale.md)
+records compact original inputs, exact shared host/checker improvements, connected
+structural models, three public anchors and COPT CPU/GPU comparisons. The full
+historical 22-model roster remains in the evaluation. A capacity-selected 16 M
+extension retains unsupported families explicitly; the 64 M–8 B stages and
+application generators below remain future work. Broad FP4 superiority and
+confirmation remain unestablished. The original survey follows unchanged.
+
 Status: benchmark research and prospective design, 2026-11-17; no scaling runs.
 Scope: broadly useful single-solve LP acceleration through low-bit arithmetic,
 including FP4, under [SPEC-0045](../specifications/SPEC-0045-general-lowbit-lp.md).

@@ -1,4 +1,5 @@
 //! Shared FP64 solver control; low-bit products never issue certificates.
+use crate::engine::Engine;
 use crate::{
     Result,
     operator::{Format, Operator},
@@ -8,7 +9,7 @@ use crate::{
     merit::EngineMerit,
 };
 use optimizer_core::{Assignment, Candidate, Model, Tolerances};
-use optimizer_lp::{Engine, LinearProgram, LpSettings, certify, certify::assess_gap};
+use optimizer_lp::{LinearProgram, LpSettings, certify, certify::assess_gap};
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::time::{Duration, Instant};

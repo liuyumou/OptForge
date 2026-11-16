@@ -124,3 +124,79 @@ Large evidence remains local. See the [redesign report](../../docs/benchmarks/lp
 The [FP4 surrounding-work continuation](../../docs/benchmarks/lp-general-overhead.md)
 coalesces projection and encoding while preserving complete numerical transcripts.
 Its matched old/new comparison retains native/FP32 controls and the full LP roster.
+
+## Compact scale inputs and exact host work
+
+`MODEL` may also be an `LPCSRA01` compact original-model file. It stores canonical
+CSR, original IDs, sparse objective, bounds and binary64 coefficients without
+quantization. The 64-byte little-endian header and array order are documented in
+`src/input.rs` and `tools/lp_general_scale_io.py`. Both readers validate dimensions,
+exact length, positions, ordering and bounds. The numerical dimension/nonzero
+limits remain unchanged; compact transport does not increase device capacity.
+
+Additional opt-in `fast` settings are `host_reductions` and
+`host_preparation`, both false by default. The former removes unused zero-padding
+work from the original host reduction tree and uses up to four workers. It
+preserves tree order, including signed-zero behavior. The latter applies those
+same products to the original spectral estimate. An isolated adapter reuses
+public geometry preparation and retains the exact computed step, including
+steps above one. Original core sources stay unchanged. Neither option changes certificate arithmetic or permits
+an approximate progress test to issue a certificate.
+
+`host_certificates` lazily prepares the already admitted exact checker after the
+first failed assessment when more work remains. It caches immutable coefficient
+geometry, never endpoint answers. A solve that certifies at its first check pays
+no cache setup. `auto_schedule` selects split products when either orientation
+has more than four tiles per output group on average. This is a structural rule,
+without model-name dispatch. It preserves the arithmetic of the chosen explicit
+schedule; split and combined reduction orders can differ. Both options default
+to false. The strict original-model certificate and check cadence are unchanged.
+
+`assess`, `assess-proven` and the admission-only `assess-fast` reuse immutable
+model geometry across a batch of independent endpoint requests. A fresh final
+checker process still pays its own preparation. `assess-fast` checks reuse of the
+cached arithmetic against the original serial authority.
+
+`tools/lp_general_scale_models.py` generates coupled structural models at bounded
+nonzero targets. Construction witnesses remain separate from solver input.
+`lp_general_scale_public.py` compares COPT and HiGHS MPS imports before emitting a
+continuous model; no MIP presolve is applied. `lp_general_scale_copt.py` loads the
+same compact model through COPT's bulk matrix API, retaining CPU auto and actual
+GPU PDLP as separate external baselines. Its pinned local environment must match
+the libraries in `/root/copt80`. A COPT status is not our certificate authority.
+`lp_general_scale_bench.py` freezes source-bound development cells, runs fresh
+processes and checks every retained endpoint in a separate CPU process using the
+unchanged original serial certificate routines. Baseline-specific stopping
+criteria, time limits, conversion and independent-checking costs remain visible.
+The additional `copt-gpu-tight` lane uses PDLPTol=1e-12 uniformly, retaining the
+same strict 1e-9 external certificate and 30-second solver limit.
+
+Frozen campaigns execute their retained runner copy. Large responses are stored
+as bounded gzip chunks with exact raw-byte and per-chunk hashes; the supervisor's
+512 MiB file ceiling stays unchanged. `lp_general_scale_portable.py` archives a
+content-addressed local delta and replays original-model certificates from an
+extracted root. Numerical replay and packaging use fresh reporting reservations.
+The current research response includes intermediate trajectories; its complete
+process time therefore includes their serialization and transport. Archive
+compression and historical endpoint replay are separately timed. These costs
+must remain explicit when comparing against COPT's final-only response.
+The four-million-nonzero campaign releases its GPU lease before independent
+history audits in separate CPU reservations. Its final independent certificate
+remains in the timed path. All history audits must pass before timings qualify;
+the deferred work and its charges are retained in additive audit receipts.
+
+Run structural inventory and frontier preparation with the pinned
+`artifacts/gpup-copt-adapter-env/venv/bin/python`, which supplies SciPy. The base
+research Python has NumPy but does not supply SciPy. `freeze --model-version N`
+selects the explicit original-input manifest version; it does not modify models.
+The 16 M frontier retains unsupported families and may reuse exact complete
+inputs from a failed preparation, with its failed receipt and generator source
+bound separately. No solver cell is retried by that preparation continuation.
+
+The main scaling image uses the default Rust x86-64 target. The source-identical
+`scale-image-v7` experiment is built with `RUSTFLAGS=-C target-cpu=x86-64-v4` on
+the admitted host; its compiler fingerprints and exact-response/sanitizer
+admission are retained. `lp_general_scale_target.py` freezes a separate matched
+host-build pilot. Both builds use identical requests and the same CUDA image;
+any measured difference is a host-build effect, not an FP4-specific improvement.
+This does not change Cargo's portable default target or public solver defaults.

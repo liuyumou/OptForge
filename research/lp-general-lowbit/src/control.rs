@@ -2,9 +2,10 @@
 //! Resumable FP64 restart/weight control shared by host and matched CUDA execution.
 //! Controller residuals steer proposals; only independent certification grants bounds.
 
+use crate::engine::Engine;
 use crate::merit::EngineMerit;
 use optimizer_core::CancellationToken;
-use optimizer_lp::{Engine, Iterate};
+use optimizer_lp::Iterate;
 use std::time::Instant;
 
 /// All mutable numerical state that affects future FP64 iterates.

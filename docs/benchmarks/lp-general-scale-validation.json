@@ -1,0 +1,1813 @@
+{
+  "acceptance": {
+    "cached_certificates": 60,
+    "cases_per_sanitizer": 20,
+    "gpu_continuations_per_host_image": 60,
+    "host_probes": 32,
+    "input_equivalence": 24,
+    "isolated_rust_per_host_image": 37,
+    "malformed_inputs": 16,
+    "python": 827,
+    "repository_rust": 638,
+    "sanitizers_per_host_image": 4
+  },
+  "allocation": {
+    "cpu_ceiling_seconds": 240000,
+    "gpu_ceiling_seconds": 30000,
+    "settled_cpu_seconds": 181311.318401148,
+    "settled_gpu_seconds": 23462.140788896,
+    "status": "open",
+    "unsettled_reservations": []
+  },
+  "archive": {
+    "compressed_bytes": 10749532394,
+    "files": 92050,
+    "logical_bytes": 19034810517,
+    "manifest": {
+      "path": "artifacts/gpup-general-v1/portable/scale-delivery-v1/EVIDENCE.json",
+      "sha256": "eefd8b2e911de3169c83fcc6b8d8cf88237d6c46a31e3ec1212137e4441be2c8"
+    },
+    "parts_count": 139,
+    "prior_scientific_files_verified": 221275,
+    "raw_stream_validation": {
+      "partial": [],
+      "raw_bytes": 13695765344,
+      "streams": 104
+    },
+    "receipt": {
+      "path": "artifacts/gpup-general-v1/portable/scale-delivery-v1/receipt.json",
+      "sha256": "7584e25b355db7283c72799de3022b99d1fdf832c8c1f1b52a2f3a02d8c09d0d"
+    },
+    "unique_bytes": 17578633344,
+    "unique_objects": 7209
+  },
+  "checker_imports": {
+    "path": "artifacts/gpup-general-v1/sources/scale-cpu-v6/checker-imports/manifest.json",
+    "sha256": "29749419ba6659fc1c898bbb7b7f5ba59551fc7c0374a7040fcfe916f5eb2ef5"
+  },
+  "cpu_seconds": {
+    "admission": 39533.688414164,
+    "cleanup": 128.0,
+    "confirmation": 0.0,
+    "development": 68468.305125868,
+    "implementation": 17871.982730168,
+    "native": 27273.025640544,
+    "reporting": 28036.316490404
+  },
+  "environment": {
+    "baseline": {
+      "copt": "/workspace/AI-Optimizer/artifacts/gpup-copt-adapter-env/venv/lib/python3.11/site-packages/coptpy/__init__.py",
+      "numpy": "2.3.4",
+      "python": "3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]",
+      "scipy": "1.16.3"
+    },
+    "baseline_libraries": [
+      {
+        "path": "artifacts/gpup-copt-adapter-env/venv/lib/python3.11/site-packages/coptpy/libcopt_python.so",
+        "sha256": "f4d5280b94dab704dc7fadb8024b8ec947438a364456a4bc5f8b435146729c8c"
+      },
+      {
+        "path": "artifacts/gpup-copt-adapter-env/venv/lib/python3.11/site-packages/coptpy/coptcore.so",
+        "sha256": "cd80baacf015b98d576b15faeb3dd6d359f6d45990aab052f03341ca3786feef"
+      }
+    ],
+    "baseline_python": {
+      "path": "artifacts/gpup-copt-adapter-env/venv/bin/python",
+      "sha256": "ec7bbd05ff9733d03ce1aaaaed7c6825b038711c9fcbda424b309ff678080753"
+    },
+    "numpy": "2.3.4",
+    "python": "3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]",
+    "scipy": "1.16.3"
+  },
+  "failed_scale_charge": {
+    "cpu_seconds": 12000.0,
+    "gpu_seconds": 1830.0
+  },
+  "failures": [
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-copt-gpu-v1.settlement.json",
+      "sha256": "7aade4e9fde83176b92389612090bd7b65b709ae92881fa9e17dbb0591e5ca26"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v4.settlement.json",
+      "sha256": "8604e848390d8278efc82e6a2d6f6a7972967044835c876d962db9d22dfd0d45"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-tail-v1-m00.settlement.json",
+      "sha256": "2280f2f61914b61050b5b64e67a673c2ad295e1e27af7ddaa3a335b497779a0a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m20.settlement.json",
+      "sha256": "0554c6dfc2f6fc05b998a1c83db3819f9307d4fa3466f433482dc0e6b2e46de7"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-m07.settlement.json",
+      "sha256": "e512f8e9775d800e21dc1c3e51bc75b66b7c1cd3ffd299693f00f2095e45b828"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-gpu-v6.settlement.json",
+      "sha256": "1a9e8cd180b18d68eb5bd58711a546ce6c3a04b00cab9980cc519616fff00d5a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-host-build-v1.settlement.json",
+      "sha256": "603606a08883ca356948a986d7736e25cb94c7365066463f433693e7cb09d34c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m20.settlement.json",
+      "sha256": "77f2b57f37003a25547105df754f69bf9fe86a69e8ed14cd34cb3e4348a493ab"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-models-16000000-v2.settlement.json",
+      "sha256": "f150ef77acfbd1ec05d7aabbe9060f8d900701d10a93c711bcf34745802538f4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v2-m01.settlement.json",
+      "sha256": "2f8db255865f75ab41a9a51a4b2b5ba01e539294b90424a1d0d8ca0d1b060ab6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-public-pds-v1.settlement.json",
+      "sha256": "0e3b3974baea94f52857ff1be2744a446853c0e6a0fb1855d6b8c384eb586547"
+    }
+  ],
+  "gpu_seconds": {
+    "admission": 7237.261933791,
+    "confirmation": 0.0,
+    "development": 16224.878855105,
+    "reporting": 0.0
+  },
+  "historical_documents_preserved": [
+    "AGENTS.md",
+    "docs/plans/lp-benchmark-scaling.md",
+    "docs/plans/gpu-lp-precision-roadmap.md",
+    "docs/specifications/SPEC-0045-general-lowbit-lp.md"
+  ],
+  "host_target": {
+    "binary": {
+      "path": "artifacts/gpup-general-v1/scale-image-v7/executor",
+      "sha256": "4ccf035e3801a247570288b78380b6db2f1e9657770afdacbf41b016a6239a76"
+    },
+    "candidate_fingerprint": {
+      "path": "artifacts/gpup-general-v1/scale-host-target-v1/candidate-fingerprint.json",
+      "sha256": "c8c56d2d1d6a8df4000c5194d8fab265452205386db2c47c7284f2745cfc49e7"
+    },
+    "checker_imports": {
+      "path": "artifacts/gpup-general-v1/sources/scale-cpu-v7/checker-imports/manifest.json",
+      "sha256": "70d45154a6eb2e281d4751d4777892f652655afc2f8aa1c3fa3fa7765558e46d"
+    },
+    "original_fingerprint": {
+      "path": "artifacts/gpup-general-v1/scale-host-target-v1/original-fingerprint.json",
+      "sha256": "bcdfb8da1931e26a4622269ec03aed397fc25b4f5d40e9cc4efd34b13960cd6b"
+    }
+  },
+  "note": "Final source and settled resource bindings. Archive retains the scientific source/evidence snapshot; closing documentation and receipts are additive. Replay does not reconstruct missing timings or historical supervision. No confirmation, public adoption or publication.",
+  "operational_readmission": {
+    "path": "artifacts/gpup-general-v1/operational-readmission-v5.json",
+    "sha256": "2e5fc7e18501dc792681fc9de00ca8cd9c3fb7c7dc9d6973a6d96587d8ee0fae"
+  },
+  "proofs": [
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v6.settlement.json",
+      "sha256": "269b62118e28a3f11ccd058cf4a49fa224571962e7fadb28aacca3348efc06ee"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-gpu-v7.settlement.json",
+      "sha256": "3d93229ad99ae092287908ef361802d3349208e2e2e6159774c26ebf440f9b1a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-input-refusal-v1.settlement.json",
+      "sha256": "c8a477b62e7ef259d39b88e9b63eb1a49d0591ce7e6609c75c4d1044e9046b35"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-evidence-contract-v1.settlement.json",
+      "sha256": "a2f28229dc99eda2954f47b063ed9b5b0353db765e65de9c49a8ec0acb904717"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-smoke-v6.settlement.json",
+      "sha256": "ad0c03c2cd8d889ee583688377fd0697cde5fb5632077f6ed85a67b3864a3932"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-native-final-v1.settlement.json",
+      "sha256": "a063485cae4cbe1e09a3cbae47780971c03c1596db2f95be15aa0256aa872a04"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-python-final-v2.settlement.json",
+      "sha256": "6059f5d1e06af1b6499e8ba6129b39676112e31971f86f15b8ecc3db22a42115"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-python-final-v3.settlement.json",
+      "sha256": "4a051b4ba9f2433881ac7d1f7d6df50264c4d96841a986fa0d5415cdd366233f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-deferred-audit-v2.settlement.json",
+      "sha256": "33ce4a042bd3f0e4f94eec16e4dd61ef417c3384c8e0eacbea549a3342e82ff0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-deferred-smoke-v1.settlement.json",
+      "sha256": "876ec9658cb938a3ae378482cfa488ef4009f40b51ddd0043d1462d2913f8378"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-copt-cpu-v1.settlement.json",
+      "sha256": "f4dabcfc3bea561d25c7700653ad9dfdfb3fb8c477f33990f6486c019f03aaa3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-copt-gpu-disposition-v1.settlement.json",
+      "sha256": "ac45b652796e16957c124ec542f58348f76bc3c0e4c41cea4e7da58125138f2d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-replay-admission-v2.settlement.json",
+      "sha256": "7f8964518c428eaf780c80df6b236fb9c5f5db59a2834d1e88ca82b55fdf9288"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-gap-diagnosis-v1.settlement.json",
+      "sha256": "936b55080f440145d89362f4ab6d36c0d287659b2ec9db7078db68b496b3c7ad"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-memcheck-v7.settlement.json",
+      "sha256": "68175cf1a778cf27619bd3521c23246dc8359dc80a26d922045a88629cdb9f76"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-racecheck-v7.settlement.json",
+      "sha256": "c719d755163548742f4e5a38f00344f9958ad0025160ff80063def9b31eefe22"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-initcheck-v7.settlement.json",
+      "sha256": "b8e4fca642e5c9f71f826e1308070cb46b75dcc8424a0a268fa0d0ab759e319e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-synccheck-v7.settlement.json",
+      "sha256": "05909c4f1762ed6f0e758cd7c4e0d08475ba015fb646baa4d0b401afeff0be82"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v7.settlement.json",
+      "sha256": "9d9a343c7b68ac8b028751c2c9d1064b52371e425f10ccfae6fed2c417f87aa3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-gpu-v1.settlement.json",
+      "sha256": "3fed995f535c828eaa3421795527359cfae00d74489ca895ec415a92efed604c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-frontier-report-v1.settlement.json",
+      "sha256": "2d23be46096fa1761326ad58df8fc0b61497b0d82ff60c189ca265ff94cb6e05"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-report-v1.settlement.json",
+      "sha256": "ea710f62375b8d6f3f60c16aabcce8c81a20745159497139144fa1fd4cd265a2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-memcheck-v1.settlement.json",
+      "sha256": "100fa41eafb70e531fb7196d85efaff1816509874352fb789be41e241d5319a1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-racecheck-v1.settlement.json",
+      "sha256": "7fd7bd3751b0392c3e8822f73d993bbd382593b51c63fd50616d12000ce9c962"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-initcheck-v1.settlement.json",
+      "sha256": "84546e6c62449eb4d63516dcc2ef251f4953d0c2372759a6c0ec38e888334bed"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-synccheck-v1.settlement.json",
+      "sha256": "fd8d65973189ecac0f32cf8545c724905815cd0bfd7c9f697420c6a68366f0c4"
+    }
+  ],
+  "replay": {
+    "byte_files": 92050,
+    "receipt": {
+      "path": "artifacts/gpup-general-v1/portable/scale-delivery-v1/replay.json",
+      "sha256": "c9c2befc8cc2992c052d74a3a896fc97b5b832deda922a288b8304a00a1d283f"
+    },
+    "result": {
+      "admission_responses": 707,
+      "assessments": 10457,
+      "baseline_admission_responses": 11,
+      "cells": 897,
+      "claim": "Exact archived bytes and CPU original-model replay from extracted root. Raw-only checking does not repair missing historical supervision or cell receipts.",
+      "distinct_assessments": 4407,
+      "missing": [
+        {
+          "campaign": "scale-final-main-tail-v1",
+          "cell": "m20-r0-t0-fp32",
+          "raw_retained": true
+        },
+        {
+          "campaign": "scale-final-main-tail-v1",
+          "cell": "m20-r0-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-final-main-tail-v1",
+          "cell": "m20-r0-t0-copt-cpu-auto"
+        },
+        {
+          "campaign": "scale-final-main-tail-v1",
+          "cell": "m20-r0-t0-copt-gpu-tight"
+        },
+        {
+          "campaign": "scale-final-main-v1",
+          "cell": "m20-r0-t0-native",
+          "raw_retained": true
+        },
+        {
+          "campaign": "scale-final-main-v1",
+          "cell": "m20-r0-t0-fp32"
+        },
+        {
+          "campaign": "scale-final-main-v1",
+          "cell": "m20-r0-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-final-main-v1",
+          "cell": "m20-r0-t0-copt-cpu-auto"
+        },
+        {
+          "campaign": "scale-final-main-v1",
+          "cell": "m20-r0-t0-copt-gpu-tight"
+        },
+        {
+          "campaign": "scale-final-pilot-v1",
+          "cell": "m07-r1-t0-fp32",
+          "raw_retained": true
+        },
+        {
+          "campaign": "scale-main-v1",
+          "cell": "m20-r0-t0-fp4x2",
+          "raw_retained": true
+        },
+        {
+          "campaign": "scale-main-v1",
+          "cell": "m20-r0-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-main-v1",
+          "cell": "m20-r0-t0-copt-cpu-auto"
+        },
+        {
+          "campaign": "scale-main-v1",
+          "cell": "m20-r0-t0-copt-gpu-pdlp"
+        },
+        {
+          "campaign": "scale-main-v1",
+          "cell": "m20-r0-t0-native"
+        },
+        {
+          "campaign": "scale-main-v1",
+          "cell": "m20-r0-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r0-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r0-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r0-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r0-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r0-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r0-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r1-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r1-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r1-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r1-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r1-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m01-r1-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r0-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r0-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r0-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r0-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r0-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r0-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r1-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r1-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r1-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r1-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r1-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m02-r1-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r0-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r0-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r0-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r0-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r0-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r0-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r1-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r1-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r1-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r1-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r1-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m03-r1-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r0-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r0-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r0-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r0-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r0-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r0-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r1-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r1-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r1-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r1-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r1-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m04-r1-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r0-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r0-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r0-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r0-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r0-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r0-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r1-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r1-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r1-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r1-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r1-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m05-r1-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r0-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r0-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r0-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r0-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r0-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r0-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r1-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r1-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r1-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r1-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r1-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m06-r1-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r0-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r0-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r0-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r0-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r0-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r0-t0-fp32"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r1-t0-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r1-t0-previous-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r1-t0-previous-fp4x2"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r1-t0-fp4x2-split"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r1-t0-native"
+        },
+        {
+          "campaign": "scale-pilot-v2",
+          "cell": "m07-r1-t0-fp32"
+        }
+      ],
+      "partial_responses": [],
+      "raw_only": 4,
+      "raw_stream_validation": {
+        "partial": [],
+        "raw_bytes": 13695765344,
+        "streams": 104
+      },
+      "status": "passed"
+    }
+  },
+  "resources": [
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-archive-v1.settlement.json",
+      "sha256": "1c3fef787b44aa650358abbdab17f859a91b4e3cda85659c6d9841ab12fde894"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-catalog-v1.settlement.json",
+      "sha256": "1d3c5af4377c80a5e78c554d59af5b4a6b10b782f8ecd7d6fb57cbb6fd2a45a5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-copt-cpu-v1.settlement.json",
+      "sha256": "f4dabcfc3bea561d25c7700653ad9dfdfb3fb8c477f33990f6486c019f03aaa3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-copt-gpu-disposition-v1.settlement.json",
+      "sha256": "ac45b652796e16957c124ec542f58348f76bc3c0e4c41cea4e7da58125138f2d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-copt-gpu-v1.settlement.json",
+      "sha256": "7aade4e9fde83176b92389612090bd7b65b709ae92881fa9e17dbb0591e5ca26"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v1.settlement.json",
+      "sha256": "bf561a8657a0f0d808de133b9899aeba21e8e96880c1d45aa4e430f678d090f9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v2.settlement.json",
+      "sha256": "bb20124ca9d80e5fdd72c065144d7062c74e106249c24630783a058fe5dc9f41"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v3.settlement.json",
+      "sha256": "8e4a1d7cc95433e2afbf0a04e5c895578217a99b25c961936405902ba417ab7c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v4.settlement.json",
+      "sha256": "8604e848390d8278efc82e6a2d6f6a7972967044835c876d962db9d22dfd0d45"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v5.settlement.json",
+      "sha256": "0c89e87fd3d74b78eea38d434d0407cd9935817f7974fa17e8a8e6633040a43e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v6.settlement.json",
+      "sha256": "269b62118e28a3f11ccd058cf4a49fa224571962e7fadb28aacca3348efc06ee"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v7.settlement.json",
+      "sha256": "9d9a343c7b68ac8b028751c2c9d1064b52371e425f10ccfae6fed2c417f87aa3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-deferred-audit-v1.settlement.json",
+      "sha256": "875eae7484d4318beee283b97173cd6fdc2bcdfd3e3b17876d3c4614fb59729c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-deferred-audit-v2.settlement.json",
+      "sha256": "33ce4a042bd3f0e4f94eec16e4dd61ef417c3384c8e0eacbea549a3342e82ff0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-deferred-smoke-v1.settlement.json",
+      "sha256": "876ec9658cb938a3ae378482cfa488ef4009f40b51ddd0043d1462d2913f8378"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-docs-final-v1.settlement.json",
+      "sha256": "0f1e5a18a5f3c03c1c908a1c888ba9830485013ff1d1e7145f00910181c15054"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-docs-prearchive-v1.settlement.json",
+      "sha256": "a2364bb3510c0914c937521b115d076eff8006983227bb37e9496a2cad4b516f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-evidence-contract-v1.settlement.json",
+      "sha256": "a2f28229dc99eda2954f47b063ed9b5b0353db765e65de9c49a8ec0acb904717"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-freeze.settlement.json",
+      "sha256": "ca3ff5a48f0121b6eed1cb2c9ad9848a1d3c7ffca7ef7a9294f42f77ad675744"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m00.settlement.json",
+      "sha256": "d7d1f83a1975eaa76ee45cc5b5f4bd9fccd0a68bb5290aecf14dcc97c5c839c6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m01.settlement.json",
+      "sha256": "ccf0a7d2a7f44a656f2cf69bdef6a0b963785d5065d0bca997a52c5b31c49244"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m02.settlement.json",
+      "sha256": "3344220e2102093309c25f78fbc065ac63923ea48dc9451d61925d3f2d379973"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m03.settlement.json",
+      "sha256": "ad2c5f15ce4c4986b2068363ad6c0c0efbab664e51602b51646e1632db7a040e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m04.settlement.json",
+      "sha256": "95d72a1c99256759b644152299c8ffeeb431b2d6f05397b80b6ef4a5ff0d63e3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m05.settlement.json",
+      "sha256": "d5ce40c0553b8a44d77c4b7fd5f89368ae70e12a71d6132189f95bcdb3b65b75"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m06.settlement.json",
+      "sha256": "25078c11a56aae4acc8ebfe69fa1101b35d7375d4da8bc95bbda6c2b1f73bda2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m07.settlement.json",
+      "sha256": "09acf21028d0f6f8e1c386170ce6a2b724173d50dae0ede6e35a8953b6ee3f45"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m08.settlement.json",
+      "sha256": "c5f100b9d3eac8958d72584a04b3cc67b7ae051f44d61dc18f07f3f7e0e8f979"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m09.settlement.json",
+      "sha256": "fe7238164f2f951b70311d7363e63906c64042c854984ebd3a97091ace00ef43"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m10.settlement.json",
+      "sha256": "22fc21daaa41032136acd37a8e0b6c431ee5a151a263dfae66967bda52baf75b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m11.settlement.json",
+      "sha256": "1136b3b34215930bf7b2c9d967273b0baa8c97442949462f24b07af90c5bac45"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m12.settlement.json",
+      "sha256": "443d8daf462e75548bafdf434175d3999c80c32cbaf708ded4e42b6ef60f6f6b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m13.settlement.json",
+      "sha256": "e2c806a603ddb77d00a8a7d3353271700cff6a4c6e9e67a131d045be0124a50f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m14.settlement.json",
+      "sha256": "9a421c552fbefb6c1002dd934989f3c8da9c97b84339d058b422df91efcda619"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m15.settlement.json",
+      "sha256": "93cb9b99990ce3e3527b8009f4a4b02e86bb64b2ebbc8707c66d8786f3f4a7a3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m16.settlement.json",
+      "sha256": "4132b54a2dcf35106638b20469ea752e6f94f14aa67dd51b8a29589008a48062"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m17.settlement.json",
+      "sha256": "7953105722752cdc3f22d465118db8ac7c0d5e37afde837a6e18329023d30185"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m18.settlement.json",
+      "sha256": "6e2c36d8c001bb7aea6d0f892fb56125a82113f05e4efebd783ecc013c2cb6cd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m19.settlement.json",
+      "sha256": "86b9bbf9b6f3e941c0a29a1a79508e24dc0f7ec218b5fafc48b96c327b803680"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m20.settlement.json",
+      "sha256": "f81fe94dbf8f247f7e5f1e60e4b34a5c42624d16ac30b438efc8fba58969e4d5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-broad-v1-m21.settlement.json",
+      "sha256": "73ba4d65ad94d35d45ae1a2e3daf468fac595dba9979aa0dd80d0bbe0e25bf63"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-tail-v1-freeze.settlement.json",
+      "sha256": "08950927575fd9365569a31808924737709564c2c5513fc2776b0ee7ad8fc23b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-tail-v1-m00.settlement.json",
+      "sha256": "2280f2f61914b61050b5b64e67a673c2ad295e1e27af7ddaa3a335b497779a0a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-tail-v2-freeze.settlement.json",
+      "sha256": "bec2112cd4edb34532d3870e0fe82733776bf99cb6fc457dd3b8597cf8f3b3c7"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-tail-v2-m00-audit.settlement.json",
+      "sha256": "7e8a1f55d262aad7dd94e65bce1e0c150fe24e165d08efd4bce71b47227d16f8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-tail-v2-m00.settlement.json",
+      "sha256": "fbc9a9137a9531f13a4e2a85d489802a4d33e3917bc88b9da9b5aed4c8bb66f4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-freeze.settlement.json",
+      "sha256": "0a66647c663679f4cfdd4e411ce757d48f2219525b76fe523f9b758a395bdc71"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m00.settlement.json",
+      "sha256": "c15c41d14f18fe7d072104b9c0446af45a5c47bd84dd65d5beb0a5dd7a41ca1e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m01.settlement.json",
+      "sha256": "4ed4e1117c40bc4500b8c3b7531f5dcfa65196f877a70ab5b6cc1750fcd9a26e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m02.settlement.json",
+      "sha256": "a047524df4ba067c13fb80704dbc415591db30df14db4fa5ac2d95097fd92f58"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m03.settlement.json",
+      "sha256": "befc2186fedb1e7b07d0b5f2737bcd367ef5fbbb48fb812bccda3bbff26a47fd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m04.settlement.json",
+      "sha256": "12437dbdf0e7e6d8fea0a8f8f63a49c342cbc29eaede67080e235d6c10733580"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m05.settlement.json",
+      "sha256": "756acdf295155f94b3e8aa114d31fa81b0f4350bc814021f59032e0c317b9534"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m06.settlement.json",
+      "sha256": "2d02873f77b5ab559e1eb29a89787e53f52454d8c596a081068b087ce5689029"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m07.settlement.json",
+      "sha256": "54d30c0083d992f3286dd6c32b564747f121f1e05156c49097a464f40d2cd306"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m08.settlement.json",
+      "sha256": "768ce4d58bd39ac10884fdd3aef09628d2f3879049f739369f2b698e214032bb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m09.settlement.json",
+      "sha256": "937bbeef990e6e360fdf7bfa5fc44460feee8b2dab605ae4aba299b985926639"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m10.settlement.json",
+      "sha256": "8d8d1d03544e786b9cbcbc444a5482cdaea162184689b29298218f3409bc8dc4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m11.settlement.json",
+      "sha256": "ff152f7a778bfa44c467c73ce493e59cc28c4a0cff8fbfa55f5737beefa1c8d5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m12.settlement.json",
+      "sha256": "411f6cd0fa3722ed17d503a339cf7b102710b59957bf3a0b11a9076cea13bc8b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m13.settlement.json",
+      "sha256": "1b460928f327e64b0b74e60a762e1444d563b9f92a2481f3b8a760c68a6511a0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m14.settlement.json",
+      "sha256": "c10ecc39b62541168a7397b6fdc3fa193db2121df9288b65378a9178cd611f69"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m15.settlement.json",
+      "sha256": "b7471fb7e29f44c9e4fb844d7892ee65923586a5af4ad36fe357721e6c45331b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m16.settlement.json",
+      "sha256": "eb5d93bbb24f7bdd065611a673ea315944938d453298ed98518bfd3fe470773c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m17.settlement.json",
+      "sha256": "0cdcbaeee56cd24e27450837de181ab4b36ca385d113a15ce282814f64014e4b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m18.settlement.json",
+      "sha256": "bac7e2472836977953704328ff53a77f921a221097a25865951f604b65644680"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m19.settlement.json",
+      "sha256": "25421babf53100ae715afc37169e9f9c9f281949d012bb43830ecf20a06a47b2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-main-v1-m20.settlement.json",
+      "sha256": "0554c6dfc2f6fc05b998a1c83db3819f9307d4fa3466f433482dc0e6b2e46de7"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-freeze.settlement.json",
+      "sha256": "a9632044201c2575cc8586309812f27bd2e94a3b06bce8ff7e321685ee00510c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-m00.settlement.json",
+      "sha256": "2e0d5a2ebbd065bcb3702724b0d0e350cbc8d516523b09a8456835a74d60dffc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-m01.settlement.json",
+      "sha256": "0343cb979bcfdcc77fe84ae303423b60a471bedd238dbf261679b63c5438546f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-m02.settlement.json",
+      "sha256": "ff438a0808d6256f65bd5174cbb43931ced83f828a188a21a89afd46aafa7197"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-m03.settlement.json",
+      "sha256": "0e408b27d7fc3996c32176696274a1a1561d74e16d56cba29dd0144de5bcf626"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-m04.settlement.json",
+      "sha256": "b121c440a83b64d5cda6c6a16b8ae3b0c83ff76d1fec6db841b6ffc5b841f711"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-m05.settlement.json",
+      "sha256": "b29ad8eafff61e66c5c713b93f44ffda0edf0196717b549e5c69f16df4a4d5fc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-m06.settlement.json",
+      "sha256": "e794cdf441fb994f873b32bc93cc33c47cf07cbaac91724cf4b98b34db9c9ccd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-pilot-v1-m07.settlement.json",
+      "sha256": "e512f8e9775d800e21dc1c3e51bc75b66b7c1cd3ffd299693f00f2095e45b828"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-final-report-v1.settlement.json",
+      "sha256": "8b421005463c05115ab63a8fef6d4cc987297308e05f18421681c03e56d77227"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-freeze.settlement.json",
+      "sha256": "4737b41a3a438a5e31dc0996c2c47cba1950e0b458f48400bb04062f3e57d7e5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m00-audit.settlement.json",
+      "sha256": "ca7c00f201ad2fa2d5959a84eea06ddbbcaeb42acf2d22e0fae72aacfdf2b3ae"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m00.settlement.json",
+      "sha256": "6536b66f31bd8ff1cc4fefc861cbda803c776637afd6504d32895b8ed3f04389"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m01-audit.settlement.json",
+      "sha256": "8e96e61c2448eddf1fc6a07a84d1c6f771b48003305627f7f9146c7d81cf2237"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m01.settlement.json",
+      "sha256": "ee5b474bc5779749170f10286ce58dfce556a02c04f5c71dd2fd6bb5a927829b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m02-audit.settlement.json",
+      "sha256": "bda8de9fb8f0dbbac2071b2d815db3febdc16502ac94ddca6507c42e598cd9d8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m02.settlement.json",
+      "sha256": "5dcae0801cd2f53bcc3c2a8f29de79fc66dc79f602422a11e41b7da761b638bd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m03-audit.settlement.json",
+      "sha256": "90633b2516ea6c99deb845a334473c13d352ae58039621da8b7ef02c26bc5a43"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m03.settlement.json",
+      "sha256": "0ac933d8297a6af26dc54e1b892fa1342dbf988c6dab17e688dc7fa112a74ba7"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m04-audit.settlement.json",
+      "sha256": "06f1fde4a6c422c0b611897e0617c7c74c7e8662ffc12356c115c5592e9301e9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m04.settlement.json",
+      "sha256": "94eff8d334b86013dcc1e56cf1ed0dc1e2398b127a15d92ad43fb81afdd414dd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m05-audit.settlement.json",
+      "sha256": "2644caee33593fe2d18bc8a2fa4014a95c0d66b193bb0992df04ec61a855a4bf"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m05.settlement.json",
+      "sha256": "0a46bad06c3189c142f4a7fdb27e547a0791f23085a1d8c066113a1beacdc817"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m06-audit.settlement.json",
+      "sha256": "1ae2ec7ea9389bdc1d51cfe03720bf30fdac40c154458912605de594da23d960"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m06.settlement.json",
+      "sha256": "92f0d67dd3907cd9993560413beb3c462c0bc569152ae12c940d90a3b7106943"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m07-audit.settlement.json",
+      "sha256": "abb43c529fe5ca380fe02abd11e7586189e9e69b0eac5eb1e6457e1596fe533a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m07.settlement.json",
+      "sha256": "d1d3a69e4fba1f2b82fc1ba323ce9c861fe0334af9a7bf8224e5d1ead2d5d580"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m08-audit.settlement.json",
+      "sha256": "c899f94a3e6aa4f54dc17c657580109dc02dfd6d5a093f41aa6aa8e3cd84a531"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m08.settlement.json",
+      "sha256": "922488bfc790c9a5ee44de334a80c568c7f50a9a56a72fb55706e01519d4fa41"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m09-audit.settlement.json",
+      "sha256": "f4737a40fea4b342673e39eb1e669f749f66287bfbc51846e8510ee995e91648"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m09.settlement.json",
+      "sha256": "4e3639e1fb9261d397ed6fc5b251301bb0d5883f92eeb17d7dfdebd3223042ba"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m10-audit.settlement.json",
+      "sha256": "f2fd0c55999e79fa57b8d1e64d170b4a4546204638214d06eebbc38afc88f9c3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m10.settlement.json",
+      "sha256": "35a554c4cb0a47a0f9907e2009575297e4fc00335c8c34c8d0400ceb3a0693bb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m11-audit.settlement.json",
+      "sha256": "4514fd742f902a0f87745533f84fdecd4bdddc7c7aaed1c8fd4160eeef47edc0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m11.settlement.json",
+      "sha256": "f5bcfea65c3c9bf327791f88c326c9ed5ee947d64c2d520a636d923a7b251afc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m12-audit.settlement.json",
+      "sha256": "503b5a9d1e8f1d47e9118afb820422262bf26072005949da9782e74ed2547bb1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m12.settlement.json",
+      "sha256": "4bffc0fd4ca76f7b3ae114db8431e1868ecf3e1bb2c4250fd6cfad136c0e1118"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m13-audit.settlement.json",
+      "sha256": "d1dba0e10d823b9cf38e7a549cb70db81a10e39f4476611646b42c44e90fc42f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m13.settlement.json",
+      "sha256": "06c6d718390ff43a3c1a3ab0ab6ad3ade8d8bb91a9bdaa9220d269479fbcea0c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m14-audit.settlement.json",
+      "sha256": "5342d04e0d9d4e96c48604c6443be09f637d26423c9f53a5aa40c4083db6fb44"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m14.settlement.json",
+      "sha256": "6a535665b82b6b218497a10051b2b63519d0ff0e58f28b7a1ff83543ef9ed632"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m15-audit.settlement.json",
+      "sha256": "382397e6586ed7b650ec19e0ffd3d0bf9be13dbb237e4e7350c255bac14a5c79"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m15.settlement.json",
+      "sha256": "00ed1688ea86b9cdfc09c085961094012e56898ab7a0ec85161069d361737fcf"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m16-audit.settlement.json",
+      "sha256": "c8e6fdb2d4e18e777fd128fd3bf16b99ce496802553bed97176673a46cb574c6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m16.settlement.json",
+      "sha256": "489289315b63de77b395d40a69bf7dd0a124fc150b69f80cb178ac2e47fbeb7b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m17-audit.settlement.json",
+      "sha256": "192e572efcce035df797b4a2f70e4c6a94d56f1d62f83df6d6809e46af5f659d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-four-million-v1-m17.settlement.json",
+      "sha256": "60bc8b3b580ae56b925dc9316e086bf0e71df65baf07b0a2846ad2bf2e7578ba"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-frontier-report-v1.settlement.json",
+      "sha256": "2d23be46096fa1761326ad58df8fc0b61497b0d82ff60c189ca265ff94cb6e05"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-gap-diagnosis-v1.settlement.json",
+      "sha256": "936b55080f440145d89362f4ab6d36c0d287659b2ec9db7078db68b496b3c7ad"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-gpu-v1.settlement.json",
+      "sha256": "30b9944dbacf818bf92d67f360eaf22f4216251960447fddf870b9a59df926b8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-gpu-v2.settlement.json",
+      "sha256": "06ddc2242402c15f39b5603fd589abf599bafa5e15852df0ecebae8b645baf1b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-gpu-v3.settlement.json",
+      "sha256": "b2be231c62eb2428a6912457c1ff26b46846021811ab65e3cf8716f1b40dbe09"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-gpu-v6.settlement.json",
+      "sha256": "1a9e8cd180b18d68eb5bd58711a546ce6c3a04b00cab9980cc519616fff00d5a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-gpu-v7.settlement.json",
+      "sha256": "3d93229ad99ae092287908ef361802d3349208e2e2e6159774c26ebf440f9b1a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-harness-smoke-v1.settlement.json",
+      "sha256": "5e2e469c466588ae4d8ef51e62d2a93683366d6bf59aab506e8ad06806fa1542"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-host-build-v1.settlement.json",
+      "sha256": "603606a08883ca356948a986d7736e25cb94c7365066463f433693e7cb09d34c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-initcheck-v1.settlement.json",
+      "sha256": "5d2dd051323fc9fe100242a3549d6d8083419f27a06fe8aa29019fbbab6e77c0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-initcheck-v2.settlement.json",
+      "sha256": "aa11565a107a3e37e16da6717d6886f06b58b062bd53290a22700adb93f1430f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-initcheck-v3.settlement.json",
+      "sha256": "930d862f7eacbed80f0cd28e81a03a8c1d73e55ec9bb7c1fab2c5b70dcd1b3be"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-initcheck-v7.settlement.json",
+      "sha256": "b8e4fca642e5c9f71f826e1308070cb46b75dcc8424a0a268fa0d0ab759e319e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-input-build-v1.settlement.json",
+      "sha256": "943ce220fb6ef24c7d42d4112677ec71e50ea511cd91435de10a08878fcf4a1f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-input-refusal-v1.settlement.json",
+      "sha256": "c8a477b62e7ef259d39b88e9b63eb1a49d0591ce7e6609c75c4d1044e9046b35"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-interim-report-v1.settlement.json",
+      "sha256": "5b0fb72dd8b65dbfc8365aff6a514728d6447bfc20c3608d18cbcdd5f01558ac"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-inventory-v1.settlement.json",
+      "sha256": "81c30bde476a920a8e6cbba210f615c9271da962bd8971e00da6321c548f7642"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-inventory-v2.settlement.json",
+      "sha256": "73a7b4c80aaa01bd6d8c5667d87a3447ca04a15a54d108cc38fde6f33c11d799"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-freeze-v1.settlement.json",
+      "sha256": "7076070485ce5eeaed50088808f4527e18c678e7cf402925035504dee22c4b22"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m00.settlement.json",
+      "sha256": "c52f18fe60c4968deae48b94e093f8d2db28e0e37e879bc1f7a0d185588ee758"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m01.settlement.json",
+      "sha256": "281f0e24084fd15b87f83ca36eea17fd6ae414f434c5a59d3410ed2f5fdf7759"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m02.settlement.json",
+      "sha256": "18b8b26a55ac55da4ec0db50f4648118e463c0d2135a8eb916ff9e56ead8dc34"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m03.settlement.json",
+      "sha256": "5877fa03528cd1fd5d088c40d11a78ccbc24d1ec57a125faa6cde972178213a8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m04.settlement.json",
+      "sha256": "0c4315de811c187c9e623db00d1b5aebd14e2b73de270ebc94a9956df071663f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m05.settlement.json",
+      "sha256": "a81a7b86e845cb91fdf8cd51fa12aabf4a757c44da79679accdb6b0f5fa24755"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m06.settlement.json",
+      "sha256": "d00362bf84e5f59624cf314e8c506d88bb0e1374dba9d1c2289c4f00ea19b5d2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m07.settlement.json",
+      "sha256": "d5b157aeaecb2310891d5e40e419e235d3e8475230c9d97dced00acfa9087010"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m08.settlement.json",
+      "sha256": "1c4c892ef0ece11ea257f329655e44f5fa28c40466a26580cf458e884f730464"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m09.settlement.json",
+      "sha256": "ea6a4a2fae432822c0526d077952684ffc000849b08add0f50406e6f3d09ae7e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m10.settlement.json",
+      "sha256": "f926875c48f4390bc474fb852987cd5ccf560b40a4f8062da1fe7eb363c0fb03"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m11.settlement.json",
+      "sha256": "2ee6fbbec259dd045bec3e2b3e87248d956155c27dc0eac96eebcd4dc649292a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m12.settlement.json",
+      "sha256": "3310e22c90ab1aaac3be01de2714ea6b113d188b1659d71eeece13c54f52b676"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m13.settlement.json",
+      "sha256": "f0f99b7705b348f9bd0f31a58f5091e0c6ef554a170bc88df6ca1cba78fd7d4a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m14.settlement.json",
+      "sha256": "1f6628c46af6ca516f743618b34e52723215b08093f7d2165c7cb991bb969049"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m15.settlement.json",
+      "sha256": "8b2241fa5f1b2995efc1267128bf7ab956d116c12ff8a1030e55a10736de06dc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m16.settlement.json",
+      "sha256": "3d2a9984834d61852193a3a39922dd573f7f4000eaa763ea2495edb9f3a78142"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m17.settlement.json",
+      "sha256": "c98de88dd759d5c02b1f943d79ea6f881b8343f5104357fe013dbc5a9e85b8c6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m18.settlement.json",
+      "sha256": "8141d0d3a4668f58d67dd09baf743b8415aa9625484fedf91d853b3741b749bf"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m19.settlement.json",
+      "sha256": "f2b23ac705b2c7de678474e7726efb6507c1c962c07351de14af40689a078c7f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-main-v1-m20.settlement.json",
+      "sha256": "77f2b57f37003a25547105df754f69bf9fe86a69e8ed14cd34cb3e4348a493ab"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-memcheck-v1.settlement.json",
+      "sha256": "e19d9556a09822db07629af20f684a0f594c64f7390005fa64c36e5aa5d283a9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-memcheck-v2.settlement.json",
+      "sha256": "1b718056140016e7bbf5831a8e010645d4d7d99303c4a6ce7afd2151a28fd6d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-memcheck-v3.settlement.json",
+      "sha256": "5228d00fcacd7a3b57a3cf02659e7794035964854a720319b1fd56fc870dcb3f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-memcheck-v7.settlement.json",
+      "sha256": "68175cf1a778cf27619bd3521c23246dc8359dc80a26d922045a88629cdb9f76"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-models-1000000-v1.settlement.json",
+      "sha256": "56714b57f53d4f6a2685076e657018e350cedaa31fc02f5494001a1f97626060"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-models-1000000-v2.settlement.json",
+      "sha256": "37a16141918d83b11f55b9fa99d1f1ac8e32768f61527499f552913419266fc8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-models-16000000-v2.settlement.json",
+      "sha256": "f150ef77acfbd1ec05d7aabbe9060f8d900701d10a93c711bcf34745802538f4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-models-16000000-v3.settlement.json",
+      "sha256": "00c20a2be4bbc0bbb40bf8f6ad2272dfe05f30332b67fb4d2e4e86192242b5b3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-models-4000000-v1.settlement.json",
+      "sha256": "dcc026724d89cd24bfbb831f8ebba8dbf51806ad43039061a3e37ef11d18263b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-models-4000000-v2.settlement.json",
+      "sha256": "e85b8abc375635a02629bd0356ebf3bb21af4d3da2f90bfc195664b292b00ed4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-native-final-v1.settlement.json",
+      "sha256": "a063485cae4cbe1e09a3cbae47780971c03c1596db2f95be15aa0256aa872a04"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-native-v1.settlement.json",
+      "sha256": "5cdecb45aa180fa7942aacba6fbd6aec2aad69e880142b56284f4ee6396eec26"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-operational-v1.settlement.json",
+      "sha256": "1205db19b5b599a7b4582d86cfdf7f35b93864fc053ac4d67adfe0a10188ec16"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-operational-v4.settlement.json",
+      "sha256": "9cdf4e430b4d4d1d65662cbd139e9ae2da72bb8220ca22b0859e1e6ee821f42b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-operational-v5.settlement.json",
+      "sha256": "30b8dc42bd91d2990ecddc780823b1581d993b998fd400918a9ea7729b13d74e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-freeze-v1.settlement.json",
+      "sha256": "611cdce4aa3ba9af32bf0cb88ff1146fd6fc6fa8b75ceb46291f8f31950c058b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-freeze-v2.settlement.json",
+      "sha256": "73258cf83434ac55c29831111f8720b9295e7729be54269779ee695717212f0b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-freeze-v3.settlement.json",
+      "sha256": "7308d0e45ec07427de771fe56037a03e2308bd4372fb3a8df5e71be89987a511"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v1-m00.settlement.json",
+      "sha256": "fa9916b8df4e9a54704f9140b7ff038b6bdcba4c70b4799dba06e2bd5f758601"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v1-m01.settlement.json",
+      "sha256": "067daf9e6e4f5a9ea334af4991419f00b729f6e8e9fbeb585629552c278988bf"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v1-m02.settlement.json",
+      "sha256": "867c73c1af082813fdfd7d46536ee5614a1b10663c6d8b366f5e9263e0deb521"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v1-m03.settlement.json",
+      "sha256": "6ecbe36a83917bc50ee192e2624668540aa99422b1c9854af3d045c419fcd850"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v1-m04.settlement.json",
+      "sha256": "542be836fa7d9e3cff3bc02cb09347069ab3b1edf26f4cece1e8feccce7792da"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v1-m05.settlement.json",
+      "sha256": "bf336c56782a1da54309a93e17ec62381c4ed777330dfdf6cf4e6d082281c88c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v1-m06.settlement.json",
+      "sha256": "4fb5ded349ecfff337ee26723487a9dff03a867cb42ef3203dfa9d7bb240b215"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v1-m07.settlement.json",
+      "sha256": "085ffeadf8b6f22a5f359b0033c936987d31d2d3995ba9e1bce9654e3d52f132"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v2-m00.settlement.json",
+      "sha256": "d6cd1f2c814fd955739d27e88f25eb1f463ca85e8f7859598562ccf6de53e48c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v2-m01.settlement.json",
+      "sha256": "2f8db255865f75ab41a9a51a4b2b5ba01e539294b90424a1d0d8ca0d1b060ab6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v3-m00.settlement.json",
+      "sha256": "bc408bcd349ba59546da361f910779ca3bdfe70625db67fc5f6fb09ff29a0d81"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v3-m01.settlement.json",
+      "sha256": "173a390c4bd9dc2541ee80939353fb53cb94c3695f9786e9e828787981815157"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v3-m02.settlement.json",
+      "sha256": "da0f535690dd575a2ba2926fb71113e4deab2c332dccc669982c852e7e8905d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v3-m03.settlement.json",
+      "sha256": "11f79c835953eda84a2716730773b377b65b7cd84c04cbe35de8e4cdef8fcb6d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v3-m04.settlement.json",
+      "sha256": "bcc71260711db888f29737f7e7acd0220e483a9dc2d8140b35e4c69592ebb6c4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v3-m05.settlement.json",
+      "sha256": "fa6bdfe98ee67c8b6ddda00dbd56ffe90739ab7fa00c42c41a8066438027017b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v3-m06.settlement.json",
+      "sha256": "58f0450874f3f8c73dbf318548833bcb093ade691419258a87789fd42d4b0835"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-pilot-v3-m07.settlement.json",
+      "sha256": "b09a7c8d404837de06783a4ac9a86934a11b8956fec9c42aa7e9cc4ae8c12337"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-portable-replay-v1.settlement.json",
+      "sha256": "0ddc0250872cdae98fb7d3ed27f7a435a3c4860f285ba4d8fdae19bad1dba9df"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-public-pds-v1.settlement.json",
+      "sha256": "0e3b3974baea94f52857ff1be2744a446853c0e6a0fb1855d6b8c384eb586547"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-public-pds-v2.settlement.json",
+      "sha256": "ba197e60ee319d807076a259130d418e48609487dc5a6fb06c3d78cdd1881c76"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-public-v1.settlement.json",
+      "sha256": "f23fc990662a0a45653cd268f498d0cc2bad75575ff5ce7fbc1f3ba66a4facf0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-python-final-v2.settlement.json",
+      "sha256": "6059f5d1e06af1b6499e8ba6129b39676112e31971f86f15b8ecc3db22a42115"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-python-final-v3.settlement.json",
+      "sha256": "4a051b4ba9f2433881ac7d1f7d6df50264c4d96841a986fa0d5415cdd366233f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-python-focused-v3.settlement.json",
+      "sha256": "75f76d77f67165406fd5bff55807e3173f61341a490ef701cdeb1d7733de85c2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-racecheck-v1.settlement.json",
+      "sha256": "62183277dd2668e5c5680a1af09a07bf95fb7c9bbb3d06df70c1b0365e0ef912"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-racecheck-v2.settlement.json",
+      "sha256": "c32f41f753a131fea9eb5c96843e44e7e036fc1a926ab2b18bda25e7ce688ea6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-racecheck-v3.settlement.json",
+      "sha256": "9eb1c855855beb21c5b2a0f73802f430a2c8bf4ee89899a565370f1b383e6362"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-racecheck-v7.settlement.json",
+      "sha256": "c719d755163548742f4e5a38f00344f9958ad0025160ff80063def9b31eefe22"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-replay-admission-v1.settlement.json",
+      "sha256": "6978a2e30e0c80468aaa73524442ef4a8d2f3406416c3fa09b145e0acc067b4a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-replay-admission-v2.settlement.json",
+      "sha256": "7f8964518c428eaf780c80df6b236fb9c5f5db59a2834d1e88ca82b55fdf9288"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-freeze.settlement.json",
+      "sha256": "562966666a3d899621e956a8f7dcc1f8dfd875f5b413fe265d405459604d70eb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m00-audit.settlement.json",
+      "sha256": "c99da328c6c112c6cd9578f75e8e29487f73c209103cada53ed8300160fee0e4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m00.settlement.json",
+      "sha256": "1eb7f7c7b627950c2bc33a6f509b722e00db391461a8bc3b51baad60ccb14a0d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m01-audit.settlement.json",
+      "sha256": "474dcc2fef9f4dc603d91bf418a1cc9063683c672b0dbe9e1fd44badb536b847"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m01.settlement.json",
+      "sha256": "eb1f38f34293c949b36b25997788773bc55d9388af7ebb062662a6bcc147d6bd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m02-audit.settlement.json",
+      "sha256": "34ccfe11dbde5ec05687e586a94d86b5b93d7713247593bcbd0db8281dbf8746"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m02.settlement.json",
+      "sha256": "4a16bf71b765cfe4e051913371ab0466d7cde9b121a0b9d67bdc9ad0b27ad766"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m03-audit.settlement.json",
+      "sha256": "f77524e203ed808be4d379648d8a986a81f503c2b5b07384e7bd7ddd7ed55118"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m03.settlement.json",
+      "sha256": "48caf1ff19a1bb97d76b79d39314eb317b78cf854713eac7b657cbbefeefb42e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m04-audit.settlement.json",
+      "sha256": "3a6a1ce2bec75a520ef22e098f65e0da59ca3bb4cdfb270e004c8a30df70dfeb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m04.settlement.json",
+      "sha256": "5997538cd4ad95291292c507b6ed8cbd5e4a20e424b53e1d0e4ca87c08616102"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m05-audit.settlement.json",
+      "sha256": "58198230d45e179cc95e325ad7e3bf437dff42d3fb564ebf8f6fb9a66e16e8ff"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-sixteen-million-v1-m05.settlement.json",
+      "sha256": "f79ba4a35415da929bec6ea71b82243a60898a52b99cfae6f9986265a727dbba"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-smoke-v6.settlement.json",
+      "sha256": "ad0c03c2cd8d889ee583688377fd0697cde5fb5632077f6ed85a67b3864a3932"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-source-validation-v1.settlement.json",
+      "sha256": "4ef035323c886b2a0ddb07721020348df94be0fdcf49e19f40c40f11c8c9000e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-source-validation-v2.settlement.json",
+      "sha256": "f12efc6cdafd47c817ade1bafd43205008a7d20a5099ed5f64c667845f723603"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-source-validation-v3.settlement.json",
+      "sha256": "9eb48e8da293b2ad1d77b7d60b1a7c07ca6ed08ad918c7c49391887ee3436b1f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-synccheck-v1.settlement.json",
+      "sha256": "5f73de9d2eb6123f94ecb328d82cb888f421de8ebb9364a5dc89f4ad7a3c7177"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-synccheck-v2.settlement.json",
+      "sha256": "4f8af8f72d1d0db6309b74fa441030ae64552c1dc067be3594204fa41460eebb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-synccheck-v3.settlement.json",
+      "sha256": "1e4f309a5201380439982e7146b0d0512487fee8b9d5795822da4e5e67904786"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-synccheck-v7.settlement.json",
+      "sha256": "05909c4f1762ed6f0e758cd7c4e0d08475ba015fb646baa4d0b401afeff0be82"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-gpu-v1.settlement.json",
+      "sha256": "3fed995f535c828eaa3421795527359cfae00d74489ca895ec415a92efed604c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-initcheck-v1.settlement.json",
+      "sha256": "84546e6c62449eb4d63516dcc2ef251f4953d0c2372759a6c0ec38e888334bed"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-memcheck-v1.settlement.json",
+      "sha256": "100fa41eafb70e531fb7196d85efaff1816509874352fb789be41e241d5319a1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-pilot-v1-freeze.settlement.json",
+      "sha256": "dd26bf135481453a28dd7535d66c6a16e9fe9297755b2dd89d30af16b31d77a4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-pilot-v1-m00.settlement.json",
+      "sha256": "753a5968b27ad22d6426923ea3b44572988f730110945604de1f0e6c439e0bd4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-pilot-v1-m01.settlement.json",
+      "sha256": "08fe85e7d5fc0543c66799fc6342469122b3142ab08dbdc422556d33870187c6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-pilot-v1-m02.settlement.json",
+      "sha256": "05fc7988bdc9e18e1471e19d9ad394d5a059feb4b4f151f13209cc4e5f5ee01d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-pilot-v1-m03.settlement.json",
+      "sha256": "a1d87a43e8f587972d00ff126d9f9fa13f9958d338910ebab8ddbb983d7a8e2d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-pilot-v1-m04.settlement.json",
+      "sha256": "3037b04284bf91128ad8a2333a16676f3c99d640c695b11568108169de79f9a3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-pilot-v1-m05.settlement.json",
+      "sha256": "cc4c8e698bf87dd6f635ae638b0b581716599fd1314653cd60be73142561119e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-pilot-v1-m06.settlement.json",
+      "sha256": "7b851e2a3054567975d340356ae4e6ee9e273efb5903bcd687d2651e9db29687"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-pilot-v1-m07.settlement.json",
+      "sha256": "14ee87f03f23f514c7077f899cc379ff115b4ba377fb126b48200f129cf54299"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-racecheck-v1.settlement.json",
+      "sha256": "7fd7bd3751b0392c3e8822f73d993bbd382593b51c63fd50616d12000ce9c962"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-report-v1.settlement.json",
+      "sha256": "ea710f62375b8d6f3f60c16aabcce8c81a20745159497139144fa1fd4cd265a2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-target-synccheck-v1.settlement.json",
+      "sha256": "fd8d65973189ecac0f32cf8545c724905815cd0bfd7c9f697420c6a68366f0c4"
+    }
+  ],
+  "source": [
+    {
+      "path": "research/lp-general-lowbit/src/assessment.rs",
+      "sha256": "67e4f7a9e57c170ae293d1e30d8df161cfaab7e21a5bef2cb9671164dd77d26c"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/control.rs",
+      "sha256": "56f85fec437aaed757f8c3ff1a3530e3df396c8330b9097be53050ff415d71a1"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/device.rs",
+      "sha256": "33d06a60cb1c25c40baddb3f2048d2ea8bdc518a5446474a1eb9feaa3d0374d9"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/engine.rs",
+      "sha256": "49b3ec2d8d57c5b10600b7175b6e2610530c9b0e34a9152b1694e2407dbb179e"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/fast_device.rs",
+      "sha256": "a9257af4616c90f1aad47e7770416f3d2d8f8c7682ae23c6b07904a4a8b075ff"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu.rs",
+      "sha256": "eab5ebf4e93fa0be23680bb50ceb0f74857d1a43cf4b7a3bddf7a84c2c997ef9"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu_tensor.rs",
+      "sha256": "c994faeb7f37fd1575e60bda2699549cf91d3703f5cc76621546167aac1318f0"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/host.rs",
+      "sha256": "9cdd49ba65afebbf396542733f56ca1b8ba828fe528780c6e7cb2b05228ffcdb"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/implied.rs",
+      "sha256": "a59c82823e6d7efd1cb3bc3b169b8257f277771d4195d5442cfab8dc34cc4c49"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/input.rs",
+      "sha256": "42b1ef4213c5d861ea8ad02dd1c14cbe2f4d0096beadb19a3ac257dd4f36a093"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/lib.rs",
+      "sha256": "4334c8fae36109d1a2dba239dedd037bafc4374487ab2ab6515d9f0c1ae4cf51"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/main.rs",
+      "sha256": "ccf218c67f907f45ca3e5db03ed3127a11c04e7720ada8321e363a411c341d74"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/merit.rs",
+      "sha256": "a02a0c64accca9ddc9d7fb630d547c024e11de6787c18c1a9245f1fedcba1e77"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/operator.rs",
+      "sha256": "b748fcc10347891fc5bd1048258c80114e44718e72fff53ed9cd92e076d75b70"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/repair.rs",
+      "sha256": "a25e610d1d18b4a3a79ab0d93acda526632cd0ce713fc03fa2437b338acbefb2"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/solve.rs",
+      "sha256": "802521331146497a9c3e25716a622c00b3ebab3e0de6970979276855c2db1c34"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor.rs",
+      "sha256": "64f4b75a78fe0bc266e12843fd89644789cc23a72695ca12026e0ddcb24ad442"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor_device.rs",
+      "sha256": "902ad772c6c555fc7b660fed735467725555605b90af668beb35afe82265e8f3"
+    }
+  ],
+  "source_validation": {
+    "path": "artifacts/gpup-general-v1/scale-source-validation-v3/result.json",
+    "sha256": "6e2bd7f23dfe68c427dddea816a10361ae98db65958b67dbc6bb75f496e5aa60"
+  },
+  "status": "passed",
+  "tools": [
+    {
+      "path": "tools/lp_general_scale_admit.py",
+      "sha256": "cabdadf9982efd2981c5aecddedaaf34d518e760fef8c1198c0ec48ad9b14130"
+    },
+    {
+      "path": "tools/lp_general_scale_bench.py",
+      "sha256": "c292a101e87c8a3a00921017cea02a7eb2af69dd39e1a18861a4ceebd8051745"
+    },
+    {
+      "path": "tools/lp_general_scale_catalog.py",
+      "sha256": "08e4edd635d86bda06846766a0296c8e757587fe0b0bc2b48015773f4ba81ef1"
+    },
+    {
+      "path": "tools/lp_general_scale_copt.py",
+      "sha256": "0f3469591ead4eec0e362ceb729b8c6bf6a25f2a52ed78451f17685c3a832cdb"
+    },
+    {
+      "path": "tools/lp_general_scale_cpu.sh",
+      "sha256": "78d05327c3b606f8e394d611f0fde3d582a93a26f5acbc2101ab18794367ee6d"
+    },
+    {
+      "path": "tools/lp_general_scale_evidence.py",
+      "sha256": "a81403f75215224bdefe3d74eb6f02b5d45d5692a09719a4abcf647a2bf49f4e"
+    },
+    {
+      "path": "tools/lp_general_scale_frontier.py",
+      "sha256": "597b156aa9619b0e8e47370fd90625f69787acedc330e0b391d88cf65400d3d9"
+    },
+    {
+      "path": "tools/lp_general_scale_gap_diagnose.py",
+      "sha256": "eb99335285b6f6161a7b2a7c89811e54a2e29c940dc12a5794de91ee490c365b"
+    },
+    {
+      "path": "tools/lp_general_scale_imports.py",
+      "sha256": "62fe59a39ee8aa0fa93010d5a1ffa2a8aa9a4d4d0d7b365664cdaec4821abf02"
+    },
+    {
+      "path": "tools/lp_general_scale_inventory.py",
+      "sha256": "5520f20c54e48093a454e308fb58ef2147abf0811ce860f96855c9c3f6707f87"
+    },
+    {
+      "path": "tools/lp_general_scale_io.py",
+      "sha256": "71011b1a56d0854957da3ee43a87704f6b7dac58aa2e04f10986540e42a329fb"
+    },
+    {
+      "path": "tools/lp_general_scale_models.py",
+      "sha256": "ddb9966c822781f12988fd757c5c34f02e66872418cd8cd892fab915cb4135e7"
+    },
+    {
+      "path": "tools/lp_general_scale_portable.py",
+      "sha256": "b3bc59ea86120d383f96bc9980e69bfbcea16b5c812630649fa1722763929efc"
+    },
+    {
+      "path": "tools/lp_general_scale_public.py",
+      "sha256": "9b2c1ef88bd633a80c6457b80545d7174e0859a25cbf66d2a4a976f8757d95dc"
+    },
+    {
+      "path": "tools/lp_general_scale_report.py",
+      "sha256": "97ce4f2684a8564c0fe125d1f4e625798b3e8149a7cff10e07b2f6f64dfe784a"
+    },
+    {
+      "path": "tools/lp_general_scale_target.py",
+      "sha256": "65c84040131e48a0c7c21eb9688bdd1192fd9a75055fa7b36d9424c6896f8287"
+    },
+    {
+      "path": "tools/lp_general_scale_validate.py",
+      "sha256": "3685526e95af8ce058d331c8a95a93726d0daad7f309aa74651e388440b81497"
+    }
+  ]
+}

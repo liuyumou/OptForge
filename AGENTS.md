@@ -1,3 +1,57 @@
+# Current agent handoff: scale development with COPT (2026-11-17)
+
+Keep the broad single-solve LP objective active, including meaningful FP4 benefit.
+The scale continuation delivers exact compact original CSR inputs, faster
+original-tree host products/preparation, lazy exact-checker geometry reuse and
+structural kernel scheduling. The numerical CUDA image remains fast-image-v10.
+Main scaling uses scale-image-v6 (default Rust target); source-identical
+scale-image-v7 is an opt-in x86-64-v4 experiment. Public defaults stay unchanged.
+
+The full historical roster retains 132/132 cells, with native/FP32/FP4x2 each
+certifying 20/44. The final 1 M/public roster has 103/105 complete measurements
+plus two retained raw PDS endpoints with missing timing receipts. Never-started
+PDS lanes complete in separate tails; no attempted cell repeats. The full 4 M
+cohort completes 90/90 measurements and all audits: our lanes certify 12/18 and
+COPT GPU 15/18. The capacity-selected 16 M extension completes 30/30 and all
+audits: our lanes and COPT GPU certify 6/6; twelve other models / sixty lanes
+remain unsupported. All 42 final generated models are connected. Keep the
+full lower-scale roster and capacity refusals; do not generalize from that subset.
+
+Coupled-family native/FP4 execution medians improve from 3.192x at 1 M to 5.332x
+at 16 M, but complete-cost ratios are 0.981 / 0.999 / 1.008 at 1 M / 4 M / 16 M;
+FP32/FP4 ratios are 0.974 / 1.000 / 0.994. Broad FP4 superiority is unestablished.
+At 16 M, extra preparation nearly cancels execution savings, while original-A
+control/checking and response transport dominate. General convergence and sparse
+FP4 coverage remain priorities. Do not narrow to prepared or dense workflows.
+
+COPT 8.0.6 CPU auto and actual GPU PDLP use the installed authorized libraries,
+four threads and 30-second solver limits; the final GPU setting uses PDLPTol
+1e-12 with unchanged strict 1e-9 external checking. A retained CPU PDS endpoint
+has an exact objective gap of 3.51e-11 but fails the conservative enclosure's
+separate lower-gap guard. Preserve its recorded rejection; future exact
+refinement should address that assessment limitation without weakening criteria.
+
+The host-target pilot completes 96/96 cells and 48 exact equal-work transcript
+pairs; its overall descriptive median gain is only 1.008x. Each host image passes
+37 isolated Rust tests, 60 GPU continuation comparisons and four 20-case sanitizer
+suites. Native acceptance is 638 repository Rust / 827 Python. Eleven failed
+reservations retain 12000 CPU / 1830 GPU seconds, including the missing-SciPy
+frontier preparation; corrected preparation reuses its exact retained input.
+
+Delivery validation is complete. Extracted-root replay verifies 92050 files,
+897 retained campaign responses, 707 research and 11 COPT admission
+responses, and 10457 assessments / 4407 distinct serial witnesses. All
+221275 earlier scientific file bindings remain exact. Missing timing receipts
+and raw-only responses stay explicit; cleanup is empty and no reservation is
+active. Keep the independent 240000 CPU / 30000 GPU allocation open, unchanged
+four slots, 16 GiB sampled RSS, 12 GiB owned device buffers, pinned lease,
+one-second supervision and all 100 ms advisories. Large evidence stays local;
+only compact results are tracked. Commit locally only; no confirmation, public
+adoption or publication is released.
+
+Open settled checkpoint: 181311.318401148 CPU / 23462.140788896 GPU seconds.
+Report: [scale development and COPT](docs/benchmarks/lp-general-scale.md).
+
 # Current agent handoff: benchmark scale design (2026-11-17)
 
 The user requests checking popular benchmark scales before scaling execution.

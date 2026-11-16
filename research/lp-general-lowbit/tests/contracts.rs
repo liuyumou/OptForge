@@ -1,10 +1,11 @@
+use lp_general_lowbit::engine::Engine;
 use lp_general_lowbit::{control::Fp64Controller, merit::EngineMerit};
 use lp_general_lowbit::{
     operator::{Format, Operator},
     solve::{Settings, cpu},
 };
 use optimizer_core::{CancellationToken, Model};
-use optimizer_lp::{Engine, LinearProgram};
+use optimizer_lp::LinearProgram;
 use serde_json::json;
 
 fn model(n: usize, m: usize) -> Model {
@@ -354,7 +355,11 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 lanes,
                 fused_encode: true,
                 combined: false,
-                adaptive_rows: true
+                adaptive_rows: true,
+                host_reductions: false,
+                host_preparation: false,
+                host_certificates: false,
+                auto_schedule: false
             }
             .validate()
             .is_ok()
@@ -366,7 +371,11 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 lanes,
                 fused_encode: false,
                 combined: true,
-                adaptive_rows: false
+                adaptive_rows: false,
+                host_reductions: true,
+                host_preparation: true,
+                host_certificates: true,
+                auto_schedule: true
             }
             .validate()
             .is_err()

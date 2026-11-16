@@ -1,0 +1,2187 @@
+{
+  "campaigns": [
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-final-broad-v1/freeze.json",
+        "sha256": "2389630429beb6fe327a7bd32849b9f8434645fbbe689e0da45dc01055155ce7"
+      },
+      "identity": "scale-final-broad-v1",
+      "models": [
+        {
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-degenerate-33-830132.json",
+            "sha256": "6d14eac31031046f6eb8565095fe9660acb9b06c4043f8f8a7fca6b508afe2fa"
+          },
+          "model_index": 0
+        },
+        {
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-degenerate-4097-846388.json",
+            "sha256": "304b1eafd1bdda55c467141af82e2d039788747f234468f30e79f50fbff2a2e5"
+          },
+          "model_index": 1
+        },
+        {
+          "family": "dense",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-dense-33-840132.json",
+            "sha256": "1f1ae2b489bcc84303a5c884f41d55edb233d5b6d0367182d77cf96fe72f4742"
+          },
+          "model_index": 2
+        },
+        {
+          "family": "dense",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-dense-257-841028.json",
+            "sha256": "e73b8674c689fea2adc21cc78ba7f1ff9de53e1e352ac51353b32d2acfbc3f8c"
+          },
+          "model_index": 3
+        },
+        {
+          "family": "dense_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-dense_blocks-33-810132.json",
+            "sha256": "f16b51368bd37f1cc9960c6385b1a9c5403e3f7b4419ed30c1ab696af356f218"
+          },
+          "model_index": 4
+        },
+        {
+          "family": "dense_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-dense_blocks-4097-826388.json",
+            "sha256": "2c465b457d9f50f54daf7ef9356b270f1d10bf46cd158baae6072123eaeb1dbd"
+          },
+          "model_index": 5
+        },
+        {
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-ill_scaled-33-820132.json",
+            "sha256": "1075786ea003bf2022dca0fa0b210eaa03917cec9801af94461fc42bdc899336"
+          },
+          "model_index": 6
+        },
+        {
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-ill_scaled-4097-836388.json",
+            "sha256": "756168a99653da6e72fc1682c70b4833e150a721c53bf634c8bc68855ef32c03"
+          },
+          "model_index": 7
+        },
+        {
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-irregular-33-790132.json",
+            "sha256": "c38f1a6038c05b7a2a7928c034ea52cf39625be03f5e03924ddc4dcb5ef79c18"
+          },
+          "model_index": 8
+        },
+        {
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-irregular-4097-806388.json",
+            "sha256": "490eacdbd5d24ba910f4beaa9e3f1c43dd31bb24a76b48fce371640e4a8fe3f8"
+          },
+          "model_index": 9
+        },
+        {
+          "family": "rectangular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-rectangular-33-800132.json",
+            "sha256": "4dafa8b336866a3f4a9eafe5112a81fe3cc49f86d6caf808cc6a3d46d2d7af39"
+          },
+          "model_index": 10
+        },
+        {
+          "family": "rectangular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-rectangular-4097-816388.json",
+            "sha256": "b06aa17f7180573e96b4091ae1d221d2f32f80badfdba7d946342b5baafdcf11"
+          },
+          "model_index": 11
+        },
+        {
+          "family": "public-afiro",
+          "model": {
+            "path": "artifacts/gpup-general-v1/public-development-v1/afiro.json",
+            "sha256": "cca2d75038cdd457db0ca9ab00020a3cc39c8509f13189a7eec67a0c7274e292"
+          },
+          "model_index": 12
+        },
+        {
+          "family": "public-adlittle",
+          "model": {
+            "path": "artifacts/gpup-general-v1/public-development-v1/adlittle.json",
+            "sha256": "779b5af10a434dc02272a6bfac2843349443ea8b958e3bc300842647a71bbf2d"
+          },
+          "model_index": 13
+        },
+        {
+          "family": "public-israel",
+          "model": {
+            "path": "artifacts/gpup-general-v1/public-development-v1/israel.json",
+            "sha256": "6c358e0020eb47cc46bca4016aee2a334386d6977803a48670cb40bd8beecf10"
+          },
+          "model_index": 14
+        },
+        {
+          "family": "public-25fv47",
+          "model": {
+            "path": "artifacts/gpup-general-v1/public-development-v1/25fv47.json",
+            "sha256": "d3ec0ab18f8cfb663cd7bd8d1f0c21fb41e2a900bda01ba5053e76f9be58ca69"
+          },
+          "model_index": 15
+        },
+        {
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-irregular-65537-819000.json",
+            "sha256": "aa8a3e713c32be7919c44814e70f8d61715273b4fc86cf34a60276098072d306"
+          },
+          "model_index": 16
+        },
+        {
+          "family": "rectangular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-rectangular-65537-819001.json",
+            "sha256": "aec80e9ee71aab62564c10b0c49b252093d2c35924ef31cc827d31372ce17455"
+          },
+          "model_index": 17
+        },
+        {
+          "family": "dense_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-dense_blocks-16385-819002.json",
+            "sha256": "7a7d157b3634a6ef27da8e85e91b6c52734102961d8e6234999aebfb19551a8a"
+          },
+          "model_index": 18
+        },
+        {
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-ill_scaled-32769-819003.json",
+            "sha256": "38e15d0ea4e153ffa07bb1b9d244b28b71f92e78fd940e931dd6a1c0788c4482"
+          },
+          "model_index": 19
+        },
+        {
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-degenerate-32769-819004.json",
+            "sha256": "102787cab9048682b5febfc77a6d32de6d0f8aa3c722b10b6a6d3984361fc771"
+          },
+          "model_index": 20
+        },
+        {
+          "family": "dense",
+          "model": {
+            "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-dense-1025-819005.json",
+            "sha256": "476443f04554f7e5b89d00dcebb3d2621238e26d688e2d248f7946fb77f308dc"
+          },
+          "model_index": 21
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-v1/freeze.json",
+        "sha256": "35b9d16940f67703578364004d94cb51240f2113cf24323060932cede0fbcab7"
+      },
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-tail-v1/freeze.json",
+        "sha256": "d89c648b29e533232378586f45f28a51596fd09b7914842f14d1a4cb7a87aced"
+      },
+      "identity": "scale-final-main-tail-v1",
+      "models": [
+        {
+          "columns": 505360,
+          "family": "public-pds-100",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-pds-v2/pds-100.lpcsr",
+            "sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15"
+          },
+          "model_index": 0,
+          "nonzeros": 1086785,
+          "rows": 156243,
+          "source_group": "Mittelmann-pds-100"
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-v1/freeze.json",
+        "sha256": "35b9d16940f67703578364004d94cb51240f2113cf24323060932cede0fbcab7"
+      },
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-tail-v2/freeze.json",
+        "sha256": "95e112adbe8b5c633d5f40fca7521aa212e045d42757cd8da034fc504fa72134"
+      },
+      "identity": "scale-final-main-tail-v2",
+      "models": [
+        {
+          "columns": 505360,
+          "family": "public-pds-100",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-pds-v2/pds-100.lpcsr",
+            "sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15"
+          },
+          "model_index": 0,
+          "nonzeros": 1086785,
+          "rows": 156243,
+          "source_group": "Mittelmann-pds-100"
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-final-main-v1/freeze.json",
+        "sha256": "35b9d16940f67703578364004d94cb51240f2113cf24323060932cede0fbcab7"
+      },
+      "identity": "scale-final-main-v1",
+      "models": [
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-irregular-1000000-831001.lpcsr",
+            "sha256": "53cea746bd0b0baa0cbc88742239c86d1385c88a7f15356519f1eff219b3e4dd"
+          },
+          "model_index": 0,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-irregular-1000000-831002.lpcsr",
+            "sha256": "cfefd4fcc29b65cc40e876dc05fedfaff6bdbd938b5de64f3302371c188c1dca"
+          },
+          "model_index": 1,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-irregular-1000000-831003.lpcsr",
+            "sha256": "7cf9198c3139af7d481d69c7b1e95362c2c9bc23ebd9f427c50f66788ddbeef8"
+          },
+          "model_index": 2,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-wide-1000000-831001.lpcsr",
+            "sha256": "6a4cdd0a152da4810da4d77093642c01f23ddec110125eb29334a61584cf6032"
+          },
+          "model_index": 3,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-wide-1000000-831002.lpcsr",
+            "sha256": "f1521f4cb9d5d074ba8586a7bccbe291acb092241e802d27f15d06aff654ffa6"
+          },
+          "model_index": 4,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-wide-1000000-831003.lpcsr",
+            "sha256": "8ca5fefb2db51c7c57dc61697460113d4b6eb8be47df2fc131998bfb671315bf"
+          },
+          "model_index": 5,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-tall-1000000-831001.lpcsr",
+            "sha256": "5eefc26c0350abc9f078472b464218723d4cb72491e0177852d0334bba64a52b"
+          },
+          "model_index": 6,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-tall-1000000-831002.lpcsr",
+            "sha256": "d4b105453123f8593a4c1339d78a39bdf2831f77b6fd2a158f1c038bb91eaed3"
+          },
+          "model_index": 7,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-tall-1000000-831003.lpcsr",
+            "sha256": "a31e49637afbb64e25c23bd302953d328f14817969fc1931a2ae6351ecc52cbb"
+          },
+          "model_index": 8,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-coupled_blocks-1000000-831001.lpcsr",
+            "sha256": "3b009f8559349a20f01d8d37bdf3185990a03cc98c66061ffa2eff60cb99918a"
+          },
+          "model_index": 9,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831001,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-coupled_blocks-1000000-831002.lpcsr",
+            "sha256": "e622dcd34df746266f512f3541af80a9be0ca44b3af986c4d102c91d03bfea8e"
+          },
+          "model_index": 10,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831002,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-coupled_blocks-1000000-831003.lpcsr",
+            "sha256": "14af6a1b0db7d655562f275507c68937a709eaee1f82a60ebf4ab0f1583fd882"
+          },
+          "model_index": 11,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831003,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-ill_scaled-1000000-831001.lpcsr",
+            "sha256": "bc0a994d5cbd08b23bb9cc829e9e28d50c163208d10b3816f3b7de22aebdf2b8"
+          },
+          "model_index": 12,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-ill_scaled-1000000-831002.lpcsr",
+            "sha256": "34781a925ad8500c39a8f22b709306decc551ce63a8de0b6a1d4f635a249566c"
+          },
+          "model_index": 13,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-ill_scaled-1000000-831003.lpcsr",
+            "sha256": "05fbcce84639e2b66dc0c2245e7d125765365458a7ef74f46c3ca998ccd2b728"
+          },
+          "model_index": 14,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-degenerate-1000000-831001.lpcsr",
+            "sha256": "e6b4f6490a05fd50c15b798c5e7021469c1055701b3dd8e2197912f6c9185e81"
+          },
+          "model_index": 15,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-degenerate-1000000-831002.lpcsr",
+            "sha256": "228166fc8937129ee2136ce98ce049c489bf0c439c00aebbfc61ee6cf360580c"
+          },
+          "model_index": 16,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-degenerate-1000000-831003.lpcsr",
+            "sha256": "461bd5af4ba5f978ac6d4bb314541d705e549515d49b6fce40b020d9fa16876b"
+          },
+          "model_index": 17,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 28860,
+          "family": "public-square31",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/square31.lpcsr",
+            "sha256": "30dc620dd158ebf43665f64ea29219bc893cb0197e9eebb0b522e0e5bcaf2ef4"
+          },
+          "model_index": 18,
+          "nonzeros": 3937200,
+          "rows": 19435,
+          "source_group": "MIPLIB-square"
+        },
+        {
+          "columns": 500000,
+          "family": "public-scpm1",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/scpm1.lpcsr",
+            "sha256": "a6b80ae2d6049ef6af3240cf04ddfeceff4bed49d7238a68bf2a2d8871b864a8"
+          },
+          "model_index": 19,
+          "nonzeros": 6250000,
+          "rows": 5000,
+          "source_group": "Mittelmann-scpm1"
+        },
+        {
+          "columns": 505360,
+          "family": "public-pds-100",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-pds-v2/pds-100.lpcsr",
+            "sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15"
+          },
+          "model_index": 20,
+          "nonzeros": 1086785,
+          "rows": 156243,
+          "source_group": "Mittelmann-pds-100"
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-final-pilot-v1/freeze.json",
+        "sha256": "d2b24addfbb8ebccd66a8e26a728c77acadaa141676f8d3359db3599e532a8df"
+      },
+      "identity": "scale-final-pilot-v1",
+      "models": [
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-irregular-1000000-831001.lpcsr",
+            "sha256": "82fb107a1635ac7459a754935bb70316c88527ec9b1e81b9d6e00565e9061281"
+          },
+          "model_index": 0,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-wide-1000000-831001.lpcsr",
+            "sha256": "9d8c1cc8e91a01add7937058864cf03a3efeaa4b6561a63eedbe523ef6319c34"
+          },
+          "model_index": 1,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-tall-1000000-831001.lpcsr",
+            "sha256": "aae5a15b4ac9bb4b669d030d52b0a1c437d92c15073938ef9d364341d8efc447"
+          },
+          "model_index": 2,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-coupled_blocks-1000000-831001.lpcsr",
+            "sha256": "c7b69cc74dc340df81c4a6e031c38052162fb428a840177d49739203fe21570a"
+          },
+          "model_index": 3,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831001,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-ill_scaled-1000000-831001.lpcsr",
+            "sha256": "a73e3623b9042f4e7daf212b35ca6a95e91c9d2822bcb9661f147fb79feafc1c"
+          },
+          "model_index": 4,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-degenerate-1000000-831001.lpcsr",
+            "sha256": "270129d14314834834d4ba43ad290756004206f176d51396d41d3c8be5518ef8"
+          },
+          "model_index": 5,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 28860,
+          "family": "public-square31",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/square31.lpcsr",
+            "sha256": "30dc620dd158ebf43665f64ea29219bc893cb0197e9eebb0b522e0e5bcaf2ef4"
+          },
+          "model_index": 6,
+          "nonzeros": 3937200,
+          "rows": 19435,
+          "source_group": "MIPLIB-square"
+        },
+        {
+          "columns": 500000,
+          "family": "public-scpm1",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/scpm1.lpcsr",
+            "sha256": "a6b80ae2d6049ef6af3240cf04ddfeceff4bed49d7238a68bf2a2d8871b864a8"
+          },
+          "model_index": 7,
+          "nonzeros": 6250000,
+          "rows": 5000,
+          "source_group": "Mittelmann-scpm1"
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-four-million-v1/freeze.json",
+        "sha256": "23c19a77b1a28abc29c52d7e87b2a747b1dcddb07021d961917279e21f5d3acf"
+      },
+      "identity": "scale-four-million-v1",
+      "models": [
+        {
+          "columns": 250000,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-irregular-4000000-831001.lpcsr",
+            "sha256": "2a4f56a1b482aca6381b0240a0b3b79a8315a01bf543a9447374bed581070bd6"
+          },
+          "model_index": 0,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831001,
+          "source_group": "general-scale-irregular",
+          "target": 4000000
+        },
+        {
+          "columns": 250000,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-irregular-4000000-831002.lpcsr",
+            "sha256": "099d05658cb5e9b8623fbd60a3a9560bd5ff3cd532bdd92368815960b875943e"
+          },
+          "model_index": 1,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831002,
+          "source_group": "general-scale-irregular",
+          "target": 4000000
+        },
+        {
+          "columns": 250000,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-irregular-4000000-831003.lpcsr",
+            "sha256": "1799a9c81eaf9c556e9c5cf95e0bac9c287af55a6eb03839fefb3652d5fab9c9"
+          },
+          "model_index": 2,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831003,
+          "source_group": "general-scale-irregular",
+          "target": 4000000
+        },
+        {
+          "columns": 1000000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-wide-4000000-831001.lpcsr",
+            "sha256": "69a20c44602417baecdeb709db83abbfcba1f57c06ae577477776abcde9e8bee"
+          },
+          "model_index": 3,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831001,
+          "source_group": "general-scale-wide",
+          "target": 4000000
+        },
+        {
+          "columns": 1000000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-wide-4000000-831002.lpcsr",
+            "sha256": "3f252e8339b0a7f9f45fe0440d504f85d3908f2786930f9e5cd0199dc21c35da"
+          },
+          "model_index": 4,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831002,
+          "source_group": "general-scale-wide",
+          "target": 4000000
+        },
+        {
+          "columns": 1000000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-wide-4000000-831003.lpcsr",
+            "sha256": "fb033ed30b439dc6f01cfa3e0fd857055b99da43336cba6c780a9ef1eca0ed7e"
+          },
+          "model_index": 5,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831003,
+          "source_group": "general-scale-wide",
+          "target": 4000000
+        },
+        {
+          "columns": 62500,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-tall-4000000-831001.lpcsr",
+            "sha256": "6f8e682def37f6a5cef21953ccabf48b6e565597d11769e373742a229a5d54ee"
+          },
+          "model_index": 6,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831001,
+          "source_group": "general-scale-tall",
+          "target": 4000000
+        },
+        {
+          "columns": 62500,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-tall-4000000-831002.lpcsr",
+            "sha256": "e51c7f21792c4005aeee309608c9266f9cc138f3e5b3240535edc5b26107d573"
+          },
+          "model_index": 7,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831002,
+          "source_group": "general-scale-tall",
+          "target": 4000000
+        },
+        {
+          "columns": 62500,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-tall-4000000-831003.lpcsr",
+            "sha256": "ea2ff9c834a744092cfd31f6ce5663973a13e378d2702d203bad4cd9a907a5ec"
+          },
+          "model_index": 8,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831003,
+          "source_group": "general-scale-tall",
+          "target": 4000000
+        },
+        {
+          "columns": 62528,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-coupled_blocks-4000000-831001.lpcsr",
+            "sha256": "f108af252b3cb29bc1743b14cf3d0f005033e8e736d7d74c2f8f19717078929a"
+          },
+          "model_index": 9,
+          "nonzeros": 4000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 4000000
+        },
+        {
+          "columns": 62528,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-coupled_blocks-4000000-831002.lpcsr",
+            "sha256": "e943806a6ad71c3f5de199fc3c778a389c5f06418484ee5861e754b31b1529f2"
+          },
+          "model_index": 10,
+          "nonzeros": 4000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 4000000
+        },
+        {
+          "columns": 62528,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-coupled_blocks-4000000-831003.lpcsr",
+            "sha256": "8b2cfb7bf48ff55cffb835f3bcddc0354e4b247af688d1430f4096d3947b5f42"
+          },
+          "model_index": 11,
+          "nonzeros": 4000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 4000000
+        },
+        {
+          "columns": 250000,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-ill_scaled-4000000-831001.lpcsr",
+            "sha256": "4fc7984d319eccc62c74a354e4397748cde631028ed7bfad50ae47edb727cc85"
+          },
+          "model_index": 12,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831001,
+          "source_group": "general-scale-ill_scaled",
+          "target": 4000000
+        },
+        {
+          "columns": 250000,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-ill_scaled-4000000-831002.lpcsr",
+            "sha256": "11d28ba5170612fe76780c5603069a9c07aa0ce09165f0cb1767904f5ad82269"
+          },
+          "model_index": 13,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831002,
+          "source_group": "general-scale-ill_scaled",
+          "target": 4000000
+        },
+        {
+          "columns": 250000,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-ill_scaled-4000000-831003.lpcsr",
+            "sha256": "a50a8ab74cf0e087973fceefea678d0bc9d40942d61d3c3e832b8c87853acc38"
+          },
+          "model_index": 14,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831003,
+          "source_group": "general-scale-ill_scaled",
+          "target": 4000000
+        },
+        {
+          "columns": 250000,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-degenerate-4000000-831001.lpcsr",
+            "sha256": "3fcc6fd416c8535a768558a7bfab4d7325d92e5364b62e2a47832caf1dca0fde"
+          },
+          "model_index": 15,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831001,
+          "source_group": "general-scale-degenerate",
+          "target": 4000000
+        },
+        {
+          "columns": 250000,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-degenerate-4000000-831002.lpcsr",
+            "sha256": "b7369c75466f4ce3d93b77d559b70f8a4dc33aa470affbd9e1256817fdf74d16"
+          },
+          "model_index": 16,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831002,
+          "source_group": "general-scale-degenerate",
+          "target": 4000000
+        },
+        {
+          "columns": 250000,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-4000000-v2/scale2-degenerate-4000000-831003.lpcsr",
+            "sha256": "b07aa3e6a4f972aa31b4d64519c99134a04f5a35ae4f2a77c04a4f1fd9928edd"
+          },
+          "model_index": 17,
+          "nonzeros": 4000000,
+          "rows": 250000,
+          "seed": 831003,
+          "source_group": "general-scale-degenerate",
+          "target": 4000000
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-main-v1/freeze.json",
+        "sha256": "e82fc1e97226feb8e2376820e34c2ecd5e4cfa729a7d750fea242568417a7854"
+      },
+      "identity": "scale-main-v1",
+      "models": [
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-irregular-1000000-831001.lpcsr",
+            "sha256": "53cea746bd0b0baa0cbc88742239c86d1385c88a7f15356519f1eff219b3e4dd"
+          },
+          "model_index": 0,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-irregular-1000000-831002.lpcsr",
+            "sha256": "cfefd4fcc29b65cc40e876dc05fedfaff6bdbd938b5de64f3302371c188c1dca"
+          },
+          "model_index": 1,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-irregular-1000000-831003.lpcsr",
+            "sha256": "7cf9198c3139af7d481d69c7b1e95362c2c9bc23ebd9f427c50f66788ddbeef8"
+          },
+          "model_index": 2,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-wide-1000000-831001.lpcsr",
+            "sha256": "6a4cdd0a152da4810da4d77093642c01f23ddec110125eb29334a61584cf6032"
+          },
+          "model_index": 3,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-wide-1000000-831002.lpcsr",
+            "sha256": "f1521f4cb9d5d074ba8586a7bccbe291acb092241e802d27f15d06aff654ffa6"
+          },
+          "model_index": 4,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-wide-1000000-831003.lpcsr",
+            "sha256": "8ca5fefb2db51c7c57dc61697460113d4b6eb8be47df2fc131998bfb671315bf"
+          },
+          "model_index": 5,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-tall-1000000-831001.lpcsr",
+            "sha256": "5eefc26c0350abc9f078472b464218723d4cb72491e0177852d0334bba64a52b"
+          },
+          "model_index": 6,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-tall-1000000-831002.lpcsr",
+            "sha256": "d4b105453123f8593a4c1339d78a39bdf2831f77b6fd2a158f1c038bb91eaed3"
+          },
+          "model_index": 7,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-tall-1000000-831003.lpcsr",
+            "sha256": "a31e49637afbb64e25c23bd302953d328f14817969fc1931a2ae6351ecc52cbb"
+          },
+          "model_index": 8,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-coupled_blocks-1000000-831001.lpcsr",
+            "sha256": "3b009f8559349a20f01d8d37bdf3185990a03cc98c66061ffa2eff60cb99918a"
+          },
+          "model_index": 9,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831001,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-coupled_blocks-1000000-831002.lpcsr",
+            "sha256": "e622dcd34df746266f512f3541af80a9be0ca44b3af986c4d102c91d03bfea8e"
+          },
+          "model_index": 10,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831002,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-coupled_blocks-1000000-831003.lpcsr",
+            "sha256": "14af6a1b0db7d655562f275507c68937a709eaee1f82a60ebf4ab0f1583fd882"
+          },
+          "model_index": 11,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831003,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-ill_scaled-1000000-831001.lpcsr",
+            "sha256": "bc0a994d5cbd08b23bb9cc829e9e28d50c163208d10b3816f3b7de22aebdf2b8"
+          },
+          "model_index": 12,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-ill_scaled-1000000-831002.lpcsr",
+            "sha256": "34781a925ad8500c39a8f22b709306decc551ce63a8de0b6a1d4f635a249566c"
+          },
+          "model_index": 13,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-ill_scaled-1000000-831003.lpcsr",
+            "sha256": "05fbcce84639e2b66dc0c2245e7d125765365458a7ef74f46c3ca998ccd2b728"
+          },
+          "model_index": 14,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-degenerate-1000000-831001.lpcsr",
+            "sha256": "e6b4f6490a05fd50c15b798c5e7021469c1055701b3dd8e2197912f6c9185e81"
+          },
+          "model_index": 15,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-degenerate-1000000-831002.lpcsr",
+            "sha256": "228166fc8937129ee2136ce98ce049c489bf0c439c00aebbfc61ee6cf360580c"
+          },
+          "model_index": 16,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831002,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-degenerate-1000000-831003.lpcsr",
+            "sha256": "461bd5af4ba5f978ac6d4bb314541d705e549515d49b6fce40b020d9fa16876b"
+          },
+          "model_index": 17,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831003,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 28860,
+          "family": "public-square31",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/square31.lpcsr",
+            "sha256": "30dc620dd158ebf43665f64ea29219bc893cb0197e9eebb0b522e0e5bcaf2ef4"
+          },
+          "model_index": 18,
+          "nonzeros": 3937200,
+          "rows": 19435,
+          "source_group": "MIPLIB-square"
+        },
+        {
+          "columns": 500000,
+          "family": "public-scpm1",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/scpm1.lpcsr",
+            "sha256": "a6b80ae2d6049ef6af3240cf04ddfeceff4bed49d7238a68bf2a2d8871b864a8"
+          },
+          "model_index": 19,
+          "nonzeros": 6250000,
+          "rows": 5000,
+          "source_group": "Mittelmann-scpm1"
+        },
+        {
+          "columns": 505360,
+          "family": "public-pds-100",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-pds-v2/pds-100.lpcsr",
+            "sha256": "fa40d4751f2073daf400bef08ad38595f493dc73999f044d6926ab12bcf6ff15"
+          },
+          "model_index": 20,
+          "nonzeros": 1086785,
+          "rows": 156243,
+          "source_group": "Mittelmann-pds-100"
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-pilot-v1/freeze.json",
+        "sha256": "b29ed7eb5d05d9080fb255751d4464e56e33866eaa6795c3f57215e159af429e"
+      },
+      "identity": "scale-pilot-v1",
+      "models": [
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-irregular-1000000-831001.lpcsr",
+            "sha256": "82fb107a1635ac7459a754935bb70316c88527ec9b1e81b9d6e00565e9061281"
+          },
+          "model_index": 0,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-wide-1000000-831001.lpcsr",
+            "sha256": "9d8c1cc8e91a01add7937058864cf03a3efeaa4b6561a63eedbe523ef6319c34"
+          },
+          "model_index": 1,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-tall-1000000-831001.lpcsr",
+            "sha256": "aae5a15b4ac9bb4b669d030d52b0a1c437d92c15073938ef9d364341d8efc447"
+          },
+          "model_index": 2,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-coupled_blocks-1000000-831001.lpcsr",
+            "sha256": "c7b69cc74dc340df81c4a6e031c38052162fb428a840177d49739203fe21570a"
+          },
+          "model_index": 3,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831001,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-ill_scaled-1000000-831001.lpcsr",
+            "sha256": "a73e3623b9042f4e7daf212b35ca6a95e91c9d2822bcb9661f147fb79feafc1c"
+          },
+          "model_index": 4,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-degenerate-1000000-831001.lpcsr",
+            "sha256": "270129d14314834834d4ba43ad290756004206f176d51396d41d3c8be5518ef8"
+          },
+          "model_index": 5,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 28860,
+          "family": "public-square31",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/square31.lpcsr",
+            "sha256": "30dc620dd158ebf43665f64ea29219bc893cb0197e9eebb0b522e0e5bcaf2ef4"
+          },
+          "model_index": 6,
+          "nonzeros": 3937200,
+          "rows": 19435,
+          "source_group": "MIPLIB-square"
+        },
+        {
+          "columns": 500000,
+          "family": "public-scpm1",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/scpm1.lpcsr",
+            "sha256": "a6b80ae2d6049ef6af3240cf04ddfeceff4bed49d7238a68bf2a2d8871b864a8"
+          },
+          "model_index": 7,
+          "nonzeros": 6250000,
+          "rows": 5000,
+          "source_group": "Mittelmann-scpm1"
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-pilot-v2/freeze.json",
+        "sha256": "90e48db2714624a0edf165b78a954f822a3abc788ff566ee0a1fb5ed489da957"
+      },
+      "identity": "scale-pilot-v2",
+      "models": [
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-irregular-1000000-831001.lpcsr",
+            "sha256": "82fb107a1635ac7459a754935bb70316c88527ec9b1e81b9d6e00565e9061281"
+          },
+          "model_index": 0,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-wide-1000000-831001.lpcsr",
+            "sha256": "9d8c1cc8e91a01add7937058864cf03a3efeaa4b6561a63eedbe523ef6319c34"
+          },
+          "model_index": 1,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-tall-1000000-831001.lpcsr",
+            "sha256": "aae5a15b4ac9bb4b669d030d52b0a1c437d92c15073938ef9d364341d8efc447"
+          },
+          "model_index": 2,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-coupled_blocks-1000000-831001.lpcsr",
+            "sha256": "c7b69cc74dc340df81c4a6e031c38052162fb428a840177d49739203fe21570a"
+          },
+          "model_index": 3,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831001,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-ill_scaled-1000000-831001.lpcsr",
+            "sha256": "a73e3623b9042f4e7daf212b35ca6a95e91c9d2822bcb9661f147fb79feafc1c"
+          },
+          "model_index": 4,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-degenerate-1000000-831001.lpcsr",
+            "sha256": "270129d14314834834d4ba43ad290756004206f176d51396d41d3c8be5518ef8"
+          },
+          "model_index": 5,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 28860,
+          "family": "public-square31",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/square31.lpcsr",
+            "sha256": "30dc620dd158ebf43665f64ea29219bc893cb0197e9eebb0b522e0e5bcaf2ef4"
+          },
+          "model_index": 6,
+          "nonzeros": 3937200,
+          "rows": 19435,
+          "source_group": "MIPLIB-square"
+        },
+        {
+          "columns": 500000,
+          "family": "public-scpm1",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/scpm1.lpcsr",
+            "sha256": "a6b80ae2d6049ef6af3240cf04ddfeceff4bed49d7238a68bf2a2d8871b864a8"
+          },
+          "model_index": 7,
+          "nonzeros": 6250000,
+          "rows": 5000,
+          "source_group": "Mittelmann-scpm1"
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-pilot-v3/freeze.json",
+        "sha256": "27078627a1e371bdd8c4f0ad567875a3ab8460e5420173d83ed5558b82134619"
+      },
+      "identity": "scale-pilot-v3",
+      "models": [
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-irregular-1000000-831001.lpcsr",
+            "sha256": "82fb107a1635ac7459a754935bb70316c88527ec9b1e81b9d6e00565e9061281"
+          },
+          "model_index": 0,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-wide-1000000-831001.lpcsr",
+            "sha256": "9d8c1cc8e91a01add7937058864cf03a3efeaa4b6561a63eedbe523ef6319c34"
+          },
+          "model_index": 1,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-tall-1000000-831001.lpcsr",
+            "sha256": "aae5a15b4ac9bb4b669d030d52b0a1c437d92c15073938ef9d364341d8efc447"
+          },
+          "model_index": 2,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-coupled_blocks-1000000-831001.lpcsr",
+            "sha256": "c7b69cc74dc340df81c4a6e031c38052162fb428a840177d49739203fe21570a"
+          },
+          "model_index": 3,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831001,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-ill_scaled-1000000-831001.lpcsr",
+            "sha256": "a73e3623b9042f4e7daf212b35ca6a95e91c9d2822bcb9661f147fb79feafc1c"
+          },
+          "model_index": 4,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v1/scale-degenerate-1000000-831001.lpcsr",
+            "sha256": "270129d14314834834d4ba43ad290756004206f176d51396d41d3c8be5518ef8"
+          },
+          "model_index": 5,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 28860,
+          "family": "public-square31",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/square31.lpcsr",
+            "sha256": "30dc620dd158ebf43665f64ea29219bc893cb0197e9eebb0b522e0e5bcaf2ef4"
+          },
+          "model_index": 6,
+          "nonzeros": 3937200,
+          "rows": 19435,
+          "source_group": "MIPLIB-square"
+        },
+        {
+          "columns": 500000,
+          "family": "public-scpm1",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/scpm1.lpcsr",
+            "sha256": "a6b80ae2d6049ef6af3240cf04ddfeceff4bed49d7238a68bf2a2d8871b864a8"
+          },
+          "model_index": 7,
+          "nonzeros": 6250000,
+          "rows": 5000,
+          "source_group": "Mittelmann-scpm1"
+        }
+      ],
+      "unsupported_models": []
+    },
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-sixteen-million-v1/freeze.json",
+        "sha256": "1886d82e841f692752b6bb44cbddc3b3d4edc015f03269a31fdaca8c3dac5c98"
+      },
+      "identity": "scale-sixteen-million-v1",
+      "models": [
+        {
+          "columns": 250000,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-16000000-v2/scale2-tall-16000000-831001.lpcsr",
+            "sha256": "ab2f87cc908bcf7c57ba13c5c36fa945cedcbf42e88f1386c2d8af4a204019dc"
+          },
+          "model_index": 0,
+          "nonzeros": 16000000,
+          "rows": 1000000,
+          "seed": 831001,
+          "source_group": "general-scale-tall",
+          "target": 16000000
+        },
+        {
+          "columns": 250000,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-16000000-v3/scale2-tall-16000000-831002.lpcsr",
+            "sha256": "26059ef53f9d6b48d910b99f8a23917d63783649e80f17bd758b715a7c7293d8"
+          },
+          "model_index": 1,
+          "nonzeros": 16000000,
+          "rows": 1000000,
+          "seed": 831002,
+          "source_group": "general-scale-tall",
+          "target": 16000000
+        },
+        {
+          "columns": 250000,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-16000000-v3/scale2-tall-16000000-831003.lpcsr",
+            "sha256": "c29f3ec58b842a8f1302955438a9964942ae8337108729f11048848bc2203179"
+          },
+          "model_index": 2,
+          "nonzeros": 16000000,
+          "rows": 1000000,
+          "seed": 831003,
+          "source_group": "general-scale-tall",
+          "target": 16000000
+        },
+        {
+          "columns": 250048,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-16000000-v3/scale2-coupled_blocks-16000000-831001.lpcsr",
+            "sha256": "33b0c2893ac2cb6952c0335f862b7d0eb911a2b74726c05cb49a12f1ccab9efc"
+          },
+          "model_index": 3,
+          "nonzeros": 16000000,
+          "rows": 250000,
+          "seed": 831001,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 16000000
+        },
+        {
+          "columns": 250048,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-16000000-v3/scale2-coupled_blocks-16000000-831002.lpcsr",
+            "sha256": "84c8f6579d910ec969b57c927dd5eddc72cfbc1b6a5d61190e897f42ed34c310"
+          },
+          "model_index": 4,
+          "nonzeros": 16000000,
+          "rows": 250000,
+          "seed": 831002,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 16000000
+        },
+        {
+          "columns": 250048,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-16000000-v3/scale2-coupled_blocks-16000000-831003.lpcsr",
+            "sha256": "0b1b0345f8aacf36426da6a6ea24baf5004d079afdd4086cda639c7c1f431e97"
+          },
+          "model_index": 5,
+          "nonzeros": 16000000,
+          "rows": 250000,
+          "seed": 831003,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 16000000
+        }
+      ],
+      "unsupported_models": [
+        {
+          "columns": 1000000,
+          "family": "irregular",
+          "host_pipeline_allowance_bytes": 21544870912,
+          "memory": {
+            "admits_domain": true,
+            "compact_bytes": 252001108,
+            "device_allowance_bytes": 2115108864,
+            "host_allowance_bytes": 5416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 5377048576,
+          "reasons": [
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831001,
+          "source_group": "general-scale-irregular",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 1000000,
+          "family": "irregular",
+          "host_pipeline_allowance_bytes": 21544870912,
+          "memory": {
+            "admits_domain": true,
+            "compact_bytes": 252001108,
+            "device_allowance_bytes": 2115108864,
+            "host_allowance_bytes": 5416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 5377048576,
+          "reasons": [
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831002,
+          "source_group": "general-scale-irregular",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 1000000,
+          "family": "irregular",
+          "host_pipeline_allowance_bytes": 21544870912,
+          "memory": {
+            "admits_domain": true,
+            "compact_bytes": 252001108,
+            "device_allowance_bytes": 2115108864,
+            "host_allowance_bytes": 5416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 5377048576,
+          "reasons": [
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831003,
+          "source_group": "general-scale-irregular",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 4000000,
+          "family": "wide",
+          "host_pipeline_allowance_bytes": 48736870912,
+          "memory": {
+            "admits_domain": false,
+            "compact_bytes": 348001108,
+            "device_allowance_bytes": 3651108864,
+            "host_allowance_bytes": 8416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 13441048576,
+          "reasons": [
+            "current dimension/nonzero domain",
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831001,
+          "source_group": "general-scale-wide",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 4000000,
+          "family": "wide",
+          "host_pipeline_allowance_bytes": 48736870912,
+          "memory": {
+            "admits_domain": false,
+            "compact_bytes": 348001108,
+            "device_allowance_bytes": 3651108864,
+            "host_allowance_bytes": 8416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 13441048576,
+          "reasons": [
+            "current dimension/nonzero domain",
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831002,
+          "source_group": "general-scale-wide",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 4000000,
+          "family": "wide",
+          "host_pipeline_allowance_bytes": 48736870912,
+          "memory": {
+            "admits_domain": false,
+            "compact_bytes": 348001108,
+            "device_allowance_bytes": 3651108864,
+            "host_allowance_bytes": 8416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 13441048576,
+          "reasons": [
+            "current dimension/nonzero domain",
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831003,
+          "source_group": "general-scale-wide",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 1000000,
+          "family": "ill_scaled",
+          "host_pipeline_allowance_bytes": 21544870912,
+          "memory": {
+            "admits_domain": true,
+            "compact_bytes": 252001108,
+            "device_allowance_bytes": 2115108864,
+            "host_allowance_bytes": 5416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 5377048576,
+          "reasons": [
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831001,
+          "source_group": "general-scale-ill_scaled",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 1000000,
+          "family": "ill_scaled",
+          "host_pipeline_allowance_bytes": 21544870912,
+          "memory": {
+            "admits_domain": true,
+            "compact_bytes": 252001108,
+            "device_allowance_bytes": 2115108864,
+            "host_allowance_bytes": 5416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 5377048576,
+          "reasons": [
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831002,
+          "source_group": "general-scale-ill_scaled",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 1000000,
+          "family": "ill_scaled",
+          "host_pipeline_allowance_bytes": 21544870912,
+          "memory": {
+            "admits_domain": true,
+            "compact_bytes": 252001108,
+            "device_allowance_bytes": 2115108864,
+            "host_allowance_bytes": 5416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 5377048576,
+          "reasons": [
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831003,
+          "source_group": "general-scale-ill_scaled",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 1000000,
+          "family": "degenerate",
+          "host_pipeline_allowance_bytes": 21544870912,
+          "memory": {
+            "admits_domain": true,
+            "compact_bytes": 252001108,
+            "device_allowance_bytes": 2115108864,
+            "host_allowance_bytes": 5416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 5377048576,
+          "reasons": [
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831001,
+          "source_group": "general-scale-degenerate",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 1000000,
+          "family": "degenerate",
+          "host_pipeline_allowance_bytes": 21544870912,
+          "memory": {
+            "admits_domain": true,
+            "compact_bytes": 252001108,
+            "device_allowance_bytes": 2115108864,
+            "host_allowance_bytes": 5416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 5377048576,
+          "reasons": [
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831002,
+          "source_group": "general-scale-degenerate",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        },
+        {
+          "columns": 1000000,
+          "family": "degenerate",
+          "host_pipeline_allowance_bytes": 21544870912,
+          "memory": {
+            "admits_domain": true,
+            "compact_bytes": 252001108,
+            "device_allowance_bytes": 2115108864,
+            "host_allowance_bytes": 5416870912,
+            "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+          },
+          "nonzeros": 16000000,
+          "partition": "development",
+          "planned_lanes": [
+            "native",
+            "fp32",
+            "fp4x2",
+            "copt-cpu-auto",
+            "copt-gpu-tight"
+          ],
+          "raw_response_allowance_bytes": 5377048576,
+          "reasons": [
+            "complete solver/trajectory/audit host allowance",
+            "bounded response transport allowance"
+          ],
+          "rows": 1000000,
+          "seed": 831003,
+          "source_group": "general-scale-degenerate",
+          "status": "unsupported",
+          "target": 16000000,
+          "tolerance": 1e-09
+        }
+      ]
+    },
+    {
+      "continuation_of": null,
+      "freeze": {
+        "path": "artifacts/gpup-general-v1/scale-target-pilot-v1/freeze.json",
+        "sha256": "4f10c57c73dce882cc06e1633cc6a93c6064b465371da53db141c4d15e560f8b"
+      },
+      "identity": "scale-target-pilot-v1",
+      "models": [
+        {
+          "columns": 62500,
+          "family": "irregular",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-irregular-1000000-831001.lpcsr",
+            "sha256": "53cea746bd0b0baa0cbc88742239c86d1385c88a7f15356519f1eff219b3e4dd"
+          },
+          "model_index": 0,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-irregular",
+          "target": 1000000
+        },
+        {
+          "columns": 250000,
+          "family": "wide",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-wide-1000000-831001.lpcsr",
+            "sha256": "6a4cdd0a152da4810da4d77093642c01f23ddec110125eb29334a61584cf6032"
+          },
+          "model_index": 1,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-wide",
+          "target": 1000000
+        },
+        {
+          "columns": 15625,
+          "family": "tall",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-tall-1000000-831001.lpcsr",
+            "sha256": "5eefc26c0350abc9f078472b464218723d4cb72491e0177852d0334bba64a52b"
+          },
+          "model_index": 2,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-tall",
+          "target": 1000000
+        },
+        {
+          "columns": 15680,
+          "family": "coupled_blocks",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-coupled_blocks-1000000-831001.lpcsr",
+            "sha256": "3b009f8559349a20f01d8d37bdf3185990a03cc98c66061ffa2eff60cb99918a"
+          },
+          "model_index": 3,
+          "nonzeros": 1000000,
+          "rows": 15625,
+          "seed": 831001,
+          "source_group": "general-scale-coupled_blocks",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "ill_scaled",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-ill_scaled-1000000-831001.lpcsr",
+            "sha256": "bc0a994d5cbd08b23bb9cc829e9e28d50c163208d10b3816f3b7de22aebdf2b8"
+          },
+          "model_index": 4,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-ill_scaled",
+          "target": 1000000
+        },
+        {
+          "columns": 62500,
+          "family": "degenerate",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-models-1000000-v2/scale2-degenerate-1000000-831001.lpcsr",
+            "sha256": "e6b4f6490a05fd50c15b798c5e7021469c1055701b3dd8e2197912f6c9185e81"
+          },
+          "model_index": 5,
+          "nonzeros": 1000000,
+          "rows": 62500,
+          "seed": 831001,
+          "source_group": "general-scale-degenerate",
+          "target": 1000000
+        },
+        {
+          "columns": 28860,
+          "family": "public-square31",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/square31.lpcsr",
+            "sha256": "30dc620dd158ebf43665f64ea29219bc893cb0197e9eebb0b522e0e5bcaf2ef4"
+          },
+          "model_index": 6,
+          "nonzeros": 3937200,
+          "rows": 19435,
+          "source_group": "MIPLIB-square"
+        },
+        {
+          "columns": 500000,
+          "family": "public-scpm1",
+          "model": {
+            "path": "artifacts/gpup-general-v1/scale-public-v1/scpm1.lpcsr",
+            "sha256": "a6b80ae2d6049ef6af3240cf04ddfeceff4bed49d7238a68bf2a2d8871b864a8"
+          },
+          "model_index": 7,
+          "nonzeros": 6250000,
+          "rows": 5000,
+          "source_group": "Mittelmann-scpm1"
+        }
+      ],
+      "unsupported_models": []
+    }
+  ],
+  "note": "Joins compact result model_index values to frozen original identities. Omitted metadata was not present in that historical freeze; no dimensions are inferred from file names. Repeated model identities are shared development inputs, not independent application samples.",
+  "source": {
+    "path": "tools/lp_general_scale_catalog.py",
+    "sha256": "08e4edd635d86bda06846766a0296c8e757587fe0b0bc2b48015773f4ba81ef1"
+  }
+}
