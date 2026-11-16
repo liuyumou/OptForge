@@ -220,3 +220,179 @@ supervisor and 100 ms advisories are unchanged. No confirmation, public-default
 change or publication is implied. Commit locally only.
 
 Open allocation checkpoint: 61348.495516364 CPU / 5583.955075437 GPU seconds.
+
+## Follow-up kernel diagnosis (2026-11-16)
+
+The negative result applies to all **14 jointly certified pairs with actual FP4
+work**, rather than every FP4-labelled configuration. The following investigation
+profiles the unchanged admitted executable/image; it does not replace the cohort
+or alter its criteria. [Diagnostic results](lp-general-tensor-diagnosis-results.json)
+retain source bindings, every launch-shape summary, raw-trace hashes, timing
+distributions, profiler disturbance, failures and missingness.
+
+Nine timelines cover native, FP32 and FP4x4 on dense257, dense1025 and
+dense_blocks16385. They use the prior ablation's 500 updates, with a prospective
+120-second internal allowance for profiling overhead. All 26 retained numerical
+transcripts exactly match the original 500-update transcripts, including states,
+assessments, work, restarts and recovery; only timing/deadline metadata is excluded.
+Eight timeline jobs complete with before/after unprofiled observations. The first
+job stops after Nsight cannot import its trace because `libdw.so.1` is absent from
+the default library path. Its original trace is subsequently imported **offline**
+using the already available library. Its failed receipt and missing after
+observation remain; it is not rerun. The other planned timeline cells use an
+explicit library path.
+
+Nsight Compute refuses the first counter request with `ERR_NVGPUCTRPERM`; the
+remaining four planned counter requests are not launched. Permissions, clocks and
+cache policy are not changed. Therefore this diagnosis measures kernel timelines
+and launch geometry, but cannot measure achieved occupancy, Tensor Core utilization,
+cache hit rates or instruction-level stalls. NVIDIA also cautions that profiling
+overhead prevents treating instrumented host timings as workload timings
+([profiling guide](https://docs.nvidia.com/nsight-compute/ProfilingGuide/)).
+
+### Dense products: too little parallel work and too much reconstruction
+
+The following values sum the two directional **per-launch medians**, in
+microseconds per LP update. They are not complete-solve timings or confidence
+intervals. Raw sums, p05/p95, extrema and all observations remain in the JSON.
+
+| Model | Native product + projection | FP4 product alone | FP4 remainder + projection | FP4 vector encoding |
+| --- | ---: | ---: | ---: | ---: |
+| dense257 | 17.280 | 31.360 | 14.368 | 7.168 |
+| dense1025 | 29.744 | 114.942 | 19.136 | 8.032 |
+| dense_blocks16385 | 138.974 | 16.320 | 148.766 | 8.128 |
+
+For dense1025, the FP4 product alone costs about **3.86x both complete native
+update kernels**. Actual QMMA instructions are present, but the surrounding
+mapping is inefficient:
+
+- The model has 512 rows and 1025 columns. The two product launches contain just
+  **32 and 65 one-warp blocks** on the traced **188-SM RTX PRO 6000**. Even perfect
+  distribution can use at most 17.0% and 34.6% of SMs, with only one warp on each.
+  The entire grids contain only 0.355% and 0.720% of the device's 9024 available
+  warp slots. These are grid-derived limits, not counter-measured occupancy.
+  Each warp serially traverses 32 or 16 tiles. Doubling that traversal roughly
+  doubles the median product duration: 75.967 versus 38.975 microseconds.
+- Four matrix components and four vector components require sixteen component
+  pairs. Each 16-by-32 half tile executes four 16-by-8-by-32 MMAs: **16384 physical
+  FP4 multiply-accumulates for 512 original coefficient products**, a 32x expansion.
+  Sixteen-fold component expansion and two-fold unused output-column capacity
+  explain this count. It is physical arithmetic, distinct from the useful
+  original-nonzero counter. Tensor throughput could still overcome this expansion
+  with sufficient utilization; the present mapping does not establish that.
+- The kernel unpacks fragments, gathers vector codes, shuffles results, rescales
+  each component pair and sums them serially. In the current source all four
+  lanes of each row group reconstruct identical sums, although only one copy is
+  ultimately used. FP64 outward-bound calculations accompany every tile. Timeline
+  data localizes the cost to this combined kernel; it does **not** separately
+  identify the causal shares of reconstruction, guards, memory or instruction
+  dependencies.
+- The compiled product has 48 registers/thread and zero reported local memory
+  per thread. SASS contains no `LDL`/`STL` instructions in encode, product or step.
+  Register spilling is not supported as an explanation.
+
+The four-warp layout ablation groups existing row warps together; it does not
+split their serial tile traversal. It therefore does not solve the lack of
+parallelism along the reduction dimension. Lower component counts and layouts
+must be evaluated for certified time, rather than selected solely for guard
+acceptance or compact storage.
+
+### Sparse/block products: the common update pass consumes the saving
+
+dense_blocks16385 executes **94.10%** of its accepted product nonzeros through
+FP4, with zero row replacements in these cells. Nevertheless, its FP4
+remainder/projection kernel takes 148.766 microseconds per update versus
+138.974 for native's full product/projection. Removing almost all matrix products
+does not remove the fixed per-row work across 21846 rows and 16385 columns.
+
+`tensor_step` retains warp reductions for multiple accumulators, FP64 error-bound
+calculations, reference additions, anchor handling, projection and counters. Some
+of this work still executes when the sparse remainder is empty. Remaining sparse
+coefficients also require increment subtraction and its error accounting.
+The branch-general kernel serves native, FP32 and tensor modes. The trace proves
+that this pass is the dominant measured cost; isolating individual instructions
+requires a separately admitted diagnostic variant or counters.
+
+Across the instrumented block case, step kernels consume 146.431 of 160.700 ms
+of update-kernel time; the tensor products consume only 10.171 ms. Making the
+tensor product free would therefore leave this version slower than native's
+100.390 ms of update-kernel time. Tensor-product optimization alone cannot fix
+this case. The raw durations contain substantial tails on the shared device;
+the directional medians and before/after observations remain visible.
+
+Tile fill also matters. Here 852 eligible 32-by-32 blocks represent 349222
+nonzeros: about 40.0% occupancy of the packed coefficient positions. Padding raises
+physical FP4 arithmetic to about **80x the covered original coefficient products**.
+Four components already require sixteen logical coefficient bits before padding,
+scales and bounds. FP4 packing occupies 5.27 MB in addition to the 9.06 MB retained
+original operator. This is not a four-bit-total-storage implementation.
+
+### Launches, preparation and numerical policy
+
+FP4 launches six kernels per update, compared with two for native. In the dense1025
+trace, update kernels occupy 112.215 ms and gaps between those kernels occupy
+23.601 ms within the five update windows. Native's corresponding values are
+19.561 and 4.050 ms. Launch/dispatch gaps contribute materially, but eliminating
+all such gaps would leave the FP4 kernel regression. Summed CUDA launch API time
+overlaps GPU execution and must not be added to those durations. Likewise, lengthy
+`cuMemcpyDtoHAsync` calls include waiting for preceding work; actual device-copy
+events total only 2.040 ms over the entire FP4 process, including setup.
+
+Unprofiled before/after observations expose measurement disturbance: the trace's
+execution time is 0.879–1.880x its available unprofiled counterpart. The failed
+first timeline is 1.722x its retained before observation. These are diagnostic
+traces, not new performance claims or causal assignments of shared-device tails.
+
+The original strict dense1025 solve already separates the major complete-cost
+regressions: **+164.1 ms host preparation and +356.7 ms execution**, versus a
+513.0 ms increase overall. Checking differs by only +6.1 ms. Packing constructs
+canonical tiles, four residual encodings, both orientations and outward metadata
+on the CPU. Its extra cost is measured; the relative costs of those preparation
+substeps have not been separately profiled. CUDA setup noise and independent
+checking are not the principal explanation for this matched dense regression.
+
+The precision policy solved rejection by using four components. It did not solve
+cost: **99.999832% acceptance is a correctness/participation result, not an
+efficiency result**. The two-component ablation retains only 31.18% of eligible
+work under these local budgets; that does not prove two-component proposals cannot
+converge under a different, independently checked controller. All three full-solve
+lanes still certify only 20/44 cases, so general convergence remains a separate
+problem. Neither tightening the final certificate nor relaxing a historical value
+gate explains the measured kernel regression.
+
+### Consequences for the next implementation
+
+1. Parallelize long tile reductions within each single solve, remove duplicated
+   component reconstruction, and specialize component counts. Packing/precision
+   choices must account for tile density and actual arithmetic expansion.
+2. Specialize the update pass for tensor-covered, remainder and native work;
+   eliminate redundant empty-remainder reductions and bounds. Fuse encoding with
+   updates where dependencies allow, then evaluate graph/launch amortization.
+   Graphs alone cannot repair the current product-kernel cost.
+3. Compare cheaper FP4 proposals with periodic original-operator residual correction
+   and exact checkpoint recovery. Test whether a conservative bound on every
+   approximate row is worth its cost. Strict original-model final certification
+   remains authoritative; any changed numerical/controller implementation needs
+   new admission. Include FP16/BF16 Tensor Core controls because four FP4 components
+   are an expensive sixteen-bit representation.
+4. Preserve the broad roster, arbitrary sparse operators, ordinary cold single
+   solves, unsuccessful cases and full costs. Advance convergence and low-bit
+   execution together. Neither batching different LP solves nor routing difficult
+   cases permanently to native completes the project objective.
+
+This diagnosis adds three failed reservations: trace import, unavailable counters,
+and an initial report that confused CUDA's logical ordinal with the profiler's
+physical GPU ID. The corrected report joins `TARGET_INFO_CUDA_DEVICE` to the
+physical device table and verifies the pinned UUID. Full charges of **1800 CPU /
+360 GPU seconds**, original sources and logs remain. All cleanup is empty; the
+supervisor is unchanged. No numerical implementation, public default or old result
+changes. The results JSON's accounting snapshot includes its active reporting
+reservation; the settled follow-up checkpoint is recorded below.
+
+[Follow-up validation](lp-general-tensor-diagnosis-validation.json) verifies all
+retained diagnostic evidence bindings and the 15 unchanged numerical source files,
+26 exact transcripts, empty cleanup, full failure charges and exact preservation
+of the earlier report. Both Python tools compile; all 286 documentation pages and
+internal links pass. No new native acceptance claim is needed for an unchanged
+solver/image. Settled open checkpoint: **63436.471766488 CPU /
+5997.829481460 GPU seconds** under the unchanged independent allocation.

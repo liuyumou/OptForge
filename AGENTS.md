@@ -1,5 +1,28 @@
 # Agent Instructions
 
+## Tensor Core slowdown diagnosed (2026-11-16)
+
+Nine timelines of the unchanged admitted image retain 26 exact 500-update
+transcripts. Dense1025's FP4 product alone costs 114.942 us/update (sum of
+directional launch medians) versus 29.744 us for native product/projection.
+Its two product grids have only 32/65 warps on 188 SMs; four-component FP4 expands
+physical arithmetic 32x before sparse padding. In dense_blocks16385, 94.10%
+FP4 coverage still leaves the remainder/projection pass slower than the full
+native pass. Fix both reduction parallelism/component reconstruction and the
+common per-row guard/update cost. Launch fusion alone is insufficient. Keep
+broad single-solve usefulness, general convergence and strict certificates central.
+
+Hardware counters are unavailable (ERR_NVGPUCTRPERM); no measured occupancy or
+instruction-level causal attribution is claimed. One failed timeline import is
+recovered offline without rerunning it; its missing after observation remains.
+Trace import, counter refusal and a corrected logical/physical GPU-ID analysis
+error retain all sources and full 1800 CPU / 360 GPU-second charges. Cleanup is
+empty. No numerical image, public default, old result or confirmation changes.
+Validation binds 207 evidence files and 15 unchanged numerical source files;
+286 documentation pages/links pass. Local commit only.
+Settled allocation checkpoint: 63436.471766488 CPU / 5997.829481460 GPU seconds.
+See the follow-up in [the Tensor Core report](docs/benchmarks/lp-general-tensor.md).
+
 ## Actual FP4 Tensor Core continuation delivered; value unestablished (2026-11-16)
 
 Keep the broadly useful low-bit LP objective active, including ordinary single
