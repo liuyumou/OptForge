@@ -1,0 +1,347 @@
+{
+  "accounting": {
+    "path": "artifacts/gpup-general-v1/checkpoint-accounting-v1.json",
+    "sha256": "38f3f6b3a014eb33f5ba44163fb5330b3fc3e11cd844168e45ef1c937cfee9f1"
+  },
+  "archive_receipt": {
+    "compressed_bytes": 1156248782,
+    "files": 43484,
+    "manifest": {
+      "path": "artifacts/gpup-general-v1/portable/delivery-v2/EVIDENCE.json",
+      "sha256": "618bf07cbffb41509a12419f0e53dac5174cf416f9117f5dda202b1d85161572"
+    },
+    "parts": [
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-000.tar.gz",
+          "sha256": "a936848d334d24fbca7224377d18fe3fd016bb138c39fcc78e7ca4a7881019e9"
+        },
+        "bytes": 38484841
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-001.tar.gz",
+          "sha256": "c2124fc2c3d759e6c489ecd7bfb0d7cb66bce9fd1ee2ff97df1385b26747a332"
+        },
+        "bytes": 45299743
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-002.tar.gz",
+          "sha256": "684357083fbb11a8ab65617ae934a76c76c31d528a66b923a0dfe54af890af53"
+        },
+        "bytes": 45718182
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-003.tar.gz",
+          "sha256": "a894d48255282c3ae3a0c089651b4cf7e2ce8697459974a7ff05acc6a26a9598"
+        },
+        "bytes": 43998136
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-004.tar.gz",
+          "sha256": "daa71992336fb9f5418c0f1a91547973e514f2ffe1cb6462b260c35350dc33f4"
+        },
+        "bytes": 33059865
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-005.tar.gz",
+          "sha256": "b0e28c129ea176e193f9ec038c918605676037ee26d7761b5652f2ebe2372ca3"
+        },
+        "bytes": 44035406
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-006.tar.gz",
+          "sha256": "5e40597724c842960850725b27213bbdaab1f76699ca04480baa76c6b311096c"
+        },
+        "bytes": 15662298
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-007.tar.gz",
+          "sha256": "4d559e234c9d44b8b91e0aef40b34c855ea500b4330dd8a1dc498345569c8d95"
+        },
+        "bytes": 44032761
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-008.tar.gz",
+          "sha256": "aeb52c38e2c18db80adbfd61475f4d88dfb092c036c21a3615845ac778a12257"
+        },
+        "bytes": 15670009
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-009.tar.gz",
+          "sha256": "c96782016cdb18b588e7b7e22842b369d7e3dd5b7f71c8ed16102b2d500626a7"
+        },
+        "bytes": 44047624
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-010.tar.gz",
+          "sha256": "589a460981289b090688ea79e3b8ec44d4d63eaa170156e94897b00ef6384d99"
+        },
+        "bytes": 15664461
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-011.tar.gz",
+          "sha256": "3e56135c53bb1c3c8cdc1e0b61ed63f21ba9d1fed21b8f970ed6e59dc03dc561"
+        },
+        "bytes": 44040116
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-012.tar.gz",
+          "sha256": "8d89dce38ab1091708dfb8d9e8f59b8dd4b9af464fc1636e49e5bdf10a4a01fe"
+        },
+        "bytes": 15668039
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-013.tar.gz",
+          "sha256": "c1d1abcca62fe5c81ccb121f36c4556adbb6c44af14a407922b4eefe626753e6"
+        },
+        "bytes": 44045226
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-014.tar.gz",
+          "sha256": "77bafcd867257d808630cca28d31bed384455463f7e5a2d6ddc4cc2ec1c5e232"
+        },
+        "bytes": 15668020
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-015.tar.gz",
+          "sha256": "c0c7062ddc7ee2bf77e7b9960ed12a1b0f1ed97374f35498cd3794d60de39bd3"
+        },
+        "bytes": 44040229
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-016.tar.gz",
+          "sha256": "8f4f837dc65b83c4f47e23a5c6385d880320da6602924c7370c5f32909f92e0e"
+        },
+        "bytes": 15662304
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-017.tar.gz",
+          "sha256": "751920d0f1cdccc616be6754f95d09a44b0d05e569b0e6e97fa085f17bffc21a"
+        },
+        "bytes": 44032769
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-018.tar.gz",
+          "sha256": "ce2481490a58ba0b1ddaf99743ecc0b1ca08d58376c6c072c19226ed41a59639"
+        },
+        "bytes": 15669997
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-019.tar.gz",
+          "sha256": "8f20f912c1c9f190d4866cbadcc5e0277bcb0f33a8540b88817b4ce0a61cd23a"
+        },
+        "bytes": 43101890
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-020.tar.gz",
+          "sha256": "46ecc81dcd44909dbcb4e9e38a28f9080661986022b734b418e817aeba73f91e"
+        },
+        "bytes": 42244327
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-021.tar.gz",
+          "sha256": "5ef3548216a3c2f02dc09cc3c013d562443be0425cdeb54355d03532dd5c42fc"
+        },
+        "bytes": 45880019
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-022.tar.gz",
+          "sha256": "2e36ec5c475b764d490a0e5073ae9c6e79ba88c8ba6be6e72c77f034ca47b355"
+        },
+        "bytes": 21810341
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-023.tar.gz",
+          "sha256": "7c23d6ac9f5ab56a7f3a09269706a2baf4cb871aaef0a9d17e318c5d3310077f"
+        },
+        "bytes": 32601236
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-024.tar.gz",
+          "sha256": "c66a4813cbb9de7220c4133c108789f73c3d09807c63ef94cd76b718d292d392"
+        },
+        "bytes": 28303559
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-025.tar.gz",
+          "sha256": "9f3cae357001e8c6e6bf6f52358352b61e1cea81dc8a9d2f0935222ee8660393"
+        },
+        "bytes": 28054432
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-026.tar.gz",
+          "sha256": "9e7a5718cd48d4eb22c118580ae92d592b84de6f36bab10c8b236af6a64d4667"
+        },
+        "bytes": 35982653
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-027.tar.gz",
+          "sha256": "3d11c54ae96ee695ee31d42f931b82a1008c519c1202df06eed1887f258871ec"
+        },
+        "bytes": 27063603
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-028.tar.gz",
+          "sha256": "013458eca76d0a1028da0faa0aa894495e1845d6f4851864ac04e15dad352222"
+        },
+        "bytes": 19529721
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-029.tar.gz",
+          "sha256": "b6ce25d939f61ad15320e5fbf26ecaf563930360135f977edc164ef4d2f9dbe0"
+        },
+        "bytes": 9718335
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-030.tar.gz",
+          "sha256": "2a259022b047cd53aef5531fb131eacb4505028f1d00c9307e35a408a5c4271b"
+        },
+        "bytes": 8108182
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-031.tar.gz",
+          "sha256": "2e696533690d918189f921412a043f53dc9fc92db1272d550affaab5e84a1c0a"
+        },
+        "bytes": 8773234
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-032.tar.gz",
+          "sha256": "3de270989271d6154fa52f94eda9a9c78c0a299dee392334e6c9c12e275e1a32"
+        },
+        "bytes": 8709766
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-033.tar.gz",
+          "sha256": "1827e6a80a867fb75c31f98f9b1d9ecb646f93fff4d44ccbe40b77796db4dfac"
+        },
+        "bytes": 8306134
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-034.tar.gz",
+          "sha256": "6b85e4f317a806d6c3e0b01f4d70a03f21c4c81309958988c488adc2dfa9cf22"
+        },
+        "bytes": 5509030
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-035.tar.gz",
+          "sha256": "edf6542dfcd0e3e9bccaf0b9cda19eebc4427100fc3948807324b49242c22861"
+        },
+        "bytes": 7703254
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-036.tar.gz",
+          "sha256": "b1857749afd9c918b06cae9e518e76fb35318be3b10229b37214dbc42ecdf161"
+        },
+        "bytes": 17574592
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-037.tar.gz",
+          "sha256": "aa5b2b3aa67c0bb26c25caf9f8606c6bdb38b844ec6f14e6cee060022d291b6e"
+        },
+        "bytes": 26419963
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-038.tar.gz",
+          "sha256": "31bef14b67edc4e2dfc8a94a889c46f7eeb72ccfbc41a86eb45b3b983628221f"
+        },
+        "bytes": 26449858
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-039.tar.gz",
+          "sha256": "0ce4e80a7433d44ab69d3d977dc50c95cb5bb82df68c8f10a237f2a3fb17f645"
+        },
+        "bytes": 30199280
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-040.tar.gz",
+          "sha256": "a772a435f2d105fc9dc15672795c82f6ef58f74043a739c77700c043fd1aa4ba"
+        },
+        "bytes": 29540233
+      },
+      {
+        "archive": {
+          "path": "artifacts/gpup-general-v1/portable/delivery-v2/evidence-041.tar.gz",
+          "sha256": "b7434456d72a0c648c214267c432e721d3dc99a9a2b38c9d6d8194f5e7cd88d8"
+        },
+        "bytes": 20165114
+      }
+    ],
+    "raw_bytes": 4857558154,
+    "scope": "retained general-program inputs, responses, proofs, failures, source versions and serial checker; local bundle, not a Git blob"
+  },
+  "archive_receipt_binding": {
+    "path": "artifacts/gpup-general-v1/portable/delivery-v2/receipt.json",
+    "sha256": "5da3873d48200210859f6a359e5f81729d22adb2afb256d8d2fb4b65c19faf1e"
+  },
+  "assessments": 5833,
+  "charged_cpu_seconds": 40002.661693116,
+  "charged_gpu_seconds": 2623.360765263,
+  "confirmation_frozen": false,
+  "device_admission": {
+    "path": "artifacts/gpup-general-v1/device-admission-v2.json",
+    "sha256": "5620aec7ac3e787d3f01825c275f7b66e09cb60dd89baa84bb5862acdcc61e9c"
+  },
+  "general_python_tests": 9,
+  "isolated_rust_tests": 12,
+  "missing_cells": 39,
+  "native_gate": {
+    "path": "artifacts/gpup-general-v1/resources/native-v3.settlement.json",
+    "sha256": "cf544018ffccd25b31c897f43c01a7e67fe5f01368beff536f7e8223e5f79cd5"
+  },
+  "native_python_tests": 819,
+  "native_rust_tests": 638,
+  "no_broad_performance_claim": true,
+  "observation": "265 retained responses replay; 264 have complete campaign resource receipts; missing supervision is not repaired",
+  "portable_replay": {
+    "path": "artifacts/gpup-general-v1/portable/delivery-v2/replay.json",
+    "sha256": "20d01b0568e1bc46bc06eabe0bbf55db79a730b9f673e6e5781aaa8195c58032"
+  },
+  "preservation": {
+    "path": "artifacts/gpup-general-v1/preservation-v2.json",
+    "sha256": "f48302a647bb69c902a40bdbc62bb09842972775ec93f1f42fdea6e3603b5c8d"
+  },
+  "public_defaults_changed": false,
+  "retained_cells": 265,
+  "schema_version": 1,
+  "status": "engineering checkpoint; broad objective active"
+}

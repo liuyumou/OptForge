@@ -1,5 +1,41 @@
 # Active Task
 
+## General low-bit LP implementation active (2026-11-16)
+
+The user directs the project toward a broadly useful LP solver whose performance
+improves through low-bit arithmetic, including FP4. Keep this objective persistent:
+single solves matter; workflow-specific recipes or native fallback alone do not
+complete it. ADR-0079 / SPEC-0045 authorize the reviewed implementation and broad
+evaluation plan. Reuse sparse solver/preconditioning/restart APIs, preserve strict
+original-model certificates, and admit each new numerical/device implementation.
+
+GPUP-9 remains complete under its original scoped protocol. The additive review
+records that scaling was numerically inactive (288 identical response pairs), and
+that square nonsingular equality fixtures do not establish general LP behavior.
+Preserve all historical observations, criteria, sources and charges exactly.
+PREP3 is supporting diagnosis; GPUP-10 packaging follows broad validation.
+
+Independent ceiling: 240000 CPU / 30000 GPU seconds; phase caps in SPEC-0045,
+receipts artifacts/gpup-general-v1. Four CPU slots, 16 GiB sampled RSS, 12 GiB device
+buffers, one pinned shared lease, unchanged one-second supervisor and all 100 ms
+advisories. Preserve failures/full charges. Source-bound numerical/device admission
+passes. The first 128-cell pilot completes; the extended pilot retains 137/176
+responses (136 with complete supervision), with 39 missing cells after a missing
+supervisor receipt. No retry. Current cleanup is empty; historical supervision is
+not reconstructed. Full conservative interruption charge and sources are retained.
+Its disposition permits CPU work; new GPU/scientific work requires operational
+readmission. Each lane certifies 18/44 planned extended cases. FP4 supplies only
+about 0.48% of accepted updates; broad low-bit value remains unestablished.
+Continue general convergence, control/check separation, local guards and efficient
+low-bit execution; the sparse prototype uses FP4 storage with FP32 SIMT arithmetic,
+not Tensor Cores. No confirmation is frozen. Commit locally only; public defaults
+and publication remain separate. See docs/benchmarks/lp-general-lowbit.md.
+
+Delivery acceptance: 638 Rust / 819 Python plus 12 isolated Rust; portable replay
+verifies 43484 files and 265 responses / 5833 assessments, preserving missingness.
+Open allocation checkpoint: 40002.661693116 CPU / 2623.360765263 GPU seconds.
+Large evidence remains local; compact results and validation receipts are tracked.
+
 ## GPUP-9 controlled study complete (2026-11-15)
 
 SPEC-0044 / ADR-0078 deliver the independent controlled native/FP4 study on the
