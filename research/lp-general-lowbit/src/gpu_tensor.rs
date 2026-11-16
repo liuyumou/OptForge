@@ -1,0 +1,288 @@
+//! Checkpointed sparse GPU execution with original-model host certification.
+use crate::{
+    Result,
+    operator::{Format, Operator},
+    solve::{Settings, assess_repaired, same_state},
+    tensor::{Config, Packed},
+    tensor_device::Device,
+};
+use crate::{control::Fp64Controller, merit::EngineMerit};
+use optimizer_core::Model;
+use optimizer_lp::{Engine, LinearProgram};
+use serde_json::{Value, json};
+use std::{
+    path::Path,
+    time::{Duration, Instant},
+};
+
+pub fn solve(model: &Model, settings: &Settings, image: &Path, config: &Config) -> Result<Value> {
+    settings.validate()?;
+    config.validate()?;
+    let mut control_settings = settings.clone();
+    control_settings.check_interval = config.control_interval;
+    let started = Instant::now();
+    let program = LinearProgram::new(model)?;
+    let certificate_context = crate::implied::Context::new(model, &program)?;
+    let engine = Engine::new(&program, control_settings.lp());
+    let op = Operator::new_for(&engine, Format::Native)?;
+    let packed = if settings.format.components() > 0 {
+        Some(Packed::new(&op, config)?).filter(|p| p.tile_count > 0)
+    } else {
+        None
+    };
+    let mut control =
+        Fp64Controller::new_with_merit(&engine, |x, y, w| engine.projected_residual(x, y, w));
+    control.set_deadline(Some(started + Duration::from_millis(settings.wall_ms)));
+    let selected_format = if settings.format.components() > 0 && packed.is_none() {
+        Format::Native
+    } else {
+        settings.format
+    };
+    let prepared = started.elapsed().as_nanos();
+    let mut device = Device::new(
+        &engine,
+        &op,
+        packed.as_ref(),
+        image,
+        selected_format,
+        config,
+    )?;
+    device.reset(control.state())?;
+    let setup = started.elapsed().as_nanos() - prepared;
+    let mut format = selected_format;
+    let mut current_merit = control.state().anchor_error;
+    let mut accepted = [0u64; 6];
+    let mut attempted = [0u64; 6];
+    let mut recoveries = Vec::new();
+    let mut assessments = Vec::new();
+    let mut accepted_work = [0u64; 4];
+    let mut work_before = [0u64; 4];
+    let mut last_certificate = 0;
+    let mut faulted = false;
+    let mut status = "limit";
+    let mut execution_ns = 0;
+    let mut assessment_ns = 0;
+    let mut recovery_ns = 0;
+    let index = |f| match f {
+        Format::Native => 0,
+        Format::Fp32 => 1,
+        Format::Fp4x1 => 2,
+        Format::Fp4x2 => 3,
+        Format::Fp4x3 => 4,
+        Format::Fp4x4 => 5,
+    };
+    while control.remaining() > 0 {
+        if control.expired() {
+            status = "deadline";
+            break;
+        }
+        if settings
+            .cancel_after
+            .is_some_and(|v| control.physical_iterations() >= v)
+        {
+            status = "cancelled";
+            break;
+        }
+        // Device state is accepted only at a complete host assessment boundary.
+        let checkpoint_work = work_before;
+        let checkpoint = control.checkpoint();
+        let before = control.state().clone();
+        let before_error = current_merit;
+        let limit = crate::merit::local_budget(before_error);
+        let mut done = 0;
+        let mut rejected = false;
+        let mut interrupted = false;
+        let execution_start = Instant::now();
+        while !control.check_pending() && control.remaining() > 0 {
+            let mut count = control.next_chunk(config.control_interval);
+            if let Some(at) = settings.cancel_after {
+                count = count.min(at.saturating_sub(control.physical_iterations()));
+            }
+            if !faulted && let Some(at) = settings.force_recovery_after {
+                count = count.min(at.saturating_sub(control.physical_iterations()).max(1));
+            }
+            if count == 0 {
+                interrupted = true;
+                status = "cancelled";
+                break;
+            }
+            let valid = device.advance(
+                count,
+                engine.step(),
+                control.state().weight,
+                control.state().since_restart,
+                limit,
+            )?;
+            attempted[index(format)] += count;
+            done += count;
+            control.commit_steps(count)?;
+            if control.expired()
+                || settings
+                    .cancel_after
+                    .is_some_and(|v| control.physical_iterations() >= v)
+            {
+                interrupted = true;
+                status = if control.expired() {
+                    "deadline"
+                } else {
+                    "cancelled"
+                };
+                break;
+            }
+            if !valid {
+                rejected = true;
+                break;
+            }
+            if !faulted
+                && settings
+                    .force_recovery_after
+                    .is_some_and(|v| control.physical_iterations() >= v)
+            {
+                faulted = true;
+                rejected = true;
+                break;
+            }
+        }
+        if !rejected && !interrupted {
+            let (x, y) = device.endpoint()?;
+            let (cx, cy, _, _) = control.buffers();
+            cx.copy_from_slice(&x);
+            cy.copy_from_slice(&y);
+        }
+        execution_ns += execution_start.elapsed().as_nanos();
+        let work_after = device.work()?;
+        let check_start = Instant::now();
+        if !rejected && !interrupted {
+            let s = control.state();
+            let error = engine.projected_residual(&s.primal, &s.dual, s.weight);
+            current_merit = error;
+            rejected = !error.is_finite()
+                || (format != Format::Native && error > 2. * before_error.max(settings.tolerance));
+        }
+        assessment_ns += check_start.elapsed().as_nanos();
+        if interrupted || rejected {
+            current_merit = before_error;
+            work_before = work_after;
+            let recovery_start = Instant::now();
+            control.restore(&checkpoint)?;
+            let exact = same_state(control.state(), &before);
+            device.reset(control.state())?;
+            if interrupted {
+                recovery_ns += recovery_start.elapsed().as_nanos();
+                break;
+            }
+            if format == Format::Native {
+                status = "numerical_failure";
+                recovery_ns += recovery_start.elapsed().as_nanos();
+                break;
+            }
+            let next = Format::Native;
+            recoveries.push(json!({"from":format,"to":next,"physical":control.physical_iterations(),
+                "logical":control.state().iterations,"generation":control.generation(),"restored_exact":exact}));
+            device.set_format(next)?;
+            format = next;
+            recovery_ns += recovery_start.elapsed().as_nanos();
+            continue;
+        }
+        accepted[index(format)] += done;
+        for j in 0..4 {
+            accepted_work[j] += work_after[j] - work_before[j];
+        }
+        work_before = work_after;
+        let check_start = Instant::now();
+        let due = control.state().iterations.saturating_sub(last_certificate)
+            >= settings.check_interval
+            || control.remaining() == 0;
+        if due {
+            last_certificate = control.state().iterations;
+            let endpoint = control.iterate();
+            let certificate = assess_repaired(
+                model,
+                certificate_context.program(&program),
+                &endpoint.primal,
+                &endpoint.dual,
+                settings.tolerance,
+            )?;
+            assessments.push(
+            json!({"physical":control.physical_iterations(),"logical":control.state().iterations,
+            "primal":endpoint.primal,"dual":endpoint.dual,"certificate":certificate}),
+        );
+            if control.expired() {
+                control.restore(&checkpoint)?;
+                accepted[index(format)] -= done;
+                // A deadline invalidates this entire control interval, including low-bit work.
+                for j in 0..4 {
+                    accepted_work[j] -= work_after[j] - checkpoint_work[j];
+                }
+                status = "deadline";
+                assessment_ns += check_start.elapsed().as_nanos();
+                break;
+            }
+            if certificate["accepted"] == true {
+                status = "certified";
+                assessment_ns += check_start.elapsed().as_nanos();
+                break;
+            }
+        }
+        if control.expired() {
+            control.restore(&checkpoint)?;
+            accepted[index(format)] -= done;
+            for j in 0..4 {
+                accepted_work[j] -= work_after[j] - checkpoint_work[j];
+            }
+            status = "deadline";
+            break;
+        }
+        if control.check_pending() {
+            let checked_weight = control.state().weight;
+            let checked_merit = current_merit;
+            control.continue_after_check_with_merit(|x, y, w| {
+                current_merit = if w.to_bits() == checked_weight.to_bits() {
+                    checked_merit
+                } else {
+                    engine.projected_residual(x, y, w)
+                };
+                current_merit
+            });
+        }
+        device.reset(control.state())?;
+        assessment_ns += check_start.elapsed().as_nanos();
+    }
+    let check_start = Instant::now();
+    let endpoint = control.iterate();
+    let certificate = if status == "certified" {
+        assessments.last().ok_or("missing accepted assessment")?["certificate"].clone()
+    } else {
+        assess_repaired(
+            model,
+            certificate_context.program(&program),
+            &endpoint.primal,
+            &endpoint.dual,
+            settings.tolerance,
+        )?
+    };
+    if control.expired() {
+        status = "deadline";
+    }
+    assessment_ns += check_start.elapsed().as_nanos();
+    let physical_work = device.work()?;
+    let reference_work = device.reference_work;
+    let device_bytes = device.allocated_bytes;
+    let teardown_start = Instant::now();
+    drop(device);
+    let teardown_ns = teardown_start.elapsed().as_nanos();
+    Ok(
+        json!({"schema_version":1,"kind":"general-lowbit-solve","execution":"sparse-tensor-local","settings":settings,"tensor_config":config,"selected_initial_format":selected_format,
+        "reference_product_nnz":reference_work,
+        "physical_product_work":physical_work,"accepted_product_work":accepted_work,
+        "product_work_order":["tensor_attempted_nnz","tensor_used_nnz","row_correction_nnz","logical_product_nnz"],
+        "tile_count":packed.as_ref().map_or(0,|p|p.tile_count),"packed_bytes":packed.as_ref().map_or(0,Packed::storage_bytes),
+        "bound_proof":certificate_context.proof,"guard_policy":"tile-local-row-replacement-v2",
+        "status":status,"certified":status=="certified"&&certificate["accepted"]==true,"certificate":certificate,
+        "primal":endpoint.primal,"dual":endpoint.dual,"physical":control.physical_iterations(),"logical":control.state().iterations,
+        "restarts":control.state().restarts,"attempted":attempted,"accepted":accepted,"format_order":["native","fp32","fp4x1","fp4x2","fp4x3","fp4x4"],
+        "recoveries":recoveries,"assessments":assessments,"operator_storage_bytes":op.storage_bytes(),"device_bytes_upper":device_bytes,
+        "rows":program.row_count(),"columns":program.column_count(),"nonzeros":program.nonzeros(),"elapsed_ns":started.elapsed().as_nanos(),
+        "cost_ns":{"host_preparation":prepared,"device_setup":setup,"execution":execution_ns,"assessment":assessment_ns,"recovery":recovery_ns,"device_teardown":teardown_ns}}),
+    )
+}

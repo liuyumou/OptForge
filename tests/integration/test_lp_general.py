@@ -116,4 +116,25 @@ class GeneralTests(unittest.TestCase):
         changed=copy.deepcopy(tight);changed['constraints'][0]['upper']=finite(5.)
         with self.assertRaises(ValueError):verify(model,changed,proof)
 
+
+class OperationalReadmissionTests(unittest.TestCase):
+    def test_explicit_readmission_binds_disposition_sources_and_cleanup(self):
+        from lp_general_readmit import validate,sources
+        with tempfile.TemporaryDirectory(dir=ROOT/'artifacts') as d:
+            base=Path(d);disposition={'path':'old','sha256':'unchanged'}
+            proof=base/'proof.json';receipt=base/'receipt.json';settlement=base/'settlement.json'
+            proof.write_text(json.dumps(dict(status='passed',tests=39,skipped=0,sources=sources())))
+            receipt.write_text(json.dumps(dict(status='passed',guardian_cleanup=dict(empty=True),result=dict(cleanup=dict(empty=True)))))
+            settlement.write_text(json.dumps(dict(status='passed',overrun=False,gpu=False,phase='admission',resource=ref(receipt))))
+            path=base/'operational-readmission-v1.json'
+            record=dict(kind='prospective-general-operational-readmission',status='passed',interruptions=[disposition],historical_supervision_established=False,
+                        sources=sources(),max_gap_ns=1000000000,proof=ref(proof),settlement=ref(settlement))
+            path.write_text(json.dumps(record));validate(disposition,base)
+            with self.assertRaises(ValueError):validate({'path':'another','sha256':'interruption'},base)
+            record['historical_supervision_established']=True;path.write_text(json.dumps(record))
+            with self.assertRaises(ValueError):validate(disposition,base)
+            record['historical_supervision_established']=False;path.write_text(json.dumps(record))
+            receipt.write_text('{}')
+            with self.assertRaises(ValueError):validate(disposition,base)
+
 if __name__=='__main__':unittest.main()

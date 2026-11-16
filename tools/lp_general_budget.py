@@ -57,8 +57,9 @@ def admission_open(base=BASE, phase=None, gpu=False):
                     'interruption charge differs')
             r=load(reservation)
             require(s['cpu_ns']>=r['cpu_ns'] and s['gpu_ns']>=r['gpu_ns'],'interruption undercharged')
-            require(not gpu and phase not in ('development','confirmation'),
-                    'missing supervision receipt: new GPU/scientific execution needs operational readmission')
+            if gpu or phase in ('development','confirmation'):
+                from lp_general_readmit import validate
+                validate(item, base)
             continue
         require(not s['overrun'], 'prior resource overrun closes execution')
         if s.get('resource'):

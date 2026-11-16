@@ -1,5 +1,42 @@
 # Agent Instructions
 
+## Actual FP4 Tensor Core continuation delivered; value unestablished (2026-11-16)
+
+Keep the broadly useful low-bit LP objective active, including ordinary single
+solves and meaningful FP4 contribution. SPEC-0045 now admits an opt-in actual
+SM120 E2M1 Tensor Core backend with canonical sparse tiles, local original-row
+replacement, FP64 control-boundary references/state, separate control/certificate
+cadences and unchanged strict original-model certificates. Four-component FP4
+uses sixteen logical coefficient bits plus metadata/original data; it is not a
+four-bit-total-storage claim. Native and actual FP32 controls remain explicit.
+
+The 154-cell ablation and 132-cell broad comparison complete with full supervision.
+All three lanes certify 20/44 model/tier cases. FP4 retains 99.999832% of eligible
+tensor work and contributes 25.3910% of accepted product nonzeros, but beats native
+in 0/14 jointly certified cases with actual tensor work (median 0.816x). The
+all-configuration median is 0.892x; its three faster pairs use no FP4. An apparent
+11.25x adlittle gain is a native-setup outlier, not FP4 evidence. Both layouts and
+launch shapes preserve 44 numerical transcripts. Broad low-bit value is not
+established. Continue general convergence, efficient sparse low-bit execution and
+lower guard/encoding/launch cost; do not narrow the project to dense-tile cases,
+prepared workflows or native fallback. No confirmation is frozen.
+
+Prospective operational readmission passes; earlier missing supervision and the
+39 missing extended-pilot cells remain unchanged. The first tensor campaign's
+writer failure retains two responses, 66 missing cells, sources and full charge;
+no scientific retry. All four failed new reservations retain 3120 CPU / 180 GPU
+seconds. Final admission: 638 Rust / 820 Python plus 15 isolated Rust; 21888 product
+outputs and all four sanitizers. Portable delta replay verifies 39385 files,
+288 responses / 3767 assessments (2638 distinct serial checks), preserving all
+43430 earlier archived scientific files. Large evidence remains local.
+
+Existing independent 240000 CPU / 30000 GPU allocation and phase caps stay open;
+four CPU slots, 16 GiB sampled RSS, 12 GiB device buffers, one pinned lease, unchanged
+one-second supervision and all 100 ms advisories. Cleanup is empty. Public defaults
+and publication remain separate. Commit locally only.
+Open allocation checkpoint: 61348.495516364 CPU / 5583.955075437 GPU seconds.
+Report: [actual Tensor Core development](docs/benchmarks/lp-general-tensor.md).
+
 ## General low-bit LP implementation active (2026-11-16)
 
 The user directs the project toward a broadly useful LP solver whose performance

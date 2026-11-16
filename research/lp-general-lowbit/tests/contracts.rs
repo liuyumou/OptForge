@@ -268,3 +268,73 @@ fn dual_repair_is_only_a_proposal_to_the_unchanged_checker() {
     );
     assert!(lp_general_lowbit::repair::propose(&p, &[2.]).is_none());
 }
+
+#[test]
+fn tensor_packing_stays_sparse_on_large_rectangles() {
+    use lp_general_lowbit::tensor::{Config, Packed};
+    let model = model(32769, 3);
+    let p = LinearProgram::new(&model).unwrap();
+    let e = Engine::new(&p, settings(Format::Native).lp());
+    let op = Operator::new_for(&e, Format::Native).unwrap();
+    let packed = Packed::new(&op, &Config::default()).unwrap();
+    assert_eq!(packed.tile_count, 0);
+    assert_eq!(packed.rows.residual.original.len(), p.nonzeros());
+    assert_eq!(packed.columns.residual.original.len(), p.nonzeros());
+    assert!(
+        packed.storage_bytes() < 20 * (p.row_count() + p.column_count()) + 32 * p.nonzeros() + 256
+    );
+}
+#[test]
+fn tensor_transpose_must_bind_original_coefficient_bytes() {
+    use lp_general_lowbit::tensor::{Config, Packed};
+    let model = model(33, 17);
+    let p = LinearProgram::new(&model).unwrap();
+    let e = Engine::new(&p, settings(Format::Native).lp());
+    let mut op = Operator::new_for(&e, Format::Native).unwrap();
+    let config = Config {
+        min_tile_nnz: 1,
+        components: 4,
+        control_interval: 32,
+        incremental: true,
+        compact_fragments: true,
+        tensor_warps: 1,
+    };
+    let packed = Packed::new(&op, &config).unwrap();
+    assert_eq!(
+        packed
+            .rows
+            .covered
+            .iter()
+            .map(|v| *v as usize)
+            .sum::<usize>(),
+        p.nonzeros()
+    );
+    op.columns.original[0] = op.columns.original[0].next_up();
+    assert!(Packed::new(&op, &config).is_err());
+}
+#[test]
+fn extended_fp4_components_are_exclusive_to_the_tensor_backend() {
+    use lp_general_lowbit::tensor::Config;
+    let model = model(5, 3);
+    let p = LinearProgram::new(&model).unwrap();
+    let e = Engine::new(&p, settings(Format::Native).lp());
+    for format in [Format::Fp4x3, Format::Fp4x4] {
+        assert!(Operator::new_for(&e, format).is_err());
+    }
+    for bad in [
+        Config {
+            min_tile_nnz: 0,
+            ..Config::default()
+        },
+        Config {
+            components: 5,
+            ..Config::default()
+        },
+        Config {
+            control_interval: 0,
+            ..Config::default()
+        },
+    ] {
+        assert!(bad.validate().is_err());
+    }
+}

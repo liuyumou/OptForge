@@ -11,7 +11,7 @@ use optimizer_lp::Engine;
 use std::{path::Path, rc::Rc};
 
 pub const DEVICE: &str = "GPU-6721b13a-30f9-83ec-dace-ba2d9738556f";
-fn upload<T: Copy + Default>(
+pub(crate) fn upload<T: Copy + Default>(
     ctx: &Rc<Context>,
     stream: &Stream,
     values: &[T],
@@ -24,13 +24,17 @@ fn upload<T: Copy + Default>(
     }
     Ok(out)
 }
-fn read<T: Copy + Default>(b: &DeviceBuffer<T>, stream: &Stream, n: usize) -> Result<Vec<T>> {
+pub(crate) fn read<T: Copy + Default>(
+    b: &DeviceBuffer<T>,
+    stream: &Stream,
+    n: usize,
+) -> Result<Vec<T>> {
     let mut v = vec![T::default(); b.len()];
     b.copy_to(&mut v, stream)?;
     v.truncate(n);
     Ok(v)
 }
-fn write<T: Copy + Default>(b: &mut DeviceBuffer<T>, s: &Stream, v: &[T]) -> Result<()> {
+pub(crate) fn write<T: Copy + Default>(b: &mut DeviceBuffer<T>, s: &Stream, v: &[T]) -> Result<()> {
     if v.is_empty() {
         b.copy_from(&[T::default()], s)?;
     } else {
@@ -38,15 +42,17 @@ fn write<T: Copy + Default>(b: &mut DeviceBuffer<T>, s: &Stream, v: &[T]) -> Res
     }
     Ok(())
 }
-fn pointer<T: Copy>(b: &DeviceBuffer<T>) -> A {
+pub(crate) fn pointer<T: Copy>(b: &DeviceBuffer<T>) -> A {
     A::DevicePtr(b.as_device_ptr())
 }
-fn mode(f: Format) -> u32 {
+pub(crate) fn mode(f: Format) -> u32 {
     match f {
         Format::Native => 0,
         Format::Fp32 => 1,
         Format::Fp4x1 => 2,
         Format::Fp4x2 => 3,
+        Format::Fp4x3 => 4,
+        Format::Fp4x4 => 5,
     }
 }
 struct Matrix {
@@ -272,6 +278,7 @@ impl Device {
             Format::Fp32 => self.prepared != Format::Native,
             Format::Fp4x2 => matches!(self.prepared, Format::Fp4x1 | Format::Fp4x2),
             Format::Fp4x1 => self.prepared == Format::Fp4x1,
+            Format::Fp4x3 | Format::Fp4x4 => false,
         };
         if !resident || !op.supports(format) {
             return Err("unprepared device format".into());

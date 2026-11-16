@@ -8,3 +8,7 @@ pub mod gpu;
 pub mod implied;
 pub mod merit;
 pub mod repair;
+
+pub mod gpu_tensor;
+pub mod tensor;
+pub mod tensor_device;

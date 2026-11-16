@@ -15,12 +15,17 @@ pub enum Format {
     Fp32,
     Fp4x1,
     Fp4x2,
+    /// Actual Tensor Core backend only; legacy sparse operators reject these.
+    Fp4x3,
+    Fp4x4,
 }
 impl Format {
     pub fn components(self) -> usize {
         match self {
             Self::Fp4x1 => 1,
             Self::Fp4x2 => 2,
+            Self::Fp4x3 => 3,
+            Self::Fp4x4 => 4,
             _ => 0,
         }
     }
@@ -96,6 +101,9 @@ impl Operator {
         Self::new_for(engine, Format::Fp4x1)
     }
     pub fn new_for(engine: &Engine<'_>, prepared: Format) -> Result<Self> {
+        if prepared.components() > 2 {
+            return Err("multi-component format requires tensor backend".into());
+        }
         let p = engine.program();
         if p.row_count().max(p.column_count()) > MAX_DIMENSION || p.nonzeros() > MAX_NONZEROS {
             return Err("operator resource domain".into());
@@ -189,6 +197,7 @@ impl Operator {
             Format::Fp32 => self.prepared != Format::Native,
             Format::Fp4x2 => matches!(self.prepared, Format::Fp4x1 | Format::Fp4x2),
             Format::Fp4x1 => self.prepared == Format::Fp4x1,
+            Format::Fp4x3 | Format::Fp4x4 => false,
         }
     }
     pub fn orientation(&self, transpose: bool) -> &Orientation {
@@ -196,6 +205,9 @@ impl Operator {
     }
     pub fn parts(&self, id: usize, format: Format) -> [f64; 2] {
         match format {
+            Format::Fp4x3 | Format::Fp4x4 => {
+                panic!("multi-component format requires tensor backend")
+            }
             Format::Native => [self.rows.original[id], 0.],
             Format::Fp32 => [f64::from(self.fp32[id]), 0.],
             Format::Fp4x1 | Format::Fp4x2 => {

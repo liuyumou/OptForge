@@ -227,3 +227,81 @@ and cleanup only. New GPU or scientific execution remains closed pending
 operational readmission. Keep the one-second supervisor and every 100 ms
 advisory unchanged. Publish explicit missing cells and distinguish retained
 numerical endpoints from timings eligible under a complete resource receipt.
+
+## Actual Tensor Core continuation (2026-11-16)
+
+The user authorizes actual FP4 Tensor Core arithmetic and redesign of guards,
+precision policy and mixed-precision machinery for general performance. This
+prospective development keeps all earlier candidates and observations unchanged.
+The new opt-in backend uses canonical 32-by-32 sparse blocks, admitting tiles by
+their nonzero density alone. Remaining entries stay sparse. It never densifies a
+whole operator. The represented transpose uses exactly the same coefficients.
+Normal E2M1 matrix and vector components feed actual SM120 MMA instructions with
+FP32 accumulation and FP64 solver state. Single-vector execution remains primary.
+
+Investigate direct products without periodic original-A anchors. Tile-local
+coefficient/vector error bounds replace global vector maxima. A local refusal
+recomputes that output from original FP64 coefficients before projection; no
+uncertified approximate row enters the state. This local proposal replacement
+supersedes whole-solve promotion for these local refusals only. Global progress,
+finite-state, cancellation and fault failures still restore the complete control
+checkpoint. Physical attempted, rejected, exact and accepted nonzero work is
+reported separately. A native replacement is never counted as FP4 work.
+
+Control feedback and certificate assessment have separate cadences, shared by
+native, FP32 and Tensor Core controls. Final certificates remain unchanged and
+mandatory. Comparisons include preparation, packing, launch, correction and
+checking; density thresholds and precision settings are development parameters,
+not family identifiers. No new confirmation is frozen by this continuation.
+
+Operational readmission requires a fresh CPU-only supervisor contract suite and
+settled supervised workload probe, exact current supervisor/budget source
+bindings, empty cleanup and the unchanged one-second bound. Its prospective
+receipt explicitly names the interrupted disposition; it cannot reconstruct
+historical supervision or repair the missing cells. GPU numerical admission then
+requires current CPU/native acceptance, independent product/guard verification,
+recovery tests and all four sanitizers before new development comparisons.
+The existing independent allocation and phase ceilings remain unchanged.
+
+The first actual tensor admission passes independent products, original serial
+certificates, restoration and four sanitizers. Direct two-component products
+still require frequent row replacements. The next development version admits
+one through four normal-E2M1 components (reported explicitly; four FP4 components
+are not a claim of four-bit total storage). Component dots contain 32 quarter-
+integer products with absolute sum at most 1152, so unscaled MMA accumulation is
+exact. Power-of-two scale sums remain in [-96,96]; scaled normal sums are finite.
+Across tiles and component pairs, gamma(k*k*tile_count+1,2^-24) bounds FP32
+accumulation. Tile coefficient-error L1, component L1, and vector-block actual
+representation error are outward enclosures. Matrix sums include binary64
+component/subtraction allowances; vector conversion includes its actual decoded
+components and binary64 subtraction error. Independent rational checks verify
+both transpose directions against original coefficients, not merely decoded data.
+
+Compare direct products with control-boundary original-A references. The latter
+quantizes only the current increment from its FP64 anchor and refreshes at control
+boundaries, not every 16 updates. Sparse remainder products use the same increment;
+all subtraction, original reference, accumulation and final-addition errors are
+included. Native row replacement always recomputes the full original product.
+The reference's 32-lane tree has at most ceil(row_nnz/32) accumulation depth plus
+five shuffle levels; gamma(ceil(row_nnz/32)+8,2^-52) and a conservative underflow
+allowance enclose it. Count references separately from useful tensor nonzeros.
+Direct mode remains an ablation; no reference cost is hidden in native work.
+
+Reuse a control merit only for the identical state and weight; a changed weight
+requires fresh evaluation. Cache kernel handles within each launch window and
+reuse an accepted final assessment without repeating the same certificate work.
+These shared optimizations also apply to the new native and FP32 controls.
+
+The optimized candidate packs two four-coefficient MMA byte fragments into one
+32-bit nibble word, expanding only into registers. Expanded fragments remain a
+matched layout ablation. A row-block histogram discovers eligible tiles in linear
+sparse passes, avoiding a heap allocation for every occupied sparse block.
+Operators with no eligible tiles select native execution explicitly and contribute
+zero FP4 work; this does not count toward the low-bit objective. The FP32 control
+stores actual binary32 coefficients in each orientation and retains original
+coefficients only for references/correction. Its bound uses the actual lane/tree
+accumulation depth. Tensor product launches expose one or four warps per block;
+this changes occupancy, not arithmetic order. Both layouts and launch shapes need
+numerical and sanitizer admission. Retain direct, two-component, expanded-layout
+and four-warp diagnostic comparisons, then assess the common four-component policy
+against native and FP32 on the whole 22-model development roster at both tiers.

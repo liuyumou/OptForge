@@ -282,3 +282,12 @@ charges or frozen cohort. Earlier allocations remain closed.
 
 Receipts and immutable source snapshots: artifacts/gpup-general-v1. Allocation
 and broad objective remain open; this is an engineering checkpoint, not adoption.
+
+
+## Actual Tensor Core continuation
+
+The separately admitted [actual FP4 Tensor Core continuation](lp-general-tensor.md)
+retains the original pilot and interruption unchanged. Its complete ablation and
+full-solve development cohorts diagnose useful FP4 work, local guards and complete
+cost on the broad roster. Numerical admission and substantial FP4 contribution do
+not establish a speed advantage; the general low-bit objective remains active.

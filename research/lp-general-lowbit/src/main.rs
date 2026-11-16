@@ -23,6 +23,9 @@ fn run() -> Result<()> {
             "gpu",
             "gpu-probe",
             "gpu-fixed",
+            "tensor-operator",
+            "gpu-tensor",
+            "gpu-tensor-probe",
             "assess",
             "assess-proven",
             "tighten",
@@ -61,7 +64,72 @@ fn run() -> Result<()> {
         let request: Value = serde_json::from_slice(&line)?;
         let settings: Settings = serde_json::from_value(request["settings"].clone())?;
         settings.validate()?;
-        let mut result = if args[1] == "cpu" {
+        let mut result = if matches!(
+            args[1].as_str(),
+            "tensor-operator" | "gpu-tensor" | "gpu-tensor-probe"
+        ) {
+            use lp_general_lowbit::{
+                tensor::{Config, Packed},
+                tensor_device,
+            };
+            let mut config: Config =
+                serde_json::from_value(request.get("tensor").cloned().unwrap_or(json!({})))?;
+            config.validate()?;
+            if settings.format.components() > 0 {
+                if request
+                    .get("tensor")
+                    .and_then(|t| t.get("components"))
+                    .is_some()
+                    && config.components != settings.format.components()
+                {
+                    return Err("format/component mismatch".into());
+                }
+                config.components = settings.format.components();
+            }
+            config.validate()?;
+            if args[1] == "gpu-tensor" {
+                lp_general_lowbit::gpu_tensor::solve(
+                    &model,
+                    &settings,
+                    Path::new(&args[3]),
+                    &config,
+                )?
+            } else {
+                let p = LinearProgram::new(&model)?;
+                let e = Engine::new(&p, settings.lp());
+                let op = Operator::new_for(&e, Format::Native)?;
+                let packed = Packed::new(&op, &config)?;
+                if args[1] == "tensor-operator" {
+                    json!({"operator":op,"packed":packed,"tensor_config":config})
+                } else {
+                    let tr = request["transpose"].as_bool().ok_or("transpose boolean")?;
+                    let vector: Vec<f64> = serde_json::from_value(request["vector"].clone())?;
+                    let limit = request
+                        .get("local_limit")
+                        .and_then(Value::as_f64)
+                        .unwrap_or(f64::MAX);
+                    if !limit.is_finite() || limit < 0. {
+                        return Err("local limit domain".into());
+                    }
+                    let mut d = tensor_device::Device::new(
+                        &e,
+                        &op,
+                        Some(&packed),
+                        Path::new(&args[3]),
+                        settings.format,
+                        &config,
+                    )?;
+                    let anchor: Vec<f64> = serde_json::from_value(
+                        request
+                            .get("anchor")
+                            .cloned()
+                            .unwrap_or(json!(vec![0.; vector.len()])),
+                    )?;
+                    let product = d.probe(tr, &vector, &anchor, limit)?;
+                    json!({"operator":op,"packed":packed,"product":product,"tensor_config":config})
+                }
+            }
+        } else if args[1] == "cpu" {
             cpu(&model, &settings)?
         } else if args[1] == "tighten" {
             let (tightened, proof) = lp_general_lowbit::implied::derive(&model)?;

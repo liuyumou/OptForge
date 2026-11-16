@@ -162,7 +162,7 @@ pub fn cpu(model: &Model, settings: &Settings) -> Result<Value> {
         Format::Native => 0,
         Format::Fp32 => 1,
         Format::Fp4x1 => 2,
-        Format::Fp4x2 => 3,
+        Format::Fp4x2 | Format::Fp4x3 | Format::Fp4x4 => 3,
     };
     while control.remaining() > 0 {
         if control.expired()
