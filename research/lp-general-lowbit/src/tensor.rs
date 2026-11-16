@@ -67,15 +67,22 @@ fn upadd(a: f64, b: f64) -> f64 {
     }
 }
 fn quant(v: f64) -> u8 {
-    let mut best = 0;
-    let mut error = v.abs();
-    for c in 2..=7 {
-        let e = (v.abs() - decode(c)).abs();
-        if e < error || (e == error && c % 2 == 0 && best % 2 != 0) {
-            best = c;
-            error = e;
-        }
-    }
+    let x = v.abs();
+    let best = if x > 5. {
+        7
+    } else if x >= 3.5 {
+        6
+    } else if x > 2.5 {
+        5
+    } else if x >= 1.75 {
+        4
+    } else if x > 1.25 {
+        3
+    } else if x > 0.5 {
+        2
+    } else {
+        0
+    };
     best | if v < 0. && best != 0 { 8 } else { 0 }
 }
 fn encode(values: &[f64], k: usize) -> (Vec<u8>, Vec<i32>, Vec<f64>) {
@@ -93,20 +100,30 @@ fn encode(values: &[f64], k: usize) -> (Vec<u8>, Vec<i32>, Vec<f64>) {
             e += 1;
         }
         ex.push(e);
+        let scale = 2f64.powi(e);
+        let inverse = 2f64.powi(-e);
         for (j, v) in rem.iter_mut().enumerate() {
-            let c = quant(*v / 2f64.powi(e));
+            let c = quant(*v * inverse);
             codes[h * values.len() + j] = c;
-            *v -= decode(c) * 2f64.powi(e);
+            *v -= decode(c) * scale;
         }
     }
     (codes, ex, rem)
 }
 impl Packed {
     pub fn new(op: &Operator, c: &Config) -> Result<Self> {
+        Self::build(op, c, true)
+    }
+    /// Unenclosed search proposals do not consume outward row metadata.
+    pub fn proposal(op: &Operator, c: &Config) -> Result<Self> {
+        Self::build(op, c, false)
+    }
+    fn build(op: &Operator, c: &Config, enclose: bool) -> Result<Self> {
         c.validate()?;
         // Maps contain only occupied sparse tiles. Quantized tiles are allocated
         // only after passing the density test; original coefficients stay authoritative.
         let mut canonical = BTreeMap::new();
+        let mut row_covered = vec![false; op.rows.original.len()];
         let blocks = (op.columns.offsets.len() - 1).div_ceil(32);
         let mut counts = vec![0usize; blocks];
         let mut slots = vec![usize::MAX; blocks];
@@ -134,11 +151,17 @@ impl Packed {
             }
             if !eligible.is_empty() {
                 for row in first..last {
-                    for j in op.rows.offsets[row] as usize..op.rows.offsets[row + 1] as usize {
-                        let col = op.rows.indices[j] as usize;
+                    let range = op.rows.offsets[row] as usize..op.rows.offsets[row + 1] as usize;
+                    for ((&col, &value), covered) in op.rows.indices[range.clone()]
+                        .iter()
+                        .zip(&op.rows.original[range.clone()])
+                        .zip(&mut row_covered[range])
+                    {
+                        let col = col as usize;
                         let slot = slots[col / 32];
                         if slot != usize::MAX {
-                            values[slot][(row % 32) * 32 + col % 32] = op.rows.original[j];
+                            values[slot][(row % 32) * 32 + col % 32] = value;
+                            *covered = true;
                         }
                     }
                 }
@@ -155,16 +178,35 @@ impl Packed {
                 counts[col] = 0;
             }
         }
-        for col in 0..op.columns.offsets.len() - 1 {
-            for j in op.columns.offsets[col] as usize..op.columns.offsets[col + 1] as usize {
-                let row = op.columns.indices[j] as usize;
-                if let Some((values, _, _)) = canonical.get(&(row / 32, col / 32))
-                    && values[(row % 32) * 32 + col % 32].to_bits()
-                        != op.columns.original[j].to_bits()
+        let mut column_covered = vec![false; op.columns.original.len()];
+        let mut cursors = op.columns.offsets[..op.columns.offsets.len() - 1].to_vec();
+        // Both sparse orientations are sorted. A linear permutation verifies
+        // every original coefficient, including the untiled remainder.
+        for row in 0..op.rows.offsets.len() - 1 {
+            for (j, &covered) in row_covered
+                .iter()
+                .enumerate()
+                .take(op.rows.offsets[row + 1] as usize)
+                .skip(op.rows.offsets[row] as usize)
+            {
+                let col = op.rows.indices[j] as usize;
+                let slot = cursors[col] as usize;
+                if slot >= op.columns.offsets[col + 1] as usize
+                    || op.columns.indices[slot] as usize != row
+                    || op.columns.original[slot].to_bits() != op.rows.original[j].to_bits()
                 {
                     return Err("noncanonical original transpose".into());
                 }
+                column_covered[slot] = covered;
+                cursors[col] += 1;
             }
+        }
+        if cursors
+            .iter()
+            .zip(&op.columns.offsets[1..])
+            .any(|(a, b)| a != b)
+        {
+            return Err("noncanonical original transpose size".into());
         }
         let make = |transpose: bool| {
             let original = op.orientation(transpose);
@@ -227,7 +269,7 @@ impl Packed {
                             }
                         }
                     }
-                    for row in half * 16..half * 16 + 16 {
+                    for row in half * 16..half * 16 + if enclose { 16 } else { 0 } {
                         let (mut err, mut mag) = (0., 0.);
                         for col in 0..32 {
                             let j = index(row, col);
@@ -257,12 +299,11 @@ impl Packed {
             for row in 0..n {
                 for j in original.offsets[row] as usize..original.offsets[row + 1] as usize {
                     let col = original.indices[j] as usize;
-                    let key = if transpose {
-                        (col / 32, row / 32)
+                    if if transpose {
+                        column_covered[j]
                     } else {
-                        (row / 32, col / 32)
-                    };
-                    if canonical.contains_key(&key) {
+                        row_covered[j]
+                    } {
                         t.covered[row] += 1;
                     } else {
                         t.residual.indices.push(col as u32);
@@ -295,5 +336,32 @@ impl Packed {
                     + 8 * (t.metadata.len() + t.residual.original.len())
             })
             .sum()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn quantization_preserves_normal_e2m1_nearest_even_boundaries() {
+        let reference = |v: f64| {
+            let mut best = 0;
+            let mut error = v.abs();
+            for c in 2..=7 {
+                let e = (v.abs() - decode(c)).abs();
+                if e < error || (e == error && c % 2 == 0 && best % 2 != 0) {
+                    best = c;
+                    error = e;
+                }
+            }
+            best | if v < 0. && best != 0 { 8 } else { 0 }
+        };
+        for mid in [0.5f64, 1.25, 1.75, 2.5, 3.5, 5.] {
+            for x in [mid.next_down(), mid, mid.next_up()] {
+                for sign in [-1., 1.] {
+                    assert_eq!(quant(sign * x), reference(sign * x));
+                }
+            }
+        }
     }
 }

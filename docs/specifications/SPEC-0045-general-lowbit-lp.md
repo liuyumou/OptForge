@@ -305,3 +305,91 @@ this changes occupancy, not arithmetic order. Both layouts and launch shapes nee
 numerical and sanitizer admission. Retain direct, two-component, expanded-layout
 and four-warp diagnostic comparisons, then assess the common four-component policy
 against native and FP32 on the whole 22-model development roster at both tiers.
+
+## Prospective fast-proposal redesign (2026-11-16)
+
+The user authorizes implementing and iteratively optimizing the diagnosed
+redesign. Add a separately admitted `gpu-fast` executor; retain the local-bound
+executor as a control. Approximate products are search proposals, never numerical
+enclosures or certificate authority. This supersedes the per-row bound requirement
+for this opt-in executor only. Original-operator control-boundary residuals,
+nonfinite/domain checks, exact checkpoint recovery, physical-work accounting and
+unchanged strict final original-model certificates remain mandatory. Cancellation
+and deadlines retain the same transactional behavior. Any admission probe must
+label unenclosed approximate values explicitly and compare independently decoded
+arithmetic, rather than report an invented bound.
+
+Initially partition Tensor Core work by 16-by-32 half tile. Specialize component
+counts, reconstruct each output once, and reduce tile partials in a specialized
+sparse projection pass. Native receives a specialized FP64 control; actual FP32
+storage is a second control. Sparse residual products may use FP32 increments
+under periodically refreshed original FP64 references, reported separately from
+actual FP4 work. No-tile cases remain visible; FP32 or native routing cannot count
+as FP4 contribution. Keep both orientations canonically consistent and retain
+all original data and partial-buffer memory in resource counts.
+
+Preparation may omit unused local-bound metadata in this executor. Test cheap
+encoding, launch fusion, component counts and precision/refinement policies using
+admitted versions and fresh development identities. A failed scientific cell is
+not retried. Freeze each comparison before observing its timings. Profile changed
+versions without claiming instrumented timing as complete-solve value, and retain
+unprofiled controls and numerical equivalence/independent checking. Keep all 22
+development models at both strict tiers; do not restrict evaluation to dense tiles
+or multi-solve workflows. Full native acceptance, new-image arithmetic/process
+admission and four sanitizers precede comparative execution. Existing allocation,
+phase ceilings, supervisor and publication restrictions remain unchanged.
+
+The next measured candidate may combine each 32-output block's tensor products,
+full-warp sparse remainder reduction, projection and encoding in one CTA. Four
+warps reduce each half tile's column dimension; no global numerical atomics are
+introduced. This changes the FP32 reduction order, which needs an independently
+decoded CPU oracle and fresh device/sanitizer admission. Keep the split path as
+an explicit control. Report long sparse rows as well as average row work when
+diagnosing shape choices. Algebraically equivalent scaled-coordinate projection
+may replace division, with changed floating-point trajectories admitted explicitly.
+None of these numerical search changes alter original-model certificate authority.
+
+The combined candidate may adapt sparse reduction within each four-row warp
+group: use eight lanes per short row and full-warp reductions when any row has
+more than 64 remainder entries. Projection is parallel across the CTA's 32
+outputs. Keep forced full-warp reduction as an explicit arithmetic control and
+independently check both trees, including long tails and multi-tile reductions.
+Observed shared-device activity must remain visible; paired development timings
+under such activity do not establish uncontended or production performance.
+
+Cache each working input's FP32 delta once per vector element. Form it with the
+same FP64 subtraction and binary32 rounding previously repeated per nonzero;
+refresh it at resets and after each projection, including the extrapolated
+primal input. Native continues to use original FP64 inputs. Account for the
+extra vector buffers and uploads. Independent products and complete fused/
+unfused trajectories must verify the unchanged arithmetic before performance
+comparison; strict certification and original references stay unchanged.
+
+The supplemental split-path racecheck `fast-split-racecheck-v1` exhausts its
+90-second development-admission reservation after 12 retained responses. Dense
+cases take approximately 4–7 seconds and certified cases 8–11 seconds each under
+racecheck; these measurements imply that all 18 cases need more than 90 seconds.
+Retain the incomplete proof and full 360 CPU / 90 GPU-second charge. A separate
+`fast-split-racecheck-v2` admission identity reserves 180 seconds for the unchanged
+18-case suite and unchanged image; initcheck and synccheck reserve 60 seconds each.
+This is completion of source admission, not a scientific cohort retry, and does
+not change the one-second supervisor or the phase ceilings.
+
+After the complete 108-cell `fast-pilot-v5`, freeze `fast-broad-v2` with the
+same complete 22-model roster and both strict tiers. Include native, actual FP32,
+one-component FP4 and two-component FP4: 176 cells. One-component updates are
+cheaper in the pilot, but fixed-work timing cannot decide their certified cost.
+Keep the combined schedule for both FP4 policies; the pilot retains its mixed
+comparison with split execution. Reserve 300 seconds per model for eight
+30-second-capped solves, preparation and checking; whole-phase preflight must
+pass before launch. These are prospective development comparisons, not a
+confirmation, scientific retry or change to historical criteria.
+
+For final fast-backend delivery, content-addressed archive construction is a
+reporting task. The extracted-root independent arithmetic and original-serial
+certificate replay is a CPU-only numerical admission task, reserved in the
+existing admission phase before execution (up to 1800 wall / 7200 CPU seconds).
+This separates packaging from numerical acceptance; all phase ceilings, earlier
+charges and closed allocations remain unchanged. Identical offline certificate
+witnesses may share a replay result after exact input/witness hashing; every
+retained response remains covered and no numerical solver answer is reused.

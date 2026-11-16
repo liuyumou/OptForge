@@ -312,6 +312,68 @@ fn tensor_transpose_must_bind_original_coefficient_bytes() {
     op.columns.original[0] = op.columns.original[0].next_up();
     assert!(Packed::new(&op, &config).is_err());
 }
+
+#[test]
+fn proposal_packing_preserves_both_representations_without_unused_bounds() {
+    use lp_general_lowbit::tensor::{Config, Packed};
+    let model = model(65, 33);
+    let p = LinearProgram::new(&model).unwrap();
+    let e = Engine::new(&p, settings(Format::Native).lp());
+    let op = Operator::new_for(&e, Format::Native).unwrap();
+    for components in 1..=4 {
+        let config = Config {
+            min_tile_nnz: 1,
+            components,
+            ..Config::default()
+        };
+        let bounded = Packed::new(&op, &config).unwrap();
+        let proposal = Packed::proposal(&op, &config).unwrap();
+        for (a, b) in [
+            (&bounded.rows, &proposal.rows),
+            (&bounded.columns, &proposal.columns),
+        ] {
+            assert!(b.metadata.is_empty());
+            assert_eq!(a.fragments, b.fragments);
+            assert_eq!(a.exponents, b.exponents);
+            assert_eq!(a.offsets, b.offsets);
+            assert_eq!(a.columns, b.columns);
+            assert_eq!(a.covered, b.covered);
+            assert_eq!(a.residual.indices, b.residual.indices);
+            assert_eq!(a.residual.original, b.residual.original);
+        }
+        assert!(proposal.storage_bytes() < bounded.storage_bytes());
+    }
+}
+
+#[test]
+fn fast_proposals_validate_explicit_execution_domains() {
+    use lp_general_lowbit::fast_device::Config;
+    for lanes in [0, 1, 4, 8, 32] {
+        assert!(
+            Config {
+                lanes,
+                fused_encode: true,
+                combined: false,
+                adaptive_rows: true
+            }
+            .validate()
+            .is_ok()
+        );
+    }
+    for lanes in [2, 16, 64, usize::MAX] {
+        assert!(
+            Config {
+                lanes,
+                fused_encode: false,
+                combined: true,
+                adaptive_rows: false
+            }
+            .validate()
+            .is_err()
+        );
+    }
+    assert!(serde_json::from_str::<Config>(r#"{"unknown":true}"#).is_err());
+}
 #[test]
 fn extended_fp4_components_are_exclusive_to_the_tensor_backend() {
     use lp_general_lowbit::tensor::Config;

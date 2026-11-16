@@ -26,6 +26,8 @@ fn run() -> Result<()> {
             "tensor-operator",
             "gpu-tensor",
             "gpu-tensor-probe",
+            "gpu-fast",
+            "gpu-fast-probe",
             "assess",
             "assess-proven",
             "tighten",
@@ -66,7 +68,7 @@ fn run() -> Result<()> {
         settings.validate()?;
         let mut result = if matches!(
             args[1].as_str(),
-            "tensor-operator" | "gpu-tensor" | "gpu-tensor-probe"
+            "tensor-operator" | "gpu-tensor" | "gpu-tensor-probe" | "gpu-fast" | "gpu-fast-probe"
         ) {
             use lp_general_lowbit::{
                 tensor::{Config, Packed},
@@ -87,7 +89,18 @@ fn run() -> Result<()> {
                 config.components = settings.format.components();
             }
             config.validate()?;
-            if args[1] == "gpu-tensor" {
+            let fast: lp_general_lowbit::fast_device::Config =
+                serde_json::from_value(request.get("fast").cloned().unwrap_or(json!({})))?;
+            fast.validate()?;
+            if args[1] == "gpu-fast" {
+                lp_general_lowbit::gpu_tensor::solve_with_fast(
+                    &model,
+                    &settings,
+                    Path::new(&args[3]),
+                    &config,
+                    Some(&fast),
+                )?
+            } else if args[1] == "gpu-tensor" {
                 lp_general_lowbit::gpu_tensor::solve(
                     &model,
                     &settings,
@@ -101,6 +114,30 @@ fn run() -> Result<()> {
                 let packed = Packed::new(&op, &config)?;
                 if args[1] == "tensor-operator" {
                     json!({"operator":op,"packed":packed,"tensor_config":config})
+                } else if args[1] == "gpu-fast-probe" {
+                    let tr = request["transpose"].as_bool().ok_or("transpose boolean")?;
+                    let vector: Vec<f64> = serde_json::from_value(request["vector"].clone())?;
+                    let anchor: Vec<f64> = serde_json::from_value(
+                        request
+                            .get("anchor")
+                            .cloned()
+                            .unwrap_or(json!(vec![0.; vector.len()])),
+                    )?;
+                    let mut d = lp_general_lowbit::fast_device::Device::new(
+                        &e,
+                        &op,
+                        if settings.format.components() > 0 {
+                            Some(&packed)
+                        } else {
+                            None
+                        },
+                        Path::new(&args[3]),
+                        settings.format,
+                        &config,
+                        &fast,
+                    )?;
+                    let values = d.probe(tr, &vector, &anchor)?;
+                    json!({"operator":op,"packed":packed,"proposal_values":values,"enclosed":false,"tensor_config":config,"fast_config":fast,"lanes":d.shapes()})
                 } else {
                     let tr = request["transpose"].as_bool().ok_or("transpose boolean")?;
                     let vector: Vec<f64> = serde_json::from_value(request["vector"].clone())?;

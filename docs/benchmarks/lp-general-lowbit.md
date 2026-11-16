@@ -291,3 +291,12 @@ retains the original pilot and interruption unchanged. Its complete ablation and
 full-solve development cohorts diagnose useful FP4 work, local guards and complete
 cost on the broad roster. Numerical admission and substantial FP4 contribution do
 not establish a speed advantage; the general low-bit objective remains active.
+
+## Specialized search-proposal redesign
+
+The additive [redesign report](lp-general-fast.md) records specialized native,
+FP32 and actual FP4 kernels, independently checked proposal arithmetic, multiple
+measured optimization rounds, and complete single-solve comparisons. It retains
+the slower versions and shared-device observations. Broad convergence and useful
+low-bit performance remain the objective; this continuation does not narrow it
+to dense tiles, prepared sessions or fallback behavior.

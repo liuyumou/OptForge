@@ -85,3 +85,38 @@ within the existing budget/supervisor protocol; old identities cannot be reused.
 `tools/lp_general_tensor_portable.py` archives and independently replays a local
 **delta** bundle, keeping the original large evidence bundle separate. Only
 compact results and validation receipts belong in Git.
+
+## Specialized search-proposal backend
+
+`gpu-fast MODEL CUBIN` uses the separately compiled `cuda/fast.cu` image.
+`gpu-fast-probe` emits independently checked proposal products with
+`enclosed: false`; these values have no certificate authority. FP64 state,
+original-operator control/reference work, rollback and strict original-model
+certification remain in the solve. The sparse remainder uses FP32; cases with
+no eligible tiles explicitly select FP32 and contribute no FP4 work.
+
+The optional `fast` object has `combined` (true), `fused_encode` (true),
+`adaptive_rows` (true), and `lanes` (0). Combined FP4 assigns a CTA to 32 outputs,
+integrating product, projection and encoding. Short remainder rows use eight
+lanes; groups containing a row with more than 64 entries use full warps.
+Disabling `adaptive_rows` forces full-warp reduction. Setting
+`combined: false` selects the split half-tile implementation. `lanes` selects
+1/4/8/32 lanes for native, FP32 and split FP4, with zero choosing from average
+work per output; combined FP4 uses its own short/long-row policy. Disabling
+encoding fusion provides a matched arithmetic ablation. The original
+`gpu-tensor` local-bound backend remains available.
+
+FP32 and FP4 remainder products reuse a cached FP32 vector difference, formed
+once per vector element at each reset or projection. This preserves their
+product arithmetic while removing repeated FP64 subtraction and conversion
+from the per-nonzero loop. The native control keeps its FP64 products.
+
+Use `tools/lp_general_fast_cpu.sh`, the fast arithmetic/boundary admission tools,
+four sanitizers and `lp_general_fast_admit.py` before a frozen fast benchmark.
+Every numerical command still requires a fresh budget reservation and applicable
+GPU lease. `lp_general_fast_profile.py` brackets each timeline with uninstrumented
+transcript checks. `lp_general_fast_portable.py` stores identical source snapshots
+as one content-addressed object and independently replays the extracted evidence.
+For this backend, reserve archive construction in reporting and the independent
+CPU numerical replay in admission, within the unchanged phase ceilings.
+Large evidence remains local. See the [redesign report](../../docs/benchmarks/lp-general-fast.md).

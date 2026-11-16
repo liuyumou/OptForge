@@ -1,3 +1,58 @@
+# Current agent handoff
+
+## General low-bit kernel redesign delivered (2026-11-16)
+
+Keep the broadly useful single-solve LP objective active, including meaningful
+FP4 contribution. SPEC-0045 / ADR-0079 now deliver an opt-in `gpu-fast` proposal
+executor with actual normal-E2M1 Tensor Cores, FP64 state/original references,
+strict original-model certificates and complete checkpoint recovery. Per-row
+outward guards are removed only from this proposal backend; `enclosed: false`
+is explicit. Public defaults and the historical local-bound backend remain.
+
+The measured sequence specializes sparse/tensor kernels, reconstructs outputs
+once, accelerates canonical packing, fuses encoding, tests combined versus split
+schedules, adapts sparse rows, and caches FP32 vector deltas. The final image is
+`fast-image-v9` under `fast-admission-v5`. All 444 compared admission responses
+are exactly unchanged by cached deltas, excluding timing/allocated-byte fields.
+Main, boundary and split suites pass all four sanitizers. Native acceptance is
+638 Rust / 820 Python, plus 18 isolated Rust tests. Portable replay verifies
+114046 files, 800 cells, 1779 admission solves, 137676 product outputs and 14102
+assessments / 3798 distinct serial witnesses. All 82240 earlier archived files
+and 207 diagnostic bindings stay exact; cleanup is empty. See the report for
+source/resource bindings and the final settled allocation checkpoint.
+
+Five fixed-work pilots and two full-roster comparisons retain all 800 supervised
+cells. Final FP4x4 execution is 4.03–7.63x faster than the previous implementation
+on three tiled fixtures, but native improves too. These 500-update measurements
+are not certified-solve gains. Final broad coverage is 176/176: native, FP32 and
+FP4x2 certify 20/44 cases; FP4x1 certifies 21/44, with its extra public-israel
+certificate mostly using native after promotion. Accepted FP4 product shares are
+5.013% for FP4x1 and 24.131% for FP4x2. Descriptive complete-cost median ratios
+native/candidate are 1.023 and 1.017; FP32/candidate are 0.990 and 0.985. Broad
+FP4 superiority remains unestablished; no confirmation is frozen.
+
+Twelve final timelines preserve 36 exact transcripts. Split tile products take
+about 1.9 us/launch; projection/encoding, launch gaps, and limited combined-grid
+parallelism remain expensive. Combined dense1025 exposes only 16/33 CTAs on
+188 SMs. Hardware counters remain unavailable; no measured occupancy claim.
+Shared-device/host timing variability remains visible. General convergence and
+original-A control/check cost need improvement alongside arithmetic scheduling;
+do not narrow the roster to dense tiles, prepared workflows or native fallback.
+
+Six failed reservations retain full 3660 CPU / 90 GPU seconds and sources,
+including an incomplete supplemental racecheck and a reporting import error.
+The separately identified complete split racecheck passes; no scientific cell
+is retried. One-second supervision, 100 ms advisories, four CPU slots, 16 GiB
+sampled RSS, 12 GiB device buffers and the pinned shared lease remain unchanged.
+The independent 240000 CPU / 30000 GPU-second allocation stays open. Large
+content-addressed evidence stays local; only compact results are tracked.
+Commit locally only; public adoption and publication remain separate.
+
+Open settled checkpoint: 95645.880891480 CPU / 10887.964566891 GPU seconds.
+
+Report: [general low-bit redesign](docs/benchmarks/lp-general-fast.md).
+The preserved instructions below retain their historical scope.
+
 # Agent Instructions
 
 ## Tensor Core slowdown diagnosed (2026-11-16)

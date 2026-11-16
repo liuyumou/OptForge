@@ -4,7 +4,7 @@ use crate::{
     operator::{Format, Operator},
     solve::{Settings, assess_repaired, same_state},
     tensor::{Config, Packed},
-    tensor_device::Device,
+    tensor_device::Device as LocalDevice,
 };
 use crate::{control::Fp64Controller, merit::EngineMerit};
 use optimizer_core::Model;
@@ -15,9 +15,56 @@ use std::{
     time::{Duration, Instant},
 };
 
+enum Runtime {
+    Local(Box<LocalDevice>),
+    Fast(Box<crate::fast_device::Device>),
+}
+macro_rules! dispatch {
+    ($s:expr, $d:ident, $body:expr) => {
+        match $s {
+            Runtime::Local($d) => $body,
+            Runtime::Fast($d) => $body,
+        }
+    };
+}
+impl Runtime {
+    fn reset(&mut self, s: &crate::control::Fp64State) -> Result<()> {
+        dispatch!(self, d, d.reset(s))
+    }
+    fn set_format(&mut self, f: Format) -> Result<()> {
+        dispatch!(self, d, d.set_format(f))
+    }
+    fn advance(&mut self, n: u64, step: f64, w: f64, since: u64, limit: f64) -> Result<bool> {
+        dispatch!(self, d, d.advance(n, step, w, since, limit))
+    }
+    fn endpoint(&self) -> Result<(Vec<f64>, Vec<f64>)> {
+        dispatch!(self, d, d.endpoint())
+    }
+    fn work(&self) -> Result<[u64; 4]> {
+        dispatch!(self, d, d.work())
+    }
+    fn reference_work(&self) -> u64 {
+        dispatch!(self, d, d.reference_work)
+    }
+    fn allocated_bytes(&self) -> usize {
+        dispatch!(self, d, d.allocated_bytes)
+    }
+}
 pub fn solve(model: &Model, settings: &Settings, image: &Path, config: &Config) -> Result<Value> {
+    solve_with_fast(model, settings, image, config, None)
+}
+pub fn solve_with_fast(
+    model: &Model,
+    settings: &Settings,
+    image: &Path,
+    config: &Config,
+    fast: Option<&crate::fast_device::Config>,
+) -> Result<Value> {
     settings.validate()?;
     config.validate()?;
+    if let Some(f) = fast {
+        f.validate()?;
+    }
     let mut control_settings = settings.clone();
     control_settings.check_interval = config.control_interval;
     let started = Instant::now();
@@ -26,7 +73,12 @@ pub fn solve(model: &Model, settings: &Settings, image: &Path, config: &Config) 
     let engine = Engine::new(&program, control_settings.lp());
     let op = Operator::new_for(&engine, Format::Native)?;
     let packed = if settings.format.components() > 0 {
-        Some(Packed::new(&op, config)?).filter(|p| p.tile_count > 0)
+        Some(if fast.is_some() {
+            Packed::proposal(&op, config)?
+        } else {
+            Packed::new(&op, config)?
+        })
+        .filter(|p| p.tile_count > 0)
     } else {
         None
     };
@@ -34,19 +86,39 @@ pub fn solve(model: &Model, settings: &Settings, image: &Path, config: &Config) 
         Fp64Controller::new_with_merit(&engine, |x, y, w| engine.projected_residual(x, y, w));
     control.set_deadline(Some(started + Duration::from_millis(settings.wall_ms)));
     let selected_format = if settings.format.components() > 0 && packed.is_none() {
-        Format::Native
+        if fast.is_some() {
+            Format::Fp32
+        } else {
+            Format::Native
+        }
     } else {
         settings.format
     };
     let prepared = started.elapsed().as_nanos();
-    let mut device = Device::new(
-        &engine,
-        &op,
-        packed.as_ref(),
-        image,
-        selected_format,
-        config,
-    )?;
+    let mut device = if let Some(f) = fast {
+        Runtime::Fast(Box::new(crate::fast_device::Device::new(
+            &engine,
+            &op,
+            packed.as_ref(),
+            image,
+            selected_format,
+            config,
+            f,
+        )?))
+    } else {
+        Runtime::Local(Box::new(LocalDevice::new(
+            &engine,
+            &op,
+            packed.as_ref(),
+            image,
+            selected_format,
+            config,
+        )?))
+    };
+    let fast_shapes = match &device {
+        Runtime::Fast(d) => Some(d.shapes()),
+        _ => None,
+    };
     device.reset(control.state())?;
     let setup = started.elapsed().as_nanos() - prepared;
     let mut format = selected_format;
@@ -266,13 +338,12 @@ pub fn solve(model: &Model, settings: &Settings, image: &Path, config: &Config) 
     }
     assessment_ns += check_start.elapsed().as_nanos();
     let physical_work = device.work()?;
-    let reference_work = device.reference_work;
-    let device_bytes = device.allocated_bytes;
+    let reference_work = device.reference_work();
+    let device_bytes = device.allocated_bytes();
     let teardown_start = Instant::now();
     drop(device);
     let teardown_ns = teardown_start.elapsed().as_nanos();
-    Ok(
-        json!({"schema_version":1,"kind":"general-lowbit-solve","execution":"sparse-tensor-local","settings":settings,"tensor_config":config,"selected_initial_format":selected_format,
+    let mut result = json!({"schema_version":1,"kind":"general-lowbit-solve","execution":"sparse-tensor-local","settings":settings,"tensor_config":config,"selected_initial_format":selected_format,
         "reference_product_nnz":reference_work,
         "physical_product_work":physical_work,"accepted_product_work":accepted_work,
         "product_work_order":["tensor_attempted_nnz","tensor_used_nnz","row_correction_nnz","logical_product_nnz"],
@@ -283,6 +354,12 @@ pub fn solve(model: &Model, settings: &Settings, image: &Path, config: &Config) 
         "restarts":control.state().restarts,"attempted":attempted,"accepted":accepted,"format_order":["native","fp32","fp4x1","fp4x2","fp4x3","fp4x4"],
         "recoveries":recoveries,"assessments":assessments,"operator_storage_bytes":op.storage_bytes(),"device_bytes_upper":device_bytes,
         "rows":program.row_count(),"columns":program.column_count(),"nonzeros":program.nonzeros(),"elapsed_ns":started.elapsed().as_nanos(),
-        "cost_ns":{"host_preparation":prepared,"device_setup":setup,"execution":execution_ns,"assessment":assessment_ns,"recovery":recovery_ns,"device_teardown":teardown_ns}}),
-    )
+        "cost_ns":{"host_preparation":prepared,"device_setup":setup,"execution":execution_ns,"assessment":assessment_ns,"recovery":recovery_ns,"device_teardown":teardown_ns}});
+    if fast.is_some() {
+        result["execution"] = json!("sparse-tensor-proposal");
+        result["guard_policy"] = json!("original-residual-checkpoint-v1");
+        result["fast_config"] = json!(fast);
+        result["initial_fast_lanes"] = json!(fast_shapes);
+    }
+    Ok(result)
 }

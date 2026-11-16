@@ -1,0 +1,906 @@
+{
+  "admission": {
+    "path": "artifacts/gpup-general-v1/fast-admission-v5.json",
+    "sha256": "9d3080a603ce451f021801b733d590a2eb1dfae69ebdd22004964640c5ff2f6b"
+  },
+  "allocation_status": "open",
+  "archive_compressed_bytes": 3248953494,
+  "archive_logical_bytes": 12581367496,
+  "archive_unique_bytes": 10743208688,
+  "checkpoint_including_active_reservation": {
+    "cpu_ns": 95859906518336,
+    "gpu_ns": 10887964566891
+  },
+  "claim": "Delivery acceptance only; no broad superiority, confirmation, public default or publication.",
+  "cleanup_empty": true,
+  "docs_job": {
+    "path": "artifacts/gpup-general-v1/resources/fast-docs-final-v1.settlement.json",
+    "sha256": "99b298cb942e8a15b5b6d7d7b875e0b7af9efceeaabf64da445aa748e1439016"
+  },
+  "failed_attempts": [
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 0,
+      "reason": "command_failed",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-cpu-v1.settlement.json",
+        "sha256": "515e1ba4ba313be835ce320c58cb5cf1798e2a450c02132a657f15aab9a5bc1a"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 0,
+      "reason": "command_failed",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-cpu-v4.settlement.json",
+        "sha256": "32a83e0d055783640bf1222685ecc978438e414d21eeaa27835bed6722266092"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 0,
+      "reason": "command_failed",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-cpu-v6.settlement.json",
+        "sha256": "821a018ed0907b8eedced27d306658f9856d65f1d6b3c05d04984e306227dc5d"
+      }
+    },
+    {
+      "cpu_ns": 60000000000,
+      "gpu_ns": 0,
+      "reason": "command_failed",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-export-v1.settlement.json",
+        "sha256": "fdb638f56304ee2ff095ed25c2fa7d2ff3137de98a9cfc99224b768544d9d19f"
+      }
+    },
+    {
+      "cpu_ns": 360000000000,
+      "gpu_ns": 0,
+      "reason": "command_failed",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-smoke-v3.settlement.json",
+        "sha256": "0d752b98c0e85492dfe348ccfeb56a5e5ca987c3ae812341bdea6f2acd61d8a4"
+      }
+    },
+    {
+      "cpu_ns": 360000000000,
+      "gpu_ns": 90000000000,
+      "reason": "guardian_cpu_wall_deadline",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-split-racecheck-v1.settlement.json",
+        "sha256": "c25dbcfd28a16c2a05f752ad6ab0595bc57647cf27a0fbed289c78b5855d921f"
+      }
+    }
+  ],
+  "failed_cpu_ns": 3660000000000,
+  "failed_gpu_ns": 90000000000,
+  "historical_text": [
+    "AGENTS.md",
+    "docs/benchmarks/lp-general-lowbit.md",
+    "research/lp-general-lowbit/README.md",
+    "docs/benchmarks/lp-general-tensor.md",
+    "docs/benchmarks/lp-general-tensor-results.json",
+    "docs/benchmarks/lp-general-tensor-validation.json",
+    "docs/benchmarks/lp-general-tensor-diagnosis-results.json",
+    "docs/benchmarks/lp-general-tensor-diagnosis-validation.json"
+  ],
+  "local_validation": {
+    "path": "artifacts/gpup-general-v1/fast-validation-v1.json",
+    "sha256": "1eaeda7336c1fe3247ff04a82f72bbb85aed2bb263a731641e9b7ad6b24cb7f3"
+  },
+  "native": {
+    "path": "artifacts/gpup-general-v1/resources/fast-native-final-v1.settlement.json",
+    "sha256": "a768abe96b2303a61fadfeb6ec1578da1c1ed63a8732bac9bde4f7bfbf09ac92"
+  },
+  "numerical_sources_exact": 17,
+  "portable": {
+    "path": "artifacts/gpup-general-v1/portable/fast-delivery-v1/replay.json",
+    "sha256": "243440e4b39749702b0040d61f334c20dd162390e032b40bbf95ed1cda3b0fa8"
+  },
+  "portable_result": {
+    "admission_solves": 1779,
+    "assessments": 14102,
+    "cells": 800,
+    "claim": "Extracted-root byte and independent arithmetic/certificate replay. Identical offline witnesses deduplicated; no solver answer reuse or missingness repair.",
+    "distinct_assessments": 3798,
+    "missing": [],
+    "probes": 2616,
+    "product_outputs": 137676,
+    "root": "/workspace/AI-Optimizer/artifacts/fast-portable-vluwuxka",
+    "status": "passed"
+  },
+  "post_validation_editorial_changes": "Replay counts, settled accounting, documentation links and handoff only; numerical sources and exported results unchanged.",
+  "prior_diagnostic_files_verified": 207,
+  "prior_scientific_files_verified": 82240,
+  "receipts": [
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-admit-compose-v1.settlement.json",
+      "sha256": "9aa56b4df92fa247079adbf7757812badb5100b697bb185b99427cd4c52cd1ad"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-admit-compose-v2.settlement.json",
+      "sha256": "7f29d248e702c91589333aaaa15994ef8a507966e5a0723bc4d845333772aa0c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-admit-compose-v3.settlement.json",
+      "sha256": "d71e79fe3419f341e1d129f75135b18258f35cb659907766aaf290c01bf96a13"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-admit-compose-v4.settlement.json",
+      "sha256": "b258a84e369ef78a150c80eacdbb9f3d3e40e2b5175506333aa253c09e1d9ced"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-analysis-final-v1.settlement.json",
+      "sha256": "d82b19fe74c57789030035414b9e6b9dc37c448afcad51a6030ded7744b9605f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-analysis-v2.settlement.json",
+      "sha256": "a728fa03e7d6ab0ee679538335fa8ac2b43cd0f37a12c9509b9a9361bd4a9616"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-analysis-v3.settlement.json",
+      "sha256": "d287b2fbc028b12b763a7b67874d26aa13ffd0f8003954bf95d21c63eeb3a9bb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-analysis-v4.settlement.json",
+      "sha256": "3b98219897b1014eab47fcf8108bfce2c0451e02de1f354ba5a5096e275ab744"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-cpu-v1.settlement.json",
+      "sha256": "d384e310e05f0ee035cd870c074ba1f58131543fcfd343f563cf51798f387e69"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-cpu-v2.settlement.json",
+      "sha256": "1052b35f3efb436985f199cb7e13830a39a28bd9ae6232de0e5e6750d60aec2c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-cpu-v3.settlement.json",
+      "sha256": "c8193408656c4b3f110ba02b09aaf2a24a7857643149dbf262d5269376d39020"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-gpu-v1.settlement.json",
+      "sha256": "aa9770289915c3a2fe4240b672c68aa0075156898c3d148ac3b4d0af64631ca3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-gpu-v2.settlement.json",
+      "sha256": "1365fce274337b373cb14137fe105798111afb413d2e7696eac3181ba598ae0c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-gpu-v3.settlement.json",
+      "sha256": "cbdb8cd3069159777ce4f5fdf820562d15db277522c659edb9aa59bd9042d6ee"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-initcheck-v1.settlement.json",
+      "sha256": "a449f50c5dcf7b83ba7eb38db138cfccb63666f071195399a5f657a36aeb4f60"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-initcheck-v2.settlement.json",
+      "sha256": "b6223544c76d942856e23d4d580e1bbf2baa97060cc5e3140ddb79698c225191"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-initcheck-v3.settlement.json",
+      "sha256": "1824f66926604284d0e47ae8dd8d274a496e996fcbfd0bf3f289e621233204b4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-memcheck-v1.settlement.json",
+      "sha256": "15b440cdf4241e6833e9c13b16358ef15c0114ed8b716b918d276cbb8922be44"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-memcheck-v2.settlement.json",
+      "sha256": "8abce9746cfa4390e9ad95737ca224757d3771e3302da1df9cddfaf77ce1a96c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-memcheck-v3.settlement.json",
+      "sha256": "3fb1c21e8fa858fd0e2e67a9319c61d2b695fc99a7921e5434e9a137b2a651b3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-racecheck-v1.settlement.json",
+      "sha256": "c931e68a2781ce76f2e8ce6fb326206a84e3f59123e43c374ac54b673ed2934d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-racecheck-v2.settlement.json",
+      "sha256": "23a78262634bd89c7a6cd45c94f0eb426dbe172436845997344a738543aeb129"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-racecheck-v3.settlement.json",
+      "sha256": "9dc3c9231112fb91b35c4bbe8d5c6ed8959863a84dc64d0ce8436f7966245948"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-synccheck-v1.settlement.json",
+      "sha256": "96ec86b0698671e3ae4d148e796379ecfb8408bd6d6a245322c9ec404b896d01"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-synccheck-v2.settlement.json",
+      "sha256": "22beaeb11d69dba61dc52e41e7f03258dd702203d92c76ab51a3fe46ac6ca032"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-boundary-synccheck-v3.settlement.json",
+      "sha256": "2593f57f12bbe1aff911b53c948cfa8df285aa7c5a94bf4aa4387ea22a1faa91"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-analysis-v1.settlement.json",
+      "sha256": "8879fd30204d614e59968900762be7aa3ae8f407137d73396cd1519a65d208a6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-freeze-v1.settlement.json",
+      "sha256": "0f210cd8017f277673032258da3e74c34298b49700bfb621c0da6ddc56c8963d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-freeze-v2.settlement.json",
+      "sha256": "dddd66ce3e67d65152ccf63e7843a248e9e4a08ee1218a0fdec8245e32e04ce9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m00.settlement.json",
+      "sha256": "dd78f528d947eac44a4456eb5b508324bf7c9cdf62262c611764f0b7b2d42eef"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m01.settlement.json",
+      "sha256": "03ebf2a7bb61e0738715a7e48bc58140a00d8f8403f00551582bbabf04ed9f46"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m02.settlement.json",
+      "sha256": "7e14cb4fab8cbed65dfefbc2e5b2642de5701abbdd942e12c04c2baf266d81a6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m03.settlement.json",
+      "sha256": "be2c577371b86e4d96382a817888c08dda3dcf83fd1a091a961699d276512c96"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m04.settlement.json",
+      "sha256": "34181f655accc267b54c2741ee98324f80f0b8f2479bab05e88b7250b177318e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m05.settlement.json",
+      "sha256": "bdfbd34462fe348f55fb94c4aa735a39ab75b6788fcdcc75ea5224a91f428eb9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m06.settlement.json",
+      "sha256": "bc0ee06ec6dd9685aac7efce179f18d73377e7061aa97e09c19d6370e36ec3db"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m07.settlement.json",
+      "sha256": "d3bac21aa028e9a2814fce6106c8a0615892678dc5afaf8ad0cf541cbbb3c768"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m08.settlement.json",
+      "sha256": "042cee75fbdd79cab0a8326ad17b39669a3c8c5873f46b32228a72d18d5a2bad"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m09.settlement.json",
+      "sha256": "5b65b21924eaef661eddf24d3d36225bacc314f51a282190e83d2027582994df"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m10.settlement.json",
+      "sha256": "d6a76f8b8695e8fd9cf3bbd9eb182a2623840917a2c57876abc55b8b391b2903"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m11.settlement.json",
+      "sha256": "92edba9233280db71732d53284461b1223eeefd6c63fc69dba9acea4c5464b35"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m12.settlement.json",
+      "sha256": "808170c944f7242f8ae8ef94caad25b0bdc3123ea348943b1f5178d6204fc26b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m13.settlement.json",
+      "sha256": "e9e78ac4aa9f81c8e4bdf704e46a29d6f0a41e7336588fa76a6db0ad2b178b8a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m14.settlement.json",
+      "sha256": "76900f081e02d989533411b3e3bef80a7a76f854ebc0d2d0450bf0509f5e6ff8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m15.settlement.json",
+      "sha256": "225255ceb8fccba1641d0781db8617f03be1d3e388622ee0a48293f48c0ec148"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m16.settlement.json",
+      "sha256": "104459542d99ed3708ff38ebe2cc97848b856c99943be2d79a00cb6adda19f60"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m17.settlement.json",
+      "sha256": "f430f469d2e8c7872f89e85b7edf3aae289ffb17f39b9daaf9e1fb4d9d86615a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m18.settlement.json",
+      "sha256": "f4fb82956f7b63d4ebf5fa7943f85db4d5461d2f79ae0c562f6fbd291aa4c98b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m19.settlement.json",
+      "sha256": "610caa601fdcf189a13aa4184ff0ab4c283d4ab8aa1a4ea0dff494416704231e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m20.settlement.json",
+      "sha256": "d9c280d4bb4913a1720e39cda7bfee484ee396faab137c8b3e7ee770310b396d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v1-m21.settlement.json",
+      "sha256": "731b4d381644d365cc5e7da78da0c4c40ff7f56a21cd3ad2935765ee611cba7a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m00.settlement.json",
+      "sha256": "e14e766e9d07437a2a97d4db327f34f0931f5c7829be67a0067c2648f0eb30d0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m01.settlement.json",
+      "sha256": "6c17efded9593f476861a82e3adbec3daaa4f15403c8aefd678381f923505781"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m02.settlement.json",
+      "sha256": "2e8c6ac769f31f67019da9c40092645f8c326b835ed43f2d18b32d302cd3f327"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m03.settlement.json",
+      "sha256": "1395c109b5acaabf7f1ca039563527472d593e21ffea72dcc37f8cf13f6d859a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m04.settlement.json",
+      "sha256": "245d33473de2a4b86c49e05efe64c2b676eabf438c1e059fc92c970b68304f4b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m05.settlement.json",
+      "sha256": "419a1d5c7f2da5df0cd5256425bd9e317c8962ff0316abb6f5ad6709043aa221"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m06.settlement.json",
+      "sha256": "2945d30fc82d11006e0bf119ad1a6de807888c8d04d5ff01cee63aad7874e378"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m07.settlement.json",
+      "sha256": "0fd1a774b54c8698496476a2600b37740297b3c0519f1b9a96e12dd5a67b1507"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m08.settlement.json",
+      "sha256": "ca436d399cd3e6a0e3f36725dfda82a13335629fad301f7c98f7755b3ec15950"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m09.settlement.json",
+      "sha256": "b236c216635a4b9096623e6999eac296bc37652e2f311e595f699f0309ec1eda"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m10.settlement.json",
+      "sha256": "755f35c45dcb05424dee1acebd86b5d9296e3fb4b6fb83d6f1008585f7e68245"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m11.settlement.json",
+      "sha256": "930f3d6dae10261c83cb68b7912580015113b51f0adb81228f3fb75eb958891b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m12.settlement.json",
+      "sha256": "51fb9c13bc70768a5144060ba73cde4c8672b9a7834cdd4779fd2947533a08fd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m13.settlement.json",
+      "sha256": "758f6f92171c1a92f4011dbe8894f9b295d288da046cbc33d20cfd7281880ea3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m14.settlement.json",
+      "sha256": "ee0cb6e58ed9e475206c1c1ebee5e18d2fcfb640f969186a56b813c6494f2e55"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m15.settlement.json",
+      "sha256": "550ec1d5a41dc4688890e29dfccc6805258b466603d0036000bdb465c0b99460"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m16.settlement.json",
+      "sha256": "eae92479af30069b8c152463b41beb249ab48dafcd01e2fcf951a68291a07006"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m17.settlement.json",
+      "sha256": "f101e30b8ad4f8d6c678dc2adb85e6286bac9f6c76484f6f7755db93c3b95adf"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m18.settlement.json",
+      "sha256": "19792ebf71aba0580e11a4d60e1fa18a259b1ad691d2754a9d7d523fb60dd172"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m19.settlement.json",
+      "sha256": "cb77e8779fcf4528509805b552d1e31054dc123b14f8e26fb247c18d71c24879"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m20.settlement.json",
+      "sha256": "7aad12cadc3bed759b38bfd03d9528ecd32b982a607d4221e70e42f33fa038d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-broad-v2-m21.settlement.json",
+      "sha256": "a219491438a1e06085c1f1cc0fd743cbdf046b899c57f9850340c1f884c9d7fd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-compose-v5.settlement.json",
+      "sha256": "2cd82de9ce9b2386711e1fc33c6bfd06c1a20d763d089cf6070e02cd85816d10"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-cpu-v1.settlement.json",
+      "sha256": "515e1ba4ba313be835ce320c58cb5cf1798e2a450c02132a657f15aab9a5bc1a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-cpu-v2.settlement.json",
+      "sha256": "b21d91e73a1e01866411157a96246744c63a488feb116228a0970b40cda0dd6c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-cpu-v3.settlement.json",
+      "sha256": "42b72d951472406068f9e066336736b9dd39c61ac3983fe3e84ff878233d2f65"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-cpu-v4.settlement.json",
+      "sha256": "32a83e0d055783640bf1222685ecc978438e414d21eeaa27835bed6722266092"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-cpu-v5.settlement.json",
+      "sha256": "061bba9a40b53c820d00aa84c4eb680cda54e4880f9cd2234563d246a81d1c76"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-cpu-v6.settlement.json",
+      "sha256": "821a018ed0907b8eedced27d306658f9856d65f1d6b3c05d04984e306227dc5d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-cpu-v7.settlement.json",
+      "sha256": "1ba5875adb5b276661eeb4e0bd0cf4c2dbe763f0c9aff1190bcec7f5211eb7a4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-cpu-v8.settlement.json",
+      "sha256": "f2d07f304059b77e6949b02623a4988f5ef3f67b15273e378182d67e83f5e932"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-cpu-v9.settlement.json",
+      "sha256": "1cf5a331868797f8d3b946bd4be36d74dfc66448dd798c4299bb1bc1ae5b99dc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-delta-equivalence-v1.settlement.json",
+      "sha256": "d6e686e6d2fa998150dc9fcb1fa941a54a60022312deac0d1c79864a965556df"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-export-v1.settlement.json",
+      "sha256": "fdb638f56304ee2ff095ed25c2fa7d2ff3137de98a9cfc99224b768544d9d19f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-export-v2.settlement.json",
+      "sha256": "ca82c70489b861fb19cd918d71a4129e2413278e01e318ffbcc28bb9e40b538f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-format-v1.settlement.json",
+      "sha256": "705101669a47d5098499158f83fdb5e3df03a7e56c3c472766dfe346e7e8f6e2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-format-v2.settlement.json",
+      "sha256": "0d7c2b3733112c1eceee19e91bd35db6cd76a97e0fac27df1761abb150d83036"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-format-v4.settlement.json",
+      "sha256": "cb7100adebb4c24f325b1215142216541289266a4b13f4b3cf069541504c3f74"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-format-v5.settlement.json",
+      "sha256": "03efb1b0ed13475b4d761652726285571b8458cfdb81e98a40345f4c90f1a007"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-format-v6.settlement.json",
+      "sha256": "7ef2ea916493b16e4205910abf6cb99d1c35aa347ccbbed2b9d01fad0b9bb949"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-format-v8.settlement.json",
+      "sha256": "5ac37f5bd55b84627317efb9b16ff52546dba5e7f5350522eb5557402d6329dc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-format-v9.settlement.json",
+      "sha256": "7030bae21d6018fea571d24f2db023e25ae9baef7e2d69ea81d54db08ada1003"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-freeze-v5.settlement.json",
+      "sha256": "1d5f15730329785314cbcebf7bd650ff5ddd2312d112220eef8acce61149ef26"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-gpu-v1.settlement.json",
+      "sha256": "ade3316b04ec3531747c676925997acc50cffca93232b91665ba0bee2d843cef"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-gpu-v2.settlement.json",
+      "sha256": "010e2730fced5651083bf8bdb06839ee28e62ad802ea1bd6fc6b7913e6543986"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-gpu-v3.settlement.json",
+      "sha256": "41af382947a30b21941b28d122029ceb18aae9385708d7cd91fd4a68165429a9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-gpu-v4.settlement.json",
+      "sha256": "8c96bce4af2f6da7e68d8db14d673f7dc1855f9082501cc2ca10cacc52a44fde"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-gpu-v5.settlement.json",
+      "sha256": "5674945fa4be1aff6ece982778506bfc8f0064e460a37dfedb49a45d365cc8b2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-idle-v1.settlement.json",
+      "sha256": "85f34ef39e16534d497c1c5c457412d1971403efb16677c712402b86e0d9eedd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-idle-v2.settlement.json",
+      "sha256": "063369e6bd81ee52cee92ff56fced79d8a0ca07e8986a71f17df0ef7cf9946bd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-initcheck-v1.settlement.json",
+      "sha256": "2fc2433d7c7e4d05e92900f603046088c2ffcf8e0ce841289603dab757d4396b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-initcheck-v2.settlement.json",
+      "sha256": "fce64a2fb0f84390699d9b87e715783d536ba9c8ca6de903eefa9bd6e491c833"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-initcheck-v3.settlement.json",
+      "sha256": "1a2ab85132557045ac826a6f648162b0d334c749572ceac19d4405ed31543add"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-initcheck-v4.settlement.json",
+      "sha256": "fc1ad626c097d92e4fb954cb626ac03da754106c84c809e291bebe4fb701eb1b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-initcheck-v5.settlement.json",
+      "sha256": "c9d86d466c96f8e978437c59a0d53b78fb8021057fe9427891b9758f83294e50"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-memcheck-v1.settlement.json",
+      "sha256": "12accf75dcb2733ca2f447e3fad199096d2e469af60667719d8570b5c973648a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-memcheck-v2.settlement.json",
+      "sha256": "e9ac84c3cae29e87dc6cf869ede772756f8f342edf96ca945c8eae46546d51f4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-memcheck-v3.settlement.json",
+      "sha256": "f23fd0aecb49aae1783487f77b7dbd3f866b363a299bd42fde942e4a5d5de5ef"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-memcheck-v4.settlement.json",
+      "sha256": "3ec0b3066006f6004ec2a9f7089a13fc0c9149f2b976ba527b479b7048224999"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-memcheck-v5.settlement.json",
+      "sha256": "ec71d63e29f47460c41d3613041e3b38567e9811ead662eeb6f84a78941f9b69"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-native-final-v1.settlement.json",
+      "sha256": "a768abe96b2303a61fadfeb6ec1578da1c1ed63a8732bac9bde4f7bfbf09ac92"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-native-v1.settlement.json",
+      "sha256": "341b51af6b2c0ffab57975ccaed0d7a0dc2bb85b06594872de018b15fa103509"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-oracle-cpu-v1.settlement.json",
+      "sha256": "82e97dbbfb62790af337f5e94b72a901c797db7dcf283fc21b99ba77bb359dfe"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-analysis-v1.settlement.json",
+      "sha256": "ebced3200f68b0c15731a89f682f6dbfaf731f5dac4e5140b278edc7488e5327"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-freeze-v1.settlement.json",
+      "sha256": "11a5aff6b57b16ca61a5e62605ef367920d5dbade40cbf137147b536a10031e7"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-freeze-v2.settlement.json",
+      "sha256": "ec6c81c7f1bd0f15bcfaf84e64dcdf988a30e04b38e899accb3101955bb2c33d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-freeze-v3.settlement.json",
+      "sha256": "1679dff49c85d3dfdfe5d6fa44f7857f826e83881dafe3980086d79e5fa908b6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-freeze-v4.settlement.json",
+      "sha256": "df433baad296a70089af31a6691eabb49ba96fc377b5f3b946cb98d468f19403"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v1-m03.settlement.json",
+      "sha256": "f1d58e9026ccd3a1710fd90ed0edb77cc4c8d91eee1f1f4fd8d816df78aa9315"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v1-m09.settlement.json",
+      "sha256": "c227a7d6994d1580184af2b27c74164a877c2543b7f95871ea9e3b936f480204"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v1-m11.settlement.json",
+      "sha256": "06ac97158eccd46494cfbef69619aa4592f503e6438e841c810d06426ba99dfb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v1-m13.settlement.json",
+      "sha256": "111b7ab90e4419eef683c2f7fe0cf6bc13c66ed39c3d6f13c15e4700cad9f4b9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v1-m18.settlement.json",
+      "sha256": "370e4c1403fbfa3afc9973f8ec07b90956b0385456c7e65e784e6ff818014c93"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v1-m21.settlement.json",
+      "sha256": "d814443e6c91df9ed2b3aa214be072894d1ffebf9adc4e1fab42da6b83c2647c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v2-m03.settlement.json",
+      "sha256": "5f0d9c9df5d057a44576604b0a72ee465d1747f40915267de5a4e04d21216ce5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v2-m09.settlement.json",
+      "sha256": "888278a1f46b4d2b5d43aefdb1420b14b22c162a5c9e14cb362b87d41abb9660"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v2-m11.settlement.json",
+      "sha256": "3abb72264b353bda19c4bad1a1a68990cfa8d4d09009cd9d2557c39cddbf8804"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v2-m13.settlement.json",
+      "sha256": "816525d4897471fd371adc9f000df013b6682da27d6df5c055eaf2dac944d1f7"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v2-m18.settlement.json",
+      "sha256": "06271ca28dab2788105507e0f81daf6bea9bcd3d975276e5967c340df487fce1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v2-m21.settlement.json",
+      "sha256": "1ea7a2236e6444b8e1ad755e944eba9d0669770909c4da516e29527442c0ff6c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v3-m03.settlement.json",
+      "sha256": "436e7eb20d6f893a6043538ef80654240b5442c61b801ee46859c4c18086b750"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v3-m09.settlement.json",
+      "sha256": "682508d8ca316756b3c92081a82e9fb53a5f64384f879f65b8ed21068aacccf8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v3-m11.settlement.json",
+      "sha256": "23902962e74b4a88c20d83094a45be5fd74ee83268a2ad4581dd840d9b39587c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v3-m13.settlement.json",
+      "sha256": "99fe2e6b5bedfe384d96097ca7fe0d927ddc6478fd1d2984f37afc715541ce6f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v3-m18.settlement.json",
+      "sha256": "7c675d29fa3d47745d13e983b7993a67b469ef1f70e3ce9e0c80870dec6af167"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v3-m21.settlement.json",
+      "sha256": "613e48f00869756775f98a1977640663b9de3d97a3ea7b46cc0292a045ea0677"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v4-m03.settlement.json",
+      "sha256": "72ec614447c30ccd375a48cc0cc4ba7d227fcce491c3ef22dc0dde98ed528048"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v4-m09.settlement.json",
+      "sha256": "fb228d9e68bfbcafe8151b7516930aa590cd6d603be941ea31972f4db5dd0b5e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v4-m11.settlement.json",
+      "sha256": "c417d17dc351c8a5a7173fc5e9c4b4d9985a2fd852c6e189e4c268ce730869ea"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v4-m13.settlement.json",
+      "sha256": "2cea7ad79196c56dd713b8449fb414315624be4ccb0624947687748ff36a7079"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v4-m18.settlement.json",
+      "sha256": "bee0d3802d3b172c48d19e1bb65f91aab57ab4cafb1a28f747476cadf5ce25ba"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v4-m21.settlement.json",
+      "sha256": "17cc137872c3c0fd9dc900d868baeb389cb22adaab35f9cbb2a3c3e29ada0f82"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v5-m03.settlement.json",
+      "sha256": "c3d7c4e07c55acea6fa94d7e35632f3f586cc1640e4852b38cb8ecbc90559670"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v5-m09.settlement.json",
+      "sha256": "489234b6d30a0a1ea6ea22984c0b0c98073b997da7f27a7610da0446dbf9ec10"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v5-m11.settlement.json",
+      "sha256": "861d51ced7ae365f74d2c927ff05c61027e06915f5039e4c14c1507948fe9b99"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v5-m13.settlement.json",
+      "sha256": "15f7c71481d421f70edd040d7bf53a83f07dd3867641a189a93e7b2f5cbf3655"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v5-m18.settlement.json",
+      "sha256": "c9fb3d90e05b4008ad4d72b8b02acb9da35e27e902ca923a6220ecc3ecda0849"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-pilot-v5-m21.settlement.json",
+      "sha256": "e600d9dc3b2f025c37fc1a7ae6f0c7fcf8360c35b908961d31fdf3f873bcb18f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-portable-archive-v1.settlement.json",
+      "sha256": "adb829b242bf359f8b444caf2f0fd692b4cd038136fca8c42b9cf76f45b3884f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-portable-replay-v1.settlement.json",
+      "sha256": "6ff7a794444191cb47936b522c415531624e3c3f8ecb81cbd4ee02be86c92ab8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-analysis-v5.settlement.json",
+      "sha256": "af989b30554e558c96e25ca7ba8faf8864d24dfa307882385791acacdc24a7db"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-freeze-v1.settlement.json",
+      "sha256": "c4a4729dc1801b4363b3e3918fa48da51ce1995bffea331df3585d58d2872bd8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-freeze-v2.settlement.json",
+      "sha256": "db88619d3e398903787e1993fa00ca25f776933a71e9ec0746b1fa5bbca5a81a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-freeze-v3.settlement.json",
+      "sha256": "3543afb0e6bea5f3d2f36f306c949a06d8b192e3b3db476878627cdde97d9a37"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-freeze-v5.settlement.json",
+      "sha256": "f538075e8ca9771c66e2e06007b9a6c6ba299dda6c57e2822ccfbaf92d6f834b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-report-v1.settlement.json",
+      "sha256": "0051597dc26f6796f1235f008c2cc263dae5f36df786ea297ef5edc42918a168"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-report-v2.settlement.json",
+      "sha256": "61b38eab3a346633950d2467637a92ed51e9c2f3d058b97cbaeedd0f4f312af9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-report-v3.settlement.json",
+      "sha256": "b11af5efa9120a3afd8f1b843756210641be1aa1643843d76f20f8f95a889ba9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v1-m03.settlement.json",
+      "sha256": "6a3518ecdcaef9cf175c6d2340cbfa061c2eaacdc1a90ed1d069fb7ad9211384"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v1-m18.settlement.json",
+      "sha256": "e699058a84c63105e76ee4d0fa85097fcf203abd650adfa3c78a99e95f4deb65"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v1-m21.settlement.json",
+      "sha256": "cae375f0f817ea35c79bc3031f371ef2cbf95b6ccd5ac1f45b466596ae0f7d31"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v2-m03.settlement.json",
+      "sha256": "3dda67ae6c02b6ef18aa6de1e6516b5737bb98f7689aa707f79f606a03dd0471"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v2-m18.settlement.json",
+      "sha256": "c86817ede476d7a6f983dccecd20780bf358397573a2127883138baca6ded832"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v2-m21.settlement.json",
+      "sha256": "20da847860e3e09ddda7a7a69f1940fbc11a7e4f483f5984b9645d64771b0b70"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v3-m03.settlement.json",
+      "sha256": "c0eed5042e1ad79c6ce6db86daf398adc3bdfb921779d50b4a663c7b1f041112"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v3-m18.settlement.json",
+      "sha256": "d2273b9d8aaf9bd5953b21f2f8ec8940251a9b138e3e17ce80377436c7dfb13f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v3-m21.settlement.json",
+      "sha256": "fd66d2d5063ae35dfa822b733741b82c0b826c92b7a79c2b9923e27d0f0b0482"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v5-m03.settlement.json",
+      "sha256": "5030ff3e64b5283c7469a82020da48ca1e8af48adf0c9c2d34fec2963e4f8736"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v5-m18.settlement.json",
+      "sha256": "86ef8c3b958ffbe9f288f5de62d25cb90316fa401bb42a10ce988d0088c3207f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-profile-v5-m21.settlement.json",
+      "sha256": "4880c258653b1fe0f480c118e1bcde240d6199d0bb7cc9f39673abfd2c9e13f9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-racecheck-v1.settlement.json",
+      "sha256": "f76f20c136a34a78e5d7b3135838e5737d79fb97df02224d776bad93634465a8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-racecheck-v2.settlement.json",
+      "sha256": "57e4791610fbaf9092b94be966a0012598d1aff75cf22a60c0a9dacd92ec3104"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-racecheck-v3.settlement.json",
+      "sha256": "96e7cd9577877e2a30848fdbad622c0f1b29e8adbeb4c1719d4cf828a0209e94"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-racecheck-v4.settlement.json",
+      "sha256": "3b9e782a1673156176a60e18cd9c2fbc5ad1dcfcddce435afbb080f5f3056dff"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-racecheck-v5.settlement.json",
+      "sha256": "35fd68e095c6b1b0c184a47c6ac2f10c0b53aca11607e5971e816dad11c210bd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-smoke-v1.settlement.json",
+      "sha256": "59985cd8878baa4c76f0136a426c94c2e5e425b3709f45ccf4c6cf8eef03c5f3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-smoke-v3.settlement.json",
+      "sha256": "0d752b98c0e85492dfe348ccfeb56a5e5ca987c3ae812341bdea6f2acd61d8a4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-smoke-v4.settlement.json",
+      "sha256": "b695c76c9f9a8462f3950696023e91d1c311e9492a9efba9f704276c02655be9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-split-gpu-v1.settlement.json",
+      "sha256": "37279800202e8446aa57af508cf3c20b331a5ef7ece3121d9ee063ac27006e86"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-split-initcheck-v1.settlement.json",
+      "sha256": "bc94c339b56d5c2ea793fbe99c4f861ac9f38b79258cb7ad7f5b9c2e1a18a27c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-split-memcheck-v1.settlement.json",
+      "sha256": "94761785e4a5fcc3f1628c4c34870a999e7ad89548389e7f97452731f68536f2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-split-racecheck-v1.settlement.json",
+      "sha256": "c25dbcfd28a16c2a05f752ad6ab0595bc57647cf27a0fbed289c78b5855d921f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-split-racecheck-v2.settlement.json",
+      "sha256": "55ebb5634d1dc134c01a546b390e75b213a3db5f6c9b6c2236517ccbcd849ba2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-split-synccheck-v1.settlement.json",
+      "sha256": "7a408a94a5c5f881a2180c3ef7d444c59fb1d44b6861e8fd7abcba110c83f553"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-synccheck-v1.settlement.json",
+      "sha256": "a0426ffe9792c39bb4cbab9c9bd4bf794d7a5558b0b9484a5a45e06bda3f0fbd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-synccheck-v2.settlement.json",
+      "sha256": "e912da968c5e8f64f6403b8e1f0888aec4ecc47fd0a91e45b17f22b6fd7206ba"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-synccheck-v3.settlement.json",
+      "sha256": "c064d929bb4507d22e99f78d4f7d519e68a990f7a9e9db67f5da1ccd0aa8a229"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-synccheck-v4.settlement.json",
+      "sha256": "6ac7f86b8fc2e195e82966a6c89d525e898658e7b2e3742a8b8f72a3d32930ec"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-synccheck-v5.settlement.json",
+      "sha256": "cb08acae26ed5952141467a271f60fab99990ae6c8f44bacbd9b04b7b73168c9"
+    }
+  ],
+  "results": {
+    "path": "docs/benchmarks/lp-general-fast-results.json",
+    "sha256": "3d88fc5603dddb7d3e694b2c66cfaceaa2594fa04f858efc604067ca4d312fdd"
+  },
+  "settled_accounting_ns": {
+    "cpu": {
+      "admission": 27951627980344,
+      "cleanup": 128000000000,
+      "confirmation": 0,
+      "development": 24462565094352,
+      "implementation": 12474478920828,
+      "native": 19341981269064,
+      "reporting": 11287227626892
+    },
+    "gpu": {
+      "admission": 5534138578335,
+      "confirmation": 0,
+      "development": 5353825988556,
+      "reporting": 0
+    }
+  },
+  "settled_cpu_ns": 95645880891480,
+  "settled_gpu_ns": 10887964566891,
+  "status": "passed",
+  "validation_job": {
+    "path": "artifacts/gpup-general-v1/resources/fast-validation-v1.settlement.json",
+    "sha256": "90a474217d875e4789e0579732537d6bee821bda13dd0fb3d38c829eef7b40ed"
+  }
+}
