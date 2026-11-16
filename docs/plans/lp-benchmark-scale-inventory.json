@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "survey_date": "2026-11-17",
+  "status": "metadata survey; prospective design; no solver execution",
+  "units": "rows, columns and nonzeros are published counts; raw and canonical counts are not interchangeable",
+  "statistical_scope": "descriptive medians of each listed collection, without pooling",
+  "collections": [
+    {
+      "id": "netlib",
+      "url": "https://netlib.org/lp/data/readme",
+      "bytes": 31854,
+      "sha256": "3e88f372892982e84ab41a65e005ecf1b4fbf19f3e8ada9fcb59a5ae87dd003c",
+      "local_snapshot": "artifacts/lp-scale-survey-v1/netlib.source",
+      "counting_convention": "Numeric rows in the main published summary; objective row and coefficients included, slack/surplus columns excluded. Not the entire NETLIB collection.",
+      "listed_count": 96,
+      "statistics": {
+        "rows": {
+          "minimum": 25,
+          "median": 470.0,
+          "maximum": 16676
+        },
+        "columns": {
+          "minimum": 32,
+          "median": 1083.5,
+          "maximum": 22275
+        },
+        "nonzeros": {
+          "minimum": 88,
+          "median": 5187.0,
+          "maximum": 151120
+        }
+      },
+      "nonzeros_at_least": {
+        "1000000": 0,
+        "10000000": 0,
+        "100000000": 0,
+        "1000000000": 0
+      },
+      "examples": [
+        {
+          "name": "AFIRO",
+          "rows": 28,
+          "columns": 32,
+          "nonzeros": 88
+        },
+        {
+          "name": "MAROS-R7",
+          "rows": 3137,
+          "columns": 9408,
+          "nonzeros": 151120
+        }
+      ]
+    },
+    {
+      "id": "kennington",
+      "url": "https://netlib.org/lp/data/kennington/readme",
+      "bytes": 2590,
+      "sha256": "ddee580ab888f4c51d7e2160737b07cb747dd9cc6a4c096df3d74d98d5783cff",
+      "local_snapshot": "artifacts/lp-scale-survey-v1/kennington.source",
+      "counting_convention": "All 16 rows in the supplement summary, as published; slack/surplus columns excluded.",
+      "listed_count": 16,
+      "statistics": {
+        "rows": {
+          "minimum": 1119,
+          "median": 9288.0,
+          "maximum": 105128
+        },
+        "columns": {
+          "minimum": 3602,
+          "median": 45711.0,
+          "maximum": 232966
+        },
+        "nonzeros": {
+          "minimum": 11981,
+          "median": 153853.0,
+          "maximum": 1630758
+        }
+      },
+      "nonzeros_at_least": {
+        "1000000": 1,
+        "10000000": 0,
+        "100000000": 0,
+        "1000000000": 0
+      },
+      "examples": [
+        {
+          "name": "OSA-60",
+          "rows": 10281,
+          "columns": 232966,
+          "nonzeros": 1630758
+        }
+      ]
+    },
+    {
+      "id": "miplib",
+      "url": "https://miplib.zib.de/set_benchmark.html",
+      "bytes": 139431,
+      "sha256": "cbd74ea7d59ff8f2f0214d110aeb9002dcef53fd13dce30526d62a95714f51d2",
+      "local_snapshot": "artifacts/lp-scale-survey-v1/miplib.source",
+      "counting_convention": "All 240 benchmark-set summary rows, original model metadata. Summary counts may be rounded. Proposed use is continuous relaxations; MIP status and objective are not LP authority.",
+      "listed_count": 240,
+      "statistics": {
+        "rows": {
+          "minimum": 4,
+          "median": 5069.5,
+          "maximum": 2897380
+        },
+        "columns": {
+          "minimum": 30,
+          "median": 11098.0,
+          "maximum": 1429098
+        },
+        "nonzeros": {
+          "minimum": 123,
+          "median": 110248.0,
+          "maximum": 27329900
+        }
+      },
+      "nonzeros_at_least": {
+        "1000000": 30,
+        "10000000": 2,
+        "100000000": 0,
+        "1000000000": 0
+      },
+      "examples": [
+        {
+          "name": "square47",
+          "rows": 61591,
+          "columns": 95030,
+          "nonzeros": 27329900
+        },
+        {
+          "name": "supportcase19",
+          "rows": 10713,
+          "columns": 1429098,
+          "nonzeros": 4287090
+        },
+        {
+          "name": "neos-3402454-bohle",
+          "rows": 2897380,
+          "columns": 2904,
+          "nonzeros": 8953800
+        }
+      ]
+    },
+    {
+      "id": "mittelmann",
+      "url": "https://plato.asu.edu/ftp/lpfeas.html",
+      "bytes": 13671,
+      "sha256": "18a05741314d9a07409dd7f2cfee06df7e2f1c4611c883241067aa98184a9fe6",
+      "local_snapshot": "artifacts/lp-scale-survey-v1/mittelmann.source",
+      "counting_convention": "49 disclosed main dimension rows only; excludes 16 undisclosed main cases and the separate extreme-scale addendum. Published 25 Oct 2026.",
+      "listed_count": 49,
+      "statistics": {
+        "rows": {
+          "minimum": 4284,
+          "median": 160793,
+          "maximum": 30000600
+        },
+        "columns": {
+          "minimum": 6624,
+          "median": 270869,
+          "maximum": 38868107
+        },
+        "nonzeros": {
+          "minimum": 110700,
+          "median": 1955388,
+          "maximum": 93001800
+        }
+      },
+      "nonzeros_at_least": {
+        "1000000": 38,
+        "10000000": 11,
+        "100000000": 0,
+        "1000000000": 0
+      },
+      "examples": [
+        {
+          "name": "pds-100",
+          "rows": 156244,
+          "columns": 505360,
+          "nonzeros": 1390539
+        },
+        {
+          "name": "scpm1",
+          "rows": 5000,
+          "columns": 500000,
+          "nonzeros": 6250000
+        },
+        {
+          "name": "a2864",
+          "rows": 22117,
+          "columns": 200787,
+          "nonzeros": 20078717
+        },
+        {
+          "name": "rail4284",
+          "rows": 4284,
+          "columns": 1092610,
+          "nonzeros": 12372358
+        },
+        {
+          "name": "dlr2",
+          "rows": 7132926,
+          "columns": 38868107,
+          "nonzeros": 78091589
+        },
+        {
+          "name": "Dual2_5000",
+          "rows": 30000600,
+          "columns": 33050602,
+          "nonzeros": 93001800
+        }
+      ]
+    },
+    {
+      "id": "pdlp",
+      "url": "https://arxiv.org/html/2501.07018v2",
+      "bytes": 671183,
+      "sha256": "c3dd114eddacce06ebe0ad5619a5d8202dd82e89afc56b8953ce87eb43265882",
+      "local_snapshot": "artifacts/lp-scale-survey-v1/pdlp.source",
+      "counting_convention": "All 11 problem rows in Table 2 of arXiv:2501.07018v2, 18 Mar 2026. Published benchmark targets differ from our strict certificate endpoints.",
+      "listed_count": 11,
+      "statistics": {
+        "rows": {
+          "minimum": 1980200,
+          "median": 15304282,
+          "maximum": 162934799
+        },
+        "columns": {
+          "minimum": 18270600,
+          "median": 60601996,
+          "maximum": 1184557727
+        },
+        "nonzeros": {
+          "minimum": 125000000,
+          "median": 500049700,
+          "maximum": 6337834450
+        }
+      },
+      "nonzeros_at_least": {
+        "1000000": 11,
+        "10000000": 11,
+        "100000000": 11,
+        "1000000000": 3
+      },
+      "examples": [
+        {
+          "name": "heat-source-easy",
+          "rows": 15625000,
+          "columns": 31628008,
+          "nonzeros": 125000000
+        },
+        {
+          "name": "production-inventory",
+          "rows": 4650850,
+          "columns": 18270600,
+          "nonzeros": 500049700
+        },
+        {
+          "name": "tsp-gaia-100m",
+          "rows": 162934799,
+          "columns": 1184557727,
+          "nonzeros": 6337834450
+        }
+      ]
+    }
+  ],
+  "proposed_nonzero_targets": [
+    250000,
+    1000000,
+    4000000,
+    16000000,
+    64000000,
+    128000000,
+    256000000,
+    512000000,
+    1000000000,
+    2000000000,
+    8000000000
+  ],
+  "current_admitted_domain": {
+    "max_rows_or_columns": 1048576,
+    "max_nonzeros": 67108864,
+    "owned_device_bytes": 12884901888,
+    "sampled_host_rss_bytes": 17179869184
+  },
+  "benchmark_models_downloaded": 0,
+  "solver_runs": 0
+}

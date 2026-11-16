@@ -1,5 +1,14 @@
 # GPU LP Performance Research and Implementation Roadmap
 
+## Benchmark scale design (2026-11-17)
+
+The [scale survey and proposed evaluation](lp-benchmark-scaling.md) compares
+NETLIB, MIPLIB relaxations, Mittelmann and the PDLP large-scale collection.
+It proposes broad development through 64 million nonzeros and larger stages
+through 8 billion, with explicit dimension, memory and admission prerequisites.
+This is benchmark research and design; no scaling campaign or confirmation has
+started. Existing implementation results and resource limits remain unchanged.
+
 ## General low-bit LP implementation active (2026-11-16)
 
 The user directs the project toward a broadly useful LP solver whose performance

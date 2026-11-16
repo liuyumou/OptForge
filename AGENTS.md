@@ -1,3 +1,14 @@
+# Current agent handoff: benchmark scale design (2026-11-17)
+
+The user requests checking popular benchmark scales before scaling execution.
+[The scale survey and design](docs/plans/lp-benchmark-scaling.md) records official
+NETLIB, MIPLIB, Mittelmann and PDLP metadata. Main development targets reach
+64 million nonzeros; larger design stages reach 128 million through 8 billion,
+subject to admitted dimensions, full memory accounting and execution resources.
+Keep broad sparse/application coverage, strict certificates and meaningful FP4
+contribution. No scaling run, numerical change or confirmation freeze occurred.
+The previous implementation and settled allocation checkpoint remain unchanged.
+
 # Current agent handoff: FP4 surrounding work (2026-11-16)
 
 Keep the broadly useful single-solve LP objective active, including meaningful
