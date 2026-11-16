@@ -1,3 +1,54 @@
+# Current agent handoff: FP4 surrounding work (2026-11-16)
+
+Keep the broadly useful single-solve LP objective active, including meaningful
+FP4 acceleration and strict original-model certificates. The opt-in fast image
+is now `fast-image-v10`, admitted by `fast-overhead-admission-v1`. Contiguous
+projection/state writes and fused encoding remove a shared-memory handoff and
+barrier; exact bit decoding replaces an FP4 table lookup. All 477 compared
+responses remain exactly unchanged (excluding timing/allocation fields), and
+13 native/FP32/product compiled kernels are exact. Four scoped sanitizers pass.
+Final native acceptance passes 638 Rust / 821 Python; isolated acceptance has
+18 Rust tests. Portable replay verifies 26632 files, 319 retained study responses, 281 admission
+solves, 21524 product outputs and 5796 assessments / 3209 distinct serial witnesses.
+All 113490 prior file bindings remain exact; cleanup is empty.
+
+All 144 fixed-work pilot cells complete; 48 old/new FP4 pairs retain exact
+transcripts. Combined FP4x2 execution improves 1.160x / 1.702x / 1.143x on the
+three tiled cases. Block-sparse FP4x2 executes 500 updates in 7.123 ms versus
+10.078 ms for FP32. These are not certified-solve gains. Twelve new timelines
+retain 36 exact transcripts. Combined now beats split elapsed execution in all
+three tiled pilots, but dense1025 combined active time still exceeds split
+(18.651 versus 13.759 us/update): 16/33 CTAs versus 256 product CTAs on 188 SMs.
+Hardware counters remain unavailable; no occupancy claim.
+
+The broad manifest's group 16 exhausts an incorrectly sized 180-second resource
+reservation for eight solves plus independent checking. Preserve seven responses,
+exclude all seven timings, and leave its interrupted FP32/1e-9 endpoint missing.
+Only never-started groups 17–21 execute in a separate tail manifest with 300-second
+reservations. No attempted cell repeats. Distinct roster coverage is 175/176
+responses and 168 eligible timings across all 22 models and both tiers. All
+four lanes certify 20 cases; descriptive FP32/candidate complete-cost medians
+are 0.992 combined and 0.988 split. Broad FP4 superiority remains unestablished.
+Original-model assessment and general convergence remain major targets alongside
+parallel scheduling and launch gaps; do not narrow the roster or replace FP4
+progress with native fallback.
+
+Four failed reservations retain 2200 CPU / 400 GPU seconds and sources: harness
+syntax, immutable report write, undersized scientific group and undersized offline
+analysis. The current independent total remains 240000 CPU / 30000 GPU seconds.
+Prospectively rebalanced GPU phase ceilings are admission 8000, development 10000,
+confirmation 10000 and reporting 2000; CPU caps remain unchanged. Operational
+receipt v2 admits these exact sources under unchanged one-second supervision,
+all 100 ms advisories, four CPU slots, 16 GiB sampled RSS, 12 GiB device buffers
+and the pinned shared lease. Receipt v1 and every historical scientific file
+remain exact. Large evidence stays local; only compact results are tracked.
+Commit locally only; no default, confirmation or publication is released.
+
+Open settled checkpoint: 108845.598964180 CPU / 12326.763290488 GPU seconds.
+
+Report: [FP4 surrounding work](docs/benchmarks/lp-general-overhead.md).
+The preserved instructions below retain their historical scope.
+
 # Current agent handoff
 
 ## General low-bit kernel redesign delivered (2026-11-16)

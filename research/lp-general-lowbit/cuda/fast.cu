@@ -2,6 +2,12 @@
 #include "tensor.cu"
 
 namespace fast {
+// Normal E2M1 only: construct binary32 bits without a dynamically indexed table.
+__device__ __forceinline__ float decode(unsigned c) {
+    unsigned m=c&7;
+    return __uint_as_float(m ? (((m/2+126)<<23)|((m&1)<<22)|((c&8)<<28)) : 0);
+}
+
 __device__ void encode(double value, unsigned index, unsigned n, unsigned k,
     unsigned* codes, int* exponents, unsigned* flags) {
     unsigned lane=threadIdx.x%32, block=index/32;
@@ -17,7 +23,7 @@ __device__ void encode(double value, unsigned index, unsigned n, unsigned k,
         for(int d=1;d<8;d<<=1)word|=__shfl_down_sync(0xffffffff,word,d)<<(4*d);
         if(!(lane&7))codes[(block*k+h)*4+lane/8]=word;
         if(!lane)exponents[block*k+h]=e;
-        v=__fsub_rn(v,tensor::scale(general::fp4(c),e));
+        v=__fsub_rn(v,tensor::scale(decode(c),e));
     }
 }
 
@@ -80,7 +86,6 @@ __device__ void combined(const unsigned* offsets,const unsigned* indices,const f
     }
     __shared__ float partial[128];
     __shared__ float remainder[32];
-    __shared__ double encoded[32];
     if(!(lane%4)){partial[warp*16+lane/4]=a;partial[warp*16+lane/4+8]=b;}
     __syncthreads();
     unsigned local=threadIdx.x/8,row=blockIdx.x*32+local;
@@ -109,29 +114,30 @@ __device__ void combined(const unsigned* offsets,const unsigned* indices,const f
         if(!(lane%8))remainder[local]=sum;
     }
     __syncthreads();
-    if(!(lane%8)){
-            unsigned base=(local/16)*64+local%16;
-            float tiles=__fadd_rn(__fadd_rn(partial[base],partial[base+32]),__fadd_rn(partial[base+16],partial[base+48]));
-            encoded[local]=0;
-            if(row<rows){
-                double value=double(__fadd_rn(remainder[local],tiles));if(incremental)value=__dadd_rn(value,reference[row]);
-                if(direction==2){product[row]=value;if(!isfinite(value))atomicOr(flags,1u);}
-                else {
-                    double old=state[row],next,e=0;
-                    if(direction==0){next=fmin(upper[row],fmax(lower[row],old-scale*(objective[row]-value)));e=2*next-old;}
-                    else {double raw=old-scale*value;next=raw-fmin(-scale*lower[row],fmax(-scale*upper[row],raw));}
-                    double blended=toward*next+back*anchor[row];if(direction==1)e=blended;
-                    if(!isfinite(value)||!isfinite(blended)||!isfinite(e))atomicOr(flags,1u);
-                    else {state[row]=blended;if(direction==0)extra[row]=e;encoded[local]=e;
-                        output_delta[row]=__double2float_rn(incremental?__dsub_rn(e,output_anchor[row]):e);}
-                }
+    // The reduction layout uses eight lanes/output. Repack its 32 results into
+    // one full warp before FP64 projection and encoding. This coalesces state
+    // traffic and avoids the second shared-memory handoff and block barrier.
+    if(warp==0){
+        unsigned row=blockIdx.x*32+lane,base=(lane/16)*64+lane%16;
+        float tiles=__fadd_rn(__fadd_rn(partial[base],partial[base+32]),__fadd_rn(partial[base+16],partial[base+48]));
+        double encoded=0;
+        if(row<rows){
+            double value=double(__fadd_rn(remainder[lane],tiles));if(incremental)value=__dadd_rn(value,reference[row]);
+            if(direction==2){product[row]=value;if(!isfinite(value))atomicOr(flags,1u);}
+            else {
+                double old=state[row],next,e=0;
+                if(direction==0){next=fmin(upper[row],fmax(lower[row],old-scale*(objective[row]-value)));e=2*next-old;}
+                else {double raw=old-scale*value;next=raw-fmin(-scale*lower[row],fmax(-scale*upper[row],raw));}
+                double blended=toward*next+back*anchor[row];if(direction==1)e=blended;
+                if(!isfinite(value)||!isfinite(blended)||!isfinite(e))atomicOr(flags,1u);
+                else {state[row]=blended;if(direction==0)extra[row]=e;encoded=e;
+                    output_delta[row]=__double2float_rn(incremental?__dsub_rn(e,output_anchor[row]):e);}
             }
-    }
-    __syncthreads();
-    if(fused&&direction!=2&&warp==0){
-        unsigned row=blockIdx.x*32+lane;double v=encoded[lane];
-        if(incremental&&row<rows)v=__dsub_rn(v,output_anchor[row]);
-        encode(v,row,rows,K,output_codes,output_exponents,flags);
+        }
+        if(fused&&direction!=2){
+            if(incremental&&row<rows)encoded=__dsub_rn(encoded,output_anchor[row]);
+            encode(encoded,row,rows,K,output_codes,output_exponents,flags);
+        }
     }
 }
 
@@ -157,8 +163,19 @@ __device__ void step(const unsigned* offsets,const unsigned* indices,const doubl
         if(MODE==0)ds=__dadd_rn(ds,__shfl_down_sync(0xffffffff,ds,d,LANES));
         else fs=__fadd_rn(fs,__shfl_down_sync(0xffffffff,fs,d,LANES));
     }
+    bool owner=!lane;
+    if constexpr(MODE==2&&LANES<=8){
+        if(fused&&direction!=2){
+            __shared__ float reduced[256/LANES];
+            if(!lane)reduced[threadIdx.x/LANES]=fs;
+            __syncthreads();
+            owner=threadIdx.x<256/LANES;
+            row=blockIdx.x*(256/LANES)+threadIdx.x;
+            if(owner)fs=reduced[threadIdx.x];
+        }
+    }
     double encoded=0;
-    if(!lane&&row<rows){
+    if(owner&&row<rows){
         double value=MODE?double(fs):ds;
         if(MODE&&incremental)value=__dadd_rn(value,reference[row]);
         if(direction==2){product[row]=value;if(!isfinite(value))atomicOr(flags,1u);}
@@ -179,18 +196,9 @@ __device__ void step(const unsigned* offsets,const unsigned* indices,const doubl
         }
     }
     if constexpr(MODE==2&&LANES<=8){
-        if(fused&&direction!=2){
-            __shared__ double output[256/LANES];
-            if(!lane)output[threadIdx.x/LANES]=encoded;
-            __syncthreads();
-            if(threadIdx.x<256/LANES){
-                unsigned i=blockIdx.x*(256/LANES)+threadIdx.x;
-                if(i/32<(rows+31)/32){
-                    double v=i<rows?output[threadIdx.x]:0.;
-                    if(incremental&&i<rows)v=__dsub_rn(v,output_anchor[i]);
-                    encode(v,i,rows,k,output_codes,output_exponents,flags);
-                }
-            }
+        if(fused&&direction!=2&&owner&&row/32<(rows+31)/32){
+            if(incremental&&row<rows)encoded=__dsub_rn(encoded,output_anchor[row]);
+            encode(encoded,row,rows,k,output_codes,output_exponents,flags);
         }
     }
 }

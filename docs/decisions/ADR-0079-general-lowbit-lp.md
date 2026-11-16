@@ -35,3 +35,10 @@ The user's execution authorization covers these engineering and evaluation stage
 SPEC-0045 declares an independent finite allocation and milestone checks before
 execution. Historical allocations stay closed. All changes and evidence are local;
 publication remains outside this authorization.
+
+The user's surrounding-work continuation optimizes projection/encoding layout
+without changing FP4 reduction order or strict original certificates. The
+[report](../benchmarks/lp-general-overhead.md) records exact old/new transcripts,
+matched timings, broad coverage and fusion diagnosis. SPEC-0045 prospectively
+moves 2000 unspent GPU seconds from development to admission within the unchanged
+30000-second total; all supervision rules and historical charges remain exact.

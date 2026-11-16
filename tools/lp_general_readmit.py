@@ -13,7 +13,8 @@ def sources():
 
 
 def validate(disposition, base=BASE):
-    path=base/'operational-readmission-v1.json'
+    paths=list(base.glob('operational-readmission-v*.json'))
+    path=max(paths,key=lambda p:int(p.stem.rsplit('v',1)[1])) if paths else base/'operational-readmission-v1.json'
     require(path.exists(),'operational readmission is missing')
     r=load(path)
     require(r['kind']=='prospective-general-operational-readmission' and r['status']=='passed','invalid readmission')
@@ -42,11 +43,11 @@ def probe(identity):
     put(out/'result.json',dict(status='passed',tests=result.testsRun,skipped=len(result.skipped),sources=sources(),max_gap_ns=MAX_GAP_NS))
 
 
-def compose(identity):
+def compose(identity, version=1):
     proof=BASE/identity/'result.json';settlement=BASE/'resources'/(identity+'.settlement.json')
     interruptions=[load(p)['interruption_disposition'] for p in (BASE/'resources').glob('*.settlement.json') if load(p).get('interruption_disposition')]
     require(interruptions,'no interrupted disposition to readmit')
-    path=BASE/'operational-readmission-v1.json';require(not path.exists(),'readmission immutable')
+    path=BASE/f'operational-readmission-v{version}.json';require(not path.exists(),'readmission immutable')
     put(path,dict(kind='prospective-general-operational-readmission',status='passed',interruptions=interruptions,
         historical_supervision_established=False,sources=sources(),max_gap_ns=MAX_GAP_NS,proof=ref(proof),settlement=ref(settlement),
         claim='Fresh operational contract admission only. Interruption cause unknown; no availability guarantee, historical repair, or numerical admission.'))
@@ -54,5 +55,5 @@ def compose(identity):
     print('prospective operational readmission passed',flush=True)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['probe','compose']);p.add_argument('--id',required=True);a=p.parse_args()
-    (probe if a.action=='probe' else compose)(a.id)
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['probe','compose']);p.add_argument('--id',required=True);p.add_argument('--version',type=int,default=1);a=p.parse_args()
+    probe(a.id) if a.action=='probe' else compose(a.id,a.version)

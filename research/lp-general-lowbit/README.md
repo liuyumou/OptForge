@@ -120,3 +120,7 @@ as one content-addressed object and independently replays the extracted evidence
 For this backend, reserve archive construction in reporting and the independent
 CPU numerical replay in admission, within the unchanged phase ceilings.
 Large evidence remains local. See the [redesign report](../../docs/benchmarks/lp-general-fast.md).
+
+The [FP4 surrounding-work continuation](../../docs/benchmarks/lp-general-overhead.md)
+coalesces projection and encoding while preserving complete numerical transcripts.
+Its matched old/new comparison retains native/FP32 controls and the full LP roster.

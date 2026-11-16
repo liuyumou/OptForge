@@ -393,3 +393,74 @@ This separates packaging from numerical acceptance; all phase ceilings, earlier
 charges and closed allocations remain unchanged. Identical offline certificate
 witnesses may share a replay result after exact input/witness hashing; every
 retained response remains covered and no numerical solver answer is reused.
+
+
+## FP4 surrounding-work continuation (2026-11-16)
+
+The user requests optimizing the work surrounding FP4 and diagnosing the fusion
+tradeoff. Repack reduced outputs into contiguous active lanes before FP64
+projection and fused vector encoding. Preserve the reduction trees, explicit
+rounding, reference/reset behavior and complete checkpoint semantics. Replace
+normal-E2M1 lookup decoding with exact binary32 bit construction. Retain the
+previous admitted image as a contemporaneous control, with independent product,
+full-transcript, boundary, recovery and four-sanitizer admission. Do not claim
+arithmetic equivalence from a timing comparison alone.
+
+Keep all 22 development models and both strict tiers. A fixed-work comparison
+first measures old and new split/combined paths against current native and FP32;
+complete-solve observations retain all failed and censored cells. Profile the
+changed paths to distinguish active kernel savings from launch gaps. Shared
+host/device variability and instrumentation effects remain explicit. No broad
+superiority or confirmation is implied by this development continuation.
+
+The arithmetic-preserving image uses full ordinary differential admission and
+exact comparisons against all 444 prior admission responses. All four sanitizers
+cover the changed combined and split paths: every component count, long rows,
+multi-tile reductions, tail/empty dimensions, every split lane count, fused versus
+unfused encoding, positive strict certificates and transactional recovery. The
+unchanged native/FP32 code and historical local-bound backend retain their prior
+sanitizer coverage. This scoped admission fits the remaining original admission
+allocation; no phase ceiling, total budget or supervision rule changes.
+
+The first surrounding-work racecheck reservation fails on a Python harness syntax
+error before any CUDA invocation. Keep its complete 880 CPU / 220 GPU-second
+charge and source snapshot. Corrected admission has a new identity, not a
+scientific-cell retry. Prospectively move 2000 unspent GPU seconds from development
+to admission: admission 8000, development 10000, confirmation 10000 and reporting
+2000, still 30000 total. CPU caps and the independent total remain unchanged.
+This supersedes the preceding unchanged-phase statement for this continuation;
+it moves no funding from a historical allocation. Native acceptance already
+passed. Re-admit the exact revised accounting/readmission sources using the same
+39 supervisor contracts and supervised CPU probe before any new GPU work. Preserve
+the original operational receipt; the new version cannot repair historical gaps.
+
+
+The surrounding-work broad harness incorrectly reserves 180 seconds per model
+for eight, not four, solves plus independent checking. Model group 16 reaches
+its unchanged guardian wall deadline. Preserve all seven completed solver and
+serial-check responses, the interrupted eighth FP32/1e-9 process without an
+endpoint, complete cleanup, sources and full 720 CPU / 180 GPU-second charge.
+The failed job's seven timings are ineligible for primary comparison. Do not
+repeat any of its cells or repair its missing endpoint.
+
+Freeze only never-started groups 17–21 in a separate tail manifest referencing
+the original frozen cells and failed receipt. Each gets 300 wall seconds for
+eight 30-second-capped solves, preparation and independent checking; whole-tail
+reservation preflight precedes launch. Preserve original cell order, image,
+requests and models. Original missingness remains visible; combine distinct
+attempt identities only for roster accounting, never portray the interrupted
+cohort as complete. The sole interrupted endpoint stays missing. All 22 models
+remain represented, with native, FP32 and both FP4x2 schedules at both tiers.
+
+The first consolidated offline analysis reservation (90 wall seconds) also
+expires while parsing the preserved large response JSON. Retain its source,
+partial log summaries and full 360 CPU-second charge; no numerical run repeats.
+A separate 600-second reporting reservation covers the unchanged observations.
+Previous complete 800-cell reporting took about 169 wall seconds, and prior
+archive/replay took about 248/683 seconds; use those measurements to reserve
+300 seconds for the new delta archive and 1800 for independent portable replay.
+
+The delta archive also verifies the larger, final fast-delivery manifest (114046
+bindings before excluding mutable working-tree sources). Reserve 600 rather
+than 300 wall seconds for that combined preservation/compression operation;
+existing phase and total ceilings still preflight. Replay remains 1800 seconds.
