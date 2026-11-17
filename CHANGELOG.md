@@ -1,5 +1,15 @@
 # Changelog
 
+## General low-bit LP implementation and scale evaluation (2026-11-17)
+
+- Deliver the controlled GPUP-9 study, general sparse LP research executor and
+   actual FP4 Tensor Core proposal backend with strict original-model checking.
+- Improve projection/encoding, host preparation and checker reuse; add compact
+   inputs, structural scheduling and COPT CPU/GPU evaluation through 16 M nonzeros.
+- Preserve all positive, negative and incomplete results, original criteria and
+   public defaults. Broad complete-solve FP4 superiority remains unestablished.
+  [Integration and retained comparisons](docs/benchmarks/lp-general-pr.md).
+
 ## GPUP-8 FP4 redesign and gate waiver (2026-11-15)
 
 - Waive the legacy arithmetic-family/cold-only progression gate and supersede

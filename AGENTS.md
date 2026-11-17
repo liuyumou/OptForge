@@ -1,3 +1,28 @@
+# Current agent handoff: general LP PR acceptance complete (2026-11-17)
+
+The user authorizes publishing and normally merging the eight original feature
+commits through [PR #28](https://github.com/liuyumou/OptForge/pull/28), preserving
+ancestry and all results. Integration acceptance passes 638 repository Rust /
+827 Python tests, 37 isolated Rust tests and documentation checks. All 2407
+other original files stay exact; historical navigation text is preserved. Both
+admitted host images, source bindings and all 139 latest archive parts verify.
+Existing device admission, sanitizers and numerical replay remain applicable.
+
+Hosted initial checks report startup_failure with zero jobs; local acceptance
+is separate. Use a normal merge without changing or bypassing protection. Final
+head/merge receipts are local and reported on the PR. Earlier local-only entries
+retain their historical scope. GPUP-9 archive parts remain tracked; newer large
+scientific bundles stay local. No numerical source, public default, historical
+criterion, failed/missing result or scientific allocation changes. Broad single-
+solve usefulness with meaningful FP4 benefit remains the objective.
+
+The separate integration allocation is closed at 3309.763244320 / 16000 CPU
+seconds, zero GPU, including 1000 closing-administration seconds; cleanup is empty.
+The general scientific allocation remains open at 181311.318401148 CPU /
+23462.140788896 GPU seconds.
+
+Report: [integration acceptance](docs/benchmarks/lp-general-pr.md).
+
 # Current agent handoff: scale development with COPT (2026-11-17)
 
 Keep the broad single-solve LP objective active, including meaningful FP4 benefit.
