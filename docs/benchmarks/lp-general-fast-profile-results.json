@@ -1,0 +1,1646 @@
+{
+  "freeze": {
+    "path": "artifacts/gpup-general-v1/fast-profile-v5/freeze.json",
+    "sha256": "d0b92b46ff809525e73e728c8e053113340d14ca068cfa44054dc004eb16cbba"
+  },
+  "limits": "Timeline durations include profiler disturbance; no hardware counters or measured occupancy. Device ordinal verified against physical UUID.",
+  "rows": [
+    {
+      "cell": "m03-r0-t0-native",
+      "cost_ns": {
+        "after": {
+          "assessment": 5613238,
+          "device_setup": 262673225,
+          "device_teardown": 68793327,
+          "execution": 6378881,
+          "host_preparation": 7613117,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 5447218,
+          "device_setup": 308354748,
+          "device_teardown": 72485193,
+          "execution": 6368975,
+          "host_preparation": 7474450,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 5625944,
+          "device_setup": 523434720,
+          "device_teardown": 70539323,
+          "execution": 6426972,
+          "host_preparation": 7730109,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m03-r0-t0-native-trace/trace.sqlite",
+        "sha256": "d53ffbaf4c40adda0ac2576a25b2bd7bce6c121b344a61aba2de2672c226e609"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "native",
+      "inter_kernel_gap_ns": 2077174,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 4512,
+            "median": 4416.0,
+            "minimum": 4383,
+            "p05": 4383,
+            "p95": 4416,
+            "sum": 2202167
+          },
+          "grid": 16,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_0_32",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 3839,
+            "median": 3712.0,
+            "minimum": 3647,
+            "p05": 3680,
+            "p95": 3744,
+            "sum": 1852638
+          },
+          "grid": 33,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_0_32",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 3,
+      "profiler_execution_ratio": {
+        "after": 1.0075390965907658,
+        "before": 1.0091061748554517
+      },
+      "update_kernel_ns": 4054805,
+      "update_span_ns": 6131979
+    },
+    {
+      "cell": "m03-r0-t0-fp32",
+      "cost_ns": {
+        "after": {
+          "assessment": 5778773,
+          "device_setup": 307790561,
+          "device_teardown": 75474711,
+          "execution": 5351376,
+          "host_preparation": 7535652,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 5680061,
+          "device_setup": 243657791,
+          "device_teardown": 66776207,
+          "execution": 5356589,
+          "host_preparation": 7611845,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 6010304,
+          "device_setup": 520394009,
+          "device_teardown": 71676985,
+          "execution": 6391645,
+          "host_preparation": 7814714,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m03-r0-t0-fp32-trace/trace.sqlite",
+        "sha256": "9f28e07e9307f74ec14f5ba95347b796dbc450a3ecf519cd9a57017f2e92ea78"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "fp32",
+      "inter_kernel_gap_ns": 2404619,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 4032,
+            "median": 3903.0,
+            "minimum": 3839,
+            "p05": 3871,
+            "p95": 3904,
+            "sum": 1944698
+          },
+          "grid": 16,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_1_32",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 3712,
+            "median": 3552.0,
+            "minimum": 3519,
+            "p05": 3551,
+            "p95": 3584,
+            "sum": 1780452
+          },
+          "grid": 33,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_1_32",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 5215,
+            "median": 5024.0,
+            "minimum": 4992,
+            "p05": 4992,
+            "p95": 5215,
+            "sum": 30399
+          },
+          "grid": 16,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 4160,
+            "median": 3936.0,
+            "minimum": 3936,
+            "p05": 3936,
+            "p95": 4160,
+            "sum": 23968
+          },
+          "grid": 33,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 3,
+      "profiler_execution_ratio": {
+        "after": 1.1943928066351532,
+        "before": 1.1932304307834707
+      },
+      "update_kernel_ns": 3725150,
+      "update_span_ns": 6129769
+    },
+    {
+      "cell": "m03-r0-t0-fp4x2",
+      "cost_ns": {
+        "after": {
+          "assessment": 5800640,
+          "device_setup": 265594464,
+          "device_teardown": 79671599,
+          "execution": 7409536,
+          "host_preparation": 9427968,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 5820532,
+          "device_setup": 240246901,
+          "device_teardown": 68450087,
+          "execution": 7399462,
+          "host_preparation": 9173857,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 6130865,
+          "device_setup": 543861301,
+          "device_teardown": 72072725,
+          "execution": 7436506,
+          "host_preparation": 9431628,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m03-r0-t0-fp4x2-trace/trace.sqlite",
+        "sha256": "b161b77693aae3b16eec9deeaa95158cb3e900c6132b6d0817b53f3a921a0d7d"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "fp4x2",
+      "inter_kernel_gap_ns": 1588838,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 6304,
+            "median": 6240.0,
+            "minimum": 6175,
+            "p05": 6207,
+            "p95": 6272,
+            "sum": 3116442
+          },
+          "grid": 4,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_combined_2",
+          "registers": [
+            48
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 4992,
+            "median": 4896.0,
+            "minimum": 4864,
+            "p05": 4864,
+            "p95": 4928,
+            "sum": 2454793
+          },
+          "grid": 9,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_combined_2",
+          "registers": [
+            48
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 1472,
+            "median": 1440.0,
+            "minimum": 1439,
+            "p05": 1439,
+            "p95": 1472,
+            "sum": 8703
+          },
+          "grid": 1,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_encode",
+          "registers": [
+            28
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 5184,
+            "median": 4992.0,
+            "minimum": 4960,
+            "p05": 4960,
+            "p95": 5184,
+            "sum": 30271
+          },
+          "grid": 16,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 4224,
+            "median": 3936.0,
+            "minimum": 3904,
+            "p05": 3904,
+            "p95": 4224,
+            "sum": 24064
+          },
+          "grid": 33,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 3,
+      "profiler_execution_ratio": {
+        "after": 1.003639904037176,
+        "before": 1.0050063099182076
+      },
+      "update_kernel_ns": 5571235,
+      "update_span_ns": 7160073
+    },
+    {
+      "cell": "m03-r0-t0-fp4x2-split",
+      "cost_ns": {
+        "after": {
+          "assessment": 5801902,
+          "device_setup": 246687829,
+          "device_teardown": 68689671,
+          "execution": 10479340,
+          "host_preparation": 9499632,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 5854181,
+          "device_setup": 242660574,
+          "device_teardown": 67786305,
+          "execution": 10478920,
+          "host_preparation": 9554937,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 5925887,
+          "device_setup": 533565288,
+          "device_teardown": 70834895,
+          "execution": 10529824,
+          "host_preparation": 9298317,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m03-r0-t0-fp4x2-split-trace/trace.sqlite",
+        "sha256": "f2bb0010cb35e9ceaa9c997d187bbcf5edf7a172e0cb046645730155cf5b9168"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "fp4x2-split",
+      "inter_kernel_gap_ns": 3785209,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 1472,
+            "median": 1440.0,
+            "minimum": 1440,
+            "p05": 1440,
+            "p95": 1472,
+            "sum": 8672
+          },
+          "grid": 1,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_encode",
+          "registers": [
+            28
+          ]
+        },
+        {
+          "block": 128,
+          "duration_ns": {
+            "count": 1000,
+            "maximum": 1856,
+            "median": 1824.0,
+            "minimum": 1760,
+            "p05": 1792,
+            "p95": 1856,
+            "sum": 1815046
+          },
+          "grid": 16,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_product_2",
+          "registers": [
+            26
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 5056,
+            "median": 4768.0,
+            "minimum": 4735,
+            "p05": 4736,
+            "p95": 4832,
+            "sum": 2391790
+          },
+          "grid": 5,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_2_4",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 4703,
+            "median": 4480.0,
+            "minimum": 4447,
+            "p05": 4448,
+            "p95": 4512,
+            "sum": 2243252
+          },
+          "grid": 4,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_2_8",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 5088,
+            "median": 5008.0,
+            "minimum": 4960,
+            "p05": 4960,
+            "p95": 5088,
+            "sum": 30112
+          },
+          "grid": 16,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 4192,
+            "median": 3935.5,
+            "minimum": 3904,
+            "p05": 3904,
+            "p95": 4192,
+            "sum": 24031
+          },
+          "grid": 33,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 3,
+      "profiler_execution_ratio": {
+        "after": 1.00481747896337,
+        "before": 1.0048577525164808
+      },
+      "update_kernel_ns": 6450088,
+      "update_span_ns": 10235297
+    },
+    {
+      "cell": "m18-r0-t0-native",
+      "cost_ns": {
+        "after": {
+          "assessment": 158369822,
+          "device_setup": 341634972,
+          "device_teardown": 70837050,
+          "execution": 10602761,
+          "host_preparation": 294177268,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 152640467,
+          "device_setup": 309678177,
+          "device_teardown": 76923256,
+          "execution": 11165267,
+          "host_preparation": 291585247,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 155041128,
+          "device_setup": 554072687,
+          "device_teardown": 71949621,
+          "execution": 11285651,
+          "host_preparation": 289561274,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m18-r0-t0-native-trace/trace.sqlite",
+        "sha256": "ce235546c2dbb34623b8c0353fa2ddf9d96b80475ffe1129d6010f3b79bd9902"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "native",
+      "inter_kernel_gap_ns": 1689858,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 7936,
+            "median": 7776.0,
+            "minimum": 7743,
+            "p05": 7775,
+            "p95": 7808,
+            "sum": 3895021
+          },
+          "grid": 513,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_0_8",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 9376,
+            "median": 9280.0,
+            "minimum": 9247,
+            "p05": 9248,
+            "p95": 9344,
+            "sum": 4646686
+          },
+          "grid": 683,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_0_8",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 18,
+      "profiler_execution_ratio": {
+        "after": 1.064406808754814,
+        "before": 1.0107820081687253
+      },
+      "update_kernel_ns": 8541707,
+      "update_span_ns": 10231565
+    },
+    {
+      "cell": "m18-r0-t0-fp32",
+      "cost_ns": {
+        "after": {
+          "assessment": 153378456,
+          "device_setup": 314545025,
+          "device_teardown": 70957102,
+          "execution": 10128614,
+          "host_preparation": 293915106,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 154005527,
+          "device_setup": 236832552,
+          "device_teardown": 70033314,
+          "execution": 10147532,
+          "host_preparation": 285749281,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 153830655,
+          "device_setup": 517468173,
+          "device_teardown": 85470101,
+          "execution": 10136445,
+          "host_preparation": 287759395,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m18-r0-t0-fp32-trace/trace.sqlite",
+        "sha256": "3a9b4a1e51206f749bf031c5bb54bd3c009365a1ab8a97c1b5af551cb9e3f4a5"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "fp32",
+      "inter_kernel_gap_ns": 1539921,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 7072,
+            "median": 6880.0,
+            "minimum": 6816,
+            "p05": 6848,
+            "p95": 6912,
+            "sum": 3438971
+          },
+          "grid": 513,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_1_8",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 8512,
+            "median": 8448.0,
+            "minimum": 8415,
+            "p05": 8416,
+            "p95": 8480,
+            "sum": 4230017
+          },
+          "grid": 683,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_1_8",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 24351,
+            "median": 24239.0,
+            "minimum": 24127,
+            "p05": 24127,
+            "p95": 24351,
+            "sum": 145404
+          },
+          "grid": 2049,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 31551,
+            "median": 31391.0,
+            "minimum": 31295,
+            "p05": 31295,
+            "p95": 31551,
+            "sum": 188346
+          },
+          "grid": 2731,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 18,
+      "profiler_execution_ratio": {
+        "after": 1.0007731561297528,
+        "before": 0.9989074190650495
+      },
+      "update_kernel_ns": 7668988,
+      "update_span_ns": 9208909
+    },
+    {
+      "cell": "m18-r0-t0-fp4x2",
+      "cost_ns": {
+        "after": {
+          "assessment": 153345486,
+          "device_setup": 331135290,
+          "device_teardown": 70660876,
+          "execution": 12118773,
+          "host_preparation": 318284213,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 153923791,
+          "device_setup": 228304567,
+          "device_teardown": 70389888,
+          "execution": 12121524,
+          "host_preparation": 317238428,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 155157685,
+          "device_setup": 551198867,
+          "device_teardown": 74715080,
+          "execution": 12183250,
+          "host_preparation": 319722617,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m18-r0-t0-fp4x2-trace/trace.sqlite",
+        "sha256": "1ac8104becfc36a5dab64dbbf12ac51845fc7152754156eca0c5e3adfd8c686d"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "fp4x2",
+      "inter_kernel_gap_ns": 1985539,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 8608,
+            "median": 8479.0,
+            "minimum": 8415,
+            "p05": 8416,
+            "p95": 8512,
+            "sum": 4234509
+          },
+          "grid": 513,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_combined_2",
+          "registers": [
+            48
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 10144,
+            "median": 10048.0,
+            "minimum": 9983,
+            "p05": 10015,
+            "p95": 10112,
+            "sum": 5030274
+          },
+          "grid": 683,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_combined_2",
+          "registers": [
+            48
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 1696,
+            "median": 1632.0,
+            "minimum": 1632,
+            "p05": 1632,
+            "p95": 1696,
+            "sum": 9888
+          },
+          "grid": 86,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_encode",
+          "registers": [
+            28
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 24351,
+            "median": 24175.0,
+            "minimum": 24095,
+            "p05": 24095,
+            "p95": 24351,
+            "sum": 145114
+          },
+          "grid": 2049,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 31423,
+            "median": 31311.0,
+            "minimum": 31135,
+            "p05": 31135,
+            "p95": 31423,
+            "sum": 187706
+          },
+          "grid": 2731,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 18,
+      "profiler_execution_ratio": {
+        "after": 1.0053204231154425,
+        "before": 1.005092263976048
+      },
+      "update_kernel_ns": 9264783,
+      "update_span_ns": 11250322
+    },
+    {
+      "cell": "m18-r0-t0-fp4x2-split",
+      "cost_ns": {
+        "after": {
+          "assessment": 160085470,
+          "device_setup": 320469835,
+          "device_teardown": 72556450,
+          "execution": 12176673,
+          "host_preparation": 325384653,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 154210863,
+          "device_setup": 246035264,
+          "device_teardown": 73011411,
+          "execution": 12154658,
+          "host_preparation": 317003889,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 161585254,
+          "device_setup": 548579391,
+          "device_teardown": 72892811,
+          "execution": 12215112,
+          "host_preparation": 326916880,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m18-r0-t0-fp4x2-split-trace/trace.sqlite",
+        "sha256": "71863e8b167550d3003707498bd34e3f71929642eaefc8184af1c899f3d6975d"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "fp4x2-split",
+      "inter_kernel_gap_ns": 3874794,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 1664,
+            "median": 1632.0,
+            "minimum": 1632,
+            "p05": 1632,
+            "p95": 1664,
+            "sum": 9856
+          },
+          "grid": 86,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_encode",
+          "registers": [
+            28
+          ]
+        },
+        {
+          "block": 128,
+          "duration_ns": {
+            "count": 1000,
+            "maximum": 2016,
+            "median": 1920.0,
+            "minimum": 1888,
+            "p05": 1920,
+            "p95": 1952,
+            "sum": 1935362
+          },
+          "grid": 426,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_product_2",
+          "registers": [
+            26
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 5024,
+            "median": 4832.0,
+            "minimum": 4799,
+            "p05": 4800,
+            "p95": 4864,
+            "sum": 2418365
+          },
+          "grid": 86,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_2_1",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 6144,
+            "median": 6048.0,
+            "minimum": 5983,
+            "p05": 6015,
+            "p95": 6080,
+            "sum": 3022923
+          },
+          "grid": 257,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_2_4",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 24319,
+            "median": 24207.0,
+            "minimum": 24128,
+            "p05": 24128,
+            "p95": 24319,
+            "sum": 145307
+          },
+          "grid": 2049,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 31519,
+            "median": 31327.0,
+            "minimum": 31231,
+            "p05": 31231,
+            "p95": 31519,
+            "sum": 188058
+          },
+          "grid": 2731,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 18,
+      "profiler_execution_ratio": {
+        "after": 1.003156773611314,
+        "before": 1.0049737310584963
+      },
+      "update_kernel_ns": 7376650,
+      "update_span_ns": 11251444
+    },
+    {
+      "cell": "m21-r0-t0-native",
+      "cost_ns": {
+        "after": {
+          "assessment": 77539721,
+          "device_setup": 340530347,
+          "device_teardown": 70789281,
+          "execution": 9486290,
+          "host_preparation": 128029679,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 81803303,
+          "device_setup": 283491335,
+          "device_teardown": 70071132,
+          "execution": 9506455,
+          "host_preparation": 137217181,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 79614506,
+          "device_setup": 545343205,
+          "device_teardown": 104590683,
+          "execution": 9553185,
+          "host_preparation": 127135559,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m21-r0-t0-native-trace/trace.sqlite",
+        "sha256": "2de3c559f2639f8964746d1b5a7faa4d2e7337dfa497807358c3474880a1e295"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "native",
+      "inter_kernel_gap_ns": 2283099,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 8128,
+            "median": 8064.0,
+            "minimum": 8000,
+            "p05": 8031,
+            "p95": 8096,
+            "sum": 4031183
+          },
+          "grid": 64,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_0_32",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 5856,
+            "median": 5760.0,
+            "minimum": 5727,
+            "p05": 5759,
+            "p95": 5792,
+            "sum": 2885996
+          },
+          "grid": 129,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_0_32",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 21,
+      "profiler_execution_ratio": {
+        "after": 1.0070517557443426,
+        "before": 1.0049156073425898
+      },
+      "update_kernel_ns": 6917179,
+      "update_span_ns": 9200278
+    },
+    {
+      "cell": "m21-r0-t0-fp32",
+      "cost_ns": {
+        "after": {
+          "assessment": 82463558,
+          "device_setup": 328734875,
+          "device_teardown": 70666108,
+          "execution": 6438625,
+          "host_preparation": 137526383,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 77952141,
+          "device_setup": 251259462,
+          "device_teardown": 69096768,
+          "execution": 6421975,
+          "host_preparation": 125807359,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 78815751,
+          "device_setup": 521166518,
+          "device_teardown": 72289185,
+          "execution": 6466801,
+          "host_preparation": 139859668,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m21-r0-t0-fp32-trace/trace.sqlite",
+        "sha256": "a92d412724c906f3d21b28234848532ce0695a6dd35e07647ec857ab6ba07f5a"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "fp32",
+      "inter_kernel_gap_ns": 1175134,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 5536,
+            "median": 5408.0,
+            "minimum": 5343,
+            "p05": 5376,
+            "p95": 5472,
+            "sum": 2708115
+          },
+          "grid": 64,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_1_32",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 4672,
+            "median": 4544.0,
+            "minimum": 4511,
+            "p05": 4512,
+            "p95": 4576,
+            "sum": 2272188
+          },
+          "grid": 129,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_1_32",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 10176,
+            "median": 10080.0,
+            "minimum": 10079,
+            "p05": 10079,
+            "p95": 10176,
+            "sum": 60606
+          },
+          "grid": 64,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 6592,
+            "median": 6592.0,
+            "minimum": 6560,
+            "p05": 6560,
+            "p95": 6592,
+            "sum": 39488
+          },
+          "grid": 129,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 21,
+      "profiler_execution_ratio": {
+        "after": 1.004376089615407,
+        "before": 1.0069800956870745
+      },
+      "update_kernel_ns": 4980303,
+      "update_span_ns": 6155437
+    },
+    {
+      "cell": "m21-r0-t0-fp4x2",
+      "cost_ns": {
+        "after": {
+          "assessment": 83695905,
+          "device_setup": 252992479,
+          "device_teardown": 70701161,
+          "execution": 12554577,
+          "host_preparation": 170935906,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 79595031,
+          "device_setup": 247364303,
+          "device_teardown": 70589340,
+          "execution": 12531255,
+          "host_preparation": 168787573,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 81027646,
+          "device_setup": 519708316,
+          "device_teardown": 71478943,
+          "execution": 12570044,
+          "host_preparation": 173297505,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m21-r0-t0-fp4x2-trace/trace.sqlite",
+        "sha256": "26fa57a23755ae15a5aa48b538abb37445f96f5d4db87f84db6427be47bef82a"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "fp4x2",
+      "inter_kernel_gap_ns": 2279013,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 12288,
+            "median": 12160.0,
+            "minimum": 12064,
+            "p05": 12127,
+            "p95": 12224,
+            "sum": 6081967
+          },
+          "grid": 16,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_combined_2",
+          "registers": [
+            48
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 7872,
+            "median": 7808.0,
+            "minimum": 7744,
+            "p05": 7776,
+            "p95": 7872,
+            "sum": 3910568
+          },
+          "grid": 33,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_combined_2",
+          "registers": [
+            48
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 1600,
+            "median": 1568.0,
+            "minimum": 1536,
+            "p05": 1536,
+            "p95": 1600,
+            "sum": 9408
+          },
+          "grid": 2,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_encode",
+          "registers": [
+            28
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 10176,
+            "median": 10048.0,
+            "minimum": 9984,
+            "p05": 9984,
+            "p95": 10176,
+            "sum": 60448
+          },
+          "grid": 64,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 6623,
+            "median": 6560.0,
+            "minimum": 6560,
+            "p05": 6560,
+            "p95": 6623,
+            "sum": 39455
+          },
+          "grid": 129,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 21,
+      "profiler_execution_ratio": {
+        "after": 1.0012319809739507,
+        "before": 1.0030953803110703
+      },
+      "update_kernel_ns": 9992535,
+      "update_span_ns": 12271548
+    },
+    {
+      "cell": "m21-r0-t0-fp4x2-split",
+      "cost_ns": {
+        "after": {
+          "assessment": 79914154,
+          "device_setup": 348498496,
+          "device_teardown": 71439571,
+          "execution": 11518750,
+          "host_preparation": 159790073,
+          "recovery": 0
+        },
+        "before": {
+          "assessment": 84826971,
+          "device_setup": 250911730,
+          "device_teardown": 85206913,
+          "execution": 11525137,
+          "host_preparation": 167782667,
+          "recovery": 0
+        },
+        "trace": {
+          "assessment": 80670968,
+          "device_setup": 544518186,
+          "device_teardown": 71606515,
+          "execution": 11542747,
+          "host_preparation": 172208836,
+          "recovery": 0
+        }
+      },
+      "database": {
+        "path": "artifacts/gpup-general-v1/fast-profile-v5/m21-r0-t0-fp4x2-split-trace/trace.sqlite",
+        "sha256": "c25b2fa3018aa8b6082cb523e20e327f68d6918fc95df827ae94f6e6b6c0b2fc"
+      },
+      "device": {
+        "l2CacheSize": 134217728,
+        "maxWarpsPerSm": 48,
+        "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "smCount": 188,
+        "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+      },
+      "format": "fp4x2-split",
+      "inter_kernel_gap_ns": 3923526,
+      "kernels": [
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 1568,
+            "median": 1568.0,
+            "minimum": 1536,
+            "p05": 1536,
+            "p95": 1568,
+            "sum": 9376
+          },
+          "grid": 2,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_encode",
+          "registers": [
+            28
+          ]
+        },
+        {
+          "block": 128,
+          "duration_ns": {
+            "count": 1000,
+            "maximum": 1952,
+            "median": 1888.0,
+            "minimum": 1823,
+            "p05": 1856,
+            "p95": 1920,
+            "sum": 1875051
+          },
+          "grid": 256,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_product_2",
+          "registers": [
+            26
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 4863,
+            "median": 4576.0,
+            "minimum": 4543,
+            "p05": 4544,
+            "p95": 4608,
+            "sum": 2287522
+          },
+          "grid": 16,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_2_8",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 500,
+            "maximum": 7008,
+            "median": 6336.0,
+            "minimum": 6271,
+            "p05": 6303,
+            "p95": 6368,
+            "sum": 3167208
+          },
+          "grid": 33,
+          "local_bytes": [
+            0
+          ],
+          "name": "fast_step_2_8",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 10207,
+            "median": 10080.0,
+            "minimum": 10080,
+            "p05": 10080,
+            "p95": 10207,
+            "sum": 60702
+          },
+          "grid": 64,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        },
+        {
+          "block": 256,
+          "duration_ns": {
+            "count": 6,
+            "maximum": 6592,
+            "median": 6560.0,
+            "minimum": 6559,
+            "p05": 6559,
+            "p95": 6592,
+            "sum": 39422
+          },
+          "grid": 129,
+          "local_bytes": [
+            0
+          ],
+          "name": "tensor_reference",
+          "registers": [
+            40
+          ]
+        }
+      ],
+      "model_index": 21,
+      "profiler_execution_ratio": {
+        "after": 1.0020832989690722,
+        "before": 1.0015279644831987
+      },
+      "update_kernel_ns": 7329781,
+      "update_span_ns": 11253307
+    }
+  ],
+  "source": {
+    "path": "tools/lp_general_fast_profile_report.py",
+    "sha256": "63bdcefad383f772edcab1215f08be0a8887edb6062aa0877358912fe487f6af"
+  },
+  "status": "passed"
+}

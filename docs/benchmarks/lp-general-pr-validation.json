@@ -1,0 +1,129 @@
+{
+  "admitted_images": [
+    "artifacts/gpup-general-v1/scale-image-v6/executor",
+    "artifacts/gpup-general-v1/scale-image-v6/tensor.cubin",
+    "artifacts/gpup-general-v1/scale-image-v6/tensor.sass",
+    "artifacts/gpup-general-v1/scale-image-v7/executor",
+    "artifacts/gpup-general-v1/scale-image-v7/tensor.cubin",
+    "artifacts/gpup-general-v1/scale-image-v7/tensor.sass"
+  ],
+  "allocation_receipt": {
+    "path": "artifacts/gpup-general-pr-v1/CLOSED.json",
+    "sha256": "a1f467aea97d54ab5297e38c5e5deb84259af8220c65dd5334117ebe29efcee8"
+  },
+  "allocation_status": "closed",
+  "archive_compressed_bytes": 10749532394,
+  "archive_parts_verified": 139,
+  "archive_receipt": {
+    "path": "artifacts/gpup-general-v1/portable/scale-delivery-v1/receipt.json",
+    "sha256": "7584e25b355db7283c72799de3022b99d1fdf832c8c1f1b52a2f3a02d8c09d0d"
+  },
+  "base": "3377bf96eeb52d356299dfcdc27fd40abda9a921",
+  "ceiling_cpu_seconds": 16000,
+  "checks": [
+    {
+      "path": "artifacts/gpup-general-pr-v1/resources/dependencies-v1.settlement.json",
+      "sha256": "d1ebe67c9daed7c46317e1b8d1c902dac21f421a0ffac57d61517129fe1aa85d"
+    },
+    {
+      "path": "artifacts/gpup-general-pr-v1/resources/native-v1.settlement.json",
+      "sha256": "61b108758e2171f0399a2f2be5cae66a296011f9813634662de20970bc0b87d0"
+    },
+    {
+      "path": "artifacts/gpup-general-pr-v1/resources/isolated-v1.settlement.json",
+      "sha256": "e10a01b65346148d496dfad4bf1629a51597223ae375ed515b539dfcf2ab107e"
+    }
+  ],
+  "closing_administration_included_seconds": 1000,
+  "cpu_seconds": {
+    "cleanup": 1000.0,
+    "implementation": 518.912779188,
+    "native": 1584.32186142,
+    "reporting": 92.680735132,
+    "research": 113.84786858
+  },
+  "feature_head": "0bb384b8374e25592bed0fe1ea4061914cbae608",
+  "gpu_seconds": 0,
+  "hosted_initial": {
+    "hosted_pass": false,
+    "jobs": {
+      "path": "artifacts/gpup-general-pr-v1/hosted-initial-jobs.json",
+      "sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6"
+    },
+    "jobs_executed": 0,
+    "pr": {
+      "path": "artifacts/gpup-general-pr-v1/pr-initial-v2.json",
+      "sha256": "73ffbd897700e28de8842d59851f48a16d9321ec3bb4625cee40e68c508fe270"
+    },
+    "runs": {
+      "path": "artifacts/gpup-general-pr-v1/hosted-initial.json",
+      "sha256": "f55cb6ff6c40a0f691aba6f20516d7d57efd163019a2b494c275cbce00441d3e"
+    },
+    "status": "startup_failure"
+  },
+  "integration_validation": {
+    "path": "artifacts/gpup-general-pr-v1/validation.json",
+    "sha256": "52d3b7323365f5d322d5aece7577691020cab461b10c1ced51a58cb793023ed4"
+  },
+  "note": "Publication and normal merge are authorized. Scientific data and original commit ancestry are preserved; hosted startup failure is not a local or hosted test pass. Final-head hosting and merge receipts remain local and are reported on the PR.",
+  "numerical_source_files": 18,
+  "original_manifest": {
+    "path": "artifacts/gpup-general-pr-v1/original-files.json",
+    "sha256": "8b5a86efb5a4453f987460c10c625a0b619e4146c75e632b70b528d3a2d87d14"
+  },
+  "pr": "https://github.com/liuyumou/OptForge/pull/28",
+  "preserved_documents": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "state/active-task.md",
+    "wiki/status.md"
+  ],
+  "replay_receipt": {
+    "path": "artifacts/gpup-general-v1/portable/scale-delivery-v1/replay.json",
+    "sha256": "c9c2befc8cc2992c052d74a3a896fc97b5b832deda922a288b8304a00a1d283f"
+  },
+  "resource_settlements": [
+    {
+      "path": "artifacts/gpup-general-pr-v1/resources/dependencies-v1.settlement.json",
+      "sha256": "d1ebe67c9daed7c46317e1b8d1c902dac21f421a0ffac57d61517129fe1aa85d"
+    },
+    {
+      "path": "artifacts/gpup-general-pr-v1/resources/docs-final-v1.settlement.json",
+      "sha256": "8c9dfcafd9198710104df19c6846c47afb713deea7c5372e66876ecc38d516da"
+    },
+    {
+      "path": "artifacts/gpup-general-pr-v1/resources/isolated-v1.settlement.json",
+      "sha256": "e10a01b65346148d496dfad4bf1629a51597223ae375ed515b539dfcf2ab107e"
+    },
+    {
+      "path": "artifacts/gpup-general-pr-v1/resources/native-v1.settlement.json",
+      "sha256": "61b108758e2171f0399a2f2be5cae66a296011f9813634662de20970bc0b87d0"
+    },
+    {
+      "path": "artifacts/gpup-general-pr-v1/resources/preservation-v1.settlement.json",
+      "sha256": "415bcc45025361085b14f06a46bcd62ba7becf54b6861d1c04b2a0598a117cf9"
+    }
+  ],
+  "scale_validation": {
+    "path": "docs/benchmarks/lp-general-scale-validation.json",
+    "sha256": "2a3c8c40746c33845dbab2844a49eb2c22ab90030bee000ca00f2989f5024506"
+  },
+  "scientific_allocation_ns": [
+    181311318401148,
+    23462140788896
+  ],
+  "source": {
+    "path": "artifacts/gpup-general-pr-v1/validate.py",
+    "sha256": "fa93dd7a2505a8e8a393aeaa9ad05b4ebfd11a41f34f457a87205d1e88756ab1"
+  },
+  "status": "passed",
+  "tests": {
+    "documentation_pages": 291,
+    "isolated_rust": 37,
+    "python": 827,
+    "repository_rust": 638
+  },
+  "total_cpu_seconds": 3309.76324432,
+  "unchanged_original_files": 2407,
+  "unchanged_scale_tools": 17
+}

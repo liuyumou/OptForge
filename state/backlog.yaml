@@ -1,3 +1,4 @@
+# Current GPUP-9: complete; PREP3 unopened; public adoption and follow-on allocation separate.
 # Current plan 2026-11-15: ADR-0077 waives the legacy progression gate; GPUP-8 scoped FP4 capability complete; GPUP-9 ready for its own protocol/budget.
 # Current plan 2026-11-15: ADR-0076 closes GPUP-8 negatively; original science incomplete; GPUP-9 blocked on GPUP-CERTIFIED-COST-GATE.
 # Current plan 2026-11-11: FP4-INTEGRATE complete; latency retention fails; native retained; TENSOR2 conditional.
@@ -43,9 +44,17 @@ active_research_track: GPUP
 # ADR-0041 and its 3600-second allocation are explicitly accepted by the user.
 # GPUP-8's user-approved working-family/gain requirement remains unmet.
 # Do not advance GPUP-9; unused headroom reserves no later task.
-next_ready_task: GPUP-9
+next_ready_task: GPUP-GENERAL
 research_roadmap: docs/plans/gpu-lp-precision-roadmap.md
 tasks:
+  - id: GPUP-GENERAL
+    title: Improve broad certified LP performance through low-bit arithmetic including FP4
+    status: in_progress
+    depends_on: [GPUP-9]
+    specification: docs/specifications/SPEC-0045-general-lowbit-lp.md
+    evidence: docs/benchmarks/lp-general-lowbit.md
+    current_stage: "Sparse numerical/device admission passes. Initial pilot 128/128; extended pilot stopped with 137/176 responses, 136 fully supervised and 39 missing cells. Broad FP4 value remains unestablished. CPU work continues; GPU/scientific execution requires operational readmission after the missing supervisor receipt."
+    acceptance: "Shared scalable sparse method, state-dependent precision, complete single-solve costs, diverse independent LP development and powered frozen broad confirmation. Strict original-model authority and substantive accepted low-bit contribution; preserve all historical evidence. ADR-0079 authorizes execution with an independent finite allocation. No workflow-specific recipe substitutes for this objective."
   - id: GPUP-PREP3
     title: Attribute final checker source and compiler target and test exact preparation
     status: ready
@@ -491,13 +500,16 @@ tasks:
     evidence: docs/benchmarks/lp-gpup8-redesign.md
   - id: GPUP-9
     title: Run controlled precision experiments and ablations
-    status: ready
+    status: complete
     depends_on: [GPUP-7, GPUP-STATE, GPUP-ASSESS, GPUP-8]
-    specification: docs/specifications/SPEC-0013-lp-precision-experiments.md
+    specification: docs/specifications/SPEC-0044-gpup9-controlled-study.md
     historical_acceptance: "Gated on GPUP-8 completion; a negative-result closure requires a separate accepted ADR explicitly replacing that gate. Then accept concrete protocol/allocation; bounded component/interaction blocks, frozen finalists and unseen grouped holdout; coverage, uncertainty and full costs; all historical caps preserved. ADR-0047 engineering tasks do not authorize this campaign."
     historical_acceptance_adr0076: "ADR-0076 replaces only the historical GPUP-8 dependency. Blocked until every GPUP-CERTIFIED-COST-GATE condition passes and a separate release ADR accepts a concrete GPUP-9 protocol/allocation under SPEC-0013. Preserve bounded interactions, frozen finalists, unseen grouped holdout, coverage, uncertainty and full costs. No public-default or GPUP-10 adoption implied."
-    acceptance: "ADR-0077 satisfies the research prerequisite through scoped FP4 evidence. Next define and fund a versioned controlled component/interaction study: direct same-target native/FP4 controls, declared complete prepared-session endpoint and separate cold observations, all costs/coverage/uncertainty, frozen finalists and unseen grouped holdout. No PREP3, external-superiority, cold-gain or hosted-CI prerequisite to research. Current source/device admission and an independent frozen protocol/allocation remain required before execution; no public/default adoption. Proceeding to protocol preparation is ready; scientific allocation is unopened."
+    historical_acceptance_adr0077: "ADR-0077 satisfies the research prerequisite through scoped FP4 evidence. Next define and fund a versioned controlled component/interaction study: direct same-target native/FP4 controls, declared complete prepared-session endpoint and separate cold observations, all costs/coverage/uncertainty, frozen finalists and unseen grouped holdout. No PREP3, external-superiority, cold-gain or hosted-CI prerequisite to research. Current source/device admission and an independent frozen protocol/allocation remain required before execution; no public/default adoption. Proceeding to protocol preparation is ready; scientific allocation is unopened."
+    acceptance: "ADR-0078 / SPEC-0044: complete controlled study, 768 sessions / 14592 strict 1e-9 certified solves; disjoint seeded operator groups, eight development configurations, coverage-first frozen finalists and 16-block holdout. Scoped value passes 0/6 prepared and 0/6 cold comparisons; all simultaneous intervals, order sensitivity, negative results and complete costs retained. Whole-configuration held-out evidence; fixed mechanisms unmeasured and no population/external superiority claim. Original serial authority, accepted-work proof, portable exact-byte replay and final acceptance receipts in report. PREP3 unopened, public defaults unchanged; no follow-on execution or publication."
+    evidence: docs/benchmarks/lp-gpup9.md
   - id: GPUP-10
+    current_release_requirement: "ADR-0079: packaging requires GPUP-GENERAL broad validation; earlier dependency readiness alone does not release adoption."
     title: Package evidence-supported precision recipes
     status: planned
     depends_on: [GPUP-9]

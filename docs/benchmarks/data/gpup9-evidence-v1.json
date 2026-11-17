@@ -1,0 +1,28 @@
+{
+  "bytes": 102579182,
+  "files": 33980,
+  "kind": "gpup9-split-zstd-zip-v1",
+  "parts": [
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/gpup9-evidence-v1.part00",
+      "sha256": "7a0c74fe84b4f0702c8bfdb2392506719ee3b6356eaf64bfe010ee7ede529faa"
+    },
+    {
+      "bytes": 50331648,
+      "path": "docs/benchmarks/data/gpup9-evidence-v1.part01",
+      "sha256": "cf826dc9cc51f1ee6831bd4109efd01a2d8baeea61e11c16d2dc2d827a223003"
+    },
+    {
+      "bytes": 1915886,
+      "path": "docs/benchmarks/data/gpup9-evidence-v1.part02",
+      "sha256": "1244a6dd6dda3b9f26b773f91ac615dde2bc8db65a100478f68495371fe8479d"
+    }
+  ],
+  "pending_administration": [
+    "publish-compact-v5"
+  ],
+  "schema_version": 1,
+  "sha256": "79a04ff4a9207facc7ab3c9b7129dfa8bff148551765e646228c57c0b1263891",
+  "zip_bytes": 4860764525
+}

@@ -1,0 +1,16 @@
+{
+  "base_commit": "895708060d0107f55d37bae70f0e9240ebb702d5",
+  "files": [
+    {
+      "path": "crates/optimizer-lp/src/control.rs",
+      "sha256": "1108151e8fe3247a588cca7b62a1ea50d57b4510369436852050e3b485f19d01",
+      "retained_source": "research/lp-general-lowbit/upstream/control.rs.source"
+    },
+    {
+      "path": "crates/optimizer-lp/src/pdhg.rs",
+      "sha256": "2fa78f60be5b24677db6e61d023f960b468ef645682e1b5bbeb46e485e2e230c",
+      "retained_source": "research/lp-general-lowbit/upstream/pdhg.rs.source"
+    }
+  ],
+  "scope": "Research controller derives from core restart, weight, step and checkpoint formulas; projected merit is the explicit new diagnostic. Core source bytes remain unchanged."
+}

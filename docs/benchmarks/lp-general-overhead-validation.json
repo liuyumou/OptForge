@@ -1,0 +1,490 @@
+{
+  "admission": {
+    "path": "artifacts/gpup-general-v1/fast-overhead-admission-v1.json",
+    "sha256": "743bed630c8399afddc4680d2ea1377f1b288894f1e1fbe5a949e0ca2c9049bc"
+  },
+  "allocation_status": "open",
+  "archived_files": 26632,
+  "checkpoint_including_active_reservation": {
+    "cpu_ns": 109042968113888,
+    "gpu_ns": 12326763290488
+  },
+  "claim": "Validated implementation and descriptive development. No broad superiority, confirmation, public-default change or publication.",
+  "cleanup_empty": true,
+  "compressed_bytes": 1747648168,
+  "failed_cpu_ns": 2200000000000,
+  "failed_gpu_ns": 400000000000,
+  "failures": [
+    {
+      "cpu_ns": 360000000000,
+      "gpu_ns": 0,
+      "reason": "guardian_cpu_wall_deadline",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-overhead-analysis-v1.settlement.json",
+        "sha256": "d1057bccdf57179a2b1ded76490329e38273f370b8fa380ab1aa6cd8b3d03eb3"
+      }
+    },
+    {
+      "cpu_ns": 720000000000,
+      "gpu_ns": 180000000000,
+      "reason": "guardian_cpu_wall_deadline",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m16.settlement.json",
+        "sha256": "48ad2cfe7dbbc4d5677e9f027536c4992a3f9e72f464be46457b17f92bcdf62b"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "reason": "command_failed",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-overhead-freeze-v1.settlement.json",
+        "sha256": "c77a2cde92c52ebb11b6bad566ff3e40827e8ac08eda8607f4fa2f3f46d62e8f"
+      }
+    },
+    {
+      "cpu_ns": 880000000000,
+      "gpu_ns": 220000000000,
+      "reason": "command_failed",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/fast-overhead-racecheck-v1.settlement.json",
+        "sha256": "1829e44a370bd016a89e06ce439a3aa0350f6c34c4369f5cf72f119190197ccb"
+      }
+    }
+  ],
+  "final_documentation": {
+    "path": "artifacts/gpup-general-v1/resources/fast-overhead-delivery-check-v1.settlement.json",
+    "sha256": "cd7473f14c66ba04a33f591247c99fba7bf79790c413ced4d3fb8d3fa1626834"
+  },
+  "historical_text": [
+    "AGENTS.md",
+    "research/lp-general-lowbit/README.md",
+    "docs/specifications/SPEC-0045-general-lowbit-lp.md",
+    "docs/decisions/ADR-0079-general-lowbit-lp.md",
+    "docs/benchmarks/lp-general-fast.md",
+    "docs/benchmarks/lp-general-fast-results.json",
+    "docs/benchmarks/lp-general-fast-profile-results.json",
+    "docs/benchmarks/lp-general-fast-validation.json"
+  ],
+  "native": {
+    "path": "artifacts/gpup-general-v1/resources/fast-overhead-native-final-v1.settlement.json",
+    "sha256": "69d7c93042d496834556d0cdeba998b7090398e1a20b5a520ef6f4af88b31c91"
+  },
+  "portable": {
+    "path": "artifacts/gpup-general-v1/portable/fast-overhead-delivery-v1/replay.json",
+    "sha256": "8ab437e33e1182cdff57502db9d20c80f61be11201892fe14cb176955e7ddfb6"
+  },
+  "portable_result": {
+    "admission_solves": 281,
+    "assessments": 5796,
+    "cells": 319,
+    "claim": "Extracted-root byte and independent arithmetic/certificate replay. Identical offline witnesses deduplicated; no solver answer reuse or missingness repair.",
+    "distinct_assessments": 3209,
+    "missing": [
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m16-r0-t1-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m17-r0-t0-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m17-r0-t0-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m17-r0-t0-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m17-r0-t0-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m17-r0-t1-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m17-r0-t1-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m17-r0-t1-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m17-r0-t1-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m18-r0-t0-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m18-r0-t0-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m18-r0-t0-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m18-r0-t0-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m18-r0-t1-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m18-r0-t1-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m18-r0-t1-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m18-r0-t1-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m19-r0-t0-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m19-r0-t0-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m19-r0-t0-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m19-r0-t0-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m19-r0-t1-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m19-r0-t1-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m19-r0-t1-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m19-r0-t1-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m20-r0-t0-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m20-r0-t0-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m20-r0-t0-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m20-r0-t0-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m20-r0-t1-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m20-r0-t1-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m20-r0-t1-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m20-r0-t1-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m21-r0-t0-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m21-r0-t0-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m21-r0-t0-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m21-r0-t0-fp32"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m21-r0-t1-fp4x2"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m21-r0-t1-fp4x2-split"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m21-r0-t1-native"
+      },
+      {
+        "campaign": "fast-overhead-broad-v1",
+        "id": "m21-r0-t1-fp32"
+      }
+    ],
+    "probes": 328,
+    "product_outputs": 21524,
+    "root": "/workspace/AI-Optimizer/artifacts/fast-portable-f5ug5tvg",
+    "status": "passed"
+  },
+  "previous_files_preserved": 113490,
+  "resources": [
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-analysis-v1.settlement.json",
+      "sha256": "d1057bccdf57179a2b1ded76490329e38273f370b8fa380ab1aa6cd8b3d03eb3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-analysis-v2.settlement.json",
+      "sha256": "8aba601fbd099fe62b30e5a0aef8412d9ccf77c664fde97ad6fa3a2500439603"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-archive-v1.settlement.json",
+      "sha256": "03fa184121f5feedbd1e973a67f4ba3072a3920eef6c66dcde5997f2c58f39df"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-boundary-v1.settlement.json",
+      "sha256": "bce6c71543a7439e8b3fcd38215a5273f4384e6985cdf89a99010f438615309f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-tail-v1-m17.settlement.json",
+      "sha256": "220acf8db23bbea486e0fd2ef48de3aebd6c50c4418f20a335de120e276ba42d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-tail-v1-m18.settlement.json",
+      "sha256": "dd54aedd29575586cd49bcfd7ab2824107d2839c55e4f94b4787366e6e92f9ee"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-tail-v1-m19.settlement.json",
+      "sha256": "dae0ebbb7ac2e542c380a1b8e6ba750af6218a2dff6a7a326dd750aa175ebcba"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-tail-v1-m20.settlement.json",
+      "sha256": "acaa70dc506447a54936be843a110cb4cc6d6806b84e0b29adcbe73fa7b7f5c4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-tail-v1-m21.settlement.json",
+      "sha256": "a766fa8b1f87f46653d6b44705c0d108067b9a2eeafddc4b478fcba948deb060"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m00.settlement.json",
+      "sha256": "2c402600f8491d310e2157902eccb037ec1c12de568ba5cb92cdbcd00b617b4f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m01.settlement.json",
+      "sha256": "c44dbaabbbcc386c5d53047497852036d4e3c351211e2c3783d89102af3af247"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m02.settlement.json",
+      "sha256": "b212c3c19e5eef5138021b99aef9a1139caa58ca854159a725efe4d4ccbcbdcb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m03.settlement.json",
+      "sha256": "f35d552e732f54c883a420c0c61de6028ee79a8e2b9338f8bb958ae0052ba93a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m04.settlement.json",
+      "sha256": "58d51c15cabacc6220b98e3cd700531605cd7063d66652d683acc6931f7c78f8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m05.settlement.json",
+      "sha256": "233aa5d6634b8ed20090519cc9a8986d96475cf7eea69257f7d4fa2dfaba6dbe"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m06.settlement.json",
+      "sha256": "73c37da77f492f468315bc1d2ba9fae9b5c44f137c85f85b8ee3c0975a2616b1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m07.settlement.json",
+      "sha256": "9938602047f0df833d66690cdf3c43a6c68ee00c49e737560b17140e20e92e98"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m08.settlement.json",
+      "sha256": "52693bf1ce5d98d1eb2f93afb9fd956cc1607b4e1d7270a86e1bb21eb03989e6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m09.settlement.json",
+      "sha256": "9d8ccf3c2e6702ece2e2ba7e74fc9f06ec2eff5bb6ddd866a67de12934a414b3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m10.settlement.json",
+      "sha256": "8e1d7db5b2d82e6c34584179afe22e187fa693f20a3ff6caf9f7d080b3e45318"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m11.settlement.json",
+      "sha256": "fd59d0b4c0eeffbafe5565bc086faf97c43f74bd1ce6648e834859cfe0733ae4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m12.settlement.json",
+      "sha256": "ab697854f6330ae37b45ac97112dff56c9ea415b14f891fbfa5cc8f7d4e88139"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m13.settlement.json",
+      "sha256": "b4f8aaa08b8b237b58c2cb85ff06b2811f035ad147ec7f03e512520b78abf0b0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m14.settlement.json",
+      "sha256": "aef282cbf54c23159ca94c3d2dc0e24995b30f2bd0887c0e56fe24f1795fad42"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m15.settlement.json",
+      "sha256": "80ba2e6127b886f40bea378ef32c40891094c95d5e1bde27f3a1936dfcde1638"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-broad-v1-m16.settlement.json",
+      "sha256": "48ad2cfe7dbbc4d5677e9f027536c4992a3f9e72f464be46457b17f92bcdf62b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-compose-v1.settlement.json",
+      "sha256": "484c8175c878b800beaedf466ec14e40fd735efa54e84d4502495db9fbc54a22"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-cpu-v1.settlement.json",
+      "sha256": "a1b00b857e6b5d9b8ed71037c4d8b00dc231798b660655148040903318f7c60c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-freeze-v1.settlement.json",
+      "sha256": "c77a2cde92c52ebb11b6bad566ff3e40827e8ac08eda8607f4fa2f3f46d62e8f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-freeze-v2.settlement.json",
+      "sha256": "2e3d857555dd88f144f26fc2576b55b417592a43047597c40d1f3b7547a5fd94"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-gpu-v1.settlement.json",
+      "sha256": "c2f7b9e37db639246a50e15b8f78f1e75fcc3710f673cb5d879a8d372a51f42d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-initcheck-v1.settlement.json",
+      "sha256": "2c1ddc477f71e869987c4bf40d696def2998e14fa71da5a040edc05382a519cf"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-memcheck-v1.settlement.json",
+      "sha256": "50b2fbae3fe1c0cf7febde93a10dd13a687423973ba78d945faff21f16e8401a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-native-final-v1.settlement.json",
+      "sha256": "69d7c93042d496834556d0cdeba998b7090398e1a20b5a520ef6f4af88b31c91"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-native-v1.settlement.json",
+      "sha256": "da0190672826317569da375cd1cda0ae66f588469a275b0bb864da48cfd494eb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-pilot-v1-m03.settlement.json",
+      "sha256": "817dd4fbb54d9b644fe2b72093d7a327e42d5ee931cafa7502c0b835842c52f6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-pilot-v1-m09.settlement.json",
+      "sha256": "e9f80a3113378b7cf73c7c98687d1f7496f3e17bd6a3f4d21913aa0e82ad2569"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-pilot-v1-m11.settlement.json",
+      "sha256": "043cff76c1c90c6b55f99c50f2be1c1217096ebfca0857835a6806d57af39cf2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-pilot-v1-m13.settlement.json",
+      "sha256": "35178d1e4f67ad16fc326b40eb6613ae1e12af0b8374672a843e6c19b40db55c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-pilot-v1-m18.settlement.json",
+      "sha256": "d9d36c811cc53cc9a595f03ea0b1c477b913dc574361951f51a0470c9e4ee61e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-pilot-v1-m21.settlement.json",
+      "sha256": "555c533f5ddc45804d2619fa66d35a6f74b2aa298eb941de522c1025dcecf4e7"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-profile-report-v1.settlement.json",
+      "sha256": "c4464f19ad67367392520049ad9c0295f261e3a87324bb09dcebb00c0ef2ac85"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-profile-v1-m03.settlement.json",
+      "sha256": "e98b8da97c02ca78d3c2409136a921a1826a4d39b6ccbf4c7903a729fea9541f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-profile-v1-m18.settlement.json",
+      "sha256": "423f270255d7edcb695ef5d0c0a93bd3da5b2e5d03b3073e27005b062b8c37cb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-profile-v1-m21.settlement.json",
+      "sha256": "37378d23c6bf71ff59a6dabd6148a72227a63f7b1daf03203876c580f2548a91"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-racecheck-v1.settlement.json",
+      "sha256": "1829e44a370bd016a89e06ce439a3aa0350f6c34c4369f5cf72f119190197ccb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-racecheck-v2.settlement.json",
+      "sha256": "d74335a2a5b0652978347d2ae8d3a4d7db1d6c234b9fbe4e0f88b3fd3f4ff400"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-readmit-v2.settlement.json",
+      "sha256": "ba3694b83e5f855c8769910b7935a98a900e9eb2dcca0469e357ebaac957804d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-readmit-v3.settlement.json",
+      "sha256": "594524335445630fd7c56bc4575d4b5118accc2716287f4efead4a4631646001"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-replay-v1.settlement.json",
+      "sha256": "62c1fe578827ae2e90b48ca835064e8ca456fbf798c6f69ad74747efbb991810"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-split-v1.settlement.json",
+      "sha256": "97aea06d1cca66999810b2c8a9abd0ae418376992af1ae752d0b123c3b3e24a9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-synccheck-v1.settlement.json",
+      "sha256": "2ec22f959736b6e499527d7250ced02c14a9dc0ff087561d02a73e2611fab9fc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/fast-overhead-tail-freeze-v1.settlement.json",
+      "sha256": "0f2a061b7536b1a6be15739fc29559d46b4176c0287e343b2f403b6b08b6dd23"
+    }
+  ],
+  "results": {
+    "path": "docs/benchmarks/lp-general-overhead-results.json",
+    "sha256": "1d8f67a9bf94196da42df446dea6917e7733b4c8e63a1521470d3d30010aa00a"
+  },
+  "settled": {
+    "path": "artifacts/gpup-general-v1/fast-overhead-settled-v1.json",
+    "sha256": "f7d91d41cb5a09000a4fa23278596bd4c0dfdd198e7bbc11397f830c7e771b2c"
+  },
+  "settled_checkpoint": {
+    "cpu_ns": 108845598964180,
+    "gpu_ns": 12326763290488
+  },
+  "status": "passed",
+  "validation": {
+    "path": "artifacts/gpup-general-v1/fast-overhead-validation-v1.json",
+    "sha256": "0250c415bccd513f9b3aa9dfe96e18fbe3f83830dbba70922bb0ff59c23bb2a9"
+  },
+  "validation_resources": {
+    "path": "artifacts/gpup-general-v1/resources/fast-overhead-validation-v1.settlement.json",
+    "sha256": "b9a7de049ded0422c09102ca068f45c12e6f98170c970d241b45ba7aa87f2335"
+  }
+}

@@ -1,5 +1,99 @@
 # GPU LP Performance Research and Implementation Roadmap
 
+## Scale development with COPT (2026-11-17)
+
+The [scale implementation and evaluation](../benchmarks/lp-general-scale.md)
+adds compact exact original inputs, faster original-tree host products and
+preparation, lazy exact-checker geometry reuse, structural kernel scheduling,
+and installed COPT 8.0.6 CPU/GPU baselines. Complete single-solve costs and strict
+original-model certificates remain primary. The original broad roster and all
+six structural families remain visible, including unsuccessful solves and
+capacity limits. Actual FP4 execution gains have not yet established broad
+complete-solve superiority. The report also diagnoses a conservative gap-enclosure
+rejection on a numerically accurate COPT PDS endpoint; historical gates and
+outcomes remain unchanged. The survey below records the earlier design stage.
+
+## Benchmark scale design (2026-11-17)
+
+The [scale survey and proposed evaluation](lp-benchmark-scaling.md) compares
+NETLIB, MIPLIB relaxations, Mittelmann and the PDLP large-scale collection.
+It proposes broad development through 64 million nonzeros and larger stages
+through 8 billion, with explicit dimension, memory and admission prerequisites.
+This is benchmark research and design; no scaling campaign or confirmation has
+started. Existing implementation results and resource limits remain unchanged.
+
+## General low-bit LP implementation active (2026-11-16)
+
+The user directs the project toward a broadly useful LP solver whose performance
+improves through low-bit arithmetic, including FP4. Keep this objective persistent:
+single solves matter; workflow-specific recipes or native fallback alone do not
+complete it. ADR-0079 / SPEC-0045 authorize the reviewed implementation and broad
+evaluation plan. Reuse sparse solver/preconditioning/restart APIs, preserve strict
+original-model certificates, and admit each new numerical/device implementation.
+
+GPUP-9 remains complete under its original scoped protocol. The additive review
+records that scaling was numerically inactive (288 identical response pairs), and
+that square nonsingular equality fixtures do not establish general LP behavior.
+Preserve all historical observations, criteria, sources and charges exactly.
+PREP3 is supporting diagnosis; GPUP-10 packaging follows broad validation.
+
+Independent ceiling: 240000 CPU / 30000 GPU seconds; phase caps in SPEC-0045,
+receipts artifacts/gpup-general-v1. Four CPU slots, 16 GiB sampled RSS, 12 GiB device
+buffers, one pinned shared lease, unchanged one-second supervisor and all 100 ms
+advisories. Preserve failures/full charges. Source-bound numerical/device admission
+passes. The first 128-cell pilot completes; the extended pilot retains 137/176
+responses (136 with complete supervision), with 39 missing cells after a missing
+supervisor receipt. No retry. Current cleanup is empty; historical supervision is
+not reconstructed. Full conservative interruption charge and sources are retained.
+Its disposition permits CPU work; new GPU/scientific work requires operational
+readmission. Each lane certifies 18/44 planned extended cases. FP4 supplies only
+about 0.48% of accepted updates; broad low-bit value remains unestablished.
+Continue general convergence, control/check separation, local guards and efficient
+low-bit execution; the sparse prototype uses FP4 storage with FP32 SIMT arithmetic,
+not Tensor Cores. No confirmation is frozen. Commit locally only; public defaults
+and publication remain separate. See docs/benchmarks/lp-general-lowbit.md.
+
+Delivery acceptance: 638 Rust / 819 Python plus 12 isolated Rust; portable replay
+verifies 43484 files and 265 responses / 5833 assessments, preserving missingness.
+Open allocation checkpoint: 40002.661693116 CPU / 2623.360765263 GPU seconds.
+Large evidence remains local; compact results and validation receipts are tracked.
+
+## GPUP-9 controlled study complete (2026-11-15)
+
+SPEC-0044 / ADR-0078 deliver the independent controlled native/FP4 study on the
+same CHECKER2 executable and x86-64-v4 target. All 768 sessions / 14592 solves
+complete with strict original-model 1e-9 certificates: screening 144/576,
+validation 240/7680, held-out 384/6336. Eight development configurations cross
+precision, window 16/32 and scaling; validation freezes native-w32-s0 and
+fp4x2-w16-s1 before unseen grouped holdout. No scientific retry or retuning.
+
+Held-out scoped value passes 0/6 prepared and 0/6 cold comparisons under
+unchanged simultaneous ratio and >10 ms savings criteria. These compare whole
+configurations; every matched component/interaction contrast, negative result,
+order sensitivity and full cost partition remains visible. Fixed mechanisms have
+no separately measured causal effects. One constructed operator per family/split
+limits generalization; fresh-process cold observations do not imply flushed caches.
+
+Final native acceptance passes 638 repository Rust / 810 Python tests,
+plus 31 isolated Rust. Original serial checking covers every final/intermediate
+assessment; independent accepted-work replay excludes rejected FP4 attempts.
+Portable replay preserves every response byte and retained source version; generated models remain locally retained with generator, seed and hash bindings.
+All earlier scientific files, navigation and unrelated backlog entries stay exact.
+
+Independent allocation closed at 44710.832486852 CPU /
+5263.717809413 GPU seconds, including 512 preparation / 128 closing CPU
+administration. All 6 failed development/administrative reservations retain
+full charges and sources; cleanup is empty. One-second supervision and all
+100 ms advisories remain; sampled RSS is not a hard peak enclosure.
+
+PREP3 remains deferred and unopened. Public defaults remain unchanged. GPUP-10
+is dependency-ready after final acceptance, with its own protocol/adoption decision
+and allocation still required. No follow-on execution or publication is released.
+Commit locally only. Earlier handoffs below retain their historical scope.
+
+Report: [controlled study](../benchmarks/lp-gpup9.md).
+
+
 ## GPUP-8 redesigned around scoped FP4 capability (2026-11-15)
 
 The user authorizes waiving the inappropriate legacy progression gate.

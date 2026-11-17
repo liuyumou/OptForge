@@ -1,4 +1,332 @@
+# Current agent handoff: general LP PR acceptance complete (2026-11-17)
+
+The user authorizes publishing and normally merging the eight original feature
+commits through [PR #28](https://github.com/liuyumou/OptForge/pull/28), preserving
+ancestry and all results. Integration acceptance passes 638 repository Rust /
+827 Python tests, 37 isolated Rust tests and documentation checks. All 2407
+other original files stay exact; historical navigation text is preserved. Both
+admitted host images, source bindings and all 139 latest archive parts verify.
+Existing device admission, sanitizers and numerical replay remain applicable.
+
+Hosted initial checks report startup_failure with zero jobs; local acceptance
+is separate. Use a normal merge without changing or bypassing protection. Final
+head/merge receipts are local and reported on the PR. Earlier local-only entries
+retain their historical scope. GPUP-9 archive parts remain tracked; newer large
+scientific bundles stay local. No numerical source, public default, historical
+criterion, failed/missing result or scientific allocation changes. Broad single-
+solve usefulness with meaningful FP4 benefit remains the objective.
+
+The separate integration allocation is closed at 3309.763244320 / 16000 CPU
+seconds, zero GPU, including 1000 closing-administration seconds; cleanup is empty.
+The general scientific allocation remains open at 181311.318401148 CPU /
+23462.140788896 GPU seconds.
+
+Report: [integration acceptance](docs/benchmarks/lp-general-pr.md).
+
+# Current agent handoff: scale development with COPT (2026-11-17)
+
+Keep the broad single-solve LP objective active, including meaningful FP4 benefit.
+The scale continuation delivers exact compact original CSR inputs, faster
+original-tree host products/preparation, lazy exact-checker geometry reuse and
+structural kernel scheduling. The numerical CUDA image remains fast-image-v10.
+Main scaling uses scale-image-v6 (default Rust target); source-identical
+scale-image-v7 is an opt-in x86-64-v4 experiment. Public defaults stay unchanged.
+
+The full historical roster retains 132/132 cells, with native/FP32/FP4x2 each
+certifying 20/44. The final 1 M/public roster has 103/105 complete measurements
+plus two retained raw PDS endpoints with missing timing receipts. Never-started
+PDS lanes complete in separate tails; no attempted cell repeats. The full 4 M
+cohort completes 90/90 measurements and all audits: our lanes certify 12/18 and
+COPT GPU 15/18. The capacity-selected 16 M extension completes 30/30 and all
+audits: our lanes and COPT GPU certify 6/6; twelve other models / sixty lanes
+remain unsupported. All 42 final generated models are connected. Keep the
+full lower-scale roster and capacity refusals; do not generalize from that subset.
+
+Coupled-family native/FP4 execution medians improve from 3.192x at 1 M to 5.332x
+at 16 M, but complete-cost ratios are 0.981 / 0.999 / 1.008 at 1 M / 4 M / 16 M;
+FP32/FP4 ratios are 0.974 / 1.000 / 0.994. Broad FP4 superiority is unestablished.
+At 16 M, extra preparation nearly cancels execution savings, while original-A
+control/checking and response transport dominate. General convergence and sparse
+FP4 coverage remain priorities. Do not narrow to prepared or dense workflows.
+
+COPT 8.0.6 CPU auto and actual GPU PDLP use the installed authorized libraries,
+four threads and 30-second solver limits; the final GPU setting uses PDLPTol
+1e-12 with unchanged strict 1e-9 external checking. A retained CPU PDS endpoint
+has an exact objective gap of 3.51e-11 but fails the conservative enclosure's
+separate lower-gap guard. Preserve its recorded rejection; future exact
+refinement should address that assessment limitation without weakening criteria.
+
+The host-target pilot completes 96/96 cells and 48 exact equal-work transcript
+pairs; its overall descriptive median gain is only 1.008x. Each host image passes
+37 isolated Rust tests, 60 GPU continuation comparisons and four 20-case sanitizer
+suites. Native acceptance is 638 repository Rust / 827 Python. Eleven failed
+reservations retain 12000 CPU / 1830 GPU seconds, including the missing-SciPy
+frontier preparation; corrected preparation reuses its exact retained input.
+
+Delivery validation is complete. Extracted-root replay verifies 92050 files,
+897 retained campaign responses, 707 research and 11 COPT admission
+responses, and 10457 assessments / 4407 distinct serial witnesses. All
+221275 earlier scientific file bindings remain exact. Missing timing receipts
+and raw-only responses stay explicit; cleanup is empty and no reservation is
+active. Keep the independent 240000 CPU / 30000 GPU allocation open, unchanged
+four slots, 16 GiB sampled RSS, 12 GiB owned device buffers, pinned lease,
+one-second supervision and all 100 ms advisories. Large evidence stays local;
+only compact results are tracked. Commit locally only; no confirmation, public
+adoption or publication is released.
+
+Open settled checkpoint: 181311.318401148 CPU / 23462.140788896 GPU seconds.
+Report: [scale development and COPT](docs/benchmarks/lp-general-scale.md).
+
+# Current agent handoff: benchmark scale design (2026-11-17)
+
+The user requests checking popular benchmark scales before scaling execution.
+[The scale survey and design](docs/plans/lp-benchmark-scaling.md) records official
+NETLIB, MIPLIB, Mittelmann and PDLP metadata. Main development targets reach
+64 million nonzeros; larger design stages reach 128 million through 8 billion,
+subject to admitted dimensions, full memory accounting and execution resources.
+Keep broad sparse/application coverage, strict certificates and meaningful FP4
+contribution. No scaling run, numerical change or confirmation freeze occurred.
+The previous implementation and settled allocation checkpoint remain unchanged.
+
+# Current agent handoff: FP4 surrounding work (2026-11-16)
+
+Keep the broadly useful single-solve LP objective active, including meaningful
+FP4 acceleration and strict original-model certificates. The opt-in fast image
+is now `fast-image-v10`, admitted by `fast-overhead-admission-v1`. Contiguous
+projection/state writes and fused encoding remove a shared-memory handoff and
+barrier; exact bit decoding replaces an FP4 table lookup. All 477 compared
+responses remain exactly unchanged (excluding timing/allocation fields), and
+13 native/FP32/product compiled kernels are exact. Four scoped sanitizers pass.
+Final native acceptance passes 638 Rust / 821 Python; isolated acceptance has
+18 Rust tests. Portable replay verifies 26632 files, 319 retained study responses, 281 admission
+solves, 21524 product outputs and 5796 assessments / 3209 distinct serial witnesses.
+All 113490 prior file bindings remain exact; cleanup is empty.
+
+All 144 fixed-work pilot cells complete; 48 old/new FP4 pairs retain exact
+transcripts. Combined FP4x2 execution improves 1.160x / 1.702x / 1.143x on the
+three tiled cases. Block-sparse FP4x2 executes 500 updates in 7.123 ms versus
+10.078 ms for FP32. These are not certified-solve gains. Twelve new timelines
+retain 36 exact transcripts. Combined now beats split elapsed execution in all
+three tiled pilots, but dense1025 combined active time still exceeds split
+(18.651 versus 13.759 us/update): 16/33 CTAs versus 256 product CTAs on 188 SMs.
+Hardware counters remain unavailable; no occupancy claim.
+
+The broad manifest's group 16 exhausts an incorrectly sized 180-second resource
+reservation for eight solves plus independent checking. Preserve seven responses,
+exclude all seven timings, and leave its interrupted FP32/1e-9 endpoint missing.
+Only never-started groups 17–21 execute in a separate tail manifest with 300-second
+reservations. No attempted cell repeats. Distinct roster coverage is 175/176
+responses and 168 eligible timings across all 22 models and both tiers. All
+four lanes certify 20 cases; descriptive FP32/candidate complete-cost medians
+are 0.992 combined and 0.988 split. Broad FP4 superiority remains unestablished.
+Original-model assessment and general convergence remain major targets alongside
+parallel scheduling and launch gaps; do not narrow the roster or replace FP4
+progress with native fallback.
+
+Four failed reservations retain 2200 CPU / 400 GPU seconds and sources: harness
+syntax, immutable report write, undersized scientific group and undersized offline
+analysis. The current independent total remains 240000 CPU / 30000 GPU seconds.
+Prospectively rebalanced GPU phase ceilings are admission 8000, development 10000,
+confirmation 10000 and reporting 2000; CPU caps remain unchanged. Operational
+receipt v2 admits these exact sources under unchanged one-second supervision,
+all 100 ms advisories, four CPU slots, 16 GiB sampled RSS, 12 GiB device buffers
+and the pinned shared lease. Receipt v1 and every historical scientific file
+remain exact. Large evidence stays local; only compact results are tracked.
+Commit locally only; no default, confirmation or publication is released.
+
+Open settled checkpoint: 108845.598964180 CPU / 12326.763290488 GPU seconds.
+
+Report: [FP4 surrounding work](docs/benchmarks/lp-general-overhead.md).
+The preserved instructions below retain their historical scope.
+
+# Current agent handoff
+
+## General low-bit kernel redesign delivered (2026-11-16)
+
+Keep the broadly useful single-solve LP objective active, including meaningful
+FP4 contribution. SPEC-0045 / ADR-0079 now deliver an opt-in `gpu-fast` proposal
+executor with actual normal-E2M1 Tensor Cores, FP64 state/original references,
+strict original-model certificates and complete checkpoint recovery. Per-row
+outward guards are removed only from this proposal backend; `enclosed: false`
+is explicit. Public defaults and the historical local-bound backend remain.
+
+The measured sequence specializes sparse/tensor kernels, reconstructs outputs
+once, accelerates canonical packing, fuses encoding, tests combined versus split
+schedules, adapts sparse rows, and caches FP32 vector deltas. The final image is
+`fast-image-v9` under `fast-admission-v5`. All 444 compared admission responses
+are exactly unchanged by cached deltas, excluding timing/allocated-byte fields.
+Main, boundary and split suites pass all four sanitizers. Native acceptance is
+638 Rust / 820 Python, plus 18 isolated Rust tests. Portable replay verifies
+114046 files, 800 cells, 1779 admission solves, 137676 product outputs and 14102
+assessments / 3798 distinct serial witnesses. All 82240 earlier archived files
+and 207 diagnostic bindings stay exact; cleanup is empty. See the report for
+source/resource bindings and the final settled allocation checkpoint.
+
+Five fixed-work pilots and two full-roster comparisons retain all 800 supervised
+cells. Final FP4x4 execution is 4.03–7.63x faster than the previous implementation
+on three tiled fixtures, but native improves too. These 500-update measurements
+are not certified-solve gains. Final broad coverage is 176/176: native, FP32 and
+FP4x2 certify 20/44 cases; FP4x1 certifies 21/44, with its extra public-israel
+certificate mostly using native after promotion. Accepted FP4 product shares are
+5.013% for FP4x1 and 24.131% for FP4x2. Descriptive complete-cost median ratios
+native/candidate are 1.023 and 1.017; FP32/candidate are 0.990 and 0.985. Broad
+FP4 superiority remains unestablished; no confirmation is frozen.
+
+Twelve final timelines preserve 36 exact transcripts. Split tile products take
+about 1.9 us/launch; projection/encoding, launch gaps, and limited combined-grid
+parallelism remain expensive. Combined dense1025 exposes only 16/33 CTAs on
+188 SMs. Hardware counters remain unavailable; no measured occupancy claim.
+Shared-device/host timing variability remains visible. General convergence and
+original-A control/check cost need improvement alongside arithmetic scheduling;
+do not narrow the roster to dense tiles, prepared workflows or native fallback.
+
+Six failed reservations retain full 3660 CPU / 90 GPU seconds and sources,
+including an incomplete supplemental racecheck and a reporting import error.
+The separately identified complete split racecheck passes; no scientific cell
+is retried. One-second supervision, 100 ms advisories, four CPU slots, 16 GiB
+sampled RSS, 12 GiB device buffers and the pinned shared lease remain unchanged.
+The independent 240000 CPU / 30000 GPU-second allocation stays open. Large
+content-addressed evidence stays local; only compact results are tracked.
+Commit locally only; public adoption and publication remain separate.
+
+Open settled checkpoint: 95645.880891480 CPU / 10887.964566891 GPU seconds.
+
+Report: [general low-bit redesign](docs/benchmarks/lp-general-fast.md).
+The preserved instructions below retain their historical scope.
+
 # Agent Instructions
+
+## Tensor Core slowdown diagnosed (2026-11-16)
+
+Nine timelines of the unchanged admitted image retain 26 exact 500-update
+transcripts. Dense1025's FP4 product alone costs 114.942 us/update (sum of
+directional launch medians) versus 29.744 us for native product/projection.
+Its two product grids have only 32/65 warps on 188 SMs; four-component FP4 expands
+physical arithmetic 32x before sparse padding. In dense_blocks16385, 94.10%
+FP4 coverage still leaves the remainder/projection pass slower than the full
+native pass. Fix both reduction parallelism/component reconstruction and the
+common per-row guard/update cost. Launch fusion alone is insufficient. Keep
+broad single-solve usefulness, general convergence and strict certificates central.
+
+Hardware counters are unavailable (ERR_NVGPUCTRPERM); no measured occupancy or
+instruction-level causal attribution is claimed. One failed timeline import is
+recovered offline without rerunning it; its missing after observation remains.
+Trace import, counter refusal and a corrected logical/physical GPU-ID analysis
+error retain all sources and full 1800 CPU / 360 GPU-second charges. Cleanup is
+empty. No numerical image, public default, old result or confirmation changes.
+Validation binds 207 evidence files and 15 unchanged numerical source files;
+286 documentation pages/links pass. Local commit only.
+Settled allocation checkpoint: 63436.471766488 CPU / 5997.829481460 GPU seconds.
+See the follow-up in [the Tensor Core report](docs/benchmarks/lp-general-tensor.md).
+
+## Actual FP4 Tensor Core continuation delivered; value unestablished (2026-11-16)
+
+Keep the broadly useful low-bit LP objective active, including ordinary single
+solves and meaningful FP4 contribution. SPEC-0045 now admits an opt-in actual
+SM120 E2M1 Tensor Core backend with canonical sparse tiles, local original-row
+replacement, FP64 control-boundary references/state, separate control/certificate
+cadences and unchanged strict original-model certificates. Four-component FP4
+uses sixteen logical coefficient bits plus metadata/original data; it is not a
+four-bit-total-storage claim. Native and actual FP32 controls remain explicit.
+
+The 154-cell ablation and 132-cell broad comparison complete with full supervision.
+All three lanes certify 20/44 model/tier cases. FP4 retains 99.999832% of eligible
+tensor work and contributes 25.3910% of accepted product nonzeros, but beats native
+in 0/14 jointly certified cases with actual tensor work (median 0.816x). The
+all-configuration median is 0.892x; its three faster pairs use no FP4. An apparent
+11.25x adlittle gain is a native-setup outlier, not FP4 evidence. Both layouts and
+launch shapes preserve 44 numerical transcripts. Broad low-bit value is not
+established. Continue general convergence, efficient sparse low-bit execution and
+lower guard/encoding/launch cost; do not narrow the project to dense-tile cases,
+prepared workflows or native fallback. No confirmation is frozen.
+
+Prospective operational readmission passes; earlier missing supervision and the
+39 missing extended-pilot cells remain unchanged. The first tensor campaign's
+writer failure retains two responses, 66 missing cells, sources and full charge;
+no scientific retry. All four failed new reservations retain 3120 CPU / 180 GPU
+seconds. Final admission: 638 Rust / 820 Python plus 15 isolated Rust; 21888 product
+outputs and all four sanitizers. Portable delta replay verifies 39385 files,
+288 responses / 3767 assessments (2638 distinct serial checks), preserving all
+43430 earlier archived scientific files. Large evidence remains local.
+
+Existing independent 240000 CPU / 30000 GPU allocation and phase caps stay open;
+four CPU slots, 16 GiB sampled RSS, 12 GiB device buffers, one pinned lease, unchanged
+one-second supervision and all 100 ms advisories. Cleanup is empty. Public defaults
+and publication remain separate. Commit locally only.
+Open allocation checkpoint: 61348.495516364 CPU / 5583.955075437 GPU seconds.
+Report: [actual Tensor Core development](docs/benchmarks/lp-general-tensor.md).
+
+## General low-bit LP implementation active (2026-11-16)
+
+The user directs the project toward a broadly useful LP solver whose performance
+improves through low-bit arithmetic, including FP4. Keep this objective persistent:
+single solves matter; workflow-specific recipes or native fallback alone do not
+complete it. ADR-0079 / SPEC-0045 authorize the reviewed implementation and broad
+evaluation plan. Reuse sparse solver/preconditioning/restart APIs, preserve strict
+original-model certificates, and admit each new numerical/device implementation.
+
+GPUP-9 remains complete under its original scoped protocol. The additive review
+records that scaling was numerically inactive (288 identical response pairs), and
+that square nonsingular equality fixtures do not establish general LP behavior.
+Preserve all historical observations, criteria, sources and charges exactly.
+PREP3 is supporting diagnosis; GPUP-10 packaging follows broad validation.
+
+Independent ceiling: 240000 CPU / 30000 GPU seconds; phase caps in SPEC-0045,
+receipts artifacts/gpup-general-v1. Four CPU slots, 16 GiB sampled RSS, 12 GiB device
+buffers, one pinned shared lease, unchanged one-second supervisor and all 100 ms
+advisories. Preserve failures/full charges. Source-bound numerical/device admission
+passes. The first 128-cell pilot completes; the extended pilot retains 137/176
+responses (136 with complete supervision), with 39 missing cells after a missing
+supervisor receipt. No retry. Current cleanup is empty; historical supervision is
+not reconstructed. Full conservative interruption charge and sources are retained.
+Its disposition permits CPU work; new GPU/scientific work requires operational
+readmission. Each lane certifies 18/44 planned extended cases. FP4 supplies only
+about 0.48% of accepted updates; broad low-bit value remains unestablished.
+Continue general convergence, control/check separation, local guards and efficient
+low-bit execution; the sparse prototype uses FP4 storage with FP32 SIMT arithmetic,
+not Tensor Cores. No confirmation is frozen. Commit locally only; public defaults
+and publication remain separate. See docs/benchmarks/lp-general-lowbit.md.
+
+Delivery acceptance: 638 Rust / 819 Python plus 12 isolated Rust; portable replay
+verifies 43484 files and 265 responses / 5833 assessments, preserving missingness.
+Open allocation checkpoint: 40002.661693116 CPU / 2623.360765263 GPU seconds.
+Large evidence remains local; compact results and validation receipts are tracked.
+
+## GPUP-9 controlled study complete (2026-11-15)
+
+SPEC-0044 / ADR-0078 deliver the independent controlled native/FP4 study on the
+same CHECKER2 executable and x86-64-v4 target. All 768 sessions / 14592 solves
+complete with strict original-model 1e-9 certificates: screening 144/576,
+validation 240/7680, held-out 384/6336. Eight development configurations cross
+precision, window 16/32 and scaling; validation freezes native-w32-s0 and
+fp4x2-w16-s1 before unseen grouped holdout. No scientific retry or retuning.
+
+Held-out scoped value passes 0/6 prepared and 0/6 cold comparisons under
+unchanged simultaneous ratio and >10 ms savings criteria. These compare whole
+configurations; every matched component/interaction contrast, negative result,
+order sensitivity and full cost partition remains visible. Fixed mechanisms have
+no separately measured causal effects. One constructed operator per family/split
+limits generalization; fresh-process cold observations do not imply flushed caches.
+
+Final native acceptance passes 638 repository Rust / 810 Python tests,
+plus 31 isolated Rust. Original serial checking covers every final/intermediate
+assessment; independent accepted-work replay excludes rejected FP4 attempts.
+Portable replay preserves every response byte and retained source version; generated models remain locally retained with generator, seed and hash bindings.
+All earlier scientific files, navigation and unrelated backlog entries stay exact.
+
+Independent allocation closed at 44710.832486852 CPU /
+5263.717809413 GPU seconds, including 512 preparation / 128 closing CPU
+administration. All 6 failed development/administrative reservations retain
+full charges and sources; cleanup is empty. One-second supervision and all
+100 ms advisories remain; sampled RSS is not a hard peak enclosure.
+
+PREP3 remains deferred and unopened. Public defaults remain unchanged. GPUP-10
+is dependency-ready after final acceptance, with its own protocol/adoption decision
+and allocation still required. No follow-on execution or publication is released.
+Commit locally only. Earlier handoffs below retain their historical scope.
+
+Report: [controlled study](docs/benchmarks/lp-gpup9.md).
+
 
 ## GPUP-8 redesigned around scoped FP4 capability (2026-11-15)
 

@@ -1,0 +1,1320 @@
+//! Restarted primal-dual hybrid gradient, under SPEC-0011 requirements 5 to 10.
+//!
+//! The method solves a linear program with repeated matrix-vector products and
+//! vector updates, and no factorization. That choice is the one SPEC-0011 argues
+//! for from the hardware: a sparse product is bounded by memory bandwidth at this
+//! arithmetic intensity, so the compute capability 12.0 FP64 rate does not bind,
+//! while factorization and interior-point steps have the opposite intensity and
+//! are excluded for that reason rather than by preference.
+//!
+//! Everything in this module is `f64`, requirement 5, and everything is arranged
+//! so the result depends only on the input and the settings:
+//!
+//! - each product reads the matrix orientation whose major axis it writes, so no
+//!   output element is accumulated by more than one reduction and no atomic is
+//!   needed anywhere (requirement 6);
+//! - every reduction goes through [`crate::reduce`]'s fixed partition and tree,
+//!   never a loop whose order depends on a launch shape (requirement 7);
+//! - the step size comes from a fixed number of power iterations rather than from
+//!   a convergence test, because a count that stopped on a measured criterion
+//!   would vary with rounding and take every later iterate with it;
+//! - the step size itself is fixed rather than line-searched, which is a
+//!   departure from the published method made for the same reason. An adaptive
+//!   step retries an input-dependent number of times, each retry is a reduction,
+//!   and the trial count would then depend on rounding. The cost is convergence
+//!   rate, which requirement 23 forbids claiming anything about in either
+//!   direction.
+//!
+//! The KKT residuals computed here steer the algorithm -- they drive restarts and
+//! the primal weight -- and they justify nothing. No bound, status or proof reads
+//! them; [`crate::certify::certify`] recomputes everything it needs from the original
+//! model. A device that computes these residuals badly converges badly and cannot
+//! produce a wrong answer. That distinction is easy to lose at a glance, which is
+//! why it is written here rather than assumed.
+
+use optimizer_core::CancellationToken;
+
+use crate::precondition::Preconditioner;
+use crate::problem::LinearProgram;
+use crate::reduce::tree_sum;
+use optimizer_core::LpSettings;
+
+/// Why the iteration stopped.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Stop {
+    /// The iteration limit was reached.
+    IterationLimit,
+    /// Cancellation was observed at a check boundary.
+    Cancelled,
+    /// The caller's termination check accepted the iterate.
+    Accepted,
+}
+
+/// One iterate, unscaled into the original model's variables and rows.
+#[derive(Clone, Debug, PartialEq)]
+pub struct Iterate {
+    /// Primal values, in the canonical program's column order.
+    pub primal: Vec<f64>,
+    /// Dual multipliers, in the canonical program's row order.
+    pub dual: Vec<f64>,
+    /// Iterations performed.
+    pub iterations: u64,
+    /// Restarts performed.
+    pub restarts: u64,
+}
+
+/// What a caller's termination check decided.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Decision {
+    /// Keep iterating.
+    Continue,
+    /// Stop; the iterate is good enough for the caller's purposes.
+    Accept,
+}
+
+/// The scaled working problem and the iteration state.
+pub struct Engine<'a> {
+    program: &'a LinearProgram,
+    preconditioner: Preconditioner,
+    settings: LpSettings,
+    /// Scaled matrix values, parallel to the program's own storage.
+    scaled_row_values: Vec<f64>,
+    scaled_column_values: Vec<f64>,
+    scaled_objective: Vec<f64>,
+    scaled_row_lower: Vec<f64>,
+    scaled_row_upper: Vec<f64>,
+    scaled_column_lower: Vec<f64>,
+    scaled_column_upper: Vec<f64>,
+    step: f64,
+}
+
+/// The matrix-only half of an [`Engine`]'s construction, built once and shared
+/// across solves that differ only in variable bounds.
+///
+/// SPEC-0014 requirement 7 fixes exactly what a repeated-solve session may
+/// reuse: the preconditioner, the scaled matrix in both orientations, the
+/// scaled objective and the spectral step. None of them reads a bound, so they
+/// are computed here, and [`Engine::from_prepared`] adds the bound-derived
+/// vectors for one program — which is the cheap half, next to the
+/// preconditioning passes and the power iterations a session exists to
+/// amortize.
+pub struct PreparedMatrix {
+    preconditioner: Preconditioner,
+    settings: LpSettings,
+    /// Scaled matrix values, parallel to the program's own storage.
+    scaled_row_values: Vec<f64>,
+    scaled_column_values: Vec<f64>,
+    scaled_objective: Vec<f64>,
+    step: f64,
+}
+
+impl PreparedMatrix {
+    /// Build the reusable matrix-only state for one program.
+    #[must_use]
+    pub fn new(program: &LinearProgram, settings: &LpSettings) -> Self {
+        Self::with_preconditioner(
+            program,
+            *settings,
+            Preconditioner::new(program, settings.preconditioner),
+        )
+    }
+
+    fn with_preconditioner(
+        program: &LinearProgram,
+        settings: LpSettings,
+        preconditioner: Preconditioner,
+    ) -> Self {
+        let row_scale = preconditioner.row().to_vec();
+        let column_scale = preconditioner.column().to_vec();
+
+        // Â = diag(row) A diag(column), stored in both orientations so each
+        // product writes the axis it owns.
+        let scaled_row_values: Vec<f64> = program
+            .row_major()
+            .entries()
+            .map(|(row, column, value)| row_scale[row] * value * column_scale[column as usize])
+            .collect();
+        let scaled_column_values: Vec<f64> = program
+            .column_major()
+            .entries()
+            .map(|(column, row, value)| row_scale[row as usize] * value * column_scale[column])
+            .collect();
+
+        // x = diag(column) x̂, so the objective multiplies and the bounds divide.
+        let scaled_objective: Vec<f64> = program
+            .objective()
+            .iter()
+            .zip(&column_scale)
+            .map(|(cost, scale)| cost * scale)
+            .collect();
+
+        let norm = spectral_norm(
+            program,
+            &settings,
+            &scaled_row_values,
+            &scaled_column_values,
+        );
+        // 0.9 rather than 1.0 leaves headroom for the norm estimate being low.
+        // A step above the convergence threshold does not merely converge slowly,
+        // it diverges, so the margin is not a tuning constant.
+        let step = if norm > 0.0 { 0.9 / norm } else { 1.0 };
+        Self {
+            preconditioner,
+            settings,
+            scaled_row_values,
+            scaled_column_values,
+            scaled_objective,
+            step,
+        }
+    }
+
+    /// The preconditioner this preparation computed, for the record.
+    #[must_use]
+    pub fn preconditioner(&self) -> &Preconditioner {
+        &self.preconditioner
+    }
+
+    /// The settings this preparation ran with.
+    #[must_use]
+    pub fn settings(&self) -> LpSettings {
+        self.settings
+    }
+
+    /// The scaled matrix values, in row-major and column-major order.
+    ///
+    /// Exposed for the same reason as [`Engine::scaled_matrix`]: a device
+    /// residency uploads exactly these values rather than recomputing a scaling
+    /// it would then have to be checked against.
+    #[must_use]
+    pub fn scaled_matrix(&self) -> (&[f64], &[f64]) {
+        (&self.scaled_row_values, &self.scaled_column_values)
+    }
+
+    /// The scaled objective coefficients.
+    #[must_use]
+    pub fn scaled_objective(&self) -> &[f64] {
+        &self.scaled_objective
+    }
+
+    /// The step size derived from the scaled matrix.
+    #[must_use]
+    pub fn step(&self) -> f64 {
+        self.step
+    }
+}
+
+impl<'a> Engine<'a> {
+    /// Build the scaled working problem.
+    #[must_use]
+    pub fn new(program: &'a LinearProgram, settings: LpSettings) -> Self {
+        Self::from_prepared(program, &PreparedMatrix::new(program, &settings))
+    }
+
+    #[cfg(feature = "precision-research")]
+    fn with_preconditioner(
+        program: &'a LinearProgram,
+        settings: LpSettings,
+        preconditioner: Preconditioner,
+    ) -> Self {
+        Self::from_prepared(
+            program,
+            &PreparedMatrix::with_preconditioner(program, settings, preconditioner),
+        )
+    }
+
+    /// Build an engine for `program` from state prepared for its matrix.
+    ///
+    /// The result is bit for bit the engine [`Engine::new`] would have built:
+    /// the bound-derived vectors below are computed with the same expressions
+    /// in the same order, and everything else is cloned verbatim from the
+    /// preparation. A session holds one [`PreparedMatrix`] and calls this per
+    /// solve, so a solve that changes only variable bounds pays neither the
+    /// preconditioning passes nor the spectral estimate again. Nothing here
+    /// checks that `prepared` was built for this program's matrix; pairing
+    /// them is the caller's contract, and the session makes it with
+    /// [`LinearProgram::same_matrix_objective_rows`].
+    #[must_use]
+    pub fn from_prepared(program: &'a LinearProgram, prepared: &PreparedMatrix) -> Engine<'a> {
+        let _component_scope = optimizer_core::lp_cost::scope("working_host_allocation");
+        let row_scale = prepared.preconditioner.row().to_vec();
+        let column_scale = prepared.preconditioner.column().to_vec();
+
+        // x = diag(column) x̂, so bounds divide.
+        let scaled_column_lower: Vec<f64> = program
+            .columns()
+            .iter()
+            .zip(&column_scale)
+            .map(|(range, scale)| range.lower / scale)
+            .collect();
+        let scaled_column_upper: Vec<f64> = program
+            .columns()
+            .iter()
+            .zip(&column_scale)
+            .map(|(range, scale)| range.upper / scale)
+            .collect();
+        let scaled_row_lower: Vec<f64> = program
+            .rows()
+            .iter()
+            .zip(&row_scale)
+            .map(|(range, scale)| range.lower * scale)
+            .collect();
+        let scaled_row_upper: Vec<f64> = program
+            .rows()
+            .iter()
+            .zip(&row_scale)
+            .map(|(range, scale)| range.upper * scale)
+            .collect();
+
+        Self {
+            program,
+            preconditioner: prepared.preconditioner.clone(),
+            settings: prepared.settings,
+            scaled_row_values: prepared.scaled_row_values.clone(),
+            scaled_column_values: prepared.scaled_column_values.clone(),
+            scaled_objective: prepared.scaled_objective.clone(),
+            scaled_row_lower,
+            scaled_row_upper,
+            scaled_column_lower,
+            scaled_column_upper,
+            step: prepared.step,
+        }
+    }
+
+    /// Rebind correction vectors while retaining the prepared transformed matrix.
+    ///
+    /// # Errors
+    /// Rejects a different sparse matrix, dimensions or nonfinite objective.
+    #[cfg(feature = "precision-research")]
+    pub(crate) fn rebind_correction(
+        program: &'a LinearProgram,
+        base: &LinearProgram,
+        prepared: &PreparedMatrix,
+    ) -> Result<Self, &'static str> {
+        if program.row_major() != base.row_major()
+            || program.column_major() != base.column_major()
+            || !program.objective().iter().all(|x| x.is_finite())
+        {
+            return Err("correction_matrix_mismatch");
+        }
+        let mut engine = Self::from_prepared(program, prepared);
+        engine.scaled_objective = program
+            .objective()
+            .iter()
+            .zip(engine.preconditioner.column())
+            .map(|(c, s)| c * s)
+            .collect();
+        if engine
+            .scaled_objective
+            .iter()
+            .zip(program.objective())
+            .any(|(scaled, original)| !scaled.is_finite() || *original != 0.0 && *scaled == 0.0)
+        {
+            return Err("correction_objective_range");
+        }
+        for (bounds, lower, upper) in [
+            (
+                program.columns(),
+                engine.scaled_column_lower.as_slice(),
+                engine.scaled_column_upper.as_slice(),
+            ),
+            (
+                program.rows(),
+                engine.scaled_row_lower.as_slice(),
+                engine.scaled_row_upper.as_slice(),
+            ),
+        ] {
+            for (i, range) in bounds.iter().enumerate() {
+                for (original, scaled) in [(range.lower, lower[i]), (range.upper, upper[i])] {
+                    if original.is_finite()
+                        && (!scaled.is_finite() || original != 0.0 && scaled == 0.0)
+                    {
+                        return Err("correction_bound_scale_range");
+                    }
+                }
+            }
+        }
+        Ok(engine)
+    }
+
+    /// Research-only exact power-of-two scaling, with explicit caller-supplied exponents.
+    #[cfg(feature = "precision-research")]
+    pub fn with_power2_scaling(
+        program: &'a LinearProgram,
+        settings: LpSettings,
+        row: &[i32],
+        column: &[i32],
+    ) -> Result<Self, &'static str> {
+        use crate::research::{exact_scale, scale_pow2};
+        if row.len() != program.row_count() || column.len() != program.column_count() {
+            return Err("scale_dimensions");
+        }
+        let make = |v: &[i32]| {
+            v.iter()
+                .map(|&e| {
+                    let s = scale_pow2(1.0, e);
+                    if s.is_finite() && s > 0.0 {
+                        Ok(s)
+                    } else {
+                        Err("scale_range")
+                    }
+                })
+                .collect::<Result<Vec<_>, _>>()
+        };
+        let scales = Preconditioner::explicit(make(row)?, make(column)?, settings.preconditioner);
+        let mut engine = Self::with_preconditioner(program, settings, scales);
+        engine.scaled_row_values = program
+            .row_major()
+            .entries()
+            .map(|(r, c, a)| {
+                exact_scale(
+                    a,
+                    row[r]
+                        .checked_add(column[c as usize])
+                        .ok_or("scale_exponent")?,
+                )
+            })
+            .collect::<Result<_, _>>()?;
+        engine.scaled_column_values =
+            crate::research::transpose(program, &engine.scaled_row_values);
+        engine.scaled_objective = program
+            .objective()
+            .iter()
+            .zip(column)
+            .map(|(&v, &e)| exact_scale(v, e))
+            .collect::<Result<_, _>>()?;
+        let bound = |v: f64, e: i32| {
+            if v.is_infinite() {
+                Ok(v)
+            } else {
+                exact_scale(v, e)
+            }
+        };
+        engine.scaled_column_lower = program
+            .columns()
+            .iter()
+            .zip(column)
+            .map(|(v, &e)| bound(v.lower, -e))
+            .collect::<Result<_, _>>()?;
+        engine.scaled_column_upper = program
+            .columns()
+            .iter()
+            .zip(column)
+            .map(|(v, &e)| bound(v.upper, -e))
+            .collect::<Result<_, _>>()?;
+        engine.scaled_row_lower = program
+            .rows()
+            .iter()
+            .zip(row)
+            .map(|(v, &e)| bound(v.lower, e))
+            .collect::<Result<_, _>>()?;
+        engine.scaled_row_upper = program
+            .rows()
+            .iter()
+            .zip(row)
+            .map(|(v, &e)| bound(v.upper, e))
+            .collect::<Result<_, _>>()?;
+        let norm = engine.spectral_norm();
+        engine.step = if norm > 0.0 { 0.9 / norm } else { 1.0 };
+        Ok(engine)
+    }
+
+    /// Restrict the experimental operator step without changing legacy construction.
+    pub fn restrict_step(&mut self, step: f64) -> Result<(), &'static str> {
+        if !step.is_finite() || step <= 0.0 || step > self.step {
+            return Err("invalid restricted step");
+        }
+        self.step = step;
+        Ok(())
+    }
+
+    /// Tighten the iteration allowance for one solve of a repeated-solve
+    /// session (SPEC-0014), matching the clamp a backend applies when
+    /// `SolveOptions::iteration_limit` tightens the settings' limit.
+    ///
+    /// Nothing an engine precomputes reads `iteration_limit` — the scaled
+    /// values, the spectral step and the start vectors are all built without
+    /// it — so clamping after construction yields exactly the engine
+    /// [`Engine::new`] would have built from settings with the smaller limit,
+    /// which is what makes clamping a session's reused engine sound.
+    pub fn clamp_iteration_limit(&mut self, limit: u64) {
+        self.settings.iteration_limit = self.settings.iteration_limit.min(limit);
+    }
+
+    /// The preconditioner this engine applied, for the record.
+    #[must_use]
+    pub fn preconditioner(&self) -> &Preconditioner {
+        &self.preconditioner
+    }
+
+    /// The program this engine was built for.
+    #[must_use]
+    pub fn program(&self) -> &LinearProgram {
+        self.program
+    }
+
+    /// The settings this engine runs with.
+    #[must_use]
+    pub fn settings(&self) -> LpSettings {
+        self.settings
+    }
+
+    /// The step size derived from the scaled matrix.
+    #[must_use]
+    pub fn step(&self) -> f64 {
+        self.step
+    }
+
+    /// The scaled matrix values, in row-major and column-major order.
+    ///
+    /// Exposed so a device residency can upload exactly what this engine iterates
+    /// on rather than recomputing the scaling itself. Two computations of the same
+    /// scaling would be two things that must agree, and the whole point of the
+    /// host engine is to be the one the device is checked against.
+    #[must_use]
+    pub fn scaled_matrix(&self) -> (&[f64], &[f64]) {
+        (&self.scaled_row_values, &self.scaled_column_values)
+    }
+
+    /// The scaled objective coefficients.
+    #[must_use]
+    pub fn scaled_objective(&self) -> &[f64] {
+        &self.scaled_objective
+    }
+
+    /// The scaled row activity bounds.
+    #[must_use]
+    pub fn scaled_row_bounds(&self) -> (&[f64], &[f64]) {
+        (&self.scaled_row_lower, &self.scaled_row_upper)
+    }
+
+    /// The scaled variable bounds.
+    #[must_use]
+    pub fn scaled_column_bounds(&self) -> (&[f64], &[f64]) {
+        (&self.scaled_column_lower, &self.scaled_column_upper)
+    }
+
+    /// The starting primal point: zero projected onto the scaled variable bounds.
+    ///
+    /// Shared with the device engine so both start from the same place; a
+    /// differential that started from two points would measure the starts.
+    #[must_use]
+    pub fn start_primal(&self) -> Vec<f64> {
+        (0..self.program.column_count())
+            .map(|column| {
+                0.0f64
+                    .max(self.scaled_column_lower[column])
+                    .min(self.scaled_column_upper[column])
+            })
+            .collect()
+    }
+
+    /// The starting dual point.
+    #[must_use]
+    pub fn start_dual(&self) -> Vec<f64> {
+        vec![0.0; self.program.row_count()]
+    }
+
+    /// Unscale a primal iterate into the original model's variables.
+    #[must_use]
+    pub fn unscale_primal(&self, x: &[f64]) -> Vec<f64> {
+        x.iter()
+            .zip(self.preconditioner.column())
+            .map(|(value, scale)| value * scale)
+            .collect()
+    }
+
+    /// Unscale a dual iterate into the original model's rows.
+    #[must_use]
+    pub fn unscale_dual(&self, y: &[f64]) -> Vec<f64> {
+        y.iter()
+            .zip(self.preconditioner.row())
+            .map(|(value, scale)| value * scale)
+            .collect()
+    }
+
+    /// One step of the iteration, exposed for a differential against a device.
+    #[must_use]
+    pub fn step_once(&self, x: &[f64], y: &[f64], weight: f64) -> (Vec<f64>, Vec<f64>) {
+        self.advance(x, y, weight)
+    }
+
+    /// Estimate the largest singular value by a fixed number of power iterations.
+    #[cfg(feature = "precision-research")]
+    fn spectral_norm(&self) -> f64 {
+        let _component_scope = optimizer_core::lp_cost::scope("norm_step_estimation");
+        spectral_norm(
+            self.program,
+            &self.settings,
+            &self.scaled_row_values,
+            &self.scaled_column_values,
+        )
+    }
+
+    /// Euclidean norm through the fixed reduction.
+    fn norm(&self, values: &[f64]) -> f64 {
+        euclidean_norm(values)
+    }
+
+    /// `Â x̂`, written row by row from the row-major form.
+    fn multiply(&self, x: &[f64]) -> Vec<f64> {
+        multiply(self.program, &self.scaled_row_values, x)
+    }
+
+    /// `Âᵀ ŷ`, written column by column from the column-major form.
+    fn multiply_transpose(&self, y: &[f64]) -> Vec<f64> {
+        multiply_transpose(self.program, &self.scaled_column_values, y)
+    }
+
+    /// One primal-dual step.
+    fn advance(&self, x: &[f64], y: &[f64], weight: f64) -> (Vec<f64>, Vec<f64>) {
+        let _component_scope = optimizer_core::lp_cost::scope("cpu_arithmetic_update");
+        let primal_step = self.step / weight;
+        let dual_step = self.step * weight;
+
+        let transposed = self.multiply_transpose(y);
+        let mut next_x = Vec::with_capacity(x.len());
+        for column in 0..x.len() {
+            let gradient = self.scaled_objective[column] - transposed[column];
+            let moved = x[column] - primal_step * gradient;
+            next_x.push(
+                moved
+                    .max(self.scaled_column_lower[column])
+                    .min(self.scaled_column_upper[column]),
+            );
+        }
+
+        // The extrapolated point, which is what makes this a primal-dual method
+        // rather than alternating projections.
+        let extrapolated: Vec<f64> = (0..x.len())
+            .map(|column| 2.0 * next_x[column] - x[column])
+            .collect();
+        let activity = self.multiply(&extrapolated);
+
+        // The dual update is the proximal operator of the support function of the
+        // negated row range, by Moreau decomposition. One expression covers
+        // equality, ranged, one-sided and free rows with no branch on row shape.
+        //
+        // The negation is not cosmetic. This module takes the saddle function
+        // `cᵀx − yᵀAx + h(y)`, so that the reduced cost is `c − Aᵀy` -- the
+        // ordinary linear-programming convention, and the one [`crate::certify::certify`]
+        // recomputes from the original model. Taking the other common convention
+        // would produce multipliers of the opposite sign; certification would
+        // still be *valid*, because it is valid for any vector, but every bound
+        // would be uselessly weak, which is a far harder defect to notice than a
+        // wrong answer.
+        //
+        // A consequence worth stating: this lands the multiplier inside the cone
+        // the certification's repair projects onto, so the two agree by
+        // construction rather than by coincidence.
+        let mut next_y = Vec::with_capacity(y.len());
+        for row in 0..y.len() {
+            let raw = y[row] - dual_step * activity[row];
+            let projected = (raw / dual_step)
+                .max(-self.scaled_row_upper[row])
+                .min(-self.scaled_row_lower[row]);
+            next_y.push(raw - dual_step * projected);
+        }
+
+        (next_x, next_y)
+    }
+
+    /// A weighted KKT error, used to steer restarts and the primal weight.
+    ///
+    /// Never used to justify a bound, a status or a proof. See the module header.
+    pub(crate) fn kkt_error(&self, x: &[f64], y: &[f64], weight: f64) -> f64 {
+        let _component_scope = optimizer_core::lp_cost::scope("kkt_evaluation");
+        let activity = self.multiply(x);
+        let primal_violation: Vec<f64> = (0..y.len())
+            .map(|row| {
+                let value = activity[row];
+                let clamped = value
+                    .max(self.scaled_row_lower[row])
+                    .min(self.scaled_row_upper[row]);
+                let residual = value - clamped;
+                residual * residual
+            })
+            .collect();
+        let transposed = self.multiply_transpose(y);
+        let dual_violation: Vec<f64> = (0..x.len())
+            .map(|column| {
+                let reduced = self.scaled_objective[column] - transposed[column];
+                // Only the component that cannot be absorbed by a variable bound
+                // is a violation.
+                let absorbed = if reduced > 0.0 {
+                    if self.scaled_column_lower[column].is_finite() {
+                        0.0
+                    } else {
+                        reduced
+                    }
+                } else if self.scaled_column_upper[column].is_finite() {
+                    0.0
+                } else {
+                    reduced
+                };
+                absorbed * absorbed
+            })
+            .collect();
+        let primal = tree_sum(&primal_violation).sqrt();
+        let dual = tree_sum(&dual_violation).sqrt();
+        weight * primal + dual / weight
+    }
+
+    /// Run the method, consulting `check` every `check_interval` iterations.
+    ///
+    /// `check` receives an unscaled iterate. It is where the caller's termination
+    /// policy lives -- validating a candidate and certifying a bound -- because
+    /// this module deliberately owns no policy about what counts as good enough.
+    pub fn run(
+        &self,
+        cancel: &CancellationToken,
+        mut check: impl FnMut(&Iterate) -> Decision,
+    ) -> (Iterate, Stop) {
+        let mut control = crate::control::Fp64Controller::new(self);
+        while control.remaining() > 0 {
+            control.host_step();
+            if !control.check_pending() {
+                continue;
+            }
+            // Preserve the legacy host cancellation and callback order exactly.
+            if cancel.is_cancelled() {
+                return (control.iterate(), Stop::Cancelled);
+            }
+            let iterate = control.iterate();
+            if check(&iterate) == Decision::Accept {
+                return (iterate, Stop::Accepted);
+            }
+            control.continue_after_check();
+        }
+        (control.iterate(), Stop::IterationLimit)
+    }
+
+    #[cfg(test)]
+    pub(crate) fn legacy_run(
+        &self,
+        cancel: &CancellationToken,
+        mut check: impl FnMut(&Iterate) -> Decision,
+        mut trace: impl FnMut(&Iterate),
+    ) -> (Iterate, Stop) {
+        let columns = self.program.column_count();
+        let rows = self.program.row_count();
+
+        // Start from the projection of zero, which is feasible for the bounds and
+        // costs nothing to compute.
+        let mut x: Vec<f64> = (0..columns)
+            .map(|column| {
+                0.0f64
+                    .max(self.scaled_column_lower[column])
+                    .min(self.scaled_column_upper[column])
+            })
+            .collect();
+        let mut y = vec![0.0f64; rows];
+
+        let mut anchor_x = x.clone();
+        let mut anchor_y = y.clone();
+        let mut weight = 1.0f64;
+        let mut integral = 0.0f64;
+        let mut previous_error = None::<f64>;
+        let mut anchor_error = self.kkt_error(&x, &y, weight);
+        let mut last_check_error = anchor_error;
+
+        let mut iterations = 0u64;
+        let mut restarts = 0u64;
+        let mut since_restart = 0u64;
+
+        let unscale = |x: &[f64], y: &[f64], iterations, restarts| Iterate {
+            primal: x
+                .iter()
+                .zip(self.preconditioner.column())
+                .map(|(value, scale)| value * scale)
+                .collect(),
+            dual: y
+                .iter()
+                .zip(self.preconditioner.row())
+                .map(|(value, scale)| value * scale)
+                .collect(),
+            iterations,
+            restarts,
+        };
+
+        while iterations < self.settings.iteration_limit {
+            let (next_x, next_y) = self.advance(&x, &y, weight);
+
+            // Halpern: pull each step back toward the anchor by a coefficient
+            // that is a pure function of an integer, so the host and the device
+            // derive the same number rather than one sending it to the other.
+            let numerator = (since_restart + 1) as f64;
+            let denominator = (since_restart + 2) as f64;
+            let toward = numerator / denominator;
+            let back = 1.0 / denominator;
+            for column in 0..columns {
+                x[column] = toward * next_x[column] + back * anchor_x[column];
+            }
+            for row in 0..rows {
+                y[row] = toward * next_y[row] + back * anchor_y[row];
+            }
+
+            iterations += 1;
+            since_restart += 1;
+            trace(&unscale(&x, &y, iterations, restarts));
+
+            if !iterations.is_multiple_of(self.settings.check_interval) {
+                continue;
+            }
+
+            // Cancellation is observed here and only here, so its latency is
+            // bounded by the interval rather than by the iteration limit. On a
+            // device this is also the only synchronization point, which is what
+            // makes the interval a real parameter rather than a detail.
+            if cancel.is_cancelled() {
+                return (unscale(&x, &y, iterations, restarts), Stop::Cancelled);
+            }
+
+            let iterate = unscale(&x, &y, iterations, restarts);
+            if check(&iterate) == Decision::Accept {
+                return (iterate, Stop::Accepted);
+            }
+
+            let error = self.kkt_error(&x, &y, weight);
+            let rose = last_check_error < error;
+            last_check_error = error;
+
+            let sufficient = error <= self.settings.restart.sufficient * anchor_error;
+            let necessary = error <= self.settings.restart.necessary * anchor_error && rose;
+            let artificial =
+                since_restart as f64 >= self.settings.restart.artificial * iterations as f64;
+
+            if sufficient || necessary || artificial {
+                weight = self.next_weight(
+                    &x,
+                    &y,
+                    &anchor_x,
+                    &anchor_y,
+                    weight,
+                    &mut integral,
+                    &mut previous_error,
+                );
+                anchor_x.copy_from_slice(&x);
+                anchor_y.copy_from_slice(&y);
+                anchor_error = self.kkt_error(&x, &y, weight);
+                last_check_error = anchor_error;
+                since_restart = 0;
+                restarts += 1;
+            }
+        }
+
+        (unscale(&x, &y, iterations, restarts), Stop::IterationLimit)
+    }
+
+    /// The primal weight controller, evaluated at a restart.
+    ///
+    /// Compares how far the primal and dual iterates moved since the anchor and
+    /// rebalances the step sizes toward whichever is lagging. With the integral
+    /// and derivative gains at zero this is exactly the published smoothed update.
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn next_weight(
+        &self,
+        x: &[f64],
+        y: &[f64],
+        anchor_x: &[f64],
+        anchor_y: &[f64],
+        weight: f64,
+        integral: &mut f64,
+        previous_error: &mut Option<f64>,
+    ) -> f64 {
+        let primal_movement = self.norm(
+            &x.iter()
+                .zip(anchor_x)
+                .map(|(value, anchor)| value - anchor)
+                .collect::<Vec<_>>(),
+        );
+        let dual_movement = self.norm(
+            &y.iter()
+                .zip(anchor_y)
+                .map(|(value, anchor)| value - anchor)
+                .collect::<Vec<_>>(),
+        );
+        // Too small to divide by means the restart carried no information about
+        // the balance, so the weight is left where it was.
+        if primal_movement <= 1.0e-12 || dual_movement <= 1.0e-12 {
+            return weight;
+        }
+
+        let gains = self.settings.primal_weight;
+        let error = (dual_movement / primal_movement).ln() - weight.ln();
+        *integral += error;
+        let derivative = previous_error.map_or(0.0, |last| error - last);
+        *previous_error = Some(error);
+
+        let logarithm = weight.ln()
+            + gains.proportional * error
+            + gains.integral * *integral
+            + gains.derivative * derivative;
+        // Clamped so a pathological instance cannot drive the step sizes to zero
+        // or to infinity and turn a slow solve into a nonfinite one.
+        logarithm.exp().clamp(1.0e-6, 1.0e6)
+    }
+}
+
+/// Estimate the largest singular value by a fixed number of power iterations.
+///
+/// A free function rather than a method so [`PreparedMatrix`] — which holds the
+/// scaled matrix but no program borrow — and [`Engine`] run the same
+/// arithmetic; two implementations of one estimate would be two things that
+/// must agree.
+fn spectral_norm(
+    program: &LinearProgram,
+    settings: &LpSettings,
+    scaled_row_values: &[f64],
+    scaled_column_values: &[f64],
+) -> f64 {
+    let _component_scope = optimizer_core::lp_cost::scope("norm_step_estimation");
+    let columns = program.column_count();
+    if columns == 0 || program.nonzeros() == 0 {
+        return 0.0;
+    }
+    // A deterministic start rather than a random one. The seed would have to
+    // be recorded otherwise, and nothing is gained: the estimate feeds a step
+    // size, not a result.
+    let mut vector = vec![1.0f64; columns];
+    let mut norm = 0.0;
+    for _ in 0..settings.power_iterations {
+        let product = multiply(program, scaled_row_values, &vector);
+        let transposed = multiply_transpose(program, scaled_column_values, &product);
+        let magnitude = euclidean_norm(&transposed);
+        if magnitude <= 0.0 {
+            return 0.0;
+        }
+        for value in &mut vector {
+            *value /= magnitude;
+        }
+        for (slot, value) in vector.iter_mut().zip(&transposed) {
+            *slot = value / magnitude;
+        }
+        norm = magnitude.sqrt();
+    }
+    norm
+}
+
+/// Euclidean norm through the fixed reduction.
+fn euclidean_norm(values: &[f64]) -> f64 {
+    tree_sum(&values.iter().map(|value| value * value).collect::<Vec<_>>()).sqrt()
+}
+
+/// `Â x̂`, written row by row from the row-major form.
+fn multiply(program: &LinearProgram, scaled_row_values: &[f64], x: &[f64]) -> Vec<f64> {
+    (0..program.row_count())
+        .map(|row| {
+            let (indices, _) = program.row_major().line(row);
+            let start = program.row_major().offset(row);
+            let products: Vec<f64> = indices
+                .iter()
+                .enumerate()
+                .map(|(slot, column)| scaled_row_values[start + slot] * x[*column as usize])
+                .collect();
+            tree_sum(&products)
+        })
+        .collect()
+}
+
+/// `Âᵀ ŷ`, written column by column from the column-major form.
+fn multiply_transpose(
+    program: &LinearProgram,
+    scaled_column_values: &[f64],
+    y: &[f64],
+) -> Vec<f64> {
+    (0..program.column_count())
+        .map(|column| {
+            let (indices, _) = program.column_major().line(column);
+            let start = program.column_major().offset(column);
+            let products: Vec<f64> = indices
+                .iter()
+                .enumerate()
+                .map(|(slot, row)| scaled_column_values[start + slot] * y[*row as usize])
+                .collect();
+            tree_sum(&products)
+        })
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use optimizer_core::{
+        Bound, Constraint, Domain, LinearTerm, Model, ModelDocument, Objective, ObjectiveSense,
+        SCHEMA_VERSION, Variable,
+    };
+
+    fn assert_iterate_bits(left: &Iterate, right: &Iterate) {
+        assert_eq!(
+            (left.iterations, left.restarts),
+            (right.iterations, right.restarts)
+        );
+        for (a, b) in left
+            .primal
+            .iter()
+            .chain(&left.dual)
+            .zip(right.primal.iter().chain(&right.dual))
+        {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+    }
+
+    #[test]
+    fn shared_controller_matches_literal_legacy_whole_trajectories() {
+        use crate::control::Fp64Controller;
+        let program = program();
+        for interval in [1, 17, 200] {
+            for history in [false, true] {
+                let mut settings = LpSettings::published(1237, 17);
+                settings.iteration_limit = 1237;
+                settings.check_interval = interval;
+                if history {
+                    settings.primal_weight.integral = 0.02;
+                    settings.primal_weight.derivative = 0.1;
+                }
+                let engine = Engine::new(&program, settings);
+                let mut expected = Vec::new();
+                let (last, _) = engine.legacy_run(
+                    &CancellationToken::new(),
+                    |_| Decision::Continue,
+                    |iterate| expected.push(iterate.clone()),
+                );
+                let mut control = Fp64Controller::new(&engine);
+                for iterate in expected {
+                    control.host_step();
+                    assert_iterate_bits(&control.iterate(), &iterate);
+                    if control.check_pending() {
+                        control.continue_after_check();
+                    }
+                }
+                assert_iterate_bits(&control.iterate(), &last);
+                assert!(control.state().restarts > 0);
+                assert!(control.state().previous_error.is_some());
+            }
+        }
+    }
+
+    #[test]
+    fn checkpoints_restore_all_history_but_never_work_or_deadlines() {
+        use crate::control::Fp64Controller;
+        let program = program();
+        let mut settings = LpSettings::published(1237, 17);
+        settings.iteration_limit = 900;
+        settings.check_interval = 17;
+        settings.primal_weight.integral = 0.02;
+        settings.primal_weight.derivative = 0.1;
+        let engine = Engine::new(&program, settings);
+        let other_engine = Engine::new(&program, settings);
+        let mut uninterrupted = Fp64Controller::new(&engine);
+        let token = CancellationToken::new();
+        for index in 0..450 {
+            uninterrupted.host_step();
+            if [1, 16, 17, 18, 101, 199, 200, 449].contains(&index) {
+                let checkpoint = uninterrupted.checkpoint();
+                let mut resumed = Fp64Controller::new(&engine);
+                resumed.restore(&checkpoint).unwrap();
+                assert_eq!(resumed.state(), uninterrupted.state());
+                if resumed.check_pending() {
+                    resumed.continue_after_check();
+                }
+                let saved = resumed.checkpoint();
+                let deadline = std::time::Instant::now();
+                resumed.set_deadline(Some(deadline));
+                assert!(resumed.expired_at(deadline));
+                assert!(!resumed.expired_at(deadline - std::time::Duration::from_nanos(1)));
+                resumed.host_step();
+                let after = resumed.state().clone();
+                let consumed = resumed.physical_iterations();
+                let kkt = resumed.kkt_evaluations();
+                resumed.restore(&saved).unwrap();
+                assert_eq!(resumed.physical_iterations(), consumed);
+                assert_eq!(resumed.kkt_evaluations(), kkt);
+                assert!(resumed.expired_at(deadline));
+                assert_eq!(resumed.advance_host(64, &token), 0);
+                resumed.set_deadline(None);
+                resumed.host_step();
+                assert_eq!(resumed.state(), &after);
+                assert!(Fp64Controller::new(&other_engine).restore(&saved).is_err());
+            }
+            if uninterrupted.check_pending() {
+                uninterrupted.continue_after_check();
+            }
+        }
+        let saved = uninterrupted.checkpoint();
+        while uninterrupted.remaining() > 0 {
+            if uninterrupted.check_pending() {
+                uninterrupted.continue_after_check();
+            }
+            uninterrupted.advance_host(64, &token);
+        }
+        uninterrupted.restore(&saved).unwrap();
+        assert_eq!(uninterrupted.remaining(), 0);
+        assert_eq!(uninterrupted.advance_host(64, &token), 0);
+        let mut fresh = Fp64Controller::new(&engine);
+        token.cancel();
+        assert_eq!(fresh.advance_host(64, &token), 0);
+        assert_eq!(fresh.physical_iterations(), 0);
+    }
+
+    fn finite(value: f64) -> Bound {
+        Bound::Finite { value }
+    }
+
+    /// `min -x0 - x1` subject to `x0 + x1 <= 1.5`, `0 <= xj <= 1`. Optimum -1.5.
+    fn model() -> Model {
+        Model::new(ModelDocument {
+            schema_version: SCHEMA_VERSION,
+            model_id: "pdhg".to_string(),
+            variables: (0..2)
+                .map(|id| Variable {
+                    id,
+                    domain: Domain::Continuous,
+                    lower: finite(0.0),
+                    upper: finite(1.0),
+                })
+                .collect(),
+            constraints: vec![Constraint {
+                id: 0,
+                lower: Bound::NegativeInfinity,
+                upper: finite(1.5),
+                terms: (0..2)
+                    .map(|variable_id| LinearTerm {
+                        variable_id,
+                        coefficient: 1.0,
+                    })
+                    .collect(),
+            }],
+            objective: Objective {
+                sense: ObjectiveSense::Minimize,
+                offset: 0.0,
+                terms: (0..2)
+                    .map(|variable_id| LinearTerm {
+                        variable_id,
+                        coefficient: -1.0,
+                    })
+                    .collect(),
+            },
+        })
+        .expect("valid")
+    }
+
+    fn program() -> LinearProgram {
+        LinearProgram::new(&model()).expect("continuous")
+    }
+
+    fn settings() -> LpSettings {
+        LpSettings::published(20_000, 50)
+    }
+
+    fn run(program: &LinearProgram, settings: LpSettings) -> (Iterate, Stop) {
+        Engine::new(program, settings).run(&CancellationToken::new(), |_| Decision::Continue)
+    }
+
+    /// SPEC-0014: a session clamps one solve's allowance rather than
+    /// rebuilding the engine; the clamped engine is the one a fresh
+    /// construction with the tighter limit would have produced.
+    #[test]
+    fn clamping_the_iteration_limit_matches_fresh_construction() {
+        let program = program();
+        let prepared = PreparedMatrix::new(&program, &settings());
+        let mut clamped = Engine::from_prepared(&program, &prepared);
+        clamped.clamp_iteration_limit(3);
+        let mut tighter = settings();
+        tighter.iteration_limit = 3;
+        let fresh = Engine::new(&program, tighter);
+        assert_eq!(clamped.settings(), fresh.settings());
+        assert_eq!(clamped.step().to_bits(), fresh.step().to_bits());
+        assert_eq!(clamped.start_primal(), fresh.start_primal());
+        assert_eq!(clamped.scaled_matrix(), fresh.scaled_matrix());
+        assert_eq!(clamped.scaled_objective(), fresh.scaled_objective());
+        assert_eq!(clamped.scaled_row_bounds(), fresh.scaled_row_bounds());
+        assert_eq!(clamped.scaled_column_bounds(), fresh.scaled_column_bounds());
+        // A clamp above the settings' limit changes nothing.
+        let mut unclamped = Engine::from_prepared(&program, &prepared);
+        unclamped.clamp_iteration_limit(u64::MAX);
+        assert_eq!(unclamped.settings(), settings());
+    }
+
+    #[test]
+    fn the_iteration_approaches_the_known_optimum() {
+        let program = program();
+        let (iterate, stop) = run(&program, settings());
+        assert_eq!(stop, Stop::IterationLimit);
+        let objective = program.objective()[0] * iterate.primal[0]
+            + program.objective()[1] * iterate.primal[1]
+            + program.offset();
+        assert!(
+            (objective - -1.5).abs() < 1.0e-4,
+            "objective {objective} should approach -1.5"
+        );
+    }
+
+    /// Requirement 8 on the host: a fixed input produces a bitwise identical
+    /// result. The device half of this requirement is asserted separately.
+    #[test]
+    fn a_fixed_instance_solved_twice_is_bitwise_identical() {
+        let program = program();
+        let (first, _) = run(&program, settings());
+        let (second, _) = run(&program, settings());
+        for (a, b) in first.primal.iter().zip(&second.primal) {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+        for (a, b) in first.dual.iter().zip(&second.dual) {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+        assert_eq!(first.iterations, second.iterations);
+        assert_eq!(first.restarts, second.restarts);
+    }
+
+    fn assert_engine_bits(left: &Engine<'_>, right: &Engine<'_>) {
+        assert_eq!(left.preconditioner(), right.preconditioner());
+        assert_eq!(left.settings(), right.settings());
+        assert_eq!(left.step().to_bits(), right.step().to_bits());
+        let pairs = [
+            (left.scaled_matrix().0, right.scaled_matrix().0),
+            (left.scaled_matrix().1, right.scaled_matrix().1),
+            (left.scaled_objective(), right.scaled_objective()),
+            (left.scaled_row_bounds().0, right.scaled_row_bounds().0),
+            (left.scaled_row_bounds().1, right.scaled_row_bounds().1),
+            (
+                left.scaled_column_bounds().0,
+                right.scaled_column_bounds().0,
+            ),
+            (
+                left.scaled_column_bounds().1,
+                right.scaled_column_bounds().1,
+            ),
+        ];
+        for (a, b) in pairs {
+            assert_eq!(a.len(), b.len());
+            for (x, y) in a.iter().zip(b) {
+                assert_eq!(x.to_bits(), y.to_bits());
+            }
+        }
+        for (a, b) in left.start_primal().iter().zip(&right.start_primal()) {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+        for (a, b) in left.start_dual().iter().zip(&right.start_dual()) {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+    }
+
+    /// SPEC-0014 requirements 6 to 10: an engine assembled from a prepared
+    /// matrix is bit for bit the engine `Engine::new` builds in one piece —
+    /// every scaled vector, the step, the start points and the whole
+    /// trajectory. Asserted on the base program and on a variant that differs
+    /// only in variable bounds, which is the reuse a session exists for.
+    #[test]
+    fn from_prepared_matches_a_fresh_engine_bitwise_on_base_and_bounds_variant() {
+        let base = model();
+        let program = program();
+        let mut tightened = base.document().variables.clone();
+        for variable in &mut tightened {
+            variable.lower = finite(0.25);
+            variable.upper = finite(0.75);
+        }
+        let variant = program
+            .with_variable_bounds(&base.rebound(tightened).unwrap())
+            .unwrap();
+        assert!(variant.same_matrix_objective_rows(&program));
+
+        let prepared = PreparedMatrix::new(&program, &settings());
+        assert_eq!(prepared.settings(), settings());
+        for candidate in [program, variant] {
+            let fresh = Engine::new(&candidate, settings());
+            let reused = Engine::from_prepared(&candidate, &prepared);
+            assert_engine_bits(&fresh, &reused);
+
+            let mut expected = Vec::new();
+            let (last, stop) = fresh.legacy_run(
+                &CancellationToken::new(),
+                |_| Decision::Continue,
+                |iterate| expected.push(iterate.clone()),
+            );
+            expected.push(last);
+            let mut actual = Vec::new();
+            let (reused_last, reused_stop) = reused.legacy_run(
+                &CancellationToken::new(),
+                |_| Decision::Continue,
+                |iterate| actual.push(iterate.clone()),
+            );
+            actual.push(reused_last);
+            assert_eq!(stop, reused_stop);
+            assert_eq!(expected.len(), actual.len());
+            for (a, b) in expected.iter().zip(&actual) {
+                assert_iterate_bits(a, b);
+            }
+        }
+    }
+
+    /// Requirement 10: the interval is a real parameter, and changing it changes
+    /// the work done rather than being a cosmetic setting.
+    #[test]
+    fn the_check_interval_bounds_how_often_the_caller_is_consulted() {
+        let program = program();
+        let mut settings = settings();
+        settings.iteration_limit = 1_000;
+        settings.check_interval = 100;
+        let mut checks = 0;
+        Engine::new(&program, settings).run(&CancellationToken::new(), |_| {
+            checks += 1;
+            Decision::Continue
+        });
+        assert_eq!(checks, 10);
+    }
+
+    /// Cancellation latency is bounded by the interval, not the iteration limit.
+    #[test]
+    fn cancellation_is_observed_at_the_next_check_boundary() {
+        let program = program();
+        let mut settings = settings();
+        settings.iteration_limit = 100_000;
+        settings.check_interval = 25;
+        let cancel = CancellationToken::new();
+        let (iterate, stop) = Engine::new(&program, settings).run(&cancel, |_| {
+            cancel.cancel();
+            Decision::Continue
+        });
+        assert_eq!(stop, Stop::Cancelled);
+        assert_eq!(
+            iterate.iterations, 50,
+            "the token is set during the first check, so the second observes it"
+        );
+    }
+
+    #[test]
+    fn a_caller_accepting_an_iterate_stops_the_method() {
+        let program = program();
+        let (iterate, stop) =
+            Engine::new(&program, settings()).run(&CancellationToken::new(), |_| Decision::Accept);
+        assert_eq!(stop, Stop::Accepted);
+        assert_eq!(iterate.iterations, 50);
+    }
+
+    /// The published gains are a special case of the controller, asserted rather
+    /// than described, so a later tuning experiment has a known-good baseline.
+    #[test]
+    fn the_primal_weight_reduces_to_the_smoothed_rule_when_the_other_gains_are_zero() {
+        let program = program();
+        let mut general = settings();
+        general.primal_weight = optimizer_core::PrimalWeightSettings {
+            proportional: 0.5,
+            integral: 0.0,
+            derivative: 0.0,
+        };
+        let (from_general, _) = run(&program, general);
+        let (from_published, _) = run(&program, settings());
+        for (a, b) in from_general.primal.iter().zip(&from_published.primal) {
+            assert_eq!(a.to_bits(), b.to_bits());
+        }
+    }
+
+    /// Restarts have to actually happen, or every restart threshold is dead
+    /// configuration and the tests above assert nothing about them.
+    #[test]
+    fn the_method_restarts_at_least_once() {
+        let program = program();
+        let (iterate, _) = run(&program, settings());
+        assert!(iterate.restarts > 0, "adaptive restart must fire");
+    }
+}

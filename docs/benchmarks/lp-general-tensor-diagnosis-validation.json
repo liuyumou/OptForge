@@ -1,0 +1,114 @@
+{
+  "artifact_bindings": 207,
+  "cleanup_empty": true,
+  "compiled_python_tools": 2,
+  "docs_job": {
+    "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-docs-v1.settlement.json",
+    "sha256": "73f344c3be1ee17f1257d103d928db3a0052dc884f200cef22e3249ee51f0178"
+  },
+  "failed_cpu_ns": 1800000000000,
+  "failed_gpu_ns": 360000000000,
+  "historical_report_prefix_exact": true,
+  "local_validation": {
+    "path": "artifacts/gpup-general-v1/tensor-diagnosis-validation-v1.json",
+    "sha256": "e343ad7b0888864c357f615a0f83dfc370e072a28e0cb624da3d49e8d7ea94a7"
+  },
+  "numerical_diff_empty": true,
+  "numerical_source_bindings": 15,
+  "report": {
+    "path": "docs/benchmarks/lp-general-tensor-diagnosis-results.json",
+    "sha256": "cb03d9616c034ab8f900369335221beab2e182a4ab354397bc1427c566b99d26"
+  },
+  "resources": [
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-analysis-v1.settlement.json",
+      "sha256": "7f0130303d6ea1f0f78f4f54bde07b5dd9d66c16fdc3b69c94b3c1cdeff31377"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-analysis-v2.settlement.json",
+      "sha256": "ef7d63d7647ded96938aface740bd42f68e2c2c36496c5f625e89a8f196d99e6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-docs-v1.settlement.json",
+      "sha256": "73f344c3be1ee17f1257d103d928db3a0052dc884f200cef22e3249ee51f0178"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-export-v1.settlement.json",
+      "sha256": "fd8a23e1f3d0079b865108d539548a556e9bc8e263672fae43ad665573537751"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-freeze-v1.settlement.json",
+      "sha256": "cb7ffeb5b5c513e463a9f253752a11e668f853369b40608fa44ce8adaaedc685"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-import-v1.settlement.json",
+      "sha256": "21d261326e2e36b959659ff85bc627b55a3819abf54fddd53206e07177a7bb42"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m03-fp32-timeline-v1.settlement.json",
+      "sha256": "6c038e6bfcbc8a91be21d9851d1dfd9fc14990d04baf35cf3139e5d4f13d4dac"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m03-fp4x4-timeline-v1.settlement.json",
+      "sha256": "e3a0b9d13a5f33c481b2fa05dbb207bbc7a0d21d01bf7aa16df975d5178c8f67"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m03-native-timeline-v1.settlement.json",
+      "sha256": "ee992e662d6bae3da35e8e25300c032342f466144a5860914d446a06e10cb646"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m18-fp32-timeline-v1.settlement.json",
+      "sha256": "7ca5c64b600f12eba44f9c3f97574538295583b52ba8368e5004f78c0511fa53"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m18-fp4x4-timeline-v1.settlement.json",
+      "sha256": "e311dec106cc6c4ff3d46d7f150014cf032a9d4b4c2b4bc3cb624489de41a4da"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m18-native-timeline-v1.settlement.json",
+      "sha256": "83f1141d3bd7e7a79adcf583db1ccea879d9b226aeab83dcf2e9e3231817509d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m21-fp32-timeline-v1.settlement.json",
+      "sha256": "81ca209af093540297864348edc6b79138b1fe8eb153e28f3ee805b72fca1a65"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m21-fp4x4-product-v1.settlement.json",
+      "sha256": "e5de361ec41868809f4550f69a875c28881d8b9c785490a4533b1d5d83707786"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m21-fp4x4-timeline-v1.settlement.json",
+      "sha256": "87d0cb6241532749866ce2fc926e85663343239762ef18cb9dd2d68a47e51c1d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m21-native-timeline-v1.settlement.json",
+      "sha256": "19be8f0ff067051ace6709d304fbee5dec35b56b3b2cb3e484f749ffd845b9dc"
+    }
+  ],
+  "retained_exact_transcripts": 26,
+  "settled_accounting_ns": {
+    "cpu": {
+      "admission": 12736710304584,
+      "cleanup": 128000000000,
+      "confirmation": 0,
+      "development": 15354128176552,
+      "implementation": 8873069145432,
+      "native": 16138206283108,
+      "reporting": 10206357856812
+    },
+    "gpu": {
+      "admission": 2576592288123,
+      "confirmation": 0,
+      "development": 3421237193337,
+      "reporting": 0
+    }
+  },
+  "settled_cpu_ns": 63436471766488,
+  "settled_gpu_ns": 5997829481460,
+  "status": "passed",
+  "timelines": 9,
+  "validation_job": {
+    "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-validation-v1.settlement.json",
+    "sha256": "95913ed209be3baaba5dd5c8ddb6ccc991e43b88efffb098b7ad0520a39a9e01"
+  }
+}

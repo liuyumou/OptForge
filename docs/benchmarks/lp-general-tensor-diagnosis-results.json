@@ -1,0 +1,3834 @@
+{
+  "accounting_checkpoint_ns": {
+    "cpu": {
+      "admission": 12736710304584,
+      "cleanup": 128000000000,
+      "confirmation": 0,
+      "development": 15354128176552,
+      "implementation": 8873069145432,
+      "native": 16138206283108,
+      "reporting": 10535391769556
+    },
+    "gpu": {
+      "admission": 2576592288123,
+      "confirmation": 0,
+      "development": 3421237193337,
+      "reporting": 0
+    }
+  },
+  "analyzer": {
+    "path": "tools/lp_general_tensor_diagnosis_report.py",
+    "sha256": "907dc75c078ffce884cb30bbc0702c00a722756176ca286104114b688226383d"
+  },
+  "artifact_files": [
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/freeze.json",
+      "sha256": "fb362bc8a09a93510c5571d28e748cb20a0296554c4229a7bd5c9d9407f133ab"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/command.json",
+      "sha256": "8ad732f7286e6c7e2c310ca6de6c50b336500241d6f1b0c7e8c72bbeda375e5e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/input.jsonl",
+      "sha256": "622c676f1a4d06511d45ba228ee7f2de3994d11ecfc09c3e3330fde1947c8263"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/process.json",
+      "sha256": "2708806c0e11bf979ec90bf14e637ac9f8ef39545f8f58c7d66f9f979e91fa76"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/response.json",
+      "sha256": "52f96ff2a7c1c746c35803dbdd1f97e52223811be4cea75cc1b8b3ad633b7fb9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/result.json",
+      "sha256": "d2b641885aa4fe061fc710d55e6402c255dcdc141edb15bbd109f8a1ce1c0bc5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/stdout",
+      "sha256": "1341b1425ae7794901dd0db38ce5e22e50a140966e3126d134eb3237d4843a02"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/trace.nsys-rep",
+      "sha256": "be991173227d4287ff58b77e7124063c434f958fdb349cab9af43b1210c41b84"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/trace.sqlite",
+      "sha256": "f75000ff06cb97d8e9163fece7a80bea495312c651268e8aa117256ac8e6913d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-after/command.json",
+      "sha256": "c4d435795fcdfcb49b359e93092c420fdef7187034907b4a7ae61e8d3eaa0c53"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-after/input.jsonl",
+      "sha256": "622c676f1a4d06511d45ba228ee7f2de3994d11ecfc09c3e3330fde1947c8263"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-after/process.json",
+      "sha256": "b20e571911121f4aba24b6afa9f4810d70c21cfb2b1a99774d8b63023154d0d9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-after/response.json",
+      "sha256": "ff1ca96ee5c5e8776c26d9431d581ec3e54b3da05572c86f9355a12c2f86252a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-after/result.json",
+      "sha256": "41d3d5455eebb77102def18a6444705e929ba0f0ad821866bdee63d8155cffb0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-after/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-after/stdout",
+      "sha256": "6a6919af9e1c4bd86a77a8207f7b247979bc7b2fd16b6709796b18640d973490"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-before/command.json",
+      "sha256": "c4d435795fcdfcb49b359e93092c420fdef7187034907b4a7ae61e8d3eaa0c53"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-before/input.jsonl",
+      "sha256": "622c676f1a4d06511d45ba228ee7f2de3994d11ecfc09c3e3330fde1947c8263"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-before/process.json",
+      "sha256": "75af39db1c49b5223e5f27e0ef15282662e11dd4cd3156ce8ad1bfc9b116ded3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-before/response.json",
+      "sha256": "e1bd2e78ffe48015f0137c8ae7ef1c0a89dfc9e79abc93c4d90b3c9a86a2dfcd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-before/result.json",
+      "sha256": "8bce3e2bea63d367009ff2b267946838facf62f9549600def6fa20f2aaf656ca"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-before/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-before/stdout",
+      "sha256": "e29f490d7384fc779e4c8e32a7571e2a0eb6bc67760eaa47ae9315709d1d1052"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/command.json",
+      "sha256": "ecebd36bf20d98115a4d5c4225075b5346d4c645e04916646808b45156e9a7b7"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/input.jsonl",
+      "sha256": "9cddac39cd6e0dfd6dd98e9ef78c10e60845ee511c51b2d4b02f9a62dcf360d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/process.json",
+      "sha256": "3c6081f134fd754ba586a33fb5bdc7097b49badfad7728d12623b62cd0c4e3b1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/response.json",
+      "sha256": "3b8b0a15c3c09ed77064c052b29c2852ca5882ca1c4b8b54d461710b37a7fcbd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/result.json",
+      "sha256": "10bd3f6b70988b71ba57a82810a91c3f7ecb609f84aa82764bdf673058fec6c0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/stdout",
+      "sha256": "62030dd875de2edfa5d4fe4cc0025369ab6c44da591b54bf34f1f785cf3dc3b5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/trace.nsys-rep",
+      "sha256": "105b5c217e561b1f233f4940628ef6c9735430a36a8d8342bde8f9c062f3583e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/trace.sqlite",
+      "sha256": "7041a9f8b7fdbd9994429000ffe3a609564e11900420f8a9ac7565a351920277"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-after/command.json",
+      "sha256": "c4d435795fcdfcb49b359e93092c420fdef7187034907b4a7ae61e8d3eaa0c53"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-after/input.jsonl",
+      "sha256": "9cddac39cd6e0dfd6dd98e9ef78c10e60845ee511c51b2d4b02f9a62dcf360d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-after/process.json",
+      "sha256": "c063fc794380c896ec38f795e4a9c439dd663ca98649ce4423be3022dd68ac97"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-after/response.json",
+      "sha256": "660ea7ef8b909ba8e9f33b28cd10ac7f52cdac369400ea7f7b4f72480f383cbd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-after/result.json",
+      "sha256": "fe743c25e097622fe69ede679c0cabe31566cda135f8086ca431800b152a2e5d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-after/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-after/stdout",
+      "sha256": "55b81a0d544d8997de01d169b3a2c6cf3e003f68de36029c4603ff7e4f21e5cd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-before/command.json",
+      "sha256": "c4d435795fcdfcb49b359e93092c420fdef7187034907b4a7ae61e8d3eaa0c53"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-before/input.jsonl",
+      "sha256": "9cddac39cd6e0dfd6dd98e9ef78c10e60845ee511c51b2d4b02f9a62dcf360d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-before/process.json",
+      "sha256": "eba0296f6626ea23bbee46f4110ff162e08e892ba51a8d6df913d0031a4a63fd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-before/response.json",
+      "sha256": "0eede19e19e51482a7297de2fabd72c96b18fe3d73e0f4a22a2c1f63883a71f9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-before/result.json",
+      "sha256": "5c7677cb0deff4c2a8bd0174a18422ce8285e64430c710d470ea8eb32bd6aae9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-before/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-before/stdout",
+      "sha256": "d7af2473618fcb692fcc5a81e4f977510a00684814e4091522841a693cd0d194"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/command.json",
+      "sha256": "298f98cd5d60210be3ee83828df9460565755dc13c2a5e197b31c895f87da405"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/input.jsonl",
+      "sha256": "d98e71496d5272b37fe0ff6d033dd882c71df32660966c64c7597c0837aa338d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/process.json",
+      "sha256": "2a7343ca6bd2d11d259cc89f575b710ddcc603ab5132b6e9fe89329b3fa2cdac"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/response.json",
+      "sha256": "3c69b760543ef9dc0e94cccc7e840cb546c72d6123adc6f7e68196ff213fdc86"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/result.json",
+      "sha256": "2a8f6db890dd1ecd7f0f24b0931273896c2b947cff434412fb53a039158ab054"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/stdout",
+      "sha256": "1ce3bf510435f3fb7d726816cc8d8c84f6bf2ed997ea8bcd847f768281ace4c3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/trace.nsys-rep",
+      "sha256": "a38f3bce111e861c6ac8021b24ff3f4753dc209df5ccca40975125e8e4f03b8b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/trace.sqlite",
+      "sha256": "5c266576c0f072b314aeace6ac9b75fcf7cae598d58b0bfab35c903ccfe31e5d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-after/command.json",
+      "sha256": "c4d435795fcdfcb49b359e93092c420fdef7187034907b4a7ae61e8d3eaa0c53"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-after/input.jsonl",
+      "sha256": "d98e71496d5272b37fe0ff6d033dd882c71df32660966c64c7597c0837aa338d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-after/process.json",
+      "sha256": "a9399f90c094110019454de659a4cf504ec9e712ed3c20f93a32054c80f57f9a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-after/response.json",
+      "sha256": "26d825a1d1ced5393f7035e445ffbd6d39e5951e5267d0340cf2f31b2ef1299d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-after/result.json",
+      "sha256": "962e853bb41af061958941fe1dd1c2994b4c78f670eb025293b9270e5b745aea"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-after/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-after/stdout",
+      "sha256": "fd5ff90606404817368830c5e8ba1313426e30847b9cd42ad4d07da570ebbdb8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-before/command.json",
+      "sha256": "c4d435795fcdfcb49b359e93092c420fdef7187034907b4a7ae61e8d3eaa0c53"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-before/input.jsonl",
+      "sha256": "d98e71496d5272b37fe0ff6d033dd882c71df32660966c64c7597c0837aa338d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-before/process.json",
+      "sha256": "46d0629ecd755681c34bf74291d3c607da9c696984873a49fdc22609797a1c01"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-before/response.json",
+      "sha256": "49e2030071f27dcf52a5924a19eccedb4a054ec917b2514d9299038b60afc2be"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-before/result.json",
+      "sha256": "dbeeb528bbe319db0eb65355921afefd47f4624805d4bcd3fd77de5a25f6f0aa"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-before/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-before/stdout",
+      "sha256": "906bc64c1308b6ab51a58b539ac8de8d24bd6a0bccf72719f72212ce08b8a6c8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/command.json",
+      "sha256": "137d305e4d6d49b9345e286937c1154387e940292dfd481e4526791843ad3692"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/input.jsonl",
+      "sha256": "622c676f1a4d06511d45ba228ee7f2de3994d11ecfc09c3e3330fde1947c8263"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/process.json",
+      "sha256": "cf4492b8576d432268765f6df4ebccbaf81cc74a30e393a83a7109abda4a2c96"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/response.json",
+      "sha256": "971611ba65d20223807adb1d9e30f46c7b644559a0740348e86ec157a631e767"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/result.json",
+      "sha256": "f06dc0c9ed1f0d65b6917f7fe1a7e72e1626039d93534b5f56d27613028fe2c4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/stdout",
+      "sha256": "38e3a1d720f719bdb5b281bea6d9fc33cfd2fc0a747b60adc0f984939be84dc5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/trace.nsys-rep",
+      "sha256": "5fc3e2e1c3ceb0eefdaf3f15312084ffd3716c6e033071f64ee50b00c0124317"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/trace.sqlite",
+      "sha256": "5152e2fbe8a4d0cb606733107cbdbf0917198fad558c8b215651f0ed0aa5240e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-after/command.json",
+      "sha256": "ad913ad9ae98f899a64a25464b2bf801ef211df2563004babd59a0be27389b12"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-after/input.jsonl",
+      "sha256": "622c676f1a4d06511d45ba228ee7f2de3994d11ecfc09c3e3330fde1947c8263"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-after/process.json",
+      "sha256": "fdfe4dfb362dbd9639ae57d4db5d0da4ab0ad9c5cfeb8fc9ed479d26529d100e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-after/response.json",
+      "sha256": "6f9c58881fa03b329902f23268afa39c198e671765cf80a0f30f9a8f6ac28ee9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-after/result.json",
+      "sha256": "26763f92f5a3ec7825bb46a6f14c8e36f89a04b7f32bf3f7fd822ed4ae963a53"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-after/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-after/stdout",
+      "sha256": "edbda3bc2d3b4afaa65bfc1ac0a87d189db7ffdec8ae4308079bed65b018d548"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-before/command.json",
+      "sha256": "ad913ad9ae98f899a64a25464b2bf801ef211df2563004babd59a0be27389b12"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-before/input.jsonl",
+      "sha256": "622c676f1a4d06511d45ba228ee7f2de3994d11ecfc09c3e3330fde1947c8263"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-before/process.json",
+      "sha256": "2afaef44a8b3819a187bc1b6a88513344e0094ab1537133e8ce4ef00226e77f3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-before/response.json",
+      "sha256": "227565c882ae6c89bcdf8a729417df10fc074af24f76ba4daa8a3338b3d57cd9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-before/result.json",
+      "sha256": "37560b7ac6f68044ea7e45f0aef75c60aa38f807edc02d0dbb43e163fcd10205"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-before/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-before/stdout",
+      "sha256": "9037e1fd1f1fd335303e69f01fc090b3cc354b43d9c34595c513a5eaa7594f8e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/command.json",
+      "sha256": "2ea5fee90b710729b35053797b9ae5bb9cb1706bc2598d3470a9ac16d8ec0ef9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/input.jsonl",
+      "sha256": "9cddac39cd6e0dfd6dd98e9ef78c10e60845ee511c51b2d4b02f9a62dcf360d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/process.json",
+      "sha256": "275f24057e2145d79b2ca13fc4287f0cbdcd451b732e7fa101674ef504f6a457"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/response.json",
+      "sha256": "ce6819de35c5e817da6ad8ccce468a66b97f67f8261a63e5497ef509a956dc5d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/result.json",
+      "sha256": "07c9a3fbdc8957242a0a9e77523e617652621a2efa7d284055eff82643eb82e1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/stdout",
+      "sha256": "fd861bc122da3223140361dc91a86126c99aaf670219caef0cdfeebf6fa6affb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/trace.nsys-rep",
+      "sha256": "548440fe0884ddb26903e3519b57119b0c27543f52651a57861caa8d678430c5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/trace.sqlite",
+      "sha256": "128f94e6515f3e6bc51f090f3a376aea684fa521e78bb496904f2ee548733181"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-after/command.json",
+      "sha256": "ad913ad9ae98f899a64a25464b2bf801ef211df2563004babd59a0be27389b12"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-after/input.jsonl",
+      "sha256": "9cddac39cd6e0dfd6dd98e9ef78c10e60845ee511c51b2d4b02f9a62dcf360d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-after/process.json",
+      "sha256": "1d318c672aed7bf7b1b5b24a8bd3e39e572248939c0a9a73fc2720e891c0986d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-after/response.json",
+      "sha256": "5d83ccaa9c2681e2afcd03b6cf388f5b868ba339b4d9fa13048e5a4ddd7abb0b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-after/result.json",
+      "sha256": "45fdddd018633538a327e5f647ae580f9c117947f21e3d510c07f6eda3bb9d73"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-after/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-after/stdout",
+      "sha256": "5288bc97407192bf7829358adc7524f72f310bf7ae286332abac1f47804586b4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-before/command.json",
+      "sha256": "ad913ad9ae98f899a64a25464b2bf801ef211df2563004babd59a0be27389b12"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-before/input.jsonl",
+      "sha256": "9cddac39cd6e0dfd6dd98e9ef78c10e60845ee511c51b2d4b02f9a62dcf360d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-before/process.json",
+      "sha256": "b010e88a319062d15b5d9b850033ecb0e3d5043baa2ce42a876f7d39ebd3221d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-before/response.json",
+      "sha256": "4c62a8c0e45893e1f93ea7b1be17c3eb679a07398c8d4660bf14e6245112c388"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-before/result.json",
+      "sha256": "e8d98d314428d360cd9b95d8eddcdcb226ca84cfe74588a0cc640626cb0da8fa"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-before/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-before/stdout",
+      "sha256": "96527948988df56dc34b3a115b0c2b8bde0f5d587a8847e96202898a23c954b6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/command.json",
+      "sha256": "576ebf7ffc40577f6b118be61eeeeaedceda448e253c04cb89d45720bc345e49"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/input.jsonl",
+      "sha256": "d98e71496d5272b37fe0ff6d033dd882c71df32660966c64c7597c0837aa338d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/process.json",
+      "sha256": "19bc201a4692c72047af6dc0c71310cc3c1f2008cdcfebe3184f9ec1fc2a8627"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/response.json",
+      "sha256": "8c411e64e513d1a6350f29bed0904542a96756466f56e78147f97bbf326d6a18"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/result.json",
+      "sha256": "73ff329b18166687896a3da3bc0cd32cec34a77694a9b60f8645489c50801a9d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/stdout",
+      "sha256": "78f2b94377b2a07c4e4645ec8196d984331b3685a2711bf7a43711fe0210ec79"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/trace.nsys-rep",
+      "sha256": "81f56b1b54b69ca16bd7073074ed862949a4bb6771593e4f9791c9473cb7f402"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/trace.sqlite",
+      "sha256": "d55a569131fcaccba50563b7aedb70258572b29eb8f310c288f47272bc6f306c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-after/command.json",
+      "sha256": "ad913ad9ae98f899a64a25464b2bf801ef211df2563004babd59a0be27389b12"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-after/input.jsonl",
+      "sha256": "d98e71496d5272b37fe0ff6d033dd882c71df32660966c64c7597c0837aa338d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-after/process.json",
+      "sha256": "ae6f287c3532bf7d0df88f0f66b8eaef6de9ea355c9d232da25ba5b52b8260e9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-after/response.json",
+      "sha256": "1ef7baa2c69e9278c2e7ca3894b7fb670e3979052d82a376273aed99d2a6def3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-after/result.json",
+      "sha256": "71f20fa217b04d969323a1371fb76d5ae7980db15988679c8815fd77dca00a33"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-after/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-after/stdout",
+      "sha256": "fa632baa202a370c95735dad69594faea596adf980dc73383039a0b4ecd87bd2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-before/command.json",
+      "sha256": "ad913ad9ae98f899a64a25464b2bf801ef211df2563004babd59a0be27389b12"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-before/input.jsonl",
+      "sha256": "d98e71496d5272b37fe0ff6d033dd882c71df32660966c64c7597c0837aa338d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-before/process.json",
+      "sha256": "eb633f31e02b260188e27aa5a6cf1fc3c533404d969fb2af278d3c3c567a5ce4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-before/response.json",
+      "sha256": "f7dde5c712b3089d71e4eff4e5f81f452e8f9da8cd65d90ee87c68826b4100b1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-before/result.json",
+      "sha256": "b0364dec1d64a5cbe4d8833d6a84040dc8c752de7e64fc85a807d836b810e45d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-before/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-before/stdout",
+      "sha256": "e02938aa84c6c99eb5781baca1eb95c8a36f1c73fc01f4298738d7ca3f38519f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/command.json",
+      "sha256": "94de525134a331ecdb48f949b1acd89cfc931ec29a8a6d0fc313f860708d9a1a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/input.jsonl",
+      "sha256": "622c676f1a4d06511d45ba228ee7f2de3994d11ecfc09c3e3330fde1947c8263"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/process.json",
+      "sha256": "e9e3b860f9c8aac9feccab2b8745f3805bc6b0b1255aee6a20a7b5440b1eb470"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/response.json",
+      "sha256": "e3bf81cfcea6500b8cca9a774491d1812faa888cca148089d69500dde51e80c9"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/result.json",
+      "sha256": "e2a128768ae4be63159cdaa39a70e7675b568791be73949ca1d47bdc552aed81"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/stdout",
+      "sha256": "8344cf9fe6b79bfbc48b81cfa4d10bc177660967bac142277ca7d398208ee779"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/trace.nsys-rep",
+      "sha256": "a33d6576c218d80dc81c9983b341332c475f90fd6e411abeb8d392352d7cd836"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/trace.sqlite",
+      "sha256": "7a15c3bcdfc14a5f6b81471c2d36babccd1f9c553482fa58e5829fcb8890a4b5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-after/command.json",
+      "sha256": "06548d81a7571e07fd5ab1fc9a897fcf0310cbb29b31522de02508ae4a6985ab"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-after/input.jsonl",
+      "sha256": "622c676f1a4d06511d45ba228ee7f2de3994d11ecfc09c3e3330fde1947c8263"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-after/process.json",
+      "sha256": "eae2c7c3d6bb00be260e830da033a84e2e7c4b7213a7d93ae74c0ac0fd66bdde"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-after/response.json",
+      "sha256": "9850bb95e0fc5e316a5c47ffcab4b11592387454fe974d4c3eb6a218a721f762"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-after/result.json",
+      "sha256": "e5064ec53a22946cf10a9a8f929ecd609ffbc1e07fe4b72e1730fea9e01aaf70"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-after/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-after/stdout",
+      "sha256": "e3c3b8283ca6e45b20a6875ceb8c07c3d453d8670acb694a32eb35f7b65b5d01"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-before/command.json",
+      "sha256": "06548d81a7571e07fd5ab1fc9a897fcf0310cbb29b31522de02508ae4a6985ab"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-before/input.jsonl",
+      "sha256": "622c676f1a4d06511d45ba228ee7f2de3994d11ecfc09c3e3330fde1947c8263"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-before/process.json",
+      "sha256": "609cfabd2897a9307f914c4da86c66f61e4c3e50c0c367fc0c2dc080d491d71b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-before/response.json",
+      "sha256": "d4140e7085b18f62fb59f0929b4bb41d9e359c4dfcbb7b040a897789f9c1723d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-before/result.json",
+      "sha256": "ba983a6333bc558f2074b4cc739faa3fcdb23ac3d3d251fb4f934d3e7a45f89d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-before/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-before/stdout",
+      "sha256": "9fd9e265db7c4b2b1c9c82632bf7270e0bde93b2d377fa8fdb39f195289fb3a1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-ncu-tensor_product/command.json",
+      "sha256": "b8db739154c5e7b3f7f16167890cdd96eed8e2d0f880b123ceb503ebc51055f6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-ncu-tensor_product/input.jsonl",
+      "sha256": "9cddac39cd6e0dfd6dd98e9ef78c10e60845ee511c51b2d4b02f9a62dcf360d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-ncu-tensor_product/process.json",
+      "sha256": "7469c17a1ee8f3d6a2385a5fb5d8d93dfcf577beb6b07c06f51c4a7235b25a00"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-ncu-tensor_product/profile.txt",
+      "sha256": "816f96130a67c0ba445b49518db094a136b7c2cf4c607c59dd708430af17f054"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-ncu-tensor_product/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-ncu-tensor_product/stdout",
+      "sha256": "8440af5009ddf441b4bc29b3ea3eab165db1c0038438b6db9e6fcfc64292d392"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/command.json",
+      "sha256": "57e5a2c473553f210de8c0a07d94344aaad0bce18fe253de4518d998c9ec9782"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/input.jsonl",
+      "sha256": "9cddac39cd6e0dfd6dd98e9ef78c10e60845ee511c51b2d4b02f9a62dcf360d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/offline.nsys-rep",
+      "sha256": "171f52dde489c285d3a523c4de64685fa8df6c587ff616ea8c6338f6552bc189"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/offline.sqlite",
+      "sha256": "35826613059cce06121c3073705556bf49b4780d5a3430e9ec39b2d81e3afbe7"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/process.json",
+      "sha256": "6c15a4737e6c25b1ecc33693ebd958c397f07964bdc1972de9b2ec27cc961ff6"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/response.json",
+      "sha256": "de320b521b05bf46fd8b23bbab095f05eddb34e0620548d12e8b4dc4638bdccd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/stderr",
+      "sha256": "c2d7dda7c91433325f5dadfcfab71134221de4a0b2f21e031175cf17302611fd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/stdout",
+      "sha256": "ed177f44672a044c719db3176571be97f909cbaf82e1be3bf407ea6c126790b1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/trace.qdstrm",
+      "sha256": "3dbe3bfbe5209a72dc14d1e8bd1c0e80038b2f24954247e87c159a43b620fd60"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-plain-before/command.json",
+      "sha256": "06548d81a7571e07fd5ab1fc9a897fcf0310cbb29b31522de02508ae4a6985ab"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-plain-before/input.jsonl",
+      "sha256": "9cddac39cd6e0dfd6dd98e9ef78c10e60845ee511c51b2d4b02f9a62dcf360d3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-plain-before/process.json",
+      "sha256": "d8b319abbc3466929d160f34626a8e2856bd756db510e13491b428cb0960bb96"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-plain-before/response.json",
+      "sha256": "ab59389d3116f5524333a622bf8ae169deb52a80d32803f90810243904628b1e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-plain-before/result.json",
+      "sha256": "0f7fb45a6e9843472a20813c1a74c9423e1382c126e9c08b4b63fcbb5eb8832e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-plain-before/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-plain-before/stdout",
+      "sha256": "e3e97483b4e122bca671c3b66cc73a99d7aab46084902cf6771cedb094ce1e5e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/command.json",
+      "sha256": "6c4e3d7c405944451ef8f2b98ebd92d93e7b72f4518da834bb714b5540cd3340"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/input.jsonl",
+      "sha256": "d98e71496d5272b37fe0ff6d033dd882c71df32660966c64c7597c0837aa338d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/process.json",
+      "sha256": "28792ddab27b76362a10ddfc3879e0f8966b4d48144677281e6ce44af212b24f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/response.json",
+      "sha256": "285c34dad8f5981ed999d6a82b6aea6fda5d30b173d58a4d60a3024826b3d114"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/result.json",
+      "sha256": "897d98be9237b8c67b5dd0795824769a929386f556faab19974f1e0f69dfeafd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/stdout",
+      "sha256": "80c82c94f36f50a1bc09ec05fdd0378589fd007c7dd2869c7a40f893413f99ce"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/trace.nsys-rep",
+      "sha256": "bcfa471fe59eb72ce40999fe2a7e999c530b06292920e48e58eaebddd980f036"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/trace.sqlite",
+      "sha256": "3178cf75b7511fcb874e8bdc45837c90851de6f8f6f78594b5ba3c0ed6acb7c5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-after/command.json",
+      "sha256": "06548d81a7571e07fd5ab1fc9a897fcf0310cbb29b31522de02508ae4a6985ab"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-after/input.jsonl",
+      "sha256": "d98e71496d5272b37fe0ff6d033dd882c71df32660966c64c7597c0837aa338d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-after/process.json",
+      "sha256": "89d067e1af776081e95372f1c8cc10852572875e576fdc3ed048ef00b0ee8152"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-after/response.json",
+      "sha256": "fef78b0a53c38172bf6f80ab6d798e5c1beb2edceb9ff0254c513dcbf698ad7d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-after/result.json",
+      "sha256": "ffc9bfb77a0b4850c5da08e2db0a317d097dd0bd770dc3dc98431fe3e4444d92"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-after/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-after/stdout",
+      "sha256": "1ea30eb31a9ba8a32e13fb3a691b93af3c1105f5e42735c0da6e85e62d880484"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-before/command.json",
+      "sha256": "06548d81a7571e07fd5ab1fc9a897fcf0310cbb29b31522de02508ae4a6985ab"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-before/input.jsonl",
+      "sha256": "d98e71496d5272b37fe0ff6d033dd882c71df32660966c64c7597c0837aa338d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-before/process.json",
+      "sha256": "c38488062eb3f6f3007eea57e5e1b3916620e9ab1bd39517e7135af92049269b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-before/response.json",
+      "sha256": "6806b9fc2e0cc057cf0cb408cd5147dbffa4bfd8780f84a42d1b74b8a20d2d5d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-before/result.json",
+      "sha256": "396ef0f696beef9e7f8c6d688fee25a396a1114c584a7f85c867da1569ca54ee"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-before/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-before/stdout",
+      "sha256": "6eb89dd8c1f4ae177bfc0621cf7ab67f93cac77a2ef32ca8b0ac0759f1b7222e"
+    }
+  ],
+  "cells": [
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        524800000
+      ],
+      "columns": 1025,
+      "id": "m21-native",
+      "job_status": "passed",
+      "model": {
+        "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-dense-1025-819005.json",
+        "sha256": "476443f04554f7e5b89d00dcebb3d2621238e26d688e2d248f7946fb77f308dc"
+      },
+      "modes": {
+        "nsys": {
+          "cost_ns": {
+            "assessment": 95464580,
+            "device_setup": 570589099,
+            "device_teardown": 145545980,
+            "execution": 25363287,
+            "host_preparation": 145957753,
+            "recovery": 0
+          },
+          "elapsed_ns": 988884896,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 4098535987,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/response.json",
+            "sha256": "285c34dad8f5981ed999d6a82b6aea6fda5d30b173d58a4d60a3024826b3d114"
+          },
+          "status": "retained",
+          "timeline": {
+            "api": [
+              {
+                "count": 1,
+                "duration_ns": 196963379,
+                "name": "cuCtxCreate_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 144749243,
+                "name": "cuCtxDestroy_v2"
+              },
+              {
+                "count": 32,
+                "duration_ns": 27396173,
+                "name": "cuMemcpyDtoHAsync_v2"
+              },
+              {
+                "count": 139,
+                "duration_ns": 22459795,
+                "name": "cuStreamSynchronize"
+              },
+              {
+                "count": 1012,
+                "duration_ns": 3141716,
+                "name": "cuLaunchKernel"
+              },
+              {
+                "count": 106,
+                "duration_ns": 2962770,
+                "name": "cuMemcpyHtoDAsync_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 959600,
+                "name": "cuModuleLoadData"
+              },
+              {
+                "count": 64,
+                "duration_ns": 596487,
+                "name": "cuMemFree_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 554273,
+                "name": "cuMemAlloc_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 152803,
+                "name": "cuModuleUnload"
+              },
+              {
+                "count": 1,
+                "duration_ns": 115394,
+                "name": "cuStreamCreate"
+              },
+              {
+                "count": 1,
+                "duration_ns": 12049,
+                "name": "cuStreamDestroy_v2"
+              },
+              {
+                "count": 66,
+                "duration_ns": 7129,
+                "name": "cuCtxSetCurrent"
+              }
+            ],
+            "copies": {
+              "bytes": 13168616,
+              "count": 138,
+              "duration_ns": 1846158
+            },
+            "database": {
+              "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-nsys/trace.sqlite",
+              "sha256": "3178cf75b7511fcb874e8bdc45837c90851de6f8f6f78594b5ba3c0ed6acb7c5"
+            },
+            "device": {
+              "l2CacheSize": 134217728,
+              "maxWarpsPerSm": 48,
+              "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "smCount": 188,
+              "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+            },
+            "inter_kernel_gap_ns": 4049848,
+            "kernels": [
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.3404255319148936,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 21983,
+                  "median": 17967.5,
+                  "minimum": 17792,
+                  "p05": 17855,
+                  "p95": 18144,
+                  "sum": 9013691
+                },
+                "grid": 64,
+                "grid_warps": 512,
+                "grid_warps_fraction_device_capacity": 0.05673758865248227,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.6861702127659575,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 1580879,
+                  "median": 11776.0,
+                  "minimum": 11679,
+                  "p05": 11711,
+                  "p95": 11872,
+                  "sum": 10547123
+                },
+                "grid": 129,
+                "grid_warps": 1032,
+                "grid_warps_fraction_device_capacity": 0.11436170212765957,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 12,
+                  "maximum": 4576,
+                  "median": 3632.0,
+                  "minimum": 2720,
+                  "p05": 2720,
+                  "p95": 4576,
+                  "sum": 43583
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_totals",
+                "registers_per_thread": [
+                  22
+                ]
+              }
+            ],
+            "limits": "Grid capacity is a mathematical upper bound, not measured occupancy. API waits overlap GPU execution; do not add them to kernel time.",
+            "update_kernel_ns": 19560814,
+            "update_kernels": 1000,
+            "update_span_ns": 23610662,
+            "update_windows": 5
+          }
+        },
+        "plain-after": {
+          "cost_ns": {
+            "assessment": 88724709,
+            "device_setup": 224938876,
+            "device_teardown": 99176928,
+            "execution": 24191629,
+            "host_preparation": 132743362,
+            "recovery": 0
+          },
+          "elapsed_ns": 575267929,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 676491900,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-after/response.json",
+            "sha256": "fef78b0a53c38172bf6f80ab6d798e5c1beb2edceb9ff0254c513dcbf698ad7d"
+          },
+          "status": "retained"
+        },
+        "plain-before": {
+          "cost_ns": {
+            "assessment": 81672924,
+            "device_setup": 216002987,
+            "device_teardown": 75689599,
+            "execution": 16591353,
+            "host_preparation": 130242185,
+            "recovery": 0
+          },
+          "elapsed_ns": 520903052,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 618246295,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-native-plain-before/response.json",
+            "sha256": "6806b9fc2e0cc057cf0cb408cd5147dbffa4bfd8780f84a42d1b74b8a20d2d5d"
+          },
+          "status": "retained"
+        }
+      },
+      "nonzeros": 524800,
+      "offline_import": false,
+      "operator_storage_bytes": 12601356,
+      "packed_bytes": 0,
+      "profiler_execution_ratio_to_after": 1.048432373032837,
+      "profiler_execution_ratio_to_before": 1.528705163466777,
+      "reference_product_nnz": 0,
+      "resource": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m21-native-timeline-v1.settlement.json",
+        "sha256": "19be8f0ff067051ace6709d304fbee5dec35b56b3b2cb3e484f749ffd845b9dc"
+      },
+      "rows": 512,
+      "tensor_fraction": 0.0,
+      "tile_count": 0
+    },
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        524800000
+      ],
+      "columns": 1025,
+      "id": "m21-fp32",
+      "job_status": "passed",
+      "model": {
+        "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-dense-1025-819005.json",
+        "sha256": "476443f04554f7e5b89d00dcebb3d2621238e26d688e2d248f7946fb77f308dc"
+      },
+      "modes": {
+        "nsys": {
+          "cost_ns": {
+            "assessment": 173657372,
+            "device_setup": 791689215,
+            "device_teardown": 188792365,
+            "execution": 54226239,
+            "host_preparation": 145456825,
+            "recovery": 0
+          },
+          "elapsed_ns": 1380280612,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 4550141426,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/response.json",
+            "sha256": "e3bf81cfcea6500b8cca9a774491d1812faa888cca148089d69500dde51e80c9"
+          },
+          "status": "retained",
+          "timeline": {
+            "api": [
+              {
+                "count": 1,
+                "duration_ns": 339113515,
+                "name": "cuCtxCreate_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 187634429,
+                "name": "cuCtxDestroy_v2"
+              },
+              {
+                "count": 151,
+                "duration_ns": 118515042,
+                "name": "cuStreamSynchronize"
+              },
+              {
+                "count": 32,
+                "duration_ns": 76055793,
+                "name": "cuMemcpyDtoHAsync_v2"
+              },
+              {
+                "count": 1024,
+                "duration_ns": 3776849,
+                "name": "cuLaunchKernel"
+              },
+              {
+                "count": 118,
+                "duration_ns": 2865400,
+                "name": "cuMemcpyHtoDAsync_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 2469521,
+                "name": "cuStreamCreate"
+              },
+              {
+                "count": 1,
+                "duration_ns": 2023310,
+                "name": "cuModuleLoadData"
+              },
+              {
+                "count": 64,
+                "duration_ns": 886381,
+                "name": "cuMemFree_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 880270,
+                "name": "cuMemAlloc_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 217928,
+                "name": "cuModuleUnload"
+              },
+              {
+                "count": 1,
+                "duration_ns": 13778,
+                "name": "cuStreamDestroy_v2"
+              },
+              {
+                "count": 66,
+                "duration_ns": 7766,
+                "name": "cuCtxSetCurrent"
+              }
+            ],
+            "copies": {
+              "bytes": 17440784,
+              "count": 150,
+              "duration_ns": 1490836
+            },
+            "database": {
+              "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-nsys/trace.sqlite",
+              "sha256": "7a15c3bcdfc14a5f6b81471c2d36babccd1f9c553482fa58e5829fcb8890a4b5"
+            },
+            "device": {
+              "l2CacheSize": 134217728,
+              "maxWarpsPerSm": 48,
+              "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "smCount": 188,
+              "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+            },
+            "inter_kernel_gap_ns": 4502970,
+            "kernels": [
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.3404255319148936,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 13792,
+                  "median": 12144.0,
+                  "minimum": 11936,
+                  "p05": 11936,
+                  "p95": 13792,
+                  "sum": 74240
+                },
+                "grid": 64,
+                "grid_warps": 512,
+                "grid_warps_fraction_device_capacity": 0.05673758865248227,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.6861702127659575,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 9280,
+                  "median": 8384.0,
+                  "minimum": 8160,
+                  "p05": 8160,
+                  "p95": 9280,
+                  "sum": 50976
+                },
+                "grid": 129,
+                "grid_warps": 1032,
+                "grid_warps_fraction_device_capacity": 0.11436170212765957,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.3404255319148936,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 2406567,
+                  "median": 34303.0,
+                  "minimum": 34175,
+                  "p05": 34208,
+                  "p95": 34559,
+                  "sum": 36080610
+                },
+                "grid": 64,
+                "grid_warps": 512,
+                "grid_warps_fraction_device_capacity": 0.05673758865248227,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.6861702127659575,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 2339336,
+                  "median": 20480.0,
+                  "minimum": 20384,
+                  "p05": 20416,
+                  "p95": 20607,
+                  "sum": 12617851
+                },
+                "grid": 129,
+                "grid_warps": 1032,
+                "grid_warps_fraction_device_capacity": 0.11436170212765957,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 12,
+                  "maximum": 4480,
+                  "median": 3600.0,
+                  "minimum": 2720,
+                  "p05": 2720,
+                  "p95": 4480,
+                  "sum": 42944
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_totals",
+                "registers_per_thread": [
+                  22
+                ]
+              }
+            ],
+            "limits": "Grid capacity is a mathematical upper bound, not measured occupancy. API waits overlap GPU execution; do not add them to kernel time.",
+            "update_kernel_ns": 48698461,
+            "update_kernels": 1000,
+            "update_span_ns": 53201431,
+            "update_windows": 5
+          }
+        },
+        "plain-after": {
+          "cost_ns": {
+            "assessment": 91473554,
+            "device_setup": 275445079,
+            "device_teardown": 109731324,
+            "execution": 47592620,
+            "host_preparation": 133006047,
+            "recovery": 0
+          },
+          "elapsed_ns": 666453378,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 765759613,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-after/response.json",
+            "sha256": "9850bb95e0fc5e316a5c47ffcab4b11592387454fe974d4c3eb6a218a721f762"
+          },
+          "status": "retained"
+        },
+        "plain-before": {
+          "cost_ns": {
+            "assessment": 152889774,
+            "device_setup": 484606372,
+            "device_teardown": 168135201,
+            "execution": 51356729,
+            "host_preparation": 133886726,
+            "recovery": 0
+          },
+          "elapsed_ns": 1017722714,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 1122199931,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp32-plain-before/response.json",
+            "sha256": "d4140e7085b18f62fb59f0929b4bb41d9e359c4dfcbb7b040a897789f9c1723d"
+          },
+          "status": "retained"
+        }
+      },
+      "nonzeros": 524800,
+      "offline_import": false,
+      "operator_storage_bytes": 12601356,
+      "packed_bytes": 0,
+      "profiler_execution_ratio_to_after": 1.1393833539737883,
+      "profiler_execution_ratio_to_before": 1.0558740802982214,
+      "reference_product_nnz": 6297600,
+      "resource": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m21-fp32-timeline-v1.settlement.json",
+        "sha256": "81ca209af093540297864348edc6b79138b1fe8eb153e28f3ee805b72fca1a65"
+      },
+      "rows": 512,
+      "tensor_fraction": 0.0,
+      "tile_count": 0
+    },
+    {
+      "accepted_product_work": [
+        524288000,
+        524288000,
+        0,
+        524800000
+      ],
+      "columns": 1025,
+      "id": "m21-fp4x4",
+      "job_status": "refused",
+      "model": {
+        "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-dense-1025-819005.json",
+        "sha256": "476443f04554f7e5b89d00dcebb3d2621238e26d688e2d248f7946fb77f308dc"
+      },
+      "modes": {
+        "nsys": {
+          "cost_ns": {
+            "assessment": 131577789,
+            "device_setup": 554076784,
+            "device_teardown": 91991942,
+            "execution": 140523419,
+            "host_preparation": 291822433,
+            "recovery": 0
+          },
+          "elapsed_ns": 1213757547,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 3957886137,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/response.json",
+            "sha256": "de320b521b05bf46fd8b23bbab095f05eddb34e0620548d12e8b4dc4638bdccd"
+          },
+          "status": "retained",
+          "timeline": {
+            "api": [
+              {
+                "count": 1,
+                "duration_ns": 185288783,
+                "name": "cuCtxCreate_v2"
+              },
+              {
+                "count": 32,
+                "duration_ns": 134055630,
+                "name": "cuMemcpyDtoHAsync_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 91122023,
+                "name": "cuCtxDestroy_v2"
+              },
+              {
+                "count": 151,
+                "duration_ns": 51327160,
+                "name": "cuStreamSynchronize"
+              },
+              {
+                "count": 3024,
+                "duration_ns": 8936368,
+                "name": "cuLaunchKernel"
+              },
+              {
+                "count": 118,
+                "duration_ns": 3748596,
+                "name": "cuMemcpyHtoDAsync_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 1002031,
+                "name": "cuModuleLoadData"
+              },
+              {
+                "count": 64,
+                "duration_ns": 669514,
+                "name": "cuMemFree_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 651006,
+                "name": "cuMemAlloc_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 152990,
+                "name": "cuModuleUnload"
+              },
+              {
+                "count": 1,
+                "duration_ns": 144153,
+                "name": "cuStreamCreate"
+              },
+              {
+                "count": 1,
+                "duration_ns": 13657,
+                "name": "cuStreamDestroy_v2"
+              },
+              {
+                "count": 66,
+                "duration_ns": 8058,
+                "name": "cuCtxSetCurrent"
+              }
+            ],
+            "copies": {
+              "bytes": 15925512,
+              "count": 150,
+              "duration_ns": 2039885
+            },
+            "database": {
+              "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-nsys/offline.sqlite",
+              "sha256": "35826613059cce06121c3073705556bf49b4780d5a3430e9ec39b2d81e3afbe7"
+            },
+            "device": {
+              "l2CacheSize": 134217728,
+              "maxWarpsPerSm": 48,
+              "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "smCount": 188,
+              "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+            },
+            "inter_kernel_gap_ns": 23601356,
+            "kernels": [
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.010638297872340425,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 4384,
+                  "median": 4000.0,
+                  "minimum": 3936,
+                  "p05": 3936,
+                  "p95": 4032,
+                  "sum": 1995216
+                },
+                "grid": 2,
+                "grid_warps": 16,
+                "grid_warps_fraction_device_capacity": 0.0017730496453900709,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_encode",
+                "registers_per_thread": [
+                  36
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.026595744680851064,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 4544,
+                  "median": 4032.0,
+                  "minimum": 3968,
+                  "p05": 4000,
+                  "p95": 4256,
+                  "sum": 2029609
+                },
+                "grid": 5,
+                "grid_warps": 40,
+                "grid_warps_fraction_device_capacity": 0.004432624113475178,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_encode",
+                "registers_per_thread": [
+                  36
+                ]
+              },
+              {
+                "block": 32,
+                "block_count_fraction_sm_count": 0.1702127659574468,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 4088571,
+                  "median": 75967.0,
+                  "minimum": 75871,
+                  "p05": 75903,
+                  "p95": 118367,
+                  "sum": 54508013
+                },
+                "grid": 32,
+                "grid_warps": 32,
+                "grid_warps_fraction_device_capacity": 0.0035460992907801418,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_product",
+                "registers_per_thread": [
+                  48
+                ]
+              },
+              {
+                "block": 32,
+                "block_count_fraction_sm_count": 0.34574468085106386,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 4564023,
+                  "median": 38975.0,
+                  "minimum": 38880,
+                  "p05": 38912,
+                  "p95": 60223,
+                  "sum": 40754192
+                },
+                "grid": 65,
+                "grid_warps": 65,
+                "grid_warps_fraction_device_capacity": 0.007203014184397163,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_product",
+                "registers_per_thread": [
+                  48
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.3404255319148936,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 13600,
+                  "median": 12448.0,
+                  "minimum": 12096,
+                  "p05": 12096,
+                  "p95": 13600,
+                  "sum": 76127
+                },
+                "grid": 64,
+                "grid_warps": 512,
+                "grid_warps_fraction_device_capacity": 0.05673758865248227,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.6861702127659575,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 9152,
+                  "median": 8607.5,
+                  "minimum": 8256,
+                  "p05": 8256,
+                  "p95": 9152,
+                  "sum": 52030
+                },
+                "grid": 129,
+                "grid_warps": 1032,
+                "grid_warps_fraction_device_capacity": 0.11436170212765957,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.3404255319148936,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 1532882,
+                  "median": 7968.0,
+                  "minimum": 7935,
+                  "p05": 7967,
+                  "p95": 9248,
+                  "sum": 5570256
+                },
+                "grid": 64,
+                "grid_warps": 512,
+                "grid_warps_fraction_device_capacity": 0.05673758865248227,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.6861702127659575,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 1554737,
+                  "median": 11168.0,
+                  "minimum": 11072,
+                  "p05": 11104,
+                  "p95": 16928,
+                  "sum": 7357974
+                },
+                "grid": 129,
+                "grid_warps": 1032,
+                "grid_warps_fraction_device_capacity": 0.11436170212765957,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 12,
+                  "maximum": 4448,
+                  "median": 3104.0,
+                  "minimum": 2208,
+                  "p05": 2208,
+                  "p95": 4448,
+                  "sum": 39680
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_totals",
+                "registers_per_thread": [
+                  22
+                ]
+              }
+            ],
+            "limits": "Grid capacity is a mathematical upper bound, not measured occupancy. API waits overlap GPU execution; do not add them to kernel time.",
+            "update_kernel_ns": 112215260,
+            "update_kernels": 3000,
+            "update_span_ns": 135816616,
+            "update_windows": 5
+          }
+        },
+        "plain-after": {
+          "reason": "failed timeline job stopped before this observation",
+          "status": "missing"
+        },
+        "plain-before": {
+          "cost_ns": {
+            "assessment": 84703066,
+            "device_setup": 209805707,
+            "device_teardown": 141267195,
+            "execution": 81604851,
+            "host_preparation": 291590125,
+            "recovery": 0
+          },
+          "elapsed_ns": 809833031,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 906025401,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-plain-before/response.json",
+            "sha256": "ab59389d3116f5524333a622bf8ae169deb52a80d32803f90810243904628b1e"
+          },
+          "status": "retained"
+        }
+      },
+      "nonzeros": 524800,
+      "offline_import": true,
+      "operator_storage_bytes": 12601356,
+      "packed_bytes": 2687388,
+      "profiler_execution_ratio_to_after": null,
+      "profiler_execution_ratio_to_before": 1.721998352769494,
+      "reference_product_nnz": 6297600,
+      "resource": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m21-fp4x4-timeline-v1.settlement.json",
+        "sha256": "87d0cb6241532749866ce2fc926e85663343239762ef18cb9dd2d68a47e51c1d"
+      },
+      "rows": 512,
+      "tensor_fraction": 0.9990243902439024,
+      "tile_count": 512
+    },
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        32896000
+      ],
+      "columns": 257,
+      "id": "m03-native",
+      "job_status": "passed",
+      "model": {
+        "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-dense-257-841028.json",
+        "sha256": "e73b8674c689fea2adc21cc78ba7f1ff9de53e1e352ac51353b32d2acfbc3f8c"
+      },
+      "modes": {
+        "nsys": {
+          "cost_ns": {
+            "assessment": 13014451,
+            "device_setup": 672068949,
+            "device_teardown": 111095438,
+            "execution": 19822017,
+            "host_preparation": 7740071,
+            "recovery": 0
+          },
+          "elapsed_ns": 826456902,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 3941498409,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/response.json",
+            "sha256": "3c69b760543ef9dc0e94cccc7e840cb546c72d6123adc6f7e68196ff213fdc86"
+          },
+          "status": "retained",
+          "timeline": {
+            "api": [
+              {
+                "count": 1,
+                "duration_ns": 259646193,
+                "name": "cuCtxCreate_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 110692118,
+                "name": "cuCtxDestroy_v2"
+              },
+              {
+                "count": 139,
+                "duration_ns": 22101469,
+                "name": "cuStreamSynchronize"
+              },
+              {
+                "count": 32,
+                "duration_ns": 18709662,
+                "name": "cuMemcpyDtoHAsync_v2"
+              },
+              {
+                "count": 1012,
+                "duration_ns": 3143181,
+                "name": "cuLaunchKernel"
+              },
+              {
+                "count": 1,
+                "duration_ns": 932990,
+                "name": "cuModuleLoadData"
+              },
+              {
+                "count": 106,
+                "duration_ns": 460279,
+                "name": "cuMemcpyHtoDAsync_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 267621,
+                "name": "cuMemFree_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 230725,
+                "name": "cuMemAlloc_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 133359,
+                "name": "cuStreamCreate"
+              },
+              {
+                "count": 1,
+                "duration_ns": 92514,
+                "name": "cuModuleUnload"
+              },
+              {
+                "count": 1,
+                "duration_ns": 8005,
+                "name": "cuStreamDestroy_v2"
+              },
+              {
+                "count": 66,
+                "duration_ns": 7113,
+                "name": "cuCtxSetCurrent"
+              }
+            ],
+            "copies": {
+              "bytes": 933608,
+              "count": 138,
+              "duration_ns": 76830
+            },
+            "database": {
+              "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-nsys/trace.sqlite",
+              "sha256": "5c266576c0f072b314aeace6ac9b75fcf7cae598d58b0bfab35c903ccfe31e5d"
+            },
+            "device": {
+              "l2CacheSize": 134217728,
+              "maxWarpsPerSm": 48,
+              "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "smCount": 188,
+              "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+            },
+            "inter_kernel_gap_ns": 6765087,
+            "kernels": [
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.0851063829787234,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 1523792,
+                  "median": 9728.0,
+                  "minimum": 9664,
+                  "p05": 9696,
+                  "p95": 9792,
+                  "sum": 6397727
+                },
+                "grid": 16,
+                "grid_warps": 128,
+                "grid_warps_fraction_device_capacity": 0.014184397163120567,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.17553191489361702,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 1473904,
+                  "median": 7552.0,
+                  "minimum": 7487,
+                  "p05": 7519,
+                  "p95": 7615,
+                  "sum": 5258946
+                },
+                "grid": 33,
+                "grid_warps": 264,
+                "grid_warps_fraction_device_capacity": 0.02925531914893617,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 12,
+                  "maximum": 2624,
+                  "median": 2144.0,
+                  "minimum": 1792,
+                  "p05": 1792,
+                  "p95": 2624,
+                  "sum": 24640
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_totals",
+                "registers_per_thread": [
+                  22
+                ]
+              }
+            ],
+            "limits": "Grid capacity is a mathematical upper bound, not measured occupancy. API waits overlap GPU execution; do not add them to kernel time.",
+            "update_kernel_ns": 11656673,
+            "update_kernels": 1000,
+            "update_span_ns": 18421760,
+            "update_windows": 5
+          }
+        },
+        "plain-after": {
+          "cost_ns": {
+            "assessment": 12546889,
+            "device_setup": 282308608,
+            "device_teardown": 134629643,
+            "execution": 10544703,
+            "host_preparation": 7597650,
+            "recovery": 0
+          },
+          "elapsed_ns": 455882493,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 472654803,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-after/response.json",
+            "sha256": "26d825a1d1ced5393f7035e445ffbd6d39e5951e5267d0340cf2f31b2ef1299d"
+          },
+          "status": "retained"
+        },
+        "plain-before": {
+          "cost_ns": {
+            "assessment": 13229163,
+            "device_setup": 257079323,
+            "device_teardown": 107500216,
+            "execution": 10643044,
+            "host_preparation": 7576985,
+            "recovery": 0
+          },
+          "elapsed_ns": 404566317,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 421188757,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-native-plain-before/response.json",
+            "sha256": "49e2030071f27dcf52a5924a19eccedb4a054ec917b2514d9299038b60afc2be"
+          },
+          "status": "retained"
+        }
+      },
+      "nonzeros": 32896,
+      "offline_import": false,
+      "operator_storage_bytes": 791052,
+      "packed_bytes": 0,
+      "profiler_execution_ratio_to_after": 1.8798079945921664,
+      "profiler_execution_ratio_to_before": 1.862438697049453,
+      "reference_product_nnz": 0,
+      "resource": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m03-native-timeline-v1.settlement.json",
+        "sha256": "ee992e662d6bae3da35e8e25300c032342f466144a5860914d446a06e10cb646"
+      },
+      "rows": 128,
+      "tensor_fraction": 0.0,
+      "tile_count": 0
+    },
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        32896000
+      ],
+      "columns": 257,
+      "id": "m03-fp32",
+      "job_status": "passed",
+      "model": {
+        "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-dense-257-841028.json",
+        "sha256": "e73b8674c689fea2adc21cc78ba7f1ff9de53e1e352ac51353b32d2acfbc3f8c"
+      },
+      "modes": {
+        "nsys": {
+          "cost_ns": {
+            "assessment": 31027455,
+            "device_setup": 544813178,
+            "device_teardown": 102011605,
+            "execution": 24855979,
+            "host_preparation": 7559907,
+            "recovery": 0
+          },
+          "elapsed_ns": 718279147,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 3744504097,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/response.json",
+            "sha256": "52f96ff2a7c1c746c35803dbdd1f97e52223811be4cea75cc1b8b3ad633b7fb9"
+          },
+          "status": "retained",
+          "timeline": {
+            "api": [
+              {
+                "count": 1,
+                "duration_ns": 185406711,
+                "name": "cuCtxCreate_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 98473395,
+                "name": "cuCtxDestroy_v2"
+              },
+              {
+                "count": 151,
+                "duration_ns": 38881716,
+                "name": "cuStreamSynchronize"
+              },
+              {
+                "count": 32,
+                "duration_ns": 29202599,
+                "name": "cuMemcpyDtoHAsync_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 3394700,
+                "name": "cuMemFree_v2"
+              },
+              {
+                "count": 1024,
+                "duration_ns": 3132113,
+                "name": "cuLaunchKernel"
+              },
+              {
+                "count": 1,
+                "duration_ns": 927108,
+                "name": "cuModuleLoadData"
+              },
+              {
+                "count": 118,
+                "duration_ns": 426437,
+                "name": "cuMemcpyHtoDAsync_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 219120,
+                "name": "cuMemAlloc_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 134882,
+                "name": "cuStreamCreate"
+              },
+              {
+                "count": 1,
+                "duration_ns": 105218,
+                "name": "cuModuleUnload"
+              },
+              {
+                "count": 1,
+                "duration_ns": 8738,
+                "name": "cuStreamDestroy_v2"
+              },
+              {
+                "count": 66,
+                "duration_ns": 7165,
+                "name": "cuCtxSetCurrent"
+              }
+            ],
+            "copies": {
+              "bytes": 1215248,
+              "count": 150,
+              "duration_ns": 89630
+            },
+            "database": {
+              "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-nsys/trace.sqlite",
+              "sha256": "f75000ff06cb97d8e9163fece7a80bea495312c651268e8aa117256ac8e6913d"
+            },
+            "device": {
+              "l2CacheSize": 134217728,
+              "maxWarpsPerSm": 48,
+              "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "smCount": 188,
+              "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+            },
+            "inter_kernel_gap_ns": 4469423,
+            "kernels": [
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.0851063829787234,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 5984,
+                  "median": 5888.0,
+                  "minimum": 5728,
+                  "p05": 5728,
+                  "p95": 5984,
+                  "sum": 35264
+                },
+                "grid": 16,
+                "grid_warps": 128,
+                "grid_warps_fraction_device_capacity": 0.014184397163120567,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.17553191489361702,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 4800,
+                  "median": 4575.5,
+                  "minimum": 4544,
+                  "p05": 4544,
+                  "p95": 4800,
+                  "sum": 27647
+                },
+                "grid": 33,
+                "grid_warps": 264,
+                "grid_warps_fraction_device_capacity": 0.02925531914893617,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.0851063829787234,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 2361959,
+                  "median": 15552.0,
+                  "minimum": 15456,
+                  "p05": 15519,
+                  "p95": 15648,
+                  "sum": 11473576
+                },
+                "grid": 16,
+                "grid_warps": 128,
+                "grid_warps_fraction_device_capacity": 0.014184397163120567,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.17553191489361702,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 13696,
+                  "median": 10944.0,
+                  "minimum": 10879,
+                  "p05": 10912,
+                  "p95": 11040,
+                  "sum": 5497992
+                },
+                "grid": 33,
+                "grid_warps": 264,
+                "grid_warps_fraction_device_capacity": 0.02925531914893617,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 12,
+                  "maximum": 2656,
+                  "median": 2128.0,
+                  "minimum": 1824,
+                  "p05": 1824,
+                  "p95": 2656,
+                  "sum": 26432
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_totals",
+                "registers_per_thread": [
+                  22
+                ]
+              }
+            ],
+            "limits": "Grid capacity is a mathematical upper bound, not measured occupancy. API waits overlap GPU execution; do not add them to kernel time.",
+            "update_kernel_ns": 16971568,
+            "update_kernels": 1000,
+            "update_span_ns": 21440991,
+            "update_windows": 5
+          }
+        },
+        "plain-after": {
+          "cost_ns": {
+            "assessment": 14703209,
+            "device_setup": 239395945,
+            "device_teardown": 111003823,
+            "execution": 21705628,
+            "host_preparation": 7427549,
+            "recovery": 0
+          },
+          "elapsed_ns": 398472306,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 415621097,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-after/response.json",
+            "sha256": "ff1ca96ee5c5e8776c26d9431d581ec3e54b3da05572c86f9355a12c2f86252a"
+          },
+          "status": "retained"
+        },
+        "plain-before": {
+          "cost_ns": {
+            "assessment": 30590628,
+            "device_setup": 324804349,
+            "device_teardown": 114891132,
+            "execution": 21271536,
+            "host_preparation": 7550320,
+            "recovery": 0
+          },
+          "elapsed_ns": 506016981,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 523042230,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp32-plain-before/response.json",
+            "sha256": "e1bd2e78ffe48015f0137c8ae7ef1c0a89dfc9e79abc93c4d90b3c9a86a2dfcd"
+          },
+          "status": "retained"
+        }
+      },
+      "nonzeros": 32896,
+      "offline_import": false,
+      "operator_storage_bytes": 791052,
+      "packed_bytes": 0,
+      "profiler_execution_ratio_to_after": 1.1451398227224754,
+      "profiler_execution_ratio_to_before": 1.168508893763008,
+      "reference_product_nnz": 394752,
+      "resource": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m03-fp32-timeline-v1.settlement.json",
+        "sha256": "6c038e6bfcbc8a91be21d9851d1dfd9fc14990d04baf35cf3139e5d4f13d4dac"
+      },
+      "rows": 128,
+      "tensor_fraction": 0.0,
+      "tile_count": 0
+    },
+    {
+      "accepted_product_work": [
+        32768000,
+        32768000,
+        0,
+        32896000
+      ],
+      "columns": 257,
+      "id": "m03-fp4x4",
+      "job_status": "passed",
+      "model": {
+        "path": "artifacts/gpup-general-v1/models-development-v1/general-dev-dense-257-841028.json",
+        "sha256": "e73b8674c689fea2adc21cc78ba7f1ff9de53e1e352ac51353b32d2acfbc3f8c"
+      },
+      "modes": {
+        "nsys": {
+          "cost_ns": {
+            "assessment": 33322136,
+            "device_setup": 578211506,
+            "device_teardown": 98049410,
+            "execution": 53323142,
+            "host_preparation": 20345647,
+            "recovery": 0
+          },
+          "elapsed_ns": 789634667,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 3975546066,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/response.json",
+            "sha256": "3b8b0a15c3c09ed77064c052b29c2852ca5882ca1c4b8b54d461710b37a7fcbd"
+          },
+          "status": "retained",
+          "timeline": {
+            "api": [
+              {
+                "count": 1,
+                "duration_ns": 199174397,
+                "name": "cuCtxCreate_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 97654861,
+                "name": "cuCtxDestroy_v2"
+              },
+              {
+                "count": 32,
+                "duration_ns": 49815893,
+                "name": "cuMemcpyDtoHAsync_v2"
+              },
+              {
+                "count": 151,
+                "duration_ns": 42499844,
+                "name": "cuStreamSynchronize"
+              },
+              {
+                "count": 3024,
+                "duration_ns": 8743703,
+                "name": "cuLaunchKernel"
+              },
+              {
+                "count": 1,
+                "duration_ns": 919533,
+                "name": "cuModuleLoadData"
+              },
+              {
+                "count": 118,
+                "duration_ns": 541298,
+                "name": "cuMemcpyHtoDAsync_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 259973,
+                "name": "cuMemFree_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 214505,
+                "name": "cuMemAlloc_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 119051,
+                "name": "cuStreamCreate"
+              },
+              {
+                "count": 1,
+                "duration_ns": 97444,
+                "name": "cuModuleUnload"
+              },
+              {
+                "count": 1,
+                "duration_ns": 8051,
+                "name": "cuStreamDestroy_v2"
+              },
+              {
+                "count": 66,
+                "duration_ns": 7224,
+                "name": "cuCtxSetCurrent"
+              }
+            ],
+            "copies": {
+              "bytes": 1123656,
+              "count": 150,
+              "duration_ns": 95487
+            },
+            "database": {
+              "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-nsys/trace.sqlite",
+              "sha256": "7041a9f8b7fdbd9994429000ffe3a609564e11900420f8a9ac7565a351920277"
+            },
+            "device": {
+              "l2CacheSize": 134217728,
+              "maxWarpsPerSm": 48,
+              "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "smCount": 188,
+              "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+            },
+            "inter_kernel_gap_ns": 10561770,
+            "kernels": [
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 4032,
+                  "median": 3200.0,
+                  "minimum": 3136,
+                  "p05": 3168,
+                  "p95": 3232,
+                  "sum": 1604968
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_encode",
+                "registers_per_thread": [
+                  36
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.010638297872340425,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 4224,
+                  "median": 3968.0,
+                  "minimum": 3903,
+                  "p05": 3936,
+                  "p95": 4032,
+                  "sum": 1988266
+                },
+                "grid": 2,
+                "grid_warps": 16,
+                "grid_warps_fraction_device_capacity": 0.0017730496453900709,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_encode",
+                "registers_per_thread": [
+                  36
+                ]
+              },
+              {
+                "block": 32,
+                "block_count_fraction_sm_count": 0.0425531914893617,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 2308263,
+                  "median": 20320.0,
+                  "minimum": 20255,
+                  "p05": 20288,
+                  "p95": 23328,
+                  "sum": 19892396
+                },
+                "grid": 8,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_product",
+                "registers_per_thread": [
+                  48
+                ]
+              },
+              {
+                "block": 32,
+                "block_count_fraction_sm_count": 0.09042553191489362,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 2301224,
+                  "median": 11040.0,
+                  "minimum": 10976,
+                  "p05": 11007,
+                  "p95": 11104,
+                  "sum": 9255584
+                },
+                "grid": 17,
+                "grid_warps": 17,
+                "grid_warps_fraction_device_capacity": 0.0018838652482269503,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_product",
+                "registers_per_thread": [
+                  48
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.0851063829787234,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 6207,
+                  "median": 5904.0,
+                  "minimum": 5824,
+                  "p05": 5824,
+                  "p95": 6207,
+                  "sum": 35647
+                },
+                "grid": 16,
+                "grid_warps": 128,
+                "grid_warps_fraction_device_capacity": 0.014184397163120567,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.17553191489361702,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 4960,
+                  "median": 4832.0,
+                  "minimum": 4640,
+                  "p05": 4640,
+                  "p95": 4960,
+                  "sum": 28832
+                },
+                "grid": 33,
+                "grid_warps": 264,
+                "grid_warps_fraction_device_capacity": 0.02925531914893617,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.0851063829787234,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 10304,
+                  "median": 7936.0,
+                  "minimum": 7903,
+                  "p05": 7904,
+                  "p95": 8000,
+                  "sum": 4000792
+                },
+                "grid": 16,
+                "grid_warps": 128,
+                "grid_warps_fraction_device_capacity": 0.014184397163120567,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.17553191489361702,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 9600,
+                  "median": 6432.0,
+                  "minimum": 6368,
+                  "p05": 6400,
+                  "p95": 6496,
+                  "sum": 3268618
+                },
+                "grid": 33,
+                "grid_warps": 264,
+                "grid_warps_fraction_device_capacity": 0.02925531914893617,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 12,
+                  "maximum": 2752,
+                  "median": 2096.0,
+                  "minimum": 1792,
+                  "p05": 1792,
+                  "p95": 2752,
+                  "sum": 25376
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_totals",
+                "registers_per_thread": [
+                  22
+                ]
+              }
+            ],
+            "limits": "Grid capacity is a mathematical upper bound, not measured occupancy. API waits overlap GPU execution; do not add them to kernel time.",
+            "update_kernel_ns": 40010624,
+            "update_kernels": 3000,
+            "update_span_ns": 50572394,
+            "update_windows": 5
+          }
+        },
+        "plain-after": {
+          "cost_ns": {
+            "assessment": 14600932,
+            "device_setup": 259889324,
+            "device_teardown": 223278512,
+            "execution": 52077838,
+            "host_preparation": 16262198,
+            "recovery": 0
+          },
+          "elapsed_ns": 568619297,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 585885914,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-after/response.json",
+            "sha256": "660ea7ef8b909ba8e9f33b28cd10ac7f52cdac369400ea7f7b4f72480f383cbd"
+          },
+          "status": "retained"
+        },
+        "plain-before": {
+          "cost_ns": {
+            "assessment": 14883486,
+            "device_setup": 247615433,
+            "device_teardown": 96494686,
+            "execution": 52647968,
+            "host_preparation": 16259432,
+            "recovery": 0
+          },
+          "elapsed_ns": 430523067,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 447692891,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m03-fp4x4-plain-before/response.json",
+            "sha256": "0eede19e19e51482a7297de2fabd72c96b18fe3d73e0f4a22a2c1f63883a71f9"
+          },
+          "status": "retained"
+        }
+      },
+      "nonzeros": 32896,
+      "offline_import": false,
+      "operator_storage_bytes": 791052,
+      "packed_bytes": 172668,
+      "profiler_execution_ratio_to_after": 1.0239123598026478,
+      "profiler_execution_ratio_to_before": 1.0128243126116472,
+      "reference_product_nnz": 394752,
+      "resource": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m03-fp4x4-timeline-v1.settlement.json",
+        "sha256": "e3a0b9d13a5f33c481b2fa05dbb207bbc7a0d21d01bf7aa16df975d5178c8f67"
+      },
+      "rows": 128,
+      "tensor_fraction": 0.9961089494163424,
+      "tile_count": 32
+    },
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        371121000
+      ],
+      "columns": 16385,
+      "id": "m18-native",
+      "job_status": "passed",
+      "model": {
+        "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-dense_blocks-16385-819002.json",
+        "sha256": "7a7d157b3634a6ef27da8e85e91b6c52734102961d8e6234999aebfb19551a8a"
+      },
+      "modes": {
+        "nsys": {
+          "cost_ns": {
+            "assessment": 163038260,
+            "device_setup": 596699207,
+            "device_teardown": 79213971,
+            "execution": 109978775,
+            "host_preparation": 302357840,
+            "recovery": 0
+          },
+          "elapsed_ns": 1259560594,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 4362021827,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/response.json",
+            "sha256": "8c411e64e513d1a6350f29bed0904542a96756466f56e78147f97bbf326d6a18"
+          },
+          "status": "retained",
+          "timeline": {
+            "api": [
+              {
+                "count": 1,
+                "duration_ns": 216327786,
+                "name": "cuCtxCreate_v2"
+              },
+              {
+                "count": 32,
+                "duration_ns": 111136688,
+                "name": "cuMemcpyDtoHAsync_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 78270973,
+                "name": "cuCtxDestroy_v2"
+              },
+              {
+                "count": 139,
+                "duration_ns": 5801642,
+                "name": "cuStreamSynchronize"
+              },
+              {
+                "count": 106,
+                "duration_ns": 3422852,
+                "name": "cuMemcpyHtoDAsync_v2"
+              },
+              {
+                "count": 1012,
+                "duration_ns": 3221450,
+                "name": "cuLaunchKernel"
+              },
+              {
+                "count": 1,
+                "duration_ns": 966551,
+                "name": "cuModuleLoadData"
+              },
+              {
+                "count": 64,
+                "duration_ns": 750999,
+                "name": "cuMemAlloc_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 738685,
+                "name": "cuMemFree_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 148771,
+                "name": "cuModuleUnload"
+              },
+              {
+                "count": 1,
+                "duration_ns": 133280,
+                "name": "cuStreamCreate"
+              },
+              {
+                "count": 1,
+                "duration_ns": 12970,
+                "name": "cuStreamDestroy_v2"
+              },
+              {
+                "count": 66,
+                "duration_ns": 7812,
+                "name": "cuCtxSetCurrent"
+              }
+            ],
+            "copies": {
+              "bytes": 22572400,
+              "count": 138,
+              "duration_ns": 1461581
+            },
+            "database": {
+              "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-nsys/trace.sqlite",
+              "sha256": "d55a569131fcaccba50563b7aedb70258572b29eb8f310c288f47272bc6f306c"
+            },
+            "device": {
+              "l2CacheSize": 134217728,
+              "maxWarpsPerSm": 48,
+              "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "smCount": 188,
+              "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+            },
+            "inter_kernel_gap_ns": 7642228,
+            "kernels": [
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 10.898936170212766,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 1668014,
+                  "median": 55455.0,
+                  "minimum": 55232,
+                  "p05": 55295,
+                  "p95": 57408,
+                  "sum": 34041164
+                },
+                "grid": 2049,
+                "grid_warps": 16392,
+                "grid_warps_fraction_device_capacity": 1.8164893617021276,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 14.52659574468085,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 1702638,
+                  "median": 83519.0,
+                  "minimum": 83295,
+                  "p05": 83327,
+                  "p95": 85343,
+                  "sum": 66348888
+                },
+                "grid": 2731,
+                "grid_warps": 21848,
+                "grid_warps_fraction_device_capacity": 2.4210992907801416,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 12,
+                  "maximum": 90847,
+                  "median": 67375.5,
+                  "minimum": 50464,
+                  "p05": 50464,
+                  "p95": 90847,
+                  "sum": 861622
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_totals",
+                "registers_per_thread": [
+                  22
+                ]
+              }
+            ],
+            "limits": "Grid capacity is a mathematical upper bound, not measured occupancy. API waits overlap GPU execution; do not add them to kernel time.",
+            "update_kernel_ns": 100390052,
+            "update_kernels": 1000,
+            "update_span_ns": 108032280,
+            "update_windows": 5
+          }
+        },
+        "plain-after": {
+          "cost_ns": {
+            "assessment": 157452774,
+            "device_setup": 192446769,
+            "device_teardown": 105376163,
+            "execution": 108231144,
+            "host_preparation": 291675219,
+            "recovery": 0
+          },
+          "elapsed_ns": 863820806,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 978783871,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-after/response.json",
+            "sha256": "1ef7baa2c69e9278c2e7ca3894b7fb670e3979052d82a376273aed99d2a6def3"
+          },
+          "status": "retained"
+        },
+        "plain-before": {
+          "cost_ns": {
+            "assessment": 157634107,
+            "device_setup": 232699196,
+            "device_teardown": 84280778,
+            "execution": 112930188,
+            "host_preparation": 293047086,
+            "recovery": 0
+          },
+          "elapsed_ns": 888975744,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 1001258733,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-native-plain-before/response.json",
+            "sha256": "f7dde5c712b3089d71e4eff4e5f81f452e8f9da8cd65d90ee87c68826b4100b1"
+          },
+          "status": "retained"
+        }
+      },
+      "nonzeros": 371121,
+      "offline_import": false,
+      "operator_storage_bytes": 9059836,
+      "packed_bytes": 0,
+      "profiler_execution_ratio_to_after": 1.0161472099010613,
+      "profiler_execution_ratio_to_before": 0.9738651546387225,
+      "reference_product_nnz": 0,
+      "resource": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m18-native-timeline-v1.settlement.json",
+        "sha256": "83f1141d3bd7e7a79adcf583db1ccea879d9b226aeab83dcf2e9e3231817509d"
+      },
+      "rows": 21846,
+      "tensor_fraction": 0.0,
+      "tile_count": 0
+    },
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        371121000
+      ],
+      "columns": 16385,
+      "id": "m18-fp32",
+      "job_status": "passed",
+      "model": {
+        "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-dense_blocks-16385-819002.json",
+        "sha256": "7a7d157b3634a6ef27da8e85e91b6c52734102961d8e6234999aebfb19551a8a"
+      },
+      "modes": {
+        "nsys": {
+          "cost_ns": {
+            "assessment": 159076645,
+            "device_setup": 538950570,
+            "device_teardown": 191278772,
+            "execution": 200524153,
+            "host_preparation": 293516650,
+            "recovery": 0
+          },
+          "elapsed_ns": 1405490480,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 4631983407,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/response.json",
+            "sha256": "971611ba65d20223807adb1d9e30f46c7b644559a0740348e86ec157a631e767"
+          },
+          "status": "retained",
+          "timeline": {
+            "api": [
+              {
+                "count": 32,
+                "duration_ns": 215441186,
+                "name": "cuMemcpyDtoHAsync_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 181446731,
+                "name": "cuCtxCreate_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 180828358,
+                "name": "cuCtxDestroy_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 10242644,
+                "name": "cuMemFree_v2"
+              },
+              {
+                "count": 151,
+                "duration_ns": 6091081,
+                "name": "cuStreamSynchronize"
+              },
+              {
+                "count": 1024,
+                "duration_ns": 3275255,
+                "name": "cuLaunchKernel"
+              },
+              {
+                "count": 118,
+                "duration_ns": 3162638,
+                "name": "cuMemcpyHtoDAsync_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 931471,
+                "name": "cuModuleLoadData"
+              },
+              {
+                "count": 64,
+                "duration_ns": 896451,
+                "name": "cuMemAlloc_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 153950,
+                "name": "cuModuleUnload"
+              },
+              {
+                "count": 1,
+                "duration_ns": 121444,
+                "name": "cuStreamCreate"
+              },
+              {
+                "count": 1,
+                "duration_ns": 10610,
+                "name": "cuStreamDestroy_v2"
+              },
+              {
+                "count": 66,
+                "duration_ns": 7932,
+                "name": "cuCtxSetCurrent"
+              }
+            ],
+            "copies": {
+              "bytes": 27376448,
+              "count": 150,
+              "duration_ns": 1241203
+            },
+            "database": {
+              "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-nsys/trace.sqlite",
+              "sha256": "5152e2fbe8a4d0cb606733107cbdbf0917198fad558c8b215651f0ed0aa5240e"
+            },
+            "device": {
+              "l2CacheSize": 134217728,
+              "maxWarpsPerSm": 48,
+              "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "smCount": 188,
+              "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+            },
+            "inter_kernel_gap_ns": 5921150,
+            "kernels": [
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 10.898936170212766,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 26528,
+                  "median": 26288.0,
+                  "minimum": 26112,
+                  "p05": 26112,
+                  "p95": 26528,
+                  "sum": 157823
+                },
+                "grid": 2049,
+                "grid_warps": 16392,
+                "grid_warps_fraction_device_capacity": 1.8164893617021276,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 14.52659574468085,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 33119,
+                  "median": 32895.5,
+                  "minimum": 32608,
+                  "p05": 32608,
+                  "p95": 33119,
+                  "sum": 197309
+                },
+                "grid": 2731,
+                "grid_warps": 21848,
+                "grid_warps_fraction_device_capacity": 2.4210992907801416,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 10.898936170212766,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 2548036,
+                  "median": 82591.0,
+                  "minimum": 82367,
+                  "p05": 82431,
+                  "p95": 1887499,
+                  "sum": 102100875
+                },
+                "grid": 2049,
+                "grid_warps": 16392,
+                "grid_warps_fraction_device_capacity": 1.8164893617021276,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 14.52659574468085,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 2559268,
+                  "median": 117726.0,
+                  "minimum": 117439,
+                  "p05": 117503,
+                  "p95": 119614,
+                  "sum": 85510715
+                },
+                "grid": 2731,
+                "grid_warps": 21848,
+                "grid_warps_fraction_device_capacity": 2.4210992907801416,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 12,
+                  "maximum": 90975,
+                  "median": 68751.5,
+                  "minimum": 49728,
+                  "p05": 49728,
+                  "p95": 90975,
+                  "sum": 911929
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_totals",
+                "registers_per_thread": [
+                  22
+                ]
+              }
+            ],
+            "limits": "Grid capacity is a mathematical upper bound, not measured occupancy. API waits overlap GPU execution; do not add them to kernel time.",
+            "update_kernel_ns": 187611590,
+            "update_kernels": 1000,
+            "update_span_ns": 193532740,
+            "update_windows": 5
+          }
+        },
+        "plain-after": {
+          "cost_ns": {
+            "assessment": 167699933,
+            "device_setup": 444274082,
+            "device_teardown": 127725507,
+            "execution": 228045059,
+            "host_preparation": 298486315,
+            "recovery": 0
+          },
+          "elapsed_ns": 1299857380,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 1423963487,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-after/response.json",
+            "sha256": "6f9c58881fa03b329902f23268afa39c198e671765cf80a0f30f9a8f6ac28ee9"
+          },
+          "status": "retained"
+        },
+        "plain-before": {
+          "cost_ns": {
+            "assessment": 159230335,
+            "device_setup": 240568747,
+            "device_teardown": 76690426,
+            "execution": 163389131,
+            "host_preparation": 290972695,
+            "recovery": 0
+          },
+          "elapsed_ns": 941440387,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 1052015043,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp32-plain-before/response.json",
+            "sha256": "227565c882ae6c89bcdf8a729417df10fc074af24f76ba4daa8a3338b3d57cd9"
+          },
+          "status": "retained"
+        }
+      },
+      "nonzeros": 371121,
+      "offline_import": false,
+      "operator_storage_bytes": 9059836,
+      "packed_bytes": 0,
+      "profiler_execution_ratio_to_after": 0.8793181219506273,
+      "profiler_execution_ratio_to_before": 1.227279634653299,
+      "reference_product_nnz": 4453452,
+      "resource": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m18-fp32-timeline-v1.settlement.json",
+        "sha256": "7ca5c64b600f12eba44f9c3f97574538295583b52ba8368e5004f78c0511fa53"
+      },
+      "rows": 21846,
+      "tensor_fraction": 0.0,
+      "tile_count": 0
+    },
+    {
+      "accepted_product_work": [
+        349222000,
+        349222000,
+        0,
+        371121000
+      ],
+      "columns": 16385,
+      "id": "m18-fp4x4",
+      "job_status": "passed",
+      "model": {
+        "path": "artifacts/gpup-general-v1/models-large-v1/general-dev-dense_blocks-16385-819002.json",
+        "sha256": "7a7d157b3634a6ef27da8e85e91b6c52734102961d8e6234999aebfb19551a8a"
+      },
+      "modes": {
+        "nsys": {
+          "cost_ns": {
+            "assessment": 168631545,
+            "device_setup": 683447898,
+            "device_teardown": 117178034,
+            "execution": 188757752,
+            "host_preparation": 474405992,
+            "recovery": 0
+          },
+          "elapsed_ns": 1645870028,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 5071481504,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/response.json",
+            "sha256": "ce6819de35c5e817da6ad8ccce468a66b97f67f8261a63e5497ef509a956dc5d"
+          },
+          "status": "retained",
+          "timeline": {
+            "api": [
+              {
+                "count": 1,
+                "duration_ns": 208116038,
+                "name": "cuCtxCreate_v2"
+              },
+              {
+                "count": 32,
+                "duration_ns": 188853297,
+                "name": "cuMemcpyDtoHAsync_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 116115111,
+                "name": "cuCtxDestroy_v2"
+              },
+              {
+                "count": 3024,
+                "duration_ns": 8932629,
+                "name": "cuLaunchKernel"
+              },
+              {
+                "count": 118,
+                "duration_ns": 4591596,
+                "name": "cuMemcpyHtoDAsync_v2"
+              },
+              {
+                "count": 151,
+                "duration_ns": 3577725,
+                "name": "cuStreamSynchronize"
+              },
+              {
+                "count": 1,
+                "duration_ns": 1060600,
+                "name": "cuModuleLoadData"
+              },
+              {
+                "count": 64,
+                "duration_ns": 937515,
+                "name": "cuMemAlloc_v2"
+              },
+              {
+                "count": 64,
+                "duration_ns": 861342,
+                "name": "cuMemFree_v2"
+              },
+              {
+                "count": 1,
+                "duration_ns": 156918,
+                "name": "cuModuleUnload"
+              },
+              {
+                "count": 1,
+                "duration_ns": 129987,
+                "name": "cuStreamCreate"
+              },
+              {
+                "count": 1,
+                "duration_ns": 10576,
+                "name": "cuStreamDestroy_v2"
+              },
+              {
+                "count": 66,
+                "duration_ns": 7557,
+                "name": "cuCtxSetCurrent"
+              }
+            ],
+            "copies": {
+              "bytes": 29573728,
+              "count": 150,
+              "duration_ns": 1893900
+            },
+            "database": {
+              "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-nsys/trace.sqlite",
+              "sha256": "128f94e6515f3e6bc51f090f3a376aea684fa521e78bb496904f2ee548733181"
+            },
+            "device": {
+              "l2CacheSize": 134217728,
+              "maxWarpsPerSm": 48,
+              "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+              "smCount": 188,
+              "uuid": "6721b13a-30f9-83ec-dace-ba2d9738556f"
+            },
+            "inter_kernel_gap_ns": 20527375,
+            "kernels": [
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.34574468085106386,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 4672,
+                  "median": 4064.0,
+                  "minimum": 4000,
+                  "p05": 4032,
+                  "p95": 4256,
+                  "sum": 2043976
+                },
+                "grid": 65,
+                "grid_warps": 520,
+                "grid_warps_fraction_device_capacity": 0.057624113475177305,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_encode",
+                "registers_per_thread": [
+                  36
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.4574468085106383,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 4896,
+                  "median": 4064.0,
+                  "minimum": 4032,
+                  "p05": 4064,
+                  "p95": 4448,
+                  "sum": 2053866
+                },
+                "grid": 86,
+                "grid_warps": 688,
+                "grid_warps_fraction_device_capacity": 0.07624113475177305,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_encode",
+                "registers_per_thread": [
+                  36
+                ]
+              },
+              {
+                "block": 32,
+                "block_count_fraction_sm_count": 5.452127659574468,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 1707629,
+                  "median": 9312.0,
+                  "minimum": 9248,
+                  "p05": 9280,
+                  "p95": 13504,
+                  "sum": 6541884
+                },
+                "grid": 1025,
+                "grid_warps": 1025,
+                "grid_warps_fraction_device_capacity": 0.11358599290780141,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_product",
+                "registers_per_thread": [
+                  48
+                ]
+              },
+              {
+                "block": 32,
+                "block_count_fraction_sm_count": 7.26595744680851,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 10719,
+                  "median": 7008.0,
+                  "minimum": 6943,
+                  "p05": 6975,
+                  "p95": 9920,
+                  "sum": 3628908
+                },
+                "grid": 1366,
+                "grid_warps": 1366,
+                "grid_warps_fraction_device_capacity": 0.15137411347517732,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_product",
+                "registers_per_thread": [
+                  48
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 10.898936170212766,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 26784,
+                  "median": 26335.5,
+                  "minimum": 26080,
+                  "p05": 26080,
+                  "p95": 26784,
+                  "sum": 158014
+                },
+                "grid": 2049,
+                "grid_warps": 16392,
+                "grid_warps_fraction_device_capacity": 1.8164893617021276,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 14.52659574468085,
+                "duration_ns": {
+                  "count": 6,
+                  "maximum": 33792,
+                  "median": 32847.5,
+                  "minimum": 32416,
+                  "p05": 32416,
+                  "p95": 33792,
+                  "sum": 197439
+                },
+                "grid": 2731,
+                "grid_warps": 21848,
+                "grid_warps_fraction_device_capacity": 2.4210992907801416,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_reference",
+                "registers_per_thread": [
+                  40
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 10.898936170212766,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 2500677,
+                  "median": 57663.0,
+                  "minimum": 57375,
+                  "p05": 57471,
+                  "p95": 59200,
+                  "sum": 42309563
+                },
+                "grid": 2049,
+                "grid_warps": 16392,
+                "grid_warps_fraction_device_capacity": 1.8164893617021276,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 14.52659574468085,
+                "duration_ns": {
+                  "count": 500,
+                  "maximum": 4717677,
+                  "median": 91103.0,
+                  "minimum": 90847,
+                  "p05": 90911,
+                  "p95": 92863,
+                  "sum": 104121784
+                },
+                "grid": 2731,
+                "grid_warps": 21848,
+                "grid_warps_fraction_device_capacity": 2.4210992907801416,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_step",
+                "registers_per_thread": [
+                  42
+                ]
+              },
+              {
+                "block": 256,
+                "block_count_fraction_sm_count": 0.005319148936170213,
+                "duration_ns": {
+                  "count": 12,
+                  "maximum": 90719,
+                  "median": 68623.0,
+                  "minimum": 50111,
+                  "p05": 50111,
+                  "p95": 90719,
+                  "sum": 910902
+                },
+                "grid": 1,
+                "grid_warps": 8,
+                "grid_warps_fraction_device_capacity": 0.0008865248226950354,
+                "local_memory_bytes_per_thread": [
+                  0
+                ],
+                "name": "tensor_totals",
+                "registers_per_thread": [
+                  22
+                ]
+              }
+            ],
+            "limits": "Grid capacity is a mathematical upper bound, not measured occupancy. API waits overlap GPU execution; do not add them to kernel time.",
+            "update_kernel_ns": 160699981,
+            "update_kernels": 3000,
+            "update_span_ns": 181227356,
+            "update_windows": 5
+          }
+        },
+        "plain-after": {
+          "cost_ns": {
+            "assessment": 165820874,
+            "device_setup": 210339861,
+            "device_teardown": 106648728,
+            "execution": 157383396,
+            "host_preparation": 474450223,
+            "recovery": 0
+          },
+          "elapsed_ns": 1123687409,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 1249190251,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-after/response.json",
+            "sha256": "5d83ccaa9c2681e2afcd03b6cf388f5b868ba339b4d9fa13048e5a4ddd7abb0b"
+          },
+          "status": "retained"
+        },
+        "plain-before": {
+          "cost_ns": {
+            "assessment": 159841741,
+            "device_setup": 248770890,
+            "device_teardown": 108960215,
+            "execution": 157622257,
+            "host_preparation": 462885310,
+            "recovery": 0
+          },
+          "elapsed_ns": 1154065065,
+          "exact_numerical_match": true,
+          "process": {
+            "outer_ns": 1272473200,
+            "returncode": 0
+          },
+          "response": {
+            "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m18-fp4x4-plain-before/response.json",
+            "sha256": "4c62a8c0e45893e1f93ea7b1be17c3eb679a07398c8d4660bf14e6245112c388"
+          },
+          "status": "retained"
+        }
+      },
+      "nonzeros": 371121,
+      "offline_import": false,
+      "operator_storage_bytes": 9059836,
+      "packed_bytes": 5271404,
+      "profiler_execution_ratio_to_after": 1.1993498475531688,
+      "profiler_execution_ratio_to_before": 1.1975323510308573,
+      "reference_product_nnz": 4453452,
+      "resource": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m18-fp4x4-timeline-v1.settlement.json",
+        "sha256": "e311dec106cc6c4ff3d46d7f150014cf032a9d4b4c2b4bc3cb624489de41a4da"
+      },
+      "rows": 21846,
+      "tensor_fraction": 0.9409922909239844,
+      "tile_count": 852
+    }
+  ],
+  "completed_timeline_jobs": 8,
+  "counters": {
+    "attempted": 1,
+    "evidence": {
+      "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/m21-fp4x4-ncu-tensor_product/profile.txt",
+      "sha256": "816f96130a67c0ba445b49518db094a136b7c2cf4c607c59dd708430af17f054"
+    },
+    "permission_unchanged": true,
+    "planned": 5,
+    "reason": "ERR_NVGPUCTRPERM",
+    "status": "unavailable",
+    "unattempted": 4
+  },
+  "failed_jobs": [
+    {
+      "cpu_ns": 720000000000,
+      "gpu_ns": 180000000000,
+      "job": "tensor-diagnose-m21-fp4x4-timeline-v1",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m21-fp4x4-timeline-v1.settlement.json",
+        "sha256": "87d0cb6241532749866ce2fc926e85663343239762ef18cb9dd2d68a47e51c1d"
+      }
+    },
+    {
+      "cpu_ns": 720000000000,
+      "gpu_ns": 180000000000,
+      "job": "tensor-diagnose-m21-fp4x4-product-v1",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-m21-fp4x4-product-v1.settlement.json",
+        "sha256": "e5de361ec41868809f4550f69a875c28881d8b9c785490a4533b1d5d83707786"
+      }
+    },
+    {
+      "cpu_ns": 360000000000,
+      "gpu_ns": 0,
+      "job": "tensor-diagnose-analysis-v1",
+      "settlement": {
+        "path": "artifacts/gpup-general-v1/resources/tensor-diagnose-analysis-v1.settlement.json",
+        "sha256": "7f0130303d6ea1f0f78f4f54bde07b5dd9d66c16fdc3b69c94b3c1cdeff31377"
+      }
+    }
+  ],
+  "freeze": {
+    "path": "artifacts/gpup-general-v1/tensor-diagnosis-v1/freeze.json",
+    "sha256": "fb362bc8a09a93510c5571d28e748cb20a0296554c4229a7bd5c9d9407f133ab"
+  },
+  "kind": "unchanged-image-tensor-attribution",
+  "limits": [
+    "No changed solver or CUDA image.",
+    "The first timeline was imported offline; its failed receipt and missing after observation remain.",
+    "Kernel timings are instrumented descriptive observations on a shared GPU, not new solve-time evidence.",
+    "No hardware counter attribution between FP64 guards, memory stalls and component reconstruction is available.",
+    "All 26 retained numerical transcripts exactly match the prior admitted 500-update ablation."
+  ],
+  "matched_responses": 26,
+  "planned_timeline_responses": 27,
+  "recovered_timelines": 9,
+  "sass": {
+    "source": {
+      "path": "artifacts/gpup-general-v1/tensor-image-v6/tensor.sass",
+      "sha256": "24711984c115d5bd3efd0ac6864e4c82814885f087f07d35611339e6049e89fc"
+    },
+    "spill_instructions": {
+      "tensor_encode": {
+        "LDL": 0,
+        "STL": 0
+      },
+      "tensor_product": {
+        "LDL": 0,
+        "STL": 0
+      },
+      "tensor_step": {
+        "LDL": 0,
+        "STL": 0
+      }
+    }
+  },
+  "sources": [
+    {
+      "path": "research/lp-general-lowbit/src/control.rs",
+      "sha256": "ba1dcf14512f12db9aa2c6571251fa3e38849bf91dfb91e8c28b9d22dfba78db"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/device.rs",
+      "sha256": "230b0b331670d830b07e31f0bb6244218eca12e8ab957a316015bd3dba4547c0"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu.rs",
+      "sha256": "259f2831474cdce621ba3f712dc052cdcbc3c7485414812444d492eb697ed8fb"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu_tensor.rs",
+      "sha256": "5d7f438744729b7e00bc8973d4857684867a439e1a5145b39855dd5122fe8b23"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/implied.rs",
+      "sha256": "a59c82823e6d7efd1cb3bc3b169b8257f277771d4195d5442cfab8dc34cc4c49"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/lib.rs",
+      "sha256": "55ed904aee40e58ae646fb374e76e36408c5aaa0850ca36cfb9cb4e0192dc1b0"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/main.rs",
+      "sha256": "93b522b1eb0535812e865482bca09b3db2320cc3a1ece21eae732c9cacd46284"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/merit.rs",
+      "sha256": "5dda788bf7be1334b8c0cf933bb8b616ed4ee3476b0e472f2ecac310d8a2e47c"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/operator.rs",
+      "sha256": "b748fcc10347891fc5bd1048258c80114e44718e72fff53ed9cd92e076d75b70"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/repair.rs",
+      "sha256": "a25e610d1d18b4a3a79ab0d93acda526632cd0ce713fc03fa2437b338acbefb2"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/solve.rs",
+      "sha256": "e74869ea07c4016c2ace4c8ca69756efa60eebda99cf74e889bdb3e995184568"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor.rs",
+      "sha256": "17fa8c3862aa3b3c990fe62f426064295fa588d2ebfab6e845b32afea26de9af"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor_device.rs",
+      "sha256": "47d8bec45f10fd9d365b4070490f167e4db980a34dc89bbe32911d8d38a5ce5f"
+    },
+    {
+      "path": "research/lp-general-lowbit/cuda/lowbit.cu",
+      "sha256": "f6b42e23746b5d6056e1cb51affb12d9746d3e03fe6e7d79aee513f4060804cb"
+    },
+    {
+      "path": "research/lp-general-lowbit/cuda/tensor.cu",
+      "sha256": "5d0cf0b3a04c8881aecd4ff6591d1db35d183432fb5a0dad9cd56dd0b3bdbd31"
+    }
+  ],
+  "status": "diagnosis-complete-with-counter-refusal"
+}
