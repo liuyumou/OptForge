@@ -1,3 +1,46 @@
+# Current agent handoff: preparation/control overhead delivered (2026-11-19)
+
+The user requests reducing preparation and control so fast FP4 execution lowers
+complete single-solve time. Opt-in scale-image-v14 adds exact gathered products,
+scoped host workers and reusable scratch, parallel canonical FP4 packing and
+checked indexed construction in an isolated host derivative. Original arithmetic,
+strict certificates, public source/defaults and fast-image-v10 CUDA stay exact.
+
+All five cohorts complete 150/150 supervised measurements. The first shared
+implementation has a 1.029 jointly certified complete-cost median. Final v12/v14
+preparation ratios are 1.073 at 1 M and 1.055 on the limited 16 M extension;
+certified complete-cost medians are 1.024 and 1.016. The final comparisons retain
+18 and six exact non-deadline pairs. Every lower-scale version/lane certifies
+5/8; both public models hit the final 10-second limit. Keep all uncertified,
+regressing and deadline observations. Separate cohort medians are not cumulative.
+
+Coarser 500-update control increases work and regresses certified total time
+(100/500 ratios 0.928 at lower scale and 0.933 at 16 M); retain 100-update control.
+The final coupled 16 M FP4 solve takes 19.263 seconds versus 20.119 native and
+19.917 FP32, with 75% accepted FP4 work and unchanged 2500 updates. Execution is
+0.314 versus native's 1.666 seconds, but host work dominates. Broad repeatable
+FP4 superiority remains unestablished. Keep the full lower-scale roster, twelve
+16 M capacity refusals and four other unmeasured capacity-admitted models.
+
+Fresh native acceptance passes 638 Rust / 827 Python; the final image passes
+40 isolated Rust tests. Both admitted images pass 60 exact GPU continuations
+and four 20-case sanitizer suites. Extracted-root replay verifies 25843 files,
+150 campaign and 302 admission responses, and 3294 assessments / 846 distinct
+serial witnesses. All 19520 checked prior host-cost scientific bindings remain
+exact. Large evidence stays local in 26 parts. Four failed build/native/packaging
+reservations retain sources and full 8200 CPU seconds, zero GPU. No attempted
+scientific cell is retried; all completed cleanup is empty.
+
+The independent 240000 CPU / 30000 GPU allocation stays open. Operational
+readmission v7/v8 binds prospective phase transfers, with unchanged four slots,
+16 GiB sampled RSS, 12 GiB device buffers, pinned lease, one-second supervision
+and all 100 ms advisories. Commit locally only; no public adoption, confirmation
+or publication is released.
+
+Open settled checkpoint: 222683.436386676 CPU / 29019.968674596 GPU seconds.
+
+Report: [preparation/control](docs/benchmarks/lp-general-prep-control.md).
+
 # Current agent handoff: shared host overhead delivered (2026-11-19)
 
 The user requests reducing preparation, assessment and control time. The opt-in

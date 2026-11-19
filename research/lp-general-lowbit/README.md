@@ -1,5 +1,17 @@
 # General sparse low-bit LP research executor
 
+The [preparation/control continuation](../../docs/benchmarks/lp-general-prep-control.md)
+adds exact gathered host products, scoped worker/buffer reuse and parallel
+canonical FP4 packing in scale-image-v12. Scale-image-v14 adds checked indexed
+preparation in an isolated host derivative; all public source files stay exact.
+Default control remains every 100 updates. The separately evaluated 500-update
+setting in v12 changes trajectories and regresses the certified-solve median.
+The final indexed comparison reduces preparation by about 6.8% at lower scale
+and 5.2% on the limited 16 M extension; certified complete-time medians improve
+about 2.4% and 1.6%. All 150 measurements are retained. Broad FP4 complete-time
+superiority remains unestablished.
+Public solver defaults and the fast-image-v10 CUDA image remain unchanged.
+
 The [host-cost continuation](../../docs/benchmarks/lp-general-host-cost.md)
 optimizes the existing opt-in `host_certificates` path. Original host products,
 control decisions and spectral preparation are preserved. Historical

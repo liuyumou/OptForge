@@ -74,7 +74,7 @@ version = "0.1.0"
 dependencies = [
  "optimizer-core",
  "optimizer-cuda-sys",
- "optimizer-lp",
+ "optimizer-lp-host",
  "serde",
  "serde_json",
  "sha2",
@@ -104,7 +104,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "optimizer-lp"
+name = "optimizer-lp-host"
 version = "0.1.0"
 dependencies = [
  "optimizer-core",

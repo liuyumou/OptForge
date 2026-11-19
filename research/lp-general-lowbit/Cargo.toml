@@ -7,7 +7,7 @@ license = "MIT"
 [workspace]
 [dependencies]
 optimizer-core = { path = "../../crates/optimizer-core" }
-optimizer-lp = { path = "../../crates/optimizer-lp" }
+optimizer-lp = { package = "optimizer-lp-host", path = "src/host-lp", features = ["precision-research"] }
 optimizer-cuda-sys = { path = "../lp-tensor-expanded-device/cuda-sys" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0", features = ["float_roundtrip"] }

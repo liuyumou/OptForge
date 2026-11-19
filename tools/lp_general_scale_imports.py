@@ -2,7 +2,8 @@
 import argparse
 from lp_general_common import ROOT,BASE,put,ref,require,load
 SOURCES=['research/lp-mixed2-checker2/src/exact_math.rs','research/lp-mixed2-checker2/src/cached_certificate.rs',
-         'research/lp-fp4-checker/src/prepared_feasibility.rs','crates/optimizer-lp/src/outward.rs','crates/optimizer-lp/src/reduce.rs']
+         'research/lp-fp4-checker/src/prepared_feasibility.rs','crates/optimizer-lp/src/outward.rs','crates/optimizer-lp/src/reduce.rs',
+         'research/lp-general-lowbit/src/host-lp/Cargo.toml']
 
 def snapshot(identity):
     out=BASE/'sources'/identity/'checker-imports';out.mkdir(exist_ok=False);rows=[]

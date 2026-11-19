@@ -31,6 +31,55 @@ fn settings(format: Format) -> Settings {
     }
 }
 #[test]
+fn indexed_constructor_preserves_dense_sparse_ids_senses_and_refusals() {
+    for ids in [
+        [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        [0, 1, 3, 7, 11, 17, 23, 31, 100],
+        [7, 10, 13, 16, 19, 22, 25, 28, 31],
+        [
+            u32::MAX - 8,
+            u32::MAX - 7,
+            u32::MAX - 6,
+            u32::MAX - 5,
+            u32::MAX - 4,
+            u32::MAX - 3,
+            u32::MAX - 2,
+            u32::MAX - 1,
+            u32::MAX,
+        ],
+    ] {
+        for sense in ["minimize", "maximize"] {
+            for discrete in [false, true] {
+                let mut doc: serde_json::Value =
+                    serde_json::from_str(&model(9, 5).to_json().unwrap()).unwrap();
+                for (v, id) in doc["variables"].as_array_mut().unwrap().iter_mut().zip(ids) {
+                    v["id"] = json!(id);
+                }
+                for row in doc["constraints"].as_array_mut().unwrap() {
+                    for t in row["terms"].as_array_mut().unwrap() {
+                        t["variable_id"] =
+                            json!(ids[(t["variable_id"].as_u64().unwrap() as usize - 7) / 3]);
+                    }
+                }
+                doc["objective"]["terms"][0]["variable_id"] = json!(ids[0]);
+                doc["objective"]["sense"] = json!(sense);
+                if discrete {
+                    doc["variables"][0]["domain"] = json!("integer");
+                }
+                let model = Model::from_json(&serde_json::to_vec(&doc).unwrap()).unwrap();
+                let original = LinearProgram::new(&model)
+                    .map(|p| p.matrix_sha256())
+                    .map_err(|e| e.to_string());
+                let indexed = LinearProgram::new_indexed(&model)
+                    .map(|p| p.matrix_sha256())
+                    .map_err(|e| e.to_string());
+                assert_eq!(original, indexed);
+                assert_eq!(original.is_err(), discrete);
+            }
+        }
+    }
+}
+#[test]
 fn large_rectangular_storage_is_linear_and_transpose_is_canonical() {
     let model = model(32769, 3);
     let p = LinearProgram::new(&model).unwrap();
