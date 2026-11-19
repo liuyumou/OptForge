@@ -1,3 +1,39 @@
+# Current agent handoff: shared host overhead delivered (2026-11-19)
+
+The user requests reducing preparation, assessment and control time. The opt-in
+scale-image-v9 retains the fast-image-v10 CUDA image and original host products,
+control cadence, strict certificate criteria and public defaults. Borrowed
+immutable feasibility preparation, checked direct dense-ID lookup and smaller
+exact-certificate scratch reduce shared checker overhead. The first in-place
+product candidate's preparation regression and all its observations remain.
+
+Both fixed-work cohorts complete 96/96 measurements with 48 exact pairs each.
+Final descriptive assessment / complete-cost ratios are 1.267 / 1.067. The
+ordinary single-solve cohort completes 48/48: every version/lane certifies 5/8,
+15 jointly certified pairs have a 1.052 complete-cost median, and all 21 pairs
+without deadlines retain exact full transcripts. Three scpm1 controls hit the
+wall limit while the candidate reaches 20000 updates; none certifies. All 509
+common intermediate assessments match. The coupled actual-FP4 solve remains
+flat, including 75% accepted FP4 product work; broad FP4 superiority remains
+unestablished. Preparation, control, transport and general convergence remain
+open targets; do not narrow to prepared workflows or native fallback.
+
+Native acceptance passes 638 Rust / 827 Python. Each image passes 37 isolated
+Rust tests, 60 exact GPU continuations and four 20-case sanitizer suites.
+Extracted-root replay verifies 20092 files, 240 campaign and 280 admission
+responses, and 2749 assessments / 483 distinct serial witnesses. All 91476
+checked prior scale-evidence bindings stay exact. All new measurements have
+complete supervision; no new failed reservation or missing cell is introduced.
+Large evidence stays local in 23 archive parts. Commit locally only; no public
+adoption, confirmation or publication is released.
+
+The 240000 CPU / 30000 GPU allocation stays open under unchanged four slots,
+16 GiB sampled RSS, 12 GiB device buffers, pinned lease, one-second supervision
+and all 100 ms advisories. Every completed reservation has empty cleanup.
+
+Open settled checkpoint: 195952.885224432 CPU / 25975.890687406 GPU seconds.
+Report: [host cost](docs/benchmarks/lp-general-host-cost.md).
+
 # Current agent handoff: general LP PR acceptance complete (2026-11-17)
 
 The user authorizes publishing and normally merging the eight original feature

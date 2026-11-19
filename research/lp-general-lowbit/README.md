@@ -1,5 +1,10 @@
 # General sparse low-bit LP research executor
 
+The [host-cost continuation](../../docs/benchmarks/lp-general-host-cost.md)
+optimizes the existing opt-in `host_certificates` path. Original host products,
+control decisions and spectral preparation are preserved. Historical
+scale-image-v6 remains the matched control; public solver defaults are unchanged.
+
 See [SPEC-0045](../../docs/specifications/SPEC-0045-general-lowbit-lp.md).
 This isolated candidate targets fresh single solves of general LPs. It does not
 change public solver defaults and has no broad performance claim yet.

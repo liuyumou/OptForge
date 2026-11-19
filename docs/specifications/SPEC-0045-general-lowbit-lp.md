@@ -1,5 +1,60 @@
 # SPEC-0045: General low-bit LP implementation and evaluation
 
+## Shared host overhead continuation (2026-11-19)
+
+The user requests reducing preparation, assessment and control cost. Optimize
+only the isolated host/checker implementation: bounded scratch reductions,
+borrowed immutable feasibility geometry and exact original-order products.
+Preserve all arithmetic order, signed-zero/error behavior, control/certificate
+cadences, strict original-model criteria and the fast-image-v10 device image.
+Historical executors and imported checker sources stay exact. No endpoint-answer
+cache or public-default change is authorized by this continuation.
+
+Prospectively rebalance unchanged totals to CPU phase caps implementation 20000,
+native 32000, admission 48000, development 90000, confirmation 2000, reporting
+44000 and cleanup 4000 seconds; GPU caps admission 9000, development 20500,
+confirmation 500 and reporting 0. No previous charge changes. Fresh operational
+readmission precedes device work. The four CPU slots, 16 GiB sampled RSS,
+12 GiB device buffers, pinned lease, one-second supervision and all 100 ms
+advisories remain mandatory.
+
+Admit exact products/preparation and complete feasibility/certificate reports,
+including signed zeros, subnormals, overflow, cancellation and first errors.
+Run native acceptance, exact GPU continuations/recovery/cancellation and four
+scoped sanitizers before freezing a matched development cohort. The pilot uses
+all six connected 1 M structural families and square31/scpm1, native/FP32/FP4x2,
+two rotated-order repetitions, identical 1000-update requests, 250-update
+certificates, 100-update control and 30-second solve limits. Reserve 300 seconds
+per model and 900 for scpm1, with complete-cohort preflight and fresh independent
+final and historical endpoint checks. Retain every failure and no cell retries.
+Report preparation, assessment, execution and complete costs separately; exact
+equal-work pairs support implementation attribution, not broad confirmation.
+The historical full rosters and capacity refusals remain visible.
+
+The first overhead pilot remains immutable. Its structural-family preparation
+costs regress slightly with in-place host products, despite lower assessment
+costs. A separately identified scale-image-v9 restores the admitted original
+host-product implementation and retains only the exact checker scratch and
+borrowed-preparation changes. Admit its CPU arithmetic, whole GPU continuation
+and all four sanitizers before a second complete matched cohort with the same
+eight models, requests, repetitions and reservations. The unchanged public/core
+sources reuse the passing native gate; isolated final-source acceptance is fresh.
+Both complete cohorts remain visible, with no attempted-cell retries or pooling
+of different implementations. No phase or total ceiling changes.
+
+After final fixed-work attribution, evaluate the same eight-model roster as
+ordinary single solves with the final image and scale-image-v6 controls, all
+three lanes, one rotated-order repetition, 20000-update maximum, 500-update
+certificates and unchanged 100-update control / 30-second solve limit. Reserve
+300 seconds per structural model, except 240 for previously certified tall,
+coupled and degenerate models; reserve 450 for square31 and 900 for scpm1.
+The whole 48-cell cohort requires 2970 GPU / 11880 CPU reservation seconds and
+must fit the unchanged phase ceilings before launch. Include up to 42 trajectory
+snapshots in full memory and response preflight. Keep independent final and
+historical endpoint checks, every uncertified/time-limited result and exact
+equal-work comparisons. Only jointly certified pairs support solve-time ratios;
+bounded-work results and this one-repeat development cohort remain separate.
+
 ## Scale development continuation (2026-11-17)
 
 After the frozen 16 M cohort, an explicit x86-64-v4 host build may be compared

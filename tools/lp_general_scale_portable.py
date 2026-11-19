@@ -120,14 +120,15 @@ def replay(identity):
             dest=root/item['path'];dest.parent.mkdir(parents=True,exist_ok=True);os.link(source,dest)
         put(root/'scale-campaigns.json',m['campaigns'])
         binary=root/'artifacts/gpup-general-v1/scale-image-v6/executor';binary.chmod(binary.stat().st_mode|0o100)
-        p=subprocess.run(['python3',str(root/'tools/lp_general_scale_portable.py'),'_verify','--id',identity],cwd=root,text=True,capture_output=True,
+        p=subprocess.run(['python3',str(root/'tools/lp_general_scale_portable.py'),'_verify','--id',identity,
+                         '--admission-prefixes',*m.get('admission_prefixes',['scale-'])],cwd=root,text=True,capture_output=True,
                          env={**os.environ,'PYTHONPATH':str(root/'tools')})
         (out/'replay.stdout').write_text(p.stdout);(out/'replay.stderr').write_text(p.stderr)
         require(p.returncode==0,'extracted-root serial replay failed')
         result=json.loads(p.stdout.splitlines()[-1]);put(out/'replay.json',dict(status='passed',receipt=ref(out/'receipt.json'),byte_files=len(m['files']),result=result));print(result,flush=True)
 
 
-def verify(identity,campaigns=None):
+def verify(identity,campaigns=None,admission_prefixes=('scale-',)):
     binary=BASE/'scale-image-v6/executor';seen=set();assessments=0;cells=0;raw_only=0;missing=[];admissions=0;partial=[]
     baseline_admissions=0;baseline_expected={}
     identities=campaigns if campaigns is not None else load(ROOT/'scale-campaigns.json')
@@ -148,7 +149,8 @@ def verify(identity,campaigns=None):
                 for key in ['serial','audit']:
                     if row.get(key):require(ref(ROOT/row[key]['path'])==row[key],'independent stream binding differs')
             groups.setdefault(model,[]).append((path,c['tolerance'],cell if cell.exists() else None));cells+=1
-    for directory in sorted(BASE.glob('scale-*')):
+    for directory in sorted(p for p in BASE.iterdir() if p.is_dir() and
+                            any(p.name.startswith(prefix) for prefix in admission_prefixes)):
         if (directory/'freeze.json').exists():continue
         for p in sorted(directory.glob('*.response.json')):
             r=read_response(p);model=next((q for q in directory.glob('*.lpcsr') if digest(q)==r.get('model_sha256')),None)
@@ -211,8 +213,8 @@ def verify(identity,campaigns=None):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['archive','replay','_verify']);p.add_argument('--id',required=True);p.add_argument('--campaigns',nargs='+');a=p.parse_args()
-    if a.action=='_verify':verify(a.id,a.campaigns)
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['archive','replay','_verify']);p.add_argument('--id',required=True);p.add_argument('--campaigns',nargs='+');p.add_argument('--admission-prefixes',nargs='+',default=['scale-']);a=p.parse_args()
+    if a.action=='_verify':verify(a.id,a.campaigns,a.admission_prefixes)
     else:
         require(a.campaigns is None,'campaign filtering is admission-only')
         {'archive':archive,'replay':replay}[a.action](a.id)

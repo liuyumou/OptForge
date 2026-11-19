@@ -1,0 +1,16 @@
+{
+  "scope": "Isolated host-cost derivatives; historical sources are unchanged. Arithmetic order, signed-zero normalization and first errors are preserved.",
+  "base_commit": "1e15895",
+  "files": [
+    {
+      "path": "research/lp-mixed2-checker2/src/exact_math.rs",
+      "sha256": "e6395c04db0a224df504f07cd021f05670924c6fc36826ae0006d01ccdc9ee8b",
+      "derivative": "research/lp-general-lowbit/src/exact_math.rs"
+    },
+    {
+      "path": "research/lp-fp4-checker/src/prepared_feasibility.rs",
+      "sha256": "10a4cfdc17395d68db95c69b09c07a018c0d2203559446e449c7e5fbc234a04d",
+      "derivative": "research/lp-general-lowbit/src/prepared_feasibility.rs"
+    }
+  ]
+}
