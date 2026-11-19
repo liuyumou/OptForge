@@ -1,0 +1,202 @@
+{
+  "allocation_open": true,
+  "catalog": {
+    "bytes": 6991919,
+    "namespace": "evidence",
+    "path": "portable/gpu-preparation-v2/manifest.json",
+    "sha256": "8d389dad7f7f6fe2b58ad41084663b22dd2ff5f1b08f243b5124cbf77547b273"
+  },
+  "checkpoint": {
+    "bytes": 39252,
+    "namespace": "evidence",
+    "path": "checkpoint-gpu-preparation-v2.json",
+    "sha256": "ac5f27f8c48d621a2cb051586bad6b78259dd1bf1c136fb9a0089a61460b1b3e"
+  },
+  "cpu_ns_by_phase": {
+    "admission": 8080427004304,
+    "cleanup": 137152067816,
+    "development": 26115076498292,
+    "implementation": 672143765960,
+    "native": 13583482065588,
+    "reporting": 12854036402756
+  },
+  "current_cpu_ns": 61442317804716,
+  "current_gpu_ns": 2870821030734,
+  "delivery_checkpoint": {
+    "bytes": 39252,
+    "namespace": "evidence",
+    "path": "delivery-checkpoint-v1.json",
+    "sha256": "34fde5d753c947598ae04158e655da5a70391a6037c1baacd2ae0ed63460237b"
+  },
+  "evidence_root": "/storage/ai-optimizer-billion-v1",
+  "gpu_ns_by_phase": {
+    "admission": 567319482055,
+    "development": 2303501548679
+  },
+  "limitation": "No GPU preparation execution or billion-scale LP solve has occurred. Later documentation and delivery receipts supplement this checkpoint.",
+  "receipts": [
+    {
+      "bytes": 4982,
+      "namespace": "evidence",
+      "path": "build-prepare-v3/result.json",
+      "sha256": "5b7dd9ffde9c4aad241e09e512d67eaf03a15c346e782af20aa88bac764cc2b0"
+    },
+    {
+      "bytes": 358,
+      "namespace": "evidence",
+      "path": "resources/array-quality-v6.settlement.json",
+      "sha256": "0039ed7a20e4ee41d3a29a0823bf4b03fb5758bd4abd6152bea638486edbc9e8"
+    },
+    {
+      "bytes": 358,
+      "namespace": "evidence",
+      "path": "resources/billion-native-v2.settlement.json",
+      "sha256": "f47c262b11d8113a74745059eeb3cb02db670282ddc737c0b3bc2e7181b48315"
+    },
+    {
+      "bytes": 365,
+      "namespace": "evidence",
+      "path": "resources/preparation-harness-cpu-v2.settlement.json",
+      "sha256": "b2259884dc20b26354930b4238bbc6f1e6ce4a645765cf8582262d3d7c25c314"
+    },
+    {
+      "bytes": 368,
+      "namespace": "evidence",
+      "path": "resources/checkpoint-gpu-preparation-v2.settlement.json",
+      "sha256": "9487a3dfbcb29ce11ef935ae3a8f403388cfe4ad2257f5798262faa87fc7ccea"
+    },
+    {
+      "bytes": 645,
+      "namespace": "evidence",
+      "path": "portable/gpu-preparation-v2/result.json",
+      "sha256": "daa9fe1449d16fe35681dfd140f9f8c6fca8f1a2d4cccbbbe642c2eb5e073611"
+    },
+    {
+      "bytes": 459,
+      "namespace": "evidence",
+      "path": "portable/gpu-preparation-v2/relocated-replay.json",
+      "sha256": "4f532079d9fdddadac57e0910c384692a8a37f30707825f4e0c67cc05ca2fd9c"
+    },
+    {
+      "bytes": 370,
+      "namespace": "evidence",
+      "path": "resources/portable-gpu-preparation-v2.settlement.json",
+      "sha256": "1291b02291ae4753bedc382a4971098d189b84c6961dcca0a9248a5eb81f2c6e"
+    },
+    {
+      "bytes": 24850,
+      "namespace": "evidence",
+      "path": "ownership-audit-v1.json",
+      "sha256": "52effa082937f70440abc18d874769973d14addadf164f2e53b136e6e7ea3572"
+    },
+    {
+      "bytes": 357,
+      "namespace": "evidence",
+      "path": "resources/ownership-audit-v2.settlement.json",
+      "sha256": "d336e4843e0f2b5ea2d385c24f8a08b6bd5a29f0efe3d7c5be48bdd258afefb3"
+    },
+    {
+      "bytes": 12904,
+      "namespace": "evidence",
+      "path": "ladder-64m-v1/freeze.json",
+      "sha256": "8227c99346bdf460e54cbd3098ebf8f4eadcdc9760807db103548e4a309a7046"
+    },
+    {
+      "bytes": 13338,
+      "namespace": "evidence",
+      "path": "ladder-64m-v2/freeze.json",
+      "sha256": "e0782f06c97ddd48abe2b2fc8d4325077fb1f749742e69609e93a909cacb3c79"
+    },
+    {
+      "bytes": 3639,
+      "namespace": "evidence",
+      "path": "ladder-128m-v2/summary.json",
+      "sha256": "ef2a57f1e187f40b771f6ac2059e04fa1e8c388e4fdb5aa649293ede09f819c5"
+    },
+    {
+      "bytes": 5307,
+      "namespace": "evidence",
+      "path": "ladder-256m-v2/summary.json",
+      "sha256": "645ba4b4bf6408fe74d8ed9df2bd4a447c16999d600ee79d20d25ff748b9e69e"
+    },
+    {
+      "bytes": 5972,
+      "namespace": "evidence",
+      "path": "ladder-512m-v2/summary.json",
+      "sha256": "97ceb355522e675c2ffce4ee4fe0ad5eaadfadb600cf37a4779cdfa3db73f3a4"
+    },
+    {
+      "bytes": 363,
+      "namespace": "evidence",
+      "path": "resources/array-gpu-v1.settlement.json",
+      "sha256": "3f8f9a8ebc8ec29fd1157e387abc6248b7c94968229451d3f08c83197ba1056b"
+    },
+    {
+      "bytes": 367,
+      "namespace": "evidence",
+      "path": "resources/array-memcheck-v1.settlement.json",
+      "sha256": "f411375aaed94c9547374e915b69da4769c62696f832213467311d34899e2d71"
+    },
+    {
+      "bytes": 369,
+      "namespace": "evidence",
+      "path": "resources/array-racecheck-v1.settlement.json",
+      "sha256": "beaf82f0dd75315873afa87d03d9b492b837a77326afa8798f4b0993f0aaeff0"
+    },
+    {
+      "bytes": 368,
+      "namespace": "evidence",
+      "path": "resources/array-initcheck-v1.settlement.json",
+      "sha256": "9995d8848a77f1b21dcc506748ee19e102c65576abb26574ba4c30494d431495"
+    },
+    {
+      "bytes": 368,
+      "namespace": "evidence",
+      "path": "resources/array-synccheck-v1.settlement.json",
+      "sha256": "ba6e99f52993e161fb9059dd860c3ec97482cc1cb737eca02a3534ebf5fe91be"
+    },
+    {
+      "bytes": 363,
+      "namespace": "evidence",
+      "path": "resources/array-gpu-v2.settlement.json",
+      "sha256": "ffb10da854b327834f9935bfcbf1a722ebc48a05274c10a583640eee15448a4b"
+    },
+    {
+      "bytes": 367,
+      "namespace": "evidence",
+      "path": "resources/array-memcheck-v2.settlement.json",
+      "sha256": "39ce8c190cb11cf591356a96e0b6eb0687be5885712703bdfa0d238c94100a8d"
+    },
+    {
+      "bytes": 369,
+      "namespace": "evidence",
+      "path": "resources/array-racecheck-v2.settlement.json",
+      "sha256": "2bac30a14231b4f4cc3afd79f848c35e9edf3ba9ab0aeaf6c166024e724c4fd2"
+    },
+    {
+      "bytes": 368,
+      "namespace": "evidence",
+      "path": "resources/array-initcheck-v2.settlement.json",
+      "sha256": "03084cdbeac858ad3323fb9fb9679ba74b73ba2f6a8e3935d0c79fd3af905a06"
+    },
+    {
+      "bytes": 368,
+      "namespace": "evidence",
+      "path": "resources/array-synccheck-v2.settlement.json",
+      "sha256": "8b45167041349cb41afa35cbfca9f97675ee0d6c39184d722009905d18f7578e"
+    },
+    {
+      "bytes": 356,
+      "namespace": "evidence",
+      "path": "resources/delivery-docs-v1.settlement.json",
+      "sha256": "4a2c5ad33ad6f721767ec46a866db01ef430613f5859a55baed6cb2826fd06f7"
+    },
+    {
+      "bytes": 361,
+      "namespace": "evidence",
+      "path": "resources/delivery-checkpoint-v1.settlement.json",
+      "sha256": "ec3ed6d89655edcda20002efc2647f64d2c11115ff83e78647b910857c273c6c"
+    }
+  ],
+  "status": "awaiting_idle_gpu"
+}

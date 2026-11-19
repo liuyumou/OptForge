@@ -1,3 +1,69 @@
+# Current agent handoff: GPU preparation awaits idle device (2026-11-20)
+
+The user authorizes full LP solves with one billion original nonzeros on the
+Pro6000 only while idle and requests GPU scaling, norm and step-size estimation
+with strict certificates. SPEC-0046 and ten additive amendments govern a separate
+240000 CPU / 30000 GPU-second allocation: four slots, 128 GiB sampled host RSS,
+80 GiB owned device buffers and 400 GiB owned storage. The earlier general
+allocation remains open and exact at 222683.436386676 CPU / 29019.968674596 GPU.
+
+The isolated original-array executor admits image-v1/v2 with the unchanged
+fast-image-v10 solve CUDA. Both six-family 64 M cohorts have exact transcripts;
+v1/v2 descriptive complete-cost median is 1.134, all uncertified at 100 updates.
+The full capacity ladder retains 18 cells, 17 responses, 15 eligible timings and
+one missing 128 M irregular response. Every completed response has independent
+final/intermediate checking. Both 512 M timings are excluded by additive ownership
+dispositions, retaining original receipts, numerical results and full charges.
+Never retry an attempted scientific cell or generalize these limit-run timings.
+
+The new opt-in FP64 GPU preparation module implements exact-tree Ruiz/Pock scaling,
+scaled CSR/CSC, spectral power products, norms, normalization and step calculation.
+Strict original-model CPU certificates and independent scalar checking stay exact.
+Public sources/defaults remain unchanged. Candidate CPU acceptance passes 51 Rust
+tests, formatting, Clippy, release and CUDA compilation; it has NEVER executed on
+GPU. Device bitwise comparisons, four sanitizers and total-time measurements are
+pending. Native acceptance is 638 Rust / 835 Python; images v1/v2 each pass 60 GPU
+continuations and four 20-case sanitizers. Current resource/evidence tests pass 21;
+original supervisor tests pass 75. The checkpoint verifies 293 numerical bindings.
+
+All six connected one-billion-nonzero inputs are generated and construction-checked:
+irregular, wide, tall, coupled blocks, ill-scaled and degenerate. Coupled blocks has
+750 million eligible FP4 nonzeros; other families have no canonical eligible tiles.
+Construction witnesses never enter solves. Zero billion-scale solves have run.
+Their six CPU jobs consume 11517.112111744 CPU seconds, zero GPU, cleanup empty.
+
+The pinned UUID is GPU-6721b13a-30f9-83ec-dace-ba2d9738556f. About 10 GiB of
+unattributed usage prevents idle admission. Do not reset the device or signal other
+work. The fixed 2 GiB unattributed-memory guard correctly stops operational GPU v7
+when usage returns after 35 seconds; retain full 480 CPU / 120 GPU, partial responses
+and empty cleanup. Operational GPU v8 needs at least five minutes of observed idle,
+six samples with gaps at most 90 seconds and a fresh final sample. Plan v8 permits
+only the six named CPU construction jobs while that GPU gate is incomplete.
+
+Resume with tools/lp_billion_prepare_continue.py after idle observation. It performs
+fresh operational/device/sanitizer admission and new 64/256/512 M candidate cohorts,
+retaining every regression and refusing failed/unsettled job repetition. Final 18
+billion-scale native/FP32/FP4x2 cells remain unfrozen: choose the largest common
+500-update ceiling up to 5000 that fits full time, audit and storage reservations,
+including possible repaired dual witnesses. Keep 100-update control, 500-update
+certification and strict 1e-9 criteria. Do not infer admission from source availability.
+
+Seven failed reservations retain 26400 CPU / 600 GPU seconds and sources. The first
+portable catalog omitted retained Cargo.lock files; originals remain intact and
+the filter has a regression test. Preserve its failed catalog and full charge.
+The original 128 M false-cleanup receipt remains alongside later independent cleanup
+proof. Every other completed reservation has empty cleanup. No allocation is closed.
+Corrected portable replay verifies 33729 files and 49158 references from a relocated
+root, with temporary hardlinks removed. Latest telemetry reports about 78 GiB used
+and 99% utilization; GPU admission and the billion-scale solves remain blocked.
+Large evidence stays in /storage/ai-optimizer-billion-v1. Commit compact results
+locally only; no public adoption, confirmation or publication is released.
+
+Open settled checkpoint: 61442.317804716 CPU / 2870.821030734 GPU seconds.
+Documentation validates 307 pages and their local links. No reservation is active.
+
+Report: [billion-scale and GPU preparation](docs/benchmarks/lp-billion.md).
+
 # Current agent handoff: preparation/control overhead delivered (2026-11-19)
 
 The user requests reducing preparation and control so fast FP4 execution lowers

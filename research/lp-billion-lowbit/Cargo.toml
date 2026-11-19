@@ -1,0 +1,21 @@
+[package]
+name = "lp-billion-lowbit"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.93"
+license = "MIT"
+[workspace]
+[dependencies]
+optimizer-core = { path = "../../crates/optimizer-core" }
+optimizer-lp = { package = "optimizer-lp-billion", path = "src/host-lp", features = ["precision-research"] }
+optimizer-cuda-sys = { path = "../lp-tensor-expanded-device/cuda-sys" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["float_roundtrip"] }
+sha2 = "=0.10.9"
+[lints.rust]
+unsafe_code = "forbid"
+[lints.clippy]
+all = "warn"
+[profile.release]
+lto = "fat"
+codegen-units = 1

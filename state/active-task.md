@@ -1,5 +1,63 @@
 # Active Task
 
+## Billion-nonzero LPs and GPU preparation active (2026-11-20)
+
+The user authorizes full LP solves with one billion original matrix nonzeros on
+the Pro6000 only while idle, and requests GPU scaling, norm and step estimation
+while preserving strict certificates. SPEC-0046 and its additive amendments govern
+the separate 240000 CPU / 30000 GPU-second allocation, four slots, 128 GiB sampled
+host RSS, 80 GiB owned device buffers and 400 GiB local storage. The earlier general
+allocation remains unchanged at 222683.436386676 CPU / 29019.968674596 GPU seconds.
+
+The isolated original-array executor has admitted image-v1/v2. Two six-family
+64 M fixed-work cohorts match exactly, with descriptive v1/v2 complete-cost median
+1.134; every endpoint is uncertified at 100 updates. Preserve the missing 128 M
+irregular cell and its full charge, later separate cleanup proof, completed coupled
+128 M cell, both 256 M cells, and both 512 M responses. No attempted cell repeats.
+
+The new opt-in GPU preparation candidate compiles and passes 51 isolated Rust
+tests and Clippy. FP64 kernels cover scaling, scaled coefficients, spectral power
+iterations, vector norms and step calculation, with exact-tree arithmetic and
+explicit host fallback. Original CPU certificates and fast-image-v10 solve CUDA
+remain unchanged. Device admission and preparation performance remain unmeasured.
+
+Unlisted device usage of about 10 GiB prevents idle admission. Amendment 7 adds a
+fixed 2 GiB unattributed-memory ceiling; both 512 M timings are excluded in additive
+dispositions, preserving their original receipts, charges and numerical results.
+Both 512 M responses pass independent final/intermediate numerical audits.
+Operational plan v8 and amendment 8 allow
+only six named CPU input-generation/construction jobs after fresh CPU tests while
+all GPU execution waits. Never-started operational GPU v5/v6 are superseded. GPU
+v7 starts after idle returns, then stops on newly unattributed memory after 35
+seconds; retain its full 480 CPU / 120 GPU charge, partial responses and empty
+cleanup. The preparation module has never executed. Amendment 9 requires five
+minutes of observed idle availability before fresh operational GPU v8. Do not
+reset or signal unrelated GPU work. All six one-billion-nonzero inputs are
+generated and construction-certified; no billion-scale solve has run.
+Amendment 10 includes possible repaired dual vectors in full storage reservations
+before choosing the common final iteration ceiling and freezing all 18 cells.
+
+The checkpoint verifies 293 numerical source bindings, all six construction
+certificates and all 17 retained capacity responses; 15 timings remain eligible,
+two are excluded and one frozen cell remains missing. The current harness passes
+21 tests. Seven failed reservations retain full charges of 26400 CPU / 600 GPU
+seconds. Resume with tools/lp_billion_prepare_continue.py only after its required
+five-minute idle observation window. The new preparation module still needs GPU
+exactness, all four sanitizers and complete-cost measurements before admission.
+The first portable catalog omitted retained Cargo.lock files through an overly
+broad filename filter. Original evidence is intact; retain that catalog, sources
+and full 7200 CPU-second charge. The filter is repaired and regression-tested.
+Corrected portable replay verifies 33729 files and 49158 references from a
+relocated root; temporary hardlinks are removed. Current GPU telemetry reaches
+about 78 GiB used and 99% utilization, so device admission remains blocked.
+
+Evidence: `/storage/ai-optimizer-billion-v1`; report:
+[billion-scale development](../docs/benchmarks/lp-billion.md). The allocation stays
+open. Public adoption, publication and confirmation remain separate.
+
+Open settled checkpoint: 61442.317804716 CPU / 2870.821030734 GPU seconds.
+Documentation validates 307 pages and local links; no reservation is active.
+
 ## Preparation/control overhead delivered (2026-11-19)
 
 The user requests reducing preparation and control so fast FP4 execution lowers
