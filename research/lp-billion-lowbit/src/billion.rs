@@ -83,17 +83,15 @@ pub fn solve(
     } else {
         Engine::new(program, control_settings.lp())
     };
+    let engine_end = started.elapsed().as_nanos();
     let op = Operator::borrowed_native(&engine)?;
+    let operator_end = started.elapsed().as_nanos();
     let packed = if settings.format.components() > 0 {
-        Some(if fast.is_some() {
-            Packed::proposal(&op, config)?
-        } else {
-            Packed::new(&op, config)?
-        })
-        .filter(|p| p.tile_count > 0)
+        crate::tensor_prepare::prepare(&op, config)?
     } else {
         None
     };
+    let packing_end = started.elapsed().as_nanos();
     crate::host::with_products(
         &engine,
         fast.is_some_and(|f| f.host_reductions),
@@ -374,6 +372,7 @@ pub fn solve(
         "restarts":control.state().restarts,"attempted":attempted,"accepted":accepted,"format_order":["native","fp32","fp4x1","fp4x2","fp4x3","fp4x4"],
         "recoveries":recoveries,"assessments":assessments,"operator_storage_bytes":op.storage_bytes(),"device_bytes_upper":device_bytes,
         "rows":program.row_count(),"columns":program.column_count(),"nonzeros":program.nonzeros(),"elapsed_ns":started.elapsed().as_nanos(),
+        "preparation_detail_ns":{"engine":engine_end,"operator":operator_end-engine_end,"packing":packing_end-operator_end,"control_initialization":prepared-packing_end},
         "cost_ns":{"host_preparation":prepared,"device_setup":setup,"execution":execution_ns,"assessment":assessment_ns,"recovery":recovery_ns,"device_teardown":teardown_ns}});
             if fast.is_some() {
                 if let Some(metrics) = &gpu_preparation {

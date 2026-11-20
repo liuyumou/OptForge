@@ -61,6 +61,15 @@ class BillionEvidenceContracts(unittest.TestCase):
             self.assertEqual(before['endpoint_bytes_upper'],after['endpoint_bytes_upper'])
             self.assertEqual((before['formula_version'],after['formula_version']),(2,3))
 
+    def test_preparation_partitions_do_not_mask_numerical_changes(self):
+        from lp_billion_admit import canonical as admission
+        from lp_billion_results import canonical as campaign_canonical
+        old=dict(logical=100,certified=False,cost_ns=dict(host_preparation=10))
+        new=dict(old,preparation_detail_ns=dict(engine=3,operator=1,packing=4,control_initialization=2))
+        for canonical in [admission,campaign_canonical]:
+            self.assertEqual(canonical(old),canonical(new))
+            self.assertNotEqual(canonical(old),canonical(dict(new,logical=101)))
+
     def test_storage_reserves_a_repaired_dual_at_every_assessment(self):
         self.assertEqual(endpoint_bytes(dict(rows=11,columns=7),500),3*8*(7+22))
         self.assertEqual(endpoint_bytes(dict(rows=11,columns=7),501),4*8*(7+22))

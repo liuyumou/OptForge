@@ -460,3 +460,46 @@ fn extended_fp4_components_are_exclusive_to_the_tensor_backend() {
         assert!(bad.validate().is_err());
     }
 }
+
+#[test]
+fn indexed_proposal_matches_original_and_checks_transpose_without_tiles() {
+    use lp_billion_lowbit::{
+        tensor::{Config, Packed},
+        tensor_prepare,
+    };
+    for (n, m) in [(9, 5), (65, 33), (129, 97)] {
+        let model = model(n, m);
+        let p = LinearProgram::new(&model).unwrap();
+        let e = Engine::new(&p, settings(Format::Native).lp());
+        let mut op = Operator::new_for(&e, Format::Native).unwrap();
+        for min_tile_nnz in [1, 128, 1024] {
+            for components in 1..=4 {
+                for compact_fragments in [false, true] {
+                    let config = Config {
+                        min_tile_nnz,
+                        components,
+                        compact_fragments,
+                        ..Config::default()
+                    };
+                    let old = Packed::proposal(&op, &config).unwrap();
+                    let new = tensor_prepare::prepare(&op, &config).unwrap();
+                    if old.tile_count == 0 {
+                        assert!(new.is_none());
+                    } else {
+                        assert_eq!(
+                            serde_json::to_value(old).unwrap(),
+                            serde_json::to_value(new.unwrap()).unwrap()
+                        );
+                    }
+                }
+            }
+        }
+        op.columns.original.to_mut()[0] = op.columns.original[0].next_up();
+        let no_tiles = Config {
+            min_tile_nnz: 1024,
+            ..Config::default()
+        };
+        assert!(Packed::proposal(&op, &no_tiles).is_err());
+        assert!(tensor_prepare::prepare(&op, &no_tiles).is_err());
+    }
+}

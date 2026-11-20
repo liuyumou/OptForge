@@ -1,14 +1,14 @@
 # Billion-nonzero LP development on the Pro6000
 
 Execution continuation under [SPEC-0046](../specifications/SPEC-0046-billion-lp.md),
-2026-11-19–20. Image-v4 removes duplicate host operator arrays while preserving
-strict certificates and both CUDA binaries. All ten new 64/256/512 M capacity
-runs have exact numerical transcripts and complete independent audits. Sampled
-peak host RSS falls by roughly 25%; descriptive complete-cost speedups over
-GPU-preparation image-v3 are 1.075x / 1.052x / 1.050x. These remain uncertified
-100-update measurements. Zero billion-scale solves have run: two native/FP32
-cells now fit current host headroom, but the FP4 lanes and full roster do not.
-See the [latest memory results](#borrowed-host-matrix-storage).
+2026-11-19–20. The new image-v7 passes CPU correctness and packing-stage diagnostics:
+all six 64 M cases improve, with a 1.744x median ratio and 9.0% less packing time on
+the coupled model with FP4 tiles. Strict certificates and both CUDA binaries stay
+exact. GPU validation and total-solve measurements remain pending operational
+supervision failures; no new GPU performance claim is made. The latest snapshot
+also fails GPU idle and billion-scale host capacity. Zero billion-scale solves
+have run. See the [latest packing results](#indexed-preparation-packing) and the
+previously GPU-validated [memory results](#borrowed-host-matrix-storage).
 
 ## Scope and implementation
 
@@ -577,11 +577,13 @@ declares 32 GiB with unchanged checks, 600-second ceiling and physical headroom.
 No failed reservation or scientific cell is repeated.
 
 [Amendment 21](../specifications/SPEC-0046-amendment-21.md) separately reserves each
-complete paired transcript comparison at 32 GiB / 600 seconds. Its existing
-endpoint expansion and numerical comparison remain unchanged. The final metadata
-audit also verifies exact content-addressed endpoint manifests without expanding
-another set of Python vectors. Neither step replaces the independent original
-scalar checker.
+complete paired transcript comparison at 32 GiB / 600 seconds. A later source
+review corrects its description of endpoint expansion: the campaign comparator
+already compares exact content-addressed manifests without expanding vectors.
+The small-fixture admission comparator does unpack arrays. This correction is
+recorded prospectively in [amendment 22](../specifications/SPEC-0046-amendment-22.md);
+the original protocol, resource receipts and numerical results remain intact.
+Neither comparison replaces the independent original scalar checker.
 
 Both preparation and solve CUDA binaries remain byte-identical. Of the 293 prior
 numerical source bindings, 289 remain exact; the four changed files are the
@@ -661,3 +663,182 @@ Open settled checkpoint including final documentation: 98505.269208520 CPU /
 All 318 documentation pages and their local links validate. The earlier general
 allocation remains unchanged. Commit locally only; no public
 adoption, confirmation or publication is released.
+
+## Indexed preparation packing
+
+The next candidate, image-v5, reduces host work that remains after GPU scaling
+and norm estimation. Under [amendment 22](../specifications/SPEC-0046-amendment-22.md),
+the isolated array executor appends qualifying tiles in canonical sorted order
+and uses direct indices when constructing both packed orientations. It reuses
+touched-column scratch between row groups. The encoder, fragment layouts,
+exponents, coverage and residual order remain exact.
+
+When no tile qualifies, the previous implementation still built complete residual
+copies for both orientations before the caller discarded the packed operator.
+The candidate validates every original-transpose coefficient and then returns
+without constructing those unused residual arrays. It retains this validation
+even on the empty-tile path. Legacy packing interfaces and public defaults remain
+unchanged. The conservative capacity allowance also remains unchanged; eliminated
+transient work does not automatically reduce the declared memory requirement.
+
+New timing partitions expose engine construction, borrowed-operator construction,
+packing and control initialization. Their integer nanosecond sum must exactly
+match the existing preparation interval. Input hashing/loading stays separate
+and remains included in fresh-process and complete cost. The engine interval
+includes GPU preparation and its transfers; the GPU's existing internal timings
+remain available separately.
+
+CPU acceptance passes 53 isolated Rust tests, formatting, Clippy and release/CUDA
+builds. Complete packed representations match the retained original packer across
+one to four components, both fragment layouts, rectangular tails and the parallel
+packing threshold. A corrupted transpose still refuses when no tile qualifies.
+Fresh operational CPU acceptance passes 75 supervisor and 25 resource/evidence
+tests, including a regression that timing-only fields cannot hide numerical changes.
+
+### Operational interruption retained
+
+The first six-minute idle window passes, but operational GPU v11 stops after about
+15 seconds with `lost_coordinator_heartbeat`. It uses the prior image-v2; no
+candidate GPU work starts. Its eight new and eight reference response files,
+source bindings, ownership trace, empty cleanup and full 480 CPU / 120 GPU-second
+charge remain. All three retained process identities are subsequently absent.
+No cause or GPU-memory owner is inferred.
+
+[Amendment 23](../specifications/SPEC-0046-amendment-23.md) prospectively requires
+fresh operational v12 with unchanged limits and a new sustained-idle observation.
+The second observation records a brief 8.506 GiB / 99% utilization burst while
+no GPU job from this task is active. It ends without a passing idle span, and the
+explicit observed-idle guard prevents admission. A separate third observation
+retains that history and requires its own complete idle result. The failed
+operational reservation is not repeated, and no scientific cell has been retried.
+
+The third six-minute observation passes at the original idle baseline. Operational
+GPU v12 nevertheless stops after about 18 seconds with the same heartbeat reason,
+retaining nineteen partial new response files, empty cleanup and another full
+480 CPU / 120 GPU seconds. Neither operational run reaches image-v5 admission.
+The repeated supervision failure remains unresolved; no timeout, ownership guard
+or certificate requirement is weakened. All candidate GPU comparisons, sanitizers
+and full-solve timing cohorts remain pending.
+
+### CPU-only packing diagnostic
+
+[Amendment 24](../specifications/SPEC-0046-amendment-24.md) permits a separate
+CPU-only diagnostic while GPU readmission remains incomplete. It links the same
+candidate library and prepares each of the six retained 64 M original models with
+the unchanged CPU engine. Both packers receive those exact same scaled arrays.
+One paired measurement per input alternates reference-first and candidate-first
+order. The reference includes destruction of the unused zero-tile residuals,
+as image-v4 does. Input loading, engine construction and operator setup are timed
+separately from packing. The diagnostic executes no LP solve and creates no CUDA
+context. All packed fields, including FP64 bit patterns, are compared when tiles
+qualify; both paths must return no packed operator otherwise.
+
+### Allocation and component encoding refinements
+
+The first diagnostic retains all six image-v5 responses, including a coupled
+regression from 3.858 to 3.994 seconds. Its intermediate Rust library was bound
+at a mutable Cargo target path and was overwritten by the next quality build
+before archival. [Amendment 26](../specifications/SPEC-0046-amendment-26.md) preserves
+this missing binding explicitly and excludes all six timings. The measured
+executable, source snapshots, exact results and full resource charges remain.
+Subsequent diagnostic builds copy both linked libraries into immutable evidence
+before compilation and measurement.
+
+[Amendment 25](../specifications/SPEC-0046-amendment-25.md) introduces image-v6:
+it uses tile values as exact quantization scratch, releases them before orientation
+construction, and preallocates output arrays using verified counts. All six fresh
+CPU pairs are exact and have durable linker artifacts. Five zero-tile cases improve,
+but coupled regresses from 3.619 to 3.841 seconds (0.942x); this valid regression
+remains in the report and evidence.
+
+The next proposal in [amendment 27](../specifications/SPEC-0046-amendment-27.md)
+uses explicit SIMD encoding. Its first quality reservation stops with incomplete
+cleanup and a receipt-finalization timeout during directory fsync. The original
+receipt and full 1200 CPU-second charge remain; a subsequent independent check
+finds all five retained process identities absent, as recorded by
+[amendment 28](../specifications/SPEC-0046-amendment-28.md). The fresh quality attempt
+then reaches compilation and refuses unsafe Rust under the existing crate lint,
+retaining another full 1200 CPU seconds and empty cleanup.
+
+The final image-v7 follows [amendment 29](../specifications/SPEC-0046-amendment-29.md):
+safe, portable branchless threshold comparisons and exact binary64 bit construction
+replace the component quantizer branches and decoder table. Maximum reduction,
+exponent selection, component order and separate FP64 arithmetic remain exact.
+There is no unsafe code, target-feature dispatch or measured SIMD instruction claim.
+The original encoder remains the independent reference.
+
+Fresh quality acceptance passes all 54 isolated Rust tests, formatting, Clippy
+and release/CUDA compilation. New coverage compares codes, exponents and every
+residual bit across adjacent rounding thresholds, signed zeros, scales and vector
+tails. Fresh operational CPU acceptance passes the original 75 supervisor and 25
+resource/evidence tests. No GPU candidate admission or full-solve measurement is
+inferred from these CPU results.
+
+### Final packing-stage results
+
+The [compact packing receipt](lp-billion-packing-results.json) binds the final
+image, all three diagnostic cohorts, current source verification, explicit
+exclusions, failed charges and fresh host-capacity observation. All six final
+pairs are exact and have complete supervision with empty cleanup and zero GPU
+charge. Times below are the packing stage on 64 M original-nonzero inputs.
+
+| Family | Original packing seconds | Image-v7 packing seconds | Ratio | Time reduction |
+| --- | ---: | ---: | ---: | ---: |
+| irregular | 5.529 | 3.182 | 1.737 | 42.4% |
+| wide | 5.726 | 3.734 | 1.533 | 34.8% |
+| tall | 5.183 | 2.730 | 1.898 | 47.3% |
+| coupled blocks | 3.693 | 3.362 | 1.099 | 9.0% |
+| ill scaled | 5.443 | 3.110 | 1.750 | 42.9% |
+| degenerate | 4.673 | 2.515 | 1.858 | 46.2% |
+
+The median per-case ratio is 1.744x, with a median
+packing-time reduction of 42.6%.
+Coupled contains 62,500 eligible FP4 tiles and improves by 9.0%; the other five
+models have no eligible tiles. These single paired stage observations use
+alternating order and do not establish repeatability, full preparation gains,
+GPU execution gains or certified total-solve benefit. Input, engine and operator
+costs remain in the raw results and supervised process costs. No stage timing
+is substituted for a complete solve measurement.
+
+All 296 current numerical source bindings verify. Of the 293 image-v4 bindings,
+289 stay exact and four isolated implementation/test files change; three new
+files contain the packer, component encoder and standalone diagnostic. Both CUDA
+binaries and all six original budget/idle/supervisor/placement source bindings
+remain exact. Public defaults, strict original-model 1e-9 certificates and
+control100/certificate500 remain unchanged.
+
+### Remaining admission and resource state
+
+Image-v7 has never executed on the GPU. Its preparation comparisons, continuations,
+four full sanitizer suites and fresh 64/256/512 M full-solve comparisons remain
+pending. Image-v5/v6 GPU cells were also never attempted. Investigate the repeated
+operational supervision interruptions before fresh operational GPU v15; then
+require a new complete observed-idle result, fresh final proof and every original
+gate. Plans v15/v16 preserve both cleanup dispositions and the CPU-only job scope.
+`tools/lp_billion_packing_cpu_v3.py` is complete; no diagnostic cell should repeat.
+The future GPU continuation is `tools/lp_billion_packing_continue.py`.
+
+The post-run snapshot sees 52.026 GiB host MemAvailable and
+5.131 GiB device usage, failing the instantaneous idle gate. No owner
+is inferred. None of eighteen prospective billion-scale cells fits current host
+headroom: declarations still require 55–106 GiB including physical headroom, with
+72 GiB for actual-FP4 coupled. The six original billion-nonzero inputs remain ready,
+but zero billion-scale solves have run and the final cohort remains unfrozen.
+Retain the full FP4 objective and prospective common 500-update ceiling up to 5000
+once full solve/audit/storage and physical capacity permit.
+
+The full-solve capacity record is unchanged at 38 cells / 37 responses / 35 eligible
+timings / one old missing response. The separate CPU diagnostic record has eighteen
+responses, twelve eligible stage timings and six explicit first-cohort exclusions.
+Seventeen failed reservations retain full 36000 CPU / 1800 GPU seconds. The latest
+quality-v3 false-cleanup receipt remains alongside its independent five-identity
+cleanup proof. All later completed cleanup is empty; no reservation is active.
+Old portable catalogs remain unchanged. New source-bound receipts supplement them;
+no fresh full portable replay or resolution of the missing first-cohort library
+is claimed. No total allocation or phase cap changes.
+
+Open settled checkpoint including final documentation: 110219.293992796 CPU /
+6952.970278844 GPU seconds. The separate 240000 CPU / 30000 GPU allocation
+remains open, and the earlier general allocation is unchanged. All 326 documentation
+pages and their local links validate. Commit locally only; no public adoption,
+confirmation or publication is released.

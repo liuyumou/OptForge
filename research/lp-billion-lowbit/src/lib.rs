@@ -36,3 +36,6 @@ pub mod fast_device;
 pub mod gpu_tensor;
 pub mod tensor;
 pub mod tensor_device;
+
+pub mod tensor_prepare;
+mod tensor_prepare_encode;

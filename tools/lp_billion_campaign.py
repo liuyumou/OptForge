@@ -61,12 +61,12 @@ def capacity(model, lane, borrowed_operator=False):
 
 def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=False, version=1):
     out=BASE/identity;require(not out.exists(),'fresh cohort identity')
-    require(version in [1,2,3,4], 'admitted image version')
+    require(version in [1,2,3,4,5,6,7], 'admitted image version')
     image=BASE/f'image-v{version}'
     proofs=[]
     from lp_billion_admit import gate_identity
-    if version==4:
-        for name in ['operational-cpu-v10','operational-gpu-v10']:
+    if version>=4:
+        for name in (['operational-cpu-v15','operational-gpu-v15'] if version==7 else ['operational-cpu-v14','operational-gpu-v14'] if version==6 else ['operational-cpu-v13','operational-gpu-v13'] if version==5 else ['operational-cpu-v10','operational-gpu-v10']):
             gate=BASE/'resources'/(name+'.settlement.json')
             require(load(gate)['status']=='passed','memory candidate admission '+name)
             proofs.append(ref(gate))
@@ -128,7 +128,7 @@ def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=Fa
         for lane in order:
             cell_seconds=seconds if isinstance(seconds,int) else seconds[model['family']]
             cell_wall=wall_ms if isinstance(wall_ms,int) else wall_ms[model['family']]
-            memory=capacity(model,lane,borrowed_operator=version==4)
+            memory=capacity(model,lane,borrowed_operator=version>=4)
             # Capacity pilots have fewer endpoint snapshots than the final cohort.
             memory['endpoint_bytes_upper']=endpoint_bytes(model,iterations)
             cell=dict(id=f'{identity}-{index}-{lane}',model=model['model'],model_result=ref(path),construction_check=ref(proof_path),lane=lane,memory=memory,

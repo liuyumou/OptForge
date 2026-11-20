@@ -66,7 +66,7 @@ fn upadd(a: f64, b: f64) -> f64 {
         (a + b).next_up()
     }
 }
-fn quant(v: f64) -> u8 {
+pub(crate) fn quant(v: f64) -> u8 {
     let x = v.abs();
     let best = if x > 5. {
         7
@@ -85,7 +85,7 @@ fn quant(v: f64) -> u8 {
     };
     best | if v < 0. && best != 0 { 8 } else { 0 }
 }
-fn encode(values: &[f64], k: usize) -> (Vec<u8>, Vec<i32>, Vec<f64>) {
+pub(crate) fn encode(values: &[f64], k: usize) -> (Vec<u8>, Vec<i32>, Vec<f64>) {
     let mut rem = values.to_vec();
     let mut codes = vec![0; values.len() * k];
     let mut ex = Vec::new();
@@ -411,6 +411,11 @@ mod tests {
                 };
                 let a = Packed::build_scheduled(&op, &c, false, false).unwrap();
                 let b = Packed::proposal(&op, &c).unwrap();
+                let indexed = crate::tensor_prepare::prepare(&op, &c).unwrap().unwrap();
+                assert_eq!(
+                    serde_json::to_value(&b).unwrap(),
+                    serde_json::to_value(indexed).unwrap()
+                );
                 assert!(a.tile_count >= 128);
                 assert_eq!(
                     serde_json::to_value(a).unwrap(),

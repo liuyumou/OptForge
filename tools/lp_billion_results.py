@@ -28,7 +28,7 @@ def canonical(response):
     # Endpoint references bind every binary64 bit; never materialize billion-scale
     # vectors merely to compare their already-content-addressed identities.
     result={k: copy.deepcopy(v) for k, v in response.items()
-            if k not in {'input_ns', 'elapsed_ns', 'cost_ns','gpu_preparation'}}
+            if k not in {'input_ns', 'elapsed_ns', 'cost_ns','gpu_preparation','preparation_detail_ns'}}
     result.get('fast_config',{}).pop('gpu_preparation',None)
     return result
 
@@ -70,7 +70,7 @@ def record(cell):
         input_ns=r['input_ns'], cost_ns=r['cost_ns'], offline_audit_ns=audit_result['elapsed_ns'],
         device_bytes=r['device_bytes_upper'], operator_storage_bytes=r['operator_storage_bytes'],
         packed_bytes=r['packed_bytes'], tile_count=r['tile_count'],
-        gpu_preparation=r.get('gpu_preparation'),
+        gpu_preparation=r.get('gpu_preparation'),preparation_detail_ns=r.get('preparation_detail_ns'),
         peak_rss_bytes=resource['result']['peak_rss_bytes'],
         response=measured['response'], resource=settlement['resource'],
         final_check=ref(out.with_name(out.name+'-final-check')/'result.json'),
@@ -86,7 +86,7 @@ def summarize(manifest, output):
 
 
 def compare(before, after, output, within_reservation=False):
-    if not within_reservation and load(after)['image']['path']=='image-v4/binding.json':
+    if not within_reservation and load(after)['image']['path'] in ['image-v4/binding.json','image-v5/binding.json','image-v6/binding.json','image-v7/binding.json']:
         from lp_billion_budget import run
         import sys
         identity='comparison-'+Path(after).parent.name

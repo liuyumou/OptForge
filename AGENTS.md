@@ -1,3 +1,78 @@
+# Current agent handoff: CPU packing gains; GPU readmission blocked (2026-11-20)
+
+Image-v7 reduces isolated host packing work through canonical tile indexing,
+zero-tile residual elimination, reusable tile scratch, exact preallocation and
+safe portable branchless component encoding. The original encoder remains the
+reference. All 54 Rust tests, format, Clippy, release/CUDA builds, 75 original
+supervisor and 25 resource/evidence tests pass. Both CUDA binaries, original
+strict 1e-9 certificates, control100/certificate500, public defaults and all six
+budget/idle/supervisor/placement sources remain exact. Current numerical bindings
+are 296: 289 unchanged from image-v4, four changed files and three added files.
+
+All six final 64 M CPU packing pairs pass exact packed comparisons. Median ratio
+is 1.744x (42.6% less packing time); coupled with 62,500 eligible FP4 tiles improves
+3.693 to 3.362 seconds (9.0%). Other five models have no eligible tiles. These are
+single paired CPU-stage diagnostics with alternating order, not full preparation,
+GPU execution or total-solve measurements. No broad FP4 or certified-solve claim.
+The preceding allocation-refined image-v6 retains its valid coupled regression
+3.619 to 3.841 seconds. Image-v5 retains its 3.858 to 3.994-second regression as
+ineligible history: its mutable intermediate library was overwritten before
+archival. All six first-cohort timings are excluded; original executable, sources,
+raw results and charges remain. Later cohorts retain linked libraries immutably.
+The eighteen CPU stage responses include twelve eligible timings and six exclusions.
+
+Image-v5/v6/v7 have NEVER executed on the GPU. Two fresh idle windows pass, but
+operational GPU v11/v12 (prior image-v2) stop on lost_coordinator_heartbeat at about
+15/18 seconds. Preserve 8/19 partial new response files, empty cleanup and full
+960 CPU / 240 GPU seconds. An intervening idle observation sees an 8.506 GiB / 99%
+utilization burst while no task GPU job is active; its non-passing result remains.
+No owner is inferred. The explicit observed-idle guard remains unchanged.
+
+The first SIMD quality reservation v3 fails supervision/finalization with an
+original false-cleanup receipt and full 1200 CPU seconds. All five retained
+identities are independently absent; keep the additive cleanup disposition.
+Fresh quality v4 refuses unsafe Rust and retains another full 1200 CPU seconds,
+with empty cleanup. The final safe implementation passes fresh quality v5.
+No unsafe-code lint, supervisor deadline or ownership guard is weakened. Explicit
+SIMD/AVX2 is not adopted and no measured SIMD instruction claim is made.
+
+Amendments 22–29 preserve all revisions, failures, exclusions and exact checks.
+Plans v15/v16 bind both cleanup dispositions and six CPU-only development jobs;
+those jobs are complete. Investigate repeated supervision/storage interruptions
+before fresh operational GPU v15. Then require a new five-minute idle result,
+six samples with at most 90-second gaps, fresh final proof and all original gates.
+Future image-v7 exact preparation/continuation admission, four complete sanitizers
+and ten fresh 64/256/512 M full-solve cells remain unattempted. Continue via
+`tools/lp_billion_packing_continue.py` only after addressing operational admission.
+Do not repeat failed reservations or attempted scientific/diagnostic cells.
+
+The user allows the full Pro6000 only while idle and inside this container. Latest
+post-run capacity sees 52.026 GiB host available and 5.131 GiB device use, failing
+idle. None of eighteen billion cells fits the unchanged 55–106 GiB host requirement
+including headroom; actual-FP4 coupled requires 72 GiB. All fit device capacity.
+Six original billion-nonzero inputs remain ready, zero billion solves have run,
+and the final cohort is unfrozen. Preserve the full roster and FP4 objective.
+When capacity permits, prospectively choose the largest common 500-update ceiling
+up to 5000 with full solve/audit/storage reservations and repaired dual witnesses.
+No host escape, reset, shared-memory clearing, other-job signals or owner inference.
+
+Full-solve capacity history is unchanged: 38 cells / 37 responses / 35 eligible
+timings / one old missing response. Seventeen failed reservations retain full
+36000 CPU / 1800 GPU seconds. No reservation is active; all surviving original
+false-cleanup receipts retain independent cleanup proofs. Old portable catalogs
+are unchanged; no fresh full portable replay or recovered missing library is claimed.
+The 240000 CPU / 30000 GPU allocation and all phase caps stay unchanged and open.
+Earlier general allocation remains exactly 222683.436386676 CPU / 29019.968674596 GPU.
+
+Evidence: /storage/ai-optimizer-billion-v1/packing-progress-v{1,2,3}.json,
+packing-delivery-v1.json, cpu-packing-64m-v{1,2,3}/freeze.json and
+billion-host-availability-v3.json. Open settled checkpoint including documentation:
+110219.293992796 CPU / 6952.970278844 GPU seconds. All 326 documentation pages
+and local links validate. Commit locally only; no public adoption or publication.
+
+Report: [Indexed preparation packing](docs/benchmarks/lp-billion.md#indexed-preparation-packing).
+Compact bindings: [Packing results](docs/benchmarks/lp-billion-packing-results.json).
+
 # Current agent handoff: borrowed host matrix storage validated (2026-11-20)
 
 Image-v4 removes duplicate host operator CSR/CSC indices and scaled coefficients

@@ -23,7 +23,7 @@ def snapshot(identity, version=3):
         path=BASE/f'models-1b-{family}-v1/result.json';model=load(path)
         require(model['nonzeros']==1_000_000_000,'one billion original matrix nonzeros')
         for lane in ['native','fp32','fp4x2']:
-            allocation=capacity(model,lane,borrowed_operator=version==4)
+            allocation=capacity(model,lane,borrowed_operator=version>=4)
             host_required=(allocation['host_gib']+4)<<30
             device_required=(allocation['device_gib']+2)<<30
             cells.append(dict(family=family,lane=lane,model=ref(path),capacity=allocation,
@@ -44,5 +44,5 @@ def snapshot(identity, version=3):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--id',required=True)
-    parser.add_argument('--version',type=int,choices=[3,4],default=3)
+    parser.add_argument('--version',type=int,choices=[3,4,5,6,7],default=3)
     args=parser.parse_args();snapshot(args.id,args.version)
