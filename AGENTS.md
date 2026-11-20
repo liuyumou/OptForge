@@ -1,3 +1,71 @@
+# Current agent handoff: bounded preparation memory (2026-11-21)
+
+The user requests reducing required peak memory. Isolated image-v9 uses bounded
+FP4 packing batches, exact final arrays, <=32 MiB FP32 upload conversion scratch
+and release of host Packed before controller/checkpoint/certificate allocation.
+Public defaults, original arithmetic, strict original-model 1e-9 certificates,
+control100/certificate500, both CUDA binaries and all six guard sources stay exact.
+CPU quality passes 58 Rust tests, format/Clippy/release/CUDA builds and one pure
+copy-boundary overflow test. Original supervisor tests pass 75; final contracts
+pass 42. There are 299 numerical bindings (291 of v8's 297 unchanged, six isolated
+changes, two additions). Image-v9 has NEVER executed on GPU.
+
+All fifteen CPU preparations retain raw responses; fourteen reservations pass.
+Seven reference/candidate packed hashes match across all six 64 M models and
+coupled 256 M. The coupled 64 M candidate fails only its final bound assertion
+because the first formula misses eight bytes of terminal offsets. Retain that raw
+response, timing exclusion, full 960 CPU seconds and empty cleanup. Do not retry it.
+The eight-cell tail contains only never-attempted cells. The whole diagnostic
+campaign is now complete; do not rerun either driver.
+
+Overall CPU peak RSS is unchanged because engine construction briefly holds both
+prepared and cloned scaled matrices. At 256 M, post-packing RSS falls 12.898 to
+12.133 GiB, but peak stays 14.040 GiB, packing slows 7.3%, and CPU preparation
+regresses 68.769 to 72.756 seconds. Keep all observations. The candidate-only
+one-billion-NNZ CPU preparation completes at 54.806 GiB process HWM within 64 GiB
+host reserve, with 976564 tiles and 750 M eligible nonzeros. Input takes 108.361,
+engine 271.795, operator 7.130, packing 72.607, preparation subtotal 351.532,
+digest 15.193 and fresh process total 477.791 seconds. This is NOT an LP solve;
+zero CUDA contexts, LP updates or certificates run in the diagnostic.
+
+Final prospective host requirements include unchanged 8 GiB internal allowance
+and 4 GiB physical headroom. FP4 coupled drops 72 to 68 GiB; irregular/ill-scaled/
+degenerate 85 to 76; tall 81 to 72. Wide rises 106 to 107 due to explicit repaired
+witness storage. The preliminary 60 GiB coupled estimate omitted CPU clone
+transients and is superseded. Formula 5 also used a loose public Pock upper bound;
+final formula 6 correctly bounds the isolated streamed implementation. Historical
+formulas, reservations and sources remain. Amendments 36–39 record all corrections.
+
+Latest capacity sees 176.460 GiB host available: all eighteen project lanes fit.
+The GPU is instantaneously idle at 0.750 GiB, not admitted by a sustained window.
+Fresh operational GPU v16, image-v9 exact continuations/chunk-copy exercise and all
+four full sanitizers remain pending. Require complete prospective admission phase
+reservations before starting. Final campaign freeze supports image-v9 and requires
+operational CPU v17 plus bounded-memory-contracts-v2. Plans v23/v24 close the
+completed CPU-only scope and preserve both historical cleanup dispositions.
+The thirty-cell project/COPT roster is unfrozen and zero billion LP solves have
+run. COPT native CPU admission remains 12 cases / 9 strict accepted endpoints;
+COPT GPU ownership and billion peak admission remain pending. Keep the broad roster,
+common prospective 500-update increments up to 5000 and all full solve/audit/storage
+reservations. Remain container-only, no reset, shared-memory clearing or other-job
+signals; GPU only while idle.
+
+Twenty-two failed reservations retain full 40020 CPU / 1800 GPU seconds. New
+cleanup is empty and owned diagnostic identities are gone. Prior full-solve counts
+remain 38/37/35 with one missing response; prior CPU packing counts remain 18/12/6.
+No fresh full portable replay is claimed. The 240000 CPU / 30000 GPU allocation
+stays open, phase caps and earlier general allocation unchanged. No active
+reservation remains at final settlement. Commit locally only; no public adoption.
+
+Evidence: /storage/ai-optimizer-billion-v1/bounded-memory-delivery-v1.json,
+bounded-memory-cpu-v1/freeze.json, bounded-memory-cpu-tail-v1.json,
+billion-host-availability-v6.json and bounded-memory-settled-checkpoint-v1.json.
+Open settled checkpoint: 119590.941904424 CPU / 6952.970278844 GPU seconds.
+All 336 documentation pages and local links validate.
+
+Report: [peak memory](docs/benchmarks/lp-billion.md#bounded-preparation-storage-and-peak-memory).
+Compact bindings: [memory results](docs/benchmarks/lp-billion-bounded-memory-results.json).
+
 # Current agent handoff: component timing and COPT CPU admission (2026-11-20)
 
 The user requests careful billion-scale component timings and comparison with the

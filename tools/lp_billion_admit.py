@@ -17,6 +17,7 @@ IMAGE = BASE/'image-v1'
 def gate_identity(kind,version):
     # The first v3 memcheck reservation stopped on its CPU-only fallback fixture.
     # Its failed receipt remains; the corrected harness has a fresh identity.
+    if version==9:return f'bounded-memory-{kind}-v1'
     if version==8:return f'timing-{kind}-v1'
     if version in [5,6,7]:return f'packing-{kind}-v{version-4}'
     if version==4:return f'memory-{kind}-v1'
@@ -33,7 +34,7 @@ def call(command, requests, out, name):
     return result
 
 def seal(version=1):
-    quality = {1:'array-quality-v4',2:'array-quality-v5',3:'array-quality-v6',4:'memory-quality-v1',5:'packing-quality-v1',6:'packing-quality-v2',7:'packing-quality-v5',8:'timing-quality-v3'}[version]
+    quality = {1:'array-quality-v4',2:'array-quality-v5',3:'array-quality-v6',4:'memory-quality-v1',5:'packing-quality-v1',6:'packing-quality-v2',7:'packing-quality-v5',8:'timing-quality-v3',9:'bounded-memory-quality-v1'}[version]
     require(load(BASE/'resources'/(quality+'.settlement.json'))['status']=='passed', 'array admission')
     ownership = 'gpu-ownership-v1' if version == 1 else 'ownership-audit-v2'
     require(load(BASE/'resources'/(ownership+'.settlement.json'))['status']=='passed','operational GPU ownership admission')
@@ -45,10 +46,10 @@ def seal(version=1):
         shutil.copyfile(source,IMAGE/name);(IMAGE/name).chmod(0o755 if name!='tensor.cubin' else 0o644)
     require(ref(IMAGE/'tensor.cubin')['sha256']==ref(ROOT/'artifacts/gpup-general-v1/fast-image-v10/tensor.cubin')['sha256'],'unchanged CUDA image')
     binding=dict(executor=ref(IMAGE/'executor'),legacy=ref(IMAGE/'legacy-interface'),cuda=ref(IMAGE/'tensor.cubin'),
-        source_manifest=ref(BASE/'sources'/quality/'manifest.json'),old_executor=ref(OLD/'executor'),cpu_tests={1:48,2:49,3:51,4:52,5:53,6:53,7:54,8:57}[version],clippy_passed=True,
+        source_manifest=ref(BASE/'sources'/quality/'manifest.json'),old_executor=ref(OLD/'executor'),cpu_tests={1:48,2:49,3:51,4:52,5:53,6:53,7:54,8:57,9:58}[version],clippy_passed=True,
         ownership_admission=ref(BASE/'resources'/(ownership+'.settlement.json')))
     if version>=3:
-        built=load(BASE/({3:'build-prepare-v3',4:'build-memory-v1',5:'build-packing-v1',6:'build-packing-v2',7:'build-packing-v5',8:'build-timing-v3'}[version]+'/result.json'))
+        built=load(BASE/({3:'build-prepare-v3',4:'build-memory-v1',5:'build-packing-v1',6:'build-packing-v2',7:'build-packing-v5',8:'build-timing-v3',9:'build-bounded-memory-v1'}[version]+'/result.json'))
         require(built['status']=='passed' and built['quality'],'GPU preparation CPU quality')
         binding['cpu_tests']=built['rust_tests']
         require(built['cuda_source']==ref(ROOT/'research/lp-billion-lowbit/cuda/prepare.cu'),'compiled preparation source binding')
@@ -116,7 +117,7 @@ def gpu(identity,sanitizer=None):
                     cmd=instrument(cmd,sanitizer,out/(name+'.sanitizer'))
                 candidate=copy.deepcopy(r)
                 if preparation is not None:candidate['fast']['gpu_preparation']=True
-                if IMAGE.name=='image-v8':candidate['profile']=True
+                if IMAGE.name in ['image-v8','image-v9']:candidate['profile']=True
                 after=call(cmd,[candidate],out,name+'-new')[0]
                 validate_timings(after, candidate.get('profile',False))
                 if preparation is not None:
@@ -134,7 +135,7 @@ def gpu(identity,sanitizer=None):
     print(dict(status='passed',comparisons=len(rows),sanitizer=sanitizer),flush=True)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['seal','gpu']);p.add_argument('--id');p.add_argument('--version',type=int,choices=[1,2,3,4,5,6,7,8],default=1);p.add_argument('--sanitizer',choices=['memcheck','racecheck','initcheck','synccheck']);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['seal','gpu']);p.add_argument('--id');p.add_argument('--version',type=int,choices=[1,2,3,4,5,6,7,8,9],default=1);p.add_argument('--sanitizer',choices=['memcheck','racecheck','initcheck','synccheck']);a=p.parse_args()
     IMAGE=BASE/f'image-v{a.version}'
     if a.action=='seal':seal(a.version)
     else:gpu(a.id,a.sanitizer)

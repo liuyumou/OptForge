@@ -98,6 +98,50 @@ pub fn solve(
         None
     };
     let packing_end = started.elapsed().as_nanos();
+    let packed_bytes = packed.as_ref().map_or(0, Packed::storage_bytes);
+    let tile_count = packed.as_ref().map_or(0, |p| p.tile_count);
+    let selected_combined = fast.is_some_and(|f| f.resolved(packed.as_ref()).combined);
+    let selected_format = if settings.format.components() > 0 && packed.is_none() {
+        if fast.is_some() {
+            Format::Fp32
+        } else {
+            Format::Native
+        }
+    } else {
+        settings.format
+    };
+    let setup_started = Instant::now();
+    profile.enter(Phase::DeviceSetup);
+    let mut device = if let Some(f) = fast {
+        Runtime::Fast(Box::new(crate::fast_device::Device::new(
+            &engine,
+            &op,
+            packed.as_ref(),
+            image,
+            selected_format,
+            config,
+            f,
+        )?))
+    } else {
+        Runtime::Local(Box::new(LocalDevice::new(
+            &engine,
+            &op,
+            packed.as_ref(),
+            image,
+            selected_format,
+            config,
+        )?))
+    };
+    let fast_shapes = match &device {
+        Runtime::Fast(d) => Some(d.shapes()),
+        _ => None,
+    };
+    // All device constructors complete their uploads before returning. Only
+    // logical metadata is needed after this point; release the host arrays before
+    // allocating controller, checkpoint, residual and certificate workspace.
+    drop(packed);
+    let initial_setup_ns = setup_started.elapsed().as_nanos();
+    let control_started = Instant::now();
     profile.enter(Phase::InitialControl);
     crate::host::with_products(
         &engine,
@@ -116,43 +160,11 @@ pub fn solve(
             };
             let mut control = Fp64Controller::new_with_merit(&engine, merit);
             control.set_deadline(Some(started + Duration::from_millis(settings.wall_ms)));
-            let selected_format = if settings.format.components() > 0 && packed.is_none() {
-                if fast.is_some() {
-                    Format::Fp32
-                } else {
-                    Format::Native
-                }
-            } else {
-                settings.format
-            };
-            let prepared = started.elapsed().as_nanos();
+            let prepared = packing_end + control_started.elapsed().as_nanos();
             profile.enter(Phase::DeviceSetup);
-            let mut device = if let Some(f) = fast {
-                Runtime::Fast(Box::new(crate::fast_device::Device::new(
-                    &engine,
-                    &op,
-                    packed.as_ref(),
-                    image,
-                    selected_format,
-                    config,
-                    f,
-                )?))
-            } else {
-                Runtime::Local(Box::new(LocalDevice::new(
-                    &engine,
-                    &op,
-                    packed.as_ref(),
-                    image,
-                    selected_format,
-                    config,
-                )?))
-            };
-            let fast_shapes = match &device {
-                Runtime::Fast(d) => Some(d.shapes()),
-                _ => None,
-            };
+            let reset_started = Instant::now();
             device.reset(control.state())?;
-            let setup = started.elapsed().as_nanos() - prepared;
+            let setup = initial_setup_ns + reset_started.elapsed().as_nanos();
             profile.enter(Phase::Bookkeeping);
             let mut format = selected_format;
             let mut current_merit = control.state().anchor_error;
@@ -409,7 +421,7 @@ pub fn solve(
         "reference_product_nnz":reference_work,
         "physical_product_work":physical_work,"accepted_product_work":accepted_work,
         "product_work_order":["tensor_attempted_nnz","tensor_used_nnz","row_correction_nnz","logical_product_nnz"],
-        "tile_count":packed.as_ref().map_or(0,|p|p.tile_count),"packed_bytes":packed.as_ref().map_or(0,Packed::storage_bytes),
+        "tile_count":tile_count,"packed_bytes":packed_bytes,
         "bound_proof":[],"guard_policy":"tile-local-row-replacement-v2",
         "status":status,"certified":status=="certified"&&certificate["accepted"]==true,"certificate":certificate,
         "endpoint":final_endpoint,"physical":control.physical_iterations(),"logical":control.state().iterations,
@@ -429,10 +441,10 @@ pub fn solve(
                 if fast.is_some_and(|f| f.host_certificates) {
                     result["cached_assessments"] = json!(cached_assessments);
                 }
-                if let Some(f) = fast.filter(|f| f.auto_schedule) {
+                if fast.is_some_and(|f| f.auto_schedule) {
                     result["selected_schedule"] = json!(if selected_format.components() == 0 {
                         "sparse"
-                    } else if f.resolved(packed.as_ref()).combined {
+                    } else if selected_combined {
                         "combined"
                     } else {
                         "split"

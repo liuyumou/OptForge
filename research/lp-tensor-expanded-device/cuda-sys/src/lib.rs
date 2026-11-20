@@ -27,8 +27,8 @@ use std::ptr;
 use std::rc::Rc;
 use std::sync::OnceLock;
 
-mod primary;
 pub mod events;
+mod primary;
 pub mod setup;
 mod status;
 
@@ -830,6 +830,23 @@ pub struct DeviceBuffer<T: Copy> {
     _element: PhantomData<T>,
 }
 
+fn copy_target(raw: u64, count: usize, offset: usize, len: usize, width: usize) -> Result<u64> {
+    let end = offset
+        .checked_add(len)
+        .ok_or_else(|| DeviceError::Unsupported("copy range overflow".into()))?;
+    if end > count {
+        return Err(DeviceError::Unsupported(
+            "copy range exceeds allocation".into(),
+        ));
+    }
+    let bytes = offset
+        .checked_mul(width)
+        .and_then(|n| u64::try_from(n).ok())
+        .ok_or_else(|| DeviceError::Unsupported("copy byte offset overflow".into()))?;
+    raw.checked_add(bytes)
+        .ok_or_else(|| DeviceError::Unsupported("copy device address overflow".into()))
+}
+
 impl<T: Copy> DeviceBuffer<T> {
     /// Element count.
     #[must_use]
@@ -889,6 +906,39 @@ impl<T: Copy> DeviceBuffer<T> {
         // The source is borrowed only for this call, so the copy must complete
         // before it returns. Synchronizing here is what makes that true, and it is
         // the reason this method is not the one a hot loop uses.
+        stream.synchronize()
+    }
+
+    /// Copy a bounded host slice into an element offset of this allocation.
+    /// The borrowed host memory is no longer in use when this method returns.
+    ///
+    /// # Errors
+    ///
+    /// Refuses element, byte-offset or device-address overflow and out-of-range
+    /// writes before accessing the driver. Reports driver or stream failures.
+    pub fn copy_from_at(&mut self, offset: usize, source: &[T], stream: &Stream) -> Result<()> {
+        let _component_scope = optimizer_core::lp_cost::scope("host_to_device");
+        let destination = copy_target(self.raw, self.count, offset, source.len(), size_of::<T>())?;
+        if source.is_empty() {
+            return Ok(());
+        }
+        let driver = driver()?;
+        // SAFETY: the checked element range lies within this live allocation;
+        // byte/address arithmetic was checked, source is valid for this call,
+        // and the live stream is synchronized before the host borrow ends.
+        let status = unsafe {
+            (driver.copy_to_device)(
+                destination,
+                source.as_ptr().cast(),
+                std::mem::size_of_val(source),
+                stream.raw,
+            )
+        };
+        check(driver, "cuMemcpyHtoDAsync_v2", status)?;
+        optimizer_core::lp_cost::count(
+            "host_to_device_bytes",
+            std::mem::size_of_val(source) as u64,
+        );
         stream.synchronize()
     }
 
@@ -1032,6 +1082,20 @@ pub fn launch(
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn offset_copy_bounds_and_overflows_are_checked_without_a_driver() {
+        assert_eq!(super::copy_target(16, 10, 3, 4, 8).unwrap(), 40);
+        assert_eq!(super::copy_target(16, 10, 10, 0, 8).unwrap(), 96);
+        for (raw, count, offset, len, width) in [
+            (16, 10, 8, 3, 8),
+            (16, 10, 11, 0, 8),
+            (0, usize::MAX, usize::MAX, 1, 8),
+            (0, usize::MAX, usize::MAX, 0, 8),
+            (u64::MAX - 3, 2, 1, 1, 8),
+        ] {
+            assert!(super::copy_target(raw, count, offset, len, width).is_err());
+        }
+    }
     use super::*;
 
     #[test]
@@ -1147,13 +1211,25 @@ mod expanded_argument_tests {
     fn expanded_argument_cells_preserve_complete_abi_payloads() {
         assert_eq!(std::mem::size_of::<[u64; 4]>(), 32);
         assert!(std::mem::align_of::<[u64; 4]>() >= 8);
-        assert_eq!(argument_words(Argument::DevicePtr(u64::MAX)), [u64::MAX, 0, 0, 0]);
-        assert_eq!(&argument_words(Argument::U32(u32::MAX))[0].to_ne_bytes()[..4], &u32::MAX.to_ne_bytes());
+        assert_eq!(
+            argument_words(Argument::DevicePtr(u64::MAX)),
+            [u64::MAX, 0, 0, 0]
+        );
+        assert_eq!(
+            &argument_words(Argument::U32(u32::MAX))[0].to_ne_bytes()[..4],
+            &u32::MAX.to_ne_bytes()
+        );
         assert_eq!(argument_words(Argument::F64(-0.))[0], (-0f64).to_bits());
-        let addresses=[0x0123456789abcdef,0xfedcba9876543210,1,u64::MAX];
+        let addresses = [0x0123456789abcdef, 0xfedcba9876543210, 1, u64::MAX];
         assert_eq!(argument_words(Argument::Soa32(addresses)), addresses);
-        let words=[Argument::U32(7),Argument::Soa32(addresses),Argument::F64(3.)]
-            .map(argument_words);
-        assert_eq!(words[0][0],7);assert_eq!(words[1],addresses);assert_eq!(words[2][0],3f64.to_bits());
+        let words = [
+            Argument::U32(7),
+            Argument::Soa32(addresses),
+            Argument::F64(3.),
+        ]
+        .map(argument_words);
+        assert_eq!(words[0][0], 7);
+        assert_eq!(words[1], addresses);
+        assert_eq!(words[2][0], 3f64.to_bits());
     }
 }

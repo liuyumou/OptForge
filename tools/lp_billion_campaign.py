@@ -61,20 +61,27 @@ def capacity(model, lane, borrowed_operator=False):
 
 def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=False, version=1):
     out=BASE/identity;require(not out.exists(),'fresh cohort identity')
-    require(version in [1,2,3,4,5,6,7,8], 'admitted image version')
+    require(version in [1,2,3,4,5,6,7,8,9], 'admitted image version')
     image=BASE/f'image-v{version}'
     proofs=[]
     from lp_billion_admit import gate_identity
     if version>=4:
-        for name in (['operational-cpu-v15','operational-gpu-v15'] if version in [7,8] else ['operational-cpu-v14','operational-gpu-v14'] if version==6 else ['operational-cpu-v13','operational-gpu-v13'] if version==5 else ['operational-cpu-v10','operational-gpu-v10']):
+        for name in (['operational-cpu-v17','operational-gpu-v16'] if version==9 else ['operational-cpu-v15','operational-gpu-v15'] if version in [7,8] else ['operational-cpu-v14','operational-gpu-v14'] if version==6 else ['operational-cpu-v13','operational-gpu-v13'] if version==5 else ['operational-cpu-v10','operational-gpu-v10']):
             gate=BASE/'resources'/(name+'.settlement.json')
             require(load(gate)['status']=='passed','memory candidate admission '+name)
             proofs.append(ref(gate))
         for path in sorted((BASE/'resources').glob('*.settlement.json')):
             if load(path)['status']!='passed':proofs.append(ref(path))
-    if version==8:
+    if version>=8:
         gate=BASE/'resources/timing-copt-contracts-v5.settlement.json'
         require(load(gate)['status']=='passed','complete timing contract admission')
+        proofs.append(ref(gate))
+    if version==9:
+        gate=BASE/'resources/bounded-upload-contracts-v1.settlement.json'
+        require(load(gate)['status']=='passed','bounded upload admission')
+        proofs.append(ref(gate))
+        gate=BASE/'resources/bounded-memory-contracts-v2.settlement.json'
+        require(load(gate)['status']=='passed','final source-specific capacity admission')
         proofs.append(ref(gate))
     if version==3:
         harness=BASE/'resources/preparation-harness-cpu-v6.settlement.json'
@@ -133,6 +140,9 @@ def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=Fa
             cell_seconds=seconds if isinstance(seconds,int) else seconds[model['family']]
             cell_wall=wall_ms if isinstance(wall_ms,int) else wall_ms[model['family']]
             memory=capacity(model,lane,borrowed_operator=version>=4)
+            if version>=9:
+                from lp_billion_memory_bounds_final import bounded_capacity
+                memory=bounded_capacity(model,lane)
             # Capacity pilots have fewer endpoint snapshots than the final cohort.
             memory['endpoint_bytes_upper']=endpoint_bytes(model,iterations)
             cell=dict(id=f'{identity}-{index}-{lane}',model=model['model'],model_result=ref(path),construction_check=ref(proof_path),lane=lane,memory=memory,

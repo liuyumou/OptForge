@@ -1,0 +1,84 @@
+{
+  "active_reservations": 0,
+  "billion_CPU_preparations": 1,
+  "billion_LP_solves": 0,
+  "checkpoint": {
+    "bytes": 2378,
+    "namespace": "evidence",
+    "path": "bounded-memory-settled-checkpoint-v1.json",
+    "sha256": "8b038b3c721d96283c17c71cf43ae3f0a037c74f8198c6856de63426458a1964"
+  },
+  "cpu_by_phase_ns": {
+    "admission": 25984552665804,
+    "cleanup": 137152067816,
+    "development": 40288546875108,
+    "implementation": 1152143765960,
+    "native": 13583482065588,
+    "reporting": 38445064464148
+  },
+  "cpu_caps": {
+    "admission": 28000,
+    "cleanup": 6000,
+    "development": 118000,
+    "implementation": 6000,
+    "native": 20000,
+    "reporting": 62000
+  },
+  "cpu_ns": 119590941904424,
+  "current_GPU_admission_started": false,
+  "current_image": {
+    "bytes": 1679,
+    "namespace": "evidence",
+    "path": "image-v9/binding.json",
+    "sha256": "051100bdc6ad2be94c86c5bdf6dafbf27fa227193269c22a05cca737cb701ff2"
+  },
+  "delivery": {
+    "bytes": 142305,
+    "namespace": "evidence",
+    "path": "bounded-memory-delivery-v1.json",
+    "sha256": "58029ab8c65d480848e0f676e631c54bdc71788974260cd30f63f67396ad954b"
+  },
+  "docs_settlement": {
+    "bytes": 362,
+    "namespace": "evidence",
+    "path": "resources/bounded-memory-docs-v1.settlement.json",
+    "sha256": "1c174caa9e0feaa9ba2209e115ef90dc565853e34d2eef3389a91b1d94119e44"
+  },
+  "documentation_pages": 336,
+  "failed_cpu_ns": 40020000000000,
+  "failed_gpu_ns": 1800000000000,
+  "failed_reservations": 22,
+  "final_verification": {
+    "bytes": 1220,
+    "namespace": "evidence",
+    "path": "bounded-memory-final-verification-v1.json",
+    "sha256": "c89662d6fb0bb852b5fe6dcdd34b0450e6e16743f4ba2fbff75f6feca01baf2c"
+  },
+  "general_allocation_unchanged": {
+    "cpu_ns": 222683436386676,
+    "gpu_ns": 29019968674596
+  },
+  "gpu_by_phase_ns": {
+    "admission": 3097199960750,
+    "development": 3855770318094
+  },
+  "gpu_caps": {
+    "admission": 5500,
+    "development": 24500
+  },
+  "gpu_ns": 6952970278844,
+  "host_capacity": {
+    "bytes": 28705,
+    "namespace": "evidence",
+    "path": "billion-host-availability-v6.json",
+    "sha256": "e2112ee95cf87e4c7bef42d63cf60fbfe4de24f2413cf6dc940ded6091efc262"
+  },
+  "limitation": "Bounded CPU preparation verified, measured CPU overall peak unchanged; GPU admission and full billion/COPT solves pending.",
+  "prior_checkpoint": {
+    "bytes": 3019,
+    "namespace": "evidence",
+    "path": "timing-settled-checkpoint-v1.json",
+    "sha256": "94e1ccc820f8434989df8353734b76df879333466eb57d522b15e5732756a5ba"
+  },
+  "status": "open_settled"
+}

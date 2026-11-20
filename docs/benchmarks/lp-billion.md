@@ -945,3 +945,164 @@ local evidence at `/storage/ai-optimizer-billion-v1/timing-copt-delivery-v1.json
 [35](../specifications/SPEC-0046-amendment-35.md).
 The [final supplemental checkpoint](lp-billion-timing-copt-checkpoint.json) binds
 the corrected 36-test harness admission and fully settled allocation totals.
+
+
+## Bounded preparation storage and peak memory
+
+The opt-in image-v9 reduces the conservative coupled billion-scale host
+requirement from **72 to 68 GiB**, including the unchanged 8 GiB internal allowance
+and 4 GiB physical headroom. This is a prospective full-solve requirement, not a
+measured full-solve peak. The initially derived 60 GiB estimate omitted the CPU
+fallback's construction transient and is explicitly superseded. The earlier
+72 GiB declaration remains historical; future reference admission would also need
+the complete fallback and repaired-witness accounting.
+
+The packer uses two ordered sparse passes, exact-length final arrays and a bounded
+256-tile work batch. It no longer retains all dense tile coefficients/codes,
+per-nonzero coverage flags or lists of half tiles. Both orientations retain the
+same coefficient bits, fragment order and original transpose validation. FP32
+proposal uploads reuse at most 32 MiB of conversion scratch. The checked offset
+copy synchronizes before its borrowed host slice is reused. After synchronous
+device upload, host packed arrays are released before creating controller,
+checkpoint, residual and certificate workspace. All upload and lifetime overhead
+remains inside the recorded phase and complete costs.
+
+The unchanged CPU fallback sets the coupled conservative peak: it briefly retains
+the prepared scaled matrices while cloning them into the engine. Its streamed Pock work
+and spectral scratch are now explicit in the bound. This remaining cost
+also means that less packing residency need not reduce a CPU preparation's overall
+high-water RSS. No strict-checker arrays, original FP64 coefficients, arithmetic,
+certificate criteria, public defaults or control100/certificate500 policy change.
+
+| Billion original-nonzero family, FP4x2 | Previous declaration, GiB | Corrected candidate, GiB | Candidate limiting stage |
+| --- | ---: | ---: | --- |
+| irregular | 85 | 76 | CPU engine construction |
+| wide | 106 | 107 | solve and certificate |
+| tall | 81 | 72 | CPU engine construction |
+| coupled blocks | 72 | 68 | CPU engine construction |
+| ill scaled | 85 | 76 | CPU engine construction |
+| degenerate | 85 | 76 | CPU engine construction |
+
+All entries include physical headroom. Wide increases because repaired-dual witness
+storage is now explicit; no improvement is claimed for it. Device reservations
+are unchanged. These bounds apply to the frozen native/FP32/compact-FP4x2 settings,
+not arbitrary component counts or representations.
+
+### Fresh-process CPU measurements
+
+The protocol freezes reference/candidate CPU preparations on all six 64 M models
+and coupled 256 M, plus one candidate-only billion preparation. Every implementation
+runs in a fresh process. Reference packing source is byte-identical to image-v8;
+engine/scaling/norm preparation is shared and unchanged. Complete packed-array
+SHA-256 values include integer arrays, FP64 bits, metadata and both orientations.
+Input, engine, operator, packing, digest and process costs remain separately visible.
+Digesting uses bounded scratch and is excluded from preparation but included in the
+process cost. VmHWM is a per-process high-water mark; sampled aggregate RSS is
+retained separately and is not an exact aggregate peak.
+
+The coupled 64 M candidate retains a complete raw response, but its final bound
+assertion fails because the first formula omitted two terminal residual offsets:
+eight bytes. Its full 960 CPU-second reservation, sources, raw values and empty
+cleanup remain. Its performance is excluded and the cell never repeats. The
+corrected formula includes all terminal entries. Seven initial attempts and eight
+never-attempted tail cells retain disjoint identities. Before the billion cell could
+start, an additive disposition corrects its CPU host reserve from 56 to 64 GiB.
+The original freeze and provisional bounds remain intact.
+
+CPU acceptance passes 58 isolated Rust tests, including exact representation
+comparisons across worker batches, plus the offset-copy overflow/range test.
+Formatting, Clippy and release/CUDA compilation pass. Fresh operational CPU v17
+passes 75 original supervisor tests and 42 resource/evidence/timing/memory tests.
+Numerical image-v9 and its diagnostic executable are unchanged by the accounting
+corrections. Exact GPU continuations, chunk-upload exercise and all four complete
+sanitizer suites remain mandatory before full solves; image-v9 has not run on GPU.
+
+The [compact memory results](lp-billion-bounded-memory-results.json) bind each
+response, timing exclusion, source manifest and complete charge. Protocol and
+additive dispositions are [amendment 36](../specifications/SPEC-0046-amendment-36.md),
+[37](../specifications/SPEC-0046-amendment-37.md) and
+[38](../specifications/SPEC-0046-amendment-38.md) and
+[39](../specifications/SPEC-0046-amendment-39.md). Formula 5 retained an unnecessarily
+loose public-Pock term-graph upper bound; final formula 6 uses the isolated streamed
+implementation. Every original reservation remains unchanged.
+
+### Measured results and remaining limits
+
+All seven paired packed-array hashes match, including the retained failed raw
+candidate. Fourteen reservations pass; that one candidate retains its exclusion.
+The six eligible performance pairs comprise five 64 M families and coupled 256 M.
+No attempted cell repeats.
+
+| Model | Reference peak RSS, GiB | Candidate peak RSS, GiB | Reference packing, s | Candidate packing, s |
+| --- | ---: | ---: | ---: | ---: |
+| 256m coupled blocks | 14.040 | 14.040 | 14.430 | 15.484 |
+| 64m coupled blocks | 3.512 | 3.512 | 3.302 | excluded |
+| 64m degenerate | 4.026 | 4.027 | 2.474 | 2.449 |
+| 64m ill scaled | 4.026 | 4.026 | 3.038 | 3.039 |
+| 64m irregular | 4.026 | 4.026 | 3.056 | 2.955 |
+| 64m tall | 3.725 | 3.725 | 2.585 | 2.734 |
+| 64m wide | 5.251 | 5.251 | 3.663 | 3.396 |
+
+Overall CPU high-water RSS is essentially unchanged: engine construction peaks
+before packing. At 256 M, resident RSS immediately after packing falls from
+12.898 to 12.133 GiB
+(5.9%), but packing time regresses by
+7.3% and complete CPU preparation
+regresses from 68.769 to 72.756 seconds.
+Both observations remain eligible. These are single observations and do not
+establish a repeatable speedup, GPU upload performance or certified solve benefit.
+
+The candidate-only preparation of **1,000,000,000 original nonzeros** completes,
+with 976,564 canonical FP4 tiles and 750 million eligible nonzeros. It uses
+54.806 GiB per-process peak RSS and
+54.898 GiB sampled aggregate peak RSS within its
+64 GiB host reservation. The final packed arrays occupy 7.734 GiB;
+resident RSS after packing is 47.155 GiB. Its
+complete packed hash is retained. There is no reference billion preparation and
+no paired billion memory or speedup claim.
+
+| Billion CPU preparation component | Seconds |
+| --- | ---: |
+| Original input loading, hashing and transpose | 108.361 |
+| CPU engine: scaling, norms and step estimation | 271.795 |
+| Borrowed operator validation | 7.130 |
+| Bounded FP4 packing | 72.607 |
+| Complete preparation (engine + operator + packing) | 351.532 |
+| Full packed-array fingerprint | 15.193 |
+| Process bookkeeping, memory samples, serialization and teardown residual | 2.706 |
+| Fresh process total | 477.791 |
+
+The preparation subtotal is nested; do not add it to its three components. This
+run creates no CUDA context and executes no LP updates or certificates. It is a
+full-size preparation diagnostic, **not a billion-scale LP solve**. Strict checker
+sources remain unchanged; new device behavior still requires its mandatory gates.
+
+All 299 current numerical bindings verify: 291 of image-v8's 297 stay exact,
+six isolated implementation/test/boundary files change, and two files add the
+retained reference and diagnostic. Both CUDA binaries and all six original
+budget/idle/supervisor/placement bindings remain exact. Final capacity contracts
+pass all 42 tests after the source-specific correction. Twenty-two failed
+reservations retain full 40020 CPU / 1800 GPU seconds. New cleanup is empty,
+including the failed assertion; all owned diagnostic process identities are gone.
+
+The post-run snapshot has 176.460 GiB host MemAvailable,
+so all eighteen prospective project cells fit their current host declarations.
+The GPU is instantaneously idle at 0.750 GiB; this is not a
+five-minute observed-idle admission. Image-v9 exact GPU continuations, chunk-copy
+exercise and four sanitizers remain pending. All six original billion LP inputs
+remain ready. The full thirty-cell project/COPT comparison remains unfrozen;
+COPT GPU ownership and billion-scale peak admission are still required. Zero
+billion LP solves have run. Fresh complete GPU admission reservations must fit
+the remaining phase budgets before execution; no phase cap is changed here.
+
+The original full-solve capacity counts remain 38/37/35 with one missing response;
+the eighteen older CPU packing responses retain twelve eligible timings and six
+exclusions. Existing portable catalogs are unchanged and no new full portable
+replay is claimed. The separate 240000 CPU / 30000 GPU allocation remains open,
+with unchanged physical guards and the earlier general allocation unchanged.
+Large evidence is local under `/storage/ai-optimizer-billion-v1`; commit locally
+only, with no public adoption or publication.
+
+Open settled checkpoint: 119590.941904424 CPU / 6952.970278844 GPU seconds.
+All 336 documentation pages and local links validate.
+Final settled evidence: `bounded-memory-settled-checkpoint-v1.json`.

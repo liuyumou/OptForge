@@ -503,3 +503,33 @@ fn indexed_proposal_matches_original_and_checks_transpose_without_tiles() {
         assert!(tensor_prepare::prepare(&op, &no_tiles).is_err());
     }
 }
+
+#[test]
+fn bounded_packing_matches_retained_reference_across_worker_batches() {
+    use lp_billion_lowbit::{tensor::Config, tensor_prepare, tensor_prepare_reference};
+    for (n, m) in [(8193, 8193), (8193, 129), (129, 8193)] {
+        let p = LinearProgram::new(&model(n, m)).unwrap();
+        let e = Engine::new(&p, settings(Format::Native).lp());
+        let op = Operator::borrowed_native(&e).unwrap();
+        for min_tile_nnz in [1, 128, 1024] {
+            for components in 1..=4 {
+                for compact_fragments in [false, true] {
+                    let c = Config {
+                        min_tile_nnz,
+                        components,
+                        compact_fragments,
+                        ..Config::default()
+                    };
+                    let before = tensor_prepare_reference::prepare(&op, &c).unwrap();
+                    let after = tensor_prepare::prepare(&op, &c).unwrap();
+                    // Serialized bytes preserve floating point sign bits, unlike
+                    // serde Value equality's numeric comparison of signed zero.
+                    assert_eq!(
+                        serde_json::to_vec(&before).unwrap(),
+                        serde_json::to_vec(&after).unwrap()
+                    );
+                }
+            }
+        }
+    }
+}

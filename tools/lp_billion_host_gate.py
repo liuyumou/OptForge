@@ -23,7 +23,11 @@ def snapshot(identity, version=3):
         path=BASE/f'models-1b-{family}-v1/result.json';model=load(path)
         require(model['nonzeros']==1_000_000_000,'one billion original matrix nonzeros')
         for lane in ['native','fp32','fp4x2']:
-            allocation=capacity(model,lane,borrowed_operator=version>=4)
+            if version>=9:
+                from lp_billion_memory_bounds_final import bounded_capacity
+                allocation=bounded_capacity(model,lane)
+            else:
+                allocation=capacity(model,lane,borrowed_operator=version>=4)
             host_required=(allocation['host_gib']+4)<<30
             device_required=(allocation['device_gib']+2)<<30
             cells.append(dict(family=family,lane=lane,model=ref(path),capacity=allocation,
@@ -36,6 +40,7 @@ def snapshot(identity, version=3):
         minimum_host_required_bytes=min(c['host_required_bytes'] for c in cells),
         all_cells_host_required_bytes=max(c['host_required_bytes'] for c in cells),
         source=ref(__file__),capacity_source=ref(Path(__file__).with_name('lp_billion_campaign.py')),
+        memory_capacity_source=ref(Path(__file__).with_name('lp_billion_memory_bounds_final.py')) if version>=9 else None,
         cuda_context_created=False,device_configuration_changed=False,other_processes_signalled=False,
         limitation='Container-visible instantaneous physical capacity only; no GPU reservation, final scientific freeze or sustained-idle admission is implied.'))
     print(dict(status=status,host_available_gib=memory['MemAvailable']/2**30,
@@ -44,5 +49,5 @@ def snapshot(identity, version=3):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--id',required=True)
-    parser.add_argument('--version',type=int,choices=[3,4,5,6,7],default=3)
+    parser.add_argument('--version',type=int,choices=[3,4,5,6,7,8,9],default=3)
     args=parser.parse_args();snapshot(args.id,args.version)

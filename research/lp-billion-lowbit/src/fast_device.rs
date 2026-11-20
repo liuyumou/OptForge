@@ -92,6 +92,26 @@ fn lanes(work: usize, rows: usize, override_lanes: usize) -> usize {
         1
     }
 }
+fn upload_proposal_values(
+    ctx: &Rc<Context>,
+    stream: &Stream,
+    values: &[f64],
+    format: Format,
+) -> Result<DeviceBuffer<f32>> {
+    if format == Format::Native || values.is_empty() {
+        return upload(ctx, stream, &[]);
+    }
+    const CHUNK: usize = 8 << 20; // At most 32 MiB of host conversion scratch.
+    let mut output = ctx.allocate(values.len())?;
+    let mut converted = Vec::with_capacity(CHUNK.min(values.len()));
+    for (index, chunk) in values.chunks(CHUNK).enumerate() {
+        converted.clear();
+        converted.extend(chunk.iter().map(|v| *v as f32));
+        output.copy_from_at(index * CHUNK, &converted, stream)?;
+    }
+    Ok(output)
+}
+
 struct Matrix {
     offsets: DeviceBuffer<u32>,
     indices: DeviceBuffer<u32>,
@@ -131,15 +151,7 @@ impl Matrix {
             original: upload(ctx, stream, &m.original)?,
             ro: upload(ctx, stream, t.map_or(&[][..], |v| &v.residual.offsets))?,
             ri: upload(ctx, stream, t.map_or(&[][..], |v| &v.residual.indices))?,
-            values: upload(
-                ctx,
-                stream,
-                &if format == Format::Native {
-                    Vec::new()
-                } else {
-                    residual.original.iter().map(|v| *v as f32).collect()
-                },
-            )?,
+            values: upload_proposal_values(ctx, stream, &residual.original, format)?,
             to: upload(ctx, stream, t.map_or(&[][..], |v| &v.offsets))?,
             tc: upload(ctx, stream, t.map_or(&[][..], |v| &v.columns))?,
             fragments: upload(ctx, stream, t.map_or(&[][..], |v| &v.fragments))?,

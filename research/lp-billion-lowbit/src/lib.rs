@@ -39,5 +39,6 @@ pub mod tensor_device;
 
 pub mod tensor_prepare;
 mod tensor_prepare_encode;
+pub mod tensor_prepare_reference;
 
 mod phase_profile;
