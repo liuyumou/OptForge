@@ -1,3 +1,65 @@
+# Current agent handoff: borrowed host matrix storage validated (2026-11-20)
+
+Image-v4 removes duplicate host operator CSR/CSC indices and scaled coefficients
+by borrowing immutable slices. Original FP64 data, arithmetic, strict 1e-9
+certificates, control100/certificate500, public defaults and both CUDA binaries
+remain unchanged. Of 293 numerical bindings, 289 remain exact; four isolated
+implementation/test files change and every retained original source remains exact.
+
+Acceptance passes 52 isolated Rust tests, formatting, Clippy, release/CUDA builds,
+75 original supervisor / 24 resource tests, 66 bitwise preparation comparisons,
+60 exact GPU continuations and all four complete sanitizer suites. Racecheck keeps
+its original 20 deep-norm power iterations, passes in 389.945 charged GPU seconds
+and peaks at 7.817 GiB RSS. Its never-started 56 GiB preflight refusal is followed
+by a prospective 32 GiB declaration supported by the previous 7.604 GiB peak.
+Preserve the initial failed compile and full 480 CPU / zero GPU seconds.
+
+All ten new 64/256/512 M cells and final/intermediate independent audits complete
+with exact v3/v4 numerical transcripts. Median sampled RSS reductions are about
+25%; preparation ratios are 1.130 / 1.167 / 1.115 and complete-cost ratios are
+1.075 / 1.052 / 1.050. Preserve the 64 M coupled and both 512 M assessment
+regressions. At 512 M, irregular RSS falls 47.209 to 35.777 GiB and coupled falls
+41.642 to 30.260 GiB. All endpoints are uncertified 100-update limits. Actual FP4
+share remains 75% only for coupled cases; no broad FP4 or certified-solve claim.
+The new 512 M comparisons use valid v3 controls; old v2 timing exclusions remain.
+
+The user allows the full Pro6000, only while idle and inside the container.
+Fresh post-run capacity sees GPU idle at 0.750 GiB and 60.781 GiB host available.
+Borrowing removes a 24 GiB billion-scale capacity allowance: minimum with headroom
+falls 79 to 55 GiB and widest falls 130 to 106 GiB. Exactly two of eighteen cells
+fit host capacity (native/FP32 coupled); no FP4 lane fits. All fit GPU capacity.
+Six original billion-nonzero inputs remain ready, zero billion solves have run,
+and the final cohort remains unfrozen. Preserve the full roster and FP4 objective.
+Once capacity permits, freeze the largest common 500-update ceiling up to 5000
+with complete solve/audit/storage reservations, including repaired dual witnesses.
+Never retry an attempted scientific cell or a failed reservation.
+
+Amendments 19–21 record borrowing, source-bound admission, supported racecheck
+memory and separately supervised full transcript comparisons. CPU phase caps now
+are implementation 6000, native 20000, admission 28000, development 118000,
+reporting 62000, cleanup 6000; GPU admission/development are 5500/24500. Totals
+stay 240000 CPU / 30000 GPU. Operational v10 passes, with numeric readmission
+ordering. All original physical limits, idle guards and supervision remain. Do
+not reset the device, clear shared memory, signal others or escape the container.
+
+The record retains 38 cells / 37 responses / 35 eligible timings / one old missing
+response and thirteen failed reservations charged full 32640 CPU / 1560 GPU
+seconds. All new completed cleanup is empty and no reservation is active. Old
+portable catalogs remain exact; new source-bound receipts supplement them and no
+new full portable replay is claimed. `tools/lp_billion_memory_continue.py` has
+completed all its stages; do not repeat them. Final billion freeze/execution still
+needs capacity and its full prospective resource plan.
+
+Evidence: /storage/ai-optimizer-billion-v1/memory-results-v1.json,
+paired-{64m,256m,512m}-v3-v4.json and billion-host-availability-v2.json.
+Open settled checkpoint including final documentation: 98505.269208520 CPU /
+6712.970278844 GPU seconds. The allocation stays open; earlier general allocation unchanged.
+All 318 documentation pages and local links validate. Commit locally only; no
+public adoption or publication.
+
+Report: [Borrowed host matrix storage](docs/benchmarks/lp-billion.md#borrowed-host-matrix-storage).
+Compact bindings: [Memory results](docs/benchmarks/lp-billion-memory-results.json).
+
 # Current agent handoff: GPU preparation gains; billion solves await host RAM (2026-11-20)
 
 GPU preparation is fully admitted: 66 bitwise preparation comparisons, 60 exact

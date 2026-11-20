@@ -17,6 +17,12 @@ import lp_billion_prepare_continue as continuation
 
 
 class BillionResourceContracts(unittest.TestCase):
+    def test_readmission_v10_supersedes_v9_in_numeric_order(self):
+        with tempfile.TemporaryDirectory() as temporary, mock.patch.object(budget,'BASE',Path(temporary)):
+            root=Path(temporary)/'operational-readmissions';root.mkdir()
+            for name in ['v9.json','v10.json','v4.json']:(root/name).write_text('{}')
+            self.assertEqual([p.stem for p in budget.operational_plans()],['v4','v9','v10'])
+
     def test_approved_totals_and_memory_are_exact(self):
         self.assertEqual(sum(common.CPU_CAPS.values()), 240000)
         self.assertEqual(sum(common.GPU_CAPS.values()), 30000)

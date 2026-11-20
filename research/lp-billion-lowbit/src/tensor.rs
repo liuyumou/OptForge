@@ -49,7 +49,7 @@ pub struct Tiles {
     /// Per 16-row half tile: coefficient error and component magnitude, interleaved.
     pub metadata: Vec<f64>,
     pub covered: Vec<u32>,
-    pub residual: Orientation,
+    pub residual: Orientation<'static>,
 }
 #[derive(Debug, Serialize)]
 pub struct Packed {
@@ -255,8 +255,8 @@ impl Packed {
                 covered: vec![0; n],
                 residual: Orientation {
                     offsets: vec![0],
-                    indices: Vec::new(),
-                    original: Vec::new(),
+                    indices: Vec::new().into(),
+                    original: Vec::new().into(),
                     ids: Vec::new(),
                 },
             };
@@ -331,8 +331,8 @@ impl Packed {
                     } {
                         t.covered[row] += 1;
                     } else {
-                        t.residual.indices.push(col as u32);
-                        t.residual.original.push(original.original[j]);
+                        t.residual.indices.to_mut().push(col as u32);
+                        t.residual.original.to_mut().push(original.original[j]);
                     }
                 }
                 t.residual.offsets.push(t.residual.indices.len() as u32);

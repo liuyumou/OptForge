@@ -85,7 +85,16 @@ def summarize(manifest, output):
         certified=sum(c.get('certified', False) for c in cells)))
 
 
-def compare(before, after, output):
+def compare(before, after, output, within_reservation=False):
+    if not within_reservation and load(after)['image']['path']=='image-v4/binding.json':
+        from lp_billion_budget import run
+        import sys
+        identity='comparison-'+Path(after).parent.name
+        result=run(identity,'reporting',600,False,
+            [sys.executable,'-B',__file__,'compare',str(before),str(after),str(output),'--within-reservation'],
+            host_gib=32,disk_gib=1)
+        require(result['status']=='passed','bounded complete comparison')
+        return
     a,b=load(before)['cells'],load(after)['cells']
     require(len(a)==len(b),'paired cohort lengths')
     pairs=[]
@@ -118,8 +127,8 @@ if __name__=='__main__':
     p=argparse.ArgumentParser();sub=p.add_subparsers(dest='action',required=True)
     a=sub.add_parser('audit');a.add_argument('manifest',type=Path)
     s=sub.add_parser('summarize');s.add_argument('manifest',type=Path);s.add_argument('output',type=Path)
-    c=sub.add_parser('compare');c.add_argument('before',type=Path);c.add_argument('after',type=Path);c.add_argument('output',type=Path)
+    c=sub.add_parser('compare');c.add_argument('before',type=Path);c.add_argument('after',type=Path);c.add_argument('output',type=Path);c.add_argument('--within-reservation',action='store_true')
     args=p.parse_args()
     if args.action=='audit':audit(args.manifest)
     elif args.action=='summarize':summarize(args.manifest,args.output)
-    else:compare(args.before,args.after,args.output)
+    else:compare(args.before,args.after,args.output,args.within_reservation)

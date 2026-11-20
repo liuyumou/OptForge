@@ -1,15 +1,14 @@
 # Billion-nonzero LP development on the Pro6000
 
 Execution continuation under [SPEC-0046](../specifications/SPEC-0046-billion-lp.md),
-2026-11-19–20. GPU preparation now passes bitwise comparisons, exact solve
-continuations and all four sanitizer suites. Ten independently audited capacity
-runs retain exact numerical transcripts. At 64 M and 256 M nonzeros, descriptive
-v2/v3 preparation speedups are 2.897x and 3.401x; complete-cost speedups are 1.293x
-and 1.392x. These are uncertified 100-update runs. All six billion-nonzero originals
-are ready, but zero billion-scale solves have run: the current host-memory gate
-admits none of the eighteen final cells. Public defaults, strict certificates and
-historical results remain unchanged. See the
-[latest timings and capacity gate](#gpu-preparation-timings-and-host-memory).
+2026-11-19–20. Image-v4 removes duplicate host operator arrays while preserving
+strict certificates and both CUDA binaries. All ten new 64/256/512 M capacity
+runs have exact numerical transcripts and complete independent audits. Sampled
+peak host RSS falls by roughly 25%; descriptive complete-cost speedups over
+GPU-preparation image-v3 are 1.075x / 1.052x / 1.050x. These remain uncertified
+100-update measurements. Zero billion-scale solves have run: two native/FP32
+cells now fit current host headroom, but the FP4 lanes and full roster do not.
+See the [latest memory results](#borrowed-host-matrix-storage).
 
 ## Scope and implementation
 
@@ -525,3 +524,140 @@ Open settled checkpoint including final documentation: 86933.674672092 CPU /
 All 315 documentation pages and their local links validate. The earlier general
 allocation remains unchanged. Results and changes are committed
 locally only; no public adoption, confirmation or publication is released.
+
+## Borrowed host matrix storage
+
+The [compact memory receipt](lp-billion-memory-results.json) binds the admitted
+image-v4, complete sanitizer suites, ten paired runs, independent audits, numerical
+source comparisons and fresh physical-capacity snapshot. This follows the user's
+request to reduce host memory; it does not reduce numerical precision.
+
+The billion-scale executor previously cloned both orientations' canonical u32
+indices and scaled FP64 coefficients into its operator while the original arrays
+remained alive. It now borrows those immutable slices through Rust lifetimes;
+compact u32 offsets stay owned. Legacy constructors still own their data, and
+packing residuals remain owned. The original model, scaled engine values, CPU
+control and strict certificate checks retain their existing arithmetic and order.
+The existing `operator_storage_bytes` response field describes logical referenced
+storage, so it remains numerically unchanged; sampled process RSS measures the
+physical reduction.
+
+At one billion nonzeros, the eliminated arrays contain 24 billion bytes
+(22.352 GiB). Their former capacity allowance was 24 GiB. The versioned admission
+formula subtracts only that copy allowance and preserves every other allocator,
+context, I/O, state, packing and certificate allowance, including mandatory
+4 GiB physical headroom. The change and validation are prospective under
+[amendment 19](../specifications/SPEC-0046-amendment-19.md).
+
+### Validation and resource handling
+
+All 52 isolated Rust tests, formatting, Clippy and release/CUDA builds pass. The
+new regression checks actual shared pointers, exact products and complete FP4
+packing for rectangular matrices with empty terminal axes and component counts
+one through four. Fresh operational CPU acceptance passes 75 original supervisor
+and 24 resource/evidence tests, including numeric readmission ordering and the
+versioned memory allowance. A fresh six-minute idle window precedes operational
+GPU v10, which passes 60 original-image continuations.
+
+Image-v4 then passes 66 exact preparation comparisons, 60 exact solve continuations
+and 130 independent scalar checks. Memcheck, racecheck, initcheck and synccheck each
+pass eight preparation cases (seven GPU and one explicit host fallback), 20 solve
+continuations and 60 independent strict scalar checks. Racecheck retains the full
+recursive-norm fixture and its original 20 power iterations. Its actual peak RSS
+is 7.817 GiB and its GPU charge is 389.945 seconds. All completed new reservations
+have empty cleanup and no overrun.
+
+The first compile reservation fails because an existing mutation test needs the
+explicit owned-write API for the new storage type. Its source and full 480 CPU /
+zero GPU-second charge remain; the corrected complete acceptance has a fresh job
+identity. Later, the proposed 56 GiB racecheck declaration fails physical preflight
+before any racecheck reservation exists. Based on the previous complete same-suite
+7.604 GiB peak, [amendment 20](../specifications/SPEC-0046-amendment-20.md) prospectively
+declares 32 GiB with unchanged checks, 600-second ceiling and physical headroom.
+No failed reservation or scientific cell is repeated.
+
+[Amendment 21](../specifications/SPEC-0046-amendment-21.md) separately reserves each
+complete paired transcript comparison at 32 GiB / 600 seconds. Its existing
+endpoint expansion and numerical comparison remain unchanged. The final metadata
+audit also verifies exact content-addressed endpoint manifests without expanding
+another set of Python vectors. Neither step replaces the independent original
+scalar checker.
+
+Both preparation and solve CUDA binaries remain byte-identical. Of the 293 prior
+numerical source bindings, 289 remain exact; the four changed files are the
+operator representation, billion executor call site, packing storage adapter and
+existing/new regression tests. All original retained source bytes verify. Public
+sources/defaults, strict original-model 1e-9 criteria, control100/certificate500,
+GPU idle/ownership guards and container-only access remain unchanged.
+
+### Measured memory and complete cost
+
+Every final/intermediate assessment is independently checked, and all ten full
+image-v3/v4 numerical transcripts agree exactly. All are uncertified 100-update
+limit endpoints. Memory below is supervised sampled aggregate peak host RSS.
+Complete cost includes the fresh process and independent final original-model
+check. Ratios are v3/v4; values above one mean faster with borrowed storage.
+
+| Nonzeros | Family | v3 peak GiB | v4 peak GiB | Complete-cost ratio | v4 complete seconds |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 64M | irregular | 6.074 | 4.631 | 1.044 | 40.599 |
+| 64M | wide | 7.721 | 6.292 | 1.096 | 56.388 |
+| 64M | tall | 5.811 | 4.066 | 1.112 | 32.416 |
+| 64M | coupled blocks | 5.355 | 3.898 | 1.053 | 26.489 |
+| 64M | ill scaled | 5.975 | 4.630 | 1.045 | 40.005 |
+| 64M | degenerate | 6.068 | 4.354 | 1.100 | 36.544 |
+| 256M | irregular | 23.690 | 17.983 | 1.041 | 186.480 |
+| 256M | coupled blocks | 20.853 | 15.222 | 1.063 | 103.823 |
+| 512M | irregular | 47.209 | 35.777 | 1.018 | 399.487 |
+| 512M | coupled blocks | 41.642 | 30.260 | 1.082 | 219.753 |
+
+| Cohort | Median RSS reduction | Preparation ratio | Assessment ratio | Complete-cost ratio |
+| --- | ---: | ---: | ---: | ---: |
+| 64M | 25.5% | 1.130 | 1.024 | 1.075 |
+| 256M | 25.5% | 1.167 | 1.012 | 1.052 |
+| 512M | 25.8% | 1.115 | 0.960 | 1.050 |
+
+These separate descriptive medians are not cumulative speedups. All complete-cost
+pairs improve, but the 64 M coupled assessment and both 512 M assessments regress;
+retain those observations and their full costs. The valid 512 M comparisons use
+image-v3 controls. The earlier image-v2 512 M ownership exclusions remain intact.
+Coupled cases still execute 75% of accepted product nonzeros through FP4; other
+families select FP32. These results establish reduced memory for this implementation,
+not certified convergence or broad FP4 superiority.
+
+### Revised billion-scale headroom
+
+The new post-run snapshot finds the GPU idle at its 0.750 GiB baseline and
+60.781 GiB of host MemAvailable. The smallest native/FP32 coupled declaration falls
+from 75 to 51 GiB, or 79 to 55 GiB with physical headroom. The widest declaration
+falls from 126 to 102 GiB, or 130 to 106 GiB with headroom. Actual-FP4 coupled
+needs 68 GiB plus headroom. Exactly two of eighteen prospective cells now fit
+host capacity: native and FP32 coupled. No FP4 lane fits, and all fit GPU capacity.
+
+No billion-scale cell is frozen or attempted. Preserve the full eighteen-lane
+objective and six ready one-billion-original-nonzero inputs. Final execution still
+requires sufficient physical host memory and a prospective largest common
+500-update ceiling up to 5000 that fits complete solve/audit/storage reservations,
+including repaired dual witnesses. Do not substitute the two fitting native/FP32
+cells for the FP4 objective or weaken certificates or resource guards.
+
+### Updated allocation and evidence
+
+The unchanged totals are 240000 CPU / 30000 GPU seconds. Amendment 19 transfers
+unused development capacity prospectively: CPU admission/development become
+28000/118000; GPU admission/development become 5500/24500. Other phase caps and
+all physical ceilings remain unchanged. Operational readmission v10 binds the
+transfer, with numeric version ordering so v10 follows v9.
+
+The combined capacity record retains 38 cells, 37 responses, 35 eligible timings
+and the original missing 128 M response. Thirteen failed reservations retain full
+32640 CPU / 1560 GPU seconds. No new failed scientific cell is introduced. The
+original false-cleanup receipt and its later independent proof both remain.
+Earlier portable catalogs and their replay results remain unchanged; the new
+source-bound receipts supplement them, with no new full portable replay claimed.
+
+Open settled checkpoint including final documentation: 98505.269208520 CPU /
+6712.970278844 GPU seconds. The allocation remains open and no reservation is active.
+All 318 documentation pages and their local links validate. The earlier general
+allocation remains unchanged. Commit locally only; no public
+adoption, confirmation or publication is released.

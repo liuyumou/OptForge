@@ -359,7 +359,7 @@ fn tensor_transpose_must_bind_original_coefficient_bytes() {
             .sum::<usize>(),
         p.nonzeros()
     );
-    op.columns.original[0] = op.columns.original[0].next_up();
+    op.columns.original.to_mut()[0] = op.columns.original[0].next_up();
     assert!(Packed::new(&op, &config).is_err());
 }
 

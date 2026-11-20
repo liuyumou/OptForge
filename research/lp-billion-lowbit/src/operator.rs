@@ -3,6 +3,7 @@
 use crate::Result;
 use optimizer_lp::{Compressed, Engine};
 use serde::{Deserialize, Serialize};
+use std::borrow::Cow;
 
 pub const MAX_DIMENSION: usize = 250_000_000;
 pub const MAX_NONZEROS: usize = 1_000_000_000;
@@ -38,18 +39,18 @@ impl Format {
     }
 }
 #[derive(Clone, Debug, Serialize)]
-pub struct Orientation {
+pub struct Orientation<'a> {
     pub offsets: Vec<u32>,
-    pub indices: Vec<u32>,
-    pub original: Vec<f64>,
+    pub indices: Cow<'a, [u32]>,
+    pub original: Cow<'a, [f64]>,
     /// IDs in the canonical row-major coefficient representation.
     pub ids: Vec<u32>,
 }
 #[derive(Clone, Debug, Serialize)]
-pub struct Operator {
+pub struct Operator<'a> {
     pub prepared: Format,
-    pub rows: Orientation,
-    pub columns: Orientation,
+    pub rows: Orientation<'a>,
+    pub columns: Orientation<'a>,
     pub codes: Vec<u8>,
     pub exponents: Vec<[i32; 2]>,
     pub fp32: Vec<f32>,
@@ -86,17 +87,47 @@ fn gamma(count: usize, unit: f64) -> f64 {
     let x = up_mul(count as f64, unit);
     (x / (1. - x).next_down()).next_up()
 }
-fn orientation(matrix: &Compressed, values: &[f64]) -> Orientation {
+fn orientation(matrix: &Compressed, values: &[f64]) -> Orientation<'static> {
     Orientation {
         offsets: (0..=matrix.lines())
             .map(|i| matrix.offset(i) as u32)
             .collect(),
         indices: matrix.entries().map(|(_, j, _)| j).collect(),
-        original: values.to_vec(),
+        original: Cow::Owned(values.to_vec()),
         ids: Vec::new(),
     }
 }
-impl Operator {
+impl<'a> Operator<'a> {
+    /// Borrow immutable native geometry and scaled values for the array executor.
+    /// Only the compact u32 offsets are owned; all coefficient/index arrays remain
+    /// alive in the engine/program throughout packing, upload and host checking.
+    pub fn borrowed_native(engine: &'a Engine<'_>) -> Result<Self> {
+        let p = engine.program();
+        if p.row_count().max(p.column_count()) > MAX_DIMENSION || p.nonzeros() > MAX_NONZEROS {
+            return Err("operator resource domain".into());
+        }
+        let (r, c) = engine.scaled_matrix();
+        if r.iter()
+            .chain(c)
+            .any(|v| !v.is_finite() || v.abs() > 2f64.powi(40))
+        {
+            return Err("scaled coefficient domain".into());
+        }
+        let view = |matrix: &'a Compressed, values: &'a [f64]| Orientation {
+            offsets: matrix.arrays().0.iter().map(|&i| i as u32).collect(),
+            indices: Cow::Borrowed(matrix.arrays().1),
+            original: Cow::Borrowed(values),
+            ids: Vec::new(),
+        };
+        Ok(Self {
+            prepared: Format::Native,
+            rows: view(p.row_major(), r),
+            columns: view(p.column_major(), c),
+            codes: Vec::new(),
+            exponents: Vec::new(),
+            fp32: Vec::new(),
+        })
+    }
     pub fn new(engine: &Engine<'_>) -> Result<Self> {
         Self::new_for(engine, Format::Fp4x1)
     }
@@ -200,7 +231,7 @@ impl Operator {
             Format::Fp4x3 | Format::Fp4x4 => false,
         }
     }
-    pub fn orientation(&self, transpose: bool) -> &Orientation {
+    pub fn orientation(&self, transpose: bool) -> &Orientation<'_> {
         if transpose { &self.columns } else { &self.rows }
     }
     pub fn parts(&self, id: usize, format: Format) -> [f64; 2] {
@@ -413,5 +444,102 @@ impl Operator {
             })
             .collect();
         Ok(Product { values, bounds })
+    }
+}
+
+#[cfg(test)]
+mod borrowed_tests {
+    use super::*;
+    use crate::tensor::{Config, Packed};
+    use optimizer_core::ObjectiveSense;
+    use optimizer_lp::{LinearProgram, LpSettings, Range};
+
+    #[test]
+    fn borrowed_native_preserves_products_and_packing_without_array_copies() {
+        for (m, n) in [(33usize, 65usize), (65, 33)] {
+            let mut offsets = vec![0];
+            let mut indices = Vec::new();
+            let mut values = Vec::new();
+            for i in 0..m {
+                if i + 1 < m {
+                    for j in 0..n - 1 {
+                        indices.push(j as u32);
+                        values.push(((i * 17 + j * 23) % 31 + 1) as f64 / 16.);
+                    }
+                }
+                offsets.push(indices.len());
+            }
+            let bound = Range {
+                lower: -1.,
+                upper: 1.,
+            };
+            let p = LinearProgram::from_csr(
+                (0..n as u32).collect(),
+                vec![bound; n],
+                vec![bound; m],
+                offsets,
+                indices,
+                values,
+                &[],
+                &[],
+                ObjectiveSense::Minimize,
+                0.,
+            )
+            .unwrap();
+            let engine = Engine::new(&p, LpSettings::published(100, 100));
+            let owned = Operator::new_for(&engine, Format::Native).unwrap();
+            let borrowed = Operator::borrowed_native(&engine).unwrap();
+            assert_eq!(
+                serde_json::to_value(&owned).unwrap(),
+                serde_json::to_value(&borrowed).unwrap()
+            );
+            for transpose in [false, true] {
+                let view = borrowed.orientation(transpose);
+                let matrix = if transpose {
+                    p.column_major()
+                } else {
+                    p.row_major()
+                };
+                let coefficients = if transpose {
+                    engine.scaled_matrix().1
+                } else {
+                    engine.scaled_matrix().0
+                };
+                assert!(matches!(view.indices, Cow::Borrowed(_)));
+                assert!(matches!(view.original, Cow::Borrowed(_)));
+                assert_eq!(view.indices.as_ptr(), matrix.arrays().1.as_ptr());
+                assert_eq!(view.original.as_ptr(), coefficients.as_ptr());
+                let x: Vec<_> = (0..if transpose { m } else { n })
+                    .map(|i| (i as f64 - 19.) / 8.)
+                    .collect();
+                assert_eq!(
+                    owned
+                        .native(transpose, &x)
+                        .unwrap()
+                        .iter()
+                        .map(|v| v.to_bits())
+                        .collect::<Vec<_>>(),
+                    borrowed
+                        .native(transpose, &x)
+                        .unwrap()
+                        .iter()
+                        .map(|v| v.to_bits())
+                        .collect::<Vec<_>>()
+                );
+            }
+            for components in 1..=4 {
+                let config = Config {
+                    components,
+                    ..Config::default()
+                };
+                let a = Packed::proposal(&owned, &config).unwrap();
+                let b = Packed::proposal(&borrowed, &config).unwrap();
+                assert!(a.tile_count > 0);
+                assert_eq!(
+                    serde_json::to_value(a).unwrap(),
+                    serde_json::to_value(b).unwrap()
+                );
+            }
+        }
     }
 }

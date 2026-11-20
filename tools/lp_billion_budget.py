@@ -45,6 +45,11 @@ def sources():
     return sorted(set(p for p in paths if p.is_file()))
 
 
+def operational_plans():
+    return sorted((BASE/'operational-readmissions').glob('v[0-9]*.json'),
+                  key=lambda p:int(p.stem[1:]))
+
+
 def cleared(settlement_path, gpu, phase, identity):
     """Later cleanup/readmission never rewrites a failed historical receipt."""
     d=load(settlement_path)
@@ -56,7 +61,7 @@ def cleared(settlement_path, gpu, phase, identity):
     disposition=load(disposition_path)
     require(disposition['status']=='cleanup_verified' and disposition['settlement']==ref(settlement_path), 'cleanup disposition binding')
     require(disposition['identities'] and not any(same_process(p) for p in disposition['identities']), 'owned process identity still live')
-    for path in sorted((BASE/'operational-readmissions').glob('*.json')):
+    for path in operational_plans():
         plan=load(path)
         if plan['cleanup_disposition']==ref(disposition_path):
             require(plan['status']=='prospective', 'operational readmission plan')

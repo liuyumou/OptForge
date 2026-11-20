@@ -83,7 +83,7 @@ pub fn solve(
     } else {
         Engine::new(program, control_settings.lp())
     };
-    let op = Operator::new_for(&engine, Format::Native)?;
+    let op = Operator::borrowed_native(&engine)?;
     let packed = if settings.format.components() > 0 {
         Some(if fast.is_some() {
             Packed::proposal(&op, config)?

@@ -15,14 +15,14 @@ GIB=1<<30
 def endpoint_bytes(model,iterations):
     return (math.ceil(iterations/500)+2)*8*(model['columns']+2*model['rows'])
 
-def capacity(model, lane):
+def capacity(model, lane, borrowed_operator=False):
     m,n,z=model['rows'],model['columns'],model['nonzeros']
     nzcap=1<<(max(1,z)-1).bit_length()
     ncap=1<<max(1,n).bit_length();mcap=1<<max(1,m).bit_length()
     dim=m+n;tiles=model['canonical_tiles'] if lane=='fp4x2' else 0
     residual=z-model['covered_nnz'] if tiles else z
     # Original arrays, exact-length transpose, engine values and operator copies.
-    resident=40*z+24*nzcap+56*m+84*n
+    resident=40*z+(0 if borrowed_operator else 24*nzcap)+56*m+84*n
     # Two controller states (live + checkpoint), product workspace, unscaled
     # endpoint and the original serial enclosure's term and reduction copies.
     workspace=14*max(m,n)+16*ncap+8*mcap
@@ -57,14 +57,21 @@ def capacity(model, lane):
         host_gib=math.ceil(host/GIB),device_gib=math.ceil(device/GIB),
         admitted=admitted,physical_fragment_index_upper=physical_index,
         reason=None if admitted else 'complete host/device/index allowance exceeds approved ceiling',
-        original_nonzeros=z,canonical_tiles=tiles,formula_version=2)
+        original_nonzeros=z,canonical_tiles=tiles,formula_version=3 if borrowed_operator else 2)
 
 def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=False, version=1):
     out=BASE/identity;require(not out.exists(),'fresh cohort identity')
-    require(version in [1,2,3], 'admitted image version')
+    require(version in [1,2,3,4], 'admitted image version')
     image=BASE/f'image-v{version}'
     proofs=[]
     from lp_billion_admit import gate_identity
+    if version==4:
+        for name in ['operational-cpu-v10','operational-gpu-v10']:
+            gate=BASE/'resources'/(name+'.settlement.json')
+            require(load(gate)['status']=='passed','memory candidate admission '+name)
+            proofs.append(ref(gate))
+        for path in sorted((BASE/'resources').glob('*.settlement.json')):
+            if load(path)['status']!='passed':proofs.append(ref(path))
     if version==3:
         harness=BASE/'resources/preparation-harness-cpu-v6.settlement.json'
         require(load(harness)['status']=='passed','cohort identity harness acceptance')
@@ -89,7 +96,8 @@ def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=Fa
             q=BASE/'resources'/(name+'.settlement.json')
             require(load(q)['status']=='passed','operational readmission '+name)
             proofs.append(ref(q))
-    plans=sorted((BASE/'operational-readmissions').glob('*.json'))
+    from lp_billion_budget import operational_plans
+    plans=operational_plans()
     superseded=set()
     superseded_failed=set()
     for p in plans:
@@ -120,7 +128,7 @@ def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=Fa
         for lane in order:
             cell_seconds=seconds if isinstance(seconds,int) else seconds[model['family']]
             cell_wall=wall_ms if isinstance(wall_ms,int) else wall_ms[model['family']]
-            memory=capacity(model,lane)
+            memory=capacity(model,lane,borrowed_operator=version==4)
             # Capacity pilots have fewer endpoint snapshots than the final cohort.
             memory['endpoint_bytes_upper']=endpoint_bytes(model,iterations)
             cell=dict(id=f'{identity}-{index}-{lane}',model=model['model'],model_result=ref(path),construction_check=ref(proof_path),lane=lane,memory=memory,
@@ -128,7 +136,7 @@ def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=Fa
                 request=dict(settings={**settings(lane),'iteration_limit':iterations,'check_interval':500,'wall_ms':cell_wall},
                     tensor=dict(control_interval=100,min_tile_nnz=128),
                     fast=dict(host_reductions=True,host_preparation=True,host_certificates=True,auto_schedule=True)))
-            if version==3:cell['request']['fast']['gpu_preparation']=True
+            if version>=3:cell['request']['fast']['gpu_preparation']=True
             cells.append(cell)
     from lp_billion_budget import accounting
     from lp_billion_common import CPU_CAPS,GPU_CAPS,NS,disk_bytes,DISK_LIMIT

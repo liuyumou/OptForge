@@ -52,6 +52,15 @@ class BillionEvidenceContracts(unittest.TestCase):
             found={str(p.relative_to(root)) for p in evidence_files(root,['live'],root/'portable/current')}
             self.assertEqual(found,{'portable/old/manifest.json','resources/old.settlement.json','objects/data.bin'})
 
+    def test_borrowed_capacity_removes_only_operator_array_allowance(self):
+        model=dict(rows=62500000,columns=62500000,nonzeros=1000000000,canonical_tiles=0,covered_nnz=0)
+        for lane in ['native','fp32','fp4x2']:
+            before=campaign.capacity(model,lane);after=campaign.capacity(model,lane,True)
+            self.assertEqual(before['host_bytes']-after['host_bytes'],24*(1<<30))
+            self.assertEqual(before['device_bytes'],after['device_bytes'])
+            self.assertEqual(before['endpoint_bytes_upper'],after['endpoint_bytes_upper'])
+            self.assertEqual((before['formula_version'],after['formula_version']),(2,3))
+
     def test_storage_reserves_a_repaired_dual_at_every_assessment(self):
         self.assertEqual(endpoint_bytes(dict(rows=11,columns=7),500),3*8*(7+22))
         self.assertEqual(endpoint_bytes(dict(rows=11,columns=7),501),4*8*(7+22))
