@@ -5,6 +5,16 @@ from lp_billion_common import BASE,put,ref,require,load
 from lp_general_oracle import settings
 
 
+def instrument(cmd,sanitizer,log,host_fallback=False):
+    # A host fallback makes no CUDA calls, so compute-sanitizer rejects it before
+    # instrumentation. Check its exact result normally; never suppress tool errors.
+    if sanitizer and not host_fallback:
+        tracking=['--force-synchronization-limit','8','--racecheck-num-workers','3'] if sanitizer=='racecheck' else []
+        return ['/usr/local/cuda/bin/compute-sanitizer','--tool',sanitizer,
+                '--error-exitcode','99','--log-file',str(log),*tracking,*cmd]
+    return cmd
+
+
 def document(n,m,kind='normal',sense='minimize'):
     bound=lambda x:dict(kind='finite',value=x)
     coefficient=lambda i,j: (-1. if (i+j)%2 else 1.)*(1.+((i+j)%7)/16.)
@@ -43,22 +53,23 @@ def suite(out,image,sanitizer=None):
                 iteration_limit=100,check_interval=100,power_iterations=variant['power'],
                 restart=dict(sufficient=.2,necessary=.8,artificial=.36),
                 primal_weight=dict(proportional=.5,integral=0.,derivative=0.))
-        cmd=[str(image/'executor'),'prepare-check',str(arrays),str(BASE),str(image/'prepare.cubin')]
-        if sanitizer:cmd=['/usr/local/cuda/bin/compute-sanitizer','--tool',sanitizer,'--error-exitcode','99','--log-file',str(out/(name+'.sanitizer')),*cmd]
+        fallback=n==0 or m==0 or max(n,m)>1024 or kind=='huge' or (variant is not None and variant['alpha']==.5)
+        no_cuda=fallback and kind!='huge'
+        cmd=instrument([str(image/'executor'),'prepare-check',str(arrays),str(BASE),str(image/'prepare.cubin')],sanitizer,out/(name+'.sanitizer'),no_cuda)
         result=call(cmd,[request],out,name)[0]
         require(result['exact'],'full exact preparation '+name)
-        fallback=n==0 or m==0 or max(n,m)>1024 or kind=='huge' or (variant is not None and variant['alpha']==.5)
         require(result['preparation']['backend']==('host-fallback' if fallback else 'gpu-fp64'),'explicit preparation domain '+name)
-        if sanitizer and result['preparation']['backend']=='gpu-fp64':
+        if sanitizer and not no_cuda:
             text=(out/(name+'.sanitizer')).read_text()
             require('ERROR SUMMARY: 0 errors' in text or 'RACECHECK SUMMARY: 0 hazards' in text,'preparation sanitizer summary')
+        result['sanitizer']=sanitizer if not no_cuda else None
         path=out/(name+'.result.json');put(path,result);results.append(ref(path))
     # More than 1024^2 vector entries exercise three recursive norm levels.
     from lp_billion_generate import generate
     identity=out.name+'-deep-norm';generate(identity,'wide',4_194_368,861198)
     model=BASE/identity/'model.json';name='prepare-deep-norm'
     cmd=[str(image/'executor'),'prepare-check',str(model),str(BASE),str(image/'prepare.cubin')]
-    if sanitizer:cmd=['/usr/local/cuda/bin/compute-sanitizer','--tool',sanitizer,'--error-exitcode','99','--log-file',str(out/(name+'.sanitizer')),*cmd]
+    cmd=instrument(cmd,sanitizer,out/(name+'.sanitizer'))
     result=call(cmd,[dict(settings=settings('native'))],out,name)[0]
     require(result['exact'] and result['preparation']['backend']=='gpu-fp64','deep norm GPU preparation')
     if sanitizer:

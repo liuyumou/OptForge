@@ -14,6 +14,12 @@ OLD = ROOT/'artifacts/gpup-general-v1/scale-image-v14'
 SERIAL = ROOT/'artifacts/gpup-checker2-v1/build-v5/executor'
 IMAGE = BASE/'image-v1'
 
+def gate_identity(kind,version):
+    # The first v3 memcheck reservation stopped on its CPU-only fallback fixture.
+    # Its failed receipt remains; the corrected harness has a fresh identity.
+    if version==3 and kind=='racecheck':return 'array-racecheck-v5'
+    return 'array-memcheck-v4' if (kind,version)==('memcheck',3) else f'array-{kind}-v{version}'
+
 def call(command, requests, out, name):
     request=out/(name+'.request.json');put(request,requests)
     p=subprocess.run(list(map(str,command)),input=''.join(json.dumps(r)+'\n' for r in requests),text=True,capture_output=True)
@@ -91,7 +97,9 @@ def gpu(identity,sanitizer=None):
                 r=dict(settings=s,tensor=dict(control_interval=8,min_tile_nnz=128),fast=dict(host_reductions=True,host_preparation=True,host_certificates=True,auto_schedule=True))
                 name=f'{family}-{fmt}-{fault}'
                 cmd=[str(IMAGE/'executor'),'solve',str(compact),str(BASE),str(IMAGE/'tensor.cubin')]
-                if sanitizer:cmd=['/usr/local/cuda/bin/compute-sanitizer','--tool',sanitizer,'--error-exitcode','99','--log-file',str(out/(name+'.sanitizer')),*cmd]
+                if sanitizer:
+                    from lp_billion_prepare_admit import instrument
+                    cmd=instrument(cmd,sanitizer,out/(name+'.sanitizer'))
                 candidate=copy.deepcopy(r)
                 if preparation is not None:candidate['fast']['gpu_preparation']=True
                 after=call(cmd,[candidate],out,name+'-new')[0]

@@ -1,5 +1,55 @@
 # Active Task
 
+## Partial GPU preparation validation (2026-11-20)
+
+The Pro6000 passes a six-minute idle window and operational GPU v8 completes
+60 exact continuations. Image-v3 then passes 66 bitwise preparation comparisons
+(57 GPU results and nine explicit host fallbacks), 60 exact solve continuations
+and 130 independent strict scalar checks. The complete corrected memcheck v4
+passes seven GPU preparations, one host fallback and 20 continuations / 60 scalar
+checks. Numerical Rust/CUDA, strict certificates and public defaults are unchanged;
+293 numerical source bindings verify. No GPU preparation performance cohort or
+billion-nonzero LP solve has started.
+
+Preserve three failed admission reservations and full additional 2880 CPU / 720
+GPU seconds: memcheck v3 instruments a no-CUDA host fallback; racecheck v3 reaches
+16 GiB sampled RSS during deep norm; racecheck v4 stops on the unchanged 2 GiB
+unattributed-memory guard after two small cases. All cleanup is empty and all 72
+retained process identities are gone. The harness now runs the CPU-only fallback
+normally and retains fatal checks on actual GPU paths. Fresh racecheck v5 uses
+three analysis workers, synchronization after eight launches and a 64 GiB host
+reservation within the existing 128 GiB cap; it has not started. No kernel/hazard
+filters or numerical changes are introduced.
+
+A subsequent CPU-only idle-confirmation v5 stops with lost_coordinator_heartbeat;
+five partial samples show 5.390–5.597 GiB unattributed usage, so none passes idle.
+Retain its missing final result, sources, full 1920 CPU / zero GPU charge and empty
+cleanup. The monitor closes and starts no GPU job. Latest fresh telemetry reaches
+5.836 GiB with no listed owner. Do not infer an external owner or a proven leak.
+Remain container-only: no host access, reset, configuration change or other-job
+signals. No more GPU reservation is active.
+
+Amendments 11–14 preserve all failures and move unused phase capacity within the
+unchanged 240000 CPU / 30000 GPU totals. CPU caps are implementation 6000, native
+20000, admission 16000, development 130000, reporting 62000, cleanup 6000; GPU caps
+are admission 3000 / development 27000. Operational plan v9 binds the transfer.
+Fresh operational CPU v9 passes 75 supervisor / 22 resource-evidence tests.
+Operational GPU v9 still needs a new five-minute idle window, six samples with
+at most 90-second gaps and a fresh final sample; then run pending racecheck v5,
+initcheck v3 and synccheck v3 before timing cohorts. Resume with
+`tools/lp_billion_prepare_continue.py`; observations now collect under
+availability/operational-gpu-v9. Never retry an attempted scientific cell or a
+failed reservation. The allocation remains open with eleven failed reservations
+retaining 31200 CPU / 1320 GPU seconds. Six billion-nonzero inputs remain ready.
+
+Evidence: /storage/ai-optimizer-billion-v1/preparation-progress-v1.json and
+preparation-device-checkpoint-v1.json. See
+[device validation](../docs/benchmarks/lp-billion.md#gpu-preparation-device-validation)
+and [compact receipt](../docs/benchmarks/lp-billion-preparation-admission.json).
+Commit locally only. Open settled checkpoint including final documentation:
+75147.503818756 CPU / 3764.416660567 GPU seconds. Documentation validates
+311 pages and local links; no reservation is active.
+
 ## Container-only GPU memory audit (2026-11-20)
 
 The user prohibits leaving the container. No host connection is available; do not

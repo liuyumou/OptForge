@@ -1,10 +1,12 @@
 # Billion-nonzero LP development on the Pro6000
 
 Execution continuation under [SPEC-0046](../specifications/SPEC-0046-billion-lp.md),
-2026-11-19–20. GPU preparation is implemented and CPU-tested, but device admission
-and performance measurements are waiting for the Pro6000 to become idle. All six
-billion-nonzero originals are ready; no billion-scale solve has run. Public
-defaults and historical results remain unchanged.
+2026-11-19–20. GPU preparation now passes 66 bitwise preparation comparisons,
+60 exact solve continuations and the complete memcheck suite. Racecheck remains
+incomplete after resource and ownership interruptions; initcheck, synccheck and
+performance measurements remain pending. All six billion-nonzero originals are
+ready; no billion-scale solve has run. Public defaults and historical results
+remain unchanged. See the [latest device validation](#gpu-preparation-device-validation).
 
 ## Scope and implementation
 
@@ -315,3 +317,92 @@ active. The current metadata supplements the earlier portable catalog. The
 scientific inputs, binaries, strict certificate checks and historical results are
 unchanged, and there is still no GPU preparation performance result or billion-scale
 solve result to report.
+
+## GPU preparation device validation
+
+The [compact admission receipt](lp-billion-preparation-admission.json) binds the
+completed checks, all three GPU interruptions, partial observations and current
+source checkpoint. The earlier portable catalog remains unchanged; these new
+source-bound local receipts supplement it.
+
+After the user reports that the Pro6000 appears idle, a new observed window reaches
+six uninterrupted minutes at 804978688 bytes (0.750 GiB) and zero utilization. A
+fresh final observation and the normal three-sample preflight also pass.
+Operational GPU v8 then completes all 60 exact continuation checks. Unlike the
+earlier empty inventories, retained telemetry now identifies owned GPU processes
+in 55 of its 169 samples and 100 of the subsequent numerical admission's 295
+samples. This confirms attribution during these jobs; it does not explain why
+earlier inventories were empty or identify the earlier unattributed owner.
+
+A read-only NVML client stays open across the observation/admission handoff.
+No persistence setting, CUDA context, driver configuration or host-namespace access
+is used by this monitor. NVIDIA documents transient driver-initialization work,
+including ECC scrubbing, but that is only a possible explanation for some brief
+activity; it does not explain or attribute the large historical allocations. See
+[NVIDIA driver lifecycle documentation](https://docs.nvidia.com/deploy/driver-persistence/latest/overview.html).
+Every original idle and ownership guard remains active.
+
+The unchanged image-v3 preparation module executes for the first time:
+
+| Check | Completed result |
+| --- | --- |
+| Full preparation comparison | 66 bitwise matches: 57 actual FP64 GPU preparations and nine explicit host fallbacks |
+| Solve continuation comparison | 60 exact continuations, including recovery/cancellation; 130 independent strict scalar checks |
+| Complete memcheck admission | Seven GPU preparation cases, one exact host fallback, 20 solve continuations and 60 independent strict scalar checks |
+| Racecheck | Incomplete; partial results retained |
+| Initcheck and synccheck | Not started |
+| New 64/256/512 M timing cohorts | Not started |
+| Billion-nonzero LP solves | Zero |
+
+The first memcheck reservation invokes the sanitizer on the 1025-term CPU fallback.
+Its exact raw response reports zero allocated device bytes, but the sanitizer exits
+because the target makes no CUDA call. Six preceding GPU cases have zero errors.
+The corrected harness checks the fallback normally and keeps fatal instrumentation
+for every actual GPU case. The complete fresh memcheck v4 suite passes; the failed
+v3 receipt and full charge remain. [Amendment 11](../specifications/SPEC-0046-amendment-11.md)
+records the correction without changing numerical code or certificate criteria.
+
+Racecheck v3 reaches 17182568448 sampled host bytes during the recursive-norm
+fixture and is stopped at its 16 GiB reservation. Its partial log is not a completed
+check. [Amendment 12](../specifications/SPEC-0046-amendment-12.md) introduces three
+analysis workers, stream synchronization after at most eight launches and a 64 GiB
+host reservation within the existing 128 GiB allocation. It retains all kernels,
+fixtures and fatal errors. Racecheck v4 completes two small preparations, then the
+unchanged ownership guard stops it as unattributed memory exceeds 2 GiB. The last
+retained owned process accounts for only 32 MiB while total usage exceeds 2.2 GiB;
+later read-only telemetry reaches 5.390 GiB with no listed process. No external
+owner or driver fault is inferred from that visibility gap.
+
+All three interrupted admissions have empty cleanup and retain full additional
+2880 CPU / 720 GPU-second charges. At this point the allocation retains ten failed
+reservations totaling 29280 CPU / 1320 GPU seconds. No scientific cell starts or
+repeats. [Amendment 13](../specifications/SPEC-0046-amendment-13.md) prospectively
+transfers unused phase capacity within the unchanged 240000 CPU / 30000 GPU totals:
+CPU implementation/admission become 6000/16000 seconds, and GPU
+admission/development become 3000/27000. Other phase ceilings and physical limits
+stay unchanged. Fresh operational CPU v8 passes 75 original supervisor tests and
+22 resource/evidence tests. Operational GPU v9 requires another uninterrupted
+five-minute idle window before the remaining sanitizer admissions or scientific
+work. Strict original-model certificates remain unchanged; no preparation or total
+solve speedup is yet measured.
+
+The subsequent CPU-only idle-confirmation v5 stops after approximately 300 seconds
+with `lost_coordinator_heartbeat`. Its five retained diagnostic samples show
+5.390–5.597 GiB used, no listed owner and zero instantaneous utilization; all fail
+the fixed memory guard. Its final result is missing and is not reconstructed.
+Empty owned-process cleanup and the full 1920 CPU / zero GPU-second charge are
+retained. The monitor closes without starting operational GPU v9. This brings the
+allocation to eleven failed reservations retaining 31200 CPU / 1320 GPU seconds.
+[Amendment 14](../specifications/SPEC-0046-amendment-14.md) requires fresh CPU
+acceptance before the pending GPU admission. Operational CPU v9 passes all 75
+original supervisor and 22 resource/evidence tests. A fresh observation still
+fails at 5.836 GiB unattributed usage.
+
+The final evidence check verifies all 293 numerical source bindings, the completed
+admissions' scalar comparisons, and that none of the 72 retained process identities
+from the three interrupted GPU admissions survives. It preserves all previous
+17 capacity responses, 15 eligible timings and the missing 128 M cell. No new
+scientific timing or billion-scale solve is reported. The allocation remains open
+at 75147.503818756 CPU / 3764.416660567 GPU seconds including final documentation.
+All 311 documentation pages and their local links validate; no reservation is
+active.

@@ -25,9 +25,10 @@ def checkpoint(identity):
             resolve(item['original']);resolve(item['retained']);bindings+=1
     built=load(BASE/'build-prepare-v3/result.json');resolve(built['cuda']);resolve(built['cuda_source'])
     images=[]
-    for version in [1,2]:
+    for version in [1,2,3]:
         p=BASE/f'image-v{version}/binding.json';binding=load(p)
         for name in ['executor','legacy','cuda']:resolve(binding[name])
+        if 'preparation' in binding:resolve(binding['preparation'])
         images.append(ref(p))
     inputs=[]
     for family in FAMILIES:
@@ -68,17 +69,17 @@ def checkpoint(identity):
         if load(p)['status']!='passed':failed.append(dict(receipt=ref(p),**load(p)))
     cpu,gpu=accounting()
     gates={name:(ref(p) if (p:=BASE/'resources'/(name+'.settlement.json')).exists() else None)
-           for name in ['operational-gpu-v8','array-gpu-v3','array-memcheck-v3','array-racecheck-v3','array-initcheck-v3','array-synccheck-v3']}
+           for name in ['operational-gpu-v9','array-gpu-v3','array-memcheck-v4','array-racecheck-v5','array-initcheck-v3','array-synccheck-v3']}
     admitted=all(p and load(resolve(p))['status']=='passed' for p in gates.values())
     result=dict(status='gpu_preparation_admitted' if admitted else 'awaiting_gpu_preparation_admission',
         origin_commit=ORIGIN,protected_tracked_files_exact=True,historical_handoffs_exact=True,
         current_numerical_source_bindings=bindings,host_quality=ref(BASE/'build-prepare-v3/result.json'),
-        cpu_contracts=ref(BASE/'resources/preparation-harness-cpu-v2.settlement.json'),images=images,
+        cpu_contracts=ref(BASE/'resources/operational-cpu-v9.settlement.json'),images=images,
         billion_inputs=inputs,billion_solve_measurements=sum(load(p).get('nonzeros')==1_000_000_000 for p in BASE.glob('*/response.json')),capacity_cells=cells,
         gpu_preparation_gates=gates,failed_reservations=failed,
         cpu_caps=CPU_CAPS,gpu_caps=GPU_CAPS,cpu_ns_including_active_reservations=cpu,gpu_ns_including_active_reservations=gpu,
         evidence_payload_bytes=disk_bytes(),allocation_open=not (BASE/'CLOSED.json').exists(),
-        operational_plan=ref(BASE/'operational-readmissions/v8.json'),
+        operational_plan=ref(BASE/'operational-readmissions/v9.json'),
         protocols=[ref(p) for p in sorted((ROOT/'docs/specifications').glob('SPEC-0046*.md'))],
         limitation='Construction certificates establish ready inputs, not LP solves. GPU preparation has no measured benefit before device admission and experiments.')
     put(BASE/(identity+'.json'),result)

@@ -25,25 +25,29 @@ def job(identity,seconds,command,gpu=False,phase='admission',host=16,disk=2):
 
 
 def main():
-    job('preparation-harness-cpu-v2',120,
-        ['python3','-B','-m','unittest','discover','-s','tests/integration','-p','test_lp_billion*.py'])
-    if not completed('operational-gpu-v8'):
+    job('operational-cpu-v9',120,['bash','-c',
+        'set -e\npython3 -B -m unittest discover -s tests/integration -p "test_lp_confirmation*supervisor.py"\n'
+        'python3 -B -m unittest discover -s tests/integration -p "test_lp_billion*.py"'])
+    if not completed('operational-gpu-v9'):
         from lp_billion_availability import observe,proof,stable
         import time
-        observe('operational-gpu-v8')
-        paths=sorted((BASE/'availability/operational-gpu-v8').glob('*.json'),key=lambda p:int(p.stem))
+        observe('operational-gpu-v9')
+        paths=sorted((BASE/'availability/operational-gpu-v9').glob('*.json'),key=lambda p:int(p.stem))
         if not stable([load(p) for p in paths],time.monotonic_ns()):
             print(dict(status='waiting_for_gpu',required_idle_seconds=300),flush=True)
             return 75
-        proof_path=BASE/'availability/operational-gpu-v8.json'
+        proof_path=BASE/'availability/operational-gpu-v9.json'
         if not proof_path.exists():
-            proof('operational-gpu-v8')
-        job('operational-gpu-v8',120,['python3','-B','tools/lp_billion_admit.py','gpu','--id','operational-gpu-v8','--version','2'],gpu=True)
+            proof('operational-gpu-v9')
+        job('operational-gpu-v9',120,['python3','-B','tools/lp_billion_admit.py','gpu','--id','operational-gpu-v9','--version','2'],gpu=True)
     job('seal-prepare-v3',30,['python3','-B','tools/lp_billion_admit.py','seal','--version','3'])
     job('array-gpu-v3',240,['python3','-B','tools/lp_billion_admit.py','gpu','--id','array-gpu-v3','--version','3'],gpu=True)
     for sanitizer in ['memcheck','racecheck','initcheck','synccheck']:
-        identity='array-'+sanitizer+'-v3'
-        job(identity,240,['python3','-B','tools/lp_billion_admit.py','gpu','--id',identity,'--version','3','--sanitizer',sanitizer],gpu=True)
+        from lp_billion_admit import gate_identity
+        identity=gate_identity(sanitizer,3)
+        job(identity,240 if sanitizer=='racecheck' else 120,
+            ['python3','-B','tools/lp_billion_admit.py','gpu','--id',identity,'--version','3','--sanitizer',sanitizer],
+            gpu=True,host=64 if sanitizer=='racecheck' else 16)
     from lp_billion_campaign import freeze
     from lp_billion_ladder import execute
     from lp_billion_results import summarize,compare

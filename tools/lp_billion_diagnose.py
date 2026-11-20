@@ -116,7 +116,7 @@ def main(identity, seconds):
             sample = sensor.sample()
         finally:
             sensor.close()
-        path = BASE/'availability/operational-gpu-v8'/(str(sample['start_ns'])+'.json')
+        path = BASE/'availability/operational-gpu-v9'/(str(sample['start_ns'])+'.json')
         put(path, sample)
         samples.append(ref(path))
         observed = [load(p) for p in sorted(path.parent.glob('*.json'), key=lambda p:int(p.stem))]

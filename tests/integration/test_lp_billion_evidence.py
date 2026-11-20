@@ -16,6 +16,21 @@ import lp_billion_budget as budget
 
 
 class BillionEvidenceContracts(unittest.TestCase):
+    def test_cpu_fallback_has_no_cuda_instrumentation_but_gpu_errors_stay_fatal(self):
+        from lp_billion_prepare_admit import instrument
+        command=['executor','prepare-check','long-line']
+        self.assertEqual(instrument(command,'memcheck','log',True),command)
+        gpu=instrument(command,'memcheck','log',False)
+        self.assertEqual(gpu[-3:],command)
+        self.assertEqual(gpu[gpu.index('--error-exitcode')+1],'99')
+        self.assertIn('compute-sanitizer',gpu[0])
+        race=instrument(command,'racecheck','log')
+        self.assertEqual(race[race.index('--force-synchronization-limit')+1],'8')
+        self.assertEqual(race[race.index('--racecheck-num-workers')+1],'3')
+        self.assertNotIn('--launch-count',race)
+        self.assertNotIn('--kernel-name',race)
+        self.assertNotIn('--kernel-name-exclude',race)
+
     def test_dependency_locks_are_evidence_while_live_root_locks_are_not(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)
@@ -45,8 +60,17 @@ class BillionEvidenceContracts(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)
             with mock.patch.object(common,'BASE',root), mock.patch.object(campaign,'BASE',root), mock.patch.object(budget,'BASE',root):
-                for name in ['billion-native-v2','array-gpu-v3','array-memcheck-v3',
-                             'array-racecheck-v3','array-initcheck-v3','array-synccheck-v3',
+                common.put(root/'resources/array-memcheck-v3.settlement.json',
+                           dict(status='refused',cleanup_empty=True,overrun=False))
+                common.put(root/'resources/array-racecheck-v3.settlement.json',
+                           dict(status='refused',cleanup_empty=True,overrun=False))
+                common.put(root/'resources/array-racecheck-v4.settlement.json',
+                           dict(status='refused',cleanup_empty=True,overrun=False))
+                common.put(root/'resources/idle-confirmation-v5.settlement.json',
+                           dict(status='refused',cleanup_empty=True,overrun=False))
+                common.put(root/'resources/operational-cpu-v9.settlement.json',dict(status='passed'))
+                for name in ['billion-native-v2','array-gpu-v3','array-memcheck-v4',
+                             'array-racecheck-v5','array-initcheck-v3','array-synccheck-v3',
                              'generator-admission-v1','ownership-audit-v2']:
                     common.put(root/'resources'/(name+'.settlement.json'),dict(status='passed'))
                 original=root/'input/model.json';common.put(original,{})
@@ -61,6 +85,9 @@ class BillionEvidenceContracts(unittest.TestCase):
                 self.assertTrue(all(c['status']=='pending' for c in cells))
                 self.assertTrue(all(c['memory']['endpoint_bytes_upper']==4*8*(7+22) for c in cells))
                 self.assertTrue(all(c['request']['fast']['gpu_preparation'] for c in cells))
+                proof_paths={p['path'] for p in common.load(manifest)['admission']}
+                self.assertIn('resources/array-memcheck-v3.settlement.json',proof_paths)
+                self.assertIn('resources/array-memcheck-v4.settlement.json',proof_paths)
 
     def fixture(self,root):
         payload=b'\x00'*8;sha=hashlib.sha256(payload).hexdigest()

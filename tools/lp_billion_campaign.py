@@ -64,7 +64,21 @@ def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=Fa
     require(version in [1,2,3], 'admitted image version')
     image=BASE/f'image-v{version}'
     proofs=[]
-    for name in ['billion-native-v2',f'array-gpu-v{version}',f'array-memcheck-v{version}',f'array-racecheck-v{version}',f'array-initcheck-v{version}',f'array-synccheck-v{version}','generator-admission-v1','ownership-audit-v2']:
+    from lp_billion_admit import gate_identity
+    if version==3:
+        cpu=BASE/'resources/operational-cpu-v9.settlement.json'
+        require(load(cpu)['status']=='passed','post-observation CPU readmission')
+        proofs.append(ref(cpu))
+        observation=BASE/'resources/idle-confirmation-v5.settlement.json'
+        stopped=load(observation)
+        require(stopped['status']=='refused' and stopped['cleanup_empty'] and not stopped['overrun'],'retained observation interruption')
+        proofs.append(ref(observation))
+    for identity in (['array-memcheck-v3','array-racecheck-v3','array-racecheck-v4'] if version==3 else []):
+        failed=BASE/'resources'/(identity+'.settlement.json')
+        failure=load(failed)
+        require(failure['status']=='refused' and failure['cleanup_empty'] and not failure['overrun'],'retained sanitizer harness failure')
+        proofs.append(ref(failed))
+    for name in ['billion-native-v2',*[gate_identity(k,version) for k in ['gpu','memcheck','racecheck','initcheck','synccheck']],'generator-admission-v1','ownership-audit-v2']:
         p=BASE/'resources'/(name+'.settlement.json');require(load(p)['status']=='passed','admission '+name);proofs.append(ref(p))
     for p in sorted((BASE/'resources').glob('*.cleanup-disposition.json')):
         disposition=load(p);proofs.append(ref(p))
