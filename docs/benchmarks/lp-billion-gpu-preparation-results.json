@@ -1,0 +1,814 @@
+{
+  "admission": {
+    "bytes": 21647,
+    "namespace": "evidence",
+    "path": "preparation-progress-v2.json",
+    "sha256": "323e9f956fb8a001d23e6d63b50de746496d2ba54fba3b7354b1a87e905184ef"
+  },
+  "billion_host_gate": {
+    "bytes": 16188,
+    "namespace": "evidence",
+    "path": "billion-host-availability-v1.json",
+    "sha256": "d8412f645fda1f83acffaeccf997ccac6ecaf50ef234ca07dbfa82e0ff3b1099"
+  },
+  "billion_solve_measurements": 0,
+  "checkpoint": {
+    "bytes": 59502,
+    "namespace": "evidence",
+    "path": "preparation-device-checkpoint-v2.json",
+    "sha256": "8d380b8356172b7e30bfe926af417233f89860e314ecf992513049a4307026d2"
+  },
+  "cohorts": [
+    {
+      "cells": [
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 42385340837,
+          "after_cost_ns": {
+            "assessment": 7656017357,
+            "device_setup": 1157294005,
+            "device_teardown": 87897213,
+            "execution": 287796975,
+            "host_preparation": 9645186795,
+            "recovery": 0
+          },
+          "after_preparation_ns": 9645186795,
+          "after_process_ns": 29468895151,
+          "after_response": {
+            "bytes": 4115,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-0-fp4x2/response.json",
+            "sha256": "2b26be148ba83227f3926d33e384c5c26194a03877c52660de175d64607161de"
+          },
+          "assessment_ratio": 0.924372473180118,
+          "audit": {
+            "bytes": 1552,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-0-fp4x2-audit/result.json",
+            "sha256": "11bad55a1911693d35a1eb10f556d0139b0ef43b3180d953bbd07becd48da1f9"
+          },
+          "before_complete_ns": 56710353677,
+          "before_preparation_ns": 29263141764,
+          "before_response": {
+            "bytes": 3737,
+            "namespace": "evidence",
+            "path": "ladder-64m-v2-0-fp4x2/response.json",
+            "sha256": "f7a96ee4fdf725301ddab4923aaa635d598d50d9b69a6971981170e3d684d8af"
+          },
+          "certified": false,
+          "complete_ratio": 1.3379709247848037,
+          "exact": true,
+          "family": "irregular",
+          "final_check": {
+            "bytes": 1229,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-0-fp4x2-final-check/result.json",
+            "sha256": "fae50f6c5a973535514541eb0dff81aa185c3200394dab3aaeb07c3f25cd23ba"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 1792062552,
+            "backend": "gpu-fp64",
+            "download_ns": 770491523,
+            "longest_line": 39,
+            "power_iterations": 20,
+            "scaling_ns": 56049197,
+            "setup_ns": 613067848,
+            "spectral_ns": 88421313,
+            "step_bits": 4610255430510716949,
+            "teardown_ns": 81380395,
+            "total_ns": 2016282346
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 64000000,
+          "old_ownership_disposition": null,
+          "pair_timing_eligible": true,
+          "preparation_ratio": 3.033963196977151,
+          "process_ratio": 1.505868977395107,
+          "resource": {
+            "bytes": 11390,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v3-0-fp4x2.resource.json",
+            "sha256": "8419009aa4b47a3e32991aa55e1c876d65c108c67742b0925f2c28533f5e10a6"
+          },
+          "status": "limit"
+        },
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 61812618909,
+          "after_cost_ns": {
+            "assessment": 15217308169,
+            "device_setup": 1492901406,
+            "device_teardown": 87584475,
+            "execution": 459675271,
+            "host_preparation": 11463198490,
+            "recovery": 0
+          },
+          "after_preparation_ns": 11463198490,
+          "after_process_ns": 41818059142,
+          "after_response": {
+            "bytes": 4962,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-1-fp4x2/response.json",
+            "sha256": "a7784ffc96ad6ab2f0519aa08383eb57db66ee78f7bd78f27c5900ae3254e126"
+          },
+          "assessment_ratio": 0.9250444120384167,
+          "audit": {
+            "bytes": 1517,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-1-fp4x2-audit/result.json",
+            "sha256": "ff5895eedb836f5e931cb539008ea9374aa34b97eb7e8f608c5fb3074eecbfd2"
+          },
+          "before_complete_ns": 86489486893,
+          "before_preparation_ns": 44591110695,
+          "before_response": {
+            "bytes": 4580,
+            "namespace": "evidence",
+            "path": "ladder-64m-v2-1-fp4x2/response.json",
+            "sha256": "7b0622e7665ab9f59269ece94da6039cd6088a65dfb412f21a027c85f84c05dc"
+          },
+          "certified": false,
+          "complete_ratio": 1.3992205543067036,
+          "exact": true,
+          "family": "wide",
+          "final_check": {
+            "bytes": 1209,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-1-fp4x2-final-check/result.json",
+            "sha256": "7534eaa281d797c1c18c1803721c3958db9b0bc4721a5ca17d6a88f88b8e37bb"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 2224250040,
+            "backend": "gpu-fp64",
+            "download_ns": 832690356,
+            "longest_line": 17,
+            "power_iterations": 20,
+            "scaling_ns": 126748993,
+            "setup_ns": 728755968,
+            "spectral_ns": 195575825,
+            "step_bits": 4608046874525911128,
+            "teardown_ns": 88328657,
+            "total_ns": 2653743111
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 64000000,
+          "old_ownership_disposition": null,
+          "pair_timing_eligible": true,
+          "preparation_ratio": 3.8899361931052105,
+          "process_ratio": 1.6524956954445353,
+          "resource": {
+            "bytes": 13814,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v3-1-fp4x2.resource.json",
+            "sha256": "73d5f0a1f29b880862d248465b50ce110f8428c25fb9e476484828b3b55c4733"
+          },
+          "status": "limit"
+        },
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 36060575225,
+          "after_cost_ns": {
+            "assessment": 5642511171,
+            "device_setup": 1135035815,
+            "device_teardown": 86234849,
+            "execution": 262166719,
+            "host_preparation": 9061241391,
+            "recovery": 0
+          },
+          "after_preparation_ns": 9061241391,
+          "after_process_ns": 24909945819,
+          "after_response": {
+            "bytes": 4112,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-2-fp4x2/response.json",
+            "sha256": "6650d0fcc2ee767ff6e8229e755baee97641162b09f606cd0bca90dce61d54bf"
+          },
+          "assessment_ratio": 0.9074176773127385,
+          "audit": {
+            "bytes": 1545,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-2-fp4x2-audit/result.json",
+            "sha256": "11d46b79a22a360dca654a474cd29b1ff7026df16d2a7f3aa78d3b82092768c0"
+          },
+          "before_complete_ns": 46378632742,
+          "before_preparation_ns": 25088327640,
+          "before_response": {
+            "bytes": 3733,
+            "namespace": "evidence",
+            "path": "ladder-64m-v2-2-fp4x2/response.json",
+            "sha256": "da6dc7d8c84a22655a1afb52d83dbdb7a51ae29d66d3d56e168b6eaafa533666"
+          },
+          "certified": false,
+          "complete_ratio": 1.2861312514462253,
+          "exact": true,
+          "family": "tall",
+          "final_check": {
+            "bytes": 1223,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-2-fp4x2-final-check/result.json",
+            "sha256": "e78d78431233964fbabecc80b5ba60df33b2e4658f9356f652e0850dbe1a4559"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 1684015672,
+            "backend": "gpu-fp64",
+            "download_ns": 747068705,
+            "longest_line": 103,
+            "power_iterations": 20,
+            "scaling_ns": 38802577,
+            "setup_ns": 609310386,
+            "spectral_ns": 58431774,
+            "step_bits": 4612108023351825170,
+            "teardown_ns": 86452592,
+            "total_ns": 1892444022
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 64000000,
+          "old_ownership_disposition": null,
+          "pair_timing_eligible": true,
+          "preparation_ratio": 2.768751714849884,
+          "process_ratio": 1.4842741526077021,
+          "resource": {
+            "bytes": 10350,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v3-2-fp4x2.resource.json",
+            "sha256": "52d34a7cb052e27fa85050f08d447e9c99be5465856f5f533f77a59a4191ac97"
+          },
+          "status": "limit"
+        },
+        {
+          "accepted_fp4_share": 0.75,
+          "after_complete_ns": 27888873073,
+          "after_cost_ns": {
+            "assessment": 3643118806,
+            "device_setup": 621369558,
+            "device_teardown": 85180149,
+            "execution": 63037884,
+            "host_preparation": 7275647232,
+            "recovery": 0
+          },
+          "after_preparation_ns": 7275647232,
+          "after_process_ns": 19154692518,
+          "after_response": {
+            "bytes": 4131,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-3-fp4x2/response.json",
+            "sha256": "8b537cc8c07d2fdff99f0193d64d46c84a151a3d0bb985563309661f53147d8c"
+          },
+          "assessment_ratio": 0.9674891804777448,
+          "audit": {
+            "bytes": 1529,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-3-fp4x2-audit/result.json",
+            "sha256": "2ace372688a563903fc1c73db79ff9c502986cc758a68991d4a15614f4607bb4"
+          },
+          "before_complete_ns": 34010142223,
+          "before_preparation_ns": 17883989416,
+          "before_response": {
+            "bytes": 3753,
+            "namespace": "evidence",
+            "path": "ladder-64m-v2-3-fp4x2/response.json",
+            "sha256": "bf1a6d5435cef910f66db15881d3685fa6dae90eddb3d8ffe244e8c7f2f1b2fa"
+          },
+          "certified": false,
+          "complete_ratio": 1.2194878629185693,
+          "exact": true,
+          "family": "coupled_blocks",
+          "final_check": {
+            "bytes": 1219,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-3-fp4x2-final-check/result.json",
+            "sha256": "f52c801fa3148c312d6be9b1d6967f8c292801de85eba9eda9718c9736907859"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 1600015672,
+            "backend": "gpu-fp64",
+            "download_ns": 710739913,
+            "longest_line": 87,
+            "power_iterations": 20,
+            "scaling_ns": 23211120,
+            "setup_ns": 603479970,
+            "spectral_ns": 34113937,
+            "step_bits": 4614410376408177451,
+            "teardown_ns": 83501038,
+            "total_ns": 1717163448
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 64000000,
+          "old_ownership_disposition": null,
+          "pair_timing_eligible": true,
+          "preparation_ratio": 2.4580616467139897,
+          "process_ratio": 1.3822811542455689,
+          "resource": {
+            "bytes": 9309,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v3-3-fp4x2.resource.json",
+            "sha256": "13ceec8d055b2f0cad6fd9c97309dff73ebc3a598b44060de9d9bd1572c24ac5"
+          },
+          "status": "limit"
+        },
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 41824305051,
+          "after_cost_ns": {
+            "assessment": 7708121578,
+            "device_setup": 1137566740,
+            "device_teardown": 86157571,
+            "execution": 285501991,
+            "host_preparation": 9354645500,
+            "recovery": 0
+          },
+          "after_preparation_ns": 9354645500,
+          "after_process_ns": 28160056318,
+          "after_response": {
+            "bytes": 4108,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-4-fp4x2/response.json",
+            "sha256": "207e919ce36f9aa67d04eae4276e6569c923b21bec400775e29ba8fad52f9238"
+          },
+          "assessment_ratio": 0.9427962495741528,
+          "audit": {
+            "bytes": 1547,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-4-fp4x2-audit/result.json",
+            "sha256": "f81f629064551a7afd4658f41967ebdbc4255ff691b269d7e26fc37c9fb0b9af"
+          },
+          "before_complete_ns": 54360845829,
+          "before_preparation_ns": 27908144582,
+          "before_response": {
+            "bytes": 3730,
+            "namespace": "evidence",
+            "path": "ladder-64m-v2-4-fp4x2/response.json",
+            "sha256": "426ae3c2f51b0a6b97efd526d825eb66c660fb2ce5e703af3c6b34a1dac118cc"
+          },
+          "certified": false,
+          "complete_ratio": 1.2997429547894008,
+          "exact": true,
+          "family": "ill_scaled",
+          "final_check": {
+            "bytes": 1227,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-4-fp4x2-final-check/result.json",
+            "sha256": "c2d5e86a841a51a66f6db0387808d733833df1b88300641e71c1c4475aaa4172"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 1792062552,
+            "backend": "gpu-fp64",
+            "download_ns": 739560753,
+            "longest_line": 37,
+            "power_iterations": 20,
+            "scaling_ns": 53262835,
+            "setup_ns": 623395932,
+            "spectral_ns": 81408184,
+            "step_bits": 4606451243450826650,
+            "teardown_ns": 80643928,
+            "total_ns": 1968319514
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 64000000,
+          "old_ownership_disposition": null,
+          "pair_timing_eligible": true,
+          "preparation_ratio": 2.9833460372175513,
+          "process_ratio": 1.5314113160503375,
+          "resource": {
+            "bytes": 11130,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v3-4-fp4x2.resource.json",
+            "sha256": "2c0236ad69aca9d6b4060a1c8b45bd38e1f77e3c19403087009810cbd57cfdc0"
+          },
+          "status": "limit"
+        },
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 40198121762,
+          "after_cost_ns": {
+            "assessment": 7658570161,
+            "device_setup": 1151434209,
+            "device_teardown": 104195818,
+            "execution": 284514747,
+            "host_preparation": 9294009390,
+            "recovery": 0
+          },
+          "after_preparation_ns": 9294009390,
+          "after_process_ns": 27571617101,
+          "after_response": {
+            "bytes": 4083,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-5-fp4x2/response.json",
+            "sha256": "b990dfbd33cd320e5c81059e09adfa78ea6fcdc8cb08c1e257e994331ec33036"
+          },
+          "assessment_ratio": 0.9510720578224654,
+          "audit": {
+            "bytes": 1521,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-5-fp4x2-audit/result.json",
+            "sha256": "5f40745a78c459b054cc242b2bbbee3c47418f54cbad4c8c31488a53eba3ca94"
+          },
+          "before_complete_ns": 50871557386,
+          "before_preparation_ns": 26124823997,
+          "before_response": {
+            "bytes": 3705,
+            "namespace": "evidence",
+            "path": "ladder-64m-v2-5-fp4x2/response.json",
+            "sha256": "fe424c76f8c19967e154a0abfca04de8a047716616a6b62af4e368c77bed451c"
+          },
+          "certified": false,
+          "complete_ratio": 1.265520754606246,
+          "exact": true,
+          "family": "degenerate",
+          "final_check": {
+            "bytes": 1214,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-5-fp4x2-final-check/result.json",
+            "sha256": "d4d9a09761b5f1791fa764ddb8572b284caa913c6e772631df01acf2c1800c05"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 1792062552,
+            "backend": "gpu-fp64",
+            "download_ns": 732550957,
+            "longest_line": 48,
+            "power_iterations": 20,
+            "scaling_ns": 53367069,
+            "setup_ns": 634287495,
+            "spectral_ns": 81607566,
+            "step_bits": 4609371482968922347,
+            "teardown_ns": 89310707,
+            "total_ns": 2076800043
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 64000000,
+          "old_ownership_disposition": null,
+          "pair_timing_eligible": true,
+          "preparation_ratio": 2.8109315259686865,
+          "process_ratio": 1.4696626362742553,
+          "resource": {
+            "bytes": 10870,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v3-5-fp4x2.resource.json",
+            "sha256": "3df9869b7b39cf7266db10aa583d01d845d644a27949774fc5882b3f90b5f437"
+          },
+          "status": "limit"
+        }
+      ],
+      "comparison": {
+        "bytes": 37908,
+        "namespace": "evidence",
+        "path": "paired-64m-v2-v3.json",
+        "sha256": "3c674840e40e9d808161ead58104ed1d733d041601a7072de6b74846a3b1ed21"
+      },
+      "median_assessment_ratio": 0.9339203308062847,
+      "median_complete_ratio": 1.2929371031178132,
+      "median_preparation_ratio": 2.897138781593119,
+      "median_process_ratio": 1.4950715650014046,
+      "scale": "64m"
+    },
+    {
+      "cells": [
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 194066951789,
+          "after_cost_ns": {
+            "assessment": 36218729252,
+            "device_setup": 4318350325,
+            "device_teardown": 104937891,
+            "execution": 1175135427,
+            "host_preparation": 40617126907,
+            "recovery": 0
+          },
+          "after_preparation_ns": 40617126907,
+          "after_process_ns": 122810143464,
+          "after_response": {
+            "bytes": 5872,
+            "namespace": "evidence",
+            "path": "ladder-256m-v3-0-fp4x2/response.json",
+            "sha256": "322a4bd13d5dc2ccc8d2176d9b61882f171a3cfb8865914fba4b591e74fbe833"
+          },
+          "assessment_ratio": 0.9465134625922021,
+          "audit": {
+            "bytes": 1557,
+            "namespace": "evidence",
+            "path": "ladder-256m-v3-0-fp4x2-audit/result.json",
+            "sha256": "00d2765579a027654fa091bd772b2f88bf615da93c5ff68a9ac3c541bba7f899"
+          },
+          "before_complete_ns": 286395266800,
+          "before_preparation_ns": 164196921007,
+          "before_response": {
+            "bytes": 5491,
+            "namespace": "evidence",
+            "path": "ladder-256m-v2-0-fp4x2/response.json",
+            "sha256": "381594a245f124f8fde6ebbfe2efaae2d554846a0298db29ebb5914f4122e803"
+          },
+          "certified": false,
+          "complete_ratio": 1.4757549606456657,
+          "exact": true,
+          "family": "irregular",
+          "final_check": {
+            "bytes": 1233,
+            "namespace": "evidence",
+            "path": "ladder-256m-v3-0-fp4x2-final-check/result.json",
+            "sha256": "f0273275ff779fadd1711b5c664b304f37123dfd77d644b1193eb2f6318f7246"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 7168250040,
+            "backend": "gpu-fp64",
+            "download_ns": 3032745841,
+            "longest_line": 40,
+            "power_iterations": 20,
+            "scaling_ns": 259255785,
+            "setup_ns": 1743745871,
+            "spectral_ns": 409510870,
+            "step_bits": 4610255634780496676,
+            "teardown_ns": 94853033,
+            "total_ns": 7103506618
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 256000000,
+          "old_ownership_disposition": null,
+          "pair_timing_eligible": true,
+          "preparation_ratio": 4.042553806992737,
+          "process_ratio": 1.8873435659078468,
+          "resource": {
+            "bytes": 30379,
+            "namespace": "evidence",
+            "path": "resources/ladder-256m-v3-0-fp4x2.resource.json",
+            "sha256": "6d44d1a5efb3218c85093052ee69439d62ee46d8d60964e46b4a5ed3065cf825"
+          },
+          "status": "limit"
+        },
+        {
+          "accepted_fp4_share": 0.75,
+          "after_complete_ns": 110362355776,
+          "after_cost_ns": {
+            "assessment": 15791331848,
+            "device_setup": 2372525754,
+            "device_teardown": 102525039,
+            "execution": 242406208,
+            "host_preparation": 28165745640,
+            "recovery": 0
+          },
+          "after_preparation_ns": 28165745640,
+          "after_process_ns": 75809475039,
+          "after_response": {
+            "bytes": 4148,
+            "namespace": "evidence",
+            "path": "ladder-256m-v3-1-fp4x2/response.json",
+            "sha256": "ff155bebf42ea7016b97de18cee554a9708dece797611b31c4c23fc1baa2129c"
+          },
+          "assessment_ratio": 0.9465560912706114,
+          "audit": {
+            "bytes": 1530,
+            "namespace": "evidence",
+            "path": "ladder-256m-v3-1-fp4x2-audit/result.json",
+            "sha256": "ff9093d2984105c64f09cc0f6ef00e701d53885654e3656ea7908bc641a30f00"
+          },
+          "before_complete_ns": 144280573319,
+          "before_preparation_ns": 77743502167,
+          "before_response": {
+            "bytes": 3765,
+            "namespace": "evidence",
+            "path": "ladder-256m-v2-1-fp4x2/response.json",
+            "sha256": "28a24e7a469a597ba6f96905995d2b754208544fce8e2f4fca587589c4cdefd3"
+          },
+          "certified": false,
+          "complete_ratio": 1.3073350265541908,
+          "exact": true,
+          "family": "coupled_blocks",
+          "final_check": {
+            "bytes": 1222,
+            "namespace": "evidence",
+            "path": "ladder-256m-v3-1-fp4x2-final-check/result.json",
+            "sha256": "f4d6c25007983b6225b35237f2ec0715f321d0cbb0add1af56c197843601a56e"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 6400062552,
+            "backend": "gpu-fp64",
+            "download_ns": 2834117776,
+            "longest_line": 89,
+            "power_iterations": 20,
+            "scaling_ns": 91942393,
+            "setup_ns": 1548426313,
+            "spectral_ns": 134761001,
+            "step_bits": 4614412047695799487,
+            "teardown_ns": 94648339,
+            "total_ns": 5761279827
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 256000000,
+          "old_ownership_disposition": null,
+          "pair_timing_eligible": true,
+          "preparation_ratio": 2.760214594020597,
+          "process_ratio": 1.4837368377519335,
+          "resource": {
+            "bytes": 20758,
+            "namespace": "evidence",
+            "path": "resources/ladder-256m-v3-1-fp4x2.resource.json",
+            "sha256": "6f340c1853fa2a5bcf17c700ac9cce21bbe1967ba28d0ed5c06db15b2313ed80"
+          },
+          "status": "limit"
+        }
+      ],
+      "comparison": {
+        "bytes": 13278,
+        "namespace": "evidence",
+        "path": "paired-256m-v2-v3.json",
+        "sha256": "ec7686e42ad9a892d5d2859132e0182693ad8ee48621f6b4f73b43c64f4a1d02"
+      },
+      "median_assessment_ratio": 0.9465347769314068,
+      "median_complete_ratio": 1.3915449935999282,
+      "median_preparation_ratio": 3.4013842005066675,
+      "median_process_ratio": 1.6855402018298902,
+      "scale": "256m"
+    },
+    {
+      "cells": [
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 406709022411,
+          "after_cost_ns": {
+            "assessment": 73826566927,
+            "device_setup": 8580286060,
+            "device_teardown": 124420063,
+            "execution": 4009432840,
+            "host_preparation": 92272276877,
+            "recovery": 0
+          },
+          "after_preparation_ns": 92272276877,
+          "after_process_ns": 262952349191,
+          "after_response": {
+            "bytes": 8198,
+            "namespace": "evidence",
+            "path": "ladder-512m-v3-0-fp4x2/response.json",
+            "sha256": "dbc65bfefb57b915b654e6d45b0ece18cb5e61bebdee834f9c5f08b9be5140d1"
+          },
+          "assessment_ratio": null,
+          "audit": {
+            "bytes": 1556,
+            "namespace": "evidence",
+            "path": "ladder-512m-v3-0-fp4x2-audit/result.json",
+            "sha256": "a472f7cd014201bd94dfb1555d7049a113ab7871b58c4c2401fd063c0830ed7b"
+          },
+          "before_complete_ns": 681940092924,
+          "before_preparation_ns": 394792994377,
+          "before_response": {
+            "bytes": 7813,
+            "namespace": "evidence",
+            "path": "ladder-512m-v2-0-fp4x2/response.json",
+            "sha256": "a0dfcced7d8430fbfb1e9dd8e87291e65598fe9a4857469bbad075c781e430ae"
+          },
+          "certified": false,
+          "complete_ratio": null,
+          "exact": true,
+          "family": "irregular",
+          "final_check": {
+            "bytes": 1233,
+            "namespace": "evidence",
+            "path": "ladder-512m-v3-0-fp4x2-final-check/result.json",
+            "sha256": "1ba8e182b0326d34c74f3be58882c90004a89f7a1a12a72dddc62e7a292c19d3"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 14336500040,
+            "backend": "gpu-fp64",
+            "download_ns": 6122911468,
+            "longest_line": 38,
+            "power_iterations": 20,
+            "scaling_ns": 634376922,
+            "setup_ns": 3425237282,
+            "spectral_ns": 1022018963,
+            "step_bits": 4610255393922665598,
+            "teardown_ns": 109935694,
+            "total_ns": 15478323049
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 512000000,
+          "old_ownership_disposition": {
+            "bytes": 1019,
+            "namespace": "evidence",
+            "path": "resources/ladder-512m-v2-0-fp4x2.ownership-disposition.json",
+            "sha256": "0fd17a694ac69516fd69c45d393af201c62cda20714274413508fdaf0ab8924f"
+          },
+          "pair_timing_eligible": false,
+          "preparation_ratio": null,
+          "process_ratio": null,
+          "resource": {
+            "bytes": 58980,
+            "namespace": "evidence",
+            "path": "resources/ladder-512m-v3-0-fp4x2.resource.json",
+            "sha256": "f3d019820cb357d22a4024f752723cc97ebb3144b15c18319e2306ad03a316f5"
+          },
+          "status": "limit"
+        },
+        {
+          "accepted_fp4_share": 0.75,
+          "after_complete_ns": 237677554741,
+          "after_cost_ns": {
+            "assessment": 31433312434,
+            "device_setup": 4648219970,
+            "device_teardown": 133238924,
+            "execution": 481563545,
+            "host_preparation": 58147415492,
+            "recovery": 0
+          },
+          "after_preparation_ns": 58147415492,
+          "after_process_ns": 154079827020,
+          "after_response": {
+            "bytes": 4738,
+            "namespace": "evidence",
+            "path": "ladder-512m-v3-1-fp4x2/response.json",
+            "sha256": "5d165b6cd34fe2edf61f3491ea4ed9246083954543c4628c12133aeb4c2fbb73"
+          },
+          "assessment_ratio": null,
+          "audit": {
+            "bytes": 1533,
+            "namespace": "evidence",
+            "path": "ladder-512m-v3-1-fp4x2-audit/result.json",
+            "sha256": "03f8ae203ab54460dbcf4a9af71b912542d8f1326ae2ef1aab54431d5b69cdd6"
+          },
+          "before_complete_ns": 362474844205,
+          "before_preparation_ns": 190111527471,
+          "before_response": {
+            "bytes": 4354,
+            "namespace": "evidence",
+            "path": "ladder-512m-v2-1-fp4x2/response.json",
+            "sha256": "dd51215c0ede3b11220e40f80a760dade68e515347b0fb9a68a4a0bcf14995df"
+          },
+          "certified": false,
+          "complete_ratio": null,
+          "exact": true,
+          "family": "coupled_blocks",
+          "final_check": {
+            "bytes": 1223,
+            "namespace": "evidence",
+            "path": "ladder-512m-v3-1-fp4x2-final-check/result.json",
+            "sha256": "b2dbe6f2c57d9e78031f916fca6e99bfe185c3ae6aba93047e129ff4594c19d3"
+          },
+          "gpu_preparation": {
+            "allocated_bytes": 12800125048,
+            "backend": "gpu-fp64",
+            "download_ns": 5686511976,
+            "longest_line": 94,
+            "power_iterations": 20,
+            "scaling_ns": 192685857,
+            "setup_ns": 2856342238,
+            "spectral_ns": 302927956,
+            "step_bits": 4614411295576224853,
+            "teardown_ns": 100125940,
+            "total_ns": 11256051484
+          },
+          "logical": 100,
+          "new_timing_eligible": true,
+          "nonzeros": 512000000,
+          "old_ownership_disposition": {
+            "bytes": 1019,
+            "namespace": "evidence",
+            "path": "resources/ladder-512m-v2-1-fp4x2.ownership-disposition.json",
+            "sha256": "c64f9fcf680f072858519a52c97395517bd0444f3794c619074774e0394ecb6b"
+          },
+          "pair_timing_eligible": false,
+          "preparation_ratio": null,
+          "process_ratio": null,
+          "resource": {
+            "bytes": 36879,
+            "namespace": "evidence",
+            "path": "resources/ladder-512m-v3-1-fp4x2.resource.json",
+            "sha256": "57384b65e8575c6bf98470666a6dcc42a37d5e4b416ef1828e9cb2bd6eea5cf9"
+          },
+          "status": "limit"
+        }
+      ],
+      "comparison": {
+        "bytes": 13621,
+        "namespace": "evidence",
+        "path": "paired-512m-v2-v3.json",
+        "sha256": "f5a79e6668c0a98d6a0fdfd5c4354c3274f5f5427211282911c17a3d32c3503e"
+      },
+      "median_assessment_ratio": null,
+      "median_complete_ratio": null,
+      "median_preparation_ratio": null,
+      "median_process_ratio": null,
+      "scale": "512m"
+    }
+  ],
+  "cpu_ns": 86933674672092,
+  "documentation": {
+    "bytes": 363,
+    "namespace": "evidence",
+    "path": "resources/gpu-preparation-docs-v1.settlement.json",
+    "sha256": "877d43fca524b7bd1d3ae415b9fdab9386348ae7629d21099b059be716c2611c"
+  },
+  "evidence_audit": {
+    "bytes": 367,
+    "namespace": "evidence",
+    "path": "resources/gpu-preparation-delivery-v1.settlement.json",
+    "sha256": "ecb34d8982260ba8e957b318b14f94a63817823b236b4a7ee140eccbaa160dfa"
+  },
+  "gpu_ns": 5341824658053,
+  "limitation": "Descriptive 100-update capacity runs, all uncertified. Complete cost includes the fresh solve process and independent final original-model checking. Older 512 M timings remain excluded. No broad FP4 superiority or billion-scale convergence claim.",
+  "status": "gpu_preparation_admitted_and_capacity_measured"
+}

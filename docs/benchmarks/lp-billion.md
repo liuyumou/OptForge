@@ -1,12 +1,15 @@
 # Billion-nonzero LP development on the Pro6000
 
 Execution continuation under [SPEC-0046](../specifications/SPEC-0046-billion-lp.md),
-2026-11-19–20. GPU preparation now passes 66 bitwise preparation comparisons,
-60 exact solve continuations and the complete memcheck suite. Racecheck remains
-incomplete after resource and ownership interruptions; initcheck, synccheck and
-performance measurements remain pending. All six billion-nonzero originals are
-ready; no billion-scale solve has run. Public defaults and historical results
-remain unchanged. See the [latest device validation](#gpu-preparation-device-validation).
+2026-11-19–20. GPU preparation now passes bitwise comparisons, exact solve
+continuations and all four sanitizer suites. Ten independently audited capacity
+runs retain exact numerical transcripts. At 64 M and 256 M nonzeros, descriptive
+v2/v3 preparation speedups are 2.897x and 3.401x; complete-cost speedups are 1.293x
+and 1.392x. These are uncertified 100-update runs. All six billion-nonzero originals
+are ready, but zero billion-scale solves have run: the current host-memory gate
+admits none of the eighteen final cells. Public defaults, strict certificates and
+historical results remain unchanged. See the
+[latest timings and capacity gate](#gpu-preparation-timings-and-host-memory).
 
 ## Scope and implementation
 
@@ -320,6 +323,9 @@ solve result to report.
 
 ## GPU preparation device validation
 
+This section retains the earlier partial checkpoint; the next section records
+completion and subsequent measurements.
+
 The [compact admission receipt](lp-billion-preparation-admission.json) binds the
 completed checks, all three GPU interruptions, partial observations and current
 source checkpoint. The earlier portable catalog remains unchanged; these new
@@ -406,3 +412,116 @@ scientific timing or billion-scale solve is reported. The allocation remains ope
 at 75147.503818756 CPU / 3764.416660567 GPU seconds including final documentation.
 All 311 documentation pages and their local links validate; no reservation is
 active.
+
+## GPU preparation timings and host memory
+
+The [compact results receipt](lp-billion-gpu-preparation-results.json) binds the
+complete admission, paired measurements, independent audits and final capacity
+snapshot. The user authorizes use of the full Pro6000. All work stays inside the
+container, on the pinned UUID, with the original idle/ownership guards, strict
+certificates and existing resource ceilings. No device reset, configuration change,
+host access or signal to another job occurs.
+
+Idle-confirmation v6 observes seven samples across six minutes at the original
+0.750 GiB baseline and zero utilization. Operational GPU v9 passes 60 exact
+continuations. The image-v3 numerical preparation comparison retains 66 bitwise
+matches and 60 exact solve continuations. Memcheck v4, racecheck v6, initcheck v3
+and synccheck v3 now all pass: each covers seven actual GPU preparations, one
+explicit host fallback and 20 solve continuations, with independent strict scalar
+checking. The recursive-norm case retains its original 20 power iterations; no
+fixture, kernel or hazard coverage is removed. All 293 numerical source bindings
+remain exact. The solve CUDA image, numerical Rust, public defaults, 100-update
+control and 500-update certification are unchanged.
+
+Before any v3 scientific cell starts, a harness regression exposes a loop-variable
+shadowing error that could overwrite cohort-qualified cell identities.
+[Amendment 15](../specifications/SPEC-0046-amendment-15.md) corrects that orchestration
+error; the fresh harness v6 passes all 22 resource/evidence tests including exact
+cell-identity assertions. No attempted scientific cell is repeated.
+
+The proposed 64 GiB racecheck host declaration fails physical preflight before a
+reservation exists. [Amendment 16](../specifications/SPEC-0046-amendment-16.md)
+prospectively declares 56 GiB with unchanged headroom and sampled-RSS limits.
+Racecheck v5 then reaches its 240-second CPU wall guard in the deep-norm case;
+its partial results, empty cleanup and full 960 CPU / 240 GPU seconds remain.
+[Amendment 17](../specifications/SPEC-0046-amendment-17.md) authorizes a fresh
+600-second admission reservation. Complete racecheck v6 takes 430.933 charged GPU
+seconds and passes all original checks. The failed v5 run remains a failed run.
+
+Every new 64/256/512 M response agrees exactly with its image-v2 numerical
+transcript, excluding timing/allocation fields, and every final/intermediate
+assessment is independently checked against the original model. All ten endpoints
+reach the 100-update limit without certification. Ratios below are v2/v3; above
+one means faster with GPU preparation. Complete cost includes the fresh solve
+process and independent final original-model check.
+
+| Nonzeros | Family | Preparation | Assessment | Process | Complete cost | v3 complete seconds |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 64M | irregular | 3.034 | 0.924 | 1.506 | 1.338 | 42.385 |
+| 64M | wide | 3.890 | 0.925 | 1.652 | 1.399 | 61.813 |
+| 64M | tall | 2.769 | 0.907 | 1.484 | 1.286 | 36.061 |
+| 64M | coupled blocks | 2.458 | 0.967 | 1.382 | 1.219 | 27.889 |
+| 64M | ill scaled | 2.983 | 0.943 | 1.531 | 1.300 | 41.824 |
+| 64M | degenerate | 2.811 | 0.951 | 1.470 | 1.266 | 40.198 |
+| 64M | Descriptive median | 2.897 | 0.934 | 1.495 | 1.293 | — |
+| 256M | irregular | 4.043 | 0.947 | 1.887 | 1.476 | 194.067 |
+| 256M | coupled blocks | 2.760 | 0.947 | 1.484 | 1.307 | 110.362 |
+| 256M | Descriptive median | 3.401 | 0.947 | 1.686 | 1.392 | — |
+
+The separate cohort medians are descriptive and are not cumulative speedups.
+Assessment regresses in every eligible pair; those costs remain included. The
+coupled cases execute 75% of accepted product nonzeros through actual FP4, with
+complete-cost speedups of 1.219x at 64 M and 1.307x at 256 M. Other families have
+no eligible canonical FP4 tiles and select FP32. These shared preparation gains
+do not establish broad FP4 superiority or certified full-solve benefit.
+
+The two new 512 M runs have valid absolute timings. Both older 512 M timings remain
+excluded by their original ownership dispositions, so no paired timing ratio or
+speedup is reported for this scale:
+
+| 512 M family | v3 preparation seconds | v3 process seconds | v3 complete seconds |
+| --- | ---: | ---: | ---: |
+| Irregular | 92.272 | 262.952 | 406.709 |
+| Coupled blocks | 58.147 | 154.080 | 237.678 |
+
+The initial 256 M independent-audit host preflight refuses before creating a
+reservation. [Amendment 18](../specifications/SPEC-0046-amendment-18.md) declares
+32/40 GiB for the never-started 256/512 M audits, based on earlier same-checker
+peaks of 8.751/17.392 GiB. The full unchanged independent audits then pass. Their
+900/1800-second time reservations, physical headroom and sampled-RSS stops stay
+intact; no solve declaration or certificate criterion changes.
+
+### Billion-scale host capacity
+
+The retained post-run snapshot finds the GPU idle at 0.750 GiB, but only
+62.364 GiB of host MemAvailable. All eighteen prospective native/FP32/FP4x2 cells
+fit device capacity. None fits host headroom: the smallest declaration requires
+79 GiB including the mandatory 4 GiB headroom, and the widest requires 130 GiB.
+Full GPU access does not supply the missing host RAM. No other job or shared
+memory is disturbed, and no billion-scale scientific cell starts or is frozen.
+
+All six one-billion-original-nonzero inputs remain ready. Once physical host
+capacity permits the roster, prospectively select the largest common 500-update
+ceiling up to 5000 that fits complete solve, intermediate/final audit and endpoint
+storage reservations, including possible repaired dual witnesses. Keep strict
+1e-9 criteria, control100/certificate500, all eighteen native/FP32/FP4x2 cells and
+all historical failures/missingness. `tools/lp_billion_prepare_continue.py` has
+completed its preparation admissions and ten capacity cells; the final billion
+cohort needs its own freeze and execution, not a repeat of these measurements.
+
+### Updated evidence and resources
+
+The checkpoint retains 28 frozen capacity cells, 27 responses, 25 eligible timings
+and the original missing 128 M response. All twelve failed reservations preserve
+full charges totaling 32160 CPU / 1560 GPU seconds. New completed reservations
+have empty cleanup and no overrun; no reservation is active. The original 128 M
+false-cleanup receipt and later independent cleanup proof both remain intact.
+The earlier relocated portable catalog remains unchanged; the new source-bound
+admission, comparison, audit and capacity receipts supplement it. No new full
+portable replay is claimed.
+
+Open settled checkpoint including final documentation: 86933.674672092 CPU /
+5341.824658053 GPU seconds of the unchanged 240000 CPU / 30000 GPU allocation.
+All 315 documentation pages and their local links validate. The earlier general
+allocation remains unchanged. Results and changes are committed
+locally only; no public adoption, confirmation or publication is released.

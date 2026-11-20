@@ -1,5 +1,55 @@
 # Active Task
 
+## GPU preparation gains; billion solves await host RAM (2026-11-20)
+
+GPU preparation is fully admitted: 66 bitwise preparation comparisons, 60 exact
+solve continuations and all four complete sanitizers pass. Racecheck v6 keeps the
+original deep-norm 20 power iterations and passes in 430.933 charged GPU seconds.
+Retain failed racecheck v5 and its full 960 CPU / 240 GPU seconds. Fresh harness v6
+passes 22 tests, including the corrected cohort-identity shadowing regression.
+Numerical Rust/CUDA, 293 source bindings, strict original-model 1e-9 certificates,
+public defaults, control100/certificate500 and all idle guards remain unchanged.
+
+All ten image-v3 capacity cells and their final/intermediate independent audits
+complete with exact v2/v3 numerical transcripts. The six-family 64 M descriptive
+preparation / complete-cost medians are 2.897x / 1.293x; the two-family 256 M medians
+are 3.401x / 1.392x. Assessment regresses (0.934x / 0.947x) and remains included.
+All endpoints are uncertified 100-update limits. Both valid new 512 M absolute
+complete costs are 406.709 / 237.678 seconds; old 512 M timings remain excluded,
+with no paired speedup. Coupled cases execute 75% accepted FP4 work; broad FP4
+superiority and certified-solve benefit remain unestablished.
+
+The user allows the full Pro6000, still container-only and only while idle. The
+post-run capacity snapshot sees the 0.750 GiB idle baseline but only 62.364 GiB
+host RAM available. None of eighteen prospective billion cells fits: minimum
+79 GiB including headroom, up to 130 GiB for the full roster. All fit device memory.
+Do not relax host/ownership guards, clear shared memory, reset the GPU, signal
+others, escape the container or infer an owner. Six original billion-nonzero inputs
+are ready, but zero billion-scale solves have run and the final cohort is unfrozen.
+When host capacity permits, prospectively choose the largest common 500-update
+ceiling up to 5000 fitting full solve/audit/storage reservations, including repaired
+dual witnesses. Never retry an attempted scientific cell. The preparation continuation
+script has completed all its cohorts; final billion freeze/execution remains next.
+
+Amendments 15–18 preserve all failures and record the identity fix, fresh full
+racecheck reservation and supported audit host declarations. Allocation and phase
+caps stay unchanged. The checkpoint retains 28 cells / 27 responses / 25 eligible
+timings / one old missing response, twelve failed reservations retaining full
+32160 CPU / 1560 GPU seconds, and 293 exact numerical bindings. All new cleanup is
+empty; no reservation is active. The old portable catalog remains unchanged, with
+new source-bound receipts supplemental; no fresh full portable replay is claimed.
+
+Evidence: /storage/ai-optimizer-billion-v1/preparation-progress-v2.json,
+preparation-device-checkpoint-v2.json, paired-{64m,256m,512m}-v2-v3.json and
+billion-host-availability-v1.json. Open settled checkpoint including final documentation:
+86933.674672092 CPU / 5341.824658053 GPU seconds. The separate 240000 CPU / 30000 GPU
+allocation stays open; the earlier general allocation is unchanged. Commit locally
+only; no public adoption or publication. All 315 documentation pages and local
+links validate.
+
+Report: [GPU preparation timings and host memory](../docs/benchmarks/lp-billion.md#gpu-preparation-timings-and-host-memory).
+Compact bindings: [GPU preparation results](../docs/benchmarks/lp-billion-gpu-preparation-results.json).
+
 ## Partial GPU preparation validation (2026-11-20)
 
 The Pro6000 passes a six-minute idle window and operational GPU v8 completes

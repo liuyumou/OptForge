@@ -66,11 +66,14 @@ class BillionEvidenceContracts(unittest.TestCase):
                            dict(status='refused',cleanup_empty=True,overrun=False))
                 common.put(root/'resources/array-racecheck-v4.settlement.json',
                            dict(status='refused',cleanup_empty=True,overrun=False))
+                common.put(root/'resources/array-racecheck-v5.settlement.json',
+                           dict(status='refused',cleanup_empty=True,overrun=False))
                 common.put(root/'resources/idle-confirmation-v5.settlement.json',
                            dict(status='refused',cleanup_empty=True,overrun=False))
                 common.put(root/'resources/operational-cpu-v9.settlement.json',dict(status='passed'))
+                common.put(root/'resources/preparation-harness-cpu-v6.settlement.json',dict(status='passed'))
                 for name in ['billion-native-v2','array-gpu-v3','array-memcheck-v4',
-                             'array-racecheck-v5','array-initcheck-v3','array-synccheck-v3',
+                             'array-racecheck-v6','array-initcheck-v3','array-synccheck-v3',
                              'generator-admission-v1','ownership-audit-v2']:
                     common.put(root/'resources'/(name+'.settlement.json'),dict(status='passed'))
                 original=root/'input/model.json';common.put(original,{})
@@ -82,6 +85,7 @@ class BillionEvidenceContracts(unittest.TestCase):
                 manifest=campaign.freeze('cohort',[model],['native','fp32','fp4x2'],501,1000,10,version=3)
                 cells=common.load(manifest)['cells']
                 self.assertEqual([c['lane'] for c in cells],['native','fp32','fp4x2'])
+                self.assertEqual([c['id'] for c in cells],['cohort-0-native','cohort-0-fp32','cohort-0-fp4x2'])
                 self.assertTrue(all(c['status']=='pending' for c in cells))
                 self.assertTrue(all(c['memory']['endpoint_bytes_upper']==4*8*(7+22) for c in cells))
                 self.assertTrue(all(c['request']['fast']['gpu_preparation'] for c in cells))

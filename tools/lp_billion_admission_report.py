@@ -1,4 +1,4 @@
-"""Bind partial device validation without promoting it to scientific admission."""
+"""Bind complete preparation admission while retaining every interruption."""
 import argparse
 import json
 from lp_billion_common import BASE,load,put,ref,resolve,require
@@ -7,7 +7,8 @@ from lp_billion_common import BASE,load,put,ref,resolve,require
 def report(identity):
     require(identity and '/' not in identity and identity not in ['.','..'],'report identity')
     results=[]
-    for name in ['operational-gpu-v8','array-gpu-v3','array-memcheck-v4']:
+    for name in ['operational-gpu-v8','operational-gpu-v9','array-gpu-v3','array-memcheck-v4',
+                 'array-racecheck-v6','array-initcheck-v3','array-synccheck-v3']:
         path=BASE/name/'result.json';result=load(path)
         resource=BASE/'resources'/(name+'.settlement.json');settlement=load(resource)
         require(settlement['status']=='passed' and settlement['cleanup_empty'] and not settlement['overrun'],'completed admission supervision')
@@ -35,24 +36,29 @@ def report(identity):
             maximum_unattributed_bytes=max(s['used']-sum(s['processes'].values()) for s in samples)))
     failures=[]
     for name,reason in [('array-memcheck-v3','command_failed'),('array-racecheck-v3','sampled_rss_limit'),
-                        ('array-racecheck-v4','unattributed GPU memory exceeds fixed idle allowance')]:
+                        ('array-racecheck-v4','unattributed GPU memory exceeds fixed idle allowance'),
+                        ('array-racecheck-v5','guardian_cpu_wall_deadline')]:
         path=BASE/'resources'/(name+'.settlement.json');settlement=load(path)
         resource=load(resolve(settlement['resource']))
         require(settlement['status']=='refused' and settlement['cleanup_empty'] and not settlement['overrun'],'retained failed admission')
         require(settlement['cpu_ns']==960_000_000_000 and settlement['gpu_ns']==240_000_000_000,'full failed charge')
         require(resource['result']['reason']==reason,'interruption classification')
         from lp_confirmation2_supervisor import same_process
-        identities=resource['result']['observed_processes']
+        coordinator=BASE/'resources'/(name+'.resource.json.coordinator-result.json')
+        detail=resource['result'] if 'observed_processes' in resource['result'] else load(coordinator)
+        identities=detail['observed_processes']
         require(not any(same_process(p) for p in identities),'failed admission process still alive')
         outputs=[ref(p) for p in sorted((BASE/name).glob('prepare-*.result.json'))]
         failures.append(dict(identity=name,settlement=ref(path),reason=reason,completed_preparation_results=outputs,
             retained_process_identities=len(identities),live_process_identities=0,
-            peak_rss_bytes=resource['result']['peak_rss_bytes'],partial_log=ref(BASE/'resources'/(name+'.resource.json.log'))))
+            peak_rss_bytes=detail.get('peak_rss_bytes'),
+            supplemental_coordinator=ref(coordinator) if detail is not resource['result'] else None,
+            partial_log=ref(BASE/'resources'/(name+'.resource.json.log'))))
     image=BASE/'image-v3/binding.json'
     for key in ['executor','legacy','cuda','preparation']:
         resolve(load(image)[key])
     observations=[]
-    for version in range(2,6):
+    for version in range(2,7):
         name=f'idle-confirmation-v{version}';path=BASE/name/'result.json'
         settlement=BASE/'resources'/(name+'.settlement.json')
         if path.exists():
@@ -67,13 +73,14 @@ def report(identity):
             observations.append(dict(result=None,status='interrupted',settlement=ref(settlement),
                 reason=resource['result']['reason'],initial=ref(BASE/name/'initial.json'),
                 partial_log=ref(BASE/'resources'/(name+'.resource.json.log')),
-                partial_samples=[ref(p) for p in sorted((BASE/'availability/operational-gpu-v9').glob('*.json'))]))
-    result=dict(status='partial_device_validation',image=ref(image),completed=results,failed=failures,
+                previous_partial_report=ref(BASE/'preparation-progress-v1.json')))
+    result=dict(status='gpu_preparation_admitted',image=ref(image),completed=results,failed=failures,
         observations=observations,monitor_handoffs=[ref(p) for p in sorted(BASE.glob('idle-handoff-v*/result.json'))],
         source=ref(__file__),operational_plan=ref(BASE/'operational-readmissions/v9.json'),
         cpu_acceptance=ref(BASE/'resources/operational-cpu-v9.settlement.json'),
+        harness_acceptance=ref(BASE/'resources/preparation-harness-cpu-v6.settlement.json'),
         numerical_code_unchanged=True,strict_certificates_unchanged=True,
-        limitation='Partial validation is not full device admission or a preparation/total-solve speedup measurement.')
+        limitation='Device acceptance is separate from performance evidence and does not establish billion-scale convergence or broad FP4 superiority.')
     put(BASE/(identity+'.json'),result)
     print(dict(status=result['status'],completed_admissions=len(results),retained_interruptions=len(failures)),flush=True)
 

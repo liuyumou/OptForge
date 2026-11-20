@@ -69,7 +69,7 @@ def checkpoint(identity):
         if load(p)['status']!='passed':failed.append(dict(receipt=ref(p),**load(p)))
     cpu,gpu=accounting()
     gates={name:(ref(p) if (p:=BASE/'resources'/(name+'.settlement.json')).exists() else None)
-           for name in ['operational-gpu-v9','array-gpu-v3','array-memcheck-v4','array-racecheck-v5','array-initcheck-v3','array-synccheck-v3']}
+           for name in ['operational-gpu-v9','array-gpu-v3','array-memcheck-v4','array-racecheck-v6','array-initcheck-v3','array-synccheck-v3']}
     admitted=all(p and load(resolve(p))['status']=='passed' for p in gates.values())
     result=dict(status='gpu_preparation_admitted' if admitted else 'awaiting_gpu_preparation_admission',
         origin_commit=ORIGIN,protected_tracked_files_exact=True,historical_handoffs_exact=True,

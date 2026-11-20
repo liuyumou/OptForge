@@ -17,7 +17,7 @@ IMAGE = BASE/'image-v1'
 def gate_identity(kind,version):
     # The first v3 memcheck reservation stopped on its CPU-only fallback fixture.
     # Its failed receipt remains; the corrected harness has a fresh identity.
-    if version==3 and kind=='racecheck':return 'array-racecheck-v5'
+    if version==3 and kind=='racecheck':return 'array-racecheck-v6'
     return 'array-memcheck-v4' if (kind,version)==('memcheck',3) else f'array-{kind}-v{version}'
 
 def call(command, requests, out, name):

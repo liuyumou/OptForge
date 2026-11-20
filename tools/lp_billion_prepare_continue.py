@@ -25,6 +25,8 @@ def job(identity,seconds,command,gpu=False,phase='admission',host=16,disk=2):
 
 
 def main():
+    job('preparation-harness-cpu-v6',120,
+        ['python3','-B','-m','unittest','discover','-s','tests/integration','-p','test_lp_billion*.py'])
     job('operational-cpu-v9',120,['bash','-c',
         'set -e\npython3 -B -m unittest discover -s tests/integration -p "test_lp_confirmation*supervisor.py"\n'
         'python3 -B -m unittest discover -s tests/integration -p "test_lp_billion*.py"'])
@@ -45,13 +47,13 @@ def main():
     for sanitizer in ['memcheck','racecheck','initcheck','synccheck']:
         from lp_billion_admit import gate_identity
         identity=gate_identity(sanitizer,3)
-        job(identity,240 if sanitizer=='racecheck' else 120,
+        job(identity,600 if sanitizer=='racecheck' else 120,
             ['python3','-B','tools/lp_billion_admit.py','gpu','--id',identity,'--version','3','--sanitizer',sanitizer],
-            gpu=True,host=64 if sanitizer=='racecheck' else 16)
+            gpu=True,host=56 if sanitizer=='racecheck' else 16)
     from lp_billion_campaign import freeze
     from lp_billion_ladder import execute
     from lp_billion_results import summarize,compare
-    for tag,seconds,host in [('64m',600,32),('256m',900,64),('512m',1800,64)]:
+    for tag,seconds,host in [('64m',600,32),('256m',900,32),('512m',1800,40)]:
         before=BASE/('ladder-'+tag+'-v2/freeze.json')
         previous=load(before)['cells']
         identity='ladder-'+tag+'-v3';manifest=BASE/identity/'freeze.json'

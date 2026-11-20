@@ -66,6 +66,9 @@ def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=Fa
     proofs=[]
     from lp_billion_admit import gate_identity
     if version==3:
+        harness=BASE/'resources/preparation-harness-cpu-v6.settlement.json'
+        require(load(harness)['status']=='passed','cohort identity harness acceptance')
+        proofs.append(ref(harness))
         cpu=BASE/'resources/operational-cpu-v9.settlement.json'
         require(load(cpu)['status']=='passed','post-observation CPU readmission')
         proofs.append(ref(cpu))
@@ -73,8 +76,8 @@ def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=Fa
         stopped=load(observation)
         require(stopped['status']=='refused' and stopped['cleanup_empty'] and not stopped['overrun'],'retained observation interruption')
         proofs.append(ref(observation))
-    for identity in (['array-memcheck-v3','array-racecheck-v3','array-racecheck-v4'] if version==3 else []):
-        failed=BASE/'resources'/(identity+'.settlement.json')
+    for failed_identity in (['array-memcheck-v3','array-racecheck-v3','array-racecheck-v4','array-racecheck-v5'] if version==3 else []):
+        failed=BASE/'resources'/(failed_identity+'.settlement.json')
         failure=load(failed)
         require(failure['status']=='refused' and failure['cleanup_empty'] and not failure['overrun'],'retained sanitizer harness failure')
         proofs.append(ref(failed))
