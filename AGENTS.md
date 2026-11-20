@@ -1,3 +1,43 @@
+# Current agent handoff: container-only GPU leak audit (2026-11-20)
+
+The user explicitly prohibits escaping the container. No host-shell connection is
+available; do not request it again or attempt host namespace/filesystem access.
+Read-only memory diagnostics compare all nine legacy/v2/v3 compute/graphics/MPS
+APIs, memory v1/v2, visible device handles and retained process identities.
+Six samples spanning five minutes retain 10.542 GiB used and zero utilization;
+a subsequent sample rises to 10.858 GiB. Only 0.622 GiB is driver-reserved.
+The fixed 2 GiB unexplained-memory gate remains unchanged and fails.
+The later six-minute idle-confirmation window cycles 0.750 → 5.584 → 0.750 →
+65.451 GiB, reaching 70% utilization while no GPU job from us starts. It never
+passes five uninterrupted idle minutes; operational GPU v8 remains unattempted.
+
+The leak audit checks 2056 resource receipts and 191104 distinct PID/start-time
+identities; none survives, and no visible process holds an NVIDIA/DRM device
+handle. The 128 M interruption stays at the original 0.750 GiB baseline; memory
+returns to that baseline after both 512 M runs and before operational GPU v7.
+That last GPU reservation declares at most 1.81 MiB of solver buffers in its 42
+raw responses, plus context/module overhead. Later observations reach 77.825 GiB
+and 99% utilization while our subsequent jobs are CPU-only. No surviving ordinary
+solver allocation is identified, but driver-level orphan memory cannot be
+conclusively excluded within this container. Do not claim a proven external owner.
+
+Process inventories are empty even during retained traces of our own GPU work;
+they cannot independently attribute memory. Kernel logs are denied and driver
+clients are not exposed. No reset, configuration change, CUDA context, signal to
+another process or new GPU reservation occurs during this investigation. Both
+supervised diagnostic jobs pass with empty cleanup and zero GPU charge. The new
+GPU preparation module has still never executed. Validation and all billion-scale
+solves remain pending the unchanged idle and operational gates; do not retry old
+scientific cells or relax strict certificates. The allocation stays open.
+The additional idle-confirmation job also passes supervision with empty cleanup
+and zero GPU charge. Open settled checkpoint: 64401.039603840 CPU /
+2870.821030734 GPU seconds. No reservation is active; 307 documentation pages pass.
+
+Evidence: /storage/ai-optimizer-billion-v1/ownership-diagnosis-v1 and
+/storage/ai-optimizer-billion-v1/own-memory-audit-v1. Report and compact receipt:
+[GPU memory investigation](docs/benchmarks/lp-billion.md#container-only-memory-investigation)
+and [audit bindings](docs/benchmarks/lp-billion-ownership.json). Commit locally only.
+
 # Current agent handoff: GPU preparation awaits idle device (2026-11-20)
 
 The user authorizes full LP solves with one billion original nonzeros on the

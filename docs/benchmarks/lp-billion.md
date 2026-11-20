@@ -238,3 +238,80 @@ The new allocation's open settled checkpoint is 61442.317804716 CPU /
 is active, and the temporary replay root is removed. Documentation validation
 passes 307 pages with local links and anchors checked. This checkpoint leaves the
 GPU-dependent work pending; it does not close the allocation or establish a speedup.
+
+## Container-only memory investigation
+
+The user requests investigating unattributed memory, specifically checking whether
+our earlier program retained it. The user explicitly prohibits leaving the
+container. The [diagnostic and process-audit receipt](lp-billion-ownership.json)
+records read-only checks; no CUDA context, device reset, configuration change or
+signal to another process is used.
+
+Six observations spanning five minutes within a six-minute diagnostic window show
+10.542 GiB total usage and zero instantaneous utilization. NVML memory v2 separates
+10651566080 allocated bytes (9.920 GiB) from 667877376 reserved bytes (0.622 GiB),
+agreeing with memory v1's total. Driver reservation alone does not explain the
+excess. All nine compute/graphics/MPS process queries across legacy, v2 and v3
+return success with empty lists; `pmon` also shows no process. MIG and virtualization
+are disabled. The NVIDIA driver library is loaded from its system path;
+there is no `LD_PRELOAD` interposition in the inspected environment.
+
+The container marker is present, PID 1 is `entrypoint.sh`, and the visible procfs
+has 35 processes during the recorded scan. None holds an NVIDIA or DRM device
+handle; no process-directory read is denied. The NVIDIA driver client list is not
+exposed. Kernel-log access is denied, and the container journal has no kernel
+entries. No host namespace, host filesystem or SSH access is attempted.
+Linux procfs visibility follows PID namespaces, so this scan cannot identify an
+owner outside the visible namespace. This is a visibility limit, not proof of a
+particular external owner. See the [Linux PID namespace documentation](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html)
+and [NVIDIA's process-visibility guidance](https://docs.nvidia.com/health-validation/operating/integration#process-and-filesystem-exposure).
+
+The leak audit examines 2056 retained resource receipts across the experiment
+allocations and matches 191104 distinct recorded PID/start-time identities against
+current procfs. None survives. It preserves the original false-cleanup 128 M
+receipt and verifies its later cleanup evidence separately. The CUDA wrapper uses
+owned buffers, streams and contexts with free/destroy calls on drop. Historical
+successful execution does not establish that every destructor returned success;
+source inspection alone is not proof against a driver leak.
+
+The memory timeline provides stronger evidence about the large runs: the recorded
+128 M interruption remains at 804978688 bytes (0.750 GiB), and the device returns
+to that same baseline after both 512 M runs and before operational GPU v7. Thus
+the current excess was not continuously retained from those large experiments.
+The final interrupted v7 admission has 42 raw array responses, with at most
+1901420 declared solver-buffer bytes (1.81 MiB), plus unquantified context/module
+overhead. All its recorded identities have ended. After this last GPU reservation,
+observed usage varies from 8.888 to 77.825 GiB with utilization reaching 99%, while
+our subsequent jobs are CPU-only. This does not establish an external owner, but
+it is evidence against a surviving ordinary solver allocation causing all current
+usage.
+
+No surviving solver process or inherited visible GPU handle is found. A
+driver-level orphan allocation cannot be conclusively excluded with the available
+container-only telemetry. Process inventories are also empty in retained traces
+during our own GPU runs, so those inventories cannot independently attribute
+allocations. The fixed 2 GiB unexplained-memory limit remains unchanged; empty
+inventories and zero instantaneous utilization do not waive it. GPU preparation
+validation, new timing comparisons and all billion-scale solves remain pending.
+The new preparation CUDA module has still never executed. Both diagnostic jobs
+finish with empty cleanup and zero GPU charge; their CPU charges are recorded in
+the linked receipt. No failed or scientific measurement is repeated.
+
+A subsequent supervised six-minute idle-confirmation window starts at the original
+0.750 GiB baseline, rises to 5.584 GiB, returns to 0.750 GiB, then reaches 65.451 GiB
+and 70% utilization. No solver or preparation GPU job starts anywhere in this
+investigation; operational GPU v8 remains unattempted. These release/reallocation
+cycles further argue against memory continuously retained by our earlier solver
+processes. They do not identify the unseen owner or conclusively diagnose a driver
+fault. The required uninterrupted five-minute idle window never passes. An
+additional process-detail API also returns empty inventories for raw modes 0–2;
+raw mode 3 is explicitly rejected as an invalid argument and is not counted as an
+empty inventory.
+
+All three supervised diagnostic/observation jobs finish with empty cleanup and
+zero GPU charge. The allocation remains open at 64401.039603840 CPU /
+2870.821030734 GPU seconds, including the documentation check; no reservation is
+active. The current metadata supplements the earlier portable catalog. The
+scientific inputs, binaries, strict certificate checks and historical results are
+unchanged, and there is still no GPU preparation performance result or billion-scale
+solve result to report.

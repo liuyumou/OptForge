@@ -1,5 +1,27 @@
 # Active Task
 
+## Container-only GPU memory audit (2026-11-20)
+
+The user prohibits leaving the container. No host connection is available; do not
+request or attempt one. Read-only diagnostics find about 10.5–10.9 GiB of usage,
+including 0.622 GiB driver reservation, but no visible GPU handle or listed owner.
+All nine process-query variants return empty lists. The leak audit checks 2056
+resource receipts and 191104 PID/start-time identities, with none surviving.
+Memory returned to the original 0.750 GiB baseline after the large capacity runs;
+last operational GPU v7 has at most 1.81 MiB declared solver buffers. Later usage
+reaches 77.825 GiB / 99% with no later GPU reservation from this allocation.
+This argues against a surviving ordinary solver allocation, but cannot conclusively
+exclude driver-level orphan memory. No reset, process signal or CUDA context is
+used in the investigation. The fixed 2 GiB gate fails; preparation validation and
+all billion-scale solves remain pending. Both new diagnostic jobs pass with empty
+cleanup and zero GPU charge. Source-bound results are linked from the
+[report](../docs/benchmarks/lp-billion.md#container-only-memory-investigation).
+An additional supervised idle-confirmation window cycles 0.750 → 5.584 → 0.750 →
+65.451 GiB, reaching 70% utilization with no solver/preparation GPU job started.
+The five-minute gate never passes, so operational GPU v8 remains unattempted.
+This observation job has empty cleanup and zero GPU charge. Open checkpoint:
+64401.039603840 CPU / 2870.821030734 GPU seconds; no reservation is active.
+
 ## Billion-nonzero LPs and GPU preparation active (2026-11-20)
 
 The user authorizes full LP solves with one billion original matrix nonzeros on
