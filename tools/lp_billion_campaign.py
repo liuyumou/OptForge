@@ -61,17 +61,21 @@ def capacity(model, lane, borrowed_operator=False):
 
 def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=False, version=1):
     out=BASE/identity;require(not out.exists(),'fresh cohort identity')
-    require(version in [1,2,3,4,5,6,7], 'admitted image version')
+    require(version in [1,2,3,4,5,6,7,8], 'admitted image version')
     image=BASE/f'image-v{version}'
     proofs=[]
     from lp_billion_admit import gate_identity
     if version>=4:
-        for name in (['operational-cpu-v15','operational-gpu-v15'] if version==7 else ['operational-cpu-v14','operational-gpu-v14'] if version==6 else ['operational-cpu-v13','operational-gpu-v13'] if version==5 else ['operational-cpu-v10','operational-gpu-v10']):
+        for name in (['operational-cpu-v15','operational-gpu-v15'] if version in [7,8] else ['operational-cpu-v14','operational-gpu-v14'] if version==6 else ['operational-cpu-v13','operational-gpu-v13'] if version==5 else ['operational-cpu-v10','operational-gpu-v10']):
             gate=BASE/'resources'/(name+'.settlement.json')
             require(load(gate)['status']=='passed','memory candidate admission '+name)
             proofs.append(ref(gate))
         for path in sorted((BASE/'resources').glob('*.settlement.json')):
             if load(path)['status']!='passed':proofs.append(ref(path))
+    if version==8:
+        gate=BASE/'resources/timing-copt-contracts-v5.settlement.json'
+        require(load(gate)['status']=='passed','complete timing contract admission')
+        proofs.append(ref(gate))
     if version==3:
         harness=BASE/'resources/preparation-harness-cpu-v6.settlement.json'
         require(load(harness)['status']=='passed','cohort identity harness acceptance')
@@ -137,6 +141,7 @@ def freeze(identity, model_paths, lanes, iterations, wall_ms, seconds, ladder=Fa
                     tensor=dict(control_interval=100,min_tile_nnz=128),
                     fast=dict(host_reductions=True,host_preparation=True,host_certificates=True,auto_schedule=True)))
             if version>=3:cell['request']['fast']['gpu_preparation']=True
+            if version>=8:cell['request']['profile']=True
             cells.append(cell)
     from lp_billion_budget import accounting
     from lp_billion_common import CPU_CAPS,GPU_CAPS,NS,disk_bytes,DISK_LIMIT
@@ -168,6 +173,8 @@ def worker(freeze_path, index):
     (out/'stdout.jsonl').write_text(p.stdout);(out/'stderr').write_text(p.stderr)
     require(p.returncode==0,'LP process failed: '+p.stderr[-1000:])
     response=json.loads(p.stdout)
+    from lp_billion_admit import validate_timings
+    validate_timings(response,cell['request'].get('profile',False))
     require(response['model_sha256']==cell['model']['sha256'],'original model binding')
     require(response['nonzeros']==load(model)['nonzeros'],'original matrix size')
     require(response['device_bytes_upper']<=cell['memory']['device_bytes'],'actual allocation exceeds preflight')
@@ -179,9 +186,14 @@ def worker(freeze_path, index):
     endpoint_storage=sum(chunks.values())
     require(endpoint_storage<=cell['memory']['endpoint_bytes_upper'],'complete endpoint and certificate witness storage')
     put(out/'response.json',response)
-    put(out/'result.json',dict(status='measured',cell=cell['id'],response=ref(out/'response.json'),freeze=ref(freeze_path),
-        process_ns=returned-started,response_transport_ns=time.monotonic_ns()-returned,
-        fresh_process_ns=time.monotonic_ns()-started,solver_status=response['status'],certified=response['certified'],endpoint_bytes=endpoint_storage))
+    finished=time.monotonic_ns()
+    measured=dict(status='measured',cell=cell['id'],response=ref(out/'response.json'),freeze=ref(freeze_path),
+        process_ns=returned-started,response_transport_ns=finished-returned,
+        fresh_process_ns=finished-started,solver_status=response['status'],certified=response['certified'],endpoint_bytes=endpoint_storage)
+    if 'solver_profile' in response:
+        from lp_billion_timing import process_ledger
+        measured['process_cost_ledger']=process_ledger(response,measured)
+    put(out/'result.json',measured)
     print(dict(cell=cell['id'],status=response['status'],logical=response['logical'],physical=response['physical'],
         seconds=(returned-started)/1e9,cost_ns=response['cost_ns'],device_bytes=response['device_bytes_upper']),flush=True)
 

@@ -842,3 +842,106 @@ Open settled checkpoint including final documentation: 110219.293992796 CPU /
 remains open, and the earlier general allocation is unchanged. All 326 documentation
 pages and their local links validate. Commit locally only; no public adoption,
 confirmation or publication is released.
+
+## Billion-scale component timings and installed COPT
+
+The next billion-scale comparison has a prospective roster of all six original
+one-billion-nonzero models and five lanes: native, FP32, FP4x2, COPT CPU auto and
+COPT GPU PDLP. **No billion-scale solve or COPT performance comparison has run.**
+The roster remains unfrozen. The final capacity observation has 60.45 GiB host RAM
+available and an instantaneously idle Pro6000 at its usual baseline. Only two of
+our eighteen prospective lanes fit host headroom; the coupled FP4 lane requires
+72 GiB and the full project roster requires up to 106 GiB. COPT's billion-scale
+peak memory and native API GPU ownership remain unadmitted. Array storage lower
+bounds do not constitute peak-memory admission. No GPU job starts in this update.
+
+Opt-in timing image-v8 adds twenty exclusive host-wall phases. Their sum must equal
+the recorded solver interval exactly. The outer ledger adds original input loading,
+profile finalization, process startup/serialization/cleanup, response persistence
+and independent final checking, with every residual exposed. Existing preparation
+and GPU preparation details remain nested and are never summed twice. Both scaling
+and spectral preparation already synchronize their streams; device advance already
+waits for its flag read. These are host-wall costs including launch and completion
+overhead, not kernel-active durations. All timer overhead remains included.
+
+| Cost | Project solver | Installed COPT native API |
+| --- | --- | --- |
+| Original input | Chunk hashing, validation and original-model construction, including transpose | Chunk hashing and validation into preallocated arrays |
+| Preparation | Engine, operator, FP4 packing, initial control and device setup; nested scaling and spectral/norm/step estimation | Library/environment, configuration, CSR-to-CSC conversion, model import and input release |
+| Iteration/control | Device advance, endpoint download, checkpoint, original-model control, restart/weight control, upload and recovery | Native solve call; internal presolve, scaling and iteration costs remain opaque |
+| Assessment/output | Unscale, strict certificate, certificate reuse, witness output and response assembly | Endpoint extraction and bounded binary output; vendor status does not certify an endpoint |
+| Complete cost | Fresh solver process, response persistence and independent final check | Same complete-cost definition; installation hash work is separately exposed |
+
+Original input construction and solver preparation must both be visible when
+comparing preparation costs: the two imports place sparse transposition in different
+phases. COPT's reported `SolvingTime` is nested within its opaque solve call and
+must not be added again. Log delivery is not an internal phase timer. Offline
+intermediate audits remain separate from complete single-solve cost. Update counts
+and vendor iterations are different units. Common wall allowances and the largest
+common project update ceiling in 500-update increments up to 5000 still require
+prospective full solve/check/audit/storage reservations before the final freeze.
+
+The `/root/copt80` installation is COPT 8.0.6. Its direct C API adapter avoids a
+Python object per coefficient: it preallocates each binary array, verifies bounded
+chunks, converts canonical CSR to CSC and extracts primal/dual arrays directly.
+Native sparse, bound and objective arrays are checked bitwise on small admission
+models; objective senses and offsets also roundtrip exactly. Finite values colliding with COPT's infinity sentinel are
+refused. Native parameter types come from the installed header; every configured
+value is read back. The current small CPU admission uses four threads, CPU auto,
+`MatrixTol=0`, feasibility/duality tolerances `1e-9` and a **soft** 12000 MB vendor
+memory limit. That value is not a billion-scale allowance or a hard enclosure.
+The native GPU adapter path fails closed pending its own resource admission.
+Library/header hashes and Python/NumPy/SciPy versions are retained without copying
+license material.
+
+CPU admission completes twelve cases. Nine returned endpoints—including both
+objective senses, free/fixed/ranged/empty geometry and all six generated small
+families—pass the unchanged independent original-model `1e-9` checker. Infeasible,
+unbounded and preparation-deadline cases retain their distinct outcomes. Preparation
+counts against the common solver wall budget; a deadline exhausted during import
+prevents a solve call. These are adapter checks, not performance comparisons or
+billion-scale measurements. No construction witness enters a solve.
+
+Image-v8 passes 57 isolated Rust tests, formatting, Clippy, release compilation and
+CUDA compilation. All 36 final billion resource/evidence/timing tests pass, including
+native `MemLimit` typing, corrupted chunks, accounting gaps and certificate fields
+that must survive numerical transcript comparison. Of 297 numerical bindings,
+293 remain exact from image-v7, three existing files gain timing instrumentation
+and one timer module is added. Both CUDA binaries and all six budget, idle,
+supervisor and placement sources remain exact. Strict certificates, numerical
+arithmetic, public defaults and control100/certificate500 remain unchanged.
+Image-v8 has not executed on the GPU; exact continuation and all four sanitizer
+gates remain mandatory before scientific use.
+
+Four new failed admissions retain their complete sources and charges: two builds
+stop on resource-sampling durations above one second, default Python lacks SciPy,
+and the first native COPT adapter sends `MemLimit` through the integer API. All
+cleanup is empty. The failed builds retain full 1200 CPU seconds each; the Python
+and COPT failures retain 180 and 480 CPU seconds. Existing three-plus-one CPU
+placement alone did not resolve sampling. Fresh serialized Cargo compilation
+passes the full quality suite without changing the one-second or 100 ms checks.
+Fresh contracts use the already installed COPT Python environment; corrected
+native parameter typing passes all twelve cases. No failed reservation or attempted
+scientific cell is repeated or overwritten. The record now retains 21 failed
+reservations charged 39060 CPU / 1800 GPU seconds in total.
+
+The separate 240000 CPU / 30000 GPU allocation remains open with unchanged phase
+caps and physical limits. Previous full-solve capacity counts remain 38 cells,
+37 responses, 35 eligible timings and one missing response; the eighteen prior
+CPU packing responses retain twelve eligible timings and six exclusions. Old
+portable catalogs remain unchanged; no fresh full portable replay is claimed.
+Container-only, idle/ownership and physical-headroom rules remain in force.
+
+[Compact timing/COPT results](lp-billion-timing-copt-results.json) bind the large
+local evidence at `/storage/ai-optimizer-billion-v1/timing-copt-delivery-v1.json`,
+`copt-native-cpu-v2/result.json`, `billion-comparison-plan-v1.json` and
+`billion-host-availability-v5.json`. The final settled ledger is retained as
+`timing-settled-checkpoint-v1.json`. Protocol and dispositions:
+[amendment 30](../specifications/SPEC-0046-amendment-30.md),
+[31](../specifications/SPEC-0046-amendment-31.md),
+[32](../specifications/SPEC-0046-amendment-32.md),
+[33](../specifications/SPEC-0046-amendment-33.md) and
+[34](../specifications/SPEC-0046-amendment-34.md) and
+[35](../specifications/SPEC-0046-amendment-35.md).
+The [final supplemental checkpoint](lp-billion-timing-copt-checkpoint.json) binds
+the corrected 36-test harness admission and fully settled allocation totals.

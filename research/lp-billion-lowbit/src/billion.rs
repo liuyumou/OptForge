@@ -1,6 +1,7 @@
 //! Checkpointed sparse GPU execution with original-model host certification.
 use crate::array_input::{Original, Store};
 use crate::engine::Engine;
+use crate::phase_profile::{Phase, Profile};
 use crate::{
     Result,
     operator::{Format, Operator},
@@ -57,6 +58,7 @@ pub fn solve(
     image: &Path,
     config: &Config,
     fast_config: &crate::fast_device::Config,
+    detailed_timing: bool,
 ) -> Result<Value> {
     let fast = Some(fast_config);
     settings.validate()?;
@@ -67,6 +69,8 @@ pub fn solve(
     let mut control_settings = settings.clone();
     control_settings.check_interval = config.control_interval;
     let started = Instant::now();
+    let mut profile = Profile::new(started, detailed_timing);
+    profile.enter(Phase::Engine);
     let program = &original.program;
     // No optional bound tightening is applied to this canonical-array path.
     // Certificates continue to use the supplied original bounds, including infinities.
@@ -84,14 +88,17 @@ pub fn solve(
         Engine::new(program, control_settings.lp())
     };
     let engine_end = started.elapsed().as_nanos();
+    profile.enter(Phase::Operator);
     let op = Operator::borrowed_native(&engine)?;
     let operator_end = started.elapsed().as_nanos();
+    profile.enter(Phase::Packing);
     let packed = if settings.format.components() > 0 {
         crate::tensor_prepare::prepare(&op, config)?
     } else {
         None
     };
     let packing_end = started.elapsed().as_nanos();
+    profile.enter(Phase::InitialControl);
     crate::host::with_products(
         &engine,
         fast.is_some_and(|f| f.host_reductions),
@@ -119,6 +126,7 @@ pub fn solve(
                 settings.format
             };
             let prepared = started.elapsed().as_nanos();
+            profile.enter(Phase::DeviceSetup);
             let mut device = if let Some(f) = fast {
                 Runtime::Fast(Box::new(crate::fast_device::Device::new(
                     &engine,
@@ -145,6 +153,7 @@ pub fn solve(
             };
             device.reset(control.state())?;
             let setup = started.elapsed().as_nanos() - prepared;
+            profile.enter(Phase::Bookkeeping);
             let mut format = selected_format;
             let mut current_merit = control.state().anchor_error;
             let mut accepted = [0u64; 6];
@@ -181,7 +190,9 @@ pub fn solve(
                 }
                 // Device state is accepted only at a complete host assessment boundary.
                 let checkpoint_work = work_before;
+                profile.enter(Phase::Checkpoint);
                 let checkpoint = control.checkpoint();
+                profile.enter(Phase::Bookkeeping);
                 let before_error = current_merit;
                 let limit = crate::merit::local_budget(before_error);
                 let mut done = 0;
@@ -201,6 +212,7 @@ pub fn solve(
                         status = "cancelled";
                         break;
                     }
+                    profile.enter(Phase::Advance);
                     let valid = device.advance(
                         count,
                         engine.step(),
@@ -208,6 +220,7 @@ pub fn solve(
                         control.state().since_restart,
                         limit,
                     )?;
+                    profile.enter(Phase::Bookkeeping);
                     attempted[index(format)] += count;
                     done += count;
                     control.commit_steps(count)?;
@@ -239,17 +252,23 @@ pub fn solve(
                     }
                 }
                 if !rejected && !interrupted {
+                    profile.enter(Phase::Download);
                     let (x, y) = device.endpoint()?;
+                    profile.enter(Phase::Bookkeeping);
                     let (cx, cy, _, _) = control.buffers();
                     cx.copy_from_slice(&x);
                     cy.copy_from_slice(&y);
                 }
                 execution_ns += execution_start.elapsed().as_nanos();
+                profile.enter(Phase::Accounting);
                 let work_after = device.work()?;
+                profile.enter(Phase::Bookkeeping);
                 let check_start = Instant::now();
                 if !rejected && !interrupted {
                     let s = control.state();
+                    profile.enter(Phase::Merit);
                     let error = merit(&s.primal, &s.dual, s.weight);
+                    profile.enter(Phase::Bookkeeping);
                     current_merit = error;
                     rejected = !error.is_finite()
                         || (format != Format::Native
@@ -260,9 +279,12 @@ pub fn solve(
                     current_merit = before_error;
                     work_before = work_after;
                     let recovery_start = Instant::now();
+                    profile.enter(Phase::Recovery);
                     control.restore(&checkpoint)?;
                     let exact = checkpoint.matches_state(control.state());
+                    profile.enter(Phase::Upload);
                     device.reset(control.state())?;
+                    profile.enter(Phase::Recovery);
                     if interrupted {
                         recovery_ns += recovery_start.elapsed().as_nanos();
                         break;
@@ -275,7 +297,9 @@ pub fn solve(
                     let next = Format::Native;
                     recoveries.push(json!({"from":format,"to":next,"physical":control.physical_iterations(),
                 "logical":control.state().iterations,"generation":control.generation(),"restored_exact":exact}));
+                    profile.enter(Phase::Upload);
                     device.set_format(next)?;
+                    profile.enter(Phase::Bookkeeping);
                     format = next;
                     recovery_ns += recovery_start.elapsed().as_nanos();
                     continue;
@@ -291,18 +315,23 @@ pub fn solve(
                     || control.remaining() == 0;
                 if due {
                     last_certificate = control.state().iterations;
+                    profile.enter(Phase::Unscale);
                     let endpoint = control.iterate();
+                    profile.enter(Phase::Certificate);
                     let certificate = assessor.evaluate(
                         &endpoint.primal,
                         &endpoint.dual,
                         settings.tolerance,
                         control.remaining() > 0 && !control.expired(),
                     )?;
+                    profile.enter(Phase::Witness);
                     assessments.push(
             json!({"physical":control.physical_iterations(),"logical":control.state().iterations,
             "endpoint":store.endpoint(&endpoint.primal, &endpoint.dual)?,"certificate":certificate}),
         );
+                    profile.enter(Phase::Bookkeeping);
                     if control.expired() {
+                        profile.enter(Phase::Recovery);
                         control.restore(&checkpoint)?;
                         accepted[index(format)] -= done;
                         // A deadline invalidates this entire control interval, including low-bit work.
@@ -320,6 +349,7 @@ pub fn solve(
                     }
                 }
                 if control.expired() {
+                    profile.enter(Phase::Recovery);
                     control.restore(&checkpoint)?;
                     accepted[index(format)] -= done;
                     for j in 0..4 {
@@ -331,6 +361,7 @@ pub fn solve(
                 if control.check_pending() {
                     let checked_weight = control.state().weight;
                     let checked_merit = current_merit;
+                    profile.enter(Phase::Restart);
                     control.continue_after_check_with_merit(|x, y, w| {
                         current_merit = if w.to_bits() == checked_weight.to_bits() {
                             checked_merit
@@ -340,11 +371,19 @@ pub fn solve(
                         current_merit
                     });
                 }
+                profile.enter(Phase::Upload);
                 device.reset(control.state())?;
+                profile.enter(Phase::Bookkeeping);
                 assessment_ns += check_start.elapsed().as_nanos();
             }
             let check_start = Instant::now();
+            profile.enter(Phase::Unscale);
             let endpoint = control.iterate();
+            profile.enter(if status == "certified" {
+                Phase::CertificateReuse
+            } else {
+                Phase::Certificate
+            });
             let certificate = if status == "certified" {
                 assessments.last().ok_or("missing accepted assessment")?["certificate"].clone()
             } else {
@@ -354,13 +393,18 @@ pub fn solve(
                 status = "deadline";
             }
             assessment_ns += check_start.elapsed().as_nanos();
+            profile.enter(Phase::Accounting);
             let physical_work = device.work()?;
             let reference_work = device.reference_work();
             let device_bytes = device.allocated_bytes();
             let teardown_start = Instant::now();
+            profile.enter(Phase::Teardown);
             drop(device);
             let teardown_ns = teardown_start.elapsed().as_nanos();
             let cached_assessments = assessor.cached_calls;
+            profile.enter(Phase::Witness);
+            let final_endpoint = store.endpoint(&endpoint.primal, &endpoint.dual)?;
+            profile.enter(Phase::Response);
             let mut result = json!({"schema_version":1,"kind":"general-lowbit-solve","execution":"sparse-tensor-local","settings":settings,"tensor_config":config,"selected_initial_format":selected_format,
         "reference_product_nnz":reference_work,
         "physical_product_work":physical_work,"accepted_product_work":accepted_work,
@@ -368,7 +412,7 @@ pub fn solve(
         "tile_count":packed.as_ref().map_or(0,|p|p.tile_count),"packed_bytes":packed.as_ref().map_or(0,Packed::storage_bytes),
         "bound_proof":[],"guard_policy":"tile-local-row-replacement-v2",
         "status":status,"certified":status=="certified"&&certificate["accepted"]==true,"certificate":certificate,
-        "endpoint":store.endpoint(&endpoint.primal, &endpoint.dual)?,"physical":control.physical_iterations(),"logical":control.state().iterations,
+        "endpoint":final_endpoint,"physical":control.physical_iterations(),"logical":control.state().iterations,
         "restarts":control.state().restarts,"attempted":attempted,"accepted":accepted,"format_order":["native","fp32","fp4x1","fp4x2","fp4x3","fp4x4"],
         "recoveries":recoveries,"assessments":assessments,"operator_storage_bytes":op.storage_bytes(),"device_bytes_upper":device_bytes,
         "rows":program.row_count(),"columns":program.column_count(),"nonzeros":program.nonzeros(),"elapsed_ns":started.elapsed().as_nanos(),
@@ -394,6 +438,10 @@ pub fn solve(
                         "split"
                     });
                 }
+            }
+            if let Some(timing) = profile.finish() {
+                result["solver_profile"] = timing;
+                result["elapsed_ns"] = json!(started.elapsed().as_nanos());
             }
             Ok(result)
         },

@@ -1,5 +1,71 @@
 # Active Task
 
+## component timing and COPT CPU admission (2026-11-20)
+
+The user requests careful billion-scale component timings and comparison with the
+installed /root/copt80. Image-v8 adds opt-in exclusive host-wall accounting for
+20 solver phases plus exact outer input/process/transport/final-check residuals.
+Nested GPU preparation scaling and spectral/norm/step metrics are not added twice.
+Host-wall device advance is not kernel-active time. Public defaults, arithmetic,
+strict original-model 1e-9 certificates, control100/certificate500, both CUDA
+binaries and all six budget/idle/supervisor/placement sources remain unchanged.
+CPU acceptance passes 57 Rust tests, format, Clippy, release/CUDA builds and 36
+final resource/evidence/timing tests. Image-v8 is sealed but has NEVER executed on
+GPU. Of 297 numerical bindings, 293 remain exact from image-v7, three existing
+files gain timing and one timer module is added. All GPU/sanitizer gates remain.
+
+The bounded native COPT 8.0.6 C API adapter uses preallocated binary arrays and
+CSR-to-CSC conversion without Python coefficient objects. Twelve small CPU cases
+pass exact imports and outcome checks; all nine returned endpoints pass independent
+strict 1e-9 checking, including both senses and six generated families. Infeasible,
+unbounded and preparation-deadline outcomes remain distinct. Preparation counts
+against solver wall time. COPT internal phases remain opaque; vendor status alone
+never certifies. This is CPU adapter admission, not a performance comparison.
+Native GPU execution fails closed pending ownership/peak-memory admission. The
+current 12000 MB soft vendor limit is a small-admission setting, not a billion
+allowance. Library/header hashes and Python dependency versions are retained;
+no license material is copied.
+
+All six original billion inputs are ready. The prospective roster now has thirty
+cells: native, FP32, FP4x2, COPT CPU auto and GPU PDLP for each family. ZERO billion
+solves have run; the roster is unfrozen. Latest capacity is 60.45 GiB host available
+with instantaneously idle GPU at its baseline. Only two project lanes fit; coupled
+FP4 needs 72 GiB including headroom and the full project roster up to 106 GiB.
+COPT billion peak memory is unadmitted. Keep the full roster, strict idle/ownership
+and capacity guards. User authorizes the full Pro6000 only while idle and forbids
+leaving the container, resets, clearing shared memory, or signaling others.
+
+Two new timing builds stop on >1-second resource sampling; three-plus-one CPU
+placement alone does not resolve it. Fresh serialized Cargo compilation passes.
+Retain both full 1200 CPU charges, plus missing-SciPy contracts 180 and wrong native
+MemLimit setter 480 CPU seconds. All new cleanup is empty. There are now 21 failed
+reservations retaining full 39060 CPU / 1800 GPU seconds. No scientific cell was
+retried. Amendments 30–35 retain these attempts and the prelaunch timing-harness
+correction. Final contracts v5 pass 36 tests and require requested profiles to be
+present. Earlier 35-test/delivery and 36-test v4 receipts remain unchanged.
+
+Do not run the completed packing/prepare continuations again. Operational GPU v15
+and new image-v8 exact continuations/four sanitizers still need admission. Campaign
+freeze supports v8 with profile=true and requires timing-copt-contracts-v5; final
+COPT capacity/ownership, common wall budget and full 30-cell resource freeze remain
+pending. Choose the largest common project 500-update increment up to 5000 fitting
+all solves, final checks, intermediate audits and repaired-witness storage. Vendor
+iterations are different units. Never repeat an attempted scientific cell.
+
+Evidence: /storage/ai-optimizer-billion-v1/timing-copt-delivery-v1.json,
+copt-native-cpu-v2/result.json, billion-comparison-plan-v1.json,
+billion-host-availability-v5.json and timing-settled-checkpoint-v1.json.
+Prior full-solve capacity counts remain 38/37/35 with one missing response; prior
+CPU packing counts remain 18 responses/12 eligible/6 excluded. No fresh portable
+replay is claimed. The separate 240000 CPU / 30000 GPU allocation stays open;
+phase caps and earlier general allocation are unchanged. No reservation is active.
+Final settled CPU: 113801.201699752 seconds; GPU: 6952.970278844 seconds.
+All 332 documentation pages and local links validate. Commit locally only.
+
+Report: [component timings and COPT](../docs/benchmarks/lp-billion.md#billion-scale-component-timings-and-installed-copt).
+Compact evidence: [admission](../docs/benchmarks/lp-billion-timing-copt-results.json)
+and [final checkpoint](../docs/benchmarks/lp-billion-timing-copt-checkpoint.json).
+
 ## Borrowed host matrix storage validated (2026-11-20)
 
 Image-v4 removes duplicate host operator CSR/CSC indices and scaled coefficients

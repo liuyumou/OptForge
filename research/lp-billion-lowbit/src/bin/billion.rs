@@ -78,6 +78,10 @@ fn run() -> Result<()> {
                 Path::new(&a[4]),
                 &t,
                 &f,
+                match r.get("profile") {
+                    None => false,
+                    Some(v) => v.as_bool().ok_or("profile must be boolean")?,
+                },
             )?
         } else {
             return Err("command domain".into());

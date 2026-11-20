@@ -1,0 +1,102 @@
+{
+  "active_reservations": 0,
+  "billion_solves": 0,
+  "capacity": {
+    "bytes": 16185,
+    "namespace": "evidence",
+    "path": "billion-host-availability-v5.json",
+    "sha256": "33b33ba8e53651b015d9de9e8d35b687fdede3c6149b6a27a7f36cea3a9b6bb6"
+  },
+  "comparison": {
+    "bytes": 29556,
+    "namespace": "evidence",
+    "path": "billion-comparison-plan-v1.json",
+    "sha256": "1c66679aa1c1ceaeb14144d33d98f4601a43ee4b0f12c6dde5466af73acdfb7d"
+  },
+  "copt_native_gpu_admitted": false,
+  "cpu_by_phase_ns": {
+    "admission": 25401417311092,
+    "cleanup": 137152067816,
+    "development": 35160088922288,
+    "implementation": 1152143765960,
+    "native": 13583482065588,
+    "reporting": 38366917567008
+  },
+  "cpu_caps": {
+    "admission": 28000,
+    "cleanup": 6000,
+    "development": 118000,
+    "implementation": 6000,
+    "native": 20000,
+    "reporting": 62000
+  },
+  "cpu_ns": 113801201699752,
+  "current_gpu_validation_started": false,
+  "current_image": {
+    "bytes": 1671,
+    "namespace": "evidence",
+    "path": "image-v8/binding.json",
+    "sha256": "d7f42b351bd74bcab6540b7bd80c0d8f8266649667f124dbc63d9def5b7cb72c"
+  },
+  "docs_settlement": {
+    "bytes": 354,
+    "namespace": "evidence",
+    "path": "resources/timing-docs-v1.settlement.json",
+    "sha256": "873bac7e1abe397bc4212335bdf0a6a1532ccc36486de876a7103c764669f83a"
+  },
+  "documentation_pages": 332,
+  "failed_cpu_ns": 39060000000000,
+  "failed_gpu_ns": 1800000000000,
+  "failed_reservations": 21,
+  "final_harness_gate": {
+    "bytes": 363,
+    "namespace": "evidence",
+    "path": "resources/timing-copt-contracts-v5.settlement.json",
+    "sha256": "7fd47ca8e679d257f5330e47fac6289a4180febdf7e03e259b6eaf4c4d085901"
+  },
+  "final_harness_sources": {
+    "bytes": 190953,
+    "namespace": "evidence",
+    "path": "sources/timing-copt-contracts-v5/manifest.json",
+    "sha256": "7faab0b17e1e9c5e667743f883e715fdcda6503535aac67cba64076625c9c506"
+  },
+  "final_python_contract_tests": 36,
+  "final_verification": {
+    "bytes": 502,
+    "namespace": "evidence",
+    "path": "timing-final-verification-v1.json",
+    "sha256": "85229ffd3d71a3803d6a2987b4218bbdf3817a9c8ceb08770362feb15f1edb04"
+  },
+  "general_allocation_unchanged": {
+    "cpu_ns": 222683436386676,
+    "gpu_ns": 29019968674596
+  },
+  "gpu_by_phase_ns": {
+    "admission": 3097199960750,
+    "development": 3855770318094
+  },
+  "gpu_caps": {
+    "admission": 5500,
+    "development": 24500
+  },
+  "gpu_ns": 6952970278844,
+  "initial_delivery": {
+    "bytes": 95403,
+    "namespace": "evidence",
+    "path": "timing-copt-delivery-v1.json",
+    "sha256": "e798df01fa14699420b8185ef3f4eb4e09326235987e0458b1156462b81e7549"
+  },
+  "initial_delivery_superseded_fields": {
+    "harness_gate": "timing-copt-contracts-v5",
+    "python_contract_tests": 36
+  },
+  "limitation": "CPU timing implementation and native COPT admission only; full GPU admission and billion-scale comparison remain pending capacity and resource freeze.",
+  "rust_tests": 57,
+  "settled_receipt": {
+    "bytes": 3019,
+    "namespace": "evidence",
+    "path": "timing-settled-checkpoint-v1.json",
+    "sha256": "94e1ccc820f8434989df8353734b76df879333466eb57d522b15e5732756a5ba"
+  },
+  "status": "open_settled"
+}

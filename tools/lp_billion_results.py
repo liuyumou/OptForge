@@ -28,7 +28,7 @@ def canonical(response):
     # Endpoint references bind every binary64 bit; never materialize billion-scale
     # vectors merely to compare their already-content-addressed identities.
     result={k: copy.deepcopy(v) for k, v in response.items()
-            if k not in {'input_ns', 'elapsed_ns', 'cost_ns','gpu_preparation','preparation_detail_ns'}}
+            if k not in {'input_ns', 'elapsed_ns', 'cost_ns','gpu_preparation','preparation_detail_ns','solver_profile'}}
     result.get('fast_config',{}).pop('gpu_preparation',None)
     return result
 
@@ -75,6 +75,9 @@ def record(cell):
         response=measured['response'], resource=settlement['resource'],
         final_check=ref(out.with_name(out.name+'-final-check')/'result.json'),
         audit=ref(out.with_name(out.name+'-audit')/'result.json'))
+    if 'solver_profile' in r:
+        from lp_billion_timing import process_ledger
+        result['complete_cost_ledger']=process_ledger(r,measured,final['elapsed_ns'])
     return result
 
 
@@ -101,6 +104,7 @@ def compare(before, after, output, within_reservation=False):
     for ca,cb in zip(a,b):
         qa,qb=copy.deepcopy(ca['request']),copy.deepcopy(cb['request'])
         qa['fast'].pop('gpu_preparation',None);qb['fast'].pop('gpu_preparation',None)
+        qa.pop('profile',None);qb.pop('profile',None)
         require(ca['model']==cb['model'] and qa==qb,'equal input and work settings')
         ra,rb=record(ca),record(cb)
         require(canonical(load(resolve(ra['response'])))==canonical(load(resolve(rb['response']))),
