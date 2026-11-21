@@ -53,7 +53,10 @@ def operational_plans():
 def cleared(settlement_path, gpu, phase, identity):
     """Later cleanup/readmission never rewrites a failed historical receipt."""
     d=load(settlement_path)
-    require(not d['overrun'], 'resource admission closed by overrun')
+    if d['overrun']:
+        from lp_billion_readmission import cleared as approved_overrun
+        approved_overrun(settlement_path,gpu,phase,identity)
+        return
     if d['cleanup_empty']:
         return
     from lp_confirmation2_supervisor import same_process

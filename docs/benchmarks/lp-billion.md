@@ -1,14 +1,13 @@
 # Billion-nonzero LP development on the Pro6000
 
-Execution continuation under [SPEC-0046](../specifications/SPEC-0046-billion-lp.md),
-updated 2026-11-21. Image-v9 now passes all GPU preparation, exact continuation,
-four complete sanitizer and bounded-upload gates. Native COPT CPU/GPU admission
-passes 24 small fixtures, including 17 strictly accepted endpoints. Two coupled
-64 M COPT capacity cells finish at time limits without endpoints; a degenerate
-GPU capacity cell exceeds its reservation and closes resource execution. Later
-read-only inspection confirms all its owned processes are gone. Zero billion-scale
-LP solves have run. See [current execution status](#gpu-admission-and-copt-capacity-interruption)
-and the [explicit recovery proposal](../specifications/SPEC-0046-amendment-43.md).
+The authorized billion-nonzero comparison is complete: eighteen project runs and
+3 supported COPT GPU attempts (0 returned responses), preserving strict original-model 1e-9 checking.
+Three project runs and 0 COPT runs certify; all limits and capacity refusals
+remain visible. FP4 accelerates coupled device advancement but does not reduce
+its complete cost. See [full results](#approved-recovery-and-billion-execution),
+[phase timings](lp-billion-full-phases.csv) and [compact evidence](lp-billion-full-results.json).
+Updated 2026-11-21 under [SPEC-0046](../specifications/SPEC-0046-billion-lp.md).
+Historical checkpoints below retain their original scope and failures.
 
 ## Scope and implementation
 
@@ -1193,3 +1192,196 @@ at `/storage/ai-optimizer-billion-v1/complete-device-checkpoint-v1.json`. There 
 usage is 126194.902614812 CPU / 8047.349848722 GPU seconds. No reservation is active;
 the allocation ledger remains open while its execution guard is closed. The earlier
 general allocation remains unchanged. No result is published or adopted publicly.
+
+## Approved recovery and billion execution
+
+The approved continuation is complete. All eighteen supported project runs on six
+connected LPs with **one billion original matrix nonzeros each** return results,
+and every final/intermediate assessment passes independent agreement checking.
+Three runs certify: all three tall-family lanes. The other fifteen retain their
+update-limit or deadline outcomes. The original twelve default-COPT billion slots
+remain unsupported. A separate COPT GPU PDLP configuration with Presolve=0 attempts
+3 supported billion runs and returns 0 responses; 0 pass the same strict certificate.
+All six slots of that supplemental roster remain visible below.
+
+The user's explicit approval and [amendment 44](../specifications/SPEC-0046-amendment-44.md)
+authorize cumulative 320000 CPU / 35000 GPU seconds and recovery of only the exact
+recorded overrun. Fresh operational CPU v20 passes 75 supervisor / 59 resource
+tests; a six-minute idle window and GPU v17's sixty exact continuations pass.
+The failed stale-allocation CPU v19 test retains its full 720 CPU-second charge.
+The original COPT overrun and all other failed reservations retain their full
+charges and sources. No attempted scientific cell repeats. Four CPU slots,
+128 GiB sampled aggregate host RSS, 80 GiB owned device buffers, 400 GiB owned
+storage, physical headroom and every idle/ownership guard remain unchanged.
+All work and read-only ownership inspection remain inside the container.
+
+The [full-run protocol](../specifications/SPEC-0046-amendment-46.md) prospectively
+selects 1000 updates as the largest common 500-update increment fitting all
+supported solve, strict final/intermediate audit and endpoint/repaired-witness
+storage reservations. Control100/certificate500 and normalized original-model
+1e-9 criteria stay exact. The requested solver allowance is 600 seconds after
+original loading; mandatory final checks and opaque vendor calls can overshoot.
+Actual elapsed costs, including overshoots, appear below. A valid proof arriving
+after a deadline never regrades that outcome as a certified solve.
+
+### Full project results
+
+`native` means GPU FP64. Every lane uses admitted image-v9 GPU preparation.
+Solver preparation below sums engine, operator, packing and initial control;
+it excludes original input/transpose and device setup, which are separate phases.
+Complete cost includes the fresh process and a cold independent final proof.
+Additional distinct intermediate proofs are retained as offline audit cost.
+
+| Family | Lane | Accepted updates | Outcome | Solver preparation (s) | Complete cost (s) | Solver peak RSS (GiB) |
+| --- | --- | ---: | --- | ---: | ---: | ---: |
+| irregular | native | 1000 | limit | 45.338 | 975.699 | 58.571 |
+| irregular | fp32 | 1000 | limit | 48.482 | 904.558 | 58.571 |
+| irregular | fp4x2 | 1000 | deadline | 118.434 | 973.036 | 58.575 |
+| wide | fp32 | 700 | deadline | 63.254 | 1303.536 | 93.643 |
+| wide | fp4x2 | 500 | deadline | 148.698 | 1159.189 | 93.656 |
+| wide | native | 700 | deadline | 69.554 | 1171.363 | 93.643 |
+| tall | fp4x2 | 1000 | certified | 107.482 | 865.903 | 50.387 |
+| tall | native | 1000 | certified | 38.760 | 761.347 | 50.387 |
+| tall | fp32 | 1000 | certified | 39.111 | 734.962 | 50.362 |
+| coupled_blocks | native | 1000 | limit | 31.844 | 502.028 | 42.767 |
+| coupled_blocks | fp32 | 1000 | limit | 35.243 | 461.850 | 42.767 |
+| coupled_blocks | fp4x2 | 1000 | limit | 112.173 | 511.561 | 47.193 |
+| ill_scaled | native | 1000 | limit | 43.927 | 966.265 | 58.587 |
+| ill_scaled | fp32 | 1000 | limit | 43.654 | 917.496 | 58.597 |
+| ill_scaled | fp4x2 | 1000 | deadline | 119.476 | 985.309 | 58.601 |
+| degenerate | native | 1000 | limit | 41.587 | 918.601 | 58.574 |
+| degenerate | fp32 | 1000 | limit | 41.882 | 840.538 | 58.574 |
+| degenerate | fp4x2 | 1000 | limit | 108.754 | 900.003 | 58.578 |
+
+Only coupled_blocks performs actual FP4 arithmetic: 75% of accepted product work.
+The other FP4x2 requests select FP32 because they have no eligible canonical tiles.
+Wide native/FP32 accept 700 updates after 800 physical attempts; wide FP4x2 accepts
+500 after 600 physical attempts. Those deadline comparisons have different work
+and cannot be described as equal-work speedups. All returned endpoint checks,
+including rejected and deadline endpoints, remain in the compact evidence.
+
+### Where the coupled solve spends its time
+
+All three coupled runs accept 1000 updates and remain uncertified. Their complete
+exclusive phase accounting is:
+
+| Exclusive phase | GPU FP64/native (s) | FP32 (s) | FP4x2 (s) |
+| --- | ---: | ---: | ---: |
+| Original input and transpose | 108.633 | 64.196 | 64.286 |
+| GPU-backed preparation engine | 22.179 | 22.681 | 23.010 |
+| Operator and initial control | 9.664 | 12.561 | 14.369 |
+| FP4 packing | 0.000 | 0.000 | 74.794 |
+| Device setup | 6.410 | 11.901 | 9.617 |
+| Device advance | 39.700 | 32.119 | 8.182 |
+| Original-model control | 53.615 | 53.923 | 52.762 |
+| Restart/weight control | 34.057 | 34.338 | 33.806 |
+| Internal strict certification | 81.102 | 82.198 | 82.005 |
+| Cold independent final proof | 132.452 | 132.253 | 132.836 |
+| All other measured phases | 14.214 | 15.678 | 15.894 |
+| **Complete cost** | **502.028** | **461.850** | **511.561** |
+
+FP4 device advancement is 4.85x faster than GPU FP64 and 3.93x faster than FP32.
+However, packing costs 74.794 seconds, exceeding the 23.937 seconds saved against
+FP32 advancement. Complete FP4 cost is 511.561 seconds versus 461.850 for FP32
+and 502.028 for GPU FP64. Thus this run does **not** establish a total-solve FP4
+benefit. Input timing also varies: 108.633 / 64.196 / 64.286 seconds for native,
+FP32 and FP4; these are fresh processes without flushed caches, with one rotated
+repetition. No broad repeatable superiority is claimed.
+
+The FP4 preparation engine itself is 23.010 seconds. Its nested GPU telemetry
+records 0.429 seconds of scaling, 0.680 of spectral products, 5.632 of setup and
+10.901 of download. These are subintervals, not extra costs to add to the table;
+remaining engine work is included in its total. Twenty power iterations remain.
+Zero-eligible FP4 requests also incur packing: irregular 74.153 seconds, wide
+78.331 and tall 67.921. Avoiding that unnecessary packing and reducing actual
+FP4 packing, original-model control and repeated assessment are measured next
+targets; no unvalidated numerical change is adopted in this completed cohort.
+
+`input_hash_validation` includes chunk reading/hashing/decoding, canonical
+validation **and original CSR-to-CSC construction**. It is not pure disk I/O.
+Device advancement is wall time around GPU work, not kernel-active time. All
+exclusive phases, including checkpointing, uploads/downloads, witness output,
+teardown and process/response overhead, are in the [phase CSV](lp-billion-full-phases.csv).
+The [compact JSON](lp-billion-full-results.json) retains nested preparation
+telemetry, physical/accepted work, proofs, capacity refusals and comparisons.
+
+### Installed COPT comparison
+
+The original automatic-presolve COPT CPU-auto and GPU-PDLP baseline remains
+capacity-unsupported in all twelve billion slots. Its completed capacity responses
+have zero optimization iterations; three 256 M cells and one 512 M cell retain
+owned-child interruptions. The nine never-started 64 M tail cells complete.
+Setup-only responses cannot establish full optimization workspace, and several
+memory forecasts exceed the admitted limits. These are capacity dispositions,
+not measured billion-scale timings or evidence that project solves beat COPT.
+See [amendment 48](../specifications/SPEC-0046-amendment-48.md).
+
+The separately identified [Presolve=0 variant](../specifications/SPEC-0046-amendment-49.md)
+uses the same installed COPT 8.0.6 in `/root/copt80`, four threads, GPU PDLP,
+MatrixTol=0, FeasTol=DualTol=1e-9, PDLPTol=1e-12 and no crossover. Its unchanged
+48000 MB vendor memory setting is soft; measured process and device memory guards
+remain authoritative. Nine contracts and twelve small admission cases pass,
+including eight independently certified optima. It then attempts all ten frozen
+64/256/512 M capacity cells before freezing its separate six-slot billion roster.
+Every smaller observed path must demonstrate optimization workspace and fit the
+prospective growth/headroom forecast. Missing, interrupted and setup-only paths
+remain disqualifying; forecasts are empirical, not hard bounds on vendor internals.
+
+| Family | Outcome | PDLP iterations | Strict certificate | Complete cost (s) | Solver peak RSS (GiB) |
+| --- | --- | ---: | --- | ---: | ---: |
+| irregular | Unsupported: missing/interrupted/unconfirmed optimization workspace | — | No | — | — |
+| wide | Unsupported: host forecast exceeds 128 GiB; device forecast exceeds 80 GiB | — | No | — | — |
+| tall | Attempted; missing response | — | No | Excluded | Missing |
+| coupled_blocks | Unsupported: missing/interrupted/unconfirmed optimization workspace | — | No | — | — |
+| ill_scaled | Attempted; missing response | — | No | Excluded | 59.068 (partial) |
+| degenerate | Attempted; missing response | — | No | Excluded | 69.703 (partial) |
+
+The tall COPT attempt stops without a response or a retained process HWM. Its
+original settlement records cleanup_incomplete with no overrun and retains the full
+3600 CPU / 900 GPU-second charge. Subsequent exact PID/start-time checks prove all
+four owned identities gone; the GPU returns to the idle baseline. [Amendment 50](../specifications/SPEC-0046-amendment-50.md)
+uses the existing non-overrun cleanup/readmission path, fresh CPU v21, a complete
+idle window and GPU v18 before the two untouched cells. It does not retry tall or
+change its failure. The original guardian receipt overwrites the preceding stop
+trigger, so the underlying cause is unresolved. Partial sampled memory cannot
+serve as a completed optimizer-workspace measurement. Ill-scaled and degenerate
+both reach their owned-child cutoffs without responses. Each retains the full
+3600 CPU / 900 GPU seconds and settles with empty cleanup and no overrun. Failed attempts have no complete-cost
+timing or recovered phase profile. The CSV retains observed child/reservation
+durations where available and marks interrupted process memory as partial.
+
+COPT's iteration count is not directly comparable with project updates. The
+same requested 600-second solver allowance and original-model certificate criteria
+apply, but project runs also have the common 1000-update ceiling. A time limit
+without an endpoint has no independent final-proof cost and cannot establish a
+certified-solve speedup. Vendor internal preprocessing and execution are opaque;
+the CSV separates measurable input, adapter CSC/import, the vendor call, extraction,
+teardown and final checking. Adapter preparation is not all vendor preparation.
+
+### Memory, validation and retention
+
+Project solver process peaks range from 42.767 to 93.656 GiB. These kernel-
+recorded process HWMs differ from the sampled aggregate owned-process peak, which
+includes coordination, and from the separately measured independent audit peak.
+All three measures and the sampled owned GPU peak appear in the phase CSV.
+Memory limits and strict checks were preserved; the bounded representation now
+permits these full billion-nonzero runs. This cohort has no paired old-image
+billion solve, so it does not establish a before/after billion-scale memory or
+GPU-preparation speedup. Earlier paired preparation results retain their own scope.
+
+Image-v9's 66 bitwise preparation comparisons, sixty exact solve continuations,
+all four complete sanitizers, and bounded-copy diagnostic remain applicable.
+Numerical Rust/CUDA, both CUDA binaries, all 300 numerical source bindings and
+public defaults stay exact. Full-run contract tests and three real strict-checker
+replays admit the deadline-aware independent auditor. Final harness, documentation,
+source-binding and owned-process verification are recorded in the final checkpoint.
+The prior portable catalog remains unchanged; no new full portable replay is claimed.
+
+Large evidence remains local under `/storage/ai-optimizer-billion-v1`, including
+`full-billion-v1/freeze.json`, `copt-nopresolve-1b-v1/freeze.json`, complete raw
+responses and strict final/intermediate audits. All failures, missing responses,
+unsupported slots and regressions remain visible. The approved allocation stays
+open, and the earlier general allocation stays unchanged. Local commit only;
+no public adoption, confirmation or publication is released.
+
+Open settled allocation: 235329.259157332 CPU / 26771.899422302 GPU seconds within 320000 / 35000. No reservation is active. 88 billion-harness tests and 347 documentation pages/local links pass. All 300 numerical bindings remain exact. 34 failed reservations retain full 61060.620150944 CPU / 6520.000000000 GPU seconds. Final settled evidence: `full-billion-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-full-checkpoint.json`.

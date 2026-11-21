@@ -1,8 +1,9 @@
 """Strict original-model endpoint audit with exact identity-based proof reuse."""
-import argparse,json,subprocess,time
+import argparse,json,select,subprocess,time
 from pathlib import Path
 from lp_billion_common import BASE,ROOT,put,load,ref,resolve,require
 from lp_general_oracle import settings
+from lp_billion_owned_process import stop_owned
 
 def requests(response,project=True):
     require(response['has_solution'] if not project else 'endpoint' in response,'available endpoint')
@@ -43,21 +44,27 @@ def audit(manifest,index):
     qs,mapping,endpoints=requests(response,project);put(out/'requests.json',dict(requests=qs,mapping=mapping))
     checker=resolve(frozen['checker']);model=resolve(cell['model'])
     results=[];start=time.monotonic_ns()
+    allowance=cell.get("audit_seconds",cell.get("check_seconds"))
+    require(allowance is not None and allowance>30,"checker cleanup margin")
+    deadline=time.monotonic()+allowance-30
     with (out/'stderr').open('w') as err,(out/'stdout.jsonl').open('w') as raw:
         p=subprocess.Popen([str(checker),'assess',str(model),str(BASE)],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=err,text=True)
         first_done=None
         try:
             for i,q in enumerate(qs):
                 p.stdin.write(json.dumps(q,allow_nan=False)+'\n');p.stdin.flush()
+                remaining=deadline-time.monotonic()
+                require(remaining>0 and select.select([p.stdout],[],[],remaining)[0],'owned checker deadline; retain partial audit')
                 line=p.stdout.readline();require(bool(line),'checker ended before full endpoint coverage')
                 raw.write(line);raw.flush();results.append(json.loads(line))
                 if i==0:first_done=time.monotonic_ns()
             tail_done=time.monotonic_ns();p.stdin.close()
-            require(p.stdout.read()=='' and p.wait()==0,'independent checker completion')
+            remaining=deadline-time.monotonic();require(remaining>0,'owned checker deadline')
+            require(p.wait(timeout=remaining)==0 and p.stdout.read()=='','independent checker completion')
         finally:
-            # The enclosing supervisor owns cleanup on any failure. Never signal
-            # arbitrary external processes or conceal a partial checker response.
+            stop_owned(p)
             p.stdout.close()
+            if not p.stdin.closed:p.stdin.close()
     finish=time.monotonic_ns()
     certified=validate(results,mapping,endpoints,cell['model']['sha256'],project)
     if project:require(certified==response['certified'],'strict final certificate status')

@@ -1,3 +1,53 @@
+# Current agent handoff: billion comparison complete (2026-11-21)
+
+The approved continuation completes all eighteen project billion-NNZ runs and
+3 separately admitted COPT Presolve=0 GPU attempts (0 responses).
+Project lanes certify 3/18, all tall; the separate COPT lane certifies 0/3.
+Every returned final/intermediate assessment receives strict original-model 1e-9
+independent checking. All six families and every lane slot remain visible: twelve
+original default-COPT billion slots and three separate-variant slots are unsupported.
+No attempted scientific cell repeats; both continuation sequences are complete.
+
+The common project ceiling is 1000 updates with a requested 600-second solver
+allowance, control100/certificate500 and full solve/audit/storage reservations.
+All original Rust/CUDA, 300 numerical bindings and public defaults stay exact.
+Image-v9 retains 66 bitwise preparation comparisons, sixty exact continuations,
+all four complete sanitizers and the real chunk-copy diagnostic. A strict proof
+after a deadline does not regrade the deadline as a certified solve.
+
+Coupled performs 75% accepted FP4 work. GPU advancement takes 8.182 seconds versus
+39.700 native GPU FP64 and 32.119 FP32, but complete FP4 cost is 511.561 seconds
+versus 502.028 / 461.850. Packing costs 74.794 seconds, exceeding the 23.937-second
+advancement saving against FP32. Zero-eligible FP4 requests still incur 68–78 seconds
+of packing before FP32 fallback. Broad FP4 total-solve superiority is unestablished.
+All exclusive phases and separate cold final/offline intermediate proofs are saved.
+Input includes original CSR-to-CSC construction; advancement is not kernel-active
+GPU time. One rotated repetition and unflushed caches limit timing interpretation.
+Project process HWM ranges 42.767–93.656 GiB; sampled aggregate and audit
+peaks are distinct. No paired before/after billion memory comparison is claimed.
+
+The COPT tall interruption retains its missing response, cleanup=false settlement
+and full 3600 CPU / 900 GPU charge. Four exact owned identities are subsequently
+gone. Amendment 50 uses the existing non-overrun cleanup-disposition path and
+fresh CPU v21 / five-minute idle window / GPU v18 before the two untouched cases.
+Never retry tall; the preceding stop trigger was overwritten and remains unknown.
+
+The user explicitly approved 320000 CPU / 35000 GPU seconds and recovery of the
+single immutable original COPT overrun. Every failure and full charge remains.
+No other overrun is exempted. Four CPU slots, 128 GiB aggregate host, 80 GiB owned
+GPU and 400 GiB storage caps remain; all ownership, idle and physical headroom
+guards remain. Container-only: no host escape, reset, shared-memory clearing,
+other-job signals or owner inference. The earlier general allocation is unchanged.
+The allocation stays open; commit locally only, no public adoption/publication.
+No fresh full portable replay is claimed. Large evidence remains under
+/storage/ai-optimizer-billion-v1, including full-billion-settled-checkpoint-v1.json.
+
+Open settled allocation: 235329.259157332 CPU / 26771.899422302 GPU seconds within 320000 / 35000. No reservation is active. 88 billion-harness tests and 347 documentation pages/local links pass. All 300 numerical bindings remain exact. 34 failed reservations retain full 61060.620150944 CPU / 6520.000000000 GPU seconds. Final settled evidence: `full-billion-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-full-checkpoint.json`.
+
+Report: [full billion comparison](docs/benchmarks/lp-billion.md#approved-recovery-and-billion-execution).
+Timings: [phase CSV](docs/benchmarks/lp-billion-full-phases.csv).
+Evidence: [compact results](docs/benchmarks/lp-billion-full-results.json).
+
 # Current agent handoff: GPU admission complete; COPT overrun closes execution (2026-11-21)
 
 The user directs completing the actual billion-nonzero run. Image-v9 now passes
