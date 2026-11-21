@@ -1,3 +1,70 @@
+# Current agent handoff: GPU admission complete; COPT overrun closes execution (2026-11-21)
+
+The user directs completing the actual billion-nonzero run. Image-v9 now passes
+66 bitwise preparations, 60 exact continuations, all four full sanitizers and the
+real three-chunk upload diagnostic (16,777,233 floats, seventeen-element tail).
+Full racecheck retains twenty deep-norm iterations and charges 405.777 GPU seconds.
+Operational CPU v18 passes 75 supervisor/42 resource tests; complete-harness v2
+passes 45 contracts and compiles the copy diagnostic. Preserve complete-harness v1's
+missing-rustc-PATH failure and full 480 CPU seconds. Both CUDA binaries and all 298
+image-v9 numerical bindings remain exact; two supplemental diagnostics make 300.
+No arithmetic, certificate, public-default or idle/ownership change occurs.
+
+COPT full admission v2 passes 24 small CPU/GPU fixtures; all seventeen returned
+endpoints pass strict original-model 1e-9 checks. The ill-scaled GPU timeout has
+no endpoint. Admission v1 incorrectly required one; preserve its full 960 CPU /
+240 GPU failure. Use the existing COPT venv, not the default Python without SciPy.
+The native adapter source is tools/lp_billion_copt_run.py, gated on v2 and actual
+pinned GPU lease/log/ownership evidence. Vendor MemLimit is only soft.
+
+Three COPT 64 M capacity cells are attempted. Coupled CPU/GPU complete in 47.483 /
+53.145 seconds, both time limits without endpoints, with 6.644 / 6.743 GiB HWM.
+The degenerate GPU cell exhausts its undersized 100-second process reservation
+while initializing GPU PDLP. Preserve missing response, excluded timing, full
+400.620150944 CPU / 100 GPU seconds, overrun=true and cleanup_empty=false receipt.
+Read-only supplemental cleanup proves all retained owned PID/start identities
+are gone; it does not rewrite the receipt. Latest sample is 0.750 GiB and zero
+utilization. The unchanged lp_billion_budget.py:56 guard now closes ALL execution.
+Do not bypass it, launch direct jobs, retry this cell, or rerun completed drivers.
+No reservation remains active. Remain container-only and never signal other work.
+
+Two asynchronous questions were sent. The SECOND supersedes the first: explicit
+approval is requested for total 320000 CPU / 35000 GPU seconds AND a narrowly bound
+overrun readmission after fresh CPU/idle/GPU operational gates. No answer has yet
+arrived; neither extension nor readmission is authorized/applied. See amendment 43
+for the concrete proposed phase caps and exact scope. Current authorized caps are
+amendment 40: CPU implementation2000/native14000/admission36000/development114000/
+reporting68000/cleanup6000; GPU admission8500/development21500, original totals.
+The original guard remains unchanged. Approval of time alone does not authorize
+silently dropping failures or weakening future overrun/ownership checks.
+
+All nine remaining 64 M COPT cells, all 256/512 M COPT cells and every billion LP
+solve remain unattempted. If recovery is approved, preserve the old capacity freeze
+and create a fresh tail ONLY for never-started cells with sufficient process
+reservations. The interrupted degenerate GPU capacity cell remains unsupported;
+never infer full-scale vendor capacity from a missing response. Keep every lane
+visible in the full thirty-cell roster. The 600-second common wall / 500-update
+full-run worksheet requires 173000 CPU / 21450 GPU seconds for all solves and
+strict final/intermediate checks; it is a proposal, NOT a freeze or convergence
+claim. Larger update ceilings have retained prospective rejections. Physical
+limits, strict 1e-9 certs, control100/certificate500 remain unchanged.
+
+New full-audit tooling and five regressions are draft/unadmitted: syntax parses,
+but tests did NOT run after closure. Every final/intermediate proof must retain
+original model/settings/endpoint binding, including restored checkpoints and
+repaired dual witnesses. No fresh full portable or documentation-suite replay is
+claimed. Large receipts remain local. Commit locally only; no public publication.
+
+Evidence: complete-device-checkpoint-v1.json, complete-overrun-cleanup-v1.json,
+full-reservation-proposal-v1.json and copt-capacity-64m-v1/freeze.json under
+/storage/ai-optimizer-billion-v1. Twenty-five failed reservations retain
+41860.620150944 CPU / 2140 GPU seconds. Settled usage is 126194.902614812 CPU /
+8047.349848722 GPU seconds. Ledger remains open; execution is closed by the guard.
+Earlier general allocation remains unchanged; zero billion LP solves have run.
+
+Report: [current status](docs/benchmarks/lp-billion.md#gpu-admission-and-copt-capacity-interruption).
+Recovery: [amendment 43](docs/specifications/SPEC-0046-amendment-43.md).
+
 # Current agent handoff: bounded preparation memory (2026-11-21)
 
 The user requests reducing required peak memory. Isolated image-v9 uses bounded

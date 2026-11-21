@@ -1,14 +1,14 @@
 # Billion-nonzero LP development on the Pro6000
 
 Execution continuation under [SPEC-0046](../specifications/SPEC-0046-billion-lp.md),
-2026-11-19–20. The new image-v7 passes CPU correctness and packing-stage diagnostics:
-all six 64 M cases improve, with a 1.744x median ratio and 9.0% less packing time on
-the coupled model with FP4 tiles. Strict certificates and both CUDA binaries stay
-exact. GPU validation and total-solve measurements remain pending operational
-supervision failures; no new GPU performance claim is made. The latest snapshot
-also fails GPU idle and billion-scale host capacity. Zero billion-scale solves
-have run. See the [latest packing results](#indexed-preparation-packing) and the
-previously GPU-validated [memory results](#borrowed-host-matrix-storage).
+updated 2026-11-21. Image-v9 now passes all GPU preparation, exact continuation,
+four complete sanitizer and bounded-upload gates. Native COPT CPU/GPU admission
+passes 24 small fixtures, including 17 strictly accepted endpoints. Two coupled
+64 M COPT capacity cells finish at time limits without endpoints; a degenerate
+GPU capacity cell exceeds its reservation and closes resource execution. Later
+read-only inspection confirms all its owned processes are gone. Zero billion-scale
+LP solves have run. See [current execution status](#gpu-admission-and-copt-capacity-interruption)
+and the [explicit recovery proposal](../specifications/SPEC-0046-amendment-43.md).
 
 ## Scope and implementation
 
@@ -1106,3 +1106,90 @@ only, with no public adoption or publication.
 Open settled checkpoint: 119590.941904424 CPU / 6952.970278844 GPU seconds.
 All 336 documentation pages and local links validate.
 Final settled evidence: `bounded-memory-settled-checkpoint-v1.json`.
+
+## GPU admission and COPT capacity interruption
+
+Image-v9's device validation is now complete. Operational CPU v18 passes 75
+supervisor and 42 resource tests; the later complete-harness v2 passes 45 Python
+contracts and builds the standalone chunk-copy diagnostic. A retained earlier
+compiler-path failure has its full 480 CPU-second charge. A six-minute idle
+observation precedes operational GPU v16. The candidate then passes 66 bitwise
+preparation comparisons, 60 exact solve continuations, and complete memcheck,
+racecheck, initcheck and synccheck suites. Each sanitizer covers eight preparation
+cases, including the explicit host fallback, and twenty continuations. Full
+racecheck keeps twenty deep-norm power iterations and charges 405.777 GPU seconds.
+The separate copy diagnostic transfers 16,777,233 float elements in three chunks,
+including a seventeen-element final chunk, and verifies every bit. It exercises
+the admitted bounded upload boundary on the real device.
+
+Both CUDA binaries and all 298 numerical files in the image-v9 build binding stay
+exact. Two supplemental diagnostics bring current numerical source bindings to
+300. Public defaults, solver arithmetic, strict original-model 1e-9 certificates,
+control100/certificate500 and GPU ownership/idle guards remain unchanged. Only
+allocation phase constants changed in the common module, under amendment 40;
+the other five guard implementations remain exact. These device admissions are
+correctness results, not billion-scale total-time measurements.
+
+The new native COPT adapter binds the installed 8.0.6 libraries, four threads,
+original binary arrays and strict independent checker. GPU PDLP uses the inherited
+pinned lease, method 6, no crossover and PDLPTol=1e-12, with actual GPU log and
+owned-process evidence. CPU auto remains separate. Full admission v1 stops when
+a small ill-scaled GPU solve times out without an endpoint; its harness wrongly
+required an endpoint. Preserve its full 960 CPU / 240 GPU-second failure. Corrected
+admission v2 records all 24 small outcomes, independently checks all seventeen
+returned endpoints and accepts all seventeen at the unchanged strict tolerance.
+The ill-scaled timeout is retained without certification.
+
+The prospective COPT capacity roster starts at 64 million original nonzeros:
+
+| Family/lane | Fresh process plus final check (s) | Process peak RSS (GiB) | Outcome |
+| --- | ---: | ---: | --- |
+| Coupled / CPU auto | 47.483 | 6.644 | Time limit, no endpoint |
+| Coupled / actual GPU PDLP | 53.145 | 6.743 | Time limit, no endpoint |
+| Degenerate / GPU PDLP | Excluded | Not a completed peak estimate | Reservation overrun; missing response |
+
+Both completed cells have no final-check cost because COPT returns no solution.
+Their requested common solver wall is thirty seconds after original input loading,
+including model conversion/import. The vendor memory ceiling is soft, and internal
+solver phases remain opaque. No vendor status substitutes for strict certification.
+
+I assigned a 100-second process reservation to each 64 M capacity cell. That was
+insufficient for the degenerate GPU initialization path: COPT had printed its GPU
+PDLP start but returned neither an iteration result nor an endpoint before the
+supervisor terminated the owned process family. The receipt retains
+400.620150944 CPU / 100 GPU seconds, `overrun=true`, and `cleanup_empty=false` at
+settlement. Subsequent PID/start-time inspection verifies all recorded identities
+are gone; that supplemental proof never rewrites the original receipt. The latest
+read-only sample is zero utilization and 0.750 GiB device usage. No GPU reset,
+configuration change, host access or other-job signal occurs.
+
+The unchanged budget guard closes execution on this overrun. The remaining nine
+64 M cells, all 256/512 M COPT capacity cells, and the complete billion-scale roster
+remain unattempted. The interrupted cell must never be retried. A proposed tail
+uses larger reservations only for never-started cells. Any unsupported lane remains
+visible; successful capacity or ownership cannot be inferred from the missing
+response.
+
+The [recovery proposal](../specifications/SPEC-0046-amendment-43.md) awaits explicit
+user authorization. It requests cumulative totals of 320000 CPU / 35000 GPU seconds,
+compared with the existing 240000 / 30000, plus a source-bound readmission for this
+one retained overrun after fresh operational checks. Physical limits and strict
+certificates remain unchanged. The full-roster worksheet reserves 173000 additional
+CPU / 21450 GPU seconds for thirty 600-second-wall solves and their complete
+independent audits at a common 500-update ceiling; larger ceilings are rejected
+prospectively under that proposal. These are reservation ceilings, not measured
+solve times or a guarantee of convergence. No allocation extension or readmission
+has yet been applied.
+
+New draft audit tooling preserves distinct final/intermediate endpoints after
+checkpoint restoration, checks repaired-dual bindings, and reuses proofs only for
+identical model/settings/endpoint identities. Its five new regression tests have
+not run because resource execution is closed. It is not admitted for science.
+No fresh full portable replay or documentation-suite pass is claimed.
+
+The [compact checkpoint](lp-billion-completion-status.json) binds detailed evidence
+at `/storage/ai-optimizer-billion-v1/complete-device-checkpoint-v1.json`. There are
+25 retained failed reservations with 41860.620150944 CPU / 2140 GPU seconds. Settled
+usage is 126194.902614812 CPU / 8047.349848722 GPU seconds. No reservation is active;
+the allocation ledger remains open while its execution guard is closed. The earlier
+general allocation remains unchanged. No result is published or adopted publicly.

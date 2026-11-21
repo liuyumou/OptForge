@@ -1,0 +1,75 @@
+{
+  "accounting": {
+    "cpu_by_phase_ns": {
+      "admission": 31132922247756,
+      "cleanup": 137152067816,
+      "development": 40288546875108,
+      "implementation": 1152143765960,
+      "native": 13583482065588,
+      "reporting": 39900655592584
+    },
+    "cpu_ns": 126194902614812,
+    "gpu_by_phase_ns": {
+      "admission": 4191579530628,
+      "development": 3855770318094
+    },
+    "gpu_ns": 8047349848722
+  },
+  "active_reservations": [],
+  "allocation_stays_open_but_execution_guard_closed": true,
+  "attempted_capacity_cells": 3,
+  "billion_solves": 0,
+  "capacity_freeze": {
+    "bytes": 9660,
+    "namespace": "evidence",
+    "path": "copt-capacity-64m-v1/freeze.json",
+    "sha256": "263bb95ad111a016b91fe746f865df11807341fdb7fb6e9c8d9d8c08f6e3db8a"
+  },
+  "completed_capacity_cells": 2,
+  "copt_admission": {
+    "bytes": 38911,
+    "namespace": "evidence",
+    "path": "copt-full-admission-v2/result.json",
+    "sha256": "e07fcfb872fcfd0253f649a4bdc9a717deb3a3baf6eaf067f3959f49ae67d3f8"
+  },
+  "copt_cases": 24,
+  "copt_strict_accepted": 17,
+  "copy_result": {
+    "bytes": 371,
+    "namespace": "evidence",
+    "path": "bounded-copy-gpu-v1/result.json",
+    "sha256": "d1fc9f39f28fe860ee5247187b2f16d8f23c9cc6866f47827dd0e7668033dcea"
+  },
+  "failed_cpu_ns": 41860620150944,
+  "failed_gpu_ns": 2140000000000,
+  "fresh_portable_replay": false,
+  "full_audit_draft_tests_executed": false,
+  "full_cohort_frozen": false,
+  "image": {
+    "bytes": 1679,
+    "namespace": "evidence",
+    "path": "image-v9/binding.json",
+    "sha256": "051100bdc6ad2be94c86c5bdf6dafbf27fa227193269c22a05cca737cb701ff2"
+  },
+  "image_numerical_bindings_exact": 298,
+  "missing_capacity_responses": 1,
+  "proposal": {
+    "bytes": 88840,
+    "namespace": "evidence",
+    "path": "full-reservation-proposal-v1.json",
+    "sha256": "19d63af3c42ae1f26aeb4cbf023e44c6b4421a792cde29458392ad086a8fa7cb"
+  },
+  "recovery_proposal": {
+    "bytes": 3270,
+    "namespace": "repo",
+    "path": "docs/specifications/SPEC-0046-amendment-43.md",
+    "sha256": "41e5e79df0454d53e3e927f61e5526f52061633aacf0ee82a67ef74f8a96b46a"
+  },
+  "status": "resource_admission_closed_pending_explicit_recovery",
+  "supplemental_cleanup": {
+    "bytes": 1517,
+    "namespace": "evidence",
+    "path": "complete-overrun-cleanup-v1.json",
+    "sha256": "fe7e367c7314d839404ef79878093aae910f23d59e897221bcb4689d3eb385ec"
+  }
+}
