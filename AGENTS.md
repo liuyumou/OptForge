@@ -1,3 +1,37 @@
+# Current agent handoff: GPU FP4 packing measured (2026-11-21)
+
+Opt-in image-v10 moves eligibility/validation/residual extraction/encoding to GPU,
+skips packing allocations with no eligible tiles and preserves strict original-model
+1e-9 checks, original preparation/solve CUDA, control100/certificate500 and defaults.
+Native quality-v7 and separate read-only seal audit admit exact sources. All 81
+bitwise packing comparisons, six malformed inputs, sixty exact continuations,
+130 independent scalar checks and all four complete sanitizers pass. Retain all
+failed admission/build/seal receipts and v6's non-admitted fixture snapshot.
+
+Fresh six-family paired 64 M preparation / complete median ratios:
+1.844x / 1.106x.
+Six new billion FP4-request cells compare descriptively to retained v9 controls:
+2.473x / 1.035x;
+1 jointly certified pairs. Every returned final and
+intermediate assessment is independently audited. Preserve all outcomes and
+unequal deadline/update work. Broad FP4 certified superiority is unestablished.
+Both cohorts are complete; never rerun their attempted cells or completed drivers.
+
+Approved totals remain 320000 CPU / 35000 GPU seconds. CPU phase caps are
+8000/22000/52000/140000/97000/1000; GPU admission7000/development28000.
+Preserve original recovery and both explicit transfer approvals. All failed
+charges remain. Resource readmission CPU v26 / GPU v21 binds the exact native
+storage counter, with the legacy Python walk retained as an independent oracle.
+Four slots, 128 GiB host, 80 GiB GPU, 400 GiB storage, physical
+headroom, one-second supervision and all 100 ms advisories remain unchanged.
+Container-only, idle-only; no reset, host escape, other-job signal or owner inference.
+Earlier general allocation remains unchanged. Commit locally only; no publication.
+
+Open settled allocation: 280670.141791928 CPU / 31576.271121081 GPU seconds within 320000 / 35000. No reservation is active. 101 harness tests and 363 documentation pages/local links pass. 303 current numerical bindings verify; 295 prior bindings remain exact, with five scoped integration changes and their original source copies retained. 46 failed reservations retain 72780.620150944 CPU / 6520.000000000 GPU seconds. Evidence: `gpu-pack-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-gpu-packing-checkpoint.json`.
+
+Report: [GPU packing](docs/benchmarks/lp-billion.md#gpu-fp4-packing-and-zero-eligible-fast-path).
+Results: [compact evidence](docs/benchmarks/lp-billion-gpu-packing-results.json).
+
 # Current agent handoff: billion comparison complete (2026-11-21)
 
 The approved continuation completes all eighteen project billion-NNZ runs and

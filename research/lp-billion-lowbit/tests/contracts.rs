@@ -409,7 +409,8 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 host_preparation: false,
                 host_certificates: false,
                 auto_schedule: false,
-                gpu_preparation: false
+                gpu_preparation: false,
+                gpu_packing: false,
             }
             .validate()
             .is_ok()
@@ -426,13 +427,26 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 host_preparation: true,
                 host_certificates: true,
                 auto_schedule: true,
-                gpu_preparation: false
+                gpu_preparation: false,
+                gpu_packing: false,
             }
             .validate()
             .is_err()
         );
     }
     assert!(serde_json::from_str::<Config>(r#"{"unknown":true}"#).is_err());
+    assert!(!Config::default().gpu_packing);
+    assert!(
+        serde_json::to_value(Config::default())
+            .unwrap()
+            .get("gpu_packing")
+            .is_none()
+    );
+    assert!(
+        serde_json::from_str::<Config>(r#"{"gpu_packing":true}"#)
+            .unwrap()
+            .gpu_packing
+    );
 }
 #[test]
 fn extended_fp4_components_are_exclusive_to_the_tensor_backend() {

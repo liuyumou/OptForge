@@ -1385,3 +1385,120 @@ open, and the earlier general allocation stays unchanged. Local commit only;
 no public adoption, confirmation or publication is released.
 
 Open settled allocation: 235329.259157332 CPU / 26771.899422302 GPU seconds within 320000 / 35000. No reservation is active. 88 billion-harness tests and 347 documentation pages/local links pass. All 300 numerical bindings remain exact. 34 failed reservations retain full 61060.620150944 CPU / 6520.000000000 GPU seconds. Final settled evidence: `full-billion-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-full-checkpoint.json`.
+
+
+## GPU FP4 packing and zero-eligible fast path
+
+The opt-in image-v10 array executor moves structural eligibility counting,
+coefficient-domain and exact transpose validation, residual extraction and normal
+E2M1 encoding to a separate GPU module. It returns before allocating packing
+fragments or residual arrays when no tile qualifies. The redundant CPU coefficient
+scan is deferred to the GPU validator only for this opt-in path. Host work retains
+sorted canonical metadata and offsets; a bounded structural-hash overflow explicitly
+uses the exact CPU packer. Both matrix orientations retain identical packed bits.
+The first implementation downloads canonical Packed and uses the unchanged device
+initializer, so these transfers and context costs remain in measured total time.
+
+Public defaults, the original FP64 preparation and solve CUDA modules, strict
+original-model 1e-9 certification, control100/certificate500 and all resource guards
+remain unchanged. The exact storage inventory now uses a source-bound native
+counter to stay within the same supervision limit as the evidence tree grows;
+it still traverses every file, deduplicates hardlinks and excludes symlinks and
+directories. Independent recompilation, legacy-counter comparisons and fresh
+CPU/GPU operational gates admit that resource change. CPU acceptance passes 60 isolated Rust tests,
+formatting, Clippy, release and CUDA compilation. Device admission passes
+81 bitwise packing comparisons,
+6 malformed-input rejections,
+60 exact solve continuations and
+130 independent strict scalar checks.
+All four complete sanitizers cover the packing suite and twenty solve continuations
+each. The new exponent batches include subnormals, the exponent clamp and neighbors
+of powers of two and six. Unchanged preparation kernels retain their prior complete
+admission, including the original twenty deep-norm iterations.
+
+The fresh six-family paired 64 M cohort uses 100 updates and rotated version order.
+Its descriptive preparation / complete-cost median ratios are
+1.844x / 1.106x.
+All failed, regressing and uncertified outcomes remain in the compact results.
+
+| Family | Packing before / after (s) | Preparation before / after (s) | Complete before / after (s) | Updates before / after | Certified before / after |
+| --- | ---: | ---: | ---: | ---: | --- |
+| irregular | 3.118 / 0.533 | 5.926 / 3.225 | 32.038 / 29.381 | 100 / 100 | False / False |
+| wide | 3.585 / 0.543 | 8.084 / 4.521 | 49.432 / 44.826 | 100 / 100 | False / False |
+| tall | 2.825 / 0.525 | 5.418 / 2.928 | 26.023 / 23.428 | 100 / 100 | False / False |
+| coupled_blocks | 3.559 / 0.900 | 5.881 / 3.069 | 21.831 / 19.472 | 100 / 100 | False / False |
+| ill_scaled | 3.097 / 0.513 | 5.897 / 3.037 | 31.885 / 28.759 | 100 / 100 | False / False |
+| degenerate | 2.430 / 0.527 | 5.167 / 3.116 | 29.065 / 27.417 | 100 / 100 | False / False |
+
+The six new one-billion-original-nonzero solves use the retained 1000-update ceiling,
+600-second requested solver allowance and strict independent final/intermediate
+checks. Their image-v9 controls are historical runs: these are descriptive
+comparisons across runs, with no randomized paired billion-trial claim. Deadline or
+update-count differences remain explicit. The descriptive preparation / complete
+median ratios are 2.473x /
+1.035x, with 1 jointly
+certified pairs. Uncertified bounded runs do not establish certified-solve speedup.
+
+| Family | Packing before / after (s) | Preparation before / after (s) | Complete before / after (s) | Updates before / after | Certified before / after |
+| --- | ---: | ---: | ---: | ---: | --- |
+| irregular | 74.153 / 8.098 | 118.434 / 47.749 | 973.036 / 955.000 | 1000 / 1000 | False / False |
+| wide | 78.331 / 8.244 | 148.698 / 67.644 | 1159.189 / 1248.923 | 500 / 700 | False / False |
+| tall | 67.921 / 5.930 | 107.482 / 40.709 | 865.903 / 787.538 | 1000 / 1000 | True / True |
+| coupled_blocks | 74.794 / 11.391 | 112.173 / 38.368 | 511.561 / 486.850 | 1000 / 1000 | False / False |
+| ill_scaled | 75.038 / 8.145 | 119.476 / 48.449 | 985.309 / 977.887 | 1000 / 1000 | False / False |
+| degenerate | 61.494 / 6.486 | 108.754 / 46.492 | 900.003 / 838.991 | 1000 / 1000 | False / False |
+
+The 5 equal-update historical pairs have descriptive preparation / complete-cost median ratios of 2.480x / 1.051x. 3 retain exact full numerical transcripts. Equal update counts do not by themselves establish certification or remove cross-run input/cache variability.
+
+The other two equal-update records, irregular and ill-scaled, differ only in
+terminal status: the historical deadline becomes an iteration limit. Their
+numerical fields remain exact, while the original full-transcript flags remain
+false. The wide case completes 700 updates versus 500 and retains its total-time
+regression; its ratio is an unequal-work observation.
+
+The new billion coupled run accepts 75.0% FP4 product work. Its largest complete-cost intervals are `independent_final_check` (135.728 s), `input_hash_validation` (112.880 s), `strict_certificate` (80.523 s), `original_model_control` (52.785 s). These retained intervals identify the remaining costs after GPU packing.
+
+| Billion family | Solver peak host RSS before / after (GiB) | Sampled aggregate host RSS after (GiB) | Sampled owned GPU peak after (GiB) |
+| --- | ---: | ---: | ---: |
+| irregular | 58.575 / 58.569 | 58.660 | 39.836 |
+| wide | 93.656 / 93.643 | 93.734 | 55.414 |
+| tall | 50.387 / 50.364 | 50.456 | 35.934 |
+| coupled_blocks | 47.193 / 47.188 | 47.279 | 31.039 |
+| ill_scaled | 58.601 / 58.587 | 58.679 | 39.836 |
+| degenerate | 58.578 / 58.572 | 58.663 | 39.836 |
+
+Solver peak RSS comes from the dedicated child's high-water mark; aggregate host
+and owned device peaks are sampled separately and are not added to that value.
+The conservative pre-allocation bounds and physical host headroom remain enforced.
+
+Complete cost includes the fresh solver process, response persistence and cold
+independent final proof. Additional distinct intermediate proofs are reported as
+separate offline audit costs. Input includes chunk reading, hashing, canonical
+validation and original CSR-to-CSC construction. Every exclusive phase sums exactly
+to complete cost; nested GPU packing metrics are not added a second time. GPU
+advancement and packing metrics are host elapsed intervals, not kernel-active times.
+Caches were not flushed. All family/lane limitations and actual FP4 work shares
+remain visible; zero-eligible requests execute the established FP32 fallback.
+Broad repeatable FP4 certified-solve superiority remains unestablished.
+
+The allocation remains open at 320000 CPU / 35000 GPU seconds. Two explicit user
+approvals transfer phase capacity within those totals. Retain every failed build,
+CPU admission and sealing charge, and the excluded v6 source snapshot. The failed
+seal's artifacts are admitted only by a separate read-only source/binary audit;
+its original resource failure is unchanged. No attempted scientific cell repeats.
+Container-only execution, idle/ownership checks, four CPU slots, 128 GiB host,
+80 GiB owned GPU and 400 GiB storage caps remain unchanged. Commit locally only;
+no public adoption, confirmation or fresh full portable replay is claimed.
+
+Open settled allocation: 280670.141791928 CPU / 31576.271121081 GPU seconds within 320000 / 35000. No reservation is active. 101 harness tests and 363 documentation pages/local links pass. 303 current numerical bindings verify; 295 prior bindings remain exact, with five scoped integration changes and their original source copies retained. 46 failed reservations retain 72780.620150944 CPU / 6520.000000000 GPU seconds. Evidence: `gpu-pack-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-gpu-packing-checkpoint.json`.
+
+Final verification v1 passes 101 harness tests, then fails on two relative links
+in the new state handoff. Its full 720 CPU-second charge and original output remain.
+The corrected links and supplementary status-field comparison are checked by a
+fresh verification v2; no scientific measurement repeats. See
+[amendment 66](../specifications/SPEC-0046-amendment-66.md).
+
+[Compact GPU packing results](lp-billion-gpu-packing-results.json) and
+[all exclusive phase timings](lp-billion-gpu-packing-phases.csv) retain raw receipt,
+source, proof and memory bindings. Large evidence stays under
+`/storage/ai-optimizer-billion-v1/gpu-pack-64m-v1` and `gpu-pack-1b-v1`.

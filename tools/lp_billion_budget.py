@@ -30,6 +30,7 @@ def sources():
     paths += list((ROOT/'research/lp-billion-lowbit').rglob('Cargo.*'))
     paths += list((ROOT/'research/lp-billion-lowbit/upstream').glob('*.json'))
     paths += list((ROOT/'tools').glob('lp_billion*.py'))
+    paths += list((ROOT/'tools').glob('lp_billion*.c'))
     paths += list((ROOT/'tests/integration').glob('test_lp_billion*.py'))
     paths += list((ROOT/'crates').rglob('*.rs'))
     paths += list((ROOT/'crates').glob('*/Cargo.toml'))

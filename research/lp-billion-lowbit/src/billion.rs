@@ -89,10 +89,21 @@ pub fn solve(
     };
     let engine_end = started.elapsed().as_nanos();
     profile.enter(Phase::Operator);
-    let op = Operator::borrowed_native(&engine)?;
+    let gpu_pack = settings.format.components() > 0 && fast.is_some_and(|f| f.gpu_packing);
+    let op = if gpu_pack {
+        Operator::borrowed_for_gpu_packing(&engine)?
+    } else {
+        Operator::borrowed_native(&engine)?
+    };
     let operator_end = started.elapsed().as_nanos();
     profile.enter(Phase::Packing);
-    let packed = if settings.format.components() > 0 {
+    let mut gpu_packing = None;
+    let packed = if gpu_pack {
+        let (packed, metrics) =
+            crate::gpu_packing::prepare(&op, config, &image.with_file_name("pack.cubin"))?;
+        gpu_packing = Some(metrics);
+        packed
+    } else if settings.format.components() > 0 {
         crate::tensor_prepare::prepare(&op, config)?
     } else {
         None
@@ -431,6 +442,9 @@ pub fn solve(
         "preparation_detail_ns":{"engine":engine_end,"operator":operator_end-engine_end,"packing":packing_end-operator_end,"control_initialization":prepared-packing_end},
         "cost_ns":{"host_preparation":prepared,"device_setup":setup,"execution":execution_ns,"assessment":assessment_ns,"recovery":recovery_ns,"device_teardown":teardown_ns}});
             if fast.is_some() {
+                if let Some(metrics) = &gpu_packing {
+                    result["gpu_packing"] = metrics.clone();
+                }
                 if let Some(metrics) = &gpu_preparation {
                     result["gpu_preparation"] = metrics.clone();
                 }

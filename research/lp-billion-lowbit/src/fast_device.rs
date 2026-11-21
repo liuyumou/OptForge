@@ -36,6 +36,8 @@ pub struct Config {
     /// Exact-order FP64 preparation through the separately admitted CUDA module.
     #[serde(skip_serializing_if = "disabled")]
     pub gpu_preparation: bool,
+    #[serde(skip_serializing_if = "disabled")]
+    pub gpu_packing: bool,
 }
 fn disabled(value: &bool) -> bool {
     !*value
@@ -52,6 +54,7 @@ impl Default for Config {
             host_certificates: false,
             auto_schedule: false,
             gpu_preparation: false,
+            gpu_packing: false,
         }
     }
 }

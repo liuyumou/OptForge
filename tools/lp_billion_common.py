@@ -2,15 +2,16 @@
 import hashlib
 import json
 import os
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = Path('/storage/ai-optimizer-billion-v1')
 DEVICE = 'GPU-6721b13a-30f9-83ec-dace-ba2d9738556f'
 NS = 1_000_000_000
-CPU_CAPS = dict(implementation=2000, native=14000, admission=45000,
-                development=148000, reporting=110000, cleanup=1000)
-GPU_CAPS = dict(admission=9000, development=26000)
+CPU_CAPS = dict(implementation=8000, native=22000, admission=52000,
+                development=140000, reporting=97000, cleanup=1000)
+GPU_CAPS = dict(admission=7000, development=28000)
 HOST_LIMIT = 128 << 30
 DEVICE_LIMIT = 80 << 30
 DISK_LIMIT = 400 << 30
@@ -61,9 +62,9 @@ def put(path, value):
     return ref(p)
 
 
-def disk_bytes():
+def legacy_disk_bytes(root=None):
     total, seen = 0, set()
-    pending = [BASE]
+    pending = [BASE if root is None else Path(root)]
     while pending:
         directory = pending.pop()
         try:
@@ -85,3 +86,26 @@ def disk_bytes():
         except FileNotFoundError:
             continue
     return total
+
+
+INVENTORY_ROOT = Path('/storage/ai-optimizer-billion-v1')
+INVENTORY_BINDING = INVENTORY_ROOT/'disk-inventory-binding-v1.json'
+INVENTORY_BINDING_SHA = '723e48c78c80936af78e4f8f35eec11edff4213f52ea6115efb24fff9b9a5795'
+
+
+def native_inventory(root):
+    require(digest(INVENTORY_BINDING)==INVENTORY_BINDING_SHA,'storage inventory binding integrity')
+    binding=load(INVENTORY_BINDING)
+    require(binding['status']=='retained_for_cpu_bootstrap','storage inventory binding status')
+    executable=INVENTORY_ROOT/binding['executable']['path']
+    source=ROOT/binding['source']['path']
+    require(digest(executable)==binding['executable']['sha256'] and digest(source)==binding['source']['sha256'],'storage inventory executable/source integrity')
+    result=subprocess.run([str(executable),str(root)],capture_output=True,text=True,timeout=.9)
+    require(result.returncode==0 and not result.stderr,'exact storage inventory failed')
+    value=json.loads(result.stdout)
+    require(set(value)=={'bytes','files'} and all(type(value[k]) is int and 0<=value[k]<2**64 for k in value),'storage inventory integer domain')
+    return value
+
+
+def disk_bytes():
+    return native_inventory(BASE)['bytes']

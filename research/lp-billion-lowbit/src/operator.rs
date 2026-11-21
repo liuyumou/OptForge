@@ -102,14 +102,22 @@ impl<'a> Operator<'a> {
     /// Only the compact u32 offsets are owned; all coefficient/index arrays remain
     /// alive in the engine/program throughout packing, upload and host checking.
     pub fn borrowed_native(engine: &'a Engine<'_>) -> Result<Self> {
+        Self::borrowed_checked(engine, false)
+    }
+    /// The GPU packer validates both coefficient domains and exact transpose bits.
+    pub fn borrowed_for_gpu_packing(engine: &'a Engine<'_>) -> Result<Self> {
+        Self::borrowed_checked(engine, true)
+    }
+    fn borrowed_checked(engine: &'a Engine<'_>, gpu_validation: bool) -> Result<Self> {
         let p = engine.program();
         if p.row_count().max(p.column_count()) > MAX_DIMENSION || p.nonzeros() > MAX_NONZEROS {
             return Err("operator resource domain".into());
         }
         let (r, c) = engine.scaled_matrix();
-        if r.iter()
-            .chain(c)
-            .any(|v| !v.is_finite() || v.abs() > 2f64.powi(40))
+        if !gpu_validation
+            && r.iter()
+                .chain(c)
+                .any(|v| !v.is_finite() || v.abs() > 2f64.powi(40))
         {
             return Err("scaled coefficient domain".into());
         }

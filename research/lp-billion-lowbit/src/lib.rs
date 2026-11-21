@@ -13,6 +13,7 @@ pub mod engine;
 #[allow(dead_code)]
 mod exact_math;
 pub mod gpu;
+pub mod gpu_packing;
 pub mod gpu_prepare;
 pub mod host;
 pub mod implied;
