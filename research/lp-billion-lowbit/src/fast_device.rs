@@ -38,6 +38,12 @@ pub struct Config {
     pub gpu_preparation: bool,
     #[serde(skip_serializing_if = "disabled")]
     pub gpu_packing: bool,
+    /// Exact-tree progress residuals and restart movement norms.
+    #[serde(skip_serializing_if = "disabled")]
+    pub gpu_control: bool,
+    /// Original-order feasibility; CPU feasibility still gates certificate acceptance.
+    #[serde(skip_serializing_if = "disabled")]
+    pub gpu_feasibility: bool,
 }
 fn disabled(value: &bool) -> bool {
     !*value
@@ -55,6 +61,8 @@ impl Default for Config {
             auto_schedule: false,
             gpu_preparation: false,
             gpu_packing: false,
+            gpu_control: false,
+            gpu_feasibility: false,
         }
     }
 }
@@ -137,6 +145,14 @@ struct Matrix {
     proposal_lanes: usize,
 }
 impl Matrix {
+    fn view(&self) -> crate::gpu_control::Matrix<'_> {
+        crate::gpu_control::Matrix {
+            offsets: &self.offsets,
+            indices: &self.indices,
+            values: &self.original,
+            n: self.n,
+        }
+    }
     fn new(
         ctx: &Rc<Context>,
         stream: &Stream,
@@ -204,6 +220,7 @@ struct Kernels<'a> {
     dual: Function<'a>,
 }
 pub struct Device {
+    support: Option<crate::gpu_control::Support>,
     _ctx: Rc<Context>,
     module: Module,
     stream: Stream,
@@ -262,7 +279,17 @@ impl Device {
             engine.program().column_count(),
             engine.program().row_count(),
         );
-        let allocated_bytes = allocation_bytes(op, packed, format, t.components, c.combined)?;
+        let support_bytes = if c.gpu_control || c.gpu_feasibility {
+            crate::gpu_control::required_bytes(m, n, op.rows.original.len(), c.gpu_feasibility)?
+        } else {
+            0
+        };
+        let allocated_bytes = allocation_bytes(op, packed, format, t.components, c.combined)?
+            .checked_add(support_bytes)
+            .ok_or("GPU control allocation overflow")?;
+        if allocated_bytes > 80usize << 30 {
+            return Err("combined GPU allocation limit".into());
+        }
         for (matrix, tiles) in [
             (&op.rows, packed.map(|p| &p.rows)),
             (&op.columns, packed.map(|p| &p.columns)),
@@ -283,6 +310,18 @@ impl Device {
         let (xl, xu) = engine.scaled_column_bounds();
         let (yl, yu) = engine.scaled_row_bounds();
         let result = Self {
+            support: if c.gpu_control || c.gpu_feasibility {
+                Some(crate::gpu_control::Support::new(
+                    &ctx,
+                    &stream,
+                    engine.program(),
+                    &image.with_file_name("control.cubin"),
+                    c.gpu_control,
+                    c.gpu_feasibility,
+                )?)
+            } else {
+                None
+            },
             rows: Matrix::new(&ctx, &stream, &op.rows, packed.map(|p| &p.rows), c, format)?,
             columns: Matrix::new(
                 &ctx,
@@ -589,6 +628,90 @@ impl Device {
             read(&self.x.state, &self.stream, self.x.n)?,
             read(&self.y.state, &self.stream, self.y.n)?,
         ))
+    }
+    pub fn gpu_merit(
+        &mut self,
+        x: &[f64],
+        y: &[f64],
+        step: f64,
+        weight: f64,
+    ) -> Result<Option<f64>> {
+        let Some(s) = self.support.as_mut().filter(|s| s.control && s.short_lines) else {
+            return Ok(None);
+        };
+        if x.len() != self.x.n || y.len() != self.y.n {
+            return Err("control dimensions".into());
+        }
+        write(&mut self.x.state, &self.stream, x)?;
+        write(&mut self.y.state, &self.stream, y)?;
+        Ok(Some(s.merit(
+            &self.stream,
+            self.rows.view(),
+            self.columns.view(),
+            &self.x.state,
+            &self.y.state,
+            &self.extra,
+            &self.columns.product,
+            &self.rows.product,
+            &self.objective,
+            &self.xl,
+            &self.xu,
+            &self.yl,
+            &self.yu,
+            step,
+            weight,
+        )?))
+    }
+    pub fn gpu_movements(&mut self, state: &Fp64State) -> Result<Option<(f64, f64)>> {
+        let Some(s) = self.support.as_mut().filter(|s| s.control) else {
+            return Ok(None);
+        };
+        if state.primal.len() != self.x.n
+            || state.dual.len() != self.y.n
+            || state.anchor_primal.len() != self.x.n
+            || state.anchor_dual.len() != self.y.n
+        {
+            return Err("movement dimensions".into());
+        }
+        write(&mut self.x.state, &self.stream, &state.primal)?;
+        write(&mut self.y.state, &self.stream, &state.dual)?;
+        write(&mut self.x.controller, &self.stream, &state.anchor_primal)?;
+        write(&mut self.y.controller, &self.stream, &state.anchor_dual)?;
+        Ok(Some(s.movements(
+            &self.stream,
+            &self.x.state,
+            &self.x.controller,
+            &self.columns.product,
+            self.x.n,
+            &self.y.state,
+            &self.y.controller,
+            &self.rows.product,
+            self.y.n,
+        )?))
+    }
+    pub fn gpu_feasible(&mut self, x: &[f64], tolerance: f64) -> Result<Option<bool>> {
+        let Some(s) = self.support.as_mut().filter(|s| s.has_feasibility()) else {
+            return Ok(None);
+        };
+        if x.len() != self.x.n {
+            return Err("candidate domain".into());
+        }
+        write(&mut self.extra, &self.stream, x)?;
+        Ok(Some(s.feasible(
+            &self.stream,
+            self.rows.view(),
+            &self.extra,
+            tolerance,
+        )?))
+    }
+    pub fn support_metrics(&self) -> Option<serde_json::Value> {
+        self.support.as_ref().map(|s| serde_json::json!({
+            "control_backend":if s.control && s.short_lines {"gpu"} else {"host"},
+            "movement_backend":if s.control {"gpu"} else {"host"},
+            "feasibility_backend":if s.has_feasibility() {"gpu"} else {"host"},
+            "merit_calls":s.merit_calls,"movement_calls":s.movement_calls,"feasibility_calls":s.feasibility_calls,
+            "control_product_nnz":2*self.nonzeros*s.merit_calls as u64,
+            "certificate_acceptance":"original_cpu_dual_gap_and_feasibility"}))
     }
     pub fn work(&self) -> Result<[u64; 4]> {
         Ok(self.work)

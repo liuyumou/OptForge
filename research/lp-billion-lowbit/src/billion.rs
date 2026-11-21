@@ -50,6 +50,30 @@ impl Runtime {
     fn allocated_bytes(&self) -> usize {
         dispatch!(self, d, d.allocated_bytes)
     }
+    fn gpu_merit(&mut self, x: &[f64], y: &[f64], step: f64, weight: f64) -> Result<Option<f64>> {
+        match self {
+            Self::Fast(d) => d.gpu_merit(x, y, step, weight),
+            Self::Local(_) => Ok(None),
+        }
+    }
+    fn gpu_movements(&mut self, state: &crate::control::Fp64State) -> Result<Option<(f64, f64)>> {
+        match self {
+            Self::Fast(d) => d.gpu_movements(state),
+            Self::Local(_) => Ok(None),
+        }
+    }
+    fn gpu_feasible(&mut self, x: &[f64], tolerance: f64) -> Result<Option<bool>> {
+        match self {
+            Self::Fast(d) => d.gpu_feasible(x, tolerance),
+            Self::Local(_) => Ok(None),
+        }
+    }
+    fn support_metrics(&self) -> Option<Value> {
+        match self {
+            Self::Fast(d) => d.support_metrics(),
+            Self::Local(_) => None,
+        }
+    }
 }
 pub fn solve(
     original: &Original,
@@ -123,7 +147,7 @@ pub fn solve(
     };
     let setup_started = Instant::now();
     profile.enter(Phase::DeviceSetup);
-    let mut device = if let Some(f) = fast {
+    let device = if let Some(f) = fast {
         Runtime::Fast(Box::new(crate::fast_device::Device::new(
             &engine,
             &op,
@@ -147,6 +171,11 @@ pub fn solve(
         Runtime::Fast(d) => Some(d.shapes()),
         _ => None,
     };
+    let gpu_control_enabled = device
+        .support_metrics()
+        .is_some_and(|v| v["control_backend"] == "gpu");
+    let device = std::cell::RefCell::new(device);
+    let gpu_error = std::cell::RefCell::new(None::<String>);
     // All device constructors complete their uploads before returning. Only
     // logical metadata is needed after this point; release the host arrays before
     // allocating controller, checkpoint, residual and certificate workspace.
@@ -156,11 +185,19 @@ pub fn solve(
     profile.enter(Phase::InitialControl);
     crate::host::with_products(
         &engine,
-        fast.is_some_and(|f| f.host_reductions),
+        fast.is_some_and(|f| f.host_reductions) && !gpu_control_enabled,
         |products| {
             let workspace =
                 std::cell::RefCell::new((products, crate::host::ResidualWorkspace::default()));
             let merit = |x: &[f64], y: &[f64], w| {
+                match device.borrow_mut().gpu_merit(x, y, engine.step(), w) {
+                    Ok(Some(value)) => return value,
+                    Ok(None) => {}
+                    Err(error) => {
+                        *gpu_error.borrow_mut() = Some(error.to_string());
+                        return f64::INFINITY;
+                    }
+                }
                 if fast.is_some_and(|f| f.host_reductions) {
                     let mut workspace = workspace.borrow_mut();
                     let (products, residual) = &mut *workspace;
@@ -170,11 +207,14 @@ pub fn solve(
                 }
             };
             let mut control = Fp64Controller::new_with_merit(&engine, merit);
+            if let Some(error) = gpu_error.borrow_mut().take() {
+                return Err(error.into());
+            }
             control.set_deadline(Some(started + Duration::from_millis(settings.wall_ms)));
             let prepared = packing_end + control_started.elapsed().as_nanos();
             profile.enter(Phase::DeviceSetup);
             let reset_started = Instant::now();
-            device.reset(control.state())?;
+            device.borrow_mut().reset(control.state())?;
             let setup = initial_setup_ns + reset_started.elapsed().as_nanos();
             profile.enter(Phase::Bookkeeping);
             let mut format = selected_format;
@@ -236,7 +276,7 @@ pub fn solve(
                         break;
                     }
                     profile.enter(Phase::Advance);
-                    let valid = device.advance(
+                    let valid = device.borrow_mut().advance(
                         count,
                         engine.step(),
                         control.state().weight,
@@ -276,7 +316,7 @@ pub fn solve(
                 }
                 if !rejected && !interrupted {
                     profile.enter(Phase::Download);
-                    let (x, y) = device.endpoint()?;
+                    let (x, y) = device.borrow().endpoint()?;
                     profile.enter(Phase::Bookkeeping);
                     let (cx, cy, _, _) = control.buffers();
                     cx.copy_from_slice(&x);
@@ -284,13 +324,16 @@ pub fn solve(
                 }
                 execution_ns += execution_start.elapsed().as_nanos();
                 profile.enter(Phase::Accounting);
-                let work_after = device.work()?;
+                let work_after = device.borrow().work()?;
                 profile.enter(Phase::Bookkeeping);
                 let check_start = Instant::now();
                 if !rejected && !interrupted {
                     let s = control.state();
                     profile.enter(Phase::Merit);
                     let error = merit(&s.primal, &s.dual, s.weight);
+                    if let Some(error) = gpu_error.borrow_mut().take() {
+                        return Err(error.into());
+                    }
                     profile.enter(Phase::Bookkeeping);
                     current_merit = error;
                     rejected = !error.is_finite()
@@ -306,7 +349,7 @@ pub fn solve(
                     control.restore(&checkpoint)?;
                     let exact = checkpoint.matches_state(control.state());
                     profile.enter(Phase::Upload);
-                    device.reset(control.state())?;
+                    device.borrow_mut().reset(control.state())?;
                     profile.enter(Phase::Recovery);
                     if interrupted {
                         recovery_ns += recovery_start.elapsed().as_nanos();
@@ -321,7 +364,7 @@ pub fn solve(
                     recoveries.push(json!({"from":format,"to":next,"physical":control.physical_iterations(),
                 "logical":control.state().iterations,"generation":control.generation(),"restored_exact":exact}));
                     profile.enter(Phase::Upload);
-                    device.set_format(next)?;
+                    device.borrow_mut().set_format(next)?;
                     profile.enter(Phase::Bookkeeping);
                     format = next;
                     recovery_ns += recovery_start.elapsed().as_nanos();
@@ -341,11 +384,11 @@ pub fn solve(
                     profile.enter(Phase::Unscale);
                     let endpoint = control.iterate();
                     profile.enter(Phase::Certificate);
-                    let certificate = assessor.evaluate(
+                    let certificate = assessor.evaluate_with_feasibility(
                         &endpoint.primal,
                         &endpoint.dual,
                         settings.tolerance,
-                        control.remaining() > 0 && !control.expired(),
+                        |x, t| device.borrow_mut().gpu_feasible(x, t),
                     )?;
                     profile.enter(Phase::Witness);
                     assessments.push(
@@ -385,17 +428,29 @@ pub fn solve(
                     let checked_weight = control.state().weight;
                     let checked_merit = current_merit;
                     profile.enter(Phase::Restart);
-                    control.continue_after_check_with_merit(|x, y, w| {
-                        current_merit = if w.to_bits() == checked_weight.to_bits() {
-                            checked_merit
-                        } else {
-                            merit(x, y, w)
-                        };
-                        current_merit
-                    });
+                    control.continue_after_check_with_movement(
+                        |x, y, w| {
+                            current_merit = if w.to_bits() == checked_weight.to_bits() {
+                                checked_merit
+                            } else {
+                                merit(x, y, w)
+                            };
+                            current_merit
+                        },
+                        |state| match device.borrow_mut().gpu_movements(state) {
+                            Ok(value) => value,
+                            Err(error) => {
+                                *gpu_error.borrow_mut() = Some(error.to_string());
+                                Some((0., 0.))
+                            }
+                        },
+                    );
+                    if let Some(error) = gpu_error.borrow_mut().take() {
+                        return Err(error.into());
+                    }
                 }
                 profile.enter(Phase::Upload);
-                device.reset(control.state())?;
+                device.borrow_mut().reset(control.state())?;
                 profile.enter(Phase::Bookkeeping);
                 assessment_ns += check_start.elapsed().as_nanos();
             }
@@ -410,16 +465,22 @@ pub fn solve(
             let certificate = if status == "certified" {
                 assessments.last().ok_or("missing accepted assessment")?["certificate"].clone()
             } else {
-                assessor.evaluate(&endpoint.primal, &endpoint.dual, settings.tolerance, false)?
+                assessor.evaluate_with_feasibility(
+                    &endpoint.primal,
+                    &endpoint.dual,
+                    settings.tolerance,
+                    |x, t| device.borrow_mut().gpu_feasible(x, t),
+                )?
             };
             if control.expired() {
                 status = "deadline";
             }
             assessment_ns += check_start.elapsed().as_nanos();
             profile.enter(Phase::Accounting);
-            let physical_work = device.work()?;
-            let reference_work = device.reference_work();
-            let device_bytes = device.allocated_bytes();
+            let physical_work = device.borrow().work()?;
+            let reference_work = device.borrow().reference_work();
+            let device_bytes = device.borrow().allocated_bytes();
+            let gpu_control = device.borrow().support_metrics();
             let teardown_start = Instant::now();
             profile.enter(Phase::Teardown);
             drop(device);
@@ -442,6 +503,11 @@ pub fn solve(
         "preparation_detail_ns":{"engine":engine_end,"operator":operator_end-engine_end,"packing":packing_end-operator_end,"control_initialization":prepared-packing_end},
         "cost_ns":{"host_preparation":prepared,"device_setup":setup,"execution":execution_ns,"assessment":assessment_ns,"recovery":recovery_ns,"device_teardown":teardown_ns}});
             if fast.is_some() {
+                if let Some(mut metrics) = gpu_control {
+                    metrics["cpu_feasibility_confirmations"] =
+                        json!(assessor.cpu_feasibility_confirmations);
+                    result["gpu_control"] = metrics;
+                }
                 if let Some(metrics) = &gpu_packing {
                     result["gpu_packing"] = metrics.clone();
                 }

@@ -50,7 +50,29 @@ remain authoritative on the CPU. The flag defaults to false.
 
 `prepare-check MODEL STORE PREPARE_CUBIN` compares every scale, scaled coefficient,
 objective/bound value and step-size bit against the admitted host implementation.
-The preparation candidate currently passes 51 isolated Rust tests, Clippy and
-CPU-side CUDA compilation. Device exactness, sanitizers and performance admission
-remain pending while the Pro6000 has unattributed memory. This is an implemented
-research candidate, not yet an admitted GPU preparation image or measured speedup.
+Preparation device admission, sanitizers and timing results are recorded in the
+[billion-scale report](../../docs/benchmarks/lp-billion.md). Source availability
+alone does not admit a particular image or establish a measured speedup.
+
+
+The independent opt-in flags `fast.gpu_control: true` and
+`fast.gpu_feasibility: true` load `control.cubin` next to the solve image. Control
+uses the resident scaled CSR/CSC and existing vector scratch for exact-tree
+projected residuals and restart movement norms. Lines longer than 1024 terms
+retain CPU residual evaluation. Scalar square roots and the log/exp weight
+recurrence remain on the CPU, with unchanged control cadence and recovery.
+
+GPU feasibility evaluates original coefficients and bounds in original row order.
+It borrows CSR indices and uploads original values and bounds with bounded host
+scratch. Its additional live device allocation is checked together with the solve
+buffers before allocation. The CPU dual-bound enclosure and gap arithmetic remain
+unchanged. Every potentially accepting GPU feasibility result must also pass the
+original CPU feasibility check with identical objective bits before certificate
+acceptance. Independent final/intermediate audits remain required by the campaign.
+Both flags default to false; neither changes the strict original-model 1e-9 criteria.
+
+`control_check TENSOR_CUBIN` is a separate admission diagnostic for exact residuals,
+movement norms, original feasibility, long-line fallback and invalid inputs.
+The admission and campaign tools retain immutable images, complete sanitizers,
+resource supervision and all failed or uncertified outcomes. Performance claims
+must come from completed, independently audited cohorts in the benchmark report.

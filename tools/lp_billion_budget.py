@@ -129,12 +129,16 @@ def run(identity, phase, seconds, gpu, command, host_gib=16, device_gib=0, disk_
             frozen = BASE/'sources'/identity
             frozen.mkdir(parents=True, exist_ok=False)
             bindings = []
+            from lp_billion_source_store import retain_source
             for p in sources():
-                dest = frozen/p.relative_to(ROOT)
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                dest.write_bytes(p.read_bytes())
-                bindings.append(dict(original=ref(p), retained=ref(dest)))
-            put(frozen/'manifest.json', dict(sources=bindings))
+                original = ref(p)
+                dest = retain_source(p, BASE/'source-objects')
+                retained = ref(dest)
+                require((original['bytes'], original['sha256']) ==
+                        (retained['bytes'], retained['sha256']), 'exact source snapshot')
+                bindings.append(dict(original=original, retained=retained))
+            put(frozen/'manifest.json', dict(sources=bindings,
+                source_storage='immutable shared content-addressed objects'))
             put(str(prefix)+'.reservation.json', dict(phase=phase, gpu=gpu,
                 cpu_ns=4*seconds*NS, gpu_ns=seconds*NS if gpu else 0, command=command,
                 source_manifest=ref(frozen/'manifest.json'), idle=idle, device=DEVICE,

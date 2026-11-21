@@ -9,9 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = Path('/storage/ai-optimizer-billion-v1')
 DEVICE = 'GPU-6721b13a-30f9-83ec-dace-ba2d9738556f'
 NS = 1_000_000_000
-CPU_CAPS = dict(implementation=8000, native=22000, admission=52000,
-                development=140000, reporting=97000, cleanup=1000)
-GPU_CAPS = dict(admission=7000, development=28000)
+CPU_CAPS = dict(implementation=10000, native=26000, admission=58000,
+                development=162000, reporting=113000, cleanup=1000)
+GPU_CAPS = dict(admission=10000, development=34000)
 HOST_LIMIT = 128 << 30
 DEVICE_LIMIT = 80 << 30
 DISK_LIMIT = 400 << 30

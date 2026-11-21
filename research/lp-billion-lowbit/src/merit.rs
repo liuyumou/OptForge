@@ -71,18 +71,35 @@ impl EngineMerit for Engine<'_> {
                 .map(|(value, anchor)| value - anchor)
                 .collect::<Vec<_>>(),
         );
-        if primal_movement <= 1e-12 || dual_movement <= 1e-12 {
-            return weight;
-        }
-        let gains = self.settings().primal_weight;
-        let error = (dual_movement / primal_movement).ln() - weight.ln();
-        *integral += error;
-        let derivative = previous_error.map_or(0., |last| error - last);
-        *previous_error = Some(error);
-        let logarithm = weight.ln()
-            + gains.proportional * error
-            + gains.integral * *integral
-            + gains.derivative * derivative;
-        logarithm.exp().clamp(1e-6, 1e6)
+        next_weight_from_movements(
+            self,
+            primal_movement,
+            dual_movement,
+            weight,
+            integral,
+            previous_error,
+        )
     }
+}
+pub(crate) fn next_weight_from_movements(
+    engine: &Engine<'_>,
+    primal_movement: f64,
+    dual_movement: f64,
+    weight: f64,
+    integral: &mut f64,
+    previous_error: &mut Option<f64>,
+) -> f64 {
+    if primal_movement <= 1e-12 || dual_movement <= 1e-12 {
+        return weight;
+    }
+    let gains = engine.settings().primal_weight;
+    let error = (dual_movement / primal_movement).ln() - weight.ln();
+    *integral += error;
+    let derivative = previous_error.map_or(0., |last| error - last);
+    *previous_error = Some(error);
+    let logarithm = weight.ln()
+        + gains.proportional * error
+        + gains.integral * *integral
+        + gains.derivative * derivative;
+    logarithm.exp().clamp(1e-6, 1e6)
 }

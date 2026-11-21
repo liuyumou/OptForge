@@ -328,7 +328,16 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
     /// progress diagnostic. The caller uses the same merit at initialization.
     pub fn continue_after_check_with_merit(
         &mut self,
+        merit: impl FnMut(&[f64], &[f64], f64) -> f64,
+    ) {
+        self.continue_after_check_with_movement(merit, |_| None);
+    }
+
+    /// Optional exact movement norms; the weight recurrence remains on the host.
+    pub fn continue_after_check_with_movement(
+        &mut self,
         mut merit: impl FnMut(&[f64], &[f64], f64) -> f64,
+        mut movement: impl FnMut(&Fp64State) -> Option<(f64, f64)>,
     ) {
         let _cost = optimizer_core::lp_cost::scope("controller_assessment");
         assert!(self.check_pending());
@@ -343,15 +352,26 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
             || state.since_restart as f64 >= restart.artificial * state.iterations as f64
         {
             let _cost = optimizer_core::lp_cost::scope("restart");
-            state.weight = self.engine.next_weight(
-                &state.primal,
-                &state.dual,
-                &state.anchor_primal,
-                &state.anchor_dual,
-                state.weight,
-                &mut state.integral,
-                &mut state.previous_error,
-            );
+            state.weight = if let Some((primal, dual)) = movement(state) {
+                crate::merit::next_weight_from_movements(
+                    self.engine,
+                    primal,
+                    dual,
+                    state.weight,
+                    &mut state.integral,
+                    &mut state.previous_error,
+                )
+            } else {
+                self.engine.next_weight(
+                    &state.primal,
+                    &state.dual,
+                    &state.anchor_primal,
+                    &state.anchor_dual,
+                    state.weight,
+                    &mut state.integral,
+                    &mut state.previous_error,
+                )
+            };
             state.anchor_primal.copy_from_slice(&state.primal);
             state.anchor_dual.copy_from_slice(&state.dual);
             state.anchor_error = merit(&state.primal, &state.dual, state.weight);

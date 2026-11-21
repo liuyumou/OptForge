@@ -411,6 +411,8 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 auto_schedule: false,
                 gpu_preparation: false,
                 gpu_packing: false,
+                gpu_control: false,
+                gpu_feasibility: false,
             }
             .validate()
             .is_ok()
@@ -429,6 +431,8 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 auto_schedule: true,
                 gpu_preparation: false,
                 gpu_packing: false,
+                gpu_control: false,
+                gpu_feasibility: false,
             }
             .validate()
             .is_err()

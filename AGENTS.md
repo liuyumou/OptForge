@@ -1,3 +1,46 @@
+# Current agent handoff: GPU assessment/control measured (2026-11-22)
+
+Opt-in image-v11 offloads exact-tree residuals, restart movement norms and original
+primal feasibility. Original CPU dual/gap proofs remain exact, and every accepting
+assessment rechecks original CPU feasibility. Strict original-model 1e-9 criteria,
+public defaults, control100/certificate500 and original solve/prep/pack CUDA remain.
+Native quality-v3, full diagnostic, sixty exact continuations, independent scalar
+checks and all four complete sanitizers pass. Preserve all failures/full charges.
+
+All twelve fresh 64 M cells and 5 new billion responses finish with
+independent final/intermediate audits. The interrupted wide candidate remains
+missing, with its full charge, original cleanup receipt and supplemental cleanup
+proof. Only the four untouched cases resume after fresh operational admission. Before/after control / assessment / complete medians:
+64 M 13.843x / 1.107x / 1.060x;
+billion 24.997x / 1.200x / 1.321x.
+Billion controls are historical v10; retain unequal work, deadlines, regressions
+and uncertified endpoints. 1 historical pairs certify.
+Broad FP4 certified superiority remains unestablished. Both cohorts are complete;
+never rerun attempted cells or completed drivers.
+
+Approved totals are 370000 CPU / 44000 GPU seconds; CPU phase caps are
+10000/26000/58000/162000/113000/1000 and GPU 10000/34000. The immutable approval
+chain includes recovery, both packing transfers and the assessment extension.
+Operational CPU v29 / GPU v23 bind current resource sources. Four slots, 128 GiB
+host, 80 GiB GPU, 400 GiB storage, headroom, idle/ownership checks and all advisories
+remain unchanged. Container-only; no reset, host escape, other-job signal or owner
+inference. Earlier general allocation remains unchanged. Commit locally only.
+
+At the user's explicit request, obsolete large data is deleted after audits;
+145.070 GiB is released including verified source compaction. New snapshots
+share immutable source objects. Keep all small results and failures. Historical
+raw-data replay requires regeneration; no full portable replay is claimed.
+
+Final verification v1 retains a 960 CPU-second failure on a historical report
+source reference. Verification v2 uses the exact retained source from the original
+64 M reporting reservation; no scientific measurement repeats. See
+[amendment 77](docs/specifications/SPEC-0046-amendment-77.md).
+
+Open settled allocation: 314228.458381384 CPU / 35557.827345976 GPU seconds within 370000 / 44000. No reservation is active. 109 harness tests and 374 documentation pages/local links pass. 306 current numerical bindings verify; 296 prior bindings remain exact, with seven scoped integration changes and their original source copies retained. 51 failed reservations retain 84260.620150944 CPU / 7770.000000000 GPU seconds. Evidence: `gpu-control-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-gpu-control-checkpoint.json`.
+
+Report: [GPU assessment/control](docs/benchmarks/lp-billion.md#gpu-assessment-and-control-with-strict-cpu-acceptance).
+Results: [compact evidence](docs/benchmarks/lp-billion-gpu-control-results.json).
+
 # Current agent handoff: GPU FP4 packing measured (2026-11-21)
 
 Opt-in image-v10 moves eligibility/validation/residual extraction/encoding to GPU,

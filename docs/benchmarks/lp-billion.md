@@ -1502,3 +1502,141 @@ fresh verification v2; no scientific measurement repeats. See
 [all exclusive phase timings](lp-billion-gpu-packing-phases.csv) retain raw receipt,
 source, proof and memory bindings. Large evidence stays under
 `/storage/ai-optimizer-billion-v1/gpu-pack-64m-v1` and `gpu-pack-1b-v1`.
+
+
+## GPU assessment and control with strict CPU acceptance
+
+Opt-in image-v11 reuses the resident scaled matrices for exact-tree projected
+residual products and GPU restart-movement norms. It preserves the original
+1024-leaf arithmetic tree, signed-zero behavior and FP64 operations; long matrix
+lines explicitly retain CPU control. The scalar square roots and log/exp weight
+recurrence remain on the CPU. Reused device scratch and removed idle product
+workers avoid another scaled matrix or persistent vector allocation.
+
+Original-order primal feasibility now runs across GPU rows using original
+coefficients and bounds. Original CSR indices are borrowed; original coefficients
+and bounds occupy additional device memory, and bounded uploads use at most
+8 MiB of new host scratch. The unchanged CPU dual-bound enclosure and gap
+arithmetic remain authoritative. Every potentially accepting assessment must also
+pass the original CPU feasibility check and identical objective bits before it
+can grant a strict original-model 1e-9 certificate. GPU residuals never substitute
+for that proof. Every final and intermediate claim receives independent CPU
+checking after the measured solve.
+
+Public defaults, original solve/preparation/packing CUDA binaries, control100,
+certificate500 and recovery semantics remain unchanged. Native quality passes
+61 isolated Rust tests, formatting, Clippy, release and CUDA
+compilation. Device admission passes 33 bitwise residual
+comparisons, 3 explicit long-line fallbacks,
+36 exact movement-norm comparisons,
+180 original-feasibility comparisons and
+78 malformed-input rejections. Deep reductions exceed
+1024 squared vector entries. The 60 exact continuations cover
+native, FP32, FP4x1, FP4x2, recovery and cancellation, with
+130 independent scalar checks.
+All four complete sanitizers cover the diagnostic and twenty continuations each.
+
+The fresh rotated six-family 64 M cohort retains 100 updates per cell and exact
+full numerical transcripts. Descriptive median ratios (before / after) are
+13.843x control, 1.107x assessment,
+1.109x fresh process and 1.060x complete cost.
+The preparation ratio is 1.153x. All regressions
+and uncertified endpoints remain in the results.
+
+| Family | Control before / after (s) | Assessment before / after (s) | Fresh process before / after (s) | Complete before / after (s) | Updates before / after | Certified before / after |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| irregular | 0.916 / 0.070 | 5.462 / 4.878 | 17.300 / 15.897 | 28.514 / 27.521 | 100 / 100 | False / False |
+| wide | 1.825 / 0.175 | 10.412 / 9.535 | 27.262 / 24.308 | 44.606 / 41.086 | 100 / 100 | False / False |
+| tall | 0.795 / 0.043 | 4.051 / 3.481 | 13.995 / 12.342 | 23.168 / 21.824 | 100 / 100 | False / False |
+| coupled_blocks | 0.496 / 0.018 | 2.983 / 2.736 | 11.241 / 10.289 | 18.611 / 18.013 | 100 / 100 | False / False |
+| ill_scaled | 1.025 / 0.076 | 5.457 / 4.937 | 17.649 / 15.596 | 29.317 / 26.823 | 100 / 100 | False / False |
+| degenerate | 0.973 / 0.068 | 5.573 / 5.024 | 16.398 / 14.946 | 26.870 / 25.387 | 100 / 100 | False / False |
+
+Six new full LP attempts each contain one billion original matrix nonzeros.
+5 return endpoints; the wide cell is interrupted without a response and
+is never retried. All returned endpoints pass independent audits. They retain
+the 1000-update ceiling and requested 600-second solver allowance. Their v10
+controls are historical runs, so the comparison is descriptive rather than a
+randomized paired billion-scale experiment. Before / after median ratios are
+24.997x control, 1.200x assessment,
+1.472x fresh process and 1.321x complete cost.
+Different deadline/update work is explicit. Uncertified bounded runs cannot
+establish certified-solve speedups.
+
+| Family | Control before / after (s) | Assessment before / after (s) | Fresh process before / after (s) | Complete before / after (s) | Updates before / after | Certified before / after |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| irregular | 176.346 / 7.055 | 168.234 / 136.195 | 720.953 / 470.595 | 955.000 / 697.770 | 1000 / 1000 | False / False |
+| wide | unavailable | unavailable | unavailable | unavailable | 700 / None | False / False |
+| tall | 199.044 / 8.008 | 92.514 / 85.905 | 585.335 / 356.309 | 787.538 / 562.932 | 1000 / 1000 | True / True |
+| coupled_blocks | 86.531 / 2.284 | 80.523 / 67.101 | 351.121 / 239.641 | 486.850 / 371.999 | 1000 / 1000 | False / False |
+| ill_scaled | 186.507 / 7.085 | 174.849 / 143.087 | 743.834 / 505.490 | 977.887 / 740.026 | 1000 / 1000 | False / False |
+| degenerate | 172.213 / 7.743 | 172.502 / 148.255 | 618.694 / 464.934 | 838.991 / 682.020 | 1000 / 1000 | False / False |
+
+The 5 equal-update historical pairs have a descriptive complete-cost median ratio of 1.321x; 5 have identical full transcripts. Equal update counts do not remove deadline classification or cross-run timing variability.
+
+Jointly certified historical comparisons: tall: 787.538 to 562.932 s complete (1.399x), 1000 / 1000 updates.
+
+The coupled billion case accepts 75.0% FP4 product work. Its largest remaining intervals are `independent_final_check` (132.358 s), `input_hash_validation` (100.017 s), `strict_certificate` (67.101 s), `preparation_engine` (21.953 s).
+
+| Billion family | Preparation before / after (s) | Device setup before / after (s) | Solver peak host RSS before / after (GiB) | Sampled owned GPU peak after (GiB) |
+| --- | ---: | ---: | ---: | ---: |
+| irregular | 47.749 / 39.079 | 12.980 / 17.930 | 58.569 / 56.357 | 49.154 |
+| tall | 40.709 / 32.409 | 11.323 / 13.127 | 50.364 / 48.875 | 44.553 |
+| coupled_blocks | 38.368 / 34.485 | 8.550 / 11.992 | 47.188 / 47.196 | 38.959 |
+| ill_scaled | 48.449 / 37.126 | 13.000 / 16.694 | 58.587 / 56.388 | 49.154 |
+| degenerate | 46.492 / 34.866 | 13.900 / 16.938 | 58.572 / 56.363 | 49.154 |
+
+Control combines `original_model_control` and `restart_weight_control`;
+assessment is `strict_certificate`. Preparation includes initial control;
+device setup is reported separately. Fresh process includes original input
+reading/hashing/validation, CSR-to-CSC construction, solver execution and response
+persistence. Complete cost additionally includes the cold independent final
+original-model proof. Additional intermediate audits remain separately reported
+offline costs. Every exclusive phase sums exactly to complete cost; nested timing
+metrics are not counted twice. These are host elapsed intervals, not kernel-active
+times. Caches were not flushed. The CSV retains all phases and observed peaks.
+
+Device memory rises to hold the original feasibility arrays. Peak host RSS is the
+solver child's high-water mark; sampled aggregate host/device peaks are distinct
+measurements. Conservative capacity bounds, 4 GiB physical host headroom and all
+ownership/idle checks remain enforced. The five zero-eligible families use their
+established FP32 fallback; the coupled family retains actual FP4 work. Broad FP4
+certified-solve superiority remains unestablished.
+
+The user explicitly extends the open allocation to 370000 CPU / 44000 GPU seconds,
+with CPU phase caps 10000/26000/58000/162000/113000/1000 and GPU caps 10000/34000.
+The original recovery and both packing-transfer approvals remain required. Preserve
+all failures and full charges, including CPU-v27's obsolete totals assertion and
+quality-v1's formatting failure and quality-v2's diagnostic settings compile error.
+No attempted scientific cell is retried. Four CPU
+slots, 128 GiB host, 80 GiB owned GPU, 400 GiB storage, one-second supervision and
+all 100 ms advisories stay unchanged. Remain container-only; no reset, host escape,
+other-job signal or owner inference. Commit locally only, with no public adoption
+or fresh full portable replay claim. The earlier general allocation is unchanged.
+
+The wide attempt retains its full 5000 CPU / 1250 GPU-second charge and original
+incomplete cleanup receipt. A later exact-identity check confirms all owned
+processes gone, with no new signal; fresh CPU v29 / GPU v23 and a complete idle
+window admit only the four untouched cells. The original interruption reason
+was overwritten by the cleanup result and remains undetermined.
+
+At the user's explicit request, obsolete large chunks are deleted after dependent
+solves/audits finish. Source compaction verifies and archives 151015
+older loose files, and new reservations share immutable source objects. Together
+these actions release 145.070 GiB of allocated disk blocks. All small timing,
+certificate, source-binding and failure records remain. Historical raw-data replay
+requires regenerating deleted chunks; restoring source archives alone is insufficient.
+The numerical certificates were checked before deletion and are not reclassified.
+
+Final verification v1 passes 109 harness tests and 373 documentation pages, then
+stops on the earlier 64 M report's source reference. Its full 960 CPU-second charge
+is retained. Fresh verification v2 checks that exact historical reporting source
+through its own reservation snapshot, without rewriting the report or repeating
+scientific measurements. See [amendment 77](../specifications/SPEC-0046-amendment-77.md).
+
+Open settled allocation: 314228.458381384 CPU / 35557.827345976 GPU seconds within 370000 / 44000. No reservation is active. 109 harness tests and 374 documentation pages/local links pass. 306 current numerical bindings verify; 296 prior bindings remain exact, with seven scoped integration changes and their original source copies retained. 51 failed reservations retain 84260.620150944 CPU / 7770.000000000 GPU seconds. Evidence: `gpu-control-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-gpu-control-checkpoint.json`.
+
+[Compact assessment/control results](lp-billion-gpu-control-results.json) and
+[every exclusive timing phase](lp-billion-gpu-control-phases.csv) retain source,
+resource, proof and memory bindings. Large evidence remains under
+`/storage/ai-optimizer-billion-v1/gpu-control-64m-v1` and `gpu-control-1b-v1`.

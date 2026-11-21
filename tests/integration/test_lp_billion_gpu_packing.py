@@ -5,13 +5,16 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'tools'))
 import lp_billion_readmission as admission
 
+PACK_CPU=dict(implementation=8000,native=22000,admission=52000,development=140000,reporting=97000,cleanup=1000)
+PACK_GPU=dict(admission=7000,development=28000)
+
 class TransferContracts(unittest.TestCase):
     def fixture(self):
         old=dict(cpu_caps=dict(implementation=2000,native=14000,admission=45000,development=148000,reporting=110000,cleanup=1000),gpu_caps=dict(admission=9000,development=26000),settlement={'sha256':admission.SHA})
-        transfer=dict(status='explicitly_authorized',user_answer='Approve the phase transfer',previous_approval={'old':True},old_cpu_caps=old['cpu_caps'],old_gpu_caps=old['gpu_caps'],cpu_caps=admission.CPU_CAPS,gpu_caps=admission.GPU_CAPS,protocol={},proposal={})
+        transfer=dict(status='explicitly_authorized',user_answer='Approve the phase transfer',previous_approval={'old':True},old_cpu_caps=old['cpu_caps'],old_gpu_caps=old['gpu_caps'],cpu_caps=PACK_CPU,gpu_caps=PACK_GPU,protocol={},proposal={})
         return copy.deepcopy((old,transfer))
     def apply(self,old,transfer):
-        with patch.object(admission,'ref',return_value={'old':True}),patch.object(admission,'resolve'):
+        with patch.object(admission,'CPU_CAPS',PACK_CPU),patch.object(admission,'GPU_CAPS',PACK_GPU),patch.object(admission,'ref',return_value={'old':True}),patch.object(admission,'resolve'):
             return admission.transfer_approval(old,transfer)
     def test_only_caps_change_under_explicit_transfer(self):
         old,t=self.fixture();result=self.apply(old,t)
@@ -51,10 +54,10 @@ class RevisedTransferContracts(unittest.TestCase):
         # First transfer values are immutable, independent of the current caps.
         previous['cpu_caps']=dict(implementation=6000,native=18000,admission=52000,development=151000,reporting=92000,cleanup=1000)
         previous['gpu_caps']=dict(admission=7000,development=28000)
-        transfer=dict(status='explicitly_authorized',user_answer='Approve revised phase transfer',previous_transfer={'path':'approved-packing-transfer-v1.json'},original_approval={'path':'approved-recovery-v1.json'},old_cpu_caps=previous['cpu_caps'],old_gpu_caps=previous['gpu_caps'],cpu_caps=admission.CPU_CAPS,gpu_caps=admission.GPU_CAPS,protocol={},proposal={})
+        transfer=dict(status='explicitly_authorized',user_answer='Approve revised phase transfer',previous_transfer={'path':'approved-packing-transfer-v1.json'},original_approval={'path':'approved-recovery-v1.json'},old_cpu_caps=previous['cpu_caps'],old_gpu_caps=previous['gpu_caps'],cpu_caps=PACK_CPU,gpu_caps=PACK_GPU,protocol={},proposal={})
         return copy.deepcopy((old,transfer,previous))
     def apply(self,args):
-        with patch.object(admission,'ref',side_effect=lambda p:{'path':p.name}),patch.object(admission,'resolve'):
+        with patch.object(admission,'CPU_CAPS',PACK_CPU),patch.object(admission,'GPU_CAPS',PACK_GPU),patch.object(admission,'ref',side_effect=lambda p:{'path':p.name}),patch.object(admission,'resolve'):
             return admission.revised_transfer_approval(*args)
     def test_revised_transfer_preserves_original_exception(self):
         args=self.fixture();self.assertEqual(self.apply(args)['settlement'],args[0]['settlement'])
