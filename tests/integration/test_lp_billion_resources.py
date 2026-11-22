@@ -24,8 +24,8 @@ class BillionResourceContracts(unittest.TestCase):
             self.assertEqual([p.stem for p in budget.operational_plans()],['v4','v9','v10'])
 
     def test_approved_totals_and_memory_are_exact(self):
-        self.assertEqual(sum(common.CPU_CAPS.values()), 370000)
-        self.assertEqual(sum(common.GPU_CAPS.values()), 44000)
+        self.assertEqual(sum(common.CPU_CAPS.values()), 570000)
+        self.assertEqual(sum(common.GPU_CAPS.values()), 68000)
         self.assertEqual((common.HOST_LIMIT, common.DEVICE_LIMIT, common.DISK_LIMIT),
                          (128 << 30, 80 << 30, 400 << 30))
 

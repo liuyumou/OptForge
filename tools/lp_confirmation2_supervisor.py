@@ -16,6 +16,7 @@ import resource
 import select
 import signal
 import socket
+import threading
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -138,18 +139,24 @@ def reap():
     return statuses
 
 
-def terminate_descendants(root, cpus, exclude=()):
+def terminate_descendants(root, cpus, exclude=(), observer=None):
     """Stop tracked processes individually: descendants can create new sessions."""
     until = time.monotonic() + 1
     excluded = {root, *exclude}
     seen = {}
     while True:
-        try:
-            current = snapshot(root, cpus)
+        if observer is not None:
+            # A failed actual resource sample must propagate, never be replaced
+            # with a heartbeat or identity-only observation.
+            current = observer()
             live = [p for p in current['processes'] if p['pid'] not in excluded]
-        except Exception:
-            # Identity discovery remains possible even after an affinity failure.
-            live = descendants_unchecked(root, excluded)
+        else:
+            try:
+                current = snapshot(root, cpus)
+                live = [p for p in current['processes'] if p['pid'] not in excluded]
+            except Exception:
+                # Identity discovery remains possible even after an affinity failure.
+                live = descendants_unchecked(root, excluded)
         for item in live:
             seen[item['pid']] = item
             if same_process(item):
@@ -201,8 +208,8 @@ def receive(channel):
     return json.loads(raw) if raw else None
 
 
-def publish_result(channel, request, result):
-    """Keep control packets small; bind the separately durable bounded result."""
+def prepare_result(request, result):
+    """Persist the bounded result before returning its small control binding."""
     path = Path(request['output'] + '.coordinator-result.json')
     if path.exists():
         raise AdmissionError('immutable_coordinator_result_exists')
@@ -210,8 +217,63 @@ def publish_result(channel, request, result):
     raw = path.read_bytes()
     if len(raw) > 8 << 20:
         raise AdmissionError('coordinator_result_too_large')
-    send(channel, dict(event='done', result_bytes=len(raw),
-                       result_sha256=hashlib.sha256(raw).hexdigest()))
+    return dict(event='done', result_bytes=len(raw), result_sha256=hashlib.sha256(raw).hexdigest())
+
+
+def publish_result(channel, request, result):
+    """Keep control packets small; bind the separately durable bounded result."""
+    send(channel, prepare_result(request, result))
+
+
+class FinalizationSampler:
+    """Continue real resource observations while cleanup/publication completes."""
+    def __init__(self, channel, request, cpus, last_sample):
+        self.channel, self.request, self.cpus = channel, request, cpus
+        self.last = last_sample
+        self.record = dict(samples=0, max_sample_gap_ns=0, max_sample_work_ns=0, peak_rss_bytes=0,
+                           advisory_gap_ns=ADVISORY_GAP_NS, timing_exceedances=[])
+
+    def sample(self):
+        now = time.monotonic_ns(); request = self.request
+        gap = now - self.last
+        if gap > request['max_gap_ns']: raise AdmissionError('finalization_sample_gap')
+        if now >= request['work_deadline_ns']: raise AdmissionError('finalization_work_deadline')
+        send(self.channel, dict(event='heartbeat', timestamp_ns=now))
+        observation = snapshot(os.getpid(), self.cpus, [request['guardian_pid']])
+        if observation['rss_bytes'] >= request['rss_stop_bytes']: raise AdmissionError('finalization_rss_limit')
+        if observation['swap_bytes']: raise AdmissionError('finalization_observed_swap')
+        work = time.monotonic_ns() - now
+        if work > request['max_gap_ns']: raise AdmissionError('finalization_sample_duration')
+        self.record['samples'] += 1
+        self.record['max_sample_gap_ns'] = max(self.record['max_sample_gap_ns'], gap)
+        self.record['max_sample_work_ns'] = max(self.record['max_sample_work_ns'], work)
+        self.record['peak_rss_bytes'] = max(self.record['peak_rss_bytes'], observation['rss_bytes'])
+        if gap > ADVISORY_GAP_NS: self.record['timing_exceedances'].append(['sample_start_gap', self.last, gap])
+        if work > ADVISORY_GAP_NS: self.record['timing_exceedances'].append(['sample_work', now, work])
+        self.last = now
+        return observation
+
+
+def publish_result_observed(channel, request, result, sampler):
+    """I/O may wait; the supervising thread must still complete real samples."""
+    finished = threading.Event(); outcome = {}
+    def write():
+        try: outcome['message'] = prepare_result(request, result)
+        except BaseException as error: outcome['error'] = error
+        finally: finished.set()
+    writer = threading.Thread(target=write, daemon=True)
+    deadline = min(request['work_deadline_ns'], time.monotonic_ns() + request['publication_wall_seconds'] * NS)
+    writer.start()
+    while not finished.is_set():
+        if time.monotonic_ns() >= deadline: raise AdmissionError('result_publication_deadline')
+        sampler.sample()
+        finished.wait(.005)
+    writer.join()
+    if 'error' in outcome: raise outcome['error']
+    if time.monotonic_ns() >= deadline: raise AdmissionError('result_publication_deadline')
+    sampler.sample()
+    message = outcome['message']; message['finalization_observation'] = sampler.record
+    send(channel, message)
 
 
 def load_result(request, message):
@@ -227,6 +289,22 @@ def load_result(request, message):
     result = json.loads(raw)
     if not isinstance(result, dict):
         raise AdmissionError('coordinator_result_type_invalid')
+    if request.get('observed_finalization'):
+        record = message.get('finalization_observation')
+        scalars = {'samples', 'max_sample_gap_ns', 'max_sample_work_ns', 'peak_rss_bytes', 'advisory_gap_ns'}
+        if (not isinstance(record, dict) or set(record) != scalars | {'timing_exceedances'} or
+                any(type(record[k]) is not int or record[k] < 0 for k in scalars) or record['samples'] == 0 or
+                record['advisory_gap_ns'] != ADVISORY_GAP_NS or not isinstance(record['timing_exceedances'], list) or
+                len(record['timing_exceedances']) > 1024 or
+                record['max_sample_gap_ns'] > request['max_gap_ns'] or record['max_sample_work_ns'] > request['max_gap_ns'] or
+                record['peak_rss_bytes'] >= request['rss_stop_bytes']):
+            raise AdmissionError('finalization_observation_invalid')
+        for event in record['timing_exceedances']:
+            if (not isinstance(event, list) or len(event) != 3 or event[0] not in ['sample_start_gap', 'sample_work'] or
+                    type(event[1]) is not int or type(event[2]) is not int or event[1] < request['started_ns'] or
+                    not ADVISORY_GAP_NS < event[2] <= request['max_gap_ns']):
+                raise AdmissionError('finalization_advisory_invalid')
+        result['finalization_observation'] = record
     return result
 
 
@@ -300,6 +378,7 @@ def coordinator(request, lock_fd, channel, cpus):
                   peak_active_numerical_allocations=0)
     seen = {}
     last = time.monotonic_ns()
+    last_sample = last
     try:
         pid, child_fd, item = launch(request, lock_fd, channel, cpus)
         result['entry'] = item
@@ -323,6 +402,7 @@ def coordinator(request, lock_fd, channel, cpus):
             # a stale sampler. Completion still requires every resource check and
             # the duration bound below; a progress message never grants a pass.
             send(channel, dict(event='heartbeat', timestamp_ns=now))
+            last_sample = now
             observation = snapshot(os.getpid(), cpus, [request['guardian_pid']])
             allocation_path=Path(request['output']+'.allocations')
             if allocation_path.exists():
@@ -368,10 +448,13 @@ def coordinator(request, lock_fd, channel, cpus):
         result['reason'] = ('guardian_lost' if isinstance(error,(BrokenPipeError,ConnectionResetError))
                             else str(error) or type(error).__name__)
     finally:
-        result['cleanup'] = terminate_descendants(os.getpid(), cpus)
+        sampler = FinalizationSampler(channel, request, cpus, last_sample) if request.get('observed_finalization') else None
+        result['cleanup'] = terminate_descendants(os.getpid(), cpus, exclude=[request['guardian_pid']],
+                                                  observer=sampler.sample if sampler else None)
         result['observed_processes'] = list(seen.values())
         try:
-            publish_result(channel, request, result)
+            if sampler: publish_result_observed(channel, request, result, sampler)
+            else: publish_result(channel, request, result)
             # Keep the coordinator alive until the guardian consumes the result.
             # Otherwise an already-ready pidfd could race a queued final packet.
             select.select([channel], [], [], .5)
@@ -435,6 +518,14 @@ def initial_journal():
 def run(request):
     if request.get('max_gap_ns') not in (100_000_000,1_000_000_000):
         raise AdmissionError('unsupported_sampling_policy')
+    receipt_seconds = request.get('receipt_finalization_seconds', 1)
+    if type(receipt_seconds) is not int or not 1 <= receipt_seconds <= 10:
+        raise AdmissionError('invalid_receipt_finalization_reserve')
+    if request.get('observed_finalization'):
+        publication = request.get('publication_wall_seconds')
+        if type(publication) is not int or not 1 <= publication <= 30:
+            raise AdmissionError('invalid_publication_reserve')
+    receipt_ns = receipt_seconds * NS
     entered = time.monotonic_ns()
     available = sorted(os.sched_getaffinity(0))
     if len(available) < 4:
@@ -461,6 +552,8 @@ def run(request):
         stage = journal['stages'][request['stage']]
         if reserved < 12 * NS or reserved > stage['cap_cpu_ns'] - stage['charged_cpu_ns']:
             raise AdmissionError('stage_reservation_exhausted')
+        if reserved // 4 <= receipt_ns + NS:
+            raise AdmissionError('finalization_margin_exhausts_reservation')
         if journal['prior_cpu_ns'] + sum(s['cap_cpu_ns'] for s in journal['stages'].values()) > journal['ceiling_cpu_ns']:
             raise AdmissionError('mandatory_future_reserves_do_not_fit')
         if request['slots'] not in range(1, 5):
@@ -469,7 +562,7 @@ def run(request):
             raise AdmissionError('memory_envelope_refused')
         request.update(guardian_pid=os.getpid(), affinity=sorted(cpus),
                        started_ns=entered,
-                       work_deadline_ns=entered + reserved // 4 - 2 * NS)
+                       work_deadline_ns=entered + reserved // 4 - receipt_ns - NS)
         request['thread_environment'] = THREAD_ENV
         request['source_sha256'] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
         request['command_sources'] = [dict(path=p, sha256=hashlib.sha256(Path(p).read_bytes()).hexdigest())
@@ -570,8 +663,9 @@ def run(request):
         success = (result['reason'] == 'completed' and result['returncode'] == 0
                    and cleanup['empty'])
         end = time.monotonic_ns()
-        # Reserve and charge a full finalization second, including durable writes.
-        measured_upper = 4 * (end - entered + NS)
+        # Numerical work/cleanup must leave the prospectively charged durable
+        # receipt allowance; it never extends the outer reservation.
+        measured_upper = 4 * (end - entered + receipt_ns)
         charged = reserved if request['bootstrap'] or not success else measured_upper
         charged = max(charged, measured_upper)
         if charged > reserved:
@@ -581,7 +675,7 @@ def run(request):
                       status='passed' if success else 'refused', result=result,
                       guardian_cleanup=cleanup, charged_cpu_ns=charged,
                       guardian_observation=dict(max_loop_gap_ns=max_observation_gap, **watch.record()),
-                      active_elapsed_ns=end-entered, finalization_wall_reserve_ns=NS,
+                      active_elapsed_ns=end-entered, finalization_wall_reserve_ns=receipt_ns,
                       cpu_method='4 * active wall including reserved finalization; full reservation on failure/bootstrap',
                       memory_method='sampled aggregate VmRSS; not hard cgroup containment',
                       hard_memory_enclosure=False, exact_aggregate_peak=False)
@@ -593,7 +687,7 @@ def run(request):
         def finalization_timeout(*_):
             raise AdmissionError('receipt_finalization_timeout')
         signal.signal(signal.SIGALRM, finalization_timeout)
-        signal.setitimer(signal.ITIMER_REAL, 1)
+        signal.setitimer(signal.ITIMER_REAL, receipt_seconds)
         try:
             if request.get('show_log'):
                 with Path(request['log']).open('rb') as stream:

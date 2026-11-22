@@ -1,3 +1,333 @@
+# Three remaining LP identities attempted; final verification settled (2026-11-22)
+
+All three resumed scientific identities have now been attempted once. Ill-scaled
+COPT returns interrupted without endpoint after 5640 iterations and
+1886.239276306 complete seconds. Degenerate COPT returns interrupted without
+endpoint after 6520 iterations and 1863.704107960 complete seconds. Degenerate
+project is interrupted after 1367.951789046 supervised active seconds with no
+response, cleanup_incomplete and no overrun; full 10800 CPU / 2700 GPU seconds
+remain. Its preceding trigger is unknown. All four recorded owned identities are
+gone; the separate missing-response audit passes. Never repeat these LPs/drivers.
+
+CPU-only finalization is complete through reporting. The first final cleanup
+incorrectly requires the original failed tall audit and retains full 480 CPU
+seconds, with empty cleanup and no deletion. Corrected cleanup in
+`lp_billion_copt_fair_report.py prune` validates the retained tall proof seal and
+all audit dispositions; cleanup v2 passes. About 47.009 GiB is released in this
+resumption, including partial failed-attempt objects. All small evidence remains.
+The frozen finalization helper/plan and its failed cleanup remain exact.
+
+`copt-fair-complete-report-v1` passes; all twelve roster slots remain visible,
+with no jointly timely strict certified-time pair. The two COPT certified complete
+costs are tall 1408.579966302 / coupled 857.414167436 seconds. Project tall remains
+strictly accepted but complete timing is excluded. Report/phase CSV/compact JSON
+are written. Final verification passes 136 harness tests / 387 documentation
+pages, resolves 637 retained references and verifies all 306 numerical bindings.
+All 1995 recorded owned identities are gone. Settled evidence is
+`copt-fair-settled-checkpoint-v1.json`, with a compact copy at
+`docs/benchmarks/lp-billion-copt-fair-checkpoint.json`.
+Final settled usage is 459659.784173452 CPU / 55943.714704332 GPU seconds within
+570000/68000. All 63 failed reservations retain 136740.620150944 CPU /
+14970 GPU seconds. No reservation or monitor is active. Commit locally only;
+no publication or push.
+No more GPU work is needed. All 306 numerical bindings and critical sources stay
+exact; additional CPU35/GPU27 pass. Future development would require the fresh
+CPU36/GPU28 gates named in the last cleanup disposition; neither has run.
+
+# Historical explicit three-cell resumption
+
+The user now explicitly requests checking RAM/GPU availability and resuming the
+three remaining LPs under existing limits and strict 1e-9 checks. This revokes
+the pause below. The initial sample shows about 174.1 GiB RAM available and the
+GPU at 0.750 GiB / zero utilization / no listed processes. No reservation is
+active and all three cells remain untouched at this initial check.
+
+Use `tools/lp_billion_copt_fair_headroom_resume.py` with fresh observation identity
+`copt-fair-headroom-idle-v2`. It delegates to the unchanged frozen helper with
+the new availability identity, requires a current sustained idle proof and fresh
+host capacity, rechecks all 306 numerical bindings, and records explicit resumption
+in `copt-fair-headroom-resume-v1/plan.json` before calling the helper once. The
+old idle-v1 proof remains historical. Do not edit frozen helpers or repeat any
+attempted LP/completed driver. All budgets, source-bound operational gates,
+strict audits and prompt audited large-data deletion remain unchanged.
+The fresh idle-v2 observation now passes; its initial unreserved 0.9-second storage
+preflight refusal is retained separately, and the unchanged guard passes on recheck.
+The resumption driver has now exited. Ill-scaled COPT returns interrupted without
+an endpoint after 5640 iterations and 1885.924168562 complete seconds. Supervision,
+the no-endpoint audit and large-family-data deletion pass. Degenerate regeneration
+v1 then fails with cleanup_incomplete, no overrun and full 3600 CPU seconds; its
+preceding trigger is unknown. All four recorded owned identities are now gone.
+Neither degenerate LP started. Do not repeat either old driver or any attempted LP.
+
+Amendment 89 and `tools/lp_billion_copt_fair_degenerate_tail.py` recover only these
+two untouched cells with exact original hashes, additional CPU v35 / GPU v27 and
+fresh headroom-idle-v3 gates. CPU v34/GPU v26, every resource-critical source and
+all 306 numerical bindings remain exact. The original failure and full charge
+remain; no guard, limit or certificate change. Inspect reservations and the new
+`copt-fair-degenerate-tail-v1` plan/started/completed records before launching.
+CPU v35 passes 75 supervisor / 136 billion tests; fresh headroom-idle-v3 and GPU
+v27 (60 exact continuations) pass. Regeneration v2 passes: 157 existing chunks
+match and none are removed; original model/construction hashes are exact.
+Degenerate COPT returns interrupted without endpoint after 6520 iterations and
+1863.368695828 complete seconds. Its supervision and no-endpoint audit pass.
+Degenerate project then stops after 1367.951789046 supervised active seconds,
+with cleanup_incomplete, no response, no overrun and full 10800 CPU / 2700 GPU
+charge. The preceding trigger is unknown; all four exact owned identities are
+gone and GPU memory returns to baseline. The two-cell driver is finished. NEVER
+repeat it or any attempted LP. All three requested scientific cells are attempted.
+
+Amendment 90 / `tools/lp_billion_copt_fair_finalize.py` perform CPU-only missing-
+response audit, obsolete large-data cleanup and final reporting. Its plan is
+`copt-fair-finalization-v1/plan.json`; execute may be active. No further GPU job
+or idle monitor is needed. Additional future CPU v36/GPU v28 gates are only named
+in the last cleanup disposition; they have not run. Existing numerical/resource
+sources and all frozen helpers remain exact. Final verification, settled
+checkpoint and local commit remain pending.
+
+# Historical user-requested pause (superseded by explicit resumption above)
+
+The user asks to pause if RAM is unavailable and says they will resume later.
+At the pause decision, host availability is 129.478 GiB, below the original
+128+4 GiB requirement. The proposed 120+4 GiB reservation could fit, but the
+remaining continuation is left unstarted. While recording the pause, availability
+rises to 157.544 GiB. Keep the pause in effect until explicit user resumption;
+do not restart evaluation or monitoring automatically because capacity recovers.
+
+`/storage/ai-optimizer-billion-v1/copt-fair-user-pause-v2.json` records the pause,
+exact remaining roster and accounting. Its `pause_basis` refers to the earlier
+129.478 GiB decision reading; `host_available_bytes` is the later 157.544 GiB
+checkpoint reading. The finite headroom idle monitor finishes normally, passes,
+and all of its recorded owned identities are gone. No reservation is active.
+Current settled usage is 425061.651944720 CPU / 49441.759926774 GPU seconds within
+570000 / 68000; all phase caps and every failure/full charge remain unchanged.
+
+Remaining, never attempted: `copt-fair-1b-v1-ill_scaled-copt`,
+`copt-fair-1b-v1-degenerate-copt`, `copt-fair-1b-v1-degenerate-project`.
+The final helper `tools/lp_billion_copt_fair_headroom.py` is frozen by
+`copt-fair-headroom-tail-v1/freeze.json`; its execute action has NEVER run.
+Contracts pass 135 tests; early audited endpoint pruning releases 13.038516045 GiB.
+On explicit resumption, require fresh host capacity and sustained GPU-idle
+observations under a NEW identity; do not reuse the old idle proof as current or
+rerun its completed observation. Preserve the frozen helper, all prior failed and
+completed drivers, source-bound CPU v34/GPU v26 and all 306 numerical bindings.
+
+New completed outcomes: tall COPT strictly certifies in 1408.579966302 complete
+seconds; coupled COPT strictly certifies in 857.414167436 complete seconds.
+Coupled project rejects the unsupported 2100000 ms request before solving; its
+full 10800 CPU / 2700 GPU charge remains and it is never retried. Corrected
+ill-scaled project returns an uncertified deadline after 6400 accepted updates,
+1875.828319590 native seconds and 2236.278415066 complete seconds; all fourteen
+independent endpoint checks pass their audit. The ill-scaled original input stays
+for COPT, but all audited large project endpoint objects are deleted. All small
+proofs/results/failures remain. Final comparison report, final verification and
+local commit remain unfinished; working-tree changes are saved and uncommitted.
+
+# Historical continuation state (superseded by user pause above)
+
+The corrected four-cell driver exits after the successful ill-scaled project
+audit: 14/14 independent proofs, uncertified deadline, 6400 accepted updates,
+1875.828319590 native seconds and 2236.278415066 complete seconds. COPT preflight
+then refuses physical host headroom before reserving/starting a cell: available
+about 129.6 GiB versus 132 required. GPU is sampled idle. Three cells remain:
+ill-scaled COPT, degenerate COPT, degenerate project. No job is currently active.
+
+Amendment 88 / `tools/lp_billion_copt_fair_headroom.py` prospectively lowers only
+the two untouched vendor host stops/reservations to 120 GiB, above their padded
+110.1 GiB forecasts, preserving all native settings and the global 128 GiB cap,
+4 GiB physical headroom and every original guard. Contracts pass 135 tests; early
+audited-endpoint pruning releases 13.038516045 GiB while protecting original model
+objects. The helper is frozen by `copt-fair-headroom-tail-v1/freeze.json`; do not
+edit it. `copt-fair-headroom-idle-v1` may be active. After its passing settlement,
+call the helper's execute action once. Do
+not rerun either prior driver or any attempted LP. Current CPU v34/GPU v26 and
+306 numerical bindings remain exact. All failures and full charges remain.
+
+# Historical four-cell native-bound continuation
+
+The first resumed driver has exited. Tall and coupled COPT both pass strict 1e-9
+independent checks, with complete costs 1408.579966302 / 857.414167436 seconds.
+Their large data is deleted after audits. Coupled project rejects the requested
+2100000 ms because sealed image-v11 permits at most 1800000; preserve the missing
+response/full 10800 CPU / 2700 GPU charge and never retry it. Ill-scaled input
+regeneration then fails on the unchanged 0.9-second native inventory timeout;
+empty cleanup, full 2400 CPU charge, no LP started. An owned cooperative launch
+lease prevented further invalid launches and is released. The corrected four-cell
+driver may now be active; inspect reservations before launching anything.
+
+Amendment 87 and `tools/lp_billion_copt_fair_native_tail.py` correct only the four
+untouched ill-scaled/degenerate cells to equal 1800-second native allowances with
+2700-second outer reserves and unchanged enlarged audits. Sealed-native validation
+passes at 1800000 ms and rejects 1800001/2100000; contracts pass 133 tests. The new
+helper is frozen by `/storage/ai-optimizer-billion-v1/copt-fair-native-tail-v1/freeze.json`;
+do not edit it. `copt-fair-native-tail-idle-v1` passes. The helper's `execute` action
+is already running; never repeat it. Ill-scaled recovery v2 passes after checking
+347 existing chunks, with no partial chunk removed and exact original hashes.
+The ill-scaled project cell is active; all historical failures remain. Recover input
+with a fresh identity and 900-second reservation, retaining the interrupted one.
+All resource-critical sources/CPU v34/GPU v26 and 306 numerical bindings stay exact.
+Do not rerun the seven-cell driver or edit its frozen source. No scientific retry.
+
+# Historical first resumption plan (superseded for the four untouched cells)
+
+The user explicitly resumes the seven remaining LP attempts if the Pro6000 is
+idle, and requests time budgets that accommodate normal overhead. Amendment 85
+prospectively assigns 2100-second native allowances / 2700-second outer reserves
+only to the seven untouched cells, with separately enlarged strict audit budgets.
+The 570000 CPU / 68000 GPU totals, exact phase caps, physical/ownership limits,
+10000-update ceiling, control100/certificate500 and original 1e-9 checks remain.
+Historical 1200/1800-second cells and all failures remain unchanged. Do not run
+old tight-budget continuation drivers or repeat attempted scientific cells.
+
+The fresh sustained idle window passes at 0.750 GiB with zero utilization and no
+listed processes. `copt-fair-budget-idle-v1` is settled; GPU v26 and the seven-cell
+continuation may be active. Inspect current reservations before launching anything.
+`copt-fair-budget-envelope-v2.json` reserves the complete remaining work and retains
+source copies. Plans v69–v74 bind CPU v34 / GPU v26 for all six prior cleanup
+dispositions. Resource sources now opt into actual sampling during cleanup and
+asynchronous durable publication, with a prospectively charged receipt allowance
+up to ten seconds. One-second hard sampling and all 100 ms advisories remain;
+stalled sampling and overlong scans must still fail. No numerical source changes.
+CPU v34 passes 75 original supervisor and 128 billion harness tests, including slow
+I/O and genuine stalls on the evidence filesystem. CPU v33 retains its missing
+receipt/full 960 CPU charge and independent proof that all 139 recorded owned
+identities are gone; amendment 86 records the corrected guardian exclusion.
+Budget contracts v2 passes all 131 billion tests. The effective manifest is
+`/storage/ai-optimizer-billion-v1/copt-fair-budgeted-v1/freeze.json`, driven by
+`tools/lp_billion_copt_fair_budgeted.py`. Its source is frozen; do not edit it or
+repeat the driver/attempted cells. Final report and verification remain pending.
+Budget contracts v1 retains its full 480 CPU charge and empty cleanup: an outer
+three-core placement wrapper prevented nested four-slot supervisor tests from
+starting. Contracts v2 uses the original four-slot test placement. This is a
+test-launch correction; the admitted resource sources and numerical code stay exact.
+
+# Historical user-requested pause (superseded by explicit resume above)
+
+The user explicitly stops the monitor and all further evaluation because someone
+else may need the GPU, and will request resumption later. Honor this pause. The
+owned idle-v2 guardian was canceled by exact PID/start identity; the continuation
+exited and no reservation or retained monitor identity is active. Preserve the
+canceled idle-v2 receipt (empty cleanup, no overrun, full 1920 CPU seconds).
+Do not restart monitoring, operational gates, audits or solves automatically.
+
+Interim checkpoint: `docs/benchmarks/lp-billion-copt-fair-paused.json` and
+`/storage/ai-optimizer-billion-v1/copt-fair-user-pause-v1.json`. Settled totals are
+376690.813581624 CPU / 42877.640387647 GPU seconds within 570000 / 68000. There are
+56 failed reservations, all full charges retained. Seven frozen LP cells and GPU
+v25 remain untouched. CPU v32 passes 75 supervisor / 122 billion tests; the tall
+proof seal passes. Full comparison/report/final verification and local commit
+remain unfinished; working-tree changes are saved locally and uncommitted.
+
+On explicit resume, use a fresh availability identity (v3 or later); idle-v1 is a
+completed non-passing window and idle-v2 is canceled. Neither old driver may run
+again. `tools/lp_billion_copt_fair_resume.py observation --id <fresh-id>` and its
+`resume --id <passed-fresh-id>` action retain the existing source-bound seven-cell
+tail and require sustained idle proof before GPU v25. Inspect all reservations
+first. The `copt-fair-idle-resume-v1/plan.json` receipt has not been created yet.
+
+# Current agent handoff: COPT diagnosis complete; fair comparison paused (2026-11-22)
+
+The user requests investigating missing COPT solutions and a fair comparison on
+the same original billion-nonzero problems with strict original-model 1e-9 checks.
+The twelve-cell COPT startup diagnostic is complete; never rerun its driver or
+attempted identities. All twelve responses/audit dispositions are retained. Four
+coupled endpoints certify; eight irregular/ill-scaled cases return interrupted
+without endpoints. Durable phase journals and owned COPT_Interrupt preserve
+progress and graceful deadline evidence. The installed COPT library and every
+project numerical source remain unchanged.
+
+The prespecified rule selects Scaling=0 with automatic Dualize. Coupled complete
+cost improves 43.737 to 33.530 seconds; retain the major ill-scaled convergence
+regression and every other configuration. This is an experimental choice, not a
+public default. Original billion failures remain intact: all enter COPT_SolveLp
+but never log GPU PDLP startup, with only 0.537 GiB sampled owned GPU use. Internal
+vendor attribution remains opaque; do not infer an import bug or GPU OOM.
+
+The user explicitly approved **570000 CPU / 68000 GPU seconds** under amendment
+79. Exact CPU phase caps are 10000/26000/72000/260000/200000/2000; GPU caps are
+12000 admission / 56000 development. Amendment 80 and the additive approval
+receipt retain the original recovery, both packing transfers and assessment
+extension. Operational CPU v30 / GPU v24 and plans v58–v61 bind the changed
+resource sources. All physical, idle, ownership, cleanup and certificate limits
+remain unchanged. Container-only; no reset, host escape or other-job signals.
+
+The seven new selected-configuration capacity cells and all audits are complete.
+Coupled certifies at 256 M and 512 M; irregular reaches optimization but has no
+endpoint at either deadline. Reporting v1 retains a duplicate-key failure and
+full 240 CPU-second charge; corrected `lp_billion_copt_fair_capacity.py` under
+readiness-v2 aggregates existing evidence only (amendment 82). Never invoke the
+old runner's `readiness` action or repeat completed capacity drivers.
+
+The first irregular pair is complete: project deadline 1271.867 solver seconds /
+1605.636 complete seconds, 4400 FP32 updates, no strict certificate; COPT returns
+interrupted normally after 1206.119 solver / 1244.889 complete seconds and 1560
+iterations, without an endpoint. COPT only reaches GPU PDLP near 1060 seconds of
+supervised activity. All ten project proofs are checked and 23.628 GiB of completed
+large irregular data is deleted. The wide project attempt has a missing response,
+recorded lost_coordinator_heartbeat, empty cleanup, no overrun and full 7200 CPU /
+1800 GPU charge; never repeat it. COPT-wide remains unsupported.
+
+Tall project returns certified after 1000 FP32 updates and 247.003 solver seconds.
+Its final independent proof accepts, but the original full audit is interrupted
+before its second proof and retains cleanup_empty=false, overrun=false and full
+11200 CPU seconds. The preceding trigger is overwritten and unknown. Five exact
+owned identities are independently absent; the additive cleanup disposition and
+operational plan v62 preserve the original receipt (amendment 83). The original
+execution driver is finished and must never be rerun. The fresh source-bound
+`tools/lp_billion_copt_fair_recovery.py execute` continuation may be active: inspect
+before launching anything. CPU v31, a supplemental missing-proof audit, a fresh
+five-minute idle window and GPU v25 precede the seven untouched frozen LP cells.
+The tall original cold-proof stopwatch is unavailable: retain its accepting proof
+and observed solver/process times, but exclude complete-cost timing and ratios.
+Never replace that lost timing or regrade the failed original audit. Supplemental
+and untouched full audits reserve 64 GiB host within the unchanged 128 GiB limit.
+
+The supplemental missing proof returns and matches the original assessment, but
+its reservation also fails finalization (lost_coordinator_heartbeat, empty cleanup,
+no overrun, full 2400 CPU seconds). Keep its raw proof and completed result, without
+claiming its supervision passed. Both distinct proofs now cover all three tall
+claims. Amendment 84 / operational plan v63 require CPU v32, a separately
+supervised read-only proof seal, the fresh idle window and still-never-attempted
+GPU v25. The v1 recovery driver is finished and must never be rerun. The active
+continuation is now `tools/lp_billion_copt_fair_recovery_v2.py execute`, bound to
+`copt-fair-untouched-tail-v2/plan.json`. It performs no repeated LP solve or proof
+recomputation, preserves both failed audit charges and the lost timing exclusion,
+and proceeds only through the same seven untouched cells after admission. All
+resource-critical sources and the original full freeze remain exact.
+
+CPU v32 passes 75 supervisor / 122 billion tests; the read-only tall proof seal
+passes with zero numerical recomputation. Idle window v1 is a passed observation
+reservation with a non-passing availability result: device use reaches 19.578 GiB
+while no task GPU job is active, then returns to baseline. It grants no GPU
+admission. The v2 recovery driver is finished. The active entry point is now
+`tools/lp_billion_copt_fair_resume.py`, with fresh `copt-fair-tail-idle-v2`
+observations followed by its `resume` action only after a sustained idle window.
+GPU v25 and the same seven LP cells remain untouched until that guard passes.
+Inspect active reservations before any launch; never rerun the ended drivers.
+
+The full six-family COPT/image-v11 roster is frozen with eleven admitted attempts
+and one unsupported COPT-wide slot. Its empirical forecasts are 138.266 GiB host /
+116.831 GiB device, exceeding unchanged limits. The runner is
+`tools/lp_billion_copt_fair_run.py`; use its complete source-bound manifests and
+budgeted stages, never direct unguarded jobs. The full execution driver may be
+active: inspect reservations/completion markers before launching anything. Never
+rerun attempted scientific identities or completed drivers.
+Every final and project intermediate assessment requires the unchanged independent
+checker. Missing/setup-only capacity paths remain unsupported. Full pairing,
+deadlines, the 10000-update safety cap and per-family data deletion follow the
+prospective protocol. Amendment 81 sets a common 1200-second solver window within
+the unchanged approved 1800-second outer reservations; freeze with
+`freeze_full --wall-seconds 1200`. The frozen full manifest is
+`copt-fair-1b-v1/freeze.json`; per-family regeneration, solves, strict audits and
+cleanup are in progress. Final report/verification modules are
+`lp_billion_copt_fair_report.py` and `lp_billion_copt_fair_verify.py`; final settled
+verification and a local commit remain pending.
+
+All small evidence remains under `/storage/ai-optimizer-billion-v1`, especially
+`copt-diagnostic-results-v1.json`, `copt-diagnostic-retrospective-v1.json`, and
+`copt-fair-reservation-proposal-v1.json`. Keep all failures/full charges and
+delete only completed, audited large content objects. No public publication or
+push; commit locally only. See the COPT diagnosis section in `docs/benchmarks/lp-billion.md`.
+
 # Current agent handoff: GPU assessment/control measured (2026-11-22)
 
 Opt-in image-v11 offloads exact-tree residuals, restart movement norms and original

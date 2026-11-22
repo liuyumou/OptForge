@@ -5,8 +5,8 @@ from lp_billion_common import BASE,ROOT,load,ref,resolve,require,CPU_CAPS,GPU_CA
 from lp_confirmation2_supervisor import same_process
 IDENTITY='copt-capacity-64m-v1-1-copt-gpu-pdlp'
 SHA='f4707c7a84827b2ad2953172afb69ead1f2b5845e1b1ec202a35085a43af9304'
-CPU='operational-cpu-v29'
-GPU='operational-gpu-v23'
+CPU='operational-cpu-v34'
+GPU='operational-gpu-v26'
 
 def validate_exception(path,receipt,approval,cleanup):
     require(Path(path).name==IDENTITY+'.settlement.json' and receipt['sha256']==SHA,'resource admission closed by unapproved overrun')
@@ -44,14 +44,22 @@ def revised_transfer_approval(approval, transfer, previous, cpu_caps=None, gpu_c
     for record in [transfer,previous]:resolve(record['protocol']);resolve(record['proposal'])
     return dict(approval,cpu_caps=cpu_caps,gpu_caps=gpu_caps)
 
-def assessment_approval(approval, extension, revised, previous):
+def assessment_approval(approval, extension, revised, previous, cpu_caps=None, gpu_caps=None):
+    cpu_caps=CPU_CAPS if cpu_caps is None else cpu_caps
+    gpu_caps=GPU_CAPS if gpu_caps is None else gpu_caps
     require(extension['status']=='explicitly_authorized' and extension['user_answer']=='Approve assessment/control allocation','explicit assessment/control authorization')
     require(extension['previous_approval']==ref(BASE/'approved-packing-transfer-v2.json') and extension['original_approval']==ref(BASE/'approved-recovery-v1.json'),'assessment approval chain')
     require(extension['old_cpu_caps']==revised['cpu_caps'] and extension['old_gpu_caps']==revised['gpu_caps'],'assessment previous caps')
     revised_transfer_approval(approval,revised,previous,extension['old_cpu_caps'],extension['old_gpu_caps'])
-    require(extension['cpu_caps']==CPU_CAPS and extension['gpu_caps']==GPU_CAPS,'assessment authorized exact phase caps')
-    require(sum(CPU_CAPS.values())==370000 and sum(GPU_CAPS.values())==44000,'assessment authorized totals')
+    require(extension['cpu_caps']==cpu_caps and extension['gpu_caps']==gpu_caps,'assessment authorized exact phase caps')
+    require(sum(cpu_caps.values())==370000 and sum(gpu_caps.values())==44000,'assessment authorized totals')
     resolve(extension['proposal']);resolve(extension['protocol'])
+    return dict(approval,cpu_caps=cpu_caps,gpu_caps=gpu_caps)
+
+def fair_approval(approval, extension, previous, revised, packing):
+    from lp_billion_copt_fair_allocation import validate, OLD_CPU, OLD_GPU
+    assessment_approval(approval,previous,revised,packing,OLD_CPU,OLD_GPU)
+    validate(extension,previous,CPU_CAPS,GPU_CAPS)
     return dict(approval,cpu_caps=CPU_CAPS,gpu_caps=GPU_CAPS)
 
 def cleared(path,gpu,phase,identity):
@@ -62,7 +70,9 @@ def cleared(path,gpu,phase,identity):
         previous=load(BASE/'approved-packing-transfer-v1.json')
         revised=BASE/'approved-packing-transfer-v2.json'
         extension=BASE/'approved-assessment-extension-v1.json'
-        approval=assessment_approval(approval,load(extension),load(revised),previous) if extension.exists() else (revised_transfer_approval(approval,load(revised),previous) if revised.exists() else transfer_approval(approval,previous))
+        fair=BASE/'approved-copt-fair-extension-v1.json'
+        if fair.exists():approval=fair_approval(approval,load(fair),load(extension),load(revised),previous)
+        else:approval=assessment_approval(approval,load(extension),load(revised),previous) if extension.exists() else (revised_transfer_approval(approval,load(revised),previous) if revised.exists() else transfer_approval(approval,previous))
     validate_exception(path,receipt,approval,cleanup);resolve(approval['protocol'])
     if not gpu and phase=='admission' and identity==CPU:return
     passed(CPU)
@@ -74,7 +84,7 @@ def cleared(path,gpu,phase,identity):
         return
     gate=passed(GPU)
     reservation=load(gate.with_name(GPU+'.reservation.json'))
-    names={'tools/lp_billion_common.py','tools/lp_billion_budget.py','tools/lp_billion_idle.py','tools/lp_billion_readmission.py','tools/lp_billion_disk_inventory.c','tools/lp_billion_source_store.py'}
+    names={'tools/lp_billion_common.py','tools/lp_billion_budget.py','tools/lp_billion_idle.py','tools/lp_billion_readmission.py','tools/lp_billion_disk_inventory.c','tools/lp_billion_source_store.py','tools/lp_billion_copt_fair_allocation.py','tools/lp_confirmation2_supervisor.py'}
     bound=set()
     for item in load(resolve(reservation['source_manifest']))['sources']:
         if item['original']['path'] in names:resolve(item['original']);bound.add(item['original']['path'])

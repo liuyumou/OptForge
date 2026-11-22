@@ -5,16 +5,17 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'tools'))
 import lp_billion_readmission as r
 import test_lp_billion_gpu_packing as packing
+from lp_billion_copt_fair_allocation import OLD_CPU,OLD_GPU
 
 class AssessmentAllocationContracts(unittest.TestCase):
     def fixture(self):
         old,revised,previous=packing.RevisedTransferContracts().fixture()
         extension=dict(status='explicitly_authorized',user_answer='Approve assessment/control allocation',
             previous_approval={'path':'approved-packing-transfer-v2.json'},original_approval={'path':'approved-recovery-v1.json'},
-            old_cpu_caps=revised['cpu_caps'],old_gpu_caps=revised['gpu_caps'],cpu_caps=r.CPU_CAPS,gpu_caps=r.GPU_CAPS,proposal={},protocol={})
+            old_cpu_caps=revised['cpu_caps'],old_gpu_caps=revised['gpu_caps'],cpu_caps=OLD_CPU,gpu_caps=OLD_GPU,proposal={},protocol={})
         return copy.deepcopy((old,extension,revised,previous))
     def apply(self,args):
-        with patch.object(r,'ref',side_effect=lambda p:{'path':p.name}),patch.object(r,'resolve'):
+        with patch.object(r,'ref',side_effect=lambda p:{'path':p.name}),patch.object(r,'resolve'),patch.object(r,'CPU_CAPS',OLD_CPU),patch.object(r,'GPU_CAPS',OLD_GPU):
             return r.assessment_approval(*args)
     def test_only_explicit_extension_admits_exact_caps(self):
         args=self.fixture();out=self.apply(args)

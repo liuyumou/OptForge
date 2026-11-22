@@ -1640,3 +1640,286 @@ Open settled allocation: 314228.458381384 CPU / 35557.827345976 GPU seconds with
 [every exclusive timing phase](lp-billion-gpu-control-phases.csv) retain source,
 resource, proof and memory bindings. Large evidence remains under
 `/storage/ai-optimizer-billion-v1/gpu-control-64m-v1` and `gpu-control-1b-v1`.
+
+## COPT startup diagnosis and fair comparison plan
+
+The three original billion-nonzero COPT attempts entered `COPT_SolveLp`, printed
+the original problem dimensions, and never logged GPU PDLP startup. Their sampled
+owned GPU peak was only 0.537 GiB, consistent with a CUDA context. This points to
+work before GPU optimization; the vendor's opaque internals prevent attributing
+the entire delay to a specific operation. The original missing responses,
+unknown tall interruption trigger, cleanup receipts and full charges remain.
+
+An isolated adapter now durably journals every measured phase, including entry
+and return from the vendor solve call. A bounded watcher invokes `COPT_Interrupt`
+only on its own live problem at the common deadline, and joins before teardown.
+Outer ownership and hard process supervision remain unchanged. Small GPU import,
+endpoint and interruption admission passes on 24 fixtures/configurations. Every
+available endpoint is independently checked on the unchanged original model at
+1e-9. Installed COPT 8.0.6 and all project numerical sources remain unchanged.
+
+Twelve prespecified, rotated 64 M diagnostics compare automatic scaling and
+dualization with either or both disabled. Presolve remains zero, MatrixTol zero,
+FeasTol/DualTol 1e-9 and PDLPTol 1e-12. Each receives 90 seconds after original
+input loading, including adapter preparation. All twelve processes return
+normally and receive their independent audit disposition: four coupled optima
+certify; eight irregular/ill-scaled cases return an interrupted status without an
+endpoint. A logged objective or residual is not a certificate.
+
+| COPT setting | Irregular first iteration (s) | Ill-scaled first iteration (s) | Timely strict optima |
+| --- | ---: | ---: | ---: |
+| Automatic scaling and dualization | 41.72 | 41.55 | 1/3 |
+| Scaling off | 27.84 | 27.81 | 1/3 |
+| Dualization off | 41.48 | 41.83 | 1/3 |
+| Both off | 27.34 | 28.22 | 1/3 |
+
+The coupled 64 M diagnostic costs separate the native solver timer, full solver
+process and external validation. All four coupled endpoints pass the unchanged
+independent original-model 1e-9 checker.
+
+| COPT setting | Native solver (s) | Solver process (s) | External final proof (s) | Process + final proof (s) |
+| --- | ---: | ---: | ---: | ---: |
+| Automatic scaling and dualization | 34.174 | 36.414 | 7.323 | 43.737 |
+| Scaling off | 23.887 | 26.149 | 7.382 | 33.530 |
+| Dualization off | 34.193 | 36.462 | 7.314 | 43.776 |
+| Both off | 24.103 | 26.349 | 7.295 | 33.645 |
+
+First-iteration times are vendor log values, rounded to 0.01 seconds, measured
+inside its solve call. They exclude adapter preparation and are not kernel time.
+Complete cost includes fresh input/process cost and cold independent final proof.
+Scaling off reduces coupled complete cost by 23.3% (1.304x). Disabling dualization
+alone gives no meaningful observed improvement. These are one-repetition startup
+diagnostics, not a comparison against our solver.
+
+The scaling tradeoff is substantial. On ill-scaled input, the vendor-reported
+relative primal infeasibility / gap at interruption changes from
+1.87e-6 / 3.57e-3 with automatic scaling to 4.45e-4 / 3.91e-1 with scaling off.
+The irregular case also remains unresolved. These opaque vendor diagnostics
+describe convergence only; they do not substitute for the original-model proof.
+The prespecified coverage-then-complete-cost rule selects Scaling=0 with automatic
+Dualize for the next experimental cohort, retaining these regressions. No public
+default changes and no general recommendation to disable scaling follow.
+
+The user explicitly approves 570000 CPU / 68000 GPU seconds under
+[amendment 79](../specifications/SPEC-0046-amendment-79.md), applied through
+[amendment 80](../specifications/SPEC-0046-amendment-80.md). All previous approvals,
+failures, physical limits, container restrictions and strict checks remain.
+Fresh CPU v30 / GPU v24 operational admission precedes selected-configuration
+64/256/512 M capacity checks. Missing or setup-only capacity paths cannot admit a
+billion slot. The full six-family, two-solver roster retains unsupported cases.
+
+### Separate solver timing and independent validation
+
+At the user's request, solver performance and independent validation are reported
+separately. Solver process time is the primary performance view; process plus
+external final proof is the additional independently verified end-to-end view.
+The original selection rule and recorded results remain unchanged. The separate
+process-time view does not reselect the COPT configuration or relax acceptance.
+
+| Reported cost | Scope | Saved field |
+| --- | --- | --- |
+| Solver process | Original input reading, hashing, validation and conversion; preparation; optimization; all built-in stopping/certificate checks; output, transport and teardown | `fresh_process_ns` |
+| External final proof | Separate frozen checker, including fresh original input loading, one final endpoint assessment and checker teardown | `final_check_ns` |
+| Process + final proof | Solver process plus external final proof; a certified total only when the endpoint passes and the solve meets its deadline | `complete_ns` |
+| External intermediate audit | Additional independent checks of saved intermediate endpoints, outside both headline timings | `offline_audit_ns` |
+
+Our solver's built-in original-model feasibility and dual/gap checks are part of
+solver process time. The independent final proof repeats endpoint validation in a
+separate process; it is a benchmark audit, not another solver iteration. Both
+solvers use the same external original-model 1e-9 acceptance check. Excluding its
+runtime from the primary performance column never excludes the check itself:
+only jointly timely, externally certified endpoints support either process-time
+or verified-total speed ratios. Bounded unsuccessful runs retain their costs but
+are not successful time-to-solution measurements. Native solver timers remain
+supplementary because input/conversion boundaries differ between adapters.
+
+For the same eligible pair, report `COPT fresh_process_ns / project
+fresh_process_ns` separately from `COPT complete_ns / project complete_ns`.
+Neither denominator includes the additional external intermediate audits.
+The two components sum exactly in integer nanoseconds; displayed rounded values
+can differ in the last decimal. No solver rerun is needed to show this split.
+
+### Interim comparison snapshot: 2026-11-22 04:24 UTC
+
+The selected-configuration capacity checks are complete. These COPT measurements
+are not matched comparisons against our solver. All unsuccessful cases remain
+visible; a dash for proof means no endpoint was available to check, rather than
+a zero-cost successful proof.
+
+| Original nonzeros | Family | COPT process (s) | External final proof (s) | Process + final proof (s) | Strict result |
+| --- | --- | ---: | ---: | ---: | --- |
+| 64 M | irregular | 93.105 | — | 93.105 | Interrupted; no endpoint |
+| 64 M | coupled_blocks | 26.149 | 7.382 | 33.530 | Timely certificate |
+| 64 M | ill_scaled | 93.140 | — | 93.140 | Interrupted; no endpoint |
+| 64 M | wide | 82.773 | 16.655 | 99.428 | Timely certificate |
+| 64 M | tall | 36.662 | 9.346 | 46.008 | Timely certificate |
+| 64 M | degenerate | 54.788 | 10.504 | 65.292 | Timely certificate |
+| 256 M | coupled_blocks | 116.820 | 30.521 | 147.341 | Timely certificate |
+| 256 M | irregular | 311.080 | — | 311.080 | Interrupted; no endpoint |
+| 512 M | coupled_blocks | 256.605 | 64.014 | 320.619 | Timely certificate |
+| 512 M | irregular | 622.749 | — | 622.749 | Interrupted; no endpoint |
+
+The frozen billion-scale cohort contains eleven admitted attempts and one
+unsupported COPT-wide slot. At this snapshot only our irregular solve has
+returned. Its independent final endpoint check rejects the endpoint; all ten
+final/intermediate assessments have been audited and the audit has settled with
+clean cleanup and no overrun. The matching COPT run has started, but no new
+billion-scale COPT response or completed pair is available.
+
+| Billion family / solver | Solver process (s) | External final proof (s) | Process + final proof (s) | Strict result |
+| --- | ---: | ---: | ---: | --- |
+| irregular / project | 1371.863 | 233.773 | 1605.636 | Deadline; final endpoint rejected |
+| irregular / COPT | Running | Pending | Pending | Pending |
+
+The project's additional external intermediate audits cost 1197.984 s, excluded
+from both process time and process plus final proof. The 1605.636 s total is the
+cost of this unsuccessful bounded run and its final validation, not a certified
+time to solution.
+
+The project irregular preparation is 35.347 s, and its native solver elapsed
+time is 1271.867 s under the requested 1200-second window. It accepts 4400 updates
+and uses the established FP32 fallback because no tiles qualify for FP4. The
+native elapsed time exceeds the requested window; neither the returned endpoint
+nor a partial audit is counted as a timely certificate. No billion-scale speed
+ratio is available. The remaining family slots are pending, except COPT-wide,
+whose empirical memory forecasts exceed the unchanged limits.
+
+This is a timestamped reporting view of existing evidence, not a new experiment
+or a replacement for the frozen full-cohort results. Small source records remain
+under `/storage/ai-optimizer-billion-v1`: `copt-diagnostic-results-v1.json`,
+`copt-fair-capacity-v1.json`, `copt-fair-1b-v1/freeze.json`, and
+`copt-fair-1b-v1-irregular-project/{response,result}.json`. The final rejection is
+also recorded in `copt-fair-1b-v1-irregular-project-full-audit/stdout.jsonl`;
+settled proof timings and full endpoint coverage are in that directory's
+`result.json`.
+
+
+### Historical interim results at the user-requested pause
+
+At this historical checkpoint, the user explicitly stopped monitoring and further
+evaluation. The owned monitor was canceled, its continuation exited, and no
+reservation remained active. GPU v25 and seven frozen LP attempts were untouched.
+The later explicit resumption and final outcomes are recorded below.
+The canceled observation retains empty cleanup, no overrun, and its full reserved
+charge. This is an incomplete comparison, not a final benchmark release.
+
+| Billion-nonzero problem / solver | Solver seconds | Fresh process seconds | Complete seconds | Outcome |
+| --- | ---: | ---: | ---: | --- |
+| irregular / project | 1271.867 | 1371.863 | 1605.636 | Deadline; final endpoint fails strict proof |
+| irregular / COPT | 1206.119 | 1244.889 | 1244.889 | Interrupted; no solution endpoint |
+| tall / project | 247.003 | 342.833 | unavailable | Strict final proof accepted; all three assessment claims independently covered |
+| wide / project | unavailable | unavailable | unavailable | Missing response after recorded lost_coordinator_heartbeat |
+| wide / COPT | not attempted | not attempted | not attempted | Capacity forecast exceeds the unchanged limits |
+
+Complete cost includes input, all solver work, output/teardown, and a cold
+independent final proof when an endpoint exists. The irregular project final
+proof costs 233.773 seconds; its additional offline intermediate audit costs
+1197.984 seconds. Tall's original audit loses its cold-proof timing during an
+interruption. The missing intermediate proof subsequently completes, but that
+reservation also fails supervision finalization. A separately supervised read-only
+seal validates both raw proofs, exact original bindings, and all three assessment
+claims without numerical recomputation. Both failures retain full charges. Tall's
+observed solver/process times remain valid observations; its complete-cost timing
+and certified-time ratio are excluded. Both returned project runs use FP32
+fallback, with zero accepted FP4 work.
+
+COPT reaches logged GPU PDLP iterations on the billion irregular model only after
+roughly 1060 seconds of supervised activity. It completes 1560 iterations before
+interruption; logged relative primal infeasibility is 1.83e-6 and relative gap is
+3.98e-5, and HasLpSol is false. Earlier billion attempts never logged GPU PDLP
+startup before ending. These observations establish substantial startup cost,
+without identifying undocumented vendor internals. A normal interrupted response
+without an endpoint is distinct from an earlier missing response file.
+
+Selected COPT configuration on coupled-block models produces independently
+accepted strict original-model 1e-9 solutions at the admitted smaller scales:
+
+| Original nonzeros | Solver seconds | Complete seconds |
+| --- | ---: | ---: |
+| 64 million | 23.887 | 33.530 |
+| 256 million | 109.228 | 147.341 |
+| 512 million | 241.402 | 320.619 |
+
+At 64 million, disabling scaling reduces coupled complete cost from 43.737 to
+33.530 seconds (23.3%), but worsens ill-scaled convergence in the retained pilots.
+No jointly certified billion-scale total-time comparison is established so far.
+The remaining attempts are tall COPT and both lanes for coupled_blocks,
+ill_scaled and degenerate. Strict certificates, original inputs, public defaults,
+physical limits and all failure charges remain unchanged.
+
+[Paused checkpoint and exact evidence bindings](lp-billion-copt-fair-paused.json)
+retain the current results. Settled allocation is 376690.813581624 CPU /
+42877.640387647 GPU seconds within 570000 / 68000, with no active reservation.
+Latest CPU admission passes 75 supervisor and 122 billion-harness tests. Final
+comparison verification has not run; no fresh complete replay or final result is
+claimed.
+
+### Billion-scale comparison
+
+All eleven admitted attempts are now retained, alongside the unsupported COPT-wide
+slot. COPT strictly certifies tall and coupled-block LPs. The project tall endpoint
+also passes strict independent checking, but its complete-cost timing is missing.
+No pair supports a certified complete-time ratio. The final resumption returns
+two COPT deadlines without endpoints and one interrupted project attempt without
+a response. Strict original-model 1e-9 acceptance is unchanged throughout.
+
+Historical cells retain their 1200-second native / 1800-second outer allowances. The first three resumed attempts use 2100/2700 seconds; the coupled project attempt rejects this unsupported native setting before solving. The final four untouched ill-scaled/degenerate cells use the sealed executable’s maximum supported 1800-second native allowance, with the enlarged 2700-second outer reserve and separate audits. Both lanes in these two pairs have equal limits. The tall pair spans different allowances and receives no time ratio. All six original billion-nonzero families and both lane slots remain visible. The project uses unchanged image-v11 with a 10000-update safety cap, control100/certificate500 and strict original-model 1e-9 acceptance. COPT 8.0.6 uses GPU PDLP, Presolve=0, Scaling=0, automatic Dualize, MatrixTol=0, FeasTol/DualTol=1e-9 and PDLPTol=1e-12.
+
+| Family | Project complete (s) | COPT complete (s) | Eligible timely strict project / COPT | COPT / project certified-time ratio |
+| --- | ---: | ---: | --- | ---: |
+| irregular | 1605.636 | 1244.889 | False / False | — |
+| wide | — | — | False / False | — |
+| tall | — | 1408.580 | False / True | — |
+| coupled_blocks | — | 857.414 | False / True | — |
+| ill_scaled | 2236.278 | 1886.239 | False / False | — |
+| degenerate | — | 1863.704 | False / False | — |
+
+Complete cost includes original input validation/conversion, all preparation, execution, output/teardown and the cold independent final proof. The CSV retains every exclusive phase. Additional independent intermediate audits are recorded separately. Native solver timers have different input/conversion boundaries, so their raw elapsed values are not used as end-to-end speedups. Only jointly timely, strictly certified pairs with equal requested allowances receive a solve-time ratio; other displayed costs are the costs of the recorded bounded outcomes.
+
+| Family / lane | Outcome | Strict endpoint accepted | Solver elapsed (s) | Fresh process (s) | Offline intermediate audit (s) | Actual FP4 work |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| irregular / fp4x2 | deadline | False | 1271.867 | 1371.863 | 1197.984 | 0.0% |
+| irregular / copt-gpu-pdlp | interrupted | no endpoint | 1206.119 | 1244.889 | 0.000 | — |
+| wide / copt-gpu-pdlp | unsupported_capacity | — | — | — | — | — |
+| wide / fp4x2 | missing response; recorded lost_coordinator_heartbeat | — | — | — | — | — |
+| tall / fp4x2 | certified | True | 247.003 | 342.833 | — | 0.0% |
+| tall / copt-gpu-pdlp | vendor optimal | True | 1042.017 | 1155.914 | 0.000 | — |
+| coupled_blocks / copt-gpu-pdlp | vendor optimal | True | 649.036 | 679.335 | 0.000 | — |
+| coupled_blocks / fp4x2 | missing response; recorded command_failed: invalid solver settings | — | — | — | — | — |
+| ill_scaled / fp4x2 | deadline | False | 1875.828 | 1977.391 | 1981.486 | 0.0% |
+| ill_scaled / copt-gpu-pdlp | interrupted | no endpoint | 1807.569 | 1886.239 | 0.000 | — |
+| degenerate / copt-gpu-pdlp | interrupted | no endpoint | 1805.864 | 1863.704 | 0.000 | — |
+| degenerate / fp4x2 | missing response; recorded cleanup_incomplete | — | — | — | — | — |
+
+The tall / fp4x2 endpoint passes strict independent verification, but its complete-cost timing is excluded: interrupted original audit did not retain cold final-proof timing. The retained completed proof and supplemental missing-proof check cover every assessment. Its observed solver and fresh-process times remain above; no replacement cold-final timing or certified-time ratio is reported. Supplemental verification took 236.160 seconds; the original failure retains its full charge.
+
+The supplemental numerical check also completed before a refused supervision receipt. A separately supervised read-only seal validates both retained proof outputs and their exact bindings. Both failed audit charges remain; the seal performs no LP update or numerical proof recomputation.
+
+Every unavailable response and capacity refusal remains in the compact evidence. A recorded supervision stop identifies the retained receipt; it does not establish the underlying numerical or system cause. Missing responses have no eligible solve-time measurement and are never retried. The project requests FP4; ineligible tiles use the established FP32 fallback, and actual accepted FP4 work is reported above. The vendor soft MemLimit stays at its admitted 48000 MB setting, alongside the common physical 128 GiB host / 80 GiB owned GPU limits. Empirical capacity forecasts are not hard vendor enclosures. Construction witnesses and warm starts are never supplied. At most one rotated pair per family and unflushed caches limit timing inference; this does not establish broad FP4 or general COPT superiority.
+
+[Compact diagnosis, capacity and full results](lp-billion-copt-fair-results.json) and [exclusive complete-cost phases](lp-billion-copt-fair-phases.csv) retain all outcomes. Completed large input/endpoint chunks are deleted after dependent audits; raw replay requires regeneration. All small results, phase journals, exact sources and failure charges remain.
+
+The untouched ill-scaled and degenerate COPT cells use a smaller 120 GiB per-job host RSS stop, with the unchanged additional 4 GiB physical headroom and global 128 GiB cap. This exceeds their already padded empirical forecasts of about 110.1 GiB by almost 10 GiB. The native MemLimit and all numerical settings remain unchanged; the forecast is not a hard vendor enclosure. Audited ill-scaled project endpoint objects were deleted before the COPT lane while preserving all original model objects and small proof evidence.
+
+Degenerate input generation was interrupted before either LP started. Its original cleanup-incomplete receipt and full 3600 CPU-second charge remain. A separate check finds all four recorded owned identities absent; additional CPU/GPU admission and a fresh sustained idle/RAM window precede recovery under a new input identity. Existing chunks and the regenerated model are checked against the original hashes. Neither scientific cell is repeated, and no resource or certificate guard is relaxed.
+
+The final degenerate project attempt stops after 1367.952 supervised active seconds with no response and a cleanup-incomplete receipt. Its preceding stop trigger is unavailable. All four recorded owned identities are independently absent afterward. The full 10800 CPU / 2700 GPU-second charge remains; no complete solve timing or certificate is assigned, and the attempt is never repeated. The original audit records a missing response with zero endpoint claims. All admitted LP identities are now attempted; missing or uncertified outcomes remain part of the comparison. Remaining obsolete large objects, including partial failed-attempt data, are removed after the full audit dispositions, with a retained size inventory.
+
+The final cleanup's first check incorrectly required the original tall audit to
+pass, stopping before deletion and retaining its full 480 CPU-second charge.
+The corrected cleanup validates the already admitted tall proof seal and all
+other audit dispositions. This resumption releases 47.009 GiB of obsolete large
+data while retaining small results, proofs, source bindings and failures.
+
+The final timing table uses complete process boundaries: ill-scaled COPT costs
+1886.239276306 seconds and degenerate COPT 1863.704107960 seconds. Earlier progress
+notes and amendment 90 quote adapter-profile totals (1885.924168562 and
+1863.368695828 seconds); those exclude process startup and response transport and
+must not be treated as complete costs.
+
+Final verification passes 136 harness tests and 387 documentation pages, resolves
+637 retained evidence references and confirms all 306 numerical bindings. All
+1995 recorded owned identities are gone. The [settled checkpoint](lp-billion-copt-fair-checkpoint.json)
+records 459659.784173452 CPU / 55943.714704332 GPU seconds within the approved
+570000 / 68000 limits, with no active reservation or monitor. All 63 failed
+reservations retain their full charges. No fresh portable raw-data replay is claimed.

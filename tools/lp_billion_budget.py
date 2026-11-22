@@ -152,6 +152,8 @@ def run(identity, phase, seconds, gpu, command, host_gib=16, device_gib=0, disk_
                 slots=4, declared_memory_bytes=(host_gib << 30)-(256 << 20),
                 rss_stop_bytes=host_gib << 30, address_space_bytes=0, sources=[],
                 bootstrap=False, show_log=False, max_gap_ns=MAX_GAP_NS, billion_gpu=gpu,
+                observed_finalization=True, receipt_finalization_seconds=min(10, max(1, seconds // 10)),
+                publication_wall_seconds=min(30, max(2, seconds // 4)),
                 command=([sys.executable, '-B', str(ROOT/'tools/lp_mixed2_reuse_place.py'), *command]
                          if gpu or host_gib > 16 else command))
             request_path = str(prefix)+'.request.json'
