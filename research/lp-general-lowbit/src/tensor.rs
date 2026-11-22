@@ -119,6 +119,9 @@ impl Packed {
         Self::build(op, c, false)
     }
     fn build(op: &Operator, c: &Config, enclose: bool) -> Result<Self> {
+        Self::build_scheduled(op, c, enclose, true)
+    }
+    fn build_scheduled(op: &Operator, c: &Config, enclose: bool, parallel: bool) -> Result<Self> {
         c.validate()?;
         // Maps contain only occupied sparse tiles. Quantized tiles are allocated
         // only after passing the density test; original coefficients stay authoritative.
@@ -167,16 +170,38 @@ impl Packed {
                 }
             }
             for (col, values) in eligible.into_iter().zip(values) {
-                let (codes, ex, _) = encode(&values, c.components);
-                if ex.iter().any(|e| !(-48..=48).contains(e)) {
-                    return Err("tensor matrix exponent domain".into());
-                }
-                canonical.insert((first / 32, col), (values, codes, ex));
+                canonical.insert((first / 32, col), (values, Vec::new(), Vec::new()));
                 slots[col] = usize::MAX;
             }
             for col in touched {
                 counts[col] = 0;
             }
+        }
+        // Quantization is independent per canonical tile. Retain tile order,
+        // coefficient order and identical rounding in both orientations.
+        let mut tiles: Vec<_> = canonical.values_mut().collect();
+        let workers = if parallel && !enclose && tiles.len() >= 128 {
+            4
+        } else {
+            1
+        };
+        let chunk = tiles.len().div_ceil(workers).max(1);
+        std::thread::scope(|scope| {
+            for batch in tiles.chunks_mut(chunk) {
+                scope.spawn(move || {
+                    for (values, codes, ex) in batch.iter_mut().map(|t| &mut **t) {
+                        let (encoded, powers, _) = encode(values, c.components);
+                        *codes = encoded;
+                        *ex = powers;
+                    }
+                });
+            }
+        });
+        if canonical
+            .values()
+            .any(|(_, _, ex)| ex.iter().any(|e| !(-48..=48).contains(e)))
+        {
+            return Err("tensor matrix exponent domain".into());
         }
         let mut column_covered = vec![false; op.columns.original.len()];
         let mut cursors = op.columns.offsets[..op.columns.offsets.len() - 1].to_vec();
@@ -314,9 +339,20 @@ impl Packed {
             }
             t
         };
+        let (rows, columns) = if parallel && !enclose && canonical.len() >= 128 {
+            std::thread::scope(|scope| {
+                let columns = scope.spawn(|| make(true));
+                (
+                    make(false),
+                    columns.join().expect("transpose packing worker"),
+                )
+            })
+        } else {
+            (make(false), make(true))
+        };
         Ok(Self {
-            rows: make(false),
-            columns: make(true),
+            rows,
+            columns,
             components: c.components,
             tile_count: canonical.len(),
             compact_fragments: c.compact_fragments,
@@ -342,6 +378,47 @@ impl Packed {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn parallel_proposal_packing_preserves_both_orientations_and_tails() {
+        let n = 385usize;
+        let make = |transpose| Orientation {
+            offsets: (0..=n).map(|i| (i * n) as u32).collect(),
+            indices: (0..n).flat_map(|_| 0..n as u32).collect(),
+            original: (0..n)
+                .flat_map(|i| {
+                    (0..n).map(move |j| {
+                        let (r, c) = if transpose { (j, i) } else { (i, j) };
+                        ((r * 23 + c * 17) % 103) as f64 / 16. - 3.
+                    })
+                })
+                .collect(),
+            ids: Vec::new(),
+        };
+        let op = Operator {
+            prepared: crate::operator::Format::Native,
+            rows: make(false),
+            columns: make(true),
+            codes: Vec::new(),
+            exponents: Vec::new(),
+            fp32: Vec::new(),
+        };
+        for components in 1..=4 {
+            for compact_fragments in [false, true] {
+                let c = Config {
+                    components,
+                    compact_fragments,
+                    ..Config::default()
+                };
+                let a = Packed::build_scheduled(&op, &c, false, false).unwrap();
+                let b = Packed::proposal(&op, &c).unwrap();
+                assert!(a.tile_count >= 128);
+                assert_eq!(
+                    serde_json::to_value(a).unwrap(),
+                    serde_json::to_value(b).unwrap()
+                );
+            }
+        }
+    }
     #[test]
     fn quantization_preserves_normal_e2m1_nearest_even_boundaries() {
         let reference = |v: f64| {

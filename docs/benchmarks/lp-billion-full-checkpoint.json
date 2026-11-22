@@ -1,0 +1,826 @@
+{
+  "active_reservations": 0,
+  "all_cohort_owned_identities_gone": true,
+  "approval": {
+    "bytes": 1223,
+    "namespace": "evidence",
+    "path": "approved-recovery-v1.json",
+    "sha256": "b948e10f0663aa8dc6be5d9fac847e5e815d90a7d0a509ec52bf3ed26f31f32d"
+  },
+  "checkpoint": {
+    "bytes": 26028,
+    "namespace": "evidence",
+    "path": "full-billion-settled-checkpoint-v1.json",
+    "sha256": "d3c9fa36289dac0cc36057d8918dcc048b9b732a44b8b66d969c86ca897db878"
+  },
+  "confirmation": false,
+  "cpu_by_phase_ns": {
+    "admission": 42706951807516,
+    "cleanup": 137152067816,
+    "development": 110528185587716,
+    "implementation": 1152143765960,
+    "native": 13583482065588,
+    "reporting": 67221343862736
+  },
+  "cpu_caps": {
+    "admission": 45000,
+    "cleanup": 1000,
+    "development": 148000,
+    "implementation": 2000,
+    "native": 14000,
+    "reporting": 110000
+  },
+  "cpu_ns": 235329259157332,
+  "delivery": {
+    "bytes": 709,
+    "namespace": "evidence",
+    "path": "full-billion-delivery-v1.json",
+    "sha256": "f092c0aa44468cc18ae600f57751e24ca0aa1d601b22c4d9a4f7b59b5c14828a"
+  },
+  "documentation_pages": 347,
+  "failed_cpu_ns": 61060620150944,
+  "failed_gpu_ns": 6520000000000,
+  "failed_reservations": 34,
+  "failures": [
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 960000000000,
+      "gpu": true,
+      "gpu_ns": 240000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 9562,
+        "namespace": "evidence",
+        "path": "resources/array-memcheck-v3.resource.json",
+        "sha256": "89940f493a3b6b43fe8c1d938e6c4253ee5fe90e5b0bb18e25b6a886c08e9e24"
+      },
+      "settlement": {
+        "bytes": 369,
+        "namespace": "evidence",
+        "path": "resources/array-memcheck-v3.settlement.json",
+        "sha256": "ecd8eb86929d253107e33bd8cbd6bca4d83b7831ccbaa52e0169ac0bb8011ce9"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 2400000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 24993,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v2.resource.json",
+        "sha256": "1b38b87656e80697758e34c406af2fd5b0aa017af7139119d6e78b7489e6b145"
+      },
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v2.settlement.json",
+        "sha256": "205c2fb5c6f0a2e8b34288492b3a7a02677ec25a5f7124243ab4278e2f370052"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 13644,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v3.resource.json",
+        "sha256": "748b98c19e9377ca7d62b0d630bb08f8c8295f1f8a0b186a1eba651f91a99032"
+      },
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v3.settlement.json",
+        "sha256": "e12a62366eba77fb049b6d5d1e5fafb37af71100118a08748b2e4e9de6356176"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 960000000000,
+      "gpu": true,
+      "gpu_ns": 240000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 21741,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v3.resource.json",
+        "sha256": "1448cc1f13cbdc566b4dda9b70ed6c06505e78400547dabbda6827f5fe62b4be"
+      },
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v3.settlement.json",
+        "sha256": "625930a3ff648974a37f895496d427451742b90111b34a7755fdef447ff7e698"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 960000000000,
+      "gpu": true,
+      "gpu_ns": 240000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 9690,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v4.resource.json",
+        "sha256": "02c13ac25fec692550f693041b5543e28568cc62933a0fdf028989e03cb779f9"
+      },
+      "settlement": {
+        "bytes": 370,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v4.settlement.json",
+        "sha256": "930e9f9324f605b13d2517f1cf0564f050b3334a8a3854567f6016674b5e0caa"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 960000000000,
+      "gpu": true,
+      "gpu_ns": 240000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 22184,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v5.resource.json",
+        "sha256": "ff478907afb704af2d20c25eecea1ae8d81ace6eddb9bdd4e86490c616a4cabe"
+      },
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v5.settlement.json",
+        "sha256": "7300125cdcf6814d717fad29eb02a9599cb30e0ae333959a3bad1b22de0fb9d3"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 12000000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "native",
+      "resource": {
+        "bytes": 297470,
+        "namespace": "evidence",
+        "path": "resources/billion-native-v1.resource.json",
+        "sha256": "0964f5771d2be6ea42578f63920fe97457072e625ebbe33648a7927044cb96a9"
+      },
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/billion-native-v1.settlement.json",
+        "sha256": "0127666f55f95f185dea87cef532d5ef0da3a5191b0fcfce1e3790907ec2f08c"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 960000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "development",
+      "resource": {
+        "bytes": 9303,
+        "namespace": "evidence",
+        "path": "resources/bounded-memory-cpu-v1-64m-3-candidate.resource.json",
+        "sha256": "4e074e18a0bcb5b0a80efc67d56aaf3afe67175b5519a7fee26f738a07f99f1f"
+      },
+      "settlement": {
+        "bytes": 381,
+        "namespace": "evidence",
+        "path": "resources/bounded-memory-cpu-v1-64m-3-candidate.settlement.json",
+        "sha256": "05cc09538dd1a0a4d2695703f88a882363eb8ad4d97c79646aa7505734bb9af0"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 480000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 3917,
+        "namespace": "evidence",
+        "path": "resources/complete-harness-v1.resource.json",
+        "sha256": "49c8b0ae5e219aef833ac0d5e6aa344c3d06f9ed81633f764b847928503208eb"
+      },
+      "settlement": {
+        "bytes": 361,
+        "namespace": "evidence",
+        "path": "resources/complete-harness-v1.settlement.json",
+        "sha256": "4b3ef755809dfbefdfc72e3869f1504ea893d59d6c6d7d33e19fc42c81c862a4"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 960000000000,
+      "gpu": true,
+      "gpu_ns": 240000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 38896,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-256m-v2-0-copt-gpu-pdlp.resource.json",
+        "sha256": "5503f54f78ec88626a8cc7d43658d31a3d1940d9a9e6bf4d62d611a9065f5c47"
+      },
+      "settlement": {
+        "bytes": 390,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-256m-v2-0-copt-gpu-pdlp.settlement.json",
+        "sha256": "a1a77fa88ea105cda38707363879984484429317461e1f3a8553497a875dceeb"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 960000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 38897,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-256m-v2-1-copt-cpu-auto.resource.json",
+        "sha256": "fcd0f1295ff2df7a018a1cfe1e5f92a7159494ce505dcced3d21b92b6dec1b8d"
+      },
+      "settlement": {
+        "bytes": 380,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-256m-v2-1-copt-cpu-auto.settlement.json",
+        "sha256": "b44fae0758f470a51b78d9938c3ada2c45775eb34bdb57cb46ace8d72fdc34df"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 960000000000,
+      "gpu": true,
+      "gpu_ns": 240000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 38896,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-256m-v2-1-copt-gpu-pdlp.resource.json",
+        "sha256": "69f1815139993201a766f4d0bcde785b3b2f9592d8bbc354887c7c9f51250fe8"
+      },
+      "settlement": {
+        "bytes": 390,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-256m-v2-1-copt-gpu-pdlp.settlement.json",
+        "sha256": "4f64d702e196a1d72658e9d2980d21edf2981c5ffe36b8431aa5466592d53e00"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 2400000000000,
+      "gpu": true,
+      "gpu_ns": 600000000000,
+      "overrun": false,
+      "phase": "development",
+      "resource": {
+        "bytes": 95615,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-512m-v2-1-copt-gpu-pdlp.resource.json",
+        "sha256": "ddc2422eab64fdeae9cee5ce544da34b0e6a729bc0f653d6090935e5c3775388"
+      },
+      "settlement": {
+        "bytes": 393,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-512m-v2-1-copt-gpu-pdlp.settlement.json",
+        "sha256": "0941f3fd88f17add44a0ac46a70af32c23be1b5d95e30a2d4f77ab0fbe29dd54"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": false,
+      "cpu_ns": 400620150944,
+      "gpu": true,
+      "gpu_ns": 100000000000,
+      "overrun": true,
+      "phase": "admission",
+      "resource": {
+        "bytes": 10631,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-64m-v1-1-copt-gpu-pdlp.resource.json",
+        "sha256": "c41c2d8ea191526c941239490fc4ae953d9cb440600fd374f7f7132cd2004463"
+      },
+      "settlement": {
+        "bytes": 389,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-64m-v1-1-copt-gpu-pdlp.settlement.json",
+        "sha256": "f4707c7a84827b2ad2953172afb69ead1f2b5845e1b1ec202a35085a43af9304"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 960000000000,
+      "gpu": true,
+      "gpu_ns": 240000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 17176,
+        "namespace": "evidence",
+        "path": "resources/copt-full-admission-v1.resource.json",
+        "sha256": "103023f6063c7222b3cd595431ef639568d6da7c2b1fde1e49dd5a757a583c79"
+      },
+      "settlement": {
+        "bytes": 375,
+        "namespace": "evidence",
+        "path": "resources/copt-full-admission-v1.settlement.json",
+        "sha256": "6394e512316e3a2e62630e8b4dbeb2b5a45f9c50b02f502d2e39928f941bfc66"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 480000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 4897,
+        "namespace": "evidence",
+        "path": "resources/copt-native-cpu-v1.resource.json",
+        "sha256": "62302e0eb186f0cf142d4dc2fd0655e03a7c7cebf6cf09c6acc90833575a2454"
+      },
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/copt-native-cpu-v1.settlement.json",
+        "sha256": "0505480b80614b56e9be5df3be5f34d87c362dc9def98d99de9560b6bd1b7696"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": false,
+      "cpu_ns": 3600000000000,
+      "gpu": true,
+      "gpu_ns": 900000000000,
+      "overrun": false,
+      "phase": "development",
+      "resource": {
+        "bytes": 44174,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-1b-v1-2.resource.json",
+        "sha256": "092cb3e3b91f957d965368edfb39f3db7f0e806a76cf534de830ab2055198929"
+      },
+      "settlement": {
+        "bytes": 380,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-1b-v1-2.settlement.json",
+        "sha256": "a2f8bb67023fcec4c63e4cbda0b9e84007b4d38e1f47c4b742196799e9a6aba0"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 3600000000000,
+      "gpu": true,
+      "gpu_ns": 900000000000,
+      "overrun": false,
+      "phase": "development",
+      "resource": {
+        "bytes": 130339,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-1b-v1-4.resource.json",
+        "sha256": "534b9483dc1a40301272cec30d9ac0b755f65da8e048199ac9357547ab4cfffc"
+      },
+      "settlement": {
+        "bytes": 380,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-1b-v1-4.settlement.json",
+        "sha256": "16e7c978bed627e2bb9aa26ef7cea01dd8a3c759f718d1544db9af77cc4c4e56"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 3600000000000,
+      "gpu": true,
+      "gpu_ns": 900000000000,
+      "overrun": false,
+      "phase": "development",
+      "resource": {
+        "bytes": 130079,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-1b-v1-5.resource.json",
+        "sha256": "d1d39e77e9530259ddb1262ba4ebd855c89a4f451bd6ddaaf9830b1c623c4333"
+      },
+      "settlement": {
+        "bytes": 380,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-1b-v1-5.settlement.json",
+        "sha256": "4cb7b53e8b5f6df21b71f5a4512c1c69786bd5fbd65af573897c510065f142bf"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 2400000000000,
+      "gpu": true,
+      "gpu_ns": 600000000000,
+      "overrun": false,
+      "phase": "development",
+      "resource": {
+        "bytes": 88276,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-512m-v1-1.resource.json",
+        "sha256": "5736587f0a1baf3dce42cb1289491eb9718a027aa6f78279871dd458a86d48fd"
+      },
+      "settlement": {
+        "bytes": 381,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-512m-v1-1.settlement.json",
+        "sha256": "34e832321c185f058c5f9d1b937833bb26f40e17b108ac9b94157590312f37b8"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1920000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 25493,
+        "namespace": "evidence",
+        "path": "resources/idle-confirmation-v5.resource.json",
+        "sha256": "2819596cd7dfc34060745609e60ca7f51dce1303096c2bf3cc72cc36417e3524"
+      },
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/idle-confirmation-v5.settlement.json",
+        "sha256": "9102a6c8df1aabf26107870bdf5753da670ae4b65432eab39bbad978296680bb"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": false,
+      "cpu_ns": 1920000000000,
+      "gpu": true,
+      "gpu_ns": 480000000000,
+      "overrun": false,
+      "phase": "development",
+      "resource": {
+        "bytes": 9288,
+        "namespace": "evidence",
+        "path": "resources/ladder-128m-v2-0-fp4x2.resource.json",
+        "sha256": "63a644367827a0e7ab1a5ff56d4370ff2fb8271cd05a819936ad61e260a5e6c4"
+      },
+      "settlement": {
+        "bytes": 378,
+        "namespace": "evidence",
+        "path": "resources/ladder-128m-v2-0-fp4x2.settlement.json",
+        "sha256": "40a7b6502c76f005d5d72b10c3d46eb5161e7ea2037ba4cef99349f3e335b827"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 480000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "implementation",
+      "resource": {
+        "bytes": 6736,
+        "namespace": "evidence",
+        "path": "resources/memory-compile-v1.resource.json",
+        "sha256": "c2c9b9c2af51077992703ca07486736e5c3fcdd35e996dfe0aea339852da24f3"
+      },
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/memory-compile-v1.settlement.json",
+        "sha256": "fc0188eec852de43532f12504369d3a844d44551fc8410ba5f5966301b26b9f0"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 720000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 23807,
+        "namespace": "evidence",
+        "path": "resources/operational-cpu-v19.resource.json",
+        "sha256": "c6d0fbd99dd7c1a8b3d2abaf0773ce6d04ef1835d8e94992f3f5aecdf0f35f9c"
+      },
+      "settlement": {
+        "bytes": 362,
+        "namespace": "evidence",
+        "path": "resources/operational-cpu-v19.settlement.json",
+        "sha256": "0ba4de6f519e4f12c9582180313e33954ac442b86e55a92ce659e9061a5ca570"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 480000000000,
+      "gpu": true,
+      "gpu_ns": 120000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 5689,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v11.resource.json",
+        "sha256": "9094c4a57cf9587cde7dea12473f99b8031718fd0009f7f1e87590b0ec3896d4"
+      },
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v11.settlement.json",
+        "sha256": "6d38099ca42ca2e9f2ba0f81c9b5dd2d1636750ae8ef3dad15b8ab55663c90a4"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 480000000000,
+      "gpu": true,
+      "gpu_ns": 120000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 5861,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v12.resource.json",
+        "sha256": "93be03e3c0a671bfcbabccc1e4053651f2c0e9df98c4dd58785659148c8ec8c6"
+      },
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v12.settlement.json",
+        "sha256": "ce9da59a84693cd437400cd37de3b64aecd69dbe6f8b2bb80b89537b0ca5c3b4"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 480000000000,
+      "gpu": true,
+      "gpu_ns": 120000000000,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 41709,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v7.resource.json",
+        "sha256": "57d938e02aac3f3ba59407959ec976c2326a3da30e0dff9c0822238697d27b6d"
+      },
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v7.settlement.json",
+        "sha256": "3ee018843028f43961c41240a98740568096f693a94e2d2aee39f5a8f49c9598"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": false,
+      "cpu_ns": 1200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 6116,
+        "namespace": "evidence",
+        "path": "resources/packing-quality-v3.resource.json",
+        "sha256": "ac3cd8d4cda3de4427629a733c7e592edb61d63c7558604ac4d8c23d7f6e8d61"
+      },
+      "settlement": {
+        "bytes": 362,
+        "namespace": "evidence",
+        "path": "resources/packing-quality-v3.settlement.json",
+        "sha256": "fd1ddc9277d7be814ab5d39171c4ec93fd13ca1f6beca12e21d6d527a4c7a9cc"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 6391,
+        "namespace": "evidence",
+        "path": "resources/packing-quality-v4.resource.json",
+        "sha256": "b7b8f3226eeb049f277606560e5431d1c51dbf0edb720b36a8f16c7893938758"
+      },
+      "settlement": {
+        "bytes": 361,
+        "namespace": "evidence",
+        "path": "resources/packing-quality-v4.settlement.json",
+        "sha256": "4e0ff304bc2b76095e467aac5205b34d1562188503fed95cdef7d982f3a78e53"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 7200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 166320,
+        "namespace": "evidence",
+        "path": "resources/portable-gpu-preparation-v1.resource.json",
+        "sha256": "453de61cea04a0aed90edb87ac90bfdad2492bb11e2b7f9ad46b4c2ad994ce8f"
+      },
+      "settlement": {
+        "bytes": 372,
+        "namespace": "evidence",
+        "path": "resources/portable-gpu-preparation-v1.settlement.json",
+        "sha256": "57ea2b0d4f787cbea5d5f3cd9b2a2c97a637aad22310b4a50d514c4904d2de9d"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 22392,
+        "namespace": "evidence",
+        "path": "resources/prepare-build-check-v1.resource.json",
+        "sha256": "147bb2ce37d637ae467a97d588d44a2224ae707b04e5be43ab2eff148811fd35"
+      },
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/prepare-build-check-v1.settlement.json",
+        "sha256": "2120a5e275247293dcc63998cb60f36f77bc6e3a2bba2b43ae906ecab891d33d"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 180000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 3887,
+        "namespace": "evidence",
+        "path": "resources/timing-copt-contracts-v1.resource.json",
+        "sha256": "e3d313228127e737361ddd28cc0d7b12acbbc4563e7359053ae11a22328b0243"
+      },
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/timing-copt-contracts-v1.settlement.json",
+        "sha256": "39146e25f31b36a7c0d6bf60f11c027ca93a32f596433a8426ae805a70233117"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 7464,
+        "namespace": "evidence",
+        "path": "resources/timing-quality-v1.resource.json",
+        "sha256": "55a9a12a2cc51947f752966960dd3cbe9152ee560f93751b4b42f4364a8697fe"
+      },
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/timing-quality-v1.settlement.json",
+        "sha256": "12054e8e17937f4310e3541f947c5f570c2a108cd8a68d4233a1c57dacc476a5"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "resource": {
+        "bytes": 6437,
+        "namespace": "evidence",
+        "path": "resources/timing-quality-v2.resource.json",
+        "sha256": "15a54a9cb2bb6eb11ad2df4d953d0a6f45a12acef27f787ee61914808c0ee1bd"
+      },
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/timing-quality-v2.settlement.json",
+        "sha256": "27f27e0e025cacbe19658b086b2c80324d97adbf6ae1e6767ecaa975a80e56f3"
+      },
+      "status": "refused"
+    }
+  ],
+  "final_device_observation": {
+    "bytes": 225,
+    "namespace": "evidence",
+    "path": "full-billion-verification-v1/device-sample.json",
+    "sha256": "9105371ebb1b5c87cb96cbe3c60ec55b117407c4ce32819c0a52eda03f2e5c5f"
+  },
+  "fresh_full_portable_replay": false,
+  "full_billion_attempts": 21,
+  "full_billion_responses": 18,
+  "general_allocation_unchanged": {
+    "cpu_ns": 222683436386676,
+    "gpu_ns": 29019968674596
+  },
+  "gpu_by_phase_ns": {
+    "admission": 5381534104301,
+    "development": 21390365318001
+  },
+  "gpu_caps": {
+    "admission": 9000,
+    "development": 26000
+  },
+  "gpu_ns": 26771899422302,
+  "harness_tests": 88,
+  "independent_checks": 35,
+  "numerical_bindings": 300,
+  "phase_csv": {
+    "bytes": 11294,
+    "namespace": "repo",
+    "path": "docs/benchmarks/lp-billion-full-phases.csv",
+    "sha256": "14c40db8de6055e4091d5dbb3dfe9b1c6ac7b5e13116bdae559014b8bcc25bdf"
+  },
+  "previous_checkpoint": {
+    "bytes": 89110,
+    "namespace": "evidence",
+    "path": "complete-device-checkpoint-v1.json",
+    "sha256": "5eb004fcea3fa3d02eeca4cc5ac0c2b321d98c15a64196329357add932bd01ff"
+  },
+  "process_identities_checked": 240,
+  "public_adoption": false,
+  "recorded_assessment_claims": 51,
+  "report": {
+    "bytes": 195272,
+    "namespace": "repo",
+    "path": "docs/benchmarks/lp-billion-full-results.json",
+    "sha256": "39b413927105c872c64e7bc893551a7f589493e5b8779261019c8378af2fbb34"
+  },
+  "source": {
+    "bytes": 4121,
+    "namespace": "repo",
+    "path": "tools/lp_billion_full_checkpoint.py",
+    "sha256": "2cc1d35355de57a58e8b167ec3b72f61d546315f73e69803ff9b038cc40a14e2"
+  },
+  "status": "open_settled",
+  "strict_certificates": 3,
+  "verification": {
+    "bytes": 78617,
+    "namespace": "evidence",
+    "path": "full-billion-verification-v1/result.json",
+    "sha256": "924f0c4e462d54ae96d4a0cd59d1b696b0a2e818756b19db09789bd3f7cea991"
+  },
+  "verification_settlement": {
+    "bytes": 368,
+    "namespace": "evidence",
+    "path": "resources/full-billion-verification-v1.settlement.json",
+    "sha256": "09cea69ff8e8f522d8e74db34323c9434522c5d5326a9cee8a67d66e32e669ae"
+  }
+}

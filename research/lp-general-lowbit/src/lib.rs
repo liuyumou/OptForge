@@ -11,7 +11,6 @@ pub mod control;
 pub mod device;
 pub mod engine;
 #[allow(dead_code)]
-#[path = "../../lp-mixed2-checker2/src/exact_math.rs"]
 mod exact_math;
 pub mod gpu;
 pub mod host;
@@ -22,7 +21,6 @@ pub mod merit;
 #[path = "../../../crates/optimizer-lp/src/outward.rs"]
 mod outward;
 #[allow(dead_code)]
-#[path = "../../lp-fp4-checker/src/prepared_feasibility.rs"]
 mod prepared_feasibility;
 #[allow(dead_code)]
 #[path = "../../../crates/optimizer-lp/src/reduce.rs"]

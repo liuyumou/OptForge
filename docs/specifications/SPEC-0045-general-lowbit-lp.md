@@ -1,5 +1,154 @@
 # SPEC-0045: General low-bit LP implementation and evaluation
 
+## Preparation and control continuation (2026-11-19)
+
+The user requests translating fast FP4 execution into lower total single-solve
+cost by reducing preparation and control overhead. The isolated candidate may
+reuse bounded host workers and scratch, gather products directly into the exact
+original reduction tree, and parallelize independent canonical FP4 packing.
+Retain original arithmetic, check cadences, strict certificates, recovery and
+actual FP4 work. No cross-solve answer cache, public-default or CUDA change.
+Historical executables, observations and failed reservations remain immutable.
+
+Fresh isolated arithmetic/preparation tests, bitwise full continuations and four
+sanitizers precede comparative execution. The unchanged public/core sources
+reuse the passing native acceptance gate. Freeze all six connected 1 M families
+and square31/scpm1, native/FP32/FP4x2, candidate versus scale-image-v9, with one
+rotated repetition, 20000 updates, 500-update certificates, 100-update controls
+and 15-second solver limits. Reserve 210 seconds per generated model, 330 for
+square31 and 540 for scpm1; preflight the complete 2130-second cohort before
+launch. Deadlines and failures remain explicit; no attempted cell repeats.
+Report full fresh-process cost including independent final checking and response
+transport, all cost partitions, exact paired work and accepted FP4 contribution.
+These bounded development results do not establish broad superiority. Keep all
+historical lower-scale results and capacity refusals. Existing allocation, phase
+caps, four CPU slots, memory limits, lease and supervision remain unchanged.
+Large evidence stays local, with extracted-root replay; commit locally only.
+
+After this unchanged-cadence cohort, separately evaluate the existing opt-in
+500-update control setting, aligned with the unchanged 500-update certificate
+cadence. This changes restart decisions and numerical trajectories; it is a
+configuration experiment, not arithmetic equivalence to the 100-update setting.
+First compare the candidate and admitted scale-image-v9 at identical 500-update
+settings on dense, irregular and rectangular admission cases, including recovery
+and cancellation, with independent original-model checks. The unchanged CUDA
+image retains its fresh four-sanitizer admission. Then freeze all eight models
+and all three lanes once (24 cells), 20000 updates and 15-second limits. Reserve
+120 seconds per generated model, 180 for square31 and 300 for scpm1. Preserve
+every changed work count, refusal and missed certificate. Comparisons against
+the preceding 100-update cohort are noncontemporaneous development observations;
+no significance, equal-work speedup or default change is claimed. New native,
+FP32 and FP4 comparisons within the 500-update cohort are contemporaneous.
+
+Subject to whole-cohort preflight in the remaining unchanged allocation, extend
+the control comparison to the first seed (831001) of both capacity-admitted 16 M
+families, tall and coupled blocks. Measure all three lanes on scale-image-v9 at
+100-update control, and scale-image-v12 at both 100 and 500-update control:
+18 rotated contemporaneous cells, 20000 updates, 500-update certificates and
+30-second solver limits. Reserve 550
+seconds per model including independent final and history checking. Carry the
+original twelve unsupported models and four other unmeasured capacity-admitted
+models explicitly. This limited scale diagnosis does not replace the complete
+1 M family roster or establish broad sparse FP4 coverage. Preserve every outcome
+and changed work count; do not claim an equal-work comparison when work changes.
+
+The three complete cohorts retain modest implementation gains and mixed cadence
+results. The final preparation candidate may add a feature-gated experimental
+`LinearProgram::new_indexed` constructor. Keep the original public constructor
+byte-exact; the new path checks the direct dense-ID position and retains the
+original binary lookup for arbitrary IDs. Every expression, sparse compression,
+bound, sense and refusal stays exact. Use it only for the isolated opt-in
+preparation path. Apply the same checked lookup in isolated bound-implication
+preparation. Fresh native acceptance, isolated constructor/hash/refusal tests,
+GPU continuation and four sanitizers precede a final matched eight-model cohort.
+
+Prospectively move the unused 2000 CPU confirmation seconds to development
+(92000), and move 850 GPU admission plus 500 confirmation seconds to development
+(21850), leaving GPU admission 8150 and both confirmation caps zero. Totals stay
+240000 CPU / 30000 GPU seconds; no prior charge or closed allocation changes.
+Fresh operational readmission binds these caps under unchanged supervision and
+memory/slot limits. The final comparison uses v12 versus the new admitted image,
+all eight models and three lanes, one rotated repetition, unchanged 100-update
+control and 500-update certificates, 20000 updates and 10-second solver limits.
+Reserve 180 seconds per generated model, 270 for square31 and 400 for scpm1:
+1750 GPU / 7000 CPU seconds, with whole-cohort preflight. Keep all prior cohorts,
+failed reservations and numerical configurations separate; no attempted-cell
+retry or default/public adoption is authorized.
+
+The first indexed candidate passes isolated arithmetic but the native gate
+rejects its additive public-file change: historical source bridges bind the
+entire original `problem.rs`. Preserve that failure and its full 2800 CPU-second
+charge. Restore every public source byte exactly. Place the constructor in an
+isolated host crate that reuses the original host modules by explicit paths and
+holds a source-bound derivative of problem construction; bind its extra Cargo
+manifest through the existing import admission. No historical source check is
+weakened. Prospectively move 3000 unspent reporting CPU seconds to native
+(native 35000, reporting 41000), with the same 240000 total and fresh operational
+readmission. Repeat acceptance under a new identity, not any scientific cell.
+
+After the final eight-model comparison, subject to remaining whole-cohort
+capacity, evaluate the same indexed image against v12 on seed 831001 of both
+admitted 16 M families. Keep 100-update control, 500-update certificates,
+20000 updates, 30-second limits and all three lanes: twelve contemporaneous
+cells, 450 seconds per model. Retain all prior scale configurations, twelve
+capacity refusals and four other unmeasured capacity-admitted models. No retuning
+or additional funding is released; this is a final exact-source comparison.
+
+## Shared host overhead continuation (2026-11-19)
+
+The user requests reducing preparation, assessment and control cost. Optimize
+only the isolated host/checker implementation: bounded scratch reductions,
+borrowed immutable feasibility geometry and exact original-order products.
+Preserve all arithmetic order, signed-zero/error behavior, control/certificate
+cadences, strict original-model criteria and the fast-image-v10 device image.
+Historical executors and imported checker sources stay exact. No endpoint-answer
+cache or public-default change is authorized by this continuation.
+
+Prospectively rebalance unchanged totals to CPU phase caps implementation 20000,
+native 32000, admission 48000, development 90000, confirmation 2000, reporting
+44000 and cleanup 4000 seconds; GPU caps admission 9000, development 20500,
+confirmation 500 and reporting 0. No previous charge changes. Fresh operational
+readmission precedes device work. The four CPU slots, 16 GiB sampled RSS,
+12 GiB device buffers, pinned lease, one-second supervision and all 100 ms
+advisories remain mandatory.
+
+Admit exact products/preparation and complete feasibility/certificate reports,
+including signed zeros, subnormals, overflow, cancellation and first errors.
+Run native acceptance, exact GPU continuations/recovery/cancellation and four
+scoped sanitizers before freezing a matched development cohort. The pilot uses
+all six connected 1 M structural families and square31/scpm1, native/FP32/FP4x2,
+two rotated-order repetitions, identical 1000-update requests, 250-update
+certificates, 100-update control and 30-second solve limits. Reserve 300 seconds
+per model and 900 for scpm1, with complete-cohort preflight and fresh independent
+final and historical endpoint checks. Retain every failure and no cell retries.
+Report preparation, assessment, execution and complete costs separately; exact
+equal-work pairs support implementation attribution, not broad confirmation.
+The historical full rosters and capacity refusals remain visible.
+
+The first overhead pilot remains immutable. Its structural-family preparation
+costs regress slightly with in-place host products, despite lower assessment
+costs. A separately identified scale-image-v9 restores the admitted original
+host-product implementation and retains only the exact checker scratch and
+borrowed-preparation changes. Admit its CPU arithmetic, whole GPU continuation
+and all four sanitizers before a second complete matched cohort with the same
+eight models, requests, repetitions and reservations. The unchanged public/core
+sources reuse the passing native gate; isolated final-source acceptance is fresh.
+Both complete cohorts remain visible, with no attempted-cell retries or pooling
+of different implementations. No phase or total ceiling changes.
+
+After final fixed-work attribution, evaluate the same eight-model roster as
+ordinary single solves with the final image and scale-image-v6 controls, all
+three lanes, one rotated-order repetition, 20000-update maximum, 500-update
+certificates and unchanged 100-update control / 30-second solve limit. Reserve
+300 seconds per structural model, except 240 for previously certified tall,
+coupled and degenerate models; reserve 450 for square31 and 900 for scpm1.
+The whole 48-cell cohort requires 2970 GPU / 11880 CPU reservation seconds and
+must fit the unchanged phase ceilings before launch. Include up to 42 trajectory
+snapshots in full memory and response preflight. Keep independent final and
+historical endpoint checks, every uncertified/time-limited result and exact
+equal-work comparisons. Only jointly certified pairs support solve-time ratios;
+bounded-work results and this one-repeat development cohort remain separate.
+
 ## Scale development continuation (2026-11-17)
 
 After the frozen 16 M cohort, an explicit x86-64-v4 host build may be compared

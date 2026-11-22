@@ -1,0 +1,449 @@
+{
+  "active_reservations": 0,
+  "allocation_open": true,
+  "checkpoint": {
+    "bytes": 43298,
+    "namespace": "evidence",
+    "path": "preparation-device-checkpoint-v1.json",
+    "sha256": "2913610bd7b73c0b6005b9e03e2e48571c79cd0f9f6762e954d6171aaa8607ab"
+  },
+  "completed": [
+    {
+      "exact_continuations": 60,
+      "gpu_samples": 169,
+      "identity": "operational-gpu-v8",
+      "maximum_unattributed_bytes": 1288634368,
+      "preparation_backends": {},
+      "result": {
+        "bytes": 54139,
+        "namespace": "evidence",
+        "path": "operational-gpu-v8/result.json",
+        "sha256": "4423f91056a743af2c7ea41244f71a713645e3911d0e0f40bd17ecb8d26fd155"
+      },
+      "samples_with_owner": 55,
+      "scalar_checks": 130,
+      "settlement": {
+        "bytes": 369,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v8.settlement.json",
+        "sha256": "2186101f3453a9f766097e9ca10943dd737ccd44f7cafaa3a114b29f046472e2"
+      },
+      "trace": {
+        "bytes": 55102,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v8.resource.json.capacity.jsonl",
+        "sha256": "c8834bfa90829bf39180325a552b0a7441157be66bfcc2132138601724482a90"
+      }
+    },
+    {
+      "exact_continuations": 60,
+      "gpu_samples": 295,
+      "identity": "array-gpu-v3",
+      "maximum_unattributed_bytes": 1288634368,
+      "preparation_backends": {
+        "gpu-fp64": 57,
+        "host-fallback": 9
+      },
+      "result": {
+        "bytes": 67041,
+        "namespace": "evidence",
+        "path": "array-gpu-v3/result.json",
+        "sha256": "82ceb0599c6c1a01aad937b4258c4007aceb5bffa5178a3f085a4e502fd97720"
+      },
+      "samples_with_owner": 100,
+      "scalar_checks": 130,
+      "settlement": {
+        "bytes": 363,
+        "namespace": "evidence",
+        "path": "resources/array-gpu-v3.settlement.json",
+        "sha256": "d022d24239f41f85b493912502e5ec2209611ff09d72882e348d6fc3e54c50ba"
+      },
+      "trace": {
+        "bytes": 96437,
+        "namespace": "evidence",
+        "path": "resources/array-gpu-v3.resource.json.capacity.jsonl",
+        "sha256": "ec6eaa617fa052c37ec87023081f0a13e9fc53b582aaf835100f361f7ae5250e"
+      }
+    },
+    {
+      "exact_continuations": 20,
+      "gpu_samples": 114,
+      "identity": "array-memcheck-v4",
+      "maximum_unattributed_bytes": 1573847040,
+      "preparation_backends": {
+        "gpu-fp64": 7,
+        "host-fallback": 1
+      },
+      "result": {
+        "bytes": 23343,
+        "namespace": "evidence",
+        "path": "array-memcheck-v4/result.json",
+        "sha256": "c9bf58700f4f2654ae4e521dfd0190f05aab8f8c142cda83f9f9762acaeade35"
+      },
+      "samples_with_owner": 34,
+      "scalar_checks": 60,
+      "settlement": {
+        "bytes": 368,
+        "namespace": "evidence",
+        "path": "resources/array-memcheck-v4.settlement.json",
+        "sha256": "aa36e7d855c53822b64d88e92b9186842514ad7e4de33a1e55645467cfbf58c3"
+      },
+      "trace": {
+        "bytes": 38149,
+        "namespace": "evidence",
+        "path": "resources/array-memcheck-v4.resource.json.capacity.jsonl",
+        "sha256": "e93d59475d70c095f26adf4a3d3a971fe57933a87b9a4e7f9a3f7daf5fd28324"
+      }
+    }
+  ],
+  "cpu_acceptance": {
+    "bytes": 359,
+    "namespace": "evidence",
+    "path": "resources/operational-cpu-v9.settlement.json",
+    "sha256": "ea6af8416c3d80945efc8a19a9da8dcb42bfc763e059b9b7493a28ebfac959bb"
+  },
+  "current_cpu_ns": 75147503818756,
+  "current_gpu_ns": 3764416660567,
+  "documentation_pages": 311,
+  "documentation_resource": {
+    "bytes": 368,
+    "namespace": "evidence",
+    "path": "resources/preparation-progress-docs-v1.settlement.json",
+    "sha256": "6dc0e34d8fea415a6f3c0ef06465e92940cb360fc64478ecc9d853ce24f379bf"
+  },
+  "evidence_audit": {
+    "bytes": 368,
+    "namespace": "evidence",
+    "path": "resources/preparation-progress-audit-v1.settlement.json",
+    "sha256": "f669f284b9823b1476fce6b55e17a63b9801106c7b0e17d312e4d7bb3d62f421"
+  },
+  "failed": [
+    {
+      "completed_preparation_results": [
+        {
+          "bytes": 535,
+          "namespace": "evidence",
+          "path": "array-memcheck-v3/prepare-0.result.json",
+          "sha256": "96ee5022bf142fc44f2405c3d85e94e07153e0a57bd3582fe315727c5fe3735d"
+        },
+        {
+          "bytes": 535,
+          "namespace": "evidence",
+          "path": "array-memcheck-v3/prepare-1.result.json",
+          "sha256": "6f2de66d373f08973cb5e46d341c929eca430aece14ecf3a0de7944b1544f707"
+        },
+        {
+          "bytes": 537,
+          "namespace": "evidence",
+          "path": "array-memcheck-v3/prepare-2.result.json",
+          "sha256": "1c169c9ca8daba22e4ac4d56b14a08df6b18f079ef8fc9de1a7fe4c426dac79a"
+        },
+        {
+          "bytes": 537,
+          "namespace": "evidence",
+          "path": "array-memcheck-v3/prepare-3.result.json",
+          "sha256": "cc60f5fabb5091d14076e0f54368029bbb87f12ffd12b71bd8b3c304acb38d65"
+        },
+        {
+          "bytes": 538,
+          "namespace": "evidence",
+          "path": "array-memcheck-v3/prepare-4.result.json",
+          "sha256": "064b9bc94c83b6956e615468a36a0e967e2626eedea3b36a144757ced583ae5c"
+        },
+        {
+          "bytes": 538,
+          "namespace": "evidence",
+          "path": "array-memcheck-v3/prepare-5.result.json",
+          "sha256": "254009e5f5ab1243112039923bd6a4cf54e01f419d0ddb204d8d2df75b359fa3"
+        }
+      ],
+      "identity": "array-memcheck-v3",
+      "live_process_identities": 0,
+      "partial_log": {
+        "bytes": 817,
+        "namespace": "evidence",
+        "path": "resources/array-memcheck-v3.resource.json.log",
+        "sha256": "3e9ade6cef8eac2b9ccf76abcb2074557774d603272b0b2713805e61c0fb18f4"
+      },
+      "peak_rss_bytes": 290263040,
+      "reason": "command_failed",
+      "retained_process_identities": 24,
+      "settlement": {
+        "bytes": 369,
+        "namespace": "evidence",
+        "path": "resources/array-memcheck-v3.settlement.json",
+        "sha256": "ecd8eb86929d253107e33bd8cbd6bca4d83b7831ccbaa52e0169ac0bb8011ce9"
+      }
+    },
+    {
+      "completed_preparation_results": [
+        {
+          "bytes": 570,
+          "namespace": "evidence",
+          "path": "array-racecheck-v3/prepare-0.result.json",
+          "sha256": "414a2ca1744128678be83078bbf58d0cd92817ce46cb89e51a00b8cc5bbbeba5"
+        },
+        {
+          "bytes": 570,
+          "namespace": "evidence",
+          "path": "array-racecheck-v3/prepare-1.result.json",
+          "sha256": "4116d4d778208e50cc7e245c9c550575e65642a576a34a2228dae6efaf5c854f"
+        },
+        {
+          "bytes": 572,
+          "namespace": "evidence",
+          "path": "array-racecheck-v3/prepare-2.result.json",
+          "sha256": "49dbf3129fa2c595f79a30fbebba6e56b56ed5ec314c3ea02550ea9ccfe0b7a0"
+        },
+        {
+          "bytes": 572,
+          "namespace": "evidence",
+          "path": "array-racecheck-v3/prepare-3.result.json",
+          "sha256": "da943d855053048828b6f50d9774d4d5a404d3cdb1ee062b08621a8c001fb426"
+        },
+        {
+          "bytes": 574,
+          "namespace": "evidence",
+          "path": "array-racecheck-v3/prepare-4.result.json",
+          "sha256": "1ce2051b3612e948fa1fd4580eddcb13d1365361ad9169f3763e15e9570098be"
+        },
+        {
+          "bytes": 575,
+          "namespace": "evidence",
+          "path": "array-racecheck-v3/prepare-5.result.json",
+          "sha256": "4ab8d35f26905ade766f17ab2ee28a50132c460b9f5a2a4d5b9c030a20dcc065"
+        },
+        {
+          "bytes": 414,
+          "namespace": "evidence",
+          "path": "array-racecheck-v3/prepare-6.result.json",
+          "sha256": "3cd9c4cc33d6f4cb2b952ffad75b0d718dea5aa19c9cf65fb7f5c2481abceeed"
+        }
+      ],
+      "identity": "array-racecheck-v3",
+      "live_process_identities": 0,
+      "partial_log": {
+        "bytes": 993,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v3.resource.json.log",
+        "sha256": "eabc44712ff09af9e8bc7ea04a7558c1b5e64933a34b4949cd5b39665cb1641d"
+      },
+      "peak_rss_bytes": 17182568448,
+      "reason": "sampled_rss_limit",
+      "retained_process_identities": 32,
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v3.settlement.json",
+        "sha256": "625930a3ff648974a37f895496d427451742b90111b34a7755fdef447ff7e698"
+      }
+    },
+    {
+      "completed_preparation_results": [
+        {
+          "bytes": 570,
+          "namespace": "evidence",
+          "path": "array-racecheck-v4/prepare-0.result.json",
+          "sha256": "83e6847e2f1d67a026a25fd990a5787cb367d88b4ba7d4f35aaebe7d1f4015d7"
+        },
+        {
+          "bytes": 570,
+          "namespace": "evidence",
+          "path": "array-racecheck-v4/prepare-1.result.json",
+          "sha256": "57367b662f9ef5315c858b39998ff06f9f3eca22a4951bf8ea3eefed91c7e109"
+        }
+      ],
+      "identity": "array-racecheck-v4",
+      "live_process_identities": 0,
+      "partial_log": {
+        "bytes": 0,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v4.resource.json.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "peak_rss_bytes": 1241464832,
+      "reason": "unattributed GPU memory exceeds fixed idle allowance",
+      "retained_process_identities": 16,
+      "settlement": {
+        "bytes": 370,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v4.settlement.json",
+        "sha256": "930e9f9324f605b13d2517f1cf0564f050b3334a8a3854567f6016674b5e0caa"
+      }
+    }
+  ],
+  "image": {
+    "bytes": 1670,
+    "namespace": "evidence",
+    "path": "image-v3/binding.json",
+    "sha256": "cb4bc356fb3ecb85a6cad9ce45639fca2fa53cac2601a387f56aea2861cd3b62"
+  },
+  "limitation": "Partial validation is not full device admission or a preparation/total-solve speedup measurement.",
+  "monitor_handoffs": [
+    {
+      "bytes": 555,
+      "namespace": "evidence",
+      "path": "idle-handoff-v1/result.json",
+      "sha256": "14ca47c09b56baf9c0361a167e022fafbc1e5013d6be9bfdeb78d73147e30748"
+    },
+    {
+      "bytes": 549,
+      "namespace": "evidence",
+      "path": "idle-handoff-v2/result.json",
+      "sha256": "0d25740a89118c54c576df9d33e4026be99686c773c5a75c2b1b7d411cab1344"
+    },
+    {
+      "bytes": 549,
+      "namespace": "evidence",
+      "path": "idle-handoff-v3/result.json",
+      "sha256": "8ee2675fd3e3b93c7e56d09260b2576efe059bc22afb4197d8da12dbe2d27e1d"
+    },
+    {
+      "bytes": 549,
+      "namespace": "evidence",
+      "path": "idle-handoff-v4/result.json",
+      "sha256": "19bd3f984a3b722a433a56aa3613e050f4b95e79c3f130e809dccc4dac15e6fc"
+    },
+    {
+      "bytes": 549,
+      "namespace": "evidence",
+      "path": "idle-handoff-v5/result.json",
+      "sha256": "a0a2bbc79606d81e83c9b1176c177da5480d405f61081ca08e24f90667d9d852"
+    },
+    {
+      "bytes": 549,
+      "namespace": "evidence",
+      "path": "idle-handoff-v6/result.json",
+      "sha256": "ba7bb3e2ea68f53241c596b5279585d1a44709ed5249d4fbeeda644e1e0dad7e"
+    }
+  ],
+  "numerical_code_unchanged": true,
+  "observations": [
+    {
+      "result": {
+        "bytes": 3928,
+        "namespace": "evidence",
+        "path": "idle-confirmation-v2/result.json",
+        "sha256": "fee8d079efe73edf6ba11d9890cf595563d9ad84ce73bcb68750c24f7bf53a92"
+      },
+      "settlement": {
+        "bytes": 363,
+        "namespace": "evidence",
+        "path": "resources/idle-confirmation-v2.settlement.json",
+        "sha256": "b7fefa7afb48633284d1d83ae37652b2f4e77664a7d4502c911c720c8cc7a205"
+      },
+      "status": "observed_idle"
+    },
+    {
+      "result": {
+        "bytes": 6071,
+        "namespace": "evidence",
+        "path": "idle-confirmation-v3/result.json",
+        "sha256": "c5ce9a8b72b362743d8dbfe4a4278d5b98ffc3883ec4fcf1e8751e8974f4de4b"
+      },
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/idle-confirmation-v3.settlement.json",
+        "sha256": "4dcf011fd672ded00f2628b564887ce519cd970d97837f0783e188779465dbc5"
+      },
+      "status": "idle_gate_not_met"
+    },
+    {
+      "result": {
+        "bytes": 5413,
+        "namespace": "evidence",
+        "path": "idle-confirmation-v4/result.json",
+        "sha256": "d5a084cd70f4dc0e890ce128efb6b3939fd6ce23c1ee7e718741bfdb451f27ab"
+      },
+      "settlement": {
+        "bytes": 363,
+        "namespace": "evidence",
+        "path": "resources/idle-confirmation-v4.settlement.json",
+        "sha256": "ef185f8215fcdb634f50e40a40090414d002df6aa94f998cf3634dc0aa29b196"
+      },
+      "status": "observed_idle"
+    },
+    {
+      "initial": {
+        "bytes": 15311,
+        "namespace": "evidence",
+        "path": "idle-confirmation-v5/initial.json",
+        "sha256": "18fb8363219a28b7b53b33599cb4a47a932d7b13c62a69848834f791e3383385"
+      },
+      "partial_log": {
+        "bytes": 662,
+        "namespace": "evidence",
+        "path": "resources/idle-confirmation-v5.resource.json.log",
+        "sha256": "699596c4c083246d41498a26d84fa40a25a33ead712b63aade375ea2c550b4c5"
+      },
+      "partial_samples": [
+        {
+          "bytes": 225,
+          "namespace": "evidence",
+          "path": "availability/operational-gpu-v9/8455750421539566.json",
+          "sha256": "f970ba88c7910808c456914d02205ebd31ef0ecf482dc3236ce52d7d8698f569"
+        },
+        {
+          "bytes": 225,
+          "namespace": "evidence",
+          "path": "availability/operational-gpu-v9/8455777954910589.json",
+          "sha256": "f568250fc33538d3575da17861461c8cf9c5a5cd69cbf7319b604d88ea1695c8"
+        },
+        {
+          "bytes": 225,
+          "namespace": "evidence",
+          "path": "availability/operational-gpu-v9/8455837956908183.json",
+          "sha256": "b064bd25eb05fb58c6159d57fea50dd00a903a2d071c6a8b05789f95095c4c1f"
+        },
+        {
+          "bytes": 225,
+          "namespace": "evidence",
+          "path": "availability/operational-gpu-v9/8455897956924739.json",
+          "sha256": "957a4f17c81c29f2318c0fa49b357d32f798dd36ae330f2563d71e176359279c"
+        },
+        {
+          "bytes": 225,
+          "namespace": "evidence",
+          "path": "availability/operational-gpu-v9/8455957956839511.json",
+          "sha256": "4a059a1bba6db132430ebaaf07bf73ab87db3c781a07123d84459b97bf8bfa7d"
+        },
+        {
+          "bytes": 225,
+          "namespace": "evidence",
+          "path": "availability/operational-gpu-v9/8456017957964466.json",
+          "sha256": "d9cdd6d471b1fd339e5cacec4ce1a4807ff7641a9a254485b695935c8cc9de5a"
+        },
+        {
+          "bytes": 225,
+          "namespace": "evidence",
+          "path": "availability/operational-gpu-v9/8456245118198209.json",
+          "sha256": "5c86441563cbbdd17c52a5bb263607d2debf057f3f6474617422e8380ded9579"
+        }
+      ],
+      "reason": "lost_coordinator_heartbeat",
+      "result": null,
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/idle-confirmation-v5.settlement.json",
+        "sha256": "9102a6c8df1aabf26107870bdf5753da670ae4b65432eab39bbad978296680bb"
+      },
+      "status": "interrupted"
+    }
+  ],
+  "operational_plan": {
+    "bytes": 1020,
+    "namespace": "evidence",
+    "path": "operational-readmissions/v9.json",
+    "sha256": "86b58f24cdf31ffc8e39c714a5aeabf0290ade1490712ef3fdcd22c9f032a198"
+  },
+  "source": {
+    "bytes": 5820,
+    "namespace": "repo",
+    "path": "tools/lp_billion_admission_report.py",
+    "sha256": "3163e0692076f800ada4f4387b5d14c3926a82e21ba0f850ccb4fad9555a1390"
+  },
+  "status": "partial_device_validation",
+  "strict_certificates_unchanged": true
+}

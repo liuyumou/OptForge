@@ -1,3 +1,1107 @@
+# User-authorized PR integration: local acceptance complete (2026-11-22)
+
+The user requests careful PR review and normal merge, authorizing publication
+of all fifteen commits through 334bb20 over main 1e15895. PR #29 is the integration
+vehicle; preserve the feature commits through a normal merge. Old local-only
+instructions retain their historical scope. No GPU experiment or monitor.
+
+Native acceptance and the final 963 Python tests pass; isolated packages pass
+218 Rust tests, and 136 harness tests pass from a source-only snapshot without
+private evidence access in the test interpreter. All 306 numerical bindings,
+eight resource sources, six image files, 637 comparison references and 63 original
+failed reservations verify. Review fixes declare SciPy, use temporary inventory
+fixtures, and preserve source-bound CSV bytes. Strict 1e-9 authority and public
+defaults remain exact. See docs/benchmarks/lp-billion-pr.md and its compact receipt.
+
+PR work uses fresh CPU-only reporting reservations within the existing 570000 /
+68000 totals, with a 32000 CPU ceiling, four slots and 16 GiB sampled host memory.
+All failures/full charges remain; no supervised PR overrun or nonempty cleanup.
+The original scientific settled checkpoint remains exact. Hosted startup_failure
+with zero jobs uses the previously documented local CPU/docs/smoke fallback;
+never fabricate hosted success or bypass protection. Final documentation verification passes 388 pages.
+Publish the review commit and normally merge PR #29. Retain small
+final-head/merge receipts locally and remove only this PR's temporary build/env.
+
+# Three remaining LP identities attempted; final verification settled (2026-11-22)
+
+All three resumed scientific identities have now been attempted once. Ill-scaled
+COPT returns interrupted without endpoint after 5640 iterations and
+1886.239276306 complete seconds. Degenerate COPT returns interrupted without
+endpoint after 6520 iterations and 1863.704107960 complete seconds. Degenerate
+project is interrupted after 1367.951789046 supervised active seconds with no
+response, cleanup_incomplete and no overrun; full 10800 CPU / 2700 GPU seconds
+remain. Its preceding trigger is unknown. All four recorded owned identities are
+gone; the separate missing-response audit passes. Never repeat these LPs/drivers.
+
+CPU-only finalization is complete through reporting. The first final cleanup
+incorrectly requires the original failed tall audit and retains full 480 CPU
+seconds, with empty cleanup and no deletion. Corrected cleanup in
+`lp_billion_copt_fair_report.py prune` validates the retained tall proof seal and
+all audit dispositions; cleanup v2 passes. About 47.009 GiB is released in this
+resumption, including partial failed-attempt objects. All small evidence remains.
+The frozen finalization helper/plan and its failed cleanup remain exact.
+
+`copt-fair-complete-report-v1` passes; all twelve roster slots remain visible,
+with no jointly timely strict certified-time pair. The two COPT certified complete
+costs are tall 1408.579966302 / coupled 857.414167436 seconds. Project tall remains
+strictly accepted but complete timing is excluded. Report/phase CSV/compact JSON
+are written. Final verification passes 136 harness tests / 387 documentation
+pages, resolves 637 retained references and verifies all 306 numerical bindings.
+All 1995 recorded owned identities are gone. Settled evidence is
+`copt-fair-settled-checkpoint-v1.json`, with a compact copy at
+`docs/benchmarks/lp-billion-copt-fair-checkpoint.json`.
+Final settled usage is 459659.784173452 CPU / 55943.714704332 GPU seconds within
+570000/68000. All 63 failed reservations retain 136740.620150944 CPU /
+14970 GPU seconds. No reservation or monitor is active. Commit locally only;
+no publication or push.
+No more GPU work is needed. All 306 numerical bindings and critical sources stay
+exact; additional CPU35/GPU27 pass. Future development would require the fresh
+CPU36/GPU28 gates named in the last cleanup disposition; neither has run.
+
+# Historical explicit three-cell resumption
+
+The user now explicitly requests checking RAM/GPU availability and resuming the
+three remaining LPs under existing limits and strict 1e-9 checks. This revokes
+the pause below. The initial sample shows about 174.1 GiB RAM available and the
+GPU at 0.750 GiB / zero utilization / no listed processes. No reservation is
+active and all three cells remain untouched at this initial check.
+
+Use `tools/lp_billion_copt_fair_headroom_resume.py` with fresh observation identity
+`copt-fair-headroom-idle-v2`. It delegates to the unchanged frozen helper with
+the new availability identity, requires a current sustained idle proof and fresh
+host capacity, rechecks all 306 numerical bindings, and records explicit resumption
+in `copt-fair-headroom-resume-v1/plan.json` before calling the helper once. The
+old idle-v1 proof remains historical. Do not edit frozen helpers or repeat any
+attempted LP/completed driver. All budgets, source-bound operational gates,
+strict audits and prompt audited large-data deletion remain unchanged.
+The fresh idle-v2 observation now passes; its initial unreserved 0.9-second storage
+preflight refusal is retained separately, and the unchanged guard passes on recheck.
+The resumption driver has now exited. Ill-scaled COPT returns interrupted without
+an endpoint after 5640 iterations and 1885.924168562 complete seconds. Supervision,
+the no-endpoint audit and large-family-data deletion pass. Degenerate regeneration
+v1 then fails with cleanup_incomplete, no overrun and full 3600 CPU seconds; its
+preceding trigger is unknown. All four recorded owned identities are now gone.
+Neither degenerate LP started. Do not repeat either old driver or any attempted LP.
+
+Amendment 89 and `tools/lp_billion_copt_fair_degenerate_tail.py` recover only these
+two untouched cells with exact original hashes, additional CPU v35 / GPU v27 and
+fresh headroom-idle-v3 gates. CPU v34/GPU v26, every resource-critical source and
+all 306 numerical bindings remain exact. The original failure and full charge
+remain; no guard, limit or certificate change. Inspect reservations and the new
+`copt-fair-degenerate-tail-v1` plan/started/completed records before launching.
+CPU v35 passes 75 supervisor / 136 billion tests; fresh headroom-idle-v3 and GPU
+v27 (60 exact continuations) pass. Regeneration v2 passes: 157 existing chunks
+match and none are removed; original model/construction hashes are exact.
+Degenerate COPT returns interrupted without endpoint after 6520 iterations and
+1863.368695828 complete seconds. Its supervision and no-endpoint audit pass.
+Degenerate project then stops after 1367.951789046 supervised active seconds,
+with cleanup_incomplete, no response, no overrun and full 10800 CPU / 2700 GPU
+charge. The preceding trigger is unknown; all four exact owned identities are
+gone and GPU memory returns to baseline. The two-cell driver is finished. NEVER
+repeat it or any attempted LP. All three requested scientific cells are attempted.
+
+Amendment 90 / `tools/lp_billion_copt_fair_finalize.py` perform CPU-only missing-
+response audit, obsolete large-data cleanup and final reporting. Its plan is
+`copt-fair-finalization-v1/plan.json`; execute may be active. No further GPU job
+or idle monitor is needed. Additional future CPU v36/GPU v28 gates are only named
+in the last cleanup disposition; they have not run. Existing numerical/resource
+sources and all frozen helpers remain exact. Final verification, settled
+checkpoint and local commit remain pending.
+
+# Historical user-requested pause (superseded by explicit resumption above)
+
+The user asks to pause if RAM is unavailable and says they will resume later.
+At the pause decision, host availability is 129.478 GiB, below the original
+128+4 GiB requirement. The proposed 120+4 GiB reservation could fit, but the
+remaining continuation is left unstarted. While recording the pause, availability
+rises to 157.544 GiB. Keep the pause in effect until explicit user resumption;
+do not restart evaluation or monitoring automatically because capacity recovers.
+
+`/storage/ai-optimizer-billion-v1/copt-fair-user-pause-v2.json` records the pause,
+exact remaining roster and accounting. Its `pause_basis` refers to the earlier
+129.478 GiB decision reading; `host_available_bytes` is the later 157.544 GiB
+checkpoint reading. The finite headroom idle monitor finishes normally, passes,
+and all of its recorded owned identities are gone. No reservation is active.
+Current settled usage is 425061.651944720 CPU / 49441.759926774 GPU seconds within
+570000 / 68000; all phase caps and every failure/full charge remain unchanged.
+
+Remaining, never attempted: `copt-fair-1b-v1-ill_scaled-copt`,
+`copt-fair-1b-v1-degenerate-copt`, `copt-fair-1b-v1-degenerate-project`.
+The final helper `tools/lp_billion_copt_fair_headroom.py` is frozen by
+`copt-fair-headroom-tail-v1/freeze.json`; its execute action has NEVER run.
+Contracts pass 135 tests; early audited endpoint pruning releases 13.038516045 GiB.
+On explicit resumption, require fresh host capacity and sustained GPU-idle
+observations under a NEW identity; do not reuse the old idle proof as current or
+rerun its completed observation. Preserve the frozen helper, all prior failed and
+completed drivers, source-bound CPU v34/GPU v26 and all 306 numerical bindings.
+
+New completed outcomes: tall COPT strictly certifies in 1408.579966302 complete
+seconds; coupled COPT strictly certifies in 857.414167436 complete seconds.
+Coupled project rejects the unsupported 2100000 ms request before solving; its
+full 10800 CPU / 2700 GPU charge remains and it is never retried. Corrected
+ill-scaled project returns an uncertified deadline after 6400 accepted updates,
+1875.828319590 native seconds and 2236.278415066 complete seconds; all fourteen
+independent endpoint checks pass their audit. The ill-scaled original input stays
+for COPT, but all audited large project endpoint objects are deleted. All small
+proofs/results/failures remain. Final comparison report, final verification and
+local commit remain unfinished; working-tree changes are saved and uncommitted.
+
+# Historical continuation state (superseded by user pause above)
+
+The corrected four-cell driver exits after the successful ill-scaled project
+audit: 14/14 independent proofs, uncertified deadline, 6400 accepted updates,
+1875.828319590 native seconds and 2236.278415066 complete seconds. COPT preflight
+then refuses physical host headroom before reserving/starting a cell: available
+about 129.6 GiB versus 132 required. GPU is sampled idle. Three cells remain:
+ill-scaled COPT, degenerate COPT, degenerate project. No job is currently active.
+
+Amendment 88 / `tools/lp_billion_copt_fair_headroom.py` prospectively lowers only
+the two untouched vendor host stops/reservations to 120 GiB, above their padded
+110.1 GiB forecasts, preserving all native settings and the global 128 GiB cap,
+4 GiB physical headroom and every original guard. Contracts pass 135 tests; early
+audited-endpoint pruning releases 13.038516045 GiB while protecting original model
+objects. The helper is frozen by `copt-fair-headroom-tail-v1/freeze.json`; do not
+edit it. `copt-fair-headroom-idle-v1` may be active. After its passing settlement,
+call the helper's execute action once. Do
+not rerun either prior driver or any attempted LP. Current CPU v34/GPU v26 and
+306 numerical bindings remain exact. All failures and full charges remain.
+
+# Historical four-cell native-bound continuation
+
+The first resumed driver has exited. Tall and coupled COPT both pass strict 1e-9
+independent checks, with complete costs 1408.579966302 / 857.414167436 seconds.
+Their large data is deleted after audits. Coupled project rejects the requested
+2100000 ms because sealed image-v11 permits at most 1800000; preserve the missing
+response/full 10800 CPU / 2700 GPU charge and never retry it. Ill-scaled input
+regeneration then fails on the unchanged 0.9-second native inventory timeout;
+empty cleanup, full 2400 CPU charge, no LP started. An owned cooperative launch
+lease prevented further invalid launches and is released. The corrected four-cell
+driver may now be active; inspect reservations before launching anything.
+
+Amendment 87 and `tools/lp_billion_copt_fair_native_tail.py` correct only the four
+untouched ill-scaled/degenerate cells to equal 1800-second native allowances with
+2700-second outer reserves and unchanged enlarged audits. Sealed-native validation
+passes at 1800000 ms and rejects 1800001/2100000; contracts pass 133 tests. The new
+helper is frozen by `/storage/ai-optimizer-billion-v1/copt-fair-native-tail-v1/freeze.json`;
+do not edit it. `copt-fair-native-tail-idle-v1` passes. The helper's `execute` action
+is already running; never repeat it. Ill-scaled recovery v2 passes after checking
+347 existing chunks, with no partial chunk removed and exact original hashes.
+The ill-scaled project cell is active; all historical failures remain. Recover input
+with a fresh identity and 900-second reservation, retaining the interrupted one.
+All resource-critical sources/CPU v34/GPU v26 and 306 numerical bindings stay exact.
+Do not rerun the seven-cell driver or edit its frozen source. No scientific retry.
+
+# Historical first resumption plan (superseded for the four untouched cells)
+
+The user explicitly resumes the seven remaining LP attempts if the Pro6000 is
+idle, and requests time budgets that accommodate normal overhead. Amendment 85
+prospectively assigns 2100-second native allowances / 2700-second outer reserves
+only to the seven untouched cells, with separately enlarged strict audit budgets.
+The 570000 CPU / 68000 GPU totals, exact phase caps, physical/ownership limits,
+10000-update ceiling, control100/certificate500 and original 1e-9 checks remain.
+Historical 1200/1800-second cells and all failures remain unchanged. Do not run
+old tight-budget continuation drivers or repeat attempted scientific cells.
+
+The fresh sustained idle window passes at 0.750 GiB with zero utilization and no
+listed processes. `copt-fair-budget-idle-v1` is settled; GPU v26 and the seven-cell
+continuation may be active. Inspect current reservations before launching anything.
+`copt-fair-budget-envelope-v2.json` reserves the complete remaining work and retains
+source copies. Plans v69–v74 bind CPU v34 / GPU v26 for all six prior cleanup
+dispositions. Resource sources now opt into actual sampling during cleanup and
+asynchronous durable publication, with a prospectively charged receipt allowance
+up to ten seconds. One-second hard sampling and all 100 ms advisories remain;
+stalled sampling and overlong scans must still fail. No numerical source changes.
+CPU v34 passes 75 original supervisor and 128 billion harness tests, including slow
+I/O and genuine stalls on the evidence filesystem. CPU v33 retains its missing
+receipt/full 960 CPU charge and independent proof that all 139 recorded owned
+identities are gone; amendment 86 records the corrected guardian exclusion.
+Budget contracts v2 passes all 131 billion tests. The effective manifest is
+`/storage/ai-optimizer-billion-v1/copt-fair-budgeted-v1/freeze.json`, driven by
+`tools/lp_billion_copt_fair_budgeted.py`. Its source is frozen; do not edit it or
+repeat the driver/attempted cells. Final report and verification remain pending.
+Budget contracts v1 retains its full 480 CPU charge and empty cleanup: an outer
+three-core placement wrapper prevented nested four-slot supervisor tests from
+starting. Contracts v2 uses the original four-slot test placement. This is a
+test-launch correction; the admitted resource sources and numerical code stay exact.
+
+# Historical user-requested pause (superseded by explicit resume above)
+
+The user explicitly stops the monitor and all further evaluation because someone
+else may need the GPU, and will request resumption later. Honor this pause. The
+owned idle-v2 guardian was canceled by exact PID/start identity; the continuation
+exited and no reservation or retained monitor identity is active. Preserve the
+canceled idle-v2 receipt (empty cleanup, no overrun, full 1920 CPU seconds).
+Do not restart monitoring, operational gates, audits or solves automatically.
+
+Interim checkpoint: `docs/benchmarks/lp-billion-copt-fair-paused.json` and
+`/storage/ai-optimizer-billion-v1/copt-fair-user-pause-v1.json`. Settled totals are
+376690.813581624 CPU / 42877.640387647 GPU seconds within 570000 / 68000. There are
+56 failed reservations, all full charges retained. Seven frozen LP cells and GPU
+v25 remain untouched. CPU v32 passes 75 supervisor / 122 billion tests; the tall
+proof seal passes. Full comparison/report/final verification and local commit
+remain unfinished; working-tree changes are saved locally and uncommitted.
+
+On explicit resume, use a fresh availability identity (v3 or later); idle-v1 is a
+completed non-passing window and idle-v2 is canceled. Neither old driver may run
+again. `tools/lp_billion_copt_fair_resume.py observation --id <fresh-id>` and its
+`resume --id <passed-fresh-id>` action retain the existing source-bound seven-cell
+tail and require sustained idle proof before GPU v25. Inspect all reservations
+first. The `copt-fair-idle-resume-v1/plan.json` receipt has not been created yet.
+
+# Current agent handoff: COPT diagnosis complete; fair comparison paused (2026-11-22)
+
+The user requests investigating missing COPT solutions and a fair comparison on
+the same original billion-nonzero problems with strict original-model 1e-9 checks.
+The twelve-cell COPT startup diagnostic is complete; never rerun its driver or
+attempted identities. All twelve responses/audit dispositions are retained. Four
+coupled endpoints certify; eight irregular/ill-scaled cases return interrupted
+without endpoints. Durable phase journals and owned COPT_Interrupt preserve
+progress and graceful deadline evidence. The installed COPT library and every
+project numerical source remain unchanged.
+
+The prespecified rule selects Scaling=0 with automatic Dualize. Coupled complete
+cost improves 43.737 to 33.530 seconds; retain the major ill-scaled convergence
+regression and every other configuration. This is an experimental choice, not a
+public default. Original billion failures remain intact: all enter COPT_SolveLp
+but never log GPU PDLP startup, with only 0.537 GiB sampled owned GPU use. Internal
+vendor attribution remains opaque; do not infer an import bug or GPU OOM.
+
+The user explicitly approved **570000 CPU / 68000 GPU seconds** under amendment
+79. Exact CPU phase caps are 10000/26000/72000/260000/200000/2000; GPU caps are
+12000 admission / 56000 development. Amendment 80 and the additive approval
+receipt retain the original recovery, both packing transfers and assessment
+extension. Operational CPU v30 / GPU v24 and plans v58–v61 bind the changed
+resource sources. All physical, idle, ownership, cleanup and certificate limits
+remain unchanged. Container-only; no reset, host escape or other-job signals.
+
+The seven new selected-configuration capacity cells and all audits are complete.
+Coupled certifies at 256 M and 512 M; irregular reaches optimization but has no
+endpoint at either deadline. Reporting v1 retains a duplicate-key failure and
+full 240 CPU-second charge; corrected `lp_billion_copt_fair_capacity.py` under
+readiness-v2 aggregates existing evidence only (amendment 82). Never invoke the
+old runner's `readiness` action or repeat completed capacity drivers.
+
+The first irregular pair is complete: project deadline 1271.867 solver seconds /
+1605.636 complete seconds, 4400 FP32 updates, no strict certificate; COPT returns
+interrupted normally after 1206.119 solver / 1244.889 complete seconds and 1560
+iterations, without an endpoint. COPT only reaches GPU PDLP near 1060 seconds of
+supervised activity. All ten project proofs are checked and 23.628 GiB of completed
+large irregular data is deleted. The wide project attempt has a missing response,
+recorded lost_coordinator_heartbeat, empty cleanup, no overrun and full 7200 CPU /
+1800 GPU charge; never repeat it. COPT-wide remains unsupported.
+
+Tall project returns certified after 1000 FP32 updates and 247.003 solver seconds.
+Its final independent proof accepts, but the original full audit is interrupted
+before its second proof and retains cleanup_empty=false, overrun=false and full
+11200 CPU seconds. The preceding trigger is overwritten and unknown. Five exact
+owned identities are independently absent; the additive cleanup disposition and
+operational plan v62 preserve the original receipt (amendment 83). The original
+execution driver is finished and must never be rerun. The fresh source-bound
+`tools/lp_billion_copt_fair_recovery.py execute` continuation may be active: inspect
+before launching anything. CPU v31, a supplemental missing-proof audit, a fresh
+five-minute idle window and GPU v25 precede the seven untouched frozen LP cells.
+The tall original cold-proof stopwatch is unavailable: retain its accepting proof
+and observed solver/process times, but exclude complete-cost timing and ratios.
+Never replace that lost timing or regrade the failed original audit. Supplemental
+and untouched full audits reserve 64 GiB host within the unchanged 128 GiB limit.
+
+The supplemental missing proof returns and matches the original assessment, but
+its reservation also fails finalization (lost_coordinator_heartbeat, empty cleanup,
+no overrun, full 2400 CPU seconds). Keep its raw proof and completed result, without
+claiming its supervision passed. Both distinct proofs now cover all three tall
+claims. Amendment 84 / operational plan v63 require CPU v32, a separately
+supervised read-only proof seal, the fresh idle window and still-never-attempted
+GPU v25. The v1 recovery driver is finished and must never be rerun. The active
+continuation is now `tools/lp_billion_copt_fair_recovery_v2.py execute`, bound to
+`copt-fair-untouched-tail-v2/plan.json`. It performs no repeated LP solve or proof
+recomputation, preserves both failed audit charges and the lost timing exclusion,
+and proceeds only through the same seven untouched cells after admission. All
+resource-critical sources and the original full freeze remain exact.
+
+CPU v32 passes 75 supervisor / 122 billion tests; the read-only tall proof seal
+passes with zero numerical recomputation. Idle window v1 is a passed observation
+reservation with a non-passing availability result: device use reaches 19.578 GiB
+while no task GPU job is active, then returns to baseline. It grants no GPU
+admission. The v2 recovery driver is finished. The active entry point is now
+`tools/lp_billion_copt_fair_resume.py`, with fresh `copt-fair-tail-idle-v2`
+observations followed by its `resume` action only after a sustained idle window.
+GPU v25 and the same seven LP cells remain untouched until that guard passes.
+Inspect active reservations before any launch; never rerun the ended drivers.
+
+The full six-family COPT/image-v11 roster is frozen with eleven admitted attempts
+and one unsupported COPT-wide slot. Its empirical forecasts are 138.266 GiB host /
+116.831 GiB device, exceeding unchanged limits. The runner is
+`tools/lp_billion_copt_fair_run.py`; use its complete source-bound manifests and
+budgeted stages, never direct unguarded jobs. The full execution driver may be
+active: inspect reservations/completion markers before launching anything. Never
+rerun attempted scientific identities or completed drivers.
+Every final and project intermediate assessment requires the unchanged independent
+checker. Missing/setup-only capacity paths remain unsupported. Full pairing,
+deadlines, the 10000-update safety cap and per-family data deletion follow the
+prospective protocol. Amendment 81 sets a common 1200-second solver window within
+the unchanged approved 1800-second outer reservations; freeze with
+`freeze_full --wall-seconds 1200`. The frozen full manifest is
+`copt-fair-1b-v1/freeze.json`; per-family regeneration, solves, strict audits and
+cleanup are in progress. Final report/verification modules are
+`lp_billion_copt_fair_report.py` and `lp_billion_copt_fair_verify.py`; final settled
+verification and a local commit remain pending.
+
+All small evidence remains under `/storage/ai-optimizer-billion-v1`, especially
+`copt-diagnostic-results-v1.json`, `copt-diagnostic-retrospective-v1.json`, and
+`copt-fair-reservation-proposal-v1.json`. Keep all failures/full charges and
+delete only completed, audited large content objects. No public publication or
+push; commit locally only. See the COPT diagnosis section in `docs/benchmarks/lp-billion.md`.
+
+# Current agent handoff: GPU assessment/control measured (2026-11-22)
+
+Opt-in image-v11 offloads exact-tree residuals, restart movement norms and original
+primal feasibility. Original CPU dual/gap proofs remain exact, and every accepting
+assessment rechecks original CPU feasibility. Strict original-model 1e-9 criteria,
+public defaults, control100/certificate500 and original solve/prep/pack CUDA remain.
+Native quality-v3, full diagnostic, sixty exact continuations, independent scalar
+checks and all four complete sanitizers pass. Preserve all failures/full charges.
+
+All twelve fresh 64 M cells and 5 new billion responses finish with
+independent final/intermediate audits. The interrupted wide candidate remains
+missing, with its full charge, original cleanup receipt and supplemental cleanup
+proof. Only the four untouched cases resume after fresh operational admission. Before/after control / assessment / complete medians:
+64 M 13.843x / 1.107x / 1.060x;
+billion 24.997x / 1.200x / 1.321x.
+Billion controls are historical v10; retain unequal work, deadlines, regressions
+and uncertified endpoints. 1 historical pairs certify.
+Broad FP4 certified superiority remains unestablished. Both cohorts are complete;
+never rerun attempted cells or completed drivers.
+
+Approved totals are 370000 CPU / 44000 GPU seconds; CPU phase caps are
+10000/26000/58000/162000/113000/1000 and GPU 10000/34000. The immutable approval
+chain includes recovery, both packing transfers and the assessment extension.
+Operational CPU v29 / GPU v23 bind current resource sources. Four slots, 128 GiB
+host, 80 GiB GPU, 400 GiB storage, headroom, idle/ownership checks and all advisories
+remain unchanged. Container-only; no reset, host escape, other-job signal or owner
+inference. Earlier general allocation remains unchanged. Commit locally only.
+
+At the user's explicit request, obsolete large data is deleted after audits;
+145.070 GiB is released including verified source compaction. New snapshots
+share immutable source objects. Keep all small results and failures. Historical
+raw-data replay requires regeneration; no full portable replay is claimed.
+
+Final verification v1 retains a 960 CPU-second failure on a historical report
+source reference. Verification v2 uses the exact retained source from the original
+64 M reporting reservation; no scientific measurement repeats. See
+[amendment 77](docs/specifications/SPEC-0046-amendment-77.md).
+
+Open settled allocation: 314228.458381384 CPU / 35557.827345976 GPU seconds within 370000 / 44000. No reservation is active. 109 harness tests and 374 documentation pages/local links pass. 306 current numerical bindings verify; 296 prior bindings remain exact, with seven scoped integration changes and their original source copies retained. 51 failed reservations retain 84260.620150944 CPU / 7770.000000000 GPU seconds. Evidence: `gpu-control-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-gpu-control-checkpoint.json`.
+
+Report: [GPU assessment/control](docs/benchmarks/lp-billion.md#gpu-assessment-and-control-with-strict-cpu-acceptance).
+Results: [compact evidence](docs/benchmarks/lp-billion-gpu-control-results.json).
+
+# Current agent handoff: GPU FP4 packing measured (2026-11-21)
+
+Opt-in image-v10 moves eligibility/validation/residual extraction/encoding to GPU,
+skips packing allocations with no eligible tiles and preserves strict original-model
+1e-9 checks, original preparation/solve CUDA, control100/certificate500 and defaults.
+Native quality-v7 and separate read-only seal audit admit exact sources. All 81
+bitwise packing comparisons, six malformed inputs, sixty exact continuations,
+130 independent scalar checks and all four complete sanitizers pass. Retain all
+failed admission/build/seal receipts and v6's non-admitted fixture snapshot.
+
+Fresh six-family paired 64 M preparation / complete median ratios:
+1.844x / 1.106x.
+Six new billion FP4-request cells compare descriptively to retained v9 controls:
+2.473x / 1.035x;
+1 jointly certified pairs. Every returned final and
+intermediate assessment is independently audited. Preserve all outcomes and
+unequal deadline/update work. Broad FP4 certified superiority is unestablished.
+Both cohorts are complete; never rerun their attempted cells or completed drivers.
+
+Approved totals remain 320000 CPU / 35000 GPU seconds. CPU phase caps are
+8000/22000/52000/140000/97000/1000; GPU admission7000/development28000.
+Preserve original recovery and both explicit transfer approvals. All failed
+charges remain. Resource readmission CPU v26 / GPU v21 binds the exact native
+storage counter, with the legacy Python walk retained as an independent oracle.
+Four slots, 128 GiB host, 80 GiB GPU, 400 GiB storage, physical
+headroom, one-second supervision and all 100 ms advisories remain unchanged.
+Container-only, idle-only; no reset, host escape, other-job signal or owner inference.
+Earlier general allocation remains unchanged. Commit locally only; no publication.
+
+Open settled allocation: 280670.141791928 CPU / 31576.271121081 GPU seconds within 320000 / 35000. No reservation is active. 101 harness tests and 363 documentation pages/local links pass. 303 current numerical bindings verify; 295 prior bindings remain exact, with five scoped integration changes and their original source copies retained. 46 failed reservations retain 72780.620150944 CPU / 6520.000000000 GPU seconds. Evidence: `gpu-pack-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-gpu-packing-checkpoint.json`.
+
+Report: [GPU packing](docs/benchmarks/lp-billion.md#gpu-fp4-packing-and-zero-eligible-fast-path).
+Results: [compact evidence](docs/benchmarks/lp-billion-gpu-packing-results.json).
+
+# Current agent handoff: billion comparison complete (2026-11-21)
+
+The approved continuation completes all eighteen project billion-NNZ runs and
+3 separately admitted COPT Presolve=0 GPU attempts (0 responses).
+Project lanes certify 3/18, all tall; the separate COPT lane certifies 0/3.
+Every returned final/intermediate assessment receives strict original-model 1e-9
+independent checking. All six families and every lane slot remain visible: twelve
+original default-COPT billion slots and three separate-variant slots are unsupported.
+No attempted scientific cell repeats; both continuation sequences are complete.
+
+The common project ceiling is 1000 updates with a requested 600-second solver
+allowance, control100/certificate500 and full solve/audit/storage reservations.
+All original Rust/CUDA, 300 numerical bindings and public defaults stay exact.
+Image-v9 retains 66 bitwise preparation comparisons, sixty exact continuations,
+all four complete sanitizers and the real chunk-copy diagnostic. A strict proof
+after a deadline does not regrade the deadline as a certified solve.
+
+Coupled performs 75% accepted FP4 work. GPU advancement takes 8.182 seconds versus
+39.700 native GPU FP64 and 32.119 FP32, but complete FP4 cost is 511.561 seconds
+versus 502.028 / 461.850. Packing costs 74.794 seconds, exceeding the 23.937-second
+advancement saving against FP32. Zero-eligible FP4 requests still incur 68–78 seconds
+of packing before FP32 fallback. Broad FP4 total-solve superiority is unestablished.
+All exclusive phases and separate cold final/offline intermediate proofs are saved.
+Input includes original CSR-to-CSC construction; advancement is not kernel-active
+GPU time. One rotated repetition and unflushed caches limit timing interpretation.
+Project process HWM ranges 42.767–93.656 GiB; sampled aggregate and audit
+peaks are distinct. No paired before/after billion memory comparison is claimed.
+
+The COPT tall interruption retains its missing response, cleanup=false settlement
+and full 3600 CPU / 900 GPU charge. Four exact owned identities are subsequently
+gone. Amendment 50 uses the existing non-overrun cleanup-disposition path and
+fresh CPU v21 / five-minute idle window / GPU v18 before the two untouched cases.
+Never retry tall; the preceding stop trigger was overwritten and remains unknown.
+
+The user explicitly approved 320000 CPU / 35000 GPU seconds and recovery of the
+single immutable original COPT overrun. Every failure and full charge remains.
+No other overrun is exempted. Four CPU slots, 128 GiB aggregate host, 80 GiB owned
+GPU and 400 GiB storage caps remain; all ownership, idle and physical headroom
+guards remain. Container-only: no host escape, reset, shared-memory clearing,
+other-job signals or owner inference. The earlier general allocation is unchanged.
+The allocation stays open; commit locally only, no public adoption/publication.
+No fresh full portable replay is claimed. Large evidence remains under
+/storage/ai-optimizer-billion-v1, including full-billion-settled-checkpoint-v1.json.
+
+Open settled allocation: 235329.259157332 CPU / 26771.899422302 GPU seconds within 320000 / 35000. No reservation is active. 88 billion-harness tests and 347 documentation pages/local links pass. All 300 numerical bindings remain exact. 34 failed reservations retain full 61060.620150944 CPU / 6520.000000000 GPU seconds. Final settled evidence: `full-billion-settled-checkpoint-v1.json`; compact checkpoint: `docs/benchmarks/lp-billion-full-checkpoint.json`.
+
+Report: [full billion comparison](docs/benchmarks/lp-billion.md#approved-recovery-and-billion-execution).
+Timings: [phase CSV](docs/benchmarks/lp-billion-full-phases.csv).
+Evidence: [compact results](docs/benchmarks/lp-billion-full-results.json).
+
+# Current agent handoff: GPU admission complete; COPT overrun closes execution (2026-11-21)
+
+The user directs completing the actual billion-nonzero run. Image-v9 now passes
+66 bitwise preparations, 60 exact continuations, all four full sanitizers and the
+real three-chunk upload diagnostic (16,777,233 floats, seventeen-element tail).
+Full racecheck retains twenty deep-norm iterations and charges 405.777 GPU seconds.
+Operational CPU v18 passes 75 supervisor/42 resource tests; complete-harness v2
+passes 45 contracts and compiles the copy diagnostic. Preserve complete-harness v1's
+missing-rustc-PATH failure and full 480 CPU seconds. Both CUDA binaries and all 298
+image-v9 numerical bindings remain exact; two supplemental diagnostics make 300.
+No arithmetic, certificate, public-default or idle/ownership change occurs.
+
+COPT full admission v2 passes 24 small CPU/GPU fixtures; all seventeen returned
+endpoints pass strict original-model 1e-9 checks. The ill-scaled GPU timeout has
+no endpoint. Admission v1 incorrectly required one; preserve its full 960 CPU /
+240 GPU failure. Use the existing COPT venv, not the default Python without SciPy.
+The native adapter source is tools/lp_billion_copt_run.py, gated on v2 and actual
+pinned GPU lease/log/ownership evidence. Vendor MemLimit is only soft.
+
+Three COPT 64 M capacity cells are attempted. Coupled CPU/GPU complete in 47.483 /
+53.145 seconds, both time limits without endpoints, with 6.644 / 6.743 GiB HWM.
+The degenerate GPU cell exhausts its undersized 100-second process reservation
+while initializing GPU PDLP. Preserve missing response, excluded timing, full
+400.620150944 CPU / 100 GPU seconds, overrun=true and cleanup_empty=false receipt.
+Read-only supplemental cleanup proves all retained owned PID/start identities
+are gone; it does not rewrite the receipt. Latest sample is 0.750 GiB and zero
+utilization. The unchanged lp_billion_budget.py:56 guard now closes ALL execution.
+Do not bypass it, launch direct jobs, retry this cell, or rerun completed drivers.
+No reservation remains active. Remain container-only and never signal other work.
+
+Two asynchronous questions were sent. The SECOND supersedes the first: explicit
+approval is requested for total 320000 CPU / 35000 GPU seconds AND a narrowly bound
+overrun readmission after fresh CPU/idle/GPU operational gates. No answer has yet
+arrived; neither extension nor readmission is authorized/applied. See amendment 43
+for the concrete proposed phase caps and exact scope. Current authorized caps are
+amendment 40: CPU implementation2000/native14000/admission36000/development114000/
+reporting68000/cleanup6000; GPU admission8500/development21500, original totals.
+The original guard remains unchanged. Approval of time alone does not authorize
+silently dropping failures or weakening future overrun/ownership checks.
+
+All nine remaining 64 M COPT cells, all 256/512 M COPT cells and every billion LP
+solve remain unattempted. If recovery is approved, preserve the old capacity freeze
+and create a fresh tail ONLY for never-started cells with sufficient process
+reservations. The interrupted degenerate GPU capacity cell remains unsupported;
+never infer full-scale vendor capacity from a missing response. Keep every lane
+visible in the full thirty-cell roster. The 600-second common wall / 500-update
+full-run worksheet requires 173000 CPU / 21450 GPU seconds for all solves and
+strict final/intermediate checks; it is a proposal, NOT a freeze or convergence
+claim. Larger update ceilings have retained prospective rejections. Physical
+limits, strict 1e-9 certs, control100/certificate500 remain unchanged.
+
+New full-audit tooling and five regressions are draft/unadmitted: syntax parses,
+but tests did NOT run after closure. Every final/intermediate proof must retain
+original model/settings/endpoint binding, including restored checkpoints and
+repaired dual witnesses. No fresh full portable or documentation-suite replay is
+claimed. Large receipts remain local. Commit locally only; no public publication.
+
+Evidence: complete-device-checkpoint-v1.json, complete-overrun-cleanup-v1.json,
+full-reservation-proposal-v1.json and copt-capacity-64m-v1/freeze.json under
+/storage/ai-optimizer-billion-v1. Twenty-five failed reservations retain
+41860.620150944 CPU / 2140 GPU seconds. Settled usage is 126194.902614812 CPU /
+8047.349848722 GPU seconds. Ledger remains open; execution is closed by the guard.
+Earlier general allocation remains unchanged; zero billion LP solves have run.
+
+Report: [current status](docs/benchmarks/lp-billion.md#gpu-admission-and-copt-capacity-interruption).
+Recovery: [amendment 43](docs/specifications/SPEC-0046-amendment-43.md).
+
+# Current agent handoff: bounded preparation memory (2026-11-21)
+
+The user requests reducing required peak memory. Isolated image-v9 uses bounded
+FP4 packing batches, exact final arrays, <=32 MiB FP32 upload conversion scratch
+and release of host Packed before controller/checkpoint/certificate allocation.
+Public defaults, original arithmetic, strict original-model 1e-9 certificates,
+control100/certificate500, both CUDA binaries and all six guard sources stay exact.
+CPU quality passes 58 Rust tests, format/Clippy/release/CUDA builds and one pure
+copy-boundary overflow test. Original supervisor tests pass 75; final contracts
+pass 42. There are 299 numerical bindings (291 of v8's 297 unchanged, six isolated
+changes, two additions). Image-v9 has NEVER executed on GPU.
+
+All fifteen CPU preparations retain raw responses; fourteen reservations pass.
+Seven reference/candidate packed hashes match across all six 64 M models and
+coupled 256 M. The coupled 64 M candidate fails only its final bound assertion
+because the first formula misses eight bytes of terminal offsets. Retain that raw
+response, timing exclusion, full 960 CPU seconds and empty cleanup. Do not retry it.
+The eight-cell tail contains only never-attempted cells. The whole diagnostic
+campaign is now complete; do not rerun either driver.
+
+Overall CPU peak RSS is unchanged because engine construction briefly holds both
+prepared and cloned scaled matrices. At 256 M, post-packing RSS falls 12.898 to
+12.133 GiB, but peak stays 14.040 GiB, packing slows 7.3%, and CPU preparation
+regresses 68.769 to 72.756 seconds. Keep all observations. The candidate-only
+one-billion-NNZ CPU preparation completes at 54.806 GiB process HWM within 64 GiB
+host reserve, with 976564 tiles and 750 M eligible nonzeros. Input takes 108.361,
+engine 271.795, operator 7.130, packing 72.607, preparation subtotal 351.532,
+digest 15.193 and fresh process total 477.791 seconds. This is NOT an LP solve;
+zero CUDA contexts, LP updates or certificates run in the diagnostic.
+
+Final prospective host requirements include unchanged 8 GiB internal allowance
+and 4 GiB physical headroom. FP4 coupled drops 72 to 68 GiB; irregular/ill-scaled/
+degenerate 85 to 76; tall 81 to 72. Wide rises 106 to 107 due to explicit repaired
+witness storage. The preliminary 60 GiB coupled estimate omitted CPU clone
+transients and is superseded. Formula 5 also used a loose public Pock upper bound;
+final formula 6 correctly bounds the isolated streamed implementation. Historical
+formulas, reservations and sources remain. Amendments 36–39 record all corrections.
+
+Latest capacity sees 176.460 GiB host available: all eighteen project lanes fit.
+The GPU is instantaneously idle at 0.750 GiB, not admitted by a sustained window.
+Fresh operational GPU v16, image-v9 exact continuations/chunk-copy exercise and all
+four full sanitizers remain pending. Require complete prospective admission phase
+reservations before starting. Final campaign freeze supports image-v9 and requires
+operational CPU v17 plus bounded-memory-contracts-v2. Plans v23/v24 close the
+completed CPU-only scope and preserve both historical cleanup dispositions.
+The thirty-cell project/COPT roster is unfrozen and zero billion LP solves have
+run. COPT native CPU admission remains 12 cases / 9 strict accepted endpoints;
+COPT GPU ownership and billion peak admission remain pending. Keep the broad roster,
+common prospective 500-update increments up to 5000 and all full solve/audit/storage
+reservations. Remain container-only, no reset, shared-memory clearing or other-job
+signals; GPU only while idle.
+
+Twenty-two failed reservations retain full 40020 CPU / 1800 GPU seconds. New
+cleanup is empty and owned diagnostic identities are gone. Prior full-solve counts
+remain 38/37/35 with one missing response; prior CPU packing counts remain 18/12/6.
+No fresh full portable replay is claimed. The 240000 CPU / 30000 GPU allocation
+stays open, phase caps and earlier general allocation unchanged. No active
+reservation remains at final settlement. Commit locally only; no public adoption.
+
+Evidence: /storage/ai-optimizer-billion-v1/bounded-memory-delivery-v1.json,
+bounded-memory-cpu-v1/freeze.json, bounded-memory-cpu-tail-v1.json,
+billion-host-availability-v6.json and bounded-memory-settled-checkpoint-v1.json.
+Open settled checkpoint: 119590.941904424 CPU / 6952.970278844 GPU seconds.
+All 336 documentation pages and local links validate.
+
+Report: [peak memory](docs/benchmarks/lp-billion.md#bounded-preparation-storage-and-peak-memory).
+Compact bindings: [memory results](docs/benchmarks/lp-billion-bounded-memory-results.json).
+
+# Current agent handoff: component timing and COPT CPU admission (2026-11-20)
+
+The user requests careful billion-scale component timings and comparison with the
+installed /root/copt80. Image-v8 adds opt-in exclusive host-wall accounting for
+20 solver phases plus exact outer input/process/transport/final-check residuals.
+Nested GPU preparation scaling and spectral/norm/step metrics are not added twice.
+Host-wall device advance is not kernel-active time. Public defaults, arithmetic,
+strict original-model 1e-9 certificates, control100/certificate500, both CUDA
+binaries and all six budget/idle/supervisor/placement sources remain unchanged.
+CPU acceptance passes 57 Rust tests, format, Clippy, release/CUDA builds and 36
+final resource/evidence/timing tests. Image-v8 is sealed but has NEVER executed on
+GPU. Of 297 numerical bindings, 293 remain exact from image-v7, three existing
+files gain timing and one timer module is added. All GPU/sanitizer gates remain.
+
+The bounded native COPT 8.0.6 C API adapter uses preallocated binary arrays and
+CSR-to-CSC conversion without Python coefficient objects. Twelve small CPU cases
+pass exact imports and outcome checks; all nine returned endpoints pass independent
+strict 1e-9 checking, including both senses and six generated families. Infeasible,
+unbounded and preparation-deadline outcomes remain distinct. Preparation counts
+against solver wall time. COPT internal phases remain opaque; vendor status alone
+never certifies. This is CPU adapter admission, not a performance comparison.
+Native GPU execution fails closed pending ownership/peak-memory admission. The
+current 12000 MB soft vendor limit is a small-admission setting, not a billion
+allowance. Library/header hashes and Python dependency versions are retained;
+no license material is copied.
+
+All six original billion inputs are ready. The prospective roster now has thirty
+cells: native, FP32, FP4x2, COPT CPU auto and GPU PDLP for each family. ZERO billion
+solves have run; the roster is unfrozen. Latest capacity is 60.45 GiB host available
+with instantaneously idle GPU at its baseline. Only two project lanes fit; coupled
+FP4 needs 72 GiB including headroom and the full project roster up to 106 GiB.
+COPT billion peak memory is unadmitted. Keep the full roster, strict idle/ownership
+and capacity guards. User authorizes the full Pro6000 only while idle and forbids
+leaving the container, resets, clearing shared memory, or signaling others.
+
+Two new timing builds stop on >1-second resource sampling; three-plus-one CPU
+placement alone does not resolve it. Fresh serialized Cargo compilation passes.
+Retain both full 1200 CPU charges, plus missing-SciPy contracts 180 and wrong native
+MemLimit setter 480 CPU seconds. All new cleanup is empty. There are now 21 failed
+reservations retaining full 39060 CPU / 1800 GPU seconds. No scientific cell was
+retried. Amendments 30–35 retain these attempts and the prelaunch timing-harness
+correction. Final contracts v5 pass 36 tests and require requested profiles to be
+present. Earlier 35-test/delivery and 36-test v4 receipts remain unchanged.
+
+Do not run the completed packing/prepare continuations again. Operational GPU v15
+and new image-v8 exact continuations/four sanitizers still need admission. Campaign
+freeze supports v8 with profile=true and requires timing-copt-contracts-v5; final
+COPT capacity/ownership, common wall budget and full 30-cell resource freeze remain
+pending. Choose the largest common project 500-update increment up to 5000 fitting
+all solves, final checks, intermediate audits and repaired-witness storage. Vendor
+iterations are different units. Never repeat an attempted scientific cell.
+
+Evidence: /storage/ai-optimizer-billion-v1/timing-copt-delivery-v1.json,
+copt-native-cpu-v2/result.json, billion-comparison-plan-v1.json,
+billion-host-availability-v5.json and timing-settled-checkpoint-v1.json.
+Prior full-solve capacity counts remain 38/37/35 with one missing response; prior
+CPU packing counts remain 18 responses/12 eligible/6 excluded. No fresh portable
+replay is claimed. The separate 240000 CPU / 30000 GPU allocation stays open;
+phase caps and earlier general allocation are unchanged. No reservation is active.
+Final settled CPU: 113801.201699752 seconds; GPU: 6952.970278844 seconds.
+All 332 documentation pages and local links validate. Commit locally only.
+
+Report: [component timings and COPT](docs/benchmarks/lp-billion.md#billion-scale-component-timings-and-installed-copt).
+Compact evidence: [admission](docs/benchmarks/lp-billion-timing-copt-results.json)
+and [final checkpoint](docs/benchmarks/lp-billion-timing-copt-checkpoint.json).
+
+# Current agent handoff: CPU packing gains; GPU readmission blocked (2026-11-20)
+
+Image-v7 reduces isolated host packing work through canonical tile indexing,
+zero-tile residual elimination, reusable tile scratch, exact preallocation and
+safe portable branchless component encoding. The original encoder remains the
+reference. All 54 Rust tests, format, Clippy, release/CUDA builds, 75 original
+supervisor and 25 resource/evidence tests pass. Both CUDA binaries, original
+strict 1e-9 certificates, control100/certificate500, public defaults and all six
+budget/idle/supervisor/placement sources remain exact. Current numerical bindings
+are 296: 289 unchanged from image-v4, four changed files and three added files.
+
+All six final 64 M CPU packing pairs pass exact packed comparisons. Median ratio
+is 1.744x (42.6% less packing time); coupled with 62,500 eligible FP4 tiles improves
+3.693 to 3.362 seconds (9.0%). Other five models have no eligible tiles. These are
+single paired CPU-stage diagnostics with alternating order, not full preparation,
+GPU execution or total-solve measurements. No broad FP4 or certified-solve claim.
+The preceding allocation-refined image-v6 retains its valid coupled regression
+3.619 to 3.841 seconds. Image-v5 retains its 3.858 to 3.994-second regression as
+ineligible history: its mutable intermediate library was overwritten before
+archival. All six first-cohort timings are excluded; original executable, sources,
+raw results and charges remain. Later cohorts retain linked libraries immutably.
+The eighteen CPU stage responses include twelve eligible timings and six exclusions.
+
+Image-v5/v6/v7 have NEVER executed on the GPU. Two fresh idle windows pass, but
+operational GPU v11/v12 (prior image-v2) stop on lost_coordinator_heartbeat at about
+15/18 seconds. Preserve 8/19 partial new response files, empty cleanup and full
+960 CPU / 240 GPU seconds. An intervening idle observation sees an 8.506 GiB / 99%
+utilization burst while no task GPU job is active; its non-passing result remains.
+No owner is inferred. The explicit observed-idle guard remains unchanged.
+
+The first SIMD quality reservation v3 fails supervision/finalization with an
+original false-cleanup receipt and full 1200 CPU seconds. All five retained
+identities are independently absent; keep the additive cleanup disposition.
+Fresh quality v4 refuses unsafe Rust and retains another full 1200 CPU seconds,
+with empty cleanup. The final safe implementation passes fresh quality v5.
+No unsafe-code lint, supervisor deadline or ownership guard is weakened. Explicit
+SIMD/AVX2 is not adopted and no measured SIMD instruction claim is made.
+
+Amendments 22–29 preserve all revisions, failures, exclusions and exact checks.
+Plans v15/v16 bind both cleanup dispositions and six CPU-only development jobs;
+those jobs are complete. Investigate repeated supervision/storage interruptions
+before fresh operational GPU v15. Then require a new five-minute idle result,
+six samples with at most 90-second gaps, fresh final proof and all original gates.
+Future image-v7 exact preparation/continuation admission, four complete sanitizers
+and ten fresh 64/256/512 M full-solve cells remain unattempted. Continue via
+`tools/lp_billion_packing_continue.py` only after addressing operational admission.
+Do not repeat failed reservations or attempted scientific/diagnostic cells.
+
+The user allows the full Pro6000 only while idle and inside this container. Latest
+post-run capacity sees 52.026 GiB host available and 5.131 GiB device use, failing
+idle. None of eighteen billion cells fits the unchanged 55–106 GiB host requirement
+including headroom; actual-FP4 coupled requires 72 GiB. All fit device capacity.
+Six original billion-nonzero inputs remain ready, zero billion solves have run,
+and the final cohort is unfrozen. Preserve the full roster and FP4 objective.
+When capacity permits, prospectively choose the largest common 500-update ceiling
+up to 5000 with full solve/audit/storage reservations and repaired dual witnesses.
+No host escape, reset, shared-memory clearing, other-job signals or owner inference.
+
+Full-solve capacity history is unchanged: 38 cells / 37 responses / 35 eligible
+timings / one old missing response. Seventeen failed reservations retain full
+36000 CPU / 1800 GPU seconds. No reservation is active; all surviving original
+false-cleanup receipts retain independent cleanup proofs. Old portable catalogs
+are unchanged; no fresh full portable replay or recovered missing library is claimed.
+The 240000 CPU / 30000 GPU allocation and all phase caps stay unchanged and open.
+Earlier general allocation remains exactly 222683.436386676 CPU / 29019.968674596 GPU.
+
+Evidence: /storage/ai-optimizer-billion-v1/packing-progress-v{1,2,3}.json,
+packing-delivery-v1.json, cpu-packing-64m-v{1,2,3}/freeze.json and
+billion-host-availability-v3.json. Open settled checkpoint including documentation:
+110219.293992796 CPU / 6952.970278844 GPU seconds. All 326 documentation pages
+and local links validate. Commit locally only; no public adoption or publication.
+
+Report: [Indexed preparation packing](docs/benchmarks/lp-billion.md#indexed-preparation-packing).
+Compact bindings: [Packing results](docs/benchmarks/lp-billion-packing-results.json).
+
+# Current agent handoff: borrowed host matrix storage validated (2026-11-20)
+
+Image-v4 removes duplicate host operator CSR/CSC indices and scaled coefficients
+by borrowing immutable slices. Original FP64 data, arithmetic, strict 1e-9
+certificates, control100/certificate500, public defaults and both CUDA binaries
+remain unchanged. Of 293 numerical bindings, 289 remain exact; four isolated
+implementation/test files change and every retained original source remains exact.
+
+Acceptance passes 52 isolated Rust tests, formatting, Clippy, release/CUDA builds,
+75 original supervisor / 24 resource tests, 66 bitwise preparation comparisons,
+60 exact GPU continuations and all four complete sanitizer suites. Racecheck keeps
+its original 20 deep-norm power iterations, passes in 389.945 charged GPU seconds
+and peaks at 7.817 GiB RSS. Its never-started 56 GiB preflight refusal is followed
+by a prospective 32 GiB declaration supported by the previous 7.604 GiB peak.
+Preserve the initial failed compile and full 480 CPU / zero GPU seconds.
+
+All ten new 64/256/512 M cells and final/intermediate independent audits complete
+with exact v3/v4 numerical transcripts. Median sampled RSS reductions are about
+25%; preparation ratios are 1.130 / 1.167 / 1.115 and complete-cost ratios are
+1.075 / 1.052 / 1.050. Preserve the 64 M coupled and both 512 M assessment
+regressions. At 512 M, irregular RSS falls 47.209 to 35.777 GiB and coupled falls
+41.642 to 30.260 GiB. All endpoints are uncertified 100-update limits. Actual FP4
+share remains 75% only for coupled cases; no broad FP4 or certified-solve claim.
+The new 512 M comparisons use valid v3 controls; old v2 timing exclusions remain.
+
+The user allows the full Pro6000, only while idle and inside the container.
+Fresh post-run capacity sees GPU idle at 0.750 GiB and 60.781 GiB host available.
+Borrowing removes a 24 GiB billion-scale capacity allowance: minimum with headroom
+falls 79 to 55 GiB and widest falls 130 to 106 GiB. Exactly two of eighteen cells
+fit host capacity (native/FP32 coupled); no FP4 lane fits. All fit GPU capacity.
+Six original billion-nonzero inputs remain ready, zero billion solves have run,
+and the final cohort remains unfrozen. Preserve the full roster and FP4 objective.
+Once capacity permits, freeze the largest common 500-update ceiling up to 5000
+with complete solve/audit/storage reservations, including repaired dual witnesses.
+Never retry an attempted scientific cell or a failed reservation.
+
+Amendments 19–21 record borrowing, source-bound admission, supported racecheck
+memory and separately supervised full transcript comparisons. CPU phase caps now
+are implementation 6000, native 20000, admission 28000, development 118000,
+reporting 62000, cleanup 6000; GPU admission/development are 5500/24500. Totals
+stay 240000 CPU / 30000 GPU. Operational v10 passes, with numeric readmission
+ordering. All original physical limits, idle guards and supervision remain. Do
+not reset the device, clear shared memory, signal others or escape the container.
+
+The record retains 38 cells / 37 responses / 35 eligible timings / one old missing
+response and thirteen failed reservations charged full 32640 CPU / 1560 GPU
+seconds. All new completed cleanup is empty and no reservation is active. Old
+portable catalogs remain exact; new source-bound receipts supplement them and no
+new full portable replay is claimed. `tools/lp_billion_memory_continue.py` has
+completed all its stages; do not repeat them. Final billion freeze/execution still
+needs capacity and its full prospective resource plan.
+
+Evidence: /storage/ai-optimizer-billion-v1/memory-results-v1.json,
+paired-{64m,256m,512m}-v3-v4.json and billion-host-availability-v2.json.
+Open settled checkpoint including final documentation: 98505.269208520 CPU /
+6712.970278844 GPU seconds. The allocation stays open; earlier general allocation unchanged.
+All 318 documentation pages and local links validate. Commit locally only; no
+public adoption or publication.
+
+Report: [Borrowed host matrix storage](docs/benchmarks/lp-billion.md#borrowed-host-matrix-storage).
+Compact bindings: [Memory results](docs/benchmarks/lp-billion-memory-results.json).
+
+# Current agent handoff: GPU preparation gains; billion solves await host RAM (2026-11-20)
+
+GPU preparation is fully admitted: 66 bitwise preparation comparisons, 60 exact
+solve continuations and all four complete sanitizers pass. Racecheck v6 keeps the
+original deep-norm 20 power iterations and passes in 430.933 charged GPU seconds.
+Retain failed racecheck v5 and its full 960 CPU / 240 GPU seconds. Fresh harness v6
+passes 22 tests, including the corrected cohort-identity shadowing regression.
+Numerical Rust/CUDA, 293 source bindings, strict original-model 1e-9 certificates,
+public defaults, control100/certificate500 and all idle guards remain unchanged.
+
+All ten image-v3 capacity cells and their final/intermediate independent audits
+complete with exact v2/v3 numerical transcripts. The six-family 64 M descriptive
+preparation / complete-cost medians are 2.897x / 1.293x; the two-family 256 M medians
+are 3.401x / 1.392x. Assessment regresses (0.934x / 0.947x) and remains included.
+All endpoints are uncertified 100-update limits. Both valid new 512 M absolute
+complete costs are 406.709 / 237.678 seconds; old 512 M timings remain excluded,
+with no paired speedup. Coupled cases execute 75% accepted FP4 work; broad FP4
+superiority and certified-solve benefit remain unestablished.
+
+The user allows the full Pro6000, still container-only and only while idle. The
+post-run capacity snapshot sees the 0.750 GiB idle baseline but only 62.364 GiB
+host RAM available. None of eighteen prospective billion cells fits: minimum
+79 GiB including headroom, up to 130 GiB for the full roster. All fit device memory.
+Do not relax host/ownership guards, clear shared memory, reset the GPU, signal
+others, escape the container or infer an owner. Six original billion-nonzero inputs
+are ready, but zero billion-scale solves have run and the final cohort is unfrozen.
+When host capacity permits, prospectively choose the largest common 500-update
+ceiling up to 5000 fitting full solve/audit/storage reservations, including repaired
+dual witnesses. Never retry an attempted scientific cell. The preparation continuation
+script has completed all its cohorts; final billion freeze/execution remains next.
+
+Amendments 15–18 preserve all failures and record the identity fix, fresh full
+racecheck reservation and supported audit host declarations. Allocation and phase
+caps stay unchanged. The checkpoint retains 28 cells / 27 responses / 25 eligible
+timings / one old missing response, twelve failed reservations retaining full
+32160 CPU / 1560 GPU seconds, and 293 exact numerical bindings. All new cleanup is
+empty; no reservation is active. The old portable catalog remains unchanged, with
+new source-bound receipts supplemental; no fresh full portable replay is claimed.
+
+Evidence: /storage/ai-optimizer-billion-v1/preparation-progress-v2.json,
+preparation-device-checkpoint-v2.json, paired-{64m,256m,512m}-v2-v3.json and
+billion-host-availability-v1.json. Open settled checkpoint including final documentation:
+86933.674672092 CPU / 5341.824658053 GPU seconds. The separate 240000 CPU / 30000 GPU
+allocation stays open; the earlier general allocation is unchanged. Commit locally
+only; no public adoption or publication. All 315 documentation pages and local
+links validate.
+
+Report: [GPU preparation timings and host memory](docs/benchmarks/lp-billion.md#gpu-preparation-timings-and-host-memory).
+Compact bindings: [GPU preparation results](docs/benchmarks/lp-billion-gpu-preparation-results.json).
+
+# Current agent handoff: partial GPU preparation validation (2026-11-20)
+
+The Pro6000 passes a six-minute idle window and operational GPU v8 completes
+60 exact continuations. Image-v3 then passes 66 bitwise preparation comparisons
+(57 GPU results and nine explicit host fallbacks), 60 exact solve continuations
+and 130 independent strict scalar checks. The complete corrected memcheck v4
+passes seven GPU preparations, one host fallback and 20 continuations / 60 scalar
+checks. Numerical Rust/CUDA, strict certificates and public defaults are unchanged;
+293 numerical source bindings verify. No GPU preparation performance cohort or
+billion-nonzero LP solve has started.
+
+Preserve three failed admission reservations and full additional 2880 CPU / 720
+GPU seconds: memcheck v3 instruments a no-CUDA host fallback; racecheck v3 reaches
+16 GiB sampled RSS during deep norm; racecheck v4 stops on the unchanged 2 GiB
+unattributed-memory guard after two small cases. All cleanup is empty and all 72
+retained process identities are gone. The harness now runs the CPU-only fallback
+normally and retains fatal checks on actual GPU paths. Fresh racecheck v5 uses
+three analysis workers, synchronization after eight launches and a 64 GiB host
+reservation within the existing 128 GiB cap; it has not started. No kernel/hazard
+filters or numerical changes are introduced.
+
+A subsequent CPU-only idle-confirmation v5 stops with lost_coordinator_heartbeat;
+five partial samples show 5.390–5.597 GiB unattributed usage, so none passes idle.
+Retain its missing final result, sources, full 1920 CPU / zero GPU charge and empty
+cleanup. The monitor closes and starts no GPU job. Latest fresh telemetry reaches
+5.836 GiB with no listed owner. Do not infer an external owner or a proven leak.
+Remain container-only: no host access, reset, configuration change or other-job
+signals. No more GPU reservation is active.
+
+Amendments 11–14 preserve all failures and move unused phase capacity within the
+unchanged 240000 CPU / 30000 GPU totals. CPU caps are implementation 6000, native
+20000, admission 16000, development 130000, reporting 62000, cleanup 6000; GPU caps
+are admission 3000 / development 27000. Operational plan v9 binds the transfer.
+Fresh operational CPU v9 passes 75 supervisor / 22 resource-evidence tests.
+Operational GPU v9 still needs a new five-minute idle window, six samples with
+at most 90-second gaps and a fresh final sample; then run pending racecheck v5,
+initcheck v3 and synccheck v3 before timing cohorts. Resume with
+`tools/lp_billion_prepare_continue.py`; observations now collect under
+availability/operational-gpu-v9. Never retry an attempted scientific cell or a
+failed reservation. The allocation remains open with eleven failed reservations
+retaining 31200 CPU / 1320 GPU seconds. Six billion-nonzero inputs remain ready.
+
+Evidence: /storage/ai-optimizer-billion-v1/preparation-progress-v1.json and
+preparation-device-checkpoint-v1.json. See
+[device validation](docs/benchmarks/lp-billion.md#gpu-preparation-device-validation)
+and [compact receipt](docs/benchmarks/lp-billion-preparation-admission.json).
+Commit locally only. Open settled checkpoint including final documentation:
+75147.503818756 CPU / 3764.416660567 GPU seconds. Documentation validates
+311 pages and local links; no reservation is active.
+
+# Current agent handoff: container-only GPU leak audit (2026-11-20)
+
+The user explicitly prohibits escaping the container. No host-shell connection is
+available; do not request it again or attempt host namespace/filesystem access.
+Read-only memory diagnostics compare all nine legacy/v2/v3 compute/graphics/MPS
+APIs, memory v1/v2, visible device handles and retained process identities.
+Six samples spanning five minutes retain 10.542 GiB used and zero utilization;
+a subsequent sample rises to 10.858 GiB. Only 0.622 GiB is driver-reserved.
+The fixed 2 GiB unexplained-memory gate remains unchanged and fails.
+The later six-minute idle-confirmation window cycles 0.750 → 5.584 → 0.750 →
+65.451 GiB, reaching 70% utilization while no GPU job from us starts. It never
+passes five uninterrupted idle minutes; operational GPU v8 remains unattempted.
+
+The leak audit checks 2056 resource receipts and 191104 distinct PID/start-time
+identities; none survives, and no visible process holds an NVIDIA/DRM device
+handle. The 128 M interruption stays at the original 0.750 GiB baseline; memory
+returns to that baseline after both 512 M runs and before operational GPU v7.
+That last GPU reservation declares at most 1.81 MiB of solver buffers in its 42
+raw responses, plus context/module overhead. Later observations reach 77.825 GiB
+and 99% utilization while our subsequent jobs are CPU-only. No surviving ordinary
+solver allocation is identified, but driver-level orphan memory cannot be
+conclusively excluded within this container. Do not claim a proven external owner.
+
+Process inventories are empty even during retained traces of our own GPU work;
+they cannot independently attribute memory. Kernel logs are denied and driver
+clients are not exposed. No reset, configuration change, CUDA context, signal to
+another process or new GPU reservation occurs during this investigation. Both
+supervised diagnostic jobs pass with empty cleanup and zero GPU charge. The new
+GPU preparation module has still never executed. Validation and all billion-scale
+solves remain pending the unchanged idle and operational gates; do not retry old
+scientific cells or relax strict certificates. The allocation stays open.
+The additional idle-confirmation job also passes supervision with empty cleanup
+and zero GPU charge. Open settled checkpoint: 64401.039603840 CPU /
+2870.821030734 GPU seconds. No reservation is active; 307 documentation pages pass.
+
+Evidence: /storage/ai-optimizer-billion-v1/ownership-diagnosis-v1 and
+/storage/ai-optimizer-billion-v1/own-memory-audit-v1. Report and compact receipt:
+[GPU memory investigation](docs/benchmarks/lp-billion.md#container-only-memory-investigation)
+and [audit bindings](docs/benchmarks/lp-billion-ownership.json). Commit locally only.
+
+# Current agent handoff: GPU preparation awaits idle device (2026-11-20)
+
+The user authorizes full LP solves with one billion original nonzeros on the
+Pro6000 only while idle and requests GPU scaling, norm and step-size estimation
+with strict certificates. SPEC-0046 and ten additive amendments govern a separate
+240000 CPU / 30000 GPU-second allocation: four slots, 128 GiB sampled host RSS,
+80 GiB owned device buffers and 400 GiB owned storage. The earlier general
+allocation remains open and exact at 222683.436386676 CPU / 29019.968674596 GPU.
+
+The isolated original-array executor admits image-v1/v2 with the unchanged
+fast-image-v10 solve CUDA. Both six-family 64 M cohorts have exact transcripts;
+v1/v2 descriptive complete-cost median is 1.134, all uncertified at 100 updates.
+The full capacity ladder retains 18 cells, 17 responses, 15 eligible timings and
+one missing 128 M irregular response. Every completed response has independent
+final/intermediate checking. Both 512 M timings are excluded by additive ownership
+dispositions, retaining original receipts, numerical results and full charges.
+Never retry an attempted scientific cell or generalize these limit-run timings.
+
+The new opt-in FP64 GPU preparation module implements exact-tree Ruiz/Pock scaling,
+scaled CSR/CSC, spectral power products, norms, normalization and step calculation.
+Strict original-model CPU certificates and independent scalar checking stay exact.
+Public sources/defaults remain unchanged. Candidate CPU acceptance passes 51 Rust
+tests, formatting, Clippy, release and CUDA compilation; it has NEVER executed on
+GPU. Device bitwise comparisons, four sanitizers and total-time measurements are
+pending. Native acceptance is 638 Rust / 835 Python; images v1/v2 each pass 60 GPU
+continuations and four 20-case sanitizers. Current resource/evidence tests pass 21;
+original supervisor tests pass 75. The checkpoint verifies 293 numerical bindings.
+
+All six connected one-billion-nonzero inputs are generated and construction-checked:
+irregular, wide, tall, coupled blocks, ill-scaled and degenerate. Coupled blocks has
+750 million eligible FP4 nonzeros; other families have no canonical eligible tiles.
+Construction witnesses never enter solves. Zero billion-scale solves have run.
+Their six CPU jobs consume 11517.112111744 CPU seconds, zero GPU, cleanup empty.
+
+The pinned UUID is GPU-6721b13a-30f9-83ec-dace-ba2d9738556f. About 10 GiB of
+unattributed usage prevents idle admission. Do not reset the device or signal other
+work. The fixed 2 GiB unattributed-memory guard correctly stops operational GPU v7
+when usage returns after 35 seconds; retain full 480 CPU / 120 GPU, partial responses
+and empty cleanup. Operational GPU v8 needs at least five minutes of observed idle,
+six samples with gaps at most 90 seconds and a fresh final sample. Plan v8 permits
+only the six named CPU construction jobs while that GPU gate is incomplete.
+
+Resume with tools/lp_billion_prepare_continue.py after idle observation. It performs
+fresh operational/device/sanitizer admission and new 64/256/512 M candidate cohorts,
+retaining every regression and refusing failed/unsettled job repetition. Final 18
+billion-scale native/FP32/FP4x2 cells remain unfrozen: choose the largest common
+500-update ceiling up to 5000 that fits full time, audit and storage reservations,
+including possible repaired dual witnesses. Keep 100-update control, 500-update
+certification and strict 1e-9 criteria. Do not infer admission from source availability.
+
+Seven failed reservations retain 26400 CPU / 600 GPU seconds and sources. The first
+portable catalog omitted retained Cargo.lock files; originals remain intact and
+the filter has a regression test. Preserve its failed catalog and full charge.
+The original 128 M false-cleanup receipt remains alongside later independent cleanup
+proof. Every other completed reservation has empty cleanup. No allocation is closed.
+Corrected portable replay verifies 33729 files and 49158 references from a relocated
+root, with temporary hardlinks removed. Latest telemetry reports about 78 GiB used
+and 99% utilization; GPU admission and the billion-scale solves remain blocked.
+Large evidence stays in /storage/ai-optimizer-billion-v1. Commit compact results
+locally only; no public adoption, confirmation or publication is released.
+
+Open settled checkpoint: 61442.317804716 CPU / 2870.821030734 GPU seconds.
+Documentation validates 307 pages and their local links. No reservation is active.
+
+Report: [billion-scale and GPU preparation](docs/benchmarks/lp-billion.md).
+
+# Current agent handoff: preparation/control overhead delivered (2026-11-19)
+
+The user requests reducing preparation and control so fast FP4 execution lowers
+complete single-solve time. Opt-in scale-image-v14 adds exact gathered products,
+scoped host workers and reusable scratch, parallel canonical FP4 packing and
+checked indexed construction in an isolated host derivative. Original arithmetic,
+strict certificates, public source/defaults and fast-image-v10 CUDA stay exact.
+
+All five cohorts complete 150/150 supervised measurements. The first shared
+implementation has a 1.029 jointly certified complete-cost median. Final v12/v14
+preparation ratios are 1.073 at 1 M and 1.055 on the limited 16 M extension;
+certified complete-cost medians are 1.024 and 1.016. The final comparisons retain
+18 and six exact non-deadline pairs. Every lower-scale version/lane certifies
+5/8; both public models hit the final 10-second limit. Keep all uncertified,
+regressing and deadline observations. Separate cohort medians are not cumulative.
+
+Coarser 500-update control increases work and regresses certified total time
+(100/500 ratios 0.928 at lower scale and 0.933 at 16 M); retain 100-update control.
+The final coupled 16 M FP4 solve takes 19.263 seconds versus 20.119 native and
+19.917 FP32, with 75% accepted FP4 work and unchanged 2500 updates. Execution is
+0.314 versus native's 1.666 seconds, but host work dominates. Broad repeatable
+FP4 superiority remains unestablished. Keep the full lower-scale roster, twelve
+16 M capacity refusals and four other unmeasured capacity-admitted models.
+
+Fresh native acceptance passes 638 Rust / 827 Python; the final image passes
+40 isolated Rust tests. Both admitted images pass 60 exact GPU continuations
+and four 20-case sanitizer suites. Extracted-root replay verifies 25843 files,
+150 campaign and 302 admission responses, and 3294 assessments / 846 distinct
+serial witnesses. All 19520 checked prior host-cost scientific bindings remain
+exact. Large evidence stays local in 26 parts. Four failed build/native/packaging
+reservations retain sources and full 8200 CPU seconds, zero GPU. No attempted
+scientific cell is retried; all completed cleanup is empty.
+
+The independent 240000 CPU / 30000 GPU allocation stays open. Operational
+readmission v7/v8 binds prospective phase transfers, with unchanged four slots,
+16 GiB sampled RSS, 12 GiB device buffers, pinned lease, one-second supervision
+and all 100 ms advisories. Commit locally only; no public adoption, confirmation
+or publication is released.
+
+Open settled checkpoint: 222683.436386676 CPU / 29019.968674596 GPU seconds.
+
+Report: [preparation/control](docs/benchmarks/lp-general-prep-control.md).
+
+# Current agent handoff: shared host overhead delivered (2026-11-19)
+
+The user requests reducing preparation, assessment and control time. The opt-in
+scale-image-v9 retains the fast-image-v10 CUDA image and original host products,
+control cadence, strict certificate criteria and public defaults. Borrowed
+immutable feasibility preparation, checked direct dense-ID lookup and smaller
+exact-certificate scratch reduce shared checker overhead. The first in-place
+product candidate's preparation regression and all its observations remain.
+
+Both fixed-work cohorts complete 96/96 measurements with 48 exact pairs each.
+Final descriptive assessment / complete-cost ratios are 1.267 / 1.067. The
+ordinary single-solve cohort completes 48/48: every version/lane certifies 5/8,
+15 jointly certified pairs have a 1.052 complete-cost median, and all 21 pairs
+without deadlines retain exact full transcripts. Three scpm1 controls hit the
+wall limit while the candidate reaches 20000 updates; none certifies. All 509
+common intermediate assessments match. The coupled actual-FP4 solve remains
+flat, including 75% accepted FP4 product work; broad FP4 superiority remains
+unestablished. Preparation, control, transport and general convergence remain
+open targets; do not narrow to prepared workflows or native fallback.
+
+Native acceptance passes 638 Rust / 827 Python. Each image passes 37 isolated
+Rust tests, 60 exact GPU continuations and four 20-case sanitizer suites.
+Extracted-root replay verifies 20092 files, 240 campaign and 280 admission
+responses, and 2749 assessments / 483 distinct serial witnesses. All 91476
+checked prior scale-evidence bindings stay exact. All new measurements have
+complete supervision; no new failed reservation or missing cell is introduced.
+Large evidence stays local in 23 archive parts. Commit locally only; no public
+adoption, confirmation or publication is released.
+
+The 240000 CPU / 30000 GPU allocation stays open under unchanged four slots,
+16 GiB sampled RSS, 12 GiB device buffers, pinned lease, one-second supervision
+and all 100 ms advisories. Every completed reservation has empty cleanup.
+
+Open settled checkpoint: 195952.885224432 CPU / 25975.890687406 GPU seconds.
+Report: [host cost](docs/benchmarks/lp-general-host-cost.md).
+
 # Current agent handoff: general LP PR acceptance complete (2026-11-17)
 
 The user authorizes publishing and normally merging the eight original feature

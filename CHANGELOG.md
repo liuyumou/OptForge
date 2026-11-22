@@ -1,5 +1,14 @@
 # Changelog
 
+## Billion-scale LP preparation, packing and control (2026-11-22)
+
+- Reduce exact host preparation/checker overhead and bound large-array memory.
+- Add opt-in GPU preparation, FP4 packing with a zero-eligible fast path, and
+  GPU assessment/control with strict original-model 1e-9 CPU acceptance.
+- Retain complete phase timings, independent audits and the COPT comparison,
+  including all failed, missing and uncertified outcomes; public defaults stay
+  unchanged. [PR review and validation](docs/benchmarks/lp-billion-pr.md).
+
 ## General low-bit LP implementation and scale evaluation (2026-11-17)
 
 - Deliver the controlled GPUP-9 study, general sparse LP research executor and

@@ -1,5 +1,23 @@
 # Project Status
 
+## Billion-scale LP PR acceptance complete (2026-11-22)
+
+[PR #29](https://github.com/liuyumou/OptForge/pull/29) integrates the fifteen
+preparation, packing, assessment/control and COPT-comparison commits. Native
+acceptance, 963 final Python tests, 218 isolated Rust tests and 136 source-only
+harness tests pass. All 306 numerical bindings and admitted resource/image sources
+remain exact. Strict 1e-9 CPU authority and public defaults are unchanged.
+
+The completed COPT comparison retains all twelve slots and has no jointly timely
+strict complete-time pair. All historical outcomes and charges remain. Hosted CI
+fails before starting jobs; the documented local CPU/docs/smoke fallback permits
+normal merge without changing or bypassing protection. The user authorizes this
+PR and merge, preserving all feature commits. No GPU work or monitor is started.
+
+[Review and validation](../docs/benchmarks/lp-billion-pr.md) records the fixes,
+limits and separate CPU integration receipts. Earlier local-only entries retain
+their historical scope.
+
 ## General LP PR acceptance complete (2026-11-17)
 
 The user authorizes publishing and normally merging the eight original feature

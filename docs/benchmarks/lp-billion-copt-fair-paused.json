@@ -1,0 +1,740 @@
+{
+  "active_reservations": [],
+  "cancel_receipt": {
+    "bytes": 366,
+    "namespace": "evidence",
+    "path": "resources/copt-fair-tail-idle-v2.settlement.json",
+    "sha256": "547789f717625698a866a61f82ad3098c4c2e2211ec14a6d4bc02ed916879051"
+  },
+  "capacity": {
+    "bytes": 69888,
+    "namespace": "evidence",
+    "path": "copt-fair-capacity-v1.json",
+    "sha256": "86a49bba4c96cc5cdeff60dd63f559e914acf6980c1e110a6e72c9ca3c37f7f8"
+  },
+  "continuation_plan": {
+    "bytes": 2300,
+    "namespace": "evidence",
+    "path": "copt-fair-untouched-tail-v2/plan.json",
+    "sha256": "c7603db362258e87dbd941ec0bb7e07fefc768256e336cd9ae2673fabc945c00"
+  },
+  "cpu_by_phase_ns": {
+    "admission": 59791653985356,
+    "cleanup": 667734258256,
+    "development": 169950267138544,
+    "implementation": 5511184496016,
+    "native": 23582819188488,
+    "reporting": 117187154514964
+  },
+  "cpu_caps": {
+    "admission": 72000,
+    "cleanup": 2000,
+    "development": 260000,
+    "implementation": 10000,
+    "native": 26000,
+    "reporting": 200000
+  },
+  "cpu_ns": 376690813581624,
+  "diagnostic": {
+    "bytes": 74763,
+    "namespace": "evidence",
+    "path": "copt-diagnostic-results-v1.json",
+    "sha256": "0ed74a98436d4d032bf0b380a9e3b98c15e56b0f5056866913d6185f007759e5"
+  },
+  "evaluations_complete": false,
+  "failed_cpu_ns": 107220620150944,
+  "failed_gpu_ns": 9570000000000,
+  "failed_reservations": 56,
+  "failures": [
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 369,
+        "namespace": "evidence",
+        "path": "resources/array-memcheck-v3.settlement.json",
+        "sha256": "ecd8eb86929d253107e33bd8cbd6bca4d83b7831ccbaa52e0169ac0bb8011ce9"
+      }
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v2.settlement.json",
+        "sha256": "205c2fb5c6f0a2e8b34288492b3a7a02677ec25a5f7124243ab4278e2f370052"
+      }
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v3.settlement.json",
+        "sha256": "e12a62366eba77fb049b6d5d1e5fafb37af71100118a08748b2e4e9de6356176"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v3.settlement.json",
+        "sha256": "625930a3ff648974a37f895496d427451742b90111b34a7755fdef447ff7e698"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 370,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v4.settlement.json",
+        "sha256": "930e9f9324f605b13d2517f1cf0564f050b3334a8a3854567f6016674b5e0caa"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v5.settlement.json",
+        "sha256": "7300125cdcf6814d717fad29eb02a9599cb30e0ae333959a3bad1b22de0fb9d3"
+      }
+    },
+    {
+      "cpu_ns": 12000000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/billion-native-v1.settlement.json",
+        "sha256": "0127666f55f95f185dea87cef532d5ef0da3a5191b0fcfce1e3790907ec2f08c"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 381,
+        "namespace": "evidence",
+        "path": "resources/bounded-memory-cpu-v1-64m-3-candidate.settlement.json",
+        "sha256": "05cc09538dd1a0a4d2695703f88a882363eb8ad4d97c79646aa7505734bb9af0"
+      }
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 361,
+        "namespace": "evidence",
+        "path": "resources/complete-harness-v1.settlement.json",
+        "sha256": "4b3ef755809dfbefdfc72e3869f1504ea893d59d6c6d7d33e19fc42c81c862a4"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 390,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-256m-v2-0-copt-gpu-pdlp.settlement.json",
+        "sha256": "a1a77fa88ea105cda38707363879984484429317461e1f3a8553497a875dceeb"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 380,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-256m-v2-1-copt-cpu-auto.settlement.json",
+        "sha256": "b44fae0758f470a51b78d9938c3ada2c45775eb34bdb57cb46ace8d72fdc34df"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 390,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-256m-v2-1-copt-gpu-pdlp.settlement.json",
+        "sha256": "4f64d702e196a1d72658e9d2980d21edf2981c5ffe36b8431aa5466592d53e00"
+      }
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu_ns": 600000000000,
+      "settlement": {
+        "bytes": 393,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-512m-v2-1-copt-gpu-pdlp.settlement.json",
+        "sha256": "0941f3fd88f17add44a0ac46a70af32c23be1b5d95e30a2d4f77ab0fbe29dd54"
+      }
+    },
+    {
+      "cpu_ns": 400620150944,
+      "gpu_ns": 100000000000,
+      "settlement": {
+        "bytes": 389,
+        "namespace": "evidence",
+        "path": "resources/copt-capacity-64m-v1-1-copt-gpu-pdlp.settlement.json",
+        "sha256": "f4707c7a84827b2ad2953172afb69ead1f2b5845e1b1ec202a35085a43af9304"
+      }
+    },
+    {
+      "cpu_ns": 11200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 385,
+        "namespace": "evidence",
+        "path": "resources/copt-fair-1b-v1-tall-project-full-audit.settlement.json",
+        "sha256": "268ae29e19b5eef5619ff41d100231501a0dc2f47b5b9de4c18699fbbbc67b70"
+      }
+    },
+    {
+      "cpu_ns": 7200000000000,
+      "gpu_ns": 1800000000000,
+      "settlement": {
+        "bytes": 385,
+        "namespace": "evidence",
+        "path": "resources/copt-fair-1b-v1-wide-project.settlement.json",
+        "sha256": "d36de130b4397a1731d59747d5ecb05f33c5dc6c86af713d7909d44f50daf727"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/copt-fair-readiness-v1.settlement.json",
+        "sha256": "7ec8a01fc129369e5e5eac0910c6afd358bab3ebedab79a972f8e19932cd500b"
+      }
+    },
+    {
+      "cpu_ns": 1920000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/copt-fair-tail-idle-v2.settlement.json",
+        "sha256": "547789f717625698a866a61f82ad3098c4c2e2211ec14a6d4bc02ed916879051"
+      }
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 378,
+        "namespace": "evidence",
+        "path": "resources/copt-fair-tall-audit-completion-v1.settlement.json",
+        "sha256": "c3944ee266e517258e70f1895c2fde162721189bd1506013c9b616d65b790e36"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 375,
+        "namespace": "evidence",
+        "path": "resources/copt-full-admission-v1.settlement.json",
+        "sha256": "6394e512316e3a2e62630e8b4dbeb2b5a45f9c50b02f502d2e39928f941bfc66"
+      }
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/copt-native-cpu-v1.settlement.json",
+        "sha256": "0505480b80614b56e9be5df3be5f34d87c362dc9def98d99de9560b6bd1b7696"
+      }
+    },
+    {
+      "cpu_ns": 3600000000000,
+      "gpu_ns": 900000000000,
+      "settlement": {
+        "bytes": 380,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-1b-v1-2.settlement.json",
+        "sha256": "a2f8bb67023fcec4c63e4cbda0b9e84007b4d38e1f47c4b742196799e9a6aba0"
+      }
+    },
+    {
+      "cpu_ns": 3600000000000,
+      "gpu_ns": 900000000000,
+      "settlement": {
+        "bytes": 380,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-1b-v1-4.settlement.json",
+        "sha256": "16e7c978bed627e2bb9aa26ef7cea01dd8a3c759f718d1544db9af77cc4c4e56"
+      }
+    },
+    {
+      "cpu_ns": 3600000000000,
+      "gpu_ns": 900000000000,
+      "settlement": {
+        "bytes": 380,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-1b-v1-5.settlement.json",
+        "sha256": "4cb7b53e8b5f6df21b71f5a4512c1c69786bd5fbd65af573897c510065f142bf"
+      }
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu_ns": 600000000000,
+      "settlement": {
+        "bytes": 381,
+        "namespace": "evidence",
+        "path": "resources/copt-nopresolve-512m-v1-1.settlement.json",
+        "sha256": "34e832321c185f058c5f9d1b937833bb26f40e17b108ac9b94157590312f37b8"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 365,
+        "namespace": "evidence",
+        "path": "resources/disk-inventory-build-v1.settlement.json",
+        "sha256": "04016c090e5f8dd947e3a751672f94380ce62c99375635139181c0ffc5e6c54b"
+      }
+    },
+    {
+      "cpu_ns": 5000000000000,
+      "gpu_ns": 1250000000000,
+      "settlement": {
+        "bytes": 381,
+        "namespace": "evidence",
+        "path": "resources/gpu-control-1b-v1-1-v11.settlement.json",
+        "sha256": "d3fde6f3cbc9228b34b6a8f34809a260590eb2838b6dc8f037846df54bc7e4a2"
+      }
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 362,
+        "namespace": "evidence",
+        "path": "resources/gpu-control-quality-v1.settlement.json",
+        "sha256": "bfeb548e21026740b2c0537188c0498ec01251fe9ea6808ddfbb5e08dd0785e7"
+      }
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 363,
+        "namespace": "evidence",
+        "path": "resources/gpu-control-quality-v2.settlement.json",
+        "sha256": "ad34be4291d92ca8edddcd4ab6cc7cc79d2d38f62675822b03c66cb4a1b54584"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 369,
+        "namespace": "evidence",
+        "path": "resources/gpu-control-verification-v1.settlement.json",
+        "sha256": "646db9a28673b3539c4a4040244bd78755a49fb9d5e45519b6b9638aaa974200"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/gpu-pack-freeze-64m-v1.settlement.json",
+        "sha256": "138f166dc92c027e719819fa42f0c79ebe06a63a650834ec365119962c7e2b9c"
+      }
+    },
+    {
+      "cpu_ns": 240000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/gpu-pack-freeze-64m-v2.settlement.json",
+        "sha256": "558dee08d1999f8c8294dfeb0b64047e48655dccc0bbc89353ca5961a132436f"
+      }
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 367,
+        "namespace": "evidence",
+        "path": "resources/gpu-pack-quality-v1.settlement.json",
+        "sha256": "e873eb3a33657ea65531395ad38ca79cba1067807e1fe749a9b7e8a111d9f078"
+      }
+    },
+    {
+      "cpu_ns": 1920000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 367,
+        "namespace": "evidence",
+        "path": "resources/gpu-pack-quality-v2.settlement.json",
+        "sha256": "e4eb95ad49ce3403cd5a4b2f98285edddcc279e7ac3263d86162a24796283ca1"
+      }
+    },
+    {
+      "cpu_ns": 1920000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 359,
+        "namespace": "evidence",
+        "path": "resources/gpu-pack-quality-v3.settlement.json",
+        "sha256": "5c48500a5a178de0b089df322c0cab944812b6a50e8e6d674c2038ca4e1bed08"
+      }
+    },
+    {
+      "cpu_ns": 1920000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 359,
+        "namespace": "evidence",
+        "path": "resources/gpu-pack-quality-v4.settlement.json",
+        "sha256": "d5801928f37af27dd376ece4fa0be5bdb0d41c2ef6e0c1d25275fe26ec6344e5"
+      }
+    },
+    {
+      "cpu_ns": 560000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 358,
+        "namespace": "evidence",
+        "path": "resources/gpu-pack-quality-v5.settlement.json",
+        "sha256": "6da7b5b98abd646ec1191cba6aeb1dae375fde684ad99b464683f642af5f0475"
+      }
+    },
+    {
+      "cpu_ns": 120000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 358,
+        "namespace": "evidence",
+        "path": "resources/gpu-pack-seal-v1.settlement.json",
+        "sha256": "34ce458208a7a8f6f450f38612276a0ec6a231a89c3fa53f161921bf61da454c"
+      }
+    },
+    {
+      "cpu_ns": 720000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/gpu-pack-verification-v1.settlement.json",
+        "sha256": "03e6becad228711f3c702e18b056879e3e40c794435e5be2f605b3beb15c60a7"
+      }
+    },
+    {
+      "cpu_ns": 1920000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/idle-confirmation-v5.settlement.json",
+        "sha256": "9102a6c8df1aabf26107870bdf5753da670ae4b65432eab39bbad978296680bb"
+      }
+    },
+    {
+      "cpu_ns": 1920000000000,
+      "gpu_ns": 480000000000,
+      "settlement": {
+        "bytes": 378,
+        "namespace": "evidence",
+        "path": "resources/ladder-128m-v2-0-fp4x2.settlement.json",
+        "sha256": "40a7b6502c76f005d5d72b10c3d46eb5161e7ea2037ba4cef99349f3e335b827"
+      }
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/memory-compile-v1.settlement.json",
+        "sha256": "fc0188eec852de43532f12504369d3a844d44551fc8410ba5f5966301b26b9f0"
+      }
+    },
+    {
+      "cpu_ns": 720000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 362,
+        "namespace": "evidence",
+        "path": "resources/operational-cpu-v19.settlement.json",
+        "sha256": "0ba4de6f519e4f12c9582180313e33954ac442b86e55a92ce659e9061a5ca570"
+      }
+    },
+    {
+      "cpu_ns": 720000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 362,
+        "namespace": "evidence",
+        "path": "resources/operational-cpu-v22.settlement.json",
+        "sha256": "e2abd3364561f3c3c5f4053d3525b2fa395f6a3354746877853e5545ea3e356d"
+      }
+    },
+    {
+      "cpu_ns": 720000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 362,
+        "namespace": "evidence",
+        "path": "resources/operational-cpu-v25.settlement.json",
+        "sha256": "9dd756a8440c95a54b891af1bd50fb4932c555e317f866963e4198b83cf03be3"
+      }
+    },
+    {
+      "cpu_ns": 720000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 362,
+        "namespace": "evidence",
+        "path": "resources/operational-cpu-v27.settlement.json",
+        "sha256": "6ba23e05222035c4b935506fd3bb018c15c872b64f3a8d65d1b2de8016067547"
+      }
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu_ns": 120000000000,
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v11.settlement.json",
+        "sha256": "6d38099ca42ca2e9f2ba0f81c9b5dd2d1636750ae8ef3dad15b8ab55663c90a4"
+      }
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu_ns": 120000000000,
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v12.settlement.json",
+        "sha256": "ce9da59a84693cd437400cd37de3b64aecd69dbe6f8b2bb80b89537b0ca5c3b4"
+      }
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu_ns": 120000000000,
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v7.settlement.json",
+        "sha256": "3ee018843028f43961c41240a98740568096f693a94e2d2aee39f5a8f49c9598"
+      }
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 362,
+        "namespace": "evidence",
+        "path": "resources/packing-quality-v3.settlement.json",
+        "sha256": "fd1ddc9277d7be814ab5d39171c4ec93fd13ca1f6beca12e21d6d527a4c7a9cc"
+      }
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 361,
+        "namespace": "evidence",
+        "path": "resources/packing-quality-v4.settlement.json",
+        "sha256": "4e0ff304bc2b76095e467aac5205b34d1562188503fed95cdef7d982f3a78e53"
+      }
+    },
+    {
+      "cpu_ns": 7200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 372,
+        "namespace": "evidence",
+        "path": "resources/portable-gpu-preparation-v1.settlement.json",
+        "sha256": "57ea2b0d4f787cbea5d5f3cd9b2a2c97a637aad22310b4a50d514c4904d2de9d"
+      }
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/prepare-build-check-v1.settlement.json",
+        "sha256": "2120a5e275247293dcc63998cb60f36f77bc6e3a2bba2b43ae906ecab891d33d"
+      }
+    },
+    {
+      "cpu_ns": 180000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/timing-copt-contracts-v1.settlement.json",
+        "sha256": "39146e25f31b36a7c0d6bf60f11c027ca93a32f596433a8426ae805a70233117"
+      }
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/timing-quality-v1.settlement.json",
+        "sha256": "12054e8e17937f4310e3541f947c5f570c2a108cd8a68d4233a1c57dacc476a5"
+      }
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/timing-quality-v2.settlement.json",
+        "sha256": "27f27e0e025cacbe19658b086b2c80324d97adbf6ae1e6767ecaa975a80e56f3"
+      }
+    }
+  ],
+  "final_comparison_verification_not_run": true,
+  "freeze": {
+    "bytes": 28841,
+    "namespace": "evidence",
+    "path": "copt-fair-1b-v1/freeze.json",
+    "sha256": "20aa0faf4d0b292be401337b98d95d92c023e3d753143d1bc7b23ba96823d9f7"
+  },
+  "gpu_by_phase_ns": {
+    "admission": 8159928860847,
+    "development": 34717711526800
+  },
+  "gpu_caps": {
+    "admission": 12000,
+    "development": 56000
+  },
+  "gpu_ns": 42877640387647,
+  "harness_tests": 122,
+  "large_replay_requires_regeneration": true,
+  "latest_cpu_admission": {
+    "bytes": 360,
+    "namespace": "evidence",
+    "path": "resources/operational-cpu-v32.settlement.json",
+    "sha256": "6f57732e2ca28305afad9929890656869498fc394042cf58f1beac4699df1b9c"
+  },
+  "never_attempted": [
+    "copt-fair-1b-v1-tall-copt",
+    "copt-fair-1b-v1-coupled_blocks-copt",
+    "copt-fair-1b-v1-coupled_blocks-project",
+    "copt-fair-1b-v1-ill_scaled-project",
+    "copt-fair-1b-v1-ill_scaled-copt",
+    "copt-fair-1b-v1-degenerate-copt",
+    "copt-fair-1b-v1-degenerate-project"
+  ],
+  "proof_seal": {
+    "bytes": 4358,
+    "namespace": "evidence",
+    "path": "copt-fair-tall-proof-seal-v1/result.json",
+    "sha256": "c4a88d76279679c1adbd9768dc19c207366494dd4c21dfa4e64a58e5f13fc089"
+  },
+  "results": [
+    {
+      "audit": {
+        "bytes": 4477,
+        "namespace": "evidence",
+        "path": "copt-fair-1b-v1-irregular-project-full-audit/result.json",
+        "sha256": "075e57e1664ecb5ee7451d87e3bdcdf86bc36b7f16f1af00677248dba664b92f"
+      },
+      "complete_ns": 1605635640784,
+      "fresh_process_ns": 1371862572364,
+      "id": "copt-fair-1b-v1-irregular-project",
+      "measured": {
+        "bytes": 2414,
+        "namespace": "evidence",
+        "path": "copt-fair-1b-v1-irregular-project/result.json",
+        "sha256": "cfa4b14841e0f4a28967f091ad4fe4e5cb077f2d4858444c6b72371337add975"
+      },
+      "response": {
+        "bytes": 55896,
+        "namespace": "evidence",
+        "path": "copt-fair-1b-v1-irregular-project/response.json",
+        "sha256": "1b64869f0e19de3ffa1a985b9f7e442f73f7ca1008f77243ee6dd06ad2d840f6"
+      },
+      "solver_ns": 1271866986207,
+      "status": "deadline",
+      "strict_endpoint_accepted": false
+    },
+    {
+      "audit": {
+        "bytes": 344,
+        "namespace": "evidence",
+        "path": "copt-fair-1b-v1-irregular-copt-full-audit/result.json",
+        "sha256": "d16bbd30e820ff3237a4931c91a61cd0771e003d981f68bbe161fb3395bc07c4"
+      },
+      "complete_ns": 1244888966504,
+      "fresh_process_ns": 1244888966504,
+      "id": "copt-fair-1b-v1-irregular-copt",
+      "measured": {
+        "bytes": 508,
+        "namespace": "evidence",
+        "path": "copt-fair-1b-v1-irregular-copt/result.json",
+        "sha256": "6b5e9fc7b9794ba28084216ac23e8a921772c9d5ebc394cb36311721ada9dd5f"
+      },
+      "response": {
+        "bytes": 3288,
+        "namespace": "evidence",
+        "path": "copt-fair-1b-v1-irregular-copt/response.json",
+        "sha256": "3bf295853781d49fc77542d3685670cedebc145867ffb668fe5c7c8a2dcb8bf6"
+      },
+      "solver_ns": 1206118876786,
+      "status": 10,
+      "strict_endpoint_accepted": false
+    },
+    {
+      "audit": {
+        "bytes": 4358,
+        "namespace": "evidence",
+        "path": "copt-fair-tall-proof-seal-v1/result.json",
+        "sha256": "c4a88d76279679c1adbd9768dc19c207366494dd4c21dfa4e64a58e5f13fc089"
+      },
+      "complete_ns": null,
+      "fresh_process_ns": 342832643724,
+      "id": "copt-fair-1b-v1-tall-project",
+      "measured": {
+        "bytes": 2385,
+        "namespace": "evidence",
+        "path": "copt-fair-1b-v1-tall-project/result.json",
+        "sha256": "00ef9f7cd53094921d18e634a3dc0fbbdda0cad1a61f6640641f4f1fc7c24f02"
+      },
+      "response": {
+        "bytes": 14968,
+        "namespace": "evidence",
+        "path": "copt-fair-1b-v1-tall-project/response.json",
+        "sha256": "4549d4df3206affdaeb64f3f8c008ad656d5fa70ddd75923c492d3541ccec458"
+      },
+      "solver_ns": 247003496538,
+      "status": "certified",
+      "strict_endpoint_accepted": true,
+      "timing_excluded": true
+    }
+  ],
+  "retained_wide_failure": {
+    "bytes": 385,
+    "namespace": "evidence",
+    "path": "resources/copt-fair-1b-v1-wide-project.settlement.json",
+    "sha256": "d36de130b4397a1731d59747d5ecb05f33c5dc6c86af713d7909d44f50daf727"
+  },
+  "status": "paused_at_explicit_user_request",
+  "strict_original_tolerance": 1e-09,
+  "supervisor_tests": 75,
+  "user_instruction": "Stop the monitor and further evaluation; resume only when the user asks."
+}

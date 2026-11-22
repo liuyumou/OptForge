@@ -1,0 +1,343 @@
+{
+  "affected_python_tests": 6,
+  "allocation_open": true,
+  "archive_receipt": {
+    "path": "artifacts/gpup-general-v1/portable/host-cost-delivery-v1/receipt.json",
+    "sha256": "c7ce2e5961a281735afa1f84d03e102c359aab4ba739423e0750dc87122b9214"
+  },
+  "cleanup_empty": true,
+  "cpu_seconds": {
+    "admission": 41585.027845256,
+    "cleanup": 153.91825248,
+    "confirmation": 0.0,
+    "development": 76926.211545196,
+    "implementation": 17887.93538542,
+    "native": 28977.434413224,
+    "reporting": 30422.357782856
+  },
+  "device": {
+    "path": "artifacts/gpup-general-v1/scale-image-v9/tensor.cubin",
+    "sha256": "8a8da54f18676e98befdbf5703a8a776ddca36313a2f8a735545b0b6c1b3d1a8"
+  },
+  "documentation": {
+    "path": "artifacts/gpup-general-v1/resources/host-cost-docs-final-v1.settlement.json",
+    "sha256": "b411a66a9e6e6b4691679a8b44600973fb859302a39ab19c9b3cb9d3f6a3478a"
+  },
+  "documentation_pages": 292,
+  "failed_new_reservations": 0,
+  "failures": [],
+  "gpu_seconds": {
+    "admission": 7657.470302618,
+    "confirmation": 0.0,
+    "development": 18318.420384788,
+    "reporting": 0.0
+  },
+  "image": {
+    "path": "artifacts/gpup-general-v1/scale-image-v9/executor",
+    "sha256": "0aa5a53fca54f410d009fe4d7a1cf905bb75f6efdf65ea3ba1296f3c0a2a4ce7"
+  },
+  "imports": {
+    "path": "artifacts/gpup-general-v1/sources/scale-cpu-v9/checker-imports/manifest.json",
+    "sha256": "e70c7e782b13e0cd7f05080e5846e80cfba619286c84f36e7fc13247cf9ec513"
+  },
+  "isolated_rust_tests_per_image": 37,
+  "native_python_tests": 827,
+  "native_rust_tests": 638,
+  "new_reservations": 48,
+  "portable": {
+    "path": "artifacts/gpup-general-v1/portable/host-cost-delivery-v1/replay.json",
+    "sha256": "eefae48b2bcb8af245a1592d94139ec566e74aaa181f147d6d0ec825a3a2728c"
+  },
+  "report": {
+    "path": "docs/benchmarks/lp-general-host-cost.md",
+    "sha256": "ea3bf61783e0d5912d3403a97c7f45f64630fd6202baa144e27ed7af58d6689e"
+  },
+  "results": {
+    "path": "docs/benchmarks/lp-general-host-cost-results.json",
+    "sha256": "2d4972255e6457d630ec50beb5b9a78ddb39f1d4d8a1f92a017aa512429e908b"
+  },
+  "scope": "Final source, numerical, resource, documentation and portable delivery validation. The scientific allocation remains open.",
+  "settled_allocation": {
+    "path": "artifacts/gpup-general-v1/host-cost-settled-v1.json",
+    "sha256": "ebbde1d42adcd4e59b536fe8453cdf360385018a14fc48843555a29193587099"
+  },
+  "settlements": [
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-archive-v1.settlement.json",
+      "sha256": "1aa7a6b6cf2c45d4ed6e386a13b6af671889611f31620ef03f8c0d979569d4ec"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-final-gpu-v1.settlement.json",
+      "sha256": "d01d6d0484c52b852f04099bc84f42d760800a99541ce46d2f09bc72ca6c9904"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-final-initcheck-v1.settlement.json",
+      "sha256": "c1aefdfa59c0165d412c48fcaebe37c57ddf86bd7160aec57540df25cdeb6122"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-final-memcheck-v1.settlement.json",
+      "sha256": "14482543ab3cee2ea274f688500d50fa958d63c9cfdaf7b4b8f500309e6650f2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-final-racecheck-v1.settlement.json",
+      "sha256": "831fbcc69057faf819dc14d80f40248abace0501c112fb84d29539fe5f942d88"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-final-synccheck-v1.settlement.json",
+      "sha256": "8b7b74adafd1eb4f41a92eee102c26e9aea4231407da2f9fd24c09f706bf7763"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-freeze-v1.settlement.json",
+      "sha256": "cb528b2aace0889e92380468602712069353a16b2b1de31c99cd9ac8a16730dc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-freeze-v2.settlement.json",
+      "sha256": "5651b8159195e7242e42124a1da4432b1a68c4ef2b60a8f1bfee2d43847614e1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-gpu-v1.settlement.json",
+      "sha256": "5512121912336ae7e86978f3acecfdddda4670e84dab3b7e83aa1c48c37ef82a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-initcheck-v1.settlement.json",
+      "sha256": "c83edd2097de95f9b852a9653c95b20647734625779de64fa10f8afd03187862"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-memcheck-v1.settlement.json",
+      "sha256": "a4e568fced68d6ce8408d028381043cf1d97765a21dac683964a1aa8a9fbfe41"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-native-v1.settlement.json",
+      "sha256": "53757658252f0ed1f3f8b099df7615ef48af5860070cc4868d5e6ea0c47960d4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v1-m00.settlement.json",
+      "sha256": "edf5348135f039aa4d3cfb4460eb7df330ee781edc96ec14c6336422f380ed1e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v1-m01.settlement.json",
+      "sha256": "8b323f926649de8274634e394665463f4b89f19c89237940a5dcb8f8bf0df624"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v1-m02.settlement.json",
+      "sha256": "58b066b82fe4aea26920cb4cbdbd1324280eb3a438d4a272f053c169b24990eb"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v1-m03.settlement.json",
+      "sha256": "b938e46110f0152a4feeec6019fa118236435744f143151bd1db9d030013e0cd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v1-m04.settlement.json",
+      "sha256": "33f58cb05c0fb78eae677e8b4045e46e78c8a8847eeacec7a793f72d2628a877"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v1-m05.settlement.json",
+      "sha256": "fb20c09d13a774ec6e573b259baa8856bb781fa998b09a343f1a8de9a8e140dc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v1-m06.settlement.json",
+      "sha256": "4ba61a1c957bdb62b843b693d2e63c75678dbd0e289a0800fee9b43660db3511"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v1-m07.settlement.json",
+      "sha256": "3cc0295688b338f837892ea83f8ace105fb57658d181760f6c6ccec4c2cf00b3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v2-m00.settlement.json",
+      "sha256": "1cf0c9e8c4afe8b521cdb98769302656927575e89d3305f9e30ea4d415c7d028"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v2-m01.settlement.json",
+      "sha256": "7fdbbc9269de3815ced03e031972a4f9658e740856820925a3459da52f466216"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v2-m02.settlement.json",
+      "sha256": "ff2bb94215b2e5a099121d676f9824f8f3d25299328ea9fd29065f8f5d30504b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v2-m03.settlement.json",
+      "sha256": "bcac6d2613eb4474323fbfadfd5ea79851f62598f136e17cffead4c4052c228f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v2-m04.settlement.json",
+      "sha256": "6505af4dd222ad3292171296ce4e7e15496180952ebd057329e8962a99dabbd0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v2-m05.settlement.json",
+      "sha256": "bc7bc07c1e76a1aa60e81ab9a1e07407ba137d078d56cefc03e9f5704d0e9463"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v2-m06.settlement.json",
+      "sha256": "ca02a3c038562635f812b0ff6defff8168c154e74bc1acf50d255122bc5ed3ea"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-pilot-v2-m07.settlement.json",
+      "sha256": "32ae720a3b178e5ad5945875f4babd6a449ad4cb8909510aa796c17c9e64696c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-racecheck-v1.settlement.json",
+      "sha256": "1d8313b561fa209b7e6894c079d0c0675a141f7958004103703320a33653a909"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-readmit-v1.settlement.json",
+      "sha256": "b00748ae6beed49fe4b0d8d70a7319ff730a22107e471704c09ca5613304e0d1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-replay-v1.settlement.json",
+      "sha256": "65c1f95af641638ac9acf2cdf5ca71aaf40db291633b6fbe045b6c31f7bee900"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-report-v1.settlement.json",
+      "sha256": "7df80a9a28f5925114a5ba8c7262abe13d183cd6ae3e5774af4f5d4f7b94d6e2"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-report-v2.settlement.json",
+      "sha256": "4006cb901085a91e076aa82a86da069ee7ce2c937a783874f37e17d99c98c197"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-freeze-v1.settlement.json",
+      "sha256": "06b27fb3e499982cd84a1d1679ccdc5bdaa12a8feac0980ef897203e2d4312ac"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-report-v1.settlement.json",
+      "sha256": "16fe185a3d23c5389d0c0246f8f04f0955a4cd2f32b7863cf8fe5310e52c475d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-v1-m00.settlement.json",
+      "sha256": "efccbafe1926a40535e3f06251fd351facbc4d46dc85aa7f4a6c2f6adf1e7ffe"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-v1-m01.settlement.json",
+      "sha256": "49b22144366ea7d812dc94da0587b3c89b3567b5a2baa634e498066461bccb60"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-v1-m02.settlement.json",
+      "sha256": "cfa04661b76a5b54d06f404b3a9baeb7c5b71cbca22f5443f260618ae208d439"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-v1-m03.settlement.json",
+      "sha256": "66719652bfe442ef95ae284af9c81ead4b268c3579702484745f605ac7f34c8e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-v1-m04.settlement.json",
+      "sha256": "089adff3028dff2ccc7ed529e7966911f0cad1cf3279c67dcbe12d2f73c46732"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-v1-m05.settlement.json",
+      "sha256": "d76db9247498c111375373e3f8d07163214a8cbe01e4f05cf90955d48a69276a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-v1-m06.settlement.json",
+      "sha256": "5d16b9b84bc9bd837395abceb9e30f2ee86d39b8721780059f56f00daffd787c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-solve-v1-m07.settlement.json",
+      "sha256": "be15418c0f77075e775aa770dd424564f6425bbcb429221c0cd38d408d583201"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/host-cost-synccheck-v1.settlement.json",
+      "sha256": "f51df1fc224c5c3aa63ffa25b57a430f8d315cc2c20333392e7bcfc732f25e0f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v8.settlement.json",
+      "sha256": "f3ec4f5f501f2c1065f0f48da97ad2b0895e14def9ed70a15ff4db4f021da0cf"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v9.settlement.json",
+      "sha256": "fdc752227e40f40995fbad64eb032d91cb8759589edb4b5af6b33ddd7abce157"
+    }
+  ],
+  "solve_results": {
+    "path": "docs/benchmarks/lp-general-host-cost-solve-results.json",
+    "sha256": "ea473bdb776ed3b3be8caa89e4ae5772bdc018c32c88bdd963b0045aa08cb84b"
+  },
+  "source": [
+    {
+      "path": "research/lp-general-lowbit/src/assessment.rs",
+      "sha256": "95a59ff22b9170c96e6ab0446e4d6df9ef26b8ca480bb1d9c34950434ffae5bd"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/control.rs",
+      "sha256": "56f85fec437aaed757f8c3ff1a3530e3df396c8330b9097be53050ff415d71a1"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/device.rs",
+      "sha256": "33d06a60cb1c25c40baddb3f2048d2ea8bdc518a5446474a1eb9feaa3d0374d9"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/engine.rs",
+      "sha256": "49b3ec2d8d57c5b10600b7175b6e2610530c9b0e34a9152b1694e2407dbb179e"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/exact_math.rs",
+      "sha256": "1be732720c414c25f530ca5156cdd7870cf7f7d7c191d9697840d6c8228128fa"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/fast_device.rs",
+      "sha256": "a9257af4616c90f1aad47e7770416f3d2d8f8c7682ae23c6b07904a4a8b075ff"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu.rs",
+      "sha256": "eab5ebf4e93fa0be23680bb50ceb0f74857d1a43cf4b7a3bddf7a84c2c997ef9"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu_tensor.rs",
+      "sha256": "c994faeb7f37fd1575e60bda2699549cf91d3703f5cc76621546167aac1318f0"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/host.rs",
+      "sha256": "9cdd49ba65afebbf396542733f56ca1b8ba828fe528780c6e7cb2b05228ffcdb"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/implied.rs",
+      "sha256": "a59c82823e6d7efd1cb3bc3b169b8257f277771d4195d5442cfab8dc34cc4c49"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/input.rs",
+      "sha256": "42b1ef4213c5d861ea8ad02dd1c14cbe2f4d0096beadb19a3ac257dd4f36a093"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/lib.rs",
+      "sha256": "448a133838fd35f0f3e6337750e09f0f5ad7acb5bf8d57c11b06441bed302fa4"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/main.rs",
+      "sha256": "ccf218c67f907f45ca3e5db03ed3127a11c04e7720ada8321e363a411c341d74"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/merit.rs",
+      "sha256": "a02a0c64accca9ddc9d7fb630d547c024e11de6787c18c1a9245f1fedcba1e77"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/operator.rs",
+      "sha256": "b748fcc10347891fc5bd1048258c80114e44718e72fff53ed9cd92e076d75b70"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/prepared_feasibility.rs",
+      "sha256": "a638cba747379c00672083f6944fa1935aca1ec83e7396c1ad09927c22e7828a"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/repair.rs",
+      "sha256": "a25e610d1d18b4a3a79ab0d93acda526632cd0ce713fc03fa2437b338acbefb2"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/solve.rs",
+      "sha256": "802521331146497a9c3e25716a622c00b3ebab3e0de6970979276855c2db1c34"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor.rs",
+      "sha256": "64f4b75a78fe0bc266e12843fd89644789cc23a72695ca12026e0ddcb24ad442"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor_device.rs",
+      "sha256": "902ad772c6c555fc7b660fed735467725555605b90af668beb35afe82265e8f3"
+    }
+  ],
+  "source_validation": {
+    "path": "artifacts/gpup-general-v1/host-cost-validation-v1/result.json",
+    "sha256": "b1968a6d50511af1a2e8701900e39fb04163d8207389d78bbf74303c7a1893d4"
+  },
+  "status": "passed",
+  "total_cpu_seconds": 195952.885224432,
+  "total_gpu_seconds": 25975.890687406
+}

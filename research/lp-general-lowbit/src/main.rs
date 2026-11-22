@@ -175,7 +175,11 @@ fn run() -> Result<()> {
         } else if args[1] == "host-probe" {
             let p = LinearProgram::new(&model)?;
             let e = Engine::new(&p, settings.lp());
-            let prepared = lp_general_lowbit::host::engine(&p, settings.lp());
+            let indexed = LinearProgram::new_indexed(&model)?;
+            if p.matrix_sha256() != indexed.matrix_sha256() {
+                return Err("indexed preparation differs from original bits".into());
+            }
+            let prepared = lp_general_lowbit::host::engine(&indexed, settings.lp());
             let x: Vec<f64> = serde_json::from_value(request["primal"].clone())?;
             let y: Vec<f64> = serde_json::from_value(request["dual"].clone())?;
             let w = request["weight"].as_f64().ok_or("weight")?;
@@ -189,6 +193,18 @@ fn run() -> Result<()> {
             }
             let original = e.step_once(&x, &y, w);
             let optimized = lp_general_lowbit::host::step_once(&prepared, &x, &y, w);
+            lp_general_lowbit::host::with_products(&prepared, true, |products| {
+                let mut workspace = lp_general_lowbit::host::ResidualWorkspace::default();
+                // Repeated, changed weights exercise reused buffers and worker inputs.
+                for weight in [w, 1., w] {
+                    assert_eq!(
+                        workspace
+                            .evaluate(products, &prepared, &x, &y, weight)
+                            .to_bits(),
+                        e.projected_residual(&x, &y, weight).to_bits()
+                    );
+                }
+            });
             let bits = |v: &[f64]| v.iter().map(|x| x.to_bits()).collect::<Vec<_>>();
             if e.step().to_bits() != prepared.step().to_bits()
                 || bits(e.scaled_matrix().0) != bits(prepared.scaled_matrix().0)

@@ -1,0 +1,1083 @@
+{
+  "after": {
+    "bytes": 13338,
+    "namespace": "evidence",
+    "path": "ladder-64m-v2/freeze.json",
+    "sha256": "e0782f06c97ddd48abe2b2fc8d4325077fb1f749742e69609e93a909cacb3c79"
+  },
+  "before": {
+    "bytes": 12904,
+    "namespace": "evidence",
+    "path": "ladder-64m-v1/freeze.json",
+    "sha256": "8227c99346bdf460e54cbd3098ebf8f4eadcdc9760807db103548e4a309a7046"
+  },
+  "claim": "Descriptive sequential fixed-work comparison; not certified-solve benefit or confirmation.",
+  "median_assessment_ratio": 1.8608877376067685,
+  "median_complete_ratio": 1.1344365071442721,
+  "median_process_ratio": 1.1792712595356205,
+  "pairs": [
+    {
+      "after": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1552,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-0-fp4x2-audit/result.json",
+          "sha256": "97f4df0dc5f8175491172574392b98fc68793cebbc3776cc5e431f67bd604fec"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 2966435712,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 192000000,
+          "formula_version": 1,
+          "host_bytes": 15162811744,
+          "host_gib": 15,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 4000000,
+        "complete_ns": 56710353677,
+        "cost_ns": {
+          "assessment": 7077011699,
+          "device_setup": 1315809509,
+          "device_teardown": 122733054,
+          "execution": 269235539,
+          "host_preparation": 29263141764,
+          "recovery": 0
+        },
+        "device_bytes": 2698000068,
+        "family": "irregular",
+        "final_check": {
+          "bytes": 1229,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-0-fp4x2-final-check/result.json",
+          "sha256": "27d85cb83220774ed3306bb1ccbf02604ab06b16545abf916e368dbb5ecd1cd9"
+        },
+        "final_check_ns": 12325748046,
+        "fresh_process_ns": 44384605631,
+        "id": "ladder-64m-v2-0-fp4x2",
+        "input_ns": 5876255777,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 17770629157,
+        "operator_storage_bytes": 1568000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 6573359104,
+        "physical": 100,
+        "process_ns": 44376295006,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 13730,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v2-0-fp4x2.resource.json",
+          "sha256": "786c902114964e6e27f1878b202183522c0e0691b3c9326caf7e179bf69b3fd4"
+        },
+        "response": {
+          "bytes": 3737,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-0-fp4x2/response.json",
+          "sha256": "f7a96ee4fdf725301ddab4923aaa635d598d50d9b69a6971981170e3d684d8af"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "assessment_ratio": 1.8504292465491372,
+      "before": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1360,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-0-fp4x2-audit/result.json",
+          "sha256": "f5990113e40ffff5c5b3a9662b5d775566d6618abe1f118ae255c775e7d3d072"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 2966435712,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 192000000,
+          "formula_version": 1,
+          "host_bytes": 15162811744,
+          "host_gib": 15,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 4000000,
+        "complete_ns": 62691285572,
+        "cost_ns": {
+          "assessment": 13095509426,
+          "device_setup": 1348744223,
+          "device_teardown": 82939249,
+          "execution": 283517917,
+          "host_preparation": 30199454322,
+          "recovery": 0
+        },
+        "device_bytes": 2698000068,
+        "family": "irregular",
+        "final_check": {
+          "bytes": 1037,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-0-fp4x2-final-check/result.json",
+          "sha256": "29c103bc595cae3ce9ed2ebe19ee75146350ab6a5e482afb4972ea58b4f136db"
+        },
+        "final_check_ns": 11070620618,
+        "fresh_process_ns": 51620664954,
+        "id": "ladder-64m-v1-0-fp4x2",
+        "input_ns": 6125092255,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 16611223821,
+        "operator_storage_bytes": 1568000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 6262976512,
+        "physical": 100,
+        "process_ns": 51603269342,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 15810,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v1-0-fp4x2.resource.json",
+          "sha256": "a8f17c6482dfe6166a15e9ab33c7f922763fc462ef5ddf9a7b3529a38c457d47"
+        },
+        "response": {
+          "bytes": 3737,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-0-fp4x2/response.json",
+          "sha256": "24c98d23d74e3c93a81c4e27f8c36600d5fd53e6db173ca05c5ab97a09a8ee5f"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "complete_ratio": 1.1054645493672117,
+      "exact": true,
+      "family": "irregular",
+      "process_ratio": 1.162856640803899
+    },
+    {
+      "after": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1517,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-1-fp4x2-audit/result.json",
+          "sha256": "12639005511405a7c1a66e18faef929734c798a895955d7692851952136aa793"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 4037435712,
+          "device_gib": 4,
+          "endpoint_bytes_upper": 480000000,
+          "formula_version": 1,
+          "host_bytes": 16646537216,
+          "host_gib": 16,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 16000000,
+        "complete_ns": 86489486893,
+        "cost_ns": {
+          "assessment": 14076685888,
+          "device_setup": 1693465389,
+          "device_teardown": 82476791,
+          "execution": 476356096,
+          "host_preparation": 44591110695,
+          "recovery": 0
+        },
+        "device_bytes": 3769000068,
+        "family": "wide",
+        "final_check": {
+          "bytes": 1209,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-1-fp4x2-final-check/result.json",
+          "sha256": "fb07c6fca3c112288349b23299203157936e0301b3a906dc3e5886fb828f1ddd"
+        },
+        "final_check_ns": 17369029951,
+        "fresh_process_ns": 69120456942,
+        "id": "ladder-64m-v2-1-fp4x2",
+        "input_ns": 7250817503,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 27152529883,
+        "operator_storage_bytes": 1616000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 8353124352,
+        "physical": 100,
+        "process_ns": 69104162724,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 18410,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v2-1-fp4x2.resource.json",
+          "sha256": "47be4f2cda6421685f688875ceb360ee7e954f7f9dd8d7bef7220f2c3e0cd040"
+        },
+        "response": {
+          "bytes": 4580,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-1-fp4x2/response.json",
+          "sha256": "7b0622e7665ab9f59269ece94da6039cd6088a65dfb412f21a027c85f84c05dc"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "assessment_ratio": 1.6132726692693535,
+      "before": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1325,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-1-fp4x2-audit/result.json",
+          "sha256": "4cd5a21d4df94037f1d3003c4b665a4ba4c3361672cbb8108d3b5d4bee956a7f"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 4037435712,
+          "device_gib": 4,
+          "endpoint_bytes_upper": 480000000,
+          "formula_version": 1,
+          "host_bytes": 16646537216,
+          "host_gib": 16,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 16000000,
+        "complete_ns": 94546735401,
+        "cost_ns": {
+          "assessment": 22709532617,
+          "device_setup": 1700693504,
+          "device_teardown": 82915692,
+          "execution": 482356039,
+          "host_preparation": 44841512176,
+          "recovery": 0
+        },
+        "device_bytes": 3769000068,
+        "family": "wide",
+        "final_check": {
+          "bytes": 1017,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-1-fp4x2-final-check/result.json",
+          "sha256": "5595b5df1e6091227d57499bdd9c8aaafd8f63b76b16e53dd0251208adb1e5f7"
+        },
+        "final_check_ns": 16513944592,
+        "fresh_process_ns": 78032790809,
+        "id": "ladder-64m-v1-1-fp4x2",
+        "input_ns": 7272513473,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 26136916923,
+        "operator_storage_bytes": 1616000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 8250912768,
+        "physical": 100,
+        "process_ns": 78015670062,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 21272,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v1-1-fp4x2.resource.json",
+          "sha256": "b1326b8b9e7d246eda3b72e9ef3e2e0739abeb2bf212d298b097b143e7d7abcf"
+        },
+        "response": {
+          "bytes": 4580,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-1-fp4x2/response.json",
+          "sha256": "e35064e053acd7b358112ca1498e87a99f8cab5ad91b5d7702e767fd55254659"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "complete_ratio": 1.0931587039933301,
+      "exact": true,
+      "family": "wide",
+      "process_ratio": 1.1289576052544374
+    },
+    {
+      "after": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1545,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-2-fp4x2-audit/result.json",
+          "sha256": "f4f03b2ea88b14260cbaaa27e9b453e1c966c63a07d573108dbab698e5f494ce"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 2698685712,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 120000000,
+          "formula_version": 1,
+          "host_bytes": 14864442400,
+          "host_gib": 14,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 1000000,
+        "complete_ns": 46378632742,
+        "cost_ns": {
+          "assessment": 5120114381,
+          "device_setup": 1312427613,
+          "device_teardown": 85217905,
+          "execution": 243054477,
+          "host_preparation": 25088327640,
+          "recovery": 0
+        },
+        "device_bytes": 2430250068,
+        "family": "tall",
+        "final_check": {
+          "bytes": 1222,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-2-fp4x2-final-check/result.json",
+          "sha256": "68ae1dec5c5b419030245464ad86ddec64b0d0a58fdd0fedbeed87a0104d54aa"
+        },
+        "final_check_ns": 9387489169,
+        "fresh_process_ns": 36991143573,
+        "id": "ladder-64m-v2-2-fp4x2",
+        "input_ns": 4776451577,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 14908551235,
+        "operator_storage_bytes": 1556000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 6280085504,
+        "physical": 100,
+        "process_ns": 36973188722,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 12430,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v2-2-fp4x2.resource.json",
+          "sha256": "b70abac98e09fdf7873157fbe16ff39a4e7c0c358cc3229abeffebdfe65a70c7"
+        },
+        "response": {
+          "bytes": 3733,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-2-fp4x2/response.json",
+          "sha256": "da6dc7d8c84a22655a1afb52d83dbdb7a51ae29d66d3d56e168b6eaafa533666"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "assessment_ratio": 2.024865766372808,
+      "before": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1353,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-2-fp4x2-audit/result.json",
+          "sha256": "da7bc7cc3ea8fc896b473057940269ab435d95f27177802c30da918d48de6e04"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 2698685712,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 120000000,
+          "formula_version": 1,
+          "host_bytes": 14864442400,
+          "host_gib": 14,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 1000000,
+        "complete_ns": 52049459836,
+        "cost_ns": {
+          "assessment": 10367544330,
+          "device_setup": 1253145315,
+          "device_teardown": 82124425,
+          "execution": 242425053,
+          "host_preparation": 25353881637,
+          "recovery": 0
+        },
+        "device_bytes": 2430250068,
+        "family": "tall",
+        "final_check": {
+          "bytes": 1030,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-2-fp4x2-final-check/result.json",
+          "sha256": "161e7b04ecb64ae7da019e2585cc492eaeb1c66995595179a07c34ff0a1404ff"
+        },
+        "final_check_ns": 9349951094,
+        "fresh_process_ns": 42699508742,
+        "id": "ladder-64m-v1-2-fp4x2",
+        "input_ns": 4991321377,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 13680121058,
+        "operator_storage_bytes": 1556000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 6280364032,
+        "physical": 100,
+        "process_ns": 42691930257,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 13990,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v1-2-fp4x2.resource.json",
+          "sha256": "26a44dae336823e2059f4754f7d9187f75737faae422fa7f446629503cf2a072"
+        },
+        "response": {
+          "bytes": 3734,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-2-fp4x2/response.json",
+          "sha256": "fff80b2868881e2373acd7a13d0a585f3ef8e9721055e58e76fd5f65b3f9d08d"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "complete_ratio": 1.1222724077604074,
+      "exact": true,
+      "family": "tall",
+      "process_ratio": 1.1546726623445709
+    },
+    {
+      "after": {
+        "accepted": [
+          0,
+          0,
+          0,
+          100,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.75,
+        "accepted_product_work": [
+          9600000000,
+          9600000000,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1529,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-3-fp4x2-audit/result.json",
+          "sha256": "9a3b33d3135f8269179ade15f8e88b173eceadde9993ae6d7f58bf453818ad6d"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 62500,
+          "device_bytes": 2378435720,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 48000000,
+          "formula_version": 1,
+          "host_bytes": 14266976864,
+          "host_gib": 14,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 32000000,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 1000000,
+        "complete_ns": 34010142223,
+        "cost_ns": {
+          "assessment": 3524678028,
+          "device_setup": 827599503,
+          "device_teardown": 79131796,
+          "execution": 63126569,
+          "host_preparation": 17883989416,
+          "recovery": 0
+        },
+        "device_bytes": 2094000036,
+        "family": "coupled_blocks",
+        "final_check": {
+          "bytes": 1219,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-3-fp4x2-final-check/result.json",
+          "sha256": "43a00bf9e079d51eba8a1fab4f2c4a228778b8a8bd9632b02e18c86d34463cff"
+        },
+        "final_check_ns": 7514462193,
+        "fresh_process_ns": 26495680030,
+        "id": "ladder-64m-v2-3-fp4x2",
+        "input_ns": 3792077311,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 12302507683,
+        "operator_storage_bytes": 1544000008,
+        "packed_bytes": 531500016,
+        "peak_rss_bytes": 5731942400,
+        "physical": 100,
+        "process_ns": 26477170483,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 10350,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v2-3-fp4x2.resource.json",
+          "sha256": "7c1371b70416a889c26f13bdac1916c14210f35f6e023feed3657ff044943e21"
+        },
+        "response": {
+          "bytes": 3753,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-3-fp4x2/response.json",
+          "sha256": "bf1a6d5435cef910f66db15881d3685fa6dae90eddb3d8ffe244e8c7f2f1b2fa"
+        },
+        "rows": 1000000,
+        "selected_initial_format": "fp4x2",
+        "status": "limit",
+        "tile_count": 62500
+      },
+      "assessment_ratio": 2.2081579055367833,
+      "before": {
+        "accepted": [
+          0,
+          0,
+          0,
+          100,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.75,
+        "accepted_product_work": [
+          9600000000,
+          9600000000,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1337,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-3-fp4x2-audit/result.json",
+          "sha256": "f4926fea386c2cfd2f399d5f001c2cf3e1d07257763a9cdebc0910ece08b1147"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 62500,
+          "device_bytes": 2378435720,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 48000000,
+          "formula_version": 1,
+          "host_bytes": 14266976864,
+          "host_gib": 14,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 32000000,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 1000000,
+        "complete_ns": 38996049701,
+        "cost_ns": {
+          "assessment": 7783045652,
+          "device_setup": 847107395,
+          "device_teardown": 77477770,
+          "execution": 63545156,
+          "host_preparation": 18609911750,
+          "recovery": 0
+        },
+        "device_bytes": 2094000036,
+        "family": "coupled_blocks",
+        "final_check": {
+          "bytes": 1027,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-3-fp4x2-final-check/result.json",
+          "sha256": "b361c816c55825dbc53f3b00ba4c3cd9817b409f4751934231c76642f237a476"
+        },
+        "final_check_ns": 7313133056,
+        "fresh_process_ns": 31682916645,
+        "id": "ladder-64m-v1-3-fp4x2",
+        "input_ns": 3990618080,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 10982496296,
+        "operator_storage_bytes": 1544000008,
+        "packed_bytes": 531500016,
+        "peak_rss_bytes": 5730250752,
+        "physical": 100,
+        "process_ns": 31658378843,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 11650,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v1-3-fp4x2.resource.json",
+          "sha256": "6ef0883246d264fc00d4f9b92e86e8de6d76e0d1588383bbc732d45e18c3e54c"
+        },
+        "response": {
+          "bytes": 3753,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-3-fp4x2/response.json",
+          "sha256": "6ace99668b64337904a087942834e83977e45aad938cbe16278dcea871229f2d"
+        },
+        "rows": 1000000,
+        "selected_initial_format": "fp4x2",
+        "status": "limit",
+        "tile_count": 62500
+      },
+      "complete_ratio": 1.146600606528137,
+      "exact": true,
+      "family": "coupled_blocks",
+      "process_ratio": 1.195685878267342
+    },
+    {
+      "after": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1547,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-4-fp4x2-audit/result.json",
+          "sha256": "26bd84cb980756d94e8f48b3515d066e39e4129bd6bae41e08f44d46763cfc1c"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 2966435712,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 192000000,
+          "formula_version": 1,
+          "host_bytes": 15162811744,
+          "host_gib": 15,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 4000000,
+        "complete_ns": 54360845829,
+        "cost_ns": {
+          "assessment": 7267188115,
+          "device_setup": 1351996877,
+          "device_teardown": 84951096,
+          "execution": 270990981,
+          "host_preparation": 27908144582,
+          "recovery": 0
+        },
+        "device_bytes": 2698000068,
+        "family": "ill_scaled",
+        "final_check": {
+          "bytes": 1227,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-4-fp4x2-final-check/result.json",
+          "sha256": "58f5284e53d3aeda7064e829dc3162eb643b74a39534a6db95cd4c9c8a25a722"
+        },
+        "final_check_ns": 11227385756,
+        "fresh_process_ns": 43133460073,
+        "id": "ladder-64m-v2-4-fp4x2",
+        "input_ns": 5700833478,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 16672440078,
+        "operator_storage_bytes": 1568000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 6233878528,
+        "physical": 100,
+        "process_ns": 43124628906,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 13470,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v2-4-fp4x2.resource.json",
+          "sha256": "c55175290dfb27b3a6f7e3c9fd23dad2feb49611c182a175cb67ce01c218c2a1"
+        },
+        "response": {
+          "bytes": 3730,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-4-fp4x2/response.json",
+          "sha256": "426ae3c2f51b0a6b97efd526d825eb66c660fb2ce5e703af3c6b34a1dac118cc"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "assessment_ratio": 1.8713462286644,
+      "before": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1355,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-4-fp4x2-audit/result.json",
+          "sha256": "e11e15e6ad88030c0c50b70af57e5b2c4162b8972d021aa8fad1435317d51b2e"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 2966435712,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 192000000,
+          "formula_version": 1,
+          "host_bytes": 15162811744,
+          "host_gib": 15,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 4000000,
+        "complete_ns": 63764537122,
+        "cost_ns": {
+          "assessment": 13599425072,
+          "device_setup": 1337136322,
+          "device_teardown": 79307869,
+          "execution": 269456477,
+          "host_preparation": 30737932464,
+          "recovery": 0
+        },
+        "device_bytes": 2698000068,
+        "family": "ill_scaled",
+        "final_check": {
+          "bytes": 1035,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-4-fp4x2-final-check/result.json",
+          "sha256": "06674d28a655ab186110faed69431f703eb5940d91138fc1c4891623c7424fd8"
+        },
+        "final_check_ns": 11230033818,
+        "fresh_process_ns": 52534503304,
+        "id": "ladder-64m-v1-4-fp4x2",
+        "input_ns": 6017689013,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 17195794532,
+        "operator_storage_bytes": 1568000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 6387752960,
+        "physical": 100,
+        "process_ns": 52516971746,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 15810,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v1-4-fp4x2.resource.json",
+          "sha256": "7657f4f3b79476fd0cda6ca36611b667cf2dfa994ea69d2cdbc96e0d78550933"
+        },
+        "response": {
+          "bytes": 3731,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-4-fp4x2/response.json",
+          "sha256": "2f113752840ba45ec678bd8493b9013b16d74424e122f6b1b3f387dda110fa88"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "complete_ratio": 1.1729864785875608,
+      "exact": true,
+      "family": "ill_scaled",
+      "process_ratio": 1.217795331305291
+    },
+    {
+      "after": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1521,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-5-fp4x2-audit/result.json",
+          "sha256": "84eb5daa34ca959e979afed684e48c200a85cf1b81306260d6b765086a864bd3"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 2966435712,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 192000000,
+          "formula_version": 1,
+          "host_bytes": 15162811744,
+          "host_gib": 15,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 4000000,
+        "complete_ns": 50871557386,
+        "cost_ns": {
+          "assessment": 7283852083,
+          "device_setup": 1359789169,
+          "device_teardown": 103334465,
+          "execution": 277047681,
+          "host_preparation": 26124823997,
+          "recovery": 0
+        },
+        "device_bytes": 2698000068,
+        "family": "degenerate",
+        "final_check": {
+          "bytes": 1214,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-5-fp4x2-final-check/result.json",
+          "sha256": "9ee0dca82a91b195f2baecd193306ce54302d01ba43deb368d4eaa38af5b7c2a"
+        },
+        "final_check_ns": 10333322351,
+        "fresh_process_ns": 40538235035,
+        "id": "ladder-64m-v2-5-fp4x2",
+        "input_ns": 4822308170,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 16056513778,
+        "operator_storage_bytes": 1568000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 6319009792,
+        "physical": 100,
+        "process_ns": 40520975475,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 12950,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v2-5-fp4x2.resource.json",
+          "sha256": "5fe162d9fc1719ca6b77891f6d267d3814b448b5c82f6582aa222751c4405077"
+        },
+        "response": {
+          "bytes": 3705,
+          "namespace": "evidence",
+          "path": "ladder-64m-v2-5-fp4x2/response.json",
+          "sha256": "fe424c76f8c19967e154a0abfca04de8a047716616a6b62af4e368c77bed451c"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "assessment_ratio": 1.848098021844467,
+      "before": {
+        "accepted": [
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ],
+        "accepted_fp4_share": 0.0,
+        "accepted_product_work": [
+          0,
+          0,
+          0,
+          12800000000
+        ],
+        "audit": {
+          "bytes": 1329,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-5-fp4x2-audit/result.json",
+          "sha256": "574ee27d23405684485c0ed539552642276368f358be2e442de0ba0b6a4ffe1f"
+        },
+        "capacity": {
+          "admitted": true,
+          "canonical_tiles": 0,
+          "device_bytes": 2966435712,
+          "device_gib": 3,
+          "endpoint_bytes_upper": 192000000,
+          "formula_version": 1,
+          "host_bytes": 15162811744,
+          "host_gib": 15,
+          "original_nonzeros": 64000000,
+          "physical_fragment_index_upper": 0,
+          "reason": null
+        },
+        "certified": false,
+        "columns": 4000000,
+        "complete_ns": 59767678254,
+        "cost_ns": {
+          "assessment": 13461272626,
+          "device_setup": 1334880893,
+          "device_teardown": 84406949,
+          "execution": 270415526,
+          "host_preparation": 28258866854,
+          "recovery": 0
+        },
+        "device_bytes": 2698000068,
+        "family": "degenerate",
+        "final_check": {
+          "bytes": 1022,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-5-fp4x2-final-check/result.json",
+          "sha256": "6b046dff80a21fc5cf754a6d7f753750555ff38ae055640a196f7cc25bc2824b"
+        },
+        "final_check_ns": 10879186862,
+        "fresh_process_ns": 48888491392,
+        "id": "ladder-64m-v1-5-fp4x2",
+        "input_ns": 4982475855,
+        "lane": "fp4x2",
+        "logical": 100,
+        "nonzeros": 64000000,
+        "offline_audit_ns": 16637988275,
+        "operator_storage_bytes": 1568000008,
+        "packed_bytes": 0,
+        "peak_rss_bytes": 6573752320,
+        "physical": 100,
+        "process_ns": 48871856100,
+        "recoveries": 0,
+        "resource": {
+          "bytes": 15030,
+          "namespace": "evidence",
+          "path": "resources/ladder-64m-v1-5-fp4x2.resource.json",
+          "sha256": "4166e10e9e23ed5d2b7384cbc04e170943665faaa5d841b5c8bb90a18a383206"
+        },
+        "response": {
+          "bytes": 3705,
+          "namespace": "evidence",
+          "path": "ladder-64m-v1-5-fp4x2/response.json",
+          "sha256": "a5a9a2cd33f53fdcf0720744ce1972ee450e4d0b5d98c58f884c47b4e1dce208"
+        },
+        "rows": 4000000,
+        "selected_initial_format": "fp32",
+        "status": "limit",
+        "tile_count": 0
+      },
+      "complete_ratio": 1.1748741600438646,
+      "exact": true,
+      "family": "degenerate",
+      "process_ratio": 1.2060878477654664
+    }
+  ],
+  "status": "passed"
+}

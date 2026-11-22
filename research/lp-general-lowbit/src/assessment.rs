@@ -8,7 +8,7 @@ pub struct Assessor<'a> {
     model: &'a Model,
     program: &'a LinearProgram,
     enabled: bool,
-    cache: Option<(Prepared, Plan)>,
+    cache: Option<(Prepared<'a>, Plan)>,
     pub cached_calls: usize,
 }
 impl<'a> Assessor<'a> {
@@ -23,7 +23,7 @@ impl<'a> Assessor<'a> {
     }
     pub fn prepare(&mut self) {
         if self.cache.is_none() {
-            self.cache = Some((Prepared::new(self.model.clone()), Plan::new(self.program)));
+            self.cache = Some((Prepared::new(self.model), Plan::new(self.program)));
         }
     }
     fn cached(&self, x: &[f64], y: &[f64], tolerance: f64) -> Result<Value> {

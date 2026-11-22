@@ -1,0 +1,1141 @@
+{
+  "allocation_open": true,
+  "billion_inputs": [
+    {
+      "canonical_tiles": 0,
+      "columns": 62500000,
+      "construction_check": {
+        "bytes": 569,
+        "namespace": "evidence",
+        "path": "models-1b-irregular-v1/construction-check.json",
+        "sha256": "55ebdf891f65cb4b6e587116fad32e87e5c2023ee798c5a456ba6f94cf0e1bb9"
+      },
+      "covered_nnz": 0,
+      "family": "irregular",
+      "model": {
+        "bytes": 1110,
+        "namespace": "evidence",
+        "path": "models-1b-irregular-v1/result.json",
+        "sha256": "70feb64fa2a51d9ced39f3ec9b0f16d21b812f8ae5a8fc25414f9c6f0fe30ab0"
+      },
+      "nonzeros": 1000000000,
+      "resource": {
+        "bytes": 370,
+        "namespace": "evidence",
+        "path": "resources/generate-1b-irregular-v1.settlement.json",
+        "sha256": "37683940d3cfcff338f911703d050ac6339080d7f31dd6a49d8ffb42cc8d92e8"
+      },
+      "rows": 62500000
+    },
+    {
+      "canonical_tiles": 0,
+      "columns": 250000000,
+      "construction_check": {
+        "bytes": 565,
+        "namespace": "evidence",
+        "path": "models-1b-wide-v1/construction-check.json",
+        "sha256": "3e87e254a197c048b0f1657312b52f92a899872a5efae7bba0751c2995fde029"
+      },
+      "covered_nnz": 0,
+      "family": "wide",
+      "model": {
+        "bytes": 1096,
+        "namespace": "evidence",
+        "path": "models-1b-wide-v1/result.json",
+        "sha256": "282697cf87dad6d8801ad96c010ae7859f67c1bc745868d7cef44ce453245f12"
+      },
+      "nonzeros": 1000000000,
+      "resource": {
+        "bytes": 365,
+        "namespace": "evidence",
+        "path": "resources/generate-1b-wide-v1.settlement.json",
+        "sha256": "7a486ce4941ce18f92ddee2279631589c3ee1a891006a6324745fda00292e42f"
+      },
+      "rows": 62500000
+    },
+    {
+      "canonical_tiles": 0,
+      "columns": 15625000,
+      "construction_check": {
+        "bytes": 563,
+        "namespace": "evidence",
+        "path": "models-1b-tall-v1/construction-check.json",
+        "sha256": "2e57c73c02e030fe081667628e0068b5243cf135f643420cb7130c2b5cb3de66"
+      },
+      "covered_nnz": 0,
+      "family": "tall",
+      "model": {
+        "bytes": 1095,
+        "namespace": "evidence",
+        "path": "models-1b-tall-v1/result.json",
+        "sha256": "c512166fee4117270993d82b061f99dc774d8daa119388f0324008170edacc9b"
+      },
+      "nonzeros": 1000000000,
+      "resource": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/generate-1b-tall-v1.settlement.json",
+        "sha256": "463752670559820dd07173b6cc77bbe1731a0fc7011f76c771ec1feaed41412b"
+      },
+      "rows": 62500000
+    },
+    {
+      "canonical_tiles": 976564,
+      "columns": 15625024,
+      "construction_check": {
+        "bytes": 573,
+        "namespace": "evidence",
+        "path": "models-1b-coupled_blocks-v1/construction-check.json",
+        "sha256": "1d5d99293517ec90e5d2ff096356f0dab0b232e49fb1950bf9db4efa351a0ca9"
+      },
+      "covered_nnz": 750000000,
+      "family": "coupled_blocks",
+      "model": {
+        "bytes": 1138,
+        "namespace": "evidence",
+        "path": "models-1b-coupled_blocks-v1/result.json",
+        "sha256": "df4df7a7344e873ffd0676ae7b6cff8c4d7f8dca59c441acf39580f269d65f41"
+      },
+      "nonzeros": 1000000000,
+      "resource": {
+        "bytes": 375,
+        "namespace": "evidence",
+        "path": "resources/generate-1b-coupled_blocks-v1.settlement.json",
+        "sha256": "006fa6a3dd22647718619705a462df41be63bda64df21ac66e7b4a8bfa76ebba"
+      },
+      "rows": 15625000
+    },
+    {
+      "canonical_tiles": 0,
+      "columns": 62500000,
+      "construction_check": {
+        "bytes": 571,
+        "namespace": "evidence",
+        "path": "models-1b-ill_scaled-v1/construction-check.json",
+        "sha256": "47858e534d340135dd794371b2d787c59334ed4bbb92356ab27a8f1d531d0189"
+      },
+      "covered_nnz": 0,
+      "family": "ill_scaled",
+      "model": {
+        "bytes": 1126,
+        "namespace": "evidence",
+        "path": "models-1b-ill_scaled-v1/result.json",
+        "sha256": "0d31fc0b457ca338f98d906ce0608f1a2142a64465d2fbcea891bf166ec241e3"
+      },
+      "nonzeros": 1000000000,
+      "resource": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/generate-1b-ill_scaled-v1.settlement.json",
+        "sha256": "7bb511a481e3248a5c5917d04a15165f1073234857c1be4f3c033f0f1d2746ef"
+      },
+      "rows": 62500000
+    },
+    {
+      "canonical_tiles": 0,
+      "columns": 62500000,
+      "construction_check": {
+        "bytes": 569,
+        "namespace": "evidence",
+        "path": "models-1b-degenerate-v1/construction-check.json",
+        "sha256": "6e55a0f4695d329165d35017d01b925c566c6f0c73f42f55e061f61c5d618af8"
+      },
+      "covered_nnz": 0,
+      "family": "degenerate",
+      "model": {
+        "bytes": 1113,
+        "namespace": "evidence",
+        "path": "models-1b-degenerate-v1/result.json",
+        "sha256": "4879acf1f3b549e6c737570361a75aa27a5cb79cf88b2afc5e74376dbbef4318"
+      },
+      "nonzeros": 1000000000,
+      "resource": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/generate-1b-degenerate-v1.settlement.json",
+        "sha256": "5debf6354a971bbf84fa68639ca333f2a6d113a0bc70dc36241b5ead0f4bc314"
+      },
+      "rows": 62500000
+    }
+  ],
+  "billion_solve_measurements": 0,
+  "capacity_cells": [
+    {
+      "freeze": {
+        "bytes": 6401,
+        "namespace": "evidence",
+        "path": "ladder-128m-v2/freeze.json",
+        "sha256": "bd8154a086cc0bef27a6f99b016e1cee6f804564867c97f3c139fa8076dd3898"
+      },
+      "id": "ladder-128m-v2-0-fp4x2",
+      "settlement": {
+        "bytes": 378,
+        "namespace": "evidence",
+        "path": "resources/ladder-128m-v2-0-fp4x2.settlement.json",
+        "sha256": "40a7b6502c76f005d5d72b10c3d46eb5161e7ea2037ba4cef99349f3e335b827"
+      },
+      "status": "missing"
+    },
+    {
+      "audit": {
+        "bytes": 1531,
+        "namespace": "evidence",
+        "path": "ladder-128m-v2-1-fp4x2-audit/result.json",
+        "sha256": "25bf3a25d830f95af526354334f95358d59833218e7235ba9c502e35dd75220c"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1222,
+        "namespace": "evidence",
+        "path": "ladder-128m-v2-1-fp4x2-final-check/result.json",
+        "sha256": "fbde9f9a80097d02ecf0a378158de74c9ca5bac4ffb4cf5915914478ed0a4de0"
+      },
+      "freeze": {
+        "bytes": 6401,
+        "namespace": "evidence",
+        "path": "ladder-128m-v2/freeze.json",
+        "sha256": "bd8154a086cc0bef27a6f99b016e1cee6f804564867c97f3c139fa8076dd3898"
+      },
+      "id": "ladder-128m-v2-1-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3766,
+        "namespace": "evidence",
+        "path": "ladder-128m-v2-1-fp4x2/response.json",
+        "sha256": "965767e1212566c5bf6b272f866b60205664f603fe9765ca3ff8fe804cc0332a"
+      },
+      "settlement": {
+        "bytes": 375,
+        "namespace": "evidence",
+        "path": "resources/ladder-128m-v2-1-fp4x2.settlement.json",
+        "sha256": "d76874a34c679348165d56bc6ce1e697654f8fbcb491e055f2e35087953f2cb4"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 32000000
+    },
+    {
+      "audit": {
+        "bytes": 1557,
+        "namespace": "evidence",
+        "path": "ladder-256m-v2-0-fp4x2-audit/result.json",
+        "sha256": "67d14e4a08604d3ca10d34be72f3de78c8967b19c26b606c9084aaa2032e4494"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1233,
+        "namespace": "evidence",
+        "path": "ladder-256m-v2-0-fp4x2-final-check/result.json",
+        "sha256": "f7a5c81b5a5de3117e85a71fbd53361741211e2147557419a6a5628726a2b264"
+      },
+      "freeze": {
+        "bytes": 8075,
+        "namespace": "evidence",
+        "path": "ladder-256m-v2/freeze.json",
+        "sha256": "62dc99d4159d219b6626c74a4fbc34696580b9fcacf096173a3e9ee561c2cc1e"
+      },
+      "id": "ladder-256m-v2-0-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 5491,
+        "namespace": "evidence",
+        "path": "ladder-256m-v2-0-fp4x2/response.json",
+        "sha256": "381594a245f124f8fde6ebbfe2efaae2d554846a0298db29ebb5914f4122e803"
+      },
+      "settlement": {
+        "bytes": 376,
+        "namespace": "evidence",
+        "path": "resources/ladder-256m-v2-0-fp4x2.settlement.json",
+        "sha256": "7d38adc74b65f69c7317854c1ce8126073f2b057568aa402c755ca15bef69895"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 256000000
+    },
+    {
+      "audit": {
+        "bytes": 1530,
+        "namespace": "evidence",
+        "path": "ladder-256m-v2-1-fp4x2-audit/result.json",
+        "sha256": "bfc017596d99dd48d66979830210f0f771148b6139d017109a697a3b1e4abbfd"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1222,
+        "namespace": "evidence",
+        "path": "ladder-256m-v2-1-fp4x2-final-check/result.json",
+        "sha256": "beadae26c73516f17195872cf27bf412487a5cc89a8b8995d4618fd23e16f1c8"
+      },
+      "freeze": {
+        "bytes": 8075,
+        "namespace": "evidence",
+        "path": "ladder-256m-v2/freeze.json",
+        "sha256": "62dc99d4159d219b6626c74a4fbc34696580b9fcacf096173a3e9ee561c2cc1e"
+      },
+      "id": "ladder-256m-v2-1-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3765,
+        "namespace": "evidence",
+        "path": "ladder-256m-v2-1-fp4x2/response.json",
+        "sha256": "28a24e7a469a597ba6f96905995d2b754208544fce8e2f4fca587589c4cdefd3"
+      },
+      "settlement": {
+        "bytes": 376,
+        "namespace": "evidence",
+        "path": "resources/ladder-256m-v2-1-fp4x2.settlement.json",
+        "sha256": "2a108d157c20a7a2a0ec48d5892506e4d751f4bd036bcb065649c37c45541eed"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 64000000
+    },
+    {
+      "audit": {
+        "bytes": 1556,
+        "namespace": "evidence",
+        "path": "ladder-512m-v2-0-fp4x2-audit/result.json",
+        "sha256": "fd46a79ec166343edb0ff1c92038339a8b081a4350c8f090a803b603897efe1a"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1233,
+        "namespace": "evidence",
+        "path": "ladder-512m-v2-0-fp4x2-final-check/result.json",
+        "sha256": "de633c2a04e731afe7e26368f1d8c108bdaa7a93b8577dcd8ea5b32b4591cc7d"
+      },
+      "freeze": {
+        "bytes": 8286,
+        "namespace": "evidence",
+        "path": "ladder-512m-v2/freeze.json",
+        "sha256": "abf416a87924d35765d7be40248e8f553c66e75281f4340e620ef0ddb48334bc"
+      },
+      "id": "ladder-512m-v2-0-fp4x2",
+      "ownership_disposition": {
+        "bytes": 1019,
+        "namespace": "evidence",
+        "path": "resources/ladder-512m-v2-0-fp4x2.ownership-disposition.json",
+        "sha256": "0fd17a694ac69516fd69c45d393af201c62cda20714274413508fdaf0ab8924f"
+      },
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 7813,
+        "namespace": "evidence",
+        "path": "ladder-512m-v2-0-fp4x2/response.json",
+        "sha256": "a0dfcced7d8430fbfb1e9dd8e87291e65598fe9a4857469bbad075c781e430ae"
+      },
+      "settlement": {
+        "bytes": 378,
+        "namespace": "evidence",
+        "path": "resources/ladder-512m-v2-0-fp4x2.settlement.json",
+        "sha256": "faba4fca655df1428fe76c8c1b8317a34d62fe7e72bc986aecf4098ac59b831b"
+      },
+      "status": "limit",
+      "timing_eligible": false,
+      "unique_endpoint_payload_bytes": 512000000
+    },
+    {
+      "audit": {
+        "bytes": 1533,
+        "namespace": "evidence",
+        "path": "ladder-512m-v2-1-fp4x2-audit/result.json",
+        "sha256": "af609d6d373f9e748c55bd8cbbdadbf5ce5a80b5982431246d40ae58a04a5c95"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1223,
+        "namespace": "evidence",
+        "path": "ladder-512m-v2-1-fp4x2-final-check/result.json",
+        "sha256": "ce5e8cd5ca8fbece4ea7b5de98c7a88f4a47547497c3c0119efacf7f4032073a"
+      },
+      "freeze": {
+        "bytes": 8286,
+        "namespace": "evidence",
+        "path": "ladder-512m-v2/freeze.json",
+        "sha256": "abf416a87924d35765d7be40248e8f553c66e75281f4340e620ef0ddb48334bc"
+      },
+      "id": "ladder-512m-v2-1-fp4x2",
+      "ownership_disposition": {
+        "bytes": 1019,
+        "namespace": "evidence",
+        "path": "resources/ladder-512m-v2-1-fp4x2.ownership-disposition.json",
+        "sha256": "c64f9fcf680f072858519a52c97395517bd0444f3794c619074774e0394ecb6b"
+      },
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 4354,
+        "namespace": "evidence",
+        "path": "ladder-512m-v2-1-fp4x2/response.json",
+        "sha256": "dd51215c0ede3b11220e40f80a760dade68e515347b0fb9a68a4a0bcf14995df"
+      },
+      "settlement": {
+        "bytes": 377,
+        "namespace": "evidence",
+        "path": "resources/ladder-512m-v2-1-fp4x2.settlement.json",
+        "sha256": "d9fd4ebba3d19c06794744ec413eae3383fea002b485baec62d1f5edf30c77e7"
+      },
+      "status": "limit",
+      "timing_eligible": false,
+      "unique_endpoint_payload_bytes": 128000000
+    },
+    {
+      "audit": {
+        "bytes": 1360,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-0-fp4x2-audit/result.json",
+        "sha256": "f5990113e40ffff5c5b3a9662b5d775566d6618abe1f118ae255c775e7d3d072"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1037,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-0-fp4x2-final-check/result.json",
+        "sha256": "29c103bc595cae3ce9ed2ebe19ee75146350ab6a5e482afb4972ea58b4f136db"
+      },
+      "freeze": {
+        "bytes": 12904,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1/freeze.json",
+        "sha256": "8227c99346bdf460e54cbd3098ebf8f4eadcdc9760807db103548e4a309a7046"
+      },
+      "id": "ladder-64m-v1-0-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3737,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-0-fp4x2/response.json",
+        "sha256": "24c98d23d74e3c93a81c4e27f8c36600d5fd53e6db173ca05c5ab97a09a8ee5f"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v1-0-fp4x2.settlement.json",
+        "sha256": "f9a4ee29e0f4604be3e11381d5cd7e7611447a9e72fd04f86d4aca43634b9c3a"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 64000000
+    },
+    {
+      "audit": {
+        "bytes": 1325,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-1-fp4x2-audit/result.json",
+        "sha256": "4cd5a21d4df94037f1d3003c4b665a4ba4c3361672cbb8108d3b5d4bee956a7f"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1017,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-1-fp4x2-final-check/result.json",
+        "sha256": "5595b5df1e6091227d57499bdd9c8aaafd8f63b76b16e53dd0251208adb1e5f7"
+      },
+      "freeze": {
+        "bytes": 12904,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1/freeze.json",
+        "sha256": "8227c99346bdf460e54cbd3098ebf8f4eadcdc9760807db103548e4a309a7046"
+      },
+      "id": "ladder-64m-v1-1-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 4580,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-1-fp4x2/response.json",
+        "sha256": "e35064e053acd7b358112ca1498e87a99f8cab5ad91b5d7702e767fd55254659"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v1-1-fp4x2.settlement.json",
+        "sha256": "d3527433a49455808c0269ad990c15ad4bff1a41e73336d9b045158fed36fd7b"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 160000000
+    },
+    {
+      "audit": {
+        "bytes": 1353,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-2-fp4x2-audit/result.json",
+        "sha256": "da7bc7cc3ea8fc896b473057940269ab435d95f27177802c30da918d48de6e04"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1030,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-2-fp4x2-final-check/result.json",
+        "sha256": "161e7b04ecb64ae7da019e2585cc492eaeb1c66995595179a07c34ff0a1404ff"
+      },
+      "freeze": {
+        "bytes": 12904,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1/freeze.json",
+        "sha256": "8227c99346bdf460e54cbd3098ebf8f4eadcdc9760807db103548e4a309a7046"
+      },
+      "id": "ladder-64m-v1-2-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3734,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-2-fp4x2/response.json",
+        "sha256": "fff80b2868881e2373acd7a13d0a585f3ef8e9721055e58e76fd5f65b3f9d08d"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v1-2-fp4x2.settlement.json",
+        "sha256": "fe4d91d148e03379a6055ceb1e31a66c739ed5526f61f9403172e3e07c9c9c4a"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 40000000
+    },
+    {
+      "audit": {
+        "bytes": 1337,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-3-fp4x2-audit/result.json",
+        "sha256": "f4926fea386c2cfd2f399d5f001c2cf3e1d07257763a9cdebc0910ece08b1147"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1027,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-3-fp4x2-final-check/result.json",
+        "sha256": "b361c816c55825dbc53f3b00ba4c3cd9817b409f4751934231c76642f237a476"
+      },
+      "freeze": {
+        "bytes": 12904,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1/freeze.json",
+        "sha256": "8227c99346bdf460e54cbd3098ebf8f4eadcdc9760807db103548e4a309a7046"
+      },
+      "id": "ladder-64m-v1-3-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3753,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-3-fp4x2/response.json",
+        "sha256": "6ace99668b64337904a087942834e83977e45aad938cbe16278dcea871229f2d"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v1-3-fp4x2.settlement.json",
+        "sha256": "f3f63b084744d7b0ce8676cb7978c5ec85d3e0d55e70207d4d19ec990966d155"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 16000000
+    },
+    {
+      "audit": {
+        "bytes": 1355,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-4-fp4x2-audit/result.json",
+        "sha256": "e11e15e6ad88030c0c50b70af57e5b2c4162b8972d021aa8fad1435317d51b2e"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1035,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-4-fp4x2-final-check/result.json",
+        "sha256": "06674d28a655ab186110faed69431f703eb5940d91138fc1c4891623c7424fd8"
+      },
+      "freeze": {
+        "bytes": 12904,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1/freeze.json",
+        "sha256": "8227c99346bdf460e54cbd3098ebf8f4eadcdc9760807db103548e4a309a7046"
+      },
+      "id": "ladder-64m-v1-4-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3731,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-4-fp4x2/response.json",
+        "sha256": "2f113752840ba45ec678bd8493b9013b16d74424e122f6b1b3f387dda110fa88"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v1-4-fp4x2.settlement.json",
+        "sha256": "9377b7e0c105e52968b1eab224e585c01bbc61281cbccff6e709b004b00dabbd"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 64000000
+    },
+    {
+      "audit": {
+        "bytes": 1329,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-5-fp4x2-audit/result.json",
+        "sha256": "574ee27d23405684485c0ed539552642276368f358be2e442de0ba0b6a4ffe1f"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1022,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-5-fp4x2-final-check/result.json",
+        "sha256": "6b046dff80a21fc5cf754a6d7f753750555ff38ae055640a196f7cc25bc2824b"
+      },
+      "freeze": {
+        "bytes": 12904,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1/freeze.json",
+        "sha256": "8227c99346bdf460e54cbd3098ebf8f4eadcdc9760807db103548e4a309a7046"
+      },
+      "id": "ladder-64m-v1-5-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3705,
+        "namespace": "evidence",
+        "path": "ladder-64m-v1-5-fp4x2/response.json",
+        "sha256": "a5a9a2cd33f53fdcf0720744ce1972ee450e4d0b5d98c58f884c47b4e1dce208"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v1-5-fp4x2.settlement.json",
+        "sha256": "942b4a0d12ddb2f73f1c08157bd871552230c97a15afe4912ea81f33eb39fe9a"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 64000000
+    },
+    {
+      "audit": {
+        "bytes": 1552,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-0-fp4x2-audit/result.json",
+        "sha256": "97f4df0dc5f8175491172574392b98fc68793cebbc3776cc5e431f67bd604fec"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1229,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-0-fp4x2-final-check/result.json",
+        "sha256": "27d85cb83220774ed3306bb1ccbf02604ab06b16545abf916e368dbb5ecd1cd9"
+      },
+      "freeze": {
+        "bytes": 13338,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2/freeze.json",
+        "sha256": "e0782f06c97ddd48abe2b2fc8d4325077fb1f749742e69609e93a909cacb3c79"
+      },
+      "id": "ladder-64m-v2-0-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3737,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-0-fp4x2/response.json",
+        "sha256": "f7a96ee4fdf725301ddab4923aaa635d598d50d9b69a6971981170e3d684d8af"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v2-0-fp4x2.settlement.json",
+        "sha256": "824fdb126c57cba16496fc322556175ef081faf878d6f41bfe7c6e2e67e4a07e"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 64000000
+    },
+    {
+      "audit": {
+        "bytes": 1517,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-1-fp4x2-audit/result.json",
+        "sha256": "12639005511405a7c1a66e18faef929734c798a895955d7692851952136aa793"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1209,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-1-fp4x2-final-check/result.json",
+        "sha256": "fb07c6fca3c112288349b23299203157936e0301b3a906dc3e5886fb828f1ddd"
+      },
+      "freeze": {
+        "bytes": 13338,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2/freeze.json",
+        "sha256": "e0782f06c97ddd48abe2b2fc8d4325077fb1f749742e69609e93a909cacb3c79"
+      },
+      "id": "ladder-64m-v2-1-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 4580,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-1-fp4x2/response.json",
+        "sha256": "7b0622e7665ab9f59269ece94da6039cd6088a65dfb412f21a027c85f84c05dc"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v2-1-fp4x2.settlement.json",
+        "sha256": "4ee1dd0593f4125b9d31ee2c358702bdcc10fe4180a6f1678b042d2952b8c22f"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 160000000
+    },
+    {
+      "audit": {
+        "bytes": 1545,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-2-fp4x2-audit/result.json",
+        "sha256": "f4f03b2ea88b14260cbaaa27e9b453e1c966c63a07d573108dbab698e5f494ce"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1222,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-2-fp4x2-final-check/result.json",
+        "sha256": "68ae1dec5c5b419030245464ad86ddec64b0d0a58fdd0fedbeed87a0104d54aa"
+      },
+      "freeze": {
+        "bytes": 13338,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2/freeze.json",
+        "sha256": "e0782f06c97ddd48abe2b2fc8d4325077fb1f749742e69609e93a909cacb3c79"
+      },
+      "id": "ladder-64m-v2-2-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3733,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-2-fp4x2/response.json",
+        "sha256": "da6dc7d8c84a22655a1afb52d83dbdb7a51ae29d66d3d56e168b6eaafa533666"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v2-2-fp4x2.settlement.json",
+        "sha256": "8aad125eaf27cd5bab7972a0899c23319e84db44c9d6388e880cb9119336b341"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 40000000
+    },
+    {
+      "audit": {
+        "bytes": 1529,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-3-fp4x2-audit/result.json",
+        "sha256": "9a3b33d3135f8269179ade15f8e88b173eceadde9993ae6d7f58bf453818ad6d"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1219,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-3-fp4x2-final-check/result.json",
+        "sha256": "43a00bf9e079d51eba8a1fab4f2c4a228778b8a8bd9632b02e18c86d34463cff"
+      },
+      "freeze": {
+        "bytes": 13338,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2/freeze.json",
+        "sha256": "e0782f06c97ddd48abe2b2fc8d4325077fb1f749742e69609e93a909cacb3c79"
+      },
+      "id": "ladder-64m-v2-3-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3753,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-3-fp4x2/response.json",
+        "sha256": "bf1a6d5435cef910f66db15881d3685fa6dae90eddb3d8ffe244e8c7f2f1b2fa"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v2-3-fp4x2.settlement.json",
+        "sha256": "5d730262f0defa5081aabe7d6c2fd0b9a0e6c976dc6c13be7c56b232df99aed2"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 16000000
+    },
+    {
+      "audit": {
+        "bytes": 1547,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-4-fp4x2-audit/result.json",
+        "sha256": "26bd84cb980756d94e8f48b3515d066e39e4129bd6bae41e08f44d46763cfc1c"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1227,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-4-fp4x2-final-check/result.json",
+        "sha256": "58f5284e53d3aeda7064e829dc3162eb643b74a39534a6db95cd4c9c8a25a722"
+      },
+      "freeze": {
+        "bytes": 13338,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2/freeze.json",
+        "sha256": "e0782f06c97ddd48abe2b2fc8d4325077fb1f749742e69609e93a909cacb3c79"
+      },
+      "id": "ladder-64m-v2-4-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3730,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-4-fp4x2/response.json",
+        "sha256": "426ae3c2f51b0a6b97efd526d825eb66c660fb2ce5e703af3c6b34a1dac118cc"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v2-4-fp4x2.settlement.json",
+        "sha256": "906111bea995b511d3114b88a6da36ad919c1b68ba9330c5b0d8b868e01c1db2"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 64000000
+    },
+    {
+      "audit": {
+        "bytes": 1521,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-5-fp4x2-audit/result.json",
+        "sha256": "84eb5daa34ca959e979afed684e48c200a85cf1b81306260d6b765086a864bd3"
+      },
+      "certified": false,
+      "final": {
+        "bytes": 1214,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-5-fp4x2-final-check/result.json",
+        "sha256": "9ee0dca82a91b195f2baecd193306ce54302d01ba43deb368d4eaa38af5b7c2a"
+      },
+      "freeze": {
+        "bytes": 13338,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2/freeze.json",
+        "sha256": "e0782f06c97ddd48abe2b2fc8d4325077fb1f749742e69609e93a909cacb3c79"
+      },
+      "id": "ladder-64m-v2-5-fp4x2",
+      "ownership_disposition": null,
+      "repaired_dual_assessments": 0,
+      "response": {
+        "bytes": 3705,
+        "namespace": "evidence",
+        "path": "ladder-64m-v2-5-fp4x2/response.json",
+        "sha256": "fe424c76f8c19967e154a0abfca04de8a047716616a6b62af4e368c77bed451c"
+      },
+      "settlement": {
+        "bytes": 374,
+        "namespace": "evidence",
+        "path": "resources/ladder-64m-v2-5-fp4x2.settlement.json",
+        "sha256": "34552043127b4a668660f209577e6ee5b70ac23e9094cfa2ea8eefbb6e6c6d02"
+      },
+      "status": "limit",
+      "timing_eligible": true,
+      "unique_endpoint_payload_bytes": 64000000
+    }
+  ],
+  "cpu_caps": {
+    "admission": 12000,
+    "cleanup": 6000,
+    "development": 130000,
+    "implementation": 10000,
+    "native": 20000,
+    "reporting": 62000
+  },
+  "cpu_contracts": {
+    "bytes": 365,
+    "namespace": "evidence",
+    "path": "resources/preparation-harness-cpu-v2.settlement.json",
+    "sha256": "b2259884dc20b26354930b4238bbc6f1e6ce4a645765cf8582262d3d7c25c314"
+  },
+  "cpu_ns_including_active_reservations": {
+    "admission": 8080427004304,
+    "cleanup": 137152067816,
+    "development": 26115076498292,
+    "implementation": 672143765960,
+    "native": 13583482065588,
+    "reporting": 13031572753348
+  },
+  "current_numerical_source_bindings": 293,
+  "evidence_payload_bytes": 123007099720,
+  "failed_reservations": [
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 2400000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "receipt": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v2.settlement.json",
+        "sha256": "205c2fb5c6f0a2e8b34288492b3a7a02677ec25a5f7124243ab4278e2f370052"
+      },
+      "resource": {
+        "bytes": 24993,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v2.resource.json",
+        "sha256": "1b38b87656e80697758e34c406af2fd5b0aa017af7139119d6e78b7489e6b145"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "receipt": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v3.settlement.json",
+        "sha256": "e12a62366eba77fb049b6d5d1e5fafb37af71100118a08748b2e4e9de6356176"
+      },
+      "resource": {
+        "bytes": 13644,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v3.resource.json",
+        "sha256": "748b98c19e9377ca7d62b0d630bb08f8c8295f1f8a0b186a1eba651f91a99032"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 12000000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "native",
+      "receipt": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/billion-native-v1.settlement.json",
+        "sha256": "0127666f55f95f185dea87cef532d5ef0da3a5191b0fcfce1e3790907ec2f08c"
+      },
+      "resource": {
+        "bytes": 297470,
+        "namespace": "evidence",
+        "path": "resources/billion-native-v1.resource.json",
+        "sha256": "0964f5771d2be6ea42578f63920fe97457072e625ebbe33648a7927044cb96a9"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": false,
+      "cpu_ns": 1920000000000,
+      "gpu": true,
+      "gpu_ns": 480000000000,
+      "overrun": false,
+      "phase": "development",
+      "receipt": {
+        "bytes": 378,
+        "namespace": "evidence",
+        "path": "resources/ladder-128m-v2-0-fp4x2.settlement.json",
+        "sha256": "40a7b6502c76f005d5d72b10c3d46eb5161e7ea2037ba4cef99349f3e335b827"
+      },
+      "resource": {
+        "bytes": 9288,
+        "namespace": "evidence",
+        "path": "resources/ladder-128m-v2-0-fp4x2.resource.json",
+        "sha256": "63a644367827a0e7ab1a5ff56d4370ff2fb8271cd05a819936ad61e260a5e6c4"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 480000000000,
+      "gpu": true,
+      "gpu_ns": 120000000000,
+      "overrun": false,
+      "phase": "admission",
+      "receipt": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v7.settlement.json",
+        "sha256": "3ee018843028f43961c41240a98740568096f693a94e2d2aee39f5a8f49c9598"
+      },
+      "resource": {
+        "bytes": 41709,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v7.resource.json",
+        "sha256": "57d938e02aac3f3ba59407959ec976c2326a3da30e0dff9c0822238697d27b6d"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 7200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "reporting",
+      "receipt": {
+        "bytes": 372,
+        "namespace": "evidence",
+        "path": "resources/portable-gpu-preparation-v1.settlement.json",
+        "sha256": "57ea2b0d4f787cbea5d5f3cd9b2a2c97a637aad22310b4a50d514c4904d2de9d"
+      },
+      "resource": {
+        "bytes": 166320,
+        "namespace": "evidence",
+        "path": "resources/portable-gpu-preparation-v1.resource.json",
+        "sha256": "453de61cea04a0aed90edb87ac90bfdad2492bb11e2b7f9ad46b4c2ad994ce8f"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "overrun": false,
+      "phase": "admission",
+      "receipt": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/prepare-build-check-v1.settlement.json",
+        "sha256": "2120a5e275247293dcc63998cb60f36f77bc6e3a2bba2b43ae906ecab891d33d"
+      },
+      "resource": {
+        "bytes": 22392,
+        "namespace": "evidence",
+        "path": "resources/prepare-build-check-v1.resource.json",
+        "sha256": "147bb2ce37d637ae467a97d588d44a2224ae707b04e5be43ab2eff148811fd35"
+      },
+      "status": "refused"
+    }
+  ],
+  "gpu_caps": {
+    "admission": 2000,
+    "development": 28000
+  },
+  "gpu_ns_including_active_reservations": {
+    "admission": 567319482055,
+    "development": 2303501548679
+  },
+  "gpu_preparation_gates": {
+    "array-gpu-v3": null,
+    "array-initcheck-v3": null,
+    "array-memcheck-v3": null,
+    "array-racecheck-v3": null,
+    "array-synccheck-v3": null,
+    "operational-gpu-v8": null
+  },
+  "historical_handoffs_exact": true,
+  "host_quality": {
+    "bytes": 4982,
+    "namespace": "evidence",
+    "path": "build-prepare-v3/result.json",
+    "sha256": "5b7dd9ffde9c4aad241e09e512d67eaf03a15c346e782af20aa88bac764cc2b0"
+  },
+  "images": [
+    {
+      "bytes": 1043,
+      "namespace": "evidence",
+      "path": "image-v1/binding.json",
+      "sha256": "6d26cea2b9b34d09415d1c37dc116408710c0b6cfd576441f6b6cbd1af074f30"
+    },
+    {
+      "bytes": 1263,
+      "namespace": "evidence",
+      "path": "image-v2/binding.json",
+      "sha256": "ed0c4c30b9d4593dbbb5ac82b76ecf1dce904963868d80799180984312da8aed"
+    }
+  ],
+  "limitation": "Construction certificates establish ready inputs, not LP solves. GPU preparation has no measured benefit before device admission and experiments.",
+  "operational_plan": {
+    "bytes": 1962,
+    "namespace": "evidence",
+    "path": "operational-readmissions/v8.json",
+    "sha256": "7e94155a1a4a9ffc5d76e7f80767fdbce251a3d897a8e954e6340f902027a074"
+  },
+  "origin_commit": "53d7879c128d886cbac260c5c9238a9cdb9a0703",
+  "protected_tracked_files_exact": true,
+  "protocols": [
+    {
+      "bytes": 1003,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-1.md",
+      "sha256": "58df1b8337f16f8030312001e46de2852392c088874ccf820b6a5c6da08e4e65"
+    },
+    {
+      "bytes": 1420,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-10.md",
+      "sha256": "9e9082b7ac9267060b93fd5a0b0d7d0f7a173607e7de04095b31523715919bc8"
+    },
+    {
+      "bytes": 1725,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-2.md",
+      "sha256": "4a466ab26e3cd182252387fe532932206f70b0851077589f4cfb637e8ca3fe7b"
+    },
+    {
+      "bytes": 1751,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-3.md",
+      "sha256": "ccb9b38f28fccc131d43e977b5b3ca465925bbf2a67193c7aff065df4f13c929"
+    },
+    {
+      "bytes": 1781,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-4.md",
+      "sha256": "3f2ecafb85cd64294dcdfbab4d89e0f6ecd94246b88b700cc74d4b0aa7c538dd"
+    },
+    {
+      "bytes": 2774,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-5.md",
+      "sha256": "8d6682c2cb6fbb5559ae2d23baa1816b98881f653057002c77d7ba48f28634a9"
+    },
+    {
+      "bytes": 1000,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-6.md",
+      "sha256": "540b976b0a9bffe1cf65ffc00174f9f9a6816679360d034bebc7972a1badf79c"
+    },
+    {
+      "bytes": 1978,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-7.md",
+      "sha256": "297614199d833896e605c2cc6e9dd431551bd238e1aa732a9ac537d88f56e9b1"
+    },
+    {
+      "bytes": 1707,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-8.md",
+      "sha256": "e27f7c4b16e3f205edef83db3e749a42bb8c869ae1186c7c8aef9fabcdc68d51"
+    },
+    {
+      "bytes": 1504,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-amendment-9.md",
+      "sha256": "e1a66871f0a635d784d4f4bf9e83806e198699cedd9effdfe3ba3305fd0959dd"
+    },
+    {
+      "bytes": 4692,
+      "namespace": "repo",
+      "path": "docs/specifications/SPEC-0046-billion-lp.md",
+      "sha256": "b54eb75c94bb560b57e45b2f169278a43b1c30094e2030f2849e7ba114dab106"
+    }
+  ],
+  "status": "awaiting_gpu_preparation_admission"
+}

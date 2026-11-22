@@ -1,0 +1,192 @@
+{
+  "audit": {
+    "bytes": 27580,
+    "namespace": "evidence",
+    "path": "own-memory-audit-v1/result.json",
+    "sha256": "6622d48b47169b7b295911457c2751da37af6925150d49c9f042f700e90f62ae"
+  },
+  "baseline_bytes": 804978688,
+  "container_only": true,
+  "current_cpu_ns": 64401039603840,
+  "current_gpu_ns": 2870821030734,
+  "device_mutations": false,
+  "diagnostic": {
+    "bytes": 3936,
+    "namespace": "evidence",
+    "path": "ownership-diagnosis-v1/result.json",
+    "sha256": "368767bc2be4f43a4c5e634569cd70962cfbb010739cdad247461b71d564ac5e"
+  },
+  "documentation_resource": {
+    "bytes": 357,
+    "namespace": "evidence",
+    "path": "resources/ownership-docs-v1.settlement.json",
+    "sha256": "fb493ef096fda0dccb1d752230caf80ef5deba1c63a2ec6348566ac3fddbf46a"
+  },
+  "idle_confirmation": {
+    "bytes": 3934,
+    "namespace": "evidence",
+    "path": "idle-confirmation-v1/result.json",
+    "sha256": "202e9d1796aae22ab34071dc4edea61996affc49b65aa866933bc5cc16bb548f"
+  },
+  "interpretation": "No evidence of a surviving solver process or visible inherited GPU handle. Return to baseline excludes continuously retained large-run allocation. Driver-level orphan allocation cannot be conclusively excluded from this container.",
+  "later_max_used": 83564232704,
+  "later_max_utilization": 99,
+  "later_min_used": 9543155712,
+  "latest_confirmation_samples": [
+    {
+      "processes": {},
+      "start_ns": 8440296219953832,
+      "used": 804978688,
+      "utilization": 0
+    },
+    {
+      "processes": {},
+      "start_ns": 8440356222409612,
+      "used": 5995495424,
+      "utilization": 0
+    },
+    {
+      "processes": {},
+      "start_ns": 8440416228665209,
+      "used": 5995495424,
+      "utilization": 0
+    },
+    {
+      "processes": {},
+      "start_ns": 8440476222208543,
+      "used": 804978688,
+      "utilization": 0
+    },
+    {
+      "processes": {},
+      "start_ns": 8440536224486255,
+      "used": 804978688,
+      "utilization": 0
+    },
+    {
+      "processes": {},
+      "start_ns": 8440596225255554,
+      "used": 70277398528,
+      "utilization": 70
+    }
+  ],
+  "latest_gpu_reservation": "operational-gpu-v7.reservation.json",
+  "latest_observation": {
+    "bytes": 225,
+    "namespace": "evidence",
+    "path": "availability/operational-gpu-v8/8440248166330470.json",
+    "sha256": "557fd9528d1e00598b276736dd7e34da02cef55843363b240362561bf81f2dc4"
+  },
+  "latest_used_bytes": 804978688,
+  "latest_utilization": 0,
+  "limits": "Recorded process identities and visible handles exclude only observed surviving owners. No host PID view or kernel log is available; driver-level orphan allocations cannot be conclusively excluded. Historical process telemetry is empty even during our runs, so it cannot independently attribute allocations.",
+  "max_declared_buffers_last_admission": 1901420,
+  "memory_v2": {
+    "free": 91322515456,
+    "reserved": 667877376,
+    "returncode": 0,
+    "total": 102641958912,
+    "used": 10651566080,
+    "version": 33554472
+  },
+  "no_gpu_reservation_during_investigation": true,
+  "observation_samples": 6,
+  "other_processes_signalled": false,
+  "process_apis": [
+    {
+      "api": "nvmlDeviceGetComputeRunningProcesses",
+      "count": 0,
+      "processes": [],
+      "returncode": 0
+    },
+    {
+      "api": "nvmlDeviceGetComputeRunningProcesses_v2",
+      "count": 0,
+      "processes": [],
+      "returncode": 0
+    },
+    {
+      "api": "nvmlDeviceGetComputeRunningProcesses_v3",
+      "count": 0,
+      "processes": [],
+      "returncode": 0
+    },
+    {
+      "api": "nvmlDeviceGetGraphicsRunningProcesses",
+      "count": 0,
+      "processes": [],
+      "returncode": 0
+    },
+    {
+      "api": "nvmlDeviceGetGraphicsRunningProcesses_v2",
+      "count": 0,
+      "processes": [],
+      "returncode": 0
+    },
+    {
+      "api": "nvmlDeviceGetGraphicsRunningProcesses_v3",
+      "count": 0,
+      "processes": [],
+      "returncode": 0
+    },
+    {
+      "api": "nvmlDeviceGetMPSComputeRunningProcesses",
+      "count": 0,
+      "processes": [],
+      "returncode": 0
+    },
+    {
+      "api": "nvmlDeviceGetMPSComputeRunningProcesses_v2",
+      "count": 0,
+      "processes": [],
+      "returncode": 0
+    },
+    {
+      "api": "nvmlDeviceGetMPSComputeRunningProcesses_v3",
+      "count": 0,
+      "processes": [],
+      "returncode": 0
+    }
+  ],
+  "process_detail_query": {
+    "bytes": 606,
+    "namespace": "evidence",
+    "path": "process-detail-query-v1.json",
+    "sha256": "facbd6c4272eec091918d57103f44d77ac8212d43b91556c5bc8f105a3c41851"
+  },
+  "recorded_process_identities": 191104,
+  "references": [
+    "https://man7.org/linux/man-pages/man7/pid_namespaces.7.html",
+    "https://docs.nvidia.com/health-validation/operating/integration#process-and-filesystem-exposure"
+  ],
+  "resources": [
+    {
+      "bytes": 365,
+      "namespace": "evidence",
+      "path": "resources/ownership-diagnosis-v1.settlement.json",
+      "sha256": "7fcd1799395fac7431d76c07c8d980bdcb103ea532a2f839de8e0480e73c09fb"
+    },
+    {
+      "bytes": 359,
+      "namespace": "evidence",
+      "path": "resources/own-memory-audit-v1.settlement.json",
+      "sha256": "dffbbf2edf03fb6fd4f4f004ba40fff16b6759f40050ec5f0b1760d1a434fbb1"
+    },
+    {
+      "bytes": 363,
+      "namespace": "evidence",
+      "path": "resources/idle-confirmation-v1.settlement.json",
+      "sha256": "af290a668663b237297f5209677b4510d57557b5950f1b3af4bfc83075bca6a5"
+    }
+  ],
+  "retained_resource_receipts": 2056,
+  "status": "idle_gate_not_met",
+  "surviving_recorded_identities": [],
+  "visible_handles": {
+    "holders": [],
+    "permission_denied": 0,
+    "scope": "Visible procfs only; no command lines, environments or process memory read.",
+    "vanished": 0,
+    "visible_processes": 35
+  }
+}

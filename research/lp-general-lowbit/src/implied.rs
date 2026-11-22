@@ -57,7 +57,14 @@ pub fn derive(model: &Model) -> Result<(Option<Model>, Vec<Step>)> {
             let indices: Vec<_> = row
                 .terms
                 .iter()
-                .map(|t| ids.binary_search(&t.variable_id).expect("validated ID"))
+                .map(|t| {
+                    let direct = t.variable_id as usize;
+                    if ids.get(direct) == Some(&t.variable_id) {
+                        direct
+                    } else {
+                        ids.binary_search(&t.variable_id).expect("validated ID")
+                    }
+                })
                 .collect();
             // Each product has both endpoints so subtracting its own term from
             // an outward row sum also encloses the remaining contributions.

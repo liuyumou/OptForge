@@ -1,0 +1,3239 @@
+{
+  "admissions": [
+    {
+      "continuations": 60,
+      "identity": "memory-gpu-v1",
+      "preparation": {
+        "exact_preparations": 66,
+        "results": [
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-0.result.json",
+            "sha256": "4d6e0050e11d10c9e71749cd22cf8e51beae5841fe8b36254c7c919dfbd80aaa"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-1.result.json",
+            "sha256": "87caaf1e0fd50b27ef615113540635ff2d35b932107828ffc463f22be760b72e"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-2.result.json",
+            "sha256": "cec6142bb798bcf14e61335b227836c399ddafdf8fc7d7bb1230664c0b058bc1"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-3.result.json",
+            "sha256": "5e58936a4b0d5b42eff6c00cfc80292f3922abaeb29f95250c5cc3989e6af636"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-4.result.json",
+            "sha256": "5507154882dcae623f72558195401a68c9985a7961898965cad22d06c64c9ebc"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-5.result.json",
+            "sha256": "7186faa2fd191d6f0b18327f8c2b0ae1eb059e9c1665c7b1a0b7d82e1906a100"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-6.result.json",
+            "sha256": "fa4e77f514da10637fe9e3aa5b8a8200c0999c80452c2318fe60fdb2386bef12"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-7.result.json",
+            "sha256": "5110448b70c691fdfa16cadede50abeacc73f2e551fa32c4ffebb8c229c962ca"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-8.result.json",
+            "sha256": "fe60f57852ee678ca684d05af20ed31e2fee97357be182966ef7e52eac85f83b"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-9.result.json",
+            "sha256": "aa556f530b1a57d18d5caa7dbba72013b50cb5366d2a13a5131ea2baf82d5ce9"
+          },
+          {
+            "bytes": 553,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-10.result.json",
+            "sha256": "62007c0e2f251c1017b0234421d95bbac2d1219daede2ec765055199885fcaf8"
+          },
+          {
+            "bytes": 553,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-11.result.json",
+            "sha256": "8500e138da9b2934d026f57a53826945a407467b6fb1b67c28b3c68f3f4b636f"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-12.result.json",
+            "sha256": "cc074d65b5cfd2bf7246bfce51cad4af6520bcdef86a64ae0127d1719ffb1c35"
+          },
+          {
+            "bytes": 553,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-13.result.json",
+            "sha256": "9223bf16a2e41aae7de64cdad5941534a1dabc340596cd123247d0a89132ef65"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-14.result.json",
+            "sha256": "3340d9af149a6a00a2505eb4bc882adb858403acc43569d136d648254daf65ec"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-15.result.json",
+            "sha256": "b185a9f7986d7e706efdfaa4ed7a04c21cb8023bb3469606f0d1e8a26c5b8c2c"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-16.result.json",
+            "sha256": "22b941b97f268340b71fff2b8d4410284aaeb14d686729e1677ac9c814f0bfc3"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-17.result.json",
+            "sha256": "dead1424bb4a6217734ad12ba4fbb642359f7e2b017e882e7bbb2f7591eba9f9"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-18.result.json",
+            "sha256": "81c1fd06aa743ba9426f8f51f27b5602cf061833189908cdb6904cb9e5a2c47b"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-19.result.json",
+            "sha256": "98365657e9ca3c4ddb8c971a94e2dbc27c61c56b0f95c7f565137907a4d65b0a"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-20.result.json",
+            "sha256": "dc00f293a3b4f82909f4f50dd8aabbe191223c37c73e92e673a465ca29878356"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-21.result.json",
+            "sha256": "835022bd6227e7013100a9febe5f285977dc12ae5af92993e94f44ff6ca602ee"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-22.result.json",
+            "sha256": "e71274c2da03fe23a22c3931789c75d9ca7cf653a33309d78b8ef923222a86ff"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-23.result.json",
+            "sha256": "16dc5ee0b7d41edad7f29b5515dc084e60f729e61314d5f06d06c8fe0532e8b4"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-24.result.json",
+            "sha256": "843e40e4e2bf31cef7be3e1580bc3bffaf83a3d10eaacc815f8a2267a09ca9f1"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-25.result.json",
+            "sha256": "8cc709441d061e0710b1e363f56e7e79b8cce89b22984511554099f2784d8d99"
+          },
+          {
+            "bytes": 555,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-26.result.json",
+            "sha256": "7b7b57f1e50a19be8175fbc77ee28c6e8047fcb951fc397ef42922e17114264b"
+          },
+          {
+            "bytes": 555,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-27.result.json",
+            "sha256": "b3e1629205d68117c985e258e33231b5dea9fb0ef6bf492445f3bef1d476696a"
+          },
+          {
+            "bytes": 555,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-28.result.json",
+            "sha256": "d849a89e45685a1fff329cf421952aad546f2d3f56ac0c083c3171ea6ac80394"
+          },
+          {
+            "bytes": 555,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-29.result.json",
+            "sha256": "137dec4b978fcf1c45b65e18b1c581a7ae811c0b1a37be76cd3a14eafa3e52a3"
+          },
+          {
+            "bytes": 555,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-30.result.json",
+            "sha256": "15e4f6062bbc381152df8e98bfdf177cc5eabeaaa83f22cbe3428db7b36d8aa2"
+          },
+          {
+            "bytes": 555,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-31.result.json",
+            "sha256": "623c6c15f570de8bfcbabb07881d43fba930b374c4a0cd17b1d16cbbb5b64b30"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-32.result.json",
+            "sha256": "9dd1b94b9ea6e945b10f1828d9d62dad54b34e5d6e159332af91a4c23fa3d5a5"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-33.result.json",
+            "sha256": "20fa00cdfeeb04eae4067524830e117c58ef65c3eb7dfd38e751a837bc36b2d8"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-34.result.json",
+            "sha256": "34488d967a129de6f50ccde051a7b6a01841bdc01b10f6c300c1ac1344776926"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-35.result.json",
+            "sha256": "c352619f566c495ffa0bf7a96ee9a14c4d1aa9b850f0549d4bfadaa9ada8cf99"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-36.result.json",
+            "sha256": "41558233cad8bacbfe674c61a6b740632ef81a95e7c41dc3d8fa515d5b06e888"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-37.result.json",
+            "sha256": "eaa50cf4b024dc23a0b7828d3621892e17dcecbbe312765383e2834c3beb3857"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-38.result.json",
+            "sha256": "cc87ac0c727ac05e07c557451539dff2cf913dca4e16f00c5a9c8bd9cdc46f20"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-39.result.json",
+            "sha256": "fe9b4607e55c48661dad7a6ece9881eb2a844346ad5c54c674f38856679367a2"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-40.result.json",
+            "sha256": "ccc360904f4436eed590926868d618a1024fedc3a3e62cf16a7e8c0db987273c"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-41.result.json",
+            "sha256": "deffa27449f6e1825771b09343818191ec35cb259c79690eaca9e103d2926ee2"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-42.result.json",
+            "sha256": "a6689508930c5283a59e1601f7e89e55f3ef78bf8783d695695a8cdfbb9e99fa"
+          },
+          {
+            "bytes": 556,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-43.result.json",
+            "sha256": "260d1553c136d97b58a1add62a30e67e22e6e57a4eb08659b31ba346d0565900"
+          },
+          {
+            "bytes": 557,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-44.result.json",
+            "sha256": "738515baaa58f65e9a483c9ccb296aaf855f57e0709d3595453b19c5cbbcb85f"
+          },
+          {
+            "bytes": 557,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-45.result.json",
+            "sha256": "cb5c0bb71d629c01c3d3764adfbae3b1fd79cb3a6247052e872f45054d565425"
+          },
+          {
+            "bytes": 557,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-46.result.json",
+            "sha256": "ca0b945274f3683a9c64930ceb88b043f2e3414581755b3d3f1c307a6acca295"
+          },
+          {
+            "bytes": 557,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-47.result.json",
+            "sha256": "408e080516b07570fffca73685299737b54cadb1781ea903b5acbfa39b06f794"
+          },
+          {
+            "bytes": 414,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-48.result.json",
+            "sha256": "ce53010fb486304508efdaf9b8f463f9bd22eb26fd7b8d09757cce930b1bac95"
+          },
+          {
+            "bytes": 414,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-49.result.json",
+            "sha256": "5ed1f61718858f19eed817bed0d4d90c04c2b1f17ca13d287c61d2736e6a3938"
+          },
+          {
+            "bytes": 392,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-50.result.json",
+            "sha256": "5e56595bc0978e44e57c87a537b812428df109157a392d2d75db809ada36715e"
+          },
+          {
+            "bytes": 392,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-51.result.json",
+            "sha256": "dfebad1f6edca3823a5071b47ca7eb14a9d71f635398a862b9e36543b16033bf"
+          },
+          {
+            "bytes": 392,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-52.result.json",
+            "sha256": "3ff3537dafe0e2f8a5f38e38c0e2b8c3a15fb34c81015460c7f0aaac7faa6e50"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-53.result.json",
+            "sha256": "fb457c29aa5e07898d95aa816dfebe19bf0f7479ebe654f2a779e40940ab4db0"
+          },
+          {
+            "bytes": 554,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-54.result.json",
+            "sha256": "65fae2cf3c4b81bbd663db60ea578a4e5f6bcde94c4a1abfc5e209fc0ab7bf16"
+          },
+          {
+            "bytes": 549,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-55.result.json",
+            "sha256": "58d0d64fe4fd3d29aadbb9244c4c91323c7839db59832644753c9283423c0830"
+          },
+          {
+            "bytes": 549,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-56.result.json",
+            "sha256": "307a07c2b511d26f9e0143824e7989065d9d9cfa7a4a3febed22e769d33bb565"
+          },
+          {
+            "bytes": 551,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-57.result.json",
+            "sha256": "680f4fe8d3651d1d250d11e2f92488c8ddcbfaf6f8e495bf49e2c7faf58fdf05"
+          },
+          {
+            "bytes": 487,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-58.result.json",
+            "sha256": "8f5ff0885befed1d7f739f6d79d1536e06c5f9a560311c013b0096b048620730"
+          },
+          {
+            "bytes": 505,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-59.result.json",
+            "sha256": "f89c270c138b25902cdb22dd875937dc55d84def2857f23e1510b1d7f96b0b10"
+          },
+          {
+            "bytes": 506,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-60.result.json",
+            "sha256": "a4516f795451fb9123b4bdb18e8ab0410ff3def85719317e29fa7236af090852"
+          },
+          {
+            "bytes": 553,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-61.result.json",
+            "sha256": "e138fa7f487a3541367018f2232b2b9f37be045b9e735348fd9e437edf43be43"
+          },
+          {
+            "bytes": 552,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-62.result.json",
+            "sha256": "f84c5cbac1b15b5924e800cdd4f5590561b0153f0cf7a719d2734a61b755623e"
+          },
+          {
+            "bytes": 553,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-63.result.json",
+            "sha256": "67bb0f83cd4be95bf1794c21995858e89ef1f9bbff40d51fb826f294572f5642"
+          },
+          {
+            "bytes": 408,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-64.result.json",
+            "sha256": "f6ac4f79960457f84dff72a5f43f7956c864b3fe333e30433546c6899a65a9be"
+          },
+          {
+            "bytes": 547,
+            "namespace": "evidence",
+            "path": "memory-gpu-v1/prepare-deep-norm.result.json",
+            "sha256": "a4bcccdaeb8c7bc68347e00c743140155e9ad5451c6461f2e194aa3309a77c21"
+          }
+        ]
+      },
+      "result": {
+        "bytes": 67297,
+        "namespace": "evidence",
+        "path": "memory-gpu-v1/result.json",
+        "sha256": "ab148aa03cb848c687eedf8a3884ebae8cfd9e9b6d8e1c7c299e4fe6b8310396"
+      },
+      "scalar_checks": 130,
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/memory-gpu-v1.settlement.json",
+        "sha256": "3b28335ece838b2760954b35c0eb2f45fe89c9501fefda702a89630b552d4708"
+      }
+    },
+    {
+      "continuations": 20,
+      "identity": "memory-memcheck-v1",
+      "preparation": {
+        "exact_preparations": 8,
+        "results": [
+          {
+            "bytes": 562,
+            "namespace": "evidence",
+            "path": "memory-memcheck-v1/prepare-0.result.json",
+            "sha256": "26dec1a9a5d9b636e4d43bdeb6f607c95ba049a0685decd2de42bc08ca39a9f6"
+          },
+          {
+            "bytes": 562,
+            "namespace": "evidence",
+            "path": "memory-memcheck-v1/prepare-1.result.json",
+            "sha256": "5987e4c6430745b9f6d38eaf2cdff819172287b99702343f66c962f6cb57d32f"
+          },
+          {
+            "bytes": 565,
+            "namespace": "evidence",
+            "path": "memory-memcheck-v1/prepare-2.result.json",
+            "sha256": "957bb9951bd0ab3aa2e9d8ca3f5a4fc3cf3eb0a29b066792fdadf98e2d4e0f04"
+          },
+          {
+            "bytes": 564,
+            "namespace": "evidence",
+            "path": "memory-memcheck-v1/prepare-3.result.json",
+            "sha256": "c5020434fec08a905c09983ee2583a448d14e28d6cd4b2e198f84e581b6873ad"
+          },
+          {
+            "bytes": 565,
+            "namespace": "evidence",
+            "path": "memory-memcheck-v1/prepare-4.result.json",
+            "sha256": "09030f690b01ee9020f3005026dca32a90f29a62d5143fdab87a1ed2539a1ddf"
+          },
+          {
+            "bytes": 565,
+            "namespace": "evidence",
+            "path": "memory-memcheck-v1/prepare-5.result.json",
+            "sha256": "976d39d82df75f17dcfe25c2159a95d693a51f76642039a55bb50962828d02b3"
+          },
+          {
+            "bytes": 414,
+            "namespace": "evidence",
+            "path": "memory-memcheck-v1/prepare-6.result.json",
+            "sha256": "812dec0b929f36464c8087744dc5d7a7286e93ac25c73a90bb6c7cd736ae4049"
+          },
+          {
+            "bytes": 550,
+            "namespace": "evidence",
+            "path": "memory-memcheck-v1/prepare-deep-norm.result.json",
+            "sha256": "04a261134a1d5e1d1b930c60ebe72bff115d320e8a435acbf61b72d207aa6b0d"
+          }
+        ]
+      },
+      "result": {
+        "bytes": 23431,
+        "namespace": "evidence",
+        "path": "memory-memcheck-v1/result.json",
+        "sha256": "a80a6328b726abb55a428286ca85deb816e8ff90f9965ae44329cec23cdbcf2e"
+      },
+      "scalar_checks": 60,
+      "settlement": {
+        "bytes": 369,
+        "namespace": "evidence",
+        "path": "resources/memory-memcheck-v1.settlement.json",
+        "sha256": "7f0485bb68c55eff67b438dbaf0ade07c1ff866e81dc00f76fa4e870c5272c6b"
+      }
+    },
+    {
+      "continuations": 20,
+      "identity": "memory-racecheck-v1",
+      "preparation": {
+        "exact_preparations": 8,
+        "results": [
+          {
+            "bytes": 570,
+            "namespace": "evidence",
+            "path": "memory-racecheck-v1/prepare-0.result.json",
+            "sha256": "59bdb1fbd91c0572bd59cf299cf1c16747f2f9c38274aa3eeeea42f4cda205ae"
+          },
+          {
+            "bytes": 570,
+            "namespace": "evidence",
+            "path": "memory-racecheck-v1/prepare-1.result.json",
+            "sha256": "3a2d2821bd5a0fd888e54d4fb69fb23549ba3fff8e89402dc26574e049a95999"
+          },
+          {
+            "bytes": 572,
+            "namespace": "evidence",
+            "path": "memory-racecheck-v1/prepare-2.result.json",
+            "sha256": "c09163bccb27d0e333eaf2241e2db17219f4c4c3c8cb328d2485388e463716fc"
+          },
+          {
+            "bytes": 572,
+            "namespace": "evidence",
+            "path": "memory-racecheck-v1/prepare-3.result.json",
+            "sha256": "778250a0950829251d1ee1524b4ca52c877d5620db2cbaf2b11c1e5476300e99"
+          },
+          {
+            "bytes": 573,
+            "namespace": "evidence",
+            "path": "memory-racecheck-v1/prepare-4.result.json",
+            "sha256": "469decd61bf407eb5d33cdac1eab3914e20b1e36d89f328582f9c61d5304f8cc"
+          },
+          {
+            "bytes": 573,
+            "namespace": "evidence",
+            "path": "memory-racecheck-v1/prepare-5.result.json",
+            "sha256": "ad67ad178c3fb9d12286885ef2cbd202115f72785b2d02ceee13cab7ab28099d"
+          },
+          {
+            "bytes": 414,
+            "namespace": "evidence",
+            "path": "memory-racecheck-v1/prepare-6.result.json",
+            "sha256": "e94873e77176c702ca126572b58636766ed0ac989fe4d2666f19435cdd12a75a"
+          },
+          {
+            "bytes": 560,
+            "namespace": "evidence",
+            "path": "memory-racecheck-v1/prepare-deep-norm.result.json",
+            "sha256": "5259309e66bf30e733a96108c1eb98f67ef546794100dc19fee77f3a8695b888"
+          }
+        ]
+      },
+      "result": {
+        "bytes": 23520,
+        "namespace": "evidence",
+        "path": "memory-racecheck-v1/result.json",
+        "sha256": "5d2f20719e03a8f4fffe4c1149e5e8db0bdc1a327487a698ab788d4e1f98f893"
+      },
+      "scalar_checks": 60,
+      "settlement": {
+        "bytes": 373,
+        "namespace": "evidence",
+        "path": "resources/memory-racecheck-v1.settlement.json",
+        "sha256": "c06d3382ef57a3d6170dc43603a5bd32108339acf9fa28a0f8f7cdc9e20d956b"
+      }
+    },
+    {
+      "continuations": 20,
+      "identity": "memory-initcheck-v1",
+      "preparation": {
+        "exact_preparations": 8,
+        "results": [
+          {
+            "bytes": 564,
+            "namespace": "evidence",
+            "path": "memory-initcheck-v1/prepare-0.result.json",
+            "sha256": "8d339343c944c2d0fdfef8e209a14a0a0bae92ac4cc3a2cb973fb357c0bd0464"
+          },
+          {
+            "bytes": 564,
+            "namespace": "evidence",
+            "path": "memory-initcheck-v1/prepare-1.result.json",
+            "sha256": "768a72004f6e5e05371f47a3ddb544e96763919cf788b2f464cd12cf7c9bf2f9"
+          },
+          {
+            "bytes": 566,
+            "namespace": "evidence",
+            "path": "memory-initcheck-v1/prepare-2.result.json",
+            "sha256": "b020ad479c0aaedef72cb5b8c338fa94c281589caa789a2cdf7e8ce1d5b93b24"
+          },
+          {
+            "bytes": 566,
+            "namespace": "evidence",
+            "path": "memory-initcheck-v1/prepare-3.result.json",
+            "sha256": "d6cf5789c6c17e27a468853ed5645e6112adcc08575370d6514f954266dca44e"
+          },
+          {
+            "bytes": 567,
+            "namespace": "evidence",
+            "path": "memory-initcheck-v1/prepare-4.result.json",
+            "sha256": "f19ed47cdcec52e017299e8533c636b0dacbb18766408c827ef27b5a69895c33"
+          },
+          {
+            "bytes": 567,
+            "namespace": "evidence",
+            "path": "memory-initcheck-v1/prepare-5.result.json",
+            "sha256": "e0dc4fdb6098fae847edd36b947868f42bc34e62d0cfc667418dc9227e554e68"
+          },
+          {
+            "bytes": 414,
+            "namespace": "evidence",
+            "path": "memory-initcheck-v1/prepare-6.result.json",
+            "sha256": "eb1130e57a7ce46d91bad3b10542bca89e0b4c07b5ae62b2ea98752e5a7b90b1"
+          },
+          {
+            "bytes": 550,
+            "namespace": "evidence",
+            "path": "memory-initcheck-v1/prepare-deep-norm.result.json",
+            "sha256": "51f164136949173d5ead12833eb4943c48560603fafdc11411863eed1a416446"
+          }
+        ]
+      },
+      "result": {
+        "bytes": 23520,
+        "namespace": "evidence",
+        "path": "memory-initcheck-v1/result.json",
+        "sha256": "bbeb9187585a994497f432efb1bf3904dd3c9981093265283b36fa51c335f2ac"
+      },
+      "scalar_checks": 60,
+      "settlement": {
+        "bytes": 370,
+        "namespace": "evidence",
+        "path": "resources/memory-initcheck-v1.settlement.json",
+        "sha256": "95f1de59c14515af88c046a3af5b673cea0846b0affac512e316270328f43913"
+      }
+    },
+    {
+      "continuations": 20,
+      "identity": "memory-synccheck-v1",
+      "preparation": {
+        "exact_preparations": 8,
+        "results": [
+          {
+            "bytes": 563,
+            "namespace": "evidence",
+            "path": "memory-synccheck-v1/prepare-0.result.json",
+            "sha256": "e6b7624e7c3444af7fd064a7f1d610975001581fe204ae4b7e182de302ddb23f"
+          },
+          {
+            "bytes": 563,
+            "namespace": "evidence",
+            "path": "memory-synccheck-v1/prepare-1.result.json",
+            "sha256": "8880c3d0afb1ecf8a181999336e04acfa9ce2e63224329b38eeac7a3a940c952"
+          },
+          {
+            "bytes": 565,
+            "namespace": "evidence",
+            "path": "memory-synccheck-v1/prepare-2.result.json",
+            "sha256": "ba70f558eeea0a2d2aac01701209110d4f4f5084ff8d43d28ac394aa68d83570"
+          },
+          {
+            "bytes": 565,
+            "namespace": "evidence",
+            "path": "memory-synccheck-v1/prepare-3.result.json",
+            "sha256": "61e2db4cdbddcd268c5757600104708274c9a4916911eb2b9115b858a6312bd2"
+          },
+          {
+            "bytes": 566,
+            "namespace": "evidence",
+            "path": "memory-synccheck-v1/prepare-4.result.json",
+            "sha256": "e351d0741bb8081cf3b6b730b712db9401af3effe2f5bca4f00f5a851e1e3b85"
+          },
+          {
+            "bytes": 566,
+            "namespace": "evidence",
+            "path": "memory-synccheck-v1/prepare-5.result.json",
+            "sha256": "2ee45a35d483263313bc05a2ca9eb0a82b6dad276a7f3fa9e60a02bbedbd5824"
+          },
+          {
+            "bytes": 414,
+            "namespace": "evidence",
+            "path": "memory-synccheck-v1/prepare-6.result.json",
+            "sha256": "524aecc1fba1481e5f073bf695d0cb1b2c54db7405dd2e074d1d338c525ce40d"
+          },
+          {
+            "bytes": 549,
+            "namespace": "evidence",
+            "path": "memory-synccheck-v1/prepare-deep-norm.result.json",
+            "sha256": "78c88862b7f464e5553042cf98cf67e369036cceac493cf675ab82f1d5dcc17d"
+          }
+        ]
+      },
+      "result": {
+        "bytes": 23520,
+        "namespace": "evidence",
+        "path": "memory-synccheck-v1/result.json",
+        "sha256": "61769707720b0d5dde8e8e1c1b2b2aa2a4d6f85c4302af8d6d43a1c644176b91"
+      },
+      "scalar_checks": 60,
+      "settlement": {
+        "bytes": 370,
+        "namespace": "evidence",
+        "path": "resources/memory-synccheck-v1.settlement.json",
+        "sha256": "f91d1b4bff2ef18c896422807afead8301805d834c3cdd4deadf7d4676b689b1"
+      }
+    }
+  ],
+  "billion_host_gate": {
+    "bytes": 16185,
+    "namespace": "evidence",
+    "path": "billion-host-availability-v2.json",
+    "sha256": "928afa5c48ed1d70e41158c79800df06e3fd14a5461992aa8adc807ed17e42e1"
+  },
+  "billion_solve_measurements": 0,
+  "changed": [
+    {
+      "after": {
+        "bytes": 17771,
+        "namespace": "repo",
+        "path": "research/lp-billion-lowbit/src/billion.rs",
+        "sha256": "8c126744d987444cb5733b0f01fcdd38cb7eba509c161a6526d691416e4fe8c8"
+      },
+      "before": {
+        "bytes": 17779,
+        "namespace": "evidence",
+        "path": "sources/array-quality-v6/research/lp-billion-lowbit/src/billion.rs",
+        "sha256": "1633a2d39ed1ea1bdf675d40f8c64ce2a4ab56341ad8651bbff8c6d08716e3f3"
+      }
+    },
+    {
+      "after": {
+        "bytes": 20103,
+        "namespace": "repo",
+        "path": "research/lp-billion-lowbit/src/operator.rs",
+        "sha256": "6073b4c87a4eb5ac34f52fd20dc6a9b23c6976e7f9ff6990642b56f1eeb09e1a"
+      },
+      "before": {
+        "bytes": 15143,
+        "namespace": "evidence",
+        "path": "sources/array-quality-v6/research/lp-billion-lowbit/src/operator.rs",
+        "sha256": "afe46d744af726a11de1c0cbd44a3d560e4945e0820620baea3c54d600367ac6"
+      }
+    },
+    {
+      "after": {
+        "bytes": 16731,
+        "namespace": "repo",
+        "path": "research/lp-billion-lowbit/src/tensor.rs",
+        "sha256": "9fb0a1389c972a189a76b7ccd19dbcb7510a13a147c8ccdbccb20148044de458"
+      },
+      "before": {
+        "bytes": 16690,
+        "namespace": "evidence",
+        "path": "sources/array-quality-v6/research/lp-billion-lowbit/src/tensor.rs",
+        "sha256": "948e62e3a2ab0c6f6db1ee10c3a69b378a926c525d765b3d5ea86c95732bb241"
+      }
+    },
+    {
+      "after": {
+        "bytes": 17883,
+        "namespace": "repo",
+        "path": "research/lp-billion-lowbit/tests/contracts.rs",
+        "sha256": "ce02da94e60d12a65bee7369cb48e4b4b3f2ceb00830cec41de62e0afeb4da57"
+      },
+      "before": {
+        "bytes": 17874,
+        "namespace": "evidence",
+        "path": "sources/array-quality-v6/research/lp-billion-lowbit/tests/contracts.rs",
+        "sha256": "794bc0387c1745172993c446d5132efc53f045b87bbac38901f61caf734f8c89"
+      }
+    }
+  ],
+  "cohorts": [
+    {
+      "audit_settlement": {
+        "bytes": 354,
+        "namespace": "evidence",
+        "path": "resources/audit-64m-v4.settlement.json",
+        "sha256": "4c4e03e986da473348948a0d0de34de75534c2b621d3175e89eddc4744fdbe32"
+      },
+      "cells": [
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 40599244593,
+          "after_peak_rss_bytes": 4972228608,
+          "after_response": {
+            "bytes": 4115,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-0-fp4x2/response.json",
+            "sha256": "7a8f734e5dbea380485ed3356639ee944bdbd1f6fe6a60b03962e564c3256d04"
+          },
+          "assessment_ratio": 1.0185586299214802,
+          "audit": {
+            "bytes": 1552,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-0-fp4x2-audit/result.json",
+            "sha256": "7803070e8f85deee804234e31aeace8c038bd3f9d6b1fae793fbe86c47f30168"
+          },
+          "before_complete_ns": 42385340837,
+          "before_peak_rss_bytes": 6521839616,
+          "before_response": {
+            "bytes": 4115,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-0-fp4x2/response.json",
+            "sha256": "2b26be148ba83227f3926d33e384c5c26194a03877c52660de175d64607161de"
+          },
+          "certified": false,
+          "complete_ratio": 1.043993336868833,
+          "exact": true,
+          "family": "irregular",
+          "final_check": {
+            "bytes": 1229,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-0-fp4x2-final-check/result.json",
+            "sha256": "8b56a215f22084672211bef26cc3456e403b263431ed576409ccb6511d0960c0"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.311653210294228,
+          "preparation_ratio": 1.1099031944645796,
+          "resource": {
+            "bytes": 10870,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v4-0-fp4x2.resource.json",
+            "sha256": "9180b0d226043a886de7bda096b5fe8c3ea3a767fa97a99cbf5e0ea9b9da7055"
+          },
+          "saved_rss_bytes": 1549611008
+        },
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 56388020112,
+          "after_peak_rss_bytes": 6756229120,
+          "after_response": {
+            "bytes": 4961,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-1-fp4x2/response.json",
+            "sha256": "39bf9642bc94977ac2390233897398e64f3ba10e7d5207274be290c4e527af3d"
+          },
+          "assessment_ratio": 1.0835770142196928,
+          "audit": {
+            "bytes": 1517,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-1-fp4x2-audit/result.json",
+            "sha256": "6ad9cbcd17d6908403873c6a62b007d5bc55922c4b3edabc5a42ddf2213bcf68"
+          },
+          "before_complete_ns": 61812618909,
+          "before_peak_rss_bytes": 8290643968,
+          "before_response": {
+            "bytes": 4962,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-1-fp4x2/response.json",
+            "sha256": "a7784ffc96ad6ab2f0519aa08383eb57db66ee78f7bd78f27c5900ae3254e126"
+          },
+          "certified": false,
+          "complete_ratio": 1.0962012637830776,
+          "exact": true,
+          "family": "wide",
+          "final_check": {
+            "bytes": 1209,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-1-fp4x2-final-check/result.json",
+            "sha256": "ea76c1e1db6f549471852aeb2f85afc8983046cc60b875ffb3ce464ed0edd63f"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.2271111326668567,
+          "preparation_ratio": 1.1505403021256,
+          "resource": {
+            "bytes": 12690,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v4-1-fp4x2.resource.json",
+            "sha256": "a2476f5cedae6bc5acdc69c3d014a97098f02fc1e88b0db1e71e529a2cf1dc1e"
+          },
+          "saved_rss_bytes": 1534414848
+        },
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 32415633800,
+          "after_peak_rss_bytes": 4365598720,
+          "after_response": {
+            "bytes": 4112,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-2-fp4x2/response.json",
+            "sha256": "6ee7a2ba2299f194596d9344fbc60737dc30ee3765279dd42dc0dc1c20da4010"
+          },
+          "assessment_ratio": 1.0296285676756085,
+          "audit": {
+            "bytes": 1545,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-2-fp4x2-audit/result.json",
+            "sha256": "e5f47f7cb8f1047bcbd551be9768dd1c34436b5b6862b6c97072fe071d176eba"
+          },
+          "before_complete_ns": 36060575225,
+          "before_peak_rss_bytes": 6239719424,
+          "before_response": {
+            "bytes": 4112,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-2-fp4x2/response.json",
+            "sha256": "6650d0fcc2ee767ff6e8229e755baee97641162b09f606cd0bca90dce61d54bf"
+          },
+          "certified": false,
+          "complete_ratio": 1.112443935154524,
+          "exact": true,
+          "family": "tall",
+          "final_check": {
+            "bytes": 1222,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-2-fp4x2-final-check/result.json",
+            "sha256": "65e5a81f6e5c0b0a8e114be792b200fd47ffb9b363f0372cfdc6d58e2582e330"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.4292929387701487,
+          "preparation_ratio": 1.2302444259958254,
+          "resource": {
+            "bytes": 9653,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v4-2-fp4x2.resource.json",
+            "sha256": "1a384cc548fa6b8e3a4bde4f93c788bc6faf2f40cb3062afdc32c9d7609b7de3"
+          },
+          "saved_rss_bytes": 1874120704
+        },
+        {
+          "accepted_fp4_share": 0.75,
+          "after_complete_ns": 26488750568,
+          "after_peak_rss_bytes": 4185202688,
+          "after_response": {
+            "bytes": 4131,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-3-fp4x2/response.json",
+            "sha256": "56964d1c4f4183eb0c39051ec7346f01c2051fbea74bda5ba6e2810250ad8b8e"
+          },
+          "assessment_ratio": 0.9953457421458238,
+          "audit": {
+            "bytes": 1529,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-3-fp4x2-audit/result.json",
+            "sha256": "1c17d03c87d2e5a9bb659baf06c3b3566ee39689476a81cc24cbbeda4826ab69"
+          },
+          "before_complete_ns": 27888873073,
+          "before_peak_rss_bytes": 5749649408,
+          "before_response": {
+            "bytes": 4131,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-3-fp4x2/response.json",
+            "sha256": "8b537cc8c07d2fdff99f0193d64d46c84a151a3d0bb985563309661f53147d8c"
+          },
+          "certified": false,
+          "complete_ratio": 1.052857249774983,
+          "exact": true,
+          "family": "coupled_blocks",
+          "final_check": {
+            "bytes": 1219,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-3-fp4x2-final-check/result.json",
+            "sha256": "08ac625097859a7d91c207dcc1d039a5688f060fc015a40f2d5405ba8e91e6d0"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.373804290168706,
+          "preparation_ratio": 1.097672155839501,
+          "resource": {
+            "bytes": 8789,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v4-3-fp4x2.resource.json",
+            "sha256": "c284acebe5b5bf7fc36c77b0371d9db19a521ab7bd7d29a6ec035efddd0f1f44"
+          },
+          "saved_rss_bytes": 1564446720
+        },
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 40004684728,
+          "after_peak_rss_bytes": 4971851776,
+          "after_response": {
+            "bytes": 4108,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-4-fp4x2/response.json",
+            "sha256": "e04839fa3974392e932db3d8ff68bfcc86397d72bb21f1174eff0ca6d60d830b"
+          },
+          "assessment_ratio": 1.0107974306434993,
+          "audit": {
+            "bytes": 1547,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-4-fp4x2-audit/result.json",
+            "sha256": "be1b5e47de271bcf8c68ab3400eba4fa8fe2b9da5248d949a919144a565ba3f2"
+          },
+          "before_complete_ns": 41824305051,
+          "before_peak_rss_bytes": 6415179776,
+          "before_response": {
+            "bytes": 4108,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-4-fp4x2/response.json",
+            "sha256": "207e919ce36f9aa67d04eae4276e6569c923b21bec400775e29ba8fad52f9238"
+          },
+          "certified": false,
+          "complete_ratio": 1.0454851809324825,
+          "exact": true,
+          "family": "ill_scaled",
+          "final_check": {
+            "bytes": 1227,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-4-fp4x2-final-check/result.json",
+            "sha256": "a0ece9af4f47dae85a810deb1c44a7b4c99d91bc7e6fa4985473aecdec8d4a27"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.2902998852393786,
+          "preparation_ratio": 1.078936276475716,
+          "resource": {
+            "bytes": 10610,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v4-4-fp4x2.resource.json",
+            "sha256": "518d8616bdb4fbf8964482ead49b7cf4437f9bbf7f68c5d4a4e3a6e64722cc31"
+          },
+          "saved_rss_bytes": 1443328000
+        },
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 36544107618,
+          "after_peak_rss_bytes": 4675362816,
+          "after_response": {
+            "bytes": 4082,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-5-fp4x2/response.json",
+            "sha256": "52b23980236086628e62d8735ed7ca8f534e65b7d607a225bd08b9236376c089"
+          },
+          "assessment_ratio": 1.0374804704946776,
+          "audit": {
+            "bytes": 1521,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-5-fp4x2-audit/result.json",
+            "sha256": "0b4124fa4291df44080436e14759bdc2800607a9f477fe39fb888452d67e50a4"
+          },
+          "before_complete_ns": 40198121762,
+          "before_peak_rss_bytes": 6515486720,
+          "before_response": {
+            "bytes": 4083,
+            "namespace": "evidence",
+            "path": "ladder-64m-v3-5-fp4x2/response.json",
+            "sha256": "b990dfbd33cd320e5c81059e09adfa78ea6fcdc8cb08c1e257e994331ec33036"
+          },
+          "certified": false,
+          "complete_ratio": 1.099989146874124,
+          "exact": true,
+          "family": "degenerate",
+          "final_check": {
+            "bytes": 1214,
+            "namespace": "evidence",
+            "path": "ladder-64m-v4-5-fp4x2-final-check/result.json",
+            "sha256": "9723460c0b3dfe10671bcc37353c68f59aae2cb52bd4295b7b2816037f5cd3eb"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.393578846480692,
+          "preparation_ratio": 1.2676488585231698,
+          "resource": {
+            "bytes": 10090,
+            "namespace": "evidence",
+            "path": "resources/ladder-64m-v4-5-fp4x2.resource.json",
+            "sha256": "0499854c53ef47e0f763fb82eae5ad00ddee707236761f4e49afba2f20b968af"
+          },
+          "saved_rss_bytes": 1840123904
+        }
+      ],
+      "comparison": {
+        "bytes": 40270,
+        "namespace": "evidence",
+        "path": "paired-64m-v3-v4.json",
+        "sha256": "e3013f3b90e18af2faa8de1bd38f0ba32f6334ffd0497c13fd33b8f5efbfb709"
+      },
+      "comparison_settlement": {
+        "bytes": 363,
+        "namespace": "evidence",
+        "path": "resources/comparison-ladder-64m-v4.settlement.json",
+        "sha256": "9363298fc7d8e4ee5b157d7c91aff7c98e8d1742b9efac978473c1d262d9c000"
+      },
+      "median_assessment_ratio": 1.0240935987985442,
+      "median_complete_ratio": 1.0745292567790303,
+      "median_peak_rss_ratio": 1.3427287502314669,
+      "median_preparation_ratio": 1.1302217482950898,
+      "scale": "64m"
+    },
+    {
+      "audit_settlement": {
+        "bytes": 355,
+        "namespace": "evidence",
+        "path": "resources/audit-256m-v4.settlement.json",
+        "sha256": "5246abc0fefceb37e2e67769728f7f6d2d57b88c3c2f4a7470f461ff6d96d43e"
+      },
+      "cells": [
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 186480388112,
+          "after_peak_rss_bytes": 19309076480,
+          "after_response": {
+            "bytes": 5872,
+            "namespace": "evidence",
+            "path": "ladder-256m-v4-0-fp4x2/response.json",
+            "sha256": "8dd35174424ea32ace8599079074e3affec100b2388e3f3808d940b7b06c2540"
+          },
+          "assessment_ratio": 1.0206874336569645,
+          "audit": {
+            "bytes": 1557,
+            "namespace": "evidence",
+            "path": "ladder-256m-v4-0-fp4x2-audit/result.json",
+            "sha256": "46478583bef118534f973b2d6a357226237ee98fdb50e0e365372c5d06369f48"
+          },
+          "before_complete_ns": 194066951789,
+          "before_peak_rss_bytes": 25437450240,
+          "before_response": {
+            "bytes": 5872,
+            "namespace": "evidence",
+            "path": "ladder-256m-v3-0-fp4x2/response.json",
+            "sha256": "322a4bd13d5dc2ccc8d2176d9b61882f171a3cfb8865914fba4b591e74fbe833"
+          },
+          "certified": false,
+          "complete_ratio": 1.0406829037294985,
+          "exact": true,
+          "family": "irregular",
+          "final_check": {
+            "bytes": 1233,
+            "namespace": "evidence",
+            "path": "ladder-256m-v4-0-fp4x2-final-check/result.json",
+            "sha256": "4579875332dfb0d7490f7987813f6901e339d91e63c449275b19edd87d28d596"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.3173830590161917,
+          "preparation_ratio": 1.1387511928690925,
+          "resource": {
+            "bytes": 27863,
+            "namespace": "evidence",
+            "path": "resources/ladder-256m-v4-0-fp4x2.resource.json",
+            "sha256": "c6c672bc0334b48a3363279c81084e1bc19f26982e65db50444aac3a90a597ad"
+          },
+          "saved_rss_bytes": 6128373760
+        },
+        {
+          "accepted_fp4_share": 0.75,
+          "after_complete_ns": 103822779029,
+          "after_peak_rss_bytes": 16344727552,
+          "after_response": {
+            "bytes": 4147,
+            "namespace": "evidence",
+            "path": "ladder-256m-v4-1-fp4x2/response.json",
+            "sha256": "fcf2d2e39ea07909bce3249a107deace7dfc870abf59ce916bc56cf2bc05e0af"
+          },
+          "assessment_ratio": 1.004227808416602,
+          "audit": {
+            "bytes": 1530,
+            "namespace": "evidence",
+            "path": "ladder-256m-v4-1-fp4x2-audit/result.json",
+            "sha256": "10f2d00323b0a5c9b9748184e88a8f3f01ea87f6e27af172d85115b0184f5b73"
+          },
+          "before_complete_ns": 110362355776,
+          "before_peak_rss_bytes": 22390411264,
+          "before_response": {
+            "bytes": 4148,
+            "namespace": "evidence",
+            "path": "ladder-256m-v3-1-fp4x2/response.json",
+            "sha256": "ff155bebf42ea7016b97de18cee554a9708dece797611b31c4c23fc1baa2129c"
+          },
+          "certified": false,
+          "complete_ratio": 1.0629878800024546,
+          "exact": true,
+          "family": "coupled_blocks",
+          "final_check": {
+            "bytes": 1222,
+            "namespace": "evidence",
+            "path": "ladder-256m-v4-1-fp4x2-final-check/result.json",
+            "sha256": "39ef844a93e8fbea859f4777bc950bebb7688371bf19db2fa1d2208940609687"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.369885866421813,
+          "preparation_ratio": 1.1947054091648142,
+          "resource": {
+            "bytes": 18936,
+            "namespace": "evidence",
+            "path": "resources/ladder-256m-v4-1-fp4x2.resource.json",
+            "sha256": "4da3dc49c7ae8e70aab1052434237d5205f3f950f035c65c985a8c02b0e21555"
+          },
+          "saved_rss_bytes": 6045683712
+        }
+      ],
+      "comparison": {
+        "bytes": 14073,
+        "namespace": "evidence",
+        "path": "paired-256m-v3-v4.json",
+        "sha256": "96fda933af9ccd07efd792dfc906e8b09765915f4fccaebc3f7ab4d5bc4a0cc1"
+      },
+      "comparison_settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/comparison-ladder-256m-v4.settlement.json",
+        "sha256": "7d9473b5134db23f8f4166ff3e78a11c5997e6344470192bd1f8780a2b9a81ae"
+      },
+      "median_assessment_ratio": 1.0124576210367833,
+      "median_complete_ratio": 1.0518353918659766,
+      "median_peak_rss_ratio": 1.3436344627190024,
+      "median_preparation_ratio": 1.1667283010169534,
+      "scale": "256m"
+    },
+    {
+      "audit_settlement": {
+        "bytes": 357,
+        "namespace": "evidence",
+        "path": "resources/audit-512m-v4.settlement.json",
+        "sha256": "42cd88148216e8f6a453ec8f5e863fc0bc8e8f57c027da306f1f718227357811"
+      },
+      "cells": [
+        {
+          "accepted_fp4_share": 0.0,
+          "after_complete_ns": 399486646869,
+          "after_peak_rss_bytes": 38415572992,
+          "after_response": {
+            "bytes": 8198,
+            "namespace": "evidence",
+            "path": "ladder-512m-v4-0-fp4x2/response.json",
+            "sha256": "2f78580a9b50c754afc6bf3f5105db0e5889ab5f8123bc173c4a6a1a19b9bf95"
+          },
+          "assessment_ratio": 0.989827495066525,
+          "audit": {
+            "bytes": 1556,
+            "namespace": "evidence",
+            "path": "ladder-512m-v4-0-fp4x2-audit/result.json",
+            "sha256": "23d4a437c9c66ed7571f78deb0f922014b7ed804d2a7081c54ef16ace56fc20c"
+          },
+          "before_complete_ns": 406709022411,
+          "before_peak_rss_bytes": 50690498560,
+          "before_response": {
+            "bytes": 8198,
+            "namespace": "evidence",
+            "path": "ladder-512m-v3-0-fp4x2/response.json",
+            "sha256": "dbc65bfefb57b915b654e6d45b0ece18cb5e61bebdee834f9c5f08b9be5140d1"
+          },
+          "certified": false,
+          "complete_ratio": 1.018079141314499,
+          "exact": true,
+          "family": "irregular",
+          "final_check": {
+            "bytes": 1233,
+            "namespace": "evidence",
+            "path": "ladder-512m-v4-0-fp4x2-final-check/result.json",
+            "sha256": "a542fc2979b2ec63c07f45300356291fa400ae9876c42d3f6bb2ead29a823942"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.3195299356996768,
+          "preparation_ratio": 1.1410054396927962,
+          "resource": {
+            "bytes": 54040,
+            "namespace": "evidence",
+            "path": "resources/ladder-512m-v4-0-fp4x2.resource.json",
+            "sha256": "26dd61a9cb0a5e283c7fc4835b4978996afb21a6227077fd9922d1f22e4e7a77"
+          },
+          "saved_rss_bytes": 12274925568
+        },
+        {
+          "accepted_fp4_share": 0.75,
+          "after_complete_ns": 219753441274,
+          "after_peak_rss_bytes": 32491311104,
+          "after_response": {
+            "bytes": 4738,
+            "namespace": "evidence",
+            "path": "ladder-512m-v4-1-fp4x2/response.json",
+            "sha256": "610b5185ff89ef8d6d87a0c03585d6410d1a903deba44c120bcc95c006d72a71"
+          },
+          "assessment_ratio": 0.9302608974777877,
+          "audit": {
+            "bytes": 1533,
+            "namespace": "evidence",
+            "path": "ladder-512m-v4-1-fp4x2-audit/result.json",
+            "sha256": "f84d86c513fbcc314b4ac6fa1f57109498b01449c1c840cc2a22da287f22afbb"
+          },
+          "before_complete_ns": 237677554741,
+          "before_peak_rss_bytes": 44713099264,
+          "before_response": {
+            "bytes": 4738,
+            "namespace": "evidence",
+            "path": "ladder-512m-v3-1-fp4x2/response.json",
+            "sha256": "5d165b6cd34fe2edf61f3491ea4ed9246083954543c4628c12133aeb4c2fbb73"
+          },
+          "certified": false,
+          "complete_ratio": 1.0815646542920403,
+          "exact": true,
+          "family": "coupled_blocks",
+          "final_check": {
+            "bytes": 1223,
+            "namespace": "evidence",
+            "path": "ladder-512m-v4-1-fp4x2-final-check/result.json",
+            "sha256": "3688dceb460789f9f15148522b8a9b298c678f16ac9b9294c4d428d156d6343b"
+          },
+          "logical": 100,
+          "peak_rss_ratio": 1.3761555857465961,
+          "preparation_ratio": 1.0884483477582734,
+          "resource": {
+            "bytes": 34279,
+            "namespace": "evidence",
+            "path": "resources/ladder-512m-v4-1-fp4x2.resource.json",
+            "sha256": "9821bb03050f6f077a6aa3bfa7725873be3aea3ae05b8af7f3badc42e9f2f973"
+          },
+          "saved_rss_bytes": 12221788160
+        }
+      ],
+      "comparison": {
+        "bytes": 14114,
+        "namespace": "evidence",
+        "path": "paired-512m-v3-v4.json",
+        "sha256": "df9794f8655c8ad1ace36d650ed25def95d869d120efd73612ea24074095f10a"
+      },
+      "comparison_settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/comparison-ladder-512m-v4.settlement.json",
+        "sha256": "3cd742b7bef35b1b2e36fe0d4f32371c3e3e9e37c39f37c682d1ba58ca8ca7c6"
+      },
+      "median_assessment_ratio": 0.9600441962721564,
+      "median_complete_ratio": 1.0498218978032696,
+      "median_peak_rss_ratio": 1.3478427607231365,
+      "median_preparation_ratio": 1.1147268937255348,
+      "scale": "512m"
+    }
+  ],
+  "cpu_caps": {
+    "admission": 28000,
+    "cleanup": 6000,
+    "development": 118000,
+    "implementation": 6000,
+    "native": 20000,
+    "reporting": 62000
+  },
+  "cpu_ns": 98505269208520,
+  "documentation": {
+    "bytes": 354,
+    "namespace": "evidence",
+    "path": "resources/memory-docs-v1.settlement.json",
+    "sha256": "5ce93a0e5f901f05f2b8f8cf4e236b7daf25aa5d747a196afed6817e2ed01d03"
+  },
+  "evidence_audit": {
+    "bytes": 358,
+    "namespace": "evidence",
+    "path": "resources/memory-delivery-v1.settlement.json",
+    "sha256": "7431adb29a36d2caf6124db8c887b74ef68dfb26892ce624338dbe91b80e51fe"
+  },
+  "failed_reservations": [
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 369,
+        "namespace": "evidence",
+        "path": "resources/array-memcheck-v3.settlement.json",
+        "sha256": "ecd8eb86929d253107e33bd8cbd6bca4d83b7831ccbaa52e0169ac0bb8011ce9"
+      }
+    },
+    {
+      "cpu_ns": 2400000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v2.settlement.json",
+        "sha256": "205c2fb5c6f0a2e8b34288492b3a7a02677ec25a5f7124243ab4278e2f370052"
+      }
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/array-quality-v3.settlement.json",
+        "sha256": "e12a62366eba77fb049b6d5d1e5fafb37af71100118a08748b2e4e9de6356176"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v3.settlement.json",
+        "sha256": "625930a3ff648974a37f895496d427451742b90111b34a7755fdef447ff7e698"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 370,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v4.settlement.json",
+        "sha256": "930e9f9324f605b13d2517f1cf0564f050b3334a8a3854567f6016674b5e0caa"
+      }
+    },
+    {
+      "cpu_ns": 960000000000,
+      "gpu_ns": 240000000000,
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/array-racecheck-v5.settlement.json",
+        "sha256": "7300125cdcf6814d717fad29eb02a9599cb30e0ae333959a3bad1b22de0fb9d3"
+      }
+    },
+    {
+      "cpu_ns": 12000000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 360,
+        "namespace": "evidence",
+        "path": "resources/billion-native-v1.settlement.json",
+        "sha256": "0127666f55f95f185dea87cef532d5ef0da3a5191b0fcfce1e3790907ec2f08c"
+      }
+    },
+    {
+      "cpu_ns": 1920000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/idle-confirmation-v5.settlement.json",
+        "sha256": "9102a6c8df1aabf26107870bdf5753da670ae4b65432eab39bbad978296680bb"
+      }
+    },
+    {
+      "cpu_ns": 1920000000000,
+      "gpu_ns": 480000000000,
+      "settlement": {
+        "bytes": 378,
+        "namespace": "evidence",
+        "path": "resources/ladder-128m-v2-0-fp4x2.settlement.json",
+        "sha256": "40a7b6502c76f005d5d72b10c3d46eb5161e7ea2037ba4cef99349f3e335b827"
+      }
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/memory-compile-v1.settlement.json",
+        "sha256": "fc0188eec852de43532f12504369d3a844d44551fc8410ba5f5966301b26b9f0"
+      }
+    },
+    {
+      "cpu_ns": 480000000000,
+      "gpu_ns": 120000000000,
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/operational-gpu-v7.settlement.json",
+        "sha256": "3ee018843028f43961c41240a98740568096f693a94e2d2aee39f5a8f49c9598"
+      }
+    },
+    {
+      "cpu_ns": 7200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 372,
+        "namespace": "evidence",
+        "path": "resources/portable-gpu-preparation-v1.settlement.json",
+        "sha256": "57ea2b0d4f787cbea5d5f3cd9b2a2c97a637aad22310b4a50d514c4904d2de9d"
+      }
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/prepare-build-check-v1.settlement.json",
+        "sha256": "2120a5e275247293dcc63998cb60f36f77bc6e3a2bba2b43ae906ecab891d33d"
+      }
+    }
+  ],
+  "gpu_caps": {
+    "admission": 5500,
+    "development": 24500
+  },
+  "gpu_ns": 6712970278844,
+  "image": {
+    "bytes": 1671,
+    "namespace": "evidence",
+    "path": "image-v4/binding.json",
+    "sha256": "52d0d02008d2e40f51d17cef8369e6087e1e47d4e889b243c5c672f883f0d092"
+  },
+  "limitation": "Descriptive single 100-update capacity runs; all failures and regressions retained. No certified-solve, broad FP4 or billion-scale performance claim.",
+  "original_numerical_bindings": 293,
+  "previous_image": {
+    "bytes": 1670,
+    "namespace": "evidence",
+    "path": "image-v3/binding.json",
+    "sha256": "cb4bc356fb3ecb85a6cad9ce45639fca2fa53cac2601a387f56aea2861cd3b62"
+  },
+  "prior_checkpoint": {
+    "bytes": 59502,
+    "namespace": "evidence",
+    "path": "preparation-device-checkpoint-v2.json",
+    "sha256": "8d380b8356172b7e30bfe926af417233f89860e314ecf992513049a4307026d2"
+  },
+  "raw_report": {
+    "bytes": 115160,
+    "namespace": "evidence",
+    "path": "memory-results-v1.json",
+    "sha256": "70c94c599c1227c94d95d21abdc20b7287d6a4539ff335336fe10cf176604228"
+  },
+  "source": {
+    "bytes": 7033,
+    "namespace": "repo",
+    "path": "tools/lp_billion_memory_report.py",
+    "sha256": "a53dfdae7091ab021ba2b2f33d4f78aab3e81d661796ef740244de5111948a30"
+  },
+  "status": "borrowed_storage_admitted_and_measured",
+  "strict_certificates_unchanged": true,
+  "unchanged_numerical_bindings": 289,
+  "unchanged_numerical_sources": [
+    {
+      "bytes": 8274,
+      "namespace": "repo",
+      "path": "Cargo.lock",
+      "sha256": "7612e571c495752771b54379134c860e8a5098f2b610c0290361c735f0038185"
+    },
+    {
+      "bytes": 631,
+      "namespace": "repo",
+      "path": "Cargo.toml",
+      "sha256": "0620bf07a335673ac7eb15165131571be3985a65a78bdfc26ef99be1fffd94c2"
+    },
+    {
+      "bytes": 1145,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/Cargo.toml",
+      "sha256": "4d5cda1de1a298492e647135862f7013f80a9cdaec6cbb9530144216b2bcb00c"
+    },
+    {
+      "bytes": 15891,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/batch.rs",
+      "sha256": "3d37d64d0ffc57d45608a31d3d36f3efe80741aded666b7204c8c75607ed0a09"
+    },
+    {
+      "bytes": 1418,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/input.rs",
+      "sha256": "28f4a56acbda91fe1d8956f57a6bf2fb3c6611fba40f1e8067bad53fac9bb77a"
+    },
+    {
+      "bytes": 6068,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/lp_setup.rs",
+      "sha256": "430d240571fd287739fd299f4fadf63f311aa836df5711f0b37591f5587fff40"
+    },
+    {
+      "bytes": 23776,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/lp_study.rs",
+      "sha256": "9988c7592b17c10b02ee41feb63dbaf3b25a1e7808317735264b72a75e2bff7f"
+    },
+    {
+      "bytes": 11474,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/main.rs",
+      "sha256": "b272a4c9752952bcedbbc9a353b380aaaadce032327151b2659c2d039ab51252"
+    },
+    {
+      "bytes": 3096,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/model.rs",
+      "sha256": "bf68282b40fe8a9f097755e29acf44e4c7af14af550e75148ee140c26fb62027"
+    },
+    {
+      "bytes": 5546,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/provenance.rs",
+      "sha256": "3156a13ea44c06d22c7b12fac0a221529d6ba7fbca35e2e1370b4218ec1aecbb"
+    },
+    {
+      "bytes": 18092,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/registry.rs",
+      "sha256": "18579e57f501caa3775eca4d06a480e118c96274923b4e73857c53a82b0e8e6b"
+    },
+    {
+      "bytes": 9249,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/schedule.rs",
+      "sha256": "f77b6ab301086f0eead0d448619d6b13c07db69e0cb574b9d3109d6713993682"
+    },
+    {
+      "bytes": 16281,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/search.rs",
+      "sha256": "cbec3bd79297c6b6a9836dcb32c45f4bb3613b5ad0b9c12b86751fa8fca5b965"
+    },
+    {
+      "bytes": 19010,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/solve.rs",
+      "sha256": "53dd5deda12689f9365342cc836c1272caaa3e8aff2a8c12bafb53355f244ab5"
+    },
+    {
+      "bytes": 3729,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/src/study_output.rs",
+      "sha256": "2f2ff7e1b79d0d722929cd3ee4f49e3e25ce7b0edda03f16eaf6ff57c0b9ab01"
+    },
+    {
+      "bytes": 9169,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/tests/batch.rs",
+      "sha256": "37064d36257495644e6864687f73ccf039f051ec44e24532fb783e866c8ac37b"
+    },
+    {
+      "bytes": 11256,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/tests/cli.rs",
+      "sha256": "b33bb275e7f412851fb9fb649961eb2a085b9d0567e15d594da86a024a43f8a5"
+    },
+    {
+      "bytes": 8358,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/tests/lp_study.rs",
+      "sha256": "9edd519ab247344d505f12fb89216dfb2876684f6658c580d9bfc06f2c107b62"
+    },
+    {
+      "bytes": 11942,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/tests/model.rs",
+      "sha256": "39984584d8d2566e03898d0a27fc3af049d5e872d6fb4449a26ffbd6cff679b8"
+    },
+    {
+      "bytes": 12014,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/tests/registry.rs",
+      "sha256": "49f67cd13318047d14948618d04ab24ac253e7b3deba530c578d5832ef50ae16"
+    },
+    {
+      "bytes": 35656,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/tests/schedule.rs",
+      "sha256": "614dc700ea162f6c310397aa4d6775f77f0caf6085a8f24b445fef31cdd07f28"
+    },
+    {
+      "bytes": 27492,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/tests/search.rs",
+      "sha256": "97d693ba64eb14397879f9b4b12cf1bbaa5431f59ae588fd016602fddb72c82e"
+    },
+    {
+      "bytes": 20471,
+      "namespace": "repo",
+      "path": "crates/optimizer-cli/tests/solve.rs",
+      "sha256": "ba9929b5697e5ceb5c04466c0ff40b6cd0c5aa242fa3f4e78cd717edbd11ccdb"
+    },
+    {
+      "bytes": 232,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/Cargo.toml",
+      "sha256": "9c33fe79a14456a03cb2b88b304a6f2daedb1a8e40d2ddd3b52c222e7c40661b"
+    },
+    {
+      "bytes": 13951,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/capability.rs",
+      "sha256": "e2e110895638ca48c95c51dc297f41a3df7f758cc7631bb1f9ed2886c6898ebc"
+    },
+    {
+      "bytes": 18367,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/document.rs",
+      "sha256": "2586616d6cf32121871f113ddb7bbc194f1760d02e568f77c2d977bc01875743"
+    },
+    {
+      "bytes": 12690,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/evaluate.rs",
+      "sha256": "fe100314c476519bd9d46185e642f6cff45ab917aca5dd652f5ab4c0f374ef1d"
+    },
+    {
+      "bytes": 5396,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/lib.rs",
+      "sha256": "ac6dae3a69a4b1106a6234f7245d7366c0ff11fb15e1f2efbd1750a6b974c47c"
+    },
+    {
+      "bytes": 13093,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/lp_adaptive.rs",
+      "sha256": "aedaf37c7452449bd1095313a6dbd43f91e3a119891d3559200f4f922fcbcc35"
+    },
+    {
+      "bytes": 8642,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/lp_cost.rs",
+      "sha256": "0738960d9ade2033731fe7525c858dd66fe88cd721cff65615c36644cda42408"
+    },
+    {
+      "bytes": 6019,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/lp_diagnostics.rs",
+      "sha256": "2e8fa6f7d1a09fb304f41da9f0f589a10a0a542eb91358e5baa18249d1f4cfe4"
+    },
+    {
+      "bytes": 7982,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/lp_execution.rs",
+      "sha256": "4aca540b2d862f59d5c4f6560e63aeefb0f4d3909a3a896b2a1b08a902ecf28b"
+    },
+    {
+      "bytes": 7220,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/lp_precision.rs",
+      "sha256": "87e22f38580a02e6b30cd69c59e99837d9b9d4d034dd726af4bff8b46cebd2ae"
+    },
+    {
+      "bytes": 12201,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/lp_settings.rs",
+      "sha256": "bebf3cc0510d75322900747736077e265d3e4464f95cd0dd1db321db959e4c3b"
+    },
+    {
+      "bytes": 2652,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/serde_strict.rs",
+      "sha256": "7f6c7f55a206e3db5ee8b388298961d9d780e42f41f3ac5ac40b23b71c21bc30"
+    },
+    {
+      "bytes": 6496,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/sha256.rs",
+      "sha256": "3e15b160859e1d85c733a5b42daa4d39db9accda3fa2ea910468df8e4ad05e4d"
+    },
+    {
+      "bytes": 27128,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/src/solve.rs",
+      "sha256": "9042934f1cca245bbfc843071e4f6fe190e820a5d9583391cf57449027e21029"
+    },
+    {
+      "bytes": 47626,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/tests/contracts.rs",
+      "sha256": "f575091310255028e3b82f28924414182e326cc26dd20a1410aedc74eb73ee23"
+    },
+    {
+      "bytes": 15234,
+      "namespace": "repo",
+      "path": "crates/optimizer-core/tests/solve.rs",
+      "sha256": "e25a2591f43d8433dc2c549e5d5c2df469f3edc7564bf103b11f1e302e20b4df"
+    },
+    {
+      "bytes": 453,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda/Cargo.toml",
+      "sha256": "d497ed60d7e4835edd007eebb88785c109378ba6f759f9d4d785b90f339e614f"
+    },
+    {
+      "bytes": 1960,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda/build.rs",
+      "sha256": "33060824bce1a032023c89646a35f3bd9caaf447d4de33af084bb488f4d67d6d"
+    },
+    {
+      "bytes": 11530,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda/src/lib.rs",
+      "sha256": "d3ac28b340214399a0bc36ee5574880744901c01a9a0e73efc7bd947b7625fb4"
+    },
+    {
+      "bytes": 11838,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda/src/probe.rs",
+      "sha256": "18ea0e329c947c1ae03539ec0dddcc2c88240381dd52414ca44288f3a5b16e8f"
+    },
+    {
+      "bytes": 24189,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda/src/schedule.rs",
+      "sha256": "4afbc80313387170e2b3e727100b15f685eec0119ae86172f7278cd9e221deab"
+    },
+    {
+      "bytes": 11516,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda/src/session.rs",
+      "sha256": "e9475df0b80c9ad70c47266de01deae4a42bece839a4ecaa41c47bd28bb60ad5"
+    },
+    {
+      "bytes": 26745,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda/tests/device.rs",
+      "sha256": "f99cba8a6a164f0d15290fbf39b4107a4df925ab3f05d0c950581db343d6c162"
+    },
+    {
+      "bytes": 688,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda-sys/Cargo.toml",
+      "sha256": "b9e9ac50f7e0bf1728d25d1530f66796433aa4e6675ba10c9720ed2b9c1f7c1b"
+    },
+    {
+      "bytes": 45616,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda-sys/src/lib.rs",
+      "sha256": "854a823283b2b297e09e32b624d6da886cee2c3d2b86f080e9da4395a0f6b47d"
+    },
+    {
+      "bytes": 13509,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda-sys/src/primary.rs",
+      "sha256": "8b5ad93af537f4d39516806c0069c44a756171b05ec7a7125af0cbcf686a2d7c"
+    },
+    {
+      "bytes": 5686,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda-sys/src/setup.rs",
+      "sha256": "9e2eb9915dcf8dd3ef37b53ae9279df18e3f5b38477d71306337d84b3cf24653"
+    },
+    {
+      "bytes": 17303,
+      "namespace": "repo",
+      "path": "crates/optimizer-cuda-sys/src/status.rs",
+      "sha256": "ea72ed4eb38e348a535b1971a87c60e0c6d503d74ef9ebf7dc468df77f23d95b"
+    },
+    {
+      "bytes": 2005,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/Cargo.toml",
+      "sha256": "d983203b2a57b1de5b7e15b2a49e583c6f50d1be2a72f19272dc0c3f5b08e6c3"
+    },
+    {
+      "bytes": 7582,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_diagnose.rs",
+      "sha256": "3edcf5842498037401aac619a06328b7177e5b88fc905f1b243cd7c8657796a2"
+    },
+    {
+      "bytes": 2998,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_evidence_fixture.rs",
+      "sha256": "07c2fc1cd4dbc46711ac4ccb6c7bd04e3134378dc06b198ef023bb539b37bb2b"
+    },
+    {
+      "bytes": 2983,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_assess.rs",
+      "sha256": "537f71d510969be6edc91992c94762aa80d80d5b5df1d8ad45c602c5c2de0212"
+    },
+    {
+      "bytes": 2307,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_diagnose.rs",
+      "sha256": "b5ce26f8666da0d5560a42383d86facde5f1cf1649e8f9428c87d21ccd077951"
+    },
+    {
+      "bytes": 2292,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_exec.rs",
+      "sha256": "f85c2a15cc0870586da02685e6c6cbbf120d1b6b9c58669643ecff98a65ecb99"
+    },
+    {
+      "bytes": 1904,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_quant.rs",
+      "sha256": "0d5afc88352c8a786808457bb3b1fe6eb026528885c4548552ac61f1bf472903"
+    },
+    {
+      "bytes": 2837,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_quant_resident.rs",
+      "sha256": "f5be50c964aa8443242b2f371b8879f311ee69440571ca072aa8cd4414dd65a5"
+    },
+    {
+      "bytes": 2294,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_refine.rs",
+      "sha256": "876e59d29e7a3572a153c31b1466af97452802b967ea9b1f6f29e11037531a4b"
+    },
+    {
+      "bytes": 3952,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_research.rs",
+      "sha256": "de0209b8a2d6136f40af7d5fd72b35b8d0c3e7349f9bc29766c48d9483a90ef4"
+    },
+    {
+      "bytes": 1923,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_tensor.rs",
+      "sha256": "35d64e35036a203f130ad054a3c4f91b84cd63d44667bb678fddc0507ff1c897"
+    },
+    {
+      "bytes": 1933,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_tensor_cost.rs",
+      "sha256": "b46133c3a2aa7e640fe06e743e1c3836fd71559c899bf659ae4bffae8b86a17d"
+    },
+    {
+      "bytes": 1941,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/examples/lp_precision_tensor_residual.rs",
+      "sha256": "a8198d3d39d016b66b27bc8c9f1fe6528459dfcc2813998ff861e103e3ed697a"
+    },
+    {
+      "bytes": 3181,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lib.rs",
+      "sha256": "0bf11627836a5134a6382a1abf2ce925621422fa2467319ea8766ff6411b3a28"
+    },
+    {
+      "bytes": 64473,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp.rs",
+      "sha256": "2ffa466c0a1c4ee53432edd57a36b497b8041c41b76c8bc2b609e7dfb5634fc0"
+    },
+    {
+      "bytes": 35255,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_assess.rs",
+      "sha256": "ba2bf06b3d582394fd03c91595551ca213cb08802361217347150b8d941879d1"
+    },
+    {
+      "bytes": 44708,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_batch.rs",
+      "sha256": "bf712d036b6ddf0ea7153ca41613d0fc1ff0d7e71ca928705fba83f118668d35"
+    },
+    {
+      "bytes": 7822,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_compact.rs",
+      "sha256": "bd66b897077491b20920ceebfaea6ae761d1df30442aecdb0ee0f7bfa3b37064"
+    },
+    {
+      "bytes": 30429,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_exec.rs",
+      "sha256": "f44b144cea59051f40d6b2c881498b72033b338cf5fe129ffc1a6063ec45874a"
+    },
+    {
+      "bytes": 10657,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_external.rs",
+      "sha256": "6f0c2539478bad0e7cfcc57e203bd639605cb8afe92f36d7a0a54f896ee5c211"
+    },
+    {
+      "bytes": 9810,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_external_v2.rs",
+      "sha256": "2194efc2154ee06dab564ff8e4faf5717549fa65b3ee91136b336b50f6710714"
+    },
+    {
+      "bytes": 24605,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_quant.rs",
+      "sha256": "d379037d866ac266e146a25c4c754f57410c4ad042cbc55514e2a1e9227d57f2"
+    },
+    {
+      "bytes": 30199,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_quant_resident.rs",
+      "sha256": "e768de10c483f3ba0eb8b9ee53162f1b3d23bd6da7aaa3c057a15cba35adbda5"
+    },
+    {
+      "bytes": 12762,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_quant_resident_micro.rs",
+      "sha256": "cf766e6cf58008b3a68fa5a8deba1ba5dfc5aaf461dbb1e4f6c02d954f2cd93d"
+    },
+    {
+      "bytes": 25469,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_refine.rs",
+      "sha256": "5ba573abe4be3d3a7674e317e09d01e82809a97eee4de1f0b593370529f824bc"
+    },
+    {
+      "bytes": 82583,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_research.rs",
+      "sha256": "a3b5b00e48c628dd0f94beacc6c2c1da709ae01a1a70a7eac5cf83890a8d582a"
+    },
+    {
+      "bytes": 31107,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_tensor.rs",
+      "sha256": "8b08a6629dd9ed0e9d4700f7d94e166c74e17d64c3db3e9331b49e56e0463aff"
+    },
+    {
+      "bytes": 35650,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_tensor_cost.rs",
+      "sha256": "b61cb65867777fd4a32f5ae04ff1a62c0b68bb87a511b29029bac7e35f6e8df4"
+    },
+    {
+      "bytes": 31250,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/lp_tensor_residual.rs",
+      "sha256": "8eb8952f139706b285583bb9cad895b20133175cca62dce195c35cfc2d9f3283"
+    },
+    {
+      "bytes": 20913,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/run.rs",
+      "sha256": "ed1de7abdc0576e1af7a43ba0f4968f8ff579c36c8a3a867cdce19faca4a5b9f"
+    },
+    {
+      "bytes": 2652,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/serde_strict.rs",
+      "sha256": "7f6c7f55a206e3db5ee8b388298961d9d780e42f41f3ac5ac40b23b71c21bc30"
+    },
+    {
+      "bytes": 108,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/src/sha256.rs",
+      "sha256": "4a9ebc9809b4a93644543d4a05e6babbbe52f1ee34c24b32ff4fdd49c16e0e50"
+    },
+    {
+      "bytes": 1385,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/tests/lp_tensor.rs",
+      "sha256": "3feff7703db031fab28fbf0641ca7bbbcea70d3a331ae7a13ffb66ab0be374b5"
+    },
+    {
+      "bytes": 1403,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/tests/lp_tensor_residual.rs",
+      "sha256": "da77204f0b32f58a3b235438bae69a10f2c99e09ad3cbc7e5ff942f3cc256a6a"
+    },
+    {
+      "bytes": 16311,
+      "namespace": "repo",
+      "path": "crates/optimizer-experiment/tests/run.rs",
+      "sha256": "545ce00a88d73b728e0367e7f710d4461a9b9bb676830ad686d96eb6227f4e93"
+    },
+    {
+      "bytes": 303,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension/Cargo.toml",
+      "sha256": "392dedd17757366d5b9f536888f0fa7f639956e945ca777f541a83cdebc98786"
+    },
+    {
+      "bytes": 10831,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension/src/declare.rs",
+      "sha256": "a0fa1c4f251ff42596b9401203da17fe4e68049810bbf67c1fbda95510b39b80"
+    },
+    {
+      "bytes": 15601,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension/src/guard.rs",
+      "sha256": "599b14f8d46b04fff1344facf761c92650375a72f8ca5e9047bc4fbdc5e0b7ca"
+    },
+    {
+      "bytes": 2659,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension/src/hook.rs",
+      "sha256": "ac1b5881c8deddfbbcff66d1ee2a52203a5d05b294854201fcb53afab2d2dcb6"
+    },
+    {
+      "bytes": 2430,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension/src/lib.rs",
+      "sha256": "5922db5d4c4c2e2263d6d74d22ebffaca1b2012e0196c50dc2d98691902c2eb5"
+    },
+    {
+      "bytes": 11660,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension/src/record.rs",
+      "sha256": "1efc633246d27925bdc944b8edc9cb4fcdce814a2be43ec8ac751593cf3b1e74"
+    },
+    {
+      "bytes": 1867,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension/src/serde_strict.rs",
+      "sha256": "e55705810c46c3dd08beb003d52492bc7bd1c1b80b52388f5c029bb97fd2ac6d"
+    },
+    {
+      "bytes": 2825,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension/src/view.rs",
+      "sha256": "6ceda503f1fd8d47119db87feaca9977bb6fa77f47f0eee69f9e806ccf9ad85c"
+    },
+    {
+      "bytes": 30912,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension/tests/contracts.rs",
+      "sha256": "2293809e4bd294bd31c13b16735cd60757ae689f67253c56edf24c1fa5e28a34"
+    },
+    {
+      "bytes": 810,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension-examples/Cargo.toml",
+      "sha256": "b5fa334d4fd63e68a292eb14b66a9ba1db1bb3d6d89fc8bd0a8415ee1c96f556"
+    },
+    {
+      "bytes": 15011,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension-examples/src/lib.rs",
+      "sha256": "4dc85705095b577f5e1608884f6fc590fc5dfabb4e7c1a4240aff2cefb6e6652"
+    },
+    {
+      "bytes": 46157,
+      "namespace": "repo",
+      "path": "crates/optimizer-extension-examples/tests/acceptance.rs",
+      "sha256": "6886da373653c1d1ee647b1014e2758dc24fb39f2e428138c33eeb221778bc6a"
+    },
+    {
+      "bytes": 1652,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/Cargo.toml",
+      "sha256": "542227216392f88ebd78c1d7ab903cf39b6045162e80181616d66fa955e8639a"
+    },
+    {
+      "bytes": 1830,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/build.rs",
+      "sha256": "b66e432f2a5b97e7ff53f27326da5ef5449831f7d7c73c4e70cc56c0df90d329"
+    },
+    {
+      "bytes": 7514,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/src/ffi.rs",
+      "sha256": "3cecb3913e859c8184167291c6c67984b93a6466ca25ba15c622f7e0387bed68"
+    },
+    {
+      "bytes": 8033,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/src/lib.rs",
+      "sha256": "b85ddf2ed38d113e0337393af9ef197ff38932648ace5b75ef9b6bfbbb5e016a"
+    },
+    {
+      "bytes": 35429,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/src/native.rs",
+      "sha256": "cf1f7c0fe97dd3ed8c65911fdce6be612474e98385bba5a4e6f93bc95722114c"
+    },
+    {
+      "bytes": 26539,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/tests/backend.rs",
+      "sha256": "a687a87ee9e0b38b1bec49d87dce586cb382a11d7e2b662b16ff269ad001137e"
+    },
+    {
+      "bytes": 12590,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/tests/differential.rs",
+      "sha256": "e88456cd43708bf5406116e007c13e6d451411a6f017535065696de7a71f9d2e"
+    },
+    {
+      "bytes": 13949,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/tests/executive.rs",
+      "sha256": "f9406fc1912da84de3a2cf00c1ef352d860e93754065e575dc81646d883465e5"
+    },
+    {
+      "bytes": 23303,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/tests/first_order.rs",
+      "sha256": "c65924b67a7a26f9bf59b3c8e6b183c20e57e19a88cd57854148df0c5e48172a"
+    },
+    {
+      "bytes": 16278,
+      "namespace": "repo",
+      "path": "crates/optimizer-highs/tests/schedule.rs",
+      "sha256": "73b2be109d4fff48184aeccb206c983218dde91e67ca781b6ff3d003df8eb557"
+    },
+    {
+      "bytes": 972,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/Cargo.toml",
+      "sha256": "9dc1768aedfc32ae3cecbf8c82a72f5cf204867addf84f82ba8145b2388fe05c"
+    },
+    {
+      "bytes": 2342,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/quant_probe.rs",
+      "sha256": "3b1d849f9010431ab022c7abbf161bbd8e27d55e5118c7127fcb168ce03d5c51"
+    },
+    {
+      "bytes": 2806,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/quant_resident_probe.rs",
+      "sha256": "a9dbdac436136fe5fed1e889da2857ef4c6c98859e0a55a977257963590772b6"
+    },
+    {
+      "bytes": 3192,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_cost_compact_probe.rs",
+      "sha256": "779279a183885a084bd61a59f74909638f7751025eb9b904d8a5defb7e1cb65e"
+    },
+    {
+      "bytes": 614,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_cost_norm_probe.rs",
+      "sha256": "7cf2eee6a8164a6c2c62412149e936f322330041ed389584527dcec9931e6e69"
+    },
+    {
+      "bytes": 1407,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_cost_probe.rs",
+      "sha256": "6d2e34dbba656894c51efb525ab4709b999beabe704fa92f754a5150a75a7f53"
+    },
+    {
+      "bytes": 1455,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_cost_product_probe.rs",
+      "sha256": "56dd8178492bc0aac1ffe8af1244cf18ee3b9810ca212a849e41963579dc9aff"
+    },
+    {
+      "bytes": 2268,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_diagnose.rs",
+      "sha256": "1f0074a0257429b255b9f53e274d598504ebc787b8e4a6a0235d54796d809fec"
+    },
+    {
+      "bytes": 1053,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_probe.rs",
+      "sha256": "2b4ebbe8db60c40c98e90fc00cdc8a5e5bcfa4a0094741c580cfce73c636b1f0"
+    },
+    {
+      "bytes": 1411,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_product_probe.rs",
+      "sha256": "c0d16c91fa2eb48568de3c181c4611f8cd9cd90d982acf93db4cd5eddc330d17"
+    },
+    {
+      "bytes": 1419,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_residual_probe.rs",
+      "sha256": "d8aa85d266f0624294e24f15f3231be32450c3a673df818a5bb5ecf84f861706"
+    },
+    {
+      "bytes": 1455,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_residual_product_probe.rs",
+      "sha256": "0237dc582eb610bd7aab30606eaaf2fc78e9fb71d65dea47fc861e1a6904ab59"
+    },
+    {
+      "bytes": 1222,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/examples/tensor_warp32_probe.rs",
+      "sha256": "c8e2c13f9b6732c84012567865b00c4dc79842e666a81cc795b22ef491b7d666"
+    },
+    {
+      "bytes": 17437,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/adaptive.rs",
+      "sha256": "a56df25fbc852f37eafde95456d302a70ae13fd0c6878d45716bb36d96bf4636"
+    },
+    {
+      "bytes": 21121,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/assess.rs",
+      "sha256": "fa657cdffb49208469c7c22342703258c8c87ad88d85b2870576d5190bdd5a28"
+    },
+    {
+      "bytes": 14330,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/backend.rs",
+      "sha256": "d5f1e986485ea6c44fafa2732f6e6cbf3dcdf128d182c61400c501164fc18873"
+    },
+    {
+      "bytes": 27408,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/certify.rs",
+      "sha256": "eb6e6db5f99ea51b08b68ff5f199f23d649a5622badc922a755b999a1ceda707"
+    },
+    {
+      "bytes": 12145,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/control.rs",
+      "sha256": "1108151e8fe3247a588cca7b62a1ea50d57b4510369436852050e3b485f19d01"
+    },
+    {
+      "bytes": 23536,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/exec.rs",
+      "sha256": "36cfa54a90c396f78b62e73cb2f55728501859ac83218db1823c54ccbc37d0bd"
+    },
+    {
+      "bytes": 3426,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/lib.rs",
+      "sha256": "cc660465ea80262dfe71ca4632a5047fedaa2062207cf87a58f1aa3e217c98cb"
+    },
+    {
+      "bytes": 11767,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/outward.rs",
+      "sha256": "c75d14ffc5ba96a751f1443367962397f39bc62c50d77abf76d0890d5ee1bdba"
+    },
+    {
+      "bytes": 51041,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/pdhg.rs",
+      "sha256": "2fa78f60be5b24677db6e61d023f960b468ef645682e1b5bbeb46e485e2e230c"
+    },
+    {
+      "bytes": 9021,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/precision.rs",
+      "sha256": "aa4646589c712996047665ee6c9cf6c6342eaa23fc2acda2b8c4e8c959969417"
+    },
+    {
+      "bytes": 11130,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/precondition.rs",
+      "sha256": "bf636c2ba5c7a04c7efc718d4d20beba1f23e73b0306de8f144d7291e97e8c0c"
+    },
+    {
+      "bytes": 29230,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/problem.rs",
+      "sha256": "8a8bb9876fa5e8b751fab4663b84091bafbd8ec94ac650a98068260abf5ee58b"
+    },
+    {
+      "bytes": 41163,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/quant.rs",
+      "sha256": "4604d9acffdcbcd522034f8b9df1243c768c633afeca57df6ce52e186f84feb1"
+    },
+    {
+      "bytes": 39232,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/quant_resident.rs",
+      "sha256": "859b1124457c2ac1a1d6dd6eee8e608afa583e8891e49cd83f3bcbcf684096de"
+    },
+    {
+      "bytes": 9240,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/reduce.rs",
+      "sha256": "4c61189553dd5abe14c4439102eb46c600d6837e0e17fa981ccf92209e640e25"
+    },
+    {
+      "bytes": 77198,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/refine.rs",
+      "sha256": "77e4871bcadc152dfbfb185d965b8bb40921555cfc636726fadf82751d31ba15"
+    },
+    {
+      "bytes": 22324,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/research.rs",
+      "sha256": "8898c630c997353a6e43b64cc7f2609d5c813f89316cbe0f35aaee6c0f1c5c72"
+    },
+    {
+      "bytes": 45116,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/tensor.rs",
+      "sha256": "45b22f7cf386721848574e97eca508aa32a04f5d047db6186e850ae06a09d679"
+    },
+    {
+      "bytes": 46961,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/tensor_cost.rs",
+      "sha256": "47fa7f42afe77f7b2e70e5d78da1d6d1978abb05840191b9a853e8d0eee240a0"
+    },
+    {
+      "bytes": 10411,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/tensor_cost_prepare.rs",
+      "sha256": "afea7f7ff046c8d26f79b35a71a8ac983e168443eff3f60f7fa2a9efe42ab09a"
+    },
+    {
+      "bytes": 46929,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/src/tensor_residual.rs",
+      "sha256": "0ce9ec451fe5572b5f88cd31d48bc2067d7d7e804e05f891d589564eb94fe5f8"
+    },
+    {
+      "bytes": 14623,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/adaptive.rs",
+      "sha256": "4245ca9db419102066628ef9ac2fc0207e9d3f5931f81afa410208c6256e10c2"
+    },
+    {
+      "bytes": 11497,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/adaptive_cost.rs",
+      "sha256": "f9e39a36dc1a268ec92d2eb083135e9a6305505b92cf98044cf67671bb2f8806"
+    },
+    {
+      "bytes": 8952,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/certification.rs",
+      "sha256": "b8c49b32a2300f90aec5a744f57f358a4ff05f9c3a73ed86d67cb19f7a9e8d5b"
+    },
+    {
+      "bytes": 2325,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/exec.rs",
+      "sha256": "42487e3083e2ecf16f643423ebb7cabdb62e5c6cc14d0259fbb94aba8621b6ff"
+    },
+    {
+      "bytes": 3075,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/precision.rs",
+      "sha256": "f5203ce1bf6ef647fb6c31dfe0e92b26ef90cd64e8624bc8e731422a03eeb6a5"
+    },
+    {
+      "bytes": 9017,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/quant.rs",
+      "sha256": "8a3b0c66d8591abdc88f3ee653cb66e85b4cd42b2867ed94dd615a62be3df1d8"
+    },
+    {
+      "bytes": 11689,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/quant_resident.rs",
+      "sha256": "2ebf1a8372bf22dcc938c22fcc7c535f22790cd6e97c500c44179d22a8e73b4e"
+    },
+    {
+      "bytes": 14203,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/refine.rs",
+      "sha256": "b87703301e87fd1e3f5b349ef43aed423bc100afed3775447ef6360b536f7e2c"
+    },
+    {
+      "bytes": 14239,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/research.rs",
+      "sha256": "0e231a5a268dff255b72e36e1f9f6192005caa87eceeb350163dddeec93e016f"
+    },
+    {
+      "bytes": 5838,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/tensor.rs",
+      "sha256": "6dfeab0165b2be98acba37631ee8369e730d5ea26cfd6493c6642c0876687d22"
+    },
+    {
+      "bytes": 871,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/tensor_cost.rs",
+      "sha256": "bd4a0e47eaecaba62a7d0cdef5090c6bd96db299f1a86330bee545525a65b28f"
+    },
+    {
+      "bytes": 6910,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp/tests/tensor_residual.rs",
+      "sha256": "307c1cfcaca0aadb26d9e18e045a369ccff94462820d9189a1579399f0710b43"
+    },
+    {
+      "bytes": 1469,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/Cargo.toml",
+      "sha256": "6cb077d73412118805d4987b961b9e0a62c7ee36640536fb3b8d593a02c54b26"
+    },
+    {
+      "bytes": 5536,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/examples/lp_resident2.rs",
+      "sha256": "5f71086e920fc94df54ba310ac48f9e540e33034862f28692ad8a38f9f2fc6b4"
+    },
+    {
+      "bytes": 12700,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/examples/lp_state_probe.rs",
+      "sha256": "b9c778b1479328a50f550b84ecfc21cc6fd0e9a19396df16b2a27945965b9e10"
+    },
+    {
+      "bytes": 3248,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/adaptive.rs",
+      "sha256": "175d3afcf269c078fbfb160ad3aa02792386c6cf57786879170516670f066f7e"
+    },
+    {
+      "bytes": 6087,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/assess.rs",
+      "sha256": "08b0615a2cccd660a32f046a66cad088f68c94f919cb6fa677f5f663d0029602"
+    },
+    {
+      "bytes": 33585,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/backend.rs",
+      "sha256": "6c666abeeb124486c817bd5869744d6692da75ff93e2bdf6b4b576e99761f7fe"
+    },
+    {
+      "bytes": 13190,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/exec.rs",
+      "sha256": "a031aec78df40e3db13d67e6f1cd5f865018c241ebac92f87b7a476078c5dd80"
+    },
+    {
+      "bytes": 2584,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/lib.rs",
+      "sha256": "752975ef75c5458aef1ace82761d7494cdac42ab263641d5438adced980eabb0"
+    },
+    {
+      "bytes": 23159,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/precision.rs",
+      "sha256": "466a98ba721b85e386e813b610ac79e0f093504e565c55a3416b22aa4538628e"
+    },
+    {
+      "bytes": 8067,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/quant.rs",
+      "sha256": "0bf8c61441767f5765a05ce126804bc2a60e005f06c135194b0408dbaba4caa2"
+    },
+    {
+      "bytes": 29992,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/quant_resident.rs",
+      "sha256": "3fbadc0530ee287a6da2971d6f4897573805640abce8517a8ea9ee874476787b"
+    },
+    {
+      "bytes": 8804,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/refine.rs",
+      "sha256": "687383857f17fd8d3ce9c36aa73aa890a20b7a542bf9a4f2c857e6c17fd2a1b7"
+    },
+    {
+      "bytes": 38247,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/research.rs",
+      "sha256": "82348180f8db6b0299b0ab8eced04580abacb2579044774d5d454e7a6a21d8a7"
+    },
+    {
+      "bytes": 37782,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/residency.rs",
+      "sha256": "60aa1a22f299dfaf6c642b2ebd58cc2be4e4432aa4a8458c2e73425d431374bf"
+    },
+    {
+      "bytes": 28671,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/resident2.rs",
+      "sha256": "b2ccf9517db978d204af815dc32f7656694f7dafba340c8358e71c06d5200c67"
+    },
+    {
+      "bytes": 19429,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/session.rs",
+      "sha256": "98732653fc489e819d62b7f9b19debb62d5f2574fc43f5e30eda6d948f9a7cad"
+    },
+    {
+      "bytes": 31946,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/tensor.rs",
+      "sha256": "f6f3129b796d227699878e38c4c2377ad743310132a8cd77cae5ed4928ddf19d"
+    },
+    {
+      "bytes": 37962,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/tensor_cost.rs",
+      "sha256": "e7e2aebbcc2399236c620dd094bc9a82803556d0e1ea6fa33d7d344862b92085"
+    },
+    {
+      "bytes": 32488,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/tensor_residual.rs",
+      "sha256": "d22741092da18418d1672f2a4d25330974dda3e9f0c66ed56833e05ddda2cc13"
+    },
+    {
+      "bytes": 15906,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/src/tuned.rs",
+      "sha256": "da208be0df80c29eddbf70b052aece4f9486f8c9c74cafcbe6cce55da8624143"
+    },
+    {
+      "bytes": 4494,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/assess_device.rs",
+      "sha256": "4d7955e45709b65a04b9640430d6014305748ed8aa711206c75f139d243295d5"
+    },
+    {
+      "bytes": 8838,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/device/adaptive.rs",
+      "sha256": "c06e60ef161b5dd08332d1e75ccefcd059f31055282ef2f0d148af007149df01"
+    },
+    {
+      "bytes": 14984,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/device/precision.rs",
+      "sha256": "158084f7b6a064c696bb08b45ecad853e3cb68c1739ca3c3c1d735530e33a6e4"
+    },
+    {
+      "bytes": 4894,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/device/primary.rs",
+      "sha256": "a71e63af9639de5667438fb8e3ecfc3003cab74ee6daec9340fbfed942b89cf1"
+    },
+    {
+      "bytes": 15002,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/device/research.rs",
+      "sha256": "73324e99042fc9ca164578f00eed585c5d5a3e5f0810b35f26d37566d392dc41"
+    },
+    {
+      "bytes": 30538,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/device/session.rs",
+      "sha256": "af85b54050c41fb69ca9caa0fade38d964ff23df0fca33f7cf505768b7096cc1"
+    },
+    {
+      "bytes": 15558,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/device/tuned.rs",
+      "sha256": "94e25aebcfa82a93d5756a6799ec58a9afc3808671b951a087a284c0c49795e5"
+    },
+    {
+      "bytes": 38918,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/device.rs",
+      "sha256": "f4c26d3b1539e7922d86ec6fbcc54f14630ff1910a1e3584409829ec738a0e0b"
+    },
+    {
+      "bytes": 10920,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/exec_device.rs",
+      "sha256": "b2d0e1f8d9a3d1375e8702a1dc9033337dc7c05dd363026afc5ab0e9f40631ff"
+    },
+    {
+      "bytes": 4966,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/quant_device.rs",
+      "sha256": "15f47c190feddfe283e98790234ba02719b93d874a1e61617442cf21e72c8ea5"
+    },
+    {
+      "bytes": 9639,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/quant_resident_device.rs",
+      "sha256": "fcafb61fb71a6e318ba08e124e64e384f732e8d1f69a819bb73008de47ba9e39"
+    },
+    {
+      "bytes": 8238,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/refine_device.rs",
+      "sha256": "f64c1eb65f0ee51a94ff2de6c6e33e8677d4425043a4e11a024b0dea1055a7ce"
+    },
+    {
+      "bytes": 8189,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/tensor_cost_device.rs",
+      "sha256": "0722bbc4ffeca0a03a624accd411c3384235cb65eabbe1bde8117b6eaa46b7f7"
+    },
+    {
+      "bytes": 7662,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/tensor_device.rs",
+      "sha256": "bb3a7f24c0909f2a0c6cdeaaa1650c5ba5d0300fc14ba5534b57f1172674d5ed"
+    },
+    {
+      "bytes": 8282,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/tensor_residual_device.rs",
+      "sha256": "f7173199b1a131a4a7f0118974ed777649938ef8fdfec95bd86fd39c9e4a2742"
+    },
+    {
+      "bytes": 4573,
+      "namespace": "repo",
+      "path": "crates/optimizer-lp-cuda/tests/tensor_warp32_device.rs",
+      "sha256": "4951e583810bb38c8b6c12953a90161e49324743cf39f3d60f7d04d518f8f286"
+    },
+    {
+      "bytes": 1212,
+      "namespace": "repo",
+      "path": "crates/optimizer-registry/Cargo.toml",
+      "sha256": "4c4ed04cd515c6dd4bfd9aee204d4a51900c35a96f6c56ee1b688e20e4c3f56c"
+    },
+    {
+      "bytes": 25225,
+      "namespace": "repo",
+      "path": "crates/optimizer-registry/src/conformance.rs",
+      "sha256": "087769009231ea4a3889ce63bb5f09726ac85d2ed0519196976e29a42a93c191"
+    },
+    {
+      "bytes": 19746,
+      "namespace": "repo",
+      "path": "crates/optimizer-registry/src/document.rs",
+      "sha256": "b8c49723fe767ae3c4db9c6f17b01d4d6eca13267980398d63a180b222d89f8d"
+    },
+    {
+      "bytes": 2660,
+      "namespace": "repo",
+      "path": "crates/optimizer-registry/src/lib.rs",
+      "sha256": "b89ae4b18936b5ad06ec11a20a7a3210e315d7009b53fc3462068da1b5d93112"
+    },
+    {
+      "bytes": 22177,
+      "namespace": "repo",
+      "path": "crates/optimizer-registry/src/resolve.rs",
+      "sha256": "6c26b1bec87c3027a83b0313ed41c35a4edd142cb5494fee5130cb0af42747a9"
+    },
+    {
+      "bytes": 1867,
+      "namespace": "repo",
+      "path": "crates/optimizer-registry/src/serde_strict.rs",
+      "sha256": "e55705810c46c3dd08beb003d52492bc7bd1c1b80b52388f5c029bb97fd2ac6d"
+    },
+    {
+      "bytes": 37456,
+      "namespace": "repo",
+      "path": "crates/optimizer-registry/tests/contracts.rs",
+      "sha256": "ed63371f33ee81a3a47556d7aaae7fb7053b8592528ad21201baa6db7eb1ce8d"
+    },
+    {
+      "bytes": 597,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule/Cargo.toml",
+      "sha256": "4a677b7030597890dab3a2e0bee667440a3543960b1897dd94a39d2923f12431"
+    },
+    {
+      "bytes": 14838,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule/src/encode.rs",
+      "sha256": "c13d087a684284fb31f4b7c9221f51f3da310128378e4ed9c2d5424c60f51455"
+    },
+    {
+      "bytes": 13015,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule/src/evaluate.rs",
+      "sha256": "f5fa6774c1128793f9fb4896b011bf0a3d9c87f8963f3543ac78c7b3a33b1e03"
+    },
+    {
+      "bytes": 9730,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule/src/generate.rs",
+      "sha256": "52f8ae9906a7f7d1e2ac0035deaa88435d11d35e69a71e11a332eb1db2ae1105"
+    },
+    {
+      "bytes": 6689,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule/src/heuristic.rs",
+      "sha256": "6072129b984b148b15018186f7d80e4e7546c55d5a59ad6c06a632dee22aebe5"
+    },
+    {
+      "bytes": 8401,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule/src/instance.rs",
+      "sha256": "5f4a436e69af69362b0e97e61b822847783c31b43feeba3874a46b5ca173743a"
+    },
+    {
+      "bytes": 1810,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule/src/lib.rs",
+      "sha256": "9c262a444672a37ae8e2a94563ff30b170bad5bc3a391579ce0521b0601252dc"
+    },
+    {
+      "bytes": 1880,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule/src/serde_strict.rs",
+      "sha256": "1ae8821e6c356232ecdc9e6cacdf616f9a9af1795aa6f11d16fc7faebc1b31c3"
+    },
+    {
+      "bytes": 33460,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule/tests/contracts.rs",
+      "sha256": "81f961229c78b0b05b267036f6ebb17f85071564d6eaed3692c977f40e0569bc"
+    },
+    {
+      "bytes": 1072,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule-examples/Cargo.toml",
+      "sha256": "7ac6fcdb53173e45eb286547bb5bbd1cf56bc2a7609f6e7df1b544941d34a8ce"
+    },
+    {
+      "bytes": 18352,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule-examples/src/lib.rs",
+      "sha256": "e14353677dec9d1995a59d4482fdd735b940ebf724819c553be0c350e9955175"
+    },
+    {
+      "bytes": 16584,
+      "namespace": "repo",
+      "path": "crates/optimizer-schedule-examples/tests/device.rs",
+      "sha256": "1543957561bf5441d0a6c42add0ebecbc79d3d2b1919060b1e60cb4616cfbbe9"
+    },
+    {
+      "bytes": 377,
+      "namespace": "repo",
+      "path": "crates/optimizer-solver/Cargo.toml",
+      "sha256": "18ac110a12a55e543765443859a56fe8d513a56c278b69606208abda71f96058"
+    },
+    {
+      "bytes": 32112,
+      "namespace": "repo",
+      "path": "crates/optimizer-solver/src/executive.rs",
+      "sha256": "27a19f2c10259d90a0d3e6d35cf298f14836eae3461dea6895662ff4fb803526"
+    },
+    {
+      "bytes": 3273,
+      "namespace": "repo",
+      "path": "crates/optimizer-solver/src/hooks.rs",
+      "sha256": "8d04357f753438054ea71dc7960f812a2c3c5fe1cd785711e09d0652cc10a300"
+    },
+    {
+      "bytes": 1487,
+      "namespace": "repo",
+      "path": "crates/optimizer-solver/src/lib.rs",
+      "sha256": "86effe801221421fcc04599eae6709ae427430ee66066788f6decd4db8b616c5"
+    },
+    {
+      "bytes": 6842,
+      "namespace": "repo",
+      "path": "crates/optimizer-solver/src/node.rs",
+      "sha256": "faa0fe8ef8fe517832672d7727f68d9fffa4b65af9eb22df94657eb06274492c"
+    },
+    {
+      "bytes": 19357,
+      "namespace": "repo",
+      "path": "crates/optimizer-solver/src/search.rs",
+      "sha256": "f8bad80a4d2513089d60ffdb5e803aab0428afcd5e7c03e7128aaf811ee4098b"
+    },
+    {
+      "bytes": 1911,
+      "namespace": "repo",
+      "path": "crates/optimizer-solver/src/serde_strict.rs",
+      "sha256": "65e1900f21d4da03cd340d8989cc4cc27ee868baed57e8302370e30efbcad8cd"
+    },
+    {
+      "bytes": 54734,
+      "namespace": "repo",
+      "path": "crates/optimizer-solver/tests/executive.rs",
+      "sha256": "ec741432f18ab85db9c21a91eadc2cfd2dfa083d6374937f02c897cd349c1a05"
+    },
+    {
+      "bytes": 5301,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/Cargo.lock",
+      "sha256": "d203471689e7440f6b1b6baa6360a9f3831b52007621e21dadf022245ea22e24"
+    },
+    {
+      "bytes": 621,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/Cargo.toml",
+      "sha256": "25cd33c39aa6304bcffc8eafc3d45c152447ba888440eeadf71741461aeb1137"
+    },
+    {
+      "bytes": 5898,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/cuda/prepare.cu",
+      "sha256": "7eb2890adad57290eeb5a31bc01050857fb507d30edba67cff54a9144f487522"
+    },
+    {
+      "bytes": 5014,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/array_assessment.rs",
+      "sha256": "fb8a9a37f64994194304ab927759cfd1d17643dcf8a4ca7e210f956f9a769ce8"
+    },
+    {
+      "bytes": 10277,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/array_input.rs",
+      "sha256": "891c74626f8f8bbaf352dda85348dd3c787e4dc2f2f9febba636f86636dcc15c"
+    },
+    {
+      "bytes": 2787,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/assessment.rs",
+      "sha256": "95a59ff22b9170c96e6ab0446e4d6df9ef26b8ca480bb1d9c34950434ffae5bd"
+    },
+    {
+      "bytes": 3537,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/bin/billion.rs",
+      "sha256": "62896865f6760b12e9535f858cb64518e5e0d2210f04bcfa64839f427c392c0c"
+    },
+    {
+      "bytes": 8744,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/bounded_certificate.rs",
+      "sha256": "b724ba878961ecf741a0d372c8c119b762926942172672f00c43bc196b30c71d"
+    },
+    {
+      "bytes": 13296,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/control.rs",
+      "sha256": "20c7160e26de0e8e11b214d5cb875d9478a38c44f395ca660e8b0c9ce635acfa"
+    },
+    {
+      "bytes": 14350,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/device.rs",
+      "sha256": "33d06a60cb1c25c40baddb3f2048d2ea8bdc518a5446474a1eb9feaa3d0374d9"
+    },
+    {
+      "bytes": 1737,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/engine.rs",
+      "sha256": "59d8e3f3fa44f472654501754a30eb58c9f5ba32edcfb9b1389c0ebdbdd3fe18"
+    },
+    {
+      "bytes": 16838,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/exact_math.rs",
+      "sha256": "1be732720c414c25f530ca5156cdd7870cf7f7d7c191d9697840d6c8228128fa"
+    },
+    {
+      "bytes": 24647,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/fast_device.rs",
+      "sha256": "f77e35f511ab6c20ee605f4f6b2d208a9d10750856bd350cf38dfc3fb842aaa2"
+    },
+    {
+      "bytes": 8746,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/gpu.rs",
+      "sha256": "eab5ebf4e93fa0be23680bb50ceb0f74857d1a43cf4b7a3bddf7a84c2c997ef9"
+    },
+    {
+      "bytes": 13702,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/gpu_prepare.rs",
+      "sha256": "be64d6026739eb245c3f2f3ae79bfff24d89a75fc22bc290b8c22bfbd30afa33"
+    },
+    {
+      "bytes": 17879,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/gpu_tensor.rs",
+      "sha256": "c62f52480e8d4eb1518930d821bb1a6a008894216cc473657383ef681130aea9"
+    },
+    {
+      "bytes": 429,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/host-lp/Cargo.toml",
+      "sha256": "de62d7dfd138b3ea78bff3a150f500ec34f3646aba85de804467883f0d3126f3"
+    },
+    {
+      "bytes": 4455,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/host-lp/lib.rs",
+      "sha256": "897f1562114b6f127c3812edc7c6a15b338ac6bdd92622897a03a97b9860a114"
+    },
+    {
+      "bytes": 53558,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/host-lp/pdhg.rs",
+      "sha256": "148e9380df6ecaaf97c78bbd73c996e03d378df54c2e31195f449c92b2b3639e"
+    },
+    {
+      "bytes": 13984,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/host-lp/precondition.rs",
+      "sha256": "b122f93b78884f448bbc02d26cf56a725c55f4c1bce1e7ccffae04981a5ef473"
+    },
+    {
+      "bytes": 36730,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/host-lp/problem.rs",
+      "sha256": "9ea85d44cc6c64d1261badea34d76f406384d68fc94368b3c8071596c308bb56"
+    },
+    {
+      "bytes": 17163,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/host.rs",
+      "sha256": "09e8d2b64c1fa296031312ba46608297ce947ad05223b38c324f19ad4486e1dd"
+    },
+    {
+      "bytes": 6877,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/implied.rs",
+      "sha256": "60d3bfdde946ada00b52ac57fde5c24ea29c5d89c1d787740c22cc68d28864fe"
+    },
+    {
+      "bytes": 6818,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/input.rs",
+      "sha256": "42b1ef4213c5d861ea8ad02dd1c14cbe2f4d0096beadb19a3ac257dd4f36a093"
+    },
+    {
+      "bytes": 937,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/lib.rs",
+      "sha256": "bbdebafc6f01c221d25ed3150a28400ff167d9203d30ffd48957399ddbfff496"
+    },
+    {
+      "bytes": 15437,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/main.rs",
+      "sha256": "8979ed01efc3d0d029cd5158bb0bfd8c421426cab4347f00dceafb5862e9894d"
+    },
+    {
+      "bytes": 2968,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/merit.rs",
+      "sha256": "a02a0c64accca9ddc9d7fb630d547c024e11de6787c18c1a9245f1fedcba1e77"
+    },
+    {
+      "bytes": 13929,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/prepared_feasibility.rs",
+      "sha256": "a638cba747379c00672083f6944fa1935aca1ec83e7396c1ad09927c22e7828a"
+    },
+    {
+      "bytes": 2859,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/repair.rs",
+      "sha256": "a25e610d1d18b4a3a79ab0d93acda526632cd0ce713fc03fa2437b338acbefb2"
+    },
+    {
+      "bytes": 12535,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/solve.rs",
+      "sha256": "64ad8be474403ae63c440878817b5076db5b02cf626ddfb5fea1b0fdb312c235"
+    },
+    {
+      "bytes": 16539,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/src/tensor_device.rs",
+      "sha256": "902ad772c6c555fc7b660fed735467725555605b90af668beb35afe82265e8f3"
+    },
+    {
+      "bytes": 7839,
+      "namespace": "repo",
+      "path": "research/lp-billion-lowbit/tests/arrays.rs",
+      "sha256": "a976413cb2bdb8bb9dee6b25e5acb9ff5cbe38fb6774c59e8c3c2f9186bed1b7"
+    },
+    {
+      "bytes": 2787,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/assessment.rs",
+      "sha256": "95a59ff22b9170c96e6ab0446e4d6df9ef26b8ca480bb1d9c34950434ffae5bd"
+    },
+    {
+      "bytes": 12981,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/control.rs",
+      "sha256": "56f85fec437aaed757f8c3ff1a3530e3df396c8330b9097be53050ff415d71a1"
+    },
+    {
+      "bytes": 14350,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/device.rs",
+      "sha256": "33d06a60cb1c25c40baddb3f2048d2ea8bdc518a5446474a1eb9feaa3d0374d9"
+    },
+    {
+      "bytes": 1504,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/engine.rs",
+      "sha256": "49b3ec2d8d57c5b10600b7175b6e2610530c9b0e34a9152b1694e2407dbb179e"
+    },
+    {
+      "bytes": 16838,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/exact_math.rs",
+      "sha256": "1be732720c414c25f530ca5156cdd7870cf7f7d7c191d9697840d6c8228128fa"
+    },
+    {
+      "bytes": 20402,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/fast_device.rs",
+      "sha256": "a9257af4616c90f1aad47e7770416f3d2d8f8c7682ae23c6b07904a4a8b075ff"
+    },
+    {
+      "bytes": 8746,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/gpu.rs",
+      "sha256": "eab5ebf4e93fa0be23680bb50ceb0f74857d1a43cf4b7a3bddf7a84c2c997ef9"
+    },
+    {
+      "bytes": 17750,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/gpu_tensor.rs",
+      "sha256": "e3a96cc2d071dfea62ab499a11c15871cad6f29602888678635709ddeec8cda4"
+    },
+    {
+      "bytes": 4575,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/host-lp/lib.rs",
+      "sha256": "c36c4fe6e304c03056bbddee58634b90d886f7426cb8b85974590fa55d064b39"
+    },
+    {
+      "bytes": 32748,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/host-lp/problem.rs",
+      "sha256": "5d1a7c8db4c631c6e99e23771d9c9054886ab964d16e85d7eff08f9c8f8c1566"
+    },
+    {
+      "bytes": 17163,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/host.rs",
+      "sha256": "09e8d2b64c1fa296031312ba46608297ce947ad05223b38c324f19ad4486e1dd"
+    },
+    {
+      "bytes": 6877,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/implied.rs",
+      "sha256": "60d3bfdde946ada00b52ac57fde5c24ea29c5d89c1d787740c22cc68d28864fe"
+    },
+    {
+      "bytes": 6818,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/input.rs",
+      "sha256": "42b1ef4213c5d861ea8ad02dd1c14cbe2f4d0096beadb19a3ac257dd4f36a093"
+    },
+    {
+      "bytes": 823,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/lib.rs",
+      "sha256": "448a133838fd35f0f3e6337750e09f0f5ad7acb5bf8d57c11b06441bed302fa4"
+    },
+    {
+      "bytes": 15437,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/main.rs",
+      "sha256": "42cdc127f1574ad66c7be0266579d501aacf74b739c2a98fb838e899648d918a"
+    },
+    {
+      "bytes": 2968,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/merit.rs",
+      "sha256": "a02a0c64accca9ddc9d7fb630d547c024e11de6787c18c1a9245f1fedcba1e77"
+    },
+    {
+      "bytes": 15133,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/operator.rs",
+      "sha256": "b748fcc10347891fc5bd1048258c80114e44718e72fff53ed9cd92e076d75b70"
+    },
+    {
+      "bytes": 13929,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/prepared_feasibility.rs",
+      "sha256": "a638cba747379c00672083f6944fa1935aca1ec83e7396c1ad09927c22e7828a"
+    },
+    {
+      "bytes": 2859,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/repair.rs",
+      "sha256": "a25e610d1d18b4a3a79ab0d93acda526632cd0ce713fc03fa2437b338acbefb2"
+    },
+    {
+      "bytes": 12536,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/solve.rs",
+      "sha256": "802521331146497a9c3e25716a622c00b3ebab3e0de6970979276855c2db1c34"
+    },
+    {
+      "bytes": 16690,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/tensor.rs",
+      "sha256": "948e62e3a2ab0c6f6db1ee10c3a69b378a926c525d765b3d5ea86c95732bb241"
+    },
+    {
+      "bytes": 16539,
+      "namespace": "repo",
+      "path": "research/lp-general-lowbit/src/tensor_device.rs",
+      "sha256": "902ad772c6c555fc7b660fed735467725555605b90af668beb35afe82265e8f3"
+    },
+    {
+      "bytes": 11224,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/cached_certificate.rs",
+      "sha256": "f5c7f44ed42246c9a5054f2611a4d8d3cc2a7c7ffe0a25e56929e65e51a069d7"
+    },
+    {
+      "bytes": 3710,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/checker.rs",
+      "sha256": "1d92f23ea32e0ef4ec262a71792ecc9a1475e9124814048213a63333cfa2fd32"
+    },
+    {
+      "bytes": 634,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/config.rs",
+      "sha256": "12ee05c01b97211195a54489bf4dea8ec2c63f0bf147e8f99792608db118d17e"
+    },
+    {
+      "bytes": 13457,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/device.rs",
+      "sha256": "1d4f2a91017e1db1fce8b73de3a49dd064c1a22411b77bda231850c064ce5f5a"
+    },
+    {
+      "bytes": 15882,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/exact_math.rs",
+      "sha256": "e6395c04db0a224df504f07cd021f05670924c6fc36826ae0006d01ccdc9ee8b"
+    },
+    {
+      "bytes": 1710,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/identity.rs",
+      "sha256": "f1cf69e0e066e5873f5d172ba80314fa0dbc6fd682f7b2bc81c8f7c7aa88192b"
+    },
+    {
+      "bytes": 32695,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/main.rs",
+      "sha256": "e3c9f2854fbfc6392fe140069530baa15b7b03219ca26a26ecc09b83f3ee0a84"
+    },
+    {
+      "bytes": 19308,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/model.rs",
+      "sha256": "00afcbb21821c34e5d8d66809fef787ceaae1de42ffae4d136f18341df8d97bc"
+    },
+    {
+      "bytes": 4656,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/parse.rs",
+      "sha256": "123e3239d1876fd7b880de30257cafbabf9790a2eda8d16a3444da9391debb0c"
+    },
+    {
+      "bytes": 1521,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/policy.rs",
+      "sha256": "4e61a66a1f8fbf069a8242885b7674c52e3e981e5e801aa48db5adad06e09f8c"
+    },
+    {
+      "bytes": 2568,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/startup.rs",
+      "sha256": "b99ec04626d4d75547d2272827f6a62ae0f414f748c0081c0241e7a3b7643184"
+    },
+    {
+      "bytes": 12316,
+      "namespace": "repo",
+      "path": "research/lp-mixed2-checker2/src/transport.rs",
+      "sha256": "4f1676fe32a0eece5554335cb69ec99e610bd64d27d330209641581455721cb5"
+    },
+    {
+      "bytes": 368,
+      "namespace": "repo",
+      "path": "research/lp-tensor-expanded-device/cuda-sys/Cargo.toml",
+      "sha256": "d8fdcb3fad67451ab16447889924709ccb05b727f5d4e1583b03a478d41d2d28"
+    },
+    {
+      "bytes": 3504,
+      "namespace": "repo",
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/events.rs",
+      "sha256": "ee0906c18f20170f06c4ebba5e03cf4c152c149e0842dd1c0332fe193478de77"
+    },
+    {
+      "bytes": 46853,
+      "namespace": "repo",
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/lib.rs",
+      "sha256": "a7954d1b1764ea92048fb99d4962a5aba66e7c2666312aefe13d2719ff0b9950"
+    },
+    {
+      "bytes": 13509,
+      "namespace": "repo",
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/primary.rs",
+      "sha256": "8b5ad93af537f4d39516806c0069c44a756171b05ec7a7125af0cbcf686a2d7c"
+    },
+    {
+      "bytes": 5686,
+      "namespace": "repo",
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/setup.rs",
+      "sha256": "9e2eb9915dcf8dd3ef37b53ae9279df18e3f5b38477d71306337d84b3cf24653"
+    },
+    {
+      "bytes": 17303,
+      "namespace": "repo",
+      "path": "research/lp-tensor-expanded-device/cuda-sys/src/status.rs",
+      "sha256": "ea72ed4eb38e348a535b1971a87c60e0c6d503d74ef9ebf7dc468df77f23d95b"
+    }
+  ]
+}

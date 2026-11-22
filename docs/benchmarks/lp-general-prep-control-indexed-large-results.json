@@ -1,0 +1,1047 @@
+{
+  "cell_columns": [
+    "id",
+    "model_index",
+    "lane",
+    "repeat",
+    "status",
+    "certified",
+    "supervised",
+    "primary_seconds",
+    "independent_seconds",
+    "audit_seconds",
+    "logical",
+    "physical",
+    "fp4_share",
+    "nonzeros",
+    "cost_seconds"
+  ],
+  "cells": [
+    [
+      "m00-r0-t0-previous-native",
+      0,
+      "previous-native",
+      0,
+      "certified",
+      true,
+      true,
+      25.812935333,
+      7.427689189,
+      10.355901715,
+      1000,
+      1000,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.289804828,
+        "device_setup": 0.418257312,
+        "device_teardown": 0.08169058,
+        "execution": 0.680412005,
+        "host_preparation": 7.973631928,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m00-r0-t0-native",
+      0,
+      "native",
+      0,
+      "certified",
+      true,
+      true,
+      25.591654206,
+      7.402307218,
+      10.207434755,
+      1000,
+      1000,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.279753301,
+        "device_setup": 0.430785679,
+        "device_teardown": 0.091281873,
+        "execution": 0.683772022,
+        "host_preparation": 7.730845216,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m00-r0-t0-fp32",
+      0,
+      "fp32",
+      0,
+      "certified",
+      true,
+      true,
+      24.989536182,
+      7.231444408,
+      10.294526325,
+      1000,
+      1000,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.30681784,
+        "device_setup": 0.517521323,
+        "device_teardown": 0.080512876,
+        "execution": 0.580591169,
+        "host_preparation": 7.401688127,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m00-r0-t0-previous-fp32",
+      0,
+      "previous-fp32",
+      0,
+      "certified",
+      true,
+      true,
+      25.311210072,
+      7.14691629,
+      10.034807143,
+      1000,
+      1000,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.314098985,
+        "device_setup": 0.512134497,
+        "device_teardown": 0.078676057,
+        "execution": 0.582688117,
+        "host_preparation": 7.851262515,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m00-r0-t0-previous-fp4x2",
+      0,
+      "previous-fp4x2",
+      0,
+      "certified",
+      true,
+      true,
+      26.313585056,
+      7.131918017,
+      10.113436171,
+      1000,
+      1000,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.258529514,
+        "device_setup": 0.522989984,
+        "device_teardown": 0.078523626,
+        "execution": 0.580368512,
+        "host_preparation": 8.933987752,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m00-r0-t0-fp4x2",
+      0,
+      "fp4x2",
+      0,
+      "certified",
+      true,
+      true,
+      25.760044481,
+      7.24643951,
+      10.21416424,
+      1000,
+      1000,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.161576699,
+        "device_setup": 0.515504149,
+        "device_teardown": 0.076209225,
+        "execution": 0.582689119,
+        "host_preparation": 8.344906537,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m01-r0-t0-fp4x2",
+      1,
+      "fp4x2",
+      0,
+      "certified",
+      true,
+      true,
+      19.263379747,
+      4.33351809,
+      10.538986356,
+      2500,
+      2500,
+      0.75,
+      16000000,
+      {
+        "assessment": 5.570757001,
+        "device_setup": 0.433005915,
+        "device_teardown": 0.080751678,
+        "execution": 0.313780318,
+        "host_preparation": 6.102147704,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m01-r0-t0-previous-fp4x2",
+      1,
+      "previous-fp4x2",
+      0,
+      "certified",
+      true,
+      true,
+      19.650225035,
+      4.436161057,
+      10.660261582,
+      2500,
+      2500,
+      0.75,
+      16000000,
+      {
+        "assessment": 5.796330757,
+        "device_setup": 0.445662225,
+        "device_teardown": 0.081059481,
+        "execution": 0.315794725,
+        "host_preparation": 6.153766379,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m01-r0-t0-previous-fp32",
+      1,
+      "previous-fp32",
+      0,
+      "certified",
+      true,
+      true,
+      19.891268318,
+      4.317500131,
+      10.808730481,
+      2500,
+      2500,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.612162929,
+        "device_setup": 0.545252761,
+        "device_teardown": 0.073895743,
+        "execution": 1.382945468,
+        "host_preparation": 5.598210847,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m01-r0-t0-fp32",
+      1,
+      "fp32",
+      0,
+      "certified",
+      true,
+      true,
+      19.916645678,
+      4.524778268,
+      10.833749078,
+      2500,
+      2500,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.625695552,
+        "device_setup": 0.518588623,
+        "device_teardown": 0.076933218,
+        "execution": 1.382315531,
+        "host_preparation": 5.338772612,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m01-r0-t0-native",
+      1,
+      "native",
+      0,
+      "certified",
+      true,
+      true,
+      20.118825844,
+      4.380149734,
+      10.632862258,
+      2500,
+      2500,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.6503663,
+        "device_setup": 0.40143835,
+        "device_teardown": 0.076446971,
+        "execution": 1.666296723,
+        "host_preparation": 5.509199999,
+        "recovery": 0.0
+      }
+    ],
+    [
+      "m01-r0-t0-previous-native",
+      1,
+      "previous-native",
+      0,
+      "certified",
+      true,
+      true,
+      21.089333476,
+      4.630450505,
+      10.912993651,
+      2500,
+      2500,
+      0.0,
+      16000000,
+      {
+        "assessment": 5.69168978,
+        "device_setup": 0.375896458,
+        "device_teardown": 0.079084265,
+        "execution": 1.668991948,
+        "host_preparation": 6.166178319,
+        "recovery": 0.0
+      }
+    ]
+  ],
+  "claim": "Final indexed-constructor comparison, v12 versus v14, on seed 831001 of both capacity-admitted 16 M families; unchanged 100-update control, strict certificates and arithmetic, all three lanes. Twelve unsupported and four unmeasured capacity models retained. No broad claim.",
+  "continuation_of": null,
+  "cpu_seconds": {
+    "admission": 44764.22479196,
+    "cleanup": 153.91825248,
+    "confirmation": 0.0,
+    "development": 87854.678468904,
+    "implementation": 19687.93538542,
+    "native": 33499.219811324,
+    "reporting": 32454.268760556
+  },
+  "excluded_attempted": [],
+  "freeze": {
+    "path": "artifacts/gpup-general-v1/prep-control-indexed-large-v1/freeze.json",
+    "sha256": "6e07f80c2e96285a7212792698fbab05331fb8bc8c4fe9c71dd68a5276ce34a3"
+  },
+  "full_local_results": {
+    "path": "artifacts/gpup-general-v1/prep-control-indexed-large-results-v1/result.json",
+    "sha256": "d547ec538967551553d65ad247add3f6bec180fa698467978d160696598aeea6"
+  },
+  "gpu_seconds": {
+    "admission": 7993.958952568,
+    "confirmation": 0.0,
+    "development": 21026.009722028,
+    "reporting": 0.0
+  },
+  "identity": "prep-control-indexed-large-v1",
+  "matched": [
+    {
+      "after_primary_seconds": 25.591654206,
+      "before_primary_seconds": 25.812935333,
+      "cost_ratios": {
+        "assessment": 1.0019037872466685,
+        "device_setup": 0.9709174013651461,
+        "device_teardown": 0.8949266411305999,
+        "execution": 0.9950860566213691,
+        "host_preparation": 1.0314049376512573,
+        "recovery": null
+      },
+      "deadline_pair": false,
+      "equal_work": true,
+      "exact": true,
+      "exact_common_assessments": 2,
+      "jointly_certified": true,
+      "lane": "native",
+      "model_index": 0,
+      "preparation_ratio": 1.0314049376512573,
+      "primary_ratio": 1.0086466128847629,
+      "process_ratio": 1.0128389498702517,
+      "repeat": 0,
+      "status_same": true,
+      "supervised": true
+    },
+    {
+      "after_primary_seconds": 24.989536182,
+      "before_primary_seconds": 25.311210072,
+      "cost_ratios": {
+        "assessment": 1.0013720359770255,
+        "device_setup": 0.9895911032829077,
+        "device_teardown": 0.9771860217737098,
+        "execution": 1.0036117462888934,
+        "host_preparation": 1.0607394394746295,
+        "recovery": null
+      },
+      "deadline_pair": false,
+      "equal_work": true,
+      "exact": true,
+      "exact_common_assessments": 2,
+      "jointly_certified": true,
+      "lane": "fp32",
+      "model_index": 0,
+      "preparation_ratio": 1.0607394394746295,
+      "primary_ratio": 1.0128723433543239,
+      "process_ratio": 1.02322939334407,
+      "repeat": 0,
+      "status_same": true,
+      "supervised": true
+    },
+    {
+      "after_primary_seconds": 25.760044481,
+      "before_primary_seconds": 26.313585056,
+      "cost_ratios": {
+        "assessment": 1.0187835656920072,
+        "device_setup": 1.0145213865194322,
+        "device_teardown": 1.0303690399685863,
+        "execution": 0.9960174183379593,
+        "host_preparation": 1.0705917091327635,
+        "recovery": null
+      },
+      "deadline_pair": false,
+      "equal_work": true,
+      "exact": true,
+      "exact_common_assessments": 2,
+      "jointly_certified": true,
+      "lane": "fp4x2",
+      "model_index": 0,
+      "preparation_ratio": 1.0705917091327635,
+      "primary_ratio": 1.0214883392537726,
+      "process_ratio": 1.0373880152533779,
+      "repeat": 0,
+      "status_same": true,
+      "supervised": true
+    },
+    {
+      "after_primary_seconds": 19.263379747,
+      "before_primary_seconds": 19.650225035,
+      "cost_ratios": {
+        "assessment": 1.0404924781245184,
+        "device_setup": 1.0292289540663666,
+        "device_teardown": 1.0038117226492806,
+        "execution": 1.0064198003649165,
+        "host_preparation": 1.0084590995668892,
+        "recovery": null
+      },
+      "deadline_pair": false,
+      "equal_work": true,
+      "exact": true,
+      "exact_common_assessments": 5,
+      "jointly_certified": true,
+      "lane": "fp4x2",
+      "model_index": 1,
+      "preparation_ratio": 1.0084590995668892,
+      "primary_ratio": 1.020081901155494,
+      "process_ratio": 1.0154206235447338,
+      "repeat": 0,
+      "status_same": true,
+      "supervised": true
+    },
+    {
+      "after_primary_seconds": 19.916645678,
+      "before_primary_seconds": 19.891268318,
+      "cost_ratios": {
+        "assessment": 0.9975944978047757,
+        "device_setup": 1.0514167430934944,
+        "device_teardown": 0.9605180300660243,
+        "execution": 1.0004557114391561,
+        "host_preparation": 1.0485951086241918,
+        "recovery": null
+      },
+      "deadline_pair": false,
+      "equal_work": true,
+      "exact": true,
+      "exact_common_assessments": 5,
+      "jointly_certified": true,
+      "lane": "fp32",
+      "model_index": 1,
+      "preparation_ratio": 1.0485951086241918,
+      "primary_ratio": 0.9987258215861103,
+      "process_ratio": 1.0129556244019218,
+      "repeat": 0,
+      "status_same": true,
+      "supervised": true
+    },
+    {
+      "after_primary_seconds": 20.118825844,
+      "before_primary_seconds": 21.089333476,
+      "cost_ratios": {
+        "assessment": 1.007313416123128,
+        "device_setup": 0.936374060923676,
+        "device_teardown": 1.0344983452647194,
+        "execution": 1.001617494029003,
+        "host_preparation": 1.1192511290421934,
+        "recovery": null
+      },
+      "deadline_pair": false,
+      "equal_work": true,
+      "exact": true,
+      "exact_common_assessments": 5,
+      "jointly_certified": true,
+      "lane": "native",
+      "model_index": 1,
+      "preparation_ratio": 1.1192511290421934,
+      "primary_ratio": 1.0482387809072582,
+      "process_ratio": 1.0459833795180373,
+      "repeat": 0,
+      "status_same": true,
+      "supervised": true
+    }
+  ],
+  "missing": [],
+  "mode": "scale",
+  "planned": 12,
+  "raw_only": [],
+  "responses": 12,
+  "source": {
+    "path": "tools/lp_general_host_cost.py",
+    "sha256": "9ae41aba5a34f7e4bc9b5379fb78d6a2dcc9a0084264bd4e448186841b6e89f4"
+  },
+  "summaries": [
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        112000000000
+      ],
+      "certified": 2,
+      "fp4_share": 0.0,
+      "lane": "fp32",
+      "planned": 2,
+      "responses": 2,
+      "statuses": {
+        "certified": 2
+      },
+      "supervised": 2
+    },
+    {
+      "accepted_product_work": [
+        60000000000,
+        60000000000,
+        0,
+        112000000000
+      ],
+      "certified": 2,
+      "fp4_share": 0.5357142857142857,
+      "lane": "fp4x2",
+      "planned": 2,
+      "responses": 2,
+      "statuses": {
+        "certified": 2
+      },
+      "supervised": 2
+    },
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        112000000000
+      ],
+      "certified": 2,
+      "fp4_share": 0.0,
+      "lane": "native",
+      "planned": 2,
+      "responses": 2,
+      "statuses": {
+        "certified": 2
+      },
+      "supervised": 2
+    },
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        112000000000
+      ],
+      "certified": 2,
+      "fp4_share": 0.0,
+      "lane": "previous-fp32",
+      "planned": 2,
+      "responses": 2,
+      "statuses": {
+        "certified": 2
+      },
+      "supervised": 2
+    },
+    {
+      "accepted_product_work": [
+        60000000000,
+        60000000000,
+        0,
+        112000000000
+      ],
+      "certified": 2,
+      "fp4_share": 0.5357142857142857,
+      "lane": "previous-fp4x2",
+      "planned": 2,
+      "responses": 2,
+      "statuses": {
+        "certified": 2
+      },
+      "supervised": 2
+    },
+    {
+      "accepted_product_work": [
+        0,
+        0,
+        0,
+        112000000000
+      ],
+      "certified": 2,
+      "fp4_share": 0.0,
+      "lane": "previous-native",
+      "planned": 2,
+      "responses": 2,
+      "statuses": {
+        "certified": 2
+      },
+      "supervised": 2
+    }
+  ],
+  "summary": {
+    "all": {
+      "cost_medians": {
+        "assessment": 1.0046086016848983,
+        "execution": 1.0010366027340796,
+        "host_preparation": 1.0546672740494105
+      },
+      "pairs": 6,
+      "primary_median": 1.016477122254909
+    },
+    "certified_primary_median": 1.016477122254909,
+    "exact_pairs": 6,
+    "families": [
+      {
+        "assessment_median": 1.0019037872466685,
+        "family": "tall",
+        "pairs": 3,
+        "primary_median": 1.0128723433543239
+      },
+      {
+        "assessment_median": 1.007313416123128,
+        "family": "coupled_blocks",
+        "pairs": 3,
+        "primary_median": 1.020081901155494
+      }
+    ],
+    "fp32": {
+      "cost_medians": {
+        "assessment": 0.9994832668909006,
+        "execution": 1.0020337288640246,
+        "host_preparation": 1.0546672740494105
+      },
+      "pairs": 2,
+      "primary_median": 1.005799082470217
+    },
+    "fp4x2": {
+      "cost_medians": {
+        "assessment": 1.0296380219082628,
+        "execution": 1.001218609351438,
+        "host_preparation": 1.0395254043498263
+      },
+      "pairs": 2,
+      "primary_median": 1.0207851202046334
+    },
+    "jointly_certified_pairs": 6,
+    "native": {
+      "cost_medians": {
+        "assessment": 1.0046086016848983,
+        "execution": 0.998351775325186,
+        "host_preparation": 1.0753280333467252
+      },
+      "pairs": 2,
+      "primary_median": 1.0284426968960105
+    },
+    "planned_pairs": 6
+  },
+  "timing_scope": "v1 and interrupted v2 include historical endpoint auditing in complete cost; v3 and later separate final-certificate primary time and historical auditing. Compare versions only within the same frozen campaign.",
+  "unsupported_models": [
+    {
+      "columns": 1000000,
+      "family": "irregular",
+      "host_pipeline_allowance_bytes": 21544870912,
+      "memory": {
+        "admits_domain": true,
+        "compact_bytes": 252001108,
+        "device_allowance_bytes": 2115108864,
+        "host_allowance_bytes": 5416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 5377048576,
+      "reasons": [
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831001,
+      "source_group": "general-scale-irregular",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 1000000,
+      "family": "irregular",
+      "host_pipeline_allowance_bytes": 21544870912,
+      "memory": {
+        "admits_domain": true,
+        "compact_bytes": 252001108,
+        "device_allowance_bytes": 2115108864,
+        "host_allowance_bytes": 5416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 5377048576,
+      "reasons": [
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831002,
+      "source_group": "general-scale-irregular",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 1000000,
+      "family": "irregular",
+      "host_pipeline_allowance_bytes": 21544870912,
+      "memory": {
+        "admits_domain": true,
+        "compact_bytes": 252001108,
+        "device_allowance_bytes": 2115108864,
+        "host_allowance_bytes": 5416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 5377048576,
+      "reasons": [
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831003,
+      "source_group": "general-scale-irregular",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 4000000,
+      "family": "wide",
+      "host_pipeline_allowance_bytes": 48736870912,
+      "memory": {
+        "admits_domain": false,
+        "compact_bytes": 348001108,
+        "device_allowance_bytes": 3651108864,
+        "host_allowance_bytes": 8416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 13441048576,
+      "reasons": [
+        "current dimension/nonzero domain",
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831001,
+      "source_group": "general-scale-wide",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 4000000,
+      "family": "wide",
+      "host_pipeline_allowance_bytes": 48736870912,
+      "memory": {
+        "admits_domain": false,
+        "compact_bytes": 348001108,
+        "device_allowance_bytes": 3651108864,
+        "host_allowance_bytes": 8416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 13441048576,
+      "reasons": [
+        "current dimension/nonzero domain",
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831002,
+      "source_group": "general-scale-wide",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 4000000,
+      "family": "wide",
+      "host_pipeline_allowance_bytes": 48736870912,
+      "memory": {
+        "admits_domain": false,
+        "compact_bytes": 348001108,
+        "device_allowance_bytes": 3651108864,
+        "host_allowance_bytes": 8416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 13441048576,
+      "reasons": [
+        "current dimension/nonzero domain",
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831003,
+      "source_group": "general-scale-wide",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 1000000,
+      "family": "ill_scaled",
+      "host_pipeline_allowance_bytes": 21544870912,
+      "memory": {
+        "admits_domain": true,
+        "compact_bytes": 252001108,
+        "device_allowance_bytes": 2115108864,
+        "host_allowance_bytes": 5416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 5377048576,
+      "reasons": [
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831001,
+      "source_group": "general-scale-ill_scaled",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 1000000,
+      "family": "ill_scaled",
+      "host_pipeline_allowance_bytes": 21544870912,
+      "memory": {
+        "admits_domain": true,
+        "compact_bytes": 252001108,
+        "device_allowance_bytes": 2115108864,
+        "host_allowance_bytes": 5416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 5377048576,
+      "reasons": [
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831002,
+      "source_group": "general-scale-ill_scaled",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 1000000,
+      "family": "ill_scaled",
+      "host_pipeline_allowance_bytes": 21544870912,
+      "memory": {
+        "admits_domain": true,
+        "compact_bytes": 252001108,
+        "device_allowance_bytes": 2115108864,
+        "host_allowance_bytes": 5416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 5377048576,
+      "reasons": [
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831003,
+      "source_group": "general-scale-ill_scaled",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 1000000,
+      "family": "degenerate",
+      "host_pipeline_allowance_bytes": 21544870912,
+      "memory": {
+        "admits_domain": true,
+        "compact_bytes": 252001108,
+        "device_allowance_bytes": 2115108864,
+        "host_allowance_bytes": 5416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 5377048576,
+      "reasons": [
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831001,
+      "source_group": "general-scale-degenerate",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 1000000,
+      "family": "degenerate",
+      "host_pipeline_allowance_bytes": 21544870912,
+      "memory": {
+        "admits_domain": true,
+        "compact_bytes": 252001108,
+        "device_allowance_bytes": 2115108864,
+        "host_allowance_bytes": 5416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 5377048576,
+      "reasons": [
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831002,
+      "source_group": "general-scale-degenerate",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    },
+    {
+      "columns": 1000000,
+      "family": "degenerate",
+      "host_pipeline_allowance_bytes": 21544870912,
+      "memory": {
+        "admits_domain": true,
+        "compact_bytes": 252001108,
+        "device_allowance_bytes": 2115108864,
+        "host_allowance_bytes": 5416870912,
+        "note": "Allowance assumes sequential solver/checker processes. Tile padding and actual buffer accounting must independently fit before execution."
+      },
+      "nonzeros": 16000000,
+      "partition": "development",
+      "planned_lanes": [
+        "native",
+        "fp32",
+        "fp4x2",
+        "copt-cpu-auto",
+        "copt-gpu-tight"
+      ],
+      "raw_response_allowance_bytes": 5377048576,
+      "reasons": [
+        "complete solver/trajectory/audit host allowance",
+        "bounded response transport allowance"
+      ],
+      "rows": 1000000,
+      "seed": 831003,
+      "source_group": "general-scale-degenerate",
+      "status": "unsupported",
+      "target": 16000000,
+      "tolerance": 1e-09
+    }
+  ]
+}

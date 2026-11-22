@@ -1,0 +1,120 @@
+{
+  "scope": "Isolated exact preparation/control implementation. Original reduction order, spectral step, check settings, checkpoint semantics and CUDA bytes remain unchanged. A separately measured opt-in 500-update control configuration changes trajectories without changing strict certificate criteria.",
+  "base_commit": "efc1d6efe62dec9ae1a8b031ea9e0c4fca27f4ba",
+  "files": [
+    {
+      "path": "research/lp-general-lowbit/src/host.rs",
+      "previous_sha256": "9cdd49ba65afebbf396542733f56ca1b8ba828fe528780c6e7cb2b05228ffcdb"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu_tensor.rs",
+      "previous_sha256": "c994faeb7f37fd1575e60bda2699549cf91d3703f5cc76621546167aac1318f0"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor.rs",
+      "previous_sha256": "64f4b75a78fe0bc266e12843fd89644789cc23a72695ca12026e0ddcb24ad442"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/main.rs",
+      "previous_sha256": "ccf218c67f907f45ca3e5db03ed3127a11c04e7720ada8321e363a411c341d74"
+    },
+    {
+      "path": "crates/optimizer-lp/src/problem.rs",
+      "previous_sha256": "8a8bb9876fa5e8b751fab4663b84091bafbd8ec94ac650a98068260abf5ee58b"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/implied.rs",
+      "previous_sha256": "a59c82823e6d7efd1cb3bc3b169b8257f277771d4195d5442cfab8dc34cc4c49"
+    },
+    {
+      "path": "research/lp-general-lowbit/Cargo.toml",
+      "previous_sha256": "2177399f3f873ed231308de3f4efb06d1a088777da29738401f726daa022351e"
+    }
+  ],
+  "final_image": "scale-image-v14",
+  "public_constructor": "Every public source file remains exact. The indexed constructor is in src/host-lp/problem.rs, compiled only into the isolated research host crate.",
+  "rejected_indexed_image": "scale-image-v13: isolated arithmetic passed, native historical whole-file preservation failed; public sources restored exactly.",
+  "reused_host_modules": [
+    {
+      "path": "crates/optimizer-lp/src/backend.rs",
+      "sha256": "d5f1e986485ea6c44fafa2732f6e6cbf3dcdf128d182c61400c501164fc18873"
+    },
+    {
+      "path": "crates/optimizer-lp/src/certify.rs",
+      "sha256": "eb6e6db5f99ea51b08b68ff5f199f23d649a5622badc922a755b999a1ceda707"
+    },
+    {
+      "path": "crates/optimizer-lp/src/control.rs",
+      "sha256": "1108151e8fe3247a588cca7b62a1ea50d57b4510369436852050e3b485f19d01"
+    },
+    {
+      "path": "crates/optimizer-lp/src/outward.rs",
+      "sha256": "c75d14ffc5ba96a751f1443367962397f39bc62c50d77abf76d0890d5ee1bdba"
+    },
+    {
+      "path": "crates/optimizer-lp/src/pdhg.rs",
+      "sha256": "2fa78f60be5b24677db6e61d023f960b468ef645682e1b5bbeb46e485e2e230c"
+    },
+    {
+      "path": "crates/optimizer-lp/src/precondition.rs",
+      "sha256": "bf636c2ba5c7a04c7efc718d4d20beba1f23e73b0306de8f144d7291e97e8c0c"
+    },
+    {
+      "path": "crates/optimizer-lp/src/reduce.rs",
+      "sha256": "4c61189553dd5abe14c4439102eb46c600d6837e0e17fa981ccf92209e640e25"
+    },
+    {
+      "path": "crates/optimizer-lp/src/precision.rs",
+      "sha256": "aa4646589c712996047665ee6c9cf6c6342eaa23fc2acda2b8c4e8c959969417"
+    },
+    {
+      "path": "crates/optimizer-lp/src/research.rs",
+      "sha256": "8898c630c997353a6e43b64cc7f2609d5c813f89316cbe0f35aaee6c0f1c5c72"
+    },
+    {
+      "path": "crates/optimizer-lp/src/adaptive.rs",
+      "sha256": "a56df25fbc852f37eafde95456d302a70ae13fd0c6878d45716bb36d96bf4636"
+    },
+    {
+      "path": "crates/optimizer-lp/src/exec.rs",
+      "sha256": "36cfa54a90c396f78b62e73cb2f55728501859ac83218db1823c54ccbc37d0bd"
+    },
+    {
+      "path": "crates/optimizer-lp/src/refine.rs",
+      "sha256": "77e4871bcadc152dfbfb185d965b8bb40921555cfc636726fadf82751d31ba15"
+    },
+    {
+      "path": "crates/optimizer-lp/src/assess.rs",
+      "sha256": "fa657cdffb49208469c7c22342703258c8c87ad88d85b2870576d5190bdd5a28"
+    },
+    {
+      "path": "crates/optimizer-lp/src/quant.rs",
+      "sha256": "4604d9acffdcbcd522034f8b9df1243c768c633afeca57df6ce52e186f84feb1"
+    },
+    {
+      "path": "crates/optimizer-lp/src/quant_resident.rs",
+      "sha256": "859b1124457c2ac1a1d6dd6eee8e608afa583e8891e49cd83f3bcbcf684096de"
+    },
+    {
+      "path": "crates/optimizer-lp/src/tensor.rs",
+      "sha256": "45b22f7cf386721848574e97eca508aa32a04f5d047db6186e850ae06a09d679"
+    },
+    {
+      "path": "crates/optimizer-lp/src/tensor_residual.rs",
+      "sha256": "0ce9ec451fe5572b5f88cd31d48bc2067d7d7e804e05f891d589564eb94fe5f8"
+    },
+    {
+      "path": "crates/optimizer-lp/src/tensor_cost.rs",
+      "sha256": "47fa7f42afe77f7b2e70e5d78da1d6d1978abb05840191b9a853e8d0eee240a0"
+    },
+    {
+      "path": "crates/optimizer-lp/src/tensor_cost_prepare.rs",
+      "sha256": "afea7f7ff046c8d26f79b35a71a8ac983e168443eff3f60f7fa2a9efe42ab09a"
+    }
+  ],
+  "derivative": {
+    "path": "research/lp-general-lowbit/src/host-lp/problem.rs",
+    "original": "crates/optimizer-lp/src/problem.rs",
+    "change": "Feature-gated indexed constructor; all original source bytes otherwise preserved."
+  }
+}

@@ -1,0 +1,626 @@
+{
+  "admissions": [
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v12.settlement.json",
+      "sha256": "e3375ddb7c9f0a6a9dcac0bb5b6e38eefe7aa7da7442ad524f4c7ae75dc551ea"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v14.settlement.json",
+      "sha256": "e4700fe0c3b2be56ddafaeb560bd797e52635813145b82ede5102c19d0e09c03"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-admission-v1.settlement.json",
+      "sha256": "33b3a528f7ddd75ed6343b20e16863f3679eefe5b46068896eb505232faba705"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-gpu-v1.settlement.json",
+      "sha256": "17e1687a8f69008d7e02301af8d13a9aceb456fa5af37e19e81dc6c0b23bfecc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-memcheck-v1.settlement.json",
+      "sha256": "33411632161d52012a9e7881579feff8f8f20fe37f5261afd28db2fce9d4cff8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-racecheck-v1.settlement.json",
+      "sha256": "eaf89908766469465a326b0cc3cd39d999cdcbfca98b663778352343972ac6e8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-initcheck-v1.settlement.json",
+      "sha256": "9072a940a5064d731259680949334cc0809b2088c55e1175675ec3c224884d91"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-synccheck-v1.settlement.json",
+      "sha256": "61babf0578f36685a8a603097eac44bfb122db8e45010a126c2b04c716001f36"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-gpu-v1.settlement.json",
+      "sha256": "c28c188f8922c57cf9d935b5b782381c9b5043dbe34dba1ef644a905aaaa0000"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-memcheck-v1.settlement.json",
+      "sha256": "afc05634a315b562a74f6e7bf73ac923f3d5863809b66d2c72abde79d108bc21"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-racecheck-v1.settlement.json",
+      "sha256": "a9359c8db59bf002939c1dd22acdb639adc86334589998e72b2daf0d7458d553"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-initcheck-v1.settlement.json",
+      "sha256": "464b25c6e2c8f89fd3fecabd366908f301ff9fb3d028e0de13da4b8424fc0f8e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-synccheck-v1.settlement.json",
+      "sha256": "e35f0e407fc3fcd8856935a615818b170628d01aae166d1f2ef43a1dfe8ab6e4"
+    }
+  ],
+  "affected_python_tests_per_image": 17,
+  "allocation_open": true,
+  "archive_receipt": {
+    "path": "artifacts/gpup-general-v1/portable/prep-control-delivery-v2/receipt.json",
+    "sha256": "8107bfb7bbd02c541264da0f206485e5cb4f7772bb888fea6e56401453a2f5e1"
+  },
+  "base_commit": "efc1d6efe62dec9ae1a8b031ea9e0c4fca27f4ba",
+  "cleanup_empty": true,
+  "cpu_phase_caps": {
+    "admission": 48000,
+    "cleanup": 4000,
+    "confirmation": 0,
+    "development": 92000,
+    "implementation": 20000,
+    "native": 35000,
+    "reporting": 41000
+  },
+  "cpu_seconds": {
+    "admission": 44764.22479196,
+    "cleanup": 178.31588206,
+    "confirmation": 0.0,
+    "development": 87854.678468904,
+    "implementation": 19687.93538542,
+    "native": 33499.219811324,
+    "reporting": 36699.062047008
+  },
+  "device": {
+    "path": "artifacts/gpup-general-v1/scale-image-v14/tensor.cubin",
+    "sha256": "8a8da54f18676e98befdbf5703a8a776ddca36313a2f8a735545b0b6c1b3d1a8"
+  },
+  "documentation": {
+    "path": "artifacts/gpup-general-v1/resources/prep-control-docs-final-v1.settlement.json",
+    "sha256": "11af85022b0ad4e564f9590076648320c58caa9464b8a3f28491718992bfd8c0"
+  },
+  "documentation_pages": 293,
+  "failed_new_reservations": 4,
+  "failures": [
+    {
+      "cpu_ns": 2400000000000,
+      "gpu_ns": 0,
+      "receipt": {
+        "path": "artifacts/gpup-general-v1/resources/prep-control-archive-v1.settlement.json",
+        "sha256": "85b411190674da09e9c9402ade5672367f6babde66dc06d684905bcae195883b"
+      }
+    },
+    {
+      "cpu_ns": 2800000000000,
+      "gpu_ns": 0,
+      "receipt": {
+        "path": "artifacts/gpup-general-v1/resources/prep-control-native-v1.settlement.json",
+        "sha256": "36cdcdeba66eb649b15e39676b6bc6ea9c0065fbc6db759c0adad1599e8a732b"
+      }
+    },
+    {
+      "cpu_ns": 1800000000000,
+      "gpu_ns": 0,
+      "receipt": {
+        "path": "artifacts/gpup-general-v1/resources/scale-cpu-v10.settlement.json",
+        "sha256": "57e749092511ab4157cb8319a8db8885dfa39b1deb61eb43195435fbae315949"
+      }
+    },
+    {
+      "cpu_ns": 1200000000000,
+      "gpu_ns": 0,
+      "receipt": {
+        "path": "artifacts/gpup-general-v1/resources/scale-cpu-v11.settlement.json",
+        "sha256": "02923f75987953f075d153042146e8cbab3e4b95de6e8bc0bb6952eaef9a8196"
+      }
+    }
+  ],
+  "gpu_phase_caps": {
+    "admission": 8150,
+    "confirmation": 0,
+    "development": 21850,
+    "reporting": 0
+  },
+  "gpu_seconds": {
+    "admission": 7993.958952568,
+    "confirmation": 0.0,
+    "development": 21026.009722028,
+    "reporting": 0.0
+  },
+  "handoffs": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "189fffec3783857cd638c54e6ab42a16498395c60fec28a0133d58ea8eefeaa7"
+    },
+    {
+      "path": "state/active-task.md",
+      "sha256": "1be677adadb5e4e13c80f5de0efe8be4927c1287d78fefb933ebd452c134a1eb"
+    }
+  ],
+  "image": {
+    "path": "artifacts/gpup-general-v1/scale-image-v14/executor",
+    "sha256": "f18e091a8f3440642be5be0fa9d3fa212945306eb7dc18468f53213ac4ccfdbc"
+  },
+  "imports": {
+    "path": "artifacts/gpup-general-v1/sources/scale-cpu-v14/checker-imports/manifest.json",
+    "sha256": "e0df8ec2ff3d1c4bd5d2ffe88b5ad1766c594b5200a51eaf0b32cde446fe5821"
+  },
+  "isolated_rust_tests": {
+    "scale-image-v12": 39,
+    "scale-image-v14": 40
+  },
+  "native_gate": {
+    "path": "artifacts/gpup-general-v1/resources/prep-control-native-v2.settlement.json",
+    "sha256": "292d29f6eaa289398f3e1348cbafb48125b7ce4d118578d18a4d1449ab1fc48c"
+  },
+  "native_python_tests": 827,
+  "native_rust_tests": 638,
+  "new_reservations": 63,
+  "operational_readmissions": [
+    {
+      "path": "artifacts/gpup-general-v1/operational-readmission-v7.json",
+      "sha256": "db6cee24a4b12f30278470f21445ce11232917a67cd01e84db6f5d9abfedce62"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/operational-readmission-v8.json",
+      "sha256": "de6441e5c379db0e003a3df4d18026795b51e4aa360f674a717396a0b579ca6a"
+    }
+  ],
+  "portable": {
+    "path": "artifacts/gpup-general-v1/portable/prep-control-delivery-v2/replay.json",
+    "sha256": "f4fc9732d787c5a98a268447aebf0ce782447b29fce5e56907a44690c6a50b58"
+  },
+  "provenance": {
+    "path": "research/lp-general-lowbit/upstream/preparation-control-provenance.json",
+    "sha256": "2ed08a953316a88f99772f8d6413430e9161b998d1f5e7e867635ab213640b79"
+  },
+  "replay_summary": {
+    "admission_responses": 302,
+    "assessments": 3294,
+    "baseline_admission_responses": 0,
+    "cells": 150,
+    "claim": "Exact archived bytes and CPU original-model replay from extracted root. Raw-only checking does not repair missing historical supervision or cell receipts.",
+    "distinct_assessments": 846,
+    "missing": [],
+    "partial_responses": [],
+    "raw_only": 0,
+    "raw_stream_validation": {
+      "partial": [],
+      "raw_bytes": 4107248883,
+      "streams": 69
+    },
+    "status": "passed"
+  },
+  "report": {
+    "path": "docs/benchmarks/lp-general-prep-control.md",
+    "sha256": "282f26136b37799a04c5569393d85b9ffae87634a2a43db18f926fd1c2f01ea9"
+  },
+  "results": [
+    {
+      "path": "docs/benchmarks/lp-general-prep-control-control-results.json",
+      "sha256": "35575448f78473f9e5e541e5913e2a164f8848e7404f8f4ce4efc3ee6eeba7a3"
+    },
+    {
+      "path": "docs/benchmarks/lp-general-prep-control-indexed-large-results.json",
+      "sha256": "5b11bd2882bd78db43fd7d7f29b6c7cddef252855548e34924f2bc324801d144"
+    },
+    {
+      "path": "docs/benchmarks/lp-general-prep-control-indexed-results.json",
+      "sha256": "0cdf8ea417e51e85b20e70975d1c05cae80d0a55de3b32fab35d36aefa98f65a"
+    },
+    {
+      "path": "docs/benchmarks/lp-general-prep-control-large-control-results.json",
+      "sha256": "870fd65fecfcb4a9a947cdab49682de59b0bb0cbeb64875b1337d262baf9a0a2"
+    },
+    {
+      "path": "docs/benchmarks/lp-general-prep-control-large-results.json",
+      "sha256": "3d309e1bcd542430d8b8cb1c1687e4654451cfb2e268e9e18aaadc22e92d3bfa"
+    },
+    {
+      "path": "docs/benchmarks/lp-general-prep-control-results.json",
+      "sha256": "befd86519c604d6082fe28395f8390b720272cd338e890394b421e4b59a2c8d3"
+    }
+  ],
+  "scope": "Final source, numerical, resource, documentation and portable delivery validation. The scientific allocation remains open.",
+  "settled_allocation": {
+    "path": "artifacts/gpup-general-v1/prep-control-settled-v1.json",
+    "sha256": "a90aeac439a7d81dda5f39081f115197c8d304164284c045278b7727b0ecc764"
+  },
+  "settlements": [
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-archive-v1.settlement.json",
+      "sha256": "85b411190674da09e9c9402ade5672367f6babde66dc06d684905bcae195883b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-archive-v2.settlement.json",
+      "sha256": "0cfd1b7902202f907b36aea32481397ea5e5a6763fcec334c95a99cc4cb8b400"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-admission-v1.settlement.json",
+      "sha256": "33b3a528f7ddd75ed6343b20e16863f3679eefe5b46068896eb505232faba705"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-freeze-v1.settlement.json",
+      "sha256": "af70560e91a5b7b3579fc5392337937d8b152e6080cd43e0e905b7f8fb63515b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-report-v1.settlement.json",
+      "sha256": "18d17be4bb5557d92f2abd21b3173795c776262ebaf151633a93d5ab64594d21"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-v1-m00.settlement.json",
+      "sha256": "a6ae2421f282ca39cb817745f8f09ca8505f75512052fa1d06506486873b316b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-v1-m01.settlement.json",
+      "sha256": "f3a90bdb0bfef4f5aace22b838a6ce9836e506218705babb445d5fb3d045484d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-v1-m02.settlement.json",
+      "sha256": "091c57170de53fc060a0897cb00f5fdad5403114155d9e010d5e1f822d6d3fb1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-v1-m03.settlement.json",
+      "sha256": "2f7413841c3a0a06a1a4e86f787e89b7dfb88a2b14874d6f1dd067dc6c496222"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-v1-m04.settlement.json",
+      "sha256": "10a2a5fe8ed815c8615cda781bb1d11c8592def2d3e5edb327b739e741da8ea0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-v1-m05.settlement.json",
+      "sha256": "2c3253358bd3c05571ed818bb1700629c8257a240740435782e02d5181e4941b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-v1-m06.settlement.json",
+      "sha256": "643d3feca83c827b37bcd7fcd0b7971da61ba3165c09ab1d627387dc941a0fdd"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-cadence-v1-m07.settlement.json",
+      "sha256": "3eaad9a1fa23181d04479f0b4cf5f8cdf5d6207c6a064d0ae92204d65ac5a934"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-docs-final-v1.settlement.json",
+      "sha256": "11af85022b0ad4e564f9590076648320c58caa9464b8a3f28491718992bfd8c0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-freeze-v1.settlement.json",
+      "sha256": "25f256ca203de730a0e1cdfb056b1d1702668a5eb587b1f06e69b36099e7d4c8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-gpu-v1.settlement.json",
+      "sha256": "17e1687a8f69008d7e02301af8d13a9aceb456fa5af37e19e81dc6c0b23bfecc"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-freeze-v1.settlement.json",
+      "sha256": "033bb0f36a42ee48317bd78c915f3443c567e38074077c6466fe22770e8ec92d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-gpu-v1.settlement.json",
+      "sha256": "c28c188f8922c57cf9d935b5b782381c9b5043dbe34dba1ef644a905aaaa0000"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-initcheck-v1.settlement.json",
+      "sha256": "464b25c6e2c8f89fd3fecabd366908f301ff9fb3d028e0de13da4b8424fc0f8e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-large-freeze-v1.settlement.json",
+      "sha256": "cfe07cafda2457c4bfa1ca9317bc5853f53d81ae8e4770e75f7d9072cb383bb5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-large-report-v1.settlement.json",
+      "sha256": "9f4b3ea348b986750d30a3bffc1ea3d5a9bc6a30603282f41e5cd229be9f1a9f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-large-v1-m00.settlement.json",
+      "sha256": "d586245edeac4a226fae3a1528ce8fe082d95cb0e18d2a08f2cdb6a7dfc6f6f3"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-large-v1-m01.settlement.json",
+      "sha256": "8454f5eadd5b33552655f6a880c5f9a39cf24dfbca7cde35d9c933b366999cb5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-memcheck-v1.settlement.json",
+      "sha256": "afc05634a315b562a74f6e7bf73ac923f3d5863809b66d2c72abde79d108bc21"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-racecheck-v1.settlement.json",
+      "sha256": "a9359c8db59bf002939c1dd22acdb639adc86334589998e72b2daf0d7458d553"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-report-v1.settlement.json",
+      "sha256": "ed0f457ae0c9164e93bcab0b332bb60c911e2f738664f9dac6a7b62ea87ab48e"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-synccheck-v1.settlement.json",
+      "sha256": "e35f0e407fc3fcd8856935a615818b170628d01aae166d1f2ef43a1dfe8ab6e4"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-v1-m00.settlement.json",
+      "sha256": "629eddf082adac6be302c5cdf4c95dd5b46c7372c7e395b62e72af280fbf5903"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-v1-m01.settlement.json",
+      "sha256": "8d6cd876bb2ac7396cf77ddf9df30408500b71faba8fe0c2ca52cc4ae706c44f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-v1-m02.settlement.json",
+      "sha256": "3b1d85d9f6ea7541031732f97c0c77b86c6600d7883cd4c3241a13d93aacff0b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-v1-m03.settlement.json",
+      "sha256": "e684157500a1e11143c64bb254cb2b2da22f74e3951f12fe652fd7c7ba44eb65"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-v1-m04.settlement.json",
+      "sha256": "508803722cd2bded303077f5dfc4eeda03cbf035e20b5307a14243f11f69a948"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-v1-m05.settlement.json",
+      "sha256": "f836db7fb0fa4ffe7c5b16d60700ff01eafcf73f5b7aa837b499b28faf552c8b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-v1-m06.settlement.json",
+      "sha256": "0248ad6b5d0f9e4820dcacaeae1aa4e422c743281fa21dde3ad49cc05c9e6a64"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-indexed-v1-m07.settlement.json",
+      "sha256": "b5d063f03073b49759fb57ff33a9f54e2b339ac658263b93e56bca2bcf35d880"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-initcheck-v1.settlement.json",
+      "sha256": "9072a940a5064d731259680949334cc0809b2088c55e1175675ec3c224884d91"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-large-freeze-v1.settlement.json",
+      "sha256": "55023fd13ec67d405e893d1646040606e28f33b196395b1310b4c528588f638a"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-large-report-v1.settlement.json",
+      "sha256": "6804c91ff57090278eeb66e0c148d3ea87f1dadc78c4a10d111e24845f673e10"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-large-v1-m00.settlement.json",
+      "sha256": "c04e79a0c501ab5a5c215cd09fc93f07835c77cea579d07bf3da5875dbef7a91"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-large-v1-m01.settlement.json",
+      "sha256": "ca35c67255bc9f98b9a507517619bafaa31f0eb129d97ab720f4d4f2379ccdb0"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-memcheck-v1.settlement.json",
+      "sha256": "33411632161d52012a9e7881579feff8f8f20fe37f5261afd28db2fce9d4cff8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-native-v1.settlement.json",
+      "sha256": "36cdcdeba66eb649b15e39676b6bc6ea9c0065fbc6db759c0adad1599e8a732b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-native-v2.settlement.json",
+      "sha256": "292d29f6eaa289398f3e1348cbafb48125b7ce4d118578d18a4d1449ab1fc48c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-operational-v1.settlement.json",
+      "sha256": "37f64cdda142b305af9cada7e9754bf7e72f1ba66b5a05897dd875f706324f81"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-operational-v2.settlement.json",
+      "sha256": "c455d29ca72fb4d8de93258d50b73fbfad695cdda996d0301ce0fc3c0b701fdf"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-racecheck-v1.settlement.json",
+      "sha256": "eaf89908766469465a326b0cc3cd39d999cdcbfca98b663778352343972ac6e8"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-replay-v1.settlement.json",
+      "sha256": "0251f3105c30e695cb98abaa5098e2e990f31119aa7c16f65d6091162cae538c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-report-v1.settlement.json",
+      "sha256": "9d04c31d1b90b44130cf5420b2b55ae88745ee6814742bdc7621c22863cd91a1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-solve-v1-m00.settlement.json",
+      "sha256": "25a5e71e319b3ebb342f6a4d5a0ae4e2b3dd2d9372431258433d2c3d4a3adc01"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-solve-v1-m01.settlement.json",
+      "sha256": "77b6835a37035dc17490e265ae88d36799ac379b0b55bd62bc24418e73ecfb6f"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-solve-v1-m02.settlement.json",
+      "sha256": "f80ff9c5e087ec038e0c3c9d3382726288eaa0837dd7d875eaf5371840b3887b"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-solve-v1-m03.settlement.json",
+      "sha256": "7d8f6dcfb0706394c73d0871f2fdf51c3444ca326050bae90b5b5be03f98a8c1"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-solve-v1-m04.settlement.json",
+      "sha256": "fefb56975fd067ca1a9f21bfecc45255f4ae7caf4b688d409e569389f7d46645"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-solve-v1-m05.settlement.json",
+      "sha256": "809c839ded542535bbdd0b6088c370c3830f34fb24cbc7b4c95aed016dbc376c"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-solve-v1-m06.settlement.json",
+      "sha256": "0a983ab081d889bcdd2c335bde9942a9dc6d2214daaab7ec4bde12fc77992d35"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-solve-v1-m07.settlement.json",
+      "sha256": "bfe6533d23fadd3a58dd2e4c22297eb09ef326718ee6c7ae2f9b3345a2a822d5"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-synccheck-v1.settlement.json",
+      "sha256": "61babf0578f36685a8a603097eac44bfb122db8e45010a126c2b04c716001f36"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/prep-control-validation-v1.settlement.json",
+      "sha256": "8de04d5c8d5fcd8794db1998cb64bedea3ed400253f1ded148b04ead2843488d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v10.settlement.json",
+      "sha256": "57e749092511ab4157cb8319a8db8885dfa39b1deb61eb43195435fbae315949"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v11.settlement.json",
+      "sha256": "02923f75987953f075d153042146e8cbab3e4b95de6e8bc0bb6952eaef9a8196"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v12.settlement.json",
+      "sha256": "e3375ddb7c9f0a6a9dcac0bb5b6e38eefe7aa7da7442ad524f4c7ae75dc551ea"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v13.settlement.json",
+      "sha256": "938101e7f402b0eed39d4b5f48187b05852be5371e23c81c40f0a92ebf47092d"
+    },
+    {
+      "path": "artifacts/gpup-general-v1/resources/scale-cpu-v14.settlement.json",
+      "sha256": "e4700fe0c3b2be56ddafaeb560bd797e52635813145b82ede5102c19d0e09c03"
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "research/lp-general-lowbit/Cargo.lock",
+      "sha256": "41ef03c8ec4826cee69971f87d7c142d4f6a658d90caa846a7e5297f56312a75"
+    },
+    {
+      "path": "research/lp-general-lowbit/Cargo.toml",
+      "sha256": "8692116f9559c7767a5a80c22e0a72c53fbb34478c02147722f2a068e86bfafa"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/assessment.rs",
+      "sha256": "95a59ff22b9170c96e6ab0446e4d6df9ef26b8ca480bb1d9c34950434ffae5bd"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/control.rs",
+      "sha256": "56f85fec437aaed757f8c3ff1a3530e3df396c8330b9097be53050ff415d71a1"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/device.rs",
+      "sha256": "33d06a60cb1c25c40baddb3f2048d2ea8bdc518a5446474a1eb9feaa3d0374d9"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/engine.rs",
+      "sha256": "49b3ec2d8d57c5b10600b7175b6e2610530c9b0e34a9152b1694e2407dbb179e"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/exact_math.rs",
+      "sha256": "1be732720c414c25f530ca5156cdd7870cf7f7d7c191d9697840d6c8228128fa"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/fast_device.rs",
+      "sha256": "a9257af4616c90f1aad47e7770416f3d2d8f8c7682ae23c6b07904a4a8b075ff"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu.rs",
+      "sha256": "eab5ebf4e93fa0be23680bb50ceb0f74857d1a43cf4b7a3bddf7a84c2c997ef9"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu_tensor.rs",
+      "sha256": "e3a96cc2d071dfea62ab499a11c15871cad6f29602888678635709ddeec8cda4"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/host-lp/lib.rs",
+      "sha256": "c36c4fe6e304c03056bbddee58634b90d886f7426cb8b85974590fa55d064b39"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/host-lp/problem.rs",
+      "sha256": "5d1a7c8db4c631c6e99e23771d9c9054886ab964d16e85d7eff08f9c8f8c1566"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/host.rs",
+      "sha256": "09e8d2b64c1fa296031312ba46608297ce947ad05223b38c324f19ad4486e1dd"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/implied.rs",
+      "sha256": "60d3bfdde946ada00b52ac57fde5c24ea29c5d89c1d787740c22cc68d28864fe"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/input.rs",
+      "sha256": "42b1ef4213c5d861ea8ad02dd1c14cbe2f4d0096beadb19a3ac257dd4f36a093"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/lib.rs",
+      "sha256": "448a133838fd35f0f3e6337750e09f0f5ad7acb5bf8d57c11b06441bed302fa4"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/main.rs",
+      "sha256": "42cdc127f1574ad66c7be0266579d501aacf74b739c2a98fb838e899648d918a"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/merit.rs",
+      "sha256": "a02a0c64accca9ddc9d7fb630d547c024e11de6787c18c1a9245f1fedcba1e77"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/operator.rs",
+      "sha256": "b748fcc10347891fc5bd1048258c80114e44718e72fff53ed9cd92e076d75b70"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/prepared_feasibility.rs",
+      "sha256": "a638cba747379c00672083f6944fa1935aca1ec83e7396c1ad09927c22e7828a"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/repair.rs",
+      "sha256": "a25e610d1d18b4a3a79ab0d93acda526632cd0ce713fc03fa2437b338acbefb2"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/solve.rs",
+      "sha256": "802521331146497a9c3e25716a622c00b3ebab3e0de6970979276855c2db1c34"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor.rs",
+      "sha256": "948e62e3a2ab0c6f6db1ee10c3a69b378a926c525d765b3d5ea86c95732bb241"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor_device.rs",
+      "sha256": "902ad772c6c555fc7b660fed735467725555605b90af668beb35afe82265e8f3"
+    },
+    {
+      "path": "research/lp-general-lowbit/tests/contracts.rs",
+      "sha256": "7594f1778daf263204d837a8a846f30ef07ea7c61e09210865aced60d728aa0c"
+    }
+  ],
+  "status": "passed",
+  "tools": [
+    {
+      "path": "tools/lp_general_prep_control.py",
+      "sha256": "4a7ba9be6014f8595232b8156ac2ec6898ca5ed65eaafaa7d27cc57d7ee02cfd"
+    },
+    {
+      "path": "tools/lp_general_prep_control_archive.py",
+      "sha256": "40b1e664da1158b86cca54750b668c25caffcb4838e0a2850db6585c8d85c3fe"
+    },
+    {
+      "path": "tools/lp_general_prep_control_validate.py",
+      "sha256": "df66fc7ece82ad2afdec605e56e4d6b54def75133d2c2b9ec23d998a7bf3eed2"
+    },
+    {
+      "path": "tools/lp_general_common.py",
+      "sha256": "d10803112e22cab66c9d45e6169f598fc4a9be1521a0b23287e274b9117ba74e"
+    },
+    {
+      "path": "tools/lp_general_scale_imports.py",
+      "sha256": "09bf0d580bccf05604aacd562095e07113e93063304a6e55873bbbf9eb52c731"
+    }
+  ],
+  "total_cpu_seconds": 222683.436386676,
+  "total_gpu_seconds": 29019.968674596,
+  "validation": {
+    "path": "artifacts/gpup-general-v1/prep-control-validation-v1/result.json",
+    "sha256": "7e8412edc9d1e57054f1f6d8122586bcebebda19de1beac229b01226fdc677f9"
+  },
+  "validation_settlement": {
+    "path": "artifacts/gpup-general-v1/resources/prep-control-validation-v1.settlement.json",
+    "sha256": "8de04d5c8d5fcd8794db1998cb64bedea3ed400253f1ded148b04ead2843488d"
+  }
+}

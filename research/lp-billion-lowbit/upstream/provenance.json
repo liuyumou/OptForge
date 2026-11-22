@@ -1,0 +1,108 @@
+{
+  "parent_commit": "53d7879c128d886cbac260c5c9238a9cdb9a0703",
+  "parent_image": "scale-image-v14",
+  "device_image": "fast-image-v10",
+  "scope": "Isolated billion-scale derivative; original public and research sources remain unchanged.",
+  "source_files": [
+    {
+      "path": "research/lp-general-lowbit/Cargo.lock",
+      "sha256": "41ef03c8ec4826cee69971f87d7c142d4f6a658d90caa846a7e5297f56312a75"
+    },
+    {
+      "path": "research/lp-general-lowbit/Cargo.toml",
+      "sha256": "8692116f9559c7767a5a80c22e0a72c53fbb34478c02147722f2a068e86bfafa"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/device.rs",
+      "sha256": "33d06a60cb1c25c40baddb3f2048d2ea8bdc518a5446474a1eb9feaa3d0374d9"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/implied.rs",
+      "sha256": "60d3bfdde946ada00b52ac57fde5c24ea29c5d89c1d787740c22cc68d28864fe"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu_tensor.rs",
+      "sha256": "e3a96cc2d071dfea62ab499a11c15871cad6f29602888678635709ddeec8cda4"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/solve.rs",
+      "sha256": "802521331146497a9c3e25716a622c00b3ebab3e0de6970979276855c2db1c34"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/exact_math.rs",
+      "sha256": "1be732720c414c25f530ca5156cdd7870cf7f7d7c191d9697840d6c8228128fa"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor_device.rs",
+      "sha256": "902ad772c6c555fc7b660fed735467725555605b90af668beb35afe82265e8f3"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/tensor.rs",
+      "sha256": "948e62e3a2ab0c6f6db1ee10c3a69b378a926c525d765b3d5ea86c95732bb241"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/engine.rs",
+      "sha256": "49b3ec2d8d57c5b10600b7175b6e2610530c9b0e34a9152b1694e2407dbb179e"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/main.rs",
+      "sha256": "42cdc127f1574ad66c7be0266579d501aacf74b739c2a98fb838e899648d918a"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/lib.rs",
+      "sha256": "448a133838fd35f0f3e6337750e09f0f5ad7acb5bf8d57c11b06441bed302fa4"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/repair.rs",
+      "sha256": "a25e610d1d18b4a3a79ab0d93acda526632cd0ce713fc03fa2437b338acbefb2"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/merit.rs",
+      "sha256": "a02a0c64accca9ddc9d7fb630d547c024e11de6787c18c1a9245f1fedcba1e77"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/host.rs",
+      "sha256": "09e8d2b64c1fa296031312ba46608297ce947ad05223b38c324f19ad4486e1dd"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/gpu.rs",
+      "sha256": "eab5ebf4e93fa0be23680bb50ceb0f74857d1a43cf4b7a3bddf7a84c2c997ef9"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/prepared_feasibility.rs",
+      "sha256": "a638cba747379c00672083f6944fa1935aca1ec83e7396c1ad09927c22e7828a"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/assessment.rs",
+      "sha256": "95a59ff22b9170c96e6ab0446e4d6df9ef26b8ca480bb1d9c34950434ffae5bd"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/fast_device.rs",
+      "sha256": "a9257af4616c90f1aad47e7770416f3d2d8f8c7682ae23c6b07904a4a8b075ff"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/operator.rs",
+      "sha256": "b748fcc10347891fc5bd1048258c80114e44718e72fff53ed9cd92e076d75b70"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/control.rs",
+      "sha256": "56f85fec437aaed757f8c3ff1a3530e3df396c8330b9097be53050ff415d71a1"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/input.rs",
+      "sha256": "42b1ef4213c5d861ea8ad02dd1c14cbe2f4d0096beadb19a3ac257dd4f36a093"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/host-lp/lib.rs",
+      "sha256": "c36c4fe6e304c03056bbddee58634b90d886f7426cb8b85974590fa55d064b39"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/host-lp/problem.rs",
+      "sha256": "5d1a7c8db4c631c6e99e23771d9c9054886ab964d16e85d7eff08f9c8f8c1566"
+    },
+    {
+      "path": "research/lp-general-lowbit/src/host-lp/Cargo.toml",
+      "sha256": "231c2c801c16da6b9ffc7a7a56d0db0619bcee3d8a7ed9e4625d3f3d98eae4d4"
+    }
+  ]
+}
