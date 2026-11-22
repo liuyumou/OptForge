@@ -4,7 +4,12 @@ from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'tools'))
 import lp_billion_common as c
+from lp_billion_test_support import native_inventory_fixture
 class DiskInventoryContracts(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.enterClassContext(native_inventory_fixture())
+
     def test_exact_nested_files_hardlinks_symlinks_and_fifo(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);(root/'empty').mkdir();(root/'nested').mkdir()

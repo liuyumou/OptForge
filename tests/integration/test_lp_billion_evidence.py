@@ -13,6 +13,7 @@ from lp_billion_campaign import endpoint_bytes
 import lp_billion_campaign as campaign
 import lp_billion_common as common
 import lp_billion_budget as budget
+from lp_billion_test_support import native_inventory_fixture
 
 
 class BillionEvidenceContracts(unittest.TestCase):
@@ -77,7 +78,7 @@ class BillionEvidenceContracts(unittest.TestCase):
     def test_freeze_binds_all_lanes_and_complete_endpoint_allowance(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)
-            with mock.patch.object(common,'BASE',root), mock.patch.object(campaign,'BASE',root), mock.patch.object(budget,'BASE',root):
+            with native_inventory_fixture(), mock.patch.object(common,'BASE',root), mock.patch.object(campaign,'BASE',root), mock.patch.object(budget,'BASE',root):
                 common.put(root/'resources/array-memcheck-v3.settlement.json',
                            dict(status='refused',cleanup_empty=True,overrun=False))
                 common.put(root/'resources/array-racecheck-v3.settlement.json',

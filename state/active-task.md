@@ -1,4 +1,25 @@
-# Current agent handoff: GPU assessment/control measured (2026-11-22)
+# PR #29: reviewed and locally accepted
+
+Integrate the fifteen feature commits through 334bb20 over main 1e15895, preserving
+ancestry with a normal merge. The user explicitly authorizes push, PR and merge.
+Native acceptance, final 963 Python tests, 218 isolated Rust tests and the 136-test
+source-only harness pass. All numerical and operational bindings remain exact.
+Two portability issues are fixed: undeclared SciPy and private inventory fixtures.
+Git attributes preserve all source-bound phase CSV bytes. No GPU work or monitor.
+
+Final documentation verification passes 388 pages. Commit and push review fixes,
+inspect checks on that exact head, and normally merge PR #29 without bypassing
+protection. The documented local CPU/docs/smoke fallback applies to zero-job
+hosted startup_failure. Preserve all scientific results, failures and charges.
+
+CPU review reservations stay within 32000 reporting seconds of the existing
+570000 CPU / 68000 GPU allocation, four slots and 16 GiB sampled host memory.
+The original scientific checkpoint remains unchanged; the compact integration
+receipt records new charges, including every failed validation. Remove only the
+PR-specific temporary build and dependency trees after checks. Final hosted-head
+and merge receipts stay local. See [review](../docs/benchmarks/lp-billion-pr.md).
+
+# Historical handoff: GPU assessment/control measured (2026-11-22)
 
 Opt-in image-v11 offloads exact-tree residuals, restart movement norms and original
 primal feasibility. Original CPU dual/gap proofs remain exact, and every accepting

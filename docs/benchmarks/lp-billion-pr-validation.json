@@ -1,0 +1,404 @@
+{
+  "base_head": "1e15895516129068d6bfc61d6e5194048ec7c338",
+  "failed_cpu_ns": 19200000000000,
+  "final_documentation": {
+    "bytes": 364,
+    "namespace": "evidence",
+    "path": "resources/billion-pr-final-docs-v1.settlement.json",
+    "sha256": "50373ac9b02c72297f1596e4ca0e0718e4f60600d668cad9b9c7289671e5b709"
+  },
+  "final_test_fixture_refresh": {
+    "identity": "billion-pr-final-python-v1",
+    "python_tests": 963
+  },
+  "hosted": {
+    "conclusion": "startup_failure",
+    "initial_run": "https://github.com/liuyumou/OptForge/actions/runs/45029602086",
+    "jobs": 0,
+    "local_acceptance_is_not_hosted_success": true,
+    "normal_merge_without_protection_bypass": true
+  },
+  "integration_cpu_ceiling_seconds": 32000,
+  "integration_cpu_ns": 22432270309424,
+  "integration_gpu_ns": 0,
+  "integration_status": "closed_local_acceptance",
+  "isolated": {
+    "clippy": true,
+    "device_free_copy_boundary": true,
+    "format": true,
+    "identity": "billion-pr-isolated-v3",
+    "rust_tests": 218
+  },
+  "native_gate": {
+    "buffered_adapter_rust_tests": 1,
+    "committed_record_replay": true,
+    "documentation_pages": 388,
+    "identity": "billion-pr-native-v2",
+    "python_tests": 963,
+    "smoke": true,
+    "workspace_rust_tests": 637
+  },
+  "original_feature_head": "334bb2095bec19b6b4405c9332e9f58a2181ef7c",
+  "preservation": {
+    "base_head": "1e15895516129068d6bfc61d6e5194048ec7c338",
+    "comparison_references_verified": 637,
+    "feature_head": "334bb2095bec19b6b4405c9332e9f58a2181ef7c",
+    "historical_handoff_text_preserved": true,
+    "image_files_verified": 6,
+    "new_gpu_work": false,
+    "numerical_bindings_verified": 306,
+    "original_checkpoint": {
+      "bytes": 107518,
+      "namespace": "evidence",
+      "path": "copt-fair-settled-checkpoint-v1.json",
+      "sha256": "052e0c36acdbe12c1212c27e9483ee7f5d770dd011d5498fef55de791f4fb043"
+    },
+    "original_tracked_files": 2759,
+    "prior_failures_verified": 63,
+    "public_defaults_and_workflows_unchanged": true,
+    "resource_sources_verified": 8,
+    "review_changes": [
+      ".gitattributes",
+      "AGENTS.md",
+      "CHANGELOG.md",
+      "state/active-task.md",
+      "tests/integration/test_lp_billion_disk_inventory.py",
+      "tests/integration/test_lp_billion_evidence.py",
+      "tests/integration/test_lp_billion_resources.py",
+      "tools/baseline-test-requirements.txt",
+      "wiki/status.md"
+    ],
+    "script": {
+      "bytes": 3810,
+      "namespace": "evidence",
+      "path": "pr-integration-v1/preserve-v2.py",
+      "sha256": "37dae83f81b9c6fe832ca28e416f38d54420ea4b5b799e22b3da92150f0eea5b"
+    },
+    "status": "passed",
+    "unchanged_original_files": 2750
+  },
+  "pull_request": "https://github.com/liuyumou/OptForge/pull/29",
+  "review_fix_bindings": [
+    {
+      "bytes": 300,
+      "namespace": "repo",
+      "path": ".gitattributes",
+      "sha256": "2fa89dbf6040ef9cd1ebce514896a59ca5895457452b88eb4898d87c437637c3"
+    },
+    {
+      "bytes": 126,
+      "namespace": "repo",
+      "path": "tools/baseline-test-requirements.txt",
+      "sha256": "8094266c4de57f87fc0395b55f036ef942882420a2edc83227a39f59917f02b6"
+    },
+    {
+      "bytes": 1228,
+      "namespace": "repo",
+      "path": "tests/integration/lp_billion_test_support.py",
+      "sha256": "d331cf5fbf13d68b5c2428dbd7e770df9ff2e63296195b8e9c0a874d747d9bbe"
+    },
+    {
+      "bytes": 2261,
+      "namespace": "repo",
+      "path": "tests/integration/test_lp_billion_disk_inventory.py",
+      "sha256": "df0dc30f6a8a4ae5fe36169874fb52dcde15811573feb48d3abd59e749490125"
+    },
+    {
+      "bytes": 11151,
+      "namespace": "repo",
+      "path": "tests/integration/test_lp_billion_resources.py",
+      "sha256": "bda7d910af36bed7691a18ed8c94d73ca2d38e24decf4b4d98bb87e9e32f5a55"
+    },
+    {
+      "bytes": 9149,
+      "namespace": "repo",
+      "path": "tests/integration/test_lp_billion_evidence.py",
+      "sha256": "262d317466bbc5dfb6a557b66b836f2707e58fa685bf9fb4340369e6b936954a"
+    }
+  ],
+  "schema_version": 1,
+  "settled_global_cpu_ns": 482092054482876,
+  "settled_global_gpu_ns": 55943714704332,
+  "settlements": [
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 105890462316,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-dependencies-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 10170,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-dependencies-v1.resource.json",
+        "sha256": "dd88cccbd6bb8db19d8e7668a45d1d0eb504746f59aa1862a8770c3f447823d9"
+      },
+      "settlement": {
+        "bytes": 368,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-dependencies-v1.settlement.json",
+        "sha256": "f36bd3412729d2480033c7b8dc3a52bf62aa080c4e287cd06835e1f1595ec6d3"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 61853118068,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-final-docs-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 6973,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-final-docs-v1.resource.json",
+        "sha256": "1beb5ae63648f433870be9a5fa505abd5b6b7ea2511265b3246b78e12b32de0d"
+      },
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-final-docs-v1.settlement.json",
+        "sha256": "50373ac9b02c72297f1596e4ca0e0718e4f60600d668cad9b9c7289671e5b709"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 820296157916,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-final-python-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 100214,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-final-python-v1.resource.json",
+        "sha256": "2da29ea35c0c9f0d05388f2377165544a7e9b5cffc8509f4eb000c20a2b3207f"
+      },
+      "settlement": {
+        "bytes": 369,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-final-python-v1.settlement.json",
+        "sha256": "e6af9ba374fd597eeb0f6b96e320409494e06dec25aa608bbde4e70f92f939b1"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 3600000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-isolated-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 5417,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-isolated-v1.resource.json",
+        "sha256": "1eb4b2627cb2e429299bcc76731dd5c16857f5d507351a950c0627a65de7e1bb"
+      },
+      "settlement": {
+        "bytes": 365,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-isolated-v1.settlement.json",
+        "sha256": "eae1dc9f9bcb4631fc3c625ed17d17e57832caca367c223c5fac9682250c219b"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 3600000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-isolated-v2",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 58568,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-isolated-v2.resource.json",
+        "sha256": "38c73a92e1a07803263129307f2ef3b55b0239cd764c0a1b9b9f6b4e809a9895"
+      },
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-isolated-v2.settlement.json",
+        "sha256": "8ced8c024c002ec0be202bf75c16e0c162a8d8920df16a91558e220b277ed72a"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 449331781904,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-isolated-v3",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 35962,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-isolated-v3.resource.json",
+        "sha256": "1055e5c4c61b05162b72230feefb28b76c272cf2b9fc93febe57363d206ab4bd"
+      },
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-isolated-v3.settlement.json",
+        "sha256": "d820d71e61023a75840caabec688e5427fd1e7fdf29eb402649076bd8562c4c5"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 7200000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-native-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 346543,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-native-v1.resource.json",
+        "sha256": "637694adcbb9d399d276762b959097ab78777f77d305a27fb5341071427084f9"
+      },
+      "settlement": {
+        "bytes": 365,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-native-v1.settlement.json",
+        "sha256": "a32b6a05e021ec27882f0369431d010514ac99fa567104f583c913738186394c"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1677967380400,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-native-v2",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 228240,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-native-v2.resource.json",
+        "sha256": "a54fcca9ce0c533005fe557b911cd61d489dce5cbd65fe18d40b8cebcde4159d"
+      },
+      "settlement": {
+        "bytes": 364,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-native-v2.settlement.json",
+        "sha256": "9f134b30f66ceb76a4990b5e902c718160f8cf05da28a149c9caa4bf0199245b"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 2400000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-portable-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 10412,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-portable-v1.resource.json",
+        "sha256": "30b33ad1ed1f31fb5899f8f792357c0c3381936f8763df7d7a2a1a4654075d55"
+      },
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-portable-v1.settlement.json",
+        "sha256": "4d491c8fbe84f55cc6478a20d463b684be62a201fb3afd7a8842e7b2ea78b889"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 2400000000000,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-portable-v2",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 12568,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-portable-v2.resource.json",
+        "sha256": "e8719eadd2fcc44c50a7ee052014ede14b57aa54fff08c269b0fbbd4b6da18c8"
+      },
+      "settlement": {
+        "bytes": 366,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-portable-v2.settlement.json",
+        "sha256": "b47649c2f68e9b4784897c212f4580e91dfdf8ceb8822bbc7398417c22d3fd0e"
+      },
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 73997968400,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-portable-v3",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 12559,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-portable-v3.resource.json",
+        "sha256": "6a0beb9399ab806630233b0e0baaa1839f088fddfe626c50cf1cb62fc4a4bc2b"
+      },
+      "settlement": {
+        "bytes": 363,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-portable-v3.settlement.json",
+        "sha256": "7bb64dd7fa04b0d4951f3d2e5e023af6da25d1691dcb7d3df55d56281bc5f276"
+      },
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 42933440420,
+      "gpu": false,
+      "gpu_ns": 0,
+      "id": "billion-pr-temporary-cleanup-v1",
+      "overrun": false,
+      "phase": "reporting",
+      "resource": {
+        "bytes": 5915,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-temporary-cleanup-v1.resource.json",
+        "sha256": "3fe67f5f6abb1c7508a05ba994d199202d5297377e1845cf2759d93ba3ae5cb7"
+      },
+      "settlement": {
+        "bytes": 371,
+        "namespace": "evidence",
+        "path": "resources/billion-pr-temporary-cleanup-v1.settlement.json",
+        "sha256": "b7abe38c0a8af24e9371531c6c891c6b69c62445ae549961b58d0a438d321a84"
+      },
+      "status": "passed"
+    }
+  ],
+  "source_only": {
+    "copied_files": 940,
+    "device_vendor_dlopen_denied_in_test_interpreter": true,
+    "identity": "billion-pr-portable-v3",
+    "private_evidence_reads_denied_in_test_interpreter": true,
+    "status": "passed",
+    "temporary_source_copy_deleted": true,
+    "tests": 136
+  },
+  "status": "local_acceptance_passed",
+  "temporary_cleanup": {
+    "bytes": 127,
+    "namespace": "evidence",
+    "path": "pr-integration-v1/temporary-cleanup.json",
+    "sha256": "ee8158c004ed3ccc6dd4ffa7fd5d9aee4c4892aca7cce5f450ac9884c402f2d5"
+  }
+}

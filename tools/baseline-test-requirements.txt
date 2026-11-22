@@ -1,3 +1,4 @@
 # CPU-only dependencies for mocked vendor arrays and compiled-schema tests.
 numpy==2.3.4
+scipy==1.16.3
 fastjsonschema==2.21.2

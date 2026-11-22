@@ -14,6 +14,7 @@ import lp_billion_budget as budget
 import lp_billion_idle as idle
 import lp_billion_availability as availability
 import lp_billion_prepare_continue as continuation
+from lp_billion_test_support import native_inventory_fixture
 
 
 class BillionResourceContracts(unittest.TestCase):
@@ -119,7 +120,7 @@ class BillionResourceContracts(unittest.TestCase):
             self.assertEqual(json.loads((root/'sample.reservation.json').read_text()), r)
 
     def test_complete_disk_scan_counts_hardlinks_once_and_excludes_symlinks(self):
-        with tempfile.TemporaryDirectory() as temporary, mock.patch.object(common, 'BASE', Path(temporary)):
+        with tempfile.TemporaryDirectory() as temporary, native_inventory_fixture(), mock.patch.object(common, 'BASE', Path(temporary)):
             root=Path(temporary);(root/'nested').mkdir()
             (root/'first').write_bytes(b'12345');(root/'nested/second').write_bytes(b'123')
             os.link(root/'first',root/'nested/hardlink')

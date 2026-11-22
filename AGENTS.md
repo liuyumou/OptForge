@@ -1,3 +1,27 @@
+# User-authorized PR integration: local acceptance complete (2026-11-22)
+
+The user requests careful PR review and normal merge, authorizing publication
+of all fifteen commits through 334bb20 over main 1e15895. PR #29 is the integration
+vehicle; preserve the feature commits through a normal merge. Old local-only
+instructions retain their historical scope. No GPU experiment or monitor.
+
+Native acceptance and the final 963 Python tests pass; isolated packages pass
+218 Rust tests, and 136 harness tests pass from a source-only snapshot without
+private evidence access in the test interpreter. All 306 numerical bindings,
+eight resource sources, six image files, 637 comparison references and 63 original
+failed reservations verify. Review fixes declare SciPy, use temporary inventory
+fixtures, and preserve source-bound CSV bytes. Strict 1e-9 authority and public
+defaults remain exact. See docs/benchmarks/lp-billion-pr.md and its compact receipt.
+
+PR work uses fresh CPU-only reporting reservations within the existing 570000 /
+68000 totals, with a 32000 CPU ceiling, four slots and 16 GiB sampled host memory.
+All failures/full charges remain; no supervised PR overrun or nonempty cleanup.
+The original scientific settled checkpoint remains exact. Hosted startup_failure
+with zero jobs uses the previously documented local CPU/docs/smoke fallback;
+never fabricate hosted success or bypass protection. Final documentation verification passes 388 pages.
+Publish the review commit and normally merge PR #29. Retain small
+final-head/merge receipts locally and remove only this PR's temporary build/env.
+
 # Three remaining LP identities attempted; final verification settled (2026-11-22)
 
 All three resumed scientific identities have now been attempted once. Ill-scaled
