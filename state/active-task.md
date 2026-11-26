@@ -1,3 +1,19 @@
+# Pricing research PR #30: scoped CPU-only integration review (2026-11-26)
+
+The user authorizes commit, publication, careful PR review and normal merge.
+Integrate the evaluated pricing implementation and reports; keep 38 paused or
+unadmitted billion/5090 files on the original local feature branch. No GPU
+experiment, admission or availability monitor may restart for this PR.
+
+Use fresh reporting reservations within the existing SP allocation of 240000
+CPU / 37200 GPU seconds, with a 9600 CPU-second review ceiling, four CPU slots
+and 16 GiB sampled host memory. All historical failures and sources remain.
+Initial source-only tests fail on missing native libraries/private fixture
+assumptions; retain the full 720 CPU-second charge. Corrected portable CPU
+acceptance passes all 156 SP tests with zero skips and no private/device access.
+Full native acceptance, isolated Rust checks and final PR review remain pending.
+See [scope and review](../docs/benchmarks/lp-sp-pricing-pr.md).
+
 # Utilization optimization complete and settled (2026-11-23)
 
 The user approved the new optimization scope and explicitly approved the revised

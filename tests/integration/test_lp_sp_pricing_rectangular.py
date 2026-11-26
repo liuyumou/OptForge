@@ -1,5 +1,6 @@
 """Preserved dispatch and independently checkable direct rectangular endpoints."""
 from pathlib import Path
+from contextlib import ExitStack
 import json
 import sys
 import tempfile
@@ -8,8 +9,8 @@ from unittest.mock import patch
 import numpy as np
 ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'tools'))
 import lp_sp_pricing_rectangular_run as subject
-from lp_sp_pricing_budget import BASE
-from lp_sp_pricing_nontall_experiment import generate
+from lp_sp_pricing_baselines import portable
+from lp_sp_pricing_nontall_experiment import arrays
 from lp_sp_pricing_recovery_endpoint_balanced import prepare
 from lp_sp_pricing_scale_verify import check as exact_check
 from lp_sp_pricing_factor_proof import check as implicit_check
@@ -24,13 +25,21 @@ class RectangularRecovery(unittest.TestCase):
                     self.assertEqual(subject.run(model,Path(temporary)/'out',17,False,'cpu',64),'delegated')
                     delegate.assert_called_once_with(model,Path(temporary)/'out',17,False,'cpu')
     def test_small_rectangular_endpoint_passes_independent_original_model_check(self):
-        with tempfile.TemporaryDirectory(dir=BASE) as temporary:
+        with tempfile.TemporaryDirectory() as temporary, ExitStack() as patches:
             out=Path(temporary);spec=dict(name='rectangular-test',m=24,n=16,degree=16,layout='band',shift=1,scaled=False,mixed=True)
-            model=generate(spec,127007,out/'model');path=Path(model['model']['path'])
+            # Each module imports its own study-store alias. Isolate all loaded
+            # aliases while leaving numerical/certificate implementations intact.
+            for name,module in list(sys.modules.items()):
+                if name.startswith('lp_sp_pricing_') and hasattr(module,'BASE'):
+                    patches.enter_context(patch.object(module,'BASE',out))
+            a,b,c,_,_,_=arrays(spec,127007)
+            path=out/'model.json'
+            portable(dict(A=a.toarray().tolist(),b=b.tolist(),c=c.tolist()),path)
             with patch.object(subject.previous.original.legacy,'certified_factor_proposal',side_effect=AssertionError('CPU presolve must be skipped')):
                 self.assertFalse(subject.run(path,out/'response.json',20,False,'cpu',16))
             prepare(path,out/'response.json',out/'certificate.json');cert=json.loads((out/'certificate.json').read_text())
-            proof=(implicit_check if cert.get('implicit_certificate') else exact_check)(path,out/'certificate.json')
+            proof=(implicit_check(path,out/'certificate.json') if cert.get('implicit_certificate')
+                   else exact_check(path,out/'certificate.json',out))
             self.assertTrue(proof['accepted']);self.assertEqual(proof['visited_nonzeros'],24*16)
     def test_invalid_configuration_rejected_before_any_solver_work(self):
         with patch.object(subject.previous,'run',side_effect=AssertionError('unexpected old path')):

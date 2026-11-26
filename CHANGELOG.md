@@ -1,5 +1,15 @@
 # Changelog
 
+## Certified LP pricing research (2026-11-26)
+
+- Add isolated pricing/reference components, practical factor recovery and
+  independent exact certificates, with complete-cost COPT evaluations through
+  16 million nonzeros. [Implementation and results](docs/benchmarks/lp-sp-pricing-comprehensive.md).
+- Build native CPU test libraries from source and isolate test fixtures from
+  private campaign evidence. Production solver defaults remain unchanged.
+- Keep the paused billion-scale/5090 continuation and unadmitted GPU extensions
+  off the integration branch. [PR scope and review](docs/benchmarks/lp-sp-pricing-pr.md).
+
 ## Storage supervision and certification utilization (2026-11-23)
 
 - Allow 60 seconds for the complete prelaunch storage inventory after a cold

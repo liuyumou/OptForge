@@ -94,6 +94,7 @@ fi
 # status-mapping and cancellation evidence cannot be produced without it. A skip
 # is permitted for constrained environments but is reported loudly, so a partial
 # run can never be recorded as a full acceptance pass.
+python3 tools/setup_sp_pricing_cpu.py
 native_covered=1
 if [[ "${AI_OPTIMIZER_SKIP_NATIVE:-0}" == "1" ]]; then
     native_covered=0

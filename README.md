@@ -17,7 +17,8 @@ proposals; low-precision solver acceleration remains an active research directio
 ## Quick start
 
 Supported development platform: Linux x86-64. CPU checks require Rust (installed
-through rustup), Python 3.11+, Git, and util-linux `flock`. Solving requires the
+through rustup), Python 3.11+, Git, util-linux `flock`, a C++17 compiler and the
+GMP 6 runtime (`libgmp.so.10`) for native CPU tests. Solving requires the
 pinned HiGHS 1.11.0 build, which needs CMake and a C++ compiler; NVIDIA drivers
 are optional for discovery and CUDA is not a build dependency.
 
