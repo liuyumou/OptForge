@@ -33,4 +33,25 @@ class DiskInventoryContracts(unittest.TestCase):
         with patch.object(c,'digest',return_value='altered'),patch.object(c.subprocess,'run') as run:
             with self.assertRaisesRegex(ValueError,'binding integrity'):c.native_inventory(c.BASE)
             run.assert_not_called()
+    def test_preflight_timeout_is_separate_from_runtime_sampling(self):
+        with patch.object(c, 'native_inventory', return_value={'bytes': 7, 'files': 1}) as scan:
+            self.assertEqual(c.preflight_disk_bytes(), 7)
+            scan.assert_called_once_with(c.BASE, timeout_seconds=60)
+            scan.reset_mock()
+            self.assertEqual(c.disk_bytes(), 7)
+            scan.assert_called_once_with(c.BASE)
+
+    def test_inventory_timeout_is_bounded_and_has_no_automatic_retry(self):
+        import subprocess
+        for value in [0, -1, 61, float('inf'), float('nan'), True, '60']:
+            with self.subTest(value=value), patch.object(c.subprocess, 'run') as run:
+                with self.assertRaisesRegex(ValueError, 'bounded storage inventory timeout'):
+                    c.native_inventory(c.BASE, timeout_seconds=value)
+                run.assert_not_called()
+        with patch.object(c, 'inventory_command', return_value=['inventory']), \
+                patch.object(c.subprocess, 'run', side_effect=subprocess.TimeoutExpired('inventory', 60)) as run:
+            with self.assertRaises(subprocess.TimeoutExpired):
+                c.preflight_disk_bytes()
+            self.assertEqual(run.call_count, 1)
+            self.assertEqual(run.call_args.kwargs['timeout'], 60)
 if __name__=='__main__':unittest.main()

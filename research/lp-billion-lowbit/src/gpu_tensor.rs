@@ -65,6 +65,12 @@ pub fn solve_with_fast(
     config.validate()?;
     if let Some(f) = fast {
         f.validate()?;
+        if f.certificate_scratch {
+            return Err("certificate scratch requires the original-array interface".into());
+        }
+        if f.final_assessment_reuse {
+            return Err("final assessment reuse requires the original-array interface".into());
+        }
         if f.gpu_preparation {
             return Err("GPU preparation requires the original-array interface".into());
         }

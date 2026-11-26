@@ -98,7 +98,8 @@ pub fn solve(
     let program = &original.program;
     // No optional bound tightening is applied to this canonical-array path.
     // Certificates continue to use the supplied original bounds, including infinities.
-    let mut assessor = crate::array_assessment::Assessor::new(original, store, true);
+    let mut assessor = crate::array_assessment::Assessor::new(original, store, true)
+        .with_certificate_scratch(fast_config.certificate_scratch);
     let mut gpu_preparation = None;
     let engine = if fast.is_some_and(|f| f.gpu_preparation) {
         let preparation_image = image.with_file_name("prepare.cubin");
@@ -226,6 +227,7 @@ pub fn solve(
             let mut accepted_work = [0u64; 4];
             let mut work_before = [0u64; 4];
             let mut last_certificate = 0;
+            let mut last_assessed_state = None;
             let mut faulted = false;
             let mut status = "limit";
             let mut execution_ns = 0;
@@ -390,6 +392,11 @@ pub fn solve(
                         settings.tolerance,
                         |x, t| device.borrow_mut().gpu_feasible(x, t),
                     )?;
+                    last_assessed_state = Some((
+                        control.generation(),
+                        control.physical_iterations(),
+                        control.state().iterations,
+                    ));
                     profile.enter(Phase::Witness);
                     assessments.push(
             json!({"physical":control.physical_iterations(),"logical":control.state().iterations,
@@ -457,12 +464,25 @@ pub fn solve(
             let check_start = Instant::now();
             profile.enter(Phase::Unscale);
             let endpoint = control.iterate();
-            profile.enter(if status == "certified" {
+            // The controller's restart only changes anchors/weight, not the
+            // assessed primal/dual. Advances change the iteration identity;
+            // restoration changes generation even when the iteration matches.
+            // Conservatively recompute all deadline/cancellation/failure tails.
+            let reuse_final = status == "certified"
+                || (fast_config.final_assessment_reuse
+                    && status == "limit"
+                    && last_assessed_state
+                        == Some((
+                            control.generation(),
+                            control.physical_iterations(),
+                            control.state().iterations,
+                        )));
+            profile.enter(if reuse_final {
                 Phase::CertificateReuse
             } else {
                 Phase::Certificate
             });
-            let certificate = if status == "certified" {
+            let certificate = if reuse_final {
                 assessments.last().ok_or("missing accepted assessment")?["certificate"].clone()
             } else {
                 assessor.evaluate_with_feasibility(

@@ -98,6 +98,12 @@ fn run() -> Result<()> {
             let fast: lp_billion_lowbit::fast_device::Config =
                 serde_json::from_value(request.get("fast").cloned().unwrap_or(json!({})))?;
             fast.validate()?;
+            if fast.certificate_scratch {
+                return Err("certificate scratch requires the original-array interface".into());
+            }
+            if fast.final_assessment_reuse {
+                return Err("final assessment reuse requires the original-array interface".into());
+            }
             if args[1] == "gpu-fast" {
                 lp_billion_lowbit::gpu_tensor::solve_with_fast(
                     &model,

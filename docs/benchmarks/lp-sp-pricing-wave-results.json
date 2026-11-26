@@ -1,0 +1,3569 @@
+{
+  "admission": {
+    "bytes": 4982,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-gpu-admit-v2/admission.json",
+    "sha256": "3f0b889fbfeaf12f3930e4b3243ea24be34f29c530b1e1aebf6d297eda303165"
+  },
+  "billion_nonzero_solves": 0,
+  "comparison": {
+    "bytes": 54966,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/result.json",
+    "sha256": "4c324279e2fd263fc381b019b4acce94a313f2f660e98c43e5fe0b44087a8a57"
+  },
+  "freeze": {
+    "bytes": 25455,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/freeze.json",
+    "sha256": "53e2146e03ea7c1c449b292d7f2ab01263f53d73de19a433970954a345d30779"
+  },
+  "lanes": {
+    "copt_scale_off": {
+      "attempts": 14,
+      "complete_seconds": 31.378252381,
+      "median_complete_seconds": 0.8797569615,
+      "statuses": {
+        "1": 12,
+        "10": 2
+      },
+      "timely_exact": 0,
+      "timely_strict": 0,
+      "vendor_optimal": 12
+    },
+    "cpu": {
+      "attempts": 14,
+      "complete_seconds": 43.82970012,
+      "median_complete_seconds": 2.0843036975,
+      "statuses": {
+        "certificate_returned": 12,
+        "resource_limit": 2
+      },
+      "timely_exact": 12,
+      "timely_strict": 2,
+      "vendor_optimal": 0
+    },
+    "lean": {
+      "attempts": 14,
+      "complete_seconds": 49.290834855,
+      "median_complete_seconds": 2.560591847,
+      "statuses": {
+        "certificate_returned": 12,
+        "resource_limit": 2
+      },
+      "timely_exact": 12,
+      "timely_strict": 2,
+      "vendor_optimal": 0
+    },
+    "wave": {
+      "attempts": 14,
+      "complete_seconds": 45.792286397,
+      "median_complete_seconds": 2.2611719275,
+      "statuses": {
+        "certificate_returned": 12,
+        "resource_limit": 2
+      },
+      "timely_exact": 12,
+      "timely_strict": 2,
+      "vendor_optimal": 0
+    }
+  },
+  "limitations": [
+    "seven small generated models, two cyclic repetitions, no cache flush",
+    "COPT device preparation remains inside opaque solve time",
+    "ratios require joint timely certification; vendor optimal statuses reported separately"
+  ],
+  "literal_reference_validated": false,
+  "micro": {
+    "admission": {
+      "bytes": 4982,
+      "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-gpu-admit-v2/admission.json",
+      "sha256": "3f0b889fbfeaf12f3930e4b3243ea24be34f29c530b1e1aebf6d297eda303165"
+    },
+    "checks": [
+      {
+        "case": "coupled-first",
+        "gmp_ns": 2602009,
+        "interval": {
+          "checked_proposals": 26,
+          "gmp_fallbacks": 0,
+          "interval_dual_certificates": 0,
+          "interval_operations": 18980,
+          "uncertain_proposals": 0
+        },
+        "interval_ns": 215349,
+        "labels": 11,
+        "proposals": 64,
+        "repetition": 0
+      },
+      {
+        "case": "coupled-first",
+        "gmp_ns": 2515252,
+        "interval": {
+          "checked_proposals": 26,
+          "gmp_fallbacks": 0,
+          "interval_dual_certificates": 0,
+          "interval_operations": 18980,
+          "uncertain_proposals": 0
+        },
+        "interval_ns": 179765,
+        "labels": 11,
+        "proposals": 64,
+        "repetition": 1
+      },
+      {
+        "case": "coupled-first",
+        "gmp_ns": 2541539,
+        "interval": {
+          "checked_proposals": 26,
+          "gmp_fallbacks": 0,
+          "interval_dual_certificates": 0,
+          "interval_operations": 18980,
+          "uncertain_proposals": 0
+        },
+        "interval_ns": 199352,
+        "labels": 11,
+        "proposals": 64,
+        "repetition": 2
+      },
+      {
+        "case": "coupled-optimum",
+        "gmp_ns": 50861703,
+        "interval": {
+          "checked_proposals": 64,
+          "gmp_fallbacks": 0,
+          "interval_dual_certificates": 0,
+          "interval_operations": 318680,
+          "uncertain_proposals": 0
+        },
+        "interval_ns": 2214474,
+        "labels": 0,
+        "proposals": 64,
+        "repetition": 0
+      },
+      {
+        "case": "coupled-optimum",
+        "gmp_ns": 50847907,
+        "interval": {
+          "checked_proposals": 64,
+          "gmp_fallbacks": 0,
+          "interval_dual_certificates": 0,
+          "interval_operations": 318680,
+          "uncertain_proposals": 0
+        },
+        "interval_ns": 2232918,
+        "labels": 0,
+        "proposals": 64,
+        "repetition": 1
+      },
+      {
+        "case": "coupled-optimum",
+        "gmp_ns": 50869285,
+        "interval": {
+          "checked_proposals": 64,
+          "gmp_fallbacks": 0,
+          "interval_dual_certificates": 0,
+          "interval_operations": 318680,
+          "uncertain_proposals": 0
+        },
+        "interval_ns": 2230122,
+        "labels": 0,
+        "proposals": 64,
+        "repetition": 2
+      },
+      {
+        "case": "degenerate-optimum",
+        "gmp_ns": 150264342,
+        "interval": {
+          "checked_proposals": 64,
+          "gmp_fallbacks": 0,
+          "interval_dual_certificates": 0,
+          "interval_operations": 671084,
+          "uncertain_proposals": 0
+        },
+        "interval_ns": 6332108,
+        "labels": 0,
+        "proposals": 64,
+        "repetition": 0
+      },
+      {
+        "case": "degenerate-optimum",
+        "gmp_ns": 150161343,
+        "interval": {
+          "checked_proposals": 64,
+          "gmp_fallbacks": 0,
+          "interval_dual_certificates": 0,
+          "interval_operations": 671084,
+          "uncertain_proposals": 0
+        },
+        "interval_ns": 4930404,
+        "labels": 0,
+        "proposals": 64,
+        "repetition": 1
+      },
+      {
+        "case": "degenerate-optimum",
+        "gmp_ns": 150380468,
+        "interval": {
+          "checked_proposals": 64,
+          "gmp_fallbacks": 0,
+          "interval_dual_certificates": 0,
+          "interval_operations": 671084,
+          "uncertain_proposals": 0
+        },
+        "interval_ns": 4878040,
+        "labels": 0,
+        "proposals": 64,
+        "repetition": 2
+      }
+    ],
+    "rows": [
+      {
+        "case": "coupled-first",
+        "complete_ns": 5908506,
+        "device_ms": 2.237407922744751,
+        "lane": "lean",
+        "preparation_ns": 628130,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 2776481,
+        "device_ms": 2.397887945175171,
+        "lane": "wave",
+        "preparation_ns": 259096,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 2389196,
+        "device_ms": 2.2943999767303467,
+        "lane": "wave",
+        "preparation_ns": 43928,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 3900524,
+        "device_ms": 2.2079360485076904,
+        "lane": "lean",
+        "preparation_ns": 235148,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 3756694,
+        "device_ms": 2.2100160121917725,
+        "lane": "lean",
+        "preparation_ns": 234081,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 2426048,
+        "device_ms": 2.294015884399414,
+        "lane": "wave",
+        "preparation_ns": 42424,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 10710461,
+        "device_ms": 8.824448108673096,
+        "lane": "lean",
+        "preparation_ns": 223112,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 3833935,
+        "device_ms": 3.6148159503936768,
+        "lane": "wave",
+        "preparation_ns": 97902,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 3753572,
+        "device_ms": 3.613663911819458,
+        "lane": "wave",
+        "preparation_ns": 57190,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 10830742,
+        "device_ms": 8.827327966690063,
+        "lane": "lean",
+        "preparation_ns": 229076,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 10674828,
+        "device_ms": 8.829728126525879,
+        "lane": "lean",
+        "preparation_ns": 219302,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 3787574,
+        "device_ms": 3.6174399852752686,
+        "lane": "wave",
+        "preparation_ns": 65711,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 3520879,
+        "device_ms": 2.064095973968506,
+        "lane": "lean",
+        "preparation_ns": 261045,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 2751782,
+        "device_ms": 2.6357760429382324,
+        "lane": "wave",
+        "preparation_ns": 45912,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 2790138,
+        "device_ms": 2.641983985900879,
+        "lane": "wave",
+        "preparation_ns": 75122,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 3569753,
+        "device_ms": 2.066495895385742,
+        "lane": "lean",
+        "preparation_ns": 278692,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 3532710,
+        "device_ms": 2.066080093383789,
+        "lane": "lean",
+        "preparation_ns": 260726,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 2780913,
+        "device_ms": 2.640255928039551,
+        "lane": "wave",
+        "preparation_ns": 47920,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 10155270,
+        "device_ms": 8.257567882537842,
+        "lane": "lean",
+        "preparation_ns": 272807,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 4459874,
+        "device_ms": 4.229856014251709,
+        "lane": "wave",
+        "preparation_ns": 92193,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 4385640,
+        "device_ms": 4.238016128540039,
+        "lane": "wave",
+        "preparation_ns": 59102,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 10113442,
+        "device_ms": 8.253920078277588,
+        "lane": "lean",
+        "preparation_ns": 261026,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 10084710,
+        "device_ms": 8.250400066375732,
+        "lane": "lean",
+        "preparation_ns": 252071,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-first",
+        "complete_ns": 4401440,
+        "device_ms": 4.2381439208984375,
+        "lane": "wave",
+        "preparation_ns": 66284,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 8479770,
+        "device_ms": 4.1935038566589355,
+        "lane": "lean",
+        "preparation_ns": 2385501,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 5166320,
+        "device_ms": 4.529407978057861,
+        "lane": "wave",
+        "preparation_ns": 280667,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 4850030,
+        "device_ms": 4.525472164154053,
+        "lane": "wave",
+        "preparation_ns": 150328,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 8334582,
+        "device_ms": 4.180319786071777,
+        "lane": "lean",
+        "preparation_ns": 2344621,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 8690940,
+        "device_ms": 4.1926398277282715,
+        "lane": "lean",
+        "preparation_ns": 2476939,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 5001592,
+        "device_ms": 4.535488128662109,
+        "lane": "wave",
+        "preparation_ns": 169810,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 21492122,
+        "device_ms": 16.595839977264404,
+        "lane": "lean",
+        "preparation_ns": 2325933,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 14217028,
+        "device_ms": 13.573311805725098,
+        "lane": "wave",
+        "preparation_ns": 280466,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 14113144,
+        "device_ms": 13.564895629882812,
+        "lane": "wave",
+        "preparation_ns": 306380,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 21825826,
+        "device_ms": 16.614463806152344,
+        "lane": "lean",
+        "preparation_ns": 2360565,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 21971282,
+        "device_ms": 16.611424446105957,
+        "lane": "lean",
+        "preparation_ns": 2336535,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 14124209,
+        "device_ms": 13.581151962280273,
+        "lane": "wave",
+        "preparation_ns": 210236,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 7332261,
+        "device_ms": 3.3805439472198486,
+        "lane": "lean",
+        "preparation_ns": 2408141,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 4293831,
+        "device_ms": 3.871040105819702,
+        "lane": "wave",
+        "preparation_ns": 175241,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 4330983,
+        "device_ms": 3.8681600093841553,
+        "lane": "wave",
+        "preparation_ns": 247527,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 7443185,
+        "device_ms": 3.3887999057769775,
+        "lane": "lean",
+        "preparation_ns": 2471626,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 7371900,
+        "device_ms": 3.3764801025390625,
+        "lane": "lean",
+        "preparation_ns": 2388808,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 4322655,
+        "device_ms": 3.8762240409851074,
+        "lane": "wave",
+        "preparation_ns": 180409,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 18428720,
+        "device_ms": 13.369952201843262,
+        "lane": "lean",
+        "preparation_ns": 2419235,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 11891105,
+        "device_ms": 11.218048095703125,
+        "lane": "wave",
+        "preparation_ns": 305186,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 11651241,
+        "device_ms": 11.189632415771484,
+        "lane": "wave",
+        "preparation_ns": 223880,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 18340768,
+        "device_ms": 13.365375995635986,
+        "lane": "lean",
+        "preparation_ns": 2401009,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 18625132,
+        "device_ms": 13.36303997039795,
+        "lane": "lean",
+        "preparation_ns": 2373021,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "coupled-optimum",
+        "complete_ns": 11840817,
+        "device_ms": 11.214079856872559,
+        "lane": "wave",
+        "preparation_ns": 280718,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 20703761,
+        "device_ms": 8.671615600585938,
+        "lane": "lean",
+        "preparation_ns": 9247790,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 10832347,
+        "device_ms": 8.823648452758789,
+        "lane": "wave",
+        "preparation_ns": 1540916,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 9496035,
+        "device_ms": 8.819135665893555,
+        "lane": "wave",
+        "preparation_ns": 451571,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 19511245,
+        "device_ms": 8.673760414123535,
+        "lane": "lean",
+        "preparation_ns": 8768309,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 19933398,
+        "device_ms": 8.668767929077148,
+        "lane": "lean",
+        "preparation_ns": 9209751,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 9668028,
+        "device_ms": 8.813247680664062,
+        "lane": "wave",
+        "preparation_ns": 490261,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 47159523,
+        "device_ms": 34.542399406433105,
+        "lane": "lean",
+        "preparation_ns": 8657281,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 33285856,
+        "device_ms": 31.644800186157227,
+        "lane": "wave",
+        "preparation_ns": 1057887,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 32809218,
+        "device_ms": 31.681184768676758,
+        "lane": "wave",
+        "preparation_ns": 787039,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 47263094,
+        "device_ms": 34.58656024932861,
+        "lane": "lean",
+        "preparation_ns": 8710134,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 47349391,
+        "device_ms": 34.56719970703125,
+        "lane": "lean",
+        "preparation_ns": 9030172,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 32592415,
+        "device_ms": 31.65203285217285,
+        "lane": "wave",
+        "preparation_ns": 472826,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 16443845,
+        "device_ms": 5.627744197845459,
+        "lane": "lean",
+        "preparation_ns": 8879708,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 7184810,
+        "device_ms": 6.478496074676514,
+        "lane": "wave",
+        "preparation_ns": 366072,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 7801826,
+        "device_ms": 6.396383762359619,
+        "lane": "wave",
+        "preparation_ns": 1028407,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 19641692,
+        "device_ms": 5.551839828491211,
+        "lane": "lean",
+        "preparation_ns": 9194556,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 16526366,
+        "device_ms": 5.54307222366333,
+        "lane": "lean",
+        "preparation_ns": 8876858,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 7214398,
+        "device_ms": 6.392960071563721,
+        "lane": "wave",
+        "preparation_ns": 421689,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 34874816,
+        "device_ms": 22.222047805786133,
+        "lane": "lean",
+        "preparation_ns": 8850402,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 22068634,
+        "device_ms": 20.7478084564209,
+        "lane": "wave",
+        "preparation_ns": 748610,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 21542773,
+        "device_ms": 20.741695404052734,
+        "lane": "wave",
+        "preparation_ns": 449475,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 35175055,
+        "device_ms": 22.35158395767212,
+        "lane": "lean",
+        "preparation_ns": 9050422,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 35200751,
+        "device_ms": 22.368671894073486,
+        "lane": "lean",
+        "preparation_ns": 8980729,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "degenerate-optimum",
+        "complete_ns": 21686259,
+        "device_ms": 20.74140739440918,
+        "lane": "wave",
+        "preparation_ns": 459774,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 47484818,
+        "device_ms": 20.2326717376709,
+        "lane": "lean",
+        "preparation_ns": 22373166,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 28391556,
+        "device_ms": 22.136512756347656,
+        "lane": "wave",
+        "preparation_ns": 5149162,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 24804861,
+        "device_ms": 22.14908790588379,
+        "lane": "wave",
+        "preparation_ns": 2345156,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 40344917,
+        "device_ms": 20.219200134277344,
+        "lane": "lean",
+        "preparation_ns": 16434258,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 39248819,
+        "device_ms": 20.219999313354492,
+        "lane": "lean",
+        "preparation_ns": 14585973,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 25661257,
+        "device_ms": 22.13395118713379,
+        "lane": "wave",
+        "preparation_ns": 2489566,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 103671528,
+        "device_ms": 81.04105567932129,
+        "lane": "lean",
+        "preparation_ns": 14585765,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 83125008,
+        "device_ms": 78.14588928222656,
+        "lane": "wave",
+        "preparation_ns": 3670150,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 82822105,
+        "device_ms": 78.35250854492188,
+        "lane": "wave",
+        "preparation_ns": 3958825,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 115220890,
+        "device_ms": 80.82860946655273,
+        "lane": "lean",
+        "preparation_ns": 22743763,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 110952440,
+        "device_ms": 80.95510482788086,
+        "lane": "lean",
+        "preparation_ns": 20303284,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 82217478,
+        "device_ms": 78.1476821899414,
+        "lane": "wave",
+        "preparation_ns": 3090081,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 51187176,
+        "device_ms": 31.04863929748535,
+        "lane": "lean",
+        "preparation_ns": 17189742,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 29925222,
+        "device_ms": 22.57049560546875,
+        "lane": "wave",
+        "preparation_ns": 6734011,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 27063183,
+        "device_ms": 22.55241584777832,
+        "lane": "wave",
+        "preparation_ns": 4232747,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 50609062,
+        "device_ms": 31.030303955078125,
+        "lane": "lean",
+        "preparation_ns": 16031446,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 49874113,
+        "device_ms": 31.03343963623047,
+        "lane": "lean",
+        "preparation_ns": 15718483,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 26981189,
+        "device_ms": 22.545663833618164,
+        "lane": "wave",
+        "preparation_ns": 3788199,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 147946799,
+        "device_ms": 124.20463943481445,
+        "lane": "lean",
+        "preparation_ns": 15713911,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 88437357,
+        "device_ms": 83.2074203491211,
+        "lane": "wave",
+        "preparation_ns": 4306740,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 87428425,
+        "device_ms": 83.1343994140625,
+        "lane": "wave",
+        "preparation_ns": 3830160,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 149260301,
+        "device_ms": 124.30659294128418,
+        "lane": "lean",
+        "preparation_ns": 17245129,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 147522347,
+        "device_ms": 124.28217506408691,
+        "lane": "lean",
+        "preparation_ns": 15885838,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "dense-256",
+        "complete_ns": 88078188,
+        "device_ms": 83.1463394165039,
+        "lane": "wave",
+        "preparation_ns": 4061642,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 145260896,
+        "device_ms": 62.93395233154297,
+        "lane": "lean",
+        "preparation_ns": 76728712,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 90379819,
+        "device_ms": 63.83456039428711,
+        "lane": "wave",
+        "preparation_ns": 24582775,
+        "repetition": 0,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 80223869,
+        "device_ms": 63.875038146972656,
+        "lane": "wave",
+        "preparation_ns": 15905135,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 144001020,
+        "device_ms": 62.965824127197266,
+        "lane": "lean",
+        "preparation_ns": 75195359,
+        "repetition": 1,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 140214761,
+        "device_ms": 62.949214935302734,
+        "lane": "lean",
+        "preparation_ns": 70899304,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 81806580,
+        "device_ms": 63.83148956298828,
+        "lane": "wave",
+        "preparation_ns": 16278790,
+        "repetition": 2,
+        "sparse": false,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 339161555,
+        "device_ms": 251.72550201416016,
+        "lane": "lean",
+        "preparation_ns": 69922713,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 269136907,
+        "device_ms": 249.09039306640625,
+        "lane": "wave",
+        "preparation_ns": 17934045,
+        "repetition": 0,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 270930787,
+        "device_ms": 249.06973266601562,
+        "lane": "wave",
+        "preparation_ns": 21152152,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 334382210,
+        "device_ms": 251.6975326538086,
+        "lane": "lean",
+        "preparation_ns": 66516696,
+        "repetition": 1,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 328155213,
+        "device_ms": 251.97043228149414,
+        "lane": "lean",
+        "preparation_ns": 65006148,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 267161307,
+        "device_ms": 249.87545776367188,
+        "lane": "wave",
+        "preparation_ns": 15338931,
+        "repetition": 2,
+        "sparse": false,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 94044690,
+        "device_ms": 17.848800659179688,
+        "lane": "lean",
+        "preparation_ns": 70156828,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 30041291,
+        "device_ms": 18.89833641052246,
+        "lane": "wave",
+        "preparation_ns": 9437493,
+        "repetition": 0,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 28033609,
+        "device_ms": 18.897920608520508,
+        "lane": "wave",
+        "preparation_ns": 8806016,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 96598670,
+        "device_ms": 17.843168258666992,
+        "lane": "lean",
+        "preparation_ns": 73005694,
+        "repetition": 1,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 94769891,
+        "device_ms": 17.838464736938477,
+        "lane": "lean",
+        "preparation_ns": 70238585,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 30194343,
+        "device_ms": 18.91244888305664,
+        "lane": "wave",
+        "preparation_ns": 9510571,
+        "repetition": 2,
+        "sparse": true,
+        "width": 64
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 156540563,
+        "device_ms": 71.2361946105957,
+        "lane": "lean",
+        "preparation_ns": 69869225,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 82931730,
+        "device_ms": 69.11529541015625,
+        "lane": "wave",
+        "preparation_ns": 12445020,
+        "repetition": 0,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 79392953,
+        "device_ms": 69.10844421386719,
+        "lane": "wave",
+        "preparation_ns": 9657144,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 150961440,
+        "device_ms": 71.2216968536377,
+        "lane": "lean",
+        "preparation_ns": 65977862,
+        "repetition": 1,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 157171602,
+        "device_ms": 71.23718452453613,
+        "lane": "lean",
+        "preparation_ns": 69592016,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      },
+      {
+        "case": "sparse-512",
+        "complete_ns": 83214866,
+        "device_ms": 69.04656219482422,
+        "lane": "wave",
+        "preparation_ns": 12227581,
+        "repetition": 2,
+        "sparse": true,
+        "width": 256
+      }
+    ],
+    "status": "passed"
+  },
+  "micro_evidence": {
+    "bytes": 31442,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-micro-v1/result.json",
+    "sha256": "6546614168b1329840fbd540c7150bb9e36b9f98b8476d88ed1f0bdb6a78ee11"
+  },
+  "micro_summary": [
+    {
+      "case": "coupled-first",
+      "device_ms": {
+        "lean": 8.827327966690063,
+        "wave": 3.6148159503936768
+      },
+      "lean_over_wave": 2.441985453153904,
+      "sparse": false,
+      "width": 256
+    },
+    {
+      "case": "coupled-first",
+      "device_ms": {
+        "lean": 8.253920078277588,
+        "wave": 4.238016128540039
+      },
+      "lean_over_wave": 1.947590530081582,
+      "sparse": true,
+      "width": 256
+    },
+    {
+      "case": "coupled-optimum",
+      "device_ms": {
+        "lean": 16.611424446105957,
+        "wave": 13.573311805725098
+      },
+      "lean_over_wave": 1.2238298717266196,
+      "sparse": false,
+      "width": 256
+    },
+    {
+      "case": "coupled-optimum",
+      "device_ms": {
+        "lean": 13.365375995635986,
+        "wave": 11.214079856872559
+      },
+      "lean_over_wave": 1.1918388460061664,
+      "sparse": true,
+      "width": 256
+    },
+    {
+      "case": "degenerate-optimum",
+      "device_ms": {
+        "lean": 34.56719970703125,
+        "wave": 31.65203285217285
+      },
+      "lean_over_wave": 1.0921004621874792,
+      "sparse": false,
+      "width": 256
+    },
+    {
+      "case": "degenerate-optimum",
+      "device_ms": {
+        "lean": 22.35158395767212,
+        "wave": 20.741695404052734
+      },
+      "lean_over_wave": 1.0776160541488247,
+      "sparse": true,
+      "width": 256
+    },
+    {
+      "case": "dense-256",
+      "device_ms": {
+        "lean": 80.95510482788086,
+        "wave": 78.1476821899414
+      },
+      "lean_over_wave": 1.035924579709426,
+      "sparse": false,
+      "width": 256
+    },
+    {
+      "case": "dense-256",
+      "device_ms": {
+        "lean": 124.28217506408691,
+        "wave": 83.1463394165039
+      },
+      "lean_over_wave": 1.494740188639235,
+      "sparse": true,
+      "width": 256
+    },
+    {
+      "case": "sparse-512",
+      "device_ms": {
+        "lean": 251.72550201416016,
+        "wave": 249.09039306640625
+      },
+      "lean_over_wave": 1.0105789264504128,
+      "sparse": false,
+      "width": 256
+    },
+    {
+      "case": "sparse-512",
+      "device_ms": {
+        "lean": 71.2361946105957,
+        "wave": 69.10844421386719
+      },
+      "lean_over_wave": 1.030788573247921,
+      "sparse": true,
+      "width": 256
+    }
+  ],
+  "pairs": [
+    {
+      "left": "cpu",
+      "maximum_left_over_right": 1.1229303459902265,
+      "median_left_over_right": 0.917036291355639,
+      "minimum_left_over_right": 0.7441473069065796,
+      "paired_models": 6,
+      "paired_repetitions": 12,
+      "right": "wave",
+      "right_faster_repetitions": 2,
+      "rows": [
+        {
+          "left_complete_seconds": 2.084966104,
+          "left_over_right": 0.9128099396883447,
+          "model": "dense-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 2.284118537
+        },
+        {
+          "left_complete_seconds": 2.083641291,
+          "left_over_right": 0.9309345552671476,
+          "model": "dense-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 2.238225318
+        },
+        {
+          "left_complete_seconds": 2.337645584,
+          "left_over_right": 0.9412398591299833,
+          "model": "irregular-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 2.483581163
+        },
+        {
+          "left_complete_seconds": 2.333376807,
+          "left_over_right": 0.88570032619486,
+          "model": "irregular-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 2.634499207
+        },
+        {
+          "left_complete_seconds": 0.683036203,
+          "left_over_right": 0.7774151801792846,
+          "model": "wide-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 0.878599004
+        },
+        {
+          "left_complete_seconds": 0.728353965,
+          "left_over_right": 0.7441473069065796,
+          "model": "wide-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 0.978776592
+        },
+        {
+          "left_complete_seconds": 1.983189397,
+          "left_over_right": 0.9059423363697213,
+          "model": "coupled-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 2.189090097
+        },
+        {
+          "left_complete_seconds": 1.980386809,
+          "left_over_right": 0.9282334247234536,
+          "model": "coupled-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 2.133500859
+        },
+        {
+          "left_complete_seconds": 2.842817496,
+          "left_over_right": 0.9212626430229334,
+          "model": "ill_scaled-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 3.08578397
+        },
+        {
+          "left_complete_seconds": 2.835780578,
+          "left_over_right": 0.9028805468950808,
+          "model": "ill_scaled-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 3.140814793
+        },
+        {
+          "left_complete_seconds": 1.8326526,
+          "left_over_right": 1.1186507406869863,
+          "model": "degenerate-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 1.638270582
+        },
+        {
+          "left_complete_seconds": 1.832262686,
+          "left_over_right": 1.1229303459902265,
+          "model": "degenerate-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 1.631679732
+        }
+      ],
+      "tier": "exact"
+    },
+    {
+      "left": "lean",
+      "maximum_left_over_right": 1.215776668113936,
+      "median_left_over_right": 1.1324271481929418,
+      "minimum_left_over_right": 1.0512943499163698,
+      "paired_models": 6,
+      "paired_repetitions": 12,
+      "right": "wave",
+      "right_faster_repetitions": 12,
+      "rows": [
+        {
+          "left_complete_seconds": 2.584544276,
+          "left_over_right": 1.131528085838568,
+          "model": "dense-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 2.284118537
+        },
+        {
+          "left_complete_seconds": 2.536639418,
+          "left_over_right": 1.1333262105473154,
+          "model": "dense-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 2.238225318
+        },
+        {
+          "left_complete_seconds": 2.88473769,
+          "left_over_right": 1.1615234214916617,
+          "model": "irregular-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 2.483581163
+        },
+        {
+          "left_complete_seconds": 2.88533531,
+          "left_over_right": 1.0952120624418924,
+          "model": "irregular-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 2.634499207
+        },
+        {
+          "left_complete_seconds": 0.97906214,
+          "left_over_right": 1.114344695979191,
+          "model": "wide-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 0.878599004
+        },
+        {
+          "left_complete_seconds": 1.028982301,
+          "left_over_right": 1.0512943499163698,
+          "model": "wide-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 0.978776592
+        },
+        {
+          "left_complete_seconds": 2.487622311,
+          "left_over_right": 1.1363727397100367,
+          "model": "coupled-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 2.189090097
+        },
+        {
+          "left_complete_seconds": 2.434254183,
+          "left_over_right": 1.1409670508128913,
+          "model": "coupled-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 2.133500859
+        },
+        {
+          "left_complete_seconds": 3.483051537,
+          "left_over_right": 1.1287412115890925,
+          "model": "ill_scaled-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 3.08578397
+        },
+        {
+          "left_complete_seconds": 3.537155724,
+          "left_over_right": 1.1261904814901322,
+          "model": "ill_scaled-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 3.140814793
+        },
+        {
+          "left_complete_seconds": 1.938219305,
+          "left_over_right": 1.183088634011741,
+          "model": "degenerate-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 1.638270582
+        },
+        {
+          "left_complete_seconds": 1.983758148,
+          "left_over_right": 1.215776668113936,
+          "model": "degenerate-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 1.631679732
+        }
+      ],
+      "tier": "exact"
+    },
+    {
+      "left": "copt_scale_off",
+      "maximum_left_over_right": null,
+      "median_left_over_right": null,
+      "minimum_left_over_right": null,
+      "paired_models": 0,
+      "paired_repetitions": 0,
+      "right": "wave",
+      "right_faster_repetitions": 0,
+      "rows": [],
+      "tier": "exact"
+    },
+    {
+      "left": "cpu",
+      "maximum_left_over_right": 0.7774151801792846,
+      "median_left_over_right": 0.7607812435429321,
+      "minimum_left_over_right": 0.7441473069065796,
+      "paired_models": 1,
+      "paired_repetitions": 2,
+      "right": "wave",
+      "right_faster_repetitions": 0,
+      "rows": [
+        {
+          "left_complete_seconds": 0.683036203,
+          "left_over_right": 0.7774151801792846,
+          "model": "wide-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 0.878599004
+        },
+        {
+          "left_complete_seconds": 0.728353965,
+          "left_over_right": 0.7441473069065796,
+          "model": "wide-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 0.978776592
+        }
+      ],
+      "tier": "strict"
+    },
+    {
+      "left": "lean",
+      "maximum_left_over_right": 1.114344695979191,
+      "median_left_over_right": 1.0828195229477804,
+      "minimum_left_over_right": 1.0512943499163698,
+      "paired_models": 1,
+      "paired_repetitions": 2,
+      "right": "wave",
+      "right_faster_repetitions": 2,
+      "rows": [
+        {
+          "left_complete_seconds": 0.97906214,
+          "left_over_right": 1.114344695979191,
+          "model": "wide-8-99173",
+          "repetition": 0,
+          "right_complete_seconds": 0.878599004
+        },
+        {
+          "left_complete_seconds": 1.028982301,
+          "left_over_right": 1.0512943499163698,
+          "model": "wide-8-99173",
+          "repetition": 1,
+          "right_complete_seconds": 0.978776592
+        }
+      ],
+      "tier": "strict"
+    },
+    {
+      "left": "copt_scale_off",
+      "maximum_left_over_right": null,
+      "median_left_over_right": null,
+      "minimum_left_over_right": null,
+      "paired_models": 0,
+      "paired_repetitions": 0,
+      "right": "wave",
+      "right_faster_repetitions": 0,
+      "rows": [],
+      "tier": "strict"
+    }
+  ],
+  "preparation_diagnostic": [
+    {
+      "cold_preparation_ms": 250.907992,
+      "complete_ms": 257.686391,
+      "explicit_runtime_init_ms": 251.287776,
+      "lane": "old",
+      "warm_preparation_ms": 0.280185
+    },
+    {
+      "cold_preparation_ms": 246.213812,
+      "complete_ms": 252.806524,
+      "explicit_runtime_init_ms": 242.915778,
+      "lane": "aot-static",
+      "warm_preparation_ms": 0.273536
+    },
+    {
+      "cold_preparation_ms": 241.895083,
+      "complete_ms": 246.065662,
+      "explicit_runtime_init_ms": 241.282743,
+      "lane": "aot-shared",
+      "warm_preparation_ms": 0.240398
+    }
+  ],
+  "preparation_evidence": {
+    "bytes": 14380,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-preparation-diagnostic-v1/result.json",
+    "sha256": "9587ed97f43286c4573167fd91d9289ccf91b54c40183a03dfca2911cc40ae89"
+  },
+  "profiles": {
+    "copt_scale_off": {
+      "actual_async_initialization_seconds": 0.0,
+      "auxiliary_calls": 0,
+      "auxiliary_phase_seconds": 0.0,
+      "device_seconds": 0.0,
+      "exposed_preparation_seconds": 0.0,
+      "gmp_fallbacks": 0,
+      "gpu_labels": 0,
+      "host_check_seconds": 0.0,
+      "initialization_wait_seconds": 0.0
+    },
+    "cpu": {
+      "actual_async_initialization_seconds": 0.0,
+      "auxiliary_calls": 848,
+      "auxiliary_phase_seconds": 27.559288521,
+      "device_seconds": 0.0,
+      "exposed_preparation_seconds": 0.0,
+      "gmp_fallbacks": 0,
+      "gpu_labels": 0,
+      "host_check_seconds": 0.0,
+      "initialization_wait_seconds": 0.0
+    },
+    "lean": {
+      "actual_async_initialization_seconds": 0.0,
+      "auxiliary_calls": 320,
+      "auxiliary_phase_seconds": 31.76452019,
+      "device_seconds": 0.20786297583580018,
+      "exposed_preparation_seconds": 4.751450886,
+      "gmp_fallbacks": 0,
+      "gpu_labels": 692,
+      "host_check_seconds": 1.402737195,
+      "initialization_wait_seconds": 0.0
+    },
+    "wave": {
+      "actual_async_initialization_seconds": 3.929379976,
+      "auxiliary_calls": 320,
+      "auxiliary_phase_seconds": 28.15189447,
+      "device_seconds": 0.2772356796711683,
+      "exposed_preparation_seconds": 1.853968502,
+      "gmp_fallbacks": 0,
+      "gpu_labels": 692,
+      "host_check_seconds": 0.106843692,
+      "initialization_wait_seconds": 1.745266412
+    }
+  },
+  "resources": {
+    "cpu_cap_seconds": 240000,
+    "cpu_ns": 82058015542808,
+    "failures": [
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v1.settlement.json",
+          "sha256": "f7f8145595f29de440f73d5f155f9f8e79b5873041a4b105af589daad6cb15e8"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v2",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v2.settlement.json",
+          "sha256": "e39568e97849ff3504e892b3e4a8cc7f806abcf1d03c0dfbc9dcd4d7092baafc"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v3",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v3.settlement.json",
+          "sha256": "04ed4e8458bde1f393a80af09a5faeda444f2e408cde790a50600df0743ac3d1"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-coupled-solve",
+        "settlement": {
+          "bytes": 395,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-coupled-solve.settlement.json",
+          "sha256": "56501357e63d9bff05394552b1eed2e4b4b2046043313c8b3c1361c903ce2631"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-dense-solve",
+        "settlement": {
+          "bytes": 393,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-dense-solve.settlement.json",
+          "sha256": "41e9e66d0ea8a1641d7f0b1677f36f499b538c78362bdb4e4f593f85cccc344c"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-ill_scaled-solve",
+        "settlement": {
+          "bytes": 398,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-ill_scaled-solve.settlement.json",
+          "sha256": "fd9d199f4405e9bba5cda8f68f2d5babf467dd36e344da88991b4d807829a1dc"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-irregular-solve",
+        "settlement": {
+          "bytes": 397,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-irregular-solve.settlement.json",
+          "sha256": "8c1d4287b253ea4b41b424602005925cdd202e49db68e8141612ca3ac03bbd8a"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-tall-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-tall-solve.settlement.json",
+          "sha256": "1750cbd2f52fbcc034c99ef9049496e690ff1f6f8cbfb201bdad457cbda777c5"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-wide-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-wide-solve.settlement.json",
+          "sha256": "dc2138ff6f3c27777750f3fa4bf3a621ceab6cdd5a13893827c4bc46dfa4ff91"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v1",
+        "settlement": {
+          "bytes": 365,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v1.settlement.json",
+          "sha256": "c9e71879de32ecc52c4d5f12f3337b127d8d6759a9e7393c6a79f1de2b21ccf9"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v2",
+        "settlement": {
+          "bytes": 366,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v2.settlement.json",
+          "sha256": "182c8f691dd0a9e5a516d865db415c71625d5987ba03e9237208b1443dca578d"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-development-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-development-v1.settlement.json",
+          "sha256": "f6044e287575026502d32907f6ca36b50a80367728f4a6e841f6ba32d9f0ef8b"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-opt-admit-v2",
+        "settlement": {
+          "bytes": 381,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v2.settlement.json",
+          "sha256": "5c64e06b9068ef7e43eb638ba3f7348e50d1e90fcadaa84027a4149caa591761"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "gpu-opt-admit-v3",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.settlement.json",
+          "sha256": "9a6a1b5ce9b9edce2ff69584f67e3421ae29a2e220d81ede484003594bebbb7d"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 240000000000,
+        "identity": "gpu-opt-admit-v5",
+        "settlement": {
+          "bytes": 380,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v5.settlement.json",
+          "sha256": "ae24b3547a68b4a58d63809f7f31b7329caeb85ca2231c2a8074f4cd02467274"
+        }
+      },
+      {
+        "cpu_ns": 240000000000,
+        "gpu_ns": 0,
+        "identity": "gpu-opt-freeze-v1",
+        "settlement": {
+          "bytes": 368,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-freeze-v1.settlement.json",
+          "sha256": "19f8bbd549d05b6d8ab86a10095b2b15a4ae66c52bc2cc802a5be7e20deadcac"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-sanitizers-v1",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-sanitizers-v1.settlement.json",
+          "sha256": "e8a816154107b2ff1c21465c6480dc6df4918a8ab9fd15c473776e68feea0e8c"
+        }
+      },
+      {
+        "cpu_ns": 720000000000,
+        "gpu_ns": 0,
+        "identity": "symbolic-grouped-unit-v1",
+        "settlement": {
+          "bytes": 377,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/symbolic-grouped-unit-v1.settlement.json",
+          "sha256": "40a8d3bd0be3bc79294dbb88335a747cb2c8f905b5e666cd997b894e89f10f1c"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 240000000000,
+        "identity": "wave-gpu-admit-v1",
+        "settlement": {
+          "bytes": 381,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/wave-gpu-admit-v1.settlement.json",
+          "sha256": "55ce6b8a84a8dbaaa1fd111c523d3c2efa91549d326bdff34c44172e1d9aba96"
+        }
+      }
+    ],
+    "gpu_cap_seconds": 30000,
+    "gpu_ns": 17002851269845,
+    "pending_at_snapshot": [
+      "wave-final-verify-v1"
+    ],
+    "retained_source_files_verified": 6312,
+    "subsequent_cleanup_dispositions": [
+      {
+        "bytes": 1697,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.cleanup-disposition.json",
+        "sha256": "0b052eaa7ec813852dde0abc103ecab62164e9d09a2526f223d54f853c088b20"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r0-cpu/audit.json",
+        "sha256": "9f52878c358c8f40f17377385db6062b4ca402c2a04704630aa6aeca6391ede6"
+      },
+      "audit_ns": 13779054,
+      "cell": "dense-8-99173-r0-cpu",
+      "complete_ns": 2084966104,
+      "encoding_ns": 3945660,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "cpu",
+      "model": "dense-8-99173",
+      "native_ns": 1938570211,
+      "process_ns": 2067241390,
+      "repetition": 0,
+      "response": {
+        "bytes": 2761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r0-cpu/response.json",
+        "sha256": "fed122fc6c9a4a181b51b84216163fe192e5b2e9bd4770866287a30278e53757"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r0-lean/audit.json",
+        "sha256": "1746837348210fca29f105eed14995af1fad8e0ad12822e412f792c5d61f6a9a"
+      },
+      "audit_ns": 12675642,
+      "cell": "dense-8-99173-r0-lean",
+      "complete_ns": 2584544276,
+      "encoding_ns": 3945660,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "lean",
+      "model": "dense-8-99173",
+      "native_ns": 2372265976,
+      "process_ns": 2567922974,
+      "repetition": 0,
+      "response": {
+        "bytes": 6026,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r0-lean/response.json",
+        "sha256": "0b3e28235e75eb900289379c11f380738817caeb80cff93145ed0f348d1f1f21"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r0-wave/audit.json",
+        "sha256": "c0c5877f1ef31111932f9598d53300c0ffe0d39e3bc506fc20a32da2134bf5a6"
+      },
+      "audit_ns": 12524794,
+      "cell": "dense-8-99173-r0-wave",
+      "complete_ns": 2284118537,
+      "encoding_ns": 3945660,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "wave",
+      "model": "dense-8-99173",
+      "native_ns": 2049077981,
+      "process_ns": 2267648083,
+      "repetition": 0,
+      "response": {
+        "bytes": 7168,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r0-wave/response.json",
+        "sha256": "1702efa420939775db9a6cec68356ed1a093a4e3ba881381c62d2d8f67db6217"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 596,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r0-copt_scale_off/audit.json",
+        "sha256": "c6329e1f8660de3f6e5fe3abbcc780c4c752f4c52d331e053190556445ea5bee"
+      },
+      "audit_ns": 9078520,
+      "cell": "dense-8-99173-r0-copt_scale_off",
+      "complete_ns": 877967411,
+      "encoding_ns": 3945660,
+      "exact_accepted": false,
+      "family": "dense",
+      "lane": "copt_scale_off",
+      "model": "dense-8-99173",
+      "native_ns": 415569761,
+      "process_ns": 864943231,
+      "repetition": 0,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r0-copt_scale_off/response.json",
+        "sha256": "5d5ea61d7f60dbfe348ca78b3ba570846551d78271774b09833d741c46b4bd2b"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r1-lean/audit.json",
+        "sha256": "0804ae6c7dfb6e910465d494de107b3371dfc7d1ba48553259ae136fcc266ff5"
+      },
+      "audit_ns": 12567765,
+      "cell": "dense-8-99173-r1-lean",
+      "complete_ns": 2536639418,
+      "encoding_ns": 3945660,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "lean",
+      "model": "dense-8-99173",
+      "native_ns": 2278057110,
+      "process_ns": 2520125993,
+      "repetition": 1,
+      "response": {
+        "bytes": 6024,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r1-lean/response.json",
+        "sha256": "2d43ce2db6995997ed47272cf895369c8f440fa4e2eba7ce0b3d8ac6540340ca"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r1-wave/audit.json",
+        "sha256": "aa245519c05e5901b01dc337382abcf56c4bdfbca8f2c1e504b4460ed8185bc9"
+      },
+      "audit_ns": 12454907,
+      "cell": "dense-8-99173-r1-wave",
+      "complete_ns": 2238225318,
+      "encoding_ns": 3945660,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "wave",
+      "model": "dense-8-99173",
+      "native_ns": 2013538134,
+      "process_ns": 2221824751,
+      "repetition": 1,
+      "response": {
+        "bytes": 7164,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r1-wave/response.json",
+        "sha256": "f60a15d19fc70237c586a289b3e228c48633c464f21dd0630ebbe35c40e794f9"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 597,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r1-copt_scale_off/audit.json",
+        "sha256": "781d477175646f045a96797a638b1c8d30a646375c42397eb5d8ce98fbdf2c2b"
+      },
+      "audit_ns": 10945515,
+      "cell": "dense-8-99173-r1-copt_scale_off",
+      "complete_ns": 880282251,
+      "encoding_ns": 3945660,
+      "exact_accepted": false,
+      "family": "dense",
+      "lane": "copt_scale_off",
+      "model": "dense-8-99173",
+      "native_ns": 416776239,
+      "process_ns": 865391076,
+      "repetition": 1,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r1-copt_scale_off/response.json",
+        "sha256": "d72b498568f9ed54af62408f714be29c645a155ca879f5fd68035987153a097a"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r1-cpu/audit.json",
+        "sha256": "65389fb7dce48ddc9cbd467e6f9697eeef2c27860b3d9bf459a4ac80f81307b0"
+      },
+      "audit_ns": 12561640,
+      "cell": "dense-8-99173-r1-cpu",
+      "complete_ns": 2083641291,
+      "encoding_ns": 3945660,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "cpu",
+      "model": "dense-8-99173",
+      "native_ns": 1948197224,
+      "process_ns": 2067133991,
+      "repetition": 1,
+      "response": {
+        "bytes": 2761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/dense-8-99173-r1-cpu/response.json",
+        "sha256": "3013a32ba9f66093c29843254d39c1cf60ae4d5f4b369d2cf65c87fb52a2ddb0"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r0-lean/audit.json",
+        "sha256": "d0e4ffd114a97970936f01ebb8917ebd8418deb7483dabb7eab19152c76c76f2"
+      },
+      "audit_ns": 12999143,
+      "cell": "irregular-8-99173-r0-lean",
+      "complete_ns": 2884737690,
+      "encoding_ns": 3309022,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "lean",
+      "model": "irregular-8-99173",
+      "native_ns": 2672075503,
+      "process_ns": 2868429525,
+      "repetition": 0,
+      "response": {
+        "bytes": 5585,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r0-lean/response.json",
+        "sha256": "1f4dc756340e608e8d3192b7642657eb00ab5e64404f5db499a56841799e3fc6"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r0-wave/audit.json",
+        "sha256": "00f12a07ec714913216c91d9126da1901ebcf2e3ff38730d04f7580c7a7bb5df"
+      },
+      "audit_ns": 12630467,
+      "cell": "irregular-8-99173-r0-wave",
+      "complete_ns": 2483581163,
+      "encoding_ns": 3309022,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "wave",
+      "model": "irregular-8-99173",
+      "native_ns": 2252096065,
+      "process_ns": 2467641674,
+      "repetition": 0,
+      "response": {
+        "bytes": 6536,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r0-wave/response.json",
+        "sha256": "203c04c5952ab9d890072422d5cb31bdd256b19f7318b51175aa8a6b7a10de77"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 599,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r0-copt_scale_off/audit.json",
+        "sha256": "f01fb66cd8ee7cee08cbe0d96310338704f20cf417aa76fff0690f0132aee5d4"
+      },
+      "audit_ns": 10879951,
+      "cell": "irregular-8-99173-r0-copt_scale_off",
+      "complete_ns": 829197042,
+      "encoding_ns": 3309022,
+      "exact_accepted": false,
+      "family": "irregular",
+      "lane": "copt_scale_off",
+      "model": "irregular-8-99173",
+      "native_ns": 401250780,
+      "process_ns": 815008069,
+      "repetition": 0,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r0-copt_scale_off/response.json",
+        "sha256": "e271bf75b36c8ff81b06d93d85a64a0088b65393519ba90d4fbead94e9991fa4"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r0-cpu/audit.json",
+        "sha256": "45c5636cafade3616991b795208a79683469b3c554104553c7bab1b2286b8491"
+      },
+      "audit_ns": 13169525,
+      "cell": "irregular-8-99173-r0-cpu",
+      "complete_ns": 2337645584,
+      "encoding_ns": 3309022,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "cpu",
+      "model": "irregular-8-99173",
+      "native_ns": 2227421087,
+      "process_ns": 2321167037,
+      "repetition": 0,
+      "response": {
+        "bytes": 2729,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r0-cpu/response.json",
+        "sha256": "c591beef25612ab8a5549d30c585023468946a59be705d7ccbb47dc28db9ff69"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r1-wave/audit.json",
+        "sha256": "4af5ac1ff99af403d252a8415ea7b735735f057a2571757cbf6f538aa769b3b8"
+      },
+      "audit_ns": 10197298,
+      "cell": "irregular-8-99173-r1-wave",
+      "complete_ns": 2634499207,
+      "encoding_ns": 3309022,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "wave",
+      "model": "irregular-8-99173",
+      "native_ns": 2401130440,
+      "process_ns": 2620992887,
+      "repetition": 1,
+      "response": {
+        "bytes": 6540,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r1-wave/response.json",
+        "sha256": "9873ae91caefc1b7cc162d160f95ea3dac400cf10719bf4f2a22965651258f9d"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 599,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r1-copt_scale_off/audit.json",
+        "sha256": "647996c908235be8b6e0420a66eb8e717921acf03072bbf16f8f0414e4f1fa01"
+      },
+      "audit_ns": 10914837,
+      "cell": "irregular-8-99173-r1-copt_scale_off",
+      "complete_ns": 880239155,
+      "encoding_ns": 3309022,
+      "exact_accepted": false,
+      "family": "irregular",
+      "lane": "copt_scale_off",
+      "model": "irregular-8-99173",
+      "native_ns": 437519140,
+      "process_ns": 866015296,
+      "repetition": 1,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r1-copt_scale_off/response.json",
+        "sha256": "12d1f088c69d64fa9b454dbbe78bc18240ede503476bcda550cf375b3e9bf9cf"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r1-cpu/audit.json",
+        "sha256": "f2ac6137d92bc0da4ef2a3690efc03c0c732c5956ff438750e8302cbb42e4f15"
+      },
+      "audit_ns": 12335833,
+      "cell": "irregular-8-99173-r1-cpu",
+      "complete_ns": 2333376807,
+      "encoding_ns": 3309022,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "cpu",
+      "model": "irregular-8-99173",
+      "native_ns": 2186134043,
+      "process_ns": 2317731952,
+      "repetition": 1,
+      "response": {
+        "bytes": 2729,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r1-cpu/response.json",
+        "sha256": "0d660165bb2c412322318faf3b1a6bdb6621414a04528b3437fb5ab005b9c57a"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r1-lean/audit.json",
+        "sha256": "a537275596dfc15636a9951b18f6bb5a81f8e5e7f429872398e2aca6ad7ce968"
+      },
+      "audit_ns": 12430122,
+      "cell": "irregular-8-99173-r1-lean",
+      "complete_ns": 2885335310,
+      "encoding_ns": 3309022,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "lean",
+      "model": "irregular-8-99173",
+      "native_ns": 2654674533,
+      "process_ns": 2869596166,
+      "repetition": 1,
+      "response": {
+        "bytes": 5582,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/irregular-8-99173-r1-lean/response.json",
+        "sha256": "f1bd04d252298f9fa7dec70ca7bc484525d4dc0f14f18af1428406b194f8396f"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 776,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r0-wave/audit.json",
+        "sha256": "0c8cc2e1de4d67d0ac806c116bc24369ded1e931d4bbdb45aa86aea9e16c5559"
+      },
+      "audit_ns": 11622313,
+      "cell": "wide-8-99173-r0-wave",
+      "complete_ns": 878599004,
+      "encoding_ns": 1893369,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "wave",
+      "model": "wide-8-99173",
+      "native_ns": 669955890,
+      "process_ns": 865083322,
+      "repetition": 0,
+      "response": {
+        "bytes": 5675,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r0-wave/response.json",
+        "sha256": "69a70f82c2048b6902e8112e4dbee7cd97e279e8f98b097ceaeb4cb97a4b7817"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 598,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r0-copt_scale_off/audit.json",
+        "sha256": "787839b705398a4da24d795c600b5a6c44d83ceb868eb78c8ac821a55282dde9"
+      },
+      "audit_ns": 10847440,
+      "cell": "wide-8-99173-r0-copt_scale_off",
+      "complete_ns": 878385932,
+      "encoding_ns": 1893369,
+      "exact_accepted": false,
+      "family": "wide",
+      "lane": "copt_scale_off",
+      "model": "wide-8-99173",
+      "native_ns": 416810381,
+      "process_ns": 865645123,
+      "repetition": 0,
+      "response": {
+        "bytes": 2009,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r0-copt_scale_off/response.json",
+        "sha256": "dd4df7f4be4182a0313574efc6d1408dcbeeec8f30a520716d7e819a9a10f8aa"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 776,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r0-cpu/audit.json",
+        "sha256": "dd6bb7c55af58f785e7b7b62eacd79299ce05c8a239fd05dbb5167d3680bce94"
+      },
+      "audit_ns": 11453275,
+      "cell": "wide-8-99173-r0-cpu",
+      "complete_ns": 683036203,
+      "encoding_ns": 1893369,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "cpu",
+      "model": "wide-8-99173",
+      "native_ns": 573187648,
+      "process_ns": 669689559,
+      "repetition": 0,
+      "response": {
+        "bytes": 2183,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r0-cpu/response.json",
+        "sha256": "6ef1c2eec10da583178fa01cf5ff829030c5c32e3ba3c5440294e91fe7ab81db"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 776,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r0-lean/audit.json",
+        "sha256": "1acc6e8ee3cacaa889a2c0df008c34830d0f3d4aec09b27ddf0c842cf339b794"
+      },
+      "audit_ns": 11808868,
+      "cell": "wide-8-99173-r0-lean",
+      "complete_ns": 979062140,
+      "encoding_ns": 1893369,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "lean",
+      "model": "wide-8-99173",
+      "native_ns": 781225265,
+      "process_ns": 965359903,
+      "repetition": 0,
+      "response": {
+        "bytes": 4813,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r0-lean/response.json",
+        "sha256": "c7a0c5d92c5f39111db40ac11e1065db1a5da280616cfbb4e41a45cdd417f79c"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 598,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r1-copt_scale_off/audit.json",
+        "sha256": "2248e601cd390802342cddfe1888b74800b7abfc8df573ca4852166e95686934"
+      },
+      "audit_ns": 10946004,
+      "cell": "wide-8-99173-r1-copt_scale_off",
+      "complete_ns": 828116065,
+      "encoding_ns": 1893369,
+      "exact_accepted": false,
+      "family": "wide",
+      "lane": "copt_scale_off",
+      "model": "wide-8-99173",
+      "native_ns": 395636951,
+      "process_ns": 815276692,
+      "repetition": 1,
+      "response": {
+        "bytes": 2009,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r1-copt_scale_off/response.json",
+        "sha256": "2063e64b4c328184e6fb2044db97447800020c47846f777117a95d0eb1ff1f96"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 776,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r1-cpu/audit.json",
+        "sha256": "06af377c198b827b76e1ef5e52542822be7f2805dfc1ac73692315eccea57b30"
+      },
+      "audit_ns": 11452101,
+      "cell": "wide-8-99173-r1-cpu",
+      "complete_ns": 728353965,
+      "encoding_ns": 1893369,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "cpu",
+      "model": "wide-8-99173",
+      "native_ns": 585659865,
+      "process_ns": 715008495,
+      "repetition": 1,
+      "response": {
+        "bytes": 2183,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r1-cpu/response.json",
+        "sha256": "ae20941486c66abcfe5f2d68f024510ca356df04bd7b3a73674ee87dc3fad095"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 776,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r1-lean/audit.json",
+        "sha256": "5398e5e34d5fe77213db18905f40d3d8132cd062c63dc85ecb390ea32e5cff6d"
+      },
+      "audit_ns": 11510806,
+      "cell": "wide-8-99173-r1-lean",
+      "complete_ns": 1028982301,
+      "encoding_ns": 1893369,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "lean",
+      "model": "wide-8-99173",
+      "native_ns": 824172519,
+      "process_ns": 1015578126,
+      "repetition": 1,
+      "response": {
+        "bytes": 4813,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r1-lean/response.json",
+        "sha256": "8ca178631cb8230ba0c370274916932c56b95d8d4df166859e3c31caa6027380"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 776,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r1-wave/audit.json",
+        "sha256": "7d7df618060f96ea64ec0de59d44531a6df1911546ecdacf7056b0384d705dd4"
+      },
+      "audit_ns": 11480857,
+      "cell": "wide-8-99173-r1-wave",
+      "complete_ns": 978776592,
+      "encoding_ns": 1893369,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "wave",
+      "model": "wide-8-99173",
+      "native_ns": 744857281,
+      "process_ns": 965402366,
+      "repetition": 1,
+      "response": {
+        "bytes": 5677,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/wide-8-99173-r1-wave/response.json",
+        "sha256": "6ae8b96bf298eb2a612f2f4018582eee058187c6023f01d8af4d113ce27899dd"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 599,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r0-copt_scale_off/audit.json",
+        "sha256": "2ae532aa872cb626d461be687c73dc828908d058db6d72f679fdce6597526264"
+      },
+      "audit_ns": 10801615,
+      "cell": "tall-8-99173-r0-copt_scale_off",
+      "complete_ns": 831112814,
+      "encoding_ns": 5500654,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "copt_scale_off",
+      "model": "tall-8-99173",
+      "native_ns": 360134058,
+      "process_ns": 814810545,
+      "repetition": 0,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r0-copt_scale_off/response.json",
+        "sha256": "36dfbf6d1ee19176c032f241c54a3f4c1634dbb387e01352ad5061c84bc07051"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r0-cpu/audit.json",
+        "sha256": "fb3e02039b7485af9942e8e07f4232b90ec5a690751b5d3eab78293316d3809e"
+      },
+      "audit_ns": 36754,
+      "cell": "tall-8-99173-r0-cpu",
+      "complete_ns": 10135516767,
+      "encoding_ns": 5500654,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "cpu",
+      "model": "tall-8-99173",
+      "native_ns": 10021687365,
+      "process_ns": 10129979359,
+      "repetition": 0,
+      "response": {
+        "bytes": 1264,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r0-cpu/response.json",
+        "sha256": "12875948fb638edcb157b90dc868c3731dae09f6113da1ecb6a3b1bc3ef4f694"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r0-lean/audit.json",
+        "sha256": "0d971c43bd7ffb3aa16cd1039c1b50019148ee7b99bca888beca92dadc2f51dc"
+      },
+      "audit_ns": 61784,
+      "cell": "tall-8-99173-r0-lean",
+      "complete_ns": 10290073513,
+      "encoding_ns": 5500654,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "lean",
+      "model": "tall-8-99173",
+      "native_ns": 10024207393,
+      "process_ns": 10284511075,
+      "repetition": 0,
+      "response": {
+        "bytes": 4029,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r0-lean/response.json",
+        "sha256": "24d3647c2992cd19c02c350b16f2b03da3059eef1ca5a2d4d2472fb7e054ac6e"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r0-wave/audit.json",
+        "sha256": "eade74555ab80cf5797fdef1a4b2f7f5cb9d48a3b690b50f29200697a9b60363"
+      },
+      "audit_ns": 57610,
+      "cell": "tall-8-99173-r0-wave",
+      "complete_ns": 10236707117,
+      "encoding_ns": 5500654,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "wave",
+      "model": "tall-8-99173",
+      "native_ns": 10030449514,
+      "process_ns": 10231148853,
+      "repetition": 0,
+      "response": {
+        "bytes": 4485,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r0-wave/response.json",
+        "sha256": "e19c714e1b29e1ef64e7ce4926ca221116caff524439d348f20d682bc787e88b"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r1-cpu/audit.json",
+        "sha256": "a2a8271d83f38a4a78baa6849ac1fc64adc3694835825244a6e8e249b93729e6"
+      },
+      "audit_ns": 31781,
+      "cell": "tall-8-99173-r1-cpu",
+      "complete_ns": 10136073833,
+      "encoding_ns": 5500654,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "cpu",
+      "model": "tall-8-99173",
+      "native_ns": 10022982042,
+      "process_ns": 10130541398,
+      "repetition": 1,
+      "response": {
+        "bytes": 1264,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r1-cpu/response.json",
+        "sha256": "d03cca96eb362e5fa9738c93474ce8cd4b8c547e3efb5e4e6357dcbb78db9382"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r1-lean/audit.json",
+        "sha256": "a12bdd7b6c93fcf75232e03dde622099163ae33aa875e7a94f8ede3199b560e5"
+      },
+      "audit_ns": 53830,
+      "cell": "tall-8-99173-r1-lean",
+      "complete_ns": 10237398999,
+      "encoding_ns": 5500654,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "lean",
+      "model": "tall-8-99173",
+      "native_ns": 10027178065,
+      "process_ns": 10231844515,
+      "repetition": 1,
+      "response": {
+        "bytes": 4029,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r1-lean/response.json",
+        "sha256": "4ebe3288d2ed18b05828c2d73178eb59d714b477cb24d9968fe33aa02100150a"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r1-wave/audit.json",
+        "sha256": "2d44d1f4f49b5ad2d6178560ed51ab442a9b24e8f601cb37d66fe6ba8e203749"
+      },
+      "audit_ns": 57765,
+      "cell": "tall-8-99173-r1-wave",
+      "complete_ns": 10238639426,
+      "encoding_ns": 5500654,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "wave",
+      "model": "tall-8-99173",
+      "native_ns": 10025676547,
+      "process_ns": 10233081007,
+      "repetition": 1,
+      "response": {
+        "bytes": 4484,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r1-wave/response.json",
+        "sha256": "1fc2debf5419746235d42aa8a900fd39745b7291d7f4327a7d1e421b95c38392"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 599,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r1-copt_scale_off/audit.json",
+        "sha256": "ac95e2febe035a4530874cf1ac9879aa7c91d5500c732f76175917f70b63c0bb"
+      },
+      "audit_ns": 11398843,
+      "cell": "tall-8-99173-r1-copt_scale_off",
+      "complete_ns": 882203060,
+      "encoding_ns": 5500654,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "copt_scale_off",
+      "model": "tall-8-99173",
+      "native_ns": 418498559,
+      "process_ns": 865303563,
+      "repetition": 1,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/tall-8-99173-r1-copt_scale_off/response.json",
+        "sha256": "6099477ecb2c8a51424f2e4cfc5cb38ca09443da8eb5660000e1194fff8afd5b"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r0-cpu/audit.json",
+        "sha256": "8eee6baa3fbd59f76a0e4022e56de4343ca5594cd83a89c85bba1bc1154e8d47"
+      },
+      "audit_ns": 12487229,
+      "cell": "coupled-8-99173-r0-cpu",
+      "complete_ns": 1983189397,
+      "encoding_ns": 3364971,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "cpu",
+      "model": "coupled-8-99173",
+      "native_ns": 1846497363,
+      "process_ns": 1967337197,
+      "repetition": 0,
+      "response": {
+        "bytes": 2761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r0-cpu/response.json",
+        "sha256": "0986f0b9655f553713d0af3725f6cbb796849008496ad270817b0fc6a1d3b84e"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r0-lean/audit.json",
+        "sha256": "62ebb076816149644b7d233a49083121373a1b411e5936cfecc8845d392cc885"
+      },
+      "audit_ns": 12420833,
+      "cell": "coupled-8-99173-r0-lean",
+      "complete_ns": 2487622311,
+      "encoding_ns": 3364971,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "lean",
+      "model": "coupled-8-99173",
+      "native_ns": 2281602920,
+      "process_ns": 2471836507,
+      "repetition": 0,
+      "response": {
+        "bytes": 5411,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r0-lean/response.json",
+        "sha256": "a5e214ddda86422e454fa00f77a0bf272ec64f3433e36d0795155f9ad004b907"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r0-wave/audit.json",
+        "sha256": "2539662e9ea7efd990ded9fd87235333d7ab1a998617c7e3f18bea3f1e3a5014"
+      },
+      "audit_ns": 12370044,
+      "cell": "coupled-8-99173-r0-wave",
+      "complete_ns": 2189090097,
+      "encoding_ns": 3364971,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "wave",
+      "model": "coupled-8-99173",
+      "native_ns": 1954407590,
+      "process_ns": 2173355082,
+      "repetition": 0,
+      "response": {
+        "bytes": 6274,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r0-wave/response.json",
+        "sha256": "898de335d13701a2b3f7d1b909bf8fd4efb89b52e91ef5bf399501c1c4365cfe"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 598,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r0-copt_scale_off/audit.json",
+        "sha256": "f892519dacfe77e08bc8269818a7e1ba8ff6853ae8df39e0591e2d1cee96d8b2"
+      },
+      "audit_ns": 10933239,
+      "cell": "coupled-8-99173-r0-copt_scale_off",
+      "complete_ns": 879274768,
+      "encoding_ns": 3364971,
+      "exact_accepted": false,
+      "family": "coupled",
+      "lane": "copt_scale_off",
+      "model": "coupled-8-99173",
+      "native_ns": 419684358,
+      "process_ns": 864976558,
+      "repetition": 0,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r0-copt_scale_off/response.json",
+        "sha256": "3039ca065e119a4eb440bfc14d462e322ca3cb271015d46c25b91791fe82fa54"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r1-lean/audit.json",
+        "sha256": "b751d526daf8497565965030a23ee9b2438b4062f3d4e38ab5e531c78fad3868"
+      },
+      "audit_ns": 12516153,
+      "cell": "coupled-8-99173-r1-lean",
+      "complete_ns": 2434254183,
+      "encoding_ns": 3364971,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "lean",
+      "model": "coupled-8-99173",
+      "native_ns": 2208482122,
+      "process_ns": 2418373059,
+      "repetition": 1,
+      "response": {
+        "bytes": 5410,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r1-lean/response.json",
+        "sha256": "a2dda4846cd6872417568d5d563e804b50e15cc284551e83201cd18c4fba5faa"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r1-wave/audit.json",
+        "sha256": "d824c45364aa96866611e57bd5797c289f4182991165721622dd723201b1dc7e"
+      },
+      "audit_ns": 12281243,
+      "cell": "coupled-8-99173-r1-wave",
+      "complete_ns": 2133500859,
+      "encoding_ns": 3364971,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "wave",
+      "model": "coupled-8-99173",
+      "native_ns": 1925149269,
+      "process_ns": 2117854645,
+      "repetition": 1,
+      "response": {
+        "bytes": 6271,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r1-wave/response.json",
+        "sha256": "e8cdcb2197768f853bc4ef9ad3bcfe02e8c4aa0beead1ff72d221a90a65683f1"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 598,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r1-copt_scale_off/audit.json",
+        "sha256": "28d63a3eb999e5cf99faeb05bc781e016ad3bd8d72eba9f07e88793ef9aa2b26"
+      },
+      "audit_ns": 11302881,
+      "cell": "coupled-8-99173-r1-copt_scale_off",
+      "complete_ns": 883944552,
+      "encoding_ns": 3364971,
+      "exact_accepted": false,
+      "family": "coupled",
+      "lane": "copt_scale_off",
+      "model": "coupled-8-99173",
+      "native_ns": 427725072,
+      "process_ns": 869276700,
+      "repetition": 1,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r1-copt_scale_off/response.json",
+        "sha256": "905ae4d71935b90deed23c516cd8fd80924bee2a1f2a57dd74af0c4924719279"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r1-cpu/audit.json",
+        "sha256": "a4f8c511bcc44aeccac5e88ceeb7e7c2110b9baef95a9e4cd3ad7e316a3d2b10"
+      },
+      "audit_ns": 10063058,
+      "cell": "coupled-8-99173-r1-cpu",
+      "complete_ns": 1980386809,
+      "encoding_ns": 3364971,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "cpu",
+      "model": "coupled-8-99173",
+      "native_ns": 1869203379,
+      "process_ns": 1966958780,
+      "repetition": 1,
+      "response": {
+        "bytes": 2761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/coupled-8-99173-r1-cpu/response.json",
+        "sha256": "314eaeadd9f7bcd7a93cc4f37641ba47df763f736a59b11a48bd4e7b056654d5"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r0-lean/audit.json",
+        "sha256": "184d8864ea9d65dd655c3012fb377043ef8a230fa5097e75a572922ad08e41d3"
+      },
+      "audit_ns": 10370833,
+      "cell": "ill_scaled-8-99173-r0-lean",
+      "complete_ns": 3483051537,
+      "encoding_ns": 3524535,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "lean",
+      "model": "ill_scaled-8-99173",
+      "native_ns": 3301867184,
+      "process_ns": 3469156169,
+      "repetition": 0,
+      "response": {
+        "bytes": 6068,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r0-lean/response.json",
+        "sha256": "db168476d83166ac7fbddfe7c501c449631bec800afd5268953e31cf730d692d"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r0-wave/audit.json",
+        "sha256": "33558caacdf47bcf84de31333fbd719957d9d26441b364ef1a86cc5c39cda3da"
+      },
+      "audit_ns": 12392998,
+      "cell": "ill_scaled-8-99173-r0-wave",
+      "complete_ns": 3085783970,
+      "encoding_ns": 3524535,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "wave",
+      "model": "ill_scaled-8-99173",
+      "native_ns": 2872300314,
+      "process_ns": 3069866437,
+      "repetition": 0,
+      "response": {
+        "bytes": 7208,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r0-wave/response.json",
+        "sha256": "ab39ffc6972151949a0a6239af1de42317faaea283ea664ed466bdef123db412"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 114,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r0-copt_scale_off/audit.json",
+        "sha256": "0de43d257e486460fcfa15d2011a409f4f5c0d24ee5146741d0d63312912ea74"
+      },
+      "audit_ns": 33897,
+      "cell": "ill_scaled-8-99173-r0-copt_scale_off",
+      "complete_ns": 10486314680,
+      "encoding_ns": 3524535,
+      "exact_accepted": false,
+      "family": "ill_scaled",
+      "lane": "copt_scale_off",
+      "model": "ill_scaled-8-99173",
+      "native_ns": 10032734599,
+      "process_ns": 10482756248,
+      "repetition": 0,
+      "response": {
+        "bytes": 1658,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r0-copt_scale_off/response.json",
+        "sha256": "e0ab3c26073947193fabf0235d30f2e4da7df1276145ee27d8494718cb623ea2"
+      },
+      "status": 10,
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r0-cpu/audit.json",
+        "sha256": "1b711f67b0af417d5b1ed5ce6103f6dbc6971bf521ea8329fe0a2d2df7b7a068"
+      },
+      "audit_ns": 12377103,
+      "cell": "ill_scaled-8-99173-r0-cpu",
+      "complete_ns": 2842817496,
+      "encoding_ns": 3524535,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "cpu",
+      "model": "ill_scaled-8-99173",
+      "native_ns": 2718775278,
+      "process_ns": 2826915858,
+      "repetition": 0,
+      "response": {
+        "bytes": 2801,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r0-cpu/response.json",
+        "sha256": "ce66cfbab2afae67375522786c5c3e61e46fbbca0bff8404eb5478d23173d2fd"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r1-wave/audit.json",
+        "sha256": "756f1a17516331b6e5c73ad5398f77e76291ca3797e762da03f7f4e17b866cd0"
+      },
+      "audit_ns": 12469480,
+      "cell": "ill_scaled-8-99173-r1-wave",
+      "complete_ns": 3140814793,
+      "encoding_ns": 3524535,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "wave",
+      "model": "ill_scaled-8-99173",
+      "native_ns": 2930018980,
+      "process_ns": 3124820778,
+      "repetition": 1,
+      "response": {
+        "bytes": 7210,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r1-wave/response.json",
+        "sha256": "0c8b7c4854b7104454b0dbe1f4b5557ca5555e1150d41efcc0a7fa8145d7c318"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 114,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r1-copt_scale_off/audit.json",
+        "sha256": "eb9bef426aef3171348f920859e25b76820d42cd4339f137af37366bc9b6e055"
+      },
+      "audit_ns": 32776,
+      "cell": "ill_scaled-8-99173-r1-copt_scale_off",
+      "complete_ns": 10483645190,
+      "encoding_ns": 3524535,
+      "exact_accepted": false,
+      "family": "ill_scaled",
+      "lane": "copt_scale_off",
+      "model": "ill_scaled-8-99173",
+      "native_ns": 10032567186,
+      "process_ns": 10480087879,
+      "repetition": 1,
+      "response": {
+        "bytes": 1658,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r1-copt_scale_off/response.json",
+        "sha256": "c88df3b68ac6599dfeb6fa6e4c74f016672401c692c22ae582f72b785cb37b88"
+      },
+      "status": 10,
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r1-cpu/audit.json",
+        "sha256": "991487b0efa2bf1ef7f928bc5e4dd90fee374e58e6faa6b8e2809bd79e002e5b"
+      },
+      "audit_ns": 12766922,
+      "cell": "ill_scaled-8-99173-r1-cpu",
+      "complete_ns": 2835780578,
+      "encoding_ns": 3524535,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "cpu",
+      "model": "ill_scaled-8-99173",
+      "native_ns": 2717224707,
+      "process_ns": 2819489121,
+      "repetition": 1,
+      "response": {
+        "bytes": 2801,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r1-cpu/response.json",
+        "sha256": "089bda4dfa2ea87081c49a5f9c0828d767786252c5661ad2a9f9d2311a82dce8"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r1-lean/audit.json",
+        "sha256": "0c59c01dd1041ea36e90e81816a8dc4474c963571049dec9e4fd5fbaa09a2626"
+      },
+      "audit_ns": 13376702,
+      "cell": "ill_scaled-8-99173-r1-lean",
+      "complete_ns": 3537155724,
+      "encoding_ns": 3524535,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "lean",
+      "model": "ill_scaled-8-99173",
+      "native_ns": 3312663589,
+      "process_ns": 3520254487,
+      "repetition": 1,
+      "response": {
+        "bytes": 6065,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/ill_scaled-8-99173-r1-lean/response.json",
+        "sha256": "6fb99810b0a844fee2a640b5bf81b18ae5dc4de0ef16a0efb7dc9d229db89e4c"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r0-wave/audit.json",
+        "sha256": "84bd4d53372557edbe64c44c4fe234306ab8b2ade095d305cde385a01b314b67"
+      },
+      "audit_ns": 12455377,
+      "cell": "degenerate-8-99173-r0-wave",
+      "complete_ns": 1638270582,
+      "encoding_ns": 3162189,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "wave",
+      "model": "degenerate-8-99173",
+      "native_ns": 1451725256,
+      "process_ns": 1622653016,
+      "repetition": 0,
+      "response": {
+        "bytes": 6602,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r0-wave/response.json",
+        "sha256": "38cfebedc135938ebdcb84492e2ed8b2f820e6e82b15fd68e5e0d9a2ee953788"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 597,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r0-copt_scale_off/audit.json",
+        "sha256": "852f273c2c8170afd4c347e14002f5bc1a30f1ad3a119a9fd04fc5f4dae6ecab"
+      },
+      "audit_ns": 8610860,
+      "cell": "degenerate-8-99173-r0-copt_scale_off",
+      "complete_ns": 926843289,
+      "encoding_ns": 3162189,
+      "exact_accepted": false,
+      "family": "degenerate",
+      "lane": "copt_scale_off",
+      "model": "degenerate-8-99173",
+      "native_ns": 477039838,
+      "process_ns": 915070240,
+      "repetition": 0,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r0-copt_scale_off/response.json",
+        "sha256": "a8db8c17f741afac9b5f015d4fe1ac5a14f07441e345f894d19d169b3636f9cc"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r0-cpu/audit.json",
+        "sha256": "fc66caf98f9ff06adc1a9f9791c143131a1eb0784f867d274e75b7db584fffaf"
+      },
+      "audit_ns": 12444468,
+      "cell": "degenerate-8-99173-r0-cpu",
+      "complete_ns": 1832652600,
+      "encoding_ns": 3162189,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "cpu",
+      "model": "degenerate-8-99173",
+      "native_ns": 1688647747,
+      "process_ns": 1817045943,
+      "repetition": 0,
+      "response": {
+        "bytes": 2788,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r0-cpu/response.json",
+        "sha256": "49aeeafa90f14dc012e037787880d845c2fd2d4d9a3ae02547ce86d513e1e6c3"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r0-lean/audit.json",
+        "sha256": "011c5d0586f6deeccb5a0b44875359f5f59498a46697f872c01631ecd7c184b9"
+      },
+      "audit_ns": 12869123,
+      "cell": "degenerate-8-99173-r0-lean",
+      "complete_ns": 1938219305,
+      "encoding_ns": 3162189,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "lean",
+      "model": "degenerate-8-99173",
+      "native_ns": 1741662214,
+      "process_ns": 1922187993,
+      "repetition": 0,
+      "response": {
+        "bytes": 6867,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r0-lean/response.json",
+        "sha256": "eeca470a93f3de16767968f235bf8c16a27aed405dd721ee2a4eaad1fa62674f"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 598,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r1-copt_scale_off/audit.json",
+        "sha256": "b2d4d9a79f8fc7e8ddad40aad67bee0c806001d56326b0b2a03dcb6aaca2b3df"
+      },
+      "audit_ns": 10858411,
+      "cell": "degenerate-8-99173-r1-copt_scale_off",
+      "complete_ns": 830726172,
+      "encoding_ns": 3162189,
+      "exact_accepted": false,
+      "family": "degenerate",
+      "lane": "copt_scale_off",
+      "model": "degenerate-8-99173",
+      "native_ns": 398629320,
+      "process_ns": 816705572,
+      "repetition": 1,
+      "response": {
+        "bytes": 2011,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r1-copt_scale_off/response.json",
+        "sha256": "304396cc49aed697ba9cdcb72f54dffafbc84fb17320ece882b1e19ee92b7fc2"
+      },
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r1-cpu/audit.json",
+        "sha256": "935389c06b38db6f922553a59b9006731b2dcf278495d9df0939321f7b4c09f2"
+      },
+      "audit_ns": 12448330,
+      "cell": "degenerate-8-99173-r1-cpu",
+      "complete_ns": 1832262686,
+      "encoding_ns": 3162189,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "cpu",
+      "model": "degenerate-8-99173",
+      "native_ns": 1693447674,
+      "process_ns": 1816652167,
+      "repetition": 1,
+      "response": {
+        "bytes": 2788,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r1-cpu/response.json",
+        "sha256": "085b7960561cea11f20042bd1299baba6082297b793c2129f84af6594018bccd"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r1-lean/audit.json",
+        "sha256": "be7d9951ad4ff1b56599958c155de10dc3c6b18d74ce6f85a2eb68f77d253681"
+      },
+      "audit_ns": 12601881,
+      "cell": "degenerate-8-99173-r1-lean",
+      "complete_ns": 1983758148,
+      "encoding_ns": 3162189,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "lean",
+      "model": "degenerate-8-99173",
+      "native_ns": 1790757805,
+      "process_ns": 1967994078,
+      "repetition": 1,
+      "response": {
+        "bytes": 6871,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r1-lean/response.json",
+        "sha256": "e07eb16460733d118d5d7053ae85d46a0cf047286314794023aa06729ec9f29e"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r1-wave/audit.json",
+        "sha256": "709fc601d11df4d899a21f7e60cba8620ffb501a71f29883c3701ad72b4a7564"
+      },
+      "audit_ns": 12325919,
+      "cell": "degenerate-8-99173-r1-wave",
+      "complete_ns": 1631679732,
+      "encoding_ns": 3162189,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "wave",
+      "model": "degenerate-8-99173",
+      "native_ns": 1406625239,
+      "process_ns": 1616191624,
+      "repetition": 1,
+      "response": {
+        "bytes": 6601,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-confirmation-v1/cells/degenerate-8-99173-r1-wave/response.json",
+        "sha256": "aff12d41c2e4401a701fccfce11147dfc4f9cdaf99fd2e853bffe0da68bf27c8"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    }
+  ],
+  "schema": 1,
+  "selected_steps": 1000,
+  "selection": [
+    {
+      "capped_ns": 86662681486,
+      "evidence": {
+        "bytes": 8636,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-ladder-v1/result.json",
+        "sha256": "2ced8a8ed01d6caaa025eea45c1dde8c6f7d942c62d2976ac25b50788fd5f1b8"
+      },
+      "steps": 1000,
+      "timely": 14
+    },
+    {
+      "capped_ns": 87836273059,
+      "evidence": {
+        "bytes": 8634,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-ladder-v2/result.json",
+        "sha256": "75a926f11f235a7cd639917eea4f993521d0b646981132c47749e1cd17e7d352"
+      },
+      "steps": 256,
+      "timely": 14
+    }
+  ],
+  "status": "wave_followup_complete",
+  "verified_bindings": 196
+}

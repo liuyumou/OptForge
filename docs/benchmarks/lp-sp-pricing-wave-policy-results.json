@@ -1,0 +1,1639 @@
+{
+  "comparison": {
+    "bytes": 42349,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/result.json",
+    "sha256": "7a927934a5a40fdfe3db24575f279ef4dfc22376ee2a1458e90686b8ebb82847"
+  },
+  "development": {
+    "bytes": 6366,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-development-v1/result.json",
+    "sha256": "3515191e7d1f8141731010f88d1945dcb069fcc0afebd38ba1d6342217854569"
+  },
+  "freeze": {
+    "bytes": 23018,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/freeze.json",
+    "sha256": "7885ab4b8d5e0a4fbb8fde60b05f06522adca1c2975d81e027432d951aa7127d"
+  },
+  "lanes": {
+    "cpu": {
+      "attempts": 14,
+      "timely_exact": 12,
+      "timely_strict": 2,
+      "total_complete_seconds": 43.664617034
+    },
+    "opportunistic": {
+      "attempts": 14,
+      "timely_exact": 12,
+      "timely_strict": 2,
+      "total_complete_seconds": 44.943447294
+    },
+    "wave": {
+      "attempts": 14,
+      "timely_exact": 12,
+      "timely_strict": 2,
+      "total_complete_seconds": 47.036132214
+    }
+  },
+  "limitations": [
+    "seven small generated models, two repetitions, no cache flushing",
+    "policy was motivated by the preceding held-out cohort; this confirmation uses a new seed",
+    "all initialization and final teardown remain inside cold complete cost"
+  ],
+  "pairs": [
+    {
+      "left": "cpu",
+      "maximum_left_over_right": 0.9797986299579134,
+      "median_left_over_right": 0.9583434184462715,
+      "minimum_left_over_right": 0.8684263766703225,
+      "paired_models": 6,
+      "paired_repetitions": 12,
+      "right": "opportunistic",
+      "right_faster_repetitions": 0,
+      "rows": [
+        {
+          "left_complete_seconds": 2.185637017,
+          "left_over_right": 0.9758740137016964,
+          "model": "dense-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 2.239671296
+        },
+        {
+          "left_complete_seconds": 2.184044666,
+          "left_over_right": 0.9561915572836068,
+          "model": "dense-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 2.284107875
+        },
+        {
+          "left_complete_seconds": 2.033265857,
+          "left_over_right": 0.948134512599131,
+          "model": "irregular-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 2.144490924
+        },
+        {
+          "left_complete_seconds": 2.033356283,
+          "left_over_right": 0.9287385665121026,
+          "model": "irregular-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 2.189374229
+        },
+        {
+          "left_complete_seconds": 0.67823318,
+          "left_over_right": 0.8684263766703225,
+          "model": "wide-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 0.780990995
+        },
+        {
+          "left_complete_seconds": 0.678123262,
+          "left_over_right": 0.9279176137260419,
+          "model": "wide-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 0.730801153
+        },
+        {
+          "left_complete_seconds": 2.432880118,
+          "left_over_right": 0.9797986299579134,
+          "model": "coupled-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 2.483040947
+        },
+        {
+          "left_complete_seconds": 2.433107588,
+          "left_over_right": 0.9604952796089361,
+          "model": "coupled-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 2.533180162
+        },
+        {
+          "left_complete_seconds": 2.583768999,
+          "left_over_right": 0.9627200533174012,
+          "model": "ill_scaled-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 2.68382173
+        },
+        {
+          "left_complete_seconds": 2.583611213,
+          "left_over_right": 0.962483882939998,
+          "model": "ill_scaled-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 2.684316339
+        },
+        {
+          "left_complete_seconds": 1.781934906,
+          "left_over_right": 0.9464298024525375,
+          "model": "degenerate-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 1.882796697
+        },
+        {
+          "left_complete_seconds": 1.781928738,
+          "left_over_right": 0.9726408584673714,
+          "model": "degenerate-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 1.832052111
+        }
+      ],
+      "tier": "exact"
+    },
+    {
+      "left": "wave",
+      "maximum_left_over_right": 1.2710957613937974,
+      "median_left_over_right": 1.084076829361506,
+      "minimum_left_over_right": 1.054807311100552,
+      "paired_models": 6,
+      "paired_repetitions": 12,
+      "right": "opportunistic",
+      "right_faster_repetitions": 12,
+      "rows": [
+        {
+          "left_complete_seconds": 2.439413235,
+          "left_over_right": 1.0891835955377625,
+          "model": "dense-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 2.239671296
+        },
+        {
+          "left_complete_seconds": 2.434559015,
+          "left_over_right": 1.065868666557616,
+          "model": "dense-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 2.284107875
+        },
+        {
+          "left_complete_seconds": 2.336484527,
+          "left_over_right": 1.0895287552170587,
+          "model": "irregular-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 2.144490924
+        },
+        {
+          "left_complete_seconds": 2.383448547,
+          "left_over_right": 1.08864373912387,
+          "model": "irregular-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 2.189374229
+        },
+        {
+          "left_complete_seconds": 0.981964097,
+          "left_over_right": 1.2573308825410976,
+          "model": "wide-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 0.780990995
+        },
+        {
+          "left_complete_seconds": 0.928918248,
+          "left_over_right": 1.2710957613937974,
+          "model": "wide-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 0.730801153
+        },
+        {
+          "left_complete_seconds": 2.735469559,
+          "left_over_right": 1.1016610750237459,
+          "model": "coupled-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 2.483040947
+        },
+        {
+          "left_complete_seconds": 2.733157962,
+          "left_over_right": 1.078943378366785,
+          "model": "coupled-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 2.533180162
+        },
+        {
+          "left_complete_seconds": 2.83364979,
+          "left_over_right": 1.0558263830735135,
+          "model": "ill_scaled-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 2.68382173
+        },
+        {
+          "left_complete_seconds": 2.833863913,
+          "left_over_right": 1.0557116059039866,
+          "model": "ill_scaled-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 2.684316339
+        },
+        {
+          "left_complete_seconds": 2.032497711,
+          "left_over_right": 1.079509919599142,
+          "model": "degenerate-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 1.882796697
+        },
+        {
+          "left_complete_seconds": 1.932461961,
+          "left_over_right": 1.054807311100552,
+          "model": "degenerate-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 1.832052111
+        }
+      ],
+      "tier": "exact"
+    },
+    {
+      "left": "cpu",
+      "maximum_left_over_right": 0.9279176137260419,
+      "median_left_over_right": 0.8981719951981821,
+      "minimum_left_over_right": 0.8684263766703225,
+      "paired_models": 1,
+      "paired_repetitions": 2,
+      "right": "opportunistic",
+      "right_faster_repetitions": 0,
+      "rows": [
+        {
+          "left_complete_seconds": 0.67823318,
+          "left_over_right": 0.8684263766703225,
+          "model": "wide-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 0.780990995
+        },
+        {
+          "left_complete_seconds": 0.678123262,
+          "left_over_right": 0.9279176137260419,
+          "model": "wide-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 0.730801153
+        }
+      ],
+      "tier": "strict"
+    },
+    {
+      "left": "wave",
+      "maximum_left_over_right": 1.2710957613937974,
+      "median_left_over_right": 1.2642133219674476,
+      "minimum_left_over_right": 1.2573308825410976,
+      "paired_models": 1,
+      "paired_repetitions": 2,
+      "right": "opportunistic",
+      "right_faster_repetitions": 2,
+      "rows": [
+        {
+          "left_complete_seconds": 0.981964097,
+          "left_over_right": 1.2573308825410976,
+          "model": "wide-8-111359",
+          "repetition": 0,
+          "right_complete_seconds": 0.780990995
+        },
+        {
+          "left_complete_seconds": 0.928918248,
+          "left_over_right": 1.2710957613937974,
+          "model": "wide-8-111359",
+          "repetition": 1,
+          "right_complete_seconds": 0.730801153
+        }
+      ],
+      "tier": "strict"
+    }
+  ],
+  "profiles": {
+    "cpu": {
+      "actual_initialization_seconds": 0.0,
+      "cpu_auxiliary_calls": 838,
+      "cpu_queries_while_initializing": 0,
+      "device_seconds": 0.0,
+      "exposed_preparation_seconds": 0.0,
+      "host_check_seconds": 0.0,
+      "initialization_wait_seconds": 0.0
+    },
+    "opportunistic": {
+      "actual_initialization_seconds": 4.112816612,
+      "cpu_auxiliary_calls": 578,
+      "cpu_queries_while_initializing": 18,
+      "device_seconds": 0.12701052796840667,
+      "exposed_preparation_seconds": 0.091562392,
+      "host_check_seconds": 0.095284363,
+      "initialization_wait_seconds": 7.2348e-05
+    },
+    "wave": {
+      "actual_initialization_seconds": 4.591392568,
+      "cpu_auxiliary_calls": 463,
+      "cpu_queries_while_initializing": 0,
+      "device_seconds": 0.285837824434042,
+      "exposed_preparation_seconds": 2.557580501,
+      "host_check_seconds": 0.161622964,
+      "initialization_wait_seconds": 2.427695171
+    }
+  },
+  "resources": {
+    "cpu_cap_seconds": 240000,
+    "cpu_ns": 82058015542808,
+    "failures": [
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v1.settlement.json",
+          "sha256": "f7f8145595f29de440f73d5f155f9f8e79b5873041a4b105af589daad6cb15e8"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v2",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v2.settlement.json",
+          "sha256": "e39568e97849ff3504e892b3e4a8cc7f806abcf1d03c0dfbc9dcd4d7092baafc"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v3",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v3.settlement.json",
+          "sha256": "04ed4e8458bde1f393a80af09a5faeda444f2e408cde790a50600df0743ac3d1"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-coupled-solve",
+        "settlement": {
+          "bytes": 395,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-coupled-solve.settlement.json",
+          "sha256": "56501357e63d9bff05394552b1eed2e4b4b2046043313c8b3c1361c903ce2631"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-dense-solve",
+        "settlement": {
+          "bytes": 393,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-dense-solve.settlement.json",
+          "sha256": "41e9e66d0ea8a1641d7f0b1677f36f499b538c78362bdb4e4f593f85cccc344c"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-ill_scaled-solve",
+        "settlement": {
+          "bytes": 398,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-ill_scaled-solve.settlement.json",
+          "sha256": "fd9d199f4405e9bba5cda8f68f2d5babf467dd36e344da88991b4d807829a1dc"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-irregular-solve",
+        "settlement": {
+          "bytes": 397,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-irregular-solve.settlement.json",
+          "sha256": "8c1d4287b253ea4b41b424602005925cdd202e49db68e8141612ca3ac03bbd8a"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-tall-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-tall-solve.settlement.json",
+          "sha256": "1750cbd2f52fbcc034c99ef9049496e690ff1f6f8cbfb201bdad457cbda777c5"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-wide-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-wide-solve.settlement.json",
+          "sha256": "dc2138ff6f3c27777750f3fa4bf3a621ceab6cdd5a13893827c4bc46dfa4ff91"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v1",
+        "settlement": {
+          "bytes": 365,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v1.settlement.json",
+          "sha256": "c9e71879de32ecc52c4d5f12f3337b127d8d6759a9e7393c6a79f1de2b21ccf9"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v2",
+        "settlement": {
+          "bytes": 366,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v2.settlement.json",
+          "sha256": "182c8f691dd0a9e5a516d865db415c71625d5987ba03e9237208b1443dca578d"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-development-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-development-v1.settlement.json",
+          "sha256": "f6044e287575026502d32907f6ca36b50a80367728f4a6e841f6ba32d9f0ef8b"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-opt-admit-v2",
+        "settlement": {
+          "bytes": 381,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v2.settlement.json",
+          "sha256": "5c64e06b9068ef7e43eb638ba3f7348e50d1e90fcadaa84027a4149caa591761"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "gpu-opt-admit-v3",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.settlement.json",
+          "sha256": "9a6a1b5ce9b9edce2ff69584f67e3421ae29a2e220d81ede484003594bebbb7d"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 240000000000,
+        "identity": "gpu-opt-admit-v5",
+        "settlement": {
+          "bytes": 380,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v5.settlement.json",
+          "sha256": "ae24b3547a68b4a58d63809f7f31b7329caeb85ca2231c2a8074f4cd02467274"
+        }
+      },
+      {
+        "cpu_ns": 240000000000,
+        "gpu_ns": 0,
+        "identity": "gpu-opt-freeze-v1",
+        "settlement": {
+          "bytes": 368,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-freeze-v1.settlement.json",
+          "sha256": "19f8bbd549d05b6d8ab86a10095b2b15a4ae66c52bc2cc802a5be7e20deadcac"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-sanitizers-v1",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-sanitizers-v1.settlement.json",
+          "sha256": "e8a816154107b2ff1c21465c6480dc6df4918a8ab9fd15c473776e68feea0e8c"
+        }
+      },
+      {
+        "cpu_ns": 720000000000,
+        "gpu_ns": 0,
+        "identity": "symbolic-grouped-unit-v1",
+        "settlement": {
+          "bytes": 377,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/symbolic-grouped-unit-v1.settlement.json",
+          "sha256": "40a8d3bd0be3bc79294dbb88335a747cb2c8f905b5e666cd997b894e89f10f1c"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 240000000000,
+        "identity": "wave-gpu-admit-v1",
+        "settlement": {
+          "bytes": 381,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/wave-gpu-admit-v1.settlement.json",
+          "sha256": "55ce6b8a84a8dbaaa1fd111c523d3c2efa91549d326bdff34c44172e1d9aba96"
+        }
+      }
+    ],
+    "gpu_cap_seconds": 30000,
+    "gpu_ns": 17002851269845,
+    "pending_at_snapshot": [
+      "wave-final-verify-v1"
+    ],
+    "retained_source_files_verified": 6312,
+    "subsequent_cleanup_dispositions": [
+      {
+        "bytes": 1697,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.cleanup-disposition.json",
+        "sha256": "0b052eaa7ec813852dde0abc103ecab62164e9d09a2526f223d54f853c088b20"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r0-cpu/audit.json",
+        "sha256": "eee3529f23f135c5ae73a218d0000cb20a739ead7d9442e3ff6b8f8eeeb58544"
+      },
+      "audit_ns": 13811038,
+      "cell": "dense-8-111359-r0-cpu",
+      "complete_ns": 2185637017,
+      "encoding_ns": 4279653,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "cpu",
+      "model": "dense-8-111359",
+      "native_ns": 2083686447,
+      "process_ns": 2167546326,
+      "repetition": 0,
+      "response": {
+        "bytes": 2777,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r0-cpu/response.json",
+        "sha256": "52fb3f57963d688f35aa541da2e8ed365aa14e27ab1a44976b12d408aecd9761"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r0-wave/audit.json",
+        "sha256": "1cf46dfbdae09419b5b972a351152ec579cb0ddaf0363e3eeacdec85eefaf5de"
+      },
+      "audit_ns": 12746220,
+      "cell": "dense-8-111359-r0-wave",
+      "complete_ns": 2439413235,
+      "encoding_ns": 4279653,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "wave",
+      "model": "dense-8-111359",
+      "native_ns": 2238286856,
+      "process_ns": 2422387362,
+      "repetition": 0,
+      "response": {
+        "bytes": 6880,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r0-wave/response.json",
+        "sha256": "737c64cbb8e2ea4c25d088cb36a4341e4111832fd9df352eb70560d18552fafb"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r0-opportunistic/audit.json",
+        "sha256": "053f596364934d74abd1b92fb82a958828ed72b3cdb5b73550185e687d56e098"
+      },
+      "audit_ns": 12386431,
+      "cell": "dense-8-111359-r0-opportunistic",
+      "complete_ns": 2239671296,
+      "encoding_ns": 4279653,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "opportunistic",
+      "model": "dense-8-111359",
+      "native_ns": 2049339063,
+      "process_ns": 2223005212,
+      "repetition": 0,
+      "response": {
+        "bytes": 5685,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r0-opportunistic/response.json",
+        "sha256": "aa335c473738c7c08e2c8d6eb2345145c5b8693be668f21bd6963734ce55f9f5"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r1-wave/audit.json",
+        "sha256": "520bff56650b7a97d85811e94927aab5250e6d0845a940b47b037d381bdd3e40"
+      },
+      "audit_ns": 12589991,
+      "cell": "dense-8-111359-r1-wave",
+      "complete_ns": 2434559015,
+      "encoding_ns": 4279653,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "wave",
+      "model": "dense-8-111359",
+      "native_ns": 2233127509,
+      "process_ns": 2417689371,
+      "repetition": 1,
+      "response": {
+        "bytes": 6883,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r1-wave/response.json",
+        "sha256": "7b1e605c68c632f76467f8bf4487a89424f0314af476e480351c2909e801cc86"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r1-opportunistic/audit.json",
+        "sha256": "2f8df92c862012d66b8229418954fb9ce8d004448a853c001ab663736e9c14c7"
+      },
+      "audit_ns": 12488597,
+      "cell": "dense-8-111359-r1-opportunistic",
+      "complete_ns": 2284107875,
+      "encoding_ns": 4279653,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "opportunistic",
+      "model": "dense-8-111359",
+      "native_ns": 2084263037,
+      "process_ns": 2267339625,
+      "repetition": 1,
+      "response": {
+        "bytes": 5684,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r1-opportunistic/response.json",
+        "sha256": "3fbbb23f324221506ed443a848fb4e45c7d1bd5d48af600c21b45da2be752537"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r1-cpu/audit.json",
+        "sha256": "ea1bc0224af79c20a8adc339e547d9d5c9af2764a7370ec9155a2dc77d6271ae"
+      },
+      "audit_ns": 12416093,
+      "cell": "dense-8-111359-r1-cpu",
+      "complete_ns": 2184044666,
+      "encoding_ns": 4279653,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "cpu",
+      "model": "dense-8-111359",
+      "native_ns": 2080268287,
+      "process_ns": 2167348920,
+      "repetition": 1,
+      "response": {
+        "bytes": 2777,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/dense-8-111359-r1-cpu/response.json",
+        "sha256": "1c7616ad462e00d2dd0bcc0615ceecdabec0749931567546237f4577b7bded6a"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r0-wave/audit.json",
+        "sha256": "0456a4262e388d740c02eeb72a3bdb98fe9b88e3d43ef75711d750f5c73adf14"
+      },
+      "audit_ns": 12602876,
+      "cell": "irregular-8-111359-r0-wave",
+      "complete_ns": 2336484527,
+      "encoding_ns": 3409824,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "wave",
+      "model": "irregular-8-111359",
+      "native_ns": 2129654128,
+      "process_ns": 2320471827,
+      "repetition": 0,
+      "response": {
+        "bytes": 6872,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r0-wave/response.json",
+        "sha256": "24c2feb56910b4b06ca92a438b8ea9ab0f0680f77f8fd56d033549dfe4f0b208"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r0-opportunistic/audit.json",
+        "sha256": "39688a558d37f465cdb169ab695260042d9aa3f9ddc92a2bd94f9a6ee2a17edf"
+      },
+      "audit_ns": 12386837,
+      "cell": "irregular-8-111359-r0-opportunistic",
+      "complete_ns": 2144490924,
+      "encoding_ns": 3409824,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "opportunistic",
+      "model": "irregular-8-111359",
+      "native_ns": 1933404324,
+      "process_ns": 2128694263,
+      "repetition": 0,
+      "response": {
+        "bytes": 5671,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r0-opportunistic/response.json",
+        "sha256": "eecd16b9ea2fad8015d70dcc72bcf6208d412ec31eec6219c0b47f3091107a6a"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r0-cpu/audit.json",
+        "sha256": "1e0208dabb54779737305b0f917e3996693a2b350c22f2a673e3413fe762f403"
+      },
+      "audit_ns": 12269671,
+      "cell": "irregular-8-111359-r0-cpu",
+      "complete_ns": 2033265857,
+      "encoding_ns": 3409824,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "cpu",
+      "model": "irregular-8-111359",
+      "native_ns": 1922997263,
+      "process_ns": 2017586362,
+      "repetition": 0,
+      "response": {
+        "bytes": 2768,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r0-cpu/response.json",
+        "sha256": "71fa3b6c248cb05c865aa414376605081a7e02d5b89cba907f6f6a53c376bcf2"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r1-opportunistic/audit.json",
+        "sha256": "6856484f1f9d835d5215d0f14c9bd605dbbb7c038577e1d4aa5575c15c004c08"
+      },
+      "audit_ns": 13068613,
+      "cell": "irregular-8-111359-r1-opportunistic",
+      "complete_ns": 2189374229,
+      "encoding_ns": 3409824,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "opportunistic",
+      "model": "irregular-8-111359",
+      "native_ns": 1965740520,
+      "process_ns": 2172895792,
+      "repetition": 1,
+      "response": {
+        "bytes": 4606,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r1-opportunistic/response.json",
+        "sha256": "d40c87d1f52d285c866bfdb2f8218d1d15fbf6aae835fa1d6ee633a235b0a6e3"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r1-cpu/audit.json",
+        "sha256": "c242b6a62dd3d663cde79cba28eb264b355794f313415f62bbfec11af9164c5c"
+      },
+      "audit_ns": 13221341,
+      "cell": "irregular-8-111359-r1-cpu",
+      "complete_ns": 2033356283,
+      "encoding_ns": 3409824,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "cpu",
+      "model": "irregular-8-111359",
+      "native_ns": 1924019908,
+      "process_ns": 2016725118,
+      "repetition": 1,
+      "response": {
+        "bytes": 2768,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r1-cpu/response.json",
+        "sha256": "c737bed2124f522244195d28f925c42e2e59cb810af1567ace5a1d2ceaf401e2"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r1-wave/audit.json",
+        "sha256": "e13993e4afd8351514d2e6ce31a458a86cb98e6002f54ac431646461b7fc2afb"
+      },
+      "audit_ns": 12422322,
+      "cell": "irregular-8-111359-r1-wave",
+      "complete_ns": 2383448547,
+      "encoding_ns": 3409824,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "wave",
+      "model": "irregular-8-111359",
+      "native_ns": 2158476904,
+      "process_ns": 2367616401,
+      "repetition": 1,
+      "response": {
+        "bytes": 6873,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/irregular-8-111359-r1-wave/response.json",
+        "sha256": "e213125ed2112770b847cd49b6865c3271d5db89f3216a247b02d171c31b22d1"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 777,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r0-opportunistic/audit.json",
+        "sha256": "a6958610c768ee03e74f1e1b73840f42c82d6c3cc345ff530baf2f8418952687"
+      },
+      "audit_ns": 11882541,
+      "cell": "wide-8-111359-r0-opportunistic",
+      "complete_ns": 780990995,
+      "encoding_ns": 1929969,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "opportunistic",
+      "model": "wide-8-111359",
+      "native_ns": 521149186,
+      "process_ns": 767178485,
+      "repetition": 0,
+      "response": {
+        "bytes": 4308,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r0-opportunistic/response.json",
+        "sha256": "e96a1fa23b64bf9ea7bb15376723f0e26323944744c6fd9e636441ef7d322e8f"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 777,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r0-cpu/audit.json",
+        "sha256": "e054df147fb93140727091727355a3ed6ae7d0ce4528a4082bde3e6932925750"
+      },
+      "audit_ns": 11438529,
+      "cell": "wide-8-111359-r0-cpu",
+      "complete_ns": 678233180,
+      "encoding_ns": 1929969,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "cpu",
+      "model": "wide-8-111359",
+      "native_ns": 575288462,
+      "process_ns": 664864682,
+      "repetition": 0,
+      "response": {
+        "bytes": 2186,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r0-cpu/response.json",
+        "sha256": "1dcba171b753c6520b51cf5524fd2cd9d1ea0f454e4cecfa431f29ed5fba4ea6"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 777,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r0-wave/audit.json",
+        "sha256": "e2373aeefe713c8d19ce470719585c5439b922d00d747969334ac7cc11c0fdc9"
+      },
+      "audit_ns": 11769717,
+      "cell": "wide-8-111359-r0-wave",
+      "complete_ns": 981964097,
+      "encoding_ns": 1929969,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "wave",
+      "model": "wide-8-111359",
+      "native_ns": 752439437,
+      "process_ns": 968264411,
+      "repetition": 0,
+      "response": {
+        "bytes": 5676,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r0-wave/response.json",
+        "sha256": "9c9e5c90f7327999fd8ab2144ad49ad19bd84c7e85148625df92ab7196ff2668"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 777,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r1-cpu/audit.json",
+        "sha256": "3931e37343362e180af658207fae0374702910e2de295f18677d9f8322709ee8"
+      },
+      "audit_ns": 11473545,
+      "cell": "wide-8-111359-r1-cpu",
+      "complete_ns": 678123262,
+      "encoding_ns": 1929969,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "cpu",
+      "model": "wide-8-111359",
+      "native_ns": 570936241,
+      "process_ns": 664719748,
+      "repetition": 1,
+      "response": {
+        "bytes": 2186,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r1-cpu/response.json",
+        "sha256": "b3b0e9e35cd0659daeb3e23f72c6e98bdbec05f1d9b9c729ac7aac25e484df32"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 777,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r1-wave/audit.json",
+        "sha256": "7b20dcde56b3c519b20989a654f3a2ad655bcdb2d676d37fed1547909b66bf44"
+      },
+      "audit_ns": 11738261,
+      "cell": "wide-8-111359-r1-wave",
+      "complete_ns": 928918248,
+      "encoding_ns": 1929969,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "wave",
+      "model": "wide-8-111359",
+      "native_ns": 698381148,
+      "process_ns": 915250018,
+      "repetition": 1,
+      "response": {
+        "bytes": 5676,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r1-wave/response.json",
+        "sha256": "85655a0bb9968ef3a2c9864405aab509d938bb7c1187f11bb8ae260e9062f370"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 777,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r1-opportunistic/audit.json",
+        "sha256": "29f5bc67bcbd69b10b4ca8f8f2e5330fa9d0387f4dcbcf81ae7e40a192bb5806"
+      },
+      "audit_ns": 11515202,
+      "cell": "wide-8-111359-r1-opportunistic",
+      "complete_ns": 730801153,
+      "encoding_ns": 1929969,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "opportunistic",
+      "model": "wide-8-111359",
+      "native_ns": 514300381,
+      "process_ns": 717355982,
+      "repetition": 1,
+      "response": {
+        "bytes": 4307,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/wide-8-111359-r1-opportunistic/response.json",
+        "sha256": "845e05b8ddf0a7dcf62bd13f080e83860a264e476cdbb9dc8cdea9c5ae06e97e"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r0-cpu/audit.json",
+        "sha256": "e352aa8bb90a22fab89199bc2a5c7dfc03b50d7fc6cff1c2b627698327b0e826"
+      },
+      "audit_ns": 36565,
+      "cell": "tall-8-111359-r0-cpu",
+      "complete_ns": 10137417114,
+      "encoding_ns": 5479270,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "cpu",
+      "model": "tall-8-111359",
+      "native_ns": 10021932364,
+      "process_ns": 10131901279,
+      "repetition": 0,
+      "response": {
+        "bytes": 1264,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r0-cpu/response.json",
+        "sha256": "0f3a78d633c574e8e5743cfea5133fe43cfd8d85e1d76c264cdc6b3b5cffb358"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r0-wave/audit.json",
+        "sha256": "f3c157e9cc6738074ddc653c809d015fb4f8c19a30724caa82509337ce1c5f3b"
+      },
+      "audit_ns": 50697,
+      "cell": "tall-8-111359-r0-wave",
+      "complete_ns": 10238821600,
+      "encoding_ns": 5479270,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "wave",
+      "model": "tall-8-111359",
+      "native_ns": 10040995166,
+      "process_ns": 10233291633,
+      "repetition": 0,
+      "response": {
+        "bytes": 3893,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r0-wave/response.json",
+        "sha256": "140ea5468014025eb5eb157d31242a2169f3744ab5c81ce3dbe99f1d60820d8d"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r0-opportunistic/audit.json",
+        "sha256": "255ce240dab8aad6d25d00a46f6c7d15d8aa7d17489d8305913cb76e49a7b835"
+      },
+      "audit_ns": 39711,
+      "cell": "tall-8-111359-r0-opportunistic",
+      "complete_ns": 10239500882,
+      "encoding_ns": 5479270,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "opportunistic",
+      "model": "tall-8-111359",
+      "native_ns": 10026997852,
+      "process_ns": 10233981901,
+      "repetition": 0,
+      "response": {
+        "bytes": 2640,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r0-opportunistic/response.json",
+        "sha256": "51cd4ec5ef8b2d9f9ad9628f0178cdbeef565933c129af27538c62b6b89405e5"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r1-wave/audit.json",
+        "sha256": "affa38583f5010861788b222bd013f5315737f6419cffbd63db5bb7054201870"
+      },
+      "audit_ns": 63386,
+      "cell": "tall-8-111359-r1-wave",
+      "complete_ns": 10191422049,
+      "encoding_ns": 5479270,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "wave",
+      "model": "tall-8-111359",
+      "native_ns": 10015677194,
+      "process_ns": 10185879393,
+      "repetition": 1,
+      "response": {
+        "bytes": 5514,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r1-wave/response.json",
+        "sha256": "cef886b7754da0df74313171c45f0426576efb05f69991d45bed0a9edb3ee006"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r1-opportunistic/audit.json",
+        "sha256": "0008758397d22b49761d182b11428268eac4a16b15daf9c3ba3bb901beaa78b8"
+      },
+      "audit_ns": 35946,
+      "cell": "tall-8-111359-r1-opportunistic",
+      "complete_ns": 10235301954,
+      "encoding_ns": 5479270,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "opportunistic",
+      "model": "tall-8-111359",
+      "native_ns": 10027185913,
+      "process_ns": 10229786738,
+      "repetition": 1,
+      "response": {
+        "bytes": 2640,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r1-opportunistic/response.json",
+        "sha256": "1067371b5d0823c6656e4732354aac48941cf9ad67f6e5aed18f1cb381df53db"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 166,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r1-cpu/audit.json",
+        "sha256": "0533ec2859a73d0beff30217a4f2e5ff5b5faaf1e2829a341ed99e96085b890c"
+      },
+      "audit_ns": 31202,
+      "cell": "tall-8-111359-r1-cpu",
+      "complete_ns": 10137308093,
+      "encoding_ns": 5479270,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "cpu",
+      "model": "tall-8-111359",
+      "native_ns": 10020023841,
+      "process_ns": 10131797621,
+      "repetition": 1,
+      "response": {
+        "bytes": 1264,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/tall-8-111359-r1-cpu/response.json",
+        "sha256": "9ac6ac2b0be529277ee7280e5810739067292f9e7ddf02323bf7ec5036b97402"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r0-wave/audit.json",
+        "sha256": "960e8a4d79ce2662f11b3ae4bbfab5f8f0d313822da8542c89db98acc95a6bda"
+      },
+      "audit_ns": 12690462,
+      "cell": "coupled-8-111359-r0-wave",
+      "complete_ns": 2735469559,
+      "encoding_ns": 3334201,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "wave",
+      "model": "coupled-8-111359",
+      "native_ns": 2507625421,
+      "process_ns": 2719444896,
+      "repetition": 0,
+      "response": {
+        "bytes": 6865,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r0-wave/response.json",
+        "sha256": "85b939549a5a1385dfa28622dd81311015fb611a9e64f0e754e4e15cd265f021"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r0-opportunistic/audit.json",
+        "sha256": "a2db34fed2379f8852b4d11088cc8b0e704886d647947b4af59db979aad2db9c"
+      },
+      "audit_ns": 12424785,
+      "cell": "coupled-8-111359-r0-opportunistic",
+      "complete_ns": 2483040947,
+      "encoding_ns": 3334201,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "opportunistic",
+      "model": "coupled-8-111359",
+      "native_ns": 2256329459,
+      "process_ns": 2467281961,
+      "repetition": 0,
+      "response": {
+        "bytes": 5665,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r0-opportunistic/response.json",
+        "sha256": "ac924195a601d73c31583789c59a93d1bc4e7e943e0fb47a7c5fad4429d250ab"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r0-cpu/audit.json",
+        "sha256": "7918bcbcfdbc7a3fba6d2bd75813cc5e34f1965d7a6854c41a48fc6f080dcba6"
+      },
+      "audit_ns": 12439661,
+      "cell": "coupled-8-111359-r0-cpu",
+      "complete_ns": 2432880118,
+      "encoding_ns": 3334201,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "cpu",
+      "model": "coupled-8-111359",
+      "native_ns": 2295462980,
+      "process_ns": 2417106256,
+      "repetition": 0,
+      "response": {
+        "bytes": 2762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r0-cpu/response.json",
+        "sha256": "f68c9884d5af7cb9bf498a3939538e079e7d0755b2228b03315659edfeaf8618"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r1-opportunistic/audit.json",
+        "sha256": "3defb34e23efa8b24946703969c93ea1db45951f6ee438042949e99f2bc1920d"
+      },
+      "audit_ns": 12285639,
+      "cell": "coupled-8-111359-r1-opportunistic",
+      "complete_ns": 2533180162,
+      "encoding_ns": 3334201,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "opportunistic",
+      "model": "coupled-8-111359",
+      "native_ns": 2333020684,
+      "process_ns": 2517560322,
+      "repetition": 1,
+      "response": {
+        "bytes": 4599,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r1-opportunistic/response.json",
+        "sha256": "ad918ee9b7f1356427907fccca8cfb3976356d946a9bcc35bccd2eddbc48af16"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r1-cpu/audit.json",
+        "sha256": "88ec2e5ddcdee60405dc924b64f7279aebcdb764cdc4696e6493e385c61e772b"
+      },
+      "audit_ns": 12330356,
+      "cell": "coupled-8-111359-r1-cpu",
+      "complete_ns": 2433107588,
+      "encoding_ns": 3334201,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "cpu",
+      "model": "coupled-8-111359",
+      "native_ns": 2308886744,
+      "process_ns": 2417443031,
+      "repetition": 1,
+      "response": {
+        "bytes": 2762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r1-cpu/response.json",
+        "sha256": "55bedd0d1a012752f77b2418d24219f06b95e178786d3512e25b4833435c06d4"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r1-wave/audit.json",
+        "sha256": "3093bd4dded013d04fb5c0e7784c50db775304045464c1d96204c4389c856dfc"
+      },
+      "audit_ns": 12203408,
+      "cell": "coupled-8-111359-r1-wave",
+      "complete_ns": 2733157962,
+      "encoding_ns": 3334201,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "wave",
+      "model": "coupled-8-111359",
+      "native_ns": 2536497808,
+      "process_ns": 2717620353,
+      "repetition": 1,
+      "response": {
+        "bytes": 6864,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/coupled-8-111359-r1-wave/response.json",
+        "sha256": "a6a12bf11816add865bd3aec7556e0c336bb838418c97805a8be28a90e917c50"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 775,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r0-opportunistic/audit.json",
+        "sha256": "565248139b4564721c37e492e56e9d7fb909b494346ebd0d71c480b1213609f9"
+      },
+      "audit_ns": 12570946,
+      "cell": "ill_scaled-8-111359-r0-opportunistic",
+      "complete_ns": 2683821730,
+      "encoding_ns": 3552929,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "opportunistic",
+      "model": "ill_scaled-8-111359",
+      "native_ns": 2485582812,
+      "process_ns": 2667697855,
+      "repetition": 0,
+      "response": {
+        "bytes": 5994,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r0-opportunistic/response.json",
+        "sha256": "ab9352368985b4504e38b5d05e0f560ef59e081a6147171c535f0e12db52b112"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 775,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r0-cpu/audit.json",
+        "sha256": "e821b336db1a7bf0a6a6256a6b388f6e24b3f2ed9dcc73478cc153d0b534a506"
+      },
+      "audit_ns": 12739920,
+      "cell": "ill_scaled-8-111359-r0-cpu",
+      "complete_ns": 2583768999,
+      "encoding_ns": 3552929,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "cpu",
+      "model": "ill_scaled-8-111359",
+      "native_ns": 2456973460,
+      "process_ns": 2567476150,
+      "repetition": 0,
+      "response": {
+        "bytes": 2794,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r0-cpu/response.json",
+        "sha256": "00951604d6b2be648aa473bde4eb8bc187de84add87393df50554e9ed50522b6"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 775,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r0-wave/audit.json",
+        "sha256": "5c628b19e65ab4bb33c06809361134845a65700894919126bdbef873d4fd11b6"
+      },
+      "audit_ns": 12328351,
+      "cell": "ill_scaled-8-111359-r0-wave",
+      "complete_ns": 2833649790,
+      "encoding_ns": 3552929,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "wave",
+      "model": "ill_scaled-8-111359",
+      "native_ns": 2635460429,
+      "process_ns": 2817768510,
+      "repetition": 0,
+      "response": {
+        "bytes": 6897,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r0-wave/response.json",
+        "sha256": "401b5881af8d55772c9758be246c02cd8a6b628334e3cbccf578976d4fcf805b"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 775,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r1-cpu/audit.json",
+        "sha256": "23011fd484bfeb08695060de042407972b9e6fe9739d0f313ed2bb42df6368bb"
+      },
+      "audit_ns": 12649930,
+      "cell": "ill_scaled-8-111359-r1-cpu",
+      "complete_ns": 2583611213,
+      "encoding_ns": 3552929,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "cpu",
+      "model": "ill_scaled-8-111359",
+      "native_ns": 2443784295,
+      "process_ns": 2567408354,
+      "repetition": 1,
+      "response": {
+        "bytes": 2794,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r1-cpu/response.json",
+        "sha256": "9fae3f35d9ceb990eb52dd21d59265d2fc20a43e6ee2c268d2a21a45a6844987"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 775,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r1-wave/audit.json",
+        "sha256": "4343568bc088fef161a9352f95c0e35ade4fd419d82b6f4152410d97d0349e35"
+      },
+      "audit_ns": 12412508,
+      "cell": "ill_scaled-8-111359-r1-wave",
+      "complete_ns": 2833863913,
+      "encoding_ns": 3552929,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "wave",
+      "model": "ill_scaled-8-111359",
+      "native_ns": 2620303877,
+      "process_ns": 2817898476,
+      "repetition": 1,
+      "response": {
+        "bytes": 6898,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r1-wave/response.json",
+        "sha256": "af4c2137e1f30d654bb6d02d947863e2683bffa0454c2b98ba0a9d233a7e01f7"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 775,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r1-opportunistic/audit.json",
+        "sha256": "cd7df8c891696f4d668c70e35c353f03f44dd22a7b91e0c16ce5a463deb2ca0e"
+      },
+      "audit_ns": 12960398,
+      "cell": "ill_scaled-8-111359-r1-opportunistic",
+      "complete_ns": 2684316339,
+      "encoding_ns": 3552929,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "opportunistic",
+      "model": "ill_scaled-8-111359",
+      "native_ns": 2469362447,
+      "process_ns": 2667803012,
+      "repetition": 1,
+      "response": {
+        "bytes": 5996,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/ill_scaled-8-111359-r1-opportunistic/response.json",
+        "sha256": "a44842202a96a6f18c9e0a76f337169c6d8eff728cdc6aca94886fceab64bda3"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r0-cpu/audit.json",
+        "sha256": "44f729039087ad3d0fcaf15a8952db162d9e3b1a936c07daa5c7a37b91632cb7"
+      },
+      "audit_ns": 12413813,
+      "cell": "degenerate-8-111359-r0-cpu",
+      "complete_ns": 1781934906,
+      "encoding_ns": 3245593,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "cpu",
+      "model": "degenerate-8-111359",
+      "native_ns": 1641427788,
+      "process_ns": 1766275500,
+      "repetition": 0,
+      "response": {
+        "bytes": 2800,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r0-cpu/response.json",
+        "sha256": "c57a8f20f54e71cc75a152e55c25567529f899b0e7298831ebb044fc3a7d455c"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r0-wave/audit.json",
+        "sha256": "a36b2c9f0f304bad218aba3e75621b55e50684b686826e6bc2a6fa8520afb196"
+      },
+      "audit_ns": 12520191,
+      "cell": "degenerate-8-111359-r0-wave",
+      "complete_ns": 2032497711,
+      "encoding_ns": 3245593,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "wave",
+      "model": "degenerate-8-111359",
+      "native_ns": 1825149457,
+      "process_ns": 2016731927,
+      "repetition": 0,
+      "response": {
+        "bytes": 6308,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r0-wave/response.json",
+        "sha256": "81992370c02fdd7d1a967af104cbc62abf2e92ab7da30aa59e4a3de005b8363b"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r0-opportunistic/audit.json",
+        "sha256": "a14e6ff4c2669e08fea7c06481e8ad986cf2d679b73f89983393d28b333de295"
+      },
+      "audit_ns": 12665460,
+      "cell": "degenerate-8-111359-r0-opportunistic",
+      "complete_ns": 1882796697,
+      "encoding_ns": 3245593,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "opportunistic",
+      "model": "degenerate-8-111359",
+      "native_ns": 1648681177,
+      "process_ns": 1866885644,
+      "repetition": 0,
+      "response": {
+        "bytes": 5704,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r0-opportunistic/response.json",
+        "sha256": "8c6fd7989b63eb2dc995e77f1776289df057562597aea5f0a3a3ddcd02bf421f"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r1-wave/audit.json",
+        "sha256": "5a16a66f8bfadf8fd8bf68c6d330dad1b6865d99e62f232808234c861331d6fb"
+      },
+      "audit_ns": 12346949,
+      "cell": "degenerate-8-111359-r1-wave",
+      "complete_ns": 1932461961,
+      "encoding_ns": 3245593,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "wave",
+      "model": "degenerate-8-111359",
+      "native_ns": 1735000902,
+      "process_ns": 1916869419,
+      "repetition": 1,
+      "response": {
+        "bytes": 6308,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r1-wave/response.json",
+        "sha256": "d544e07b3373ffc250e904158479b2e6afb586fc6bb0f87a10136af6246f0ea3"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r1-opportunistic/audit.json",
+        "sha256": "a1ca7d54f732d2986d22f4083b39a3e236379b5d069c7520f774ac4c43deb672"
+      },
+      "audit_ns": 12388446,
+      "cell": "degenerate-8-111359-r1-opportunistic",
+      "complete_ns": 1832052111,
+      "encoding_ns": 3245593,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "opportunistic",
+      "model": "degenerate-8-111359",
+      "native_ns": 1637875332,
+      "process_ns": 1816418072,
+      "repetition": 1,
+      "response": {
+        "bytes": 5703,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r1-opportunistic/response.json",
+        "sha256": "52371868c32b3d2faff08846da72dc5c3a2cd58a503bea9fbe5e7d62dd6fc5d9"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r1-cpu/audit.json",
+        "sha256": "1ff349e1fd2b636137f066dc7d65225ef22bb2e2fb0bc704ea77e33d569b70d1"
+      },
+      "audit_ns": 12486438,
+      "cell": "degenerate-8-111359-r1-cpu",
+      "complete_ns": 1781928738,
+      "encoding_ns": 3245593,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "cpu",
+      "model": "degenerate-8-111359",
+      "native_ns": 1644789918,
+      "process_ns": 1766196707,
+      "repetition": 1,
+      "response": {
+        "bytes": 2800,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-policy-confirmation-v1/cells/degenerate-8-111359-r1-cpu/response.json",
+        "sha256": "55cd35c422f8bd69c82da6327d04181da8a61b2b4599b024085dfa7f54416257"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    }
+  ],
+  "schema": 1,
+  "selected": "opportunistic",
+  "selection": [
+    {
+      "capped_ns": 23357640863,
+      "certified": 6,
+      "lane": "wave"
+    },
+    {
+      "capped_ns": 22302002151,
+      "certified": 6,
+      "lane": "opportunistic"
+    }
+  ],
+  "status": "nonblocking_start_followup_complete"
+}

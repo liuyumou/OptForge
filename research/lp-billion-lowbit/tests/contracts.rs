@@ -8,6 +8,118 @@ use optimizer_core::{CancellationToken, Model};
 use optimizer_lp::LinearProgram;
 use serde_json::json;
 
+#[test]
+fn certificate_scratch_is_explicit_and_preserves_default_serialization() {
+    use lp_billion_lowbit::fast_device::Config;
+    let default: Config = serde_json::from_value(json!({})).unwrap();
+    assert!(!default.certificate_scratch);
+    assert!(!default.final_assessment_reuse);
+    assert!(
+        serde_json::to_value(&default)
+            .unwrap()
+            .get("final_assessment_reuse")
+            .is_none()
+    );
+    let reuse: Config = serde_json::from_value(json!({"final_assessment_reuse": true})).unwrap();
+    assert!(reuse.final_assessment_reuse);
+    assert!(serde_json::from_value::<Config>(json!({"final_assessment_reuse": 1})).is_err());
+    assert!(
+        serde_json::to_value(&default)
+            .unwrap()
+            .get("certificate_scratch")
+            .is_none()
+    );
+    let enabled: Config = serde_json::from_value(json!({"certificate_scratch": true})).unwrap();
+    assert!(enabled.certificate_scratch);
+    assert_eq!(
+        serde_json::to_value(enabled).unwrap()["certificate_scratch"],
+        true
+    );
+    assert!(serde_json::from_value::<Config>(json!({"certificate_scratch": 1})).is_err());
+}
+
+#[test]
+fn legacy_solver_rejects_array_only_scratch_before_device_setup() {
+    let fast = lp_billion_lowbit::fast_device::Config {
+        certificate_scratch: true,
+        ..Default::default()
+    };
+    let result = lp_billion_lowbit::gpu_tensor::solve_with_fast(
+        &model(5, 3),
+        &settings(Format::Fp32),
+        std::path::Path::new("missing-device-image"),
+        &Default::default(),
+        Some(&fast),
+    );
+    assert_eq!(
+        result.unwrap_err().to_string(),
+        "certificate scratch requires the original-array interface"
+    );
+}
+
+#[test]
+fn legacy_solver_rejects_final_reuse_before_device_setup() {
+    let fast = lp_billion_lowbit::fast_device::Config {
+        final_assessment_reuse: true,
+        ..Default::default()
+    };
+    let result = lp_billion_lowbit::gpu_tensor::solve_with_fast(
+        &model(5, 3),
+        &settings(Format::Fp32),
+        std::path::Path::new("missing-device-image"),
+        &Default::default(),
+        Some(&fast),
+    );
+    assert_eq!(
+        result.unwrap_err().to_string(),
+        "final assessment reuse requires the original-array interface"
+    );
+}
+
+#[test]
+fn final_assessment_identity_survives_restart_but_not_rollback() {
+    let document = model(5, 3);
+    let program = LinearProgram::new(&document).unwrap();
+    let configuration = settings(Format::Native);
+    let engine = Engine::new(&program, configuration.lp());
+    let mut control = Fp64Controller::new(&engine);
+    let cancellation = CancellationToken::new();
+    while !control.check_pending() {
+        control.advance_host(8, &cancellation);
+    }
+    let identity = |c: &Fp64Controller<'_, '_>| {
+        (
+            c.generation(),
+            c.physical_iterations(),
+            c.state().iterations,
+        )
+    };
+    let assessed_identity = identity(&control);
+    let assessed = control.iterate();
+    let checkpoint = control.checkpoint();
+    control.continue_after_check();
+    assert_eq!(identity(&control), assessed_identity);
+    let endpoint = control.iterate();
+    assert!(
+        endpoint
+            .primal
+            .iter()
+            .zip(&assessed.primal)
+            .all(|(a, b)| a.to_bits() == b.to_bits())
+    );
+    assert!(
+        endpoint
+            .dual
+            .iter()
+            .zip(&assessed.dual)
+            .all(|(a, b)| a.to_bits() == b.to_bits())
+    );
+    control.restore(&checkpoint).unwrap();
+    assert_ne!(identity(&control), assessed_identity);
+    // Even restoration to identical bits invalidates the cache generation.
+    assert_eq!(control.state().iterations, assessed_identity.2);
+}
+
 fn model(n: usize, m: usize) -> Model {
     let f = |v| json!({"kind":"finite","value":v});
     Model::from_json(&serde_json::to_vec(&json!({"schema_version":1,"model_id":"general-contract",
@@ -408,6 +520,8 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 host_reductions: false,
                 host_preparation: false,
                 host_certificates: false,
+                certificate_scratch: false,
+                final_assessment_reuse: false,
                 auto_schedule: false,
                 gpu_preparation: false,
                 gpu_packing: false,
@@ -428,6 +542,8 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 host_reductions: true,
                 host_preparation: true,
                 host_certificates: true,
+                certificate_scratch: false,
+                final_assessment_reuse: false,
                 auto_schedule: true,
                 gpu_preparation: false,
                 gpu_packing: false,

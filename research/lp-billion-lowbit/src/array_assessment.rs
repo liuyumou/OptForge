@@ -94,6 +94,7 @@ pub struct Assessor<'a> {
     original: &'a Original,
     store: &'a Store,
     parallel: bool,
+    certificate_scratch: bool,
     pub cached_calls: usize,
     pub cpu_feasibility_confirmations: usize,
 }
@@ -103,9 +104,15 @@ impl<'a> Assessor<'a> {
             original,
             store,
             parallel,
+            certificate_scratch: false,
             cached_calls: 0,
             cpu_feasibility_confirmations: 0,
         }
+    }
+    /// Enable the opt-in scratch candidate for this assessor.
+    pub fn with_certificate_scratch(mut self, enabled: bool) -> Self {
+        self.certificate_scratch = enabled;
+        self
     }
     fn assess(
         &mut self,
@@ -123,7 +130,9 @@ impl<'a> Assessor<'a> {
             Some(feasible) => (feasible, objective(self.original, x)?),
             None => feasibility(self.original, x, tolerance, self.parallel)?,
         };
-        let bound = if self.parallel {
+        let bound = if self.parallel && self.certificate_scratch {
+            crate::scratch_certificate::certify(p, y)
+        } else if self.parallel {
             crate::bounded_certificate::certify(p, y)
         } else {
             certify(p, y)
@@ -221,6 +230,19 @@ mod tests {
         let mut assessor = Assessor::new(&original, &store, true);
         let expected = assessor.evaluate(&[0.5], &[0.], 1e-9, false).unwrap();
         assert_eq!(expected["accepted"], true);
+        let mut scratch_assessor =
+            Assessor::new(&original, &store, true).with_certificate_scratch(true);
+        assert_eq!(
+            scratch_assessor
+                .evaluate(&[0.5], &[0.], 1e-9, false)
+                .unwrap(),
+            expected
+        );
+        assert!(
+            scratch_assessor
+                .evaluate_with_feasibility(&[2.], &[0.], 1e-9, |_, _| Ok(Some(true)))
+                .is_err()
+        );
         assert_eq!(
             assessor
                 .evaluate_with_feasibility(&[0.5], &[0.], 1e-9, |_, _| Ok(Some(true)))

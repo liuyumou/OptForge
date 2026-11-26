@@ -1,3 +1,77 @@
+# Utilization optimization complete and settled (2026-11-23)
+
+The user approved the new optimization scope and explicitly approved the revised
+asynchronous storage policy. Amendments 91-93 govern this work. CPU37 passes
+75 supervisor / 156 harness tests; sustained idle and GPU28 pass (60 exact
+continuations). All current resource sources are bound to GPU28. The explicit
+async-v1 policy uses 60 s scans, 90 s freshness and a mandatory final inventory,
+with 75 s reserved inside each outer allowance; RAM/GPU hard sampling remains
+one second. CPU37's largest sample gap/work is 16.008/10.949 ms.
+
+Off-by-default certificate_scratch and final_assessment_reuse are implemented.
+Native quality passes 69 tests, formatting, Clippy and release build. Image-v12
+retains all five non-executor image-v11 files exactly. All 240 candidate
+continuations match across all four flag combinations, with 520 independent
+scalar endpoint checks. Deadline/cancellation/failure final paths recompute;
+limit reuse binds solve-local physical/logical iteration and rollback generation.
+Strict original-model 1e-9 CPU authority, control100/certificate500 and defaults
+remain unchanged. The original six image files and all 306 original numerical
+bindings verify (299 unchanged; seven scoped originals retained).
+
+Three fresh 4 M-NNZ pairs finish with exact continuations and all final/intermediate
+proofs. Tall certifies; irregular/coupled reach uncertified iteration limits.
+Assessment seconds reference/candidate: irregular .473/.239, tall .231/.208,
+coupled .256/.164. Complete times: 2.807/2.196, 1.946/2.090, 1.916/1.697.
+Shared witness-file reuse favors the second variant, confounding complete ratios;
+retain the 7.4% tall regression. CPU microbenchmark ratios are 1.222/1.061/1.032.
+No broad certified-solve speedup, billion-scale improvement or measured GPU
+utilization percentage is claimed. Keep the candidate opt-in.
+
+All new reservations pass with complete cleanup and no overrun. Do not repeat
+completed gates, native quality, candidate admission, idle observation or fresh
+measurement identities. No old scientific LP or driver was repeated. Final
+reporting passes; 392 documentation pages/local links pass. All 1852 recorded
+owned identities from this scope are absent; no reservation or monitor is active.
+Scope usage is 3881.803214088 CPU / 285.322280343 GPU seconds. Overall allocation
+usage is 485973.857696964 CPU / 56229.036984675 GPU seconds within 570000/68000;
+all exact phase caps pass. All 68 existing failed reservations retain their full
+charges. Original scientific checkpoint and all failed evidence remain exact.
+The compact settlement is docs/benchmarks/lp-billion-utilization-checkpoint.json.
+Retain locally; no publication is authorized. No further GPU work is needed.
+Evidence: /storage/ai-optimizer-billion-v1/utilization-optimization-v1 and the
+utilization-* / operational-cpu-v36,v37 / operational-gpu-v28 resource receipts.
+
+# Historical initial GPU utilization diagnosis (2026-11-23)
+
+User requests diagnosis and improved useful GPU utilization. First deliver a
+CPU-only analysis of retained image-v11 and COPT-fair responses, with exact
+phase coverage, source bindings, missing outcomes and rollback exclusions.
+Preserve all frozen numerical/resource/image files and historical evidence.
+No LP, GPU experiment or monitor is started. Runtime optimization is not admitted
+by this diagnostic; future development requires CPU36/GPU28 and fresh availability.
+
+Scope: new offline report tool, focused reader tests, diagnostic report/receipt,
+and this task entry. Reserve at most 2400 CPU seconds in fresh reporting jobs
+within the existing 570000 CPU / 68000 GPU totals, four slots, 16 GiB host,
+zero GPU. Gates: report invariants and malformed/missing-evidence tests,
+documentation links, git diff whitespace and unchanged tracked numerical sources.
+Full runtime acceptance is not repeated for this reporting-only slice.
+
+Diagnosis: long-run strict CPU assessment intervals total 459.063 s (irregular)
+and 703.532 s (ill-scaled), while GPU advancement host intervals total 488.200 /
+692.313 s. Buffers remain resident through CPU checks and intermediate witnesses.
+Exact duplicate final assessments occur in six short and four earlier billion
+v11 responses, but not in the two latest rollback/deadline responses. See
+[diagnosis and concrete optimization order](../docs/benchmarks/lp-billion-utilization.md).
+
+Reporting preflights v1/v2 both refused on the unchanged 0.9-second native storage
+inventory timeout, before creating reservations or starting workloads. Tests and
+generated report have not run; do not claim acceptance. Source-only reader/tests
+and documentation remain local and uncommitted. No numerical/resource source
+changes, GPU job, monitor, repeated LP or driver. User clarification is pending
+on opening a new versioned optimization scope beyond the existing exact-source
+freeze; CPU36/GPU28 have not run. Historical budget charges remain unchanged.
+
 # PR #29: reviewed and locally accepted
 
 Integrate the fifteen feature commits through 334bb20 over main 1e15895, preserving

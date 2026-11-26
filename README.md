@@ -1,106 +1,18 @@
 # AI Optimizer
 
-A Rust-first research project for mathematical optimization and scheduling with
-selective GPU acceleration. **C6 is implemented under SPEC-0010 and SPEC-0011**:
-a search can evaluate integer schedules on a GPU, and a first-order LP backend
-runs on the host or device with host-side validation and certification.
+AI Optimizer is a research project using the low-precision floating-point
+capabilities of modern GPUs to accelerate linear programming (LP), with plans to
+extend these techniques to other solver algorithms. We combine GPU computation
+with independent validation and exact certification.
 
-As of 2026-11-11, **GPUP-8 is implemented experimentally but incomplete**.
-Its corrected proof and device acceptance pass; six small profiles complete,
-then the first large BF16 profile times out. No certified latency gain or supported
-precision preset is established, and GPUP-9 remains gated. The
-[system diagnosis](docs/benchmarks/lp-system-diagnosis-2026-11-10.md) identifies
-expanded reconstruction and state-update costs as the dominant current bottleneck.
-The [revised roadmap](docs/plans/gpu-lp-precision-roadmap.md#current-plan-2026-11-10)
-now prioritizes [persistent multi-FP4 iterations](docs/plans/lp-fp4-persistent-state.md):
-approximate inner iterations and fused kernels. The
-[new planning amendment](docs/decisions/ADR-0058-fp4-gpu-exploration-quality-tiers.md)
-admits independent device exploration after the failed long CPU trajectory gate.
-The [FP4 GPU pilot](docs/benchmarks/lp-fp4-gpu-pilot.md) now completes all 216
-profile cells after corrected arithmetic and four-sanitizer admission. This
-candidate is slower than native FP64 in the bounded grid; no solver preset is
-selected. CPU numerical recovery is next ready. Future certified
-comparisons have explicit 1e-7 and strict 1e-9 tiers, with same-tolerance controls
-and complete-solve speed/coverage criteria; current solver defaults stay unchanged.
-[SPEC-0025](docs/specifications/SPEC-0025-persistent-fp4-contract.md) implements
-the CPU numerical/transaction/cost contract; its
-[report](docs/benchmarks/lp-fp4-spec-gpup-fp4-spec.md) records the frozen proposal
-and retained-data feasibility bounds. The
-[FP4-PROTO CPU attempt](docs/benchmarks/lp-fp4-proto-gpup-fp4-proto.md) qualifies
-none of twelve cells: nine error-guard and three metadata refusals. That v1
-attempt remains closed; the independent GPU pilot preserves its sources,
-criteria and charges. Full prototype acceptance and certified-solver speedup
-remain unestablished.
-[cuOpt setup](docs/operations/cuopt.md) is isolated and optional;
-Gurobi remains unavailable and was excluded from the baseline.
-
-[GPUP-BASELINE](docs/benchmarks/lp-external-baseline-native-return.md) is complete
-under the user's amended comparison policy: all 240 planned cells have settled
-attempts, 198 meet their comparison policy and 135 certify strictly.
-For cuOpt, 90/96 native returns pass its explicit error/status policy, while
-24/96 meet the independent certificate. Limits, native errors, outer failures
-and numerical discrepancies remain visible. This is not a quality-matched
-performance claim. Total baseline GPU charge is 3091.996 / 3600 seconds.
-[SPEC-0023](docs/specifications/SPEC-0023-baseline-native-return.md) records the
-cuOpt policy, and SPEC-0022's strict mathematical checker remains unchanged.
-
-[GPUP-RESIDENT2](docs/benchmarks/lp-resident2-gpup-resident2.md) is complete as a
-bounded negative result: certified coverage is preserved, but complete latency
-fails the retention gate. Keep the native control. The new FP4 pilot and numerical
-recovery lead to integration before a certified study; MIXED2 and DELIVERY2
-remain alternatives.
-
-The earlier research slices provide the following foundation.
-Slice 1 repairs a [certification defect](state/known-failures.md#lp-certification-can-lose-the-roundoff-allowance-at-zero-reduced-cost)
-and the objective/gap checks. Slice 2 adds the [bounded LP study harness](docs/benchmarks/lp-precision-study.md),
-with independent endpoints, frozen workloads and a [measured baseline report](docs/benchmarks/lp-baseline-gpup2.md).
-The shared resumable FP64 controller and subsequent explicit tuned/precision
-slices are implemented, with their evidence linked from the roadmap.
-GPUP-THROUGHPUT, opt-in repeated-solve throughput sessions, is complete under
-[SPEC-0014](docs/specifications/SPEC-0014-lp-repeated-solve-throughput.md) and
-[ADR-0023](docs/decisions/ADR-0023-repeated-solve-throughput.md), both accepted
-2026-09-20; its [report](docs/benchmarks/lp-repeated-solve-throughput.md) verifies
-687 of 705 attempts with 4785/4785 batch solves bitwise identical to fresh singles.
-Explicit FP32 execution and GPUP-6 adaptive audit/recovery policies are
-implemented experimentally; the [adaptive report](docs/benchmarks/lp-adaptive-gpup6.md)
-records acceptance and incomplete comparison coverage. No supported precision
-recipe is selected. The [2026-10-12 design](docs/plans/lp-precision-architecture-2026-10-12.md)
-now separates exact compact storage, accurate expansion arithmetic, residual-driven
-refinement and assessment costs. GPUP-REP CPU contract validation is complete under accepted ADR-0034 and the
-bounded CPU subset of SPEC-0020. Its exact codec, binary64/expansion reference
-semantics and layout receipts remain CPU reference tools.
-[GPUP-EXEC](docs/benchmarks/lp-exact-executor-gpup-exec.md) adds the separate
-bounded exact-dot executor under ADR-0035: 108 retained attempts, 94 verified
-endpoints and explicit range/coverage limits, with no fresh-solve speedup or preset.
-[GPUP-STATE](docs/benchmarks/lp-expansion-state-gpup-state.md) closes with a
-resource admission refusal under ADR-0036: its first full-range exact-bin
-primitive exceeds the register/spill gate in both expansion formats. PR 19's
-full-range compact FMA passes at 40 registers and zero spills, resolving that
-scalar obstacle. It passes 6170 device cases, four scoped sanitizers and 36
-independently verified primitive timings on RTX PRO 6000 Blackwell. The original
-busy-device refusal is retained; total charge is 30.114068273 GPU seconds. No
-full controller or solver performance benefit is admitted.
-[GPUP-REFINE](docs/benchmarks/lp-refinement-gpup-refine.md),
-[GPUP-ASSESS](docs/benchmarks/lp-assessment-scheduling-gpup-assess.md),
-[GPUP-7](docs/benchmarks/lp-quantization-gpup7.md) and
-[GPUP-7R](docs/benchmarks/lp-quant-resident-gpup7r.md) have since completed their
-bounded investigations, with negative results and coverage limits retained.
-
-The [COPT comparison and component report](docs/benchmarks/lp-copt-comparison.md)
-now covers all 1140 planned attempts through 65536 rows. It identifies evidence
-size, host preparation/checks and adaptive recovery costs as future directions;
-coverage gaps remain, and no winner or preset is selected.
-
-The project validates original
-linear models and candidates, solves them with an independently validated incumbent,
-proves optimality with its own search, accepts separately authored extensions
-without granting them any mathematical authority, and records each search with the
-provenance needed to re-execute it. Flow-shop instances reach that same machinery
-through an exactly linear encoding, and their makespans are recomputed by a
-recurrence that shares no code with the heuristics proposing schedules. A local
-registry resolves a named extension into a run and refuses every claim it cannot
-check, which is what lets an extension-influenced record be re-executed rather than
-merely read.
+We implement key ideas from OpenAI's
+[Strongly Polynomial Linear Programming](https://github.com/openai/math/blob/main/preprints/Strongly-polynomial-linear-programming-November-24-2026/paper.pdf)
+with engineering optimizations for practical CPU/GPU execution. Our
+[certified evaluations](docs/benchmarks/lp-sp-pricing-comprehensive.md) show faster
+end-to-end solves than COPT on several tested synthetic LP families, including
+dense-wide, square and unscaled tall problems, counting model preparation and
+independent certification. These results use hybrid CPU/GPU paths with FP64
+proposals; low-precision solver acceleration remains an active research direction.
 
 ## Quick start
 
@@ -153,8 +65,42 @@ outside tracked source. `tools/check.sh` requires it; set
 `AI_OPTIMIZER_SKIP_NATIVE=1` to run without it, which reports that native
 acceptance was not covered.
 
+## Certified LP benchmarks
+
+Existing results for our engineering-optimized implementation of the paper's
+ideas on synthetic dyadic LPs, using an Intel Xeon Platinum 8457C, an NVIDIA
+RTX PRO 6000 Blackwell Server Edition, COPT 8.0.6 and four CPU slots.
+Cells show **median complete seconds (timely certified runs / 3 attempts)**,
+including model preparation, solving and independent certification. A dash
+means no timely certified result; lower times are better.
+
+| Family | Nonzeros | Ours | COPT GPU | COPT CPU auto |
+| --- | ---: | ---: | ---: | ---: |
+| Dense-wide | 1M | 1.527 (3/3) | 2.469 (3/3) | — (0/3) |
+| Dense-wide | 4M | 3.281 (3/3) | 4.782 (3/3) | — (0/3) |
+| Sparse-wide | 1M | 3.268 (3/3) | 3.819 (3/3) | — (0/3) |
+| Mixed-square | 1M | 1.875 (3/3) | 2.786 (3/3) | 5.229 (3/3) |
+| Dense-square | 4M | 5.186 (3/3) | 63.701 (1/3) | 35.161 (3/3) |
+| Banded-square | 4M | 8.691 (3/3) | — (0/3) | — (0/3) |
+| Irregular-square | 1M | 6.480 (3/3) | 16.250 (2/3) | — (0/3) |
+| Scaled-square | 1M | 2.727 (3/3) | 23.552 (1/3) | — (0/3) |
+| Mixed-rectangular | 1.5M | 2.493 (3/3) | 2.802 (3/3) | 13.659 (3/3) |
+| Mixed-tall | 1M | 2.216 (3/3) | 2.369 (3/3) | 52.094 (1/3) |
+| Mixed-tall | 4M | 3.742 (3/3) | 4.438 (3/3) | — (0/3) |
+| Mixed-tall | 16M | 11.579 (3/3) | 14.765 (3/3) | — (0/3) |
+| Mixed-scaled-tall | 1M | 2.770 (3/3) | 2.431 (3/3) | — (0/3) |
+| Mixed-scaled-tall | 4M | 5.408 (3/3) | 4.446 (3/3) | — (0/3) |
+
+COPT GPU uses PDLP with presolve and crossover disabled; COPT CPU uses its
+automatic method. Medians cover each lane's timely certified runs, so rows with
+different success counts do not represent matched speedups. The scaled-tall
+rows are from the fresh evaluation; other rows retain their documented cohorts.
+See the [full report](docs/benchmarks/lp-sp-pricing-comprehensive.md) for solver
+settings, certificate definitions, individual timings and limitations.
+
 ## Project navigation
 
+- [Comprehensive LP implementation and COPT performance report](docs/benchmarks/lp-sp-pricing-comprehensive.md)
 - [Current status and milestones](wiki/status.md)
 - [Contributor and autonomous workflow](CONTRIBUTING.md)
 - [Architecture and ownership](docs/architecture/overview.md)

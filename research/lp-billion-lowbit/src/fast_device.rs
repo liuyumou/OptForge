@@ -30,6 +30,12 @@ pub struct Config {
     pub host_preparation: bool,
     #[serde(skip_serializing_if = "disabled")]
     pub host_certificates: bool,
+    /// Reuse exact CPU certificate reduction scratch; isolated array solver only.
+    #[serde(skip_serializing_if = "disabled")]
+    pub certificate_scratch: bool,
+    /// Reuse the final limit assessment only at the same solve-local state identity.
+    #[serde(skip_serializing_if = "disabled")]
+    pub final_assessment_reuse: bool,
     /// Split heavily tiled output groups to expose independent product CTAs.
     #[serde(skip_serializing_if = "disabled")]
     pub auto_schedule: bool,
@@ -58,6 +64,8 @@ impl Default for Config {
             host_reductions: false,
             host_preparation: false,
             host_certificates: false,
+            certificate_scratch: false,
+            final_assessment_reuse: false,
             auto_schedule: false,
             gpu_preparation: false,
             gpu_packing: false,

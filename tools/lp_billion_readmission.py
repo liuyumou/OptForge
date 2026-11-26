@@ -5,8 +5,8 @@ from lp_billion_common import BASE,ROOT,load,ref,resolve,require,CPU_CAPS,GPU_CA
 from lp_confirmation2_supervisor import same_process
 IDENTITY='copt-capacity-64m-v1-1-copt-gpu-pdlp'
 SHA='f4707c7a84827b2ad2953172afb69ead1f2b5845e1b1ec202a35085a43af9304'
-CPU='operational-cpu-v34'
-GPU='operational-gpu-v26'
+CPU='operational-cpu-v37'
+GPU='operational-gpu-v28'
 
 def validate_exception(path,receipt,approval,cleanup):
     require(Path(path).name==IDENTITY+'.settlement.json' and receipt['sha256']==SHA,'resource admission closed by unapproved overrun')
@@ -84,7 +84,7 @@ def cleared(path,gpu,phase,identity):
         return
     gate=passed(GPU)
     reservation=load(gate.with_name(GPU+'.reservation.json'))
-    names={'tools/lp_billion_common.py','tools/lp_billion_budget.py','tools/lp_billion_idle.py','tools/lp_billion_readmission.py','tools/lp_billion_disk_inventory.c','tools/lp_billion_source_store.py','tools/lp_billion_copt_fair_allocation.py','tools/lp_confirmation2_supervisor.py'}
+    names={'tools/lp_billion_common.py','tools/lp_billion_budget.py','tools/lp_billion_idle.py','tools/lp_billion_storage.py','tools/lp_billion_readmission.py','tools/lp_billion_disk_inventory.c','tools/lp_billion_source_store.py','tools/lp_billion_copt_fair_allocation.py','tools/lp_confirmation2_supervisor.py'}
     bound=set()
     for item in load(resolve(reservation['source_manifest']))['sources']:
         if item['original']['path'] in names:resolve(item['original']);bound.add(item['original']['path'])

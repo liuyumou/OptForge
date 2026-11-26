@@ -1,5 +1,20 @@
 # Changelog
 
+## Storage supervision and certification utilization (2026-11-23)
+
+- Allow 60 seconds for the complete prelaunch storage inventory after a cold
+  scan measured 22.65 seconds; retain exact counts, source checks and ceilings.
+- Add explicitly approved asynchronous storage scans with 60-second deadlines,
+  90-second freshness and mandatory final inventory; retain one-second RAM/GPU
+  sampling and all original ceilings. [Policy](docs/specifications/SPEC-0046-amendment-93.md).
+- Add opt-in exact CPU scratch reuse and conservative final-assessment reuse.
+  Native quality passes 69 tests; CPU supervision/harness pass 75/156 tests;
+  240 exact candidate continuations receive 520 independent endpoint checks.
+- Retain three fresh 4 M-NNZ paired measurements, including the tall complete-time
+  regression and shared-witness timing confound. CPU checking improves, but
+  general certified-solve superiority remains unestablished. Public defaults and
+  strict original-model CPU authority stay exact. [Results](docs/benchmarks/lp-billion-utilization.md).
+
 ## Billion-scale LP preparation, packing and control (2026-11-22)
 
 - Reduce exact host preparation/checker overhead and bound large-array memory.

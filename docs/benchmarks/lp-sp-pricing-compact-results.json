@@ -1,0 +1,1910 @@
+{
+  "audits": {
+    "bytes": 23610,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/audits.json",
+    "sha256": "ed962c4a72870a19773097ea0e9fb08700e30640881dcd3b93742c30f0f2b03e"
+  },
+  "auxiliary": [
+    {
+      "advanced_searches": 2000,
+      "batches": 0,
+      "case": "dense-million",
+      "checked_proposals": 1,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "dense-million-r0-wave",
+      "labels": 1000,
+      "lane": "wave",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 80038048,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r0-wave/process.json",
+        "sha256": "12f8f835d6b62e44b57773052aaa88978e3ef4dff221de72afca9fa05385ea87"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 430104576,
+      "process_seconds": 5.2709327,
+      "reason": null,
+      "repetition": 0,
+      "resident_searches": 2000,
+      "response": {
+        "bytes": 1006,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r0-wave/response.json",
+        "sha256": "c35beafa607776015c54eeb84e6811eb2ceffa0917109c61076c4eec3faadef5"
+      },
+      "response_seconds": 4.896078646,
+      "status": "completed",
+      "stored_factor_entries": 1000000
+    },
+    {
+      "advanced_searches": 32,
+      "batches": 1,
+      "case": "dense-million",
+      "checked_proposals": 1,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "dense-million-r0-compact-serial",
+      "labels": 1000,
+      "lane": "compact-serial",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 27185728,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r0-compact-serial/process.json",
+        "sha256": "6ead3895e85816b2eff6bb62988124a18f0571116b10a092c493adfbfb5452dc"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 306233344,
+      "process_seconds": 5.772653664,
+      "reason": null,
+      "repetition": 0,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 1309,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r0-compact-serial/response.json",
+        "sha256": "0bb0effe2bd4b10ff37039739dbbc3820501167c439b4f92923c42e584520656"
+      },
+      "response_seconds": 5.38296169,
+      "status": "completed",
+      "stored_factor_entries": 1000000
+    },
+    {
+      "advanced_searches": 64,
+      "batches": 2,
+      "case": "dense-million",
+      "checked_proposals": 1,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "dense-million-r0-compact-pipeline",
+      "labels": 1000,
+      "lane": "compact-pipeline",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 27185728,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r0-compact-pipeline/process.json",
+        "sha256": "43a39801e501398544ba00217eb3e41b1b5581a99c744ba5ec166eb8cec6faf9"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 306601984,
+      "process_seconds": 5.621515955,
+      "reason": null,
+      "repetition": 0,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 1697,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r0-compact-pipeline/response.json",
+        "sha256": "6fd17b31b7d580ef20df5c30e2d59a3adf6658b15d7067d5aae31b0c8e21e38b"
+      },
+      "response_seconds": 5.233674618,
+      "status": "completed",
+      "stored_factor_entries": 1000000
+    },
+    {
+      "advanced_searches": 64,
+      "batches": 2,
+      "case": "dense-million",
+      "checked_proposals": 1,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "dense-million-r0-compact-stream",
+      "labels": 1000,
+      "lane": "compact-stream",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 3132224,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r0-compact-stream/process.json",
+        "sha256": "b258ab7e2087410b2bf7b66efec0a6a2d686ea06eba0c0dabaceff1ee3836009"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 300556288,
+      "process_seconds": 11.282130183,
+      "reason": null,
+      "repetition": 0,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 1688,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r0-compact-stream/response.json",
+        "sha256": "8fa35e5cd9fba2f20063bb5582428a03601f82a2c9b2147431fd7873902dc299"
+      },
+      "response_seconds": 10.797625919,
+      "status": "completed",
+      "stored_factor_entries": 1000000
+    },
+    {
+      "advanced_searches": 64,
+      "batches": 2,
+      "case": "dense-million",
+      "checked_proposals": 1,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "dense-million-r1-compact-stream",
+      "labels": 1000,
+      "lane": "compact-stream",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 3132224,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r1-compact-stream/process.json",
+        "sha256": "03d7435027e4fdaf27a8221eddc34b1f6c96b45762bbbc13b575cb6284c57e97"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 300367872,
+      "process_seconds": 10.481453127,
+      "reason": null,
+      "repetition": 1,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 1688,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r1-compact-stream/response.json",
+        "sha256": "209a572ad39d9d30fc6f294e934795c7a7ef67642970ce3ba23565044cda5060"
+      },
+      "response_seconds": 10.080323704,
+      "status": "completed",
+      "stored_factor_entries": 1000000
+    },
+    {
+      "advanced_searches": 64,
+      "batches": 2,
+      "case": "dense-million",
+      "checked_proposals": 1,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "dense-million-r1-compact-pipeline",
+      "labels": 1000,
+      "lane": "compact-pipeline",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 27185728,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r1-compact-pipeline/process.json",
+        "sha256": "1aa282ab645c8c4ed7827d7a44a5bb591ff8300c7a1e329d1b91778b1303ba84"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 306876416,
+      "process_seconds": 5.925567168,
+      "reason": null,
+      "repetition": 1,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 1697,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r1-compact-pipeline/response.json",
+        "sha256": "785db9f4fb5b2d9e57c913535500ec501f75632610ecfb134b9f3d987afcdb54"
+      },
+      "response_seconds": 5.495813084,
+      "status": "completed",
+      "stored_factor_entries": 1000000
+    },
+    {
+      "advanced_searches": 32,
+      "batches": 1,
+      "case": "dense-million",
+      "checked_proposals": 1,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "dense-million-r1-compact-serial",
+      "labels": 1000,
+      "lane": "compact-serial",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 27185728,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r1-compact-serial/process.json",
+        "sha256": "ba5facc59b597202626be5acb707039a40cf67588f410107cc65b8e42684e7f9"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 306237440,
+      "process_seconds": 5.773127993,
+      "reason": null,
+      "repetition": 1,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 1306,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r1-compact-serial/response.json",
+        "sha256": "5a56a3476b8915b59dc8089fc86aa535c9cf574d19ae1edc99bf117c9bac93db"
+      },
+      "response_seconds": 5.39737028,
+      "status": "completed",
+      "stored_factor_entries": 1000000
+    },
+    {
+      "advanced_searches": 2000,
+      "batches": 0,
+      "case": "dense-million",
+      "checked_proposals": 1,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "dense-million-r1-wave",
+      "labels": 1000,
+      "lane": "wave",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 80038048,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r1-wave/process.json",
+        "sha256": "1af3135a6f3f91637c72d41323ba8c742ed951bafc759787bc39f9b31f9cd98f"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 430145536,
+      "process_seconds": 5.422322522,
+      "reason": null,
+      "repetition": 1,
+      "resident_searches": 2000,
+      "response": {
+        "bytes": 1005,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/dense-million-r1-wave/response.json",
+        "sha256": "fc983a200e48090465c342cf7076791bfc7dd5784b56a5ef2ed486780366ffdb"
+      },
+      "response_seconds": 5.025861665,
+      "status": "completed",
+      "stored_factor_entries": 1000000
+    },
+    {
+      "advanced_searches": 2000,
+      "batches": 0,
+      "case": "diagonal-million",
+      "checked_proposals": 1500,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "diagonal-million-r0-wave",
+      "labels": 1000,
+      "lane": "wave",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 56050048,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r0-wave/process.json",
+        "sha256": "79b544a6058564d25b6e42111f405e6acc858bc5e607967e9e5821043cf9c16c"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 305508352,
+      "process_seconds": 2.567964574,
+      "reason": null,
+      "repetition": 0,
+      "resident_searches": 2000,
+      "response": {
+        "bytes": 1005,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r0-wave/response.json",
+        "sha256": "ddb4f1d629f28cb4db115d88cca1e491766f37a99d15b8d146e86ca3acc54bbe"
+      },
+      "response_seconds": 2.131854682,
+      "status": "completed",
+      "stored_factor_entries": 500
+    },
+    {
+      "advanced_searches": 2000,
+      "batches": 63,
+      "case": "diagonal-million",
+      "checked_proposals": 1000,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "diagonal-million-r0-compact-serial",
+      "labels": 1000,
+      "lane": "compact-serial",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 3150912,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r0-compact-serial/process.json",
+        "sha256": "0b366e5b4adb97e92d8404eb259694820671e83d4f1002e69ea89f76f657c022"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 165113856,
+      "process_seconds": 1.167881351,
+      "reason": null,
+      "repetition": 0,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 27362,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r0-compact-serial/response.json",
+        "sha256": "5aa013a7c535c3ce25e9f9cacce4ca1a89475be5375682d47bcee1cdd00d4b9b"
+      },
+      "response_seconds": 0.844022945,
+      "status": "completed",
+      "stored_factor_entries": 500
+    },
+    {
+      "advanced_searches": 2000,
+      "batches": 63,
+      "case": "diagonal-million",
+      "checked_proposals": 1000,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "diagonal-million-r0-compact-pipeline",
+      "labels": 1000,
+      "lane": "compact-pipeline",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 3150912,
+      "process": {
+        "bytes": 89,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r0-compact-pipeline/process.json",
+        "sha256": "7a2801efb0f55ab3ba1e170ae9fd9ed0f64c04ddf82572357b61408cc051e47a"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 164990976,
+      "process_seconds": 0.965129291,
+      "reason": null,
+      "repetition": 0,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 27363,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r0-compact-pipeline/response.json",
+        "sha256": "aec7c91c763e234f906538722cc0f3a77009173d75d2d2ffaa04c5fcc8dbea9a"
+      },
+      "response_seconds": 0.636337253,
+      "status": "completed",
+      "stored_factor_entries": 500
+    },
+    {
+      "advanced_searches": 2000,
+      "batches": 63,
+      "case": "diagonal-million",
+      "checked_proposals": 1000,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "diagonal-million-r1-compact-pipeline",
+      "labels": 1000,
+      "lane": "compact-pipeline",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 3150912,
+      "process": {
+        "bytes": 89,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r1-compact-pipeline/process.json",
+        "sha256": "a4bcf7830bbf8e8b2f55ab856a74fc69312551d09697cf144cfa0db8f53aa0be"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 165044224,
+      "process_seconds": 0.915202538,
+      "reason": null,
+      "repetition": 1,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 27357,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r1-compact-pipeline/response.json",
+        "sha256": "e1e5d0d456b5bc6729f70041a82223d1be545d54bae220eee4d87a6e5ae509f9"
+      },
+      "response_seconds": 0.602741135,
+      "status": "completed",
+      "stored_factor_entries": 500
+    },
+    {
+      "advanced_searches": 2000,
+      "batches": 63,
+      "case": "diagonal-million",
+      "checked_proposals": 1000,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "diagonal-million-r1-compact-serial",
+      "labels": 1000,
+      "lane": "compact-serial",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 3150912,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r1-compact-serial/process.json",
+        "sha256": "d59b99659126a76b6e9454bccdb0c76ebabb9604e55d6dabc7d3d4fc62114536"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 164990976,
+      "process_seconds": 1.215545922,
+      "reason": null,
+      "repetition": 1,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 27355,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r1-compact-serial/response.json",
+        "sha256": "c8491f1369c21b22a56ec5ac4add292ece3302dc34e2c06770da03c07b349a23"
+      },
+      "response_seconds": 0.879980592,
+      "status": "completed",
+      "stored_factor_entries": 500
+    },
+    {
+      "advanced_searches": 2000,
+      "batches": 0,
+      "case": "diagonal-million",
+      "checked_proposals": 1500,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 1000,
+      "fallback_constructions": 0,
+      "id": "diagonal-million-r1-wave",
+      "labels": 1000,
+      "lane": "wave",
+      "matrix_positions": 1000000,
+      "numerical_device_bytes": 56050048,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r1-wave/process.json",
+        "sha256": "754d5bb9d29fd1aadd910783ebef8ecdd2905cd82b1ec6663946e86c53e78e91"
+      },
+      "process_allowance_seconds": 45,
+      "process_hwm_bytes": 305487872,
+      "process_seconds": 2.367356883,
+      "reason": null,
+      "repetition": 1,
+      "resident_searches": 2000,
+      "response": {
+        "bytes": 1005,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/diagonal-million-r1-wave/response.json",
+        "sha256": "67b98f90290f5b57537144be39e2d5b8f1c9ae3ce2e0a03591c8c59ed357364c"
+      },
+      "response_seconds": 2.001777665,
+      "status": "completed",
+      "stored_factor_entries": 500
+    },
+    {
+      "advanced_searches": 16000,
+      "batches": 500,
+      "case": "factor-128m",
+      "checked_proposals": 8000,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 8000,
+      "fallback_constructions": 0,
+      "id": "factor-128m-r0-compact-serial",
+      "labels": 8000,
+      "lane": "compact-serial",
+      "matrix_positions": 128000000,
+      "numerical_device_bytes": 18449560,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/factor-128m-r0-compact-serial/process.json",
+        "sha256": "d353aca9769f2ed090770c1eb78082c7a60734081d26fe83c7fdc8e812a2b782"
+      },
+      "process_allowance_seconds": 90,
+      "process_hwm_bytes": 264896512,
+      "process_seconds": 49.538803166,
+      "reason": null,
+      "repetition": 0,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 213972,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/factor-128m-r0-compact-serial/response.json",
+        "sha256": "55267b8df4fd89422b540ebf54420c024a0e45cedb43d28ab5edbbfd3e6b6c85"
+      },
+      "response_seconds": 49.199831028,
+      "status": "completed",
+      "stored_factor_entries": 4000
+    },
+    {
+      "advanced_searches": 16000,
+      "batches": 500,
+      "case": "factor-128m",
+      "checked_proposals": 8000,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 8000,
+      "fallback_constructions": 0,
+      "id": "factor-128m-r0-compact-pipeline",
+      "labels": 8000,
+      "lane": "compact-pipeline",
+      "matrix_positions": 128000000,
+      "numerical_device_bytes": 18449560,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/factor-128m-r0-compact-pipeline/process.json",
+        "sha256": "6768796c828d4a76507865a1d396e887ada104bbee71f945d948595199167444"
+      },
+      "process_allowance_seconds": 90,
+      "process_hwm_bytes": 268824576,
+      "process_seconds": 30.052090081,
+      "reason": null,
+      "repetition": 0,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 213977,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/factor-128m-r0-compact-pipeline/response.json",
+        "sha256": "5094ed95160e2eaf713fe1208f6a2856e7a7f479bced378120cc284abf6b02a0"
+      },
+      "response_seconds": 29.67658749,
+      "status": "completed",
+      "stored_factor_entries": 4000
+    },
+    {
+      "advanced_searches": 16000,
+      "batches": 500,
+      "case": "factor-128m",
+      "checked_proposals": 8000,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 8000,
+      "fallback_constructions": 0,
+      "id": "factor-128m-r1-compact-pipeline",
+      "labels": 8000,
+      "lane": "compact-pipeline",
+      "matrix_positions": 128000000,
+      "numerical_device_bytes": 18449560,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/factor-128m-r1-compact-pipeline/process.json",
+        "sha256": "00a01225c5952f2fa19321872639526122d8f3a0bd51d320f4e824b60fa60116"
+      },
+      "process_allowance_seconds": 90,
+      "process_hwm_bytes": 267042816,
+      "process_seconds": 30.046418252,
+      "reason": null,
+      "repetition": 1,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 213961,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/factor-128m-r1-compact-pipeline/response.json",
+        "sha256": "5a782225049a73236074c139379d04fba4a3df456185a7f32aae2804ad8f1706"
+      },
+      "response_seconds": 29.71442085,
+      "status": "completed",
+      "stored_factor_entries": 4000
+    },
+    {
+      "advanced_searches": 16000,
+      "batches": 500,
+      "case": "factor-128m",
+      "checked_proposals": 8000,
+      "completed_labels": true,
+      "exact_fallbacks": 0,
+      "expected_labels": 8000,
+      "fallback_constructions": 0,
+      "id": "factor-128m-r1-compact-serial",
+      "labels": 8000,
+      "lane": "compact-serial",
+      "matrix_positions": 128000000,
+      "numerical_device_bytes": 18449560,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/factor-128m-r1-compact-serial/process.json",
+        "sha256": "10184d14d2191f6f1384c031404fed6c1f28598fca89473024da9d037bfb6ec1"
+      },
+      "process_allowance_seconds": 90,
+      "process_hwm_bytes": 267030528,
+      "process_seconds": 49.307058825,
+      "reason": null,
+      "repetition": 1,
+      "resident_searches": 32,
+      "response": {
+        "bytes": 214001,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/auxiliary/factor-128m-r1-compact-serial/response.json",
+        "sha256": "aca234e6fb7c44717f6a9ca3817bef490eb3ac08a74081ddcbe0e9a553cad892"
+      },
+      "response_seconds": 48.944346077,
+      "status": "completed",
+      "stored_factor_entries": 4000
+    }
+  ],
+  "auxiliary_comparisons": [
+    {
+      "case": "dense-million",
+      "left": "wave",
+      "median_left_over_right": 0.9263538923615584,
+      "pairs": 2,
+      "ratios": [
+        0.9376354602910668,
+        0.9150723244320501
+      ],
+      "right": "compact-pipeline"
+    },
+    {
+      "case": "dense-million",
+      "left": "compact-serial",
+      "median_left_over_right": 1.000579955182978,
+      "pairs": 2,
+      "ratios": [
+        1.0268855785894502,
+        0.9742743317765056
+      ],
+      "right": "compact-pipeline"
+    },
+    {
+      "case": "dense-million",
+      "left": "compact-stream",
+      "median_left_over_right": 1.8879037070967515,
+      "pairs": 2,
+      "ratios": [
+        2.0069551119863362,
+        1.7688523022071667
+      ],
+      "right": "compact-pipeline"
+    },
+    {
+      "case": "diagonal-million",
+      "left": "wave",
+      "median_left_over_right": 2.6237247026855663,
+      "pairs": 2,
+      "ratios": [
+        2.6607466978224785,
+        2.586702707548654
+      ],
+      "right": "compact-pipeline"
+    },
+    {
+      "case": "diagonal-million",
+      "left": "compact-serial",
+      "median_left_over_right": 1.2691245545832412,
+      "pairs": 2,
+      "ratios": [
+        1.2100776153938113,
+        1.3281714937726714
+      ],
+      "right": "compact-pipeline"
+    },
+    {
+      "case": "factor-128m",
+      "left": "compact-serial",
+      "median_left_over_right": 1.6447303559133708,
+      "pairs": 2,
+      "ratios": [
+        1.6484312083611181,
+        1.6410295034656233
+      ],
+      "right": "compact-pipeline"
+    }
+  ],
+  "auxiliary_groups": [
+    {
+      "case": "dense-million",
+      "complete": 2,
+      "lane": "compact-pipeline",
+      "median_advanced_searches": 64.0,
+      "median_checked_proposals": 1.0,
+      "median_numerical_device_bytes": 27185728.0,
+      "median_process_hwm_bytes": 306739200.0,
+      "median_process_seconds": 5.7735415615,
+      "median_resident_searches": 32.0,
+      "median_response_seconds": 5.364743851,
+      "slots": 2
+    },
+    {
+      "case": "dense-million",
+      "complete": 2,
+      "lane": "compact-serial",
+      "median_advanced_searches": 32.0,
+      "median_checked_proposals": 1.0,
+      "median_numerical_device_bytes": 27185728.0,
+      "median_process_hwm_bytes": 306235392.0,
+      "median_process_seconds": 5.7728908285,
+      "median_resident_searches": 32.0,
+      "median_response_seconds": 5.390165984999999,
+      "slots": 2
+    },
+    {
+      "case": "dense-million",
+      "complete": 2,
+      "lane": "compact-stream",
+      "median_advanced_searches": 64.0,
+      "median_checked_proposals": 1.0,
+      "median_numerical_device_bytes": 3132224.0,
+      "median_process_hwm_bytes": 300462080.0,
+      "median_process_seconds": 10.881791655,
+      "median_resident_searches": 32.0,
+      "median_response_seconds": 10.4389748115,
+      "slots": 2
+    },
+    {
+      "case": "dense-million",
+      "complete": 2,
+      "lane": "wave",
+      "median_advanced_searches": 2000.0,
+      "median_checked_proposals": 1.0,
+      "median_numerical_device_bytes": 80038048.0,
+      "median_process_hwm_bytes": 430125056.0,
+      "median_process_seconds": 5.346627611000001,
+      "median_resident_searches": 2000.0,
+      "median_response_seconds": 4.9609701555,
+      "slots": 2
+    },
+    {
+      "case": "diagonal-million",
+      "complete": 2,
+      "lane": "compact-pipeline",
+      "median_advanced_searches": 2000.0,
+      "median_checked_proposals": 1000.0,
+      "median_numerical_device_bytes": 3150912.0,
+      "median_process_hwm_bytes": 165017600.0,
+      "median_process_seconds": 0.9401659145,
+      "median_resident_searches": 32.0,
+      "median_response_seconds": 0.619539194,
+      "slots": 2
+    },
+    {
+      "case": "diagonal-million",
+      "complete": 2,
+      "lane": "compact-serial",
+      "median_advanced_searches": 2000.0,
+      "median_checked_proposals": 1000.0,
+      "median_numerical_device_bytes": 3150912.0,
+      "median_process_hwm_bytes": 165052416.0,
+      "median_process_seconds": 1.1917136364999998,
+      "median_resident_searches": 32.0,
+      "median_response_seconds": 0.8620017685,
+      "slots": 2
+    },
+    {
+      "case": "diagonal-million",
+      "complete": 2,
+      "lane": "wave",
+      "median_advanced_searches": 2000.0,
+      "median_checked_proposals": 1500.0,
+      "median_numerical_device_bytes": 56050048.0,
+      "median_process_hwm_bytes": 305498112.0,
+      "median_process_seconds": 2.4676607285,
+      "median_resident_searches": 2000.0,
+      "median_response_seconds": 2.0668161735000004,
+      "slots": 2
+    },
+    {
+      "case": "factor-128m",
+      "complete": 2,
+      "lane": "compact-pipeline",
+      "median_advanced_searches": 16000.0,
+      "median_checked_proposals": 8000.0,
+      "median_numerical_device_bytes": 18449560.0,
+      "median_process_hwm_bytes": 267933696.0,
+      "median_process_seconds": 30.0492541665,
+      "median_resident_searches": 32.0,
+      "median_response_seconds": 29.69550417,
+      "slots": 2
+    },
+    {
+      "case": "factor-128m",
+      "complete": 2,
+      "lane": "compact-serial",
+      "median_advanced_searches": 16000.0,
+      "median_checked_proposals": 8000.0,
+      "median_numerical_device_bytes": 18449560.0,
+      "median_process_hwm_bytes": 265963520.0,
+      "median_process_seconds": 49.422930995499996,
+      "median_resident_searches": 32.0,
+      "median_response_seconds": 49.0720885525,
+      "slots": 2
+    }
+  ],
+  "checked_bindings": 90,
+  "freeze": {
+    "bytes": 16555,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/freeze.json",
+    "sha256": "cd81f5627b3e7e5d6aa1857152bd0560c2b41e4029d7d4edbce80fd0af76156e"
+  },
+  "lanes": {
+    "compact-cpu": {
+      "slots": 6,
+      "timely_exact": 6,
+      "timely_strict": 0,
+      "total_complete_seconds": 11.511471868
+    },
+    "compact-pipeline": {
+      "slots": 6,
+      "timely_exact": 6,
+      "timely_strict": 0,
+      "total_complete_seconds": 13.758111949
+    },
+    "compact-serial": {
+      "slots": 6,
+      "timely_exact": 6,
+      "timely_strict": 0,
+      "total_complete_seconds": 14.317468448
+    },
+    "wave": {
+      "slots": 6,
+      "timely_exact": 6,
+      "timely_strict": 0,
+      "total_complete_seconds": 13.209840038
+    }
+  },
+  "limitations": [
+    "Opt-in practical variant; no literal-reference completion or strongly polynomial claim.",
+    "Auxiliary comparisons use the same requested labels, but different pruning and actual work.",
+    "Only two cold repetitions; caches are not flushed; limited synthetic fixtures.",
+    "128 million positions are represented by 4000 positive-factor entries and 8000 actual nonzeros.",
+    "Process HWM and explicit numerical device allocations exclude aggregate device context overhead.",
+    "No new COPT cells; no transitive COPT superiority claim."
+  ],
+  "original": [
+    {
+      "audit": {
+        "bytes": 114,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/original/dense/audit.json",
+        "sha256": "b0cabec9e7eeb4a825116d1738f2533e6f13590d0d2654e3677ed4d45ec558f1"
+      },
+      "complete_ns": 21805815785,
+      "internal_exact_accepted": false,
+      "model": "dense",
+      "native_seconds": 20.083734083,
+      "phase_ns": {
+        "geometry_and_experts": 19998608597
+      },
+      "process_hwm_bytes": 270082048,
+      "queries": 0,
+      "reason": "deadline",
+      "response": {
+        "bytes": 922,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/original/dense/response.json",
+        "sha256": "9a89ba06135cd1a61d4d31a8f6555f325d015d074320f828923ce7fba024cf42"
+      },
+      "status": "resource_limit",
+      "storage_peak_entries": 52920,
+      "strict_accepted": false,
+      "work": {
+        "operations": 7185992,
+        "peak_bits": 314
+      }
+    },
+    {
+      "audit": {
+        "bytes": 114,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/original/tall/audit.json",
+        "sha256": "a9608a0a59d0d07096c04081fe292fbe496bc6f1082dc1d7e1f9843d9aab61f0"
+      },
+      "complete_ns": 21907284270,
+      "internal_exact_accepted": false,
+      "model": "tall",
+      "native_seconds": 20.086976614,
+      "phase_ns": {
+        "geometry_and_experts": 19996785871
+      },
+      "process_hwm_bytes": 280489984,
+      "queries": 0,
+      "reason": "deadline",
+      "response": {
+        "bytes": 923,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/original/tall/response.json",
+        "sha256": "bd6b0daad66b4979e56e05f82d0ade33ca59bab76c98a9473c7a58dd6cbb88dc"
+      },
+      "status": "resource_limit",
+      "storage_peak_entries": 104551,
+      "strict_accepted": false,
+      "work": {
+        "operations": 10292394,
+        "peak_bits": 327
+      }
+    },
+    {
+      "audit": {
+        "bytes": 114,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/original/sparse/audit.json",
+        "sha256": "15e195dbd8a2aa2e9d55a1aae7502a158327287590a56d1eebd6dab74c70ca56"
+      },
+      "complete_ns": 21955699077,
+      "internal_exact_accepted": false,
+      "model": "sparse",
+      "native_seconds": 20.075606117,
+      "phase_ns": {
+        "geometry_and_experts": 19989048051
+      },
+      "process_hwm_bytes": 271097856,
+      "queries": 0,
+      "reason": "deadline",
+      "response": {
+        "bytes": 922,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/original/sparse/response.json",
+        "sha256": "db667c36377fed845c0671b261463b6cf89abe709a56af2f48a540b4590e6d94"
+      },
+      "status": "resource_limit",
+      "storage_peak_entries": 33250,
+      "strict_accepted": false,
+      "work": {
+        "operations": 7363015,
+        "peak_bits": 941
+      }
+    }
+  ],
+  "resources": {
+    "cpu_cap_seconds": 240000,
+    "cpu_ns": 89421026223524,
+    "failures": [
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v1.settlement.json",
+          "sha256": "f7f8145595f29de440f73d5f155f9f8e79b5873041a4b105af589daad6cb15e8"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v2",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v2.settlement.json",
+          "sha256": "e39568e97849ff3504e892b3e4a8cc7f806abcf1d03c0dfbc9dcd4d7092baafc"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v3",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v3.settlement.json",
+          "sha256": "04ed4e8458bde1f393a80af09a5faeda444f2e408cde790a50600df0743ac3d1"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 0,
+        "identity": "compact-cpu-dev-v1",
+        "settlement": {
+          "bytes": 371,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/compact-cpu-dev-v1.settlement.json",
+          "sha256": "9783a9973fffff55242448dc5b3162d0e091a2142b0b6509f5b838652bd1af51"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-coupled-solve",
+        "settlement": {
+          "bytes": 395,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-coupled-solve.settlement.json",
+          "sha256": "56501357e63d9bff05394552b1eed2e4b4b2046043313c8b3c1361c903ce2631"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-dense-solve",
+        "settlement": {
+          "bytes": 393,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-dense-solve.settlement.json",
+          "sha256": "41e9e66d0ea8a1641d7f0b1677f36f499b538c78362bdb4e4f593f85cccc344c"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-ill_scaled-solve",
+        "settlement": {
+          "bytes": 398,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-ill_scaled-solve.settlement.json",
+          "sha256": "fd9d199f4405e9bba5cda8f68f2d5babf467dd36e344da88991b4d807829a1dc"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-irregular-solve",
+        "settlement": {
+          "bytes": 397,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-irregular-solve.settlement.json",
+          "sha256": "8c1d4287b253ea4b41b424602005925cdd202e49db68e8141612ca3ac03bbd8a"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-tall-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-tall-solve.settlement.json",
+          "sha256": "1750cbd2f52fbcc034c99ef9049496e690ff1f6f8cbfb201bdad457cbda777c5"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-wide-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-wide-solve.settlement.json",
+          "sha256": "dc2138ff6f3c27777750f3fa4bf3a621ceab6cdd5a13893827c4bc46dfa4ff91"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v1",
+        "settlement": {
+          "bytes": 365,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v1.settlement.json",
+          "sha256": "c9e71879de32ecc52c4d5f12f3337b127d8d6759a9e7393c6a79f1de2b21ccf9"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v2",
+        "settlement": {
+          "bytes": 366,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v2.settlement.json",
+          "sha256": "182c8f691dd0a9e5a516d865db415c71625d5987ba03e9237208b1443dca578d"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-development-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-development-v1.settlement.json",
+          "sha256": "f6044e287575026502d32907f6ca36b50a80367728f4a6e841f6ba32d9f0ef8b"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-opt-admit-v2",
+        "settlement": {
+          "bytes": 381,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v2.settlement.json",
+          "sha256": "5c64e06b9068ef7e43eb638ba3f7348e50d1e90fcadaa84027a4149caa591761"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "gpu-opt-admit-v3",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.settlement.json",
+          "sha256": "9a6a1b5ce9b9edce2ff69584f67e3421ae29a2e220d81ede484003594bebbb7d"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 240000000000,
+        "identity": "gpu-opt-admit-v5",
+        "settlement": {
+          "bytes": 380,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v5.settlement.json",
+          "sha256": "ae24b3547a68b4a58d63809f7f31b7329caeb85ca2231c2a8074f4cd02467274"
+        }
+      },
+      {
+        "cpu_ns": 240000000000,
+        "gpu_ns": 0,
+        "identity": "gpu-opt-freeze-v1",
+        "settlement": {
+          "bytes": 368,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-freeze-v1.settlement.json",
+          "sha256": "19f8bbd549d05b6d8ab86a10095b2b15a4ae66c52bc2cc802a5be7e20deadcac"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-sanitizers-v1",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-sanitizers-v1.settlement.json",
+          "sha256": "e8a816154107b2ff1c21465c6480dc6df4918a8ab9fd15c473776e68feea0e8c"
+        }
+      },
+      {
+        "cpu_ns": 720000000000,
+        "gpu_ns": 0,
+        "identity": "million-final-verify-v1",
+        "settlement": {
+          "bytes": 376,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/million-final-verify-v1.settlement.json",
+          "sha256": "228944687638414b3475ab8192e861b2fef7394999b560086f9e648c1269acfa"
+        }
+      },
+      {
+        "cpu_ns": 720000000000,
+        "gpu_ns": 0,
+        "identity": "symbolic-grouped-unit-v1",
+        "settlement": {
+          "bytes": 377,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/symbolic-grouped-unit-v1.settlement.json",
+          "sha256": "40a8d3bd0be3bc79294dbb88335a747cb2c8f905b5e666cd997b894e89f10f1c"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 0,
+        "identity": "wave-final-verify-v1",
+        "settlement": {
+          "bytes": 373,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/wave-final-verify-v1.settlement.json",
+          "sha256": "c4d34a92931738d1f68c2d1757755b934f1926fa2a7565e2ba480bff0d680320"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 240000000000,
+        "identity": "wave-gpu-admit-v1",
+        "settlement": {
+          "bytes": 381,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/wave-gpu-admit-v1.settlement.json",
+          "sha256": "55ce6b8a84a8dbaaa1fd111c523d3c2efa91549d326bdff34c44172e1d9aba96"
+        }
+      }
+    ],
+    "gpu_cap_seconds": 30000,
+    "gpu_ns": 17941061871955,
+    "pending_at_snapshot": [
+      "compact-final-verify-v1"
+    ],
+    "retained_source_files_verified": 8494,
+    "subsequent_cleanup_dispositions": [
+      {
+        "bytes": 1697,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.cleanup-disposition.json",
+        "sha256": "0b052eaa7ec813852dde0abc103ecab62164e9d09a2526f223d54f853c088b20"
+      }
+    ]
+  },
+  "small": [
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r0-wave/audit.json",
+        "sha256": "fa127741c978b78eb487c9bfde4d128ee10185bf219146a06c1c8ec57e79e342"
+      },
+      "complete_ns": 2287640576,
+      "exact_accepted": true,
+      "id": "coupled-8-122011-r0-wave",
+      "lane": "wave",
+      "model": "coupled-8-122011",
+      "model_index": 0,
+      "repetition": 0,
+      "response": {
+        "bytes": 6866,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r0-wave/response.json",
+        "sha256": "f281604608e14d79f32caa576802fee422c77484933b4217280fe3159a5147af"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r0-compact-cpu/audit.json",
+        "sha256": "40539c5f612989bf5bc04b4d3145a5b1e33f5da3e52b9a032577371eb68202d1"
+      },
+      "complete_ns": 1883945479,
+      "exact_accepted": true,
+      "id": "coupled-8-122011-r0-compact-cpu",
+      "lane": "compact-cpu",
+      "model": "coupled-8-122011",
+      "model_index": 0,
+      "repetition": 0,
+      "response": {
+        "bytes": 4516,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r0-compact-cpu/response.json",
+        "sha256": "87940ddc164f141fbdf97091f7c0613a39ca26902769996e0619ab96d0f839ef"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r0-compact-serial/audit.json",
+        "sha256": "6dda54d20366221a3423855043e637a6ccc1ad0f80176810acbf4b822dd064da"
+      },
+      "complete_ns": 2385265952,
+      "exact_accepted": true,
+      "id": "coupled-8-122011-r0-compact-serial",
+      "lane": "compact-serial",
+      "model": "coupled-8-122011",
+      "model_index": 0,
+      "repetition": 0,
+      "response": {
+        "bytes": 9142,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r0-compact-serial/response.json",
+        "sha256": "be4e8b0d63b3fda46a2c44dbd95f74edf9a1d2bace9528e822979ee4167727d7"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r0-compact-pipeline/audit.json",
+        "sha256": "7d625f03477fc027ea89dc91b2e20d3e9ef622a656864db0fcf1085568530d45"
+      },
+      "complete_ns": 2288547510,
+      "exact_accepted": true,
+      "id": "coupled-8-122011-r0-compact-pipeline",
+      "lane": "compact-pipeline",
+      "model": "coupled-8-122011",
+      "model_index": 0,
+      "repetition": 0,
+      "response": {
+        "bytes": 10087,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r0-compact-pipeline/response.json",
+        "sha256": "9ace1bfb6809045e06d7da8215a53bd3a73fba133e0af59bddb5692a0ef612e5"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r1-compact-cpu/audit.json",
+        "sha256": "50181636c9cd8a9c7ed8b22e97a06695a27bc340712415f9b164a122c10e54c6"
+      },
+      "complete_ns": 1884680708,
+      "exact_accepted": true,
+      "id": "coupled-8-122011-r1-compact-cpu",
+      "lane": "compact-cpu",
+      "model": "coupled-8-122011",
+      "model_index": 0,
+      "repetition": 1,
+      "response": {
+        "bytes": 4516,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r1-compact-cpu/response.json",
+        "sha256": "7c4c8736db8f6a7c69798373fbdb0174295b380a70fe8058511818162792c758"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r1-compact-serial/audit.json",
+        "sha256": "d9fd6eb862f7d56e581a143a93287a23fbd334087870e21a35281be684586189"
+      },
+      "complete_ns": 2334397364,
+      "exact_accepted": true,
+      "id": "coupled-8-122011-r1-compact-serial",
+      "lane": "compact-serial",
+      "model": "coupled-8-122011",
+      "model_index": 0,
+      "repetition": 1,
+      "response": {
+        "bytes": 9145,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r1-compact-serial/response.json",
+        "sha256": "57127796912b93becce0ece3e03733aefca6af4b1d3203f9f9abc2a38fcbaa64"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r1-compact-pipeline/audit.json",
+        "sha256": "7027f21ba00941a528d927a7c84dddd7a75544f6acf325a3358a4059343b5fd2"
+      },
+      "complete_ns": 2284513791,
+      "exact_accepted": true,
+      "id": "coupled-8-122011-r1-compact-pipeline",
+      "lane": "compact-pipeline",
+      "model": "coupled-8-122011",
+      "model_index": 0,
+      "repetition": 1,
+      "response": {
+        "bytes": 10090,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r1-compact-pipeline/response.json",
+        "sha256": "78b19753cf8c62f4879b55010eb0b2dac24ee5d19dc6d89435272cd551cf341b"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r1-wave/audit.json",
+        "sha256": "ee3149bdd152c0cadcdd59a0a7e69b39d237c7169c32565e0c249bc8b2ad0236"
+      },
+      "complete_ns": 2184269659,
+      "exact_accepted": true,
+      "id": "coupled-8-122011-r1-wave",
+      "lane": "wave",
+      "model": "coupled-8-122011",
+      "model_index": 0,
+      "repetition": 1,
+      "response": {
+        "bytes": 6869,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/coupled-8-122011-r1-wave/response.json",
+        "sha256": "f22fb19a109d26bb3f4be4818f372ea92f2ee00657c0ac03819a4ef2a1c42e12"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r0-compact-cpu/audit.json",
+        "sha256": "857767011c614d08782f9dbf9a51e721c79091ddbcfdab15a3029516fb8309b1"
+      },
+      "complete_ns": 2137937098,
+      "exact_accepted": true,
+      "id": "dense-8-122011-r0-compact-cpu",
+      "lane": "compact-cpu",
+      "model": "dense-8-122011",
+      "model_index": 1,
+      "repetition": 0,
+      "response": {
+        "bytes": 4511,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r0-compact-cpu/response.json",
+        "sha256": "9f2adfd9db88dde0208497fdcb9b629b2cd8c3d09bba4bc5d41e38ce67dcdb4b"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r0-compact-serial/audit.json",
+        "sha256": "bb854fcc4ed4648b8c412a5310842ecdae1bafd854e98d0499187936d1b08d7c"
+      },
+      "complete_ns": 2534315363,
+      "exact_accepted": true,
+      "id": "dense-8-122011-r0-compact-serial",
+      "lane": "compact-serial",
+      "model": "dense-8-122011",
+      "model_index": 1,
+      "repetition": 0,
+      "response": {
+        "bytes": 9612,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r0-compact-serial/response.json",
+        "sha256": "330c757b7f460ca99c24ee5c657e0971864f0544dcde0c4ec459cbaf358882d0"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r0-compact-pipeline/audit.json",
+        "sha256": "74891e6482c8aec7ea41aa519275fc7823ae58d16bc2a52cd260a99a2ce47fa8"
+      },
+      "complete_ns": 2434691932,
+      "exact_accepted": true,
+      "id": "dense-8-122011-r0-compact-pipeline",
+      "lane": "compact-pipeline",
+      "model": "dense-8-122011",
+      "model_index": 1,
+      "repetition": 0,
+      "response": {
+        "bytes": 10084,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r0-compact-pipeline/response.json",
+        "sha256": "68bcb05ba7f1f1834c782ff564e7da136fd87cd4ae6fd914aa1f8ccfe28d8c6c"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r0-wave/audit.json",
+        "sha256": "0b6facd6b88bef518c0a0c9df7dc858682084bfb1c4aaabaafc53f43c45f944a"
+      },
+      "complete_ns": 2335165718,
+      "exact_accepted": true,
+      "id": "dense-8-122011-r0-wave",
+      "lane": "wave",
+      "model": "dense-8-122011",
+      "model_index": 1,
+      "repetition": 0,
+      "response": {
+        "bytes": 6845,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r0-wave/response.json",
+        "sha256": "8448ac2f182cdb2b27a1c6a141d8fc493104d09c6cb1d1122bbbab05a4718b1d"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r1-compact-serial/audit.json",
+        "sha256": "19aedbad0f779ee1befd2eb490f34a0766e84c2cd4c3306d87abcaf354d22881"
+      },
+      "complete_ns": 2485443450,
+      "exact_accepted": true,
+      "id": "dense-8-122011-r1-compact-serial",
+      "lane": "compact-serial",
+      "model": "dense-8-122011",
+      "model_index": 1,
+      "repetition": 1,
+      "response": {
+        "bytes": 9614,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r1-compact-serial/response.json",
+        "sha256": "6c73a63ee93d7e08c439fcb87b94ad27174ee17626181103e6571ad40af7d3d5"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r1-compact-pipeline/audit.json",
+        "sha256": "cf035c35093597c0228a6d9f91e59516a15a7ea64c0e4bc1f211a7b4bba395a5"
+      },
+      "complete_ns": 2433865685,
+      "exact_accepted": true,
+      "id": "dense-8-122011-r1-compact-pipeline",
+      "lane": "compact-pipeline",
+      "model": "dense-8-122011",
+      "model_index": 1,
+      "repetition": 1,
+      "response": {
+        "bytes": 10083,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r1-compact-pipeline/response.json",
+        "sha256": "1bed4379e1a3e8cb744c5a47df80f941014c91cbbe4f3884a8154dd3c73b2bf1"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r1-wave/audit.json",
+        "sha256": "fcf5afb994a49d957f840f82831578c8a9f351c087f98cffe0cf6b9d2ba3e725"
+      },
+      "complete_ns": 2386160061,
+      "exact_accepted": true,
+      "id": "dense-8-122011-r1-wave",
+      "lane": "wave",
+      "model": "dense-8-122011",
+      "model_index": 1,
+      "repetition": 1,
+      "response": {
+        "bytes": 6846,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r1-wave/response.json",
+        "sha256": "91bd486902829b54d922bda25e45735f94904eb46c7d0fab8ee9a57852382a73"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r1-compact-cpu/audit.json",
+        "sha256": "cfd7428c58dad2681177b6642d12739385e6bc82b1fe35f848dff706688e8740"
+      },
+      "complete_ns": 2083056582,
+      "exact_accepted": true,
+      "id": "dense-8-122011-r1-compact-cpu",
+      "lane": "compact-cpu",
+      "model": "dense-8-122011",
+      "model_index": 1,
+      "repetition": 1,
+      "response": {
+        "bytes": 4511,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/dense-8-122011-r1-compact-cpu/response.json",
+        "sha256": "74408aa5c00bd0b23f4f4776a92b78350cd6c3e148ed9d525e4efb4c9279fb2c"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r0-compact-serial/audit.json",
+        "sha256": "a8a8e34496e5fa6119e9dec6421bf29268968da0bdf35b333175470ac4f437c7"
+      },
+      "complete_ns": 2242572564,
+      "exact_accepted": true,
+      "id": "degenerate-8-122011-r0-compact-serial",
+      "lane": "compact-serial",
+      "model": "degenerate-8-122011",
+      "model_index": 2,
+      "repetition": 0,
+      "response": {
+        "bytes": 10183,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r0-compact-serial/response.json",
+        "sha256": "46433d8fa4b2a03dcac0b903d6055a237a70a1a24c206038f7db665618dd1fbf"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r0-compact-pipeline/audit.json",
+        "sha256": "c81b33d64b9d36efde0b1f024bbc234e256383ac9310609e5ea77add3b3f0724"
+      },
+      "complete_ns": 2082867579,
+      "exact_accepted": true,
+      "id": "degenerate-8-122011-r0-compact-pipeline",
+      "lane": "compact-pipeline",
+      "model": "degenerate-8-122011",
+      "model_index": 2,
+      "repetition": 0,
+      "response": {
+        "bytes": 10184,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r0-compact-pipeline/response.json",
+        "sha256": "30f0f686ffe1d5d20837225da0809fdcc7752f4fbe52646f9fbd16de52bef32e"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r0-wave/audit.json",
+        "sha256": "79c0a2d851bc9a632f381c84389fda990b6655567e5a40fe5a437ad9dffaf4d7"
+      },
+      "complete_ns": 1982819087,
+      "exact_accepted": true,
+      "id": "degenerate-8-122011-r0-wave",
+      "lane": "wave",
+      "model": "degenerate-8-122011",
+      "model_index": 2,
+      "repetition": 0,
+      "response": {
+        "bytes": 6245,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r0-wave/response.json",
+        "sha256": "4f0cd02135d05e149d61f369535948a7cbc090e4ab040024fb074454f68a4ce2"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r0-compact-cpu/audit.json",
+        "sha256": "2def025cd980cd79bcd967bcbcecf84727e029692a56e78b01eb9a46787ad8b6"
+      },
+      "complete_ns": 1733669465,
+      "exact_accepted": true,
+      "id": "degenerate-8-122011-r0-compact-cpu",
+      "lane": "compact-cpu",
+      "model": "degenerate-8-122011",
+      "model_index": 2,
+      "repetition": 0,
+      "response": {
+        "bytes": 4601,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r0-compact-cpu/response.json",
+        "sha256": "f7a84a11ebe3522bc1cb2a639be5af5e8cf564b0552689f664ca969087e04e3c"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r1-compact-pipeline/audit.json",
+        "sha256": "61cd56fff707732b4793445f701307d7302a5b95899fb50070e7885be515f101"
+      },
+      "complete_ns": 2233625452,
+      "exact_accepted": true,
+      "id": "degenerate-8-122011-r1-compact-pipeline",
+      "lane": "compact-pipeline",
+      "model": "degenerate-8-122011",
+      "model_index": 2,
+      "repetition": 1,
+      "response": {
+        "bytes": 10183,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r1-compact-pipeline/response.json",
+        "sha256": "d983eb52df11b1f06f013319d7078d6c35985156ca5be7bcc507df1e13863e3b"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r1-wave/audit.json",
+        "sha256": "bbf1d660847ed46f21644c2b8b6525c2ecc269fba8d77e656fd8e81870555d5f"
+      },
+      "complete_ns": 2033784937,
+      "exact_accepted": true,
+      "id": "degenerate-8-122011-r1-wave",
+      "lane": "wave",
+      "model": "degenerate-8-122011",
+      "model_index": 2,
+      "repetition": 1,
+      "response": {
+        "bytes": 6250,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r1-wave/response.json",
+        "sha256": "cc5a857fd99199fe085f665149a1adfdea5c73a31070eaa6d4978601bdb76a9b"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r1-compact-cpu/audit.json",
+        "sha256": "e06d899eded7ff052c0ecd79209ccc6bea3d3dd1e378b761ed86648ee145b365"
+      },
+      "complete_ns": 1788182536,
+      "exact_accepted": true,
+      "id": "degenerate-8-122011-r1-compact-cpu",
+      "lane": "compact-cpu",
+      "model": "degenerate-8-122011",
+      "model_index": 2,
+      "repetition": 1,
+      "response": {
+        "bytes": 4602,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r1-compact-cpu/response.json",
+        "sha256": "3817d946f59644e45a25021240c0eca60b9cff80b334eaccc1a055e70aef9242"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r1-compact-serial/audit.json",
+        "sha256": "b0932a8cc336f9d7a35b36286a306a37c88c7bc3903d2158f31b1d0ffabcf218"
+      },
+      "complete_ns": 2335473755,
+      "exact_accepted": true,
+      "id": "degenerate-8-122011-r1-compact-serial",
+      "lane": "compact-serial",
+      "model": "degenerate-8-122011",
+      "model_index": 2,
+      "repetition": 1,
+      "response": {
+        "bytes": 10187,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/compact-experiment-v1/small/degenerate-8-122011-r1-compact-serial/response.json",
+        "sha256": "1527face46611f3deca49ba67e6c6b034963389571552dcea0afb2998e9fab72"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    }
+  ],
+  "small_comparisons": [
+    {
+      "left": "wave",
+      "maximum_left_over_right": 0.9996037075935557,
+      "median_left_over_right": 0.9576208927679017,
+      "minimum_left_over_right": 0.9105308748962089,
+      "paired_models": 3,
+      "paired_repetitions": 6,
+      "right": "compact-pipeline",
+      "right_faster_repetitions": 0,
+      "rows": [
+        {
+          "left_complete_seconds": 2.287640576,
+          "left_over_right": 0.9996037075935557,
+          "model": "coupled-8-122011",
+          "repetition": 0,
+          "right_complete_seconds": 2.28854751
+        },
+        {
+          "left_complete_seconds": 2.184269659,
+          "left_over_right": 0.9561201458293145,
+          "model": "coupled-8-122011",
+          "repetition": 1,
+          "right_complete_seconds": 2.284513791
+        },
+        {
+          "left_complete_seconds": 2.335165718,
+          "left_over_right": 0.9591216397064891,
+          "model": "dense-8-122011",
+          "repetition": 0,
+          "right_complete_seconds": 2.434691932
+        },
+        {
+          "left_complete_seconds": 2.386160061,
+          "left_over_right": 0.9803992371912668,
+          "model": "dense-8-122011",
+          "repetition": 1,
+          "right_complete_seconds": 2.433865685
+        },
+        {
+          "left_complete_seconds": 1.982819087,
+          "left_over_right": 0.951965985255753,
+          "model": "degenerate-8-122011",
+          "repetition": 0,
+          "right_complete_seconds": 2.082867579
+        },
+        {
+          "left_complete_seconds": 2.033784937,
+          "left_over_right": 0.9105308748962089,
+          "model": "degenerate-8-122011",
+          "repetition": 1,
+          "right_complete_seconds": 2.233625452
+        }
+      ],
+      "tier": "exact"
+    },
+    {
+      "left": "compact-cpu",
+      "maximum_left_over_right": 0.8781140110173085,
+      "median_left_over_right": 0.828664263953817,
+      "minimum_left_over_right": 0.8005740328571435,
+      "paired_models": 3,
+      "paired_repetitions": 6,
+      "right": "compact-pipeline",
+      "right_faster_repetitions": 0,
+      "rows": [
+        {
+          "left_complete_seconds": 1.883945479,
+          "left_over_right": 0.8232057542034599,
+          "model": "coupled-8-122011",
+          "repetition": 0,
+          "right_complete_seconds": 2.28854751
+        },
+        {
+          "left_complete_seconds": 1.884680708,
+          "left_over_right": 0.8249811033861253,
+          "model": "coupled-8-122011",
+          "repetition": 1,
+          "right_complete_seconds": 2.284513791
+        },
+        {
+          "left_complete_seconds": 2.137937098,
+          "left_over_right": 0.8781140110173085,
+          "model": "dense-8-122011",
+          "repetition": 0,
+          "right_complete_seconds": 2.434691932
+        },
+        {
+          "left_complete_seconds": 2.083056582,
+          "left_over_right": 0.8558634089128053,
+          "model": "dense-8-122011",
+          "repetition": 1,
+          "right_complete_seconds": 2.433865685
+        },
+        {
+          "left_complete_seconds": 1.733669465,
+          "left_over_right": 0.8323474245215087,
+          "model": "degenerate-8-122011",
+          "repetition": 0,
+          "right_complete_seconds": 2.082867579
+        },
+        {
+          "left_complete_seconds": 1.788182536,
+          "left_over_right": 0.8005740328571435,
+          "model": "degenerate-8-122011",
+          "repetition": 1,
+          "right_complete_seconds": 2.233625452
+        }
+      ],
+      "tier": "exact"
+    },
+    {
+      "left": "compact-serial",
+      "maximum_left_over_right": 1.0766755345419874,
+      "median_left_over_right": 1.0415901116972581,
+      "minimum_left_over_right": 1.0211917055726927,
+      "paired_models": 3,
+      "paired_repetitions": 6,
+      "right": "compact-pipeline",
+      "right_faster_repetitions": 6,
+      "rows": [
+        {
+          "left_complete_seconds": 2.385265952,
+          "left_over_right": 1.0422619332032133,
+          "model": "coupled-8-122011",
+          "repetition": 0,
+          "right_complete_seconds": 2.28854751
+        },
+        {
+          "left_complete_seconds": 2.334397364,
+          "left_over_right": 1.0218355315676009,
+          "model": "coupled-8-122011",
+          "repetition": 1,
+          "right_complete_seconds": 2.284513791
+        },
+        {
+          "left_complete_seconds": 2.534315363,
+          "left_over_right": 1.040918290191303,
+          "model": "dense-8-122011",
+          "repetition": 0,
+          "right_complete_seconds": 2.434691932
+        },
+        {
+          "left_complete_seconds": 2.48544345,
+          "left_over_right": 1.0211917055726927,
+          "model": "dense-8-122011",
+          "repetition": 1,
+          "right_complete_seconds": 2.433865685
+        },
+        {
+          "left_complete_seconds": 2.242572564,
+          "left_over_right": 1.0766755345419874,
+          "model": "degenerate-8-122011",
+          "repetition": 0,
+          "right_complete_seconds": 2.082867579
+        },
+        {
+          "left_complete_seconds": 2.335473755,
+          "left_over_right": 1.0455977536022454,
+          "model": "degenerate-8-122011",
+          "repetition": 1,
+          "right_complete_seconds": 2.233625452
+        }
+      ],
+      "tier": "exact"
+    },
+    {
+      "left": "wave",
+      "maximum_left_over_right": null,
+      "median_left_over_right": null,
+      "minimum_left_over_right": null,
+      "paired_models": 0,
+      "paired_repetitions": 0,
+      "right": "compact-pipeline",
+      "right_faster_repetitions": 0,
+      "rows": [],
+      "tier": "strict"
+    },
+    {
+      "left": "compact-cpu",
+      "maximum_left_over_right": null,
+      "median_left_over_right": null,
+      "minimum_left_over_right": null,
+      "paired_models": 0,
+      "paired_repetitions": 0,
+      "right": "compact-pipeline",
+      "right_faster_repetitions": 0,
+      "rows": [],
+      "tier": "strict"
+    },
+    {
+      "left": "compact-serial",
+      "maximum_left_over_right": null,
+      "median_left_over_right": null,
+      "minimum_left_over_right": null,
+      "paired_models": 0,
+      "paired_repetitions": 0,
+      "right": "compact-pipeline",
+      "right_faster_repetitions": 0,
+      "rows": [],
+      "tier": "strict"
+    }
+  ],
+  "status": "compact_experiments_audited"
+}

@@ -115,6 +115,22 @@ def install(supervisor, request):
     sensor = None
     last_gpu = last_disk = 0
     trace = Path(request['output']+'.capacity.jsonl')
+    storage = None
+    if request.get('storage_policy') is not None:
+        from lp_billion_storage import DiskMonitor, POLICY
+        require(request['storage_policy'] == POLICY, 'storage policy domain')
+        storage = DiskMonitor(request['storage_initial'], request['output']+'.storage.jsonl')
+        original_cleanup = supervisor.terminate_descendants
+
+        def cleanup(*args, **kwargs):
+            try:
+                storage.close()
+            finally:
+                # Cleanup must still run if scanner shutdown or trace writing fails.
+                result = original_cleanup(*args, **kwargs)
+            return result
+
+        supervisor.terminate_descendants = cleanup
 
     def snapshot(*args, **kwargs):
         nonlocal sensor, last_gpu, last_disk
@@ -134,7 +150,9 @@ def install(supervisor, request):
                 f.write(json.dumps(record, sort_keys=True)+'\n')
             validate_gpu(sample, owned)
             last_gpu = sample['end_ns']
-        if now-last_disk >= 1_000_000_000:
+        if storage is not None:
+            storage.tick()
+        elif now-last_disk >= 1_000_000_000:
             amount = disk_bytes()
             require(amount <= DISK_LIMIT, 'owned evidence/build disk ceiling')
             last_disk = time.monotonic_ns()

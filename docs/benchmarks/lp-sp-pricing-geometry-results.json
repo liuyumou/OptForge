@@ -1,0 +1,1044 @@
+{
+  "audits": {
+    "bytes": 7111,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/audits.json",
+    "sha256": "1d3510d0d94df2f0d23b7c6e64566305b13d6b2d5b73f9468b9a3553961600f4"
+  },
+  "automatic_audits": {
+    "bytes": 3675,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/audits.json",
+    "sha256": "102c4e72da15fb26c1de189686dd6bb178796ee1b90441241faee9743bd01ac3"
+  },
+  "automatic_control_disclosure": "Added as a stronger supplemental control after the primary roster was frozen and its first candidate timing was visible; candidate sources/configuration remain frozen.",
+  "checked_bindings": 60,
+  "comparisons": [
+    {
+      "candidate_complete_seconds": 0.652644998,
+      "copt_complete_seconds": 30.618060613,
+      "copt_over_candidate": null,
+      "jointly_timely_strict": false,
+      "model": "dense",
+      "vendor": "copt"
+    },
+    {
+      "candidate_complete_seconds": 0.652644998,
+      "copt_complete_seconds": 3.609183668,
+      "copt_over_candidate": null,
+      "jointly_timely_strict": false,
+      "model": "dense",
+      "vendor": "copt-auto"
+    },
+    {
+      "candidate_complete_seconds": 30.610276195,
+      "copt_complete_seconds": 1.244250057,
+      "copt_over_candidate": null,
+      "jointly_timely_strict": false,
+      "model": "tall",
+      "vendor": "copt"
+    },
+    {
+      "candidate_complete_seconds": 30.610276195,
+      "copt_complete_seconds": 21.172144157,
+      "copt_over_candidate": null,
+      "jointly_timely_strict": false,
+      "model": "tall",
+      "vendor": "copt-auto"
+    },
+    {
+      "candidate_complete_seconds": 1.249722751,
+      "copt_complete_seconds": 30.560358469,
+      "copt_over_candidate": null,
+      "jointly_timely_strict": false,
+      "model": "sparse",
+      "vendor": "copt"
+    },
+    {
+      "candidate_complete_seconds": 1.249722751,
+      "copt_complete_seconds": 37.580577537,
+      "copt_over_candidate": null,
+      "jointly_timely_strict": false,
+      "model": "sparse",
+      "vendor": "copt-auto"
+    }
+  ],
+  "development": {
+    "bytes": 6509,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-development-v1/result.json",
+    "sha256": "49bb9afcc701cfef4ce49a6c5a1219a0ab8dbf6baa7e9917902787653dde3499"
+  },
+  "freeze": {
+    "bytes": 7531,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/freeze.json",
+    "sha256": "6a1ba5a658ac4d814131b17ed364df038238604eb7d71c97521c7fed49dd5061"
+  },
+  "geometry": [
+    {
+      "case": "dense",
+      "fraction_seconds": 0.509007321,
+      "matched_complete": true,
+      "native_seconds": 0.129558923,
+      "ratio": 3.9287708574113416
+    },
+    {
+      "case": "sparse",
+      "fraction_seconds": 1.196307592,
+      "matched_complete": true,
+      "native_seconds": 0.330635439,
+      "ratio": 3.618207399721601
+    },
+    {
+      "case": "tall",
+      "fraction_seconds": 1.027146458,
+      "matched_complete": true,
+      "native_seconds": 0.189728765,
+      "ratio": 5.413762420263475
+    }
+  ],
+  "historical_development_sources": [
+    {
+      "bytes": 6441,
+      "path": "/workspace/AI-Optimizer/research/lp-sp-pricing/native/geometry_exact.cpp",
+      "sha256": "bf499b43111ff8f360dbdf4e501b91368496482d34bc4fc20f38fbcc3f712560"
+    },
+    {
+      "bytes": 625,
+      "path": "/workspace/AI-Optimizer/research/lp-sp-pricing/native/geometry_exact_test.cpp",
+      "sha256": "e3efa660999279ece3eef6360d3158f17d75a9ec82ee7858fa373982d8f04705"
+    },
+    {
+      "bytes": 3071,
+      "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/sources/geometry-development-v1/research/lp-sp-pricing/native/geometry_rank.cu",
+      "sha256": "ab76b1c4b1707f22102fd00ed6cda9c4d6930bb94fc9201ac47fc71b317f84b3"
+    },
+    {
+      "bytes": 10757,
+      "path": "/workspace/AI-Optimizer/research/lp-sp-pricing/python/sp_pricing/geometry_fast.py",
+      "sha256": "333dcb9a104f12e766cbe6e5956daff0e117af99a7300474e11bb5da53ca63ae"
+    },
+    {
+      "bytes": 45832,
+      "path": "/workspace/AI-Optimizer/research/lp-sp-pricing/target/cpu/libsp_geometry_exact.so",
+      "sha256": "c07e7803238249f7e7cc32b2924f7776bb46e515ad42cf2ea6618f99c6205b4b"
+    },
+    {
+      "bytes": 54144,
+      "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-cpu-admit-v2/libsp_geometry_rank.so",
+      "sha256": "320965e1b1b4fcabc22c8dd20883b4d370e85def8c06222e3af713ead6ac7198"
+    },
+    {
+      "bytes": 4081,
+      "path": "/workspace/AI-Optimizer/tests/integration/test_lp_sp_pricing_geometry.py",
+      "sha256": "5549ef61688c1aa0f8838e06c498009124cf1d4d35a799dd68e5d300203d3107"
+    },
+    {
+      "bytes": 4424,
+      "path": "/workspace/AI-Optimizer/tools/lp_sp_pricing_geometry_admit.py",
+      "sha256": "e093e292a26e2a42c2863550f6d98cbe06c2ebaf0b4b6a2b2abe04f7bf30ad57"
+    },
+    {
+      "bytes": 4989,
+      "path": "/workspace/AI-Optimizer/tools/lp_sp_pricing_geometry_run.py",
+      "sha256": "d65c44533de5df082ec4409d851486dbbc826ad4c408624baa42078be5aed723"
+    }
+  ],
+  "limitations": [
+    "one cold repetition per lane; no cache flushing",
+    "three synthetic all-active models with nonuniform dyadic primal/dual witnesses",
+    "presolve certificates do not demonstrate completion of the paper pricing algorithm",
+    "all preparation, teardown and independent endpoint checking included in complete cost"
+  ],
+  "phases": [
+    {
+      "geometry": [],
+      "gpu_confirmed": null,
+      "hwm_bytes": 106622976,
+      "id": "dense-candidate",
+      "input_ns": 33598013,
+      "lane": "candidate",
+      "native_exact": true,
+      "native_seconds": 0.115624812,
+      "phase_ns": {},
+      "proposal": {
+        "accepted": true,
+        "complete_ns": 115280868,
+        "dual_exponent": 10,
+        "exact_checks": 1,
+        "factor_ns": 99401507,
+        "method": "lapack_lu_two_sides",
+        "model_exponent": 14,
+        "primal_exponent": 3,
+        "quantization_ns": 12114290
+      },
+      "queries": 0,
+      "vendor_profile": null
+    },
+    {
+      "geometry": null,
+      "gpu_confirmed": true,
+      "hwm_bytes": null,
+      "id": "dense-copt",
+      "input_ns": null,
+      "lane": "copt",
+      "native_exact": false,
+      "native_seconds": 30.034043062,
+      "phase_ns": null,
+      "proposal": null,
+      "queries": null,
+      "vendor_profile": {
+        "clock": "monotonic_host_wall",
+        "exclusive_ns": {
+          "configuration": 360021,
+          "csr_to_csc": 14509719,
+          "endpoint_extraction": 532975,
+          "input_hash_validation": 35951827,
+          "installation_binding": 59266833,
+          "library_environment": 3322964,
+          "model_import": 22966874,
+          "solve_call_opaque": 30034171000,
+          "solve_configuration": 206138,
+          "teardown": 5759939
+        },
+        "kernel_active_time": false,
+        "schema_version": 1,
+        "timer_overhead_included": true,
+        "total_ns": 30177048290
+      }
+    },
+    {
+      "geometry": null,
+      "gpu_confirmed": true,
+      "hwm_bytes": null,
+      "id": "tall-copt",
+      "input_ns": null,
+      "lane": "copt",
+      "native_exact": false,
+      "native_seconds": 0.624522643,
+      "phase_ns": null,
+      "proposal": null,
+      "queries": null,
+      "vendor_profile": {
+        "clock": "monotonic_host_wall",
+        "exclusive_ns": {
+          "configuration": 369429,
+          "csr_to_csc": 11707676,
+          "endpoint_extraction": 764487,
+          "input_hash_validation": 33152762,
+          "installation_binding": 57919808,
+          "library_environment": 3254091,
+          "model_import": 20222359,
+          "solve_call_opaque": 624638080,
+          "solve_configuration": 193565,
+          "teardown": 5627234
+        },
+        "kernel_active_time": false,
+        "schema_version": 1,
+        "timer_overhead_included": true,
+        "total_ns": 757849491
+      }
+    },
+    {
+      "geometry": [
+        {
+          "columns": 4001,
+          "complete_ns": 26991834932,
+          "method": "native_sparse_gmp",
+          "rows": 1001
+        }
+      ],
+      "gpu_confirmed": null,
+      "hwm_bytes": 465625088,
+      "id": "tall-candidate",
+      "input_ns": 30212545,
+      "lane": "candidate",
+      "native_exact": false,
+      "native_seconds": 30.163349422,
+      "phase_ns": {
+        "geometry_and_experts": 27965930499
+      },
+      "proposal": {
+        "accepted": false,
+        "complete_ns": 474258757,
+        "exact_checks": 0,
+        "factor_ns": 444755242,
+        "fallback_input_ns": 1474939187,
+        "method": "lsmr_two_sides_128",
+        "quantization_ns": 29500728
+      },
+      "queries": 0,
+      "vendor_profile": null
+    },
+    {
+      "geometry": [],
+      "gpu_confirmed": null,
+      "hwm_bytes": 136142848,
+      "id": "sparse-candidate",
+      "input_ns": 30806897,
+      "lane": "candidate",
+      "native_exact": true,
+      "native_seconds": 0.667533117,
+      "phase_ns": {},
+      "proposal": {
+        "accepted": true,
+        "complete_ns": 665825110,
+        "dual_exponent": 13,
+        "exact_checks": 1,
+        "factor_ns": 627087097,
+        "method": "sparse_lu_two_sides",
+        "model_exponent": 17,
+        "primal_exponent": 3,
+        "quantization_ns": 13969178
+      },
+      "queries": 0,
+      "vendor_profile": null
+    },
+    {
+      "geometry": null,
+      "gpu_confirmed": true,
+      "hwm_bytes": null,
+      "id": "sparse-copt",
+      "input_ns": null,
+      "lane": "copt",
+      "native_exact": false,
+      "native_seconds": 30.033065971,
+      "phase_ns": null,
+      "proposal": null,
+      "queries": null,
+      "vendor_profile": {
+        "clock": "monotonic_host_wall",
+        "exclusive_ns": {
+          "configuration": 362212,
+          "csr_to_csc": 10365652,
+          "endpoint_extraction": 571630,
+          "input_hash_validation": 32999044,
+          "installation_binding": 58458517,
+          "library_environment": 3236747,
+          "model_import": 17212075,
+          "solve_call_opaque": 30033196752,
+          "solve_configuration": 197805,
+          "teardown": 5716169
+        },
+        "kernel_active_time": false,
+        "schema_version": 1,
+        "timer_overhead_included": true,
+        "total_ns": 30162316603
+      }
+    },
+    {
+      "geometry": null,
+      "gpu_confirmed": null,
+      "hwm_bytes": null,
+      "id": "dense-copt-auto",
+      "input_ns": null,
+      "lane": "copt-auto",
+      "native_exact": false,
+      "native_seconds": 2.933950994,
+      "phase_ns": null,
+      "proposal": null,
+      "queries": null,
+      "vendor_profile": {
+        "clock": "monotonic_host_wall",
+        "exclusive_ns": {
+          "configuration": 340900,
+          "csr_to_csc": 13601718,
+          "endpoint_extraction": 1183650,
+          "input_hash_validation": 33972892,
+          "installation_binding": 56539263,
+          "library_environment": 3401541,
+          "model_import": 21722961,
+          "solve_call_opaque": 2934076360,
+          "solve_configuration": 193937,
+          "teardown": 8419412
+        },
+        "kernel_active_time": false,
+        "schema_version": 1,
+        "timer_overhead_included": true,
+        "total_ns": 3073452634
+      }
+    },
+    {
+      "geometry": null,
+      "gpu_confirmed": null,
+      "hwm_bytes": null,
+      "id": "tall-copt-auto",
+      "input_ns": null,
+      "lane": "copt-auto",
+      "native_exact": false,
+      "native_seconds": 20.493966743,
+      "phase_ns": null,
+      "proposal": null,
+      "queries": null,
+      "vendor_profile": {
+        "clock": "monotonic_host_wall",
+        "exclusive_ns": {
+          "configuration": 318817,
+          "csr_to_csc": 11853239,
+          "endpoint_extraction": 1179497,
+          "input_hash_validation": 33510699,
+          "installation_binding": 56542862,
+          "library_environment": 3353693,
+          "model_import": 20775917,
+          "solve_call_opaque": 20494097832,
+          "solve_configuration": 196769,
+          "teardown": 13845909
+        },
+        "kernel_active_time": false,
+        "schema_version": 1,
+        "timer_overhead_included": true,
+        "total_ns": 20635675234
+      }
+    },
+    {
+      "geometry": null,
+      "gpu_confirmed": null,
+      "hwm_bytes": null,
+      "id": "sparse-copt-auto",
+      "input_ns": null,
+      "lane": "copt-auto",
+      "native_exact": false,
+      "native_seconds": 36.957546327,
+      "phase_ns": null,
+      "proposal": null,
+      "queries": null,
+      "vendor_profile": {
+        "clock": "monotonic_host_wall",
+        "exclusive_ns": {
+          "configuration": 301715,
+          "csr_to_csc": 11661776,
+          "endpoint_extraction": 351294,
+          "input_hash_validation": 37475550,
+          "installation_binding": 56629298,
+          "library_environment": 3237361,
+          "model_import": 19446645,
+          "solve_call_opaque": 36957666591,
+          "solve_configuration": 187194,
+          "teardown": 13765771
+        },
+        "kernel_active_time": false,
+        "schema_version": 1,
+        "timer_overhead_included": true,
+        "total_ns": 37100723195
+      }
+    }
+  ],
+  "profile": {
+    "bytes": 2284,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-profile-v1/result.json",
+    "sha256": "738a10dc07b3f4805ad917de3b1329b69d036c544e81147e5d8a03de57c61b7a"
+  },
+  "rank": [
+    {
+      "case": "dense",
+      "detail": {
+        "reason": "deadline"
+      },
+      "elapsed_ns": 5001899496,
+      "full_space_proved": false,
+      "lane": "fraction",
+      "status": "resource_limit"
+    },
+    {
+      "case": "dense",
+      "detail": {
+        "reason": "deadline"
+      },
+      "elapsed_ns": 5049370567,
+      "full_space_proved": false,
+      "lane": "native",
+      "status": "resource_limit"
+    },
+    {
+      "case": "dense",
+      "detail": {
+        "allocated_matrix_bytes": 4000000,
+        "arithmetic": "exact_uint32_field",
+        "columns": 1000,
+        "full_rank_proved": true,
+        "gpu": true,
+        "native_ns": 337563845,
+        "packing_ns": 1643118188,
+        "prime": 65521,
+        "rank": 1000
+      },
+      "elapsed_ns": 1989580492,
+      "full_space_proved": true,
+      "lane": "gpu-rank",
+      "status": "completed"
+    },
+    {
+      "case": "sparse",
+      "detail": {
+        "reason": "deadline"
+      },
+      "elapsed_ns": 5001008401,
+      "full_space_proved": false,
+      "lane": "fraction",
+      "status": "resource_limit"
+    },
+    {
+      "case": "sparse",
+      "detail": {
+        "reason": "deadline"
+      },
+      "elapsed_ns": 5049956970,
+      "full_space_proved": false,
+      "lane": "native",
+      "status": "resource_limit"
+    },
+    {
+      "case": "sparse",
+      "detail": {
+        "allocated_matrix_bytes": 256000000,
+        "arithmetic": "exact_uint32_field",
+        "columns": 8000,
+        "full_rank_proved": true,
+        "gpu": true,
+        "native_ns": 593089520,
+        "packing_ns": 1708776816,
+        "prime": 65521,
+        "rank": 8000
+      },
+      "elapsed_ns": 2314453908,
+      "full_space_proved": true,
+      "lane": "gpu-rank",
+      "status": "completed"
+    }
+  ],
+  "rank_development": {
+    "bytes": 3742,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-rank-development-v1/result.json",
+    "sha256": "2da28e97896d658148ec13ae736f6179f7f3cf14afabaa83471ea487f0fff9b4"
+  },
+  "resources": {
+    "cpu_cap_seconds": 240000,
+    "cpu_ns": 92398995291592,
+    "failures": [
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v1.settlement.json",
+          "sha256": "f7f8145595f29de440f73d5f155f9f8e79b5873041a4b105af589daad6cb15e8"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v2",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v2.settlement.json",
+          "sha256": "e39568e97849ff3504e892b3e4a8cc7f806abcf1d03c0dfbc9dcd4d7092baafc"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v3",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v3.settlement.json",
+          "sha256": "04ed4e8458bde1f393a80af09a5faeda444f2e408cde790a50600df0743ac3d1"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 0,
+        "identity": "compact-cpu-dev-v1",
+        "settlement": {
+          "bytes": 371,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/compact-cpu-dev-v1.settlement.json",
+          "sha256": "9783a9973fffff55242448dc5b3162d0e091a2142b0b6509f5b838652bd1af51"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-coupled-solve",
+        "settlement": {
+          "bytes": 395,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-coupled-solve.settlement.json",
+          "sha256": "56501357e63d9bff05394552b1eed2e4b4b2046043313c8b3c1361c903ce2631"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-dense-solve",
+        "settlement": {
+          "bytes": 393,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-dense-solve.settlement.json",
+          "sha256": "41e9e66d0ea8a1641d7f0b1677f36f499b538c78362bdb4e4f593f85cccc344c"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-ill_scaled-solve",
+        "settlement": {
+          "bytes": 398,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-ill_scaled-solve.settlement.json",
+          "sha256": "fd9d199f4405e9bba5cda8f68f2d5babf467dd36e344da88991b4d807829a1dc"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-irregular-solve",
+        "settlement": {
+          "bytes": 397,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-irregular-solve.settlement.json",
+          "sha256": "8c1d4287b253ea4b41b424602005925cdd202e49db68e8141612ca3ac03bbd8a"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-tall-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-tall-solve.settlement.json",
+          "sha256": "1750cbd2f52fbcc034c99ef9049496e690ff1f6f8cbfb201bdad457cbda777c5"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-wide-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-wide-solve.settlement.json",
+          "sha256": "dc2138ff6f3c27777750f3fa4bf3a621ceab6cdd5a13893827c4bc46dfa4ff91"
+        }
+      },
+      {
+        "cpu_ns": 720000000000,
+        "gpu_ns": 0,
+        "identity": "geometry-cpu-admit-v1",
+        "settlement": {
+          "bytes": 374,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/geometry-cpu-admit-v1.settlement.json",
+          "sha256": "b094433186aacf8995f42f99af9d2b250a24c33e404014d9c6f4428f6d7f1c34"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v1",
+        "settlement": {
+          "bytes": 365,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v1.settlement.json",
+          "sha256": "c9e71879de32ecc52c4d5f12f3337b127d8d6759a9e7393c6a79f1de2b21ccf9"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v2",
+        "settlement": {
+          "bytes": 366,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v2.settlement.json",
+          "sha256": "182c8f691dd0a9e5a516d865db415c71625d5987ba03e9237208b1443dca578d"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-development-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-development-v1.settlement.json",
+          "sha256": "f6044e287575026502d32907f6ca36b50a80367728f4a6e841f6ba32d9f0ef8b"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-opt-admit-v2",
+        "settlement": {
+          "bytes": 381,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v2.settlement.json",
+          "sha256": "5c64e06b9068ef7e43eb638ba3f7348e50d1e90fcadaa84027a4149caa591761"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "gpu-opt-admit-v3",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.settlement.json",
+          "sha256": "9a6a1b5ce9b9edce2ff69584f67e3421ae29a2e220d81ede484003594bebbb7d"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 240000000000,
+        "identity": "gpu-opt-admit-v5",
+        "settlement": {
+          "bytes": 380,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v5.settlement.json",
+          "sha256": "ae24b3547a68b4a58d63809f7f31b7329caeb85ca2231c2a8074f4cd02467274"
+        }
+      },
+      {
+        "cpu_ns": 240000000000,
+        "gpu_ns": 0,
+        "identity": "gpu-opt-freeze-v1",
+        "settlement": {
+          "bytes": 368,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-freeze-v1.settlement.json",
+          "sha256": "19f8bbd549d05b6d8ab86a10095b2b15a4ae66c52bc2cc802a5be7e20deadcac"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-sanitizers-v1",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-sanitizers-v1.settlement.json",
+          "sha256": "e8a816154107b2ff1c21465c6480dc6df4918a8ab9fd15c473776e68feea0e8c"
+        }
+      },
+      {
+        "cpu_ns": 720000000000,
+        "gpu_ns": 0,
+        "identity": "million-final-verify-v1",
+        "settlement": {
+          "bytes": 376,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/million-final-verify-v1.settlement.json",
+          "sha256": "228944687638414b3475ab8192e861b2fef7394999b560086f9e648c1269acfa"
+        }
+      },
+      {
+        "cpu_ns": 720000000000,
+        "gpu_ns": 0,
+        "identity": "symbolic-grouped-unit-v1",
+        "settlement": {
+          "bytes": 377,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/symbolic-grouped-unit-v1.settlement.json",
+          "sha256": "40a8d3bd0be3bc79294dbb88335a747cb2c8f905b5e666cd997b894e89f10f1c"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 0,
+        "identity": "wave-final-verify-v1",
+        "settlement": {
+          "bytes": 373,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/wave-final-verify-v1.settlement.json",
+          "sha256": "c4d34a92931738d1f68c2d1757755b934f1926fa2a7565e2ba480bff0d680320"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 240000000000,
+        "identity": "wave-gpu-admit-v1",
+        "settlement": {
+          "bytes": 381,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/wave-gpu-admit-v1.settlement.json",
+          "sha256": "55ce6b8a84a8dbaaa1fd111c523d3c2efa91549d326bdff34c44172e1d9aba96"
+        }
+      }
+    ],
+    "gpu_cap_seconds": 30000,
+    "gpu_ns": 18198395768081,
+    "pending_at_snapshot": [
+      "geometry-final-verify-v1"
+    ],
+    "retained_source_files_verified": 10409,
+    "subsequent_cleanup_dispositions": [
+      {
+        "bytes": 1697,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.cleanup-disposition.json",
+        "sha256": "0b052eaa7ec813852dde0abc103ecab62164e9d09a2526f223d54f853c088b20"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "audit": {
+        "bytes": 613,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/dense-candidate/audit.json",
+        "sha256": "00def5f8ec00eba969b3f4aa5e553267c575208d97ddcc82b3a4d9fb02423910"
+      },
+      "audit_ns": 123755764,
+      "complete_ns": 652644998,
+      "encoding_ns": 64368551,
+      "id": "dense-candidate",
+      "lane": "candidate",
+      "model": "dense",
+      "model_index": 0,
+      "native_ns": 115624812,
+      "process": {
+        "bytes": 89,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/dense-candidate/process.json",
+        "sha256": "a27bbfaa5487c6529d4df2130940eb2b90108255515f11e1bf85feb1546a5038"
+      },
+      "process_ns": 464520683,
+      "reason": null,
+      "response": {
+        "bytes": 144655,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/dense-candidate/response.json",
+        "sha256": "f8b83180756f1f04e8ea344a58c8eb8004c7d16645db2917528ac661cdbab4f3"
+      },
+      "route": "exact_certified_factor_presolve",
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 114,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/dense-copt/audit.json",
+        "sha256": "de6241b38ffc3aa736aeacf31dee59669e8be98c38ece784e523d623ae61366d"
+      },
+      "audit_ns": 36537,
+      "complete_ns": 30618060613,
+      "encoding_ns": 64368551,
+      "id": "dense-copt",
+      "lane": "copt",
+      "model": "dense",
+      "model_index": 0,
+      "native_ns": 30034043062,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/dense-copt/process.json",
+        "sha256": "b83dcce8e0e5a2164b77c086e91232363134504aa353e453e4f47b900ad87afe"
+      },
+      "process_ns": 30553655525,
+      "reason": null,
+      "response": {
+        "bytes": 1663,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/dense-copt/response.json",
+        "sha256": "de9b979243bf4e822321147b2d6e20fa3edf2fe460caaba4b3c57f4ad129b9ee"
+      },
+      "route": null,
+      "status": 10,
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 600,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/tall-copt/audit.json",
+        "sha256": "9f9413dad5146876359a6093aba932901cce8fc307ee440a3bf5c36ba5138a3c"
+      },
+      "audit_ns": 72634238,
+      "complete_ns": 1244250057,
+      "encoding_ns": 56093553,
+      "id": "tall-copt",
+      "lane": "copt",
+      "model": "tall",
+      "model_index": 1,
+      "native_ns": 624522643,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/tall-copt/process.json",
+        "sha256": "ae389f1287b4d0abdf8538348af20d4684e55d6fff5537ccb9e91ca5a6cf9af8"
+      },
+      "process_ns": 1115522266,
+      "reason": null,
+      "response": {
+        "bytes": 2026,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/tall-copt/response.json",
+        "sha256": "30059438d3e8d903c064fd6d3db072284568a7443ec4038773dd760e36158d71"
+      },
+      "route": null,
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 114,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/tall-candidate/audit.json",
+        "sha256": "99e91842f894f71f88f69ce2cee4dcfac599082a9c29c241ed3a0c8e73168ad8"
+      },
+      "audit_ns": 32226,
+      "complete_ns": 30610276195,
+      "encoding_ns": 56093553,
+      "id": "tall-candidate",
+      "lane": "candidate",
+      "model": "tall",
+      "model_index": 1,
+      "native_ns": 30163349422,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/tall-candidate/process.json",
+        "sha256": "6b1eb7b1fd8599097da02fba68a1fe0fb9888f074d5ccb0c9b61ceef4cb9fd46"
+      },
+      "process_ns": 30554150416,
+      "reason": "deadline",
+      "response": {
+        "bytes": 1151,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/tall-candidate/response.json",
+        "sha256": "93f48d36d79a42dba51fda6b5d5e0cecbf72883176d949458c316a2aa1c6582f"
+      },
+      "route": "native_compact_pricing",
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 611,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/sparse-candidate/audit.json",
+        "sha256": "3202a3553867e5fe880183b6ef4effcb75ba29ac792000446b317e928fc5db74"
+      },
+      "audit_ns": 128713438,
+      "complete_ns": 1249722751,
+      "encoding_ns": 55498243,
+      "id": "sparse-candidate",
+      "lane": "candidate",
+      "model": "sparse",
+      "model_index": 2,
+      "native_ns": 667533117,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/sparse-candidate/process.json",
+        "sha256": "fd8d2b09a1da57d43d0009f4379caf87e8dea2043fc7acbb794a5c2dd4c1f65a"
+      },
+      "process_ns": 1065511070,
+      "reason": null,
+      "response": {
+        "bytes": 1149323,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/sparse-candidate/response.json",
+        "sha256": "11813938f2c26e337c3f44ce02b1160c9ed446201679bf3ea45af97e226b9623"
+      },
+      "route": "exact_certified_factor_presolve",
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 114,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/sparse-copt/audit.json",
+        "sha256": "991b0bab46b849502f68a2e83bb966400d0fd94ded3a84d2ed73b4b0278c9432"
+      },
+      "audit_ns": 59681,
+      "complete_ns": 30560358469,
+      "encoding_ns": 55498243,
+      "id": "sparse-copt",
+      "lane": "copt",
+      "model": "sparse",
+      "model_index": 2,
+      "native_ns": 30033065971,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/sparse-copt/process.json",
+        "sha256": "788e9b7836334a3120a036c33ab54a02cf98bbafd65146797c1900d79ca016ef"
+      },
+      "process_ns": 30504800545,
+      "reason": null,
+      "response": {
+        "bytes": 1663,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-million-v1/runs/sparse-copt/response.json",
+        "sha256": "2b1f18bc017cc3d2a2bd7f4db74bd08c723f071c34801a8f90db97965f8f77ff"
+      },
+      "route": null,
+      "status": 10,
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 600,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/runs/dense/audit.json",
+        "sha256": "e22d7a89e5fc67bec36436cb86559c4498b2dea82ad92c6dab94aab47a3f9c6b"
+      },
+      "audit_ns": 72666777,
+      "complete_ns": 3609183668,
+      "encoding_ns": 64368551,
+      "id": "dense-copt-auto",
+      "lane": "copt-auto",
+      "model": "dense",
+      "native_ns": 2933950994,
+      "process": {
+        "bytes": 90,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/runs/dense/process.json",
+        "sha256": "9cc9f6fcbd3e455b7241bd3bee9e6fd580ff64710d4a38f77f9cb4d58489f026"
+      },
+      "process_ns": 3472148340,
+      "reason": null,
+      "response": {
+        "bytes": 1835,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/runs/dense/response.json",
+        "sha256": "8afb8c02466a0fd4536809566ddca747454d12847dec10c8a4f5829b7963e2ac"
+      },
+      "route": "COPT automatic CPU",
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 600,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/runs/tall/audit.json",
+        "sha256": "370f33098e8223ab36416c3b3ebc8643ad53a1dced14be5bb9376411da2632ac"
+      },
+      "audit_ns": 72657489,
+      "complete_ns": 21172144157,
+      "encoding_ns": 56093553,
+      "id": "tall-copt-auto",
+      "lane": "copt-auto",
+      "model": "tall",
+      "native_ns": 20493966743,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/runs/tall/process.json",
+        "sha256": "df757e2ff74e4a63867aa0012ee448d1b9327d26c38d473305eb2e1cca9ef8c2"
+      },
+      "process_ns": 21043393115,
+      "reason": null,
+      "response": {
+        "bytes": 1840,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/runs/tall/response.json",
+        "sha256": "8c937e256020c393f395140f50cf901d74d0368f2113e6064b65586829529db6"
+      },
+      "route": "COPT automatic CPU",
+      "status": 1,
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 114,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/runs/sparse/audit.json",
+        "sha256": "6f40aa69b70f8796fac63dcd7a69f3b4740fecfe80815ae97e53f035ad198561"
+      },
+      "audit_ns": 32798,
+      "complete_ns": 37580577537,
+      "encoding_ns": 55498243,
+      "id": "sparse-copt-auto",
+      "lane": "copt-auto",
+      "model": "sparse",
+      "native_ns": 36957546327,
+      "process": {
+        "bytes": 91,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/runs/sparse/process.json",
+        "sha256": "9ef466f0aea9e57d9e9fa070646378bbdddfe880efb966dcb3545b76f144cf84"
+      },
+      "process_ns": 37525046496,
+      "reason": null,
+      "response": {
+        "bytes": 1466,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-copt-auto-v1/runs/sparse/response.json",
+        "sha256": "9a880e3f43e5db3bfbe3460b6485d4debea67f8d0e90df5a2ae124f4e497b5f2"
+      },
+      "route": "COPT automatic CPU",
+      "status": 8,
+      "strict_accepted": false,
+      "timely": false
+    }
+  ],
+  "status": "geometry_and_fresh_million_comparison_audited",
+  "supplemental_sanitizer": {
+    "bytes": 2779,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/geometry-native-sanitizer-v1/result.json",
+    "sha256": "1dcda80036d45bfa21127329329dbee160e863e0b6e922af21916b5505fd08c0"
+  }
+}
