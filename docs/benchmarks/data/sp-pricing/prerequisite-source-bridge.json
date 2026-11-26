@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "reason": "Build source-only SP-LP CPU test libraries before acceptance; no measured numerical body or original receipt changed.",
+  "files": [
+    {
+      "path": "tools/check.sh",
+      "frozen_path": "docs/benchmarks/data/sp-pricing/check-before.sh",
+      "before_sha256": "3b5bda274aaa8e0ef6951f80b23f537faa2674eed59ce04c7676d072dd135107",
+      "after_sha256": "55adbdc8f20ac33d4ff6f1934d3374c11de075ce78afb94d77aa1d39608a6ec5"
+    }
+  ]
+}

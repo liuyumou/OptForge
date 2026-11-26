@@ -112,7 +112,9 @@ headroom, the 30-second idle proof, ownership checks and all supervision rules
 remain unchanged. CPU preparation uses the already approved allocation.
 
 The implementation of this proposal is in
-[the protocol](../../tools/lp_sp_pricing_billion_plan.py),
-[the streaming generator](../../tools/lp_sp_pricing_billion_input.py), and
-[its exact-oracle tests](../../tests/integration/test_lp_sp_pricing_billion_input.py).
+the protocol (`tools/lp_sp_pricing_billion_plan.py`),
+the streaming generator (`tools/lp_sp_pricing_billion_input.py`), and
+its exact-oracle tests (`tests/integration/test_lp_sp_pricing_billion_input.py`).
+These files remain on the local research branch with the paused continuation;
+they are intentionally excluded from the public integration pending admission.
 The proposal has no solver-launch, approval, or deletion action.
