@@ -6,12 +6,19 @@ unadmitted billion/5090 files on the original local feature branch. No GPU
 experiment, admission or availability monitor may restart for this PR.
 
 Use fresh reporting reservations within the existing SP allocation of 240000
-CPU / 37200 GPU seconds, with a 9600 CPU-second review ceiling, four CPU slots
+CPU / 37200 GPU seconds, with a 10300 CPU-second review ceiling, four CPU slots
 and 16 GiB sampled host memory. All historical failures and sources remain.
 Initial source-only tests fail on missing native libraries/private fixture
 assumptions; retain the full 720 CPU-second charge. Corrected portable CPU
 acceptance passes all 156 SP tests with zero skips and no private/device access.
-Full native acceptance, isolated Rust checks and final PR review remain pending.
+Native workspace checks pass 637 Rust tests; the isolated packages pass 72 Rust
+tests and six CPU sanitizer targets. The full Python run has 1128 tests and three
+optional skips; its remaining source-bridge failure is corrected and all four
+bridge tests pass in a targeted rerun. Record replay, smoke and 411 documentation
+pages pass. All three failed review reservations retain their full 9360 CPU
+seconds; cleanup is empty and no overrun occurs. Hosted checks cannot start due
+to the account billing lock. Publish the final review and use only normal PR
+merge; do not change or bypass branch protection or claim hosted success.
 See [scope and review](../docs/benchmarks/lp-sp-pricing-pr.md).
 
 # Utilization optimization complete and settled (2026-11-23)

@@ -39,10 +39,29 @@ and uses the independent source checker. Historical measured sources and data
 remain preserved on the original branch; no numerical solver or checker code
 is changed by these portability fixes.
 
-All 156 SP tests then pass with zero skips in a test interpreter that refuses
-private evidence reads and vendor/GPU library loading. Both the failed first
-reservation and its full 720 CPU-second charge remain in local evidence.
-Full native workspace acceptance and isolated Rust checks are still pending.
+All 156 SP tests pass with zero skips in a test interpreter that refuses private
+evidence reads and vendor/GPU library loading. Native workspace acceptance
+passes 637 Rust tests, formatting, Clippy, dependency policy and artifact checks.
+The two isolated research packages pass 72 Rust tests and Clippy. All six native
+CPU sanitizer targets pass ASan/UBSan. Committed-record replay, smoke and
+documentation generation for 411 pages with local links also pass.
+
+The full Python run executes 1128 tests with three existing optional skips. Its
+remaining failure was the historical source-binding check: the new CPU build
+step and the test registering its source bridge both need retained original
+bytes. The completed bridge preserves those bytes and their before/after hashes;
+all four source-binding tests pass in the targeted rerun. There is no claim of a
+clean full-suite rerun after that metadata-only correction. Missing local
+`fastjsonschema` was resolved using the already-declared dependency in a
+PR-specific directory, without changing dependency pins.
+
+The [compact validation receipt](lp-sp-pricing-pr-validation.json) binds the
+reviewed code and all 77 unchanged research files. Three failed reservations
+retain their full 9360 CPU-second charge, with empty cleanup and no overrun.
+Review use at that checkpoint is 9610.972 CPU seconds within a 10300-second
+review ceiling and the unchanged approved phase/cumulative allocation. No GPU
+seconds are added. Small publication/final-head receipts remain in the local
+ledger. The historical scientific checkpoints are not rewritten.
 
 ## Hosted checks
 
