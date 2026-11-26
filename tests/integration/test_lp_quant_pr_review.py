@@ -27,7 +27,7 @@ class QuantPrReview(unittest.TestCase):
             current=file_hash(ROOT/f['path'])
             if current==f['sha256']:continue
             previous=f['sha256']
-            for cohort in ['tensor','tensor-residual','tensor-cost','tensor-warp32','baseline-pr','resident2']:
+            for cohort in ['tensor','tensor-residual','tensor-cost','tensor-warp32','baseline-pr','resident2','sp-pricing']:
                 path=ROOT/('docs/benchmarks/data/'+cohort+'/prerequisite-source-bridge.json')
                 if not path.exists():continue
                 rows={row['path']:row for row in read_json(path)['files']}

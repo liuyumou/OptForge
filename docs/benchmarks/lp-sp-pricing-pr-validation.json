@@ -1,0 +1,457 @@
+{
+  "CPU_cumulative_cap_seconds": 240000,
+  "CPU_sanitizer_targets": [
+    "market",
+    "auxiliary",
+    "proof",
+    "proof_interval",
+    "compact_proof",
+    "geometry_exact"
+  ],
+  "GPU_cumulative_cap_seconds": 37200,
+  "base": "96ed5e18acdae78f7a246dd8a75e4d22a6c733d7",
+  "checkpoint_note": "Before publication/final-head verification; subsequent small CPU reporting reservations remain in the local ledger.",
+  "committed_record_replay": "passed",
+  "cpu_phase_ns": {
+    "admission": 32237282520492,
+    "billion": 5300792203644,
+    "confirmation": 124473705580648,
+    "development": 17649076361980,
+    "reference": 2829660776044,
+    "reporting": 21272509281516
+  },
+  "documentation_pages": 411,
+  "excluded_files": [
+    "docs/benchmarks/lp-sp-pricing-5090-checkpoint.json",
+    "docs/benchmarks/lp-sp-pricing-5090.md",
+    "research/lp-sp-pricing/native/factor_projection_billion.cu",
+    "research/lp-sp-pricing/native/square_billion.cu",
+    "research/lp-sp-pricing/native/wide_recovery_billion.cu",
+    "tests/integration/test_lp_sp_pricing_5090.py",
+    "tests/integration/test_lp_sp_pricing_billion_execute.py",
+    "tests/integration/test_lp_sp_pricing_billion_input.py",
+    "tests/integration/test_lp_sp_pricing_billion_numeric.py",
+    "tools/lp_sp_pricing_5090.py",
+    "tools/lp_sp_pricing_5090_budget.py",
+    "tools/lp_sp_pricing_5090_guard.py",
+    "tools/lp_sp_pricing_billion_admit.py",
+    "tools/lp_sp_pricing_billion_admit_v2.py",
+    "tools/lp_sp_pricing_billion_admit_v3.py",
+    "tools/lp_sp_pricing_billion_admit_v4.py",
+    "tools/lp_sp_pricing_billion_budget.py",
+    "tools/lp_sp_pricing_billion_budget_v2.py",
+    "tools/lp_sp_pricing_billion_control.py",
+    "tools/lp_sp_pricing_billion_defer.py",
+    "tools/lp_sp_pricing_billion_execute.py",
+    "tools/lp_sp_pricing_billion_execute_v2.py",
+    "tools/lp_sp_pricing_billion_fast_admit.py",
+    "tools/lp_sp_pricing_billion_fast_control.py",
+    "tools/lp_sp_pricing_billion_finalize.py",
+    "tools/lp_sp_pricing_billion_gate_resume.py",
+    "tools/lp_sp_pricing_billion_harness.py",
+    "tools/lp_sp_pricing_billion_input.py",
+    "tools/lp_sp_pricing_billion_input_audit.py",
+    "tools/lp_sp_pricing_billion_numeric.py",
+    "tools/lp_sp_pricing_billion_plan.py",
+    "tools/lp_sp_pricing_billion_prepare_finish.py",
+    "tools/lp_sp_pricing_billion_prepare_seal.py",
+    "tools/lp_sp_pricing_billion_report.py",
+    "tools/lp_sp_pricing_billion_resume_budget.py",
+    "tools/lp_sp_pricing_billion_run.py",
+    "tools/lp_sp_pricing_billion_run_fast.py",
+    "tools/lp_sp_pricing_billion_square_domain.py"
+  ],
+  "failed_full_cpu_ns": 9360000000000,
+  "gpu_phase_ns": {
+    "admission": 4876481086144,
+    "billion": 0,
+    "confirmation": 22281243483745,
+    "development": 3407751503839,
+    "reference": 0,
+    "reporting": 0
+  },
+  "hosted_status": "account_billing_lock_no_steps_executed",
+  "hosted_success_claimed": false,
+  "isolated_rust_tests": 72,
+  "numerical_or_default_changes_by_review": false,
+  "original_local_head": "a47bb8c",
+  "pr": "https://github.com/liuyumou/OptForge/pull/30",
+  "python_suite": {
+    "attempted": 1128,
+    "clean_full_rerun_after_metadata_only_correction": false,
+    "correction": "add frozen old test bytes and its before/after hash to the explicit source bridge",
+    "initial_remaining_failure": "historical source bridge omitted the test registering its own extension",
+    "optional_skips": 3,
+    "targeted_rerun_passed": true,
+    "targeted_rerun_tests": 4
+  },
+  "review_ceiling_seconds": 10300,
+  "review_cpu_ns": 9610971550820,
+  "review_reservations": [
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 720000000000,
+      "gpu_ns": 0,
+      "identity": "sp-pr-source-tests-v1",
+      "overrun": false,
+      "settlement_sha256": "a39f229421b3daf8338b95500e3391f511335b0241700c68a2b5af77a8f7b09e",
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 186320826908,
+      "gpu_ns": 0,
+      "identity": "sp-pr-source-tests-v2",
+      "overrun": false,
+      "settlement_sha256": "92768de8c0d552ab0d329077fc2ee0803214b220d7df954edc9f9e3a91109e91",
+      "status": "passed"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 7200000000000,
+      "gpu_ns": 0,
+      "identity": "sp-pr-full-native-v1",
+      "overrun": false,
+      "settlement_sha256": "2b87524f3a6160337abff1063505804d0a749304f071e8869c48d6a09bced4fc",
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 1440000000000,
+      "gpu_ns": 0,
+      "identity": "sp-pr-final-gate-v1",
+      "overrun": false,
+      "settlement_sha256": "e2a6d8beb2fd0f4de030660b93ba336a7446708344653532be15b787dcf6fd04",
+      "status": "refused"
+    },
+    {
+      "cleanup_empty": true,
+      "cpu_ns": 64650723912,
+      "gpu_ns": 0,
+      "identity": "sp-pr-finish-checks-v1",
+      "overrun": false,
+      "settlement_sha256": "c2d9d34d72f2d0ed9813aafba5fadf57802bf10c6d7458794db3e96d83b6664b",
+      "status": "passed"
+    }
+  ],
+  "reviewed_code_head": "b17b587b5bdba71311a9fba43748093451bf65f0",
+  "schema_version": 1,
+  "smoke": "passed",
+  "source_only_SP_tests": {
+    "GPU_vendor_loading": false,
+    "private_evidence_access": false,
+    "skips": 0,
+    "tests": 156
+  },
+  "unchanged_research_sources": [
+    {
+      "path": "research/lp-billion-lowbit/src/array_assessment.rs",
+      "sha256": "073aacbc75c428e1f46af23371e1a3a52c7f6ba281ba012cc6e809d4be444a00"
+    },
+    {
+      "path": "research/lp-billion-lowbit/src/billion.rs",
+      "sha256": "969ffe786ee1f877a262e2e559ec4a5597bfa8f2a74d146eef836b813c96c62b"
+    },
+    {
+      "path": "research/lp-billion-lowbit/src/bin/certificate_bench.rs",
+      "sha256": "eebe5b71d38337099b71a9a6a93ac4734d6196d8502b89b471ae7f1001677fd2"
+    },
+    {
+      "path": "research/lp-billion-lowbit/src/fast_device.rs",
+      "sha256": "9a604497712f7f53e5836546745fcd23879c9a27de2e5c1193ded45746bb941e"
+    },
+    {
+      "path": "research/lp-billion-lowbit/src/gpu_tensor.rs",
+      "sha256": "fb990607d5a028241b632f73d87cf9652c7580e49a688856663b1b6035bfb07d"
+    },
+    {
+      "path": "research/lp-billion-lowbit/src/lib.rs",
+      "sha256": "7e84da56e769de8c55606592212a90441e07188a62f4252a602501679b19bbcb"
+    },
+    {
+      "path": "research/lp-billion-lowbit/src/main.rs",
+      "sha256": "0add112c8cef0ef19fdb956c894e18365341220c13cefb69568f057771a6797f"
+    },
+    {
+      "path": "research/lp-billion-lowbit/src/scratch_certificate.rs",
+      "sha256": "fa05ce74c1fd171173a31f0c14cc92a1e9afd102fcedba58650cc189b5cf489e"
+    },
+    {
+      "path": "research/lp-billion-lowbit/tests/contracts.rs",
+      "sha256": "04ae36d20a65c3590345e1143a1222f38cd1524b9023db640c89cee7ecb5e9e9"
+    },
+    {
+      "path": "research/lp-sp-pricing/.gitignore",
+      "sha256": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368"
+    },
+    {
+      "path": "research/lp-sp-pricing/Cargo.lock",
+      "sha256": "e1ce530d81f95f5badb705db06eb9ba2b158e1ec8764f280926ebb8aa1b2843b"
+    },
+    {
+      "path": "research/lp-sp-pricing/Cargo.toml",
+      "sha256": "32b5e5d6d6880a4f10ce625bbd41f749c3baebcc1b8890d938c48621647adf6a"
+    },
+    {
+      "path": "research/lp-sp-pricing/README.md",
+      "sha256": "f20b7e217b785a8fd3085cc9c4e5c40ba6bca395b165d1bdb6dd04f60b4cdc43"
+    },
+    {
+      "path": "research/lp-sp-pricing/build.rs",
+      "sha256": "51136845d7a9b2cc77b9d3e97d5ca59bd5e47d23f56722f4357d192f7ddf53e5"
+    },
+    {
+      "path": "research/lp-sp-pricing/examples/bounded.json",
+      "sha256": "42f3bc0856516656a2a641f85c3274fb6b77bf78fccc11148cecdf6f5face0d7"
+    },
+    {
+      "path": "research/lp-sp-pricing/examples/unbounded.json",
+      "sha256": "2ab2421bdd9f06433ab0bf2d6bd731eff3923d94bc631547afaa216e9d377a09"
+    },
+    {
+      "path": "research/lp-sp-pricing/interval-notes.md",
+      "sha256": "b32c126bc6c2e061c0d7a56c9c4a1ed2ab2a91c8bc1515ebc6bc50d44485f18e"
+    },
+    {
+      "path": "research/lp-sp-pricing/market-notes.md",
+      "sha256": "97677b23024a6c661fd17d084786c11b846a459211044c5d48d4e9f90f7d5783"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/auxiliary.cpp",
+      "sha256": "95f00542fe0a31fce28b2a221b5d7cfb6e5af1574cd1c7beb79ba14eefba7521"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/auxiliary_test.cpp",
+      "sha256": "01d1e922ace8835cdfb80dfb11f34c9f0390cc7b4ceb05ffa313c1f27ae5f82d"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/batch.cu",
+      "sha256": "c06585d19be50d882fc90f15bf0ec6e9fe2681c4f3e53cd947e57a190184af1d"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/batch_optimized.cu",
+      "sha256": "18e3076a1cc9ed3796526c613856306759adc170c0077c381afd64da183b6140"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/batch_wave.cu",
+      "sha256": "79b18c459cfb4c94904ea80afd16762e86888b9b01332b7af4fa7273e5c9c3ba"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/compact_proof.cpp",
+      "sha256": "8ee9f7167c1456a735dfc52808a9e0449b88c6a6b7fb5f9ea8f5a761384d9b18"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/compact_proof_test.cpp",
+      "sha256": "e8e52263510943df550f3329995620abe8af936417ddc41b43b4fbaf9269dce2"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/compact_tiles.cu",
+      "sha256": "65cf51baf24dc8bbe82908e1a36b5282a49b54a83ac71011910ade5ff3dd024f"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/factor_projection.cu",
+      "sha256": "06d5d0aac02af7c7abd5e350ef3d904b56423a8b1dbe6228b2872098d63c682a"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/factor_transform.cu",
+      "sha256": "500e94d950cdc7c2bd434fb0483b68286b6dac9caae851baca884eca7474a7f8"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/geometry_exact.cpp",
+      "sha256": "bf499b43111ff8f360dbdf4e501b91368496482d34bc4fc20f38fbcc3f712560"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/geometry_exact_test.cpp",
+      "sha256": "e3efa660999279ece3eef6360d3158f17d75a9ec82ee7858fa373982d8f04705"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/geometry_rank.cu",
+      "sha256": "5e6036be5b0dbabf65478dbc8d6e9ccb09d0d2ce1d3bd5436b467f7ecf1129c7"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/gmp_abi.h",
+      "sha256": "380ccf3aec696828bc1be4a49e01ad9eedb160ae2ca3fbc7f693395116b38a3e"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/market.cpp",
+      "sha256": "7655a72e20b55d85b45b3f1d31979e0395837cb56b7f864c8cb7f450d073b2cb"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/market_test.cpp",
+      "sha256": "ec44ce492b4f5150062eadf82a0f9d0a40bece86afc0e26cf112219948f31aea"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/proof.cpp",
+      "sha256": "13549e87182ba3e55dfa898fb948298668d8e1b05412cfa3a0de0d8be09f3080"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/proof_interval.cpp",
+      "sha256": "9c5995df7008dc6a65484e53a09639dee999edcca5d0982fce3df63fd901802b"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/proof_interval_test.cpp",
+      "sha256": "2f97a66c93ffbe477c53def5f76b3f3cf5136a7005ef15e34154612ac83df954"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/proof_test.cpp",
+      "sha256": "91897b585fe1c95799864b2d6a1a51fd92c42412ef2df63918af91637d18bf65"
+    },
+    {
+      "path": "research/lp-sp-pricing/native/wide_recovery.cu",
+      "sha256": "531f074d99db5481e428bfd651860770f10b0fc52241d8f3188008eb2eac0963"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/__init__.py",
+      "sha256": "869aa0d8c0ae9aba257222010054912e4c3cc4fb069d46210fa42d227f096225"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/calibration.py",
+      "sha256": "f394136266f790e138c997dd6476b25d9fc784a8454e952b44c1b2514040186c"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/cells.py",
+      "sha256": "baac4fdf07a359ab83d4f0a554f36a514fc668d38c847f08c68602a494f569ea"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/certificate_guard.py",
+      "sha256": "a3fffb3ee16936efdb2d3b4dbb305afecf142e267e4f9e5c6d7a0cb8a9fd12f5"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/compact_basis.py",
+      "sha256": "158c049f81b1b37b54ff00f33aaa6c099612549643e7c02023beb939ba73a1d3"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/compact_geometry.py",
+      "sha256": "5ddc06c567162a88f87b476295f05b0cc5c0e64558a148431be108b472588431"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/compact_gpu.py",
+      "sha256": "f1087552c2038f024b6efff3284b358d983d078803c8a2670a5d8288b83d60d6"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/compact_solver.py",
+      "sha256": "64cfdca8d192b6ee3358026f6dc2686feaa31cd417125eaea7b29ebe5841684f"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/compression.py",
+      "sha256": "80328b10a7cb4019fc4a1e4f6c35d5740df9f3b6a9588d9d93a66e8c35d9a82c"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/dual_recovery_cached.py",
+      "sha256": "d99b14274e8ce6504b1ce1bb594760c13e34b60ef1f41e197ca1e78d3f79f2b3"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/dual_recovery_cached_lazy.py",
+      "sha256": "d0f84e9d5ffbf09b811ada7ee74ae2041905150ddda2213e449aaffea02d35d4"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/dual_recovery_fast.py",
+      "sha256": "9a700be569f2e2b0c3f75e123d97c28e61f5646cf9384c2c369a60eff5252b39"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/dual_recovery_screened.py",
+      "sha256": "3edc733b025b387a6aa153288215bd9d6b8df2ebf4609ab2195abb7f3f6abc8a"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/ellipsoid.py",
+      "sha256": "1da26b4cbfbc1717109dad5836977502082cab7e5b2bf69ff6da34952c34e420"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/exact.py",
+      "sha256": "791bc26edd71127a09b752da7a58978be488dc52cc857a03477b5d8bf947a6f3"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/factor_projection.py",
+      "sha256": "d3669731ddc91cc9ca2278ba88eba91ca86765dd04f2f57ad0b24b87856ada53"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/flow_market.py",
+      "sha256": "6713017bb5686bd43b7cc9ba804c06a47b4a33f3961bc291c36b969a686a604e"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/geometry.py",
+      "sha256": "337d6524fcdd64738f76e2cae845f8f01e9f54d3935da0489b5798265b16c2aa"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/geometry_fast.py",
+      "sha256": "333dcb9a104f12e766cbe6e5956daff0e117af99a7300474e11bb5da53ca63ae"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/gpu.py",
+      "sha256": "df93e3d8d5d03ad49c1e2cf49514e55a4720e12902fad9da5f262e84821cf063"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/gpu_lean.py",
+      "sha256": "0a7b2ad4748b6bdd08743f68a6359fda2026fc08ce0805649cedfdeeeedb1668"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/gpu_wave.py",
+      "sha256": "2d45510e0eeaa8ae52c9e11351c5b4930462db8ebea4e1eb43cf489482b096cf"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/gpu_wave_policy.py",
+      "sha256": "18475f970ea771fe8b41323a1e78013a1ca4c20390467e721bbc327b98d1ac4f"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/grouped_market.py",
+      "sha256": "9c6ab4de4cd5c96c56d2993a11f26155fa2c8c86456de862583dacb710148d26"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/implicit_certificate.py",
+      "sha256": "d23b939f2ba33da14e71d112043d19b2df9c44b26e963e52195221f09a05224c"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/log_oracle.py",
+      "sha256": "3dc58c1d8a815cdfc05ea42a67b11e44a646e86b8aa266dcfd18608c8dc8520c"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/lp.py",
+      "sha256": "3dd3ac894a08b4006fbb17dd23826093d09999a975c23f03eab76fdaa4fe15ff"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/market.py",
+      "sha256": "19c2eb70482403e11ab84ddd55b198caf2471ff253775ad0e5aabd6838a0d9c3"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/native_auxiliary.py",
+      "sha256": "0bfbbce7f13f62e879053e805fc9d979d137993f2166040a52e28970422739f2"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/native_proof.py",
+      "sha256": "4e93bd60290c5fc8ff20663c8c43bc3bfc772f5183f9a5309eec2c976e28df6d"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/primal_recovery.py",
+      "sha256": "a69f4bf2de49cf1b93c34b8c339b30713f0f7d7279bc04371d2fec1926c0b057"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/primal_recovery_balanced.py",
+      "sha256": "a682a6ce454427191d27426176983c548bdaa0e0c4baf32781cd05bf178086c3"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/primal_recovery_fast.py",
+      "sha256": "94e4f87e838196e89074613f4dc3bace76f87ed5f5d4162b545edb23452977df"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/recursive.py",
+      "sha256": "13a1c53a2dd17544a5267412699b7aa94515fd3fe798bc9e7c8287f514afa10f"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/reference.py",
+      "sha256": "4fc9c8d7a88e2a007461987a619532e4956b243db4b7a3da7fccf8f2b3bf65f8"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/solver.py",
+      "sha256": "b468a3119714a58d65ab5169447bd0399a5609e84d481cced77f6d1bf8df4f5b"
+    },
+    {
+      "path": "research/lp-sp-pricing/python/sp_pricing/symbolic_compression.py",
+      "sha256": "14df2c6245e722dd4238a605e4a79d6b30be10a2cb607c06fb6a636647e77557"
+    },
+    {
+      "path": "research/lp-sp-pricing/src/lib.rs",
+      "sha256": "7cd393a073a8667d686e1de78f78e596590285d461ddd1ed86d24c96dcfd39f1"
+    }
+  ],
+  "workspace_rust_tests": 637
+}

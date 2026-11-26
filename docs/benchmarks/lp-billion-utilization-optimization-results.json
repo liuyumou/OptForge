@@ -1,0 +1,553 @@
+{
+  "admission": {
+    "bytes": 273234,
+    "namespace": "evidence",
+    "path": "utilization-candidate-v1/result.json",
+    "sha256": "e30ac846229a26558a9c30412295a93d5500249498b0a413af3c96b254e8d909"
+  },
+  "benchmark": {
+    "bytes": 3664,
+    "namespace": "evidence",
+    "path": "utilization-cpu-benchmark-v1/result.json",
+    "sha256": "d66397a5aab21f46eecea24e66b7c700c22ebd39b26e4a738c15fc0c17da47da"
+  },
+  "billion_harness_tests": 156,
+  "candidate_continuations": 240,
+  "cpu_microbenchmark": [
+    {
+      "case": "short_columns",
+      "median_paired_speedup": 1.2215781779521722,
+      "nonzeros": 1048576,
+      "samples": [
+        {
+          "candidate_ns": 19634635,
+          "exact": true,
+          "reference_ns": 24506227,
+          "repetition": 0
+        },
+        {
+          "candidate_ns": 18226639,
+          "exact": true,
+          "reference_ns": 22839109,
+          "repetition": 1
+        },
+        {
+          "candidate_ns": 20147024,
+          "exact": true,
+          "reference_ns": 22774057,
+          "repetition": 2
+        },
+        {
+          "candidate_ns": 18424620,
+          "exact": true,
+          "reference_ns": 23089843,
+          "repetition": 3
+        },
+        {
+          "candidate_ns": 19510800,
+          "exact": true,
+          "reference_ns": 23316268,
+          "repetition": 4
+        },
+        {
+          "candidate_ns": 28518354,
+          "exact": true,
+          "reference_ns": 33329330,
+          "repetition": 5
+        }
+      ]
+    },
+    {
+      "case": "balanced",
+      "median_paired_speedup": 1.060882249512788,
+      "nonzeros": 1048576,
+      "samples": [
+        {
+          "candidate_ns": 18648836,
+          "exact": true,
+          "reference_ns": 23248023,
+          "repetition": 0
+        },
+        {
+          "candidate_ns": 24200428,
+          "exact": true,
+          "reference_ns": 14543942,
+          "repetition": 1
+        },
+        {
+          "candidate_ns": 12187904,
+          "exact": true,
+          "reference_ns": 13196997,
+          "repetition": 2
+        },
+        {
+          "candidate_ns": 12341992,
+          "exact": true,
+          "reference_ns": 12917203,
+          "repetition": 3
+        },
+        {
+          "candidate_ns": 12093315,
+          "exact": true,
+          "reference_ns": 12915305,
+          "repetition": 4
+        },
+        {
+          "candidate_ns": 12156827,
+          "exact": true,
+          "reference_ns": 12810790,
+          "repetition": 5
+        }
+      ]
+    },
+    {
+      "case": "long_columns",
+      "median_paired_speedup": 1.0321710678801215,
+      "nonzeros": 1048576,
+      "samples": [
+        {
+          "candidate_ns": 39058607,
+          "exact": true,
+          "reference_ns": 40237982,
+          "repetition": 0
+        },
+        {
+          "candidate_ns": 38290955,
+          "exact": true,
+          "reference_ns": 39374055,
+          "repetition": 1
+        },
+        {
+          "candidate_ns": 38235581,
+          "exact": true,
+          "reference_ns": 39160781,
+          "repetition": 2
+        },
+        {
+          "candidate_ns": 38031423,
+          "exact": true,
+          "reference_ns": 39347553,
+          "repetition": 3
+        },
+        {
+          "candidate_ns": 38028295,
+          "exact": true,
+          "reference_ns": 39326852,
+          "repetition": 4
+        },
+        {
+          "candidate_ns": 38015114,
+          "exact": true,
+          "reference_ns": 39382251,
+          "repetition": 5
+        }
+      ]
+    }
+  ],
+  "fresh_4m_pairs": [
+    {
+      "assessment_speedup": 1.9807800959315436,
+      "complete_speedup": 1.2784884671215853,
+      "exact_continuation": true,
+      "family": "irregular",
+      "rows": {
+        "candidate": {
+          "audit": {
+            "bytes": 1846,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-irregular-candidate-full-audit/result.json",
+            "sha256": "3df848e14bb769247120bd18917ffa9696ad870ab1c7e4ec4319decf499fe2db"
+          },
+          "certified": false,
+          "complete_ns": 2195784139,
+          "device_bytes_upper": 218763356,
+          "final_proof_ns": 607060405,
+          "independent_proofs": 2,
+          "logical": 1000,
+          "offline_audit_ns": 311019628,
+          "phase_ns": {
+            "certificate_reuse": 1672,
+            "checkpoint": 7986140,
+            "device_accounting": 4090,
+            "device_advance": 151721286,
+            "device_setup": 180847997,
+            "device_teardown": 78345327,
+            "endpoint_download": 12567212,
+            "endpoint_unscale": 3716976,
+            "host_bookkeeping": 8629143,
+            "original_model_control": 11939889,
+            "preparation_control": 2082684,
+            "preparation_engine": 469751981,
+            "preparation_operator": 29068287,
+            "preparation_packing": 526,
+            "recovery": 0,
+            "response_assembly": 34757,
+            "restart_weight_control": 8679918,
+            "state_upload": 20612195,
+            "strict_certificate": 238902233,
+            "witness_output": 26904923
+          },
+          "physical": 1000,
+          "process_ns": 1588723734,
+          "response": {
+            "bytes": 7115,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-irregular-candidate/response.json",
+            "sha256": "60965bee2b1eb0fd353c722161b66dedd2ab2f598a612651532245bbd92d6a9f"
+          },
+          "status": "limit",
+          "strict_certificate_calls": 2,
+          "version": "candidate"
+        },
+        "reference": {
+          "audit": {
+            "bytes": 1846,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-irregular-reference-full-audit/result.json",
+            "sha256": "1ecca530e047436b1c8026a40b2a8e6774db0a7b98568e4e638f8a949f2dbf78"
+          },
+          "certified": false,
+          "complete_ns": 2807284698,
+          "device_bytes_upper": 218763356,
+          "final_proof_ns": 583649518,
+          "independent_proofs": 2,
+          "logical": 1000,
+          "offline_audit_ns": 309597123,
+          "phase_ns": {
+            "certificate_reuse": 0,
+            "checkpoint": 12308205,
+            "device_accounting": 3738,
+            "device_advance": 151740789,
+            "device_setup": 177160350,
+            "device_teardown": 77621582,
+            "endpoint_download": 14190176,
+            "endpoint_unscale": 4544118,
+            "host_bookkeeping": 12896957,
+            "original_model_control": 11969623,
+            "preparation_control": 2075883,
+            "preparation_engine": 503173475,
+            "preparation_operator": 16628033,
+            "preparation_packing": 751,
+            "recovery": 0,
+            "response_assembly": 35559,
+            "restart_weight_control": 8609284,
+            "state_upload": 21809179,
+            "strict_certificate": 473212788,
+            "witness_output": 417988820
+          },
+          "physical": 1000,
+          "process_ns": 2223635180,
+          "response": {
+            "bytes": 7046,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-irregular-reference/response.json",
+            "sha256": "5ccc6679d1d1a4751efe1e213fffa59d8de82f462b262d25b2eea7db82d50043"
+          },
+          "status": "limit",
+          "strict_certificate_calls": 3,
+          "version": "reference"
+        }
+      }
+    },
+    {
+      "assessment_speedup": 1.1117739281374281,
+      "complete_speedup": 0.9306875266369873,
+      "exact_continuation": true,
+      "family": "tall",
+      "rows": {
+        "candidate": {
+          "audit": {
+            "bytes": 1837,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-tall-candidate-full-audit/result.json",
+            "sha256": "012d1539120ec7f06d29ebc6d3b19452481bd59e10bde365fdc5a6bd6a12f7af"
+          },
+          "certified": true,
+          "complete_ns": 2090401568,
+          "device_bytes_upper": 198070364,
+          "final_proof_ns": 508572843,
+          "independent_proofs": 2,
+          "logical": 1000,
+          "offline_audit_ns": 261285803,
+          "phase_ns": {
+            "certificate_reuse": 2442,
+            "checkpoint": 4904202,
+            "device_accounting": 4475,
+            "device_advance": 150545521,
+            "device_setup": 172866640,
+            "device_teardown": 77302763,
+            "endpoint_download": 6602288,
+            "endpoint_unscale": 2552007,
+            "host_bookkeeping": 5341226,
+            "original_model_control": 7460832,
+            "preparation_control": 1233617,
+            "preparation_engine": 472339058,
+            "preparation_operator": 28836350,
+            "preparation_packing": 650,
+            "recovery": 0,
+            "response_assembly": 34959,
+            "restart_weight_control": 13111480,
+            "state_upload": 11961795,
+            "strict_certificate": 208218181,
+            "witness_output": 111805851
+          },
+          "physical": 1000,
+          "process_ns": 1581828725,
+          "response": {
+            "bytes": 7115,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-tall-candidate/response.json",
+            "sha256": "eaef8d2efe54cfc54f5f0378410891d40de4dd81c96d4a494009130272baad65"
+          },
+          "status": "certified",
+          "strict_certificate_calls": 2,
+          "version": "candidate"
+        },
+        "reference": {
+          "audit": {
+            "bytes": 1837,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-tall-reference-full-audit/result.json",
+            "sha256": "f76e1246ba2a9478435563d23806a950abf91d736825ce42c03c8d3a749d4ce8"
+          },
+          "certified": true,
+          "complete_ns": 1945510665,
+          "device_bytes_upper": 198070364,
+          "final_proof_ns": 498760272,
+          "independent_proofs": 2,
+          "logical": 1000,
+          "offline_audit_ns": 260796091,
+          "phase_ns": {
+            "certificate_reuse": 1687,
+            "checkpoint": 4891978,
+            "device_accounting": 3487,
+            "device_advance": 150526692,
+            "device_setup": 170374310,
+            "device_teardown": 77277418,
+            "endpoint_download": 7084319,
+            "endpoint_unscale": 2071414,
+            "host_bookkeeping": 5348436,
+            "original_model_control": 7434165,
+            "preparation_control": 1189348,
+            "preparation_engine": 422759255,
+            "preparation_operator": 28611121,
+            "preparation_packing": 574,
+            "recovery": 0,
+            "response_assembly": 34157,
+            "restart_weight_control": 12742818,
+            "state_upload": 12127317,
+            "strict_certificate": 231491545,
+            "witness_output": 17257386
+          },
+          "physical": 1000,
+          "process_ns": 1446750393,
+          "response": {
+            "bytes": 7045,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-tall-reference/response.json",
+            "sha256": "7c6b97355fa30fe4908b946f978825a1d086c94d911106f783e3eaa40f119f3f"
+          },
+          "status": "certified",
+          "strict_certificate_calls": 2,
+          "version": "reference"
+        }
+      }
+    },
+    {
+      "assessment_speedup": 1.5625685330083527,
+      "complete_speedup": 1.128851201973109,
+      "exact_continuation": true,
+      "family": "coupled_blocks",
+      "rows": {
+        "candidate": {
+          "audit": {
+            "bytes": 1854,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-coupled_blocks-candidate-full-audit/result.json",
+            "sha256": "5debb6c944a496880042082b99b98e3ee2c2ecbf6919b38460c7746877ce9faf"
+          },
+          "certified": false,
+          "complete_ns": 1697398415,
+          "device_bytes_upper": 180520028,
+          "final_proof_ns": 414366541,
+          "independent_proofs": 2,
+          "logical": 1000,
+          "offline_audit_ns": 212538562,
+          "phase_ns": {
+            "certificate_reuse": 1655,
+            "checkpoint": 2522996,
+            "device_accounting": 2945,
+            "device_advance": 143882911,
+            "device_setup": 160310324,
+            "device_teardown": 75754768,
+            "endpoint_download": 4090451,
+            "endpoint_unscale": 600373,
+            "host_bookkeeping": 1979647,
+            "original_model_control": 2637254,
+            "preparation_control": 591121,
+            "preparation_engine": 428796068,
+            "preparation_operator": 15576046,
+            "preparation_packing": 597,
+            "recovery": 0,
+            "response_assembly": 31133,
+            "restart_weight_control": 3664203,
+            "state_upload": 4719188,
+            "strict_certificate": 164151739,
+            "witness_output": 6261227
+          },
+          "physical": 1000,
+          "process_ns": 1283031874,
+          "response": {
+            "bytes": 7095,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-coupled_blocks-candidate/response.json",
+            "sha256": "394823654d9b61323db61e15404f81098a7918fec3a2f751641d3cdfb1d8d0c8"
+          },
+          "status": "limit",
+          "strict_certificate_calls": 2,
+          "version": "candidate"
+        },
+        "reference": {
+          "audit": {
+            "bytes": 1854,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-coupled_blocks-reference-full-audit/result.json",
+            "sha256": "48bdbd63146c7abcc360504ff279714fcecfa841912934f72d7e9ab7dc4cf12e"
+          },
+          "certified": false,
+          "complete_ns": 1916110241,
+          "device_bytes_upper": 180520028,
+          "final_proof_ns": 445496784,
+          "independent_proofs": 2,
+          "logical": 1000,
+          "offline_audit_ns": 220609791,
+          "phase_ns": {
+            "certificate_reuse": 0,
+            "checkpoint": 1976831,
+            "device_accounting": 2868,
+            "device_advance": 143893150,
+            "device_setup": 162633429,
+            "device_teardown": 78951166,
+            "endpoint_download": 3494615,
+            "endpoint_unscale": 580710,
+            "host_bookkeeping": 2032762,
+            "original_model_control": 2650660,
+            "preparation_control": 627179,
+            "preparation_engine": 475632485,
+            "preparation_operator": 15419771,
+            "preparation_packing": 533,
+            "recovery": 0,
+            "response_assembly": 32713,
+            "restart_weight_control": 4139300,
+            "state_upload": 5237518,
+            "strict_certificate": 256498342,
+            "witness_output": 60604133
+          },
+          "physical": 1000,
+          "process_ns": 1470613457,
+          "response": {
+            "bytes": 7024,
+            "namespace": "evidence",
+            "path": "utilization-4m-v1-coupled_blocks-reference/response.json",
+            "sha256": "664d367c1f2131917952da390cee38265f919f3ad4532b05d5ccac25c495129e"
+          },
+          "status": "limit",
+          "strict_certificate_calls": 3,
+          "version": "reference"
+        }
+      }
+    }
+  ],
+  "historical_image_files": 6,
+  "independent_scalar_proofs": 520,
+  "limits": [
+    "No sampled utilization or kernel-active-time speedup is inferred.",
+    "One rotated pair per family at 4 M nonzeros; no billion-scale performance claim.",
+    "CPU microbenchmark has six alternating-order pairs; caches were not flushed.",
+    "Paired solvers share the content-addressed witness store: the second writer can reuse files. Complete ratios are order-confounded, not attributable optimization speedups.",
+    "Independent final proof remains in complete cost; intermediate offline audits are separate.",
+    "Defaults, CPU authority, tolerance and control100/certificate500 remain unchanged."
+  ],
+  "measurements": {
+    "bytes": 6552,
+    "namespace": "evidence",
+    "path": "utilization-4m-v1/result.json",
+    "sha256": "d9f8d55f1504b18e4e4e819cfbdc742eeb8c67e9f95b295ba1032d59799a6ec4"
+  },
+  "native_tests": 69,
+  "operational_continuations": 60,
+  "original_numerical_bindings": 306,
+  "owned_completed_identities_absent": 1843,
+  "receipts": [
+    {
+      "bytes": 361,
+      "namespace": "evidence",
+      "path": "resources/operational-cpu-v36.settlement.json",
+      "sha256": "586f82a40c6f862941dbae91fd8000e174b62d31710672a2bb469a6ebb556de8"
+    },
+    {
+      "bytes": 814,
+      "namespace": "evidence",
+      "path": "resources/operational-cpu-v37.settlement.json",
+      "sha256": "40df196a5af5253ffc3e81ec4716563d5cf54e45a6d0d3812a3702abf000b16c"
+    },
+    {
+      "bytes": 364,
+      "namespace": "evidence",
+      "path": "resources/utilization-diagnosis-v3.settlement.json",
+      "sha256": "b31673fc045ec6f21508838fa869d42556c5c2675b1aea9d536e2c74bf128706"
+    },
+    {
+      "bytes": 817,
+      "namespace": "evidence",
+      "path": "resources/utilization-idle-v1.settlement.json",
+      "sha256": "e6db3a81ed9a9e129d4ceb84ded3185f4d6ed7abc3582ce1fe2c74511af85650"
+    },
+    {
+      "bytes": 824,
+      "namespace": "evidence",
+      "path": "resources/operational-gpu-v28.settlement.json",
+      "sha256": "e8a7f32433f9569ea05e1d55b1e0bf39550b5d091d30a71abb8b601be9387242"
+    },
+    {
+      "bytes": 819,
+      "namespace": "evidence",
+      "path": "resources/utilization-quality-v1.settlement.json",
+      "sha256": "15fb597a4ef383290fea8f02518757afa3d5461fd9aaaf89026b1131260fbe69"
+    },
+    {
+      "bytes": 834,
+      "namespace": "evidence",
+      "path": "resources/utilization-seal-benchmark-v1.settlement.json",
+      "sha256": "22d210233f641347c9ccf884cb77932d1916fbc85f3edea17b246fd117a9b2ac"
+    },
+    {
+      "bytes": 837,
+      "namespace": "evidence",
+      "path": "resources/utilization-candidate-v1.settlement.json",
+      "sha256": "a5a1c6771bdd92ff93ef3b11da5eed18cbc52967a2fb38782fc025c50a3f57f4"
+    },
+    {
+      "bytes": 831,
+      "namespace": "evidence",
+      "path": "resources/utilization-measure-v1.settlement.json",
+      "sha256": "c39fecac819c57b88fb2c37d5839f8796a7c0f5554c3f280f7859bb9f0d2dd6d"
+    }
+  ],
+  "removed_admission_final_calls": 70,
+  "source_disposition": {
+    "bytes": 67131,
+    "namespace": "evidence",
+    "path": "utilization-optimization-v1/source-disposition-v4.json",
+    "sha256": "80a0f12e820d015bf93cc863ee0671794cc0ee181d6a9a9bf924f0b8079f079c"
+  },
+  "status": "validated_opt_in_candidate",
+  "storage_policy": {
+    "bytes": 2086,
+    "namespace": "repo",
+    "path": "docs/specifications/SPEC-0046-amendment-93.md",
+    "sha256": "124a37ac7530104350ab827ae9ac51509b0a3688484eeadcff54e61bd9b82032"
+  },
+  "supervisor_tests": 75,
+  "unchanged_numerical_bindings": 299
+}

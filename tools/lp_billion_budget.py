@@ -7,7 +7,7 @@ import subprocess
 import sys
 import time
 from lp_billion_common import (BASE, ROOT, CPU_CAPS, GPU_CAPS, HOST_LIMIT, DEVICE,
-    DEVICE_LIMIT, DISK_LIMIT, MAX_GAP_NS, NS, load, put, ref, resolve, require, disk_bytes)
+    DEVICE_LIMIT, DISK_LIMIT, MAX_GAP_NS, NS, load, put, ref, resolve, require, preflight_disk_bytes)
 
 
 def accounting():
@@ -93,11 +93,28 @@ def cleared(settlement_path, gpu, phase, identity):
             resolve(item['original'])
 
 
-def run(identity, phase, seconds, gpu, command, host_gib=16, device_gib=0, disk_gib=1):
+def settlement(phase, gpu, seconds, elapsed, returncode, report, resource, storage_error=None):
+    success = returncode == 0 and report and report['status'] == 'passed' and storage_error is None
+    charged_cpu = max(report['charged_cpu_ns'] if report else 4*seconds*NS, 4*elapsed)
+    if not success:
+        charged_cpu = max(charged_cpu, 4*seconds*NS)
+    charged_gpu = (elapsed if success else max(elapsed, seconds*NS)) if gpu else 0
+    overrun = charged_cpu > 4*seconds*NS or charged_gpu > seconds*NS
+    cleanup = bool(report and report['guardian_cleanup']['empty'] and report['result']['cleanup']['empty'])
+    return dict(phase=phase, gpu=gpu, cpu_ns=charged_cpu, gpu_ns=charged_gpu,
+                status='passed' if success and not overrun else 'refused', overrun=overrun,
+                cleanup_empty=cleanup, resource=resource)
+
+
+def run(identity, phase, seconds, gpu, command, host_gib=16, device_gib=0, disk_gib=1,
+        storage_policy=None):
     require(identity and Path(identity).name == identity, 'job identity')
     require(phase in CPU_CAPS and isinstance(seconds, int) and seconds >= 5, 'reservation domain')
     require(not gpu or phase in GPU_CAPS, 'GPU phase domain')
     require(1 <= host_gib <= 128 and 0 <= device_gib <= 80 and 0 <= disk_gib <= 400, 'approved capacity domain')
+    from lp_billion_storage import POLICY, FINAL_RESERVE_SECONDS, observation, validate, final_check
+    require(storage_policy in (None, POLICY), 'storage policy domain')
+    require(storage_policy is None or seconds >= 120, 'storage finalization reserve needs 120 seconds')
     require(load(BASE/'OPEN.json')['status'] == 'open', 'allocation not open')
     require(not (BASE/'CLOSED.json').exists(), 'allocation already closed')
     directory = BASE/'resources'
@@ -111,7 +128,7 @@ def run(identity, phase, seconds, gpu, command, host_gib=16, device_gib=0, disk_
         cpu, used_gpu = accounting()
         require(cpu[phase]+4*seconds*NS <= CPU_CAPS[phase]*NS, 'CPU phase exhausted')
         require(not gpu or used_gpu[phase]+seconds*NS <= GPU_CAPS[phase]*NS, 'GPU phase exhausted')
-        require(disk_bytes()+(disk_gib << 30) <= DISK_LIMIT, 'complete disk reservation exceeds ceiling')
+        require(preflight_disk_bytes()+(disk_gib << 30) <= DISK_LIMIT, 'complete disk reservation exceeds ceiling')
         stat = os.statvfs(BASE)
         require(stat.f_bavail*stat.f_frsize >= (disk_gib+8) << 30, 'physical disk headroom')
         available = int(next(l for l in Path('/proc/meminfo').read_text().splitlines()
@@ -139,14 +156,30 @@ def run(identity, phase, seconds, gpu, command, host_gib=16, device_gib=0, disk_
                 bindings.append(dict(original=original, retained=retained))
             put(frozen/'manifest.json', dict(sources=bindings,
                 source_storage='immutable shared content-addressed objects'))
+            initial = None
+            if storage_policy:
+                initial = observation()
+                validate(initial)
+                require(initial['value']['bytes']+(disk_gib << 30) <= DISK_LIMIT,
+                        'complete refreshed disk reservation exceeds ceiling')
+                stat = os.statvfs(BASE)
+                require(stat.f_bavail*stat.f_frsize >= (disk_gib+8) << 30, 'physical disk headroom')
+                available = int(next(l for l in Path('/proc/meminfo').read_text().splitlines()
+                                     if l.startswith('MemAvailable:')).split()[1])*1024
+                require(available >= (host_gib+4) << 30, 'physical host headroom')
+                if gpu:
+                    idle = quiet(device_gib << 30)
             put(str(prefix)+'.reservation.json', dict(phase=phase, gpu=gpu,
                 cpu_ns=4*seconds*NS, gpu_ns=seconds*NS if gpu else 0, command=command,
                 source_manifest=ref(frozen/'manifest.json'), idle=idle, device=DEVICE,
-                host_bytes=host_gib << 30, device_bytes=device_gib << 30, disk_bytes=disk_gib << 30))
+                host_bytes=host_gib << 30, device_bytes=device_gib << 30, disk_bytes=disk_gib << 30,
+                **(dict(storage_policy=storage_policy, storage_initial=initial,
+                        storage_finalization_seconds=FINAL_RESERVE_SECONDS) if storage_policy else {})))
             put(str(prefix)+'.cpu-journal.json', dict(identity='billion-lp-job-v1',
                 prior_cpu_ns=0, ceiling_cpu_ns=4*seconds*NS, active=None, failed=False, runs=[],
                 stages={phase: dict(cap_cpu_ns=4*seconds*NS, charged_cpu_ns=0)}))
-            request = dict(stage=phase, reserve_cpu_seconds=4*seconds,
+            inner_seconds = seconds - FINAL_RESERVE_SECONDS if storage_policy else seconds
+            request = dict(stage=phase, reserve_cpu_seconds=4*inner_seconds,
                 output=str(prefix)+'.resource.json', log=str(prefix)+'.resource.json.log',
                 journal=str(prefix)+'.cpu-journal.json', lock=str(BASE/'cpu.lock'),
                 slots=4, declared_memory_bytes=(host_gib << 30)-(256 << 20),
@@ -156,6 +189,8 @@ def run(identity, phase, seconds, gpu, command, host_gib=16, device_gib=0, disk_
                 publication_wall_seconds=min(30, max(2, seconds // 4)),
                 command=([sys.executable, '-B', str(ROOT/'tools/lp_mixed2_reuse_place.py'), *command]
                          if gpu or host_gib > 16 else command))
+            if storage_policy:
+                request.update(storage_policy=storage_policy, storage_initial=initial)
             request_path = str(prefix)+'.request.json'
             put(request_path, request)
             env = {**os.environ, 'CUDA_VISIBLE_DEVICES': DEVICE if gpu else '',
@@ -166,19 +201,21 @@ def run(identity, phase, seconds, gpu, command, host_gib=16, device_gib=0, disk_
             started = time.monotonic_ns()
             child = subprocess.run([sys.executable, '-B', __file__, '_supervise', request_path],
                 env=env, pass_fds=() if lease is None else (lease.fileno(),))
+            final_inventory, storage_error = None, None
+            if storage_policy:
+                try:
+                    final_inventory = final_check(request['output']+'.storage.jsonl')
+                except Exception as error:
+                    storage_error = f'{type(error).__name__}: {error}'
             elapsed = time.monotonic_ns()-started
             receipt = Path(request['output'])
             report = load(receipt) if receipt.exists() else None
-            success = child.returncode == 0 and report and report['status'] == 'passed'
-            charged_cpu = max(report['charged_cpu_ns'] if report else 4*seconds*NS, 4*elapsed)
-            if not success:
-                charged_cpu = max(charged_cpu, 4*seconds*NS)
-            charged_gpu = (elapsed if success else max(elapsed, seconds*NS)) if gpu else 0
-            overrun = charged_cpu > 4*seconds*NS or charged_gpu > seconds*NS
-            cleanup = bool(report and report['guardian_cleanup']['empty'] and report['result']['cleanup']['empty'])
-            result = dict(phase=phase, gpu=gpu, cpu_ns=charged_cpu, gpu_ns=charged_gpu,
-                status='passed' if success and not overrun else 'refused', overrun=overrun,
-                cleanup_empty=cleanup, resource=ref(receipt) if report else None)
+            result = settlement(phase, gpu, seconds, elapsed, child.returncode, report,
+                                ref(receipt) if report else None, storage_error)
+            result.update(**(dict(storage_policy=storage_policy, storage_final=final_inventory,
+                        storage_error=storage_error,
+                        storage_trace=ref(request['output']+'.storage.jsonl')
+                        if Path(request['output']+'.storage.jsonl').exists() else None) if storage_policy else {}))
             put(str(prefix)+'.settlement.json', result)
             return result
         finally:
@@ -201,10 +238,12 @@ def main():
     p.add_argument('--host-gib', type=int, default=16)
     p.add_argument('--device-gib', type=int, default=0)
     p.add_argument('--disk-gib', type=int, default=1)
+    p.add_argument('--storage-policy', choices=['async-v1'])
     p.add_argument('command', nargs=argparse.REMAINDER)
     a = p.parse_args()
     result = run(a.id, a.phase, a.seconds, a.gpu,
-        a.command[1:] if a.command[:1] == ['--'] else a.command, a.host_gib, a.device_gib, a.disk_gib)
+        a.command[1:] if a.command[:1] == ['--'] else a.command, a.host_gib, a.device_gib, a.disk_gib,
+        storage_policy=a.storage_policy)
     print(result, flush=True)
     return 0 if result['status'] == 'passed' else 2
 

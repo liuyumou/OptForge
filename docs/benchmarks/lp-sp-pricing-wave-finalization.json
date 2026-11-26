@@ -1,0 +1,30 @@
+{
+  "original_failed_settlement": {
+    "bytes": 373,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/wave-final-verify-v1.settlement.json",
+    "sha256": "c4d34a92931738d1f68c2d1757755b934f1926fa2a7565e2ba480bff0d680320"
+  },
+  "original_failure_regraded": false,
+  "policy_checkpoint": {
+    "bytes": 12214,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-final-report-v1/settled-checkpoint.json",
+    "sha256": "c41d1ace4bcad866e3a897db6a0aef723cf968b1d288c87262a06360bf11dc18"
+  },
+  "read_only_seal": {
+    "bytes": 1529,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-final-seal-v1/result.json",
+    "sha256": "435762b621b7cd164aa61d3b409fd0fca0aeca8b8bdb374b08e7f1c42493bd18"
+  },
+  "repeated_scientific_runs": 0,
+  "seal_settlement": {
+    "bytes": 368,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/wave-final-seal-v1.settlement.json",
+    "sha256": "f535339f95121e561df9347c7a24a1c9c12ff806597da7d40fbbbdddd4ac7975"
+  },
+  "status": "verification_and_resources_settled",
+  "wave_checkpoint": {
+    "bytes": 12507,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/wave-final-report-v1/wave/settled-checkpoint.json",
+    "sha256": "d6ca4d1b8d42f96ed456622af13c2949c6a02a1238797bfe4f718e00b2480fe9"
+  }
+}

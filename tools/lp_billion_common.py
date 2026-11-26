@@ -93,19 +93,34 @@ INVENTORY_BINDING = INVENTORY_ROOT/'disk-inventory-binding-v1.json'
 INVENTORY_BINDING_SHA = '723e48c78c80936af78e4f8f35eec11edff4213f52ea6115efb24fff9b9a5795'
 
 
-def native_inventory(root):
+def inventory_command(root):
     require(digest(INVENTORY_BINDING)==INVENTORY_BINDING_SHA,'storage inventory binding integrity')
     binding=load(INVENTORY_BINDING)
     require(binding['status']=='retained_for_cpu_bootstrap','storage inventory binding status')
     executable=INVENTORY_ROOT/binding['executable']['path']
     source=ROOT/binding['source']['path']
     require(digest(executable)==binding['executable']['sha256'] and digest(source)==binding['source']['sha256'],'storage inventory executable/source integrity')
-    result=subprocess.run([str(executable),str(root)],capture_output=True,text=True,timeout=.9)
+    return [str(executable), str(root)]
+
+
+def inventory_result(result):
     require(result.returncode==0 and not result.stderr,'exact storage inventory failed')
     value=json.loads(result.stdout)
     require(set(value)=={'bytes','files'} and all(type(value[k]) is int and 0<=value[k]<2**64 for k in value),'storage inventory integer domain')
     return value
 
 
+def native_inventory(root, timeout_seconds=.9):
+    require(type(timeout_seconds) in (int, float) and 0 < timeout_seconds <= 60,
+            'bounded storage inventory timeout')
+    result=subprocess.run(inventory_command(root),capture_output=True,text=True,timeout=timeout_seconds)
+    return inventory_result(result)
+
+
 def disk_bytes():
     return native_inventory(BASE)['bytes']
+
+
+def preflight_disk_bytes():
+    """Allow cold storage latency before launch; runtime sampling stays unchanged."""
+    return native_inventory(BASE, timeout_seconds=60)['bytes']

@@ -1,0 +1,10 @@
+id,model,lane,status,reason,route,timely,strict_accepted,native_ns,process_ns,encoding_ns,audit_ns,complete_ns
+dense-candidate,dense,candidate,certificate_returned,,exact_certified_factor_presolve,True,True,115624812,464520683,64368551,123755764,652644998
+dense-copt,dense,copt,10,,,False,False,30034043062,30553655525,64368551,36537,30618060613
+tall-copt,tall,copt,1,,,True,False,624522643,1115522266,56093553,72634238,1244250057
+tall-candidate,tall,candidate,resource_limit,deadline,native_compact_pricing,False,False,30163349422,30554150416,56093553,32226,30610276195
+sparse-candidate,sparse,candidate,certificate_returned,,exact_certified_factor_presolve,True,True,667533117,1065511070,55498243,128713438,1249722751
+sparse-copt,sparse,copt,10,,,False,False,30033065971,30504800545,55498243,59681,30560358469
+dense-copt-auto,dense,copt-auto,1,,COPT automatic CPU,True,False,2933950994,3472148340,64368551,72666777,3609183668
+tall-copt-auto,tall,copt-auto,1,,COPT automatic CPU,True,False,20493966743,21043393115,56093553,72657489,21172144157
+sparse-copt-auto,sparse,copt-auto,8,,COPT automatic CPU,False,False,36957546327,37525046496,55498243,32798,37580577537

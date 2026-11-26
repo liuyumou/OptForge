@@ -36,6 +36,7 @@ pub mod billion;
 pub mod bounded_certificate;
 pub mod fast_device;
 pub mod gpu_tensor;
+pub mod scratch_certificate;
 pub mod tensor;
 pub mod tensor_device;
 

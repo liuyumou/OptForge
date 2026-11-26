@@ -1,0 +1,4853 @@
+{
+  "admission": {
+    "bytes": 4078,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-admit-v6/admission.json",
+    "sha256": "e37d98827f130b6405401cfce36edc9873291462299f67fbc600101a0ef3572d"
+  },
+  "broad_end_to_end_superiority": false,
+  "comparison": {
+    "bytes": 48952,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/result.json",
+    "sha256": "6ffc63ff37f5ac739a47af908a1e7518118056242aefbfcfb7ece8b9139a5ec7"
+  },
+  "development": [
+    {
+      "capped_seconds": 88.31288663500001,
+      "cells": 21,
+      "certified": 14,
+      "evidence": {
+        "bytes": 14391,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/cpu-ladder-v4/result.json",
+        "sha256": "d46b2a66721ef0c9f989f506c54102a6ad78a1c694f8fc5fb574ab8b444aea8f"
+      },
+      "identity": "cpu-ladder-v4"
+    },
+    {
+      "capped_seconds": 114.678621685,
+      "cells": 21,
+      "certified": 14,
+      "evidence": {
+        "bytes": 14410,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-ladder-v2/result.json",
+        "sha256": "fc6f7d5bb184d1a47306710a9eef50caf61bd622cee7ed9026ec2f366630a1a5"
+      },
+      "identity": "gpu-ladder-v2"
+    },
+    {
+      "capped_seconds": 95.19022048400001,
+      "cells": 21,
+      "certified": 14,
+      "evidence": {
+        "bytes": 14437,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-ladder-v1/result.json",
+        "sha256": "4e8030ccafc015d7561ab4f238cfc03b0d884b6a5f7f49c36d1e46a6dd882870"
+      },
+      "identity": "gpu-opt-ladder-v1"
+    },
+    {
+      "capped_seconds": 99.015805991,
+      "cells": 21,
+      "certified": 14,
+      "evidence": {
+        "bytes": 14443,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-ladder-v2/result.json",
+        "sha256": "8690f379a0596efabb1d1573f9256788f29c31d6a9b406ccbcc774e40514d679"
+      },
+      "identity": "gpu-opt-ladder-v2"
+    },
+    {
+      "capped_seconds": 88.80523923999999,
+      "cells": 21,
+      "certified": 14,
+      "evidence": {
+        "bytes": 14432,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-ladder-v3/result.json",
+        "sha256": "7e1b0e6a428c579a308480ee766b0d621d4beff69609d50e16cae51fa5a8b18d"
+      },
+      "identity": "gpu-opt-ladder-v3"
+    },
+    {
+      "capped_seconds": 89.579823212,
+      "cells": 21,
+      "certified": 14,
+      "evidence": {
+        "bytes": 14431,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-ladder-v4/result.json",
+        "sha256": "73586ad95a8db94ab6330b8a5b85f845bf8b24762135ab9ab228e395bab15e9a"
+      },
+      "identity": "gpu-opt-ladder-v4"
+    }
+  ],
+  "diagnosis": {
+    "complete_seconds": 5.131351077,
+    "device_seconds": 0.3286184978485107,
+    "evidence": {
+      "bytes": 21079193,
+      "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-ladder-v2/coupled-8-73011/result.json",
+      "sha256": "b1703ae7b2280d69efa8abdd800b69df566e40fa85c970f487e24db626be41ec"
+    },
+    "exact_check_seconds": 2.85049895,
+    "per_query": [
+      {
+        "cpu_auxiliary_calls": 4,
+        "gpu_labels": 13
+      },
+      {
+        "cpu_auxiliary_calls": 0,
+        "gpu_labels": 18
+      },
+      {
+        "cpu_auxiliary_calls": 39,
+        "gpu_labels": 0
+      }
+    ]
+  },
+  "freeze": {
+    "bytes": 23292,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/freeze.json",
+    "sha256": "04d7cfb8173f220ef87a07dec555e787383f6c2ee0ac86e3964f5c7b24eecf00"
+  },
+  "lanes": {
+    "cpu": {
+      "late_exact": 0,
+      "slots": 16,
+      "timely_exact": 16,
+      "timely_strict": 6,
+      "total_complete_seconds": 46.044398814
+    },
+    "lean_gpu": {
+      "late_exact": 0,
+      "slots": 16,
+      "timely_exact": 16,
+      "timely_strict": 6,
+      "total_complete_seconds": 55.230431904
+    },
+    "legacy_gpu": {
+      "late_exact": 0,
+      "slots": 16,
+      "timely_exact": 14,
+      "timely_strict": 6,
+      "total_complete_seconds": 103.108409224
+    }
+  },
+  "limitations": [
+    "Eight small generated models, two rotated repetitions, one GPU, unflushed caches.",
+    "CPU and lean GPU both use compact traces; the archived legacy GPU retains its full traces.",
+    "Microbenchmark fixes targets/steps; diagonal preconditioning changes candidate iterates.",
+    "Microbenchmark full proof output differs from the compact proof decisions used in complete solves.",
+    "Exact rational acceptance and the unchanged original-model 1e-9 checker are separate tiers.",
+    "No new vendor comparison, full literal strongly-polynomial validation, or billion-nonzero solve."
+  ],
+  "micro": {
+    "checker": {
+      "case": "coupled-optimum",
+      "identical_raw_inputs": true,
+      "native_compact_ns": 25521001,
+      "native_ns": 65415186,
+      "proposals": 32,
+      "python_ns": 357536956,
+      "source": {
+        "bytes": 21079193,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-ladder-v2/coupled-8-73011/result.json",
+        "sha256": "b1703ae7b2280d69efa8abdd800b69df566e40fa85c970f487e24db626be41ec"
+      }
+    },
+    "completed_cells": 108,
+    "csr_width64": [
+      {
+        "case": "coupled-first",
+        "format": "csr",
+        "lean_fp64": {
+          "complete_ms": 29.90437,
+          "device_ms": 8.094047546386719
+        },
+        "legacy_fp32x2": {
+          "complete_ms": 43.852261,
+          "device_ms": 22.537952423095703
+        },
+        "legacy_fp64": {
+          "complete_ms": 37.143236,
+          "device_ms": 16.394304275512695
+        },
+        "width": 64
+      },
+      {
+        "case": "coupled-optimum",
+        "format": "csr",
+        "lean_fp64": {
+          "complete_ms": 166.588667,
+          "device_ms": 13.09331226348877
+        },
+        "legacy_fp32x2": {
+          "complete_ms": 200.51868,
+          "device_ms": 57.346046447753906
+        },
+        "legacy_fp64": {
+          "complete_ms": 176.143392,
+          "device_ms": 28.686080932617188
+        },
+        "width": 64
+      },
+      {
+        "case": "degenerate-optimum",
+        "format": "csr",
+        "lean_fp64": {
+          "complete_ms": 464.74888,
+          "device_ms": 21.859519958496094
+        },
+        "legacy_fp32x2": {
+          "complete_ms": 533.092872,
+          "device_ms": 106.50418853759766
+        },
+        "legacy_fp64": {
+          "complete_ms": 465.081121,
+          "device_ms": 45.065216064453125
+        },
+        "width": 64
+      }
+    ],
+    "evidence": {
+      "bytes": 52460,
+      "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-micro-v3/result.json",
+      "sha256": "f350c11d75e21a4e936880a8c08cd81265cb496cc45285e36c55635ba5bc409a"
+    },
+    "rows": [
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 906370,
+        "complete_ns": 58761176,
+        "device_ns": 36872478.48510742,
+        "exact_check_ns": 18043035,
+        "id": "coupled-first-0-32-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 632459,
+        "proposal_ns": 37447126,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 855511,
+        "complete_ns": 54784973,
+        "device_ns": 28667647.36175537,
+        "exact_check_ns": 18046826,
+        "id": "coupled-first-0-32-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 5915955,
+        "proposal_ns": 28884444,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 1159594,
+        "complete_ns": 39700780,
+        "device_ns": 17330719.94781494,
+        "exact_check_ns": 18419918,
+        "id": "coupled-first-0-32-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 393809,
+        "proposal_ns": 17983293,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 851139,
+        "complete_ns": 50262328,
+        "device_ns": 28679296.493530273,
+        "exact_check_ns": 18358540,
+        "id": "coupled-first-0-32-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 342514,
+        "proposal_ns": 28904499,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 834981,
+        "complete_ns": 39283721,
+        "device_ns": 17308863.639831543,
+        "exact_check_ns": 18936106,
+        "id": "coupled-first-0-32-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 377800,
+        "proposal_ns": 17469972,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 834616,
+        "complete_ns": 57978282,
+        "device_ns": 36860992.431640625,
+        "exact_check_ns": 18284274,
+        "id": "coupled-first-0-32-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 732027,
+        "proposal_ns": 37082078,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 891264,
+        "complete_ns": 39248664,
+        "device_ns": 17308736.80114746,
+        "exact_check_ns": 18891675,
+        "id": "coupled-first-0-32-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 381178,
+        "proposal_ns": 17465252,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 850177,
+        "complete_ns": 57836576,
+        "device_ns": 36858303.07006836,
+        "exact_check_ns": 18546831,
+        "id": "coupled-first-0-32-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 330430,
+        "proposal_ns": 37090735,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 868242,
+        "complete_ns": 50317249,
+        "device_ns": 28679263.1149292,
+        "exact_check_ns": 18400829,
+        "id": "coupled-first-0-32-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 350987,
+        "proposal_ns": 28899224,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 849080,
+        "complete_ns": 45399998,
+        "device_ns": 24577215.19470215,
+        "exact_check_ns": 18536080,
+        "id": "coupled-first-0-64-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 345967,
+        "proposal_ns": 24687159,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 851774,
+        "complete_ns": 37132594,
+        "device_ns": 16393600.463867188,
+        "exact_check_ns": 18450847,
+        "id": "coupled-first-0-64-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 344482,
+        "proposal_ns": 16504382,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 859209,
+        "complete_ns": 29966135,
+        "device_ns": 8666208.267211914,
+        "exact_check_ns": 18337535,
+        "id": "coupled-first-0-64-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 385711,
+        "proposal_ns": 8756622,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 853024,
+        "complete_ns": 52779527,
+        "device_ns": 16395135.879516602,
+        "exact_check_ns": 17865746,
+        "id": "coupled-first-0-64-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 6255479,
+        "proposal_ns": 16503840,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 11496067,
+        "complete_ns": 49006042,
+        "device_ns": 8661696.434020996,
+        "exact_check_ns": 18479710,
+        "id": "coupled-first-0-64-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 7358959,
+        "proposal_ns": 8751178,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 813099,
+        "complete_ns": 51748321,
+        "device_ns": 24576959.60998535,
+        "exact_check_ns": 18423252,
+        "id": "coupled-first-0-64-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 6842135,
+        "proposal_ns": 24689205,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 849500,
+        "complete_ns": 30537513,
+        "device_ns": 8658207.893371582,
+        "exact_check_ns": 18978448,
+        "id": "coupled-first-0-64-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 385060,
+        "proposal_ns": 8746563,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 853738,
+        "complete_ns": 45071027,
+        "device_ns": 24576864.24255371,
+        "exact_check_ns": 18247306,
+        "id": "coupled-first-0-64-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 331731,
+        "proposal_ns": 24686001,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 890671,
+        "complete_ns": 39133464,
+        "device_ns": 16395391.464233398,
+        "exact_check_ns": 18707567,
+        "id": "coupled-first-0-64-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 1613848,
+        "proposal_ns": 16637904,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 874188,
+        "complete_ns": 57955734,
+        "device_ns": 36857822.41821289,
+        "exact_check_ns": 18372434,
+        "id": "coupled-first-1-32-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 389856,
+        "proposal_ns": 37089223,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 844565,
+        "complete_ns": 50653402,
+        "device_ns": 28679647.44567871,
+        "exact_check_ns": 18421220,
+        "id": "coupled-first-1-32-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 1471476,
+        "proposal_ns": 28892148,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 854841,
+        "complete_ns": 38246810,
+        "device_ns": 16179967.880249023,
+        "exact_check_ns": 18745307,
+        "id": "coupled-first-1-32-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 437579,
+        "proposal_ns": 16355811,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 852927,
+        "complete_ns": 50176774,
+        "device_ns": 28675871.84906006,
+        "exact_check_ns": 18306545,
+        "id": "coupled-first-1-32-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 1089820,
+        "proposal_ns": 28894903,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 848788,
+        "complete_ns": 37732830,
+        "device_ns": 16180480.003356934,
+        "exact_check_ns": 18450765,
+        "id": "coupled-first-1-32-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 421043,
+        "proposal_ns": 16345016,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 872227,
+        "complete_ns": 58060489,
+        "device_ns": 36858112.33520508,
+        "exact_check_ns": 17875908,
+        "id": "coupled-first-1-32-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 1204423,
+        "proposal_ns": 37080876,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 857573,
+        "complete_ns": 37687973,
+        "device_ns": 16181056.022644043,
+        "exact_check_ns": 18361409,
+        "id": "coupled-first-1-32-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 430419,
+        "proposal_ns": 16343074,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 1204042,
+        "complete_ns": 75047142,
+        "device_ns": 36859359.74121094,
+        "exact_check_ns": 30934681,
+        "id": "coupled-first-1-32-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 4329492,
+        "proposal_ns": 37099947,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 846065,
+        "complete_ns": 49622952,
+        "device_ns": 28677151.679992676,
+        "exact_check_ns": 18470130,
+        "id": "coupled-first-1-32-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 382576,
+        "proposal_ns": 28900972,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 839402,
+        "complete_ns": 43852261,
+        "device_ns": 22537759.78088379,
+        "exact_check_ns": 18455922,
+        "id": "coupled-first-1-64-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 887121,
+        "proposal_ns": 22645816,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 846275,
+        "complete_ns": 37143236,
+        "device_ns": 16393632.888793945,
+        "exact_check_ns": 18426939,
+        "id": "coupled-first-1-64-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 367560,
+        "proposal_ns": 16498744,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 854861,
+        "complete_ns": 29904370,
+        "device_ns": 8092351.913452148,
+        "exact_check_ns": 18827644,
+        "id": "coupled-first-1-64-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 421324,
+        "proposal_ns": 8184374,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 839073,
+        "complete_ns": 37724973,
+        "device_ns": 16394496.91772461,
+        "exact_check_ns": 18380869,
+        "id": "coupled-first-1-64-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 971730,
+        "proposal_ns": 16506785,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 846592,
+        "complete_ns": 30985321,
+        "device_ns": 8094304.084777832,
+        "exact_check_ns": 18956194,
+        "id": "coupled-first-1-64-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 1460413,
+        "proposal_ns": 8182540,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 837663,
+        "complete_ns": 45431325,
+        "device_ns": 22537952.423095703,
+        "exact_check_ns": 18343681,
+        "id": "coupled-first-1-64-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 2642583,
+        "proposal_ns": 22650835,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 23,
+        "case": "coupled-first",
+        "checker_preparation_ns": 856685,
+        "complete_ns": 29739555,
+        "device_ns": 8094047.546386719,
+        "exact_check_ns": 18726531,
+        "id": "coupled-first-1-64-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 411083,
+        "proposal_ns": 8182632,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 856724,
+        "complete_ns": 43358319,
+        "device_ns": 22537952.423095703,
+        "exact_check_ns": 17846043,
+        "id": "coupled-first-1-64-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 1027040,
+        "proposal_ns": 22646257,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 16,
+        "case": "coupled-first",
+        "checker_preparation_ns": 864262,
+        "complete_ns": 36490515,
+        "device_ns": 16394304.275512695,
+        "exact_check_ns": 17769729,
+        "id": "coupled-first-1-64-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 371594,
+        "proposal_ns": 16502677,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12737284,
+        "complete_ns": 272671410,
+        "device_ns": 132028800.96435547,
+        "exact_check_ns": 122460260,
+        "id": "coupled-optimum-0-32-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 3352608,
+        "proposal_ns": 132399017,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12294964,
+        "complete_ns": 185279625,
+        "device_ns": 45062721.252441406,
+        "exact_check_ns": 122613799,
+        "id": "coupled-optimum-0-32-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 2637217,
+        "proposal_ns": 45340651,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12268824,
+        "complete_ns": 194666505,
+        "device_ns": 18869407.653808594,
+        "exact_check_ns": 131874974,
+        "id": "coupled-optimum-0-32-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 2726851,
+        "proposal_ns": 19541872,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 13336321,
+        "complete_ns": 190202034,
+        "device_ns": 45060895.919799805,
+        "exact_check_ns": 123689785,
+        "id": "coupled-optimum-0-32-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 3602510,
+        "proposal_ns": 45394088,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12573441,
+        "complete_ns": 173495505,
+        "device_ns": 19180383.682250977,
+        "exact_check_ns": 132110679,
+        "id": "coupled-optimum-0-32-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 4623918,
+        "proposal_ns": 19680837,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 33875151,
+        "complete_ns": 295682397,
+        "device_ns": 133995201.11083984,
+        "exact_check_ns": 122035760,
+        "id": "coupled-optimum-0-32-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 2709161,
+        "proposal_ns": 134278593,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12251123,
+        "complete_ns": 189260761,
+        "device_ns": 19077536.582946777,
+        "exact_check_ns": 150104115,
+        "id": "coupled-optimum-0-32-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 3194794,
+        "proposal_ns": 19539681,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12307520,
+        "complete_ns": 276627668,
+        "device_ns": 134005828.85742188,
+        "exact_check_ns": 123170301,
+        "id": "coupled-optimum-0-32-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 4004923,
+        "proposal_ns": 134302135,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 14809518,
+        "complete_ns": 190557743,
+        "device_ns": 45066432.95288086,
+        "exact_check_ns": 123242181,
+        "id": "coupled-optimum-0-32-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 2997597,
+        "proposal_ns": 45392317,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12324452,
+        "complete_ns": 288063292,
+        "device_ns": 121291328.43017578,
+        "exact_check_ns": 146936194,
+        "id": "coupled-optimum-0-64-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 3952224,
+        "proposal_ns": 121445933,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12710532,
+        "complete_ns": 174354060,
+        "device_ns": 32784385.681152344,
+        "exact_check_ns": 122601772,
+        "id": "coupled-optimum-0-64-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 2619868,
+        "proposal_ns": 32940115,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12513242,
+        "complete_ns": 174138341,
+        "device_ns": 16271039.962768555,
+        "exact_check_ns": 132180784,
+        "id": "coupled-optimum-0-64-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 9181199,
+        "proposal_ns": 16723208,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12578442,
+        "complete_ns": 194904142,
+        "device_ns": 32783359.52758789,
+        "exact_check_ns": 143225340,
+        "id": "coupled-optimum-0-64-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 2880278,
+        "proposal_ns": 32949583,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 13196581,
+        "complete_ns": 168730522,
+        "device_ns": 16269567.489624023,
+        "exact_check_ns": 131987181,
+        "id": "coupled-optimum-0-64-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 3476461,
+        "proposal_ns": 16664630,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12428211,
+        "complete_ns": 264216924,
+        "device_ns": 121218048.09570312,
+        "exact_check_ns": 124110861,
+        "id": "coupled-optimum-0-64-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 2845062,
+        "proposal_ns": 121370991,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12497581,
+        "complete_ns": 165893665,
+        "device_ns": 16264831.54296875,
+        "exact_check_ns": 130891900,
+        "id": "coupled-optimum-0-64-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 2709013,
+        "proposal_ns": 16660508,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12264495,
+        "complete_ns": 291288830,
+        "device_ns": 121158653.25927734,
+        "exact_check_ns": 152226675,
+        "id": "coupled-optimum-0-64-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 2620710,
+        "proposal_ns": 121314798,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12807753,
+        "complete_ns": 176930244,
+        "device_ns": 32788032.53173828,
+        "exact_check_ns": 123900990,
+        "id": "coupled-optimum-0-64-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 4282404,
+        "proposal_ns": 32980691,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12424922,
+        "complete_ns": 212376076,
+        "device_ns": 69659008.02612305,
+        "exact_check_ns": 123439596,
+        "id": "coupled-optimum-1-32-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 2846772,
+        "proposal_ns": 69975187,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12669892,
+        "complete_ns": 204443869,
+        "device_ns": 40973440.170288086,
+        "exact_check_ns": 143335516,
+        "id": "coupled-optimum-1-32-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 3651033,
+        "proposal_ns": 41285053,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12811333,
+        "complete_ns": 169351606,
+        "device_ns": 16019295.692443848,
+        "exact_check_ns": 132014763,
+        "id": "coupled-optimum-1-32-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 2980289,
+        "proposal_ns": 16602412,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12453285,
+        "complete_ns": 181998134,
+        "device_ns": 40972673.416137695,
+        "exact_check_ns": 122882928,
+        "id": "coupled-optimum-1-32-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 2827527,
+        "proposal_ns": 41263039,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12559411,
+        "complete_ns": 187382190,
+        "device_ns": 15742720.127105713,
+        "exact_check_ns": 150151197,
+        "id": "coupled-optimum-1-32-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 4044351,
+        "proposal_ns": 16293149,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12631798,
+        "complete_ns": 219622371,
+        "device_ns": 69658878.32641602,
+        "exact_check_ns": 123499920,
+        "id": "coupled-optimum-1-32-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 10272355,
+        "proposal_ns": 69952695,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 13480161,
+        "complete_ns": 170986565,
+        "device_ns": 16017439.365386963,
+        "exact_check_ns": 132991304,
+        "id": "coupled-optimum-1-32-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 3311585,
+        "proposal_ns": 16526706,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12585108,
+        "complete_ns": 212951751,
+        "device_ns": 69659168.2434082,
+        "exact_check_ns": 123817394,
+        "id": "coupled-optimum-1-32-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 2984288,
+        "proposal_ns": 69973759,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12753153,
+        "complete_ns": 203203370,
+        "device_ns": 40973728.17993164,
+        "exact_check_ns": 142502524,
+        "id": "coupled-optimum-1-32-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 3095734,
+        "proposal_ns": 41276883,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12465068,
+        "complete_ns": 198846550,
+        "device_ns": 57346046.447753906,
+        "exact_check_ns": 122842897,
+        "id": "coupled-optimum-1-64-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 2801048,
+        "proposal_ns": 57497146,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12641024,
+        "complete_ns": 177719893,
+        "device_ns": 28686080.932617188,
+        "exact_check_ns": 126679709,
+        "id": "coupled-optimum-1-64-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 2781091,
+        "proposal_ns": 28846244,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 13086390,
+        "complete_ns": 194694517,
+        "device_ns": 13093312.26348877,
+        "exact_check_ns": 157230155,
+        "id": "coupled-optimum-1-64-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 3511598,
+        "proposal_ns": 13578316,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12270614,
+        "complete_ns": 170794721,
+        "device_ns": 28685216.903686523,
+        "exact_check_ns": 124137429,
+        "id": "coupled-optimum-1-64-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 2716710,
+        "proposal_ns": 28858484,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12552108,
+        "complete_ns": 166588667,
+        "device_ns": 13093088.150024414,
+        "exact_check_ns": 132978128,
+        "id": "coupled-optimum-1-64-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 3060104,
+        "proposal_ns": 13490540,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12667788,
+        "complete_ns": 219474674,
+        "device_ns": 57338878.6315918,
+        "exact_check_ns": 143164863,
+        "id": "coupled-optimum-1-64-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 2910626,
+        "proposal_ns": 57495446,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12392231,
+        "complete_ns": 165756784,
+        "device_ns": 13093791.961669922,
+        "exact_check_ns": 132782921,
+        "id": "coupled-optimum-1-64-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 3091814,
+        "proposal_ns": 13490580,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12576468,
+        "complete_ns": 200518680,
+        "device_ns": 57353824.615478516,
+        "exact_check_ns": 123881957,
+        "id": "coupled-optimum-1-64-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 3001744,
+        "proposal_ns": 57510043,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "coupled-optimum",
+        "checker_preparation_ns": 12383535,
+        "complete_ns": 176143392,
+        "device_ns": 28695392.608642578,
+        "exact_check_ns": 123126640,
+        "id": "coupled-optimum-1-64-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 2931446,
+        "proposal_ns": 28849449,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 48355775,
+        "complete_ns": 771258580,
+        "device_ns": 364650497.43652344,
+        "exact_check_ns": 342751417,
+        "id": "degenerate-optimum-0-32-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 10363722,
+        "proposal_ns": 365038414,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 93790893,
+        "complete_ns": 489933741,
+        "device_ns": 69648384.09423828,
+        "exact_check_ns": 309426269,
+        "id": "degenerate-optimum-0-32-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 10965057,
+        "proposal_ns": 70033689,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 102672661,
+        "complete_ns": 530198808,
+        "device_ns": 38132896.423339844,
+        "exact_check_ns": 371074766,
+        "id": "degenerate-optimum-0-32-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 11102124,
+        "proposal_ns": 38748656,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 49951374,
+        "complete_ns": 448076830,
+        "device_ns": 69647361.7553711,
+        "exact_check_ns": 309613365,
+        "id": "degenerate-optimum-0-32-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 10477365,
+        "proposal_ns": 70121783,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 49732148,
+        "complete_ns": 513677919,
+        "device_ns": 37858207.70263672,
+        "exact_check_ns": 406519491,
+        "id": "degenerate-optimum-0-32-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 10469606,
+        "proposal_ns": 38401382,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 50337057,
+        "complete_ns": 782472661,
+        "device_ns": 364622848.5107422,
+        "exact_check_ns": 345815985,
+        "id": "degenerate-optimum-0-32-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 12964843,
+        "proposal_ns": 365030951,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 50369333,
+        "complete_ns": 513991402,
+        "device_ns": 38122367.85888672,
+        "exact_check_ns": 406100445,
+        "id": "degenerate-optimum-0-32-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 10365795,
+        "proposal_ns": 38662309,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 50399058,
+        "complete_ns": 782229662,
+        "device_ns": 364624893.18847656,
+        "exact_check_ns": 347607428,
+        "id": "degenerate-optimum-0-32-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 10584381,
+        "proposal_ns": 365038994,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 102282847,
+        "complete_ns": 501074957,
+        "device_ns": 69654945.37353516,
+        "exact_check_ns": 311602957,
+        "id": "degenerate-optimum-0-32-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 10936032,
+        "proposal_ns": 70076786,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 93848070,
+        "complete_ns": 764844815,
+        "device_ns": 346551300.0488281,
+        "exact_check_ns": 308519079,
+        "id": "degenerate-optimum-0-64-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 9829532,
+        "proposal_ns": 346747243,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 50430658,
+        "complete_ns": 436141314,
+        "device_ns": 57347072.60131836,
+        "exact_check_ns": 309400985,
+        "id": "degenerate-optimum-0-64-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 10274457,
+        "proposal_ns": 57554905,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 51057863,
+        "complete_ns": 477477908,
+        "device_ns": 33519935.607910156,
+        "exact_check_ns": 371461980,
+        "id": "degenerate-optimum-0-64-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 11766446,
+        "proposal_ns": 34025124,
+        "repetition": 0,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 52440150,
+        "complete_ns": 484124061,
+        "device_ns": 57347072.60131836,
+        "exact_check_ns": 353939213,
+        "id": "degenerate-optimum-0-64-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 11599243,
+        "proposal_ns": 57555523,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 50837998,
+        "complete_ns": 519730432,
+        "device_ns": 33768352.50854492,
+        "exact_check_ns": 414854765,
+        "id": "degenerate-optimum-0-64-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 10528365,
+        "proposal_ns": 34206014,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 51040780,
+        "complete_ns": 779990828,
+        "device_ns": 346587127.6855469,
+        "exact_check_ns": 359154737,
+        "id": "degenerate-optimum-0-64-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 13856340,
+        "proposal_ns": 346791068,
+        "repetition": 1,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 50685173,
+        "complete_ns": 519667022,
+        "device_ns": 33828289.03198242,
+        "exact_check_ns": 413312855,
+        "id": "degenerate-optimum-0-64-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 13133022,
+        "proposal_ns": 34255632,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 119625683,
+        "complete_ns": 795714137,
+        "device_ns": 346564605.7128906,
+        "exact_check_ns": 311260393,
+        "id": "degenerate-optimum-0-64-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 10371624,
+        "proposal_ns": 346804241,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 113497216,
+        "complete_ns": 497361557,
+        "device_ns": 57349121.09375,
+        "exact_check_ns": 309529334,
+        "id": "degenerate-optimum-0-64-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 10581241,
+        "proposal_ns": 57557031,
+        "repetition": 2,
+        "sparse": false,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 111867791,
+        "complete_ns": 566056880,
+        "device_ns": 122806755.06591797,
+        "exact_check_ns": 313586447,
+        "id": "degenerate-optimum-1-32-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 10217726,
+        "proposal_ns": 123191255,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 106502312,
+        "complete_ns": 492455871,
+        "device_ns": 57348480.224609375,
+        "exact_check_ns": 311299211,
+        "id": "degenerate-optimum-1-32-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 10205776,
+        "proposal_ns": 57732182,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 101656486,
+        "complete_ns": 517722937,
+        "device_ns": 25779935.836791992,
+        "exact_check_ns": 371933841,
+        "id": "degenerate-optimum-1-32-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 10061187,
+        "proposal_ns": 26440052,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 48980369,
+        "complete_ns": 433820177,
+        "device_ns": 57353281.021118164,
+        "exact_check_ns": 309438533,
+        "id": "degenerate-optimum-1-32-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 11306267,
+        "proposal_ns": 57706444,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 49672876,
+        "complete_ns": 467144345,
+        "device_ns": 26060575.485229492,
+        "exact_check_ns": 371596309,
+        "id": "degenerate-optimum-1-32-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 11265827,
+        "proposal_ns": 26614707,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 49815474,
+        "complete_ns": 545791271,
+        "device_ns": 122986145.01953125,
+        "exact_check_ns": 353008918,
+        "id": "degenerate-optimum-1-32-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 10970170,
+        "proposal_ns": 123383443,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 49837657,
+        "complete_ns": 502013290,
+        "device_ns": 26069631.576538086,
+        "exact_check_ns": 405369242,
+        "id": "degenerate-optimum-1-32-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 10685476,
+        "proposal_ns": 26622150,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 50139438,
+        "complete_ns": 540865845,
+        "device_ns": 122952060.69946289,
+        "exact_check_ns": 347356475,
+        "id": "degenerate-optimum-1-32-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 11047546,
+        "proposal_ns": 123366507,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 98559914,
+        "complete_ns": 484304098,
+        "device_ns": 57350175.857543945,
+        "exact_check_ns": 310950584,
+        "id": "degenerate-optimum-1-32-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 10060598,
+        "proposal_ns": 57803009,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 32
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 103398150,
+        "complete_ns": 535374757,
+        "device_ns": 106463233.9477539,
+        "exact_check_ns": 309383529,
+        "id": "degenerate-optimum-1-64-0-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 10113996,
+        "proposal_ns": 106681115,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 102484811,
+        "complete_ns": 474337605,
+        "device_ns": 45065216.064453125,
+        "exact_check_ns": 311193722,
+        "id": "degenerate-optimum-1-64-0-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 9827932,
+        "proposal_ns": 45270563,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 49222281,
+        "complete_ns": 463537637,
+        "device_ns": 21577856.063842773,
+        "exact_check_ns": 372333569,
+        "id": "degenerate-optimum-1-64-0-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 11914994,
+        "proposal_ns": 22083652,
+        "repetition": 0,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 49564959,
+        "complete_ns": 424036392,
+        "device_ns": 45074432.373046875,
+        "exact_check_ns": 310683195,
+        "id": "degenerate-optimum-1-64-1-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 10743289,
+        "proposal_ns": 45269116,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 50884017,
+        "complete_ns": 464748880,
+        "device_ns": 21869216.918945312,
+        "exact_check_ns": 371493794,
+        "id": "degenerate-optimum-1-64-1-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 10748529,
+        "proposal_ns": 22282568,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 51218530,
+        "complete_ns": 488588657,
+        "device_ns": 106509315.49072266,
+        "exact_check_ns": 311001191,
+        "id": "degenerate-optimum-1-64-1-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 10997812,
+        "proposal_ns": 106707161,
+        "repetition": 1,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 51517159,
+        "complete_ns": 514083025,
+        "device_ns": 21859519.958496094,
+        "exact_check_ns": 419230735,
+        "id": "degenerate-optimum-1-64-2-lean_fp64",
+        "implementation": "lean_fp64",
+        "preparation_ns": 11434548,
+        "proposal_ns": 22291965,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 51279182,
+        "complete_ns": 533092872,
+        "device_ns": 106504188.53759766,
+        "exact_check_ns": 354557265,
+        "id": "degenerate-optimum-1-64-2-legacy_fp32x2",
+        "implementation": "legacy_fp32x2",
+        "preparation_ns": 12066368,
+        "proposal_ns": 106712269,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      },
+      {
+        "accepted_targets": 0,
+        "case": "degenerate-optimum",
+        "checker_preparation_ns": 51785895,
+        "complete_ns": 465081121,
+        "device_ns": 45065216.064453125,
+        "exact_check_ns": 347860754,
+        "id": "degenerate-optimum-1-64-2-legacy_fp64",
+        "implementation": "legacy_fp64",
+        "preparation_ns": 10800909,
+        "proposal_ns": 45264673,
+        "repetition": 2,
+        "sparse": true,
+        "steps": 1000,
+        "targets": 64,
+        "width": 64
+      }
+    ]
+  },
+  "models": 8,
+  "pairs": [
+    {
+      "left": "legacy_gpu",
+      "maximum_left_over_right": 2.6394611995985526,
+      "median_left_over_right": 2.42970348374638,
+      "minimum_left_over_right": 1.4652920894109174,
+      "paired_models": 7,
+      "paired_repetitions": 14,
+      "right": "lean_gpu",
+      "right_faster_repetitions": 14,
+      "rows": [
+        {
+          "left_complete_seconds": 6.887045359,
+          "left_over_right": 2.4195693232772175,
+          "model": "dense-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.846393072
+        },
+        {
+          "left_complete_seconds": 6.686627464,
+          "left_over_right": 2.4422306231024735,
+          "model": "dense-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.737918115
+        },
+        {
+          "left_complete_seconds": 6.577826531,
+          "left_over_right": 2.6394611995985526,
+          "model": "irregular-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.492109576
+        },
+        {
+          "left_complete_seconds": 6.639839548,
+          "left_over_right": 2.5700290823506564,
+          "model": "irregular-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.583565919
+        },
+        {
+          "left_complete_seconds": 1.441314753,
+          "left_over_right": 1.4652920894109174,
+          "model": "wide-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 0.98363648
+        },
+        {
+          "left_complete_seconds": 1.490679495,
+          "left_over_right": 1.5245012706811574,
+          "model": "wide-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 0.977814531
+        },
+        {
+          "left_complete_seconds": 6.773448734,
+          "left_over_right": 2.475397325099575,
+          "model": "coupled-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.736307689
+        },
+        {
+          "left_complete_seconds": 6.787130597,
+          "left_over_right": 2.3101218188956136,
+          "model": "coupled-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.937996837
+        },
+        {
+          "left_complete_seconds": 10.356918365,
+          "left_over_right": 2.231165287678135,
+          "model": "ill_scaled-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 4.641932367
+        },
+        {
+          "left_complete_seconds": 10.321234346,
+          "left_over_right": 2.22517219074166,
+          "model": "ill_scaled-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 4.638398048
+        },
+        {
+          "left_complete_seconds": 5.519115249,
+          "left_over_right": 2.4678216367025065,
+          "model": "degenerate-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.236431988
+        },
+        {
+          "left_complete_seconds": 5.57956367,
+          "left_over_right": 2.4398376442155416,
+          "model": "degenerate-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.286858588
+        },
+        {
+          "left_complete_seconds": 3.59526439,
+          "left_over_right": 2.599667443324857,
+          "model": "wide-16-88371",
+          "repetition": 0,
+          "right_complete_seconds": 1.382970887
+        },
+        {
+          "left_complete_seconds": 3.531961242,
+          "left_over_right": 2.231657544570524,
+          "model": "wide-16-88371",
+          "repetition": 1,
+          "right_complete_seconds": 1.582662739
+        }
+      ],
+      "tier": "exact"
+    },
+    {
+      "left": "cpu",
+      "maximum_left_over_right": 0.9635156896834951,
+      "median_left_over_right": 0.7962845211463898,
+      "minimum_left_over_right": 0.6867047159467932,
+      "paired_models": 8,
+      "paired_repetitions": 16,
+      "right": "lean_gpu",
+      "right_faster_repetitions": 0,
+      "rows": [
+        {
+          "left_complete_seconds": 2.290278784,
+          "left_over_right": 0.8046249151354034,
+          "model": "dense-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.846393072
+        },
+        {
+          "left_complete_seconds": 2.288294768,
+          "left_over_right": 0.835779110946859,
+          "model": "dense-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.737918115
+        },
+        {
+          "left_complete_seconds": 2.032134948,
+          "left_over_right": 0.8154276070242908,
+          "model": "irregular-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.492109576
+        },
+        {
+          "left_complete_seconds": 2.035705593,
+          "left_over_right": 0.7879441271573764,
+          "model": "irregular-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.583565919
+        },
+        {
+          "left_complete_seconds": 0.676527905,
+          "left_over_right": 0.6877824468242577,
+          "model": "wide-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 0.98363648
+        },
+        {
+          "left_complete_seconds": 0.676461451,
+          "left_over_right": 0.6918095707865892,
+          "model": "wide-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 0.977814531
+        },
+        {
+          "left_complete_seconds": 9.549401562,
+          "left_over_right": 0.9449297371556853,
+          "model": "tall-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 10.105938237
+        },
+        {
+          "left_complete_seconds": 9.558883154,
+          "left_over_right": 0.9502347199457059,
+          "model": "tall-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 10.059496831
+        },
+        {
+          "left_complete_seconds": 2.284708086,
+          "left_over_right": 0.8349602258490748,
+          "model": "coupled-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.736307689
+        },
+        {
+          "left_complete_seconds": 2.184107257,
+          "left_over_right": 0.7434001389974948,
+          "model": "coupled-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.937996837
+        },
+        {
+          "left_complete_seconds": 3.197666374,
+          "left_over_right": 0.6888653520099854,
+          "model": "ill_scaled-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 4.641932367
+        },
+        {
+          "left_complete_seconds": 3.185209814,
+          "left_over_right": 0.6867047159467932,
+          "model": "ill_scaled-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 4.638398048
+        },
+        {
+          "left_complete_seconds": 1.736273321,
+          "left_over_right": 0.7763586508851169,
+          "model": "degenerate-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.236431988
+        },
+        {
+          "left_complete_seconds": 1.734762885,
+          "left_over_right": 0.7585789930793919,
+          "model": "degenerate-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.286858588
+        },
+        {
+          "left_complete_seconds": 1.332514148,
+          "left_over_right": 0.9635156896834951,
+          "model": "wide-16-88371",
+          "repetition": 0,
+          "right_complete_seconds": 1.382970887
+        },
+        {
+          "left_complete_seconds": 1.281468764,
+          "left_over_right": 0.8096916243884604,
+          "model": "wide-16-88371",
+          "repetition": 1,
+          "right_complete_seconds": 1.582662739
+        }
+      ],
+      "tier": "exact"
+    },
+    {
+      "left": "legacy_gpu",
+      "maximum_left_over_right": 2.6394611995985526,
+      "median_left_over_right": 2.40084331346059,
+      "minimum_left_over_right": 1.4652920894109174,
+      "paired_models": 3,
+      "paired_repetitions": 6,
+      "right": "lean_gpu",
+      "right_faster_repetitions": 6,
+      "rows": [
+        {
+          "left_complete_seconds": 6.577826531,
+          "left_over_right": 2.6394611995985526,
+          "model": "irregular-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.492109576
+        },
+        {
+          "left_complete_seconds": 6.639839548,
+          "left_over_right": 2.5700290823506564,
+          "model": "irregular-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.583565919
+        },
+        {
+          "left_complete_seconds": 1.441314753,
+          "left_over_right": 1.4652920894109174,
+          "model": "wide-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 0.98363648
+        },
+        {
+          "left_complete_seconds": 1.490679495,
+          "left_over_right": 1.5245012706811574,
+          "model": "wide-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 0.977814531
+        },
+        {
+          "left_complete_seconds": 3.59526439,
+          "left_over_right": 2.599667443324857,
+          "model": "wide-16-88371",
+          "repetition": 0,
+          "right_complete_seconds": 1.382970887
+        },
+        {
+          "left_complete_seconds": 3.531961242,
+          "left_over_right": 2.231657544570524,
+          "model": "wide-16-88371",
+          "repetition": 1,
+          "right_complete_seconds": 1.582662739
+        }
+      ],
+      "tier": "strict"
+    },
+    {
+      "left": "cpu",
+      "maximum_left_over_right": 0.9635156896834951,
+      "median_left_over_right": 0.7988178757729184,
+      "minimum_left_over_right": 0.6877824468242577,
+      "paired_models": 3,
+      "paired_repetitions": 6,
+      "right": "lean_gpu",
+      "right_faster_repetitions": 0,
+      "rows": [
+        {
+          "left_complete_seconds": 2.032134948,
+          "left_over_right": 0.8154276070242908,
+          "model": "irregular-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 2.492109576
+        },
+        {
+          "left_complete_seconds": 2.035705593,
+          "left_over_right": 0.7879441271573764,
+          "model": "irregular-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 2.583565919
+        },
+        {
+          "left_complete_seconds": 0.676527905,
+          "left_over_right": 0.6877824468242577,
+          "model": "wide-8-88371",
+          "repetition": 0,
+          "right_complete_seconds": 0.98363648
+        },
+        {
+          "left_complete_seconds": 0.676461451,
+          "left_over_right": 0.6918095707865892,
+          "model": "wide-8-88371",
+          "repetition": 1,
+          "right_complete_seconds": 0.977814531
+        },
+        {
+          "left_complete_seconds": 1.332514148,
+          "left_over_right": 0.9635156896834951,
+          "model": "wide-16-88371",
+          "repetition": 0,
+          "right_complete_seconds": 1.382970887
+        },
+        {
+          "left_complete_seconds": 1.281468764,
+          "left_over_right": 0.8096916243884604,
+          "model": "wide-16-88371",
+          "repetition": 1,
+          "right_complete_seconds": 1.582662739
+        }
+      ],
+      "tier": "strict"
+    }
+  ],
+  "profiles": [
+    {
+      "auxiliary_phase_seconds": 1.182925567,
+      "cell": "dense-8-88371-r0-cpu",
+      "cpu_auxiliary_calls": [
+        8,
+        18,
+        39
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "dense-8-88371",
+      "native_seconds": 2.161640342,
+      "repetition": 0,
+      "response_bytes": 2843
+    },
+    {
+      "auxiliary_phase_seconds": 4.809905214,
+      "cell": "dense-8-88371-r0-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        2,
+        0,
+        39
+      ],
+      "device_seconds": 0.32911970806121826,
+      "exact_proposal_seconds": 2.896300976,
+      "gpu_labels_per_query": [
+        15,
+        18,
+        0
+      ],
+      "lane": "legacy_gpu",
+      "model": "dense-8-88371",
+      "native_seconds": 5.934407881,
+      "repetition": 0,
+      "response_bytes": 21483881
+    },
+    {
+      "auxiliary_phase_seconds": 1.618670349,
+      "cell": "dense-8-88371-r0-lean_gpu",
+      "cpu_auxiliary_calls": [
+        4,
+        0,
+        39
+      ],
+      "device_seconds": 0.01359984004497528,
+      "exact_proposal_seconds": 0.112831868,
+      "gpu_labels_per_query": [
+        13,
+        18,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "dense-8-88371",
+      "native_seconds": 2.623811984,
+      "repetition": 0,
+      "response_bytes": 5919
+    },
+    {
+      "auxiliary_phase_seconds": 4.640014622,
+      "cell": "dense-8-88371-r1-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        2,
+        0,
+        39
+      ],
+      "device_seconds": 0.3287226266860962,
+      "exact_proposal_seconds": 2.843448585,
+      "gpu_labels_per_query": [
+        15,
+        18,
+        0
+      ],
+      "lane": "legacy_gpu",
+      "model": "dense-8-88371",
+      "native_seconds": 5.75557696,
+      "repetition": 1,
+      "response_bytes": 21483879
+    },
+    {
+      "auxiliary_phase_seconds": 1.567585001,
+      "cell": "dense-8-88371-r1-lean_gpu",
+      "cpu_auxiliary_calls": [
+        4,
+        0,
+        39
+      ],
+      "device_seconds": 0.013523936092853546,
+      "exact_proposal_seconds": 0.112559234,
+      "gpu_labels_per_query": [
+        13,
+        18,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "dense-8-88371",
+      "native_seconds": 2.55225974,
+      "repetition": 1,
+      "response_bytes": 5919
+    },
+    {
+      "auxiliary_phase_seconds": 1.184294811,
+      "cell": "dense-8-88371-r1-cpu",
+      "cpu_auxiliary_calls": [
+        8,
+        18,
+        39
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "dense-8-88371",
+      "native_seconds": 2.164780427,
+      "repetition": 1,
+      "response_bytes": 2843
+    },
+    {
+      "auxiliary_phase_seconds": 4.55188125,
+      "cell": "irregular-8-88371-r0-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        39
+      ],
+      "device_seconds": 0.3130732135772705,
+      "exact_proposal_seconds": 2.930194026,
+      "gpu_labels_per_query": [
+        17,
+        18,
+        0
+      ],
+      "lane": "legacy_gpu",
+      "model": "irregular-8-88371",
+      "native_seconds": 5.677374054,
+      "repetition": 0,
+      "response_bytes": 21702982
+    },
+    {
+      "auxiliary_phase_seconds": 1.304867109,
+      "cell": "irregular-8-88371-r0-lean_gpu",
+      "cpu_auxiliary_calls": [
+        1,
+        0,
+        39
+      ],
+      "device_seconds": 0.01212140792608261,
+      "exact_proposal_seconds": 0.112082825,
+      "gpu_labels_per_query": [
+        16,
+        18,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "irregular-8-88371",
+      "native_seconds": 2.282133576,
+      "repetition": 0,
+      "response_bytes": 5601
+    },
+    {
+      "auxiliary_phase_seconds": 0.952907162,
+      "cell": "irregular-8-88371-r0-cpu",
+      "cpu_auxiliary_calls": [
+        8,
+        18,
+        39
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "irregular-8-88371",
+      "native_seconds": 1.915450321,
+      "repetition": 0,
+      "response_bytes": 2737
+    },
+    {
+      "auxiliary_phase_seconds": 1.432141099,
+      "cell": "irregular-8-88371-r1-lean_gpu",
+      "cpu_auxiliary_calls": [
+        1,
+        0,
+        39
+      ],
+      "device_seconds": 0.012111199855804443,
+      "exact_proposal_seconds": 0.112072322,
+      "gpu_labels_per_query": [
+        16,
+        18,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "irregular-8-88371",
+      "native_seconds": 2.404710874,
+      "repetition": 1,
+      "response_bytes": 5603
+    },
+    {
+      "auxiliary_phase_seconds": 0.962746234,
+      "cell": "irregular-8-88371-r1-cpu",
+      "cpu_auxiliary_calls": [
+        8,
+        18,
+        39
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "irregular-8-88371",
+      "native_seconds": 1.93523023,
+      "repetition": 1,
+      "response_bytes": 2737
+    },
+    {
+      "auxiliary_phase_seconds": 4.590372979,
+      "cell": "irregular-8-88371-r1-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        39
+      ],
+      "device_seconds": 0.31324152946472167,
+      "exact_proposal_seconds": 2.946326031,
+      "gpu_labels_per_query": [
+        17,
+        18,
+        0
+      ],
+      "lane": "legacy_gpu",
+      "model": "irregular-8-88371",
+      "native_seconds": 5.704084609,
+      "repetition": 1,
+      "response_bytes": 21702992
+    },
+    {
+      "auxiliary_phase_seconds": 0.30869252,
+      "cell": "wide-8-88371-r0-lean_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        0
+      ],
+      "device_seconds": 0.005623584017157555,
+      "exact_proposal_seconds": 0.008751375,
+      "gpu_labels_per_query": [
+        5,
+        6,
+        32
+      ],
+      "lane": "lean_gpu",
+      "model": "wide-8-88371",
+      "native_seconds": 0.81484985,
+      "repetition": 0,
+      "response_bytes": 4905
+    },
+    {
+      "auxiliary_phase_seconds": 0.082718871,
+      "cell": "wide-8-88371-r0-cpu",
+      "cpu_auxiliary_calls": [
+        5,
+        6,
+        25
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "wide-8-88371",
+      "native_seconds": 0.587405225,
+      "repetition": 0,
+      "response_bytes": 2258
+    },
+    {
+      "auxiliary_phase_seconds": 0.592435351,
+      "cell": "wide-8-88371-r0-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        8
+      ],
+      "device_seconds": 0.09016796684265137,
+      "exact_proposal_seconds": 0.170714735,
+      "gpu_labels_per_query": [
+        5,
+        6,
+        17
+      ],
+      "lane": "legacy_gpu",
+      "model": "wide-8-88371",
+      "native_seconds": 1.124563415,
+      "repetition": 0,
+      "response_bytes": 3218200
+    },
+    {
+      "auxiliary_phase_seconds": 0.081836018,
+      "cell": "wide-8-88371-r1-cpu",
+      "cpu_auxiliary_calls": [
+        5,
+        6,
+        25
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "wide-8-88371",
+      "native_seconds": 0.586334639,
+      "repetition": 1,
+      "response_bytes": 2258
+    },
+    {
+      "auxiliary_phase_seconds": 0.613896361,
+      "cell": "wide-8-88371-r1-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        8
+      ],
+      "device_seconds": 0.09016944122314453,
+      "exact_proposal_seconds": 0.171321351,
+      "gpu_labels_per_query": [
+        5,
+        6,
+        17
+      ],
+      "lane": "legacy_gpu",
+      "model": "wide-8-88371",
+      "native_seconds": 1.149111454,
+      "repetition": 1,
+      "response_bytes": 3218200
+    },
+    {
+      "auxiliary_phase_seconds": 0.276980194,
+      "cell": "wide-8-88371-r1-lean_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        0
+      ],
+      "device_seconds": 0.0056453441828489305,
+      "exact_proposal_seconds": 0.008774848,
+      "gpu_labels_per_query": [
+        5,
+        6,
+        32
+      ],
+      "lane": "lean_gpu",
+      "model": "wide-8-88371",
+      "native_seconds": 0.782233947,
+      "repetition": 1,
+      "response_bytes": 4904
+    },
+    {
+      "auxiliary_phase_seconds": 7.4135865,
+      "cell": "tall-8-88371-r0-cpu",
+      "cpu_auxiliary_calls": [
+        22,
+        34,
+        59
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "tall-8-88371",
+      "native_seconds": 9.442616613,
+      "repetition": 0,
+      "response_bytes": 3435
+    },
+    {
+      "auxiliary_phase_seconds": 8.084950147,
+      "cell": "tall-8-88371-r0-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        21,
+        0
+      ],
+      "device_seconds": 0.1454350070953369,
+      "exact_proposal_seconds": 0.508915357,
+      "gpu_labels_per_query": [
+        1,
+        34
+      ],
+      "lane": "legacy_gpu",
+      "model": "tall-8-88371",
+      "native_seconds": 10.059461202,
+      "repetition": 0,
+      "response_bytes": 5288581
+    },
+    {
+      "auxiliary_phase_seconds": 7.812402004,
+      "cell": "tall-8-88371-r0-lean_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        59
+      ],
+      "device_seconds": 0.011465951919555665,
+      "exact_proposal_seconds": 0.312670059,
+      "gpu_labels_per_query": [
+        33,
+        34,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "tall-8-88371",
+      "native_seconds": 9.883963483,
+      "repetition": 0,
+      "response_bytes": 6316
+    },
+    {
+      "auxiliary_phase_seconds": 8.092708222,
+      "cell": "tall-8-88371-r1-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        21,
+        0
+      ],
+      "device_seconds": 0.14544748878479005,
+      "exact_proposal_seconds": 0.507971099,
+      "gpu_labels_per_query": [
+        1,
+        34
+      ],
+      "lane": "legacy_gpu",
+      "model": "tall-8-88371",
+      "native_seconds": 10.05838838,
+      "repetition": 1,
+      "response_bytes": 5288580
+    },
+    {
+      "auxiliary_phase_seconds": 7.809871175,
+      "cell": "tall-8-88371-r1-lean_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        59
+      ],
+      "device_seconds": 0.011467200100421905,
+      "exact_proposal_seconds": 0.326328654,
+      "gpu_labels_per_query": [
+        33,
+        34,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "tall-8-88371",
+      "native_seconds": 9.852148025,
+      "repetition": 1,
+      "response_bytes": 6314
+    },
+    {
+      "auxiliary_phase_seconds": 7.412427904,
+      "cell": "tall-8-88371-r1-cpu",
+      "cpu_auxiliary_calls": [
+        22,
+        34,
+        59
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "tall-8-88371",
+      "native_seconds": 9.443834627,
+      "repetition": 1,
+      "response_bytes": 3436
+    },
+    {
+      "auxiliary_phase_seconds": 4.778343712,
+      "cell": "coupled-8-88371-r0-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        2,
+        0,
+        39
+      ],
+      "device_seconds": 0.3273277082443237,
+      "exact_proposal_seconds": 2.962401259,
+      "gpu_labels_per_query": [
+        15,
+        18,
+        0
+      ],
+      "lane": "legacy_gpu",
+      "model": "coupled-8-88371",
+      "native_seconds": 5.889475063,
+      "repetition": 0,
+      "response_bytes": 21432133
+    },
+    {
+      "auxiliary_phase_seconds": 1.540789747,
+      "cell": "coupled-8-88371-r0-lean_gpu",
+      "cpu_auxiliary_calls": [
+        2,
+        0,
+        39
+      ],
+      "device_seconds": 0.012119199633598327,
+      "exact_proposal_seconds": 0.118145821,
+      "gpu_labels_per_query": [
+        15,
+        18,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "coupled-8-88371",
+      "native_seconds": 2.520908157,
+      "repetition": 0,
+      "response_bytes": 5662
+    },
+    {
+      "auxiliary_phase_seconds": 1.113386929,
+      "cell": "coupled-8-88371-r0-cpu",
+      "cpu_auxiliary_calls": [
+        6,
+        18,
+        39
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "coupled-8-88371",
+      "native_seconds": 2.144795009,
+      "repetition": 0,
+      "response_bytes": 2799
+    },
+    {
+      "auxiliary_phase_seconds": 1.746790609,
+      "cell": "coupled-8-88371-r1-lean_gpu",
+      "cpu_auxiliary_calls": [
+        2,
+        0,
+        39
+      ],
+      "device_seconds": 0.012117984175682068,
+      "exact_proposal_seconds": 0.118098115,
+      "gpu_labels_per_query": [
+        15,
+        18,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "coupled-8-88371",
+      "native_seconds": 2.727156224,
+      "repetition": 1,
+      "response_bytes": 5663
+    },
+    {
+      "auxiliary_phase_seconds": 1.103516718,
+      "cell": "coupled-8-88371-r1-cpu",
+      "cpu_auxiliary_calls": [
+        6,
+        18,
+        39
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "coupled-8-88371",
+      "native_seconds": 2.091404504,
+      "repetition": 1,
+      "response_bytes": 2799
+    },
+    {
+      "auxiliary_phase_seconds": 4.764583304,
+      "cell": "coupled-8-88371-r1-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        2,
+        0,
+        39
+      ],
+      "device_seconds": 0.3276849250793457,
+      "exact_proposal_seconds": 2.970560577,
+      "gpu_labels_per_query": [
+        15,
+        18,
+        0
+      ],
+      "lane": "legacy_gpu",
+      "model": "coupled-8-88371",
+      "native_seconds": 5.880470573,
+      "repetition": 1,
+      "response_bytes": 21432133
+    },
+    {
+      "auxiliary_phase_seconds": 3.452167118,
+      "cell": "ill_scaled-8-88371-r0-lean_gpu",
+      "cpu_auxiliary_calls": [
+        1,
+        1,
+        35
+      ],
+      "device_seconds": 0.04711884742975235,
+      "exact_proposal_seconds": 0.643919162,
+      "gpu_labels_per_query": [
+        16,
+        17,
+        4
+      ],
+      "lane": "lean_gpu",
+      "model": "ill_scaled-8-88371",
+      "native_seconds": 4.436591356,
+      "repetition": 0,
+      "response_bytes": 7596
+    },
+    {
+      "auxiliary_phase_seconds": 2.112497034,
+      "cell": "ill_scaled-8-88371-r0-cpu",
+      "cpu_auxiliary_calls": [
+        7,
+        18,
+        37
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "ill_scaled-8-88371",
+      "native_seconds": 3.095530056,
+      "repetition": 0,
+      "response_bytes": 2873
+    },
+    {
+      "auxiliary_phase_seconds": 8.236941904,
+      "cell": "ill_scaled-8-88371-r0-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        3,
+        2,
+        37
+      ],
+      "device_seconds": 0.35966674995422365,
+      "exact_proposal_seconds": 4.396752519,
+      "gpu_labels_per_query": [
+        13,
+        16,
+        1
+      ],
+      "lane": "legacy_gpu",
+      "model": "ill_scaled-8-88371",
+      "native_seconds": 9.432464976,
+      "repetition": 0,
+      "response_bytes": 28422408
+    },
+    {
+      "auxiliary_phase_seconds": 2.109612336,
+      "cell": "ill_scaled-8-88371-r1-cpu",
+      "cpu_auxiliary_calls": [
+        7,
+        18,
+        37
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "ill_scaled-8-88371",
+      "native_seconds": 3.099769147,
+      "repetition": 1,
+      "response_bytes": 2873
+    },
+    {
+      "auxiliary_phase_seconds": 8.175419106,
+      "cell": "ill_scaled-8-88371-r1-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        3,
+        2,
+        37
+      ],
+      "device_seconds": 0.36049925994873044,
+      "exact_proposal_seconds": 4.364097695,
+      "gpu_labels_per_query": [
+        13,
+        16,
+        1
+      ],
+      "lane": "legacy_gpu",
+      "model": "ill_scaled-8-88371",
+      "native_seconds": 9.36373405,
+      "repetition": 1,
+      "response_bytes": 28422412
+    },
+    {
+      "auxiliary_phase_seconds": 3.455219215,
+      "cell": "ill_scaled-8-88371-r1-lean_gpu",
+      "cpu_auxiliary_calls": [
+        1,
+        1,
+        35
+      ],
+      "device_seconds": 0.04767321622371674,
+      "exact_proposal_seconds": 0.644838644,
+      "gpu_labels_per_query": [
+        16,
+        17,
+        4
+      ],
+      "lane": "lean_gpu",
+      "model": "ill_scaled-8-88371",
+      "native_seconds": 4.439262431,
+      "repetition": 1,
+      "response_bytes": 7597
+    },
+    {
+      "auxiliary_phase_seconds": 0.714898448,
+      "cell": "degenerate-8-88371-r0-cpu",
+      "cpu_auxiliary_calls": [
+        9,
+        18,
+        44
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "degenerate-8-88371",
+      "native_seconds": 1.650802196,
+      "repetition": 0,
+      "response_bytes": 2785
+    },
+    {
+      "auxiliary_phase_seconds": 3.56395573,
+      "cell": "degenerate-8-88371-r0-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        3,
+        0,
+        44
+      ],
+      "device_seconds": 0.34414751720428466,
+      "exact_proposal_seconds": 2.167178401,
+      "gpu_labels_per_query": [
+        11,
+        18,
+        0
+      ],
+      "lane": "legacy_gpu",
+      "model": "degenerate-8-88371",
+      "native_seconds": 4.623358322,
+      "repetition": 0,
+      "response_bytes": 18930542
+    },
+    {
+      "auxiliary_phase_seconds": 1.075425834,
+      "cell": "degenerate-8-88371-r0-lean_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        44
+      ],
+      "device_seconds": 0.011920831978321075,
+      "exact_proposal_seconds": 0.072606501,
+      "gpu_labels_per_query": [
+        17,
+        18,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "degenerate-8-88371",
+      "native_seconds": 2.023235966,
+      "repetition": 0,
+      "response_bytes": 5655
+    },
+    {
+      "auxiliary_phase_seconds": 3.609176035,
+      "cell": "degenerate-8-88371-r1-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        3,
+        0,
+        44
+      ],
+      "device_seconds": 0.3440308771133423,
+      "exact_proposal_seconds": 2.187515657,
+      "gpu_labels_per_query": [
+        11,
+        18,
+        0
+      ],
+      "lane": "legacy_gpu",
+      "model": "degenerate-8-88371",
+      "native_seconds": 4.680434723,
+      "repetition": 1,
+      "response_bytes": 18930539
+    },
+    {
+      "auxiliary_phase_seconds": 1.10209757,
+      "cell": "degenerate-8-88371-r1-lean_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        44
+      ],
+      "device_seconds": 0.01192825621366501,
+      "exact_proposal_seconds": 0.07267421,
+      "gpu_labels_per_query": [
+        17,
+        18,
+        0
+      ],
+      "lane": "lean_gpu",
+      "model": "degenerate-8-88371",
+      "native_seconds": 2.06289865,
+      "repetition": 1,
+      "response_bytes": 5655
+    },
+    {
+      "auxiliary_phase_seconds": 0.707565476,
+      "cell": "degenerate-8-88371-r1-cpu",
+      "cpu_auxiliary_calls": [
+        9,
+        18,
+        44
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "degenerate-8-88371",
+      "native_seconds": 1.640892275,
+      "repetition": 1,
+      "response_bytes": 2785
+    },
+    {
+      "auxiliary_phase_seconds": 1.985324422,
+      "cell": "wide-16-88371-r0-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        44
+      ],
+      "device_seconds": 0.24564829063415528,
+      "exact_proposal_seconds": 0.909704329,
+      "gpu_labels_per_query": [
+        9,
+        10,
+        2
+      ],
+      "lane": "legacy_gpu",
+      "model": "wide-16-88371",
+      "native_seconds": 2.871716239,
+      "repetition": 0,
+      "response_bytes": 12226367
+    },
+    {
+      "auxiliary_phase_seconds": 0.408243788,
+      "cell": "wide-16-88371-r0-lean_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        3
+      ],
+      "device_seconds": 0.015321120142936706,
+      "exact_proposal_seconds": 0.039132418,
+      "gpu_labels_per_query": [
+        9,
+        10,
+        56
+      ],
+      "lane": "lean_gpu",
+      "model": "wide-16-88371",
+      "native_seconds": 1.189367717,
+      "repetition": 0,
+      "response_bytes": 6035
+    },
+    {
+      "auxiliary_phase_seconds": 0.438896055,
+      "cell": "wide-16-88371-r0-cpu",
+      "cpu_auxiliary_calls": [
+        9,
+        10,
+        46
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "wide-16-88371",
+      "native_seconds": 1.204224828,
+      "repetition": 0,
+      "response_bytes": 2762
+    },
+    {
+      "auxiliary_phase_seconds": 0.595532818,
+      "cell": "wide-16-88371-r1-lean_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        3
+      ],
+      "device_seconds": 0.015329279839992523,
+      "exact_proposal_seconds": 0.039120548,
+      "gpu_labels_per_query": [
+        9,
+        10,
+        56
+      ],
+      "lane": "lean_gpu",
+      "model": "wide-16-88371",
+      "native_seconds": 1.367534055,
+      "repetition": 1,
+      "response_bytes": 6035
+    },
+    {
+      "auxiliary_phase_seconds": 0.437390699,
+      "cell": "wide-16-88371-r1-cpu",
+      "cpu_auxiliary_calls": [
+        9,
+        10,
+        46
+      ],
+      "device_seconds": 0.0,
+      "exact_proposal_seconds": 0.0,
+      "gpu_labels_per_query": [],
+      "lane": "cpu",
+      "model": "wide-16-88371",
+      "native_seconds": 1.19380525,
+      "repetition": 1,
+      "response_bytes": 2762
+    },
+    {
+      "auxiliary_phase_seconds": 1.947305286,
+      "cell": "wide-16-88371-r1-legacy_gpu",
+      "cpu_auxiliary_calls": [
+        0,
+        0,
+        44
+      ],
+      "device_seconds": 0.24567654418945312,
+      "exact_proposal_seconds": 0.906561581,
+      "gpu_labels_per_query": [
+        9,
+        10,
+        2
+      ],
+      "lane": "legacy_gpu",
+      "model": "wide-16-88371",
+      "native_seconds": 2.833282624,
+      "repetition": 1,
+      "response_bytes": 12226363
+    }
+  ],
+  "resources": {
+    "cpu_cap_seconds": 240000,
+    "cpu_ns": 76369668667408,
+    "failures": [
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v1.settlement.json",
+          "sha256": "f7f8145595f29de440f73d5f155f9f8e79b5873041a4b105af589daad6cb15e8"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v2",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v2.settlement.json",
+          "sha256": "e39568e97849ff3504e892b3e4a8cc7f806abcf1d03c0dfbc9dcd4d7092baafc"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "baseline-adapters-v3",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/baseline-adapters-v3.settlement.json",
+          "sha256": "04ed4e8458bde1f393a80af09a5faeda444f2e408cde790a50600df0743ac3d1"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-coupled-solve",
+        "settlement": {
+          "bytes": 395,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-coupled-solve.settlement.json",
+          "sha256": "56501357e63d9bff05394552b1eed2e4b4b2046043313c8b3c1361c903ce2631"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-dense-solve",
+        "settlement": {
+          "bytes": 393,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-dense-solve.settlement.json",
+          "sha256": "41e9e66d0ea8a1641d7f0b1677f36f499b538c78362bdb4e4f593f85cccc344c"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-ill_scaled-solve",
+        "settlement": {
+          "bytes": 398,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-ill_scaled-solve.settlement.json",
+          "sha256": "fd9d199f4405e9bba5cda8f68f2d5babf467dd36e344da88991b4d807829a1dc"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-irregular-solve",
+        "settlement": {
+          "bytes": 397,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-irregular-solve.settlement.json",
+          "sha256": "8c1d4287b253ea4b41b424602005925cdd202e49db68e8141612ca3ac03bbd8a"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-tall-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-tall-solve.settlement.json",
+          "sha256": "1750cbd2f52fbcc034c99ef9049496e690ff1f6f8cbfb201bdad457cbda777c5"
+        }
+      },
+      {
+        "cpu_ns": 6720000000000,
+        "gpu_ns": 1680000000000,
+        "identity": "confirmation-v1-wide-solve",
+        "settlement": {
+          "bytes": 392,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/confirmation-v1-wide-solve.settlement.json",
+          "sha256": "dc2138ff6f3c27777750f3fa4bf3a621ceab6cdd5a13893827c4bc46dfa4ff91"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v1",
+        "settlement": {
+          "bytes": 365,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v1.settlement.json",
+          "sha256": "c9e71879de32ecc52c4d5f12f3337b127d8d6759a9e7393c6a79f1de2b21ccf9"
+        }
+      },
+      {
+        "cpu_ns": 480000000000,
+        "gpu_ns": 0,
+        "identity": "gmp-headers-v2",
+        "settlement": {
+          "bytes": 366,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gmp-headers-v2.settlement.json",
+          "sha256": "182c8f691dd0a9e5a516d865db415c71625d5987ba03e9237208b1443dca578d"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-development-v1",
+        "settlement": {
+          "bytes": 385,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-development-v1.settlement.json",
+          "sha256": "f6044e287575026502d32907f6ca36b50a80367728f4a6e841f6ba32d9f0ef8b"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-opt-admit-v2",
+        "settlement": {
+          "bytes": 381,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v2.settlement.json",
+          "sha256": "5c64e06b9068ef7e43eb638ba3f7348e50d1e90fcadaa84027a4149caa591761"
+        }
+      },
+      {
+        "cpu_ns": 1200000000000,
+        "gpu_ns": 300000000000,
+        "identity": "gpu-opt-admit-v3",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.settlement.json",
+          "sha256": "9a6a1b5ce9b9edce2ff69584f67e3421ae29a2e220d81ede484003594bebbb7d"
+        }
+      },
+      {
+        "cpu_ns": 960000000000,
+        "gpu_ns": 240000000000,
+        "identity": "gpu-opt-admit-v5",
+        "settlement": {
+          "bytes": 380,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v5.settlement.json",
+          "sha256": "ae24b3547a68b4a58d63809f7f31b7329caeb85ca2231c2a8074f4cd02467274"
+        }
+      },
+      {
+        "cpu_ns": 240000000000,
+        "gpu_ns": 0,
+        "identity": "gpu-opt-freeze-v1",
+        "settlement": {
+          "bytes": 368,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-freeze-v1.settlement.json",
+          "sha256": "19f8bbd549d05b6d8ab86a10095b2b15a4ae66c52bc2cc802a5be7e20deadcac"
+        }
+      },
+      {
+        "cpu_ns": 2400000000000,
+        "gpu_ns": 600000000000,
+        "identity": "gpu-sanitizers-v1",
+        "settlement": {
+          "bytes": 382,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-sanitizers-v1.settlement.json",
+          "sha256": "e8a816154107b2ff1c21465c6480dc6df4918a8ab9fd15c473776e68feea0e8c"
+        }
+      },
+      {
+        "cpu_ns": 720000000000,
+        "gpu_ns": 0,
+        "identity": "symbolic-grouped-unit-v1",
+        "settlement": {
+          "bytes": 377,
+          "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/symbolic-grouped-unit-v1.settlement.json",
+          "sha256": "40a8d3bd0be3bc79294dbb88335a747cb2c8f905b5e666cd997b894e89f10f1c"
+        }
+      }
+    ],
+    "gpu_cap_seconds": 30000,
+    "gpu_ns": 15936471769890,
+    "pending_at_snapshot": [
+      "gpu-opt-final-verify-v1"
+    ],
+    "retained_source_files_verified": 4770,
+    "subsequent_cleanup_dispositions": [
+      {
+        "bytes": 1697,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/gpu-opt-admit-v3.cleanup-disposition.json",
+        "sha256": "0b052eaa7ec813852dde0abc103ecab62164e9d09a2526f223d54f853c088b20"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r0-cpu/audit.json",
+        "sha256": "47a52bad0684ddc0e17363052c24942eadfe27e174ba3d445327ca20c174779f"
+      },
+      "audit_ns": 13446509,
+      "cell": "dense-8-88371-r0-cpu",
+      "complete_ns": 2290278784,
+      "encoding_ns": 4258992,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "cpu",
+      "model": "dense-8-88371",
+      "native_ns": 2161640342,
+      "process_ns": 2272573283,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 2843,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r0-cpu/response.json",
+        "sha256": "aa87a4edc2f6fe6a967cb73d8c5e00d6c047851e9abf6aafd8b07f82d396c93d"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r0-legacy_gpu/audit.json",
+        "sha256": "cf3424f4df34853a32d7550c8207f0270f0ec71b5be70ca2503e645c75e9a9fd"
+      },
+      "audit_ns": 105636372,
+      "cell": "dense-8-88371-r0-legacy_gpu",
+      "complete_ns": 6887045359,
+      "encoding_ns": 4258992,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "legacy_gpu",
+      "model": "dense-8-88371",
+      "native_ns": 5934407881,
+      "process_ns": 6777149995,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 21483881,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r0-legacy_gpu/response.json",
+        "sha256": "c615c24edcfaaa262a03841f954265ea351aebc7d757050c327dd0a7025e0ef8"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r0-lean_gpu/audit.json",
+        "sha256": "bfdf584f262b91fa8ff8c7a583bff4033f3acf87638768f3ac8eabbdc4f1193e"
+      },
+      "audit_ns": 12885496,
+      "cell": "dense-8-88371-r0-lean_gpu",
+      "complete_ns": 2846393072,
+      "encoding_ns": 4258992,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "lean_gpu",
+      "model": "dense-8-88371",
+      "native_ns": 2623811984,
+      "process_ns": 2829248584,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 5919,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r0-lean_gpu/response.json",
+        "sha256": "88b36bfd7c5e92392a973d6239dbcb89412c44fb09a6f749df2cdf7306c940f0"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r1-legacy_gpu/audit.json",
+        "sha256": "1a7a996594f089916fda5245cd1079f8d3f80e717d6df1797e036f24845550d5"
+      },
+      "audit_ns": 105138047,
+      "cell": "dense-8-88371-r1-legacy_gpu",
+      "complete_ns": 6686627464,
+      "encoding_ns": 4258992,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "legacy_gpu",
+      "model": "dense-8-88371",
+      "native_ns": 5755576960,
+      "process_ns": 6577230425,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 21483879,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r1-legacy_gpu/response.json",
+        "sha256": "530d8a90217ab2253e54bbc5cfda263046144f424750220c265d3b68e7db4e63"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r1-lean_gpu/audit.json",
+        "sha256": "873fb0a7d3803fc2b5df83a94dd2ed9bbb44a7c9cd089c2ac48bd1dd34b51b77"
+      },
+      "audit_ns": 13980174,
+      "cell": "dense-8-88371-r1-lean_gpu",
+      "complete_ns": 2737918115,
+      "encoding_ns": 4258992,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "lean_gpu",
+      "model": "dense-8-88371",
+      "native_ns": 2552259740,
+      "process_ns": 2719678949,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 5919,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r1-lean_gpu/response.json",
+        "sha256": "0df5861ed1388a8ee25dadb1f900ff35ccd662eed59751e362ae5cebc637a744"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r1-cpu/audit.json",
+        "sha256": "07deec15acc7c6d49c5540074abd3f9118d85a9a68062cf9b3601d0b9b6c4e0d"
+      },
+      "audit_ns": 12991128,
+      "cell": "dense-8-88371-r1-cpu",
+      "complete_ns": 2288294768,
+      "encoding_ns": 4258992,
+      "exact_accepted": true,
+      "family": "dense",
+      "lane": "cpu",
+      "model": "dense-8-88371",
+      "native_ns": 2164780427,
+      "process_ns": 2271044648,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 2843,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/dense-8-88371-r1-cpu/response.json",
+        "sha256": "6a17730617bdb67490a4f67d3c5a35821e6ed2e90e283b7de32ed631e6861555"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r0-legacy_gpu/audit.json",
+        "sha256": "ebb01f1088ea3717ac0b0a395f9e52057dd12578b438cbc9517bca7c104190c0"
+      },
+      "audit_ns": 96666396,
+      "cell": "irregular-8-88371-r0-legacy_gpu",
+      "complete_ns": 6577826531,
+      "encoding_ns": 3333559,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "legacy_gpu",
+      "model": "irregular-8-88371",
+      "native_ns": 5677374054,
+      "process_ns": 6477826576,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 21702982,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r0-legacy_gpu/response.json",
+        "sha256": "378a082f5e55aceb4ba347f67e96f1588f4a65c89dfaae4967506cc69fcd3ca5"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r0-lean_gpu/audit.json",
+        "sha256": "c9f91e2218c1babe988ace82a475cdf4f6d56c7175e379475d256168c0c4828c"
+      },
+      "audit_ns": 11693188,
+      "cell": "irregular-8-88371-r0-lean_gpu",
+      "complete_ns": 2492109576,
+      "encoding_ns": 3333559,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "lean_gpu",
+      "model": "irregular-8-88371",
+      "native_ns": 2282133576,
+      "process_ns": 2477082829,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 5601,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r0-lean_gpu/response.json",
+        "sha256": "58136e53903490fa81df56e090d0302a1f06b89183570d406506211fc582a6f9"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r0-cpu/audit.json",
+        "sha256": "ff3d2abcfcd4702c9b9b0cf39bca38ed7a89456c03a9d0b4b39f5e2ab90559b9"
+      },
+      "audit_ns": 10574024,
+      "cell": "irregular-8-88371-r0-cpu",
+      "complete_ns": 2032134948,
+      "encoding_ns": 3333559,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "cpu",
+      "model": "irregular-8-88371",
+      "native_ns": 1915450321,
+      "process_ns": 2018227365,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 2737,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r0-cpu/response.json",
+        "sha256": "4231fa93f1273e1709a2fcea0dbf2a3e11531c3752491cd87436b9c577ef803f"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r1-lean_gpu/audit.json",
+        "sha256": "5eff5b134a7aa21008de12a979f117b685e3068947f9919f66ed13e7580c78e2"
+      },
+      "audit_ns": 10179055,
+      "cell": "irregular-8-88371-r1-lean_gpu",
+      "complete_ns": 2583565919,
+      "encoding_ns": 3333559,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "lean_gpu",
+      "model": "irregular-8-88371",
+      "native_ns": 2404710874,
+      "process_ns": 2570053305,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 5603,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r1-lean_gpu/response.json",
+        "sha256": "76a27fd7ff3d6c1ff87b3cfb834151b81b8ea746cb4622943f6a37e6063b0cd2"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r1-cpu/audit.json",
+        "sha256": "fa77481ba7254a89ffe3fd2bb4dbfe097c1c97e18d186acf84f7bfe0f8396890"
+      },
+      "audit_ns": 10116247,
+      "cell": "irregular-8-88371-r1-cpu",
+      "complete_ns": 2035705593,
+      "encoding_ns": 3333559,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "cpu",
+      "model": "irregular-8-88371",
+      "native_ns": 1935230230,
+      "process_ns": 2022255787,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 2737,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r1-cpu/response.json",
+        "sha256": "e8a37774ec7eb9a77480418768bf9b694d7f2c2e8d96e3efc549eec344352113"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r1-legacy_gpu/audit.json",
+        "sha256": "e164615e865567b2e39a258742ca9a5e3667d1934642c68815e27777e8f59e2d"
+      },
+      "audit_ns": 108590412,
+      "cell": "irregular-8-88371-r1-legacy_gpu",
+      "complete_ns": 6639839548,
+      "encoding_ns": 3333559,
+      "exact_accepted": true,
+      "family": "irregular",
+      "lane": "legacy_gpu",
+      "model": "irregular-8-88371",
+      "native_ns": 5704084609,
+      "process_ns": 6527915577,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 21702992,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/irregular-8-88371-r1-legacy_gpu/response.json",
+        "sha256": "3fbeac5731b9eebbd2482f1037aff8e9240bbb81084dcba21d5122055ef6104f"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 790,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r0-lean_gpu/audit.json",
+        "sha256": "3fd6abbd1a836b84b611bded1bd25983349b3e685b5afcd281ae51a2668bc3f0"
+      },
+      "audit_ns": 11239653,
+      "cell": "wide-8-88371-r0-lean_gpu",
+      "complete_ns": 983636480,
+      "encoding_ns": 1921548,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "lean_gpu",
+      "model": "wide-8-88371",
+      "native_ns": 814849850,
+      "process_ns": 970475279,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 4905,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r0-lean_gpu/response.json",
+        "sha256": "3b57d78a4327aa5091e189e340c288461a04f2d6dc2c27d4dd65ca3c0e84310e"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 789,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r0-cpu/audit.json",
+        "sha256": "76dcfadf7ea32b80323e72cc7b62c4c05b9d7248106a514542995f22568958a3"
+      },
+      "audit_ns": 9793229,
+      "cell": "wide-8-88371-r0-cpu",
+      "complete_ns": 676527905,
+      "encoding_ns": 1921548,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "cpu",
+      "model": "wide-8-88371",
+      "native_ns": 587405225,
+      "process_ns": 664813128,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 2258,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r0-cpu/response.json",
+        "sha256": "5681f126e838ec937ed84b45b6e919e6b2c037fc90b46afa2478fb60aaff263c"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 790,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r0-legacy_gpu/audit.json",
+        "sha256": "b29feac8242dbc0defb11455c9cd114503fdec0914a9a839d61f16119a5d7b6e"
+      },
+      "audit_ns": 22728698,
+      "cell": "wide-8-88371-r0-legacy_gpu",
+      "complete_ns": 1441314753,
+      "encoding_ns": 1921548,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "legacy_gpu",
+      "model": "wide-8-88371",
+      "native_ns": 1124563415,
+      "process_ns": 1416664507,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 3218200,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r0-legacy_gpu/response.json",
+        "sha256": "7ba9a7e97fd39457b6c897c0e2c91b998c60527221e094158810e68423f55ea1"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 789,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r1-cpu/audit.json",
+        "sha256": "8dc927edb95ae23556664c138b4c8f8c26e729e2981193dabbc05ba8a0d6cb63"
+      },
+      "audit_ns": 9722845,
+      "cell": "wide-8-88371-r1-cpu",
+      "complete_ns": 676461451,
+      "encoding_ns": 1921548,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "cpu",
+      "model": "wide-8-88371",
+      "native_ns": 586334639,
+      "process_ns": 664817058,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 2258,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r1-cpu/response.json",
+        "sha256": "865d5052d1a40d7d870b6a9c5268f49d918cc9c99402d84533e285ebd55434dd"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 790,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r1-legacy_gpu/audit.json",
+        "sha256": "6d3769e1f7f962f023a433df7d7741b085970e46c3ae7d2f9b36f55992480137"
+      },
+      "audit_ns": 21065467,
+      "cell": "wide-8-88371-r1-legacy_gpu",
+      "complete_ns": 1490679495,
+      "encoding_ns": 1921548,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "legacy_gpu",
+      "model": "wide-8-88371",
+      "native_ns": 1149111454,
+      "process_ns": 1467692480,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 3218200,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r1-legacy_gpu/response.json",
+        "sha256": "3388be6d6199ab8b40b0b021b788ea45eafea2a1473c6eb7448d43d7757a234a"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 789,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r1-lean_gpu/audit.json",
+        "sha256": "cffcb6f2a19854560903c767af3330b0983a36d5d1c508d7e43fafae548083fa"
+      },
+      "audit_ns": 9683730,
+      "cell": "wide-8-88371-r1-lean_gpu",
+      "complete_ns": 977814531,
+      "encoding_ns": 1921548,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "lean_gpu",
+      "model": "wide-8-88371",
+      "native_ns": 782233947,
+      "process_ns": 966209253,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 4904,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-8-88371-r1-lean_gpu/response.json",
+        "sha256": "cede19395384367ea6bd3225aafe3f9bd3f0fb87ac9ad4d1ff7412aa9e36ae45"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r0-cpu/audit.json",
+        "sha256": "875a4ec5dff73fde1e21a91dedbd19b905fb534d72835108eff205bd8b3686e4"
+      },
+      "audit_ns": 11602336,
+      "cell": "tall-8-88371-r0-cpu",
+      "complete_ns": 9549401562,
+      "encoding_ns": 5110051,
+      "exact_accepted": true,
+      "family": "tall",
+      "lane": "cpu",
+      "model": "tall-8-88371",
+      "native_ns": 9442616613,
+      "process_ns": 9532689175,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 3435,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r0-cpu/response.json",
+        "sha256": "05ee8002f356540cc167467a0b7ccf62ba1d5e9274488ccf490fba0320459794"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 169,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r0-legacy_gpu/audit.json",
+        "sha256": "c31e6bdf72796214061795c8ec687db1767b5cd034bbc8b8b1a7fb9528c0f1e5"
+      },
+      "audit_ns": 20067105,
+      "cell": "tall-8-88371-r0-legacy_gpu",
+      "complete_ns": 10463845959,
+      "encoding_ns": 5110051,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "legacy_gpu",
+      "model": "tall-8-88371",
+      "native_ns": 10059461202,
+      "process_ns": 10438668803,
+      "reason": "deadline",
+      "repetition": 0,
+      "response": {
+        "bytes": 5288581,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r0-legacy_gpu/response.json",
+        "sha256": "ea9b7a7fa3438c2480c36887c9dd1d8aa17346c0a0f9e2fa50e8120438d27dd2"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r0-lean_gpu/audit.json",
+        "sha256": "079c56647cfb16b27b5062c417d3032651e95c453410ab93a2ed5a358c360a57"
+      },
+      "audit_ns": 12306481,
+      "cell": "tall-8-88371-r0-lean_gpu",
+      "complete_ns": 10105938237,
+      "encoding_ns": 5110051,
+      "exact_accepted": true,
+      "family": "tall",
+      "lane": "lean_gpu",
+      "model": "tall-8-88371",
+      "native_ns": 9883963483,
+      "process_ns": 10088521705,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 6316,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r0-lean_gpu/response.json",
+        "sha256": "504878c2e8927d9b63aeb5c7935514f8a34e81d6f05746dc6fc032413c64c916"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 169,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r1-legacy_gpu/audit.json",
+        "sha256": "c47ffd40dfcda3e32004922e8053665c344b8922a96b682dcba64bdb4cd18e54"
+      },
+      "audit_ns": 17537938,
+      "cell": "tall-8-88371-r1-legacy_gpu",
+      "complete_ns": 10456593522,
+      "encoding_ns": 5110051,
+      "exact_accepted": false,
+      "family": "tall",
+      "lane": "legacy_gpu",
+      "model": "tall-8-88371",
+      "native_ns": 10058388380,
+      "process_ns": 10433945533,
+      "reason": "deadline",
+      "repetition": 1,
+      "response": {
+        "bytes": 5288580,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r1-legacy_gpu/response.json",
+        "sha256": "2320b029ef7c58937d32d37c28816250f2f5760da36246145b3f04203b4fda52"
+      },
+      "status": "resource_limit",
+      "strict_accepted": false,
+      "timely": false
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r1-lean_gpu/audit.json",
+        "sha256": "40af2af310f3292bfd8637e340cd1e5597db923829cea69eea558cb068f1b3e8"
+      },
+      "audit_ns": 14445524,
+      "cell": "tall-8-88371-r1-lean_gpu",
+      "complete_ns": 10059496831,
+      "encoding_ns": 5110051,
+      "exact_accepted": true,
+      "family": "tall",
+      "lane": "lean_gpu",
+      "model": "tall-8-88371",
+      "native_ns": 9852148025,
+      "process_ns": 10039941256,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 6314,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r1-lean_gpu/response.json",
+        "sha256": "e13b68ead605d6601fc2a6340d1c3a7360d3fba39b82ba87748badca4c4d79dc"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 763,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r1-cpu/audit.json",
+        "sha256": "f39fd170a0bc5cd48e8a00c8e2bbf3ac2292e40fe8f680edb85a0ad33f64408b"
+      },
+      "audit_ns": 13800385,
+      "cell": "tall-8-88371-r1-cpu",
+      "complete_ns": 9558883154,
+      "encoding_ns": 5110051,
+      "exact_accepted": true,
+      "family": "tall",
+      "lane": "cpu",
+      "model": "tall-8-88371",
+      "native_ns": 9443834627,
+      "process_ns": 9539972718,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 3436,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/tall-8-88371-r1-cpu/response.json",
+        "sha256": "081848f85556890b5a63e48295281d531fb80c35339cf9159229d487f08feb33"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r0-legacy_gpu/audit.json",
+        "sha256": "a15309dc192aca7c66a76e4587f1adf10acd522bd0bc8dd3d9295a4898e7fa71"
+      },
+      "audit_ns": 94144794,
+      "cell": "coupled-8-88371-r0-legacy_gpu",
+      "complete_ns": 6773448734,
+      "encoding_ns": 3268967,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "legacy_gpu",
+      "model": "coupled-8-88371",
+      "native_ns": 5889475063,
+      "process_ns": 6676034973,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 21432133,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r0-legacy_gpu/response.json",
+        "sha256": "e5770494f2d490ec98dfb0d7b535d17164cf17d55a8a53a29425696f579276c9"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r0-lean_gpu/audit.json",
+        "sha256": "895bfd1609307d210116bb1d297367338dbf8848c71f51de6ecacabe37924359"
+      },
+      "audit_ns": 13927639,
+      "cell": "coupled-8-88371-r0-lean_gpu",
+      "complete_ns": 2736307689,
+      "encoding_ns": 3268967,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "lean_gpu",
+      "model": "coupled-8-88371",
+      "native_ns": 2520908157,
+      "process_ns": 2719111083,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 5662,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r0-lean_gpu/response.json",
+        "sha256": "ad3fc6dc95877fbbdb5958c7af3ce681a6ea51cf3692a947bbac2b243b245e5d"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r0-cpu/audit.json",
+        "sha256": "d6d5521e4cbbd9baa46c0978d712eec6f01325b5ee326bd9d430903f481f55ed"
+      },
+      "audit_ns": 10626382,
+      "cell": "coupled-8-88371-r0-cpu",
+      "complete_ns": 2284708086,
+      "encoding_ns": 3268967,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "cpu",
+      "model": "coupled-8-88371",
+      "native_ns": 2144795009,
+      "process_ns": 2270812737,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 2799,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r0-cpu/response.json",
+        "sha256": "892e01f0efae789894bf21196d78d34ffed3cb4a332ce02be830ba0abb60cd2c"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r1-lean_gpu/audit.json",
+        "sha256": "5cbf2313b335f3cea283e32b16d1936219fc1121cc9503191119efa75e789e95"
+      },
+      "audit_ns": 12238877,
+      "cell": "coupled-8-88371-r1-lean_gpu",
+      "complete_ns": 2937996837,
+      "encoding_ns": 3268967,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "lean_gpu",
+      "model": "coupled-8-88371",
+      "native_ns": 2727156224,
+      "process_ns": 2922488993,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 5663,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r1-lean_gpu/response.json",
+        "sha256": "1a8297db0ff36ed1af0a461ff9ff217ce5e374b91b1682a44f06f44007143fea"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 760,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r1-cpu/audit.json",
+        "sha256": "d2f9a85bebe9aa32218cb2003699c657513aadb35a82da249ec1cb593c638cdd"
+      },
+      "audit_ns": 11995088,
+      "cell": "coupled-8-88371-r1-cpu",
+      "complete_ns": 2184107257,
+      "encoding_ns": 3268967,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "cpu",
+      "model": "coupled-8-88371",
+      "native_ns": 2091404504,
+      "process_ns": 2168843202,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 2799,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r1-cpu/response.json",
+        "sha256": "5e94ebe8f710d793bd24ae1ac93f2de79555c1f74a5adf0a3ed322f9b9782083"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 761,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r1-legacy_gpu/audit.json",
+        "sha256": "b20564383614fd35745d99272ca61f6e5ab4357a11c8e8a244c3918e310e6f85"
+      },
+      "audit_ns": 102226445,
+      "cell": "coupled-8-88371-r1-legacy_gpu",
+      "complete_ns": 6787130597,
+      "encoding_ns": 3268967,
+      "exact_accepted": true,
+      "family": "coupled",
+      "lane": "legacy_gpu",
+      "model": "coupled-8-88371",
+      "native_ns": 5880470573,
+      "process_ns": 6681635185,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 21432133,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/coupled-8-88371-r1-legacy_gpu/response.json",
+        "sha256": "4bffcaab9c4ef3bc199d9fa748afde5b808dfaf3fd188695a858dd89d3307138"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r0-lean_gpu/audit.json",
+        "sha256": "a5ce9d3ed12c6d7ca45e6bb32a2db49542db99ca20d4fbc175985bb9b0571998"
+      },
+      "audit_ns": 12067564,
+      "cell": "ill_scaled-8-88371-r0-lean_gpu",
+      "complete_ns": 4641932367,
+      "encoding_ns": 3536041,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "lean_gpu",
+      "model": "ill_scaled-8-88371",
+      "native_ns": 4436591356,
+      "process_ns": 4626328762,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 7596,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r0-lean_gpu/response.json",
+        "sha256": "390085d7793319e3dfd37648fcdc021e732cce7b97c865d8b84f910132db1a28"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r0-cpu/audit.json",
+        "sha256": "ccd704b58d6b9b96dd92733280f5be4ec0e921b3142b0f64d040e17c3a845c4c"
+      },
+      "audit_ns": 13239304,
+      "cell": "ill_scaled-8-88371-r0-cpu",
+      "complete_ns": 3197666374,
+      "encoding_ns": 3536041,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "cpu",
+      "model": "ill_scaled-8-88371",
+      "native_ns": 3095530056,
+      "process_ns": 3180891029,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 2873,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r0-cpu/response.json",
+        "sha256": "12df48713960ebc32d8306d8ea8c40712fd73c11520437a966d09b72a4768d2a"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 775,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r0-legacy_gpu/audit.json",
+        "sha256": "72fff6477d3b1d6adb0d72ab72fc0aa179f0b2a7d489faafc88b83d3faefdf9b"
+      },
+      "audit_ns": 118227140,
+      "cell": "ill_scaled-8-88371-r0-legacy_gpu",
+      "complete_ns": 10356918365,
+      "encoding_ns": 3536041,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "legacy_gpu",
+      "model": "ill_scaled-8-88371",
+      "native_ns": 9432464976,
+      "process_ns": 10235155184,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 28422408,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r0-legacy_gpu/response.json",
+        "sha256": "12536fc7f42c4ef6446ffc28b48de998857ec6431c44210150aaa4ca26710a77"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r1-cpu/audit.json",
+        "sha256": "0b2dfd1c399a8c996135e046fc3d0b4251c506042c2d6778496d2c01d24e59c1"
+      },
+      "audit_ns": 11804003,
+      "cell": "ill_scaled-8-88371-r1-cpu",
+      "complete_ns": 3185209814,
+      "encoding_ns": 3536041,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "cpu",
+      "model": "ill_scaled-8-88371",
+      "native_ns": 3099769147,
+      "process_ns": 3169869770,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 2873,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r1-cpu/response.json",
+        "sha256": "89f574befde3d041dc00585b6122438bd26627551af7aff4337f9369422f789b"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 775,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r1-legacy_gpu/audit.json",
+        "sha256": "ef6ed60283347d78da0780c8dab8e3303de7d06e3a6e4205b9324b495ca7a8df"
+      },
+      "audit_ns": 135384033,
+      "cell": "ill_scaled-8-88371-r1-legacy_gpu",
+      "complete_ns": 10321234346,
+      "encoding_ns": 3536041,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "legacy_gpu",
+      "model": "ill_scaled-8-88371",
+      "native_ns": 9363734050,
+      "process_ns": 10182314272,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 28422412,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r1-legacy_gpu/response.json",
+        "sha256": "5e254fe964edb77a1cb861a092514f1b0598528b3dd2da766c1846559d2a27c0"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 774,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r1-lean_gpu/audit.json",
+        "sha256": "ee7fe18cd4daab452e53b96a60e618a94f9b8f8dffbc95b560ce6b963baad2cc"
+      },
+      "audit_ns": 12758707,
+      "cell": "ill_scaled-8-88371-r1-lean_gpu",
+      "complete_ns": 4638398048,
+      "encoding_ns": 3536041,
+      "exact_accepted": true,
+      "family": "ill_scaled",
+      "lane": "lean_gpu",
+      "model": "ill_scaled-8-88371",
+      "native_ns": 4439262431,
+      "process_ns": 4622103300,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 7597,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/ill_scaled-8-88371-r1-lean_gpu/response.json",
+        "sha256": "d2ba7290305993a75b9384f4030aba396a9b121f04ff88c35c1652785b54ae5a"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r0-cpu/audit.json",
+        "sha256": "4fa52b803828e2198b0b066e211ccc2965d348ae486cd9da1891e764d52b7aaf"
+      },
+      "audit_ns": 10848478,
+      "cell": "degenerate-8-88371-r0-cpu",
+      "complete_ns": 1736273321,
+      "encoding_ns": 3804333,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "cpu",
+      "model": "degenerate-8-88371",
+      "native_ns": 1650802196,
+      "process_ns": 1721620510,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 2785,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r0-cpu/response.json",
+        "sha256": "f4f3e51ff25f63ce53b94b6000387e520e1cbe0899cd8415d771444e89993afb"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r0-legacy_gpu/audit.json",
+        "sha256": "2b8d6bc02aa37faa9124ca17208e65f90cac6afdc0b0275a9144bd8dc5fdb94d"
+      },
+      "audit_ns": 91300375,
+      "cell": "degenerate-8-88371-r0-legacy_gpu",
+      "complete_ns": 5519115249,
+      "encoding_ns": 3804333,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "legacy_gpu",
+      "model": "degenerate-8-88371",
+      "native_ns": 4623358322,
+      "process_ns": 5424010541,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 18930542,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r0-legacy_gpu/response.json",
+        "sha256": "86e9c1e5ba110dc6ad69e3adfd5aa5bb0a1c3db1091e7f0d5a6796a205e6a1c1"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r0-lean_gpu/audit.json",
+        "sha256": "eb0f1ad95ffc6b43cdbd6f7370143b89625a5ec9ab3a05f7a9ad0f6ae07aecb4"
+      },
+      "audit_ns": 14389993,
+      "cell": "degenerate-8-88371-r0-lean_gpu",
+      "complete_ns": 2236431988,
+      "encoding_ns": 3804333,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "lean_gpu",
+      "model": "degenerate-8-88371",
+      "native_ns": 2023235966,
+      "process_ns": 2218237662,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 5655,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r0-lean_gpu/response.json",
+        "sha256": "f16b507a68da55cebaad7bb70c779df669d1fa643bfa23b272268d7b2542ef0a"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r1-legacy_gpu/audit.json",
+        "sha256": "846d1d81adeff825d37a12e53102d9236904b2e1a3e581e5231ca7517c08a97a"
+      },
+      "audit_ns": 98984631,
+      "cell": "degenerate-8-88371-r1-legacy_gpu",
+      "complete_ns": 5579563670,
+      "encoding_ns": 3804333,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "legacy_gpu",
+      "model": "degenerate-8-88371",
+      "native_ns": 4680434723,
+      "process_ns": 5476774706,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 18930539,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r1-legacy_gpu/response.json",
+        "sha256": "a35e0e420b39237f560a2bff076271daf511ab2b65557519bb09c6bec25939fa"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r1-lean_gpu/audit.json",
+        "sha256": "e8b752d64ad5f5594b18ad3ca6f796eb0e4f3397a448a154612ffe2d8fe378d4"
+      },
+      "audit_ns": 14164275,
+      "cell": "degenerate-8-88371-r1-lean_gpu",
+      "complete_ns": 2286858588,
+      "encoding_ns": 3804333,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "lean_gpu",
+      "model": "degenerate-8-88371",
+      "native_ns": 2062898650,
+      "process_ns": 2268889980,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 5655,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r1-lean_gpu/response.json",
+        "sha256": "ff9c90ff4a054c20448f6b2138cd1437a0c523ee64d6c93879c7b9b68fb95bdd"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r1-cpu/audit.json",
+        "sha256": "fe2b185343dee801f3efe13a10a5feb2b59ddf544d173c7e5bee8e8f6cf5b24a"
+      },
+      "audit_ns": 13560995,
+      "cell": "degenerate-8-88371-r1-cpu",
+      "complete_ns": 1734762885,
+      "encoding_ns": 3804333,
+      "exact_accepted": true,
+      "family": "degenerate",
+      "lane": "cpu",
+      "model": "degenerate-8-88371",
+      "native_ns": 1640892275,
+      "process_ns": 1717397557,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 2785,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/degenerate-8-88371-r1-cpu/response.json",
+        "sha256": "5096625b0235387677aadf03962a5b03e8b95f7dccca1ea1ecee226a4b48a24f"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": false,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 792,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r0-legacy_gpu/audit.json",
+        "sha256": "caec89e0d75adee892a367477552729ab2d30921562dcfaaa2164ebbd92b6ef5"
+      },
+      "audit_ns": 57525335,
+      "cell": "wide-16-88371-r0-legacy_gpu",
+      "complete_ns": 3595264390,
+      "encoding_ns": 2953304,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "legacy_gpu",
+      "model": "wide-16-88371",
+      "native_ns": 2871716239,
+      "process_ns": 3534785751,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 12226367,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r0-legacy_gpu/response.json",
+        "sha256": "67014fb9c8cb1bb8b0643c16b3e4b482306f1c484efff6fb6c89cf5569d10cbc"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 792,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r0-lean_gpu/audit.json",
+        "sha256": "66aeab8bca5f4eb4871b0f6d4934c37da446d98d1cbcbeffc43c6372feb9151f"
+      },
+      "audit_ns": 13451695,
+      "cell": "wide-16-88371-r0-lean_gpu",
+      "complete_ns": 1382970887,
+      "encoding_ns": 2953304,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "lean_gpu",
+      "model": "wide-16-88371",
+      "native_ns": 1189367717,
+      "process_ns": 1366565888,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 6035,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r0-lean_gpu/response.json",
+        "sha256": "6ebd717f283e8454159d17f6fefdaf0c1ea21d2ab84c0b027523a95aa6807e38"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 792,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r0-cpu/audit.json",
+        "sha256": "a2cb6ba654ad54589248d9a437f49bae627f2eba0428531992c40c5fcbc74797"
+      },
+      "audit_ns": 13253311,
+      "cell": "wide-16-88371-r0-cpu",
+      "complete_ns": 1332514148,
+      "encoding_ns": 2953304,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "cpu",
+      "model": "wide-16-88371",
+      "native_ns": 1204224828,
+      "process_ns": 1316307533,
+      "reason": null,
+      "repetition": 0,
+      "response": {
+        "bytes": 2762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r0-cpu/response.json",
+        "sha256": "44b1ae8b8a2a8ca4e8dfae7edb37237459a200e4e9cc3522aaf4af65a1fc65a1"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 792,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r1-lean_gpu/audit.json",
+        "sha256": "4f0c35f1907033ef705c457beb9aa6bdb476ff2204e1b42321cb8e8536a8a18b"
+      },
+      "audit_ns": 12947364,
+      "cell": "wide-16-88371-r1-lean_gpu",
+      "complete_ns": 1582662739,
+      "encoding_ns": 2953304,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "lean_gpu",
+      "model": "wide-16-88371",
+      "native_ns": 1367534055,
+      "process_ns": 1566762071,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 6035,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r1-lean_gpu/response.json",
+        "sha256": "556b5832ef08b3653c635d2800357c833d484de54af3da1dc4693e45c2ed7ba9"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 792,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r1-cpu/audit.json",
+        "sha256": "d8e37f0baac4153793105318f93f4867a61c1d6332a66ae2032ae5ee9248ef7c"
+      },
+      "audit_ns": 12571734,
+      "cell": "wide-16-88371-r1-cpu",
+      "complete_ns": 1281468764,
+      "encoding_ns": 2953304,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "cpu",
+      "model": "wide-16-88371",
+      "native_ns": 1193805250,
+      "process_ns": 1265943726,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 2762,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r1-cpu/response.json",
+        "sha256": "d3b4a95314c2e1aa3f56076ebb6194d20b27f2e3bdd7d729e9a8e20be570a912"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    },
+    {
+      "audit": {
+        "bytes": 792,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r1-legacy_gpu/audit.json",
+        "sha256": "baf4c3157deceb682b00a7d6a20c58de06dfb83ab612afdf4d7de0f236399ef4"
+      },
+      "audit_ns": 57867746,
+      "cell": "wide-16-88371-r1-legacy_gpu",
+      "complete_ns": 3531961242,
+      "encoding_ns": 2953304,
+      "exact_accepted": true,
+      "family": "wide",
+      "lane": "legacy_gpu",
+      "model": "wide-16-88371",
+      "native_ns": 2833282624,
+      "process_ns": 3471140192,
+      "reason": null,
+      "repetition": 1,
+      "response": {
+        "bytes": 12226363,
+        "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/gpu-opt-confirmation-v2/cells/wide-16-88371-r1-legacy_gpu/response.json",
+        "sha256": "4dd252a18989a1eedb50bdf5dc7ea1173de082e86610b0a19dbcc4cc5192aa60"
+      },
+      "status": "certificate_returned",
+      "strict_accepted": true,
+      "timely": true
+    }
+  ],
+  "schema": 1,
+  "selected_configuration": {
+    "backend": "lean",
+    "compact_trace": true,
+    "precision": "fp64",
+    "sparse": true,
+    "steps": 1000,
+    "width": 64
+  },
+  "slots": 48,
+  "status": "fresh_lean_gpu_comparison_complete",
+  "verified_bindings": 164
+}

@@ -1,0 +1,26 @@
+{
+  "checkpoint": {
+    "bytes": 11463,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/scale-report-v1/settled-checkpoint.json",
+    "sha256": "c8085073c1b4166709dbdfc792d1868fc3f280db7cab0756186de7af2c2f61e8"
+  },
+  "original_failed_settlement": {
+    "bytes": 375,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/scale-final-verify-v1.settlement.json",
+    "sha256": "59acc98db3c29f2cefd93477aeed01c4c559acde7c3ec1519d658b98f1aa9cb3"
+  },
+  "original_failure_regraded": false,
+  "read_only_seal": {
+    "bytes": 1277,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/scale-final-seal-v1/result.json",
+    "sha256": "4b3da849a7ca05bc7e4765a3531678642908a8c674b3d5cee07e4dd6855a9ca3"
+  },
+  "repeated_scientific_runs": 0,
+  "repeated_test_suites": 0,
+  "seal_settlement": {
+    "bytes": 368,
+    "path": "/workspace/AI-Optimizer/artifacts/lp-sp-pricing-v1/resources/scale-final-seal-v1.settlement.json",
+    "sha256": "cd9d7dca220df5082fdfedae367ef847330ff31d5e3a9f89ebb555e43ea5a899"
+  },
+  "status": "verification_and_resources_settled"
+}
