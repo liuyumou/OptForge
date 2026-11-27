@@ -1923,3 +1923,12 @@ Final verification passes 136 harness tests and 387 documentation pages, resolve
 records 459659.784173452 CPU / 55943.714704332 GPU seconds within the approved
 570000 / 68000 limits, with no active reservation or monitor. All 63 failed
 reservations retain their full charges. No fresh portable raw-data replay is claimed.
+
+
+## FP4x2 overhead follow-up
+
+The [FP4x2 implementation and CPU evaluation](lp-fp4x2-overhead.md) adds opt-in
+resident preparation, control-vector reuse, persistent certificate workspace and
+bounded proof/output overlap. GPU admission and complete-cost evaluation remain
+pending; all new defaults remain off. Historical scientific cohorts and their
+results above are unchanged.

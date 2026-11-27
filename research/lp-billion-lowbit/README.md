@@ -39,7 +39,8 @@ scaled CSR/CSC coefficients, spectral power iterations, vector norms and step
 calculation to FP64 CUDA kernels. Explicit rounded operations preserve the
 original reduction tree; no floating-point atomics are used. Upload, download,
 context creation and teardown count toward complete preparation cost. Preparation
-buffers are released before the solve device is allocated.
+buffers are released before the solve device is allocated unless the experimental
+`resident_preparation` option below transfers their ownership to the solve.
 
 The exact GPU domain has at most 1024 nonzeros per original row or column and
 Pock-Chambolle alpha 0 or 1. Empty geometry, longer lines, other exponents and
@@ -76,3 +77,37 @@ movement norms, original feasibility, long-line fallback and invalid inputs.
 The admission and campaign tools retain immutable images, complete sanitizers,
 resource supervision and all failed or uncertified outcomes. Performance claims
 must come from completed, independently audited cohorts in the benchmark report.
+
+
+Four experimental FP4x2 overhead options are available in the original-array
+`solve` interface. All default to false; the legacy document interface rejects
+them explicitly. They do not select a different algorithm or alter `tolerance`,
+control intervals, restart rules, final checks or public solver defaults.
+
+| `fast` option | Effect and prerequisites |
+| --- | --- |
+| `resident_preparation` | Transfer device CSR/CSC allocations from `gpu_preparation` through `gpu_packing` to execution; also transfer packed fragments and geometry. Host mirrors and original GPU kernels remain. With either GPU preparation stage disabled, reuse only allocations that stage actually supplies. |
+| `resident_control` | Reuse current device primal/dual and controller anchors at accepted, downloaded boundaries. Initialization, rollback and probes retain full uploads; reference re-anchoring remains exact. |
+| `certificate_workspace` | Reuse solve-local multiplier, enclosure and per-worker scratch capacity. Recompute every proof with the original arithmetic and reduction order; report retained capacity. |
+| `certificate_overlap` | Compute one snapshot's CPU proof while writing its witness. Use three proof workers plus the writer, join before any next update, and publish repaired duals after joining. This also enables certificate workspace. |
+
+For example, add the following fields to an existing admitted `fast` request:
+
+```json
+{
+  "resident_preparation": true,
+  "resident_control": true,
+  "certificate_workspace": true,
+  "certificate_overlap": false
+}
+```
+
+These are candidates awaiting GPU admission. Avoided-transfer counters report
+eliminated uploads, not measured speedups. Overlap's nested proof/output times
+are included in the exclusive `strict_certificate` phase and must not be added
+to complete time again. The independent cold final proof still applies.
+
+See the [implementation and evaluation report](../../docs/benchmarks/lp-fp4x2-overhead.md)
+and [protocol](../../docs/specifications/SPEC-0046-amendment-94.md) for CPU evidence,
+GPU gates and default-promotion requirements. The pricing implementation from
+PR #30 remains unchanged.

@@ -65,6 +65,13 @@ pub fn solve_with_fast(
     config.validate()?;
     if let Some(f) = fast {
         f.validate()?;
+        if f.resident_preparation
+            || f.resident_control
+            || f.certificate_workspace
+            || f.certificate_overlap
+        {
+            return Err("FP4x2 overhead options require the original-array interface".into());
+        }
         if f.certificate_scratch {
             return Err("certificate scratch requires the original-array interface".into());
         }

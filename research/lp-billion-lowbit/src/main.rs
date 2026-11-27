@@ -98,6 +98,13 @@ fn run() -> Result<()> {
             let fast: lp_billion_lowbit::fast_device::Config =
                 serde_json::from_value(request.get("fast").cloned().unwrap_or(json!({})))?;
             fast.validate()?;
+            if fast.resident_preparation
+                || fast.resident_control
+                || fast.certificate_workspace
+                || fast.certificate_overlap
+            {
+                return Err("FP4x2 overhead options require the original-array interface".into());
+            }
             if fast.certificate_scratch {
                 return Err("certificate scratch requires the original-array interface".into());
             }

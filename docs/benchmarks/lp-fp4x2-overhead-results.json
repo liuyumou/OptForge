@@ -1,0 +1,256 @@
+{
+  "availability": {
+    "gpu_admission": false,
+    "idle": false,
+    "sample": {
+      "end_ns": 9067421322487061,
+      "free": 22187802624,
+      "processes": {},
+      "processes_after": {},
+      "processes_before": {},
+      "start_ns": 9067421316458389,
+      "total": 102641958912,
+      "used": 80454156288,
+      "utilization": 0
+    },
+    "scope": "One read-only sample; no sustained-idle proof or device workload",
+    "status": "observed"
+  },
+  "cpu_microbenchmark": {
+    "default_promotion": false,
+    "image": {
+      "bytes": 2210,
+      "namespace": "evidence",
+      "path": "image-fp4x2-overhead-v1/binding.json",
+      "sha256": "7cba3a385c5b0ee06915eee0ffd15885429b622deb484fb89ec1a6391b72fd64"
+    },
+    "quality": {
+      "bytes": 3136,
+      "namespace": "evidence",
+      "path": "fp4x2-overhead-quality-v1/result.json",
+      "sha256": "202a00bf5b8e1331b3de6b466eca2b48f2a7bb0d7982bfda7ec950a60a921806"
+    },
+    "reason": "CPU microbenchmark is not complete FP4x2 solver evidence",
+    "rows": [
+      {
+        "case": "short_columns",
+        "columns": 65536,
+        "construction_ns": 37158146,
+        "nonzeros": 1048576,
+        "rows": 8192,
+        "samples": [
+          {
+            "bounded_ns": 39403689,
+            "exact": true,
+            "repetition": 0,
+            "retained_bytes": 3999616,
+            "scratch_ns": 28779451,
+            "workspace3_ns": 43134448,
+            "workspace4_ns": 31504131
+          },
+          {
+            "bounded_ns": 22210472,
+            "exact": true,
+            "repetition": 1,
+            "retained_bytes": 3999616,
+            "scratch_ns": 19850388,
+            "workspace3_ns": 25520938,
+            "workspace4_ns": 17834118
+          },
+          {
+            "bounded_ns": 22936617,
+            "exact": true,
+            "repetition": 2,
+            "retained_bytes": 3999616,
+            "scratch_ns": 19774379,
+            "workspace3_ns": 25918667,
+            "workspace4_ns": 17541165
+          },
+          {
+            "bounded_ns": 22788504,
+            "exact": true,
+            "repetition": 3,
+            "retained_bytes": 3999616,
+            "scratch_ns": 19025020,
+            "workspace3_ns": 26709524,
+            "workspace4_ns": 18006740
+          },
+          {
+            "bounded_ns": 22794511,
+            "exact": true,
+            "repetition": 4,
+            "retained_bytes": 3999616,
+            "scratch_ns": 20504465,
+            "workspace3_ns": 26502677,
+            "workspace4_ns": 17989138
+          },
+          {
+            "bounded_ns": 26307753,
+            "exact": true,
+            "repetition": 5,
+            "retained_bytes": 3999616,
+            "scratch_ns": 18830121,
+            "workspace3_ns": 26189201,
+            "workspace4_ns": 19024769
+          }
+        ],
+        "scratch_over_workspace3_median": 0.740971462208738,
+        "scratch_over_workspace4_median": 1.0848034154785715
+      },
+      {
+        "case": "balanced",
+        "columns": 4096,
+        "construction_ns": 33383997,
+        "nonzeros": 1048576,
+        "rows": 4096,
+        "samples": [
+          {
+            "bounded_ns": 14580824,
+            "exact": true,
+            "repetition": 0,
+            "retained_bytes": 548864,
+            "scratch_ns": 12305305,
+            "workspace3_ns": 14783127,
+            "workspace4_ns": 12132441
+          },
+          {
+            "bounded_ns": 13152119,
+            "exact": true,
+            "repetition": 1,
+            "retained_bytes": 548864,
+            "scratch_ns": 12454065,
+            "workspace3_ns": 14322066,
+            "workspace4_ns": 11684084
+          },
+          {
+            "bounded_ns": 12954026,
+            "exact": true,
+            "repetition": 2,
+            "retained_bytes": 548864,
+            "scratch_ns": 12186452,
+            "workspace3_ns": 14408037,
+            "workspace4_ns": 11656395
+          },
+          {
+            "bounded_ns": 13032200,
+            "exact": true,
+            "repetition": 3,
+            "retained_bytes": 548864,
+            "scratch_ns": 12132269,
+            "workspace3_ns": 14509435,
+            "workspace4_ns": 20493240
+          },
+          {
+            "bounded_ns": 13221600,
+            "exact": true,
+            "repetition": 4,
+            "retained_bytes": 548864,
+            "scratch_ns": 22349443,
+            "workspace3_ns": 14652836,
+            "workspace4_ns": 12701626
+          },
+          {
+            "bounded_ns": 13139962,
+            "exact": true,
+            "repetition": 5,
+            "retained_bytes": 548864,
+            "scratch_ns": 12613105,
+            "workspace3_ns": 14454389,
+            "workspace4_ns": 11071012
+          }
+        ],
+        "scratch_over_workspace3_median": 0.8576905708581448,
+        "scratch_over_workspace4_median": 1.0556867408500374
+      },
+      {
+        "case": "long_columns",
+        "columns": 257,
+        "construction_ns": 25122595,
+        "nonzeros": 1048576,
+        "rows": 8192,
+        "samples": [
+          {
+            "bounded_ns": 40318490,
+            "exact": true,
+            "repetition": 0,
+            "retained_bytes": 753664,
+            "scratch_ns": 39384617,
+            "workspace3_ns": 38415676,
+            "workspace4_ns": 37767574
+          },
+          {
+            "bounded_ns": 39885148,
+            "exact": true,
+            "repetition": 1,
+            "retained_bytes": 753664,
+            "scratch_ns": 38114979,
+            "workspace3_ns": 36524921,
+            "workspace4_ns": 36896066
+          },
+          {
+            "bounded_ns": 40253864,
+            "exact": true,
+            "repetition": 2,
+            "retained_bytes": 753664,
+            "scratch_ns": 37294071,
+            "workspace3_ns": 37679880,
+            "workspace4_ns": 37557711
+          },
+          {
+            "bounded_ns": 40187441,
+            "exact": true,
+            "repetition": 3,
+            "retained_bytes": 753664,
+            "scratch_ns": 37368952,
+            "workspace3_ns": 36741608,
+            "workspace4_ns": 36876599
+          },
+          {
+            "bounded_ns": 39838274,
+            "exact": true,
+            "repetition": 4,
+            "retained_bytes": 753664,
+            "scratch_ns": 37646234,
+            "workspace3_ns": 38094872,
+            "workspace4_ns": 37613268
+          },
+          {
+            "bounded_ns": 40222856,
+            "exact": true,
+            "repetition": 5,
+            "retained_bytes": 753664,
+            "scratch_ns": 37883665,
+            "workspace3_ns": 36955844,
+            "workspace4_ns": 37266903
+          }
+        ],
+        "scratch_over_workspace3_median": 1.0210903445902397,
+        "scratch_over_workspace4_median": 1.0149506130395636
+      }
+    ],
+    "scope": "CPU certificate microbenchmark; no solver, certification acceptance or GPU utilization speedup claim",
+    "status": "passed"
+  },
+  "default_promotion": false,
+  "gpu_admission": false,
+  "limitation": "No GPU continuation, sanitizer or complete FP4x2 performance evidence; CPU component timings cannot promote defaults",
+  "preservation": {
+    "baseline_sources": 50,
+    "protected_sources": 472
+  },
+  "quality": {
+    "bytes": 3136,
+    "namespace": "evidence",
+    "path": "fp4x2-overhead-quality-v1/result.json",
+    "sha256": "202a00bf5b8e1331b3de6b466eca2b48f2a7bb0d7982bfda7ec950a60a921806"
+  },
+  "rust_tests": 73,
+  "scope_plan": {
+    "bytes": 84158,
+    "namespace": "evidence",
+    "path": "fp4x2-overhead-v1/plan.json",
+    "sha256": "a08933e9ae88e77321baa64afd93e1a9b3f46f8e1b54e26cb418284d1d64bc18"
+  },
+  "status": "CPU_validated_GPU_pending",
+  "strict_original_model_tolerance": 1e-09
+}

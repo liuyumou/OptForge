@@ -29,6 +29,9 @@ fn bound(b: f64, lower: bool, v: f64, magnitude: f64, t: f64) -> Result<bool> {
     Ok(violation <= finite(t + relative)?)
 }
 pub fn feasibility(a: &Original, x: &[f64], t: f64, parallel: bool) -> Result<(bool, f64)> {
+    feasibility_workers(a, x, t, if parallel { 4 } else { 1 })
+}
+fn feasibility_workers(a: &Original, x: &[f64], t: f64, workers: usize) -> Result<(bool, f64)> {
     let p = &a.program;
     if x.len() != p.column_count() || !t.is_finite() || t < 0. || x.iter().any(|v| !v.is_finite()) {
         return Err("candidate domain".into());
@@ -60,12 +63,17 @@ pub fn feasibility(a: &Original, x: &[f64], t: f64, parallel: bool) -> Result<(b
         })()
         .map_err(|e| e.to_string())
     };
-    if parallel && p.nonzeros() >= 65536 {
+    if workers > 1 && p.nonzeros() >= 65536 {
         let results = std::thread::scope(|scope| {
-            (0..4)
+            (0..workers)
                 .map(|w| {
                     let rows = &rows;
-                    scope.spawn(move || rows(p.row_count() * w / 4, p.row_count() * (w + 1) / 4))
+                    scope.spawn(move || {
+                        rows(
+                            p.row_count() * w / workers,
+                            p.row_count() * (w + 1) / workers,
+                        )
+                    })
                 })
                 .collect::<Vec<_>>()
                 .into_iter()
@@ -90,11 +98,17 @@ fn objective(a: &Original, x: &[f64]) -> Result<f64> {
     }
     finite(objective + a.offset)
 }
+pub(crate) struct DeferredAssessment {
+    value: Value,
+    repaired_dual: Option<Vec<f64>>,
+}
 pub struct Assessor<'a> {
     original: &'a Original,
     store: &'a Store,
     parallel: bool,
     certificate_scratch: bool,
+    workspace: Option<crate::certificate_workspace::Workspace>,
+    workers: usize,
     pub cached_calls: usize,
     pub cpu_feasibility_confirmations: usize,
 }
@@ -105,6 +119,8 @@ impl<'a> Assessor<'a> {
             store,
             parallel,
             certificate_scratch: false,
+            workspace: None,
+            workers: if parallel { 4 } else { 1 },
             cached_calls: 0,
             cpu_feasibility_confirmations: 0,
         }
@@ -113,6 +129,17 @@ impl<'a> Assessor<'a> {
     pub fn with_certificate_scratch(mut self, enabled: bool) -> Self {
         self.certificate_scratch = enabled;
         self
+    }
+    pub fn with_workspace(mut self, enabled: bool, workers: usize) -> Self {
+        assert!((1..=4).contains(&workers));
+        self.workers = if self.parallel { workers } else { 1 };
+        self.workspace = enabled.then(|| crate::certificate_workspace::Workspace::new(workers));
+        self
+    }
+    pub fn retained_workspace_bytes(&self) -> usize {
+        self.workspace
+            .as_ref()
+            .map_or(0, crate::certificate_workspace::Workspace::retained_bytes)
     }
     fn assess(
         &mut self,
@@ -128,9 +155,11 @@ impl<'a> Assessor<'a> {
         let device_feasible = gpu(x, tolerance)?;
         let (feasible, objective) = match device_feasible {
             Some(feasible) => (feasible, objective(self.original, x)?),
-            None => feasibility(self.original, x, tolerance, self.parallel)?,
+            None => feasibility_workers(self.original, x, tolerance, self.workers)?,
         };
-        let bound = if self.parallel && self.certificate_scratch {
+        let bound = if let Some(workspace) = &mut self.workspace {
+            workspace.certify(p, y)
+        } else if self.parallel && self.certificate_scratch {
             crate::scratch_certificate::certify(p, y)
         } else if self.parallel {
             crate::bounded_certificate::certify(p, y)
@@ -148,7 +177,7 @@ impl<'a> Assessor<'a> {
         // A GPU diagnostic can never grant certificate acceptance on its own.
         if device_feasible.is_some() && feasible && gap.as_ref().is_some_and(|g| g.closed) {
             let (host_feasible, host_objective) =
-                feasibility(self.original, x, tolerance, self.parallel)?;
+                feasibility_workers(self.original, x, tolerance, self.workers)?;
             self.cpu_feasibility_confirmations += 1;
             if !host_feasible || host_objective.to_bits() != objective.to_bits() {
                 return Err("GPU feasibility disagrees with independent CPU acceptance".into());
@@ -167,19 +196,41 @@ impl<'a> Assessor<'a> {
         x: &[f64],
         y: &[f64],
         t: f64,
-        mut gpu: impl FnMut(&[f64], f64) -> Result<Option<bool>>,
+        gpu: impl FnMut(&[f64], f64) -> Result<Option<bool>>,
     ) -> Result<Value> {
+        let result = self.evaluate_deferred(x, y, t, gpu)?;
+        self.publish(result)
+    }
+    pub(crate) fn evaluate_deferred(
+        &mut self,
+        x: &[f64],
+        y: &[f64],
+        t: f64,
+        mut gpu: impl FnMut(&[f64], f64) -> Result<Option<bool>>,
+    ) -> Result<DeferredAssessment> {
         self.cached_calls += 1;
+        let mut repaired_dual = None;
         let mut result = self.assess(x, y, t, &mut gpu)?;
         if result["feasible"] == true
             && result["bound"].is_null()
             && let Some((witness, corrections)) = crate::repair::propose(&self.original.program, y)
         {
             result = self.assess(x, &witness, t, &mut gpu)?;
-            result["certificate_dual_array"] = serde_json::to_value(self.store.write(&witness)?)?;
+            repaired_dual = Some(witness);
             result["dual_corrections"] = json!(corrections);
         }
-        Ok(result)
+        Ok(DeferredAssessment {
+            value: result,
+            repaired_dual,
+        })
+    }
+    pub(crate) fn publish(&self, mut result: DeferredAssessment) -> Result<Value> {
+        // One writer: publish repaired-dual arrays only after snapshot output ends.
+        if let Some(witness) = result.repaired_dual {
+            result.value["certificate_dual_array"] =
+                serde_json::to_value(self.store.write(&witness)?)?;
+        }
+        Ok(result.value)
     }
 }
 
@@ -261,6 +312,33 @@ mod tests {
                 .unwrap()["accepted"],
             false
         );
+        for workers in [1, 3, 4] {
+            let mut workspace =
+                Assessor::new(&original, &store, true).with_workspace(true, workers);
+            let (deferred, witness, _) = crate::assessment_overlap::run(
+                || {
+                    workspace
+                        .evaluate_deferred(&[0.5], &[0.], 1e-9, |_, _| Ok(Some(true)))
+                        .map_err(|e| e.to_string())
+                },
+                || store.endpoint(&[0.5], &[0.]).map_err(|e| e.to_string()),
+            )
+            .unwrap();
+            assert_eq!(workspace.publish(deferred).unwrap(), expected);
+            assert!(witness["primal"].is_object());
+            assert!(
+                workspace
+                    .evaluate_with_feasibility(&[2.], &[0.], 1e-9, |_, _| Ok(Some(true)))
+                    .is_err()
+            );
+            let retained = workspace.retained_workspace_bytes();
+            assert!(retained > 0);
+            assert_eq!(
+                workspace.evaluate(&[0.5], &[0.], 1e-9, false).unwrap(),
+                expected
+            );
+            assert_eq!(workspace.retained_workspace_bytes(), retained);
+        }
         std::fs::remove_dir_all(path).unwrap();
     }
 }

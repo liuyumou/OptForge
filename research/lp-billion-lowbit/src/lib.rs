@@ -29,11 +29,14 @@ mod prepared_feasibility;
 #[path = "../../../crates/optimizer-lp/src/reduce.rs"]
 mod reduce;
 pub mod repair;
+mod resident;
 
 pub mod array_assessment;
 pub mod array_input;
+mod assessment_overlap;
 pub mod billion;
 pub mod bounded_certificate;
+pub mod certificate_workspace;
 pub mod fast_device;
 pub mod gpu_tensor;
 pub mod scratch_certificate;

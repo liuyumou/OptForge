@@ -522,6 +522,10 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 host_certificates: false,
                 certificate_scratch: false,
                 final_assessment_reuse: false,
+                resident_preparation: false,
+                resident_control: false,
+                certificate_workspace: false,
+                certificate_overlap: false,
                 auto_schedule: false,
                 gpu_preparation: false,
                 gpu_packing: false,
@@ -544,6 +548,10 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 host_certificates: true,
                 certificate_scratch: false,
                 final_assessment_reuse: false,
+                resident_preparation: false,
+                resident_control: false,
+                certificate_workspace: false,
+                certificate_overlap: false,
                 auto_schedule: true,
                 gpu_preparation: false,
                 gpu_packing: false,
@@ -665,5 +673,32 @@ fn bounded_packing_matches_retained_reference_across_worker_batches() {
                 }
             }
         }
+    }
+}
+
+#[test]
+fn overhead_candidates_are_opt_in_and_array_only() {
+    use lp_billion_lowbit::fast_device::Config;
+    let defaults = serde_json::to_value(Config::default()).unwrap();
+    for name in [
+        "resident_preparation",
+        "resident_control",
+        "certificate_workspace",
+        "certificate_overlap",
+    ] {
+        assert!(defaults.get(name).is_none());
+        let enabled: Config = serde_json::from_value(json!({name:true})).unwrap();
+        let result = lp_billion_lowbit::gpu_tensor::solve_with_fast(
+            &model(5, 3),
+            &settings(Format::Fp4x2),
+            std::path::Path::new("missing-device-image"),
+            &Default::default(),
+            Some(&enabled),
+        );
+        assert_eq!(
+            result.unwrap_err().to_string(),
+            "FP4x2 overhead options require the original-array interface"
+        );
+        assert!(serde_json::from_value::<Config>(json!({name:1})).is_err());
     }
 }

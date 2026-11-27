@@ -3,7 +3,7 @@
 use crate::outward::Enclosure;
 use optimizer_lp::{Certificate, LinearProgram, NoBound, Range};
 
-fn endpoint(z: f64, range: Range, variable: Option<u32>) -> Result<Enclosure, NoBound> {
+pub(crate) fn endpoint(z: f64, range: Range, variable: Option<u32>) -> Result<Enclosure, NoBound> {
     if z == 0. {
         return Ok(Enclosure::ZERO);
     }
@@ -20,7 +20,7 @@ fn endpoint(z: f64, range: Range, variable: Option<u32>) -> Result<Enclosure, No
 // Compact successive levels in the existing buffer. The destination for a
 // completed chunk precedes every unread chunk, so compaction never overwrites
 // live input. Arithmetic and padding normalization match outward::sum exactly.
-fn sum_in_place(values: &mut [Enclosure]) -> Option<Enclosure> {
+pub(crate) fn sum_in_place(values: &mut [Enclosure]) -> Option<Enclosure> {
     if values.is_empty() {
         return Some(Enclosure::ZERO);
     }
@@ -307,6 +307,11 @@ mod tests {
                         3.25,
                     )
                     .unwrap();
+                    let mut workspaces = [
+                        crate::certificate_workspace::Workspace::new(1),
+                        crate::certificate_workspace::Workspace::new(3),
+                        crate::certificate_workspace::Workspace::new(4),
+                    ];
                     for value in [
                         -0.,
                         0.,
@@ -337,6 +342,26 @@ mod tests {
                             ),
                             (Err(a), Err(b)) => assert_eq!(a, b),
                             pair => panic!("certificate difference: {pair:?}"),
+                        }
+                        for workspace in &mut workspaces {
+                            match (optimizer_lp::certify(&p, &y), workspace.certify(&p, &y)) {
+                                (Ok(a), Ok(b)) => assert_eq!(
+                                    (
+                                        a.bound.to_bits(),
+                                        a.unadjusted.to_bits(),
+                                        a.allowance.to_bits(),
+                                        a.repaired
+                                    ),
+                                    (
+                                        b.bound.to_bits(),
+                                        b.unadjusted.to_bits(),
+                                        b.allowance.to_bits(),
+                                        b.repaired
+                                    )
+                                ),
+                                (Err(a), Err(b)) => assert_eq!(a, b),
+                                pair => panic!("workspace certificate difference: {pair:?}"),
+                            }
                         }
                         comparisons += 1;
                     }
