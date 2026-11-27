@@ -93,7 +93,15 @@ fn roundtrip(model: &Model) -> (Original, Store, std::path::PathBuf) {
     let manifest = Original::convert(model, &store).unwrap();
     let path = root.join("model.json");
     std::fs::write(&path, serde_json::to_vec(&manifest).unwrap()).unwrap();
-    (Original::load(&path, &store).unwrap(), store, root)
+    let original = Original::load(&path, &store).unwrap();
+    let parallel_store = Store::new(&root).unwrap().with_read_workers(4);
+    let (parallel, _) = Original::load_profiled(&path, &parallel_store, true).unwrap();
+    assert_eq!(original.program, parallel.program);
+    assert_eq!(
+        original.program.matrix_sha256(),
+        parallel.program.matrix_sha256()
+    );
+    (original, store, root)
 }
 #[test]
 fn original_arrays_preparation_and_certificates_match() {
@@ -176,4 +184,187 @@ fn malformed_chunks_and_shapes_are_refused() {
     assert!(store.read::<f64>(&endpoint, 3).is_err());
     drop(a);
     std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn parallel_chunks_keep_bits_and_ordered_corruption_refusals() {
+    use lp_billion_lowbit::array_input::Array;
+    let root = std::env::temp_dir().join(format!("parallel-chunks-{}", std::process::id()));
+    let serial = Store::new(&root).unwrap();
+    let parallel = Store::new(&root).unwrap().with_read_workers(4);
+    let values = (0..(1 << 19))
+        .map(|i| match i % 5 {
+            0 => -0.,
+            1 => f64::from_bits(i as u64),
+            _ => i as f64 / 17.,
+        })
+        .collect::<Vec<_>>();
+    let chunks = values
+        .chunks(1 << 16)
+        .map(|chunk| {
+            let bytes = chunk
+                .iter()
+                .flat_map(|v| v.to_le_bytes())
+                .collect::<Vec<_>>();
+            serial.put(&bytes).unwrap()
+        })
+        .collect::<Vec<_>>();
+    let array = Array {
+        dtype: "f64le".into(),
+        count: values.len(),
+        chunks,
+    };
+    let bits = |x: Vec<f64>| x.into_iter().map(f64::to_bits).collect::<Vec<_>>();
+    assert_eq!(
+        bits(serial.read(&array, values.len()).unwrap()),
+        bits(parallel.read(&array, values.len()).unwrap())
+    );
+    let first = root
+        .join("objects")
+        .join(format!("{}.bin", array.chunks[0].sha256));
+    let last = root
+        .join("objects")
+        .join(format!("{}.bin", array.chunks.last().unwrap().sha256));
+    std::fs::write(first, vec![0; array.chunks[0].bytes]).unwrap();
+    std::fs::write(last, [0u8]).unwrap();
+    assert_eq!(
+        serial
+            .read::<f64>(&array, values.len())
+            .unwrap_err()
+            .to_string(),
+        "object digest"
+    );
+    assert_eq!(
+        parallel
+            .read::<f64>(&array, values.len())
+            .unwrap_err()
+            .to_string(),
+        "object digest"
+    );
+    let mut bad = array.clone();
+    bad.chunks[0].bytes += 1;
+    assert!(parallel.read::<f64>(&bad, values.len()).is_err());
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn parallel_transpose_preserves_original_entry_bits_and_validation() {
+    use optimizer_core::ObjectiveSense;
+    use optimizer_lp::Range;
+    for (n, skew) in [(257usize, false), (8192, true), (8192, false)] {
+        let m = 8192;
+        let width = 128;
+        let mut offsets = vec![0];
+        let mut indices = Vec::new();
+        let mut values = Vec::new();
+        for row in 0..m {
+            let domain = if skew && row % 8 != 0 { 256 } else { n };
+            let mut cols = (0..width)
+                .map(|j| ((row * 17 + j) % domain) as u32)
+                .collect::<Vec<_>>();
+            cols.sort_unstable();
+            for &j in &cols {
+                values.push(if row % 2 == 0 {
+                    -0.
+                } else {
+                    f64::from_bits(j as u64 + 1)
+                });
+            }
+            indices.extend(cols);
+            offsets.push(values.len());
+        }
+        let build = |parallel: bool, indices: Vec<u32>, values: Vec<f64>| {
+            let constructor = if parallel {
+                LinearProgram::from_csr_parallel
+            } else {
+                LinearProgram::from_csr
+            };
+            constructor(
+                (0..n as u32).collect(),
+                vec![
+                    Range {
+                        lower: -2.,
+                        upper: 3.
+                    };
+                    n
+                ],
+                vec![
+                    Range {
+                        lower: -1.,
+                        upper: 2.
+                    };
+                    m
+                ],
+                offsets.clone(),
+                indices,
+                values,
+                &[0],
+                &[1.],
+                ObjectiveSense::Maximize,
+                -0.,
+            )
+        };
+        let serial = build(false, indices.clone(), values.clone()).unwrap();
+        let parallel = build(true, indices.clone(), values.clone()).unwrap();
+        assert_eq!(serial, parallel);
+        let bits = |p: &LinearProgram| {
+            p.column_major()
+                .arrays()
+                .2
+                .iter()
+                .map(|v| v.to_bits())
+                .collect::<Vec<_>>()
+        };
+        assert_eq!(bits(&serial), bits(&parallel));
+        for malformed in 0..3 {
+            let mut i = indices.clone();
+            let mut v = values.clone();
+            match malformed {
+                0 => i[0] = n as u32,
+                1 => i[1] = i[0],
+                _ => v[0] = f64::NAN,
+            }
+            assert_eq!(
+                build(false, i.clone(), v.clone()).unwrap_err(),
+                build(true, i, v).unwrap_err()
+            );
+        }
+    }
+}
+
+#[test]
+fn accelerated_cold_assessor_matches_original_command() {
+    use std::io::Write;
+    use std::process::{Command, Stdio};
+    for (n, m) in [(0, 0), (7, 11)] {
+        let model = fixture(n, m, "maximize", 0);
+        let (_, store, root) = roundtrip(&model);
+        let endpoint = store.endpoint(&vec![0.25; n], &vec![0.125; m]).unwrap();
+        let request = json!({"settings":json!({"format":"native","tolerance":1e-9,"iteration_limit":100,"check_interval":10,"reference_window":1,"wall_ms":60000,"equilibrate":false}),"endpoint":endpoint});
+        let run = |accelerated: bool| {
+            let mut command = Command::new(env!("CARGO_BIN_EXE_billion"));
+            command
+                .arg(if accelerated { "assess-fast" } else { "assess" })
+                .arg(root.join("model.json"))
+                .arg(&root);
+            if accelerated {
+                command.arg("--parallel-input");
+            }
+            let mut child = command
+                .stdin(Stdio::piped())
+                .stdout(Stdio::piped())
+                .stderr(Stdio::piped())
+                .spawn()
+                .unwrap();
+            writeln!(child.stdin.take().unwrap(), "{request}").unwrap();
+            let output = child.wait_with_output().unwrap();
+            assert!(output.status.success(), "{:?}", output);
+            let mut result: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+            result.as_object_mut().unwrap().remove("input_ns");
+            result.as_object_mut().unwrap().remove("input_profile");
+            result
+        };
+        assert_eq!(run(false), run(true));
+        std::fs::remove_dir_all(root).unwrap();
+    }
 }

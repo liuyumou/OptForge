@@ -32,6 +32,27 @@ impl Runtime {
     fn reset(&mut self, s: &crate::control::Fp64State) -> Result<()> {
         dispatch!(self, d, d.reset(s))
     }
+    fn reset_current(&mut self, s: &crate::control::Fp64State) -> Result<()> {
+        match self {
+            Self::Fast(d) => d.reset_current(s),
+            Self::Local(d) => d.reset(s),
+        }
+    }
+    fn gpu_merit_current(&mut self, step: f64, weight: f64) -> Result<Option<f64>> {
+        match self {
+            Self::Fast(d) => d.gpu_merit_current(step, weight),
+            Self::Local(_) => Ok(None),
+        }
+    }
+    fn gpu_movements_current(
+        &mut self,
+        s: &crate::control::Fp64State,
+    ) -> Result<Option<(f64, f64)>> {
+        match self {
+            Self::Fast(d) => d.gpu_movements_current(s),
+            Self::Local(_) => Ok(None),
+        }
+    }
     fn set_format(&mut self, f: Format) -> Result<()> {
         dispatch!(self, d, d.set_format(f))
     }
@@ -40,6 +61,17 @@ impl Runtime {
     }
     fn endpoint(&self) -> Result<(Vec<f64>, Vec<f64>)> {
         dispatch!(self, d, d.endpoint())
+    }
+    fn endpoint_into(&self, x: &mut [f64], y: &mut [f64]) -> Result<()> {
+        match self {
+            Self::Fast(d) => d.endpoint_into(x, y),
+            Self::Local(d) => {
+                let (px, py) = d.endpoint()?;
+                x.copy_from_slice(&px);
+                y.copy_from_slice(&py);
+                Ok(())
+            }
+        }
     }
     fn work(&self) -> Result<[u64; 4]> {
         dispatch!(self, d, d.work())
@@ -99,12 +131,33 @@ pub fn solve(
     // No optional bound tightening is applied to this canonical-array path.
     // Certificates continue to use the supplied original bounds, including infinities.
     let mut assessor = crate::array_assessment::Assessor::new(original, store, true)
-        .with_certificate_scratch(fast_config.certificate_scratch);
+        .with_certificate_scratch(fast_config.certificate_scratch)
+        .with_workspace(
+            fast_config.certificate_workspace || fast_config.certificate_overlap,
+            if fast_config.certificate_overlap {
+                3
+            } else {
+                4
+            },
+        )
+        .with_exact_product(
+            fast_config.exact_certificate,
+            if fast_config.certificate_overlap {
+                3
+            } else {
+                4
+            },
+        );
+    let mut residency = None;
     let mut gpu_preparation = None;
     let engine = if fast.is_some_and(|f| f.gpu_preparation) {
         let preparation_image = image.with_file_name("prepare.cubin");
-        let (engine, metrics) =
-            crate::gpu_prepare::engine(program, control_settings.lp(), &preparation_image)?;
+        let (engine, metrics) = crate::gpu_prepare::engine_with_residency(
+            program,
+            control_settings.lp(),
+            &preparation_image,
+            fast_config.resident_preparation.then_some(&mut residency),
+        )?;
         gpu_preparation = Some(metrics);
         engine
     } else if fast.is_some_and(|f| f.host_preparation) {
@@ -124,8 +177,12 @@ pub fn solve(
     profile.enter(Phase::Packing);
     let mut gpu_packing = None;
     let packed = if gpu_pack {
-        let (packed, metrics) =
-            crate::gpu_packing::prepare(&op, config, &image.with_file_name("pack.cubin"))?;
+        let (packed, metrics) = crate::gpu_packing::prepare_with_residency(
+            &op,
+            config,
+            &image.with_file_name("pack.cubin"),
+            fast_config.resident_preparation.then_some(&mut residency),
+        )?;
         gpu_packing = Some(metrics);
         packed
     } else if settings.format.components() > 0 {
@@ -149,7 +206,7 @@ pub fn solve(
     let setup_started = Instant::now();
     profile.enter(Phase::DeviceSetup);
     let device = if let Some(f) = fast {
-        Runtime::Fast(Box::new(crate::fast_device::Device::new(
+        Runtime::Fast(Box::new(crate::fast_device::Device::new_with_residency(
             &engine,
             &op,
             packed.as_ref(),
@@ -157,6 +214,7 @@ pub fn solve(
             selected_format,
             config,
             f,
+            residency,
         )?))
     } else {
         Runtime::Local(Box::new(LocalDevice::new(
@@ -167,6 +225,10 @@ pub fn solve(
             selected_format,
             config,
         )?))
+    };
+    let avoided_upload_bytes = match &device {
+        Runtime::Fast(d) => d.avoided_upload_bytes,
+        _ => 0,
     };
     let fast_shapes = match &device {
         Runtime::Fast(d) => Some(d.shapes()),
@@ -207,6 +269,22 @@ pub fn solve(
                     engine.projected_residual(x, y, w)
                 }
             };
+            // This closure is used only after endpoint download. Initialization,
+            // restoration and reference probes use the original upload path.
+            let current_merit_value = |x: &[f64], y: &[f64], weight| {
+                if fast_config.resident_control {
+                    let result = device.borrow_mut().gpu_merit_current(engine.step(), weight);
+                    match result {
+                        Ok(Some(value)) => return value,
+                        Ok(None) => {}
+                        Err(error) => {
+                            *gpu_error.borrow_mut() = Some(error.to_string());
+                            return f64::INFINITY;
+                        }
+                    }
+                }
+                merit(x, y, weight)
+            };
             let mut control = Fp64Controller::new_with_merit(&engine, merit);
             if let Some(error) = gpu_error.borrow_mut().take() {
                 return Err(error.into());
@@ -228,10 +306,13 @@ pub fn solve(
             let mut work_before = [0u64; 4];
             let mut last_certificate = 0;
             let mut last_assessed_state = None;
+            let mut checkpoint_slot = None;
             let mut faulted = false;
             let mut status = "limit";
             let mut execution_ns = 0;
             let mut assessment_ns = 0;
+            let mut overlap_timing = crate::assessment_overlap::Timing::default();
+            let mut overlap_calls = 0;
             let mut recovery_ns = 0;
             let index = |f| match f {
                 Format::Native => 0,
@@ -256,7 +337,13 @@ pub fn solve(
                 // Device state is accepted only at a complete host assessment boundary.
                 let checkpoint_work = work_before;
                 profile.enter(Phase::Checkpoint);
-                let checkpoint = control.checkpoint();
+                if fast_config.host_state_reuse {
+                    control.checkpoint_reusing(&mut checkpoint_slot);
+                } else {
+                    drop(checkpoint_slot.take());
+                    checkpoint_slot = Some(control.checkpoint());
+                }
+                let checkpoint = checkpoint_slot.as_ref().expect("control snapshot");
                 profile.enter(Phase::Bookkeeping);
                 let before_error = current_merit;
                 let limit = crate::merit::local_budget(before_error);
@@ -318,11 +405,16 @@ pub fn solve(
                 }
                 if !rejected && !interrupted {
                     profile.enter(Phase::Download);
-                    let (x, y) = device.borrow().endpoint()?;
+                    if fast_config.host_state_reuse {
+                        let (cx, cy, _, _) = control.buffers();
+                        device.borrow().endpoint_into(cx, cy)?;
+                    } else {
+                        let (x, y) = device.borrow().endpoint()?;
+                        let (cx, cy, _, _) = control.buffers();
+                        cx.copy_from_slice(&x);
+                        cy.copy_from_slice(&y);
+                    }
                     profile.enter(Phase::Bookkeeping);
-                    let (cx, cy, _, _) = control.buffers();
-                    cx.copy_from_slice(&x);
-                    cy.copy_from_slice(&y);
                 }
                 execution_ns += execution_start.elapsed().as_nanos();
                 profile.enter(Phase::Accounting);
@@ -332,7 +424,7 @@ pub fn solve(
                 if !rejected && !interrupted {
                     let s = control.state();
                     profile.enter(Phase::Merit);
-                    let error = merit(&s.primal, &s.dual, s.weight);
+                    let error = current_merit_value(&s.primal, &s.dual, s.weight);
                     if let Some(error) = gpu_error.borrow_mut().take() {
                         return Err(error.into());
                     }
@@ -348,7 +440,11 @@ pub fn solve(
                     work_before = work_after;
                     let recovery_start = Instant::now();
                     profile.enter(Phase::Recovery);
-                    control.restore(&checkpoint)?;
+                    if fast_config.host_state_reuse {
+                        control.restore_reusing(checkpoint)?;
+                    } else {
+                        control.restore(checkpoint)?;
+                    }
                     let exact = checkpoint.matches_state(control.state());
                     profile.enter(Phase::Upload);
                     device.borrow_mut().reset(control.state())?;
@@ -386,26 +482,51 @@ pub fn solve(
                     profile.enter(Phase::Unscale);
                     let endpoint = control.iterate();
                     profile.enter(Phase::Certificate);
-                    let certificate = assessor.evaluate_with_feasibility(
-                        &endpoint.primal,
-                        &endpoint.dual,
-                        settings.tolerance,
-                        |x, t| device.borrow_mut().gpu_feasible(x, t),
-                    )?;
+                    let (certificate, witness) = if fast_config.certificate_overlap {
+                        let (certificate, witness, timing) = assessor.evaluate_overlapped(
+                            &endpoint.primal,
+                            &endpoint.dual,
+                            settings.tolerance,
+                            |x, t| device.borrow_mut().gpu_feasible(x, t),
+                        )?;
+                        overlap_timing.proof_ns += timing.proof_ns;
+                        overlap_timing.witness_ns += timing.witness_ns;
+                        overlap_timing.wall_ns += timing.wall_ns;
+                        overlap_calls += 1;
+                        (certificate, witness)
+                    } else {
+                        let certificate = assessor.evaluate_with_feasibility(
+                            &endpoint.primal,
+                            &endpoint.dual,
+                            settings.tolerance,
+                            |x, t| device.borrow_mut().gpu_feasible(x, t),
+                        )?;
+                        profile.enter(Phase::Witness);
+                        (
+                            certificate,
+                            store.endpoint(&endpoint.primal, &endpoint.dual)?,
+                        )
+                    };
                     last_assessed_state = Some((
                         control.generation(),
                         control.physical_iterations(),
                         control.state().iterations,
                     ));
-                    profile.enter(Phase::Witness);
+                    if fast_config.certificate_overlap {
+                        profile.enter(Phase::Witness);
+                    }
                     assessments.push(
             json!({"physical":control.physical_iterations(),"logical":control.state().iterations,
-            "endpoint":store.endpoint(&endpoint.primal, &endpoint.dual)?,"certificate":certificate}),
+            "endpoint":witness,"certificate":certificate}),
         );
                     profile.enter(Phase::Bookkeeping);
                     if control.expired() {
                         profile.enter(Phase::Recovery);
-                        control.restore(&checkpoint)?;
+                        if fast_config.host_state_reuse {
+                            control.restore_reusing(checkpoint)?;
+                        } else {
+                            control.restore(checkpoint)?;
+                        }
                         accepted[index(format)] -= done;
                         // A deadline invalidates this entire control interval, including low-bit work.
                         for j in 0..4 {
@@ -423,7 +544,11 @@ pub fn solve(
                 }
                 if control.expired() {
                     profile.enter(Phase::Recovery);
-                    control.restore(&checkpoint)?;
+                    if fast_config.host_state_reuse {
+                        control.restore_reusing(checkpoint)?;
+                    } else {
+                        control.restore(checkpoint)?;
+                    }
                     accepted[index(format)] -= done;
                     for j in 0..4 {
                         accepted_work[j] -= work_after[j] - checkpoint_work[j];
@@ -440,11 +565,15 @@ pub fn solve(
                             current_merit = if w.to_bits() == checked_weight.to_bits() {
                                 checked_merit
                             } else {
-                                merit(x, y, w)
+                                current_merit_value(x, y, w)
                             };
                             current_merit
                         },
-                        |state| match device.borrow_mut().gpu_movements(state) {
+                        |state| match if fast_config.resident_control {
+                            device.borrow_mut().gpu_movements_current(state)
+                        } else {
+                            device.borrow_mut().gpu_movements(state)
+                        } {
                             Ok(value) => value,
                             Err(error) => {
                                 *gpu_error.borrow_mut() = Some(error.to_string());
@@ -457,10 +586,17 @@ pub fn solve(
                     }
                 }
                 profile.enter(Phase::Upload);
-                device.borrow_mut().reset(control.state())?;
+                if fast_config.resident_control {
+                    device.borrow_mut().reset_current(control.state())?;
+                } else {
+                    device.borrow_mut().reset(control.state())?;
+                }
                 profile.enter(Phase::Bookkeeping);
                 assessment_ns += check_start.elapsed().as_nanos();
             }
+            // No rollback can follow the loop. Release all snapshot capacity
+            // before final assessment/output, including the all-off path.
+            drop(checkpoint_slot);
             let check_start = Instant::now();
             profile.enter(Phase::Unscale);
             let endpoint = control.iterate();
@@ -501,13 +637,22 @@ pub fn solve(
             let reference_work = device.borrow().reference_work();
             let device_bytes = device.borrow().allocated_bytes();
             let gpu_control = device.borrow().support_metrics();
+            let avoided_control_bytes = match &*device.borrow() {
+                Runtime::Fast(d) => d.avoided_control_bytes,
+                _ => 0,
+            };
             let teardown_start = Instant::now();
             profile.enter(Phase::Teardown);
             drop(device);
             let teardown_ns = teardown_start.elapsed().as_nanos();
             let cached_assessments = assessor.cached_calls;
+            let retained_workspace_bytes = assessor.retained_workspace_bytes();
             profile.enter(Phase::Witness);
-            let final_endpoint = store.endpoint(&endpoint.primal, &endpoint.dual)?;
+            let final_endpoint = if fast_config.host_state_reuse && reuse_final {
+                assessments.last().ok_or("missing final witness")?["endpoint"].clone()
+            } else {
+                store.endpoint(&endpoint.primal, &endpoint.dual)?
+            };
             profile.enter(Phase::Response);
             let mut result = json!({"schema_version":1,"kind":"general-lowbit-solve","execution":"sparse-tensor-local","settings":settings,"tensor_config":config,"selected_initial_format":selected_format,
         "reference_product_nnz":reference_work,
@@ -523,6 +668,25 @@ pub fn solve(
         "preparation_detail_ns":{"engine":engine_end,"operator":operator_end-engine_end,"packing":packing_end-operator_end,"control_initialization":prepared-packing_end},
         "cost_ns":{"host_preparation":prepared,"device_setup":setup,"execution":execution_ns,"assessment":assessment_ns,"recovery":recovery_ns,"device_teardown":teardown_ns}});
             if fast.is_some() {
+                if fast_config.host_state_reuse {
+                    result["host_state_reuse"] = json!({"checkpoint_buffers":true,"download_into_controller":true,"final_witness_reused":reuse_final});
+                }
+                if fast_config.certificate_overlap {
+                    result["certificate_overlap"] = json!({"calls":overlap_calls,"proof_worker_ns":overlap_timing.proof_ns,"caller_diagnostic_and_witness_ns":overlap_timing.witness_ns,"wall_ns":overlap_timing.wall_ns,"maximum_pending":1,"cpu_dual_overlaps_gpu_diagnostic":true,"speculative_updates":0,"exclusive_phase":"strict_certificate","nested_timings_not_additive":true});
+                }
+                if fast_config.certificate_workspace
+                    || fast_config.certificate_overlap
+                    || fast_config.exact_certificate
+                {
+                    result["certificate_workspace"] = json!({"retained_bytes":retained_workspace_bytes,"workers":if fast_config.certificate_overlap {3} else {4}});
+                }
+                if fast_config.resident_control {
+                    result["resident_control"] =
+                        json!({"avoided_upload_bytes":avoided_control_bytes});
+                }
+                if fast_config.resident_preparation {
+                    result["resident_preparation"] = json!({"avoided_upload_bytes":avoided_upload_bytes,"host_reference_mirrors_retained":true});
+                }
                 if let Some(mut metrics) = gpu_control {
                     metrics["cpu_feasibility_confirmations"] =
                         json!(assessor.cpu_feasibility_confirmations);

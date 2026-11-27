@@ -1,0 +1,480 @@
+{
+  "completed_job_cpu_ns": 1985548821052,
+  "completed_job_gpu_ns": 0,
+  "completed_jobs": [
+    {
+      "identity": "fp4x2-certificate-measure-v1",
+      "receipt": {
+        "bytes": 832,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-certificate-measure-v1.settlement.json",
+        "sha256": "7212230a70574531d1574e9e218f73e9dbbfa6c34a7105463c127034117999ec"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 48336060252,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "development",
+        "resource": {
+          "bytes": 5548,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-certificate-measure-v1.resource.json",
+          "sha256": "e2aa262f67e59c43f58277f49ae0d4f64e3cd0ffd6e3ca42fb660a6b5957b3a8"
+        },
+        "status": "passed",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9067333943615382,
+          "started_ns": 9067333573334532,
+          "value": {
+            "bytes": 9159641458,
+            "files": 104000
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 35,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-certificate-measure-v1.resource.json.storage.jsonl",
+          "sha256": "07ac8b48b94dc933663f711440043c4c0c61c5632a3b47db5d3575a3353ea3e7"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-availability-v1",
+      "receipt": {
+        "bytes": 834,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-availability-v1.settlement.json",
+        "sha256": "c5a7bf06742928c6b13eafc1e6c6f3fa74d151f2579f8253ad1bd9226ad96da8"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 40615968332,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "resource": {
+          "bytes": 5385,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-availability-v1.resource.json",
+          "sha256": "4c10c9f01ce58f603b46b7557a88963cc8f3780fe49545fde71f99194b30d83e"
+        },
+        "status": "passed",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9067421783000433,
+          "started_ns": 9067421410295847,
+          "value": {
+            "bytes": 9159961357,
+            "files": 104012
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 35,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-availability-v1.resource.json.storage.jsonl",
+          "sha256": "07ac8b48b94dc933663f711440043c4c0c61c5632a3b47db5d3575a3353ea3e7"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-check-v1",
+      "receipt": {
+        "bytes": 819,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-check-v1.settlement.json",
+        "sha256": "7af55af779a9a399598ed94915db149cfe9b66927901c6fd2b0b2e077a6499cb"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 480000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "resource": {
+          "bytes": 6377,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-check-v1.resource.json",
+          "sha256": "d5c831089114d1c9b0b7e5c4b936bce3e3c0091d08359932b4132a94942b29cd"
+        },
+        "status": "refused",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9066434073942186,
+          "started_ns": 9066433710035554,
+          "value": {
+            "bytes": 8984206868,
+            "files": 103460
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 35,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-check-v1.resource.json.storage.jsonl",
+          "sha256": "07ac8b48b94dc933663f711440043c4c0c61c5632a3b47db5d3575a3353ea3e7"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-check-v2",
+      "receipt": {
+        "bytes": 818,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-check-v2.settlement.json",
+        "sha256": "d00064d81da28320e320c8763e013909781d4ff6dbb88415f346001357b3421f"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 65087572512,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "resource": {
+          "bytes": 9269,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-check-v2.resource.json",
+          "sha256": "9900834e630151a591c7ad1e0b7741d0b78e56068b9e17964abb01278b0f1dbf"
+        },
+        "status": "passed",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9066532965863806,
+          "started_ns": 9066532604467196,
+          "value": {
+            "bytes": 9056259775,
+            "files": 103646
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 185,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-check-v2.resource.json.storage.jsonl",
+          "sha256": "61b213231d43fdac2697a6b3f0f781c365a2ea56c1c98d082c405168adafdd0f"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-cleanup-v1",
+      "receipt": {
+        "bytes": 822,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-cleanup-v1.settlement.json",
+        "sha256": "ff84c32fbf8f5f5ddf65dc444a6f872517678e3cef625e9dc38c4f9872742a4e"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 41275802784,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "cleanup",
+        "resource": {
+          "bytes": 5358,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-cleanup-v1.resource.json",
+          "sha256": "925bbb09178f26b05c6ab020f5644456e5d2dbfb769bceba1eba2a8e13301083"
+        },
+        "status": "passed",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9067933449137763,
+          "started_ns": 9067933140764207,
+          "value": {
+            "bytes": 9161253378,
+            "files": 104075
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 35,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-cleanup-v1.resource.json.storage.jsonl",
+          "sha256": "07ac8b48b94dc933663f711440043c4c0c61c5632a3b47db5d3575a3353ea3e7"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-environment-v1",
+      "receipt": {
+        "bytes": 839,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-environment-v1.settlement.json",
+        "sha256": "0e4c952db48278866e08da0eb9d87afb873da3a0d08e5f43af5592cb47566796"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 127560959408,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "implementation",
+        "resource": {
+          "bytes": 8628,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-environment-v1.resource.json",
+          "sha256": "b0cf9f4918262ae75dc818ab46c50697c040a321896e058678712a52921ec2af"
+        },
+        "status": "passed",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9067796350964259,
+          "started_ns": 9067795973912956,
+          "value": {
+            "bytes": 9330827529,
+            "files": 108327
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 635,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-environment-v1.resource.json.storage.jsonl",
+          "sha256": "7cc55c782f0a1f0cd00f5a5e4c592470a7151964b77308683f1dd420fa419b0b"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-permissions-v1",
+      "receipt": {
+        "bytes": 832,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-permissions-v1.settlement.json",
+        "sha256": "90d3bc8ed93ff022815a8748c6014da51c61221d7c85419119d55a89a689ca90"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 40623469056,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "resource": {
+          "bytes": 5382,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-permissions-v1.resource.json",
+          "sha256": "8d3b71af042021a48a477dda4b9ee189606949ccfd94270a2f8975cadf28c7bf"
+        },
+        "status": "passed",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9067279001461602,
+          "started_ns": 9067278696546189,
+          "value": {
+            "bytes": 9159329826,
+            "files": 103988
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 35,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-permissions-v1.resource.json.storage.jsonl",
+          "sha256": "07ac8b48b94dc933663f711440043c4c0c61c5632a3b47db5d3575a3353ea3e7"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-quality-v1",
+      "receipt": {
+        "bytes": 825,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-quality-v1.settlement.json",
+        "sha256": "ff8884dff4a89609f0e3e3bccd8a89f90568eadd3633ff3936e8a9c10e3309c0"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 317923726832,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "native",
+        "resource": {
+          "bytes": 26286,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-quality-v1.resource.json",
+          "sha256": "a24cd13cdb6ec6352d5f4459ab039c9706aa75f81106183ad56fd03eef59722d"
+        },
+        "status": "passed",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9066694872453222,
+          "started_ns": 9066694496885230,
+          "value": {
+            "bytes": 9152852953,
+            "files": 103956
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 1835,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-quality-v1.resource.json.storage.jsonl",
+          "sha256": "1556518013491ec648ec8420b6886a14beb3c846cfef6bd4fc51247e394efe5f"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-report-check-v1",
+      "receipt": {
+        "bytes": 836,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-report-check-v1.settlement.json",
+        "sha256": "ebb65b16996a94b7ce30183c504dd3bd93d0ffef5ffa75352398f1b9aaadec0e"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 720000000000,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "resource": {
+          "bytes": 5729,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-report-check-v1.resource.json",
+          "sha256": "d23661ca92aa7c3cca88cb2375fb21a8382e9dbf4b897461c1221689e4d713b8"
+        },
+        "status": "refused",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9067633276045377,
+          "started_ns": 9067632905305368,
+          "value": {
+            "bytes": 9160290074,
+            "files": 104027
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 35,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-report-check-v1.resource.json.storage.jsonl",
+          "sha256": "07ac8b48b94dc933663f711440043c4c0c61c5632a3b47db5d3575a3353ea3e7"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-report-check-v2",
+      "receipt": {
+        "bytes": 835,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-report-check-v2.settlement.json",
+        "sha256": "7f462171be35cc62ba29a51b9ffb88f1a0c5048d9f4027e40fb6779a1d7b5b62"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 63054098688,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "resource": {
+          "bytes": 8790,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-report-check-v2.resource.json",
+          "sha256": "1a3f36e59a52fb2a918b5b115df6a04eac1d2baceaa854952aabaf803c6f65a6"
+        },
+        "status": "passed",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9067827668937396,
+          "started_ns": 9067827352072055,
+          "value": {
+            "bytes": 9555299316,
+            "files": 109404
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 185,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-report-check-v2.resource.json.storage.jsonl",
+          "sha256": "32139f998077d0dc1298a35ef4600d8ef1f5a220071029f657de26235aa40139"
+        }
+      }
+    },
+    {
+      "identity": "fp4x2-overhead-seal-v1",
+      "receipt": {
+        "bytes": 818,
+        "namespace": "evidence",
+        "path": "resources/fp4x2-overhead-seal-v1.settlement.json",
+        "sha256": "c49949dfcf740d6165bb9407fe20412453da08794646fefcb3cd83cc9613d1da"
+      },
+      "settlement": {
+        "cleanup_empty": true,
+        "cpu_ns": 41071163188,
+        "gpu": false,
+        "gpu_ns": 0,
+        "overrun": false,
+        "phase": "reporting",
+        "resource": {
+          "bytes": 5347,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-seal-v1.resource.json",
+          "sha256": "9afdf1f4047a806279084cff131b4d0083d5c7bd69f0394f3b4611b7ac051804"
+        },
+        "status": "passed",
+        "storage_error": null,
+        "storage_final": {
+          "completed_ns": 9066994360802953,
+          "started_ns": 9066993997821617,
+          "value": {
+            "bytes": 9159011062,
+            "files": 103976
+          }
+        },
+        "storage_policy": "async-v1",
+        "storage_trace": {
+          "bytes": 35,
+          "namespace": "evidence",
+          "path": "resources/fp4x2-overhead-seal-v1.resource.json.storage.jsonl",
+          "sha256": "07ac8b48b94dc933663f711440043c4c0c61c5632a3b47db5d3575a3353ea3e7"
+        }
+      }
+    }
+  ],
+  "cpu_by_phase_including_final_reservation_ns": {
+    "admission": 66514602137352,
+    "cleanup": 1360736856672,
+    "development": 231552888654180,
+    "implementation": 5638745455424,
+    "native": 25132541600512,
+    "reporting": 158239891813876
+  },
+  "defaults_promoted": false,
+  "final_reporting_reservation": {
+    "bytes": 854,
+    "namespace": "evidence",
+    "path": "resources/fp4x2-overhead-final-report-v1.reservation.json",
+    "sha256": "bb9c6ae59266f4cd4f59d49c157c22c85357a6daafc42821ddd81b88ef5e2cf0"
+  },
+  "final_settlement_path": "resources/fp4x2-overhead-final-report-v1.settlement.json",
+  "gpu_by_phase_including_final_reservation_ns": {
+    "admission": 8520417107821,
+    "development": 47708619876854
+  },
+  "note": "This checkpoint lists settled jobs before its own reporting reservation; the final settlement supplies that last actual charge",
+  "preservation": {
+    "baseline_sources": 50,
+    "protected_sources": 472
+  },
+  "retained_failed_cpu_ns": 1200000000000,
+  "status": "CPU_validated_GPU_pending",
+  "strict_tolerance": 1e-09,
+  "verification": {
+    "bytes": 4184,
+    "namespace": "evidence",
+    "path": "fp4x2-overhead-report-check-v2/result.json",
+    "sha256": "c776bc76b0e98767a164f0d9c20777ce9193f45c4ff718538ee659b8d95e8e56"
+  }
+}

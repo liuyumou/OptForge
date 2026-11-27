@@ -59,26 +59,11 @@ fn capacity(bytes: usize) -> Result<usize> {
     }
     Ok(bytes)
 }
-struct Matrix {
-    offsets: DeviceBuffer<u32>,
-    indices: DeviceBuffer<u32>,
-    values: DeviceBuffer<f64>,
-    n: usize,
-}
-impl Matrix {
-    fn new(o: &Orientation, ctx: &Rc<Context>, s: &Stream) -> Result<Self> {
-        Ok(Self {
-            offsets: upload(ctx, s, &o.offsets)?,
-            indices: upload(ctx, s, &o.indices)?,
-            values: upload(ctx, s, &o.original)?,
-            n: o.offsets.len() - 1,
-        })
-    }
-}
+use crate::resident::{Matrix, Resident, Tiles as ResidentTiles};
 struct Gpu {
     ctx: Rc<Context>,
     module: Module,
-    stream: Stream,
+    stream: Rc<Stream>,
 }
 impl Gpu {
     fn call(&self, name: &str, grid: usize, args: &[A]) -> Result<()> {
@@ -209,7 +194,13 @@ impl Output {
             exponent_len,
         })
     }
-    fn finish(self, m: &Matrix, o: &Orientation, gpu: &Gpu) -> Result<Tiles> {
+    fn finish(
+        self,
+        m: &Matrix,
+        o: &Orientation,
+        gpu: &Gpu,
+        retain: bool,
+    ) -> Result<(Tiles, Option<ResidentTiles>)> {
         let covered = read(&self.covered, &gpu.stream, m.n)?;
         let mut remaining = Vec::with_capacity(m.n);
         for (i, &count) in covered.iter().enumerate() {
@@ -241,7 +232,7 @@ impl Output {
             ],
         )?;
         gpu.sync()?;
-        Ok(Tiles {
+        let host = Tiles {
             offsets: self.geometry.offsets,
             columns: self.geometry.columns,
             covered,
@@ -264,12 +255,31 @@ impl Output {
                 .into(),
                 ids: Vec::new(),
             },
-        })
+        };
+        // Host mirrors still serve canonical diagnostics and FP32 conversion.
+        // Transfer the device allocations instead of uploading their bytes again.
+        let resident = retain.then_some(ResidentTiles {
+            offsets: self.offsets,
+            columns: self.columns,
+            fragments: self.fragments,
+            exponents: self.exponents,
+            residual_offsets: d_offsets,
+            residual_indices: indices,
+        });
+        Ok((host, resident))
     }
 }
 /// Allocates no tile fragments or residual arrays when no tile is eligible.
 /// A bounded structural hash overflow explicitly falls back to canonical host packing.
 pub fn prepare(op: &Operator, c: &Config, image: &Path) -> Result<(Option<Packed>, Value)> {
+    prepare_with_residency(op, c, image, None)
+}
+pub(crate) fn prepare_with_residency(
+    op: &Operator,
+    c: &Config,
+    image: &Path,
+    mut retained: Option<&mut Option<Resident>>,
+) -> Result<(Option<Packed>, Value)> {
     c.validate()?;
     let started = Instant::now();
     let (m, n, z) = shape(op)?;
@@ -279,16 +289,27 @@ pub fn prepare(op: &Operator, c: &Config, image: &Path) -> Result<(Option<Packed
         return Err("pinned shared lease required for GPU packing".into());
     }
     let base_bytes = capacity(24 * z + 4 * (m + n + 2) + 8 * m.div_ceil(32) + 64)?;
-    let ctx = Rc::new(Context::create(DEVICE)?);
-    let stream = ctx.stream()?;
-    let module = ctx.load_module_file(image)?;
-    let gpu = Gpu {
-        ctx,
-        module,
-        stream,
+    let mut resident = match retained.as_deref_mut().and_then(Option::take) {
+        Some(r) => r,
+        None => Resident::new()?,
     };
-    let rows = Matrix::new(&op.rows, &gpu.ctx, &gpu.stream)?;
-    let columns = Matrix::new(&op.columns, &gpu.ctx, &gpu.stream)?;
+    let gpu = Gpu {
+        module: resident.ctx.load_module_file(image)?,
+        ctx: Rc::clone(&resident.ctx),
+        stream: Rc::clone(&resident.stream),
+    };
+    let rows = if let Some(rows) = resident.rows.take() {
+        resident.avoided_upload_bytes += rows.bytes();
+        rows
+    } else {
+        Matrix::new(&op.rows, &gpu.ctx, &gpu.stream)?
+    };
+    let columns = if let Some(columns) = resident.columns.take() {
+        resident.avoided_upload_bytes += columns.bytes();
+        columns
+    } else {
+        Matrix::new(&op.columns, &gpu.ctx, &gpu.stream)?
+    };
     let bad = upload(&gpu.ctx, &gpu.stream, &[0u32])?;
     gpu.sync()?;
     let uploaded = started.elapsed().as_nanos();
@@ -354,6 +375,7 @@ pub fn prepare(op: &Operator, c: &Config, image: &Path) -> Result<(Option<Packed
         drop(rows);
         drop(columns);
         drop(gpu);
+        drop(resident);
         let result = crate::tensor_prepare::prepare(op, c)?;
         return Ok((
             result,
@@ -369,6 +391,11 @@ pub fn prepare(op: &Operator, c: &Config, image: &Path) -> Result<(Option<Packed
     let tile_count = *offsets.last().unwrap() as usize;
     let detected = started.elapsed().as_nanos();
     if tile_count == 0 {
+        if let Some(retained) = retained {
+            resident.rows = Some(rows);
+            resident.columns = Some(columns);
+            *retained = Some(resident);
+        }
         return Ok((
             None,
             json!({"backend":"gpu","eligible_tiles":0,"skipped":true,"upload_ns":uploaded,
@@ -468,9 +495,19 @@ pub fn prepare(op: &Operator, c: &Config, image: &Path) -> Result<(Option<Packed
     )?;
     gpu.sync()?;
     let encoded = started.elapsed().as_nanos();
+    let (host_rows, row_tiles) = r.finish(&rows, &op.rows, &gpu, retained.is_some())?;
+    let (host_columns, column_tiles) =
+        col.finish(&columns, &op.columns, &gpu, retained.is_some())?;
+    if let Some(retained) = retained {
+        resident.rows = Some(rows);
+        resident.columns = Some(columns);
+        resident.row_tiles = row_tiles;
+        resident.column_tiles = column_tiles;
+        *retained = Some(resident);
+    }
     let result = Packed {
-        rows: r.finish(&rows, &op.rows, &gpu)?,
-        columns: col.finish(&columns, &op.columns, &gpu)?,
+        rows: host_rows,
+        columns: host_columns,
         components: c.components,
         tile_count,
         compact_fragments: c.compact_fragments,

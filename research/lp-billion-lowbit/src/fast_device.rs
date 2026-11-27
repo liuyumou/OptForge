@@ -36,6 +36,24 @@ pub struct Config {
     /// Reuse the final limit assessment only at the same solve-local state identity.
     #[serde(skip_serializing_if = "disabled")]
     pub final_assessment_reuse: bool,
+    /// Keep GPU preparation and packing allocations through execution.
+    #[serde(skip_serializing_if = "disabled")]
+    pub resident_preparation: bool,
+    /// Reuse explicitly identified current device control vectors.
+    #[serde(skip_serializing_if = "disabled")]
+    pub resident_control: bool,
+    /// Reuse host checkpoint and download storage; array solver only.
+    #[serde(skip_serializing_if = "disabled")]
+    pub host_state_reuse: bool,
+    /// Retain bounded certificate workspace for the lifetime of this solve.
+    #[serde(skip_serializing_if = "disabled")]
+    pub certificate_workspace: bool,
+    /// Exact 64-bit product classification with original scalar authority retained.
+    #[serde(skip_serializing_if = "disabled")]
+    pub exact_certificate: bool,
+    /// Overlap one immutable CPU proof with GPU diagnostics and witness output.
+    #[serde(skip_serializing_if = "disabled")]
+    pub certificate_overlap: bool,
     /// Split heavily tiled output groups to expose independent product CTAs.
     #[serde(skip_serializing_if = "disabled")]
     pub auto_schedule: bool,
@@ -66,6 +84,12 @@ impl Default for Config {
             host_certificates: false,
             certificate_scratch: false,
             final_assessment_reuse: false,
+            resident_preparation: false,
+            resident_control: false,
+            host_state_reuse: false,
+            certificate_workspace: false,
+            exact_certificate: false,
+            certificate_overlap: false,
             auto_schedule: false,
             gpu_preparation: false,
             gpu_packing: false,
@@ -161,6 +185,7 @@ impl Matrix {
             n: self.n,
         }
     }
+    #[allow(clippy::too_many_arguments)]
     fn new(
         ctx: &Rc<Context>,
         stream: &Stream,
@@ -168,21 +193,49 @@ impl Matrix {
         t: Option<&Tiles>,
         c: &Config,
         format: Format,
+        resident: Option<crate::resident::Matrix>,
+        tiles: Option<crate::resident::Tiles>,
     ) -> Result<Self> {
         let n = m.offsets.len() - 1;
         let residual = t.map_or(m, |v| &v.residual);
         let tile_count = t.map_or(0, |v| v.columns.len());
+        let (offsets, indices, original) = match resident {
+            Some(m) => (m.offsets, m.indices, m.values),
+            None => (
+                upload(ctx, stream, &m.offsets)?,
+                upload(ctx, stream, &m.indices)?,
+                upload(ctx, stream, &m.original)?,
+            ),
+        };
+        let (ro, ri, to, tc, fragments, ex) = match tiles {
+            Some(t) => (
+                t.residual_offsets,
+                t.residual_indices,
+                t.offsets,
+                t.columns,
+                t.fragments,
+                t.exponents,
+            ),
+            None => (
+                upload(ctx, stream, t.map_or(&[][..], |v| &v.residual.offsets))?,
+                upload(ctx, stream, t.map_or(&[][..], |v| &v.residual.indices))?,
+                upload(ctx, stream, t.map_or(&[][..], |v| &v.offsets))?,
+                upload(ctx, stream, t.map_or(&[][..], |v| &v.columns))?,
+                upload(ctx, stream, t.map_or(&[][..], |v| &v.fragments))?,
+                upload(ctx, stream, t.map_or(&[][..], |v| &v.exponents))?,
+            ),
+        };
         Ok(Self {
-            offsets: upload(ctx, stream, &m.offsets)?,
-            indices: upload(ctx, stream, &m.indices)?,
-            original: upload(ctx, stream, &m.original)?,
-            ro: upload(ctx, stream, t.map_or(&[][..], |v| &v.residual.offsets))?,
-            ri: upload(ctx, stream, t.map_or(&[][..], |v| &v.residual.indices))?,
+            offsets,
+            indices,
+            original,
+            ro,
+            ri,
             values: upload_proposal_values(ctx, stream, &residual.original, format)?,
-            to: upload(ctx, stream, t.map_or(&[][..], |v| &v.offsets))?,
-            tc: upload(ctx, stream, t.map_or(&[][..], |v| &v.columns))?,
-            fragments: upload(ctx, stream, t.map_or(&[][..], |v| &v.fragments))?,
-            ex: upload(ctx, stream, t.map_or(&[][..], |v| &v.exponents))?,
+            to,
+            tc,
+            fragments,
+            ex,
             partial: upload(
                 ctx,
                 stream,
@@ -231,7 +284,9 @@ pub struct Device {
     support: Option<crate::gpu_control::Support>,
     _ctx: Rc<Context>,
     module: Module,
-    stream: Stream,
+    stream: Rc<Stream>,
+    pub(crate) avoided_upload_bytes: usize,
+    pub(crate) avoided_control_bytes: usize,
     rows: Matrix,
     columns: Matrix,
     x: Vector,
@@ -265,6 +320,19 @@ impl Device {
         format: Format,
         t: &TensorConfig,
         c: &Config,
+    ) -> Result<Self> {
+        Self::new_with_residency(engine, op, packed, image, format, t, c, None)
+    }
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn new_with_residency(
+        engine: &Engine<'_>,
+        op: &Operator,
+        packed: Option<&Packed>,
+        image: &Path,
+        format: Format,
+        t: &TensorConfig,
+        c: &Config,
+        mut resident: Option<crate::resident::Resident>,
     ) -> Result<Self> {
         c.validate()?;
         t.validate()?;
@@ -312,9 +380,26 @@ impl Device {
             check_thread_domain(rows, lanes(matrix.original.len(), rows, c.lanes))?;
             check_thread_domain(rows, lanes(work, rows, c.lanes))?;
         }
-        let ctx = Rc::new(Context::create(DEVICE)?);
+        let ctx = match &resident {
+            Some(r) => Rc::clone(&r.ctx),
+            None => Rc::new(Context::create(DEVICE)?),
+        };
         let module = ctx.load_module_file(image)?;
-        let stream = ctx.stream()?;
+        let stream = match &resident {
+            Some(r) => Rc::clone(&r.stream),
+            None => Rc::new(ctx.stream()?),
+        };
+        let avoided_upload_bytes = resident.as_ref().map_or(0, |r| {
+            r.avoided_upload_bytes
+                + r.rows.as_ref().map_or(0, crate::resident::Matrix::bytes)
+                + r.columns.as_ref().map_or(0, crate::resident::Matrix::bytes)
+                + r.row_tiles
+                    .as_ref()
+                    .map_or(0, crate::resident::Tiles::bytes)
+                + r.column_tiles
+                    .as_ref()
+                    .map_or(0, crate::resident::Tiles::bytes)
+        });
         let (xl, xu) = engine.scaled_column_bounds();
         let (yl, yu) = engine.scaled_row_bounds();
         let result = Self {
@@ -330,7 +415,16 @@ impl Device {
             } else {
                 None
             },
-            rows: Matrix::new(&ctx, &stream, &op.rows, packed.map(|p| &p.rows), c, format)?,
+            rows: Matrix::new(
+                &ctx,
+                &stream,
+                &op.rows,
+                packed.map(|p| &p.rows),
+                c,
+                format,
+                resident.as_mut().and_then(|r| r.rows.take()),
+                resident.as_mut().and_then(|r| r.row_tiles.take()),
+            )?,
             columns: Matrix::new(
                 &ctx,
                 &stream,
@@ -338,6 +432,8 @@ impl Device {
                 packed.map(|p| &p.columns),
                 c,
                 format,
+                resident.as_mut().and_then(|r| r.columns.take()),
+                resident.as_mut().and_then(|r| r.column_tiles.take()),
             )?,
             x: Vector::new(&ctx, &stream, n, t.components)?,
             y: Vector::new(&ctx, &stream, m, t.components)?,
@@ -360,6 +456,8 @@ impl Device {
             combined: c.combined,
             adaptive_rows: c.adaptive_rows,
             allocated_bytes,
+            avoided_upload_bytes,
+            avoided_control_bytes: 0,
             reference_work: 0,
             nonzeros: op.rows.original.len() as u64,
             work: [0; 4],
@@ -455,8 +553,20 @@ impl Device {
         )
     }
     pub fn reset(&mut self, s: &Fp64State) -> Result<()> {
-        write(&mut self.x.state, &self.stream, &s.primal)?;
-        write(&mut self.y.state, &self.stream, &s.dual)?;
+        self.reset_impl(s, false)
+    }
+    /// Only the array solver may call this after a downloaded, accepted window.
+    /// Anchors, deltas, encodings and reference products are still rebuilt.
+    pub(crate) fn reset_current(&mut self, s: &Fp64State) -> Result<()> {
+        self.reset_impl(s, true)
+    }
+    fn reset_impl(&mut self, s: &Fp64State, current: bool) -> Result<()> {
+        if current {
+            self.avoided_control_bytes += 8 * (s.primal.len() + s.dual.len());
+        } else {
+            write(&mut self.x.state, &self.stream, &s.primal)?;
+            write(&mut self.y.state, &self.stream, &s.dual)?;
+        }
         write(&mut self.extra, &self.stream, &s.primal)?;
         write(&mut self.x.controller, &self.stream, &s.anchor_primal)?;
         write(&mut self.y.controller, &self.stream, &s.anchor_dual)?;
@@ -631,6 +741,14 @@ impl Device {
         self.work[3] += 2 * self.nonzeros * count;
         Ok(read(&self.flags, &self.stream, 1)?[0] == 0)
     }
+    pub(crate) fn endpoint_into(&self, x: &mut [f64], y: &mut [f64]) -> Result<()> {
+        if x.len() != self.x.n || y.len() != self.y.n {
+            return Err("endpoint dimensions".into());
+        }
+        self.x.state.copy_to(x, &self.stream)?;
+        self.y.state.copy_to(y, &self.stream)?;
+        Ok(())
+    }
     pub fn endpoint(&self) -> Result<(Vec<f64>, Vec<f64>)> {
         Ok((
             read(&self.x.state, &self.stream, self.x.n)?,
@@ -644,14 +762,30 @@ impl Device {
         step: f64,
         weight: f64,
     ) -> Result<Option<f64>> {
-        let Some(s) = self.support.as_mut().filter(|s| s.control && s.short_lines) else {
+        if !self
+            .support
+            .as_ref()
+            .is_some_and(|s| s.control && s.short_lines)
+        {
             return Ok(None);
-        };
+        }
         if x.len() != self.x.n || y.len() != self.y.n {
             return Err("control dimensions".into());
         }
         write(&mut self.x.state, &self.stream, x)?;
         write(&mut self.y.state, &self.stream, y)?;
+        self.merit_current(step, weight, false)
+    }
+    pub(crate) fn gpu_merit_current(&mut self, step: f64, weight: f64) -> Result<Option<f64>> {
+        self.merit_current(step, weight, true)
+    }
+    fn merit_current(&mut self, step: f64, weight: f64, reused: bool) -> Result<Option<f64>> {
+        let Some(s) = self.support.as_mut().filter(|s| s.control && s.short_lines) else {
+            return Ok(None);
+        };
+        if reused {
+            self.avoided_control_bytes += 8 * (self.x.n + self.y.n);
+        }
         Ok(Some(s.merit(
             &self.stream,
             self.rows.view(),
@@ -671,6 +805,15 @@ impl Device {
         )?))
     }
     pub fn gpu_movements(&mut self, state: &Fp64State) -> Result<Option<(f64, f64)>> {
+        self.movements(state, false)
+    }
+    pub(crate) fn gpu_movements_current(
+        &mut self,
+        state: &Fp64State,
+    ) -> Result<Option<(f64, f64)>> {
+        self.movements(state, true)
+    }
+    fn movements(&mut self, state: &Fp64State, current: bool) -> Result<Option<(f64, f64)>> {
         let Some(s) = self.support.as_mut().filter(|s| s.control) else {
             return Ok(None);
         };
@@ -681,10 +824,15 @@ impl Device {
         {
             return Err("movement dimensions".into());
         }
-        write(&mut self.x.state, &self.stream, &state.primal)?;
-        write(&mut self.y.state, &self.stream, &state.dual)?;
-        write(&mut self.x.controller, &self.stream, &state.anchor_primal)?;
-        write(&mut self.y.controller, &self.stream, &state.anchor_dual)?;
+        if current {
+            // Reset uploaded these controller anchors; movement precedes restart.
+            self.avoided_control_bytes += 16 * (self.x.n + self.y.n);
+        } else {
+            write(&mut self.x.state, &self.stream, &state.primal)?;
+            write(&mut self.y.state, &self.stream, &state.dual)?;
+            write(&mut self.x.controller, &self.stream, &state.anchor_primal)?;
+            write(&mut self.y.controller, &self.stream, &state.anchor_dual)?;
+        }
         Ok(Some(s.movements(
             &self.stream,
             &self.x.state,

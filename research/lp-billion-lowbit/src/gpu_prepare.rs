@@ -7,7 +7,7 @@ use crate::{
 use optimizer_cuda_sys::{
     Argument as A, Context, DeviceBuffer, LaunchConfig, Module, Stream, launch,
 };
-use optimizer_lp::{Compressed, LinearProgram, LpSettings};
+use optimizer_lp::{LinearProgram, LpSettings};
 use serde_json::{Value, json};
 use std::{path::Path, rc::Rc, time::Instant};
 
@@ -30,31 +30,11 @@ pub fn required_bytes(m: usize, n: usize, z: usize) -> Result<usize> {
     Ok(amount as usize)
 }
 
-struct Matrix {
-    offsets: DeviceBuffer<u32>,
-    indices: DeviceBuffer<u32>,
-    values: DeviceBuffer<f64>,
-    n: usize,
-}
-impl Matrix {
-    fn new(p: &Compressed, ctx: &Rc<Context>, s: &Stream) -> Result<Self> {
-        let (offsets, indices, values) = p.arrays();
-        let offsets = offsets
-            .iter()
-            .map(|&v| u32::try_from(v))
-            .collect::<std::result::Result<Vec<_>, _>>()?;
-        Ok(Self {
-            offsets: upload(ctx, s, &offsets)?,
-            indices: upload(ctx, s, indices)?,
-            values: upload(ctx, s, values)?,
-            n: p.lines(),
-        })
-    }
-}
+use crate::resident::{Matrix, Resident};
 struct Preparation {
     _ctx: Rc<Context>,
     module: Module,
-    stream: Stream,
+    stream: Rc<Stream>,
     rows: Matrix,
     columns: Matrix,
     r: DeviceBuffer<f64>,
@@ -79,11 +59,11 @@ impl Preparation {
         let (m, n) = (p.row_count(), p.column_count());
         required_bytes(m, n, p.nonzeros())?;
         let ctx = Rc::new(Context::create(DEVICE)?);
-        let stream = ctx.stream()?;
+        let stream = Rc::new(ctx.stream()?);
         let module = ctx.load_module_file(image)?;
         let out = Self {
-            rows: Matrix::new(p.row_major(), &ctx, &stream)?,
-            columns: Matrix::new(p.column_major(), &ctx, &stream)?,
+            rows: Matrix::compressed(p.row_major(), &ctx, &stream)?,
+            columns: Matrix::compressed(p.column_major(), &ctx, &stream)?,
             r: ctx.allocate(m)?,
             c: ctx.allocate(n)?,
             rm: ctx.allocate(m)?,
@@ -261,6 +241,14 @@ pub fn engine<'a>(
     s: LpSettings,
     image: &Path,
 ) -> Result<(Engine<'a>, Value)> {
+    engine_with_residency(p, s, image, None)
+}
+pub(crate) fn engine_with_residency<'a>(
+    p: &'a LinearProgram,
+    s: LpSettings,
+    image: &Path,
+    retained: Option<&mut Option<Resident>>,
+) -> Result<(Engine<'a>, Value)> {
     let started = Instant::now();
     let longest = [p.row_major(), p.column_major()]
         .into_iter()
@@ -310,7 +298,26 @@ pub fn engine<'a>(
     let state = read(&device.state, &device.stream, 3)?;
     let download = t.elapsed().as_nanos();
     let t = Instant::now();
-    drop(device);
+    if let Some(retained) = retained {
+        let Preparation {
+            _ctx: ctx,
+            stream,
+            rows,
+            columns,
+            ..
+        } = device;
+        *retained = Some(Resident {
+            ctx,
+            stream,
+            rows: Some(rows),
+            columns: Some(columns),
+            row_tiles: None,
+            column_tiles: None,
+            avoided_upload_bytes: 0,
+        });
+    } else {
+        drop(device);
+    }
     let teardown = t.elapsed().as_nanos();
     let base = optimizer_lp::Engine::from_device_preparation(
         p, s, row, column, values, transposed, state[2],
