@@ -1,81 +1,102 @@
-# AI Optimizer
+<p align="center">
+  <img src="docs/assets/readme-hero.svg" alt="ACEOpt — Low-precision compute. High-accuracy LP solving." width="1000">
+</p>
 
-AI Optimizer is a research project using the low-precision floating-point
-capabilities of modern GPUs to accelerate linear programming (LP), with plans to
-extend these techniques to other solver algorithms. We combine GPU computation
-with independent validation and exact certification.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-34d399?style=flat-square" alt="License: MIT"></a>
+  <a href="rust-toolchain.toml"><img src="https://img.shields.io/badge/Rust-1.93.1-f59e0b?style=flat-square" alt="Rust 1.93.1"></a>
+  <a href="docs/operations/build.md"><img src="https://img.shields.io/badge/platform-Linux_x86--64-94a3b8?style=flat-square" alt="Platform: Linux x86-64"></a>
+  <a href="wiki/status.md"><img src="https://img.shields.io/badge/status-research-38bdf8?style=flat-square" alt="Status: research"></a>
+</p>
 
-We implement key ideas from OpenAI's
-[Strongly Polynomial Linear Programming](https://github.com/openai/math/blob/main/preprints/Strongly-polynomial-linear-programming-November-24-2026/paper.pdf)
-with engineering optimizations for practical CPU/GPU execution. Our
-[certified evaluations](docs/benchmarks/lp-sp-pricing-comprehensive.md) show faster
-end-to-end solves than COPT on several tested synthetic LP families, including
-dense-wide, square and unscaled tall problems, counting model preparation and
-independent certification. These results use hybrid CPU/GPU paths with FP64
-proposals; low-precision solver acceleration remains an active research direction.
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="docs/benchmarks/lp-sp-pricing-comprehensive.md">Benchmarks</a> ·
+  <a href="#project-navigation">Documentation</a> ·
+  <a href="docs/plans/gpu-lp-precision-roadmap.md">Roadmap</a> ·
+  <a href="CONTRIBUTING.md">Contributing</a>
+</p>
+
+**ACEOpt is a research project focused on accelerating high-accuracy linear
+programming (LP) with the low-precision floating-point capabilities of modern
+NVIDIA GPUs.** Fast numerical computation is paired with independent checks
+against the original model.
+
+Our long-term goal is to build fast, reliable solvers that make full use of
+modern computing hardware. Built in Rust with CUDA backends, ACEOpt combines
+an optimization CLI with isolated research solvers.
+
+Our latest research implements key ideas from OpenAI's
+[Strongly Polynomial Linear Programming](https://github.com/openai/math/blob/main/preprints/Strongly-polynomial-linear-programming-November-24-2026/paper.pdf),
+with practical CPU/GPU engineering. On several tested synthetic LP families,
+it achieves lower complete certified-solve times than COPT, including preparation
+and independent proof. This implementation uses **FP64 proposals**; its reported
+gains come from algorithmic and CPU/GPU engineering and do not measure FP4
+acceleration. Our low-precision work is documented in separate
+[precision studies](docs/plans/gpu-lp-precision-roadmap.md).
+
+## Why ACEOpt?
+
+- **Low-precision compute, high-accuracy goals.** Explore FP32 and FP4 GPU
+  computation for faster LP solving, while retaining independent original-model
+  checks as the acceptance authority.
+- **Separate computation from trust.** Numerical methods propose solutions;
+  independent checks assess them against the original model. The pricing research
+  path uses exact feasibility and zero-gap certificates.
+- **Measure the whole solve.** Published comparisons include model preparation,
+  solving, endpoint construction, and independent certification.
+- **Keep results inspectable.** Versioned records capture configurations and
+  provenance. Reports retain deadlines, failed attempts, and slower cases.
+- **Build on clear interfaces.** A Rust workspace separates models, solver
+  backends, search, extensions, and GPU ownership.
 
 ## Quick start
 
-Supported development platform: Linux x86-64. CPU checks require Rust (installed
-through rustup), Python 3.11+, Git, util-linux `flock`, a C++17 compiler and the
-GMP 6 runtime (`libgmp.so.10`) for native CPU tests. Solving requires the
-pinned HiGHS 1.11.0 build, which needs CMake and a C++ compiler; NVIDIA drivers
-are optional for discovery and CUDA is not a build dependency.
+**Platform:** Linux x86-64. Install Rust through rustup (the repository pins
+1.93.1), Python 3.11+, Git, util-linux `flock`, CMake, and a C++17 compiler.
+Native research CPU tests also require the GMP 6 runtime (`libgmp.so.10`).
+The standard CPU build does not require a GPU or CUDA toolkit.
 
 ```bash
+git clone https://github.com/liuyumou/OptForge.git
+cd OptForge
+
 python3 -m venv .venv
 . .venv/bin/activate
 python3 -m pip install -r tools/requirements.txt
-cargo install cargo-deny --version 0.19.0 --locked
+
+# Build the pinned HiGHS 1.11.0 CPU backend and the Rust workspace.
 bash tools/setup_highs.sh
 cargo build --workspace --locked
-cargo run -p optimizer-cli -- hello
-cargo run -p optimizer-cli -- model validate --model examples/model-v1.json
+
+# Solve the included model.
 cargo run -p optimizer-cli -- solve \
-  --model examples/model-v1.json --config examples/solve-config-v1.json
-cargo run -p optimizer-cli -- search \
-  --model examples/model-v1.json --config examples/search-config-v3.json \
-  --output artifacts/run.json
-cargo run -p optimizer-cli -- verify \
-  --record artifacts/run.json --model examples/model-v1.json
-cargo run -p optimizer-cli -- gpu discover --dry-run
-bash tools/gpu_job.sh GPU-<uuid> \
-  cargo run -p optimizer-cli -- gpu probe --device GPU-<uuid>
-bash tools/check.sh
+  --model examples/model-v1.json \
+  --config examples/solve-config-v1.json
 ```
 
-The hello command prints `hello workspace`. Solving prints a version-1 solve
-record whose objective and violations are recomputed by the core, not echoed from
-the backend; exit 0 means a completed outcome, 1 a limit, 130 an interruption.
-Searching prints a version-1 run record whose embedded search record carries the
-executive's own proof claim, plus the revision, model fingerprint and input
-hashes needed to repeat it. Verifying re-runs that search from the record alone
-and exits 2 on any divergence, naming the field; agreement establishes
-determinism on this host, not optimality.
-Discovery prints JSON with `status: available` and devices sorted by UUID with their
-driver version, or `status: unavailable` and a diagnostic. It never creates a CUDA
-context. Probing does: it takes the shared host lease, creates a context on one named
-device, and reports the UUID the driver read back beside the one that was requested,
-along with the compute capability and the kernels the provisioned code object
-provides. A probe that cannot reach a device exits 2 and writes no report. Checks
-include a bounded process smoke measurement whose artifact is written to
-`artifacts/bootstrap-smoke.json`. A Git commit is required for that measured record.
+The example minimizes `2 x3 + x8 + 0.5` subject to `x3 + x8 >= 2`, with
+`x3` binary and `x8` continuous and nonnegative. The returned JSON record includes
+`"termination": "optimal"` and `"objective": 2.5`, with the objective and candidate
+feasibility recomputed by the core.
 
-`tools/setup_highs.sh` fetches and builds the pinned library under `target/native`,
-outside tracked source. `tools/check.sh` requires it; set
-`AI_OPTIMIZER_SKIP_NATIVE=1` to run without it, which reports that native
-acceptance was not covered.
+This quick start uses HiGHS and its recorded numerical tolerances. The exact
+certified pricing solver behind the benchmark results is a separate
+[research package](research/lp-sp-pricing/README.md), not a default CLI backend.
+
+Continue with [model validation](docs/tutorials/model-validation.md),
+[solving and result fields](docs/tutorials/solve-a-model.md), or
+[running and verifying a search](docs/tutorials/run-and-verify.md).
+For contributor checks, see [build and verification](docs/operations/build.md).
 
 ## Certified LP benchmarks
 
-Existing results for our engineering-optimized implementation of the paper's
-ideas on synthetic dyadic LPs, using an Intel Xeon Platinum 8457C, an NVIDIA
-RTX PRO 6000 Blackwell Server Edition, COPT 8.0.6 and four CPU slots.
-Cells show **median complete seconds (timely certified runs / 3 attempts)**,
-including model preparation, solving and independent certification. A dash
-means no timely certified result; lower times are better.
+Results below are for synthetic dyadic LPs on an **Intel Xeon Platinum 8457C +
+NVIDIA RTX PRO 6000 Blackwell Server Edition**, with **COPT 8.0.6** and four CPU
+slots. Each cell shows **median complete seconds (timely certified runs / 3
+attempts)**. Lower is better; a dash means no timely certified result.
 
-| Family | Nonzeros | Ours | COPT GPU | COPT CPU auto |
+| Family | Nonzeros | ACEOpt | COPT GPU | COPT CPU auto |
 | --- | ---: | ---: | ---: | ---: |
 | Dense-wide | 1M | 1.527 (3/3) | 2.469 (3/3) | — (0/3) |
 | Dense-wide | 4M | 3.281 (3/3) | 4.782 (3/3) | — (0/3) |
@@ -93,94 +114,78 @@ means no timely certified result; lower times are better.
 | Mixed-scaled-tall | 4M | 5.408 (3/3) | 4.446 (3/3) | — (0/3) |
 
 COPT GPU uses PDLP with presolve and crossover disabled; COPT CPU uses its
-automatic method. Medians cover each lane's timely certified runs, so rows with
-different success counts do not represent matched speedups. The scaled-tall
-rows are from the fresh evaluation; other rows retain their documented cohorts.
-See the [full report](docs/benchmarks/lp-sp-pricing-comprehensive.md) for solver
-settings, certificate definitions, individual timings and limitations.
+automatic method. Medians cover each lane's timely certified runs, so different
+success counts do not establish matched speedups. Scaled-tall rows are from the
+fresh evaluation; the other rows retain their documented cohorts. COPT GPU is
+faster on both scaled-tall cases.
+
+These experiments do not establish general superiority, a completed literal
+strongly polynomial solver, or low-precision end-to-end gains. See the
+[full implementation and performance report](docs/benchmarks/lp-sp-pricing-comprehensive.md)
+for settings, proofs, individual timings, and limits, or inspect the
+[comparison CSV](docs/benchmarks/lp-sp-pricing-pipeline-comparison.csv).
+
+## From proposal to proof
+
+The pricing research pipeline keeps numerical work and mathematical acceptance
+separate:
+
+1. **Prepare** the original model and select a path for its shape.
+2. **Propose** a solution with CPU factorization or eligible resident FP64 GPU
+   projection.
+3. **Recover** an exact primal/dual representation where supported.
+4. **Certify** feasibility and zero gap independently on the original model.
+
+Low-precision and billion-nonzero studies have their own configurations, checks,
+and recorded outcomes. Start with the [precision roadmap](docs/plans/gpu-lp-precision-roadmap.md)
+and [billion-nonzero study](docs/benchmarks/lp-billion.md) for that evidence.
+The public host/GPU LP backends use the separately documented
+[certification arithmetic and limits](docs/architecture/lp-certification.md).
 
 ## Project navigation
 
-- [Comprehensive LP implementation and COPT performance report](docs/benchmarks/lp-sp-pricing-comprehensive.md)
-- [Current status and milestones](wiki/status.md)
-- [Contributor and autonomous workflow](CONTRIBUTING.md)
-- [Architecture and ownership](docs/architecture/overview.md)
-- [Bootstrap specification](docs/specifications/SPEC-0000-bootstrap.md)
-- [Model and validation specification](docs/specifications/SPEC-0001-model-and-validation.md)
-- [Backend contract specification](docs/specifications/SPEC-0002-backend-contract.md)
-- [Solver executive specification](docs/specifications/SPEC-0003-solver-executive.md)
-- [Extension runtime specification](docs/specifications/SPEC-0004-extension-runtime.md)
-- [Run surface specification](docs/specifications/SPEC-0005-run-surface.md)
-- [Flow-shop scheduling specification](docs/specifications/SPEC-0008-flow-shop.md)
-- [Extension registry specification](docs/specifications/SPEC-0009-extension-registry.md)
-- [Validate a model and candidate](docs/tutorials/model-validation.md)
-- [Solve a model](docs/tutorials/solve-a-model.md)
-- [Run and verify a search](docs/tutorials/run-and-verify.md)
-- [Register an extension](docs/tutorials/register-an-extension.md)
-- [GPU discovery and lease contract](docs/specifications/SPEC-0006-gpu-lease.md)
-- [Heterogeneous computation specification](docs/specifications/SPEC-0010-heterogeneous-computation.md)
-- [GPU LP backend specification](docs/specifications/SPEC-0011-gpu-lp-backend.md)
-- [LP certification arithmetic and limits](docs/architecture/lp-certification.md)
-- [GPU LP performance roadmap and slices](docs/plans/gpu-lp-precision-roadmap.md)
-- [Current system diagnosis and cuOpt/COPT/Gurobi comparison](docs/benchmarks/lp-system-diagnosis-2026-11-10.md)
-- [Certified-performance design decision](docs/decisions/ADR-0047-certified-performance-roadmap.md)
-- [Optional cuOpt installation and acceptance status](docs/operations/cuopt.md)
-- [Precision architecture and component motivations](docs/plans/lp-precision-architecture-2026-10-12.md)
-- [Accepted CPU reference and bounded exact sparse-product executor](docs/specifications/SPEC-0020-lp-expansion-arithmetic.md)
-- [GPUP-EXEC exact executor, costs and retained failures](docs/benchmarks/lp-exact-executor-gpup-exec.md)
-- [GPUP-STATE original refusal and compact FMA challenge](docs/benchmarks/lp-expansion-state-gpup-state.md)
-- [Correction LP, anchors and assessment contract](docs/specifications/SPEC-0021-lp-refinement.md)
-- [Component and combination experiment design](docs/benchmarks/lp-precision-design-experiments.md)
-- [FP64-pipe root cause of the FP32 component slowdown](docs/benchmarks/lp-fp64-pipe-root-cause.md)
-- [GPUP-5C guards, fusion, double-float, tiers and corpus report](docs/benchmarks/lp-fp64-pipe-gpup5c.md)
-- [Accepted mixed-precision LP contract](docs/specifications/SPEC-0012-mixed-precision-lp.md)
-- [Accepted LP experiment protocol](docs/specifications/SPEC-0013-lp-precision-experiments.md)
-- [Artifact contract](docs/specifications/SPEC-0007-artifacts.md)
-- [Build and verification](docs/operations/build.md)
-- [GPU operations](docs/operations/gpu.md)
-- [First experiment tutorial](docs/tutorials/first-experiment.md)
-- [Benchmark policy](docs/benchmarks/protocol.md)
-- [Glossary](wiki/glossary.md)
-- [Backlog](state/backlog.yaml) and [active task](state/active-task.md)
-- [Changelog](CHANGELOG.md)
+| I want to… | Start here |
+| --- | --- |
+| Run my first model | [Validate a model](docs/tutorials/model-validation.md) · [Solve a model](docs/tutorials/solve-a-model.md) |
+| Reproduce a search | [Run and verify](docs/tutorials/run-and-verify.md) · [First experiment](docs/tutorials/first-experiment.md) |
+| Understand the results | [Certified LP report](docs/benchmarks/lp-sp-pricing-comprehensive.md) · [Benchmark policy](docs/benchmarks/protocol.md) |
+| Explore the implementation | [Architecture](docs/architecture/overview.md) · [Backend contract](docs/specifications/SPEC-0002-backend-contract.md) · [Research package](research/lp-sp-pricing/README.md) |
+| Work with a GPU | [GPU operations and leases](docs/operations/gpu.md) · [GPU LP backend](docs/specifications/SPEC-0011-gpu-lp-backend.md) |
+| Extend or contribute | [Contributing](CONTRIBUTING.md) · [Build and verification](docs/operations/build.md) · [Register an extension](docs/tutorials/register-an-extension.md) |
+| See what's next | [Status](wiki/status.md) · [Precision roadmap](docs/plans/gpu-lp-precision-roadmap.md) · [Backlog](state/backlog.yaml) · [Changelog](CHANGELOG.md) |
 
-The source [implementation plan](implementation-plan.md) defines the evidence
-stages and capability roadmap. The [research plan](ai-native-optimizer-plan.md)
-provides long-term direction. Their unvalidated research claims are hypotheses.
+The [wiki](wiki/README.md) provides navigation; `docs/` holds the authoritative
+contracts and evidence. The [implementation plan](implementation-plan.md) and
+[research plan](ai-native-optimizer-plan.md) describe longer-term goals, including
+unvalidated research hypotheses.
 
 ## Layout
 
-`crates/` contains the Rust workspace. optimizer-core owns original models,
-versioned JSON, objective recomputation, candidate feasibility with explicit
-tolerances, and the backend-neutral solve contract. optimizer-highs implements
-that contract against the pinned CPU HiGHS build. It and optimizer-cuda-sys are
-the only crates permitted to contain unsafe code. optimizer-solver owns the
-branch-and-bound executive and consumes the solve contract as a relaxation service without depending on any
-backend. optimizer-extension defines the extension declaration, authority model
-and guarded host; optimizer-extension-examples holds independently authored
-extensions, including deliberately hostile ones, and depends only on the
-published APIs. optimizer-registry resolves a recorded extension identity into a
-registration the executive accepts, refusing any claim it cannot check against the
-extension's own declaration; it names no extension itself, so the concrete provider
-table lives in the CLI. The CLI exposes validation, solving and GPU
-discovery/ownership, the reproducible run surface and the registry surface;
-optimizer-experiment owns run records, their provenance and the verification
-comparison. Remaining numerical crates reserve ownership boundaries without solver
-APIs. `schemas/`, `examples/`, `tests/`, and `tools/` provide executable contracts.
-optimizer-cuda-sys owns the CUDA driver boundary and optimizer-cuda owns discovery,
-the host lease, device selection and residency; `cuda/` holds the kernels, built out
-of tracked source by `tools/setup_cuda.sh`. `docs/` is authoritative; `wiki/`
-provides navigation. optimizer-lp owns the host LP method and certification without
-a device dependency; optimizer-lp-cuda owns the device backend. Quantized/FP8 and
-Tensor LP candidates exist as research implementations, with no supported precision
-preset. Python SDK, dynamically loaded native extensions, persistent checkpoint
-restart and broader performance suites remain planned, with limits recorded in
-[known failures](state/known-failures.md).
+| Path | What lives here |
+| --- | --- |
+| [`crates/`](crates/) | Rust models, solver backends, search executive, CLI, extensions, and run records |
+| [`cuda/`](cuda/) | GPU kernels and device-side computation |
+| [`research/`](research/) | Isolated experimental solvers and precision studies |
+| [`examples/`](examples/) · [`schemas/`](schemas/) | Example models, configurations, and versioned JSON contracts |
+| [`tests/`](tests/) · [`tools/`](tools/) | Contract checks, build tools, and validation tooling |
+| [`docs/`](docs/) · [`wiki/`](wiki/) | Specifications, tutorials, operations, benchmark evidence, and navigation |
+
+Python is currently repository tooling; a Python SDK is planned. Dynamically
+loaded native extensions and persistent checkpoint restart also remain planned.
+See [known limitations](state/known-failures.md).
+
+## Contributing
+
+Contributions to solver engineering, independent validation, reproducible
+benchmarks, and documentation are welcome. Start with the
+[contribution guide](CONTRIBUTING.md) and [backlog](state/backlog.yaml).
+Use [GitHub issues](https://github.com/liuyumou/OptForge/issues) for bugs and
+feature proposals, including the configuration and reproduction steps when
+reporting a numerical issue.
 
 ## License
 
-Project code and small generated fixtures use the [MIT license](LICENSE).
-HiGHS 1.11.0 is MIT licensed and is fetched and built from pinned, checksum
-verified upstream source; it is not vendored into tracked source. Other external
-datasets and native dependencies need their own license records before
-introduction. No third-party benchmark dataset is bundled.
+Project code and small generated fixtures are [MIT licensed](LICENSE).
+HiGHS 1.11.0 is also MIT licensed and is built from pinned, checksum-verified
+upstream source. Other external datasets and native dependencies require their
+own license records; no third-party benchmark dataset is bundled.
