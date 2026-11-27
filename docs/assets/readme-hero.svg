@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-labelledby="title desc">
+  <title id="title">ACEOpt</title>
+  <desc id="desc">Low-precision compute. High-accuracy LP solving. An abstract feasible region and a path toward its optimal vertex illustrate linear programming research.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#101e32"/><stop offset="1" stop-color="#080f1c"/>
+    </linearGradient>
+    <linearGradient id="region" x1="0" y1="1" x2="1" y2="0">
+      <stop stop-color="#34d399" stop-opacity="0.04"/><stop offset="1" stop-color="#34d399" stop-opacity="0.24"/>
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#b9d1ee" stroke-opacity="0.07"/>
+    </pattern>
+    <clipPath id="rounded"><rect width="1280" height="400" rx="20"/></clipPath>
+  </defs>
+  <g clip-path="url(#rounded)">
+    <rect width="1280" height="400" fill="url(#background)"/>
+    <rect x="702" width="578" height="400" fill="url(#grid)"/>
+    <path d="M702 0V400" stroke="#b9d1ee" stroke-opacity="0.08"/>
+    <g font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+      <g transform="translate(58 48)">
+        <path d="M17 0 34 10V30L17 40 0 30V10Z" fill="#34d399" fill-opacity="0.12" stroke="#34d399" stroke-width="1.5"/>
+        <path d="M8 28 17 12 26 28M12 23H22" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="50" y="25" font-size="13" font-weight="600" letter-spacing="2.5" fill="#a8bed5">OPTIMIZATION / RESEARCH</text>
+      </g>
+      <text x="55" y="172" font-size="86" font-weight="700" letter-spacing="-2.5" fill="#f0f6fc">ACEOpt</text>
+      <text x="58" y="225" font-size="27" fill="#d6e2ef">Low-precision compute.</text>
+      <text x="58" y="263" font-size="27" fill="#6ee7b7">High-accuracy LP solving.</text>
+      <path d="M58 305H635" stroke="#2a3c52"/>
+      <text x="58" y="339" font-size="12" font-weight="600" letter-spacing="1.8" fill="#99adc3">RUST + CUDA</text>
+      <circle cx="181" cy="334" r="2" fill="#34d399"/>
+      <text x="201" y="339" font-size="12" font-weight="600" letter-spacing="1.8" fill="#99adc3">LINEAR PROGRAMMING</text>
+      <circle cx="401" cy="334" r="2" fill="#34d399"/>
+      <text x="421" y="339" font-size="12" font-weight="600" letter-spacing="1.8" fill="#99adc3">OPEN RESEARCH</text>
+      <g fill="none">
+        <path d="M772 310H1214M799 326V56" stroke="#69819c" stroke-opacity="0.4" stroke-width="1.5"/>
+        <path d="M774 120 1188 293M875 44 1180 321M808 242 1169 65" stroke="#617b96" stroke-opacity="0.5" stroke-width="1.5"/>
+        <path d="M835 271 835 169 967 110 1102 163 1135 258 1038 289Z" fill="url(#region)" stroke="#34d399" stroke-opacity="0.75" stroke-width="2"/>
+        <path d="M850 271 909 239 939 190 1005 192 1053 171 1102 163" stroke="#6ee7b7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M996 43 1199 246" stroke="#6ee7b7" stroke-opacity="0.65" stroke-width="1.5" stroke-dasharray="5 7"/>
+        <circle cx="1102" cy="163" r="21" stroke="#6ee7b7" stroke-opacity="0.16" stroke-width="10"/>
+      </g>
+      <g fill="#101e32" stroke="#6ee7b7" stroke-width="2">
+        <circle cx="850" cy="271" r="4"/><circle cx="909" cy="239" r="4"/>
+        <circle cx="939" cy="190" r="4"/><circle cx="1005" cy="192" r="4"/>
+        <circle cx="1053" cy="171" r="4"/>
+      </g>
+      <circle cx="1102" cy="163" r="6" fill="#a7f3d0"/>
+      <text x="799" y="362" font-size="12" font-weight="500" letter-spacing="2.2" fill="#99adc3">PROPOSE → CHECK → CERTIFY</text>
+    </g>
+  </g>
+</svg>
