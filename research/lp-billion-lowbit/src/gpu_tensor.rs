@@ -67,6 +67,7 @@ pub fn solve_with_fast(
         f.validate()?;
         if f.resident_preparation
             || f.resident_control
+            || f.host_state_reuse
             || f.certificate_workspace
             || f.certificate_overlap
         {

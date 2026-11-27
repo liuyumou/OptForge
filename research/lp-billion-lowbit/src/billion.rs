@@ -62,6 +62,17 @@ impl Runtime {
     fn endpoint(&self) -> Result<(Vec<f64>, Vec<f64>)> {
         dispatch!(self, d, d.endpoint())
     }
+    fn endpoint_into(&self, x: &mut [f64], y: &mut [f64]) -> Result<()> {
+        match self {
+            Self::Fast(d) => d.endpoint_into(x, y),
+            Self::Local(d) => {
+                let (px, py) = d.endpoint()?;
+                x.copy_from_slice(&px);
+                y.copy_from_slice(&py);
+                Ok(())
+            }
+        }
+    }
     fn work(&self) -> Result<[u64; 4]> {
         dispatch!(self, d, d.work())
     }
@@ -287,6 +298,7 @@ pub fn solve(
             let mut work_before = [0u64; 4];
             let mut last_certificate = 0;
             let mut last_assessed_state = None;
+            let mut checkpoint_slot = None;
             let mut faulted = false;
             let mut status = "limit";
             let mut execution_ns = 0;
@@ -317,7 +329,13 @@ pub fn solve(
                 // Device state is accepted only at a complete host assessment boundary.
                 let checkpoint_work = work_before;
                 profile.enter(Phase::Checkpoint);
-                let checkpoint = control.checkpoint();
+                if fast_config.host_state_reuse {
+                    control.checkpoint_reusing(&mut checkpoint_slot);
+                } else {
+                    drop(checkpoint_slot.take());
+                    checkpoint_slot = Some(control.checkpoint());
+                }
+                let checkpoint = checkpoint_slot.as_ref().expect("control snapshot");
                 profile.enter(Phase::Bookkeeping);
                 let before_error = current_merit;
                 let limit = crate::merit::local_budget(before_error);
@@ -379,11 +397,16 @@ pub fn solve(
                 }
                 if !rejected && !interrupted {
                     profile.enter(Phase::Download);
-                    let (x, y) = device.borrow().endpoint()?;
+                    if fast_config.host_state_reuse {
+                        let (cx, cy, _, _) = control.buffers();
+                        device.borrow().endpoint_into(cx, cy)?;
+                    } else {
+                        let (x, y) = device.borrow().endpoint()?;
+                        let (cx, cy, _, _) = control.buffers();
+                        cx.copy_from_slice(&x);
+                        cy.copy_from_slice(&y);
+                    }
                     profile.enter(Phase::Bookkeeping);
-                    let (cx, cy, _, _) = control.buffers();
-                    cx.copy_from_slice(&x);
-                    cy.copy_from_slice(&y);
                 }
                 execution_ns += execution_start.elapsed().as_nanos();
                 profile.enter(Phase::Accounting);
@@ -409,7 +432,11 @@ pub fn solve(
                     work_before = work_after;
                     let recovery_start = Instant::now();
                     profile.enter(Phase::Recovery);
-                    control.restore(&checkpoint)?;
+                    if fast_config.host_state_reuse {
+                        control.restore_reusing(checkpoint)?;
+                    } else {
+                        control.restore(checkpoint)?;
+                    }
                     let exact = checkpoint.matches_state(control.state());
                     profile.enter(Phase::Upload);
                     device.borrow_mut().reset(control.state())?;
@@ -448,33 +475,17 @@ pub fn solve(
                     let endpoint = control.iterate();
                     profile.enter(Phase::Certificate);
                     let (certificate, witness) = if fast_config.certificate_overlap {
-                        // GPU diagnostics finish before the worker starts. The proof
-                        // still confirms original CPU feasibility before acceptance.
-                        let feasible = device
-                            .borrow_mut()
-                            .gpu_feasible(&endpoint.primal, settings.tolerance)?;
-                        let (assessment, witness, timing) = crate::assessment_overlap::run(
-                            || {
-                                assessor
-                                    .evaluate_deferred(
-                                        &endpoint.primal,
-                                        &endpoint.dual,
-                                        settings.tolerance,
-                                        |_, _| Ok(feasible),
-                                    )
-                                    .map_err(|e| e.to_string())
-                            },
-                            || {
-                                store
-                                    .endpoint(&endpoint.primal, &endpoint.dual)
-                                    .map_err(|e| e.to_string())
-                            },
+                        let (certificate, witness, timing) = assessor.evaluate_overlapped(
+                            &endpoint.primal,
+                            &endpoint.dual,
+                            settings.tolerance,
+                            |x, t| device.borrow_mut().gpu_feasible(x, t),
                         )?;
                         overlap_timing.proof_ns += timing.proof_ns;
                         overlap_timing.witness_ns += timing.witness_ns;
                         overlap_timing.wall_ns += timing.wall_ns;
                         overlap_calls += 1;
-                        (assessor.publish(assessment)?, witness)
+                        (certificate, witness)
                     } else {
                         let certificate = assessor.evaluate_with_feasibility(
                             &endpoint.primal,
@@ -503,7 +514,11 @@ pub fn solve(
                     profile.enter(Phase::Bookkeeping);
                     if control.expired() {
                         profile.enter(Phase::Recovery);
-                        control.restore(&checkpoint)?;
+                        if fast_config.host_state_reuse {
+                            control.restore_reusing(checkpoint)?;
+                        } else {
+                            control.restore(checkpoint)?;
+                        }
                         accepted[index(format)] -= done;
                         // A deadline invalidates this entire control interval, including low-bit work.
                         for j in 0..4 {
@@ -521,7 +536,11 @@ pub fn solve(
                 }
                 if control.expired() {
                     profile.enter(Phase::Recovery);
-                    control.restore(&checkpoint)?;
+                    if fast_config.host_state_reuse {
+                        control.restore_reusing(checkpoint)?;
+                    } else {
+                        control.restore(checkpoint)?;
+                    }
                     accepted[index(format)] -= done;
                     for j in 0..4 {
                         accepted_work[j] -= work_after[j] - checkpoint_work[j];
@@ -567,6 +586,9 @@ pub fn solve(
                 profile.enter(Phase::Bookkeeping);
                 assessment_ns += check_start.elapsed().as_nanos();
             }
+            // No rollback can follow the loop. Release all snapshot capacity
+            // before final assessment/output, including the all-off path.
+            drop(checkpoint_slot);
             let check_start = Instant::now();
             profile.enter(Phase::Unscale);
             let endpoint = control.iterate();
@@ -618,7 +640,11 @@ pub fn solve(
             let cached_assessments = assessor.cached_calls;
             let retained_workspace_bytes = assessor.retained_workspace_bytes();
             profile.enter(Phase::Witness);
-            let final_endpoint = store.endpoint(&endpoint.primal, &endpoint.dual)?;
+            let final_endpoint = if fast_config.host_state_reuse && reuse_final {
+                assessments.last().ok_or("missing final witness")?["endpoint"].clone()
+            } else {
+                store.endpoint(&endpoint.primal, &endpoint.dual)?
+            };
             profile.enter(Phase::Response);
             let mut result = json!({"schema_version":1,"kind":"general-lowbit-solve","execution":"sparse-tensor-local","settings":settings,"tensor_config":config,"selected_initial_format":selected_format,
         "reference_product_nnz":reference_work,
@@ -634,8 +660,11 @@ pub fn solve(
         "preparation_detail_ns":{"engine":engine_end,"operator":operator_end-engine_end,"packing":packing_end-operator_end,"control_initialization":prepared-packing_end},
         "cost_ns":{"host_preparation":prepared,"device_setup":setup,"execution":execution_ns,"assessment":assessment_ns,"recovery":recovery_ns,"device_teardown":teardown_ns}});
             if fast.is_some() {
+                if fast_config.host_state_reuse {
+                    result["host_state_reuse"] = json!({"checkpoint_buffers":true,"download_into_controller":true,"final_witness_reused":reuse_final});
+                }
                 if fast_config.certificate_overlap {
-                    result["certificate_overlap"] = json!({"calls":overlap_calls,"proof_worker_ns":overlap_timing.proof_ns,"witness_ns":overlap_timing.witness_ns,"wall_ns":overlap_timing.wall_ns,"maximum_pending":1,"speculative_updates":0,"exclusive_phase":"strict_certificate","nested_timings_not_additive":true});
+                    result["certificate_overlap"] = json!({"calls":overlap_calls,"proof_worker_ns":overlap_timing.proof_ns,"caller_diagnostic_and_witness_ns":overlap_timing.witness_ns,"wall_ns":overlap_timing.wall_ns,"maximum_pending":1,"cpu_dual_overlaps_gpu_diagnostic":true,"speculative_updates":0,"exclusive_phase":"strict_certificate","nested_timings_not_additive":true});
                 }
                 if fast_config.certificate_workspace || fast_config.certificate_overlap {
                     result["certificate_workspace"] = json!({"retained_bytes":retained_workspace_bytes,"workers":if fast_config.certificate_overlap {3} else {4}});

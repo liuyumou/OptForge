@@ -136,3 +136,11 @@ reservation, including both full failed charges, exact source preservation and
 phase accounting. Its own final reporting reservation is shown separately until
 that reservation settles. Temporary test dependencies and generated HTML copies
 are removed after validation; binaries and all small evidence remain available.
+
+
+## Subsequent component diagnosis
+
+The [parallel assessment follow-up](lp-fp4x2-pipeline.md) reviews the complete
+phase ledger and adds work-aware proof scheduling, host state reuse and actual
+CPU-proof/GPU-diagnostic overlap. It retains the original results above and keeps
+GPU admission and default promotion pending.

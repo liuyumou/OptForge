@@ -42,10 +42,13 @@ pub struct Config {
     /// Reuse explicitly identified current device control vectors.
     #[serde(skip_serializing_if = "disabled")]
     pub resident_control: bool,
+    /// Reuse host checkpoint and download storage; array solver only.
+    #[serde(skip_serializing_if = "disabled")]
+    pub host_state_reuse: bool,
     /// Retain bounded certificate workspace for the lifetime of this solve.
     #[serde(skip_serializing_if = "disabled")]
     pub certificate_workspace: bool,
-    /// One CPU certificate worker; immutable snapshots and bounded speculation.
+    /// Overlap one immutable CPU proof with GPU diagnostics and witness output.
     #[serde(skip_serializing_if = "disabled")]
     pub certificate_overlap: bool,
     /// Split heavily tiled output groups to expose independent product CTAs.
@@ -80,6 +83,7 @@ impl Default for Config {
             final_assessment_reuse: false,
             resident_preparation: false,
             resident_control: false,
+            host_state_reuse: false,
             certificate_workspace: false,
             certificate_overlap: false,
             auto_schedule: false,
@@ -732,6 +736,14 @@ impl Device {
         self.work[1] += covered * count;
         self.work[3] += 2 * self.nonzeros * count;
         Ok(read(&self.flags, &self.stream, 1)?[0] == 0)
+    }
+    pub(crate) fn endpoint_into(&self, x: &mut [f64], y: &mut [f64]) -> Result<()> {
+        if x.len() != self.x.n || y.len() != self.y.n {
+            return Err("endpoint dimensions".into());
+        }
+        self.x.state.copy_to(x, &self.stream)?;
+        self.y.state.copy_to(y, &self.stream)?;
+        Ok(())
     }
     pub fn endpoint(&self) -> Result<(Vec<f64>, Vec<f64>)> {
         Ok((

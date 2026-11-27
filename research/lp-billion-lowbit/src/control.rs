@@ -39,6 +39,26 @@ pub struct Fp64State {
     pub checked_iteration: u64,
 }
 
+impl Fp64State {
+    fn reuse_from(&mut self, source: &Self) {
+        let mut primal = std::mem::take(&mut self.primal);
+        let mut dual = std::mem::take(&mut self.dual);
+        let mut anchor_primal = std::mem::take(&mut self.anchor_primal);
+        let mut anchor_dual = std::mem::take(&mut self.anchor_dual);
+        primal.clone_from(&source.primal);
+        dual.clone_from(&source.dual);
+        anchor_primal.clone_from(&source.anchor_primal);
+        anchor_dual.clone_from(&source.anchor_dual);
+        *self = Self {
+            primal,
+            dual,
+            anchor_primal,
+            anchor_dual,
+            ..*source
+        };
+    }
+}
+
 /// Opaque in-memory checkpoint bound to the exact immutable engine instance.
 #[derive(Clone)]
 pub struct Fp64Checkpoint<'e, 'p> {
@@ -155,6 +175,17 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
         }
     }
 
+    /// Reuse snapshot allocations; every numerical field is refreshed exactly.
+    pub fn checkpoint_reusing(&self, slot: &mut Option<Fp64Checkpoint<'e, 'p>>) {
+        let _component_scope = optimizer_core::lp_cost::scope("checkpoint_copy");
+        if let Some(checkpoint) = slot {
+            checkpoint.engine = self.engine;
+            checkpoint.state.reuse_from(&self.state);
+        } else {
+            *slot = Some(self.checkpoint());
+        }
+    }
+
     /// Restore numerical state on the same immutable problem/settings instance.
     ///
     /// # Errors
@@ -165,6 +196,21 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
             return Err("checkpoint belongs to a different FP64 engine");
         }
         self.state = checkpoint.state.clone();
+        self.generation = self
+            .generation
+            .checked_add(1)
+            .expect("FP64 state generation exhausted");
+        Ok(())
+    }
+
+    pub fn restore_reusing(
+        &mut self,
+        checkpoint: &Fp64Checkpoint<'e, 'p>,
+    ) -> Result<(), &'static str> {
+        if !std::ptr::eq(self.engine, checkpoint.engine) {
+            return Err("checkpoint belongs to a different FP64 engine");
+        }
+        self.state.reuse_from(&checkpoint.state);
         self.generation = self
             .generation
             .checked_add(1)
@@ -392,5 +438,91 @@ impl<'e, 'p> Fp64Controller<'e, 'p> {
             iterations: self.state.iterations,
             restarts: self.state.restarts,
         }
+    }
+}
+
+#[cfg(test)]
+mod reuse_tests {
+    use super::*;
+    use optimizer_core::ObjectiveSense;
+    use optimizer_lp::{LinearProgram, LpSettings, Range};
+    fn program() -> LinearProgram {
+        LinearProgram::from_csr(
+            vec![0, 1],
+            vec![
+                Range {
+                    lower: -2.,
+                    upper: 3.
+                };
+                2
+            ],
+            vec![Range {
+                lower: -1.,
+                upper: 2.,
+            }],
+            vec![0, 2],
+            vec![0, 1],
+            vec![1., -1.],
+            &[0, 1],
+            &[1., 2.],
+            ObjectiveSense::Minimize,
+            0.,
+        )
+        .unwrap()
+    }
+    fn pointers(s: &Fp64State) -> [*const f64; 4] {
+        [
+            s.primal.as_ptr(),
+            s.dual.as_ptr(),
+            s.anchor_primal.as_ptr(),
+            s.anchor_dual.as_ptr(),
+        ]
+    }
+    #[test]
+    fn reused_snapshots_restore_every_bit_without_allocating_or_refunding_work() {
+        let p = program();
+        let e = Engine::new(&p, LpSettings::published(100, 10));
+        let mut c = Fp64Controller::new(&e);
+        let mut slot = None;
+        c.checkpoint_reusing(&mut slot);
+        let buffers = pointers(&slot.as_ref().unwrap().state);
+        c.physical_iterations = 17;
+        c.generation = 4;
+        let deadline = Instant::now();
+        c.set_deadline(Some(deadline));
+        for i in 0..5 {
+            c.state.primal[0] = -0.;
+            c.state.primal[1] = i as f64 + 0.25;
+            c.state.dual[0] = -3.25;
+            c.state.anchor_primal.fill(8.5);
+            c.state.anchor_dual.fill(-0.);
+            c.state.weight = 2.;
+            c.state.integral = -0.;
+            c.state.previous_error = Some(f64::from_bits(1));
+            c.state.anchor_error = 5.;
+            c.state.last_check_error = 7.;
+            c.state.iterations = i;
+            c.state.restarts = i + 1;
+            c.state.since_restart = i + 2;
+            c.state.checked_iteration = i + 3;
+            let expected = c.state.clone();
+            c.checkpoint_reusing(&mut slot);
+            let snapshot = slot.as_ref().unwrap();
+            assert!(snapshot.matches_state(&expected));
+            assert_eq!(pointers(&snapshot.state), buffers);
+            c.state.primal.fill(99.);
+            c.state.weight = 11.;
+            let destination = pointers(&c.state);
+            c.restore_reusing(snapshot).unwrap();
+            assert!(snapshot.matches_state(c.state()));
+            assert_eq!(destination, pointers(&c.state));
+            assert_eq!(c.physical_iterations(), 17);
+            assert_eq!(c.generation(), 5 + i);
+            assert!(c.expired_at(deadline));
+        }
+        let other = Engine::new(&p, LpSettings::published(100, 10));
+        let foreign = Fp64Controller::new(&other).checkpoint();
+        assert!(c.restore_reusing(&foreign).is_err());
+        assert_eq!(c.physical_iterations(), 17);
     }
 }

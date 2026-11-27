@@ -36,6 +36,8 @@ pub mod array_input;
 mod assessment_overlap;
 pub mod billion;
 pub mod bounded_certificate;
+#[doc(hidden)]
+pub mod certificate_staged;
 pub mod certificate_workspace;
 pub mod fast_device;
 pub mod gpu_tensor;
@@ -48,3 +50,5 @@ mod tensor_prepare_encode;
 pub mod tensor_prepare_reference;
 
 mod phase_profile;
+
+mod work_partition;

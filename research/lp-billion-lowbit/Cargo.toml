@@ -19,3 +19,8 @@ all = "warn"
 [profile.release]
 lto = "fat"
 codegen-units = 1
+
+[[bin]]
+name = "fp4x2_pipeline_bench"
+path = "src/bin/fp4x2_pipeline_bench.rs"
+test = false

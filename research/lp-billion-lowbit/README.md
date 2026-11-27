@@ -79,7 +79,7 @@ resource supervision and all failed or uncertified outcomes. Performance claims
 must come from completed, independently audited cohorts in the benchmark report.
 
 
-Four experimental FP4x2 overhead options are available in the original-array
+Five experimental FP4x2 overhead options are available in the original-array
 `solve` interface. All default to false; the legacy document interface rejects
 them explicitly. They do not select a different algorithm or alter `tolerance`,
 control intervals, restart rules, final checks or public solver defaults.
@@ -88,8 +88,9 @@ control intervals, restart rules, final checks or public solver defaults.
 | --- | --- |
 | `resident_preparation` | Transfer device CSR/CSC allocations from `gpu_preparation` through `gpu_packing` to execution; also transfer packed fragments and geometry. Host mirrors and original GPU kernels remain. With either GPU preparation stage disabled, reuse only allocations that stage actually supplies. |
 | `resident_control` | Reuse current device primal/dual and controller anchors at accepted, downloaded boundaries. Initialization, rollback and probes retain full uploads; reference re-anchoring remains exact. |
-| `certificate_workspace` | Reuse solve-local multiplier, enclosure and per-worker scratch capacity. Recompute every proof with the original arithmetic and reduction order; report retained capacity. |
-| `certificate_overlap` | Compute one snapshot's CPU proof while writing its witness. Use three proof workers plus the writer, join before any next update, and publish repaired duals after joining. This also enables certificate workspace. |
+| `host_state_reuse` | Reuse checkpoint capacity, download directly into controller buffers and reuse an already-published final witness only when the existing final-assessment identity permits it. Rollback still restores every state field and retains consumed work. |
+| `certificate_workspace` | Reuse solve-local proof storage. Select weighted contiguous partitions for heavy/skewed columns and preserve the unchanged staged routine for balanced work. Recompute every proof in original order. |
+| `certificate_overlap` | Overlap one snapshot's CPU dual proof with caller-thread GPU feasibility and witness output. Use at most three proof workers plus the caller; join before acceptance or any next update and publish repaired duals afterward. This also enables certificate workspace. |
 
 For example, add the following fields to an existing admitted `fast` request:
 
@@ -97,6 +98,7 @@ For example, add the following fields to an existing admitted `fast` request:
 {
   "resident_preparation": true,
   "resident_control": true,
+  "host_state_reuse": true,
   "certificate_workspace": true,
   "certificate_overlap": false
 }
@@ -111,3 +113,9 @@ See the [implementation and evaluation report](../../docs/benchmarks/lp-fp4x2-ov
 and [protocol](../../docs/specifications/SPEC-0046-amendment-94.md) for CPU evidence,
 GPU gates and default-promotion requirements. The pricing implementation from
 PR #30 remains unchanged.
+
+
+The [component diagnosis and parallel follow-up](../../docs/benchmarks/lp-fp4x2-pipeline.md)
+records retained whole-solve costs, every CPU comparison (including regressions),
+the structural scheduling rule and the still-pending GPU admission. The isolated
+`assess` command and the independent cold checker retain their original authority.

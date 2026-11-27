@@ -29,9 +29,15 @@ fn bound(b: f64, lower: bool, v: f64, magnitude: f64, t: f64) -> Result<bool> {
     Ok(violation <= finite(t + relative)?)
 }
 pub fn feasibility(a: &Original, x: &[f64], t: f64, parallel: bool) -> Result<(bool, f64)> {
-    feasibility_workers(a, x, t, if parallel { 4 } else { 1 })
+    feasibility_workers(a, x, t, if parallel { 4 } else { 1 }, false)
 }
-fn feasibility_workers(a: &Original, x: &[f64], t: f64, workers: usize) -> Result<(bool, f64)> {
+fn feasibility_workers(
+    a: &Original,
+    x: &[f64],
+    t: f64,
+    workers: usize,
+    weighted: bool,
+) -> Result<(bool, f64)> {
     let p = &a.program;
     if x.len() != p.column_count() || !t.is_finite() || t < 0. || x.iter().any(|v| !v.is_finite()) {
         return Err("candidate domain".into());
@@ -64,16 +70,19 @@ fn feasibility_workers(a: &Original, x: &[f64], t: f64, workers: usize) -> Resul
         .map_err(|e| e.to_string())
     };
     if workers > 1 && p.nonzeros() >= 65536 {
-        let results = std::thread::scope(|scope| {
+        let ranges = if weighted {
+            crate::work_partition::sparse(p.row_major().arrays().0, workers)
+        } else {
             (0..workers)
-                .map(|w| {
+                .map(|w| p.row_count() * w / workers..p.row_count() * (w + 1) / workers)
+                .collect()
+        };
+        let results = std::thread::scope(|scope| {
+            ranges
+                .into_iter()
+                .map(|range| {
                     let rows = &rows;
-                    scope.spawn(move || {
-                        rows(
-                            p.row_count() * w / workers,
-                            p.row_count() * (w + 1) / workers,
-                        )
-                    })
+                    scope.spawn(move || rows(range.start, range.end))
                 })
                 .collect::<Vec<_>>()
                 .into_iter()
@@ -133,7 +142,8 @@ impl<'a> Assessor<'a> {
     pub fn with_workspace(mut self, enabled: bool, workers: usize) -> Self {
         assert!((1..=4).contains(&workers));
         self.workers = if self.parallel { workers } else { 1 };
-        self.workspace = enabled.then(|| crate::certificate_workspace::Workspace::new(workers));
+        self.workspace =
+            enabled.then(|| crate::certificate_workspace::Workspace::new(self.workers));
         self
     }
     pub fn retained_workspace_bytes(&self) -> usize {
@@ -151,13 +161,23 @@ impl<'a> Assessor<'a> {
         if y.len() != self.original.program.row_count() {
             return Err("dual dimensions".into());
         }
-        let p = &self.original.program;
         let device_feasible = gpu(x, tolerance)?;
         let (feasible, objective) = match device_feasible {
             Some(feasible) => (feasible, objective(self.original, x)?),
-            None => feasibility_workers(self.original, x, tolerance, self.workers)?,
+            None => feasibility_workers(
+                self.original,
+                x,
+                tolerance,
+                self.workers,
+                self.workspace.is_some(),
+            )?,
         };
-        let bound = if let Some(workspace) = &mut self.workspace {
+        let bound = self.dual_bound(y);
+        self.finish(x, tolerance, device_feasible, feasible, objective, bound)
+    }
+    fn dual_bound(&mut self, y: &[f64]) -> Option<f64> {
+        let p = &self.original.program;
+        if let Some(workspace) = &mut self.workspace {
             workspace.certify(p, y)
         } else if self.parallel && self.certificate_scratch {
             crate::scratch_certificate::certify(p, y)
@@ -167,7 +187,18 @@ impl<'a> Assessor<'a> {
             certify(p, y)
         }
         .ok()
-        .map(|v| v.bound);
+        .map(|v| v.bound)
+    }
+    fn finish(
+        &mut self,
+        x: &[f64],
+        tolerance: f64,
+        device_feasible: Option<bool>,
+        feasible: bool,
+        objective: f64,
+        bound: Option<f64>,
+    ) -> Result<Value> {
+        let p = &self.original.program;
         let t = Tolerances {
             absolute: tolerance,
             relative: tolerance,
@@ -176,8 +207,13 @@ impl<'a> Assessor<'a> {
         let gap = bound.and_then(|b| assess_gap(p, x, b, t));
         // A GPU diagnostic can never grant certificate acceptance on its own.
         if device_feasible.is_some() && feasible && gap.as_ref().is_some_and(|g| g.closed) {
-            let (host_feasible, host_objective) =
-                feasibility_workers(self.original, x, tolerance, self.workers)?;
+            let (host_feasible, host_objective) = feasibility_workers(
+                self.original,
+                x,
+                tolerance,
+                self.workers,
+                self.workspace.is_some(),
+            )?;
             self.cpu_feasibility_confirmations += 1;
             if !host_feasible || host_objective.to_bits() != objective.to_bits() {
                 return Err("GPU feasibility disagrees with independent CPU acceptance".into());
@@ -224,6 +260,56 @@ impl<'a> Assessor<'a> {
             repaired_dual,
         })
     }
+    /// GPU calls remain on the caller/context thread. Only the original CPU
+    /// dual proof moves to the worker; both use this immutable endpoint.
+    pub(crate) fn evaluate_overlapped(
+        &mut self,
+        x: &[f64],
+        y: &[f64],
+        t: f64,
+        mut gpu: impl FnMut(&[f64], f64) -> Result<Option<bool>>,
+    ) -> Result<(Value, Value, crate::assessment_overlap::Timing)> {
+        if y.len() != self.original.program.row_count() {
+            return Err("dual dimensions".into());
+        }
+        assert!(self.workers <= 3, "overlap reserves one caller slot");
+        self.cached_calls += 1;
+        let original = self.original;
+        let store = self.store;
+        let (bound, (device_feasible, objective, witness), timing) =
+            crate::assessment_overlap::run(
+                || Ok::<_, String>(self.dual_bound(y)),
+                || {
+                    let device_feasible = gpu(x, t).map_err(|e| e.to_string())?;
+                    let objective = objective(original, x).map_err(|e| e.to_string())?;
+                    let witness = store.endpoint(x, y).map_err(|e| e.to_string())?;
+                    Ok((device_feasible, objective, witness))
+                },
+            )?;
+        // A CPU fallback begins only after the dual worker joins: never two
+        // independent worker teams competing for the same four-slot budget.
+        let (feasible, objective) = match device_feasible {
+            Some(feasible) => (feasible, objective),
+            None => feasibility_workers(original, x, t, self.workers, self.workspace.is_some())?,
+        };
+        let mut value = self.finish(x, t, device_feasible, feasible, objective, bound)?;
+        let mut repaired_dual = None;
+        if feasible
+            && bound.is_none()
+            && let Some((dual, corrections)) = crate::repair::propose(&original.program, y)
+        {
+            let bound = self.dual_bound(&dual);
+            // Repair changes only y. The original primal diagnostic remains valid.
+            value = self.finish(x, t, device_feasible, feasible, objective, bound)?;
+            repaired_dual = Some(dual);
+            value["dual_corrections"] = json!(corrections);
+        }
+        let value = self.publish(DeferredAssessment {
+            value,
+            repaired_dual,
+        })?;
+        Ok((value, witness, timing))
+    }
     pub(crate) fn publish(&self, mut result: DeferredAssessment) -> Result<Value> {
         // One writer: publish repaired-dual arrays only after snapshot output ends.
         if let Some(witness) = result.repaired_dual {
@@ -239,6 +325,62 @@ mod tests {
     use super::*;
     use optimizer_core::ObjectiveSense;
     use optimizer_lp::{LinearProgram, Range};
+    #[test]
+    fn overlap_repair_reuses_primal_diagnostic_but_keeps_original_acceptance() {
+        let original = Original {
+            program: LinearProgram::from_csr(
+                vec![7],
+                vec![Range {
+                    lower: 0.,
+                    upper: f64::INFINITY,
+                }],
+                vec![Range {
+                    lower: 1.,
+                    upper: 1.,
+                }],
+                vec![0, 1],
+                vec![0],
+                vec![1.],
+                &[0],
+                &[1.],
+                ObjectiveSense::Minimize,
+                0.,
+            )
+            .unwrap(),
+            row_ids: vec![11],
+            model_id: "overlap-repair".into(),
+            objective_indices: vec![0],
+            objective_values: vec![1.],
+            offset: 0.,
+            sha256: String::new(),
+        };
+        let path = std::env::temp_dir().join(format!("overlap-repair-{}", std::process::id()));
+        let store = Store::new(&path).unwrap();
+        let y = [1. + f64::EPSILON];
+        let mut serial = Assessor::new(&original, &store, true).with_workspace(true, 3);
+        let mut serial_calls = 0;
+        let expected = serial
+            .evaluate_with_feasibility(&[1.], &y, 1e-9, |_, _| {
+                serial_calls += 1;
+                Ok(Some(true))
+            })
+            .unwrap();
+        assert_eq!(serial_calls, 2);
+        assert_eq!(expected["accepted"], true);
+        assert!(expected["certificate_dual_array"].is_object());
+        let mut parallel = Assessor::new(&original, &store, true).with_workspace(true, 3);
+        let mut parallel_calls = 0;
+        let (actual, _, _) = parallel
+            .evaluate_overlapped(&[1.], &y, 1e-9, |_, _| {
+                parallel_calls += 1;
+                Ok(Some(true))
+            })
+            .unwrap();
+        assert_eq!(parallel_calls, 1);
+        assert_eq!(actual, expected);
+        assert_eq!(parallel.cpu_feasibility_confirmations, 1);
+        std::fs::remove_dir_all(path).unwrap();
+    }
     #[test]
     fn untrusted_feasibility_cannot_grant_a_false_certificate() {
         let original = Original {
@@ -312,6 +454,37 @@ mod tests {
                 .unwrap()["accepted"],
             false
         );
+        for diagnostic in [None, Some(true)] {
+            let mut overlapped = Assessor::new(&original, &store, true).with_workspace(true, 3);
+            let caller = std::thread::current().id();
+            let calls = std::rc::Rc::new(std::cell::Cell::new(0));
+            let (value, witness, _) = overlapped
+                .evaluate_overlapped(&[0.5], &[0.], 1e-9, |_, _| {
+                    assert_eq!(std::thread::current().id(), caller);
+                    calls.set(calls.get() + 1);
+                    Ok(diagnostic)
+                })
+                .unwrap();
+            assert_eq!(calls.get(), 1);
+            assert_eq!(value, expected);
+            assert!(witness["primal"].is_object());
+            assert!(
+                overlapped
+                    .evaluate_overlapped(&[2.], &[0.], 1e-9, |_, _| Ok(Some(true)))
+                    .is_err()
+            );
+            assert!(
+                overlapped
+                    .evaluate_overlapped(&[0.5], &[0.], 1e-9, |_, _| Err(
+                        "diagnostic failure".into()
+                    ))
+                    .is_err()
+            );
+            assert_eq!(
+                overlapped.evaluate(&[0.5], &[0.], 1e-9, false).unwrap(),
+                expected
+            );
+        }
         for workers in [1, 3, 4] {
             let mut workspace =
                 Assessor::new(&original, &store, true).with_workspace(true, workers);

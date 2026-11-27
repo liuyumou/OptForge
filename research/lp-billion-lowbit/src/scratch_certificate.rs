@@ -253,6 +253,7 @@ mod tests {
             (129, 65),
             (4097, 33),
             (33, 4097),
+            (33, 8193),
         ] {
             for mode in 0..4 {
                 for sense in [ObjectiveSense::Minimize, ObjectiveSense::Maximize] {
@@ -368,6 +369,6 @@ mod tests {
                 }
             }
         }
-        assert_eq!(comparisons, 640);
+        assert_eq!(comparisons, 720);
     }
 }
