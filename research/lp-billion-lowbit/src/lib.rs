@@ -52,3 +52,7 @@ pub mod tensor_prepare_reference;
 mod phase_profile;
 
 mod work_partition;
+
+pub mod certificate_fast;
+mod certificate_fast_staged;
+mod certificate_product;

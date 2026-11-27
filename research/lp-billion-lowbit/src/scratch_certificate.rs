@@ -308,6 +308,8 @@ mod tests {
                         3.25,
                     )
                     .unwrap();
+                    let mut fast_workspaces =
+                        [1, 3, 4].map(crate::certificate_fast::Workspace::new);
                     let mut workspaces = [
                         crate::certificate_workspace::Workspace::new(1),
                         crate::certificate_workspace::Workspace::new(3),
@@ -344,8 +346,16 @@ mod tests {
                             (Err(a), Err(b)) => assert_eq!(a, b),
                             pair => panic!("certificate difference: {pair:?}"),
                         }
-                        for workspace in &mut workspaces {
-                            match (optimizer_lp::certify(&p, &y), workspace.certify(&p, &y)) {
+                        for actual in workspaces
+                            .iter_mut()
+                            .map(|workspace| workspace.certify(&p, &y))
+                            .chain(
+                                fast_workspaces
+                                    .iter_mut()
+                                    .map(|workspace| workspace.certify(&p, &y)),
+                            )
+                        {
+                            match (optimizer_lp::certify(&p, &y), actual) {
                                 (Ok(a), Ok(b)) => assert_eq!(
                                     (
                                         a.bound.to_bits(),

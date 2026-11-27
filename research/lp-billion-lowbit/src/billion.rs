@@ -139,6 +139,14 @@ pub fn solve(
             } else {
                 4
             },
+        )
+        .with_exact_product(
+            fast_config.exact_certificate,
+            if fast_config.certificate_overlap {
+                3
+            } else {
+                4
+            },
         );
     let mut residency = None;
     let mut gpu_preparation = None;
@@ -666,7 +674,10 @@ pub fn solve(
                 if fast_config.certificate_overlap {
                     result["certificate_overlap"] = json!({"calls":overlap_calls,"proof_worker_ns":overlap_timing.proof_ns,"caller_diagnostic_and_witness_ns":overlap_timing.witness_ns,"wall_ns":overlap_timing.wall_ns,"maximum_pending":1,"cpu_dual_overlaps_gpu_diagnostic":true,"speculative_updates":0,"exclusive_phase":"strict_certificate","nested_timings_not_additive":true});
                 }
-                if fast_config.certificate_workspace || fast_config.certificate_overlap {
+                if fast_config.certificate_workspace
+                    || fast_config.certificate_overlap
+                    || fast_config.exact_certificate
+                {
                     result["certificate_workspace"] = json!({"retained_bytes":retained_workspace_bytes,"workers":if fast_config.certificate_overlap {3} else {4}});
                 }
                 if fast_config.resident_control {

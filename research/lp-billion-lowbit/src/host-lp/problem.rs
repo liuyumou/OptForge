@@ -326,6 +326,64 @@ impl LinearProgram {
         sense: ObjectiveSense,
         original_offset: f64,
     ) -> Result<Self, ValidationError> {
+        Self::from_csr_with_workers(
+            variable_ids,
+            columns,
+            rows,
+            offsets,
+            indices,
+            values,
+            objective_indices,
+            objective_values,
+            sense,
+            original_offset,
+            1,
+        )
+    }
+
+    /// Deterministic disjoint-column transpose, with the same original validation.
+    #[allow(clippy::too_many_arguments)]
+    pub fn from_csr_parallel(
+        variable_ids: Vec<u32>,
+        columns: Vec<Range>,
+        rows: Vec<Range>,
+        offsets: Vec<usize>,
+        indices: Vec<u32>,
+        values: Vec<f64>,
+        objective_indices: &[u32],
+        objective_values: &[f64],
+        sense: ObjectiveSense,
+        original_offset: f64,
+    ) -> Result<Self, ValidationError> {
+        Self::from_csr_with_workers(
+            variable_ids,
+            columns,
+            rows,
+            offsets,
+            indices,
+            values,
+            objective_indices,
+            objective_values,
+            sense,
+            original_offset,
+            4,
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn from_csr_with_workers(
+        variable_ids: Vec<u32>,
+        columns: Vec<Range>,
+        rows: Vec<Range>,
+        offsets: Vec<usize>,
+        indices: Vec<u32>,
+        values: Vec<f64>,
+        objective_indices: &[u32],
+        objective_values: &[f64],
+        sense: ObjectiveSense,
+        original_offset: f64,
+        workers: usize,
+    ) -> Result<Self, ValidationError> {
         let invalid =
             || ValidationError::new(ErrorKind::Structural, "invalid canonical sparse arrays");
         let n = columns.len();
@@ -384,12 +442,62 @@ impl LinearProgram {
         let mut cursor = column_offsets[..n].to_vec();
         let mut column_indices = vec![0u32; z];
         let mut column_values = vec![0.; z];
-        for i in 0..m {
-            for k in offsets[i]..offsets[i + 1] {
-                let slot = &mut cursor[indices[k] as usize];
-                column_indices[*slot] = i as u32;
-                column_values[*slot] = values[k];
-                *slot += 1;
+        if workers > 1 && z >= 1 << 20 && n > 1 {
+            let width = workers.min(n);
+            let mut boundaries = vec![0];
+            for worker in 1..width {
+                boundaries.push(
+                    column_offsets
+                        .partition_point(|&offset| offset < z * worker / width)
+                        .min(n),
+                );
+            }
+            boundaries.push(n);
+            let mut out_indices = column_indices.as_mut_slice();
+            let mut out_values = column_values.as_mut_slice();
+            let mut cursors = cursor.as_mut_slice();
+            std::thread::scope(|scope| {
+                for range in boundaries.windows(2) {
+                    let (lo, hi) = (range[0], range[1]);
+                    let base = column_offsets[lo];
+                    let length = column_offsets[hi] - base;
+                    let (ci, tail_i) = out_indices.split_at_mut(length);
+                    out_indices = tail_i;
+                    let (cv, tail_v) = out_values.split_at_mut(length);
+                    out_values = tail_v;
+                    let (cursor, tail_c) = cursors.split_at_mut(hi - lo);
+                    cursors = tail_c;
+                    let offsets = &offsets;
+                    let indices = &indices;
+                    let values = &values;
+                    scope.spawn(move || {
+                        if lo == hi {
+                            return;
+                        }
+                        // Rows and each column's entries retain their exact original order.
+                        // Binary-search sorted row indices instead of rereading all values.
+                        for i in 0..m {
+                            let row = &indices[offsets[i]..offsets[i + 1]];
+                            let begin = row.partition_point(|&j| (j as usize) < lo);
+                            let end = row.partition_point(|&j| (j as usize) < hi);
+                            for (local, &j) in row.iter().enumerate().take(end).skip(begin) {
+                                let slot = &mut cursor[j as usize - lo];
+                                ci[*slot - base] = i as u32;
+                                cv[*slot - base] = values[offsets[i] + local];
+                                *slot += 1;
+                            }
+                        }
+                    });
+                }
+            });
+        } else {
+            for i in 0..m {
+                for k in offsets[i]..offsets[i + 1] {
+                    let slot = &mut cursor[indices[k] as usize];
+                    column_indices[*slot] = i as u32;
+                    column_values[*slot] = values[k];
+                    *slot += 1;
+                }
             }
         }
         if cursor.iter().zip(&column_offsets[1..]).any(|(a, b)| a != b) {

@@ -13,14 +13,18 @@ use std::{
     time::Instant,
 };
 fn run() -> Result<()> {
-    let a: Vec<_> = std::env::args().collect();
+    let mut a: Vec<_> = std::env::args().collect();
+    let parallel_input = a.last().is_some_and(|arg| arg == "--parallel-input");
+    if parallel_input {
+        a.pop();
+    }
     if a.len() < 4 {
         return Err(
-            "usage: billion convert|inspect|assess|solve|prepare-check MODEL STORE [CUBIN]".into(),
+            "usage: billion convert|inspect|assess|assess-fast|solve|prepare-check MODEL STORE [CUBIN] [--parallel-input]".into(),
         );
     }
     let started = Instant::now();
-    let store = Store::new(Path::new(&a[3]))?;
+    let store = Store::new(Path::new(&a[3]))?.with_read_workers(if parallel_input { 4 } else { 1 });
     if a[1] == "convert" {
         let (model, _) = lp_billion_lowbit::input::load(Path::new(&a[2]))?;
         println!(
@@ -29,7 +33,8 @@ fn run() -> Result<()> {
         );
         return Ok(());
     }
-    let original = Original::load(Path::new(&a[2]), &store)?;
+    let (original, input_profile) =
+        Original::load_profiled(Path::new(&a[2]), &store, parallel_input)?;
     let input_ns = started.elapsed().as_nanos();
     if a[1] == "inspect" {
         println!(
@@ -40,7 +45,8 @@ fn run() -> Result<()> {
         );
         return Ok(());
     }
-    let mut assessor = Assessor::new(&original, &store, false);
+    let mut assessor = Assessor::new(&original, &store, a[1] == "assess-fast")
+        .with_exact_product(a[1] == "assess-fast", 4);
     for line in io::stdin().lock().lines() {
         let line = line?;
         if line.len() > 16 << 20 {
@@ -57,7 +63,7 @@ fn run() -> Result<()> {
             };
             lp.validate()?;
             lp_billion_lowbit::gpu_prepare::check(&original.program, lp, Path::new(&a[4]))?
-        } else if a[1] == "assess" {
+        } else if a[1] == "assess" || a[1] == "assess-fast" {
             let x: Array = serde_json::from_value(r["endpoint"]["primal"].clone())?;
             let y: Array = serde_json::from_value(r["endpoint"]["dual"].clone())?;
             let x = store.read(&x, original.program.column_count())?;
@@ -88,6 +94,9 @@ fn run() -> Result<()> {
         };
         result["model_sha256"] = json!(original.sha256);
         result["input_ns"] = json!(input_ns);
+        if parallel_input {
+            result["input_profile"] = json!(input_profile);
+        }
         println!("{}", serde_json::to_string(&result)?);
         io::stdout().flush()?;
     }

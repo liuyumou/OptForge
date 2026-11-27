@@ -24,3 +24,8 @@ codegen-units = 1
 name = "fp4x2_pipeline_bench"
 path = "src/bin/fp4x2_pipeline_bench.rs"
 test = false
+
+[[bin]]
+name = "fp4x2_io_bench"
+path = "src/bin/fp4x2_io_bench.rs"
+test = false

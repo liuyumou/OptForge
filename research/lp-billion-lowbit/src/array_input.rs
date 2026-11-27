@@ -9,6 +9,7 @@ use std::{
     fs::{self, OpenOptions},
     io::Write,
     path::{Path, PathBuf},
+    time::Instant,
 };
 
 pub const CHUNK: usize = 32 << 20;
@@ -39,8 +40,9 @@ pub struct Manifest {
 }
 pub struct Store {
     root: PathBuf,
+    read_workers: usize,
 }
-pub trait Scalar: Copy {
+pub trait Scalar: Copy + Default + Send + Sync {
     const WIDTH: usize;
     const DTYPE: &'static str;
     fn decode(bytes: &[u8]) -> Self;
@@ -68,7 +70,14 @@ impl Store {
         fs::create_dir_all(root.join("objects"))?;
         Ok(Self {
             root: root.canonicalize()?,
+            read_workers: 1,
         })
+    }
+    /// Bounded verified decoding only; no digest or metadata cache.
+    pub fn with_read_workers(mut self, workers: usize) -> Self {
+        assert!((1..=4).contains(&workers));
+        self.read_workers = workers;
+        self
     }
     fn path(&self, o: &Object) -> Result<PathBuf> {
         if o.sha256.len() != 64
@@ -141,6 +150,50 @@ impl Store {
         {
             return Err("array shape/type".into());
         }
+        if self.read_workers > 1 && a.chunks.len() > 1 && count * T::WIDTH >= 2 << 20 {
+            let mut result = Vec::new();
+            result.try_reserve_exact(count)?;
+            result.resize(count, T::default());
+            let width = self.read_workers.min(a.chunks.len());
+            let mut remaining = result.as_mut_slice();
+            let mut jobs = Vec::with_capacity(width);
+            for worker in 0..width {
+                let chunks = &a.chunks
+                    [a.chunks.len() * worker / width..a.chunks.len() * (worker + 1) / width];
+                let elements = chunks.iter().map(|c| c.bytes / T::WIDTH).sum();
+                let (output, tail) = remaining.split_at_mut(elements);
+                remaining = tail;
+                jobs.push((chunks, output));
+            }
+            let results = std::thread::scope(|scope| {
+                jobs.into_iter()
+                    .map(|(chunks, mut output)| {
+                        scope.spawn(move || -> std::result::Result<(), String> {
+                            for chunk in chunks {
+                                // One raw chunk per worker, decoded directly into its final slice.
+                                let bytes = self.bytes(chunk).map_err(|e| e.to_string())?;
+                                let (part, tail) = output.split_at_mut(chunk.bytes / T::WIDTH);
+                                output = tail;
+                                for (slot, value) in
+                                    part.iter_mut().zip(bytes.chunks_exact(T::WIDTH))
+                                {
+                                    *slot = T::decode(value);
+                                }
+                            }
+                            Ok(())
+                        })
+                    })
+                    .collect::<Vec<_>>()
+                    .into_iter()
+                    .map(|job| job.join().expect("verified chunk reader"))
+                    .collect::<Vec<_>>()
+            });
+            // Join every reader, then preserve the first chunk-order refusal.
+            for result in results {
+                result?;
+            }
+            return Ok(result);
+        }
         let mut result = Vec::new();
         result.try_reserve_exact(count)?;
         for c in &a.chunks {
@@ -161,8 +214,26 @@ pub struct Original {
     pub offset: f64,
     pub sha256: String,
 }
+#[derive(Default, Debug, Serialize)]
+pub struct InputProfile {
+    pub manifest_ns: u128,
+    pub metadata_arrays_ns: u128,
+    pub csr_arrays_ns: u128,
+    pub objective_arrays_ns: u128,
+    pub construction_ns: u128,
+    pub total_ns: u128,
+}
 impl Original {
     pub fn load(path: &Path, store: &Store) -> Result<Self> {
+        Self::load_profiled(path, store, false).map(|(original, _)| original)
+    }
+    pub fn load_profiled(
+        path: &Path,
+        store: &Store,
+        parallel_transpose: bool,
+    ) -> Result<(Self, InputProfile)> {
+        let started = Instant::now();
+        let mut profile = InputProfile::default();
         if path.metadata()?.len() > 16 << 20 {
             return Err("manifest size".into());
         }
@@ -178,6 +249,9 @@ impl Original {
         {
             return Err("original manifest domain".into());
         }
+        let sha256 = format!("{:x}", Sha256::digest(&bytes));
+        profile.manifest_ns = started.elapsed().as_nanos();
+        let stage = Instant::now();
         let field = |name: &str| a.arrays.get(name).ok_or_else(|| format!("missing {name}"));
         let variable_ids = store.read(field("column_ids")?, n)?;
         let row_ids: Vec<u32> = store.read(field("row_ids")?, m)?;
@@ -195,6 +269,8 @@ impl Original {
         };
         let columns = ranges("column_lower", "column_upper", n)?;
         let rows = ranges("row_lower", "row_upper", m)?;
+        profile.metadata_arrays_ns = stage.elapsed().as_nanos();
+        let stage = Instant::now();
         let offsets: Vec<u64> = store.read(field("offsets")?, m + 1)?;
         let offsets = offsets
             .into_iter()
@@ -202,13 +278,22 @@ impl Original {
             .collect::<std::result::Result<Vec<_>, _>>()?;
         let indices = store.read(field("indices")?, z)?;
         let values = store.read(field("values")?, z)?;
+        profile.csr_arrays_ns = stage.elapsed().as_nanos();
+        let stage = Instant::now();
         let objective_n = field("objective_indices")?.count;
         if objective_n > n {
             return Err("objective size".into());
         }
         let objective_indices = store.read(field("objective_indices")?, objective_n)?;
         let objective_values = store.read(field("objective_values")?, objective_n)?;
-        let program = LinearProgram::from_csr(
+        profile.objective_arrays_ns = stage.elapsed().as_nanos();
+        let stage = Instant::now();
+        let constructor = if parallel_transpose {
+            LinearProgram::from_csr_parallel
+        } else {
+            LinearProgram::from_csr
+        };
+        let program = constructor(
             variable_ids,
             columns,
             rows,
@@ -220,15 +305,20 @@ impl Original {
             a.sense,
             a.offset,
         )?;
-        Ok(Self {
-            program,
-            row_ids,
-            model_id: a.model_id,
-            objective_indices,
-            objective_values,
-            offset: a.offset,
-            sha256: format!("{:x}", Sha256::digest(&bytes)),
-        })
+        profile.construction_ns = stage.elapsed().as_nanos();
+        profile.total_ns = started.elapsed().as_nanos();
+        Ok((
+            Self {
+                program,
+                row_ids,
+                model_id: a.model_id,
+                objective_indices,
+                objective_values,
+                offset: a.offset,
+                sha256,
+            },
+            profile,
+        ))
     }
     pub fn convert(model: &Model, store: &Store) -> Result<Manifest> {
         let p = LinearProgram::new(model)?;

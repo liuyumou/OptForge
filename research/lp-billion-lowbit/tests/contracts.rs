@@ -525,6 +525,7 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 resident_preparation: false,
                 resident_control: false,
                 host_state_reuse: false,
+                exact_certificate: false,
                 certificate_workspace: false,
                 certificate_overlap: false,
                 auto_schedule: false,
@@ -552,6 +553,7 @@ fn fast_proposals_validate_explicit_execution_domains() {
                 resident_preparation: false,
                 resident_control: false,
                 host_state_reuse: false,
+                exact_certificate: false,
                 certificate_workspace: false,
                 certificate_overlap: false,
                 auto_schedule: true,
@@ -686,6 +688,7 @@ fn overhead_candidates_are_opt_in_and_array_only() {
         "resident_preparation",
         "resident_control",
         "host_state_reuse",
+        "exact_certificate",
         "certificate_workspace",
         "certificate_overlap",
     ] {

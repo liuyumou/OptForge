@@ -117,6 +117,7 @@ pub struct Assessor<'a> {
     parallel: bool,
     certificate_scratch: bool,
     workspace: Option<crate::certificate_workspace::Workspace>,
+    fast_workspace: Option<crate::certificate_fast::Workspace>,
     workers: usize,
     pub cached_calls: usize,
     pub cpu_feasibility_confirmations: usize,
@@ -129,6 +130,7 @@ impl<'a> Assessor<'a> {
             parallel,
             certificate_scratch: false,
             workspace: None,
+            fast_workspace: None,
             workers: if parallel { 4 } else { 1 },
             cached_calls: 0,
             cpu_feasibility_confirmations: 0,
@@ -146,10 +148,25 @@ impl<'a> Assessor<'a> {
             enabled.then(|| crate::certificate_workspace::Workspace::new(self.workers));
         self
     }
+    pub fn with_exact_product(mut self, enabled: bool, workers: usize) -> Self {
+        assert!((1..=4).contains(&workers));
+        if enabled {
+            self.workers = if self.parallel { workers } else { 1 };
+            self.workspace = None;
+            self.fast_workspace = Some(crate::certificate_fast::Workspace::new(self.workers));
+        } else {
+            self.fast_workspace = None;
+        }
+        self
+    }
     pub fn retained_workspace_bytes(&self) -> usize {
         self.workspace
             .as_ref()
             .map_or(0, crate::certificate_workspace::Workspace::retained_bytes)
+            + self
+                .fast_workspace
+                .as_ref()
+                .map_or(0, crate::certificate_fast::Workspace::retained_bytes)
     }
     fn assess(
         &mut self,
@@ -169,7 +186,7 @@ impl<'a> Assessor<'a> {
                 x,
                 tolerance,
                 self.workers,
-                self.workspace.is_some(),
+                self.workspace.is_some() || self.fast_workspace.is_some(),
             )?,
         };
         let bound = self.dual_bound(y);
@@ -177,7 +194,9 @@ impl<'a> Assessor<'a> {
     }
     fn dual_bound(&mut self, y: &[f64]) -> Option<f64> {
         let p = &self.original.program;
-        if let Some(workspace) = &mut self.workspace {
+        if let Some(workspace) = &mut self.fast_workspace {
+            workspace.certify(p, y)
+        } else if let Some(workspace) = &mut self.workspace {
             workspace.certify(p, y)
         } else if self.parallel && self.certificate_scratch {
             crate::scratch_certificate::certify(p, y)
@@ -212,7 +231,7 @@ impl<'a> Assessor<'a> {
                 x,
                 tolerance,
                 self.workers,
-                self.workspace.is_some(),
+                self.workspace.is_some() || self.fast_workspace.is_some(),
             )?;
             self.cpu_feasibility_confirmations += 1;
             if !host_feasible || host_objective.to_bits() != objective.to_bits() {
@@ -290,7 +309,13 @@ impl<'a> Assessor<'a> {
         // independent worker teams competing for the same four-slot budget.
         let (feasible, objective) = match device_feasible {
             Some(feasible) => (feasible, objective),
-            None => feasibility_workers(original, x, t, self.workers, self.workspace.is_some())?,
+            None => feasibility_workers(
+                original,
+                x,
+                t,
+                self.workers,
+                self.workspace.is_some() || self.fast_workspace.is_some(),
+            )?,
         };
         let mut value = self.finish(x, t, device_feasible, feasible, objective, bound)?;
         let mut repaired_dual = None;
@@ -485,9 +510,13 @@ mod tests {
                 expected
             );
         }
-        for workers in [1, 3, 4] {
-            let mut workspace =
-                Assessor::new(&original, &store, true).with_workspace(true, workers);
+        for (workers, exact_product) in [1, 3, 4]
+            .into_iter()
+            .flat_map(|workers| [(workers, false), (workers, true)])
+        {
+            let mut workspace = Assessor::new(&original, &store, true)
+                .with_workspace(true, workers)
+                .with_exact_product(exact_product, workers);
             let (deferred, witness, _) = crate::assessment_overlap::run(
                 || {
                     workspace

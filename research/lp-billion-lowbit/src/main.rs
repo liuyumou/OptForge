@@ -100,6 +100,7 @@ fn run() -> Result<()> {
             fast.validate()?;
             if fast.resident_preparation
                 || fast.resident_control
+                || fast.exact_certificate
                 || fast.host_state_reuse
                 || fast.certificate_workspace
                 || fast.certificate_overlap

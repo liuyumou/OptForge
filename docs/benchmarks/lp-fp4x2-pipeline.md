@@ -157,3 +157,8 @@ checks. The existing promotion rule still requires unchanged certificate
 coverage, at least 5% median complete improvement, no family above 5% median
 regression and no resource-limit regression across fresh, audited comparisons.
 CPU component gains alone do not satisfy that rule; defaults remain unchanged.
+
+
+The [input and strict-proof follow-up](lp-fp4x2-io-proof.md) separately measures
+verified chunk loading, deterministic transpose construction, exact product and
+reduction work, and complete cold CPU checking on fresh synthetic models.

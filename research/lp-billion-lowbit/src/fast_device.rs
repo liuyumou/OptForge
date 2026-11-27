@@ -48,6 +48,9 @@ pub struct Config {
     /// Retain bounded certificate workspace for the lifetime of this solve.
     #[serde(skip_serializing_if = "disabled")]
     pub certificate_workspace: bool,
+    /// Exact 64-bit product classification with original scalar authority retained.
+    #[serde(skip_serializing_if = "disabled")]
+    pub exact_certificate: bool,
     /// Overlap one immutable CPU proof with GPU diagnostics and witness output.
     #[serde(skip_serializing_if = "disabled")]
     pub certificate_overlap: bool,
@@ -85,6 +88,7 @@ impl Default for Config {
             resident_control: false,
             host_state_reuse: false,
             certificate_workspace: false,
+            exact_certificate: false,
             certificate_overlap: false,
             auto_schedule: false,
             gpu_preparation: false,
